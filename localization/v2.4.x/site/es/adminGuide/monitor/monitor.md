@@ -123,14 +123,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>Si ha desplegado servicios de monitoreo para el cluster Milvus, puede que también quiera aprender a:<ul>
-<li><a href="/docs/es/visualize.md">Visualizar las métricas de Milvus en Grafana</a></li>
-<li><a href="/docs/es/alert.md">Crear una alerta para los servicios de Milvus</a></li>
-<li>Ajustar su <a href="/docs/es/allocate.md">asignación de recursos</a></li>
+<li><a href="/docs/es/v2.4.x/visualize.md">Visualizar las métricas de Milvus en Grafana</a></li>
+<li><a href="/docs/es/v2.4.x/alert.md">Crear una alerta para los servicios de Milvus</a></li>
+<li>Ajustar su <a href="/docs/es/v2.4.x/allocate.md">asignación de recursos</a></li>
 </ul></li>
 <li>Si busca información sobre cómo escalar un clúster Milvus:<ul>
-<li>Aprender a <a href="/docs/es/scaleout.md">escalar un clúster Milvus</a></li>
+<li>Aprender a <a href="/docs/es/v2.4.x/scaleout.md">escalar un clúster Milvus</a></li>
 </ul></li>
 <li>Si está interesado en actualizar la versión de Milvus,<ul>
-<li>Lea la <a href="/docs/es/upgrade_milvus_cluster-operator.md">guía para</a> <a href="/docs/es/upgrade_milvus_standalone-operator.md">actualizar</a> <a href="/docs/es/upgrade_milvus_cluster-operator.md">Milvus cluster</a> y <a href="/docs/es/upgrade_milvus_standalone-operator.md">la</a> <a href="/docs/es/upgrade_milvus_cluster-operator.md">guía</a> <a href="/docs/es/upgrade_milvus_standalone-operator.md">para actualizar Milvus standalone</a>.</li>
+<li>Lea la <a href="/docs/es/v2.4.x/upgrade_milvus_cluster-operator.md">guía para</a> <a href="/docs/es/v2.4.x/upgrade_milvus_standalone-operator.md">actualizar</a> <a href="/docs/es/v2.4.x/upgrade_milvus_cluster-operator.md">Milvus cluster</a> y <a href="/docs/es/v2.4.x/upgrade_milvus_standalone-operator.md">la</a> <a href="/docs/es/v2.4.x/upgrade_milvus_cluster-operator.md">guía</a> <a href="/docs/es/v2.4.x/upgrade_milvus_standalone-operator.md">para actualizar Milvus standalone</a>.</li>
 </ul></li>
 </ul>

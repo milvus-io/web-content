@@ -47,7 +47,7 @@ summary: >-
   useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
   bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Consulte <a href="/docs/es/configure_minio.md">Configuraciones de MinIO/S3</a> para obtener más información.</p>
+<p>Consulte <a href="/docs/es/v2.4.x/configure_minio.md">Configuraciones de MinIO/S3</a> para obtener más información.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Afinar docker-compose.yaml</h3><p>También eliminaría la variable de entorno <code translate="no">MINIO_ADDRESS</code> para el servicio milvus en <code translate="no">docker-compose.yaml</code>. Por defecto milvus utilizará minio local en lugar de S3 externo.</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3. Ejecutar Milvus</h3><p>Ejecute el siguiente comando para iniciar Milvus que utiliza las configuraciones de S3.</p>
 <pre><code translate="no" class="language-shell">docker compose up
@@ -129,6 +129,6 @@ summary: >-
       </svg>
     </button></h2><p>Aprende a configurar otras dependencias de Milvus con Docker Compose o Helm:</p>
 <ul>
-<li><a href="/docs/es/deploy_etcd.md">Configurar Meta Storage con Docker Compose o Helm</a></li>
-<li><a href="/docs/es/deploy_pulsar.md">Configurar el almacenamiento de mensajes con Docker Compose o Helm</a></li>
+<li><a href="/docs/es/v2.4.x/deploy_etcd.md">Configurar Meta Storage con Docker Compose o Helm</a></li>
+<li><a href="/docs/es/v2.4.x/deploy_pulsar.md">Configurar el almacenamiento de mensajes con Docker Compose o Helm</a></li>
 </ul>

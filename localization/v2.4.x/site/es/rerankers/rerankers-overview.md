@@ -21,7 +21,7 @@ title: Visión general de los rerankers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En el ámbito de la recuperación de información y la IA generativa, un reordenador es una herramienta esencial que optimiza el orden de los resultados de las búsquedas iniciales. Los rerankers se diferencian de <a href="/docs/es/embeddings.md">los modelos de incrustación</a> tradicionales en que toman una consulta y un documento como entrada y devuelven directamente una puntuación de similitud en lugar de incrustaciones. Esta puntuación indica la relevancia entre la consulta y el documento.</p>
+    </button></h1><p>En el ámbito de la recuperación de información y la IA generativa, un reordenador es una herramienta esencial que optimiza el orden de los resultados de las búsquedas iniciales. Los rerankers se diferencian de <a href="/docs/es/v2.4.x/embeddings.md">los modelos de incrustación</a> tradicionales en que toman una consulta y un documento como entrada y devuelven directamente una puntuación de similitud en lugar de incrustaciones. Esta puntuación indica la relevancia entre la consulta y el documento.</p>
 <p>Los reordenadores suelen emplearse después de la primera fase de recuperación, que suele realizarse mediante técnicas vectoriales de Vecino más Cercano Aproximado (RNA). Aunque las búsquedas RNA son eficaces a la hora de obtener un amplio conjunto de resultados potencialmente relevantes, es posible que no siempre prioricen los resultados en función de su proximidad semántica real a la consulta. En este caso, rerankers se utiliza para optimizar el orden de los resultados mediante análisis contextuales más profundos, a menudo aprovechando modelos avanzados de aprendizaje automático como BERT u otros modelos basados en Transformer. De este modo, los rerankers pueden mejorar drásticamente la precisión y relevancia de los resultados finales presentados al usuario.</p>
 <p>La biblioteca de modelos PyMilvus integra funciones rerank para optimizar el orden de los resultados devueltos a partir de las búsquedas iniciales. Después de recuperar las incrustaciones más cercanas de Milvus, puede aprovechar estas herramientas de reranking para refinar los resultados de la búsqueda y mejorar la precisión de los resultados de la búsqueda.</p>
 <table>
@@ -57,7 +57,7 @@ title: Visión general de los rerankers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En este ejemplo, demostramos cómo clasificar los resultados de búsqueda utilizando el <a href="/docs/es/rerankers-bge.md">reranker de</a> BGE en función de una consulta específica.</p>
+    </button></h2><p>En este ejemplo, demostramos cómo clasificar los resultados de búsqueda utilizando el <a href="/docs/es/v2.4.x/rerankers-bge.md">reranker de</a> BGE en función de una consulta específica.</p>
 <p>Para utilizar un reordenador con la biblioteca de modelos <a href="https://github.com/milvus-io/milvus-model">PyMilvus</a>, instale la biblioteca de modelos PyMilvus junto con el subpaquete de modelos que contiene todas las utilidades de reordenación necesarias:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -115,7 +115,7 @@ documents = [
 <p><strong>Componentes del conjunto de datos</strong>:</p>
 <ul>
 <li><code translate="no">doc_id</code>: Identificador único para cada documento.</li>
-<li><code translate="no">doc_vector</code>: Incrustaciones vectoriales que representan el documento. Para más información sobre la generación de incrustaciones, consulte <a href="/docs/es/embeddings.md">Incrustaciones</a>.</li>
+<li><code translate="no">doc_vector</code>: Incrustaciones vectoriales que representan el documento. Para más información sobre la generación de incrustaciones, consulte <a href="/docs/es/v2.4.x/embeddings.md">Incrustaciones</a>.</li>
 <li><code translate="no">doc_text</code>: Contenido textual del documento.</li>
 </ul>
 <h3 id="Preparations" class="common-anchor-header">Preparativos</h3><p>Antes de iniciar una búsqueda de similitudes, debe establecer una conexión con Milvus, crear una colección y preparar e insertar datos en esa colección. El siguiente fragmento de código ilustra estos pasos preliminares.</p>

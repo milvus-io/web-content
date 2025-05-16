@@ -37,7 +37,7 @@ title: Durchführung von Visionsrecherchen mit Milvus und FiftyOne
       </svg>
     </button></h2><p>Bevor Sie beginnen, stellen Sie sicher, dass Sie über die folgenden Voraussetzungen verfügen:</p>
 <ul>
-<li>Ein laufender <a href="/docs/de/install_standalone-docker.md">Milvus-Server</a>.</li>
+<li>Ein laufender <a href="/docs/de/v2.4.x/install_standalone-docker.md">Milvus-Server</a>.</li>
 <li>Eine Python-Umgebung mit <code translate="no">pymilvus</code> und <code translate="no">fiftyone</code> installiert.</li>
 <li>Einen <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">Datensatz</a> mit Bildern zum Durchsuchen.</li>
 </ul>
@@ -262,7 +262,7 @@ milvus_index = fob.compute_similarity(
 <li><p><strong>metric</strong> (<em>"dotproduct")</em>: die Metrik für den Einbettungsabstand, die bei der Erstellung eines neuen Index verwendet werden soll. Die unterstützten Werte sind (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong> (<em>"Session")</em>: die zu verwendende Konsistenzstufe. Unterstützte Werte sind (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>Ausführliche Informationen zu diesen Parametern finden Sie in der <a href="/docs/de/authenticate.md">Milvus-Authentifizierungsdokumentation</a> und der <a href="/docs/de/consistency.md">Milvus-Konsistenzstufen-Dokumentation</a>.</p>
+<p>Ausführliche Informationen zu diesen Parametern finden Sie in der <a href="/docs/de/v2.4.x/authenticate.md">Milvus-Authentifizierungsdokumentation</a> und der <a href="/docs/de/v2.4.x/consistency.md">Milvus-Konsistenzstufen-Dokumentation</a>.</p>
 <p>Sie können diese Parameter mit jeder der im vorherigen Abschnitt beschriebenen Strategien angeben. Hier ist ein Beispiel für eine <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">Gehirnkonfiguration</a>, die alle verfügbaren Parameter enthält:</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {

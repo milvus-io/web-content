@@ -141,8 +141,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>Si su hardware y software cumplen con los requisitos, usted puede:</p>
 <ul>
-<li><a href="/docs/es/install_cluster-milvusoperator.md">Ejecutar Milvus en Kubernets con Milvus Operator</a></li>
-<li><a href="/docs/es/install_cluster-helm.md">Ejecutar Milvus en Kubernetes con Helm</a></li>
+<li><a href="/docs/es/v2.4.x/install_cluster-milvusoperator.md">Ejecutar Milvus en Kubernets con Milvus Operator</a></li>
+<li><a href="/docs/es/v2.4.x/install_cluster-helm.md">Ejecutar Milvus en Kubernetes con Helm</a></li>
 </ul></li>
-<li><p>Consulte <a href="/docs/es/system_configuration.md">Configuración del Sistema</a> para conocer los parámetros que puede establecer mientras instala Milvus.</p></li>
+<li><p>Consulte <a href="/docs/es/v2.4.x/system_configuration.md">Configuración del Sistema</a> para conocer los parámetros que puede establecer mientras instala Milvus.</p></li>
 </ul>

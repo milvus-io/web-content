@@ -38,7 +38,7 @@ title: Milvus Hybrid Search Retriever
     </button></h2><blockquote>
 <p><a href="https://milvus.io/docs">Milvus</a> è un database vettoriale open-source costruito per alimentare le applicazioni di ricerca per similarità e AI. Milvus rende la ricerca di dati non strutturati più accessibile e fornisce un'esperienza utente coerente indipendentemente dall'ambiente di distribuzione.</p>
 </blockquote>
-<p>Questo vi aiuterà a iniziare con il <a href="/docs/concepts/#retrievers">retriever</a> Milvus Hybrid Search, che combina i punti di forza della ricerca vettoriale densa e rada. Per una documentazione dettagliata di tutte le funzioni e le configurazioni di <code translate="no">MilvusCollectionHybridSearchRetriever</code>, consultare il <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">riferimento API</a>.</p>
+<p>Questo vi aiuterà a iniziare con il <a href="/docs/concepts/v2.4.x/#retrievers">retriever</a> Milvus Hybrid Search, che combina i punti di forza della ricerca vettoriale densa e rada. Per una documentazione dettagliata di tutte le funzioni e le configurazioni di <code translate="no">MilvusCollectionHybridSearchRetriever</code>, consultare il <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">riferimento API</a>.</p>
 <p>Si veda anche la <a href="https://milvus.io/docs/multi-vector-search.md">documentazione</a> sulla ricerca multivettoriale di Milvus.</p>
 <h3 id="Integration-details" class="common-anchor-header">Dettagli dell'integrazione</h3><table>
 <thead>

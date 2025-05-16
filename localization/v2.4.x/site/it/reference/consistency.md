@@ -35,7 +35,7 @@ title: Coerenza
         ></path>
       </svg>
     </button></h2><p>La consistenza in un database distribuito si riferisce specificamente alla proprietà che garantisce che ogni nodo o replica abbia la stessa visione dei dati quando scrive o legge i dati in un determinato momento.</p>
-<p>Milvus supporta quattro livelli di consistenza: forte, bounded staleness, di sessione e finale. Il livello di consistenza predefinito in Milvus è bounded staleness.  È possibile regolare facilmente il livello di consistenza quando si effettua una <a href="/docs/it/single-vector-search.md">ricerca monovettoriale</a>, una <a href="/docs/it/multi-vector-search.md">ricerca ibrida</a> o una <a href="/docs/it/get-and-scalar-query.md">query</a> per adattarlo al meglio alla propria applicazione.</p>
+<p>Milvus supporta quattro livelli di consistenza: forte, bounded staleness, di sessione e finale. Il livello di consistenza predefinito in Milvus è bounded staleness.  È possibile regolare facilmente il livello di consistenza quando si effettua una <a href="/docs/it/v2.4.x/single-vector-search.md">ricerca monovettoriale</a>, una <a href="/docs/it/v2.4.x/multi-vector-search.md">ricerca ibrida</a> o una <a href="/docs/it/v2.4.x/get-and-scalar-query.md">query</a> per adattarlo al meglio alla propria applicazione.</p>
 <h2 id="Consistency-levels" class="common-anchor-header">Livelli di consistenza<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,8 +118,8 @@ title: Coerenza
       </svg>
     </button></h2><ul>
 <li>Imparare a regolare il livello di coerenza quando:<ul>
-<li><a href="/docs/it/single-vector-search.md">si effettua una ricerca a vettore singolo</a></li>
-<li><a href="/docs/it/multi-vector-search.md">ricerca ibrida</a></li>
-<li><a href="/docs/it/get-and-scalar-query.md">esecuzione di una query scalare</a></li>
+<li><a href="/docs/it/v2.4.x/single-vector-search.md">si effettua una ricerca a vettore singolo</a></li>
+<li><a href="/docs/it/v2.4.x/multi-vector-search.md">ricerca ibrida</a></li>
+<li><a href="/docs/it/v2.4.x/get-and-scalar-query.md">esecuzione di una query scalare</a></li>
 </ul></li>
 </ul>

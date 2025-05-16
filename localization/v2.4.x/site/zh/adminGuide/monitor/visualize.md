@@ -20,7 +20,7 @@ summary: 了解如何在 Grafana 中可视化 Milvus 指标。
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何使用 Grafana 可视化 Milvus 指标。</p>
-<p>如<a href="/docs/zh/monitor.md">监控指南</a>所述，指标包含有用的信息，例如特定 Milvus 组件使用了多少内存。监控指标可帮助您更好地了解 Milvus 性能及其运行状态，以便及时调整资源分配。</p>
+<p>如<a href="/docs/zh/v2.4.x/monitor.md">监控指南</a>所述，指标包含有用的信息，例如特定 Milvus 组件使用了多少内存。监控指标可帮助您更好地了解 Milvus 性能及其运行状态，以便及时调整资源分配。</p>
 <p>可视化是显示资源使用量随时间变化的图表，它能让你更容易地快速查看和注意到资源使用量的变化，尤其是在事件发生时。</p>
 <p>本教程使用时间序列分析开源平台 Grafana 来可视化部署在 Kubernetes (K8s) 上的 Milvus 集群的各种性能指标。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -39,8 +39,8 @@ summary: 了解如何在 Grafana 中可视化 Milvus 指标。
         ></path>
       </svg>
     </button></h2><ul>
-<li>您已<a href="/docs/zh/install_cluster-helm.md">在 K8s 上安装了 Milvus 集群</a>。）</li>
-<li>在使用 Grafana 可视化指标之前，您需要<a href="/docs/zh/monitor.md">配置 Prometheus</a>以监控和收集指标。如果设置成功，您可以从<code translate="no">http://localhost:3000</code> 访问 Grafana。或者也可以使用<code translate="no">admin:admin</code> 的默认 Grafana<code translate="no">user:password</code> 访问 Grafana。</li>
+<li>您已<a href="/docs/zh/v2.4.x/install_cluster-helm.md">在 K8s 上安装了 Milvus 集群</a>。）</li>
+<li>在使用 Grafana 可视化指标之前，您需要<a href="/docs/zh/v2.4.x/monitor.md">配置 Prometheus</a>以监控和收集指标。如果设置成功，您可以从<code translate="no">http://localhost:3000</code> 访问 Grafana。或者也可以使用<code translate="no">admin:admin</code> 的默认 Grafana<code translate="no">user:password</code> 访问 Grafana。</li>
 </ul>
 <h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">使用 Grafana 可视化指标<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,11 +90,11 @@ summary: 了解如何在 Grafana 中可视化 Milvus 指标。
       </svg>
     </button></h2><ul>
 <li>如果您已将 Grafana 设置为可视化 Milvus 指标，您可能还想：<ul>
-<li>了解如何<a href="/docs/zh/alert.md">为 Milvus 服务创建警报</a></li>
-<li>调整<a href="/docs/zh/allocate.md">资源分配</a></li>
-<li><a href="/docs/zh/scaleout.md">扩大或缩小 Milvus 集群规模</a></li>
+<li>了解如何<a href="/docs/zh/v2.4.x/alert.md">为 Milvus 服务创建警报</a></li>
+<li>调整<a href="/docs/zh/v2.4.x/allocate.md">资源分配</a></li>
+<li><a href="/docs/zh/v2.4.x/scaleout.md">扩大或缩小 Milvus 集群规模</a></li>
 </ul></li>
 <li>如果你有兴趣升级 Milvus 版本、<ul>
-<li>阅读<a href="/docs/zh/upgrade_milvus_cluster-operator.md">Milvus 集群升级指南</a>和<a href="/docs/zh/upgrade_milvus_standalone-operator.md">Milvus 独立升级</a> <a href="/docs/zh/upgrade_milvus_cluster-operator.md">指南</a>。</li>
+<li>阅读<a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-operator.md">Milvus 集群升级指南</a>和<a href="/docs/zh/v2.4.x/upgrade_milvus_standalone-operator.md">Milvus 独立升级</a> <a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-operator.md">指南</a>。</li>
 </ul></li>
 </ul>

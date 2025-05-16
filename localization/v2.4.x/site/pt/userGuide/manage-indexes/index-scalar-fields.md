@@ -192,7 +192,7 @@ client.createIndex(createIndexReq);
 <p>O tipo do índice escalar a ser criado. Para indexação implícita, deixe-o vazio ou omita este parâmetro.</p>
 <p>Para indexação personalizada, os valores válidos são:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Recomendado) Um índice invertido consiste num dicionário de termos que contém todas as palavras tokenizadas ordenadas alfabeticamente. Para obter detalhes, consulte <a href="/docs/pt/scalar_index.md">Índice escalar</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (Recomendado) Um índice invertido consiste num dicionário de termos que contém todas as palavras tokenizadas ordenadas alfabeticamente. Para obter detalhes, consulte <a href="/docs/pt/v2.4.x/scalar_index.md">Índice escalar</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Classifica campos escalares usando o algoritmo de classificação da biblioteca de modelos padrão. Suporta apenas campos numéricos (por exemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Uma estrutura de dados em árvore para pesquisas e recuperações rápidas de prefixos. Suporta campos VARCHAR.</p></li>
 </ul></li>
@@ -216,7 +216,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(String</em>) O nome do campo escalar a indexar.</li>
 <li><strong>indexName</strong><em>(String</em>) O nome do índice escalar a criar. Cada campo escalar suporta um índice.</li>
 <li><strong>indexType</strong><em>(String</em>) O tipo do índice escalar a criar. Para indexação implícita, deixe-o vazio ou omita este parâmetro. Para indexação personalizada, os valores válidos são:<ul>
-<li><strong>INVERTED</strong>: (Recomendado) Um índice invertido consiste num dicionário de termos que contém todas as palavras tokenizadas ordenadas alfabeticamente. Para obter detalhes, consulte <a href="/docs/pt/scalar_index.md">Índice escalar</a>.</li>
+<li><strong>INVERTED</strong>: (Recomendado) Um índice invertido consiste num dicionário de termos que contém todas as palavras tokenizadas ordenadas alfabeticamente. Para obter detalhes, consulte <a href="/docs/pt/v2.4.x/scalar_index.md">Índice escalar</a>.</li>
 <li><strong>STL_SORT</strong>: Classifica campos escalares usando o algoritmo de classificação da biblioteca de modelos padrão. Suporta campos booleanos e numéricos (por exemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Uma estrutura de dados em árvore para pesquisas e recuperações rápidas de prefixos. Suporta campos VARCHAR.</li>
 </ul></li>
@@ -237,7 +237,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(string</em>) O nome do campo escalar a indexar.</li>
 <li><strong>index_name</strong><em>(string</em>) O nome do índice escalar a criar. Cada campo escalar suporta um índice.</li>
 <li><strong>index_type</strong><em>(string</em>) O tipo do índice escalar a criar. Para indexação implícita, deixe-o vazio ou omita este parâmetro. Para indexação personalizada, os valores válidos são:<ul>
-<li><strong>INVERTED</strong>: (Recomendado) Um índice invertido consiste num dicionário de termos que contém todas as palavras tokenizadas ordenadas alfabeticamente. Para obter detalhes, consulte <a href="/docs/pt/scalar_index.md">Índice escalar</a>.</li>
+<li><strong>INVERTED</strong>: (Recomendado) Um índice invertido consiste num dicionário de termos que contém todas as palavras tokenizadas ordenadas alfabeticamente. Para obter detalhes, consulte <a href="/docs/pt/v2.4.x/scalar_index.md">Índice escalar</a>.</li>
 <li><strong>STL_SORT</strong>: Classifica campos escalares usando o algoritmo de classificação da biblioteca de modelos padrão. Suporta campos booleanos e numéricos (por exemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Uma estrutura de dados em árvore para pesquisas e recuperações rápidas de prefixos. Suporta campos VARCHAR.</li>
 </ul></li>

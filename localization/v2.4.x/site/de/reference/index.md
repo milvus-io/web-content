@@ -19,9 +19,9 @@ title: In-Memory-Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dieses Thema listet verschiedene Arten von In-Memory-Indizes auf, die von Milvus unterstützt werden, die Szenarien, für die jeder von ihnen am besten geeignet ist, und die Parameter, die Benutzer konfigurieren können, um eine bessere Suchleistung zu erzielen. Für On-Disk-Indizes, siehe <strong><a href="/docs/de/disk_index.md">On-Disk-Index</a></strong>.</p>
+    </button></h1><p>Dieses Thema listet verschiedene Arten von In-Memory-Indizes auf, die von Milvus unterstützt werden, die Szenarien, für die jeder von ihnen am besten geeignet ist, und die Parameter, die Benutzer konfigurieren können, um eine bessere Suchleistung zu erzielen. Für On-Disk-Indizes, siehe <strong><a href="/docs/de/v2.4.x/disk_index.md">On-Disk-Index</a></strong>.</p>
 <p>Indizierung ist der Prozess der effizienten Organisation von Daten und spielt eine wichtige Rolle, wenn es darum geht, die Ähnlichkeitssuche nützlich zu machen, indem zeitaufwändige Abfragen auf großen Datenbeständen drastisch beschleunigt werden.</p>
-<p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/index-vector-fields.md">einen Indextyp angeben</a>.</p>
+<p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/v2.4.x/index-vector-fields.md">einen Indextyp angeben</a>.</p>
 <div class="alert note">
 Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automatisch den alten Index, wenn der Indextyp gewechselt wird.</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS-Vektorindizes<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +60,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <div class="filter">
  <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Embeddings</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der Speicherplatzbedarf 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der Speicherplatzbedarf 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/v2.4.x/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
 <p>Diese Arten von Indizes umfassen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code> und <code translate="no">SCANN</code> für CPU-basierte ANN-Suchen.</p>
 </div>
 <div class="filter-binary">
@@ -218,7 +218,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] Die gewählte Distanzmetrik.</td><td>Siehe <a href="/docs/de/metric.md">Unterstützte Metriken</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Optional] Die gewählte Distanzmetrik.</td><td>Siehe <a href="/docs/de/v2.4.x/metric.md">Unterstützte Metriken</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -418,7 +418,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] Die gewählte Abstandsmetrik.</td><td>Siehe <a href="/docs/de/metric.md">Unterstützte Metriken</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Optional] Die gewählte Abstandsmetrik.</td><td>Siehe <a href="/docs/de/v2.4.x/metric.md">Unterstützte Metriken</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -488,7 +488,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>Dieser Index weist Ähnlichkeiten mit <code translate="no">SPARSE_INVERTED_INDEX</code> auf, verwendet jedoch den <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND-Algorithmus</a>, um die Anzahl der vollständigen IP-Abstandsbewertungen während des Suchprozesses weiter zu reduzieren.</p>
-<p>Unsere Tests haben ergeben, dass <code translate="no">SPARSE_WAND</code> im Allgemeinen schneller ist als die anderen Methoden. Allerdings kann sich die Leistung mit zunehmender Dichte der Vektoren schnell verschlechtern. Um dieses Problem zu beheben, kann die Einführung eines <code translate="no">drop_ratio_search</code>, das nicht Null ist, die Leistung erheblich verbessern, während nur ein minimaler Genauigkeitsverlust entsteht. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p>
+<p>Unsere Tests haben ergeben, dass <code translate="no">SPARSE_WAND</code> im Allgemeinen schneller ist als die anderen Methoden. Allerdings kann sich die Leistung mit zunehmender Dichte der Vektoren schnell verschlechtern. Um dieses Problem zu beheben, kann die Einführung eines <code translate="no">drop_ratio_search</code>, das nicht Null ist, die Leistung erheblich verbessern, während nur ein minimaler Genauigkeitsverlust entsteht. Weitere Informationen finden Sie unter <a href="/docs/de/v2.4.x/sparse_vector.md">Sparse Vector</a>.</p>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
 <table>
@@ -551,5 +551,5 @@ Weitere Informationen finden Sie unter <a href="https://medium.com/unstructured-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Erfahren Sie mehr über die in Milvus unterstützten <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a>.</li>
+<li>Erfahren Sie mehr über die in Milvus unterstützten <a href="/docs/de/v2.4.x/metric.md">Ähnlichkeitsmetriken</a>.</li>
 </ul>

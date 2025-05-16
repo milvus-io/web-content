@@ -123,14 +123,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>Si vous avez déployé des services de surveillance pour le cluster Milvus, vous pouvez également apprendre à :<ul>
-<li><a href="/docs/fr/visualize.md">Visualiser les métriques Milvus dans Grafana</a></li>
-<li><a href="/docs/fr/alert.md">Créer une alerte pour les services Milvus</a></li>
-<li>Ajuster l'<a href="/docs/fr/allocate.md">allocation des ressources</a></li>
+<li><a href="/docs/fr/v2.4.x/visualize.md">Visualiser les métriques Milvus dans Grafana</a></li>
+<li><a href="/docs/fr/v2.4.x/alert.md">Créer une alerte pour les services Milvus</a></li>
+<li>Ajuster l'<a href="/docs/fr/v2.4.x/allocate.md">allocation des ressources</a></li>
 </ul></li>
 <li>Si vous recherchez des informations sur la manière de faire évoluer un cluster Milvus :<ul>
-<li>Apprendre à <a href="/docs/fr/scaleout.md">faire évoluer un cluster Milvus</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.4.x/scaleout.md">faire évoluer un cluster Milvus</a></li>
 </ul></li>
 <li>Si vous souhaitez mettre à niveau la version de Milvus,<ul>
-<li>Lisez le <a href="/docs/fr/upgrade_milvus_cluster-operator.md">guide de mise à niveau du cluster Milvus</a> et celui <a href="/docs/fr/upgrade_milvus_standalone-operator.md">de mise à niveau de Milvus standalone</a>.</li>
+<li>Lisez le <a href="/docs/fr/v2.4.x/upgrade_milvus_cluster-operator.md">guide de mise à niveau du cluster Milvus</a> et celui <a href="/docs/fr/v2.4.x/upgrade_milvus_standalone-operator.md">de mise à niveau de Milvus standalone</a>.</li>
 </ul></li>
 </ul>

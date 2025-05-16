@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: 了解如何使用 Helm 图表升级 Milvus 集群。
 title: 使用 Helm 图表升级 Milvus 群集
 ---
-<div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/zh/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">使用 Helm 图表升级 Milvus 群集<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

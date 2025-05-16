@@ -31,14 +31,14 @@ title: 성능 FAQ
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">CPU 사용량에 영향을 미치는 요인은 무엇인가요?</h4><p>Milvus가 인덱스를 구축하거나 쿼리를 실행할 때 CPU 사용량이 증가합니다. 일반적으로 인덱스 구축은 단일 스레드에서 실행되는 Annoy를 사용하는 경우를 제외하고는 CPU 집약적입니다.</p>
 <p>쿼리를 실행할 때 CPU 사용량은 <code translate="no">nq</code> 와 <code translate="no">nprobe</code> 에 의해 영향을 받습니다. <code translate="no">nq</code> 과 <code translate="no">nprobe</code> 이 작으면 동시성이 낮고 CPU 사용량이 낮게 유지됩니다.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">데이터 삽입과 검색을 동시에 수행하면 쿼리 성능에 영향을 주나요?</h4><p>삽입 작업은 CPU를 많이 사용하지 않습니다. 그러나 새 세그먼트가 인덱스 구축 임계값에 도달하지 않았을 수 있기 때문에 Milvus는 무차별 대입 검색을 사용하므로 쿼리 성능에 상당한 영향을 미칩니다.</p>
-<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 매개변수는 세그먼트의 인덱스 구축 임계값을 결정하며, 기본적으로 1024행으로 설정되어 있습니다. 자세한 내용은 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
+<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 매개변수는 세그먼트의 인덱스 구축 임계값을 결정하며, 기본적으로 1024행으로 설정되어 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
 <h4 id="Is-storage-space-released-right-after-data-deletion-in-Milvus" class="common-anchor-header">Milvus에서 데이터를 삭제한 후 저장 공간이 바로 해제되나요?</h4><p>아니요, Milvus에서 데이터를 삭제하면 저장 공간이 즉시 해제되지 않습니다. 데이터를 삭제하면 엔티티가 '논리적으로 삭제됨'으로 표시되지만 실제 공간은 즉시 해제되지 않을 수 있습니다. 그 이유는 다음과 같습니다:</p>
 <ul>
 <li><strong>압축</strong>: Milvus는 백그라운드에서 데이터를 자동으로 압축합니다. 이 프로세스는 작은 데이터 세그먼트를 큰 데이터 세그먼트로 병합하고 논리적으로 삭제된 데이터(삭제 표시된 엔티티) 또는 TTL(Time-To-Live)을 초과한 데이터를 제거합니다. 그러나 압축은 새 세그먼트를 생성하는 동시에 이전 세그먼트를 "삭제됨"으로 표시합니다.</li>
 <li><strong>가비지 컬렉션</strong>: 가비지 컬렉션(GC)이라는 별도의 프로세스가 주기적으로 이러한 '삭제된' 세그먼트를 제거하여 해당 세그먼트가 차지하고 있던 스토리지 공간을 확보합니다. 이렇게 하면 저장 공간을 효율적으로 사용할 수 있지만 삭제와 공간 확보 사이에 약간의 지연이 발생할 수 있습니다.</li>
 </ul>
 <h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">플러시를 기다리지 않고 작업 후 즉시 삽입, 삭제 또는 업서트된 데이터를 볼 수 있나요?</h4><p>예. Milvus에서는 스토리지-컴퓨팅 분리 아키텍처로 인해 데이터 가시성이 플러시 작업과 직접적으로 연계되어 있지 않습니다. 일관성 수준을 사용하여 데이터 가독성을 관리할 수 있습니다.</p>
-<p>일관성 수준을 선택할 때는 일관성과 성능 간의 장단점을 고려하세요. 즉각적인 가시성이 필요한 작업의 경우 '강력' 일관성 수준을 사용하세요. 더 빠른 쓰기를 원한다면 약한 일관성(데이터가 즉시 표시되지 않을 수 있음)을 우선순위로 정하세요. 자세한 내용은 <a href="/docs/ko/consistency.md">일관성을</a> 참조하세요.</p>
+<p>일관성 수준을 선택할 때는 일관성과 성능 간의 장단점을 고려하세요. 즉각적인 가시성이 필요한 작업의 경우 '강력' 일관성 수준을 사용하세요. 더 빠른 쓰기를 원한다면 약한 일관성(데이터가 즉시 표시되지 않을 수 있음)을 우선순위로 정하세요. 자세한 내용은 <a href="/docs/ko/v2.4.x/consistency.md">일관성을</a> 참조하세요.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">VARCHAR 필드를 색인하면 삭제 속도가 향상되나요?</h4><p>예. VARCHAR 필드를 색인하면 '표현식으로 삭제' 작업 속도를 높일 수 있지만 특정 조건에서만 가능합니다:</p>
 <ul>
 <li><strong>반전 인덱스</strong>: 이 인덱스는 기본 키가 아닌 VARCHAR 필드에 있는 <code translate="no">IN</code> 또는 <code translate="no">==</code> 표현식에 도움이 됩니다.</li>

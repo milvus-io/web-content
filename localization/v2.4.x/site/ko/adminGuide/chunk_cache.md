@@ -54,11 +54,11 @@ summary: ''
     </button></h2><p>이 가이드는 Milvus 인스턴스에 대한 청크 캐시 메커니즘을 구성하는 방법에 대한 지침을 제공합니다. 구성은 Milvus 인스턴스를 설치하는 방식에 따라 다릅니다.</p>
 <ul>
 <li><p>헬름 차트를 사용하여 설치한 Milvus 인스턴스의 경우</p>
-<p><code translate="no">config</code> 섹션 아래의 <code translate="no">values.yaml</code> 파일에 구성을 추가한다. 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 Milvus 구성을</a> 참조한다.</p></li>
+<p><code translate="no">config</code> 섹션 아래의 <code translate="no">values.yaml</code> 파일에 구성을 추가한다. 자세한 내용은 <a href="/docs/ko/v2.4.x/configure-helm.md">헬름 차트로 Milvus 구성을</a> 참조한다.</p></li>
 <li><p>Docker Compose를 사용하여 설치한 Milvus 인스턴스의 경우</p>
-<p>Milvus 인스턴스를 시작할 때 사용한 <code translate="no">milvus.yaml</code> 파일에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/configure-docker.md">Docker Compose로 Milvus 구성을</a> 참조하세요.</p></li>
+<p>Milvus 인스턴스를 시작할 때 사용한 <code translate="no">milvus.yaml</code> 파일에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/configure-docker.md">Docker Compose로 Milvus 구성을</a> 참조하세요.</p></li>
 <li><p>Operator를 사용하여 설치한 Milvus 인스턴스의 경우</p>
-<p><code translate="no">Milvus</code> 사용자 지정 리소스의 <code translate="no">spec.components</code> 섹션에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/configure_operator.md">Operator로 Milvus 구성을</a> 참조하세요.</p></li>
+<p><code translate="no">Milvus</code> 사용자 지정 리소스의 <code translate="no">spec.components</code> 섹션에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/configure_operator.md">Operator로 Milvus 구성을</a> 참조하세요.</p></li>
 </ul>
 <h3 id="Configuration-options" class="common-anchor-header">구성 옵션</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode</span>:
     <span class="hljs-attr">cache</span>:

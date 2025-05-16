@@ -156,6 +156,6 @@ summary: Imparare a conoscere il sistema di sincronizzazione dell'ora in Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Conoscere il concetto di <a href="/docs/it/timestamp.md">timestamp</a>.</li>
-<li>Conoscere il <a href="/docs/it/data_processing.md">flusso di lavoro dell'elaborazione dei dati</a> in Milvus.</li>
+<li>Conoscere il concetto di <a href="/docs/it/v2.4.x/timestamp.md">timestamp</a>.</li>
+<li>Conoscere il <a href="/docs/it/v2.4.x/data_processing.md">flusso di lavoro dell'elaborazione dei dati</a> in Milvus.</li>
 </ul>

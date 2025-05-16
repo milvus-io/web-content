@@ -20,7 +20,7 @@ summary: Découvrez comment visualiser les métriques Milvus dans Grafana.
         ></path>
       </svg>
     </button></h1><p>Cette rubrique décrit comment visualiser les métriques Milvus à l'aide de Grafana.</p>
-<p>Comme décrit dans le <a href="/docs/fr/monitor.md">guide de suivi</a>, les métriques contiennent des informations utiles telles que la quantité de mémoire utilisée par un composant Milvus spécifique. Le suivi des métriques vous aide à mieux comprendre les performances de Milvus et son état d'exécution afin que vous puissiez ajuster l'allocation des ressources en temps voulu.</p>
+<p>Comme décrit dans le <a href="/docs/fr/v2.4.x/monitor.md">guide de suivi</a>, les métriques contiennent des informations utiles telles que la quantité de mémoire utilisée par un composant Milvus spécifique. Le suivi des métriques vous aide à mieux comprendre les performances de Milvus et son état d'exécution afin que vous puissiez ajuster l'allocation des ressources en temps voulu.</p>
 <p>La visualisation est un graphique montrant l'évolution de l'utilisation des ressources dans le temps, ce qui vous permet de voir et de remarquer rapidement les modifications de l'utilisation des ressources, en particulier lorsqu'un événement se produit.</p>
 <p>Ce tutoriel utilise Grafana, une plateforme open-source pour l'analyse de séries temporelles, pour visualiser diverses mesures de performance d'un cluster Milvus déployé sur Kubernetes (K8s).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -39,8 +39,8 @@ summary: Découvrez comment visualiser les métriques Milvus dans Grafana.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Vous avez <a href="/docs/fr/install_cluster-helm.md">installé un cluster Milvus sur K8s)</a>.</li>
-<li>Vous devez <a href="/docs/fr/monitor.md">configurer Prometheus</a> pour surveiller et collecter des métriques avant d'utiliser Grafana pour visualiser les métriques. Si la configuration est réussie, vous pouvez accéder à Grafana à l'adresse <code translate="no">http://localhost:3000</code>. Vous pouvez également accéder à Grafana en utilisant l'adresse par défaut de Grafana <code translate="no">user:password</code>, à savoir <code translate="no">admin:admin</code>.</li>
+<li>Vous avez <a href="/docs/fr/v2.4.x/install_cluster-helm.md">installé un cluster Milvus sur K8s)</a>.</li>
+<li>Vous devez <a href="/docs/fr/v2.4.x/monitor.md">configurer Prometheus</a> pour surveiller et collecter des métriques avant d'utiliser Grafana pour visualiser les métriques. Si la configuration est réussie, vous pouvez accéder à Grafana à l'adresse <code translate="no">http://localhost:3000</code>. Vous pouvez également accéder à Grafana en utilisant l'adresse par défaut de Grafana <code translate="no">user:password</code>, à savoir <code translate="no">admin:admin</code>.</li>
 </ul>
 <h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">Visualisation des mesures à l'aide de Grafana<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,11 +90,11 @@ summary: Découvrez comment visualiser les métriques Milvus dans Grafana.
       </svg>
     </button></h2><ul>
 <li>Si vous avez configuré Grafana pour visualiser les métriques Milvus, vous pouvez également.. :<ul>
-<li>Apprendre à <a href="/docs/fr/alert.md">créer une alerte pour les services Milvus</a></li>
-<li>Ajuster l'<a href="/docs/fr/allocate.md">allocation des ressources</a></li>
-<li><a href="/docs/fr/scaleout.md">Réduire ou augmenter la taille d'un cluster Milvus</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.4.x/alert.md">créer une alerte pour les services Milvus</a></li>
+<li>Ajuster l'<a href="/docs/fr/v2.4.x/allocate.md">allocation des ressources</a></li>
+<li><a href="/docs/fr/v2.4.x/scaleout.md">Réduire ou augmenter la taille d'un cluster Milvus</a></li>
 </ul></li>
 <li>Si vous souhaitez mettre à niveau la version de Milvus,<ul>
-<li>Lisez le <a href="/docs/fr/upgrade_milvus_cluster-operator.md">guide de mise à niveau de Milvus cluster</a> et <a href="/docs/fr/upgrade_milvus_standalone-operator.md">celui de mise à niveau de Milvus standalone</a>.</li>
+<li>Lisez le <a href="/docs/fr/v2.4.x/upgrade_milvus_cluster-operator.md">guide de mise à niveau de Milvus cluster</a> et <a href="/docs/fr/v2.4.x/upgrade_milvus_standalone-operator.md">celui de mise à niveau de Milvus standalone</a>.</li>
 </ul></li>
 </ul>

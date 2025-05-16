@@ -38,7 +38,7 @@ title: الإدراج والإضافة والحذف
       </svg>
     </button></h2><ul>
 <li><p>لقد قمت بتثبيت SDK من اختيارك. لتثبيت SDK، راجع <a href="https://milvus.io/docs/install-pymilvus.md">تثبيت SDKs</a>.</p></li>
-<li><p>لقد قمت بإنشاء مجموعة. لإنشاء مجموعة، راجع <a href="/docs/ar/manage-collections.md">إدارة المجموعات</a>.</p></li>
+<li><p>لقد قمت بإنشاء مجموعة. لإنشاء مجموعة، راجع <a href="/docs/ar/v2.4.x/manage-collections.md">إدارة المجموعات</a>.</p></li>
 <li><p>لإدراج كمية كبيرة من البيانات، يُنصح باستخدام <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">استيراد البيانات</a>.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -58,7 +58,7 @@ title: الإدراج والإضافة والحذف
       </svg>
     </button></h2><p>يعتبر الكيان، في سياق مجموعات Milvus، مثيلًا منفردًا يمكن تحديده ضمن مجموعة. وهو يمثل عضوًا مميزًا في فئة معينة، سواء كان كتابًا في مكتبة أو جينًا في جينوم أو أي كيان آخر يمكن تحديده.</p>
 <p>تشترك الكيانات داخل مجموعة ما في مجموعة ما في مجموعة مشتركة من السمات التي يطلق عليها المخطط، والتي تحدد البنية التي يجب أن يلتزم بها كل كيان، بما في ذلك أسماء الحقول وأنواع البيانات وأي قيود أخرى.</p>
-<p>ويتطلب الإدراج الناجح للكيانات في مجموعة أن تحتوي البيانات المقدمة على جميع الحقول المعرفة من قبل المخطط للمجموعة المستهدفة. بالإضافة إلى ذلك، يمكنك أيضًا تضمين الحقول غير المعرفة من قبل المخطط فقط إذا قمت بتمكين الحقل الديناميكي. لمزيد من التفاصيل، راجع <a href="/docs/ar/enable-dynamic-field.md">تمكين الحقل الديناميكي</a>.</p>
+<p>ويتطلب الإدراج الناجح للكيانات في مجموعة أن تحتوي البيانات المقدمة على جميع الحقول المعرفة من قبل المخطط للمجموعة المستهدفة. بالإضافة إلى ذلك، يمكنك أيضًا تضمين الحقول غير المعرفة من قبل المخطط فقط إذا قمت بتمكين الحقل الديناميكي. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.4.x/enable-dynamic-field.md">تمكين الحقل الديناميكي</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">الإعدادات<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -382,7 +382,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يكون الناتج عبارة عن قاموس يحتوي على إحصائيات الكيانات المتأثرة. للحصول على تفاصيل حول عمليات التقسيم، راجع <a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a>.</p>
+<p>يكون الناتج عبارة عن قاموس يحتوي على إحصائيات الكيانات المتأثرة. للحصول على تفاصيل حول عمليات التقسيم، راجع <a href="/docs/ar/v2.4.x/manage-partitions.md">إدارة الأقسام</a>.</p>
 <h2 id="Upsert-entities" class="common-anchor-header">إدراج الكيانات<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -587,7 +587,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>الإخراج عبارة عن قاموس يحتوي على إحصائيات الكيانات المتأثرة. للحصول على تفاصيل حول عمليات التقسيم، راجع <a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a>.</p>
+<p>الإخراج عبارة عن قاموس يحتوي على إحصائيات الكيانات المتأثرة. للحصول على تفاصيل حول عمليات التقسيم، راجع <a href="/docs/ar/v2.4.x/manage-partitions.md">إدارة الأقسام</a>.</p>
 <h2 id="Delete-entities" class="common-anchor-header">حذف الكيانات<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -708,7 +708,7 @@ System.out.<span class="hljs-built_in">println</span>(deleteResp.getDeleteCnt())
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للحصول على تفاصيل حول كيفية استخدام تعبيرات التصفية، ارجع إلى <a href="/docs/ar/get-and-scalar-query.md">احصل على استعلام الحصول على واستعلام قياسي</a>.</p></li>
+<p>للحصول على تفاصيل حول كيفية استخدام تعبيرات التصفية، ارجع إلى <a href="/docs/ar/v2.4.x/get-and-scalar-query.md">احصل على استعلام الحصول على واستعلام قياسي</a>.</p></li>
 <li><p><strong>حذف الكيانات حسب اسم القسم</strong>.</p>
 <p>إذا كنت ترغب في حذف كيانات من قسم معين، يمكنك تحديد اسم القسم باستخدام المعلمة <code translate="no">partition_name</code> في الأسلوب <code translate="no">delete()</code>. يحذف المثال التالي الكيانات من <code translate="no">partitionA</code> التي لها لون يبدأ بـ <code translate="no">blue</code>.</p>
 <p><div class="multipleCode">

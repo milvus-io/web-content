@@ -192,7 +192,7 @@ client.createIndex(createIndexReq);
 <p>Le type d'index scalaire à créer. Pour l'indexation implicite, laissez ce paramètre vide ou omettez-le.</p>
 <p>Pour l'indexation personnalisée, les valeurs valides sont</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots tokenisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/scalar_index.md">Index scalaire</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots tokenisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/v2.4.x/scalar_index.md">Index scalaire</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Trie les champs scalaires à l'aide de l'algorithme de tri de la bibliothèque standard. Ne prend en charge que les champs numériques (par exemple, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Une structure de données arborescente pour des recherches et des extractions rapides de préfixes. Prend en charge les champs VARCHAR.</p></li>
 </ul></li>
@@ -216,7 +216,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(Chaîne</em>) Le nom du champ scalaire à indexer.</li>
 <li><strong>indexName</strong><em>(Chaîne</em>) Le nom de l'index scalaire à créer. Chaque champ scalaire supporte un index.</li>
 <li><strong>indexType</strong><em>(Chaîne</em>) Le type d'index scalaire à créer. Pour l'indexation implicite, laissez ce paramètre vide ou omettez-le. Pour l'indexation personnalisée, les valeurs valides sont les suivantes :<ul>
-<li><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots symbolisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/scalar_index.md">Index scalaire</a>.</li>
+<li><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots symbolisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/v2.4.x/scalar_index.md">Index scalaire</a>.</li>
 <li><strong>STL_SORT</strong>: Trie les champs scalaires à l'aide de l'algorithme de tri de la bibliothèque standard. Prend en charge les champs booléens et numériques (par exemple, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Une structure de données arborescente pour des recherches et des extractions rapides de préfixes. Prend en charge les champs VARCHAR.</li>
 </ul></li>
@@ -237,7 +237,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(string</em>) Le nom du champ scalaire à indexer.</li>
 <li><strong>index_name</strong><em>(string</em>) Le nom de l'index scalaire à créer. Chaque champ scalaire supporte un index.</li>
 <li><strong>index_type</strong><em>(chaîne</em>) Le type d'index scalaire à créer. Pour l'indexation implicite, laissez ce paramètre vide ou omettez-le. Pour l'indexation personnalisée, les valeurs valides sont les suivantes :<ul>
-<li><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots tokenisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/scalar_index.md">Index scalaire</a>.</li>
+<li><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots tokenisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/v2.4.x/scalar_index.md">Index scalaire</a>.</li>
 <li><strong>STL_SORT</strong>: Trie les champs scalaires à l'aide de l'algorithme de tri de la bibliothèque standard. Prend en charge les champs booléens et numériques (par exemple, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Une structure de données arborescente pour des recherches et des extractions rapides de préfixes. Prend en charge les champs VARCHAR.</li>
 </ul></li>

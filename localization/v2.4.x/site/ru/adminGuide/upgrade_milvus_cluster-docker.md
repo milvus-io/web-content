@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: 'Узнайте, как обновить кластер Milvus с помощью Docker Compose.'
 title: Обновление кластера Milvus с помощью Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ru/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/ru/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/ru/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/ru/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/ru/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/ru/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/ru/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/ru/v2.4.x/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/ru/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/ru/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">Обновление кластера Milvus с помощью Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,11 +144,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>Вам также может быть интересно узнать, как:<ul>
-<li><a href="/docs/ru/scaleout.md">Масштабировать кластер Milvus</a></li>
+<li><a href="/docs/ru/v2.4.x/scaleout.md">Масштабировать кластер Milvus</a></li>
 </ul></li>
 <li>Если вы готовы развернуть свой кластер в облаке:<ul>
-<li>Узнайте, как <a href="/docs/ru/eks.md">развернуть Milvus на Amazon EKS с помощью Terraform</a>.</li>
-<li>Узнайте, как <a href="/docs/ru/gcp.md">развернуть кластер Milvus на GCP с помощью Kubernetes</a></li>
-<li>Узнайте, как <a href="/docs/ru/azure.md">развернуть Milvus на Microsoft Azure с помощью Kubernetes</a>.</li>
+<li>Узнайте, как <a href="/docs/ru/v2.4.x/eks.md">развернуть Milvus на Amazon EKS с помощью Terraform</a>.</li>
+<li>Узнайте, как <a href="/docs/ru/v2.4.x/gcp.md">развернуть кластер Milvus на GCP с помощью Kubernetes</a></li>
+<li>Узнайте, как <a href="/docs/ru/v2.4.x/azure.md">развернуть Milvus на Microsoft Azure с помощью Kubernetes</a>.</li>
 </ul></li>
 </ul>

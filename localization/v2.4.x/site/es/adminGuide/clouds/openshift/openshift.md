@@ -177,7 +177,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>Si desea aprender cómo implementar Milvus en otras nubes:</p>
 <ul>
-<li><a href="/docs/es/eks.md">Despliegue Milvus Cluster en AWS con Kubernetes</a></li>
-<li><a href="/docs/es/azure.md">Despliegue de Milvus Cluster en Azure con Kubernetes</a></li>
-<li><a href="/docs/es/gcp.md">Despliegue de Milvus Cluster en GCP con Kubernetes</a></li>
+<li><a href="/docs/es/v2.4.x/eks.md">Despliegue Milvus Cluster en AWS con Kubernetes</a></li>
+<li><a href="/docs/es/v2.4.x/azure.md">Despliegue de Milvus Cluster en Azure con Kubernetes</a></li>
+<li><a href="/docs/es/v2.4.x/gcp.md">Despliegue de Milvus Cluster en GCP con Kubernetes</a></li>
 </ul>

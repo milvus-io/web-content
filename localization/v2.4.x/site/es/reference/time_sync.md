@@ -156,6 +156,6 @@ summary: Conozca el sistema de sincronización horaria de Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Conozca el concepto de <a href="/docs/es/timestamp.md">marca de tiempo</a>.</li>
-<li>Conozca el <a href="/docs/es/data_processing.md">flujo de trabajo de procesamiento de datos</a> en Milvus.</li>
+<li>Conozca el concepto de <a href="/docs/es/v2.4.x/timestamp.md">marca de tiempo</a>.</li>
+<li>Conozca el <a href="/docs/es/v2.4.x/data_processing.md">flujo de trabajo de procesamiento de datos</a> en Milvus.</li>
 </ul>

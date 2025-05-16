@@ -36,10 +36,10 @@ title: Milvus 마이그레이션 개요
       </svg>
     </button></h2><p><a href="https://github.com/zilliztech/milvus-migration">Milvus 마이그레이션</a> 도구는 다양한 사용자 요구 사항을 수용하기 위해 다양한 마이그레이션 경로를 지원합니다:</p>
 <ul>
-<li><a href="/docs/ko/es2m.md">Elasticsearch에서 Milvus 2.x로</a>: 사용자가 Milvus의 최적화된 벡터 검색 기능을 활용하기 위해 Elasticsearch 환경에서 데이터를 마이그레이션할 수 있습니다.</li>
-<li><a href="/docs/ko/f2m.md">Faiss에서 Milvus 2.x로</a>: 효율적인 유사도 검색을 위해 널리 사용되는 라이브러리인 Faiss에서 데이터 전송을 위한 실험적 지원을 제공합니다.</li>
-<li><a href="/docs/ko/m2m.md">Milvus 1.x에서 Milvus 2.x로</a>: 이전 버전의 데이터가 최신 프레임워크로 원활하게 전환되도록 보장합니다.</li>
-<li><a href="/docs/ko/from-m2x.md">Milvus 2.3.x에서 Milvus 2.3.x 이상으로</a>: 이미 2.3.x로 마이그레이션한 사용자를 위한 일회성 마이그레이션 경로를 제공합니다.</li>
+<li><a href="/docs/ko/v2.4.x/es2m.md">Elasticsearch에서 Milvus 2.x로</a>: 사용자가 Milvus의 최적화된 벡터 검색 기능을 활용하기 위해 Elasticsearch 환경에서 데이터를 마이그레이션할 수 있습니다.</li>
+<li><a href="/docs/ko/v2.4.x/f2m.md">Faiss에서 Milvus 2.x로</a>: 효율적인 유사도 검색을 위해 널리 사용되는 라이브러리인 Faiss에서 데이터 전송을 위한 실험적 지원을 제공합니다.</li>
+<li><a href="/docs/ko/v2.4.x/m2m.md">Milvus 1.x에서 Milvus 2.x로</a>: 이전 버전의 데이터가 최신 프레임워크로 원활하게 전환되도록 보장합니다.</li>
+<li><a href="/docs/ko/v2.4.x/from-m2x.md">Milvus 2.3.x에서 Milvus 2.3.x 이상으로</a>: 이미 2.3.x로 마이그레이션한 사용자를 위한 일회성 마이그레이션 경로를 제공합니다.</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">특징<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

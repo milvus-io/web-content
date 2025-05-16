@@ -183,7 +183,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p>Perhatikan bahwa <code translate="no">_resource_groups</code> adalah parameter opsional, dan jika tidak ditentukan, Milvus akan memuat replika ke node kueri dalam grup sumber daya default.</p>
 <p>Agar Milus memuat setiap replika koleksi dalam kelompok sumber daya yang terpisah, pastikan jumlah kelompok sumber daya sama dengan jumlah replika.</p></li>
 <li><p>Mentransfer replika di antara grup sumber daya.</p>
-<p>Milvus menggunakan <a href="/docs/id/replica.md">replika</a> untuk mencapai penyeimbangan beban di antara <a href="/docs/id/glossary.md#Segment">segmen-segmen</a> yang didistribusikan di beberapa node kueri. Anda dapat memindahkan replika tertentu dari sebuah koleksi dari satu grup sumber daya ke grup sumber daya lainnya sebagai berikut:</p>
+<p>Milvus menggunakan <a href="/docs/id/v2.4.x/replica.md">replika</a> untuk mencapai penyeimbangan beban di antara <a href="/docs/id/v2.4.x/glossary.md#Segment">segmen-segmen</a> yang didistribusikan di beberapa node kueri. Anda dapat memindahkan replika tertentu dari sebuah koleksi dari satu grup sumber daya ke grup sumber daya lainnya sebagai berikut:</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Untuk menerapkan instans Milvus multi-penyewa, baca yang berikut ini:</p>
 <ul>
-<li><a href="/docs/id/rbac.md">Mengaktifkan RBAC</a></li>
-<li><a href="/docs/id/users_and_roles.md">Pengguna dan peran</a></li>
+<li><a href="/docs/id/v2.4.x/rbac.md">Mengaktifkan RBAC</a></li>
+<li><a href="/docs/id/v2.4.x/users_and_roles.md">Pengguna dan peran</a></li>
 </ul>

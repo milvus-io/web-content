@@ -107,7 +107,7 @@ summary: >-
       </svg>
     </button></h2><p>Nachdem Sie den grundlegenden Arbeitsablauf der Überwachung und Alarmierung kennengelernt haben, lernen Sie:</p>
 <ul>
-<li><a href="/docs/de/monitor.md">Bereitstellen von Überwachungsdiensten</a></li>
-<li><a href="/docs/de/visualize.md">Visualisierung von Milvus-Metriken</a></li>
-<li><a href="/docs/de/alert.md">Einen Alarm erstellen</a></li>
+<li><a href="/docs/de/v2.4.x/monitor.md">Bereitstellen von Überwachungsdiensten</a></li>
+<li><a href="/docs/de/v2.4.x/visualize.md">Visualisierung von Milvus-Metriken</a></li>
+<li><a href="/docs/de/v2.4.x/alert.md">Einen Alarm erstellen</a></li>
 </ul>

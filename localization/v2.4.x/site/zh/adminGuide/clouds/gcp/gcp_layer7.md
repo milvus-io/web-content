@@ -26,9 +26,9 @@ summary: 了解如何在 GCP 上的 Layer-7 负载均衡器后面部署 Milvus �
 <p>要创建项目，请参阅<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">创建和管理项目</a>。本指南中使用的项目名称是<strong>milvus-testing-nonprod</strong>。</p></li>
 <li><p>您已在本地安装了<a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>、<a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> 和<a href="https://helm.sh/docs/intro/install/">Helm</a>，或者决定使用基于浏览器的<a href="https://cloud.google.com/shell">Cloud Shell</a>。</p></li>
 <li><p>您已使用 GCP 账户凭据<a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">初始化了 gcloud CLI</a>。</p></li>
-<li><p>您已<a href="/docs/zh/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p></li>
+<li><p>您已<a href="/docs/zh/v2.4.x/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假定您已<a href="/docs/zh/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假定您已<a href="/docs/zh/v2.4.x/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
 <p>在为该 Milvus 群集设置第 7 层负载平衡器之前，请运行以下命令移除第 4 层负载平衡器。</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

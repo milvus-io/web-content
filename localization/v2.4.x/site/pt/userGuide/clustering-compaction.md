@@ -138,7 +138,7 @@ common:
 </table>
 </li>
 </ul>
-<p>Para aplicar as alterações acima ao seu cluster Milvus, siga os passos em <a href="/docs/pt/configure-helm.md">Configurar Milvus com Helm</a> e <a href="/docs/pt/configure_operator.md">Configurar Milvus com Milvus Operators</a>.</p>
+<p>Para aplicar as alterações acima ao seu cluster Milvus, siga os passos em <a href="/docs/pt/v2.4.x/configure-helm.md">Configurar Milvus com Helm</a> e <a href="/docs/pt/v2.4.x/configure_operator.md">Configurar Milvus com Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Configuração da coleção</h3><p>Para compactar o cluster numa coleção específica, deve selecionar um campo escalar da coleção como chave de cluster.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

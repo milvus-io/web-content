@@ -20,7 +20,7 @@ title: 온디스크 인덱스
         ></path>
       </svg>
     </button></h1><p>이 문서에서는 DiskANN이라는 온디스크 인덱싱 알고리즘을 소개합니다. DiskANN은 Vamana 그래프를 기반으로 대규모 데이터 세트 내에서 효율적인 검색을 지원합니다.</p>
-<p>쿼리 성능을 향상시키기 위해 각 벡터 필드에 대해 <a href="/docs/ko/index-vector-fields.md">인덱스 유형을 지정할</a> 수 있습니다.</p>
+<p>쿼리 성능을 향상시키기 위해 각 벡터 필드에 대해 <a href="/docs/ko/v2.4.x/index-vector-fields.md">인덱스 유형을 지정할</a> 수 있습니다.</p>
 <div class="alert note"> 
 현재 벡터 필드는 하나의 인덱스 유형만 지원합니다. Milvus는 인덱스 유형을 전환할 때 이전 인덱스를 자동으로 삭제합니다.</div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">

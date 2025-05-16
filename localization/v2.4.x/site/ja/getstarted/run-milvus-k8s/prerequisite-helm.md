@@ -141,8 +141,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>ハードウェアとソフトウェアが要件を満たしていれば、次のことができます：</p>
 <ul>
-<li><a href="/docs/ja/install_cluster-milvusoperator.md">Milvus Operatorを使用してKubernetsでMilvusを実行する。</a></li>
-<li><a href="/docs/ja/install_cluster-helm.md">Helmを使用してKubernetesでMilvusを実行する</a></li>
+<li><a href="/docs/ja/v2.4.x/install_cluster-milvusoperator.md">Milvus Operatorを使用してKubernetsでMilvusを実行する。</a></li>
+<li><a href="/docs/ja/v2.4.x/install_cluster-helm.md">Helmを使用してKubernetesでMilvusを実行する</a></li>
 </ul></li>
-<li><p>Milvusのインストール時に設定できるパラメータについては、<a href="/docs/ja/system_configuration.md">システム構成を</a>参照してください。</p></li>
+<li><p>Milvusのインストール時に設定できるパラメータについては、<a href="/docs/ja/v2.4.x/system_configuration.md">システム構成を</a>参照してください。</p></li>
 </ul>

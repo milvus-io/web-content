@@ -22,9 +22,9 @@ summary: ''
 <p>이 가이드는 Milvus에서 액세스 로그를 구성하는 방법에 대한 자세한 지침을 제공합니다.</p>
 <p>액세스 로그의 구성은 Milvus의 설치 방법에 따라 다릅니다:</p>
 <ul>
-<li><strong>헬름 설치</strong>: <code translate="no">values.yaml</code> 에서 구성한다. 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 Milvus 구성하기를</a> 참조하세요.</li>
-<li><strong>도커 설치</strong>: <code translate="no">milvus.yaml</code> 에서 구성한다. 자세한 내용은 <a href="/docs/ko/configure-docker.md">Docker Compose로 Milvus 구성하기를</a> 참조하세요.</li>
-<li><strong>오퍼레이터 설치</strong>: 구성 파일에서 <code translate="no">spec.components</code> 을 수정합니다. 자세한 내용은 <a href="/docs/ko/configure_operator.md">Milvus 오퍼레이터로 Milvus 구성을</a> 참조하세요.</li>
+<li><strong>헬름 설치</strong>: <code translate="no">values.yaml</code> 에서 구성한다. 자세한 내용은 <a href="/docs/ko/v2.4.x/configure-helm.md">헬름 차트로 Milvus 구성하기를</a> 참조하세요.</li>
+<li><strong>도커 설치</strong>: <code translate="no">milvus.yaml</code> 에서 구성한다. 자세한 내용은 <a href="/docs/ko/v2.4.x/configure-docker.md">Docker Compose로 Milvus 구성하기를</a> 참조하세요.</li>
+<li><strong>오퍼레이터 설치</strong>: 구성 파일에서 <code translate="no">spec.components</code> 을 수정합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/configure_operator.md">Milvus 오퍼레이터로 Milvus 구성을</a> 참조하세요.</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">구성 옵션<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

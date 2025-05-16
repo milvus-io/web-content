@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: تعرف على كيفية ترقية ميلفوس المستقل مع مشغل ميلفوس.
 title: ترقية Milvus Standalone مع مشغل Milvus
 ---
-<div class="tab-wrapper"><a href="/docs/ar/upgrade_milvus_standalone-operator.md" class='active '>مشغل ميلفوس ميلفوس</a><a href="/docs/ar/upgrade_milvus_standalone-helm.md" class=''>هيلم</a><a href="/docs/ar/upgrade_milvus_standalone-operator.md" class='active '>دوكر</a><a href="/docs/ar/upgrade_milvus_standalone-docker.md" class=''>كومبوزر</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.4.x/upgrade_milvus_standalone-operator.md" class='active '>مشغل ميلفوس ميلفوس</a><a href="/docs/ar/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>هيلم</a><a href="/docs/ar/v2.4.x/upgrade_milvus_standalone-operator.md" class='active '>دوكر</a><a href="/docs/ar/v2.4.x/upgrade_milvus_standalone-docker.md" class=''>كومبوزر</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">ترقية Milvus Standalone مع مشغل Milvus<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

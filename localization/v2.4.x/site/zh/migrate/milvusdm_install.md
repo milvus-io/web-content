@@ -85,7 +85,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>安装了Milvus-migration工具后，你就可以从不同来源迁移数据了：</p>
 <ul>
-<li><a href="/docs/zh/es2m.md">从 Elasticsearch</a></li>
-<li><a href="/docs/zh/f2m.md">从 Faiss</a></li>
-<li><a href="/docs/zh/m2m.md">从 Milvus 1.x</a></li>
+<li><a href="/docs/zh/v2.4.x/es2m.md">从 Elasticsearch</a></li>
+<li><a href="/docs/zh/v2.4.x/f2m.md">从 Faiss</a></li>
+<li><a href="/docs/zh/v2.4.x/m2m.md">从 Milvus 1.x</a></li>
 </ul>

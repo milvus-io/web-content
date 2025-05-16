@@ -21,7 +21,7 @@ summary: Découvrez comment activer le proxy TLS dans Milvus.
     </button></h1><p>TLS (Transport Layer Security) est un protocole de cryptage qui garantit la sécurité des communications. Le proxy Milvus utilise l'authentification unidirectionnelle et bidirectionnelle TLS.</p>
 <p>Cette rubrique décrit comment activer TLS dans le proxy Milvus pour les trafics gRPC et RESTful.</p>
 <div class="alert note">
-<p>TLS et l'authentification utilisateur sont deux approches de sécurité distinctes. Si vous avez activé l'authentification utilisateur et TLS dans votre système Milvus, vous devrez fournir un nom d'utilisateur, un mot de passe et des chemins d'accès aux fichiers de certificats. Pour plus d'informations sur l'activation de l'authentification de l'utilisateur, voir <a href="/docs/fr/authenticate.md">Authentifier l'accès de l'utilisateur</a>.</p>
+<p>TLS et l'authentification utilisateur sont deux approches de sécurité distinctes. Si vous avez activé l'authentification utilisateur et TLS dans votre système Milvus, vous devrez fournir un nom d'utilisateur, un mot de passe et des chemins d'accès aux fichiers de certificats. Pour plus d'informations sur l'activation de l'authentification de l'utilisateur, voir <a href="/docs/fr/v2.4.x/authenticate.md">Authentifier l'accès de l'utilisateur</a>.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">Créer votre propre certificat<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"

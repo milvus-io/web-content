@@ -294,6 +294,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>Se você quiser aprender como implantar o Milvus em outras nuvens:</p>
 <ul>
-<li><a href="/docs/pt/eks.md">Implantar o Milvus Cluster na AWS com Kubernetes</a></li>
-<li><a href="/docs/pt/gcp.md">Implantar o cluster do Milvus no GCP com o Kubernetes</a></li>
+<li><a href="/docs/pt/v2.4.x/eks.md">Implantar o Milvus Cluster na AWS com Kubernetes</a></li>
+<li><a href="/docs/pt/v2.4.x/gcp.md">Implantar o cluster do Milvus no GCP com o Kubernetes</a></li>
 </ul>

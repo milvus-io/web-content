@@ -37,8 +37,8 @@ summary: 本頁示範匯入準備資料的程序。
       </svg>
     </button></h2><ul>
 <li><p>您已經準備好您的資料並將其放入 Milvus 資料桶。</p>
-<p>如果沒有，您應該先使用<strong>RemoteBulkWriter</strong>準備您的資料，並確保準備好的資料已經傳輸到與您的 Milvus 實例一起啟動的 MinIO 實例上的 Milvus 資料桶。如需詳細資訊，請參閱<a href="/docs/zh-hant/prepare-source-data.md">準備原始資料</a>。</p></li>
-<li><p>您已經使用您用來準備資料的模式建立了一個集合。如果沒有，請參閱<a href="/docs/zh-hant/manage-collections.md">管理集合</a>。</p></li>
+<p>如果沒有，您應該先使用<strong>RemoteBulkWriter</strong>準備您的資料，並確保準備好的資料已經傳輸到與您的 Milvus 實例一起啟動的 MinIO 實例上的 Milvus 資料桶。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/prepare-source-data.md">準備原始資料</a>。</p></li>
+<li><p>您已經使用您用來準備資料的模式建立了一個集合。如果沒有，請參閱<a href="/docs/zh-hant/v2.4.x/manage-collections.md">管理集合</a>。</p></li>
 </ul>
 <div class="language-python">
 <p>下面的程式碼片段使用給定的模式建立一個簡單的集合。有關參數的詳細資訊，請參閱 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>和 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>SDK 參考資料。</p>

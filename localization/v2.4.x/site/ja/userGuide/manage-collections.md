@@ -74,9 +74,9 @@ title: コレクションの管理
     </button></h2><p>以下のいずれかの方法でコレクションを作成できます：</p>
 <ul>
 <li><p><strong>クイックセットアップ</strong></p>
-<p>この方法では、名前を付けて、このコレクションに格納するベクトル埋込みの次元数を指定するだけで、コレクションを作成できます。詳細は、<a href="/docs/ja/manage-collections.md">Quick setupを</a>参照。</p></li>
+<p>この方法では、名前を付けて、このコレクションに格納するベクトル埋込みの次元数を指定するだけで、コレクションを作成できます。詳細は、<a href="/docs/ja/v2.4.x/manage-collections.md">Quick setupを</a>参照。</p></li>
 <li><p><strong>カスタマイズセットアップ</strong></p>
-<p>In Milvusにコレクションのほとんどすべてを任せる代わりに、コレクションの<strong>スキーマと</strong> <strong>インデックスパラメータを</strong>自分で決めることができます。詳細は<a href="/docs/ja/manage-collections.md">カスタマイズセットアップを</a>参照してください。</p></li>
+<p>In Milvusにコレクションのほとんどすべてを任せる代わりに、コレクションの<strong>スキーマと</strong> <strong>インデックスパラメータを</strong>自分で決めることができます。詳細は<a href="/docs/ja/v2.4.x/manage-collections.md">カスタマイズセットアップを</a>参照してください。</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">クイックセットアップ</h3><p>AI業界における大きな飛躍を背景に、ほとんどの開発者はシンプルかつダイナミックなコレクションを必要としています。Milvusでは、3つの引数を指定するだけで、そのようなコレクションを素早くセットアップできます：</p>
 <ul>
@@ -272,7 +272,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </ul>
 <p>提供されたコードから自動的にインデックス付けされ、ロードされたコレクションは、すぐにデータ挿入の準備ができます。</p>
 <h3 id="Customized-setup" class="common-anchor-header">カスタマイズされたセットアップ</h3><p>Milvusにコレクションのほとんど全てを決定させる代わりに、あなた自身でコレクションの<strong>スキーマと</strong> <strong>インデックスパラメータを</strong>決定することができます。</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">ステップ1: スキーマの設定</h4><p>スキーマはコレクションの構造を定義します。スキーマ内では、<code translate="no">enable_dynamic_field</code> を有効または無効にし、定義済みフィールドを追加し、各フィールドに属性を設定するオプションがあります。スキーマの概念と使用可能なデータ型の詳細については、<a href="/docs/ja/schema.md">スキーマの</a>説明を参照してください。</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">ステップ1: スキーマの設定</h4><p>スキーマはコレクションの構造を定義します。スキーマ内では、<code translate="no">enable_dynamic_field</code> を有効または無効にし、定義済みフィールドを追加し、各フィールドに属性を設定するオプションがあります。スキーマの概念と使用可能なデータ型の詳細については、<a href="/docs/ja/v2.4.x/schema.md">スキーマの</a>説明を参照してください。</p>
 <div class="language-python">
 <p>スキーマを設定するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>を使用してスキーマ・オブジェクトを作成し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>を使用してスキーマにフィールドを追加する。</p>
 </div>
@@ -526,7 +526,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">ステップ2：インデックスパラメータの設定</h4><p>インデックスパラメータは、Milvusがコレクション内でデータをどのように整理するかを決定します。<code translate="no">metric_type</code> と<code translate="no">index_type</code> を調整することで、特定のフィールドのインデックス作成プロセスを調整できます。ベクトル・フィールドでは、扱うベクトルのタイプに応じて、<code translate="no">metric_type</code> 、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> 、<code translate="no">HAMMING</code> 、<code translate="no">JACCARD</code> を柔軟に選択できます。詳細については、<a href="/docs/ja/metric.md">類似度メトリクスを</a>参照してください。</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">ステップ2：インデックスパラメータの設定</h4><p>インデックスパラメータは、Milvusがコレクション内でデータをどのように整理するかを決定します。<code translate="no">metric_type</code> と<code translate="no">index_type</code> を調整することで、特定のフィールドのインデックス作成プロセスを調整できます。ベクトル・フィールドでは、扱うベクトルのタイプに応じて、<code translate="no">metric_type</code> 、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> 、<code translate="no">HAMMING</code> 、<code translate="no">JACCARD</code> を柔軟に選択できます。詳細については、<a href="/docs/ja/v2.4.x/metric.md">類似度メトリクスを</a>参照してください。</p>
 <div class="language-python">
 <p>インデックス・パラメータを設定するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>を使用してインデックス・パラメータを準備し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>を使用してインデックスを追加します。</p>
 </div>
@@ -898,7 +898,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記で作成されたコレクションは自動的にロードされます。コレクションのロードとリリースの詳細は、<a href="/docs/ja/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a> を参照してください。</p></li>
+<p>上記で作成されたコレクションは自動的にロードされます。コレクションのロードとリリースの詳細は、<a href="/docs/ja/v2.4.x/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a> を参照してください。</p></li>
 <li><p><strong>コレクションとインデックスファイルを別々に作成する。</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
@@ -1015,7 +1015,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記で作成したコレクションは自動的にロードされません。以下のようにコレクションのインデックスを作成できます。別の方法でコレクションのインデックスを作成しても、コレクションは自動的にロード されません。詳細は、<a href="/docs/ja/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a> を参照してください。</p>
+<p>上記で作成したコレクションは自動的にロードされません。以下のようにコレクションのインデックスを作成できます。別の方法でコレクションのインデックスを作成しても、コレクションは自動的にロード されません。詳細は、<a href="/docs/ja/v2.4.x/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a> を参照してください。</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1154,7 +1154,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>上記で作成したコレクションは自動的にロードされません。以下のように、コレクションのインデックスを作成できます。別の方法でコレクションのインデックスを作成しても、コレクションは自動的にロード されません。詳細は、<a href="/docs/ja/manage-collections.md">Load &amp; Release Collection</a> を参照。</p>
+<p>上記で作成したコレクションは自動的にロードされません。以下のように、コレクションのインデックスを作成できます。別の方法でコレクションのインデックスを作成しても、コレクションは自動的にロード されません。詳細は、<a href="/docs/ja/v2.4.x/manage-collections.md">Load &amp; Release Collection</a> を参照。</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>

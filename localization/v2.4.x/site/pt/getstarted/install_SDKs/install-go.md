@@ -74,10 +74,10 @@ title: Instalar o Milvus Go SDK
     </button></h2><p>Depois de instalar o Milvus GO SDK, pode:</p>
 <ul>
 <li>Aprender as operações básicas do Milvus:<ul>
-<li><a href="/docs/pt/manage-collections.md">Gerir colecções</a></li>
-<li><a href="/docs/pt/manage-partitions.md">Gerir partições</a></li>
-<li><a href="/docs/pt/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
-<li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
-<li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
+<li><a href="/docs/pt/v2.4.x/manage-collections.md">Gerir colecções</a></li>
+<li><a href="/docs/pt/v2.4.x/manage-partitions.md">Gerir partições</a></li>
+<li><a href="/docs/pt/v2.4.x/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
+<li><a href="/docs/pt/v2.4.x/single-vector-search.md">Pesquisa de vetor único</a></li>
+<li><a href="/docs/pt/v2.4.x/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 </ul>

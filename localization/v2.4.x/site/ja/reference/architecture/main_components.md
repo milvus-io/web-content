@@ -94,5 +94,5 @@ title: 主要コンポーネント
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvusの仕組みと設計原理を理解するには、<a href="/docs/ja/four_layers.md">コンピューティング/ストレージ分散を</a>お読みください。</li>
+<li>Milvusの仕組みと設計原理を理解するには、<a href="/docs/ja/v2.4.x/four_layers.md">コンピューティング/ストレージ分散を</a>お読みください。</li>
 </ul>

@@ -38,7 +38,7 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">تثبيت Docker</a>.</li>
-<li><a href="/docs/ar/prerequisite-gpu.md">تحقق من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</li>
+<li><a href="/docs/ar/v2.4.x/prerequisite-gpu.md">تحقق من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</li>
 </ul>
 <div class="alert note">
 <p>إذا واجهت أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
@@ -196,26 +196,26 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>التحقق من <a href="/docs/ar/quickstart.md">Quickstart</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
+<li><p>التحقق من <a href="/docs/ar/v2.4.x/quickstart.md">Quickstart</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
-<li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
-<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإضافة وحذف</a></li>
-<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.4.x/manage_databases.md">إدارة قواعد البيانات</a></li>
+<li><a href="/docs/ar/v2.4.x/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/v2.4.x/manage-partitions.md">إدارة الأقسام</a></li>
+<li><a href="/docs/ar/v2.4.x/insert-update-delete.md">إدراج وإضافة وحذف</a></li>
+<li><a href="/docs/ar/v2.4.x/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/v2.4.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
-<li><p><a href="/docs/ar/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام مخطط Helm</a>.</p></li>
-<li><p><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة ميلفوس الخاصة بك</a></p></li>
+<li><p><a href="/docs/ar/v2.4.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام مخطط Helm</a>.</p></li>
+<li><p><a href="/docs/ar/v2.4.x/scaleout.md">توسيع نطاق مجموعة ميلفوس الخاصة بك</a></p></li>
 <li><p>نشر مجموعة ميلفوس الخاصة بك على السحابة:</p>
 <ul>
-<li><a href="/docs/ar/eks.md">أمازون EKS</a></li>
-<li><a href="/docs/ar/gcp.md">جوجل كلاود</a></li>
-<li><a href="/docs/ar/azure.md">مايكروسوفت أزور</a></li>
+<li><a href="/docs/ar/v2.4.x/eks.md">أمازون EKS</a></li>
+<li><a href="/docs/ar/v2.4.x/gcp.md">جوجل كلاود</a></li>
+<li><a href="/docs/ar/v2.4.x/azure.md">مايكروسوفت أزور</a></li>
 </ul></li>
-<li><p>استكشف <a href="/docs/ar/milvus_backup_overview.md">Milvus Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطي لبيانات Milvus.</p></li>
-<li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.4.x/milvus_backup_overview.md">Milvus Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطي لبيانات Milvus.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.4.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://milvus.io/docs/attu.md">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/v2.4.x/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

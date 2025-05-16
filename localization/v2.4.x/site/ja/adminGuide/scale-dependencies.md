@@ -19,7 +19,7 @@ title: 規模の依存
       </svg>
     </button></h1><p>Milvusは、MinIO、Kafka、Pulsar、etcdといった様々な依存関係に依存しています。これらのコンポーネントを拡張することで、Milvusの様々な要件への適応性を高めることができます。</p>
 <div class="alert note">
-<p>Milvus Operatorユーザの方は、<a href="/docs/ja/object_storage_operator.md">Milvus Operatorによるオブジェクトストレージの構成</a>、<a href="/docs/ja/meta_storage_operator.md">Milvus Operatorによるメタストレージの構成</a>、<a href="/docs/ja/message_storage_operator.md">Milvus Operatorによるメッセージストレージの</a>構成を参照してください。</p>
+<p>Milvus Operatorユーザの方は、<a href="/docs/ja/v2.4.x/object_storage_operator.md">Milvus Operatorによるオブジェクトストレージの構成</a>、<a href="/docs/ja/v2.4.x/meta_storage_operator.md">Milvus Operatorによるメタストレージの構成</a>、<a href="/docs/ja/v2.4.x/message_storage_operator.md">Milvus Operatorによるメッセージストレージの</a>構成を参照してください。</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">MinIOの拡張<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"

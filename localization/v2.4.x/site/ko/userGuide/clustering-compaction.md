@@ -136,7 +136,7 @@ common:
 </table>
 </li>
 </ul>
-<p>위의 변경 사항을 Milvus 클러스터에 적용하려면 <a href="/docs/ko/configure-helm.md">헬름으로 Milvus 구성하기</a> 및 Milvus <a href="/docs/ko/configure_operator.md">오퍼레이터로 Milvus 구성하기의</a> 단계를 따르세요.</p>
+<p>위의 변경 사항을 Milvus 클러스터에 적용하려면 <a href="/docs/ko/v2.4.x/configure-helm.md">헬름으로 Milvus 구성하기</a> 및 Milvus <a href="/docs/ko/v2.4.x/configure_operator.md">오퍼레이터로 Milvus 구성하기의</a> 단계를 따르세요.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">수집 구성</h3><p>특정 컬렉션에서 클러스터링 압축을 하려면 컬렉션에서 스칼라 필드를 클러스터링 키로 선택해야 합니다.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

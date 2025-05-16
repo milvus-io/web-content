@@ -42,7 +42,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
   port: <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   maxMessageSize: <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
+<p>詳細については、<a href="/docs/ja/v2.4.x/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2.Milvusの実行</h3><p>以下のコマンドを実行し、Pulsar設定を使用するMilvusを起動します。</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -63,7 +63,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
         ></path>
       </svg>
     </button></h2><p>K8s上のMilvusクラスタの場合、Milvusの起動と同じコマンドでPulsarを設定することができます。あるいは、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使ってPulsarを設定することもできます。</p>
-<p>Helmを使用したMilvus設定方法の詳細については、<a href="/docs/ja/configure-helm.md">HelmチャートによるMilvus設定を</a>ご参照ください。Pulsar関連の設定項目の詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
+<p>Helmを使用したMilvus設定方法の詳細については、<a href="/docs/ja/v2.4.x/configure-helm.md">HelmチャートによるMilvus設定を</a>ご参照ください。Pulsar関連の設定項目の詳細については、<a href="/docs/ja/v2.4.x/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用</h3><ol>
 <li><code translate="no">values.yaml</code> ファイルの<code translate="no">externalConfigFiles</code> セクションを設定します。</li>
 </ol>
@@ -98,7 +98,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
         ></path>
       </svg>
     </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するのと同じコマンドでKafkaを設定することができる。または、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使用してKafkaを設定することもできます。</p>
-<p>Helmを使用したMilvusの設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helmチャートを使用したMilvusの設定</a>」をご参照ください。Pulsar関連の設定項目の詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
+<p>Helmを使用したMilvusの設定方法の詳細については、「<a href="/docs/ja/v2.4.x/configure-helm.md">Helmチャートを使用したMilvusの設定</a>」をご参照ください。Pulsar関連の設定項目の詳細については、<a href="/docs/ja/v2.4.x/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用</h3><ol>
 <li>メッセージ・ストレージ・システムとしてKafkaを使用する場合は、<code translate="no">values.yaml</code> ファイルの<code translate="no">externalConfigFiles</code> セクションを設定します。</li>
 </ol>
@@ -132,7 +132,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusスタンドアロンでは、デフォルトのメッセージストレージとしてRocksMQを使用します。Helmを利用したMilvusの設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helmチャートを利用したMilvusの設定</a>」をご参照ください。RocksMQ関連の設定項目については、<a href="/docs/ja/configure_rocksmq.md">RocksMQ関連の設定を</a>ご参照ください。</p>
+    </button></h2><p>Milvusスタンドアロンでは、デフォルトのメッセージストレージとしてRocksMQを使用します。Helmを利用したMilvusの設定方法の詳細については、「<a href="/docs/ja/v2.4.x/configure-helm.md">Helmチャートを利用したMilvusの設定</a>」をご参照ください。RocksMQ関連の設定項目については、<a href="/docs/ja/v2.4.x/configure_rocksmq.md">RocksMQ関連の設定を</a>ご参照ください。</p>
 <ul>
 <li><p>RocksMQでMilvusを起動し、その設定を変更したい場合は、以下のYAMLファイルで変更した設定で<code translate="no">helm upgrade -f</code> 。</p></li>
 <li><p>RocksMQ以外のメッセージストアを使用してHelmを使用してMilvusをスタンドアロンでインストールし、RocksMQに戻したい場合は、全てのコレクションをフラッシュしてMilvusを停止した後に、以下のYAMLファイルを指定して<code translate="no">helm upgrade -f</code> 。</p></li>
@@ -171,7 +171,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATSはRocksMQに代わる実験的なメッセージストアです。Helmを使ったMilvusの設定方法の詳細については、<a href="/docs/ja/configure-helm.md">Helm Chartsを使ったMilvusの設定を</a>参照してください。RocksMQ関連の設定項目については、<a href="/docs/ja/configure_natsmq.md">NATS関連の設定を</a>参照してください。</p>
+    </button></h2><p>NATSはRocksMQに代わる実験的なメッセージストアです。Helmを使ったMilvusの設定方法の詳細については、<a href="/docs/ja/v2.4.x/configure-helm.md">Helm Chartsを使ったMilvusの設定を</a>参照してください。RocksMQ関連の設定項目については、<a href="/docs/ja/v2.4.x/configure_natsmq.md">NATS関連の設定を</a>参照してください。</p>
 <ul>
 <li><p>NATSでMilvusを起動し、設定を変更したい場合は、以下のYAMLファイルで変更した設定で<code translate="no">helm upgrade -f</code> 。</p></li>
 <li><p>NATS以外のメッセージストアでMilvusをスタンドアロンインストールし、NATSに変更したい場合は、全てのコレクションをフラッシュし、Milvusを停止した後、以下のYAMLファイルを指定して<code translate="no">helm upgrade -f</code> 。</p></li>
@@ -235,6 +235,6 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
       </svg>
     </button></h2><p>Docker ComposeまたはHelmを使用して他のMilvus依存関係を設定する方法について説明します：</p>
 <ul>
-<li><a href="/docs/ja/deploy_s3.md">Docker ComposeまたはHelmでオブジェクトストレージを設定する</a></li>
-<li><a href="/docs/ja/deploy_etcd.md">Docker ComposeまたはHelmでメタストレージを設定する</a></li>
+<li><a href="/docs/ja/v2.4.x/deploy_s3.md">Docker ComposeまたはHelmでオブジェクトストレージを設定する</a></li>
+<li><a href="/docs/ja/v2.4.x/deploy_etcd.md">Docker ComposeまたはHelmでメタストレージを設定する</a></li>
 </ul>

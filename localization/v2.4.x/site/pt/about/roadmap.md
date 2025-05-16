@@ -78,7 +78,7 @@ summary: >-
 <li>O nosso roteiro é normalmente estruturado em três partes: a versão mais recente, a próxima versão e uma visão de médio a longo prazo no próximo ano.</li>
 <li>Conforme progredimos, aprendemos continuamente e ocasionalmente ajustamos nosso foco, adicionando ou removendo itens conforme necessário.</li>
 <li>Estes planos são indicativos e estão sujeitos a alterações, podendo variar consoante os serviços de subscrição.</li>
-<li>Cumprimos rigorosamente o nosso roteiro, com as nossas <a href="/docs/pt/release_notes.md">notas de lançamento</a> a servirem de referência.</li>
+<li>Cumprimos rigorosamente o nosso roteiro, com as nossas <a href="/docs/pt/v2.4.x/release_notes.md">notas de lançamento</a> a servirem de referência.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">Como contribuir<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

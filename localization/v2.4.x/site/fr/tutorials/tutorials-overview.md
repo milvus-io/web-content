@@ -26,27 +26,27 @@ title: Vue d'ensemble des didacticiels
 <tr><th>Tutoriel</th><th>Cas d'utilisation</th><th>Fonctionnalités connexes de Milvus</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/fr/build-rag-with-milvus.md">Construire RAG avec Milvus</a></td><td>RAG</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/how_to_enhance_your_rag.md">RAG avancé</a></td><td>RAG</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/full_text_search_with_milvus.md">Recherche en texte intégral avec Milvus</a></td><td>Démarrage rapide</td><td>Recherche en texte intégral</td></tr>
-<tr><td><a href="/docs/fr/hybrid_search_with_milvus.md">Recherche hybride avec Milvus</a></td><td>Recherche hybride</td><td>recherche hybride, multi vectorielle, intégration dense, intégration clairsemée</td></tr>
-<tr><td><a href="/docs/fr/image_similarity_search.md">Recherche d'images avec Milvus</a></td><td>Recherche sémantique</td><td>recherche vectorielle, champ dynamique</td></tr>
-<tr><td><a href="/docs/fr/multimodal_rag_with_milvus.md">RAG multimodal avec Milvus</a></td><td>RAG</td><td>Recherche vectorielle, champ dynamique</td></tr>
-<tr><td><a href="/docs/fr/multimodal_rag_with_milvus.md">Recherche multimodale utilisant des vecteurs multiples</a></td><td>Recherche sémantique</td><td>multi vectorielle, recherche hybride</td></tr>
-<tr><td><a href="/docs/fr/graph_rag_with_milvus.md">Graph RAG avec Milvus</a></td><td>RAG</td><td>recherche par graphe</td></tr>
-<tr><td><a href="/docs/fr/contextual_retrieval_with_milvus.md">Recherche contextuelle avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/use_ColPali_with_milvus.md">Utiliser ColPali pour la recherche multimodale avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/vector_visualization.md">Visualisation vectorielle</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/movie_recommendation_with_milvus.md">Recommandation de films avec Milvus</a></td><td>Système de recommandation</td><td>Recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/funnel_search_with_matryoshka.md">Recherche en entonnoir avec Matryoshka Embeddings</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/question_answering_system.md">Système de réponse aux questions</a></td><td>Réponse aux questions</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/recommendation_system.md">Système de recommandation</a></td><td>Système de recommandation</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/video_similarity_search.md">Recherche de similarité vidéo</a></td><td>Recherche sémantique</td><td>Recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/audio_similarity_search.md">Recherche de similarité audio</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/dna_sequence_classification.md">Classification de l'ADN</a></td><td>Classification</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/text_search_engine.md">Moteur de recherche textuelle</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/text_image_search.md">Recherche d'images par texte</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/image_deduplication_system.md">Déduplication d'images</a></td><td>Déduplication</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/build-rag-with-milvus.md">Construire RAG avec Milvus</a></td><td>RAG</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/how_to_enhance_your_rag.md">RAG avancé</a></td><td>RAG</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/full_text_search_with_milvus.md">Recherche en texte intégral avec Milvus</a></td><td>Démarrage rapide</td><td>Recherche en texte intégral</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/hybrid_search_with_milvus.md">Recherche hybride avec Milvus</a></td><td>Recherche hybride</td><td>recherche hybride, multi vectorielle, intégration dense, intégration clairsemée</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/image_similarity_search.md">Recherche d'images avec Milvus</a></td><td>Recherche sémantique</td><td>recherche vectorielle, champ dynamique</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/multimodal_rag_with_milvus.md">RAG multimodal avec Milvus</a></td><td>RAG</td><td>Recherche vectorielle, champ dynamique</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/multimodal_rag_with_milvus.md">Recherche multimodale utilisant des vecteurs multiples</a></td><td>Recherche sémantique</td><td>multi vectorielle, recherche hybride</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/graph_rag_with_milvus.md">Graph RAG avec Milvus</a></td><td>RAG</td><td>recherche par graphe</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/contextual_retrieval_with_milvus.md">Recherche contextuelle avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/use_ColPali_with_milvus.md">Utiliser ColPali pour la recherche multimodale avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/vector_visualization.md">Visualisation vectorielle</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/movie_recommendation_with_milvus.md">Recommandation de films avec Milvus</a></td><td>Système de recommandation</td><td>Recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/funnel_search_with_matryoshka.md">Recherche en entonnoir avec Matryoshka Embeddings</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/question_answering_system.md">Système de réponse aux questions</a></td><td>Réponse aux questions</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/recommendation_system.md">Système de recommandation</a></td><td>Système de recommandation</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/video_similarity_search.md">Recherche de similarité vidéo</a></td><td>Recherche sémantique</td><td>Recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/audio_similarity_search.md">Recherche de similarité audio</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/dna_sequence_classification.md">Classification de l'ADN</a></td><td>Classification</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/text_search_engine.md">Moteur de recherche textuelle</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/text_image_search.md">Recherche d'images par texte</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/v2.4.x/image_deduplication_system.md">Déduplication d'images</a></td><td>Déduplication</td><td>recherche vectorielle</td></tr>
 </tbody>
 </table>

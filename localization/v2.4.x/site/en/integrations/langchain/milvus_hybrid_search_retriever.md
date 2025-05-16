@@ -38,7 +38,7 @@ title: Milvus Hybrid Search Retriever
     </button></h2><blockquote>
 <p><a href="https://milvus.io/docs">Milvus</a> is an open-source vector database built to power embedding similarity search and AI applications. Milvus makes unstructured data search more accessible, and provides a consistent user experience regardless of the deployment environment.</p>
 </blockquote>
-<p>This will help you getting started with the Milvus Hybrid Search <a href="/docs/concepts/#retrievers">retriever</a>, which combines the strengths of both dense and sparse vector search. For detailed documentation of all <code translate="no">MilvusCollectionHybridSearchRetriever</code> features and configurations head to the <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">API reference</a>.</p>
+<p>This will help you getting started with the Milvus Hybrid Search <a href="/docs/concepts/v2.4.x/#retrievers">retriever</a>, which combines the strengths of both dense and sparse vector search. For detailed documentation of all <code translate="no">MilvusCollectionHybridSearchRetriever</code> features and configurations head to the <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">API reference</a>.</p>
 <p>See also the Milvus Multi-Vector Search <a href="https://milvus.io/docs/multi-vector-search.md">docs</a>.</p>
 <h3 id="Integration-details" class="common-anchor-header">Integration details</h3><table>
 <thead>

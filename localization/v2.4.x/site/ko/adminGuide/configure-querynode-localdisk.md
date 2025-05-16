@@ -38,11 +38,11 @@ summary: 로컬 디스크를 사용하도록 Milvus QueryNode를 구성하는 �
     </button></h2><p>Milvus는 방대한 양의 벡터 데이터를 효율적으로 저장하고 검색할 수 있도록 맞춤화된 AI 중심 벡터 데이터베이스입니다. 이미지 및 동영상 분석, 자연어 처리, 추천 시스템과 같은 작업에 이상적입니다. 최적의 성능을 보장하려면 디스크 읽기 지연 시간을 최소화하는 것이 중요합니다. 지연을 방지하고 시스템 안정성을 유지하려면 로컬 NVMe SSD를 사용하는 것이 좋습니다.</p>
 <p>로컬 디스크 스토리지가 중요한 역할을 하는 주요 기능은 다음과 같습니다:</p>
 <ul>
-<li><a href="/docs/ko/chunk_cache.md"><strong>청크 캐시</strong></a>: 빠른 검색을 위해 로컬 디스크 캐시에 데이터를 미리 로드합니다.</li>
-<li><a href="/docs/ko/mmap.md"><strong>MMap</strong></a>: 메모리 효율성을 높이기 위해 파일 콘텐츠를 메모리에 직접 매핑합니다.</li>
-<li><a href="/docs/ko/disk_index.md"><strong>DiskANN 인덱스</strong></a>: 효율적인 인덱스 관리를 위해 디스크 스토리지가 필요합니다.</li>
+<li><a href="/docs/ko/v2.4.x/chunk_cache.md"><strong>청크 캐시</strong></a>: 빠른 검색을 위해 로컬 디스크 캐시에 데이터를 미리 로드합니다.</li>
+<li><a href="/docs/ko/v2.4.x/mmap.md"><strong>MMap</strong></a>: 메모리 효율성을 높이기 위해 파일 콘텐츠를 메모리에 직접 매핑합니다.</li>
+<li><a href="/docs/ko/v2.4.x/disk_index.md"><strong>DiskANN 인덱스</strong></a>: 효율적인 인덱스 관리를 위해 디스크 스토리지가 필요합니다.</li>
 </ul>
-<p>이 문서에서는 클라우드 플랫폼에 <a href="/docs/ko/install-overview.md#Milvus-Distributed">Milvus Distributed를</a> 배포하는 방법과 NVMe 디스크 스토리지를 사용하도록 쿼리 노드를 구성하는 방법에 대해 중점적으로 설명합니다. 다음 표에는 다양한 클라우드 제공업체의 권장 머신 유형이 나와 있습니다.</p>
+<p>이 문서에서는 클라우드 플랫폼에 <a href="/docs/ko/v2.4.x/install-overview.md#Milvus-Distributed">Milvus Distributed를</a> 배포하는 방법과 NVMe 디스크 스토리지를 사용하도록 쿼리 노드를 구성하는 방법에 대해 중점적으로 설명합니다. 다음 표에는 다양한 클라우드 제공업체의 권장 머신 유형이 나와 있습니다.</p>
 <table>
 <thead>
 <tr><th style="text-align:center">클라우드 제공자</th><th style="text-align:center">머신 유형</th></tr>
@@ -266,7 +266,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>확인 결과가 만족스러우면 다음 단계에 따라 Milvus Distributed를 배포할 수 있습니다:</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">헬름을 사용하여 밀버스 디스트리뷰티드 배포를 위한 팁</h3><p>쿼리노드 파드는 기본적으로 NVMe 디스크를 EmptyDir 볼륨으로 사용한다. 최적의 성능을 보장하려면 NVMe 디스크를 쿼리노드 파드 내의 <code translate="no">/var/lib/milvus/data</code> 에 마운트하는 것이 좋다.</p>
-<p>헬름을 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>
+<p>헬름을 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">밀버스 오퍼레이터를 사용하여 밀버스 디스트리뷰티드 배포를 위한 팁</h3><p>밀버스 오퍼레이터는 NVMe 디스크를 EmptyDir 볼륨으로 사용하도록 쿼리노드 파드를 자동으로 구성한다. <code translate="no">MilvusCluster</code> 사용자 정의 리소스에 다음 구성을 추가하는 것이 좋습니다:</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -279,4 +279,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>이렇게 하면 쿼리노드 파드가 NVMe 디스크를 데이터 볼륨으로 사용하게 됩니다. 밀버스 오퍼레이터를 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/install_cluster-milvusoperator.md">밀버스 오퍼레이터로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>
+<p>이렇게 하면 쿼리노드 파드가 NVMe 디스크를 데이터 볼륨으로 사용하게 됩니다. 밀버스 오퍼레이터를 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/install_cluster-milvusoperator.md">밀버스 오퍼레이터로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>

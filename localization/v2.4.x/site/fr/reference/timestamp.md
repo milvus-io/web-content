@@ -105,5 +105,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Découvrez comment <a href="/docs/fr/consistency.md">l'horodatage garanti permet une cohérence réglable dans Milvus.</a></li>
+<li>Découvrez comment <a href="/docs/fr/v2.4.x/consistency.md">l'horodatage garanti permet une cohérence réglable dans Milvus.</a></li>
 </ul>

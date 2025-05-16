@@ -177,7 +177,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>Milvusを他のクラウドにデプロイする方法を学びたい場合：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">Kubernetesを使用したAWS上でのMilvusクラスタのデプロイ</a></li>
-<li><a href="/docs/ja/azure.md">Kubernetesを利用したAzureへのMilvusクラスタのデプロイ</a></li>
-<li><a href="/docs/ja/gcp.md">KubernetesでGCPにMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/v2.4.x/eks.md">Kubernetesを使用したAWS上でのMilvusクラスタのデプロイ</a></li>
+<li><a href="/docs/ja/v2.4.x/azure.md">Kubernetesを利用したAzureへのMilvusクラスタのデプロイ</a></li>
+<li><a href="/docs/ja/v2.4.x/gcp.md">KubernetesでGCPにMilvusクラスタをデプロイする</a></li>
 </ul>

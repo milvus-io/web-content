@@ -54,11 +54,11 @@ summary: ''
     </button></h2><p>Esta guía proporciona instrucciones sobre cómo configurar el mecanismo de caché de trozos para una instancia de Milvus. La configuración varía según la forma de instalar la instancia Milvus.</p>
 <ul>
 <li><p>Para instancias Milvus instaladas utilizando Helm Charts</p>
-<p>Añada la configuración al archivo <code translate="no">values.yaml</code> en la sección <code translate="no">config</code>. Para más detalles, consulte <a href="/docs/es/configure-helm.md">Configurar Milvus con Helm Charts</a>.</p></li>
+<p>Añada la configuración al archivo <code translate="no">values.yaml</code> en la sección <code translate="no">config</code>. Para más detalles, consulte <a href="/docs/es/v2.4.x/configure-helm.md">Configurar Milvus con Helm Charts</a>.</p></li>
 <li><p>Para instancias Milvus instaladas utilizando Docker Compose</p>
-<p>Añada la configuración al archivo <code translate="no">milvus.yaml</code> que ha utilizado para iniciar la instancia de Milvus. Para más detalles, consulte <a href="/docs/es/configure-docker.md">Configurar Milvus con Docker Compose</a>.</p></li>
+<p>Añada la configuración al archivo <code translate="no">milvus.yaml</code> que ha utilizado para iniciar la instancia de Milvus. Para más detalles, consulte <a href="/docs/es/v2.4.x/configure-docker.md">Configurar Milvus con Docker Compose</a>.</p></li>
 <li><p>Para instancias Milvus instaladas utilizando Operator</p>
-<p>Añada la configuración a la sección <code translate="no">spec.components</code> del recurso personalizado <code translate="no">Milvus</code>. Para más detalles, consulte <a href="/docs/es/configure_operator.md">Configurar Milvus con Operator</a>.</p></li>
+<p>Añada la configuración a la sección <code translate="no">spec.components</code> del recurso personalizado <code translate="no">Milvus</code>. Para más detalles, consulte <a href="/docs/es/v2.4.x/configure_operator.md">Configurar Milvus con Operator</a>.</p></li>
 </ul>
 <h3 id="Configuration-options" class="common-anchor-header">Opciones de configuración</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode</span>:
     <span class="hljs-attr">cache</span>:

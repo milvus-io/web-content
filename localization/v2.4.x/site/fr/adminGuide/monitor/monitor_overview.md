@@ -107,7 +107,7 @@ summary: >-
       </svg>
     </button></h2><p>Après avoir découvert le flux de travail de base de la surveillance et de l'alerte, apprenez :</p>
 <ul>
-<li><a href="/docs/fr/monitor.md">Déployer des services de surveillance</a></li>
-<li><a href="/docs/fr/visualize.md">Visualiser les mesures de Milvus</a></li>
-<li><a href="/docs/fr/alert.md">Créer une alerte</a></li>
+<li><a href="/docs/fr/v2.4.x/monitor.md">Déployer des services de surveillance</a></li>
+<li><a href="/docs/fr/v2.4.x/visualize.md">Visualiser les mesures de Milvus</a></li>
+<li><a href="/docs/fr/v2.4.x/alert.md">Créer une alerte</a></li>
 </ul>

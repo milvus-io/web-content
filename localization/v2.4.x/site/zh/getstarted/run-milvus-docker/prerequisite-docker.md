@@ -106,6 +106,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>如果您的硬件和软件符合上述要求，您可以</p>
 <ul>
-<li><a href="/docs/zh/install_standalone-docker.md">在 Docker 中运行 Milvus</a></li>
-<li><a href="/docs/zh/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a></li>
+<li><a href="/docs/zh/v2.4.x/install_standalone-docker.md">在 Docker 中运行 Milvus</a></li>
+<li><a href="/docs/zh/v2.4.x/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a></li>
 </ul>

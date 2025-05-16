@@ -21,7 +21,7 @@ summary: Imparate a distribuire un cluster Milvus su AWS EC2.
       </svg>
     </button></h1><p>Questo argomento descrive come distribuire un cluster Milvus su <a href="https://docs.aws.amazon.com/ec2/">Amazon EC2</a> con Terraform e Ansible.</p>
 <div class="alert note">
-<p>Questo argomento è obsoleto e sarà presto rimosso. Si consiglia di consultare invece <a href="/docs/it/eks.md">Deploy di un cluster Milvus su EKS</a>.</p>
+<p>Questo argomento è obsoleto e sarà presto rimosso. Si consiglia di consultare invece <a href="/docs/it/v2.4.x/eks.md">Deploy di un cluster Milvus su EKS</a>.</p>
 </div>
 <h2 id="Provision-a-Milvus-cluster" class="common-anchor-header">Provisionare un cluster Milvus<button data-href="#Provision-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -488,7 +488,7 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
       </svg>
     </button></h2><p>Se volete imparare a distribuire Milvus su altri cloud:</p>
 <ul>
-<li><a href="/docs/it/eks.md">Distribuire un cluster Milvus su EKS</a></li>
-<li><a href="/docs/it/gcp.md">Distribuzione del cluster Milvus su GCP con Kubernetes</a></li>
-<li><a href="/docs/it/azure.md">Guida alla distribuzione di Milvus su Microsoft Azure con Kubernetes</a></li>
+<li><a href="/docs/it/v2.4.x/eks.md">Distribuire un cluster Milvus su EKS</a></li>
+<li><a href="/docs/it/v2.4.x/gcp.md">Distribuzione del cluster Milvus su GCP con Kubernetes</a></li>
+<li><a href="/docs/it/v2.4.x/azure.md">Guida alla distribuzione di Milvus su Microsoft Azure con Kubernetes</a></li>
 </ul>

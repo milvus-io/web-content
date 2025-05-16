@@ -41,7 +41,7 @@ summary: このトピックでは、Lokiを使用してログを収集し、Graf
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/install_cluster-helm.md">K8s上にMilvusクラスタをインストールして</a>いる。</li>
+<li><a href="/docs/ja/v2.4.x/install_cluster-helm.md">K8s上にMilvusクラスタをインストールして</a>いる。</li>
 <li><a href="https://helm.sh/docs/intro/install/">Helmや</a> <a href="https://kubernetes.io/docs/tasks/tools/">Kubectlなどの</a>必要なツールをインストールしている。</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Lokiのデプロイ<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">

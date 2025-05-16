@@ -38,10 +38,10 @@ title: Milvus Migration Overview
       </svg>
     </button></h2><p>The <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool supports a variety of migration paths to accommodate different user needs:</p>
 <ul>
-<li><a href="/docs/es2m.md">Elasticsearch to Milvus 2.x</a>: Enabling users to migrate data from Elasticsearch environments to take advantage of Milvus’s optimized vector search capabilities.</li>
-<li><a href="/docs/f2m.md">Faiss to Milvus 2.x</a>: Providing experimental support for transferring data from Faiss, a popular library for efficient similarity search.</li>
-<li><a href="/docs/m2m.md">Milvus 1.x to Milvus 2.x</a>: Ensuring data from earlier versions is transitioned smoothly to the latest framework.</li>
-<li><a href="/docs/from-m2x.md">Milvus 2.3.x to Milvus 2.3.x or above</a>: Providing a one-time migration path for users who have already migrated to 2.3.x.</li>
+<li><a href="/docs/es2m.md/v2.4.x">Elasticsearch to Milvus 2.x</a>: Enabling users to migrate data from Elasticsearch environments to take advantage of Milvus’s optimized vector search capabilities.</li>
+<li><a href="/docs/f2m.md/v2.4.x">Faiss to Milvus 2.x</a>: Providing experimental support for transferring data from Faiss, a popular library for efficient similarity search.</li>
+<li><a href="/docs/m2m.md/v2.4.x">Milvus 1.x to Milvus 2.x</a>: Ensuring data from earlier versions is transitioned smoothly to the latest framework.</li>
+<li><a href="/docs/from-m2x.md/v2.4.x">Milvus 2.3.x to Milvus 2.3.x or above</a>: Providing a one-time migration path for users who have already migrated to 2.3.x.</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">Features<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

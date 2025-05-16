@@ -24,9 +24,9 @@ summary: >-
     </button></h1><p>Comparé à un équilibreur de charge de couche 4, un équilibreur de charge de couche 7 offre des capacités intelligentes d'équilibrage de charge et de mise en cache et constitue un excellent choix pour les services natifs dans le nuage.</p>
 <p>Ce guide vous guide dans la configuration d'un équilibreur de charge de couche 7 pour un cluster Milvus fonctionnant déjà derrière un équilibreur de charge de couche 4.</p>
 <h3 id="Before-your-start" class="common-anchor-header">Avant de commencer</h3><ul>
-<li>Vous avez <a href="/docs/fr/eks.md">déployé un cluster Milvus derrière un équilibreur de charge de niveau 4 sur AWS</a>.</li>
+<li>Vous avez <a href="/docs/fr/v2.4.x/eks.md">déployé un cluster Milvus derrière un équilibreur de charge de niveau 4 sur AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modifier les configurations de Milvus</h3><p>Ce guide suppose que vous avez déjà <a href="/docs/fr/eks.md">déployé un cluster Milvus derrière un équilibreur de charge de niveau 4 sur AWS</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modifier les configurations de Milvus</h3><p>Ce guide suppose que vous avez déjà <a href="/docs/fr/v2.4.x/eks.md">déployé un cluster Milvus derrière un équilibreur de charge de niveau 4 sur AWS</a>.</p>
 <p>Avant de configurer un équilibreur de charge de couche 7 pour ce cluster Milvus, exécutez la commande suivante pour supprimer l'équilibreur de charge de couche 4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

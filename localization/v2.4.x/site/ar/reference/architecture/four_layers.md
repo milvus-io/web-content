@@ -119,5 +119,5 @@ title: فصل التخزين/الحوسبة
         ></path>
       </svg>
     </button></h2><ul>
-<li>اقرأ <a href="/docs/ar/main_components.md">المكونات الرئيسية</a> لمزيد من التفاصيل حول بنية ميلفوس.</li>
+<li>اقرأ <a href="/docs/ar/v2.4.x/main_components.md">المكونات الرئيسية</a> لمزيد من التفاصيل حول بنية ميلفوس.</li>
 </ul>

@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: 了解如何使用 Milvus Operator 升级 Milvus 集群。
 title: 使用 Milvus Operator 升级 Milvus 群集
 ---
-<div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/zh/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 升级 Milvus 群集<button data-href="#Upgrade-Milvus-Cluster-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

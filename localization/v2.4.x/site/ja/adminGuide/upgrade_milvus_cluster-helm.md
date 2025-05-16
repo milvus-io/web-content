@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: MilvusクラスタをHelm Chartでアップグレードする方法をご紹介します。
 title: HelmチャートによるMilvusクラスタのアップグレード
 ---
-<div class="tab-wrapper"><a href="/docs/ja/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/ja/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/ja/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/ja/v2.4.x/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">HelmチャートによるMilvusクラスタのアップグレード<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

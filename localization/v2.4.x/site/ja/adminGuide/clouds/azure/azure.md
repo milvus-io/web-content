@@ -294,6 +294,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>Milvusを他のクラウドにデプロイする方法を学びたい場合は、以下のリンクを参照してください：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">Kubernetesを使ったAWSへのMilvusクラスタのデプロイ</a></li>
-<li><a href="/docs/ja/gcp.md">KubernetesでGCPにMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/v2.4.x/eks.md">Kubernetesを使ったAWSへのMilvusクラスタのデプロイ</a></li>
+<li><a href="/docs/ja/v2.4.x/gcp.md">KubernetesでGCPにMilvusクラスタをデプロイする</a></li>
 </ul>

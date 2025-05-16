@@ -38,7 +38,7 @@ title: MilvusとFiftyOneによるビジョン・サーチの実施
       </svg>
     </button></h2><p>開始する前に、以下が揃っていることを確認してください：</p>
 <ul>
-<li>稼働中の<a href="/docs/ja/install_standalone-docker.md">Milvusサーバ</a></li>
+<li>稼働中の<a href="/docs/ja/v2.4.x/install_standalone-docker.md">Milvusサーバ</a></li>
 <li><code translate="no">pymilvus</code> と<code translate="no">fiftyone</code> がインストールされたPython環境。</li>
 <li>検索する画像の<a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">データセット</a></li>
 </ul>
@@ -273,7 +273,7 @@ password=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
 <li><p><strong>metric</strong>(<em>"dotproduct")</em>: 新しいインデックスを作成する際に使用する埋め込み距離メトリック。使用可能な値は (<code translate="no">&quot;dotproduct&quot;</code>,<code translate="no">&quot;euclidean&quot;</code>) です。</p></li>
 <li><p><strong>consistency_level</strong>(<em>"Session")</em>: 使用する一貫性レベル。使用可能な値は (<code translate="no">&quot;Strong&quot;</code>,<code translate="no">&quot;Session&quot;</code>,<code translate="no">&quot;Bounded&quot;</code>,<code translate="no">&quot;Eventually&quot;</code>) です。</p></li>
 </ul>
-<p>これらのパラメータの詳細については、<a href="/docs/ja/authenticate.md">Milvus認証のドキュメント</a>および<a href="/docs/ja/consistency.md">Milvus一貫性レベルのドキュメントを</a>参照してください。</p>
+<p>これらのパラメータの詳細については、<a href="/docs/ja/v2.4.x/authenticate.md">Milvus認証のドキュメント</a>および<a href="/docs/ja/v2.4.x/consistency.md">Milvus一貫性レベルのドキュメントを</a>参照してください。</p>
 <p>これらのパラメータは、前のセクションで説明したどの方法でも指定することができます。以下は利用可能なパラメータをすべて含む<a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">ブレインコンフィグの</a>例です：</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {

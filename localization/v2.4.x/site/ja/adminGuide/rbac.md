@@ -20,7 +20,7 @@ title: RBACの有効化
         ></path>
       </svg>
     </button></h1><p>RBACを有効にすることで、特定のMilvusリソース(コレクションやパーティションなど)へのアクセスを制御したり、ユーザの役割や権限に基づいてパーミッションを制御することができます。現在、この機能は Python と Java でのみ利用可能です。</p>
-<p>このトピックでは、RBACを有効にし、<a href="/docs/ja/users_and_roles.md">ユーザとロールを</a>管理する方法について説明します。</p>
+<p>このトピックでは、RBACを有効にし、<a href="/docs/ja/v2.4.x/users_and_roles.md">ユーザとロールを</a>管理する方法について説明します。</p>
 <div class="alert note">
 <p>このページのコードスニペットでは、新しい<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a>(Python)を使用してMilvusと対話します。他の言語用の新しいMilvusClient SDKは今後のアップデートでリリースされる予定です。</p>
 </div>
@@ -39,7 +39,7 @@ title: RBACの有効化
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ja/authenticate.md">ユーザ認証を</a>有効にした後、ユーザ名とパスワードで構成される<code translate="no">token</code> 、Milvusインスタンスに接続します。デフォルトでは、Milvus は<code translate="no">root</code> ユーザとパスワード<code translate="no">Milvus</code> を使用します。</p>
+    </button></h2><p><a href="/docs/ja/v2.4.x/authenticate.md">ユーザ認証を</a>有効にした後、ユーザ名とパスワードで構成される<code translate="no">token</code> 、Milvusインスタンスに接続します。デフォルトでは、Milvus は<code translate="no">root</code> ユーザとパスワード<code translate="no">Milvus</code> を使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -139,8 +139,8 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>以下の例では、<code translate="no">roleA</code> という名前のロールにすべてのコレクションを検索する権限を付与する方法を示します。</p>
-<p><code translate="no">object_type</code> 、オブジェクトタイプを指定します。これはリソースタイプとしても理解できます。現在、有効な値はCollection/User/Globalなどで、Globalは特定のリソースタイプがないことを意味します。<code translate="no">object_name</code> はリソース名です。<em>objecttypeがCollectionの場合、object nameは特定のコレクション名を参照するか、*を使用してすべてのコレクションを指定することができます。objecttypeが</em>Globalの場合、オブジェクト名は*しか指定できません。付与できる他の種類の権限については、<a href="/docs/ja/users_and_roles.md">ユーザとロールを</a>参照してください。</p>
-<p>ロール権限を管理する前に、ユーザ認証が有効になっていることを確認してください。そうしないと、エラーが発生することがあります。ユーザ認証を有効にする方法については、「<a href="/docs/ja/authenticate.md">ユーザ・アクセスの認証</a>」を参照してください。</p>
+<p><code translate="no">object_type</code> 、オブジェクトタイプを指定します。これはリソースタイプとしても理解できます。現在、有効な値はCollection/User/Globalなどで、Globalは特定のリソースタイプがないことを意味します。<code translate="no">object_name</code> はリソース名です。<em>objecttypeがCollectionの場合、object nameは特定のコレクション名を参照するか、*を使用してすべてのコレクションを指定することができます。objecttypeが</em>Globalの場合、オブジェクト名は*しか指定できません。付与できる他の種類の権限については、<a href="/docs/ja/v2.4.x/users_and_roles.md">ユーザとロールを</a>参照してください。</p>
+<p>ロール権限を管理する前に、ユーザ認証が有効になっていることを確認してください。そうしないと、エラーが発生することがあります。ユーザ認証を有効にする方法については、「<a href="/docs/ja/v2.4.x/authenticate.md">ユーザ・アクセスの認証</a>」を参照してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># grant privilege to a role</span>
 
 client.grant_privilege(
@@ -260,6 +260,6 @@ client.grant_role(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ja/authenticate.md">ユーザ認証の</a>管理方法</p></li>
-<li><p>Milvusで<a href="/docs/ja/tls.md">TLSプロキシを</a>有効にする方法を学びます。</p></li>
+<li><p><a href="/docs/ja/v2.4.x/authenticate.md">ユーザ認証の</a>管理方法</p></li>
+<li><p>Milvusで<a href="/docs/ja/v2.4.x/tls.md">TLSプロキシを</a>有効にする方法を学びます。</p></li>
 </ul>

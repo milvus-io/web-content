@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: تعرف على كيفية ترقية ميلفوس المستقل مع مخطط هيلم.
 title: ترقية Milvus Standalone مع مخطط Helm البياني
 ---
-<div class="tab-wrapper"><a href="/docs/ar/upgrade_milvus_standalone-operator.md" class=''>مشغل</a><a href="/docs/ar/upgrade_milvus_standalone-helm.md" class='active '>MilvusHelmDocker</a><a href="/docs/ar/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>مشغل</a><a href="/docs/ar/v2.4.x/upgrade_milvus_standalone-helm.md" class='active '>MilvusHelmDocker</a><a href="/docs/ar/v2.4.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">ترقية Milvus Standalone مع مخطط Helm البياني<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

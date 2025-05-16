@@ -78,7 +78,7 @@ summary: >-
 <li>Nuestra hoja de ruta suele estructurarse en tres partes: la versión más reciente, la próxima versión y una visión a medio y largo plazo para el próximo año.</li>
 <li>A medida que avanzamos, aprendemos continuamente y en ocasiones ajustamos nuestro enfoque, añadiendo o eliminando elementos según sea necesario.</li>
 <li>Estos planes son indicativos y están sujetos a cambios, y pueden variar en función de los servicios de suscripción.</li>
-<li>Nos ceñimos firmemente a nuestra hoja de ruta, y nuestras <a href="/docs/es/release_notes.md">notas de publicación</a> nos sirven de referencia.</li>
+<li>Nos ceñimos firmemente a nuestra hoja de ruta, y nuestras <a href="/docs/es/v2.4.x/release_notes.md">notas de publicación</a> nos sirven de referencia.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">Cómo contribuir<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

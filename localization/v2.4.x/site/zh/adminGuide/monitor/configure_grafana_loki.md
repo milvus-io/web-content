@@ -41,7 +41,7 @@ summary: 本主题介绍如何使用 Loki 收集日志，并使用 Grafana 查�
         ></path>
       </svg>
     </button></h2><ul>
-<li>已<a href="/docs/zh/install_cluster-helm.md">在 K8s 上安装 Milvus 集群</a>。</li>
+<li>已<a href="/docs/zh/v2.4.x/install_cluster-helm.md">在 K8s 上安装 Milvus 集群</a>。</li>
 <li>已安装必要的工具，包括<a href="https://helm.sh/docs/intro/install/">Helm</a>和<a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>。</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">部署洛基<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">

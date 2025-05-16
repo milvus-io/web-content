@@ -22,9 +22,9 @@ summary: 了解如何在 AWS 上的第 7 层负载平衡器后面部署 Milvus �
     </button></h1><p>与第四层负载平衡器相比，第七层负载平衡器具有智能负载平衡和缓存功能，是云原生服务的最佳选择。</p>
 <p>本指南将指导您为已在第 4 层负载平衡器后面运行的 Milvus 集群设置第 7 层负载平衡器。</p>
 <h3 id="Before-your-start" class="common-anchor-header">开始之前</h3><ul>
-<li>您已<a href="/docs/zh/eks.md">在 AWS 上的第 4 层负载平衡器后面部署了一个 Milvus 群集</a>。</li>
+<li>您已<a href="/docs/zh/v2.4.x/eks.md">在 AWS 上的第 4 层负载平衡器后面部署了一个 Milvus 群集</a>。</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假定您已<a href="/docs/zh/eks.md">在 AWS 的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假定您已<a href="/docs/zh/v2.4.x/eks.md">在 AWS 的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
 <p>在为该 Milvus 群集设置第 7 层负载平衡器之前，请运行以下命令移除第 4 层负载平衡器。</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

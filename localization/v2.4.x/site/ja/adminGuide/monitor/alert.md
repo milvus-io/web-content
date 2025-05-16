@@ -72,7 +72,7 @@ summary: GrafanaでMilvusサービスのアラートを作成する方法をご�
         ></path>
       </svg>
     </button></h2><p>本ガイドでは、Milvusコンポーネントのメモリ使用量に関するアラートを作成することを例にしています。他の種類のアラートを作成する場合は、適宜コマンドを調整してください。作業中に何か問題が発生した場合は、<a href="https://github.com/milvus-io/milvus/discussions">Githubのディスカッションで</a>質問するか、<a href="https://discord.com/invite/8uyFbECzPX">Discordで</a>スレッドを立ててください。</p>
-<h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>このチュートリアルでは、Grafanaがインストールされ、設定されていることを前提としています。そうでない場合は、<a href="/docs/ja/monitor.md">モニタリングガイドを</a>読むことをお勧めします。</p>
+<h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>このチュートリアルでは、Grafanaがインストールされ、設定されていることを前提としています。そうでない場合は、<a href="/docs/ja/v2.4.x/monitor.md">モニタリングガイドを</a>読むことをお勧めします。</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1.新しいクエリを追加する</h3><p>Milvusコンポーネントのメモリ使用量のアラートを追加するには、Memoryパネルを編集します。次に、メトリックで新しいクエリを追加します：<code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +120,13 @@ summary: GrafanaでMilvusサービスのアラートを作成する方法をご�
       </svg>
     </button></h2><ul>
 <li>Milvusのモニタリングサービスを開始する必要がある場合：<ul>
-<li><a href="/docs/ja/monitor.md">モニタリングガイドを</a>読む</li>
-<li><a href="/docs/ja/visualize.md">モニタリングメトリクスの可視化</a>方法</li>
+<li><a href="/docs/ja/v2.4.x/monitor.md">モニタリングガイドを</a>読む</li>
+<li><a href="/docs/ja/v2.4.x/visualize.md">モニタリングメトリクスの可視化</a>方法</li>
 </ul></li>
 <li>Milvusコンポーネントのメモリ使用量に関するアラートを作成した場合: リソースの割り当て方法を学ぶ<ul>
-<li><a href="/docs/ja/allocate.md#standalone">リソースの割り当て</a>方法</li>
+<li><a href="/docs/ja/v2.4.x/allocate.md#standalone">リソースの割り当て</a>方法</li>
 </ul></li>
 <li>Milvusクラスタをスケールする方法をお探しですか?<ul>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケールについて</a>学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/scaleout.md">Milvusクラスタのスケールについて</a>学ぶ</li>
 </ul></li>
 </ul>

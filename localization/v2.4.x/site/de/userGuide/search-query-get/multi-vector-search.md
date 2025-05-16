@@ -21,7 +21,7 @@ title: Hybride Suche
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Mit Milvus 2.4 haben wir die Unterstützung für mehrere Vektoren und eine hybride Suche eingeführt, was bedeutet, dass Benutzer mehrere Vektorfelder (bis zu 10) in eine einzige Sammlung einbringen können. Diese Vektoren in verschiedenen Spalten repräsentieren unterschiedliche Facetten von Daten, die aus verschiedenen Einbettungsmodellen stammen oder verschiedenen Verarbeitungsmethoden unterzogen wurden. Die Ergebnisse der hybriden Suchvorgänge werden mit Hilfe von Reranking-Strategien wie Reciprocal Rank Fusion (RRF) und Weighted Scoring integriert. Mehr über Reranking-Strategien erfahren Sie unter <a href="/docs/de/reranking.md">Reranking</a>.</p>
+    </button></h1><p>Mit Milvus 2.4 haben wir die Unterstützung für mehrere Vektoren und eine hybride Suche eingeführt, was bedeutet, dass Benutzer mehrere Vektorfelder (bis zu 10) in eine einzige Sammlung einbringen können. Diese Vektoren in verschiedenen Spalten repräsentieren unterschiedliche Facetten von Daten, die aus verschiedenen Einbettungsmodellen stammen oder verschiedenen Verarbeitungsmethoden unterzogen wurden. Die Ergebnisse der hybriden Suchvorgänge werden mit Hilfe von Reranking-Strategien wie Reciprocal Rank Fusion (RRF) und Weighted Scoring integriert. Mehr über Reranking-Strategien erfahren Sie unter <a href="/docs/de/v2.4.x/reranking.md">Reranking</a>.</p>
 <p>Diese Funktion ist besonders nützlich in umfassenden Suchszenarien, z. B. bei der Identifizierung der ähnlichsten Person in einer Vektorbibliothek auf der Grundlage verschiedener Attribute wie Bilder, Stimme, Fingerabdrücke usw.</p>
 <p>In diesem Tutorial werden Sie lernen, wie man:</p>
 <ul>
@@ -178,7 +178,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nachdem Sie <code translate="no">AnnSearchRequest</code> Instanzen erstellt haben, konfigurieren Sie eine Reranking-Strategie, um die Ergebnisse zu kombinieren und neu zu ordnen. Derzeit gibt es zwei Optionen: <code translate="no">WeightedRanker</code> und <code translate="no">RRFRanker</code>. Weitere Informationen zu Ranking-Strategien finden Sie unter <a href="/docs/de/reranking.md">Reranking</a>.</p>
+    </button></h2><p>Nachdem Sie <code translate="no">AnnSearchRequest</code> Instanzen erstellt haben, konfigurieren Sie eine Reranking-Strategie, um die Ergebnisse zu kombinieren und neu zu ordnen. Derzeit gibt es zwei Optionen: <code translate="no">WeightedRanker</code> und <code translate="no">RRFRanker</code>. Weitere Informationen zu Ranking-Strategien finden Sie unter <a href="/docs/de/v2.4.x/reranking.md">Reranking</a>.</p>
 <ul>
 <li><p>Gewichtetes Scoring verwenden</p>
 <p>Die <code translate="no">WeightedRanker</code> wird verwendet, um den Ergebnissen aus jeder Vektorfeldsuche mit bestimmten Gewichtungen Bedeutung zuzuweisen. Wenn Sie einige Vektorfelder gegenüber anderen bevorzugen, kann <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> dies in den kombinierten Suchergebnissen widerspiegeln.</p>
@@ -232,7 +232,7 @@ res = collection.hybrid_search(
 <p>Eine Liste von Suchanfragen, wobei jede Anfrage ein <code translate="no">ANNSearchRequest</code> Objekt ist. Jede Anfrage kann einem anderen Vektorfeld und einem anderen Satz von Suchparametern entsprechen.</p></li>
 <li><p><code translate="no">rerank</code> <em>(Objekt</em>)</p>
 <p>Die für die hybride Suche zu verwendende Rangfolgestrategie. Mögliche Werte: <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> und <code translate="no">RRFRanker()</code>.</p>
-<p>Weitere Informationen über Ranking-Strategien finden Sie unter <a href="/docs/de/reranking.md">Reranking</a>.</p></li>
+<p>Weitere Informationen über Ranking-Strategien finden Sie unter <a href="/docs/de/v2.4.x/reranking.md">Reranking</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>Die maximale Anzahl der Endergebnisse, die bei der hybriden Suche zurückgegeben werden sollen.</p></li>
 </ul>

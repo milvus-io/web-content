@@ -44,7 +44,7 @@ summary: Learn how to migrate Faiss data to Milvus.
 </ul></li>
 <li><strong>Required tools</strong>:
 <ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md">Install Migration Tool</a>.</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md/v2.4.x">Install Migration Tool</a>.</li>
 </ul></li>
 </ul>
 <h2 id="Configure-the-migration" class="common-anchor-header">Configure the migration<button data-href="#Configure-the-migration" class="anchor-icon" translate="no">

@@ -138,7 +138,7 @@ common:
 </table>
 </li>
 </ul>
-<p>Um die oben genannten Änderungen auf Ihren Milvus-Cluster anzuwenden, folgen Sie bitte den Schritten in <a href="/docs/de/configure-helm.md">Konfigurieren Sie Milvus mit Helm</a> und <a href="/docs/de/configure_operator.md">Konfigurieren Sie Milvus mit Milvus Operators</a>.</p>
+<p>Um die oben genannten Änderungen auf Ihren Milvus-Cluster anzuwenden, folgen Sie bitte den Schritten in <a href="/docs/de/v2.4.x/configure-helm.md">Konfigurieren Sie Milvus mit Helm</a> und <a href="/docs/de/v2.4.x/configure_operator.md">Konfigurieren Sie Milvus mit Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Konfiguration der Sammlung</h3><p>Für die Clusterverdichtung in einer bestimmten Sammlung sollten Sie ein skalares Feld aus der Sammlung als Clusterschlüssel auswählen.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

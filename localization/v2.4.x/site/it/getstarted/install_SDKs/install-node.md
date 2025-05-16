@@ -107,11 +107,11 @@ yarn add @zilliz/milvus2-sdk-node
 <li><p>Visualizzare l'<a href="https://github.com/milvus-io/milvus-sdk-node">avvio rapido dell'SDK Milvus node.js</a></p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
-<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
-<li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
-<li><a href="/docs/it/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
-<li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
-<li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
+<li><a href="/docs/it/v2.4.x/manage-collections.md">Gestire le collezioni</a></li>
+<li><a href="/docs/it/v2.4.x/manage-partitions.md">Gestire le partizioni</a></li>
+<li><a href="/docs/it/v2.4.x/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
+<li><a href="/docs/it/v2.4.x/single-vector-search.md">Ricerca a vettore singolo</a></li>
+<li><a href="/docs/it/v2.4.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
 <li><p>Esplora le <a href="/api-reference/node/v2.4.x/About.md">API di riferimento di Milvus Node.js</a></p></li>
 </ul>

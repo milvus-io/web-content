@@ -21,7 +21,7 @@ summary: AWS EC2上にMilvusクラスタをデプロイする方法を学びま�
       </svg>
     </button></h1><p>このトピックでは、TerraformとAnsibleを使用して<a href="https://docs.aws.amazon.com/ec2/">Amazon EC</a>2にMilvusクラスタをデプロイする方法について説明します。</p>
 <div class="alert note">
-<p>このトピックは古く、すぐに削除される予定です。代わりに<a href="/docs/ja/eks.md">EKS上でのMilvusクラスタのデプロイを</a>参照することをお勧めします。</p>
+<p>このトピックは古く、すぐに削除される予定です。代わりに<a href="/docs/ja/v2.4.x/eks.md">EKS上でのMilvusクラスタのデプロイを</a>参照することをお勧めします。</p>
 </div>
 <h2 id="Provision-a-Milvus-cluster" class="common-anchor-header">Milvusクラスタのプロビジョニング<button data-href="#Provision-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -488,7 +488,7 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
       </svg>
     </button></h2><p>他のクラウドにMilvusをデプロイする方法を学びたい場合は、次の手順に進んでください：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">EKSにMilvusクラスタをデプロイする</a></li>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使ってGCP上にMilvusクラスタをデプロイする</a></li>
-<li><a href="/docs/ja/azure.md">KubernetesでMicrosoft AzureにMilvusをデプロイするガイド</a></li>
+<li><a href="/docs/ja/v2.4.x/eks.md">EKSにMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/v2.4.x/gcp.md">Kubernetesを使ってGCP上にMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/v2.4.x/azure.md">KubernetesでMicrosoft AzureにMilvusをデプロイするガイド</a></li>
 </ul>

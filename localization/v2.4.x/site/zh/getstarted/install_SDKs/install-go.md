@@ -75,10 +75,10 @@ title: 安装 Milvus Go SDK
     </button></h2><p>安装 Milvus GO SDK 后，您可以</p>
 <ul>
 <li>学习 Milvus 的基本操作：<ul>
-<li><a href="/docs/zh/manage-collections.md">管理集合</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/manage-collections.md">管理集合</a></li>
+<li><a href="/docs/zh/v2.4.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.4.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.4.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 </ul>

@@ -183,7 +183,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p>請注意，<code translate="no">_resource_groups</code> 是一個可選參數，不指定它會讓 Milvus 將複製本載入預設資源群組中的查詢節點。</p>
 <p>若要 Milus 在單獨的資源群組中載入集合的每個複製本，請確保資源群組的數量等於複製本的數量。</p></li>
 <li><p>在資源群組之間轉移副本。</p>
-<p>Milvus 使用<a href="/docs/zh-hant/replica.md">副本</a>实现分布在多个查询节点上的<a href="/docs/zh-hant/glossary.md#Segment">段</a>之间的负载平衡。您可以按以下方式將資料集中的某些複製品從一個資源群組移到另一個資源群組：</p>
+<p>Milvus 使用<a href="/docs/zh-hant/v2.4.x/replica.md">副本</a>实现分布在多个查询节点上的<a href="/docs/zh-hant/v2.4.x/glossary.md#Segment">段</a>之间的负载平衡。您可以按以下方式將資料集中的某些複製品從一個資源群組移到另一個資源群組：</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>要部署多租户 Milvus 实例，请阅读以下内容：</p>
 <ul>
-<li><a href="/docs/zh-hant/rbac.md">啟用 RBAC</a></li>
-<li><a href="/docs/zh-hant/users_and_roles.md">使用者與角色</a></li>
+<li><a href="/docs/zh-hant/v2.4.x/rbac.md">啟用 RBAC</a></li>
+<li><a href="/docs/zh-hant/v2.4.x/users_and_roles.md">使用者與角色</a></li>
 </ul>

@@ -22,9 +22,9 @@ summary: ''
 <p>Este guia fornece instruções detalhadas sobre a configuração dos registos de acesso no Milvus.</p>
 <p>A configuração dos registos de acesso depende do método de instalação do Milvus:</p>
 <ul>
-<li><strong>Instalação do Helm</strong>: Configurar em <code translate="no">values.yaml</code>. Para obter mais informações, consulte <a href="/docs/pt/configure-helm.md">Configurar o Milvus com gráficos do Helm</a>.</li>
-<li><strong>Instalação do Docker</strong>: Configurar em <code translate="no">milvus.yaml</code>. Para obter mais informações, consulte <a href="/docs/pt/configure-docker.md">Configurar o Milvus com o Docker Compose</a>.</li>
-<li><strong>Instalação do operador</strong>: Modificar <code translate="no">spec.components</code> no ficheiro de configuração. Para obter mais informações, consulte <a href="/docs/pt/configure_operator.md">Configurar o Milvus com o Milvus Operator</a>.</li>
+<li><strong>Instalação do Helm</strong>: Configurar em <code translate="no">values.yaml</code>. Para obter mais informações, consulte <a href="/docs/pt/v2.4.x/configure-helm.md">Configurar o Milvus com gráficos do Helm</a>.</li>
+<li><strong>Instalação do Docker</strong>: Configurar em <code translate="no">milvus.yaml</code>. Para obter mais informações, consulte <a href="/docs/pt/v2.4.x/configure-docker.md">Configurar o Milvus com o Docker Compose</a>.</li>
+<li><strong>Instalação do operador</strong>: Modificar <code translate="no">spec.components</code> no ficheiro de configuração. Para obter mais informações, consulte <a href="/docs/pt/v2.4.x/configure_operator.md">Configurar o Milvus com o Milvus Operator</a>.</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Opções de configuração<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

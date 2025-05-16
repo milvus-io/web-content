@@ -104,5 +104,5 @@ summary: 了解时间戳的概念以及 Milvus 向量数据库中与时间戳相
         ></path>
       </svg>
     </button></h2><ul>
-<li>了解<a href="/docs/zh/consistency.md">保证时间戳</a>如何<a href="/docs/zh/consistency.md">在 Milvus 中实现可调整的一致性</a></li>
+<li>了解<a href="/docs/zh/v2.4.x/consistency.md">保证时间戳</a>如何<a href="/docs/zh/v2.4.x/consistency.md">在 Milvus 中实现可调整的一致性</a></li>
 </ul>

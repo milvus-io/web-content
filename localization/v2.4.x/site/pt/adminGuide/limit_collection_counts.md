@@ -22,11 +22,11 @@ title: Definir limites para o número de recolhas
 <p>A configuração varia consoante a forma como instala a instância do Milvus.</p>
 <ul>
 <li><p>Para instâncias do Milvus instaladas usando Helm Charts</p>
-<p>Adicione a configuração ao ficheiro <code translate="no">values.yaml</code> na secção <code translate="no">config</code>. Para obter detalhes, consulte <a href="/docs/pt/configure-helm.md">Configurar o Milvus com Helm Charts</a>.</p></li>
+<p>Adicione a configuração ao ficheiro <code translate="no">values.yaml</code> na secção <code translate="no">config</code>. Para obter detalhes, consulte <a href="/docs/pt/v2.4.x/configure-helm.md">Configurar o Milvus com Helm Charts</a>.</p></li>
 <li><p>Para instâncias do Milvus instaladas usando o Docker Compose</p>
-<p>Adicione a configuração ao ficheiro <code translate="no">milvus.yaml</code> que utilizou para iniciar a instância do Milvus. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md">Configurar o Milvus com o Docker Compose</a>.</p></li>
+<p>Adicione a configuração ao ficheiro <code translate="no">milvus.yaml</code> que utilizou para iniciar a instância do Milvus. Para obter detalhes, consulte <a href="/docs/pt/v2.4.x/configure-docker.md">Configurar o Milvus com o Docker Compose</a>.</p></li>
 <li><p>Para instâncias do Milvus instaladas com o Operator</p>
-<p>Adicione a configuração à secção <code translate="no">spec.components</code> do recurso personalizado <code translate="no">Milvus</code>. Para obter detalhes, consulte <a href="/docs/pt/configure_operator.md">Configurar o Milvus com o Operator</a>.</p></li>
+<p>Adicione a configuração à secção <code translate="no">spec.components</code> do recurso personalizado <code translate="no">Milvus</code>. Para obter detalhes, consulte <a href="/docs/pt/v2.4.x/configure_operator.md">Configurar o Milvus com o Operator</a>.</p></li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Opções de configuração<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

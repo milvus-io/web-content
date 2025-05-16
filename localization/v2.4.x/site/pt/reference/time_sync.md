@@ -156,6 +156,6 @@ summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Saiba mais sobre o conceito de <a href="/docs/pt/timestamp.md">carimbo de data/hora</a>.</li>
-<li>Saiba mais sobre o <a href="/docs/pt/data_processing.md">fluxo de trabalho de processamento de dados</a> no Milvus.</li>
+<li>Saiba mais sobre o conceito de <a href="/docs/pt/v2.4.x/timestamp.md">carimbo de data/hora</a>.</li>
+<li>Saiba mais sobre o <a href="/docs/pt/v2.4.x/data_processing.md">fluxo de trabalho de processamento de dados</a> no Milvus.</li>
 </ul>

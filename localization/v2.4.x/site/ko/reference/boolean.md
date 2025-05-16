@@ -349,7 +349,7 @@ array_length(int_array) <span class="hljs-comment"># ==&gt; 7</span>
       </svg>
     </button></h2><p>이제 Milvus에서 비트셋이 어떻게 작동하는지 알았습니다:</p>
 <ul>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 수행하는 방법을 알아보세요.</li>
+<li><a href="/docs/ko/v2.4.x/multi-vector-search.md">하이브리드 검색을</a> 수행하는 방법을 알아보세요.</li>
 <li><a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">문자열을 사용하여</a> 검색 결과를 <a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">필터링하는</a> 방법을 알아보세요.</li>
-<li><a href="/docs/ko/enable-dynamic-field.md">부울 표현식을 작성할 때 동적 필드를 사용하는</a> 방법을 알아보세요.</li>
+<li><a href="/docs/ko/v2.4.x/enable-dynamic-field.md">부울 표현식을 작성할 때 동적 필드를 사용하는</a> 방법을 알아보세요.</li>
 </ul>

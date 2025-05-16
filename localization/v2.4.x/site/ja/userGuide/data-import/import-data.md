@@ -37,8 +37,8 @@ summary: このページでは、準備したデータをインポートする�
       </svg>
     </button></h2><ul>
 <li><p>既にデータを準備し、Milvusバケットに入れている。</p>
-<p>そうでない場合は、まず<strong>RemoteBulkWriterを</strong>使用してデータを準備し、準備したデータがMilvusインスタンスと一緒に起動したMinIOインスタンス上のMilvusバケットに転送済みであることを確認してください。詳細は<a href="/docs/ja/prepare-source-data.md">ソースデータの準備を</a>参照してください。</p></li>
-<li><p>データの準備に使用するスキーマでコレクションを作成済みである。そうでない場合は、「<a href="/docs/ja/manage-collections.md">コレクションの管理</a>」を参照してください。</p></li>
+<p>そうでない場合は、まず<strong>RemoteBulkWriterを</strong>使用してデータを準備し、準備したデータがMilvusインスタンスと一緒に起動したMinIOインスタンス上のMilvusバケットに転送済みであることを確認してください。詳細は<a href="/docs/ja/v2.4.x/prepare-source-data.md">ソースデータの準備を</a>参照してください。</p></li>
+<li><p>データの準備に使用するスキーマでコレクションを作成済みである。そうでない場合は、「<a href="/docs/ja/v2.4.x/manage-collections.md">コレクションの管理</a>」を参照してください。</p></li>
 </ul>
 <div class="language-python">
 <p>以下のコード・スニペットは、指定されたスキーマで単純なコレクションを作成します。パラメータの詳細については <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>および <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を参照してください。</p>

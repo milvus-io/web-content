@@ -117,7 +117,7 @@ entities = [
 <p><b>注释</b></p>
 <p>向量维数必须是 Python<code translate="no">int</code> 或<code translate="no">numpy.integer</code> 类型，值必须是 Python<code translate="no">float</code> 或<code translate="no">numpy.floating</code> 类型。</p>
 </div>
-<p>要生成嵌入，也可以使用 PyMilvus 库中内置的<code translate="no">model</code> 包，它提供了一系列嵌入函数。详情请参阅<a href="/docs/zh/embeddings.md">嵌入</a>。</p>
+<p>要生成嵌入，也可以使用 PyMilvus 库中内置的<code translate="no">model</code> 包，它提供了一系列嵌入函数。详情请参阅<a href="/docs/zh/v2.4.x/embeddings.md">嵌入</a>。</p>
 <h2 id="Create-a-collection-with-a-sparse-vector-field" class="common-anchor-header">用稀疏向量场创建集合<button data-href="#Create-a-collection-with-a-sparse-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,7 +214,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">metric_type</code>:稀疏向量仅支持<code translate="no">IP</code> （Inner Product）距离度量。</p></li>
 <li><p><code translate="no">params.drop_ratio_build</code>:专门用于稀疏向量的索引参数。它控制在索引过程中排除的小向量值的比例。通过该参数，可以在构建索引时忽略小值，从而对效率和准确性之间的权衡进行微调。例如，如果<code translate="no">drop_ratio_build = 0.3</code> ，在索引构建过程中，所有稀疏向量的所有值都会被收集并排序。这些值中最小的 30% 不会包含在索引中，从而减少了搜索过程中的计算工作量。</p></li>
 </ul>
-<p>更多信息，请参阅<a href="/docs/zh/index.md">内存索引</a>。</p>
+<p>更多信息，请参阅<a href="/docs/zh/v2.4.x/index.md">内存索引</a>。</p>
 <h2 id="Perform-ANN-search" class="common-anchor-header">执行 ANN 搜索<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

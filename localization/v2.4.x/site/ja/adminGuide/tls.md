@@ -21,7 +21,7 @@ summary: MilvusでTLSプロキシを有効にする方法を説明します。
     </button></h1><p>TLS (Transport Layer Security) は通信の安全性を確保するための暗号化プロトコルです。MilvusプロキシはTLSの片方向認証と双方向認証を使用します。</p>
 <p>このトピックでは、gRPCとRESTfulトラフィックの両方でMilvusプロキシでTLSを有効にする方法について説明します。</p>
 <div class="alert note">
-<p>TLSとユーザ認証は2つの異なるセキュリティアプローチです。Milvusシステムでユーザ認証とTLSの両方を有効にしている場合、ユーザ名、パスワード、証明書ファイルのパスを指定する必要があります。ユーザ認証を有効にする方法については、<a href="/docs/ja/authenticate.md">ユーザアクセスの認証を</a>参照してください。</p>
+<p>TLSとユーザ認証は2つの異なるセキュリティアプローチです。Milvusシステムでユーザ認証とTLSの両方を有効にしている場合、ユーザ名、パスワード、証明書ファイルのパスを指定する必要があります。ユーザ認証を有効にする方法については、<a href="/docs/ja/v2.4.x/authenticate.md">ユーザアクセスの認証を</a>参照してください。</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">独自の証明書を作成する<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"

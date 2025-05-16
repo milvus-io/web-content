@@ -22,9 +22,9 @@ summary: ''
 <p>本指南提供在 Milvus 中配置访问日志的详细说明。</p>
 <p>访问日志的配置取决于 Milvus 的安装方法：</p>
 <ul>
-<li><strong>Helm 安装</strong>：在<code translate="no">values.yaml</code> 中配置。有关详细信息，请参阅<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>。</li>
-<li><strong>Docker 安装</strong>：在<code translate="no">milvus.yaml</code> 中配置。更多信息，请参阅<a href="/docs/zh/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</li>
-<li><strong>操作员安装</strong>：修改配置文件中的<code translate="no">spec.components</code> 。更多信息，请参阅<a href="/docs/zh/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>。</li>
+<li><strong>Helm 安装</strong>：在<code translate="no">values.yaml</code> 中配置。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/configure-helm.md">使用 Helm 图表配置 Milvus</a>。</li>
+<li><strong>Docker 安装</strong>：在<code translate="no">milvus.yaml</code> 中配置。更多信息，请参阅<a href="/docs/zh/v2.4.x/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</li>
+<li><strong>操作员安装</strong>：修改配置文件中的<code translate="no">spec.components</code> 。更多信息，请参阅<a href="/docs/zh/v2.4.x/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>。</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">配置选项<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

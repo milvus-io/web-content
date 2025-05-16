@@ -22,9 +22,9 @@ summary: AWS의 Layer-7 로드 밸런서 뒤에 Milvus 클러스터를 배포하
     </button></h1><p>레이어 4 로드 밸런서와 비교할 때, 레이어 7 로드 밸런서는 스마트한 로드 밸런싱 및 캐싱 기능을 제공하며 클라우드 네이티브 서비스에 적합한 선택입니다.</p>
 <p>이 가이드에서는 이미 레이어 4 로드 밸런서 뒤에서 실행 중인 Milvus 클러스터를 위한 레이어 7 로드 밸런서 설정 방법을 안내합니다.</p>
 <h3 id="Before-your-start" class="common-anchor-header">시작하기 전</h3><ul>
-<li><a href="/docs/ko/eks.md">AWS의 레이어 4 로드 밸런서 뒤에 Milvus 클러스터를 배포했습니다</a>.</li>
+<li><a href="/docs/ko/v2.4.x/eks.md">AWS의 레이어 4 로드 밸런서 뒤에 Milvus 클러스터를 배포했습니다</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus 구성 조정</h3><p>이 가이드에서는 <a href="/docs/ko/eks.md">AWS의 Layer-4 로드 밸런서 뒤에 Milvus 클러스터를</a> 이미 <a href="/docs/ko/eks.md">배포했다고</a> 가정합니다.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus 구성 조정</h3><p>이 가이드에서는 <a href="/docs/ko/v2.4.x/eks.md">AWS의 Layer-4 로드 밸런서 뒤에 Milvus 클러스터를</a> 이미 <a href="/docs/ko/v2.4.x/eks.md">배포했다고</a> 가정합니다.</p>
 <p>이 Milvus 클러스터에 대해 레이어 7 로드 밸런서를 설정하기 전에 다음 명령을 실행하여 레이어 4 로드 밸런서를 제거하세요.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

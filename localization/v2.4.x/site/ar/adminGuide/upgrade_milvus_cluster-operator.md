@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: تعرف على كيفية ترقية مجموعة ميلفوس العنقودية باستخدام مشغل ميلفوس.
 title: ترقية مجموعة ميلفوس العنقودية باستخدام مشغل ميلفوس
 ---
-<div class="tab-wrapper"><a href="/docs/ar/upgrade_milvus_cluster-operator.md" class='active '>مشغل ميلفوس ميلفوس</a><a href="/docs/ar/upgrade_milvus_cluster-helm.md" class=''>هيلم</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.4.x/upgrade_milvus_cluster-operator.md" class='active '>مشغل ميلفوس ميلفوس</a><a href="/docs/ar/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>هيلم</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Milvus-Operator" class="common-anchor-header">ترقية مجموعة ميلفوس العنقودية باستخدام مشغل ميلفوس<button data-href="#Upgrade-Milvus-Cluster-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -37,14 +37,14 @@ title: Konfigurieren Sie Milvus im laufenden Betrieb
       </svg>
     </button></h2><p>Sie müssen sicherstellen, dass：</p>
 <ul>
-<li>Sie haben Birdwatcher installiert. Details dazu finden Sie unter <a href="/docs/de/birdwatcher_install_guides.md">Birdwatcher installieren</a>,</li>
+<li>Sie haben Birdwatcher installiert. Details dazu finden Sie unter <a href="/docs/de/v2.4.x/birdwatcher_install_guides.md">Birdwatcher installieren</a>,</li>
 <li>Sie haben etcdctl installiert. Details dazu finden Sie unter <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Interaktion mit etcd</a>, oder</li>
 <li>Sie haben andere etcd-Clients, wie z.B. den Python-Client, installiert.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>Die Beispiele in diesem Handbuch ändern den Wert von <code translate="no">proxy.minPasswordLength</code> in <code translate="no">8</code>. Sie können den Schlüssel durch die in <a href="/docs/de/dynamic_config.md#Applicable-configuration-items">Anwendbare Konfigurationselemente</a> aufgeführten Schlüssel ersetzen.</li>
-<li>Die Beispiele in diesem Handbuch gehen davon aus, dass der Wurzelpfad Ihres Milvus <code translate="no">by-dev</code> lautet. Alle Konfigurationen werden unter dem Pfad <code translate="no">by-dev/config</code> aufgeführt. Der Stammverzeichnispfad von Milvus variiert je nach Art der Installation. Für die Instanzen, die mit den Helm-Charts installiert werden, lautet der Root-Pfad standardmäßig <code translate="no">by-dev</code>. Wenn Sie den Root-Pfad nicht kennen, lesen Sie den Abschnitt <a href="/docs/de/birdwatcher_usage_guides.md#Connect-to-etcd">Verbindung mit etcd</a>.</li>
+<li>Die Beispiele in diesem Handbuch ändern den Wert von <code translate="no">proxy.minPasswordLength</code> in <code translate="no">8</code>. Sie können den Schlüssel durch die in <a href="/docs/de/v2.4.x/dynamic_config.md#Applicable-configuration-items">Anwendbare Konfigurationselemente</a> aufgeführten Schlüssel ersetzen.</li>
+<li>Die Beispiele in diesem Handbuch gehen davon aus, dass der Wurzelpfad Ihres Milvus <code translate="no">by-dev</code> lautet. Alle Konfigurationen werden unter dem Pfad <code translate="no">by-dev/config</code> aufgeführt. Der Stammverzeichnispfad von Milvus variiert je nach Art der Installation. Für die Instanzen, die mit den Helm-Charts installiert werden, lautet der Root-Pfad standardmäßig <code translate="no">by-dev</code>. Wenn Sie den Root-Pfad nicht kennen, lesen Sie den Abschnitt <a href="/docs/de/v2.4.x/birdwatcher_usage_guides.md#Connect-to-etcd">Verbindung mit etcd</a>.</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">Konfigurationen ändern<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +203,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>Erfahren Sie mehr über <a href="/docs/de/system_configuration.md">Systemkonfigurationen</a>.</li>
-<li>Erfahren Sie, wie Sie Milvus mit <a href="/docs/de/configure_operator.md">Milvus Operator</a>, <a href="/docs/de/configure-helm.md">Helm-Diagrammen</a> und <a href="/docs/de/configure-docker.md">Docker</a> konfigurieren.</li>
+<li>Erfahren Sie mehr über <a href="/docs/de/v2.4.x/system_configuration.md">Systemkonfigurationen</a>.</li>
+<li>Erfahren Sie, wie Sie Milvus mit <a href="/docs/de/v2.4.x/configure_operator.md">Milvus Operator</a>, <a href="/docs/de/v2.4.x/configure-helm.md">Helm-Diagrammen</a> und <a href="/docs/de/v2.4.x/configure-docker.md">Docker</a> konfigurieren.</li>
 </ul>

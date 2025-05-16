@@ -19,7 +19,7 @@ summary: Découvrez comment allouer des ressources à Milvus sur Kubernetes.
         ></path>
       </svg>
     </button></h1><p>Cette rubrique décrit comment allouer des ressources à un cluster Milvus sur Kubernetes.</p>
-<p>En règle générale, les ressources allouées à un cluster Milvus en production doivent être proportionnelles à la charge de travail de la machine. Vous devez également prendre en compte le type de machine lors de l'allocation des ressources. Bien que vous puissiez mettre à jour les configurations lorsque le cluster est en cours d'exécution, nous vous recommandons de définir les valeurs avant de <a href="/docs/fr/install_cluster-helm.md">déployer le cluster</a>.</p>
+<p>En règle générale, les ressources allouées à un cluster Milvus en production doivent être proportionnelles à la charge de travail de la machine. Vous devez également prendre en compte le type de machine lors de l'allocation des ressources. Bien que vous puissiez mettre à jour les configurations lorsque le cluster est en cours d'exécution, nous vous recommandons de définir les valeurs avant de <a href="/docs/fr/v2.4.x/install_cluster-helm.md">déployer le cluster</a>.</p>
 <div class="alert note">
 <p>Pour plus d'informations sur l'allocation des ressources avec Milvus Operator, voir <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">Allocation des ressources avec Milvus Operator</a>.</p>
 </div>
@@ -59,8 +59,8 @@ summary: Découvrez comment allouer des ressources à Milvus sur Kubernetes.
 L'utilisation de Helm pour mettre à niveau les ressources entraînera l'exécution d'une mise à jour continue par les pods en cours d'exécution.</div>
 <p>Il existe deux façons d'allouer des ressources :</p>
 <ul>
-<li><a href="/docs/fr/allocate.md#Allocate-resources-with-commands">Utiliser les commandes</a></li>
-<li><a href="/docs/fr/allocate.md#Allocate-resources-by-setting-configuration-file">Définir les paramètres dans le fichier <code translate="no">YAML</code> </a></li>
+<li><a href="/docs/fr/v2.4.x/allocate.md#Allocate-resources-with-commands">Utiliser les commandes</a></li>
+<li><a href="/docs/fr/v2.4.x/allocate.md#Allocate-resources-by-setting-configuration-file">Définir les paramètres dans le fichier <code translate="no">YAML</code> </a></li>
 </ul>
 <h3 id="Allocate-resources-with-commands" class="common-anchor-header">Allouer des ressources avec des commandes</h3><p>Vous devez définir les variables de ressources pour chaque composant Milvus si vous utilisez <code translate="no">--set</code> pour mettre à jour les configurations de ressources.</p>
 <div class="filter">
@@ -129,13 +129,13 @@ Si <code translate="no">resources.limits</code> n'est pas spécifié, les pods c
       </svg>
     </button></h2><ul>
 <li>Vous voudrez peut-être aussi apprendre à<ul>
-<li><a href="/docs/fr/scaleout.md">Faire évoluer un cluster Milvus</a></li>
-<li><a href="/docs/fr/upgrade_milvus_cluster-operator.md">Mettre à niveau le cluster Milvus</a></li>
-<li><a href="/docs/fr/upgrade_milvus_standalone-operator.md">Mettre à niveau Milvus Standalone</a></li>
+<li><a href="/docs/fr/v2.4.x/scaleout.md">Faire évoluer un cluster Milvus</a></li>
+<li><a href="/docs/fr/v2.4.x/upgrade_milvus_cluster-operator.md">Mettre à niveau le cluster Milvus</a></li>
+<li><a href="/docs/fr/v2.4.x/upgrade_milvus_standalone-operator.md">Mettre à niveau Milvus Standalone</a></li>
 </ul></li>
 <li>Si vous êtes prêt à déployer votre cluster sur des nuages :<ul>
-<li>Apprendre à <a href="/docs/fr/eks.md">déployer Milvus sur Amazon EKS avec Terraform</a></li>
-<li>Apprendre à <a href="/docs/fr/gcp.md">déployer le cluster Milvus sur GCP avec Kubernetes</a></li>
-<li>Apprendre à <a href="/docs/fr/azure.md">déployer Milvus sur Microsoft Azure avec Kubernetes</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.4.x/eks.md">déployer Milvus sur Amazon EKS avec Terraform</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.4.x/gcp.md">déployer le cluster Milvus sur GCP avec Kubernetes</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.4.x/azure.md">déployer Milvus sur Microsoft Azure avec Kubernetes</a></li>
 </ul></li>
 </ul>

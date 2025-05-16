@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Pelajari cara meng-upgrade Milvus mandiri dengan Docker Compose.
 title: Memutakhirkan Milvus Standalone dengan Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/id/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/id/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/id/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/id/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/id/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/id/v2.4.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Memutakhirkan Milvus Standalone dengan Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,11 +122,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>Anda mungkin juga ingin mempelajari caranya:<ul>
-<li><a href="/docs/id/scaleout.md">Menetapkan skala cluster Milvus</a></li>
+<li><a href="/docs/id/v2.4.x/scaleout.md">Menetapkan skala cluster Milvus</a></li>
 </ul></li>
 <li>Jika Anda siap untuk men-deploy cluster Anda di awan:<ul>
-<li>Pelajari cara <a href="/docs/id/eks.md">Menerapkan Milvus di Amazon EKS dengan Terraform</a></li>
-<li>Pelajari cara <a href="/docs/id/gcp.md">Menerapkan Klaster Milvus di GCP dengan Kubernetes</a></li>
-<li>Pelajari cara <a href="/docs/id/azure.md">Menerapkan Milvus di Microsoft Azure dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.4.x/eks.md">Menerapkan Milvus di Amazon EKS dengan Terraform</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.4.x/gcp.md">Menerapkan Klaster Milvus di GCP dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.4.x/azure.md">Menerapkan Milvus di Microsoft Azure dengan Kubernetes</a></li>
 </ul></li>
 </ul>

@@ -592,6 +592,6 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ja/rbac.md">RBACの有効化</a></p></li>
-<li><p><a href="/docs/ja/multi_tenancy.md">マルチテナンシー</a></p></li>
+<li><p><a href="/docs/ja/v2.4.x/rbac.md">RBACの有効化</a></p></li>
+<li><p><a href="/docs/ja/v2.4.x/multi_tenancy.md">マルチテナンシー</a></p></li>
 </ul>

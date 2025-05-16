@@ -74,9 +74,9 @@ title: Mengelola Koleksi
     </button></h2><p>Anda dapat membuat koleksi dengan salah satu cara berikut:</p>
 <ul>
 <li><p><strong>Penyiapan cepat</strong></p>
-<p>Dengan cara ini, Anda dapat membuat koleksi hanya dengan memberinya nama dan menentukan jumlah dimensi penyematan vektor yang akan disimpan dalam koleksi ini. Untuk detailnya, bacalah <a href="/docs/id/manage-collections.md">Penyiapan cepat</a>.</p></li>
+<p>Dengan cara ini, Anda dapat membuat koleksi hanya dengan memberinya nama dan menentukan jumlah dimensi penyematan vektor yang akan disimpan dalam koleksi ini. Untuk detailnya, bacalah <a href="/docs/id/v2.4.x/manage-collections.md">Penyiapan cepat</a>.</p></li>
 <li><p><strong>Penyiapan yang disesuaikan</strong></p>
-<p>Alih-alih membiarkan In Milvus memutuskan hampir semua hal untuk koleksi Anda, Anda dapat menentukan <strong>skema</strong> dan <strong>parameter indeks</strong> koleksi sendiri. Untuk detailnya, lihat <a href="/docs/id/manage-collections.md">Penyiapan</a> yang <a href="/docs/id/manage-collections.md">disesuaikan</a>.</p></li>
+<p>Alih-alih membiarkan In Milvus memutuskan hampir semua hal untuk koleksi Anda, Anda dapat menentukan <strong>skema</strong> dan <strong>parameter indeks</strong> koleksi sendiri. Untuk detailnya, lihat <a href="/docs/id/v2.4.x/manage-collections.md">Penyiapan</a> yang <a href="/docs/id/v2.4.x/manage-collections.md">disesuaikan</a>.</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">Penyiapan cepat</h3><p>Dengan latar belakang lompatan besar dalam industri AI, sebagian besar pengembang hanya membutuhkan koleksi yang sederhana namun dinamis untuk memulai. Milvus memungkinkan penyiapan cepat untuk koleksi semacam itu hanya dengan tiga argumen:</p>
 <ul>
@@ -272,7 +272,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </ul>
 <p>Koleksi yang diindeks dan dimuat secara otomatis dari kode yang disediakan siap untuk penyisipan data segera.</p>
 <h3 id="Customized-setup" class="common-anchor-header">Penyiapan yang disesuaikan</h3><p>Daripada membiarkan Milvus memutuskan hampir semua hal untuk koleksi Anda, Anda dapat menentukan <strong>skema</strong> dan <strong>parameter indeks</strong> koleksi sendiri.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Langkah 1: Siapkan skema</h4><p>Skema mendefinisikan struktur koleksi. Di dalam skema, Anda memiliki opsi untuk mengaktifkan atau menonaktifkan <code translate="no">enable_dynamic_field</code>, menambahkan bidang yang telah ditentukan sebelumnya, dan mengatur atribut untuk setiap bidang. Untuk penjelasan rinci tentang konsep dan tipe data yang tersedia, lihat <a href="/docs/id/schema.md">Penjelasan Skema.</a></p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Langkah 1: Siapkan skema</h4><p>Skema mendefinisikan struktur koleksi. Di dalam skema, Anda memiliki opsi untuk mengaktifkan atau menonaktifkan <code translate="no">enable_dynamic_field</code>, menambahkan bidang yang telah ditentukan sebelumnya, dan mengatur atribut untuk setiap bidang. Untuk penjelasan rinci tentang konsep dan tipe data yang tersedia, lihat <a href="/docs/id/v2.4.x/schema.md">Penjelasan Skema.</a></p>
 <div class="language-python">
 <p>Untuk menyiapkan skema, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> untuk membuat objek skema dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> untuk menambahkan bidang ke skema.</p>
 </div>
@@ -526,7 +526,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Langkah 2: Menyiapkan parameter indeks</h4><p>Parameter indeks menentukan bagaimana Milvus mengatur data Anda di dalam koleksi. Anda dapat menyesuaikan proses pengindeksan untuk bidang tertentu dengan menyesuaikan <code translate="no">metric_type</code> dan <code translate="no">index_type</code>. Untuk bidang vektor, Anda memiliki fleksibilitas untuk memilih <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, atau <code translate="no">JACCARD</code> sebagai <code translate="no">metric_type</code>, tergantung pada jenis vektor yang Anda kerjakan. Untuk informasi lebih lanjut, lihat <a href="/docs/id/metric.md">Metrik Kemiripan</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Langkah 2: Menyiapkan parameter indeks</h4><p>Parameter indeks menentukan bagaimana Milvus mengatur data Anda di dalam koleksi. Anda dapat menyesuaikan proses pengindeksan untuk bidang tertentu dengan menyesuaikan <code translate="no">metric_type</code> dan <code translate="no">index_type</code>. Untuk bidang vektor, Anda memiliki fleksibilitas untuk memilih <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, atau <code translate="no">JACCARD</code> sebagai <code translate="no">metric_type</code>, tergantung pada jenis vektor yang Anda kerjakan. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.4.x/metric.md">Metrik Kemiripan</a>.</p>
 <div class="language-python">
 <p>Untuk menyiapkan parameter indeks, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> untuk menyiapkan parameter indeks dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> untuk menambahkan indeks.</p>
 </div>
@@ -898,7 +898,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Koleksi yang dibuat di atas dimuat secara otomatis. Untuk mempelajari lebih lanjut tentang memuat dan melepaskan koleksi, lihat Memuat <a href="/docs/id/manage-collections.md#Load--Release-Collection">&amp; Melepaskan Koleksi</a>.</p></li>
+<p>Koleksi yang dibuat di atas dimuat secara otomatis. Untuk mempelajari lebih lanjut tentang memuat dan melepaskan koleksi, lihat Memuat <a href="/docs/id/v2.4.x/manage-collections.md#Load--Release-Collection">&amp; Melepaskan Koleksi</a>.</p></li>
 <li><p><strong>Membuat koleksi dan berkas indeks secara terpisah.</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
@@ -1015,7 +1015,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Koleksi yang dibuat di atas tidak dimuat secara otomatis. Anda dapat membuat indeks untuk koleksi sebagai berikut. Membuat indeks untuk koleksi dengan cara terpisah tidak secara otomatis memuat koleksi. Untuk detailnya, lihat <a href="/docs/id/manage-collections.md#Load--Release-Collection">Memuat &amp; Melepaskan Koleksi</a>.</p>
+<p>Koleksi yang dibuat di atas tidak dimuat secara otomatis. Anda dapat membuat indeks untuk koleksi sebagai berikut. Membuat indeks untuk koleksi dengan cara terpisah tidak secara otomatis memuat koleksi. Untuk detailnya, lihat <a href="/docs/id/v2.4.x/manage-collections.md#Load--Release-Collection">Memuat &amp; Melepaskan Koleksi</a>.</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1154,7 +1154,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>Koleksi yang dibuat di atas tidak dimuat secara otomatis. Anda dapat membuat indeks untuk koleksi sebagai berikut. Membuat indeks untuk koleksi dengan cara terpisah tidak secara otomatis memuat koleksi. Untuk detailnya, lihat <a href="/docs/id/manage-collections.md">Memuat &amp; Melepaskan Koleksi</a>.</p>
+<p>Koleksi yang dibuat di atas tidak dimuat secara otomatis. Anda dapat membuat indeks untuk koleksi sebagai berikut. Membuat indeks untuk koleksi dengan cara terpisah tidak secara otomatis memuat koleksi. Untuk detailnya, lihat <a href="/docs/id/v2.4.x/manage-collections.md">Memuat &amp; Melepaskan Koleksi</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>

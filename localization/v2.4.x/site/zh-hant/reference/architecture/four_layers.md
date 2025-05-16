@@ -119,5 +119,5 @@ title: 儲存/計算分解
         ></path>
       </svg>
     </button></h2><ul>
-<li>請閱讀「<a href="/docs/zh-hant/main_components.md">主要元件</a>」以瞭解更多有關 Milvus 架構的詳細資訊。</li>
+<li>請閱讀「<a href="/docs/zh-hant/v2.4.x/main_components.md">主要元件</a>」以瞭解更多有關 Milvus 架構的詳細資訊。</li>
 </ul>

@@ -36,7 +36,7 @@ title: Skalarer Index
         ></path>
       </svg>
     </button></h2><p>Wenn Sie in Milvus eine Suche nach Vektorähnlichkeit durchführen, können Sie logische Operatoren verwenden, um skalare Felder in booleschen Ausdrücken zu organisieren.</p>
-<p>Wenn Milvus eine Suchanfrage mit einem solchen booleschen Ausdruck erhält, parst es den booleschen Ausdruck in einen abstrakten Syntaxbaum (AST), um einen physischen Plan für die Attributfilterung zu erstellen. Milvus wendet dann den physischen Plan in jedem Segment an, um ein <a href="/docs/de/bitset.md">Bitset</a> als Filterergebnis zu erzeugen, und schließt das Ergebnis als Vektorsuchparameter ein, um den Suchbereich einzugrenzen. In diesem Fall hängt die Geschwindigkeit der Vektorsuche stark von der Geschwindigkeit der Attributfilterung ab.</p>
+<p>Wenn Milvus eine Suchanfrage mit einem solchen booleschen Ausdruck erhält, parst es den booleschen Ausdruck in einen abstrakten Syntaxbaum (AST), um einen physischen Plan für die Attributfilterung zu erstellen. Milvus wendet dann den physischen Plan in jedem Segment an, um ein <a href="/docs/de/v2.4.x/bitset.md">Bitset</a> als Filterergebnis zu erzeugen, und schließt das Ergebnis als Vektorsuchparameter ein, um den Suchbereich einzugrenzen. In diesem Fall hängt die Geschwindigkeit der Vektorsuche stark von der Geschwindigkeit der Attributfilterung ab.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +154,12 @@ title: Skalarer Index
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Um ein skalares Feld zu indizieren, lesen Sie <a href="/docs/de/index-scalar-fields.md">Index auf Skalaren erstellen</a>.</p></li>
+<li><p>Um ein skalares Feld zu indizieren, lesen Sie <a href="/docs/de/v2.4.x/index-scalar-fields.md">Index auf Skalaren erstellen</a>.</p></li>
 <li><p>Um mehr über die oben erwähnten verwandten Begriffe und Regeln zu erfahren, lesen Sie</p>
 <ul>
-<li><a href="/docs/de/bitset.md">Bitset</a></li>
-<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
-<li><a href="/docs/de/boolean.md">Regeln für boolesche Ausdrücke</a></li>
-<li><a href="/docs/de/schema.md#Supported-data-type">Unterstützte Datentypen</a></li>
+<li><a href="/docs/de/v2.4.x/bitset.md">Bitset</a></li>
+<li><a href="/docs/de/v2.4.x/multi-vector-search.md">Hybride Suche</a></li>
+<li><a href="/docs/de/v2.4.x/boolean.md">Regeln für boolesche Ausdrücke</a></li>
+<li><a href="/docs/de/v2.4.x/schema.md#Supported-data-type">Unterstützte Datentypen</a></li>
 </ul></li>
 </ul>

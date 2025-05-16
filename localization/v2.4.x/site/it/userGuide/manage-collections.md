@@ -74,9 +74,9 @@ title: Gestire le raccolte
     </button></h2><p>È possibile creare una raccolta in uno dei seguenti modi:</p>
 <ul>
 <li><p><strong>Impostazione rapida</strong></p>
-<p>In questo modo, è possibile creare una collezione semplicemente dandole un nome e specificando il numero di dimensioni delle incorporazioni vettoriali da memorizzare in questa collezione. Per maggiori dettagli, consultare la sezione <a href="/docs/it/manage-collections.md">Impostazione rapida</a>.</p></li>
+<p>In questo modo, è possibile creare una collezione semplicemente dandole un nome e specificando il numero di dimensioni delle incorporazioni vettoriali da memorizzare in questa collezione. Per maggiori dettagli, consultare la sezione <a href="/docs/it/v2.4.x/manage-collections.md">Impostazione rapida</a>.</p></li>
 <li><p><strong>Configurazione personalizzata</strong></p>
-<p>Invece di lasciare che In Milvus decida quasi tutto per la vostra collezione, potete determinare da soli i <strong>parametri</strong> <strong>dello schema</strong> e dell'<strong>indice</strong> della collezione. Per i dettagli, consultare la sezione <a href="/docs/it/manage-collections.md">Configurazione personalizzata</a>.</p></li>
+<p>Invece di lasciare che In Milvus decida quasi tutto per la vostra collezione, potete determinare da soli i <strong>parametri</strong> <strong>dello schema</strong> e dell'<strong>indice</strong> della collezione. Per i dettagli, consultare la sezione <a href="/docs/it/v2.4.x/manage-collections.md">Configurazione personalizzata</a>.</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">Configurazione rapida</h3><p>Nel contesto del grande balzo dell'industria dell'intelligenza artificiale, la maggior parte degli sviluppatori ha bisogno di una collezione semplice ma dinamica per iniziare. Milvus permette di configurare rapidamente una collezione di questo tipo con soli tre argomenti:</p>
 <ul>
@@ -272,7 +272,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </ul>
 <p>La collezione indicizzata e caricata automaticamente dal codice fornito è pronta per l'inserimento immediato dei dati.</p>
 <h3 id="Customized-setup" class="common-anchor-header">Configurazione personalizzata</h3><p>Invece di lasciare che Milvus decida quasi tutto per la vostra collezione, potete determinare da soli i <strong>parametri</strong> <strong>dello schema</strong> e dell'<strong>indice</strong> della collezione.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Passo 1: Impostazione dello schema</h4><p>Uno schema definisce la struttura di una collezione. All'interno dello schema, si ha la possibilità di abilitare o disabilitare <code translate="no">enable_dynamic_field</code>, aggiungere campi predefiniti e impostare attributi per ogni campo. Per una spiegazione dettagliata del concetto e dei tipi di dati disponibili, consultare <a href="/docs/it/schema.md">Schema spiegato</a>.</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Passo 1: Impostazione dello schema</h4><p>Uno schema definisce la struttura di una collezione. All'interno dello schema, si ha la possibilità di abilitare o disabilitare <code translate="no">enable_dynamic_field</code>, aggiungere campi predefiniti e impostare attributi per ogni campo. Per una spiegazione dettagliata del concetto e dei tipi di dati disponibili, consultare <a href="/docs/it/v2.4.x/schema.md">Schema spiegato</a>.</p>
 <div class="language-python">
 <p>Per impostare uno schema, usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> per creare un oggetto schema e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> per aggiungere campi allo schema.</p>
 </div>
@@ -526,7 +526,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Passo 2: Impostazione dei parametri di indice</h4><p>I parametri di indice determinano il modo in cui Milvus organizza i dati all'interno di una collezione. È possibile personalizzare il processo di indicizzazione per campi specifici regolando i loro <code translate="no">metric_type</code> e <code translate="no">index_type</code>. Per il campo vettoriale, è possibile selezionare <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, o <code translate="no">JACCARD</code> come <code translate="no">metric_type</code>, a seconda del tipo di vettori con cui si lavora. Per ulteriori informazioni, consultare <a href="/docs/it/metric.md">Metriche di somiglianza</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Passo 2: Impostazione dei parametri di indice</h4><p>I parametri di indice determinano il modo in cui Milvus organizza i dati all'interno di una collezione. È possibile personalizzare il processo di indicizzazione per campi specifici regolando i loro <code translate="no">metric_type</code> e <code translate="no">index_type</code>. Per il campo vettoriale, è possibile selezionare <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, o <code translate="no">JACCARD</code> come <code translate="no">metric_type</code>, a seconda del tipo di vettori con cui si lavora. Per ulteriori informazioni, consultare <a href="/docs/it/v2.4.x/metric.md">Metriche di somiglianza</a>.</p>
 <div class="language-python">
 <p>Per impostare i parametri dell'indice, usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> per preparare i parametri dell'indice e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> per aggiungere l'indice.</p>
 </div>
@@ -898,7 +898,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La raccolta creata in precedenza viene caricata automaticamente. Per ulteriori informazioni sul caricamento e il rilascio di una raccolta, consultare <a href="/docs/it/manage-collections.md#Load--Release-Collection">Carica e rilascia una raccolta</a>.</p></li>
+<p>La raccolta creata in precedenza viene caricata automaticamente. Per ulteriori informazioni sul caricamento e il rilascio di una raccolta, consultare <a href="/docs/it/v2.4.x/manage-collections.md#Load--Release-Collection">Carica e rilascia una raccolta</a>.</p></li>
 <li><p><strong>Creare una raccolta e un file di indice separatamente.</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
@@ -1015,7 +1015,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'insieme creato sopra non viene caricato automaticamente. È possibile creare un indice per la raccolta come segue. La creazione di un indice per la raccolta in modo separato non carica automaticamente la raccolta. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/manage-collections.md#Load--Release-Collection">Caricare e rilasciare la raccolta</a>.</p>
+<p>L'insieme creato sopra non viene caricato automaticamente. È possibile creare un indice per la raccolta come segue. La creazione di un indice per la raccolta in modo separato non carica automaticamente la raccolta. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/v2.4.x/manage-collections.md#Load--Release-Collection">Caricare e rilasciare la raccolta</a>.</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1154,7 +1154,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>L'insieme creato in precedenza non viene caricato automaticamente. È possibile creare un indice per l'insieme come segue. La creazione di un indice per l'insieme in modo separato non carica automaticamente l'insieme. Per maggiori dettagli, consultare <a href="/docs/it/manage-collections.md">Carica e rilascia la collezione</a>.</p>
+<p>L'insieme creato in precedenza non viene caricato automaticamente. È possibile creare un indice per l'insieme come segue. La creazione di un indice per l'insieme in modo separato non carica automaticamente l'insieme. Per maggiori dettagli, consultare <a href="/docs/it/v2.4.x/manage-collections.md">Carica e rilascia la collezione</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>

@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: 學習如何使用 Docker Compose 升級 Milvus 叢集。
 title: 使用 Docker Compose 升級 Milvus 叢集
 ---
-<div class="tab-wrapper"><a href="/docs/zh-hant/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/zh-hant/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/zh-hant/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh-hant/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/zh-hant/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/zh-hant/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/zh-hant/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/zh-hant/v2.4.x/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh-hant/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/zh-hant/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升級 Milvus 叢集<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,11 +144,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>您可能還想學習如何<ul>
-<li><a href="/docs/zh-hant/scaleout.md">擴充 Milvus 叢集</a></li>
+<li><a href="/docs/zh-hant/v2.4.x/scaleout.md">擴充 Milvus 叢集</a></li>
 </ul></li>
 <li>如果您已準備好在雲上部署您的叢集：<ul>
-<li>學習如何<a href="/docs/zh-hant/eks.md">使用 Terraform 在 Amazon EKS 上部署 Milvus</a></li>
-<li>學習如何<a href="/docs/zh-hant/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
-<li>學習如何<a href="/docs/zh-hant/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.4.x/eks.md">使用 Terraform 在 Amazon EKS 上部署 Milvus</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.4.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.4.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
 </ul></li>
 </ul>

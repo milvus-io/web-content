@@ -105,7 +105,7 @@ summary: PrometheusとGrafanaがMilvusでどのようにモニタリングとア
       </svg>
     </button></h2><p>モニタリングとアラートの基本的なワークフローを学んだら、次のことを学びましょう：</p>
 <ul>
-<li><a href="/docs/ja/monitor.md">監視サービスのデプロイ</a></li>
-<li><a href="/docs/ja/visualize.md">Milvusのメトリックを可視化する</a></li>
-<li><a href="/docs/ja/alert.md">アラートを作成する</a></li>
+<li><a href="/docs/ja/v2.4.x/monitor.md">監視サービスのデプロイ</a></li>
+<li><a href="/docs/ja/v2.4.x/visualize.md">Milvusのメトリックを可視化する</a></li>
+<li><a href="/docs/ja/v2.4.x/alert.md">アラートを作成する</a></li>
 </ul>

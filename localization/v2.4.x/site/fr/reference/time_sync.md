@@ -156,6 +156,6 @@ summary: Découvrez le système de synchronisation temporelle de Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Découvrez le concept d'<a href="/docs/fr/timestamp.md">horodatage</a>.</li>
-<li>Découvrir le <a href="/docs/fr/data_processing.md">flux de traitement des données</a> dans Milvus.</li>
+<li>Découvrez le concept d'<a href="/docs/fr/v2.4.x/timestamp.md">horodatage</a>.</li>
+<li>Découvrir le <a href="/docs/fr/v2.4.x/data_processing.md">flux de traitement des données</a> dans Milvus.</li>
 </ul>

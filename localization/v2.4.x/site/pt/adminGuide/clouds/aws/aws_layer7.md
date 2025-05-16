@@ -24,9 +24,9 @@ summary: >-
     </button></h1><p>Quando comparado a um balanceador de carga de camada 4, um balanceador de carga de camada 7 oferece recursos inteligentes de balanceamento de carga e armazenamento em cache e é uma ótima opção para serviços nativos da nuvem.</p>
 <p>Este guia orienta-o na configuração de um balanceador de carga de camada 7 para um cluster Milvus já em execução atrás de um balanceador de carga de camada 4.</p>
 <h3 id="Before-your-start" class="common-anchor-header">Antes de começar</h3><ul>
-<li>Você implantou <a href="/docs/pt/eks.md">um cluster do Milvus por trás de um balanceador de carga de camada 4 no AWS</a>.</li>
+<li>Você implantou <a href="/docs/pt/v2.4.x/eks.md">um cluster do Milvus por trás de um balanceador de carga de camada 4 no AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Ajustar as configurações do Milvus</h3><p>Este guia pressupõe que você já <a href="/docs/pt/eks.md">implantou um cluster Milvus por trás de um balanceador de carga de camada 4 no AWS</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Ajustar as configurações do Milvus</h3><p>Este guia pressupõe que você já <a href="/docs/pt/v2.4.x/eks.md">implantou um cluster Milvus por trás de um balanceador de carga de camada 4 no AWS</a>.</p>
 <p>Antes de configurar um balanceador de carga da Camada 7 para esse cluster do Milvus, execute o seguinte comando para remover o balanceador de carga da Camada 4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

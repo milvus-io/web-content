@@ -40,7 +40,7 @@ title: Milvus 2.3.x부터
 <li>대상 Milvus: 2.3.0 이상</li>
 </ul></li>
 <li><strong>필수 도구</strong>:<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus 마이그레이션</a> 도구. 설치에 대한 자세한 내용은 <a href="/docs/ko/milvusdm_install.md">마이그레이션 도구 설치를</a> 참조하세요.</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus 마이그레이션</a> 도구. 설치에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/milvusdm_install.md">마이그레이션 도구 설치를</a> 참조하세요.</li>
 </ul></li>
 <li><strong>데이터 준비</strong>:<ul>
 <li>소스 Milvus 컬렉션이 로드되어 있고 데이터를 내보낼 준비가 되어 있는지 확인합니다.</li>
@@ -118,8 +118,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>소스 Milvus 서버의 주소입니다.</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>소스 Milvus 서버의 사용자 이름입니다. 이 매개변수는 Milvus 서버에 대해 사용자 인증이 활성화된 경우 필요합니다. 자세한 내용은 <a href="/docs/ko/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>소스 Milvus 서버의 비밀번호입니다. Milvus 서버에 사용자 인증이 활성화된 경우 이 파라미터가 필요합니다. 자세한 내용은 <a href="/docs/ko/authenticate.md">인증 활성화를</a> 참조하십시오.</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>소스 Milvus 서버의 사용자 이름입니다. 이 매개변수는 Milvus 서버에 대해 사용자 인증이 활성화된 경우 필요합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>소스 Milvus 서버의 비밀번호입니다. Milvus 서버에 사용자 인증이 활성화된 경우 이 파라미터가 필요합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/authenticate.md">인증 활성화를</a> 참조하십시오.</td></tr>
 </tbody>
 </table>
 </li>
@@ -130,8 +130,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>대상 Milvus 서버의 주소입니다.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>대상 Milvus 서버의 사용자 이름입니다. 이 매개변수는 Milvus 서버에 사용자 인증이 활성화된 경우 필요합니다. 자세한 내용은 <a href="/docs/ko/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>대상 Milvus 서버의 비밀번호입니다. Milvus 서버에 사용자 인증이 활성화된 경우 이 파라미터가 필요합니다. 자세한 내용은 <a href="/docs/ko/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>대상 Milvus 서버의 사용자 이름입니다. 이 매개변수는 Milvus 서버에 사용자 인증이 활성화된 경우 필요합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>대상 Milvus 서버의 비밀번호입니다. Milvus 서버에 사용자 인증이 활성화된 경우 이 파라미터가 필요합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
 </tbody>
 </table>
 </li>

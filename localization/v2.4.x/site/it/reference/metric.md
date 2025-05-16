@@ -187,5 +187,5 @@ Per ulteriori informazioni, consultare <a href="https://en.wikipedia.org/wiki/Un
         ></path>
       </svg>
     </button></h2><ul>
-<li>Per saperne di più sui <a href="/docs/it/index.md">tipi di indice</a> supportati in Milvus.</li>
+<li>Per saperne di più sui <a href="/docs/it/v2.4.x/index.md">tipi di indice</a> supportati in Milvus.</li>
 </ul>

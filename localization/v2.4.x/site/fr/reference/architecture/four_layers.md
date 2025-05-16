@@ -119,5 +119,5 @@ title: Désagrégation stockage/informatique
         ></path>
       </svg>
     </button></h2><ul>
-<li>Lisez <a href="/docs/fr/main_components.md">Composants principaux</a> pour plus de détails sur l'architecture Milvus.</li>
+<li>Lisez <a href="/docs/fr/v2.4.x/main_components.md">Composants principaux</a> pour plus de détails sur l'architecture Milvus.</li>
 </ul>

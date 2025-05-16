@@ -74,8 +74,8 @@ title: Knowhere
     </button></h2><p>以下はKnowhereがFaissより優れている点です。</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">BitsetViewのサポート</h4><p>Milvusは &quot;ソフト削除 &quot;を実現するためにビットセット機構を導入しています。ソフト削除されたベクトルはデータベースに存在しますが、ベクトルの類似性検索やクエリの際に計算されることはありません。</p>
 <p>ビットセットの各ビットはインデックス付きベクトルに対応する。あるベクトルがビットセットで "1 "とマークされた場合、そのベクトルはソフト削除され、ベクトル検索には関与しないことを意味する。bitset パラメータは、CPU および GPU インデックスを含む、Knowhere で公開されているすべての Faiss インデックス照会 API に適用されます。</p>
-<p>bitset メカニズムの詳細については、<a href="/docs/ja/bitset.md">bitset</a> を参照してください。</p>
-<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">バイナリ・ベクトルのインデックス作成における複数の類似性メトリクスのサポート</h4><p>Knowhereは<a href="/docs/ja/metric.md#Hamming-distance">ハミング</a>、<a href="/docs/ja/metric.md#Jaccard-distance">Jaccard</a>、<a href="/docs/ja/metric.md#Tanimoto-distance">Tanimoto</a>、<a href="/docs/ja/metric.md#Superstructure">Superstructure</a>、<a href="/docs/ja/metric.md#Substructure">Substructureを</a>サポートしています。Jaccard と Tanimoto は 2 つのサンプル・セット間の類似性を測定するために使用でき、Superstructure と Substructure は化学構造の類似性を測定するために使用できます。</p>
+<p>bitset メカニズムの詳細については、<a href="/docs/ja/v2.4.x/bitset.md">bitset</a> を参照してください。</p>
+<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">バイナリ・ベクトルのインデックス作成における複数の類似性メトリクスのサポート</h4><p>Knowhereは<a href="/docs/ja/v2.4.x/metric.md#Hamming-distance">ハミング</a>、<a href="/docs/ja/v2.4.x/metric.md#Jaccard-distance">Jaccard</a>、<a href="/docs/ja/v2.4.x/metric.md#Tanimoto-distance">Tanimoto</a>、<a href="/docs/ja/v2.4.x/metric.md#Superstructure">Superstructure</a>、<a href="/docs/ja/v2.4.x/metric.md#Substructure">Substructureを</a>サポートしています。Jaccard と Tanimoto は 2 つのサンプル・セット間の類似性を測定するために使用でき、Superstructure と Substructure は化学構造の類似性を測定するために使用できます。</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">AVX512命令セットのサポート</h4><p>Faissがすでにサポートしている<a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>、<a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a>、<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>以外に、Knowhereは<a href="https://en.wikipedia.org/wiki/AVX-512">AVX512も</a>サポートしています。AVX512はAVX2と比較して<a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">インデックス構築とクエリの性能を20～30%向上させる</a>ことができます。</p>
 <h4 id="Automatic-SIMD-instruction-selection" class="common-anchor-header">SIMD命令の自動選択</h4><p>Knowhereは、あらゆるCPUプロセッサ（オンプレミスとクラウドの両方のプラットフォーム）で適切なSIMD命令（SIMD SSE、AVX、AVX2、AVX512など）を自動的に呼び出すことをサポートしているため、ユーザーはコンパイル時にSIMDフラグ（"-msse4 "など）を手動で指定する必要がありません。</p>
 <p>KnowhereはFaissのコードベースをリファクタリングして構築されています。SIMDアクセラレーションに依存する一般的な関数（類似度計算など）はファクタアウトされます。次に、各関数について4つのバージョン（すなわち、SSE、AVX、AVX2、AVX512）が実装され、それぞれが別々のソースファイルに入れられます。その後、ソースファイルは対応する SIMD フラグで個別にコンパイルされます。したがって、Knowhere は実行時に現在の CPU フラグに基づいて最適な SIMD 命令を自動的に選択し、フッキングを使用して適切な関数ポインタをリンクします。</p>
@@ -173,7 +173,7 @@ title: Knowhere
       </svg>
     </button></h2><p>MilvusでKnowhereがどのように動作するのかを学んだ後は、次のことを行ってください：</p>
 <ul>
-<li><p><a href="/docs/ja/index.md">Milvusがサポートする様々なタイプのインデックスについて</a>学ぶ。</p></li>
-<li><p><a href="/docs/ja/bitset.md">ビットセットメカニズムについて</a>学ぶ。</p></li>
-<li><p>Milvusで<a href="/docs/ja/data_processing.md">データがどのように処理されるかを</a>理解する。</p></li>
+<li><p><a href="/docs/ja/v2.4.x/index.md">Milvusがサポートする様々なタイプのインデックスについて</a>学ぶ。</p></li>
+<li><p><a href="/docs/ja/v2.4.x/bitset.md">ビットセットメカニズムについて</a>学ぶ。</p></li>
+<li><p>Milvusで<a href="/docs/ja/v2.4.x/data_processing.md">データがどのように処理されるかを</a>理解する。</p></li>
 </ul>

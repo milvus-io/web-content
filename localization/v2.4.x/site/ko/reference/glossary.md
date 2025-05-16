@@ -81,7 +81,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ko/birdwatcher_overview.md">Birdwatcher는</a> Milvus용 디버깅 도구로, etcd에 연결하여 Milvus 서버의 상태를 모니터링하고 실시간으로 조정할 수 있습니다. 또한 etcd 파일 백업을 지원하여 개발자의 문제 해결을 돕습니다.</p>
+    </button></h2><p><a href="/docs/ko/v2.4.x/birdwatcher_overview.md">Birdwatcher는</a> Milvus용 디버깅 도구로, etcd에 연결하여 Milvus 서버의 상태를 모니터링하고 실시간으로 조정할 수 있습니다. 또한 etcd 파일 백업을 지원하여 개발자의 문제 해결을 돕습니다.</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">벌크 라이터<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,7 +161,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 컬렉션은 관계형 데이터베이스 관리 시스템(RDBMS)의 테이블에 해당합니다. 컬렉션은 엔티티를 저장하고 관리하는 데 사용되는 주요 논리적 객체입니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md">컬렉션 관리를</a> 참조하세요.</p>
+    </button></h2><p>Milvus에서 컬렉션은 관계형 데이터베이스 관리 시스템(RDBMS)의 테이블에 해당합니다. 컬렉션은 엔티티를 저장하고 관리하는 데 사용되는 주요 논리적 객체입니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/manage-collections.md">컬렉션 관리를</a> 참조하세요.</p>
 <h2 id="Dependency" class="common-anchor-header">종속성<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,7 +193,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>동적 스키마를 사용하면 기존 스키마를 수정하지 않고도 새 필드가 있는 엔티티를 컬렉션에 삽입할 수 있습니다. 즉, 컬렉션의 전체 스키마를 몰라도 데이터를 삽입할 수 있으며 아직 정의되지 않은 필드를 포함할 수 있습니다. 컬렉션을 만들 때 동적 필드를 활성화하여 이 스키마 없는 기능을 활성화할 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드 활성화를</a> 참조하세요.</p>
+    </button></h2><p>동적 스키마를 사용하면 기존 스키마를 수정하지 않고도 새 필드가 있는 엔티티를 컬렉션에 삽입할 수 있습니다. 즉, 컬렉션의 전체 스키마를 몰라도 데이터를 삽입할 수 있으며 아직 정의되지 않은 필드를 포함할 수 있습니다. 컬렉션을 만들 때 동적 필드를 활성화하여 이 스키마 없는 기능을 활성화할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/enable-dynamic-field.md">동적 필드 활성화를</a> 참조하세요.</p>
 <h2 id="Embeddings" class="common-anchor-header">임베딩<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +226,7 @@ summary: ''
         ></path>
       </svg>
     </button></h2><p>엔티티는 실제 객체를 나타내는 필드 그룹으로 구성됩니다. Milvus의 각 엔티티는 고유한 기본 키로 표시됩니다.</p>
-<p>기본 키를 사용자 지정할 수 있습니다. 수동으로 구성하지 않으면 Milvus가 자동으로 기본 키를 엔티티에 할당합니다. 기본 키를 사용자 지정하도록 선택하는 경우 현재 Milvus는 기본 키 중복 제거를 지원하지 않는다는 점에 유의하세요. 따라서 동일한 컬렉션에 중복된 기본 키가 있을 수 있습니다. 자세한 내용은 <a href="/docs/ko/insert-update-delete.md#Insert-entities">엔티티 삽입을</a> 참조하세요.</p>
+<p>기본 키를 사용자 지정할 수 있습니다. 수동으로 구성하지 않으면 Milvus가 자동으로 기본 키를 엔티티에 할당합니다. 기본 키를 사용자 지정하도록 선택하는 경우 현재 Milvus는 기본 키 중복 제거를 지원하지 않는다는 점에 유의하세요. 따라서 동일한 컬렉션에 중복된 기본 키가 있을 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/insert-update-delete.md#Insert-entities">엔티티 삽입을</a> 참조하세요.</p>
 <h2 id="Field" class="common-anchor-header">필드<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -274,7 +274,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>필터링된 검색은 벡터 검색에 스칼라 필터를 적용하여 특정 기준에 따라 검색 결과를 세분화할 수 있도록 합니다. 자세한 내용은 <a href="/docs/ko/single-vector-search.md#Filtered-search">필터링된 검색을</a> 참조하세요.</p>
+    </button></h2><p>필터링된 검색은 벡터 검색에 스칼라 필터를 적용하여 특정 기준에 따라 검색 결과를 세분화할 수 있도록 합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/single-vector-search.md#Filtered-search">필터링된 검색을</a> 참조하세요.</p>
 <h2 id="Hybrid-search" class="common-anchor-header">하이브리드 검색<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +290,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">하이브리드 검색은</a> Milvus 2.4.0부터 하이브리드 검색을 위한 API입니다. 여러 벡터 필드를 검색하고 이를 융합할 수 있습니다. 스칼라 필드 필터링과 결합된 벡터 검색의 경우 &quot;필터링된 검색&quot;이라고 합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">하이브리드 검색은</a> Milvus 2.4.0부터 하이브리드 검색을 위한 API입니다. 여러 벡터 필드를 검색하고 이를 융합할 수 있습니다. 스칼라 필드 필터링과 결합된 벡터 검색의 경우 &quot;필터링된 검색&quot;이라고 합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
 <h2 id="Index" class="common-anchor-header">색인<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -546,7 +546,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 2.4.0부터 하나의 컬렉션에 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
+    </button></h2><p>Milvus는 2.4.0부터 하나의 컬렉션에 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
 <h2 id="Partition" class="common-anchor-header">파티션<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -42,7 +42,7 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
   port: <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   maxMessageSize: <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni, vedere le <a href="/docs/it/configure_pulsar.md">configurazioni relative a Pulsar</a>.</p>
+<p>Per ulteriori informazioni, vedere le <a href="/docs/it/v2.4.x/configure_pulsar.md">configurazioni relative a Pulsar</a>.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Eseguire Milvus</h3><p>Eseguire il seguente comando per avviare Milvus che utilizza le configurazioni di Pulsar.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -63,7 +63,7 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
         ></path>
       </svg>
     </button></h2><p>Per i cluster Milvus su K8, è possibile configurare Pulsar con lo stesso comando di avvio di Milvus. In alternativa, è possibile configurare Pulsar utilizzando il file <code translate="no">values.yml</code> nel percorso /charts/milvus nel repository <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> prima di avviare Milvus.</p>
-<p>Per i dettagli su come configurare Milvus usando Helm, fare riferimento a <a href="/docs/it/configure-helm.md">Configurare Milvus con i grafici Helm</a>. Per i dettagli sulle voci di configurazione relative a Pulsar, consultare <a href="/docs/it/configure_pulsar.md">Configurazioni relative a Pulsar</a>. |</p>
+<p>Per i dettagli su come configurare Milvus usando Helm, fare riferimento a <a href="/docs/it/v2.4.x/configure-helm.md">Configurare Milvus con i grafici Helm</a>. Per i dettagli sulle voci di configurazione relative a Pulsar, consultare <a href="/docs/it/v2.4.x/configure_pulsar.md">Configurazioni relative a Pulsar</a>. |</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Uso del file YAML</h3><ol>
 <li>Configurare la sezione <code translate="no">externalConfigFiles</code> nel file <code translate="no">values.yaml</code>.</li>
 </ol>
@@ -98,7 +98,7 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
         ></path>
       </svg>
     </button></h2><p>Per i cluster Milvus su K8s, è possibile configurare Kafka con lo stesso comando che avvia Milvus. In alternativa, è possibile configurare Kafka utilizzando il file <code translate="no">values.yml</code> nel percorso /charts/milvus nel repository <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> prima di avviare Milvus.</p>
-<p>Per i dettagli su come configurare Milvus usando Helm, fare riferimento a <a href="/docs/it/configure-helm.md">Configurare Milvus con i grafici Helm</a>. Per i dettagli sulle voci di configurazione relative a Pulsar, fare riferimento a <a href="/docs/it/configure_pulsar.md">Configurazioni relative a Pulsar</a>.</p>
+<p>Per i dettagli su come configurare Milvus usando Helm, fare riferimento a <a href="/docs/it/v2.4.x/configure-helm.md">Configurare Milvus con i grafici Helm</a>. Per i dettagli sulle voci di configurazione relative a Pulsar, fare riferimento a <a href="/docs/it/v2.4.x/configure_pulsar.md">Configurazioni relative a Pulsar</a>.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Uso del file YAML</h3><ol>
 <li>Configurare la sezione <code translate="no">externalConfigFiles</code> nel file <code translate="no">values.yaml</code> se si desidera utilizzare Kafka come sistema di archiviazione dei messaggi.</li>
 </ol>
@@ -132,7 +132,7 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus standalone utilizza RocksMQ come archivio messaggi predefinito. Per i passi dettagliati su come configurare Milvus con Helm, fate riferimento a <a href="/docs/it/configure-helm.md">Configurare Milvus con i grafici di Helm</a>. Per i dettagli sulle voci di configurazione relative a RocksMQ, fate riferimento a <a href="/docs/it/configure_rocksmq.md">Configurazioni relative a RocksMQ</a>.</p>
+    </button></h2><p>Milvus standalone utilizza RocksMQ come archivio messaggi predefinito. Per i passi dettagliati su come configurare Milvus con Helm, fate riferimento a <a href="/docs/it/v2.4.x/configure-helm.md">Configurare Milvus con i grafici di Helm</a>. Per i dettagli sulle voci di configurazione relative a RocksMQ, fate riferimento a <a href="/docs/it/v2.4.x/configure_rocksmq.md">Configurazioni relative a RocksMQ</a>.</p>
 <ul>
 <li><p>Se si avvia Milvus con RocksMQ e si vogliono modificare le sue impostazioni, si può eseguire <code translate="no">helm upgrade -f</code> con le impostazioni modificate nel seguente file YAML.</p></li>
 <li><p>Se avete installato Milvus standalone usando Helm con un message store diverso da RocksMQ e volete tornare a RocksMQ, eseguite <code translate="no">helm upgrade -f</code> con il seguente file YAML dopo aver scaricato tutte le collezioni e fermato Milvus.</p></li>
@@ -171,7 +171,7 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS è un archivio di messaggi sperimentale alternativo a RocksMQ. Per informazioni dettagliate su come configurare Milvus con Helm, consultare <a href="/docs/it/configure-helm.md">Configurare Milvus con i grafici di Helm</a>. Per i dettagli sulle voci di configurazione relative a RocksMQ, fate riferimento a <a href="/docs/it/configure_natsmq.md">Configurazioni relative a NATS</a>.</p>
+    </button></h2><p>NATS è un archivio di messaggi sperimentale alternativo a RocksMQ. Per informazioni dettagliate su come configurare Milvus con Helm, consultare <a href="/docs/it/v2.4.x/configure-helm.md">Configurare Milvus con i grafici di Helm</a>. Per i dettagli sulle voci di configurazione relative a RocksMQ, fate riferimento a <a href="/docs/it/v2.4.x/configure_natsmq.md">Configurazioni relative a NATS</a>.</p>
 <ul>
 <li><p>Se si avvia Milvus con NATS e si vogliono modificare le sue impostazioni, si può eseguire <code translate="no">helm upgrade -f</code> con le impostazioni modificate nel seguente file YAML.</p></li>
 <li><p>Se avete installato Milvus standalone con un message store diverso da NATS e volete cambiarlo con NATS, eseguite <code translate="no">helm upgrade -f</code> con il seguente file YAML dopo aver scaricato tutte le collezioni e fermato Milvus.</p></li>
@@ -235,6 +235,6 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
       </svg>
     </button></h2><p>Scoprite come configurare le altre dipendenze di Milvus con Docker Compose o Helm:</p>
 <ul>
-<li><a href="/docs/it/deploy_s3.md">Configurazione dell'archiviazione degli oggetti con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/deploy_etcd.md">Configurazione del Meta Storage con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/v2.4.x/deploy_s3.md">Configurazione dell'archiviazione degli oggetti con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/v2.4.x/deploy_etcd.md">Configurazione del Meta Storage con Docker Compose o Helm</a></li>
 </ul>

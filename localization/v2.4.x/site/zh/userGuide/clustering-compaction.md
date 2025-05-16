@@ -134,7 +134,7 @@ common:
 </table>
 </li>
 </ul>
-<p>要将上述更改应用到 Milvus 群集，请按照 "<a href="/docs/zh/configure-helm.md">使用 Helm 配置 Milvus</a>"和 "<a href="/docs/zh/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>"中的步骤<a href="/docs/zh/configure_operator.md">操作</a>。</p>
+<p>要将上述更改应用到 Milvus 群集，请按照 "<a href="/docs/zh/v2.4.x/configure-helm.md">使用 Helm 配置 Milvus</a>"和 "<a href="/docs/zh/v2.4.x/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>"中的步骤<a href="/docs/zh/v2.4.x/configure_operator.md">操作</a>。</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Collection 配置</h3><p>要在特定 Collections 中进行聚类压缩，应从 Collections 中选择一个标量字段作为聚类密钥。</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

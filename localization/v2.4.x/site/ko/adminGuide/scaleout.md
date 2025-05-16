@@ -20,7 +20,7 @@ title: Milvus 클러스터 확장
         ></path>
       </svg>
     </button></h1><p>Milvus는 구성 요소의 수평적 확장을 지원합니다. 즉, 필요에 따라 각 유형의 워커 노드 수를 늘리거나 줄일 수 있습니다.</p>
-<p>이 항목에서는 Milvus 클러스터에서 스케일 아웃 및 스케일링하는 방법에 대해 설명합니다. 확장하기 전에 이미 <a href="/docs/ko/install_cluster-helm.md">Milvus 클러스터를 설치했다고</a> 가정합니다. 또한 시작하기 전에 <a href="/docs/ko/architecture_overview.md">Milvus 아키텍처를</a> 숙지하는 것이 좋습니다.</p>
+<p>이 항목에서는 Milvus 클러스터에서 스케일 아웃 및 스케일링하는 방법에 대해 설명합니다. 확장하기 전에 이미 <a href="/docs/ko/v2.4.x/install_cluster-helm.md">Milvus 클러스터를 설치했다고</a> 가정합니다. 또한 시작하기 전에 <a href="/docs/ko/v2.4.x/architecture_overview.md">Milvus 아키텍처를</a> 숙지하는 것이 좋습니다.</p>
 <p>이 튜토리얼에서는 3개의 쿼리 노드 스케일아웃을 예로 들어 설명합니다. 다른 유형의 노드를 스케일아웃하려면 명령줄에서 <code translate="no">queryNode</code> 를 해당 노드 유형으로 바꾸세요.</p>
 <div class="alert note">
 <p>밀버스 오퍼레이터로 클러스터를 확장하는 방법에 대한 자세한 내용은 <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">밀버스 오퍼레이터로 클러스터 확장하기를</a> 참조하세요.</p>
@@ -50,7 +50,7 @@ title: Milvus 클러스터 확장
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>스케일업</span> </span></p>
-<p><a href="/docs/ko/architecture_overview.md">Milvus 아키텍처에</a> 따르면 상태 비저장 워커 노드에는 쿼리 노드, 데이터 노드, 인덱스 노드 및 프록시가 포함됩니다. 따라서 이러한 유형의 노드를 비즈니스 요구와 애플리케이션 시나리오에 맞게 스케일아웃할 수 있습니다. Milvus 클러스터는 수동 또는 자동으로 스케일아웃할 수 있습니다.</p>
+<p><a href="/docs/ko/v2.4.x/architecture_overview.md">Milvus 아키텍처에</a> 따르면 상태 비저장 워커 노드에는 쿼리 노드, 데이터 노드, 인덱스 노드 및 프록시가 포함됩니다. 따라서 이러한 유형의 노드를 비즈니스 요구와 애플리케이션 시나리오에 맞게 스케일아웃할 수 있습니다. Milvus 클러스터는 수동 또는 자동으로 스케일아웃할 수 있습니다.</p>
 <p>일반적으로 Milvus 클러스터가 과도하게 사용되는 경우 생성한 클러스터를 스케일아웃해야 합니다. 다음은 Milvus 클러스터를 스케일아웃해야 할 수 있는 몇 가지 일반적인 상황입니다:</p>
 <ul>
 <li>일정 기간 동안 CPU 및 메모리 사용률이 높은 경우.</li>
@@ -166,16 +166,16 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
     </button></h2><ul>
 <li><p>Milvus 서비스를 모니터링하고 알림을 생성하는 방법을 배우려면 다음과 같이 하세요:</p>
 <ul>
-<li><a href="/docs/ko/monitor.md">Kubernetes의 Prometheus Operator로 Milvus 모니터링</a> 배우기</li>
+<li><a href="/docs/ko/v2.4.x/monitor.md">Kubernetes의 Prometheus Operator로 Milvus 모니터링</a> 배우기</li>
 </ul></li>
 <li><p>클라우드에 클러스터를 배포할 준비가 되셨다면:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>
 </ul></li>
 <li><p>리소스를 할당하는 방법에 대한 지침을 찾고 계신다면 이 문서를 참조하세요:</p>
 <ul>
-<li><a href="/docs/ko/allocate.md#standalone">Kubernetes에서 리소스 할당하기</a></li>
+<li><a href="/docs/ko/v2.4.x/allocate.md#standalone">Kubernetes에서 리소스 할당하기</a></li>
 </ul></li>
 </ul>

@@ -137,7 +137,7 @@ common:
 </table>
 </li>
 </ul>
-<p>لتطبيق التغييرات المذكورة أعلاه على مجموعة Milvus الخاصة بك، يرجى اتباع الخطوات في <a href="/docs/ar/configure-helm.md">تكوين Milvus مع Helm</a> <a href="/docs/ar/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
+<p>لتطبيق التغييرات المذكورة أعلاه على مجموعة Milvus الخاصة بك، يرجى اتباع الخطوات في <a href="/docs/ar/v2.4.x/configure-helm.md">تكوين Milvus مع Helm</a> <a href="/docs/ar/v2.4.x/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">تكوين التجميع</h3><p>لضغط التجميع في مجموعة محددة، يجب عليك تحديد حقل قياسي من المجموعة كمفتاح التجميع.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

@@ -22,11 +22,11 @@ title: 수거 횟수 제한 설정
 <p>구성은 Milvus 인스턴스를 설치하는 방식에 따라 다릅니다.</p>
 <ul>
 <li><p>헬름 차트를 사용하여 설치한 Milvus 인스턴스의 경우</p>
-<p><code translate="no">config</code> 섹션 아래의 <code translate="no">values.yaml</code> 파일에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 Milvus 구성을</a> 참조한다.</p></li>
+<p><code translate="no">config</code> 섹션 아래의 <code translate="no">values.yaml</code> 파일에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/configure-helm.md">헬름 차트로 Milvus 구성을</a> 참조한다.</p></li>
 <li><p>Docker Compose를 사용하여 설치한 Milvus 인스턴스의 경우</p>
-<p>Milvus 인스턴스를 시작할 때 사용한 <code translate="no">milvus.yaml</code> 파일에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/configure-docker.md">Docker Compose로 Milvus 구성을</a> 참조하세요.</p></li>
+<p>Milvus 인스턴스를 시작할 때 사용한 <code translate="no">milvus.yaml</code> 파일에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/configure-docker.md">Docker Compose로 Milvus 구성을</a> 참조하세요.</p></li>
 <li><p>Operator를 사용하여 설치한 Milvus 인스턴스의 경우</p>
-<p><code translate="no">Milvus</code> 사용자 지정 리소스의 <code translate="no">spec.components</code> 섹션에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/configure_operator.md">Operator로 Milvus 구성을</a> 참조하세요.</p></li>
+<p><code translate="no">Milvus</code> 사용자 지정 리소스의 <code translate="no">spec.components</code> 섹션에 구성을 추가합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/configure_operator.md">Operator로 Milvus 구성을</a> 참조하세요.</p></li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">구성 옵션<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

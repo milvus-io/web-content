@@ -37,7 +37,7 @@ title: Milvus混合搜索寻回犬
     </button></h2><blockquote>
 <p><a href="https://milvus.io/docs">Milvus</a>是一个开源向量数据库，用于支持嵌入式相似性搜索和人工智能应用。Milvus 使非结构化数据搜索更易于访问，无论部署环境如何，都能提供一致的用户体验。</p>
 </blockquote>
-<p>这将帮助你开始使用 Milvus 混合搜索<a href="/docs/concepts/#retrievers">检索器</a>，它结合了密集向量搜索和稀疏向量搜索<a href="/docs/concepts/#retrievers">的</a>优势。有关所有<code translate="no">MilvusCollectionHybridSearchRetriever</code> 功能和配置的详细文档，请访问<a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">API 参考</a>。</p>
+<p>这将帮助你开始使用 Milvus 混合搜索<a href="/docs/concepts/v2.4.x/#retrievers">检索器</a>，它结合了密集向量搜索和稀疏向量搜索<a href="/docs/concepts/v2.4.x/#retrievers">的</a>优势。有关所有<code translate="no">MilvusCollectionHybridSearchRetriever</code> 功能和配置的详细文档，请访问<a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">API 参考</a>。</p>
 <p>另请参阅 Milvus 多向量搜索<a href="https://milvus.io/docs/multi-vector-search.md">文档</a>。</p>
 <h3 id="Integration-details" class="common-anchor-header">集成详情</h3><table>
 <thead>

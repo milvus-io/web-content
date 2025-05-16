@@ -35,7 +35,7 @@ title: 일관성
         ></path>
       </svg>
     </button></h2><p>분산 데이터베이스의 일관성이란 특정 시간에 데이터를 쓰거나 읽을 때 모든 노드 또는 복제본이 동일한 데이터 보기를 갖도록 보장하는 속성을 의미합니다.</p>
-<p>Milvus는 네 가지 일관성 수준, 즉 강력, 경계가 있는 유효성 유지, 세션, 최종의 일관성 수준을 지원합니다. Milvus의 기본 일관성 수준은 제한적 무결성입니다. <a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a>, <a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a> 또는 <a href="/docs/ko/get-and-scalar-query.md">쿼리를</a> 수행할 때 일관성 수준을 애플리케이션에 가장 적합하도록 쉽게 조정할 수 있습니다.</p>
+<p>Milvus는 네 가지 일관성 수준, 즉 강력, 경계가 있는 유효성 유지, 세션, 최종의 일관성 수준을 지원합니다. Milvus의 기본 일관성 수준은 제한적 무결성입니다. <a href="/docs/ko/v2.4.x/single-vector-search.md">단일 벡터 검색</a>, <a href="/docs/ko/v2.4.x/multi-vector-search.md">하이브리드 검색</a> 또는 <a href="/docs/ko/v2.4.x/get-and-scalar-query.md">쿼리를</a> 수행할 때 일관성 수준을 애플리케이션에 가장 적합하도록 쉽게 조정할 수 있습니다.</p>
 <h2 id="Consistency-levels" class="common-anchor-header">일관성 수준<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,8 +118,8 @@ title: 일관성
       </svg>
     </button></h2><ul>
 <li>일관성 수준을 조정하는 방법을 알아보세요:<ul>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색 수행</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색 수행</a></li>
-<li><a href="/docs/ko/get-and-scalar-query.md">스칼라 쿼리 수행</a></li>
+<li><a href="/docs/ko/v2.4.x/single-vector-search.md">단일 벡터 검색 수행</a></li>
+<li><a href="/docs/ko/v2.4.x/multi-vector-search.md">하이브리드 검색 수행</a></li>
+<li><a href="/docs/ko/v2.4.x/get-and-scalar-query.md">스칼라 쿼리 수행</a></li>
 </ul></li>
 </ul>

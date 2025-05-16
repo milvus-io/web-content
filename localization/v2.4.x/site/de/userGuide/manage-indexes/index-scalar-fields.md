@@ -192,7 +192,7 @@ client.createIndex(createIndexReq);
 <p>Der Typ des zu erstellenden skalaren Indexes. Bei impliziter Indizierung lassen Sie diesen Parameter leer oder lassen ihn weg.</p>
 <p>Für die benutzerdefinierte Indizierung sind folgende Werte gültig:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (empfohlen) Ein invertierter Index besteht aus einem Begriffswörterbuch, das alle tokenisierten Wörter in alphabetischer Reihenfolge enthält. Einzelheiten finden Sie unter <a href="/docs/de/scalar_index.md">Skalarer Index</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (empfohlen) Ein invertierter Index besteht aus einem Begriffswörterbuch, das alle tokenisierten Wörter in alphabetischer Reihenfolge enthält. Einzelheiten finden Sie unter <a href="/docs/de/v2.4.x/scalar_index.md">Skalarer Index</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Sortiert skalare Felder mit dem Standard-Sortieralgorithmus der Vorlagenbibliothek. Unterstützt nur numerische Felder (z. B. INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Eine Baumdatenstruktur für schnelle Präfix-Suchen und -Abrufe. Unterstützt VARCHAR-Felder.</p></li>
 </ul></li>
@@ -216,7 +216,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(String</em>) Der Name des skalaren Feldes, das indiziert werden soll.</li>
 <li><strong>indexName</strong><em>(String</em>) Der Name des zu erstellenden skalaren Indexes. Jedes Skalarfeld unterstützt einen Index.</li>
 <li><strong>indexType</strong><em>(String</em>) Der Typ des zu erstellenden skalaren Indexes. Für implizite Indizierung lassen Sie diesen Parameter leer oder lassen ihn weg. Für benutzerdefinierte Indizierung sind folgende Werte gültig:<ul>
-<li><strong>INVERTED</strong>: (Empfohlen) Ein invertierter Index besteht aus einem Begriffswörterbuch, das alle tokenisierten Wörter in alphabetischer Reihenfolge enthält. Einzelheiten finden Sie unter <a href="/docs/de/scalar_index.md">Skalarer Index</a>.</li>
+<li><strong>INVERTED</strong>: (Empfohlen) Ein invertierter Index besteht aus einem Begriffswörterbuch, das alle tokenisierten Wörter in alphabetischer Reihenfolge enthält. Einzelheiten finden Sie unter <a href="/docs/de/v2.4.x/scalar_index.md">Skalarer Index</a>.</li>
 <li><strong>STL_SORT</strong>: Sortiert skalare Felder mit dem Standard-Sortieralgorithmus der Vorlagenbibliothek. Unterstützt boolesche und numerische Felder (z. B. INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Eine Baumdatenstruktur für schnelle Präfix-Suchen und -Abrufe. Unterstützt VARCHAR-Felder.</li>
 </ul></li>
@@ -237,7 +237,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(string</em>) Der Name des skalaren Feldes, das indiziert werden soll.</li>
 <li><strong>index_name</strong><em>(string</em>) Der Name des zu erstellenden skalaren Indexes. Jedes Skalarfeld unterstützt einen Index.</li>
 <li><strong>index_type</strong><em>(string</em>) Der Typ des zu erstellenden skalaren Indexes. Für implizite Indizierung lassen Sie diesen Parameter leer oder lassen ihn weg. Für benutzerdefinierte Indizierung sind folgende Werte gültig:<ul>
-<li><strong>INVERTED</strong>: (empfohlen) Ein invertierter Index besteht aus einem Begriffswörterbuch, das alle tokenisierten Wörter in alphabetischer Reihenfolge enthält. Einzelheiten finden Sie unter <a href="/docs/de/scalar_index.md">Skalarer Index</a>.</li>
+<li><strong>INVERTED</strong>: (empfohlen) Ein invertierter Index besteht aus einem Begriffswörterbuch, das alle tokenisierten Wörter in alphabetischer Reihenfolge enthält. Einzelheiten finden Sie unter <a href="/docs/de/v2.4.x/scalar_index.md">Skalarer Index</a>.</li>
 <li><strong>STL_SORT</strong>: Sortiert skalare Felder mit dem Standard-Sortieralgorithmus der Vorlagenbibliothek. Unterstützt boolesche und numerische Felder (z. B. INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Eine Baumdatenstruktur für schnelle Präfix-Suchen und -Abrufe. Unterstützt VARCHAR-Felder.</li>
 </ul></li>

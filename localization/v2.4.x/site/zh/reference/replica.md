@@ -19,7 +19,7 @@ title: 内存内复制
         ></path>
       </svg>
     </button></h1><p>本主题介绍 Milvus 中的内存中复制（replication）机制，该机制可在工作内存中实现多个网段复制，以提高性能和可用性。</p>
-<p>有关如何配置内存中复制的信息，请参阅<a href="/docs/zh/configure_querynode.md#queryNodereplicas">查询节点相关配置</a>。</p>
+<p>有关如何配置内存中复制的信息，请参阅<a href="/docs/zh/v2.4.x/configure_querynode.md#queryNodereplicas">查询节点相关配置</a>。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

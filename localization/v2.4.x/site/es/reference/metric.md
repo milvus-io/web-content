@@ -187,5 +187,5 @@ Para más información, consulte <a href="https://en.wikipedia.org/wiki/Unit_vec
         ></path>
       </svg>
     </button></h2><ul>
-<li>Aprenda más sobre los <a href="/docs/es/index.md">tipos de índice</a> soportados en Milvus.</li>
+<li>Aprenda más sobre los <a href="/docs/es/v2.4.x/index.md">tipos de índice</a> soportados en Milvus.</li>
 </ul>

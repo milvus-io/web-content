@@ -26,27 +26,27 @@ title: Ikhtisar Tutorial
 <tr><th>Tutorial</th><th>Kasus Penggunaan</th><th>Fitur-fitur terkait Milvus</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/id/build-rag-with-milvus.md">Membangun RAG dengan Milvus</a></td><td>RAG</td><td>Pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/how_to_enhance_your_rag.md">RAG tingkat lanjut</a></td><td>RAG</td><td>Pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/full_text_search_with_milvus.md">Pencarian Teks Lengkap dengan Milvus</a></td><td>Mulai Cepat</td><td>Pencarian Teks Lengkap</td></tr>
-<tr><td><a href="/docs/id/hybrid_search_with_milvus.md">Pencarian Hibrida dengan Milvus</a></td><td>Pencarian Hibrida</td><td>pencarian hibrida, multi vektor, penyematan padat, penyematan jarang</td></tr>
-<tr><td><a href="/docs/id/image_similarity_search.md">Pencarian Gambar dengan Milvus</a></td><td>Pencarian Semantik</td><td>pencarian vektor, bidang dinamis</td></tr>
-<tr><td><a href="/docs/id/multimodal_rag_with_milvus.md">RAG multimodal dengan Milvus</a></td><td>RAG</td><td>pencarian vektor, bidang dinamis</td></tr>
-<tr><td><a href="/docs/id/multimodal_rag_with_milvus.md">Pencarian Multimodal menggunakan Multi Vektor</a></td><td>Pencarian Semantik</td><td>multi vektor, pencarian hibrida</td></tr>
-<tr><td><a href="/docs/id/graph_rag_with_milvus.md">Grafik RAG dengan Milvus</a></td><td>RAG</td><td>pencarian grafik</td></tr>
-<tr><td><a href="/docs/id/contextual_retrieval_with_milvus.md">Pencarian Kontekstual dengan Milvus</a></td><td>Memulai dengan cepat</td><td>Pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/hdbscan_clustering_with_milvus.md">Pengelompokan HDBSCAN dengan Milvus</a></td><td>Mulai cepat</td><td>pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/use_ColPali_with_milvus.md">Gunakan ColPali untuk Pencarian Multi-Modal dengan Milvus</a></td><td>Mulai Cepat</td><td>pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/vector_visualization.md">Visualisasi Vektor</a></td><td>Mulai Cepat</td><td>pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/movie_recommendation_with_milvus.md">Rekomendasi Film dengan Milvus</a></td><td>Sistem Rekomendasi</td><td>pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/funnel_search_with_matryoshka.md">Pencarian Corong dengan Penyematan Matryoshka</a></td><td>Mulai cepat</td><td>Pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/question_answering_system.md">Sistem Penjawaban Pertanyaan</a></td><td>Menjawab Pertanyaan</td><td>Pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/recommendation_system.md">Sistem Rekomendasi</a></td><td>Sistem Rekomendasi</td><td>Pencarian Vektor</td></tr>
-<tr><td><a href="/docs/id/video_similarity_search.md">Pencarian Kemiripan Video</a></td><td>Pencarian Semantik</td><td>Pencarian Vektor</td></tr>
-<tr><td><a href="/docs/id/audio_similarity_search.md">Pencarian Kemiripan Audio</a></td><td>Pencarian Semantik</td><td>pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/dna_sequence_classification.md">Klasifikasi DNA</a></td><td>Klasifikasi</td><td>pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/text_search_engine.md">Mesin Pencari Teks</a></td><td>Pencarian Semantik</td><td>Pencarian Vektor</td></tr>
-<tr><td><a href="/docs/id/text_image_search.md">Cari Gambar dengan Teks</a></td><td>Pencarian Semantik</td><td>Pencarian Vektor</td></tr>
-<tr><td><a href="/docs/id/image_deduplication_system.md">Deduplikasi Gambar</a></td><td>Deduplikasi</td><td>pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/build-rag-with-milvus.md">Membangun RAG dengan Milvus</a></td><td>RAG</td><td>Pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/how_to_enhance_your_rag.md">RAG tingkat lanjut</a></td><td>RAG</td><td>Pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/full_text_search_with_milvus.md">Pencarian Teks Lengkap dengan Milvus</a></td><td>Mulai Cepat</td><td>Pencarian Teks Lengkap</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/hybrid_search_with_milvus.md">Pencarian Hibrida dengan Milvus</a></td><td>Pencarian Hibrida</td><td>pencarian hibrida, multi vektor, penyematan padat, penyematan jarang</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/image_similarity_search.md">Pencarian Gambar dengan Milvus</a></td><td>Pencarian Semantik</td><td>pencarian vektor, bidang dinamis</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/multimodal_rag_with_milvus.md">RAG multimodal dengan Milvus</a></td><td>RAG</td><td>pencarian vektor, bidang dinamis</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/multimodal_rag_with_milvus.md">Pencarian Multimodal menggunakan Multi Vektor</a></td><td>Pencarian Semantik</td><td>multi vektor, pencarian hibrida</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/graph_rag_with_milvus.md">Grafik RAG dengan Milvus</a></td><td>RAG</td><td>pencarian grafik</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/contextual_retrieval_with_milvus.md">Pencarian Kontekstual dengan Milvus</a></td><td>Memulai dengan cepat</td><td>Pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/hdbscan_clustering_with_milvus.md">Pengelompokan HDBSCAN dengan Milvus</a></td><td>Mulai cepat</td><td>pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/use_ColPali_with_milvus.md">Gunakan ColPali untuk Pencarian Multi-Modal dengan Milvus</a></td><td>Mulai Cepat</td><td>pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/vector_visualization.md">Visualisasi Vektor</a></td><td>Mulai Cepat</td><td>pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/movie_recommendation_with_milvus.md">Rekomendasi Film dengan Milvus</a></td><td>Sistem Rekomendasi</td><td>pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/funnel_search_with_matryoshka.md">Pencarian Corong dengan Penyematan Matryoshka</a></td><td>Mulai cepat</td><td>Pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/question_answering_system.md">Sistem Penjawaban Pertanyaan</a></td><td>Menjawab Pertanyaan</td><td>Pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/recommendation_system.md">Sistem Rekomendasi</a></td><td>Sistem Rekomendasi</td><td>Pencarian Vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/video_similarity_search.md">Pencarian Kemiripan Video</a></td><td>Pencarian Semantik</td><td>Pencarian Vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/audio_similarity_search.md">Pencarian Kemiripan Audio</a></td><td>Pencarian Semantik</td><td>pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/dna_sequence_classification.md">Klasifikasi DNA</a></td><td>Klasifikasi</td><td>pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/text_search_engine.md">Mesin Pencari Teks</a></td><td>Pencarian Semantik</td><td>Pencarian Vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/text_image_search.md">Cari Gambar dengan Teks</a></td><td>Pencarian Semantik</td><td>Pencarian Vektor</td></tr>
+<tr><td><a href="/docs/id/v2.4.x/image_deduplication_system.md">Deduplikasi Gambar</a></td><td>Deduplikasi</td><td>pencarian vektor</td></tr>
 </tbody>
 </table>

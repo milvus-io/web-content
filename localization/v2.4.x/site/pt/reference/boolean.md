@@ -349,7 +349,7 @@ array_length(int_array) <span class="hljs-comment"># ==&gt; 7</span>
       </svg>
     </button></h2><p>Agora que já sabe como funcionam os conjuntos de bits no Milvus, também pode querer:</p>
 <ul>
-<li>Aprender a efetuar uma <a href="/docs/pt/multi-vector-search.md">Pesquisa Híbrida</a>.</li>
+<li>Aprender a efetuar uma <a href="/docs/pt/v2.4.x/multi-vector-search.md">Pesquisa Híbrida</a>.</li>
 <li>Aprender a <a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">utilizar cadeias de caracteres para filtrar</a> os resultados da pesquisa.</li>
-<li>Aprender a <a href="/docs/pt/enable-dynamic-field.md">utilizar campos dinâmicos na construção de expressões booleanas</a>.</li>
+<li>Aprender a <a href="/docs/pt/v2.4.x/enable-dynamic-field.md">utilizar campos dinâmicos na construção de expressões booleanas</a>.</li>
 </ul>

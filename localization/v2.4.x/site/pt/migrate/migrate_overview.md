@@ -38,10 +38,10 @@ title: Visão geral da migração Milvus
       </svg>
     </button></h2><p>A ferramenta <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> suporta uma variedade de caminhos de migração para acomodar diferentes necessidades dos utilizadores:</p>
 <ul>
-<li><a href="/docs/pt/es2m.md">Elasticsearch para Milvus 2.x</a>: Permite aos utilizadores migrar dados de ambientes Elasticsearch para tirar partido das capacidades de pesquisa vetorial optimizada do Milvus.</li>
-<li><a href="/docs/pt/f2m.md">Faiss para Milvus 2.x</a>: Fornecendo suporte experimental para a transferência de dados do Faiss, uma biblioteca popular para pesquisa eficiente de similaridade.</li>
-<li><a href="/docs/pt/m2m.md">Milvus 1.x para Milvus 2.x</a>: Garantir que os dados das versões anteriores sejam transferidos sem problemas para a estrutura mais recente.</li>
-<li><a href="/docs/pt/from-m2x.md">Milvus 2.3.x para Milvus 2.3.x ou superior</a>: Proporcionar um caminho de migração único para os utilizadores que já migraram para a versão 2.3.x.</li>
+<li><a href="/docs/pt/v2.4.x/es2m.md">Elasticsearch para Milvus 2.x</a>: Permite aos utilizadores migrar dados de ambientes Elasticsearch para tirar partido das capacidades de pesquisa vetorial optimizada do Milvus.</li>
+<li><a href="/docs/pt/v2.4.x/f2m.md">Faiss para Milvus 2.x</a>: Fornecendo suporte experimental para a transferência de dados do Faiss, uma biblioteca popular para pesquisa eficiente de similaridade.</li>
+<li><a href="/docs/pt/v2.4.x/m2m.md">Milvus 1.x para Milvus 2.x</a>: Garantir que os dados das versões anteriores sejam transferidos sem problemas para a estrutura mais recente.</li>
+<li><a href="/docs/pt/v2.4.x/from-m2x.md">Milvus 2.3.x para Milvus 2.3.x ou superior</a>: Proporcionar um caminho de migração único para os utilizadores que já migraram para a versão 2.3.x.</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">Caraterísticas<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

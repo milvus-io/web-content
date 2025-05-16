@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: تعرف على كيفية ترقية مجموعة ميلفوس العنقودية باستخدام مخطط هيلم.
 title: ترقية مجموعة Milvus العنقودية باستخدام مخطط Helm
 ---
-<div class="tab-wrapper"><a href="/docs/ar/upgrade_milvus_cluster-helm.md" class='active '>مشغل</a><a href="/docs/ar/upgrade_milvus_cluster-operator.md" class=''>ميلفوس هيلم</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.4.x/upgrade_milvus_cluster-helm.md" class='active '>مشغل</a><a href="/docs/ar/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>ميلفوس هيلم</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">ترقية مجموعة Milvus العنقودية باستخدام مخطط Helm<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

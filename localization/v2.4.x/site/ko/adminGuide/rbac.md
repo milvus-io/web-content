@@ -20,7 +20,7 @@ title: RBAC 활성화
         ></path>
       </svg>
     </button></h1><p>RBAC를 활성화하면 특정 Milvus 리소스(예: 컬렉션 또는 파티션)에 대한 액세스 또는 사용자 역할 및 권한에 따른 권한을 제어할 수 있습니다. 현재 이 기능은 Python과 Java에서만 사용할 수 있습니다.</p>
-<p>이 주제에서는 RBAC를 활성화하고 <a href="/docs/ko/users_and_roles.md">사용자 및 역할을</a> 관리하는 방법에 대해 설명합니다.</p>
+<p>이 주제에서는 RBAC를 활성화하고 <a href="/docs/ko/v2.4.x/users_and_roles.md">사용자 및 역할을</a> 관리하는 방법에 대해 설명합니다.</p>
 <div class="alert note">
 <p>이 페이지의 코드 스니펫은 새로운 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python)를 사용하여 Milvus와 상호 작용합니다. 다른 언어에 대한 새로운 MilvusClient SDK는 향후 업데이트를 통해 출시될 예정입니다.</p>
 </div>
@@ -39,7 +39,7 @@ title: RBAC 활성화
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>사용자 <a href="/docs/ko/authenticate.md">인증을</a> 활성화한 후 사용자 이름과 비밀번호로 구성된 <code translate="no">token</code> 을 사용하여 Milvus 인스턴스에 연결합니다. 기본적으로 Milvus는 <code translate="no">root</code> 사용자와 비밀번호 <code translate="no">Milvus</code> 를 사용합니다.</p>
+    </button></h2><p>사용자 <a href="/docs/ko/v2.4.x/authenticate.md">인증을</a> 활성화한 후 사용자 이름과 비밀번호로 구성된 <code translate="no">token</code> 을 사용하여 Milvus 인스턴스에 연결합니다. 기본적으로 Milvus는 <code translate="no">root</code> 사용자와 비밀번호 <code translate="no">Milvus</code> 를 사용합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -139,8 +139,8 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>다음 예는 <code translate="no">roleA</code> 이라는 역할에 모든 컬렉션을 검색할 수 있는 권한을 부여하는 방법을 보여줍니다.</p>
-<p><code translate="no">object_type</code> 은 리소스 유형으로도 이해할 수 있는 객체 유형을 지정합니다. 현재 유효한 값으로는 컬렉션/사용자/글로벌 등이 있으며, 여기서 글로벌은 특정 리소스 유형이 없음을 의미합니다. <code translate="no">object_name</code> 은 리소스 이름입니다. 객체 유형이<em>Collection인 경우 객체 이름은 특정 컬렉션 이름을 참조하거나 *를 사용하여 모든 컬렉션을 지정할 수 있습니다.</em>개체<em>유형이</em>Global인 경우에는 개체 이름을 *로만 지정할 수 있습니다. 부여할 수 있는 다른 유형의 권한은 <a href="/docs/ko/users_and_roles.md">사용자 및 역할을</a> 참조하세요.</p>
-<p>역할 권한을 관리하기 전에 사용자 인증을 사용 설정했는지 확인하세요. 그렇지 않으면 오류가 발생할 수 있습니다. 사용자 인증을 사용 설정하는 방법에 대한 자세한 내용은 <a href="/docs/ko/authenticate.md">사용자 액세스 인증하기를</a> 참조하세요.</p>
+<p><code translate="no">object_type</code> 은 리소스 유형으로도 이해할 수 있는 객체 유형을 지정합니다. 현재 유효한 값으로는 컬렉션/사용자/글로벌 등이 있으며, 여기서 글로벌은 특정 리소스 유형이 없음을 의미합니다. <code translate="no">object_name</code> 은 리소스 이름입니다. 객체 유형이<em>Collection인 경우 객체 이름은 특정 컬렉션 이름을 참조하거나 *를 사용하여 모든 컬렉션을 지정할 수 있습니다.</em>개체<em>유형이</em>Global인 경우에는 개체 이름을 *로만 지정할 수 있습니다. 부여할 수 있는 다른 유형의 권한은 <a href="/docs/ko/v2.4.x/users_and_roles.md">사용자 및 역할을</a> 참조하세요.</p>
+<p>역할 권한을 관리하기 전에 사용자 인증을 사용 설정했는지 확인하세요. 그렇지 않으면 오류가 발생할 수 있습니다. 사용자 인증을 사용 설정하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/authenticate.md">사용자 액세스 인증하기를</a> 참조하세요.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># grant privilege to a role</span>
 
 client.grant_privilege(
@@ -260,6 +260,6 @@ client.grant_role(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ko/authenticate.md">사용자 인증을</a> 관리하는 방법을 알아보세요.</p></li>
-<li><p>Milvus에서 <a href="/docs/ko/tls.md">TLS 프록시를</a> 활성화하는 방법을 알아보세요.</p></li>
+<li><p><a href="/docs/ko/v2.4.x/authenticate.md">사용자 인증을</a> 관리하는 방법을 알아보세요.</p></li>
+<li><p>Milvus에서 <a href="/docs/ko/v2.4.x/tls.md">TLS 프록시를</a> 활성화하는 방법을 알아보세요.</p></li>
 </ul>

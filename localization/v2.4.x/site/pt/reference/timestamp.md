@@ -105,5 +105,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Saiba como <a href="/docs/pt/consistency.md">o carimbo de data/hora de garantia permite uma consistência ajustável no Milvus</a></li>
+<li>Saiba como <a href="/docs/pt/v2.4.x/consistency.md">o carimbo de data/hora de garantia permite uma consistência ajustável no Milvus</a></li>
 </ul>

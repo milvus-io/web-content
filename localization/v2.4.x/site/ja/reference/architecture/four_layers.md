@@ -119,5 +119,5 @@ title: ストレージ／コンピューティングの分離
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvusアーキテクチャの詳細については、<a href="/docs/ja/main_components.md">メインコンポーネントを</a>お読みください。</li>
+<li>Milvusアーキテクチャの詳細については、<a href="/docs/ja/v2.4.x/main_components.md">メインコンポーネントを</a>お読みください。</li>
 </ul>

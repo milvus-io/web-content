@@ -59,7 +59,7 @@ summary: Imparate a configurare il meta-archivio per Milvus con Docker Compose/H
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni, vedere <a href="/docs/it/configure_etcd.md">Configurazioni relative a etcd</a>.</p>
+<p>Per ulteriori informazioni, vedere <a href="/docs/it/v2.4.x/configure_etcd.md">Configurazioni relative a etcd</a>.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Eseguire Milvus</h3><p>Eseguire il seguente comando per avviare Milvus che utilizza le configurazioni di etcd.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -131,6 +131,6 @@ summary: Imparate a configurare il meta-archivio per Milvus con Docker Compose/H
       </svg>
     </button></h2><p>Scoprite come configurare altre dipendenze di Milvus con Docker Compose o Helm:</p>
 <ul>
-<li><a href="/docs/it/deploy_s3.md">Configurazione dell'archiviazione degli oggetti con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/deploy_pulsar.md">Configurare l'archiviazione dei messaggi con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/v2.4.x/deploy_s3.md">Configurazione dell'archiviazione degli oggetti con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/v2.4.x/deploy_pulsar.md">Configurare l'archiviazione dei messaggi con Docker Compose o Helm</a></li>
 </ul>

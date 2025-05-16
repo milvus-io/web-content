@@ -390,26 +390,26 @@ collection that need to be dumped
       </svg>
     </button></h2><p>Milvus Liteに接続したら、次のことができます：</p>
 <ul>
-<li><p><a href="/docs/ja/quickstart.md">クイックスタートで</a>Milvusの機能を確認する。</p></li>
+<li><p><a href="/docs/ja/v2.4.x/quickstart.md">クイックスタートで</a>Milvusの機能を確認する。</p></li>
 <li><p>Milvusの基本操作を学ぶ</p>
 <ul>
-<li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
-<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/v2.4.x/manage_databases.md">データベースの管理</a></li>
+<li><a href="/docs/ja/v2.4.x/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/v2.4.x/manage-partitions.md">パーティションの管理</a></li>
+<li><a href="/docs/ja/v2.4.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.4.x/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/v2.4.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
-<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></p></li>
+<li><p><a href="/docs/ja/v2.4.x/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
+<li><p><a href="/docs/ja/v2.4.x/scaleout.md">Milvusクラスタのスケール</a></p></li>
 <li><p>Milvusクラスタをクラウドにデプロイする：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>
-<li><a href="/docs/ja/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ja/v2.4.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ja/v2.4.x/gcp.md">Googleクラウド</a></li>
+<li><a href="/docs/ja/v2.4.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>紹介します。</p></li>
-<li><p><a href="/docs/ja/birdwatcher_overview.md">Birdwatcher(バードウォッチャー</a>): Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール。</p></li>
+<li><p><a href="/docs/ja/v2.4.x/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/v2.4.x/milvus_backup_overview.md">Milvus Backupを</a>紹介します。</p></li>
+<li><p><a href="/docs/ja/v2.4.x/birdwatcher_overview.md">Birdwatcher(バードウォッチャー</a>): Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご覧ください。</p></li>
-<li><p><a href="/docs/ja/monitor.md">PrometheusによるMilvusの監視</a></p></li>
+<li><p><a href="/docs/ja/v2.4.x/monitor.md">PrometheusによるMilvusの監視</a></p></li>
 </ul>

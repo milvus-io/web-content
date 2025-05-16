@@ -35,7 +35,7 @@ title: Consistência
         ></path>
       </svg>
     </button></h2><p>A consistência em uma base de dados distribuída refere-se especificamente à propriedade que garante que cada nó ou réplica tenha a mesma visão dos dados ao escrever ou ler dados num determinado momento.</p>
-<p>Milvus suporta quatro níveis de consistência: forte, staleness limitado, sessão e eventualmente. O nível de consistência padrão no Milvus é o bounded staleness.  É possível ajustar facilmente o nível de consistência ao realizar uma <a href="/docs/pt/single-vector-search.md">pesquisa de vetor único</a>, <a href="/docs/pt/multi-vector-search.md">uma pesquisa híbrida</a> ou <a href="/docs/pt/get-and-scalar-query.md">uma consulta</a> para melhor se adequar à sua aplicação.</p>
+<p>Milvus suporta quatro níveis de consistência: forte, staleness limitado, sessão e eventualmente. O nível de consistência padrão no Milvus é o bounded staleness.  É possível ajustar facilmente o nível de consistência ao realizar uma <a href="/docs/pt/v2.4.x/single-vector-search.md">pesquisa de vetor único</a>, <a href="/docs/pt/v2.4.x/multi-vector-search.md">uma pesquisa híbrida</a> ou <a href="/docs/pt/v2.4.x/get-and-scalar-query.md">uma consulta</a> para melhor se adequar à sua aplicação.</p>
 <h2 id="Consistency-levels" class="common-anchor-header">Níveis de consistência<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,8 +118,8 @@ title: Consistência
       </svg>
     </button></h2><ul>
 <li>Saiba como ajustar o nível de consistência quando:<ul>
-<li><a href="/docs/pt/single-vector-search.md">realizar uma pesquisa de vetor único</a></li>
-<li><a href="/docs/pt/multi-vector-search.md">conduzindo uma pesquisa híbrida</a></li>
-<li><a href="/docs/pt/get-and-scalar-query.md">realizar uma consulta escalar</a></li>
+<li><a href="/docs/pt/v2.4.x/single-vector-search.md">realizar uma pesquisa de vetor único</a></li>
+<li><a href="/docs/pt/v2.4.x/multi-vector-search.md">conduzindo uma pesquisa híbrida</a></li>
+<li><a href="/docs/pt/v2.4.x/get-and-scalar-query.md">realizar uma consulta escalar</a></li>
 </ul></li>
 </ul>

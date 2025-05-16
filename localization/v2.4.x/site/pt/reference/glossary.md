@@ -81,7 +81,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/pt/birdwatcher_overview.md">O Birdwatcher</a> é uma ferramenta de depuração para o Milvus que se liga ao etcd, permitindo-lhe monitorizar o estado do servidor Milvus e fazer ajustes em tempo real. Também suporta backups de ficheiros etcd, ajudando os programadores na resolução de problemas.</p>
+    </button></h2><p><a href="/docs/pt/v2.4.x/birdwatcher_overview.md">O Birdwatcher</a> é uma ferramenta de depuração para o Milvus que se liga ao etcd, permitindo-lhe monitorizar o estado do servidor Milvus e fazer ajustes em tempo real. Também suporta backups de ficheiros etcd, ajudando os programadores na resolução de problemas.</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">Gravador em massa<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,7 +161,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em Milvus, uma coleção é equivalente a uma tabela num sistema de gestão de bases de dados relacionais (RDBMS). As coleções são os principais objetos lógicos usados para armazenar e gerenciar entidades. Para mais informações, consulte <a href="/docs/pt/manage-collections.md">Gerir colecções</a>.</p>
+    </button></h2><p>Em Milvus, uma coleção é equivalente a uma tabela num sistema de gestão de bases de dados relacionais (RDBMS). As coleções são os principais objetos lógicos usados para armazenar e gerenciar entidades. Para mais informações, consulte <a href="/docs/pt/v2.4.x/manage-collections.md">Gerir colecções</a>.</p>
 <h2 id="Dependency" class="common-anchor-header">Dependência<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,7 +193,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O esquema dinâmico permite-lhe inserir entidades com novos campos numa coleção sem modificar o esquema existente. Isto significa que pode inserir dados sem conhecer o esquema completo de uma coleção e pode incluir campos que ainda não estão definidos. É possível ativar esta capacidade sem esquema activando o campo dinâmico ao criar uma coleção. Para obter mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Ativar campo dinâmico</a>.</p>
+    </button></h2><p>O esquema dinâmico permite-lhe inserir entidades com novos campos numa coleção sem modificar o esquema existente. Isto significa que pode inserir dados sem conhecer o esquema completo de uma coleção e pode incluir campos que ainda não estão definidos. É possível ativar esta capacidade sem esquema activando o campo dinâmico ao criar uma coleção. Para obter mais informações, consulte <a href="/docs/pt/v2.4.x/enable-dynamic-field.md">Ativar campo dinâmico</a>.</p>
 <h2 id="Embeddings" class="common-anchor-header">Embeddings<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +226,7 @@ summary: ''
         ></path>
       </svg>
     </button></h2><p>Uma entidade consiste num grupo de campos que representam objectos do mundo real. Cada entidade no Milvus é representada por uma chave primária única.</p>
-<p>É possível personalizar as chaves primárias. Se não for configurada manualmente, o Milvus atribui automaticamente a chave primária às entidades. Se optar por personalizar a chave primária, note que Milvus não suporta a desduplicação de chaves primárias por enquanto. Portanto, pode haver chaves primárias duplicadas na mesma coleção. Para obter mais informações, consulte <a href="/docs/pt/insert-update-delete.md#Insert-entities">Inserir entidades</a>.</p>
+<p>É possível personalizar as chaves primárias. Se não for configurada manualmente, o Milvus atribui automaticamente a chave primária às entidades. Se optar por personalizar a chave primária, note que Milvus não suporta a desduplicação de chaves primárias por enquanto. Portanto, pode haver chaves primárias duplicadas na mesma coleção. Para obter mais informações, consulte <a href="/docs/pt/v2.4.x/insert-update-delete.md#Insert-entities">Inserir entidades</a>.</p>
 <h2 id="Field" class="common-anchor-header">Campo<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -274,7 +274,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A pesquisa filtrada aplica filtros escalares a pesquisas vectoriais, permitindo-lhe refinar os resultados da pesquisa com base em critérios específicos. Para obter mais informações, consulte <a href="/docs/pt/single-vector-search.md#Filtered-search">Pesquisa filtrada</a>.</p>
+    </button></h2><p>A pesquisa filtrada aplica filtros escalares a pesquisas vectoriais, permitindo-lhe refinar os resultados da pesquisa com base em critérios específicos. Para obter mais informações, consulte <a href="/docs/pt/v2.4.x/single-vector-search.md#Filtered-search">Pesquisa filtrada</a>.</p>
 <h2 id="Hybrid-search" class="common-anchor-header">Pesquisa híbrida<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +290,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">A Pesquisa híbrida</a> é uma API para pesquisa híbrida desde o Milvus 2.4.0. Pode pesquisar vários campos vectoriais e fundi-los. A pesquisa vetorial combinada com a filtragem de campos escalares é designada por &quot;pesquisa filtrada&quot;. Para mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">A Pesquisa híbrida</a> é uma API para pesquisa híbrida desde o Milvus 2.4.0. Pode pesquisar vários campos vectoriais e fundi-los. A pesquisa vetorial combinada com a filtragem de campos escalares é designada por &quot;pesquisa filtrada&quot;. Para mais informações, consulte <a href="/docs/pt/v2.4.x/multi-vector-search.md">Pesquisa híbrida</a>.</p>
 <h2 id="Index" class="common-anchor-header">Índice<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -546,7 +546,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus suporta múltiplos campos vetoriais em uma coleção desde a versão 2.4.0. Para obter mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p>
+    </button></h2><p>O Milvus suporta múltiplos campos vetoriais em uma coleção desde a versão 2.4.0. Para obter mais informações, consulte <a href="/docs/pt/v2.4.x/multi-vector-search.md">Pesquisa híbrida</a>.</p>
 <h2 id="Partition" class="common-anchor-header">Partição<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

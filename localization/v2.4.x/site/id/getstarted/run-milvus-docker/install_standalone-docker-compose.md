@@ -38,7 +38,7 @@ title: Menjalankan Milvus dengan Docker Compose (Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Instal Docker</a>.</li>
-<li><a href="/docs/id/prerequisite-docker.md">Periksa persyaratan perangkat keras dan perangkat lunak</a> sebelum melakukan instalasi.</li>
+<li><a href="/docs/id/v2.4.x/prerequisite-docker.md">Periksa persyaratan perangkat keras dan perangkat lunak</a> sebelum melakukan instalasi.</li>
 </ul>
 <h2 id="Install-Milvus" class="common-anchor-header">Menginstal Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -113,26 +113,26 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
       </svg>
     </button></h2><p>Setelah menginstal Milvus di Docker, Anda dapat:</p>
 <ul>
-<li><p>Memeriksa <a href="/docs/id/quickstart.md">Mulai Cepat</a> untuk melihat apa yang dapat dilakukan Milvus.</p></li>
+<li><p>Memeriksa <a href="/docs/id/v2.4.x/quickstart.md">Mulai Cepat</a> untuk melihat apa yang dapat dilakukan Milvus.</p></li>
 <li><p>Mempelajari operasi dasar Milvus:</p>
 <ul>
-<li><a href="/docs/id/manage_databases.md">Mengelola Basis Data</a></li>
-<li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
-<li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
-<li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
+<li><a href="/docs/id/v2.4.x/manage_databases.md">Mengelola Basis Data</a></li>
+<li><a href="/docs/id/v2.4.x/manage-collections.md">Mengelola Koleksi</a></li>
+<li><a href="/docs/id/v2.4.x/manage-partitions.md">Mengelola Partisi</a></li>
+<li><a href="/docs/id/v2.4.x/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
+<li><a href="/docs/id/v2.4.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
+<li><a href="/docs/id/v2.4.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/id/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
-<li><p>Mengatur<a href="/docs/id/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
+<li><p><a href="/docs/id/v2.4.x/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
+<li><p>Mengatur<a href="/docs/id/v2.4.x/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
 <li><p>Menerapkan cluster Milvus Anda di awan:</p>
 <ul>
-<li><a href="/docs/id/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/id/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/id/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/id/v2.4.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/id/v2.4.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/id/v2.4.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.4.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.4.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk manajemen Milvus yang intuitif.</p></li>
-<li><p><a href="/docs/id/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
+<li><p><a href="/docs/id/v2.4.x/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

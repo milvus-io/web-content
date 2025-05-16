@@ -76,7 +76,7 @@ summary: Milvusは、AIアプリケーションを強化するために構築さ
 <li>私たちのロードマップは、通常3つの部分から構成されています。最新のリリース、次にリリース予定のリリース、そして今後1年以内の中長期的なビジョンです。</li>
 <li>進捗に伴い、私たちは継続的に学習し、必要に応じて項目を追加または削除し、時折フォーカスを調整します。</li>
 <li>これらの計画はあくまで参考であり、変更される可能性があります。</li>
-<li>私たちは、<a href="/docs/ja/release_notes.md">リリースノートを</a>参考にしながら、ロードマップに忠実に従います。</li>
+<li>私たちは、<a href="/docs/ja/v2.4.x/release_notes.md">リリースノートを</a>参考にしながら、ロードマップに忠実に従います。</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">貢献方法<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

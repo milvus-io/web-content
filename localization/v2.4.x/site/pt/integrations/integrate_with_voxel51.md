@@ -37,7 +37,7 @@ title: Realizar pesquisas de visão com Milvus e FiftyOne
       </svg>
     </button></h2><p>Antes de começar, certifique-se de que tem o seguinte:</p>
 <ul>
-<li>Um <a href="/docs/pt/install_standalone-docker.md">servidor Milvus</a> em execução.</li>
+<li>Um <a href="/docs/pt/v2.4.x/install_standalone-docker.md">servidor Milvus</a> em execução.</li>
 <li>Um ambiente Python com <code translate="no">pymilvus</code> e <code translate="no">fiftyone</code> instalados.</li>
 <li>Um <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">conjunto</a> de <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">dados</a> de imagens para pesquisar.</li>
 </ul>
@@ -262,7 +262,7 @@ milvus_index = fob.compute_similarity(
 <li><p><strong>metric</strong> (<em>"dotproduct")</em>: a métrica de distância de incorporação a utilizar ao criar um novo índice. Os valores suportados são (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong> (<em>"Session")</em>: o nível de consistência a utilizar. Os valores suportados são (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>Para obter informações pormenorizadas sobre estes parâmetros, consulte a <a href="/docs/pt/authenticate.md">documentação sobre a autenticação Milvus</a> e a <a href="/docs/pt/consistency.md">documentação sobre os níveis de consistência Milvus</a>.</p>
+<p>Para obter informações pormenorizadas sobre estes parâmetros, consulte a <a href="/docs/pt/v2.4.x/authenticate.md">documentação sobre a autenticação Milvus</a> e a <a href="/docs/pt/v2.4.x/consistency.md">documentação sobre os níveis de consistência Milvus</a>.</p>
 <p>Pode especificar estes parâmetros através de qualquer uma das estratégias descritas na secção anterior. Aqui está um exemplo de uma <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">configuração de cérebro</a> que inclui todos os parâmetros disponíveis:</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {

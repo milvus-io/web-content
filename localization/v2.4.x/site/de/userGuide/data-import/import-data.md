@@ -39,8 +39,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Sie haben Ihre Daten bereits vorbereitet und in den Milvus-Bucket gelegt.</p>
-<p>Wenn nicht, sollten Sie zuerst <strong>RemoteBulkWriter</strong> verwenden, um Ihre Daten vorzubereiten, und sicherstellen, dass die vorbereiteten Daten bereits in den Milvus-Bucket auf der MinIO-Instanz übertragen wurden, die zusammen mit Ihrer Milvus-Instanz gestartet wurde. Details hierzu finden Sie unter <a href="/docs/de/prepare-source-data.md">Quelldaten vorbereiten</a>.</p></li>
-<li><p>Sie haben bereits eine Sammlung mit dem Schema erstellt, das Sie zur Vorbereitung Ihrer Daten verwenden. Falls nicht, lesen Sie bitte den Abschnitt <a href="/docs/de/manage-collections.md">Verwalten von Sammlungen</a>.</p></li>
+<p>Wenn nicht, sollten Sie zuerst <strong>RemoteBulkWriter</strong> verwenden, um Ihre Daten vorzubereiten, und sicherstellen, dass die vorbereiteten Daten bereits in den Milvus-Bucket auf der MinIO-Instanz übertragen wurden, die zusammen mit Ihrer Milvus-Instanz gestartet wurde. Details hierzu finden Sie unter <a href="/docs/de/v2.4.x/prepare-source-data.md">Quelldaten vorbereiten</a>.</p></li>
+<li><p>Sie haben bereits eine Sammlung mit dem Schema erstellt, das Sie zur Vorbereitung Ihrer Daten verwenden. Falls nicht, lesen Sie bitte den Abschnitt <a href="/docs/de/v2.4.x/manage-collections.md">Verwalten von Sammlungen</a>.</p></li>
 </ul>
 <div class="language-python">
 <p>Das folgende Code-Snippet erstellt eine einfache Sammlung mit dem angegebenen Schema. Weitere Informationen zu Parametern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> in der SDK-Referenz.</p>

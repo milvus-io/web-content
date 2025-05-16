@@ -21,7 +21,7 @@ title: Vue d'ensemble des rerankers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dans le domaine de la recherche d'informations et de l'IA générative, un re-rangeur est un outil essentiel qui optimise l'ordre des résultats des recherches initiales. Les rerankers diffèrent des <a href="/docs/fr/embeddings.md">modèles d'intégration</a> traditionnels en prenant une requête et un document en entrée et en renvoyant directement un score de similarité au lieu des intégrations. Ce score indique la pertinence de la requête et du document.</p>
+    </button></h1><p>Dans le domaine de la recherche d'informations et de l'IA générative, un re-rangeur est un outil essentiel qui optimise l'ordre des résultats des recherches initiales. Les rerankers diffèrent des <a href="/docs/fr/v2.4.x/embeddings.md">modèles d'intégration</a> traditionnels en prenant une requête et un document en entrée et en renvoyant directement un score de similarité au lieu des intégrations. Ce score indique la pertinence de la requête et du document.</p>
 <p>Les re-rangeurs sont souvent utilisés après la première étape de recherche, généralement effectuée au moyen de techniques vectorielles d'approximation du plus proche voisin (ANN). Bien que les recherches ANN soient efficaces pour obtenir un large ensemble de résultats potentiellement pertinents, elles ne donnent pas toujours la priorité aux résultats en termes de proximité sémantique réelle avec la requête. Ici, rerankers est utilisé pour optimiser l'ordre des résultats en utilisant des analyses contextuelles plus approfondies, souvent en tirant parti de modèles d'apprentissage automatique avancés tels que BERT ou d'autres modèles basés sur Transformer. Ce faisant, les rerankers peuvent améliorer considérablement la précision et la pertinence des résultats finaux présentés à l'utilisateur.</p>
 <p>La bibliothèque de modèles PyMilvus intègre des fonctions de rerank pour optimiser l'ordre des résultats renvoyés par les recherches initiales. Après avoir récupéré les intégrations les plus proches dans Milvus, vous pouvez exploiter ces outils de reclassement pour affiner les résultats de la recherche afin d'améliorer la précision des résultats de la recherche.</p>
 <table>
@@ -57,7 +57,7 @@ title: Vue d'ensemble des rerankers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans cet exemple, nous montrons comment classer les résultats de recherche à l'aide de la <a href="/docs/fr/rerankers-bge.md">fonction BGE reranker</a> en fonction d'une requête spécifique.</p>
+    </button></h2><p>Dans cet exemple, nous montrons comment classer les résultats de recherche à l'aide de la <a href="/docs/fr/v2.4.x/rerankers-bge.md">fonction BGE reranker</a> en fonction d'une requête spécifique.</p>
 <p>Pour utiliser un reranker avec la bibliothèque de <a href="https://github.com/milvus-io/milvus-model">modèles Py</a> Milvus, commencez par installer la bibliothèque de modèles PyMilvus ainsi que le sous-paquet de modèles qui contient tous les utilitaires de reranking nécessaires :</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -115,7 +115,7 @@ documents = [
 <p><strong>Composants du jeu de données</strong>:</p>
 <ul>
 <li><code translate="no">doc_id</code>: Identifiant unique pour chaque document.</li>
-<li><code translate="no">doc_vector</code>: Vecteurs d'intégration représentant le document. Pour obtenir des conseils sur la génération d'embeddings, reportez-vous à <a href="/docs/fr/embeddings.md">Embeddings</a>.</li>
+<li><code translate="no">doc_vector</code>: Vecteurs d'intégration représentant le document. Pour obtenir des conseils sur la génération d'embeddings, reportez-vous à <a href="/docs/fr/v2.4.x/embeddings.md">Embeddings</a>.</li>
 <li><code translate="no">doc_text</code>: Le contenu textuel du document.</li>
 </ul>
 <h3 id="Preparations" class="common-anchor-header">Préparations</h3><p>Avant de lancer une recherche de similarités, vous devez établir une connexion avec Milvus, créer une collection et préparer et insérer des données dans cette collection. L'extrait de code suivant illustre ces étapes préliminaires.</p>
