@@ -39,7 +39,7 @@ summary: >-
     </button></h2><p>ハイブリッド検索は以下の2つのシナリオに適しています：</p>
 <h3 id="Sparse-Dense-Vector-Search" class="common-anchor-header">疎密ベクトル検索</h3><p>異なるタイプのベクトルは異なる情報を表現することができ、様々な埋め込みモデルを使用することで、データの異なる特徴や側面をより包括的に表現することができます。例えば、同じ文に対して異なる埋め込みモデルを使用することで、意味的な意味を表す密なベクトルと、文中の単語頻度を表す疎なベクトルを生成することができる。</p>
 <ul>
-<li><p><strong>スパース・ベクトル：</strong>スパースベクトルは、ベクトル次元が高く、非ゼロ値が少ないという特徴がある。この構造により、従来の情報検索アプリケーションに特に適している。ほとんどの場合、スパース・ベクトルで使用される次元数は、1つまたは複数の言語にわたる異なるトークンに対応します。各次元には、文書内のそのトークンの相対的な重要度を示す値が割り当てられます。このレイアウトは、キーワードのマッチングを伴うタスクに有利です。</p></li>
+<li><p><strong>スパース・ベクトル：</strong>スパースベクトルは、ベクトル次元が高く、非ゼロ値が少ないという特徴がある。この構造により、従来の情報検索アプリケーションに特に適している。ほとんどの場合、スパースベクトルで使用される次元数は、1つ以上の言語にわたる異なるトークンに対応します。各次元には、文書内のそのトークンの相対的な重要度を示す値が割り当てられます。このレイアウトは、キーワードのマッチングを伴うタスクに有利です。</p></li>
 <li><p><strong>密なベクトル：</strong>密なベクトルは、ニューラルネットワークから派生した埋め込みである。順序付けられた配列に配置されたとき、これらのベクトルは入力テキストの意味的本質を捉える。密なベクトルはテキスト処理に限定されるものではなく、視覚データの意味を表現するためにコンピュータビジョンでも広く使用されている。これらの密なベクトルは、通常テキスト埋め込みモデルによって生成され、ほとんどの要素またはすべての要素が非ゼロであることを特徴とする。したがって、密なベクトルは意味検索アプリケーションに特に有効であり、キーワードの完全一致がない場合でも、ベクトル距離に基づいて最も類似した結果を返すことができる。この機能により、キーワードベースのアプローチでは見逃されがちな概念間の関係性を捉えることができ、よりニュアンスや文脈を考慮した検索結果を得ることができる。</p></li>
 </ul>
 <p>詳しくは、<a href="/docs/ja/sparse_vector.md">Sparse Vectorと</a> <a href="/docs/ja/dense-vector.md">Dense Vectorを</a>参照してください。</p>
@@ -64,7 +64,7 @@ summary: >-
 <li><p><a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search#A-Quick-Recap-of-BERT">BERTや</a> <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI">Transformersの</a>ような埋め込みモデルを使って密なベクトルを生成する。</p></li>
 <li><p><a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3">BGE-M3</a>、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE">SPLADEなどの</a>埋め込みモデルを使ってスパースベクトルを生成する。</p></li>
 <li><p>Milvusでコレクションを作成し、密なベクトル場と疎なベクトル場の両方を含むコレクションスキーマを定義する。</p></li>
-<li><p>前のステップで作成したコレクションに、スパース密ベクトルを挿入する。</p></li>
+<li><p>前のステップで作成したコレクションに、スパース密なベクトルを挿入する。</p></li>
 <li><p>ハイブリッド検索を実行する：密なベクトルでのANN検索は、上位K個の最も類似した結果のセットを返し、疎なベクトルでのテキストマッチも上位K個の結果のセットを返します。</p></li>
 <li><p>正規化：上位K個の結果の2つのセットのスコアを正規化し、スコアを[0,1]の間の範囲に変換する。</p></li>
 <li><p>適切な再ランク付け戦略を選択し、2つのTop-K結果セットをマージして再ランク付けし、最終的にTop-K結果セットを返す。</p></li>
@@ -508,7 +508,7 @@ search_param_1 = {
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>}, {<span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
+query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>, <span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
@@ -751,4 +751,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>以下はその出力である：</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>ハイブリッド検索で<code translate="no">limit=2</code> が指定されているため、Milvusはステップ3の4つの検索結果を再ランク付けし、最終的に最も類似した検索結果のトップ2のみを返します。</p>
+<p>ハイブリッド検索で<code translate="no">limit=2</code> が指定されているため、Milvusはステップ3の4つの検索結果を再ランク付けし、最終的に最も類似した検索結果の上位2つだけを返します。</p>

@@ -28,7 +28,7 @@ title: MilvusとHaystackによる全文検索
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5では</a>、BM25を使ったネイティブな全文検索機能を導入した。このアプローチはテキストをBM25スコアを表すスパースベクトルに変換します。生テキストを入力するだけで、Milvusは自動的にスパースベクトルを生成し、保存します。</p>
 <p><a href="https://haystack.deepset.ai/">Haystackは</a>このMilvusの機能をサポートし、RAGアプリケーションに全文検索を簡単に追加できるようになりました。全文検索と密なベクトル意味検索を組み合わせることで、意味理解とキーワードマッチング精度の両方から恩恵を受けるハイブリッドアプローチを実現することができます。この組み合わせは検索精度を向上させ、より良い結果をユーザーに提供します。</p>
 <p>このチュートリアルでは、HaystackとMilvusを使用してアプリケーションにフルテキスト検索とハイブリッド検索を実装する方法を示します。</p>
-<p>Milvusベクターストアを使用するには、Milvusサーバを<code translate="no">URI</code> （オプションで<code translate="no">TOKEN</code> ）で指定します。Milvusサーバーを立ち上げるには、<a href="https://milvus.io/docs/install-overview.md">Milvusインストールガイドに</a>従うか、<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>(フルマネージドMilvus)を無料で<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">お試し</a>ください。</p>
+<p>Milvusベクターストアを使用するには、Milvusサーバを<code translate="no">URI</code> （オプションで<code translate="no">TOKEN</code> ）で指定します。Milvusサーバを立ち上げるには、<a href="https://milvus.io/docs/install-overview.md">Milvusインストールガイドに</a>従うか、<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>(フルマネージドMilvus)を無料で<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">お試し</a>ください。</p>
 <div class="alert note">
 <ul>
 <li>全文検索は現在、Milvus Standalone、Milvus Distributed、Zilliz Cloudで利用可能です。詳細は support@zilliz.com までお問い合わせください。</li>
@@ -83,7 +83,7 @@ documents = [
     Document(content=<span class="hljs-string">&quot;Charlie likes white dogs&quot;</span>, meta={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>全文検索をRAGシステムに組み込むことで、セマンティック検索と正確で予測可能なキーワードベースの検索のバランスをとることができる。全文検索のみを使用することもできますが、より良い検索結果を得るためには、全文検索とセマンティック検索を組み合わせることをお勧めします。ここではデモンストレーションのため、全文検索のみとハイブリッド検索を示します。</p>
+<p>全文検索をRAGシステムに組み込むことで、セマンティック検索と正確で予測可能なキーワードベースの検索のバランスをとることができる。より良い検索結果を得るためには、全文検索とセマンティック検索を組み合わせることをお勧めしますが、全文検索のみを使用することもできます。ここではデモンストレーションのため、全文検索のみとハイブリッド検索を示します。</p>
 <h2 id="BM25-search-without-embedding" class="common-anchor-header">埋め込みなしのBM25検索<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -320,7 +320,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
   </span>
 </p>
 <p>この図は、キーワードマッチングのためのBM25と意味検索のための密なベクトル検索を組み合わせたハイブリッド検索と再ランク付けのプロセスを示している。両方の方法からの結果はマージされ、再ランク付けされ、最終的な答えを生成するためにLLMに渡される。</p>
-<p>ハイブリッド検索は精度と意味理解のバランスをとり、多様なクエリに対する精度と頑健性を向上させる。BM25全文検索とベクトル検索で候補を検索し、意味的、文脈を考慮した、正確な検索の両方を保証する。</p>
+<p>ハイブリッド検索は精度と意味理解のバランスをとり、多様なクエリに対する精度と頑健性を向上させる。BM25全文検索とベクトル検索で候補を検索し、セマンティックでコンテキストを考慮した正確な検索を実現します。</p>
 <p>ハイブリッド検索で最適化されたRAGの実装を試してみよう。</p>
 <pre><code translate="no" class="language-python">prompt_template = <span class="hljs-string">&quot;&quot;&quot;Answer the following query based on the provided context. If the context does
                      not include an answer, reply with &#x27;I don&#x27;t know&#x27;.\n

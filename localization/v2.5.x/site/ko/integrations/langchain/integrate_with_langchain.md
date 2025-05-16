@@ -48,7 +48,7 @@ title: Milvus와 LangChain을 사용한 검색 증강 생성(RAG)
 <p>OpenAI의 모델을 사용합니다. 환경 변수로 <code translate="no">OPENAI_API_KEY</code> <a href="https://platform.openai.com/docs/quickstart">API 키를</a> 준비해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prepare-the-data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +123,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;./milvus_demo.db&quot;</span>,
     },
-    drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old Milvus collection if it exists</span>
+    drop_old=<span class="hljs-literal">False</span>,  <span class="hljs-comment"># Drop the old Milvus collection if it exists</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -136,7 +136,7 @@ vectorstore = Milvus.from_documents(
 </div>
 <p>테스트 쿼리 문제를 사용하여 Milvus 벡터 스토어에서 문서를 검색합니다. 상위 1개 문서를 살펴보겠습니다.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is self-reflection of an AI Agent?&quot;</span>
-vectorstore.<span class="hljs-title function_">similarity_search</span>(query, k=<span class="hljs-number">1</span>)
+vectorstore.similarity_search(query, k=<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(page_content='Self-Reflection#\nSelf-reflection is a vital aspect that allows autonomous agents to improve iteratively by refining past action decisions and correcting previous mistakes. It plays a crucial role in real-world tasks where trial and error are inevitable.\nReAct (Yao et al. 2023) integrates reasoning and acting within LLM by extending the action space to be a combination of task-specific discrete actions and the language space. The former enables LLM to interact with the environment (e.g. use Wikipedia search API), while the latter prompting LLM to generate reasoning traces in natural language.\nThe ReAct prompt template incorporates explicit steps for LLM to think, roughly formatted as:\nThought: ...\nAction: ...\nObservation: ...\n... (Repeated many times)', metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/', 'pk': 449281835035555859})]
 </code></pre>
@@ -213,8 +213,8 @@ res
     </button></h2><p><a href="https://milvus.io/docs/boolean.md">Milvus 스칼라 필터링 규칙을</a> 사용하여 메타데이터를 기반으로 문서를 필터링할 수 있습니다. 두 개의 다른 소스에서 문서를 로드했으며, 메타데이터 <code translate="no">source</code> 를 기준으로 문서를 필터링할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;What is CoT?&quot;</span>,
-    k=1,
-    <span class="hljs-built_in">expr</span>=<span class="hljs-string">&quot;source == &#x27;https://lilianweng.github.io/posts/2023-06-23-agent/&#x27;&quot;</span>,
+    k=<span class="hljs-number">1</span>,
+    expr=<span class="hljs-string">&quot;source == &#x27;https://lilianweng.github.io/posts/2023-06-23-agent/&#x27;&quot;</span>,
 )
 
 <span class="hljs-comment"># The same as:</span>
@@ -279,4 +279,4 @@ rag_chain2.with_config(
 <pre><code translate="no">&quot;I'm sorry, but based on the provided context, there is no specific information or statistical data available regarding the self-reflection of an AI agent.&quot;
 </code></pre>
 <hr>
-<p>이 튜토리얼에서는 Milvus LangChain 연동과 간단한 RAG 접근 방식의 기본 사용법을 중점적으로 설명합니다. 보다 고급 RAG 기술에 대해서는 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag">고급 RAG 부트캠프를</a> 참조하시기 바랍니다.</p>
+<p>이 튜토리얼에서는 밀버스 랭체인 연동과 간단한 RAG 접근 방식의 기본 사용법을 중점적으로 다룹니다. 보다 고급 RAG 기술에 대해서는 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag">고급 RAG 부트캠프를</a> 참조하시기 바랍니다.</p>

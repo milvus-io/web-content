@@ -23,26 +23,49 @@ title: Recherche en entonnoir avec Matryoshka Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Lors de la construction de systèmes de recherche vectorielle efficaces, l'un des principaux défis consiste à gérer les coûts de stockage tout en maintenant une latence et un rappel acceptables. Les modèles d'intégration modernes produisent des vecteurs comportant des centaines ou des milliers de dimensions, ce qui entraîne une surcharge de stockage et de calcul importante pour le vecteur brut et l'index.</p>
-<p>Traditionnellement, les besoins en stockage sont réduits par l'application d'une méthode de quantification ou de réduction de la dimensionnalité juste avant la construction de l'index. Par exemple, nous pouvons économiser de l'espace de stockage en réduisant la précision à l'aide de la quantification par produit (PQ) ou le nombre de dimensions à l'aide de l'analyse en composantes principales (ACP). Ces méthodes analysent l'ensemble des vecteurs pour en trouver un plus compact qui préserve les relations sémantiques entre les vecteurs.</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+Lors de la construction de systèmes de recherche vectorielle efficaces, l'un des principaux défis consiste à gérer les coûts de stockage tout en maintenant une latence et un rappel acceptables. Les modèles d'intégration modernes produisent des vecteurs comportant des centaines ou des milliers de dimensions, ce qui entraîne une surcharge de stockage et de calcul importante pour le vecteur brut et l'index.<p>Traditionnellement, les besoins en stockage sont réduits par l'application d'une méthode de quantification ou de réduction de la dimensionnalité juste avant la construction de l'index. Par exemple, nous pouvons économiser de l'espace de stockage en réduisant la précision à l'aide de la quantification par produit (PQ) ou le nombre de dimensions à l'aide de l'analyse en composantes principales (ACP). Ces méthodes analysent l'ensemble des vecteurs pour en trouver un plus compact qui préserve les relations sémantiques entre les vecteurs.</p>
 <p>Bien qu'efficaces, ces approches standard ne réduisent la précision ou la dimensionnalité qu'une seule fois et à une seule échelle. Mais que se passerait-il si nous pouvions maintenir simultanément plusieurs couches de détails, comme une pyramide de représentations de plus en plus précises ?</p>
 <p>C'est là qu'interviennent les encastrements Matryoshka. Nommées d'après les poupées russes gigognes (voir illustration), ces constructions astucieuses intègrent plusieurs échelles de représentation dans un seul vecteur. Contrairement aux méthodes traditionnelles de post-traitement, les Matryoshka embeddings apprennent cette structure multi-échelle au cours du processus d'apprentissage initial. Le résultat est remarquable : non seulement l'intégration complète capture la sémantique de l'entrée, mais chaque préfixe de sous-ensemble imbriqué (première moitié, premier quart, etc.) fournit une représentation cohérente, bien que moins détaillée.</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
 <p>Dans ce carnet, nous examinons comment utiliser les encastrements Matryoshka avec Milvus pour la recherche sémantique. Nous illustrons un algorithme appelé "funnel search" qui nous permet d'effectuer une recherche de similarité sur un petit sous-ensemble de nos dimensions d'encastrement sans baisse drastique du rappel.</p>
+<h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Pour le CPU uniquement :</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Pour CUDA 11.8 :</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>La commande d'installation de CUDA 11.8 n'est qu'un exemple. Veuillez confirmer votre version CUDA lors de l'installation de PyTorch.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Modèle d'intégration de la charge Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Charger le modèle d'intégration Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,7 +106,7 @@ title: Recherche en entonnoir avec Matryoshka Embeddings
         ></path>
       </svg>
     </button></h2><p>Le code suivant est une modification de celui de la page de documentation <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search with Sentence Transformers and Milvus".</a> Tout d'abord, nous chargeons le jeu de données de HuggingFace. Il contient environ 35k entrées, chacune correspondant à un film ayant un article Wikipédia. Nous utiliserons les champs <code translate="no">Title</code> et <code translate="no">PlotSummary</code> dans cet exemple.</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -113,12 +136,12 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <p>Milvus ne prend pas actuellement en charge la recherche sur des sous-ensembles d'enchâssements, c'est pourquoi nous divisons les enchâssements en deux parties : la tête représente le sous-ensemble initial du vecteur à indexer et à rechercher, et la queue est le reste. Le modèle est formé pour la recherche de similarité par distance cosinusoïdale, nous normalisons donc les intégrations de tête. Cependant, afin de calculer ultérieurement les similarités pour des sous-ensembles plus importants, nous devons stocker la norme de l'intégration de la tête, afin de pouvoir la dé-normaliser avant de la joindre à la queue.</p>
 <p>Pour effectuer une recherche via le premier 1/6e de l'intégration, nous devrons créer un index de recherche vectorielle sur le champ <code translate="no">head_embedding</code>. Plus tard, nous comparerons les résultats de la "recherche en entonnoir" à ceux d'une recherche vectorielle classique, et construirons donc également un index de recherche sur l'ensemble de l'intégration.</p>
 <p><em>Il est important de noter que nous utilisons la métrique de distance <code translate="no">COSINE</code> plutôt que <code translate="no">IP</code>, car sinon nous devrions tenir compte des normes d'intégration, ce qui compliquerait la mise en œuvre (cela aura plus de sens une fois que l'algorithme de recherche en entonnoir aura été décrit).</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>Enfin, nous codons les résumés de l'intrigue pour l'ensemble des 35 000 films et entrons les encastrements correspondants dans la base de données.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -300,7 +323,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>Nous avons pu rétablir le rappel sans effectuer de recherches vectorielles supplémentaires ! Qualitativement, ces résultats semblent avoir un meilleur rappel pour "Raiders of the Lost Ark" et "The Shining" que la recherche vectorielle standard du tutoriel, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search using Milvus and Sentence Transformers",</a> qui utilise un modèle d'intégration différent. Cependant, elle ne parvient pas à trouver &quot;Ferris Bueller's Day Off&quot;, sur lequel nous reviendrons plus loin dans le carnet. (Voir l'article <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> pour plus d'expériences quantitatives et d'analyses comparatives).</p>
+<p>Nous avons pu rétablir le rappel sans effectuer de recherches vectorielles supplémentaires ! Qualitativement, ces résultats semblent avoir un meilleur rappel pour "Raiders of the Lost Ark" et "The Shining" que la recherche vectorielle standard du tutoriel, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search using Milvus and Sentence Transformers",</a> qui utilise un modèle d'intégration différent. Cependant, elle ne parvient pas à trouver "Ferris Bueller's Day Off", sur lequel nous reviendrons plus loin dans le carnet. (Voir l'article <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> pour plus d'expériences quantitatives et d'analyses comparatives).</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Comparaison entre la recherche en entonnoir et la recherche normale<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -359,7 +382,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>À l'exception des résultats pour &quot;Un adolescent fait semblant d'être malade pour ne pas aller à l'école...&quot;, les résultats de la recherche en entonnoir sont presque identiques à ceux de la recherche complète, même si la recherche en entonnoir a été effectuée sur un espace de recherche de 128 dimensions contre 768 dimensions pour la recherche normale.</p>
+<p>À l'exception des résultats pour "Un adolescent fait semblant d'être malade pour ne pas aller à l'école...", les résultats de la recherche en entonnoir sont presque identiques à ceux de la recherche complète, même si la recherche en entonnoir a été effectuée sur un espace de recherche de 128 dimensions contre 768 dimensions pour la recherche normale.</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Enquête sur l'échec du rappel de la recherche en entonnoir pour Ferris Bueller's Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

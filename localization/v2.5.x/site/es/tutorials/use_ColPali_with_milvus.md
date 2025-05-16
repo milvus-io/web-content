@@ -9,6 +9,12 @@ summary: >-
   determinada.
 title: Utilizar ColPali para la recuperación multimodal con Milvus
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Utilizar ColPali para la recuperación multimodal con Milvus<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,16 +30,10 @@ title: Utilizar ColPali para la recuperación multimodal con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>Los modelos de recuperación modernos suelen utilizar una única incrustación para representar texto o imágenes. ColBERT, sin embargo, es un modelo neuronal que utiliza una lista de incrustaciones para cada instancia de datos y emplea una operación "MaxSim" para calcular la similitud entre dos textos. Más allá de los datos textuales, las figuras, tablas y diagramas también contienen abundante información, que a menudo no se tiene en cuenta en la recuperación de información basada en texto.</p>
+    </button></h1><p>Los modelos de recuperación modernos suelen utilizar una única incrustación para representar texto o imágenes. ColBERT, sin embargo, es un modelo neuronal que utiliza una lista de incrustaciones para cada instancia de datos y emplea una operación "MaxSim" para calcular la similitud entre dos textos. Más allá de los datos textuales, las figuras, tablas y diagramas también contienen abundante información, que a menudo no se tiene en cuenta en la recuperación de información basada en texto.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -55,11 +55,11 @@ title: Utilizar ColPali para la recuperación multimodal con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell">$ pip install pdf2image
-$ pip pymilvus
-$ pip install colpali_engine
-$ pip install tqdm
-$ pip instal pillow
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pdf2image</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install colpali_engine</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pillow</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prepare-the-data" class="common-anchor-header">Preparación de los datos<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,17 +86,17 @@ images = convert_from_path(pdf_path)
     image.save(<span class="hljs-string">f&quot;pages/page_<span class="hljs-subst">{i + <span class="hljs-number">1</span>}</span>.png&quot;</span>, <span class="hljs-string">&quot;PNG&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>A continuación, inicializaremos una base de datos utilizando Milvus Lite. Puede cambiar fácilmente a una instancia completa de Milvus estableciendo la uri en la dirección apropiada donde esté alojado su servicio Milvus.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">import</span> concurrent.<span class="hljs-property">futures</span>
+<span class="hljs-keyword">import</span> concurrent.futures
 
-client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
 <li>Si sólo necesita una base de datos vectorial local para datos a pequeña escala o prototipos, establecer la uri como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
-<li>Si tiene una gran escala de datos, digamos más de un millón de vectores, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. En esta configuración, por favor utilice la dirección del servidor y el puerto como su uri, por ejemplo<code translate="no">http://localhost:19530</code>. Si habilita la función de autenticación en Milvus, utilice "&lt;su_nombre_de_usuario&gt;:&lt;su_contraseña&gt;" como token, de lo contrario no configure el token.</li>
-<li>Si utilizas <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajusta los <code translate="no">uri</code> y <code translate="no">token</code>, que se corresponden con el <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint y la API key</a> en Zilliz Cloud.</li>
+<li>Si tiene una gran escala de datos, digamos más de un millón de vectores, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. En esta configuración, por favor utilice la dirección del servidor y el puerto como su uri, por ejemplo<code translate="no">http://localhost:19530</code>. Si habilita la función de autenticación en Milvus, utilice "<your_username>:<your_password>" como token, de lo contrario no establezca el token.</li>
+<li>Si utiliza <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">punto final público y a la clave API</a> en Zilliz Cloud.</li>
 </ul>
 </div>
 <p>Definiremos una clase MilvusColbertRetriever para envolver el cliente Milvus para la recuperación de datos multivector. La implementación aplana las incrustaciones ColBERT y las inserta en una colección, donde cada fila representa una incrustación individual de la lista de incrustaciones ColBERT. También registra el doc_id y el seq_id para rastrear el origen de cada incrustación.</p>
@@ -310,9 +310,9 @@ ds: <span class="hljs-type">List</span>[torch.Tensor] = []
 torch.Size([1030, 128])
 </code></pre>
 <p>Crearemos una colección llamada "colpali" utilizando MilvusColbertRetriever.</p>
-<pre><code translate="no" class="language-python">retriever = <span class="hljs-title class_">MilvusColbertRetriever</span>(collection_name=<span class="hljs-string">&quot;colpali&quot;</span>, milvus_client=client)
-retriever.<span class="hljs-title function_">create_collection</span>()
-retriever.<span class="hljs-title function_">create_index</span>()
+<pre><code translate="no" class="language-python">retriever = MilvusColbertRetriever(collection_name=<span class="hljs-string">&quot;colpali&quot;</span>, milvus_client=client)
+retriever.create_collection()
+retriever.create_index()
 <button class="copy-code-btn"></button></code></pre>
 <p>Insertaremos las listas de incrustación en la base de datos Milvus.</p>
 <pre><code translate="no" class="language-python">filepaths = [<span class="hljs-string">&quot;./pages/&quot;</span> + name <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> os.listdir(<span class="hljs-string">&quot;./pages&quot;</span>)]

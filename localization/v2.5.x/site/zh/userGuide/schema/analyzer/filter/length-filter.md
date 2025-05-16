@@ -90,7 +90,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>设置最大标记长度。超过此长度的标记将被删除。</p></td>
    </tr>
 </table>
-<p><code translate="no">length</code> 过滤器对标记符生成器生成的术语进行操作，因此必须与标记符生成器结合使用。有关 Milvus 中可用的标记符列表，请参阅标记符<a href="/docs/zh/tokenizers">参考</a>。</p>
+<p><code translate="no">length</code> 过滤器对标记符生成器生成的术语进行操作，因此必须与标记符结合使用。有关 Milvus 中可用的标记符列表，请参阅<a href="/docs/zh/standard-tokenizer.md">标准</a>标记符及其同类页面。</p>
 <p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

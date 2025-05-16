@@ -75,7 +75,7 @@ title: Visión general de las integraciones
 <tr><td><a href="/docs/es/build_rag_on_arm.md">Construcción de RAG en arquitectura Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_fireworks.md">Construir RAG con Milvus y Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_lepton.md">Construir GAR con Milvus y Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/es/build_RAG_with_milvus_and_siliconflow">Construir GAR con Milvus y SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/es/build_RAG_with_milvus_and_siliconflow.md">Construir GAR con Milvus y SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/es/rag_with_milvus_and_unstructured.md">Construir un GAR con Milvus y fuentes de datos</a></td><td>de datos no estructurados</td><td>Milvus, no estructurados</td></tr>
 <tr><td><a href="/docs/es/RAG_with_pii_and_milvus.md">Construir un GAR con Milvus + PII Masker</a></td><td>Fuentes de datos</td><td>Milvus, Enmascarador PII</td></tr>
 <tr><td><a href="/docs/es/knowledge_table_with_milvus.md">Tabla de conocimientos con Milvus</a></td><td>Ingeniería del conocimiento</td><td>Tabla de conocimientos, Milvus</td></tr>
@@ -88,5 +88,8 @@ title: Visión general de las integraciones
 <tr><td><a href="/docs/es/integration_with_mindsdb.md">Integración de Milvus con MindsDB</a></td><td>Ingeniería del conocimiento</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_feast.md">Construir RAG con Milvus y Feast</a></td><td>Fuentes de datos</td><td>Milvus, Feast</td></tr>
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_docling.md">Construir RAG con Milvus y Docling</a></td><td>Fuentes de datos</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/es/build_RAG_with_milvus_and_embedAnything.md">Construir RAG con Milvus y EmbedAnything</a></td><td>Incorporación de</td><td>Milvus, EmbedAnything</td></tr>
+<tr><td><a href="/docs/es/milvus_and_n8n.md">Primeros pasos con Milvus y n8n</a></td><td>Orquestación</td><td>Milvus, n8n</td></tr>
+<tr><td><a href="/docs/es/use_milvus_in_anythingllm.md">Uso de Milvus en AnythingLLM</a></td><td>Orquestación</td><td>Milvus, AnythingLLM</td></tr>
 </tbody>
 </table>

@@ -8,8 +8,7 @@ summary: >-
   interrogazione contenuto in una richiesta di ricerca ricevuta, confronta il
   vettore di interrogazione con quelli del sottogruppo e restituisce i risultati
   più simili. Con la ricerca ANN, Milvus offre un'esperienza di ricerca
-  efficiente. Questa pagina aiuta ad apprendere come condurre ricerche ANN di
-  base.
+  efficiente. Questa pagina vi aiuta a imparare a condurre ricerche ANN di base.
 ---
 <h1 id="Basic-Vector-Search" class="common-anchor-header">Ricerca vettoriale di base<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +42,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>La ricerca ANN e la ricerca k-Nearest Neighbors (kNN) sono i metodi abituali nelle ricerche di similarità vettoriale. In una ricerca kNN, è necessario confrontare tutti i vettori di uno spazio vettoriale con il vettore di query contenuto nella richiesta di ricerca prima di individuare quelli più simili, il che richiede molto tempo e risorse.</p>
-<p>A differenza delle ricerche kNN, un algoritmo di ricerca ANN richiede un file <strong>di indice</strong> che registra l'ordine ordinato delle incorporazioni vettoriali. Quando arriva una richiesta di ricerca, è possibile utilizzare il file di indice come riferimento per individuare rapidamente un sottogruppo contenente probabilmente le incorporazioni vettoriali più simili al vettore interrogato. Quindi, è possibile utilizzare il <strong>tipo di metrica</strong> specificato per misurare la somiglianza tra il vettore di query e quelli del sottogruppo, ordinare i membri del gruppo in base alla somiglianza con il vettore di query e determinare i membri del gruppo <strong>top-K</strong>.</p>
+<p>A differenza delle ricerche kNN, un algoritmo di ricerca ANN richiede un file <strong>di indice</strong> che registra l'ordine ordinato delle incorporazioni vettoriali. Quando arriva una richiesta di ricerca, è possibile utilizzare il file di indice come riferimento per individuare rapidamente un sottogruppo contenente probabilmente le incorporazioni vettoriali più simili al vettore interrogato. Quindi, è possibile utilizzare il <strong>tipo di metrica</strong> specificato per misurare la somiglianza tra il vettore di query e quelli del sottogruppo, ordinare i membri del gruppo in base alla somiglianza con il vettore di query e individuare i <strong>primi K</strong> membri del gruppo.</p>
 <p>Le ricerche ANN dipendono da indici precostituiti e la velocità di ricerca, l'utilizzo della memoria e la correttezza della ricerca possono variare a seconda del tipo di indice scelto. È necessario bilanciare le prestazioni e la correttezza della ricerca.</p>
 <p>Per ridurre la curva di apprendimento, Milvus offre <strong>AUTOINDEX</strong>. Con <strong>AUTOINDEX</strong>, Milvus è in grado di analizzare la distribuzione dei dati all'interno della collezione durante la creazione dell'indice e di impostare i parametri dell'indice più ottimizzati in base all'analisi per trovare un equilibrio tra prestazioni di ricerca e correttezza.</p>
 <p>In questa sezione troverete informazioni dettagliate sui seguenti argomenti:</p>
@@ -975,10 +974,10 @@ curl --request POST \
     </button></h2><p>AUTOINDEX appiattisce notevolmente la curva di apprendimento delle ricerche ANN. Tuttavia, i risultati della ricerca potrebbero non essere sempre corretti con l'aumentare del top-K. Riducendo la portata della ricerca, migliorando la pertinenza dei risultati e diversificando i risultati, Milvus elabora i seguenti miglioramenti della ricerca.</p>
 <ul>
 <li><p>Ricerca filtrata</p>
-<p>È possibile includere condizioni di filtraggio in una richiesta di ricerca, in modo che Milvus esegua un filtraggio dei metadati prima di eseguire ricerche sull'RNA, riducendo l'ambito di ricerca dall'intera raccolta alle sole entità che corrispondono alle condizioni di filtraggio specificate.</p>
-<p>Per ulteriori informazioni sul filtraggio dei metadati e sulle condizioni di filtraggio, consultare <a href="/docs/it/filtered-search.md">Ricerca filtrata</a> e <a href="/docs/it/filtering">Filtraggio</a>.</p></li>
+<p>È possibile includere condizioni di filtraggio in una richiesta di ricerca, in modo che Milvus effettui un filtraggio dei metadati prima di effettuare ricerche sull'RNA, riducendo l'ambito di ricerca dall'intera raccolta alle sole entità che corrispondono alle condizioni di filtraggio specificate.</p>
+<p>Per ulteriori informazioni sul filtraggio dei metadati e sulle condizioni di filtraggio, consultare <a href="/docs/it/filtered-search.md">Ricerca filtrata</a>, <a href="/docs/it/boolean.md">Filtraggio spiegato</a> e gli argomenti correlati.</p></li>
 <li><p>Ricerca per intervallo</p>
-<p>È possibile migliorare la pertinenza dei risultati della ricerca limitando la distanza o il punteggio delle entità restituite all'interno di un intervallo specifico. In Milvus, una ricerca per intervallo comporta il disegno di due cerchi concentrici con al centro l'incorporamento vettoriale più simile al vettore della query. La richiesta di ricerca specifica il raggio di entrambi i cerchi e Milvus restituisce tutte le incorporazioni vettoriali che rientrano nel cerchio esterno ma non in quello interno.</p>
+<p>È possibile migliorare la pertinenza dei risultati della ricerca limitando la distanza o il punteggio delle entità restituite all'interno di un intervallo specifico. In Milvus, una ricerca per intervallo comporta il disegno di due cerchi concentrici con al centro l'incorporamento vettoriale più simile al vettore di interrogazione. La richiesta di ricerca specifica il raggio di entrambi i cerchi e Milvus restituisce tutte le incorporazioni vettoriali che rientrano nel cerchio esterno ma non in quello interno.</p>
 <p>Per ulteriori informazioni sulla ricerca per intervallo, consultare la sezione <a href="/docs/it/range-search.md">Ricerca per intervallo</a>.</p></li>
 <li><p>Ricerca per raggruppamento</p>
 <p>Se le entità restituite hanno lo stesso valore in un campo specifico, i risultati della ricerca potrebbero non rappresentare la distribuzione di tutte le incorporazioni vettoriali nello spazio vettoriale. Per diversificare i risultati della ricerca, si può utilizzare la ricerca per raggruppamento.</p>
@@ -997,7 +996,7 @@ curl --request POST \
 <p>Per informazioni dettagliate sulla corrispondenza delle parole chiave, consultare la sezione <a href="/docs/it/keyword-match.md">Corrispondenza delle parole chiave</a>.</p></li>
 <li><p>Utilizzare la chiave di partizione</p>
 <p>Il coinvolgimento di più campi scalari nel filtraggio dei metadati e l'uso di una condizione di filtraggio piuttosto complicata possono influire sull'efficienza della ricerca. Se si imposta un campo scalare come chiave di partizione e si utilizza una condizione di filtraggio che coinvolge la chiave di partizione nella richiesta di ricerca, si può limitare l'ambito di ricerca alle partizioni corrispondenti ai valori della chiave di partizione specificati.</p>
-<p>Per informazioni dettagliate sulla chiave di partizione, vedere <a href="/docs/it/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
+<p>Per informazioni dettagliate sulla chiave di partizione, consultare la sezione <a href="/docs/it/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
 <li><p>Usa mmap</p>
 <p>Per i dettagli sulle impostazioni di mmap, fare riferimento a <a href="/docs/it/mmap.md">Usa mmap</a>.</p></li>
 <li><p>Compattazione del clustering</p>

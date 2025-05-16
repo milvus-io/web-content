@@ -28,7 +28,7 @@ title: Использование полнотекстового поиска с
 </a></p>
 <p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Полнотекстовый поиск</a> - это традиционный метод поиска документов по определенным ключевым словам или фразам в тексте. Он ранжирует результаты на основе оценки релевантности, рассчитанной с учетом таких факторов, как частота встречаемости терминов. В то время как семантический поиск лучше понимает смысл и контекст, полнотекстовый поиск превосходит его в точности подбора ключевых слов, что делает его полезным дополнением к семантическому поиску. Алгоритм BM25 широко используется для ранжирования в полнотекстовом поиске и играет ключевую роль в Retrieval-Augmented Generation (RAG).</p>
 <p>В<a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> реализованы встроенные возможности полнотекстового поиска с использованием BM25. Этот подход преобразует текст в разреженные векторы, которые представляют собой оценки BM25. Вы можете просто ввести необработанный текст, и Milvus автоматически сгенерирует и сохранит разреженные векторы, без необходимости ручной генерации разреженных вкраплений.</p>
-<p>Интеграция LangChain с Milvus также добавила эту функцию, упростив процесс включения полнотекстового поиска в приложения RAG. Комбинируя полнотекстовый поиск с семантическим поиском с помощью плотных векторов, вы можете получить гибридный подход, который использует как семантический контекст из плотных вкраплений, так и точную релевантность ключевых слов из сопоставления слов. Такая интеграция повышает точность, релевантность и удобство работы с поисковыми системами.</p>
+<p>Интеграция LangChain с Milvus также добавила эту функцию, упростив процесс внедрения полнотекстового поиска в приложения RAG. Комбинируя полнотекстовый поиск с семантическим поиском с помощью плотных векторов, вы можете получить гибридный подход, который использует как семантический контекст из плотных вкраплений, так и точную релевантность ключевых слов из сопоставления слов. Такая интеграция повышает точность, релевантность и удобство работы с поисковыми системами.</p>
 <p>В этом руководстве мы покажем, как использовать LangChain и Milvus для реализации полнотекстового поиска в вашем приложении.</p>
 <div class="alert note">
 <ul>
@@ -105,10 +105,10 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>В приведенном выше коде мы определяем экземпляр <code translate="no">BM25BuiltInFunction</code> и передаем его объекту <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> - это легкий класс-обертка для <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> в Milvus.</p>
+<p>В приведенном выше коде мы определяем экземпляр <code translate="no">BM25BuiltInFunction</code> и передаем его объекту <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> - это облегченный класс-обертка для <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> в Milvus.</p>
 <p>Вы можете указать поля ввода и вывода для этой функции в параметрах <code translate="no">BM25BuiltInFunction</code>:</p>
 <ul>
 <li><code translate="no">input_field_names</code> (str): Имя поля ввода, по умолчанию <code translate="no">text</code>. Оно указывает, какое поле эта функция считывает в качестве входного.</li>
@@ -136,7 +136,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -164,7 +164,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -211,7 +211,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Мы можем взглянуть на схему коллекции Milvus и убедиться, что настроенный анализатор настроен правильно.</p>
@@ -284,7 +284,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">Построение цепочки RAG</h3><p>Мы подготавливаем экземпляр LLM и подсказку, а затем объединяем их в RAG-конвейер с помощью языка выражений LangChain.</p>

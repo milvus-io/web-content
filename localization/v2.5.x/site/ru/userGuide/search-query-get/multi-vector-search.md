@@ -95,7 +95,7 @@ summary: >-
     </button></h2><p>В этом разделе на конкретном примере показано, как проводить гибридный поиск на разреженных векторах для повышения точности текстового поиска.</p>
 <h3 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Создание коллекции с несколькими векторными полями</h3><p>Процесс создания коллекции состоит из трех частей: определение схемы коллекции, настройка параметров индекса и создание коллекции.</p>
 <h4 id="Define-schema" class="common-anchor-header">Определение схемы</h4><p>В этом примере необходимо определить несколько векторных полей в схеме коллекции. В настоящее время каждая коллекция по умолчанию может включать до 4 векторных полей. Но при необходимости можно изменить значение <code translate="no">proxy.maxVectorFieldNum</code>, чтобы включить в коллекцию до 10 векторных полей.</p>
-<p>Следующий пример определяет схему коллекции, где <code translate="no">dense</code> и <code translate="no">sparse</code> - это два векторных поля:</p>
+<p>В следующем примере определена схема коллекции, где <code translate="no">dense</code> и <code translate="no">sparse</code> - это два векторных поля:</p>
 <ul>
 <li><p><code translate="no">id</code>: Это поле служит первичным ключом для хранения текстовых идентификаторов. Тип данных этого поля - INT64.</p></li>
 <li><p><code translate="no">text</code>: Это поле используется для хранения текстового содержимого. Тип данных этого поля - VARCHAR, максимальная длина - 1000 символов.</p></li>
@@ -512,7 +512,7 @@ search_param_1 = {
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>}, {<span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
+query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>, <span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
@@ -620,7 +620,7 @@ request2 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;sparse&qu
 <li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Эта стратегия рекомендуется, когда нет конкретного акцента. RRF может эффективно сбалансировать важность каждого векторного поля.</p></li>
 </ul>
 <p>Более подробную информацию о механизмах работы этих двух стратегий ранжирования см. в разделе <a href="/docs/ru/reranking.md">Ранжирование</a>.</p>
-<p>В следующих двух примерах показано, как использовать стратегии ранжирования WeightedRanker и RRFRanker:</p>
+<p>Следующие два примера демонстрируют использование стратегий ранжирования WeightedRanker и RRFRanker:</p>
 <ol>
 <li><p><strong>Пример 1: Использование WeightedRanker</strong></p>
 <p>При использовании стратегии WeightedRanker необходимо ввести значения веса в функцию <code translate="no">WeightedRanker</code>. Количество базовых ANN в гибридном поиске соответствует количеству значений, которые необходимо ввести. Вводимые значения должны находиться в диапазоне [0,1], причем значения ближе к 1 означают большую важность.</p>

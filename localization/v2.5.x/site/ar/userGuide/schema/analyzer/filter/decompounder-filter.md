@@ -103,7 +103,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>قائمة بمكونات الكلمات المستخدمة لتقسيم المصطلحات المركبة. يحدد هذا القاموس كيفية تحليل الكلمات المركبة إلى مصطلحات فردية.</p></td>
    </tr>
 </table>
-<p>يعمل عامل التصفية <code translate="no">decompounder</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة الترميز. للحصول على قائمة بأدوات الترميز المتوفرة في ميلفوس، راجع <a href="/docs/ar/tokenizers">مرجع أدوات الترميز</a>.</p>
+<p>يعمل عامل التصفية <code translate="no">decompounder</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة الترميز. للحصول على قائمة بأدوات الترميز المتوفرة في ميلفوس، راجع <a href="/docs/ar/standard-tokenizer.md">أداة الترميز القياسية</a> وصفحاتها الشقيقة.</p>
 <p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لـ Milvus بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل ترميز وتصفية فعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

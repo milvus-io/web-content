@@ -25,8 +25,8 @@ title: LangChain 및 Milvus에서 전체 텍스트 검색 사용하기
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색은</a> 텍스트의 특정 키워드나 구문을 일치시켜 문서를 검색하는 전통적인 방법입니다. 이는 용어 빈도 등의 요소로 계산된 관련성 점수를 기반으로 결과의 순위를 매깁니다. 시맨틱 검색은 의미와 문맥을 이해하는 데 더 효과적이지만, 전체 텍스트 검색은 정확한 키워드 매칭에 탁월하므로 시맨틱 검색을 보완하는 데 유용합니다. BM25 알고리즘은 전체 텍스트 검색에서 순위를 매기는 데 널리 사용되며 검색 증강 세대(RAG)에서 핵심적인 역할을 합니다.</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5에는</a> BM25를 사용한 기본 전체 텍스트 검색 기능이 도입되었습니다. 이 접근 방식은 텍스트를 BM25 점수를 나타내는 스파스 벡터로 변환합니다. 사용자는 원시 텍스트를 입력하기만 하면, 수동으로 스파스 임베딩을 생성할 필요 없이 Milvus가 자동으로 스파스 벡터를 생성하고 저장합니다.</p>
-<p>LangChain과 Milvus의 통합으로 이 기능도 도입되어 전체 텍스트 검색을 RAG 애플리케이션에 통합하는 프로세스가 간소화되었습니다. 전체 텍스트 검색과 고밀도 벡터를 사용한 시맨틱 검색을 결합함으로써, 고밀도 임베딩의 시맨틱 컨텍스트와 단어 매칭의 정확한 키워드 관련성을 모두 활용하는 하이브리드 접근 방식을 달성할 수 있습니다. 이러한 통합은 검색 시스템의 정확도, 연관성 및 사용자 경험을 향상시킵니다.</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5에는</a> BM25를 사용한 기본 전체 텍스트 검색 기능이 도입되었습니다. 이 접근 방식은 텍스트를 BM25 점수를 나타내는 스파스 벡터로 변환합니다. 원시 텍스트를 입력하기만 하면 Milvus가 자동으로 스파스 벡터를 생성하고 저장하므로 수동으로 스파스 임베딩을 생성할 필요가 없습니다.</p>
+<p>LangChain과 Milvus의 통합으로 이 기능도 도입되어 전체 텍스트 검색을 RAG 애플리케이션에 통합하는 프로세스가 간소화되었습니다. 전체 텍스트 검색과 고밀도 벡터를 사용한 시맨틱 검색을 결합함으로써, 고밀도 임베딩의 시맨틱 컨텍스트와 단어 매칭의 정확한 키워드 관련성을 모두 활용하는 하이브리드 접근 방식을 달성할 수 있습니다. 이러한 통합은 검색 시스템의 정확성, 연관성 및 사용자 경험을 향상시킵니다.</p>
 <p>이 튜토리얼에서는 애플리케이션에서 전체 텍스트 검색을 구현하기 위해 LangChain과 Milvus를 사용하는 방법을 보여드립니다.</p>
 <div class="alert note">
 <ul>
@@ -103,7 +103,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>위의 코드에서는 <code translate="no">BM25BuiltInFunction</code> 의 인스턴스를 정의하고 <code translate="no">Milvus</code> 객체에 전달합니다. <code translate="no">BM25BuiltInFunction</code> 는 Milvus의 경량 래퍼 클래스입니다. <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> 의 경량 래퍼 클래스입니다.</p>
@@ -134,7 +134,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -162,7 +162,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -209,7 +209,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 컬렉션의 스키마를 살펴보고 사용자 정의된 분석기가 올바르게 설정되었는지 확인할 수 있습니다.</p>
@@ -282,7 +282,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">RAG 체인 구축</h3><p>LLM 인스턴스와 프롬프트를 준비한 다음 LangChain 표현 언어를 사용하여 RAG 파이프라인으로 결합합니다.</p>

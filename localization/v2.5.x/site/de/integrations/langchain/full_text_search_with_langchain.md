@@ -105,7 +105,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Im obigen Code definieren wir eine Instanz von <code translate="no">BM25BuiltInFunction</code> und übergeben sie an das <code translate="no">Milvus</code> Objekt. <code translate="no">BM25BuiltInFunction</code> ist eine leichtgewichtige Wrapper-Klasse für <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> in Milvus.</p>
@@ -114,7 +114,7 @@ vectorstore = Milvus.from_documents(
 <li><code translate="no">input_field_names</code> (str): Der Name des Eingabefeldes, Standard ist <code translate="no">text</code>. Er gibt an, welches Feld diese Funktion als Eingabe liest.</li>
 <li><code translate="no">output_field_names</code> (str): Der Name des Ausgabefeldes, Standardwert ist <code translate="no">sparse</code>. Er gibt an, in welches Feld diese Funktion das berechnete Ergebnis ausgibt.</li>
 </ul>
-<p>Beachten Sie, dass wir in den oben erwähnten Milvus-Initialisierungsparametern auch <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> angeben. Da das Feld <code translate="no">sparse</code> als das durch <code translate="no">BM25BuiltInFunction</code> definierte Ausgabefeld genommen wird, wird das andere Feld <code translate="no">dense</code> automatisch dem Ausgabefeld von OpenAIEmbeddings zugewiesen.</p>
+<p>Beachten Sie, dass wir in den oben erwähnten Initialisierungsparametern von Milvus auch <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> angeben. Da das Feld <code translate="no">sparse</code> als das durch <code translate="no">BM25BuiltInFunction</code> definierte Ausgabefeld genommen wird, wird das andere Feld <code translate="no">dense</code> automatisch dem Ausgabefeld von OpenAIEmbeddings zugewiesen.</p>
 <p>In der Praxis, insbesondere bei der Kombination mehrerer Einbettungen oder Funktionen, empfehlen wir, die Eingabe- und Ausgabefelder für jede Funktion explizit anzugeben, um Mehrdeutigkeiten zu vermeiden.</p>
 <p>Im folgenden Beispiel geben wir die Eingabe- und Ausgabefelder von <code translate="no">BM25BuiltInFunction</code> explizit an, so dass klar ist, für welches Feld die eingebaute Funktion bestimmt ist.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
@@ -136,7 +136,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -164,7 +164,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -211,7 +211,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Wir können einen Blick auf das Schema der Milvus-Sammlung werfen und sicherstellen, dass der angepasste Analyzer korrekt eingerichtet ist.</p>
@@ -245,7 +245,7 @@ vectorstore = Milvus.from_documents(
 <p>Dieses Diagramm zeigt den Hybrid Retrieve &amp; Reranking Prozess, der BM25 für das Keyword Matching und die Vektorsuche für das semantische Retrieval kombiniert. Die Ergebnisse beider Methoden werden zusammengeführt, neu eingestuft und an einen LLM weitergeleitet, um die endgültige Antwort zu generieren.</p>
 <p>Die hybride Suche sorgt für ein Gleichgewicht zwischen Präzision und semantischem Verständnis und verbessert die Genauigkeit und Robustheit bei verschiedenen Abfragen. Sie ruft Kandidaten mit der BM25-Volltextsuche und der Vektorsuche ab und gewährleistet eine semantische, kontextbewusste und genaue Suche.</p>
 <p>Lassen Sie uns mit einem Beispiel beginnen.</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Vorbereiten der Daten</h3><p>Wir verwenden den Langchain WebBaseLoader, um Dokumente aus Webquellen zu laden und sie mit dem RecursiveCharacterTextSplitter in Teile zu zerlegen.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Vorbereiten der Daten</h3><p>Wir verwenden den Langchain WebBaseLoader, um Dokumente aus Webquellen zu laden und sie mit dem RecursiveCharacterTextSplitter in Stücke zu zerlegen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
@@ -275,7 +275,7 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Laden des Dokuments in den Milvus-Vektorspeicher</h3><p>Wie oben beschrieben, initialisieren und laden wir die vorbereiteten Dokumente in den Milvus-Vektorspeicher, der zwei Vektorfelder enthält: <code translate="no">dense</code> ist für die OpenAI-Einbettung und <code translate="no">sparse</code> ist für die BM25-Funktion.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Laden des Dokuments in den Milvus-Vektorspeicher</h3><p>Wie in der Einleitung oben beschrieben, initialisieren und laden wir die vorbereiteten Dokumente in den Milvus-Vektorspeicher, der zwei Vektorfelder enthält: <code translate="no">dense</code> für die OpenAI-Einbettung und <code translate="no">sparse</code> für die BM25-Funktion.</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -284,7 +284,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">RAG-Kette aufbauen</h3><p>Wir bereiten die LLM-Instanz und die Eingabeaufforderung vor und verbinden sie dann mit Hilfe der LangChain Expression Language zu einer RAG-Pipeline.</p>

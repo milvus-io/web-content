@@ -20,23 +20,46 @@ title: 마트료시카 임베딩을 사용한 퍼널 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>효율적인 벡터 검색 시스템을 구축할 때, 한 가지 핵심 과제는 허용 가능한 지연 시간과 리콜을 유지하면서 스토리지 비용을 관리하는 것입니다. 최신 임베딩 모델은 수백 또는 수천 개의 차원을 가진 벡터를 출력하기 때문에 원시 벡터와 인덱스에 상당한 스토리지와 계산 오버헤드를 발생시킵니다.</p>
-<p>전통적으로, 인덱스 구축 직전에 양자화 또는 차원 축소 방법을 적용하여 저장소 요구 사항을 줄입니다. 예를 들어, 제품 정량화(PQ)를 사용해 정밀도를 낮추거나 주성분 분석(PCA)을 사용해 차원 수를 줄임으로써 저장 공간을 절약할 수 있습니다. 이러한 방법은 전체 벡터 집합을 분석하여 벡터 간의 의미 관계를 유지하는 더 간결한 벡터 집합을 찾습니다.</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+효율적인 벡터 검색 시스템을 구축할 때, 한 가지 핵심 과제는 허용 가능한 지연 시간과 리콜을 유지하면서 스토리지 비용을 관리하는 것입니다. 최신 임베딩 모델은 수백 또는 수천 개의 차원을 가진 벡터를 출력하기 때문에 원시 벡터와 인덱스에 상당한 스토리지와 계산 오버헤드를 발생시킵니다.<p>전통적으로 인덱스 구축 직전에 양자화 또는 차원 축소 방법을 적용하면 저장소 요구 사항을 줄일 수 있습니다. 예를 들어, 제품 정량화(PQ)를 사용해 정밀도를 낮추거나 주성분 분석(PCA)을 사용해 차원 수를 줄임으로써 저장 공간을 절약할 수 있습니다. 이러한 방법은 전체 벡터 집합을 분석하여 벡터 간의 의미 관계를 유지하는 더 간결한 벡터 집합을 찾습니다.</p>
 <p>이러한 표준 접근 방식은 효과적이기는 하지만 정밀도나 차원을 단 한 번만 감소시킵니다. 하지만 점점 더 정밀하게 표현되는 피라미드처럼 여러 계층의 디테일을 동시에 유지할 수 있다면 어떨까요?</p>
 <p>마트료시카 임베딩을 소개합니다. 러시아 중첩 인형(그림 참조)에서 이름을 따온 이 기발한 구조는 단일 벡터 내에 여러 스케일의 표현을 임베딩합니다. 기존의 사후 처리 방법과 달리, 마트료시카 임베딩은 초기 학습 과정에서 이 다중 스케일 구조를 학습합니다. 그 결과는 놀랍습니다. 전체 임베딩이 입력 의미를 포착할 뿐만 아니라 중첩된 각 하위 집합 접두사(전반부, 1/4 등)가 덜 상세하더라도 일관성 있는 표현을 제공합니다.</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
-<p>이 노트에서는 의미 검색을 위해 Milvus와 함께 Matryoshka 임베딩을 사용하는 방법을 살펴봅니다. "깔때기 검색"이라는 알고리즘을 통해 임베딩 차원의 작은 하위 집합에 대한 유사성 검색을 수행하면서 회상률을 급격히 떨어뜨리지 않고도 검색을 수행할 수 있는 방법을 설명합니다.</p>
+<p>이 노트에서는 의미 검색을 위해 Milvus와 함께 Matryoshka 임베딩을 사용하는 방법을 살펴봅니다. "깔때기 검색"이라는 알고리즘을 통해 임베딩 차원의 작은 하위 집합에 대한 유사성 검색을 수행하여 회상률을 급격히 떨어뜨리지 않고도 검색을 수행할 수 있는 방법을 설명합니다.</p>
+<h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>CPU 전용:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>CUDA 11.8용:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>CUDA 11.8의 설치 명령은 예시일 뿐입니다. 파이토치 설치 시 사용 중인 CUDA 버전을 확인하시기 바랍니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">마트료시카 임베딩 모델 로드<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
@@ -54,7 +77,7 @@ title: 마트료시카 임베딩을 사용한 퍼널 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음과 같은 표준 임베딩 모델을 사용하는 대신 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>와 같은 표준 임베딩 <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">모델을</a> 사용하는 대신, Matryoshka 임베딩을 생성하도록 특별히 훈련된 <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">Nomic의 모델을</a> 사용합니다.</p>
+    </button></h2><p>와 같은 표준 임베딩 모델을 사용하는 대신 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>와 같은 표준 임베딩 <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">모델을</a> 사용하는 대신 Matryoshka 임베딩을 생성하도록 특별히 훈련된 <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">Nomic의 모델을</a> 사용합니다.</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -80,7 +103,7 @@ title: 마트료시카 임베딩을 사용한 퍼널 검색
         ></path>
       </svg>
     </button></h2><p>다음 코드는 문서 페이지 <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"문장 트랜스포머와 밀버스를 사용한 영화 검색"</a>의 코드를 수정한 것입니다. 먼저 HuggingFace에서 데이터 세트를 로드합니다. 여기에는 약 35,000개의 항목이 포함되어 있으며, 각 항목은 Wikipedia 문서가 있는 영화에 해당합니다. 이 예제에서는 <code translate="no">Title</code> 및 <code translate="no">PlotSummary</code> 필드를 사용하겠습니다.</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -109,13 +132,13 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus는 현재 임베딩의 하위 집합에 대한 검색을 지원하지 않기 때문에 임베딩을 두 부분으로 나누어 헤드는 색인 및 검색할 벡터의 초기 하위 집합을 나타내고 테일은 나머지 부분입니다. 이 모델은 코사인 거리 유사성 검색을 위해 훈련되었으므로 헤드 임베딩을 정규화합니다. 그러나 나중에 더 큰 하위 집합에 대한 유사도를 계산하려면 헤드 임베딩의 규범을 저장해야 하므로 꼬리에 결합하기 전에 정규화를 해제할 수 있습니다.</p>
 <p>임베딩의 첫 1/6을 통해 검색을 수행하려면 <code translate="no">head_embedding</code> 필드에 벡터 검색 인덱스를 생성해야 합니다. 나중에 '퍼널 검색'의 결과를 일반 벡터 검색과 비교할 것이므로 전체 임베딩에 대해서도 검색 인덱스를 구축할 것입니다.</p>
-<p><em>중요한 것은 <code translate="no">IP</code> 거리 메트릭이 아닌 <code translate="no">COSINE</code> 을 사용하는 것인데, 그렇지 않으면 임베딩 규범을 추적해야 하므로 구현이 복잡해지기 때문입니다(퍼널 검색 알고리즘을 설명하면 더 이해가 쉬워질 것입니다).</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<p><em>중요한 것은 <code translate="no">IP</code> 거리 메트릭이 아닌 <code translate="no">COSINE</code> 을 사용하는 것인데, 그렇지 않으면 임베딩 규범을 추적해야 하므로 구현이 복잡해지기 때문입니다(퍼널 검색 알고리즘에 대해 설명하면 더 이해가 쉬울 것입니다).</em></p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>마지막으로 35,000개의 모든 영화에 대한 줄거리 요약을 인코딩하고 해당 임베딩을 데이터베이스에 입력합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -297,7 +320,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>추가 벡터 검색을 수행하지 않고도 리콜을 복원할 수 있었습니다! 질적으로 이러한 결과는 다른 임베딩 모델을 사용하는 튜토리얼 <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">'밀버스와 문장 트랜스포머를 사용한 영화 검색'</a>의 표준 벡터 검색보다 '로스트 아크의 침입자'와 '샤이닝'에 대한 리콜이 더 높은 것으로 보입니다. 하지만 &quot;페리스 뷸러의 하루&quot;는 찾을 수 없었는데, 이 부분은 나중에 노트북에서 다시 다룰 예정입니다. (더 많은 정량적 실험과 벤치마킹은 <a href="https://arxiv.org/abs/2205.13147">Matryoshka 표현 학습</a> 논문을 참조하세요.)</p>
+<p>추가 벡터 검색을 수행하지 않고도 리콜을 복원할 수 있었습니다! 질적으로 이러한 결과는 다른 임베딩 모델을 사용하는 튜토리얼 <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">'밀버스와 문장 트랜스포머를 사용한 영화 검색'</a>의 표준 벡터 검색보다 '로스트 아크의 침입자'와 '샤이닝'에 대한 리콜이 더 높은 것으로 보입니다. 그러나 "페리스 뷸러의 하루"는 찾을 수 없으며, 이 내용은 나중에 노트북에서 다시 다룰 예정입니다. (더 많은 정량적 실험과 벤치마킹은 <a href="https://arxiv.org/abs/2205.13147">Matryoshka 표현 학습</a> 논문을 참조하세요.)</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">퍼널 검색과 일반 검색 비교<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -356,7 +379,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>&quot;한 십대가 학교를 빠지기 위해 병을 속이고...&quot;에 대한 결과를 제외하면, 퍼널 검색의 경우 128차원의 검색 공간에서 퍼널 검색을 수행한 반면 일반 검색의 경우 768차원에서 검색을 수행했음에도 불구하고 전체 검색과 거의 동일한 결과를 얻을 수 있습니다.</p>
+<p>"한 십대가 학교를 빠지기 위해 병을 속이고..."에 대한 결과를 제외하면, 퍼널 검색의 경우 128차원의 검색 공간에서 퍼널 검색을 수행한 반면 일반 검색의 경우 768차원에서 검색을 수행했음에도 불구하고 전체 검색과 거의 동일한 결과를 얻을 수 있습니다.</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">페리스 뷸러의 휴무일에 대한 퍼널 검색 리콜 실패 조사하기<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -408,7 +431,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>초기 후보 목록이 충분히 크지 않았거나, 오히려 원하는 검색어가 가장 높은 수준의 세부 수준에서 쿼리와 충분히 유사하지 않다는 것이 문제임을 알 수 있습니다. <code translate="no">128</code> 에서 <code translate="no">256</code> 으로 변경하면 검색에 성공합니다. <em>리콜과 지연 시간 간의 균형을 경험적으로 평가하기 위해 홀드아웃 세트의 후보자 수를 설정하는 경험 법칙을 만들어야 합니다.</em></p>
+<p>초기 후보 목록이 충분히 크지 않았거나, 오히려 원하는 검색어가 가장 높은 수준의 세부 수준에서 쿼리와 충분히 유사하지 않은 것이 문제임을 알 수 있습니다. <code translate="no">128</code> 에서 <code translate="no">256</code> 으로 변경하면 검색에 성공합니다. <em>리콜과 지연 시간 간의 균형을 경험적으로 평가하기 위해 홀드아웃 세트의 후보자 수를 설정하는 경험 법칙을 만들어야 합니다.</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -443,7 +466,7 @@ On the Edge of Innocence
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 모델은 재귀적으로 더 작은 접두사 임베딩을 잘 매칭하도록 학습되었습니다. 우리가 사용하는 차원의 순서가 중요할까요? 예를 들어, 접미사인 임베딩의 하위 집합도 사용할 수 있을까요? 이 실험에서는 마트료시카 임베딩의 차원 순서를 반대로 하여 깔때기 검색을 수행합니다.</p>
+    </button></h2><p>이 모델은 재귀적으로 작은 접두사 임베딩을 잘 일치시키도록 학습되었습니다. 우리가 사용하는 차원의 순서가 중요할까요? 예를 들어, 접미사인 임베딩의 하위 집합도 사용할 수 있을까요? 이 실험에서는 마트료시카 임베딩의 차원 순서를 반대로 하여 깔때기 검색을 수행합니다.</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;./wikiplots-matryoshka-flipped.db&quot;</span>)
 
 fields = [
@@ -565,4 +588,4 @@ Leopard in the Snow
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
 <div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.5.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-the-shining.png' width='100%'></div>
-"퍼널 검색"이라는 보다 효율적인 시맨틱 검색 알고리즘을 수행하기 위해 Milvus와 함께 Matryoshka 임베딩을 사용하는 방법을 보여드렸습니다. 또한 알고리즘의 순위 재지정 및 가지치기 단계의 중요성과 초기 후보 목록이 너무 작을 때의 실패 모드에 대해서도 살펴봤습니다. 마지막으로, 하위 임베딩을 구성할 때 차원 순서가 얼마나 중요한지, 즉 모델이 학습된 것과 같은 방식이어야 하는지에 대해 논의했습니다. 또는 오히려 모델이 특정 방식으로 학습되었기 때문에 임베딩의 접두사가 의미가 있는 것입니다. 이제 검색 성능을 크게 저하시키지 않으면서도 시맨틱 검색의 저장 비용을 줄이기 위해 Matryoshka 임베딩과 퍼널 검색을 구현하는 방법을 알게 되었습니다!
+"퍼널 검색"이라는 보다 효율적인 시맨틱 검색 알고리즘을 수행하기 위해 Milvus와 함께 Matryoshka 임베딩을 사용하는 방법을 보여드렸습니다. 또한 알고리즘의 순위 재지정 및 가지치기 단계의 중요성과 초기 후보 목록이 너무 작을 때의 실패 모드에 대해서도 살펴봤습니다. 마지막으로, 하위 임베딩을 구성할 때 차원 순서가 얼마나 중요한지, 즉 모델이 학습된 것과 같은 방식이어야 하는지에 대해 논의했습니다. 또는 오히려 모델이 특정 방식으로 학습되었기 때문에 임베딩의 접두사가 의미가 있는 것입니다. 이제 검색 성능을 크게 저하시키지 않으면서도 시맨틱 검색의 저장 비용을 줄이기 위해 마트료시카 임베딩과 퍼널 검색을 구현하는 방법을 알게 되었습니다!

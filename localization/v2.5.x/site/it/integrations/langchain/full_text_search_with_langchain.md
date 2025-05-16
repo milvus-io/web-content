@@ -32,7 +32,7 @@ title: Uso della ricerca full-text con LangChain e Milvus
 <p>Questo tutorial mostra come utilizzare LangChain e Milvus per implementare la ricerca full-text nella vostra applicazione.</p>
 <div class="alert note">
 <ul>
-<li>La ricerca full-text è attualmente disponibile in Milvus Standalone, Milvus Distributed e Zilliz Cloud, ma non è ancora supportata in Milvus Lite (la cui implementazione è prevista per il futuro). Per ulteriori informazioni, contattare support@zilliz.com.</li>
+<li>La ricerca full-text è attualmente disponibile in Milvus Standalone, Milvus Distributed e Zilliz Cloud, ma non è ancora supportata in Milvus Lite (la cui implementazione è prevista in futuro). Per ulteriori informazioni, contattare support@zilliz.com.</li>
 <li>Prima di procedere con questo tutorial, assicuratevi di avere una conoscenza di base della <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">ricerca full-text</a> e dell'<a href="https://milvus.io/docs/basic_usage_langchain.md">utilizzo di base</a> dell'integrazione LangChain Milvus.</li>
 </ul>
 </div>
@@ -90,7 +90,7 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">Ricerca ibrida</h3><p>Per la ricerca full-text Milvus VectorStore accetta un parametro <code translate="no">builtin_function</code>. Attraverso questo parametro, è possibile passare un'istanza di <code translate="no">BM25BuiltInFunction</code>. Questo è diverso dalla ricerca semantica, che di solito passa embeddings densi a <code translate="no">VectorStore</code>,</p>
+    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">Ricerca ibrida</h3><p>Per la ricerca full-text Milvus VectorStore accetta un parametro <code translate="no">builtin_function</code>. Attraverso questo parametro, si può passare un'istanza di <code translate="no">BM25BuiltInFunction</code>. Questo è diverso dalla ricerca semantica, che di solito passa embeddings densi a <code translate="no">VectorStore</code>,</p>
 <p>Ecco un semplice esempio di ricerca ibrida in Milvus con OpenAI dense embedding per la ricerca semantica e BM25 per la ricerca full-text:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
@@ -105,7 +105,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Nel codice qui sopra, definiamo un'istanza di <code translate="no">BM25BuiltInFunction</code> e la passiamo all'oggetto <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> è una classe leggera per il wrapper di <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> in Milvus.</p>
@@ -136,7 +136,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -164,7 +164,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -211,7 +211,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Si può dare un'occhiata allo schema della collezione Milvus e verificare che l'analizzatore personalizzato sia impostato correttamente.</p>
@@ -284,7 +284,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">Costruire la catena RAG</h3><p>Prepariamo l'istanza LLM e il prompt, quindi li combiniamo in una pipeline RAG usando il LangChain Expression Language.</p>

@@ -26,8 +26,8 @@ title: 使用 Milvus 和 Gemini 建立 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini API</a>和<a href="https://ai.google.dev/aistudio">Google AI Studio</a>可協助您開始使用 Google 的最新模型，並將您的想法轉化為可擴充的應用程式。Gemini 可讓您存取功能強大的語言模型，例如<code translate="no">Gemini-1.5-Flash</code> 、<code translate="no">Gemini-1.5-Flash-8B</code> 和<code translate="no">Gemini-1.5-Pro</code> ，以執行文字產生、文件處理、視覺、音訊分析等任務。透過 API，您可以輸入包含數百萬筆字元的長上下文、針對特定任務微調模型、產生結構化輸出（如 JSON），以及利用語意檢索和程式碼執行等功能。</p>
-<p>在本教程中，我們將教您如何使用 Milvus 和 Gemini 建立 RAG（Retrieval-Augmented Generation）管道。我們將使用 Gemini 模型根據給定的查詢產生文字。我們也會使用 Milvus 來儲存和擷取產生的文字。</p>
+    </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini API</a>和<a href="https://ai.google.dev/aistudio">Google AI Studio</a>可協助您開始使用 Google 的最新模型，並將您的想法轉化為可擴充的應用程式。Gemini 可讓您存取功能強大的語言模型，例如<code translate="no">Gemini-2.0-Flash</code> 、<code translate="no">Gemini-2.0-Pro</code> 以及其他版本，以執行文字產生、文件處理、視覺、音訊分析等任務。透過 API，您可以輸入包含數百萬筆字元的長上下文、針對特定任務微調模型、產生結構化輸出（如 JSON），以及利用語意檢索和程式碼執行等功能。</p>
+<p>在本教程中，我們將教您如何使用 Milvus 和 Gemini 建立 RAG（Retrieval-Augmented Generation）管道。我們將使用 Gemini 模型根據給定的查詢產生回應，並使用從 Milvus 擷取的相關資訊進行擴充。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,8 @@ title: 使用 Milvus 和 Gemini 建立 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">相依性與環境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus google-generativeai requests tqdm
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">相依性與環境</h3><p>首先，安裝所需的套件：</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus google-genai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（按一下螢幕上方的「Runtime」功能表，然後從下拉式功能表中選擇「Restart session」）。</p>
@@ -51,12 +52,12 @@ title: 使用 Milvus 和 Gemini 建立 RAG
 <p>您應該先登入 Google AI Studio 平台，並準備<a href="https://aistudio.google.com/apikey">api key</a> <code translate="no">GEMINI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-the-data" class="common-anchor-header">準備資料</h3><p>我們使用<a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 文件 2.4.x</a>中的常見問題頁面作為 RAG 中的私有知識，對於簡單的 RAG 管道而言，這是一個很好的資料來源。</p>
 <p>下載 zip 檔案並解壓縮文件到資料夾<code translate="no">milvus_docs</code> 。</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
-$ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>我們從資料夾<code translate="no">milvus_docs/en/faq</code> 載入所有 markdown 檔案。對於每個文件，我們只需簡單地使用「#」來分隔文件中的內容，就可以大致分隔出 markdown 檔案中每個主要部分的內容。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
@@ -69,27 +70,27 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">準備 LLM 和嵌入模型</h3><p>我們使用<code translate="no">gemini-1.5-flash</code> 作為 LLM，並使用<code translate="no">text-embedding-004</code> 作為嵌入模型。</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">準備 LLM 和嵌入模型</h3><p>我們使用<code translate="no">gemini-2.0-flash</code> 作為 LLM，並使用<code translate="no">text-embedding-004</code> 作為嵌入模型。</p>
 <p>讓我們嘗試從 LLM 產生一個測試回應：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> google.generativeai <span class="hljs-keyword">as</span> genai
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google <span class="hljs-keyword">import</span> genai
 
-genai.configure(api_key=os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>])
+client = genai.Client(api_key=os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>])
 
-gemini_model = genai.GenerativeModel(<span class="hljs-string">&quot;gemini-1.5-flash&quot;</span>)
-
-response = gemini_model.generate_content(<span class="hljs-string">&quot;who are you&quot;</span>)
+response = client.models.generate_content(
+    model=<span class="hljs-string">&quot;gemini-2.0-flash&quot;</span>, contents=<span class="hljs-string">&quot;who are you&quot;</span>
+)
 <span class="hljs-built_in">print</span>(response.text)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">I am a large language model, trained by Google.  I am an AI and don't have a personal identity or consciousness.  My purpose is to process information and respond to a wide range of prompts and questions in a helpful and informative way.
+<pre><code translate="no">I am a large language model, trained by Google.
 </code></pre>
 <p>產生測試的 embedding，並列印其尺寸和前幾個元素。</p>
-<pre><code translate="no" class="language-python">test_embeddings = genai.embed_content(
-    model=<span class="hljs-string">&quot;models/text-embedding-004&quot;</span>, content=[<span class="hljs-string">&quot;This is a test1&quot;</span>, <span class="hljs-string">&quot;This is a test2&quot;</span>]
-)[<span class="hljs-string">&quot;embedding&quot;</span>]
+<pre><code translate="no" class="language-python">test_embeddings = client.models.embed_content(
+    model=<span class="hljs-string">&quot;text-embedding-004&quot;</span>, contents=[<span class="hljs-string">&quot;This is a test1&quot;</span>, <span class="hljs-string">&quot;This is a test2&quot;</span>]
+)
 
-embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings[<span class="hljs-number">0</span>])
+embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings.embeddings[<span class="hljs-number">0</span>].values)
 <span class="hljs-built_in">print</span>(embedding_dim)
-<span class="hljs-built_in">print</span>(test_embeddings[<span class="hljs-number">0</span>][:<span class="hljs-number">10</span>])
+<span class="hljs-built_in">print</span>(test_embeddings.embeddings[<span class="hljs-number">0</span>].values[:<span class="hljs-number">10</span>])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">768
 [0.013588584, -0.004361838, -0.08481652, -0.039724775, 0.04723794, -0.0051557426, 0.026071774, 0.045514572, -0.016867816, 0.039378334]
@@ -109,9 +110,10 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings[<span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">建立集合</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">建立集合</h3><p>讓我們初始化 Milvus 用戶端，並建立我們的集合：</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -124,7 +126,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 </ul>
 </div>
 <p>檢查集合是否已經存在，如果已經存在，請將其刪除。</p>
-<pre><code translate="no" class="language-python">if milvus_client.has_collection(collection_name):
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>使用指定的參數建立新的集合。</p>
@@ -132,8 +134,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入資料</h3><p>遍歷文字行，建立嵌入，然後將資料插入 Milvus。</p>
@@ -142,16 +144,14 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 
 data = []
 
-doc_embeddings = genai.embed_content(
-    model=<span class="hljs-string">&quot;models/text-embedding-004&quot;</span>, content=text_lines
-)[<span class="hljs-string">&quot;embedding&quot;</span>]
+doc = client.models.embed_content(model=<span class="hljs-string">&quot;text-embedding-004&quot;</span>, contents=text_lines)
 
 <span class="hljs-keyword">for</span> i, line <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(tqdm(text_lines, desc=<span class="hljs-string">&quot;Creating embeddings&quot;</span>)):
-    data.append({<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: doc_embeddings[i], <span class="hljs-string">&quot;text&quot;</span>: line})
+    data.append({<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: doc.embeddings[i].values, <span class="hljs-string">&quot;text&quot;</span>: line})
 
 milvus_client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Creating embeddings: 100%|██████████| 72/72 [00:00&lt;00:00, 468201.38it/s]
+<pre><code translate="no">Creating embeddings: 100%|██████████| 72/72 [00:00&lt;00:00, 337796.30it/s]
 
 
 
@@ -178,13 +178,11 @@ milvus_client.insert(collection_name=collection_name, data=data)
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在資料集中搜尋該問題，並擷取語義上前三名的符合資料。</p>
-<pre><code translate="no" class="language-python">question_embedding = genai.embed_content(
-    model=<span class="hljs-string">&quot;models/text-embedding-004&quot;</span>, content=question
-)[<span class="hljs-string">&quot;embedding&quot;</span>]
+<pre><code translate="no" class="language-python">quest_embed = client.models.embed_content(model=<span class="hljs-string">&quot;text-embedding-004&quot;</span>, contents=question)
 
 search_res = milvus_client.search(
     collection_name=collection_name,
-    data=[question_embedding],
+    data=[quest_embed.embeddings[<span class="hljs-number">0</span>].values],
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># Return top 3 results</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}},  <span class="hljs-comment"># Inner product distance</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
@@ -214,12 +212,14 @@ retrieved_lines_with_distances = [
 ]
 </code></pre>
 <h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">使用 LLM 獲得 RAG 回應</h3><p>將擷取的文件轉換成字串格式。</p>
-<pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.<span class="hljs-keyword">join</span>(
-    [<span class="hljs-meta">line_with_distance[0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
+<pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
+    [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>定義 Lanage Model 的系統和使用者提示。此提示與從 Milvus 擷取的文件組合。</p>
-<pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google.genai <span class="hljs-keyword">import</span> types
+
+SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 &quot;&quot;&quot;</span>
 USER_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
@@ -233,12 +233,13 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>使用 Gemini 根據提示產生回應。</p>
-<pre><code translate="no" class="language-python">gemini_model = genai.GenerativeModel(
-    <span class="hljs-string">&quot;gemini-1.5-flash&quot;</span>, system_instruction=SYSTEM_PROMPT
+<pre><code translate="no" class="language-python">response = client.models.generate_content(
+    model=<span class="hljs-string">&quot;gemini-2.0-flash&quot;</span>,
+    config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
+    contents=USER_PROMPT,
 )
-response = gemini_model.generate_content(USER_PROMPT)
 <span class="hljs-built_in">print</span>(response.text)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Milvus stores data in two ways:  Inserted data (vector data, scalar data, and collection-specific schema) is stored as an incremental log in persistent storage using object storage backends such as MinIO, AWS S3, Google Cloud Storage, Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage.  Metadata, generated by each Milvus module, is stored in etcd.
+<pre><code translate="no">Milvus stores two types of data: inserted data and metadata. Inserted data, which includes vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental logs. Milvus supports multiple object storage backends. Metadata is generated within Milvus, and each Milvus module has its own metadata that is stored in etcd.
 </code></pre>
 <p>太好了！我們已成功地利用 Milvus 和 Gemini 建立 RAG 管道。</p>

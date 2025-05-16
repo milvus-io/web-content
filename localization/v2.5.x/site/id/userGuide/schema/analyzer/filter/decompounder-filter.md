@@ -104,7 +104,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Daftar komponen kata yang digunakan untuk memisahkan istilah majemuk. Kamus ini menentukan bagaimana kata-kata majemuk diuraikan menjadi istilah-istilah individual.</p></td>
    </tr>
 </table>
-<p>Filter <code translate="no">decompounder</code> beroperasi pada istilah yang dihasilkan oleh tokenizer, sehingga harus digunakan bersama dengan tokenizer. Untuk daftar tokenizer yang tersedia di Milvus, lihat <a href="/docs/id/tokenizers">Referensi Tokenizer</a>.</p>
+<p>Filter <code translate="no">decompounder</code> beroperasi pada istilah yang dihasilkan oleh tokenizer, sehingga harus digunakan bersama dengan tokenizer. Untuk daftar tokenizer yang tersedia di Milvus, lihat <a href="/docs/id/standard-tokenizer.md">Tokenizer Standar</a> dan halaman-halaman terkait.</p>
 <p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> ketika mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

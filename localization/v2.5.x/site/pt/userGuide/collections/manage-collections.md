@@ -64,7 +64,7 @@ summary: >-
 <ul>
 <li><p><strong>Tornando-os anuláveis ou definindo valores padrão</strong></p>
 <p>Para obter detalhes sobre como tornar um campo anulável ou definir o valor padrão, consulte <a href="/docs/pt/nullable-and-default.md">Anulável e padrão</a>.</p></li>
-<li><p><strong>Ativar o campo dinâmico</strong></p>
+<li><p><strong>Ativação do campo dinâmico</strong></p>
 <p>Para mais informações sobre como ativar e utilizar o campo dinâmico, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p></li>
 </ul>
 <h2 id="Primary-key-and-AutoId" class="common-anchor-header">Chave primária e AutoId<button data-href="#Primary-key-and-AutoId" class="anchor-icon" translate="no">
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>À semelhança do campo primário numa base de dados relacional, uma coleção tem um campo primário para distinguir uma entidade das outras. Cada valor no campo primário é globalmente único e corresponde a uma entidade específica.</p>
+    </button></h2><p>À semelhança do campo primário numa base de dados relacional, uma coleção tem um campo primário para distinguir uma entidade de outras. Cada valor no campo primário é globalmente único e corresponde a uma entidade específica.</p>
 <p>Como mostrado no gráfico acima, o campo denominado <strong>id</strong> serve como campo primário, e o primeiro ID <strong>0</strong> corresponde a uma entidade intitulada <em>A taxa de mortalidade do coronavírus não é importante</em>. Não haverá nenhuma outra entidade que tenha o campo primário 0.</p>
 <p>Um campo primário aceita apenas números inteiros ou cadeias de caracteres. Ao inserir entidades, você deve incluir os valores do campo primário por padrão. No entanto, se tiver ativado o <strong>AutoId</strong> aquando da criação da coleção, o Milvus irá gerar esses valores aquando da inserção de dados. Nesse caso, exclua os valores do campo primário das entidades a serem inseridas.</p>
 <p>Para mais informações, consulte <a href="/docs/pt/primary-field.md">Primary Field &amp; AutoId</a>.</p>
@@ -156,7 +156,7 @@ summary: >-
     </button></h2><p>Depois de criar índices e carregar a coleção, pode iniciar uma pesquisa por semelhança alimentando um ou vários vectores de consulta. Por exemplo, ao receber a representação vetorial da sua consulta transportada num pedido de pesquisa, o Milvus utiliza o tipo de métrica especificado para medir a semelhança entre o vetor de consulta e os vectores da coleção de destino antes de devolver os que são semanticamente semelhantes à consulta.</p>
 <p>Também é possível incluir a filtragem de metadados nas pesquisas e consultas para melhorar a relevância dos resultados. Note que as condições de filtragem de metadados são obrigatórias nas consultas, mas opcionais nas pesquisas.</p>
 <p>Para obter detalhes sobre os tipos de métricas aplicáveis, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p>
-<p>Para obter mais informações sobre pesquisas e consultas, consulte os artigos no capítulo <a href="/docs/pt/search-rerank">Pesquisa e classificação</a>, entre os quais se encontram as funcionalidades básicas:</p>
+<p>Para obter mais informações sobre pesquisas e consultas, consulte os artigos no capítulo Pesquisa e classificação, entre os quais se encontram as funcionalidades básicas:</p>
 <ul>
 <li><p><a href="/docs/pt/single-vector-search.md">Pesquisa ANN básica</a></p></li>
 <li><p><a href="/docs/pt/filtered-search.md">Pesquisa filtrada</a></p></li>
@@ -241,7 +241,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível definir funções para o Milvus derivar campos aquando da criação da coleção. Por exemplo, a função de pesquisa de texto completo utiliza a função definida pelo utilizador para derivar um campo vetorial esparso de um campo varchar específico. Para obter mais informações sobre a pesquisa de texto completo, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
+    </button></h2><p>É possível definir funções para o Milvus para derivar campos na criação da coleção. Por exemplo, a função de pesquisa de texto completo utiliza a função definida pelo utilizador para derivar um campo de vetor esparso de um campo varchar específico. Para obter mais informações sobre a pesquisa de texto completo, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
 <h2 id="Consistency-Level" class="common-anchor-header">Nível de consistência<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

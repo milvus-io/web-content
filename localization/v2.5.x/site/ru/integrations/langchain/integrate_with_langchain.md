@@ -1,7 +1,7 @@
 ---
 id: integrate_with_langchain.md
 summary: >-
-  Это руководство демонстрирует, как построить систему Retrieval-Augmented
+  В этом руководстве показано, как построить систему Retrieval-Augmented
   Generation (RAG) с помощью LangChain и Milvus.
 title: Система Retrieval-Augmented Generation (RAG) с Milvus и LangChain
 ---
@@ -25,7 +25,7 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LangChai
 </a></p>
 <p>В этом руководстве показано, как построить систему Retrieval-Augmented Generation (RAG) с помощью LangChain и Milvus.</p>
 <p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает релевантные документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
-<p><a href="https://www.langchain.com/">LangChain</a> - это фреймворк для разработки приложений на основе больших языковых моделей (LLM). <a href="https://milvus.io/">Milvus</a> - самая передовая в мире база данных векторов с открытым исходным кодом, созданная для работы с приложениями для поиска сходства вкраплений и искусственного интеллекта.</p>
+<p><a href="https://www.langchain.com/">LangChain</a> - это фреймворк для разработки приложений на основе больших языковых моделей (LLM). <a href="https://milvus.io/">Milvus</a> - самая передовая в мире база данных векторов с открытым исходным кодом, созданная для работы с приложениями поиска сходства встраивания и искусственного интеллекта.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LangChai
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Прежде чем запускать этот блокнот, убедитесь, что у вас установлены следующие зависимости:</p>
+    </button></h2><p>Перед запуском этого блокнота убедитесь, что у вас установлены следующие зависимости:</p>
 <pre><code translate="no" class="language-shell">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -50,7 +50,7 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LangChai
 <p>Мы будем использовать модели из OpenAI. Вам необходимо подготовить <a href="https://platform.openai.com/docs/quickstart">api ключ</a> <code translate="no">OPENAI_API_KEY</code> в качестве переменной окружения.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prepare-the-data" class="common-anchor-header">Подготовьте данные<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -125,7 +125,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;./milvus_demo.db&quot;</span>,
     },
-    drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old Milvus collection if it exists</span>
+    drop_old=<span class="hljs-literal">False</span>,  <span class="hljs-comment"># Drop the old Milvus collection if it exists</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -138,7 +138,7 @@ vectorstore = Milvus.from_documents(
 </div>
 <p>Выполните поиск документов в векторном хранилище Milvus, используя тестовый вопрос-запрос. Рассмотрим первый верхний документ.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is self-reflection of an AI Agent?&quot;</span>
-vectorstore.<span class="hljs-title function_">similarity_search</span>(query, k=<span class="hljs-number">1</span>)
+vectorstore.similarity_search(query, k=<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(page_content='Self-Reflection#\nSelf-reflection is a vital aspect that allows autonomous agents to improve iteratively by refining past action decisions and correcting previous mistakes. It plays a crucial role in real-world tasks where trial and error are inevitable.\nReAct (Yao et al. 2023) integrates reasoning and acting within LLM by extending the action space to be a combination of task-specific discrete actions and the language space. The former enables LLM to interact with the environment (e.g. use Wikipedia search API), while the latter prompting LLM to generate reasoning traces in natural language.\nThe ReAct prompt template incorporates explicit steps for LLM to think, roughly formatted as:\nThought: ...\nAction: ...\nObservation: ...\n... (Repeated many times)', metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/', 'pk': 449281835035555859})]
 </code></pre>
@@ -215,8 +215,8 @@ res
     </button></h2><p>Мы можем использовать <a href="https://milvus.io/docs/boolean.md">правила скалярной фильтрации Milvus</a> для фильтрации документов на основе метаданных. Мы загрузили документы из двух разных источников и можем отфильтровать их по метаданным <code translate="no">source</code>.</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;What is CoT?&quot;</span>,
-    k=1,
-    <span class="hljs-built_in">expr</span>=<span class="hljs-string">&quot;source == &#x27;https://lilianweng.github.io/posts/2023-06-23-agent/&#x27;&quot;</span>,
+    k=<span class="hljs-number">1</span>,
+    expr=<span class="hljs-string">&quot;source == &#x27;https://lilianweng.github.io/posts/2023-06-23-agent/&#x27;&quot;</span>,
 )
 
 <span class="hljs-comment"># The same as:</span>

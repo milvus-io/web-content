@@ -41,9 +41,9 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/use_milvus_in_docsgpt.md">Utilizzare Milvus in DocsGPT</a></td><td>Ochestrazione</td><td>DocsGPT, Milvus</td></tr>
 <tr><td><a href="/docs/it/use_milvus_with_sambanova.md">Utilizzare Milvus con SambaNova</a></td><td>Orchestrazione</td><td>Milvus, SambaNova</td></tr>
 <tr><td><a href="/docs/it/milvus_rag_with_dynamiq.md">Come iniziare con Dynamiq e Milvus</a></td><td>Orchestrazione</td><td>Milvus, Dynamiq</td></tr>
-<tr><td><a href="/docs/it/llama_stack_with_milvus.md">Creare RAG con Llama Stack con Milvus</a></td><td>Orchestrazione</td><td>Milvus, Llama Stack</td></tr>
+<tr><td><a href="/docs/it/llama_stack_with_milvus.md">Costruire RAG con Llama Stack con Milvus</a></td><td>Orchestrazione</td><td>Milvus, Llama Stack</td></tr>
 <tr><td><a href="/docs/it/integrate_with_memgpt.md">Agente Chatbot con Milvus e MemGPT</a></td><td>Agente</td><td>Milvus, MemGPT</td></tr>
-<tr><td><a href="/docs/it/llama_agents_metadata.md">Sistemi multi-agente con Mistral AI, Milvus e Llama-agents</a></td><td>Agente</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
+<tr><td><a href="/docs/it/llama_agents_metadata.md">Sistemi multi-agente con Mistral AI, Milvus e Llama-agenti</a></td><td>Agente</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
 <tr><td><a href="/docs/it/quickstart_mem0_with_milvus.md">Come iniziare con Mem0 e Milvus</a></td><td>Agenti</td><td>Mem0, Milvus</td></tr>
 <tr><td><a href="/docs/it/integrate_with_agno.md">Integrare Milvus con Agno</a></td><td>Agenti</td><td>Milvus, Agno</td></tr>
 <tr><td><a href="/docs/it/milvus_and_mcp.md">MCP + Milvus: connettere l'intelligenza artificiale con i database vettoriali</a></td><td>Agenti</td><td>Milvus, MCP</td></tr>
@@ -75,7 +75,7 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/build_rag_on_arm.md">Costruire RAG su architettura Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_fireworks.md">Costruire RAG con Milvus e Fireworks AI</a></td><td>LLM</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_lepton.md">Costruire RAG con Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/it/build_RAG_with_milvus_and_siliconflow">Costruire RAG con Milvus e SiliconFlow</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_siliconflow.md">Costruire RAG con Milvus e SiliconFlow</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/it/rag_with_milvus_and_unstructured.md">Costruire una RAG con Milvus e fonti di dati non strutturati</a></td><td>Fonti di dati non strutturati</td><td>Milvus, non strutturato</td></tr>
 <tr><td><a href="/docs/it/RAG_with_pii_and_milvus.md">Costruire un RAG con Milvus + PII Masker</a></td><td>Fonti di dati</td><td>Milvus, PII Masker</td></tr>
 <tr><td><a href="/docs/it/knowledge_table_with_milvus.md">Tabella delle conoscenze con Milvus</a></td><td>Ingegneria della conoscenza</td><td>Tabella delle conoscenze, Milvus</td></tr>
@@ -88,5 +88,8 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/integration_with_mindsdb.md">Integrare Milvus con MindsDB</a></td><td>Ingegneria della conoscenza</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_feast.md">Costruire RAG con Milvus e Feast</a></td><td>Fonti di dati</td><td>Milvus, Feast</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_docling.md">Creare RAG con Milvus e Docling</a></td><td>Fonti di dati</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_embedAnything.md">Costruire RAG con Milvus e EmbedAnything</a></td><td>Incorporare</td><td>Milvus, EmbedAnything</td></tr>
+<tr><td><a href="/docs/it/milvus_and_n8n.md">Come iniziare con Milvus e n8n</a></td><td>Orchestrazione</td><td>Milvus, n8n</td></tr>
+<tr><td><a href="/docs/it/use_milvus_in_anythingllm.md">Utilizzare Milvus in AnythingLLM</a></td><td>Orchestrazione</td><td>Milvus, AnythingLLM</td></tr>
 </tbody>
 </table>

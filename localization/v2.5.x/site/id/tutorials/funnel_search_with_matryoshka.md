@@ -23,26 +23,49 @@ title: Pencarian Corong dengan Penyematan Matryoshka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ketika membangun sistem pencarian vektor yang efisien, salah satu tantangan utama adalah mengelola biaya penyimpanan sambil mempertahankan latensi dan pemanggilan yang dapat diterima. Model penyematan modern menghasilkan vektor dengan ratusan atau ribuan dimensi, menciptakan penyimpanan yang signifikan dan overhead komputasi untuk vektor mentah dan indeks.</p>
-<p>Secara tradisional, kebutuhan penyimpanan dikurangi dengan menerapkan metode kuantisasi atau pengurangan dimensi sebelum membangun indeks. Sebagai contoh, kita dapat menghemat penyimpanan dengan menurunkan presisi menggunakan Product Quantization (PQ) atau jumlah dimensi menggunakan Principal Component Analysis (PCA). Metode-metode ini menganalisis seluruh kumpulan vektor untuk menemukan vektor yang lebih ringkas yang mempertahankan hubungan semantik antar vektor.</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+Ketika membangun sistem pencarian vektor yang efisien, salah satu tantangan utama adalah mengelola biaya penyimpanan sambil mempertahankan latensi dan pemanggilan yang dapat diterima. Model penyematan modern menghasilkan vektor dengan ratusan atau ribuan dimensi, menciptakan penyimpanan yang signifikan dan overhead komputasi untuk vektor mentah dan indeks.<p>Secara tradisional, kebutuhan penyimpanan dikurangi dengan menerapkan metode kuantisasi atau pengurangan dimensi sebelum membangun indeks. Sebagai contoh, kita dapat menghemat penyimpanan dengan menurunkan presisi menggunakan Product Quantization (PQ) atau jumlah dimensi menggunakan Principal Component Analysis (PCA). Metode-metode ini menganalisis seluruh kumpulan vektor untuk menemukan vektor yang lebih ringkas yang mempertahankan hubungan semantik antar vektor.</p>
 <p>Meskipun efektif, pendekatan standar ini mengurangi presisi atau dimensi hanya sekali dan pada skala tunggal. Namun, bagaimana jika kita dapat mempertahankan beberapa lapisan detail secara bersamaan, seperti piramida representasi yang semakin presisi?</p>
 <p>Masuklah ke dalam penyematan Matryoshka. Dinamai berdasarkan boneka sarang Rusia (lihat ilustrasi), konstruksi cerdas ini menyematkan beberapa skala representasi dalam satu vektor. Tidak seperti metode pasca-pemrosesan tradisional, embeddings Matryoshka mempelajari struktur multi-skala ini selama proses pelatihan awal. Hasilnya luar biasa: tidak hanya penyematan penuh yang menangkap semantik input, tetapi setiap awalan subset bersarang (paruh pertama, kuartal pertama, dll.) memberikan representasi yang koheren, meskipun tidak terlalu detail.</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
 <p>Dalam buku catatan ini, kami membahas cara menggunakan embedding Matryoshka dengan Milvus untuk pencarian semantik. Kami mengilustrasikan sebuah algoritma yang disebut "pencarian corong" yang memungkinkan kita untuk melakukan pencarian kemiripan pada sebagian kecil dari dimensi penyematan kita tanpa penurunan yang drastis dalam mengingat.</p>
+<h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Hanya untuk CPU:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Untuk CUDA 11.8:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Perintah instalasi CUDA 11.8 hanyalah sebuah contoh. Harap konfirmasikan versi CUDA Anda saat menginstal PyTorch.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Memuat Model Penyematan Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Memuat Model Embedding Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,7 +106,7 @@ title: Pencarian Corong dengan Penyematan Matryoshka
         ></path>
       </svg>
     </button></h2><p>Kode berikut ini adalah modifikasi dari halaman dokumentasi <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Pencarian Film dengan Pengubah Kalimat dan Milvus"</a>. Pertama, kita memuat dataset dari HuggingFace. Dataset ini berisi sekitar 35 ribu entri, masing-masing sesuai dengan film yang memiliki artikel Wikipedia. Kita akan menggunakan bidang <code translate="no">Title</code> dan <code translate="no">PlotSummary</code> dalam contoh ini.</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -110,15 +133,15 @@ fields = [
 schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus saat ini tidak mendukung pencarian melalui subset dari embedding, jadi kami memecah embedding menjadi dua bagian: kepala mewakili subset awal vektor untuk diindeks dan dicari, dan ekor adalah sisanya. Model dilatih untuk pencarian kemiripan jarak kosinus, jadi kami menormalkan embedding kepala. Namun, untuk menghitung kemiripan untuk subset yang lebih besar di kemudian hari, kita perlu menyimpan norma dari penyisipan kepala, sehingga kita dapat menormalkannya kembali sebelum menggabungkannya ke ekor.</p>
+<p>Milvus saat ini tidak mendukung pencarian melalui subset dari embedding, jadi kami memecah embedding menjadi dua bagian: kepala mewakili subset awal vektor untuk diindeks dan dicari, dan ekor adalah sisanya. Model dilatih untuk pencarian kemiripan jarak kosinus, jadi kami menormalkan embedding kepala. Namun, untuk menghitung kemiripan untuk subset yang lebih besar di kemudian hari, kita perlu menyimpan norma dari penyisipan kepala, sehingga kita dapat menormalkannya kembali sebelum menggabungkannya dengan ekor.</p>
 <p>Untuk melakukan pencarian melalui 1/6 pertama dari penyematan, kita perlu membuat indeks pencarian vektor di bidang <code translate="no">head_embedding</code>. Nantinya, kita akan membandingkan hasil "pencarian corong" dengan pencarian vektor biasa, dan juga membuat indeks pencarian di atas penyematan penuh.</p>
 <p><em>Yang penting, kita menggunakan metrik jarak <code translate="no">COSINE</code> dan bukan <code translate="no">IP</code>, karena jika tidak, kita harus melacak norma-norma penyematan, yang akan menyulitkan implementasi (hal ini akan lebih masuk akal setelah algoritme pencarian corong dijelaskan).</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>Terakhir, kami mengkodekan ringkasan plot untuk semua 35 ribu film dan memasukkan penyematan yang sesuai ke dalam basis data.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -300,7 +323,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>Kami telah mampu memulihkan daya ingat tanpa melakukan pencarian vektor tambahan! Secara kualitatif, hasil ini tampaknya memiliki daya ingat yang lebih tinggi untuk "Raiders of the Lost Ark" dan "The Shining" daripada pencarian vektor standar dalam tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Pencarian Film menggunakan Milvus dan Sentence Transformers"</a>, yang menggunakan model penyematan yang berbeda. Namun, tidak dapat menemukan &quot;Ferris Bueller's Day Off&quot;, yang akan kita bahas nanti di buku catatan ini. (Lihat makalah <a href="https://arxiv.org/abs/2205.13147">Pembelajaran Representasi Matryoshka</a> untuk eksperimen dan pembandingan yang lebih kuantitatif).</p>
+<p>Kami telah mampu memulihkan daya ingat tanpa melakukan pencarian vektor tambahan! Secara kualitatif, hasil ini tampaknya memiliki daya ingat yang lebih tinggi untuk "Raiders of the Lost Ark" dan "The Shining" daripada pencarian vektor standar dalam tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Pencarian Film menggunakan Milvus dan Sentence Transformers"</a>, yang menggunakan model penyematan yang berbeda. Namun, tidak dapat menemukan "Ferris Bueller's Day Off", yang akan kita bahas nanti di buku catatan ini. (Lihat makalah <a href="https://arxiv.org/abs/2205.13147">Pembelajaran Representasi Matryoshka</a> untuk eksperimen dan pembandingan yang lebih kuantitatif).</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Membandingkan Pencarian Corong dengan Pencarian Biasa<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -359,7 +382,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>Dengan pengecualian hasil untuk &quot;Seorang remaja berpura-pura sakit agar tidak masuk sekolah...&quot;, hasil di bawah pencarian corong hampir sama dengan pencarian lengkap, meskipun pencarian corong dilakukan pada ruang pencarian 128 dimensi vs 768 dimensi untuk pencarian biasa.</p>
+<p>Dengan pengecualian hasil untuk "Seorang remaja berpura-pura sakit agar tidak masuk sekolah...", hasil di bawah pencarian corong hampir sama dengan pencarian lengkap, meskipun pencarian corong dilakukan pada ruang pencarian 128 dimensi vs 768 dimensi untuk pencarian biasa.</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Menyelidiki Kegagalan Pemanggilan Kembali Pencarian Corong untuk Hari Libur Ferris Bueller<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

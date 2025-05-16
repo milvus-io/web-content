@@ -75,7 +75,7 @@ title: Обзор интеграций
 <tr><td><a href="/docs/ru/build_rag_on_arm.md">Построение RAG на архитектуре Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/ru/build_RAG_with_milvus_and_fireworks.md">Построение RAG с помощью Milvus и Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/ru/build_RAG_with_milvus_and_lepton.md">Постройте RAG с помощью Milvus и Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/ru/build_RAG_with_milvus_and_siliconflow">Построение RAG с помощью Milvus и SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/ru/build_RAG_with_milvus_and_siliconflow.md">Построение RAG с помощью Milvus и SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/ru/rag_with_milvus_and_unstructured.md">Построение RAG с помощью Milvus и неструктурированных</a></td><td>Источники данных</td><td>Milvus, неструктурированные данные</td></tr>
 <tr><td><a href="/docs/ru/RAG_with_pii_and_milvus.md">Построение RAG с помощью Milvus + PII Masker</a></td><td>Источники данных</td><td>Milvus, PII Masker</td></tr>
 <tr><td><a href="/docs/ru/knowledge_table_with_milvus.md">Таблица знаний с помощью Milvus</a></td><td>Инженерия знаний</td><td>Таблица знаний, Milvus</td></tr>
@@ -88,5 +88,8 @@ title: Обзор интеграций
 <tr><td><a href="/docs/ru/integration_with_mindsdb.md">Интеграция Milvus с MindsDB</a></td><td>Инженерия знаний</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/ru/build_RAG_with_milvus_and_feast.md">Построение RAG с помощью Milvus и Feast</a></td><td>Источники данных</td><td>Milvus, Feast</td></tr>
 <tr><td><a href="/docs/ru/build_RAG_with_milvus_and_docling.md">Построение RAG с помощью Milvus и Docling</a></td><td>Источники данных</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/ru/build_RAG_with_milvus_and_embedAnything.md">Построение RAG с помощью Milvus и EmbedAnything</a></td><td>Встраивание</td><td>Milvus, EmbedAnything</td></tr>
+<tr><td><a href="/docs/ru/milvus_and_n8n.md">Начало работы с Milvus и n8n</a></td><td>Оркестрация</td><td>Milvus, n8n</td></tr>
+<tr><td><a href="/docs/ru/use_milvus_in_anythingllm.md">Использование Milvus в AnythingLLM</a></td><td>Оркестровка</td><td>Milvus, AnythingLLM</td></tr>
 </tbody>
 </table>

@@ -59,15 +59,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>Parámetros obligatorios</p></td>
-     <td><ul><li>Nombre de la colección</li><li>Claves primarias</li></ul></td>
-     <td><ul><li>Nombre de la colección</li><li>Expresiones de filtrado</li></ul></td>
-     <td><ul><li><p>Nombre de la colección</p></li><li><p>Expresiones de filtrado</p></li><li><p>Número de entidades a devolver por consulta</p></li></ul></td>
+     <td><ul>
+<li>Nombre de la colección</li>
+<li>Claves primarias</li>
+</ul></td>
+     <td><ul>
+<li>Nombre de la colección</li>
+<li>Expresiones de filtrado</li>
+</ul></td>
+     <td><ul>
+<li><p>Nombre de la colección</p></li>
+<li><p>Expresiones de filtrado</p></li>
+<li><p>Número de entidades a devolver por consulta</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>Parámetros opcionales</p></td>
-     <td><ul><li>Nombre de la partición</li><li>Campos de salida</li></ul></td>
-     <td><ul><li><p>Nombre de la partición</p></li><li><p>Número de entidades a devolver</p></li><li><p>Campos de salida</p></li></ul></td>
-     <td><ul><li><p>Nombre de la partición</p></li><li><p>Número de entidades a devolver en total</p></li><li><p>Campos de salida</p></li></ul></td>
+     <td><ul>
+<li>Nombre de la partición</li>
+<li>Campos de salida</li>
+</ul></td>
+     <td><ul>
+<li><p>Nombre de la partición</p></li>
+<li><p>Número de entidades a devolver</p></li>
+<li><p>Campos de salida</p></li>
+</ul></td>
+     <td><ul>
+<li><p>Nombre de la partición</p></li>
+<li><p>Número de entidades a devolver en total</p></li>
+<li><p>Campos de salida</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>Devuelve</p></td>
@@ -76,8 +97,8 @@ summary: >-
      <td><p>Devuelve todas las entidades que cumplen las condiciones de filtrado personalizadas en la colección o partición especificada mediante consultas paginadas.</p></td>
    </tr>
 </table>
-<p>Para obtener más información sobre el filtrado de metadatos, consulte <a href="/docs/es/filtering">Filtrado</a>.</p>
-<h2 id="Use-Get" class="common-anchor-header">Utilizar Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>Para obtener más información sobre el filtrado de metadatos, consulte .</p>
+<h2 id="Use-Get" class="common-anchor-header">Uso de Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

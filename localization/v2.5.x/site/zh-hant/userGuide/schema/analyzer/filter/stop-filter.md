@@ -94,10 +94,16 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>要從 tokenization 中移除的單字清單。預設情況下，篩選器使用內建的<code translate="no">_english_</code> 字典。您可以用三種方式覆寫或擴充它：</p><ul><li><p><strong>內建字典</strong>- 提供其中一個語言別名，以使用預先定義的字典：<code translate="no">"_english_"</code>,<code translate="no">"_danish_"</code>,<code translate="no">"_dutch_"</code>,<code translate="no">"_finnish_"</code>,<code translate="no">"_french_"</code>,<code translate="no">"_german_"</code>,<code translate="no">"_hungarian_"</code>,<code translate="no">"_italian_"</code>,<code translate="no">"_norwegian_"</code>,<code translate="no">"_portuguese_"</code>,<code translate="no">"_russian_"</code>,<code translate="no">"_spanish_"</code> 、<code translate="no">"_swedish_"</code></p></li><li><p><strong>自訂列表</strong>- 傳送您自己的術語陣列，例如<code translate="no">["foo", "bar", "baz"]</code> 。</p></li><li><p><strong>混合列表</strong>- 結合別名和自訂術語，例如：<code translate="no">["of", "to", "_english_"]</code> 。</p><p>有關每個預定義字典的確切內容，請參閱<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>。</p></li></ul></td>
+     <td><p>要從 tokenization 中移除的單字清單。預設情況下，篩選器使用內建的<code translate="no">_english_</code> 字典。您可以用三種方式覆寫或擴充它：</p>
+<ul>
+<li><p><strong>內建字典</strong>- 提供其中一個語言別名，以使用預先定義的字典：<code translate="no">"_english_"</code>,<code translate="no">"_danish_"</code>,<code translate="no">"_dutch_"</code>,<code translate="no">"_finnish_"</code>,<code translate="no">"_french_"</code>,<code translate="no">"_german_"</code>,<code translate="no">"_hungarian_"</code>,<code translate="no">"_italian_"</code>,<code translate="no">"_norwegian_"</code>,<code translate="no">"_portuguese_"</code>,<code translate="no">"_russian_"</code>,<code translate="no">"_spanish_"</code> 、<code translate="no">"_swedish_"</code></p></li>
+<li><p><strong>自訂列表</strong>- 傳送您自己的術語陣列，例如<code translate="no">["foo", "bar", "baz"]</code> 。</p></li>
+<li><p><strong>混合列表</strong>- 結合別名和自訂術語，例如：<code translate="no">["of", "to", "_english_"]</code> 。</p>
+<p>有關每個預定義字典的確切內容，請參閱<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>。</p></li>
+</ul></td>
    </tr>
 </table>
-<p><code translate="no">stop</code> 過濾器會對 tokenizer 產生的詞彙進行操作，因此必須與 tokenizer 結合使用。如需 Milvus 中可用的 tokenizer 清單，請參考<a href="/docs/zh-hant/tokenizers">Tokenizer Reference</a>。</p>
+<p><code translate="no">stop</code> 過濾器會對 tokenizer 產生的詞彙進行操作，因此必須與 tokenizer 結合使用。如需 Milvus 中可用的標記器清單，請參閱<a href="/docs/zh-hant/standard-tokenizer.md">標準標記器</a>及其同屬頁面。</p>
 <p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這允許 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -3,7 +3,7 @@ id: funnel_search_with_matryoshka.md
 summary: >-
   En este cuaderno, examinamos cómo utilizar las incrustaciones Matryoshka con
   Milvus para la búsqueda semántica. Ilustramos un algoritmo llamado "búsqueda
-  en embudo" que nos permite realizar búsquedas de similitud en un pequeño
+  de embudo" que nos permite realizar búsquedas de similitud en un pequeño
   subconjunto de nuestras dimensiones de incrustación sin una caída drástica en
   la recuperación.
 title: Búsqueda en embudo con incrustaciones Matryoshka
@@ -23,23 +23,46 @@ title: Búsqueda en embudo con incrustaciones Matryoshka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A la hora de crear sistemas de búsqueda vectorial eficientes, uno de los principales retos es gestionar los costes de almacenamiento manteniendo una latencia y una recuperación aceptables. Los modelos de incrustación modernos producen vectores con cientos o miles de dimensiones, lo que genera una importante sobrecarga computacional y de almacenamiento para el vector en bruto y el índice.</p>
-<p>Tradicionalmente, los requisitos de almacenamiento se reducen aplicando un método de cuantificación o reducción de la dimensionalidad justo antes de construir el índice. Por ejemplo, podemos ahorrar almacenamiento reduciendo la precisión mediante la cuantificación de productos (PQ) o el número de dimensiones mediante el análisis de componentes principales (PCA). Estos métodos analizan todo el conjunto de vectores para encontrar uno más compacto que mantenga las relaciones semánticas entre vectores.</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+A la hora de crear sistemas de búsqueda vectorial eficientes, uno de los principales retos es gestionar los costes de almacenamiento manteniendo una latencia y una recuperación aceptables. Los modelos de incrustación modernos producen vectores con cientos o miles de dimensiones, lo que genera una importante sobrecarga computacional y de almacenamiento para el vector en bruto y el índice.<p>Tradicionalmente, los requisitos de almacenamiento se reducen aplicando un método de cuantificación o reducción de la dimensionalidad justo antes de construir el índice. Por ejemplo, podemos ahorrar almacenamiento reduciendo la precisión mediante la cuantificación de productos (PQ) o el número de dimensiones mediante el análisis de componentes principales (PCA). Estos métodos analizan todo el conjunto de vectores para encontrar uno más compacto que mantenga las relaciones semánticas entre vectores.</p>
 <p>Aunque eficaces, estos enfoques estándar reducen la precisión o la dimensionalidad una sola vez y a una sola escala. Pero, ¿y si pudiéramos mantener varias capas de detalle simultáneamente, como una pirámide de representaciones cada vez más precisas?</p>
 <p>He aquí las incrustaciones Matryoshka. Estas ingeniosas construcciones, que deben su nombre a las muñecas rusas (véase la ilustración), integran múltiples escalas de representación en un único vector. A diferencia de los métodos tradicionales de posprocesamiento, las incrustaciones Matryoshka aprenden esta estructura multiescala durante el proceso de entrenamiento inicial. El resultado es notable: no sólo la incrustación completa capta la semántica de entrada, sino que cada prefijo de subconjunto anidado (primera mitad, primer cuarto, etc.) proporciona una representación coherente, aunque menos detallada.</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
 <p>En este cuaderno, examinamos cómo utilizar las incrustaciones Matryoshka con Milvus para la búsqueda semántica. Ilustramos un algoritmo llamado "búsqueda en embudo" que nos permite realizar búsquedas de similitud en un pequeño subconjunto de nuestras dimensiones de incrustación sin que se produzca una caída drástica de la recuperación.</p>
+<h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Sólo para CPU:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para CUDA 11.8:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>El comando de instalación de CUDA 11.8 es sólo un ejemplo. Por favor, confirme su versión CUDA al instalar PyTorch.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Cargar el modelo de incrustación Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
@@ -83,7 +106,7 @@ title: Búsqueda en embudo con incrustaciones Matryoshka
         ></path>
       </svg>
     </button></h2><p>El siguiente código es una modificación del de la página de documentación <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search with Sentence Transformers and Milvus".</a> En primer lugar, cargamos el conjunto de datos de HuggingFace. Contiene unas 35.000 entradas, cada una de las cuales corresponde a una película que tiene un artículo en Wikipedia. En este ejemplo utilizaremos los campos <code translate="no">Title</code> y <code translate="no">PlotSummary</code>.</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -113,12 +136,12 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <p>Milvus no admite actualmente la búsqueda en subconjuntos de incrustaciones, por lo que dividimos las incrustaciones en dos partes: la cabeza representa el subconjunto inicial del vector para indexar y buscar, y la cola es el resto. El modelo está entrenado para la búsqueda de similitudes por distancia coseno, por lo que normalizamos las incrustaciones de la cabeza. Sin embargo, para poder calcular posteriormente las similitudes de subconjuntos más grandes, necesitamos almacenar la norma de la incrustación de la cabeza, de modo que podamos desnormalizarla antes de unirla a la cola.</p>
 <p>Para realizar la búsqueda a través del primer 1/6 de la incrustación, necesitaremos crear un índice de búsqueda vectorial sobre el campo <code translate="no">head_embedding</code>. Más adelante, compararemos los resultados de la "búsqueda en embudo" con una búsqueda vectorial normal, por lo que también crearemos un índice de búsqueda sobre la incrustación completa.</p>
 <p><em>Es importante destacar que utilizamos la métrica de distancia <code translate="no">COSINE</code> en lugar de <code translate="no">IP</code>, porque de lo contrario tendríamos que realizar un seguimiento de las normas de incrustación, lo que complicaría la implementación (esto tendrá más sentido una vez que se haya descrito el algoritmo de búsqueda de embudo).</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>Por último, codificamos los resúmenes argumentales de las 35.000 películas e introducimos las incrustaciones correspondientes en la base de datos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -186,7 +209,7 @@ res = client.search(
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;head_embedding&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>En este punto, hemos realizado la búsqueda en un espacio vectorial mucho más pequeño y, por tanto, es probable que hayamos reducido la latencia y los requisitos de almacenamiento del índice en relación con la búsqueda en el espacio completo. Examinemos las 5 primeras coincidencias para cada consulta:</p>
+<p>En este punto, hemos realizado la búsqueda en un espacio vectorial mucho más pequeño y, por tanto, es probable que hayamos reducido la latencia y los requisitos de almacenamiento del índice en relación con la búsqueda en el espacio completo. Examinemos las 5 primeras coincidencias de cada consulta:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query, hits <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(queries, res):
     rows = [x[<span class="hljs-string">&quot;entity&quot;</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> hits][:<span class="hljs-number">5</span>]
 
@@ -220,7 +243,7 @@ The Ref
 Impact
 The House in Marsh Road
 </code></pre>
-<p>Como vemos, la recuperación se ha visto afectada por el truncamiento de las incrustaciones durante la búsqueda. La búsqueda en embudo soluciona este problema con un truco inteligente: podemos utilizar el resto de las dimensiones de la incrustación para volver a clasificar y podar nuestra lista de candidatos y recuperar el rendimiento de la recuperación sin necesidad de realizar costosas búsquedas vectoriales adicionales.</p>
+<p>Como podemos ver, la recuperación ha sufrido como consecuencia del truncamiento de las incrustaciones durante la búsqueda. La búsqueda en embudo soluciona este problema con un truco inteligente: podemos utilizar el resto de las dimensiones de la incrustación para volver a clasificar y podar nuestra lista de candidatos y recuperar el rendimiento de la recuperación sin necesidad de realizar costosas búsquedas vectoriales adicionales.</p>
 <p>Para facilitar la exposición del algoritmo de búsqueda en embudo, convertimos los resultados de la búsqueda Milvus para cada consulta en un marco de datos Pandas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
@@ -300,7 +323,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>Hemos conseguido recuperar la memoria sin realizar ninguna búsqueda vectorial adicional. Cualitativamente, estos resultados parecen ser más eficaces para "En busca del arca perdida" y "El resplandor" que la búsqueda vectorial estándar del tutorial <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Búsqueda de películas con Milvus y transformadores de frases",</a> que utiliza un modelo de incrustación diferente. Sin embargo, no es capaz de encontrar &quot;Ferris Bueller's Day Off&quot;, a la que volveremos más adelante en el cuaderno. (Véase el artículo <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation</a> Learning para más experimentos cuantitativos y evaluaciones comparativas).</p>
+<p>Hemos conseguido recuperar la memoria sin realizar ninguna búsqueda vectorial adicional. Cualitativamente, estos resultados parecen ser más eficaces para "En busca del arca perdida" y "El resplandor" que la búsqueda vectorial estándar del tutorial <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Búsqueda de películas con Milvus y transformadores de frases",</a> que utiliza un modelo de incrustación diferente. Sin embargo, no es capaz de encontrar "Ferris Bueller's Day Off", a la que volveremos más adelante en el cuaderno. (Véase el artículo <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation</a> Learning para más experimentos cuantitativos y evaluaciones comparativas).</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Comparación de la búsqueda en embudo con la búsqueda normal<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -359,7 +382,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>A excepción de los resultados de &quot;Un adolescente finge una enfermedad para no ir al colegio...&quot;, los resultados de la búsqueda en embudo son casi idénticos a los de la búsqueda completa, a pesar de que la búsqueda en embudo se realizó en un espacio de búsqueda de 128 dimensiones frente a las 768 dimensiones de la búsqueda normal.</p>
+<p>A excepción de los resultados de "Un adolescente finge una enfermedad para no ir al colegio...", los resultados de la búsqueda en embudo son casi idénticos a los de la búsqueda completa, a pesar de que la búsqueda en embudo se realizó en un espacio de búsqueda de 128 dimensiones frente a las 768 dimensiones de la búsqueda normal.</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Investigación del fracaso de la búsqueda en embudo en Ferris Bueller's Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

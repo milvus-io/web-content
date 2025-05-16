@@ -3,6 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: 使用 Milvus 进行混合搜索
 title: 使用 Milvus 进行混合搜索
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">使用 Milvus 进行混合搜索<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -18,24 +20,22 @@ title: 使用 Milvus 进行混合搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>如果您想体验本教程的最终效果，可以直接访问 https://demos.milvus.io/hybrid-search/</p>
+    </button></h1><p>如果您想体验本教程的最终效果，可以直接访问 https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>在本教程中，我们将演示如何利用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>进行混合搜索。BGE-M3 模型可以将文本转换为密集向量和稀疏向量。Milvus 支持在一个 Collections 中存储这两种向量，从而可以进行混合搜索，增强搜索结果的相关性。</p>
 <p>Milvus 支持密集、稀疏和混合检索方法：</p>
 <ul>
 <li>密集检索：利用语义上下文来理解查询背后的含义。</li>
-<li>稀疏检索：强调文本匹配，根据特定术语查找结果，相当于全文检索。</li>
+<li>稀疏检索：强调关键词匹配，根据特定术语查找结果，相当于全文检索。</li>
 <li>混合检索：结合了密集和稀疏两种方法，捕捉完整的上下文和特定的关键词，从而获得全面的搜索结果。</li>
 </ul>
 <p>通过整合这些方法，Milvus 混合搜索平衡了语义和词汇的相似性，提高了搜索结果的整体相关性。本笔记本将介绍这些检索策略的设置和使用过程，并重点介绍它们在各种搜索场景中的有效性。</p>
-<h3 id="Dependencies-and-Environment" class="common-anchor-header">依赖关系和环境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
+<h3 id="Dependencies-and-Environment" class="common-anchor-header">依赖关系和环境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">下载数据集</h3><p>要演示搜索，我们需要一个文档语料库。让我们使用 Quora 重复问题数据集，并将其放在本地目录中。</p>
 <p>数据集来源：<a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">第一个 Quora 数据集发布：问题对</a></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Run this cell to download the dataset</span>
-$ wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Run this cell to download the dataset</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Load-and-Prepare-Data" class="common-anchor-header">加载和准备数据</h3><p>我们将加载数据集并准备一个小型语料库用于搜索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -58,7 +58,7 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
 <h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">使用 BGE-M3 模型进行嵌入</h3><p>BGE-M3 模型可以将文本嵌入为密集向量和稀疏向量。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> milvus_model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
 dense_dim = ef.dim[<span class="hljs-string">&quot;dense&quot;</span>]
@@ -70,9 +70,9 @@ docs_embeddings = ef(docs)
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
 <h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">设置 Milvus Collections 和索引</h3><p>我们将设置 Milvus Collections 并为向量场创建索引。</p>
-<div class="note alert">
+<div class="alert alert-info">
 <ul>
-<li>将 uri 设置为本地文件，如&quot;./milvus.db&quot;，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
+<li>将 uri 设置为本地文件，如"./milvus.db"，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
 <li>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri（如 http://localhost:19530）作为您的 uri。</li>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整 uri 和令牌，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端点和 API 密钥</a>相对应。</li>
 </ul>
@@ -146,40 +146,40 @@ query_embeddings = ef([query])
 <li><code translate="no">sparse_search</code>只在稀疏向量场中搜索</li>
 <li><code translate="no">hybrid_search</code>：使用加权 Reranker 在密集向量场和向量场中搜索</li>
 </ul>
-<pre><code translate="no" class="language-python"><span class="hljs-function"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-title">import</span> (<span class="hljs-params">
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     AnnSearchRequest,
     WeightedRanker,
-</span>)
+)
 
 
-def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, query_dense_embedding, limit=<span class="hljs-number">10</span></span>):
-    search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">dense_search</span>(<span class="hljs-params">col, query_dense_embedding, limit=<span class="hljs-number">10</span></span>):
+    search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
     res = col.search(
-        [<span class="hljs-meta">query_dense_embedding</span>],
+        [query_dense_embedding],
         anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
         limit=limit,
         output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
         param=search_params,
     )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 
 
-<span class="hljs-function">def <span class="hljs-title">sparse_search</span>(<span class="hljs-params">col, query_sparse_embedding, limit=<span class="hljs-number">10</span></span>):
-    search_params</span> = {
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">sparse_search</span>(<span class="hljs-params">col, query_sparse_embedding, limit=<span class="hljs-number">10</span></span>):
+    search_params = {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
         <span class="hljs-string">&quot;params&quot;</span>: {},
     }
     res = col.search(
-        [<span class="hljs-meta">query_sparse_embedding</span>],
+        [query_sparse_embedding],
         anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         limit=limit,
         output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
         param=search_params,
     )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 
 
-<span class="hljs-function">def <span class="hljs-title">hybrid_search</span>(<span class="hljs-params">
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">hybrid_search</span>(<span class="hljs-params">
     col,
     query_dense_embedding,
     query_sparse_embedding,
@@ -187,27 +187,27 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
     dense_weight=<span class="hljs-number">1.0</span>,
     limit=<span class="hljs-number">10</span>,
 </span>):
-    dense_search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+    dense_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
     dense_req = AnnSearchRequest(
-        [<span class="hljs-meta">query_dense_embedding</span>], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
+        [query_dense_embedding], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
     )
     sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
     sparse_req = AnnSearchRequest(
-        [<span class="hljs-meta">query_sparse_embedding</span>], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
+        [query_sparse_embedding], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
     )
     rerank = WeightedRanker(sparse_weight, dense_weight)
     res = col.hybrid_search(
-        [<span class="hljs-meta">sparse_req, dense_req</span>], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
+        [sparse_req, dense_req], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
     )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
 <p>让我们用定义的函数运行三种不同的搜索：</p>
-<pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
-hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
+<pre><code translate="no" class="language-python">dense_results = dense_search(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = sparse_search(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][[<span class="hljs-number">0</span>]])
+hybrid_results = hybrid_search(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][[<span class="hljs-number">0</span>]],
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -292,7 +292,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>在海得拉巴做哪一行比较好<span style='color:red'>？</span></p>
 <p><span style='color:red'> 启动</span>机器人技术的最佳方式是什么<span style='color:red'>？</span>哪种开发板最适合我<span style='color:red'> 开始</span>工作<span style='color:red'>？</span></p>
 <p>新手需要掌握哪些数学知识<span style='color:red'> 才能</span>理解计算机<span style='color:red'> 编程</span>的算法<span style='color:red'> ？</span>哪些算法书籍适合完全初学者<span style='color:red'>？</span></p>
-<p><span style='color:red'>如何</span>让生活适合自己，让生活不再从精神和情感上<span style='color:red'>虐待</span>自己<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>让生活适合自己，不让生活在精神上和情感上<span style='color:red'>虐待</span>自己<span style='color:red'>？</span></p>
 <p><strong>混合搜索结果：</strong></p>
 <p><span style='color:red'> 开始学习</span>机器人技术的最佳方法是什么<span style='color:red'>？</span>哪种开发板最好<span style='color:red'>？</span></p>
 <p>什么是 Java<span style='color:red'> 编程？如何</span>学习 Java 编程语言？</p>

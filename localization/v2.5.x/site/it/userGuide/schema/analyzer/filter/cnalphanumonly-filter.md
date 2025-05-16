@@ -63,8 +63,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il filtro <code translate="no">cnalphanumonly</code> opera sui termini generati dal tokenizer, quindi deve essere usato in combinazione con un tokenizer. Per un elenco dei tokenizer disponibili in Milvus, consultare <a href="/docs/it/tokenizers">Tokenizer Reference</a>.</p>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, consultare l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<p>Il filtro <code translate="no">cnalphanumonly</code> opera sui termini generati dal tokenizer, quindi deve essere usato in combinazione con un tokenizer. Per un elenco dei tokenizer disponibili in Milvus, consultare <a href="/docs/it/standard-tokenizer.md">Standard Tokenizer</a> e le sue pagine collaterali.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarlo a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -102,8 +102,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>複合語の分割に使用される単語コンポーネントのリスト。この辞書によって、複合語が個々の語にどのように分解されるかが決まります。</p></td>
    </tr>
 </table>
-<p><code translate="no">decompounder</code> フィルタは、トークナイザによって生成された用語で動作するため、トークナイザと組み合わせて使用する 必要があります。Milvusで利用可能なトークナイザーのリストについては、「<a href="/docs/ja/tokenizers">トークナイザー リファレンス</a>」を参照してください。</p>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">decompounder</code> フィルタは、トークナイザによって生成された用語で動作するため、トークナイザと組み合わせて使用する 必要があります。Milvusで利用可能なトークナイザーのリストについては、<a href="/docs/ja/standard-tokenizer.md">Standard Tokenizerと</a>その兄弟ページを参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

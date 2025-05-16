@@ -28,11 +28,11 @@ title: Recuperador de pesquisa híbrida Milvus
   </span>
 </p>
 <p>Este diagrama ilustra o cenário de pesquisa híbrida mais comum, que é a pesquisa híbrida densa + esparsa. Neste caso, os candidatos são recuperados utilizando a semelhança de vectores semânticos e a correspondência precisa de palavras-chave. Os resultados destes métodos são fundidos, reavaliados e transmitidos a um LLM para gerar a resposta final. Esta abordagem equilibra precisão e compreensão semântica, tornando-a altamente eficaz para diversos cenários de consulta.</p>
-<p>Para além da pesquisa híbrida densa + esparsa, as estratégias híbridas também podem combinar vários modelos de vectores densos. Por exemplo, um modelo de vectores densos pode especializar-se na captura de nuances semânticas, enquanto outro se concentra em incorporações contextuais ou representações específicas do domínio. Ao fundir os resultados destes modelos e ao reordená-los, este tipo de pesquisa híbrida assegura um processo de recuperação mais matizado e sensível ao contexto.</p>
+<p>Para além da pesquisa híbrida densa + esparsa, as estratégias híbridas também podem combinar vários modelos de vectores densos. Por exemplo, um modelo de vectores densos pode especializar-se na captura de nuances semânticas, enquanto outro se concentra em incorporações contextuais ou representações específicas do domínio. Ao fundir os resultados destes modelos e ao reordená-los, este tipo de pesquisa híbrida garante um processo de recuperação com mais nuances e mais atento ao contexto.</p>
 <p>A integração do LangChain Milvus fornece uma forma flexível de implementar a pesquisa híbrida, suporta qualquer número de campos vectoriais e quaisquer modelos de incorporação densos ou esparsos personalizados, o que permite ao LangChain Milvus adaptar-se de forma flexível a vários cenários de utilização de pesquisa híbrida e, ao mesmo tempo, ser compatível com outras capacidades do LangChain.</p>
 <p>Neste tutorial, começaremos com o caso mais comum denso + esparso e, em seguida, apresentaremos várias abordagens gerais de uso de pesquisa híbrida.</p>
 <div class="alert note">
-<p>O <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a>, que é outra implementação de busca híbrida com Milvus e LangChain, <strong>está prestes a ser descontinuado</strong>. Use a abordagem deste documento para implementar a pesquisa híbrida, pois ela é mais flexível e compatível com LangChain.</p>
+<p>O <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a>, que é outra implementação de busca híbrida com Milvus e LangChain, <strong>está prestes a ser descontinuado</strong>. Por favor, use a abordagem deste documento para implementar a pesquisa híbrida, pois ela é mais flexível e compatível com LangChain.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,7 +64,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Prepare alguns documentos de exemplo, que são resumos de histórias fictícias categorizadas por tema ou género.</p>
+<p>Prepare alguns documentos de exemplo, que são resumos de histórias de ficção categorizados por tema ou género.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
@@ -139,7 +139,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -198,7 +198,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Embora esta seja uma forma de utilizar o BM25, requer que os utilizadores gerem o corpus para obter estatísticas de frequência de termos. Em vez disso, recomendamos a utilização da função incorporada BM25 (Opção 1), uma vez que trata de tudo no lado do servidor Milvus. Isto elimina a necessidade de os utilizadores se preocuparem com a gestão do corpus ou com a formação de um vocabulário. Para mais informações, consulte a secção <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Utilizar a pesquisa de texto integral com LangChain e Milvus</a>.</p>
@@ -235,7 +235,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -267,7 +267,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -277,7 +277,7 @@ vectorstore.vector_fields
 <div class="alert note">
 <p>Mantenha a ordem da lista de parâmetros de índice consistente com a ordem de <code translate="no">vectorstore.vector_fields</code> para evitar confusões.</p>
 </div>
-<h3 id="Rerank-the-candidates" class="common-anchor-header">Classificar novamente os candidatos</h3><p>Após a primeira fase de recuperação, é necessário classificar novamente os candidatos para obter um melhor resultado. Pode escolher <a href="https://milvus.io/docs/reranking.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> ou <a href="https://milvus.io/docs/reranking.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> consoante os seus requisitos. Para mais informações, consulte a secção <a href="https://milvus.io/docs/reranking.md#Reranking">Reranking</a>.</p>
+<h3 id="Rerank-the-candidates" class="common-anchor-header">Classificar novamente os candidatos</h3><p>Após a primeira fase de recuperação, é necessário classificar novamente os candidatos para obter um melhor resultado. Pode escolher <a href="https://milvus.io/docs/reranking.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> ou <a href="https://milvus.io/docs/reranking.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> consoante os seus requisitos. Pode consultar a secção <a href="https://milvus.io/docs/reranking.md#Reranking">Reranking</a> para obter mais informações.</p>
 <p>Eis um exemplo de classificação ponderada:</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
@@ -288,7 +288,7 @@ vectorstore.vector_fields
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -320,7 +320,7 @@ vectorstore.similarity_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No cenário do RAG, a abordagem mais prevalecente para a pesquisa híbrida é a recuperação densa + esparsa, seguida da reclassificação. O exemplo seguinte demonstra um código simples de ponta a ponta.</p>
+    </button></h2><p>No cenário do RAG, a abordagem mais predominante para a pesquisa híbrida é a recuperação densa + esparsa, seguida da classificação. O exemplo seguinte demonstra um código simples de ponta a ponta.</p>
 <h3 id="Prepare-the-data" class="common-anchor-header">Preparar os dados</h3><p>Utilizamos o Langchain WebBaseLoader para carregar documentos a partir de fontes Web e dividi-los em partes utilizando o RecursiveCharacterTextSplitter.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
@@ -361,7 +361,7 @@ docs[<span class="hljs-number">1</span>]
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">Construir a cadeia RAG</h3><p>Preparamos a instância LLM e o prompt e, em seguida, combinamo-los num pipeline RAG utilizando a linguagem de expressão LangChain.</p>

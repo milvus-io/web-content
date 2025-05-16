@@ -6,7 +6,7 @@ summary: >-
   pesquisas ANN em simultâneo, reordena vários conjuntos de resultados dessas
   pesquisas ANN e, por fim, devolve um único conjunto de resultados. A
   utilização da Pesquisa Híbrida pode aumentar a precisão da pesquisa. O Milvus
-  suporta a realização de Pesquisa Híbrida numa coleção com vários campos
+  suporta a realização da Pesquisa Híbrida numa coleção com vários campos
   vectoriais.
 ---
 <h1 id="Hybrid-Search" class="common-anchor-header">Pesquisa híbrida<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
@@ -48,7 +48,7 @@ summary: >-
 <li><p><strong>Vectores densos:</strong> Os vectores densos são incorporados a partir de redes neurais. Quando dispostos numa matriz ordenada, estes vectores captam a essência semântica do texto de entrada. Note-se que os vectores densos não se limitam ao processamento de texto; são também amplamente utilizados na visão computacional para representar a semântica dos dados visuais. Estes vectores densos, normalmente gerados por modelos de incorporação de texto, caracterizam-se pelo facto de a maioria ou todos os elementos serem diferentes de zero. Assim, os vectores densos são particularmente eficazes para aplicações de pesquisa semântica, uma vez que podem devolver os resultados mais semelhantes com base na distância vetorial, mesmo na ausência de correspondências exactas de palavras-chave. Esta capacidade permite resultados de pesquisa mais matizados e conscientes do contexto, capturando frequentemente relações entre conceitos que podem ser perdidas por abordagens baseadas em palavras-chave.</p></li>
 </ul>
 <p>Para obter mais detalhes, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a> e <a href="/docs/pt/dense-vector.md">Vetor denso</a>.</p>
-<h3 id="Multimodal-Search" class="common-anchor-header">Pesquisa multimodal</h3><p>A pesquisa multimodal refere-se à pesquisa de semelhanças de dados não estruturados em várias modalidades (como imagens, vídeos, áudio, texto, etc.). Por exemplo, uma pessoa pode ser representada utilizando várias modalidades de dados, como impressões digitais, impressões de voz e caraterísticas faciais. A pesquisa híbrida suporta várias pesquisas em simultâneo. Por exemplo, procurar uma pessoa com impressões digitais e impressões de voz semelhantes.</p>
+<h3 id="Multimodal-Search" class="common-anchor-header">Pesquisa multimodal</h3><p>A pesquisa multimodal refere-se à pesquisa por semelhança de dados não estruturados em várias modalidades (como imagens, vídeos, áudio, texto, etc.). Por exemplo, uma pessoa pode ser representada utilizando várias modalidades de dados, como impressões digitais, impressões de voz e caraterísticas faciais. A pesquisa híbrida suporta várias pesquisas em simultâneo. Por exemplo, procurar uma pessoa com impressões digitais e impressões de voz semelhantes.</p>
 <h2 id="Workflow" class="common-anchor-header">Fluxo de trabalho<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,13 +93,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta secção utilizará um exemplo específico para ilustrar como realizar uma Pesquisa Híbrida em vectores esparso-densos para melhorar a precisão das pesquisas de texto.</p>
+    </button></h2><p>Esta secção utilizará um exemplo específico para ilustrar como conduzir uma Pesquisa Híbrida em vectores esparso-densos para melhorar a precisão das pesquisas de texto.</p>
 <h3 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Criar uma coleção com vários campos vectoriais</h3><p>O processo de criação de uma coleção inclui três partes: definir o esquema da coleção, configurar os parâmetros do índice e criar a coleção.</p>
 <h4 id="Define-schema" class="common-anchor-header">Definir o esquema</h4><p>Neste exemplo, é necessário definir vários campos vectoriais no esquema da coleção. Atualmente, cada coleção pode incluir até 4 campos vectoriais por predefinição. Mas também é possível modificar o valor de <code translate="no">proxy.maxVectorFieldNum</code> para incluir até 10 campos vectoriais numa coleção, conforme necessário.</p>
 <p>O exemplo seguinte define um esquema de coleção, em que <code translate="no">dense</code> e <code translate="no">sparse</code> são os dois campos vectoriais:</p>
 <ul>
 <li><p><code translate="no">id</code>: Este campo serve como chave primária para armazenar IDs de texto. O tipo de dados deste campo é INT64.</p></li>
-<li><p><code translate="no">text</code>: Este campo é utilizado para armazenar conteúdo textual. O tipo de dados deste campo é VARCHAR, com um comprimento máximo de 1000 caracteres.</p></li>
+<li><p><code translate="no">text</code>: Este campo é utilizado para armazenar conteúdos textuais. O tipo de dados deste campo é VARCHAR, com um comprimento máximo de 1000 caracteres.</p></li>
 <li><p><code translate="no">dense</code>: Este campo é utilizado para armazenar os vectores densos dos textos. O tipo de dados deste campo é FLOAT_VECTOR, com uma dimensão vetorial de 768.</p></li>
 <li><p><code translate="no">sparse</code>: Este campo é utilizado para armazenar os vectores esparsos dos textos. O tipo de dados deste campo é SPARSE_FLOAT_VECTOR.</p></li>
 </ul>
@@ -495,7 +495,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <div class="alert note">
 <p>Na Pesquisa híbrida, cada <code translate="no">AnnSearchRequest</code> suporta apenas um vetor de consulta.</p>
 </div>
-<p>Suponha que o texto da consulta "Quem iniciou a investigação em IA?" já foi convertido em vectores esparsos e densos. Com base nisto, são criados dois pedidos de pesquisa <code translate="no">AnnSearchRequest</code> para os campos vectoriais <code translate="no">sparse</code> e <code translate="no">dense</code>, respetivamente, como se mostra no exemplo seguinte.</p>
+<p>Suponha que o texto da consulta "Quem iniciou a investigação em IA?" já foi convertido em vectores esparsos e densos. Com base nisto, são criados dois pedidos de pesquisa <code translate="no">AnnSearchRequest</code> para os campos vectoriais <code translate="no">sparse</code> e <code translate="no">dense</code>, respetivamente, como mostra o exemplo seguinte.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
@@ -513,7 +513,7 @@ search_param_1 = {
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>}, {<span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
+query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>, <span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
@@ -615,7 +615,7 @@ request2 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;sparse&qu
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Como o parâmetro <code translate="no">limit</code> está definido como 2, cada <code translate="no">AnnSearchRequest</code> retorna 2 resultados de pesquisa. Neste exemplo, são criados 2 <code translate="no">AnnSearchRequest</code>, pelo que será devolvido um total de 4 resultados de pesquisa.</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">Configurar uma estratégia de ranqueamento</h3><p>Para fundir e classificar novamente os dois conjuntos de resultados de pesquisa ANN, é necessário selecionar uma estratégia de classificação adequada. Milvus suporta dois tipos de estratégias de reranking: <strong>WeightedRanker</strong> e <strong>RRFRanker</strong>. Ao escolher uma estratégia de reranking, uma coisa a considerar é se existe alguma ênfase para uma ou mais pesquisas ANN básicas nos campos vectoriais.</p>
+<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">Configurar uma estratégia de ranqueamento</h3><p>Para fundir e classificar novamente os dois conjuntos de resultados de pesquisa ANN, é necessário selecionar uma estratégia de classificação adequada. O Milvus suporta dois tipos de estratégias de reranking: <strong>WeightedRanker</strong> e <strong>RRFRanker</strong>. Ao escolher uma estratégia de reranking, uma coisa a considerar é se existe alguma ênfase para uma ou mais pesquisas ANN básicas nos campos vectoriais.</p>
 <ul>
 <li><p><strong>WeightedRanker</strong>: Esta estratégia é recomendada se for necessário que os resultados dêem ênfase a um determinado campo vetorial. O WeightedRanker permite-lhe atribuir pesos mais elevados a determinados campos vectoriais, dando-lhes mais ênfase. Por exemplo, em pesquisas multimodais, as descrições textuais de uma imagem podem ser consideradas mais importantes do que as cores dessa imagem.</p></li>
 <li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Esta estratégia é recomendada quando não existe uma ênfase específica. O RRF pode equilibrar eficazmente a importância de cada campo vetorial.</p></li>
@@ -672,7 +672,7 @@ ranker = RRFRanker(<span class="hljs-number">100</span>)
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">Executar uma pesquisa híbrida</h3><p>Antes de realizar uma Hybrid Search, é necessário carregar a coleção na memória. Se algum campo de vetor na coleção não tiver um índice ou não estiver carregado, ocorrerá um erro ao chamar o método Hybrid Search.</p>
+<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">Executar uma pesquisa híbrida</h3><p>Antes de realizar uma Hybrid Search, é necessário carregar a coleção na memória. Se algum campo de vetor da coleção não tiver um índice ou não estiver carregado, ocorrerá um erro ao chamar o método Hybrid Search.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

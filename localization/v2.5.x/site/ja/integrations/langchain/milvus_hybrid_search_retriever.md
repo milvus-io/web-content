@@ -25,9 +25,9 @@ title: Milvusハイブリッド検索レトリバー
     <span></span>
   </span>
 </p>
-<p>この図は、最も一般的なハイブリッド検索シナリオである、密＋疎ハイブリッド検索を示している。この場合、候補は意味ベクトル類似性と正確なキーワードマッチングの両方を用いて検索される。これらの方法からの結果はマージされ、再ランク付けされ、最終的な答えを生成するためにLLMに渡される。このアプローチは、精度と意味理解のバランスをとり、多様なクエリーシナリオに非常に効果的である。</p>
+<p>この図は、最も一般的なハイブリッド検索シナリオである、密＋疎ハイブリッド検索を示している。この場合、候補は意味ベクトル類似性と正確なキーワードマッチングの両方を用いて検索される。これらの方法からの結果はマージされ、再ランク付けされ、最終的な答えを生成するためにLLMに渡される。このアプローチは、精度と意味理解のバランスが取れており、多様なクエリーシナリオに非常に効果的である。</p>
 <p>密＋疎ハイブリッド検索に加えて、ハイブリッド戦略は複数の密ベクトルモデルを組み合わせることもできる。例えば、ある密なベクトルモデルは意味的なニュアンスを捉えることに特化し、別の密なベクトルモデルは文脈的な埋め込みやドメイン固有の表現に焦点を当てるかもしれない。これらのモデルからの結果をマージし、それらを再ランク付けすることで、このタイプのハイブリッド検索は、よりニュアンスがあり、コンテキストを考慮した検索プロセスを保証する。</p>
-<p>LangChainMilvusの統合はハイブリッド検索を実装する柔軟な方法を提供し、任意の数のベクトル場や、任意のカスタム密埋込みモデルやスパース埋込みモデルをサポートします。これによりLangChainMilvusは様々なハイブリッド検索の利用シナリオに柔軟に適応することができ、同時にLangChainの他の機能とも互換性があります。</p>
+<p>LangChain Milvus統合はハイブリッド検索を実装する柔軟な方法を提供し、任意の数のmilvusベクトルフィールドと、任意のカスタム密埋込みモデルまたは疎埋込みモデルをサポートします。</p>
 <p>このチュートリアルでは、最も一般的な密＋疎のケースから始め、一般的なハイブリッド検索の使い方を紹介します。</p>
 <div class="alert note">
 <p><a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">Milvusと</a>LangChainによるハイブリッド検索のもう一つの実装である<a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetrieverは</a> <strong>廃止予定です</strong>。LangChainとの互換性が高く、より柔軟なハイブリッド検索を実装するためには、本ドキュメントのアプローチをご利用ください。</p>
@@ -62,7 +62,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>テーマやジャンルごとに分類された架空のストーリーの要約であるサンプルドキュメントをいくつか用意する。</p>
+<p>テーマやジャンルごとに分類された架空のストーリーをまとめたサンプルドキュメントを用意する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
@@ -137,7 +137,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -196,7 +196,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>これはBM25を使う方法ですが、用語頻度統計のためにコーパスを管理する必要があります。BM25はMilvusサーバ側で全ての処理を行うため、BM25組み込み関数(Option 1)を使用することをお勧めします。これにより、ユーザはコーパスの管理や語彙の学習に煩わされることがなくなります。詳しくは<a href="https://milvus.io/docs/full_text_search_with_langchain.md">LangChainとMilvusによる全文検索を</a>ご参照ください。</p>
@@ -233,14 +233,14 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
-<p>この例では、3つのベクトル場があります。その中で、<code translate="no">sparse</code> は<code translate="no">BM25BuiltInFunction</code> の出力フィールドとして使用され、他の2つ、<code translate="no">dense1</code> と<code translate="no">dense2</code> は、（順番に基づき）2つの<code translate="no">OpenAIEmbeddings</code> モデルの出力フィールドとして自動的に割り当てられる。</p>
+<p>この例では、3つのベクトル場があります。その中で、<code translate="no">sparse</code> は<code translate="no">BM25BuiltInFunction</code> の出力フィールドとして使用され、他の2つ、<code translate="no">dense1</code> と<code translate="no">dense2</code> は、2つの<code translate="no">OpenAIEmbeddings</code> モデルの出力フィールドとして自動的に割り当てられる（順番に基づく）。</p>
 <h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">マルチ・ベクトル・フィールドのインデックス・パラメータの指定</h3><p>デフォルトでは、各ベクトル・フィールドのインデックス・タイプは、埋め込みまたは組み込み関数のタイプによって自動的に決定されます。しかし、検索性能を最適化するために、各ベクトル・フィールドのインデックス・タイプを指定することもできます。</p>
 <pre><code translate="no" class="language-python">dense_index_param_1 = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
@@ -265,7 +265,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -286,7 +286,7 @@ vectorstore.vector_fields
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -359,7 +359,7 @@ docs[<span class="hljs-number">1</span>]
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">RAGチェーンの構築</h3><p>LLMインスタンスとプロンプトを準備し、LangChain Expression Languageを使ってRAGパイプラインに結合する。</p>

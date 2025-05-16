@@ -58,15 +58,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>필수 매개 변수</p></td>
-     <td><ul><li>컬렉션 이름</li><li>기본 키</li></ul></td>
-     <td><ul><li>컬렉션 이름</li><li>필터링 표현식</li></ul></td>
-     <td><ul><li><p>컬렉션 이름</p></li><li><p>필터링 표현식</p></li><li><p>쿼리당 반환할 엔티티 수</p></li></ul></td>
+     <td><ul>
+<li>컬렉션 이름</li>
+<li>기본 키</li>
+</ul></td>
+     <td><ul>
+<li>컬렉션 이름</li>
+<li>필터링 표현식</li>
+</ul></td>
+     <td><ul>
+<li><p>컬렉션 이름</p></li>
+<li><p>필터링 표현식</p></li>
+<li><p>쿼리당 반환할 엔티티 수</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>선택적 매개 변수</p></td>
-     <td><ul><li>파티션 이름</li><li>출력 필드</li></ul></td>
-     <td><ul><li><p>파티션 이름</p></li><li><p>반환할 엔티티 수</p></li><li><p>출력 필드</p></li></ul></td>
-     <td><ul><li><p>파티션 이름</p></li><li><p>반환할 총 엔티티 수</p></li><li><p>출력 필드</p></li></ul></td>
+     <td><ul>
+<li>파티션 이름</li>
+<li>출력 필드</li>
+</ul></td>
+     <td><ul>
+<li><p>파티션 이름</p></li>
+<li><p>반환할 엔티티 수</p></li>
+<li><p>출력 필드</p></li>
+</ul></td>
+     <td><ul>
+<li><p>파티션 이름</p></li>
+<li><p>반환할 총 엔티티 수</p></li>
+<li><p>출력 필드</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>반환 항목</p></td>
@@ -75,8 +96,8 @@ summary: >-
      <td><p>페이지 매김 쿼리를 통해 지정된 컬렉션 또는 파티션에서 사용자 지정 필터링 조건을 충족하는 모든 엔터티를 반환합니다.</p></td>
    </tr>
 </table>
-<p>메타데이터 필터링에 대한 자세한 내용은 <a href="/docs/ko/filtering">필터링을</a> 참조하세요.</p>
-<h2 id="Use-Get" class="common-anchor-header">가져오기 사용<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>메타데이터 필터링에 대한 자세한 내용은 를 참조하세요.</p>
+<h2 id="Use-Get" class="common-anchor-header">Get 사용<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,7 +112,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본 키로 엔티티를 찾아야 하는 경우 <strong>Get</strong> 메서드를 사용할 수 있습니다. 다음 코드 예제에서는 컬렉션에 <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">color</code> 이라는 이름의 필드 3개가 있다고 가정하고 기본 키 <code translate="no">1</code>, <code translate="no">2</code>, <code translate="no">3</code> 를 사용하여 엔티티를 반환합니다.</p>
+    </button></h2><p>기본 키로 엔티티를 찾아야 하는 경우 <strong>Get</strong> 메서드를 사용할 수 있습니다. 다음 코드 예제에서는 컬렉션에 <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">color</code> 라는 이름의 필드 3개가 있다고 가정하고 기본 키 <code translate="no">1</code>, <code translate="no">2</code>, <code translate="no">3</code> 를 사용하여 엔티티를 반환합니다.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -324,7 +345,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>페이지 매김 쿼리를 통해 사용자 지정 필터링 조건으로 엔티티를 찾아야 하는 경우 <strong>QueryIterator를</strong> 생성하고 <strong>다음()</strong> 메서드를 사용하여 모든 엔티티를 반복하여 필터링 조건에 맞는 엔티티를 찾습니다. 다음 코드 예제에서는 <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">color</code> 라는 세 개의 필드가 있고 <code translate="no">red</code> 로 시작하는 <code translate="no">color</code> 값을 가진 모든 엔티티를 반환한다고 가정합니다.</p>
+    </button></h2><p>페이지 매김 쿼리를 통해 사용자 지정 필터링 조건으로 엔티티를 찾아야 하는 경우 <strong>QueryIterator를</strong> 생성하고 <strong>다음()</strong> 메서드를 사용하여 모든 엔티티를 반복하여 필터링 조건에 맞는 엔티티를 찾습니다. 다음 코드 예제에서는 <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">color</code> 라는 이름의 세 개의 필드가 있고 <code translate="no">red</code> 로 시작하는 <code translate="no">color</code> 값을 가진 모든 엔티티를 반환한다고 가정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection

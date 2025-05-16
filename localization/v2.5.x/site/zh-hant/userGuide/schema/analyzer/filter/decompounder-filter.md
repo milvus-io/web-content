@@ -100,7 +100,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>用於分割複合詞的單字元件清單。此字典決定如何將複合詞分解成單獨的詞。</p></td>
    </tr>
 </table>
-<p><code translate="no">decompounder</code> 過濾器會對由 tokenizer 產生的詞彙進行操作，因此它必須與 tokenizer 結合使用。如需 Milvus 中可用的 tokenizer 清單，請參考<a href="/docs/zh-hant/tokenizers">Tokenizer Reference</a>。</p>
+<p><code translate="no">decompounder</code> 過濾器會對由 tokenizer 產生的詞彙進行操作，因此它必須與 tokenizer 結合使用。如需 Milvus 中可用的 tokenizer 清單，請參考<a href="/docs/zh-hant/standard-tokenizer.md">Standard Tokenizer</a>及其同屬頁面。</p>
 <p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這允許 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

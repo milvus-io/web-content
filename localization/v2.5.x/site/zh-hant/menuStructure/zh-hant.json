@@ -941,6 +941,12 @@
             "id": "embed-with-gemini.md",
             "order": 14,
             "children": []
+          },
+          {
+            "label": "嵌入任何東西",
+            "id": "build_RAG_with_milvus_and_embedAnything.md",
+            "order": 15,
+            "children": []
           }
         ]
       },
@@ -1854,6 +1860,18 @@
             "label": "駝峰",
             "id": "llama_stack_with_milvus.md",
             "order": 12,
+            "children": []
+          },
+          {
+            "label": "n8n",
+            "id": "milvus_and_n8n.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "AnythingLLM",
+            "id": "use_milvus_in_anythingllm.md",
+            "order": 14,
             "children": []
           }
         ]

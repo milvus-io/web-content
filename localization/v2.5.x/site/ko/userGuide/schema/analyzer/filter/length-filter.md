@@ -90,7 +90,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>최대 토큰 길이를 설정합니다. 이 길이보다 긴 토큰은 제거됩니다.</p></td>
    </tr>
 </table>
-<p><code translate="no">length</code> 필터는 토큰 생성기에 의해 생성된 조건에 따라 작동하므로 토큰 생성기와 함께 사용해야 합니다. Milvus에서 사용 가능한 토큰라이저 목록은 토큰라이저 <a href="/docs/ko/tokenizers">참조를</a> 참조하세요.</p>
+<p><code translate="no">length</code> 필터는 토큰 생성기에 의해 생성된 조건에 따라 작동하므로 토큰 생성기와 함께 사용해야 합니다. Milvus에서 사용할 수 있는 토큰화 도구 목록은 <a href="/docs/ko/standard-tokenizer.md">표준 토큰화</a> 도구와 그 자매 페이지를 참조하세요.</p>
 <p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

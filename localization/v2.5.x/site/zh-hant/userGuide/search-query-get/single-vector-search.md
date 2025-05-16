@@ -971,7 +971,7 @@ curl --request POST \
 <ul>
 <li><p>過濾搜尋</p>
 <p>您可以在搜尋請求中加入過濾條件，讓 Milvus 在進行 ANN 搜尋之前先進行元資料過濾，將搜尋範圍從整個集合縮小到只有符合指定過濾條件的實體。</p>
-<p>關於元資料篩選和篩選條件的更多資訊，請參閱篩選<a href="/docs/zh-hant/filtered-search.md">搜尋和</a> <a href="/docs/zh-hant/filtering">篩選</a>。</p></li>
+<p>更多關於元資料篩選和篩選條件，請參考篩選<a href="/docs/zh-hant/filtered-search.md">搜尋</a>、<a href="/docs/zh-hant/boolean.md">篩選解釋</a>和相關主題。</p></li>
 <li><p>範圍搜尋</p>
 <p>您可以在特定範圍內限制返回實體的距離或分數，以改善搜尋結果的相關性。在 Milvus 中，範圍搜尋涉及以與查詢向量最相似的向量嵌入為中心，畫出兩個同心圓。搜尋請求指定兩個圓圈的半徑，Milvus 會傳回屬於外圈但不屬於內圈的所有向量嵌入。</p>
 <p>更多關於範圍搜尋，請參考<a href="/docs/zh-hant/range-search.md">範圍搜尋</a>。</p></li>

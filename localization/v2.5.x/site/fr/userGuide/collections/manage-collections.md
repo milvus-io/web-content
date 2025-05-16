@@ -157,7 +157,7 @@ summary: >-
     </button></h2><p>Une fois que vous avez créé les index et chargé la collection, vous pouvez lancer une recherche de similarité en introduisant un ou plusieurs vecteurs de requête. Par exemple, lorsqu'il reçoit la représentation vectorielle de votre requête dans une demande de recherche, Milvus utilise le type de métrique spécifié pour mesurer la similarité entre le vecteur de la requête et ceux de la collection cible avant de renvoyer ceux qui sont sémantiquement similaires à la requête.</p>
 <p>Vous pouvez également inclure le filtrage des métadonnées dans les recherches et les requêtes afin d'améliorer la pertinence des résultats. Notez que les conditions de filtrage des métadonnées sont obligatoires dans les requêtes, mais facultatives dans les recherches.</p>
 <p>Pour plus de détails sur les types de métriques applicables, voir <a href="/docs/fr/metric.md">Types de métriques</a>.</p>
-<p>Pour plus d'informations sur les recherches et les requêtes, reportez-vous aux articles du chapitre <a href="/docs/fr/search-rerank">Recherche et repositionnement</a>, parmi lesquels figurent les fonctionnalités de base :</p>
+<p>Pour plus d'informations sur les recherches et les requêtes, reportez-vous aux articles du chapitre Recherche et repositionnement, parmi lesquels figurent les fonctionnalités de base :</p>
 <ul>
 <li><p><a href="/docs/fr/single-vector-search.md">Recherche ANN de base</a></p></li>
 <li><p><a href="/docs/fr/filtered-search.md">Recherche filtrée</a></p></li>
@@ -190,7 +190,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les partitions sont des sous-ensembles d'une collection, qui partagent le même ensemble de champs avec la collection mère, et qui contiennent chacun un sous-ensemble d'entités.</p>
+    </button></h2><p>Les partitions sont des sous-ensembles d'une collection, qui partagent le même ensemble de champs avec la collection mère, et qui contiennent chacune un sous-ensemble d'entités.</p>
 <p>En répartissant les entités dans différentes partitions, vous pouvez créer des groupes d'entités. Vous pouvez effectuer des recherches et des requêtes dans des partitions spécifiques pour que Milvus ignore les entités dans d'autres partitions et améliore l'efficacité de la recherche.</p>
 <p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/manage-partitions.md">Gérer les partitions</a>.</p>
 <h2 id="Shard" class="common-anchor-header">Fardeau<button data-href="#Shard" class="anchor-icon" translate="no">
@@ -258,5 +258,5 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les systèmes de bases de données distribuées utilisent généralement le niveau de cohérence pour définir la similitude des données entre les nœuds de données et les répliques. Vous pouvez définir des niveaux de cohérence distincts lorsque vous créez une collection ou que vous effectuez des recherches de similarité au sein de la collection. Les niveaux de cohérence applicables sont les suivants : <strong>Strong (fort</strong>), Bounded <strong>Staleness (stagnation limitée</strong>), <strong>Session (session)</strong> et <strong>Eventually (éventuellement)</strong>.</p>
+    </button></h2><p>Les systèmes de bases de données distribuées utilisent généralement le niveau de cohérence pour définir la similitude des données entre les nœuds de données et les répliques. Vous pouvez définir des niveaux de cohérence distincts lorsque vous créez une collection ou que vous effectuez des recherches de similarité au sein de la collection. Les niveaux de cohérence applicables sont <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong> et <strong>Eventually</strong>.</p>
 <p>Pour plus d'informations sur ces niveaux de cohérence, reportez-vous à la section <a href="/docs/fr/tune_consistency.md">Niveau de cohérence</a>.</p>

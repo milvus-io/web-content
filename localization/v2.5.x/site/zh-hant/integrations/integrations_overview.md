@@ -73,7 +73,7 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/build_rag_on_arm.md">在 Arm 架構上建立 RAG</a></td><td>RAG</td><td>Milvus、Arm</td></tr>
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_fireworks.md">使用 Milvus 和 Fireworks AI 建立 RAG</a></td><td>LLMs</td><td>Milvus、Fireworks AI</td></tr>
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_lepton.md">使用 Milvus 和 Lepton AI 建立 RAG</a></td><td>LLMs</td><td>Milvus、Lepton AI</td></tr>
-<tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_siliconflow">使用 Milvus 和 SiliconFlow 建立 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
+<tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_siliconflow.md">使用 Milvus 和 SiliconFlow 建立 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
 <tr><td><a href="/docs/zh-hant/rag_with_milvus_and_unstructured.md">使用 Milvus 和非結構化</a></td><td>資料來源</td><td>Milvus、非結構化</td></tr>
 <tr><td><a href="/docs/zh-hant/RAG_with_pii_and_milvus.md">使用 Milvus + PII 掩碼器建立 RAG</a></td><td>資料來源</td><td>Milvus、PII 掩碼器</td></tr>
 <tr><td><a href="/docs/zh-hant/knowledge_table_with_milvus.md">使用 Milvus 建立知識表</a></td><td>知識工程</td><td>知識表，Milvus</td></tr>
@@ -85,6 +85,9 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_firecrawl.md">使用 Milvus 和 Firecrawl 建立 RAG</a></td><td>資料來源</td><td>Milvus、Firecrawl</td></tr>
 <tr><td><a href="/docs/zh-hant/integration_with_mindsdb.md">整合 Milvus 與 MindsDB</a></td><td>知識工程</td><td>Milvus、MindsDB</td></tr>
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_feast.md">使用 Milvus 和 Feast 建立 RAG</a></td><td>資料來源</td><td>Milvus、Feast</td></tr>
-<tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_docling.md">使用 Milvus 和 Docling 建立 RAG</a></td><td>資料來源</td><td>密爾沃斯、多克林</td></tr>
+<tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_docling.md">使用 Milvus 和 Docling 建立 RAG</a></td><td>資料來源</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_embedAnything.md">使用 Milvus 和 EmbedAnything 建立 RAG</a></td><td>嵌入</td><td>Milvus、EmbedAnything</td></tr>
+<tr><td><a href="/docs/zh-hant/milvus_and_n8n.md">開始使用 Milvus 和 n8n</a></td><td>協調</td><td>Milvus, n8n</td></tr>
+<tr><td><a href="/docs/zh-hant/use_milvus_in_anythingllm.md">在 AnythingLLM 中使用 Milvus</a></td><td>協調</td><td>Milvus, AnythingLLM</td></tr>
 </tbody>
 </table>

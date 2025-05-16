@@ -301,7 +301,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>De la même manière, vous pouvez inclure plusieurs vecteurs de requête dans une demande de recherche. Milvus effectuera des recherches ANN pour les vecteurs de requête en parallèle et renverra deux ensembles de résultats.</p>
+    </button></h2><p>De même, vous pouvez inclure plusieurs vecteurs de requête dans une demande de recherche. Milvus effectuera des recherches ANN pour les vecteurs de requête en parallèle et renverra deux ensembles de résultats.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
@@ -976,9 +976,9 @@ curl --request POST \
 <ul>
 <li><p>Recherche filtrée</p>
 <p>Vous pouvez inclure des conditions de filtrage dans une demande de recherche afin que Milvus procède au filtrage des métadonnées avant d'effectuer des recherches ANN, réduisant ainsi l'étendue de la recherche de l'ensemble de la collection aux seules entités correspondant aux conditions de filtrage spécifiées.</p>
-<p>Pour en savoir plus sur le filtrage des métadonnées et les conditions de filtrage, voir <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/filtering">Filtrage</a>.</p></li>
+<p>Pour en savoir plus sur le filtrage des métadonnées et les conditions de filtrage, reportez-vous à <a href="/docs/fr/filtered-search.md">Recherche filtrée</a>, <a href="/docs/fr/boolean.md">Explication du filtrage</a> et aux rubriques connexes.</p></li>
 <li><p>Recherche par plage</p>
-<p>Vous pouvez améliorer la pertinence des résultats de la recherche en limitant la distance ou le score des entités renvoyées à une plage spécifique. Dans Milvus, une recherche par plage consiste à dessiner deux cercles concentriques dont le centre est l'intégration vectorielle la plus similaire au vecteur de la requête. La requête de recherche spécifie le rayon des deux cercles et Milvus renvoie tous les enregistrements vectoriels qui se trouvent dans le cercle extérieur mais pas dans le cercle intérieur.</p>
+<p>Vous pouvez améliorer la pertinence des résultats de recherche en limitant la distance ou le score des entités renvoyées à une plage spécifique. Dans Milvus, une recherche par plage consiste à dessiner deux cercles concentriques dont le centre est l'intégration vectorielle la plus similaire au vecteur de la requête. La requête de recherche spécifie le rayon des deux cercles et Milvus renvoie tous les enregistrements vectoriels qui se trouvent dans le cercle extérieur mais pas dans le cercle intérieur.</p>
 <p>Pour en savoir plus sur la recherche par plage, reportez-vous à la section <a href="/docs/fr/range-search.md">Recherche par plage</a>.</p></li>
 <li><p>Recherche de regroupement</p>
 <p>Si les entités renvoyées ont la même valeur dans un champ spécifique, les résultats de la recherche peuvent ne pas représenter la distribution de tous les ancrages vectoriels dans l'espace vectoriel. Pour diversifier les résultats de la recherche, envisagez d'utiliser la recherche par regroupement.</p>
@@ -999,7 +999,7 @@ curl --request POST \
 <p>L'implication de plusieurs champs scalaires dans le filtrage des métadonnées et l'utilisation d'une condition de filtrage assez compliquée peuvent affecter l'efficacité de la recherche. Une fois que vous avez défini un champ scalaire comme clé de partition et que vous utilisez une condition de filtrage impliquant la clé de partition dans la requête de recherche, cela peut aider à restreindre l'étendue de la recherche dans les partitions correspondant aux valeurs de clé de partition spécifiées.</p>
 <p>Pour plus d'informations sur la clé de partition, reportez-vous à la section <a href="/docs/fr/use-partition-key.md">Utiliser la clé de partition</a>.</p></li>
 <li><p>Utiliser mmap</p>
-<p>Pour plus d'informations sur les paramètres de mmap, voir la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p></li>
+<p>Pour plus d'informations sur les paramètres mmap, voir <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p></li>
 <li><p>Compaction de la mise en grappe</p>
 <p>Pour plus d'informations sur les compactions de mise en cluster, voir <a href="/docs/fr/clustering-compaction.md">Compaction de mise en cluster</a>.</p></li>
 </ul>

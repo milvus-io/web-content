@@ -9,6 +9,12 @@ summary: >-
   Castillo.
 title: Agrupamento HDBSCAN com Milvus
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">Agrupamento HDBSCAN com Milvus<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,13 +30,7 @@ title: Agrupamento HDBSCAN com Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>Os dados podem ser transformados em embeddings utilizando modelos de aprendizagem profunda, que captam representações significativas dos dados originais. Ao aplicar um algoritmo de agrupamento não supervisionado, podemos agrupar pontos de dados semelhantes com base nos seus padrões inerentes. O HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) é um algoritmo de agrupamento amplamente utilizado que agrupa eficazmente os pontos de dados através da análise da sua densidade e distância. É particularmente útil para descobrir clusters de formas e tamanhos variados. Neste caderno, utilizaremos o HDBSCAN com o Milvus, uma base de dados vetorial de elevado desempenho, para agrupar pontos de dados em grupos distintos com base nas suas incorporações.</p>
+    </button></h1><p>Os dados podem ser transformados em embeddings utilizando modelos de aprendizagem profunda, que captam representações significativas dos dados originais. Ao aplicar um algoritmo de agrupamento não supervisionado, podemos agrupar pontos de dados semelhantes com base nos seus padrões inerentes. O HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) é um algoritmo de agrupamento amplamente utilizado que agrupa eficazmente os pontos de dados através da análise da sua densidade e distância. É particularmente útil para descobrir clusters de formas e tamanhos variados. Neste caderno, utilizaremos o HDBSCAN com o Milvus, uma base de dados vetorial de elevado desempenho, para agrupar pontos de dados em grupos distintos com base nas suas incorporações.</p>
 <p>O HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) é um algoritmo de agrupamento que se baseia no cálculo de distâncias entre pontos de dados no espaço de incorporação. Estas incorporações, criadas por modelos de aprendizagem profunda, representam os dados numa forma altamente dimensional. Para agrupar pontos de dados semelhantes, o HDBSCAN determina a sua proximidade e densidade, mas o cálculo eficiente dessas distâncias, especialmente para grandes conjuntos de dados, pode ser um desafio.</p>
 <p>O Milvus, uma base de dados vetorial de elevado desempenho, optimiza este processo através do armazenamento e indexação de embeddings, permitindo uma recuperação rápida de vectores semelhantes. Quando usados em conjunto, o HDBSCAN e o Milvus permitem o agrupamento eficiente de conjuntos de dados de grande escala no espaço de incorporação.</p>
 <p>Neste caderno, usaremos o modelo de embedding BGE-M3 para extrair embeddings de um conjunto de dados de manchetes de notícias, utilizaremos o Milvus para calcular eficientemente as distâncias entre embeddings para auxiliar o HDBSCAN no agrupamento e, em seguida, visualizaremos os resultados para análise usando o método UMAP. Este caderno é uma adaptação de Milvus do <a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">artigo de Dylan Castillo</a>.</p>
@@ -50,10 +50,10 @@ title: Agrupamento HDBSCAN com Milvus
         ></path>
       </svg>
     </button></h2><p>descarregar conjunto de dados de notícias de https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/</p>
-<pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
-$ pip install hdbscan
-$ pip install plotly
-$ pip install umap-learn
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install hdbscan</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install plotly</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install umap-learn</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Download-Data" class="common-anchor-header">Descarregar dados<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,6 +71,16 @@ $ pip install umap-learn
         ></path>
       </svg>
     </button></h2><p>Descarregue o conjunto de dados de notícias de https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/, extraia <code translate="no">news_data_dedup.csv</code> e coloque-o no diretório atual.</p>
+<p>Ou pode fazer o download via curl:</p>
+<pre><code translate="no" class="language-bash">%%bash
+curl -L -o ~/Downloads/news-headlines-2024.zip\
+  https://www.kaggle.com/api/v1/datasets/download/dylanjcastillo/news-headlines-2024
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0 --:--:--     0
+100  225k  100  225k    0     0  33151      0  0:00:06  0:00:06 --:--:-- 62160:03  114k  0:00:07  0:00:06  0:00:01 66615    0  30519      0  0:00:07  0:00:06  0:00:01 61622
+</code></pre>
 <h2 id="Extract-Embeddings-to-Milvus" class="common-anchor-header">Extrair Embeddings para Milvus<button data-href="#Extract-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +96,7 @@ $ pip install umap-learn
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vamos criar uma coleção utilizando o Milvus e extrair embeddings densos utilizando o modelo BGE-M3.</p>
+    </button></h2><p>Vamos criar uma coleção usando Milvus, e extrair embeddings densos usando o modelo BGE-M3.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 <span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
@@ -107,11 +117,13 @@ embeddings = ef(docs)[<span class="hljs-string">&quot;dense&quot;</span>]
 connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<blockquote>
 <ul>
-<li>Se só precisar de uma base de dados vetorial local para dados de pequena escala ou para prototipagem, definir o uri como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, pois utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
-<li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu uri, por exemplo,<code translate="no">http://localhost:19530</code>. Se ativar a funcionalidade de autenticação no Milvus, utilize "&lt;your_username&gt;:&lt;your_password&gt;" como token, caso contrário não defina o token.</li>
-<li>Se utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste o <code translate="no">uri</code> e o <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Ponto de extremidade público e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">chave da API</a> no Zilliz Cloud.</li>
+<li>Se só precisa de uma base de dados vetorial local para dados de pequena escala ou prototipagem, definir o uri como um ficheiro local, e.g.<code translate="no">./milvus.db</code>, é o método mais conveniente, pois utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
+<li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu uri, por exemplo,<code translate="no">http://localhost:19530</code>. Se ativar a funcionalidade de autenticação no Milvus, utilize "<your_username>:<your_password>" como token, caso contrário não defina o token.</li>
+<li>Se utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">chave API</a> no Zilliz Cloud.</li>
 </ul>
+</blockquote>
 </div>
 <pre><code translate="no" class="language-python">fields = [
     FieldSchema(
@@ -154,7 +166,7 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O HDBSCAN requer o cálculo de distâncias entre pontos para o agrupamento, o que pode ser computacionalmente intensivo. Uma vez que os pontos distantes têm menos influência nas atribuições de agrupamento, podemos melhorar a eficiência calculando os top-k vizinhos mais próximos. Neste exemplo, usamos o índice FLAT, mas para conjuntos de dados de grande escala, o Milvus suporta métodos de indexação mais avançados para acelerar o processo de pesquisa. Em primeiro lugar, precisamos de obter um iterador para iterar a coleção Milvus que criámos anteriormente.</p>
+    </button></h2><p>O HDBSCAN requer o cálculo de distâncias entre pontos para o agrupamento, o que pode ser computacionalmente intensivo. Uma vez que os pontos distantes têm menos influência nas atribuições de agrupamento, podemos melhorar a eficiência calculando os top-k vizinhos mais próximos. Neste exemplo, utilizamos o índice FLAT, mas para conjuntos de dados de grande escala, o Milvus suporta métodos de indexação mais avançados para acelerar o processo de pesquisa. Em primeiro lugar, precisamos de obter um iterador para iterar a coleção Milvus que criámos anteriormente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> hdbscan
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -179,7 +191,7 @@ dist = {}
 
 embeddings = []
 <button class="copy-code-btn"></button></code></pre>
-<p>Vamos iterar todos os embeddings da coleção Milvus. Para cada embedding, vamos procurar os seus top-k vizinhos na mesma coleção, obter os seus ids e distâncias. Depois, também precisamos de construir um dicionário para mapear o ID original para um índice contínuo na matriz de distâncias. Quando terminarmos, precisamos de criar uma matriz de distâncias inicializada com todos os elementos como infinito e preencher os elementos que pesquisámos. Desta forma, a distância entre pontos distantes será ignorada. Finalmente, utilizamos a biblioteca HDBSCAN para agrupar os pontos utilizando a matriz de distância que criámos. Temos de definir a métrica como 'precomputed' para indicar que os dados são a matriz de distâncias e não os embeddings originais.</p>
+<p>Vamos iterar todos os embeddings da coleção Milvus. Para cada embedding, vamos procurar os seus top-k vizinhos na mesma coleção, obter os seus ids e distâncias. Depois, também precisamos de construir um dicionário para mapear o ID original para um índice contínuo na matriz de distâncias. Quando terminarmos, precisamos de criar uma matriz de distâncias inicializada com todos os elementos como infinito e preencher os elementos que procurámos. Desta forma, a distância entre pontos distantes será ignorada. Finalmente, utilizamos a biblioteca HDBSCAN para agrupar os pontos utilizando a matriz de distâncias que criámos. É necessário definir a métrica como 'precomputed' para indicar que os dados são a matriz de distâncias e não os embeddings originais.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     batch = iterator.<span class="hljs-built_in">next</span>()
     batch_ids = [data[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
@@ -272,6 +284,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>imagem</span> </span></p>
-<p>Aqui, demonstramos que os dados estão bem agrupados e pode passar o rato sobre os pontos para verificar o texto que representam. Com este caderno de notas, esperamos que aprenda a utilizar o HDBSCAN para agrupar embeddings com o Milvus de forma eficiente, o que também pode ser aplicado a outros tipos de dados. Combinada com grandes modelos de linguagem, esta abordagem permite uma análise mais profunda dos seus dados em grande escala.</p>
+<p>Aqui, demonstramos que os dados estão bem agrupados, e pode passar o rato sobre os pontos para verificar o texto que representam. Com este caderno de notas, esperamos que aprenda a utilizar o HDBSCAN para agrupar embeddings com o Milvus de forma eficiente, o que também pode ser aplicado a outros tipos de dados. Combinada com grandes modelos de linguagem, esta abordagem permite uma análise mais profunda dos seus dados em grande escala.</p>

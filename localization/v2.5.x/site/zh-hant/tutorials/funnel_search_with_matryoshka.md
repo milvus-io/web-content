@@ -20,23 +20,46 @@ title: 使用 Matryoshka 嵌入式進行漏斗搜尋
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在建立有效率的向量搜尋系統時，一個主要的挑戰是管理儲存成本，同時維持可接受的延遲和召回率。現代的嵌入模型會輸出成百上千維度的向量，為原始向量和索引帶來顯著的儲存和計算開銷。</p>
-<p>傳統上，我們會在建立索引之前，先應用量化或降維方法來降低儲存需求。例如，我們可以使用積量化 (Product Quantization, PQ) 降低精確度，或使用主成分分析 (Principal Component Analysis, PCA) 降低維數，以節省儲存空間。這些方法會分析整個向量集，找出更精簡的向量集，以維持向量之間的語意關係。</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+在建立有效率的向量搜尋系統時，一個主要的挑戰是管理儲存成本，同時維持可接受的延遲和召回率。現代嵌入模型會輸出數百或數千維的向量，為原始向量和索引帶來大量的儲存和計算開銷。<p>傳統上，我們會在建立索引之前，先應用量化或降維方法來降低儲存需求。例如，我們可以使用積量化 (Product Quantization, PQ) 降低精確度，或使用主成分分析 (Principal Component Analysis, PCA) 降低維數，以節省儲存空間。這些方法會分析整個向量集，找出更精簡的向量集，以維持向量之間的語意關係。</p>
 <p>這些標準方法雖然有效，但只減少一次精確度或維度，而且是在單一尺度上。但如果我們可以同時維持多層的細節，就像金字塔般越來越精確的表達方式，那又會如何呢？</p>
 <p>進入 Matryoshka 嵌入式。以俄羅斯嵌套娃娃命名 (見插圖)，這些聰明的結構將多層表徵嵌入單一向量中。與傳統的後處理方法不同，Matryoshka 內嵌會在初始訓練過程中學習這種多尺度結構。其結果非常顯著：完整的嵌入不僅能捕捉輸入的語意，而且每個嵌套的子集前綴（前半部分、前四分之一等）都能提供連貫的表達，即使不那麼詳細。</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
 <p>在本筆記簿中，我們將探討如何使用 Matryoshka 內嵌與 Milvus 來進行語意搜尋。我們說明一種稱為「漏斗搜尋」（funnel search）的演算法，它可以讓我們在嵌入維度的一小部分子集上執行相似性搜尋，而不會大幅降低召回率。</p>
+<h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>僅用於 CPU：</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>適用於 CUDA 11.8：</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>CUDA 11.8 的安裝指令僅為範例。安裝 PyTorch 時，請確認您的 CUDA 版本。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">載入 Matryoshka 嵌入模型<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
@@ -80,7 +103,7 @@ title: 使用 Matryoshka 嵌入式進行漏斗搜尋
         ></path>
       </svg>
     </button></h2><p>以下的程式碼是修改自<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">「Movie Search with Sentence Transformers and Milvus」</a>文件頁面的程式碼<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">。</a>首先，我們從 HuggingFace 載入資料集。它包含約 35k 個條目，每個條目對應一部有 Wikipedia 文章的電影。我們將在本範例中使用<code translate="no">Title</code> 和<code translate="no">PlotSummary</code> 欄位。</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -110,12 +133,12 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <p>Milvus 目前不支援對嵌入式子集進行搜尋，因此我們將嵌入式分成兩部分：頭部代表向量的初始子集，用於索引和搜尋，尾部則是其餘部分。模型是針對余弦距離相似性搜尋所訓練的，因此我們將頭部的內嵌歸一化。然而，為了稍後計算較大子集的相似性，我們需要儲存頭部內嵌的規範，因此我們可以在連接至尾部之前將其非規範化。</p>
 <p>若要透過前 1/6 的嵌入執行搜尋，我們需要在<code translate="no">head_embedding</code> 領域上建立向量搜尋索引。稍後，我們將比較「漏斗搜尋」與一般向量搜尋的結果，因此也會在完整的內嵌上建立搜尋索引。</p>
 <p><em>重要的是，我們使用的是<code translate="no">COSINE</code> 而不是<code translate="no">IP</code> 距離公制，因為否則我們就需要追蹤內嵌規範，這會使實作變得複雜 (這在介紹漏斗搜尋演算法後會更有意義)。</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>最後，我們對所有 35k 部電影的劇情摘要進行編碼，並將相對應的 embeddings 輸入資料庫。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -545,7 +568,7 @@ Leopard in the Snow
          Unfaithful
      Always a Bride 
 </code></pre>
-<p>Recall 比預期中的漏斗搜尋或一般搜尋要差得多 (嵌入模型是透過嵌入維度的前綴而非後綴的對比學習來訓練的)。</p>
+<p>Recall 比預期的漏斗搜尋或一般搜尋要差得多 (嵌入模型是透過對比學習來訓練嵌入維度的前綴，而不是後綴)。</p>
 <h2 id="Summary" class="common-anchor-header">總結<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

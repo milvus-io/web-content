@@ -2,12 +2,13 @@
 id: single-vector-search.md
 title: Einfache Vektorsuche
 summary: >-
-  Based on an index file recording the sorted order of vector embeddings, the
-  Approximate Nearest Neighbor (ANN) search locates a subset of vector
-  embeddings based on the query vector carried in a received search request,
-  compares the query vector with those in the subgroup, and returns the most
-  similar results. With ANN search, Milvus provides an efficient search
-  experience. This page helps you to learn how to conduct basic ANN searches.
+  Auf der Grundlage einer Indexdatei, in der die sortierte Reihenfolge der
+  Vektoreinbettungen aufgezeichnet ist, findet die ANN-Suche (Approximate
+  Nearest Neighbor) eine Untergruppe von Vektoreinbettungen auf der Grundlage
+  des Abfragevektors in einer empfangenen Suchanfrage, vergleicht den
+  Abfragevektor mit denen in der Untergruppe und liefert die ähnlichsten
+  Ergebnisse. Mit der ANN-Suche bietet Milvus ein effizientes Sucherlebnis. Auf
+  dieser Seite erfahren Sie, wie Sie grundlegende ANN-Suchen durchführen können.
 ---
 <h1 id="Basic-Vector-Search" class="common-anchor-header">Einfache Vektorsuche<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -974,7 +975,7 @@ curl --request POST \
 <ul>
 <li><p>Gefilterte Suche</p>
 <p>Sie können Filterbedingungen in eine Suchanfrage aufnehmen, so dass Milvus vor der Durchführung von ANN-Suchen eine Metadatenfilterung durchführt und den Suchbereich von der gesamten Sammlung auf die Entitäten reduziert, die den angegebenen Filterbedingungen entsprechen.</p>
-<p>Weitere Informationen über Metadatenfilterung und Filterbedingungen finden Sie unter <a href="/docs/de/filtered-search.md">Gefilterte Suche</a> und <a href="/docs/de/filtering">Filterung</a>.</p></li>
+<p>Weitere Informationen über Metadatenfilterung und Filterbedingungen finden Sie unter <a href="/docs/de/filtered-search.md">Gefilterte Suche</a>, <a href="/docs/de/boolean.md">Filterung erklärt</a> und verwandte Themen.</p></li>
 <li><p>Bereichssuche</p>
 <p>Sie können die Relevanz der Suchergebnisse verbessern, indem Sie den Abstand oder die Punktzahl der zurückgegebenen Entitäten innerhalb eines bestimmten Bereichs einschränken. In Milvus beinhaltet eine Bereichssuche das Zeichnen von zwei konzentrischen Kreisen mit der Vektoreinbettung, die dem Abfragevektor am ähnlichsten ist, als Zentrum. Die Suchanfrage gibt den Radius der beiden Kreise an, und Milvus gibt alle Vektoreinbettungen zurück, die in den äußeren Kreis, aber nicht in den inneren Kreis fallen.</p>
 <p>Weitere Informationen zur Bereichssuche finden Sie unter <a href="/docs/de/range-search.md">Bereichssuche</a>.</p></li>

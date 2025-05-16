@@ -75,7 +75,7 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/build_rag_on_arm.md">Construire RAG sur l'architecture Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/fr/build_RAG_with_milvus_and_fireworks.md">Construire RAG avec Milvus et Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/fr/build_RAG_with_milvus_and_lepton.md">Construire un GCR avec Milvus et Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/fr/build_RAG_with_milvus_and_siliconflow">Construire un RAG avec Milvus et SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/fr/build_RAG_with_milvus_and_siliconflow.md">Construire un RAG avec Milvus et SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/fr/rag_with_milvus_and_unstructured.md">Construire un RAG avec Milvus et des sources de données non structurées</a></td><td>non structurées</td><td>Milvus, non structuré</td></tr>
 <tr><td><a href="/docs/fr/RAG_with_pii_and_milvus.md">Construire un RAG avec Milvus + PII Masker</a></td><td>Sources de données</td><td>Milvus, PII Masker</td></tr>
 <tr><td><a href="/docs/fr/knowledge_table_with_milvus.md">Tableau des connaissances avec Milvus</a></td><td>Ingénierie des connaissances</td><td>Tableau des connaissances, Milvus</td></tr>
@@ -88,5 +88,8 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/integration_with_mindsdb.md">Intégrer Milvus à MindsDB</a></td><td>Ingénierie des connaissances</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/fr/build_RAG_with_milvus_and_feast.md">Construire un RAG avec Milvus et Feast</a></td><td>Sources de données</td><td>Milvus, Feast</td></tr>
 <tr><td><a href="/docs/fr/build_RAG_with_milvus_and_docling.md">Construire RAG avec Milvus et Docling</a></td><td>Sources de données</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/fr/build_RAG_with_milvus_and_embedAnything.md">Construire RAG avec Milvus et EmbedAnything</a></td><td>Embedding</td><td>Milvus, EmbedAnything</td></tr>
+<tr><td><a href="/docs/fr/milvus_and_n8n.md">Démarrer avec Milvus et n8n</a></td><td>Orchestration</td><td>Milvus, n8n</td></tr>
+<tr><td><a href="/docs/fr/use_milvus_in_anythingllm.md">Utiliser Milvus dans AnythingLLM</a></td><td>Orchestration</td><td>Milvus, AnythingLLM</td></tr>
 </tbody>
 </table>

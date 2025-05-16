@@ -23,26 +23,12 @@ title: Pesquisa em funil com embeddings Matryoshka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ao criar sistemas de pesquisa vetorial eficientes, um dos principais desafios é gerir os custos de armazenamento, mantendo uma latência e uma recuperação aceitáveis. Os modelos modernos de incorporação produzem vectores com centenas ou milhares de dimensões, criando um armazenamento significativo e uma sobrecarga computacional para o vetor bruto e o índice.</p>
-<p>Tradicionalmente, os requisitos de armazenamento são reduzidos através da aplicação de um método de quantização ou de redução da dimensionalidade imediatamente antes da construção do índice. Por exemplo, podemos poupar armazenamento reduzindo a precisão utilizando a Quantização de Produtos (PQ) ou o número de dimensões utilizando a Análise de Componentes Principais (PCA). Estes métodos analisam todo o conjunto de vectores para encontrar um conjunto mais compacto que mantenha as relações semânticas entre os vectores.</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+Ao criar sistemas de pesquisa vetorial eficientes, um dos principais desafios é gerir os custos de armazenamento, mantendo uma latência e uma recuperação aceitáveis. Os modelos de incorporação modernos produzem vectores com centenas ou milhares de dimensões, criando um armazenamento significativo e uma sobrecarga computacional para o vetor bruto e o índice.<p>Tradicionalmente, os requisitos de armazenamento são reduzidos através da aplicação de um método de quantização ou de redução da dimensionalidade imediatamente antes da construção do índice. Por exemplo, podemos poupar armazenamento reduzindo a precisão utilizando a Quantização de Produtos (PQ) ou o número de dimensões utilizando a Análise de Componentes Principais (PCA). Estes métodos analisam todo o conjunto de vectores para encontrar um conjunto mais compacto que mantenha as relações semânticas entre os vectores.</p>
 <p>Embora eficazes, estas abordagens padrão reduzem a precisão ou a dimensionalidade apenas uma vez e numa única escala. Mas e se pudéssemos manter várias camadas de pormenor em simultâneo, como uma pirâmide de representações cada vez mais precisas?</p>
 <p>Eis os embeddings Matryoshka. Com o nome das bonecas russas (ver ilustração), estas construções inteligentes incorporam várias escalas de representação num único vetor. Ao contrário dos métodos tradicionais de pós-processamento, os encaixes Matryoshka aprendem esta estrutura multi-escala durante o processo de formação inicial. O resultado é notável: não só a incorporação completa capta a semântica da entrada, como cada prefixo de subconjunto aninhado (primeira metade, primeiro quarto, etc.) fornece uma representação coerente, embora menos pormenorizada.</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
-<p>Neste caderno, examinamos como usar as incrustações Matryoshka com o Milvus para pesquisa semântica. Ilustramos um algoritmo designado por "pesquisa em funil" que nos permite efetuar pesquisas por semelhança num pequeno subconjunto das nossas dimensões de incorporação sem uma queda drástica na recuperação.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
-
-<span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-<span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
-<span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
-<span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Carregar o modelo de incorporação Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<p>Neste caderno, examinamos a forma de utilizar as incrustações Matryoshka com o Milvus para a pesquisa semântica. Ilustramos um algoritmo designado por "pesquisa em funil" que nos permite efetuar pesquisas por semelhança num pequeno subconjunto das nossas dimensões de incorporação sem uma queda drástica na recuperação.</p>
+<h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +43,44 @@ title: Pesquisa em funil com embeddings Matryoshka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em vez de utilizar um modelo de incorporação padrão, como <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>utilizamos <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">um modelo da Nomic</a> treinado especialmente para produzir embeddings Matryoshka.</p>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Apenas para CPU:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para CUDA 11.8:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>O comando de instalação do CUDA 11.8 é apenas um exemplo. Por favor, confirme sua versão CUDA ao instalar o PyTorch.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
+
+<span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> pymilvus
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
+<span class="hljs-keyword">import</span> torch
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Carregar modelo de incorporação Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Em vez de usar um modelo de incorporação padrão, como o <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>usamos <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">um modelo da Nomic</a> treinado especialmente para produzir embeddings Matryoshka.</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -67,7 +90,7 @@ title: Pesquisa em funil com embeddings Matryoshka
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&lt;All keys matched successfully&gt;
 </code></pre>
-<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">Carregar o conjunto de dados, incorporar itens e construir uma base de dados de vectores<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
+<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">Carregar o conjunto de dados, incorporar itens e criar uma base de dados de vectores<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,7 +106,7 @@ title: Pesquisa em funil com embeddings Matryoshka
         ></path>
       </svg>
     </button></h2><p>O código seguinte é uma modificação do código da página de documentação <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search with Sentence Transformers and Milvus".</a> Primeiro, carregamos o conjunto de dados do HuggingFace. Ele contém cerca de 35 mil entradas, cada uma correspondendo a um filme com um artigo na Wikipédia. Neste exemplo, usaremos os campos <code translate="no">Title</code> e <code translate="no">PlotSummary</code>.</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -113,12 +136,12 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <p>Atualmente, o Milvus não suporta a pesquisa em subconjuntos de sequências, pelo que dividimos as sequências em duas partes: a cabeça representa o subconjunto inicial do vetor a indexar e pesquisar, e a cauda é o restante. O modelo é treinado para a pesquisa de semelhança de distância de cosseno, por isso normalizamos os embeddings da cabeça. No entanto, para calcular semelhanças para subconjuntos maiores mais tarde, precisamos armazenar a norma da incorporação da cabeça, para que possamos desnormalizá-la antes de juntar à cauda.</p>
 <p>Para efetuar a pesquisa através do primeiro 1/6 da incorporação, teremos de criar um índice de pesquisa vetorial sobre o campo <code translate="no">head_embedding</code>. Mais tarde, compararemos os resultados da "pesquisa em funil" com uma pesquisa vetorial normal e, assim, criaremos também um índice de pesquisa sobre a incorporação completa.</p>
 <p><em>É importante notar que utilizamos a métrica de distância <code translate="no">COSINE</code> em vez da métrica de distância <code translate="no">IP</code>, porque, de outro modo, teríamos de registar as normas de incorporação, o que complicaria a implementação (isto fará mais sentido quando o algoritmo de pesquisa em funil for descrito).</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>Por fim, codificamos os resumos dos enredos de todos os 35 mil filmes e introduzimos os correspondentes embeddings na base de dados.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -300,7 +323,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>Conseguimos recuperar a memória sem efetuar quaisquer pesquisas vectoriais adicionais! Em termos qualitativos, estes resultados parecem ter uma recuperação mais elevada para "Raiders of the Lost Ark" e "The Shining" do que a pesquisa vetorial padrão no tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search using Milvus and Sentence Transformers",</a> que utiliza um modelo de incorporação diferente. No entanto, não consegue encontrar &quot;Ferris Bueller's Day Off&quot;, ao qual voltaremos mais tarde no caderno. (Ver o artigo <a href="https://arxiv.org/abs/2205.13147">Aprendizagem de representações Matryoshka</a> para mais experiências quantitativas e avaliação comparativa).</p>
+<p>Conseguimos recuperar a memória sem efetuar quaisquer pesquisas vectoriais adicionais! Em termos qualitativos, estes resultados parecem ter uma recuperação mais elevada para "Raiders of the Lost Ark" e "The Shining" do que a pesquisa vetorial padrão no tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search using Milvus and Sentence Transformers",</a> que utiliza um modelo de incorporação diferente. No entanto, não consegue encontrar "Ferris Bueller's Day Off", ao qual voltaremos mais tarde no caderno. (Ver o artigo <a href="https://arxiv.org/abs/2205.13147">Aprendizagem de representações Matryoshka</a> para mais experiências quantitativas e avaliação comparativa).</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Comparação da pesquisa em funil com a pesquisa normal<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -359,7 +382,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>Com exceção dos resultados para &quot;Um adolescente finge estar doente para não ir à escola...&quot;, os resultados da pesquisa em funil são quase idênticos aos da pesquisa completa, apesar de a pesquisa em funil ter sido efectuada num espaço de pesquisa de 128 dimensões contra 768 dimensões para a pesquisa regular.</p>
+<p>Com exceção dos resultados para "Um adolescente finge estar doente para não ir à escola...", os resultados da pesquisa em funil são quase idênticos aos da pesquisa completa, apesar de a pesquisa em funil ter sido efectuada num espaço de pesquisa de 128 dimensões contra 768 dimensões para a pesquisa regular.</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Investigando a falha de recordação da pesquisa de funil para Ferris Bueller's Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -568,4 +591,4 @@ Leopard in the Snow
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
 <div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.5.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-the-shining.png' width='100%'></div>
-Mostrámos como utilizar as incrustações Matryoshka com o Milvus para executar um algoritmo de pesquisa semântica mais eficiente chamado "pesquisa em funil". Explorámos também a importância dos passos de reordenação e poda do algoritmo, bem como um modo de falha quando a lista inicial de candidatos é demasiado pequena. Finalmente, discutimos como a ordem das dimensões é importante na formação de sub-embeddings - deve ser da mesma forma para a qual o modelo foi treinado. Ou melhor, é apenas porque o modelo foi treinado de uma determinada forma que os prefixos dos embeddings são significativos. Agora já sabe como implementar as incrustações Matryoshka e a pesquisa em funil para reduzir os custos de armazenamento da pesquisa semântica sem sacrificar demasiado o desempenho da recuperação!
+Mostrámos como utilizar as incrustações Matryoshka com o Milvus para realizar um algoritmo de pesquisa semântica mais eficiente chamado "pesquisa em funil". Explorámos também a importância dos passos de reordenação e poda do algoritmo, bem como um modo de falha quando a lista inicial de candidatos é demasiado pequena. Finalmente, discutimos como a ordem das dimensões é importante na formação de sub-embeddings - deve ser da mesma forma para a qual o modelo foi treinado. Ou melhor, é apenas porque o modelo foi treinado de uma determinada forma que os prefixos dos embeddings são significativos. Agora já sabe como implementar as incrustações Matryoshka e a pesquisa em funil para reduzir os custos de armazenamento da pesquisa semântica sem sacrificar demasiado o desempenho da recuperação!

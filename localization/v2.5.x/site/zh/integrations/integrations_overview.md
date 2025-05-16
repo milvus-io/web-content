@@ -24,7 +24,7 @@ title: 集成概述
 <tr><th>教程</th><th>使用案例</th><th>合作伙伴或堆栈</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus 和 LLamaIndex</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus、LLamaIndex</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_langchain.md">使用 Milvus 和 LangChain 的 RAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/zh/milvus_hybrid_search_retriever.md">Milvus 混合搜索检索器在 LangChain 中的应用</a></td><td>混合搜索</td><td>Milvus、LangChain</td></tr>
 <tr><td><a href="/docs/zh/basic_usage_langchain.md">在LangChain中使用Milvus作为向量库</a></td><td>语义搜索</td><td>Milvus、LangChain</td></tr>
@@ -73,7 +73,7 @@ title: 集成概述
 <tr><td><a href="/docs/zh/build_rag_on_arm.md">在 Arm 架构上构建 RAG</a></td><td>RAG</td><td>Milvus、Arm</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_fireworks.md">使用 Milvus 和 Fireworks AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Fireworks AI</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_lepton.md">使用 Milvus 和 Lepton AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Lepton AI</td></tr>
-<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_siliconflow">使用 Milvus 和 SiliconFlow 构建 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_siliconflow.md">使用 Milvus 和 SiliconFlow 构建 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
 <tr><td><a href="/docs/zh/rag_with_milvus_and_unstructured.md">使用 Milvus 和非结构化数据源构建 RAG</a></td><td>数据源</td><td>Milvus、非结构化</td></tr>
 <tr><td><a href="/docs/zh/RAG_with_pii_and_milvus.md">使用 Milvus + PII 屏蔽器构建 RAG</a></td><td>数据源</td><td>Milvus，PII 屏蔽器</td></tr>
 <tr><td><a href="/docs/zh/knowledge_table_with_milvus.md">使用 Milvus 的知识表</a></td><td>知识工程</td><td>知识表，Milvus</td></tr>
@@ -86,5 +86,8 @@ title: 集成概述
 <tr><td><a href="/docs/zh/integration_with_mindsdb.md">Milvus 与 MindsDB 集成</a></td><td>知识工程</td><td>Milvus、MindsDB</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_feast.md">用 Milvus 和 Feast 构建 RAG</a></td><td>数据源</td><td>Milvus、Feast</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_docling.md">使用 Milvus 和 Docling 构建 RAG</a></td><td>数据源</td><td>Milvus、Docling</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_embedAnything.md">使用 Milvus 和 EmbedAnything 构建 RAG</a></td><td>嵌入</td><td>Milvus、EmbedAnything</td></tr>
+<tr><td><a href="/docs/zh/milvus_and_n8n.md">开始使用 Milvus 和 n8n</a></td><td>编排</td><td>Milvus, n8n</td></tr>
+<tr><td><a href="/docs/zh/use_milvus_in_anythingllm.md">在 AnythingLLM 中使用 Milvus</a></td><td>编排</td><td>Milvus、AnythingLLM</td></tr>
 </tbody>
 </table>

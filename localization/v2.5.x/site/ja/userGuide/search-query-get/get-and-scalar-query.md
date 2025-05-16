@@ -57,15 +57,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>必須パラメータ</p></td>
-     <td><ul><li>コレクション名</li><li>主キー</li></ul></td>
-     <td><ul><li>コレクション名</li><li>フィルタリング式</li></ul></td>
-     <td><ul><li><p>コレクション名</p></li><li><p>フィルタリング式</p></li><li><p>クエリごとに返すエンティティの数</p></li></ul></td>
+     <td><ul>
+<li>コレクション名</li>
+<li>主キー</li>
+</ul></td>
+     <td><ul>
+<li>コレクション名</li>
+<li>フィルタリング式</li>
+</ul></td>
+     <td><ul>
+<li><p>コレクション名</p></li>
+<li><p>フィルタリング式</p></li>
+<li><p>クエリごとに返すエンティティの数</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>オプションのパラメータ</p></td>
-     <td><ul><li>パーティション名</li><li>出力フィールド</li></ul></td>
-     <td><ul><li><p>パーティション名</p></li><li><p>返すエンティティの数</p></li><li><p>出力フィールド</p></li></ul></td>
-     <td><ul><li><p>パーティション名</p></li><li><p>合計で返すエンティティの数</p></li><li><p>出力フィールド</p></li></ul></td>
+     <td><ul>
+<li>パーティション名</li>
+<li>出力フィールド</li>
+</ul></td>
+     <td><ul>
+<li><p>パーティション名</p></li>
+<li><p>返すエンティティの数</p></li>
+<li><p>出力フィールド</p></li>
+</ul></td>
+     <td><ul>
+<li><p>パーティション名</p></li>
+<li><p>合計で返すエンティティの数</p></li>
+<li><p>出力フィールド</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>返り値</p></td>
@@ -74,7 +95,7 @@ summary: >-
      <td><p>ページ分割クエリによって、指定されたコレクションまたはパーティションでカスタム・フィルタリング条件を満たすすべてのエンティティを返します。</p></td>
    </tr>
 </table>
-<p>メタデータのフィルタリングの詳細は、<a href="/docs/ja/filtering">フィルタリングを</a>参照してください。</p>
+<p>メタデータのフィルタリングの詳細については、.NET メソッドを参照してください。</p>
 <h2 id="Use-Get" class="common-anchor-header">Get の使用法<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

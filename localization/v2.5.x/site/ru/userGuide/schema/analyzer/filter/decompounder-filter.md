@@ -1,13 +1,13 @@
 ---
 id: decompounder-filter.md
-title: Декомпозер
+title: Расщепитель
 summary: >-
   Фильтр decompounder разделяет сложные слова на отдельные компоненты на основе
   заданного словаря, что облегчает поиск частей сложных терминов. Этот фильтр
   особенно полезен для языков, в которых часто используются сложные слова,
   например немецкого.
 ---
-<h1 id="Decompounder" class="common-anchor-header">Декомпозер<button data-href="#Decompounder" class="anchor-icon" translate="no">
+<h1 id="Decompounder" class="common-anchor-header">Расщепитель<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,7 +104,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Список компонентов слов, используемых для разделения сложных терминов. Этот словарь определяет, как составные слова декомпозируются на отдельные термины.</p></td>
    </tr>
 </table>
-<p>Фильтр <code translate="no">decompounder</code> работает с терминами, сгенерированными токенизатором, поэтому он должен использоваться в сочетании с токенизатором. Список токенизаторов, доступных в Milvus, см. в разделе <a href="/docs/ru/tokenizers">Справочник по токенизаторам</a>.</p>
+<p>Фильтр <code translate="no">decompounder</code> работает с терминами, сгенерированными токенизатором, поэтому он должен использоваться в сочетании с токенизатором. Список токенизаторов, доступных в Milvus, см. на странице <a href="/docs/ru/standard-tokenizer.md">Standard Tokenizer</a> и других страницах.</p>
 <p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/analyzer-overview.md#Example-use">Пример использования</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -93,7 +93,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Définit la longueur maximale du jeton. Les jetons plus longs que cette longueur sont supprimés.</p></td>
    </tr>
 </table>
-<p>Le filtre <code translate="no">length</code> fonctionne sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à <a href="/docs/fr/tokenizers">Tokenizer Reference (Référence des tokenizers)</a>.</p>
+<p>Le filtre <code translate="no">length</code> fonctionne sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à la page <a href="/docs/fr/standard-tokenizer.md">Tokenizer standard</a> et à ses pages apparentées.</p>
 <p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, voir <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

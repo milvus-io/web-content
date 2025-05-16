@@ -19,23 +19,46 @@ title: マトリョーシカ埋め込みによる漏斗探索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>効率的なベクトル検索システムを構築する際の重要な課題の1つは、許容可能なレイテンシとリコールを維持しながらストレージコストを管理することです。最新の埋め込みモデルは数百から数千次元のベクトルを出力するため、生のベクトルとインデックスに多大なストレージと計算オーバーヘッドが発生します。</p>
-<p>従来は、インデックスを構築する直前に量子化や次元削減を行うことで、ストレージの容量を削減していました。例えば、積量子化(PQ)を使って精度を下げたり、主成分分析(PCA)を使って次元数を下げることで、ストレージを節約することができます。これらの方法はベクトル集合全体を分析し、ベクトル間の意味的関係を維持したまま、よりコンパクトなものを見つける。</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+効率的なベクトル検索システムを構築する際の重要な課題の1つは、許容可能なレイテンシとリコールを維持しながらストレージコストを管理することです。最新の埋め込みモデルは数百から数千次元のベクトルを出力するため、生のベクトルとインデックスに大きなストレージと計算オーバーヘッドが発生します。<p>従来は、インデックスを構築する直前に量子化や次元削減を行うことで、ストレージの容量を削減していました。例えば、積量子化(PQ)を使って精度を下げたり、主成分分析(PCA)を使って次元数を下げることで、ストレージを節約することができます。これらの方法はベクトル集合全体を分析し、ベクトル間の意味的関係を維持したまま、よりコンパクトなものを見つける。</p>
 <p>効果的ではあるが、これらの標準的なアプローチは精度や次元数を一度だけ、しかも単一のスケールで削減する。しかし、複数の詳細なレイヤーを同時に維持し、ピラミッドのように精度を高めていくことができるとしたらどうだろう？</p>
-<p>マトリョーシカ埋め込みが登場する。ロシアの入れ子人形にちなんで名付けられたこの巧妙な構造は（図を参照）、1つのベクトル内に複数のスケールの表現を埋め込む。従来の後処理手法とは異なり、マトリョーシカ埋め込みは最初の学習過程でこのマルチスケール構造を学習する。その結果は驚くべきもので、完全な埋め込みが入力セマンティクスを捉えるだけでなく、入れ子になった各サブセットの接頭辞（前半、4分の1など）が、詳細ではないものの、首尾一貫した表現を提供します。</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+<p>マトリョーシカ埋め込みが登場する。ロシアの入れ子人形にちなんで名付けられたこの巧妙な構造は（図を参照）、1つのベクトル内に複数のスケールの表現を埋め込む。従来の後処理手法とは異なり、マトリョーシカ埋め込みは最初の学習過程でこのマルチスケール構造を学習する。その結果は驚くべきもので、完全な埋め込みが入力セマンティクスを捉えるだけでなく、入れ子になった各サブセットの接頭辞（前半、4分の1など）が、詳細ではないにせよ、首尾一貫した表現を提供します。</p>
 <p>このノートブックでは、Milvusを使ったマトリョーシカ埋め込みを意味検索に使う方法を検討する。ファネル検索」と呼ばれるアルゴリズムにより、埋め込み次元の小さなサブセットで類似検索を行うことができます。</p>
+<h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>CPUのみ：</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>CUDA 11.8用：</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>CUDA 11.8のインストールコマンドは一例です。PyTorchをインストールする際にはCUDAのバージョンを確認してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">マトリョーシカ埋め込みモデルのロード<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
@@ -53,7 +76,7 @@ title: マトリョーシカ埋め込みによる漏斗探索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>のような標準的な埋め込みモデルを使う代わりに、Nomic社のモデルを使います。 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>のような標準的な埋め込みモデルを使う代わりに，マトリョーシカ埋め込みを生成するために特別に訓練された<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">Nomicのモデルを</a>使います．</p>
+    </button></h2><p>標準的な埋め込みモデルである <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>のような標準的な埋め込みモデルを使う代わりに、マトリョーシカ埋め込みを生成するために特別に学習された<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">Nomicのモデルを</a>使います。</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -79,7 +102,7 @@ title: マトリョーシカ埋め込みによる漏斗探索
         ></path>
       </svg>
     </button></h2><p>以下のコードは、ドキュメントページ<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search with Sentence Transformers and Milvus "</a>のコードを改変したものです<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">。</a>まず、HuggingFaceからデータセットをロードする。このデータセットには約35kのエントリーが含まれており、それぞれがウィキペディアの記事を持つ映画に対応している。この例では、<code translate="no">Title</code> と<code translate="no">PlotSummary</code> フィールドを使用する。</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -109,12 +132,12 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <p>Milvusは現在、埋め込みデータの部分集合を検索することをサポートしていないため、埋め込みデータを2つの部分に分割する：頭部はインデックスと検索を行うベクトルの初期部分集合を表し、尾部は残りの部分である。このモデルは余弦距離類似検索のために学習されたものなので、head embeddingsを正規化します。しかし、後でより大きな部分集合の類似度を計算するために、先頭の埋込みのノルムを保存する必要があります。</p>
 <p>埋込みの最初の1/6を検索するためには、<code translate="no">head_embedding</code> フィールド上のベクトル検索インデックスを作成する必要があります。後ほど、「ファネル検索」と通常のベクトル検索の結果を比較しますので、完全な埋め込みに対する検索インデックスも作成します。</p>
 <p><em>重要なのは、<code translate="no">IP</code> の距離尺度ではなく、<code translate="no">COSINE</code> の距離尺度を使うことです。そうしないと、埋め込みノルムを追跡する必要があり、実装が複雑になるからです（これは、ファネル検索のアルゴリズムが説明されれば、より理解できるようになるでしょう）。</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>最後に、全35k映画のプロット要約をエンコードし、対応する埋め込みをデータベースに入力する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -216,7 +239,7 @@ The Ref
 Impact
 The House in Marsh Road
 </code></pre>
-<p>見てわかるように、検索中に埋め込みが切り捨てられた結果、リコールが低下しています。ファネル検索は、この問題を巧妙なトリックで解決します。埋め込み次元の残りを使って候補リストを再ランク付けし、プルーニングすることで、高価なベクトル検索を追加で実行することなく、検索パフォーマンスを回復することができます。</p>
+<p>見てわかるように、検索中に埋め込みを切り捨てた結果、リコールが低下しています。ファネル検索は、この問題を巧妙なトリックで解決します。埋め込み次元の残りを使って、候補リストの再ランク付けとプルーニングを行うことで、高価なベクトル検索を追加で実行することなく、検索パフォーマンスを回復することができます。</p>
 <p>ファネル検索アルゴリズムの説明を簡単にするために、各クエリのMilvus検索ヒット数をPandasデータフレームに変換します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
@@ -296,7 +319,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>追加のベクトル検索を行うことなく、想起を回復させることができた！定性的には、これらの結果は "Raiders of the Lost Ark "と "The Shining "については、チュートリアルの<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"MilvusとSentence Transformersを使った映画検索 "の</a>標準的なベクトル検索よりも高い想起率を示しているようです。しかし、このチュートリアルで後ほど紹介する &quot;Ferris Bueller's Day Off &quot;を見つけることはできない。(より定量的な実験とベンチマークについては論文<a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learningを</a>参照)</p>
+<p>追加のベクトル検索を行うことなく、想起を回復させることができた！定性的には、これらの結果は "Raiders of the Lost Ark "と "The Shining "については、チュートリアルの<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"MilvusとSentence Transformersを使った映画検索 "の</a>標準的なベクトル検索よりも高い想起率を示しているようです。しかし、このチュートリアルで後ほど紹介する "Ferris Bueller's Day Off "を見つけることはできない。(より定量的な実験とベンチマークについては論文<a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learningを</a>参照)</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">漏斗探索と通常探索の比較<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -355,7 +378,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>A teenager fakes illness to get off school... &quot;の結果を除いて、ファネル検索の結果は完全埋め込み検索とほとんど同じである。</p>
+<p>A teenager fakes illness to get off school... "の結果を除いて、ファネル検索の結果は完全埋め込み検索とほとんど同じである。</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Ferris Bueller's Day Offのファネルサーチリコール失敗の調査<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

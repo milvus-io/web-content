@@ -60,7 +60,7 @@ title: LangChainとmilvusで全文検索を使う
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus サーバ<code translate="no">URI</code> (オプションで<code translate="no">TOKEN</code>) を指定してください。Milvusサーバのインストール方法と起動方法については<a href="https://milvus.io/docs/install_standalone-docker-compose.md">こちらを</a>参照してください。</p>
+<p>Milvus サーバ<code translate="no">URI</code> (オプションで<code translate="no">TOKEN</code>) を指定してください。Milvusサーバのインストールと起動方法については<a href="https://milvus.io/docs/install_standalone-docker-compose.md">こちらを</a>参照してください。</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -89,7 +89,7 @@ docs = [
         ></path>
       </svg>
     </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">ハイブリッド検索</h3><p>Milvus VectorStoreは全文検索のために<code translate="no">builtin_function</code> パラメータを受け付けます。このパラメータを通して、<code translate="no">BM25BuiltInFunction</code> のインスタンスを渡すことができます。これは通常、<code translate="no">VectorStore</code> に密な埋め込みを渡すセマンティック検索とは異なります、</p>
-<p>以下は、Milvusで、セマンティック検索にOpenAIの密な埋め込み、全文検索にBM25を使ったハイブリッド検索の簡単な例です：</p>
+<p>Milvusで、セマンティック検索にOpenAIのdense embedding、全文検索にBM25を使ったハイブリッド検索の簡単な例を示します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
@@ -103,7 +103,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>上のコードでは、<code translate="no">BM25BuiltInFunction</code> のインスタンスを定義し、<code translate="no">Milvus</code> オブジェクトに渡しています。<code translate="no">BM25BuiltInFunction</code> は、Milvusにおける <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a>の軽量なラッパークラスです。</p>
@@ -112,9 +112,9 @@ vectorstore = Milvus.from_documents(
 <li><code translate="no">input_field_names</code> (str)で指定します：入力フィールドの名前、デフォルトは です。 この関数がどのフィールドを入力として読み込むかを示します。<code translate="no">text</code></li>
 <li><code translate="no">output_field_names</code> (str)：(str):出力フィールド名, デフォルトは . この関数が計算結果を出力するフィールドを示します.<code translate="no">sparse</code></li>
 </ul>
-<p>上記のMilvus初期化パラメータでは、<code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> も指定していることに注意してください。<code translate="no">BM25BuiltInFunction</code>によって定義された出力フィールドとして<code translate="no">sparse</code> フィールドが取られるため、他の<code translate="no">dense</code> フィールドは自動的に OpenAIEmbeddings の出力フィールドに割り当てられます。</p>
-<p>実際には、特に複数の埋め込みや関数を組み合わせる場合、曖昧さを避けるために、関数ごとに入力フィールドと出力フィールドを明示的に指定することをお勧めします。</p>
-<p>次の例では、<code translate="no">BM25BuiltInFunction</code> の入力フィールドと出力フィールドを明示的に指定し、組み込み関数がどのフィールドに対するものかを明確にしています。</p>
+<p>前述のMilvus初期化パラメータでは、<code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> も指定していることに注意してください。<code translate="no">BM25BuiltInFunction</code>によって定義された出力フィールドとして<code translate="no">sparse</code> フィールドが取られるため、他の<code translate="no">dense</code> フィールドは自動的に OpenAIEmbeddings の出力フィールドに割り当てられます。</p>
+<p>実際には、特に複数の埋め込みや関数を組み合わせる場合には、曖昧さを避けるために、関数ごとに入力フィールドと出力フィールドを明示的に指定することをお勧めします。</p>
+<p>以下の例では、<code translate="no">BM25BuiltInFunction</code> の入力フィールドと出力フィールドを明示的に指定し、組み込み関数がどのフィールドに対するものかを明確にしています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
 embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
@@ -134,7 +134,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -142,7 +142,7 @@ vectorstore.vector_fields
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
 <p>この例では、3つのベクトル・フィールドがあります。その中で、<code translate="no">sparse</code> は<code translate="no">BM25BuiltInFunction</code> の出力フィールドとして使用され、他の2つ、<code translate="no">dense1</code> と<code translate="no">dense2</code> は、（順番に基づいて）2つの<code translate="no">OpenAIEmbeddings</code> モデルの出力フィールドとして自動的に割り当てられます。</p>
-<p>このように、複数のベクトル・フィールドを定義し、それらに異なるエンベッディングや関数の組み合わせを割り当てて、ハイブリッド検索を実行することができる。</p>
+<p>このように、複数のベクトル・フィールドを定義し、それらに異なる埋め込みや関数の組み合わせを割り当てることで、ハイブリッド検索を実行することができる。</p>
 <p>ハイブリッド検索を実行する際には、クエリーテキストを渡し、オプションでtopKとrerankerパラメータを設定するだけでよい。<code translate="no">vectorstore</code> インスタンスは自動的にベクトル埋め込みと組み込み関数を処理し、最後にリランカーを使って結果を絞り込む。検索プロセスの基本的な実装の詳細は、ユーザーからは見えないようになっている。</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
@@ -162,7 +162,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -209,7 +209,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusコレクションのスキーマを見て、カスタマイズされた解析器が正しくセットアップされていることを確認することができます。</p>
@@ -233,7 +233,7 @@ vectorstore = Milvus.from_documents(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ここまでLangChainとmilvusの基本的なBM25ビルドイン関数の使い方を学んできました。ハイブリッド検索とリランキングで最適化されたRAG実装を紹介しましょう。</p>
+    </button></h2><p>ここまでLangChainとmilvusの基本的なBM25ビルドイン関数の使い方を学んできた。ハイブリッド検索とリランキングで最適化されたRAG実装を紹介しましょう。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
@@ -282,7 +282,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">RAGチェーンの構築</h3><p>LLMインスタンスとプロンプトを準備し、LangChain Expression Languageを使ってRAGパイプラインに結合する。</p>

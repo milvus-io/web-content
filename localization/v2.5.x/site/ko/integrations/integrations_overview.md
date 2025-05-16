@@ -73,7 +73,7 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/build_rag_on_arm.md">Arm 아키텍처에 RAG 구축</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_fireworks.md">Milvus 및 Fireworks AI를 사용한 RAG 빌드</a></td><td>LLM</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_lepton.md">Milvus 및 Lepton AI로 RAG 빌드하기</a></td><td>LLM</td><td>Milvus, 렙톤 AI</td></tr>
-<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_siliconflow">Milvus 및 SiliconFlow를 사용한 RAG 빌드</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_siliconflow.md">Milvus 및 SiliconFlow를 사용한 RAG 빌드</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/ko/rag_with_milvus_and_unstructured.md">Milvus와 비정형 데이터로 RAG 구축하기</a></td><td>데이터 소스</td><td>Milvus, 비정형</td></tr>
 <tr><td><a href="/docs/ko/RAG_with_pii_and_milvus.md">Milvus + PII 마스커로 RAG 구축하기</a></td><td>데이터 소스</td><td>Milvus, PII 마스커</td></tr>
 <tr><td><a href="/docs/ko/knowledge_table_with_milvus.md">Milvus를 사용한 지식 테이블</a></td><td>지식 엔지니어링</td><td>지식 테이블, Milvus</td></tr>
@@ -86,5 +86,8 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/integration_with_mindsdb.md">Milvus와 MindsDB 통합</a></td><td>지식 엔지니어링</td><td>밀버스, 마인즈DB</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_feast.md">Milvus와 Feast로 RAG 구축하기</a></td><td>데이터 소스</td><td>밀버스, 피스트</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_docling.md">밀버스와 도클링으로 RAG 구축하기</a></td><td>데이터 소스</td><td>밀버스, 도클링</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_embedAnything.md">Milvus와 EmbedAnything으로 RAG 구축하기</a></td><td>임베딩</td><td>Milvus, 임베드애니씽</td></tr>
+<tr><td><a href="/docs/ko/milvus_and_n8n.md">Milvus 및 n8n 시작하기</a></td><td>오케스트레이션</td><td>Milvus, n8n</td></tr>
+<tr><td><a href="/docs/ko/use_milvus_in_anythingllm.md">AnythingLLM에서 Milvus 사용</a></td><td>오케스트레이션</td><td>Milvus, AnythingLLM</td></tr>
 </tbody>
 </table>

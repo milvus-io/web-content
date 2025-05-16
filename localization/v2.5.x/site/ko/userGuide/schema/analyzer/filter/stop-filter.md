@@ -96,10 +96,16 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>토큰화에서 제거할 단어 목록입니다. 기본적으로 필터는 기본 제공 <code translate="no">_english_</code> 사전을 사용합니다. 세 가지 방법으로 이 사전을 재정의하거나 확장할 수 있습니다:</p><ul><li><p><strong>기본</strong> 제공 사전 - 사전 정의된 사전을 사용하려면 다음 언어 별칭 중 하나를 제공합니다:<code translate="no">"_english_"</code>, <code translate="no">"_danish_"</code>, <code translate="no">"_dutch_"</code>, <code translate="no">"_finnish_"</code>, <code translate="no">"_french_"</code>, <code translate="no">"_german_"</code>, <code translate="no">"_hungarian_"</code>, <code translate="no">"_italian_"</code>, <code translate="no">"_norwegian_"</code>, <code translate="no">"_portuguese_"</code>, <code translate="no">"_russian_"</code>, <code translate="no">"_spanish_"</code>, <code translate="no">"_swedish_"</code></p></li><li><p><strong>사용자 정의 목록</strong> - 사용자 정의 용어 배열을 전달합니다(예: <code translate="no">["foo", "bar", "baz"]</code>).</p></li><li><p><strong>혼합 목록</strong> - 별칭과 사용자 지정 용어를 결합합니다(예: <code translate="no">["of", "to", "_english_"]</code>.</p><p>미리 정의된 각 사전의 정확한 내용에 대한 자세한 내용은 <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words를</a> 참조하세요.</p></li></ul></td>
+     <td><p>토큰화에서 제거할 단어 목록입니다. 기본적으로 필터는 기본 제공 <code translate="no">_english_</code> 사전을 사용합니다. 세 가지 방법으로 이 사전을 재정의하거나 확장할 수 있습니다:</p>
+<ul>
+<li><p><strong>기본</strong> 제공 사전 - 사전 정의된 사전을 사용하려면 다음 언어 별칭 중 하나를 제공합니다:<code translate="no">"_english_"</code>, <code translate="no">"_danish_"</code>, <code translate="no">"_dutch_"</code>, <code translate="no">"_finnish_"</code>, <code translate="no">"_french_"</code>, <code translate="no">"_german_"</code>, <code translate="no">"_hungarian_"</code>, <code translate="no">"_italian_"</code>, <code translate="no">"_norwegian_"</code>, <code translate="no">"_portuguese_"</code>, <code translate="no">"_russian_"</code>, <code translate="no">"_spanish_"</code>, <code translate="no">"_swedish_"</code></p></li>
+<li><p><strong>사용자 정의 목록</strong> - 사용자 정의 용어 배열을 전달합니다(예: <code translate="no">["foo", "bar", "baz"]</code>).</p></li>
+<li><p><strong>혼합 목록</strong> - 별칭과 사용자 지정 용어를 결합합니다(예: <code translate="no">["of", "to", "_english_"]</code>.</p>
+<p>미리 정의된 각 사전의 정확한 내용에 대한 자세한 내용은 <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words를</a> 참조하세요.</p></li>
+</ul></td>
    </tr>
 </table>
-<p><code translate="no">stop</code> 필터는 토큰화 도구에서 생성된 용어에 대해 작동하므로 토큰화 도구와 함께 사용해야 합니다. Milvus에서 사용 가능한 토큰라이저 목록은 토큰라이저 <a href="/docs/ko/tokenizers">참조를</a> 참조하세요.</p>
+<p><code translate="no">stop</code> 필터는 토큰화 도구에서 생성된 용어에 대해 작동하므로 토큰화 도구와 함께 사용해야 합니다. Milvus에서 사용할 수 있는 토큰화기 목록은 <a href="/docs/ko/standard-tokenizer.md">표준 토큰화기와</a> 그 자매 페이지를 참조하세요.</p>
 <p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

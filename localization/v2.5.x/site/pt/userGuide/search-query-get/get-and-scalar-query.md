@@ -59,15 +59,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>Parâmetros obrigatórios</p></td>
-     <td><ul><li>Nome da coleção</li><li>Chaves primárias</li></ul></td>
-     <td><ul><li>Nome da coleção</li><li>Expressões de filtragem</li></ul></td>
-     <td><ul><li><p>Nome da coleção</p></li><li><p>Expressões de filtragem</p></li><li><p>Número de entidades a devolver por consulta</p></li></ul></td>
+     <td><ul>
+<li>Nome da coleção</li>
+<li>Chaves primárias</li>
+</ul></td>
+     <td><ul>
+<li>Nome da coleção</li>
+<li>Expressões de filtragem</li>
+</ul></td>
+     <td><ul>
+<li><p>Nome da coleção</p></li>
+<li><p>Expressões de filtragem</p></li>
+<li><p>Número de entidades a devolver por consulta</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>Parâmetros opcionais</p></td>
-     <td><ul><li>Nome da partição</li><li>Campos de saída</li></ul></td>
-     <td><ul><li><p>Nome da partição</p></li><li><p>Número de entidades a devolver</p></li><li><p>Campos de saída</p></li></ul></td>
-     <td><ul><li><p>Nome da partição</p></li><li><p>Número de entidades a devolver no total</p></li><li><p>Campos de saída</p></li></ul></td>
+     <td><ul>
+<li>Nome da partição</li>
+<li>Campos de saída</li>
+</ul></td>
+     <td><ul>
+<li><p>Nome da partição</p></li>
+<li><p>Número de entidades a devolver</p></li>
+<li><p>Campos de saída</p></li>
+</ul></td>
+     <td><ul>
+<li><p>Nome da partição</p></li>
+<li><p>Número de entidades a devolver no total</p></li>
+<li><p>Campos de saída</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>Retorno</p></td>
@@ -76,7 +97,7 @@ summary: >-
      <td><p>Retorna todas as entidades que atendem às condições de filtragem personalizadas na coleção ou partição especificada por meio de consultas paginadas.</p></td>
    </tr>
 </table>
-<p>Para obter mais informações sobre a filtragem de metadados, consulte <a href="/docs/pt/filtering">Filtragem</a>.</p>
+<p>Para obter mais informações sobre a filtragem de metadados, consulte .</p>
 <h2 id="Use-Get" class="common-anchor-header">Usar Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,7 +113,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando você precisa encontrar entidades por suas chaves primárias, você pode usar o método <strong>Get</strong>. Os exemplos de código a seguir assumem que há três campos denominados <code translate="no">id</code>, <code translate="no">vector</code> e <code translate="no">color</code> na sua coleção e retornam as entidades com chaves primárias <code translate="no">1</code>, <code translate="no">2</code> e <code translate="no">3</code>.</p>
+    </button></h2><p>Quando você precisa encontrar entidades por suas chaves primárias, você pode usar o método <strong>Get</strong>. Os exemplos de código a seguir assumem que há três campos chamados <code translate="no">id</code>, <code translate="no">vector</code> e <code translate="no">color</code> na sua coleção e retornam as entidades com chaves primárias <code translate="no">1</code>, <code translate="no">2</code> e <code translate="no">3</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},

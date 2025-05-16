@@ -577,7 +577,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Fermarsi",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -940,6 +940,12 @@
             "label": "Gemelli",
             "id": "embed-with-gemini.md",
             "order": 14,
+            "children": []
+          },
+          {
+            "label": "IncorporaTutto",
+            "id": "build_RAG_with_milvus_and_embedAnything.md",
+            "order": 15,
             "children": []
           }
         ]
@@ -1855,6 +1861,18 @@
             "id": "llama_stack_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "n8n",
+            "id": "milvus_and_n8n.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "Qualsiasi cosaLLM",
+            "id": "use_milvus_in_anythingllm.md",
+            "order": 14,
+            "children": []
           }
         ]
       },
@@ -2288,7 +2306,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -2335,7 +2353,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

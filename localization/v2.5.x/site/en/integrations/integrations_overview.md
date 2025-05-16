@@ -88,5 +88,8 @@ title: Integrations Overview
 <tr><td><a href="/docs/integration_with_mindsdb.md">Integrate Milvus with MindsDB</a></td><td>Knowledge Engineering</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/build_RAG_with_milvus_and_feast.md">Build RAG with Milvus and Feast</a></td><td>Data Sources</td><td>Milvus, Feast</td></tr>
 <tr><td><a href="/docs/build_RAG_with_milvus_and_docling.md">Build RAG with Milvus and Docling</a></td><td>Data Sources</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_embedAnything.md">Building RAG with Milvus and EmbedAnything</a></td><td>Embedding</td><td>Milvus, EmbedAnything</td></tr>
+<tr><td><a href="/docs/milvus_and_n8n.md">Getting Started with Milvus and n8n</a></td><td>Orchestration</td><td>Milvus, n8n</td></tr>
+<tr><td><a href="/docs/use_milvus_in_anythingllm.md">Use Milvus in AnythingLLM</a></td><td>Orchestration</td><td>Milvus, AnythingLLM</td></tr>
 </tbody>
 </table>

@@ -4,8 +4,8 @@ title: Nur alphanumerische Begriffe
 summary: >-
   Der alphanumonly-Filter entfernt Token, die Nicht-ASCII-Zeichen enthalten, und
   behält nur alphanumerische Begriffe bei. Dieser Filter ist nützlich für die
-  Verarbeitung von Text, bei dem nur Buchstaben und Zahlen relevant sind und
-  keine Sonderzeichen oder Symbole enthalten sind.
+  Verarbeitung von Text, bei dem nur einfache Buchstaben und Zahlen relevant
+  sind und Sonderzeichen oder Symbole ausgeschlossen sind.
 ---
 <h1 id="Alphanumonly" class="common-anchor-header">Nur alphanumerische Begriffe<button data-href="#Alphanumonly" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,8 +66,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Der <code translate="no">alphanumonly</code> -Filter arbeitet mit den vom Tokenizer erzeugten Begriffen, so dass er in Kombination mit einem Tokenizer verwendet werden muss. Eine Liste der in Milvus verfügbaren Tokenizer finden Sie in der <a href="/docs/de/tokenizers">Tokenizer-Referenz</a>.</p>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dies ermöglicht es Milvus, den Text in diesem Feld mit dem angegebenen Analysator für eine effiziente Tokenisierung und Filterung zu verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
+<p>Der <code translate="no">alphanumonly</code> -Filter arbeitet mit den vom Tokenizer erzeugten Begriffen, so dass er in Kombination mit einem Tokenizer verwendet werden muss. Eine Liste der in Milvus verfügbaren Tokenizer finden Sie unter <a href="/docs/de/standard-tokenizer.md">Standard Tokenizer</a> und den zugehörigen Seiten.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie auf ein <code translate="no">VARCHAR</code> Feld anwenden, wenn Sie ein Sammelschema definieren. Dies ermöglicht es Milvus, den Text in diesem Feld mit dem angegebenen Analysator für eine effiziente Tokenisierung und Filterung zu verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

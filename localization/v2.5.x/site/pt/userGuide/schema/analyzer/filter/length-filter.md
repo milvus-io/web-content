@@ -93,7 +93,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Define o comprimento máximo do token. Os tokens maiores que este comprimento são removidos.</p></td>
    </tr>
 </table>
-<p>O filtro <code translate="no">length</code> funciona com os termos gerados pelo tokenizador, pelo que deve ser utilizado em combinação com um tokenizador. Para obter uma lista dos tokenizadores disponíveis no Milvus, consulte <a href="/docs/pt/tokenizers">Referência do Tokenizador</a>.</p>
+<p>O filtro <code translate="no">length</code> funciona com os termos gerados pelo tokenizador, pelo que deve ser utilizado em combinação com um tokenizador. Para obter uma lista de tokenizadores disponíveis no Milvus, consulte <a href="/docs/pt/standard-tokenizer.md">Tokenizador padrão</a> e suas páginas irmãs.</p>
 <p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-los a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para obter detalhes, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de uso</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

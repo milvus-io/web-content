@@ -105,7 +105,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Dans le code ci-dessus, nous définissons une instance de <code translate="no">BM25BuiltInFunction</code> et la transmettons à l'objet <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> est une classe enveloppante légère pour la recherche sémantique dans Milvus. <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> dans Milvus.</p>
@@ -114,7 +114,7 @@ vectorstore = Milvus.from_documents(
 <li><code translate="no">input_field_names</code> (str) : Le nom du champ d'entrée, par défaut <code translate="no">text</code>. Il indique le champ que cette fonction lit en entrée.</li>
 <li><code translate="no">output_field_names</code> (str) : Le nom du champ de sortie, par défaut <code translate="no">sparse</code>. Il indique le champ dans lequel cette fonction émet le résultat calculé.</li>
 </ul>
-<p>Notez que dans les paramètres d'initialisation de Milvus mentionnés ci-dessus, nous spécifions également <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code>. Étant donné que le champ <code translate="no">sparse</code> est considéré comme le champ de sortie défini par <code translate="no">BM25BuiltInFunction</code>, l'autre champ <code translate="no">dense</code> sera automatiquement affecté au champ de sortie d'OpenAIEmbeddings.</p>
+<p>Notez que dans les paramètres d'initialisation de Milvus mentionnés ci-dessus, nous spécifions également <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code>. Étant donné que le champ <code translate="no">sparse</code> est considéré comme le champ de sortie défini par <code translate="no">BM25BuiltInFunction</code>, l'autre champ <code translate="no">dense</code> sera automatiquement attribué au champ de sortie d'OpenAIEmbeddings.</p>
 <p>Dans la pratique, en particulier lors de la combinaison de plusieurs embeddings ou fonctions, nous recommandons de spécifier explicitement les champs d'entrée et de sortie pour chaque fonction afin d'éviter toute ambiguïté.</p>
 <p>Dans l'exemple suivant, nous spécifions explicitement les champs d'entrée et de sortie de <code translate="no">BM25BuiltInFunction</code>, ce qui permet de savoir clairement à quel champ s'adresse la fonction intégrée.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
@@ -136,7 +136,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -164,7 +164,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -211,7 +211,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Nous pouvons examiner le schéma de la collection Milvus et nous assurer que l'analyseur personnalisé est correctement configuré.</p>
@@ -284,7 +284,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">Construction de la chaîne RAG</h3><p>Nous préparons l'instance LLM et l'invite, puis nous les combinons dans un pipeline RAG à l'aide du LangChain Expression Language.</p>

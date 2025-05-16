@@ -94,10 +94,16 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>要从标记化中删除的单词列表。默认情况下，过滤器使用内置的<code translate="no">_english_</code> 词典。您可以通过三种方式覆盖或扩展它：</p><ul><li><p><strong>内置词典</strong>- 提供以下语言别名之一，以使用预定义词典：<code translate="no">"_english_"</code>,<code translate="no">"_danish_"</code>,<code translate="no">"_dutch_"</code>,<code translate="no">"_finnish_"</code>,<code translate="no">"_french_"</code>,<code translate="no">"_german_"</code>,<code translate="no">"_hungarian_"</code>,<code translate="no">"_italian_"</code>,<code translate="no">"_norwegian_"</code>,<code translate="no">"_portuguese_"</code>,<code translate="no">"_russian_"</code>,<code translate="no">"_spanish_"</code> 、<code translate="no">"_swedish_"</code></p></li><li><p><strong>自定义列表</strong>- 传递您自己的术语数组，如<code translate="no">["foo", "bar", "baz"]</code> 。</p></li><li><p><strong>混合列表</strong>- 结合别名和自定义术语，如<code translate="no">["of", "to", "_english_"]</code> 。</p><p>有关每个预定义词典的具体内容，请参阅<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>。</p></li></ul></td>
+     <td><p>要从标记化中删除的单词列表。默认情况下，过滤器使用内置的<code translate="no">_english_</code> 词典。您可以通过三种方式覆盖或扩展它：</p>
+<ul>
+<li><p><strong>内置词典</strong>- 提供以下语言别名之一，以使用预定义词典：<code translate="no">"_english_"</code>,<code translate="no">"_danish_"</code>,<code translate="no">"_dutch_"</code>,<code translate="no">"_finnish_"</code>,<code translate="no">"_french_"</code>,<code translate="no">"_german_"</code>,<code translate="no">"_hungarian_"</code>,<code translate="no">"_italian_"</code>,<code translate="no">"_norwegian_"</code>,<code translate="no">"_portuguese_"</code>,<code translate="no">"_russian_"</code>,<code translate="no">"_spanish_"</code> 、<code translate="no">"_swedish_"</code></p></li>
+<li><p><strong>自定义列表</strong>- 传递您自己的术语数组，如<code translate="no">["foo", "bar", "baz"]</code> 。</p></li>
+<li><p><strong>混合列表</strong>- 结合别名和自定义术语，如<code translate="no">["of", "to", "_english_"]</code> 。</p>
+<p>有关每个预定义词典的具体内容，请参阅<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>。</p></li>
+</ul></td>
    </tr>
 </table>
-<p><code translate="no">stop</code> 过滤器对标记化器生成的术语进行操作，因此必须与标记化器结合使用。有关 Milvus 中可用的标记符列表，请参阅标记<a href="/docs/zh/tokenizers">符参考</a>。</p>
+<p><code translate="no">stop</code> 过滤器对标记化器生成的术语进行操作，因此必须与标记化器结合使用。有关 Milvus 中可用的标记符列表，请参阅<a href="/docs/zh/standard-tokenizer.md">标准</a>标记符及其同类页面。</p>
 <p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -57,7 +57,7 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/integrate_with_hugging-face.md">الإجابة عن الأسئلة باستخدام Milvus وHuggingFace</a></td><td>الإجابة عن الأسئلة</td><td>ميلفوس، عناق الوجه</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_pytorch.md">البحث عن الصور باستخدام ميلفوس وبيتورش</a></td><td>البحث الدلالي</td><td>ميلفوس، بيتورش</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_sentencetransformers.md">البحث في الأفلام باستخدام Milvus و SentenceTransfromers</a></td><td>البحث الدلالي</td><td>ميلفوس وميلفوس وسنتنس ترانسفورمرز</td></tr>
-<tr><td><a href="/docs/ar/integrate_with_voxel51.md">إجراء عمليات بحث دلالي باستخدام ميلفوس وفيفتيون</a></td><td>البحث الدلالي</td><td>ميلفوس، فيفتي ون</td></tr>
+<tr><td><a href="/docs/ar/integrate_with_voxel51.md">إجراء عمليات بحث دلالي باستخدام ميلفوس وفيفتي ون</a></td><td>البحث الدلالي</td><td>ميلفوس، فيفتي ون</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_voyageai.md">البحث الدلالي باستخدام Milvus وVoyageAI</a></td><td>البحث الدلالي</td><td>ميلفوس، فوياج إيه آي</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_bentoml.md">البحث الدلالي باستخدام Milvus و BentoML</a></td><td>RAG</td><td>ميلفوس و BentoML</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_dspy.md">RAG مع Milvus و DSPy</a></td><td>RAG</td><td>ميلفوس، DSPy</td></tr>
@@ -75,7 +75,7 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/build_rag_on_arm.md">بناء RAG على بنية الذراع</a></td><td>RAG</td><td>ميلفوس، آرم</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_fireworks.md">بناء RAG باستخدام Milvus وFireworks AI</a></td><td>ذراع</td><td>ميلفوس، فايرووركس للذكاء الاصطناعي</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_lepton.md">بناء RAG مع ميلفوس وذكاء اصطناعي ليبتون</a></td><td>LLMs</td><td>ميلفوس، ليبتون للذكاء الاصطناعي</td></tr>
-<tr><td><a href="/docs/ar/build_RAG_with_milvus_and_siliconflow">بناء RAG مع ميلفوس وسيليكون فلو</a></td><td>أجهزة LLMs</td><td>ميلفوس، سيليكون فلو</td></tr>
+<tr><td><a href="/docs/ar/build_RAG_with_milvus_and_siliconflow.md">بناء RAG مع ميلفوس وسيليكون فلو</a></td><td>أجهزة LLMs</td><td>ميلفوس، سيليكون فلو</td></tr>
 <tr><td><a href="/docs/ar/rag_with_milvus_and_unstructured.md">بناء RAG باستخدام Milvus وMilvus وLepton</a></td><td>مصادر البيانات</td><td>ميلفوس، غير المهيكلة</td></tr>
 <tr><td><a href="/docs/ar/RAG_with_pii_and_milvus.md">بناء RAG باستخدام Milvus + قناع PII Masker</a></td><td>مصادر البيانات</td><td>ميلفوس، ماسك معلومات تحديد الهوية الشخصية</td></tr>
 <tr><td><a href="/docs/ar/knowledge_table_with_milvus.md">جدول المعرفة مع ميلفوس</a></td><td>هندسة المعرفة</td><td>جدول المعرفة، ميلفوس</td></tr>
@@ -83,10 +83,13 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_gemini.md">بناء RAG مع ميلفوس وجيميني</a></td><td>جدول المعرفة</td><td>ميلفوس، جيميني</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_ollama.md">بناء RAG مع ميلفوس وأولاما</a></td><td>ل.ل.م</td><td>ميلفوس، أولاما</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_deepseek.md">بناء RAG مع ميلفوس وديبسيك</a></td><td>LLMs</td><td>ميلفوس، ديبسيك</td></tr>
-<tr><td><a href="/docs/ar/build_RAG_with_milvus_and_crawl4ai.md">بناء RAG باستخدام Milvus وCrawl4AI</a></td><td>مصادر البيانات</td><td>ميلفوس, Crawl4AI</td></tr>
+<tr><td><a href="/docs/ar/build_RAG_with_milvus_and_crawl4ai.md">بناء RAG باستخدام Milvus وCrawl4AI</a></td><td>مصادر البيانات</td><td>Milvus, Crawl4AI</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_firecrawl.md">بناء RAG باستخدام Milvus وFirecrawl</a></td><td>مصادر البيانات</td><td>ميلفوس، فايركراول</td></tr>
 <tr><td><a href="/docs/ar/integration_with_mindsdb.md">دمج ميلفوس مع مايندز دي بي</a></td><td>هندسة المعرفة</td><td>ميلفوس، مايندز دي بي</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_feast.md">بناء RAG مع ميلفوس وفيست</a></td><td>مصادر البيانات</td><td>ميلفوس، وليمة</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_docling.md">بناء RAG باستخدام Milvus وDocling</a></td><td>مصادر البيانات</td><td>ميلفوس، دوكلينج</td></tr>
+<tr><td><a href="/docs/ar/build_RAG_with_milvus_and_embedAnything.md">بناء RAG باستخدام Milvus و EmbedAnything</a></td><td>التضمين</td><td>ميلفوس، تضمين أي شيء</td></tr>
+<tr><td><a href="/docs/ar/milvus_and_n8n.md">الشروع في العمل مع ميلفوس و n8n</a></td><td>التنسيق</td><td>ميلفوس، n8n</td></tr>
+<tr><td><a href="/docs/ar/use_milvus_in_anythingllm.md">استخدام Milvus في AnythingLLM</a></td><td>التنسيق</td><td>ميلفوس، AnythingLLLM</td></tr>
 </tbody>
 </table>

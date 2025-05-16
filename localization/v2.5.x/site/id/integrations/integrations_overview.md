@@ -75,7 +75,7 @@ title: Ikhtisar Integrasi
 <tr><td><a href="/docs/id/build_rag_on_arm.md">Membangun RAG pada Arsitektur Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/id/build_RAG_with_milvus_and_fireworks.md">Membangun RAG dengan Milvus dan Fireworks AI</a></td><td>LLM</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/id/build_RAG_with_milvus_and_lepton.md">Membangun RAG dengan Milvus dan Lepton AI</a></td><td>LLM</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/id/build_RAG_with_milvus_and_siliconflow">Membangun RAG dengan Milvus dan SiliconFlow</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/id/build_RAG_with_milvus_and_siliconflow.md">Membangun RAG dengan Milvus dan SiliconFlow</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/id/rag_with_milvus_and_unstructured.md">Membangun RAG dengan Milvus dan Unstructured</a></td><td>Sumber Data</td><td>Milvus, Tidak Terstruktur</td></tr>
 <tr><td><a href="/docs/id/RAG_with_pii_and_milvus.md">Membangun RAG dengan Milvus + PII Masker</a></td><td>Sumber Data</td><td>Milvus, PII Masker</td></tr>
 <tr><td><a href="/docs/id/knowledge_table_with_milvus.md">Tabel Pengetahuan dengan Milvus</a></td><td>Rekayasa Pengetahuan</td><td>Tabel Pengetahuan, Milvus</td></tr>
@@ -88,5 +88,8 @@ title: Ikhtisar Integrasi
 <tr><td><a href="/docs/id/integration_with_mindsdb.md">Mengintegrasikan Milvus dengan MindsDB</a></td><td>Rekayasa Pengetahuan</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/id/build_RAG_with_milvus_and_feast.md">Membangun RAG dengan Milvus dan Feast</a></td><td>Sumber Data</td><td>Milvus, Feast</td></tr>
 <tr><td><a href="/docs/id/build_RAG_with_milvus_and_docling.md">Membangun RAG dengan Milvus dan Docling</a></td><td>Sumber Data</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/id/build_RAG_with_milvus_and_embedAnything.md">Membangun RAG dengan Milvus dan EmbedAnything</a></td><td>Penyematan</td><td>Milvus, EmbedAnything</td></tr>
+<tr><td><a href="/docs/id/milvus_and_n8n.md">Memulai dengan Milvus dan n8n</a></td><td>Orkestrasi</td><td>Milvus, n8n</td></tr>
+<tr><td><a href="/docs/id/use_milvus_in_anythingllm.md">Menggunakan Milvus di AnythingLLM</a></td><td>Orkestrasi</td><td>Milvus, AnythingLLM</td></tr>
 </tbody>
 </table>
