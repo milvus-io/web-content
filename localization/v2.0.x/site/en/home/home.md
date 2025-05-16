@@ -36,14 +36,14 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
       </svg>
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
-  <a href="/docs/install_standalone-docker.md">
+  <a href="/docs/v2.0.x/install_standalone-docker.md">
     <img translate="no"  src="/docs/v2.0.x/assets/home_install.svg" alt="icon" />
     <p class="link-btn">Install Milvus <i class="fas fa-chevron-right"></i></p>
   </a>
   <p>Learn how to install Milvus using either Docker Compose or on Kubernetes.</p>
 </div>
 <div class="start_card_container">
-  <a href="/docs/example_code.md">
+  <a href="/docs/v2.0.x/example_code.md">
     <img translate="no"  src="/docs/v2.0.x/assets/home_quick_start.svg" alt="icon" />
     <p class="link-btn">Quick Start <i class="fas fa-chevron-right"></i></p>
   </a>
@@ -78,31 +78,31 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
 <div class="recomment-item">
   <p>Use</p>
 <ul>
-<li><a href="/docs/create_collection.md">Create a Collection</a></li>
-<li><a href="/docs/insert_data.md">Manage Data</a></li>
-<li><a href="/docs/build_index.md">Build an Index</a></li>
-<li><a href="/docs/search.md">Search</a></li>
-<li><a href="/docs/query.md">Query</a></li>
+<li><a href="/docs/v2.0.x/create_collection.md">Create a Collection</a></li>
+<li><a href="/docs/v2.0.x/insert_data.md">Manage Data</a></li>
+<li><a href="/docs/v2.0.x/build_index.md">Build an Index</a></li>
+<li><a href="/docs/v2.0.x/search.md">Search</a></li>
+<li><a href="/docs/v2.0.x/query.md">Query</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Deploy</p>
 <ul>
-<li><a href="/docs/configure-docker.md">Configure Milvus</a></li>
-<li><a href="/docs/deploy_s3.md">Manage Dependencies</a></li>
-<li><a href="/docs/aws.md">Deploy on Clouds</a></li>
-<li><a href="/docs/scaleout.md">Scale a Milvus Cluster</a></li>
-<li><a href="/docs/monitor_overview.md">Monitor and Alert</a></li>
+<li><a href="/docs/v2.0.x/configure-docker.md">Configure Milvus</a></li>
+<li><a href="/docs/v2.0.x/deploy_s3.md">Manage Dependencies</a></li>
+<li><a href="/docs/v2.0.x/aws.md">Deploy on Clouds</a></li>
+<li><a href="/docs/v2.0.x/scaleout.md">Scale a Milvus Cluster</a></li>
+<li><a href="/docs/v2.0.x/monitor_overview.md">Monitor and Alert</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Learn</p>
 <ul>
-<li><a href="/docs/system_configuration.md">System Configuration</a></li>
-<li><a href="/docs/architecture_overview.md">Architecture Overview</a></li>
-<li><a href="/docs/index.md">Vector Index</a></li>
-<li><a href="/docs/metric.md">Similarity Metrics</a></li>
-<li><a href="/docs/glossary.md">Glossary</a></li>
+<li><a href="/docs/v2.0.x/system_configuration.md">System Configuration</a></li>
+<li><a href="/docs/v2.0.x/architecture_overview.md">Architecture Overview</a></li>
+<li><a href="/docs/v2.0.x/index.md">Vector Index</a></li>
+<li><a href="/docs/v2.0.x/metric.md">Similarity Metrics</a></li>
+<li><a href="/docs/v2.0.x/glossary.md">Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -124,13 +124,13 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
       </svg>
     </button></h2><p><em>Apr 2022</em></p>
 <ul>
-<li>Added Milvus cluster installation guidance with <a href="/docs/install_cluster-ansible.md">Ansible</a>.</li>
+<li>Added Milvus cluster installation guidance with <a href="/docs/v2.0.x/install_cluster-ansible.md">Ansible</a>.</li>
 <li>Remade API Reference of <a href="https://milvus.io/api-reference/pymilvus/v2.0.2/About.md">PyMilvus</a> and <a href="https://milvus.io/api-reference/go/v2.0.0/About.md">Milvus GO SDK</a>.</li>
 </ul>
 <p><em>Mar 2022</em></p>
 <ul>
-<li>Added guidance on <a href="/docs/calculate_distance.md">distance calculation</a>.</li>
-<li>Added documentation on how to <a href="/docs/load_partition.md">load</a> and <a href="/docs/release_partition.md">release</a> a partition.</li>
-<li>Added Milvus <a href="/docs/benchmark.md">benchmark</a> report.</li>
+<li>Added guidance on <a href="/docs/v2.0.x/calculate_distance.md">distance calculation</a>.</li>
+<li>Added documentation on how to <a href="/docs/v2.0.x/load_partition.md">load</a> and <a href="/docs/v2.0.x/release_partition.md">release</a> a partition.</li>
+<li>Added Milvus <a href="/docs/v2.0.x/benchmark.md">benchmark</a> report.</li>
 </ul>
 </div>

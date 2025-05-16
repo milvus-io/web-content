@@ -7,7 +7,7 @@ related_key: attu
 summary: Learn how to install Attu with Helm Chart to manage your Milvus service.
 title: ''
 ---
-<div class="tab-wrapper"><a href="/docs/attu_install-docker.md" class=''>Install with Docker Compose</a><a href="/docs/attu_install-helm.md" class='active '>Install with Helm Chart</a><a href="/docs/attu_install-package.md" class=''>Install with Package</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.0.x/attu_install-docker.md" class=''>Install with Docker Compose</a><a href="/docs/v2.0.x/attu_install-helm.md" class='active '>Install with Helm Chart</a><a href="/docs/v2.0.x/attu_install-package.md" class=''>Install with Package</a></div>
 <h1 id="Install-Attu-with-Helm-Charts" class="common-anchor-header">Install Attu with Helm Charts<button data-href="#Install-Attu-with-Helm-Charts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

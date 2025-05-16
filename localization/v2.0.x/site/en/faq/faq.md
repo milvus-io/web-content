@@ -20,8 +20,8 @@ summary: ''
       </svg>
     </button></h1><p>Still having questions when using Milvus? Read the most frequently asked questions about the Milvus vector database.</p>
 <ul>
-<li><a href="/docs/performance_faq.md">Performance FAQs</a>: Questions about Milvus’ performance.</li>
-<li><a href="/docs/product_faq.md">Product FAQs</a>: Questions about Milvus’ cost, architecture, features, and more.</li>
-<li><a href="/docs/operational_faq.md">Operational FAQs</a>: Questions about running and using Milvus.</li>
-<li><a href="/docs/troubleshooting.md">Troubleshooting</a>: Common issues and possible troubleshooting tips.</li>
+<li><a href="/docs/v2.0.x/performance_faq.md">Performance FAQs</a>: Questions about Milvus’ performance.</li>
+<li><a href="/docs/v2.0.x/product_faq.md">Product FAQs</a>: Questions about Milvus’ cost, architecture, features, and more.</li>
+<li><a href="/docs/v2.0.x/operational_faq.md">Operational FAQs</a>: Questions about running and using Milvus.</li>
+<li><a href="/docs/v2.0.x/troubleshooting.md">Troubleshooting</a>: Common issues and possible troubleshooting tips.</li>
 </ul>

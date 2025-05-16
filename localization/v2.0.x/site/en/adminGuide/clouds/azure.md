@@ -232,7 +232,7 @@ This topic uses <code translate="no">my-release</code> as the release name. Repl
       </svg>
     </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
 <ul>
-<li><a href="/docs/aws.md">Deploy a Milvus Cluster on EC2</a></li>
-<li><a href="/docs/eks.md">Deploy a Milvus Cluster on EKS</a></li>
-<li><a href="/docs/gcp.md">Deploy a Milvus Cluster on GCP</a></li>
+<li><a href="/docs/v2.0.x/aws.md">Deploy a Milvus Cluster on EC2</a></li>
+<li><a href="/docs/v2.0.x/eks.md">Deploy a Milvus Cluster on EKS</a></li>
+<li><a href="/docs/v2.0.x/gcp.md">Deploy a Milvus Cluster on GCP</a></li>
 </ul>

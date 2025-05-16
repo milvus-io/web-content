@@ -154,7 +154,7 @@ summary: >-
   </span>
 </p>
 <h4 id="Support-tools" class="common-anchor-header">Support tools</h4><ul>
-<li><p><a href="/docs/attu.md"><strong>Attu</strong></a> is Milvus’ graphical user interface offering practical functionalities such as cluster state management, meta management, and data query. The source code of Attu will also be open sourced as an independent project. We are looking for more contributors to join this effort.</p></li>
+<li><p><a href="/docs/v2.0.x/attu.md"><strong>Attu</strong></a> is Milvus’ graphical user interface offering practical functionalities such as cluster state management, meta management, and data query. The source code of Attu will also be open sourced as an independent project. We are looking for more contributors to join this effort.</p></li>
 <li><p><a href="https://github.com/milvus-io/milvus_cli#overview"><strong>Milvus CLI</strong></a> is Milvus’ command-line interface based on <a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a>, supporting database connection, data operations, and data export/import.</p></li>
 <li><p><strong>Out-of-box experience (OOBE), faster deployment:</strong> Milvus 2.0 can be deployed using helm or Docker Compose.</p></li>
 <li><p>Milvus 2.0 uses Prometheus, an open-source time-series database, to store performance and monitor data, and Grafana, an open observability platform, for metrics visualization.</p></li>

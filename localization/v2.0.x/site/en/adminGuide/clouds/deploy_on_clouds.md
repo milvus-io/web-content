@@ -22,9 +22,9 @@ summary: ''
 <ul>
 <li>AWS
 <ul>
-<li><a href="/docs/aws.md">EC2</a></li>
-<li><a href="/docs/eks.md">EKS</a></li>
+<li><a href="/docs/v2.0.x/aws.md">EC2</a></li>
+<li><a href="/docs/v2.0.x/eks.md">EKS</a></li>
 </ul></li>
-<li><a href="/docs/gcp.md">GCP</a></li>
-<li><a href="/docs/azure.md">Azure</a></li>
+<li><a href="/docs/v2.0.x/gcp.md">GCP</a></li>
+<li><a href="/docs/v2.0.x/azure.md">Azure</a></li>
 </ul>

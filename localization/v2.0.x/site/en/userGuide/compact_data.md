@@ -20,10 +20,10 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to compact data in Milvus.</p>
-<p>Milvus supports automatic data compaction by default. You can <a href="/docs/configure-docker.md">configure</a> your Milvus to enable or disable <a href="/docs/configure_datacoord.md#dataCoordenableCompaction">compaction</a> and <a href="/docs/configure_datacoord.md#dataCoordcompactionenableAutoCompaction">automatic compaction</a>.</p>
+<p>Milvus supports automatic data compaction by default. You can <a href="/docs/v2.0.x/configure-docker.md">configure</a> your Milvus to enable or disable <a href="/docs/v2.0.x/configure_datacoord.md#dataCoordenableCompaction">compaction</a> and <a href="/docs/v2.0.x/configure_datacoord.md#dataCoordcompactionenableAutoCompaction">automatic compaction</a>.</p>
 <p>If automatic compaction is disabled, you can still compact data manually.</p>
 <div class="alert note">
-To ensure accuracy of searches with Time Travel, Milvus retains the data operation log within the span specified in <a href="/docs/configure_common.md#common.retentionDuration"><code translate="no">common.retentionDuration</code></a>. Therefore, data operated within this period will not be compacted. 
+To ensure accuracy of searches with Time Travel, Milvus retains the data operation log within the span specified in <a href="/docs/v2.0.x/configure_common.md#common.retentionDuration"><code translate="no">common.retentionDuration</code></a>. Therefore, data operated within this period will not be compacted. 
 </div>
 <h2 id="Compact-data-manually" class="common-anchor-header">Compact data manually<button data-href="#Compact-data-manually" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,10 +166,10 @@ collection.compact()
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/insert_data.md">Insert data into Milvus</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.0.x/insert_data.md">Insert data into Milvus</a></li>
+<li><a href="/docs/v2.0.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.0.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.0.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.0.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

@@ -20,13 +20,13 @@ summary: ''
       </svg>
     </button></h1><p>Unfamiliar with the features of Milvus? Not sure what is the meaning of some terms? You are in the right place to find a detailed explanation of the architecture, features, terms, and many other things you may want to know about Milvus.</p>
 <ul>
-<li><a href="/docs/architecture.md">Architecture</a>: An anatomy of the architecture, components, data processing workflow of Milvus.</li>
-<li><a href="/docs/benchmark.md">Benchmarks</a>: A benchmark test report covering the performances of data insertion, index building, and vector similarity search in Milvus.</li>
-<li><a href="/docs/boolean.md">Boolean Expression Rules</a>: The boolean expression rules and operators for scalar filtering in Milvus.</li>
-<li><a href="/docs/glossary.md">Glossary</a>: The most frequently used terminologies in Milvus.</li>
-<li><a href="/docs/schema.md">Schema</a>: Schema is used to define the properties of a collection and the fields within.</li>
-<li><a href="/docs/metric.md">Similarity Metrics</a>: Milvus supports multiple similarity metrics. Learn how to choose the right metrics that best suit your application.</li>
-<li><a href="/docs/system_configuration.md">System Configurations</a>: A full list of system parameters that can be flexibly configured to best suit your need.</li>
-<li><a href="/docs/timetravel_ref.md">Time Travel</a>: A detailed explanation of the Time Travel feature and the mechanism behind.</li>
-<li><a href="/docs/index.md">Vector Index</a>: A full list of the various types of indexes supported by Milvus. Learn about the best-suited scenarios of each index and the configurable index parameters.</li>
+<li><a href="/docs/v2.0.x/architecture.md">Architecture</a>: An anatomy of the architecture, components, data processing workflow of Milvus.</li>
+<li><a href="/docs/v2.0.x/benchmark.md">Benchmarks</a>: A benchmark test report covering the performances of data insertion, index building, and vector similarity search in Milvus.</li>
+<li><a href="/docs/v2.0.x/boolean.md">Boolean Expression Rules</a>: The boolean expression rules and operators for scalar filtering in Milvus.</li>
+<li><a href="/docs/v2.0.x/glossary.md">Glossary</a>: The most frequently used terminologies in Milvus.</li>
+<li><a href="/docs/v2.0.x/schema.md">Schema</a>: Schema is used to define the properties of a collection and the fields within.</li>
+<li><a href="/docs/v2.0.x/metric.md">Similarity Metrics</a>: Milvus supports multiple similarity metrics. Learn how to choose the right metrics that best suit your application.</li>
+<li><a href="/docs/v2.0.x/system_configuration.md">System Configurations</a>: A full list of system parameters that can be flexibly configured to best suit your need.</li>
+<li><a href="/docs/v2.0.x/timetravel_ref.md">Time Travel</a>: A detailed explanation of the Time Travel feature and the mechanism behind.</li>
+<li><a href="/docs/v2.0.x/index.md">Vector Index</a>: A full list of the various types of indexes supported by Milvus. Learn about the best-suited scenarios of each index and the configurable index parameters.</li>
 </ul>

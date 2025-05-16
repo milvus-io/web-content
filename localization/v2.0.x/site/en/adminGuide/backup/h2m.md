@@ -19,7 +19,7 @@ summary: Import HDF5 files to Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic describes how to import data in HDF5 files into Milvus using <a href="/docs/migrate_overview.md">MilvusDM</a>, an open-source tool specifically designed for Milvus data migration.</p>
+    </button></h1><p>This topic describes how to import data in HDF5 files into Milvus using <a href="/docs/v2.0.x/migrate_overview.md">MilvusDM</a>, an open-source tool specifically designed for Milvus data migration.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ summary: Import HDF5 files to Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You need to <a href="/docs/milvusdm_install.md">install MilvusDM</a> before migrating Milvus data.</p>
+    </button></h2><p>You need to <a href="/docs/v2.0.x/milvusdm_install.md">install MilvusDM</a> before migrating Milvus data.</p>
 <h2 id="1-Download-YAML-file" class="common-anchor-header">1. Download YAML file<button data-href="#1-Download-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,14 +153,14 @@ summary: Import HDF5 files to Milvus.
     </button></h2><ul>
 <li>If you are interested in migrating data in other forms into Milvus,
 <ul>
-<li>Learn how to <a href="/docs/f2m.md">Migrate Data from Faiss to Milvus</a>.</li>
+<li>Learn how to <a href="/docs/v2.0.x/f2m.md">Migrate Data from Faiss to Milvus</a>.</li>
 </ul></li>
 <li>If you are looking for information about how to migrate data from Milvus 1.x to Milvus 2.0,
 <ul>
-<li>Learn <a href="/docs/m2m.md">version migration</a>.</li>
+<li>Learn <a href="/docs/v2.0.x/m2m.md">version migration</a>.</li>
 </ul></li>
 <li>If you are interested in learning more about the data migration tool,
 <ul>
-<li>Read the overview of <a href="/docs/migrate_overview.md">MilvusDM</a>.</li>
+<li>Read the overview of <a href="/docs/v2.0.x/migrate_overview.md">MilvusDM</a>.</li>
 </ul></li>
 </ul>

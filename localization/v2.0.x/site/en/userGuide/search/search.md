@@ -20,7 +20,7 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to search entities with Milvus.</p>
-<p>A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. By specifying a <a href="/docs/boolean.md">boolean expression</a> that filters the scalar field or the primary key field, you can perform a <a href="/docs/hybridsearch.md">hybrid search</a> or even a search with <a href="/docs/timetravel.md">Time Travel</a>.</p>
+<p>A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. By specifying a <a href="/docs/v2.0.x/boolean.md">boolean expression</a> that filters the scalar field or the primary key field, you can perform a <a href="/docs/v2.0.x/hybridsearch.md">hybrid search</a> or even a search with <a href="/docs/v2.0.x/timetravel.md">Time Travel</a>.</p>
 <p>The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined.</p>
 <h2 id="Load-collection" class="common-anchor-header">Load collection<button data-href="#Load-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -143,11 +143,11 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
     <tbody>
     <tr>
         <td><code translate="no">metric_type</code></td>
-        <td>Metrics used to measure similarity of vectors. See <a href="/docs/metric.md">Simlarity Metrics</a> for more information.</td>
+        <td>Metrics used to measure similarity of vectors. See <a href="/docs/v2.0.x/metric.md">Simlarity Metrics</a> for more information.</td>
     </tr>
     <tr>
         <td><code translate="no">params</code></td>
-        <td>Search parameter(s) specific to the index. See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>Search parameter(s) specific to the index. See <a href="/docs/v2.0.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -169,11 +169,11 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
     </tr>
     <tr>
         <td><code translate="no">metric_type</code></td>
-        <td>Metrics used to measure similarity of vectors. See <a href="/docs/metric.md">Simlarity Metrics</a> for more information.</td>
+        <td>Metrics used to measure similarity of vectors. See <a href="/docs/v2.0.x/metric.md">Simlarity Metrics</a> for more information.</td>
     </tr>
     <tr>
         <td><code translate="no">params</code></td>
-        <td>Search parameter(s) specific to the index. See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>Search parameter(s) specific to the index. See <a href="/docs/v2.0.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -212,7 +212,7 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
     <tr>
         <td><code translate="no">searchParam</code></td>
         <td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+    <td>See <a href="/docs/v2.0.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -233,7 +233,7 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
   <tr>
         <td><code translate="no">Params</code></td>
         <td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+    <td>See <a href="/docs/v2.0.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -268,7 +268,7 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Search vectors with Milvus. To search in a specific <a href="/docs/glossary.md#Partition">partition</a>, specify the list of partition names.</p>
+    </button></h2><p>Search vectors with Milvus. To search in a specific <a href="/docs/v2.0.x/glossary.md#Partition">partition</a>, specify the list of partition names.</p>
 <p>Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as <code translate="no">Strong</code>, meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -344,7 +344,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
     </tr>
   <tr>
         <td><code translate="no">param</code></td>
-        <td>Search parameter(s) specific to the index. See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>Search parameter(s) specific to the index. See <a href="/docs/v2.0.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     <tr>
         <td><code translate="no">limit</code></td>
@@ -352,7 +352,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
     </tr>
   <tr>
         <td><code translate="no">expr</code></td>
-        <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+        <td>Boolean expression used to filter attribute. See <a href="/docs/v2.0.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">partition_names</code> (optional)</td>
@@ -406,7 +406,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
     </tr>
     <tr>
         <td><code translate="no">expr</code> (optional)</td>
-        <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+        <td>Boolean expression used to filter attribute. See <a href="/docs/v2.0.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code> (optional)</td>
@@ -441,7 +441,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
   <tr>
         <td><code translate="no">expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.0.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code></td>
@@ -512,7 +512,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
   <tr>
         <td><code translate="no">Expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.0.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -615,9 +615,9 @@ System.out.<span class="hljs-built_in">println</span>(wrapperSearch.getFieldData
     </button></h2><ul>
 <li><p>Learn more basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/query.md">Query vectors</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
-<li><a href="/docs/timetravel.md">Search with Time Travel</a></li>
+<li><a href="/docs/v2.0.x/query.md">Query vectors</a></li>
+<li><a href="/docs/v2.0.x/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.0.x/timetravel.md">Search with Time Travel</a></li>
 </ul></li>
 <li><p>Explore API references for Milvus SDKs:</p>
 <ul>

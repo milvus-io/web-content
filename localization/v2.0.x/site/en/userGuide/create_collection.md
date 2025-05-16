@@ -20,9 +20,9 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to create a collection in Milvus.</p>
-<p>A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition <code translate="no">_default</code>. See <a href="/docs/glossary.md#Collection">Glossary - Collection</a> for more information.</p>
-<p>The following example builds a two-<a href="/docs/glossary.md#Sharding">shard</a> collection named <code translate="no">book</code>, with a primary key field named <code translate="no">book_id</code>, an <code translate="no">INT64</code> scalar field named <code translate="no">word_count</code>, and a two-dimensional, floating-point vector field named <code translate="no">book_intro</code>. Real applications will likely use much higher dimensional vectors than the example.</p>
-<p>Milvus supports setting consistency level while creating a collection (only on PyMilvus currently). In this example, the consistency level of the collection is set as <code translate="no">Strong</code>, meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. By default, a collection created without specifying the consistency level is set with <code translate="no">Bounded</code> consistency level, under which Milvus reads a less updated data view (usually several seconds earlier) when a search or query request comes. Besides collection creation, you can also set the consistency level specifically for <a href="/docs/search.md">search</a> or <a href="/docs/query.md">query</a>  (only on PyMilvus currently). The consistency level set in search or query requests overwrites the one set while creating the collection. Therefore, we recommend setting the consistency level during a search or query. For other consistency level supported by Milvus, see <a href="https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md">Guarantee Timestamp in Search Requests</a>.</p>
+<p>A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition <code translate="no">_default</code>. See <a href="/docs/v2.0.x/glossary.md#Collection">Glossary - Collection</a> for more information.</p>
+<p>The following example builds a two-<a href="/docs/v2.0.x/glossary.md#Sharding">shard</a> collection named <code translate="no">book</code>, with a primary key field named <code translate="no">book_id</code>, an <code translate="no">INT64</code> scalar field named <code translate="no">word_count</code>, and a two-dimensional, floating-point vector field named <code translate="no">book_intro</code>. Real applications will likely use much higher dimensional vectors than the example.</p>
+<p>Milvus supports setting consistency level while creating a collection (only on PyMilvus currently). In this example, the consistency level of the collection is set as <code translate="no">Strong</code>, meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. By default, a collection created without specifying the consistency level is set with <code translate="no">Bounded</code> consistency level, under which Milvus reads a less updated data view (usually several seconds earlier) when a search or query request comes. Besides collection creation, you can also set the consistency level specifically for <a href="/docs/v2.0.x/search.md">search</a> or <a href="/docs/v2.0.x/query.md">query</a>  (only on PyMilvus currently). The consistency level set in search or query requests overwrites the one set while creating the collection. Therefore, we recommend setting the consistency level during a search or query. For other consistency level supported by Milvus, see <a href="https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md">Guarantee Timestamp in Search Requests</a>.</p>
 <h2 id="Prepare-Schema" class="common-anchor-header">Prepare Schema<button data-href="#Prepare-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ title: ''
       </svg>
     </button></h2><div class="alert note">
     <ul>
-        <li><a href="/docs/manage_connection.md">Connecting to Milvus server</a> before any operation.</li>
+        <li><a href="/docs/v2.0.x/manage_connection.md">Connecting to Milvus server</a> before any operation.</li>
         <li>The collection to create must contain a primary key field and a vector field. INT64 is the only supported data type for the primary key field in current release of Milvus.</li>
     </ul>
 </div>
@@ -165,7 +165,7 @@ schema := &amp;entity.Schema{
     <tbody>
         <tr>
             <td><code translate="no">FieldSchema</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="/docs/schema.md">Schema</a> for more information.</td>
+            <td>Schema of the fields within the collection to create. Refer to <a href="/docs/v2.0.x/schema.md">Schema</a> for more information.</td>
             <td>N/A</td>
         </tr>
         <tr>
@@ -216,7 +216,7 @@ schema := &amp;entity.Schema{
         </tr>
         <tr>
             <td><code translate="no">CollectionSchema</code></td>
-        <td>Schema of the collection to create. Refer to <a href="/docs/schema.md">Schema</a> for more information.</td>
+        <td>Schema of the collection to create. Refer to <a href="/docs/v2.0.x/schema.md">Schema</a> for more information.</td>
         <td>N/A</td>
         </tr>
         <tr>
@@ -257,7 +257,7 @@ schema := &amp;entity.Schema{
         </tr>
         <tr>
             <td><code translate="no">Fields</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="/docs/schema.md">Schema</a> for more information.</td>
+            <td>Schema of the fields within the collection to create. Refer to <a href="/docs/v2.0.x/schema.md">Schema</a> for more information.</td>
             <td>N/A</td>
         </tr>
         <tr>
@@ -325,7 +325,7 @@ schema := &amp;entity.Schema{
         <tr>
             <td><code translate="no">fields</code></td>
             <td>Schema of the filed and the collection to create.</td>
-            <td>Refer to <a href="/docs/schema.md">Schema</a> for more information.</td>
+            <td>Refer to <a href="/docs/v2.0.x/schema.md">Schema</a> for more information.</td>
         </tr>
         <tr>
             <td><code translate="no">data_type</code></td>
@@ -602,10 +602,10 @@ collection = <span class="hljs-title class_">Collection</span>(
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/insert_data.md">Insert data into Milvus</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.0.x/insert_data.md">Insert data into Milvus</a></li>
+<li><a href="/docs/v2.0.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.0.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.0.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.0.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

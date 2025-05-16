@@ -61,27 +61,27 @@ In current release, all parameters take effect only after Milvus restarts.
   <tr>
     <td>
         <ul>
-            <li><a href="/docs/configure_etcd.md">etcd</a></li>
-            <li><a href="/docs/configure_minio.md">MinIO or S3</a></li>
-            <li><a href="/docs/configure_pulsar.md">Pulsar</a></li>
-            <li><a href="/docs/configure_rocksmq.md">RocksMQ</a></li>
+            <li><a href="/docs/v2.0.x/configure_etcd.md">etcd</a></li>
+            <li><a href="/docs/v2.0.x/configure_minio.md">MinIO or S3</a></li>
+            <li><a href="/docs/v2.0.x/configure_pulsar.md">Pulsar</a></li>
+            <li><a href="/docs/v2.0.x/configure_rocksmq.md">RocksMQ</a></li>
         </ul>
     </td>
     <td>
         <ul>
-            <li><a href="/docs/configure_rootcoord.md">Root coord</a></li>
-            <li><a href="/docs/configure_proxy.md">Proxy</a></li>
-            <li><a href="/docs/configure_querycoord.md">Query coord</a></li>
-            <li><a href="/docs/configure_querynode.md">Query node</a></li>
-            <li><a href="/docs/configure_indexcoord.md">Index coord</a></li>
-            <li><a href="/docs/configure_indexnode.md">Index node</a></li>
-            <li><a href="/docs/configure_datacoord.md">Data coord</a></li>
-            <li><a href="/docs/configure_datanode.md">Data node</a></li>
-            <li><a href="/docs/configure_localstorage.md">Local storage</a></li>
-            <li><a href="/docs/configure_log.md">Log</a></li>
-            <li><a href="/docs/configure_messagechannel.md">Message channel</a></li>
-            <li><a href="/docs/configure_common.md">Common</a></li>
-            <li><a href="/docs/configure_knowhere.md">Knowhere</a></li>
+            <li><a href="/docs/v2.0.x/configure_rootcoord.md">Root coord</a></li>
+            <li><a href="/docs/v2.0.x/configure_proxy.md">Proxy</a></li>
+            <li><a href="/docs/v2.0.x/configure_querycoord.md">Query coord</a></li>
+            <li><a href="/docs/v2.0.x/configure_querynode.md">Query node</a></li>
+            <li><a href="/docs/v2.0.x/configure_indexcoord.md">Index coord</a></li>
+            <li><a href="/docs/v2.0.x/configure_indexnode.md">Index node</a></li>
+            <li><a href="/docs/v2.0.x/configure_datacoord.md">Data coord</a></li>
+            <li><a href="/docs/v2.0.x/configure_datanode.md">Data node</a></li>
+            <li><a href="/docs/v2.0.x/configure_localstorage.md">Local storage</a></li>
+            <li><a href="/docs/v2.0.x/configure_log.md">Log</a></li>
+            <li><a href="/docs/v2.0.x/configure_messagechannel.md">Message channel</a></li>
+            <li><a href="/docs/v2.0.x/configure_common.md">Common</a></li>
+            <li><a href="/docs/v2.0.x/configure_knowhere.md">Knowhere</a></li>
         </ul>
     </td>
   </tr>
@@ -101,14 +101,14 @@ In current release, all parameters take effect only after Milvus restarts.
     <td>Performance tuning</td>
     <td>
         <ul>
-            <li><a href="/docs/configure_querynode.md#queryNode.gracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
-            <li><a href="/docs/configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoord.segment.maxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoord.segment.sealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
-            <li><a href="/docs/configure_datanode.md#dataNode.flush.insertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
-            <li><a href="/docs/configure_querycoord.md#queryCoord.autoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
-            <li><a href="/docs/configure_querycoord.md#queryCoord.autoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
-            <li><a href="/docs/configure_localstorage.md#localStorage.enabled"><code translate="no">localStorage.enabled</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_querynode.md#queryNode.gracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_datacoord.md#dataCoord.segment.maxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_datacoord.md#dataCoord.segment.sealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_datanode.md#dataNode.flush.insertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_querycoord.md#queryCoord.autoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_querycoord.md#queryCoord.autoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_localstorage.md#localStorage.enabled"><code translate="no">localStorage.enabled</code></a></li>
         </ul>
     </td>
   </tr>
@@ -116,11 +116,11 @@ In current release, all parameters take effect only after Milvus restarts.
     <td>Data and meta</td>
     <td>
         <ul>
-            <li><a href="/docs/configure_common.md#common.retentionDuration"><code translate="no">common.retentionDuration</code></a></li>
-            <li><a href="/docs/configure_rocksmq.md#rocksmq.retentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoord.enableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoord.enableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoord.gc.dropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_common.md#common.retentionDuration"><code translate="no">common.retentionDuration</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_rocksmq.md#rocksmq.retentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_datacoord.md#dataCoord.enableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_datacoord.md#dataCoord.enableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_datacoord.md#dataCoord.gc.dropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
         </ul>
     </td>
   </tr>
@@ -128,11 +128,11 @@ In current release, all parameters take effect only after Milvus restarts.
     <td>Administration</td>
     <td>
         <ul>
-            <li><a href="/docs/configure_log.md#log.level"><code translate="no">log.level</code></a></li>
-            <li><a href="/docs/configure_log.md#log.file.rootPath"><code translate="no">log.file.rootPath</code></a></li>
-            <li><a href="/docs/configure_log.md#log.file.maxAge"><code translate="no">log.file.maxAge</code></a></li>
-            <li><a href="/docs/configure_minio.md#minio.accessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
-            <li><a href="/docs/configure_minio.md#minio.secretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_log.md#log.level"><code translate="no">log.level</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_log.md#log.file.rootPath"><code translate="no">log.file.rootPath</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_log.md#log.file.maxAge"><code translate="no">log.file.maxAge</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_minio.md#minio.accessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
+            <li><a href="/docs/v2.0.x/configure_minio.md#minio.secretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
         </ul>
     </td>
   </tr>
@@ -184,11 +184,11 @@ $ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span>
     </button></h2><ul>
 <li><p>If you want to learn how to monitor the Milvus services and create alerts:</p>
 <ul>
-<li>Learn <a href="/docs/monitor.md">Monitor Milvus 2.0 with Prometheus Operator on Kubernetes</a></li>
-<li>Learn <a href="/docs/visualize.md">Visualize Milvus Metrics in Grafana</a>.</li>
+<li>Learn <a href="/docs/v2.0.x/monitor.md">Monitor Milvus 2.0 with Prometheus Operator on Kubernetes</a></li>
+<li>Learn <a href="/docs/v2.0.x/visualize.md">Visualize Milvus Metrics in Grafana</a>.</li>
 </ul></li>
 <li><p>If you are looking for instructions on how to allocate resources:</p>
 <ul>
-<li><a href="/docs/allocate.md#standalone">Allocate Resources on Kubernetes</a></li>
+<li><a href="/docs/v2.0.x/allocate.md#standalone">Allocate Resources on Kubernetes</a></li>
 </ul></li>
 </ul>
