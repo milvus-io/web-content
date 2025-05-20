@@ -43,9 +43,11 @@ A **ListPrivilegeGroupsResp** object contains the following fields:
 ## Example
 
 ```java
-import io.milvus.v2.client.ConnectConfig
-import io.milvus.v2.client.MilvusClientV2
-import io.milvus.v2.service.rbac.request.CreateRoleReq
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.PrivilegeGroup;
+import io.milvus.v2.service.rbac.request.ListPrivilegeGroupsReq;
+import io.milvus.v2.service.rbac.response.ListPrivilegeGroupsResp;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -59,6 +61,10 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 ListPrivilegeGroupsReq listPrivilegeGroupsReq = ListPrivilegeGroupsReq.builder()
         .build();
         
-client.listPrivilegeGroups(listPrivilegeGroupsReq);
+ListPrivilegeGroupsResp resp = client.listPrivilegeGroups(listPrivilegeGroupsReq);
+List<PrivilegeGroup> groups = resp.getPrivilegeGroups();
+for (PrivilegeGroup group : groups) {
+    System.out.println(group.getGroupName() + group.getPrivileges());
+}
 ```
 

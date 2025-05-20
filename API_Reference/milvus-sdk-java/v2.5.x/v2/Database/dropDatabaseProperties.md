@@ -1,17 +1,17 @@
-# alterDatabaseProperties()
+# dropDatabaseProperties()
 
-This operation alters a database's properties. 
+This operation resets the database properties to their default values.
 
 ```java
-public Void alterDatabaseProperties(AlterDatabasePropertiesReq request)
+public Void dropDatabaseProperties(DropDatabasePropertiesReq request)
 ```
 
 ## Request Syntax
 
 ```java
-alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
+dropDatabaseProperties(DropDatabasePropertiesReq.builder()
     .databaseName(String databaseName)
-    .properties(Map<String, String> properties)
+    .propertyKeys(List<String> propertyKeys)
     .build()
 )
 ```
@@ -22,7 +22,7 @@ alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
 
     The name of the database.
 
-- `properties(Map<String, String> properties)`
+- `propertyKeys(List<String propertyKeys>)`
 
     The properties of the database, such as replica number, resource groups. Possible database properties are as follows:
 
@@ -65,7 +65,7 @@ alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.database.request.AlterDatabasePropertiesReq;
+import io.milvus.v2.service.database.request.DropDatabasePropertiesReq;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -75,13 +75,14 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Alter database properties
-Map<String, String> properties = new HashMap<>();
-properties.put("database.replica.number", "1");
-AlterDatabasePropertiesReq alterDatabasePropertiesReq = AlterDatabasePropertiesReq.builder()
+// 2. Drop database properties
+List<String> propertyKeys = new ArrayList<>();
+propertyKeys.add("database.replica.number");
+
+DropDatabasePropertiesReq dropDatabasePropertiesReq = DropDatabasePropertiesReq.builder()
         .databaseName(databaseName)
-        .properties(properties)
+        .propertyKeys(propertyKeys)
         .build();
-client.alterDatabaseProperties(alterDatabaseReq);
+client.dropDatabaseProperties(alterDatabaseReq);
 ```
 

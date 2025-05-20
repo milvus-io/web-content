@@ -148,7 +148,19 @@ You can choose between a quick setup or a customized setup as follows:
     The quick setup collection has two fields: the primary and vector fields. It also allows the insertion of undefined fields and their values in key-value pairs in a dynamic field.
 
     ```java
-    // quickly create a collection
+    import io.milvus.v2.client.ConnectConfig;
+    import io.milvus.v2.client.MilvusClientV2;
+    import io.milvus.v2.service.collection.request.CreateCollectionReq;
+    
+    // 1. Set up a client
+    ConnectConfig connectConfig = ConnectConfig.builder()
+            .uri("http://localhost:19530")
+            .token("root:Milvus")
+            .build();
+            
+    MilvusClientV2 client = new MilvusClientV2(connectConfig);
+    
+    // 2. Quickly create a collection
     CreateCollectionReq createCollectionReq = CreateCollectionReq.builder()
             .collectionName(collectionName)
             .dimension(dim)
@@ -162,7 +174,22 @@ You can choose between a quick setup or a customized setup as follows:
     For a customized setup, create the schema and index parameters beforehand. 
 
     ```java
-    // create a collection with schema, when indexParams is specified, it will create index as well
+    import io.milvus.v2.client.ConnectConfig;
+    import io.milvus.v2.client.MilvusClientV2;
+    import io.milvus.v2.common.DataType;
+    import io.milvus.v2.common.IndexParam;
+    import io.milvus.v2.service.collection.request.AddFieldReq;
+    import io.milvus.v2.service.collection.request.CreateCollectionReq;
+    
+    // 1. Set up a client
+    ConnectConfig connectConfig = ConnectConfig.builder()
+            .uri("http://localhost:19530")
+            .token("root:Milvus")
+            .build();
+            
+    MilvusClientV2 client = new MilvusClientV2(connectConfig);
+    
+    // 2. Create a collection with schema, when indexParams is specified, it will create index as well
     CreateCollectionReq.CollectionSchema collectionSchema = client.createSchema();
     collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
     collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());

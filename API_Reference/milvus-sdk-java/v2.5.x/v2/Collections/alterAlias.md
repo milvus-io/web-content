@@ -59,7 +59,19 @@ alterAlias(AlterAliasReq.builder()
 ## Example
 
 ```java
-// alter the alias for collection "test"
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.utility.request.AlterAliasReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Alter the alias for collection "test"
 AlterAliasReq alterAliasReq = AlterAliasReq.builder()
         .collectionName("test")
         .alias("test_alias2")

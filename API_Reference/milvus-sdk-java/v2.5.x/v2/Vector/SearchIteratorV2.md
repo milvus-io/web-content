@@ -1,61 +1,72 @@
-# searchIterator()
+# SearchIteratorV2()
 
-This method returns a search iterator to iterate search results.
+This operation creates an iterator for you to iterate over the search results. It is useful, especially when the search result contains a large volume of data.
 
 ```java
-public SearchIterator searchIterator(SearchIteratorReq request)
+public SearchIteratorV2 searchIteratorV2(SearchIteratorReqV2 request)
 ```
 
 ## Request Syntax
 
 ```java
-searchIterator(SearchIteratorReq.builder()
-        .collectionName(String collectionName)
-        .databaseName(String databaseName)
-        .outputFields(List<String> outputFields)
-        .expr(String expr)
-        .batchSize(long size)
-        .vectorFieldName(String vectorFieldName)
-        .vectors(List<BaseVector> vectors)
-        .params(String params)
-        .topK(int topk)
-        .metricType(IndexParam.MetricType metricType)
-        .consistencyLevel(ConsistencyLevel consistencyLevel)
-        .roundDecimal(int decimal)
-        .ignoreGrowing(boolean ignoreGrwing)
-        .groupByFieldName(String fieldName)
-        .build());
+searchIteratorV2(SearchIteratorReqV2.builder()
+    .databaseName(String databaseName)
+    .collectionName(String collectionName)
+    .partitionNames(List<String> partitionNames)
+    .metricType(IndexParam.MetricType)
+    .vectorFieldName(String vectorFieldName)
+    .topK(int topK)
+    .filter(String filter)
+    .outputFields(List<String> outputFields)
+    .vectors(List<BaseVector> vectors)
+    .roundDecimal(int roundDecimal)
+    .searchParams(Map<String, Object> searchParams)
+    .consistencyLevel(ConsistencyLevel)
+    .ignoreGrowing(boolean ignoreGrowing)
+    .groupByFieldName(String groupbyFieldName)
+    .batchSize(long batchSize)
+    .externalFilterFunc(Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc)
+    .build()
+)
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The database to which the collection belongs. You can ignore it if the database is the default.
 
 - `collectionName(String collectionName)`
 
     The name of an existing collection.
 
-- `databaseName(String databaseName)`
+- `partitionNames(List<String> partitionNames)`
 
-    The database to which the collection belongs. You can ignore it if the database is the default.
+    A list of target partition names. The search scope is limited to the designated partitions if specified.
+
+- `metricType(IndexParam.MetricType)`
+
+    The metric type used during the vector search. For more information, refer to [Metric Types](https://milvus.io/docs/metric.md).
+
+- `vectorFieldName(String vectorFieldName)`
+
+    The name of the target vector field.
+
+- `topK(int topk)`
+
+    The top-K value, which indicates the number of entities to return.
+
+- `filter(String filter)`
+
+    A scalar filtering condition to filter matching entities. 
+
+    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Filtering](https://milvus.io/docs/boolean.md). 
 
 - `outputFields(List<String> outputFields)`
 
     A list of field names to include in each entity in return.
 
     The value defaults to **None**. If left unspecified, all fields in the collection are selected as the output fields.
-
-- `expr(String expr)`
-
-    A scalar filtering condition to filter matching entities. 
-
-    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
-
-- `batchSize(long size)`
-
-    A value to define the number of entities returned per batch.
-
-- `vectorFieldName(String vectorFieldName)`
-
-    The target vector field name for which an ANN search will be conducted.
 
 - `vectors(List<BaseVector> vectors)`
 
@@ -96,13 +107,13 @@ searchIterator(SearchIteratorReq.builder()
        </tr>
     </table>
 
-- `params(String params)`
+- `roundDecimal(int decimal)`
 
-    A JSON format string for extra parameters.
+How many digits are reserved after the decimal point.
 
-- `topK(int topk)`
+- `searchParams(Map<String, Object> searchParams)`
 
-    The topk value.
+A JSON format string for extra serach parameters.
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
@@ -120,33 +131,37 @@ searchIterator(SearchIteratorReq.builder()
 
     </div>
 
-- `roundDecimal(int decimal)`
-
-    How many digits are reserved after the decimal point.
-
 - `ignoreGrowing(boolean ignoreGrwing)`
 
-    Ignore growing segments or not.
+Ignore growing segments or not.
 
 - `groupByFieldName(String fieldName)`
 
-    Sets the field name to do grouping for results.
+Sets the field name to do grouping for results.
+
+- `batchSize(long size)`
+
+A value to define the number of entities returned per batch.
+
+- `externalFilterFunc(Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc)`
+
+    A list of external filter functions, used to further filter the search results.
 
 **RETURN TYPE:**
 
-*SearchIterator*
+*SearchIteratorV2*
 
 **RETURNS:**
 
-A *SearchIterator* object to iterate search results, which offers the following methods:
+A *SearchIteratorV2* object to iterate search results, which offers the following methods:
 
 - `List<QueryResultsWrapper.RowRecord> next()`
 
-    Return a batch of results.
+    Returns a batch of results.
 
 - `close()`
 
-    Release the cache results.
+    Releases the cache results.
 
 **EXCEPTIONS:**
 
@@ -157,14 +172,17 @@ A *SearchIterator* object to iterate search results, which offers the following 
 ## Example
 
 ```java
-import io.milvus.orm.iterator.SearchIterator;
-import io.milvus.response.QueryResultsWrapper;
+import io.milvus.orm.iterator.SearchIteratorV2;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.common.ConsistencyLevel;
 import io.milvus.v2.common.IndexParam;
-import io.milvus.v2.service.vector.request.SearchIteratorReq;
+import io.milvus.v2.service.vector.request.SearchIteratorReqV2;
 import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+import java.util.*;
+import java.util.function.Function;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -174,33 +192,49 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Iterator search
+// 2. Prepare inputs
 List<Float> vector = generateFloatVector();
-SearchIterator searchIterator = client.searchIterator(SearchIteratorReq.builder()
+
+Map<String,Object> extraParams = new HashMap<>();
+extraParams.put("radius",15.0);
+
+Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc = (List<SearchResp.SearchResult> src)->{
+    List<SearchResp.SearchResult> newRes = new ArrayList<>();
+    for (SearchResp.SearchResult res : src) {
+        long id = (long)res.getId();
+        if (id%2 == 0) {
+            newRes.add(res);
+        }
+    }
+    return newRes;
+};
+
+// 3. Iterator search
+SearchIteratorV2 searchIterator = client.searchIteratorV2(SearchIteratorReqV2.builder()
         .collectionName("test")
         .outputFields(Lists.newArrayList("vector"))
         .batchSize(50L)
         .vectorFieldName("vector")
         .vectors(Collections.singletonList(new FloatVec(vector)))
-        .expr("id > 100")
-        .params("{\"range_filter\": 15.0, \"radius\": 20.0}")
+        .filter("id > 100")
+        .searchParams(extraParams)
         .topK(300)
         .metricType(IndexParam.MetricType.L2)
         .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .externalFilterFunc(externalFilterFunc)
         .build());
 
-System.out.println("SearchIteratorV1 results:");
+System.out.println("SearchIteratorV2 results:");
 while (true) {
-    List<QueryResultsWrapper.RowRecord> res = searchIterator.next();
+    List<SearchResp.SearchResult> res = searchIterator.next();
     if (res.isEmpty()) {
         System.out.println("Search iteration finished, close");
         searchIterator.close();
         break;
     }
 
-    for (QueryResultsWrapper.RowRecord record : res) {
+    for (SearchResp.SearchResult record : res) {
         System.out.println(record);
     }
 }
 ```
-

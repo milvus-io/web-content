@@ -52,11 +52,23 @@ alterCollectionProperties(AlterCollectionPropertiesReq.builder()
 ## Example
 
 ```java
-// alter the `collection.ttl.seconds` property
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.AlterCollectionPropertiesReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Alter the `collection.ttl.seconds` property
 Map<String, String> properties = new HashMap<>()
 properties.put("collection.ttl.seconds", "86400")
 
-AlterCollectionFieldReq alterCollectionFieldReq = AlterCollectionFieldReq.builder()
+AlterCollectionPropertiesReq alterCollectionFieldReq = AlterCollectionPropertiesReq.builder()
         .collectionName("test")
         .properties(properties)
         .build();

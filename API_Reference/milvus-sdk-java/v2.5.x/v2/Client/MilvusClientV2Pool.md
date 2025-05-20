@@ -120,9 +120,9 @@ Read the description in the MilvusClientV2 page.
 ## Examples
 
 ```java
-import io.milvus.v2.client.ConnectConfig
-import io.milvus.pool.PoolConfig
-import io.milvus.pool.MilvusClientV2Pool
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.pool.PoolConfig;
+import io.milvus.pool.MilvusClientV2Pool;
 
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
