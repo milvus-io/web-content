@@ -15,7 +15,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
 
 Modern retrieval models typically use a single embedding to represent text or images. ColBERT, however, is a neural model that utilizes a list of embeddings for each data instance and employs a "MaxSim" operation to calculate the similarity between two texts. Beyond textual data, figures, tables, and diagrams also contain rich information, which is often disregarded in text-based information retrieval.
 
-![](../../../images/colpali_formula.png)
+![](../../../assets/colpali_formula.png)
 
 MaxSim function compares a query with a document (what you're searching in) by looking at their token embeddings. For each word in the query, it picks the most similar word from the document (using cosine similarity or squared L2 distance) and sums these maximum similarities across all words in the query
 

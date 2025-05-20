@@ -941,12 +941,6 @@
             "id": "embed-with-gemini.md",
             "order": 14,
             "children": []
-          },
-          {
-            "label": "EmbedAnything",
-            "id": "build_RAG_with_milvus_and_embedAnything.md",
-            "order": 15,
-            "children": []
           }
         ]
       },
@@ -2019,6 +2013,12 @@
             "label": "BentoML",
             "id": "integrate_with_bentoml.md",
             "order": 5,
+            "children": []
+          },
+          {
+            "label": "EmbedAnything",
+            "id": "build_RAG_with_milvus_and_embedAnything.md",
+            "order": 15,
             "children": []
           }
         ]
