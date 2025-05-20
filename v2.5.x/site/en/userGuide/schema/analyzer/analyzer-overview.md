@@ -144,7 +144,24 @@ const result = await client.run_analyzer({
 ```
 
 ```go
-// go
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []string{"An efficient system relies on a robust analyzer to correctly process text for various applications."}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(string(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash
@@ -580,6 +597,18 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 
     ```go
     analyzerParams := map[string]any{"type": "english"}
+
+    bs, _ := json.Marshal(analyzerParams)
+    texts := []string{"Milvus simplifies text analysis for search."}
+    option := milvusclient.NewRunAnalyzerOption(texts).
+        WithAnalyzerParams(string(bs))
+    
+    result, err := client.RunAnalyzer(ctx, option)
+    if err != nil {
+        fmt.Println(err.Error())
+        // handle error
+    }
+    
     ```
 
     ```bash
@@ -687,6 +716,17 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
             "type": "stop",
             "stop_words": []string{"of", "to"},
         }}}
+        
+    bs, _ := json.Marshal(analyzerParams)
+    texts := []string{"Milvus provides flexible, customizable analyzers for robust text processing."}
+    option := milvusclient.NewRunAnalyzerOption(texts).
+        WithAnalyzerParams(string(bs))
+    
+    result, err := client.RunAnalyzer(ctx, option)
+    if err != nil {
+        fmt.Println(err.Error())
+        // handle error
+    }
     ```
 
     ```bash
