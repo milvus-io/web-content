@@ -53,12 +53,25 @@ alterIndexProperties(AlterIndexPropertiesReq.builder()
 ## Example
 
 ```java
-// alter the `mmap.enabled` property
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.index.request.AlterIndexPropertiesReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Alter the `mmap.enabled` property
 Map<String, String> properties = new HashMap<>()
 properties.put("mmap.enabled", "true")
 
 AlterIndexPropertiesReq alterIndexPropertiesReq = AlterIndexPropertiesReq.builder()
         .collectionName("test")
+        .indexName("vector")
         .properties(properties)
         .build();
 client.alterIndexProperties(alterCollectionFieldReq)

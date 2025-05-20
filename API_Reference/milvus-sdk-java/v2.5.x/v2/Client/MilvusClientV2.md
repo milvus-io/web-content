@@ -141,8 +141,8 @@ ConnectConfig.builder()
 ## Examples
 
 ```java
-import io.milvus.v2.client.ConnectConfig
-import io.milvus.v2.client.MilvusClientV2
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
 
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")

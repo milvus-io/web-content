@@ -49,11 +49,24 @@ A **GetPartitionStatsResp** object containing collected statistics on the specif
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.partition.request.GetPartitionStatsReq;
+import io.milvus.v2.service.partition.response.GetPartitionStatsResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Get partition stats
 GetPartitionStatsReq getPartitionStatsReq = GetPartitionStatsReq.builder()
         .collectionName("test")
         .partitionName("default")
         .build();
-        
 GetPartitionStatsResp getPartitionStatsResp = client.getPartitionStats(getPartitionStatsReq);
 ```
 

@@ -48,15 +48,22 @@ dropCollection(DropCollectionReq.builder()
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
 // drop a collection: test
 DropCollectionReq dropCollectionReq = DropCollectionReq.builder()
         .collectionName("test")
         .build();
 client.dropCollection(dropCollectionReq);
-// check if dropped
-client.hasCollection(HasCollectionReq.builder()
-        .collectionName("test")
-        .build());
-// false
 ```
 

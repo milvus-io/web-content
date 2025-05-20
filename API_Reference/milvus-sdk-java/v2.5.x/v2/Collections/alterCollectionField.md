@@ -71,7 +71,19 @@ alterCollectionField(AlterCollectionFieldReq.builder()
 ## Example
 
 ```java
-// alter the `max_length` property of a VarChar field named `varchar`
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.AlterCollectionFieldReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Alter the `max_length` property of a VarChar field named `varchar`
 Map<String, String> properties = new HashMap<>()
 properties.put("max_length", "512")
 

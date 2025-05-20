@@ -104,12 +104,23 @@ A **DescribeResourceGroupResp** object contains the following fields:
 ## Example
 
 ```java
-// prepare requests    
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.resourcegroup.request.DescribeResourceGroupReq;
+import io.milvus.v2.service.resourcegroup.response.DescribeResourceGroupResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Describe the resource group  
 DescribeResourceGroupReq describeResourceGroupReq = DescribeResourceGroupReq.builder()
     .groupName("rg1")
     .build();
-
-// list resource groups
 DescribeResourceGroupResp group = client.describeResourceGroup(describeResourceGroupReq);
 ```
 

@@ -39,9 +39,9 @@ removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 ## Example
 
 ```java
-import io.milvus.v2.client.ConnectConfig
-import io.milvus.v2.client.MilvusClientV2
-import io.milvus.v2.service.rbac.request.CreateRoleReq
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.request.RemovePrivilegesFromGroupReq;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -51,7 +51,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. remove privileges from group
+// 2. Remove privileges from a group
 List<String> privileges = new ArrayList<>();
 privileges.add("Query", "Search")
 
