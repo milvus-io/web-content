@@ -109,16 +109,39 @@ analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"asciif
 </div>
 
 ```python
+from pymilvus import (
+    MilvusClient,
+)
+
+client = MilvusClient(uri="http://localhost:19530")
+
 # Sample text to analyze
 sample_text = "Café Möller serves crème brûlée and piñatas."
 
 # Run the standard analyzer with the defined configuration
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
-print(result)
+result = client.run_analyzer(sample_text, analyzer_params)
+print("Standard analyzer output:", result)
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.RunAnalyzerReq;
+import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+ConnectConfig config = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build();
+MilvusClientV2 client = new MilvusClientV2(config);
+
+List<String> texts = new ArrayList<>();
+texts.add("Café Möller serves crème brûlée and piñatas.");
+
+RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
 ```javascript

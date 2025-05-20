@@ -119,11 +119,28 @@ result = client.run_analyzer(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.RunAnalyzerReq;
+import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+List<String> texts = new ArrayList<>();
+texts.add("An efficient system relies on a robust analyzer to correctly process text for various applications.");
+
+RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
 ```javascript
-// javascript
+// javascrip# Sample text to analyze
+const text = "An efficient system relies on a robust analyzer to correctly process text for various applications."
+
+// Run analyzer
+const result = await client.run_analyzer({
+    text,
+    analyzer_params
+});
 ```
 
 ```go
@@ -533,6 +550,18 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     ```java
     Map<String, Object> analyzerParamsBuiltin = new HashMap<>();
     analyzerParamsBuiltin.put("type", "english");
+
+    List<String> texts = new ArrayList<>();
+    texts.add("Milvus simplifies text ana
+    
+    lysis for search.");
+    
+    RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+            .texts(texts)
+            .analyzerParams(analyzerParams)
+            .build());
+    List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
+    
     ```
 
     ```javascript
@@ -540,6 +569,13 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     const analyzerParamsBuiltIn = {
       type: "english",
     };
+
+    const sample_text = "Milvus simplifies text analysis for search.";
+    const result = await client.run_analyzer({
+        text: sample_text, 
+        analyzer_params: analyzer_params_built_in
+    });
+    
     ```
 
     ```go
@@ -607,6 +643,15 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
                     }}
             )
     );
+    
+    List<String> texts = new ArrayList<>();
+    texts.add("Milvus provides flexible, customizable analyzers for robust text processing.");
+    
+    RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+            .texts(texts)
+            .analyzerParams(analyzerParams)
+            .build());
+    List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
     ```
 
     ```javascript
@@ -625,6 +670,11 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         },
       ],
     };
+    const sample_text = "Milvus provides flexible, customizable analyzers for robust text processing.";
+    const result = await client.run_analyzer({
+        text: sample_text, 
+        analyzer_params: analyzer_params_built_in
+    });
     ```
 
     ```go

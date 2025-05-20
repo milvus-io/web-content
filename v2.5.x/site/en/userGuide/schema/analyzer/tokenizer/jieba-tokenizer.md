@@ -152,12 +152,22 @@ analyzerParams = map[string]any{"type": "jieba", "dict": []any{"customDictionary
    </tr>
    <tr>
      <td><p><code>dict</code></p></td>
-     <td><p>A list of dictionaries that the analyzer will load as its vocabulary source. Built-in options:</p><ul><li><p><code>"_default_"</code>: Loads the engine's built‑in Simplified‑Chinese dictionary. For details, refer to <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code>"_extend_default_"</code>: Loads everything in <code>"_default_"</code> plus an additional Traditional‑Chinese supplement. For details, refer to <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>You can also mix the built‑in dictionary with any number of custom dictionaries. Example: <code>["_default_", "结巴分词器"]</code>.</p></li></ul></td>
+     <td><p>A list of dictionaries that the analyzer will load as its vocabulary source. Built-in options:</p>
+<ul>
+<li><p><code>"_default_"</code>: Loads the engine's built‑in Simplified‑Chinese dictionary. For details, refer to <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li>
+<li><p><code>"_extend_default_"</code>: Loads everything in <code>"_default_"</code> plus an additional Traditional‑Chinese supplement. For details, refer to <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p>
+<p>You can also mix the built‑in dictionary with any number of custom dictionaries. Example: <code>["_default_", "结巴分词器"]</code>.</p></li>
+</ul></td>
      <td><p><code>["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code>mode</code></p></td>
-     <td><p>The segmentation mode. Possible values:</p><ul><li><p><code>"exact"</code>: Tries to segment the sentence in the most precise manner, making it ideal for text analysis.</p></li><li><p><code>"search"</code>: Builds on exact mode by further breaking down long words to improve recall, making it suitable for search engine tokenization.</p><p>For more information, refer to <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li></ul></td>
+     <td><p>The segmentation mode. Possible values:</p>
+<ul>
+<li><p><code>"exact"</code>: Tries to segment the sentence in the most precise manner, making it ideal for text analysis.</p></li>
+<li><p><code>"search"</code>: Builds on exact mode by further breaking down long words to improve recall, making it suitable for search engine tokenization.</p>
+<p>For more information, refer to <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li>
+</ul></td>
      <td><p><code>"search"</code></p></td>
    </tr>
    <tr>
@@ -225,16 +235,39 @@ analyzerParams = map[string]any{"type": "jieba", "dict": []any{"结巴分词器"
 </div>
 
 ```python
+from pymilvus import (
+    MilvusClient,
+)
+
+client = MilvusClient(uri="http://localhost:19530")
+
 # Sample text to analyze
 sample_text = "milvus结巴分词器中文测试"
 
 # Run the standard analyzer with the defined configuration
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
-print(result)
+result = client.run_analyzer(sample_text, analyzer_params)
+print("Standard analyzer output:", result)
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.RunAnalyzerReq;
+import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+ConnectConfig config = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build();
+MilvusClientV2 client = new MilvusClientV2(config);
+
+List<String> texts = new ArrayList<>();
+texts.add("milvus结巴分词器中文测试");
+
+RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
 ```javascript
