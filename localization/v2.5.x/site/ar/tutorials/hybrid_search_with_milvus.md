@@ -3,6 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: البحث الهجين مع ميلفوس
 title: البحث الهجين مع ميلفوس
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">البحث الهجين مع ميلفوس<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -18,24 +20,22 @@ title: البحث الهجين مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>إذا كنت ترغب في تجربة التأثير النهائي لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى https://demos.milvus.io/hybrid-search/</p>
+    </button></h1><p>إذا كنت ترغب في تجربة التأثير النهائي لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>في هذا البرنامج التعليمي، سنشرح في هذا البرنامج التعليمي كيفية إجراء بحث هجين باستخدام <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> ونموذج <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3</a>. يمكن لنموذج BGE-M3 تحويل النص إلى متجهات كثيفة ومتناثرة. يدعم Milvus تخزين كلا النوعين من المتجهات في مجموعة واحدة، مما يسمح بالبحث الهجين الذي يعزز أهمية النتائج.</p>
 <p>يدعم Milvus طرق الاسترجاع الكثيفة والمتناثرة والهجينة:</p>
 <ul>
 <li>الاسترجاع الكثيف: يستخدم السياق الدلالي لفهم المعنى الكامن وراء الاستعلامات.</li>
-<li>الاسترجاع المتناثر: يركّز على مطابقة النص للعثور على النتائج بناءً على مصطلحات محددة، أي ما يعادل البحث في النص الكامل.</li>
-<li>الاسترجاع الهجين: يجمع بين النهجين الكثيف والمتناثر، حيث يلتقط السياق الكامل والكلمات الرئيسية المحددة للحصول على نتائج بحث شاملة.</li>
+<li>الاسترجاع المتناثر: يركز على مطابقة الكلمات المفتاحية للعثور على النتائج بناءً على مصطلحات محددة، أي ما يعادل البحث في النص الكامل.</li>
+<li>الاسترجاع الهجين: يجمع بين النهجين الكثيف والمتناثر، حيث يلتقط السياق الكامل والكلمات المفتاحية المحددة للحصول على نتائج بحث شاملة.</li>
 </ul>
 <p>من خلال دمج هذه الأساليب، يوازن البحث الهجين في ميلفوس بين أوجه التشابه الدلالي والمعجمي، مما يحسّن من الملاءمة الإجمالية لنتائج البحث. سيتناول هذا الدفتر عملية إعداد واستخدام استراتيجيات الاسترجاع هذه، مع تسليط الضوء على فعاليتها في سيناريوهات البحث المختلفة.</p>
-<h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
+<h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">تحميل مجموعة البيانات</h3><p>لتوضيح البحث، نحتاج إلى مجموعة من المستندات. لنستخدم مجموعة بيانات Quora Duplicate Questions ونضعها في الدليل المحلي.</p>
 <p>مصدر مجموعة البيانات: <a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">أول إصدار لمجموعة بيانات Quora: أزواج الأسئلة</a></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Run this cell to download the dataset</span>
-$ wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Run this cell to download the dataset</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Load-and-Prepare-Data" class="common-anchor-header">تحميل وإعداد البيانات</h3><p>سنقوم بتحميل مجموعة البيانات وإعداد مجموعة صغيرة للبحث.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -58,7 +58,7 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
 <h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">استخدام نموذج BGE-M3 للتضمين</h3><p>يمكن لنموذج BGE-M3 تضمين النصوص كمتجهات كثيفة ومتناثرة.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> milvus_model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
 dense_dim = ef.dim[<span class="hljs-string">&quot;dense&quot;</span>]
@@ -70,9 +70,9 @@ docs_embeddings = ef(docs)
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
 <h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">إعداد مجموعة ميلفوس والفهرس</h3><p>سنقوم بإعداد مجموعة Milvus وإنشاء مؤشرات لحقول المتجهات.</p>
-<div class="note alert">
+<div class="alert alert-info">
 <ul>
-<li>يعد تعيين الفهرس كملف محلي، على سبيل المثال &quot;./milvus.db&quot;، الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>يعد تعيين الفهرس كملف محلي، على سبيل المثال "./milvus.db"، الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام uri الخادم، على سبيل المثال http://localhost:19530، كـ uri الخاص بك.</li>
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، قم بتعديل uri والرمز المميز، اللذين يتوافقان مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> في Zilliz Cloud.</li>
 </ul>
@@ -146,40 +146,40 @@ query_embeddings = ef([query])
 <li><code translate="no">sparse_search</code>: البحث عبر حقل متجه متناثر فقط</li>
 <li><code translate="no">hybrid_search</code>: البحث عبر كلا الحقلين المتجهين الكثيف والمتجه مع إعادة ترتيب مرجحة</li>
 </ul>
-<pre><code translate="no" class="language-python"><span class="hljs-function"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-title">import</span> (<span class="hljs-params">
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     AnnSearchRequest,
     WeightedRanker,
-</span>)
+)
 
 
-def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, query_dense_embedding, limit=<span class="hljs-number">10</span></span>):
-    search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">dense_search</span>(<span class="hljs-params">col, query_dense_embedding, limit=<span class="hljs-number">10</span></span>):
+    search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
     res = col.search(
-        [<span class="hljs-meta">query_dense_embedding</span>],
+        [query_dense_embedding],
         anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
         limit=limit,
         output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
         param=search_params,
     )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 
 
-<span class="hljs-function">def <span class="hljs-title">sparse_search</span>(<span class="hljs-params">col, query_sparse_embedding, limit=<span class="hljs-number">10</span></span>):
-    search_params</span> = {
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">sparse_search</span>(<span class="hljs-params">col, query_sparse_embedding, limit=<span class="hljs-number">10</span></span>):
+    search_params = {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
         <span class="hljs-string">&quot;params&quot;</span>: {},
     }
     res = col.search(
-        [<span class="hljs-meta">query_sparse_embedding</span>],
+        [query_sparse_embedding],
         anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         limit=limit,
         output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
         param=search_params,
     )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 
 
-<span class="hljs-function">def <span class="hljs-title">hybrid_search</span>(<span class="hljs-params">
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">hybrid_search</span>(<span class="hljs-params">
     col,
     query_dense_embedding,
     query_sparse_embedding,
@@ -187,27 +187,27 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
     dense_weight=<span class="hljs-number">1.0</span>,
     limit=<span class="hljs-number">10</span>,
 </span>):
-    dense_search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+    dense_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
     dense_req = AnnSearchRequest(
-        [<span class="hljs-meta">query_dense_embedding</span>], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
+        [query_dense_embedding], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
     )
     sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
     sparse_req = AnnSearchRequest(
-        [<span class="hljs-meta">query_sparse_embedding</span>], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
+        [query_sparse_embedding], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
     )
     rerank = WeightedRanker(sparse_weight, dense_weight)
     res = col.hybrid_search(
-        [<span class="hljs-meta">sparse_req, dense_req</span>], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
+        [sparse_req, dense_req], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
     )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
 <p>دعونا نجري ثلاث عمليات بحث مختلفة بدوال محددة:</p>
-<pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
-hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
+<pre><code translate="no" class="language-python">dense_results = dense_search(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = sparse_search(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][[<span class="hljs-number">0</span>]])
+hybrid_results = hybrid_search(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][[<span class="hljs-number">0</span>]],
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )

@@ -21,7 +21,7 @@ title: Gambaran Umum Perangking Ulang
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam ranah pencarian informasi dan AI generatif, reranker adalah alat penting yang mengoptimalkan urutan hasil dari pencarian awal. Perangking ulang berbeda dari <a href="/docs/id/embeddings.md">model penyematan</a> tradisional dengan mengambil kueri dan dokumen sebagai masukan dan secara langsung mengembalikan skor kemiripan, bukan penyematan. Skor ini menunjukkan relevansi antara kueri masukan dan dokumen.</p>
+    </button></h1><p>Dalam ranah pencarian informasi dan AI generatif, reranker adalah alat penting yang mengoptimalkan urutan hasil dari pencarian awal. Perangking ulang berbeda dari <a href="/docs/id/v2.4.x/embeddings.md">model penyematan</a> tradisional dengan mengambil kueri dan dokumen sebagai masukan dan secara langsung mengembalikan skor kemiripan, bukan penyematan. Skor ini menunjukkan relevansi antara kueri masukan dan dokumen.</p>
 <p>Perangking ulang sering digunakan setelah pencarian tahap pertama, biasanya dilakukan melalui teknik vektor Approximate Nearest Neighbor (ANN). Meskipun pencarian ANN efisien dalam mengambil sekumpulan hasil yang berpotensi relevan, mereka mungkin tidak selalu memprioritaskan hasil dalam hal kedekatan semantik aktual dengan kueri. Di sini, reranker digunakan untuk mengoptimalkan urutan hasil menggunakan analisis kontekstual yang lebih dalam, yang sering kali memanfaatkan model pembelajaran mesin tingkat lanjut seperti BERT atau model berbasis Transformer lainnya. Dengan melakukan hal ini, rerankers dapat secara dramatis meningkatkan akurasi dan relevansi hasil akhir yang disajikan kepada pengguna.</p>
 <p>Pustaka model PyMilvus mengintegrasikan fungsi peringkat ulang untuk mengoptimalkan urutan hasil yang dikembalikan dari pencarian awal. Setelah Anda mengambil embedding terdekat dari Milvus, Anda dapat memanfaatkan alat perangkingan ulang ini untuk menyaring hasil pencarian untuk meningkatkan ketepatan hasil pencarian.</p>
 <table>
@@ -57,7 +57,7 @@ title: Gambaran Umum Perangking Ulang
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam contoh ini, kami mendemonstrasikan cara memberi peringkat ulang hasil pencarian menggunakan perankah <a href="/docs/id/rerankers-bge.md">BGE</a> berdasarkan kueri tertentu.</p>
+    </button></h2><p>Dalam contoh ini, kami mendemonstrasikan cara memberi peringkat ulang hasil pencarian menggunakan perankah <a href="/docs/id/v2.4.x/rerankers-bge.md">BGE</a> berdasarkan kueri tertentu.</p>
 <p>Untuk menggunakan perankingan ulang dengan pustaka <a href="https://github.com/milvus-io/milvus-model">model PyMilvus</a>, mulailah dengan menginstal pustaka model PyMilvus bersama dengan subpaket model yang berisi semua utilitas perankingan ulang yang diperlukan:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -115,7 +115,7 @@ documents = [
 <p><strong>Komponen dataset</strong>:</p>
 <ul>
 <li><code translate="no">doc_id</code>: Pengenal unik untuk setiap dokumen.</li>
-<li><code translate="no">doc_vector</code>: Sematan vektor yang mewakili dokumen. Untuk panduan tentang cara membuat penyematan, lihat <a href="/docs/id/embeddings.md">Penyematan</a>.</li>
+<li><code translate="no">doc_vector</code>: Sematan vektor yang mewakili dokumen. Untuk panduan tentang cara membuat penyematan, lihat <a href="/docs/id/v2.4.x/embeddings.md">Penyematan</a>.</li>
 <li><code translate="no">doc_text</code>: Konten teks dari dokumen.</li>
 </ul>
 <h3 id="Preparations" class="common-anchor-header">Persiapan</h3><p>Sebelum memulai pencarian kemiripan, Anda perlu membuat koneksi dengan Milvus, membuat koleksi, dan menyiapkan serta memasukkan data ke dalam koleksi tersebut. Cuplikan kode berikut ini mengilustrasikan langkah-langkah awal ini.</p>

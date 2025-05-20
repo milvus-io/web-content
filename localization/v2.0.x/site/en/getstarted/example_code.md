@@ -7,7 +7,7 @@ group: example_code.md
 summary: Get started with Milvus faster using this Python example code.
 title: ''
 ---
-<div class="tab-wrapper"><a href="/docs/example_code.md" class='active '>Python</a><a href="/docs/example_code_node.md" class=''>Node.js</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.0.x/example_code.md" class='active '>Python</a><a href="/docs/v2.0.x/example_code_node.md" class=''>Node.js</a></div>
 <h1 id="Run-Milvus-using-Python" class="common-anchor-header">Run Milvus using Python<button data-href="#Run-Milvus-using-Python" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,9 +41,9 @@ title: ''
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/install_standalone-docker.md">Milvus 2.0.0</a></li>
+<li><a href="/docs/v2.0.x/install_standalone-docker.md">Milvus 2.0.0</a></li>
 <li>Python 3 (3.7.1 or later)</li>
-<li><a href="/docs/install-pymilvus.md">PyMilvus 2.0.0</a></li>
+<li><a href="/docs/v2.0.x/install-pymilvus.md">PyMilvus 2.0.0</a></li>
 </ul>
 <h2 id="Download-example-code" class="common-anchor-header">Download example code<button data-href="#Download-example-code" class="anchor-icon" translate="no">
       <svg translate="no"

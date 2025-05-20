@@ -19,6 +19,72 @@ title: Notes de mise à jour
         ></path>
       </svg>
     </button></h1><p>Découvrez les nouveautés de Milvus ! Cette page résume les nouvelles fonctionnalités, les améliorations, les problèmes connus et les corrections de bogues de chaque version. Vous trouverez dans cette section les notes de version pour chaque version publiée après la v2.5.0. Nous vous conseillons de consulter régulièrement cette page pour prendre connaissance des mises à jour.</p>
+<h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Version de Milvus</th><th>Version du SDK Python</th><th>Version du SDK Node.js</th><th>Version du SDK Java</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.11</td><td>2.5.8</td><td>2.5.8</td><td>2.5.8</td></tr>
+</tbody>
+</table>
+<p>Nous sommes ravis d'annoncer la sortie de Milvus 2.5.11 ! Cette version introduit de nouvelles fonctionnalités puissantes telles que la capacité multi-analyseur et la prise en charge élargie des tokenizers (Jieba, Lindera, ICU, Language Identifier). Nous avons également apporté plusieurs améliorations, notamment la mise à jour du pool de threads pour le chargement dynamique des segments et l'optimisation du filtrage des suppressions lors de l'importation de binlogs. Les principales corrections de bogues concernent les problèmes potentiels de chute de segments, les échecs de recherche BM25 et les erreurs de filtrage des statistiques JSON.</p>
+<p>Nous vous encourageons à mettre à jour vers la version 2.5.11 pour profiter de ces améliorations et corrections !</p>
+<h3 id="Features" class="common-anchor-header">Fonctionnalités</h3><ul>
+<li>Ajout de la possibilité de configurer plusieurs analyseurs (tokenizers) pour la prise en charge de plusieurs langues et de sélectionner l'analyseur approprié en fonction de l'instruction des données d'entrée<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
+<li>Amélioration de la fonctionnalité de l'analyseur BM25<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
+<li>Introduction d'une API <code translate="no">run_analyzer</code> pour les essais à blanc afin d'aider à analyser les résultats de la tokenisation. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble de l'analyseur</a>.</li>
+<li>Tokenizers<ul>
+<li>Ajout de la prise en charge de la personnalisation des paramètres du tokenizer Jieba.</li>
+<li>Ajout de la prise en charge du tokenizer Lindera. Pour plus d'informations, reportez-vous à <a href="/docs/fr/lindera-tokenizer.md">Lindera</a>.</li>
+<li>Ajout de la prise en charge du tokenizer ICU. Pour plus d'informations, voir <a href="/docs/fr/icu-tokenizer.md">ICU</a>.</li>
+<li>Ajout d'un tokenizer Language Identifier pour la détection des langues.</li>
+</ul></li>
+<li>Filtres<ul>
+<li>Extension de la prise en charge des langues pour le filtre intégré de mots vides. Pour plus d'informations, reportez-vous à <a href="/docs/fr/stop-filter.md">Stop</a>.</li>
+<li>Ajout d'un filtre <code translate="no">remove_punct</code> pour supprimer les signes de ponctuation. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/removepunct-filter.md">Supprimer les signes de ponctuation</a>.</li>
+<li>Ajout d'un filtre <code translate="no">regex</code> pour le filtrage de texte basé sur des motifs. Pour plus d'informations, voir <a href="/docs/fr/regex-filter.md">Regex.</a></li>
+</ul></li>
+</ul></li>
+<li>Ajout de la prise en charge de la modification de la capacité maximale des champs de tableau<a href="https://github.com/milvus-io/milvus/pull/41406">(#41406</a>).</li>
+<li>Ajout de la prise en charge des expressions de plage binaire dans les index de chemin JSON<a href="https://github.com/milvus-io/milvus/pull/41317">(#41317</a>).</li>
+<li>Ajout de la prise en charge des types de correspondance infixe et suffixe dans les statistiques JSON<a href="https://github.com/milvus-io/milvus/pull/41388">(#41388</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Améliorations</h3><ul>
+<li>Activation des mises à jour dynamiques de la taille du pool de threads de chargement de segments<a href="https://github.com/milvus-io/milvus/pull/41549">(#41549</a>).</li>
+<li>Accélération du filtrage des suppressions lors de l'importation du binlog<a href="https://github.com/milvus-io/milvus/pull/41552">(#41552</a>).</li>
+<li>Ajout de paramètres de surveillance pour le ratio du filtre d'expression<a href="https://github.com/milvus-io/milvus/pull/41403">(#41403</a>).</li>
+<li>Ajout d'une option de configuration pour forcer la reconstruction des index à la dernière version<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>).</li>
+<li>Amélioration du message d'erreur pour la politique de liste<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368</a>).</li>
+<li>Adaptation de la gestion des traits d'union dans les en-têtes de métadonnées gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
+<li>Mise à jour de la version Go vers 1.24.1 pour corriger les CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Corrections de bogues</h3><ul>
+<li>Correction d'un problème où les segments pouvaient ne pas être correctement abandonnés lors de l'abandon d'une partition<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
+<li>Correction de l'insertion en masse pour utiliser la liste des champs d'entrée de l'exécuteur de fonction au lieu de la liste des champs du schéma<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561</a>).</li>
+<li>Correction des échecs de recherche BM25 survenant lorsque <code translate="no">avgdl</code> (longueur moyenne du document) est NaN<a href="https://github.com/milvus-io/milvus/pull/41503">(#41503</a>).</li>
+<li>Correction des étiquettes inexactes dans les métriques QueryNode<a href="https://github.com/milvus-io/milvus/pull/41422">(#41422</a>).</li>
+<li>Correction d'un problème où la création d'un index de statistiques JSON pouvait échouer si les données contenaient une carte vide<a href="https://github.com/milvus-io/milvus/pull/41506">(#41506</a>).</li>
+<li>Correction de l'API <code translate="no">AlterCollection</code> pour enregistrer correctement l'horodatage de la modification<a href="https://github.com/milvus-io/milvus/pull/41469">(#41469</a>).</li>
+<li>Correction d'une erreur de filtrage intermittente dans les statistiques JSON sous <code translate="no">ConjunctExpr</code> et amélioration de la logique de calcul du slot de tâche pour accélérer la construction des statistiques JSON<a href="https://github.com/milvus-io/milvus/pull/41458">(#41458</a>).</li>
+<li>Correction d'une fuite de l'oracle IDF dans le calcul des statistiques BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
+<li>Vérification que les sujets pré-créés sont vérifiés en premier lors de la validation du numéro du shard<a href="https://github.com/milvus-io/milvus/pull/41421">(#41421</a>).</li>
+<li>Correction d'un rapport erroné de blocage survenant dans les tests unitaires<a href="https://github.com/milvus-io/milvus/pull/41377">(#41377</a>).</li>
+</ul>
 <h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -197,7 +263,7 @@ title: Notes de mise à jour
 <tr><td>2.5.7</td><td>2.5.6</td><td>2.5.6</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>Nous sommes ravis d'annoncer la sortie de Milvus 2.5.7, marquée par la nouvelle fonctionnalité JSON Path Index. Celle-ci vous permet de construire des index inversés sur des colonnes dynamiques ou JSON afin d'améliorer de manière significative les performances des requêtes. Outre cette nouvelle fonctionnalité, nous avons apporté de nombreuses améliorations et corrections de bogues pour une meilleure fiabilité, une gestion plus fine des erreurs et une meilleure convivialité. Nous vous encourageons à effectuer la mise à niveau ou à l'essayer et, comme toujours, vos commentaires sont très appréciés car nous continuons à améliorer Milvus !</p>
+<p>Nous sommes ravis d'annoncer la sortie de Milvus 2.5.7, marquée par la nouvelle fonctionnalité JSON Path Index. Celle-ci vous permet de construire des index inversés sur des colonnes dynamiques ou JSON afin d'améliorer de manière significative les performances des requêtes. Parallèlement à cette nouvelle fonctionnalité, nous avons apporté de nombreuses améliorations et corrections de bogues pour une meilleure fiabilité, une gestion plus fine des erreurs et une plus grande facilité d'utilisation. Nous vous encourageons à effectuer la mise à niveau ou à l'essayer et, comme toujours, vos commentaires sont très appréciés car nous continuons à améliorer Milvus !</p>
 <h3 id="Features" class="common-anchor-header">Fonctionnalités</h3><ul>
 <li><strong>Index de chemin JSON</strong>: Pour répondre aux besoins des utilisateurs en matière de schémas dynamiques, Milvus 2.5.7 introduit la possibilité de créer des index sur les colonnes dynamiques et les colonnes JSON. Grâce à cette fonctionnalité, vous pouvez créer des index inversés pour des colonnes dynamiques ou des chemins JSON spécifiques, en contournant efficacement le processus de chargement JSON plus lent et en améliorant considérablement les performances des requêtes. Pour plus d'informations, voir <a href="/docs/fr/use-json-fields.md">Champ JSON</a>.</li>
 </ul>

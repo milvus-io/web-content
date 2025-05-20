@@ -37,14 +37,14 @@ title: 즉석에서 Milvus 구성
       </svg>
     </button></h2><p>다음 사항을 확인해야 합니다.</p>
 <ul>
-<li>Birdwatcher가 설치되어 있습니다. 자세한 내용은 <a href="/docs/ko/birdwatcher_install_guides.md">Birdwatcher 설치를</a> 참조하세요,</li>
+<li>Birdwatcher가 설치되어 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/birdwatcher_install_guides.md">Birdwatcher 설치를</a> 참조하세요,</li>
 <li>etcdctl이 설치되어 있습니다. 자세한 내용은 <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">etcd와 상호 작용하기를</a> 참조하세요.</li>
 <li>Python 클라이언트와 같은 다른 etcd 클라이언트가 설치되어 있습니다.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>이 가이드의 예제에서는 <code translate="no">proxy.minPasswordLength</code> 값을 <code translate="no">8</code> 으로 변경합니다. <a href="/docs/ko/dynamic_config.md#Applicable-configuration-items">해당</a> 키를 <a href="/docs/ko/dynamic_config.md#Applicable-configuration-items">적용 가능한 구성 항목에</a> 나열된 해당 키로 바꿀 수 있습니다.</li>
-<li>이 가이드의 예제에서는 Milvus의 루트 경로가 <code translate="no">by-dev</code> 로 가정합니다. 모든 구성은 <code translate="no">by-dev/config</code> 경로 아래에 나열됩니다. Milvus 루트 경로는 설치 방식에 따라 다릅니다. 헬름 차트를 사용하여 설치한 인스턴스의 경우 기본 루트 경로는 <code translate="no">by-dev</code> 이다. 루트 경로를 모르는 경우 <a href="/docs/ko/birdwatcher_usage_guides.md#Connect-to-etcd">etcd에 연결을</a> 참조한다.</li>
+<li>이 가이드의 예제에서는 <code translate="no">proxy.minPasswordLength</code> 값을 <code translate="no">8</code> 으로 변경합니다. <a href="/docs/ko/v2.4.x/dynamic_config.md#Applicable-configuration-items">해당</a> 키를 <a href="/docs/ko/v2.4.x/dynamic_config.md#Applicable-configuration-items">적용 가능한 구성 항목에</a> 나열된 해당 키로 바꿀 수 있습니다.</li>
+<li>이 가이드의 예제에서는 Milvus의 루트 경로가 <code translate="no">by-dev</code> 로 가정합니다. 모든 구성은 <code translate="no">by-dev/config</code> 경로 아래에 나열됩니다. Milvus 루트 경로는 설치 방식에 따라 다릅니다. 헬름 차트를 사용하여 설치한 인스턴스의 경우 기본 루트 경로는 <code translate="no">by-dev</code> 이다. 루트 경로를 모르는 경우 <a href="/docs/ko/v2.4.x/birdwatcher_usage_guides.md#Connect-to-etcd">etcd에 연결을</a> 참조한다.</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">구성 변경하기<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +203,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/system_configuration.md">시스템 구성에</a> 대해 자세히 알아보세요.</li>
-<li><a href="/docs/ko/configure_operator.md">Milvus Operator</a>, <a href="/docs/ko/configure-helm.md">Helm 차트</a> 및 <a href="/docs/ko/configure-docker.md">Docker를</a> 사용하여 설치된 Milvus를 구성하는 방법을 알아보세요.</li>
+<li><a href="/docs/ko/v2.4.x/system_configuration.md">시스템 구성에</a> 대해 자세히 알아보세요.</li>
+<li><a href="/docs/ko/v2.4.x/configure_operator.md">Milvus Operator</a>, <a href="/docs/ko/v2.4.x/configure-helm.md">Helm 차트</a> 및 <a href="/docs/ko/v2.4.x/configure-docker.md">Docker를</a> 사용하여 설치된 Milvus를 구성하는 방법을 알아보세요.</li>
 </ul>

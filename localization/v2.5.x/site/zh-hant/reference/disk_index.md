@@ -1,7 +1,7 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Milvus 中的磁碟索引機制。
+summary: Milvus 用於磁碟最佳化向量搜尋的磁碟索引機制。
 title: 磁碟上索引
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">磁碟上索引<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
@@ -19,7 +19,7 @@ title: 磁碟上索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本文介紹一種名為 DiskANN 的磁碟索引演算法。DiskANN 基於 Vamana 圖形，能夠在大型資料集中進行高效率的搜尋。</p>
+    </button></h1><p>本文將介紹 DiskANN，一種用於磁碟最佳化向量搜尋的磁碟上索引演算法。DiskANN 以 Vamana 圖形為基礎，在大型資料集中提供高效率的磁碟上向量搜尋。</p>
 <p>為了改善查詢效能，您可以為每個向量欄位<a href="/docs/zh-hant/index-vector-fields.md">指定索引類型</a>。</p>
 <div class="alert note"> 
 目前，一個向量欄位只支援一種索引類型。切換索引類型時，Milvus 會自動刪除舊索引。</div>
@@ -38,11 +38,11 @@ title: 磁碟上索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要使用 DiskANN，請注意</p>
+    </button></h2><p>要在 Milvus 中使用 DiskANN，請注意</p>
 <ul>
 <li>Milvus 實例在 Ubuntu 18.04.6 或更新版本上執行。</li>
 <li>Milvus 資料路徑應掛載至 NVMe SSD，以獲得完整效能：<ul>
-<li>對於 Milvus 獨立實例，資料路徑應該是實例執行容器中的<strong>/var/lib/milvus/data</strong>。</li>
+<li>對於 Milvus 獨立實例，資料路徑應該是實例執行所在容器中的<strong>/var/lib/milvus/data</strong>。</li>
 <li>對於 Milvus 叢集實例，資料路徑應該是 QueryNodes 和 IndexNodes 執行所在容器中的<strong>/var/lib/milvus/data</strong>。</li>
 </ul></li>
 </ul>

@@ -197,7 +197,7 @@ collection.<span class="hljs-title function_">drop_index</span>(index_name=<span
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

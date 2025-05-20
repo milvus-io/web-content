@@ -72,7 +72,7 @@ summary: 'Узнайте, как создать оповещение для се
         ></path>
       </svg>
     </button></h2><p>В данном руководстве рассматривается пример создания оповещения об использовании памяти компонентами Milvus. Для создания других типов оповещений, пожалуйста, настройте свои команды соответствующим образом. Если в процессе работы у вас возникнут какие-либо проблемы, спрашивайте в <a href="https://github.com/milvus-io/milvus/discussions">обсуждениях на Github</a> или заводите тему в <a href="https://discord.com/invite/8uyFbECzPX">Discord</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Предварительные условия</h3><p>В этом руководстве предполагается, что у вас установлена и настроена Grafana. Если нет, рекомендуем прочитать <a href="/docs/ru/monitor.md">руководство по мониторингу</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Предварительные условия</h3><p>В этом руководстве предполагается, что у вас установлена и настроена Grafana. Если нет, рекомендуем прочитать <a href="/docs/ru/v2.4.x/monitor.md">руководство по мониторингу</a>.</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Добавьте новый запрос</h3><p>Чтобы добавить оповещение об использовании памяти компонентами Milvus, отредактируйте панель Memory. Затем добавьте новый запрос с метрикой: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +120,13 @@ summary: 'Узнайте, как создать оповещение для се
       </svg>
     </button></h2><ul>
 <li>Если вам нужно начать мониторинг сервисов для Milvus:<ul>
-<li>Прочитайте <a href="/docs/ru/monitor.md">руководство по мониторингу</a></li>
-<li>Узнайте, как <a href="/docs/ru/visualize.md">визуализировать метрики мониторинга</a></li>
+<li>Прочитайте <a href="/docs/ru/v2.4.x/monitor.md">руководство по мониторингу</a></li>
+<li>Узнайте, как <a href="/docs/ru/v2.4.x/visualize.md">визуализировать метрики мониторинга</a></li>
 </ul></li>
 <li>Если вы создали оповещения об использовании памяти компонентами Milvus:<ul>
-<li>Узнайте, как <a href="/docs/ru/allocate.md#standalone">выделять ресурсы</a></li>
+<li>Узнайте, как <a href="/docs/ru/v2.4.x/allocate.md#standalone">выделять ресурсы</a></li>
 </ul></li>
 <li>Если вы ищете информацию о том, как масштабировать кластер Milvus:<ul>
-<li>Узнайте, <a href="/docs/ru/scaleout.md">как масштабировать кластер Milvus</a></li>
+<li>Узнайте, <a href="/docs/ru/v2.4.x/scaleout.md">как масштабировать кластер Milvus</a></li>
 </ul></li>
 </ul>

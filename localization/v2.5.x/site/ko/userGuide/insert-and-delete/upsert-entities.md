@@ -2,8 +2,8 @@
 id: upsert-entities.md
 title: 엔티티 삽입
 summary: >-
-  업서트 작업은 데이터 업데이트와 삽입 작업을 결합합니다. Milvus는 기본 키가 존재하는지 확인하여 업데이트 작업을 수행할지 삽입 작업을
-  수행할지 결정합니다. 이 섹션에서는 엔티티를 업서트하는 방법과 다양한 시나리오에서 업서트 작업의 구체적인 동작을 소개합니다.
+  업서트 작업은 데이터 업데이트와 삽입 작업을 결합합니다. Milvus는 기본 키가 존재하는지 확인하여 업데이트 또는 삽입 작업을 수행할지
+  여부를 결정합니다. 이 섹션에서는 엔티티를 업서트하는 방법과 다양한 시나리오에서 업서트 작업의 구체적인 동작을 소개합니다.
 ---
 <h1 id="Upsert-Entities" class="common-anchor-header">엔티티 삽입<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,7 +64,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 <a href="/docs/ko/create-collection-instantly.md#Quick-Setup">빠른 설정 방식으로</a> 만든 컬렉션에 엔티티를 삽입합니다. 이 방식으로 생성된 컬렉션에는 <strong>id와</strong> <strong>벡터라는</strong> 두 개의 필드만 있습니다. 또한 이 컬렉션에는 동적 필드가 활성화되어 있으므로 예제 코드의 엔티티에는 스키마에 정의되지 않은 <strong>color라는</strong> 필드가 포함되어 있습니다.</p>
+    </button></h2><p>이 섹션에서는 빠른 설정 방식으로 만든 컬렉션에 엔티티를 삽입합니다. 이 방식으로 생성된 컬렉션에는 <strong>id와</strong> <strong>벡터라는</strong> 두 개의 필드만 있습니다. 또한 이 컬렉션에는 동적 필드가 활성화되어 있으므로 예제 코드의 엔티티에는 스키마에 정의되지 않은 <strong>color라는</strong> 필드가 포함되어 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

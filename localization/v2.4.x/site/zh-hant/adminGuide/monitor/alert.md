@@ -72,7 +72,7 @@ summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
         ></path>
       </svg>
     </button></h2><p>本指南以建立 Milvus 元件記憶體使用警示為例。若要建立其他類型的警示，請相應調整您的指令。如果您在過程中遇到任何問題，請隨時到<a href="https://github.com/milvus-io/milvus/discussions">Github 討論區</a>詢問，或在<a href="https://discord.com/invite/8uyFbECzPX">Discord</a> 上開啟一個主題。</p>
-<h3 id="Prerequisites" class="common-anchor-header">先決條件</h3><p>本教學假設您已安裝和設定 Grafana。如果沒有，建議閱讀<a href="/docs/zh-hant/monitor.md">監控指南</a>。</p>
+<h3 id="Prerequisites" class="common-anchor-header">先決條件</h3><p>本教學假設您已安裝和設定 Grafana。如果沒有，建議閱讀<a href="/docs/zh-hant/v2.4.x/monitor.md">監控指南</a>。</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1.新增查詢</h3><p>要為 Milvus 元件的記憶體使用量新增警示，請編輯記憶體面板。然後，新增一個有 metric 的新查詢：<code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +120,13 @@ summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
       </svg>
     </button></h2><ul>
 <li>如果您需要開始監控 Milvus 的服務：<ul>
-<li>閱讀<a href="/docs/zh-hant/monitor.md">監控指南</a></li>
-<li>了解如何<a href="/docs/zh-hant/visualize.md">可視化監控指標</a></li>
+<li>閱讀<a href="/docs/zh-hant/v2.4.x/monitor.md">監控指南</a></li>
+<li>了解如何<a href="/docs/zh-hant/v2.4.x/visualize.md">可視化監控指標</a></li>
 </ul></li>
 <li>如果您已經為 Milvus 元件的記憶體使用創建了警報：<ul>
-<li>學習如何<a href="/docs/zh-hant/allocate.md#standalone">分配資源</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.4.x/allocate.md#standalone">分配資源</a></li>
 </ul></li>
 <li>如果您正在尋找關於如何擴展 Milvus 叢集的資訊：<ul>
-<li>了解如何<a href="/docs/zh-hant/scaleout.md">擴充 Milvus 叢集</a></li>
+<li>了解如何<a href="/docs/zh-hant/v2.4.x/scaleout.md">擴充 Milvus 叢集</a></li>
 </ul></li>
 </ul>

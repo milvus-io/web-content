@@ -45,9 +45,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>非構造化データ、エンベッディング、Milvus</span> </span></p>
 <p>Milvusは3つのデプロイメントモードを提供し、Jupyter Notebooksでのローカルプロトタイピングから数百億のベクトルを管理する大規模なKubernetesクラスタまで、幅広いデータスケールをカバーします：</p>
 <ul>
-<li>Milvus Liteは、アプリケーションに簡単に統合できるPythonライブラリです。Milvusの軽量版として、Jupyter Notebooksでの迅速なプロトタイピングや、リソースが限られたエッジデバイスでの実行に最適です。<a href="/docs/ja/milvus_lite.md">詳細は</a>こちら。</li>
-<li>Milvus Standaloneは、シングルマシンサーバーデプロイメントで、すべてのコンポーネントが単一のDockerイメージにバンドルされており、デプロイに便利です。詳細は<a href="/docs/ja/install_standalone-docker.md">こちら</a>。</li>
-<li>Milvus Distributedは、Kubernetesクラスタ上にデプロイすることができ、10億規模またはさらに大規模なシナリオ向けに設計されたクラウドネイティブなアーキテクチャを特徴としています。このアーキテクチャは、重要なコンポーネントの冗長性を保証します。<a href="/docs/ja/install_cluster-milvusoperator.md">詳細は</a>こちら。</li>
+<li>Milvus Liteは、アプリケーションに簡単に統合できるPythonライブラリです。Milvusの軽量版として、Jupyter Notebooksでの迅速なプロトタイピングや、リソースが限られたエッジデバイスでの実行に最適です。<a href="/docs/ja/v2.4.x/milvus_lite.md">詳細は</a>こちら。</li>
+<li>Milvus Standaloneは、シングルマシンサーバーデプロイメントで、すべてのコンポーネントが単一のDockerイメージにバンドルされており、デプロイに便利です。詳細は<a href="/docs/ja/v2.4.x/install_standalone-docker.md">こちら</a>。</li>
+<li>Milvus Distributedは、Kubernetesクラスタ上にデプロイすることができ、10億規模またはさらに大規模なシナリオ向けに設計されたクラウドネイティブなアーキテクチャを特徴としています。このアーキテクチャは、重要なコンポーネントの冗長性を保証します。<a href="/docs/ja/v2.4.x/install_cluster-milvusoperator.md">詳細は</a>こちら。</li>
 </ul>
 <h2 id="What-Makes-Milvus-so-Fast" class="common-anchor-header">Milvusは何が速いのか？<button data-href="#What-Makes-Milvus-so-Fast" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,14 +108,14 @@ summary: >-
       </svg>
     </button></h2><p>Milvusは様々なユースケースの要求に応えるため、様々なタイプの検索機能をサポートしています：</p>
 <ul>
-<li><a href="/docs/ja/single-vector-search.md#Basic-search">ANN検索</a>：クエリーベクトルに最も近い上位K個のベクトルを検索します。</li>
-<li><a href="/docs/ja/single-vector-search.md#Filtered-search">フィルタリング検索</a>：指定されたフィルタリング条件でANN検索を行います。</li>
-<li><a href="/docs/ja/single-vector-search.md#Range-search">範囲検索</a>：クエリーベクトルから指定した半径内のベクトルを検索します。</li>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a>複数のベクトルフィールドに基づいてANN検索を行います。</li>
+<li><a href="/docs/ja/v2.4.x/single-vector-search.md#Basic-search">ANN検索</a>：クエリーベクトルに最も近い上位K個のベクトルを検索します。</li>
+<li><a href="/docs/ja/v2.4.x/single-vector-search.md#Filtered-search">フィルタリング検索</a>：指定されたフィルタリング条件でANN検索を行います。</li>
+<li><a href="/docs/ja/v2.4.x/single-vector-search.md#Range-search">範囲検索</a>：クエリーベクトルから指定した半径内のベクトルを検索します。</li>
+<li><a href="/docs/ja/v2.4.x/multi-vector-search.md">ハイブリッド検索</a>複数のベクトルフィールドに基づいてANN検索を行います。</li>
 <li>キーワード検索BM25に基づいたキーワード検索を行います。</li>
-<li><a href="/docs/ja/reranking.md">再順位付け</a>追加条件または二次アルゴリズムに基づいて検索結果の順序を調整し、最初のANN検索結果を洗練させる。</li>
-<li><a href="/docs/ja/get-and-scalar-query.md#Get-Entities-by-ID">フェッチ</a>：主キーでデータを検索する。</li>
-<li><a href="/docs/ja/get-and-scalar-query.md#Use-Basic-Operators">クエリー</a>：特定の式を使用してデータを検索します。</li>
+<li><a href="/docs/ja/v2.4.x/reranking.md">再順位付け</a>追加条件または二次アルゴリズムに基づいて検索結果の順序を調整し、最初のANN検索結果を洗練させる。</li>
+<li><a href="/docs/ja/v2.4.x/get-and-scalar-query.md#Get-Entities-by-ID">フェッチ</a>：主キーでデータを検索する。</li>
+<li><a href="/docs/ja/v2.4.x/get-and-scalar-query.md#Use-Basic-Operators">クエリー</a>：特定の式を使用してデータを検索します。</li>
 </ul>
 <h2 id="Comprehensive-Feature-Set" class="common-anchor-header">包括的な機能セット<button data-href="#Comprehensive-Feature-Set" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -143,34 +143,34 @@ summary: >-
 </ul>
 <h3 id="Advanced-Data-Types" class="common-anchor-header">高度なデータ型</h3><p>Milvusはプリミティブなデータ型に加え、様々な高度なデータ型とそれぞれに適用可能な距離メトリクスをサポートしています。</p>
 <ul>
-<li><a href="/docs/ja/sparse_vector.md">疎ベクトル</a></li>
-<li><a href="/docs/ja/index-vector-fields.md">バイナリベクトル</a></li>
-<li><a href="/docs/ja/use-json-fields.md">JSONサポート</a></li>
-<li><a href="/docs/ja/array_data_type.md">配列のサポート</a></li>
-<li><a href="/docs/ja/metric.md">距離メトリクス</a></li>
+<li><a href="/docs/ja/v2.4.x/sparse_vector.md">疎ベクトル</a></li>
+<li><a href="/docs/ja/v2.4.x/index-vector-fields.md">バイナリベクトル</a></li>
+<li><a href="/docs/ja/v2.4.x/use-json-fields.md">JSONサポート</a></li>
+<li><a href="/docs/ja/v2.4.x/array_data_type.md">配列のサポート</a></li>
+<li><a href="/docs/ja/v2.4.x/metric.md">距離メトリクス</a></li>
 </ul>
 <h3 id="Acceleration" class="common-anchor-header">高速化</h3><ul>
-<li><p>検索アルゴリズム Milvusは調整可能なインデックスと検索アルゴリズムのセットをサポートしています。詳細は<a href="/docs/ja/index.md">インメモリインデックス</a>、<a href="/docs/ja/disk_index.md">オンディスクインデックス</a>、<a href="/docs/ja/gpu_index.md">GPUインデックスを</a>ご参照ください。</p></li>
-<li><p>パーティションとパーティションキー パーティションはMilvusコレクションのサブディビジョンです。検索パフォーマンスを向上させるために、パーティション・キーとしてスカラー・フィールドを選択できます。詳細は、<a href="/docs/ja/manage-partitions.md">Manage Partitions</a>and<a href="/docs/ja/use-partition-key.md">Use Partition Keyを</a>参照してください。</p></li>
-<li><p>調整可能な一貫性モデル 一定の時間にデータを書き込んだり読み込んだりする際に、すべてのMilvusノードまたはレプリカが同じデータビューを持つことを保証します。MilvusでANN検索を行う際、一貫性レベルを簡単に調整することができます。詳細は<a href="/docs/ja/consistency.md">一貫</a>性を参照。</p></li>
-<li><p>ハイスループット データインポート Milvusに大量のデータをインポートするには、ハイスループット データインポート ツールの使用をご検討ください。詳細は<a href="/docs/ja/prepare-source-data.md">ソースデータの準備と</a> <a href="/docs/ja/import-data.md">データのインポートを</a>ご参照ください。</p></li>
-<li><p>マルチテナンシー対応 Milvusでは、パーティションキー、クラスタリングキーなど、マルチテナンシーシナリオに対応した多くの機能を実装しています。詳細は<a href="/docs/ja/multi_tenancy.md">マルチテナント戦略を</a>ご参照ください。</p></li>
+<li><p>検索アルゴリズム Milvusは調整可能なインデックスと検索アルゴリズムのセットをサポートしています。詳細は<a href="/docs/ja/v2.4.x/index.md">インメモリインデックス</a>、<a href="/docs/ja/v2.4.x/disk_index.md">オンディスクインデックス</a>、<a href="/docs/ja/v2.4.x/gpu_index.md">GPUインデックスを</a>ご参照ください。</p></li>
+<li><p>パーティションとパーティションキー パーティションはMilvusコレクションのサブディビジョンです。検索パフォーマンスを向上させるために、パーティション・キーとしてスカラー・フィールドを選択できます。詳細は、<a href="/docs/ja/v2.4.x/manage-partitions.md">Manage Partitions</a>and<a href="/docs/ja/v2.4.x/use-partition-key.md">Use Partition Keyを</a>参照してください。</p></li>
+<li><p>調整可能な一貫性モデル 一定の時間にデータを書き込んだり読み込んだりする際に、すべてのMilvusノードまたはレプリカが同じデータビューを持つことを保証します。MilvusでANN検索を行う際、一貫性レベルを簡単に調整することができます。詳細は<a href="/docs/ja/v2.4.x/consistency.md">一貫</a>性を参照。</p></li>
+<li><p>ハイスループット データインポート Milvusに大量のデータをインポートするには、ハイスループット データインポート ツールの使用をご検討ください。詳細は<a href="/docs/ja/v2.4.x/prepare-source-data.md">ソースデータの準備と</a> <a href="/docs/ja/v2.4.x/import-data.md">データのインポートを</a>ご参照ください。</p></li>
+<li><p>マルチテナンシー対応 Milvusでは、パーティションキー、クラスタリングキーなど、マルチテナンシーシナリオに対応した多くの機能を実装しています。詳細は<a href="/docs/ja/v2.4.x/multi_tenancy.md">マルチテナント戦略を</a>ご参照ください。</p></li>
 </ul>
 <h3 id="Security-and-Authorization" class="common-anchor-header">セキュリティと認証</h3><ul>
-<li><p>調整可能な一貫性モデル 一定の時間にデータを書き込んだり読み込んだりする際に、すべてのMilvusノードやレプリカが同じビューを持つことを保証します。MilvusでANN検索を行う際、一貫性レベルを簡単に調整することができます。詳細は<a href="/docs/ja/consistency.md">一貫</a>性を参照してください。</p></li>
-<li><p>データの分離とリソース制御 マルチテナンシーシナリオでは、データの分離は基本的なセキュリティ要件です。Milvusはセキュリティ上の懸念を解決するためにいくつかの機能を実装しています。詳細は<a href="/docs/ja/resource_group.md">リソースグループの</a>管理と<a href="/docs/ja/clustering-compaction.md">クラスタリングコンパクションを</a>ご参照ください。</p></li>
+<li><p>調整可能な一貫性モデル 一定の時間にデータを書き込んだり読み込んだりする際に、すべてのMilvusノードやレプリカが同じビューを持つことを保証します。MilvusでANN検索を行う際、一貫性レベルを簡単に調整することができます。詳細は<a href="/docs/ja/v2.4.x/consistency.md">一貫</a>性を参照してください。</p></li>
+<li><p>データの分離とリソース制御 マルチテナンシーシナリオでは、データの分離は基本的なセキュリティ要件です。Milvusはセキュリティ上の懸念を解決するためにいくつかの機能を実装しています。詳細は<a href="/docs/ja/v2.4.x/resource_group.md">リソースグループの</a>管理と<a href="/docs/ja/v2.4.x/clustering-compaction.md">クラスタリングコンパクションを</a>ご参照ください。</p></li>
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">AIインテグレーション</h3><ul>
-<li><p>エンベッディングモデルの統合 エンベッディングモデルは非構造化データを高次元データ空間の数値表現に変換し、Milvusに格納できるようにします。現在、Python SDKであるPyMilvusにはいくつかの埋め込みモデルが統合されており、データをベクトル埋め込みに素早く変換することができます。詳細は<a href="/docs/ja/embeddings.md">エンベッディングの概要を</a>ご覧ください。</p></li>
-<li><p>再ランキングモデルの統合 情報検索や生成AIの領域では、再ランカーは最初の検索結果の順序を最適化する必須のツールです。PyMilvusは最初の検索から返される結果の順序を最適化するために、いくつかの再ランクモデルも統合しています。詳細は<a href="/docs/ja/rerankers-overview.md">リランカーの概要を</a>参照してください。</p></li>
-<li><p>LangChainとその他のAIツールの統合 GenAI時代において、LangChainのようなツールはアプリケーション開発者から注目を集めています。Milvusは通常、そのようなツールのコアコンポーネントとしてベクターストアの役割を果たします。Milvusをお気に入りのAIツールに統合する方法については、<a href="/docs/ja/integrate_with_openai.md">統合と</a> <a href="/docs/ja/build-rag-with-milvus.md">チュートリアルを</a>ご参照ください。</p></li>
+<li><p>エンベッディングモデルの統合 エンベッディングモデルは非構造化データを高次元データ空間の数値表現に変換し、Milvusに格納できるようにします。現在、Python SDKであるPyMilvusにはいくつかの埋め込みモデルが統合されており、データをベクトル埋め込みに素早く変換することができます。詳細は<a href="/docs/ja/v2.4.x/embeddings.md">エンベッディングの概要を</a>ご覧ください。</p></li>
+<li><p>再ランキングモデルの統合 情報検索や生成AIの領域では、再ランカーは最初の検索結果の順序を最適化する必須のツールです。PyMilvusは最初の検索から返される結果の順序を最適化するために、いくつかの再ランクモデルも統合しています。詳細は<a href="/docs/ja/v2.4.x/rerankers-overview.md">リランカーの概要を</a>参照してください。</p></li>
+<li><p>LangChainとその他のAIツールの統合 GenAI時代において、LangChainのようなツールはアプリケーション開発者から注目を集めています。Milvusは通常、そのようなツールのコアコンポーネントとしてベクターストアの役割を果たします。Milvusをお気に入りのAIツールに統合する方法については、<a href="/docs/ja/v2.4.x/integrate_with_openai.md">統合と</a> <a href="/docs/ja/v2.4.x/build-rag-with-milvus.md">チュートリアルを</a>ご参照ください。</p></li>
 </ul>
 <h3 id="Tools-and-Ecosystem" class="common-anchor-header">ツールとエコシステム</h3><ul>
 <li><p>Attu Attuはオールインワンの直感的なGUIで、Milvusとそのデータを管理することができます。詳細は<a href="https://github.com/zilliztech/attu">Attu</a>リポジトリをご参照ください。</p></li>
-<li><p>Birdwatcher BirdwatcherはMilvusのデバッグツールです。etcdに接続することで、Milvusシステムの状態を確認したり、その場で設定を行うことができます。詳細は<a href="/docs/ja/birdwatcher_overview.md">BirdWatcherを</a>ご参照ください。</p></li>
-<li><p>PromethusとGrafanaの統合 PrometheusはKubernetesのためのオープンソースのシステム監視とアラートツールキットです。Grafanaはオープンソースの可視化スタックで、あらゆるデータソースと接続できます。PromethusとGrafanaを監視サービスプロバイダとして使用することで、分散したMilvusのパフォーマンスを視覚的に監視することができます。詳細については、<a href="/docs/ja/monitor.md">監視サービスのデプロイを</a>参照してください。</p></li>
-<li><p>Milvusバックアップ Milvusバックアップは、Milvusデータのバックアップとリストアを可能にするツールです。CLIとAPIの両方を提供し、様々なアプリケーションシナリオに対応します。詳細は<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご参照ください。</p></li>
-<li><p>Milvus Capture Data Change (CDC) Milvus-CDCはMilvusインスタンス内の増分データをキャプチャして同期し、ソースインスタンスとターゲットインスタンス間でシームレスに転送することでビジネスデータの信頼性を確保し、増分バックアップやディザスタリカバリを容易に行うことができます。詳細は<a href="/docs/ja/milvus-cdc-overview.md">Milvus CDCを</a>ご参照ください。</p></li>
-<li><p>Milvusコネクタ Milvusは、MilvusをApache Sparkなどのサードパーティツールとシームレスに統合するためのコネクタ群を計画しています。現在、Spark Connectorを使用することで、MilvusのデータをApache Sparkに供給し、機械学習処理を行うことができます。詳細は<a href="/docs/ja/integrate_with_spark.md">Spark-Milvus Connectorを</a>ご参照ください。</p></li>
+<li><p>Birdwatcher BirdwatcherはMilvusのデバッグツールです。etcdに接続することで、Milvusシステムの状態を確認したり、その場で設定を行うことができます。詳細は<a href="/docs/ja/v2.4.x/birdwatcher_overview.md">BirdWatcherを</a>ご参照ください。</p></li>
+<li><p>PromethusとGrafanaの統合 PrometheusはKubernetesのためのオープンソースのシステム監視とアラートツールキットです。Grafanaはオープンソースの可視化スタックで、あらゆるデータソースと接続できます。PromethusとGrafanaを監視サービスプロバイダとして使用することで、分散したMilvusのパフォーマンスを視覚的に監視することができます。詳細については、<a href="/docs/ja/v2.4.x/monitor.md">監視サービスのデプロイを</a>参照してください。</p></li>
+<li><p>Milvusバックアップ Milvusバックアップは、Milvusデータのバックアップとリストアを可能にするツールです。CLIとAPIの両方を提供し、様々なアプリケーションシナリオに対応します。詳細は<a href="/docs/ja/v2.4.x/milvus_backup_overview.md">Milvus Backupを</a>ご参照ください。</p></li>
+<li><p>Milvus Capture Data Change (CDC) Milvus-CDCはMilvusインスタンス内の増分データをキャプチャして同期し、ソースインスタンスとターゲットインスタンス間でシームレスに転送することでビジネスデータの信頼性を確保し、増分バックアップやディザスタリカバリを容易に行うことができます。詳細は<a href="/docs/ja/v2.4.x/milvus-cdc-overview.md">Milvus CDCを</a>ご参照ください。</p></li>
+<li><p>Milvusコネクタ Milvusは、MilvusをApache Sparkなどのサードパーティツールとシームレスに統合するためのコネクタ群を計画しています。現在、Spark Connectorを使用することで、MilvusのデータをApache Sparkに供給し、機械学習処理を行うことができます。詳細は<a href="/docs/ja/v2.4.x/integrate_with_spark.md">Spark-Milvus Connectorを</a>ご参照ください。</p></li>
 <li><p>Vector Transmission Services (VTS) Milvusは、MilvusインスタンスとZillizクラスタ、Elasticsearch、Postgres (PgVector)、別のMilvusインスタンスなどのデータソース間でデータを転送するためのツールセットを提供しています。詳細は<a href="https://github.com/zilliztech/vts">VTSを</a>ご参照ください。</p></li>
 </ul>

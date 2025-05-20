@@ -63,7 +63,7 @@ summary: 您可以透過定義模式、索引參數、度量類型，以及是�
 <p>您可以為任何標量欄位設定預設值，並使其可為空。詳情請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -404,7 +404,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您也可以在沒有任何索引參數的情況下建立集合，然後再加入索引參數。在這種情況下，Milvus 在建立集合時不會載入。.</p>
-<p>下面的程式碼片段示範了如何在沒有集合的情況下建立集合，而集合的載入狀態在建立時仍然是未載入。</p>
+<p>下面的程式碼片段示範了如何建立一個沒有索引的集合，而集合的載入狀態在建立時保持未載入。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -501,7 +501,6 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 也提供了一個方法讓你立即建立一個集合。詳情請參閱<a href="/docs/zh-hant/create-collection-instantly.md">立即建立集合</a>。</p>
 <h2 id="Set-Collection-Properties" class="common-anchor-header">設定集合屬性<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -517,8 +516,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>你可以為要建立的集合設定屬性，使它適合你的服務。適用的屬性如下。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">設定分片編號</h3><p>分片是集合的水平切片。每個分片對應一個資料輸入通道。每個集合預設都有一個分片。您可以在建立資料集時，根據預期的吞吐量和要插入資料集的資料量，設定適當的分片數量。</p>
+    </button></h2><p>您可以為要建立的集合設定屬性，使其適合您的服務。適用的屬性如下。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">設定分片編號</h3><p>Shard 是集合的水平切片。每個分片對應一個資料輸入通道。每個集合預設都有一個分片。您可以在建立資料集時，根據預期的吞吐量和要插入資料集的資料量，設定適當的分片數量。</p>
 <p>在一般情況下，每當預期吞吐量增加 500 MB/秒或要插入的資料量增加 100 GB 時，就考慮增加一個分片。此建議是基於我們自己的經驗，可能不完全符合您的應用程式情境。您可以調整此數字以符合自己的需求，或直接使用預設值。</p>
 <p>以下程式碼片段示範如何在建立集合時設定 Shard 編號。</p>
 <div class="multipleCode">
@@ -744,6 +743,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關一致性層級的更多資訊，請參閱<a href="/docs/zh-hant/consistency.md">一致性</a>層級。</p>
+<p>有關一致性層級的更多資訊，請參閱<a href="/docs/zh-hant/tune_consistency.md">一致性</a>層級。</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">啟用動態欄位</h3><p>集合中的動態欄位是一個保留的 JavaScript Object Notation (JSON) 欄位，名為<strong>$meta</strong>。一旦啟用這個欄位，Milvus 會將每個實體中所有非模式定義的欄位及其值儲存為保留欄位中的鍵值對。</p>
 <p>有關如何使用動態欄位的詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態</a>欄位。</p>

@@ -38,7 +38,7 @@ title: 'Inserção, inserção ascendente e eliminação'
       </svg>
     </button></h2><ul>
 <li><p>Você instalou o SDK de sua escolha. Para instalar um SDK, consulte <a href="https://milvus.io/docs/install-pymilvus.md">Instalar SDKs</a>.</p></li>
-<li><p>Criou uma coleção. Para criar uma coleção, consulte <a href="/docs/pt/manage-collections.md">Gerir colecções</a>.</p></li>
+<li><p>Criou uma coleção. Para criar uma coleção, consulte <a href="/docs/pt/v2.4.x/manage-collections.md">Gerir colecções</a>.</p></li>
 <li><p>Para inserir um grande volume de dados, é aconselhável utilizar a <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Importação de dados</a>.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Síntese<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -58,7 +58,7 @@ title: 'Inserção, inserção ascendente e eliminação'
       </svg>
     </button></h2><p>Uma entidade, no contexto das colecções Milvus, é uma instância singular e identificável dentro de uma coleção. Representa um membro distinto de uma determinada classe, quer se trate de um livro numa biblioteca, de um gene num genoma ou de qualquer outra entidade identificável.</p>
 <p>As entidades de uma coleção partilham um conjunto comum de atributos, denominado esquema, que define a estrutura a que cada entidade deve aderir, incluindo nomes de campos, tipos de dados e quaisquer outras restrições.</p>
-<p>A inserção bem sucedida de entidades numa coleção requer que os dados fornecidos contenham todos os campos definidos pelo esquema da coleção de destino. Além disso, também é possível incluir campos não definidos pelo esquema apenas se tiver ativado o campo dinâmico. Para obter detalhes, consulte <a href="/docs/pt/enable-dynamic-field.md">Ativar campo dinâmico</a>.</p>
+<p>A inserção bem sucedida de entidades numa coleção requer que os dados fornecidos contenham todos os campos definidos pelo esquema da coleção de destino. Além disso, também é possível incluir campos não definidos pelo esquema apenas se tiver ativado o campo dinâmico. Para obter detalhes, consulte <a href="/docs/pt/v2.4.x/enable-dynamic-field.md">Ativar campo dinâmico</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparações<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -382,7 +382,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A saída é um dicionário que contém as estatísticas sobre as entidades afectadas. Para obter detalhes sobre operações de partição, consulte <a href="/docs/pt/manage-partitions.md">Gerenciar partições</a>.</p>
+<p>A saída é um dicionário que contém as estatísticas sobre as entidades afectadas. Para obter detalhes sobre operações de partição, consulte <a href="/docs/pt/v2.4.x/manage-partitions.md">Gerenciar partições</a>.</p>
 <h2 id="Upsert-entities" class="common-anchor-header">Upsert entidades<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -587,7 +587,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A saída é um dicionário que contém as estatísticas sobre as entidades afectadas. Para obter detalhes sobre operações de partição, consulte <a href="/docs/pt/manage-partitions.md">Gerenciar partições</a>.</p>
+<p>A saída é um dicionário que contém as estatísticas sobre as entidades afectadas. Para obter detalhes sobre operações de partição, consulte <a href="/docs/pt/v2.4.x/manage-partitions.md">Gerenciar partições</a>.</p>
 <h2 id="Delete-entities" class="common-anchor-header">Excluir entidades<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -708,7 +708,7 @@ System.out.<span class="hljs-built_in">println</span>(deleteResp.getDeleteCnt())
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter detalhes sobre como usar expressões de filtro, consulte <a href="/docs/pt/get-and-scalar-query.md">Obter e consulta escalar</a>.</p></li>
+<p>Para obter detalhes sobre como usar expressões de filtro, consulte <a href="/docs/pt/v2.4.x/get-and-scalar-query.md">Obter e consulta escalar</a>.</p></li>
 <li><p><strong>Excluir entidades por nome de partição</strong>.</p>
 <p>Se você quiser excluir entidades de uma partição específica, poderá especificar o nome da partição com o parâmetro <code translate="no">partition_name</code> no método <code translate="no">delete()</code>. O exemplo a seguir exclui entidades de <code translate="no">partitionA</code> que têm uma cor começando com <code translate="no">blue</code>.</p>
 <p><div class="multipleCode">

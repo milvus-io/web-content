@@ -40,7 +40,7 @@ title: 来自 Milvus 1.x
 <li>目标 Milvus： 2.x</li>
 </ul></li>
 <li><strong>所需工具</strong><ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。有关安装细节，请参阅<a href="/docs/zh/milvusdm_install.md">安装迁移工具</a>。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。有关安装细节，请参阅<a href="/docs/zh/v2.4.x/milvusdm_install.md">安装迁移工具</a>。</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">导出源 Milvus 安装的元数据<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

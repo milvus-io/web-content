@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>As entidades de uma coleção são registos de dados que partilham o mesmo conjunto de campos. Os valores de campo em cada registo de dados formam uma entidade. Esta página apresenta a forma de inserir entidades numa coleção.</p>
-<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em Milvus, uma <strong>Entidade</strong> refere-se a registos de dados numa <strong>Coleção</strong> que partilham o mesmo <strong>Esquema</strong>, com os dados em cada campo de uma linha a constituírem uma Entidade. Por conseguinte, as entidades dentro da mesma coleção têm os mesmos atributos (tais como nomes de campos, tipos de dados e outras restrições).</p>
+    </button></h2><p>Em Milvus, uma <strong>Entidade</strong> refere-se a registos de dados numa <strong>Coleção</strong> que partilham o mesmo <strong>Esquema</strong>, com os dados em cada campo de uma linha constituindo uma Entidade. Por conseguinte, as entidades dentro da mesma coleção têm os mesmos atributos (tais como nomes de campos, tipos de dados e outras restrições).</p>
 <p>Ao inserir uma Entidade numa Coleção, a Entidade a ser inserida só pode ser adicionada com êxito se contiver todos os campos definidos no Esquema. A Entidade inserida entrará numa Partição denominada <strong>_default</strong> pela ordem de inserção. Desde que exista uma determinada partição, pode também inserir entidades nessa partição especificando o nome da partição no pedido de inserção.</p>
 <p>O Milvus também suporta campos dinâmicos para manter a escalabilidade da coleção. Quando o campo dinâmico está ativado, pode inserir campos que não estão definidos no esquema na coleção. Estes campos e valores serão armazenados como pares chave-valor num campo reservado chamado <strong>$meta</strong>. Para obter mais informações sobre campos dinâmicos, consulte Campo dinâmico.</p>
 <h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">Inserir entidades em uma coleção<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
@@ -56,7 +56,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Antes de inserir dados, é necessário organizar seus dados em uma lista de dicionários de acordo com o esquema, com cada dicionário representando uma entidade e contendo todos os campos definidos no esquema. Se a Coleção tiver o campo dinâmico ativado, cada dicionário também pode incluir campos que não estão definidos no Esquema.</p>
-<p>Nesta secção, irá inserir entidades numa coleção criada <a href="/docs/pt/create-collection-instantly.md#Quick-Setup">da forma de configuração rápida</a>. Uma coleção criada desta forma tem apenas dois campos, denominados <strong>id</strong> e <strong>vetor</strong>. Além disso, essa Collection tem o campo dinâmico habilitado, de modo que as entidades no código de exemplo incluem um campo chamado <strong>cor</strong> que não está definido no esquema.</p>
+<p>Nesta secção, irá inserir entidades numa coleção criada da forma de configuração rápida. Uma coleção criada desta forma tem apenas dois campos, denominados <strong>id</strong> e <strong>vetor</strong>. Além disso, essa Collection tem o campo dinâmico habilitado, de modo que as entidades no código de exemplo incluem um campo chamado <strong>cor</strong> que não está definido no esquema.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

@@ -20,7 +20,7 @@ summary: ''
       </svg>
     </button></h1><p>There are several ways to configure Milvus components:</p>
 <ul>
-<li><p><a href="/docs/configure-docker.md">Docker Compose</a></p></li>
-<li><p><a href="/docs/configure-helm.md">Helm</a></p></li>
-<li><p><a href="/docs/configure_operator.md">Milvus Operator</a></p></li>
+<li><p><a href="/docs/v2.2.x/configure-docker.md">Docker Compose</a></p></li>
+<li><p><a href="/docs/v2.2.x/configure-helm.md">Helm</a></p></li>
+<li><p><a href="/docs/v2.2.x/configure_operator.md">Milvus Operator</a></p></li>
 </ul>

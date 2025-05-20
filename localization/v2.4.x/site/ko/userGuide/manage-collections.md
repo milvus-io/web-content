@@ -74,9 +74,9 @@ title: 컬렉션 관리
     </button></h2><p>다음 중 한 가지 방법으로 컬렉션을 만들 수 있습니다:</p>
 <ul>
 <li><p><strong>빠른 설정</strong></p>
-<p>이 방식에서는 이름을 지정하고 이 컬렉션에 저장할 벡터 임베딩의 차원 수를 지정하기만 하면 컬렉션을 만들 수 있습니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md">빠른 설정을</a> 참조하세요.</p></li>
+<p>이 방식에서는 이름을 지정하고 이 컬렉션에 저장할 벡터 임베딩의 차원 수를 지정하기만 하면 컬렉션을 만들 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/manage-collections.md">빠른 설정을</a> 참조하세요.</p></li>
 <li><p><strong>사용자 지정 설정</strong></p>
-<p>컬렉션의 거의 모든 것을 In Milvus가 결정하도록 하는 대신, 컬렉션의 <strong>스키마와</strong> <strong>인덱스 매개변수를</strong> 직접 결정할 수 있습니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md">사용자 지정 설정을</a> 참조하세요.</p></li>
+<p>컬렉션의 거의 모든 것을 In Milvus가 결정하도록 하는 대신, 컬렉션의 <strong>스키마와</strong> <strong>인덱스 매개변수를</strong> 직접 결정할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/manage-collections.md">사용자 지정 설정을</a> 참조하세요.</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">빠른 설정</h3><p>AI 산업의 비약적인 발전을 배경으로 대부분의 개발자는 간단하면서도 역동적인 컬렉션만 있으면 시작할 수 있습니다. Milvus에서는 단 세 가지 인수를 사용하여 이러한 컬렉션을 빠르게 설정할 수 있습니다:</p>
 <ul>
@@ -272,7 +272,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </ul>
 <p>제공된 코드에서 자동으로 색인되고 로드된 컬렉션은 즉시 데이터를 삽입할 수 있도록 준비됩니다.</p>
 <h3 id="Customized-setup" class="common-anchor-header">맞춤형 설정</h3><p>Milvus가 컬렉션의 거의 모든 것을 결정하는 대신, 사용자가 직접 컬렉션의 <strong>스키마와</strong> <strong>인덱스 매개변수를</strong> 결정할 수 있습니다.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">1단계: 스키마 설정</h4><p>스키마는 컬렉션의 구조를 정의합니다. 스키마 내에서 <code translate="no">enable_dynamic_field</code> 를 활성화 또는 비활성화하고, 미리 정의된 필드를 추가하고, 각 필드에 대한 속성을 설정하는 옵션이 있습니다. 스키마의 개념과 사용 가능한 데이터 유형에 대한 자세한 설명은 <a href="/docs/ko/schema.md">스키마 설명을</a> 참조하세요.</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">1단계: 스키마 설정</h4><p>스키마는 컬렉션의 구조를 정의합니다. 스키마 내에서 <code translate="no">enable_dynamic_field</code> 를 활성화 또는 비활성화하고, 미리 정의된 필드를 추가하고, 각 필드에 대한 속성을 설정하는 옵션이 있습니다. 스키마의 개념과 사용 가능한 데이터 유형에 대한 자세한 설명은 <a href="/docs/ko/v2.4.x/schema.md">스키마 설명을</a> 참조하세요.</p>
 <div class="language-python">
 <p>스키마를 설정하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 을 사용하여 스키마 개체를 만들고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> 를 사용하여 스키마에 필드를 추가합니다.</p>
 </div>
@@ -526,7 +526,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">2단계: 인덱스 매개변수 설정</h4><p>인덱스 매개변수는 Milvus가 컬렉션 내에서 데이터를 구성하는 방법을 결정합니다. <code translate="no">metric_type</code> 및 <code translate="no">index_type</code> 을 조정하여 특정 필드에 대한 인덱싱 프로세스를 맞춤 설정할 수 있습니다. 벡터 필드의 경우, 작업 중인 벡터 유형에 따라 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code> 또는 <code translate="no">JACCARD</code> 를 <code translate="no">metric_type</code> 로 유연하게 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/metric.md">유사성 메트릭을</a> 참조하세요.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">2단계: 인덱스 매개변수 설정</h4><p>인덱스 매개변수는 Milvus가 컬렉션 내에서 데이터를 구성하는 방법을 결정합니다. <code translate="no">metric_type</code> 및 <code translate="no">index_type</code> 을 조정하여 특정 필드에 대한 인덱싱 프로세스를 맞춤 설정할 수 있습니다. 벡터 필드의 경우, 작업 중인 벡터 유형에 따라 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code> 또는 <code translate="no">JACCARD</code> 를 <code translate="no">metric_type</code> 로 유연하게 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/metric.md">유사성 메트릭을</a> 참조하세요.</p>
 <div class="language-python">
 <p>인덱스 매개변수를 설정하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> 을 사용하여 인덱스 매개변수를 준비하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> 을 사용하여 인덱스를 추가합니다.</p>
 </div>
@@ -898,7 +898,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위에서 만든 컬렉션은 자동으로 로드됩니다. 컬렉션 로드 및 해제에 대해 자세히 알아보려면 <a href="/docs/ko/manage-collections.md#Load--Release-Collection">컬렉션 로드 및 해제하기를</a> 참조하세요.</p></li>
+<p>위에서 만든 컬렉션은 자동으로 로드됩니다. 컬렉션 로드 및 해제에 대해 자세히 알아보려면 <a href="/docs/ko/v2.4.x/manage-collections.md#Load--Release-Collection">컬렉션 로드 및 해제하기를</a> 참조하세요.</p></li>
 <li><p><strong>컬렉션과 인덱스 파일을 별도로 생성합니다.</strong></p>
 <p><div class="multipleCode">
 <a href="#python">파이썬 </a><a href="#java">자바</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
@@ -1015,7 +1015,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위에서 만든 컬렉션은 자동으로 로드되지 않습니다. 컬렉션에 대한 인덱스는 다음과 같이 만들 수 있습니다. 컬렉션에 대한 인덱스를 별도로 생성해도 컬렉션이 자동으로 로드되지 않습니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md#Load--Release-Collection">컬렉션 로드 및 해제하기를</a> 참조하세요.</p>
+<p>위에서 만든 컬렉션은 자동으로 로드되지 않습니다. 컬렉션에 대한 인덱스는 다음과 같이 만들 수 있습니다. 컬렉션에 대한 인덱스를 별도로 생성해도 컬렉션이 자동으로 로드되지 않습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/manage-collections.md#Load--Release-Collection">컬렉션 로드 및 해제하기를</a> 참조하세요.</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1154,7 +1154,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>위에서 만든 컬렉션은 자동으로 로드되지 않습니다. 다음과 같이 컬렉션에 대한 인덱스를 만들 수 있습니다. 컬렉션에 대한 인덱스를 별도로 생성해도 컬렉션이 자동으로 로드되지 않습니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md">컬렉션 로드 및 해제하기를</a> 참조하세요.</p>
+<p>위에서 만든 컬렉션은 자동으로 로드되지 않습니다. 다음과 같이 컬렉션에 대한 인덱스를 만들 수 있습니다. 컬렉션에 대한 인덱스를 별도로 생성해도 컬렉션이 자동으로 로드되지 않습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/manage-collections.md">컬렉션 로드 및 해제하기를</a> 참조하세요.</p>
 <p><div class="multipleCode">
 <a href="#python">파이썬 </a><a href="#java">자바</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>

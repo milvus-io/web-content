@@ -94,5 +94,5 @@ title: 主要组件
         ></path>
       </svg>
     </button></h2><ul>
-<li>阅读<a href="/docs/zh/four_layers.md">《计算/存储分解》</a>，了解 Milvus 的机制和设计原理。</li>
+<li>阅读<a href="/docs/zh/v2.4.x/four_layers.md">《计算/存储分解》</a>，了解 Milvus 的机制和设计原理。</li>
 </ul>

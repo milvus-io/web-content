@@ -23,7 +23,7 @@ title: Benutzerzugriff authentifizieren
     </button></h1><p>In diesem Handbuch wird erklärt, wie die Benutzerauthentifizierung in Milvus verwaltet wird, einschließlich der Aktivierung der Authentifizierung, der Verbindung als Benutzer und der Änderung der Benutzeranmeldedaten.</p>
 <div class="alert note">
 <ul>
-<li><p>TLS und Benutzerauthentifizierung sind zwei unterschiedliche Sicherheitsansätze. Wenn Sie sowohl die Benutzerauthentifizierung als auch TLS in Ihrem Milvus-System aktiviert haben, müssen Sie einen Benutzernamen, ein Passwort und Pfade für Zertifikatsdateien angeben. Informationen zur Aktivierung von TLS finden Sie unter <a href="/docs/de/tls.md">Verschlüsselung bei der Übermittlung</a>.</p></li>
+<li><p>TLS und Benutzerauthentifizierung sind zwei unterschiedliche Sicherheitsansätze. Wenn Sie sowohl die Benutzerauthentifizierung als auch TLS in Ihrem Milvus-System aktiviert haben, müssen Sie einen Benutzernamen, ein Passwort und Pfade für Zertifikatsdateien angeben. Informationen zur Aktivierung von TLS finden Sie unter <a href="/docs/de/v2.4.x/tls.md">Verschlüsselung bei der Übermittlung</a>.</p></li>
 <li><p>Die Codeschnipsel auf dieser Seite verwenden den neuen <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) zur Interaktion mit Milvus. Neue MilvusClient SDKs für andere Sprachen werden in zukünftigen Updates veröffentlicht.</p></li>
 </ul>
 </div>
@@ -269,11 +269,11 @@ client.list_users()
       </svg>
     </button></h2><ul>
 <li>Sie möchten vielleicht auch lernen, wie man:<ul>
-<li><a href="/docs/de/scaleout.md">Skalieren eines Milvus-Clusters</a></li>
+<li><a href="/docs/de/v2.4.x/scaleout.md">Skalieren eines Milvus-Clusters</a></li>
 </ul></li>
 <li>Wenn Sie bereit sind, Ihren Cluster in der Cloud einzusetzen:<ul>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a> können</li>
-<li>Lernen Sie, wie Sie <a href="/docs/de/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.4.x/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a> können</li>
+<li>Lernen Sie, wie Sie <a href="/docs/de/v2.4.x/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.4.x/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
 </ul></li>
 </ul>

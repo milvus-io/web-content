@@ -68,7 +68,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在 ANN 搜尋中，單向量搜尋指的是只涉及一個查詢向量的搜尋。根據預先建立的索引和搜尋請求所帶的度量類型，Milvus 會找出與查詢向量最相似的前 K 個向量。</p>
-<p>在本節中，您將學習如何進行單一向量搜尋。程式碼片段假設您已經以<a href="/docs/zh-hant/create-collection-instantly.md#Quick-Setup">快速設定的</a>方式建立了一個集合。搜尋請求帶有單一的查詢向量，並要求 Milvus 使用 Inner Product (IP) 來計算查詢向量與集合中向量的相似度，並傳回三個最相似的向量。</p>
+<p>在本節中，您將學習如何進行單一向量搜尋。搜尋請求會攜帶一個單一的查詢向量，並要求 Milvus 使用 Inner Product (IP) 來計算查詢向量與集合中向量的相似度，並傳回三個最相似的向量。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -971,7 +971,7 @@ curl --request POST \
 <ul>
 <li><p>過濾搜尋</p>
 <p>您可以在搜尋請求中加入過濾條件，讓 Milvus 在進行 ANN 搜尋之前先進行元資料過濾，將搜尋範圍從整個集合縮小到只有符合指定過濾條件的實體。</p>
-<p>關於元資料篩選和篩選條件的更多資訊，請參閱篩選<a href="/docs/zh-hant/filtered-search.md">搜尋和</a> <a href="/docs/zh-hant/filtering">篩選</a>。</p></li>
+<p>更多關於元資料篩選和篩選條件，請參考篩選<a href="/docs/zh-hant/filtered-search.md">搜尋</a>、<a href="/docs/zh-hant/boolean.md">篩選解釋</a>和相關主題。</p></li>
 <li><p>範圍搜尋</p>
 <p>您可以在特定範圍內限制返回實體的距離或分數，以改善搜尋結果的相關性。在 Milvus 中，範圍搜尋涉及以與查詢向量最相似的向量嵌入為中心，畫出兩個同心圓。搜尋請求指定兩個圓圈的半徑，Milvus 會傳回屬於外圈但不屬於內圈的所有向量嵌入。</p>
 <p>更多關於範圍搜尋，請參考<a href="/docs/zh-hant/range-search.md">範圍搜尋</a>。</p></li>

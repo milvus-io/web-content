@@ -25,7 +25,7 @@ title: مسترجع البحث الهجين ميلفوس الهجين
     <span></span>
   </span>
 </p>
-<p>يوضح هذا الرسم البياني سيناريو البحث الهجين الأكثر شيوعًا، وهو البحث الهجين الكثيف + البحث الهجين المتناثر. في هذه الحالة، يتم استرداد المرشحين باستخدام كل من تشابه المتجهات الدلالية ومطابقة الكلمات الرئيسية الدقيقة. يتم دمج النتائج من هذه الطرق وإعادة ترتيبها وتمريرها إلى جهاز البحث الدلالي لتوليد الإجابة النهائية. يوازن هذا النهج بين الدقة والفهم الدلالي، مما يجعله فعالاً للغاية في سيناريوهات الاستعلام المتنوعة.</p>
+<p>يوضح هذا الرسم البياني سيناريو البحث الهجين الأكثر شيوعًا، وهو البحث الهجين الكثيف + البحث الهجين المتناثر. في هذه الحالة، يتم استرداد المرشحين باستخدام كل من تشابه المتجهات الدلالية ومطابقة الكلمات الرئيسية الدقيقة. يتم دمج النتائج من هاتين الطريقتين وإعادة ترتيبها وتمريرها إلى جهاز البحث الدلالي لتوليد الإجابة النهائية. يوازن هذا النهج بين الدقة والفهم الدلالي، مما يجعله فعالاً للغاية في سيناريوهات الاستعلام المتنوعة.</p>
 <p>بالإضافة إلى البحث الهجين الكثيف + المتناثر، يمكن للاستراتيجيات الهجينة أيضًا الجمع بين نماذج متجهات كثيفة متعددة. على سبيل المثال، قد يتخصص أحد نماذج المتجهات الكثيفة في التقاط الفروق الدلالية الدقيقة، بينما يركز نموذج آخر على التضمينات السياقية أو التمثيلات الخاصة بالمجال. من خلال دمج النتائج من هذه النماذج وإعادة ترتيبها، يضمن هذا النوع من البحث الهجين عملية استرجاع أكثر دقة وإدراكًا للسياق.</p>
 <p>يوفر تكامل LangChain Milvus طريقة مرنة لتنفيذ البحث الهجين، فهو يدعم أي عدد من حقول المتجهات، وأي نماذج تضمين كثيفة أو متفرقة مخصصة، مما يسمح لـ LangChain Milvus بالتكيف بمرونة مع سيناريوهات استخدام البحث الهجين المختلفة، وفي نفس الوقت متوافق مع القدرات الأخرى لـ LangChain.</p>
 <p>في هذا البرنامج التعليمي، سنبدأ بالحالة الأكثر شيوعًا كثيفة + متناثرة، ثم نقدم أي عدد من أساليب استخدام البحث الهجين العامة.</p>
@@ -137,12 +137,12 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>عند استخدام <code translate="no">BM25BuiltInFunction</code> ، يُرجى ملاحظة أن البحث عن النص الكامل متاح في Milvus Standalone وMilvus Distributed، ولكن ليس في Milvus Lite، على الرغم من أنه على خارطة الطريق لإدراجه في المستقبل. سيكون متاحًا أيضًا في Zilliz Cloud (ميلفوس المدارة بالكامل) قريبًا. يرجى التواصل مع <a href="mailto:support@zilliz.com">support@zilliz.com</a> لمزيد من المعلومات.</li>
+<li>عند استخدام <code translate="no">BM25BuiltInFunction</code> ، يُرجى ملاحظة أن البحث في النص الكامل متاح في Milvus Standalone وMilvus Distributed، ولكن ليس في Milvus Lite، على الرغم من أنه على خارطة الطريق لإدراجه في المستقبل. سيكون متاحًا أيضًا في Zilliz Cloud (ميلفوس المدارة بالكامل) قريبًا. يرجى التواصل مع <a href="mailto:support@zilliz.com">support@zilliz.com</a> لمزيد من المعلومات.</li>
 </ul>
 </div>
 <p>في الكود أعلاه، نحدد مثيلًا لـ <code translate="no">BM25BuiltInFunction</code> ونمرره إلى الكائن <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> هي فئة غلاف خفيفة الوزن لـ <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> في ميلفوس. يمكننا استخدامه مع <code translate="no">OpenAIEmbeddings</code> لتهيئة مثيل مخزن متجه البحث الهجين الكثيف + المتناثر Milvus للبحث الهجين Milvus.</p>
@@ -177,7 +177,7 @@ vectorstore = Milvus.from_documents(
             }
         ] * <span class="hljs-built_in">len</span>(texts)
 <button class="copy-code-btn"></button></code></pre>
-<p>لدينا فئة تجريبية <code translate="no">BM25SparseEmbedding</code> موروثة من <code translate="no">BaseSparseEmbedding</code> في <code translate="no">langchain_milvus.utils.sparse</code>. يمكنك تمريرها إلى قائمة تضمين التهيئة لمثيل مخزن متجه ميلفوس المتجه تمامًا مثل فئات التضمين الكثيفة الأخرى في لغة لانغشين.</p>
+<p>لدينا فئة تجريبية <code translate="no">BM25SparseEmbedding</code> موروثة من <code translate="no">BaseSparseEmbedding</code> في <code translate="no">langchain_milvus.utils.sparse</code>. يمكنك تمريرها في قائمة تضمين التهيئة لمثيل مخزن متجه ميلفوس المتجه تمامًا مثل فئات التضمين الكثيفة الأخرى في لانجشين.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># BM25SparseEmbedding is inherited from BaseSparseEmbedding</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BM25SparseEmbedding
 
@@ -196,7 +196,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>على الرغم من أن هذه طريقة لاستخدام BM25، إلا أنها تتطلب من المستخدمين إدارة مجموعة إحصائيات تكرار المصطلحات. نوصي باستخدام الدالة المدمجة BM25 (الخيار 1) بدلاً من ذلك، لأنها تتعامل مع كل شيء من جانب خادم Milvus. وهذا يلغي حاجة المستخدمين إلى القلق بشأن إدارة المجموعة أو تدريب المفردات. لمزيد من المعلومات، يرجى الرجوع إلى <a href="https://milvus.io/docs/full_text_search_with_langchain.md">استخدام البحث عن النص الكامل مع LangChain و Milvus</a>.</p>
@@ -233,7 +233,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -265,7 +265,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -286,7 +286,7 @@ vectorstore.vector_fields
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -359,7 +359,7 @@ docs[<span class="hljs-number">1</span>]
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">بناء سلسلة RAG</h3><p>نقوم بإعداد مثيل LLM والموجه، ثم ندمجهما في سلسلة RAG باستخدام لغة تعبير LangChain Expression Language.</p>

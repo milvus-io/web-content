@@ -47,7 +47,7 @@ summary: >-
 <p>Há mais dois aspectos a considerar ao conceber o esquema:</p>
 <ul>
 <li><p><strong>Se deve ser ativado o AutoID</strong></p>
-<p>O campo <strong>id</strong> serve como o campo primário da coleção. Para fazer com que o campo primário seja incrementado automaticamente, pode ativar o <strong>AutoID</strong> no esquema. Neste caso, deve excluir o campo <strong>id</strong> de cada linha nos dados de origem.</p></li>
+<p>O campo <strong>id</strong> serve como o campo primário da coleção. Para fazer com que o campo primário seja automaticamente incrementado, pode ativar o <strong>AutoID</strong> no esquema. Neste caso, deve excluir o campo <strong>id</strong> de cada linha nos dados de origem.</p></li>
 <li><p><strong>Ativar ou não campos dinâmicos</strong></p>
 <p>A coleção de destino também pode armazenar campos não incluídos no seu esquema predefinido se o esquema permitir campos dinâmicos. O campo <strong>$meta</strong> é um campo JSON reservado para armazenar campos dinâmicos e seus valores em pares de valores chave. No diagrama acima, os campos <strong>dynamic_field_1</strong> e <strong>dynamic_field_2</strong> e os valores serão guardados como pares de valores chave no campo <strong>$meta</strong>.</p></li>
 </ul>
@@ -224,7 +224,7 @@ schema.verify()
     </button></h2><p><strong>BulkWriter</strong> é uma ferramenta concebida para converter conjuntos de dados brutos num formato adequado para importação através da API de importação RESTful. Ele oferece dois tipos de gravadores:</p>
 <ul>
 <li><strong>LocalBulkWriter</strong>: Lê o conjunto de dados designado e o transforma em um formato fácil de usar.</li>
-<li><strong>RemoteBulkWriter</strong>: Executa a mesma tarefa que o LocalBulkWriter, mas transfere adicionalmente os arquivos de dados convertidos para um bucket de armazenamento de objetos remoto especificado.</li>
+<li><strong>RemoteBulkWriter</strong>: Executa a mesma tarefa que o LocalBulkWriter, mas transfere adicionalmente os arquivos de dados convertidos para um bucket de armazenamento de objeto remoto especificado.</li>
 </ul>
 <p><strong>RemoteBulkWriter</strong> difere de <strong>LocalBulkWriter</strong> porque <strong>RemoteBulkWriter</strong> transfere os arquivos de dados convertidos para um bucket de armazenamento de objetos de destino.</p>
 <h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Configurar o LocalBulkWriter</h3><p>Um <strong>LocalBulkWriter</strong> acrescenta linhas do conjunto de dados de origem e transfere-as para um ficheiro local do formato especificado.</p>
@@ -355,7 +355,7 @@ writer = RemoteBulkWriter(
 <p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">connect_param</code>. Para mais pormenores sobre as definições dos parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> na referência do SDK.</p>
 </div>
 <div class="language-java">
-<p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">StorageConnectParam</code>. Para obter detalhes sobre as definições dos parâmetros, consulte RemoteBulkWriter e StorageConnectParam na referência do SDK.</p>
+<p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">StorageConnectParam</code>. Para mais informações sobre as definições dos parâmetros, consulte RemoteBulkWriter e StorageConnectParam na referência do SDK.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">Iniciar a escrita<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -606,17 +606,17 @@ writer = RemoteBulkWriter(
 <span class="hljs-comment">#  [&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/2.parquet&#x27;]]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// localBulkWriter.getBatchFiles();</span>
-remoteBulkWriter.<span class="hljs-title function_">getBatchFiles</span>();
+remoteBulkWriter.getBatchFiles();
 
 <span class="hljs-comment">// </span>
 
 <span class="hljs-comment">// Close the BulkWriter</span>
 <span class="hljs-keyword">try</span> {
-    localBulkWriter.<span class="hljs-title function_">close</span>();
-    remoteBulkWriter.<span class="hljs-title function_">close</span>();            
-} <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) {
+    localBulkWriter.close();
+    remoteBulkWriter.close();            
+} <span class="hljs-keyword">catch</span> (Exception e) {
     <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> handle exception</span>
-    e.<span class="hljs-title function_">printStackTrace</span>();
+    e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>O BulkWriter</strong> gera um UUID, cria uma subpasta utilizando o UUID no diretório de saída fornecido e coloca todos os ficheiros gerados na subpasta. <a href="https://assets.zilliz.com/bulk_writer.zip">Clique aqui</a> para descarregar os dados de amostra preparados.</p>
@@ -624,10 +624,10 @@ remoteBulkWriter.<span class="hljs-title function_">getBatchFiles</span>();
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.j</span>son 
+│       └── 1.json 
 
 <span class="hljs-comment"># Parquet</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.</span>parquet 
+│       └── 1.parquet 
 <button class="copy-code-btn"></button></code></pre>

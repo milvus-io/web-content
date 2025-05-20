@@ -106,6 +106,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>하드웨어 및 소프트웨어가 위의 요구 사항을 충족하는 경우 다음을 수행할 수 있습니다.</p>
 <ul>
-<li><a href="/docs/ko/install_standalone-docker.md">Docker에서 Milvus 실행</a></li>
-<li><a href="/docs/ko/install_standalone-docker-compose.md">Docker Compose로 Milvus 실행하기</a></li>
+<li><a href="/docs/ko/v2.4.x/install_standalone-docker.md">Docker에서 Milvus 실행</a></li>
+<li><a href="/docs/ko/v2.4.x/install_standalone-docker-compose.md">Docker Compose로 Milvus 실행하기</a></li>
 </ul>

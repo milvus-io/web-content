@@ -111,5 +111,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn how <a href="/docs/consistency.md">guarantee timestamp enables tunable consistency in Milvus</a></li>
+<li>Learn how <a href="/docs/v2.4.x/consistency.md">guarantee timestamp enables tunable consistency in Milvus</a></li>
 </ul>

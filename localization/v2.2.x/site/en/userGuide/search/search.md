@@ -20,7 +20,7 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to search entities with Milvus.</p>
-<p>A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. By specifying a <a href="/docs/boolean.md">boolean expression</a> that filters the scalar field or the primary key field, you can perform a <a href="/docs/hybridsearch.md">hybrid search</a> or even a search with <a href="/docs/timetravel.md">Time Travel</a>.</p>
+<p>A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. By specifying a <a href="/docs/v2.2.x/boolean.md">boolean expression</a> that filters the scalar field or the primary key field, you can perform a <a href="/docs/v2.2.x/hybridsearch.md">hybrid search</a> or even a search with <a href="/docs/v2.2.x/timetravel.md">Time Travel</a>.</p>
 <p>The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined.</p>
 <h2 id="Load-collection" class="common-anchor-header">Load collection<button data-href="#Load-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,7 +171,7 @@ curl --request POST \
     <tbody>
     <tr>
         <td><code translate="no">metric_type</code></td>
-        <td>Method used to measure the distance between vectors during search. It should be the same as the one specified for the index-building process. See <a href="/docs/metric.md">Simlarity Metrics</a> for more information.</td>
+        <td>Method used to measure the distance between vectors during search. It should be the same as the one specified for the index-building process. See <a href="/docs/v2.2.x/metric.md">Simlarity Metrics</a> for more information.</td>
     </tr>
     <tr>
         <td><code translate="no">offset</code></td>
@@ -183,7 +183,7 @@ curl --request POST \
     </tr>    
     <tr>
         <td><code translate="no">params</code></td>
-        <td>Search parameter(s) specific to the specified index type. See <a href="/docs/index.md">Vector Index</a> for more information. Possible options are as follows: <ul><li><code translate="no">nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, or <code translate="no">IVF_PQ</code>. The value should be less than <code translate="no">nlist</code> specified for the index-building process.</li>
+        <td>Search parameter(s) specific to the specified index type. See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information. Possible options are as follows: <ul><li><code translate="no">nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, or <code translate="no">IVF_PQ</code>. The value should be less than <code translate="no">nlist</code> specified for the index-building process.</li>
             <li><code translate="no">ef</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">HNSW</code>. The value should be within the range from <code translate="no">top_k</code> to <code translate="no">32768</code>.</li>
             <li><code translate="no">search_k</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">ANNOY</code>. The value should be greater than or equal to the top K. </li>
         </ul></td>
@@ -200,7 +200,7 @@ curl --request POST \
     <tbody>
     <tr>
         <td><code translate="no">params</code></td>
-        <td>Search parameter(s) specific to the index. See <a href="/docs/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
+        <td>Search parameter(s) specific to the index. See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
             <li><code translate="no">nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, or <code translate="no">IVF_PQ</code>. The value should be less than <code translate="no">nlist</code> specified for the index-building process.</li>
             <li><code translate="no">ef</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">HNSW</code>. The value should be within the range from <code translate="no">top_k</code> to <code translate="no">32768</code>.</li>
             <li><code translate="no">search_k</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">ANNOY</code>. The value should be greater than or equal to the top K. </li>
@@ -239,7 +239,7 @@ curl --request POST \
     <tr>
         <td><code translate="no">sp</code></td>
         <td>Search parameter(s) specific to the index returned by the preceding functions.</td>
-        <td>See <a href="/docs/index.md">Vector Index</a> for more information. </td>
+        <td>See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information. </td>
     </tr>
     <tr>
         <td><code translate="no">opt<code translate="no"></td>
@@ -270,7 +270,7 @@ curl --request POST \
   <tr>
         <td><code translate="no">SEARCH_PARAM</code></td>
         <td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="/docs/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
+    <td>See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
         <li><code translate="no">nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, or <code translate="no">IVF_PQ</code>. The value should be less than <code translate="no">nlist</code> specified for the index-building process.</li>
         <li><code translate="no">ef</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">HNSW</code>. The value should be within the range from <code translate="no">top_k</code> to <code translate="no">32768</code>.</li>
         <li><code translate="no">search_k</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">ANNOY</code>. The value should be greater than or equal to the top K.</li>
@@ -308,11 +308,11 @@ curl --request POST \
         </tr>
         <tr>
             <td>Expression</td>
-            <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+            <td>Boolean expression used to filter attribute. See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
         </tr>
         <tr>
             <td>ExtraParameters</td>
-            <td>Other applicable parameters. See <a href="/docs/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
+            <td>Other applicable parameters. See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
         <li><code translate="no">nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, or <code translate="no">IVF_PQ</code>. The value should be less than <code translate="no">nlist</code> specified for the index-building process.</li>
         <li><code translate="no">ef</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">HNSW</code>. The value should be within the range from <code translate="no">top_k</code> to <code translate="no">32768</code>.</li>
         <li><code translate="no">search_k</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">ANNOY</code>. The value should be greater than or equal to the top K.</li>
@@ -369,8 +369,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Search vectors with Milvus. To search in a specific <a href="/docs/glossary.md#Partition">partition</a>, specify the list of partition names.</p>
-<p>Milvus supports setting consistency level specifically for a search. The example in this topic sets the consistency level as <code translate="no">Strong</code>. You can also set the consistency level as <code translate="no">Bounded</code>, <code translate="no">Session</code> or <code translate="no">Eventually</code>. See <a href="/docs/consistency.md">Consistency</a> for more information about the four consistency levels in Milvus.</p>
+    </button></h2><p>Search vectors with Milvus. To search in a specific <a href="/docs/v2.2.x/glossary.md#Partition">partition</a>, specify the list of partition names.</p>
+<p>Milvus supports setting consistency level specifically for a search. The example in this topic sets the consistency level as <code translate="no">Strong</code>. You can also set the consistency level as <code translate="no">Bounded</code>, <code translate="no">Session</code> or <code translate="no">Eventually</code>. See <a href="/docs/v2.2.x/consistency.md">Consistency</a> for more information about the four consistency levels in Milvus.</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -475,7 +475,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
     </tr>
     <tr>
         <td><code translate="no">param</code></td>
-        <td>Search parameter(s) specific to the index. See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>Search parameter(s) specific to the index. See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     <tr>
         <td><code translate="no">limit</code></td>
@@ -483,7 +483,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
     </tr>
   <tr>
         <td><code translate="no">expr</code></td>
-        <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+        <td>Boolean expression used to filter attribute. See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code> (optional)</td>
@@ -529,7 +529,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
     </tr>
     <tr>
         <td><code translate="no">filter</code> (optional)</td>
-        <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+        <td>Boolean expression used to filter attribute. See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code> (optional)</td>
@@ -564,7 +564,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
   <tr>
         <td><code translate="no">expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code></td>
@@ -635,7 +635,7 @@ R&lt;<span class="hljs-title class_">SearchResults</span>&gt; respSearch = milvu
   <tr>
         <td><code translate="no">Expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">ConsistencyLevel</code></td>
@@ -786,9 +786,9 @@ Console.WriteLine(results.Ids.LongIds)
     </button></h2><ul>
 <li><p>Learn more basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/query.md">Query vectors</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
-<li><a href="/docs/timetravel.md">Search with Time Travel</a></li>
+<li><a href="/docs/v2.2.x/query.md">Query vectors</a></li>
+<li><a href="/docs/v2.2.x/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.2.x/timetravel.md">Search with Time Travel</a></li>
 </ul></li>
 <li><p>Explore API references for Milvus SDKs:</p>
 <ul>

@@ -350,7 +350,7 @@ array_length(int_array) <span class="hljs-comment"># ==&gt; 7</span>
       </svg>
     </button></h2><p>既然你已经知道比特集在 Milvus 中是如何工作的，你可能还想</p>
 <ul>
-<li>学习如何进行<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</li>
+<li>学习如何进行<a href="/docs/zh/v2.4.x/multi-vector-search.md">混合搜索</a>。</li>
 <li>学习如何<a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">使用字符串过滤</a>搜索结果。</li>
-<li>学习如何<a href="/docs/zh/enable-dynamic-field.md">在构建布尔表达式时使用Dynamic Field</a>。</li>
+<li>学习如何<a href="/docs/zh/v2.4.x/enable-dynamic-field.md">在构建布尔表达式时使用Dynamic Field</a>。</li>
 </ul>

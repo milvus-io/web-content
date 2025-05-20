@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Analogamente al campo primario di un database relazionale, una collezione ha un campo primario per distinguere un'entità dalle altre. Ogni valore del campo primario è globalmente unico e corrisponde a un'entità specifica.</p>
+    </button></h2><p>Analogamente al campo primario in un database relazionale, una collezione ha un campo primario per distinguere un'entità dalle altre. Ogni valore del campo primario è globalmente unico e corrisponde a un'entità specifica.</p>
 <p>Come mostrato nel grafico precedente, il campo <strong>id</strong> funge da campo primario e il primo ID <strong>0</strong> corrisponde a un'entità intitolata <em>Il tasso di mortalità del Coronavirus non è importante</em>. Non ci sarà nessun'altra entità che abbia il campo primario 0.</p>
 <p>Un campo primario accetta solo numeri interi o stringhe. Quando si inseriscono le entità, i valori del campo primario devono essere inclusi per impostazione predefinita. Tuttavia, se si è abilitato l'<strong>AutoId</strong> alla creazione della collezione, Milvus genererà questi valori al momento dell'inserimento dei dati. In tal caso, escludere i valori del campo primario dalle entità da inserire.</p>
 <p>Per ulteriori informazioni, consultare <a href="/docs/it/primary-field.md">Campo primario e AutoId</a>.</p>
@@ -156,7 +156,7 @@ summary: >-
     </button></h2><p>Una volta creati gli indici e caricata la collezione, è possibile avviare una ricerca di similarità alimentando uno o più vettori di query. Ad esempio, quando si riceve la rappresentazione vettoriale della query in una richiesta di ricerca, Milvus utilizza il tipo di metrica specificato per misurare la somiglianza tra il vettore della query e quelli della collezione di destinazione prima di restituire quelli che sono semanticamente simili alla query.</p>
 <p>È anche possibile includere il filtraggio dei metadati nelle ricerche e nelle query per migliorare la pertinenza dei risultati. Le condizioni di filtraggio dei metadati sono obbligatorie nelle query, ma facoltative nelle ricerche.</p>
 <p>Per informazioni dettagliate sui tipi di metrica applicabili, consultare <a href="/docs/it/metric.md">Tipi di metrica</a>.</p>
-<p>Per ulteriori informazioni su ricerche e query, consultare gli articoli del capitolo <a href="/docs/it/search-rerank">Ricerca e Rerank</a>, tra cui le caratteristiche di base:</p>
+<p>Per ulteriori informazioni su ricerche e query, consultare gli articoli del capitolo Ricerca e Rerank, tra cui le caratteristiche di base:</p>
 <ul>
 <li><p><a href="/docs/it/single-vector-search.md">Ricerca RNA di base</a></p></li>
 <li><p><a href="/docs/it/filtered-search.md">Ricerca filtrata</a></p></li>

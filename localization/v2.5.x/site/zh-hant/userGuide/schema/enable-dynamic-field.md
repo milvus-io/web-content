@@ -35,7 +35,7 @@ summary: 在要插入的實體中，必須包含在集合的模式中定義的�
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中，您可以透過設定集合中每個欄位的名稱和資料類型來建立集合模式。當您在模式中加入欄位時，請確認此欄位包含在您要插入的實體中。如果您希望某些欄位是可選的，啟用動態欄位是一個選擇。</p>
-<p>動態欄位是一個保留欄位，名為<code translate="no">$meta</code> ，屬於 JavaScript Object Notation (JSON) 類型。實體中任何未在模式中定義的欄位，都會以鍵值對的形式儲存在這個保留的 JSON 欄位中。</p>
+<p>動態欄位是名為<strong>$meta</strong> 的保留欄位，屬於 JavaScript Object Notation (JSON) 類型。實體中任何未在模式中定義的欄位，都會以鍵值對的形式儲存在這個保留的 JSON 欄位中。</p>
 <p>對於啟用動態欄位的集合，您可以使用動態欄位中的鍵進行標量篩選，就像使用模式中明確定義的欄位一樣。</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">啟用動態欄位<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: 在要插入的實體中，必須包含在集合的模式中定義的�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>使用「<a href="/docs/zh-hant/create-collection-instantly.md">立即建立集合</a>」中所述的方法建立的集合，預設會啟用動態欄位。您也可以在使用自訂設定建立集合時，手動啟用動態欄位。</p>
+    </button></h2><p>您可以在使用自訂設定建立集合時，手動啟用動態欄位。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -149,7 +149,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當您的集合啟用動態欄位時，所有未在模式中定義的欄位及其值，都會以鍵值對的方式儲存在動態欄位中。</p>
+    </button></h2><p>當您的集合啟用動態欄位時，模式中未定義的所有欄位及其值都會以鍵值對的方式儲存在動態欄位中。</p>
 <p>例如，假設您的集合模式只定義了兩個欄位，分別命名為<code translate="no">id</code> 和<code translate="no">vector</code> ，並啟用了動態欄位。現在，將下列資料集插入此集合。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>

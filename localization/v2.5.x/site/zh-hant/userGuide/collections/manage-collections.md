@@ -1,11 +1,11 @@
 ---
 id: manage-collections.md
-title: 資料集解釋
+title: 集合說明
 summary: >-
   在 Milvus
   上，您可以建立多個集合來管理您的資料，並將您的資料作為實體插入到集合中。集合和實體類似於關係數據庫中的表格和記錄。本頁可協助您了解集合及相關概念。
 ---
-<h1 id="Collection-Explained" class="common-anchor-header">資料集解釋<button data-href="#Collection-Explained" class="anchor-icon" translate="no">
+<h1 id="Collection-Explained" class="common-anchor-header">集合說明<button data-href="#Collection-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,10 +151,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立索引並載入資料庫後，您可以輸入一個或多個查詢向量，開始相似性搜尋。舉例來說，當接收到搜尋要求中攜帶的查詢向量表達時，Milvus 會使用指定的度量類型來衡量查詢向量與目標資料集中的向量之間的相似性，然後再回傳與查詢語意相似的向量。</p>
+    </button></h2><p>建立索引並載入資料庫後，您可以輸入一個或多個查詢向量，開始相似性搜尋。舉例來說，當接收到搜尋要求中攜帶的查詢向量表達時，Milvus 會使用指定的度量類型來測量查詢向量與目標資料集中的相似度，然後再回傳那些與查詢語意相似的向量。</p>
 <p>您也可以在搜尋與查詢中加入 metadata 過濾，以改善結果的相關性。請注意，元資料篩選條件在查詢中是強制性的，但在搜尋中是選擇性的。</p>
 <p>如需適用公制類型的詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p>
-<p>有關搜尋和查詢的詳細資訊，請參閱「<a href="/docs/zh-hant/search-rerank">搜尋與重新排名</a>」章節中的文章，其中的基本功能如下：</p>
+<p>有關搜尋和查詢的詳細資訊，請參閱「搜尋與重新排名」章節中的文章，其中的基本功能如下：</p>
 <ul>
 <li><p><a href="/docs/zh-hant/single-vector-search.md">基本 ANN 搜尋</a></p></li>
 <li><p><a href="/docs/zh-hant/filtered-search.md">篩選搜尋</a></p></li>
@@ -166,7 +166,7 @@ summary: >-
 <li><p><a href="/docs/zh-hant/full-text-search.md">全文檢索</a></p></li>
 <li><p><a href="/docs/zh-hant/keyword-match.md">文字匹配</a></p></li>
 </ul>
-<p>此外，Milvus 也提供增強功能來改善搜尋效能與效率。這些功能預設為停用，您可以依據您的服務需求啟用和使用它們。它們是</p>
+<p>此外，Milvus 也提供增強功能以改善搜尋效能與效率。這些功能預設為停用，您可以依據您的服務需求啟用和使用它們。它們是</p>
 <ul>
 <li><p><a href="/docs/zh-hant/use-partition-key.md">使用分割區金鑰</a></p></li>
 <li><p><a href="/docs/zh-hant/mmap.md">使用 mmap</a></p></li>

@@ -61,7 +61,7 @@ summary: >-
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>Consulte <a href="/docs/es/configure_etcd.md">Configuraciones relacionadas con</a> etcd para obtener más información.</p>
+<p>Consulte <a href="/docs/es/v2.4.x/configure_etcd.md">Configuraciones relacionadas con</a> etcd para obtener más información.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Ejecute Milvus</h3><p>Ejecute el siguiente comando para iniciar Milvus que utiliza las configuraciones de etcd.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -133,6 +133,6 @@ summary: >-
       </svg>
     </button></h2><p>Aprende a configurar otras dependencias de Milvus con Docker Compose o Helm:</p>
 <ul>
-<li><a href="/docs/es/deploy_s3.md">Configurar el Almacenamiento de Objetos con Docker Compose o Helm</a></li>
-<li><a href="/docs/es/deploy_pulsar.md">Configurar el almacenamiento de mensajes con Docker Compose o Helm</a></li>
+<li><a href="/docs/es/v2.4.x/deploy_s3.md">Configurar el Almacenamiento de Objetos con Docker Compose o Helm</a></li>
+<li><a href="/docs/es/v2.4.x/deploy_pulsar.md">Configurar el almacenamiento de mensajes con Docker Compose o Helm</a></li>
 </ul>

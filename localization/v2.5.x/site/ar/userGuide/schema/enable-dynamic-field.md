@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>في ملفوس، يمكنك إنشاء مخطط مجموعة من خلال تعيين الأسماء وأنواع البيانات لكل حقل في المجموعة. عند إضافة حقل إلى المخطط، تأكد من تضمين هذا الحقل في الكيان الذي تنوي إدراجه. إذا كنت تريد أن تكون بعض الحقول اختيارية، فإن تمكين الحقل الديناميكي هو أحد الخيارات.</p>
-<p>الحقل الديناميكي هو حقل محجوز يسمى <code translate="no">$meta</code> ، وهو من نوع JavaScript Object Notation (JSON). سيتم تخزين أي حقول في الكيانات التي لم يتم تعريفها في المخطط في حقل JSON المحجوز هذا كأزواج قيمة مفتاح-قيمة.</p>
+<p>الحقل الديناميكي هو حقل محجوز يسمى <strong>$meta،</strong> وهو من نوع JavaScript Object Notation (JSON). سيتم تخزين أي حقول في الكيانات التي لم يتم تعريفها في المخطط في حقل JSON المحجوز هذا كأزواج قيمة مفتاح-قيمة.</p>
 <p>بالنسبة للمجموعة الممكّنة للحقل الديناميكي، يمكنك استخدام المفاتيح في الحقل الديناميكي للتصفية العددية، تمامًا كما تفعل مع الحقول المحددة صراحةً في المخطط.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">تمكين الحقل الديناميكي<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +55,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يتم تمكين الحقل الديناميكي افتراضيًا في المجموعات التي تم إنشاؤها باستخدام الطريقة الموضحة في <a href="/docs/ar/create-collection-instantly.md">إنشاء مجموعة على الفور</a>. يمكنك أيضًا تمكين الحقل الديناميكي يدويًا عند إنشاء مجموعة بإعدادات مخصصة.</p>
+    </button></h2><p>يمكنك تمكين الحقل الديناميكي يدويًا عند إنشاء مجموعة بإعدادات مخصصة.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -152,7 +152,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عندما يتم تمكين الحقل الديناميكي في مجموعتك، سيتم تخزين جميع الحقول وقيمها التي لم يتم تعريفها في المخطط كأزواج مفاتيح-قيم في الحقل الديناميكي.</p>
+    </button></h2><p>عندما يتم تمكين الحقل الديناميكي في مجموعتك، سيتم تخزين جميع الحقول وقيمها غير المحددة في المخطط كأزواج مفاتيح-قيم في الحقل الديناميكي.</p>
 <p>على سبيل المثال، لنفترض أن مخطط مجموعتك يحدد حقلين فقط، وهما <code translate="no">id</code> و <code translate="no">vector</code> ، مع تمكين الحقل الديناميكي. الآن، أدخل مجموعة البيانات التالية في هذه المجموعة.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -322,10 +322,10 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">فهرسة حقل قياسي في الحقل الديناميكي</h3><p>عندما تقوم بتمكين حقل ديناميكي، يتم تخزين أي حقول قياسية غير محددة كأزواج مفاتيح-قيم بتنسيق JSON. يدعم Milvus إنشاء فهرس على مثل هذا الحقل القياسي غير المعرّف، بشكل فعال عن طريق بناء فهرس مسار JSON. إليك كيفية عمل ذلك:</p>
+<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">فهرسة حقل قياسي في الحقل الديناميكي</h3><p>عندما تقوم بتمكين حقل ديناميكي، يتم تخزين أي حقول قياسية غير محددة كأزواج مفاتيح-قيم بتنسيق JSON. يدعم Milvus إنشاء فهرس على مثل هذا الحقل القياسي غير المعرّف، بشكل فعال من خلال بناء فهرس مسار JSON. إليك كيفية عمل ذلك:</p>
 <ol>
 <li><p><strong>اختر مفتاح الحقل الديناميكي</strong> الذي تريد فهرسته. على سبيل المثال، <code translate="no">&quot;color&quot;</code> في المثال أعلاه.</p></li>
-<li><p><strong>حدّد نوع الجبيرة</strong> للقيم الموجودة في هذا المفتاح. سيقوم ميلفوس بتحليل الحقل الديناميكي، واستخراج القيم الموجودة تحت المفتاح المحدد، وإرسالها إلى النوع الذي قمت بتكوينه.</p>
+<li><p><strong>حدّد نوع الجبيرة</strong> للقيم الموجودة في هذا المفتاح. سيقوم Milvus بتحليل الحقل الديناميكي، واستخراج القيم الموجودة تحت المفتاح المحدد، وإرسالها إلى النوع الذي قمت بتكوينه.</p>
 <ul>
 <li><p>القيم <code translate="no">json_cast_type</code> المدعومة هي <code translate="no">bool</code> (أو <code translate="no">BOOL</code>) و <code translate="no">double</code> (أو <code translate="no">DOUBLE</code>) و <code translate="no">varchar</code> (أو <code translate="no">VARCHAR</code>).</p></li>
 <li><p>في حالة فشل التحليل أو الصب (على سبيل المثال، محاولة تحليل سلسلة على أنها مزدوجة)، سيتم تخطي هذه الصفوف في الفهرس.</p></li>

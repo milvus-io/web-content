@@ -75,9 +75,9 @@ title: 管理收藏集
     </button></h2><p>您可以通过以下任一方式创建 Collections：</p>
 <ul>
 <li><p><strong>快速设置</strong></p>
-<p>在这种方式下，只需给集合命名并指定要存储在此集合中的向量嵌入的维数，即可创建集合。详情请参阅<a href="/docs/zh/manage-collections.md">快速设置</a>。</p></li>
+<p>在这种方式下，只需给集合命名并指定要存储在此集合中的向量嵌入的维数，即可创建集合。详情请参阅<a href="/docs/zh/v2.4.x/manage-collections.md">快速设置</a>。</p></li>
 <li><p><strong>自定义设置</strong></p>
-<p>与让 In Milvus 为你的 Collections 决定几乎所有事情不同，你可以自己决定 Collections 的<strong>Schema</strong>和<strong>索引参数</strong>。详情请参阅<a href="/docs/zh/manage-collections.md">自定义设置</a>。</p></li>
+<p>与让 In Milvus 为你的 Collections 决定几乎所有事情不同，你可以自己决定 Collections 的<strong>Schema</strong>和<strong>索引参数</strong>。详情请参阅<a href="/docs/zh/v2.4.x/manage-collections.md">自定义设置</a>。</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">快速设置</h3><p>在人工智能行业大跃进的背景下，大多数开发人员只需要一个简单而又充满活力的 Collections 就可以开始使用了。Milvus 只需三个参数就能快速设置这样的 Collections：</p>
 <ul>
@@ -274,7 +274,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </ul>
 <p>从提供的代码中自动索引和加载的 Collections 可以立即插入数据。</p>
 <h3 id="Customized-setup" class="common-anchor-header">自定义设置</h3><p>与其让 Milvus 为你的 Collections 决定几乎一切，你可以自己决定 Collections 的<strong>Schema</strong>和<strong>索引参数</strong>。</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">第一步：设置 Schema</h4><p>Schema 定义了 Collections 的结构。在 Schema 中，您可以选择启用或禁用<code translate="no">enable_dynamic_field</code> 、添加预定义字段以及为每个字段设置属性。有关概念和可用数据类型的详细解释，请参阅<a href="/docs/zh/schema.md">Schema Explained</a>。</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">第一步：设置 Schema</h4><p>Schema 定义了 Collections 的结构。在 Schema 中，您可以选择启用或禁用<code translate="no">enable_dynamic_field</code> 、添加预定义字段以及为每个字段设置属性。有关概念和可用数据类型的详细解释，请参阅<a href="/docs/zh/v2.4.x/schema.md">Schema Explained</a>。</p>
 <div class="language-python">
 <p>要设置模式，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>创建模式对象，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>为模式添加字段。</p>
 </div>
@@ -529,7 +529,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">第二步：设置索引参数</h4><p>索引参数决定了 Milvus 如何在 Collections 中组织数据。您可以通过调整<code translate="no">metric_type</code> 和<code translate="no">index_type</code> 来定制特定字段的索引过程。对于向量字段，您可以根据所处理的向量类型，灵活选择<code translate="no">COSINE</code>,<code translate="no">L2</code>,<code translate="no">IP</code>,<code translate="no">HAMMING</code> 或<code translate="no">JACCARD</code> 作为<code translate="no">metric_type</code> 。更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度指标"</a>。</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">第二步：设置索引参数</h4><p>索引参数决定了 Milvus 如何在 Collections 中组织数据。您可以通过调整<code translate="no">metric_type</code> 和<code translate="no">index_type</code> 来定制特定字段的索引过程。对于向量字段，您可以根据所处理的向量类型，灵活选择<code translate="no">COSINE</code>,<code translate="no">L2</code>,<code translate="no">IP</code>,<code translate="no">HAMMING</code> 或<code translate="no">JACCARD</code> 作为<code translate="no">metric_type</code> 。更多信息，请参阅 "<a href="/docs/zh/v2.4.x/metric.md">相似度指标"</a>。</p>
 <div class="language-python">
 <p>要设置索引参数，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>准备索引参数，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>来添加索引。</p>
 </div>
@@ -903,7 +903,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面创建的 Collection 会自动加载。要了解加载和释放集合的更多信息，请参阅加载和<a href="/docs/zh/manage-collections.md#Load--Release-Collection">释放集合</a>。</p></li>
+<p>上面创建的 Collection 会自动加载。要了解加载和释放集合的更多信息，请参阅加载和<a href="/docs/zh/v2.4.x/manage-collections.md#Load--Release-Collection">释放集合</a>。</p></li>
 <li><p><strong>分别创建 Collections 和索引文件。</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
@@ -1021,7 +1021,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面创建的 Collection 不会自动加载。您可以按如下方式为 Collections 创建索引。以单独的方式为 Collection 创建索引不会自动加载 Collection。有关详细信息，请参阅<a href="/docs/zh/manage-collections.md#Load--Release-Collection">加载和释放 Collections</a>。</p>
+<p>上面创建的 Collection 不会自动加载。您可以按如下方式为 Collections 创建索引。以单独的方式为 Collection 创建索引不会自动加载 Collection。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/manage-collections.md#Load--Release-Collection">加载和释放 Collections</a>。</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1160,7 +1160,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>上面创建的 Collection 不会自动加载。你可以按以下方法为 Collections 创建索引。以单独方式为集合创建索引不会自动加载集合。有关详细信息，请参阅<a href="/docs/zh/manage-collections.md">加载和释放集合</a>。</p>
+<p>上面创建的 Collection 不会自动加载。你可以按以下方法为 Collections 创建索引。以单独方式为集合创建索引不会自动加载集合。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/manage-collections.md">加载和释放集合</a>。</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>

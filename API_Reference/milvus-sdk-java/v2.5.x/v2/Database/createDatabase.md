@@ -39,6 +39,20 @@ The properties of the database, such as replica number, resource groups.
 ## Example
 
 ```java
+import io.milvus.param.Constant;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.database.request.CreateDatabaseReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a database
 Map<String, String> properties = new HashMap<>();
 properties.put(Constant.DATABASE_REPLICA_NUMBER, "2");
 CreateDatabaseReq createDatabaseReq = CreateDatabaseReq.builder()

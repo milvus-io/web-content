@@ -108,7 +108,31 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La configuración del analizador incorporado <code translate="no">standard</code> anterior es equivalente a configurar un <a href="/docs/es/analyzer-overview.md#Custom-analyzer">analizador personalizado</a> con los siguientes parámetros, donde las opciones <code translate="no">tokenizer</code> y <code translate="no">filter</code> se definen explícitamente para lograr una funcionalidad similar:</p>
+<p>Para comprobar el resultado de la ejecución de un analizador, utilice el método <code translate="no">run_analyzer</code>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment"># Run analyzer</span>
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>La salida será:</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
+<button class="copy-code-btn"></button></code></pre>
+<p>Esto demuestra que el analizador tokeniza correctamente el texto de entrada filtrando las palabras de parada <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, y <code translate="no">&quot;for&quot;</code>, y devolviendo el resto de tokens significativos.</p>
+<p>La configuración del analizador integrado <code translate="no">standard</code> anterior es equivalente a la configuración de un <a href="/docs/es/analyzer-overview.md#Custom-analyzer">analizador personalizado</a> con los siguientes parámetros, donde las opciones <code translate="no">tokenizer</code> y <code translate="no">filter</code> se definen explícitamente para lograr una funcionalidad similar:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -159,14 +183,13 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
    ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus ofrece los siguientes analizadores integrados, cada uno diseñado para necesidades específicas de procesamiento de texto:</p>
+<p>Milvus ofrece los siguientes analizadores incorporados, cada uno diseñado para necesidades específicas de procesamiento de texto:</p>
 <ul>
 <li><p><code translate="no">standard</code>: Adecuado para el procesamiento de texto de uso general, aplicando la tokenización estándar y el filtrado de minúsculas.</p></li>
 <li><p><code translate="no">english</code>: Optimizado para texto en inglés, con soporte para palabras vacías en inglés.</p></li>
 <li><p><code translate="no">chinese</code>: Especializado para el tratamiento de texto chino, con tokenización adaptada a las estructuras del idioma chino.</p></li>
 </ul>
-<p>Para obtener una lista de los analizadores incorporados y sus ajustes personalizables, consulte <a href="/docs/es/built-in-analyzers">Referencia de analizadores incorporados</a>.</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">Analizador personalizado</h3><p>Para un procesamiento de texto más avanzado, los analizadores personalizados de Milvus le permiten construir un canal de tratamiento de texto a medida especificando tanto un <strong>tokenizador</strong> como <strong>filtros</strong>. Esta configuración es ideal para casos de uso especializados en los que se requiere un control preciso.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">Analizador personalizado</h3><p>Para un procesamiento de texto más avanzado, los analizadores personalizados de Milvus le permiten construir una cadena de procesamiento de texto a medida especificando tanto un <strong>tokenizador</strong> como <strong>filtros</strong>. Esta configuración es ideal para casos de uso especializado en los que se requiere un control preciso.</p>
 <h4 id="Tokenizer" class="common-anchor-header">Tokenizador</h4><p>El <strong>tokenizador</strong> es un componente <strong>obligatorio</strong> para un analizador personalizado, que inicia el proceso de análisis descomponiendo el texto de entrada en unidades discretas o <strong>tokens</strong>. La tokenización sigue reglas específicas, como la división por espacios en blanco o signos de puntuación, dependiendo del tipo de tokenizador. Este proceso permite un tratamiento más preciso e independiente de cada palabra o frase.</p>
 <p>Por ejemplo, un tokenizador convertiría el texto <code translate="no">&quot;Vector Database Built for Scale&quot;</code> en tokens separados:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -191,7 +214,6 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener una lista de los tokenizadores disponibles, consulte <a href="/docs/es/tokenizers">Referencia de tokenizadores</a>.</p>
 <h4 id="Filter" class="common-anchor-header">Filtro</h4><p><strong>Los filtros</strong> son componentes <strong>opcionales</strong> que trabajan sobre los tokens producidos por el tokenizador, transformándolos o refinándolos según sea necesario. Por ejemplo, tras aplicar un filtro <code translate="no">lowercase</code> a los términos tokenizados <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, el resultado podría ser:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
@@ -282,8 +304,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Para obtener una lista de los tipos de filtro disponibles y sus parámetros específicos, consulte <a href="/docs/es/filters">Referencia de filtros</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">Ejemplo de uso<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -309,7 +330,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p>El otro utiliza un analizador personalizado.</p></li>
 </ul></li>
 </ul>
-<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Paso 1: Inicializar MilvusClient y crear el esquema</h3><p>Comience por configurar el cliente Milvus y crear un nuevo esquema.</p>
+<p>Antes de incorporar estas configuraciones a su colección, verificará cada analizador utilizando el método <code translate="no">run_analyzer</code>.</p>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Paso 1: Inicializar MilvusClient y crear el esquema</h3><p>Comience por inicializar el cliente Milvus y crear un nuevo esquema.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -372,7 +394,8 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Paso 2: Definir y verificar las configuraciones del analizador</h3><ol>
 <li><p><strong>Configure y verifique un analizador incorporado</strong> (<code translate="no">english</code>)<strong>:</strong></p>
 <ul>
-<li><strong>Configuración:</strong> Definir los parámetros del analizador para el analizador incorporado en inglés.</li>
+<li><p><strong>Configuración:</strong> Definir los parámetros del analizador para el analizador incorporado en inglés.</p></li>
+<li><p><strong>Verificación:</strong> Utilice <code translate="no">run_analyzer</code> para comprobar que la configuración produce la tokenización esperada.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -380,6 +403,14 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 analyzer_params_built_in = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
 }
+
+<span class="hljs-comment"># Verify built-in analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_built_in)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Built-in analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -396,7 +427,8 @@ analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <sp
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Configurar y verificar un analizador personalizado:</strong></p>
 <ul>
-<li><strong>Configuración:</strong> Definir un analizador personalizado que utilice un tokenizador estándar junto con un filtro de minúsculas incorporado y filtros personalizados para la longitud de los tokens y las palabras de parada.</li>
+<li><p><strong>Configuración:</strong> Define un analizador personalizado que utilice un tokenizador estándar junto con un filtro de minúsculas incorporado y filtros personalizados para la longitud de los tokens y las palabras vacías.</p></li>
+<li><p><strong>Verificación:</strong> Utilice <code translate="no">run_analyzer</code> para asegurarse de que la configuración personalizada procesa el texto según lo previsto.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -415,6 +447,14 @@ analyzer_params_custom = {
         }
     ]
 }
+
+<span class="hljs-comment"># Verify custom analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_custom)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Custom analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>

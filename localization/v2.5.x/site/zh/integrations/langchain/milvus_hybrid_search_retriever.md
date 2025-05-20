@@ -25,12 +25,12 @@ title: Milvus 混合搜索检索器
     <span></span>
   </span>
 </p>
-<p>本图展示了最常见的混合搜索方案，即密集+稀疏混合搜索。在这种情况下，使用语义向量相似性和精确关键词匹配两种方法检索候选内容。来自这些方法的结果会被合并、Rerankers 并传递给 LLM 以生成最终答案。这种方法兼顾了精确性和语义理解，对各种查询场景都非常有效。</p>
-<p>除了密集+稀疏混合搜索，混合策略还可以结合多个密集向量模型。例如，一种密集向量模型可能专门捕捉语义的细微差别，而另一种则侧重于上下文嵌入或特定领域的表征。通过合并这些模型的结果并重新排序，这种类型的混合搜索可确保检索过程更加细致入微、更能感知上下文。</p>
+<p>本图展示了最常见的混合搜索方案，即密集+稀疏混合搜索。在这种情况下，使用语义向量相似性和精确关键词匹配两种方法检索候选内容。来自这些方法的结果会被合并、重新排序，并传递给 LLM 以生成最终答案。这种方法兼顾了精确性和语义理解，对各种查询场景都非常有效。</p>
+<p>除了密集+稀疏混合搜索，混合策略还可以结合多个密集向量模型。例如，一种密集向量模型可能专门捕捉语义的细微差别，而另一种则侧重于上下文嵌入或特定领域的表示。通过合并这些模型的结果并重新排序，这种类型的混合搜索可确保检索过程更加细致入微、更能感知上下文。</p>
 <p>LangChain Milvus集成提供了实现混合搜索的灵活方式，它支持任意数量的向量场，以及任意自定义的密集或稀疏嵌入模型，这使得LangChain Milvus能够灵活适应各种混合搜索使用场景，同时兼容LangChain的其他功能。</p>
 <p>在本教程中，我们将从最常见的密集+稀疏情况开始，然后介绍各种通用的混合搜索使用方法。</p>
 <div class="alert note">
-<p><a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a> 是使用 Milvus 和 LangChain 进行混合搜索的另一种实现，<strong>即将被弃用</strong>。请使用本文档中的方法来实现混合搜索，因为它更灵活，而且与 LangChain 兼容。</p>
+<p><a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a> 是使用 Milvus 和 LangChain 进行混合搜索的另一种实现，<strong>即将被废弃</strong>。请使用本文档中的方法来实现混合搜索，因为它更灵活，而且与 LangChain 兼容。</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,7 +137,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -196,7 +196,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>虽然这是使用 BM25 的一种方法，但它要求用户管理语料库以进行词频统计。我们建议改用 BM25 内置函数（选项 1），因为它能在 Milvus 服务器端处理一切事务。这样，用户就无需关心管理语料库或训练词汇的问题。更多信息，请参阅《<a href="https://milvus.io/docs/full_text_search_with_langchain.md">使用 LangChain 和 Milvus 进行全文检索</a>》。</p>
@@ -215,7 +215,7 @@ vectorstore = Milvus.from_documents(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在初始化 Milvus 向量存储时，你可以传入 Embeddings 列表（将来还会传入内置函数列表）来实现多路检索，然后对这些候选者进行 Rerankers。 下面是一个例子：</p>
+    </button></h2><p>在初始化 Milvus 向量存储时，你可以传入 Embeddings 列表（将来也会传入内置函数列表）来实现多路检索，然后对这些候选者进行 Rerankers。 下面是一个例子：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
 embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
@@ -233,7 +233,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -265,7 +265,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -286,7 +286,7 @@ vectorstore.vector_fields
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -359,7 +359,7 @@ docs[<span class="hljs-number">1</span>]
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">构建 RAG 链</h3><p>我们准备好 LLM 实例和提示，然后使用 LangChain 表达式语言将它们结合到 RAG 管道中。</p>

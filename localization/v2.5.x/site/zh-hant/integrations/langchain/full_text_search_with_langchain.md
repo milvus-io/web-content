@@ -25,9 +25,9 @@ title: 使用 LangChain 和 Milvus 進行全文檢索
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文</a>檢索是一種透過匹配文字中特定關鍵字或短語來檢索文件的傳統方法。它會根據詞彙頻率等因素計算出的相關性分數對結果進行排序。語意搜尋更擅長於理解意義和上下文，而全文搜尋則擅長於精確的關鍵字匹配，因此是語意搜尋的有效補充。BM25 演算法廣泛用於全文檢索的排序，並在檢索增強世代 (Retrieval-Augmented Generation, RAG) 中扮演關鍵角色。</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>引入了使用 BM25 的原生全文搜尋功能。此方法可將文字轉換成代表 BM25 分數的稀疏向量。您只需輸入原始文字，Milvus 就會自動產生並儲存稀疏向量，不需要手動產生稀疏嵌入。</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>引進了使用 BM25 的原生全文搜尋功能。此方法可將文字轉換成代表 BM25 分數的稀疏向量。您只需輸入原始文字，Milvus 就會自動產生並儲存稀疏向量，不需要手動產生稀疏嵌入。</p>
 <p>LangChain 與 Milvus 的整合也引進了這項功能，簡化了將全文檢索融入 RAG 應用程式的過程。透過結合全文檢索與密集向量的語意檢索，您可以達成一種混合方法，同時利用密集內嵌的語意上下文與字詞比對的精確關鍵字相關性。這種整合可以增強搜尋系統的精確度、相關性和使用者體驗。</p>
-<p>本教學將介紹如何使用 LangChain 和 Milvus 在您的應用程式中實作全文檢索。</p>
+<p>本教學將介紹如何使用 LangChain 和 Milvus 在您的應用程式中實作全文搜尋。</p>
 <div class="alert note">
 <ul>
 <li>目前，Milvus Standalone、Milvus Distributed 和 Zilliz Cloud 都提供全文搜尋功能，但 Milvus Lite 尚未支援此功能 (此功能將於未來實作)。如需更多資訊，請聯絡 support@zilliz.com。</li>
@@ -103,7 +103,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的程式碼中，我們定義了<code translate="no">BM25BuiltInFunction</code> 的一個實例，並將它傳給<code translate="no">Milvus</code> 物件。<code translate="no">BM25BuiltInFunction</code> 是一個輕量級的包裝類，用於 <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a>的一個輕量級包裝類。</p>
@@ -134,7 +134,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -162,7 +162,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -209,7 +209,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>我們可以看看 Milvus 套件的 schema，並確保自訂的分析器設定正確。</p>
@@ -282,7 +282,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">建立 RAG 鏈</h3><p>我們準備好 LLM 實例和提示，然後用 LangChain Expression Language 將它們結合成 RAG 管道。</p>
@@ -334,7 +334,7 @@ rag_chain = (
 
 <span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以特定的問題來啟動 RAG 鏈，並擷取回應</p>
+<p>使用特定的問題來呼叫 RAG 鏈，並擷取回應</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
 res = rag_chain.invoke(query)
 res

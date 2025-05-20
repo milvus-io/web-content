@@ -21,7 +21,7 @@ title: Ricerca ibrida
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A partire da Milvus 2.4, abbiamo introdotto il supporto per i vettori multipli e un framework di ricerca ibrida, il che significa che gli utenti possono inserire diversi campi vettoriali (fino a 10) in un'unica raccolta. Questi vettori in diverse colonne rappresentano diverse sfaccettature dei dati, provenienti da diversi modelli di incorporazione o sottoposti a diversi metodi di elaborazione. I risultati delle ricerche ibride vengono integrati utilizzando strategie di reranking, come Reciprocal Rank Fusion (RRF) e Weighted Scoring. Per saperne di più sulle strategie di reranking, consultare <a href="/docs/it/reranking.md">Reranking</a>.</p>
+    </button></h1><p>A partire da Milvus 2.4, abbiamo introdotto il supporto per i vettori multipli e un framework di ricerca ibrida, il che significa che gli utenti possono inserire diversi campi vettoriali (fino a 10) in un'unica raccolta. Questi vettori in diverse colonne rappresentano diverse sfaccettature dei dati, provenienti da diversi modelli di incorporazione o sottoposti a diversi metodi di elaborazione. I risultati delle ricerche ibride vengono integrati utilizzando strategie di reranking, come Reciprocal Rank Fusion (RRF) e Weighted Scoring. Per saperne di più sulle strategie di reranking, consultare <a href="/docs/it/v2.4.x/reranking.md">Reranking</a>.</p>
 <p>Questa funzione è particolarmente utile in scenari di ricerca completi, come l'identificazione della persona più simile in una libreria vettoriale basata su vari attributi come immagini, voce, impronte digitali, ecc.</p>
 <p>In questa esercitazione si apprenderà come:</p>
 <ul>
@@ -178,7 +178,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dopo aver creato le istanze <code translate="no">AnnSearchRequest</code>, configurare una strategia di reranking per combinare e classificare i risultati. Attualmente esistono due opzioni: <code translate="no">WeightedRanker</code> e <code translate="no">RRFRanker</code>. Per ulteriori informazioni sulle strategie di reranking, consultare <a href="/docs/it/reranking.md">Reranking</a>.</p>
+    </button></h2><p>Dopo aver creato le istanze <code translate="no">AnnSearchRequest</code>, configurare una strategia di reranking per combinare e classificare i risultati. Attualmente esistono due opzioni: <code translate="no">WeightedRanker</code> e <code translate="no">RRFRanker</code>. Per ulteriori informazioni sulle strategie di reranking, consultare <a href="/docs/it/v2.4.x/reranking.md">Reranking</a>.</p>
 <ul>
 <li><p>Usa il punteggio ponderato</p>
 <p>Il sito <code translate="no">WeightedRanker</code> viene usato per assegnare l'importanza ai risultati di ogni ricerca di campi vettoriali con pesi specificati. Se si dà priorità ad alcuni campi vettoriali rispetto ad altri, <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> può rifletterlo nei risultati della ricerca combinata.</p>
@@ -232,7 +232,7 @@ res = collection.hybrid_search(
 <p>Un elenco di richieste di ricerca, in cui ogni richiesta è un oggetto <code translate="no">ANNSearchRequest</code>. Ogni richiesta può corrispondere a un campo vettoriale diverso e a un diverso insieme di parametri di ricerca.</p></li>
 <li><p><code translate="no">rerank</code> <em>(oggetto</em>)</p>
 <p>La strategia di reranking da utilizzare per la ricerca ibrida. Valori possibili: <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> e <code translate="no">RRFRanker()</code>.</p>
-<p>Per ulteriori informazioni sulle strategie di reranking, consultare <a href="/docs/it/reranking.md">Reranking</a>.</p></li>
+<p>Per ulteriori informazioni sulle strategie di reranking, consultare <a href="/docs/it/v2.4.x/reranking.md">Reranking</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>Il numero massimo di risultati finali da restituire nella ricerca ibrida.</p></li>
 </ul>

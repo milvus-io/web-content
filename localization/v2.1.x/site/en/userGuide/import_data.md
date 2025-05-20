@@ -21,7 +21,7 @@ title: ''
       </svg>
     </button></h1><p>This topic describes how to import data in Milvus via bulk load.</p>
 <p>Regular method to insert a large batch of entities to Milvus usually leads to a massive network transmission across client, proxy, Pulsar and data nodes. To avoid such situation, Milvus 2.1 supports loading data from files via bulk load. You can import large amounts of data into a collection by just a few lines of code, and endow atomicity to a whole batch of entities.</p>
-<p>You can also migrate data to Milvus with <a href="/docs/migrate_overview.md">MilvusDM</a>, an open-source tool designed specifically for importing and exporting data with Milvus.</p>
+<p>You can also migrate data to Milvus with <a href="/docs/v2.1.x/migrate_overview.md">MilvusDM</a>, an open-source tool designed specifically for importing and exporting data with Milvus.</p>
 <h2 id="Prepare-data-file" class="common-anchor-header">Prepare data file<button data-href="#Prepare-data-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,11 +117,11 @@ numpy.save(<span class="hljs-string">&#x27;book_intro.npy&#x27;</span>, arr)
 <ul>
 <li>Upload to MinIO</li>
 </ul>
-<p>upload the data files to the bucket which is defined by <a href="/docs/configure_minio.md#miniobucketName"><code translate="no">minio.bucketName</code></a> in the configuration file <code translate="no">milvus.yml</code>.</p>
+<p>upload the data files to the bucket which is defined by <a href="/docs/v2.1.x/configure_minio.md#miniobucketName"><code translate="no">minio.bucketName</code></a> in the configuration file <code translate="no">milvus.yml</code>.</p>
 <ul>
 <li>Upload to local storage</li>
 </ul>
-<p>copy the data files into the directory which is defined by <a href="/docs/configure_localstorage.md#localStoragepath"><code translate="no">localStorage.path</code></a> in the configuration file <code translate="no">milvus.yml</code>.</p>
+<p>copy the data files into the directory which is defined by <a href="/docs/v2.1.x/configure_localstorage.md#localStoragepath"><code translate="no">localStorage.path</code></a> in the configuration file <code translate="no">milvus.yml</code>.</p>
 <h2 id="Insert-data-to-Milvus" class="common-anchor-header">Insert data to Milvus<button data-href="#Insert-data-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,9 +262,9 @@ tasks = utility.bulk_load(
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.1.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.1.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.1.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 <li>Explore API references for Milvus SDKs:
 <ul>

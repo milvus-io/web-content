@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>In Milvus können Sie ein Sammlungsschema erstellen, indem Sie die Namen und Datentypen für jedes Feld in der Sammlung festlegen. Wenn Sie ein Feld zum Schema hinzufügen, stellen Sie sicher, dass dieses Feld in der Entität enthalten ist, die Sie einfügen möchten. Wenn Sie möchten, dass einige Felder optional sind, ist die Aktivierung des dynamischen Feldes eine Möglichkeit.</p>
-<p>Bei dem dynamischen Feld handelt es sich um ein reserviertes Feld mit der Bezeichnung <code translate="no">$meta</code>, das vom Typ JavaScript Object Notation (JSON) ist. Alle Felder in den Entitäten, die nicht im Schema definiert sind, werden in diesem reservierten JSON-Feld als Schlüssel-Wert-Paare gespeichert.</p>
+<p>Das dynamische Feld ist ein reserviertes Feld namens <strong>$meta</strong>, das vom Typ JavaScript Object Notation (JSON) ist. Alle Felder in den Entitäten, die nicht im Schema definiert sind, werden in diesem reservierten JSON-Feld als Schlüssel-Wert-Paare gespeichert.</p>
 <p>Bei einer Sammlung mit aktiviertem dynamischen Feld können Sie die Schlüssel im dynamischen Feld für die skalare Filterung verwenden, genau wie bei explizit im Schema definierten Feldern.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Aktivieren des dynamischen Felds<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,7 +56,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bei Sammlungen, die mit der unter <a href="/docs/de/create-collection-instantly.md">Sofortige Erstellung einer Sammlung</a> beschriebenen Methode erstellt wurden, ist das dynamische Feld standardmäßig aktiviert. Sie können das dynamische Feld auch manuell aktivieren, wenn Sie eine Sammlung mit benutzerdefinierten Einstellungen erstellen.</p>
+    </button></h2><p>Sie können das dynamische Feld manuell aktivieren, wenn Sie eine Sammlung mit benutzerdefinierten Einstellungen erstellen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

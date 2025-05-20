@@ -24,7 +24,7 @@ When you need to update an Entity in a Collection or are not sure whether to upd
 
 ## Upsert Entity in a Collection
 
-In this section, you will upsert Entities into a Collection created [in the quick-setup manner](create-collection-instantly.md#Quick-Setup). A Collection created in this manner has only two fields, named **id** and **vector**. Additionally, this Collection has the dynamic field enabled, so the Entities in the example code include a field called **color** that is not defined in the Schema.
+In this section, you will upsert Entities into a Collection created in the quick-setup manner. A Collection created in this manner has only two fields, named **id** and **vector**. Additionally, this Collection has the dynamic field enabled, so the Entities in the example code include a field called **color** that is not defined in the Schema.
 
 <div class="multipleCode">
     <a href="#python">Python</a>

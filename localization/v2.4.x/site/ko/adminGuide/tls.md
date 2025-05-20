@@ -21,7 +21,7 @@ summary: Milvus에서 TLS 프록시를 활성화하는 방법을 알아보세요
     </button></h1><p>TLS(전송 계층 보안)는 통신 보안을 보장하기 위한 암호화 프로토콜입니다. Milvus 프록시는 TLS 단방향 및 양방향 인증을 사용합니다.</p>
 <p>이 항목에서는 Milvus 프록시에서 gRPC 및 RESTful 트래픽 모두에 대해 TLS를 활성화하는 방법에 대해 설명합니다.</p>
 <div class="alert note">
-<p>TLS와 사용자 인증은 서로 다른 두 가지 보안 접근 방식입니다. Milvus 시스템에서 사용자 인증과 TLS를 모두 사용 설정한 경우 사용자 이름, 비밀번호 및 인증서 파일 경로를 제공해야 합니다. 사용자 인증을 활성화하는 방법에 대한 자세한 내용은 <a href="/docs/ko/authenticate.md">사용자 액세스 인증을</a> 참조하세요.</p>
+<p>TLS와 사용자 인증은 서로 다른 두 가지 보안 접근 방식입니다. Milvus 시스템에서 사용자 인증과 TLS를 모두 사용 설정한 경우 사용자 이름, 비밀번호 및 인증서 파일 경로를 제공해야 합니다. 사용자 인증을 활성화하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/authenticate.md">사용자 액세스 인증을</a> 참조하세요.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">나만의 인증서 만들기<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"

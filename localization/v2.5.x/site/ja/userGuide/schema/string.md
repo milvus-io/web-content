@@ -21,7 +21,7 @@ summary: Milvusでは、VARCHARは文字列データを格納するために使�
     </button></h1><p>Milvusにおいて、<code translate="no">VARCHAR</code> は文字列データを格納するために使用されるデータ型です。<code translate="no">VARCHAR</code> フィールドを定義する場合、2つのパラメータが必須です：</p>
 <ul>
 <li><p><code translate="no">datatype</code> を<code translate="no">DataType.VARCHAR</code> に設定する。</p></li>
-<li><p><code translate="no">VARCHAR</code> フィールドが格納できる最大文字数を定義する<code translate="no">max_length</code> を指定します。<code translate="no">max_length</code> の有効範囲は 1 から 65,535 です。</p></li>
+<li><p><code translate="no">VARCHAR</code> フィールドが格納できる最大バイト数を定義する<code translate="no">max_length</code> を指定します。<code translate="no">max_length</code> の有効範囲は 1 から 65,535 です。</p></li>
 </ul>
 <div class="alert note">
 <p>Milvus は<code translate="no">VARCHAR</code> フィールドのヌル値とデフォルト値をサポートしています。これらの機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に、<code translate="no">default_value</code> を文字列値に設定してください。詳細については、<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Defaultを</a>参照してください。</p>
@@ -43,11 +43,11 @@ summary: Milvusでは、VARCHARは文字列データを格納するために使�
       </svg>
     </button></h2><p>Milvusに文字列データを格納するには、コレクションスキーマに<code translate="no">VARCHAR</code> フィールドを定義してください。以下は、2つの<code translate="no">VARCHAR</code> フィールドを持つコレクションスキーマを定義する例です：</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: 100 文字まで保存でき、NULL 値を許容し、デフォルト値は<code translate="no">&quot;Unknown&quot;</code> です。</p></li>
-<li><p><code translate="no">varchar_field2</code>: は最大 200 文字を格納し、NULL 値を許可しますが、デフォルト値はありません。</p></li>
+<li><p><code translate="no">varchar_field1</code>: 100 バイトまで保存でき、NULL 値を許容し、デフォルト値は<code translate="no">&quot;Unknown&quot;</code> です。</p></li>
+<li><p><code translate="no">varchar_field2</code>: は最大 200 バイトを格納し、NULL 値を許可しますが、デフォルト値はありません。</p></li>
 </ul>
 <div class="alert note">
-<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusは事前に定義されていないスカラーフィールドを挿入することができます。ただし、これによりクエリや管理が複雑になり、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
+<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusは事前に定義されていないスカラーフィールドを挿入することができます。しかし、これによりクエリや管理が複雑になり、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -246,7 +246,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。Milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
-<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> とスカラー・フィールド<code translate="no">varchar_field1</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細については、「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」を参照してください。</p>
+<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> とスカラー・フィールド<code translate="no">varchar_field1</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳しくは「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」をご参照ください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

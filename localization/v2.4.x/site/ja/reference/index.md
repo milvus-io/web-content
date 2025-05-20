@@ -19,9 +19,9 @@ title: インメモリインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、Milvusがサポートする様々なタイプのインメモリインデックス、それぞれのインデックスが最適なシナリオ、および、より良い検索パフォーマンスを達成するためにユーザが設定できるパラメータについて説明します。オンディスクインデックスについては、<strong><a href="/docs/ja/disk_index.md">オンディスクインデックスを</a></strong>参照してください。</p>
+    </button></h1><p>このトピックでは、Milvusがサポートする様々なタイプのインメモリインデックス、それぞれのインデックスが最適なシナリオ、および、より良い検索パフォーマンスを達成するためにユーザが設定できるパラメータについて説明します。オンディスクインデックスについては、<strong><a href="/docs/ja/v2.4.x/disk_index.md">オンディスクインデックスを</a></strong>参照してください。</p>
 <p>インデックスはデータを効率的に整理するプロセスであり、大規模なデータセットに対する時間のかかるクエリを劇的に高速化することで、類似検索を有用なものにする上で大きな役割を果たします。</p>
-<p>クエリー性能を向上させるために、各ベクトルフィールドに<a href="/docs/ja/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
+<p>クエリー性能を向上させるために、各ベクトルフィールドに<a href="/docs/ja/v2.4.x/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
 <div class="alert note">
 現在、ベクトルフィールドは1つのインデックスタイプしかサポートしていません。Milvusはインデックスタイプを切り替えると古いインデックスを自動的に削除します。</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNSベクトルインデックス<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +60,7 @@ title: インメモリインデックス
 <div class="filter">
  <a href="#floating">浮動小数点</a> <a href="#binary">埋め込み バイナリ埋め込み</a> <a href="#sparse">スパース埋め込み</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮動小数点埋込みのインデックス</h3><p>128次元の浮動小数点埋め込み（ベクトル）の場合、浮動小数点埋め込みが占有するストレージは128 * floatのサイズ = 512バイトです。また、浮動小数点埋め込みに使われる<a href="/docs/ja/metric.md">距離指標は</a>、ユークリッド距離 (<code translate="no">L2</code>) と内積 (<code translate="no">IP</code>) です。</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮動小数点埋込みのインデックス</h3><p>128次元の浮動小数点埋め込み（ベクトル）の場合、浮動小数点埋め込みが占有するストレージは128 * floatのサイズ = 512バイトです。また、浮動小数点埋め込みに使われる<a href="/docs/ja/v2.4.x/metric.md">距離指標は</a>、ユークリッド距離 (<code translate="no">L2</code>) と内積 (<code translate="no">IP</code>) です。</p>
 <p>これらのタイプのインデックスには、CPUベースのANN検索用に<code translate="no">FLAT</code>,<code translate="no">IVF_FLAT</code>,<code translate="no">IVF_PQ</code>,<code translate="no">IVF_SQ8</code>,<code translate="no">HNSW</code>,<code translate="no">SCANN</code> がある。</p>
 </div>
 <div class="filter-binary">
@@ -218,7 +218,7 @@ title: インメモリインデックス
 <tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[オプション] 選択された距離メトリック。</td><td><a href="/docs/ja/metric.md">サポートされるメトリックを</a>参照。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[オプション] 選択された距離メトリック。</td><td><a href="/docs/ja/v2.4.x/metric.md">サポートされるメトリックを</a>参照。</td></tr>
 </tbody>
 </table>
 </li>
@@ -418,7 +418,7 @@ title: インメモリインデックス
 <tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[オプション] 選択された距離メトリック。</td><td><a href="/docs/ja/metric.md">サポートされるメトリックを</a>参照してください。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[オプション] 選択された距離メトリック。</td><td><a href="/docs/ja/v2.4.x/metric.md">サポートされるメトリックを</a>参照してください。</td></tr>
 </tbody>
 </table>
 </li>
@@ -488,7 +488,7 @@ title: インメモリインデックス
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>このインデックスは、<code translate="no">SPARSE_INVERTED_INDEX</code> と類似しているが、<a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a>アルゴリズムを利用することで、検索プロセスにおけるフル IP 距離評価の回数をさらに減らしている。</p>
-<p>我々のテストに基づくと、<code translate="no">SPARSE_WAND</code> は一般的にスピードの点で他の方法を上回る。しかし、その性能はベクトルの密度が高くなるにつれて急激に悪化する可能性がある。この問題に対処するため、ゼロでない<code translate="no">drop_ratio_search</code> を導入することで、精度の低下を最小限に抑えつつ、性能を大幅に向上させることができます。詳細は<a href="/docs/ja/sparse_vector.md">スパースベクトルを</a>参照。</p>
+<p>我々のテストに基づくと、<code translate="no">SPARSE_WAND</code> は一般的にスピードの点で他の方法を上回る。しかし、その性能はベクトルの密度が高くなるにつれて急激に悪化する可能性がある。この問題に対処するため、ゼロでない<code translate="no">drop_ratio_search</code> を導入することで、精度の低下を最小限に抑えつつ、性能を大幅に向上させることができます。詳細は<a href="/docs/ja/v2.4.x/sparse_vector.md">スパースベクトルを</a>参照。</p>
 <ul>
 <li><p>インデックス構築パラメータ</p>
 <table>
@@ -551,5 +551,5 @@ title: インメモリインデックス
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvusでサポートされている<a href="/docs/ja/metric.md">類似度指標について</a>詳しく知る。</li>
+<li>Milvusでサポートされている<a href="/docs/ja/v2.4.x/metric.md">類似度指標について</a>詳しく知る。</li>
 </ul>

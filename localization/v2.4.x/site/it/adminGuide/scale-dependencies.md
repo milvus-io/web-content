@@ -19,7 +19,7 @@ title: Dipendenze di scala
       </svg>
     </button></h1><p>Milvus si basa su varie dipendenze come MinIO, Kafka, Pulsar e etcd. La scalabilità di questi componenti può migliorare l'adattabilità di Milvus alle diverse esigenze.</p>
 <div class="alert note">
-<p>Per gli utenti di Milvus Operator, consultare <a href="/docs/it/object_storage_operator.md">Configurare l'archiviazione degli oggetti con Milvus Operator</a>, <a href="/docs/it/meta_storage_operator.md">Configurare la metaconservazione con Milvus Operator</a> e <a href="/docs/it/message_storage_operator.md">Configurare l'archiviazione dei messaggi con Milvus Operator</a>.</p>
+<p>Per gli utenti di Milvus Operator, consultare <a href="/docs/it/v2.4.x/object_storage_operator.md">Configurare l'archiviazione degli oggetti con Milvus Operator</a>, <a href="/docs/it/v2.4.x/meta_storage_operator.md">Configurare la metaconservazione con Milvus Operator</a> e <a href="/docs/it/v2.4.x/message_storage_operator.md">Configurare l'archiviazione dei messaggi con Milvus Operator</a>.</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">Scalare MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"

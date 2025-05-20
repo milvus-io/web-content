@@ -35,7 +35,7 @@ title: 비트셋
         ></path>
       </svg>
     </button></h2><p>비트셋은 비트의 집합입니다. 비트는 일반적으로 <code translate="no">0</code> 및 <code translate="no">1</code> 또는 부울 값 <code translate="no">true</code> 및 <code translate="no">false</code> 과 같이 두 가지 값만 가능한 요소입니다. Milvus에서 비트셋은 비트 번호 <code translate="no">0</code> 및 <code translate="no">1</code> 의 배열로, 특정 데이터를 정수, 부동 소수점 또는 문자 대신 간결하고 효율적으로 표현하는 데 사용할 수 있습니다. 비트 번호는 기본적으로 <code translate="no">0</code> 이며, 특정 요구 사항을 충족하는 경우에만 <code translate="no">1</code> 으로 설정됩니다.</p>
-<p>비트셋에 대한 연산은 출력 값이 유효하거나 유효하지 않은 <a href="/docs/ko/boolean.md">부울 논리로</a> 수행되며, 각각 <code translate="no">1</code> 및 <code translate="no">0</code> 으로도 표시됩니다. 예를 들어 <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">논리 연산자</a> <code translate="no">AND</code> 를 사용하여 동일한 인덱스 위치에 있는 항목을 기준으로 두 비트셋을 비교하고 그 결과로 새 비트셋을 생성할 수 있습니다. 한 위치의 두 항목이 같으면 새 비트셋에 <code translate="no">1</code>, 다르면 <code translate="no">0</code> 이 해당 위치에 기록됩니다.</p>
+<p>비트셋에 대한 연산은 출력 값이 유효하거나 유효하지 않은 <a href="/docs/ko/v2.4.x/boolean.md">부울 논리로</a> 수행되며, 각각 <code translate="no">1</code> 및 <code translate="no">0</code> 으로도 표시됩니다. 예를 들어 <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">논리 연산자</a> <code translate="no">AND</code> 를 사용하여 동일한 인덱스 위치에 있는 항목을 기준으로 두 비트셋을 비교하고 그 결과로 새 비트셋을 생성할 수 있습니다. 한 위치의 두 항목이 같으면 새 비트셋에 <code translate="no">1</code>, 다르면 <code translate="no">0</code> 이 해당 위치에 기록됩니다.</p>
 <h2 id="Implementation" class="common-anchor-header">구현<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -294,6 +294,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>Wenn Sie erfahren möchten, wie Sie Milvus in anderen Clouds einsetzen können:</p>
 <ul>
-<li><a href="/docs/de/eks.md">Bereitstellung von Milvus Cluster auf AWS mit Kubernetes</a></li>
-<li><a href="/docs/de/gcp.md">Bereitstellung von Milvus Cluster auf GCP mit Kubernetes</a></li>
+<li><a href="/docs/de/v2.4.x/eks.md">Bereitstellung von Milvus Cluster auf AWS mit Kubernetes</a></li>
+<li><a href="/docs/de/v2.4.x/gcp.md">Bereitstellung von Milvus Cluster auf GCP mit Kubernetes</a></li>
 </ul>

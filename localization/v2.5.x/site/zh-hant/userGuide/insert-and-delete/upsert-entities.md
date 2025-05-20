@@ -64,7 +64,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在這一節中，您將向上插入實體到<a href="/docs/zh-hant/create-collection-instantly.md#Quick-Setup">以快速設置方式</a>創建的集合中。以這種方式創建的集合只有兩個欄位，分別命名為<strong>id</strong>和<strong>vector</strong>。此外，這個 Collection 啟用了動態欄位，因此範例程式碼中的 Entities 包含一個在 Schema 中沒有定義的欄位<strong>color</strong>。</p>
+    </button></h2><p>在這一節中，您將向上插入實體到以快速設置方式創建的集合中。以這種方式創建的集合只有兩個欄位，分別命名為<strong>id</strong>和<strong>vector</strong>。此外，這個 Collection 啟用了動態欄位，因此範例程式碼中的 Entities 包含一個在 Schema 中沒有定義的欄位<strong>color</strong>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

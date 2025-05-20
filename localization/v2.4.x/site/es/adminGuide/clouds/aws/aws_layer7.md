@@ -24,9 +24,9 @@ summary: >-
     </button></h1><p>En comparación con un equilibrador de carga de capa 4, un equilibrador de carga de capa 7 ofrece capacidades inteligentes de equilibrio de carga y almacenamiento en caché y es una gran opción para los servicios nativos de la nube.</p>
 <p>Esta guía le guía a través de la configuración de un equilibrador de carga de capa 7 para un clúster Milvus que ya se está ejecutando detrás de un equilibrador de carga de capa 4.</p>
 <h3 id="Before-your-start" class="common-anchor-header">Antes de empezar</h3><ul>
-<li>Ha <a href="/docs/es/eks.md">implementado un clúster Milvus detrás de un equilibrador de carga de capa 4 en AWS</a>.</li>
+<li>Ha <a href="/docs/es/v2.4.x/eks.md">implementado un clúster Milvus detrás de un equilibrador de carga de capa 4 en AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Ajustar las configuraciones de Milvus</h3><p>Esta guía asume que ya ha <a href="/docs/es/eks.md">implementado un clúster Milvus detrás de un equilibrador de carga de capa 4 en AWS</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Ajustar las configuraciones de Milvus</h3><p>Esta guía asume que ya ha <a href="/docs/es/v2.4.x/eks.md">implementado un clúster Milvus detrás de un equilibrador de carga de capa 4 en AWS</a>.</p>
 <p>Antes de configurar un equilibrador de carga de capa 7 para este clúster Milvus, ejecute el siguiente comando para eliminar el equilibrador de carga de capa 4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

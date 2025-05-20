@@ -42,7 +42,7 @@ title: Milvus 1.x부터
 <li>대상 Milvus: 2.x</li>
 </ul></li>
 <li><strong>필수 도구</strong>:<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus 마이그레이션</a> 도구. 설치에 대한 자세한 내용은 <a href="/docs/ko/milvusdm_install.md">마이그레이션 도구 설치를</a> 참조하세요.</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus 마이그레이션</a> 도구. 설치에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/milvusdm_install.md">마이그레이션 도구 설치를</a> 참조하세요.</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">소스 Milvus 설치의 메타데이터 내보내기<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

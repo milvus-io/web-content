@@ -60,10 +60,10 @@ summary: 您可以通过定义 Schema、索引参数、度量类型以及创建�
     </button></h2><p>Schema 定义了 Collections 的数据结构。创建 Collections 时，需要根据自己的要求设计模式。有关详细信息，请参阅<a href="/docs/zh/schema.md">Schema Explained</a>。</p>
 <p>以下代码片段创建了一个模式，其中包含启用的 Dynamic Field 和三个必填字段，分别命名为<code translate="no">my_id</code> 、<code translate="no">my_vector</code> 和<code translate="no">my_varchar</code> 。</p>
 <div class="alert note">
-<p>您可以为任何标量字段设置默认值，并使其可归零。有关详细信息，请参阅<a href="/docs/zh/nullable-and-default.md">Nullable &amp; Default</a>。</p>
+<p>您可以为任何标量字段设置默认值，并使其可归零。有关详情，请参阅<a href="/docs/zh/nullable-and-default.md">Nullable &amp; Default</a>。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -404,7 +404,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您也可以创建不带任何索引参数的 Collections，然后再添加索引参数。在这种情况下，Milvus 不会在创建时加载 Collection。.</p>
-<p>以下代码片段演示了如何创建一个不带集合的 Collection，创建时集合的加载状态仍为未加载。</p>
+<p>下面的代码片段演示了如何创建一个不带索引的 Collection，创建时 Collection 的加载状态仍为未加载。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -501,8 +501,7 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 还为您提供了即时创建 Collection 的方法。详情请参阅<a href="/docs/zh/create-collection-instantly.md">即时创建 Collection</a>。</p>
-<h2 id="Set-Collection-Properties" class="common-anchor-header">设置 Collections 属性<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Collection-Properties" class="common-anchor-header">设置集合属性<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -518,7 +517,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>您可以为要创建的 Collection 设置属性，使其适合您的服务。适用的属性如下。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">设置分片编号</h3><p>分区是 Collections 的水平切片。每个分区对应一个数据输入通道。每个 Collections 默认都有一个分区。创建 Collections 时，可根据预期吞吐量和要插入 Collections 的数据量设置适当的分片数。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">设置分片数</h3><p>分片是 Collections 的水平切片。每个分区对应一个数据输入通道。每个 Collections 默认都有一个分区。创建 Collections 时，可根据预期吞吐量和要插入 Collections 的数据量设置适当的分片数。</p>
 <p>在常见情况下，每当预期吞吐量增加 500 MB/秒或要插入的数据量增加 100 GB 时，就可以考虑增加一个分区。这一建议是基于我们自己的经验，可能并不完全适合您的应用场景。你可以根据自己的需要调整这个数字，或者直接使用默认值。</p>
 <p>下面的代码片段演示了如何在创建 Collection 时设置分片数。</p>
 <div class="multipleCode">
@@ -744,6 +743,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关一致性级别的更多信息，请参阅<a href="/docs/zh/consistency.md">一致性</a>级别。</p>
+<p>有关一致性级别的更多信息，请参阅<a href="/docs/zh/tune_consistency.md">一致性</a>级别。</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">启用动态字段</h3><p>Collections 中的动态字段是一个保留的 JavaScript Object Notation (JSON) 字段，名为<strong>$meta</strong>。启用该字段后，Milvus 会将每个实体中携带的所有非 Schema 定义字段及其值作为键值对保存在保留字段中。</p>
 <p>有关如何使用动态字段的详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">动态字段</a>。</p>

@@ -37,14 +37,14 @@ title: Configurar o Milvus em tempo real
       </svg>
     </button></h2><p>Você precisa garantir que：</p>
 <ul>
-<li>Você tem o Birdwatcher instalado. Para mais detalhes, consulte <a href="/docs/pt/birdwatcher_install_guides.md">Instalar o Birdwatcher</a>,</li>
+<li>Você tem o Birdwatcher instalado. Para mais detalhes, consulte <a href="/docs/pt/v2.4.x/birdwatcher_install_guides.md">Instalar o Birdwatcher</a>,</li>
 <li>Você tem o etcdctl instalado. Para mais detalhes, consulte <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Interagindo com o etcd</a>, ou</li>
 <li>Você tem outros clientes etcd, como o cliente Python, instalados.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>Os exemplos neste guia alteram o valor de <code translate="no">proxy.minPasswordLength</code> para <code translate="no">8</code>. Você pode substituir a chave pelas aplicáveis listadas em <a href="/docs/pt/dynamic_config.md#Applicable-configuration-items">Itens de configuração aplicáveis</a>.</li>
-<li>Os exemplos neste guia assumem que o caminho da raiz do seu Milvus é <code translate="no">by-dev</code>. Todas as configurações estão listadas no caminho <code translate="no">by-dev/config</code>. O caminho da raiz do Milvus varia consoante a forma como o instala. Para as instâncias instaladas usando os gráficos do Helm, o caminho da raiz tem como padrão <code translate="no">by-dev</code>. Se você não souber o caminho da raiz, consulte <a href="/docs/pt/birdwatcher_usage_guides.md#Connect-to-etcd">Conectar-se ao etcd</a>.</li>
+<li>Os exemplos neste guia alteram o valor de <code translate="no">proxy.minPasswordLength</code> para <code translate="no">8</code>. Você pode substituir a chave pelas aplicáveis listadas em <a href="/docs/pt/v2.4.x/dynamic_config.md#Applicable-configuration-items">Itens de configuração aplicáveis</a>.</li>
+<li>Os exemplos neste guia assumem que o caminho da raiz do seu Milvus é <code translate="no">by-dev</code>. Todas as configurações estão listadas no caminho <code translate="no">by-dev/config</code>. O caminho da raiz do Milvus varia consoante a forma como o instala. Para as instâncias instaladas usando os gráficos do Helm, o caminho da raiz tem como padrão <code translate="no">by-dev</code>. Se você não souber o caminho da raiz, consulte <a href="/docs/pt/v2.4.x/birdwatcher_usage_guides.md#Connect-to-etcd">Conectar-se ao etcd</a>.</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">Alterar as configurações<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +203,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>Saiba mais sobre <a href="/docs/pt/system_configuration.md">as Configurações do Sistema</a>.</li>
-<li>Saiba como configurar o Milvus instalado usando <a href="/docs/pt/configure_operator.md">o Milvus Operator</a>, <a href="/docs/pt/configure-helm.md">os gráficos Helm</a> e <a href="/docs/pt/configure-docker.md">o Docker</a>.</li>
+<li>Saiba mais sobre <a href="/docs/pt/v2.4.x/system_configuration.md">as Configurações do Sistema</a>.</li>
+<li>Saiba como configurar o Milvus instalado usando <a href="/docs/pt/v2.4.x/configure_operator.md">o Milvus Operator</a>, <a href="/docs/pt/v2.4.x/configure-helm.md">os gráficos Helm</a> e <a href="/docs/pt/v2.4.x/configure-docker.md">o Docker</a>.</li>
 </ul>

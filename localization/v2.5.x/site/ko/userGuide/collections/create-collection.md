@@ -65,7 +65,7 @@ summary: >-
 <p>모든 스칼라 필드에 기본값을 설정하고 null 가능으로 만들 수 있습니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -222,7 +222,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>특정 필드에 인덱스를 생성하면 이 필드에 대한 검색 속도가 빨라집니다. 인덱스는 컬렉션 내 엔티티의 순서를 기록합니다. 다음 코드 스니펫에서 볼 수 있듯이 <code translate="no">metric_type</code> 및 <code translate="no">index_type</code> 을 사용하여 Milvus가 필드를 색인하고 벡터 임베딩 간의 유사성을 측정하는 데 적합한 방법을 선택할 수 있습니다.</p>
+    </button></h2><p>특정 필드에 인덱스를 생성하면 이 필드에 대한 검색 속도가 빨라집니다. 인덱스는 컬렉션 내 엔티티의 순서를 기록합니다. 다음 코드 스니펫에 표시된 것처럼 <code translate="no">metric_type</code> 및 <code translate="no">index_type</code> 을 사용하여 Milvus가 필드를 색인하고 벡터 임베딩 간의 유사성을 측정하는 적절한 방법을 선택할 수 있습니다.</p>
 <p>Milvus에서는 모든 벡터 필드에 대한 인덱스 유형으로 <code translate="no">AUTOINDEX</code> 을 사용하고 필요에 따라 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code> 중 하나를 메트릭 유형으로 사용할 수 있습니다.</p>
 <p>위의 코드 조각에서 볼 수 있듯이 벡터 필드에는 인덱스 유형과 메트릭 유형을 모두 설정하고 스칼라 필드에는 인덱스 유형만 설정해야 합니다. 벡터 필드의 경우 인덱스는 필수이며, 필터링 조건에 자주 사용되는 스칼라 필드에 인덱스를 생성하는 것이 좋습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/index-vector-fields.md">벡터 필드 인덱스</a> 및 <a href="/docs/ko/index-scalar-fields.md">스칼라 필드 인덱스를</a> 참조하세요.</p>
@@ -406,7 +406,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>인덱스 매개변수 없이 컬렉션을 생성한 후 나중에 추가할 수도 있습니다. 이 경우 Milvus는 생성 시 컬렉션을 로드하지 않습니다. .</p>
-<p>다음 코드 스니펫은 컬렉션 없이 컬렉션을 생성하는 방법을 보여주며, 생성 시 컬렉션의 로드 상태는 로드되지 않은 상태로 유지됩니다.</p>
+<p>다음 코드 스니펫은 인덱스 없이 컬렉션을 생성하는 방법을 보여주며, 생성 시 컬렉션의 로드 상태는 로드되지 않은 상태로 유지됩니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -503,7 +503,6 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus에서는 컬렉션을 즉시 생성할 수 있는 방법도 제공합니다. 자세한 내용은 <a href="/docs/ko/create-collection-instantly.md">컬렉션 즉시 생성을</a> 참조하세요.</p>
 <h2 id="Set-Collection-Properties" class="common-anchor-header">컬렉션 속성 설정<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -746,6 +745,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>일관성 수준에 대한 자세한 내용은 <a href="/docs/ko/consistency.md">일관성 수준을</a> 참조하세요.</p>
+<p>일관성 수준에 대한 자세한 내용은 <a href="/docs/ko/tune_consistency.md">일관성 수준을</a> 참조하세요.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">동적 필드 사용</h3><p>컬렉션의 동적 필드는 <strong>$meta라는</strong> 예약된 JSON(JavaScript 객체 표기법) 필드입니다. 이 필드를 활성화하면 Milvus는 각 엔티티에 포함된 스키마 정의되지 않은 모든 필드와 해당 값을 예약된 필드에 키-값 쌍으로 저장합니다.</p>
 <p>동적 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>

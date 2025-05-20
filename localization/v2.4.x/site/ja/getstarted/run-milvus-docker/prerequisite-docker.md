@@ -106,6 +106,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>ハードウェアとソフトウェアが上記の要件を満たしていれば、次のことができます。</p>
 <ul>
-<li><a href="/docs/ja/install_standalone-docker.md">DockerでMilvusを実行する。</a></li>
-<li><a href="/docs/ja/install_standalone-docker-compose.md">Docker ComposeでMilvusを実行する</a></li>
+<li><a href="/docs/ja/v2.4.x/install_standalone-docker.md">DockerでMilvusを実行する。</a></li>
+<li><a href="/docs/ja/v2.4.x/install_standalone-docker-compose.md">Docker ComposeでMilvusを実行する</a></li>
 </ul>

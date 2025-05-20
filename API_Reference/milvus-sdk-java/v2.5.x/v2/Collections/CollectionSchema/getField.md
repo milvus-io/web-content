@@ -35,5 +35,7 @@ A [FieldSchema]() object containing details of the field.
 ## Example
 
 ```java
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
 CreateCollectionReq.FieldSchema fieldSchema = collectionSchema.getField("id");
 ```

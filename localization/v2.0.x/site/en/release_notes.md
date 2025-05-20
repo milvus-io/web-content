@@ -295,7 +295,7 @@ Solution: Remove the channel subscription with Pulsar admin.</li>
 <p>It should be noted that Milvus 2.0.0-PreGA is NOT compatible with previous versions of Milvus 2.0 because of some changes made to data codec format and RocksMQ data format.</p>
 <p><h3 id="v2.0.0-PreGA">Features</h3></p>
 <ul>
-<li><p>Deleting entity: Milvus now supports deleting entities through primary keys. Whereas Milvus relies on append-only storage, it only supports logical deletion, id est, Milvus inserts a deletion mark on the entities to cover actual data so that no search or query will return the marked entities. Therefore, it should be noted that overusing deletion may cause search performance to plummet and storage usage to surge. See <a href="/docs/delete_data.md">Delete entities</a> for more instruction.</p></li>
+<li><p>Deleting entity: Milvus now supports deleting entities through primary keys. Whereas Milvus relies on append-only storage, it only supports logical deletion, id est, Milvus inserts a deletion mark on the entities to cover actual data so that no search or query will return the marked entities. Therefore, it should be noted that overusing deletion may cause search performance to plummet and storage usage to surge. See <a href="/docs/v2.0.x/delete_data.md">Delete entities</a> for more instruction.</p></li>
 <li><p>Compaction: Compaction mechanism purges the deleted or expired entities in binlogs to save storage space. It is a background task that is triggered by data coord and executed by data node.</p></li>
 <li><p>Automatic Loadbalance <a href="https://github.com/milvus-io/milvus/issues/9481">#9481</a>：Loadbalance mechanism distributes segments evenly across query nodes to balance the memory usage of the cluster. It can be triggered either automatically or by users.</p></li>
 <li><p>Handoff <a href="https://github.com/milvus-io/milvus/issues/9481">#9481</a>：Handoff mechanism refers to that, when a growing segment is sealed, query node waits until the segment is built with index by index node and then loads the segment into memory for search or query.</p></li>
@@ -963,7 +963,7 @@ Solution: Remove the channel subscription with Pulsar admin.</li>
 <p><strong>Worker nodes:</strong> Worker nodes are dumb executors that follow the instructions from the coordinator service. There are three types of worker nodes, each responsible for a different job: data nodes, query nodes, and index nodes.</p>
 <p><strong>Storage:</strong> The cornerstone of the system that all other functions depend on. It has three storage types: meta storage, log broker, and object storage. Kudos to the open-source communities of etcd, Pulsar, MinIO, and RocksDB for building this fast, reliable storage.</p>
 <blockquote>
-<p>For more information about how the system works, see <a href="/docs/architecture_overview.md">Milvus 2.0 Architecture</a>.</p>
+<p>For more information about how the system works, see <a href="/docs/v2.0.x/architecture_overview.md">Milvus 2.0 Architecture</a>.</p>
 </blockquote>
 <p><h3 id="v2.0.0-RC1">New Features</h3></p>
 <p><strong>SDK</strong></p>

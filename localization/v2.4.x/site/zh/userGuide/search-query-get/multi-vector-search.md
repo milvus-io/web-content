@@ -19,7 +19,7 @@ title: 混合搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>自 Milvus 2.4 版起，我们引入了多向量支持和混合搜索框架，这意味着用户可以在一个 Collections 中引入多个向量场（最多 10 个）。不同列中的这些向量代表数据的不同方面，源自不同的 Embeddings 模型或经过不同的处理方法。混合搜索的结果使用 Rerankers 策略进行整合，如互易等级融合（RRF）和加权评分。要了解有关 Rerankers 策略的更多信息，请参阅<a href="/docs/zh/reranking.md">Reranking</a>。</p>
+    </button></h1><p>自 Milvus 2.4 版起，我们引入了多向量支持和混合搜索框架，这意味着用户可以在一个 Collections 中引入多个向量场（最多 10 个）。不同列中的这些向量代表数据的不同方面，源自不同的 Embeddings 模型或经过不同的处理方法。混合搜索的结果使用 Rerankers 策略进行整合，如互易等级融合（RRF）和加权评分。要了解有关 Rerankers 策略的更多信息，请参阅<a href="/docs/zh/v2.4.x/reranking.md">Reranking</a>。</p>
 <p>这一功能在综合搜索场景中特别有用，例如根据图片、声音、指纹等各种属性识别向量库中最相似的人。</p>
 <p>在本教程中，您将学习如何</p>
 <ul>
@@ -176,7 +176,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建<code translate="no">AnnSearchRequest</code> 实例后，配置 Rerankers 策略，对结果进行组合和重排。目前有两个选项：<code translate="no">WeightedRanker</code> 和<code translate="no">RRFRanker</code> 。有关重排策略的更多信息，请参阅<a href="/docs/zh/reranking.md">Rerankers</a>。</p>
+    </button></h2><p>创建<code translate="no">AnnSearchRequest</code> 实例后，配置 Rerankers 策略，对结果进行组合和重排。目前有两个选项：<code translate="no">WeightedRanker</code> 和<code translate="no">RRFRanker</code> 。有关重排策略的更多信息，请参阅<a href="/docs/zh/v2.4.x/reranking.md">Rerankers</a>。</p>
 <ul>
 <li><p>使用加权评分</p>
 <p><code translate="no">WeightedRanker</code> 用于以指定权重为每个向量场搜索结果分配重要性。如果您将某些向量场的优先级高于其他向量场，<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> 可以在合并搜索结果中反映出来。</p>
@@ -230,7 +230,7 @@ res = collection.hybrid_search(
 <p>搜索请求列表，其中每个请求都是一个<code translate="no">ANNSearchRequest</code> 对象。每个请求可以对应不同的向量场和不同的搜索参数集。</p></li>
 <li><p><code translate="no">rerank</code> <em>对象</em></p>
 <p>用于混合搜索的 Rerankers 排序策略。可能的值：<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> 和<code translate="no">RRFRanker()</code> 。</p>
-<p>有关重排策略的更多信息，请参阅<a href="/docs/zh/reranking.md">Rerankers</a>。</p></li>
+<p>有关重排策略的更多信息，请参阅<a href="/docs/zh/v2.4.x/reranking.md">Rerankers</a>。</p></li>
 <li><p><code translate="no">limit</code> <em>（int）</em></p>
 <p>在混合搜索中返回的最终结果的最大数量。</p></li>
 </ul>

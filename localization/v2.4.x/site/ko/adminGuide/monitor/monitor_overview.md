@@ -105,7 +105,7 @@ summary: Milvus에서 Prometheus와 Grafana가 모니터링 및 알림 서비스
       </svg>
     </button></h2><p>모니터링 및 알림의 기본 워크플로우에 대해 알아본 후 다음을 학습하세요:</p>
 <ul>
-<li><a href="/docs/ko/monitor.md">모니터링 서비스 배포하기</a></li>
-<li><a href="/docs/ko/visualize.md">Milvus 메트릭 시각화하기</a></li>
-<li><a href="/docs/ko/alert.md">알림 만들기</a></li>
+<li><a href="/docs/ko/v2.4.x/monitor.md">모니터링 서비스 배포하기</a></li>
+<li><a href="/docs/ko/v2.4.x/visualize.md">Milvus 메트릭 시각화하기</a></li>
+<li><a href="/docs/ko/v2.4.x/alert.md">알림 만들기</a></li>
 </ul>

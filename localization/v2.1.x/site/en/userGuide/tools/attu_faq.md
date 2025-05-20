@@ -21,4 +21,4 @@ title: ''
       </svg>
     </button></h1><h4 id="Why-is-Attu-throwing-a-network-error" class="common-anchor-header">Why is Attu throwing a network error?</h4><p>A: Check whether you have assigned a correct value to <code translate="no">HOST_URL</code> in the <code translate="no">docker run</code> command. Alternatively, you can enter <code translate="no">{HOST_URL}/api/v1/healthy</code> in the address bar of your browser to check the network status of Attu.</p>
 <h4 id="Why-did-Attu-fail-to-connect-to-Milvus" class="common-anchor-header">Why did Attu fail to connect to Milvus?</h4><p>A: Ensure that Milvus and Attu are on the same network.</p>
-<h4 id="How-do-I-use-Attu-with-K8s" class="common-anchor-header">How do I use Attu with K8s?</h4><p>A: You can <a href="/docs/attu_install-helm.md">install Attu while deploying Milvus with Helm</a>.</p>
+<h4 id="How-do-I-use-Attu-with-K8s" class="common-anchor-header">How do I use Attu with K8s?</h4><p>A: You can <a href="/docs/v2.1.x/attu_install-helm.md">install Attu while deploying Milvus with Helm</a>.</p>

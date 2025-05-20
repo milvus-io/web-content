@@ -75,11 +75,11 @@ title: ''
 <ul>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_connection.md">Connect to Milvus server</a></li>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/insert_data.md">Insert data</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.1.x/manage_connection.md">Connect to Milvus server</a></li>
+<li><a href="/docs/v2.1.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.1.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.1.x/insert_data.md">Insert data</a></li>
+<li><a href="/docs/v2.1.x/search.md">Conduct a vector search</a></li>
 </ul></li>
 <li><p>Explore <a href="/api-reference/node/v2.1.x/About.md">Milvus Node.js API reference</a></p></li>
 </ul>

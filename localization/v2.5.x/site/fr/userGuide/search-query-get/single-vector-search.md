@@ -73,7 +73,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Dans les recherches ANN, une recherche à vecteur unique fait référence à une recherche impliquant un seul vecteur d'interrogation. En fonction de l'index préconstruit et du type de métrique indiqué dans la requête de recherche, Milvus trouve les K vecteurs les plus similaires au vecteur de la requête.</p>
-<p>Dans cette section, vous apprendrez à effectuer une recherche sur un seul vecteur. L'extrait de code suppose que vous avez créé une collection de manière <a href="/docs/fr/create-collection-instantly.md#Quick-Setup">rapide</a>. La requête de recherche comporte un seul vecteur d'interrogation et demande à Milvus d'utiliser le produit intérieur (PI) pour calculer la similarité entre les vecteurs d'interrogation et les vecteurs de la collection et renvoie les trois vecteurs les plus similaires.</p>
+<p>Dans cette section, vous apprendrez à effectuer une recherche sur un seul vecteur. La requête de recherche contient un seul vecteur d'interrogation et demande à Milvus d'utiliser le produit intérieur (PI) pour calculer la similarité entre les vecteurs d'interrogation et les vecteurs de la collection et renvoie les trois vecteurs les plus similaires.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -301,7 +301,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>De la même manière, vous pouvez inclure plusieurs vecteurs de requête dans une demande de recherche. Milvus effectuera des recherches ANN pour les vecteurs de requête en parallèle et renverra deux ensembles de résultats.</p>
+    </button></h2><p>De même, vous pouvez inclure plusieurs vecteurs de requête dans une demande de recherche. Milvus effectuera des recherches ANN pour les vecteurs de requête en parallèle et renverra deux ensembles de résultats.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
@@ -976,10 +976,10 @@ curl --request POST \
 <ul>
 <li><p>Recherche filtrée</p>
 <p>Vous pouvez inclure des conditions de filtrage dans une demande de recherche afin que Milvus procède au filtrage des métadonnées avant d'effectuer des recherches ANN, réduisant ainsi l'étendue de la recherche de l'ensemble de la collection aux seules entités correspondant aux conditions de filtrage spécifiées.</p>
-<p>Pour en savoir plus sur le filtrage des métadonnées et les conditions de filtrage, voir <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/filtering">Filtrage</a>.</p></li>
+<p>Pour en savoir plus sur le filtrage des métadonnées et les conditions de filtrage, reportez-vous à <a href="/docs/fr/filtered-search.md">Recherche filtrée</a>, <a href="/docs/fr/boolean.md">Explication du filtrage</a> et aux rubriques connexes.</p></li>
 <li><p>Recherche par plage</p>
-<p>Vous pouvez améliorer la pertinence des résultats de la recherche en limitant la distance ou le score des entités renvoyées à une plage spécifique. Dans Milvus, une recherche par plage consiste à dessiner deux cercles concentriques dont le centre est l'intégration vectorielle la plus similaire au vecteur de la requête. La requête de recherche spécifie le rayon des deux cercles et Milvus renvoie tous les enregistrements vectoriels qui se trouvent dans le cercle extérieur mais pas dans le cercle intérieur.</p>
-<p>Pour plus d'informations sur la recherche par plage, reportez-vous à la section <a href="/docs/fr/range-search.md">Recherche par plage</a>.</p></li>
+<p>Vous pouvez améliorer la pertinence des résultats de recherche en limitant la distance ou le score des entités renvoyées à une plage spécifique. Dans Milvus, une recherche par plage consiste à dessiner deux cercles concentriques dont le centre est l'intégration vectorielle la plus similaire au vecteur de la requête. La requête de recherche spécifie le rayon des deux cercles et Milvus renvoie tous les enregistrements vectoriels qui se trouvent dans le cercle extérieur mais pas dans le cercle intérieur.</p>
+<p>Pour en savoir plus sur la recherche par plage, reportez-vous à la section <a href="/docs/fr/range-search.md">Recherche par plage</a>.</p></li>
 <li><p>Recherche de regroupement</p>
 <p>Si les entités renvoyées ont la même valeur dans un champ spécifique, les résultats de la recherche peuvent ne pas représenter la distribution de tous les ancrages vectoriels dans l'espace vectoriel. Pour diversifier les résultats de la recherche, envisagez d'utiliser la recherche par regroupement.</p>
 <p>Pour en savoir plus sur la recherche par regroupement, reportez-vous à la section <a href="/docs/fr/grouping-search.md">Recherche par regroupement</a>,</p></li>

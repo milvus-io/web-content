@@ -20,7 +20,7 @@ title: Habilitar RBAC
         ></path>
       </svg>
     </button></h1><p>Habilitando RBAC, puede controlar el acceso a recursos específicos de Milvus (Ej. una colección o una partición) o permisos basados en el rol y privilegios del usuario. Actualmente, esta característica sólo está disponible en Python y Java.</p>
-<p>Este tema describe cómo habilitar RBAC y gestionar <a href="/docs/es/users_and_roles.md">usuarios y roles</a>.</p>
+<p>Este tema describe cómo habilitar RBAC y gestionar <a href="/docs/es/v2.4.x/users_and_roles.md">usuarios y roles</a>.</p>
 <div class="alert note">
 <p>Los fragmentos de código de esta página utilizan el nuevo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) para interactuar con Milvus. En futuras actualizaciones se publicarán nuevos SDK de MilvusClient para otros lenguajes.</p>
 </div>
@@ -39,7 +39,7 @@ title: Habilitar RBAC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Después de habilitar la <a href="/docs/es/authenticate.md">autenticación de usuario</a>, conéctese a su instancia Milvus utilizando <code translate="no">token</code> que consiste en un nombre de usuario y una contraseña. Por defecto, Milvus utiliza el usuario <code translate="no">root</code> con la contraseña <code translate="no">Milvus</code>.</p>
+    </button></h2><p>Después de habilitar la <a href="/docs/es/v2.4.x/authenticate.md">autenticación de usuario</a>, conéctese a su instancia Milvus utilizando <code translate="no">token</code> que consiste en un nombre de usuario y una contraseña. Por defecto, Milvus utiliza el usuario <code translate="no">root</code> con la contraseña <code translate="no">Milvus</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -139,8 +139,8 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>El siguiente ejemplo muestra cómo conceder el permiso de búsqueda en todas las colecciones al rol denominado <code translate="no">roleA</code>.</p>
-<p>En <code translate="no">object_type</code> se especifica el tipo de objeto, que también puede entenderse como el tipo de recurso. Actualmente, los valores válidos incluyen Colección/Usuario/Global, etc., donde Global significa que no hay un tipo de recurso específico. <code translate="no">object_name</code> es el nombre del recurso. Si objecttype<em>es Collection, entonces el nombre del objeto puede referirse a un nombre de colección específico, o puede utilizar * para especificar todas las colecciones. Si objecttype</em>es Global, entonces el nombre del objeto sólo puede especificarse como *. Consulte <a href="/docs/es/users_and_roles.md">Usuarios y roles</a> para conocer otros tipos de privilegios que puede conceder.</p>
-<p>Antes de gestionar privilegios de rol, asegúrese de que ha activado la autenticación de usuario. De lo contrario, puede producirse un error. Para obtener información sobre cómo activar la autenticación de usuarios, consulte <a href="/docs/es/authenticate.md">Autenticar el acceso de usuarios</a>.</p>
+<p>En <code translate="no">object_type</code> se especifica el tipo de objeto, que también puede entenderse como el tipo de recurso. Actualmente, los valores válidos incluyen Colección/Usuario/Global, etc., donde Global significa que no hay un tipo de recurso específico. <code translate="no">object_name</code> es el nombre del recurso. Si objecttype<em>es Collection, entonces el nombre del objeto puede referirse a un nombre de colección específico, o puede utilizar * para especificar todas las colecciones. Si objecttype</em>es Global, entonces el nombre del objeto sólo puede especificarse como *. Consulte <a href="/docs/es/v2.4.x/users_and_roles.md">Usuarios y roles</a> para conocer otros tipos de privilegios que puede conceder.</p>
+<p>Antes de gestionar privilegios de rol, asegúrese de que ha activado la autenticación de usuario. De lo contrario, puede producirse un error. Para obtener información sobre cómo activar la autenticación de usuarios, consulte <a href="/docs/es/v2.4.x/authenticate.md">Autenticar el acceso de usuarios</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># grant privilege to a role</span>
 
 client.grant_privilege(
@@ -260,6 +260,6 @@ client.grant_role(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Aprenda a gestionar <a href="/docs/es/authenticate.md">la autenticación de usuarios</a>.</p></li>
-<li><p>Aprenda a habilitar <a href="/docs/es/tls.md">el proxy TLS</a> en Milvus.</p></li>
+<li><p>Aprenda a gestionar <a href="/docs/es/v2.4.x/authenticate.md">la autenticación de usuarios</a>.</p></li>
+<li><p>Aprenda a habilitar <a href="/docs/es/v2.4.x/tls.md">el proxy TLS</a> en Milvus.</p></li>
 </ul>

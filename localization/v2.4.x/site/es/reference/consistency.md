@@ -35,7 +35,7 @@ title: Coherencia
         ></path>
       </svg>
     </button></h2><p>La consistencia en una base de datos distribuida se refiere específicamente a la propiedad que asegura que cada nodo o réplica tiene la misma vista de los datos cuando escribe o lee datos en un momento dado.</p>
-<p>Milvus soporta cuatro niveles de consistencia: fuerte, estancamiento limitado, sesión y eventual. El nivel de consistencia por defecto en Milvus es de caducidad limitada.  Puede ajustar fácilmente el nivel de consistencia cuando realice una <a href="/docs/es/single-vector-search.md">búsqueda monovectorial</a>, una <a href="/docs/es/multi-vector-search.md">búsqueda híbrida</a> o una <a href="/docs/es/get-and-scalar-query.md">consulta</a> para que se adapte mejor a su aplicación.</p>
+<p>Milvus soporta cuatro niveles de consistencia: fuerte, estancamiento limitado, sesión y eventual. El nivel de consistencia por defecto en Milvus es de caducidad limitada.  Puede ajustar fácilmente el nivel de consistencia cuando realice una <a href="/docs/es/v2.4.x/single-vector-search.md">búsqueda monovectorial</a>, una <a href="/docs/es/v2.4.x/multi-vector-search.md">búsqueda híbrida</a> o una <a href="/docs/es/v2.4.x/get-and-scalar-query.md">consulta</a> para que se adapte mejor a su aplicación.</p>
 <h2 id="Consistency-levels" class="common-anchor-header">Niveles de consistencia<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,8 +118,8 @@ title: Coherencia
       </svg>
     </button></h2><ul>
 <li>Aprenda a ajustar el nivel de consistencia cuando<ul>
-<li><a href="/docs/es/single-vector-search.md">realizar una búsqueda de un solo vector</a></li>
-<li><a href="/docs/es/multi-vector-search.md">realizar una búsqueda híbrida</a></li>
-<li><a href="/docs/es/get-and-scalar-query.md">realizar una consulta escalar</a></li>
+<li><a href="/docs/es/v2.4.x/single-vector-search.md">realizar una búsqueda de un solo vector</a></li>
+<li><a href="/docs/es/v2.4.x/multi-vector-search.md">realizar una búsqueda híbrida</a></li>
+<li><a href="/docs/es/v2.4.x/get-and-scalar-query.md">realizar una consulta escalar</a></li>
 </ul></li>
 </ul>

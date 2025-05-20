@@ -27,7 +27,7 @@ There are two more things to consider when designing the schema:
 
 - **Whether to enable dynamic fields**
 
-    The target collection can also store fields not included in its pre-defined schema if the schema enables dynamic fields. The **\$meta** field is a reserved JSON field to hold dynamic fields and their values in key-value pairs. In the above diagram, the fields **dynamic_field_1** and **dynamic_field_2** and the values will be saved as key-value pairs in the **\$meta** field.
+    The target collection can also store fields not included in its pre-defined schema if the schema enables dynamic fields. The **&#36;meta** field is a reserved JSON field to hold dynamic fields and their values in key-value pairs. In the above diagram, the fields **dynamic_field_1** and **dynamic_field_2** and the values will be saved as key-value pairs in the **&#36;meta** field.
 
 The following code shows how to set up the schema for the collection illustrated in the above diagram.
 

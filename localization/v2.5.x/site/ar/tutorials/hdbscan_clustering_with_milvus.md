@@ -4,9 +4,15 @@ summary: >-
   في هذا الدفتر، سوف نستخدم نموذج التضمين BGE-M3 لاستخراج التضمينات من مجموعة
   بيانات عناوين الأخبار، واستخدام Milvus لحساب المسافات بين التضمينات بكفاءة
   لمساعدة HDBSCAN في التجميع، ثم تصور النتائج للتحليل باستخدام طريقة UMAP. هذا
-  الدفتر عبارة عن تعديل لمقال ديلان كاستيلو من Milvus.
+  الدفتر هو تكييف لمقالة ديلان كاستيلو من Milvus.
 title: تجميع HDBSCAN مع ميلفوس
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">تجميع HDBSCAN مع ميلفوس<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,13 +28,7 @@ title: تجميع HDBSCAN مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>يمكن تحويل البيانات إلى تجميعات باستخدام نماذج التعلم العميق، والتي تلتقط تمثيلات ذات معنى للبيانات الأصلية. من خلال تطبيق خوارزمية تجميع غير خاضعة للإشراف، يمكننا تجميع نقاط البيانات المتشابهة معًا استنادًا إلى أنماطها المتأصلة. HDBSCAN (التجميع المكاني القائم على الكثافة الهرمي للتطبيقات مع الضوضاء) هي خوارزمية تجميع مستخدمة على نطاق واسع تقوم بتجميع نقاط البيانات بكفاءة من خلال تحليل كثافتها ومسافتها. وهي مفيدة بشكل خاص لاكتشاف التكتلات ذات الأشكال والأحجام المختلفة. في هذا الدفتر، سنستخدم HDBSCAN مع قاعدة بيانات Milvus، وهي قاعدة بيانات متجهة عالية الأداء، لتجميع نقاط البيانات في مجموعات متميزة بناءً على تضميناتها.</p>
+    </button></h1><p>يمكن تحويل البيانات إلى تجميعات باستخدام نماذج التعلم العميق، والتي تلتقط تمثيلات ذات معنى للبيانات الأصلية. من خلال تطبيق خوارزمية تجميع غير خاضعة للإشراف، يمكننا تجميع نقاط البيانات المتشابهة معًا استنادًا إلى أنماطها المتأصلة. HDBSCAN (التجميع المكاني القائم على الكثافة الهرمي للتطبيقات مع الضوضاء) هي خوارزمية تجميع مستخدمة على نطاق واسع تقوم بتجميع نقاط البيانات بكفاءة من خلال تحليل كثافتها ومسافتها. وهي مفيدة بشكل خاص لاكتشاف التكتلات ذات الأشكال والأحجام المختلفة. في هذا الدفتر، سنستخدم HDBSCAN مع قاعدة بيانات Milvus، وهي قاعدة بيانات متجهة عالية الأداء، لتجميع نقاط البيانات في مجموعات متميزة بناءً على تضميناتها.</p>
 <p>HDBSCAN (التجميع المكاني القائم على الكثافة الهرمية للتطبيقات مع الضوضاء) هي خوارزمية تجميع تعتمد على حساب المسافات بين نقاط البيانات في مساحة التضمين. تمثل هذه التضمينات، التي تم إنشاؤها بواسطة نماذج التعلم العميق، البيانات في شكل عالي الأبعاد. لتجميع نقاط البيانات المتشابهة، تحدد HDBSCAN تقاربها وكثافتها، ولكن قد يكون حساب هذه المسافات بكفاءة، خاصةً بالنسبة لمجموعات البيانات الكبيرة، أمرًا صعبًا.</p>
 <p>تعمل قاعدة بيانات Milvus، وهي قاعدة بيانات متجهات عالية الأداء، على تحسين هذه العملية من خلال تخزين وفهرسة التضمينات، مما يسمح باسترجاع سريع للمتجهات المتشابهة. عند استخدامهما معًا، يتيح كل من HDBSCAN و Milvus تجميع مجموعات البيانات واسعة النطاق بكفاءة في مساحة التضمين.</p>
 <p>في هذا الدفتر، سوف نستخدم نموذج التضمين BGE-M3 لاستخراج التضمينات من مجموعة بيانات عناوين الأخبار، واستخدام Milvus لحساب المسافات بين التضمينات بكفاءة لمساعدة HDBSCAN في التجميع، ثم تصور النتائج للتحليل باستخدام طريقة UMAP. هذا الدفتر عبارة عن تعديل <a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">لمقالة ديلان كاستيلو</a> من Milvus.</p>
@@ -48,10 +48,10 @@ title: تجميع HDBSCAN مع ميلفوس
         ></path>
       </svg>
     </button></h2><p>تنزيل مجموعة بيانات الأخبار من https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/</p>
-<pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
-$ pip install hdbscan
-$ pip install plotly
-$ pip install umap-learn
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install hdbscan</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install plotly</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install umap-learn</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Download-Data" class="common-anchor-header">تنزيل البيانات<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,17 @@ $ pip install umap-learn
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تنزيل مجموعة بيانات الأخبار من https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/، واستخراج <code translate="no">news_data_dedup.csv</code> ووضعها في الدليل الحالي.</p>
+    </button></h2><p>قم بتنزيل مجموعة بيانات الأخبار من https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/، واستخرج <code translate="no">news_data_dedup.csv</code> وضعها في الدليل الحالي.</p>
+<p>أو يمكنك التنزيل عبر curl:</p>
+<pre><code translate="no" class="language-bash">%%bash
+curl -L -o ~/Downloads/news-headlines-2024.zip\
+  https://www.kaggle.com/api/v1/datasets/download/dylanjcastillo/news-headlines-2024
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0 --:--:--     0
+100  225k  100  225k    0     0  33151      0  0:00:06  0:00:06 --:--:-- 62160:03  114k  0:00:07  0:00:06  0:00:01 66615    0  30519      0  0:00:07  0:00:06  0:00:01 61622
+</code></pre>
 <h2 id="Extract-Embeddings-to-Milvus" class="common-anchor-header">استخراج التضمينات إلى ميلفوس<button data-href="#Extract-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,11 +115,13 @@ embeddings = ef(docs)[<span class="hljs-string">&quot;dense&quot;</span>]
 connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<blockquote>
 <ul>
 <li>إذا كنت تحتاج فقط إلى قاعدة بيانات متجهية محلية للبيانات الصغيرة الحجم أو النماذج الأولية، فإن تعيين uri كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث تستخدم تلقائيًا Milvus <a href="https://milvus.io/docs/milvus_lite.md">Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
-<li>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام عنوان الخادم والمنفذ كـ uri، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين خاصية المصادقة على Milvus، استخدم "&lt;your_username&gt;: &lt;your_password&gt;" كرمز مميز، وإلا فلا تقم بتعيين الرمز المميز.</li>
-<li>إذا كنت تستخدم <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المُدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> في Zilliz Cloud.</li>
+<li>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام عنوان الخادم والمنفذ كـ uri، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين ميزة المصادقة على Milvus، استخدم "<your_username>:<your_password>" كرمز مميز، وإلا فلا تقم بتعيين الرمز المميز.</li>
+<li>إذا كنت تستخدم <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، فاضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> في Zilliz Cloud.</li>
 </ul>
+</blockquote>
 </div>
 <pre><code translate="no" class="language-python">fields = [
     FieldSchema(
@@ -137,7 +149,7 @@ collection.create_index(field_name=<span class="hljs-string">&quot;embedding&quo
 
 collection.flush()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Construct-the-Distance-Matrix-for-HDBSCAN" class="common-anchor-header">إنشاء مصفوفة المسافة لـ HDBSCAN<button data-href="#Construct-the-Distance-Matrix-for-HDBSCAN" class="anchor-icon" translate="no">
+<h2 id="Construct-the-Distance-Matrix-for-HDBSCAN" class="common-anchor-header">قم ببناء مصفوفة المسافة لـ HDBSCAN<button data-href="#Construct-the-Distance-Matrix-for-HDBSCAN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -177,7 +189,7 @@ dist = {}
 
 embeddings = []
 <button class="copy-code-btn"></button></code></pre>
-<p>سنقوم بتكرار جميع التضمينات في مجموعة ميلفوس. لكل تضمين، سنبحث في كل تضمين عن جيرانه الأعلى-ك في نفس المجموعة، ونحصل على معرّفاتهم ومسافاتهم. ثم نحتاج أيضًا إلى إنشاء قاموس لتعيين المعرف الأصلي إلى فهرس متصل في مصفوفة المسافة. عند الانتهاء، نحتاج إلى إنشاء مصفوفة المسافة التي تمت تهيئتها بجميع العناصر على أنها ما لا نهاية وملء العناصر التي بحثنا عنها. بهذه الطريقة، سيتم تجاهل المسافة بين النقاط البعيدة. أخيرًا نستخدم مكتبة HDBSCAN لتجميع النقاط باستخدام مصفوفة المسافة التي أنشأناها. نحتاج إلى ضبط المقياس على "محسوب مسبقاً" للإشارة إلى أن البيانات هي مصفوفة المسافة بدلاً من التضمينات الأصلية.</p>
+<p>سنقوم بتكرار جميع التضمينات في مجموعة ميلفوس. لكل تضمين، سنبحث في كل تضمين عن جيرانه الأعلى-ك في نفس المجموعة، ونحصل على معرفاتهم ومسافاتهم. ثم نحتاج أيضًا إلى إنشاء قاموس لتعيين المعرف الأصلي إلى فهرس متصل في مصفوفة المسافة. عند الانتهاء، نحتاج إلى إنشاء مصفوفة المسافة التي تمت تهيئتها بجميع العناصر على أنها ما لا نهاية وملء العناصر التي بحثنا عنها. بهذه الطريقة، سيتم تجاهل المسافة بين النقاط البعيدة. أخيرًا نستخدم مكتبة HDBSCAN لتجميع النقاط باستخدام مصفوفة المسافة التي أنشأناها. نحتاج إلى ضبط المقياس على "محسوب مسبقاً" للإشارة إلى أن البيانات هي مصفوفة المسافة بدلاً من التضمينات الأصلية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     batch = iterator.<span class="hljs-built_in">next</span>()
     batch_ids = [data[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
@@ -270,6 +282,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>الصورة</span> </span></p>
-<p>نوضح هنا أن البيانات متجمعة بشكل جيد، ويمكنك التمرير فوق النقاط للتحقق من النص الذي تمثله. من خلال هذا الدفتر، نأمل أن تتعلم كيفية استخدام HDBSCAN لتجميع التضمينات باستخدام Milvus بكفاءة، والتي يمكن تطبيقها أيضًا على أنواع أخرى من البيانات. يسمح هذا النهج، إلى جانب نماذج اللغة الكبيرة، بتحليل أعمق لبياناتك على نطاق واسع.</p>
+<p>نوضح هنا أن البيانات متجمعة بشكل جيد، ويمكنك التمرير فوق النقاط للتحقق من النص الذي تمثله. من خلال هذا الدفتر، نأمل أن تتعلم كيفية استخدام HDBSCAN لتجميع التضمينات باستخدام Milvus بكفاءة، والتي يمكن تطبيقها أيضًا على أنواع أخرى من البيانات. يسمح هذا النهج، إلى جانب نماذج اللغة الكبيرة، بإجراء تحليل أعمق لبياناتك على نطاق واسع.</p>

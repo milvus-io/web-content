@@ -35,7 +35,7 @@ title: Consistency
         ></path>
       </svg>
     </button></h2><p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-<p>Milvus supports four consistency levels:  strong, bounded staleness, session, and eventually. The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when conducting a <a href="/docs/single-vector-search.md">single-vector search</a>, <a href="/docs/multi-vector-search.md">hybrid search</a> or <a href="/docs/get-and-scalar-query.md">query</a> to make it best suit your application.</p>
+<p>Milvus supports four consistency levels:  strong, bounded staleness, session, and eventually. The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when conducting a <a href="/docs/v2.4.x/single-vector-search.md">single-vector search</a>, <a href="/docs/v2.4.x/multi-vector-search.md">hybrid search</a> or <a href="/docs/v2.4.x/get-and-scalar-query.md">query</a> to make it best suit your application.</p>
 <h2 id="Consistency-levels" class="common-anchor-header">Consistency levels<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,8 +127,8 @@ title: Consistency
     </button></h2><ul>
 <li>Learn how to tune consistency level when:
 <ul>
-<li><a href="/docs/single-vector-search.md">conducting a single-vector search</a></li>
-<li><a href="/docs/multi-vector-search.md">conducting a hybrid search</a></li>
-<li><a href="/docs/get-and-scalar-query.md">conducting a scalar query</a></li>
+<li><a href="/docs/v2.4.x/single-vector-search.md">conducting a single-vector search</a></li>
+<li><a href="/docs/v2.4.x/multi-vector-search.md">conducting a hybrid search</a></li>
+<li><a href="/docs/v2.4.x/get-and-scalar-query.md">conducting a scalar query</a></li>
 </ul></li>
 </ul>

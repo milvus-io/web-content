@@ -4,7 +4,7 @@ title: البحث الهجين
 summary: >-
   يشير البحث الهجين إلى طريقة بحث تُجري عمليات بحث متعددة للشبكات العصبية
   الاصطناعية في وقت واحد، وتعيد ترتيب مجموعات متعددة من النتائج من عمليات البحث
-  هذه، وتعيد في النهاية مجموعة واحدة من النتائج. يمكن أن يؤدي استخدام البحث
+  هذه، ثم تُرجع في النهاية مجموعة واحدة من النتائج. يمكن أن يؤدي استخدام البحث
   الهجين إلى تحسين دقة البحث. يدعم Milvus إجراء البحث الهجين على مجموعة ذات حقول
   متجهة متعددة.
 ---
@@ -93,7 +93,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>سيستخدم هذا القسم مثالاً محددًا لتوضيح كيفية إجراء بحث هجين على المتجهات المتفرقة الكثيفة لتحسين دقة عمليات البحث النصية.</p>
-<h3 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">إنشاء مجموعة مع حقول متجهات متعددة</h3><p>تتضمن عملية إنشاء مجموعة ثلاثة أجزاء: تحديد مخطط المجموعة، وتكوين معلمات الفهرس، وإنشاء المجموعة.</p>
+<h3 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">إنشاء مجموعة ذات حقول متجهات متعددة</h3><p>تتضمن عملية إنشاء مجموعة ثلاثة أجزاء: تحديد مخطط المجموعة، وتكوين معلمات الفهرس، وإنشاء المجموعة.</p>
 <h4 id="Define-schema" class="common-anchor-header">تعريف المخطط</h4><p>في هذا المثال، يجب تعريف حقول متجهة متعددة ضمن مخطط المجموعة. حاليًا، يمكن أن تتضمن كل مجموعة ما يصل إلى 4 حقول متجهة بشكل افتراضي. ولكن يمكنك أيضًا تعديل قيمة <code translate="no">proxy.maxVectorFieldNum</code> لتضمين ما يصل إلى 10 حقول متجهة في مجموعة حسب الحاجة.</p>
 <p>يحدد المثال التالي مخطط مجموعة، حيث <code translate="no">dense</code> و <code translate="no">sparse</code> هما حقلا المتجهات:</p>
 <ul>
@@ -512,7 +512,7 @@ search_param_1 = {
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>}, {<span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
+query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>, <span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
@@ -613,7 +613,7 @@ request2 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;sparse&qu
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>نظرًا لأن المعلمة <code translate="no">limit</code> مضبوطة على 2، فإن كل <code translate="no">AnnSearchRequest</code> يُرجع نتيجتي بحث. في هذا المثال، يتم إنشاء 2 <code translate="no">AnnSearchRequest</code> ، وبالتالي سيتم إرجاع إجمالي 4 نتائج بحث.</p>
+<p>بما أن المعلمة <code translate="no">limit</code> مضبوطة على 2، فإن كل <code translate="no">AnnSearchRequest</code> يُرجع نتيجتي بحث. في هذا المثال، يتم إنشاء 2 <code translate="no">AnnSearchRequest</code> ، وبالتالي سيتم إرجاع إجمالي 4 نتائج بحث.</p>
 <h3 id="Configure-a-reranking-strategy" class="common-anchor-header">تكوين استراتيجية إعادة الترتيب</h3><p>لدمج مجموعتين من نتائج بحث الشبكة النشطة وإعادة ترتيبها، من الضروري تحديد استراتيجية إعادة ترتيب مناسبة. يدعم ميلفوس نوعين من إستراتيجيات إعادة الترتيب: استراتيجية <strong>إعادة الترتيب الموزونة</strong> واستراتيجية <strong>إعادة الترتيب RRFRanker</strong>. عند اختيار إستراتيجية إعادة الترتيب، من الأمور التي يجب أخذها في الاعتبار ما إذا كان هناك أي تركيز على بحث واحد أو أكثر من البحث الأساسي للشبكة العصبية الاصطناعية على حقول المتجهات.</p>
 <ul>
 <li><p><strong>مُرجِّح الرتبة</strong>: يوصى باستخدام هذه الاستراتيجية إذا كنت تريد أن تركز النتائج على حقل متجه معين. تسمح لك أداة WeightedRanker المرجحة بتعيين أوزان أعلى لحقول متجهة معينة، والتركيز عليها بشكل أكبر. على سبيل المثال، في عمليات البحث متعدد الوسائط، يمكن اعتبار الأوصاف النصية لصورة ما أكثر أهمية من الألوان في هذه الصورة.</p></li>

@@ -38,11 +38,11 @@ summary: 了解如何配置 Milvus QueryNode 以使用本地磁盘。
     </button></h2><p>Milvus 是一个以人工智能为重点的向量数据库，专为高效存储和检索大量向量数据而量身定制。它是图像和视频分析、自然语言处理和推荐系统等任务的理想选择。为确保最佳性能，最大限度地减少磁盘读取延迟至关重要。强烈建议使用本地 NVMe SSD，以防止延迟并保持系统稳定性。</p>
 <p>本地磁盘存储发挥作用的主要功能包括</p>
 <ul>
-<li><a href="/docs/zh/chunk_cache.md"><strong>大块缓存</strong></a>：将数据预加载到本地磁盘缓存中，以加快搜索速度。</li>
-<li><a href="/docs/zh/mmap.md"><strong>MMap</strong></a>：将文件内容直接映射到内存中，提高内存效率。</li>
-<li><a href="/docs/zh/disk_index.md"><strong>DiskANN 索引</strong></a>：需要磁盘存储，以便高效管理索引。</li>
+<li><a href="/docs/zh/v2.4.x/chunk_cache.md"><strong>大块缓存</strong></a>：将数据预加载到本地磁盘缓存中，以加快搜索速度。</li>
+<li><a href="/docs/zh/v2.4.x/mmap.md"><strong>MMap</strong></a>：将文件内容直接映射到内存中，提高内存效率。</li>
+<li><a href="/docs/zh/v2.4.x/disk_index.md"><strong>DiskANN 索引</strong></a>：需要磁盘存储，以便高效管理索引。</li>
 </ul>
-<p>本文将重点介绍在云平台上部署<a href="/docs/zh/install-overview.md#Milvus-Distributed">Milvus Distributed</a>，以及如何配置 QueryNode 以使用 NVMe 磁盘存储。下表列出了各种云提供商推荐的机器类型。</p>
+<p>本文将重点介绍在云平台上部署<a href="/docs/zh/v2.4.x/install-overview.md#Milvus-Distributed">Milvus Distributed</a>，以及如何配置 QueryNode 以使用 NVMe 磁盘存储。下表列出了各种云提供商推荐的机器类型。</p>
 <table>
 <thead>
 <tr><th style="text-align:center">云提供商</th><th style="text-align:center">机器类型</th></tr>
@@ -266,7 +266,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>验证结果令人满意后，就可以按以下步骤部署 Milvus Distributed：</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">使用 Helm 部署 Milvus Distributed 的提示</h3><p>QueryNode pod 默认使用 NVMe 磁盘作为 EmptyDir 卷。建议在 QueryNode pod 中将 NVMe 磁盘挂载到<code translate="no">/var/lib/milvus/data</code> ，以确保最佳性能。</p>
-<p>有关如何使用 Helm 部署 Milvus Distributed 的详细信息，请参阅使用<a href="/docs/zh/install_cluster-helm.md">Helm 在 Kubernetes 中运行 Milvus</a>。</p>
+<p>有关如何使用 Helm 部署 Milvus Distributed 的详细信息，请参阅使用<a href="/docs/zh/v2.4.x/install_cluster-helm.md">Helm 在 Kubernetes 中运行 Milvus</a>。</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 部署 Milvus Distributed 的提示</h3><p>Milvus Operator 会自动配置 QueryNode pod 将 NVMe 磁盘用作 EmptyDir 卷。建议将以下配置添加到<code translate="no">MilvusCluster</code> 自定义资源：</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -279,4 +279,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>这将确保 QueryNode pod 将 NVMe 磁盘用作数据卷。有关如何使用 Milvus Operator 部署<a href="/docs/zh/install_cluster-milvusoperator.md">Milvus</a> Distributed 的详细信息，请参阅<a href="/docs/zh/install_cluster-milvusoperator.md">使用 Milvus Operator 在 Kubernetes 中运行 Milvus</a>。</p>
+<p>这将确保 QueryNode pod 将 NVMe 磁盘用作数据卷。有关如何使用 Milvus Operator 部署<a href="/docs/zh/v2.4.x/install_cluster-milvusoperator.md">Milvus</a> Distributed 的详细信息，请参阅<a href="/docs/zh/v2.4.x/install_cluster-milvusoperator.md">使用 Milvus Operator 在 Kubernetes 中运行 Milvus</a>。</p>

@@ -1698,7 +1698,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><code translate="no">HAMMING</code></td><td>較小的 Hamming 距離表示較高的相似性。</td><td>若要從結果中排除最接近的向量，請確保：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>若要瞭解關於距離公制類型的更多資訊，請參閱<a href="/docs/zh-hant/metric.md">相似性公制</a>。</p>
+<p>若要瞭解關於距離公制類型的更多資訊，請參閱<a href="/docs/zh-hant/v2.4.x/metric.md">相似性公制</a>。</p>
 <h2 id="Grouping-search" class="common-anchor-header">分組搜尋<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1826,8 +1826,8 @@ search_parameters = {
 <tr><td><code translate="no">metric_type</code></td><td>如何測量向量嵌入之間的相似性。<br/> 可能的值是<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>, 和<code translate="no">HAMMING</code>, 並預設為載入索引檔案的值。</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>搜尋時要查詢的單位數量。<br/> 數值範圍為 [1，nlist<sub>[1]</sub>]。</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>搜尋精確度等級。<br/> 可能的值為<code translate="no">1</code> 、<code translate="no">2</code> 及<code translate="no">3</code> ，預設為<code translate="no">1</code> 。較高的值會產生更精確的結果，但效能較慢。</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>定義搜尋空間的外部邊界。只有與查詢向量的距離在此範圍內的向量，才會被視為潛在的匹配。<br/>值範圍由<code translate="no">metric_type</code> 參數決定。例如，如果<code translate="no">metric_type</code> 設定為<code translate="no">L2</code> ，則有效值範圍為<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 設定為<code translate="no">COSINE</code> ，則有效值範圍為<code translate="no">[-1, 1]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">相似度指標</a>。</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 設定搜尋的外部極限，而<code translate="no">range_filter</code> 則可選擇用來定義內部邊界，建立一個距離範圍，向量必須在此範圍內才會被視為匹配。<br/>值範圍由<code translate="no">metric_type</code> 參數決定。例如，如果<code translate="no">metric_type</code> 設定為<code translate="no">L2</code> ，則有效值範圍為<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 設定為<code translate="no">COSINE</code> ，則有效值範圍為<code translate="no">[-1, 1]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">相似度量測</a>。</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>定義搜尋空間的外部邊界。只有與查詢向量的距離在此範圍內的向量，才會被視為潛在的匹配。<br/>值範圍由<code translate="no">metric_type</code> 參數決定。例如，如果<code translate="no">metric_type</code> 設定為<code translate="no">L2</code> ，則有效值範圍為<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 設定為<code translate="no">COSINE</code> ，則有效值範圍為<code translate="no">[-1, 1]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/metric.md">相似度指標</a>。</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 設定搜尋的外部極限，而<code translate="no">range_filter</code> 則可選擇用來定義內部邊界，建立一個距離範圍，向量必須在此範圍內才會被視為匹配。<br/>值範圍由<code translate="no">metric_type</code> 參數決定。例如，如果<code translate="no">metric_type</code> 設定為<code translate="no">L2</code> ，則有效值範圍為<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 設定為<code translate="no">COSINE</code> ，則有效值範圍為<code translate="no">[-1, 1]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/metric.md">相似度量測</a>。</td></tr>
 </tbody>
 </table>
 <div class="admonition note">

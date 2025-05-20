@@ -269,7 +269,7 @@ vectorstore = Milvus.from_documents(
     docs,
     embeddings,
     connection_args={"uri": URI},
-    drop_old=True,
+    drop_old=False,
     partition_key_field="namespace",  # Use the "namespace" field as the partition key
 )
 ```

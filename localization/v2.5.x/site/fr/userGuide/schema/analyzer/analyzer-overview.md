@@ -108,6 +108,30 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Pour vérifier le résultat de l'exécution d'un analyseur, utilisez la méthode <code translate="no">run_analyzer</code>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment"># Run analyzer</span>
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Le résultat sera le suivant :</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
+<button class="copy-code-btn"></button></code></pre>
+<p>Ceci démontre que l'analyseur tokenise correctement le texte d'entrée en filtrant les mots vides <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, et <code translate="no">&quot;for&quot;</code>, tout en retournant les tokens significatifs restants.</p>
 <p>La configuration de l'analyseur intégré <code translate="no">standard</code> ci-dessus est équivalente à la configuration d'un <a href="/docs/fr/analyzer-overview.md#Custom-analyzer">analyseur personnalisé</a> avec les paramètres suivants, où les options <code translate="no">tokenizer</code> et <code translate="no">filter</code> sont explicitement définies pour obtenir une fonctionnalité similaire :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -163,10 +187,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <ul>
 <li><p><code translate="no">standard</code>: Adapté au traitement de texte général, appliquant la tokenisation standard et le filtrage des minuscules.</p></li>
 <li><p><code translate="no">english</code>: Optimisé pour les textes en anglais, avec prise en charge des mots vides en anglais.</p></li>
-<li><p><code translate="no">chinese</code>: Spécialisé pour le traitement de textes chinois, avec une tokénisation adaptée aux structures de la langue chinoise.</p></li>
+<li><p><code translate="no">chinese</code>: Spécialisé dans le traitement de textes chinois, avec une tokénisation adaptée aux structures de la langue chinoise.</p></li>
 </ul>
-<p>Pour obtenir une liste des analyseurs intégrés et de leurs paramètres personnalisables, reportez-vous à la section <a href="/docs/fr/built-in-analyzers">Référence des analyseurs intégrés</a>.</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">Analyseur personnalisé</h3><p>Pour un traitement de texte plus avancé, les analyseurs personnalisés de Milvus vous permettent de construire un pipeline de traitement de texte personnalisé en spécifiant à la fois un <strong>tokenizer</strong> et des <strong>filtres</strong>. Cette configuration est idéale pour les cas d'utilisation spécialisés nécessitant un contrôle précis.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">Analyseur personnalisé</h3><p>Pour un traitement de texte plus avancé, les analyseurs personnalisés de Milvus vous permettent de construire un pipeline de traitement de texte sur mesure en spécifiant à la fois un <strong>tokenizer</strong> et des <strong>filtres</strong>. Cette configuration est idéale pour les cas d'utilisation spécialisés nécessitant un contrôle précis.</p>
 <h4 id="Tokenizer" class="common-anchor-header">Tokenizer</h4><p>Le <strong>tokenizer</strong> est un composant <strong>obligatoire</strong> pour un analyseur personnalisé, qui initie le pipeline de l'analyseur en décomposant le texte d'entrée en unités discrètes ou en <strong>tokens</strong>. La tokenisation suit des règles spécifiques, telles que la division par des espaces blancs ou la ponctuation, en fonction du type de tokenizer. Ce processus permet un traitement plus précis et indépendant de chaque mot ou phrase.</p>
 <p>Par exemple, un tokenizer convertit le texte <code translate="no">&quot;Vector Database Built for Scale&quot;</code> en jetons distincts :</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -191,8 +214,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour obtenir une liste des tokenizers disponibles, reportez-vous à la section <a href="/docs/fr/tokenizers">Référence des tokenizers</a>.</p>
-<h4 id="Filter" class="common-anchor-header">Filtre</h4><p>Les<strong>filtres</strong> sont des composants <strong>optionnels</strong> qui travaillent sur les jetons produits par le tokenizer, les transformant ou les affinant si nécessaire. Par exemple, après avoir appliqué un filtre <code translate="no">lowercase</code> aux termes tokenizés <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, le résultat pourrait être :</p>
+<h4 id="Filter" class="common-anchor-header">Filtre</h4><p>Les<strong>filtres</strong> sont des composants <strong>optionnels</strong> qui travaillent sur les jetons produits par le tokenizer, en les transformant ou en les affinant si nécessaire. Par exemple, après avoir appliqué un filtre <code translate="no">lowercase</code> aux termes tokenizés <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, le résultat pourrait être :</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Les filtres d'un analyseur personnalisé peuvent être <strong>intégrés</strong> ou <strong>personnalisés</strong>, en fonction des besoins de configuration.</p>
@@ -282,8 +304,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Pour une liste des types de filtres disponibles et de leurs paramètres spécifiques, reportez-vous à la section <a href="/docs/fr/filters">Référence des filtres</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">Exemple d'utilisation<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -302,14 +323,15 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
       </svg>
     </button></h2><p>Dans cet exemple, vous allez créer un schéma de collection qui inclut :</p>
 <ul>
-<li><p>Un champ vectoriel pour les encastrements.</p></li>
+<li><p>Un champ vectoriel pour les embeddings.</p></li>
 <li><p>Deux champs <code translate="no">VARCHAR</code> pour le traitement du texte :</p>
 <ul>
 <li><p>Un champ utilise un analyseur intégré.</p></li>
 <li><p>L'autre utilise un analyseur personnalisé.</p></li>
 </ul></li>
 </ul>
-<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Étape 1 : initialisation de MilvusClient et création du schéma</h3><p>Commencez par configurer le client Milvus et par créer un nouveau schéma.</p>
+<p>Avant d'incorporer ces configurations dans votre collection, vous vérifierez chaque analyseur à l'aide de la méthode <code translate="no">run_analyzer</code>.</p>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Etape 1 : Initialiser MilvusClient et créer un schéma</h3><p>Commencez par configurer le client Milvus et créez un nouveau schéma.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -372,7 +394,8 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Étape 2 : Définir et vérifier les configurations de l'analyseur</h3><ol>
 <li><p><strong>Configurez et vérifiez un analyseur intégré</strong> (<code translate="no">english</code>)<strong>:</strong></p>
 <ul>
-<li><strong>Configuration :</strong> Définir les paramètres de l'analyseur pour l'analyseur anglais intégré.</li>
+<li><p><strong>Configuration :</strong> Définir les paramètres de l'analyseur pour l'analyseur anglais intégré.</p></li>
+<li><p><strong>Vérification :</strong> Utilisez <code translate="no">run_analyzer</code> pour vérifier que la configuration produit la tokenisation attendue.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -380,6 +403,14 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 analyzer_params_built_in = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
 }
+
+<span class="hljs-comment"># Verify built-in analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_built_in)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Built-in analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -396,7 +427,8 @@ analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <sp
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Configurer et vérifier un analyseur personnalisé :</strong></p>
 <ul>
-<li><strong>Configuration :</strong> Définir un analyseur personnalisé qui utilise un tokenizer standard ainsi qu'un filtre minuscule intégré et des filtres personnalisés pour la longueur du token et les mots vides.</li>
+<li><p><strong>Configuration :</strong> Définissez un analyseur personnalisé qui utilise un tokenizer standard avec un filtre minuscule intégré et des filtres personnalisés pour la longueur du token et les mots vides.</p></li>
+<li><p><strong>Vérification :</strong> Utilisez <code translate="no">run_analyzer</code> pour vous assurer que la configuration personnalisée traite le texte comme prévu.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -415,6 +447,14 @@ analyzer_params_custom = {
         }
     ]
 }
+
+<span class="hljs-comment"># Verify custom analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_custom)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Custom analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
@@ -462,7 +502,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Étape 3 : Ajouter des champs au schéma</h3><p>Maintenant que vous avez vérifié les configurations de votre analyseur, ajoutez-les aux champs de votre schéma :</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Étape 3 : ajouter des champs au schéma</h3><p>Maintenant que vous avez vérifié les configurations de votre analyseur, ajoutez-les aux champs de votre schéma :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>

@@ -24,6 +24,7 @@ import { remarkToHtml } from "./remark.js";
 
 const MOCK_TRANSLATE = false;
 const VERSIONS = ["v2.5.x", "v2.4.x"];
+const LATEST_VERSION = VERSIONS[0];
 const sourceFilePath = "site/en";
 const sourceLang = "en";
 const targetLangs = [
@@ -113,6 +114,7 @@ async function bootstrap() {
           lang: targetLang,
           version,
           betaTag: data.beta,
+          latestVersion: LATEST_VERSION
         };
         const {
           html: htmlContent,

@@ -37,7 +37,7 @@ title: Utiliser Milvus comme magasin de vecteurs
         ></path>
       </svg>
     </button></h2><p>Vous devez installer <code translate="no">langchain-milvus</code> avec <code translate="no">pip install -qU langchain-milvus</code> pour utiliser cette intégration.</p>
-<pre><code translate="no" class="language-shell">$ pip install -qU  langchain_milvus
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU  langchain_milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>La dernière version de pymilvus est livrée avec une base de données vectorielle locale Milvus Lite, bonne pour le prototypage. Si vous avez des données à grande échelle, comme plus d'un million de documents, nous vous recommandons d'installer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker ou kubernetes</a>.</p>
 <h2 id="Initialization" class="common-anchor-header">Initialisation<button data-href="#Initialization" class="anchor-icon" translate="no">
@@ -55,9 +55,9 @@ title: Utiliser Milvus comme magasin de vecteurs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbeddings</span>
+    </button></h2><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
-embeddings = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
+embeddings = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 
@@ -72,19 +72,19 @@ vector_store = Milvus(
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">Compartimenter les données avec Milvus Collections</h3><p>Vous pouvez stocker différents documents non liés dans différentes collections au sein de la même instance Milvus afin de maintenir le contexte</p>
 <p>Voici comment créer une nouvelle collection de stockage vectoriel à partir de documents :</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
-vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="hljs-title function_">from_documents</span>(
-    [<span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;foo!&quot;</span>)],
+vector_store_saved = Milvus.from_documents(
+    [Document(page_content=<span class="hljs-string">&quot;foo!&quot;</span>)],
     embeddings,
     collection_name=<span class="hljs-string">&quot;langchain_example&quot;</span>,
-    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
+    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Et voici comment récupérer cette collection stockée</p>
-<pre><code translate="no" class="language-python">vector_store_loaded = <span class="hljs-title class_">Milvus</span>(
+<pre><code translate="no" class="language-python">vector_store_loaded = Milvus(
     embeddings,
-    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
+    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
     collection_name=<span class="hljs-string">&quot;langchain_example&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -186,7 +186,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
  'd43cbf9a-a772-4c40-993b-9439065fec01',
  '25e667bb-6f09-4574-a368-661069301906']
 </code></pre>
-<h3 id="Delete-items-from-vector-store" class="common-anchor-header">Supprimer des éléments de la base de données vectorielles</h3><pre><code translate="no" class="language-python">vector_store.<span class="hljs-built_in">delete</span>(ids=[uuids[<span class="hljs-number">-1</span>]])
+<h3 id="Delete-items-from-vector-store" class="common-anchor-header">Supprimer des éléments de la base de données vectorielles</h3><pre><code translate="no" class="language-python">vector_store.delete(ids=[uuids[-<span class="hljs-number">1</span>]])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">(insert count: 0, delete count: 1, upsert count: 0, timestamp: 0, success count: 0, err count: 0, cost: 0)
 </code></pre>
@@ -251,7 +251,7 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
       </svg>
     </button></h2><p>Pour savoir comment utiliser ce magasin de vecteurs pour la génération augmentée par récupération (RAG), voir le <a href="https://milvus.io/docs/integrate_with_langchain.md">guide RAG</a>.</p>
 <h3 id="Per-User-Retrieval" class="common-anchor-header">Récupération par utilisateur</h3><p>Lorsque vous créez une application de recherche, vous devez souvent la concevoir en pensant à plusieurs utilisateurs. Cela signifie que vous pouvez stocker des données non pas pour un seul utilisateur, mais pour plusieurs utilisateurs différents, et qu'ils ne doivent pas être en mesure de voir les données de chacun d'entre eux.</p>
-<p>Milvus recommande d'utiliser <a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key</a> pour mettre en œuvre la multi-location, dont voici un exemple.</p>
+<p>Milvus recommande d'utiliser <a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key pour</a> mettre en œuvre la multi-location, dont voici un exemple.</p>
 <blockquote>
 <p>La fonction de clé de partition n'est pas disponible dans Milvus Lite, si vous souhaitez l'utiliser, vous devez démarrer le serveur Milvus à partir de <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker ou kubernetes</a>.</p>
 </blockquote>
@@ -265,7 +265,7 @@ vectorstore = Milvus.from_documents(
     docs,
     embeddings,
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
     partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>,  <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
 )
 <button class="copy-code-btn"></button></code></pre>

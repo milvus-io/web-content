@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "إنشاء المجموعة على الفور",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "عرض المجموعات",
             "id": "view-collections.md",
             "order": 3,
@@ -524,7 +518,19 @@
                   {
                     "label": "جيبا",
                     "id": "jieba-tokenizer.md",
-                    "order": 1,
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "لينديرا",
+                    "id": "lindera-tokenizer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "وحدة العناية المركزة",
+                    "id": "icu-tokenizer.md",
+                    "order": 4,
                     "children": []
                   }
                 ]
@@ -586,6 +592,18 @@
                     "label": "ستيمير",
                     "id": "stemmer-filter.md",
                     "order": 8,
+                    "children": []
+                  },
+                  {
+                    "label": "إزالة الترقيم",
+                    "id": "removepunct-filter.md",
+                    "order": 9,
+                    "children": []
+                  },
+                  {
+                    "label": "ريجكس",
+                    "id": "regex-filter.md",
+                    "order": 10,
                     "children": []
                   }
                 ]
@@ -922,6 +940,12 @@
             "label": "الجوزاء",
             "id": "embed-with-gemini.md",
             "order": 14,
+            "children": []
+          },
+          {
+            "label": "تضمينأي شيء",
+            "id": "build_RAG_with_milvus_and_embedAnything.md",
+            "order": 15,
             "children": []
           }
         ]
@@ -1836,6 +1860,18 @@
             "label": "كومة اللاما",
             "id": "llama_stack_with_milvus.md",
             "order": 12,
+            "children": []
+          },
+          {
+            "label": "ن8 ن",
+            "id": "milvus_and_n8n.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "أي شيءLLLM",
+            "id": "use_milvus_in_anythingllm.md",
+            "order": 14,
             "children": []
           }
         ]

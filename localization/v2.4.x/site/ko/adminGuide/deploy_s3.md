@@ -45,7 +45,7 @@ summary: 도커 컴포즈 또는 헬름으로 Milvus용 S3 스토리지를 설�
   useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
   bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>자세한 내용은 <a href="/docs/ko/configure_minio.md">MinIO/S3 구성을</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.4.x/configure_minio.md">MinIO/S3 구성을</a> 참조하세요.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. docker-compose.yaml 수정하기</h3><p>또한 <code translate="no">docker-compose.yaml</code> 에서 milvus 서비스에 대한 <code translate="no">MINIO_ADDRESS</code> 환경 변수를 제거합니다. 기본적으로 milvus는 외부 S3 대신 로컬 미니오를 사용합니다.</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3. Milvus 실행</h3><p>다음 명령어를 실행하여 S3 구성을 사용하는 Milvus를 시작합니다.</p>
 <pre><code translate="no" class="language-shell">docker compose up
@@ -127,6 +127,6 @@ summary: 도커 컴포즈 또는 헬름으로 Milvus용 S3 스토리지를 설�
       </svg>
     </button></h2><p>도커 컴포즈 또는 헬름으로 다른 Milvus 종속성을 구성하는 방법을 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/deploy_etcd.md">도커 컴포즈 또는 헬름으로 메타 스토리지 구성하기</a></li>
-<li><a href="/docs/ko/deploy_pulsar.md">도커 컴포즈 또는 헬름으로 메시지 저장소 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_etcd.md">도커 컴포즈 또는 헬름으로 메타 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_pulsar.md">도커 컴포즈 또는 헬름으로 메시지 저장소 구성하기</a></li>
 </ul>

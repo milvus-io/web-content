@@ -19,7 +19,7 @@ title: 하이브리드 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 2.4부터 다중 벡터 지원과 하이브리드 검색 프레임워크가 도입되어 사용자가 여러 개의 벡터 필드(최대 10개)를 하나의 컬렉션으로 가져올 수 있게 되었습니다. 서로 다른 열에 있는 이러한 벡터는 서로 다른 임베딩 모델에서 비롯되거나 서로 다른 처리 방법을 거친 데이터의 다양한 측면을 나타냅니다. 하이브리드 검색의 결과는 상호 순위 융합(RRF) 및 가중치 점수 등의 순위 재조정 전략을 사용해 통합됩니다. 순위 재조정 전략에 대해 자세히 알아보려면 순위 <a href="/docs/ko/reranking.md">재조정을</a> 참조하세요.</p>
+    </button></h1><p>Milvus 2.4부터 다중 벡터 지원과 하이브리드 검색 프레임워크가 도입되어 사용자가 여러 개의 벡터 필드(최대 10개)를 하나의 컬렉션으로 가져올 수 있게 되었습니다. 서로 다른 열에 있는 이러한 벡터는 서로 다른 임베딩 모델에서 비롯되거나 서로 다른 처리 방법을 거친 데이터의 다양한 측면을 나타냅니다. 하이브리드 검색의 결과는 상호 순위 융합(RRF) 및 가중치 점수 등의 순위 재조정 전략을 사용해 통합됩니다. 순위 재조정 전략에 대해 자세히 알아보려면 순위 <a href="/docs/ko/v2.4.x/reranking.md">재조정을</a> 참조하세요.</p>
 <p>이 기능은 사진, 음성, 지문 등과 같은 다양한 속성을 기반으로 벡터 라이브러리에서 가장 유사한 사람을 식별하는 등 포괄적인 검색 시나리오에서 특히 유용합니다.</p>
 <p>이 튜토리얼에서는 그 방법을 배웁니다:</p>
 <ul>
@@ -176,7 +176,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">AnnSearchRequest</code> 인스턴스를 만든 후 결과를 결합하고 순위를 재조정하는 재순위 전략을 구성합니다. 현재 <code translate="no">WeightedRanker</code> 과 <code translate="no">RRFRanker</code> 의 두 가지 옵션이 있습니다. 재랭크 전략에 대한 자세한 내용은 <a href="/docs/ko/reranking.md">재랭크하기를</a> 참조하세요.</p>
+    </button></h2><p><code translate="no">AnnSearchRequest</code> 인스턴스를 만든 후 결과를 결합하고 순위를 재조정하는 재순위 전략을 구성합니다. 현재 <code translate="no">WeightedRanker</code> 과 <code translate="no">RRFRanker</code> 의 두 가지 옵션이 있습니다. 재랭크 전략에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/reranking.md">재랭크하기를</a> 참조하세요.</p>
 <ul>
 <li><p>가중 점수 사용</p>
 <p><code translate="no">WeightedRanker</code> 은 지정된 가중치로 각 벡터 필드 검색 결과에 중요성을 할당하는 데 사용됩니다. 일부 벡터 필드를 다른 필드보다 우선순위를 지정하면 <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> 에서 이를 결합된 검색 결과에 반영할 수 있습니다.</p>
@@ -230,7 +230,7 @@ res = collection.hybrid_search(
 <p>검색 요청 목록으로, 각 요청은 <code translate="no">ANNSearchRequest</code> 객체입니다. 각 요청은 다른 벡터 필드와 다른 검색 매개변수 집합에 대응할 수 있습니다.</p></li>
 <li><p><code translate="no">rerank</code> <em>(객체</em>)</p>
 <p>하이브리드 검색에 사용할 재순위 전략입니다. 가능한 값: <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> 및 <code translate="no">RRFRanker()</code>.</p>
-<p>재랭크 전략에 대한 자세한 내용은 <a href="/docs/ko/reranking.md">재랭크하기를</a> 참조하세요.</p></li>
+<p>재랭크 전략에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/reranking.md">재랭크하기를</a> 참조하세요.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>하이브리드 검색에서 반환할 최종 결과의 최대 개수입니다.</p></li>
 </ul>

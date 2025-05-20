@@ -44,7 +44,7 @@ title: ''
         ></path>
       </svg>
     </button></h2><p>Prepare the boolean expression that filters the entities to delete.</p>
-<p>Milvus only supports deleting entities with clearly specified primary keys, which can be achieved merely with the term expression <code translate="no">in</code>. Other operators can be used only in query or scalar filtering in vector search. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</p>
+<p>Milvus only supports deleting entities with clearly specified primary keys, which can be achieved merely with the term expression <code translate="no">in</code>. Other operators can be used only in query or scalar filtering in vector search. See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</p>
 <p>The following example filters data with primary key values of <code translate="no">0</code> and <code translate="no">1</code>.</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -270,8 +270,8 @@ Output:
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.2.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.2.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.2.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

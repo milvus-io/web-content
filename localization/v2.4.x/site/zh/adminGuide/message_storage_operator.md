@@ -344,6 +344,6 @@ spec:
       </svg>
     </button></h2><p>了解如何使用 Milvus Operator 配置其他 Milvus 依赖项：</p>
 <ul>
-<li><a href="/docs/zh/object_storage_operator.md">使用 Milvus Operator 配置对象存储</a></li>
-<li><a href="/docs/zh/meta_storage_operator.md">使用 Milvus Operator 配置元存储</a></li>
+<li><a href="/docs/zh/v2.4.x/object_storage_operator.md">使用 Milvus Operator 配置对象存储</a></li>
+<li><a href="/docs/zh/v2.4.x/meta_storage_operator.md">使用 Milvus Operator 配置元存储</a></li>
 </ul>

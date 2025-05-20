@@ -90,12 +90,12 @@ search(SearchReq.builder()
        </tr>
        <tr>
          <td><p>FloatVec</p></td>
-         <td><p>FloatVec(List\<Float> data)FloatVec(float[] data)</p></td>
+         <td><p>FloatVec(List\<Float> data) FloatVec(float[] data)</p></td>
          <td><p>For DataType.FloatVector type field.</p></td>
        </tr>
        <tr>
          <td><p>BinaryVec</p></td>
-         <td><p>BinaryVec(ByteBuffer data)BinaryVec(byte[] data)</p></td>
+         <td><p>BinaryVec(ByteBuffer data) BinaryVec(byte[] data)</p></td>
          <td><p>For DataType.BinaryVector type field.</p></td>
        </tr>
     </table>
@@ -229,6 +229,21 @@ A **SearchResp object representing specific search results with the specified ou
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Search
 SearchResp searchR = client.search(SearchReq.builder()
         .collectionName(collectionName)
         .data(Collections.singletonList(new FloatVec(new float[]{1.0f, 2.0f})))
@@ -236,6 +251,7 @@ SearchResp searchR = client.search(SearchReq.builder()
         .topK(10)
         .outputFields(Collections.singletonList("*"))
         .build());
+        
 List<List<SearchResp.SearchResult>> searchResults = searchR.getSearchResults();
 System.out.println("\nSearch results:");
 for (List<SearchResp.SearchResult> results : searchResults) {

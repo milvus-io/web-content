@@ -2,7 +2,7 @@
 id: analyzer-overview.md
 title: نظرة عامة على المحلل
 summary: >-
-  في معالجة النصوص، يعد المحلل مكونًا أساسيًا يحول النص الخام إلى تنسيق منظم
+  في معالجة النصوص، يعتبر المحلل مكونًا أساسيًا يحول النص الخام إلى تنسيق منظم
   وقابل للبحث. يتكون كل محلل عادةً من عنصرين أساسيين: مُحلل الرموز والمرشح.
   يقومان معًا بتحويل النص المدخل إلى رموز، وتنقيح هذه الرموز، وإعدادها للفهرسة
   والاسترجاع بكفاءة.
@@ -107,7 +107,31 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يعادل تكوين المحلل المدمج <code translate="no">standard</code> أعلاه إعداد محلل <a href="/docs/ar/analyzer-overview.md#Custom-analyzer">مخصص</a> بالمعلمات التالية، حيث يتم تحديد خيارات <code translate="no">tokenizer</code> و <code translate="no">filter</code> بشكل صريح لتحقيق وظائف مماثلة:</p>
+<p>للتحقق من نتيجة تنفيذ محلل ما، استخدم الطريقة <code translate="no">run_analyzer</code>:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment"># Run analyzer</span>
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>سيكون الناتج:</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
+<button class="copy-code-btn"></button></code></pre>
+<p>هذا يوضح أن المحلل يقوم بترميز النص المدخل بشكل صحيح عن طريق تصفية كلمات التوقف <code translate="no">&quot;a&quot;</code> و <code translate="no">&quot;an&quot;</code> و <code translate="no">&quot;for&quot;</code> مع إرجاع الرموز ذات المعنى المتبقية.</p>
+<p>إن تكوين المحلل المدمج <code translate="no">standard</code> أعلاه يعادل إعداد محلل <a href="/docs/ar/analyzer-overview.md#Custom-analyzer">مخصص</a> باستخدام المعلمات التالية، حيث يتم تحديد خيارات <code translate="no">tokenizer</code> و <code translate="no">filter</code> بشكل صريح لتحقيق وظائف مماثلة:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -162,10 +186,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <ul>
 <li><p><code translate="no">standard</code>: مناسب لمعالجة النصوص للأغراض العامة، مع تطبيق الترميز القياسي والتصفية بالأحرف الصغيرة.</p></li>
 <li><p><code translate="no">english</code>: مُحسّن للنصوص باللغة الإنجليزية، مع دعم كلمات التوقف الإنجليزية.</p></li>
-<li><p><code translate="no">chinese</code>: مخصص لمعالجة النصوص الصينية، بما في ذلك الترميز المخصص لتراكيب اللغة الصينية.</p></li>
+<li><p><code translate="no">chinese</code>: متخصص في معالجة النصوص الصينية، بما في ذلك الترميز المخصص لتراكيب اللغة الصينية.</p></li>
 </ul>
-<p>للحصول على قائمة بالمحللات المدمجة وإعداداتها القابلة للتخصيص، راجع <a href="/docs/ar/built-in-analyzers">مرجع المحلل المدمج</a>.</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">محلل مخصص</h3><p>لمزيد من معالجة النصوص المتقدمة، تتيح لك المحللات المخصصة في Milvus إنشاء خط أنابيب مخصص لمعالجة النصوص من خلال تحديد كل من <strong>أداة الترميز</strong> <strong>والمرشحات</strong>. يعد هذا الإعداد مثاليًا لحالات الاستخدام المتخصصة التي تتطلب تحكمًا دقيقًا.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">محلل مخصص</h3><p>لمزيد من المعالجة المتقدمة للنصوص، تتيح لك المحللات المخصصة في Milvus إنشاء خط أنابيب مخصص لمعالجة النصوص من خلال تحديد كل من <strong>أداة الترميز</strong> <strong>والمرشحات</strong>. يعد هذا الإعداد مثاليًا لحالات الاستخدام المتخصصة التي تتطلب تحكمًا دقيقًا.</p>
 <h4 id="Tokenizer" class="common-anchor-header">أداة الترميز</h4><p>يعدّ أداة <strong>الترميز</strong> مكوّنًا <strong>إلزاميًا</strong> لمحلل مخصص، حيث يبدأ خط أنابيب المحلل عن طريق تقسيم نص الإدخال إلى وحدات أو <strong>رموز</strong> منفصلة. تتبع عملية الترميز قواعد محددة، مثل التقسيم حسب المسافات البيضاء أو علامات الترقيم، اعتمادًا على نوع أداة الترميز. تسمح هذه العملية بمعالجة أكثر دقة واستقلالية لكل كلمة أو عبارة.</p>
 <p>على سبيل المثال، تقوم أداة الترميز بتحويل النص <code translate="no">&quot;Vector Database Built for Scale&quot;</code> إلى رموز منفصلة:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -190,8 +213,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للاطلاع على قائمة الرموز الرمزية المتاحة للاختيار من بينها، راجع <a href="/docs/ar/tokenizers">مرجع الرموز الرمزية</a>.</p>
-<h4 id="Filter" class="common-anchor-header">المرشحات</h4><p><strong>الفلاتر</strong> هي مكوّنات <strong>اختيارية</strong> تعمل على الرموز التي ينتجها الرمز المميز، وتقوم بتحويلها أو تنقيحها حسب الحاجة. على سبيل المثال، بعد تطبيق مرشح <code translate="no">lowercase</code> على المصطلحات المرمزة <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> ، قد تكون النتيجة:</p>
+<h4 id="Filter" class="common-anchor-header">المرشحات</h4><p><strong>الفلاتر</strong> هي مكوّنات <strong>اختيارية</strong> تعمل على الرموز التي ينتجها مُصنِّف الرموز الرموز الرمزية، وتقوم بتحويلها أو تنقيحها حسب الحاجة. على سبيل المثال، بعد تطبيق مرشح <code translate="no">lowercase</code> على المصطلحات المرمزة <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> ، قد تكون النتيجة:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكن أن تكون الفلاتر في محلل مخصص إما <strong>مدمجة</strong> أو <strong>مخصصة،</strong> حسب احتياجات التكوين.</p>
@@ -281,8 +303,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>للاطلاع على قائمة بأنواع الفلاتر المتاحة ومعلماتها المحددة، راجع <a href="/docs/ar/filters">مرجع الفلاتر</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">مثال على الاستخدام<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -299,16 +320,17 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في هذا المثال، ستقوم بإنشاء مخطط مجموعة يتضمن:</p>
+    </button></h2><p>في هذا المثال، ستقوم في هذا المثال بإنشاء مخطط مجموعة يتضمن:</p>
 <ul>
 <li><p>حقل متجه للتضمينات.</p></li>
-<li><p>حقلا <code translate="no">VARCHAR</code> لمعالجة النصوص:</p>
+<li><p>حقلان <code translate="no">VARCHAR</code> لمعالجة النصوص:</p>
 <ul>
 <li><p>يستخدم أحد الحقلين محللاً مدمجًا.</p></li>
 <li><p>يستخدم الآخر محللاً مخصصًا.</p></li>
 </ul></li>
 </ul>
-<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">الخطوة 1: تهيئة MilvusClient وإنشاء مخطط</h3><p>ابدأ بإعداد عميل Milvus وإنشاء مخطط جديد.</p>
+<p>قبل دمج هذه التكوينات في مجموعتك، سوف تتحقق من كل محلل باستخدام طريقة <code translate="no">run_analyzer</code>.</p>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">الخطوة 1: تهيئة MilvusClient وإنشاء المخطط</h3><p>ابدأ بإعداد عميل Milvus وإنشاء مخطط جديد.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -371,7 +393,8 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">الخطوة 2: تحديد تكوينات المحلل والتحقق منها</h3><ol>
 <li><p><strong>قم بتكوين محلل مدمج (</strong><code translate="no">english</code><strong>) والتحقق</strong> منه<strong>:</strong></p>
 <ul>
-<li><strong>التهيئة:</strong> تحديد معلمات المحلل لمحلل اللغة الإنجليزية المدمج.</li>
+<li><p><strong>التهيئة:</strong> تحديد معلمات المحلل لمحلل اللغة الإنجليزية المدمج.</p></li>
+<li><p><strong>التحقق:</strong> استخدم <code translate="no">run_analyzer</code> للتحقق من أن التكوين ينتج الترميز المتوقع.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">بايثون</a><a href="#java">جافا جافا</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -379,6 +402,14 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 analyzer_params_built_in = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
 }
+
+<span class="hljs-comment"># Verify built-in analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_built_in)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Built-in analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -395,7 +426,8 @@ analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <sp
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>تكوين محلل مخصص والتحقق منه:</strong></p>
 <ul>
-<li><strong>التهيئة:</strong> تعريف محلل مخصص يستخدم محلل رمزي قياسي إلى جانب مرشح الأحرف الصغيرة المدمج ومرشحات مخصصة لطول الرمز المميز وكلمات التوقف.</li>
+<li><p><strong>التهيئة:</strong> قم بتعريف محلل مخصص يستخدم أداة ترميز قياسية إلى جانب مرشح الأحرف الصغيرة المدمج ومرشحات مخصصة لطول الرمز المميز وكلمات التوقف.</p></li>
+<li><p><strong>التحقق:</strong> استخدم <code translate="no">run_analyzer</code> للتأكد من أن التكوين المخصص يعالج النص على النحو المنشود.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">بايثون</a><a href="#java">جافا جافا</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -414,6 +446,14 @@ analyzer_params_custom = {
         }
     ]
 }
+
+<span class="hljs-comment"># Verify custom analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_custom)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Custom analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
@@ -461,7 +501,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">الخطوة 3: إضافة حقول إلى المخطط</h3><p>الآن بعد أن تحققت من تكوينات المحلّل، أضفها إلى حقول المخطط:</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">الخطوة 3: إضافة حقول إلى المخطط</h3><p>الآن بعد أن تحققت من تكوينات المحلل، أضفها إلى حقول المخطط:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>

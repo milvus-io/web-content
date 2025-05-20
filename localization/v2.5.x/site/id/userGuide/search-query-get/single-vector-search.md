@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Berdasarkan file indeks yang merekam urutan penyematan vektor yang diurutkan, pencarian Approximate Nearest Neighbor (ANN) menemukan subkumpulan penyematan vektor berdasarkan vektor kueri yang dibawa dalam permintaan pencarian yang diterima, membandingkan vektor kueri dengan vektor yang ada dalam subkelompok, dan mengembalikan hasil yang paling mirip. Dengan pencarian ANN, Milvus memberikan pengalaman pencarian yang efisien. Halaman ini membantu Anda mempelajari cara melakukan pencarian ANN dasar.</p>
+    </button></h1><p>Berdasarkan file indeks yang merekam urutan penyematan vektor yang diurutkan, pencarian Approximate Nearest Neighbor (ANN) menemukan subkumpulan penyematan vektor berdasarkan vektor kueri yang dibawa dalam permintaan pencarian yang diterima, membandingkan vektor kueri dengan vektor yang ada di subkelompok, dan mengembalikan hasil yang paling mirip. Dengan pencarian ANN, Milvus memberikan pengalaman pencarian yang efisien. Halaman ini membantu Anda mempelajari cara melakukan pencarian ANN dasar.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +72,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Dalam pencarian ANN, pencarian vektor tunggal mengacu pada pencarian yang hanya melibatkan satu vektor kueri. Berdasarkan indeks yang telah dibuat sebelumnya dan jenis metrik yang dibawa dalam permintaan pencarian, Milvus akan menemukan vektor K teratas yang paling mirip dengan vektor kueri.</p>
-<p>Pada bagian ini, Anda akan belajar bagaimana melakukan pencarian vektor tunggal. Cuplikan kode mengasumsikan Anda telah membuat koleksi dengan cara <a href="/docs/id/create-collection-instantly.md#Quick-Setup">penyiapan cepat</a>. Permintaan pencarian membawa satu vektor kueri dan meminta Milvus menggunakan Inner Product (IP) untuk menghitung kemiripan antara vektor kueri dan vektor di dalam koleksi dan mengembalikan tiga vektor yang paling mirip.</p>
+<p>Pada bagian ini, Anda akan mempelajari cara melakukan pencarian vektor tunggal. Permintaan pencarian membawa satu vektor kueri dan meminta Milvus menggunakan Inner Product (IP) untuk menghitung kemiripan antara vektor kueri dan vektor dalam koleksi dan mengembalikan tiga vektor yang paling mirip.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -975,7 +975,7 @@ curl --request POST \
 <ul>
 <li><p>Pencarian yang Difilter</p>
 <p>Anda dapat menyertakan kondisi pemfilteran dalam permintaan pencarian sehingga Milvus melakukan pemfilteran metadata sebelum melakukan pencarian ANN, mengurangi cakupan pencarian dari seluruh koleksi menjadi hanya entitas yang sesuai dengan kondisi pemfilteran yang ditentukan.</p>
-<p>Untuk mengetahui lebih lanjut tentang pemfilteran metadata dan kondisi pemfilteran, lihat <a href="/docs/id/filtered-search.md">Pencarian</a> dan <a href="/docs/id/filtering">Pemfilteran</a> yang Difilter.</p></li>
+<p>Untuk mengetahui lebih lanjut tentang pemfilteran metadata dan kondisi pemfilteran, lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a>, Pemfilteran <a href="/docs/id/boolean.md">yang Dijelaskan</a>, dan topik-topik terkait.</p></li>
 <li><p>Pencarian Rentang</p>
 <p>Anda dapat meningkatkan relevansi hasil pencarian dengan membatasi jarak atau skor entitas yang dikembalikan dalam rentang tertentu. Di Milvus, pencarian rentang melibatkan gambar dua lingkaran konsentris dengan penyematan vektor yang paling mirip dengan vektor kueri sebagai pusatnya. Permintaan pencarian menentukan jari-jari kedua lingkaran, dan Milvus mengembalikan semua sematan vektor yang berada di dalam lingkaran luar tetapi tidak di dalam lingkaran dalam.</p>
 <p>Untuk mengetahui lebih lanjut tentang pencarian rentang, lihat <a href="/docs/id/range-search.md">Pencarian Rentang</a>.</p></li>

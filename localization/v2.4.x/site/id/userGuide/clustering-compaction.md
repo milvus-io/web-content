@@ -138,7 +138,7 @@ common:
 </table>
 </li>
 </ul>
-<p>Untuk menerapkan perubahan di atas pada kluster Milvus Anda, silakan ikuti langkah-langkah di <a href="/docs/id/configure-helm.md">Konfigurasi Milvus dengan Helm</a> dan <a href="/docs/id/configure_operator.md">Konfigurasi Milvus dengan Operator Milvus</a>.</p>
+<p>Untuk menerapkan perubahan di atas pada kluster Milvus Anda, silakan ikuti langkah-langkah di <a href="/docs/id/v2.4.x/configure-helm.md">Konfigurasi Milvus dengan Helm</a> dan <a href="/docs/id/v2.4.x/configure_operator.md">Konfigurasi Milvus dengan Operator Milvus</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Konfigurasi Koleksi</h3><p>Untuk pemadatan klaster dalam koleksi tertentu, Anda harus memilih sebuah bidang skalar dari koleksi sebagai kunci klaster.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

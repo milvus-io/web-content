@@ -98,7 +98,7 @@ title: ''
     <span>code_mode</span>
   </span>
 </p>
-<p>Learn more about how to <a href="/docs/attu_install-docker.md">install Attu</a>.</p>
+<p>Learn more about how to <a href="/docs/v2.0.x/attu_install-docker.md">install Attu</a>.</p>
 <h2 id="Contribution" class="common-anchor-header">Contribution<button data-href="#Contribution" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -59,7 +59,7 @@ title: 安装 Milvus Python SDK
       </svg>
     </button></h2><p>PyMilvus 可在<a href="https://pypi.org/project/pymilvus/">Python 软件包索引</a>中找到。</p>
 <div class="alert note">
-建议安装与所安装 Milvus 服务器版本相匹配的 PyMilvus 版本。更多信息，请参阅<a href="/docs/zh/release_notes.md">发行说明</a>。</div>
+建议安装与所安装 Milvus 服务器版本相匹配的 PyMilvus 版本。更多信息，请参阅<a href="/docs/zh/v2.4.x/release_notes.md">发行说明</a>。</div>
 <pre><code translate="no">$ python3 -m pip install pymilvus==2.4.15
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">验证安装<button data-href="#Verify-installation" class="anchor-icon" translate="no">
@@ -99,11 +99,11 @@ title: 安装 Milvus Python SDK
 <ul>
 <li><p>学习 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.4.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.4.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.4.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p>探索<a href="/api-reference/pymilvus/v2.4.x/About.md">PyMilvus API 参考</a></p></li>
 </ul>

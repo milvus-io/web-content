@@ -21,7 +21,7 @@ summary: 了解如何在 AWS EC2 上部署 Milvus 集群。
       </svg>
     </button></h1><p>本主题介绍如何使用 Terraform 和 Ansible 在<a href="https://docs.aws.amazon.com/ec2/">亚马逊 EC2</a>上部署 Milvus 群集。</p>
 <div class="alert note">
-<p>此主题已过时，即将删除。建议你参考<a href="/docs/zh/eks.md">在 EKS 上部署 Milvus 群集</a>。</p>
+<p>此主题已过时，即将删除。建议你参考<a href="/docs/zh/v2.4.x/eks.md">在 EKS 上部署 Milvus 群集</a>。</p>
 </div>
 <h2 id="Provision-a-Milvus-cluster" class="common-anchor-header">配置 Milvus 群集<button data-href="#Provision-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -488,7 +488,7 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
       </svg>
     </button></h2><p>如果您想了解如何在其他云上部署 Milvus：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">在 EKS 上部署 Milvus 群集</a></li>
-<li><a href="/docs/zh/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 群集</a></li>
-<li><a href="/docs/zh/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus 指南</a></li>
+<li><a href="/docs/zh/v2.4.x/eks.md">在 EKS 上部署 Milvus 群集</a></li>
+<li><a href="/docs/zh/v2.4.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 群集</a></li>
+<li><a href="/docs/zh/v2.4.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus 指南</a></li>
 </ul>

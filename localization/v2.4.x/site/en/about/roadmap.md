@@ -77,7 +77,7 @@ summary: >-
 <li>Our roadmap is typically structured into three parts: the most recent release, the next upcoming release, and a mid-to-long term vision within the next year.</li>
 <li>As we progress, we continually learn and occasionally adjust our focus, adding or removing items as needed.</li>
 <li>These plans are indicative and subject to change, and may vary based on subscription services.</li>
-<li>We steadfastly adhere to our roadmap, with our <a href="/docs/release_notes.md">release notes</a> serving as a reference.</li>
+<li>We steadfastly adhere to our roadmap, with our <a href="/docs/v2.4.x/release_notes.md">release notes</a> serving as a reference.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">How to contribute<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

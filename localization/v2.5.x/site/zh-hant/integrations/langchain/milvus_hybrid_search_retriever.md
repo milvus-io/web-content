@@ -27,7 +27,7 @@ title: Milvus 混合搜尋檢索器
 </p>
 <p>此圖說明最常見的混合搜尋情況，也就是密集 + 稀疏混合搜尋。在這種情況下，候選人會同時使用語意向量相似性和精確的關鍵字匹配進行檢索。來自這些方法的結果會合併、重新排序，並傳送到 LLM 以產生最終答案。這種方法兼顧了精確度與語意理解，對於不同的查詢情境非常有效。</p>
 <p>除了密集 + 稀疏混合搜尋之外，混合策略也可以結合多種密集向量模型。例如，一個密集向量模型可能專門捕捉語義上的細微差異，而另一個則著重於上下文嵌入或特定領域的表達。透過合併這些模型的結果並重新排序，這類型的混合搜尋可確保檢索過程更仔細、更能感知上下文。</p>
-<p>LangChain Milvus 整合提供了一個彈性的方式來實現混合搜尋，它支援任何數量的向量領域，以及任何自訂的密集或稀疏嵌入模型，這使得 LangChain Milvus 能夠靈活地適應各種混合搜尋的使用情境，同時與 LangChain 的其他功能相容。</p>
+<p>LangChain Milvus 整合提供了一個彈性的方式來實作混合搜尋，它支援任何數量的向量領域，以及任何自訂的密集或稀疏嵌入模型，這讓 LangChain Milvus 可以彈性的適應各種混合搜尋的使用情境，同時也相容於 LangChain 的其他功能。</p>
 <p>在本教程中，我們將從最常見的 dense + sparse 情況開始，然後介紹任何數目的一般混合搜尋使用方式。</p>
 <div class="alert note">
 <p><a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a> 是 Milvus 和 LangChain 混合搜尋的另一種實作，<strong>即將被廢棄</strong>。請使用本文件中的方法來實作混合搜尋，因為它比較有彈性，而且與 LangChain 相容。</p>
@@ -137,7 +137,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -196,7 +196,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>雖然這是使用 BM25 的一種方式，但它需要使用者管理詞彙頻率統計的語料庫。我們建議使用 BM25 的內建函式（選項 1），因為它會在 Milvus 伺服器端處理一切。這樣使用者就不需要擔心管理語料或訓練詞彙的問題。如需更多資訊，請參閱<a href="https://milvus.io/docs/full_text_search_with_langchain.md">使用 LangChain 和 Milvus 的全文檢索</a>。</p>
@@ -233,14 +233,14 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
-<p>在這個範例中，我們有三個向量場。其中，<code translate="no">sparse</code> 用作<code translate="no">BM25BuiltInFunction</code> 的輸出欄位，而另外兩個，<code translate="no">dense1</code> 和<code translate="no">dense2</code> ，則自動指定為兩個<code translate="no">OpenAIEmbeddings</code> 模型的輸出欄位（根據順序）。</p>
+<p>在這個範例中，我們有三個向量場。其中，<code translate="no">sparse</code> 用作<code translate="no">BM25BuiltInFunction</code> 的輸出欄位，而另外兩個，<code translate="no">dense1</code> 和<code translate="no">dense2</code> ，則自動指定為兩個<code translate="no">OpenAIEmbeddings</code> 模型的輸出欄位（基於順序）。</p>
 <h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">指定多向量欄位的索引參數</h3><p>預設情況下，每個向量欄位的索引類型會由嵌入或內建函數的類型自動決定。不過，您也可以指定每個向量欄位的索引類型，以最佳化搜尋效能。</p>
 <pre><code translate="no" class="language-python">dense_index_param_1 = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
@@ -265,7 +265,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -286,7 +286,7 @@ vectorstore.vector_fields
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -359,7 +359,7 @@ docs[<span class="hljs-number">1</span>]
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">建立 RAG 鏈</h3><p>我們準備好 LLM 實例和提示，然後用 LangChain Expression Language 將它們結合成 RAG 管道。</p>
@@ -411,7 +411,7 @@ rag_chain = (
 
 <span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用特定的問題來呼叫 RAG 鏈，並擷取回應</p>
+<p>以特定的問題來呼叫 RAG 鏈，並擷取回應</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
 res = rag_chain.invoke(query)
 res

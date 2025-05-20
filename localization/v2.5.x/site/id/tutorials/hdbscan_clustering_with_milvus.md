@@ -9,6 +9,12 @@ summary: >-
   artikel Dylan Castillo.
 title: Pengelompokan HDBSCAN dengan Milvus
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">Pengelompokan HDBSCAN dengan Milvus<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,15 +30,9 @@ title: Pengelompokan HDBSCAN dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>Data dapat diubah menjadi embeddings menggunakan model pembelajaran mendalam, yang menangkap representasi yang bermakna dari data asli. Dengan menerapkan algoritme pengelompokan tanpa pengawasan, kita dapat mengelompokkan titik-titik data yang serupa berdasarkan pola yang melekat. HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) adalah algoritme pengelompokan yang banyak digunakan untuk mengelompokkan titik-titik data secara efisien dengan menganalisis kepadatan dan jaraknya. Algoritma ini sangat berguna untuk menemukan cluster dengan berbagai bentuk dan ukuran. Dalam buku catatan ini, kita akan menggunakan HDBSCAN dengan Milvus, database vektor berkinerja tinggi, untuk mengelompokkan titik data ke dalam kelompok-kelompok yang berbeda berdasarkan penyematannya.</p>
+    </button></h1><p>Data dapat diubah menjadi embeddings menggunakan model pembelajaran mendalam, yang menangkap representasi yang bermakna dari data asli. Dengan menerapkan algoritme pengelompokan tanpa pengawasan, kita dapat mengelompokkan titik-titik data yang serupa berdasarkan pola yang melekat. HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) adalah algoritme pengelompokan yang banyak digunakan untuk mengelompokkan titik-titik data secara efisien dengan menganalisis kepadatan dan jaraknya. Algoritma ini sangat berguna untuk menemukan cluster dengan berbagai bentuk dan ukuran. Dalam buku catatan ini, kita akan menggunakan HDBSCAN dengan Milvus, database vektor berkinerja tinggi, untuk mengelompokkan titik data ke dalam kelompok-kelompok yang berbeda berdasarkan penyematannya.</p>
 <p>HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) adalah algoritme pengelompokan yang mengandalkan penghitungan jarak antara titik data dalam ruang embedding. Ruang embedding ini, yang dibuat oleh model pembelajaran mendalam, merepresentasikan data dalam bentuk dimensi tinggi. Untuk mengelompokkan titik data yang serupa, HDBSCAN menentukan kedekatan dan kepadatannya, tetapi menghitung jarak ini secara efisien, terutama untuk kumpulan data yang besar, dapat menjadi tantangan.</p>
-<p>Milvus, basis data vektor berkinerja tinggi, mengoptimalkan proses ini dengan menyimpan dan mengindeks penyematan, sehingga memungkinkan pengambilan vektor yang serupa dengan cepat. Ketika digunakan bersama-sama, HDBSCAN dan Milvus memungkinkan pengelompokan yang efisien untuk set data berskala besar dalam ruang embedding.</p>
+<p>Milvus, basis data vektor berkinerja tinggi, mengoptimalkan proses ini dengan menyimpan dan mengindeks penyematan, sehingga memungkinkan pengambilan vektor yang serupa dengan cepat. Ketika digunakan bersama, HDBSCAN dan Milvus memungkinkan pengelompokan yang efisien untuk set data berskala besar dalam ruang embedding.</p>
 <p>Dalam buku catatan ini, kami akan menggunakan model embedding BGE-M3 untuk mengekstrak embedding dari dataset berita utama, memanfaatkan Milvus untuk menghitung jarak antar embedding secara efisien untuk membantu HDBSCAN dalam pengelompokan, dan kemudian memvisualisasikan hasilnya untuk analisis menggunakan metode UMAP. Buku catatan ini merupakan adaptasi Milvus dari <a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">artikel Dylan Castillo.</a></p>
 <h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,10 +50,10 @@ title: Pengelompokan HDBSCAN dengan Milvus
         ></path>
       </svg>
     </button></h2><p>unduh dataset berita dari https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/</p>
-<pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
-$ pip install hdbscan
-$ pip install plotly
-$ pip install umap-learn
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install hdbscan</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install plotly</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install umap-learn</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Download-Data" class="common-anchor-header">Unduh Data<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,7 +71,17 @@ $ pip install umap-learn
         ></path>
       </svg>
     </button></h2><p>Unduh dataset berita dari https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/, ekstrak <code translate="no">news_data_dedup.csv</code> dan letakkan di direktori saat ini.</p>
-<h2 id="Extract-Embeddings-to-Milvus" class="common-anchor-header">Mengekstrak sematan ke Milvus<button data-href="#Extract-Embeddings-to-Milvus" class="anchor-icon" translate="no">
+<p>Atau Anda dapat mengunduh melalui curl:</p>
+<pre><code translate="no" class="language-bash">%%bash
+curl -L -o ~/Downloads/news-headlines-2024.zip\
+  https://www.kaggle.com/api/v1/datasets/download/dylanjcastillo/news-headlines-2024
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0 --:--:--     0
+100  225k  100  225k    0     0  33151      0  0:00:06  0:00:06 --:--:-- 62160:03  114k  0:00:07  0:00:06  0:00:01 66615    0  30519      0  0:00:07  0:00:06  0:00:01 61622
+</code></pre>
+<h2 id="Extract-Embeddings-to-Milvus" class="common-anchor-header">Mengekstrak Embeddings ke Milvus<button data-href="#Extract-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,11 +117,13 @@ embeddings = ef(docs)[<span class="hljs-string">&quot;dense&quot;</span>]
 connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<blockquote>
 <ul>
-<li>Jika Anda hanya membutuhkan basis data vektor lokal untuk data skala kecil atau pembuatan prototipe, mengatur uri sebagai file lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
-<li>Jika Anda memiliki data berskala besar, misalnya lebih dari satu juta vektor, Anda dapat menyiapkan server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan alamat dan port server sebagai uri Anda, misalnya<code translate="no">http://localhost:19530</code>. Jika Anda mengaktifkan fitur autentikasi di Milvus, gunakan "&lt;nama_user Anda&gt;:&lt;kata sandi Anda&gt;" sebagai token, jika tidak, jangan setel token.</li>
+<li>Jika Anda hanya membutuhkan basis data vektor lokal untuk data skala kecil atau pembuatan prototipe, mengatur uri sebagai berkas lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam berkas ini.</li>
+<li>Jika Anda memiliki data berskala besar, misalnya lebih dari satu juta vektor, Anda dapat menyiapkan server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan alamat dan port server sebagai uri Anda, misalnya<code translate="no">http://localhost:19530</code>. Jika Anda mengaktifkan fitur autentikasi pada Milvus, gunakan "<your_username>:<your_password>" sebagai token, jika tidak, jangan setel token.</li>
 <li>Jika Anda menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint dan API key</a> di Zilliz Cloud.</li>
 </ul>
+</blockquote>
 </div>
 <pre><code translate="no" class="language-python">fields = [
     FieldSchema(
@@ -272,6 +284,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>gambar</span> </span></p>
 <p>Di sini, kami mendemonstrasikan bahwa data dikelompokkan dengan baik, dan Anda dapat mengarahkan kursor ke titik-titik tersebut untuk memeriksa teks yang diwakilinya. Dengan buku catatan ini, kami harap Anda dapat mempelajari cara menggunakan HDBSCAN untuk mengelompokkan embedding dengan Milvus secara efisien, yang juga dapat diterapkan pada jenis data lainnya. Dikombinasikan dengan model bahasa yang besar, pendekatan ini memungkinkan analisis yang lebih dalam pada data Anda dalam skala besar.</p>

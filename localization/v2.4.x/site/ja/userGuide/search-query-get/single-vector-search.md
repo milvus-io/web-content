@@ -1698,7 +1698,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><code translate="no">HAMMING</code></td><td>ハミング距離が小さいほど、類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>距離メトリックの種類については、<a href="/docs/ja/metric.md">類似度メトリックを</a>参照してください。</p>
+<p>距離メトリックの種類については、<a href="/docs/ja/v2.4.x/metric.md">類似度メトリックを</a>参照してください。</p>
 <h2 id="Grouping-search" class="common-anchor-header">グループ化検索<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1826,8 +1826,8 @@ search_parameters = {
 <tr><td><code translate="no">metric_type</code></td><td>ベクトル埋め込み間の類似度を測定する方法。<br/> 指定可能な値は<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> で、デフォルトは読み込まれたインデックス・ファイルの値。</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>検索中にクエリーするユニット数。<br/> 値は[1, nlist<sub>[1</sub>]]の範囲です。</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>検索精度レベル。<br/> 指定可能な値は<code translate="no">1</code> 、<code translate="no">2</code> 、および<code translate="no">3</code> で、デフォルトは<code translate="no">1</code> です。値を高くすると、より正確な結果が得られますが、パフォーマンスは低下します。</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> は検索の外側の限界を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができ、ベクターが一致とみなされるために必要な距離範囲を作成します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決定されます。例えば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/v2.4.x/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> は検索の外側の限界を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができ、ベクターが一致とみなされるために必要な距離範囲を作成します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決定されます。例えば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/v2.4.x/metric.md">類似度メトリクス</a>」を参照してください。</td></tr>
 </tbody>
 </table>
 <div class="admonition note">

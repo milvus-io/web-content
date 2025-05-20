@@ -26,7 +26,7 @@ title: ''
 <li>Loaded Collections: the number of loaded collections.</li>
 <li>All Collections: the total number of collections.</li>
 <li>Data: the total number of entities.</li>
-<li><strong>Loaded For Search</strong> card: an interactive shortcut panel that allows you to perform a <a href="/docs/attu_search.md">vector search</a> on or <a href="/docs/attu_collection.md">release the collection</a>.</li>
+<li><strong>Loaded For Search</strong> card: an interactive shortcut panel that allows you to perform a <a href="/docs/v2.1.x/attu_search.md">vector search</a> on or <a href="/docs/v2.1.x/attu_collection.md">release the collection</a>.</li>
 </ol>
 <p>
   <span class="img-wrapper">

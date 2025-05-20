@@ -94,5 +94,5 @@ title: Componentes principais
         ></path>
       </svg>
     </button></h2><ul>
-<li>Leia <a href="/docs/pt/four_layers.md">Computing/Storage Disaggregation (Desagregação de computação/armazenamento)</a> para compreender o mecanismo e o princípio de conceção do Milvus.</li>
+<li>Leia <a href="/docs/pt/v2.4.x/four_layers.md">Computing/Storage Disaggregation (Desagregação de computação/armazenamento)</a> para compreender o mecanismo e o princípio de conceção do Milvus.</li>
 </ul>

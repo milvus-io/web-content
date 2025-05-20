@@ -42,7 +42,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
   port: <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   maxMessageSize: <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>更多信息，请参阅<a href="/docs/zh/configure_pulsar.md">Pulsar 相关配置</a>。</p>
+<p>更多信息，请参阅<a href="/docs/zh/v2.4.x/configure_pulsar.md">Pulsar 相关配置</a>。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2.运行 Milvus</h3><p>运行以下命令启动使用 Pulsar 配置的 Milvus。</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -63,7 +63,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
         ></path>
       </svg>
     </button></h2><p>对于 K8s 上的 Milvus 群集，可以在启动 Milvus 的同一命令中配置 Pulsar。或者，你也可以在启动<a href="https://github.com/milvus-io/milvus-helm">Milvus</a>之前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 Pulsar。</p>
-<p>有关如何使用 Helm<a href="/docs/zh/configure-helm.md">配置</a> Milvus<a href="/docs/zh/configure-helm.md">的</a>详细信息，请参阅<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>。有关 Pulsar 相关配置项的详情，请参阅<a href="/docs/zh/configure_pulsar.md">Pulsar 相关配置</a>。</p>
+<p>有关如何使用 Helm<a href="/docs/zh/v2.4.x/configure-helm.md">配置</a> Milvus<a href="/docs/zh/v2.4.x/configure-helm.md">的</a>详细信息，请参阅<a href="/docs/zh/v2.4.x/configure-helm.md">使用 Helm 图表配置 Milvus</a>。有关 Pulsar 相关配置项的详情，请参阅<a href="/docs/zh/v2.4.x/configure_pulsar.md">Pulsar 相关配置</a>。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件</h3><ol>
 <li>在<code translate="no">values.yaml</code> 文件中配置<code translate="no">externalConfigFiles</code> 部分。</li>
 </ol>
@@ -98,7 +98,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
         ></path>
       </svg>
     </button></h2><p>对于 K8s 上的 Milvus 集群，可以在启动 Milvus 的同一命令中配置 Kafka。或者，你也可以在启动<a href="https://github.com/milvus-io/milvus-helm">Milvus</a>之前，使用 /charts/milvus 路径下<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中的<code translate="no">values.yml</code> 文件配置 Kafka。</p>
-<p>有关如何使用 Helm<a href="/docs/zh/configure-helm.md">配置</a> Milvus<a href="/docs/zh/configure-helm.md">的</a>详情，请参阅《<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>》。有关 Pulsar 相关配置项的详情，请参阅<a href="/docs/zh/configure_pulsar.md">Pulsar 相关配置</a>。</p>
+<p>有关如何使用 Helm<a href="/docs/zh/v2.4.x/configure-helm.md">配置</a> Milvus<a href="/docs/zh/v2.4.x/configure-helm.md">的</a>详情，请参阅《<a href="/docs/zh/v2.4.x/configure-helm.md">使用 Helm 图表配置 Milvus</a>》。有关 Pulsar 相关配置项的详情，请参阅<a href="/docs/zh/v2.4.x/configure_pulsar.md">Pulsar 相关配置</a>。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件</h3><ol>
 <li>如果要使用 Kafka 作为消息存储系统，请配置<code translate="no">values.yaml</code> 文件中的<code translate="no">externalConfigFiles</code> 部分。</li>
 </ol>
@@ -132,7 +132,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 单机版使用 RocksMQ 作为默认消息存储。关于如何用 Helm<a href="/docs/zh/configure-helm.md">配置</a> Milvus 的详细步骤，请参阅《<a href="/docs/zh/configure-helm.md">用 Helm 图表配置 Milvus</a>》。有关 RocksMQ 相关配置项的详情，请参阅<a href="/docs/zh/configure_rocksmq.md">RocksMQ 相关配置</a>。</p>
+    </button></h2><p>Milvus 单机版使用 RocksMQ 作为默认消息存储。关于如何用 Helm<a href="/docs/zh/v2.4.x/configure-helm.md">配置</a> Milvus 的详细步骤，请参阅《<a href="/docs/zh/v2.4.x/configure-helm.md">用 Helm 图表配置 Milvus</a>》。有关 RocksMQ 相关配置项的详情，请参阅<a href="/docs/zh/v2.4.x/configure_rocksmq.md">RocksMQ 相关配置</a>。</p>
 <ul>
 <li><p>如果你使用 RocksMQ 启动 Milvus 并想更改其设置，你可以使用以下 YAML 文件中更改后的设置运行<code translate="no">helm upgrade -f</code> 。</p></li>
 <li><p>如果你已经使用 Helm 独立安装了 Milvus，并使用了 RocksMQ 以外的消息存储空间，但又想把它改回 RocksMQ，可以在刷新所有集合并停止 Milvus 后，使用下面的 YAML 文件运行<code translate="no">helm upgrade -f</code> 。</p></li>
@@ -171,7 +171,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS 是 RocksMQ 的实验性消息存储替代品。关于如何用 Helm<a href="/docs/zh/configure-helm.md">配置</a> Milvus 的详细步骤，请参阅《<a href="/docs/zh/configure-helm.md">用 Helm 图表配置 Milvus</a>》。有关 RocksMQ 相关配置项的详情，请参阅<a href="/docs/zh/configure_natsmq.md">NATS 相关配置</a>。</p>
+    </button></h2><p>NATS 是 RocksMQ 的实验性消息存储替代品。关于如何用 Helm<a href="/docs/zh/v2.4.x/configure-helm.md">配置</a> Milvus 的详细步骤，请参阅《<a href="/docs/zh/v2.4.x/configure-helm.md">用 Helm 图表配置 Milvus</a>》。有关 RocksMQ 相关配置项的详情，请参阅<a href="/docs/zh/v2.4.x/configure_natsmq.md">NATS 相关配置</a>。</p>
 <ul>
 <li><p>如果使用 NATS 启动 Milvus 并想更改其设置，可以使用以下 YAML 文件中更改后的设置运行<code translate="no">helm upgrade -f</code> 。</p></li>
 <li><p>如果你用 NATS 以外的消息存储独立安装了 Milvus，并想将其更改为 NATS，可在刷新所有集合并停止 Milvus 后，用以下 YAML 文件运行<code translate="no">helm upgrade -f</code> 。</p></li>
@@ -235,6 +235,6 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
       </svg>
     </button></h2><p>了解如何使用 Docker Compose 或 Helm 配置 Milvus 的其他依赖项：</p>
 <ul>
-<li><a href="/docs/zh/deploy_s3.md">使用 Docker Compose 或 Helm 配置对象存储</a></li>
-<li><a href="/docs/zh/deploy_etcd.md">使用 Docker Compose 或 Helm 配置元存储</a></li>
+<li><a href="/docs/zh/v2.4.x/deploy_s3.md">使用 Docker Compose 或 Helm 配置对象存储</a></li>
+<li><a href="/docs/zh/v2.4.x/deploy_etcd.md">使用 Docker Compose 或 Helm 配置元存储</a></li>
 </ul>

@@ -225,6 +225,6 @@ spec:
       </svg>
     </button></h2><p>Milvus 오퍼레이터로 다른 Milvus 종속성을 구성하는 방법을 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/meta_storage_operator.md">밀버스 오퍼레이터로 메타 스토리지 구성하기</a></li>
-<li><a href="/docs/ko/message_storage_operator.md">밀버스 오퍼레이터로 메시지 저장소 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/meta_storage_operator.md">밀버스 오퍼레이터로 메타 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/message_storage_operator.md">밀버스 오퍼레이터로 메시지 저장소 구성하기</a></li>
 </ul>

@@ -42,7 +42,7 @@ title: Milvus 1.xより
 <li>ターゲットMilvus: 2.x</li>
 </ul></li>
 <li><strong>必要なツール</strong><ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツール</a>。インストールの詳細については、<a href="/docs/ja/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツール</a>。インストールの詳細については、<a href="/docs/ja/v2.4.x/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">移行元Milvusのメタデータのエクスポート<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

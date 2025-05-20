@@ -225,6 +225,6 @@ spec:
       </svg>
     </button></h2><p>Imparare a configurare le altre dipendenze di Milvus con Milvus Operator:</p>
 <ul>
-<li><a href="/docs/it/meta_storage_operator.md">Configurare il Meta Storage con Milvus Operator</a></li>
-<li><a href="/docs/it/message_storage_operator.md">Configurare la memorizzazione dei messaggi con Milvus Operator</a></li>
+<li><a href="/docs/it/v2.4.x/meta_storage_operator.md">Configurare il Meta Storage con Milvus Operator</a></li>
+<li><a href="/docs/it/v2.4.x/message_storage_operator.md">Configurare la memorizzazione dei messaggi con Milvus Operator</a></li>
 </ul>

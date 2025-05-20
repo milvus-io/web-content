@@ -125,7 +125,7 @@ model.<span class="hljs-built_in">eval</span>()
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Data-Ingestion" class="common-anchor-header">Ingestione dei dati</h3><p>Per consentire la ricerca semantica delle immagini, dobbiamo innanzitutto generare le incorporazioni per tutte le immagini e memorizzarle in un database vettoriale per un'indicizzazione e un recupero efficienti. Questa sezione fornisce una guida passo passo per l'inserimento dei dati delle immagini in Milvus.</p>
 <p><strong>1. Creare la raccolta Milvus</strong></p>
-<p>Prima di memorizzare le incorporazioni di immagini, è necessario creare una raccolta Milvus. Il codice seguente mostra come creare una raccolta utilizzando la <a href="https://milvus.io/docs/create-collection-instantly.md">modalità di avvio rapido</a> con il tipo di metrica predefinito COSINE. La collezione comprende i seguenti campi:</p>
+<p>Prima di memorizzare le incorporazioni di immagini, è necessario creare una raccolta Milvus. Il codice seguente mostra come creare una raccolta in modalità rapida con il tipo di metrica predefinito COSINE. La collezione comprende i seguenti campi:</p>
 <ul>
 <li><p><code translate="no">id</code>: Un campo primario con ID automatico abilitato.</p></li>
 <li><p><code translate="no">vector</code>: Un campo per memorizzare le incorporazioni vettoriali in virgola mobile.</p></li>

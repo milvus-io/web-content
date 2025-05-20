@@ -19,6 +19,72 @@ title: Hinweise zur Veröffentlichung
         ></path>
       </svg>
     </button></h1><p>Finden Sie heraus, was es Neues in Milvus gibt! Auf dieser Seite werden neue Funktionen, Verbesserungen, bekannte Probleme und Fehlerbehebungen in jeder Version zusammengefasst. Sie können die Versionshinweise für jede Version nach v2.5.0 in diesem Abschnitt finden. Wir empfehlen Ihnen, diese Seite regelmäßig zu besuchen, um sich über Updates zu informieren.</p>
+<h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Milvus-Version</th><th>Python SDK Version</th><th>Node.js SDK-Version</th><th>Java SDK-Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.11</td><td>2.5.8</td><td>2.5.8</td><td>2.5.8</td></tr>
+</tbody>
+</table>
+<p>Wir freuen uns, die Veröffentlichung von Milvus 2.5.11 ankündigen zu können! Diese Version bietet leistungsstarke neue Funktionen wie die Multi-Analysator-Fähigkeit und erweiterte Tokenizer-Unterstützung (Jieba, Lindera, ICU, Language Identifier). Außerdem haben wir mehrere Verbesserungen vorgenommen, darunter die Aktualisierung des Threadpools für das dynamische Laden von Segmenten und die optimierte Filterung von Löschvorgängen während des binlog-Imports. Wichtige Fehlerkorrekturen betreffen potenzielle Probleme mit dem Fallenlassen von Segmenten, BM25-Suchfehlern und JSON-Statistik-Filterungsfehlern.</p>
+<p>Wir empfehlen Ihnen, auf 2.5.11 zu aktualisieren, um von diesen Verbesserungen und Fehlerbehebungen zu profitieren!</p>
+<h3 id="Features" class="common-anchor-header">Funktionen</h3><ul>
+<li>Es wurde die Möglichkeit hinzugefügt, mehrere Analyzer (Tokenizer) für die Unterstützung von mehreren Sprachen zu konfigurieren und den entsprechenden Analyzer auf der Grundlage der Anweisungen der Eingabedaten auszuwählen<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
+<li>Die Funktionalität des BM25 Analyzers wurde verbessert<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
+<li>Einführung einer <code translate="no">run_analyzer</code> API für Trockenübungen, um die Analyse der Tokenisierungsergebnisse zu erleichtern. Weitere Informationen finden Sie unter <a href="/docs/de/analyzer-overview.md">Analyzer-Übersicht</a>.</li>
+<li>Tokenisierer<ul>
+<li>Unterstützung für die Anpassung von Jieba Tokenizer-Parametern wurde hinzugefügt.</li>
+<li>Unterstützung für den Lindera Tokenizer wurde hinzugefügt. Weitere Informationen finden Sie unter <a href="/docs/de/lindera-tokenizer.md">Lindera</a>.</li>
+<li>Unterstützung für den ICU-Tokenizer wurde hinzugefügt. Weitere Informationen finden Sie unter <a href="/docs/de/icu-tokenizer.md">ICU</a>.</li>
+<li>Ein Language Identifier Tokenizer für die Spracherkennung wurde hinzugefügt.</li>
+</ul></li>
+<li>Filter<ul>
+<li>Erweiterte Sprachunterstützung für den eingebauten Stoppwortfilter. Weitere Informationen finden Sie unter <a href="/docs/de/stop-filter.md">Stop</a>.</li>
+<li>Es wurde ein <code translate="no">remove_punct</code> Filter zum Entfernen von Interpunktionszeichen hinzugefügt. Weitere Informationen finden Sie unter <a href="/docs/de/removepunct-filter.md">Remove Punct</a>.</li>
+<li>Es wurde ein <code translate="no">regex</code> Filter für musterbasiertes Filtern von Text hinzugefügt. Weitere Informationen finden Sie unter <a href="/docs/de/regex-filter.md">Regex</a>.</li>
+</ul></li>
+</ul></li>
+<li>Unterstützung für die Änderung der maximalen Kapazität von Array-Feldern wurde hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/41406">(#41406</a>).</li>
+<li>Unterstützung für binäre Bereichsausdrücke in JSON-Pfadindizes wurde hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/41317">(#41317</a>).</li>
+<li>Unterstützung für Infix- und Suffix-Match-Typen in JSON-Statistiken wurde hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/41388">(#41388</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<li>Dynamische Aktualisierungen der Größe des Segmentlade-Threadpools wurden aktiviert<a href="https://github.com/milvus-io/milvus/pull/41549">(#41549</a>).</li>
+<li>Beschleunigte Löschfilterung während des Binlog-Imports<a href="https://github.com/milvus-io/milvus/pull/41552">(#41552</a>).</li>
+<li>Überwachungsparameter für das Expression-Filter-Verhältnis wurden hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/41403">(#41403</a>).</li>
+<li>Es wurde eine Konfigurationsoption hinzugefügt, um den Neuaufbau von Indizes auf die neueste Version zu erzwingen<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>).</li>
+<li>Die Fehlerprotokollmeldung für die Listenrichtlinie wurde verbessert<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368</a>).</li>
+<li>Die Behandlung von Bindestrichen in gRPC-Metadaten-Headern wurde angepasst<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
+<li>Aktualisierung der Go-Version auf 1.24.1 zur Behebung von CVEs<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<li>Es wurde ein Problem behoben, bei dem Segmente möglicherweise nicht korrekt gelöscht wurden, wenn eine Partition gelöscht wurde<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
+<li>Bulk-Insert behoben, so dass die Eingabefeldliste des Funktionsläufers statt der Feldliste des Schemas verwendet wurde<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561</a>).</li>
+<li>BM25-Suchfehler behoben, die auftraten, wenn <code translate="no">avgdl</code> (durchschnittliche Dokumentlänge) NaN war<a href="https://github.com/milvus-io/milvus/pull/41503">(#41503</a>).</li>
+<li>Ungenaue Bezeichnungen in QueryNode Metriken korrigiert<a href="https://github.com/milvus-io/milvus/pull/41422">(#41422</a>).</li>
+<li>Es wurde ein Problem behoben, bei dem die Erstellung eines JSON-Statistik-Index fehlschlagen konnte, wenn die Daten eine leere Karte enthielten<a href="https://github.com/milvus-io/milvus/pull/41506">(#41506</a>).</li>
+<li>Die <code translate="no">AlterCollection</code> API wurde korrigiert, um den Zeitstempel der Änderung korrekt zu speichern<a href="https://github.com/milvus-io/milvus/pull/41469">(#41469</a>).</li>
+<li>Ein gelegentlicher Filterfehler in JSON-Statistiken unter <code translate="no">ConjunctExpr</code> wurde behoben und die Berechnungslogik für Taskslots verbessert, um die Erstellung von JSON-Statistiken zu beschleunigen<a href="https://github.com/milvus-io/milvus/pull/41458">(#41458</a>).</li>
+<li>Ein IDF-Orakel-Leck in der BM25-Statistikberechnung wurde behoben<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
+<li>Es wurde sichergestellt, dass vorerstellte Themen bei der Überprüfung der Shard-Nummer zuerst geprüft werden<a href="https://github.com/milvus-io/milvus/pull/41421">(#41421</a>).</li>
+<li>Ein fehlerhafter Deadlock-Bericht in Unit-Tests wurde behoben<a href="https://github.com/milvus-io/milvus/pull/41377">(#41377</a>).</li>
+</ul>
 <h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -358,13 +424,13 @@ title: Hinweise zur Veröffentlichung
 <li>[2.5] Root-Benutzer konnte alle Sammlungen auflisten, auch wenn <code translate="no">common.security.rootShouldBindRole</code> gesetzt war<a href="https://github.com/milvus-io/milvus/pull/39714">(#39714</a>)</li>
 <li>[2.5] Flowgraph-Leck behoben<a href="https://github.com/milvus-io/milvus/pull/39686">(#39686</a>)</li>
 <li>[2.5] Verwendete param item formatter, um setconfig Overlay zu vermeiden<a href="https://github.com/milvus-io/milvus/pull/39636">(#39636</a>)</li>
-<li>[2.5] Metastore-Berechtigungsname mit Berechtigungsname "all" geprüft<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
+<li>[2.5] Metastore-Privilegname mit Privilegname "all" geprüft<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
 <li>[2.5] Ratenbegrenzer für RESTful v1 hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/39555">(#39555</a>)</li>
 <li>[2.5] Hardcodierte Partitionsnummer im RESTful Handler entfernt<a href="https://github.com/milvus-io/milvus/pull/40113">(#40113</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><h4 id="Observability" class="common-anchor-header">Beobachtbarkeit</h4><ul>
 <li>Monitor-Metrik zum Abrufen von Rohdaten hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/40155">(#40155</a>)</li>
-<li>[2.5] Metrik für die Latenzzeit von Get-Vektoren hinzugefügt und Fehlermeldung für das Anfragelimit verfeinert<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
+<li>[2.5] Metrik für die Latenzzeit von Get-Vektoren hinzugefügt und Fehlermeldung zum Anfragelimit verfeinert<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
 <li>[2.5] Metrik für Proxy-Warteschlange hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/40071">(#40071</a>)</li>
 <li>Mehr Metrik-Daten veröffentlicht<a href="https://github.com/milvus-io/milvus/pull/39466">(#39466</a>)</li>
 <li>[2.5] Metriken für Parse-Ausdruck hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/39716">(#39716</a>)</li>
@@ -509,7 +575,7 @@ title: Hinweise zur Veröffentlichung
 <h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
 <li>Hinzufügen einer Ressourcengruppen-API für die RESTful-Schnittstelle.<a href="https://github.com/milvus-io/milvus/pull/39092">(#39092</a>)</li>
 <li>Optimierte Abrufleistung durch Nutzung von Bitset SIMD Methoden.<a href="https://github.com/milvus-io/milvus/pull/39041">(#39041</a>)</li>
-<li>Der MVCC-Zeitstempel wurde als Garantiezeitstempel verwendet, wenn er angegeben wurde.<a href="https://github.com/milvus-io/milvus/pull/39019">(#39019</a>)</li>
+<li>Der MVCC-Zeitstempel wird nun als Garantiezeitstempel verwendet, wenn er angegeben ist.<a href="https://github.com/milvus-io/milvus/pull/39019">(#39019</a>)</li>
 <li>Fehlende Lösch-Metriken wurden hinzugefügt.<a href="https://github.com/milvus-io/milvus/pull/38747">(#38747</a>)</li>
 <li>Etcd auf Version v3.5.16 aktualisiert.<a href="https://github.com/milvus-io/milvus/pull/38969">(#38969</a>)</li>
 <li>Neues Go-Paket zur Verwaltung von Protos erstellt.<a href="https://github.com/milvus-io/milvus/pull/39128">(#39128</a>)</li>
@@ -636,7 +702,7 @@ title: Hinweise zur Veröffentlichung
 <p>PRQ ist eine Verschmelzung von PQ und AQ (Additive Quantizer). Im Vergleich zu PQ sind längere Erstellungszeiten erforderlich, um einen besseren Recall zu erzielen, insbesondere bei hohen Komprimierungsraten, wie bei der binären Komprimierung.</p>
 <h4 id="Clustering-Compaction-Beta" class="common-anchor-header">Clustering-Verdichtung (Beta)</h4><p>Milvus 2.5 führt die Clustering Compaction ein, um die Suche zu beschleunigen und die Kosten in großen Sammlungen zu reduzieren. Durch die Angabe eines skalaren Feldes als Clustering-Schlüssel werden die Daten nach Bereichen umverteilt, um die Speicherung und den Abruf zu optimieren. Diese Funktion funktioniert wie ein globaler Index und ermöglicht es Milvus, Daten bei Abfragen auf der Grundlage von Clustering-Metadaten effizient zu beschneiden und die Suchleistung zu verbessern, wenn skalare Filter angewendet werden.</p>
 <p>Einzelheiten finden Sie unter <a href="/docs/de/clustering-compaction.md">Clustering Compaction</a>.</p>
-<h3 id="Other-Features" class="common-anchor-header">Andere Funktionen</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">Streaming-Knoten (Beta)</h4><p>Mit Milvus 2.5 wird eine neue Komponente namens Streaming Node eingeführt, die WAL-Dienste (Write-Ahead Logging) bereitstellt. Dadurch ist Milvus in der Lage, vor und nach dem Lesen und Schreiben von Kanälen einen Konsens zu erzielen, wodurch neue Merkmale, Funktionen und Optimierungen freigeschaltet werden. Diese Funktion ist in Milvus 2.5 standardmäßig deaktiviert und wird in Version 3.0 offiziell verfügbar sein.</p>
+<h3 id="Other-Features" class="common-anchor-header">Andere Funktionen</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">Streaming-Knoten (Beta)</h4><p>Mit Milvus 2.5 wird eine neue Komponente namens Streaming Node eingeführt, die WAL-Dienste (Write-Ahead Logging) bereitstellt. Dadurch ist Milvus in der Lage, vor und nach dem Lesen und Schreiben von Kanälen einen Konsens zu erzielen, wodurch neue Merkmale, Funktionalitäten und Optimierungen möglich werden. Diese Funktion ist in Milvus 2.5 standardmäßig deaktiviert und wird in Version 3.0 offiziell verfügbar sein.</p>
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6-Unterstützung</h4><p>Milvus unterstützt jetzt IPv6, was eine erweiterte Netzwerkkonnektivität und Kompatibilität ermöglicht.</p>
 <h4 id="CSV-Bulk-Import" class="common-anchor-header">CSV-Bulk-Import</h4><p>Zusätzlich zu den JSON- und Parquet-Formaten unterstützt Milvus jetzt auch den direkten Massenimport von Daten im CSV-Format.</p>
 <h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">Expression Templates zur Abfrage-Beschleunigung</h4><p>Milvus unterstützt jetzt Ausdrucksvorlagen, die die Effizienz des Ausdrucks-Parsing verbessern, insbesondere in Szenarien mit komplexen Ausdrücken.</p>

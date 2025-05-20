@@ -18,7 +18,7 @@ summary: 이 문서에서는 Milvus를 다른 벡터 검색 솔루션과 비교�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>다양한 벡터 데이터베이스 옵션을 살펴볼 때 이 종합 가이드는 Milvus의 고유한 기능을 이해하여 특정 요구 사항에 가장 적합한 데이터베이스를 선택하는 데 도움이 될 것입니다. 특히 Milvus는 선도적인 오픈소스 벡터 데이터베이스이며, <a href="https://zilliz.com/cloud">Zilliz Cloud는</a> 완전 관리형 Milvus 서비스를 제공합니다. 경쟁사 대비 Milvus를 객관적으로 평가하려면 <a href="https://github.com/zilliztech/VectorDBBench#quick-start">벤치마크 도구를</a> 사용하여 성능 메트릭을 분석해 보세요.</p>
+    </button></h1><p>다양한 벡터 데이터베이스 옵션을 살펴볼 때 이 종합 가이드는 Milvus의 고유한 기능을 이해하여 특정 요구 사항에 가장 적합한 데이터베이스를 선택할 수 있도록 도와줍니다. 특히 Milvus는 선도적인 오픈소스 벡터 데이터베이스이며, <a href="https://zilliz.com/cloud">Zilliz Cloud는</a> 완전 관리형 Milvus 서비스를 제공합니다. 경쟁사 대비 Milvus를 객관적으로 평가하려면 <a href="https://github.com/zilliztech/VectorDBBench#quick-start">벤치마크 도구를</a> 사용하여 성능 메트릭을 분석해 보세요.</p>
 <h2 id="Milvus-highlights" class="common-anchor-header">Milvus 주요 특징<button data-href="#Milvus-highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +64,7 @@ summary: 이 문서에서는 Milvus를 다른 벡터 검색 솔루션과 비교�
 <tr><td>배포 모드</td><td>SaaS 전용</td><td>Milvus Lite, 온프레미스 독립형 및 클러스터, Zilliz Cloud Saas 및 BYOC</td><td>Milvus는 배포 모드에서 더 큰 유연성을 제공합니다.</td></tr>
 <tr><td>지원되는 SDK</td><td>파이썬, 자바스크립트/타입스크립트</td><td>Python, Java, NodeJS, Go, Restful API, C#, Rust</td><td>Milvus는 더 다양한 프로그래밍 언어를 지원합니다.</td></tr>
 <tr><td>오픈 소스 상태</td><td>Closed</td><td>오픈 소스</td><td>Milvus는 인기 있는 오픈소스 벡터 데이터베이스입니다.</td></tr>
-<tr><td>확장성</td><td>스케일 업/다운만 가능</td><td>스케일 아웃/인 및 스케일 업/다운 가능</td><td>Milvus는 향상된 확장성을 위해 분산 아키텍처를 사용합니다.</td></tr>
+<tr><td>확장성</td><td>스케일 업/다운만 가능</td><td>스케일 아웃/인 및 스케일 업/다운 가능</td><td>Milvus는 확장성을 강화하기 위해 분산 아키텍처를 사용합니다.</td></tr>
 <tr><td>가용성</td><td>사용 가능한 영역 내의 포드 기반 아키텍처</td><td>사용 가능한 영역 장애 조치 및 지역 간 HA</td><td>Milvus CDC(변경 데이터 캡처)는 가용성을 높이기 위해 기본/대기 모드를 지원합니다.</td></tr>
 <tr><td>Perf-Cost(백만 쿼리당 달러)</td><td>중간 데이터 세트의 경우 $0.178부터, 대규모 데이터 세트의 경우 $1.222부터 시작합니다.</td><td>Zilliz Cloud는 중간 데이터 세트의 경우 $0.148, 대규모 데이터 세트의 경우 $0.635부터 시작하며, 무료 버전도 제공됩니다.</td><td><a href="https://zilliz.com/vector-database-benchmark-tool?database=ZillizCloud,Milvus,ElasticCloud,PgVector,Pinecone,QdrantCloud,WeaviateCloud&amp;dataset=medium&amp;filter=none,low,high&amp;tab=2">비용 순위 보고서를</a> 참조하세요.</td></tr>
 <tr><td>GPU 가속</td><td>지원되지 않음</td><td>NVIDIA GPU 지원</td><td>GPU 가속은 종종 몇 배의 성능 향상을 가져옵니다.</td></tr>
@@ -133,7 +133,7 @@ summary: 이 문서에서는 Milvus를 다른 벡터 검색 솔루션과 비교�
 <li><p><strong>임베딩 기능</strong>: Milvus는 추가 임베딩 라이브러리를 지원하여 임베딩 모델을 직접 사용하여 소스 데이터를 벡터로 변환할 수 있습니다.</p></li>
 <li><p><strong>데이터 유형</strong>: Milvus는 배열과 JSON을 포함하여 Pinecone보다 더 광범위한 데이터 유형을 지원합니다. Pinecone은 문자열, 숫자, 부울 또는 문자열 목록을 값으로 사용하는 플랫 메타데이터 구조만 지원하는 반면, Milvus는 JSON 필드 내에서 중첩 구조를 포함한 모든 JSON 개체를 처리할 수 있습니다. Pinecone은 벡터당 메타데이터 크기를 40KB로 제한합니다.</p></li>
 <li><p><strong>메트릭 및 인덱스 유형</strong>: Milvus는 다양한 사용 사례를 수용하기 위해 광범위한 메트릭 및 인덱스 유형을 지원하는 반면, Pinecone은 선택의 폭이 더 제한적입니다. Milvus에서는 벡터에 대한 인덱스가 필수이지만, 구성 프로세스를 간소화하기 위해 AUTO_INDEX 옵션을 사용할 수 있습니다.</p></li>
-<li><p><strong>스키마 디자인</strong>: Milvus는 Pinecone과 유사한 스키마 없는 환경을 위한 동적 스키마를 사용한 빠른 설정과 관계형 데이터베이스 관리 시스템(RDBMS)과 유사한 사전 정의된 스키마 필드 및 인덱스를 사용한 사용자 지정 설정을 포함하여 스키마 설계를 위한 유연한 <code translate="no">create_collection</code> 모드를 제공합니다.</p></li>
+<li><p><strong>스키마 디자인</strong>: Milvus는 Pinecone과 유사한 스키마 없는 환경을 위한 동적 스키마를 사용한 빠른 설정과 관계형 데이터베이스 관리 시스템(RDBMS)과 유사한 사전 정의된 스키마 필드 및 인덱스를 사용한 사용자 지정 설정을 포함하여 유연한 스키마 설계를 위한 <code translate="no">create_collection</code> 모드를 제공합니다.</p></li>
 <li><p><strong>다중 벡터 필드</strong>: Milvus를 사용하면 단일 컬렉션 내에 여러 개의 벡터 필드를 저장할 수 있으며, 이는 희소하거나 밀도가 높을 수 있고 차원이 다를 수 있습니다. Pinecone은 이와 유사한 기능을 제공하지 않습니다.</p></li>
 <li><p><strong>도구</strong>: Milvus는 데이터베이스 관리 및 활용을 위해 Attu, Birdwatcher, Backup, CLI, CDC, Spark 및 Kafka 커넥터 등 보다 광범위한 도구를 제공합니다.</p></li>
 </ul>

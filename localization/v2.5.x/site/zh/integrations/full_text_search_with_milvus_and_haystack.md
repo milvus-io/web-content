@@ -32,7 +32,7 @@ title: 使用 Milvus 和 HayStack 进行全文检索
 <div class="alert note">
 <ul>
 <li>目前，Milvus Standalone、Milvus Distributed 和 Zilliz Cloud 均提供全文搜索功能，但 Milvus Lite 尚不支持该功能（该功能计划在未来实施）。如需了解更多信息，请访问 support@zilliz.com。</li>
-<li>在继续本教程之前，请确保您已基本了解<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文检索</a>和 HayStack Milvus 集成的<a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">基本用法</a>。</li>
+<li>在继续本教程之前，请确保您已基本了解<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文搜索</a>和 HayStack Milvus 集成的<a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">基本用法</a>。</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -84,7 +84,7 @@ documents = [
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>将全文检索集成到 RAG 系统中，可以在语义搜索和基于关键字的精确、可预测检索之间取得平衡。您也可以选择只使用全文检索，但建议将全文检索与语义搜索结合起来，以获得更好的搜索结果。在此，我们将展示单独的全文搜索和混合搜索。</p>
-<h2 id="BM25-search-without-embedding" class="common-anchor-header">不使用 Embeddings 的 BM25 搜索<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
+<h2 id="BM25-search-without-embedding" class="common-anchor-header">不带 Embeddings 的 BM25 搜索<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,7 +315,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     </button></h2><p>我们已经学习了如何在 HayStack 和 Milvus 中使用基本的 BM25 内置函数，并准备了一个加载的<code translate="no">document_store</code> 。下面我们来介绍使用混合搜索的优化 RAG 实现。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

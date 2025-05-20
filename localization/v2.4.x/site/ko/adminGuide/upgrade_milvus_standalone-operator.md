@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Milvus 운영자를 통해 Milvus 스탠드얼론 업그레이드 방법을 알아보세요.
 title: Milvus 오퍼레이터로 Milvus 스탠드얼론 업그레이드하기
 ---
-<div class="tab-wrapper"><a href="/docs/ko/upgrade_milvus_standalone-operator.md" class='active '>밀버스</a><a href="/docs/ko/upgrade_milvus_standalone-helm.md" class=''>오퍼레이터헬름도커</a><a href="/docs/ko/upgrade_milvus_standalone-docker.md" class=''>컴포즈</a></div>
+<div class="tab-wrapper"><a href="/docs/ko/v2.4.x/upgrade_milvus_standalone-operator.md" class='active '>밀버스</a><a href="/docs/ko/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>오퍼레이터헬름도커</a><a href="/docs/ko/v2.4.x/upgrade_milvus_standalone-docker.md" class=''>컴포즈</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Milvus 오퍼레이터로 Milvus 스탠드얼론 업그레이드하기<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

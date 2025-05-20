@@ -84,7 +84,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Ähnlich wie das Primärfeld in einer relationalen Datenbank hat eine Sammlung ein Primärfeld, um eine Entität von anderen zu unterscheiden. Jeder Wert im Primärfeld ist global eindeutig und entspricht einer bestimmten Entität.</p>
-<p>Wie im obigen Diagramm dargestellt, dient das Feld mit der Bezeichnung <strong>id</strong> als Primärfeld, und die erste ID <strong>0</strong> entspricht einer Entität mit dem Titel <em>Die Sterblichkeitsrate des Coronavirus ist nicht wichtig</em>. Es wird keine andere Entität geben, die das Primärfeld 0 hat.</p>
+<p>Wie im obigen Diagramm dargestellt, dient das Feld mit dem Namen <strong>id</strong> als Primärfeld, und die erste ID <strong>0</strong> entspricht einer Entität mit dem Titel <em>Die Sterblichkeitsrate des Coronavirus ist nicht wichtig</em>. Es wird keine andere Entität geben, die das Primärfeld 0 hat.</p>
 <p>Ein Primärfeld kann nur ganze Zahlen oder Zeichenketten enthalten. Beim Einfügen von Entitäten sollten Sie die Werte des Primärfelds standardmäßig einschließen. Wenn Sie jedoch <strong>AutoId</strong> bei der Erstellung der Sammlung aktiviert haben, wird Milvus diese Werte beim Einfügen der Daten generieren. In einem solchen Fall sollten Sie die Werte des Primärfeldes aus den einzufügenden Entitäten ausschließen.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/primary-field.md">Primärfeld &amp; AutoId</a>.</p>
 <h2 id="Index" class="common-anchor-header">Index<button data-href="#Index" class="anchor-icon" translate="no">
@@ -157,7 +157,7 @@ summary: >-
     </button></h2><p>Sobald Sie Indizes erstellt und die Sammlung geladen haben, können Sie eine Ähnlichkeitssuche starten, indem Sie einen oder mehrere Abfragevektoren eingeben. Wenn Sie zum Beispiel die Vektordarstellung Ihrer Abfrage in einer Suchanfrage erhalten, verwendet Milvus den angegebenen Metrik-Typ, um die Ähnlichkeit zwischen dem Abfragevektor und den Vektoren in der Zielsammlung zu messen, bevor es diejenigen zurückgibt, die der Abfrage semantisch ähnlich sind.</p>
 <p>Sie können auch Metadatenfilterung in Suchvorgänge und Abfragen integrieren, um die Relevanz der Ergebnisse zu verbessern. Beachten Sie, dass die Bedingungen für die Filterung von Metadaten in Abfragen obligatorisch, in Suchen jedoch optional sind.</p>
 <p>Einzelheiten zu den anwendbaren Metrik-Typen finden Sie unter <a href="/docs/de/metric.md">Metrik-Typen</a>.</p>
-<p>Weitere Informationen über Suchen und Abfragen finden Sie in den Artikeln des Kapitels <a href="/docs/de/search-rerank">Suchen &amp; Reranken</a>, darunter die grundlegenden Funktionen:</p>
+<p>Weitere Informationen über Suchen und Abfragen finden Sie in den Artikeln des Kapitels Suchen &amp; Reranken, darunter die grundlegenden Funktionen:</p>
 <ul>
 <li><p><a href="/docs/de/single-vector-search.md">Grundlegende ANN-Suche</a></p></li>
 <li><p><a href="/docs/de/filtered-search.md">Gefilterte Suche</a></p></li>

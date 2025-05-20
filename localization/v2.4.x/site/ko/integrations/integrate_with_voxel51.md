@@ -37,7 +37,7 @@ title: 밀버스 및 피프티원과 함께 비전 검색 수행
       </svg>
     </button></h2><p>시작하기 전에 다음이 준비되어 있는지 확인하세요:</p>
 <ul>
-<li>실행 중인 <a href="/docs/ko/install_standalone-docker.md">Milvus 서버</a>.</li>
+<li>실행 중인 <a href="/docs/ko/v2.4.x/install_standalone-docker.md">Milvus 서버</a>.</li>
 <li><code translate="no">pymilvus</code> 및 <code translate="no">fiftyone</code> 이 설치된 Python 환경.</li>
 <li>검색할 이미지 <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">데이터 세트</a>.</li>
 </ul>
@@ -262,7 +262,7 @@ milvus_index = fob.compute_similarity(
 <li><p><strong>metric</strong> (<em>"dotproduct")</em>: 새 인덱스를 생성할 때 사용할 임베딩 거리 메트릭입니다. 지원되는 값은 (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>일관성_레벨</strong> (<em>"세션")</em>: 사용할 일관성 수준입니다. 지원되는 값은 (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)입니다.</p></li>
 </ul>
-<p>이러한 매개변수에 대한 자세한 내용은 <a href="/docs/ko/authenticate.md">Milvus 인증 문서</a> 및 <a href="/docs/ko/consistency.md">Milvus 일관성 수준 문서를</a> 참조하세요.</p>
+<p>이러한 매개변수에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/authenticate.md">Milvus 인증 문서</a> 및 <a href="/docs/ko/v2.4.x/consistency.md">Milvus 일관성 수준 문서를</a> 참조하세요.</p>
 <p>이전 섹션에서 설명한 전략 중 하나를 통해 이러한 매개변수를 지정할 수 있습니다. 다음은 사용 가능한 모든 파라미터를 포함하는 <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">브레인 구성의</a> 예입니다:</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {

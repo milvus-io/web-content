@@ -33,13 +33,13 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/ko/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ko/install_standalone-docker.md"> <p class="link-btn">Milvus 설치하기</p> </a><p>도커 컴포즈 또는 쿠버네티스를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
+   <a href="/docs/ko/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/ko/v2.4.x/install_standalone-docker.md"> <p class="link-btn">Milvus 설치하기</p> </a><p>도커 컴포즈 또는 쿠버네티스를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/ko/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ko/quickstart.md"> <p class="link-btn">빠른 시작</p> </a><p>샘플 코드를 사용하여 Milvus를 빠르게 실행하는 방법을 알아보세요.</p>
+   <a href="/docs/ko/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/ko/v2.4.x/quickstart.md"> <p class="link-btn">빠른 시작</p> </a><p>샘플 코드를 사용하여 Milvus를 빠르게 실행하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +67,31 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <div class="recomment-item">
   <p>사용</p>
 <ul>
-<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
-<li><a href="/docs/ko/index-vector-fields.md">인덱스 벡터 필드</a></li>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/get-and-scalar-query.md">가져오기 및 스칼라 쿼리</a></li>
+<li><a href="/docs/ko/v2.4.x/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/v2.4.x/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
+<li><a href="/docs/ko/v2.4.x/index-vector-fields.md">인덱스 벡터 필드</a></li>
+<li><a href="/docs/ko/v2.4.x/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/v2.4.x/get-and-scalar-query.md">가져오기 및 스칼라 쿼리</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>배포</p>
 <ul>
-<li><a href="/docs/ko/configure-docker.md">Milvus 구성</a></li>
-<li><a href="/docs/ko/deploy_s3.md">종속성 관리</a></li>
-<li><a href="/docs/ko/eks.md">클라우드에 배포</a></li>
-<li><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장</a></li>
-<li><a href="/docs/ko/monitor_overview.md">모니터링 및 알림</a></li>
+<li><a href="/docs/ko/v2.4.x/configure-docker.md">Milvus 구성</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_s3.md">종속성 관리</a></li>
+<li><a href="/docs/ko/v2.4.x/eks.md">클라우드에 배포</a></li>
+<li><a href="/docs/ko/v2.4.x/scaleout.md">Milvus 클러스터 확장</a></li>
+<li><a href="/docs/ko/v2.4.x/monitor_overview.md">모니터링 및 알림</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Learn</p>
 <ul>
-<li><a href="/docs/ko/system_configuration.md">시스템 구성</a></li>
-<li><a href="/docs/ko/architecture_overview.md">아키텍처 개요</a></li>
-<li><a href="/docs/ko/index.md">벡터 인덱스</a></li>
-<li><a href="/docs/ko/metric.md">유사성 메트릭</a></li>
-<li><a href="/docs/ko/glossary.md">용어집</a></li>
+<li><a href="/docs/ko/v2.4.x/system_configuration.md">시스템 구성</a></li>
+<li><a href="/docs/ko/v2.4.x/architecture_overview.md">아키텍처 개요</a></li>
+<li><a href="/docs/ko/v2.4.x/index.md">벡터 인덱스</a></li>
+<li><a href="/docs/ko/v2.4.x/metric.md">유사성 메트릭</a></li>
+<li><a href="/docs/ko/v2.4.x/glossary.md">용어집</a></li>
 </ul>
 </div>
 </div>
@@ -113,9 +113,9 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
       </svg>
     </button></h2><p><em>2024년 3월 - Milvus 2.4.0 릴리즈</em></p>
 <ul>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색을 수행하는</a> 방법에 대한 지침이 추가되었습니다.</li>
-<li><a href="/docs/ko/gpu_index.md">GPU 인덱스에</a> 대한 설명이 추가되었습니다.</li>
-<li><a href="/docs/ko/embeddings.md">PyMilvus를 사용하여 데이터를 임베드하는</a> 방법에 대한 지침이 추가되었습니다.</li>
-<li><a href="/docs/ko/milvus-cdc-overview.md">Milvus CDC에</a> 대한 설명이 추가되었습니다.</li>
+<li><a href="/docs/ko/v2.4.x/multi-vector-search.md">하이브리드 검색을 수행하는</a> 방법에 대한 지침이 추가되었습니다.</li>
+<li><a href="/docs/ko/v2.4.x/gpu_index.md">GPU 인덱스에</a> 대한 설명이 추가되었습니다.</li>
+<li><a href="/docs/ko/v2.4.x/embeddings.md">PyMilvus를 사용하여 데이터를 임베드하는</a> 방법에 대한 지침이 추가되었습니다.</li>
+<li><a href="/docs/ko/v2.4.x/milvus-cdc-overview.md">Milvus CDC에</a> 대한 설명이 추가되었습니다.</li>
 </ul>
 </div>

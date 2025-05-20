@@ -46,7 +46,7 @@ summary: >-
 <li><p><strong>AUTOINDEX</strong>用于在向量字段上创建索引。</p></li>
 <li><p><strong>COSINE</strong>用于测量向量嵌入之间的相似性。</p></li>
 <li><p>启用名为<strong>$meta</strong>的储备动态字段，可将非 Schema 定义的字段及其值保存为键值对。</p></li>
-<li><p>Collections 会在创建时自动加载。</p></li>
+<li><p>该 Collections 会在创建时自动加载。</p></li>
 </ul>
 <p>有关上述术语的详细信息，请参阅《<a href="/docs/zh/manage-collections.md">Collection Explained》</a>。</p>
 <p>值得注意的是，使用默认设置即时创建 Collections 并不适合所有情况。建议您熟悉<a href="/docs/zh/create-collection.md">常用的 Collections 创建程序</a>，以便更好地了解 Milvus 的功能。</p>

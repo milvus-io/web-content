@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: تعرف على كيفية ترقية مجموعة Milvus العنقودية باستخدام Docker Compose.
 title: ترقية مجموعة Milvus العنقودية باستخدام Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ar/upgrade_milvus_standalone-operator.md" class=''>مشغِّل Milvusمشغل</a><a href="/docs/ar/configure_operator.md" class=''>Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل</a><a href="/docs/ar/configure-helm.md" class=''>Milvusمشغل</a><a href="/docs/ar/configure_operator.md" class=''>Milvusمشغل Milvusمشغل Docker</a><a href="/docs/ar/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>مشغِّل Milvusمشغل</a><a href="/docs/ar/v2.4.x/configure_operator.md" class=''>Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل</a><a href="/docs/ar/v2.4.x/configure-helm.md" class=''>Milvusمشغل</a><a href="/docs/ar/v2.4.x/configure_operator.md" class=''>Milvusمشغل Milvusمشغل Docker</a><a href="/docs/ar/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">ترقية مجموعة Milvus العنقودية باستخدام Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,11 +144,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>قد ترغب أيضاً في معرفة كيفية القيام بـ<ul>
-<li><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus</a></li>
+<li><a href="/docs/ar/v2.4.x/scaleout.md">توسيع نطاق مجموعة Milvus</a></li>
 </ul></li>
 <li>إذا كنت مستعدًا لنشر مجموعتك على السحابة:<ul>
-<li>تعرف على كيفية <a href="/docs/ar/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
-<li>تعلم كيفية <a href="/docs/ar/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
-<li>تعرف على كيفية <a href="/docs/ar/azure.md">نشر</a> مجموعة <a href="/docs/ar/azure.md">ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.4.x/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
+<li>تعلم كيفية <a href="/docs/ar/v2.4.x/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.4.x/azure.md">نشر</a> مجموعة <a href="/docs/ar/v2.4.x/azure.md">ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
 </ul></li>
 </ul>

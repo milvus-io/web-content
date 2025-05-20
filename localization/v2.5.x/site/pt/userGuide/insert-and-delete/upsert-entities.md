@@ -43,7 +43,7 @@ summary: >-
 <ol>
 <li><p>Verificar se o campo primário da coleção tem o AutoId ativado.</p>
 <ol>
-<li><p>Se tiver, o Milvus substitui a chave primária da Entidade por uma chave primária gerada automaticamente e insere os dados.</p></li>
+<li><p>Se estiver, o Milvus substitui a chave primária da Entidade por uma chave primária gerada automaticamente e insere os dados.</p></li>
 <li><p>Caso contrário, o Milvus utilizará a chave primária da Entidade para inserir os dados.</p></li>
 </ol></li>
 <li><p>Efetuar uma operação de eliminação com base no valor da chave primária da Entidade incluída no pedido de Upsert.</p></li>
@@ -67,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nesta secção, irá fazer o upsert de Entidades numa coleção criada <a href="/docs/pt/create-collection-instantly.md#Quick-Setup">da forma de configuração rápida</a>. Uma coleção criada desta forma tem apenas dois campos, denominados <strong>id</strong> e <strong>vetor</strong>. Além disso, essa Collection tem o campo dinâmico habilitado, de modo que as entidades no código de exemplo incluem um campo chamado <strong>cor</strong> que não está definido no esquema.</p>
+    </button></h2><p>Nesta secção, irá fazer o upsert de Entidades numa coleção criada da forma de configuração rápida. Uma coleção criada desta forma tem apenas dois campos, denominados <strong>id</strong> e <strong>vetor</strong>. Além disso, essa Collection tem o campo dinâmico habilitado, de modo que as entidades no código de exemplo incluem um campo chamado <strong>cor</strong> que não está definido no esquema.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

@@ -9,7 +9,7 @@ title: Install Milvus Standalone with GPU Support
 deprecate: true
 ---
 
-<div class="tab-wrapper"><a href="/docs/install_standalone-helm-gpu.md" class='active '>Standalone (Helm)</a></div>
+<div class="tab-wrapper"><a href="/docs/install_standalone-helm-gpu.md/v2.4.x" class='active '>Standalone (Helm)</a></div>
 <h1 id="Install-Milvus-Standalone-with-GPU-Support" class="common-anchor-header">Install Milvus Standalone with GPU Support<button data-href="#Install-Milvus-Standalone-with-GPU-Support" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -345,19 +345,19 @@ Run <code translate="no">$ kubectl logs `pod_name`</code> to get the <code trans
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/quickstart.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/quickstart.md/v2.4.x">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/manage_databases.md/v2.4.x">Manage Databases</a></li>
+<li><a href="/docs/manage-collections.md/v2.4.x">Manage Collections</a></li>
+<li><a href="/docs/manage-partitions.md/v2.4.x">Manage Partitions</a></li>
+<li><a href="/docs/insert-update-delete.md/v2.4.x">Insert, Upsert &amp; Delete</a></li>
+<li><a href="/docs/single-vector-search.md/v2.4.x">Single-Vector Search</a></li>
+<li><a href="/docs/multi-vector-search.md/v2.4.x">Hybrid Search</a></li>
 </ul></li>
-<li><p><a href="/docs/upgrade_milvus_standalone-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
-<li><p>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
+<li><p><a href="/docs/upgrade_milvus_standalone-helm.md/v2.4.x">Upgrade Milvus Using Helm Chart</a>.</p></li>
+<li><p>Explore <a href="/docs/milvus_backup_overview.md/v2.4.x">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
+<li><p>Explore <a href="/docs/birdwatcher_overview.md/v2.4.x">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
 <li><p>Explore <a href="https://milvus.io/docs/attu.md">Attu</a>, an open-source GUI tool for intuitive Milvus management.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p><a href="/docs/monitor.md/v2.4.x">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

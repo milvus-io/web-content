@@ -20,7 +20,7 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This article introduces an on-disk indexing algorithm named DiskANN. Based on Vamana graphs, DiskANN powers efficient searches within large datasets.</p>
-<p>To improve query performance, you can <a href="/docs/build_index.md">specify an index type</a> for each vector field.</p>
+<p>To improve query performance, you can <a href="/docs/v2.2.x/build_index.md">specify an index type</a> for each vector field.</p>
 <div class="alert note"> 
 Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 </div>
@@ -139,7 +139,7 @@ DiskIndex:
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Size limit on the PQ code. <br> A larger value offers a higher recall rate but increases memory usage.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">BuildNumThreadsRatio</code></td><td>Ratio between the number of threads used to build the index and the number of CPUs.</td><td>[1.0, 128.0 / CPU number]</td><td>1.0</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Ratio of cached node numbers to raw data. <br> A larger value improves index-building performance with increased memory usage.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
-<tr><td><code translate="no">LoadNumThreadRatio</code></td><td>Ratio between the number of threads used to load index/search and the number of CPUs. For details, refer to the first item in <a href="/docs/disk_index.md#references-and-facts">References and Facts</a>.</td><td>[1, 65536 / 32 / CPU number]</td><td>8.0</td></tr>
+<tr><td><code translate="no">LoadNumThreadRatio</code></td><td>Ratio between the number of threads used to load index/search and the number of CPUs. For details, refer to the first item in <a href="/docs/v2.2.x/disk_index.md#references-and-facts">References and Facts</a>.</td><td>[1, 65536 / 32 / CPU number]</td><td>8.0</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Ratio between the maximum number of IO requests per search iteration and CPU number.</td><td>[1, max(128 / CPU number, 16)]</td><td>4.0</td></tr>
 </tbody>
 </table>

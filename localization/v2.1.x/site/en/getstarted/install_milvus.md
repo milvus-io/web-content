@@ -20,8 +20,8 @@ summary: ''
       </svg>
     </button></h1><p>Milvus provides various and flexible ways of installation. Learn how to install Milvus standalone or deploy a Milvus cluster.</p>
 <ul>
-<li><p><a href="/docs/install_standalone-docker.md">Milvus Standalone</a>: Install Milvus standalone with Docker Compose, Helm, or APT/YUM.</p></li>
-<li><p><a href="/docs/install_cluster-docker.md">Milvus Cluster</a>: Install Milvus cluster with Docker Compose, Helm, Milvus Operator, or Ansible.</p></li>
-<li><p><a href="/docs/install_offline-docker.md">Install Offline</a>: Install Milvus in an offline environment to avoid image loading errors.</p></li>
-<li><p><a href="/docs/install_embedded_milvus.md">Install Embedded Milvus</a>: Use embedded Milvus to instantly install and run Milvus with Python.</p></li>
+<li><p><a href="/docs/v2.1.x/install_standalone-docker.md">Milvus Standalone</a>: Install Milvus standalone with Docker Compose, Helm, or APT/YUM.</p></li>
+<li><p><a href="/docs/v2.1.x/install_cluster-docker.md">Milvus Cluster</a>: Install Milvus cluster with Docker Compose, Helm, Milvus Operator, or Ansible.</p></li>
+<li><p><a href="/docs/v2.1.x/install_offline-docker.md">Install Offline</a>: Install Milvus in an offline environment to avoid image loading errors.</p></li>
+<li><p><a href="/docs/v2.1.x/install_embedded_milvus.md">Install Embedded Milvus</a>: Use embedded Milvus to instantly install and run Milvus with Python.</p></li>
 </ul>

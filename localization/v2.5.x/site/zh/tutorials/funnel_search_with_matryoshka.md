@@ -20,23 +20,46 @@ title: 使用 Matryoshka 嵌入进行漏斗搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在构建高效的向量搜索系统时，一个关键的挑战是管理存储成本，同时保持可接受的延迟和召回率。现代 Embeddings 模型输出的向量有成百上千个维度，这给原始向量和索引带来了巨大的存储和计算开销。</p>
-<p>传统方法是在建立索引前应用量化或降维方法来降低存储需求。例如，我们可以使用乘积量化（PQ）降低精度，或使用主成分分析（PCA）降低维数，从而节省存储空间。这些方法会对整个向量集进行分析，以找到一个能保持向量间语义关系的更紧凑的向量集。</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+在构建高效的向量搜索系统时，一个关键的挑战是管理存储成本，同时保持可接受的延迟和召回率。现代 Embeddings 模型输出的向量有成百上千个维度，这给原始向量和索引带来了巨大的存储和计算开销。<p>传统方法是在建立索引前应用量化或降维方法来降低存储需求。例如，我们可以使用乘积量化（PQ）降低精度，或使用主成分分析（PCA）降低维数，从而节省存储空间。这些方法会对整个向量集进行分析，以找到一个能保持向量间语义关系的更紧凑的向量集。</p>
 <p>这些标准方法虽然有效，但只能在单一尺度上降低一次精度或维度。但是，如果我们能同时保持多层细节，就像一个精确度越来越高的表征金字塔呢？</p>
-<p>这就是 Matryoshka Embeddings。这些巧妙的构造以俄罗斯嵌套娃娃命名（见插图），将多级表示嵌入到单个向量中。与传统的后处理方法不同，Matryoshka 嵌入在初始训练过程中就能学习这种多尺度结构。结果非常显著：不仅完整的 Embeddings 能够捕捉输入语义，而且每个嵌套的子集前缀（前半部分、前四分之一等）都提供了一个连贯的、即使不那么详细的表示。</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+<p>这就是 Matryoshka Embeddings。这些巧妙的结构以俄罗斯嵌套娃娃命名（见插图），将多级表示嵌入到单个向量中。与传统的后处理方法不同，Matryoshka 嵌入在初始训练过程中就能学习这种多尺度结构。结果非常显著：不仅完整的 Embeddings 能够捕捉输入语义，而且每个嵌套的子集前缀（前半部分、前四分之一等）都提供了一个连贯的、即使不那么详细的表示。</p>
 <p>在本笔记本中，我们将研究如何将 Matryoshka 嵌入与 Milvus 一起用于语义搜索。我们展示了一种名为 "漏斗搜索 "的算法，它允许我们在嵌入维度的一小部分子集上执行相似性搜索，而不会导致召回率急剧下降。</p>
+<h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>仅用于 CPU：</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>用于 CUDA 11.8</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>CUDA 11.8 的安装命令只是一个示例。安装 PyTorch 时，请确认您的 CUDA 版本。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">加载 Matryoshka 嵌入模型<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
@@ -54,7 +77,7 @@ title: 使用 Matryoshka 嵌入进行漏斗搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我们不使用标准的嵌入模型，如 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>等标准嵌入<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">模型</a>，我们使用了<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">Nomic</a>专门为生成 Matryoshka 嵌入而训练<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">的模型</a>。</p>
+    </button></h2><p>我们不使用标准的嵌入模型，如 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>等标准嵌入<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">模型</a>，我们使用的<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">是 Nomic</a>专门为生成 Matryoshka 嵌入而训练的<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">模型</a>。</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -80,7 +103,7 @@ title: 使用 Matryoshka 嵌入进行漏斗搜索
         ></path>
       </svg>
     </button></h2><p>以下代码是对文档页面<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"使用句子变形器和 Milvus 进行电影搜索 "中</a>的代码的修改<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">。</a>首先，我们从 HuggingFace 加载数据集。它包含约 35k 个条目，每个条目对应一部有维基百科文章的电影。我们将在本例中使用<code translate="no">Title</code> 和<code translate="no">PlotSummary</code> 字段。</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -109,13 +132,13 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 目前不支持对嵌入式子集进行搜索，因此我们将嵌入式分成两部分：头部代表要索引和搜索的向量的初始子集，尾部是剩余部分。该模型是为余弦距离相似性搜索而训练的，因此我们对头部嵌入进行了归一化处理。不过，为了以后计算更大子集的相似性，我们需要存储头部嵌入的规范，因此可以在连接到尾部之前对其进行非规范化处理。</p>
 <p>为了通过前 1/6 的嵌入执行搜索，我们需要在<code translate="no">head_embedding</code> 字段上创建一个向量搜索索引。稍后，我们将比较 "漏斗搜索 "和常规向量搜索的结果，因此也要在全嵌入上建立一个搜索索引。</p>
-<p><em>重要的是，我们使用的是<code translate="no">COSINE</code> 而不是<code translate="no">IP</code> 距离度量，因为否则我们就需要跟踪嵌入规范，这将使实现过程变得复杂（一旦介绍了漏斗搜索算法，这一点将更有意义）。</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<p><em>重要的是，我们使用的是<code translate="no">COSINE</code> 而不是<code translate="no">IP</code> 距离度量，因为否则我们就需要跟踪嵌入规范，这会使实现过程变得复杂（在介绍漏斗搜索算法后，这一点会更有意义）。</em></p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>最后，我们对所有 35k 部电影的情节摘要进行编码，并将相应的 Embeddings 输入数据库。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -218,7 +241,7 @@ Impact
 The House in Marsh Road
 </code></pre>
 <p>我们可以看到，由于在搜索过程中截断了 Embeddings，因此召回率受到了影响。漏斗搜索通过一个巧妙的技巧解决了这一问题：我们可以利用剩余的嵌入维度对候选列表进行重新排序和修剪，从而恢复检索性能，而无需运行任何额外的昂贵向量搜索。</p>
-<p>为了便于阐述漏斗搜索算法，我们将每个查询的 Milvus 搜索命中率转换为 Pandas 数据帧。</p>
+<p>为了便于说明漏斗搜索算法，我们将每个查询的 Milvus 搜索命中率转换为 Pandas 数据帧。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
     Convert a Milvus search result to a Pandas dataframe. This function is specific to our data schema.
@@ -297,7 +320,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>我们已经能够在不执行任何额外向量搜索的情况下恢复召回率！从质量上看，这些结果对 "夺宝奇兵 "和 "闪灵 "<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">的</a>召回率似乎高于教程 "<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">使用 Milvus 和 Sentence Transformers 进行电影搜索</a>"中的标准向量搜索，后者使用了不同的嵌入模型。然而，它却无法找到我们将在本手册稍后讨论的 &quot;Ferris Bueller's Day Off&quot;（《Ferris Bueller's Day Off》）。(有关更多定量实验和基准测试，请参阅论文<a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a>）。</p>
+<p>我们已经能够在不执行任何额外向量搜索的情况下恢复召回率！从质量上看，这些结果对 "夺宝奇兵 "和 "闪灵 "<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">的</a>召回率似乎高于教程 "<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">使用 Milvus 和 Sentence Transformers 进行电影搜索</a>"中的标准向量搜索，后者使用了不同的嵌入模型。然而，它却无法找到我们将在本手册稍后讨论的 "Ferris Bueller's Day Off"（《Ferris Bueller's Day Off》）。(有关更多定量实验和基准测试，请参阅论文<a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a>）。</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">比较漏斗搜索和常规搜索<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -313,7 +336,7 @@ Name: title, dtype: object
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>让我们来比较一下我们的漏斗搜索和标准向量搜索<em>在相同嵌入模型的相同数据集上的</em>结果。我们对全嵌入进行搜索。</p>
+    </button></h2><p>让我们比较一下我们的漏斗搜索和标准向量搜索<em>在相同数据集上使用相同嵌入模型</em>的结果。我们对全嵌入进行搜索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search on entire embeddings</span>
 res = client.search(
     collection_name=collection_name,
@@ -356,7 +379,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>除了 &quot;一名青少年为逃学而装病...... &quot;的搜索结果外，漏斗搜索的结果与完全搜索的结果几乎完全相同，尽管漏斗搜索是在 128 维的搜索空间上进行的，而普通搜索是在 768 维的搜索空间上进行的。</p>
+<p>除了 "一名青少年为逃学而装病...... "的搜索结果外，漏斗搜索的结果与完全搜索的结果几乎完全相同，尽管漏斗搜索是在 128 维的搜索空间上进行的，而普通搜索是在 768 维的搜索空间上进行的。</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">调查《费里斯-布勒的一天》漏斗搜索召回失败的原因<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -408,7 +431,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>我们发现，问题在于初始候选列表不够大，或者说，在最高粒度级别上，所需的点击与查询不够相似。将其从<code translate="no">128</code> 改为<code translate="no">256</code> 后，检索成功了。<em>我们应该形成一条经验法则，即通过经验评估召回率和延迟之间的权衡，来设定保留集上的候选项数量。</em></p>
+<p>我们发现，问题在于初始候选列表不够大，或者说，在最高粒度级别上，所需的点击与查询不够相似。将其从<code translate="no">128</code> 改为<code translate="no">256</code> 后，检索成功了。<em>我们应该形成一个经验法则，即通过经验评估召回率和延迟之间的权衡，来设定保留集上的候选项数量。</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -565,4 +588,4 @@ Leopard in the Snow
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
 <div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.5.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-the-shining.png' width='100%'></div>
-我们展示了如何使用 Matryoshka 嵌入和 Milvus 来执行一种更高效的语义搜索算法，即 "漏斗搜索"。我们还探讨了该算法的 Rerankers 和剪枝步骤的重要性，以及当初始候选列表太小时的失败模式。最后，我们讨论了在形成子嵌入时，维度的顺序是如何重要的--它必须与模型训练时的顺序一致。或者说，只有因为模型是以某种方式训练的，嵌入的前缀才有意义。现在你知道如何实现 Matryoshka 嵌入和漏斗搜索，以降低语义搜索的存储成本，同时又不会牺牲太多检索性能了吧！
+我们展示了如何使用 Matryoshka 嵌入和 Milvus 来执行一种更高效的语义搜索算法，即 "漏斗搜索"。我们还探讨了该算法的 Rerankers 和剪枝步骤的重要性，以及当初始候选列表太小时的失败模式。最后，我们讨论了维度的顺序在形成子嵌入时的重要性--它必须与模型训练时的顺序一致。或者说，只有因为模型是以某种方式训练的，嵌入的前缀才有意义。现在你知道如何实现 Matryoshka 嵌入和漏斗搜索，以降低语义搜索的存储成本，同时又不会牺牲太多检索性能了吧！

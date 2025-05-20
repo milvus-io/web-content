@@ -76,7 +76,7 @@ summary: Milvus 是一个开源向量数据库，旨在为人工智能应用提�
 <li>我们的路线图通常分为三个部分：最新发布的版本、即将发布的下一个版本以及明年的中长期愿景。</li>
 <li>随着我们的进步，我们会不断学习，偶尔调整我们的重点，根据需要添加或删除项目。</li>
 <li>这些计划仅供参考，可能会根据订阅服务的不同而有所变化。</li>
-<li>我们将坚定不移地遵循我们的路线图，并以我们的<a href="/docs/zh/release_notes.md">发布说明</a>作为参考。</li>
+<li>我们将坚定不移地遵循我们的路线图，并以我们的<a href="/docs/zh/v2.4.x/release_notes.md">发布说明</a>作为参考。</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">如何贡献<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

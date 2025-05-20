@@ -46,9 +46,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>非结构化数据、Embeddings 和 Milvus</span> </span></p>
 <p>Milvus 提供三种部署模式，涵盖各种数据规模--从 Jupyter Notebooks 中的本地原型到管理数百亿向量的大规模 Kubernetes 集群：</p>
 <ul>
-<li>Milvus Lite 是一个 Python 库，可以轻松集成到您的应用程序中。作为 Milvus 的轻量级版本，它非常适合在 Jupyter Notebooks 中进行快速原型开发，或在资源有限的边缘设备上运行。<a href="/docs/zh/milvus_lite.md">了解更多信息</a>。</li>
-<li>Milvus Standalone 是单机服务器部署，所有组件都捆绑在一个 Docker 镜像中，方便部署。<a href="/docs/zh/install_standalone-docker.md">了解更多</a>。</li>
-<li>Milvus Distributed 可部署在 Kubernetes 集群上，采用云原生架构，专为十亿规模甚至更大的场景而设计。该架构可确保关键组件的冗余。<a href="/docs/zh/install_cluster-milvusoperator.md">了解更多</a>。</li>
+<li>Milvus Lite 是一个 Python 库，可以轻松集成到您的应用程序中。作为 Milvus 的轻量级版本，它非常适合在 Jupyter Notebooks 中进行快速原型开发，或在资源有限的边缘设备上运行。<a href="/docs/zh/v2.4.x/milvus_lite.md">了解更多信息</a>。</li>
+<li>Milvus Standalone 是单机服务器部署，所有组件都捆绑在一个 Docker 镜像中，方便部署。<a href="/docs/zh/v2.4.x/install_standalone-docker.md">了解更多</a>。</li>
+<li>Milvus Distributed 可部署在 Kubernetes 集群上，采用云原生架构，专为十亿规模甚至更大的场景而设计。该架构可确保关键组件的冗余。<a href="/docs/zh/v2.4.x/install_cluster-milvusoperator.md">了解更多</a>。</li>
 </ul>
 <h2 id="What-Makes-Milvus-so-Fast" class="common-anchor-header">Milvus 为何如此快速？<button data-href="#What-Makes-Milvus-so-Fast" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,14 +109,14 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 支持各种类型的搜索功能，以满足不同用例的需求：</p>
 <ul>
-<li><a href="/docs/zh/single-vector-search.md#Basic-search">ANN 搜索</a>：查找最接近查询向量的前 K 个向量。</li>
-<li><a href="/docs/zh/single-vector-search.md#Filtered-search">过滤搜索</a>：在指定的过滤条件下执行 ANN 搜索。</li>
-<li><a href="/docs/zh/single-vector-search.md#Range-search">范围搜索</a>：查找查询向量指定半径范围内的向量。</li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a>：基于多个向量场进行 ANN 搜索。</li>
+<li><a href="/docs/zh/v2.4.x/single-vector-search.md#Basic-search">ANN 搜索</a>：查找最接近查询向量的前 K 个向量。</li>
+<li><a href="/docs/zh/v2.4.x/single-vector-search.md#Filtered-search">过滤搜索</a>：在指定的过滤条件下执行 ANN 搜索。</li>
+<li><a href="/docs/zh/v2.4.x/single-vector-search.md#Range-search">范围搜索</a>：查找查询向量指定半径范围内的向量。</li>
+<li><a href="/docs/zh/v2.4.x/multi-vector-search.md">混合搜索</a>：基于多个向量场进行 ANN 搜索。</li>
 <li>关键词搜索基于 BM25 的关键词搜索。</li>
-<li><a href="/docs/zh/reranking.md">Rerankers</a>：根据附加标准或辅助算法调整搜索结果的顺序，完善最初的 ANN 搜索结果。</li>
-<li><a href="/docs/zh/get-and-scalar-query.md#Get-Entities-by-ID">获取</a>：根据主键检索数据。</li>
-<li><a href="/docs/zh/get-and-scalar-query.md#Use-Basic-Operators">查询</a>使用特定表达式检索数据。</li>
+<li><a href="/docs/zh/v2.4.x/reranking.md">Rerankers</a>：根据附加标准或辅助算法调整搜索结果的顺序，完善最初的 ANN 搜索结果。</li>
+<li><a href="/docs/zh/v2.4.x/get-and-scalar-query.md#Get-Entities-by-ID">获取</a>：根据主键检索数据。</li>
+<li><a href="/docs/zh/v2.4.x/get-and-scalar-query.md#Use-Basic-Operators">查询</a>使用特定表达式检索数据。</li>
 </ul>
 <h2 id="Comprehensive-Feature-Set" class="common-anchor-header">综合功能集<button data-href="#Comprehensive-Feature-Set" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -144,34 +144,34 @@ summary: >-
 </ul>
 <h3 id="Advanced-Data-Types" class="common-anchor-header">高级数据类型</h3><p>除了原始数据类型外，Milvus 还支持各种高级数据类型及其各自适用的距离度量。</p>
 <ul>
-<li><a href="/docs/zh/sparse_vector.md">稀疏向量</a></li>
-<li><a href="/docs/zh/index-vector-fields.md">二进制向量</a></li>
-<li><a href="/docs/zh/use-json-fields.md">支持 JSON</a></li>
-<li><a href="/docs/zh/array_data_type.md">数组支持</a></li>
-<li><a href="/docs/zh/metric.md">距离度量</a></li>
+<li><a href="/docs/zh/v2.4.x/sparse_vector.md">稀疏向量</a></li>
+<li><a href="/docs/zh/v2.4.x/index-vector-fields.md">二进制向量</a></li>
+<li><a href="/docs/zh/v2.4.x/use-json-fields.md">支持 JSON</a></li>
+<li><a href="/docs/zh/v2.4.x/array_data_type.md">数组支持</a></li>
+<li><a href="/docs/zh/v2.4.x/metric.md">距离度量</a></li>
 </ul>
 <h3 id="Acceleration" class="common-anchor-header">加速</h3><ul>
-<li><p>搜索算法 Milvus 支持一系列可调整的索引和搜索算法。有关详情，请参阅<a href="/docs/zh/index.md">内存索引</a>、<a href="/docs/zh/disk_index.md">磁盘索引</a>和<a href="/docs/zh/gpu_index.md">GPU 索引</a>。</p></li>
-<li><p>分区和分区键 分区是 Milvus Collection 的子分区。你可以选择一个标量字段作为分区键，以获得更好的搜索性能。有关详情，请参阅<a href="/docs/zh/manage-partitions.md">管理分区</a>和<a href="/docs/zh/use-partition-key.md">使用分区密钥</a>。</p></li>
-<li><p>可调一致性模型 一致性可确保每个 Milvus 节点或副本在给定时间写入或读取数据时拥有相同的数据视图。在 Milvus 中进行 ANN 搜索时，可以轻松调整一致性级别。有关详细信息，请参阅<a href="/docs/zh/consistency.md">一致性</a>。</p></li>
-<li><p>高通量数据导入 要将大量数据导入 Milvus，而不是一个接一个地插入，可以考虑使用我们的高通量数据导入工具。有关详情，请参阅<a href="/docs/zh/prepare-source-data.md">准备源数据</a>和<a href="/docs/zh/import-data.md">导入数据</a>。</p></li>
-<li><p>多租户支持 Milvus 实现了许多面向多租户场景的功能，包括 Partition Key、Clustering Key 等。有关详情，请参阅<a href="/docs/zh/multi_tenancy.md">多租户策略</a>。</p></li>
+<li><p>搜索算法 Milvus 支持一系列可调整的索引和搜索算法。有关详情，请参阅<a href="/docs/zh/v2.4.x/index.md">内存索引</a>、<a href="/docs/zh/v2.4.x/disk_index.md">磁盘索引</a>和<a href="/docs/zh/v2.4.x/gpu_index.md">GPU 索引</a>。</p></li>
+<li><p>分区和分区键 分区是 Milvus Collection 的子分区。你可以选择一个标量字段作为分区键，以获得更好的搜索性能。有关详情，请参阅<a href="/docs/zh/v2.4.x/manage-partitions.md">管理分区</a>和<a href="/docs/zh/v2.4.x/use-partition-key.md">使用分区密钥</a>。</p></li>
+<li><p>可调一致性模型 一致性可确保每个 Milvus 节点或副本在给定时间写入或读取数据时拥有相同的数据视图。在 Milvus 中进行 ANN 搜索时，可以轻松调整一致性级别。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/consistency.md">一致性</a>。</p></li>
+<li><p>高通量数据导入 要将大量数据导入 Milvus，而不是一个接一个地插入，可以考虑使用我们的高通量数据导入工具。有关详情，请参阅<a href="/docs/zh/v2.4.x/prepare-source-data.md">准备源数据</a>和<a href="/docs/zh/v2.4.x/import-data.md">导入数据</a>。</p></li>
+<li><p>多租户支持 Milvus 实现了许多面向多租户场景的功能，包括 Partition Key、Clustering Key 等。有关详情，请参阅<a href="/docs/zh/v2.4.x/multi_tenancy.md">多租户策略</a>。</p></li>
 </ul>
 <h3 id="Security-and-Authorization" class="common-anchor-header">安全和授权</h3><ul>
-<li><p>可调一致性模型 一致性可确保每个 Milvus 节点或副本在给定时间写入或读取数据时拥有相同的数据视图。在 Milvus 中进行 ANN 搜索时，您可以轻松调整一致性级别。有关详细信息，请参阅<a href="/docs/zh/consistency.md">一致性</a>。</p></li>
-<li><p>数据隔离和资源控制 对于多租户场景，数据隔离是基本的安全要求。Milvus 实现了多种功能来解决您的安全问题。详情请参阅<a href="/docs/zh/resource_group.md">管理资源组和</a> <a href="/docs/zh/clustering-compaction.md">集群压缩</a>。</p></li>
+<li><p>可调一致性模型 一致性可确保每个 Milvus 节点或副本在给定时间写入或读取数据时拥有相同的数据视图。在 Milvus 中进行 ANN 搜索时，您可以轻松调整一致性级别。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/consistency.md">一致性</a>。</p></li>
+<li><p>数据隔离和资源控制 对于多租户场景，数据隔离是基本的安全要求。Milvus 实现了多种功能来解决您的安全问题。详情请参阅<a href="/docs/zh/v2.4.x/resource_group.md">管理资源组和</a> <a href="/docs/zh/v2.4.x/clustering-compaction.md">集群压缩</a>。</p></li>
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">人工智能集成</h3><ul>
-<li><p>Embeddings 模型集成 Embedding 模型将非结构化数据转换为其在高维数据空间中的数字表示，以便您能将其存储在 Milvus 中。目前，PyMilvus（Python SDK）集成了多个嵌入模型，以便您能快速将数据准备成向量嵌入。有关详情，请参阅<a href="/docs/zh/embeddings.md">嵌入概述</a>。</p></li>
-<li><p>Reranker 模型集成 在信息检索和生成式人工智能领域，Reranker 是优化初始搜索结果顺序的重要工具。PyMilvus 也集成了几种 Rerankers 模型，以优化初始搜索返回结果的顺序。详情请参考<a href="/docs/zh/rerankers-overview.md">Rerankers 概述</a>。</p></li>
-<li><p>LangChain 和其他人工智能工具集成 在 GenAI 时代，LangChain 等工具受到了应用程序开发人员的广泛关注。作为核心组件，Milvus 通常在此类工具中充当向量存储。要了解如何将 Milvus 集成到您喜爱的人工智能工具中，请参阅我们的<a href="/docs/zh/integrate_with_openai.md">集成</a>和<a href="/docs/zh/build-rag-with-milvus.md">教程</a>。</p></li>
+<li><p>Embeddings 模型集成 Embedding 模型将非结构化数据转换为其在高维数据空间中的数字表示，以便您能将其存储在 Milvus 中。目前，PyMilvus（Python SDK）集成了多个嵌入模型，以便您能快速将数据准备成向量嵌入。有关详情，请参阅<a href="/docs/zh/v2.4.x/embeddings.md">嵌入概述</a>。</p></li>
+<li><p>Reranker 模型集成 在信息检索和生成式人工智能领域，Reranker 是优化初始搜索结果顺序的重要工具。PyMilvus 也集成了几种 Rerankers 模型，以优化初始搜索返回结果的顺序。详情请参考<a href="/docs/zh/v2.4.x/rerankers-overview.md">Rerankers 概述</a>。</p></li>
+<li><p>LangChain 和其他人工智能工具集成 在 GenAI 时代，LangChain 等工具受到了应用程序开发人员的广泛关注。作为核心组件，Milvus 通常在此类工具中充当向量存储。要了解如何将 Milvus 集成到您喜爱的人工智能工具中，请参阅我们的<a href="/docs/zh/v2.4.x/integrate_with_openai.md">集成</a>和<a href="/docs/zh/v2.4.x/build-rag-with-milvus.md">教程</a>。</p></li>
 </ul>
 <h3 id="Tools-and-Ecosystem" class="common-anchor-header">工具和生态系统</h3><ul>
 <li><p>Attu Attu 是一个一体化的直观图形用户界面，可帮助您管理 Milvus 及其存储的数据。有关详情，请参阅<a href="https://github.com/zilliztech/attu">Attu</a>存储库。</p></li>
-<li><p>Birdwatcher Birdwatcher 是 Milvus 的调试工具。使用它连接到 etcd，你可以检查 Milvus 系统的状态，或动态配置它。有关详情，请参阅<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>。</p></li>
-<li><p>Promethus 和 Grafana 集成 Promethus 是 Kubernetes 的开源系统监控和警报工具包。Grafana 是一个开源可视化堆栈，可以连接所有数据源。您可以使用 Promethus 和 Grafana 作为监控服务提供商，对 Milvus Distributed 的性能进行可视化监控。有关详情，请参阅<a href="/docs/zh/monitor.md">部署监控服务</a>。</p></li>
-<li><p>Milvus 备份 Milvus 备份是一个允许用户备份和恢复 Milvus 数据的工具。它同时提供 CLI 和 API，以适应不同的应用场景。详情请参阅<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>。</p></li>
-<li><p>Milvus Capture Data Change (CDC) Milvus-CDC 可以捕获和同步 Milvus 实例中的增量数据，并通过在源实例和目标实例之间的无缝传输，确保业务数据的可靠性，从而轻松实现增量备份和灾难恢复。详情请参阅<a href="/docs/zh/milvus-cdc-overview.md">Milvus CDC</a>。</p></li>
-<li><p>Milvus 连接器 Milvus 为您规划了一套连接器，以便将 Milvus 与 Apache Spark 等第三方工具无缝集成。目前，您可以使用我们的 Spark 连接器将 Milvus 数据馈送到 Apache Spark 进行机器学习处理。有关详情，请参阅<a href="/docs/zh/integrate_with_spark.md">Spark-Milvus Connector</a>。</p></li>
+<li><p>Birdwatcher Birdwatcher 是 Milvus 的调试工具。使用它连接到 etcd，你可以检查 Milvus 系统的状态，或动态配置它。有关详情，请参阅<a href="/docs/zh/v2.4.x/birdwatcher_overview.md">Birdwatcher</a>。</p></li>
+<li><p>Promethus 和 Grafana 集成 Promethus 是 Kubernetes 的开源系统监控和警报工具包。Grafana 是一个开源可视化堆栈，可以连接所有数据源。您可以使用 Promethus 和 Grafana 作为监控服务提供商，对 Milvus Distributed 的性能进行可视化监控。有关详情，请参阅<a href="/docs/zh/v2.4.x/monitor.md">部署监控服务</a>。</p></li>
+<li><p>Milvus 备份 Milvus 备份是一个允许用户备份和恢复 Milvus 数据的工具。它同时提供 CLI 和 API，以适应不同的应用场景。详情请参阅<a href="/docs/zh/v2.4.x/milvus_backup_overview.md">Milvus 备份</a>。</p></li>
+<li><p>Milvus Capture Data Change (CDC) Milvus-CDC 可以捕获和同步 Milvus 实例中的增量数据，并通过在源实例和目标实例之间的无缝传输，确保业务数据的可靠性，从而轻松实现增量备份和灾难恢复。详情请参阅<a href="/docs/zh/v2.4.x/milvus-cdc-overview.md">Milvus CDC</a>。</p></li>
+<li><p>Milvus 连接器 Milvus 为您规划了一套连接器，以便将 Milvus 与 Apache Spark 等第三方工具无缝集成。目前，您可以使用我们的 Spark 连接器将 Milvus 数据馈送到 Apache Spark 进行机器学习处理。有关详情，请参阅<a href="/docs/zh/v2.4.x/integrate_with_spark.md">Spark-Milvus Connector</a>。</p></li>
 <li><p>向量传输服务（VTS） Milvus 为您提供了一套工具，用于在 Milvus 实例和一系列数据源（包括 Zilliz 集群、Elasticsearch、Postgres (PgVector) 和另一个 Milvus 实例）之间传输数据。有关详情，请参阅<a href="https://github.com/zilliztech/vts">VTS</a>。</p></li>
 </ul>

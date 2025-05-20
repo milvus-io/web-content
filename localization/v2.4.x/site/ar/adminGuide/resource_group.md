@@ -183,7 +183,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p>لاحظ أن <code translate="no">_resource_groups</code> هو معلمة اختيارية، وتركه غير محدد يجعل ميلفوس يقوم بتحميل النسخ المتماثلة على عقد الاستعلام في مجموعة الموارد الافتراضية.</p>
 <p>لجعل ميلفوس يقوم بتحميل كل نسخة متماثلة من المجموعة في مجموعة موارد منفصلة، تأكد من أن عدد مجموعات الموارد يساوي عدد النسخ المتماثلة.</p></li>
 <li><p>نقل النسخ المتماثلة بين مجموعات الموارد.</p>
-<p>يستخدم ميلفوس <a href="/docs/ar/replica.md">النسخ المتماثلة</a> لتحقيق موازنة التحميل بين <a href="/docs/ar/glossary.md#Segment">المجموعات</a> الموزعة عبر عدة عقد استعلام. يمكنك نقل نسخ متماثلة معينة من مجموعة ما من مجموعة موارد إلى أخرى على النحو التالي:</p>
+<p>يستخدم ميلفوس <a href="/docs/ar/v2.4.x/replica.md">النسخ المتماثلة</a> لتحقيق موازنة التحميل بين <a href="/docs/ar/v2.4.x/glossary.md#Segment">المجموعات</a> الموزعة عبر عدة عقد استعلام. يمكنك نقل نسخ متماثلة معينة من مجموعة ما من مجموعة موارد إلى أخرى على النحو التالي:</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>لنشر مثيل Milvus متعدد المستأجرين، اقرأ ما يلي:</p>
 <ul>
-<li><a href="/docs/ar/rbac.md">تمكين RBAC</a></li>
-<li><a href="/docs/ar/users_and_roles.md">المستخدمون والأدوار</a></li>
+<li><a href="/docs/ar/v2.4.x/rbac.md">تمكين RBAC</a></li>
+<li><a href="/docs/ar/v2.4.x/users_and_roles.md">المستخدمون والأدوار</a></li>
 </ul>

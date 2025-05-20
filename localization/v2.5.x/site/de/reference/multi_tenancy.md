@@ -1,10 +1,12 @@
 ---
 id: multi_tenancy.md
-related_key: multi-tenancy
-summary: Mehrmandantenfähigkeit in Milvus.
-title: Strategien mit mehreren Mandanten
+title: Implementieren Sie Multi-Tenancy
+summary: >-
+  In Milvus bedeutet Multi-Tenancy, dass mehrere Kunden oder Teams - sogenannte
+  Tenants - denselben Cluster gemeinsam nutzen und dabei isolierte
+  Datenumgebungen beibehalten.
 ---
-<h1 id="Multi-tenancy-strategies" class="common-anchor-header">Strategien mit mehreren Mandanten<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
+<h1 id="Implement-Multi-tenancy" class="common-anchor-header">Implementieren Sie Multi-Tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,9 +21,9 @@ title: Strategien mit mehreren Mandanten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In vielen Anwendungsfällen möchten Entwickler einen Milvus-Cluster betreiben und mehrere Mandanten bedienen, z. B. mehrere Produktteams oder Millionen von Endbenutzern. In diesem Leitfaden werden einige verschiedene Strategien zur Erreichung von Mandantenfähigkeit auf Milvus erläutert.</p>
-<p>Milvus ist so konzipiert, dass es Multi-Tenancy auf Datenbank-, Sammel- oder Partitionsebene unterstützt. Das Ziel der Mandantenfähigkeit ist es, die Daten und Ressourcen voneinander zu trennen. Die Implementierung von Mandantenfähigkeit auf verschiedenen Ebenen kann ein unterschiedliches Ausmaß an Isolation erreichen, ist aber auch mit unterschiedlichem Overhead verbunden. Im Folgenden werden die Kompromisse zwischen diesen Ebenen erläutert.</p>
-<h2 id="Database-oriented-multi-tenancy" class="common-anchor-header">Datenbankorientierte Mehrmandantenfähigkeit<button data-href="#Database-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h1><p>In Milvus bedeutet Multi-Tenancy, dass mehrere Kunden oder Teams - als <strong>Tenants bezeichnet -</strong>denselben Cluster gemeinsam nutzen und dabei isolierte Datenumgebungen beibehalten.</p>
+<p>Milvus unterstützt vier Multi-Tenancy-Strategien, die jeweils einen anderen Kompromiss zwischen Skalierbarkeit, Datenisolierung und Flexibilität bieten. Dieser Leitfaden führt Sie durch jede Option und hilft Ihnen, die für Ihren Anwendungsfall am besten geeignete Strategie zu wählen.</p>
+<h2 id="Multi-tenancy-strategies" class="common-anchor-header">Mehrmandantenstrategien<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +38,52 @@ title: Strategien mit mehreren Mandanten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Seit der Milvus-Version 2.2.9 können Sie mehrere Datenbanken in einem einzigen Milvus-Cluster erstellen. Diese Funktion ermöglicht eine datenbankorientierte Mandantenfähigkeit, indem jedem Mandanten eine Datenbank zugewiesen wird, so dass er seine eigenen Sammlungen erstellen kann. Dieser Ansatz bietet die beste Daten- und Ressourcenisolierung für Mandanten, ist aber auf maximal 64 Datenbanken in einem Cluster beschränkt.</p>
-<h2 id="Collection-oriented-multi-tenancy" class="common-anchor-header">Sammlungsorientierte Mehrmandantenfähigkeit<button data-href="#Collection-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus unterstützt Multi-Tenancy auf vier Ebenen: <strong>Datenbank</strong>, <strong>Sammlung</strong>, <strong>Partition</strong> und <strong>Partitionsschlüssel</strong>.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Mehrmandantenfähigkeit auf Datenbankebene</h3><p>Bei der Mandantenfähigkeit auf Datenbankebene erhält jeder Mandant eine entsprechende <a href="/docs/de/manage_databases.md">Datenbank</a>, die eine oder mehrere Sammlungen enthält.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Mehrmandantenfähigkeit auf Datenbankebene</span> </span></p>
+<ul>
+<li><p><strong>Skalierbarkeit</strong>: Die Multi-Tenancy-Strategie auf Datenbankebene unterstützt standardmäßig bis zu 64 Mandanten.</p></li>
+<li><p><strong>Datenisolierung</strong>: Die Daten in den einzelnen Datenbanken sind vollständig voneinander getrennt und bieten eine Datenisolierung auf Unternehmensniveau, die sich ideal für regulierte Umgebungen oder Kunden mit strengen Compliance-Anforderungen eignet.</p></li>
+<li><p><strong>Flexibel</strong>: Jede Datenbank kann Sammlungen mit unterschiedlichen Schemata enthalten, was eine äußerst flexible Datenorganisation ermöglicht und jedem Mandanten sein eigenes Datenschema zur Verfügung stellt.</p></li>
+<li><p><strong>Andere</strong>: Diese Strategie unterstützt auch RBAC und ermöglicht eine fein abgestufte Kontrolle des Benutzerzugriffs pro Mandant. Darüber hinaus können Sie Daten für bestimmte Mandanten flexibel laden oder freigeben, um heiße und kalte Daten effektiv zu verwalten.</p></li>
+</ul>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-Tenancy auf Sammlungsebene</h3><p>Bei der Mandantenfähigkeit auf Sammlungsebene wird jedem Mandanten eine <a href="/docs/de/manage-collections.md">Sammlung</a> zugewiesen, die eine starke Datenisolierung bietet.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Multi-Mandantenschaft auf Sammlungsebene</span> </span></p>
+<ul>
+<li><p><strong>Skalierbarkeit</strong>: Da ein Cluster standardmäßig bis zu 65.536 Sammlungen aufnehmen kann, kann diese Strategie die gleiche Anzahl von Mandanten innerhalb des Clusters aufnehmen.</p></li>
+<li><p><strong>Datenisolierung</strong>: Die Sammlungen sind physisch voneinander isoliert. Diese Strategie bietet eine starke Datenisolierung.</p></li>
+<li><p><strong>Flexibel</strong>: Bei dieser Strategie kann jede Sammlung ihr eigenes Schema haben, so dass Tenants mit unterschiedlichen Datenschemata untergebracht werden können.</p></li>
+<li><p><strong>Andere</strong>: Diese Strategie unterstützt auch RBAC und ermöglicht eine granulare Zugriffskontrolle für Mandanten. Außerdem können Sie Daten für bestimmte Mandanten flexibel laden oder freigeben, um heiße und kalte Daten effektiv zu verwalten.</p></li>
+</ul>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-Tenancy auf Partitionsebene</h3><p>Bei der Mandantenfähigkeit auf Partitionsebene wird jeder Mandant einer manuell erstellten <a href="/docs/de/manage-partitions.md">Partition</a> innerhalb einer gemeinsamen Sammlung zugewiesen.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Multimandantenfähigkeit auf Partitionsebene</span> </span></p>
+<ul>
+<li><p><strong>Skalierbarkeit</strong>: Eine Sammlung kann bis zu 1.024 Partitionen pro Sammlung enthalten, wobei die gleiche Anzahl von Tenants in der Sammlung möglich ist.</p></li>
+<li><p><strong>Datenisolierung</strong>: Die Daten der einzelnen Mandanten sind physisch durch Partitionen getrennt.</p></li>
+<li><p><strong>Flexibel</strong>: Bei dieser Strategie müssen alle Tenants dasselbe Datenschema verwenden. Und Partitionen müssen manuell erstellt werden.</p></li>
+<li><p><strong>Andere</strong>: RBAC wird auf Partitionsebene nicht unterstützt. Tenants können entweder einzeln oder über mehrere Partitionen hinweg abgefragt werden, wodurch sich dieser Ansatz gut für Szenarien mit aggregierten Abfragen oder Analysen über Tenant-Segmente hinweg eignet. Außerdem können Sie Daten für bestimmte Tenants flexibel laden oder freigeben, um Hot- und Cold-Data effektiv zu verwalten.</p></li>
+</ul>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Mehrmandantenfähigkeit auf Partitionsschlüssel-Ebene</h3><p>Bei dieser Strategie teilen sich alle Tenants eine einzige Sammlung und ein einziges Schema, aber die Daten jedes Tenants werden automatisch auf der Grundlage des <a href="/docs/de/use-partition-key.md">Partitionsschlüsselwerts</a> in 16 physisch isolierte Partitionen geleitet. Obwohl jede physische Partition mehrere Tenants enthalten kann, bleiben die Daten der verschiedenen Tenants logisch getrennt.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Partition Key Level Multi Tenancy</span> </span></p>
+<ul>
+<li><p><strong>Skalierbarkeit</strong>: Die Strategie auf Partitionsschlüssel-Ebene bietet den am besten skalierbaren Ansatz, der Millionen von Mandanten unterstützt.</p></li>
+<li><p><strong>Datenisolierung</strong>: Diese Strategie bietet eine relativ schwache Datenisolierung, da sich mehrere Mandanten eine physische Partition teilen können.</p></li>
+<li><p><strong>Flexibel</strong>: Da alle Mandanten dasselbe Datenschema verwenden müssen, bietet diese Strategie eine begrenzte Datenflexibilität.</p></li>
+<li><p><strong>Sonstiges</strong>: RBAC wird auf der Partitionsschlüssel-Ebene nicht unterstützt. Tenants können entweder einzeln oder über mehrere Partitionen hinweg abgefragt werden, wodurch sich dieser Ansatz gut für Szenarien mit aggregierten Abfragen oder Analysen über Tenant-Segmente hinweg eignet.</p></li>
+</ul>
+<h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">Die Wahl der richtigen Multi-Tenancy-Strategie<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,55 +98,77 @@ title: Strategien mit mehreren Mandanten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Es gibt zwei Möglichkeiten, um eine sammlungsorientierte Mandantenfähigkeit zu erreichen.</p>
-<h3 id="One-collection-for-all-tenants" class="common-anchor-header">Eine Sammlung für alle Tenants</h3><p>Die Verwendung einer einzigen Sammlung zur Implementierung der Mandantenfähigkeit durch Hinzufügen eines Mandantenfeldes zur Unterscheidung zwischen den Mandanten ist eine einfache Option. Fügen Sie bei der ANN-Suche nach einem bestimmten Tenant einen Filterausdruck hinzu, um alle Entitäten herauszufiltern, die zu anderen Tenants gehören. Dies ist der einfachste Weg, um Multi-Tenancy zu erreichen. Beachten Sie jedoch, dass die Leistung des Filters zum Flaschenhals der ANN-Suche werden kann. Um die Suchleistung zu verbessern, können Sie mit der folgenden partitionierten Mandantenfähigkeit optimieren.</p>
-<h3 id="One-collection-per-tenant" class="common-anchor-header">Eine Sammlung pro Mandant</h3><p>Ein anderer Ansatz besteht darin, eine Sammlung für jeden Mandanten zu erstellen, um seine eigenen Daten zu speichern, anstatt die Daten aller Mandanten in einer einzigen Sammlung zu speichern. Dies bietet eine bessere Datenisolierung und Abfrageleistung. Beachten Sie jedoch, dass dieser Ansatz mehr Ressourcen bei der Planung erfordert und auf maximal 10.000 Sammlungen in einem Cluster beschränkt ist.</p>
-<h2 id="Partition-oriented-multi-tenancy" class="common-anchor-header">Partitionsorientierte Multi-Tenancy<button data-href="#Partition-oriented-multi-tenancy" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Es gibt zwei Möglichkeiten, partitionierte Mandantenfähigkeit zu erreichen:</p>
-<h3 id="One-partition-per-tenant" class="common-anchor-header">Eine Partition pro Mandant</h3><p>Die Verwaltung einer einzigen Sammlung ist viel einfacher als die Verwaltung mehrerer Sammlungen. Anstatt mehrere Sammlungen zu erstellen, können Sie jedem Mandanten eine Partition zuweisen, um eine flexible Datenisolierung und Speicherverwaltung zu erreichen. Die Suchleistung der partitionorientierten Mandantenfähigkeit ist wesentlich besser als die der sammlungsorientierten Mandantenfähigkeit. Beachten Sie jedoch, dass die Anzahl der Mandanten der Sammlung die maximale Anzahl von Partitionen, die eine Sammlung enthalten kann, nicht überschreiten sollte.</p>
-<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">Partitionsschlüssel-basierte Mandantenfähigkeit</h3><p>Milvus 2.2.9 führt eine neue Funktion namens Partitionsschlüssel ein. Bei der Erstellung einer Sammlung kann ein Mandantenfeld als Partitionsschlüsselfeld festgelegt werden. Milvus speichert Entitäten in einer Partition entsprechend dem Hash-Wert des Partitionsschlüsselfeldes. Bei der Durchführung von ANN-Suchen durchsucht Milvus nur die Partition, die den Partitionsschlüssel enthält. Dadurch wird der Umfang der Suche weitgehend reduziert und eine bessere Leistung erzielt als ohne Partitionsschlüssel.</p>
-</div>
-<p>Diese Strategie hebt die Begrenzung der maximalen Anzahl von Mandanten auf, die eine Milvus-Sammlung unterstützen kann, und vereinfacht die Ressourcenverwaltung erheblich, da Milvus automatisch Partitionen für Sie verwaltet.</p>
-<p>Zusammenfassend lässt sich sagen, dass Sie eine oder mehrere der oben genannten Multi-Tenancy-Strategien verwenden können, um Ihre eigene Lösung zu erstellen. Die folgende Tabelle enthält Vergleiche zwischen diesen Strategien in Bezug auf die Datenisolierung, die Suchleistung und die maximale Anzahl von Mandanten.</p>
+    </button></h2><p>Die folgende Tabelle bietet einen umfassenden Vergleich zwischen den vier Ebenen von Mandantenstrategien.</p>
 <table>
-<thead>
-<tr><th></th><th>Datenisolierung</th><th>Suchperf.</th><th>Max. Anzahl von Mandanten</th><th>Empfohlene Szenarien</th></tr>
-</thead>
-<tbody>
-<tr><td>Datenbankorientiert</td><td>Stark</td><td>Stark</td><td>64</td><td>Für diejenigen, bei denen die Sammlungen je nach Projekt variieren müssen, besonders geeignet für die Datenisolierung zwischen Abteilungen in Ihrem Unternehmen.</td></tr>
-<tr><td>Eine Sammlung für alle</td><td>Schwach</td><td>Mittel</td><td>K.A.</td><td>Für Unternehmen, die nur über begrenzte Ressourcen verfügen und denen eine Datenisolierung nicht wichtig ist.</td></tr>
-<tr><td>Eine Sammlung pro Mieter</td><td>Stark</td><td>Stark</td><td>Weniger als 10.000</td><td>Für diejenigen, die weniger als 10.000 Mandanten pro Cluster haben.</td></tr>
-<tr><td>Eine Partition pro Mandant</td><td>Mittel</td><td>Stark</td><td>1,024</td><td>Für diejenigen, die weniger als 1.024 Mieter pro Sammlung haben.</td></tr>
-<tr><td>Partitionsschlüssel-basiert</td><td>Mittel</td><td>Stark</td><td>10,000,000+</td><td>Für Unternehmen, die einen raschen Anstieg der Mieterzahlen in die Millionen erwarten.</td></tr>
-</tbody>
+   <tr>
+     <th></th>
+     <th><p><strong>Datenbankebene</strong></p></th>
+     <th><p><strong>Sammlungsebene</strong></p></th>
+     <th><p><strong>Partitionsebene</strong></p></th>
+     <th><p><strong>Partitionsschlüssel-Ebene</strong></p></th>
+   </tr>
+   <tr>
+     <td><p><strong>Datenisolierung</strong></p></td>
+     <td><p>Physisch</p></td>
+     <td><p>Physisch</p></td>
+     <td><p>Physisch</p></td>
+     <td><p>Physisch + Logisch</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Maximale Anzahl von Mietern</strong></p></td>
+     <td><p>Standardmäßig 64. Sie können sie erhöhen, indem Sie den Parameter <code translate="no">maxDatabaseNum</code> in der Konfigurationsdatei Milvus.yaml ändern. </p></td>
+     <td><p>Standardmäßig 65.536. Sie können diesen Wert durch Ändern des Parameters <code translate="no">maxCollectionNum</code> in der Konfigurationsdatei Milvus.yaml erhöhen.</p></td>
+     <td><p>Bis zu 1.024 pro Sammlung. </p></td>
+     <td><p>Millionen</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Flexibilität des Datenschemas</strong></p></td>
+     <td><p>Hoch</p></td>
+     <td><p>Mittel</p></td>
+     <td><p>Niedrig</p></td>
+     <td><p>Niedrig</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>RBAC-Unterstützung</strong></p></td>
+     <td><p>Ja</p></td>
+     <td><p>Ja</p></td>
+     <td><p>Nein</p></td>
+     <td><p>Nein</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Leistung der Suche</strong></p></td>
+     <td><p>Stark</p></td>
+     <td><p>Stark</p></td>
+     <td><p>Mittel</p></td>
+     <td><p>Mittel</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Unterstützung der mandantenübergreifenden Suche</strong></p></td>
+     <td><p>Nein</p></td>
+     <td><p>Nein</p></td>
+     <td><p>Ja</p></td>
+     <td><p>Ja</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Unterstützung für den effektiven Umgang mit heißen und kalten Daten</strong></p></td>
+     <td><p>Ja</p></td>
+     <td><p>Ja</p></td>
+     <td><p>Ja</p></td>
+     <td><p>Nein Derzeit nicht unterstützt für die Partition Key-Level-Strategie.</p></td>
+   </tr>
 </table>
-<h2 id="Whats-next" class="common-anchor-header">Was kommt als nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><a href="/docs/de/manage_databases.md">Verwalten von</a><a href="/docs/de/schema.md">Datenbankschemata</a></p>
+<p>Bei der Wahl der Multi-Tenancy-Strategie in Milvus sind mehrere Faktoren zu berücksichtigen.</p>
+<ol>
+<li><p><strong>Skalierbarkeit:</strong> Partitionsschlüssel &gt; Partition &gt; Sammlung &gt; Datenbank</p>
+<p>Wenn Sie erwarten, eine sehr große Anzahl von Mandanten (Millionen oder mehr) zu unterstützen, verwenden Sie die Strategie auf Partitionsschlüssel-Ebene.</p></li>
+<li><p><strong>Starke Anforderungen an die Datenisolierung</strong>: Datenbank = Sammlung &gt; Partition &gt; Partitionsschlüssel</p>
+<p>Wählen Sie Strategien auf Datenbank-, Sammel- oder Partitionsebene, wenn Sie strenge Anforderungen an die physische Datenisolierung haben.</p></li>
+<li><p><strong>Flexibles Datenschema für die Daten der einzelnen Mandanten:</strong> Datenbank &gt; Sammlung &gt; Partition = Partitionsschlüssel</p>
+<p>Strategien auf Datenbank- und Sammlungsebene bieten volle Flexibilität bei den Datenschemata. Wenn die Datenstrukturen Ihrer Mandanten unterschiedlich sind, wählen Sie die Multi-Tenancy-Strategie auf Datenbank- oder Sammlungsebene.</p></li>
+<li><p><strong>Andere</strong></p>
+<ol>
+<li><p><strong>Leistung:</strong> Die Suchleistung wird durch verschiedene Faktoren bestimmt, darunter Indizes, Suchparameter und Maschinenkonfigurationen. Milvus unterstützt auch Performance-Tuning. Es wird empfohlen, die tatsächliche Leistung zu testen, bevor Sie eine Multi-Tenancy-Strategie wählen.</p></li>
+<li><p><strong>Effektive Handhabung von heißen und kalten Daten</strong>: Gegenwärtig unterstützen die Strategien auf Datenbank-, Sammlungs- und Partitionsebene alle die Behandlung von heißen und kalten Daten.</p></li>
+<li><p><strong>Mandantenübergreifende Suche</strong>: Nur die Strategien auf Partitionsebene und Partition-Key-Ebene unterstützen mandantenübergreifende Abfragen.</p></li>
+</ol></li>
+</ol>

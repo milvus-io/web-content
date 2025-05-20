@@ -20,7 +20,7 @@ title: 盘上索引
         ></path>
       </svg>
     </button></h1><p>本文介绍一种名为 DiskANN 的盘上索引算法。DiskANN 基于 Vamana 图，能在大型数据集中进行高效搜索。</p>
-<p>为了提高查询性能，可以为每个向量字段<a href="/docs/zh/index-vector-fields.md">指定一种索引类型</a>。</p>
+<p>为了提高查询性能，可以为每个向量字段<a href="/docs/zh/v2.4.x/index-vector-fields.md">指定一种索引类型</a>。</p>
 <div class="alert note"> 
 目前，一个向量字段只支持一种索引类型。切换索引类型时，Milvus 会自动删除旧索引。</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">

@@ -49,9 +49,9 @@ grantPrivilegeV2(GrantPrivilegeReqV2.builder()
 ## Example
 
 ```java
-import io.milvus.v2.client.ConnectConfig
-import io.milvus.v2.client.MilvusClientV2
-import io.milvus.v2.service.rbac.request.CreateRoleReq
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -61,14 +61,10 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. grant privilege or privilege group
-// The following assumes that you have already
-// created a privilege group named `read_only`
-List<String> privilege = "read_only"
-
+// 2. Grant privilege or privilege group
 GrantPrivilegeReqV2 grantPrivilegeReqV2 = GrantPrivilegeReqV2.builder()
     .roleName("my_role")
-    .privilege("read_only")
+    .privilege("Search")
     .dbName("my_db")
     .collectionName("my_collection")
     .build()

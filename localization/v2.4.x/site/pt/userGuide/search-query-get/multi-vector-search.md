@@ -21,7 +21,7 @@ title: Pesquisa híbrida
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Desde o Milvus 2.4, introduzimos o suporte multi-vetorial e uma estrutura de pesquisa híbrida, o que significa que os utilizadores podem trazer vários campos vectoriais (até 10) para uma única coleção. Estes vectores em diferentes colunas representam diversas facetas dos dados, provenientes de diferentes modelos de incorporação ou submetidos a métodos de processamento distintos. Os resultados das pesquisas híbridas são integrados usando estratégias de reranking, como Reciprocal Rank Fusion (RRF) e Weighted Scoring. Para saber mais sobre as estratégias de reranking, consulte <a href="/docs/pt/reranking.md">Reranking</a>.</p>
+    </button></h1><p>Desde o Milvus 2.4, introduzimos o suporte multi-vetorial e uma estrutura de pesquisa híbrida, o que significa que os utilizadores podem trazer vários campos vectoriais (até 10) para uma única coleção. Estes vectores em diferentes colunas representam diversas facetas dos dados, provenientes de diferentes modelos de incorporação ou submetidos a métodos de processamento distintos. Os resultados das pesquisas híbridas são integrados usando estratégias de reranking, como Reciprocal Rank Fusion (RRF) e Weighted Scoring. Para saber mais sobre as estratégias de reranking, consulte <a href="/docs/pt/v2.4.x/reranking.md">Reranking</a>.</p>
 <p>Esta funcionalidade é particularmente útil em cenários de pesquisa abrangente, como a identificação da pessoa mais semelhante numa biblioteca de vectores com base em vários atributos, como imagens, voz, impressões digitais, etc.</p>
 <p>Neste tutorial, você aprenderá como:</p>
 <ul>
@@ -178,7 +178,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de criar instâncias de <code translate="no">AnnSearchRequest</code>, configure uma estratégia de reclassificação para combinar e reclassificar os resultados. Atualmente, há duas opções: <code translate="no">WeightedRanker</code> e <code translate="no">RRFRanker</code>. Para obter mais informações sobre estratégias de ranqueamento, consulte <a href="/docs/pt/reranking.md">Ranqueamento</a>.</p>
+    </button></h2><p>Depois de criar instâncias de <code translate="no">AnnSearchRequest</code>, configure uma estratégia de reclassificação para combinar e reclassificar os resultados. Atualmente, há duas opções: <code translate="no">WeightedRanker</code> e <code translate="no">RRFRanker</code>. Para obter mais informações sobre estratégias de ranqueamento, consulte <a href="/docs/pt/v2.4.x/reranking.md">Ranqueamento</a>.</p>
 <ul>
 <li><p>Usar pontuação ponderada</p>
 <p>O <code translate="no">WeightedRanker</code> é usado para atribuir importância aos resultados de cada pesquisa de campo vetorial com pesos especificados. Se der prioridade a alguns campos vectoriais em detrimento de outros, <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> pode refletir isso nos resultados de pesquisa combinados.</p>
@@ -232,7 +232,7 @@ res = collection.hybrid_search(
 <p>Uma lista de pedidos de pesquisa, em que cada pedido é um objeto <code translate="no">ANNSearchRequest</code>. Cada pedido pode corresponder a um campo vetorial diferente e a um conjunto diferente de parâmetros de pesquisa.</p></li>
 <li><p><code translate="no">rerank</code> <em>(objeto</em>)</p>
 <p>A estratégia de reordenação a utilizar para a pesquisa híbrida. Valores possíveis: <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> e <code translate="no">RRFRanker()</code>.</p>
-<p>Para mais informações sobre estratégias de classificação, consulte <a href="/docs/pt/reranking.md">Classificação</a>.</p></li>
+<p>Para mais informações sobre estratégias de classificação, consulte <a href="/docs/pt/v2.4.x/reranking.md">Classificação</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>O número máximo de resultados finais a devolver na pesquisa híbrida.</p></li>
 </ul>

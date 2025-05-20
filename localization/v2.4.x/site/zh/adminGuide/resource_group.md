@@ -183,7 +183,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p>请注意，<code translate="no">_resource_groups</code> 是一个可选参数，如果不指定，Milvus 将把副本加载到默认资源组中的查询节点上。</p>
 <p>要让 Milus 在单独的资源组中加载 Collections 的每个副本，请确保资源组的数量等于副本的数量。</p></li>
 <li><p>在资源组之间传输副本。</p>
-<p>Milvus 使用<a href="/docs/zh/replica.md">副本</a>来实现分布在多个查询节点上的<a href="/docs/zh/glossary.md#Segment">网段</a>之间的负载平衡。您可以按以下方法将某个 Collection 的某些副本从一个资源组转移到另一个资源组：</p>
+<p>Milvus 使用<a href="/docs/zh/v2.4.x/replica.md">副本</a>来实现分布在多个查询节点上的<a href="/docs/zh/v2.4.x/glossary.md#Segment">网段</a>之间的负载平衡。您可以按以下方法将某个 Collection 的某些副本从一个资源组转移到另一个资源组：</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>要部署多租户 Milvus 实例，请阅读以下内容：</p>
 <ul>
-<li><a href="/docs/zh/rbac.md">启用 RBAC</a></li>
-<li><a href="/docs/zh/users_and_roles.md">用户和角色</a></li>
+<li><a href="/docs/zh/v2.4.x/rbac.md">启用 RBAC</a></li>
+<li><a href="/docs/zh/v2.4.x/users_and_roles.md">用户和角色</a></li>
 </ul>

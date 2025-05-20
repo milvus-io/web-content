@@ -36,8 +36,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvusでは、コレクション内の各フィールドの名前とデータ型を設定することで、コレクションスキーマを作成できます。スキーマにフィールドを追加するときは、挿入するエンティティにこのフィールドが含まれていることを確認します。一部のフィールドをオプションにする場合は、ダイナミック・フィールドを有効にすることも 1 つの方法です。</p>
-<p>動的フィールドは、<code translate="no">$meta</code> という名前の予約フィールドで、JavaScript Object Notation（JSON）タイプです。スキーマで定義されていないエンティティのフィールドは、この予約済み JSON フィールドにキーと値のペアで格納されます。</p>
-<p>ダイナミック・フィールドが有効なコレクションでは、スキーマで明示的に定義されたフィールドと同様に、ダイナミック・ フィールドのキーを使用してスカラー・フィルタリングを行うことができます。</p>
+<p>ダイナミック・フィールドは、<strong>$meta</strong> という名前の予約フィールドで、JavaScript Object Notation (JSON) 型です。スキーマで定義されていないエンティティのフィールドはすべて、この予約済み JSON フィールドにキーと値のペアで格納されます。</p>
+<p>動的フィールドを有効にしたコレクションでは、スキーマで明示的に定義したフィールドと同様に、動的フィールドのキーを使用してスカラーフィルタリングを行うことができます。</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">ダイナミック・フィールドの有効化<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ja/create-collection-instantly.md">Create Collection Instantly</a>で説明されている方法を使用して作成されたコレクションは、既定でダイナミック・フィールドが有効になっています。カスタム設定でコレクションを作成するときに、手動でダイナミック・フィールドを有効にすることもできます。</p>
+    </button></h2><p>カスタム設定でコレクションを作成するときに、手動でダイナミック・フィールドを有効にできます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -135,7 +135,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
     &quot;enableDynamicField&quot;: true
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-dynamic-field" class="common-anchor-header">ダイナミック・フィールドの使用<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="Use-dynamic-field" class="common-anchor-header">ダイナミックフィールドの使用<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,7 +150,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションでダイナミックフィールドを有効にすると、スキーマで定義されていないすべてのフィールドとその値が、ダイナミックフィールドにキーと値のペアとして格納されます。</p>
+    </button></h2><p>コレクションでダイナミックフィールドを有効にすると、スキーマで定義されていないすべてのフィールドとその値は、ダイナミックフィールドにキーと値のペアとして格納されます。</p>
 <p>例えば、コレクションのスキーマが、<code translate="no">id</code> と<code translate="no">vector</code> という 2 つのフィールドのみを定義し、ダイナミック・フィールドが有効になっているとします。ここで、このコレクションに以下のデータセットを挿入します。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -328,7 +328,7 @@ curl --request POST \
 <li><p>サポートされている<code translate="no">json_cast_type</code> の値は、<code translate="no">bool</code> （または<code translate="no">BOOL</code> ）、<code translate="no">double</code> （または<code translate="no">DOUBLE</code> ）、<code translate="no">varchar</code> （または<code translate="no">VARCHAR</code> ）です。</p></li>
 <li><p>パースやキャストに失敗した場合（例えば、文字列をdoubleとしてパースしようとした場合）、その行はインデックス内でスキップされます。</p></li>
 </ul></li>
-<li><p>そのキーへの<strong>JSONパスを</strong> <code translate="no">json_path</code> として<strong>指定</strong>します。動的フィールドはJSONとして格納されるので、<code translate="no">&quot;color&quot;</code> のように指定することもできますし、入れ子構造になっている場合は、より深いパスを指定することもできます（例えば、<code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code> ）。</p></li>
+<li><p>そのキーへの<strong>JSONパスを</strong> <code translate="no">json_path</code> として<strong>指定</strong>します。ダイナミック・フィールドはJSONとして格納されるので、<code translate="no">&quot;color&quot;</code> のように指定することもできますし、入れ子構造になっている場合は、より深いパスを指定することもできます（例えば、<code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code> ）。</p></li>
 <li><p><strong>INVERTEDインデックスを作成する</strong>。現在のところ、<code translate="no">INVERTED</code> タイプのみがJSONパスのインデックスに対応しています。</p></li>
 </ol>
 <p>パラメータと考慮点の詳細については、<a href="/docs/ja/use-json-fields.md#Index-a-JSON-field">JSONフィールドのインデックスを</a>参照してください。</p>
@@ -520,7 +520,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード例で使用されているフィルタ式<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> では、<code translate="no">color</code> フィールドの値が<strong>"red"</strong> で始まらなければならないという条件が指定されています<strong>。</strong>サンプル・データでは、この条件を満たすのは2つのエンティティだけです。したがって、<code translate="no">limit</code> (topK) を<code translate="no">3</code> 以下に設定すると、これらのエンティティの両方が返される。</p>
+<p>上記のコード例で使用されているフィルタ式<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> では、<code translate="no">color</code> フィールドの値が<strong>"red"</strong> で始まらなければならないという条件が指定されています<strong>。</strong>サンプル・データでは、この条件を満たすのは2つのエンティティだけです。したがって、<code translate="no">limit</code> (topK) を<code translate="no">3</code> 以下に設定すると、これらのエンティティの両方が返されます。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> 

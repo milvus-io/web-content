@@ -59,7 +59,7 @@ title: Install Milvus Python SDK
       </svg>
     </button></h2><p>PyMilvus is available in <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <div class="alert note">
-It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="/docs/release_notes.md">Release Notes</a>.
+It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="/docs/v2.3.x/release_notes.md">Release Notes</a>.
 </div>
 <pre><code translate="no">$ python3 -m pip install pymilvus==2.3.7
 <button class="copy-code-btn"></button></code></pre>
@@ -100,11 +100,11 @@ It is recommended to install a PyMilvus version that matches the version of the 
 <ul>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_connection.md">Connect to Milvus server</a></li>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/insert_data.md">Insert data</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/manage_connection.md">Connect to Milvus server</a></li>
+<li><a href="/docs/v2.3.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.3.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.3.x/insert_data.md">Insert data</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
 </ul></li>
 <li><p>Explore <a href="/api-reference/pymilvus/v2.3.x/About.md">PyMilvus API reference</a></p></li>
 </ul>

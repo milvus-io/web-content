@@ -54,11 +54,11 @@ summary: ''
     </button></h2><p>Dieser Leitfaden enthält Anweisungen zur Konfiguration des Chunk-Cache-Mechanismus für eine Milvus-Instanz. Die Konfiguration hängt von der Art und Weise ab, wie Sie die Milvus-Instanz installieren.</p>
 <ul>
 <li><p>Für Milvus-Instanzen, die mit Helm Charts installiert wurden</p>
-<p>Fügen Sie die Konfiguration in die Datei <code translate="no">values.yaml</code> unter dem Abschnitt <code translate="no">config</code> ein. Einzelheiten finden Sie unter <a href="/docs/de/configure-helm.md">Konfigurieren von Milvus mit Helm Charts</a>.</p></li>
+<p>Fügen Sie die Konfiguration in die Datei <code translate="no">values.yaml</code> unter dem Abschnitt <code translate="no">config</code> ein. Einzelheiten finden Sie unter <a href="/docs/de/v2.4.x/configure-helm.md">Konfigurieren von Milvus mit Helm Charts</a>.</p></li>
 <li><p>Für Milvus-Instanzen, die mit Docker Compose installiert wurden</p>
-<p>Fügen Sie die Konfiguration in die Datei <code translate="no">milvus.yaml</code> ein, die Sie zum Starten der Milvus-Instanz verwendet haben. Einzelheiten finden Sie unter <a href="/docs/de/configure-docker.md">Konfigurieren von Milvus mit Docker Compose</a>.</p></li>
+<p>Fügen Sie die Konfiguration in die Datei <code translate="no">milvus.yaml</code> ein, die Sie zum Starten der Milvus-Instanz verwendet haben. Einzelheiten finden Sie unter <a href="/docs/de/v2.4.x/configure-docker.md">Konfigurieren von Milvus mit Docker Compose</a>.</p></li>
 <li><p>Für Milvus-Instanzen, die mit Operator installiert wurden</p>
-<p>Fügen Sie die Konfiguration in den Abschnitt <code translate="no">spec.components</code> der benutzerdefinierten Ressource <code translate="no">Milvus</code> ein. Weitere Informationen finden Sie unter <a href="/docs/de/configure_operator.md">Konfigurieren von Milvus mit Operator</a>.</p></li>
+<p>Fügen Sie die Konfiguration in den Abschnitt <code translate="no">spec.components</code> der benutzerdefinierten Ressource <code translate="no">Milvus</code> ein. Weitere Informationen finden Sie unter <a href="/docs/de/v2.4.x/configure_operator.md">Konfigurieren von Milvus mit Operator</a>.</p></li>
 </ul>
 <h3 id="Configuration-options" class="common-anchor-header">Konfigurationsoptionen</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode</span>:
     <span class="hljs-attr">cache</span>:

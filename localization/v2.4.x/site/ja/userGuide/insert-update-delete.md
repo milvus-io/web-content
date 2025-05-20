@@ -36,7 +36,7 @@ title: 挿入、アップサート、削除
       </svg>
     </button></h2><ul>
 <li><p>選択したSDKがインストールされています。SDKをインストールするには、<a href="https://milvus.io/docs/install-pymilvus.md">SDKのインストールを</a>参照してください。</p></li>
-<li><p>コレクションを作成している。コレクションを作成するには、<a href="/docs/ja/manage-collections.md">Manage Collectionsを</a>参照してください。</p></li>
+<li><p>コレクションを作成している。コレクションを作成するには、<a href="/docs/ja/v2.4.x/manage-collections.md">Manage Collectionsを</a>参照してください。</p></li>
 <li><p>大量のデータを挿入するには、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Data Importを</a>使用することをお勧めします。</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -56,7 +56,7 @@ title: 挿入、アップサート、削除
       </svg>
     </button></h2><p>Milvusコレクションにおけるエンティティとは、コレクション内の識別可能なインスタンスのことです。図書館の本、ゲノムの遺伝子、その他の識別可能なエンティティなど、特定のクラスの明確なメンバーを表します。</p>
 <p>コレクション内のエンティティは、スキーマと呼ばれる共通の属性セットを共有し、フィールド名、データ型、 その他の制約など、各エンティティが準拠しなければならない構造の概要を示す。</p>
-<p>コレクションへのエンティティの挿入を成功させるには、提供されたデータにターゲット・コレクションのスキーマ定義フィールドがすべて含まれている必要があります。さらに、動的フィールドを有効にしている場合に限り、スキーマ定義以外のフィールドを含めることもできます。詳細は、<a href="/docs/ja/enable-dynamic-field.md">Enable Dynamic Field</a> を参照してください。</p>
+<p>コレクションへのエンティティの挿入を成功させるには、提供されたデータにターゲット・コレクションのスキーマ定義フィールドがすべて含まれている必要があります。さらに、動的フィールドを有効にしている場合に限り、スキーマ定義以外のフィールドを含めることもできます。詳細は、<a href="/docs/ja/v2.4.x/enable-dynamic-field.md">Enable Dynamic Field</a> を参照してください。</p>
 <h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -380,7 +380,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は、影響を受けるエンティティの統計情報を含む辞書です。パーティション操作の詳細については、『<a href="/docs/ja/manage-partitions.md">パーティションの管理</a>』を参照してください。</p>
+<p>出力は、影響を受けるエンティティの統計情報を含む辞書です。パーティション操作の詳細については、『<a href="/docs/ja/v2.4.x/manage-partitions.md">パーティションの管理</a>』を参照してください。</p>
 <h2 id="Upsert-entities" class="common-anchor-header">エンティティのアップサート<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -585,7 +585,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は、影響を受けるエンティティの統計情報を含む辞書です。パーティション操作の詳細については、『<a href="/docs/ja/manage-partitions.md">パーティションの管理</a>』を参照してください。</p>
+<p>出力は、影響を受けるエンティティの統計情報を含む辞書です。パーティション操作の詳細については、『<a href="/docs/ja/v2.4.x/manage-partitions.md">パーティションの管理</a>』を参照してください。</p>
 <h2 id="Delete-entities" class="common-anchor-header">エンティティの削除<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -706,7 +706,7 @@ System.out.<span class="hljs-built_in">println</span>(deleteResp.getDeleteCnt())
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>フィルタ式の使用方法の詳細については、「<a href="/docs/ja/get-and-scalar-query.md">Get &amp; Scalar Query</a>」を参照してください。</p></li>
+<p>フィルタ式の使用方法の詳細については、「<a href="/docs/ja/v2.4.x/get-and-scalar-query.md">Get &amp; Scalar Query</a>」を参照してください。</p></li>
 <li><p><strong>パーティション名によるエンティティの削除</strong>。</p>
 <p>特定のパーティションからエンティティを削除したい場合は、<code translate="no">delete()</code> メソッドの<code translate="no">partition_name</code> パラメータでパーティション名を指定できます。次の例は、<code translate="no">blue</code> で始まる色を持つ<code translate="no">partitionA</code> からエンティティを削除します。</p>
 <p><div class="multipleCode">

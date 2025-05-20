@@ -40,45 +40,77 @@ summary: >-
     </button></h2><p>Milvus 2.5 führt eine neue Version der API ein, die die Erteilungsoperation rationalisiert. Sie müssen nicht mehr den Objekttyp nachschlagen, wenn Sie einer Rolle ein Recht gewähren. Im Folgenden sind die Parameter und die entsprechenden Erklärungen aufgeführt.</p>
 <ul>
 <li><p><strong>role_name:</strong> Der Name der Zielrolle, für die ein oder mehrere Privileg(e) oder eine oder mehrere Privileggruppen gewährt werden sollen.</p></li>
-<li><p><strong>Ressource</strong>: Die Zielressource eines Zugriffsrechts, die eine bestimmte Instanz, Datenbank oder Sammlung sein kann. In der folgenden Tabelle wird erläutert, wie die Ressource in der Methode <code translate="no">client.grantV2()</code> anzugeben ist.</p>
-<p><table>
-<tr>
-<th><p><strong>Ebene</strong></p></th>
-<th><p><strong>Ressource</strong></p></th>
-<th><p><strong>Gewährung Methode</strong></p></th>
-<th><p><strong>Hinweise</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>Sammlung</strong></p></td>
-<td><p>Eine bestimmte Sammlung</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>Geben Sie den Namen Ihrer Zielsammlung und den Namen der Datenbank ein, zu der die Zielsammlung gehört.</p></td>
-</tr>
-<tr>
-<td><p>Alle Sammlungen unter einer bestimmten Datenbank</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>Geben Sie den Namen Ihrer Zieldatenbank und einen Platzhalter <code translate="no"></em></code> als Name der Sammlung ein.</p></td>
-</tr>
-<tr>
-<td><p><strong>Datenbank</strong></p></td>
-<td><p>Eine bestimmte Datenbank</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>Geben Sie den Namen Ihrer Zieldatenbank und einen Platzhalter <code translate="no"></em></code> als Name der Sammlung ein.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>Alle Datenbanken unter der aktuellen Instanz</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>Eingabe <code translate="no"><em></code> als Name der Datenbank und <code translate="no"></em></code> als Name der Sammlung.</p></td>
-</tr>
-<tr>
-<td><p><strong>Instanz</strong></p></td>
-<td><p>Die aktuelle Instanz</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>Eingabe <code translate="no"><em></code> als Name der Datenbank und <code translate="no"></em></code> als Name der Sammlung.</p></td>
-</tr>
-</table></p></li>
-<li><p><strong>Privileg</strong>: Das spezifische Privileg oder die <a href="/docs/de/privilege_group.md">Privileggruppe</a>, die Sie einer Rolle gewähren müssen. Derzeit bietet Milvus 56 Arten von Privilegien, die Sie gewähren können. In der folgenden Tabelle sind die Privilegien in Milvus aufgelistet.</p>
+<li><p><strong>Ressource</strong>: Die Zielressource eines Zugriffsrechts, die eine bestimmte Instanz, Datenbank oder Sammlung sein kann.</p></li>
+</ul>
+<p>Die folgende Tabelle erläutert, wie die Ressource in der Methode <code translate="no">client.grantV2()</code> anzugeben ist.</p>
+<table>
+   <tr>
+     <th><p><strong>Ebene</strong></p></th>
+     <th><p><strong>Ressource</strong></p></th>
+     <th><p><strong>Erteilung Methode</strong></p></th>
+     <th><p><strong>Hinweise</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Sammlung</strong></p></td>
+     <td><p>Eine bestimmte Sammlung</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Geben Sie den Namen Ihrer Zielsammlung und den Namen der Datenbank ein, zu der die Zielsammlung gehört.</p></td>
+   </tr>
+   <tr>
+     <td><p>Alle Sammlungen unter einer bestimmten Datenbank</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Geben Sie den Namen der Zieldatenbank und einen Platzhalter <code translate="no">*</code> als Sammlungsnamen ein.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Datenbank</strong></p></td>
+     <td><p>Eine bestimmte Datenbank</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Geben Sie den Namen Ihrer Zieldatenbank und einen Platzhalter <code translate="no">*</code> als Sammlungsnamen ein.</p></td>
+   </tr>
+   <tr>
+     <td><p>Alle Datenbanken unter der aktuellen Instanz</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Geben Sie als Datenbanknamen <code translate="no">*</code> und als Sammlungsnamen <code translate="no">*</code> ein.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Instanz</strong></p></td>
+     <td><p>Die aktuelle Instanz</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Geben Sie als Datenbanknamen <code translate="no">*</code> und als Sammlungsnamen <code translate="no">*</code> ein.</p></td>
+   </tr>
+</table>
+<ul>
+<li><p><strong>Privileg</strong>: Die spezifische Berechtigung oder <a href="/docs/de/privilege_group.md">Berechtigungsgruppe</a>, die Sie einer Rolle gewähren müssen. Derzeit bietet Milvus 56 Arten von Privilegien, die Sie gewähren können. In der folgenden Tabelle sind die Privilegien in Milvus aufgeführt.</p>
 <p><div class="alert note"></p>
 <p>Die Spalte "Typ" in der Tabelle dient dazu, Ihnen die schnelle Suche nach Privilegien zu erleichtern und wird nur zu Klassifizierungszwecken verwendet. Bei der Erteilung von Privilegien müssen Sie die Typen nicht verstehen. Sie müssen nur die entsprechenden Berechtigungen eingeben.</p>
 <p></div></p>

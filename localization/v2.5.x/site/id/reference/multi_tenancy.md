@@ -1,10 +1,12 @@
 ---
 id: multi_tenancy.md
-related_key: multi-tenancy
-summary: Multi-penyewaan di Milvus.
-title: Strategi multi-penyewaan
+title: Menerapkan Multi-tenancy
+summary: >-
+  Di Milvus, multi-tenancy berarti beberapa pelanggan atau tim - yang disebut
+  sebagai penyewa - berbagi klaster yang sama dengan tetap mempertahankan
+  lingkungan data yang terisolasi.
 ---
-<h1 id="Multi-tenancy-strategies" class="common-anchor-header">Strategi multi-penyewaan<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
+<h1 id="Implement-Multi-tenancy" class="common-anchor-header">Menerapkan Multi-tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,9 +21,9 @@ title: Strategi multi-penyewaan
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam banyak kasus penggunaan, pengembang ingin menjalankan satu cluster Milvus dan melayani beberapa penyewa, seperti beberapa tim produk, atau jutaan pengguna akhir. Panduan ini menjelaskan beberapa strategi berbeda untuk mencapai multi-tenancy di Milvus.</p>
-<p>Milvus dirancang untuk mendukung multi-tenancy di tingkat database, koleksi, atau partisi. Tujuan dari multi-tenancy adalah untuk memisahkan data dan sumber daya satu sama lain. Menerapkan multi-tenancy pada tingkat yang berbeda dapat mencapai tingkat isolasi yang berbeda tetapi juga melibatkan biaya yang berbeda. Di sini kami menjelaskan trade-off dari keduanya.</p>
-<h2 id="Database-oriented-multi-tenancy" class="common-anchor-header">Multi-tenancy yang berorientasi pada basis data<button data-href="#Database-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h1><p>Di Milvus, multi-tenancy berarti beberapa pelanggan atau tim - yang disebut sebagai <strong>penyewa</strong>- berbagi cluster yang sama dengan tetap mempertahankan lingkungan data yang terisolasi.</p>
+<p>Milvus mendukung empat strategi multi-tenancy, masing-masing menawarkan pertukaran yang berbeda antara skalabilitas, isolasi data, dan fleksibilitas. Panduan ini memandu Anda melalui setiap opsi, membantu Anda memilih strategi yang paling sesuai untuk kasus penggunaan Anda.</p>
+<h2 id="Multi-tenancy-strategies" class="common-anchor-header">Strategi multi-penyewaan<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +38,52 @@ title: Strategi multi-penyewaan
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sejak Milvus versi 2.2.9, Anda dapat membuat beberapa database dalam satu cluster Milvus. Fitur ini memungkinkan untuk mencapai multi-tenancy berorientasi database dengan memberikan database untuk setiap penyewa, sehingga mereka dapat membuat koleksi mereka sendiri. Pendekatan ini memberikan isolasi data dan sumber daya terbaik untuk penyewa, tetapi terbatas pada 64 database dalam satu cluster.</p>
-<h2 id="Collection-oriented-multi-tenancy" class="common-anchor-header">Penyewaan multi-penyewa yang berorientasi pada koleksi<button data-href="#Collection-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus mendukung multi-tenancy pada empat level: <strong>Basis Data</strong>, <strong>Koleksi</strong>, <strong>Partisi</strong>, dan <strong>Kunci Partisi</strong>.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Penyewaan multi-tenant tingkat basis data</h3><p>Dengan multi-tenancy tingkat basis data, setiap penyewa menerima <a href="/docs/id/manage_databases.md">basis data</a> yang sesuai yang berisi satu atau beberapa koleksi.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Penyewaan Multi Tingkat Basis Data</span> </span></p>
+<ul>
+<li><p><strong>Skalabilitas</strong>: Strategi multi-penyewaan tingkat basis data mendukung maksimum 64 penyewa secara default.</p></li>
+<li><p><strong>Isolasi data</strong>: Data di setiap basis data dipisahkan sepenuhnya, menawarkan isolasi data tingkat perusahaan yang ideal untuk lingkungan yang diatur atau pelanggan dengan kebutuhan kepatuhan yang ketat.</p></li>
+<li><p><strong>Fleksibilitas</strong>: Setiap basis data dapat memiliki koleksi dengan skema yang berbeda, menawarkan pengaturan data yang sangat fleksibel dan memungkinkan setiap penyewa untuk memiliki skema datanya sendiri.</p></li>
+<li><p><strong>Lainnya</strong>: Strategi ini juga mendukung RBAC, memungkinkan kontrol yang lebih baik atas akses pengguna per penyewa. Selain itu, Anda bisa secara fleksibel memuat atau melepaskan data untuk penyewa tertentu untuk mengelola data panas dan dingin secara efektif.</p></li>
+</ul>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-penyewaan tingkat koleksi</h3><p>Dengan multi-tenancy tingkat koleksi, setiap penyewa diberi <a href="/docs/id/manage-collections.md">koleksi</a>, menawarkan isolasi data yang kuat.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Multi Penyewaan Tingkat Koleksi</span> </span></p>
+<ul>
+<li><p><strong>Skalabilitas</strong>: Karena sebuah klaster dapat menampung hingga 65.536 koleksi secara default, strategi ini dapat mengakomodasi jumlah penyewa yang sama di dalam klaster.</p></li>
+<li><p><strong>Isolasi data</strong>: Koleksi secara fisik terisolasi satu sama lain. Strategi ini memberikan isolasi data yang kuat.</p></li>
+<li><p><strong>Fleksibilitas</strong>: Strategi ini memungkinkan setiap koleksi memiliki skema sendiri, mengakomodasi penyewa dengan skema data yang berbeda.</p></li>
+<li><p><strong>Lainnya</strong>: Strategi ini juga mendukung RBAC, yang memungkinkan kontrol akses granular atas penyewa. Selain itu, Anda dapat secara fleksibel memuat atau melepaskan data untuk penyewa tertentu untuk mengelola data panas dan data dingin secara efektif.</p></li>
+</ul>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-penyewaan tingkat partisi</h3><p>Dalam multi-penyewaan tingkat partisi, setiap penyewa ditugaskan ke <a href="/docs/id/manage-partitions.md">partisi</a> yang dibuat secara manual dalam koleksi bersama.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Multi Penyewaan Tingkat Partisi</span> </span></p>
+<ul>
+<li><p><strong>Skalabilitas</strong>: Sebuah koleksi dapat menampung hingga 1.024 partisi per koleksi, sehingga memungkinkan jumlah penyewa yang sama di dalamnya.</p></li>
+<li><p><strong>Isolasi data</strong>: Data setiap penyewa dipisahkan secara fisik oleh partisi.</p></li>
+<li><p><strong>Fleksibilitas</strong>: Strategi ini mengharuskan semua penyewa berbagi skema data yang sama. Dan partisi perlu dibuat secara manual.</p></li>
+<li><p><strong>Lainnya</strong>: RBAC tidak didukung pada tingkat partisi. Penyewa dapat ditanyakan secara individual atau di beberapa partisi, yang membuat pendekatan ini cocok untuk skenario yang melibatkan kueri agregat atau analitik di seluruh segmen penyewa. Selain itu, Anda dapat secara fleksibel memuat atau melepaskan data untuk penyewa tertentu untuk mengelola data panas dan dingin secara efektif.</p></li>
+</ul>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Mempartisi multi-penyewaan tingkat kunci</h3><p>Dengan strategi ini, semua penyewa berbagi satu koleksi dan skema, tetapi data setiap penyewa secara otomatis dialihkan ke dalam 16 partisi yang terisolasi secara fisik berdasarkan nilai <a href="/docs/id/use-partition-key.md">kunci partisi</a>. Meskipun setiap partisi fisik dapat berisi beberapa penyewa, data dari penyewa yang berbeda tetap terpisah secara logis.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Tingkat Kunci Partisi Multi Penyewaan</span> </span></p>
+<ul>
+<li><p><strong>Skalabilitas</strong>: Strategi tingkat kunci partisi menawarkan pendekatan yang paling skalabel, mendukung jutaan penyewa.</p></li>
+<li><p><strong>Isolasi data</strong>: Strategi ini menawarkan isolasi data yang relatif lemah karena beberapa penyewa dapat berbagi partisi fisik.</p></li>
+<li><p><strong>Fleksibilitas</strong>: Karena semua penyewa harus berbagi skema data yang sama, strategi ini menawarkan fleksibilitas data yang terbatas.</p></li>
+<li><p><strong>Lainnya</strong>: RBAC tidak didukung pada tingkat kunci partisi. Penyewa dapat ditanyakan secara individual atau di beberapa partisi, yang membuat pendekatan ini sangat cocok untuk skenario yang melibatkan kueri agregat atau analitik di seluruh segmen penyewa.</p></li>
+</ul>
+<h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">Memilih strategi multi-penyewaan yang tepat<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,55 +98,77 @@ title: Strategi multi-penyewaan
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ada dua cara yang memungkinkan untuk mencapai multi-penyewaan berorientasi koleksi.</p>
-<h3 id="One-collection-for-all-tenants" class="common-anchor-header">Satu koleksi untuk semua penyewa</h3><p>Menggunakan satu koleksi untuk mengimplementasikan multi-penyewaan dengan menambahkan bidang penyewa untuk membedakan antara penyewa adalah pilihan yang sederhana. Saat melakukan pencarian ANN untuk penyewa tertentu, tambahkan ekspresi filter untuk menyaring semua entitas yang dimiliki oleh penyewa lain. Ini adalah cara paling sederhana untuk mencapai multi-tenancy. Namun, perlu diketahui bahwa kinerja filter dapat menjadi penghambat pencarian ANN. Untuk meningkatkan kinerja pencarian, Anda dapat mengoptimalkan dengan multi-tenancy berorientasi partisi di bawah ini.</p>
-<h3 id="One-collection-per-tenant" class="common-anchor-header">Satu koleksi per penyewa</h3><p>Pendekatan lain adalah membuat koleksi untuk setiap penyewa untuk menyimpan datanya sendiri, alih-alih menyimpan data semua penyewa dalam satu koleksi. Hal ini memberikan isolasi data dan kinerja kueri yang lebih baik. Namun, perlu diingat bahwa pendekatan ini membutuhkan lebih banyak sumber daya dalam penjadwalan dan terbatas pada 10.000 koleksi dalam satu klaster.</p>
-<h2 id="Partition-oriented-multi-tenancy" class="common-anchor-header">Multi-penyewaan berorientasi partisi<button data-href="#Partition-oriented-multi-tenancy" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Ada dua cara untuk mencapai multi-penyewaan berorientasi partisi:</p>
-<h3 id="One-partition-per-tenant" class="common-anchor-header">Satu partisi per penyewa</h3><p>Mengelola satu koleksi jauh lebih mudah daripada mengelola banyak koleksi. Daripada membuat banyak koleksi, pertimbangkan untuk menetapkan satu partisi untuk setiap penyewa untuk mencapai isolasi data yang fleksibel dan manajemen memori. Performa pencarian multi-penyewaan berorientasi partisi jauh lebih baik daripada multi-penyewaan berorientasi koleksi. Namun, perlu diperhatikan bahwa jumlah penyewa koleksi tidak boleh melebihi jumlah maksimum partisi yang dapat ditampung oleh sebuah koleksi.</p>
-<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">Penyewaan multi-penyewa berbasis kunci partisi</h3><p>Milvus 2.2.9 memperkenalkan fitur baru bernama kunci partisi. Pada saat pembuatan koleksi, tentukan bidang penyewa dan jadikan bidang tersebut sebagai kunci partisi. Milvus akan menyimpan entitas dalam sebuah partisi sesuai dengan nilai hash dari field kunci partisi. Ketika melakukan pencarian ANN, Milvus hanya mencari partisi yang berisi kunci partisi. Hal ini akan mengurangi cakupan pencarian sehingga mencapai kinerja yang lebih baik daripada tanpa kunci partisi.</p>
-</div>
-<p>Strategi ini menghilangkan batasan jumlah maksimum penyewa yang dapat didukung oleh koleksi Milvus dan sangat menyederhanakan manajemen sumber daya karena Milvus secara otomatis mengelola partisi untuk Anda.</p>
-<p>Sebagai rangkuman, Anda bisa menggunakan salah satu atau beberapa strategi multi-tenancy di atas untuk membentuk solusi Anda sendiri. Tabel berikut membuat perbandingan di antara strategi-strategi ini dalam hal isolasi data, kinerja pencarian, dan jumlah maksimum penyewa.</p>
+    </button></h2><p>Tabel di bawah ini menawarkan perbandingan komprehensif antara empat tingkat strategi multi-tenancy.</p>
 <table>
-<thead>
-<tr><th></th><th>Isolasi data</th><th>Performa pencarian.</th><th>Maks. jumlah penyewa</th><th>Merekomendasikan skenario</th></tr>
-</thead>
-<tbody>
-<tr><td>Berorientasi pada basis data</td><td>Kuat</td><td>Kuat</td><td>64</td><td>Untuk mereka yang membutuhkan koleksi yang bervariasi dengan proyek, terutama cocok untuk isolasi data antar departemen dalam organisasi Anda.</td></tr>
-<tr><td>Satu koleksi untuk semua</td><td>Lemah</td><td>Sedang</td><td>N/A</td><td>Untuk mereka yang memiliki sumber daya terbatas dan tidak peka terhadap isolasi data.</td></tr>
-<tr><td>Satu koleksi per penyewa</td><td>Kuat</td><td>Kuat</td><td>Kurang dari 10.000</td><td>Untuk yang memiliki kurang dari 10.000 penyewa per klaster.</td></tr>
-<tr><td>Satu partisi per penyewa</td><td>Sedang</td><td>Kuat</td><td>1,024</td><td>Untuk yang memiliki kurang dari 1.024 penyewa per koleksi.</td></tr>
-<tr><td>Berbasis kunci partisi</td><td>Sedang</td><td>Kuat</td><td>10,000,000+</td><td>Untuk mereka yang memprediksi peningkatan penyewa yang cepat menjadi jutaan.</td></tr>
-</tbody>
+   <tr>
+     <th></th>
+     <th><p><strong>Tingkat basis data</strong></p></th>
+     <th><p><strong>Tingkat koleksi</strong></p></th>
+     <th><p><strong>Tingkat partisi</strong></p></th>
+     <th><p><strong>Tingkat kunci partisi</strong></p></th>
+   </tr>
+   <tr>
+     <td><p><strong>Isolasi Data</strong></p></td>
+     <td><p>Fisik</p></td>
+     <td><p>Fisik</p></td>
+     <td><p>Fisik</p></td>
+     <td><p>Fisik + Logis</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Maks. jumlah penyewa</strong></p></td>
+     <td><p>Secara default, 64. Anda dapat meningkatkannya dengan memodifikasi parameter <code translate="no">maxDatabaseNum</code> di file konfigurasi Milvus.yaml. </p></td>
+     <td><p>Secara default, 65.536. Anda dapat meningkatkannya dengan memodifikasi parameter <code translate="no">maxCollectionNum</code> dalam file konfigurasi Milvus.yaml.</p></td>
+     <td><p>Hingga 1.024 per koleksi. </p></td>
+     <td><p>Jutaan</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Fleksibilitas skema data</strong></p></td>
+     <td><p>Tinggi</p></td>
+     <td><p>Sedang</p></td>
+     <td><p>Rendah</p></td>
+     <td><p>Rendah</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Dukungan RBAC</strong></p></td>
+     <td><p>Ya</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Tidak</p></td>
+     <td><p>Tidak</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Performa pencarian</strong></p></td>
+     <td><p>Kuat</p></td>
+     <td><p>Kuat</p></td>
+     <td><p>Sedang</p></td>
+     <td><p>Sedang</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Dukungan pencarian lintas penyewa</strong></p></td>
+     <td><p>Tidak ada</p></td>
+     <td><p>Tidak</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Ya</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Dukungan untuk penanganan data panas dan dingin yang efektif</strong></p></td>
+     <td><p>Ya</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Tidak Saat ini, tidak didukung untuk strategi tingkat kunci partisi.</p></td>
+   </tr>
 </table>
-<h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><a href="/docs/id/manage_databases.md">Mengelola</a><a href="/docs/id/schema.md">Skema</a><a href="/docs/id/manage_databases.md">Basis Data</a></p>
+<p>Ada beberapa faktor yang perlu dipertimbangkan ketika Anda memilih strategi multi-tenancy di Milvus.</p>
+<ol>
+<li><p><strong>Skalabilitas:</strong> Kunci Partisi &gt; Partisi &gt; Koleksi &gt; Basis Data</p>
+<p>Jika Anda berharap dapat mendukung penyewa dalam jumlah yang sangat banyak (jutaan atau lebih), gunakan strategi tingkat kunci partisi.</p></li>
+<li><p><strong>Persyaratan isolasi data yang kuat</strong>: Basis data = Koleksi &gt; Partisi &gt; Kunci Partisi</p>
+<p>Pilih strategi tingkat basis data, koleksi, atau partisi jika Anda memiliki persyaratan isolasi data fisik yang ketat.</p></li>
+<li><p><strong>Skema data yang fleksibel untuk setiap data penyewa:</strong> Database &gt; Koleksi &gt; Partisi &gt; Kunci Partisi</p>
+<p>Strategi tingkat basis data dan tingkat koleksi memberikan fleksibilitas penuh dalam skema data. Jika struktur data penyewa Anda berbeda, pilihlah multi-tenancy tingkat basis data atau tingkat koleksi.</p></li>
+<li><p><strong>Lainnya</strong></p>
+<ol>
+<li><p><strong>Performa:</strong> Performa pencarian ditentukan oleh berbagai faktor, termasuk indeks, parameter pencarian, dan konfigurasi mesin. Milvus juga mendukung penyetelan kinerja. Disarankan untuk menguji performa aktual sebelum Anda memilih strategi multi-tenancy.</p></li>
+<li><p><strong>Penanganan data panas dan dingin yang efektif:</strong> Saat ini, strategi tingkat basis data, tingkat koleksi, dan tingkat partisi semuanya mendukung penanganan data panas dan dingin.</p></li>
+<li><p><strong>Pencarian lintas penyewa</strong>: Hanya strategi tingkat partisi dan tingkat kunci partisi yang mendukung pencarian lintas penyewa.</p></li>
+</ol></li>
+</ol>

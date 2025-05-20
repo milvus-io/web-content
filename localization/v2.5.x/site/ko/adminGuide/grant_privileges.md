@@ -37,44 +37,76 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
     </button></h2><p>Milvus 2.5에서는 권한 부여 작업을 간소화하는 새로운 버전의 API가 도입되었습니다. 역할에 권한을 부여할 때 더 이상 개체 유형을 조회할 필요가 없습니다. 다음은 매개변수와 해당 설명입니다.</p>
 <ul>
 <li><p><strong>role_name:</strong> 권한 또는 권한 그룹을 부여해야 하는 대상 역할의 이름입니다.</p></li>
-<li><p><strong>리소스</strong>: 특정 인스턴스, 데이터베이스 또는 컬렉션이 될 수 있는 권한의 대상 리소스입니다. 다음 표에서는 <code translate="no">client.grantV2()</code> 메서드에서 리소스를 지정하는 방법을 설명합니다.</p>
-<p><table>
-<tr>
-<th><p><strong>레벨</strong></p></th>
-<th><p><strong>리소스</strong></p></th>
-<th><p><strong>부여 방법</strong></p></th>
-<th><p><strong>참고</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>컬렉션</strong></p></td>
-<td><p>특정 컬렉션</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>대상 컬렉션의 이름과 대상 컬렉션이 속한 데이터베이스의 이름을 입력합니다.</p></td>
-</tr>
-<tr>
-<td><p>특정 데이터베이스 아래의 모든 컬렉션</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>대상 데이터베이스의 이름과 와일드카드( <code translate="no"></em></code> 를 컬렉션 이름으로 입력합니다.</p></td>
-</tr>
-<tr>
-<td><p><strong>데이터베이스</strong></p></td>
-<td><p>특정 데이터베이스</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>대상 데이터베이스의 이름과 와일드카드( <code translate="no"></em></code> 를 컬렉션 이름으로 입력합니다.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>현재 인스턴스 아래의 모든 데이터베이스</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>입력 <code translate="no"><em></code> 을 데이터베이스 이름으로, 그리고 <code translate="no"></em></code> 을 컬렉션 이름으로 입력합니다.</p></td>
-</tr>
-<tr>
-<td><p><strong>인스턴스</strong></p></td>
-<td><p>현재 인스턴스</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>입력 <code translate="no"><em></code> 을 데이터베이스 이름으로, 그리고 <code translate="no"></em></code> 을 컬렉션 이름으로 입력합니다.</p></td>
-</tr>
-</table></p></li>
+<li><p><strong>리소스</strong>: 특정 인스턴스, 데이터베이스 또는 컬렉션이 될 수 있는 권한의 대상 리소스입니다.</p></li>
+</ul>
+<p>다음 표에서는 <code translate="no">client.grantV2()</code> 메서드에서 리소스를 지정하는 방법을 설명합니다.</p>
+<table>
+   <tr>
+     <th><p><strong>레벨</strong></p></th>
+     <th><p><strong>리소스</strong></p></th>
+     <th><p><strong>부여 방법</strong></p></th>
+     <th><p><strong>참고</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>컬렉션</strong></p></td>
+     <td><p>특정 컬렉션</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>대상 컬렉션의 이름과 대상 컬렉션이 속한 데이터베이스의 이름을 입력합니다.</p></td>
+   </tr>
+   <tr>
+     <td><p>특정 데이터베이스 아래의 모든 컬렉션</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>대상 데이터베이스의 이름과 와일드카드 <code translate="no">*</code> 를 컬렉션 이름으로 입력합니다.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>데이터베이스</strong></p></td>
+     <td><p>특정 데이터베이스</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>대상 데이터베이스의 이름과 와일드카드 <code translate="no">*</code> 를 컬렉션 이름으로 입력합니다.</p></td>
+   </tr>
+   <tr>
+     <td><p>현재 인스턴스 아래의 모든 데이터베이스</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>데이터베이스 이름으로 <code translate="no">*</code>, 컬렉션 이름으로 <code translate="no">*</code> 을 입력합니다.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>인스턴스</strong></p></td>
+     <td><p>현재 인스턴스</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>데이터베이스 이름으로 <code translate="no">*</code>, 컬렉션 이름으로 <code translate="no">*</code> 을 입력합니다.</p></td>
+   </tr>
+</table>
+<ul>
 <li><p><strong>권한</strong>: 역할에 부여해야 하는 특정 권한 또는 <a href="/docs/ko/privilege_group.md">권한 그룹입니다</a>. 현재 Milvus는 부여할 수 있는 56가지 유형의 권한을 제공합니다. 아래 표에는 Milvus의 권한이 나열되어 있습니다.</p>
 <p><div class="alert note"></p>
 <p>아래 표의 유형 열은 권한을 빠르게 조회할 수 있도록 사용자별로 구분한 것으로, 분류 목적으로만 사용됩니다. 권한을 부여할 때 유형을 이해할 필요는 없습니다. 해당 권한을 입력하기만 하면 됩니다.</p>

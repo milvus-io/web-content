@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>No Milvus, é possível criar um esquema de coleção definindo os nomes e tipos de dados para cada campo da coleção. Quando se adiciona um campo ao esquema, é necessário certificar-se de que esse campo está incluído na entidade que se pretende inserir. Se pretender que alguns campos sejam opcionais, uma opção é ativar o campo dinâmico.</p>
-<p>O campo dinâmico é um campo reservado chamado <code translate="no">$meta</code>, que é do tipo JavaScript Object Notation (JSON). Quaisquer campos nas entidades que não estejam definidos no esquema serão armazenados neste campo JSON reservado como pares de valores chave.</p>
+<p>O campo dinâmico é um campo reservado denominado <strong>$meta</strong>, que é do tipo JavaScript Object Notation (JSON). Quaisquer campos nas entidades que não estejam definidos no esquema serão armazenados neste campo JSON reservado como pares de valores chave.</p>
 <p>Para uma coleção com o campo dinâmico ativado, pode utilizar chaves no campo dinâmico para filtragem escalar, tal como faria com campos explicitamente definidos no esquema.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Ativar o campo dinâmico<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,7 +56,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>As colecções criadas utilizando o método descrito em <a href="/docs/pt/create-collection-instantly.md">Criar coleção instantaneamente</a> têm o campo dinâmico ativado por predefinição. Também é possível ativar o campo dinâmico manualmente ao criar uma coleção com definições personalizadas.</p>
+    </button></h2><p>É possível ativar o campo dinâmico manualmente ao criar uma coleção com definições personalizadas.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -153,7 +153,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando o campo dinâmico está ativado na sua coleção, todos os campos e respectivos valores que não estão definidos no esquema serão armazenados como pares de valores chave no campo dinâmico.</p>
+    </button></h2><p>Quando o campo dinâmico está ativado na sua coleção, todos os campos e respectivos valores que não estão definidos no esquema serão armazenados como pares chave-valor no campo dinâmico.</p>
 <p>Por exemplo, suponha que o esquema da coleção define apenas dois campos, denominados <code translate="no">id</code> e <code translate="no">vector</code>, com o campo dinâmico ativado. Agora, insira o seguinte conjunto de dados nesta coleção.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -331,7 +331,7 @@ curl --request POST \
 <li><p>Os valores suportados em <code translate="no">json_cast_type</code> são <code translate="no">bool</code> (ou <code translate="no">BOOL</code>), <code translate="no">double</code> (ou <code translate="no">DOUBLE</code>) e <code translate="no">varchar</code> (ou <code translate="no">VARCHAR</code>).</p></li>
 <li><p>Se a análise ou a conversão falhar (por exemplo, ao tentar analisar uma cadeia de caracteres como double), essas linhas serão ignoradas no índice.</p></li>
 </ul></li>
-<li><p><strong>Especifique o caminho JSON</strong> para essa chave como <code translate="no">json_path</code>. Como o campo dinâmico é armazenado como JSON, pode especificar algo como <code translate="no">&quot;color&quot;</code>, ou se tiver estruturas aninhadas, pode especificar caminhos mais profundos (por exemplo, <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
+<li><p><strong>Especifique o caminho JSON</strong> para essa chave como <code translate="no">json_path</code>. Uma vez que o campo dinâmico é armazenado como JSON, pode especificar algo como <code translate="no">&quot;color&quot;</code>, ou se tiver estruturas aninhadas, pode especificar caminhos mais profundos (por exemplo, <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
 <li><p><strong>Crie um índice INVERTED</strong>. Atualmente, apenas o tipo <code translate="no">INVERTED</code> é suportado para a indexação do caminho JSON.</p></li>
 </ol>
 <p>Para obter detalhes sobre parâmetros e considerações, consulte <a href="/docs/pt/use-json-fields.md#Index-a-JSON-field">Indexar um campo JSON</a>.</p>

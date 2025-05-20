@@ -39,8 +39,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>В Milvus вы можете создать схему коллекции, задав имена и типы данных для каждого поля в коллекции. Когда вы добавляете поле в схему, убедитесь, что оно включено в сущность, которую вы собираетесь вставить. Если вы хотите, чтобы некоторые поля были необязательными, одним из вариантов является включение динамического поля.</p>
-<p>Динамическое поле - это зарезервированное поле с именем <code translate="no">$meta</code>, которое имеет тип JavaScript Object Notation (JSON). Любые поля в сущностях, не определенные в схеме, будут храниться в этом зарезервированном поле JSON в виде пар ключ-значение.</p>
-<p>Для коллекции с включенным динамическим полем можно использовать ключи в динамическом поле для скалярной фильтрации, как и в случае с полями, явно определенными в схеме.</p>
+<p>Динамическое поле - это зарезервированное поле с именем <strong>$meta</strong>, которое имеет тип JavaScript Object Notation (JSON). Любые поля сущностей, которые не определены в схеме, будут храниться в этом зарезервированном поле JSON в виде пар ключ-значение.</p>
+<p>Для коллекции с включенным динамическим полем вы можете использовать ключи в динамическом поле для скалярной фильтрации, как и для полей, явно определенных в схеме.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Включение динамического поля<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +56,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Коллекции, созданные с помощью метода, описанного в разделе <a href="/docs/ru/create-collection-instantly.md">"Создать коллекцию мгновенно"</a>, по умолчанию имеют включенное динамическое поле. Вы также можете включить динамическое поле вручную при создании коллекции с пользовательскими настройками.</p>
+    </button></h2><p>Вы можете включить динамическое поле вручную при создании коллекции с пользовательскими настройками.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -153,7 +153,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Когда в коллекции включено динамическое поле, все поля и их значения, которые не определены в схеме, будут храниться в динамическом поле в виде пар ключ-значение.</p>
+    </button></h2><p>Когда в коллекции включено динамическое поле, все поля и их значения, не определенные в схеме, будут храниться в виде пар ключ-значение в динамическом поле.</p>
 <p>Например, предположим, что в схеме вашей коллекции определены только два поля <code translate="no">id</code> и <code translate="no">vector</code> с включенным динамическим полем. Теперь вставьте в эту коллекцию следующий набор данных.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>

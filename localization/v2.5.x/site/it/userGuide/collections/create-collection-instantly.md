@@ -40,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Una collezione è una tabella bidimensionale con colonne fisse e righe variabili. Ogni colonna rappresenta un campo e ogni riga rappresenta un'entità. Per implementare questa gestione strutturale dei dati è necessario uno schema. Ogni entità da inserire deve soddisfare i vincoli definiti nello schema.</p>
-<p>Le applicazioni AIGC di solito utilizzano database vettoriali come base di conoscenza per gestire i dati generati durante l'interazione tra gli utenti e i Large Language Models (LLM). Tali basi di conoscenza sono pressoché simili. Per accelerare l'uso dei cluster Milvus in questi scenari, è disponibile un metodo istantaneo per creare una raccolta con solo due parametri, ovvero il nome della raccolta e la dimensionalità del campo vettoriale.</p>
+<p>Le applicazioni AIGC di solito utilizzano database vettoriali come base di conoscenza per gestire i dati generati durante l'interazione tra gli utenti e i Large Language Models (LLM). Tali basi di conoscenza sono pressoché simili. Per accelerare l'uso dei cluster Milvus in questi scenari, è disponibile un metodo istantaneo per creare una raccolta con due soli parametri, ovvero il nome della raccolta e la dimensionalità del campo vettoriale.</p>
 <p>Quando si crea una collezione istantanea con le impostazioni predefinite, si applicano le seguenti impostazioni:</p>
 <ul>
 <li><p>I campi primari e vettoriali vengono aggiunti allo schema<strong>(id</strong> e <strong>vettore</strong>).</p></li>

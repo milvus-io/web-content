@@ -117,7 +117,7 @@ entities = [
 <p><b>Hinweise</b></p>
 <p>Die Vektordimensionen müssen vom Typ Python <code translate="no">int</code> oder <code translate="no">numpy.integer</code> sein, und die Werte müssen vom Typ Python <code translate="no">float</code> oder <code translate="no">numpy.floating</code> sein.</p>
 </div>
-<p>Zum Erzeugen von Einbettungen können Sie auch das in der PyMilvus-Bibliothek enthaltene Paket <code translate="no">model</code> verwenden, das eine Reihe von Einbettungsfunktionen bietet. Einzelheiten finden Sie unter <a href="/docs/de/embeddings.md">Einbettungen</a>.</p>
+<p>Zum Erzeugen von Einbettungen können Sie auch das in der PyMilvus-Bibliothek enthaltene Paket <code translate="no">model</code> verwenden, das eine Reihe von Einbettungsfunktionen bietet. Einzelheiten finden Sie unter <a href="/docs/de/v2.4.x/embeddings.md">Einbettungen</a>.</p>
 <h2 id="Create-a-collection-with-a-sparse-vector-field" class="common-anchor-header">Erstellen einer Sammlung mit einem spärlichen Vektorfeld<button data-href="#Create-a-collection-with-a-sparse-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,7 +214,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">metric_type</code>: Nur die <code translate="no">IP</code> (Inner Product) Distanzmetrik wird für spärliche Vektoren unterstützt.</p></li>
 <li><p><code translate="no">params.drop_ratio_build</code>: Der Index-Parameter, der speziell für spärliche Vektoren verwendet wird. Er steuert den Anteil der kleinen Vektorwerte, die während des Indizierungsprozesses ausgeschlossen werden. Dieser Parameter ermöglicht eine Feinabstimmung des Kompromisses zwischen Effizienz und Genauigkeit, indem kleine Werte bei der Indexerstellung außer Acht gelassen werden. Wenn beispielsweise <code translate="no">drop_ratio_build = 0.3</code> gewählt wird, werden während der Indexerstellung alle Werte aus allen spärlichen Vektoren gesammelt und sortiert. Die kleinsten 30 % dieser Werte werden nicht in den Index aufgenommen, wodurch die Rechenlast bei der Suche verringert wird.</p></li>
 </ul>
-<p>Weitere Informationen finden Sie unter <a href="/docs/de/index.md">In-Memory-Index</a>.</p>
+<p>Weitere Informationen finden Sie unter <a href="/docs/de/v2.4.x/index.md">In-Memory-Index</a>.</p>
 <h2 id="Perform-ANN-search" class="common-anchor-header">ANN-Suche durchführen<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

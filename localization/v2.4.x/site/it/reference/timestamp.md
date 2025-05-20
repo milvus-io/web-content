@@ -105,5 +105,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Scoprite come il <a href="/docs/it/consistency.md">timestamp di garanzia consente di regolare la coerenza in Milvus</a>.</li>
+<li>Scoprite come il <a href="/docs/it/v2.4.x/consistency.md">timestamp di garanzia consente di regolare la coerenza in Milvus</a>.</li>
 </ul>

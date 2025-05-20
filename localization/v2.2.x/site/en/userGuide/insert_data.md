@@ -20,7 +20,7 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to insert data in Milvus via client.</p>
-<p>You can also migrate data to Milvus with <a href="/docs/migrate_overview.md">MilvusDM</a>, an open-source tool designed specifically for importing and exporting data with Milvus.</p>
+<p>You can also migrate data to Milvus with <a href="/docs/v2.2.x/migrate_overview.md">MilvusDM</a>, an open-source tool designed specifically for importing and exporting data with Milvus.</p>
 <p>Milvus 2.1 supports the <code translate="no">VARCHAR</code> data type on scalar fields. When building indexes for VARCHAR-type scalar fields, the default index type is dictionary tree.</p>
 <p>The following example inserts 2,000 rows of randomly generated data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than the example. You can prepare your own data to replace the example.</p>
 <h2 id="Prepare-data" class="common-anchor-header">Prepare data<button data-href="#Prepare-data" class="anchor-icon" translate="no">
@@ -39,7 +39,7 @@ title: ''
         ></path>
       </svg>
     </button></h2><p>First, prepare the data to insert.  Data type of the data to insert must match the schema of the collection, otherwise Milvus will raise exception.</p>
-<p>Once you enable dynamic schema, you can append dynamic fields in the data. For details, refer to <a href="/docs/dynamic_schema.md">Dynamic Schema</a>.</p>
+<p>Once you enable dynamic schema, you can append dynamic fields in the data. For details, refer to <a href="/docs/v2.2.x/dynamic_schema.md">Dynamic Schema</a>.</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -372,7 +372,7 @@ Output:
     </tbody>
 </table>
 <div class="alert note">
-<p>After inserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly inserted data. For more information, refer to <a href="/docs/product_faq.md#Can-indexes-be-created-after-inserting-vectors">Can indexes be created after inserting vectors?</a></p>
+<p>After inserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly inserted data. For more information, refer to <a href="/docs/v2.2.x/product_faq.md#Can-indexes-be-created-after-inserting-vectors">Can indexes be created after inserting vectors?</a></p>
 </div>
 <h2 id="Flush-the-Data-in-Milvus" class="common-anchor-header">Flush the Data in Milvus<button data-href="#Flush-the-Data-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -434,8 +434,8 @@ Output:
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.2.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.2.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.2.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

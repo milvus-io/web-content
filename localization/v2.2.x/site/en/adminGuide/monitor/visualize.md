@@ -20,7 +20,7 @@ summary: Learn how to visualize Milvus metrics in Grafana.
         ></path>
       </svg>
     </button></h1><p>This topic describes how to visualize Milvus metrics using Grafana.</p>
-<p>As described in the <a href="/docs/monitor.md">monitoring guide</a>, metrics contain useful information such as how much memory is used by a specific Milvus component. Monitoring metrics helps you better understand Milvus performance and its running status so that you can adjust resource allocation timely.</p>
+<p>As described in the <a href="/docs/v2.2.x/monitor.md">monitoring guide</a>, metrics contain useful information such as how much memory is used by a specific Milvus component. Monitoring metrics helps you better understand Milvus performance and its running status so that you can adjust resource allocation timely.</p>
 <p>Visualization is a chart showing the change of resource usage across time, which makes it easier for you to quickly see and notice the changes to resource usage especially when an event occurs.</p>
 <p>This tutorial uses Grafana, an open-source platform for time-series analytics, to visualize various performance metrics of a Milvus cluster deployed on Kubernetes (K8s).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -39,8 +39,8 @@ summary: Learn how to visualize Milvus metrics in Grafana.
         ></path>
       </svg>
     </button></h2><ul>
-<li>You have <a href="/docs/install_cluster-helm.md">installed a Milvus cluster on K8s)</a>.</li>
-<li>You need to <a href="/docs/monitor.md">configure Prometheus</a> to monitor and collect metrics before using Grafana to visualize the metrics. If the setup is successful, you can access Grafana at <code translate="no">http://localhost:3000</code>. Or you can also access Grafana using the default Grafana <code translate="no">user:password</code> of <code translate="no">admin:admin</code>.</li>
+<li>You have <a href="/docs/v2.2.x/install_cluster-helm.md">installed a Milvus cluster on K8s)</a>.</li>
+<li>You need to <a href="/docs/v2.2.x/monitor.md">configure Prometheus</a> to monitor and collect metrics before using Grafana to visualize the metrics. If the setup is successful, you can access Grafana at <code translate="no">http://localhost:3000</code>. Or you can also access Grafana using the default Grafana <code translate="no">user:password</code> of <code translate="no">admin:admin</code>.</li>
 </ul>
 <h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">Visualize metrics using Grafana<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,12 +97,12 @@ summary: Learn how to visualize Milvus metrics in Grafana.
     </button></h2><ul>
 <li>If you have set Grafana to visualize Milvus metrics, you might also want to:
 <ul>
-<li>Learn how to <a href="/docs/alert.md">create an alert for Milvus services</a></li>
-<li>Adjust your <a href="/docs/allocate.md">resource allocation</a></li>
-<li><a href="/docs/scaleout.md">Scale out or scale in a Milvus cluster</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/alert.md">create an alert for Milvus services</a></li>
+<li>Adjust your <a href="/docs/v2.2.x/allocate.md">resource allocation</a></li>
+<li><a href="/docs/v2.2.x/scaleout.md">Scale out or scale in a Milvus cluster</a></li>
 </ul></li>
 <li>If you are interested in upgrading the Milvus version,
 <ul>
-<li>Read the <a href="/docs/upgrade_milvus_cluster-operator.md">guide for upgrading Milvus cluster</a> and <a href="/docs/upgrade_milvus_standalone-operator.md">that for upgrade Milvus standalone</a>.</li>
+<li>Read the <a href="/docs/v2.2.x/upgrade_milvus_cluster-operator.md">guide for upgrading Milvus cluster</a> and <a href="/docs/v2.2.x/upgrade_milvus_standalone-operator.md">that for upgrade Milvus standalone</a>.</li>
 </ul></li>
 </ul>

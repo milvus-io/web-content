@@ -38,11 +38,11 @@ summary: Milvus QueryNodeがローカルディスクを使用するように設�
     </button></h2><p>MilvusはAIに特化したベクトルデータベースであり、膨大なベクトルデータの効率的な保存と検索が可能です。画像・動画解析、自然言語処理、推薦システムなどのタスクに最適です。最適なパフォーマンスを確保するには、ディスクの読み取りレイテンシを最小限に抑えることが極めて重要です。遅延を防ぎ、システムの安定性を維持するためには、ローカルのNVMe SSDを使用することが強く推奨されます。</p>
 <p>ローカル・ディスク・ストレージが活躍する主な機能は以下のとおりです：</p>
 <ul>
-<li><a href="/docs/ja/chunk_cache.md"><strong>チャンク・キャッシュ</strong></a>：データをローカル・ディスク・キャッシュにプリロードし、検索を高速化します。</li>
-<li><a href="/docs/ja/mmap.md"><strong>MMap</strong></a>：ファイルの内容を直接メモリにマップし、メモリ効率を向上させます。</li>
-<li><a href="/docs/ja/disk_index.md"><strong>DiskANNインデックス</strong></a>：効率的なインデックス管理のためにディスク・ストレージを必要とする。</li>
+<li><a href="/docs/ja/v2.4.x/chunk_cache.md"><strong>チャンク・キャッシュ</strong></a>：データをローカル・ディスク・キャッシュにプリロードし、検索を高速化します。</li>
+<li><a href="/docs/ja/v2.4.x/mmap.md"><strong>MMap</strong></a>：ファイルの内容を直接メモリにマップし、メモリ効率を向上させます。</li>
+<li><a href="/docs/ja/v2.4.x/disk_index.md"><strong>DiskANNインデックス</strong></a>：効率的なインデックス管理のためにディスク・ストレージを必要とする。</li>
 </ul>
-<p>本記事では、<a href="/docs/ja/install-overview.md#Milvus-Distributed">Milvus Distributedを</a>クラウドプラットフォームにデプロイし、NVMeディスクストレージを使用するようにQueryNodeを設定する方法に焦点を当てます。以下の表は、様々なクラウドプロバイダーの推奨マシンタイプの一覧です。</p>
+<p>本記事では、<a href="/docs/ja/v2.4.x/install-overview.md#Milvus-Distributed">Milvus Distributedを</a>クラウドプラットフォームにデプロイし、NVMeディスクストレージを使用するようにQueryNodeを設定する方法に焦点を当てます。以下の表は、様々なクラウドプロバイダーの推奨マシンタイプの一覧です。</p>
 <table>
 <thead>
 <tr><th style="text-align:center">クラウドプロバイダ</th><th style="text-align:center">マシンタイプ</th></tr>
@@ -266,7 +266,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>検証結果が満足のいくものであれば、以下の手順でMilvus Distributedをデプロイすることができる：</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Helmを使用してMilvus Distributedをデプロイするためのヒント</h3><p>QueryNodeポッドはデフォルトでNVMeディスクをEmptyDirボリュームとして使用します。最適なパフォーマンスを確保するために、NVMeディスクをQueryNodeポッド内の<code translate="no">/var/lib/milvus/data</code> 。</p>
-<p>Helmを使用したMilvus Distributedのデプロイ方法の詳細については、「<a href="/docs/ja/install_cluster-helm.md">Run Milvus in Kubernetes with Helm</a>」を参照してください。</p>
+<p>Helmを使用したMilvus Distributedのデプロイ方法の詳細については、「<a href="/docs/ja/v2.4.x/install_cluster-helm.md">Run Milvus in Kubernetes with Helm</a>」を参照してください。</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Milvus Operatorを使用してMilvus Distributedをデプロイするためのヒント</h3><p>Milvus Operatorは、NVMeディスクをEmptyDirボリュームとして使用するようにQueryNodeポッドを自動的に設定します。<code translate="no">MilvusCluster</code> カスタムリソースに以下の設定を追加することをお勧めします：</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -279,4 +279,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、QueryNodeポッドがNVMeディスクをデータボリュームとして使用するようになります。Milvus Operatorを使用してMilvus Distributedをデプロイする方法の詳細については、<a href="/docs/ja/install_cluster-milvusoperator.md">Milvus Operatorを使用してKubernetesでMilvusを実行するを</a>参照してください。</p>
+<p>これにより、QueryNodeポッドがNVMeディスクをデータボリュームとして使用するようになります。Milvus Operatorを使用してMilvus Distributedをデプロイする方法の詳細については、<a href="/docs/ja/v2.4.x/install_cluster-milvusoperator.md">Milvus Operatorを使用してKubernetesでMilvusを実行するを</a>参照してください。</p>

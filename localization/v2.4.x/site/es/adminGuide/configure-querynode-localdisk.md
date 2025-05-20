@@ -38,11 +38,11 @@ summary: Aprenda a configurar Milvus QueryNode para utilizar el disco local.
     </button></h2><p>Milvus es una base de datos vectorial centrada en la Inteligencia Artificial diseñada para el almacenamiento y recuperación eficientes de grandes cantidades de datos vectoriales. Es ideal para tareas como el análisis de imágenes y vídeos, el procesamiento del lenguaje natural y los sistemas de recomendación. Para garantizar un rendimiento óptimo, es crucial minimizar la latencia de lectura del disco. El uso de unidades SSD NVMe locales es muy recomendable para evitar retrasos y mantener la estabilidad del sistema.</p>
 <p>Entre las características clave en las que entra en juego el almacenamiento en disco local se incluyen:</p>
 <ul>
-<li><a href="/docs/es/chunk_cache.md"><strong>Caché de trozos</strong></a>: Precarga los datos en la caché de disco local para una búsqueda más rápida.</li>
-<li><a href="/docs/es/mmap.md"><strong>MMap</strong></a>: Asigna el contenido de los archivos directamente a la memoria para mejorar la eficiencia de la memoria.</li>
-<li><a href="/docs/es/disk_index.md"><strong>Índice DiskANN</strong></a>: Requiere almacenamiento en disco para una gestión eficiente del índice.</li>
+<li><a href="/docs/es/v2.4.x/chunk_cache.md"><strong>Caché de trozos</strong></a>: Precarga los datos en la caché de disco local para una búsqueda más rápida.</li>
+<li><a href="/docs/es/v2.4.x/mmap.md"><strong>MMap</strong></a>: Asigna el contenido de los archivos directamente a la memoria para mejorar la eficiencia de la memoria.</li>
+<li><a href="/docs/es/v2.4.x/disk_index.md"><strong>Índice DiskANN</strong></a>: Requiere almacenamiento en disco para una gestión eficiente del índice.</li>
 </ul>
-<p>En este artículo, nos centraremos en el despliegue de <a href="/docs/es/install-overview.md#Milvus-Distributed">Milvus Distributed</a> en plataformas en la nube y en cómo configurar el QueryNode para utilizar el almacenamiento en disco NVMe. La siguiente tabla enumera los tipos de máquina recomendados de varios proveedores de nube.</p>
+<p>En este artículo, nos centraremos en el despliegue de <a href="/docs/es/v2.4.x/install-overview.md#Milvus-Distributed">Milvus Distributed</a> en plataformas en la nube y en cómo configurar el QueryNode para utilizar el almacenamiento en disco NVMe. La siguiente tabla enumera los tipos de máquina recomendados de varios proveedores de nube.</p>
 <table>
 <thead>
 <tr><th style="text-align:center">Proveedor de nube</th><th style="text-align:center">Tipo de máquina</th></tr>
@@ -266,7 +266,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>Una vez que los resultados de la verificación sean satisfactorios, puede desplegar Milvus Distributed con los siguientes pasos:</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Consejos para desplegar Milvus Distributed utilizando Helm</h3><p>El pod QueryNode utiliza discos NVMe como volúmenes EmptyDir por defecto. Se recomienda montar discos NVMe en <code translate="no">/var/lib/milvus/data</code> dentro de los pods QueryNode para garantizar un rendimiento óptimo.</p>
-<p>Para más detalles sobre cómo desplegar Milvus Distributed utilizando Helm, consulte <a href="/docs/es/install_cluster-helm.md">Ejecutar Milvus en Kubernetes con Helm</a>.</p>
+<p>Para más detalles sobre cómo desplegar Milvus Distributed utilizando Helm, consulte <a href="/docs/es/v2.4.x/install_cluster-helm.md">Ejecutar Milvus en Kubernetes con Helm</a>.</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Consejos para desplegar Milvus Distributed utilizando Milvus Operator</h3><p>Milvus Operator configura automáticamente el pod QueryNode para utilizar discos NVMe como volúmenes EmptyDir. Se recomienda añadir las siguientes configuraciones al recurso personalizado <code translate="no">MilvusCluster</code>:</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -279,4 +279,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>Esto garantizará que el pod QueryNode utilice el disco NVMe como volumen de datos. Para más detalles sobre cómo desplegar Milvus Distributed utilizando Milvus <a href="/docs/es/install_cluster-milvusoperator.md">Operator</a>, consulte <a href="/docs/es/install_cluster-milvusoperator.md">Ejecutar Milvus en Kubernetes con Milvus Operator</a>.</p>
+<p>Esto garantizará que el pod QueryNode utilice el disco NVMe como volumen de datos. Para más detalles sobre cómo desplegar Milvus Distributed utilizando Milvus <a href="/docs/es/v2.4.x/install_cluster-milvusoperator.md">Operator</a>, consulte <a href="/docs/es/v2.4.x/install_cluster-milvusoperator.md">Ejecutar Milvus en Kubernetes con Milvus Operator</a>.</p>

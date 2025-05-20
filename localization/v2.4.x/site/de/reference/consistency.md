@@ -35,7 +35,7 @@ title: Konsistenz
         ></path>
       </svg>
     </button></h2><p>Konsistenz in einer verteilten Datenbank bezieht sich speziell auf die Eigenschaft, die sicherstellt, dass jeder Knoten oder jede Replik dieselbe Sicht auf die Daten hat, wenn sie zu einem bestimmten Zeitpunkt Daten schreiben oder lesen.</p>
-<p>Milvus unterstützt vier Konsistenzstufen: strong, bounded staleness, session und eventually. Die Standardkonsistenzstufe in Milvus ist "bounded staleness".  Sie können die Konsistenzstufe bei der Durchführung einer <a href="/docs/de/single-vector-search.md">Einzelvektorsuche</a>, einer <a href="/docs/de/multi-vector-search.md">hybriden Suche</a> oder einer <a href="/docs/de/get-and-scalar-query.md">Abfrage</a> leicht anpassen, um sie optimal auf Ihre Anwendung abzustimmen.</p>
+<p>Milvus unterstützt vier Konsistenzstufen: strong, bounded staleness, session und eventually. Die Standardkonsistenzstufe in Milvus ist "bounded staleness".  Sie können die Konsistenzstufe bei der Durchführung einer <a href="/docs/de/v2.4.x/single-vector-search.md">Einzelvektorsuche</a>, einer <a href="/docs/de/v2.4.x/multi-vector-search.md">hybriden Suche</a> oder einer <a href="/docs/de/v2.4.x/get-and-scalar-query.md">Abfrage</a> leicht anpassen, um sie optimal auf Ihre Anwendung abzustimmen.</p>
 <h2 id="Consistency-levels" class="common-anchor-header">Konsistenzstufen<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,8 +118,8 @@ title: Konsistenz
       </svg>
     </button></h2><ul>
 <li>Erfahren Sie, wie Sie die Konsistenzstufe einstellen können, wenn:<ul>
-<li><a href="/docs/de/single-vector-search.md">eine Ein-Vektor-Suche durchführen</a></li>
-<li><a href="/docs/de/multi-vector-search.md">eine hybride Suche durchführen</a></li>
-<li><a href="/docs/de/get-and-scalar-query.md">eine skalare Abfrage durchführen</a></li>
+<li><a href="/docs/de/v2.4.x/single-vector-search.md">eine Ein-Vektor-Suche durchführen</a></li>
+<li><a href="/docs/de/v2.4.x/multi-vector-search.md">eine hybride Suche durchführen</a></li>
+<li><a href="/docs/de/v2.4.x/get-and-scalar-query.md">eine skalare Abfrage durchführen</a></li>
 </ul></li>
 </ul>

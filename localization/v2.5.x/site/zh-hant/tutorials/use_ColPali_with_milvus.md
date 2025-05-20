@@ -5,6 +5,12 @@ summary: >-
   Milvus 進行多向量檢索。在此基礎上，我們將介紹如何使用 ColPali 根據給定的查詢檢索頁面。
 title: 使用 ColPali 與 Milvus 進行多模式檢索
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">使用 ColPali 與 Milvus 進行多模式檢索<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,22 +26,16 @@ title: 使用 ColPali 與 Milvus 進行多模式檢索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>現代的檢索模型通常使用單一的嵌入來表示文字或影像。然而，ColBERT 是一種神經模型，它利用每個資料實例的嵌入清單，並採用「MaxSim」運算來計算兩個文字之間的相似度。除了文字資料之外，圖形、表格和圖表也包含豐富的資訊，這些資訊在以文字為基礎的資訊檢索中往往被忽略。</p>
+    </button></h1><p>現代的檢索模型通常使用單一的嵌入來表示文字或影像。然而，ColBERT 是一種神經模型，它利用每個資料實例的嵌入清單，並採用「MaxSim」運算來計算兩個文字之間的相似度。除了文字資料之外，圖形、表格和圖表也包含豐富的資訊，這些資訊在以文字為基礎的資訊檢索中往往被忽略。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>MaxSim 功能是透過查看查詢與文件 (您要搜尋的內容) 的代號嵌入 (token embeddings) 來比較它們。對於查詢中的每個單字，它會從文件中挑出最相似的單字 (使用余弦相似度或平方 L2 距離)，然後將查詢中所有單字的最大相似度相加。</p>
-<p>ColPali 是一種結合 ColBERT 的多向量表示法與 PaliGemma（多模態大語言模型）的方法，以利用其強大的理解能力。這種方法可以使用統一的多向量嵌入來表示包含文字和圖像的頁面。這個多向量表達中的嵌入可以捕捉到詳細的資訊，提高多模態資料的檢索增強生成 (RAG) 效能。</p>
-<p>在本筆記簿中，為了一般性起見，我們將此種多向量表示法稱為「ColBERT 內嵌」。然而，實際使用的模型是<strong>ColPali 模型</strong>。我們將示範如何使用 Milvus 進行多向量檢索。在此基礎上，我們將介紹如何使用 ColPali 根據給定的查詢來檢索網頁。</p>
+<p>ColPali 是一種結合 ColBERT 的多向量表示法與 PaliGemma（多模態大語言模型）的方法，以利用其強大的理解能力。這種方法可以使用統一的多向量嵌入來表示包含文字和圖像的頁面。這個多向量表達中的嵌入可以捕捉到詳細的資訊，改善多模態資料的檢索增強生成 (RAG) 的效能。</p>
+<p>在本筆記簿中，為了一般性起見，我們將這種多向量表示法稱為「ColBERT 嵌入」。然而，實際使用的模型是<strong>ColPali 模型</strong>。我們將示範如何使用 Milvus 進行多向量檢索。在此基礎上，我們將介紹如何使用 ColPali 根據給定的查詢來檢索網頁。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,11 +51,11 @@ title: 使用 ColPali 與 Milvus 進行多模式檢索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell">$ pip install pdf2image
-$ pip pymilvus
-$ pip install colpali_engine
-$ pip install tqdm
-$ pip instal pillow
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pdf2image</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install colpali_engine</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pillow</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prepare-the-data" class="common-anchor-header">準備資料<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,17 +82,17 @@ images = convert_from_path(pdf_path)
     image.save(<span class="hljs-string">f&quot;pages/page_<span class="hljs-subst">{i + <span class="hljs-number">1</span>}</span>.png&quot;</span>, <span class="hljs-string">&quot;PNG&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>接下來，我們將使用 Milvus Lite 來初始化資料庫。您可以透過設定 uri 到您的 Milvus 服務託管的適當位址，輕鬆切換到完整的 Milvus 實例。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">import</span> concurrent.<span class="hljs-property">futures</span>
+<span class="hljs-keyword">import</span> concurrent.futures
 
-client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
 <li>如果您只需要一個本機向量資料庫來進行小規模的資料或原型設計，將 uri 設定為一個本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
-<li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器位址和連接埠作為您的 uri，例如<code translate="no">http://localhost:19530</code> 。如果您啟用 Milvus 的驗證功能，請使用「&lt;your_username&gt;:&lt;your_password&gt;」作為令牌，否則請勿設定令牌。</li>
-<li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務），請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，它們對應於 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
+<li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器位址和連接埠作為您的 uri，例如<code translate="no">http://localhost:19530</code> 。如果您在 Milvus 上啟用認證功能，請使用 "<your_username>:<your_password>" 作為令牌，否則請勿設定令牌。</li>
+<li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，它們對應於 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
 </ul>
 </div>
 <p>我們將定義一個 MilvusColbertRetriever 類別，用來包圍 Milvus 用戶端進行多向量資料擷取。該實作會將 ColBERT embeddings 平面化，並將它們插入一個集合，其中每一行代表 ColBERT embedding 清單中的一個個別 embedding。它還記錄了 doc_id 和 seq_id，以便追蹤每個內嵌的來源。</p>
@@ -306,9 +306,9 @@ ds: <span class="hljs-type">List</span>[torch.Tensor] = []
 torch.Size([1030, 128])
 </code></pre>
 <p>我們將使用 MilvusColbertRetriever 建立一個名為「colpali」的集合。</p>
-<pre><code translate="no" class="language-python">retriever = <span class="hljs-title class_">MilvusColbertRetriever</span>(collection_name=<span class="hljs-string">&quot;colpali&quot;</span>, milvus_client=client)
-retriever.<span class="hljs-title function_">create_collection</span>()
-retriever.<span class="hljs-title function_">create_index</span>()
+<pre><code translate="no" class="language-python">retriever = MilvusColbertRetriever(collection_name=<span class="hljs-string">&quot;colpali&quot;</span>, milvus_client=client)
+retriever.create_collection()
+retriever.create_index()
 <button class="copy-code-btn"></button></code></pre>
 <p>我們將插入嵌入清單到 Milvus 資料庫。</p>
 <pre><code translate="no" class="language-python">filepaths = [<span class="hljs-string">&quot;./pages/&quot;</span> + name <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> os.listdir(<span class="hljs-string">&quot;./pages&quot;</span>)]

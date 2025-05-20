@@ -20,7 +20,7 @@ title: Enable RBAC
         ></path>
       </svg>
     </button></h1><p>By enabling RBAC, you can control access to specific Milvus resources (Eg. a collection or a partition) or permissions based on user role and privileges. Currently, this feature is only available in Python and Java.</p>
-<p>This topic describes how to enable RBAC and manage <a href="/docs/users_and_roles.md">users and roles</a>.</p>
+<p>This topic describes how to enable RBAC and manage <a href="/docs/v2.4.x/users_and_roles.md">users and roles</a>.</p>
 <div class="alert note">
 <p>The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.</p>
 </div>
@@ -39,7 +39,7 @@ title: Enable RBAC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After you enable <a href="/docs/authenticate.md">user authentication</a>, connect to your Milvus instance using <code translate="no">token</code> that consists of a username and a password. By default, Milvus uses the <code translate="no">root</code> user with the password <code translate="no">Milvus</code>.</p>
+    </button></h2><p>After you enable <a href="/docs/v2.4.x/authenticate.md">user authentication</a>, connect to your Milvus instance using <code translate="no">token</code> that consists of a username and a password. By default, Milvus uses the <code translate="no">root</code> user with the password <code translate="no">Milvus</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -139,8 +139,8 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>The following example demonstrates how to grant the permission of searching all collections to the role named <code translate="no">roleA</code>.</p>
-<p>The <code translate="no">object_type</code> specifies the object type, which can also be understood as the resource type. Currently, valid values ​​include Collection/User/Global, etc., where Global means that there is no specific resource type. The <code translate="no">object_name</code> is the resource name. If object<em>type is Collection, then object name can be referred to a specific collection name, or you can use * to specify all collections. If object</em>type is Global, then the object name can be only specified as *. See <a href="/docs/users_and_roles.md">Users and Roles</a> for other types of privileges you can grant.</p>
-<p>Before managing role privileges, make sure you have enabled user authentication. Otherwise, an error may occur. For information on how to enable user authentication, refer to <a href="/docs/authenticate.md">Authenticate User Access</a>.</p>
+<p>The <code translate="no">object_type</code> specifies the object type, which can also be understood as the resource type. Currently, valid values ​​include Collection/User/Global, etc., where Global means that there is no specific resource type. The <code translate="no">object_name</code> is the resource name. If object<em>type is Collection, then object name can be referred to a specific collection name, or you can use * to specify all collections. If object</em>type is Global, then the object name can be only specified as *. See <a href="/docs/v2.4.x/users_and_roles.md">Users and Roles</a> for other types of privileges you can grant.</p>
+<p>Before managing role privileges, make sure you have enabled user authentication. Otherwise, an error may occur. For information on how to enable user authentication, refer to <a href="/docs/v2.4.x/authenticate.md">Authenticate User Access</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># grant privilege to a role</span>
 
 client.grant_privilege(
@@ -260,6 +260,6 @@ client.grant_role(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Learn how to manage <a href="/docs/authenticate.md">user authentication</a>.</p></li>
-<li><p>Learn how to enable <a href="/docs/tls.md">TLS proxy</a> in Milvus.</p></li>
+<li><p>Learn how to manage <a href="/docs/v2.4.x/authenticate.md">user authentication</a>.</p></li>
+<li><p>Learn how to enable <a href="/docs/v2.4.x/tls.md">TLS proxy</a> in Milvus.</p></li>
 </ul>

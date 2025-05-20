@@ -4,7 +4,7 @@ title: Recherche hybride
 summary: >-
   La recherche hybride est une méthode de recherche qui effectue simultanément
   plusieurs recherches ANN, réorganise plusieurs ensembles de résultats issus de
-  ces recherches ANN et renvoie finalement un seul ensemble de résultats.
+  ces recherches ANN et renvoie en fin de compte un seul ensemble de résultats.
   L'utilisation de la recherche hybride peut améliorer la précision de la
   recherche. Milvus prend en charge la recherche hybride sur une collection
   comportant plusieurs champs vectoriels.
@@ -48,7 +48,7 @@ summary: >-
 <li><p><strong>Vecteurs denses :</strong> Les vecteurs denses sont des encastrements dérivés des réseaux neuronaux. Lorsqu'ils sont disposés dans un tableau ordonné, ces vecteurs capturent l'essence sémantique du texte d'entrée. Il convient de noter que les vecteurs denses ne sont pas limités au traitement de texte ; ils sont également largement utilisés dans le domaine de la vision par ordinateur pour représenter la sémantique des données visuelles. Ces vecteurs denses, généralement générés par des modèles d'intégration de texte, sont caractérisés par le fait que la plupart ou tous les éléments sont non nuls. Les vecteurs denses sont donc particulièrement efficaces pour les applications de recherche sémantique, car ils peuvent renvoyer les résultats les plus similaires sur la base de la distance vectorielle, même en l'absence de correspondances exactes entre les mots clés. Cette capacité permet d'obtenir des résultats de recherche plus nuancés et tenant compte du contexte, en saisissant souvent des relations entre des concepts qui pourraient échapper aux approches basées sur les mots-clés.</p></li>
 </ul>
 <p>Pour plus de détails, voir <a href="/docs/fr/sparse_vector.md">Vecteur clair</a> et <a href="/docs/fr/dense-vector.md">Vecteur dense</a>.</p>
-<h3 id="Multimodal-Search" class="common-anchor-header">Recherche multimodale</h3><p>La recherche multimodale fait référence à la recherche de similarités entre des données non structurées et plusieurs modalités (images, vidéos, audio, texte, etc.). Par exemple, une personne peut être représentée à l'aide de différentes modalités de données telles que les empreintes digitales, les empreintes vocales et les traits du visage. La recherche hybride permet d'effectuer plusieurs recherches simultanément. Par exemple, la recherche d'une personne avec des empreintes digitales et des empreintes vocales similaires.</p>
+<h3 id="Multimodal-Search" class="common-anchor-header">Recherche multimodale</h3><p>La recherche multimodale fait référence à la recherche de similarités entre des données non structurées et plusieurs modalités (images, vidéos, audio, texte, etc.). Par exemple, une personne peut être représentée à l'aide de différentes modalités de données telles que les empreintes digitales, les empreintes vocales et les caractéristiques faciales. La recherche hybride permet d'effectuer plusieurs recherches simultanément. Par exemple, la recherche d'une personne avec des empreintes digitales et des empreintes vocales similaires.</p>
 <h2 id="Workflow" class="common-anchor-header">Déroulement des opérations<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -513,7 +513,7 @@ search_param_1 = {
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>}, {<span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
+query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>, <span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,

@@ -31,14 +31,14 @@ title: 效能常見問題
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">哪些因素影響 CPU 使用量？</h4><p>當 Milvus 建立索引或執行查詢時，CPU 使用量會增加。一般而言，除了使用 Annoy（在單一線程上執行）外，索引建立都是 CPU 密集型的。</p>
 <p>當執行查詢時，CPU 使用量會受到<code translate="no">nq</code> 和<code translate="no">nprobe</code> 的影響。當<code translate="no">nq</code> 和<code translate="no">nprobe</code> 較小的時候，並發量會很低，CPU 使用量也會保持在低水平。</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">同時插入資料和搜尋會影響查詢效能嗎？</h4><p>插入作業不是 CPU 密集型作業。然而，由於新的區段可能尚未達到建立索引的臨界值，Milvus 會採用強制搜尋，這會嚴重影響查詢效能。</p>
-<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 參數決定段的索引建立臨界值，預設為 1024 行。如需詳細資訊，請參閱<a href="/docs/zh-hant/system_configuration.md">系統設定</a>。</p>
+<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 參數決定段的索引建立臨界值，預設為 1024 行。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/system_configuration.md">系統設定</a>。</p>
 <h4 id="Is-storage-space-released-right-after-data-deletion-in-Milvus" class="common-anchor-header">在 Milvus 中刪除資料後，儲存空間會立即釋放嗎？</h4><p>不，當您在 Milvus 刪除資料時，儲存空間不會立即釋放。雖然刪除資料會將實體標記為 「邏輯上已刪除」，但實際空間可能不會立即釋放。原因如下：</p>
 <ul>
 <li><strong>壓縮</strong>：Milvus 會在背景自動壓縮資料。此過程會將較小的資料區段合併為較大的區段，並移除邏輯上已刪除的資料 (標示為刪除的實體) 或已超過使用時間 (TTL) 的資料。但是，壓縮會建立新的區段，同時將舊的區段標記為 「已丟棄」。</li>
 <li><strong>垃圾回收</strong>：稱為垃圾回收 (GC) 的獨立程序會定期移除這些「已丟棄」的區段，釋放它們所佔用的儲存空間。這可確保儲存空間的有效使用，但可能會在刪除與空間回收之間產生少許延遲。</li>
 </ul>
 <h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">我可以在操作後立即看到插入、刪除或上插的資料而不需要等待刷新嗎？</h4><p>可以，在 Milvus 中，由於其儲存-運算分解架構，資料可讀性與刷新作業沒有直接關聯。您可以使用一致性層級管理資料的可讀性。</p>
-<p>選擇一致性等級時，請考慮一致性與效能之間的權衡。對於需要立即可見性的作業，請使用「強」一致性層級。若要加快寫入速度，請優先使用較弱的一致性 (資料可能無法立即可見)。如需詳細資訊，請參閱<a href="/docs/zh-hant/consistency.md">一致性</a>。</p>
+<p>選擇一致性等級時，請考慮一致性與效能之間的權衡。對於需要立即可見性的作業，請使用「強」一致性層級。若要加快寫入速度，請優先使用較弱的一致性 (資料可能無法立即可見)。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/consistency.md">一致性</a>。</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">索引 VARCHAR 欄位可以提高刪除速度嗎？</h4><p>索引 VARCHAR 欄位可以加快「Delete By Expression」作業的速度，但僅限於某些條件：</p>
 <ul>
 <li><strong>INVERTED 索引</strong>：此索引有助於非主索引鍵 VARCHAR 欄位上的<code translate="no">IN</code> 或<code translate="no">==</code> 表達式。</li>

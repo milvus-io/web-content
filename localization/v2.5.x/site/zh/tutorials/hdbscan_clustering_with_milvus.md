@@ -5,6 +5,12 @@ summary: >-
   进行聚类，然后使用 UMAP 方法将结果可视化以进行分析。本笔记本是 Milvus 对 Dylan Castillo 文章的改编。
 title: 利用 Milvus 进行 HDBSCAN 聚类
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">利用 Milvus 进行 HDBSCAN 聚类<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,13 +26,7 @@ title: 利用 Milvus 进行 HDBSCAN 聚类
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>使用深度学习模型可以将数据转化为 Embeddings，从而捕捉到原始数据的有意义表征。通过应用无监督聚类算法，我们可以根据固有模式将相似的数据点归类到一起。HDBSCAN（基于密度的有噪声应用空间分层聚类）是一种广泛使用的聚类算法，它通过分析数据点的密度和距离对数据点进行有效分组。它对于发现不同形状和大小的聚类特别有用。在本笔记本中，我们将使用 HDBSCAN 与高性能向量数据库 Milvus，根据数据点的 Embeddings 将其聚类为不同的组。</p>
+    </button></h1><p>使用深度学习模型可以将数据转化为 Embeddings，从而捕捉到原始数据的有意义表征。通过应用无监督聚类算法，我们可以根据固有模式将相似的数据点归类到一起。HDBSCAN（基于密度的有噪声应用空间分层聚类）是一种广泛使用的聚类算法，它通过分析数据点的密度和距离对数据点进行有效分组。它对于发现不同形状和大小的聚类特别有用。在本笔记本中，我们将使用 HDBSCAN 与高性能向量数据库 Milvus，根据数据点的 Embeddings 将其聚类为不同的组。</p>
 <p>HDBSCAN （Hierarchical Density-Based Spatial Clustering of Applications with Noise）是一种聚类算法，它依赖于计算嵌入空间中数据点之间的距离。这些由深度学习模型创建的嵌入以高维形式表示数据。为了对相似数据点进行分组，HDBSCAN 要确定它们之间的距离和密度，但高效计算这些距离，尤其是对大型数据集而言，可能具有挑战性。</p>
 <p>Milvus 是一种高性能向量数据库，它通过存储和索引嵌入来优化这一过程，从而可以快速检索相似向量。HDBSCAN 和 Milvus 配合使用时，可以在嵌入空间中对大规模数据集进行高效聚类。</p>
 <p>在本笔记本中，我们将使用 BGE-M3 嵌入模型从新闻标题数据集中提取嵌入，利用 Milvus 高效计算嵌入之间的距离以帮助 HDBSCAN 进行聚类，然后使用 UMAP 方法将结果可视化以进行分析。本笔记本是 Milvus 对<a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">Dylan Castillo 文章的</a>改编。</p>
@@ -46,10 +46,10 @@ title: 利用 Milvus 进行 HDBSCAN 聚类
         ></path>
       </svg>
     </button></h2><p>从 https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/ 下载新闻数据集</p>
-<pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
-$ pip install hdbscan
-$ pip install plotly
-$ pip install umap-learn
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install hdbscan</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install plotly</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install umap-learn</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Download-Data" class="common-anchor-header">下载数据<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,6 +67,16 @@ $ pip install umap-learn
         ></path>
       </svg>
     </button></h2><p>从 https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/ 下载新闻数据集，提取<code translate="no">news_data_dedup.csv</code> 并将其放入当前目录。</p>
+<p>或通过 curl 下载：</p>
+<pre><code translate="no" class="language-bash">%%bash
+curl -L -o ~/Downloads/news-headlines-2024.zip\
+  https://www.kaggle.com/api/v1/datasets/download/dylanjcastillo/news-headlines-2024
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0 --:--:--     0
+100  225k  100  225k    0     0  33151      0  0:00:06  0:00:06 --:--:-- 62160:03  114k  0:00:07  0:00:06  0:00:01 66615    0  30519      0  0:00:07  0:00:06  0:00:01 61622
+</code></pre>
 <h2 id="Extract-Embeddings-to-Milvus" class="common-anchor-header">提取 Embeddings 至 Milvus<button data-href="#Extract-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,11 +113,13 @@ embeddings = ef(docs)[<span class="hljs-string">&quot;dense&quot;</span>]
 connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<blockquote>
 <ul>
-<li>如果你只需要一个本地向量数据库，用于小规模数据或原型设计，将 uri 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
-<li>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器地址和端口作为 uri，例如<code translate="no">http://localhost:19530</code> 。如果在 Milvus 上启用了身份验证功能，请使用"&lt;your_username&gt;:&lt;your_password&gt;"作为令牌，否则不要设置令牌。</li>
-<li>如果使用 Milvus 的全托管云服务<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端点和 API 密钥</a>相对应。</li>
+<li>如果你只需要一个本地向量数据库，用于小规模数据或原型设计，那么将 uri 设置为本地文件，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储到这个文件中。</li>
+<li>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器地址和端口作为 uri，例如<code translate="no">http://localhost:19530</code> 。如果在 Milvus 上启用了身份验证功能，请使用 "<your_username>:<your_password>" 作为令牌，否则不要设置令牌。</li>
+<li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端点和 API 密钥</a>相对应。</li>
 </ul>
+</blockquote>
 </div>
 <pre><code translate="no" class="language-python">fields = [
     FieldSchema(
@@ -150,7 +162,7 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HDBSCAN 需要计算点与点之间的距离来进行聚类，计算量很大。由于远处的点对聚类分配的影响较小，我们可以通过计算前 k 个近邻来提高效率。在本例中，我们使用的是 FLAT 索引，但对于大规模数据集，Milvus 支持更高级的索引方法来加速搜索过程。 首先，我们需要获取一个迭代器来迭代之前创建的 Milvus Collections。</p>
+    </button></h2><p>HDBSCAN 需要计算点与点之间的距离来进行聚类，这可能需要大量计算。由于远处的点对聚类分配的影响较小，我们可以通过计算前 k 个近邻来提高效率。在本例中，我们使用的是 FLAT 索引，但对于大规模数据集，Milvus 支持更高级的索引方法来加速搜索过程。 首先，我们需要获取一个迭代器来迭代之前创建的 Milvus Collections。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> hdbscan
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -175,7 +187,7 @@ dist = {}
 
 embeddings = []
 <button class="copy-code-btn"></button></code></pre>
-<p>我们将遍历 Milvus Collections 中的所有嵌入。对于每个 Embeddings，我们将搜索其在同一 Collections 中的前 k 个邻居，获取它们的 id 和距离。然后，我们还需要创建一个字典，将原始 ID 映射到距离矩阵中的连续索引。完成后，我们需要创建一个初始化所有元素为无穷大的距离矩阵，并填充我们搜索到的元素。这样，远距离点之间的距离将被忽略。最后，我们使用 HDBSCAN 库，利用创建的距离矩阵对点进行聚类。我们需要将度量值设置为 "预计算"，以表明数据是距离矩阵而非原始嵌入。</p>
+<p>我们将遍历 Milvus Collections 中的所有嵌入。对于每个 Embeddings，我们将搜索其在同一 Collections 中的前 k 个邻居，获取它们的 id 和距离。然后，我们还需要创建一个字典，将原始 ID 映射到距离矩阵中的连续索引。完成后，我们需要创建一个初始化所有元素为无穷大的距离矩阵，并填充我们搜索到的元素。这样，远距离点之间的距离将被忽略。最后，我们使用 HDBSCAN 库，利用创建的距离矩阵对点进行聚类。我们需要将度量设置为 "预计算"，以表明数据是距离矩阵而非原始嵌入。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     batch = iterator.<span class="hljs-built_in">next</span>()
     batch_ids = [data[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
@@ -268,6 +280,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>图像</span> </span></p>
 <p>在这里，我们展示了数据的良好聚类，你可以将鼠标悬停在点上查看它们所代表的文本。通过本笔记本，我们希望您能学会如何使用 HDBSCAN 对 Milvus 的嵌入数据进行高效聚类，这也可以应用于其他类型的数据。结合大型语言模型，这种方法可以对您的数据进行大规模的深入分析。</p>

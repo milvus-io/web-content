@@ -72,7 +72,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Bei der ANN-Suche bezieht sich eine Ein-Vektor-Suche auf eine Suche, die nur einen Abfragevektor umfasst. Basierend auf dem vorgefertigten Index und dem metrischen Typ, der in der Suchanfrage enthalten ist, findet Milvus die Top-K Vektoren, die dem Abfragevektor am ähnlichsten sind.</p>
-<p>In diesem Abschnitt erfahren Sie, wie Sie eine Ein-Vektor-Suche durchführen können. Das Code-Snippet geht davon aus, dass Sie eine Sammlung in einer <a href="/docs/de/create-collection-instantly.md#Quick-Setup">Quick-Setup-Art</a> erstellt haben. Die Suchanfrage enthält einen einzigen Abfragevektor und bittet Milvus, das Innere Produkt (IP) zu verwenden, um die Ähnlichkeit zwischen den Abfragevektoren und den Vektoren in der Sammlung zu berechnen und die drei ähnlichsten zurückzugeben.</p>
+<p>In diesem Abschnitt erfahren Sie, wie Sie eine Ein-Vektor-Suche durchführen können. Die Suchanfrage enthält einen einzigen Abfragevektor und bittet Milvus, das Innere Produkt (IP) zu verwenden, um die Ähnlichkeit zwischen den Abfragevektoren und den Vektoren in der Sammlung zu berechnen und die drei ähnlichsten Vektoren zurückzugeben.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -271,7 +271,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>Ein größerer Wert weist auf eine höhere Ähnlichkeit hin.</p></td>
+     <td><p>Ein größerer Wert deutet auf eine höhere Ähnlichkeit hin.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
@@ -975,7 +975,7 @@ curl --request POST \
 <ul>
 <li><p>Gefilterte Suche</p>
 <p>Sie können Filterbedingungen in eine Suchanfrage aufnehmen, so dass Milvus vor der Durchführung von ANN-Suchen eine Metadatenfilterung durchführt und den Suchbereich von der gesamten Sammlung auf die Entitäten reduziert, die den angegebenen Filterbedingungen entsprechen.</p>
-<p>Weitere Informationen über Metadatenfilterung und Filterbedingungen finden Sie unter <a href="/docs/de/filtered-search.md">Gefilterte Suche</a> und <a href="/docs/de/filtering">Filterung</a>.</p></li>
+<p>Weitere Informationen über Metadatenfilterung und Filterbedingungen finden Sie unter <a href="/docs/de/filtered-search.md">Gefilterte Suche</a>, <a href="/docs/de/boolean.md">Filterung erklärt</a> und verwandte Themen.</p></li>
 <li><p>Bereichssuche</p>
 <p>Sie können die Relevanz der Suchergebnisse verbessern, indem Sie den Abstand oder die Punktzahl der zurückgegebenen Entitäten innerhalb eines bestimmten Bereichs einschränken. In Milvus beinhaltet eine Bereichssuche das Zeichnen von zwei konzentrischen Kreisen mit der Vektoreinbettung, die dem Abfragevektor am ähnlichsten ist, als Zentrum. Die Suchanfrage gibt den Radius der beiden Kreise an, und Milvus gibt alle Vektoreinbettungen zurück, die in den äußeren Kreis, aber nicht in den inneren Kreis fallen.</p>
 <p>Weitere Informationen zur Bereichssuche finden Sie unter <a href="/docs/de/range-search.md">Bereichssuche</a>.</p></li>

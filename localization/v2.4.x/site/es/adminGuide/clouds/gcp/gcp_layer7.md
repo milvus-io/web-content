@@ -28,9 +28,9 @@ summary: >-
 <p>Para crear un proyecto, consulte <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creación y gestión de proyectos</a>. El nombre del proyecto utilizado en esta guía es <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Ha instalado localmente <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> y <a href="https://helm.sh/docs/intro/install/">Helm</a>, o ha decidido utilizar en su lugar <a href="https://cloud.google.com/shell">Cloud Shell</a> basado en navegador.</p></li>
 <li><p>Ha <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">inicializado gcloud CLI</a> con las credenciales de su cuenta GCP.</p></li>
-<li><p>Ha <a href="/docs/es/gcp.md">desplegado un clúster Milvus detrás de un equilibrador de carga Layer-4 en GCP</a>.</p></li>
+<li><p>Ha <a href="/docs/es/v2.4.x/gcp.md">desplegado un clúster Milvus detrás de un equilibrador de carga Layer-4 en GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Ajustar las configuraciones de Milvus</h3><p>Esta guía asume que ya ha <a href="/docs/es/gcp.md">desplegado un clúster Milvus detrás de un equilibrador de carga de Capa 4 en GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Ajustar las configuraciones de Milvus</h3><p>Esta guía asume que ya ha <a href="/docs/es/v2.4.x/gcp.md">desplegado un clúster Milvus detrás de un equilibrador de carga de Capa 4 en GCP</a>.</p>
 <p>Antes de configurar un equilibrador de carga de Capa-7 para este clúster Milvus, ejecute el siguiente comando para eliminar el equilibrador de carga de Capa-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

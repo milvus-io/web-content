@@ -7,7 +7,7 @@ group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster with Ansible Controller.
 title: ''
 ---
-<div class="tab-wrapper"><a href="/docs/install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="/docs/install_cluster-helm.md" class=''>Helm</a><a href="/docs/install_cluster-docker.md" class=''>Docker Compose</a><a href="/docs/install_cluster-ansible.md" class='active '>Ansible</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.1.x/install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="/docs/v2.1.x/install_cluster-helm.md" class=''>Helm</a><a href="/docs/v2.1.x/install_cluster-docker.md" class=''>Docker Compose</a><a href="/docs/v2.1.x/install_cluster-ansible.md" class='active '>Ansible</a></div>
 <h1 id="Install-Milvus-Cluster-with-Ansible" class="common-anchor-header">Install Milvus Cluster with Ansible<button data-href="#Install-Milvus-Cluster-with-Ansible" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,7 @@ Ansible can only be used in test environments. It is not recommended that you de
         ></path>
       </svg>
     </button></h2><ul>
-<li>Ensure that your CPU and RAM meet the requirements in <a href="/docs/prerequisite-docker.md">Environment Checklist</a>.</li>
+<li>Ensure that your CPU and RAM meet the requirements in <a href="/docs/v2.1.x/prerequisite-docker.md">Environment Checklist</a>.</li>
 <li>Hardware: Four servers including three Docker hosts, each with at least four cores of CPU and 8GB of RAM, and one Ansible controller</li>
 <li>Operating system: Ubuntu 20.04 LTS</li>
 <li>Software: <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible Controller</a></li>
@@ -457,15 +457,15 @@ The new configuration is automatically applied when running the playbook and doe
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/v2.1.x/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_connection.md">Connect to Milvus server</a></li>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/insert_data.md">Insert data</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.1.x/manage_connection.md">Connect to Milvus server</a></li>
+<li><a href="/docs/v2.1.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.1.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.1.x/insert_data.md">Insert data</a></li>
+<li><a href="/docs/v2.1.x/search.md">Conduct a vector search</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p>Explore <a href="/docs/v2.1.x/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
+<li><p><a href="/docs/v2.1.x/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

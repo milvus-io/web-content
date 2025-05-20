@@ -20,7 +20,7 @@ summary: GrafanaでMilvusのメトリクスを可視化する方法を学びま�
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Grafanaを使用してMilvusメトリクスを可視化する方法について説明します。</p>
-<p><a href="/docs/ja/monitor.md">モニタリングガイドで</a>説明したように、メトリクスには、特定のMilvusコンポーネントでどれだけのメモリが使用されているかなどの有用な情報が含まれています。メトリクスを監視することで、Milvusのパフォーマンスや稼働状況をより深く理解し、リソース割り当てをタイムリーに調整できるようになります。</p>
+<p><a href="/docs/ja/v2.4.x/monitor.md">モニタリングガイドで</a>説明したように、メトリクスには、特定のMilvusコンポーネントでどれだけのメモリが使用されているかなどの有用な情報が含まれています。メトリクスを監視することで、Milvusのパフォーマンスや稼働状況をより深く理解し、リソース割り当てをタイムリーに調整できるようになります。</p>
 <p>可視化とは、時間経過に伴うリソース使用量の変化をチャートで表示することで、特にイベント発生時にリソース使用量の変化を素早く確認し、気づきやすくするものです。</p>
 <p>このチュートリアルでは、時系列分析のためのオープンソースプラットフォームであるGrafanaを使用して、Kubernetes（K8s）上にデプロイされたMilvusクラスタのさまざまなパフォーマンスメトリクスを可視化します。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -39,8 +39,8 @@ summary: GrafanaでMilvusのメトリクスを可視化する方法を学びま�
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/install_cluster-helm.md">K8s)上にMilvusクラスタをインストールして</a>いる。</li>
-<li>Grafanaを使用してメトリクスを可視化する前に、<a href="/docs/ja/monitor.md">Prometheusを設定して</a>メトリクスを監視および収集する必要があります。設定が成功すると、<code translate="no">http://localhost:3000</code> で Grafana にアクセスできます。または、<code translate="no">admin:admin</code> のデフォルトの Grafana<code translate="no">user:password</code> を使用して Grafana にアクセスすることもできます。</li>
+<li><a href="/docs/ja/v2.4.x/install_cluster-helm.md">K8s)上にMilvusクラスタをインストールして</a>いる。</li>
+<li>Grafanaを使用してメトリクスを可視化する前に、<a href="/docs/ja/v2.4.x/monitor.md">Prometheusを設定して</a>メトリクスを監視および収集する必要があります。設定が成功すると、<code translate="no">http://localhost:3000</code> で Grafana にアクセスできます。または、<code translate="no">admin:admin</code> のデフォルトの Grafana<code translate="no">user:password</code> を使用して Grafana にアクセスすることもできます。</li>
 </ul>
 <h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">Grafanaを使用してメトリクスを可視化する<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,11 +90,11 @@ summary: GrafanaでMilvusのメトリクスを可視化する方法を学びま�
       </svg>
     </button></h2><ul>
 <li>Milvusのメトリクスを可視化するためにGrafanaを設定した場合、次のこともお勧めします：<ul>
-<li><a href="/docs/ja/alert.md">Milvusサービスのアラートを作成</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/allocate.md">リソースの割り当てを</a>調整する</li>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケールアウトまたはスケールイン</a></li>
+<li><a href="/docs/ja/v2.4.x/alert.md">Milvusサービスのアラートを作成</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/allocate.md">リソースの割り当てを</a>調整する</li>
+<li><a href="/docs/ja/v2.4.x/scaleout.md">Milvusクラスタのスケールアウトまたはスケールイン</a></li>
 </ul></li>
 <li>Milvusのバージョンアップに興味がある場合、<ul>
-<li><a href="/docs/ja/upgrade_milvus_cluster-operator.md">Milvusクラスタのアップグレードガイド</a>および<a href="/docs/ja/upgrade_milvus_standalone-operator.md">Milvusスタンドアロンのアップグレードガイドを</a>お読みください。</li>
+<li><a href="/docs/ja/v2.4.x/upgrade_milvus_cluster-operator.md">Milvusクラスタのアップグレードガイド</a>および<a href="/docs/ja/v2.4.x/upgrade_milvus_standalone-operator.md">Milvusスタンドアロンのアップグレードガイドを</a>お読みください。</li>
 </ul></li>
 </ul>

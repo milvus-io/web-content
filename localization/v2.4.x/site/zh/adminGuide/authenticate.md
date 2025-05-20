@@ -22,7 +22,7 @@ title: 验证用户访问
     </button></h1><p>本指南介绍如何在 Milvus 中管理用户身份验证，包括启用身份验证、以用户身份连接和修改用户凭证。</p>
 <div class="alert note">
 <ul>
-<li><p>TLS 和用户身份验证是两种不同的安全方法。如果在 Milvus 系统中同时启用了用户身份验证和 TLS，则必须提供用户名、密码和证书文件路径。有关如何启用 TLS<a href="/docs/zh/tls.md">的</a>信息，请参阅 "<a href="/docs/zh/tls.md">传输中的加密</a>"。</p></li>
+<li><p>TLS 和用户身份验证是两种不同的安全方法。如果在 Milvus 系统中同时启用了用户身份验证和 TLS，则必须提供用户名、密码和证书文件路径。有关如何启用 TLS<a href="/docs/zh/v2.4.x/tls.md">的</a>信息，请参阅 "<a href="/docs/zh/v2.4.x/tls.md">传输中的加密</a>"。</p></li>
 <li><p>本页的代码片段使用新的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a>(Python) 与<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">Milvus</a>进行交互。用于其他语言的新 MilvusClient SDK 将在未来更新中发布。</p></li>
 </ul>
 </div>
@@ -273,11 +273,11 @@ client.list_users()
       </svg>
     </button></h2><ul>
 <li>你可能还想了解如何<ul>
-<li><a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a></li>
+<li><a href="/docs/zh/v2.4.x/scaleout.md">扩展 Milvus 集群</a></li>
 </ul></li>
 <li>如果您已准备好在云上部署集群：<ul>
-<li>了解如何<a href="/docs/zh/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
-<li>学习如何<a href="/docs/zh/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
-<li>了解如何<a href="/docs/zh/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
+<li>了解如何<a href="/docs/zh/v2.4.x/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
+<li>学习如何<a href="/docs/zh/v2.4.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
+<li>了解如何<a href="/docs/zh/v2.4.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
 </ul></li>
 </ul>

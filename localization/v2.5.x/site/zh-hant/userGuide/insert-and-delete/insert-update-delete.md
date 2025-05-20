@@ -53,7 +53,7 @@ summary: 集合中的實體是共用相同欄位集的資料記錄。每個資�
         ></path>
       </svg>
     </button></h2><p>在插入資料之前，您需要依照 Schema 將資料組織成一列詞典，每個詞典代表一個 Entity，並包含 Schema 定義的所有欄位。如果 Collection 啟用了動態欄位，每個辭典也可以包含 Schema 中未定義的欄位。</p>
-<p>在本節中，您將插入 Entities 到<a href="/docs/zh-hant/create-collection-instantly.md#Quick-Setup">以快速設定方式</a>建立的 Collection 中。以這種方式建立的集合只有兩個欄位，分別命名為<strong>id</strong>和<strong>vector</strong>。此外，這個 Collection 啟用了動態欄位，因此範例程式碼中的 Entities 包含一個 Schema 中沒有定義的欄位<strong>color</strong>。</p>
+<p>在本節中，您將插入 Entities 到以快速設定方式建立的 Collection 中。以這種方式建立的集合只有兩個欄位，分別命名為<strong>id</strong>和<strong>vector</strong>。此外，這個 Collection 啟用了動態欄位，因此範例程式碼中的 Entities 包含一個 Schema 中沒有定義的欄位<strong>color</strong>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

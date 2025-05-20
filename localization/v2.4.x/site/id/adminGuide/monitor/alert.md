@@ -72,7 +72,7 @@ summary: Pelajari cara membuat peringatan untuk layanan Milvus di Grafana.
         ></path>
       </svg>
     </button></h2><p>Panduan ini mengambil contoh membuat peringatan untuk penggunaan memori komponen Milvus. Untuk membuat jenis peringatan lain, silakan sesuaikan perintah Anda. Jika Anda menemukan masalah selama prosesnya, jangan ragu untuk bertanya di <a href="https://github.com/milvus-io/milvus/discussions">diskusi Github</a> atau membuat utas di <a href="https://discord.com/invite/8uyFbECzPX">Discord</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Prasyarat</h3><p>Tutorial ini mengasumsikan bahwa Anda telah menginstal dan mengkonfigurasi Grafana. Jika belum, kami sarankan untuk membaca <a href="/docs/id/monitor.md">panduan pemantauan</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Prasyarat</h3><p>Tutorial ini mengasumsikan bahwa Anda telah menginstal dan mengkonfigurasi Grafana. Jika belum, kami sarankan untuk membaca <a href="/docs/id/v2.4.x/monitor.md">panduan pemantauan</a>.</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Menambahkan kueri baru</h3><p>Untuk menambahkan peringatan untuk penggunaan memori komponen Milvus, edit panel Memori. Kemudian, tambahkan kueri baru dengan metrik: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +120,13 @@ summary: Pelajari cara membuat peringatan untuk layanan Milvus di Grafana.
       </svg>
     </button></h2><ul>
 <li>Jika Anda perlu memulai layanan pemantauan untuk Milvus:<ul>
-<li>Baca <a href="/docs/id/monitor.md">panduan pemantauan</a></li>
-<li>Pelajari cara <a href="/docs/id/visualize.md">memvisualisasikan metrik pemantauan</a></li>
+<li>Baca <a href="/docs/id/v2.4.x/monitor.md">panduan pemantauan</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.4.x/visualize.md">memvisualisasikan metrik pemantauan</a></li>
 </ul></li>
 <li>Jika Anda telah membuat peringatan untuk penggunaan memori oleh komponen Milvus:<ul>
-<li>Pelajari cara <a href="/docs/id/allocate.md#standalone">mengalokasikan sumber daya</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.4.x/allocate.md#standalone">mengalokasikan sumber daya</a></li>
 </ul></li>
 <li>Jika Anda mencari informasi tentang cara menskalakan cluster Milvus:<ul>
-<li>Pelajari <a href="/docs/id/scaleout.md">cara menskalakan cluster Milvus</a></li>
+<li>Pelajari <a href="/docs/id/v2.4.x/scaleout.md">cara menskalakan cluster Milvus</a></li>
 </ul></li>
 </ul>

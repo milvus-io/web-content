@@ -64,7 +64,7 @@ summary: >-
 <p>任意のスカラー・フィールドにデフォルト値を設定し、それを NULL 可能にすることができます。詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -221,7 +221,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>特定のフィールドにインデックスを作成すると、このフィールドに対する検索が高速化されます。インデックスは、コレクション内のエンティティの順序を記録します。以下のコードスニペットに示すように、<code translate="no">metric_type</code> と<code translate="no">index_type</code> を使って、Milvus がフィールドにインデックスを付ける適切な方法を選択し、ベクトル埋め込み間の類似性を測定することができます。</p>
+    </button></h2><p>特定のフィールドにインデックスを作成すると、そのフィールドに対する検索が高速化されます。インデックスは、コレクション内のエンティティの順序を記録します。以下のコードスニペットに示すように、<code translate="no">metric_type</code> と<code translate="no">index_type</code> を使って、Milvus がフィールドにインデックスを付ける適切な方法を選択し、ベクトル埋め込み間の類似性を測定することができます。</p>
 <p>Milvusでは、すべてのベクトルフィールドのインデックスタイプとして<code translate="no">AUTOINDEX</code> 、必要に応じてメトリックタイプとして<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> のいずれかを使用することができます。</p>
 <p>上記のコード・スニペットで示したように、ベクトル・フィールドにはインデックス・タイプとメトリック・タイプの両方を設定し、スカラー・フィールドにはインデックス・タイプのみを設定する必要があります。ベクトル・フィールドにはインデックスが必須であり、フィルタリング条件で頻繁に使用されるスカラー・フィールドにはインデックスを作成することをお勧めします。</p>
 <p>詳細は、「<a href="/docs/ja/index-vector-fields.md">ベクトル・フィールドのインデックス</a>」と「<a href="/docs/ja/index-scalar-fields.md">スカラー・フィールドのインデックス</a>」を参照してください。</p>
@@ -405,7 +405,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>インデックスパラメータなしでコレクションを作成し、後からインデックスパラメータを追加することもできます。この場合、Milvusはコレクション作成時にコレクションをロードしません。.</p>
-<p>以下のコードスニペットはコレクションなしでコレクションを作成する方法を示しており、コレクションのロードステータスは作成時にアンロードされたままです。</p>
+<p>以下のコードスニペットはインデックスなしでコレクションを作成する方法を示しており、コレクションのロードステータスは作成時にアンロードされたままです。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -502,8 +502,7 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusは、即座にコレクションを作成する方法も提供しています。詳細は<a href="/docs/ja/create-collection-instantly.md">Create Collection Instantlyを</a>参照してください。</p>
-<h2 id="Set-Collection-Properties" class="common-anchor-header">コレクションプロパティの設定<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Collection-Properties" class="common-anchor-header">コレクション・プロパティの設定<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -518,8 +517,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>作成するコレクションにプロパティを設定することで、サービスに適合させることができます。適用可能なプロパティは以下のとおりです。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">シャード番号の設定</h3><p>シャードは、コレクションの水平スライスです。各シャードはデータ入力チャネルに対応します。すべてのコレクションには、デフォルトでシャードがあります。予想されるスループットとコレクションに挿入するデータ量に基づいて、コ レクションを作成するときに適切なシャード数を設定できます。</p>
+    </button></h2><p>作成するコレクションにプロパティを設定して、サービスに適合させることができます。適用可能なプロパティは以下の通りです。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">シャード番号の設定</h3><p>シャードはコレクションの水平スライスです。各シャードはデータ入力チャネルに対応します。すべてのコレクションには、デフォルトでシャードがあります。予想されるスループットとコレクションに挿入するデータ量に基づいて、コ レクションを作成するときに適切なシャード数を設定できます。</p>
 <p>一般的なケースでは、予想されるスループットが500 MB/s増加するたびに、または挿入するデータ量が100 GB増加するたびに、シャード数を1つ増やすことを検討してください。この提案は私たち自身の経験に基づいており、アプリケーションのシナリオに完全に適合するとは限りません。ご自身のニーズに合わせてこの数値を調整することもできますし、デフォルト値を使用することもできます。</p>
 <p>以下のコード・スニペットは、コレクション作成時にシャード数を設定する方法を示しています。</p>
 <div class="multipleCode">
@@ -745,6 +744,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>一貫性レベルの詳細については、<a href="/docs/ja/consistency.md">一貫性レベルを</a>参照してください。</p>
+<p>一貫性レベルの詳細については、<a href="/docs/ja/tune_consistency.md">一貫性レベルを</a>参照してください。</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">ダイナミック・フィールドの有効化</h3><p>コレクション内の動的フィールドは、<strong>$metaという</strong>名前の予約済みJavaScript Object Notation（JSON）フィールドです。このフィールドを有効にすると、Milvusは各エンティティで保持されるすべての非スキーマ定義フィールドとその値をkey-valueペアとして予約フィールドに保存します。</p>
 <p>動的フィールドの使用方法の詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>

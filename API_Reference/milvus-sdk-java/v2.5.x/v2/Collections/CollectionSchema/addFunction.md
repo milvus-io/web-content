@@ -62,7 +62,7 @@ A `Function` object
 import io.milvus.common.clientenum.FunctionType;
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
-import java.util.*;
+import java.util.Collections;
 
 schema.addFunction(Function.builder()
         .functionType(FunctionType.BM25)

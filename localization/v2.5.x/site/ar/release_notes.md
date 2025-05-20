@@ -19,6 +19,72 @@ title: ملاحظات الإصدار
         ></path>
       </svg>
     </button></h1><p>اكتشف الجديد في Milvus! تلخص هذه الصفحة الميزات الجديدة والتحسينات والمشاكل المعروفة وإصلاحات الأخطاء في كل إصدار. يمكنك العثور على ملاحظات الإصدار لكل إصدار تم إصداره بعد الإصدار 2.5.0 في هذا القسم. نقترح عليك زيارة هذه الصفحة بانتظام للتعرف على التحديثات.</p>
+<h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>إصدار ميلفوس</th><th>إصدار Python SDK</th><th>إصدار Node.js SDK</th><th>إصدار جافا SDK</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.11</td><td>2.5.8</td><td>2.5.8</td><td>2.5.8</td></tr>
+</tbody>
+</table>
+<p>نحن متحمسون للإعلان عن إصدار Milvus 2.5.11! يقدم هذا الإصدار ميزات جديدة وقوية مثل إمكانية التحليل المتعدد ودعم موسع للرموز (جيبا، لينديرا، وحدة المعالجة المركزية، معرف اللغة). لقد أجرينا أيضًا العديد من التحسينات، بما في ذلك تحديثات تجمع مؤشرات ترابط تحميل المقاطع الديناميكية وتصفية الحذف المحسّنة أثناء عمليات استيراد مدونة البيانات. تعالج إصلاحات الأخطاء الرئيسية مشكلات إسقاط المقاطع المحتملة وفشل البحث في BM25 وأخطاء تصفية إحصائيات JSON.</p>
+<p>نشجعك على الترقية إلى 2.5.11 للاستفادة من هذه التحسينات والإصلاحات!</p>
+<h3 id="Features" class="common-anchor-header">الميزات</h3><ul>
+<li>إضافة القدرة على تكوين محللات متعددة (محللو الرموز) لدعم لغات متعددة واختيار المحلل المناسب بناءً على تعليمات بيانات الإدخال<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
+<li>تحسين وظيفة محلل BM25<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
+<li>تقديم واجهة برمجة تطبيقات <code translate="no">run_analyzer</code> للتشغيل الجاف للمساعدة في تحليل نتائج الترميز. لمزيد من المعلومات، ارجع إلى <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحلل</a>.</li>
+<li>أدوات الترميز<ul>
+<li>تمت إضافة دعم لتخصيص معلمات أداة الترميز Jieba.</li>
+<li>إضافة دعم لمُرمِّز لينديرا. لمزيد من المعلومات، راجع <a href="/docs/ar/lindera-tokenizer.md">لينديرا</a>.</li>
+<li>إضافة دعم لأداة الترميز ICU. لمزيد من المعلومات، راجع <a href="/docs/ar/icu-tokenizer.md">ICU</a>.</li>
+<li>تمت إضافة أداة ترميز معرّف اللغة لاكتشاف اللغة.</li>
+</ul></li>
+<li>الفلاتر<ul>
+<li>توسيع دعم اللغة لمرشح كلمات الإيقاف المدمج. لمزيد من المعلومات، ارجع إلى <a href="/docs/ar/stop-filter.md">إيقاف</a>.</li>
+<li>تمت إضافة عامل تصفية <code translate="no">remove_punct</code> لإزالة علامات الترقيم. لمزيد من المعلومات، راجع <a href="/docs/ar/removepunct-filter.md">إزالة علامات الترقيم</a>.</li>
+<li>تمت إضافة عامل تصفية <code translate="no">regex</code> لتصفية النص المستند إلى النمط. لمزيد من المعلومات، راجع <a href="/docs/ar/regex-filter.md">Regex</a>.</li>
+</ul></li>
+</ul></li>
+<li>تمت إضافة دعم لتعديل السعة القصوى لحقول المصفوفات<a href="https://github.com/milvus-io/milvus/pull/41406">(#41406</a>).</li>
+<li>تمت إضافة دعم لتعبيرات النطاق الثنائي في فهارس مسار JSON<a href="https://github.com/milvus-io/milvus/pull/41317">(#41317</a>).</li>
+<li>تمت إضافة دعم لأنواع المطابقة اللواحق واللاحقة في إحصائيات JSON<a href="https://github.com/milvus-io/milvus/pull/41388">(#41388</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">تحسينات</h3><ul>
+<li>تمكين التحديثات الديناميكية لحجم تجمّع مؤشرات ترابط تحميل الأجزاء<a href="https://github.com/milvus-io/milvus/pull/41549">(#41549</a>).</li>
+<li>تسريع عملية تصفية الحذف أثناء استيراد مدونة البيانات<a href="https://github.com/milvus-io/milvus/pull/41552">(#41552</a>).</li>
+<li>إضافة معلمات مراقبة لنسبة تصفية التعبير<a href="https://github.com/milvus-io/milvus/pull/41403">(#41403</a>).</li>
+<li>إضافة خيار تكوين لفرض إعادة بناء الفهارس إلى أحدث إصدار<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>).</li>
+<li>تحسين رسالة سجل الأخطاء لنهج القائمة<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368</a>).</li>
+<li>تعديل التعامل مع الواصلات في رؤوس البيانات الوصفية ل gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
+<li>ترقية إصدار Go المطور إلى 1.24.1 لمعالجة نقاط الضعف القابلة للتغيير<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522،</a> <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">إصلاحات الأخطاء</h3><ul>
+<li>إصلاح مشكلة عدم إسقاط المقاطع بشكل صحيح عند إسقاط قسم<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
+<li>تم إصلاح الإدراج المجمّع لاستخدام قائمة حقول الإدخال الخاصة بالوظيفة المشغلة بدلاً من قائمة حقول المخطط<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561</a>).</li>
+<li>إصلاح حالات فشل بحث BM25 التي تحدث عندما يكون <code translate="no">avgdl</code> (متوسط طول المستند) هو NaN<a href="https://github.com/milvus-io/milvus/pull/41503">(#41503</a>).</li>
+<li>تم تصحيح التسميات غير الدقيقة في مقاييس QueryNode<a href="https://github.com/milvus-io/milvus/pull/41422">(#41422</a>).</li>
+<li>تم إصلاح مشكلة فشل إنشاء فهرس إحصائيات JSON في حالة احتواء البيانات على خريطة فارغة<a href="https://github.com/milvus-io/milvus/pull/41506">(#41506</a>).</li>
+<li>تم إصلاح واجهة برمجة التطبيقات <code translate="no">AlterCollection</code> لحفظ الطابع الزمني للتعديل بشكل صحيح<a href="https://github.com/milvus-io/milvus/pull/41469">(#41469</a>).</li>
+<li>إصلاح خطأ في التصفية المتقطعة في إحصائيات JSON ضمن <code translate="no">ConjunctExpr</code> وتحسين منطق حساب خانة المهمة لتسريع بناء إحصائيات JSON<a href="https://github.com/milvus-io/milvus/pull/41458">(# 41458</a>).</li>
+<li>إصلاح تسرب IDF أوراكل في حساب إحصائيات BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
+<li>تم التأكد من فحص المواضيع التي تم إنشاؤها مسبقًا أولاً أثناء التحقق من صحة رقم الجزء<a href="https://github.com/milvus-io/milvus/pull/41421">(#41421</a>).</li>
+<li>تم إصلاح تقرير الجمود الخاطئ الذي يحدث في اختبارات الوحدة<a href="https://github.com/milvus-io/milvus/pull/41377">(#41377</a>).</li>
+</ul>
 <h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +164,7 @@ title: ملاحظات الإصدار
 <li>تم حل حلقة الرصيد العادي اللانهائية التي تم تشغيلها بعد تعليق الرصيد<a href="https://github.com/milvus-io/milvus/pull/41196">(#41196</a>)</li>
 <li>يدعم عرض المجموعات الآن الكائنات الممنوحة لمجموعات الامتيازات المخصصة<a href="https://github.com/milvus-io/milvus/pull/41204">(#41204</a>)</li>
 <li>تم إصلاح فشل استرداد مواضع القنوات المتماثلة<a href="https://github.com/milvus-io/milvus/pull/41189">(#41189</a>)</li>
-<li>تم إصلاح تسرب مؤشر ترابط محتمل ناتج عن مهلات RESTful<a href="https://github.com/milvus-io/milvus/pull/41184">(#41184</a>)</li>
+<li>تم إصلاح تسرب مؤشر ترابط محتمل ناجم عن مهلات RESTful<a href="https://github.com/milvus-io/milvus/pull/41184">(#41184</a>)</li>
 <li>إضافة صورة نقطية واضحة لوضع تخطي الدُفعات<a href="https://github.com/milvus-io/milvus/pull/41165">(#41165</a>)</li>
 <li>تم إصلاح مشكلة فشل إزالة نوع فهرس في التخزين عن بُعد في الوضع المحلي<a href="https://github.com/milvus-io/milvus/pull/41163">(#41163</a>)</li>
 <li>استخدام <code translate="no">element_type</code> لمشغلي الصفيف <code translate="no">isNull</code> <a href="https://github.com/milvus-io/milvus/pull/41158">(#41158</a>)</li>
@@ -217,13 +283,13 @@ title: ملاحظات الإصدار
 <h3 id="Bug-fixes" class="common-anchor-header">إصلاحات الأخطاء</h3><ul>
 <li>استخدام <code translate="no">newInsertDataWithFunctionOutputField</code> عند استيراد ملفات مدونات المقاطع<a href="https://github.com/milvus-io/milvus/pull/40742">(#40742</a>)</li>
 <li>إصلاح مشكلة فشل تطبيق خصائص mmap عند إنشاء مجموعة<a href="https://github.com/milvus-io/milvus/pull/40515">(#40515</a>)</li>
-<li>لا تحذف ملف السنترويدات عند فشل أخذ العينات؛ بدلاً من ذلك، انتظر حتى يتم التحكم في GC<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>)</li>
+<li>لا تحذف ملف السنترويدات عند فشل أخذ العينات؛ بدلاً من ذلك، انتظر حتى يتم إجراء GC<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>)</li>
 <li>إصلاح مشاكل فقدان الرسائل أثناء البحث<a href="https://github.com/milvus-io/milvus/pull/40736">(#40736</a>)</li>
 <li>إزالة الأهداف المتأخرة بعد المرسل الرئيسي<a href="https://github.com/milvus-io/milvus/pull/40717">(#40717</a>)</li>
 <li>تمت إضافة مدخلات الصورة النقطية الواضحة لكل حلقة دفعية<a href="https://github.com/milvus-io/milvus/pull/40722">(#40722</a>)</li>
 <li>حماية <code translate="no">GetSegmentIndexes</code> باستخدام RLock<a href="https://github.com/milvus-io/milvus/pull/40720">(#40720</a>)</li>
 <li>تجنب أخطاء التجزئة الناتجة عن استرجاع مجموعات بيانات المتجهات الفارغة<a href="https://github.com/milvus-io/milvus/pull/40546">(#40546</a>)</li>
-<li>إصلاح مرشح "غير متساوٍ" لفهرس JSON<a href="https://github.com/milvus-io/milvus/pull/40648">(#40648</a>)</li>
+<li>إصلاح عامل تصفية "غير متساوٍ" لفهرس JSON<a href="https://github.com/milvus-io/milvus/pull/40648">(#40648</a>)</li>
 <li>إصلاح تحميل الإزاحة الفارغة في الفهرس المقلوب<a href="https://github.com/milvus-io/milvus/pull/40524">(#40524</a>)</li>
 <li>تم إصلاح منطق تنظيف القمامة في <code translate="no">jsonKey</code> الإحصائيات وتحسين مرشح إحصائيات مفاتيح JSON<a href="https://github.com/milvus-io/milvus/pull/40039">(#40039</a>)</li>
 <li>تم اكتشاف أخطاء مؤشر JSON غير صالح<a href="https://github.com/milvus-io/milvus/pull/40626">(#40626</a>)</li>
@@ -231,8 +297,8 @@ title: ملاحظات الإصدار
 <li>تجنب الذعر عند عدم وجود حقل في المخطط في QueryNode<a href="https://github.com/milvus-io/milvus/pull/40542">(#40542</a>)</li>
 <li>تم إصلاح مشكلة تجميع المراجع للبحث/الاستعلام<a href="https://github.com/milvus-io/milvus/pull/40550">(#40550</a>)</li>
 <li>معالجة الصفوف الفارغة للمتجهات المتفرقة<a href="https://github.com/milvus-io/milvus/pull/40586">(#40586</a>)</li>
-<li>إضافة التحقق من معلمة النوع/الفهرس المكرر عند إنشاء مجموعات<a href="https://github.com/milvus-io/milvus/pull/40465">(#40465</a>)</li>
-<li>تم نقل <code translate="no">metaHeader</code> إلى العميل لتجنب سباقات البيانات<a href="https://github.com/milvus-io/milvus/pull/40444">(#40444</a>)</li>
+<li>تمت إضافة التحقق من معلمة النوع/الفهرس المكرر عند إنشاء المجموعات<a href="https://github.com/milvus-io/milvus/pull/40465">(#40465</a>)</li>
+<li>تم نقل <code translate="no">metaHeader</code> إلى العميل لتجنب سباقات البيانات<a href="https://github.com/milvus-io/milvus/pull/40444">(#40444#</a>)</li>
 </ul>
 <h2 id="v256" class="common-anchor-header">v2.5.6<button data-href="#v256" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -358,7 +424,7 @@ title: ملاحظات الإصدار
 <li>[2.5] إصلاح تمكن المستخدم الجذر من سرد جميع المجموعات حتى عند تعيين <code translate="no">common.security.rootShouldBindRole</code> <a href="https://github.com/milvus-io/milvus/pull/39714">(#39714</a>)</li>
 <li>[2.5] تم إصلاح تسرب مخطط التدفق<a href="https://github.com/milvus-io/milvus/pull/39686">(#39686#</a>)</li>
 <li>[2.5] استخدام مُنسق عنصر المعلمة لتجنب تراكب Setconfig<a href="https://github.com/milvus-io/milvus/pull/39636">(#39636</a>)</li>
-<li>[2.5] تم التحقق من اسم امتيازات Metastore مع اسم الامتياز "الكل"<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>.5)</li>
+<li>[2.5] تم التحقق من اسم امتياز Metastore مع اسم الامتياز "الكل"<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>.5)</li>
 <li>[2.5] تمت إضافة محدد المعدل ل RESTful v1<a href="https://github.com/milvus-io/milvus/pull/39555">(#39555</a>)</li>
 <li>[2.5] إزالة رقم القسم المشفّر في معالج RESTful<a href="https://github.com/milvus-io/milvus/pull/40113">(#40113</a>)</li>
 </ul>
@@ -378,7 +444,7 @@ title: ملاحظات الإصدار
 <li>[2.5] الحد من سرعة توليد مهمة الإحصائيات<a href="https://github.com/milvus-io/milvus/pull/39645">(#39645</a>)</li>
 <li>تكوينات مضافة لجدول الضغط<a href="https://github.com/milvus-io/milvus/pull/39511">(#39511</a>)</li>
 <li>[2.5] تم التحقق من ضغط L0 فقط مع نفس القناة عند الذكر<a href="https://github.com/milvus-io/milvus/pull/39543">(#39543</a>)</li>
-<li>[2.5] ضبط تقدير ذاكرة محمل المقطع للفهارس المؤقتة<a href="https://github.com/milvus-io/milvus/pull/39509">(#39509</a>)</li>
+<li>[2.5] تعديل تقدير ذاكرة محمل المقطع للفهارس المؤقتة<a href="https://github.com/milvus-io/milvus/pull/39509">(#39509</a>)</li>
 <li>[2.5] تم استخدام نقاط بدء التشغيل لمقطع الختم حسب سياسة العمر الافتراضي<a href="https://github.com/milvus-io/milvus/pull/39994">(#39994</a>)</li>
 <li>إزالة تعريف المهمة عند انتفاء الحاجة إلى المهمة<a href="https://github.com/milvus-io/milvus/pull/40146">(#40146</a>)</li>
 <li>[2.5] تسريع سرد الكائنات أثناء استيراد مدونة البيانات<a href="https://github.com/milvus-io/milvus/pull/40048">(#40048</a>)</li>
@@ -395,7 +461,7 @@ title: ملاحظات الإصدار
 <li>[2.5] [GoSDK] تمت إضافة سكر نحوي مُمكّن<a href="https://github.com/milvus-io/milvus/pull/39853">(#39853</a>)</li>
 <li>[2.5] [2.5] دعم الفهرس المؤقت أنواع مختلفة من الفهارس والمزيد من أنواع البيانات (FP16/BF16)<a href="https://github.com/milvus-io/milvus/pull/39180">(#39180</a>)</li>
 <li>[GoSDK] [2.5] مزامنة التزامات GoSDK من الفرع الرئيسي<a href="https://github.com/milvus-io/milvus/pull/39823">(#39823</a>)</li>
-<li>حافظ على اتساق الذاكرة والتوصيف الوصفية للمذيع<a href="https://github.com/milvus-io/milvus/pull/39721">(#39721</a>)</li>
+<li>حافظ على اتساق الذاكرة والتوصيف الوصفية للبث<a href="https://github.com/milvus-io/milvus/pull/39721">(#39721</a>)</li>
 <li>البث مع إشعار قائم على الحدث<a href="https://github.com/milvus-io/milvus/pull/39550">(#39550</a>)</li>
 <li>[2.5] تنقيح رسالة الخطأ للتحقق من المخطط والفهرس<a href="https://github.com/milvus-io/milvus/pull/39565">(#39565</a>)</li>
 <li>[2.5] إعادة تعيين نوع الفهرس التلقائي الافتراضي للعدد القياسي<a href="https://github.com/milvus-io/milvus/pull/39820">(#39820</a>)</li>
@@ -460,14 +526,14 @@ title: ملاحظات الإصدار
 <li>تم إصلاح مشكلة حيث يمكن أن يؤدي استخدام الأسماء المستعارة إلى اجتياز مكرر قاعدة البيانات الخطأ<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>)</li>
 <li>إصلاح فشل تحديث مجموعة الموارد عند تغيير قاعدة البيانات<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>)</li>
 <li>تم إصلاح مشكلة متقطعة حيث لم يتمكن فهرس tantivy من حذف ملفات الفهرس أثناء الإصدار<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
-<li>تم إصلاح بطء الفهرسة البطيء الناجم عن وجود عدد كبير جداً من الخيوط<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
+<li>تم إصلاح بطء الفهرسة البطيء الناجم عن وجود عدد كبير جداً من المواضيع<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
 <li>تم إصلاح مشكلة منع تخطي عمليات التحقق من حصص الأقراص أثناء الاستيراد الجماعي<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
 <li>تم حل مشكلات التجميد الناتجة عن وجود عدد كبير جدًا من مستهلكي قائمة انتظار الرسائل عن طريق الحد من التزامن<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
 <li>إصلاح مهلات الاستعلامات التي تسببها إعادة تشغيل MixCoord أثناء عمليات الدمج واسعة النطاق<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
 <li>إصلاح مشاكل عدم توازن القنوات الناجمة عن تعطل العقدة<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
-<li>تم إصلاح مشكلة قد تتسبب في تعطل توازن القناة.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
+<li>تم إصلاح مشكلة يمكن أن تتسبب في تعطل توازن القنوات.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
 <li>تم إصلاح مشكلة حيث أصبحت عمليات التحقق من مستوى امتيازات المجموعة المخصصة RBAC غير فعالة<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
-<li>إصلاح فشل في استرداد عدد الصفوف في الفهارس الفارغة<a href="https://github.com/milvus-io/milvus/pull/39210">(#39210</a>)</li>
+<li>إصلاح فشل استرداد عدد الصفوف في الفهارس الفارغة<a href="https://github.com/milvus-io/milvus/pull/39210">(#39210</a>)</li>
 <li>إصلاح تقدير الذاكرة غير الصحيح للمقاطع الصغيرة<a href="https://github.com/milvus-io/milvus/pull/38909">(#38909</a>)</li>
 </ul>
 <h2 id="v253" class="common-anchor-header">v2.5.3<button data-href="#v253" class="anchor-icon" translate="no">
@@ -618,7 +684,7 @@ title: ملاحظات الإصدار
 </table>
 <p>يجلب الإصدار 2.5.0 من Milvus 2.5.0 تطورات كبيرة لتعزيز قابلية الاستخدام وقابلية التوسع والأداء للمستخدمين الذين يتعاملون مع البحث المتجه وإدارة البيانات على نطاق واسع. من خلال هذا الإصدار، يدمج Milvus ميزات جديدة قوية مثل البحث القائم على المصطلحات، وضغط التجميع للاستعلامات المحسّنة، والدعم متعدد الاستخدامات لطرق البحث المتجه المتفرقة والكثيفة. تقدم التحسينات في إدارة المجموعات والفهرسة ومعالجة البيانات مستويات جديدة من المرونة وسهولة الاستخدام، مما يجعل من Milvus قاعدة بيانات متجهات أكثر قوة وسهولة في الاستخدام.</p>
 <h3 id="Key-Features" class="common-anchor-header">الميزات الرئيسية</h3><h4 id="Full-Text-Search" class="common-anchor-header">بحث نصي كامل</h4><p>يدعم الإصدار Milvus 2.5 البحث في النص الكامل المنفذ باستخدام Sparse-BM25! تعد هذه الميزة مكملًا مهمًا لقدرات البحث الدلالي القوية في ميلفوس خاصةً في السيناريوهات التي تتضمن كلمات نادرة أو مصطلحات تقنية. في الإصدارات السابقة، دعمت Milvus المتجهات المتفرقة للمساعدة في سيناريوهات البحث بالكلمات الرئيسية. تم إنشاء هذه المتجهات المتفرقة خارج Milvus بواسطة نماذج عصبية مثل SPLADEv2/BGE-M3 أو نماذج إحصائية مثل خوارزمية BM25.</p>
-<p>يحتوي Milvus 2.5، المدعوم من <a href="https://github.com/quickwit-oss/tantivy">Tantivy،</a> على محلل مدمج واستخراج متجهات متناثرة، مما يوسع واجهة برمجة التطبيقات من تلقي المتجهات فقط كمدخلات إلى قبول النص مباشرةً. يتم تحديث المعلومات الإحصائية BM25 في الوقت الحقيقي عند إدخال البيانات، مما يعزز قابلية الاستخدام والدقة. بالإضافة إلى ذلك، توفر المتجهات المتفرقة المستندة إلى خوارزميات أقرب جار تقريبي (ANN) أداءً أقوى من أنظمة البحث القياسية للكلمات الرئيسية.</p>
+<p>يحتوي Milvus 2.5، المدعوم من <a href="https://github.com/quickwit-oss/tantivy">Tantivy،</a> على محلل مدمج واستخراج متجهات متناثرة، مما يوسع واجهة برمجة التطبيقات من تلقي المتجهات فقط كمدخلات إلى قبول النص مباشرةً. يتم تحديث معلومات BM25 الإحصائية في الوقت الحقيقي عند إدخال البيانات، مما يعزز قابلية الاستخدام والدقة. بالإضافة إلى ذلك، توفر المتجهات المتفرقة المستندة إلى خوارزميات أقرب جار تقريبي (ANN) أداءً أقوى من أنظمة البحث القياسية للكلمات الرئيسية.</p>
 <p>للحصول على التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة على المحلل</a> <a href="/docs/ar/full-text-search.md">والبحث في النص الكامل</a>.</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">واجهة ويب لإدارة المجموعات (بيتا)</h4><p>لدعم البيانات الضخمة والميزات الغنية بشكل أفضل، يتضمن تصميم Milvus المتطور العديد من التبعيات والعديد من أدوار العقد، وهياكل البيانات المعقدة، وغير ذلك. يمكن أن تشكل هذه الجوانب تحديات للاستخدام والصيانة.</p>
 <p>يقدّم الإصدار 2.5 من ميلفوس 2.5 واجهة ويب مدمجة لإدارة المجموعات (Cluster Management WebUI)، مما يقلل من صعوبة صيانة النظام من خلال عرض معلومات بيئة وقت تشغيل ميلفوس المعقدة. ويتضمن ذلك تفاصيل قواعد البيانات والمجموعات والمقاطع والقنوات والتبعيات وحالة صحة العقدة ومعلومات المهام والاستعلامات البطيئة والمزيد.</p>

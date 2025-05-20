@@ -383,7 +383,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code>params.json_cast_type</code></p></td>
-     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p><ul><li><p><code>"bool"</code> or <code>"BOOL"</code></p></li><li><p><code>"double"</code> or <code>"DOUBLE"</code></p></li><li><p><code>"varchar"</code> or <code>"VARCHAR"</code></p><p><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If type casting fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</p></li></ul></td>
+     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p><ul><li><code>"bool"</code> or <code>"BOOL"</code></li><li><code>"double"</code> or <code>"DOUBLE"</code></li><li><code>"varchar"</code> or <code>"VARCHAR"</code><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If type casting fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</li></ul></td>
      <td><p><code>"varchar"</code></p></td>
    </tr>
 </table>
@@ -404,7 +404,7 @@ curl --request POST \
 
 - **Numeric precision**:
 
-    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds 2^{53}, it loses precision, and queries on those out-of-range values may not match exactly.
+    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds $2^{53}$, it loses precision, and queries on those out-of-range values may not match exactly.
 
 - **Data integrity**:
 
@@ -477,7 +477,7 @@ export indexParams='[
 
 ## Create collection
 
-Once the schema and index are defined, create a collection that includes string fields.
+Once the schema and index are defined, create a collection that includes the JSON field.
 
 <div class="multipleCode">
     <a href="#python">Python</a>

@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus에서는 컬렉션의 각 필드에 대한 이름과 데이터 유형을 설정하여 컬렉션 스키마를 만들 수 있습니다. 스키마에 필드를 추가할 때 이 필드가 삽입하려는 엔티티에 포함되어 있는지 확인하세요. 일부 필드를 선택 사항으로 사용하려는 경우 동적 필드를 활성화하는 것도 한 가지 옵션입니다.</p>
-<p>동적 필드는 JavaScript 객체 표기법(JSON) 유형인 <code translate="no">$meta</code> 이라는 이름의 예약 필드입니다. 스키마에 정의되지 않은 엔티티의 모든 필드는 이 예약된 JSON 필드에 키-값 쌍으로 저장됩니다.</p>
+<p>동적 필드는 <strong>$meta라는</strong> 이름의 예약된 필드이며 JSON(JavaScript 객체 표기법) 유형입니다. 스키마에 정의되지 않은 엔티티의 모든 필드는 이 예약된 JSON 필드에 키-값 쌍으로 저장됩니다.</p>
 <p>동적 필드가 활성화된 컬렉션의 경우 스키마에 명시적으로 정의된 필드와 마찬가지로 동적 필드의 키를 스칼라 필터링에 사용할 수 있습니다.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">동적 필드 활성화<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,7 +54,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ko/create-collection-instantly.md">컬렉션 즉시 만들기에</a> 설명된 방법을 사용하여 만든 컬렉션에는 기본적으로 동적 필드가 활성화되어 있습니다. 사용자 지정 설정으로 컬렉션을 만들 때 동적 필드를 수동으로 활성화할 수도 있습니다.</p>
+    </button></h2><p>사용자 지정 설정으로 컬렉션을 만들 때 동적 필드를 수동으로 활성화할 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -151,7 +151,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션에서 동적 필드를 사용 설정하면 스키마에 정의되지 않은 모든 필드와 해당 값이 동적 필드에 키-값 쌍으로 저장됩니다.</p>
+    </button></h2><p>컬렉션에서 동적 필드를 사용하도록 설정하면 스키마에 정의되지 않은 모든 필드와 해당 값이 동적 필드에 키-값 쌍으로 저장됩니다.</p>
 <p>예를 들어 컬렉션 스키마에 동적 필드가 활성화된 상태에서 <code translate="no">id</code> 및 <code translate="no">vector</code> 이라는 두 개의 필드만 정의되어 있다고 가정해 보겠습니다. 이제 이 컬렉션에 다음 데이터 집합을 삽입합니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -423,7 +423,7 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">동적 필드로 쿼리 및 검색</h3><p>Milvus는 쿼리 및 검색 중에 필터 표현식 사용을 지원하므로 결과에 포함할 필드를 지정할 수 있습니다. 다음 예제는 스키마에 정의되어 있지 않은 <code translate="no">color</code> 필드를 동적 필드를 사용하여 쿼리 및 검색을 수행하는 방법을 보여줍니다.</p>
+<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">동적 필드로 쿼리 및 검색</h3><p>Milvus는 쿼리 및 검색 중에 필터 표현식 사용을 지원하여 결과에 포함할 필드를 지정할 수 있습니다. 다음 예제는 스키마에 정의되어 있지 않은 <code translate="no">color</code> 필드를 동적 필드를 사용하여 쿼리 및 검색을 수행하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]

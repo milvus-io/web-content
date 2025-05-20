@@ -155,6 +155,6 @@ summary: 本文将 Milvus 与其他向量搜索解决方案进行比较。
       </svg>
     </button></h2><ul>
 <li><p><strong>试用</strong>：从 Milvus<a href="https://milvus.io/docs/quickstart.md">快速入门</a>或<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">注册 Zilliz Cloud</a> 开始，亲身体验 Milvus。</p></li>
-<li><p><strong>了解更多</strong>：通过我们全面的<a href="/docs/zh/glossary.md">术语</a>和<a href="https://milvus.io/docs/manage-collections.md">用户指南</a>深入了解 Milvus 的功能。</p></li>
+<li><p><strong>了解更多</strong>：通过我们全面的<a href="/docs/zh/v2.4.x/glossary.md">术语</a>和<a href="https://milvus.io/docs/manage-collections.md">用户指南</a>深入了解 Milvus 的功能。</p></li>
 <li><p><strong>探索替代方案</strong>：如需对向量数据库选项进行更广泛的比较，请浏览<a href="https://zilliz.com/comparison">本页</a>上的其他资源。</p></li>
 </ul>

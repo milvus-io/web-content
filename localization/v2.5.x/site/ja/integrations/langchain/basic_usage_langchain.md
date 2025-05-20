@@ -35,7 +35,7 @@ title: Milvusをベクターストアとして使う
         ></path>
       </svg>
     </button></h2><p>このインテグレーションを使用するには<code translate="no">langchain-milvus</code> と<code translate="no">pip install -qU langchain-milvus</code> をインストールする必要があります。</p>
-<pre><code translate="no" class="language-shell">$ pip install -qU  langchain_milvus
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU  langchain_milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>最新版のpymilvusにはローカルベクタデータベース Milvus Lite が付属しており、プロトタイピングに適しています。100万ドキュメント以上のような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">dockerやkubernetes</a>上でよりパフォーマンスの高いMilvusサーバーをセットアップすることをお勧めします。</p>
 <h2 id="Initialization" class="common-anchor-header">初期化<button data-href="#Initialization" class="anchor-icon" translate="no">
@@ -53,9 +53,9 @@ title: Milvusをベクターストアとして使う
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbeddings</span>
+    </button></h2><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
-embeddings = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
+embeddings = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 
@@ -70,19 +70,19 @@ vector_store = Milvus(
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">Milvus Collectionsを使用してデータを分割します。</h3><p>同じMilvusインスタンス内で、関連性のない異なるドキュメントを異なるコレクションに格納し、コンテキストを維持することができます。</p>
 <p>以下は、ドキュメントから新しいベクトルストアのコレクションを作成する方法です：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
-vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="hljs-title function_">from_documents</span>(
-    [<span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;foo!&quot;</span>)],
+vector_store_saved = Milvus.from_documents(
+    [Document(page_content=<span class="hljs-string">&quot;foo!&quot;</span>)],
     embeddings,
     collection_name=<span class="hljs-string">&quot;langchain_example&quot;</span>,
-    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
+    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>そのコレクションを取り出す方法は以下のとおりです。</p>
-<pre><code translate="no" class="language-python">vector_store_loaded = <span class="hljs-title class_">Milvus</span>(
+<pre><code translate="no" class="language-python">vector_store_loaded = Milvus(
     embeddings,
-    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
+    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
     collection_name=<span class="hljs-string">&quot;langchain_example&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -184,7 +184,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
  'd43cbf9a-a772-4c40-993b-9439065fec01',
  '25e667bb-6f09-4574-a368-661069301906']
 </code></pre>
-<h3 id="Delete-items-from-vector-store" class="common-anchor-header">ベクターストアからアイテムを削除する</h3><pre><code translate="no" class="language-python">vector_store.<span class="hljs-built_in">delete</span>(ids=[uuids[<span class="hljs-number">-1</span>]])
+<h3 id="Delete-items-from-vector-store" class="common-anchor-header">ベクターストアからアイテムを削除する</h3><pre><code translate="no" class="language-python">vector_store.delete(ids=[uuids[-<span class="hljs-number">1</span>]])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">(insert count: 0, delete count: 1, upsert count: 0, timestamp: 0, success count: 0, err count: 0, cost: 0)
 </code></pre>
@@ -263,14 +263,14 @@ vectorstore = Milvus.from_documents(
     docs,
     embeddings,
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
     partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>,  <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>パーティションキーを利用した検索を行うには、検索リクエストのブーリアン式に以下のいずれかを含める必要があります：</p>
 <p><code translate="no">search_kwargs={&quot;expr&quot;: '&lt;partition_key&gt; == &quot;xxxx&quot;'}</code></p>
 <p><code translate="no">search_kwargs={&quot;expr&quot;: '&lt;partition_key&gt; == in [&quot;xxx&quot;, &quot;xxx&quot;]'}</code></p>
-<p><code translate="no">&lt;partition_key&gt;</code> をパーティション・キーとして指定されたフィールド名に置き換える。</p>
+<p><code translate="no">&lt;partition_key&gt;</code> をパーティション・キーとして指定されたフィールド名に置き換えてください。</p>
 <p>milvusは、指定されたパーティション・キーに基づいてパーティションを変更し、パーティション・キーに従ってエンティティをフィルタリングし、フィルタリングされたエンティティを検索します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># This will only get documents for Ankush</span>
 vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quot;</span>: <span class="hljs-string">&#x27;namespace == &quot;ankush&quot;&#x27;</span>}).invoke(

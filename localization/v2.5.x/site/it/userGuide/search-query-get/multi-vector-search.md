@@ -2,11 +2,12 @@
 id: multi-vector-search.md
 title: Ricerca ibrida
 summary: >-
-  La ricerca ibrida si riferisce a un metodo di ricerca che conduce più ricerche
-  di RNA simultaneamente, rielabora più serie di risultati da queste ricerche di
-  RNA e alla fine restituisce una singola serie di risultati. L'uso della
-  ricerca ibrida può migliorare l'accuratezza della ricerca. Milvus supporta
-  l'esecuzione di una ricerca ibrida su una collezione con più campi vettoriali.
+  La ricerca ibrida si riferisce a un metodo di ricerca che conduce
+  simultaneamente più ricerche di RNA, rielabora più serie di risultati da
+  queste ricerche di RNA e alla fine restituisce una singola serie di risultati.
+  L'uso della ricerca ibrida può migliorare l'accuratezza della ricerca. Milvus
+  supporta l'esecuzione di una ricerca ibrida su una collezione con più campi
+  vettoriali.
 ---
 <h1 id="Hybrid-Search" class="common-anchor-header">Ricerca ibrida<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -512,7 +513,7 @@ search_param_1 = {
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>}, {<span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
+query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>, <span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,

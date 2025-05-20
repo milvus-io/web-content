@@ -19,6 +19,75 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.11</td><td>2.5.8</td><td>2.5.8</td><td>2.5.8</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce the release of Milvus 2.5.11! This version introduces powerful new features like the multi-analyzer capability and expanded tokenizer support (Jieba, Lindera, ICU, Language Identifier). We’ve also made several improvements, including dynamic segment loading thread pool updates and optimized delete filtering during binlog imports. Key bug fixes address potential segment drop issues, BM25 search failures, and JSON stats filtering errors.</p>
+<p>We encourage you to upgrade to 2.5.11 to take advantage of these enhancements and fixes!</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Added the ability to configure multiple analyzers (tokenizers) for multi languages support and select the appropriate one based on the instruction of the input data (<a href="https://github.com/milvus-io/milvus/pull/41444">#41444</a>).</li>
+<li>Enhanced the BM25 Analyzer functionality (<a href="https://github.com/milvus-io/milvus/pull/41456">#41456</a>).
+<ul>
+<li>Introduced a <code translate="no">run_analyzer</code> API for dry runs to help analyze tokenization results. For more information, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</li>
+<li>Tokenizers
+<ul>
+<li>Added support for customizing Jieba tokenizer parameters.</li>
+<li>Added support for the Lindera tokenizer. For more information, refer to <a href="/docs/lindera-tokenizer.md">Lindera</a>.</li>
+<li>Added support for the ICU tokenizer. For more information, refer to <a href="/docs/icu-tokenizer.md">ICU</a>.</li>
+<li>Added a Language Identifier tokenizer for language detection.</li>
+</ul></li>
+<li>Filters
+<ul>
+<li>Expanded language support for the built-in stop word filter. For more information, refer to <a href="/docs/stop-filter.md">Stop</a>.</li>
+<li>Added a <code translate="no">remove_punct</code> filter to remove punctuation marks. For more information, refer to <a href="/docs/removepunct-filter.md">Remove Punct</a>.</li>
+<li>Added a <code translate="no">regex</code> filter for pattern-based text filtering. For more information, refer to <a href="/docs/regex-filter.md">Regex</a>.</li>
+</ul></li>
+</ul></li>
+<li>Added support for modifying the maximum capacity of array fields (<a href="https://github.com/milvus-io/milvus/pull/41406">#41406</a>).</li>
+<li>Added support for binary range expressions in JSON path indexes (<a href="https://github.com/milvus-io/milvus/pull/41317">#41317</a>).</li>
+<li>Added support for infix and suffix match types in JSON stats (<a href="https://github.com/milvus-io/milvus/pull/41388">#41388</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Enabled dynamic updates to the size of the Segment loading thread pool (<a href="https://github.com/milvus-io/milvus/pull/41549">#41549</a>).</li>
+<li>Accelerated delete filtering during binlog import (<a href="https://github.com/milvus-io/milvus/pull/41552">#41552</a>).</li>
+<li>Added monitoring parameters for the expression filter ratio (<a href="https://github.com/milvus-io/milvus/pull/41403">#41403</a>).</li>
+<li>Added a configuration option to force rebuilding indexes to the latest version (<a href="https://github.com/milvus-io/milvus/pull/41432">#41432</a>).</li>
+<li>Improved the error log message for the list policy (<a href="https://github.com/milvus-io/milvus/pull/41368">#41368</a>).</li>
+<li>Adapted handling for hyphens in gRPC metadata headers (<a href="https://github.com/milvus-io/milvus/pull/41372">#41372</a>).</li>
+<li>Upgraded Go version to 1.24.1 to address CVEs (<a href="https://github.com/milvus-io/milvus/pull/41522">#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed an issue where segments might not be correctly dropped when dropping a partition (<a href="https://github.com/milvus-io/milvus/pull/41543">#41543</a>).</li>
+<li>Fixed bulk insert to use the function runner’s input field list instead of the schema’s field list (<a href="https://github.com/milvus-io/milvus/pull/41561">#41561</a>).</li>
+<li>Fixed BM25 search failures occurring when <code translate="no">avgdl</code> (average document length) is NaN (<a href="https://github.com/milvus-io/milvus/pull/41503">#41503</a>).</li>
+<li>Corrected inaccurate labels in QueryNode metrics (<a href="https://github.com/milvus-io/milvus/pull/41422">#41422</a>).</li>
+<li>Fixed an issue where JSON stats index creation could fail if the data contained an empty map (<a href="https://github.com/milvus-io/milvus/pull/41506">#41506</a>).</li>
+<li>Fixed the <code translate="no">AlterCollection</code> API to correctly save the modification timestamp (<a href="https://github.com/milvus-io/milvus/pull/41469">#41469</a>).</li>
+<li>Fixed an intermittent filtering error in JSON stats under <code translate="no">ConjunctExpr</code> and improved the task slot calculation logic to accelerate JSON stats building (<a href="https://github.com/milvus-io/milvus/pull/41458">#41458</a>).</li>
+<li>Fixed an IDF oracle leak in BM25 statistics calculation (<a href="https://github.com/milvus-io/milvus/pull/41426">#41426</a>).</li>
+<li>Ensured pre-created topics are checked first during shard number validation (<a href="https://github.com/milvus-io/milvus/pull/41421">#41421</a>).</li>
+<li>Fixed an erroneous deadlock report occurring in unit tests (<a href="https://github.com/milvus-io/milvus/pull/41377">#41377</a>).</li>
+</ul>
 <h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

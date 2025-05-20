@@ -135,7 +135,7 @@ common:
 </table>
 </li>
 </ul>
-<p>上記の変更をMilvusクラスタに適用するには、<a href="/docs/ja/configure-helm.md">Configure Milvus with Helm</a>および<a href="/docs/ja/configure_operator.md">Configure Milvus with Milvus Operatorsの</a>手順に従ってください。</p>
+<p>上記の変更をMilvusクラスタに適用するには、<a href="/docs/ja/v2.4.x/configure-helm.md">Configure Milvus with Helm</a>および<a href="/docs/ja/v2.4.x/configure_operator.md">Configure Milvus with Milvus Operatorsの</a>手順に従ってください。</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">コレクションの構成</h3><p>特定のコレクションでクラスタリングコンパクトを行うには、コレクションからスカラフィールドをクラスタリングキーとして選択する必要があります。</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

@@ -103,7 +103,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的代码中，我们定义了<code translate="no">BM25BuiltInFunction</code> 的一个实例，并将其传递给<code translate="no">Milvus</code> 对象。<code translate="no">BM25BuiltInFunction</code> 是一个轻量级的封装类。 <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a>的轻量级封装类。</p>
@@ -134,7 +134,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -143,7 +143,7 @@ vectorstore.vector_fields
 </code></pre>
 <p>在这个示例中，我们有三个向量字段。其中，<code translate="no">sparse</code> 作为<code translate="no">BM25BuiltInFunction</code> 的输出字段，而其他两个字段<code translate="no">dense1</code> 和<code translate="no">dense2</code> 则被自动指定为两个<code translate="no">OpenAIEmbeddings</code> 模型的输出字段（根据顺序）。</p>
 <p>这样，就可以定义多个向量场，并为其分配不同的嵌入或函数组合，从而实现混合搜索。</p>
-<p>执行混合搜索时，我们只需传入查询文本，并选择性地设置 topK 和 Reranker 参数。<code translate="no">vectorstore</code> 实例会自动处理向量嵌入和内置函数，最后使用 Reranker 对结果进行细化。搜索过程的底层实现细节对用户是隐藏的。</p>
+<p>执行混合搜索时，我们只需传入查询文本，并选择性地设置 topK 和 Reranker 参数。<code translate="no">vectorstore</code> 实例会自动处理向量嵌入和内置函数，最后使用 Reranker 精炼结果。搜索过程的底层实现细节对用户是隐藏的。</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
 )  <span class="hljs-comment"># , ranker_type=&quot;weighted&quot;, ranker_params={&quot;weights&quot;:[0.3, 0.3, 0.4]})</span>
@@ -162,7 +162,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -209,7 +209,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>我们可以看看 Milvus Collections 的 Schema，确保定制的分析器设置正确。</p>
@@ -240,7 +240,7 @@ vectorstore = Milvus.from_documents(
     <span></span>
   </span>
 </p>
-<p>该图显示了混合检索和重排过程，将用于关键词匹配的 BM25 和用于语义检索的向量搜索结合在一起。来自这两种方法的结果经过合并、Rerankers 和传递给 LLM 来生成最终答案。</p>
+<p>该图显示了混合检索和重排过程，将用于关键词匹配的 BM25 和用于语义检索的向量搜索结合在一起。来自两种方法的结果经过合并、Rerankers 和传递给 LLM 生成最终答案。</p>
 <p>混合搜索兼顾了精确性和语义理解，提高了不同查询的准确性和稳健性。它通过 BM25 全文检索和向量搜索检索候选内容，同时确保语义、上下文感知和精确检索。</p>
 <p>让我们从一个例子开始。</p>
 <h3 id="Prepare-the-data" class="common-anchor-header">准备数据</h3><p>我们使用 Langchain WebBaseLoader 从网络源加载文档，并使用 RecursiveCharacterTextSplitter 将文档分割成块。</p>
@@ -282,7 +282,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">构建 RAG 链</h3><p>我们准备好 LLM 实例和提示，然后使用 LangChain 表达式语言将它们结合到 RAG 管道中。</p>

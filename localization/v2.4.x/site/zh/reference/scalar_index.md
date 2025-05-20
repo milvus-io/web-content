@@ -36,7 +36,7 @@ title: 标量索引
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中进行向量相似性搜索时，可以使用逻辑操作符将标量字段组织成布尔表达式。</p>
-<p>当 Milvus 收到带有这种布尔表达式的搜索请求时，它会将布尔表达式解析为抽象语法树（AST），以生成用于属性筛选的物理计划。然后，Milvus 在每个分段中应用物理计划，生成一个<a href="/docs/zh/bitset.md">比特集</a>作为过滤结果，并将结果作为向量搜索参数，以缩小搜索范围。在这种情况下，向量搜索的速度在很大程度上依赖于属性过滤的速度。</p>
+<p>当 Milvus 收到带有这种布尔表达式的搜索请求时，它会将布尔表达式解析为抽象语法树（AST），以生成用于属性筛选的物理计划。然后，Milvus 在每个分段中应用物理计划，生成一个<a href="/docs/zh/v2.4.x/bitset.md">比特集</a>作为过滤结果，并将结果作为向量搜索参数，以缩小搜索范围。在这种情况下，向量搜索的速度在很大程度上依赖于属性过滤的速度。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +154,12 @@ title: 标量索引
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>要为标量字段<a href="/docs/zh/index-scalar-fields.md">建立</a>索引，请阅读<a href="/docs/zh/index-scalar-fields.md">在标量上建立索引</a>。</p></li>
+<li><p>要为标量字段<a href="/docs/zh/v2.4.x/index-scalar-fields.md">建立</a>索引，请阅读<a href="/docs/zh/v2.4.x/index-scalar-fields.md">在标量上建立索引</a>。</p></li>
 <li><p>要进一步了解上述相关术语和规则，请阅读</p>
 <ul>
-<li><a href="/docs/zh/bitset.md">比特集</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
-<li><a href="/docs/zh/boolean.md">布尔表达式规则</a></li>
-<li><a href="/docs/zh/schema.md#Supported-data-type">支持的数据类型</a></li>
+<li><a href="/docs/zh/v2.4.x/bitset.md">比特集</a></li>
+<li><a href="/docs/zh/v2.4.x/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/boolean.md">布尔表达式规则</a></li>
+<li><a href="/docs/zh/v2.4.x/schema.md#Supported-data-type">支持的数据类型</a></li>
 </ul></li>
 </ul>

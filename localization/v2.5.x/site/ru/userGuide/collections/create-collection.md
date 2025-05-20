@@ -66,7 +66,7 @@ summary: >-
 <p>Вы можете установить значения по умолчанию для любого скалярного поля и сделать его нулевым. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -407,7 +407,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы также можете создать коллекцию без индексных параметров и добавить их впоследствии. В этом случае Milvus не загружает коллекцию при ее создании. .</p>
-<p>Следующий фрагмент кода демонстрирует, как создать коллекцию без коллекции, при этом статус загрузки коллекции при создании остается незагруженным.</p>
+<p>Следующий фрагмент кода демонстрирует, как создать коллекцию без индекса, при этом статус загрузки коллекции при создании остается незагруженным.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -504,7 +504,6 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus также предоставляет возможность мгновенного создания коллекции. Подробнее см. в разделе <a href="/docs/ru/create-collection-instantly.md">"Мгновенное создание коллекции"</a>.</p>
 <h2 id="Set-Collection-Properties" class="common-anchor-header">Установка свойств коллекции<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -629,7 +628,7 @@ curl --request POST \
     \&quot;params\&quot;: $params
 }&quot;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">Установка TTL коллекции</h3><p>Если данные в коллекции должны быть сброшены в течение определенного периода, подумайте о том, чтобы установить время жизни коллекции (TTL) в секундах. Как только TTL истечет, Milvus удалит сущности в коллекции. Удаление происходит асинхронно, что означает, что поиск и запросы все еще возможны до завершения удаления.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">Установка TTL коллекции</h3><p>Если данные в коллекции должны быть сброшены в течение определенного периода времени, подумайте о том, чтобы установить время жизни коллекции (TTL) в секундах. Как только TTL истечет, Milvus удалит сущности в коллекции. Удаление происходит асинхронно, что означает, что поиск и запросы все еще возможны до завершения удаления.</p>
 <p>Следующий фрагмент кода устанавливает TTL на один день (86400 секунд). Рекомендуется устанавливать TTL как минимум на пару дней.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -747,6 +746,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Подробнее об уровнях согласованности см. в разделе <a href="/docs/ru/consistency.md">Уровень согласованности</a>.</p>
+<p>Подробнее об уровнях согласованности см. в разделе <a href="/docs/ru/tune_consistency.md">Уровень согласованности</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Включение динамического поля</h3><p>Динамическое поле в коллекции - это зарезервированное поле JavaScript Object Notation (JSON) с именем <strong>$meta</strong>. После включения этого поля Milvus сохраняет все не определенные схемой поля, содержащиеся в каждой сущности, и их значения в виде пар ключ-значение в зарезервированном поле.</p>
 <p>Подробнее о том, как использовать динамическое поле, читайте в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>

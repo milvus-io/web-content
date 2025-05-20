@@ -20,9 +20,9 @@ summary: ''
       </svg>
     </button></h1><p>A partition is a division of a collection. Milvus supports dividing collection data into multiple parts on physical storage so that search and other operations can be limited to one partition to improve performance. Learn about the partition-level operations.</p>
 <ul>
-<li><a href="/docs/create_partition.md">Create a Partition</a>: Create a partition with the example of creating a novel partition within a book collection.</li>
-<li><a href="/docs/check_partition.md">Check Partition Information</a>: Check the basic information of a partition in Milvus including its name.</li>
-<li><a href="/docs/drop_partition.md">Drop a Partition</a>: Caution is needed as the delete operation irreversibly drops the partition and all data within it.</li>
-<li><a href="/docs/load_partition.md">Load a Partition</a>: Load the partition to memory before a search or a query instead of loading the whole collection can significantly reduce memory usage. Milvus 2.1 now supports loading a partition as multiple replicas.</li>
-<li><a href="/docs/release_partition.md">Release a Partition</a>: Release a partition from memory after a search or a query to reduce memory usage.</li>
+<li><a href="/docs/v2.0.x/create_partition.md">Create a Partition</a>: Create a partition with the example of creating a novel partition within a book collection.</li>
+<li><a href="/docs/v2.0.x/check_partition.md">Check Partition Information</a>: Check the basic information of a partition in Milvus including its name.</li>
+<li><a href="/docs/v2.0.x/drop_partition.md">Drop a Partition</a>: Caution is needed as the delete operation irreversibly drops the partition and all data within it.</li>
+<li><a href="/docs/v2.0.x/load_partition.md">Load a Partition</a>: Load the partition to memory before a search or a query instead of loading the whole collection can significantly reduce memory usage. Milvus 2.1 now supports loading a partition as multiple replicas.</li>
+<li><a href="/docs/v2.0.x/release_partition.md">Release a Partition</a>: Release a partition from memory after a search or a query to reduce memory usage.</li>
 </ul>

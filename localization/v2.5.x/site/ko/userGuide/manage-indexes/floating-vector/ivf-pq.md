@@ -54,13 +54,13 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
 <ol>
 <li><p><strong>차원 분해</strong>: 이 알고리즘은 각 고차원 벡터를 <code translate="no">m</code> 동일한 크기의 하위 벡터로 분해하는 것으로 시작됩니다. 이 분해는 원래의 D 차원 공간을 <code translate="no">m</code> 분리된 하위 공간으로 변환하며, 각 하위 공간은 <em>D/m</em> 차원을 포함합니다. <code translate="no">m</code> 매개변수는 분해의 세분성을 제어하며 압축률에 직접적인 영향을 미칩니다.</p></li>
-<li><p><strong>서브스페이스 코드북 생성</strong>: 각 하위 공간 내에서 알고리즘은 <a href="https://en.wikipedia.org/wiki/K-means_clustering">K-평균 클러스터링을</a> 적용하여 대표 벡터(중심) 집합을 학습합니다. 이러한 중심은 집합적으로 해당 하위 공간에 대한 코드북을 형성합니다. 각 코드북의 중심점 수는 매개변수 <code translate="no">nbits</code> 에 의해 결정되며, 각 코드북에는 2^{\textit{n비트}} 중심점이 포함됩니다. 예를 들어 <code translate="no">nbits = 8</code> 인 경우 각 코드북에는 256개의 중심이 포함됩니다. 각 중심에는 <code translate="no">nbits</code> 비트의 고유 인덱스가 할당됩니다.</p></li>
+<li><p><strong>서브스페이스 코드북 생성</strong>: 각 하위 공간 내에서 알고리즘은 <a href="https://en.wikipedia.org/wiki/K-means_clustering">K-평균 클러스터링을</a> 적용하여 대표 벡터(중심) 집합을 학습합니다. 이러한 중심은 집합적으로 해당 하위 공간에 대한 코드북을 형성합니다. 각 코드북의 중심 수는 매개변수 <code translate="no">nbits</code> 에 의해 결정되며, 여기서 각 코드북에는 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits 중심이 포함됩니다. 예를 들어</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code> 인 경우 각 코드북에는 256개의 중심이 포함됩니다. 각 중심에는 <code translate="no">nbits</code> 비트의 고유 인덱스가 할당됩니다.</p></li>
 <li><p><strong>벡터</strong> <strong>양자화</strong>: 원본 벡터의 각 하위 벡터에 대해 PQ는 특정 메트릭 유형을 사용하여 해당 하위 공간 내에서 가장 가까운 중심을 식별합니다. 이 프로세스는 각 하위 벡터를 코드북에서 가장 가까운 대표 벡터에 효과적으로 매핑합니다. 전체 하위 벡터 좌표를 저장하는 대신 일치하는 중심점의 인덱스만 유지됩니다.</p></li>
 <li><p><strong>압축 표현</strong>: 최종 압축 표현은 각 하위 공간에서 하나씩, 총칭하여 <strong>PQ 코드라고</strong> 하는 <code translate="no">m</code> 인덱스로 구성됩니다. 이 인코딩은 저장 요구 사항을 <em>D × 32비트</em> (32비트 부동소수점 숫자 가정)에서 <em>m</em> × <em>n비트</em> 비트로 줄여 벡터 거리를 근사화하는 기능을 유지하면서 상당한 압축을 달성합니다.</p></li>
 </ol>
 <p>매개변수 조정 및 최적화에 대한 자세한 내용은 <a href="/docs/ko/ivf-pq.md#Index-params">인덱스 매개변수를</a> 참조하세요.</p>
 <div class="alert note">
-<p>32비트 부동 소수점 숫자를 사용하는 <em>D = 128</em> 차원의 벡터를 예로 들어 보겠습니다. PQ 매개변수 <em>m = 64</em> (하위 벡터), <em>n비트 = 8</em> (따라서 <em>k =</em> 2^8 <em>=</em> 하위 공간당 <em> 256센트로이드</em> )을 사용하면 저장 공간 요구 사항을 비교할 수 있습니다:</p>
+<p>32비트 부동 소수점 숫자를 사용하는 <em>D = 128</em> 차원의 벡터를 예로 들어 보겠습니다. PQ 매개변수 <em>m = 64</em> (하위 벡터), <em>n비트 = 8</em> (따라서 <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>=</em> 하위 공간당 <em> 256개의</em> 중심)을 사용하면 저장 공간 요구 사항을 비교할 수 있습니다:</p>
 <ul>
 <li><p>원본 벡터: 128 차원 × 32비트 = 4,096비트</p></li>
 <li><p>PQ 압축 벡터: 64개의 서브 벡터 × 8비트 = 512비트</p></li>
@@ -73,11 +73,11 @@ summary: >-
 <li><p><strong>쿼리 전처리</strong></p>
 <ul>
 <li><p>쿼리 벡터는 원래의 PQ 분해 구조와 일치하는 <code translate="no">m</code> 하위 벡터로 분해됩니다.</p></li>
-<li><p>각 쿼리 하위 벡터와 그에 해당하는 코드북(2^{\textit{n비트}} 중심 포함)에 대해 모든 중심까지의 거리를 계산하고 저장합니다.</p></li>
-<li><p>이렇게 하면 <code translate="no">m</code> 조회 테이블이 생성되며, 각 테이블에는 2^{\textit{nbits}} 거리가 포함됩니다.</p></li>
+<li><p>각 쿼리 하위 벡터와 해당 코드북( <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits 중심 포함)에 대해 모든 중심까지의 거리를 계산하고 저장합니다.</span></span></span></span></span></span></span></span></span> </p></li>
+<li><p>이렇게 하면 <code translate="no">m</code> 룩업 테이블이 생성되며, 각 테이블에는 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits 거리가 포함됩니다.</span></span></span></span></span></span></span></span></span> </p></li>
 </ul></li>
 <li><p><strong>거리 근사치</strong></p>
-<p>PQ 코드로 표현되는 모든 데이터베이스 벡터의 경우, 쿼리 벡터와의 대략적인 거리는 다음과 같이 계산됩니다:</p>
+<p>PQ 코드로 표현되는 모든 데이터베이스 벡터의 경우 쿼리 벡터와의 대략적인 거리는 다음과 같이 계산됩니다:</p>
 <ul>
 <li><p>각 <code translate="no">m</code> 하위 벡터에 대해 저장된 중심 인덱스를 사용하여 해당 조회 테이블에서 미리 계산된 거리를 검색합니다.</p></li>
 <li><p>이러한 <code translate="no">m</code> 거리를 합산하여 특정 메트릭 유형(예: 유클리드 거리)에 따른 대략적인 거리를 구합니다.</p></li>
@@ -214,9 +214,9 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>각 하위 벡터의 중심 인덱스를 압축된 형태로 표현하는 데 사용되는 비트 수입니다. 각 코드북의 크기를 직접 결정합니다. 각 코드북에는 2^{\textit{n비트}}개의 중심이 포함됩니다. 예를 들어 <code translate="no">nbits</code> 을 8로 설정하면 각 하위 벡터는 8비트 중심 인덱스로 표현됩니다. 이렇게 하면 해당 하위 벡터의 코드북에 2^8(256)개의 가능한 중심이 있습니다.</p></td>
+     <td><p>각 하위 벡터의 중심 인덱스를 압축된 형태로 표현하는 데 사용되는 비트 수입니다. 각 코드북의 크기를 직접 결정합니다. 각 코드북에는 $2^{\textit{nbits}}$의 중심이 포함됩니다. 예를 들어 <code translate="no">nbits</code> 을 8로 설정하면 각 하위 벡터는 8비트 중심 인덱스로 표현됩니다. 따라서 해당 하위 벡터의 코드북에는 $2^8$(256)개의 가능한 중심이 있습니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, 64]</p><p><strong>기본값입니다</strong>: <code translate="no">8</code></p></td>
-     <td><p><code translate="no">nbits</code> 값이 클수록 더 큰 코드북을 사용할 수 있으므로 원본 벡터를 더 정확하게 표현할 수 있습니다. 하지만 각 인덱스를 저장하는 데 더 많은 비트를 사용하므로 압축률이 떨어집니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [1, 16].</p></td>
+     <td><p><code translate="no">nbits</code> 값이 클수록 코드북이 커져 원본 벡터를 더 정확하게 표현할 수 있습니다. 하지만 각 인덱스를 저장하는 데 더 많은 비트를 사용하므로 압축률이 떨어집니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [1, 16].</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/ivf-pq.md#Search-on-index">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 파라미터가 나와 있습니다.</p>

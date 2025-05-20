@@ -71,7 +71,20 @@ createResourceGroup(CreateResourceGroupReq.builder()
 ## Example
 
 ```java
-// prepare resource group config
+import io.milvus.common.resourcegroup.*;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.resourcegroup.request.CreateResourceGroupReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Prepare resource group config
 ResourceGroupLimit requests = new ResourceGroupLimit(1);
 ResourceGroupLimit limits = new ResourceGroupLimit(1);
 List<ResourceGroupTransfer> from = new ArrayList<>();
@@ -86,13 +99,11 @@ ResourceGroupConfig config = ResourceGroupConfig.builder()
     .withTo(to)
     .build();
 
-// prepare requests    
+// 3. Create a resource group
 CreateResourceGroupReq createResourceGroupReq = CreateResourceGroupReq.builder()
     .groupName("rg1")
     .config(config)
     .build();
-
-// create resource group
 client.createResourceGroup(createResourceGroupReq);
 ```
 

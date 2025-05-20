@@ -24,27 +24,27 @@ title: 튜토리얼 개요
 <tr><th>튜토리얼</th><th>사용 사례</th><th>관련 Milvus 기능</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/ko/build-rag-with-milvus.md">Milvus로 RAG 빌드하기</a></td><td>RAG</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/how_to_enhance_your_rag.md">고급 RAG</a></td><td>RAG</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/full_text_search_with_milvus.md">Milvus로 전체 텍스트 검색</a></td><td>빠른 시작</td><td>전체 텍스트 검색</td></tr>
-<tr><td><a href="/docs/ko/hybrid_search_with_milvus.md">Milvus를 사용한 하이브리드 검색</a></td><td>하이브리드 검색</td><td>하이브리드 검색, 멀티 벡터, 고밀도 임베딩, 스파스 임베딩</td></tr>
-<tr><td><a href="/docs/ko/image_similarity_search.md">Milvus를 사용한 이미지 검색</a></td><td>시맨틱 검색</td><td>벡터 검색, 동적 필드</td></tr>
-<tr><td><a href="/docs/ko/multimodal_rag_with_milvus.md">Milvus를 사용한 멀티모달 RAG</a></td><td>RAG</td><td>벡터 검색, 동적 필드</td></tr>
-<tr><td><a href="/docs/ko/multimodal_rag_with_milvus.md">멀티 벡터를 사용한 멀티모달 검색</a></td><td>시맨틱 검색</td><td>멀티 벡터, 하이브리드 검색</td></tr>
-<tr><td><a href="/docs/ko/graph_rag_with_milvus.md">밀버스를 사용한 그래프 RAG</a></td><td>RAG</td><td>그래프 검색</td></tr>
-<tr><td><a href="/docs/ko/contextual_retrieval_with_milvus.md">Milvus를 사용한 문맥 검색</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/hdbscan_clustering_with_milvus.md">Milvus를 사용한 HDBSCAN 클러스터링</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/use_ColPali_with_milvus.md">Milvus로 다중 모달 검색에 ColPali 사용</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/vector_visualization.md">벡터 시각화</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/movie_recommendation_with_milvus.md">Milvus를 사용한 영화 추천</a></td><td>추천 시스템</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/funnel_search_with_matryoshka.md">마트료시카 임베딩을 사용한 퍼널 검색</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/question_answering_system.md">질문 답변 시스템</a></td><td>질문 답변</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/recommendation_system.md">추천 시스템</a></td><td>추천 시스템</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/video_similarity_search.md">동영상 유사도 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/audio_similarity_search.md">오디오 유사도 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/dna_sequence_classification.md">DNA 분류</a></td><td>분류</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/text_search_engine.md">텍스트 검색 엔진</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/text_image_search.md">텍스트로 이미지 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/image_deduplication_system.md">이미지 중복 제거</a></td><td>중복 제거</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/build-rag-with-milvus.md">Milvus로 RAG 빌드하기</a></td><td>RAG</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/how_to_enhance_your_rag.md">고급 RAG</a></td><td>RAG</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/full_text_search_with_milvus.md">Milvus로 전체 텍스트 검색</a></td><td>빠른 시작</td><td>전체 텍스트 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/hybrid_search_with_milvus.md">Milvus를 사용한 하이브리드 검색</a></td><td>하이브리드 검색</td><td>하이브리드 검색, 멀티 벡터, 고밀도 임베딩, 스파스 임베딩</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/image_similarity_search.md">Milvus를 사용한 이미지 검색</a></td><td>시맨틱 검색</td><td>벡터 검색, 동적 필드</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/multimodal_rag_with_milvus.md">Milvus를 사용한 멀티모달 RAG</a></td><td>RAG</td><td>벡터 검색, 동적 필드</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/multimodal_rag_with_milvus.md">멀티 벡터를 사용한 멀티모달 검색</a></td><td>시맨틱 검색</td><td>멀티 벡터, 하이브리드 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/graph_rag_with_milvus.md">밀버스를 사용한 그래프 RAG</a></td><td>RAG</td><td>그래프 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/contextual_retrieval_with_milvus.md">Milvus를 사용한 문맥 검색</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/hdbscan_clustering_with_milvus.md">Milvus를 사용한 HDBSCAN 클러스터링</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/use_ColPali_with_milvus.md">Milvus로 다중 모달 검색에 ColPali 사용</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/vector_visualization.md">벡터 시각화</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/movie_recommendation_with_milvus.md">Milvus를 사용한 영화 추천</a></td><td>추천 시스템</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/funnel_search_with_matryoshka.md">마트료시카 임베딩을 사용한 퍼널 검색</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/question_answering_system.md">질문 답변 시스템</a></td><td>질문 답변</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/recommendation_system.md">추천 시스템</a></td><td>추천 시스템</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/video_similarity_search.md">동영상 유사도 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/audio_similarity_search.md">오디오 유사도 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/dna_sequence_classification.md">DNA 분류</a></td><td>분류</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/text_search_engine.md">텍스트 검색 엔진</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/text_image_search.md">텍스트로 이미지 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/v2.4.x/image_deduplication_system.md">이미지 중복 제거</a></td><td>중복 제거</td><td>벡터 검색</td></tr>
 </tbody>
 </table>

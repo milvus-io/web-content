@@ -38,14 +38,14 @@ title: Configure Milvus on the Fly
       </svg>
     </button></h2><p>You need to ensure that：</p>
 <ul>
-<li>You have Birdwatcher installed. For details, refer to <a href="/docs/birdwatcher_install_guides.md">Install Birdwatcher</a>,</li>
+<li>You have Birdwatcher installed. For details, refer to <a href="/docs/v2.3.x/birdwatcher_install_guides.md">Install Birdwatcher</a>,</li>
 <li>You have etcdctl installed. For details, refer to <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Interacting with etcd</a>, or</li>
 <li>You have other etcd clients, such as the Python client, installed.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>Examples in this guide change the value of <code translate="no">proxy.minPasswordLength</code> to <code translate="no">8</code>. You can replace the key with the applicable ones listed in <a href="/docs/dynamic_config.md#Applicable-configuration-items">Applicable configuration items</a>.</li>
-<li>Examples in this guide assume that the root path of your Milvus is <code translate="no">by-dev</code>. All configurations are listed under the path <code translate="no">by-dev/config</code>. The Milvus root path varies with the way you install it. For the instances installed using the Helm charts, the root path defaults to <code translate="no">by-dev</code>. If you do not know the root path, refer to <a href="/docs/birdwatcher_usage_guides.md#Connect-to-etcd">Connect to etcd</a>.</li>
+<li>Examples in this guide change the value of <code translate="no">proxy.minPasswordLength</code> to <code translate="no">8</code>. You can replace the key with the applicable ones listed in <a href="/docs/v2.3.x/dynamic_config.md#Applicable-configuration-items">Applicable configuration items</a>.</li>
+<li>Examples in this guide assume that the root path of your Milvus is <code translate="no">by-dev</code>. All configurations are listed under the path <code translate="no">by-dev/config</code>. The Milvus root path varies with the way you install it. For the instances installed using the Helm charts, the root path defaults to <code translate="no">by-dev</code>. If you do not know the root path, refer to <a href="/docs/v2.3.x/birdwatcher_usage_guides.md#Connect-to-etcd">Connect to etcd</a>.</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">Change configurations<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -204,6 +204,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn more about <a href="/docs/system_configuration.md">System Configurations</a>.</li>
-<li>Learn how to configure Milvus installed using <a href="/docs/configure_operator.md">Milvus Operator</a>, <a href="/docs/configure-helm.md">Helm charts</a>, and <a href="/docs/configure-docker.md">Docker</a>.</li>
+<li>Learn more about <a href="/docs/v2.3.x/system_configuration.md">System Configurations</a>.</li>
+<li>Learn how to configure Milvus installed using <a href="/docs/v2.3.x/configure_operator.md">Milvus Operator</a>, <a href="/docs/v2.3.x/configure-helm.md">Helm charts</a>, and <a href="/docs/v2.3.x/configure-docker.md">Docker</a>.</li>
 </ul>

@@ -1,10 +1,12 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Mecanismo de indexação de discos em Milvus.
-title: Índice em disco
+summary: >-
+  Mecanismo de índice de disco em Milvus para pesquisa vetorial optimizada por
+  disco.
+title: Índice no disco
 ---
-<h1 id="On-disk-Index" class="common-anchor-header">Índice em disco<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
+<h1 id="On-disk-Index" class="common-anchor-header">Índice no disco<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,10 +21,10 @@ title: Índice em disco
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este artigo apresenta um algoritmo de indexação em disco chamado DiskANN. Com base nos gráficos Vamana, o DiskANN permite pesquisas eficientes em grandes conjuntos de dados.</p>
+    </button></h1><p>Este artigo apresenta o DiskANN, um algoritmo de indexação em disco para pesquisas vetoriais otimizadas em disco. Com base nos gráficos Vamana, o DiskANN permite pesquisas vetoriais eficientes no disco em grandes conjuntos de dados.</p>
 <p>Para melhorar o desempenho da consulta, é possível <a href="/docs/pt/index-vector-fields.md">especificar um tipo de índice</a> para cada campo de vetor.</p>
 <div class="alert note"> 
-Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus exclui automaticamente o índice antigo ao alternar o tipo de índice.</div>
+Atualmente, um campo de vetor suporta apenas um tipo de índice. O Milvus exclui automaticamente o índice antigo ao alternar o tipo de índice.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,12 +40,12 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus exclui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para usar o DiskANN, observe que</p>
+    </button></h2><p>Para usar o DiskANN no Milvus, observe que</p>
 <ul>
 <li>A instância do Milvus é executada no Ubuntu 18.04.6 ou em uma versão posterior.</li>
 <li>O caminho de dados do Milvus deve ser montado em um SSD NVMe para obter desempenho total:<ul>
 <li>Para uma instância Milvus Standalone, o caminho de dados deve ser <strong>/var/lib/milvus/data</strong> no contentor onde a instância é executada.</li>
-<li>Para uma instância de Milvus Cluster, o caminho de dados deve ser <strong>/var/lib/milvus/data</strong> nos contentores onde são executados os QueryNodes e os IndexNodes.</li>
+<li>Para uma instância Milvus Cluster, o caminho de dados deve ser <strong>/var/lib/milvus/data</strong> nos contentores onde os QueryNodes e IndexNodes são executados.</li>
 </ul></li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">

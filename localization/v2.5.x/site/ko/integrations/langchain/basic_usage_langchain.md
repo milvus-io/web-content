@@ -35,7 +35,7 @@ title: Milvus를 벡터 저장소로 사용
         ></path>
       </svg>
     </button></h2><p>이 통합을 사용하려면 <code translate="no">pip install -qU langchain-milvus</code> 으로 <code translate="no">langchain-milvus</code> 을 설치해야 합니다.</p>
-<pre><code translate="no" class="language-shell">$ pip install -qU  langchain_milvus
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU  langchain_milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>최신 버전의 pymilvus에는 프로토타이핑에 좋은 로컬 벡터 데이터베이스 Milvus Lite가 함께 제공됩니다. 백만 개 이상의 문서와 같은 대규모 데이터가 있는 경우에는 <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">도커 또는 쿠버네티스에서</a> 더 성능이 뛰어난 Milvus 서버를 설정하는 것이 좋습니다.</p>
 <h2 id="Initialization" class="common-anchor-header">초기화<button data-href="#Initialization" class="anchor-icon" translate="no">
@@ -53,9 +53,9 @@ title: Milvus를 벡터 저장소로 사용
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbeddings</span>
+    </button></h2><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
-embeddings = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
+embeddings = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 
@@ -70,19 +70,19 @@ vector_store = Milvus(
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">Milvus 컬렉션으로 데이터 구획화하기</h3><p>서로 관련이 없는 여러 문서를 동일한 Milvus 인스턴스 내에서 서로 다른 컬렉션에 저장하여 컨텍스트를 유지할 수 있습니다.</p>
 <p>문서에서 새 벡터 스토어 컬렉션을 만드는 방법은 다음과 같습니다:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
-vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="hljs-title function_">from_documents</span>(
-    [<span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;foo!&quot;</span>)],
+vector_store_saved = Milvus.from_documents(
+    [Document(page_content=<span class="hljs-string">&quot;foo!&quot;</span>)],
     embeddings,
     collection_name=<span class="hljs-string">&quot;langchain_example&quot;</span>,
-    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
+    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>그리고 저장된 컬렉션을 검색하는 방법은 다음과 같습니다.</p>
-<pre><code translate="no" class="language-python">vector_store_loaded = <span class="hljs-title class_">Milvus</span>(
+<pre><code translate="no" class="language-python">vector_store_loaded = Milvus(
     embeddings,
-    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
+    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
     collection_name=<span class="hljs-string">&quot;langchain_example&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -184,7 +184,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
  'd43cbf9a-a772-4c40-993b-9439065fec01',
  '25e667bb-6f09-4574-a368-661069301906']
 </code></pre>
-<h3 id="Delete-items-from-vector-store" class="common-anchor-header">벡터 스토어에서 아이템 삭제하기</h3><pre><code translate="no" class="language-python">vector_store.<span class="hljs-built_in">delete</span>(ids=[uuids[<span class="hljs-number">-1</span>]])
+<h3 id="Delete-items-from-vector-store" class="common-anchor-header">벡터 스토어에서 아이템 삭제하기</h3><pre><code translate="no" class="language-python">vector_store.delete(ids=[uuids[-<span class="hljs-number">1</span>]])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">(insert count: 0, delete count: 1, upsert count: 0, timestamp: 0, success count: 0, err count: 0, cost: 0)
 </code></pre>
@@ -225,7 +225,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">* [SIM=21192.628906] bar [{'pk': '2', 'source': 'https://example.com'}]
 </code></pre>
-<p><code translate="no">Milvus</code> 벡터 스토어를 사용할 때 사용할 수 있는 모든 검색 옵션의 전체 목록을 보려면 <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API 참조를 참조하세요</a>.</p>
+<p><code translate="no">Milvus</code> 벡터 저장소를 사용할 때 사용할 수 있는 모든 검색 옵션의 전체 목록을 보려면 <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API 참조를 참조하세요</a>.</p>
 <h3 id="Query-by-turning-into-retriever" class="common-anchor-header">리트리버로 전환하여 쿼리하기</h3><p>벡터 스토어를 리트리버로 변환하여 체인에서 더 쉽게 사용할 수도 있습니다.</p>
 <pre><code translate="no" class="language-python">retriever = vector_store.as_retriever(search_type=<span class="hljs-string">&quot;mmr&quot;</span>, search_kwargs={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">1</span>})
 retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a crime&quot;</span>, <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>})
@@ -263,7 +263,7 @@ vectorstore = Milvus.from_documents(
     docs,
     embeddings,
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
     partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>,  <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -301,4 +301,4 @@ vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>모든 __ModuleName__VectorStore 기능 및 구성에 대한 자세한 설명서는 API 참조(https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html)를 참조하세요.</p>
+    </button></h2><p>모든 __ModuleName__VectorStore 기능 및 구성에 대한 자세한 설명은 API 참조(https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html)를 참조하세요.</p>

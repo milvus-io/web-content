@@ -267,7 +267,7 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
    </span> <span class="img-wrapper"> <span>가장 연관성이 높은 결과 얻기 및 표시</span> </span></p>
-<p>Milvus 클라이언트 사용법에 대한 자세한 내용은 <a href="/docs/ko/quickstart.md">Milvus 문서</a> 섹션을 참조하세요.</p>
+<p>Milvus 클라이언트 사용법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/quickstart.md">Milvus 문서</a> 섹션을 참조하세요.</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7. 정리하기<button data-href="#7-Clean-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -317,4 +317,4 @@ DROP SECURITY INTEGRATION SNOWSERVICES_INGRESS_OAUTH;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에 대한 자세한 내용은 <a href="/docs/ko/overview.md">Milvus 소개</a> 및 <a href="/docs/ko/quickstart.md">빠른 시작에서</a> 확인할 수 있습니다. 물론 API에 대한 더 자세한 소개는 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">Python</a> 및 <a href="https://milvus.io/api-reference/java/v2.3.x/About.md">Java</a> 버전을 참조하시고, <a href="https://milvus.io/docs/embeddings.md">임베딩</a> 및 <a href="https://milvus.io/docs/integrate_with_openai.md">통합에</a> 대한 정보도 참고하시기 바랍니다.</p>
+    </button></h2><p>Milvus에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/overview.md">Milvus 소개</a> 및 <a href="/docs/ko/v2.4.x/quickstart.md">빠른 시작에서</a> 확인할 수 있습니다. 물론 API에 대한 더 자세한 소개는 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">Python</a> 및 <a href="https://milvus.io/api-reference/java/v2.3.x/About.md">Java</a> 버전을 참조하시고, <a href="https://milvus.io/docs/embeddings.md">임베딩</a> 및 <a href="https://milvus.io/docs/integrate_with_openai.md">통합에</a> 대한 정보도 참고하시기 바랍니다.</p>

@@ -37,7 +37,7 @@ title: Inicio rápido
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En esta guía utilizamos Milvus Lite, una biblioteca python incluida en <code translate="no">pymilvus</code> que puede incrustarse en la aplicación cliente. Milvus también admite el despliegue en <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> y <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> para casos de uso de producción.</p>
+    </button></h2><p>En esta guía utilizamos Milvus Lite, una biblioteca python incluida en <code translate="no">pymilvus</code> que puede incrustarse en la aplicación cliente. Milvus también admite el despliegue en <a href="/docs/es/v2.4.x/install_standalone-docker.md">Docker</a> y <a href="/docs/es/v2.4.x/install_cluster-milvusoperator.md">Kubernetes</a> para casos de uso de producción.</p>
 <p>Antes de empezar, asegúrate de que tienes Python 3.8+ disponible en el entorno local. Instale <code translate="no">pymilvus</code> que contiene tanto la biblioteca cliente python como Milvus Lite:</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
@@ -61,10 +61,10 @@ title: Inicio rápido
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para crear una base de datos vectorial Milvus local, simplemente instale un <code translate="no">MilvusClient</code> especificando un nombre de archivo para almacenar todos los datos, como &quot;milvus_demo.db&quot;.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+    </button></h2><p>Para crear una base de datos vectorial Milvus local, simplemente instale un <code translate="no">MilvusClient</code> especificando un nombre de archivo para almacenar todos los datos, como "milvus_demo.db".</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
+client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Create-a-Collection" class="common-anchor-header">Crear una colección<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,8 +92,8 @@ client.create_collection(
 <p>En la configuración anterior,</p>
 <ul>
 <li>La clave primaria y los campos vectoriales utilizan sus nombres por defecto ("id" y "vector").</li>
-<li>El tipo de métrica (definición de distancia vectorial) se establece en su valor por defecto<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>).</li>
-<li>El campo de clave primaria acepta números enteros y no se incrementa automáticamente (es decir, no utiliza <a href="https://milvus.io/docs/schema.md">la función auto-id</a>) Alternativamente, puede definir formalmente el esquema de la colección siguiendo esta <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instrucción</a>.</li>
+<li>El tipo de métrica (definición de distancia vectorial) se establece en su valor por defecto<a href="/docs/es/v2.4.x/metric.md#Cosine-Similarity">(COSINE</a>).</li>
+<li>El campo de clave primaria acepta números enteros y no se incrementa automáticamente (es decir, no utiliza <a href="/docs/es/v2.4.x/schema.md">la función auto-id</a>) Alternativamente, puede definir formalmente el esquema de la colección siguiendo esta <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instrucción</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Preparar los datos<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -160,9 +160,9 @@ data = [
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Vector dim:&quot;</span>, <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;vector&quot;</span>]))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-title class_">Dim</span>: <span class="hljs-number">768</span> (<span class="hljs-number">768</span>,)
-<span class="hljs-title class_">Data</span> has <span class="hljs-number">3</span> entities, each <span class="hljs-keyword">with</span> <span class="hljs-attr">fields</span>:  <span class="hljs-title function_">dict_keys</span>([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
-<span class="hljs-title class_">Vector</span> <span class="hljs-attr">dim</span>: <span class="hljs-number">768</span>
+<pre><code translate="no">Dim: <span class="hljs-number">768</span> (<span class="hljs-number">768</span>,)
+Data has <span class="hljs-number">3</span> entities, <span class="hljs-keyword">each</span> <span class="hljs-keyword">with</span> fields:  dict_keys([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
+Vector dim: <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Alternatively-Use-fake-representation-with-random-vectors" class="common-anchor-header">[Alternativa] Usar representación falsa con vectores aleatorios<button data-href="#Alternatively-Use-fake-representation-with-random-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -198,8 +198,8 @@ data = [
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Vector dim:&quot;</span>, <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;vector&quot;</span>]))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-title class_">Data</span> has <span class="hljs-number">3</span> entities, each <span class="hljs-keyword">with</span> <span class="hljs-attr">fields</span>:  <span class="hljs-title function_">dict_keys</span>([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
-<span class="hljs-title class_">Vector</span> <span class="hljs-attr">dim</span>: <span class="hljs-number">768</span>
+<pre><code translate="no">Data has <span class="hljs-number">3</span> entities, <span class="hljs-keyword">each</span> <span class="hljs-keyword">with</span> fields:  dict_keys([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
+Vector dim: <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-Data" class="common-anchor-header">Insertar datos<button data-href="#Insert-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +221,7 @@ data = [
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{<span class="hljs-string">&#x27;insert_count&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;ids&#x27;</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], <span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
+<pre><code translate="no">{<span class="hljs-string">&#x27;insert_count&#x27;</span>: 3, <span class="hljs-string">&#x27;ids&#x27;</span>: [0, 1, 2], <span class="hljs-string">&#x27;cost&#x27;</span>: 0}
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Semantic-Search" class="common-anchor-header">Búsqueda semántica<button data-href="#Semantic-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -253,7 +253,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , <span class="hljs-attr">extra_info</span>: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
+<pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
 <p>La salida es una lista de resultados, cada uno de los cuales corresponde a una consulta de búsqueda vectorial. Cada consulta contiene una lista de resultados, donde cada resultado contiene la clave primaria de la entidad, la distancia al vector de consulta y los detalles de la entidad con <code translate="no">output_fields</code> especificado.</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">Búsqueda vectorial con filtrado de metadatos<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
@@ -297,11 +297,11 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , <span class="hljs-attr">extra_info</span>: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
+<pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>Por defecto, los campos escalares no se indexan. Si necesita realizar una búsqueda filtrada de metadatos en un conjunto de datos de gran tamaño, puede considerar la posibilidad de utilizar un esquema fijo y activar también el <a href="https://milvus.io/docs/scalar_index.md">índice</a> para mejorar el rendimiento de la búsqueda.</p>
+<p>Por defecto, los campos escalares no se indexan. Si necesita realizar una búsqueda filtrada de metadatos en un conjunto de datos de gran tamaño, puede considerar la posibilidad de utilizar un esquema fijo y activar también el <a href="/docs/es/v2.4.x/scalar_index.md">índice</a> para mejorar el rendimiento de la búsqueda.</p>
 <p>Además de la búsqueda vectorial, también puede realizar otros tipos de búsqueda:</p>
-<h3 id="Query" class="common-anchor-header">Consulta</h3><p>Una consulta() es una operación que recupera todas las entidades que coinciden con un criterio, como una <a href="https://milvus.io/docs/boolean.md">expresión de filtro</a> o la coincidencia con algunos ids.</p>
+<h3 id="Query" class="common-anchor-header">Consulta</h3><p>Una consulta() es una operación que recupera todas las entidades que coinciden con un criterio, como una <a href="/docs/es/v2.4.x/boolean.md">expresión de filtro</a> o la coincidencia con algunos ids.</p>
 <p>Por ejemplo, recuperar todas las entidades cuyo campo escalar tenga un valor determinado:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -310,7 +310,7 @@ res = client.search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Recuperar directamente entidades por clave primaria:</p>
-<pre><code translate="no" class="language-python">res = client.<span class="hljs-title function_">query</span>(
+<pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
@@ -364,9 +364,9 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>Dado que todos los datos de Milvus Lite se almacenan en un archivo local, puede cargar todos los datos en memoria incluso después de que el programa termine, creando un <code translate="no">MilvusClient</code> con el archivo existente. Por ejemplo, esto recuperará las colecciones del archivo "milvus_demo.db" y continuará escribiendo datos en él.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
+client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-the-collection" class="common-anchor-header">Eliminar la colección<button data-href="#Drop-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -402,7 +402,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite es ideal para comenzar con un programa python local. Si tiene datos a gran escala o le gustaría usar Milvus en producción, puede aprender sobre el despliegue de Milvus en <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> y <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Todos los modos de despliegue de Milvus comparten la misma API, por lo que su código del lado del cliente no necesita cambiar mucho si se mueve a otro modo de despliegue. Simplemente especifique el <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI y Token</a> de un servidor Milvus desplegado en cualquier lugar:</p>
-<pre><code translate="no" class="language-python">client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+    </button></h2><p>Milvus Lite es ideal para comenzar con un programa python local. Si tiene datos a gran escala o le gustaría usar Milvus en producción, puede aprender sobre el despliegue de Milvus en <a href="/docs/es/v2.4.x/install_standalone-docker.md">Docker</a> y <a href="/docs/es/v2.4.x/install_cluster-milvusoperator.md">Kubernetes</a>. Todos los modos de despliegue de Milvus comparten la misma API, por lo que su código del lado del cliente no necesita cambiar mucho si se mueve a otro modo de despliegue. Simplemente especifique el <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI y Token</a> de un servidor Milvus desplegado en cualquier lugar:</p>
+<pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus proporciona API REST y gRPC, con librerías cliente en lenguajes como <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# y <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>Milvus proporciona API REST y gRPC, con librerías cliente en lenguajes como <a href="/docs/es/v2.4.x/install-pymilvus.md">Python</a>, <a href="/docs/es/v2.4.x/install-java.md">Java</a>, <a href="/docs/es/v2.4.x/install-go.md">Go</a>, C# y <a href="/docs/es/v2.4.x/install-node.md">Node.js</a>.</p>

@@ -141,8 +141,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>하드웨어와 소프트웨어가 요구 사항을 충족하면 사용할 수 있습니다:</p>
 <ul>
-<li><a href="/docs/ko/install_cluster-milvusoperator.md">밀버스 오퍼레이터로 쿠버네츠에서 밀버스 실행하기</a></li>
-<li><a href="/docs/ko/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행하기</a></li>
+<li><a href="/docs/ko/v2.4.x/install_cluster-milvusoperator.md">밀버스 오퍼레이터로 쿠버네츠에서 밀버스 실행하기</a></li>
+<li><a href="/docs/ko/v2.4.x/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행하기</a></li>
 </ul></li>
-<li><p>Milvus를 설치하는 동안 설정할 수 있는 파라미터는 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</p></li>
+<li><p>Milvus를 설치하는 동안 설정할 수 있는 파라미터는 <a href="/docs/ko/v2.4.x/system_configuration.md">시스템 구성을</a> 참조하세요.</p></li>
 </ul>

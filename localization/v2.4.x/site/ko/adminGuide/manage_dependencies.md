@@ -23,17 +23,17 @@ deprecate: true
 <ul>
 <li>Object storage: Milvus supports using either MinIO or S3 for object storage.
 <ul>
-<li><a href="/docs/ko/deploy_s3.md">Configure object storage with Docker Compose/Helm</a></li>
-<li><a href="/docs/ko/object_storage_operator.md">Configure object storage with Milvus Operator</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_s3.md">Configure object storage with Docker Compose/Helm</a></li>
+<li><a href="/docs/ko/v2.4.x/object_storage_operator.md">Configure object storage with Milvus Operator</a></li>
 </ul></li>
 <li>Meta storage: Milvus uses etcd for meta storage.
 <ul>
-<li><a href="/docs/ko/deploy_etcd.md">Configure meta storage with Docker Compose/Helm</a></li>
-<li><a href="/docs/ko/meta_storage_operator.md">Configure meta storage with Milvus Operator</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_etcd.md">Configure meta storage with Docker Compose/Helm</a></li>
+<li><a href="/docs/ko/v2.4.x/meta_storage_operator.md">Configure meta storage with Milvus Operator</a></li>
 </ul></li>
 <li>Message storage: Milvus supports using Pulsar, Kafka, or RocksMQ for meta storage.
 <ul>
-<li><a href="/docs/ko/deploy_pulsar.md">Configure message storage with Docker Compose/Helm</a></li>
-<li><a href="/docs/ko/message_storage_operator.md">Configure message storage with Milvus Operator</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_pulsar.md">Configure message storage with Docker Compose/Helm</a></li>
+<li><a href="/docs/ko/v2.4.x/message_storage_operator.md">Configure message storage with Milvus Operator</a></li>
 </ul></li>
 </ul>

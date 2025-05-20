@@ -85,7 +85,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Una vez instalada la herramienta Milvus-migration, puede migrar datos de varias fuentes:</p>
 <ul>
-<li><a href="/docs/es/es2m.md">Desde Elasticsearch</a></li>
-<li><a href="/docs/es/f2m.md">Desde Faiss</a></li>
-<li><a href="/docs/es/m2m.md">Desde Milvus 1.x</a></li>
+<li><a href="/docs/es/v2.4.x/es2m.md">Desde Elasticsearch</a></li>
+<li><a href="/docs/es/v2.4.x/f2m.md">Desde Faiss</a></li>
+<li><a href="/docs/es/v2.4.x/m2m.md">Desde Milvus 1.x</a></li>
 </ul>

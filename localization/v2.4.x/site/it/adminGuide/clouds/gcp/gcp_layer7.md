@@ -28,9 +28,9 @@ summary: >-
 <p>Per creare un progetto, consultare la sezione <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creazione e gestione dei progetti</a>. Il nome del progetto utilizzato in questa guida è <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Avete installato localmente <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> e <a href="https://helm.sh/docs/intro/install/">Helm</a> o avete deciso di utilizzare la <a href="https://cloud.google.com/shell">Cloud Shell</a> basata su browser.</p></li>
 <li><p>Avete <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">inizializzato la gcloud CLI</a> con le credenziali del vostro account GCP.</p></li>
-<li><p>Avete <a href="/docs/it/gcp.md">distribuito un cluster Milvus dietro un bilanciatore di carico Layer-4 su GCP</a>.</p></li>
+<li><p>Avete <a href="/docs/it/v2.4.x/gcp.md">distribuito un cluster Milvus dietro un bilanciatore di carico Layer-4 su GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modificare le configurazioni di Milvus</h3><p>Questa guida presuppone che abbiate già <a href="/docs/it/gcp.md">implementato un cluster Milvus dietro un bilanciatore di carico Layer-4 su GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modificare le configurazioni di Milvus</h3><p>Questa guida presuppone che abbiate già <a href="/docs/it/v2.4.x/gcp.md">implementato un cluster Milvus dietro un bilanciatore di carico Layer-4 su GCP</a>.</p>
 <p>Prima di configurare un bilanciatore di carico Layer-7 per questo cluster Milvus, eseguire il seguente comando per rimuovere il bilanciatore di carico Layer-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

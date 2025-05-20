@@ -5,7 +5,7 @@ summary: >-
   können.
 title: Upgrade des Milvus-Clusters mit Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/de/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/de/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/de/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/de/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/de/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/de/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/de/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/de/v2.4.x/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/de/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/de/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">Upgrade des Milvus-Clusters mit Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -146,11 +146,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>Sie möchten vielleicht auch lernen, wie man:<ul>
-<li><a href="/docs/de/scaleout.md">Skalieren eines Milvus-Clusters</a></li>
+<li><a href="/docs/de/v2.4.x/scaleout.md">Skalieren eines Milvus-Clusters</a></li>
 </ul></li>
 <li>Wenn Sie bereit sind, Ihren Cluster in einer Cloud einzusetzen:<ul>
-<li>Lernen Sie, wie Sie <a href="/docs/de/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a></li>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
+<li>Lernen Sie, wie Sie <a href="/docs/de/v2.4.x/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a></li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.4.x/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.4.x/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
 </ul></li>
 </ul>

@@ -74,9 +74,9 @@ title: 管理收藏集
     </button></h2><p>您可以使用下列任一種方式建立集合：</p>
 <ul>
 <li><p><strong>快速設定</strong></p>
-<p>在這種方式中，您只需給予集合一個名稱，並指定要儲存在此集合中的向量內嵌的維數，即可建立集合。如需詳細資訊，請參閱<a href="/docs/zh-hant/manage-collections.md">快速設定</a>。</p></li>
+<p>在這種方式中，您只需給予集合一個名稱，並指定要儲存在此集合中的向量內嵌的維數，即可建立集合。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/manage-collections.md">快速設定</a>。</p></li>
 <li><p><strong>自訂設定</strong></p>
-<p>與其讓 In Milvus 為您的集合決定幾乎所有事情，您可以自行決定集合的<strong>模式</strong>和<strong>索引參數</strong>。詳情請參閱<a href="/docs/zh-hant/manage-collections.md">自訂設定</a>。</p></li>
+<p>與其讓 In Milvus 為您的集合決定幾乎所有事情，您可以自行決定集合的<strong>模式</strong>和<strong>索引參數</strong>。詳情請參閱<a href="/docs/zh-hant/v2.4.x/manage-collections.md">自訂設定</a>。</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">快速設定</h3><p>在人工智能產業大躍進的背景下，大多數開發人員只需要一個簡單但充滿活力的資料集就可以開始使用。Milvus 只需三個參數就能快速設定這樣的集合：</p>
 <ul>
@@ -272,7 +272,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </ul>
 <p>從所提供的程式碼中自動索引和載入的集合已準備好立即插入資料。</p>
 <h3 id="Customized-setup" class="common-anchor-header">客製化設定</h3><p>與其讓 Milvus 為您的集合決定幾乎一切，您可以自行決定集合的<strong>模式</strong>和<strong>索引參數</strong>。</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">步驟 1：設定模式</h4><p>模式定義了資料集的結構。在模式內，您可以選擇啟用或停用<code translate="no">enable_dynamic_field</code> 、新增預定義欄位，以及為每個欄位設定屬性。如需詳細解釋概念和可用的資料類型，請參閱<a href="/docs/zh-hant/schema.md">Schema Explained</a>。</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">步驟 1：設定模式</h4><p>模式定義了資料集的結構。在模式內，您可以選擇啟用或停用<code translate="no">enable_dynamic_field</code> 、新增預定義欄位，以及為每個欄位設定屬性。如需詳細解釋概念和可用的資料類型，請參閱<a href="/docs/zh-hant/v2.4.x/schema.md">Schema Explained</a>。</p>
 <div class="language-python">
 <p>要設定模式，請使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>來建立模式物件，並使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>來新增欄位到模式。</p>
 </div>
@@ -526,7 +526,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">步驟 2：設定索引參數</h4><p>索引參數決定 Milvus 如何在資料集中組織資料。您可以透過調整<code translate="no">metric_type</code> 和<code translate="no">index_type</code> ，為特定欄位量身打造索引過程。對於向量欄位，您可以彈性選擇<code translate="no">COSINE</code>,<code translate="no">L2</code>,<code translate="no">IP</code>,<code translate="no">HAMMING</code>, 或<code translate="no">JACCARD</code> 作為<code translate="no">metric_type</code> ，這取決於您正在處理的向量類型。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">相似度指標</a>。</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">步驟 2：設定索引參數</h4><p>索引參數決定 Milvus 如何在資料集中組織資料。您可以透過調整<code translate="no">metric_type</code> 和<code translate="no">index_type</code> ，為特定欄位量身打造索引過程。對於向量欄位，您可以彈性選擇<code translate="no">COSINE</code>,<code translate="no">L2</code>,<code translate="no">IP</code>,<code translate="no">HAMMING</code>, 或<code translate="no">JACCARD</code> 作為<code translate="no">metric_type</code> ，這取決於您正在處理的向量類型。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/metric.md">相似度指標</a>。</p>
 <div class="language-python">
 <p>要設定索引參數，請使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>來準備索引參數，並使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>來新增索引。</p>
 </div>
@@ -898,7 +898,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述建立的集合會自動載入。若要瞭解有關載入和釋放集合的更多資訊，請參閱載入和<a href="/docs/zh-hant/manage-collections.md#Load--Release-Collection">釋放集合</a>。</p></li>
+<p>上述建立的集合會自動載入。若要瞭解有關載入和釋放集合的更多資訊，請參閱載入和<a href="/docs/zh-hant/v2.4.x/manage-collections.md#Load--Release-Collection">釋放集合</a>。</p></li>
 <li><p><strong>分別建立集合和索引檔案。</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
@@ -1015,7 +1015,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面建立的集合不會自動載入。您可以如下方式為集合建立索引。以獨立方式為集合建立索引不會自動載入集合。如需詳細資訊，請參閱<a href="/docs/zh-hant/manage-collections.md#Load--Release-Collection">載入和釋放集合</a>。</p>
+<p>上面建立的集合不會自動載入。您可以如下方式為集合建立索引。以獨立方式為集合建立索引不會自動載入集合。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/manage-collections.md#Load--Release-Collection">載入和釋放集合</a>。</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1154,7 +1154,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>上面建立的集合不會自動載入。您可以為集合建立索引，步驟如下。以獨立方式為集合建立索引不會自動載入集合。如需詳細資訊，請參閱<a href="/docs/zh-hant/manage-collections.md">載入與釋放集合</a>。</p>
+<p>上面建立的集合不會自動載入。您可以為集合建立索引，步驟如下。以獨立方式為集合建立索引不會自動載入集合。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/manage-collections.md">載入與釋放集合</a>。</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>

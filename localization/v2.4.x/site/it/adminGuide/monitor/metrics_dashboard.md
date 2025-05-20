@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus produce un elenco di metriche dettagliate delle serie temporali durante l'esecuzione. È possibile utilizzare <a href="https://prometheus.io/">Prometheus</a> e <a href="https://grafana.com/">Grafana</a> per visualizzare le metriche. Questo argomento introduce le metriche di monitoraggio visualizzate nella dashboard di Grafana Milvus.</p>
 <p>L'unità di tempo in questo argomento è il millisecondo. E "99° percentile" in questo argomento si riferisce al fatto che il 99% delle statistiche di tempo sono controllate entro un certo valore.</p>
-<p>Si consiglia di leggere la <a href="/docs/it/monitor_overview.md">panoramica del framework di monitoraggio Milvus</a> per comprendere prima le metriche di Prometheus.</p>
+<p>Si consiglia di leggere la <a href="/docs/it/v2.4.x/monitor_overview.md">panoramica del framework di monitoraggio Milvus</a> per comprendere prima le metriche di Prometheus.</p>
 <p><details><summary>Proxy</summary></p>
 <table>
 <thead>

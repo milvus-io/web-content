@@ -7,7 +7,7 @@ group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 title: ''
 ---
-<div class="tab-wrapper"><a href="/docs/install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="/docs/install_cluster-helm.md" class='active '>Helm</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.2.x/install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="/docs/v2.2.x/install_cluster-helm.md" class='active '>Helm</a></div>
 <h1 id="Install-Milvus-Cluster-with-Helm" class="common-anchor-header">Install Milvus Cluster with Helm<button data-href="#Install-Milvus-Cluster-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Check <a href="/docs/prerequisite-helm.md">the requirements</a> for hardware and software prior to your installation.</p>
+    </button></h2><p>Check <a href="/docs/v2.2.x/prerequisite-helm.md">the requirements</a> for hardware and software prior to your installation.</p>
 <h2 id="Create-a-K8s-Cluster" class="common-anchor-header">Create a K8s Cluster<button data-href="#Create-a-K8s-Cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +55,7 @@ title: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to <a href="/docs/install_cluster-helm.md#Install-Helm-Chart-for-Milvus">Install Helm Chart for Milvus</a>. If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Helm.</p>
+    </button></h2><p>If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to <a href="/docs/v2.2.x/install_cluster-helm.md#Install-Helm-Chart-for-Milvus">Install Helm Chart for Milvus</a>. If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Helm.</p>
 <h3 id="Create-a-K8s-cluster-using-minikube" class="common-anchor-header">Create a K8s cluster using minikube</h3><p>We recommend installing Milvus on K8s with <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, a tool that allows you to run K8s locally.</p>
 <div class="alert note">
 minikube can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
@@ -264,22 +264,22 @@ Run <code translate="no">$ kubectl logs `pod_name`</code> to get the <code trans
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/v2.2.x/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_connection.md">Connect to Milvus server</a></li>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/insert_data.md">Insert data</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.2.x/manage_connection.md">Connect to Milvus server</a></li>
+<li><a href="/docs/v2.2.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.2.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.2.x/insert_data.md">Insert data</a></li>
+<li><a href="/docs/v2.2.x/search.md">Conduct a vector search</a></li>
 </ul></li>
-<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
+<li><p><a href="/docs/v2.2.x/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
+<li><p><a href="/docs/v2.2.x/scaleout.md">Scale your Milvus cluster</a>.</p></li>
 <li><p>Deploy your Milvu cluster on clouds:</p>
 <ul>
-<li><a href="/docs/aws.md">Amazon EC2</a></li>
-<li><a href="/docs/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/v2.2.x/aws.md">Amazon EC2</a></li>
+<li><a href="/docs/v2.2.x/eks.md">Amazon EKS</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p>Explore <a href="/docs/v2.2.x/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
+<li><p><a href="/docs/v2.2.x/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

@@ -21,7 +21,7 @@ title: Create a Partition
       </svg>
     </button></h1><p>This topic describes how to create a partition in Milvus.</p>
 <p>Milvus allows you to divide the bulk of vector data into a small number of partitions. Search and other operations can then be limited to one partition to improve the performance.</p>
-<p>A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition <code translate="no">_default</code>. See <a href="/docs/glossary.md#Partition">Glossary - Partition</a> for more information.</p>
+<p>A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition <code translate="no">_default</code>. See <a href="/docs/v2.3.x/glossary.md#Partition">Glossary - Partition</a> for more information.</p>
 <div class="alert note">
 <p>When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.</p>
 </div>
@@ -227,9 +227,9 @@ collection.create_partition(<span class="hljs-string">&quot;novel&quot;</span>)
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/insert_data.md">Insert data into Milvus</a></li>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.3.x/insert_data.md">Insert data into Milvus</a></li>
+<li><a href="/docs/v2.3.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

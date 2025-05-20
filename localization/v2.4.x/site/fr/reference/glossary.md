@@ -81,7 +81,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a> est un outil de débogage pour Milvus qui se connecte à etcd, ce qui vous permet de surveiller l'état du serveur Milvus et d'effectuer des ajustements en temps réel. Il prend également en charge les sauvegardes de fichiers etcd, ce qui aide les développeurs à résoudre les problèmes.</p>
+    </button></h2><p><a href="/docs/fr/v2.4.x/birdwatcher_overview.md">Birdwatcher</a> est un outil de débogage pour Milvus qui se connecte à etcd, ce qui vous permet de surveiller l'état du serveur Milvus et d'effectuer des ajustements en temps réel. Il prend également en charge les sauvegardes de fichiers etcd, ce qui aide les développeurs à résoudre les problèmes.</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">Bulk Writer<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,7 +161,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans Milvus, une collection est l'équivalent d'une table dans un système de gestion de base de données relationnelle (SGBDR). Les collections sont des objets logiques majeurs utilisés pour stocker et gérer les entités. Pour plus d'informations, voir <a href="/docs/fr/manage-collections.md">Gérer les collections</a>.</p>
+    </button></h2><p>Dans Milvus, une collection est l'équivalent d'une table dans un système de gestion de base de données relationnelle (SGBDR). Les collections sont des objets logiques majeurs utilisés pour stocker et gérer les entités. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/manage-collections.md">Gérer les collections</a>.</p>
 <h2 id="Dependency" class="common-anchor-header">Dépendance<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,7 +193,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le schéma dynamique vous permet d'insérer des entités avec de nouveaux champs dans une collection sans modifier le schéma existant. Cela signifie que vous pouvez insérer des données sans connaître le schéma complet d'une collection et que vous pouvez inclure des champs qui ne sont pas encore définis. Vous pouvez activer cette fonctionnalité sans schéma en activant le champ dynamique lors de la création d'une collection. Pour plus d'informations, voir <a href="/docs/fr/enable-dynamic-field.md">Activer le champ dynamique</a>.</p>
+    </button></h2><p>Le schéma dynamique vous permet d'insérer des entités avec de nouveaux champs dans une collection sans modifier le schéma existant. Cela signifie que vous pouvez insérer des données sans connaître le schéma complet d'une collection et que vous pouvez inclure des champs qui ne sont pas encore définis. Vous pouvez activer cette fonctionnalité sans schéma en activant le champ dynamique lors de la création d'une collection. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/enable-dynamic-field.md">Activer le champ dynamique</a>.</p>
 <h2 id="Embeddings" class="common-anchor-header">Intégrations<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +226,7 @@ summary: ''
         ></path>
       </svg>
     </button></h2><p>Une entité se compose d'un groupe de champs qui représentent des objets du monde réel. Dans Milvus, chaque entité est représentée par une clé primaire unique.</p>
-<p>Vous pouvez personnaliser les clés primaires. Si vous ne configurez pas manuellement, Milvus affecte automatiquement la clé primaire aux entités. Si vous choisissez de personnaliser la clé primaire, notez que Milvus ne prend pas en charge la déduplication des clés primaires pour le moment. Par conséquent, il peut y avoir des clés primaires en double dans la même collection. Pour plus d'informations, voir <a href="/docs/fr/insert-update-delete.md#Insert-entities">Insérer des entités</a>.</p>
+<p>Vous pouvez personnaliser les clés primaires. Si vous ne configurez pas manuellement, Milvus affecte automatiquement la clé primaire aux entités. Si vous choisissez de personnaliser la clé primaire, notez que Milvus ne prend pas en charge la déduplication des clés primaires pour le moment. Par conséquent, il peut y avoir des clés primaires en double dans la même collection. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/insert-update-delete.md#Insert-entities">Insérer des entités</a>.</p>
 <h2 id="Field" class="common-anchor-header">Champ<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -274,7 +274,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La recherche filtrée applique des filtres scalaires aux recherches vectorielles, ce qui permet d'affiner les résultats de la recherche en fonction de critères spécifiques. Pour plus d'informations, voir <a href="/docs/fr/single-vector-search.md#Filtered-search">Recherche filtrée</a>.</p>
+    </button></h2><p>La recherche filtrée applique des filtres scalaires aux recherches vectorielles, ce qui permet d'affiner les résultats de la recherche en fonction de critères spécifiques. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/single-vector-search.md#Filtered-search">Recherche filtrée</a>.</p>
 <h2 id="Hybrid-search" class="common-anchor-header">Recherche hybride<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +290,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">recherche hybride</a> est une API pour la recherche hybride depuis Milvus 2.4.0. Vous pouvez rechercher plusieurs champs vectoriels et les fusionner. Une recherche vectorielle combinée à un filtrage des champs scalaires est appelée &quot;recherche filtrée&quot;. Pour plus d'informations, voir <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</p>
+    </button></h2><p>La<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">recherche hybride</a> est une API pour la recherche hybride depuis Milvus 2.4.0. Vous pouvez rechercher plusieurs champs vectoriels et les fusionner. Une recherche vectorielle combinée à un filtrage des champs scalaires est appelée &quot;recherche filtrée&quot;. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/multi-vector-search.md">Recherche hybride</a>.</p>
 <h2 id="Index" class="common-anchor-header">Index<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -546,7 +546,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus prend en charge plusieurs champs vectoriels dans une collection depuis la version 2.4.0. Pour plus d'informations, voir <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</p>
+    </button></h2><p>Milvus prend en charge plusieurs champs vectoriels dans une collection depuis la version 2.4.0. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/multi-vector-search.md">Recherche hybride</a>.</p>
 <h2 id="Partition" class="common-anchor-header">Partition<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -41,7 +41,7 @@ summary: 이 항목에서는 Loki를 사용하여 로그를 수집하고 Grafana
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/install_cluster-helm.md">K8에 Milvus 클러스터를 설치했다</a>.</li>
+<li><a href="/docs/ko/v2.4.x/install_cluster-helm.md">K8에 Milvus 클러스터를 설치했다</a>.</li>
 <li><a href="https://helm.sh/docs/intro/install/">헬름과</a> <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl을</a> 포함한 필요한 도구를 설치했습니다.</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Loki 배포<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">

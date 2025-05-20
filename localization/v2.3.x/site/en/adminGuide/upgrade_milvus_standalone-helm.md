@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Helm Chart.
 title: Upgrade Milvus Standalone with Helm Chart
 ---
-<div class="tab-wrapper"><a href="/docs/upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/upgrade_milvus_standalone-helm.md" class='active '>Helm</a><a href="/docs/upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.3.x/upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/v2.3.x/upgrade_milvus_standalone-helm.md" class='active '>Helm</a><a href="/docs/v2.3.x/upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Upgrade Milvus Standalone with Helm Chart<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

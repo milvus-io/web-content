@@ -103,5 +103,5 @@ summary: 타임스탬프의 개념과 Milvus 벡터 데이터베이스의 네 �
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/consistency.md">보증 타임스탬프를 통해 Milvus에서 일관성을 조정하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/consistency.md">보증 타임스탬프를 통해 Milvus에서 일관성을 조정하는</a> 방법 알아보기</li>
 </ul>

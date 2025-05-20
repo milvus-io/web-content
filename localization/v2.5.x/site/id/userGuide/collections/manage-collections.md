@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Mirip dengan field utama dalam database relasional, sebuah koleksi memiliki field utama untuk membedakan suatu entitas dengan entitas lainnya. Setiap nilai dalam field utama bersifat unik secara global dan berhubungan dengan satu entitas tertentu.</p>
+    </button></h2><p>Mirip dengan field utama dalam database relasional, koleksi memiliki field utama untuk membedakan suatu entitas dengan entitas lainnya. Setiap nilai dalam field utama bersifat unik secara global dan berhubungan dengan satu entitas tertentu.</p>
 <p>Seperti yang ditunjukkan pada bagan di atas, field bernama <strong>id</strong> berfungsi sebagai field utama, dan ID <strong>0</strong> pertama berhubungan dengan entitas berjudul <em>Tingkat Kematian Virus Corona Tidak Penting</em>. Tidak akan ada entitas lain yang memiliki field utama 0.</p>
 <p>Bidang utama hanya menerima bilangan bulat atau string. Saat memasukkan entitas, Anda harus menyertakan nilai field utama secara default. Namun, jika Anda telah mengaktifkan <strong>AutoId</strong> pada saat pembuatan koleksi, Milvus akan menghasilkan nilai-nilai tersebut pada saat penyisipan data. Dalam kasus seperti itu, kecualikan nilai field utama dari entitas yang akan dimasukkan.</p>
 <p>Untuk informasi lebih lanjut, silakan lihat <a href="/docs/id/primary-field.md">Bidang Utama &amp; AutoId</a>.</p>
@@ -156,7 +156,7 @@ summary: >-
     </button></h2><p>Setelah Anda membuat indeks dan memuat koleksi, Anda dapat memulai pencarian kemiripan dengan memasukkan satu atau beberapa vektor kueri. Misalnya, ketika menerima representasi vektor kueri Anda yang dibawa dalam permintaan pencarian, Milvus menggunakan jenis metrik yang ditentukan untuk mengukur kemiripan antara vektor kueri dan vektor yang ada di koleksi target sebelum mengembalikan vektor yang secara semantik mirip dengan kueri.</p>
 <p>Anda juga dapat menyertakan pemfilteran metadata dalam penelusuran dan kueri untuk meningkatkan relevansi hasil. Perhatikan bahwa, kondisi pemfilteran metadata bersifat wajib dalam kueri, tetapi opsional dalam penelusuran.</p>
 <p>Untuk detail tentang jenis metrik yang berlaku, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p>
-<p>Untuk informasi lebih lanjut tentang pencarian dan kueri, lihat artikel di bab <a href="/docs/id/search-rerank">Pencarian &amp; Perangkingan</a>, di antaranya, fitur-fitur dasar:</p>
+<p>Untuk informasi lebih lanjut tentang pencarian dan kueri, lihat artikel di bab Pencarian &amp; Perangkingan, di antaranya, fitur-fitur dasar:</p>
 <ul>
 <li><p><a href="/docs/id/single-vector-search.md">Pencarian ANN Dasar</a></p></li>
 <li><p><a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a></p></li>

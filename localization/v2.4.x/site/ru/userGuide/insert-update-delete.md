@@ -38,7 +38,7 @@ title: 'Вставка, вставка и удаление'
       </svg>
     </button></h2><ul>
 <li><p>Вы установили выбранный вами SDK. Чтобы установить SDK, обратитесь к разделу <a href="https://milvus.io/docs/install-pymilvus.md">Установка SDK</a>.</p></li>
-<li><p>Вы создали коллекцию. Чтобы создать коллекцию, см. раздел <a href="/docs/ru/manage-collections.md">Управление коллекциями</a>.</p></li>
+<li><p>Вы создали коллекцию. Чтобы создать коллекцию, см. раздел <a href="/docs/ru/v2.4.x/manage-collections.md">Управление коллекциями</a>.</p></li>
 <li><p>Для вставки большого объема данных рекомендуется использовать <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Импорт данных</a>.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -58,7 +58,7 @@ title: 'Вставка, вставка и удаление'
       </svg>
     </button></h2><p>Сущность в контексте коллекций Milvus - это отдельный, идентифицируемый экземпляр в коллекции. Она представляет собой отдельного представителя определенного класса, будь то книга в библиотеке, ген в геноме или любая другая идентифицируемая сущность.</p>
 <p>Сущности в коллекции имеют общий набор атрибутов, называемый схемой, определяющий структуру, которой должна придерживаться каждая сущность, включая имена полей, типы данных и любые другие ограничения.</p>
-<p>Для успешной вставки сущностей в коллекцию требуется, чтобы предоставленные данные содержали все поля, определенные схемой целевой коллекции. Кроме того, вы можете включать поля, не определенные схемой, только если вы включили динамическое поле. Подробнее см. в разделе <a href="/docs/ru/enable-dynamic-field.md">Включение динамического поля</a>.</p>
+<p>Для успешной вставки сущностей в коллекцию требуется, чтобы предоставленные данные содержали все поля, определенные схемой целевой коллекции. Кроме того, вы можете включать поля, не определенные схемой, только если вы включили динамическое поле. Подробнее см. в разделе <a href="/docs/ru/v2.4.x/enable-dynamic-field.md">Включение динамического поля</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">Подготовка<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -382,7 +382,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>На выходе вы получите словарь, содержащий статистику по затронутым сущностям. Подробнее об операциях с разделами см. в разделе <a href="/docs/ru/manage-partitions.md">Управление разделами</a>.</p>
+<p>На выходе вы получите словарь, содержащий статистику по затронутым сущностям. Подробнее об операциях с разделами см. в разделе <a href="/docs/ru/v2.4.x/manage-partitions.md">Управление разделами</a>.</p>
 <h2 id="Upsert-entities" class="common-anchor-header">Вставка сущностей<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -587,7 +587,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>На выходе вы получите словарь, содержащий статистику по затронутым сущностям. Подробнее об операциях с разделами см. в разделе <a href="/docs/ru/manage-partitions.md">Управление разделами</a>.</p>
+<p>На выходе вы получите словарь, содержащий статистику по затронутым сущностям. Подробнее об операциях с разделами см. в разделе <a href="/docs/ru/v2.4.x/manage-partitions.md">Управление разделами</a>.</p>
 <h2 id="Delete-entities" class="common-anchor-header">Удаление сущностей<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -708,7 +708,7 @@ System.out.<span class="hljs-built_in">println</span>(deleteResp.getDeleteCnt())
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Подробнее о том, как использовать выражения фильтрации, читайте в разделе <a href="/docs/ru/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p></li>
+<p>Подробнее о том, как использовать выражения фильтрации, читайте в разделе <a href="/docs/ru/v2.4.x/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p></li>
 <li><p><strong>Удаление сущностей по имени раздела</strong>.</p>
 <p>Если вы хотите удалить сущности из определенного раздела, вы можете указать имя раздела с помощью параметра <code translate="no">partition_name</code> в методе <code translate="no">delete()</code>. В следующем примере удаляются сущности из раздела <code translate="no">partitionA</code>, цвет которых начинается с <code translate="no">blue</code>.</p>
 <p><div class="multipleCode">

@@ -8,6 +8,12 @@ summary: >-
   UMAP. Этот блокнот является адаптацией Milvus статьи Дилана Кастильо.
 title: Кластеризация HDBSCAN с помощью Milvus
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">Кластеризация HDBSCAN с помощью Milvus<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,13 +29,7 @@ title: Кластеризация HDBSCAN с помощью Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>С помощью моделей глубокого обучения данные могут быть преобразованы во вкрапления, которые отражают значимые представления исходных данных. Применяя алгоритм кластеризации без контроля, мы можем объединить похожие точки данных в группы на основе присущих им закономерностей. HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) - это широко используемый алгоритм кластеризации, который эффективно группирует точки данных, анализируя их плотность и расстояние. Он особенно полезен для обнаружения кластеров различной формы и размера. В этом блокноте мы будем использовать HDBSCAN с Milvus, высокопроизводительной векторной базой данных, для группировки точек данных в отдельные группы на основе их вкраплений.</p>
+    </button></h1><p>С помощью моделей глубокого обучения данные могут быть преобразованы во вкрапления, которые отражают значимые представления исходных данных. Применяя алгоритм кластеризации без контроля, мы можем объединить похожие точки данных в группы на основе присущих им закономерностей. HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) - это широко используемый алгоритм кластеризации, который эффективно группирует точки данных, анализируя их плотность и расстояние. Он особенно полезен для обнаружения кластеров различной формы и размера. В этом блокноте мы будем использовать HDBSCAN с Milvus, высокопроизводительной векторной базой данных, для группировки точек данных в отдельные группы на основе их вкраплений.</p>
 <p>HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) - это алгоритм кластеризации, основанный на вычислении расстояний между точками данных в пространстве вкраплений. Эти вкрапления, созданные моделями глубокого обучения, представляют данные в высокоразмерной форме. Чтобы сгруппировать похожие точки данных, HDBSCAN определяет их близость и плотность, но эффективное вычисление этих расстояний, особенно для больших наборов данных, может быть сложной задачей.</p>
 <p>Milvus, высокопроизводительная база данных векторов, оптимизирует этот процесс, сохраняя и индексируя вкрапления, что позволяет быстро находить похожие векторы. При совместном использовании HDBSCAN и Milvus обеспечивают эффективную кластеризацию больших наборов данных в пространстве вкраплений.</p>
 <p>В этом блокноте мы используем модель встраивания BGE-M3 для извлечения встраиваний из набора данных новостных заголовков, используем Milvus для эффективного вычисления расстояний между встраиваниями, чтобы помочь HDBSCAN в кластеризации, а затем визуализируем результаты для анализа с помощью метода UMAP. Этот блокнот является адаптацией Milvus к <a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">статье Дилана Кастильо</a>.</p>
@@ -49,10 +49,10 @@ title: Кластеризация HDBSCAN с помощью Milvus
         ></path>
       </svg>
     </button></h2><p>загрузите набор данных новостей с сайта https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/.</p>
-<pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
-$ pip install hdbscan
-$ pip install plotly
-$ pip install umap-learn
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install hdbscan</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install plotly</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install umap-learn</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Download-Data" class="common-anchor-header">Загрузить данные<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,17 @@ $ pip install umap-learn
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Загрузите новостной набор данных с https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/, извлеките <code translate="no">news_data_dedup.csv</code> и поместите его в текущую директорию.</p>
+    </button></h2><p>Скачайте новостной набор данных с https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/, извлеките <code translate="no">news_data_dedup.csv</code> и поместите его в текущую директорию.</p>
+<p>Или вы можете скачать через curl:</p>
+<pre><code translate="no" class="language-bash">%%bash
+curl -L -o ~/Downloads/news-headlines-2024.zip\
+  https://www.kaggle.com/api/v1/datasets/download/dylanjcastillo/news-headlines-2024
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0 --:--:--     0
+100  225k  100  225k    0     0  33151      0  0:00:06  0:00:06 --:--:-- 62160:03  114k  0:00:07  0:00:06  0:00:01 66615    0  30519      0  0:00:07  0:00:06  0:00:01 61622
+</code></pre>
 <h2 id="Extract-Embeddings-to-Milvus" class="common-anchor-header">Извлечение вкраплений в Milvus<button data-href="#Extract-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,11 +116,13 @@ embeddings = ef(docs)[<span class="hljs-string">&quot;dense&quot;</span>]
 connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<blockquote>
 <ul>
 <li>Если вам нужна локальная векторная база данных только для небольшого масштаба данных или прототипирования, установка uri в качестве локального файла, например<code translate="no">./milvus.db</code>, является наиболее удобным методом, так как он автоматически использует <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> для хранения всех данных в этом файле.</li>
-<li>Если у вас большой объем данных, скажем, более миллиона векторов, вы можете настроить более производительный сервер Milvus на <a href="https://milvus.io/docs/quickstart.md">Docker или Kubernetes</a>. В этом случае используйте адрес и порт сервера в качестве uri, например,<code translate="no">http://localhost:19530</code>. Если вы включили функцию аутентификации на Milvus, используйте "&lt;ваше_имя_пользователя&gt;:&lt;ваш_пароль&gt;" в качестве токена, в противном случае не задавайте токен.</li>
+<li>Если у вас большой объем данных, скажем, более миллиона векторов, вы можете настроить более производительный сервер Milvus на <a href="https://milvus.io/docs/quickstart.md">Docker или Kubernetes</a>. В этом случае используйте адрес и порт сервера в качестве uri, например,<code translate="no">http://localhost:19530</code>. Если вы включили функцию аутентификации на Milvus, используйте "<your_username>:<your_password>" в качестве токена, в противном случае не задавайте токен.</li>
 <li>Если вы используете <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, полностью управляемый облачный сервис для Milvus, настройте <code translate="no">uri</code> и <code translate="no">token</code>, которые соответствуют <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">публичной конечной точке и ключу API</a> в Zilliz Cloud.</li>
 </ul>
+</blockquote>
 </div>
 <pre><code translate="no" class="language-python">fields = [
     FieldSchema(
@@ -271,6 +283,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>изображение</span> </span></p>
 <p>Здесь мы демонстрируем, что данные хорошо кластеризованы, и вы можете навести курсор на точки, чтобы проверить текст, который они представляют. Мы надеемся, что с помощью этого блокнота вы узнаете, как эффективно использовать HDBSCAN для кластеризации вкраплений с помощью Milvus, что также может быть применено к другим типам данных. В сочетании с большими языковыми моделями этот подход позволяет проводить более глубокий анализ данных в больших масштабах.</p>

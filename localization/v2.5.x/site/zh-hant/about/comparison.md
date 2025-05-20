@@ -129,7 +129,7 @@ summary: 本文將比較 Milvus 與其他向量搜尋解決方案。
 </tbody>
 </table>
 <h3 id="Key-insights" class="common-anchor-header">主要觀點</h3><ul>
-<li><p><strong>部署模式</strong>：Milvus 提供多種部署方式，包括本機部署、Docker、Kubernetes on-premises、雲端 SaaS，以及針對企業的自帶雲端 (BYOC)，而 Pinecone 則僅限於 SaaS 部署。</p></li>
+<li><p><strong>部署模式</strong>：Milvus 提供多種部署選項，包括本機部署、Docker、Kubernetes on-premises、雲端 SaaS，以及針對企業的自帶雲端 (BYOC)，而 Pinecone 則僅限於 SaaS 部署。</p></li>
 <li><p><strong>嵌入功能</strong>：Milvus 支援額外的嵌入函式庫，可直接使用嵌入模型將源資料轉換為向量。</p></li>
 <li><p><strong>資料類型</strong>：Milvus 支援的資料類型比 Pinecone 更廣泛，包括陣列和 JSON。Pinecone 只支援以字串、數字、布林值或字串清單為值的平面元資料結構，而 Milvus 可以處理 JSON 欄位內的任何 JSON 物件，包括巢狀結構。Pinecone 限制每個向量的元資料大小為 40KB。</p></li>
 <li><p><strong>度量和索引類型</strong>：Milvus 支援多種公制和索引類型，以滿足各種使用情況，而 Pinecone 的選擇則較為有限。在 Milvus 中，向量的索引是強制性的，而 AUTO_INDEX 選項則可簡化設定流程。</p></li>

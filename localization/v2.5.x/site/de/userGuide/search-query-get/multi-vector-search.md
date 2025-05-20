@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Die hybride Suche bezieht sich auf eine Suchmethode, die mehrere ANN-Suchen gleichzeitig durchführt, mehrere Ergebnissätze aus diesen ANN-Suchen neu ordnet und schließlich einen einzigen Ergebnissatz liefert. Die Verwendung der hybriden Suche kann die Suchgenauigkeit verbessern. Milvus unterstützt die Durchführung von Hybrid Search in einer Sammlung mit mehreren Vektorfeldern.</p>
-<p>Die hybride Suche wird am häufigsten in Szenarien mit spärlichen und dichten Vektorsuchen und multimodalen Suchen verwendet. In diesem Leitfaden wird anhand eines konkreten Beispiels gezeigt, wie eine hybride Suche in Milvus durchgeführt werden kann.</p>
+<p>Die hybride Suche wird am häufigsten in Szenarien mit spärlichen und dichten Vektorsuchen und multimodalen Suchen verwendet. In dieser Anleitung wird anhand eines konkreten Beispiels gezeigt, wie eine Hybrid-Suche in Milvus durchgeführt wird.</p>
 <h2 id="Scenarios" class="common-anchor-header">Szenarien<button data-href="#Scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -512,7 +512,7 @@ search_param_1 = {
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>}, {<span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
+query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>, <span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,

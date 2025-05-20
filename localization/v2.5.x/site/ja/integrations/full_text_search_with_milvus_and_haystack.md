@@ -131,7 +131,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;writer&quot;</span>: {<sp
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'writer': {'documents_written': 3}}
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">検索パイプラインの作成</h3><p><code translate="no">document_store</code> のラッパーである<code translate="no">MilvusSparseEmbeddingRetriever</code> を使用して、Milvus ドキュメントストアからドキュメントを検索する検索パイプラインを作成する。</p>
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">検索パイプラインの作成</h3><p><code translate="no">document_store</code> のラッパーである<code translate="no">MilvusSparseEmbeddingRetriever</code> を使って、Milvus ドキュメントストアからドキュメントを検索する検索パイプラインを作成する。</p>
 <pre><code translate="no" class="language-python">retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(
     <span class="hljs-string">&quot;retriever&quot;</span>, MilvusSparseEmbeddingRetriever(document_store=document_store)
@@ -315,12 +315,12 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     </button></h2><p>ここまで、HaystackとMilvusにおける基本的なBM25ビルドイン関数の使い方を学び、ロードした<code translate="no">document_store</code> を準備した。ハイブリッド検索を使った最適化されたRAG実装を紹介しよう。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>この図は、キーワードマッチングのためのBM25と意味検索のための密なベクトル検索を組み合わせたハイブリッド検索と再ランク付けのプロセスを示している。両方の方法からの結果はマージされ、再ランク付けされ、最終的な答えを生成するためにLLMに渡される。</p>
-<p>ハイブリッド検索は精度と意味理解のバランスをとり、多様なクエリに対する精度と頑健性を向上させる。BM25全文検索とベクトル検索で候補を検索し、意味的、文脈を考慮した、正確な検索の両方を保証する。</p>
+<p>ハイブリッド検索は精度と意味理解のバランスをとり、多様なクエリに対する精度と頑健性を向上させる。BM25全文検索とベクトル検索で候補を検索し、セマンティックでコンテキストを考慮した正確な検索を実現します。</p>
 <p>ハイブリッド検索で最適化されたRAGの実装を試してみよう。</p>
 <pre><code translate="no" class="language-python">prompt_template = <span class="hljs-string">&quot;&quot;&quot;Answer the following query based on the provided context. If the context does
                      not include an answer, reply with &#x27;I don&#x27;t know&#x27;.\n

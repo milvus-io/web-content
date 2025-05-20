@@ -14,7 +14,7 @@
     "@babel/preset-react": "^7.24.7",
     "@babel/traverse": "^7.25.6",
     "@mdx-js/mdx": "^3.0.1",
-    "@zilliz/toolkit": "^0.2.2",
+    "@zilliz/toolkit": "^0.2.4",
     "dotenv": "^16.4.5",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.10.0",

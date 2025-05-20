@@ -22,9 +22,9 @@ summary: ''
 <p>Ce guide fournit des instructions détaillées sur la configuration des journaux d'accès dans Milvus.</p>
 <p>La configuration des journaux d'accès dépend de la méthode d'installation de Milvus :</p>
 <ul>
-<li><strong>Installation de Helm</strong>: Configurer dans <code translate="no">values.yaml</code>. Pour plus d'informations, voir <a href="/docs/fr/configure-helm.md">Configurer Milvus avec Helm Charts</a>.</li>
-<li><strong>Installation Docker</strong>: Configurer à l'adresse <code translate="no">milvus.yaml</code>. Pour plus d'informations, voir <a href="/docs/fr/configure-docker.md">Configurer Milvus avec Docker Compose</a>.</li>
-<li><strong>Installation de l'opérateur</strong>: Modifier <code translate="no">spec.components</code> dans le fichier de configuration. Pour plus d'informations, voir <a href="/docs/fr/configure_operator.md">Configurer Milvus avec Milvus Operator</a>.</li>
+<li><strong>Installation de Helm</strong>: Configurer dans <code translate="no">values.yaml</code>. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/configure-helm.md">Configurer Milvus avec Helm Charts</a>.</li>
+<li><strong>Installation Docker</strong>: Configurer à l'adresse <code translate="no">milvus.yaml</code>. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/configure-docker.md">Configurer Milvus avec Docker Compose</a>.</li>
+<li><strong>Installation de l'opérateur</strong>: Modifier <code translate="no">spec.components</code> dans le fichier de configuration. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/configure_operator.md">Configurer Milvus avec Milvus Operator</a>.</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Options de configuration<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

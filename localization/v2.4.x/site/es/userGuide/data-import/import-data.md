@@ -37,8 +37,8 @@ summary: Esta página muestra el procedimiento para importar los datos preparado
       </svg>
     </button></h2><ul>
 <li><p>Ya ha preparado sus datos y los ha colocado en el cubo de Milvus.</p>
-<p>Si no es así, debería utilizar <strong>RemoteBulkWriter</strong> para preparar sus datos primero y asegurarse de que los datos preparados ya se han transferido al cubo de Milvus en la instancia MinIO iniciada junto con su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/prepare-source-data.md">Preparar datos de origen</a>.</p></li>
-<li><p>Ya ha creado una colección con el esquema que utiliza para preparar sus datos. Si no es así, consulte <a href="/docs/es/manage-collections.md">Administrar colecciones</a>.</p></li>
+<p>Si no es así, debería utilizar <strong>RemoteBulkWriter</strong> para preparar sus datos primero y asegurarse de que los datos preparados ya se han transferido al cubo de Milvus en la instancia MinIO iniciada junto con su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/v2.4.x/prepare-source-data.md">Preparar datos de origen</a>.</p></li>
+<li><p>Ya ha creado una colección con el esquema que utiliza para preparar sus datos. Si no es así, consulte <a href="/docs/es/v2.4.x/manage-collections.md">Administrar colecciones</a>.</p></li>
 </ul>
 <div class="language-python">
 <p>El siguiente fragmento de código crea una colección simple con el esquema dado. Para obtener más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> en la referencia del SDK.</p>

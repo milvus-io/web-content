@@ -20,7 +20,7 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to insert data in Milvus via client.</p>
-<p>You can also migrate data to Milvus with <a href="/docs/migrate_overview.md">MilvusDM</a>, an open-source tool designed specifically for importing and exporting data with Milvus.</p>
+<p>You can also migrate data to Milvus with <a href="/docs/v2.1.x/migrate_overview.md">MilvusDM</a>, an open-source tool designed specifically for importing and exporting data with Milvus.</p>
 <p>Milvus 2.1 supports VARCHAR data type on scalar field. When building indexes for VARCHAR-type scalar fields, the default index type is dictionary tree.</p>
 <p>The following example inserts 2,000 rows of randomly generated data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than the example. You can prepare your own data to replace the example.</p>
 <h2 id="Prepare-data" class="common-anchor-header">Prepare data<button data-href="#Prepare-data" class="anchor-icon" translate="no">
@@ -412,8 +412,8 @@ Output:
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.1.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.1.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.1.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

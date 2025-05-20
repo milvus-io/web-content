@@ -24,9 +24,9 @@ summary: >-
     </button></h1><p>Rispetto a un bilanciatore di carico Layer-4, un bilanciatore di carico Layer-7 offre funzionalità intelligenti di bilanciamento del carico e di caching ed è un'ottima scelta per i servizi cloud-nativi.</p>
 <p>Questa guida illustra come configurare un bilanciatore di carico Layer-7 per un cluster Milvus già in esecuzione dietro a un bilanciatore di carico Layer-4.</p>
 <h3 id="Before-your-start" class="common-anchor-header">Prima di iniziare</h3><ul>
-<li>Avete <a href="/docs/it/eks.md">distribuito un cluster Milvus dietro un bilanciatore di carico Layer-4 su AWS</a>.</li>
+<li>Avete <a href="/docs/it/v2.4.x/eks.md">distribuito un cluster Milvus dietro un bilanciatore di carico Layer-4 su AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modificare le configurazioni di Milvus</h3><p>Questa guida presuppone che abbiate già <a href="/docs/it/eks.md">implementato un cluster Milvus dietro un bilanciatore di carico Layer-4 su AWS</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modificare le configurazioni di Milvus</h3><p>Questa guida presuppone che abbiate già <a href="/docs/it/v2.4.x/eks.md">implementato un cluster Milvus dietro un bilanciatore di carico Layer-4 su AWS</a>.</p>
 <p>Prima di impostare un bilanciatore di carico Layer-7 per questo cluster Milvus, eseguite il seguente comando per rimuovere il bilanciatore di carico Layer-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

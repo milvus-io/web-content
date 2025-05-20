@@ -21,7 +21,7 @@ title: 사용자 액세스 인증
     </button></h1><p>이 가이드에서는 인증 활성화, 사용자로 연결하기, 사용자 자격 증명 수정하기 등 Milvus에서 사용자 인증을 관리하는 방법에 대해 설명합니다.</p>
 <div class="alert note">
 <ul>
-<li><p>TLS와 사용자 인증은 서로 다른 두 가지 보안 접근 방식입니다. Milvus 시스템에서 사용자 인증과 TLS를 모두 활성화한 경우 사용자 이름, 비밀번호 및 인증서 파일 경로를 제공해야 합니다. TLS를 활성화하는 방법에 대한 자세한 내용은 <a href="/docs/ko/tls.md">전송 중 암호화를</a> 참조하세요.</p></li>
+<li><p>TLS와 사용자 인증은 서로 다른 두 가지 보안 접근 방식입니다. Milvus 시스템에서 사용자 인증과 TLS를 모두 활성화한 경우 사용자 이름, 비밀번호 및 인증서 파일 경로를 제공해야 합니다. TLS를 활성화하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/tls.md">전송 중 암호화를</a> 참조하세요.</p></li>
 <li><p>이 페이지의 코드 스니펫은 새로운 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python)를 사용하여 Milvus와 상호 작용합니다. 다른 언어에 대한 새로운 MilvusClient SDK는 향후 업데이트를 통해 출시될 예정입니다.</p></li>
 </ul>
 </div>
@@ -267,11 +267,11 @@ client.list_users()
       </svg>
     </button></h2><ul>
 <li>다음 방법을 알아보세요:<ul>
-<li><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a></li>
+<li><a href="/docs/ko/v2.4.x/scaleout.md">Milvus 클러스터 확장하기</a></li>
 </ul></li>
 <li>클라우드에 클러스터를 배포할 준비가 되었나요?<ul>
-<li><a href="/docs/ko/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>
 </ul></li>
 </ul>

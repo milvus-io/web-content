@@ -20,8 +20,8 @@ summary: ''
       </svg>
     </button></h1><p>New to Milvus? No sweat! Follow the topics below for instant onboarding with Milvus.</p>
 <ul>
-<li><a href="/docs/prerequisite-docker.md">Prerequisites</a>: Check the installation requirements for your hardware and software.</li>
-<li><a href="/docs/install_milvus.md">Install Milvus</a>: Learn about the various and flexible ways to either install Milvus standalone or deploy a Milvus cluster.</li>
-<li><a href="/docs/install-pymilvus.md">Install SDKs</a>: Choose the install the Milvus SDK in the language that you prefer.</li>
-<li><a href="/docs/example_code.md">Hello Milvus</a>: Run the example code to get a quick preview of what Milvus is capable of.</li>
+<li><a href="/docs/v2.0.x/prerequisite-docker.md">Prerequisites</a>: Check the installation requirements for your hardware and software.</li>
+<li><a href="/docs/v2.0.x/install_milvus.md">Install Milvus</a>: Learn about the various and flexible ways to either install Milvus standalone or deploy a Milvus cluster.</li>
+<li><a href="/docs/v2.0.x/install-pymilvus.md">Install SDKs</a>: Choose the install the Milvus SDK in the language that you prefer.</li>
+<li><a href="/docs/v2.0.x/example_code.md">Hello Milvus</a>: Run the example code to get a quick preview of what Milvus is capable of.</li>
 </ul>

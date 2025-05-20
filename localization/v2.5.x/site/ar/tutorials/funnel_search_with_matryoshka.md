@@ -4,9 +4,9 @@ summary: >-
   ندرس في هذا الدفتر كيفية استخدام تضمينات ماتريوشكا مع ميلفوس للبحث الدلالي.
   نوضح خوارزمية تسمى "البحث القمعي" التي تسمح لنا بإجراء بحث التشابه على مجموعة
   فرعية صغيرة من أبعاد التضمين دون انخفاض كبير في التذكر.
-title: البحث القمعي باستخدام تضمينات ماتريوشكا
+title: البحث القمعي مع تضمينات ماتريوشكا
 ---
-<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">البحث القمعي باستخدام تضمينات ماتريوشكا<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
+<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">البحث القمعي مع تضمينات ماتريوشكا<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,26 +21,49 @@ title: البحث القمعي باستخدام تضمينات ماتريوشك�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>عند إنشاء أنظمة بحث متجهات فعالة، يتمثل أحد التحديات الرئيسية في إدارة تكاليف التخزين مع الحفاظ على زمن استجابة واستدعاء مقبول. تُخرج نماذج التضمين الحديثة متجهات ذات مئات أو آلاف الأبعاد، مما يؤدي إلى إنشاء مساحة تخزين كبيرة ونفقات حسابية كبيرة للمتجه الخام والفهرس.</p>
-<p>وتقليديًا، يتم تقليل متطلبات التخزين من خلال تطبيق طريقة التكميم أو تقليل الأبعاد قبل إنشاء الفهرس مباشرةً. على سبيل المثال، يمكننا توفير مساحة التخزين عن طريق تقليل الدقة باستخدام التكميم الكمي للمنتج (PQ) أو عدد الأبعاد باستخدام تحليل المكونات الرئيسية (PCA). تقوم هذه الطرق بتحليل مجموعة المتجهات بأكملها للعثور على مجموعة أكثر إحكامًا تحافظ على العلاقات الدلالية بين المتجهات.</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+عند إنشاء أنظمة بحث متجهات فعالة، يتمثل أحد التحديات الرئيسية في إدارة تكاليف التخزين مع الحفاظ على زمن استجابة واستدعاء مقبول. تُخرج نماذج التضمين الحديثة متجهات ذات مئات أو آلاف الأبعاد، مما يؤدي إلى إنشاء مساحة تخزين كبيرة ونفقات حسابية كبيرة للمتجه الخام والفهرس.<p>وتقليديًا، يتم تقليل متطلبات التخزين من خلال تطبيق طريقة التكميم أو تقليل الأبعاد قبل إنشاء الفهرس مباشرةً. على سبيل المثال، يمكننا توفير مساحة التخزين عن طريق تقليل الدقة باستخدام التكميم الكمي للمنتج (PQ) أو عدد الأبعاد باستخدام تحليل المكونات الرئيسية (PCA). تقوم هذه الطرق بتحليل مجموعة المتجهات بأكملها للعثور على مجموعة أكثر إحكامًا تحافظ على العلاقات الدلالية بين المتجهات.</p>
 <p>رغم فعاليتها، فإن هذه الأساليب القياسية تقلل من الدقة أو الأبعاد مرة واحدة فقط وعلى مقياس واحد. ولكن ماذا لو تمكنا من الحفاظ على طبقات متعددة من التفاصيل في وقت واحد، مثل هرم من التمثيلات المتزايدة الدقة؟</p>
 <p>أدخل تضمينات ماتريوشكا. سُميت على اسم الدمى الروسية المتداخلة (انظر الرسم التوضيحي)، هذه التركيبات الذكية تدمج مقاييس متعددة للتمثيل داخل متجه واحد. على عكس طرق المعالجة اللاحقة التقليدية، تتعلم تضمينات ماتريوشكا هذه البنية متعددة المقاييس أثناء عملية التدريب الأولية. والنتيجة ملحوظة: لا يقتصر الأمر على أن التضمين الكامل لا يلتقط دلالات المدخلات فحسب، بل إن كل بادئة مجموعة فرعية متداخلة (النصف الأول، الربع الأول، إلخ) توفر تمثيلاً متماسكاً، وإن كان أقل تفصيلاً.</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
 <p>في هذا الدفتر، ندرس كيفية استخدام تضمينات ماتريوشكا مع ميلفوس للبحث الدلالي. نوضح خوارزمية تسمى "البحث القمعي" التي تسمح لنا بإجراء بحث التشابه على مجموعة فرعية صغيرة من أبعاد التضمين دون انخفاض كبير في التذكر.</p>
+<h2 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>لوحدة المعالجة المركزية فقط:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>لـ CUDA 11.8</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>أمر التثبيت لـ CUDA 11.8 هو مثال فقط. يرجى تأكيد إصدار CUDA الخاص بك عند تثبيت PyTorch.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">تحميل نموذج تضمين ماتريوشكا<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">تحميل نموذج تضمين Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,7 +78,7 @@ title: البحث القمعي باستخدام تضمينات ماتريوشك�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بدلاً من استخدام نموذج تضمين قياسي مثل <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>، نستخدم <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">نموذجًا من Nomic</a> مدربًا خصيصًا لإنتاج تضمينات ماتريوشكا.</p>
+    </button></h2><p>بدلاً من استخدام نموذج تضمين قياسي مثل <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>نستخدم <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">نموذجًا من Nomic</a> مدربًا خصيصًا لإنتاج تضمينات ماتريوشكا.</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -81,7 +104,7 @@ title: البحث القمعي باستخدام تضمينات ماتريوشك�
         ></path>
       </svg>
     </button></h2><p>الكود التالي هو تعديل لذلك من صفحة التوثيق <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"البحث عن الأفلام باستخدام محولات الجمل وميلفوس".</a> أولاً، نقوم بتحميل مجموعة البيانات من HuggingFace. وهي تحتوي على حوالي 35 ألف مدخل، كل منها يتوافق مع فيلم له مقالة في ويكيبيديا. سنستخدم الحقلين <code translate="no">Title</code> و <code translate="no">PlotSummary</code> في هذا المثال.</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -111,12 +134,12 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <p>لا يدعم برنامج Milvus حاليًا البحث على مجموعات فرعية من التضمينات، لذلك نقوم بتقسيم التضمينات إلى جزأين: يمثل الرأس المجموعة الفرعية الأولية من المتجه للفهرسة والبحث، والذيل هو الباقي. تم تدريب النموذج على البحث عن تشابه مسافة جيب التمام، لذلك نقوم بتطبيع تضمينات الرأس. ومع ذلك، من أجل حساب أوجه التشابه لمجموعات فرعية أكبر لاحقًا، نحتاج إلى تخزين معيار تضمين الرأس، حتى نتمكن من عدم تطبيعه قبل الانضمام إلى الذيل.</p>
 <p>لإجراء البحث عن طريق أول 1/6 من التضمين الأول، سنحتاج إلى إنشاء فهرس بحث متجه على الحقل <code translate="no">head_embedding</code>. في وقت لاحق، سنقارن نتائج "البحث القمعي" بالبحث المتجه العادي، ومن ثم ننشئ فهرس بحث على التضمين الكامل أيضًا.</p>
 <p><em>من المهم أن نستخدم <code translate="no">COSINE</code> بدلاً من مقياس المسافة <code translate="no">IP</code> ، لأنه بخلاف ذلك سنحتاج إلى تتبع معايير التضمين، مما سيعقد التنفيذ (سيكون هذا أكثر منطقية بمجرد وصف خوارزمية البحث القمعي).</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>أخيراً، نقوم بترميز ملخصات الحبكة لجميع الأفلام الـ 35 ألفاً وإدخال التضمينات المقابلة في قاعدة البيانات.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -298,7 +321,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>لقد تمكنا من استعادة التذكر دون إجراء أي عمليات بحث إضافية للمتجهات! من الناحية النوعية، يبدو أن هذه النتائج تتمتع باستدعاء أعلى لفيلمي "Raiders of the Lost Ark" و"The Shining" من البحث المتجه القياسي في البرنامج التعليمي، <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"البحث عن الأفلام باستخدام ميلفوس ومحوّلات الجمل"،</a> والذي يستخدم نموذج تضمين مختلف. ومع ذلك، فإنه غير قادر على العثور على فيلم &quot;Ferris Bueller's Day Off&quot;، والذي سنعود إليه لاحقًا في هذا الدفتر. (راجع بحث <a href="https://arxiv.org/abs/2205.13147">"تعلم تمثيل ماتريوشكا</a> " للاطلاع على المزيد من التجارب الكمية والقياس المعياري).</p>
+<p>لقد تمكنا من استعادة التذكر دون إجراء أي عمليات بحث إضافية للمتجهات! من الناحية النوعية، يبدو أن هذه النتائج تتمتع باستدعاء أعلى لفيلمي "Raiders of the Lost Ark" و"The Shining" من البحث المتجه القياسي في البرنامج التعليمي، <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"البحث عن الأفلام باستخدام ميلفوس ومحوّلات الجمل"،</a> والذي يستخدم نموذج تضمين مختلف. ومع ذلك، فإنه غير قادر على العثور على فيلم "Ferris Bueller's Day Off"، والذي سنعود إليه لاحقًا في هذا الدفتر. (راجع بحث <a href="https://arxiv.org/abs/2205.13147">"تعلم تمثيل ماتريوشكا</a> " للاطلاع على المزيد من التجارب الكمية والقياس المعياري).</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">مقارنة البحث القمعي بالبحث العادي<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -357,7 +380,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>باستثناء نتائج البحث عن &quot;مراهق يتظاهر بالمرض للتملص من المدرسة...&quot;، فإن النتائج في إطار البحث القمعي مطابقة تقريبًا للبحث الكامل، على الرغم من أن البحث القمعي أُجري على مساحة بحث من 128 بُعدًا مقابل 768 بُعدًا للبحث العادي.</p>
+<p>باستثناء نتائج البحث عن "مراهق يتظاهر بالمرض للتملص من المدرسة..."، فإن النتائج في إطار البحث القمعي مطابقة تقريبًا للبحث الكامل، على الرغم من أن البحث القمعي أُجري على مساحة بحث من 128 بُعدًا مقابل 768 بُعدًا للبحث العادي.</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">التحقيق في فشل استرجاع البحث القمعي في يوم عطلة فيريس بويلر<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -444,7 +467,7 @@ On the Edge of Innocence
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لقد تم تدريب النموذج على الأداء الجيد لمطابقة البادئات الأصغر من التضمينات بشكل متكرر. هل ترتيب الأبعاد التي نستخدمها مهم؟ على سبيل المثال، هل يمكننا أيضًا أخذ مجموعات فرعية من التضمينات التي هي عبارة عن لاحقات؟ في هذه التجربة، نقوم بعكس ترتيب الأبعاد في تضمينات ماتريوشكا ونجري بحثًا قمعيًا.</p>
+    </button></h2><p>لقد تم تدريب النموذج على الأداء الجيد لمطابقة البادئات الأصغر بشكل متكرر للبادئات المضمنة. هل ترتيب الأبعاد التي نستخدمها مهم؟ على سبيل المثال، هل يمكننا أيضًا أخذ مجموعات فرعية من التضمينات التي هي عبارة عن لاحقات؟ في هذه التجربة، نقوم بعكس ترتيب الأبعاد في تضمينات ماتريوشكا ونجري بحثًا قمعيًا.</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;./wikiplots-matryoshka-flipped.db&quot;</span>)
 
 fields = [

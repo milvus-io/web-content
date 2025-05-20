@@ -187,5 +187,5 @@ Consulte <a href="https://en.wikipedia.org/wiki/Unit_vector">a Wikipédia</a> pa
         ></path>
       </svg>
     </button></h2><ul>
-<li>Saiba mais sobre os <a href="/docs/pt/index.md">tipos de índices</a> suportados no Milvus.</li>
+<li>Saiba mais sobre os <a href="/docs/pt/v2.4.x/index.md">tipos de índices</a> suportados no Milvus.</li>
 </ul>

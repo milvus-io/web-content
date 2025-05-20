@@ -23,11 +23,11 @@ summary: ''
 <p>Configuration varies with the way you install the Milvus instance.</p>
 <ul>
 <li><p>For Milvus instances installed using Helm Charts</p>
-<p>Add the configuration to the <code translate="no">values.yaml</code> file under the <code translate="no">config</code> section. For details, refer to <a href="/docs/configure-helm.md">Configure Milvus with Helm Charts</a>.</p></li>
+<p>Add the configuration to the <code translate="no">values.yaml</code> file under the <code translate="no">config</code> section. For details, refer to <a href="/docs/v2.3.x/configure-helm.md">Configure Milvus with Helm Charts</a>.</p></li>
 <li><p>For Milvus instances installed using Docker Compose</p>
-<p>Add the configuration to the <code translate="no">milvus.yaml</code> file you have used to start the Milvus instance. For details, refer to <a href="/docs/configure-docker.md">Configure Milvus with Docker Compose</a>.</p></li>
+<p>Add the configuration to the <code translate="no">milvus.yaml</code> file you have used to start the Milvus instance. For details, refer to <a href="/docs/v2.3.x/configure-docker.md">Configure Milvus with Docker Compose</a>.</p></li>
 <li><p>For Milvus instances installed using Operator</p>
-<p>Add the configuration to the <code translate="no">spec.components</code> section of the <code translate="no">Milvus</code> custom resource. For details, refer to <a href="/docs/configure_operator.md">Configure Milvus with Operator</a>.</p></li>
+<p>Add the configuration to the <code translate="no">spec.components</code> section of the <code translate="no">Milvus</code> custom resource. For details, refer to <a href="/docs/v2.3.x/configure_operator.md">Configure Milvus with Operator</a>.</p></li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Configuration options<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

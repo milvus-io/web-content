@@ -42,7 +42,7 @@ summary: FaissのデータをMilvusに移行する方法をご紹介します。
 <li>インストールの詳細については、<a href="https://github.com/facebookresearch/faiss/blob/main/INSTALL.md">Faissのインストール</a>および<a href="https://milvus.io/docs/install_standalone-docker.md">Milvusのインストールを</a>参照してください。</li>
 </ul></li>
 <li><strong>必要なツール</strong><ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツール</a>。インストールの詳細については、<a href="/docs/ja/milvusdm_install.md">移行ツールのインストールを</a>参照してください。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツール</a>。インストールの詳細については、<a href="/docs/ja/v2.4.x/milvusdm_install.md">移行ツールのインストールを</a>参照してください。</li>
 </ul></li>
 </ul>
 <h2 id="Configure-the-migration" class="common-anchor-header">マイグレーションの設定<button data-href="#Configure-the-migration" class="anchor-icon" translate="no">

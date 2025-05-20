@@ -36,12 +36,22 @@ dropResourceGroup(DropResourceGroupReq.builder()
 ## Example
 
 ```java
-// prepare requests    
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.resourcegroup.request.DropResourceGroupReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Drop a resource group  
 DropResourceGroupReq dropResourceGroupReq = DropResourceGroupReq.builder()
     .groupName("rg1")
     .build();
-
-// drop resource group
 client.dropResourceGroup(dropResourceGroupReq);
 ```
 

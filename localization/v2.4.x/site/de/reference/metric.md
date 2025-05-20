@@ -187,5 +187,5 @@ Siehe <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> für wei
         ></path>
       </svg>
     </button></h2><ul>
-<li>Erfahren Sie mehr über die unterstützten <a href="/docs/de/index.md">Index-Typen</a> in Milvus.</li>
+<li>Erfahren Sie mehr über die unterstützten <a href="/docs/de/v2.4.x/index.md">Index-Typen</a> in Milvus.</li>
 </ul>

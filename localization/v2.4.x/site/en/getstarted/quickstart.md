@@ -37,7 +37,7 @@ title: Quickstart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this guide we use Milvus Lite, a python library included in <code translate="no">pymilvus</code> that can be embedded into the client application. Milvus also supports deployment on <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> and <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> for production use cases.</p>
+    </button></h2><p>In this guide we use Milvus Lite, a python library included in <code translate="no">pymilvus</code> that can be embedded into the client application. Milvus also supports deployment on <a href="/docs/v2.4.x/install_standalone-docker.md">Docker</a> and <a href="/docs/v2.4.x/install_cluster-milvusoperator.md">Kubernetes</a> for production use cases.</p>
 <p>Before starting, make sure you have Python 3.8+ available in the local environment. Install <code translate="no">pymilvus</code> which contains both the python client library and Milvus Lite:</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
@@ -92,8 +92,8 @@ client.create_collection(
 <p>In the above setup,</p>
 <ul>
 <li>The primary key and vector fields use their default names (“id” and “vector”).</li>
-<li>The metric type (vector distance definition) is set to its default value (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
-<li>The primary key field accepts integers and does not automatically increments (namely not using <a href="https://milvus.io/docs/schema.md">auto-id feature</a>)
+<li>The metric type (vector distance definition) is set to its default value (<a href="/docs/v2.4.x/metric.md#Cosine-Similarity">COSINE</a>).</li>
+<li>The primary key field accepts integers and does not automatically increments (namely not using <a href="/docs/v2.4.x/schema.md">auto-id feature</a>)
 Alternatively, you can formally define the schema of the collection by following this <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instruction</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Prepare Data<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
@@ -300,9 +300,9 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>By default, the scalar fields are not indexed. If you need to perform metadata filtered search in large dataset, you can consider using fixed schema and also turn on the <a href="https://milvus.io/docs/scalar_index.md">index</a> to improve the search performance.</p>
+<p>By default, the scalar fields are not indexed. If you need to perform metadata filtered search in large dataset, you can consider using fixed schema and also turn on the <a href="/docs/v2.4.x/scalar_index.md">index</a> to improve the search performance.</p>
 <p>In addition to vector search, you can also perform other types of searches:</p>
-<h3 id="Query" class="common-anchor-header">Query</h3><p>A query() is an operation that retrieves all entities matching a criteria, such as a <a href="https://milvus.io/docs/boolean.md">filter expression</a> or matching some ids.</p>
+<h3 id="Query" class="common-anchor-header">Query</h3><p>A query() is an operation that retrieves all entities matching a criteria, such as a <a href="/docs/v2.4.x/boolean.md">filter expression</a> or matching some ids.</p>
 <p>For example, retrieving all entities whose scalar field has a particular value:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -403,7 +403,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> and <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. All deployment modes of Milvus share the same API, so your client side code doesn’t need to change much if moving to another deployment mode. Simply specify the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI and Token</a> of a Milvus server deployed anywhere:</p>
+    </button></h2><p>Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on <a href="/docs/v2.4.x/install_standalone-docker.md">Docker</a> and <a href="/docs/v2.4.x/install_cluster-milvusoperator.md">Kubernetes</a>. All deployment modes of Milvus share the same API, so your client side code doesn’t need to change much if moving to another deployment mode. Simply specify the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI and Token</a> of a Milvus server deployed anywhere:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus provides REST and gRPC API, with client libraries in languages such as <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# and <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>Milvus provides REST and gRPC API, with client libraries in languages such as <a href="/docs/v2.4.x/install-pymilvus.md">Python</a>, <a href="/docs/v2.4.x/install-java.md">Java</a>, <a href="/docs/v2.4.x/install-go.md">Go</a>, C# and <a href="/docs/v2.4.x/install-node.md">Node.js</a>.</p>

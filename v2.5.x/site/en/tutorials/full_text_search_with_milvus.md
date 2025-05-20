@@ -1,7 +1,7 @@
 ---
 id: full_text_search_with_milvus.md
-summary: Since version 2.5, Milvus supports BM25 for full-text search, enabling keyword and phrase-based retrieval with greater control and flexibility. Users can also perform hybrid search, which combines dense embedding-based semantic search with full-text search, allowing both semantic and keyword-based results in a single query. This notebook demonstrates hybrid search with full-text and semantic search in Milvus.
-title: Hybrid Search with Full Text and Semantic Search in Milvus
+summary: Full-text search is a traditional method for retrieving documents by matching specific keywords or phrases in the text. It ranks results based on relevance scores calculated from factors like term frequency. While semantic search is better at understanding meaning and context, full-text search excels at precise keyword matching, making it a useful complement to semantic search. A common approach to constructing a Retrieval-Augmented Generation (RAG) pipeline involves retrieving documents through both semantic search and full-text search, followed by a reranking process to refine the results.
+title: Full Text Search with Milvus
 ---
 
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
@@ -13,35 +13,55 @@ title: Hybrid Search with Full Text and Semantic Search in Milvus
 
 # Full Text Search with Milvus
 
-Since version 2.5, Milvus supports BM25 for full-text search, enabling keyword and phrase-based retrieval with greater control and flexibility. Users can also perform hybrid search, which combines dense embedding-based semantic search with full-text search, allowing both semantic and keyword-based results in a single query. This notebook demonstrates hybrid search with full-text and semantic search in Milvus.
+[Full-text search](https://milvus.io/docs/full-text-search.md#Full-Text-Search) is a traditional method for retrieving documents by matching specific keywords or phrases in the text. It ranks results based on relevance scores calculated from factors like term frequency. While semantic search is better at understanding meaning and context, full-text search excels at precise keyword matching, making it a useful complement to semantic search. A common approach to constructing a Retrieval-Augmented Generation (RAG) pipeline involves retrieving documents through both semantic search and full-text search, followed by a reranking process to refine the results.
+
+![](../../../assets/advanced_rag/hybrid_and_rerank.png)
+
+This approach converts text into sparse vectors for BM25 scoring. To ingest documents, users can simply input raw text without computing the sparse vector manually. Milvus will automatically generate and store the sparse vectors. To search documents, users just need to specify the text search query. Milvus will compute BM25 scores internally and return ranked results.
+
+
+Milvus also supports hybrid retrieval by combining full-text search with dense vector based semantic search. It usually improves search quality and delivers better results to users by balancing keyword matching and semantic understanding.
+
+<div class="alert note">
+
+- Full-text search is currently available in Milvus Standalone, Milvus Distributed, and Zilliz Cloud, though not yet supported in Milvus Lite (which has this feature planned for future implementation). Reach out support@zilliz.com for more information.
+
+</div>
+
 
 ## Preparation
 
-### Download the dataset
-The following command will download the example data used in original Anthropic [demo](https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb).
+### Install PyMilvus
 
 
 ```shell
-$ wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json
-$ wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl
+$ pip install pymilvus -U
 ```
 
-### Install Milvus 2.5
-Check the [official installation guide](https://milvus.io/docs/install_standalone-docker-compose.md) for more details.
+<div class="alert note">
 
-### Install PyMilvus
-Run the following command to install PyMilvus:
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
+
+</div>
+
+### Set OpenAI API Key
+We will use the models from OpenAI for creating vector embeddings and generation response. You should prepare the [api key](https://platform.openai.com/docs/quickstart) `OPENAI_API_KEY` as an environment variable.
 
 
 ```python
-pip install "pymilvus[model]" -U 
+import os
+
+os.environ["OPENAI_API_KEY"] = "sk-***********"
 ```
 
-### Define the Retriever
+## Setup and Configuration
+
+Import the necessary libraries
 
 
 ```python
-import json
+from typing import List
+from openai import OpenAI
 
 from pymilvus import (
     MilvusClient,
@@ -51,317 +71,348 @@ from pymilvus import (
     AnnSearchRequest,
     RRFRanker,
 )
-
-from pymilvus.model.hybrid import BGEM3EmbeddingFunction
-
-
-class HybridRetriever:
-    def __init__(self, uri, collection_name="hybrid", dense_embedding_function=None):
-        self.uri = uri
-        self.collection_name = collection_name
-        self.embedding_function = dense_embedding_function
-        self.use_reranker = True
-        self.use_sparse = True
-        self.client = MilvusClient(uri=uri)
-
-    def build_collection(self):
-        if isinstance(self.embedding_function.dim, dict):
-            dense_dim = self.embedding_function.dim["dense"]
-        else:
-            dense_dim = self.embedding_function.dim
-
-        tokenizer_params = {
-            "tokenizer": "standard",
-            "filter": [
-                "lowercase",
-                {
-                    "type": "length",
-                    "max": 200,
-                },
-                {"type": "stemmer", "language": "english"},
-                {
-                    "type": "stop",
-                    "stop_words": [
-                        "a",
-                        "an",
-                        "and",
-                        "are",
-                        "as",
-                        "at",
-                        "be",
-                        "but",
-                        "by",
-                        "for",
-                        "if",
-                        "in",
-                        "into",
-                        "is",
-                        "it",
-                        "no",
-                        "not",
-                        "of",
-                        "on",
-                        "or",
-                        "such",
-                        "that",
-                        "the",
-                        "their",
-                        "then",
-                        "there",
-                        "these",
-                        "they",
-                        "this",
-                        "to",
-                        "was",
-                        "will",
-                        "with",
-                    ],
-                },
-            ],
-        }
-
-        schema = MilvusClient.create_schema()
-        schema.add_field(
-            field_name="pk",
-            datatype=DataType.VARCHAR,
-            is_primary=True,
-            auto_id=True,
-            max_length=100,
-        )
-        schema.add_field(
-            field_name="content",
-            datatype=DataType.VARCHAR,
-            max_length=65535,
-            analyzer_params=tokenizer_params,
-            enable_match=True,
-            enable_analyzer=True,
-        )
-        schema.add_field(
-            field_name="sparse_vector", datatype=DataType.SPARSE_FLOAT_VECTOR
-        )
-        schema.add_field(
-            field_name="dense_vector", datatype=DataType.FLOAT_VECTOR, dim=dense_dim
-        )
-        schema.add_field(
-            field_name="original_uuid", datatype=DataType.VARCHAR, max_length=128
-        )
-        schema.add_field(field_name="doc_id", datatype=DataType.VARCHAR, max_length=64)
-        schema.add_field(
-            field_name="chunk_id", datatype=DataType.VARCHAR, max_length=64
-        ),
-        schema.add_field(field_name="original_index", datatype=DataType.INT32)
-
-        functions = Function(
-            name="bm25",
-            function_type=FunctionType.BM25,
-            input_field_names=["content"],
-            output_field_names="sparse_vector",
-        )
-
-        schema.add_function(functions)
-
-        index_params = MilvusClient.prepare_index_params()
-        index_params.add_index(
-            field_name="sparse_vector",
-            index_type="SPARSE_INVERTED_INDEX",
-            metric_type="BM25",
-        )
-        index_params.add_index(
-            field_name="dense_vector", index_type="FLAT", metric_type="IP"
-        )
-
-        self.client.create_collection(
-            collection_name=self.collection_name,
-            schema=schema,
-            index_params=index_params,
-        )
-
-    def insert_data(self, chunk, metadata):
-        embedding = self.embedding_function([chunk])
-        if isinstance(embedding, dict) and "dense" in embedding:
-            dense_vec = embedding["dense"][0]
-        else:
-            dense_vec = embedding[0]
-        self.client.insert(
-            self.collection_name, {"dense_vector": dense_vec, **metadata}
-        )
-
-    def search(self, query: str, k: int = 20, mode="hybrid"):
-
-        output_fields = [
-            "content",
-            "original_uuid",
-            "doc_id",
-            "chunk_id",
-            "original_index",
-        ]
-        if mode in ["dense", "hybrid"]:
-            embedding = self.embedding_function([query])
-            if isinstance(embedding, dict) and "dense" in embedding:
-                dense_vec = embedding["dense"][0]
-            else:
-                dense_vec = embedding[0]
-
-        if mode == "sparse":
-            results = self.client.search(
-                collection_name=self.collection_name,
-                data=[query],
-                anns_field="sparse_vector",
-                limit=k,
-                output_fields=output_fields,
-            )
-        elif mode == "dense":
-            results = self.client.search(
-                collection_name=self.collection_name,
-                data=[dense_vec],
-                anns_field="dense_vector",
-                limit=k,
-                output_fields=output_fields,
-            )
-        elif mode == "hybrid":
-            full_text_search_params = {"metric_type": "BM25"}
-            full_text_search_req = AnnSearchRequest(
-                [query], "sparse_vector", full_text_search_params, limit=k
-            )
-
-            dense_search_params = {"metric_type": "IP"}
-            dense_req = AnnSearchRequest(
-                [dense_vec], "dense_vector", dense_search_params, limit=k
-            )
-
-            results = self.client.hybrid_search(
-                self.collection_name,
-                [full_text_search_req, dense_req],
-                ranker=RRFRanker(),
-                limit=k,
-                output_fields=output_fields,
-            )
-        else:
-            raise ValueError("Invalid mode")
-        return [
-            {
-                "doc_id": doc["entity"]["doc_id"],
-                "chunk_id": doc["entity"]["chunk_id"],
-                "content": doc["entity"]["content"],
-                "score": doc["distance"],
-            }
-            for doc in results[0]
-        ]
 ```
+
+We'll use the MilvusClient to establish a connection to the Milvus server.
 
 
 ```python
-dense_ef = BGEM3EmbeddingFunction()
-standard_retriever = HybridRetriever(
-    uri="http://localhost:19530",
-    collection_name="milvus_hybrid",
-    dense_embedding_function=dense_ef,
+# Connect to Milvus
+uri = "http://localhost:19530"
+collection_name = "full_text_demo"
+client = MilvusClient(uri=uri)
+```
+
+<div class="alert note">
+
+For the connection_args:
+- You can set up a more performant Milvus server on [docker or kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server address, e.g.`http://localhost:19530`, as your `uri`.
+- If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
+
+</div>
+
+## Collection Setup for Full-Text Search
+
+Setting up a collection for full-text search requires several configuration steps. Let's go through them one by one.
+
+### Text Analysis Configuration
+
+For full-text search, we define how text should be processed. Analyzers are essential in full-text search by breaking sentences into tokens and performing lexical analysis like stemming and stop word removal. Here we simply define an analyzer.
+
+
+```python
+# Define tokenizer parameters for text analysis
+analyzer_params = {"tokenizer": "standard", "filter": ["lowercase"]}
+```
+
+For more concept details about analyzer, please refer to the [analyzer documentation](https://milvus.io/docs/analyzer-overview.md).
+
+
+### Collection Schema and BM25 Function
+
+Now we define the schema with fields for primary key, text content, sparse vectors (for full-text search), dense vectors (for semantic search), and metadata. We also configure the BM25 function for full-text search.
+
+The BM25 function automatically converts text content into sparse vectors, allowing Milvus to handle the complexity of full-text search without requiring manual sparse embedding generation.
+
+
+```python
+# Create schema
+schema = MilvusClient.create_schema()
+schema.add_field(
+    field_name="id",
+    datatype=DataType.VARCHAR,
+    is_primary=True,
+    auto_id=True,
+    max_length=100,
 )
+schema.add_field(
+    field_name="content",
+    datatype=DataType.VARCHAR,
+    max_length=65535,
+    analyzer_params=analyzer_params,
+    enable_match=True,  # Enable text matching
+    enable_analyzer=True,  # Enable text analysis
+)
+schema.add_field(field_name="sparse_vector", datatype=DataType.SPARSE_FLOAT_VECTOR)
+schema.add_field(
+    field_name="dense_vector",
+    datatype=DataType.FLOAT_VECTOR,
+    dim=1536,  # Dimension for text-embedding-3-small
+)
+schema.add_field(field_name="metadata", datatype=DataType.JSON)
+
+# Define BM25 function to generate sparse vectors from text
+bm25_function = Function(
+    name="bm25",
+    function_type=FunctionType.BM25,
+    input_field_names=["content"],
+    output_field_names="sparse_vector",
+)
+
+# Add the function to schema
+schema.add_function(bm25_function)
 ```
 
-    Fetching 30 files: 100%|██████████| 30/30 [00:00<00:00, 108848.72it/s]
 
 
-### Insert the data
+
+    {'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': <DataType.VARCHAR: 21>, 'params': {'max_length': 100}, 'is_primary': True, 'auto_id': True}, {'name': 'content', 'description': '', 'type': <DataType.VARCHAR: 21>, 'params': {'max_length': 65535, 'enable_match': True, 'enable_analyzer': True, 'analyzer_params': {'tokenizer': 'standard', 'filter': ['lowercase']}}}, {'name': 'sparse_vector', 'description': '', 'type': <DataType.SPARSE_FLOAT_VECTOR: 104>, 'is_function_output': True}, {'name': 'dense_vector', 'description': '', 'type': <DataType.FLOAT_VECTOR: 101>, 'params': {'dim': 1536}}, {'name': 'metadata', 'description': '', 'type': <DataType.JSON: 23>}], 'enable_dynamic_field': False, 'functions': [{'name': 'bm25', 'description': '', 'type': <FunctionType.BM25: 1>, 'input_field_names': ['content'], 'output_field_names': ['sparse_vector'], 'params': {}}]}
+
+
+
+### Indexing and Collection Creation
+
+To optimize search performance, we create indexes for both sparse and dense vector fields, then create the collection in Milvus.
 
 
 ```python
-path = "codebase_chunks.json"
-with open(path, "r") as f:
-    dataset = json.load(f)
+# Define indexes
+index_params = MilvusClient.prepare_index_params()
+index_params.add_index(
+    field_name="sparse_vector",
+    index_type="SPARSE_INVERTED_INDEX",
+    metric_type="BM25",
+)
+index_params.add_index(field_name="dense_vector", index_type="FLAT", metric_type="IP")
 
-is_insert = True
-if is_insert:
-    standard_retriever.build_collection()
-    for doc in dataset:
-        doc_content = doc["content"]
-        for chunk in doc["chunks"]:
-            metadata = {
-                "doc_id": doc["doc_id"],
-                "original_uuid": doc["original_uuid"],
-                "chunk_id": chunk["chunk_id"],
-                "original_index": chunk["original_index"],
-                "content": chunk["content"],
-            }
-            chunk_content = chunk["content"]
-            standard_retriever.insert_data(chunk_content, metadata)
+# Drop collection if exist
+if client.has_collection(collection_name):
+    client.drop_collection(collection_name)
+# Create the collection
+client.create_collection(
+    collection_name=collection_name,
+    schema=schema,
+    index_params=index_params,
+)
+print(f"Collection '{collection_name}' created successfully")
 ```
 
-### Test Sparse Search
+    Collection 'full_text_demo' created successfully
+
+
+## Insert Data
+
+After setting up the collection, we insert data by preparing entities with both text content and their vector representations. Let's define an embedding function and then insert data into the collection.
 
 
 ```python
-results = standard_retriever.search("create a logger?", mode="sparse", k=3)
-print(results)
+# Set up OpenAI for embeddings
+openai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+model_name = "text-embedding-3-small"
+
+
+# Define embedding generation function for reuse
+def get_embeddings(texts: List[str]) -> List[List[float]]:
+    if not texts:
+        return []
+
+    response = openai_client.embeddings.create(input=texts, model=model_name)
+    return [embedding.embedding for embedding in response.data]
 ```
 
-    [{'doc_id': 'doc_10', 'chunk_id': 'doc_10_chunk_0', 'content': 'use {\n    crate::args::LogArgs,\n    anyhow::{anyhow, Result},\n    simplelog::{Config, LevelFilter, WriteLogger},\n    std::fs::File,\n};\n\npub struct Logger;\n\nimpl Logger {\n    pub fn init(args: &impl LogArgs) -> Result<()> {\n        let filter: LevelFilter = args.log_level().into();\n        if filter != LevelFilter::Off {\n            let logfile = File::create(args.log_file())\n                .map_err(|e| anyhow!("Failed to open log file: {e:}"))?;\n            WriteLogger::init(filter, Config::default(), logfile)\n                .map_err(|e| anyhow!("Failed to initalize logger: {e:}"))?;\n        }\n        Ok(())\n    }\n}\n', 'score': 9.12518310546875}, {'doc_id': 'doc_87', 'chunk_id': 'doc_87_chunk_3', 'content': '\t\tLoggerPtr INF = Logger::getLogger(LOG4CXX_TEST_STR("INF"));\n\t\tINF->setLevel(Level::getInfo());\n\n\t\tLoggerPtr INF_ERR = Logger::getLogger(LOG4CXX_TEST_STR("INF.ERR"));\n\t\tINF_ERR->setLevel(Level::getError());\n\n\t\tLoggerPtr DEB = Logger::getLogger(LOG4CXX_TEST_STR("DEB"));\n\t\tDEB->setLevel(Level::getDebug());\n\n\t\t// Note: categories with undefined level\n\t\tLoggerPtr INF_UNDEF = Logger::getLogger(LOG4CXX_TEST_STR("INF.UNDEF"));\n\t\tLoggerPtr INF_ERR_UNDEF = Logger::getLogger(LOG4CXX_TEST_STR("INF.ERR.UNDEF"));\n\t\tLoggerPtr UNDEF = Logger::getLogger(LOG4CXX_TEST_STR("UNDEF"));\n\n', 'score': 7.0077056884765625}, {'doc_id': 'doc_89', 'chunk_id': 'doc_89_chunk_3', 'content': 'using namespace log4cxx;\nusing namespace log4cxx::helpers;\n\nLOGUNIT_CLASS(FMTTestCase)\n{\n\tLOGUNIT_TEST_SUITE(FMTTestCase);\n\tLOGUNIT_TEST(test1);\n\tLOGUNIT_TEST(test1_expanded);\n\tLOGUNIT_TEST(test10);\n//\tLOGUNIT_TEST(test_date);\n\tLOGUNIT_TEST_SUITE_END();\n\n\tLoggerPtr root;\n\tLoggerPtr logger;\n\npublic:\n\tvoid setUp()\n\t{\n\t\troot = Logger::getRootLogger();\n\t\tMDC::clear();\n\t\tlogger = Logger::getLogger(LOG4CXX_TEST_STR("java.org.apache.log4j.PatternLayoutTest"));\n\t}\n\n', 'score': 6.750633716583252}]
-
-
-## Evaluation
-Now that we have inserted the dataset into Milvus, we can use dense, sparse, or hybrid search to retrieve the top 5 results. You can change the `mode` and evaluate each one. We present the Pass@5 metric, which involves retrieving the top 5 results for each query and calculating the Recall.
+Insert example documents into the collection.
 
 
 ```python
-def load_jsonl(file_path: str):
-    """Load JSONL file and return a list of dictionaries."""
-    with open(file_path, "r") as file:
-        return [json.loads(line) for line in file]
+# Example documents to insert
+documents = [
+    {
+        "content": "Milvus is a vector database built for embedding similarity search and AI applications.",
+        "metadata": {"source": "documentation", "topic": "introduction"},
+    },
+    {
+        "content": "Full-text search in Milvus allows you to search using keywords and phrases.",
+        "metadata": {"source": "tutorial", "topic": "full-text search"},
+    },
+    {
+        "content": "Hybrid search combines the power of sparse BM25 retrieval with dense vector search.",
+        "metadata": {"source": "blog", "topic": "hybrid search"},
+    },
+]
 
+# Prepare entities for insertion
+entities = []
+texts = [doc["content"] for doc in documents]
+embeddings = get_embeddings(texts)
 
-dataset = load_jsonl("evaluation_set.jsonl")
-k = 5
+for i, doc in enumerate(documents):
+    entities.append(
+        {
+            "content": doc["content"],
+            "dense_vector": embeddings[i],
+            "metadata": doc.get("metadata", {}),
+        }
+    )
 
-# mode can be "dense", "sparse" or "hybrid".
-mode = "hybrid"
-
-total_query_score = 0
-num_queries = 0
-
-for query_item in dataset:
-
-    query = query_item["query"]
-
-    golden_chunk_uuids = query_item["golden_chunk_uuids"]
-
-    chunks_found = 0
-    golden_contents = []
-    for doc_uuid, chunk_index in golden_chunk_uuids:
-        golden_doc = next(
-            (doc for doc in query_item["golden_documents"] if doc["uuid"] == doc_uuid),
-            None,
-        )
-        if golden_doc:
-            golden_chunk = next(
-                (
-                    chunk
-                    for chunk in golden_doc["chunks"]
-                    if chunk["index"] == chunk_index
-                ),
-                None,
-            )
-            if golden_chunk:
-                golden_contents.append(golden_chunk["content"].strip())
-
-    results = standard_retriever.search(query, mode=mode, k=5)
-
-    for golden_content in golden_contents:
-        for doc in results[:k]:
-            retrieved_content = doc["content"].strip()
-            if retrieved_content == golden_content:
-                chunks_found += 1
-                break
-
-    query_score = chunks_found / len(golden_contents)
-
-    total_query_score += query_score
-    num_queries += 1
+# Insert data
+client.insert(collection_name, entities)
+print(f"Inserted {len(entities)} documents")
 ```
+
+    Inserted 3 documents
+
+
+## Perform Retrieval
+You can flexibly use the `search()` or `hybrid_search()` methods to implement full-text search (sparse), semantic search (dense), and hybrid search to lead to more robust and accurate search results.
+
+### Full-Text Search
+
+Sparse search leverages the BM25 algorithm to find documents containing specific keywords or phrases. This traditional search method excels at precise term matching and is particularly effective when users know exactly what they're looking for.
 
 
 ```python
-print("Pass@5: ", total_query_score / num_queries)
+# Example query for keyword search
+query = "full-text search keywords"
+
+# BM25 sparse vectors
+results = client.search(
+    collection_name=collection_name,
+    data=[query],
+    anns_field="sparse_vector",
+    limit=5,
+    output_fields=["content", "metadata"],
+)
+sparse_results = results[0]
+
+# Print results
+print("\nSparse Search (Full-text search):")
+for i, result in enumerate(sparse_results):
+    print(
+        f"{i+1}. Score: {result['distance']:.4f}, Content: {result['entity']['content']}"
+    )
 ```
 
-    Pass@5:  0.7911386328725037
+    
+    Sparse Search (Full-text search):
+    1. Score: 3.1261, Content: Full-text search in Milvus allows you to search using keywords and phrases.
+    2. Score: 0.1836, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
+    3. Score: 0.1335, Content: Milvus is a vector database built for embedding similarity search and AI applications.
 
+
+### Semantic Search
+
+Dense search uses vector embeddings to find documents with similar meaning, even if they don't share the exact same keywords. This approach helps understand context and semantics, making it ideal for more natural language queries.
+
+
+```python
+# Example query for semantic search
+query = "How does Milvus help with similarity search?"
+
+# Generate embedding for query
+query_embedding = get_embeddings([query])[0]
+
+# Semantic search using dense vectors
+results = client.search(
+    collection_name=collection_name,
+    data=[query_embedding],
+    anns_field="dense_vector",
+    limit=5,
+    output_fields=["content", "metadata"],
+)
+dense_results = results[0]
+
+# Print results
+print("\nDense Search (Semantic):")
+for i, result in enumerate(dense_results):
+    print(
+        f"{i+1}. Score: {result['distance']:.4f}, Content: {result['entity']['content']}"
+    )
+```
+
+    
+    Dense Search (Semantic):
+    1. Score: 0.6959, Content: Milvus is a vector database built for embedding similarity search and AI applications.
+    2. Score: 0.6501, Content: Full-text search in Milvus allows you to search using keywords and phrases.
+    3. Score: 0.4371, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
+
+
+### Hybrid Search
+
+Hybrid search combines both full-text search and semantic dense retrieval. This balanced approach improves search accuracy and robustness by leveraging the strengths of both methods.
+
+Hybrid search is especially valuable in Retrieval-Augmented Generation (RAG) applications, where both semantic understanding and precise keyword matching contribute to better retrieval results.
+
+
+```python
+# Example query for hybrid search
+query = "what is hybrid search"
+
+# Get query embedding
+query_embedding = get_embeddings([query])[0]
+
+# Set up BM25 search request
+sparse_search_params = {"metric_type": "BM25"}
+sparse_request = AnnSearchRequest(
+    [query], "sparse_vector", sparse_search_params, limit=5
+)
+
+# Set up dense vector search request
+dense_search_params = {"metric_type": "IP"}
+dense_request = AnnSearchRequest(
+    [query_embedding], "dense_vector", dense_search_params, limit=5
+)
+
+# Perform hybrid search with reciprocal rank fusion
+results = client.hybrid_search(
+    collection_name,
+    [sparse_request, dense_request],
+    ranker=RRFRanker(),  # Reciprocal Rank Fusion for combining results
+    limit=5,
+    output_fields=["content", "metadata"],
+)
+hybrid_results = results[0]
+
+# Print results
+print("\nHybrid Search (Combined):")
+for i, result in enumerate(hybrid_results):
+    print(
+        f"{i+1}. Score: {result['distance']:.4f}, Content: {result['entity']['content']}"
+    )
+```
+
+    
+    Hybrid Search (Combined):
+    1. Score: 0.0328, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
+    2. Score: 0.0320, Content: Milvus is a vector database built for embedding similarity search and AI applications.
+    3. Score: 0.0320, Content: Full-text search in Milvus allows you to search using keywords and phrases.
+
+
+## Answer Generation
+
+After retrieving relevant documents with hybrid search, we can use an LLM to generate a comprehensive answer based on the retrieved information. This is the final step in a RAG (Retrieval Augmented Generation) pipeline.
+
+
+```python
+# Format retrieved documents into context
+context = "\n\n".join([doc["entity"]["content"] for doc in hybrid_results])
+
+# Create prompt
+prompt = f"""Answer the following question based on the provided context. 
+If the context doesn't contain relevant information, just say "I don't have enough information to answer this question."
+
+Context:
+{context}
+
+Question: {query}
+
+Answer:"""
+
+# Call OpenAI API
+response = openai_client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant that answers questions based on the provided context.",
+        },
+        {"role": "user", "content": prompt},
+    ],
+)
+
+print(response.choices[0].message.content)
+```
+
+    Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
+
+
+That's it! Now you've just build RAG with hybrid retrieval that combines the power of BM25-based full-text search and dense vector based semantic search.

@@ -37,8 +37,8 @@ summary: Halaman ini menunjukkan prosedur untuk mengimpor data yang sudah disiap
       </svg>
     </button></h2><ul>
 <li><p>Anda sudah menyiapkan data Anda dan menempatkannya ke dalam bucket Milvus.</p>
-<p>Jika belum, Anda harus menggunakan <strong>RemoteBulkWriter</strong> untuk menyiapkan data Anda terlebih dahulu, dan memastikan bahwa data yang disiapkan telah ditransfer ke bucket Milvus pada instance MinIO yang dimulai bersama dengan instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/prepare-source-data.md">Menyiapkan Data Sumber</a>.</p></li>
-<li><p>Anda telah membuat koleksi dengan skema yang Anda gunakan untuk menyiapkan data. Jika belum, lihat <a href="/docs/id/manage-collections.md">Mengelola Koleksi</a>.</p></li>
+<p>Jika belum, Anda harus menggunakan <strong>RemoteBulkWriter</strong> untuk menyiapkan data Anda terlebih dahulu, dan memastikan bahwa data yang disiapkan telah ditransfer ke bucket Milvus pada instance MinIO yang dimulai bersama dengan instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/v2.4.x/prepare-source-data.md">Menyiapkan Data Sumber</a>.</p></li>
+<li><p>Anda telah membuat koleksi dengan skema yang Anda gunakan untuk menyiapkan data. Jika belum, lihat <a href="/docs/id/v2.4.x/manage-collections.md">Mengelola Koleksi</a>.</p></li>
 </ul>
 <div class="language-python">
 <p>Cuplikan kode berikut ini membuat koleksi sederhana dengan skema yang diberikan. Untuk informasi lebih lanjut tentang parameter, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> dalam referensi SDK.</p>

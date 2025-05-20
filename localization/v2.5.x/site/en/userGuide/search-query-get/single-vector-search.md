@@ -71,7 +71,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>In ANN searches, a single-vector search refers to a search that involves only one query vector. Based on the pre-built index and the metric type carried in the search request, Milvus will find the top-K vectors most similar to the query vector.</p>
-<p>In this section, you will learn how to conduct a single-vector search. The code snippet assumes you have created a collection in a <a href="/docs/create-collection-instantly.md#Quick-Setup">quick-setup</a> manner. The search request carries a single query vector and asks Milvus to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.</p>
+<p>In this section, you will learn how to conduct a single-vector search. The search request carries a single query vector and asks Milvus to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -999,7 +999,7 @@ curl --request POST \
 <ul>
 <li><p>Filtered Search</p>
 <p>You can include filtering conditions in a search request so that Milvus conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.</p>
-<p>For more about metadata filtering and filtering conditions, refer to <a href="/docs/filtered-search.md">Filtered Search</a> and <a href="/docs/filtering">Filtering</a>.</p></li>
+<p>For more about metadata filtering and filtering conditions, refer to <a href="/docs/filtered-search.md">Filtered Search</a>, <a href="/docs/boolean.md">Filtering Explained</a>, and related topics.</p></li>
 <li><p>Range Search</p>
 <p>You can improve search result relevancy by restricting the distance or score of the returned entities within a specific range. In Milvus, a range search involves drawing two concentric circles with the vector embedding most similar to the query vector as the center. The search request specifies the radius of both circles, and Milvus returns all vector embeddings that fall within the outer circle but not the inner circle.</p>
 <p>For more about range search, refer to <a href="/docs/range-search.md">Range Search</a>.</p></li>

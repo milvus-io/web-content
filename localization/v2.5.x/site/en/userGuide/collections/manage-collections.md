@@ -158,7 +158,7 @@ summary: >-
     </button></h2><p>Once you create indexes and load the collection, you can start a similarity search by feeding one or several query vectors. For example, when receiving the vector representation of your query carried in a search request, Milvus uses the specified metric type to measure the similarity between the query vector and those in the target collection before returning those that are semantically similar to the query.</p>
 <p>You can also include metadata filtering within searches and queries to improve the relevancy of the results. Note that, metadata filtering conditions are mandatory in queries but optional in searches.</p>
 <p>For details on applicable metric types, refer to <a href="/docs/metric.md">Metric Types</a>.</p>
-<p>For more information about searches and queries, refer to the articles in the <a href="/docs/search-rerank">Search & Rerank</a> chapter, among which, basic features are:</p>
+<p>For more information about searches and queries, refer to the articles in the Search & Rerank chapter, among which, basic features are:</p>
 <ul>
 <li><p><a href="/docs/single-vector-search.md">Basic ANN Search</a></p></li>
 <li><p><a href="/docs/filtered-search.md">Filtered Search</a></p></li>

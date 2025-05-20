@@ -56,7 +56,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Prima di inserire i dati, è necessario organizzare i dati in un elenco di dizionari secondo lo Schema, con ogni dizionario che rappresenta un'Entità e contiene tutti i campi definiti nello Schema. Se la Collezione ha il campo dinamico abilitato, ogni dizionario può includere anche campi non definiti nello Schema.</p>
-<p>In questa sezione, si inseriranno le Entità in una Raccolta creata <a href="/docs/it/create-collection-instantly.md#Quick-Setup">in modo rapido</a>. Una raccolta creata in questo modo ha solo due campi, denominati <strong>id</strong> e <strong>vector</strong>. Inoltre, questa Collection ha il campo dinamico abilitato, quindi le Entità nel codice di esempio includono un campo chiamato <strong>colore</strong> che non è definito nello Schema.</p>
+<p>In questa sezione, si inseriranno le Entità in una Raccolta creata in modo rapido. Una raccolta creata in questo modo ha solo due campi, denominati <strong>id</strong> e <strong>vector</strong>. Inoltre, questa Collection ha il campo dinamico abilitato, quindi le Entità nel codice di esempio includono un campo chiamato <strong>colore</strong> che non è definito nello Schema.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

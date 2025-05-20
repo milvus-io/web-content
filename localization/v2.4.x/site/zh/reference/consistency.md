@@ -35,7 +35,7 @@ title: 一致性
         ></path>
       </svg>
     </button></h2><p>分布式数据库中的一致性是指确保每个节点或副本在给定时间写入或读取数据时具有相同数据视图的属性。</p>
-<p>Milvus 支持四种一致性级别：强、有约束的僵化、会话和最终。Milvus 的默认一致性级别是有界滞后。  在进行<a href="/docs/zh/single-vector-search.md">单向量搜索</a>、<a href="/docs/zh/multi-vector-search.md">混合搜索</a>或<a href="/docs/zh/get-and-scalar-query.md">查询</a>时，您可以轻松调整一致性级别，使其最适合您的应用。</p>
+<p>Milvus 支持四种一致性级别：强、有约束的僵化、会话和最终。Milvus 的默认一致性级别是有界滞后。  在进行<a href="/docs/zh/v2.4.x/single-vector-search.md">单向量搜索</a>、<a href="/docs/zh/v2.4.x/multi-vector-search.md">混合搜索</a>或<a href="/docs/zh/v2.4.x/get-and-scalar-query.md">查询</a>时，您可以轻松调整一致性级别，使其最适合您的应用。</p>
 <h2 id="Consistency-levels" class="common-anchor-header">一致性级别<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,8 +118,8 @@ title: 一致性
       </svg>
     </button></h2><ul>
 <li>了解如何在以下情况下调整一致性级别<ul>
-<li><a href="/docs/zh/single-vector-search.md">进行单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">进行混合搜索</a></li>
-<li><a href="/docs/zh/get-and-scalar-query.md">进行标量查询</a></li>
+<li><a href="/docs/zh/v2.4.x/single-vector-search.md">进行单向量搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/multi-vector-search.md">进行混合搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/get-and-scalar-query.md">进行标量查询</a></li>
 </ul></li>
 </ul>

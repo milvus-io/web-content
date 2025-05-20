@@ -45,7 +45,7 @@ summary: Docker ComposeまたはHelmを使用してMilvus用のS3ストレージ
   useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
   bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>詳細は<a href="/docs/ja/configure_minio.md">MinIO/S3設定を</a>参照してください。</p>
+<p>詳細は<a href="/docs/ja/v2.4.x/configure_minio.md">MinIO/S3設定を</a>参照してください。</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2.docker-compose.yaml を洗練させる。</h3><p>また、<code translate="no">docker-compose.yaml</code> にある milvus サービス用の環境変数<code translate="no">MINIO_ADDRESS</code> も削除します。デフォルトでは、milvusは外部のS3の代わりにローカルのminioを使用する。</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3.Milvusの実行</h3><p>以下のコマンドを実行して、S3の設定を使用するMilvusを起動する。</p>
 <pre><code translate="no" class="language-shell">docker compose up
@@ -127,6 +127,6 @@ summary: Docker ComposeまたはHelmを使用してMilvus用のS3ストレージ
       </svg>
     </button></h2><p>Docker ComposeまたはHelmを使って他のMilvusの依存関係を設定する方法を学びます：</p>
 <ul>
-<li><a href="/docs/ja/deploy_etcd.md">Docker ComposeまたはHelmでメタストレージを設定する</a></li>
-<li><a href="/docs/ja/deploy_pulsar.md">Docker ComposeまたはHelmでメッセージストレージを設定する</a></li>
+<li><a href="/docs/ja/v2.4.x/deploy_etcd.md">Docker ComposeまたはHelmでメタストレージを設定する</a></li>
+<li><a href="/docs/ja/v2.4.x/deploy_pulsar.md">Docker ComposeまたはHelmでメッセージストレージを設定する</a></li>
 </ul>

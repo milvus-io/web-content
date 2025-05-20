@@ -105,7 +105,7 @@ summary: 了解 Milvus 如何将 Prometheus 和 Grafana 用于监控和警报服
       </svg>
     </button></h2><p>了解了监控和警报的基本工作流程后，请学习：</p>
 <ul>
-<li><a href="/docs/zh/monitor.md">部署监控服务</a></li>
-<li><a href="/docs/zh/visualize.md">可视化 Milvus 指标</a></li>
-<li><a href="/docs/zh/alert.md">创建警报</a></li>
+<li><a href="/docs/zh/v2.4.x/monitor.md">部署监控服务</a></li>
+<li><a href="/docs/zh/v2.4.x/visualize.md">可视化 Milvus 指标</a></li>
+<li><a href="/docs/zh/v2.4.x/alert.md">创建警报</a></li>
 </ul>

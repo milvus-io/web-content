@@ -139,7 +139,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -148,7 +148,7 @@ vectorstore = Milvus.from_documents(
 </ul>
 </div>
 <p>Im obigen Code definieren wir eine Instanz von <code translate="no">BM25BuiltInFunction</code> und übergeben sie an das <code translate="no">Milvus</code> Objekt. <code translate="no">BM25BuiltInFunction</code> ist eine leichtgewichtige Wrapper-Klasse für <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> in Milvus. Wir können sie zusammen mit <code translate="no">OpenAIEmbeddings</code> verwenden, um eine Instanz des Milvus-Vektorspeichers mit dichter und spärlicher Hybrid-Suche zu initialisieren.</p>
-<p><code translate="no">BM25BuiltInFunction</code> erfordert nicht, dass der Client einen Korpus oder ein Training übergibt, alles wird automatisch auf dem Milvus-Server verarbeitet, so dass der Benutzer sich nicht um Vokabular und Korpus kümmern muss. Darüber hinaus können die Benutzer den <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Analyzer</a> auch anpassen, um die benutzerdefinierte Textverarbeitung im BM25 zu implementieren.</p>
+<p><code translate="no">BM25BuiltInFunction</code> erfordert nicht, dass der Client einen Korpus oder ein Training übergibt, alles wird automatisch auf dem Milvus-Server verarbeitet, so dass sich die Benutzer nicht um Vokabular und Korpus kümmern müssen. Darüber hinaus können die Benutzer den <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Analyzer</a> auch anpassen, um die benutzerdefinierte Textverarbeitung im BM25 zu implementieren.</p>
 <p>Weitere Informationen zu <code translate="no">BM25BuiltInFunction</code> finden Sie in der <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Volltextsuche</a> und der <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Verwendung der Volltextsuche mit LangChain und Milvus</a>.</p>
 <h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Option 2: Dense und angepasste LangChain Sparse Embedding verwenden</h3><p>Sie können die Klasse <code translate="no">BaseSparseEmbedding</code> von <code translate="no">langchain_milvus.utils.sparse</code> erben und die Methoden <code translate="no">embed_query</code> und <code translate="no">embed_documents</code> implementieren, um den Sparse-Embedding-Prozess anzupassen. So können Sie jede Sparse Embedding-Methode anpassen, die auf Termhäufigkeitsstatistiken (z. B. <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) oder neuronalen Netzen (z. B. <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>) basiert.</p>
 <p>Hier ist ein Beispiel:</p>
@@ -198,7 +198,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Obwohl dies eine Möglichkeit ist, BM25 zu verwenden, erfordert es, dass der Benutzer das Korpus für die Termhäufigkeitsstatistik verwaltet. Wir empfehlen stattdessen die Verwendung der eingebauten BM25-Funktion (Option 1), da diese alles auf der Milvus-Server-Seite erledigt. Dadurch müssen sich die Benutzer nicht mehr um die Verwaltung des Korpus oder das Training eines Vokabulars kümmern. Für weitere Informationen lesen Sie bitte den Abschnitt <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Volltextsuche mit LangChain und Milvus</a>.</p>
@@ -217,7 +217,7 @@ vectorstore = Milvus.from_documents(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bei der Initialisierung des Milvus-Vektorspeichers können Sie die Liste der Einbettungen (und in Zukunft auch die Liste der eingebauten Funktionen) übergeben, um eine Mehrfachsuche zu implementieren und diese Kandidaten dann neu zu ordnen. Hier ein Beispiel:</p>
+    </button></h2><p>Bei der Initialisierung des Milvus-Vektorspeichers können Sie die Liste der Einbettungen (und in Zukunft auch die Liste der eingebauten Funktionen) übergeben, um die Mehrfachsuche zu implementieren und diese Kandidaten dann neu zu ordnen. Hier ein Beispiel:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
 embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
@@ -235,7 +235,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -267,7 +267,7 @@ vectorstore = Milvus.from_documents(
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 vectorstore.vector_fields
@@ -288,7 +288,7 @@ vectorstore.vector_fields
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -361,7 +361,7 @@ docs[<span class="hljs-number">1</span>]
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=<span class="hljs-literal">True</span>,
+    drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">RAG-Kette aufbauen</h3><p>Wir bereiten die LLM-Instanz und die Eingabeaufforderung vor und verbinden sie dann mit Hilfe der LangChain Expression Language zu einer RAG-Pipeline.</p>
@@ -420,4 +420,4 @@ res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'
 </code></pre>
-<p>Herzlichen Glückwunsch! Sie haben eine hybride (dichter Vektor + dünn besetzte bm25-Funktion) RAG-Kette auf der Grundlage von Milvus und LangChain erstellt.</p>
+<p>Herzlichen Glückwunsch! Sie haben eine hybride (dichte Vektor- + spärliche bm25-Funktion) RAG-Kette auf der Grundlage von Milvus und LangChain erstellt.</p>

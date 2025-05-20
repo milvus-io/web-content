@@ -3,6 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: Pencarian Hibrida dengan Milvus
 title: Pencarian Hibrida dengan Milvus
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Pencarian Hibrida dengan Milvus<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -18,24 +20,22 @@ title: Pencarian Hibrida dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Jika Anda ingin merasakan efek akhir dari tutorial ini, Anda dapat langsung mengunjungi https://demos.milvus.io/hybrid-search/</p>
+    </button></h1><p>Jika Anda ingin merasakan efek akhir dari tutorial ini, Anda dapat langsung mengunjungi https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>Dalam tutorial ini, kami akan mendemonstrasikan cara melakukan pencarian hybrid dengan <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> dan <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">model BGE-M3</a>. Model BGE-M3 dapat mengubah teks menjadi vektor padat dan jarang. Milvus mendukung penyimpanan kedua jenis vektor tersebut dalam satu koleksi, sehingga memungkinkan pencarian hibrida yang meningkatkan relevansi hasil.</p>
 <p>Milvus mendukung metode pencarian Dense, Sparse, dan Hybrid:</p>
 <ul>
 <li>Pengambilan Padat: Memanfaatkan konteks semantik untuk memahami makna di balik kueri.</li>
-<li>Pencarian Jarang (Sparse Retrieval): Menekankan pencocokan teks untuk menemukan hasil berdasarkan istilah tertentu, setara dengan pencarian teks lengkap.</li>
-<li>Temu Kembali Hibrida: Menggabungkan pendekatan Dense dan Sparse, menangkap konteks lengkap dan kata kunci spesifik untuk hasil pencarian yang komprehensif.</li>
+<li>Pencarian Jarang: Menekankan pencocokan kata kunci untuk menemukan hasil berdasarkan istilah tertentu, setara dengan pencarian teks lengkap.</li>
+<li>Pencarian Hibrida: Menggabungkan pendekatan Dense dan Sparse, menangkap konteks lengkap dan kata kunci spesifik untuk hasil pencarian yang komprehensif.</li>
 </ul>
 <p>Dengan mengintegrasikan metode-metode ini, Pencarian Hibrida Milvus menyeimbangkan kemiripan semantik dan leksikal, sehingga meningkatkan relevansi hasil pencarian secara keseluruhan. Buku catatan ini akan memandu Anda melalui proses pengaturan dan penggunaan strategi pencarian ini, menyoroti keefektifannya dalam berbagai skenario pencarian.</p>
-<h3 id="Dependencies-and-Environment" class="common-anchor-header">Ketergantungan dan Lingkungan</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
+<h3 id="Dependencies-and-Environment" class="common-anchor-header">Ketergantungan dan Lingkungan</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">Unduh Dataset</h3><p>Untuk mendemonstrasikan pencarian, kita memerlukan korpus dokumen. Mari kita gunakan dataset Pertanyaan Duplikat Quora dan letakkan di direktori lokal.</p>
 <p>Sumber dataset: <a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">Rilis Dataset Quora Pertama: Pasangan Pertanyaan</a></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Run this cell to download the dataset</span>
-$ wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Run this cell to download the dataset</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Load-and-Prepare-Data" class="common-anchor-header">Memuat dan Menyiapkan Data</h3><p>Kami akan memuat dataset dan menyiapkan korpus kecil untuk pencarian.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -58,7 +58,7 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
 <h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Gunakan Model BGE-M3 untuk Penyematan</h3><p>Model BGE-M3 dapat menyematkan teks sebagai vektor padat dan jarang.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> milvus_model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
 dense_dim = ef.dim[<span class="hljs-string">&quot;dense&quot;</span>]
@@ -70,9 +70,9 @@ docs_embeddings = ef(docs)
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
 <h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Menyiapkan Koleksi dan Indeks Milvus</h3><p>Kita akan menyiapkan koleksi Milvus dan membuat indeks untuk bidang vektor.</p>
-<div class="note alert">
+<div class="alert alert-info">
 <ul>
-<li>Menetapkan uri sebagai file lokal, misalnya &quot;./milvus.db&quot;, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
+<li>Menetapkan uri sebagai file lokal, misalnya "./milvus.db", adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
 <li>Jika Anda memiliki data berskala besar, misalnya lebih dari satu juta vektor, Anda dapat menyiapkan server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan uri server, misalnya http://localhost:19530, sebagai uri Anda.</li>
 <li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan uri dan token, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint dan API key</a> di Zilliz Cloud.</li>
 </ul>
@@ -146,40 +146,40 @@ query_embeddings = ef([query])
 <li><code translate="no">sparse_search</code>: hanya mencari di bidang vektor yang jarang</li>
 <li><code translate="no">hybrid_search</code>: mencari di seluruh bidang vektor padat dan vektor dengan perangkingan tertimbang</li>
 </ul>
-<pre><code translate="no" class="language-python"><span class="hljs-function"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-title">import</span> (<span class="hljs-params">
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     AnnSearchRequest,
     WeightedRanker,
-</span>)
+)
 
 
-def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, query_dense_embedding, limit=<span class="hljs-number">10</span></span>):
-    search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">dense_search</span>(<span class="hljs-params">col, query_dense_embedding, limit=<span class="hljs-number">10</span></span>):
+    search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
     res = col.search(
-        [<span class="hljs-meta">query_dense_embedding</span>],
+        [query_dense_embedding],
         anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
         limit=limit,
         output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
         param=search_params,
     )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 
 
-<span class="hljs-function">def <span class="hljs-title">sparse_search</span>(<span class="hljs-params">col, query_sparse_embedding, limit=<span class="hljs-number">10</span></span>):
-    search_params</span> = {
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">sparse_search</span>(<span class="hljs-params">col, query_sparse_embedding, limit=<span class="hljs-number">10</span></span>):
+    search_params = {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
         <span class="hljs-string">&quot;params&quot;</span>: {},
     }
     res = col.search(
-        [<span class="hljs-meta">query_sparse_embedding</span>],
+        [query_sparse_embedding],
         anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         limit=limit,
         output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
         param=search_params,
     )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 
 
-<span class="hljs-function">def <span class="hljs-title">hybrid_search</span>(<span class="hljs-params">
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">hybrid_search</span>(<span class="hljs-params">
     col,
     query_dense_embedding,
     query_sparse_embedding,
@@ -187,27 +187,27 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
     dense_weight=<span class="hljs-number">1.0</span>,
     limit=<span class="hljs-number">10</span>,
 </span>):
-    dense_search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+    dense_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
     dense_req = AnnSearchRequest(
-        [<span class="hljs-meta">query_dense_embedding</span>], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
+        [query_dense_embedding], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
     )
     sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
     sparse_req = AnnSearchRequest(
-        [<span class="hljs-meta">query_sparse_embedding</span>], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
+        [query_sparse_embedding], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
     )
     rerank = WeightedRanker(sparse_weight, dense_weight)
     res = col.hybrid_search(
-        [<span class="hljs-meta">sparse_req, dense_req</span>], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
+        [sparse_req, dense_req], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
     )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
 <p>Mari kita jalankan tiga pencarian yang berbeda dengan fungsi yang ditentukan:</p>
-<pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
-hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
+<pre><code translate="no" class="language-python">dense_results = dense_search(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = sparse_search(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][[<span class="hljs-number">0</span>]])
+hybrid_results = hybrid_search(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][[<span class="hljs-number">0</span>]],
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -298,7 +298,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Apa itu<span style='color:red'> pemrograman</span> Java<span style='color:red'>?</span><span style='color:red'> Bagaimana Cara</span> Belajar Bahasa Pemrograman Java?</p>
 <p>Apa cara terbaik<span style='color:red'> untuk mulai belajar</span> robotika<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> cara kita mempersiapkan diri untuk UPSC<span style='color:red'>?</span></p>
-<p><span style='color:red'>Bagaimana cara</span> membuat fisika mudah dipelajari<span style='color:red'>?</span></p>
+<p><span style='color:red'>Bagaimana cara</span> membuat fisika<span style='color:red'> menjadi</span> mudah dipelajari<span style='color:red'>?</span></p>
 <p>Apa cara terbaik<span style='color:red'> untuk</span> belajar bahasa Prancis<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> saya bisa belajar berbicara bahasa Inggris<span style='color:red'> dengan</span> lancar<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> saya bisa belajar keamanan komputer<span style='color:red'>?</span></p>
@@ -309,6 +309,6 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>Bagaimana</span> cara membuat shell baru di terminal baru menggunakan<span style='color:red'> pemrograman</span> C (terminal Linux)<span style='color:red'>?</span></p>
 <p>Bisnis mana yang lebih baik<span style='color:red'> untuk dimulai</span> di Hyderabad<span style='color:red'>?</span></p>
 <p>Bisnis mana yang bagus untuk<span style='color:red'> memulai</span> di Hyderabad<span style='color:red'>?</span></p>
-<p>Matematika apa yang dibutuhkan seorang pemula<span style='color:red'> untuk</span> memahami algoritma<span style='color:red'> pemrograman</span> komputer<span style='color:red'>?</span> Buku-buku tentang algoritma apa yang cocok untuk pemula yang lengkap<span style='color:red'>?</span></p>
+<p>Matematika apa yang dibutuhkan seorang pemula<span style='color:red'> untuk</span> memahami algoritma<span style='color:red'> pemrograman</span> komputer<span style='color:red'>?</span> Buku algoritma apa yang cocok untuk pemula yang lengkap<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> Anda membuat hidup sesuai dengan Anda dan menghentikan hidup <span style='color:red'>menyiksa</span> Anda secara mental dan emosional<span style='color:red'>?</span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">Penerapan Cepat</h3><p>Untuk mempelajari tentang cara memulai demo online dengan tutorial ini, silakan lihat <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">contoh aplikasi</a>.</p>

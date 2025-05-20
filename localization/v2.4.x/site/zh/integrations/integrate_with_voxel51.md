@@ -37,7 +37,7 @@ title: 与 Milvus 和 FiftyOne 一起进行视觉搜索
       </svg>
     </button></h2><p>开始之前，请确保具备以下条件：</p>
 <ul>
-<li>运行中的<a href="/docs/zh/install_standalone-docker.md">Milvus 服务器</a>。</li>
+<li>运行中的<a href="/docs/zh/v2.4.x/install_standalone-docker.md">Milvus 服务器</a>。</li>
 <li>安装了<code translate="no">pymilvus</code> 和<code translate="no">fiftyone</code> 的 Python 环境。</li>
 <li>要搜索的图像<a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">数据集</a>。</li>
 </ul>
@@ -262,7 +262,7 @@ milvus_index = fob.compute_similarity(
 <li><p><strong>metric</strong>（<em>"dotproduct"）</em>：创建新索引时使用的嵌入距离度量。支持的值是 (<code translate="no">&quot;dotproduct&quot;</code>,<code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_</strong><em>level</em>（<em>"会话"）</em>：要使用的一致性级别。支持的值有 (<code translate="no">&quot;Strong&quot;</code>,<code translate="no">&quot;Session&quot;</code>,<code translate="no">&quot;Bounded&quot;</code>,<code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>有关这些参数的详细信息，请参阅<a href="/docs/zh/authenticate.md">Milvus 身份验证文档</a>和<a href="/docs/zh/consistency.md">Milvus 一致性级别文档</a>。</p>
+<p>有关这些参数的详细信息，请参阅<a href="/docs/zh/v2.4.x/authenticate.md">Milvus 身份验证文档</a>和<a href="/docs/zh/v2.4.x/consistency.md">Milvus 一致性级别文档</a>。</p>
 <p>你可以通过上一节描述的任何策略来指定这些参数。下面是一个包含所有可用参数的<a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">大脑配置</a>示例：</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {

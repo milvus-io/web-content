@@ -22,11 +22,11 @@ summary: >-
       </svg>
     </button></h1><p>في ميلفوس، <code translate="no">VARCHAR</code> هو نوع البيانات المستخدم لتخزين بيانات السلسلة. عندما تقوم بتعريف حقل <code translate="no">VARCHAR</code> ، هناك معلمتان إلزاميتان:</p>
 <ul>
-<li><p>قم بتعيين <code translate="no">datatype</code> إلى <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>حدد <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد الأحرف التي يمكن للحقل <code translate="no">VARCHAR</code> تخزينها. النطاق الصالح <code translate="no">max_length</code> هو من 1 إلى 65,535 65,535.</p></li>
+<li><p>تعيين <code translate="no">datatype</code> إلى <code translate="no">DataType.VARCHAR</code>.</p></li>
+<li><p>حدد <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن للحقل <code translate="no">VARCHAR</code> تخزينها. النطاق الصالح <code translate="no">max_length</code> هو من 1 إلى 65,535 65,535.</p></li>
 </ul>
 <div class="alert note">
-<p>يدعم ميلفوس القيم الفارغة والقيم الافتراضية للحقول <code translate="no">VARCHAR</code>. لتمكين هذه الميزات، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code> و <code translate="no">default_value</code> إلى قيمة سلسلة. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>يدعم Milvus القيم الفارغة والقيم الافتراضية للحقول <code translate="no">VARCHAR</code>. لتمكين هذه الميزات، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code> و <code translate="no">default_value</code> إلى قيمة سلسلة. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">إضافة حقل VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,8 +45,8 @@ summary: >-
       </svg>
     </button></h2><p>لتخزين بيانات السلسلة في Milvus، قم بتعريف حقل <code translate="no">VARCHAR</code> في مخطط مجموعتك. فيما يلي مثال على تعريف مخطط مجموعة بحقلين <code translate="no">VARCHAR</code>:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: يخزن ما يصل إلى 100 حرف، ويسمح بالقيم الفارغة، وله قيمة افتراضية <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: يخزن حتى 200 حرف، ويسمح بقيم فارغة، ولكن ليس له قيمة افتراضية.</p></li>
+<li><p><code translate="no">varchar_field1</code>: يخزن ما يصل إلى 100 بايت، ويسمح بالقيم الفارغة، وله قيمة افتراضية <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: يخزن حتى 200 بايت، ويسمح بالقيم الفارغة، ولكن ليس له قيمة افتراضية.</p></li>
 </ul>
 <div class="alert note">
 <p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، يسمح لك Milvus بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي ذلك إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>

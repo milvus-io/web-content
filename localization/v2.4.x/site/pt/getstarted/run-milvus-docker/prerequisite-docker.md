@@ -108,6 +108,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>Se o seu hardware e software atenderem aos requisitos acima, você poderá</p>
 <ul>
-<li><a href="/docs/pt/install_standalone-docker.md">Executar o Milvus no Docker</a></li>
-<li><a href="/docs/pt/install_standalone-docker-compose.md">Executar o Milvus com o Docker Compose</a></li>
+<li><a href="/docs/pt/v2.4.x/install_standalone-docker.md">Executar o Milvus no Docker</a></li>
+<li><a href="/docs/pt/v2.4.x/install_standalone-docker-compose.md">Executar o Milvus com o Docker Compose</a></li>
 </ul>

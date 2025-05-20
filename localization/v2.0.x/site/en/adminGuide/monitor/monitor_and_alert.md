@@ -20,8 +20,8 @@ summary: ''
       </svg>
     </button></h1><p>Milvus uses Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.</p>
 <ul>
-<li><a href="/docs/monitor_overview.md">Monitoring Architecture</a>: An overview of the Milvus monitoring framework.</li>
-<li><a href="/docs/monitor.md">Deploy Monitoring Services</a>: Use Prometheus to deploy monitoring services on Kubernetes.</li>
-<li><a href="/docs/visualize.md">Visualize Milvus Metrics</a>: Visualize Milvus metrics using Grafana.</li>
-<li><a href="/docs/alert.md">Create an Alert</a>: Learn about why, when, and how to create alerts in Milvus.</li>
+<li><a href="/docs/v2.0.x/monitor_overview.md">Monitoring Architecture</a>: An overview of the Milvus monitoring framework.</li>
+<li><a href="/docs/v2.0.x/monitor.md">Deploy Monitoring Services</a>: Use Prometheus to deploy monitoring services on Kubernetes.</li>
+<li><a href="/docs/v2.0.x/visualize.md">Visualize Milvus Metrics</a>: Visualize Milvus metrics using Grafana.</li>
+<li><a href="/docs/v2.0.x/alert.md">Create an Alert</a>: Learn about why, when, and how to create alerts in Milvus.</li>
 </ul>

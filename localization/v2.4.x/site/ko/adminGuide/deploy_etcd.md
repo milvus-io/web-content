@@ -59,7 +59,7 @@ summary: Docker Compose/Helm으로 Milvus용 메타 스토리지를 구성하는
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>자세한 내용은 <a href="/docs/ko/configure_etcd.md">etcd 관련 구성을</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.4.x/configure_etcd.md">etcd 관련 구성을</a> 참조하세요.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Milvus 실행</h3><p>다음 명령을 실행하여 etcd 구성을 사용하는 Milvus를 시작합니다.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -131,6 +131,6 @@ summary: Docker Compose/Helm으로 Milvus용 메타 스토리지를 구성하는
       </svg>
     </button></h2><p>도커 컴포즈 또는 헬름으로 다른 Milvus 종속성을 구성하는 방법을 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/deploy_s3.md">도커 컴포즈 또는 헬름으로 오브젝트 스토리지 구성하기</a></li>
-<li><a href="/docs/ko/deploy_pulsar.md">도커 컴포즈 또는 헬름으로 메시지 저장소 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_s3.md">도커 컴포즈 또는 헬름으로 오브젝트 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_pulsar.md">도커 컴포즈 또는 헬름으로 메시지 저장소 구성하기</a></li>
 </ul>

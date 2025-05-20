@@ -37,8 +37,8 @@ summary: Cette page présente la procédure d'importation des données préparé
       </svg>
     </button></h2><ul>
 <li><p>Vous avez déjà préparé vos données et les avez placées dans le seau Milvus.</p>
-<p>Si ce n'est pas le cas, vous devez d'abord utiliser <strong>RemoteBulkWriter</strong> pour préparer vos données et vous assurer que les données préparées ont déjà été transférées dans le seau Milvus sur l'instance MinIO démarrée en même temps que votre instance Milvus. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/prepare-source-data.md">Préparation des données source</a>.</p></li>
-<li><p>Vous avez déjà créé une collection avec le schéma que vous utilisez pour préparer vos données. Si ce n'est pas le cas, reportez-vous à la section <a href="/docs/fr/manage-collections.md">Gérer les collections</a>.</p></li>
+<p>Si ce n'est pas le cas, vous devez d'abord utiliser <strong>RemoteBulkWriter</strong> pour préparer vos données et vous assurer que les données préparées ont déjà été transférées dans le seau Milvus sur l'instance MinIO démarrée en même temps que votre instance Milvus. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.4.x/prepare-source-data.md">Préparation des données source</a>.</p></li>
+<li><p>Vous avez déjà créé une collection avec le schéma que vous utilisez pour préparer vos données. Si ce n'est pas le cas, reportez-vous à la section <a href="/docs/fr/v2.4.x/manage-collections.md">Gérer les collections</a>.</p></li>
 </ul>
 <div class="language-python">
 <p>L'extrait de code suivant crée une collection simple avec le schéma donné. Pour plus d'informations sur les paramètres, voir <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> dans la référence SDK.</p>

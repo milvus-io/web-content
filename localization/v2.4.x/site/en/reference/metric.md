@@ -215,5 +215,5 @@ Check if the vectors are normalized. If not, you need to normalize the vectors f
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn more about the supported <a href="/docs/index.md">index types</a> in Milvus.</li>
+<li>Learn more about the supported <a href="/docs/v2.4.x/index.md">index types</a> in Milvus.</li>
 </ul>

@@ -20,7 +20,7 @@ title: Ativar o RBAC
         ></path>
       </svg>
     </button></h1><p>Ao ativar o RBAC, pode controlar o acesso a recursos Milvus específicos (por exemplo, uma coleção ou uma partição) ou permissões com base no papel e privilégios do utilizador. Atualmente, esta funcionalidade só está disponível em Python e Java.</p>
-<p>Este tópico descreve como ativar o RBAC e gerir <a href="/docs/pt/users_and_roles.md">utilizadores e funções</a>.</p>
+<p>Este tópico descreve como ativar o RBAC e gerir <a href="/docs/pt/v2.4.x/users_and_roles.md">utilizadores e funções</a>.</p>
 <div class="alert note">
 <p>Os trechos de código nesta página usam o novo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) para interagir com o Milvus. Novos SDKs MilvusClient para outras linguagens serão lançados em futuras actualizações.</p>
 </div>
@@ -39,7 +39,7 @@ title: Ativar o RBAC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de ativar <a href="/docs/pt/authenticate.md">a autenticação do utilizador</a>, ligue-se à sua instância Milvus utilizando <code translate="no">token</code> que consiste num nome de utilizador e numa palavra-passe. Por predefinição, o Milvus utiliza o utilizador <code translate="no">root</code> com a palavra-passe <code translate="no">Milvus</code>.</p>
+    </button></h2><p>Depois de ativar <a href="/docs/pt/v2.4.x/authenticate.md">a autenticação do utilizador</a>, ligue-se à sua instância Milvus utilizando <code translate="no">token</code> que consiste num nome de utilizador e numa palavra-passe. Por predefinição, o Milvus utiliza o utilizador <code translate="no">root</code> com a palavra-passe <code translate="no">Milvus</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -139,8 +139,8 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>O exemplo seguinte demonstra como conceder a permissão de pesquisar todas as colecções à função denominada <code translate="no">roleA</code>.</p>
-<p>O <code translate="no">object_type</code> especifica o tipo de objeto, que também pode ser entendido como o tipo de recurso. Atualmente, os valores válidos incluem Coleção/Utilizador/Global, etc., em que Global significa que não existe um tipo de recurso específico. O <code translate="no">object_name</code> é o nome do recurso. Se o tipo de objeto<em>for Coleção, então o nome do objeto pode ser referido a um nome de coleção específico, ou pode utilizar * para especificar todas as colecções. Se</em>o tipo de objeto for Global, o nome do objeto só pode ser especificado como *. Consulte <a href="/docs/pt/users_and_roles.md">Utilizadores e funções</a> para outros tipos de privilégios que pode conceder.</p>
-<p>Antes de gerir os privilégios de função, certifique-se de que activou a autenticação do utilizador. Caso contrário, poderá ocorrer um erro. Para obter informações sobre como ativar a autenticação do utilizador, consulte <a href="/docs/pt/authenticate.md">Autenticar o acesso do utilizador</a>.</p>
+<p>O <code translate="no">object_type</code> especifica o tipo de objeto, que também pode ser entendido como o tipo de recurso. Atualmente, os valores válidos incluem Coleção/Utilizador/Global, etc., em que Global significa que não existe um tipo de recurso específico. O <code translate="no">object_name</code> é o nome do recurso. Se o tipo de objeto<em>for Coleção, então o nome do objeto pode ser referido a um nome de coleção específico, ou pode utilizar * para especificar todas as colecções. Se</em>o tipo de objeto for Global, o nome do objeto só pode ser especificado como *. Consulte <a href="/docs/pt/v2.4.x/users_and_roles.md">Utilizadores e funções</a> para outros tipos de privilégios que pode conceder.</p>
+<p>Antes de gerir os privilégios de função, certifique-se de que activou a autenticação do utilizador. Caso contrário, poderá ocorrer um erro. Para obter informações sobre como ativar a autenticação do utilizador, consulte <a href="/docs/pt/v2.4.x/authenticate.md">Autenticar o acesso do utilizador</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># grant privilege to a role</span>
 
 client.grant_privilege(
@@ -260,6 +260,6 @@ client.grant_role(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Saiba como gerir <a href="/docs/pt/authenticate.md">a autenticação do utilizador</a>.</p></li>
-<li><p>Saiba como ativar <a href="/docs/pt/tls.md">o proxy TLS</a> no Milvus.</p></li>
+<li><p>Saiba como gerir <a href="/docs/pt/v2.4.x/authenticate.md">a autenticação do utilizador</a>.</p></li>
+<li><p>Saiba como ativar <a href="/docs/pt/v2.4.x/tls.md">o proxy TLS</a> no Milvus.</p></li>
 </ul>

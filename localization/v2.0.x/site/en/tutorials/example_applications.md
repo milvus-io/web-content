@@ -20,12 +20,12 @@ summary: ''
       </svg>
     </button></h1><p>Milvus makes it easy to supercharge your AI application with vector similarity search. Check out the following example applications of Milvus.</p>
 <ul>
-<li><a href="/docs/image_similarity_search.md">Image Similarity Search</a></li>
-<li><a href="/docs/question_answering_system.md">Question Answering System</a></li>
-<li><a href="/docs/recommendation_system.md">Recommender System</a></li>
-<li><a href="/docs/video_similarity_search.md">Video Similarity Search</a></li>
-<li><a href="/docs/audio_similarity_search.md">Audio Similarity Search</a></li>
-<li><a href="/docs/molecular_similarity_search.md">Molecular Similarity Search</a></li>
-<li><a href="/docs/dna_sequence_classification.md">DNA Sequence Classification</a></li>
-<li><a href="/docs/text_search_engine.md">Text Search Engine</a></li>
+<li><a href="/docs/v2.0.x/image_similarity_search.md">Image Similarity Search</a></li>
+<li><a href="/docs/v2.0.x/question_answering_system.md">Question Answering System</a></li>
+<li><a href="/docs/v2.0.x/recommendation_system.md">Recommender System</a></li>
+<li><a href="/docs/v2.0.x/video_similarity_search.md">Video Similarity Search</a></li>
+<li><a href="/docs/v2.0.x/audio_similarity_search.md">Audio Similarity Search</a></li>
+<li><a href="/docs/v2.0.x/molecular_similarity_search.md">Molecular Similarity Search</a></li>
+<li><a href="/docs/v2.0.x/dna_sequence_classification.md">DNA Sequence Classification</a></li>
+<li><a href="/docs/v2.0.x/text_search_engine.md">Text Search Engine</a></li>
 </ul>

@@ -44,7 +44,7 @@ title: From Milvus 1.x
 </ul></li>
 <li><strong>Required tools</strong>:
 <ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md">Install Migration Tool</a>.</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md/v2.4.x">Install Migration Tool</a>.</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">Export metadata of the source Milvus installation<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

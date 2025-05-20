@@ -94,5 +94,5 @@ title: 주요 구성 요소
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/four_layers.md">컴퓨팅/저장소 분리를</a> 읽고 Milvus의 메커니즘과 설계 원리를 이해하세요.</li>
+<li><a href="/docs/ko/v2.4.x/four_layers.md">컴퓨팅/저장소 분리를</a> 읽고 Milvus의 메커니즘과 설계 원리를 이해하세요.</li>
 </ul>

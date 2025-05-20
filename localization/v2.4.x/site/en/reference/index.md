@@ -19,9 +19,9 @@ title: In-memory Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic lists various types of in-memory indexes Milvus supports, scenarios each of them best suits, and parameters users can configure to achieve better search performance. For on-disk indexes, see <strong><a href="/docs/disk_index.md">On-disk Index</a></strong>.</p>
+    </button></h1><p>This topic lists various types of in-memory indexes Milvus supports, scenarios each of them best suits, and parameters users can configure to achieve better search performance. For on-disk indexes, see <strong><a href="/docs/v2.4.x/disk_index.md">On-disk Index</a></strong>.</p>
 <p>Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.</p>
-<p>To improve query performance, you can <a href="/docs/index-vector-fields.md">specify an index type</a> for each vector field.</p>
+<p>To improve query performance, you can <a href="/docs/v2.4.x/index-vector-fields.md">specify an index type</a> for each vector field.</p>
 <div class="alert note">
 Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 </div>
@@ -64,7 +64,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
   <a href="#sparse">Sparse embeddings</a>
 </div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indexes for floating-point embeddings</h3><p>For 128-dimensional floating-point embeddings (vectors), the storage they take up is 128 * the size of float = 512 bytes. And the <a href="/docs/metric.md">distance metrics</a> used for float-point embeddings are Euclidean distance (<code translate="no">L2</code>) and Inner product (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indexes for floating-point embeddings</h3><p>For 128-dimensional floating-point embeddings (vectors), the storage they take up is 128 * the size of float = 512 bytes. And the <a href="/docs/v2.4.x/metric.md">distance metrics</a> used for float-point embeddings are Euclidean distance (<code translate="no">L2</code>) and Inner product (<code translate="no">IP</code>).</p>
 <p>These types of indexes include <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, and <code translate="no">SCANN</code> for CPU-based ANN searches.</p>
 </div>
 <div class="filter-binary">
@@ -222,7 +222,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/v2.4.x/metric.md">Supported Metrics</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -422,7 +422,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/v2.4.x/metric.md">Supported Metrics</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -492,7 +492,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>This index shares similarities with <code translate="no">SPARSE_INVERTED_INDEX</code>, while it utilizes the <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm to further reduce the number of full IP distance evaluations during the search process.</p>
-<p>Based on our testing, <code translate="no">SPARSE_WAND</code> generally outperforms other methods in terms of speed. However, its performance can deteriorate rapidly as the density of the vectors increases. To address this issue, introducing a non-zero <code translate="no">drop_ratio_search</code> can significantly enhance performance while only incurring minimal accuracy loss. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
+<p>Based on our testing, <code translate="no">SPARSE_WAND</code> generally outperforms other methods in terms of speed. However, its performance can deteriorate rapidly as the density of the vectors increases. To address this issue, introducing a non-zero <code translate="no">drop_ratio_search</code> can significantly enhance performance while only incurring minimal accuracy loss. For more information, refer to <a href="/docs/v2.4.x/sparse_vector.md">Sparse Vector</a>.</p>
 <ul>
 <li><p>Index building parameters</p>
 <table>
@@ -558,5 +558,5 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn more about the <a href="/docs/metric.md">Similarity Metrics</a> supported in Milvus.</li>
+<li>Learn more about the <a href="/docs/v2.4.x/metric.md">Similarity Metrics</a> supported in Milvus.</li>
 </ul>

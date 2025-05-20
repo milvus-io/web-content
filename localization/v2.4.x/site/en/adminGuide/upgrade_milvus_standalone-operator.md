@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Milvus operator.
 title: Upgrade Milvus Standalone with Milvus Operator
 ---
-<div class="tab-wrapper"><a href="/docs/upgrade_milvus_standalone-operator.md" class='active '>Milvus Operator</a><a href="/docs/upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="/docs/upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.4.x/upgrade_milvus_standalone-operator.md" class='active '>Milvus Operator</a><a href="/docs/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="/docs/v2.4.x/upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Upgrade Milvus Standalone with Milvus Operator<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

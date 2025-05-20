@@ -59,7 +59,7 @@ title: Install Milvus Python SDK
       </svg>
     </button></h2><p>PyMilvus is available in <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <div class="alert note">
-It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="/docs/release_notes.md">Release Notes</a>.
+It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="/docs/v2.4.x/release_notes.md">Release Notes</a>.
 </div>
 <pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.4</span>.<span class="hljs-number">15</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -100,11 +100,11 @@ It is recommended to install a PyMilvus version that matches the version of the 
 <ul>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/v2.4.x/manage-collections.md">Manage Collections</a></li>
+<li><a href="/docs/v2.4.x/manage-partitions.md">Manage Partitions</a></li>
+<li><a href="/docs/v2.4.x/insert-update-delete.md">Insert, Upsert & Delete</a></li>
+<li><a href="/docs/v2.4.x/single-vector-search.md">Single-Vector Search</a></li>
+<li><a href="/docs/v2.4.x/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>
 <li><p>Explore <a href="/api-reference/pymilvus/v2.4.x/About.md">PyMilvus API reference</a></p></li>
 </ul>

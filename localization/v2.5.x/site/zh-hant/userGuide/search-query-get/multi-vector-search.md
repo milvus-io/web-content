@@ -3,7 +3,7 @@ id: multi-vector-search.md
 title: 混合搜尋
 summary: >-
   混合搜尋指的是一種同時進行多個 ANN 搜尋、從這些 ANN
-  搜尋中重新排序多組結果，並最終返回單一結果集的搜尋方法。使用混合搜尋可以提高搜尋準確度。Milvus 支援在具有多向量領域的集合上執行混合搜尋。
+  搜尋中重新排序多組結果，並最終返回單一結果集的搜尋方法。使用混合搜尋可以提高搜尋準確度。Milvus 支援在具有多向量領域的集合上進行混合搜尋。
 ---
 <h1 id="Hybrid-Search" class="common-anchor-header">混合搜尋<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -509,7 +509,7 @@ search_param_1 = {
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>}, {<span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
+query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>, <span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,

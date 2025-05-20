@@ -513,6 +513,6 @@ aws iam <span class="hljs-keyword">delete</span>-policy --policy-arn <span class
       </svg>
     </button></h2><p>他のクラウドにMilvusをデプロイする方法を学びたい場合：</p>
 <ul>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使ってGCPにMilvus Clusterをデプロイする</a></li>
-<li><a href="/docs/ja/azure.md">KubernetesでAzureにMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/v2.4.x/gcp.md">Kubernetesを使ってGCPにMilvus Clusterをデプロイする</a></li>
+<li><a href="/docs/ja/v2.4.x/azure.md">KubernetesでAzureにMilvusクラスタをデプロイする</a></li>
 </ul>

@@ -21,7 +21,7 @@ title: ''
       </svg>
     </button></h1><p>This topic lists various types of indexes Milvus supports, scenarios each of them best suits, and parameters user can configure to achieve better search performance.</p>
 <p>Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.</p>
-<p>To improve query performance, you can <a href="/docs/build_index.md">specify an index type</a> for each vector field.</p>
+<p>To improve query performance, you can <a href="/docs/v2.0.x/build_index.md">specify an index type</a> for each vector field.</p>
 <div class="alert note"> 
 Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 </div>
@@ -41,7 +41,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
         ></path>
       </svg>
     </button></h2><p>Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS). Compared with accurate retrieval, which is usually very time-consuming, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.</p>
-<p>To learn how to choose an appropriate metric for an index, see <a href="/docs/metric.md">Similarity Metrics</a>.</p>
+<p>To learn how to choose an appropriate metric for an index, see <a href="/docs/v2.0.x/metric.md">Similarity Metrics</a>.</p>
 <p>According to the implementation methods, the ANNS vector index can be divided into four categories:</p>
 <ul>
 <li>Tree-based index</li>
@@ -180,7 +180,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/v2.0.x/metric.md">Supported Metrics</a>.</td></tr>
 </tbody>
 </table>
 </li>

@@ -281,7 +281,7 @@ USE SCHEMA PUBLIC;
     <span>Obtain and display the most relevant results</span>
   </span>
 </p>
-<p>For more information on the usage of the Milvus client, you can refer to the <a href="/docs/quickstart.md">Milvus Doc</a> section.</p>
+<p>For more information on the usage of the Milvus client, you can refer to the <a href="/docs/v2.4.x/quickstart.md">Milvus Doc</a> section.</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7. Clean up<button data-href="#7-Clean-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -331,4 +331,4 @@ USE ROLE ACCOUNTADMIN;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For more information about Milvus, you can start with the <a href="/docs/overview.md">Milvus introduction</a> and <a href="/docs/quickstart.md">Quick start</a>. Of course, there is a more detailed introduction to the API, refer to the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">Python</a> and <a href="https://milvus.io/api-reference/java/v2.3.x/About.md">Java</a> versions, and there is also information about <a href="https://milvus.io/docs/embeddings.md">Embeddings</a> and <a href="https://milvus.io/docs/integrate_with_openai.md">Integrations</a> for reference.</p>
+    </button></h2><p>For more information about Milvus, you can start with the <a href="/docs/v2.4.x/overview.md">Milvus introduction</a> and <a href="/docs/v2.4.x/quickstart.md">Quick start</a>. Of course, there is a more detailed introduction to the API, refer to the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">Python</a> and <a href="https://milvus.io/api-reference/java/v2.3.x/About.md">Java</a> versions, and there is also information about <a href="https://milvus.io/docs/embeddings.md">Embeddings</a> and <a href="https://milvus.io/docs/integrate_with_openai.md">Integrations</a> for reference.</p>

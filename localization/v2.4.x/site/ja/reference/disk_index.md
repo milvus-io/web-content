@@ -20,7 +20,7 @@ title: ディスク上のインデックス
         ></path>
       </svg>
     </button></h1><p>この記事では、DiskANN と名付けられたディスク上のインデックス作成アルゴリズムを紹介する。Vamana グラフに基づき、DiskANN は大規模データセット内の効率的な検索を可能にします。</p>
-<p>クエリー性能を向上させるため、各ベクトルフィールドに<a href="/docs/ja/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
+<p>クエリー性能を向上させるため、各ベクトルフィールドに<a href="/docs/ja/v2.4.x/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
 <div class="alert note"> 
 現在、ベクトルフィールドは1つのインデックスタイプしかサポートしていません。Milvusはインデックスタイプを切り替えると、古いインデックスを自動的に削除します。</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">

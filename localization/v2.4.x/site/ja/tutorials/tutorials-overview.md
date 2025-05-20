@@ -24,27 +24,27 @@ title: チュートリアル概要
 <tr><th>チュートリアル</th><th>使用例</th><th>Milvusの関連機能</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/ja/build-rag-with-milvus.md">MilvusでRAGを構築する</a></td><td>RAG</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/how_to_enhance_your_rag.md">高度なRAG</a></td><td>RAG</td><td>ベクター検索</td></tr>
-<tr><td><a href="/docs/ja/full_text_search_with_milvus.md">Milvusによる全文検索</a></td><td>クイックスタート</td><td>全文検索</td></tr>
-<tr><td><a href="/docs/ja/hybrid_search_with_milvus.md">Milvusによるハイブリッド検索</a></td><td>ハイブリッド検索</td><td>ハイブリッド検索, マルチベクトル, 密埋め込み, 疎埋め込み</td></tr>
-<tr><td><a href="/docs/ja/image_similarity_search.md">Milvusによる画像検索</a></td><td>セマンティック検索</td><td>ベクトル検索, ダイナミックフィールド</td></tr>
-<tr><td><a href="/docs/ja/multimodal_rag_with_milvus.md">MilvusによるマルチモーダルRAG</a></td><td>RAG</td><td>ベクトル検索, ダイナミックフィールド</td></tr>
-<tr><td><a href="/docs/ja/multimodal_rag_with_milvus.md">マルチベクトルによるマルチモーダル検索</a></td><td>セマンティック検索</td><td>マルチベクトル、ハイブリッド検索</td></tr>
-<tr><td><a href="/docs/ja/graph_rag_with_milvus.md">MilvusによるグラフRAG</a></td><td>RAG</td><td>グラフ検索</td></tr>
-<tr><td><a href="/docs/ja/contextual_retrieval_with_milvus.md">Milvusによる文脈検索</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/hdbscan_clustering_with_milvus.md">MilvusによるHDBSCANクラスタリング</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/use_ColPali_with_milvus.md">Milvusでマルチモーダル検索のためにColPaliを使う</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/vector_visualization.md">ベクトルの可視化</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/movie_recommendation_with_milvus.md">Milvusによる映画推薦</a></td><td>レコメンドシステム</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/funnel_search_with_matryoshka.md">マトリョーシカ埋め込みによる漏斗探索</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/question_answering_system.md">質問応答システム</a></td><td>質問応答</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/recommendation_system.md">推薦システム</a></td><td>推薦システム</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/video_similarity_search.md">ビデオ類似検索</a></td><td>セマンティック検索</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/audio_similarity_search.md">音声類似検索</a></td><td>意味検索</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/dna_sequence_classification.md">DNA分類</a></td><td>分類</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/text_search_engine.md">テキスト検索エンジン</a></td><td>セマンティック検索</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/text_image_search.md">テキストによる画像検索</a></td><td>セマンティック検索</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/image_deduplication_system.md">画像の重複排除</a></td><td>重複排除</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/build-rag-with-milvus.md">MilvusでRAGを構築する</a></td><td>RAG</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/how_to_enhance_your_rag.md">高度なRAG</a></td><td>RAG</td><td>ベクター検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/full_text_search_with_milvus.md">Milvusによる全文検索</a></td><td>クイックスタート</td><td>全文検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/hybrid_search_with_milvus.md">Milvusによるハイブリッド検索</a></td><td>ハイブリッド検索</td><td>ハイブリッド検索, マルチベクトル, 密埋め込み, 疎埋め込み</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/image_similarity_search.md">Milvusによる画像検索</a></td><td>セマンティック検索</td><td>ベクトル検索, ダイナミックフィールド</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/multimodal_rag_with_milvus.md">MilvusによるマルチモーダルRAG</a></td><td>RAG</td><td>ベクトル検索, ダイナミックフィールド</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/multimodal_rag_with_milvus.md">マルチベクトルによるマルチモーダル検索</a></td><td>セマンティック検索</td><td>マルチベクトル、ハイブリッド検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/graph_rag_with_milvus.md">MilvusによるグラフRAG</a></td><td>RAG</td><td>グラフ検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/contextual_retrieval_with_milvus.md">Milvusによる文脈検索</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/hdbscan_clustering_with_milvus.md">MilvusによるHDBSCANクラスタリング</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/use_ColPali_with_milvus.md">Milvusでマルチモーダル検索のためにColPaliを使う</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/vector_visualization.md">ベクトルの可視化</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/movie_recommendation_with_milvus.md">Milvusによる映画推薦</a></td><td>レコメンドシステム</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/funnel_search_with_matryoshka.md">マトリョーシカ埋め込みによる漏斗探索</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/question_answering_system.md">質問応答システム</a></td><td>質問応答</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/recommendation_system.md">推薦システム</a></td><td>推薦システム</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/video_similarity_search.md">ビデオ類似検索</a></td><td>セマンティック検索</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/audio_similarity_search.md">音声類似検索</a></td><td>意味検索</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/dna_sequence_classification.md">DNA分類</a></td><td>分類</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/text_search_engine.md">テキスト検索エンジン</a></td><td>セマンティック検索</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/text_image_search.md">テキストによる画像検索</a></td><td>セマンティック検索</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/v2.4.x/image_deduplication_system.md">画像の重複排除</a></td><td>重複排除</td><td>ベクトル検索</td></tr>
 </tbody>
 </table>

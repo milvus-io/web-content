@@ -107,7 +107,7 @@ summary: >-
       </svg>
     </button></h2><p>Dopo aver appreso il flusso di lavoro di base del monitoraggio e degli avvisi, imparate:</p>
 <ul>
-<li><a href="/docs/it/monitor.md">Distribuire i servizi di monitoraggio</a></li>
-<li><a href="/docs/it/visualize.md">Visualizzare le metriche di Milvus</a></li>
-<li><a href="/docs/it/alert.md">Creare un avviso</a></li>
+<li><a href="/docs/it/v2.4.x/monitor.md">Distribuire i servizi di monitoraggio</a></li>
+<li><a href="/docs/it/v2.4.x/visualize.md">Visualizzare le metriche di Milvus</a></li>
+<li><a href="/docs/it/v2.4.x/alert.md">Creare un avviso</a></li>
 </ul>

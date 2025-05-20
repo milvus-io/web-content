@@ -119,5 +119,5 @@ title: 存储/计算分解
         ></path>
       </svg>
     </button></h2><ul>
-<li>阅读 "<a href="/docs/zh/main_components.md">主要组件</a>"，了解有关 Milvus 架构的更多详情。</li>
+<li>阅读 "<a href="/docs/zh/v2.4.x/main_components.md">主要组件</a>"，了解有关 Milvus 架构的更多详情。</li>
 </ul>

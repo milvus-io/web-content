@@ -138,7 +138,7 @@ common:
 </table>
 </li>
 </ul>
-<p>Чтобы применить вышеуказанные изменения к кластеру Milvus, выполните действия, описанные в разделах <a href="/docs/ru/configure-helm.md">Настройка Milvus с помощью Helm</a> и <a href="/docs/ru/configure_operator.md">Настройка Milvus с помощью Milvus Operators</a>.</p>
+<p>Чтобы применить вышеуказанные изменения к кластеру Milvus, выполните действия, описанные в разделах <a href="/docs/ru/v2.4.x/configure-helm.md">Настройка Milvus с помощью Helm</a> и <a href="/docs/ru/v2.4.x/configure_operator.md">Настройка Milvus с помощью Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Конфигурация коллекции</h3><p>Для уплотнения кластера в определенной коллекции необходимо выбрать скалярное поле из коллекции в качестве ключа кластеризации.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

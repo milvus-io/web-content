@@ -38,7 +38,7 @@ title: Mengindeks Bidang Vektor
         ></path>
       </svg>
     </button></h2><p>Dengan memanfaatkan metadata yang disimpan dalam berkas indeks, Milvus mengatur data Anda dalam struktur khusus, sehingga memudahkan pengambilan informasi yang diminta dengan cepat selama pencarian atau kueri.</p>
-<p>Milvus menyediakan beberapa jenis indeks dan metrik untuk mengurutkan nilai bidang untuk pencarian kemiripan yang efisien. Tabel berikut mencantumkan jenis indeks dan metrik yang didukung untuk berbagai jenis bidang vektor. Saat ini, Milvus mendukung berbagai jenis data vektor, termasuk penyematan floating point (sering dikenal sebagai vektor floating point atau vektor padat), penyematan biner (juga dikenal sebagai vektor biner), dan penyematan jarang (juga dikenal sebagai vektor jarang). Untuk detailnya, lihat <a href="/docs/id/index.md">Indeks Dalam Memori</a> dan <a href="/docs/id/metric.md">Metrik Kemiripan</a>.</p>
+<p>Milvus menyediakan beberapa jenis indeks dan metrik untuk mengurutkan nilai bidang untuk pencarian kemiripan yang efisien. Tabel berikut mencantumkan jenis indeks dan metrik yang didukung untuk berbagai jenis bidang vektor. Saat ini, Milvus mendukung berbagai jenis data vektor, termasuk penyematan floating point (sering dikenal sebagai vektor floating point atau vektor padat), penyematan biner (juga dikenal sebagai vektor biner), dan penyematan jarang (juga dikenal sebagai vektor jarang). Untuk detailnya, lihat <a href="/docs/id/v2.4.x/index.md">Indeks Dalam Memori</a> dan <a href="/docs/id/v2.4.x/metric.md">Metrik Kemiripan</a>.</p>
 <div class="filter">
  <a href="#floating">Penyematan titik mengambang</a> <a href="#binary">Penyematan biner Penyematan</a> <a href="#sparse">jarang</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -105,7 +105,7 @@ title: Mengindeks Bidang Vektor
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Seperti yang dijelaskan di <a href="/docs/id/manage-collections.md">Mengelola Koleksi</a>, Milvus secara otomatis membuat indeks dan memuatnya ke dalam memori ketika membuat koleksi jika salah satu dari kondisi berikut ini ditentukan dalam permintaan pembuatan koleksi:</p>
+    </button></h2><p>Seperti yang dijelaskan di <a href="/docs/id/v2.4.x/manage-collections.md">Mengelola Koleksi</a>, Milvus secara otomatis membuat indeks dan memuatnya ke dalam memori ketika membuat koleksi jika salah satu dari kondisi berikut ini ditentukan dalam permintaan pembuatan koleksi:</p>
 <ul>
 <li><p>Dimensi bidang vektor dan tipe metrik, atau</p></li>
 <li><p>Skema dan parameter indeks.</p></li>

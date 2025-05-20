@@ -23,10 +23,10 @@ summary: >-
     </button></h1><p>В Milvus <code translate="no">VARCHAR</code> - это тип данных, используемый для хранения строковых данных. Когда вы определяете поле <code translate="no">VARCHAR</code>, два параметра являются обязательными:</p>
 <ul>
 <li><p>Установите <code translate="no">datatype</code> в <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Укажите <code translate="no">max_length</code>, который определяет максимальное количество символов, которое может хранить поле <code translate="no">VARCHAR</code>. Диапазон допустимых значений для <code translate="no">max_length</code> составляет от 1 до 65 535.</p></li>
+<li><p>Укажите <code translate="no">max_length</code>, который определяет максимальное количество байт, которое может хранить поле <code translate="no">VARCHAR</code>. Диапазон допустимых значений для <code translate="no">max_length</code> составляет от 1 до 65 535.</p></li>
 </ul>
 <div class="alert note">
-<p>Milvus поддерживает нулевые значения и значения по умолчанию для полей <code translate="no">VARCHAR</code>. Чтобы включить эти возможности, установите для <code translate="no">nullable</code> значение <code translate="no">True</code>, а для <code translate="no">default_value</code> - строковое значение. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Нулевые значения и значения по умолчанию</a>.</p>
+<p>Milvus поддерживает нулевые значения и значения по умолчанию для полей <code translate="no">VARCHAR</code>. Чтобы включить эти возможности, установите <code translate="no">nullable</code> в значение <code translate="no">True</code>, а <code translate="no">default_value</code> - в строковое значение. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Нулевые значения и значения по умолчанию</a>.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Добавление поля VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,11 +45,11 @@ summary: >-
       </svg>
     </button></h2><p>Чтобы хранить строковые данные в Milvus, определите поле <code translate="no">VARCHAR</code> в схеме коллекции. Ниже приведен пример определения схемы коллекции с двумя полями <code translate="no">VARCHAR</code>:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: хранит до 100 символов, допускает нулевые значения и имеет значение по умолчанию <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: хранит до 200 символов, допускает нулевые значения, но не имеет значения по умолчанию.</p></li>
+<li><p><code translate="no">varchar_field1</code>: хранит до 100 байт, допускает нулевые значения и имеет значение по умолчанию <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: хранит до 200 байт, допускает нулевые значения, но не имеет значения по умолчанию.</p></li>
 </ul>
 <div class="alert note">
-<p>Если вы установите <code translate="no">enable_dynamic_fields=True</code> при определении схемы, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может повысить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
+<p>Если вы установите <code translate="no">enable_dynamic_fields=True</code> при определении схемы, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может увеличить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

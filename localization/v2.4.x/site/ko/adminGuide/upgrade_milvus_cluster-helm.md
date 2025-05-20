@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: 헬름 차트를 사용하여 Milvus 클러스터를 업그레이드하는 방법을 알아보세요.
 title: 헬름 차트로 Milvus 클러스터 업그레이드하기
 ---
-<div class="tab-wrapper"><a href="/docs/ko/upgrade_milvus_cluster-operator.md" class=''>밀버스</a><a href="/docs/ko/upgrade_milvus_cluster-helm.md" class='active '>오퍼레이터헬름</a></div>
+<div class="tab-wrapper"><a href="/docs/ko/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>밀버스</a><a href="/docs/ko/v2.4.x/upgrade_milvus_cluster-helm.md" class='active '>오퍼레이터헬름</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">헬름 차트로 Milvus 클러스터 업그레이드하기<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

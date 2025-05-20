@@ -349,7 +349,7 @@ array_length(int_array) <span class="hljs-comment"># ==&gt; 7</span>
       </svg>
     </button></h2><p>Milvusでビットセットがどのように機能するかがわかったところで、次のこともやってみましょう：</p>
 <ul>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索の</a>方法</li>
+<li><a href="/docs/ja/v2.4.x/multi-vector-search.md">ハイブリッド検索の</a>方法</li>
 <li><a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">文字列を使って</a>検索結果を<a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">フィルタリング</a>する方法を学ぶ。</li>
-<li><a href="/docs/ja/enable-dynamic-field.md">ブーリアン式の構築におけるダイナミックフィールドの使用</a>方法を学ぶ。</li>
+<li><a href="/docs/ja/v2.4.x/enable-dynamic-field.md">ブーリアン式の構築におけるダイナミックフィールドの使用</a>方法を学ぶ。</li>
 </ul>

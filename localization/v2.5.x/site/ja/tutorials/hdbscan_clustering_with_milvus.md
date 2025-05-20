@@ -5,6 +5,12 @@ summary: >-
   Castilloの論文をMilvusで編集したものです。
 title: MilvusによるHDBSCANクラスタリング
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">MilvusによるHDBSCANクラスタリング<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,16 +26,10 @@ title: MilvusによるHDBSCANクラスタリング
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>データはディープラーニングモデルを使って埋め込みに変換することができ、元のデータの意味のある表現を捉えることができる。教師なしクラスタリングアルゴリズムを適用することで、固有のパターンに基づいて類似のデータポイントをグループ化することができる。HDBSCAN(Hierarchical Density-Based Spatial Clustering of Applications with Noise)は、データ点の密度と距離を分析することで効率的にデータ点をグループ化する、広く使われているクラスタリングアルゴリズムである。様々な形や大きさのクラスタを発見するのに特に有用です。このノートブックでは、HDBSCANと高性能ベクトルデータベースMilvusを使って、埋め込みに基づいてデータ点を異なるグループにクラスタリングします。</p>
+    </button></h1><p>データはディープラーニングモデルを使って埋め込みに変換することができ、元のデータの意味のある表現を捉えることができる。教師なしクラスタリングアルゴリズムを適用することで、固有のパターンに基づいて類似のデータポイントをグループ化することができる。HDBSCAN(Hierarchical Density-Based Spatial Clustering of Applications with Noise)は、データ点の密度と距離を分析することで効率的にデータ点をグループ化する、広く使われているクラスタリングアルゴリズムである。様々な形や大きさのクラスタを発見するのに特に有用です。このノートブックでは、HDBSCANと高性能ベクトルデータベースMilvusを使って、埋め込みに基づいてデータ点を異なるグループにクラスタリングします。</p>
 <p>HDBSCAN（Hierarchical Density-Based Spatial Clustering of Applications with Noise）は、埋め込み空間におけるデータ点間の距離計算に依存するクラスタリングアルゴリズムです。ディープラーニングモデルによって作成されたこれらの埋め込みは、高次元形式でデータを表現する。類似したデータ点をグループ化するために、HDBSCANはそれらの近接性と密度を決定するが、これらの距離を効率的に計算することは、特に大規模なデータセットでは困難な場合がある。</p>
 <p>高性能ベクトルデータベースであるMilvusは、埋め込みデータを格納しインデックスを付けることでこのプロセスを最適化し、類似ベクトルの高速検索を可能にします。HDBSCANとMilvusを併用することで、埋め込み空間における大規模データセットの効率的なクラスタリングが可能になります。</p>
-<p>このノートブックでは、BGE-M3埋め込みモデルを使ってニュースのヘッドラインデータセットから埋め込みを抽出し、Milvusを使って埋め込み間の距離を効率的に計算し、HDBSCANのクラスタリングを支援します。このノートブックは<a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">Dylan Castilloの論文を</a>Milvusでアレンジしたものです。</p>
+<p>このノートブックでは、BGE-M3埋め込みモデルを使ってニュースのヘッドラインデータセットから埋め込みを抽出し、Milvusを使って埋め込み間の距離を効率的に計算し、HDBSCANのクラスタリングを支援します。このノートブックは、<a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">Dylan Castilloの論文を</a>Milvusに翻案したものです。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,10 +46,10 @@ title: MilvusによるHDBSCANクラスタリング
         ></path>
       </svg>
     </button></h2><p>https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/ からニュースデータセットをダウンロードする。</p>
-<pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
-$ pip install hdbscan
-$ pip install plotly
-$ pip install umap-learn
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install hdbscan</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install plotly</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install umap-learn</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Download-Data" class="common-anchor-header">データのダウンロード<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,7 +67,17 @@ $ pip install umap-learn
         ></path>
       </svg>
     </button></h2><p>https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/ からニュースデータセットをダウンロードし、<code translate="no">news_data_dedup.csv</code> を取り出してカレントディレクトリに置く。</p>
-<h2 id="Extract-Embeddings-to-Milvus" class="common-anchor-header">Milvusにエンベッディングを抽出する。<button data-href="#Extract-Embeddings-to-Milvus" class="anchor-icon" translate="no">
+<p>curlでダウンロードすることもできる：</p>
+<pre><code translate="no" class="language-bash">%%bash
+curl -L -o ~/Downloads/news-headlines-2024.zip\
+  https://www.kaggle.com/api/v1/datasets/download/dylanjcastillo/news-headlines-2024
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0 --:--:--     0
+100  225k  100  225k    0     0  33151      0  0:00:06  0:00:06 --:--:-- 62160:03  114k  0:00:07  0:00:06  0:00:01 66615    0  30519      0  0:00:07  0:00:06  0:00:01 61622
+</code></pre>
+<h2 id="Extract-Embeddings-to-Milvus" class="common-anchor-header">Milvusへの埋め込みデータ抽出<button data-href="#Extract-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +92,7 @@ $ pip install umap-learn
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusを使ってコレクションを作成し、BGE-M3モデルを使ってエンベッディングを抽出する。</p>
+    </button></h2><p>Milvusを使ってコレクションを作成し、BGE-M3モデルを使ってエンベッディングを抽出します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 <span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
@@ -103,11 +113,13 @@ embeddings = ef(docs)[<span class="hljs-string">&quot;dense&quot;</span>]
 connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<blockquote>
 <ul>
-<li>小規模なデータやプロトタイピングのためにローカルのベクトルデータベースが必要な場合、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利です。</li>
-<li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合、トークンには"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloud</a>を利用する場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
+<li>小規模なデータやプロトタイピングのためにローカルのベクトルデータベースが必要なだけであれば、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利です。</li>
+<li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンとして "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
+</blockquote>
 </div>
 <pre><code translate="no" class="language-python">fields = [
     FieldSchema(
@@ -135,7 +147,7 @@ collection.create_index(field_name=<span class="hljs-string">&quot;embedding&quo
 
 collection.flush()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Construct-the-Distance-Matrix-for-HDBSCAN" class="common-anchor-header">HDBSCAN用の距離行列の構築<button data-href="#Construct-the-Distance-Matrix-for-HDBSCAN" class="anchor-icon" translate="no">
+<h2 id="Construct-the-Distance-Matrix-for-HDBSCAN" class="common-anchor-header">HDBSCAN用距離マトリックスの構築<button data-href="#Construct-the-Distance-Matrix-for-HDBSCAN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,7 +162,7 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HDBSCANでは、クラスタリングのために点間の距離を計算する必要があり、計算量が多くなります。遠方の点はクラスタリング割り当てへの影響が少ないため、上位k個の最近傍点を計算することで効率を向上させることができます。この例では、FLATインデックスを使用していますが、大規模なデータセットの場合、Milvusは検索プロセスを高速化するために、より高度なインデックス手法をサポートしています。 まず、以前に作成したMilvusコレクションを反復するためのイテレータを取得する必要があります。</p>
+    </button></h2><p>HDBSCANでは、クラスタリングのために点間の距離を計算する必要があり、計算量が多くなります。離れた点はクラスタリングの割り当てにあまり影響しないため、上位k個の最近傍点を計算することで効率を向上させることができます。この例では、FLATインデックスを使用していますが、大規模なデータセットの場合、Milvusは検索プロセスを高速化するために、より高度なインデックス手法をサポートしています。 まず、以前に作成したMilvusコレクションを反復するためのイテレータを取得する必要があります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> hdbscan
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -268,6 +280,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>イメージ</span> </span></p>
 <p>ここでは、データがうまくクラスタ化されていることを示し、点の上にカーソルを置くと、それらが表すテキストを確認することができます。このノートブックで、HDBSCANを使ってMilvusで埋め込みデータを効率的にクラスタリングする方法を学んでいただければと思います。大規模な言語モデルと組み合わせることで、大規模なデータ分析が可能になります。</p>

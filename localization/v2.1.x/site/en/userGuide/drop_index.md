@@ -170,8 +170,8 @@ collection.drop_index()
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
-<li><a href="/docs/timetravel.md">Search with Time Travel</a></li>
+<li><a href="/docs/v2.1.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.1.x/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.1.x/timetravel.md">Search with Time Travel</a></li>
 </ul></li>
 </ul>

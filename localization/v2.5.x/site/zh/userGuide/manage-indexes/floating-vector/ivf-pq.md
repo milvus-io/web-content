@@ -53,14 +53,14 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-pq-1.png" alt="Ivf Pq 1" class="doc-image" id="ivf-pq-1" />
    </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
 <ol>
-<li><p><strong>维度分解</strong>：该算法首先将每个高维向量分解为<code translate="no">m</code> 大小相等的子向量。这种分解将原始的 D 维空间转化为<code translate="no">m</code> 不相交的子空间，其中每个子空间包含<em>D/m</em>维。参数<code translate="no">m</code> 控制分解的粒度，并直接影响压缩比。</p></li>
-<li><p><strong>子空间编码本生成</strong>：在每个子空间内，算法应用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚类</a>来学习一组代表性向量（中心点）。这些中心点集合起来就形成了该子空间的代码集。每个编码本中的中心点数量由参数<code translate="no">nbits</code> 决定，其中每个编码本包含 2^{textit{nbits}} 个中心点。例如，如果<code translate="no">nbits = 8</code> ，每个编码本将包含 256 个中心点。每个中心点都有一个唯一的索引，索引位数为<code translate="no">nbits</code> 。</p></li>
-<li><p><strong>向量</strong> <strong>量化</strong>：对于原始向量中的每个子向量，PQ 都会使用特定的度量类型在相应的子空间内识别其最近的中心点。这一过程可有效地将每个子向量映射到编码本中与其最接近的代表向量。PQ 不存储完整的子向量坐标，只保留匹配中心点的索引。</p></li>
+<li><p><strong>维度分解</strong>：该算法首先将每个高维向量分解为<code translate="no">m</code> 大小相等的子向量。这种分解将原始的 D 维空间转换为<code translate="no">m</code> 不相交的子空间，其中每个子空间包含<em>D/m</em>维。参数<code translate="no">m</code> 控制分解的粒度，并直接影响压缩比。</p></li>
+<li><p><strong>子空间编码本生成</strong>：在每个子空间内，算法应用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚类</a>来学习一组代表性向量（中心点）。这些中心点集合起来就形成了该子空间的代码集。每个编码本中的中心点数量由参数<code translate="no">nbits</code> 决定，其中每个编码本包含<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits 中心点。例如，如果</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code> ，每个编码本将包含 256 个中心点。每个中心点都有一个唯一的索引，索引位数为<code translate="no">nbits</code> 。</p></li>
+<li><p><strong>向量</strong> <strong>量化</strong>：对于原始向量中的每个子向量，PQ 使用特定的度量类型在相应的子空间内识别其最近的中心点。这一过程可有效地将每个子向量映射到编码本中与其最接近的代表向量。PQ 不存储完整的子向量坐标，只保留匹配中心点的索引。</p></li>
 <li><p><strong>压缩表示</strong>：最终的压缩表示由<code translate="no">m</code> 索引组成，每个子空间一个索引，统称为<strong>PQ 编码</strong>。这种编码方式将存储需求从<em>D × 32</em>位（假设为 32 位浮点数）减少到<em>m</em>×<em>nbits</em>位，在保留近似向量距离能力的同时实现了大幅压缩。</p></li>
 </ol>
 <p>有关参数调整和优化的更多详情，请参阅<a href="/docs/zh/ivf-pq.md#Index-params">索引参数</a>。</p>
 <div class="alert note">
-<p>考虑一个使用 32 位浮点数的<em>D = 128</em>维向量。在 PQ 参数<em>m = 64</em>（子向量）和<em>nbits = 8</em>（因此每个子空间<em>k =</em>2^8<em>= 256 个</em>中心点）的情况下，我们可以比较存储需求：</p>
+<p>考虑一个使用 32 位浮点数的<em>D = 128</em>维向量。在 PQ 参数<em>m = 64</em>（子向量）和<em>nbits = 8</em>（因此<em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>=</em>每个子空间<em> 256 个</em>中心点）的情况下，我们可以比较存储需求：</p>
 <ul>
 <li><p>原始向量：128 维 × 32 位 = 4,096 位</p></li>
 <li><p>PQ 压缩向量：64 个子向量 × 8 位 = 512 位</p></li>
@@ -73,8 +73,8 @@ summary: >-
 <li><p><strong>查询预处理</strong></p>
 <ul>
 <li><p>将查询向量分解为<code translate="no">m</code> 个子向量，与原始 PQ 分解结构相匹配。</p></li>
-<li><p>对于每个查询子向量及其对应的编码本（包含 2^{textit{nbits}} 中心点），计算并存储与所有中心点的距离。</p></li>
-<li><p>这将生成<code translate="no">m</code> 查找表，其中每个表包含 2^{textit{nbits}} 个距离。</p></li>
+<li><p>对于每个查询子向量及其对应的编码本（包含<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits 中心点），计算并存储与所有中心点的距离。</span></span></span></span></span></span></span></span></span></p></li>
+<li><p>这将生成<code translate="no">m</code> 查找表，其中每个表包含<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits 距离。</span></span></span></span></span></span></span></span></span></p></li>
 </ul></li>
 <li><p><strong>距离近似</strong></p>
 <p>对于任何由 PQ 代码表示的数据库向量，其与查询向量的近似距离计算如下：</p>
@@ -214,7 +214,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>用于以压缩形式表示每个子向量中心点索引的比特数。它直接决定了每个编码本的大小。每个编码本将包含 2^{textit{nbits}} 个中心点。例如，如果<code translate="no">nbits</code> 设置为 8，则每个子向量将由一个 8 位的中心点索引表示。这样，该子向量的编码本中就有 2^8 个（256）可能的中心点。</p></td>
+     <td><p>用于以压缩形式表示每个子向量中心点索引的比特数。它直接决定了每个编码本的大小。每个编码本将包含 $2^{textit{nbits}}$ 的中心点。例如，如果<code translate="no">nbits</code> 设置为 8，则每个子向量将由一个 8 位的中心点索引表示。这样，该子向量的编码本中就有 2^8$ (256) 个可能的中心点。</p></td>
      <td><p><strong>类型</strong>： 整数整数[1, 64]</p><p><strong>默认值</strong>：<code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> 值越大，编码本越大，可能会更精确地表示原始向量。不过，这也意味着要使用更多比特来存储每个索引，从而导致压缩率降低。在大多数情况下，我们建议在此范围内设置一个值：[1, 16].</p></td>
    </tr>

@@ -121,14 +121,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>Milvusクラスタにモニタリングサービスをデプロイした場合、次のことも学ぶとよいでしょう：<ul>
-<li><a href="/docs/ja/visualize.md">GrafanaでMilvusメトリクスを可視化する</a></li>
-<li><a href="/docs/ja/alert.md">Milvusサービスのアラートを作成する</a></li>
-<li><a href="/docs/ja/allocate.md">リソース割り当ての</a>調整</li>
+<li><a href="/docs/ja/v2.4.x/visualize.md">GrafanaでMilvusメトリクスを可視化する</a></li>
+<li><a href="/docs/ja/v2.4.x/alert.md">Milvusサービスのアラートを作成する</a></li>
+<li><a href="/docs/ja/v2.4.x/allocate.md">リソース割り当ての</a>調整</li>
 </ul></li>
 <li>Milvusクラスタをスケールする方法に関する情報をお探しの場合は、以下をご覧ください：<ul>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケールについて</a>学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/scaleout.md">Milvusクラスタのスケールについて</a>学ぶ</li>
 </ul></li>
 <li>Milvusのバージョンアップに興味がある場合、<ul>
-<li><a href="/docs/ja/upgrade_milvus_cluster-operator.md">Milvusクラスタのアップグレードガイド</a>および<a href="/docs/ja/upgrade_milvus_standalone-operator.md">Milvusスタンドアロンのアップグレードガイドを</a>お読みください。</li>
+<li><a href="/docs/ja/v2.4.x/upgrade_milvus_cluster-operator.md">Milvusクラスタのアップグレードガイド</a>および<a href="/docs/ja/v2.4.x/upgrade_milvus_standalone-operator.md">Milvusスタンドアロンのアップグレードガイドを</a>お読みください。</li>
 </ul></li>
 </ul>

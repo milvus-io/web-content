@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "Crear colección al instante",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "Ver colecciones",
             "id": "view-collections.md",
             "order": 3,
@@ -524,7 +518,19 @@
                   {
                     "label": "Jieba",
                     "id": "jieba-tokenizer.md",
-                    "order": 1,
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Lindera",
+                    "id": "lindera-tokenizer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "UCI",
+                    "id": "icu-tokenizer.md",
+                    "order": 4,
                     "children": []
                   }
                 ]
@@ -586,6 +592,18 @@
                     "label": "Stemmer",
                     "id": "stemmer-filter.md",
                     "order": 8,
+                    "children": []
+                  },
+                  {
+                    "label": "Eliminar punct",
+                    "id": "removepunct-filter.md",
+                    "order": 9,
+                    "children": []
+                  },
+                  {
+                    "label": "Regex",
+                    "id": "regex-filter.md",
+                    "order": 10,
                     "children": []
                   }
                 ]
@@ -922,6 +940,12 @@
             "label": "Géminis",
             "id": "embed-with-gemini.md",
             "order": 14,
+            "children": []
+          },
+          {
+            "label": "EmbedAnything",
+            "id": "build_RAG_with_milvus_and_embedAnything.md",
+            "order": 15,
             "children": []
           }
         ]
@@ -1837,6 +1861,18 @@
             "id": "llama_stack_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "n8n",
+            "id": "milvus_and_n8n.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "Cualquier cosaLLM",
+            "id": "use_milvus_in_anythingllm.md",
+            "order": 14,
+            "children": []
           }
         ]
       },
@@ -2109,7 +2145,7 @@
             "children": []
           },
           {
-            "label": "No estructurado",
+            "label": "Sin estructurar",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []

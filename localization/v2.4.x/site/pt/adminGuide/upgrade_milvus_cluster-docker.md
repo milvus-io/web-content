@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: Saiba como atualizar o cluster Milvus com o Docker Compose.
 title: Atualizar o cluster do Milvus com o Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/pt/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/pt/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/pt/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/pt/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/pt/configure-docker.md" class=''></a><a href="/docs/pt/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/pt/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/pt/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/pt/v2.4.x/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/pt/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/pt/v2.4.x/configure-docker.md" class=''></a><a href="/docs/pt/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">Atualizar o cluster do Milvus com o Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,11 +144,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>Você também pode querer aprender como:<ul>
-<li><a href="/docs/pt/scaleout.md">Escalar um cluster Milvus</a></li>
+<li><a href="/docs/pt/v2.4.x/scaleout.md">Escalar um cluster Milvus</a></li>
 </ul></li>
 <li>Se estiver pronto para implantar seu cluster em nuvens:<ul>
-<li>Saiba como <a href="/docs/pt/eks.md">implantar o Milvus no Amazon EKS com o Terraform</a></li>
-<li>Saiba como implantar <a href="/docs/pt/gcp.md">o Milvus Cluster no GCP com Kubernetes</a></li>
-<li>Saiba como <a href="/docs/pt/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
+<li>Saiba como <a href="/docs/pt/v2.4.x/eks.md">implantar o Milvus no Amazon EKS com o Terraform</a></li>
+<li>Saiba como implantar <a href="/docs/pt/v2.4.x/gcp.md">o Milvus Cluster no GCP com Kubernetes</a></li>
+<li>Saiba como <a href="/docs/pt/v2.4.x/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul></li>
 </ul>

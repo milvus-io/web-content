@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Wenn Sie eine Sammlung laden, lädt Milvus die Indexdateien und die Rohdaten aller Felder in den Speicher, um schnell auf Suchen und Abfragen reagieren zu können. Entitäten, die nach dem Laden einer Sammlung eingefügt werden, werden automatisch indiziert und geladen.</p>
-<p>Die folgenden Codeschnipsel demonstrieren, wie eine Sammlung geladen wird.</p>
+<p>Die folgenden Codeschnipsel zeigen, wie eine Sammlung geladen wird.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -293,7 +293,7 @@ fmt.Println(state)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># REST</span>
 Not support yet
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenn Sie sich dafür entscheiden, bestimmte Felder zu laden, ist zu beachten, dass nur die in <code translate="no">load_fields</code> enthaltenen Felder als Filter und Ausgabefelder in Suchen und Abfragen verwendet werden können. Sie sollten immer die Namen des Primärfeldes und mindestens ein Vektorfeld in <code translate="no">load_fields</code> aufnehmen.</p>
+<p>Wenn Sie sich dafür entscheiden, bestimmte Felder zu laden, sollten Sie beachten, dass nur die in <code translate="no">load_fields</code> enthaltenen Felder als Filter und Ausgabefelder in Suchen und Abfragen verwendet werden können. Sie sollten immer die Namen des Primärfeldes und mindestens ein Vektorfeld in <code translate="no">load_fields</code> aufnehmen.</p>
 <p>Sie können auch <code translate="no">skip_load_dynamic_field</code> verwenden, um zu bestimmen, ob das dynamische Feld geladen werden soll. Das dynamische Feld ist ein reserviertes JSON-Feld namens <strong>$meta</strong> und speichert alle nicht schema-definierten Felder und ihre Werte in Schlüssel-Wert-Paaren. Beim Laden des dynamischen Feldes werden alle Schlüssel in den Feldern geladen und stehen für die Filterung und Ausgabe zur Verfügung. Wenn nicht alle Schlüssel des dynamischen Feldes an der Filterung und Ausgabe von Metadaten beteiligt sind, setzen Sie <code translate="no">skip_load_dynamic_field</code> auf <code translate="no">True</code>.</p>
 <p>Um nach dem Laden der Sammlung weitere Felder zu laden, müssen Sie die Sammlung zuerst freigeben, um mögliche Fehler zu vermeiden, die aufgrund von Indexänderungen ausgelöst werden.</p>
 <h2 id="Release-Collection" class="common-anchor-header">Sammlung freigeben<button data-href="#Release-Collection" class="anchor-icon" translate="no">

@@ -37,7 +37,7 @@ title: ミルヴァス・ハイブリッド・サーチ・レトリバー
     </button></h2><blockquote>
 <p><a href="https://milvus.io/docs">Milvusは</a>オープンソースのベクターデータベースであり、類似検索やAIアプリケーションの組み込みに威力を発揮します。Milvusは非構造化データ検索をより身近なものにし、導入環境に関わらず一貫したユーザーエクスペリエンスを提供します。</p>
 </blockquote>
-<p>これは、密なベクトル検索と疎なベクトル検索の両方の長所を組み合わせたMilvusハイブリッド検索<a href="/docs/concepts/#retrievers">レトリバーを</a>使い始めるのに役立ちます。<code translate="no">MilvusCollectionHybridSearchRetriever</code> の全機能と設定に関する詳細なドキュメントは<a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">APIリファレンスを</a>ご覧ください。</p>
+<p>これは、密なベクトル検索と疎なベクトル検索の両方の長所を組み合わせたMilvusハイブリッド検索<a href="/docs/concepts/v2.4.x/#retrievers">レトリバーを</a>使い始めるのに役立ちます。<code translate="no">MilvusCollectionHybridSearchRetriever</code> の全機能と設定に関する詳細なドキュメントは<a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">APIリファレンスを</a>ご覧ください。</p>
 <p>また、Milvus Multi-Vector Searchの<a href="https://milvus.io/docs/multi-vector-search.md">ドキュメントも</a>ご参照ください。</p>
 <h3 id="Integration-details" class="common-anchor-header">統合の詳細</h3><table>
 <thead>

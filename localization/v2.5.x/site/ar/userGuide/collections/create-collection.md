@@ -65,7 +65,7 @@ summary: >-
 <p>يمكنك تعيين القيم الافتراضية لأي حقل قياسي وجعلها قابلة للإلغاء. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيس</a> <a href="#go">جو</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -406,9 +406,9 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك أيضًا إنشاء مجموعة بدون أي معلمات فهرس وإضافتها بعد ذلك. في هذه الحالة، لا يقوم ميلفوس بتحميل المجموعة عند إنشائها. .</p>
-<p>يوضح مقتطف الشيفرة التالي كيفية إنشاء مجموعة بدون مجموعة، وتبقى حالة تحميل المجموعة غير محملة عند الإنشاء.</p>
+<p>يوضح مقتطف الشيفرة التالي كيفية إنشاء مجموعة بدون فهرس، وتبقى حالة تحميل المجموعة غير محملة عند الإنشاء.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -503,7 +503,6 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يوفر ميلفوس أيضًا طريقة لإنشاء مجموعة على الفور. لمزيد من التفاصيل، راجع <a href="/docs/ar/create-collection-instantly.md">إنشاء مجموعة على الفور</a>.</p>
 <h2 id="Set-Collection-Properties" class="common-anchor-header">تعيين خصائص المجموعة<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -519,7 +518,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك تعيين خصائص للمجموعة المراد إنشاؤها لجعلها ملائمة لخدمتك. الخصائص القابلة للتطبيق هي كما يلي.</p>
+    </button></h2><p>يمكنك تعيين خصائص للمجموعة المراد إنشاؤها لجعلها ملائمة لخدمتك. الخصائص القابلة للتطبيق هي كالتالي.</p>
 <h3 id="Set-Shard-Number" class="common-anchor-header">تعيين رقم الشريحة</h3><p>الأجزاء هي شرائح أفقية للمجموعة. تتوافق كل شريحة مع قناة إدخال بيانات. تحتوي كل مجموعة على شريحة بشكل افتراضي. يمكنك تعيين العدد المناسب من الشرائح عند إنشاء مجموعة استنادًا إلى الإنتاجية المتوقعة وحجم البيانات المراد إدراجها في المجموعة.</p>
 <p>في الحالات الشائعة، ضع في اعتبارك زيادة عدد الأجزاء بمقدار جزء واحد في كل مرة يزيد فيها الإنتاجية المتوقعة بمقدار 500 ميجابايت/ثانية أو يزيد حجم البيانات المراد إدراجها بمقدار 100 جيجابايت. يستند هذا الاقتراح إلى تجربتنا الخاصة وقد لا يتناسب تمامًا مع سيناريوهات تطبيقك. يمكنك ضبط هذا الرقم ليناسب احتياجاتك الخاصة أو استخدام القيمة الافتراضية فقط.</p>
 <p>يوضح مقتطف الشيفرة التالي كيفية تعيين رقم الجزء عند إنشاء مجموعة.</p>
@@ -746,6 +745,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمعرفة المزيد عن مستويات الاتساق، راجع <a href="/docs/ar/consistency.md">مستوى الاتساق</a>.</p>
+<p>لمعرفة المزيد عن مستويات الاتساق، راجع <a href="/docs/ar/tune_consistency.md">مستوى الاتساق</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">تمكين الحقل الديناميكي</h3><p>الحقل الديناميكي في المجموعة هو حقل تدوين كائنات جافا سكريبت (JSON) محجوز باسم <strong>$meta</strong>. بمجرد تمكين هذا الحقل، يحفظ Milvus جميع الحقول غير المعرفة من قبل الهيكلية التي يحملها كل كيان وقيمها كأزواج قيمة مفتاح في الحقل المحجوز.</p>
 <p>للحصول على تفاصيل حول كيفية استخدام الحقل الديناميكي، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>

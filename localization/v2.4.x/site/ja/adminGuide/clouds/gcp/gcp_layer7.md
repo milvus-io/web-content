@@ -26,9 +26,9 @@ summary: GCP上のLayer-7ロードバランサーの背後にMilvusクラスタ�
 <p>プロジェクトを作成するには、<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">プロジェクトの作成と</a>管理を参照してください。このガイドで使用するプロジェクトの名前は<strong>milvus-testing-nonprod</strong> です。</p></li>
 <li><p><a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>、<a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>、および<a href="https://helm.sh/docs/intro/install/">Helm を</a>ローカルにインストールしたか、代わりにブラウザベースの<a href="https://cloud.google.com/shell">Cloud Shell</a>を使用することにしました。</p></li>
 <li><p>GCP アカウント認証情報を使用して<a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">gcloud CLI を初期化</a>しました。</p></li>
-<li><p><a href="/docs/ja/gcp.md">GCP上のLayer-4ロードバランサーの背後にMilvusクラスタをデプロイ</a>しました。</p></li>
+<li><p><a href="/docs/ja/v2.4.x/gcp.md">GCP上のLayer-4ロードバランサーの背後にMilvusクラスタをデプロイ</a>しました。</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus設定の微調整</h3><p>このガイドでは、<a href="/docs/ja/gcp.md">GCP上のLayer-4ロードバランサの背後にMilvusクラスタをデプロイ</a>済みであることを前提としています。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus設定の微調整</h3><p>このガイドでは、<a href="/docs/ja/v2.4.x/gcp.md">GCP上のLayer-4ロードバランサの背後にMilvusクラスタをデプロイ</a>済みであることを前提としています。</p>
 <p>このMilvusクラスタにLayer-7ロードバランサをセットアップする前に、以下のコマンドを実行してLayer-4ロードバランサを削除してください。</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

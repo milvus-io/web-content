@@ -328,7 +328,7 @@ resource <span class="hljs-string">&quot;aws_route_table_association&quot;</span
       </svg>
     </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
 <ul>
-<li><a href="/docs/eks.md">Deploy a Milvus Cluster on EKS</a></li>
-<li><a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li><a href="/docs/azure.md">Guide to Deploying Milvus on Microsoft Azure With Kubernetes</a></li>
+<li><a href="/docs/v2.0.x/eks.md">Deploy a Milvus Cluster on EKS</a></li>
+<li><a href="/docs/v2.0.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li><a href="/docs/v2.0.x/azure.md">Guide to Deploying Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul>

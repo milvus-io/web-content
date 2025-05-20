@@ -37,7 +37,7 @@ title: Conduct Vision Searches with Milvus and FiftyOne
       </svg>
     </button></h2><p>Before starting, make sure you have the following:</p>
 <ul>
-<li>A running <a href="/docs/install_standalone-docker.md">Milvus server</a>.</li>
+<li>A running <a href="/docs/v2.3.x/install_standalone-docker.md">Milvus server</a>.</li>
 <li>A Python environment with <code translate="no">pymilvus</code> and <code translate="no">fiftyone</code> installed.</li>
 <li>A <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">dataset</a> of images to search.</li>
 </ul>
@@ -262,7 +262,7 @@ milvus_index = fob.compute_similarity(
 <li><p><strong>metric</strong> (<em>“dotproduct”</em>): the embedding distance metric to use when creating a new index. The supported values are (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong> (<em>“Session”</em>): the consistency level to use. Supported values are (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>For detailed information on these parameters, see the <a href="/docs/authenticate.md">Milvus authentication documentation</a> and <a href="/docs/consistency.md">Milvus consistency levels documentation</a>.</p>
+<p>For detailed information on these parameters, see the <a href="/docs/v2.3.x/authenticate.md">Milvus authentication documentation</a> and <a href="/docs/v2.3.x/consistency.md">Milvus consistency levels documentation</a>.</p>
 <p>You can specify these parameters via any of the strategies described in the previous section. Here’s an example of a <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">brain config</a> that includes all of the available parameters:</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {

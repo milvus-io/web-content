@@ -60,7 +60,7 @@ summary: Learn how to deploy a Milvus cluster on GCP.
       </svg>
     </button></h2><p>Ensure that you create a virtual private cloud (VPC) before creating a firewall rule for Milvus.
 <br>
-If you already have a VPC that you want to use, proceed to <a href="/docs/gcp.md#Create-a-firewall-rule-for-Milvus">Create a firewall rule for Milvus </a>.</p>
+If you already have a VPC that you want to use, proceed to <a href="/docs/v2.0.x/gcp.md#Create-a-firewall-rule-for-Milvus">Create a firewall rule for Milvus </a>.</p>
 <h3 id="Create-a-VPC" class="common-anchor-header">Create a VPC</h3><p>Open a terminal and run the following command to create a VPC.</p>
 <div class="alert note">
 Replace <code translate="no">milvus-testing-nonprod</code> with your project name.
@@ -228,7 +228,7 @@ If you choose <code translate="no">accesskey</code> and <code translate="no">sec
       </svg>
     </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
 <ul>
-<li><a href="/docs/aws.md">Deploy a Milvus Cluster on EC2</a></li>
-<li><a href="/docs/eks.md">Deploy a Milvus Cluster on EKS</a></li>
-<li><a href="/docs/azure.md">Deploy a Milvus Cluster on Azure</a></li>
+<li><a href="/docs/v2.0.x/aws.md">Deploy a Milvus Cluster on EC2</a></li>
+<li><a href="/docs/v2.0.x/eks.md">Deploy a Milvus Cluster on EKS</a></li>
+<li><a href="/docs/v2.0.x/azure.md">Deploy a Milvus Cluster on Azure</a></li>
 </ul>

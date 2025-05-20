@@ -19,9 +19,9 @@ title: Índice na memória
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este tópico lista os vários tipos de índices em memória que o Milvus suporta, os cenários que cada um deles melhor se adequa e os parâmetros que os utilizadores podem configurar para obter um melhor desempenho de pesquisa. Para índices no disco, veja <strong><a href="/docs/pt/disk_index.md">Índice no disco</a></strong>.</p>
+    </button></h1><p>Este tópico lista os vários tipos de índices em memória que o Milvus suporta, os cenários que cada um deles melhor se adequa e os parâmetros que os utilizadores podem configurar para obter um melhor desempenho de pesquisa. Para índices no disco, veja <strong><a href="/docs/pt/v2.4.x/disk_index.md">Índice no disco</a></strong>.</p>
 <p>A indexação é o processo de organização eficiente dos dados e desempenha um papel importante na utilidade da pesquisa por similaridade, acelerando drasticamente as consultas demoradas em grandes conjuntos de dados.</p>
-<p>Para melhorar o desempenho da consulta, é possível <a href="/docs/pt/index-vector-fields.md">especificar um tipo de índice</a> para cada campo de vetor.</p>
+<p>Para melhorar o desempenho da consulta, é possível <a href="/docs/pt/v2.4.x/index-vector-fields.md">especificar um tipo de índice</a> para cada campo de vetor.</p>
 <div class="alert note">
 Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimina automaticamente o índice antigo quando muda o tipo de índice.</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">Índices vectoriais ANNS<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +60,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <div class="filter">
  <a href="#floating">Incorporações de vírgula flutuante</a> <a href="#binary">Incorporações binárias</a> <a href="#sparse">Incorporações esparsas</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incorporações de vírgula flutuante</h3><p>Para as incorporações de vírgula flutuante de 128 dimensões (vectores), o armazenamento que ocupam é 128 * o tamanho da vírgula flutuante = 512 bytes. E as <a href="/docs/pt/metric.md">métricas de distância</a> utilizadas para as incorporações de vírgula flutuante são a distância euclidiana (<code translate="no">L2</code>) e o produto interno (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incorporações de vírgula flutuante</h3><p>Para as incorporações de vírgula flutuante de 128 dimensões (vectores), o armazenamento que ocupam é 128 * o tamanho da vírgula flutuante = 512 bytes. E as <a href="/docs/pt/v2.4.x/metric.md">métricas de distância</a> utilizadas para as incorporações de vírgula flutuante são a distância euclidiana (<code translate="no">L2</code>) e o produto interno (<code translate="no">IP</code>).</p>
 <p>Estes tipos de índices incluem <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, e <code translate="no">SCANN</code> para pesquisas ANN baseadas em CPU.</p>
 </div>
 <div class="filter-binary">
@@ -218,7 +218,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tr><th>Parâmetro</th><th>Descrição</th><th>Distância</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Opcional] A métrica de distância escolhida.</td><td>Ver <a href="/docs/pt/metric.md">Métricas suportadas</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Opcional] A métrica de distância escolhida.</td><td>Ver <a href="/docs/pt/v2.4.x/metric.md">Métricas suportadas</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -418,7 +418,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Distância</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Opcional] A métrica de distância escolhida.</td><td>Ver <a href="/docs/pt/metric.md">Métricas suportadas</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Opcional] A métrica de distância escolhida.</td><td>Ver <a href="/docs/pt/v2.4.x/metric.md">Métricas suportadas</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -488,7 +488,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">VARINHA_ESPECÍFICA</h3><p>Este índice partilha semelhanças com <code translate="no">SPARSE_INVERTED_INDEX</code>, embora utilize o algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> para reduzir ainda mais o número de avaliações da distância IP completa durante o processo de pesquisa.</p>
-<p>Com base nos nossos testes, <code translate="no">SPARSE_WAND</code> supera geralmente os outros métodos em termos de velocidade. No entanto, o seu desempenho pode deteriorar-se rapidamente à medida que a densidade dos vectores aumenta. Para resolver este problema, a introdução de um <code translate="no">drop_ratio_search</code> diferente de zero pode melhorar significativamente o desempenho, incorrendo apenas numa perda mínima de precisão. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p>
+<p>Com base nos nossos testes, <code translate="no">SPARSE_WAND</code> supera geralmente os outros métodos em termos de velocidade. No entanto, o seu desempenho pode deteriorar-se rapidamente à medida que a densidade dos vectores aumenta. Para resolver este problema, a introdução de um <code translate="no">drop_ratio_search</code> diferente de zero pode melhorar significativamente o desempenho, incorrendo apenas numa perda mínima de precisão. Para mais informações, consulte <a href="/docs/pt/v2.4.x/sparse_vector.md">Vetor esparso</a>.</p>
 <ul>
 <li><p>Parâmetros de construção de índices</p>
 <table>
@@ -551,5 +551,5 @@ Para mais informações, consulte <a href="https://medium.com/unstructured-data-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Saiba mais sobre as <a href="/docs/pt/metric.md">métricas de similaridade</a> suportadas no Milvus.</li>
+<li>Saiba mais sobre as <a href="/docs/pt/v2.4.x/metric.md">métricas de similaridade</a> suportadas no Milvus.</li>
 </ul>

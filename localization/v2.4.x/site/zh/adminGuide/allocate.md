@@ -19,7 +19,7 @@ summary: 了解如何在 Kubernetes 上为 Milvus 分配资源。
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何在 Kubernetes 上为 Milvus 群集分配资源。</p>
-<p>一般来说，在生产中分配给 Milvus 集群的资源应与机器工作量成比例。分配资源时还应考虑机器类型。虽然您可以在群集运行时更新配置，但我们建议您在<a href="/docs/zh/install_cluster-helm.md">部署群集</a>之前设置这些值。</p>
+<p>一般来说，在生产中分配给 Milvus 集群的资源应与机器工作量成比例。分配资源时还应考虑机器类型。虽然您可以在群集运行时更新配置，但我们建议您在<a href="/docs/zh/v2.4.x/install_cluster-helm.md">部署群集</a>之前设置这些值。</p>
 <div class="alert note">
 <p>有关如何使用 Milvus Operator<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">分配资源的</a>信息，请参阅<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">使用 Milvus Operator 分配资源</a>。</p>
 </div>
@@ -59,8 +59,8 @@ summary: 了解如何在 Kubernetes 上为 Milvus 分配资源。
 使用 Helm 升级资源将导致正在运行的 pod 执行滚动更新。</div>
 <p>分配资源有两种方法：</p>
 <ul>
-<li><a href="/docs/zh/allocate.md#Allocate-resources-with-commands">使用以下命令</a></li>
-<li><a href="/docs/zh/allocate.md#Allocate-resources-by-setting-configuration-file">在<code translate="no">YAML</code> 文件中设置参数</a></li>
+<li><a href="/docs/zh/v2.4.x/allocate.md#Allocate-resources-with-commands">使用以下命令</a></li>
+<li><a href="/docs/zh/v2.4.x/allocate.md#Allocate-resources-by-setting-configuration-file">在<code translate="no">YAML</code> 文件中设置参数</a></li>
 </ul>
 <h3 id="Allocate-resources-with-commands" class="common-anchor-header">使用命令分配资源</h3><p>如果使用<code translate="no">--set</code> 更新资源配置，则需要为每个 Milvus 组件设置资源变量。</p>
 <div class="filter">
@@ -129,13 +129,13 @@ summary: 了解如何在 Kubernetes 上为 Milvus 分配资源。
       </svg>
     </button></h2><ul>
 <li>你可能还想了解如何<ul>
-<li><a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a></li>
-<li><a href="/docs/zh/upgrade_milvus_cluster-operator.md">升级 Milvus 集群</a></li>
-<li><a href="/docs/zh/upgrade_milvus_standalone-operator.md">升级 Milvus 独立服务器</a></li>
+<li><a href="/docs/zh/v2.4.x/scaleout.md">扩展 Milvus 集群</a></li>
+<li><a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-operator.md">升级 Milvus 集群</a></li>
+<li><a href="/docs/zh/v2.4.x/upgrade_milvus_standalone-operator.md">升级 Milvus 独立服务器</a></li>
 </ul></li>
 <li>如果你已准备好在云上部署集群：<ul>
-<li>了解如何<a href="/docs/zh/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
-<li>了解如何<a href="/docs/zh/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
-<li>了解如何<a href="/docs/zh/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
+<li>了解如何<a href="/docs/zh/v2.4.x/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
+<li>了解如何<a href="/docs/zh/v2.4.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
+<li>了解如何<a href="/docs/zh/v2.4.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
 </ul></li>
 </ul>

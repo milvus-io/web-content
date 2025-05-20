@@ -77,7 +77,7 @@ summary: >-
 <li>Unsere Roadmap ist in der Regel in drei Teile gegliedert: die letzte Version, die nächste bevorstehende Version und eine mittel- bis langfristige Vision innerhalb des nächsten Jahres.</li>
 <li>Während wir Fortschritte machen, lernen wir ständig dazu und passen gelegentlich unseren Fokus an, indem wir Elemente hinzufügen oder entfernen, wenn es nötig ist.</li>
 <li>Diese Pläne sind unverbindlich und können je nach Abonnement variieren.</li>
-<li>Wir halten uns strikt an unsere Roadmap, wobei unsere <a href="/docs/de/release_notes.md">Versionshinweise</a> als Referenz dienen.</li>
+<li>Wir halten uns strikt an unsere Roadmap, wobei unsere <a href="/docs/de/v2.4.x/release_notes.md">Versionshinweise</a> als Referenz dienen.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">Wie Sie beitragen können<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

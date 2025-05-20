@@ -39,9 +39,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Dans Milvus, vous pouvez créer un schéma de collection en définissant les noms et les types de données de chaque champ de la collection. Lorsque vous ajoutez un champ au schéma, assurez-vous que ce champ est inclus dans l'entité que vous avez l'intention d'insérer. Si vous souhaitez que certains champs soient facultatifs, vous pouvez activer le champ dynamique.</p>
-<p>Le champ dynamique est un champ réservé nommé <code translate="no">$meta</code>, qui est de type JavaScript Object Notation (JSON). Tous les champs des entités qui ne sont pas définis dans le schéma seront stockés dans ce champ JSON réservé sous forme de paires clé-valeur.</p>
+<p>Le champ dynamique est un champ réservé nommé <strong>$meta</strong>, qui est de type JavaScript Object Notation (JSON). Tous les champs des entités qui ne sont pas définis dans le schéma seront stockés dans ce champ JSON réservé sous forme de paires clé-valeur.</p>
 <p>Pour une collection dont le champ dynamique est activé, vous pouvez utiliser les clés du champ dynamique pour le filtrage scalaire, comme vous le feriez avec des champs explicitement définis dans le schéma.</p>
-<h2 id="Enable-dynamic-field" class="common-anchor-header">Activer le champ dynamique<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="Enable-dynamic-field" class="common-anchor-header">Activation du champ dynamique<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +56,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les collections créées à l'aide de la méthode décrite dans la section <a href="/docs/fr/create-collection-instantly.md">Créer une collection instantanément</a> ont le champ dynamique activé par défaut. Vous pouvez également activer le champ dynamique manuellement lors de la création d'une collection avec des paramètres personnalisés.</p>
+    </button></h2><p>Vous pouvez activer le champ dynamique manuellement lors de la création d'une collection avec des paramètres personnalisés.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

@@ -37,7 +37,7 @@ title: 快速入门
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本指南中，我们使用 Milvus Lite，它是<code translate="no">pymilvus</code> 中包含的一个 python 库，可以嵌入到客户端应用程序中。Milvus 还支持在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>上部署，适用于生产用例。</p>
+    </button></h2><p>在本指南中，我们使用 Milvus Lite，它是<code translate="no">pymilvus</code> 中包含的一个 python 库，可以嵌入到客户端应用程序中。Milvus 还支持在<a href="/docs/zh/v2.4.x/install_standalone-docker.md">Docker</a>和<a href="/docs/zh/v2.4.x/install_cluster-milvusoperator.md">Kubernetes</a>上部署，适用于生产用例。</p>
 <p>开始之前，请确保本地环境中有 Python 3.8+ 可用。安装<code translate="no">pymilvus</code> ，其中包含 python 客户端库和 Milvus Lite：</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
@@ -61,10 +61,10 @@ title: 快速入门
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要创建本地的 Milvus 向量数据库，只需实例化一个<code translate="no">MilvusClient</code> ，指定一个存储所有数据的文件名，如 &quot;milvus_demo.db&quot;。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+    </button></h2><p>要创建本地的 Milvus 向量数据库，只需实例化一个<code translate="no">MilvusClient</code> ，指定一个文件名来存储所有数据，如 "milvus_demo.db"。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
+client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Create-a-Collection" class="common-anchor-header">创建 Collections<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,8 +92,8 @@ client.create_collection(
 <p>在上述设置中</p>
 <ul>
 <li>主键和向量字段使用默认名称（"id "和 "vector"）。</li>
-<li>度量类型（向量距离定义）设置为默认值<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">（COSINE</a>）。</li>
-<li>主键字段接受整数，且不自动递增（即不使用<a href="https://milvus.io/docs/schema.md">自动 ID 功能</a>）。 或者，您也可以按照此<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">说明</a>正式定义 Collections 的 Schema。</li>
+<li>度量类型（向量距离定义）设置为默认值<a href="/docs/zh/v2.4.x/metric.md#Cosine-Similarity">（COSINE</a>）。</li>
+<li>主键字段接受整数，且不自动递增（即不使用<a href="/docs/zh/v2.4.x/schema.md">自动 ID 功能</a>）。 或者，您也可以按照此<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">说明</a>正式定义 Collections 的 Schema。</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">准备数据<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -160,9 +160,9 @@ data = [
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Vector dim:&quot;</span>, <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;vector&quot;</span>]))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-title class_">Dim</span>: <span class="hljs-number">768</span> (<span class="hljs-number">768</span>,)
-<span class="hljs-title class_">Data</span> has <span class="hljs-number">3</span> entities, each <span class="hljs-keyword">with</span> <span class="hljs-attr">fields</span>:  <span class="hljs-title function_">dict_keys</span>([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
-<span class="hljs-title class_">Vector</span> <span class="hljs-attr">dim</span>: <span class="hljs-number">768</span>
+<pre><code translate="no">Dim: <span class="hljs-number">768</span> (<span class="hljs-number">768</span>,)
+Data has <span class="hljs-number">3</span> entities, <span class="hljs-keyword">each</span> <span class="hljs-keyword">with</span> fields:  dict_keys([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
+Vector dim: <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Alternatively-Use-fake-representation-with-random-vectors" class="common-anchor-header">[另一种方法] 使用随机向量的假表示法<button data-href="#Alternatively-Use-fake-representation-with-random-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -198,8 +198,8 @@ data = [
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Vector dim:&quot;</span>, <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;vector&quot;</span>]))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-title class_">Data</span> has <span class="hljs-number">3</span> entities, each <span class="hljs-keyword">with</span> <span class="hljs-attr">fields</span>:  <span class="hljs-title function_">dict_keys</span>([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
-<span class="hljs-title class_">Vector</span> <span class="hljs-attr">dim</span>: <span class="hljs-number">768</span>
+<pre><code translate="no">Data has <span class="hljs-number">3</span> entities, <span class="hljs-keyword">each</span> <span class="hljs-keyword">with</span> fields:  dict_keys([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
+Vector dim: <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-Data" class="common-anchor-header">插入数据<button data-href="#Insert-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +221,7 @@ data = [
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{<span class="hljs-string">&#x27;insert_count&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;ids&#x27;</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], <span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
+<pre><code translate="no">{<span class="hljs-string">&#x27;insert_count&#x27;</span>: 3, <span class="hljs-string">&#x27;ids&#x27;</span>: [0, 1, 2], <span class="hljs-string">&#x27;cost&#x27;</span>: 0}
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Semantic-Search" class="common-anchor-header">语义搜索<button data-href="#Semantic-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -253,7 +253,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , <span class="hljs-attr">extra_info</span>: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
+<pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
 <p>输出结果是一个结果列表，每个结果映射到一个向量搜索查询。每个查询都包含一个结果列表，其中每个结果都包含实体主键、到查询向量的距离以及指定<code translate="no">output_fields</code> 的实体详细信息。</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">带元数据过滤的向量搜索<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
@@ -297,11 +297,11 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , <span class="hljs-attr">extra_info</span>: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
+<pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>默认情况下，标量字段不编制索引。如果需要在大型数据集中执行元数据过滤搜索，可以考虑使用固定 Schema，同时打开<a href="https://milvus.io/docs/scalar_index.md">索引</a>以提高搜索性能。</p>
+<p>默认情况下，标量字段不编制索引。如果需要在大型数据集中执行元数据过滤搜索，可以考虑使用固定 Schema，同时打开<a href="/docs/zh/v2.4.x/scalar_index.md">索引</a>以提高搜索性能。</p>
 <p>除了向量搜索，还可以执行其他类型的搜索：</p>
-<h3 id="Query" class="common-anchor-header">查询</h3><p>查询()是一种操作符，用于检索与某个条件（如<a href="https://milvus.io/docs/boolean.md">过滤表达式</a>或与某些 id 匹配）相匹配的所有实体。</p>
+<h3 id="Query" class="common-anchor-header">查询</h3><p>查询()是一种操作符，用于检索与某个条件（如<a href="/docs/zh/v2.4.x/boolean.md">过滤表达式</a>或与某些 id 匹配）相匹配的所有实体。</p>
 <p>例如，检索标量字段具有特定值的所有实体：</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -310,7 +310,7 @@ res = client.search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>通过主键直接检索实体</p>
-<pre><code translate="no" class="language-python">res = client.<span class="hljs-title function_">query</span>(
+<pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
@@ -364,9 +364,9 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>由于 Milvus Lite 的所有数据都存储在本地文件中，因此即使在程序终止后，你也可以通过创建一个带有现有文件的<code translate="no">MilvusClient</code> ，将所有数据加载到内存中。例如，这将恢复 "milvus_demo.db "文件中的 Collections，并继续向其中写入数据。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
+client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-the-collection" class="common-anchor-header">删除 Collections<button data-href="#Drop-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -383,7 +383,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果想删除某个 Collections 中的所有数据，可以通过以下方法丢弃该 Collections</p>
+    </button></h2><p>如果想删除 Collections 中的所有数据，可以通过以下方法删除 Collections</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Drop collection</span>
 client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -402,7 +402,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite 非常适合从本地 python 程序入门。如果你有大规模数据或想在生产中使用 Milvus，你可以了解在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。Milvus 的所有部署模式都共享相同的 API，因此如果转向其他部署模式，你的客户端代码不需要做太大改动。只需指定部署在任何地方的 Milvus 服务器的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI 和令牌</a>即可：</p>
-<pre><code translate="no" class="language-python">client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+    </button></h2><p>Milvus Lite 非常适合从本地 python 程序入门。如果你有大规模数据或想在生产中使用 Milvus，你可以了解在<a href="/docs/zh/v2.4.x/install_standalone-docker.md">Docker</a>和<a href="/docs/zh/v2.4.x/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。Milvus 的所有部署模式都共享相同的 API，因此如果转向其他部署模式，你的客户端代码不需要做太大改动。只需指定部署在任何地方的 Milvus 服务器的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI 和令牌</a>即可：</p>
+<pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 提供 REST 和 gRPC API，并提供<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a>、C# 和<a href="https://milvus.io/docs/install-node.md">Node.js</a> 等语言的客户端库。</p>
+<p>Milvus 提供 REST 和 gRPC API，并提供<a href="/docs/zh/v2.4.x/install-pymilvus.md">Python</a>、<a href="/docs/zh/v2.4.x/install-java.md">Java</a>、<a href="/docs/zh/v2.4.x/install-go.md">Go</a>、C# 和<a href="/docs/zh/v2.4.x/install-node.md">Node.js</a> 等语言的客户端库。</p>

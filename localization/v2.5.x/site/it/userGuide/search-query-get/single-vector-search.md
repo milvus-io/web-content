@@ -8,8 +8,7 @@ summary: >-
   interrogazione contenuto in una richiesta di ricerca ricevuta, confronta il
   vettore di interrogazione con quelli del sottogruppo e restituisce i risultati
   più simili. Con la ricerca ANN, Milvus offre un'esperienza di ricerca
-  efficiente. Questa pagina aiuta ad apprendere come condurre ricerche ANN di
-  base.
+  efficiente. Questa pagina vi aiuta a imparare a condurre ricerche ANN di base.
 ---
 <h1 id="Basic-Vector-Search" class="common-anchor-header">Ricerca vettoriale di base<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +72,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Nelle ricerche ANN, una ricerca a vettore singolo si riferisce a una ricerca che coinvolge un solo vettore di interrogazione. In base all'indice pre-costruito e al tipo di metrica inserita nella richiesta di ricerca, Milvus troverà i primi K vettori più simili al vettore di interrogazione.</p>
-<p>In questa sezione si spiegherà come condurre una ricerca a vettore singolo. Lo snippet di codice presuppone che sia stata creata una collezione in modo <a href="/docs/it/create-collection-instantly.md#Quick-Setup">rapido</a>. La richiesta di ricerca contiene un singolo vettore di interrogazione e chiede a Milvus di usare l'Inner Product (IP) per calcolare la somiglianza tra i vettori di interrogazione e i vettori dell'insieme e restituire i tre più simili.</p>
+<p>In questa sezione si spiega come condurre una ricerca a vettore singolo. La richiesta di ricerca contiene un singolo vettore di interrogazione e chiede a Milvus di utilizzare il prodotto interno (IP) per calcolare la somiglianza tra i vettori di interrogazione e i vettori della collezione e restituire i tre più simili.</p>
 <div class="multipleCode">
    <a href="#python">Pitone</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -252,7 +251,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus classifica i risultati della ricerca in base al punteggio di somiglianza con il vettore della query in ordine decrescente. Il punteggio di somiglianza è anche definito distanza dal vettore di query e i suoi valori variano a seconda dei tipi di metrica utilizzati.</p>
+<p>Milvus classifica i risultati della ricerca in base al punteggio di somiglianza con il vettore della query in ordine decrescente. Il punteggio di somiglianza è anche chiamato distanza dal vettore di query e i suoi valori variano a seconda dei tipi di metrica utilizzati.</p>
 <p>La tabella seguente elenca i tipi di metrica applicabili e i corrispondenti intervalli di distanza.</p>
 <table>
    <tr>
@@ -972,13 +971,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX appiattisce notevolmente la curva di apprendimento delle ricerche di RNA. Tuttavia, i risultati della ricerca potrebbero non essere sempre corretti con l'aumentare del top-K. Riducendo la portata della ricerca, migliorando la pertinenza dei risultati e diversificando i risultati, Milvus elabora i seguenti miglioramenti della ricerca.</p>
+    </button></h2><p>AUTOINDEX appiattisce notevolmente la curva di apprendimento delle ricerche ANN. Tuttavia, i risultati della ricerca potrebbero non essere sempre corretti con l'aumentare del top-K. Riducendo la portata della ricerca, migliorando la pertinenza dei risultati e diversificando i risultati, Milvus elabora i seguenti miglioramenti della ricerca.</p>
 <ul>
 <li><p>Ricerca filtrata</p>
 <p>È possibile includere condizioni di filtraggio in una richiesta di ricerca, in modo che Milvus effettui un filtraggio dei metadati prima di effettuare ricerche sull'RNA, riducendo l'ambito di ricerca dall'intera raccolta alle sole entità che corrispondono alle condizioni di filtraggio specificate.</p>
-<p>Per ulteriori informazioni sul filtraggio dei metadati e sulle condizioni di filtraggio, consultare <a href="/docs/it/filtered-search.md">Ricerca filtrata</a> e <a href="/docs/it/filtering">Filtraggio</a>.</p></li>
+<p>Per ulteriori informazioni sul filtraggio dei metadati e sulle condizioni di filtraggio, consultare <a href="/docs/it/filtered-search.md">Ricerca filtrata</a>, <a href="/docs/it/boolean.md">Filtraggio spiegato</a> e gli argomenti correlati.</p></li>
 <li><p>Ricerca per intervallo</p>
-<p>È possibile migliorare la pertinenza dei risultati della ricerca limitando la distanza o il punteggio delle entità restituite all'interno di un intervallo specifico. In Milvus, una ricerca per intervallo comporta il disegno di due cerchi concentrici con al centro l'incorporamento vettoriale più simile al vettore della query. La richiesta di ricerca specifica il raggio di entrambi i cerchi e Milvus restituisce tutte le incorporazioni vettoriali che rientrano nel cerchio esterno ma non in quello interno.</p>
+<p>È possibile migliorare la pertinenza dei risultati della ricerca limitando la distanza o il punteggio delle entità restituite all'interno di un intervallo specifico. In Milvus, una ricerca per intervallo comporta il disegno di due cerchi concentrici con al centro l'incorporamento vettoriale più simile al vettore di interrogazione. La richiesta di ricerca specifica il raggio di entrambi i cerchi e Milvus restituisce tutte le incorporazioni vettoriali che rientrano nel cerchio esterno ma non in quello interno.</p>
 <p>Per ulteriori informazioni sulla ricerca per intervallo, consultare la sezione <a href="/docs/it/range-search.md">Ricerca per intervallo</a>.</p></li>
 <li><p>Ricerca per raggruppamento</p>
 <p>Se le entità restituite hanno lo stesso valore in un campo specifico, i risultati della ricerca potrebbero non rappresentare la distribuzione di tutte le incorporazioni vettoriali nello spazio vettoriale. Per diversificare i risultati della ricerca, si può utilizzare la ricerca per raggruppamento.</p>

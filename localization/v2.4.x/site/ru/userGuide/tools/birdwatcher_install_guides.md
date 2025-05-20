@@ -34,7 +34,7 @@ title: Установите Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если вы установили Milvus Standalone <a href="/docs/ru/install_standalone-docker.md">с помощью docker</a>, вам лучше скачать и установить собранный бинарник, установить Birdwatcher как обычный модуль Go или собрать Birdwatcher из исходников.</p>
+    </button></h2><p>Если вы установили Milvus Standalone <a href="/docs/ru/v2.4.x/install_standalone-docker.md">с помощью docker</a>, вам лучше скачать и установить собранный бинарник, установить Birdwatcher как обычный модуль Go или собрать Birdwatcher из исходников.</p>
 <ul>
 <li><p>Установите его как обычный модуль Go.</p>
 <pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/milvus-io/birdwatcher.git
@@ -77,7 +77,7 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если вы установили либо Milvus Standalone <a href="/docs/ru/install_standalone-helm.md">с помощью диаграмм Helm</a> или <a href="/docs/ru/install_standalone-operator.md">Milvus Operator</a>, либо Milvus Cluster <a href="/docs/ru/install_cluster-helm.md">с помощью диаграмм Helm</a> или <a href="/docs/ru/install_cluster-milvusoperator.md">Milvus Operator</a>, вам рекомендуется установить Birdwatcher в качестве капсулы Kubernetes.</p>
+    </button></h2><p>Если вы установили либо Milvus Standalone <a href="/docs/ru/v2.4.x/install_standalone-helm.md">с помощью диаграмм Helm</a> или <a href="/docs/ru/v2.4.x/install_standalone-operator.md">Milvus Operator</a>, либо Milvus Cluster <a href="/docs/ru/v2.4.x/install_cluster-helm.md">с помощью диаграмм Helm</a> или <a href="/docs/ru/v2.4.x/install_cluster-milvusoperator.md">Milvus Operator</a>, вам рекомендуется установить Birdwatcher в качестве капсулы Kubernetes.</p>
 <h3 id="Prepare-deploymentyml" class="common-anchor-header">Подготовьте deployment.yml</h3><pre><code translate="no" class="language-yml">apiVersion: apps/v1
 kind: Deployment
 metadata:

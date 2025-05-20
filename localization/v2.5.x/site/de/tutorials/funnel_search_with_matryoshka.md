@@ -24,26 +24,12 @@ title: Trichtersuche mit Matryoshka-Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Beim Aufbau effizienter Vektorsuchsysteme besteht eine der größten Herausforderungen darin, die Speicherkosten zu bewältigen und gleichzeitig eine akzeptable Latenzzeit und Wiederauffindbarkeit zu gewährleisten. Moderne Einbettungsmodelle geben Vektoren mit Hunderten oder Tausenden von Dimensionen aus, was zu einem erheblichen Speicher- und Rechenaufwand für den Rohvektor und den Index führt.</p>
-<p>Traditionell wird der Speicherbedarf durch die Anwendung einer Quantisierungs- oder Dimensionalitätsreduzierungsmethode unmittelbar vor dem Aufbau des Index reduziert. Wir können beispielsweise Speicherplatz einsparen, indem wir die Genauigkeit mithilfe der Produktquantisierung (PQ) oder die Anzahl der Dimensionen mithilfe der Hauptkomponentenanalyse (PCA) verringern. Diese Methoden analysieren die gesamte Vektormenge, um eine kompaktere Menge zu finden, die die semantischen Beziehungen zwischen den Vektoren beibehält.</p>
+    </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
+Beim Aufbau effizienter Vektorsuchsysteme besteht eine der größten Herausforderungen darin, die Speicherkosten zu bewältigen und gleichzeitig eine akzeptable Latenzzeit und Wiederauffindbarkeit zu gewährleisten. Moderne Einbettungsmodelle geben Vektoren mit Hunderten oder Tausenden von Dimensionen aus, was zu einem erheblichen Speicher- und Rechenaufwand für den Rohvektor und den Index führt.<p>Traditionell wird der Speicherbedarf durch die Anwendung einer Quantisierungs- oder Dimensionalitätsreduzierungsmethode unmittelbar vor dem Aufbau des Index reduziert. Wir können beispielsweise Speicherplatz einsparen, indem wir die Genauigkeit mithilfe der Produktquantisierung (PQ) oder die Anzahl der Dimensionen mithilfe der Hauptkomponentenanalyse (PCA) verringern. Diese Methoden analysieren die gesamte Vektormenge, um eine kompaktere Menge zu finden, die die semantischen Beziehungen zwischen den Vektoren beibehält.</p>
 <p>Diese Standardansätze sind zwar effektiv, aber sie reduzieren die Präzision oder Dimensionalität nur einmal und auf einer einzigen Ebene. Aber was wäre, wenn wir mehrere Detailschichten gleichzeitig beibehalten könnten, wie eine Pyramide von immer präziseren Darstellungen?</p>
 <p>Das ist die Matrjoschka-Einbettung. Diese cleveren Konstrukte, die nach den russischen Schachtelpuppen benannt sind (siehe Abbildung), betten mehrere Darstellungsebenen in einen einzigen Vektor ein. Im Gegensatz zu herkömmlichen Nachbearbeitungsmethoden erlernen Matryoshka-Einbettungen diese Multiskalenstruktur während des anfänglichen Trainingsprozesses. Das Ergebnis ist bemerkenswert: Die vollständige Einbettung erfasst nicht nur die Semantik der Eingabe, sondern jedes verschachtelte Untergruppenpräfix (erste Hälfte, erstes Viertel usw.) liefert eine kohärente, wenn auch weniger detaillierte Darstellung.</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
 <p>In diesem Notizbuch untersuchen wir, wie man Matryoshka-Einbettungen mit Milvus für die semantische Suche verwenden kann. Wir veranschaulichen einen Algorithmus namens "Trichtersuche", der es uns ermöglicht, eine Ähnlichkeitssuche über eine kleine Teilmenge unserer Einbettungsdimensionen durchzuführen, ohne dass es zu einem drastischen Abfall der Wiedererkennbarkeit kommt.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
-
-<span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-<span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
-<span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
-<span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Matrjoschka-Einbettungsmodell laden<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,7 +44,44 @@ title: Trichtersuche mit Matryoshka-Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anstatt ein Standard-Einbettungsmodell wie <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>verwenden wir <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">ein Modell von Nomic</a>, das speziell für die Erstellung von Matryoshka-Einbettungen trainiert wurde.</p>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Nur für CPU:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Für CUDA 11.8:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Der Installationsbefehl für CUDA 11.8 ist nur ein Beispiel. Bitte bestätigen Sie Ihre CUDA-Version bei der Installation von PyTorch.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
+
+<span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> pymilvus
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
+<span class="hljs-keyword">import</span> torch
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Matryoshka-Einbettungsmodell laden<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Anstelle eines Standard-Einbettungsmodells wie <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>verwenden wir <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">ein Modell von Nomic</a>, das speziell für die Erzeugung von Matryoshka-Einbettungen trainiert wurde.</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -84,7 +107,7 @@ title: Trichtersuche mit Matryoshka-Embeddings
         ></path>
       </svg>
     </button></h2><p>Der folgende Code ist eine Abwandlung des Codes aus der Dokumentationsseite <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search with Sentence Transformers and Milvus".</a> Zuerst laden wir den Datensatz von HuggingFace. Er enthält etwa 35k Einträge, die jeweils einem Film mit einem Wikipedia-Artikel entsprechen. Wir werden in diesem Beispiel die Felder <code translate="no">Title</code> und <code translate="no">PlotSummary</code> verwenden.</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -114,12 +137,12 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <p>Milvus unterstützt derzeit nicht die Suche über Teilmengen von Einbettungen, daher unterteilen wir die Einbettungen in zwei Teile: Der Kopf stellt die anfängliche Teilmenge des Vektors dar, die indiziert und durchsucht werden soll, und der Schwanz ist der Rest. Das Modell wurde für die Ähnlichkeitssuche über die Kosinusdistanz trainiert, daher normalisieren wir die Kopfeinbettungen. Um jedoch später Ähnlichkeiten für größere Teilmengen berechnen zu können, müssen wir die Norm der Kopfeinbettung speichern, damit wir sie vor dem Zusammenfügen mit dem Schwanz unnormalisieren können.</p>
 <p>Um die Suche über das erste 1/6 der Einbettung durchzuführen, müssen wir einen Vektorsuchindex über das Feld <code translate="no">head_embedding</code> erstellen. Später werden wir die Ergebnisse der "Trichtersuche" mit einer normalen Vektorsuche vergleichen und daher auch einen Suchindex über die gesamte Einbettung erstellen.</p>
 <p><em>Wichtig ist, dass wir die Distanzmetrik <code translate="no">COSINE</code> und nicht <code translate="no">IP</code> verwenden, da wir sonst die Einbettungsnormen im Auge behalten müssten, was die Implementierung verkomplizieren würde (dies wird sinnvoller, wenn der Trichtersuchalgorithmus beschrieben wurde).</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>Schließlich kodieren wir die Handlungszusammenfassungen für alle 35k Filme und geben die entsprechenden Einbettungen in die Datenbank ein.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -301,7 +324,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>Es ist uns gelungen, die Trefferquote ohne zusätzliche Vektorsuche wiederherzustellen! Qualitativ scheinen diese Ergebnisse für "Raiders of the Lost Ark" und "The Shining" eine höhere Trefferquote zu haben als die Standard-Vektorsuche aus dem Tutorial <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Filmsuche mit Milvus und Satztransformatoren",</a> die ein anderes Einbettungsmodell verwendet. Allerdings ist es nicht in der Lage, &quot;Ferris Bueller's Day Off&quot; zu finden, auf den wir später im Notizbuch zurückkommen werden. (Weitere quantitative Experimente und Benchmarking finden Sie im Dokument <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> ).</p>
+<p>Es ist uns gelungen, die Trefferquote ohne zusätzliche Vektorsuche wiederherzustellen! Qualitativ scheinen diese Ergebnisse für "Raiders of the Lost Ark" und "The Shining" eine höhere Trefferquote zu haben als die Standard-Vektorsuche aus dem Tutorial <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Filmsuche mit Milvus und Satztransformatoren",</a> die ein anderes Einbettungsmodell verwendet. Allerdings ist es nicht in der Lage, "Ferris Bueller's Day Off" zu finden, auf den wir später im Notizbuch zurückkommen werden. (Weitere quantitative Experimente und Benchmarking finden Sie im Dokument <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> ).</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Vergleich der Trichtersuche mit der regulären Suche<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -360,7 +383,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>Mit Ausnahme der Ergebnisse für &quot;Ein Jugendlicher täuscht eine Krankheit vor, um die Schule zu schwänzen...&quot; sind die Ergebnisse der Trichtersuche fast identisch mit denen der Vollsuche, obwohl die Trichtersuche auf einem Suchraum von 128 Dimensionen gegenüber 768 Dimensionen für die reguläre Suche durchgeführt wurde.</p>
+<p>Mit Ausnahme der Ergebnisse für "Ein Jugendlicher täuscht eine Krankheit vor, um die Schule zu schwänzen..." sind die Ergebnisse der Trichtersuche fast identisch mit denen der Vollsuche, obwohl die Trichtersuche auf einem Suchraum von 128 Dimensionen gegenüber 768 Dimensionen für die reguläre Suche durchgeführt wurde.</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Untersuchung des Misserfolgs der Trichtersuche bei Ferris Bueller's Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

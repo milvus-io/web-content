@@ -21,7 +21,7 @@ title: Hybrid Search
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Since Milvus 2.4, we introduced multi-vector support and a hybrid search framework, which means users can bring in several vector fields (up to 10) into a single collection. These vectors in different columns represent diverse facets of data, originating from different embedding models or undergoing distinct processing methods. The results of hybrid searches are integrated using reranking strategies, such as Reciprocal Rank Fusion (RRF) and Weighted Scoring. To learn more about reranking strategies, refer to <a href="/docs/reranking.md">Reranking</a>.</p>
+    </button></h1><p>Since Milvus 2.4, we introduced multi-vector support and a hybrid search framework, which means users can bring in several vector fields (up to 10) into a single collection. These vectors in different columns represent diverse facets of data, originating from different embedding models or undergoing distinct processing methods. The results of hybrid searches are integrated using reranking strategies, such as Reciprocal Rank Fusion (RRF) and Weighted Scoring. To learn more about reranking strategies, refer to <a href="/docs/v2.4.x/reranking.md">Reranking</a>.</p>
 <p>This feature is particularly useful in comprehensive search scenarios, such as identifying the most similar person in a vector library based on various attributes like pictures, voice, fingerprints, etc.</p>
 <p>In this tutorial, you will learn how to:</p>
 <ul>
@@ -178,7 +178,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating <code translate="no">AnnSearchRequest</code> instances, configure a reranking strategy to combine and rerank the results. Currently, there are two options: <code translate="no">WeightedRanker</code> and <code translate="no">RRFRanker</code>. For more information about reranking strategies, refer to <a href="/docs/reranking.md">Reranking</a>.</p>
+    </button></h2><p>After creating <code translate="no">AnnSearchRequest</code> instances, configure a reranking strategy to combine and rerank the results. Currently, there are two options: <code translate="no">WeightedRanker</code> and <code translate="no">RRFRanker</code>. For more information about reranking strategies, refer to <a href="/docs/v2.4.x/reranking.md">Reranking</a>.</p>
 <ul>
 <li><p>Use weighted scoring</p>
 <p>The <code translate="no">WeightedRanker</code> is used to assign importance to the results from each vector field search with specified weights. If you prioritize some vector fields over others, <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> can reflect this in the combined search results.</p>
@@ -232,7 +232,7 @@ res = collection.hybrid_search(
 <p>A list of search requests, where each request is an <code translate="no">ANNSearchRequest</code> object. Each request can correspond to a different vector field and a different set of search parameters.</p></li>
 <li><p><code translate="no">rerank</code> (<em>object</em>)</p>
 <p>The reranking strategy to use for hybrid search. Possible values: <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> and <code translate="no">RRFRanker()</code>.</p>
-<p>For more information about reranking strategies, refer to <a href="/docs/reranking.md">Reranking</a>.</p></li>
+<p>For more information about reranking strategies, refer to <a href="/docs/v2.4.x/reranking.md">Reranking</a>.</p></li>
 <li><p><code translate="no">limit</code> (<em>int</em>)</p>
 <p>The maximum number of final results to return in the hybrid search.</p></li>
 </ul>

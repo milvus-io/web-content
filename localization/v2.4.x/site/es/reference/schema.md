@@ -34,7 +34,7 @@ title: Gestionar esquema
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un esquema de campo es la definición lógica de un campo. Es lo primero que debe definir antes de definir un <a href="#Collection-schema">esquema de colección</a> y <a href="/docs/es/manage-collections.md">gestionar colecciones</a>.</p>
+    </button></h2><p>Un esquema de campo es la definición lógica de un campo. Es lo primero que debe definir antes de definir un <a href="#Collection-schema">esquema de colección</a> y <a href="/docs/es/v2.4.x/manage-collections.md">gestionar colecciones</a>.</p>
 <p>Milvus sólo admite un campo de clave primaria en una colección.</p>
 <h3 id="Field-schema-properties" class="common-anchor-header">Propiedades del esquema de campo</h3><table class="properties">
     <thead>
@@ -124,19 +124,19 @@ fields = [
 <li>FLOAT: numpy.float32</li>
 <li>DOUBLE: numpy.double</li>
 <li>VARCHAR: VARCHAR</li>
-<li>JSON: <a href="/docs/es/use-json-fields.md">JSON</a></li>
-<li>Array: <a href="/docs/es/array_data_type.md">Array</a></li>
+<li>JSON: <a href="/docs/es/v2.4.x/use-json-fields.md">JSON</a></li>
+<li>Array: <a href="/docs/es/v2.4.x/array_data_type.md">Array</a></li>
 </ul>
-<p>JSON está disponible como tipo de datos compuesto. Un campo JSON se compone de pares clave-valor. Cada clave es una cadena, y un valor puede ser un número, una cadena, un valor booleano, un array o una lista. Para más información, consulta <a href="/docs/es/use-json-fields.md">JSON: un nuevo tipo de datos</a>.</p></li>
+<p>JSON está disponible como tipo de datos compuesto. Un campo JSON se compone de pares clave-valor. Cada clave es una cadena, y un valor puede ser un número, una cadena, un valor booleano, un array o una lista. Para más información, consulta <a href="/docs/es/v2.4.x/use-json-fields.md">JSON: un nuevo tipo de datos</a>.</p></li>
 <li><p>Soporta campos vectoriales:</p>
 <ul>
 <li>BINARY_VECTOR: Almacena datos binarios como una secuencia de 0 y 1. Se utiliza para la representación compacta de características en el procesamiento de imágenes y la recuperación de información.</li>
 <li>FLOAT_VECTOR: Almacena números de coma flotante de 32 bits, utilizados habitualmente en computación científica y aprendizaje automático para representar números reales.</li>
 <li>FLOAT16_VECTOR: Almacena números de coma flotante de 16 bits de media precisión, utilizados en el aprendizaje profundo y los cálculos de GPU para la eficiencia de la memoria y el ancho de banda.</li>
 <li>BFLOAT16_VECTOR: Almacena números de punto flotante de 16 bits con precisión reducida pero el mismo rango de exponentes que Float32, popular en el aprendizaje profundo para reducir los requisitos de memoria y computación sin afectar significativamente a la precisión.</li>
-<li>SPARSE_FLOAT_VECTOR: Almacena una lista de elementos distintos de cero y sus índices correspondientes, utilizados para representar vectores dispersos. Para más información, consulte <a href="/docs/es/sparse_vector.md">Vectores dispersos</a>.</li>
+<li>SPARSE_FLOAT_VECTOR: Almacena una lista de elementos distintos de cero y sus índices correspondientes, utilizados para representar vectores dispersos. Para más información, consulte <a href="/docs/es/v2.4.x/sparse_vector.md">Vectores dispersos</a>.</li>
 </ul>
-<p>Milvus soporta múltiples campos vectoriales en una colección. Para más información, consulte <a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a>.</p></li>
+<p>Milvus soporta múltiples campos vectoriales en una colección. Para más información, consulte <a href="/docs/es/v2.4.x/multi-vector-search.md">Búsqueda híbrida</a>.</p></li>
 </ul>
 <h2 id="Collection-schema" class="common-anchor-header">Esquema de colección<button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un esquema de colección es la definición lógica de una colección. Normalmente es necesario definir el <a href="#Field-schema">esquema de campo</a> antes de definir un esquema de colección y <a href="/docs/es/manage-collections.md">gestionar colecciones</a>.</p>
+    </button></h2><p>Un esquema de colección es la definición lógica de una colección. Normalmente es necesario definir el <a href="#Field-schema">esquema de campo</a> antes de definir un esquema de colección y <a href="/docs/es/v2.4.x/manage-collections.md">gestionar colecciones</a>.</p>
 <h3 id="Collection-schema-properties" class="common-anchor-header">Propiedades del esquema de la colección</h3><table class="properties">
     <thead>
     <tr>
@@ -208,8 +208,8 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <ul>
 <li>Puede definir el número de fragmento con <code translate="no">shards_num</code>.</li>
 <li>Puede definir el servidor Milvus en el que desea crear una colección especificando el alias en <code translate="no">using</code>.</li>
-<li>Puede habilitar la característica de clave <a href="/docs/es/multi_tenancy.md">de partición</a> en un campo configurando <code translate="no">is_partition_key</code> a <code translate="no">True</code> en el campo si necesita implementar <a href="/docs/es/multi_tenancy.md">multi-tenancy basado en clave de partición</a>.</li>
-<li>Puede habilitar el esquema dinámico configurando <code translate="no">enable_dynamic_field</code> en <code translate="no">True</code> en el esquema de la colección si necesita <a href="/docs/es/enable-dynamic-field.md">habilitar el campo dinámico</a>.</li>
+<li>Puede habilitar la característica de clave <a href="/docs/es/v2.4.x/multi_tenancy.md">de partición</a> en un campo configurando <code translate="no">is_partition_key</code> a <code translate="no">True</code> en el campo si necesita implementar <a href="/docs/es/v2.4.x/multi_tenancy.md">multi-tenancy basado en clave de partición</a>.</li>
+<li>Puede habilitar el esquema dinámico configurando <code translate="no">enable_dynamic_field</code> en <code translate="no">True</code> en el esquema de la colección si necesita <a href="/docs/es/v2.4.x/enable-dynamic-field.md">habilitar el campo dinámico</a>.</li>
 </ul>
 </div>
 <p><br/>
@@ -245,7 +245,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Aprenda a preparar esquemas al <a href="/docs/es/manage-collections.md">gestionar colecciones</a>.</li>
-<li>Más información sobre <a href="/docs/es/enable-dynamic-field.md">el esquema dinámico</a>.</li>
-<li>Más información sobre partition-key en <a href="/docs/es/multi_tenancy.md">Multi-tenancy</a>.</li>
+<li>Aprenda a preparar esquemas al <a href="/docs/es/v2.4.x/manage-collections.md">gestionar colecciones</a>.</li>
+<li>Más información sobre <a href="/docs/es/v2.4.x/enable-dynamic-field.md">el esquema dinámico</a>.</li>
+<li>Más información sobre partition-key en <a href="/docs/es/v2.4.x/multi_tenancy.md">Multi-tenancy</a>.</li>
 </ul>

@@ -1698,7 +1698,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><code translate="no">HAMMING</code></td><td>汉明距离越小，相似度越高。</td><td>要从结果中排除最接近的向量，请确保：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>要了解有关距离度量类型的更多信息，请参阅<a href="/docs/zh/metric.md">相似度量</a>。</p>
+<p>要了解有关距离度量类型的更多信息，请参阅<a href="/docs/zh/v2.4.x/metric.md">相似度量</a>。</p>
 <h2 id="Grouping-search" class="common-anchor-header">分组搜索<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1826,8 +1826,8 @@ search_parameters = {
 <tr><td><code translate="no">metric_type</code></td><td>如何测量向量 Embeddings 之间的相似性。<br/> 可能的值为<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>, 和<code translate="no">HAMMING</code> ，默认值为已加载索引文件的值。</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>搜索时要查询的单元数。<br/> 取值范围为 [1，nlist<sub>[1]</sub>]。</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>搜索精度级别。<br/> 可能的值为<code translate="no">1</code> 、<code translate="no">2</code> 和<code translate="no">3</code> ，默认值为<code translate="no">1</code> 。值越高，结果越精确，但性能越差。</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>定义搜索空间的外部边界。只有与查询向量距离在此范围内的向量才会被视为潜在匹配。<br/>值范围由<code translate="no">metric_type</code> 参数决定。例如，如果<code translate="no">metric_type</code> 设置为<code translate="no">L2</code> ，则有效值范围为<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 设置为<code translate="no">COSINE</code> ，则有效值范围为<code translate="no">[-1, 1]</code> 。更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度指标"</a>。</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 设置搜索的外部界限，而<code translate="no">range_filter</code> 可选择用于定义内部界限，创建一个距离范围，向量必须在该范围内才会被视为匹配。<br/>值范围由<code translate="no">metric_type</code> 参数决定。例如，如果<code translate="no">metric_type</code> 设置为<code translate="no">L2</code> ，则有效值范围为<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 设置为<code translate="no">COSINE</code> ，则有效值范围为<code translate="no">[-1, 1]</code> 。更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度指标"</a>。</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>定义搜索空间的外部边界。只有与查询向量距离在此范围内的向量才会被视为潜在匹配。<br/>值范围由<code translate="no">metric_type</code> 参数决定。例如，如果<code translate="no">metric_type</code> 设置为<code translate="no">L2</code> ，则有效值范围为<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 设置为<code translate="no">COSINE</code> ，则有效值范围为<code translate="no">[-1, 1]</code> 。更多信息，请参阅 "<a href="/docs/zh/v2.4.x/metric.md">相似度指标"</a>。</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 设置搜索的外部界限，而<code translate="no">range_filter</code> 可选择用于定义内部界限，创建一个距离范围，向量必须在该范围内才会被视为匹配。<br/>值范围由<code translate="no">metric_type</code> 参数决定。例如，如果<code translate="no">metric_type</code> 设置为<code translate="no">L2</code> ，则有效值范围为<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 设置为<code translate="no">COSINE</code> ，则有效值范围为<code translate="no">[-1, 1]</code> 。更多信息，请参阅 "<a href="/docs/zh/v2.4.x/metric.md">相似度指标"</a>。</td></tr>
 </tbody>
 </table>
 <div class="admonition note">

@@ -22,7 +22,7 @@ title: Skalieren eines Milvus-Clusters
         ></path>
       </svg>
     </button></h1><p>Milvus unterstützt die horizontale Skalierung seiner Komponenten. Das bedeutet, dass Sie die Anzahl der Arbeitsknoten jedes Typs je nach Bedarf entweder erhöhen oder verringern können.</p>
-<p>Dieses Thema beschreibt, wie Sie einen Milvus-Cluster skalieren können. Wir gehen davon aus, dass Sie vor der Skalierung bereits <a href="/docs/de/install_cluster-helm.md">einen Milvus-Cluster installiert</a> haben. Außerdem empfehlen wir Ihnen, sich mit der <a href="/docs/de/architecture_overview.md">Milvus-Architektur</a> vertraut zu machen, bevor Sie beginnen.</p>
+<p>Dieses Thema beschreibt, wie Sie einen Milvus-Cluster skalieren können. Wir gehen davon aus, dass Sie vor der Skalierung bereits <a href="/docs/de/v2.4.x/install_cluster-helm.md">einen Milvus-Cluster installiert</a> haben. Außerdem empfehlen wir Ihnen, sich mit der <a href="/docs/de/v2.4.x/architecture_overview.md">Milvus-Architektur</a> vertraut zu machen, bevor Sie beginnen.</p>
 <p>In diesem Tutorial wird die Skalierung von drei Abfrageknoten als Beispiel verwendet. Um andere Knotentypen zu skalieren, ersetzen Sie <code translate="no">queryNode</code> durch den entsprechenden Knotentyp in der Befehlszeile.</p>
 <div class="alert note">
 <p>Informationen über die Skalierung eines Clusters mit Milvus Operator finden Sie unter <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">Skalierung eines Clusters mit Milvus Operator</a>.</p>
@@ -52,7 +52,7 @@ title: Skalieren eines Milvus-Clusters
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Hochskalieren</span> </span></p>
-<p>Gemäß der <a href="/docs/de/architecture_overview.md">Milvus-Architektur</a> umfassen die zustandslosen Arbeitsknoten Abfrageknoten, Datenknoten, Indexknoten und Proxy. Daher können Sie diese Art von Knoten entsprechend Ihren Geschäftsanforderungen und Anwendungsszenarien ausbauen. Sie können den Milvus-Cluster entweder manuell oder automatisch skalieren.</p>
+<p>Gemäß der <a href="/docs/de/v2.4.x/architecture_overview.md">Milvus-Architektur</a> umfassen die zustandslosen Arbeitsknoten Abfrageknoten, Datenknoten, Indexknoten und Proxy. Daher können Sie diese Art von Knoten entsprechend Ihren Geschäftsanforderungen und Anwendungsszenarien ausbauen. Sie können den Milvus-Cluster entweder manuell oder automatisch skalieren.</p>
 <p>Im Allgemeinen müssen Sie den Milvus-Cluster, den Sie erstellt haben, skalieren, wenn er übermäßig ausgelastet ist. Nachfolgend sind einige typische Situationen aufgeführt, in denen Sie den Milvus-Cluster ausbauen müssen:</p>
 <ul>
 <li>Die CPU- und Speicherauslastung ist über einen bestimmten Zeitraum hinweg hoch.</li>
@@ -168,16 +168,16 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
     </button></h2><ul>
 <li><p>Wenn Sie lernen möchten, wie Sie die Milvus-Dienste überwachen und Warnungen erstellen können:</p>
 <ul>
-<li>Lernen Sie <a href="/docs/de/monitor.md">Monitor Milvus mit Prometheus Operator auf Kubernetes</a></li>
+<li>Lernen Sie <a href="/docs/de/v2.4.x/monitor.md">Monitor Milvus mit Prometheus Operator auf Kubernetes</a></li>
 </ul></li>
 <li><p>Wenn Sie bereit sind, Ihren Cluster in der Cloud einzusetzen:</p>
 <ul>
-<li>Lernen Sie, wie Sie <a href="/docs/de/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a> können</li>
-<li>Lernen Sie, wie Sie <a href="/docs/de/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
+<li>Lernen Sie, wie Sie <a href="/docs/de/v2.4.x/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a> können</li>
+<li>Lernen Sie, wie Sie <a href="/docs/de/v2.4.x/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.4.x/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
 </ul></li>
 <li><p>Wenn Sie nach einer Anleitung für die Ressourcenzuweisung suchen:</p>
 <ul>
-<li><a href="/docs/de/allocate.md#standalone">Ressourcen auf Kubernetes zuweisen</a></li>
+<li><a href="/docs/de/v2.4.x/allocate.md#standalone">Ressourcen auf Kubernetes zuweisen</a></li>
 </ul></li>
 </ul>

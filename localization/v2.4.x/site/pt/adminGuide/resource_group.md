@@ -183,7 +183,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p>Observe que <code translate="no">_resource_groups</code> é um parâmetro opcional e, se ele não for especificado, o Milvus carregará as réplicas nos nós de consulta no grupo de recursos padrão.</p>
 <p>Para que o Milus carregue cada réplica de uma coleção em um grupo de recursos separado, certifique-se de que o número de grupos de recursos seja igual ao número de réplicas.</p></li>
 <li><p>Transferir réplicas entre grupos de recursos.</p>
-<p>O Milvus usa <a href="/docs/pt/replica.md">réplicas</a> para obter o balanceamento de carga entre <a href="/docs/pt/glossary.md#Segment">segmentos</a> distribuídos em vários nós de consulta. É possível mover determinadas réplicas de uma coleção de um grupo de recursos para outro da seguinte forma:</p>
+<p>O Milvus usa <a href="/docs/pt/v2.4.x/replica.md">réplicas</a> para obter o balanceamento de carga entre <a href="/docs/pt/v2.4.x/glossary.md#Segment">segmentos</a> distribuídos em vários nós de consulta. É possível mover determinadas réplicas de uma coleção de um grupo de recursos para outro da seguinte forma:</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Para implementar uma instância Milvus multi-tenant, leia o seguinte:</p>
 <ul>
-<li><a href="/docs/pt/rbac.md">Habilitar RBAC</a></li>
-<li><a href="/docs/pt/users_and_roles.md">Utilizadores e funções</a></li>
+<li><a href="/docs/pt/v2.4.x/rbac.md">Habilitar RBAC</a></li>
+<li><a href="/docs/pt/v2.4.x/users_and_roles.md">Utilizadores e funções</a></li>
 </ul>

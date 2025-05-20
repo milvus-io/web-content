@@ -156,7 +156,7 @@ summary: >-
     </button></h2><p>Una vez creados los índices y cargada la colección, puede iniciar una búsqueda de similitud introduciendo uno o varios vectores de consulta. Por ejemplo, al recibir la representación vectorial de su consulta transportada en una solicitud de búsqueda, Milvus utiliza el tipo de métrica especificado para medir la similitud entre el vector de consulta y los de la colección de destino antes de devolver los que son semánticamente similares a la consulta.</p>
 <p>También puede incluir el filtrado de metadatos en las búsquedas y consultas para mejorar la relevancia de los resultados. Tenga en cuenta que las condiciones de filtrado de metadatos son obligatorias en las consultas, pero opcionales en las búsquedas.</p>
 <p>Para obtener más información sobre los tipos de métricas aplicables, consulte <a href="/docs/es/metric.md">Tipos de métricas</a>.</p>
-<p>Para obtener más información sobre búsquedas y consultas, consulte los artículos del capítulo <a href="/docs/es/search-rerank">Búsqueda y renumeración</a>, entre los que se encuentran las funciones básicas:</p>
+<p>Para obtener más información sobre búsquedas y consultas, consulte los artículos del capítulo Búsqueda y renumeración, entre los que se encuentran las funciones básicas:</p>
 <ul>
 <li><p><a href="/docs/es/single-vector-search.md">Búsqueda básica de RNA</a></p></li>
 <li><p><a href="/docs/es/filtered-search.md">Búsqueda filtrada</a></p></li>

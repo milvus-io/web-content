@@ -32,7 +32,7 @@ title: 操作常見問題
 <p>如需詳細資訊，請參閱<a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">向量索引</a>。</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">為什麼我對配置檔案的變更沒有生效？</h4><p>Milvus 不支援在執行時修改組態檔案。您必須重新啟動 Milvus Docker，配置檔案的變更才會生效。</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">我如何知道 Milvus 是否成功啟動？</h4><p>如果 Milvus 是使用 Docker Compose 啟動的，請執行<code translate="no">docker ps</code> 觀察有多少 Docker 容器正在執行，並檢查 Milvus 服務是否正確啟動。</p>
-<p>對於 Milvus 獨立版本，您應該至少可以觀察到三個執行中的 Docker 容器，其中一個是 Milvus 服務，另外兩個是 etcd 管理和儲存服務。如需詳細資訊，請參閱<a href="/docs/zh-hant/install_standalone-docker.md">安裝 Milvus standalone</a>。</p>
+<p>對於 Milvus 獨立版本，您應該至少可以觀察到三個執行中的 Docker 容器，其中一個是 Milvus 服務，另外兩個是 etcd 管理和儲存服務。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/install_standalone-docker.md">安裝 Milvus standalone</a>。</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">為什麼日誌檔中的時間與系統時間不同？</h4><p>時間不同通常是因為主機不使用 Coordinated Universal Time (UTC)。</p>
 <p>Docker 映像中的日誌檔案預設使用 UTC。如果您的主機不使用 UTC，可能會發生這個問題。</p>
 <h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">我如何知道我的 CPU 是否支援 Milvus？</h4><p>Milvus 的運算操作取決於 CPU 對 SIMD (Single Instruction, Multiple Data) 延伸指令集的支援。您的 CPU 是否支援 SIMD 延伸指令集，對 Milvus 的索引建立和向量相似性搜尋至關重要。確保您的 CPU 至少支援下列其中一種 SIMD 指令集：</p>
@@ -46,11 +46,11 @@ title: 操作常見問題
 <pre><code translate="no">$ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">為什麼 Milvus 在啟動時返回<code translate="no">illegal instruction</code> ？</h4><p>Milvus 要求您的 CPU 支援 SIMD 指令集：SSE4.2、AVX、AVX2 或 AVX512。CPU 必須至少支援其中之一，以確保 Milvus 正常運作。在啟動時返回<code translate="no">illegal instruction</code> 錯誤，表示您的 CPU 不支援上述四種指令集中的任何一種。</p>
-<p>請參閱<a href="/docs/zh-hant/prerequisite-docker.md">CPU 對 SIMD 指令集的支援</a>。</p>
+<p>請參閱<a href="/docs/zh-hant/v2.4.x/prerequisite-docker.md">CPU 對 SIMD 指令集的支援</a>。</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">我可以在 Windows 上安裝 Milvus 嗎？</h4><p>可以，您可以從原始碼或二進位套件編譯在 Windows 上安裝 Milvus。</p>
 <p>請參閱<a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">在 Windows 上執行 Milvus</a>了解如何在 Windows 上安裝 Milvus。</p>
-<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">我在 Windows 上安裝 pymilvus 時出錯。我該怎麼做？</h4><p>不建議在 Windows 上安裝 PyMilvus。但如果您必須在 Windows 上安裝 PyMilvus 但卻發生錯誤，請嘗試在<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>環境中安裝。更多關於如何在 Conda 環境中安裝 PyMilvus 的資訊，請參閱安裝 Milvus<a href="/docs/zh-hant/install-pymilvus.md">SDK</a>。</p>
-<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">我可以在斷線時部署 Milvus 嗎？</h4><p>可以。您可以在離線環境中安裝 Milvus。更多資訊請參閱<a href="/docs/zh-hant/install_offline-helm.md">離線安裝 Milvus</a>。</p>
+<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">我在 Windows 上安裝 pymilvus 時出錯。我該怎麼做？</h4><p>不建議在 Windows 上安裝 PyMilvus。但如果您必須在 Windows 上安裝 PyMilvus 但卻發生錯誤，請嘗試在<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>環境中安裝。更多關於如何在 Conda 環境中安裝 PyMilvus 的資訊，請參閱安裝 Milvus<a href="/docs/zh-hant/v2.4.x/install-pymilvus.md">SDK</a>。</p>
+<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">我可以在斷線時部署 Milvus 嗎？</h4><p>可以。您可以在離線環境中安裝 Milvus。更多資訊請參閱<a href="/docs/zh-hant/v2.4.x/install_offline-helm.md">離線安裝 Milvus</a>。</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">我在哪裡可以找到 Milvus 產生的日誌？</h4><p>Milvus 日誌預設列印到 stout (標準輸出) 和 stderr (標準錯誤)，然而我們強烈建議在生產中重定向您的日誌到一個持久卷。要這樣做，請更新<strong>milvus.yaml</strong> 中的<code translate="no">log.file.rootPath</code> 。如果您使用<code translate="no">milvus-helm</code> 圖表部署 Milvus，您也需要先透過<code translate="no">--set log.persistence.enabled=true</code> 啟用日誌持久化。</p>
 <p>如果您沒有變更設定，使用 kubectl logs &lt;pod-name&gt; 或 docker logs CONTAINER 也可以幫助您找到日誌。</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">在插入資料之前，我可以為一個區段建立索引嗎？</h4><p>可以。但我們建議您在為每個區段建立索引之前，先分批插入資料，每批不應超過 256 MB。</p>

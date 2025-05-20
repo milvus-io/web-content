@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Di Milvus, <code translate="no">VARCHAR</code> adalah tipe data yang digunakan untuk menyimpan data string. Ketika Anda mendefinisikan bidang <code translate="no">VARCHAR</code>, dua parameter wajib dimasukkan:</p>
 <ul>
 <li><p>Tetapkan <code translate="no">datatype</code> ke <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Tentukan <code translate="no">max_length</code>, yang mendefinisikan jumlah karakter maksimum yang dapat disimpan oleh field <code translate="no">VARCHAR</code>. Kisaran yang valid untuk <code translate="no">max_length</code> adalah dari 1 hingga 65.535.</p></li>
+<li><p>Tentukan <code translate="no">max_length</code>, yang mendefinisikan jumlah maksimum byte yang dapat disimpan oleh field <code translate="no">VARCHAR</code>. Kisaran yang valid untuk <code translate="no">max_length</code> adalah dari 1 hingga 65.535.</p></li>
 </ul>
 <div class="alert note">
 <p>Milvus mendukung nilai nol dan nilai default untuk bidang <code translate="no">VARCHAR</code>. Untuk mengaktifkan fitur ini, setel <code translate="no">nullable</code> ke <code translate="no">True</code> dan <code translate="no">default_value</code> ke nilai string. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p>
@@ -46,11 +46,11 @@ summary: >-
       </svg>
     </button></h2><p>Untuk menyimpan data string di Milvus, tentukan bidang <code translate="no">VARCHAR</code> di skema koleksi Anda. Di bawah ini adalah contoh pendefinisian skema koleksi dengan dua field <code translate="no">VARCHAR</code>:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: menyimpan hingga 100 karakter, mengizinkan nilai nol, dan memiliki nilai default <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: menyimpan hingga 200 karakter, mengizinkan nilai nol, tetapi tidak memiliki nilai default.</p></li>
+<li><p><code translate="no">varchar_field1</code>: menyimpan hingga 100 byte, mengizinkan nilai nol, dan memiliki nilai default <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: menyimpan hingga 200 byte, mengizinkan nilai nol, tetapi tidak memiliki nilai default.</p></li>
 </ul>
 <div class="alert note">
-<p>Jika Anda menetapkan <code translate="no">enable_dynamic_fields=True</code> ketika mendefinisikan skema, Milvus memungkinkan Anda untuk menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan manajemen, yang berpotensi mempengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
+<p>Jika Anda menetapkan <code translate="no">enable_dynamic_fields=True</code> ketika mendefinisikan skema, Milvus mengizinkan Anda untuk menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan manajemen, yang berpotensi mempengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

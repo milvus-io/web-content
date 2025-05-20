@@ -6,7 +6,7 @@ group: example_code.md
 summary: Get started with Milvus faster using this Node.js example code.
 title: ''
 ---
-<div class="tab-wrapper"><a href="/docs/example_code.md" class=''>Python</a><a href="/docs/example_code_node.md" class='active '>Node.js</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.1.x/example_code.md" class=''>Python</a><a href="/docs/v2.1.x/example_code_node.md" class='active '>Node.js</a></div>
 <h1 id="Run-Milvus-using-Nodejs" class="common-anchor-header">Run Milvus using Node.js<button data-href="#Run-Milvus-using-Nodejs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

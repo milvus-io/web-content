@@ -37,14 +37,14 @@ title: オンザフライでMilvusを設定する
       </svg>
     </button></h2><p>以下を確認してください。</p>
 <ul>
-<li>Birdwatcherがインストールされていること。詳細については、<a href="/docs/ja/birdwatcher_install_guides.md">Birdwatcherのインストールを</a>参照してください、</li>
+<li>Birdwatcherがインストールされていること。詳細については、<a href="/docs/ja/v2.4.x/birdwatcher_install_guides.md">Birdwatcherのインストールを</a>参照してください、</li>
 <li>etcdctlがインストールされていること。詳細については、<a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">etcdとのやり取りを</a>参照してください。</li>
 <li>Pythonクライアントなど、他のetcdクライアントがインストールされている。</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>本ガイドの例では、<code translate="no">proxy.minPasswordLength</code> の値を<code translate="no">8</code> に変更しています。<a href="/docs/ja/dynamic_config.md#Applicable-configuration-items">適用可能な設定</a>項目に記載されている該当するキーで置き換えることができます。</li>
-<li>本ガイドの例では、Milvusのルートパスを<code translate="no">by-dev</code> と仮定しています。すべての設定は<code translate="no">by-dev/config</code> というパスの下に記載されています。Milvusのルートパスはインストール方法によって異なります。Helmチャートを使用してインストールしたインスタンスの場合、ルートパスのデフォルトは<code translate="no">by-dev</code> です。 ルートパスがわからない場合は、<a href="/docs/ja/birdwatcher_usage_guides.md#Connect-to-etcd">etcdへの接続を</a>参照してください。</li>
+<li>本ガイドの例では、<code translate="no">proxy.minPasswordLength</code> の値を<code translate="no">8</code> に変更しています。<a href="/docs/ja/v2.4.x/dynamic_config.md#Applicable-configuration-items">適用可能な設定</a>項目に記載されている該当するキーで置き換えることができます。</li>
+<li>本ガイドの例では、Milvusのルートパスを<code translate="no">by-dev</code> と仮定しています。すべての設定は<code translate="no">by-dev/config</code> というパスの下に記載されています。Milvusのルートパスはインストール方法によって異なります。Helmチャートを使用してインストールしたインスタンスの場合、ルートパスのデフォルトは<code translate="no">by-dev</code> です。 ルートパスがわからない場合は、<a href="/docs/ja/v2.4.x/birdwatcher_usage_guides.md#Connect-to-etcd">etcdへの接続を</a>参照してください。</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">設定の変更<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +203,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/system_configuration.md">システム構成の</a>詳細</li>
-<li><a href="/docs/ja/configure_operator.md">Milvus Operator</a>、<a href="/docs/ja/configure-helm.md">Helmチャート</a>、<a href="/docs/ja/configure-docker.md">Dockerを</a>使用してインストールされたMilvusを設定する方法を学びます。</li>
+<li><a href="/docs/ja/v2.4.x/system_configuration.md">システム構成の</a>詳細</li>
+<li><a href="/docs/ja/v2.4.x/configure_operator.md">Milvus Operator</a>、<a href="/docs/ja/v2.4.x/configure-helm.md">Helmチャート</a>、<a href="/docs/ja/v2.4.x/configure-docker.md">Dockerを</a>使用してインストールされたMilvusを設定する方法を学びます。</li>
 </ul>

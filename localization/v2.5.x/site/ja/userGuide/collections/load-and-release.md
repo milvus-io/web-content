@@ -309,7 +309,7 @@ Not support yet
         ></path>
       </svg>
     </button></h2><p>検索とクエリはメモリを大量に消費する操作です。コストを節約するには、現在使用していないコレクションを解放することをお勧めします。</p>
-<p>次のコード・スニペットは、コレクションを解放する方法を示しています。</p>
+<p>以下のコード・スニペットは、コレクションを解放する方法を示しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>

@@ -36,7 +36,7 @@ title: スカラーインデックス
         ></path>
       </svg>
     </button></h2><p>Milvusでベクトル類似検索を行う場合、論理演算子を使ってスカラーフィールドをブーリアン式に整理することができます。</p>
-<p>Milvusはこのようなブーリアン式を含む検索要求を受け取ると、ブーリアン式を抽象構文木(AST)に解析し、属性フィルタリングのための物理計画を生成します。そして、Milvusは各セグメントで物理計画を適用して、フィルタリング結果として<a href="/docs/ja/bitset.md">ビットセットを</a>生成し、その結果をベクトル検索パラメータとして含めることで、検索範囲を絞り込む。この場合、ベクトル検索の速度は属性フィルタリングの速度に大きく依存する。</p>
+<p>Milvusはこのようなブーリアン式を含む検索要求を受け取ると、ブーリアン式を抽象構文木(AST)に解析し、属性フィルタリングのための物理計画を生成します。そして、Milvusは各セグメントで物理計画を適用して、フィルタリング結果として<a href="/docs/ja/v2.4.x/bitset.md">ビットセットを</a>生成し、その結果をベクトル検索パラメータとして含めることで、検索範囲を絞り込む。この場合、ベクトル検索の速度は属性フィルタリングの速度に大きく依存する。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +154,12 @@ title: スカラーインデックス
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>スカラー・フィールドにインデックスを作成するには、<a href="/docs/ja/index-scalar-fields.md">スカラーにインデックスを作成するを</a>参照してください。</p></li>
+<li><p>スカラー・フィールドにインデックスを作成するには、<a href="/docs/ja/v2.4.x/index-scalar-fields.md">スカラーにインデックスを作成するを</a>参照してください。</p></li>
 <li><p>上記の関連用語とルールについては、以下を参照。</p>
 <ul>
-<li><a href="/docs/ja/bitset.md">ビットセット</a></li>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
-<li><a href="/docs/ja/boolean.md">ブール式ルール</a></li>
-<li><a href="/docs/ja/schema.md#Supported-data-type">サポートされるデータ型</a></li>
+<li><a href="/docs/ja/v2.4.x/bitset.md">ビットセット</a></li>
+<li><a href="/docs/ja/v2.4.x/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/v2.4.x/boolean.md">ブール式ルール</a></li>
+<li><a href="/docs/ja/v2.4.x/schema.md#Supported-data-type">サポートされるデータ型</a></li>
 </ul></li>
 </ul>

@@ -13,18 +13,18 @@ title: Build RAG with Milvus and Gemini
 
 # Build RAG with Milvus and Gemini
 
-The [Gemini API](https://ai.google.dev/gemini-api/docs) and [Google AI Studio](https://ai.google.dev/aistudio) help you start working with Google's latest models and turn your ideas into applications that scale. Gemini provides access to powerful language models like `Gemini-1.5-Flash`, `Gemini-1.5-Flash-8B`, and `Gemini-1.5-Pro` for tasks such as text generation, document processing, vision, audio analysis, and more. The API allows you to input long context with millions of tokens, fine-tune models for specific tasks, generate structured outputs like JSON, and leverage capabilities like semantic retrieval and code execution.
+The [Gemini API](https://ai.google.dev/gemini-api/docs) and [Google AI Studio](https://ai.google.dev/aistudio) help you start working with Google's latest models and turn your ideas into applications that scale. Gemini provides access to powerful language models like `Gemini-2.0-Flash`, `Gemini-2.0-Pro`, and other versions for tasks such as text generation, document processing, vision, audio analysis, and more. The API allows you to input long context with millions of tokens, fine-tune models for specific tasks, generate structured outputs like JSON, and leverage capabilities like semantic retrieval and code execution.
 
-In this tutorial, we will show you how to build a RAG (Retrieval-Augmented Generation) pipeline with Milvus and Gemini. We will use the Gemini model to generate text based on a given query. We will also use Milvus to store and retrieve the generated text.
-
-
+In this tutorial, we will show you how to build a RAG (Retrieval-Augmented Generation) pipeline with Milvus and Gemini. We will use the Gemini model to generate responses based on a given query, augmented with relevant information retrieved from Milvus.
 
 ## Preparation
 ### Dependencies and Environment
 
+First, install the required packages:
+
 
 ```shell
-$ pip install --upgrade pymilvus google-generativeai requests tqdm
+$ pip install --upgrade pymilvus google-genai requests tqdm
 ```
 
 <div class="alert note">
@@ -71,23 +71,23 @@ for file_path in glob("milvus_docs/en/faq/*.md", recursive=True):
 
 ### Prepare the LLM and Embedding Model
 
-We use the `gemini-1.5-flash` as LLM, and the `text-embedding-004` as embedding model.
+We use the `gemini-2.0-flash` as LLM, and the `text-embedding-004` as embedding model.
 
 Let's try to generate a test response from the LLM:
 
 
 ```python
-import google.generativeai as genai
+from google import genai
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-gemini_model = genai.GenerativeModel("gemini-1.5-flash")
-
-response = gemini_model.generate_content("who are you")
+response = client.models.generate_content(
+    model="gemini-2.0-flash", contents="who are you"
+)
 print(response.text)
 ```
 
-    I am a large language model, trained by Google.  I am an AI and don't have a personal identity or consciousness.  My purpose is to process information and respond to a wide range of prompts and questions in a helpful and informative way.
+    I am a large language model, trained by Google.
     
 
 
@@ -95,13 +95,13 @@ Generate a test embedding and print its dimension and first few elements.
 
 
 ```python
-test_embeddings = genai.embed_content(
-    model="models/text-embedding-004", content=["This is a test1", "This is a test2"]
-)["embedding"]
+test_embeddings = client.models.embed_content(
+    model="text-embedding-004", contents=["This is a test1", "This is a test2"]
+)
 
-embedding_dim = len(test_embeddings[0])
+embedding_dim = len(test_embeddings.embeddings[0].values)
 print(embedding_dim)
-print(test_embeddings[0][:10])
+print(test_embeddings.embeddings[0].values[:10])
 ```
 
     768
@@ -111,6 +111,8 @@ print(test_embeddings[0][:10])
 ## Load data into Milvus
 
 ### Create the Collection
+
+Let's initialize the Milvus client and set up our collection:
 
 
 ```python
@@ -148,7 +150,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type="IP",  # Inner product distance
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    consistency_level="Strong",  # Strong consistency level
 )
 ```
 
@@ -163,17 +165,15 @@ from tqdm import tqdm
 
 data = []
 
-doc_embeddings = genai.embed_content(
-    model="models/text-embedding-004", content=text_lines
-)["embedding"]
+doc = client.models.embed_content(model="text-embedding-004", contents=text_lines)
 
 for i, line in enumerate(tqdm(text_lines, desc="Creating embeddings")):
-    data.append({"id": i, "vector": doc_embeddings[i], "text": line})
+    data.append({"id": i, "vector": doc.embeddings[i].values, "text": line})
 
 milvus_client.insert(collection_name=collection_name, data=data)
 ```
 
-    Creating embeddings: 100%|██████████| 72/72 [00:00<00:00, 468201.38it/s]
+    Creating embeddings: 100%|██████████| 72/72 [00:00<00:00, 337796.30it/s]
 
 
 
@@ -198,13 +198,11 @@ Search for the question in the collection and retrieve the semantic top-3 matche
 
 
 ```python
-question_embedding = genai.embed_content(
-    model="models/text-embedding-004", content=question
-)["embedding"]
+quest_embed = client.models.embed_content(model="text-embedding-004", contents=question)
 
 search_res = milvus_client.search(
     collection_name=collection_name,
-    data=[question_embedding],
+    data=[quest_embed.embeddings[0].values],
     limit=3,  # Return top 3 results
     search_params={"metric_type": "IP", "params": {}},  # Inner product distance
     output_fields=["text"],  # Return the text field
@@ -212,7 +210,6 @@ search_res = milvus_client.search(
 ```
 
 Let's take a look at the search results of the query
-
 
 
 ```python
@@ -255,6 +252,8 @@ Define system and user prompts for the Lanage Model. This prompt is assembled wi
 
 
 ```python
+from google.genai import types
+
 SYSTEM_PROMPT = """
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 """
@@ -273,15 +272,17 @@ Use the Gemini to generate a response based on the prompts.
 
 
 ```python
-gemini_model = genai.GenerativeModel(
-    "gemini-1.5-flash", system_instruction=SYSTEM_PROMPT
+response = client.models.generate_content(
+    model="gemini-2.0-flash",
+    config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
+    contents=USER_PROMPT,
 )
-response = gemini_model.generate_content(USER_PROMPT)
 print(response.text)
 ```
 
-    Milvus stores data in two ways:  Inserted data (vector data, scalar data, and collection-specific schema) is stored as an incremental log in persistent storage using object storage backends such as MinIO, AWS S3, Google Cloud Storage, Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage.  Metadata, generated by each Milvus module, is stored in etcd.
+    Milvus stores two types of data: inserted data and metadata. Inserted data, which includes vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental logs. Milvus supports multiple object storage backends. Metadata is generated within Milvus, and each Milvus module has its own metadata that is stored in etcd.
     
 
 
 Great! We have successfully built a RAG pipeline with Milvus and Gemini.
+

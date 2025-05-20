@@ -20,8 +20,8 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to conduct a hybrid search.</p>
-<p>A hybrid search is essentially a vector search with attribute filtering. By specifying <a href="/docs/boolean.md">boolean expressions</a> that filter the scalar fields or the primary key field, you can limit your search with certain conditions.</p>
-<p>The following example shows how to perform a hybrid search on the basis of a regular <a href="/docs/search.md">vector search</a>. Suppose you want to search for certain books based on their vectorized introductions, but you only want those within a specific range of word count. You can then specify the boolean expression to filter the <code translate="no">word_count</code> field in the search parameters. Milvus will search for similar vectors only among those entities that match the expression.</p>
+<p>A hybrid search is essentially a vector search with attribute filtering. By specifying <a href="/docs/v2.0.x/boolean.md">boolean expressions</a> that filter the scalar fields or the primary key field, you can limit your search with certain conditions.</p>
+<p>The following example shows how to perform a hybrid search on the basis of a regular <a href="/docs/v2.0.x/search.md">vector search</a>. Suppose you want to search for certain books based on their vectorized introductions, but you only want those within a specific range of word count. You can then specify the boolean expression to filter the <code translate="no">word_count</code> field in the search parameters. Milvus will search for similar vectors only among those entities that match the expression.</p>
 <h2 id="Load-collection" class="common-anchor-header">Load collection<button data-href="#Load-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,7 +193,7 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
     </tr>
   <tr>
         <td><code translate="no">params</code></td>
-        <td>Search parameter(s) specific to the index. See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>Search parameter(s) specific to the index. See <a href="/docs/v2.0.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     <tr>
         <td><code translate="no">limit</code></td>
@@ -201,7 +201,7 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
     </tr>
   <tr>
         <td><code translate="no">expr</code></td>
-        <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+        <td>Boolean expression used to filter attribute. See <a href="/docs/v2.0.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">partition_names</code> (optional)</td>
@@ -251,7 +251,7 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
     </tr>
     <tr>
         <td><code translate="no">expr</code> (optional)</td>
-        <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+        <td>Boolean expression used to filter attribute. See <a href="/docs/v2.0.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code> (optional)</td>
@@ -294,7 +294,7 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
     <tr>
         <td><code translate="no">searchParam</code></td>
         <td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+    <td>See <a href="/docs/v2.0.x/index.md">Vector Index</a> for more information.</td>
     </tr>
   <tr>
     <td><code translate="no">ctx</code></td>
@@ -314,7 +314,7 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
   <tr>
         <td><code translate="no">expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.0.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code></td>
@@ -390,12 +390,12 @@ Travel <span class="hljs-title">Timestamp</span>(<span class="hljs-params">Speci
   <tr>
         <td><code translate="no">Expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.0.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">Params</code></td>
         <td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+    <td>See <a href="/docs/v2.0.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -459,7 +459,7 @@ System.out.<span class="hljs-built_in">println</span>(wrapperSearch.getFieldData
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Try <a href="/docs/timetravel.md">Search with Time Travel</a></p></li>
+<li><p>Try <a href="/docs/v2.0.x/timetravel.md">Search with Time Travel</a></p></li>
 <li><p>Explore API references for Milvus SDKs:</p>
 <ul>
 <li><a href="/api-reference/pymilvus/v2.0.x/About.md">PyMilvus API reference</a></li>

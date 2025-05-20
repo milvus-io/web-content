@@ -18,7 +18,7 @@ title: 协调员 HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>如<a href="/docs/zh/architecture_overview.md">Milvus 架构</a>所示，Milvus 由许多组件组成，并以分布式方式工作。在所有组件中，Milvus 通过<a href="/docs/zh/scaleout.md">扩大和缩小</a>节点来确保工人的高可用性，使协调器成为链条中唯一的薄弱环节。</p>
+    </button></h1><p>如<a href="/docs/zh/v2.4.x/architecture_overview.md">Milvus 架构</a>所示，Milvus 由许多组件组成，并以分布式方式工作。在所有组件中，Milvus 通过<a href="/docs/zh/v2.4.x/scaleout.md">扩大和缩小</a>节点来确保工人的高可用性，使协调器成为链条中唯一的薄弱环节。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,9 +170,9 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
       </svg>
     </button></h2><p>协调器 HA 默认为禁用。您可以通过更改 Milvus 配置文件中的以下项目手动启用此功能。</p>
 <ul>
-<li><a href="/docs/zh/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/zh/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/zh/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/zh/v2.4.x/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/zh/v2.4.x/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/zh/v2.4.x/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -74,9 +74,9 @@ title: إدارة المجموعات
     </button></h2><p>يمكنك إنشاء مجموعة بأي من الطريقتين التاليتين:</p>
 <ul>
 <li><p><strong>الإعداد السريع</strong></p>
-<p>بهذه الطريقة، يمكنك إنشاء مجموعة ببساطة عن طريق إعطائها اسمًا وتحديد عدد أبعاد التضمينات المتجهة التي سيتم تخزينها في هذه المجموعة. لمزيد من التفاصيل، راجع <a href="/docs/ar/manage-collections.md">الإعداد السريع</a>.</p></li>
+<p>بهذه الطريقة، يمكنك إنشاء مجموعة ببساطة عن طريق إعطائها اسمًا وتحديد عدد أبعاد التضمينات المتجهة التي سيتم تخزينها في هذه المجموعة. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.4.x/manage-collections.md">الإعداد السريع</a>.</p></li>
 <li><p><strong>الإعداد المخصص</strong></p>
-<p>بدلاً من السماح ل In Milvus بتحديد كل شيء تقريبًا لمجموعتك، يمكنك تحديد <strong>المخطط</strong> <strong>ومعلمات الفهرس</strong> للمجموعة بنفسك. لمزيد من التفاصيل، راجع <a href="/docs/ar/manage-collections.md">الإعداد المخصص</a>.</p></li>
+<p>بدلاً من السماح ل In Milvus بتحديد كل شيء تقريبًا لمجموعتك، يمكنك تحديد <strong>المخطط</strong> <strong>ومعلمات الفهرس</strong> للمجموعة بنفسك. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.4.x/manage-collections.md">الإعداد المخصص</a>.</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">الإعداد السريع</h3><p>على خلفية القفزة الكبيرة في صناعة الذكاء الاصطناعي، يحتاج معظم المطورين فقط إلى مجموعة بسيطة وديناميكية للبدء بها. يسمح Milvus بإعداد سريع لمثل هذه المجموعة بثلاث وسيطات فقط:</p>
 <ul>
@@ -272,7 +272,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </ul>
 <p>تكون المجموعة المفهرسة والمحملة تلقائيًا من الكود المقدم جاهزة لإدراج البيانات بشكل فوري.</p>
 <h3 id="Customized-setup" class="common-anchor-header">إعداد مخصص</h3><p>بدلاً من السماح لـ Milvus بتحديد كل شيء تقريبًا لمجموعتك، يمكنك تحديد <strong>المخطط</strong> <strong>ومعلمات الفهرس</strong> للمجموعة بنفسك.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">الخطوة 1: إعداد المخطط</h4><p>يحدد المخطط بنية المجموعة. ضمن المخطط، لديك خيار تمكين أو تعطيل <code translate="no">enable_dynamic_field</code> ، وإضافة حقول محددة مسبقًا، وتعيين سمات لكل حقل. للحصول على شرح مفصل للمفهوم وأنواع البيانات المتاحة، راجع <a href="/docs/ar/schema.md">شرح المخطط</a>.</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">الخطوة 1: إعداد المخطط</h4><p>يحدد المخطط بنية المجموعة. ضمن المخطط، لديك خيار تمكين أو تعطيل <code translate="no">enable_dynamic_field</code> ، وإضافة حقول محددة مسبقًا، وتعيين سمات لكل حقل. للحصول على شرح مفصل للمفهوم وأنواع البيانات المتاحة، راجع <a href="/docs/ar/v2.4.x/schema.md">شرح المخطط</a>.</p>
 <div class="language-python">
 <p>لإعداد مخطط، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> لإنشاء كائن مخطط و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> لإضافة حقول إلى المخطط.</p>
 </div>
@@ -526,7 +526,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">الخطوة 2: إعداد معلمات الفهرس</h4><p>تحدد معلمات الفهرس كيفية تنظيم Milvus لبياناتك داخل المجموعة. يمكنك تخصيص عملية الفهرسة لحقول معينة عن طريق تعديل <code translate="no">metric_type</code> و <code translate="no">index_type</code>. بالنسبة لحقل المتجهات، لديك المرونة في تحديد <code translate="no">COSINE</code> أو <code translate="no">L2</code> أو <code translate="no">IP</code> أو <code translate="no">HAMMING</code> أو <code translate="no">JACCARD</code> كـ <code translate="no">metric_type</code> ، اعتمادًا على نوع المتجهات التي تعمل معها. لمزيد من المعلومات، راجع <a href="/docs/ar/metric.md">مقاييس التشابه</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">الخطوة 2: إعداد معلمات الفهرس</h4><p>تحدد معلمات الفهرس كيفية تنظيم Milvus لبياناتك داخل المجموعة. يمكنك تخصيص عملية الفهرسة لحقول معينة عن طريق تعديل <code translate="no">metric_type</code> و <code translate="no">index_type</code>. بالنسبة لحقل المتجهات، لديك المرونة في تحديد <code translate="no">COSINE</code> أو <code translate="no">L2</code> أو <code translate="no">IP</code> أو <code translate="no">HAMMING</code> أو <code translate="no">JACCARD</code> كـ <code translate="no">metric_type</code> ، اعتمادًا على نوع المتجهات التي تعمل معها. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.4.x/metric.md">مقاييس التشابه</a>.</p>
 <div class="language-python">
 <p>لإعداد معلمات الفهرس، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> لإعداد معلمات الفهرس و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> لإضافة الفهرس.</p>
 </div>
@@ -898,7 +898,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يتم تحميل المجموعة التي تم إنشاؤها أعلاه تلقائيًا. لمعرفة المزيد حول تحميل مجموعة وتحريرها، راجع <a href="/docs/ar/manage-collections.md#Load--Release-Collection">تحميل مجموعة وتحريرها</a>.</p></li>
+<p>يتم تحميل المجموعة التي تم إنشاؤها أعلاه تلقائيًا. لمعرفة المزيد حول تحميل مجموعة وتحريرها، راجع <a href="/docs/ar/v2.4.x/manage-collections.md#Load--Release-Collection">تحميل مجموعة وتحريرها</a>.</p></li>
 <li><p><strong>قم بإنشاء مجموعة وملف فهرس بشكل منفصل.</strong></p>
 <p><div class="multipleCode">
 <a href="#python">بايثون </a><a href="#java">جافا جافا</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
@@ -1015,7 +1015,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لا يتم تحميل المجموعة التي تم إنشاؤها أعلاه تلقائيًا. يمكنك إنشاء فهرس للمجموعة على النحو التالي. لا يؤدي إنشاء فهرس للمجموعة بطريقة منفصلة إلى تحميل المجموعة تلقائيًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/manage-collections.md#Load--Release-Collection">تحميل المجموعة وتحريرها</a>.</p>
+<p>لا يتم تحميل المجموعة التي تم إنشاؤها أعلاه تلقائيًا. يمكنك إنشاء فهرس للمجموعة على النحو التالي. لا يؤدي إنشاء فهرس للمجموعة بطريقة منفصلة إلى تحميل المجموعة تلقائيًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.4.x/manage-collections.md#Load--Release-Collection">تحميل المجموعة وتحريرها</a>.</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1154,7 +1154,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>لا يتم تحميل المجموعة التي تم إنشاؤها أعلاه تلقائيًا. يمكنك إنشاء فهرس للمجموعة على النحو التالي. لا يؤدي إنشاء فهرس للمجموعة بطريقة منفصلة إلى تحميل المجموعة تلقائيًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/manage-collections.md">تحميل وتحرير المجموعة</a>.</p>
+<p>لا يتم تحميل المجموعة التي تم إنشاؤها أعلاه تلقائيًا. يمكنك إنشاء فهرس للمجموعة على النحو التالي. لا يؤدي إنشاء فهرس للمجموعة بطريقة منفصلة إلى تحميل المجموعة تلقائيًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.4.x/manage-collections.md">تحميل وتحرير المجموعة</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">بايثون </a><a href="#java">جافا جافا</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>

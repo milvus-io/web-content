@@ -359,10 +359,10 @@
   resolved "https://registry.npmmirror.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@zilliz/toolkit@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@zilliz/toolkit/-/toolkit-0.2.2.tgz#91e99dbe472c412f9e5a5d78bc6285f7d8797915"
-  integrity sha512-liktpjC5GJZOb3SAkmOgXIjD4/PhM2+s+9zvJ5hEaY/XJX23zBmlRrNUUTNW4RnWoyRCQy+yjTvvBWuL+4E3Hg==
+"@zilliz/toolkit@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.npmmirror.com/@zilliz/toolkit/-/toolkit-0.2.4.tgz"
+  integrity sha512-uLjurJ+RQeKCJpEVa3pThUFeXdFbBOnzR2YVcreBb2FeMvfMnSGDNiY5zAPS5/+EGsJ7HJrGcq2NPgKLVUOSKA==
 
 acorn-jsx@^5.0.0:
   version "5.3.2"

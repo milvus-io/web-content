@@ -9,7 +9,7 @@ summary: >-
   können.
 title: Aufrüstung von Milvus Standalone mit Milvus Operator
 ---
-<div class="tab-wrapper"><a href="/docs/de/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/de/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/de/upgrade_milvus_standalone-docker.md" class=''>Zusammenstellen</a></div>
+<div class="tab-wrapper"><a href="/docs/de/v2.4.x/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/de/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/de/v2.4.x/upgrade_milvus_standalone-docker.md" class=''>Zusammenstellen</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Aufrüstung von Milvus Standalone mit Milvus Operator<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -36,7 +36,7 @@ title: Scalar Index
         ></path>
       </svg>
     </button></h2><p>Once conducting vector similarity searches in Milvus, you can use logical operators to organize scalar fields into boolean expressions.</p>
-<p>When Milvus receives a search request with such a boolean expression, it parses the boolean expression into an abstract syntax tree (AST) to generate a physical plan for attribute filtering. Milvus then applies the physical plan in each segment to generate a <a href="/docs/bitset.md">bitset</a> as the filtering result and includes the result as a vector search parameter to narrow down the search scope. In this case, the speed of vector searches relies heavily on the speed of attribute filtering.</p>
+<p>When Milvus receives a search request with such a boolean expression, it parses the boolean expression into an abstract syntax tree (AST) to generate a physical plan for attribute filtering. Milvus then applies the physical plan in each segment to generate a <a href="/docs/v2.4.x/bitset.md">bitset</a> as the filtering result and includes the result as a vector search parameter to narrow down the search scope. In this case, the speed of vector searches relies heavily on the speed of attribute filtering.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -158,12 +158,12 @@ title: Scalar Index
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>To index a scalar field, read <a href="/docs/index-scalar-fields.md">Build an Index on Scalars</a>.</p></li>
+<li><p>To index a scalar field, read <a href="/docs/v2.4.x/index-scalar-fields.md">Build an Index on Scalars</a>.</p></li>
 <li><p>To learn more about the related terms and rules mentioned above, read</p>
 <ul>
-<li><a href="/docs/bitset.md">Bitset</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid search</a></li>
-<li><a href="/docs/boolean.md">Boolean expression rules</a></li>
-<li><a href="/docs/schema.md#Supported-data-type">Supported data types</a></li>
+<li><a href="/docs/v2.4.x/bitset.md">Bitset</a></li>
+<li><a href="/docs/v2.4.x/multi-vector-search.md">Hybrid search</a></li>
+<li><a href="/docs/v2.4.x/boolean.md">Boolean expression rules</a></li>
+<li><a href="/docs/v2.4.x/schema.md#Supported-data-type">Supported data types</a></li>
 </ul></li>
 </ul>

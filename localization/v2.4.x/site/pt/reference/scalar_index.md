@@ -36,7 +36,7 @@ title: Índice escalar
         ></path>
       </svg>
     </button></h2><p>Ao efetuar pesquisas de semelhança vetorial no Milvus, pode utilizar operadores lógicos para organizar campos escalares em expressões booleanas.</p>
-<p>Quando o Milvus recebe um pedido de pesquisa com uma expressão booleana deste tipo, analisa a expressão booleana numa árvore de sintaxe abstrata (AST) para gerar um plano físico para filtragem de atributos. O Milvus aplica então o plano físico em cada segmento para gerar um <a href="/docs/pt/bitset.md">conjunto de bits</a> como resultado da filtragem e inclui o resultado como parâmetro de pesquisa vetorial para limitar o âmbito da pesquisa. Neste caso, a velocidade das pesquisas vectoriais depende fortemente da velocidade da filtragem de atributos.</p>
+<p>Quando o Milvus recebe um pedido de pesquisa com uma expressão booleana deste tipo, analisa a expressão booleana numa árvore de sintaxe abstrata (AST) para gerar um plano físico para filtragem de atributos. O Milvus aplica então o plano físico em cada segmento para gerar um <a href="/docs/pt/v2.4.x/bitset.md">conjunto de bits</a> como resultado da filtragem e inclui o resultado como parâmetro de pesquisa vetorial para limitar o âmbito da pesquisa. Neste caso, a velocidade das pesquisas vectoriais depende fortemente da velocidade da filtragem de atributos.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +154,12 @@ title: Índice escalar
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Para indexar um campo escalar, leia <a href="/docs/pt/index-scalar-fields.md">Criar um índice em escalares</a>.</p></li>
+<li><p>Para indexar um campo escalar, leia <a href="/docs/pt/v2.4.x/index-scalar-fields.md">Criar um índice em escalares</a>.</p></li>
 <li><p>Para saber mais sobre os termos e regras relacionados mencionados acima, leia</p>
 <ul>
-<li><a href="/docs/pt/bitset.md">Conjunto de bits</a></li>
-<li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
-<li><a href="/docs/pt/boolean.md">Regras de expressão booleana</a></li>
-<li><a href="/docs/pt/schema.md#Supported-data-type">Tipos de dados suportados</a></li>
+<li><a href="/docs/pt/v2.4.x/bitset.md">Conjunto de bits</a></li>
+<li><a href="/docs/pt/v2.4.x/multi-vector-search.md">Pesquisa híbrida</a></li>
+<li><a href="/docs/pt/v2.4.x/boolean.md">Regras de expressão booleana</a></li>
+<li><a href="/docs/pt/v2.4.x/schema.md#Supported-data-type">Tipos de dados suportados</a></li>
 </ul></li>
 </ul>

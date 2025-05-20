@@ -39,10 +39,10 @@ title: Aperçu de la migration de Milvus
       </svg>
     </button></h2><p>L'outil <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> prend en charge une variété de chemins de migration pour répondre aux différents besoins des utilisateurs :</p>
 <ul>
-<li><a href="/docs/fr/es2m.md">Elasticsearch vers Milvus 2.x</a>: Permet aux utilisateurs de migrer des données à partir d'environnements Elasticsearch pour tirer parti des capacités de recherche vectorielle optimisée de Milvus.</li>
-<li><a href="/docs/fr/f2m.md">Faiss vers Milvus 2.x</a>: Prise en charge expérimentale du transfert de données à partir de Faiss, une bibliothèque populaire pour la recherche efficace de similarités.</li>
-<li><a href="/docs/fr/m2m.md">Milvus 1.x vers Milvus 2.x</a>: Assurer une transition en douceur des données des versions antérieures vers le cadre le plus récent.</li>
-<li><a href="/docs/fr/from-m2x.md">Milvus 2.3.x vers Milvus 2.3.x ou supérieur</a>: Fournir un chemin de migration unique pour les utilisateurs qui ont déjà migré vers 2.3.x.</li>
+<li><a href="/docs/fr/v2.4.x/es2m.md">Elasticsearch vers Milvus 2.x</a>: Permet aux utilisateurs de migrer des données à partir d'environnements Elasticsearch pour tirer parti des capacités de recherche vectorielle optimisée de Milvus.</li>
+<li><a href="/docs/fr/v2.4.x/f2m.md">Faiss vers Milvus 2.x</a>: Prise en charge expérimentale du transfert de données à partir de Faiss, une bibliothèque populaire pour la recherche efficace de similarités.</li>
+<li><a href="/docs/fr/v2.4.x/m2m.md">Milvus 1.x vers Milvus 2.x</a>: Assurer une transition en douceur des données des versions antérieures vers le cadre le plus récent.</li>
+<li><a href="/docs/fr/v2.4.x/from-m2x.md">Milvus 2.3.x vers Milvus 2.3.x ou supérieur</a>: Fournir un chemin de migration unique pour les utilisateurs qui ont déjà migré vers 2.3.x.</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">Caractéristiques<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

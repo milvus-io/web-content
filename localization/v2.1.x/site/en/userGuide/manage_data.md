@@ -20,7 +20,7 @@ summary: ''
       </svg>
     </button></h1><p>Data in Milvus are called entities. An entity consists of a group of fields and is used to represent unstructured data like images, magazine articles, short videos, and more.</p>
 <ul>
-<li><p><a href="/docs/insert_data.md">Insert Data</a>: Prepare and insert entities into Milvus. Milvus 2.1 now supports VARCHAR data type on scalar field.</p></li>
-<li><p><a href="/docs/delete_data.md">Delete Data</a>: Milvus supports deleting entities by primary key filtered with boolean expression.</p></li>
-<li><p><a href="/docs/compact_data.md">Compact Data</a>: Milvus supports automatic data compaction by default. You can still compact data manually and check the compaction status.</p></li>
+<li><p><a href="/docs/v2.1.x/insert_data.md">Insert Data</a>: Prepare and insert entities into Milvus. Milvus 2.1 now supports VARCHAR data type on scalar field.</p></li>
+<li><p><a href="/docs/v2.1.x/delete_data.md">Delete Data</a>: Milvus supports deleting entities by primary key filtered with boolean expression.</p></li>
+<li><p><a href="/docs/v2.1.x/compact_data.md">Compact Data</a>: Milvus supports automatic data compaction by default. You can still compact data manually and check the compaction status.</p></li>
 </ul>

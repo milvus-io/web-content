@@ -97,6 +97,68 @@ export analyzerParams='{
     }'
 ```
 
+To check the execution result of an analyzer, use the `run_analyzer` method:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Sample text to analyze
+text = "An efficient system relies on a robust analyzer to correctly process text for various applications."
+
+# Run analyzer
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+```
+
+```java
+import io.milvus.v2.service.vector.request.RunAnalyzerReq;
+import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+List<String> texts = new ArrayList<>();
+texts.add("An efficient system relies on a robust analyzer to correctly process text for various applications.");
+
+RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
+```
+
+```javascript
+// javascrip# Sample text to analyze
+const text = "An efficient system relies on a robust analyzer to correctly process text for various applications."
+
+// Run analyzer
+const result = await client.run_analyzer({
+    text,
+    analyzer_params
+});
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+The output will be:
+
+```plaintext
+['efficient', 'system', 'relies', 'on', 'robust', 'analyzer', 'to', 'correctly', 'process', 'text', 'various', 'applications']
+```
+
+This demonstrates that the analyzer properly tokenizes the input text by filtering out the stop words `"a"`, `"an"`, and `"for"`, while returning the remaining meaningful tokens.
+
 The configuration of the `standard` built-in analyzer above is equivalent to setting up a [custom analyzer](analyzer-overview.md#Custom-analyzer) with the following parameters, where `tokenizer` and `filter` options are explicitly defined to achieve similar functionality:
 
 <div class="multipleCode">
@@ -173,8 +235,6 @@ Milvus offers the following built-in analyzers, each designed for specific text 
 
 - `chinese`: Specialized for processing Chinese text, including tokenization adapted for Chinese language structures.
 
-For a list of built-in analyzers and their customizable settings, refer to [Built-in Analyzer Reference](built-in-analyzers).
-
 ### Custom analyzer
 
 For more advanced text processing, custom analyzers in Milvus allow you to build a tailored text-handling pipeline by specifying both a **tokenizer** and **filters**. This setup is ideal for specialized use cases where precise control is required.
@@ -225,8 +285,6 @@ export analyzerParams='{
        "type": "whitespace"
     }'
 ```
-
-For a list of tokenizers available to choose from, refer to [Tokenizer Reference](tokenizers).
 
 #### Filter
 
@@ -364,8 +422,6 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
     }'
     ```
 
-    For a list of available filter types and their specific parameters, refer to [Filter Reference](filters).
-
 ## Example use
 
 In this example, you will create a collection schema that includes:
@@ -377,6 +433,8 @@ In this example, you will create a collection schema that includes:
     - One field uses a built-in analyzer.
 
     - The other uses a custom analyzer.
+
+Before incorporating these configurations into your collection, you'll verify each analyzer using the `run_analyzer` method.
 
 ### Step 1: Initialize MilvusClient and create schema
 
@@ -463,6 +521,8 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 
     - **Configuration:** Define the analyzer parameters for the built-in English analyzer.
 
+    - **Verification:** Use `run_analyzer` to check that the configuration produces the expected tokenization.
+
     <div class="multipleCode">
         <a href="#python">Python</a>
         <a href="#java">Java</a>
@@ -477,11 +537,31 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         "type": "english"
     }
     
+    # Verify built-in analyzer configuration
+    sample_text = "Milvus simplifies text analysis for search."
+    result = client.run_analyzer(sample_text, analyzer_params_built_in)
+    print("Built-in analyzer output:", result)
+    
+    # Expected output:
+    # Built-in analyzer output: ['milvus', 'simplifi', 'text', 'analysi', 'search']
+    
     ```
 
     ```java
     Map<String, Object> analyzerParamsBuiltin = new HashMap<>();
     analyzerParamsBuiltin.put("type", "english");
+
+    List<String> texts = new ArrayList<>();
+    texts.add("Milvus simplifies text ana
+    
+    lysis for search.");
+    
+    RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+            .texts(texts)
+            .analyzerParams(analyzerParams)
+            .build());
+    List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
+    
     ```
 
     ```javascript
@@ -489,6 +569,13 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     const analyzerParamsBuiltIn = {
       type: "english",
     };
+
+    const sample_text = "Milvus simplifies text analysis for search.";
+    const result = await client.run_analyzer({
+        text: sample_text, 
+        analyzer_params: analyzer_params_built_in
+    });
+    
     ```
 
     ```go
@@ -502,6 +589,8 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 1. **Configure and verify a custom analyzer:**
 
     - **Configuration:** Define a custom analyzer that uses a standard tokenizer along with a built-in lowercase filter and custom filters for token length and stop words.
+
+    - **Verification:** Use `run_analyzer` to ensure the custom configuration processes text as intended.
 
     <div class="multipleCode">
         <a href="#python">Python</a>
@@ -528,6 +617,14 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         ]
     }
     
+    # Verify custom analyzer configuration
+    sample_text = "Milvus provides flexible, customizable analyzers for robust text processing."
+    result = client.run_analyzer(sample_text, analyzer_params_custom)
+    print("Custom analyzer output:", result)
+    
+    # Expected output:
+    # Custom analyzer output: ['milvus', 'provides', 'flexible', 'customizable', 'analyzers', 'robust', 'text', 'processing']
+    
     ```
 
     ```java
@@ -546,6 +643,15 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
                     }}
             )
     );
+    
+    List<String> texts = new ArrayList<>();
+    texts.add("Milvus provides flexible, customizable analyzers for robust text processing.");
+    
+    RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+            .texts(texts)
+            .analyzerParams(analyzerParams)
+            .build());
+    List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
     ```
 
     ```javascript
@@ -564,6 +670,11 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         },
       ],
     };
+    const sample_text = "Milvus provides flexible, customizable analyzers for robust text processing.";
+    const result = await client.run_analyzer({
+        text: sample_text, 
+        analyzer_params: analyzer_params_built_in
+    });
     ```
 
     ```go

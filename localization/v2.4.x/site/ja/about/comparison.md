@@ -154,6 +154,6 @@ summary: この記事では、Milvusと他のベクトル検索ソリューシ�
       </svg>
     </button></h2><ul>
 <li><p><strong>トライアル</strong>：Milvus<a href="https://milvus.io/docs/quickstart.md">クイックスタート</a>または<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloudにサインアップして</a>、Milvusを直接体験してください。</p></li>
-<li><p><strong>もっと知る</strong>：包括的な<a href="/docs/ja/glossary.md">用語集と</a> <a href="https://milvus.io/docs/manage-collections.md">ユーザーガイドで</a>Milvusの機能をより深く知ることができます。</p></li>
+<li><p><strong>もっと知る</strong>：包括的な<a href="/docs/ja/v2.4.x/glossary.md">用語集と</a> <a href="https://milvus.io/docs/manage-collections.md">ユーザーガイドで</a>Milvusの機能をより深く知ることができます。</p></li>
 <li><p><strong>他の選択肢を探す</strong>：ベクターデータベースの選択肢をより幅広く比較するには、<a href="https://zilliz.com/comparison">このページの</a>その他のリソースをご覧ください。</p></li>
 </ul>

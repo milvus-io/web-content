@@ -291,9 +291,9 @@ connections.connect(
       </svg>
     </button></h2><p>Having connected to a Milvus server, you can:</p>
 <ul>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/insert_data.md">Manage data</a></li>
-<li><a href="/docs/build_index.md">Build a vector index</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.2.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.2.x/insert_data.md">Manage data</a></li>
+<li><a href="/docs/v2.2.x/build_index.md">Build a vector index</a></li>
+<li><a href="/docs/v2.2.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.2.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul>

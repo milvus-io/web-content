@@ -230,7 +230,7 @@ helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>앞의 명령에서 Milvus Helm 차트의 리포지토리를 로컬에 추가하고 최신 차트를 가져오도록 리포지토리를 업데이트합니다. 그런 다음 Milvus 인스턴스를 설치하고 이름을 <strong>my-release로</strong> 지정합니다.</p>
 <p>구성 <code translate="no">service.type</code> 값에 주목하세요. 이는 Layer-4 로드 밸런서를 통해 Milvus 인스턴스를 노출하고 싶다는 것을 나타냅니다.</p>
-<p>Layer-7 로드 밸런서를 통해 Milvus 인스턴스를 노출하려면 <a href="/docs/ko/gcp_layer7.md">이 글을 읽어보세요</a>.</p>
+<p>Layer-7 로드 밸런서를 통해 Milvus 인스턴스를 노출하려면 <a href="/docs/ko/v2.4.x/gcp_layer7.md">이 글을 읽어보세요</a>.</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">배포 확인<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,6 +282,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>다른 클라우드에 Milvus를 배포하는 방법을 알아보려면 다음과 같이 하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Kubernetes로 AWS에 Milvus 클러스터 배포하기</a></li>
-<li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Azure에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.4.x/eks.md">Kubernetes로 AWS에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.4.x/azure.md">Kubernetes를 사용하여 Azure에 Milvus 클러스터 배포하기</a></li>
 </ul>

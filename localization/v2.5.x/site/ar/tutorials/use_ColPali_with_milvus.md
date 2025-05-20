@@ -1,12 +1,18 @@
 ---
 id: use_ColPali_with_milvus.md
 summary: >-
-  في هذا الدفتر، نشير إلى هذا النوع من التمثيل متعدد المتجهات باسم "تضمينات
+  في هذا الدفتر، نشير إلى هذا النوع من التمثيل متعدد النواقل باسم "تضمينات
   ColBERT" من أجل التعميم. ومع ذلك، فإن النموذج الفعلي المستخدم هو نموذج
   ColPali. سنوضح كيفية استخدام ميلفوس لاسترجاع متعدد المتجهات. بناءً على ذلك،
   سنقدم كيفية استخدام ColPali لاسترجاع الصفحات بناءً على استعلام معين.
 title: استخدام كولبالي للاسترجاع متعدد الوسائط مع ميلفوس
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">استخدام كولبالي للاسترجاع متعدد الوسائط مع ميلفوس<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,21 +28,15 @@ title: استخدام كولبالي للاسترجاع متعدد الوسائ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>تستخدم نماذج الاسترجاع الحديثة عادةً تضمينًا واحدًا لتمثيل النص أو الصور. ومع ذلك، فإن ColBERT هو نموذج عصبي يستخدم قائمة من التضمينات لكل مثيل بيانات ويستخدم عملية "MaxSim" لحساب التشابه بين نصين. بالإضافة إلى البيانات النصية، تحتوي الأشكال والجداول والرسوم البيانية أيضًا على معلومات غنية، والتي غالبًا ما يتم تجاهلها في استرجاع المعلومات المستندة إلى النصوص.</p>
+    </button></h1><p>تستخدم نماذج الاسترجاع الحديثة عادةً تضمينًا واحدًا لتمثيل النص أو الصور. ومع ذلك، فإن ColBERT هو نموذج عصبي يستخدم قائمة من التضمينات لكل مثيل بيانات ويستخدم عملية "MaxSim" لحساب التشابه بين نصين. بالإضافة إلى البيانات النصية، تحتوي الأشكال والجداول والرسوم البيانية أيضًا على معلومات غنية، والتي غالبًا ما يتم تجاهلها في استرجاع المعلومات المستندة إلى النصوص.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>تقارن دالة MaxSim استعلامًا مع مستند (ما تبحث فيه) من خلال النظر في تضمينات الرموز المميزة الخاصة بهما. لكل كلمة في الاستعلام، تقوم باختيار الكلمة الأكثر تشابهًا من المستند (باستخدام تشابه جيب التمام أو مسافة L2 المربعة) وتجمع أوجه التشابه القصوى هذه عبر جميع الكلمات في الاستعلام</p>
-<p>ColPali هي طريقة تجمع بين تمثيل ColBERT متعدد المتجهات مع PaliGemma (نموذج لغوي كبير متعدد الوسائط) للاستفادة من قدرات الفهم القوية. يتيح هذا النهج تمثيل صفحة تحتوي على كل من النصوص والصور باستخدام تضمين موحد متعدد المتجهات. يمكن للتضمينات داخل هذا التمثيل متعدد النواقل أن تلتقط معلومات مفصلة، مما يحسّن أداء التوليد المعزز للاسترجاع (RAG) للبيانات متعددة الوسائط.</p>
+<p>ColPali هي طريقة تجمع بين تمثيل ColBERT متعدد المتجهات مع PaliGemma (نموذج لغوي كبير متعدد الوسائط) للاستفادة من قدرات الفهم القوية. يتيح هذا النهج تمثيل صفحة تحتوي على كل من النص والصور باستخدام تضمين موحد متعدد المتجهات. يمكن للتضمينات داخل هذا التمثيل متعدد النواقل أن تلتقط معلومات مفصلة، مما يحسّن أداء التوليد المعزز للاسترجاع (RAG) للبيانات متعددة الوسائط.</p>
 <p>في هذا الدفتر، نشير في هذا الدفتر إلى هذا النوع من التمثيل متعدد النواقل باسم "تضمينات كولبيرت" من أجل العمومية. ومع ذلك، فإن النموذج الفعلي المستخدم هو <strong>نموذج ColPali</strong>. سنوضح كيفية استخدام ميلفوس لاسترجاع متعدد المتجهات. بناءً على ذلك، سنقدم كيفية استخدام ColPali لاسترجاع الصفحات بناءً على استعلام معين.</p>
 <h2 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -53,11 +53,11 @@ title: استخدام كولبالي للاسترجاع متعدد الوسائ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell">$ pip install pdf2image
-$ pip pymilvus
-$ pip install colpali_engine
-$ pip install tqdm
-$ pip instal pillow
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pdf2image</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install colpali_engine</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pillow</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prepare-the-data" class="common-anchor-header">إعداد البيانات<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,17 +84,17 @@ images = convert_from_path(pdf_path)
     image.save(<span class="hljs-string">f&quot;pages/page_<span class="hljs-subst">{i + <span class="hljs-number">1</span>}</span>.png&quot;</span>, <span class="hljs-string">&quot;PNG&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>بعد ذلك، سنقوم بتهيئة قاعدة بيانات باستخدام Milvus Lite. يمكنك التبديل بسهولة إلى مثيل Milvus الكامل عن طريق تعيين uri إلى العنوان المناسب حيث تتم استضافة خدمة Milvus الخاصة بك.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">import</span> concurrent.<span class="hljs-property">futures</span>
+<span class="hljs-keyword">import</span> concurrent.futures
 
-client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
 <li>إذا كنت تحتاج فقط إلى قاعدة بيانات متجهة محلية للبيانات الصغيرة الحجم أو النماذج الأولية، فإن تعيين uri كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا Milvus <a href="https://milvus.io/docs/milvus_lite.md">Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
-<li>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام عنوان الخادم والمنفذ كـ uri، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين خاصية المصادقة على Milvus، استخدم "&lt;your_username&gt;: &lt;your_password&gt;" كرمز مميز، وإلا فلا تقم بتعيين الرمز المميز.</li>
-<li>إذا كنت تستخدم <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المُدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> في Zilliz Cloud.</li>
+<li>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام عنوان الخادم والمنفذ كـ uri، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين ميزة المصادقة على Milvus، استخدم "<your_username>:<your_password>" كرمز مميز، وإلا فلا تقم بتعيين الرمز المميز.</li>
+<li>إذا كنت تستخدم <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، فاضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> في Zilliz Cloud.</li>
 </ul>
 </div>
 <p>سنقوم بتعريف فئة MilvusColbertRetriever للالتفاف حول عميل Milvus لاسترجاع البيانات متعددة النواقل. يعمل التطبيق على تسطيح تضمينات ColBERT وإدراجها في مجموعة، حيث يمثل كل صف تضمينًا فرديًا من قائمة تضمين ColBERT. كما يسجل أيضًا doc_id و seq_id لتتبع أصل كل تضمين.</p>
@@ -308,9 +308,9 @@ ds: <span class="hljs-type">List</span>[torch.Tensor] = []
 torch.Size([1030, 128])
 </code></pre>
 <p>سننشئ مجموعة تسمى "colpali" باستخدام MilvusColbertRetriever.</p>
-<pre><code translate="no" class="language-python">retriever = <span class="hljs-title class_">MilvusColbertRetriever</span>(collection_name=<span class="hljs-string">&quot;colpali&quot;</span>, milvus_client=client)
-retriever.<span class="hljs-title function_">create_collection</span>()
-retriever.<span class="hljs-title function_">create_index</span>()
+<pre><code translate="no" class="language-python">retriever = MilvusColbertRetriever(collection_name=<span class="hljs-string">&quot;colpali&quot;</span>, milvus_client=client)
+retriever.create_collection()
+retriever.create_index()
 <button class="copy-code-btn"></button></code></pre>
 <p>سنقوم بإدراج قوائم التضمين في قاعدة بيانات ميلفوس.</p>
 <pre><code translate="no" class="language-python">filepaths = [<span class="hljs-string">&quot;./pages/&quot;</span> + name <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> os.listdir(<span class="hljs-string">&quot;./pages&quot;</span>)]

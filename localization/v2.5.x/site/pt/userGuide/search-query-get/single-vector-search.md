@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Com base num ficheiro de índice que regista a ordem ordenada das incorporações vectoriais, a pesquisa ANN (Approximate Nearest Neighbor) localiza um subconjunto de incorporações vectoriais com base no vetor de consulta transportado num pedido de pesquisa recebido, compara o vetor de consulta com os do subgrupo e devolve os resultados mais semelhantes. Com a pesquisa ANN, o Milvus fornece uma experiência de pesquisa eficiente. Esta página ajuda-o a aprender como realizar pesquisas ANN básicas.</p>
+    </button></h1><p>Com base num ficheiro de índice que regista a ordem de ordenação dos vectores incorporados, a pesquisa ANN (Approximate Nearest Neighbor) localiza um subconjunto de vectores incorporados com base no vetor de consulta incluído num pedido de pesquisa recebido, compara o vetor de consulta com os do subgrupo e devolve os resultados mais semelhantes. Com a pesquisa ANN, o Milvus fornece uma experiência de pesquisa eficiente. Esta página ajuda-o a aprender como realizar pesquisas ANN básicas.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A pesquisa ANN e a pesquisa k-Nearest Neighbors (kNN) são os métodos habituais nas pesquisas de semelhança de vectores. Numa pesquisa kNN, é necessário comparar todos os vectores num espaço vetorial com o vetor de consulta transportado no pedido de pesquisa antes de descobrir os mais semelhantes, o que consome muito tempo e recursos.</p>
+    </button></h2><p>A pesquisa ANN e a pesquisa k-Nearest Neighbors (kNN) são os métodos habituais nas pesquisas de semelhança de vectores. Numa pesquisa kNN, é necessário comparar todos os vectores de um espaço vetorial com o vetor de consulta transportado no pedido de pesquisa antes de descobrir os mais semelhantes, o que consome muito tempo e recursos.</p>
 <p>Ao contrário das pesquisas kNN, um algoritmo de pesquisa ANN pede um ficheiro <strong>de índice</strong> que regista a ordem ordenada das incorporações vectoriais. Quando chega um pedido de pesquisa, pode utilizar o ficheiro de índice como referência para localizar rapidamente um subgrupo que provavelmente contém as incorporações vectoriais mais semelhantes ao vetor de consulta. Em seguida, pode utilizar o <strong>tipo de métrica</strong> especificado para medir a semelhança entre o vetor de consulta e os do subgrupo, ordenar os membros do grupo com base na semelhança com o vetor de consulta e descobrir os membros do grupo <strong>K de topo</strong>.</p>
 <p>As pesquisas ANN dependem de índices pré-construídos, e o rendimento da pesquisa, a utilização de memória e a correção da pesquisa podem variar com os tipos de índice escolhidos. É necessário equilibrar o desempenho e a correção da pesquisa.</p>
 <p>Para reduzir a curva de aprendizagem, Milvus fornece <strong>AUTOINDEX</strong>. Com o <strong>AUTOINDEX</strong>, o Milvus pode analisar a distribuição de dados dentro da sua coleção enquanto constrói o índice e define os parâmetros de índice mais optimizados com base na análise para atingir um equilíbrio entre o desempenho da pesquisa e a correção.</p>
@@ -71,8 +71,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nas pesquisas ANN, uma pesquisa de vetor único refere-se a uma pesquisa que envolve apenas um vetor de consulta. Com base no índice pré-construído e no tipo de métrica transportado no pedido de pesquisa, o Milvus irá encontrar os top-K vectores mais semelhantes ao vetor de consulta.</p>
-<p>Nesta secção, aprenderá a realizar uma pesquisa de vetor único. O trecho de código pressupõe a criação de uma coleção de forma <a href="/docs/pt/create-collection-instantly.md#Quick-Setup">rápida</a>. A solicitação de pesquisa carrega um único vetor de consulta e pede ao Milvus para usar o Produto Interno (IP) para calcular a similaridade entre os vetores de consulta e os vetores na coleção e retorna os três mais semelhantes.</p>
+    </button></h2><p>Nas pesquisas ANN, uma pesquisa de vetor único refere-se a uma pesquisa que envolve apenas um vetor de consulta. Com base no índice pré-construído e no tipo de métrica transportada no pedido de pesquisa, o Milvus irá encontrar os top-K vectores mais semelhantes ao vetor de consulta.</p>
+<p>Nesta secção, aprenderá a realizar uma pesquisa de um único vetor. O pedido de pesquisa carrega um único vetor de consulta e pede ao Milvus para usar o Inner Product (IP) para calcular a similaridade entre os vetores de consulta e os vetores na coleção e retorna os três mais semelhantes.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -252,7 +252,7 @@ curl --request POST \
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>O Milvus classifica os resultados da pesquisa pelas suas pontuações de semelhança com o vetor de consulta, por ordem descendente. A pontuação de semelhança é também designada por distância ao vetor de consulta e os seus intervalos de valores variam consoante os tipos de métricas utilizados.</p>
-<p>A tabela a seguir lista os tipos de métrica aplicáveis e os intervalos de distância correspondentes.</p>
+<p>A tabela a seguir lista os tipos de métricas aplicáveis e os intervalos de distância correspondentes.</p>
 <table>
    <tr>
      <th><p>Tipo de métrica</p></th>
@@ -835,7 +835,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Pode reparar que o parâmetro <code translate="no">limit</code> incluído nos pedidos de pesquisa determina o número de entidades a incluir nos resultados da pesquisa. Esse parâmetro especifica o número máximo de entidades a serem retornadas em uma única pesquisa, e geralmente é denominado <strong>top-K</strong>.</p>
-<p>Se pretender efetuar consultas paginadas, pode utilizar um ciclo para enviar vários pedidos de pesquisa, com os parâmetros <strong>Limite</strong> e <strong>Deslocamento</strong> transportados em cada pedido de consulta. Especificamente, pode definir o parâmetro <strong>Limite</strong> para o número de Entidades que pretende incluir nos resultados da consulta atual e definir o <strong>Deslocamento</strong> para o número total de Entidades que já foram devolvidas.</p>
+<p>Se desejar efetuar consultas paginadas, pode utilizar um ciclo para enviar vários pedidos de pesquisa, com os parâmetros <strong>Limite</strong> e <strong>Deslocamento</strong> transportados em cada pedido de consulta. Especificamente, pode definir o parâmetro <strong>Limite</strong> para o número de Entidades que pretende incluir nos resultados da consulta atual e definir o <strong>Deslocamento</strong> para o número total de Entidades que já foram devolvidas.</p>
 <p>A tabela abaixo descreve como definir os parâmetros <strong>Limite</strong> e <strong>Deslocamento</strong> para consultas paginadas ao retornar 100 Entidades de cada vez.</p>
 <table>
    <tr>
@@ -975,7 +975,7 @@ curl --request POST \
 <ul>
 <li><p>Pesquisa filtrada</p>
 <p>Pode incluir condições de filtragem num pedido de pesquisa para que o Milvus efectue a filtragem de metadados antes de efetuar pesquisas ANN, reduzindo o âmbito da pesquisa de toda a coleção para apenas as entidades que correspondem às condições de filtragem especificadas.</p>
-<p>Para obter mais informações sobre filtragem de metadados e condições de filtragem, consulte <a href="/docs/pt/filtered-search.md">Pesquisa filtrada</a> e <a href="/docs/pt/filtering">Filtragem</a>.</p></li>
+<p>Para mais informações sobre filtragem de metadados e condições de filtragem, consulte <a href="/docs/pt/filtered-search.md">Filtered Search</a>, <a href="/docs/pt/boolean.md">Filtering Explained</a>, e tópicos relacionados.</p></li>
 <li><p>Pesquisa de intervalo</p>
 <p>É possível melhorar a relevância dos resultados da pesquisa restringindo a distância ou a pontuação das entidades retornadas dentro de um intervalo específico. No Milvus, uma pesquisa de intervalo envolve o desenho de dois círculos concêntricos com a incorporação de vetor mais semelhante ao vetor de consulta como o centro. O pedido de pesquisa especifica o raio de ambos os círculos, e o Milvus devolve todas as incorporações vectoriais que se enquadram no círculo exterior mas não no círculo interior.</p>
 <p>Para obter mais informações sobre a pesquisa de intervalo, consulte <a href="/docs/pt/range-search.md">Pesquisa de intervalo</a>.</p></li>

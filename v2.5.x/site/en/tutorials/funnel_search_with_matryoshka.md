@@ -6,6 +6,7 @@ title: Funnel Search with Matryoshka Embeddings
 
 # Funnel Search with Matryoshka Embeddings
 
+<div style='margin: auto; width: 50%;'><img src='../../../assets/funnel-search.png' width='100%'></div>
 When building efficient vector search systems, one key challenge is managing storage costs while maintaining acceptable latency and recall. Modern embedding models output vectors with hundreds or thousands of dimensions, creating significant storage and computational overhead for the raw vector and index.
 
 Traditionally, the storage requirements are reduced by applying a quantization or dimensionality reduction method just before building the index. For instance, we can save storage by lowering the precision using Product Quantization (PQ) or the number of dimensions using Principal Component Analysis (PCA). These methods analyze the entire vector set to find a more compact one that maintains the semantic relationships between vectors.
@@ -14,9 +15,31 @@ While effective, these standard approaches reduce precision or dimensionality on
 
 Enter Matryoshka embeddings. Named after Russian nesting dolls (see illustration), these clever constructs embed multiple scales of representation within a single vector. Unlike traditional post-processing methods, Matryoshka embeddings learn this multi-scale structure during the initial training process. The result is remarkable: not only does the full embedding capture input semantics, but each nested subset prefix (first half, first quarter, etc.) provides a coherent, if less detailed, representation.
 
-<div style='margin: auto; width: 50%;'><img src='../../../assets/funnel-search.png' width='100%'></div>
-
 In this notebook, we examine how to use Matryoshka embeddings with Milvus for semantic search. We illustrate an algorithm called "funnel search" that allows us to perform similarity search over a small subset of our embedding dimensions without a drastic drop in recall.
+
+## Preparation
+
+
+```shell
+$ pip install datasets numpy pandas pymilvus sentence-transformers tqdm
+```
+
+For CPU-Only:
+
+
+```shell
+$ pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+```
+
+For CUDA 11.8:
+
+
+```shell
+$ pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+```
+
+
+Installation command of CUDA 11.8 is only an example. Please confirm your CUDA version when installing PyTorch.
 
 
 ```python

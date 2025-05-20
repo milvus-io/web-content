@@ -25,7 +25,7 @@ title: 밀버스 및 헤이스택을 사용한 전체 텍스트 검색
         ></path>
       </svg>
     </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색은</a> 텍스트의 특정 키워드나 구문을 일치시켜 문서를 검색하는 전통적인 방법입니다. 용어 빈도 등의 요소로 계산된 관련성 점수를 기반으로 결과의 순위를 매깁니다. 시맨틱 검색은 의미와 문맥을 이해하는 데 더 효과적이지만, 전체 텍스트 검색은 정확한 키워드 매칭에 탁월하므로 시맨틱 검색을 보완하는 데 유용합니다. BM25 알고리즘은 전체 텍스트 검색에서 순위를 매기는 데 널리 사용되며 검색 증강 세대(RAG)에서 핵심적인 역할을 합니다.</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5에는</a> BM25를 사용한 기본 전체 텍스트 검색 기능이 도입되었습니다. 이 접근 방식은 텍스트를 BM25 점수를 나타내는 스파스 벡터로 변환합니다. 원시 텍스트를 입력하기만 하면 Milvus가 자동으로 스파스 벡터를 생성하고 저장하므로 수동으로 스파스 임베딩을 생성할 필요가 없습니다.</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5에는</a> BM25를 사용한 기본 전체 텍스트 검색 기능이 도입되었습니다. 이 접근 방식은 텍스트를 BM25 점수를 나타내는 스파스 벡터로 변환합니다. 원시 텍스트를 입력하기만 하면 수동으로 스파스 임베딩을 생성할 필요 없이 Milvus가 자동으로 스파스 벡터를 생성하고 저장합니다.</p>
 <p><a href="https://haystack.deepset.ai/">Haystack은</a> 이제 이 Milvus 기능을 지원하므로 RAG 애플리케이션에 전체 텍스트 검색을 쉽게 추가할 수 있습니다. 전체 텍스트 검색과 고밀도 벡터 시맨틱 검색을 결합하여 시맨틱 이해와 키워드 매칭 정확도 모두에서 이점을 얻을 수 있는 하이브리드 접근 방식을 사용할 수 있습니다. 이 조합은 검색 정확도를 향상시키고 사용자에게 더 나은 결과를 제공합니다.</p>
 <p>이 튜토리얼에서는 Haystack과 Milvus를 사용해 애플리케이션에서 전체 텍스트 및 하이브리드 검색을 구현하는 방법을 보여드립니다.</p>
 <p>Milvus 벡터 저장소를 사용하려면 Milvus 서버 <code translate="no">URI</code> (또는 선택적으로 <code translate="no">TOKEN</code>)를 지정합니다. 밀버스 서버를 시작하려면 <a href="https://milvus.io/docs/install-overview.md">밀버스 설치 가이드를</a> 따라 밀버스 서버를 설정하거나 <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>(완전 관리형 밀버스)를 무료로 사용해 보세요.</p>
@@ -245,7 +245,7 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
         ></path>
       </svg>
     </button></h2><p>분석기는 문장을 토큰으로 나누고 어간 및 중지 단어 제거와 같은 어휘 분석을 수행하여 전체 텍스트 검색에 필수적입니다. 분석기는 일반적으로 언어별로 다릅니다. <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">이 가이드를</a> 참조하여 Milvus의 분석기에 대해 자세히 알아보세요.</p>
-<p>Milvus는 두 가지 유형의 분석기를 지원합니다: <strong>기본 제공 분석</strong> 기와 <strong>사용자 정의 분석기입니다</strong>. 기본적으로 <code translate="no">BM25BuiltInFunction</code> 에서는 구두점으로 텍스트를 토큰화하는 가장 기본적인 분석기인 <a href="https://milvus.io/docs/standard-analyzer.md">표준 내장 분석기를</a> 사용합니다.</p>
+<p>Milvus는 두 가지 유형의 분석기를 지원합니다: <strong>기본 제공 분석</strong> 기와 <strong>사용자 지정 분석기입니다</strong>. 기본적으로 <code translate="no">BM25BuiltInFunction</code> 에서는 구두점으로 텍스트를 토큰화하는 가장 기본적인 분석기인 <a href="https://milvus.io/docs/standard-analyzer.md">표준 내장 분석기를</a> 사용합니다.</p>
 <p>다른 분석기를 사용하거나 분석기를 사용자 정의하려면 <code translate="no">BM25BuiltInFunction</code> 초기화에서 <code translate="no">analyzer_params</code> 매개 변수를 전달하면 됩니다.</p>
 <pre><code translate="no" class="language-python">analyzer_params_custom = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
@@ -315,7 +315,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     </button></h2><p>헤이스택과 밀버스에서 기본 BM25 빌트인 기능을 사용하는 방법을 배웠고, 로드된 <code translate="no">document_store</code> 을 준비했습니다. 이제 하이브리드 검색을 통해 최적화된 RAG 구현을 소개해 보겠습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

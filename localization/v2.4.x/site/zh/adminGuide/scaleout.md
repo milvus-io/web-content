@@ -20,7 +20,7 @@ title: 缩放 Milvus 星团
         ></path>
       </svg>
     </button></h1><p>Milvus 支持其组件的水平扩展。这意味着你可以根据自己的需要增加或减少每种类型的工作节点数量。</p>
-<p>本主题介绍如何扩展 Milvus 集群。我们假定您在扩展之前已经<a href="/docs/zh/install_cluster-helm.md">安装了 Milvus 群集</a>。此外，我们建议您在开始之前先熟悉一下<a href="/docs/zh/architecture_overview.md">Milvus</a>的<a href="/docs/zh/architecture_overview.md">架构</a>。</p>
+<p>本主题介绍如何扩展 Milvus 集群。我们假定您在扩展之前已经<a href="/docs/zh/v2.4.x/install_cluster-helm.md">安装了 Milvus 群集</a>。此外，我们建议您在开始之前先熟悉一下<a href="/docs/zh/v2.4.x/architecture_overview.md">Milvus</a>的<a href="/docs/zh/v2.4.x/architecture_overview.md">架构</a>。</p>
 <p>本教程以扩展三个查询节点为例。要扩展其他类型的节点，请在命令行中将<code translate="no">queryNode</code> 替换为相应的节点类型。</p>
 <div class="alert note">
 <p>有关如何使用 Milvus Operator 扩展群集的信息，请参阅<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">使用 Milvus Operator 扩展群集</a>。</p>
@@ -50,7 +50,7 @@ title: 缩放 Milvus 星团
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>扩展</span> </span></p>
-<p>根据<a href="/docs/zh/architecture_overview.md">Milvus 架构</a>，无状态工作节点包括查询节点、数据节点、索引节点和代理。因此，你可以根据业务需求和应用场景来扩展这些类型的节点。你可以手动或自动扩展 Milvus 集群。</p>
+<p>根据<a href="/docs/zh/v2.4.x/architecture_overview.md">Milvus 架构</a>，无状态工作节点包括查询节点、数据节点、索引节点和代理。因此，你可以根据业务需求和应用场景来扩展这些类型的节点。你可以手动或自动扩展 Milvus 集群。</p>
 <p>一般来说，如果您创建的 Milvus 集群使用率过高，您就需要对其进行缩减。以下是一些可能需要缩减 Milvus 群集的典型情况：</p>
 <ul>
 <li>CPU 和内存利用率在一段时间内居高不下。</li>
@@ -166,16 +166,16 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
     </button></h2><ul>
 <li><p>如果您想了解如何监控 Milvus 服务并创建警报：</p>
 <ul>
-<li>学习<a href="/docs/zh/monitor.md">在 Kubernetes 上使用 Prometheus 操作员监控 Milvus</a></li>
+<li>学习<a href="/docs/zh/v2.4.x/monitor.md">在 Kubernetes 上使用 Prometheus 操作员监控 Milvus</a></li>
 </ul></li>
 <li><p>如果您已准备好在云上部署集群：</p>
 <ul>
-<li>学习如何<a href="/docs/zh/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
-<li>学习如何<a href="/docs/zh/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
-<li>了解如何<a href="/docs/zh/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
+<li>学习如何<a href="/docs/zh/v2.4.x/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
+<li>学习如何<a href="/docs/zh/v2.4.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
+<li>了解如何<a href="/docs/zh/v2.4.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
 </ul></li>
 <li><p>如果您正在寻找如何分配资源的说明：</p>
 <ul>
-<li><a href="/docs/zh/allocate.md#standalone">在 Kubernetes 上分配资源</a></li>
+<li><a href="/docs/zh/v2.4.x/allocate.md#standalone">在 Kubernetes 上分配资源</a></li>
 </ul></li>
 </ul>

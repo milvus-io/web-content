@@ -103,5 +103,5 @@ summary: タイムスタンプの概念と、Milvusベクトルデータベー�
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/consistency.md">ギャランティ・タイムスタンプがMilvusで</a>どのように<a href="/docs/ja/consistency.md">調整可能な一貫性を実現</a>するかを学ぶ。</li>
+<li><a href="/docs/ja/v2.4.x/consistency.md">ギャランティ・タイムスタンプがMilvusで</a>どのように<a href="/docs/ja/v2.4.x/consistency.md">調整可能な一貫性を実現</a>するかを学ぶ。</li>
 </ul>

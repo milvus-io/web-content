@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Une collection est une table bidimensionnelle avec des colonnes fixes et des lignes variantes. Chaque colonne représente un champ et chaque ligne une entité. Un schéma est nécessaire pour mettre en œuvre une telle gestion structurelle des données. Chaque entité à insérer doit répondre aux contraintes définies dans le schéma.</p>
-<p>Vous pouvez déterminer tous les aspects d'une collection, y compris son schéma, ses paramètres d'index, son type de métrique, et décider de la charger ou non lors de sa création, afin de vous assurer que la collection répond pleinement à vos besoins.</p>
+<p>Vous pouvez déterminer tous les aspects d'une collection, y compris son schéma, ses paramètres d'index, son type de métrique, et décider de la charger ou non lors de sa création afin de vous assurer que la collection répond pleinement à vos besoins.</p>
 <p>Pour créer une collection, vous devez</p>
 <ul>
 <li><p><a href="/docs/fr/create-collection.md#Create-Schema">Créer un schéma</a></p></li>
@@ -67,7 +67,7 @@ summary: >-
 <p>Vous pouvez définir des valeurs par défaut pour tout champ scalaire et le rendre nullable. Pour plus d'informations, reportez-vous à <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -408,7 +408,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez également créer une collection sans paramètres d'index et les ajouter par la suite. Dans ce cas, Milvus ne charge pas la collection lors de sa création. .</p>
-<p>L'extrait de code suivant montre comment créer une collection sans collection, et l'état de chargement de la collection reste non chargé lors de la création.</p>
+<p>L'extrait de code suivant montre comment créer une collection sans index, et l'état de chargement de la collection reste non chargé lors de la création.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -505,8 +505,7 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus propose également un moyen de créer une collection instantanément. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/create-collection-instantly.md">Créer une collection instantanément</a>.</p>
-<h2 id="Set-Collection-Properties" class="common-anchor-header">Définition des propriétés de la collection<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Collection-Properties" class="common-anchor-header">Définir les propriétés de la collection<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -521,8 +520,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez définir des propriétés pour la collection à créer afin de l'intégrer à votre service. Les propriétés applicables sont les suivantes.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Définir le nombre d'unités</h3><p>Les groupes de données sont des tranches horizontales d'une collection. Chaque shard correspond à un canal d'entrée de données. Chaque collection possède un shard par défaut. Lors de la création d'une collection, vous pouvez définir le nombre approprié d'unités en fonction du débit attendu et du volume des données à insérer dans la collection.</p>
+    </button></h2><p>Vous pouvez définir les propriétés de la collection à créer afin de l'intégrer à votre service. Les propriétés applicables sont les suivantes.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Définir le nombre d'unités</h3><p>Les tessons sont des tranches horizontales d'une collection. Chaque shard correspond à un canal d'entrée de données. Chaque collection possède un shard par défaut. Lors de la création d'une collection, vous pouvez définir le nombre approprié d'unités en fonction du débit attendu et du volume des données à insérer dans la collection.</p>
 <p>Dans les cas les plus courants, envisagez d'augmenter le nombre de shards d'une unité chaque fois que le débit attendu augmente de 500 Mo/s ou que le volume de données à insérer augmente de 100 Go. Cette suggestion est basée sur notre propre expérience et peut ne pas être totalement adaptée à vos scénarios d'application. Vous pouvez adapter ce nombre à vos propres besoins ou simplement utiliser la valeur par défaut.</p>
 <p>L'extrait de code suivant montre comment définir le nombre de tessons lors de la création d'une collection.</p>
 <div class="multipleCode">
@@ -748,6 +747,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour en savoir plus sur les niveaux de cohérence, voir <a href="/docs/fr/consistency.md">Niveau de cohérence</a>.</p>
+<p>Pour en savoir plus sur les niveaux de cohérence, voir <a href="/docs/fr/tune_consistency.md">Niveau de cohérence</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Activer le champ dynamique</h3><p>Le champ dynamique d'une collection est un champ JavaScript Object Notation (JSON) réservé nommé <strong>$meta</strong>. Une fois ce champ activé, Milvus enregistre tous les champs non définis par le schéma dans chaque entité et leurs valeurs en tant que paires clé-valeur dans le champ réservé.</p>
 <p>Pour plus de détails sur l'utilisation du champ dynamique, voir <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>

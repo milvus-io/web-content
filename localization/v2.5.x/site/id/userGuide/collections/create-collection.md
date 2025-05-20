@@ -66,7 +66,7 @@ summary: >-
 <p>Anda dapat menetapkan nilai default untuk bidang skalar apa pun dan menjadikannya dapat dinihilkan. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -223,7 +223,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Membuat indeks pada bidang tertentu akan mempercepat pencarian terhadap bidang tersebut. Indeks mencatat urutan entitas dalam koleksi. Seperti yang ditunjukkan pada cuplikan kode berikut ini, Anda dapat menggunakan <code translate="no">metric_type</code> dan <code translate="no">index_type</code> untuk memilih cara yang tepat bagi Milvus untuk mengindeks sebuah field dan mengukur kemiripan di antara penyematan vektor.</p>
+    </button></h2><p>Membuat indeks pada bidang tertentu akan mempercepat pencarian terhadap bidang tersebut. Indeks mencatat urutan entitas dalam koleksi. Seperti yang ditunjukkan pada cuplikan kode berikut ini, Anda dapat menggunakan <code translate="no">metric_type</code> dan <code translate="no">index_type</code> untuk memilih cara yang tepat bagi Milvus untuk mengindeks sebuah field dan mengukur kemiripan di antara sematan vektor.</p>
 <p>Pada Milvus, Anda dapat menggunakan <code translate="no">AUTOINDEX</code> sebagai tipe indeks untuk semua bidang vektor, dan salah satu dari <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code> sebagai tipe metrik berdasarkan kebutuhan Anda.</p>
 <p>Seperti yang ditunjukkan pada cuplikan kode di atas, Anda perlu mengatur jenis indeks dan jenis metrik untuk bidang vektor dan hanya jenis indeks untuk bidang skalar. Indeks wajib untuk bidang vektor, dan Anda disarankan untuk membuat indeks pada bidang skalar yang sering digunakan dalam kondisi pemfilteran.</p>
 <p>Untuk detailnya, lihat <a href="/docs/id/index-vector-fields.md">Bidang Vektor Indeks</a> dan <a href="/docs/id/index-scalar-fields.md">Bidang Skalar Indeks</a>.</p>
@@ -407,7 +407,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda juga dapat membuat koleksi tanpa parameter indeks dan menambahkannya setelahnya. Dalam kasus ini, Milvus tidak memuat koleksi pada saat pembuatannya. .</p>
-<p>Cuplikan kode berikut ini menunjukkan cara membuat koleksi tanpa koleksi, dan status pemuatan koleksi tetap tidak dimuat pada saat pembuatan.</p>
+<p>Cuplikan kode berikut ini mendemonstrasikan cara membuat koleksi tanpa indeks, dan status pemuatan koleksi tetap tidak dimuat pada saat pembuatan.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -504,7 +504,6 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus juga menyediakan cara bagi Anda untuk membuat koleksi secara instan. Untuk detailnya, lihat <a href="/docs/id/create-collection-instantly.md">Membuat Koleksi Secara Instan</a>.</p>
 <h2 id="Set-Collection-Properties" class="common-anchor-header">Mengatur Properti Koleksi<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -521,7 +520,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Anda dapat mengatur properti untuk koleksi yang akan dibuat agar sesuai dengan layanan Anda. Properti yang berlaku adalah sebagai berikut.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Mengatur Nomor Pecahan</h3><p>Pecahan adalah irisan horizontal dari koleksi. Setiap pecahan berhubungan dengan saluran input data. Setiap koleksi memiliki pecahan secara default. Anda dapat mengatur jumlah pecahan yang sesuai saat membuat koleksi berdasarkan keluaran yang diharapkan dan volume data yang akan dimasukkan ke dalam koleksi.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Tetapkan Nomor Pecahan</h3><p>Pecahan adalah irisan horizontal dari sebuah koleksi. Setiap pecahan berhubungan dengan saluran input data. Setiap koleksi memiliki pecahan secara default. Anda dapat mengatur jumlah pecahan yang sesuai saat membuat koleksi berdasarkan keluaran yang diharapkan dan volume data yang akan dimasukkan ke dalam koleksi.</p>
 <p>Dalam kasus yang umum, pertimbangkan untuk meningkatkan jumlah pecahan sebanyak satu setiap kali throughput yang diharapkan meningkat sebesar 500 MB/detik atau volume data yang akan disisipkan meningkat sebesar 100 GB. Saran ini didasarkan pada pengalaman kami sendiri dan mungkin tidak sepenuhnya sesuai dengan skenario aplikasi Anda. Anda dapat menyetel angka ini agar sesuai dengan kebutuhan Anda sendiri atau menggunakan nilai default.</p>
 <p>Cuplikan kode berikut ini menunjukkan cara mengatur nomor pecahan ketika Anda membuat koleksi.</p>
 <div class="multipleCode">
@@ -747,6 +746,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk mengetahui lebih lanjut tentang tingkat konsistensi, lihat <a href="/docs/id/consistency.md">Tingkat Konsistensi</a>.</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Mengaktifkan Bidang Dinamis</h3><p>Bidang dinamis dalam koleksi adalah bidang JavaScript Object Notation (JSON) yang dicadangkan bernama <strong>$meta</strong>. Setelah Anda mengaktifkan bidang ini, Milvus menyimpan semua bidang yang tidak ditentukan skema yang dibawa dalam setiap entitas dan nilainya sebagai pasangan nilai-kunci dalam bidang yang dicadangkan.</p>
+<p>Untuk mengetahui lebih lanjut tentang tingkat konsistensi, lihat <a href="/docs/id/tune_consistency.md">Tingkat Konsistensi</a>.</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Mengaktifkan Bidang Dinamis</h3><p>Bidang dinamis dalam koleksi adalah bidang JavaScript Object Notation (JSON) yang dicadangkan bernama <strong>$meta</strong>. Setelah Anda mengaktifkan bidang ini, Milvus menyimpan semua bidang yang tidak ditentukan skema yang dibawa dalam setiap entitas dan nilainya sebagai pasangan kunci-nilai dalam bidang yang dicadangkan.</p>
 <p>Untuk detail mengenai cara menggunakan bidang dinamis, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>

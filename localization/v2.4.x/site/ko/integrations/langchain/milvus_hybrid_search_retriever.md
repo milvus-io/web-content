@@ -36,7 +36,7 @@ title: 밀버스 하이브리드 검색 리트리버
     </button></h2><blockquote>
 <p><a href="https://milvus.io/docs">Milvus는</a> 임베딩 유사도 검색 및 AI 애플리케이션을 강화하기 위해 구축된 오픈 소스 벡터 데이터베이스입니다. Milvus는 비정형 데이터 검색의 접근성을 높이고 배포 환경에 관계없이 일관된 사용자 경험을 제공합니다.</p>
 </blockquote>
-<p>밀도 검색과 희소 벡터 검색의 강점을 결합한 Milvus 하이브리드 검색 <a href="/docs/concepts/#retrievers">리트리버를</a> 시작하는 데 도움이 될 것입니다. 모든 <code translate="no">MilvusCollectionHybridSearchRetriever</code> 기능 및 구성에 대한 자세한 설명서는 <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">API 참조를 참조하세요</a>.</p>
+<p>밀도 검색과 희소 벡터 검색의 강점을 결합한 Milvus 하이브리드 검색 <a href="/docs/concepts/v2.4.x/#retrievers">리트리버를</a> 시작하는 데 도움이 될 것입니다. 모든 <code translate="no">MilvusCollectionHybridSearchRetriever</code> 기능 및 구성에 대한 자세한 설명서는 <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">API 참조를 참조하세요</a>.</p>
 <p>Milvus 멀티-벡터 검색 <a href="https://milvus.io/docs/multi-vector-search.md">문서도</a> 참조하세요.</p>
 <h3 id="Integration-details" class="common-anchor-header">통합 세부 정보</h3><table>
 <thead>
