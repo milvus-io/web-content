@@ -172,6 +172,24 @@ add_field(
 
             - Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
 
+- **multi_analyzer_params** (*dict*)
+
+    Configures language-specific text analyzers for multilingual collections. This parameter enables the system to apply different analyzers to documents based on their language, significantly improving text search accuracy across multiple languages. For more information, refer to [Multi-language Analyzers](multi-language-analyzers.md).
+
+    ```python
+    multi_analyzer_params = {
+        "analyzers": {
+            "<analyzer_name>": <analyzer_config>,
+            "<analyzer_name>": <analyzer_config>,
+            "default": <default_analyzer_config>  # Required
+        },
+        "by_field": "<language_field_name>",
+        "alias": {  # Optional
+            "<alias>": "<analyzer_name>"
+        }
+    }
+    ```
+
 - **enable_analyzer** (*bool*)
 
     Whether to enable text analysis for the specified `VARCHAR` field. When set to `True`, it instructs Milvus to use a text analyzer, which tokenizes and filters the text content of the field.
