@@ -1,0 +1,13 @@
+{
+	"name": "milvus-docs",
+	"version": "1.0.0",
+	"description": "Welcome to Milvus documentation!",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"devDependencies": {
+		"remarkable": "^2.0.1"
+	},
+	"license": "Apache-2.0"
+}

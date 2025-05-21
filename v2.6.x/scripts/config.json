@@ -1,0 +1,277 @@
+{
+    "manuals": {
+        "guides": {
+            "base": "QrNlwhfIeiKqL7k04mlc9kPendg:tblDEFqgQwxiyVvB",
+            "sourceType": "wiki",
+            "targets": {
+                "menuStructure": "site/en/menuStructure/en.json",
+                "outputDir": "site/en",
+                "imageDir": "assets"
+            },
+            "images": {
+                "alt_texts": [
+                    {
+                        "token": "BitLbgzN4oYspwxM4vQcAmg2n9f",
+                        "type": "image",
+                        "alt_text": "collection-explained"
+                    },
+                    {
+                        "token": "Ke6jw8437hjR8hbZCvEcQtIIn1e",
+                        "type": "board",
+                        "alt_text": "analyzer-process-workflow"
+                    },
+                    {
+                        "token": "KkS9wtS5IhcP9obYvc1cK10snfg",
+                        "type": "board",
+                        "alt_text": "resource-hierarchy"
+                    },
+                    {
+                        "token": "TuIGwtyEkh9g04bvo0icsWdynBd",
+                        "type": "board",
+                        "alt_text": "binary-vector"
+                    },
+                    {
+                        "token": "TF1uw4AQVhFdmBbrhyVcJO6WnXe",
+                        "type": "board",
+                        "alt_text": "use-binary-vector"
+                    },
+                    {
+                        "token": "RHlkwqC3Mh1tBSb7G3gcMc8PnUO",
+                        "type": "board",
+                        "alt_text": "sparse-vector"
+                    },
+                    {
+                        "token": "QcKewe4XchpFUUblEyOcgEUpnbc",
+                        "type": "board",
+                        "alt_text": "use-sparse-vector"
+                    },
+                    {
+                        "token": "WeYVbC63So5YT2xSV5EcHf8qn3f",
+                        "type": "image",
+                        "alt_text": "schema-hands-on"
+                    },
+                    {
+                        "token": "X0Ttw7v2ShGLqjb9WFVcGxYLnSf",
+                        "type": "board",
+                        "alt_text": "vector-index-anatomy"
+                    },
+                    {
+                        "token": "RoJFbyTsuoY8mHxoBBicgBH9nTc",
+                        "type": "image",
+                        "alt_text": "schema-design-anatomy"
+                    },
+                    {
+                        "token": "QOgMwbrhLhvvtbbk5TxcarhEn8i",
+                        "type": "board",
+                        "alt_text": "dense-vector"
+                    },
+                    {
+                        "token": "No8KwR6wPhTIP6bKEqGcbBDWngc",
+                        "type": "board",
+                        "alt_text": "use-dense-vector"
+                    },
+                    {
+                        "token": "K2SXwCq8ThyBnGb9LxFceCk5nwe",
+                        "type": "board",
+                        "alt_text": "upsert-entities-workflow"
+                    },
+                    {
+                        "token": "BDVGwp1SxhaYOCbeLJscMo2inng",
+                        "type": "board",
+                        "alt_text": "IVF-FLAT-workflow"
+                    },
+                    {
+                        "token": "DTmrwIUMQhrOHCbAKXScX3hDnrh",
+                        "type": "board",
+                        "alt_text": "IVF-FLAT-workflow-2"
+                    },
+                    {
+                        "token": "PnJnw8X40h4vh3bBym4cV5UcnNc",
+                        "type": "board",
+                        "alt_text": "ivf-pq-1"
+                    },
+                    {
+                        "token": "KGvCwTKzChKdsQbbGDJcUxdgnzh",
+                        "type": "board",
+                        "alt_text": "ivf-pq-2"
+                    },
+                    {
+                        "token": "HtqBw0hbch2cyibVQO7cIr3bnfg",
+                        "type": "board",
+                        "alt_text": "HNSW"
+                    },
+                    {
+                        "token": "QIeKwvDN1h7lTnb9iJ7cPubknrb",
+                        "type": "board",
+                        "alt_text": "filtered-search"
+                    },
+                    {
+                        "token": "AOJ0wZxInhw0z8bZJtWcHMpfnCh",
+                        "type": "board",
+                        "alt_text": "iterative-filtering"
+                    },
+                    {
+                        "token": "Sewjwp5DShFgKAbC1Mwcrr7enOD",
+                        "type": "board",
+                        "alt_text": "range-search"
+                    },
+                    {
+                        "token": "LhJEwzWiphLWxobMaiCcbVDPnNb",
+                        "type": "board",
+                        "alt_text": "ann-search"
+                    },
+                    {
+                        "token": "Ktj8wigrHhvz4nbDES5coKZJnZe",
+                        "type": "board",
+                        "alt_text": "grouping-search"
+                    },
+                    {
+                        "token": "UZkfwo6uXhexxpb0uc2cpD7qnxL",
+                        "type": "board",
+                        "alt_text": "hybrid-search"
+                    },
+                    {
+                        "token": "DfPMwP6ZahhHlLbIN0gcG9d7nQM",
+                        "type": "board",
+                        "alt_text": "full-text-search"
+                    },
+                    {
+                        "token": "N43zw7HuGhmCHRbYDDmctO1bnkd",
+                        "type": "board",
+                        "alt_text": "keyword-match"
+                    },
+                    {
+                        "token": "IXXIwZdOYhRFXmbTMdwcaN6fnPe",
+                        "type": "board",
+                        "alt_text": "partition-vs-partition-key"
+                    },
+                    {
+                        "token": "RTaqwdaWXhRWPTb4uJTc9Uknn5c",
+                        "type": "board",
+                        "alt_text": "with-and-without-partition-key"
+                    },
+                    {
+                        "token": "BVotwv5BvhBWXXbvotUccowZnng",
+                        "type": "board",
+                        "alt_text": "partition-key-isolation"
+                    },
+                    {
+                        "token": "YCR9bk8xsoY2PNxPc97cyK7bnYf",
+                        "type": "image",
+                        "alt_text": "multi-vector-rerank"
+                    },
+                    {
+                        "token": "J6SLwimvFh8bzcbFYrQcgfKcnph",
+                        "type": "board",
+                        "alt_text": "weighted-reranker"
+                    },
+                    {
+                        "token": "VUAxwsbmdhMDL8bWgj4cG2RWnxb",
+                        "type": "board",
+                        "alt_text": "RRF-reranker"
+                    },
+                    {
+                        "token": "SROkwc94ShKZFUbhTZfcXu8Nnfd",
+                        "type": "board",
+                        "alt_text": "users-roles-privileges"
+                    },
+                    {
+                        "token": "NiRfwB4lMh9u40bsV9xcwg6GnRh",
+                        "type": "board",
+                        "alt_text": "privilege-group-illustrated"
+                    },
+                    {
+                        "token": "GIYhwxS16hfb3pbEfRwcLriPnTb",
+                        "type": "board",
+                        "alt_text": "mmap-illustrated"
+                    },
+                    {
+                        "token": "UyGbwGKtEhZ2hqb7gyscRm1znIe",
+                        "type": "board",
+                        "alt_text": "without-clustering-compaction"
+                    },
+                    {
+                        "token": "MmC8wJoFphUqMkbmkBSc68KHnQf",
+                        "type": "board",
+                        "alt_text": "clustering-compaction"
+                    },
+                    {
+                        "token": "UlOJwpWuKhj5LAbGSp9cwMFznEb",
+                        "type": "board",
+                        "alt_text": "batch-data-and-streaming-data"
+                    },
+                    {
+                        "token": "Owddb7D3Fo8zyFxJgWWcZCxanIf",
+                        "type": "image",
+                        "alt_text": "service-time-and-guarantee-time"
+                    },
+                    {
+                        "token": "Y9YabwvmjoWMXhxt9kRc8Atmnid",
+                        "type": "image",
+                        "alt_text": "consistency-level-illustrated"
+                    },
+                    {
+                        "token": "C8gHbw8dSozNslx9wXbcyt2hnLe",
+                        "type": "image",
+                        "alt_text": "euclidean-metric"
+                    },
+                    {
+                        "token": "Dqp4b8OP3oaQWgxZqoycL3ainwg",
+                        "type": "image",
+                        "alt_text": "IP-formula"
+                    },
+                    {
+                        "token": "U23obWPTJoID9KxeGyjc1HAXn9d",
+                        "type": "image",
+                        "alt_text": "normalize-formula"
+                    },
+                    {
+                        "token": "SHDAb6UUgo7qR6xLXb5cv4bKnke",
+                        "type": "image",
+                        "alt_text": "correlation-between-embeddings"
+                    },
+                    {
+                        "token": "R1iNbuEDDoz8RdxtA4RcM706nMc",
+                        "type": "image",
+                        "alt_text": "cosine-similarity"
+                    },
+                    {
+                        "token": "Sl4dbmQRVoIf1yx55mRcibZ3nAg",
+                        "type": "image",
+                        "alt_text": "JACCARD-similarity-coefficient-formula"
+                    },
+                    {
+                        "token": "Kj2kbpNmHoTUUixjDC1ccTntnnV",
+                        "type": "image",
+                        "alt_text": "JACCARD-distance-formula"
+                    },
+                    {
+                        "token": "NVV9w0w49hZJ61bNzG4cdi9gn6C",
+                        "type": "board",
+                        "alt_text": "database-level-multi-tenancy"
+                    },
+                    {
+                        "token": "SNxNwi64ChMFdubYKmrcGOH5ncg",
+                        "type": "board",
+                        "alt_text": "collection-level-multi-tenancy"
+                    },
+                    {
+                        "token": "D5cawfOk0hKkJmbJwHwc54a5n4f",
+                        "type": "board",
+                        "alt_text": "partition-level-multi-tenancy"
+                    },
+                    {
+                        "token": "GzOrwUHnEhaPGybcp7ActPwsnMh",
+                        "type": "board",
+                        "alt_text": "partition-key-level-multi-tenancy"
+                    },
+                    {
+                        "token": "ZDYIwC1HwhTrdlbfOgNcOZ4OnWg",
+                        "type": "board",
+                        "alt_text": "multi-language-analyzers-workflow"
+                    }
+                ]
+            }
+        }
+    }
+}
