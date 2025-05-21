@@ -264,6 +264,11 @@
                         "token": "GzOrwUHnEhaPGybcp7ActPwsnMh",
                         "type": "board",
                         "alt_text": "partition-key-level-multi-tenancy"
+                    },
+                    {
+                        "token": "ZDYIwC1HwhTrdlbfOgNcOZ4OnWg",
+                        "type": "board",
+                        "alt_text": "multi-language-analyzers-workflow"
                     }
                 ]
             }
