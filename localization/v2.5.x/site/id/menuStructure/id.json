@@ -781,7 +781,7 @@
             "order": 6,
             "children": [
               {
-                "label": "Penjelasan Penyaringan",
+                "label": "Penjelasan Pemfilteran",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -2202,6 +2202,12 @@
             "label": "Docling",
             "id": "build_RAG_with_milvus_and_docling.md",
             "order": 11,
+            "children": []
+          },
+          {
+            "label": "NLWeb",
+            "id": "NLWeb_with_milvus.md",
+            "order": 12,
             "children": []
           }
         ]

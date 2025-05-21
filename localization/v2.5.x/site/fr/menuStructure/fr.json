@@ -74,7 +74,7 @@
             "children": []
           },
           {
-            "label": "Exécuter Milvus en mode autonome",
+            "label": "Run Milvus Standalone",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -2202,6 +2202,12 @@
             "label": "Docling",
             "id": "build_RAG_with_milvus_and_docling.md",
             "order": 11,
+            "children": []
+          },
+          {
+            "label": "NLWeb",
+            "id": "NLWeb_with_milvus.md",
+            "order": 12,
             "children": []
           }
         ]

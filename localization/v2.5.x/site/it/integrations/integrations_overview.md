@@ -43,7 +43,7 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/milvus_rag_with_dynamiq.md">Come iniziare con Dynamiq e Milvus</a></td><td>Orchestrazione</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/it/llama_stack_with_milvus.md">Costruire RAG con Llama Stack con Milvus</a></td><td>Orchestrazione</td><td>Milvus, Llama Stack</td></tr>
 <tr><td><a href="/docs/it/integrate_with_memgpt.md">Agente Chatbot con Milvus e MemGPT</a></td><td>Agente</td><td>Milvus, MemGPT</td></tr>
-<tr><td><a href="/docs/it/llama_agents_metadata.md">Sistemi multi-agente con Mistral AI, Milvus e Llama-agenti</a></td><td>Agente</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
+<tr><td><a href="/docs/it/llama_agents_metadata.md">Sistemi multi-agente con Mistral AI, Milvus e Llama-agents</a></td><td>Agente</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
 <tr><td><a href="/docs/it/quickstart_mem0_with_milvus.md">Come iniziare con Mem0 e Milvus</a></td><td>Agenti</td><td>Mem0, Milvus</td></tr>
 <tr><td><a href="/docs/it/integrate_with_agno.md">Integrare Milvus con Agno</a></td><td>Agenti</td><td>Milvus, Agno</td></tr>
 <tr><td><a href="/docs/it/milvus_and_mcp.md">MCP + Milvus: connettere l'intelligenza artificiale con i database vettoriali</a></td><td>Agenti</td><td>Milvus, MCP</td></tr>
@@ -91,5 +91,6 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_embedAnything.md">Costruire RAG con Milvus e EmbedAnything</a></td><td>Incorporare</td><td>Milvus, EmbedAnything</td></tr>
 <tr><td><a href="/docs/it/milvus_and_n8n.md">Come iniziare con Milvus e n8n</a></td><td>Orchestrazione</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/it/use_milvus_in_anythingllm.md">Utilizzare Milvus in AnythingLLM</a></td><td>Orchestrazione</td><td>Milvus, AnythingLLM</td></tr>
+<tr><td><a href="/docs/it/NLWeb_with_milvus.md">Utilizzo di NLWeb con Milvus</a></td><td>Fonti di dati</td><td>Milvus, NLWeb</td></tr>
 </tbody>
 </table>

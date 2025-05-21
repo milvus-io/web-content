@@ -958,7 +958,7 @@
     "v2.5.x/site/en/about/milvus_adopters.md": "2025-01-14T08:40:20.649Z",
     "v2.5.x/site/en/about/overview.md": "2025-04-10T02:38:08.132Z",
     "v2.5.x/site/en/about/roadmap.md": "2025-03-10T08:26:35.775Z",
-    "v2.5.x/site/en/menuStructure/en.json": "2025-05-21T10:04:11.733Z",
+    "v2.5.x/site/en/menuStructure/en.json": "2025-05-21T22:38:01.485Z",
     "v2.5.x/site/en/adminGuide/allocate.md": "2025-01-14T08:43:02.166Z",
     "v2.5.x/site/en/adminGuide/authenticate.md": "2025-01-14T08:43:03.251Z",
     "v2.5.x/site/en/adminGuide/chunk_cache.md": "2025-01-14T08:43:04.262Z",
@@ -1082,7 +1082,7 @@
     "v2.5.x/site/en/integrations/integrate_with_voxel51.md": "2025-03-24T08:35:41.812Z",
     "v2.5.x/site/en/integrations/integrate_with_voyageai.md": "2025-01-17T01:58:40.237Z",
     "v2.5.x/site/en/integrations/integrate_with_whyhow.md": "2025-01-14T08:49:39.573Z",
-    "v2.5.x/site/en/integrations/integrations_overview.md": "2025-05-16T10:04:46.485Z",
+    "v2.5.x/site/en/integrations/integrations_overview.md": "2025-05-21T22:21:26.287Z",
     "v2.5.x/site/en/integrations/kafka-connect-milvus.md": "2025-01-23T16:37:09.982Z",
     "v2.5.x/site/en/integrations/knowledge_table_with_milvus.md": "2025-01-14T08:49:44.257Z",
     "v2.5.x/site/en/integrations/kotaemon_with_milvus.md": "2025-01-14T08:49:45.699Z",
@@ -1308,6 +1308,7 @@
     "v2.5.x/site/en/integrations/build_RAG_with_milvus_and_embedAnything.md": "2025-05-16T10:03:50.450Z",
     "v2.5.x/site/en/integrations/milvus_and_n8n.md": "2025-05-16T10:05:56.176Z",
     "v2.5.x/site/en/integrations/use_milvus_in_anythingllm.md": "2025-05-16T10:06:06.604Z",
-    "v2.5.x/site/en/userGuide/schema/analyzer/multi-language-analyzers.md": "2025-05-21T09:46:36.196Z"
+    "v2.5.x/site/en/userGuide/schema/analyzer/multi-language-analyzers.md": "2025-05-21T09:46:36.196Z",
+    "v2.5.x/site/en/integrations/NLWeb_with_milvus.md": "2025-05-21T22:21:15.709Z"
   }
 }

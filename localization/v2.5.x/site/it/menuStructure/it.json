@@ -2203,6 +2203,12 @@
             "id": "build_RAG_with_milvus_and_docling.md",
             "order": 11,
             "children": []
+          },
+          {
+            "label": "NLWeb",
+            "id": "NLWeb_with_milvus.md",
+            "order": 12,
+            "children": []
           }
         ]
       },
@@ -2359,7 +2365,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

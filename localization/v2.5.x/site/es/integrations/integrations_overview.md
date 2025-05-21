@@ -91,5 +91,6 @@ title: Visión general de las integraciones
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_embedAnything.md">Construir RAG con Milvus y EmbedAnything</a></td><td>Incorporación de</td><td>Milvus, EmbedAnything</td></tr>
 <tr><td><a href="/docs/es/milvus_and_n8n.md">Primeros pasos con Milvus y n8n</a></td><td>Orquestación</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/es/use_milvus_in_anythingllm.md">Uso de Milvus en AnythingLLM</a></td><td>Orquestación</td><td>Milvus, AnythingLLM</td></tr>
+<tr><td><a href="/docs/es/NLWeb_with_milvus.md">Uso de NLWeb con Milvus</a></td><td>Fuentes de datos</td><td>Milvus, NLWeb</td></tr>
 </tbody>
 </table>

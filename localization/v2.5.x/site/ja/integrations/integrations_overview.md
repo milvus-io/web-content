@@ -21,7 +21,7 @@ title: インテグレーション概要
     </button></h1><p>このページでは、Milvusとサードパーティツールを連携させるためのチュートリアルをご紹介します。</p>
 <table>
 <thead>
-<tr><th>チュートリアル</th><th>使用例</th><th>パートナーまたはスタック</th></tr>
+<tr><th>チュートリアル</th><th>ユースケース</th><th>パートナーまたはスタック</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/ja/integrate_with_llamaindex.md">MilvusとLlamaIndexを使用したRAG</a></td><td>RAG</td><td>MilvusとLLamaIndexの組み合わせ</td></tr>
@@ -46,7 +46,7 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/integrate_with_agno.md">MilvusとAgnoの統合</a></td><td>エージェント</td><td>Milvus、Agno</td></tr>
 <tr><td><a href="/docs/ja/milvus_and_mcp.md">MCP + Milvus: AIとベクトルデータベースの連携</a></td><td>エージェント</td><td>Milvus、MCP</td></tr>
 <tr><td><a href="/docs/ja/openai_agents_milvus.md">MilvusとOpenAIエージェントの統合：ステップバイステップガイド</a></td><td>エージェント</td><td>Milvus, OpenAI</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_ragas.md">MilvusとRAGによる評価</a></td><td>評価</td><td>Milvus、Ragas</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_ragas.md">MilvusとRAGの評価</a></td><td>評価</td><td>Milvus、Ragas</td></tr>
 <tr><td><a href="/docs/ja/evaluation_with_deepeval.md">DeepEvalによる評価</a></td><td>評価と観測可能性</td><td>Milvus、DeepEval</td></tr>
 <tr><td><a href="/docs/ja/evaluation_with_phoenix.md">Arize Pheonixによる評価</a></td><td>評価と観測可能性</td><td>Milvus、Arize Pheonix</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_langfuse.md">LangfuseでのMilvus</a></td><td>観測可能性</td><td>Milvus、Langfuse</td></tr>
@@ -89,5 +89,6 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/build_RAG_with_milvus_and_embedAnything.md">MilvusとEmbedAnythingによるRAGの構築</a></td><td>埋め込み</td><td>Milvus、EmbedAnything</td></tr>
 <tr><td><a href="/docs/ja/milvus_and_n8n.md">Milvusとn8nを使い始める</a></td><td>オーケストレーション</td><td>Milvus、n8n</td></tr>
 <tr><td><a href="/docs/ja/use_milvus_in_anythingllm.md">AnythingLLMでMilvusを使う</a></td><td>オーケストレーション</td><td>Milvus、AnythingLLM</td></tr>
+<tr><td><a href="/docs/ja/NLWeb_with_milvus.md">MilvusでNLWebを使う</a></td><td>データソース</td><td>Milvus、NLWeb</td></tr>
 </tbody>
 </table>

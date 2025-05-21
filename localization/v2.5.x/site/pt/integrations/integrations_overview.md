@@ -29,11 +29,11 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/integrate_with_llamaindex.md">RAG com Milvus e LlamaIndex</a></td><td>RAG</td><td>Milvus, LLamaIndex</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_langchain.md">RAG com Milvus e LangChain</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/pt/milvus_hybrid_search_retriever.md">Milvus Hybrid Search Retriever em LangChain</a></td><td>Pesquisa híbrida</td><td>Milvus, LangChain</td></tr>
-<tr><td><a href="/docs/pt/basic_usage_langchain.md">Utilizar o Milvus como um armazenamento vetorial em LangChain</a></td><td>Pesquisa semântica</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/pt/basic_usage_langchain.md">Usar o Milvus como um armazenamento vetorial em LangChain</a></td><td>Pesquisa semântica</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/pt/full_text_search_with_langchain.md">Usando a pesquisa de texto completo com LangChain e Milvus</a></td><td>Pesquisa de texto completo</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_haystack.md">RAG com Milvus e Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
 <tr><td><a href="/docs/pt/llamaindex_milvus_async.md">RAG com Milvus e API assíncrona LlamaIndex</a></td><td>Ochestração</td><td>Milvus, LlamaIndex</td></tr>
-<tr><td><a href="/docs/pt/milvus_rag_with_vllm.md">Construindo o RAG com Milvus, vLLM e Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
+<tr><td><a href="/docs/pt/milvus_rag_with_vllm.md">Criando o RAG com Milvus, vLLM e Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
 <tr><td><a href="/docs/pt/llamaindex_milvus_full_text_search.md">Utilização da pesquisa de texto integral com o LlamaIndex e o Milvus</a></td><td>Pesquisa de texto completo</td><td>Milvus, LlamaIndex</td></tr>
 <tr><td><a href="/docs/pt/dify_with_milvus.md">Implantação do Dify com Milvus</a></td><td>Ochestração</td><td>Milvus, Dify</td></tr>
 <tr><td><a href="/docs/pt/rag_with_langflow.md">Construindo um sistema RAG usando Langflow com Milvus</a></td><td>Ochestration</td><td>Milvus, Langflow</td></tr>
@@ -76,8 +76,8 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_fireworks.md">Construir o RAG com Milvus e Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_lepton.md">Construir RAG com Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_siliconflow.md">Construir RAG com Milvus e SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
-<tr><td><a href="/docs/pt/rag_with_milvus_and_unstructured.md">Construir um RAG com Milvus e fontes de dados não estruturados</a></td><td>Estruturadas</td><td>Milvus, Não estruturado</td></tr>
-<tr><td><a href="/docs/pt/RAG_with_pii_and_milvus.md">Construir um RAG com Milvus + Mascarador de PII</a></td><td>Fontes de dados</td><td>Milvus, mascarador de PII</td></tr>
+<tr><td><a href="/docs/pt/rag_with_milvus_and_unstructured.md">Construir um RAG com Milvus e fontes de dados não estruturadas</a></td><td>Estruturadas</td><td>Milvus, Não estruturado</td></tr>
+<tr><td><a href="/docs/pt/RAG_with_pii_and_milvus.md">Criar um RAG com Milvus + Mascarador de PII</a></td><td>Fontes de dados</td><td>Milvus, mascarador de PII</td></tr>
 <tr><td><a href="/docs/pt/knowledge_table_with_milvus.md">Tabela de conhecimentos com Milvus</a></td><td>Engenharia do conhecimento</td><td>Tabela de conhecimentos, Milvus</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_cognee.md">Criar RAG com Milvus e Cognee</a></td><td>Engenharia do conhecimento</td><td>Milvus, Cognee</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_gemini.md">Construir RAG com Milvus e Gemini</a></td><td>LLMs</td><td>Milvus, Gemini</td></tr>
@@ -91,5 +91,6 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_embedAnything.md">Criar RAG com Milvus e EmbedAnything</a></td><td>Incorporação</td><td>Milvus, EmbedAnything</td></tr>
 <tr><td><a href="/docs/pt/milvus_and_n8n.md">Introdução ao Milvus e ao n8n</a></td><td>Orquestração</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/pt/use_milvus_in_anythingllm.md">Usar o Milvus no AnythingLLM</a></td><td>Orquestração</td><td>Milvus, AnythingLLM</td></tr>
+<tr><td><a href="/docs/pt/NLWeb_with_milvus.md">Usando NLWeb com Milvus</a></td><td>Fontes de dados</td><td>Milvus, NLWeb</td></tr>
 </tbody>
 </table>

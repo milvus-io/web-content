@@ -91,5 +91,6 @@ title: Обзор интеграций
 <tr><td><a href="/docs/ru/build_RAG_with_milvus_and_embedAnything.md">Построение RAG с помощью Milvus и EmbedAnything</a></td><td>Встраивание</td><td>Milvus, EmbedAnything</td></tr>
 <tr><td><a href="/docs/ru/milvus_and_n8n.md">Начало работы с Milvus и n8n</a></td><td>Оркестрация</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/ru/use_milvus_in_anythingllm.md">Использование Milvus в AnythingLLM</a></td><td>Оркестровка</td><td>Milvus, AnythingLLM</td></tr>
+<tr><td><a href="/docs/ru/NLWeb_with_milvus.md">Использование NLWeb с Milvus</a></td><td>Источники данных</td><td>Milvus, NLWeb</td></tr>
 </tbody>
 </table>
