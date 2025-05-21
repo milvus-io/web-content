@@ -607,6 +607,12 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "label": "Analizzatori multilingue",
+                "id": "multi-language-analyzers.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -940,12 +946,6 @@
             "label": "Gemelli",
             "id": "embed-with-gemini.md",
             "order": 14,
-            "children": []
-          },
-          {
-            "label": "IncorporaTutto",
-            "id": "build_RAG_with_milvus_and_embedAnything.md",
-            "order": 15,
             "children": []
           }
         ]
@@ -2020,6 +2020,12 @@
             "id": "integrate_with_bentoml.md",
             "order": 5,
             "children": []
+          },
+          {
+            "label": "IncorporaTutto",
+            "id": "build_RAG_with_milvus_and_embedAnything.md",
+            "order": 15,
+            "children": []
           }
         ]
       },
@@ -2353,7 +2359,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

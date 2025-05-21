@@ -184,7 +184,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器处理该字段中的文本，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就能使用指定的分析器处理该字段中的文本，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,14 +229,37 @@ analyzerParams=<span class="hljs-string">&#x27;{
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Verification-using-runanalyzer" class="common-anchor-header">验证使用<code translate="no">run_analyzer</code></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
+    MilvusClient,
+)
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;Milvus is a vector database built for scale!&quot;</span>
 
 <span class="hljs-comment"># Run the standard analyzer with the defined configuration</span>
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
+result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;Milvus is a vector database built for scale!&quot;</span>);
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>

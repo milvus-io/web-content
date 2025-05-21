@@ -83,7 +83,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter detalhes sobre os parâmetros, consulte <a href="/docs/pt/jieba-tokenizer.md#Custom-configuration">Configuração personalizada</a>.</p>
-<h3 id="Custom-configuration" class="common-anchor-header">Configuração personalizada</h3><p>Para obter mais controle, você pode fornecer uma configuração personalizada que permite especificar um dicionário personalizado, selecionar o modo de segmentação e ativar ou desativar o Modelo de Markov Oculto (HMM). Por exemplo:</p>
+<h3 id="Custom-configuration" class="common-anchor-header">Configuração personalizada</h3><p>Para obter mais controle, é possível fornecer uma configuração personalizada que permite especificar um dicionário personalizado, selecionar o modo de segmentação e ativar ou desativar o Modelo de Markov Oculto (HMM). Por exemplo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom configuration with user-defined settings</span>
@@ -121,12 +121,22 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Uma lista de dicionários que o analisador carregará como sua fonte de vocabulário. Opções incorporadas:</p><ul><li><p><code translate="no">"_default_"</code>: Carrega o dicionário de chinês simplificado incorporado no motor. Para mais detalhes, consulte <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Carrega tudo em <code translate="no">"_default_"</code> mais um suplemento adicional de Chinês Tradicional. Para mais detalhes, consulte <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>Também pode misturar o dicionário incorporado com qualquer número de dicionários personalizados. Exemplo: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
+     <td><p>Uma lista de dicionários que o analisador carregará como sua fonte de vocabulário. Opções incorporadas:</p>
+<ul>
+<li><p><code translate="no">"_default_"</code>: Carrega o dicionário de chinês simplificado incorporado no motor. Para mais detalhes, consulte <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li>
+<li><p><code translate="no">"_extend_default_"</code>: Carrega tudo em <code translate="no">"_default_"</code> mais um suplemento adicional de Chinês Tradicional. Para mais detalhes, consulte <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p>
+<p>Também pode misturar o dicionário incorporado com qualquer número de dicionários personalizados. Exemplo: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li>
+</ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>O modo de segmentação. Valores possíveis:</p><ul><li><p><code translate="no">"exact"</code>: Tenta segmentar a frase da forma mais precisa, tornando-a ideal para análise de texto.</p></li><li><p><code translate="no">"search"</code>: Baseia-se no modo exato, decompondo ainda mais as palavras longas para melhorar a recuperação, tornando-o adequado para a tokenização de motores de busca.</p><p>Para obter mais informações, consulte <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li></ul></td>
+     <td><p>O modo de segmentação. Valores possíveis:</p>
+<ul>
+<li><p><code translate="no">"exact"</code>: Tenta segmentar a frase da forma mais precisa, tornando-a ideal para análise de texto.</p></li>
+<li><p><code translate="no">"search"</code>: Baseia-se no modo exato, decompondo ainda mais as palavras longas para melhorar a recuperação, tornando-o adequado para a tokenização de motores de busca.</p>
+<p>Para obter mais informações, consulte <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li>
+</ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>
@@ -135,7 +145,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-las a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para obter detalhes, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de uso</a>.</p>
+<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-las a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais pormenores, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,14 +187,37 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verificação usando <code translate="no">run_analyzer</code></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
+    MilvusClient,
+)
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>
 
 <span class="hljs-comment"># Run the standard analyzer with the defined configuration</span>
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
-<span class="hljs-built_in">print</span>(result)
+result = client.run_analyzer(sample_text, analyzer_params)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>);
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -119,12 +119,22 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>분석기가 어휘 소스로 로드할 사전 목록입니다. 기본 제공 옵션:</p><ul><li><p><code translate="no">"_default_"</code>: 엔진에 내장된 중국어 간체 사전을 로드합니다. 자세한 내용은 <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt를</a> 참조하세요.</p></li><li><p><code translate="no">"_extend_default_"</code>: <code translate="no">"_default_"</code> 의 모든 항목과 추가 중국어 번체 보충 자료를 로드합니다. 자세한 내용은 <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big을</a> 참조하세요.</p><p>기본 제공 사전과 사용자 지정 사전을 얼마든지 혼합할 수도 있습니다. 예: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
+     <td><p>분석기가 어휘 소스로 로드할 사전 목록입니다. 기본 제공 옵션:</p>
+<ul>
+<li><p><code translate="no">"_default_"</code>: 엔진에 내장된 중국어 간체 사전을 로드합니다. 자세한 내용은 <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt를</a> 참조하세요.</p></li>
+<li><p><code translate="no">"_extend_default_"</code>: <code translate="no">"_default_"</code> 의 모든 항목과 추가 중국어 번체 보충 자료를 로드합니다. 자세한 내용은 <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big을</a> 참조하세요.</p>
+<p>기본 제공 사전과 사용자 지정 사전을 얼마든지 혼합할 수도 있습니다. 예: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li>
+</ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>세분화 모드. 사용 가능한 값</p><ul><li><p><code translate="no">"exact"</code>: 가장 정확한 방식으로 문장을 세분화하여 텍스트 분석에 이상적입니다.</p></li><li><p><code translate="no">"search"</code>: 정확한 모드를 기반으로 긴 단어를 더 세분화하여 기억력을 향상시켜 검색 엔진 토큰화에 적합합니다.</p><p>자세한 내용은 <a href="https://github.com/fxsjy/jieba">Jieba 깃허브 프로젝트를</a> 참조하세요.</p></li></ul></td>
+     <td><p>세분화 모드. 사용 가능한 값</p>
+<ul>
+<li><p><code translate="no">"exact"</code>: 가장 정확한 방식으로 문장을 세분화하여 텍스트 분석에 이상적입니다.</p></li>
+<li><p><code translate="no">"search"</code>: 정확한 모드를 기반으로 긴 단어를 더 세분화하여 기억력을 향상시켜 검색 엔진 토큰화에 적합합니다.</p>
+<p>자세한 내용은 <a href="https://github.com/fxsjy/jieba">Jieba 깃허브 프로젝트를</a> 참조하세요.</p></li>
+</ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>
@@ -175,14 +185,37 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Verification-using-runanalyzer" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code></h3><div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
+    MilvusClient,
+)
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>
 
 <span class="hljs-comment"># Run the standard analyzer with the defined configuration</span>
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
-<span class="hljs-built_in">print</span>(result)
+result = client.run_analyzer(sample_text, analyzer_params)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>);
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>

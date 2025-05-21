@@ -1,10 +1,10 @@
 ---
 id: use_ColPali_with_milvus.md
 summary: >-
-  In diesem Notizbuch bezeichnen wir diese Art der Multi-Vektor-Darstellung der
-  Allgemeinheit halber als "ColBERT-Einbettungen". Das tatsächliche Modell, das
-  verwendet wird, ist jedoch das ColPali-Modell. Wir werden demonstrieren, wie
-  Milvus für Multi-Vektor-Retrieval verwendet werden kann. Darauf aufbauend
+  In diesem Notizbuch bezeichnen wir diese Art der Multi-Vektor-Darstellung aus
+  Gründen der Allgemeinheit als "ColBERT-Einbettungen". Das tatsächliche Modell,
+  das verwendet wird, ist jedoch das ColPali-Modell. Wir werden demonstrieren,
+  wie Milvus für Multi-Vektor-Retrieval verwendet werden kann. Darauf aufbauend
   stellen wir vor, wie ColPali für das Abrufen von Seiten auf der Grundlage
   einer gegebenen Abfrage verwendet werden kann.
 title: ColPali für multimodales Retrieval mit Milvus verwenden
@@ -30,16 +30,16 @@ title: ColPali für multimodales Retrieval mit Milvus verwenden
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Moderne Retrieval-Modelle verwenden in der Regel eine einzige Einbettung, um Text oder Bilder darzustellen. ColBERT ist jedoch ein neuronales Modell, das eine Liste von Einbettungen für jede Dateninstanz verwendet und eine "MaxSim"-Operation zur Berechnung der Ähnlichkeit zwischen zwei Texten einsetzt. Neben Textdaten enthalten auch Abbildungen, Tabellen und Diagramme reichhaltige Informationen, die beim textbasierten Information Retrieval oft unberücksichtigt bleiben.</p>
+    </button></h1><p>Moderne Retrieval-Modelle verwenden in der Regel eine einzige Einbettung, um Text oder Bilder darzustellen. ColBERT hingegen ist ein neuronales Modell, das eine Liste von Einbettungen für jede Dateninstanz verwendet und eine "MaxSim"-Operation zur Berechnung der Ähnlichkeit zwischen zwei Texten einsetzt. Neben Textdaten enthalten auch Abbildungen, Tabellen und Diagramme reichhaltige Informationen, die beim textbasierten Information Retrieval oft unberücksichtigt bleiben.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>Die MaxSim-Funktion vergleicht eine Abfrage mit einem Dokument (in dem Sie suchen), indem sie deren Token-Einbettungen betrachtet. Für jedes Wort in der Abfrage wählt sie das ähnlichste Wort aus dem Dokument aus (unter Verwendung der Kosinusähnlichkeit oder der quadrierten L2-Distanz) und summiert diese maximalen Ähnlichkeiten über alle Wörter in der Abfrage</p>
 <p>ColPali ist eine Methode, die die Multi-Vektor-Darstellung von ColBERT mit PaliGemma (einem multimodalen großen Sprachmodell) kombiniert, um dessen starke Verständnisfähigkeiten zu nutzen. Dieser Ansatz ermöglicht es, eine Seite, die sowohl Text als auch Bilder enthält, durch eine einheitliche Multi-Vektor-Einbettung darzustellen. Die Einbettungen innerhalb dieser Multi-Vektor-Darstellung können detaillierte Informationen erfassen und so die Leistung der Retrieval-augmented Generation (RAG) für multimodale Daten verbessern.</p>
-<p>In diesem Notizbuch bezeichnen wir diese Art von Multi-Vektor-Darstellung aus Gründen der Allgemeinheit als "ColBERT-Einbettungen". Das tatsächliche Modell, das verwendet wird, ist jedoch das <strong>ColPali-Modell</strong>. Wir werden demonstrieren, wie Milvus für die Suche nach mehreren Vektoren verwendet werden kann. Darauf aufbauend wird gezeigt, wie ColPali für das Abrufen von Seiten auf der Grundlage einer gegebenen Anfrage verwendet werden kann.</p>
+<p>In diesem Notizbuch bezeichnen wir diese Art von Multi-Vektor-Darstellung aus Gründen der Allgemeinheit als "ColBERT-Einbettungen". Das tatsächliche Modell, das verwendet wird, ist jedoch das <strong>ColPali-Modell</strong>. Wir werden demonstrieren, wie Milvus für die Suche nach mehreren Vektoren verwendet werden kann. Darauf aufbauend wird gezeigt, wie ColPali zum Abrufen von Seiten auf der Grundlage einer gegebenen Anfrage verwendet werden kann.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,7 +94,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Wenn Sie nur eine lokale Vektordatenbank für kleine Datenmengen oder Prototypen benötigen, ist die Angabe einer lokalen Datei als uri, z. B.<code translate="no">./milvus.db</code>, die bequemste Methode, da <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> automatisch alle Daten in dieser Datei speichert.</li>
+<li>Wenn Sie nur eine lokale Vektordatenbank für kleine Datenmengen oder Prototypen benötigen, ist es am bequemsten, die uri auf eine lokale Datei, z. B.<code translate="no">./milvus.db</code>, zu setzen, da <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> automatisch alle Daten in dieser Datei speichert.</li>
 <li>Wenn Sie große Datenmengen haben, z. B. mehr als eine Million Vektoren, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Serveradresse und den Port als Uri, z. B.<code translate="no">http://localhost:19530</code>. Wenn Sie die Authentifizierungsfunktion auf Milvus aktivieren, verwenden Sie "<your_username>:<your_password>" als Token, andernfalls setzen Sie das Token nicht.</li>
 <li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">öffentlichen Endpunkt und dem API-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>

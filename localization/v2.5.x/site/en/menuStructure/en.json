@@ -607,6 +607,12 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "label": "Multi-language Analyzers",
+                "id": "multi-language-analyzers.md",
+                "order": 4,
+                "children": []
               }
             ]
           },

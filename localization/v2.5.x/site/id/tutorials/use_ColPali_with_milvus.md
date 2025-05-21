@@ -2,7 +2,7 @@
 id: use_ColPali_with_milvus.md
 summary: >-
   Dalam buku catatan ini, kami menyebut representasi multi-vektor semacam ini
-  sebagai "embeddings ColBERT" untuk keumuman. Namun, model sebenarnya yang
+  sebagai "penyematan ColBERT" untuk keumuman. Namun, model sebenarnya yang
   digunakan adalah model ColPali. Kami akan mendemonstrasikan cara menggunakan
   Milvus untuk pengambilan multi-vektor. Selanjutnya, kami akan memperkenalkan
   cara menggunakan ColPali untuk mengambil halaman berdasarkan kueri yang
@@ -33,7 +33,7 @@ title: Gunakan ColPali untuk Pengambilan Multi-Modal dengan Milvus
     </button></h1><p>Model pengambilan modern biasanya menggunakan satu penyematan untuk merepresentasikan teks atau gambar. Akan tetapi, ColBERT adalah model neural yang menggunakan daftar penyematan untuk setiap contoh data dan menggunakan operasi "MaxSim" untuk menghitung kemiripan antara dua teks. Selain data tekstual, gambar, tabel, dan diagram juga mengandung informasi yang kaya, yang sering diabaikan dalam pencarian informasi berbasis teks.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

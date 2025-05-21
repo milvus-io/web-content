@@ -120,11 +120,45 @@ result = client.run_analyzer(
     analyzer_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>);
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascrip# Sample text to analyze</span>
+<span class="hljs-keyword">const</span> text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment">// Run analyzer</span>
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">run_analyzer</span>({
+    text,
+    analyzer_params
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -132,7 +166,7 @@ result = client.run_analyzer(
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Isso demonstra que o analisador tokeniza corretamente o texto de entrada, filtrando as palavras de parada <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, e <code translate="no">&quot;for&quot;</code>, enquanto retorna os tokens significativos restantes.</p>
-<p>A configuração do analisador interno <code translate="no">standard</code> acima é equivalente à configuração de um <a href="/docs/pt/analyzer-overview.md#Custom-analyzer">analisador personalizado</a> com os seguintes parâmetros, onde as opções <code translate="no">tokenizer</code> e <code translate="no">filter</code> são explicitamente definidas para alcançar uma funcionalidade semelhante:</p>
+<p>A configuração do analisador interno <code translate="no">standard</code> acima é equivalente à configuração de um <a href="/docs/pt/analyzer-overview.md#Custom-analyzer">analisador personalizado</a> com os seguintes parâmetros, onde as opções <code translate="no">tokenizer</code> e <code translate="no">filter</code> são explicitamente definidas para obter uma funcionalidade semelhante:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -415,13 +449,44 @@ result = client.run_analyzer(sample_text, analyzer_params_built_in)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;Milvus simplifies text ana
+
+lysis for search.&quot;</span>);
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Use a built-in analyzer for VARCHAR field `title_en`</span>
 <span class="hljs-keyword">const</span> analyzerParamsBuiltIn = {
   <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;english&quot;</span>,
 };
+
+<span class="hljs-keyword">const</span> sample_text = <span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>;
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">run_analyzer</span>({
+    <span class="hljs-attr">text</span>: sample_text, 
+    <span class="hljs-attr">analyzer_params</span>: analyzer_params_built_in
+});
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre></li>
@@ -472,6 +537,15 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
                 }}
         )
 );
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>);
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Configure a custom analyzer for VARCHAR field `title`</span>
 <span class="hljs-keyword">const</span> analyzerParamsCustom = {
@@ -488,6 +562,11 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     },
   ],
 };
+<span class="hljs-keyword">const</span> sample_text = <span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>;
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">run_analyzer</span>({
+    <span class="hljs-attr">text</span>: sample_text, 
+    <span class="hljs-attr">analyzer_params</span>: analyzer_params_built_in
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>, 
@@ -498,6 +577,17 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>,
         <span class="hljs-string">&quot;stop_words&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>},
     }}}
+    
+bs, _ := json.Marshal(analyzerParams)
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>

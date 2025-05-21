@@ -33,7 +33,7 @@ title: Utilizzare ColPali per il recupero multimodale con Milvus
     </button></h1><p>I moderni modelli di recupero utilizzano in genere un singolo embedding per rappresentare il testo o le immagini. ColBERT, invece, è un modello neurale che utilizza un elenco di incorporazioni per ogni istanza di dati e impiega un'operazione "MaxSim" per calcolare la somiglianza tra due testi. Oltre ai dati testuali, anche le figure, le tabelle e i diagrammi contengono informazioni ricche, che spesso non vengono prese in considerazione nel recupero delle informazioni basato sul testo.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -100,7 +100,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 </ul>
 </div>
 <p>Definiremo una classe MilvusColbertRetriever per avvolgere il client Milvus per il recupero di dati multivettoriali. L'implementazione appiattisce le incorporazioni ColBERT e le inserisce in una raccolta, dove ogni riga rappresenta una singola incorporazione dall'elenco delle incorporazioni ColBERT. Inoltre, registra il doc_id e il seq_id per risalire all'origine di ogni embedding.</p>
-<p>Quando si effettua una ricerca con un elenco di incorporazioni ColBERT, vengono condotte più ricerche, una per ogni incorporazione ColBERT. I doc_id recuperati saranno quindi deduplicati. Verrà eseguito un processo di reranking, in cui verranno recuperati gli embedding completi per ogni doc_id e verrà calcolato il punteggio MaxSim per produrre i risultati finali classificati.</p>
+<p>Quando si effettua una ricerca con un elenco di incorporazioni ColBERT, vengono effettuate più ricerche, una per ogni incorporazione ColBERT. I doc_id recuperati saranno quindi deduplicati. Verrà eseguito un processo di reranking, in cui verranno recuperati gli embedding completi per ogni doc_id e verrà calcolato il punteggio MaxSim per produrre i risultati finali classificati.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
         <span class="hljs-comment"># Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.</span>

@@ -38,12 +38,21 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Per configurare un analizzatore che utilizza il tokenizer <code translate="no">lindera</code>, impostare <code translate="no">tokenizer.type</code> su <code translate="no">lindera</code> e scegliere un dizionario con <code translate="no">dict_kind</code>.</p>
+<div class="multipleCode">
+   <a href="#plaintext">Testo normale</a> <a href="#python">Python</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
       <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>
     }
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
+analyzerParams.put(&quot;tokenizer&quot;,
+                new HashMap&lt;String, Object&gt;() {{
+                    put(&quot;type&quot;, &quot;lindera&quot;);
+                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+                }});
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -52,11 +61,16 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">type</code></p></td>
-     <td><p>Il tipo di tokenizer. Questo è fissato a <code translate="no">"lindera"</code>.</p></td>
+     <td><p>Il tipo di tokenizer. È fissato a <code translate="no">"lindera"</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Un elenco di dizionari usati per definire il vocabolario. Valori possibili:</p><ul><li><p><code translate="no">ipadic</code>: Giapponese</p></li><li><p><code translate="no">ko-dic</code>: Coreano</p></li><li><p><code translate="no">cc-cedict</code>: Cinese mandarino (tradizionale/semplice)</p></li></ul></td>
+     <td><p>Un elenco di dizionari usati per definire il vocabolario. Valori possibili:</p>
+<ul>
+<li><p><code translate="no">ipadic</code>: Giapponese</p></li>
+<li><p><code translate="no">ko-dic</code>: Coreano</p></li>
+<li><p><code translate="no">cc-cedict</code>: Cinese mandarino (tradizionale/semplice)</p></li>
+</ul></td>
    </tr>
 </table>
 <p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Questo permette a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
@@ -76,19 +90,55 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Prima di applicare la configurazione dell'analizzatore allo schema di raccolta, verificarne il comportamento con il metodo <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Configurazione dell'analizzatore</h3><pre><code translate="no" class="language-python">analyzer_params = {
+<h3 id="Analyzer-configuration" class="common-anchor-header">Configurazione dell'analizzatore</h3><div class="multipleCode">
+   <a href="#plaintext">Testo normale</a> <a href="#python">Python</a></div>
+<pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
       <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verifica con <code translate="no">run_analyzer</code></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
+analyzerParams.put(&quot;tokenizer&quot;,
+                new HashMap&lt;String, Object&gt;() {{
+                    put(&quot;type&quot;, &quot;lindera&quot;);
+                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+                }});
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verifica con <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
+    MilvusClient,
+)
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;東京スカイツリーの最寄り駅はとうきょうスカイツリー駅で&quot;</span>
 
 <span class="hljs-comment"># Run the standard analyzer with the defined configuration</span>
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
-<span class="hljs-built_in">print</span>(result)
+result = client.run_analyzer(sample_text, analyzer_params)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;東京スカイツリーの最寄り駅はとうきょうスカイツリー駅で&quot;</span>);
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expected-output" class="common-anchor-header">Risultato atteso</h3><pre><code translate="no" class="language-plaintext">{tokens: [&#x27;東京&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;の&#x27;, &#x27;最寄り駅&#x27;, &#x27;は&#x27;, &#x27;とう&#x27;, &#x27;きょう&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;駅&#x27;, &#x27;で&#x27;]} 
 <button class="copy-code-btn"></button></code></pre>

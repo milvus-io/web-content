@@ -121,12 +121,22 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Un elenco di dizionari che l'analizzatore caricherà come fonte di vocabolario. Opzioni integrate:</p><ul><li><p><code translate="no">"_default_"</code>: Carica il dizionario integrato del motore in cinese semplificato. Per i dettagli, fare riferimento a <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Carica tutto quello che c'è in <code translate="no">"_default_"</code> più un supplemento di cinese tradizionale. Per i dettagli, fare riferimento a <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>È anche possibile combinare il dizionario integrato con un numero qualsiasi di dizionari personalizzati. Esempio: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
+     <td><p>Un elenco di dizionari che l'analizzatore caricherà come fonte di vocabolario. Opzioni integrate:</p>
+<ul>
+<li><p><code translate="no">"_default_"</code>: Carica il dizionario integrato del motore in cinese semplificato. Per i dettagli, fare riferimento a <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li>
+<li><p><code translate="no">"_extend_default_"</code>: Carica tutto quello che c'è in <code translate="no">"_default_"</code> più un supplemento di cinese tradizionale. Per i dettagli, fare riferimento a <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p>
+<p>È anche possibile combinare il dizionario integrato con un numero qualsiasi di dizionari personalizzati. Esempio: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li>
+</ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>La modalità di segmentazione. Valori possibili:</p><ul><li><p><code translate="no">"exact"</code>: Cerca di segmentare la frase nel modo più preciso, il che la rende ideale per l'analisi del testo.</p></li><li><p><code translate="no">"search"</code>: Si basa sulla modalità esatta, suddividendo ulteriormente le parole lunghe per migliorare il richiamo, rendendola adatta alla tokenizzazione dei motori di ricerca.</p><p>Per ulteriori informazioni, consultare il <a href="https://github.com/fxsjy/jieba">progetto GitHub di Jieba</a>.</p></li></ul></td>
+     <td><p>La modalità di segmentazione. Valori possibili:</p>
+<ul>
+<li><p><code translate="no">"exact"</code>: Cerca di segmentare la frase nel modo più preciso, il che la rende ideale per l'analisi del testo.</p></li>
+<li><p><code translate="no">"search"</code>: Si basa sulla modalità esatta, suddividendo ulteriormente le parole lunghe per migliorare il richiamo, rendendola adatta alla tokenizzazione dei motori di ricerca.</p>
+<p>Per ulteriori informazioni, consultare il <a href="https://github.com/fxsjy/jieba">progetto GitHub di Jieba</a>.</p></li>
+</ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>
@@ -177,14 +187,37 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verifica con <code translate="no">run_analyzer</code></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
+    MilvusClient,
+)
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+<span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>
 
 <span class="hljs-comment"># Run the standard analyzer with the defined configuration</span>
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
-<span class="hljs-built_in">print</span>(result)
+result = client.run_analyzer(sample_text, analyzer_params)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>);
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
