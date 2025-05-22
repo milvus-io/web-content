@@ -119,7 +119,7 @@ Example configuration of custom stop words:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -143,7 +143,7 @@ analyzer_params = {
 }
 ```
 
-```plaintext
+```go
 analyzerParams = map[string]any{"type": "standard", "stop_words": []string{"of"}}
 ```
 

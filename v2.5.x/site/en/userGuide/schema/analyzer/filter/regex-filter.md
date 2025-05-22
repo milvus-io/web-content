@@ -70,14 +70,14 @@ Before applying the analyzer configuration to your collection schema, verify its
 ### Analyzer configuration
 
 <div class="multipleCode">
-    <a href="#plaintext">plaintext</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
-```plaintext
+```python
 {
     "tokenizer": "standard",
     "filter": [{

@@ -14,7 +14,7 @@ To configure an analyzer using the `lindera` tokenizer, set `tokenizer.type` to 
 
 <div class="multipleCode">
     <a href="#python">Python</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#java">Java</a>
 </div>
 
 ```python
@@ -26,7 +26,7 @@ analyzer_params = {
 }
 ```
 
-```plaintext
+```java
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer",
                 new HashMap<String, Object>() {{
@@ -65,7 +65,7 @@ Before applying the analyzer configuration to your collection schema, verify its
 
 <div class="multipleCode">
     <a href="#python">Python</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#java">Java</a>
 </div>
 
 ```python
@@ -77,7 +77,7 @@ analyzer_params = {
 }
 ```
 
-```plaintext
+```java
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer",
                 new HashMap<String, Object>() {{
