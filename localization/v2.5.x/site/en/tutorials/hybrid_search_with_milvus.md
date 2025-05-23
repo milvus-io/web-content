@@ -21,7 +21,7 @@ title: Hybrid Search with Milvus
         ></path>
       </svg>
     </button></h1><p>If you want to experience the final effect of this tutorial, you can go directly to https://demos.milvus.io/hybrid-search/</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>In this tutorial, we will demonstrate how to conduct hybrid search with <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> and <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 model</a>. BGE-M3 model can convert text into dense and sparse vectors. Milvus supports storing both types of vectors in one collection, allowing for hybrid search that enhances the result relevance.</p>
 <p>Milvus supports Dense, Sparse, and Hybrid retrieval methods:</p>
 <ul>
@@ -311,4 +311,4 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Which business is good<span style='color:red'> start</span> up in Hyderabad<span style='color:red'>?</span></p>
 <p>What math does a complete newbie need<span style='color:red'> to</span> understand algorithms for computer<span style='color:red'> programming?</span> What books on algorithms are suitable for a complete beginner<span style='color:red'>?</span></p>
 <p><span style='color:red'>How</span> do you make life suit you and stop life from abusi<span style='color:red'>ng</span> you mentally and emotionally<span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Quick Deploy</h3><p>To learn about how to start an online demo with this tutorial, please refer to <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">the example application</a>.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Quick Deploy</h3><p>To learn about how to start an online demo with this tutorial, please refer to <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">the example application</a>.</p>

@@ -285,7 +285,7 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/hdbscan_clustering_with_milvus.png?raw=true" alt="image" class="doc-image" id="image" />
     <span>image</span>
   </span>
 </p>
