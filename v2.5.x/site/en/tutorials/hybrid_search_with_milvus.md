@@ -11,7 +11,7 @@ title: Hybrid Search with Milvus
 
 If you want to experience the final effect of this tutorial, you can go directly to https://demos.milvus.io/hybrid-search/
 
-<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/>
+<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/>
 
 In this tutorial, we will demonstrate how to conduct hybrid search with [Milvus](https://milvus.io/docs/multi-vector-search.md) and [BGE-M3 model](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3). BGE-M3 model can convert text into dense and sparse vectors. Milvus supports storing both types of vectors in one collection, allowing for hybrid search that enhances the result relevance.
 
@@ -493,5 +493,5 @@ What math does a complete newbie need<span style='color:red'> to</span> understa
 
 ### Quick Deploy
 
-To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus).
+To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus).
 
