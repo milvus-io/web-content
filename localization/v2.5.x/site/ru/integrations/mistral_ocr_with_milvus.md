@@ -5,10 +5,10 @@ summary: >-
   помощью Milvus и Mistral OCR.
 title: Понимание документов с помощью Mistral OCR и Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">Понимание документов с помощью Mistral OCR и Milvus<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
@@ -654,7 +654,7 @@ Content: | Model | Answer |
 <ol>
 <li>обрабатывать документы из URL-адресов</li>
 <li>Извлекать текст, используя возможности Mistral OCR</li>
-<li>Генерировать векторные вкрапления для содержимого</li>
+<li>Генерировать векторные вложения для содержимого</li>
 <li>Хранить как текст, так и векторы в Milvus</li>
 <li>Выполнять семантический поиск по всем обработанным документам.</li>
 </ol>

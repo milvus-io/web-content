@@ -18,10 +18,10 @@ title: RAG multimodal avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Si vous souhaitez expérimenter l'effet final de ce tutoriel, vous pouvez aller directement à la <a href="https://demos.milvus.io/multimodal-image-search/">démo en ligne</a> et l'essayer.</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>Ce tutoriel présente le RAG multimodal alimenté par Milvus, le <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">modèle BGE visualisé</a> et <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Avec ce système, les utilisateurs peuvent télécharger une image et éditer des instructions textuelles, qui sont traitées par le modèle de recherche composé de BGE pour rechercher des images candidates. GPT-4o joue ensuite le rôle d'un re-ranker, en sélectionnant l'image la plus appropriée et en expliquant les raisons de son choix. Cette puissante combinaison permet une expérience de recherche d'images transparente et intuitive, en s'appuyant sur Milvus pour une recherche efficace, sur le modèle BGE pour un traitement et une mise en correspondance précis des images, et sur GPT-4o pour un reranking avancé.</p>
 <h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
@@ -39,25 +39,25 @@ title: RAG multimodal avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Installer les dépendances</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Installer les dépendances</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/FlagOpen/FlagEmbedding.git
-$ pip install -e FlagEmbedding
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/FlagOpen/FlagEmbedding.git</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -e FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" (Redémarrer la session) dans le menu déroulant).</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">Télécharger les données</h3><p>La commande suivante permet de télécharger les données de l'exemple et de les extraire dans un dossier local "./images_folder" :</p>
 <ul>
-<li><p><strong>images</strong>: Un sous-ensemble d'<a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> contenant environ 900 images des catégories &quot;Appliance&quot;, &quot;Cell_Phones_and_Accessories&quot;, et &quot;Electronics&quot;.</p></li>
+<li><p><strong>images</strong>: Un sous-ensemble d'<a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> contenant environ 900 images des catégories "Appliance", "Cell_Phones_and_Accessories", et "Electronics".</p></li>
 <li><p><strong>leopard.jpg</strong>: Un exemple d'image de requête.</p></li>
 </ul>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
-$ tar -xzf amazon_reviews_2023_subset.<span class="hljs-property">tar</span>.<span class="hljs-property">gz</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf amazon_reviews_2023_subset.tar.gz</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Load-Embedding-Model" class="common-anchor-header">Modèle d'intégration des charges</h3><p>Nous utiliserons le modèle Visualized BGE "bge-visualized-base-en-v1.5" pour générer des embeddings pour les images et le texte.</p>
 <p><strong>1. Télécharger le poids</strong></p>
-<pre><code translate="no" class="language-shell">$ wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>2. Construire l'encodeur</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
@@ -422,4 +422,4 @@ best_img.show()
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
    </span> <span class="img-wrapper"> <span>Le meilleur résultat</span> </span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide</h3><p>Pour savoir comment démarrer une démo en ligne avec ce tutoriel, veuillez vous référer à l <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">'exemple d'application</a>.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide</h3><p>Pour savoir comment démarrer une démo en ligne avec ce tutoriel, veuillez vous référer à l <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">'exemple d'application</a>.</p>

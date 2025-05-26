@@ -4,10 +4,10 @@ summary: >-
   全文検索は、テキスト中の特定のキーワードや語句にマッチする文書を検索する伝統的な手法である。用語の頻度などから計算された関連性スコアに基づいて結果をランク付けする。セマンティック検索が意味や文脈を理解するのに優れているのに対し、全文検索は正確なキーワードマッチングに優れており、セマンティック検索を補完するのに有用である。検索補強型生成（RAG）パイプラインを構築する一般的なアプローチでは、セマンティック検索と全文検索の両方を通して文書を検索し、その後、結果を絞り込むために再ランク付けを行う。
 title: Milvusによる全文検索
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Milvusによる全文検索<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
@@ -25,7 +25,7 @@ title: Milvusによる全文検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索は</a>、テキスト中の特定のキーワードやフレーズにマッチする文書を検索する伝統的な手法です。用語の頻度などから計算された関連性スコアに基づいて結果をランク付けする。セマンティック検索が意味や文脈を理解するのに優れているのに対し、フルテキスト検索は正確なキーワードマッチングに優れているため、セマンティック検索を補完するのに有効です。検索補強型生成（RAG）パイプラインを構築する一般的なアプローチでは、セマンティック検索と全文検索の両方を通じて文書を検索し、その後、結果を絞り込むために再ランク付け処理を行う。</p>
+    </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索は</a>、テキスト中の特定のキーワードやフレーズにマッチする文書を検索する伝統的な手法です。用語の頻度などから計算された関連性スコアに基づいて結果をランク付けする。セマンティック検索が意味や文脈を理解するのに優れているのに対し、フルテキスト検索は正確なキーワードマッチングに優れているため、セマンティック検索を補完するのに有効です。検索補強型生成（RAG）パイプラインを構築する一般的なアプローチでは、セマンティック検索と全文検索の両方を通じて文書を検索し、その後、結果を絞り込むために再ランク付けを行う。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />

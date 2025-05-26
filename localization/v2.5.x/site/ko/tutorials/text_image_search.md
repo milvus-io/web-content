@@ -5,10 +5,10 @@ summary: >-
   방법을 살펴봅니다. CLIP으로 이미지 임베딩을 생성하고 Milvus에 저장한 후 효율적인 유사도 검색을 수행해 보겠습니다.
 title: Milvus를 사용한 텍스트-이미지 검색
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">Milvus를 사용한 텍스트-이미지 검색<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
@@ -26,7 +26,7 @@ title: Milvus를 사용한 텍스트-이미지 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>텍스트-이미지 검색은 사용자가 자연어 텍스트 설명을 사용해 이미지를 검색할 수 있는 고급 기술입니다. 사전 학습된 멀티모달 모델을 활용하여 텍스트와 이미지를 모두 공유 의미 공간의 임베딩으로 변환하여 유사성 기반 비교를 가능하게 합니다.</p>
+    </button></h1><p>텍스트-이미지 검색은 사용자가 자연어 텍스트 설명을 사용해 이미지를 검색할 수 있는 고급 기술입니다. 사전 학습된 멀티모달 모델을 활용하여 텍스트와 이미지를 공유 의미 공간의 임베딩으로 변환하여 유사성 기반 비교를 가능하게 합니다.</p>
 <p>이 튜토리얼에서는 OpenAI의 CLIP(대조 언어-이미지 사전 학습) 모델과 Milvus를 사용하여 텍스트 기반 이미지 검색을 구현하는 방법을 살펴봅니다. CLIP으로 이미지 임베딩을 생성하고 Milvus에 저장한 후 효율적인 유사도 검색을 수행해 보겠습니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"

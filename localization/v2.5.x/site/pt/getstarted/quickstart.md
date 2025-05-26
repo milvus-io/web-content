@@ -18,8 +18,8 @@ title: Início rápido
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Os vectores, o formato de dados de saída dos modelos de Redes Neuronais, podem codificar eficazmente a informação e desempenhar um papel fundamental em aplicações de IA, tais como bases de dados de conhecimento, pesquisa semântica, Retrieval Augmented Generation (RAG) e muito mais.</p>
 <p>O Milvus é uma base de dados vetorial de código aberto que se adequa a aplicações de IA de todas as dimensões, desde a execução de um chatbot de demonstração no notebook Jupyter até à criação de uma pesquisa à escala da Web que serve milhares de milhões de utilizadores. Neste guia, vamos mostrar-lhe como configurar o Milvus localmente em minutos e utilizar a biblioteca cliente Python para gerar, armazenar e pesquisar vectores.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar o Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -38,12 +38,12 @@ title: Início rápido
         ></path>
       </svg>
     </button></h2><p>Neste guia, utilizamos o Milvus Lite, uma biblioteca Python incluída em <code translate="no">pymilvus</code> que pode ser incorporada na aplicação cliente. O Milvus também suporta a implantação no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e no <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> para casos de uso de produção.</p>
-<p>Antes de começar, certifique-se de ter o Python 3.8+ disponível no ambiente local. Instale <code translate="no">pymilvus</code> que contém a biblioteca do cliente python e o Milvus Lite:</p>
+<p>Antes de começar, certifique-se de ter o Python 3.8+ disponível no ambiente local. Instale <code translate="no">pymilvus</code>, que contém a biblioteca do cliente python e o Milvus Lite:</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong>. (Clique no menu "Runtime" (Tempo de execução) na parte superior do ecrã e selecione "Restart session" (Reiniciar sessão) no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong>. (Clique no menu "Runtime" (Tempo de execução) na parte superior do ecrã e selecione "Restart session" (Reiniciar sessão) no menu pendente).</p>
 </blockquote>
 </div>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Configurar a base de dados vetorial<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -238,7 +238,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Agora podemos fazer pesquisas semânticas representando o texto da consulta de pesquisa como um vetor e efetuar pesquisas de semelhança de vectores no Milvus.</p>
+    </button></h2><p>Agora podemos fazer pesquisas semânticas representando o texto da consulta de pesquisa como um vetor e efetuar uma pesquisa de semelhança de vectores no Milvus.</p>
 <h3 id="Vector-search" class="common-anchor-header">Pesquisa vetorial</h3><p>O Milvus aceita um ou vários pedidos de pesquisa vetorial ao mesmo tempo. O valor da variável query_vectors é uma lista de vectores, em que cada vetor é uma matriz de números float.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
@@ -302,7 +302,7 @@ res = client.search(
 <p>Por defeito, os campos escalares não são indexados. Se precisar de efetuar uma pesquisa filtrada de metadados num grande conjunto de dados, pode considerar a utilização de um esquema fixo e também ativar o <a href="https://milvus.io/docs/scalar_index.md">índice</a> para melhorar o desempenho da pesquisa.</p>
 <p>Para além da pesquisa vetorial, também pode efetuar outros tipos de pesquisa:</p>
 <h3 id="Query" class="common-anchor-header">Consulta</h3><p>Uma query() é uma operação que recupera todas as entidades que correspondem a um critério, tal como uma <a href="https://milvus.io/docs/boolean.md">expressão de filtro</a> ou a correspondência de alguns ids.</p>
-<p>Por exemplo, recuperar todas as entidades cujo campo escalar tem um determinado valor:</p>
+<p>Por exemplo, a recuperação de todas as entidades cujo campo escalar tem um valor específico:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,

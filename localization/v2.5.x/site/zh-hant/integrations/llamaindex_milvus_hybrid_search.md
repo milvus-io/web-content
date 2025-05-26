@@ -6,10 +6,10 @@ summary: >-
   本筆記展示如何在 [LlamaIndex](https://www.llamaindex.ai/) RAG pipelines 中使用 Milvus
   進行混合搜尋。我們將從推薦的預設混合搜尋 (語意 + BM25) 開始，然後探討其他替代的稀疏嵌入方法和自訂混合 reranker。
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="common-anchor-header">使用 Milvus 和 LlamaIndex 混合搜尋的 RAG<button data-href="#RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
@@ -27,7 +27,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>混合搜尋利用語意檢索和關鍵字匹配兩者的優勢，提供更精確且與上下文相關的結果。透過結合語義檢索和關鍵字匹配的優點，混合搜尋在複雜的資訊檢索任務中尤其有效。</p>
+    </button></h1><p>混合搜尋利用語意檢索和關鍵字比對兩者的優勢，提供更精確且與上下文相關的結果。透過結合語義檢索和關鍵字匹配的優點，混合搜尋在複雜的資訊檢索任務中尤其有效。</p>
 <p>本筆記展示如何在<a href="https://www.llamaindex.ai/">LlamaIndex</a>RAG 管道中使用 Milvus 進行混合搜尋。我們將從推薦的預設混合搜尋 (語意 + BM25) 開始，然後探討其他可替代的稀疏嵌入方法和自訂混合 reranker。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,7 +51,7 @@ summary: >-
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-llms-openai</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，您可能需要<strong>重新啟動運行時</strong>（導航到介面頂端的「運行<strong>時</strong>」功能表，並從下拉式功能表中選擇「重新啟動會話」）。</p>
+<p>如果您使用的是 Google Colab，您可能需要<strong>重新啟動運行時</strong>（導航到介面上方的「運行<strong>時</strong>」功能表，並從下拉式功能表中選擇「重新啟動會話」）。</p>
 </div>
 <p><strong>設定帳號</strong></p>
 <p>本教程使用 OpenAI 進行文字嵌入和答案產生。您需要準備<a href="https://platform.openai.com/api-keys">OpenAI API 密鑰</a>。</p>
@@ -142,7 +142,7 @@ Default sparse embedding function: BM25BuiltInFunction(input_field_names='text',
 <ul>
 <li><code translate="no">enable_sparse (bool)</code>:用來啟用或停用 sparse embedding 的布林標記。預設為 False。</li>
 <li><code translate="no">sparse_embedding_field (str)</code>:sparse embedding 欄位的名稱，預設為 DEFAULT_SPARSE_EMBEDDING_KEY。</li>
-<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>:如果 enable_sparse 為 True，則應該提供此物件來轉換文字為稀疏嵌入。若為 None，則使用預設的稀疏嵌入函數 (BM25BuiltInFunction)，或使用 BGEM3SparseEmbedding 給定的現有集合，而不使用內建函數。</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>:如果 enable_sparse 為 True，則應該提供此物件來轉換文字為稀疏內嵌。若為 None，則使用預設的稀疏嵌入函數 (BM25BuiltInFunction)，或使用 BGEM3SparseEmbedding 給定的現有集合，而不使用內建函數。</li>
 <li><code translate="no">sparse_index_config (dict, optional)</code>:用來建立稀疏嵌入索引的設定。預設為 None。</li>
 </ul>
 <p>若要在查詢階段啟用混合搜尋，請將<code translate="no">vector_store_query_mode</code> 設為「hybrid」。這將會結合語意搜尋和全文搜尋的搜尋結果，並重新排序。讓我們使用範例查詢進行測試：「作者在 Viaweb 學到了什麼？」：</p>

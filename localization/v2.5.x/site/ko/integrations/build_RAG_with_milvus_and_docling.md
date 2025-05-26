@@ -6,10 +6,10 @@ summary: >-
   통합합니다.
 title: Milvus와 Docling으로 RAG 구축하기
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-RAG-with-Milvus-and-Docling" class="common-anchor-header">Milvus와 Docling으로 RAG 구축하기<button data-href="#Build-RAG-with-Milvus-and-Docling" class="anchor-icon" translate="no">
@@ -93,7 +93,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
         ></path>
       </svg>
     </button></h2><p>Docling은 다양한 문서 형식을 통합된 표현(Docling 문서)으로 구문 분석할 수 있으며, 이를 다양한 출력 형식으로 내보낼 수 있습니다. 지원되는 입력 및 출력 형식의 전체 목록은 <a href="https://docling-project.github.io/docling/usage/supported_formats/">공식 문서를</a> 참조하세요.</p>
-<p>이 튜토리얼에서는 마크다운 파일<a href="https://milvus.io/docs/overview.md">(소스)</a>을 입력으로 사용하겠습니다. 다운스트림 RAG 작업에 적합한 구조화된 계층적 청크를 생성하기 위해 Docling에서 제공하는 계층적 <strong>청커를</strong> 사용하여 문서를 처리하겠습니다.</p>
+<p>이 튜토리얼에서는 마크다운 파일<a href="https://milvus.io/docs/overview.md">(소스)</a>을 입력으로 사용하겠습니다. 다운스트림 RAG 작업에 적합한 구조화된 계층적 청크를 생성하기 위해 Docling에서 제공하는 계층적 <strong>청커를</strong> 사용하여 문서를 처리할 것입니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> docling.document_converter <span class="hljs-keyword">import</span> DocumentConverter
 <span class="hljs-keyword">from</span> docling_core.transforms.chunker <span class="hljs-keyword">import</span> HierarchicalChunker
 
@@ -159,7 +159,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>지정된 파라미터로 새 컬렉션을 생성합니다.</p>
-<p>필드 정보를 지정하지 않으면 기본 키인 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
+<p>필드 정보를 지정하지 않으면 기본 키로 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,

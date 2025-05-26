@@ -106,11 +106,11 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
     <span class="hljs-type">String</span> <span class="hljs-variable">jobId</span> <span class="hljs-operator">=</span> bulkImport(batchFiles);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell">export MILVUS_URI=&quot;localhost:19530&quot;
 
-curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/create&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---data-raw <span class="hljs-string">&#x27;{
+curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&quot; \
+--header &quot;Content-Type: application/json&quot; \
+--data-raw &#x27;{
     &quot;files&quot;: [
         [
             &quot;/8ca44f28-47f7-40ba-9604-98918afe26d1/1.parquet&quot;
@@ -120,7 +120,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
         ]
     ],
     &quot;collectionName&quot;: &quot;quick_setup&quot;
-}&#x27;</span>
+}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>Тело запроса содержит два поля:</p>
 <ul>
@@ -145,12 +145,12 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
 </ul></li>
 </ul>
 <p>Возможные варианты возврата следующие:</p>
-<pre><code translate="no" class="language-json">{
-    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
-    <span class="hljs-string">&quot;data&quot;</span>: {
-        <span class="hljs-string">&quot;jobId&quot;</span>: <span class="hljs-string">&quot;448707763884413158&quot;</span>
-    }
-}
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;jobId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;448707763884413158&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Check-import-progress" class="common-anchor-header">Проверить ход импорта<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -183,49 +183,49 @@ resp = get_import_progress(
 
 <span class="hljs-built_in">print</span>(json.dumps(resp.json(), indent=<span class="hljs-number">4</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getImportProgress</span>(<span class="hljs-params">String jobId</span>)</span> {
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">getImportProgress</span><span class="hljs-params">(String jobId)</span> {
     <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
-        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Wait 5 second to check bulkInsert job state...&quot;</span>);
+        System.out.println(<span class="hljs-string">&quot;Wait 5 second to check bulkInsert job state...&quot;</span>);
         <span class="hljs-keyword">try</span> {
             TimeUnit.SECONDS.sleep(<span class="hljs-number">5</span>);
         } <span class="hljs-keyword">catch</span> (InterruptedException e) {
             <span class="hljs-keyword">break</span>;
         }
 
-        MilvusDescribeImportRequest request = MilvusDescribeImportRequest.builder()
+        <span class="hljs-type">MilvusDescribeImportRequest</span> <span class="hljs-variable">request</span> <span class="hljs-operator">=</span> MilvusDescribeImportRequest.builder()
                 .jobId(jobId)
                 .build();
-        String getImportProgressResult = BulkImport.getImportProgress(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, request);
+        <span class="hljs-type">String</span> <span class="hljs-variable">getImportProgressResult</span> <span class="hljs-operator">=</span> BulkImport.getImportProgress(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, request);
 
-        JsonObject getImportProgressObject = <span class="hljs-keyword">new</span> Gson().fromJson(getImportProgressResult, JsonObject.<span class="hljs-keyword">class</span>);
-        String state = getImportProgressObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;state&quot;</span>).getAsString();
-        String progress = getImportProgressObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;progress&quot;</span>).getAsString();
-        <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;Failed&quot;</span>.<span class="hljs-keyword">equals</span>(state)) {
-            String reason = getImportProgressObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;reason&quot;</span>).getAsString();
-            System.<span class="hljs-keyword">out</span>.printf(<span class="hljs-string">&quot;The job %s failed, reason: %s%n&quot;</span>, jobId, reason);
+        <span class="hljs-type">JsonObject</span> <span class="hljs-variable">getImportProgressObject</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>().fromJson(getImportProgressResult, JsonObject.class);
+        <span class="hljs-type">String</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> getImportProgressObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).get(<span class="hljs-string">&quot;state&quot;</span>).getAsString();
+        <span class="hljs-type">String</span> <span class="hljs-variable">progress</span> <span class="hljs-operator">=</span> getImportProgressObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).get(<span class="hljs-string">&quot;progress&quot;</span>).getAsString();
+        <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;Failed&quot;</span>.equals(state)) {
+            <span class="hljs-type">String</span> <span class="hljs-variable">reason</span> <span class="hljs-operator">=</span> getImportProgressObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).get(<span class="hljs-string">&quot;reason&quot;</span>).getAsString();
+            System.out.printf(<span class="hljs-string">&quot;The job %s failed, reason: %s%n&quot;</span>, jobId, reason);
             <span class="hljs-keyword">break</span>;
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;Completed&quot;</span>.<span class="hljs-keyword">equals</span>(state)) {
-            System.<span class="hljs-keyword">out</span>.printf(<span class="hljs-string">&quot;The job %s completed%n&quot;</span>, jobId);
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;Completed&quot;</span>.equals(state)) {
+            System.out.printf(<span class="hljs-string">&quot;The job %s completed%n&quot;</span>, jobId);
             <span class="hljs-keyword">break</span>;
         } <span class="hljs-keyword">else</span> {
-            System.<span class="hljs-keyword">out</span>.printf(<span class="hljs-string">&quot;The job %s is running, state:%s progress:%s%n&quot;</span>, jobId, state, progress);
+            System.out.printf(<span class="hljs-string">&quot;The job %s is running, state:%s progress:%s%n&quot;</span>, jobId, state, progress);
         }
     }
 }
 
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] args</span>) throws Exception</span> {
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception {
     List&lt;List&lt;String&gt;&gt; batchFiles = uploadData();
-    String jobId = bulkImport(batchFiles);
+    <span class="hljs-type">String</span> <span class="hljs-variable">jobId</span> <span class="hljs-operator">=</span> bulkImport(batchFiles);
     getImportProgress(jobId);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell">export MILVUS_URI=&quot;localhost:19530&quot;
 
-curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/describe&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---data-raw <span class="hljs-string">&#x27;{
+curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&quot; \
+--header &quot;Content-Type: application/json&quot; \
+--data-raw &#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
-}&#x27;</span>
+}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>Возможный ответ выглядит следующим образом:</p>
 <pre><code translate="no">{
@@ -236,7 +236,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
         <span class="hljs-string">&quot;details&quot;</span>: [
             {
                 <span class="hljs-string">&quot;completeTime&quot;</span>: <span class="hljs-string">&quot;2024-05-18T02:57:11Z&quot;</span>,
-                <span class="hljs-string">&quot;fileName&quot;</span>: <span class="hljs-string">&quot;id:449839014328146740 paths:\&quot;/8ca44f28-47f7-40ba-9604-98918afe26d1/1.parquet\&quot; &quot;</span>,
+                <span class="hljs-string">&quot;fileName&quot;</span>: <span class="hljs-string">&quot;id:449839014328146740 paths:<span class="hljs-subst">\&quot;</span>/8ca44f28-47f7-40ba-9604-98918afe26d1/1.parquet<span class="hljs-subst">\&quot;</span> &quot;</span>,
                 <span class="hljs-string">&quot;fileSize&quot;</span>: <span class="hljs-number">31567874</span>,
                 <span class="hljs-string">&quot;importedRows&quot;</span>: <span class="hljs-number">100000</span>,
                 <span class="hljs-string">&quot;progress&quot;</span>: <span class="hljs-number">100</span>,
@@ -245,7 +245,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
             },
             {
                 <span class="hljs-string">&quot;completeTime&quot;</span>: <span class="hljs-string">&quot;2024-05-18T02:57:11Z&quot;</span>,
-                <span class="hljs-string">&quot;fileName&quot;</span>: <span class="hljs-string">&quot;id:449839014328146741 paths:\&quot;/8ca44f28-47f7-40ba-9604-98918afe26d1/2.parquet\&quot; &quot;</span>,
+                <span class="hljs-string">&quot;fileName&quot;</span>: <span class="hljs-string">&quot;id:449839014328146741 paths:<span class="hljs-subst">\&quot;</span>/8ca44f28-47f7-40ba-9604-98918afe26d1/2.parquet<span class="hljs-subst">\&quot;</span> &quot;</span>,
                 <span class="hljs-string">&quot;fileSize&quot;</span>: <span class="hljs-number">31517224</span>,
                 <span class="hljs-string">&quot;importedRows&quot;</span>: <span class="hljs-number">100000</span>,
                 <span class="hljs-string">&quot;progress&quot;</span>: <span class="hljs-number">100</span>,
@@ -303,28 +303,28 @@ resp = list_import_jobs(
     listImportJobs();
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell">export MILVUS_URI=&quot;localhost:19530&quot;
 
-curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/list&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---data-raw <span class="hljs-string">&#x27;{
+curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot; \
+--header &quot;Content-Type: application/json&quot; \
+--data-raw &#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
-}&#x27;</span>
+}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>Возможные значения следующие:</p>
-<pre><code translate="no" class="language-json">{
-    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
-    <span class="hljs-string">&quot;data&quot;</span>: {
-        <span class="hljs-string">&quot;records&quot;</span>: [
-            {
-                <span class="hljs-string">&quot;collectionName&quot;</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
-                <span class="hljs-string">&quot;jobId&quot;</span>: <span class="hljs-string">&quot;448761313698322011&quot;</span>,
-                <span class="hljs-string">&quot;progress&quot;</span>: <span class="hljs-number">50</span>,
-                <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;Importing&quot;</span>
-            }
-        ]
-    }
-}
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;records&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+                <span class="hljs-attr">&quot;collectionName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;quick_setup&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-attr">&quot;jobId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;448761313698322011&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-attr">&quot;progress&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">50</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Importing&quot;</span>
+            <span class="hljs-punctuation">}</span>
+        <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Limitations" class="common-anchor-header">Ограничения<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -343,9 +343,11 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
       </svg>
     </button></h2><ul>
 <li><p>Размер каждого файла импорта не должен превышать <strong>16 ГБ</strong>.</p></li>
-<li><p>Максимальное количество запросов на импорт ограничено <strong>1024</strong>.</p></li>
-<li><p>Максимальное количество файлов в одном запросе на импорт не должно превышать <strong>1024</strong>.</p></li>
-<li><p>В запросе на импорт можно указать только одно имя раздела. Если имя раздела не указано, данные будут вставлены в раздел по умолчанию. Кроме того, в запросе на импорт нельзя задать имя раздела, если в целевой коллекции задан ключ раздела.</p></li>
+<li><p>Максимальное количество файлов в одном запросе на импорт не должно превышать <strong>1024</strong>. Каждый запрос на импорт может содержать не более 16 ГБ на файл * 1024 файла = 16 ТБ данных.</p></li>
+<li><p>Максимальное количество одновременных запросов на импорт ограничено <strong>1024</strong>.</p></li>
+</ul>
+<ul>
+<li>В запросе на импорт можно указать только одно имя раздела. Если имя раздела не указано, данные будут вставлены в раздел по умолчанию. Кроме того, в запросе на импорт нельзя задать имя раздела, если в целевой коллекции задан ключ раздела.</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">Ограничения<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -398,4 +400,4 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Мы настоятельно рекомендуем использовать функцию многофайлового импорта, которая позволяет загружать несколько файлов в одном запросе. Этот метод не только упрощает процесс импорта, но и значительно повышает его производительность. Кроме того, консолидация загружаемых файлов позволяет сократить время на управление данными и повысить эффективность рабочего процесса.</p>
+    </button></h2><p>Мы настоятельно рекомендуем использовать функцию многофайлового импорта, которая позволяет загружать несколько файлов в одном запросе. Этот метод не только упрощает процесс импорта, но и значительно повышает его производительность. Кроме того, консолидация загружаемых файлов позволяет сократить время на управление данными и сделать рабочий процесс более эффективным.</p>

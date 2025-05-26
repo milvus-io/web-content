@@ -4,13 +4,13 @@ summary: >-
   في هذا الدفتر، سوف نستخدم نموذج التضمين BGE-M3 لاستخراج التضمينات من مجموعة
   بيانات عناوين الأخبار، واستخدام Milvus لحساب المسافات بين التضمينات بكفاءة
   لمساعدة HDBSCAN في التجميع، ثم تصور النتائج للتحليل باستخدام طريقة UMAP. هذا
-  الدفتر هو تكييف لمقالة ديلان كاستيلو من Milvus.
+  الدفتر عبارة عن تعديل لمقال ديلان كاستيلو من Milvus.
 title: تجميع HDBSCAN مع ميلفوس
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">تجميع HDBSCAN مع ميلفوس<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
@@ -149,7 +149,7 @@ collection.create_index(field_name=<span class="hljs-string">&quot;embedding&quo
 
 collection.flush()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Construct-the-Distance-Matrix-for-HDBSCAN" class="common-anchor-header">قم ببناء مصفوفة المسافة لـ HDBSCAN<button data-href="#Construct-the-Distance-Matrix-for-HDBSCAN" class="anchor-icon" translate="no">
+<h2 id="Construct-the-Distance-Matrix-for-HDBSCAN" class="common-anchor-header">إنشاء مصفوفة المسافة لـ HDBSCAN<button data-href="#Construct-the-Distance-Matrix-for-HDBSCAN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,7 +189,7 @@ dist = {}
 
 embeddings = []
 <button class="copy-code-btn"></button></code></pre>
-<p>سنقوم بتكرار جميع التضمينات في مجموعة ميلفوس. لكل تضمين، سنبحث في كل تضمين عن جيرانه الأعلى-ك في نفس المجموعة، ونحصل على معرفاتهم ومسافاتهم. ثم نحتاج أيضًا إلى إنشاء قاموس لتعيين المعرف الأصلي إلى فهرس متصل في مصفوفة المسافة. عند الانتهاء، نحتاج إلى إنشاء مصفوفة المسافة التي تمت تهيئتها بجميع العناصر على أنها ما لا نهاية وملء العناصر التي بحثنا عنها. بهذه الطريقة، سيتم تجاهل المسافة بين النقاط البعيدة. أخيرًا نستخدم مكتبة HDBSCAN لتجميع النقاط باستخدام مصفوفة المسافة التي أنشأناها. نحتاج إلى ضبط المقياس على "محسوب مسبقاً" للإشارة إلى أن البيانات هي مصفوفة المسافة بدلاً من التضمينات الأصلية.</p>
+<p>سنقوم بتكرار جميع التضمينات في مجموعة ميلفوس. لكل تضمين، سنبحث في كل تضمين عن جيرانه الأعلى-ك في نفس المجموعة، ونحصل على معرّفاتهم ومسافاتهم. ثم نحتاج أيضًا إلى إنشاء قاموس لتعيين المعرف الأصلي إلى فهرس متصل في مصفوفة المسافة. عند الانتهاء، نحتاج إلى إنشاء مصفوفة المسافة التي تمت تهيئتها بجميع العناصر على أنها ما لا نهاية وملء العناصر التي بحثنا عنها. بهذه الطريقة، سيتم تجاهل المسافة بين النقاط البعيدة. أخيرًا نستخدم مكتبة HDBSCAN لتجميع النقاط باستخدام مصفوفة المسافة التي أنشأناها. نحتاج إلى ضبط المقياس على "محسوب مسبقاً" للإشارة إلى أن البيانات هي مصفوفة المسافة بدلاً من التضمينات الأصلية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     batch = iterator.<span class="hljs-built_in">next</span>()
     batch_ids = [data[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
@@ -282,6 +282,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/hdbscan_clustering_with_milvus.png?raw=true" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>الصورة</span> </span></p>
 <p>نوضح هنا أن البيانات متجمعة بشكل جيد، ويمكنك التمرير فوق النقاط للتحقق من النص الذي تمثله. من خلال هذا الدفتر، نأمل أن تتعلم كيفية استخدام HDBSCAN لتجميع التضمينات باستخدام Milvus بكفاءة، والتي يمكن تطبيقها أيضًا على أنواع أخرى من البيانات. يسمح هذا النهج، إلى جانب نماذج اللغة الكبيرة، بإجراء تحليل أعمق لبياناتك على نطاق واسع.</p>

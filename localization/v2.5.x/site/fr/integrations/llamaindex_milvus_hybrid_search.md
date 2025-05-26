@@ -9,10 +9,10 @@ summary: >-
   explorerons d'autres méthodes alternatives d'incorporation de données éparses
   et la personnalisation du reranker hybride.
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="common-anchor-header">RAG utilise la recherche hybride avec Milvus et LlamaIndex<button data-href="#RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
@@ -160,7 +160,7 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">Personnaliser l'analyseur de texte</h3><p>Les analyseurs jouent un rôle essentiel dans la recherche en texte intégral en décomposant les phrases en tokens et en effectuant un traitement lexical, tel que l'élimination des troncs et des mots vides. Ils sont généralement spécifiques à une langue. Pour plus de détails, voir le <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Guide de l'analyseur Milvus</a>.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">Personnaliser l'analyseur de texte</h3><p>Les analyseurs jouent un rôle essentiel dans la recherche en texte intégral en décomposant les phrases en jetons et en effectuant un traitement lexical, tel que l'élimination des troncs et des mots vides. Ils sont généralement spécifiques à une langue. Pour plus de détails, voir le <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Guide de l'analyseur Milvus</a>.</p>
 <p>Milvus prend en charge deux types d'analyseurs : Les <strong>analyseurs intégrés</strong> et les <strong>analyseurs personnalisés</strong>. Par défaut, si <code translate="no">enable_sparse</code> est défini sur True, <code translate="no">MilvusVectorStore</code> utilise <code translate="no">BM25BuiltInFunction</code> avec les configurations par défaut, en employant l'analyseur intégré standard qui génère du texte en fonction de la ponctuation.</p>
 <p>Pour utiliser un autre analyseur ou personnaliser l'analyseur existant, vous pouvez fournir des valeurs à l'argument <code translate="no">analyzer_params</code> lors de la construction de <code translate="no">BM25BuiltInFunction</code>. Ensuite, définissez cette fonction comme <code translate="no">sparse_embedding_function</code> dans <code translate="no">MilvusVectorStore</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
@@ -300,7 +300,7 @@ prestigious, and the challenges and rewards of running a startup.
 <li><code translate="no">hybrid_ranker (str)</code>: Spécifie le type de classificateur utilisé dans les requêtes de recherche hybride. Actuellement, seuls ["RRFRanker", "WeightedRanker"] sont pris en charge. La valeur par défaut est "RRFRanker".</li>
 <li><code translate="no">hybrid_ranker_params (dict, optional)</code>: Paramètres de configuration du classificateur hybride. La structure de ce dictionnaire dépend du classificateur spécifique utilisé :<ul>
 <li>Pour "RRFRanker", il doit comprendre les éléments suivants<ul>
-<li>"k" (int) : Un paramètre utilisé dans la fusion réciproque des rangs (RRF). Cette valeur est utilisée pour calculer les scores de classement dans le cadre de l'algorithme RRF, qui combine plusieurs stratégies de classement en un seul score afin d'améliorer la pertinence de la recherche. La valeur par défaut est 60 si elle n'est pas spécifiée.</li>
+<li>"k" (int) : Paramètre utilisé dans la fusion réciproque des rangs (RRF). Cette valeur est utilisée pour calculer les scores de classement dans le cadre de l'algorithme RRF, qui combine plusieurs stratégies de classement en un seul score afin d'améliorer la pertinence de la recherche. La valeur par défaut est 60 si elle n'est pas spécifiée.</li>
 </ul></li>
 <li>Pour "WeightedRanker", il attend :<ul>
 <li>"weights" (liste de flottants) : Une liste d'exactement deux poids :<ol>

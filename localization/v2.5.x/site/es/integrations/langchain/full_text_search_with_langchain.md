@@ -20,10 +20,10 @@ title: Uso de la búsqueda de texto completo con LangChain y Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>La<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">búsqueda de texto completo</a> es un método tradicional para recuperar documentos mediante la búsqueda de palabras clave o frases específicas en el texto. Clasifica los resultados en función de puntuaciones de relevancia calculadas a partir de factores como la frecuencia de los términos. Mientras que la búsqueda semántica es mejor para comprender el significado y el contexto, la búsqueda de texto completo destaca en la concordancia precisa de palabras clave, lo que la convierte en un complemento útil de la búsqueda semántica. El algoritmo BM25 se utiliza ampliamente para la clasificación en la búsqueda de texto completo y desempeña un papel clave en la Generación Mejorada de Recuperación (RAG).</p>
@@ -152,7 +152,7 @@ vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
-<p>Para más información sobre la búsqueda híbrida, puede consultar la <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">introducción a la búsqueda híbrida</a> y este <a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">tutorial sobre la búsqueda híbrida en LangChain Milvus</a>.</p>
+<p>Para más información sobre la búsqueda híbrida, puede consultar la <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">introducción a la búsqueda híbrida</a> y este <a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">tutorial sobre la búsqueda híbrida de LangChain Milvus</a>.</p>
 <h3 id="BM25-search-without-embedding" class="common-anchor-header">Búsqueda BM25 sin incrustación</h3><p>Si desea realizar únicamente una búsqueda de texto completo con la función BM25 sin utilizar ninguna búsqueda semántica basada en la incrustación, puede establecer el parámetro de incrustación en <code translate="no">None</code> y conservar únicamente el <code translate="no">builtin_function</code> especificado como instancia de la función BM25. El campo vectorial sólo tiene campo "disperso". Por ejemplo:</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,

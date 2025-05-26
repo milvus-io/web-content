@@ -5,10 +5,10 @@ related_key: LlamaIndex
 summary: >-
   このチュートリアルでは、LlamaIndexとMilvusを使って、全文検索とハイブリッド検索を使ったRAGシステムを構築する方法を学びます。まず全文検索を単独で実装し、次にセマンティック検索を統合してより包括的な検索結果を得られるように拡張します。
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Using-Full-Text-Search-with-LlamaIndex-and-Milvus" class="common-anchor-header">LlamaIndexとmilvusで全文検索を使う<button data-href="#Using-Full-Text-Search-with-LlamaIndex-and-Milvus" class="anchor-icon" translate="no">
@@ -28,7 +28,7 @@ summary: >-
       </svg>
     </button></h1><p><strong>全文検索では</strong>、キーワードの完全一致を使用し、多くの場合BM25のようなアルゴリズムを活用して関連性によって文書をランク付けする。<strong>検索拡張生成（RAG）</strong>システムでは、この方法はAIが生成した応答を強化するために適切なテキストを検索する。</p>
 <p>一方、<strong>セマンティック検索は</strong>文脈の意味を解釈して、より広範な結果を提供する。この2つのアプローチを組み合わせることで、情報検索を向上させる<strong>ハイブリッド検索が</strong>実現する。</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus2.</a>5のSparse-BM25アプローチでは、生テキストは自動的にスパースベクトルに変換されます。これにより、手作業によるスパース埋め込み生成が不要になり、意味理解とキーワードの関連性のバランスをとったハイブリッド検索戦略が可能になります。</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus2.</a>5のSparse-BM25アプローチでは、生テキストは自動的にスパースベクトルに変換されます。これにより、手作業によるスパース埋め込み生成が不要になり、意味理解とキーワードの関連性のバランスをとるハイブリッド検索戦略が可能になります。</p>
 <p>このチュートリアルでは、LlamaIndexとMilvusを使って、全文検索とハイブリッド検索を使ったRAGシステムを構築する方法を学びます。まずは全文検索を単独で実装し、次にセマンティック検索を統合してより包括的な結果を得られるように拡張していきます。</p>
 <blockquote>
 <p>このチュートリアルを進める前に、<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索と</a> <a href="https://milvus.io/docs/integrate_with_llamaindex.md">LlamaIndexにおけるMilvusの基本的な使い方を</a>理解しておいてください。</p>
@@ -153,7 +153,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <li><code translate="no">input_field_names (str)</code>:入力テキスト・フィールド（デフォルト："text"）。これは、BM25アルゴリズムがどのテキストフィールドに適用されるかを示す。異なるテキストフィールド名を持つ独自のコレクションを使用する場合は、これを変更する。</li>
 <li><code translate="no">output_field_names (str)</code>:このBM25関数の出力が格納されるフィールド（デフォルト："sparse_embedding"）。</li>
 </ul>
-<p>ベクトルストアの設定が完了すると、Milvusを使ってクエリーモード "sparse "または "text_search "で全文検索クエリーを実行することができます：</p>
+<p>ベクトルストアが設定されると、Milvusを使ってクエリーモード "sparse "または "text_search "で全文検索クエリーを実行することができます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> textwrap
 
 query_engine = index.as_query_engine(

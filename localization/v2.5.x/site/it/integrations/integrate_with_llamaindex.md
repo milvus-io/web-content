@@ -20,8 +20,8 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e LlamaIndex
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Questa guida mostra come costruire un sistema di Retrieval-Augmented Generation (RAG) utilizzando LlamaIndex e Milvus.</p>
 <p>Il sistema RAG combina un sistema di recupero con un modello generativo per generare nuovo testo in base a un prompt dato. Il sistema recupera prima i documenti rilevanti da un corpus utilizzando Milvus e poi utilizza un modello generativo per generare nuovo testo sulla base dei documenti recuperati.</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a> è un framework di dati semplice e flessibile per collegare fonti di dati personalizzate a grandi modelli linguistici (LLM). <a href="https://milvus.io/">Milvus</a> è il database vettoriale open-source più avanzato al mondo, costruito per alimentare le applicazioni di ricerca di similarità e di intelligenza artificiale.</p>
@@ -92,8 +92,8 @@ documents = SimpleDirectoryReader(
 <h4 id="basic-args" class="common-anchor-header">argomenti di base</h4><ul>
 <li><code translate="no">uri (str, optional)</code>: L'URI a cui connettersi, sotto forma di "https://address:port" per il servizio Milvus o Zilliz Cloud, o "path/to/local/milvus.db" per il Milvus locale lite. Il valore predefinito è "./milvus_llamaindex.db".</li>
 <li><code translate="no">token (str, optional)</code>: Il token per l'accesso. Vuoto se non si usa rbac, se si usa rbac sarà molto probabilmente "username:password".</li>
-<li><code translate="no">collection_name (str, optional)</code>: Il nome della raccolta in cui saranno memorizzati i dati. Il valore predefinito è "llamalection".</li>
-<li><code translate="no">overwrite (bool, optional)</code>: Sovrascrivere o meno la raccolta esistente con lo stesso nome. L'impostazione predefinita è False.</li>
+<li><code translate="no">collection_name (str, optional)</code>: Il nome della raccolta in cui verranno memorizzati i dati. Il valore predefinito è "llamalection".</li>
+<li><code translate="no">overwrite (bool, optional)</code>: Sovrascrivere o meno l'insieme esistente con lo stesso nome. L'impostazione predefinita è False.</li>
 </ul>
 <h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">campi scalari, compresi id doc e testo</h4><ul>
 <li><code translate="no">doc_id_field (str, optional)</code>: Il nome del campo doc_id per la raccolta. Il valore predefinito è DEFAULT_DOC_ID_KEY.</li>
@@ -106,7 +106,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">dim (int, optional)</code>: La dimensione dei vettori di incorporamento per la collezione. Richiesto quando si crea una nuova collezione con enable_sparse è False.</li>
 <li><code translate="no">embedding_field (str, optional)</code>: Il nome del campo di incorporamento denso per l'insieme, predefinito a DEFAULT_EMBEDDING_KEY.</li>
 <li><code translate="no">index_config (dict, optional)</code>: La configurazione usata per costruire l'indice di incorporamento denso. Per impostazione predefinita, Nessuno.</li>
-<li><code translate="no">search_config (dict, optional)</code>: Configurazione utilizzata per la ricerca nell'indice denso di Milvus. Si noti che deve essere compatibile con il tipo di indice specificato da <code translate="no">index_config</code>. Il valore predefinito è Nessuno.</li>
+<li><code translate="no">search_config (dict, optional)</code>: Configurazione utilizzata per la ricerca nell'indice denso di Milvus. Si noti che deve essere compatibile con il tipo di indice specificato da <code translate="no">index_config</code>. Valore predefinito: Nessuno.</li>
 <li><code translate="no">similarity_metric (str, optional)</code>: La metrica di somiglianza da utilizzare per l'incorporazione densa; attualmente supporta IP, COSINE e L2.</li>
 </ul>
 <h4 id="sparse-field" class="common-anchor-header">campo sparse</h4><ul>
@@ -125,7 +125,7 @@ documents = SimpleDirectoryReader(
 <li>Per "WeightedRanker", si aspetta:<ul>
 <li>"weights" (elenco di float): Un elenco di esattamente due pesi:<ol>
 <li>Il peso per la componente densa dell'incorporazione.</li>
-<li>Questi pesi sono usati per regolare l'importanza delle componenti dense e rade delle incorporazioni nel processo di recupero ibrido. L'impostazione predefinita è un dizionario vuoto, il che implica che il classificatore opererà con le impostazioni predefinite.</li>
+<li>Questi pesi sono usati per regolare l'importanza delle componenti dense e rade delle incorporazioni nel processo di reperimento ibrido. L'impostazione predefinita è un dizionario vuoto, il che implica che il classificatore opererà con le impostazioni predefinite.</li>
 </ol></li>
 </ul></li>
 </ul></li>
@@ -133,7 +133,7 @@ documents = SimpleDirectoryReader(
 <h4 id="others" class="common-anchor-header">altri</h4><ul>
 <li><code translate="no">collection_properties (dict, optional)</code>: Le proprietà della collezione, come TTL (Time-To-Live) e MMAP (memory mapping). L'impostazione predefinita è Nessuna. Potrebbe includere:<ul>
 <li>"collection.ttl.seconds" (int): Una volta impostata questa proprietà, i dati della raccolta corrente scadono nel tempo specificato. I dati scaduti nell'insieme saranno ripuliti e non saranno coinvolti nelle ricerche o nelle query.</li>
-<li>"mmap.enabled" (bool): Abilita o meno l'archiviazione con mappatura della memoria a livello di raccolta.</li>
+<li>"mmap.enabled" (bool): Abilita o meno la memorizzazione con mappatura di memoria a livello di raccolta.</li>
 </ul></li>
 <li><code translate="no">index_management (IndexManagement)</code>: Specifica la strategia di gestione degli indici da utilizzare. Per impostazione predefinita, "create_if_not_exists".</li>
 <li><code translate="no">batch_size (int)</code>: Configura il numero di documenti elaborati in un batch quando si inseriscono i dati in Milvus. Il valore predefinito è DEFAULT_BATCH_SIZE.</li>

@@ -1,14 +1,14 @@
 ---
 id: build_RAG_with_milvus_and_docling.md
 summary: >-
-  在本教程中，我们将向您展示如何使用 Milvus 和 Docling 构建检索增强生成（RAG）管道。该管道集成了用于文档解析的
+  在本教程中，我们将向您展示如何使用 Milvus 和 Docling 构建一个检索增强生成（RAG）管道。该管道集成了用于文档解析的
   Docling、用于向量存储的 Milvus 和用于生成有洞察力的上下文感知响应的 OpenAI。
 title: 使用 Milvus 和 Docling 构建 RAG
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-RAG-with-Milvus-and-Docling" class="common-anchor-header">使用 Milvus 和 Docling 构建 RAG<button data-href="#Build-RAG-with-Milvus-and-Docling" class="anchor-icon" translate="no">
@@ -27,7 +27,7 @@ title: 使用 Milvus 和 Docling 构建 RAG
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/docling-project/docling">Docling</a>简化了人工智能应用对不同格式文档的解析和理解。通过高级 PDF 理解和统一文档表示，Docling 使非结构化文档数据为下游工作流做好了准备。</p>
-<p>在本教程中，我们将向你展示如何使用 Milvus 和 Docling 构建一个检索-增强生成（RAG）管道。该管道集成了 Docling（用于文档解析）、Milvus（用于向量存储）和 OpenAI（用于生成具有洞察力的上下文感知响应）。</p>
+<p>在本教程中，我们将向您展示如何使用 Milvus 和 Docling 构建一个检索-增强生成（RAG）管道。该管道集成了 Docling（用于文档解析）、Milvus（用于向量存储）和 OpenAI（用于生成具有洞察力的上下文感知响应）。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,7 +153,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<p>检查 Collections 是否已存在，如果已存在，则将其删除。</p>
+<p>检查 Collections 是否已存在，如果已存在，则删除它。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>

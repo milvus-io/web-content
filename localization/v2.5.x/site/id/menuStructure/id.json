@@ -1249,7 +1249,7 @@
             ]
           },
           {
-            "label": "Gunakan Pulsa dengan Milvus",
+            "label": "Gunakan Pulsar dengan Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,

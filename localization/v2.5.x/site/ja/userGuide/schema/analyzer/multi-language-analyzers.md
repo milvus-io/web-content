@@ -2,7 +2,7 @@
 id: multi-language-analyzers.md
 title: 多言語アナライザ
 summary: >-
-  Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一の分析器を適用します。その分析器が英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、その結果、想起率が低下します。たとえば、スペイン語の「teléfono」（「電話」を意味する）を検索すると、英語に特化したアナライザはつまずきます。
+  Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一の分析器を適用します。その分析ツールが英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、結果として想起率が低下します。たとえば、スペイン語の「teléfono」（「電話」を意味する）を検索すると、英語に特化したアナライザはつまずきます。
   アクセントが削除され、スペイン語固有のステミングが適用されないため、関連する結果が見落とされる可能性があります。
 ---
 <h1 id="Multi-language-Analyzers" class="common-anchor-header">多言語アナライザ<button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
@@ -106,7 +106,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">multi_analyzer_params</code> 、Milvusが各エンティティに適切な解析器を選択する方法を決定する単一のJSONオブジェクトです：</p>
+    </button></h2><p><code translate="no">multi_analyzer_params</code> 、Milvusが各エンティティに適切なアナライザーを選択する方法を決定する1つのJSONオブジェクトです：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">multi_analyzer_params = {
@@ -450,16 +450,16 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Define-BM25-function" class="common-anchor-header">BM25関数の定義</h3><p>生のテキストデータからスパースベクトル表現を生成するBM25関数を定義します：</p>
 <div class="multipleCode">
-   <a href="#plaintext">プレーンテキスト</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-plaintext"># Create the BM25 function
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
 bm25_function = Function(
-    name=&quot;text_to_vector&quot;,            # Descriptive function name
-    function_type=FunctionType.BM25,  # Use BM25 algorithm
-    input_field_names=[&quot;text&quot;],       # Process text from this field
-    output_field_names=[&quot;sparse&quot;]     # Store vectors in this field
+    name=<span class="hljs-string">&quot;text_to_vector&quot;</span>,            <span class="hljs-comment"># Descriptive function name</span>
+    function_type=FunctionType.BM25,  <span class="hljs-comment"># Use BM25 algorithm</span>
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],       <span class="hljs-comment"># Process text from this field</span>
+    output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>]     <span class="hljs-comment"># Store vectors in this field</span>
 )
 
-# Add the function to our schema
+<span class="hljs-comment"># Add the function to our schema</span>
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">function</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
@@ -801,36 +801,36 @@ curl --request POST \
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> は、インデックスの設定と一致していなければなりません。</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> は、クエリ・テキストに適用する分析器を指定します。これは、保存された文書に使用される解析器とは無関係です。</p></li>
-<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> BM25固有の動作を制御します。ここでは、検索に含まれるすべての用語を保持します。詳細については、<a href="/docs/ja/sparse_vector.md">スパース・ベクタを</a>参照してください。</p></li>
+<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> BM25固有の動作を制御します。ここでは、検索に含まれるすべての用語を保持します。詳細については、「<a href="/docs/ja/sparse_vector.md">スパース・ベクター</a>」を参照してください。</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#plaintext">プレーンテキスト</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-plaintext">search_params = {
-    &quot;metric_type&quot;: &quot;BM25&quot;,            # Must match index configuration
-    &quot;analyzer_name&quot;: &quot;english&quot;,  # Analyzer that matches the query language
-    &quot;drop_ratio_search&quot;: &quot;0&quot;,     # Keep all terms in search (tweak as needed)
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">search_params = {
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,            <span class="hljs-comment"># Must match index configuration</span>
+    <span class="hljs-string">&quot;analyzer_name&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>,  <span class="hljs-comment"># Analyzer that matches the query language</span>
+    <span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,     <span class="hljs-comment"># Keep all terms in search (tweak as needed)</span>
 }
 
-# Execute the search
+<span class="hljs-comment"># Execute the search</span>
 english_results = client.search(
-    collection_name=COLLECTION_NAME,  # Collection to search
-    data=[&quot;artificial intelligence&quot;],                # Query text
-    anns_field=&quot;sparse&quot;,              # Field to search against
-    search_params=search_params,      # Search configuration
-    limit=3,                      # Max results to return
-    output_fields=[&quot;text&quot;, &quot;language&quot;],  # Fields to include in the output
-    consistency_level=&quot;Strong&quot;,       # Data‑consistency guarantee
+    collection_name=COLLECTION_NAME,  <span class="hljs-comment"># Collection to search</span>
+    data=[<span class="hljs-string">&quot;artificial intelligence&quot;</span>],                <span class="hljs-comment"># Query text</span>
+    anns_field=<span class="hljs-string">&quot;sparse&quot;</span>,              <span class="hljs-comment"># Field to search against</span>
+    search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
+    limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
+    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
-# Display English search results
-print(&quot;\n=== English Search Results ===&quot;)
-for i, hit in enumerate(english_results[0]):
-    print(f&quot;{i+1}. [{hit.score:.4f}] {hit.entity.get(&#x27;text&#x27;)} &quot;
-          f&quot;(Language: {hit.entity.get(&#x27;language&#x27;)})&quot;)
+<span class="hljs-comment"># Display English search results</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== English Search Results ===&quot;</span>)
+<span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(english_results[<span class="hljs-number">0</span>]):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. [<span class="hljs-subst">{hit.score:<span class="hljs-number">.4</span>f}</span>] <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;text&#x27;</span>)}</span> &quot;</span>
+          <span class="hljs-string">f&quot;(Language: <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;language&#x27;</span>)}</span>)&quot;</span>)
 
-# Expected output:
-# === English Search Results ===
-# 1. [2.7881] Artificial intelligence is transforming technology (Language: english)
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># === English Search Results ===</span>
+<span class="hljs-comment"># 1. [2.7881] Artificial intelligence is transforming technology (Language: english)</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 searchParams.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>);
@@ -922,30 +922,30 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Strong&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">中国語解析器を使う</h3><p>この例では、異なるクエリ・テキストに対して、中国語アナライザ（そのエイリアス<code translate="no">&quot;cn&quot;</code> を使用）に切り替えることを示します。他のパラメータはすべて同じですが、中国語固有のトークン化ルールを使用してクエリ・テキストが処理されます。</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">中国語アナライザを使用する</h3><p>この例では、異なるクエリ・テキストに対して、中国語アナライザ（そのエイリアス<code translate="no">&quot;cn&quot;</code> を使用）に切り替えることを示します。他のパラメータはすべて同じですが、中国語固有のトークン化ルールを使用してクエリ・テキストが処理されます。</p>
 <div class="multipleCode">
-   <a href="#plaintext">プレーンテキスト</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-plaintext">search_params[&quot;analyzer_name&quot;] = &quot;cn&quot;
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>
 
 chinese_results = client.search(
-    collection_name=COLLECTION_NAME,  # Collection to search
-    data=[&quot;人工智能&quot;],                # Query text
-    anns_field=&quot;sparse&quot;,              # Field to search against
-    search_params=search_params,      # Search configuration
-    limit=3,                      # Max results to return
-    output_fields=[&quot;text&quot;, &quot;language&quot;],  # Fields to include in the output
-    consistency_level=&quot;Strong&quot;,       # Data‑consistency guarantee
+    collection_name=COLLECTION_NAME,  <span class="hljs-comment"># Collection to search</span>
+    data=[<span class="hljs-string">&quot;人工智能&quot;</span>],                <span class="hljs-comment"># Query text</span>
+    anns_field=<span class="hljs-string">&quot;sparse&quot;</span>,              <span class="hljs-comment"># Field to search against</span>
+    search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
+    limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
+    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
-# Display Chinese search results
-print(&quot;\n=== Chinese Search Results ===&quot;)
-for i, hit in enumerate(chinese_results[0]):
-    print(f&quot;{i+1}. [{hit.score:.4f}] {hit.entity.get(&#x27;text&#x27;)} &quot;
-          f&quot;(Language: {hit.entity.get(&#x27;language&#x27;)})&quot;)
+<span class="hljs-comment"># Display Chinese search results</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== Chinese Search Results ===&quot;</span>)
+<span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(chinese_results[<span class="hljs-number">0</span>]):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. [<span class="hljs-subst">{hit.score:<span class="hljs-number">.4</span>f}</span>] <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;text&#x27;</span>)}</span> &quot;</span>
+          <span class="hljs-string">f&quot;(Language: <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;language&#x27;</span>)}</span>)&quot;</span>)
 
-# Expected output:
-# === Chinese Search Results ===
-# 1. [3.3814] 人工智能正在改变技术领域 (Language: chinese)
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># === Chinese Search Results ===</span>
+<span class="hljs-comment"># 1. [3.3814] 人工智能正在改变技术领域 (Language: chinese)</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">searchParams.put(<span class="hljs-string">&quot;analyzer_name&quot;</span>, <span class="hljs-string">&quot;cn&quot;</span>);
 searchResp = client.search(SearchReq.builder()

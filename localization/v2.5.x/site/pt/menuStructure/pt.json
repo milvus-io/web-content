@@ -1109,7 +1109,7 @@
                     "children": []
                   },
                   {
-                    "label": "Azulejo",
+                    "label": "Azure",
                     "id": "ingress.md",
                     "order": 3,
                     "children": []
@@ -1135,7 +1135,7 @@
                     "children": []
                   },
                   {
-                    "label": "Azulejo",
+                    "label": "Azure",
                     "id": "abs.md",
                     "order": 3,
                     "children": []
@@ -1249,7 +1249,7 @@
             ]
           },
           {
-            "label": "Utilizar Pulsa com Milvus",
+            "label": "Utilizar Pulsar com Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -2393,7 +2393,7 @@
     ]
   },
   {
-    "label": "FAQs",
+    "label": "Perguntas frequentes",
     "id": "faq",
     "isMenu": true,
     "order": 9,

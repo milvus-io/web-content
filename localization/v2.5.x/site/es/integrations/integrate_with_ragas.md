@@ -5,10 +5,10 @@ summary: >-
   Mejorada por Recuperación (RAG) basado en Milvus.
 title: Evaluación con Ragas
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Evaluation-with-Ragas" class="common-anchor-header">Evaluación con Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
@@ -28,7 +28,7 @@ title: Evaluación con Ragas
       </svg>
     </button></h1><p>Esta guía muestra cómo utilizar Ragas para evaluar un sistema de generación mejorada por recuperación (RAG) basado en <a href="https://milvus.io/">Milvus</a>.</p>
 <p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar texto nuevo a partir de una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
-<p><a href="https://docs.ragas.io/en/latest/index.html#">Ragas</a> es un marco de trabajo que le ayuda a evaluar sus canalizaciones RAG. Existen herramientas y marcos de trabajo que ayudan a crear estas cadenas, pero evaluarlas y cuantificar su rendimiento puede resultar difícil. Aquí es donde entra Ragas (RAG Assessment).</p>
+<p><a href="https://docs.ragas.io/en/latest/index.html#">Ragas</a> es un marco de trabajo que le ayuda a evaluar sus canalizaciones RAG. Existen herramientas y marcos de trabajo que ayudan a construir estas cadenas, pero evaluarlas y cuantificar su rendimiento puede resultar difícil. Aquí es donde entra Ragas (RAG Assessment).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

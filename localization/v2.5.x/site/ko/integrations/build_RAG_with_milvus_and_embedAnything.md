@@ -6,10 +6,10 @@ summary: >-
   포맷, 인덱싱 및 대상 벡터 저장소에 저장되는 방식을 정의하는 래퍼 역할을 합니다.
 title: Milvus와 EmbedAnything으로 RAG 구축하기
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">Milvus와 EmbedAnything으로 RAG 구축하기<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
@@ -31,7 +31,7 @@ title: Milvus와 EmbedAnything으로 RAG 구축하기
 <p>이 튜토리얼에서는 <a href="https://milvus.io">Milvus와</a> 함께 EmbedAnything을 사용하여 검색 증강 생성(RAG) 파이프라인을 구축하는 방법을 보여드리겠습니다. 특정 데이터베이스와 긴밀하게 결합하는 대신, 임베드애니씽은 플러그형 <strong>어댑터</strong> 시스템을 사용합니다. 어댑터는 임베딩의 포맷, 인덱싱 및 대상 벡터 저장소에 저장되는 방식을 정의하는 래퍼 역할을 합니다.</p>
 <p>EmbedAnything과 Milvus 어댑터를 페어링하면 단 몇 줄의 코드만으로 다양한 파일 유형에서 임베딩을 생성하고 이를 Milvus에 효율적으로 저장할 수 있습니다.</p>
 <blockquote>
-<p>⚠️ 참고: EmbedAnything의 어댑터는 Milvus로의 삽입을 처리하지만, 즉시 검색을 지원하지는 않습니다. 전체 RAG 파이프라인을 구축하려면 MilvusClient를 별도로 인스턴스화하고 애플리케이션의 일부로 검색 로직(예: 벡터를 통한 유사성 검색)을 구현해야 합니다.</p>
+<p>⚠️ 참고: EmbedAnything의 어댑터는 Milvus에 삽입을 처리하지만, 즉시 검색을 지원하지는 않습니다. 전체 RAG 파이프라인을 구축하려면 MilvusClient를 별도로 인스턴스화하고 애플리케이션의 일부로 검색 로직(예: 벡터를 통한 유사성 검색)을 구현해야 합니다.</p>
 </blockquote>
 <h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"

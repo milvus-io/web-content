@@ -21,10 +21,10 @@ title: 使用 Milvus 推薦電影
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>在本筆記簿中，我們將探討如何使用 OpenAI 來產生電影描述的嵌入式資料，並在 Milvus 中利用這些嵌入式資料來推薦符合您喜好的電影。為了強化搜尋結果，我們將運用篩選功能來執行元資料搜尋。本範例所使用的資料集來自 HuggingFace 資料集，包含超過 8,000 個電影條目，提供豐富的電影推薦選擇。</p>
@@ -52,7 +52,7 @@ title: 使用 Milvus 推薦電影
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Initialize-OpenAI-client-and-Milvus" class="common-anchor-header">初始化 OpenAI 用戶端和 Milvus<button data-href="#Initialize-OpenAI-client-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,15 +70,15 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
         ></path>
       </svg>
     </button></h2><p>初始化 OpenAI 用戶端。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
-openai_client = <span class="hljs-title class_">OpenAI</span>()
+openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
 <p>為嵌入設定集合名稱和維度。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-variable constant_">COLLECTION_NAME</span> = <span class="hljs-string">&quot;movie_search&quot;</span>
-<span class="hljs-variable constant_">DIMENSION</span> = <span class="hljs-number">1536</span>
+<pre><code translate="no" class="language-python">COLLECTION_NAME = <span class="hljs-string">&quot;movie_search&quot;</span>
+DIMENSION = <span class="hljs-number">1536</span>
 
-<span class="hljs-variable constant_">BATCH_SIZE</span> = <span class="hljs-number">1000</span>
+BATCH_SIZE = <span class="hljs-number">1000</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>連線至 Milvus。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -90,8 +90,8 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
 <p>至於<code translate="no">url</code> 和<code translate="no">token</code> 的參數：</p>
 <ul>
 <li>將<code translate="no">uri</code> 設定為本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
-<li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器位址和連接埠作為您的 uri，例如<code translate="no">http://localhost:19530</code> 。如果您啟用 Milvus 上的驗證功能，請使用「&lt;your_username&gt;:&lt;your_password&gt;」作為令牌，否則請勿設定令牌。</li>
-<li>如果您要使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，它們對應於 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>。</li>
+<li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器位址和連接埠作為您的 uri，例如<code translate="no">http://localhost:19530</code> 。如果您啟用 Milvus 上的驗證功能，請使用 "<your_username>:<your_password>" 作為令牌，否則請勿設定令牌。</li>
+<li>如果您要使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，它們對應於 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端點和 Api 金鑰</a>。</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Remove collection if it already exists</span>
@@ -159,7 +159,7 @@ client.load_collection(collection_name=COLLECTION_NAME, replica_number=<span cla
     </button></h2><p>隨著 Milvus 的啟動與執行，我們可以開始擷取資料。<code translate="no">Hugging Face Datasets</code> 是一個儲存許多不同使用者資料集的中樞，在這個範例中，我們使用 HuggingLearners 的 netflix-shows 資料集。這個資料集包含超過 8,000 部電影的電影及其元資料對。我們將內嵌每項描述，並將其與標題、類型、發行年份和評分一起儲存在 Milvus 中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 
-dataset = <span class="hljs-title function_">load_dataset</span>(<span class="hljs-string">&quot;hugginglearners/netflix-shows&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
+dataset = load_dataset(<span class="hljs-string">&quot;hugginglearners/netflix-shows&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-the-Data" class="common-anchor-header">插入資料<button data-href="#Insert-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ batch = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將資料安全地插入 Milvus 後，我們現在可以執行查詢。查詢會接收一個元組資料，包括您要搜尋的電影描述，以及要使用的篩選條件。更多關於篩選器的資訊，請參閱<a href="https://milvus.io/docs/boolean.md">這裡</a>。搜尋首先會列印出您的描述和篩選表達式。之後，我們會為每個結果列印得分、標題、類型、發行年份、評分和結果電影的描述。</p>
+    </button></h2><p>將資料安全地插入 Milvus 後，我們現在可以執行查詢。查詢會接收您要搜尋的電影描述元組及要使用的篩選條件。更多關於篩選器的資訊，請參閱<a href="https://milvus.io/docs/boolean.md">這裡</a>。搜尋首先會列印出您的描述和篩選表達式。之後，我們會為每個結果列印得分、標題、類型、發行年份、評分和結果電影的描述。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> textwrap
 
 

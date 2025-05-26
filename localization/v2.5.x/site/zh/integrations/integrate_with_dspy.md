@@ -18,8 +18,8 @@ title: Milvus 与 DSPy 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="What-is-DSPy" class="common-anchor-header">什么是 DSPy<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ title: Milvus 与 DSPy 集成
         ></path>
       </svg>
     </button></h2><p>DSPy 由斯坦福大学 NLP 小组推出，是一个开创性的程序框架，旨在优化语言模型中的提示和权重，尤其适用于大型语言模型 (LLMs) 在管道的多个阶段进行集成的情况。与依赖人工制作和调整的传统提示工程技术不同，DSPy 采用的是一种基于学习的方法。通过吸收问答示例，DSPy 可根据特定任务动态生成优化提示。这种创新方法可实现整个流水线的无缝重组，从而消除了持续手动调整提示的需要。DSPy 的 Pythonic 语法提供了各种可组合的声明式模块，简化了 LLMs 的指令。</p>
-<h2 id="Benefits-of-using-DSPy" class="common-anchor-header">使用 DSPy 的优势<button data-href="#Benefits-of-using-DSPy" class="anchor-icon" translate="no">
+<h2 id="Benefits-of-using-DSPy" class="common-anchor-header">使用 DSPy 的好处<button data-href="#Benefits-of-using-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

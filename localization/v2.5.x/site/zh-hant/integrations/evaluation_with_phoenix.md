@@ -18,8 +18,8 @@ title: 使用 Arize Pheonix 進行評估
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_phoenix.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_phoenix.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_phoenix.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_phoenix.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南演示了如何使用<a href="https://phoenix.arize.com/">Arize Pheonix</a>來評估建立在<a href="https://milvus.io/">Milvus</a> 上的檢索-增強生成 (RAG) 管道。</p>
 <p>RAG 系統結合了一個檢索系統和一個生成模型，根據給定的提示生成新的文本。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
 <p>Arize Pheonix 是一個可以幫助您評估 RAG 管道的框架。現有的工具和框架可以幫助您建立這些管道，但是評估它和量化您的管道性能可能會很難。這就是 Arize Pheonix 的用武之地。</p>
@@ -47,7 +47,7 @@ title: 使用 Arize Pheonix 進行評估
 <p>在本範例中，我們將使用 OpenAI 作為 LLM。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-# os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-*****************&quot;</span>
+<span class="hljs-comment"># os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;sk-*****************&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-the-RAG-pipeline" class="common-anchor-header">定義 RAG 管道<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -173,10 +173,10 @@ title: 使用 Arize Pheonix 進行評估
             <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content, retrieved_texts
 <button class="copy-code-btn"></button></code></pre>
 <p>讓我們用 OpenAI 和 Milvus 客戶端初始化 RAG 類別。</p>
-<pre><code translate="no" class="language-python">openai_client = <span class="hljs-title class_">OpenAI</span>()
-milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python">openai_client = OpenAI()
+milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
-my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_client, milvus_client=milvus_client)
+my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>至於<code translate="no">MilvusClient</code> 的參數 ：</p>
@@ -289,7 +289,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     <tr>
       <th>0</th>
       <td>什麼是硬體需求規格？</td>
-      <td>[Hardware Requirements/硬體需求規格]以下為硬體需求規格...</td>
+      <td>[Hardware Requirements/硬體需求規格] 以下為硬體需求規格...</td>
       <td>硬體需求規格是什麼？</td>
       <td>如果您想建立 Milvus 並從來源執行...</td>
     </tr>
@@ -393,7 +393,7 @@ hallucination_eval_df, qa_eval_df = run_evals(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">run_evals |██████████| 6/6 (100.0%) | ⏳ 00:03&lt;00:00 |  1.64it/s
 </code></pre>
-<pre><code translate="no" class="language-python">results_df = df.<span class="hljs-built_in">copy</span>()
+<pre><code translate="no" class="language-python">results_df = df.copy()
 results_df[<span class="hljs-string">&quot;hallucination_eval&quot;</span>] = hallucination_eval_df[<span class="hljs-string">&quot;label&quot;</span>]
 results_df[<span class="hljs-string">&quot;hallucination_explanation&quot;</span>] = hallucination_eval_df[<span class="hljs-string">&quot;explanation&quot;</span>]
 results_df[<span class="hljs-string">&quot;qa_eval&quot;</span>] = qa_eval_df[<span class="hljs-string">&quot;label&quot;</span>]
@@ -432,7 +432,7 @@ results_df.head()
       <th>0</th>
       <td>什麼是硬體需求規格？</td>
       <td>[Hardware Requirements/硬體需求規格] 以下為硬體需求規格...</td>
-      <td>硬體需求規格(Hardware Requirements Specification)...</td>
+      <td>硬體需求規格（Hardware Requirements Specification）...</td>
       <td>如果您想建立 Milvus 並從來源執行，您需要...</td>
       <td>[Hardware Requirements（硬體需求）] 以下是硬體需求規格，以建立...</td>
       <td>[Hardware Requirements\n\nThe following specif...</td>

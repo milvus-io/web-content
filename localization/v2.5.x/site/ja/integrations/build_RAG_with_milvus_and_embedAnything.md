@@ -2,13 +2,13 @@
 id: build_RAG_with_milvus_and_embedAnything.md
 summary: >-
   このチュートリアルでは、EmbedAnythingとMilvusを使用したRAG（Retrieval-Augmented
-  Generation）パイプラインの構築方法を紹介します。EmbedAnythingは、特定のデータベースと密に結合するのではなく、プラグイン可能なアダプタシステムを使用しています。アダプタは、埋め込みがどのようにフォーマットされ、インデックスが付けられ、ターゲットベクターストアに格納されるかを定義するラッパーとして機能します。
+  Generation）パイプラインの構築方法を紹介します。EmbedAnythingは、特定のデータベースと密に結合するのではなく、プラグイン可能なアダプタシステムを使用しています。アダプタは、埋め込みがどのようにフォーマットされ、インデックス付けされ、ターゲットベクターストアに格納されるかを定義するラッパーとして機能します。
 title: MilvusとEmbedAnythingでRAGを構築する
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">MilvusとEmbedAnythingでRAGを構築する<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
@@ -89,8 +89,8 @@ openai_client = OpenAI()
       </svg>
     </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Milvusの初期化</h3><p>ファイルを埋め込む前に、Milvusとやりとりする2つのコンポーネントを準備する必要がある：</p>
 <ol>
-<li><code translate="no">MilvusVectorAdapter</code> - これは、EmbedAnything用のMilvusアダプタで、<strong>ベクターインジェスト</strong>（エンベッディングの挿入とインデックスの作成<strong>）のみに</strong>使用されます。現在のところ、検索操作はサポートして<strong>いません</strong>。</li>
-<li><code translate="no">MilvusClient</code> - これは からの公式クライアントであり、ベクター検索、フィルタリング、コレクション管理など、Milvusの<code translate="no">pymilvus</code><strong>全機能にアクセスすることが</strong>できます。</li>
+<li><code translate="no">MilvusVectorAdapter</code> - これはEmbedAnything用のMilvusアダプタで、<strong>ベクトルインジェスト</strong>（エンベッディングの挿入とインデックスの作成<strong>）のみに</strong>使用します。現在のところ、検索操作はサポートして<strong>いません</strong>。</li>
+<li><code translate="no">MilvusClient</code> - これは からの公式クライアントであり、ベクター検索、フィルタリング、コレクション管理など、Milvus の<code translate="no">pymilvus</code><strong>全機能にアクセスすることが</strong>できます。</li>
 </ol>
 <p>混乱を避けるために</p>
 <ul>
@@ -128,7 +128,7 @@ Collection 'embed_anything_milvus_collection' created with index.
 <p><code translate="no">MilvusVectorAdapter</code> と<code translate="no">MilvusClient</code> の引数について：</p>
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利な方法です。</li>
-<li>100万ベクトルを超えるような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にする場合は、トークンに "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
+<li>100万ベクトルを超えるような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンに "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>

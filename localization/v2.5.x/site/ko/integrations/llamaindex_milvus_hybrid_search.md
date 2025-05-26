@@ -7,10 +7,10 @@ summary: >-
   Milvus를 사용하는 방법을 보여드립니다. 권장되는 기본 하이브리드 검색(시맨틱 + BM25)으로 시작한 다음 다른 대체 스파스 임베딩
   방법과 하이브리드 리랭커의 사용자 정의에 대해 살펴보겠습니다.
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="common-anchor-header">밀버스 및 라마인덱스와 함께 하이브리드 검색을 사용하는 RAG<button data-href="#RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
@@ -62,7 +62,7 @@ openai.api_key = <span class="hljs-string">&quot;sk-&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 벡터 스토어를 사용하려면 Milvus 서버 <code translate="no">URI</code> (또는 선택적으로 <code translate="no">TOKEN</code>)를 지정합니다. 밀버스 서버를 시작하려면 <a href="https://milvus.io/docs/install-overview.md">밀버스 설치 가이드에</a> 따라 밀버스 서버를 설정하거나 <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">질리즈 클라우드를</a> 무료로 체험해 보세요.</p>
 <blockquote>
-<p>전체 텍스트 검색은 현재 Milvus Standalone, Milvus Distributed 및 Zilliz Cloud에서 지원되지만, Milvus Lite(향후 구현 예정)에서는 아직 지원되지 않습니다. 자세한 내용은 support@zilliz.com 으로 문의하세요.</p>
+<p>전체 텍스트 검색은 현재 Milvus Standalone, Milvus Distributed 및 Zilliz Cloud에서 지원되지만 Milvus Lite(향후 구현 예정)에서는 아직 지원되지 않습니다. 자세한 내용은 support@zilliz.com 으로 문의하세요.</p>
 </blockquote>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = &quot;&quot;</span>

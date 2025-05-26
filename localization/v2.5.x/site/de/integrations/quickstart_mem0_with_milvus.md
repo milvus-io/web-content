@@ -25,10 +25,10 @@ title: Erste Schritte mit Mem0 und Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/quickstart_mem0_with_milvus.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://mem0.ai/">Mem0</a> ist eine intelligente Speicherebene für KI-Anwendungen, die personalisierte und effiziente Interaktionen ermöglicht, indem sie Benutzerpräferenzen speichert und sich im Laufe der Zeit kontinuierlich anpasst. Mem0 ist ideal für Chatbots und KI-gesteuerte Tools und schafft nahtlose, kontextbezogene Erlebnisse.</p>
@@ -48,7 +48,7 @@ title: Erste Schritte mit Mem0 und Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Download der erforderlichen Bibliotheken</h3><pre><code translate="no" class="language-shell">$ pip install mem0ai pymilvus
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Download der erforderlichen Bibliotheken</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
@@ -56,7 +56,7 @@ title: Erste Schritte mit Mem0 und Milvus
 <h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Mem0 mit Milvus konfigurieren</h3><p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">Api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Nun können wir Mem0 so konfigurieren, dass es Milvus als Vektorspeicher verwendet</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define Config</span>
@@ -80,7 +80,7 @@ m = Memory.from_config(config)
 <blockquote>
 <ul>
 <li>Wenn Sie nur eine lokale Vektordatenbank für kleine Datenmengen oder Prototypen benötigen, ist die Einstellung der Uri als lokale Datei, z. B.<code translate="no">./milvus.db</code>, die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> verwendet, um alle Daten in dieser Datei zu speichern.</li>
-<li>Wenn Sie große Datenmengen haben, z. B. mehr als eine Million Vektoren, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Serveradresse und den Port als Uri, z. B.<code translate="no">http://localhost:19530</code>. Wenn Sie die Authentifizierungsfunktion auf Milvus aktivieren, verwenden Sie "&lt;Ihr_Benutzername&gt;:&lt;Ihr_Passwort&gt;" als Token, andernfalls setzen Sie das Token nicht.</li>
+<li>Wenn Sie große Datenmengen haben, z. B. mehr als eine Million Vektoren, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Serveradresse und den Port als Uri, z. B.<code translate="no">http://localhost:19530</code>. Wenn Sie die Authentifizierungsfunktion auf Milvus aktivieren, verwenden Sie "<your_username>:<your_password>" als Token, andernfalls setzen Sie das Token nicht.</li>
 <li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">öffentlichen Endpunkt und dem API-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 </blockquote>
@@ -126,7 +126,7 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
 <pre><code translate="no">{'message': 'Memory updated successfully!'}
 </code></pre>
 <h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Alle Speicher für einen Benutzer abrufen</h3><p>Mit der Funktion <code translate="no">get_all</code> können wir alle eingefügten Speicher anzeigen oder nach <code translate="no">user_id</code> in Milvus filtern.</p>
-<p>Wie wir sehen, hat sich die Erinnerung von &quot;Ich arbeite daran, meine Tennisfähigkeiten zu verbessern&quot; in &quot;Ich spiele am Wochenende gerne Tennis&quot; geändert.</p>
+<p>Wie wir sehen, hat sich die Erinnerung von "Ich arbeite daran, meine Tennisfähigkeiten zu verbessern" in "Ich spiele am Wochenende gerne Tennis" geändert.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -158,14 +158,14 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 </code></pre>
 <h3 id="Search-Memory" class="common-anchor-header">Speicher suchen</h3><p>Mit der Funktion <code translate="no">search</code> können wir nach dem für den Benutzer relevantesten Speicherplatz suchen.</p>
 <p>Beginnen wir mit dem Hinzufügen eines weiteren Speichers für Alice.</p>
-<pre><code translate="no" class="language-python">new_mem = m.<span class="hljs-keyword">add</span>(
+<pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
     user_id=<span class="hljs-string">&quot;alice&quot;</span>,
     metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;task&quot;</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Jetzt rufen wir <code translate="no">get_all</code> unter Angabe der user_id auf, um zu überprüfen, ob wir tatsächlich 2 Speichereinträge für den Benutzer Alice haben.</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-title function_">get_all</span>(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
+<p>Nun rufen wir <code translate="no">get_all</code> unter Angabe der user_id auf, um zu überprüfen, ob wir tatsächlich 2 Speichereinträge für den Benutzer Alice haben.</p>
+<pre><code translate="no" class="language-python">m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
    'memory': 'Likes to play tennis on weekends',
@@ -183,7 +183,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'user_id': 'alice'}]}
 </code></pre>
 <p>Wir können nun <code translate="no">search</code> ausführen, indem wir <code translate="no">query</code> und <code translate="no">user_id</code> bereitstellen. Beachten Sie, dass wir standardmäßig die Metrik <code translate="no">L2</code> für die Ähnlichkeitssuche verwenden, so dass eine kleinere <code translate="no">score</code> eine größere Ähnlichkeit bedeutet.</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-title function_">search</span>(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
+<pre><code translate="no" class="language-python">m.search(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
    'memory': 'Likes to play tennis on weekends',
@@ -204,7 +204,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 </code></pre>
 <h3 id="Delete-Memory" class="common-anchor-header">Speicher löschen</h3><p>Wir können auch <code translate="no">delete</code> einen Speicher löschen, indem wir die entsprechende <code translate="no">memory_id</code> angeben.</p>
 <p>Wir löschen den Speicher "Spielt am Wochenende gerne Tennis", da sein <code translate="no">memory_id</code> bereits abgerufen wurde, und rufen <code translate="no">get_all</code> auf, um zu überprüfen, ob die Löschung erfolgreich war.</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-built_in">delete</span>(memory_id=memory_id)
+<pre><code translate="no" class="language-python">m.delete(memory_id=memory_id)
 
 m.get_all(<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>

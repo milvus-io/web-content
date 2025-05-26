@@ -20,10 +20,10 @@ title: استخدام البحث عن النص الكامل مع LangChain وMil
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">البحث في النص الكامل</a> هو طريقة تقليدية لاسترجاع المستندات عن طريق مطابقة كلمات أو عبارات محددة في النص. يقوم بترتيب النتائج بناءً على درجات الملاءمة المحسوبة من عوامل مثل تكرار المصطلح. في حين أن البحث الدلالي أفضل في فهم المعنى والسياق، فإن البحث في النص الكامل يتفوق في مطابقة الكلمات المفتاحية بدقة، مما يجعله مكملاً مفيدًا للبحث الدلالي. تُستخدم خوارزمية BM25 على نطاق واسع للترتيب في البحث في النص الكامل وتلعب دورًا رئيسيًا في التوليد المعزز للاسترجاع (RAG).</p>
@@ -220,7 +220,7 @@ vectorstore = Milvus.from_documents(
 <pre><code translate="no">{'auto_id': True, 'description': '', 'fields': [{'name': 'text', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535, 'enable_match': True, 'enable_analyzer': True, 'analyzer_params': {'tokenizer': 'standard', 'filter': ['lowercase', {'type': 'length', 'max': 40}, {'type': 'stop', 'stop_words': ['of', 'to']}]}}}, {'name': 'pk', 'description': '', 'type': &lt;DataType.INT64: 5&gt;, 'is_primary': True, 'auto_id': True}, {'name': 'dense', 'description': '', 'type': &lt;DataType.FLOAT_VECTOR: 101&gt;, 'params': {'dim': 1536}}, {'name': 'sparse', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}, {'name': 'category', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535}}], 'enable_dynamic_field': False, 'functions': [{'name': 'bm25_function_de368e79', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['text'], 'output_field_names': ['sparse'], 'params': {}}]}
 </code></pre>
 <p>لمزيد من تفاصيل المفهوم، على سبيل المثال، <code translate="no">analyzer</code> ، <code translate="no">tokenizer</code> ، ، <code translate="no">filter</code> ، <code translate="no">enable_match</code> ، <code translate="no">analyzer_params</code> ، يرجى الرجوع إلى <a href="https://milvus.io/docs/analyzer-overview.md">وثائق المحلل</a>.</p>
-<h2 id="Using-Hybrid-Search-and-Reranking-in-RAG" class="common-anchor-header">استخدام البحث الهجين وإعادة الترتيب في RAG<button data-href="#Using-Hybrid-Search-and-Reranking-in-RAG" class="anchor-icon" translate="no">
+<h2 id="Using-Hybrid-Search-and-Reranking-in-RAG" class="common-anchor-header">استخدام البحث الهجين وإعادة التصنيف في RAG<button data-href="#Using-Hybrid-Search-and-Reranking-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

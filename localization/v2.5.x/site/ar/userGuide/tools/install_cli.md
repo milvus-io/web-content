@@ -59,7 +59,7 @@ title: تثبيت Milvus_CLI
       </svg>
     </button></h2><p>يمكنك تثبيت Milvus_CLI باستخدام Docker.</p>
 <h3 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية</h3><p>مطلوب Docker 19.03 أو أحدث.</p>
-<h3 id="Install-based-on-Docker-image" class="common-anchor-header">التثبيت بناءً على صورة Docker</h3><pre><code translate="no" class="language-shell">$ docker run -it zilliz/milvus_cli:latest
+<h3 id="Install-based-on-Docker-image" class="common-anchor-header">التثبيت بناءً على صورة Docker</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -it zilliz/milvus_cli:latest</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-from-source-code" class="common-anchor-header">التثبيت من التعليمات البرمجية المصدرية<button data-href="#Install-from-source-code" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,12 +79,12 @@ title: تثبيت Milvus_CLI
     </button></h2><ol>
 <li>قم بتشغيل الأمر التالي لتنزيل مستودع <code translate="no">milvus_cli</code>.</li>
 </ol>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus_cli.git
+<pre><code translate="no" class="language-shell">git clone https://github.com/zilliztech/milvus_cli.git
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>قم بتشغيل الأمر التالي للدخول إلى المجلد <code translate="no">milvus_cli</code>.</li>
 </ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> milvus_cli
+<pre><code translate="no" class="language-shell">cd milvus_cli
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>قم بتشغيل الأمر التالي لتثبيت Milvus_CLI.</li>

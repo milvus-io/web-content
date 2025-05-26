@@ -11,10 +11,10 @@ summary: >-
   vetorial com facilidade. Vamos mergulhar!
 title: Carregamento eficiente de dados no Milvus com VectorETL
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/ETL_using_vectorETL.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/ETL_using_vectorETL.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/ETL_using_vectorETL.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/ETL_using_vectorETL.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Efficient-Data-Loading-into-Milvus-with-VectorETL" class="common-anchor-header">Carregamento eficiente de dados no Milvus com VectorETL<button data-href="#Efficient-Data-Loading-into-Milvus-with-VectorETL" class="anchor-icon" translate="no">
@@ -48,7 +48,7 @@ title: Carregamento eficiente de dados no Milvus com VectorETL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependency-and-Environment" class="common-anchor-header">Dependência e ambiente</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade vector-etl pymilvus
+    </button></h2><h3 id="Dependency-and-Environment" class="common-anchor-header">Dependência e ambiente</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade vector-etl pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -57,9 +57,9 @@ title: Carregamento eficiente de dados no Milvus com VectorETL
 <p>Vamos carregar documentos do Amazon S3. Portanto, é necessário preparar <code translate="no">AWS_ACCESS_KEY_ID</code> e <code translate="no">AWS_SECRET_ACCESS_KEY</code> como variáveis de ambiente para acessar com segurança seu bucket S3. Além disso, utilizaremos o modelo de incorporação <code translate="no">text-embedding-ada-002</code> da OpenAI para gerar incorporação para os dados. Também deve preparar a <a href="https://platform.openai.com/docs/quickstart">chave api</a> <code translate="no">OPENAI_API_KEY</code> como uma variável de ambiente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;your-openai-api-key&quot;</span>
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AWS_ACCESS_KEY_ID&quot;</span>] = <span class="hljs-string">&quot;your-aws-access-key-id&quot;</span>
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] = <span class="hljs-string">&quot;your-aws-secret-access-key&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;your-openai-api-key&quot;</span>
+os.environ[<span class="hljs-string">&quot;AWS_ACCESS_KEY_ID&quot;</span>] = <span class="hljs-string">&quot;your-aws-access-key-id&quot;</span>
+os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] = <span class="hljs-string">&quot;your-aws-secret-access-key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Workflow" class="common-anchor-header">Fluxo de trabalho<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,7 +77,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AW
         ></path>
       </svg>
     </button></h2><h3 id="Defining-the-Data-Source-Amazon-S3" class="common-anchor-header">Definição da fonte de dados (Amazon S3)</h3><p>Neste caso, estamos a extrair documentos de um bucket do Amazon S3. O VectorETL permite-nos especificar o nome do bucket, o caminho para os ficheiros e o tipo de dados com que estamos a trabalhar.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">source</span> = {
+<pre><code translate="no" class="language-python">source = {
     <span class="hljs-string">&quot;source_data_type&quot;</span>: <span class="hljs-string">&quot;Amazon S3&quot;</span>,
     <span class="hljs-string">&quot;bucket_name&quot;</span>: <span class="hljs-string">&quot;my-bucket&quot;</span>,
     <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;path/to/files/&quot;</span>,
@@ -89,7 +89,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AW
 <h3 id="Configuring-the-Embedding-Model-OpenAI" class="common-anchor-header">Configurando o modelo de incorporação (OpenAI)</h3><p>Assim que tivermos a nossa fonte de dados configurada, precisamos de definir o modelo de incorporação que transformará os nossos dados textuais em incorporações vectoriais. Aqui, usamos o <code translate="no">text-embedding-ada-002</code> do OpenAI neste exemplo.</p>
 <pre><code translate="no" class="language-python">embedding = {
     <span class="hljs-string">&quot;embedding_model&quot;</span>: <span class="hljs-string">&quot;OpenAI&quot;</span>,
-    <span class="hljs-string">&quot;api_key&quot;</span>: os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>],
+    <span class="hljs-string">&quot;api_key&quot;</span>: os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>],
     <span class="hljs-string">&quot;model_name&quot;</span>: <span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>,
 }
 <button class="copy-code-btn"></button></code></pre>

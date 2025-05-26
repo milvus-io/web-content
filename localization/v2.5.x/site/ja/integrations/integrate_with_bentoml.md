@@ -20,8 +20,8 @@ title: MilvusとBentoMLによる検索支援型生成(RAG)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_bentoml.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="Introduction" class="common-anchor-header">はじめに<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ title: MilvusとBentoMLによる検索支援型生成(RAG)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このガイドでは、BentoCloud上のオープンソースのエンベッディングモデルと大規模言語モデルをMilvusベクトルデータベースと組み合わせて使用し、RAG（Retrieval Augmented Generation）アプリケーションを構築する方法を説明します。 BentoCloudは、動きの速いAIチームのためのAI推論プラットフォームであり、モデル推論用に調整されたフルマネージドインフラストラクチャを提供します。オープンソースのモデル・サービング・フレームワークである BentoML と連動し、高性能なモデル・サービスを簡単に作成・展開できます。このデモでは、Pythonアプリケーションに組み込むことができるMilvusの軽量版であるMilvus Liteをベクターデータベースとして使用します。</p>
+    </button></h2><p>このガイドでは、BentoCloud上のオープンソースのエンベッディングモデルと大規模言語モデルをMilvusベクトルデータベースと組み合わせて使用し、RAG（Retrieval Augmented Generation）アプリケーションを構築する方法を説明します。 BentoCloudは、動きの速いAIチームのためのAI推論プラットフォームであり、モデル推論用に調整されたフルマネージドインフラストラクチャを提供します。オープンソースのモデル・サービング・フレームワークである BentoML と連携し、高性能なモデル・サービスの簡単な作成とデプロイを容易にします。このデモでは、Pythonアプリケーションに組み込むことができるMilvusの軽量版であるMilvus Liteをベクターデータベースとして使用します。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">始める前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,9 +76,9 @@ title: MilvusとBentoMLによる検索支援型生成(RAG)
         ></path>
       </svg>
     </button></h2><p>このエンドポイントを使うには、<code translate="no">bentoml</code> をインポートし、<code translate="no">SyncHTTPClient</code> を使って HTTP クライアントをセットアップします。エンドポイントと、オプションでトークン（BentoCloud で<code translate="no">Endpoint Authorization</code> をオンにした場合）を指定します。あるいは、BentoML の<a href="https://github.com/bentoml/BentoSentenceTransformers">Sentence Transformers Embeddings</a>リポジトリを使って、同じモデルを BentoML で提供することもできます。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> <span class="hljs-type">bentoml</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bentoml
 
-<span class="hljs-variable">BENTO_EMBEDDING_MODEL_END_POINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>
+BENTO_EMBEDDING_MODEL_END_POINT = <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>
 BENTO_API_TOKEN = <span class="hljs-string">&quot;BENTO_API_TOKEN&quot;</span>
 
 embedding_client = bentoml.SyncHTTPClient(
@@ -197,7 +197,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot
 <p>または、古いconnection.connect APIを使用してください(推奨しません)：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
 
-connections.<span class="hljs-title function_">connect</span>(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
+connections.connect(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Creating-Your-Milvus-Lite-Collection" class="common-anchor-header">Milvus Liteコレクションの作成<button data-href="#Creating-Your-Milvus-Lite-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -265,9 +265,9 @@ milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
         ></path>
       </svg>
     </button></h2><p>RAG アプリをビルドするには、BentoCloud に LLM をデプロイする必要があります。最新の Llama3 LLM を使ってみましょう。LLM が稼働したら、このモデルサービスのエンドポイントとトークンをコピーして、クライアントをセットアップするだけです。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-variable constant_">BENTO_LLM_END_POINT</span> = <span class="hljs-string">&quot;BENTO_LLM_END_POINT&quot;</span>
+<pre><code translate="no" class="language-python">BENTO_LLM_END_POINT = <span class="hljs-string">&quot;BENTO_LLM_END_POINT&quot;</span>
 
-llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span class="hljs-variable constant_">BENTO_LLM_END_POINT</span>, token=<span class="hljs-variable constant_">BENTO_API_TOKEN</span>)
+llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="LLM-Instructions" class="common-anchor-header">LLMの使い方<button data-href="#LLM-Instructions" class="anchor-icon" translate="no">
       <svg translate="no"

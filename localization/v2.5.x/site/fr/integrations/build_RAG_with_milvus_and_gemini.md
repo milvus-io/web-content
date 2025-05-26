@@ -7,10 +7,10 @@ summary: >-
   utiliserons également Milvus pour stocker et récupérer le texte généré.
 title: Construire RAG avec Milvus et Gemini
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-RAG-with-Milvus-and-Gemini" class="common-anchor-header">Construire RAG avec Milvus et Gemini<button data-href="#Build-RAG-with-Milvus-and-Gemini" class="anchor-icon" translate="no">
@@ -28,8 +28,8 @@ title: Construire RAG avec Milvus et Gemini
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'<a href="https://ai.google.dev/gemini-api/docs">API Gemini</a> et <a href="https://ai.google.dev/aistudio">Google AI Studio</a> vous permettent de commencer à travailler avec les derniers modèles de Google et de transformer vos idées en applications évolutives. Gemini permet d'accéder à de puissants modèles de langage tels que <code translate="no">Gemini-2.0-Flash</code>, <code translate="no">Gemini-2.0-Pro</code>, et d'autres versions pour des tâches telles que la génération de texte, le traitement de documents, la vision, l'analyse audio, etc. L'API vous permet de saisir des contextes longs avec des millions de tokens, d'affiner les modèles pour des tâches spécifiques, de générer des sorties structurées comme JSON, et d'exploiter des capacités comme la recherche sémantique et l'exécution de code.</p>
-<p>Dans ce tutoriel, nous allons vous montrer comment construire un pipeline RAG (Retrieval-Augmented Generation) avec Milvus et Gemini. Nous utiliserons le modèle Gemini pour générer des réponses basées sur une requête donnée, augmentée d'informations pertinentes extraites de Milvus.</p>
+    </button></h1><p>L'<a href="https://ai.google.dev/gemini-api/docs">API Gemini</a> et <a href="https://ai.google.dev/aistudio">Google AI Studio</a> vous permettent de commencer à travailler avec les derniers modèles de Google et de transformer vos idées en applications évolutives. Gemini permet d'accéder à de puissants modèles de langage tels que <code translate="no">Gemini-2.0-Flash</code>, <code translate="no">Gemini-2.0-Pro</code>, et d'autres versions pour des tâches telles que la génération de texte, le traitement de documents, la vision, l'analyse audio, etc. L'API vous permet de saisir des contextes longs avec des millions de tokens, d'affiner les modèles pour des tâches spécifiques, de générer des sorties structurées comme JSON, et d'exploiter des capacités comme la récupération sémantique et l'exécution de code.</p>
+<p>Dans ce tutoriel, nous allons vous montrer comment construire un pipeline RAG (Retrieval-Augmented Generation) avec Milvus et Gemini. Nous utiliserons le modèle Gemini pour générer des réponses basées sur une requête donnée, augmentée d'informations pertinentes récupérées dans Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

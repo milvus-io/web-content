@@ -3,10 +3,10 @@ id: full_text_search_with_milvus_and_haystack.md
 summary: 이 튜토리얼에서는 Haystack과 Milvus를 사용하여 애플리케이션에서 전체 텍스트 및 하이브리드 검색을 구현하는 방법을 설명합니다.
 title: 밀버스 및 헤이스택을 사용한 전체 텍스트 검색
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-text-search-with-Milvus-and-Haystack" class="common-anchor-header">밀버스 및 헤이스택을 사용한 전체 텍스트 검색<button data-href="#Full-text-search-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
@@ -315,7 +315,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     </button></h2><p>헤이스택과 밀버스에서 기본 BM25 빌트인 기능을 사용하는 방법을 배웠고, 로드된 <code translate="no">document_store</code> 을 준비했습니다. 이제 하이브리드 검색을 통해 최적화된 RAG 구현을 소개해 보겠습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

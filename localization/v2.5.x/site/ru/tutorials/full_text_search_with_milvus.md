@@ -8,15 +8,15 @@ summary: >-
   понимает смысл и контекст, полнотекстовый поиск превосходит его в точности
   подбора ключевых слов, что делает его полезным дополнением к семантическому
   поиску. Общий подход к построению конвейера Retrieval-Augmented Generation
-  (RAG) включает в себя поиск документов с помощью семантического и
-  полнотекстового поиска, а затем процесс повторного ранжирования для уточнения
+  (RAG) включает в себя поиск документов как через семантический, так и через
+  полнотекстовый поиск, а затем процесс повторного ранжирования для уточнения
   результатов.
 title: Полнотекстовый поиск с помощью Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Полнотекстовый поиск с помощью Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">

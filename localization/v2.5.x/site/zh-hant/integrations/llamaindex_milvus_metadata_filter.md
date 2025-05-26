@@ -6,10 +6,10 @@ summary: >-
   本手冊說明在 LlamaIndex 中使用 Milvus 向量存儲，著重於元資料過濾功能。您將學習如何使用元資料索引文件、使用 LlamaIndex
   內建的元資料篩選器執行向量搜尋，以及將 Milvus 的原生篩選表達式套用至向量儲存。
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Metadata-Filtering-with-LlamaIndex-and-Milvus" class="common-anchor-header">使用 LlamaIndex 和 Milvus 進行元資料篩選<button data-href="#Metadata-Filtering-with-LlamaIndex-and-Milvus" class="anchor-icon" translate="no">
@@ -252,7 +252,7 @@ Life: A User's Manual
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了內建的篩選功能外，您也可以使用<code translate="no">string_expr</code> 關鍵字參數來使用 Milvus 原生的篩選表達式。這允許您在搜尋作業中直接傳送特定的篩選表達式給 Milvus，從而擴展到標準的元資料篩選之外，以存取 Milvus 的進階篩選功能。</p>
+    </button></h2><p>除了內建的篩選功能外，您也可以使用<code translate="no">string_expr</code> 關鍵字參數來使用 Milvus 原生的篩選表達式。這允許您在搜尋作業中直接傳遞特定的篩選表達式給 Milvus，從而擴展到標準的元資料篩選之外，以存取 Milvus 的進階篩選功能。</p>
 <p>Milvus 提供強大而靈活的篩選選項，可讓您精確地查詢向量資料：</p>
 <ul>
 <li>基本運算符號：比較運算符、範圍篩選、算術運算符和邏輯運算符</li>

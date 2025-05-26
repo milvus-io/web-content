@@ -2,16 +2,16 @@
 id: use_ColPali_with_milvus.md
 summary: >-
   Dans ce carnet, nous appelons ce type de représentation multi-vectorielle
-  "ColBERT embeddings" par souci de généralité. Cependant, le modèle réellement
-  utilisé est le modèle ColPali. Nous montrerons comment utiliser Milvus pour la
-  recherche multi-vectorielle. Sur cette base, nous présenterons l'utilisation
-  de ColPali pour la recherche de pages sur la base d'une requête donnée.
+  "ColBERT embeddings" par souci de généralité. Cependant, le modèle utilisé est
+  le modèle ColPali. Nous montrerons comment utiliser Milvus pour la recherche
+  multi-vectorielle. Sur cette base, nous présenterons l'utilisation de ColPali
+  pour la recherche de pages sur la base d'une requête donnée.
 title: Utiliser ColPali pour la recherche multimodale avec Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Utiliser ColPali pour la recherche multimodale avec Milvus<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">

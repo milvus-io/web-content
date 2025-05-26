@@ -79,11 +79,11 @@ title: 在一個儲存桶中的不同實體間遷移 (不同的根路徑)
         ></path>
       </svg>
     </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">步驟 1：準備配置</h3><p>到 milvus-backup 專案的目錄，建立一個名為 configs 的目錄：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">mkdir</span> configs
-<span class="hljs-built_in">cd</span> configs
+<pre><code translate="no" class="language-shell">mkdir configs
+cd configs
 <button class="copy-code-btn"></button></code></pre>
 <p>下載備份組態檔案 backup.yaml：</p>
-<pre><code translate="no" class="language-shell">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml</span>
+<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>檔案結構如下：</p>
 <pre><code translate="no">├── configs
@@ -95,15 +95,15 @@ title: 在一個儲存桶中的不同實體間遷移 (不同的根路徑)
 <ul>
 <li><p>連線 configs</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
-milvus:
-  address: milvus_A
-  port: <span class="hljs-number">19530</span>
-  authorizationEnabled: false
+<span class="hljs-attr">milvus:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">milvus_A</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">19530</span>
+  <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
   <span class="hljs-comment"># tls mode values [0, 1, 2]</span>
   <span class="hljs-comment"># 0 is close, 1 is one-way authentication, 2 is two-way authentication.</span>
-  tlsMode: <span class="hljs-number">0</span>
-  user: <span class="hljs-string">&quot;root&quot;</span>
-  password: <span class="hljs-string">&quot;Milvus&quot;</span>
+  <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">0</span>
+  <span class="hljs-attr">user:</span> <span class="hljs-string">&quot;root&quot;</span>
+  <span class="hljs-attr">password:</span> <span class="hljs-string">&quot;Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">milvus.address</code>:<code translate="no">milvus_A</code> 伺服器的 IP 位址或主機名稱。</p></li>
@@ -111,32 +111,32 @@ milvus:
 </ul></li>
 <li><p>儲存設定 (MinIO/S3 設定)</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
-minio:
+<span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
-  storageType: <span class="hljs-string">&quot;minio&quot;</span> <span class="hljs-comment"># support storage type: local, minio, s3, aws, gcp, ali(aliyun), azure, tc(tencent)</span>
+  <span class="hljs-attr">storageType:</span> <span class="hljs-string">&quot;minio&quot;</span> <span class="hljs-comment"># support storage type: local, minio, s3, aws, gcp, ali(aliyun), azure, tc(tencent)</span>
   
-  address: milvus_A <span class="hljs-comment"># Address of MinIO/S3</span>
-  port: <span class="hljs-number">9000</span>   <span class="hljs-comment"># Port of MinIO/S3</span>
-  accessKeyID: minioadmin  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
-  secretAccessKey: minioadmin <span class="hljs-comment"># MinIO/S3 encryption string</span>
-  useSSL: false <span class="hljs-comment"># Access to MinIO/S3 with SSL</span>
-  useIAM: false
-  iamEndpoint: <span class="hljs-string">&quot;&quot;</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">milvus_A</span> <span class="hljs-comment"># Address of MinIO/S3</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">9000</span>   <span class="hljs-comment"># Port of MinIO/S3</span>
+  <span class="hljs-attr">accessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
+  <span class="hljs-attr">secretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Access to MinIO/S3 with SSL</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">iamEndpoint:</span> <span class="hljs-string">&quot;&quot;</span>
   
-  bucketName: <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
-  rootPath: <span class="hljs-string">&quot;files_A&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
+  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files_A&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
 
   <span class="hljs-comment"># only for azure</span>
-  backupAccessKeyID: minioadmin  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
-  backupSecretAccessKey: minioadmin <span class="hljs-comment"># MinIO/S3 encryption string</span>
+  <span class="hljs-attr">backupAccessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
+  <span class="hljs-attr">backupSecretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
   
-  backupBucketName: <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
-  backupRootPath: <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
+  <span class="hljs-attr">backupBucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
+  <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">minio.bucketName</code>:用於<code translate="no">milvus_A</code> 儲存的儲存桶名稱。在此範例中，設定為<code translate="no">bucket_A</code> 。</p></li>
 <li><p><code translate="no">minio.rootPath</code>:儲存<code translate="no">milvus_A</code> 資料的儲存桶根目錄。在本範例中，設定為<code translate="no">files_A</code> 。</p></li>
-<li><p><code translate="no">minio.backupBucketName</code>:用於儲存的儲存桶名稱。在本範例中，<code translate="no">milvus_A</code> 和<code translate="no">milvus_B</code> 共用一個資料桶。因此，設定為<code translate="no">bucket_A</code>.</p></li>
+<li><p><code translate="no">minio.backupBucketName</code>:用於儲存的資料桶名稱。在本範例中，<code translate="no">milvus_A</code> 和<code translate="no">milvus_B</code> 共用一個資料桶。因此，設定為<code translate="no">bucket_A</code>.</p></li>
 <li><p><code translate="no">minio.backupRootPath</code>:指定用於儲存備份檔案的儲存桶內的根目錄<code translate="no">milvus_B</code> 。在本範例中，使用與<code translate="no">milvus_A</code> 不同的路徑。因此，設定為<code translate="no">backup</code> 。</p></li>
 </ul></li>
 </ul>
@@ -161,34 +161,34 @@ minio:
       </svg>
     </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">步驟 1：設定還原設定</h3><p>重複步驟 2，修改還原至<code translate="no">milvus_B</code> 的設定，確保<code translate="no">minio.bucketName</code> 設定為<code translate="no">bucket_A</code> ，<code translate="no">minio.rootPath</code> 設定為<code translate="no">files_B</code> ，以區別兩個實體的儲存位置。</p>
 <p>以下是配置範例：</p>
-<pre><code translate="no" class="language-yaml">...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
-milvus:
-  address: milvus_B
-  port: <span class="hljs-number">19530</span>
-  authorizationEnabled: false
+<span class="hljs-attr">milvus:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">milvus_B</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">19530</span>
+  <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
   <span class="hljs-comment"># tls mode values [0, 1, 2]</span>
   <span class="hljs-comment"># 0 is close, 1 is one-way authentication, 2 is two-way authentication.</span>
-  tlsMode: <span class="hljs-number">0</span>
-  user: <span class="hljs-string">&quot;root&quot;</span>
-  password: <span class="hljs-string">&quot;Milvus&quot;</span>
+  <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">0</span>
+  <span class="hljs-attr">user:</span> <span class="hljs-string">&quot;root&quot;</span>
+  <span class="hljs-attr">password:</span> <span class="hljs-string">&quot;Milvus&quot;</span>
   
 <span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
-minio:
+<span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
-  storageType: <span class="hljs-string">&quot;minio&quot;</span> <span class="hljs-comment"># support storage type: local, minio, s3, aws, gcp, ali(aliyun), azure, tc(tencent)</span>
+  <span class="hljs-attr">storageType:</span> <span class="hljs-string">&quot;minio&quot;</span> <span class="hljs-comment"># support storage type: local, minio, s3, aws, gcp, ali(aliyun), azure, tc(tencent)</span>
   
-  address: milvus_B <span class="hljs-comment"># Address of MinIO/S3</span>
-  port: <span class="hljs-number">9000</span>   <span class="hljs-comment"># Port of MinIO/S3</span>
-  accessKeyID: minioadmin  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
-  secretAccessKey: minioadmin <span class="hljs-comment"># MinIO/S3 encryption string</span>
-  useSSL: false <span class="hljs-comment"># Access to MinIO/S3 with SSL</span>
-  useIAM: false
-  iamEndpoint: <span class="hljs-string">&quot;&quot;</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">milvus_B</span> <span class="hljs-comment"># Address of MinIO/S3</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">9000</span>   <span class="hljs-comment"># Port of MinIO/S3</span>
+  <span class="hljs-attr">accessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
+  <span class="hljs-attr">secretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Access to MinIO/S3 with SSL</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">iamEndpoint:</span> <span class="hljs-string">&quot;&quot;</span>
   
-  bucketName: <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
-  rootPath: <span class="hljs-string">&quot;files_B&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
-  ...
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
+  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files_B&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
+  <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Restore-backup" class="common-anchor-header">步驟 2：還原備份</h3><p>還原備份到<code translate="no">milvus_B</code> ：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak

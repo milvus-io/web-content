@@ -83,12 +83,12 @@ summary: regex 過濾器是正規表達式過濾器：由 tokenizer 產生的任
       </svg>
     </button></h2><p>在應用分析器配置到您的收集模式之前，請使用<code translate="no">run_analyzer</code> 方法驗證其行為。</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">分析器配置</h3><div class="multipleCode">
-   <a href="#plaintext">明文</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-plaintext">{
-    &quot;tokenizer&quot;: &quot;standard&quot;,
-    &quot;filter&quot;: [{
-        &quot;type&quot;: &quot;regex&quot;,
-        &quot;expr&quot;: &quot;^(?!test)&quot;
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">{
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [{
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;regex&quot;</span>,
+        <span class="hljs-string">&quot;expr&quot;</span>: <span class="hljs-string">&quot;^(?!test)&quot;</span>
     }]
 }
 <button class="copy-code-btn"></button></code></pre>

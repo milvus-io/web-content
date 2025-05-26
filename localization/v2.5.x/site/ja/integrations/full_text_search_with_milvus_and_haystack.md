@@ -3,10 +3,10 @@ id: full_text_search_with_milvus_and_haystack.md
 summary: このチュートリアルでは、HaystackとMilvusを使ってアプリケーションに全文検索とハイブリッド検索を実装する方法を紹介します。
 title: MilvusとHaystackによる全文検索
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-text-search-with-Milvus-and-Haystack" class="common-anchor-header">MilvusとHaystackによる全文検索<button data-href="#Full-text-search-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
@@ -25,14 +25,14 @@ title: MilvusとHaystackによる全文検索
         ></path>
       </svg>
     </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索は</a>、テキスト中の特定のキーワードやフレーズにマッチする文書を検索する伝統的な手法です。用語の頻度などから計算された関連性スコアに基づいて結果をランク付けする。セマンティック検索が意味や文脈を理解するのに優れているのに対し、全文検索は正確なキーワードマッチングに優れており、セマンティック検索を補完するのに有用である。BM25アルゴリズムは、フルテキスト検索におけるランキングに広く使用されており、RAG（Retrieval-Augmented Generation）において重要な役割を果たしている。</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5では</a>、BM25を使ったネイティブな全文検索機能を導入した。このアプローチはテキストをBM25スコアを表すスパースベクトルに変換します。生テキストを入力するだけで、Milvusは自動的にスパースベクトルを生成し、保存します。</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5では</a>、BM25を使ったネイティブな全文検索機能を導入した。このアプローチはテキストをBM25スコアを表すスパースベクトルに変換します。生テキストを入力するだけで、Milvusは自動的にスパースベクトルを生成し保存します。</p>
 <p><a href="https://haystack.deepset.ai/">Haystackは</a>このMilvusの機能をサポートし、RAGアプリケーションに全文検索を簡単に追加できるようになりました。全文検索と密なベクトル意味検索を組み合わせることで、意味理解とキーワードマッチング精度の両方から恩恵を受けるハイブリッドアプローチを実現することができます。この組み合わせは検索精度を向上させ、より良い結果をユーザーに提供します。</p>
 <p>このチュートリアルでは、HaystackとMilvusを使用してアプリケーションにフルテキスト検索とハイブリッド検索を実装する方法を示します。</p>
-<p>Milvusベクターストアを使用するには、Milvusサーバを<code translate="no">URI</code> （オプションで<code translate="no">TOKEN</code> ）で指定します。Milvusサーバを立ち上げるには、<a href="https://milvus.io/docs/install-overview.md">Milvusインストールガイドに</a>従うか、<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>(フルマネージドMilvus)を無料で<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">お試し</a>ください。</p>
+<p>Milvusベクターストアを使用するには、Milvusサーバを<code translate="no">URI</code> （オプションで<code translate="no">TOKEN</code> ）で指定します。Milvusサーバーを立ち上げるには、<a href="https://milvus.io/docs/install-overview.md">Milvusインストールガイドに</a>従うか、<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>(フルマネージドMilvus)を無料で<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">お試し</a>ください。</p>
 <div class="alert note">
 <ul>
 <li>全文検索は現在、Milvus Standalone、Milvus Distributed、Zilliz Cloudで利用可能です。詳細は support@zilliz.com までお問い合わせください。</li>
-<li>このチュートリアルを進める前に、<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索と</a>Haystack Milvus統合の<a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">基本的</a>な使い方を理解していることを確認してください。</li>
+<li>このチュートリアルを進める前に、<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索と</a>Haystack Milvus統合の<a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">基本的</a>な使い方を理解してください。</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -315,7 +315,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     </button></h2><p>ここまで、HaystackとMilvusにおける基本的なBM25ビルドイン関数の使い方を学び、ロードした<code translate="no">document_store</code> を準備した。ハイブリッド検索を使った最適化されたRAG実装を紹介しよう。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

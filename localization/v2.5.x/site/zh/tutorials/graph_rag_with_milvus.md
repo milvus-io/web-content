@@ -18,8 +18,8 @@ title: 用 Milvus 绘制 RAG 图
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>大型语言模型的广泛应用凸显了提高其响应准确性和相关性的重要性。检索增强生成（RAG）利用外部知识库增强了模型，提供了更多上下文信息，缓解了幻觉和知识不足等问题。然而，仅仅依靠简单的 RAG 范式有其局限性，尤其是在处理复杂的实体关系和多跳问题时，模型往往难以提供准确的答案。</p>
 <p>将知识图谱（KG）引入 RAG 系统提供了一种新的解决方案。知识图谱以结构化的方式呈现实体及其关系，提供更精确的检索信息，帮助 RAG 更好地处理复杂的问题解答任务。KG-RAG 仍处于早期阶段，对于如何从 KG 中有效检索实体及其关系，以及如何将向量相似性搜索与图结构相结合，目前还没有达成共识。</p>
 <p>在本笔记本中，我们介绍了一种简单但功能强大的方法，可大大提高该场景的性能。它是一种简单的 RAG 范式，先进行多向检索，然后重新排序，但它从逻辑上实现了 Graph RAG，并在处理多跳问题时达到了最先进的性能。让我们看看它是如何实现的。</p>
@@ -53,28 +53,28 @@ title: 用 Milvus 绘制 RAG 图
 <p>我们将使用 OpenAI 的模型。您应将<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>导入必要的库和依赖项。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
-<span class="hljs-keyword">from</span> scipy.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> csr_matrix
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">messages</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">AIMessage</span>, <span class="hljs-title class_">HumanMessage</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">prompts</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatPromptTemplate</span>, <span class="hljs-title class_">HumanMessagePromptTemplate</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">output_parsers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">StrOutputParser</span>, <span class="hljs-title class_">JsonOutputParser</span>
-<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatOpenAI</span>, <span class="hljs-title class_">OpenAIEmbeddings</span>
+<span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> langchain_core.messages <span class="hljs-keyword">import</span> AIMessage, HumanMessage
+<span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate, HumanMessagePromptTemplate
+<span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser, JsonOutputParser
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI, OpenAIEmbeddings
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>初始化 Milvus 客户端实例、LLM 和 Embeddings 模型。</p>
-<pre><code translate="no" class="language-python">milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
+<pre><code translate="no" class="language-python">milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
 
-llm = <span class="hljs-title class_">ChatOpenAI</span>(
+llm = ChatOpenAI(
     model=<span class="hljs-string">&quot;gpt-4o&quot;</span>,
     temperature=<span class="hljs-number">0</span>,
 )
-embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
+embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>对于 MilvusClient 中的 args：</p>
@@ -167,30 +167,30 @@ embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=
 <li>在这里，我们通过直接连接主语、谓语和宾语来构建关系概念，中间留有空格。</li>
 </ul>
 <p>我们还准备了一个 dict，用于将实体 id 映射到关系 id，以及另一个 dict，用于将关系 id 映射到通道 id，以备后用。</p>
-<pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(list)
-relationid_2_passageids = defaultdict(list)
+<pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(<span class="hljs-built_in">list</span>)
+relationid_2_passageids = defaultdict(<span class="hljs-built_in">list</span>)
 
 entities = []
 relations = []
 passages = []
-<span class="hljs-keyword">for</span> passage_id, dataset_info in enumerate(nano_dataset):
+<span class="hljs-keyword">for</span> passage_id, dataset_info <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(nano_dataset):
     passage, triplets = dataset_info[<span class="hljs-string">&quot;passage&quot;</span>], dataset_info[<span class="hljs-string">&quot;triplets&quot;</span>]
-    passages.<span class="hljs-built_in">append</span>(passage)
-    <span class="hljs-keyword">for</span> triplet in triplets:
-        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">0</span>] not in entities:
-            entities.<span class="hljs-built_in">append</span>(triplet[<span class="hljs-number">0</span>])
-        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">2</span>] not in entities:
-            entities.<span class="hljs-built_in">append</span>(triplet[<span class="hljs-number">2</span>])
+    passages.append(passage)
+    <span class="hljs-keyword">for</span> triplet <span class="hljs-keyword">in</span> triplets:
+        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">0</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> entities:
+            entities.append(triplet[<span class="hljs-number">0</span>])
+        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">2</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> entities:
+            entities.append(triplet[<span class="hljs-number">2</span>])
         relation = <span class="hljs-string">&quot; &quot;</span>.join(triplet)
-        <span class="hljs-keyword">if</span> relation not in relations:
-            relations.<span class="hljs-built_in">append</span>(relation)
-            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">0</span>])].<span class="hljs-built_in">append</span>(
+        <span class="hljs-keyword">if</span> relation <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> relations:
+            relations.append(relation)
+            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">0</span>])].append(
                 <span class="hljs-built_in">len</span>(relations) - <span class="hljs-number">1</span>
             )
-            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">2</span>])].<span class="hljs-built_in">append</span>(
+            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">2</span>])].append(
                 <span class="hljs-built_in">len</span>(relations) - <span class="hljs-number">1</span>
             )
-        relationid_2_passageids[relations.index(relation)].<span class="hljs-built_in">append</span>(passage_id)
+        relationid_2_passageids[relations.index(relation)].append(passage_id)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Data-Insertion" class="common-anchor-header">数据插入</h3><p>为实体、关系和段落创建 Milvus 集合。在我们的方法中，实体集合和关系集合作为图构建的主要集合，而段落集合则作为天真 RAG 检索比较或辅助用途。</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-built_in">len</span>(embedding_model.embed_query(<span class="hljs-string">&quot;foo&quot;</span>))
@@ -283,12 +283,12 @@ query_ner_embeddings = [
     embedding_model.embed_query(query_ner) <span class="hljs-keyword">for</span> query_ner <span class="hljs-keyword">in</span> query_ner_list
 ]
 
-top_k = 3
+top_k = <span class="hljs-number">3</span>
 
 entity_search_res = milvus_client.search(
     collection_name=entity_col_name,
     data=query_ner_embeddings,
-    <span class="hljs-built_in">limit</span>=top_k,
+    limit=top_k,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
 )
 
@@ -297,9 +297,9 @@ query_embedding = embedding_model.embed_query(query)
 relation_search_res = milvus_client.search(
     collection_name=relation_col_name,
     data=[query_embedding],
-    <span class="hljs-built_in">limit</span>=top_k,
+    limit=top_k,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
-)[0]
+)[<span class="hljs-number">0</span>]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">扩展子图</h3><p>我们使用检索到的实体和关系来展开子图并获得候选关系，然后通过两种方式将它们合并。下面是子图扩展过程的流程图：  <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
@@ -448,11 +448,11 @@ rerank_relation_ids = rerank_relations(
 
 final_passages = []
 final_passage_ids = []
-<span class="hljs-keyword">for</span> relation_id in rerank_relation_ids:
-    <span class="hljs-keyword">for</span> passage_id in relationid_2_passageids[relation_id]:
-        <span class="hljs-keyword">if</span> passage_id not in final_passage_ids:
-            final_passage_ids.<span class="hljs-built_in">append</span>(passage_id)
-            final_passages.<span class="hljs-built_in">append</span>(passages[passage_id])
+<span class="hljs-keyword">for</span> relation_id <span class="hljs-keyword">in</span> rerank_relation_ids:
+    <span class="hljs-keyword">for</span> passage_id <span class="hljs-keyword">in</span> relationid_2_passageids[relation_id]:
+        <span class="hljs-keyword">if</span> passage_id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> final_passage_ids:
+            final_passage_ids.append(passage_id)
+            final_passages.append(passages[passage_id])
 passages_from_our_method = final_passages[:final_top_k]
 <button class="copy-code-btn"></button></code></pre>
 <p>我们可以将结果与天真的 RAG 方法进行比较，后者直接从 Collections 中检索出基于查询嵌入的 topK 段落。</p>

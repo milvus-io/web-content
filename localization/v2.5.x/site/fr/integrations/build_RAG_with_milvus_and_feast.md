@@ -1,8 +1,8 @@
 ---
 id: build_RAG_with_milvus_and_feast.md
 summary: >-
-  Dans ce tutoriel, nous allons construire un pipeline de génération améliorée
-  par récupération (RAG) en utilisant Feast et Milvus. Feast est un magasin de
+  Dans ce tutoriel, nous allons construire un pipeline de Génération Assistée
+  par Récupération (RAG) en utilisant Feast et Milvus. Feast est un magasin de
   caractéristiques open-source qui rationalise la gestion des caractéristiques
   pour l'apprentissage automatique, permettant un stockage et une récupération
   efficaces des données structurées pour la formation et l'inférence en temps
@@ -26,13 +26,13 @@ title: Construire RAG avec Milvus et Feast
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Dans ce tutoriel, nous allons construire un pipeline Retrieval-Augmented Generation (RAG) en utilisant <a href="https://github.com/feast-dev/feast">Feast</a> et <a href="https://milvus.io/">Milvus</a>. Feast est un magasin de fonctionnalités open-source qui rationalise la gestion des fonctionnalités pour l'apprentissage automatique, permettant un stockage et une récupération efficaces des données structurées pour la formation et l'inférence en temps réel. Milvus est une base de données vectorielle haute performance conçue pour la recherche rapide de similarités, ce qui la rend idéale pour récupérer les documents pertinents dans les flux de travail RAG.</p>
+<p>Dans ce tutoriel, nous allons construire un pipeline Retrieval-Augmented Generation (RAG) en utilisant <a href="https://github.com/feast-dev/feast">Feast</a> et <a href="https://milvus.io/">Milvus</a>. Feast est un magasin de caractéristiques open-source qui rationalise la gestion des caractéristiques pour l'apprentissage automatique, permettant un stockage et une récupération efficaces des données structurées pour la formation et l'inférence en temps réel. Milvus est une base de données vectorielle haute performance conçue pour la recherche rapide de similarités, ce qui la rend idéale pour récupérer les documents pertinents dans les flux de travail RAG.</p>
 <p>Essentiellement, nous utiliserons Feast pour injecter des documents et des données structurées (c'est-à-dire des caractéristiques) dans le contexte d'un LLM (Large Language Model) afin d'alimenter une application RAG (Retrieval Augmented Generation) avec Milvus comme base de données vectorielle en ligne.</p>
 <h1 id="Why-Feast" class="common-anchor-header">Pourquoi Feast ?<button data-href="#Why-Feast" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -566,7 +566,7 @@ New York City traces its origins to Fort Amsterdam and a trading post founded on
 Anchored by Wall Street in the Financial District of Lower Manhattan, New York City has been called both the world's premier financial and fintech center and the most economically powerful city in the world. As of 2022, the New York metropolitan area is the largest metropolitan economy in the world with a gross metropolitan product of over US$2.16 trillion. If the New York metropolitan area were its own country, it would have the tenth-largest economy in the world. The city is home to the world's two largest stock exchanges by market capitalization of their listed companies: the New York Stock Exchange and Nasdaq. New York City is an established safe haven for global investors. As of 2023, New York City is the most expensive city in the world for expatriates to live. New York City is home to the highest number of billionaires, individuals of ultra-high net worth (greater than US$30 million), and millionaires of any city in the world.}
 ****END DOCUMENT 0****
 </code></pre>
-<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. Générer des réponses en utilisant le contexte extrait</h3><p>Maintenant que nous avons formaté les documents extraits, nous pouvons les intégrer dans une invite structurée pour la génération de réponses. Cette étape permet de s'assurer que l'assistant s'appuie uniquement sur les informations extraites et évite d'halluciner les réponses.</p>
+<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. Générer des réponses à l'aide du contexte extrait</h3><p>Maintenant que nous avons formaté les documents extraits, nous pouvons les intégrer dans une invite structurée pour la génération de réponses. Cette étape permet de s'assurer que l'assistant s'appuie uniquement sur les informations extraites et évite d'halluciner les réponses.</p>
 <pre><code translate="no" class="language-python">FULL_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
 You are an assistant for answering questions about states. You will be provided documentation from Wikipedia. Provide a conversational answer.
 If you don&#x27;t know the answer, just say &quot;I do not know.&quot; Don&#x27;t make up an answer.

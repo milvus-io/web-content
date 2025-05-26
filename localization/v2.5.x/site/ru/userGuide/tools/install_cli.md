@@ -59,7 +59,7 @@ title: Установка Milvus_CLI
       </svg>
     </button></h2><p>Вы можете установить Milvus_CLI с помощью docker.</p>
 <h3 id="Prerequisites" class="common-anchor-header">Необходимые условия .</h3><p>Требуется Docker 19.03 или более поздняя версия.</p>
-<h3 id="Install-based-on-Docker-image" class="common-anchor-header">Установка на основе образа Docker</h3><pre><code translate="no" class="language-shell">$ docker run -it zilliz/milvus_cli:latest
+<h3 id="Install-based-on-Docker-image" class="common-anchor-header">Установка на основе образа Docker</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -it zilliz/milvus_cli:latest</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-from-source-code" class="common-anchor-header">Установка из исходного кода<button data-href="#Install-from-source-code" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,12 +79,12 @@ title: Установка Milvus_CLI
     </button></h2><ol>
 <li>Выполните следующую команду, чтобы загрузить репозиторий <code translate="no">milvus_cli</code>.</li>
 </ol>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus_cli.git
+<pre><code translate="no" class="language-shell">git clone https://github.com/zilliztech/milvus_cli.git
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>Выполните следующую команду, чтобы войти в папку <code translate="no">milvus_cli</code>.</li>
 </ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> milvus_cli
+<pre><code translate="no" class="language-shell">cd milvus_cli
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>Выполните следующую команду для установки Milvus_CLI.</li>

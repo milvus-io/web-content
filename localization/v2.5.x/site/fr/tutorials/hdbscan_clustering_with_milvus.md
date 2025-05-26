@@ -9,10 +9,10 @@ summary: >-
   bloc-notes est une adaptation Milvus de l'article de Dylan Castillo.
 title: HDBSCAN Clustering avec Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">HDBSCAN Clustering avec Milvus<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
@@ -166,7 +166,7 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HDBSCAN nécessite le calcul des distances entre les points pour le regroupement, ce qui peut nécessiter un calcul intensif. Comme les points éloignés ont moins d'influence sur les affectations de regroupement, nous pouvons améliorer l'efficacité en calculant les k premiers voisins les plus proches. Dans cet exemple, nous utilisons l'index FLAT, mais pour les ensembles de données à grande échelle, Milvus prend en charge des méthodes d'indexation plus avancées afin d'accélérer le processus de recherche. Tout d'abord, nous devons obtenir un itérateur pour parcourir la collection Milvus que nous avons précédemment créée.</p>
+    </button></h2><p>HDBSCAN nécessite le calcul des distances entre les points pour le regroupement, ce qui peut nécessiter un calcul intensif. Les points éloignés ayant moins d'influence sur les affectations de regroupement, il est possible d'améliorer l'efficacité en calculant les k premiers voisins les plus proches. Dans cet exemple, nous utilisons l'index FLAT, mais pour les ensembles de données à grande échelle, Milvus prend en charge des méthodes d'indexation plus avancées afin d'accélérer le processus de recherche. Tout d'abord, nous devons obtenir un itérateur pour parcourir la collection Milvus que nous avons précédemment créée.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> hdbscan
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -284,6 +284,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/hdbscan_clustering_with_milvus.png?raw=true" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>Image</span> </span></p>
 <p>Ici, nous démontrons que les données sont bien regroupées, et vous pouvez survoler les points pour vérifier le texte qu'ils représentent. Avec ce carnet, nous espérons que vous apprendrez à utiliser HDBSCAN pour regrouper efficacement des embeddings avec Milvus, ce qui peut également être appliqué à d'autres types de données. Combinée à de grands modèles de langage, cette approche permet une analyse plus approfondie de vos données à grande échelle.</p>

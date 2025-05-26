@@ -3,8 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: Milvusとのハイブリッド検索
 title: Milvusを使ったハイブリッド検索
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Milvusを使ったハイブリッド検索<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +21,7 @@ title: Milvusを使ったハイブリッド検索
         ></path>
       </svg>
     </button></h1><p>このチュートリアルの最終的な効果を体験したい場合は、https://demos.milvus.io/hybrid-search/。</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>このチュートリアルでは、<a href="https://milvus.io/docs/multi-vector-search.md">Milvusと</a> <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3モデルを</a>使ったハイブリッド検索の方法を説明します。BGE-M3モデルはテキストを密なベクトルと疎なベクトルに変換することができます。Milvusは1つのコレクションに両方のタイプのベクトルを格納することをサポートし、結果の関連性を高めるハイブリッド検索を可能にします。</p>
 <p>Milvusは密検索、疎検索、ハイブリッド検索をサポートしています：</p>
 <ul>
@@ -311,4 +311,4 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>ハイデラバードで<span style='color:red'> 起業</span>するのに適したビジネスはどれ<span style='color:red'>ですか？</span></p>
 <p>全くの初心者がコンピュータ<span style='color:red'> プログラミングの</span>アルゴリズムを理解する<span style='color:red'> ために</span>必要な数学は何<span style='color:red'> ですか？</span>全くの初心者に適したアルゴリズムに関する本は何<span style='color:red'>ですか？</span></p>
 <p>人生を自分に合ったものにし、精神的・感情的に虐待<span style='color:red'>さ</span>れないように<span style='color:red'>するには</span>どうしたら<span style='color:red'>いいですか？</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">クイックデプロイ</h3><p>このチュートリアルでオンライン・デモを始める方法については、<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">アプリケーションの例を</a>参照してください。</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">クイックデプロイ</h3><p>このチュートリアルでオンライン・デモを始める方法については、<a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">アプリケーションの例を</a>参照してください。</p>

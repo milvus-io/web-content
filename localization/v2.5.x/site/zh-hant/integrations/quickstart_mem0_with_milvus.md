@@ -21,14 +21,14 @@ title: 開始使用 Mem0 和 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/quickstart_mem0_with_milvus.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://mem0.ai/">Mem0</a>是適用於 AI 應用程式的智慧型記憶體層級，可保留使用者偏好並隨時間持續適應，提供個人化且有效率的互動。Mem0 是聊天機器人和 AI 驅動工具的理想選擇，可創造無縫、情境感知的體驗。</p>
-<p>在本教程中，我們將介紹 Mem0 記憶體管理的基本操作 - 新增、擷取、更新、搜尋、刪除和追蹤記憶體歷史 - 使用<a href="https://milvus.io/">Milvus</a>，這是一個高效能的開放原始碼向量資料庫，提供高效的儲存和擷取功能。這個實作導覽將引導您完成基本的記憶體作業，以協助您使用 Mem0 和 Milvus 建立個人化的 AI 互動。</p>
+<p>在本教程中，我們將介紹 Mem0 記憶體管理的基本操作 - 新增、擷取、更新、搜尋、刪除和追蹤記憶體歷史 - 使用<a href="https://milvus.io/">Milvus</a>，這是一個高效能的開放原始碼向量資料庫，提供高效的儲存和擷取功能。這個實作導覽將引導您完成基礎記憶體作業，以協助您使用 Mem0 和 Milvus 建立個人化的 AI 互動。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ title: 開始使用 Mem0 和 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">下載所需的函式庫</h3><pre><code translate="no" class="language-shell">$ pip install mem0ai pymilvus
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">下載所需的函式庫</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -52,7 +52,7 @@ title: 開始使用 Mem0 和 Milvus
 <h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">使用 Milvus 設定 Mem0</h3><p>在本範例中，我們將使用 OpenAI 作為 LLM。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>現在，我們可以設定 Mem0 使用 Milvus 作為向量資料庫。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define Config</span>
@@ -76,8 +76,8 @@ m = Memory.from_config(config)
 <blockquote>
 <ul>
 <li>如果你只需要一個本機向量資料庫來做小量資料或原型設計，將 uri 設定為一個本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
-<li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器位址和連接埠作為您的 uri，例如<code translate="no">http://localhost:19530</code> 。如果您啟用 Milvus 的驗證功能，請使用「&lt;your_username&gt;:&lt;your_password&gt;」作為令牌，否則請勿設定令牌。</li>
-<li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務），請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，它們對應於 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
+<li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器位址和連接埠作為您的 uri，例如<code translate="no">http://localhost:19530</code> 。如果您在 Milvus 上啟用認證功能，請使用 "<your_username>:<your_password>" 作為令牌，否則請勿設定令牌。</li>
+<li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，它們對應於 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端點和 API 金鑰</a>。</li>
 </ul>
 </blockquote>
 </div>
@@ -154,14 +154,14 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 </code></pre>
 <h3 id="Search-Memory" class="common-anchor-header">搜尋記憶體</h3><p>我們可以使用<code translate="no">search</code> 函式來尋找使用者最相關的記憶體。</p>
 <p>讓我們先為 Alice 加入另一個記憶體。</p>
-<pre><code translate="no" class="language-python">new_mem = m.<span class="hljs-keyword">add</span>(
+<pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
     user_id=<span class="hljs-string">&quot;alice&quot;</span>,
     metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;task&quot;</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>現在，我們呼叫<code translate="no">get_all</code> ，指定 user_id，以驗證我們確實有 2 個使用者 Alice 的記憶體項目。</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-title function_">get_all</span>(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
+<pre><code translate="no" class="language-python">m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
    'memory': 'Likes to play tennis on weekends',
@@ -179,7 +179,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'user_id': 'alice'}]}
 </code></pre>
 <p>我們現在可以透過提供<code translate="no">query</code> 和<code translate="no">user_id</code> 來執行<code translate="no">search</code> 。請注意，我們預設使用<code translate="no">L2</code> 公制進行相似性搜尋，因此<code translate="no">score</code> 越小代表相似性越高。</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-title function_">search</span>(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
+<pre><code translate="no" class="language-python">m.search(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
    'memory': 'Likes to play tennis on weekends',
@@ -200,7 +200,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 </code></pre>
 <h3 id="Delete-Memory" class="common-anchor-header">刪除記憶體</h3><p>我們也可以透過提供對應的<code translate="no">memory_id</code> 來<code translate="no">delete</code> 記憶體。</p>
 <p>我們將刪除記憶體 "Likes to play tennis on weekends"，因為它的<code translate="no">memory_id</code> 已經被擷取，並呼叫<code translate="no">get_all</code> 來驗證刪除是否成功。</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-built_in">delete</span>(memory_id=memory_id)
+<pre><code translate="no" class="language-python">m.delete(memory_id=memory_id)
 
 m.get_all(<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>

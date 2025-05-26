@@ -9,10 +9,10 @@ summary: >-
   melhorá-la-emos integrando a pesquisa semântica para obter resultados mais
   abrangentes.
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Using-Full-Text-Search-with-LlamaIndex-and-Milvus" class="common-anchor-header">Utilizar a pesquisa de texto integral com LlamaIndex e Milvus<button data-href="#Using-Full-Text-Search-with-LlamaIndex-and-Milvus" class="anchor-icon" translate="no">
@@ -71,7 +71,7 @@ openai.api_key = <span class="hljs-string">&quot;sk-&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para utilizar o armazenamento de vectores Milvus, especifique o seu servidor Milvus <code translate="no">URI</code> (e, opcionalmente, com o <code translate="no">TOKEN</code>). Para iniciar um servidor Milvus, pode configurar um servidor Milvus seguindo o <a href="https://milvus.io/docs/install-overview.md">guia de instalação do Milvus</a> ou simplesmente experimentar <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">o Zilliz Cloud</a> gratuitamente.</p>
 <blockquote>
-<p>A pesquisa de texto integral é atualmente suportada no Milvus Standalone, Milvus Distributed e Zilliz Cloud, mas ainda não no Milvus Lite (planeado para implementação futura). Contacte support@zilliz.com para obter mais informações.</p>
+<p>A pesquisa de texto completo é atualmente suportada no Milvus Standalone, Milvus Distributed e Zilliz Cloud, mas ainda não no Milvus Lite (planeado para implementação futura). Contacte support@zilliz.com para obter mais informações.</p>
 </blockquote>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = &quot;&quot;</span>
@@ -151,7 +151,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Embeddings have been explicitly disabled. Using MockEmbedding.
 </code></pre>
-<p>O código acima insere documentos de exemplo no Milvus e cria um índice para permitir a classificação BM25 para pesquisa de texto integral. Desactiva a incorporação densa e utiliza <code translate="no">BM25BuiltInFunction</code> com parâmetros predefinidos.</p>
+<p>O código acima insere documentos de exemplo no Milvus e cria um índice para permitir a classificação BM25 para pesquisa em texto integral. Desactiva a incorporação densa e utiliza <code translate="no">BM25BuiltInFunction</code> com parâmetros predefinidos.</p>
 <p>Pode especificar os campos de entrada e saída nos parâmetros <code translate="no">BM25BuiltInFunction</code>:</p>
 <ul>
 <li><code translate="no">input_field_names (str)</code>: O campo de texto de entrada (padrão: "text"). Indica o campo de texto ao qual o algoritmo BM25 é aplicado. Altere isto se utilizar a sua própria coleção com um nome de campo de texto diferente.</li>
@@ -187,7 +187,7 @@ hiring too many people, and the relief felt when the company was acquired by Yah
     enable_match=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">Pesquisa híbrida com ranqueador</h3><p>Um sistema de pesquisa híbrido combina a pesquisa semântica e a pesquisa de texto integral, optimizando o desempenho da recuperação num sistema RAG.</p>
+<h3 id="Hybrid-Search-with-Reranker" class="common-anchor-header">Pesquisa híbrida com ranqueador</h3><p>Um sistema de pesquisa híbrido combina a pesquisa semântica e a pesquisa de texto completo, optimizando o desempenho da recuperação num sistema RAG.</p>
 <p>O exemplo a seguir usa a incorporação OpenAI para pesquisa semântica e BM25 para pesquisa de texto completo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index over the documnts</span>
 vector_store = MilvusVectorStore(
@@ -215,7 +215,7 @@ index = VectorStoreIndex.from_documents(
 <li><code translate="no">embedding</code>: Embeddings densos gerados pelo modelo de embedding OpenAI para pesquisa semântica.</li>
 <li><code translate="no">sparse_embedding</code>: Embeddings esparsos calculados com a BM25BuiltInFunction para pesquisa de texto completo.</li>
 </ul>
-<p>Além disso, aplicámos uma estratégia de classificação utilizando o "RRFRanker" com os seus parâmetros predefinidos. Para personalizar o reranker, pode configurar <code translate="no">hybrid_ranker</code> e <code translate="no">hybrid_ranker_params</code> seguindo o <a href="https://milvus.io/docs/reranking.md">Milvus Reranking Guide</a>.</p>
+<p>Além disso, aplicámos uma estratégia de classificação utilizando o "RRFRanker" com os seus parâmetros predefinidos. Para personalizar o reranker, é possível configurar <code translate="no">hybrid_ranker</code> e <code translate="no">hybrid_ranker_params</code> seguindo o <a href="https://milvus.io/docs/reranking.md">Milvus Reranking Guide</a>.</p>
 <p>Agora, vamos testar o sistema RAG com uma consulta de amostra:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query</span>
 query_engine = index.as_query_engine(
@@ -231,4 +231,4 @@ company. Additionally, the author learned about the significance of user feedbac
 building stores for users, and the realization that growth rate is crucial for the long-term success
 of a startup.
 </code></pre>
-<p>Esta abordagem híbrida garante respostas mais precisas e conscientes do contexto num sistema RAG, aproveitando a recuperação semântica e baseada em palavras-chave.</p>
+<p>Esta abordagem híbrida garante respostas mais precisas e sensíveis ao contexto num sistema RAG, aproveitando a recuperação semântica e baseada em palavras-chave.</p>

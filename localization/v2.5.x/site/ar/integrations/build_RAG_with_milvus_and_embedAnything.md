@@ -8,10 +8,10 @@ summary: >-
   المتجهات المستهدفة.
 title: بناء RAG مع Milvus و EmbedAnything
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">بناء RAG مع Milvus و EmbedAnything<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
@@ -30,7 +30,7 @@ title: بناء RAG مع Milvus و EmbedAnything
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a> هو خط أنابيب تضمين فائق السرعة وخفيف الوزن مبني في Rust يدعم النصوص وملفات PDF والصور والصوت وغيرها.</p>
-<p>في هذا البرنامج التعليمي، سنشرح في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب استرجاع-مُعزّز (RAG) باستخدام EmbedAnything مع <a href="https://milvus.io">Milvus</a>. بدلًا من الاقتران بإحكام مع أي قاعدة بيانات محددة، يستخدم EmbedAnything نظام <strong>محول</strong> قابل للتوصيل - تعمل المحولات كأغلفة تحدد كيفية تنسيق التضمينات وفهرستها وتخزينها في مخزن المتجهات المستهدفة.</p>
+<p>في هذا البرنامج التعليمي، سنشرح في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب توليد معزز للاسترجاع (RAG) باستخدام EmbedAnything مع <a href="https://milvus.io">Milvus</a>. بدلًا من الاقتران بإحكام مع أي قاعدة بيانات محددة، يستخدم EmbedAnything نظام <strong>محول</strong> قابل للتوصيل - تعمل المحولات كأغلفة تحدد كيفية تنسيق التضمينات وفهرستها وتخزينها في مخزن المتجهات المستهدفة.</p>
 <p>من خلال إقران EmbedAnything مع محول Milvus، يمكنك إنشاء تضمينات من أنواع ملفات متنوعة وتخزينها بكفاءة في Milvus في بضعة أسطر من التعليمات البرمجية.</p>
 <blockquote>
 <p>⚠️ ملاحظة: بينما يتعامل المحول في EmbedAnything مع الإدراج في Milvus، إلا أنه لا يدعم البحث خارج الصندوق. لإنشاء خط أنابيب RAG كامل، ستحتاج أيضًا إلى إنشاء MilvusClient بشكل منفصل وتنفيذ منطق الاسترجاع (على سبيل المثال، البحث عن التشابه عبر المتجهات) كجزء من تطبيقك.</p>

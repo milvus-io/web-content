@@ -25,10 +25,10 @@ title: Raccomandazione di film con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>In questo quaderno esploreremo come generare embeddings di descrizioni di film utilizzando OpenAI e sfruttare questi embeddings all'interno di Milvus per raccomandare film che corrispondono alle preferenze dell'utente. Per migliorare i risultati della ricerca, utilizzeremo il filtraggio per eseguire ricerche sui metadati. Il set di dati utilizzato in questo esempio proviene da HuggingFace e contiene oltre 8.000 voci di film, fornendo una ricca gamma di opzioni per le raccomandazioni di film.</p>
@@ -56,7 +56,7 @@ title: Raccomandazione di film con Milvus
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Initialize-OpenAI-client-and-Milvus" class="common-anchor-header">Inizializzare il client OpenAI e Milvus<button data-href="#Initialize-OpenAI-client-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,15 +74,15 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
         ></path>
       </svg>
     </button></h2><p>Inizializzare il client OpenAI.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
-openai_client = <span class="hljs-title class_">OpenAI</span>()
+openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
 <p>Impostare il nome della collezione e la dimensione degli embeddings.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-variable constant_">COLLECTION_NAME</span> = <span class="hljs-string">&quot;movie_search&quot;</span>
-<span class="hljs-variable constant_">DIMENSION</span> = <span class="hljs-number">1536</span>
+<pre><code translate="no" class="language-python">COLLECTION_NAME = <span class="hljs-string">&quot;movie_search&quot;</span>
+DIMENSION = <span class="hljs-number">1536</span>
 
-<span class="hljs-variable constant_">BATCH_SIZE</span> = <span class="hljs-number">1000</span>
+BATCH_SIZE = <span class="hljs-number">1000</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Connettersi a Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -94,8 +94,8 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
 <p>Come per l'argomento di <code translate="no">url</code> e <code translate="no">token</code>:</p>
 <ul>
 <li>L'impostazione di <code translate="no">uri</code> come file locale, ad esempio<code translate="no">./milvus.db</code>, è il metodo più conveniente, poiché utilizza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> per memorizzare tutti i dati in questo file.</li>
-<li>Se si dispone di una grande quantità di dati, ad esempio più di un milione di vettori, è possibile configurare un server Milvus più performante su <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. In questa configurazione, utilizzare l'indirizzo e la porta del server come uri, ad esempio<code translate="no">http://localhost:19530</code>. Se si abilita la funzione di autenticazione su Milvus, utilizzare "&lt;nome_utente&gt;:&lt;password&gt;" come token, altrimenti non impostare il token.</li>
-<li>Se si desidera utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito per Milvus, impostare <code translate="no">uri</code> e <code translate="no">token</code>, che corrispondono all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Endpoint pubblico e alla chiave Api</a> di Zilliz Cloud.</li>
+<li>Se si dispone di una grande quantità di dati, ad esempio più di un milione di vettori, è possibile configurare un server Milvus più performante su <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. In questa configurazione, utilizzare l'indirizzo e la porta del server come uri, ad esempio<code translate="no">http://localhost:19530</code>. Se si attiva la funzione di autenticazione su Milvus, utilizzare "<your_username>:<your_password>" come token, altrimenti non impostare il token.</li>
+<li>Se si desidera utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito per Milvus, impostare <code translate="no">uri</code> e <code translate="no">token</code>, che corrispondono all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">endpoint pubblico e alla chiave Api</a> di Zilliz Cloud.</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Remove collection if it already exists</span>
@@ -163,7 +163,7 @@ client.load_collection(collection_name=COLLECTION_NAME, replica_number=<span cla
     </button></h2><p>Con Milvus attivo e funzionante, possiamo iniziare a prelevare i nostri dati. <code translate="no">Hugging Face Datasets</code> è un hub che contiene molti dataset di utenti diversi e per questo esempio utilizziamo il dataset netflix-shows di HuggingLearners. Questo set di dati contiene film e coppie di metadati per oltre 8 mila film. Incorporeremo ogni descrizione e la memorizzeremo all'interno di Milvus insieme al titolo, al tipo, all'anno di uscita e alla valutazione.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 
-dataset = <span class="hljs-title function_">load_dataset</span>(<span class="hljs-string">&quot;hugginglearners/netflix-shows&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
+dataset = load_dataset(<span class="hljs-string">&quot;hugginglearners/netflix-shows&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-the-Data" class="common-anchor-header">Inserire i dati<button data-href="#Insert-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"

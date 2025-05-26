@@ -41,7 +41,7 @@ title: Milvus Lite 로컬 실행
 <li>노트북</li>
 <li>엣지 디바이스</li>
 </ul>
-<p>Milvus Lite는 Milvus 독립형 및 분산형과 동일한 API를 공유하며 벡터 데이터 지속성 및 관리, 벡터 CRUD 작업, 스파스 및 고밀도 벡터 검색, 메타데이터 필터링, 멀티 벡터 및 hybrid_search와 같은 대부분의 기능을 다룹니다. 이러한 기능을 함께 사용하면 에지 디바이스에서 클라우드의 클러스터에 이르기까지 다양한 유형의 환경에서 일관된 경험을 제공하여 다양한 규모의 사용 사례에 적합합니다. 동일한 클라이언트 측 코드를 사용하여 노트북이나 Jupyter Notebook에서 Milvus Lite로 GenAI 앱을 실행하거나, Docker 컨테이너에서 Milvus Standalone으로, 또는 운영 환경에서 수십억 개의 벡터를 제공하는 대규모 Kubernetes 클러스터에서 Milvus Distributed로 실행할 수 있습니다.</p>
+<p>Milvus Lite는 Milvus 독립형 및 분산형과 동일한 API를 공유하며 벡터 데이터 지속성 및 관리, 벡터 CRUD 작업, 스파스 및 고밀도 벡터 검색, 메타데이터 필터링, 멀티 벡터 및 hybrid_search와 같은 대부분의 기능을 다룹니다. 이 기능들은 엣지 디바이스에서 클라우드의 클러스터에 이르기까지 다양한 유형의 환경에서 일관된 경험을 제공하며, 다양한 규모의 사용 사례에 적합합니다. 동일한 클라이언트 측 코드를 사용하여 노트북이나 Jupyter Notebook에서 Milvus Lite로 GenAI 앱을 실행하거나, Docker 컨테이너에서 Milvus Standalone으로, 또는 운영 환경에서 수십억 개의 벡터를 제공하는 대규모 Kubernetes 클러스터에서 Milvus Distributed로 실행할 수 있습니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,7 +120,7 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음은 Milvus Lite를 텍스트 검색에 사용하는 방법을 보여주는 간단한 데모입니다. Milvus Lite를 사용하여 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>, <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb">이미지 검색과</a> 같은 애플리케이션을 구축하고 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a> 및 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex와</a> 같은 인기있는 RAG 프레임워크에서 Milvus Lite를 사용하는 더 포괄적인 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">예제가</a> 있습니다!</p>
+    </button></h2><p>다음은 Milvus Lite를 텍스트 검색에 사용하는 방법을 보여주는 간단한 데모입니다. Milvus Lite를 사용하여 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>, <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb">이미지 검색과</a> 같은 애플리케이션을 구축하고 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a> 및 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex와</a> 같은 인기있는 RAG 프레임워크에서 Milvus Lite를 사용하는 더 포괄적인 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">예제가</a> 있습니다!</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 

@@ -20,14 +20,14 @@ title: MilvusとFeastを使ってRAGを構築する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>このチュートリアルでは、<a href="https://github.com/feast-dev/feast">Feastと</a> <a href="https://milvus.io/">Milvusを使って</a>RAG（Retrieval-Augmented Generation）パイプラインを構築します。Feastは、機械学習のための特徴管理を合理化するオープンソースの特徴ストアであり、学習とリアルタイムの推論の両方で構造化データの効率的な保存と検索を可能にします。Milvusは、高速な類似性検索のために設計された高性能ベクトルデータベースであり、RAGワークフローにおける関連文書の検索に最適である。</p>
-<p>基本的には、Milvusをオンラインベクターデータベースとして使用するRAGアプリケーション（Retrieval Augmented Generation）をパワーアップさせるために、LLM（大規模言語モデル）のコンテキストにドキュメントと構造化データ（すなわち特徴）を注入するためにFeastを使用します。</p>
+<p>基本的には、Milvusをオンラインベクターデータベースとして使用するRAGアプリケーション（Retrieval Augmented Generation）をパワーアップするために、LLM（大規模言語モデル）のコンテキストにドキュメントと構造化データ（すなわち特徴）を注入するためにFeastを使用します。</p>
 <h1 id="Why-Feast" class="common-anchor-header">なぜFeastなのか？<button data-href="#Why-Feast" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +50,7 @@ title: MilvusとFeastを使ってRAGを構築する
 </ul></li>
 <li><strong>ベクトル検索：</strong>Feastは、ユーザーがアプリケーションに集中できるように、宣言的に簡単に設定できるベクトル類似検索のサポートを構築しています。Milvusは強力で効率的なベクトル類似検索機能を提供します。</li>
 <li><strong>リッチな構造化データ：</strong>ベクトル検索に加え、標準的な構造化フィールドをクエリし、LLMコンテキストにインジェクションすることで、より良いユーザーエクスペリエンスを実現します。</li>
-<li><strong>フィーチャー/コンテキストとバージョニング：</strong>組織内の異なるチームは、プロジェクトやサービス間でデータを再利用できず、アプリケーション・ロジックが重複することがよくあります。モデルやプロンプトのバージョンでA/Bテストを実行する場合など、モデルにはバージョン管理が必要なデータ依存関係があります。<ul>
+<li><strong>フィーチャー/コンテキストとバージョニング：</strong>組織内の異なるチームは、プロジェクトやサービス間でデータを再利用できず、アプリケーション・ロジックが重複することがよくあります。モデル/プロンプトのバージョンでA/Bテストを実行する場合など、モデルにはバージョン管理が必要なデータ依存関係があります。<ul>
 <li>Feastは、以前に使用されたドキュメントや機能の発見とコラボレーションを可能にし、データセットのバージョン管理を可能にします。</li>
 </ul></li>
 </ol>
@@ -137,7 +137,7 @@ llm_client = OpenAI(
 <p>このコンフィギュレーションは、以下を確立します：</p>
 <ul>
 <li>Milvusをオンラインストアとして確立し、高速なベクトル検索を実現します。</li>
-<li>過去のデータ処理のためのファイルベースのオフラインストレージ</li>
+<li>履歴データ処理用のファイルベースのオフラインストレージ</li>
 <li>COSINE類似度によるベクトル検索機能</li>
 </ul>
 <h4 id="2-examplerepopy" class="common-anchor-header">2. example_repo.py</h4><p>都市データの特徴定義が含まれています：</p>
@@ -373,7 +373,7 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>0</td>
       <td>1736447819280589</td>
       <td>0</td>
-      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）または単に...</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
       <td>ニューヨーク, ニューヨーク</td>
       <td>0.052114</td>
       <td>ニューヨーク（しばしばニューヨーク・シティまたは単に...</td>
@@ -398,7 +398,7 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
       <td>ニューヨーク, ニューヨーク</td>
       <td>0.012013</td>
-      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）または単に...</td>
+      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）、または単に...</td>
     </tr>
   </tbody>
 </table>
@@ -533,7 +533,7 @@ display(context_data)
   </tbody>
 </table>
 </div>
-<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3.RAGコンテキストのために取得した文書をフォーマットする</h3><p>関連文書を検索した後、データを、下流のアプリケーションで効率的に使用できる構造化されたコンテキストにフォーマットする必要がある。このステップにより、抽出された情報がきれいに整理され、RAGパイプラインに統合する準備が整う。</p>
+<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3.RAGコンテキストのために取得した文書をフォーマットする</h3><p>関連文書を検索した後、データを、下流のアプリケーションで効率的に使用できる構造化されたコンテキストにフォーマットする必要がある。このステップによって、抽出された情報がきれいに整理され、RAGパイプラインに統合する準備が整う。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">context_df</span>):
     output_context = <span class="hljs-string">&quot;&quot;</span>
     unique_documents = context_df.drop_duplicates().apply(

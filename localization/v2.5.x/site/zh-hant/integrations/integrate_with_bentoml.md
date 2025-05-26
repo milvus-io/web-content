@@ -18,8 +18,8 @@ title: 使用 Milvus 和 BentoML 的 Retrieval-Augmented Generation (RAG)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_bentoml.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="Introduction" class="common-anchor-header">簡介<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,9 +74,9 @@ title: 使用 Milvus 和 BentoML 的 Retrieval-Augmented Generation (RAG)
         ></path>
       </svg>
     </button></h2><p>要使用此端點，請匯入<code translate="no">bentoml</code> ，並透過指定端點和可選的令牌（如果您在 BentoCloud 上開啟<code translate="no">Endpoint Authorization</code> ），使用<code translate="no">SyncHTTPClient</code> 設定 HTTP 客戶端。或者，您也可以使用 BentoML 的<a href="https://github.com/bentoml/BentoSentenceTransformers">Sentence Transformers Embeddings</a>套件庫來提供相同的模型。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> <span class="hljs-type">bentoml</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bentoml
 
-<span class="hljs-variable">BENTO_EMBEDDING_MODEL_END_POINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>
+BENTO_EMBEDDING_MODEL_END_POINT = <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>
 BENTO_API_TOKEN = <span class="hljs-string">&quot;BENTO_API_TOKEN&quot;</span>
 
 embedding_client = bentoml.SyncHTTPClient(
@@ -143,7 +143,7 @@ city_chunks = []
         sentences=texts,
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>現在，我們需要匹配 embeddings 和文字塊。由於嵌入式清單和句子清單應該依索引匹配，因此我們可以透過<code translate="no">enumerate</code> 任一清單來進行匹配。</p>
+<p>現在，我們需要匹配 embeddings 和文字塊。由於嵌入式清單和句子清單應該依索引匹配，因此我們可以透過<code translate="no">enumerate</code> 任一清單進行匹配。</p>
 <pre><code translate="no" class="language-python">entries = []
 <span class="hljs-keyword">for</span> city_dict <span class="hljs-keyword">in</span> city_chunks:
     <span class="hljs-comment"># No need for the embeddings list if get_embeddings already returns a list of lists</span>
@@ -175,7 +175,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>準備好嵌入和資料之後，我們就可以將向量連同 metadata 插入 Milvus Lite，以便稍後進行向量搜尋。本節的第一步是連線到 Milvus Lite 來啟動一個用戶端。我們只要匯入<code translate="no">MilvusClient</code> 模組，並初始化一個連線到 Milvus Lite 向量資料庫的 Milvus Lite 用戶端。維度大小來自嵌入模型的大小，例如 Sentence Transformer 模型<code translate="no">all-MiniLM-L6-v2</code> 產生 384 維度的向量。</p>
+    </button></h2><p>準備好嵌入和資料後，我們就可以將向量連同 metadata 插入 Milvus Lite，以便稍後進行向量搜尋。本節的第一步是連線到 Milvus Lite 來啟動一個用戶端。我們只要匯入<code translate="no">MilvusClient</code> 模組，並初始化一個連線到 Milvus Lite 向量資料庫的 Milvus Lite 用戶端。維度大小來自嵌入模型的大小，例如句子轉換模型<code translate="no">all-MiniLM-L6-v2</code> 產生 384 維度的向量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>
@@ -195,7 +195,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot
 <p>或使用舊的 connections.connect API (不建議)：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
 
-connections.<span class="hljs-title function_">connect</span>(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
+connections.connect(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Creating-Your-Milvus-Lite-Collection" class="common-anchor-header">建立您的 Milvus Lite 套件<button data-href="#Creating-Your-Milvus-Lite-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -263,9 +263,9 @@ milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
         ></path>
       </svg>
     </button></h2><p>要建立 RAG 應用程式，我們需要在 BentoCloud 上部署 LLM。讓我們使用最新的 Llama3 LLM。一旦部署完成，只需複製此模型服務的端點和標記，並為其設定用戶端即可。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-variable constant_">BENTO_LLM_END_POINT</span> = <span class="hljs-string">&quot;BENTO_LLM_END_POINT&quot;</span>
+<pre><code translate="no" class="language-python">BENTO_LLM_END_POINT = <span class="hljs-string">&quot;BENTO_LLM_END_POINT&quot;</span>
 
-llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span class="hljs-variable constant_">BENTO_LLM_END_POINT</span>, token=<span class="hljs-variable constant_">BENTO_API_TOKEN</span>)
+llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="LLM-Instructions" class="common-anchor-header">LLM 指令<button data-href="#LLM-Instructions" class="anchor-icon" translate="no">
       <svg translate="no"

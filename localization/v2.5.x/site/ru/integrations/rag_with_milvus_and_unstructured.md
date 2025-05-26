@@ -5,10 +5,10 @@ summary: >-
   PDF-документов, а затем с помощью Milvus построим конвейер RAG.
 title: Построение RAG с помощью Milvus и Unstructured
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_unstructured.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_unstructured.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-a-RAG-with-Milvus-and-Unstructured" class="common-anchor-header">Построение RAG с помощью Milvus и Unstructured<button data-href="#Build-a-RAG-with-Milvus-and-Unstructured" class="anchor-icon" translate="no">
@@ -59,7 +59,7 @@ title: Построение RAG с помощью Milvus и Unstructured
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Подготовьте клиенты Milvus и OpenAI</h3><p>Вы можете использовать клиент Milvus для создания коллекции Milvus и вставки в нее данных.</p>
+<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Подготовка клиентов Milvus и OpenAI</h3><p>Вы можете использовать клиент Milvus для создания коллекции Milvus и вставки в нее данных.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

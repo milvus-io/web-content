@@ -3,8 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: 使用 Milvus 進行混合搜尋
 title: 使用 Milvus 進行混合搜尋
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">使用 Milvus 進行混合搜尋<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,8 +21,8 @@ title: 使用 Milvus 進行混合搜尋
         ></path>
       </svg>
     </button></h1><p>如果您想體驗本教學的最終效果，可以直接到 https://demos.milvus.io/hybrid-search/</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>在本教程中，我們將示範如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>進行混合搜索。BGE-M3 模型可以將文字轉換成密集向量和稀疏向量。Milvus 支援在一個集合中同時儲存這兩種向量，允許進行混合搜尋，以提高搜尋結果的相關性。</p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
+<p>在本教程中，我們將示範如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>進行混合搜索。BGE-M3 模型可以將文字轉換成密集向量和稀疏向量。Milvus 支援在一個集合中同時儲存這兩種向量，允許混合搜尋以增強結果的相關性。</p>
 <p>Milvus 支援密集、稀疏和混合檢索方法：</p>
 <ul>
 <li>密集檢索：利用語意上下文來瞭解查詢背後的意義。</li>
@@ -311,4 +311,4 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>在海得拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
 <p>一個完全的新手需要哪些數學知識<span style='color:red'> 才能</span>理解電腦<span style='color:red'> 程式設計</span>的演算法<span style='color:red'> ？</span>有哪些有關演算法的書籍適合初學者<span style='color:red'>？</span></p>
 <p><span style='color:red'>如何</span>讓生活適合您，並避免生活在精神上和情緒上<span style='color:red'>虐待</span>您<span style='color:red'>？</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">快速部署</h3><p>若要瞭解如何利用本教學開始線上示範，請參考<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">範例應用程式</a>。</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">快速部署</h3><p>若要瞭解如何利用本教學開始線上示範，請參考<a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">範例應用程式</a>。</p>

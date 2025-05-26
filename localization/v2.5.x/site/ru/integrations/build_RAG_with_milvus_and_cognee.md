@@ -5,16 +5,16 @@ summary: >-
   (Retrieval-Augmented Generation) с помощью Milvus и Cognee.
 title: Построение RAG с помощью Milvus и Cognee
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h3 id="Build-RAG-with-Milvus-and-Cognee" class="common-anchor-header">Создайте RAG с помощью Milvus и Cognee</h3><p><a href="https://www.cognee.ai">Cognee</a> - это платформа, ориентированная на разработчиков, которая упрощает разработку приложений искусственного интеллекта с помощью масштабируемых модульных конвейеров ECL (Extract, Cognify, Load). Благодаря бесшовной интеграции с Milvus, Cognee обеспечивает эффективное подключение и извлечение разговоров, документов и транскрипций, сокращая количество галлюцинаций и оптимизируя операционные расходы.</p>
 <p>Благодаря поддержке таких векторных хранилищ, как Milvus, баз данных графов и LLM, Cognee предоставляет гибкую и настраиваемую основу для создания систем с расширенным поиском (RAG). Его готовая к производству архитектура обеспечивает повышенную точность и эффективность приложений, основанных на искусственном интеллекте.</p>
 <p>В этом руководстве мы покажем вам, как построить конвейер RAG (Retrieval-Augmented Generation) с помощью Milvus и Cognee.</p>
-<pre><code translate="no" class="language-shell">$ pip install pymilvus git+<span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/topoteretes/cognee.git</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus git+https://github.com/topoteretes/cognee.git</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>Если вы используете Google Colab, то для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
@@ -25,11 +25,11 @@ title: Построение RAG с помощью Milvus и Cognee
 
 <span class="hljs-keyword">import</span> cognee
 
-cognee.<span class="hljs-property">config</span>.<span class="hljs-title function_">set_llm_api_key</span>(<span class="hljs-string">&quot;YOUR_OPENAI_API_KEY&quot;</span>)
+cognee.config.set_llm_api_key(<span class="hljs-string">&quot;YOUR_OPENAI_API_KEY&quot;</span>)
 
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;VECTOR_DB_PROVIDER&quot;</span>] = <span class="hljs-string">&quot;milvus&quot;</span>
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;VECTOR_DB_URL&quot;</span>] = <span class="hljs-string">&quot;./milvus.db&quot;</span>
+os.environ[<span class="hljs-string">&quot;VECTOR_DB_PROVIDER&quot;</span>] = <span class="hljs-string">&quot;milvus&quot;</span>
+os.environ[<span class="hljs-string">&quot;VECTOR_DB_URL&quot;</span>] = <span class="hljs-string">&quot;./milvus.db&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Что касается переменных окружения <code translate="no">VECTOR_DB_URL</code> и <code translate="no">VECTOR_DB_KEY</code>:</p>
@@ -41,10 +41,10 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;VE
 <p></a></p>
 <h3 id="Prepare-the-data" class="common-anchor-header">Подготовьте данные</h3><p>Мы используем страницы FAQ из <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">документации Milvus 2.4.x</a> в качестве частных знаний в нашей RAG, которая является хорошим источником данных для простого RAG-конвейера.</p>
 <p>Скачайте zip-файл и распакуйте документы в папку <code translate="no">milvus_docs</code>.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
-$ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Мы загружаем все файлы разметки из папки <code translate="no">milvus_docs/en/faq</code>. Для каждого документа мы просто используем &quot;# &quot; для разделения содержимого в файле, что позволяет примерно разделить содержимое каждой основной части файла разметки.</p>
+<p>Мы загружаем все файлы разметки из папки <code translate="no">milvus_docs/en/faq</code>. Для каждого документа мы просто используем "# " для разделения содержимого в файле, что позволяет примерно разделить содержимое каждой основной части файла разметки.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -92,11 +92,11 @@ search_results = <span class="hljs-keyword">await</span> cognee.search(SearchTyp
 <pre><code translate="no">{'id': 'de5c6713-e079-5d0b-b11d-e9bacd1e0d73', 'text': 'Milvus stores two data types: inserted data and metadata.'}
 </code></pre>
 <p>Этот запрос ищет в графе знаний резюме, связанное с текстом запроса, и выводит наиболее связанного кандидата.</p>
-<h3 id="Querying-for-Chunks" class="common-anchor-header">Запрос по фрагментам</h3><p>Сводки предлагают высокоуровневые сведения, но для получения более детальной информации мы можем запросить определенные фрагменты данных непосредственно из обработанного набора данных. Эти фрагменты получены из исходных данных, которые были добавлены и проанализированы во время создания графа знаний.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.<span class="hljs-property">api</span>.<span class="hljs-property">v1</span>.<span class="hljs-property">search</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">SearchType</span>
+<h3 id="Querying-for-Chunks" class="common-anchor-header">Запрос по фрагментам</h3><p>Сводки предлагают высокоуровневые сведения, но для получения более детальных сведений мы можем запросить определенные фрагменты данных непосредственно из обработанного набора данных. Эти фрагменты получены из исходных данных, которые были добавлены и проанализированы во время создания графа знаний.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.api.v1.search <span class="hljs-keyword">import</span> SearchType
 
 query_text = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
-search_results = <span class="hljs-keyword">await</span> cognee.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchType</span>.<span class="hljs-property">CHUNKS</span>, query_text=query_text)
+search_results = <span class="hljs-keyword">await</span> cognee.search(SearchType.CHUNKS, query_text=query_text)
 <button class="copy-code-btn"></button></code></pre>
 <p>Давайте отформатируем и отобразим их для лучшей читабельности!</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_and_print</span>(<span class="hljs-params">data</span>):
@@ -141,19 +141,19 @@ text = <span class="hljs-string">&quot;&quot;&quot;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Querying-for-Insights" class="common-anchor-header">Запрос для получения информации</h3><p>Сосредоточившись на этом меньшем наборе данных, мы можем четко проанализировать взаимосвязи и структуру графа знаний.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;Tell me about NLP&quot;</span>
-search_results = await cognee.search(SearchType.INSIGHTS, query_text=query_text)
+search_results = <span class="hljs-keyword">await</span> cognee.search(SearchType.INSIGHTS, query_text=query_text)
 
-<span class="hljs-keyword">for</span> result_text in search_results:
+<span class="hljs-keyword">for</span> result_text <span class="hljs-keyword">in</span> search_results:
     <span class="hljs-built_in">print</span>(result_text)
 
-# Example output:
-# ({<span class="hljs-string">&#x27;id&#x27;</span>: UUID(<span class="hljs-string">&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;</span>), <span class="hljs-string">&#x27;updated_at&#x27;</span>: datetime.datetime(<span class="hljs-number">2024</span>, <span class="hljs-number">11</span>, <span class="hljs-number">21</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">1</span>, <span class="hljs-number">211808</span>, tzinfo=datetime.timezone.utc), <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;natural language processing&#x27;</span>, <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;An interdisciplinary subfield of computer science and information retrieval.&#x27;</span>}, {<span class="hljs-string">&#x27;relationship_name&#x27;</span>: <span class="hljs-string">&#x27;is_a_subfield_of&#x27;</span>, <span class="hljs-string">&#x27;source_node_id&#x27;</span>: UUID(<span class="hljs-string">&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;</span>), <span class="hljs-string">&#x27;target_node_id&#x27;</span>: UUID(<span class="hljs-string">&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;</span>), <span class="hljs-string">&#x27;updated_at&#x27;</span>: datetime.datetime(<span class="hljs-number">2024</span>, <span class="hljs-number">11</span>, <span class="hljs-number">21</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">15</span>, <span class="hljs-number">473137</span>, tzinfo=datetime.timezone.utc)}, {<span class="hljs-string">&#x27;id&#x27;</span>: UUID(<span class="hljs-string">&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;</span>), <span class="hljs-string">&#x27;updated_at&#x27;</span>: datetime.datetime(<span class="hljs-number">2024</span>, <span class="hljs-number">11</span>, <span class="hljs-number">21</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">1</span>, <span class="hljs-number">211808</span>, tzinfo=datetime.timezone.utc), <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;computer science&#x27;</span>, <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;The study of computation and information processing.&#x27;</span>})
-# (...)
-#
-# It represents nodes and relationships in the knowledge graph:
-# - The first element is the source node (e.g., <span class="hljs-string">&#x27;natural language processing&#x27;</span>).
-# - The second element is the relationship between nodes (e.g., <span class="hljs-string">&#x27;is_a_subfield_of&#x27;</span>).
-# - The third element is the target node (e.g., <span class="hljs-string">&#x27;computer science&#x27;</span>).
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># ({&#x27;id&#x27;: UUID(&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;), &#x27;updated_at&#x27;: datetime.datetime(2024, 11, 21, 12, 23, 1, 211808, tzinfo=datetime.timezone.utc), &#x27;name&#x27;: &#x27;natural language processing&#x27;, &#x27;description&#x27;: &#x27;An interdisciplinary subfield of computer science and information retrieval.&#x27;}, {&#x27;relationship_name&#x27;: &#x27;is_a_subfield_of&#x27;, &#x27;source_node_id&#x27;: UUID(&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;), &#x27;target_node_id&#x27;: UUID(&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;), &#x27;updated_at&#x27;: datetime.datetime(2024, 11, 21, 12, 23, 15, 473137, tzinfo=datetime.timezone.utc)}, {&#x27;id&#x27;: UUID(&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;), &#x27;updated_at&#x27;: datetime.datetime(2024, 11, 21, 12, 23, 1, 211808, tzinfo=datetime.timezone.utc), &#x27;name&#x27;: &#x27;computer science&#x27;, &#x27;description&#x27;: &#x27;The study of computation and information processing.&#x27;})</span>
+<span class="hljs-comment"># (...)</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># It represents nodes and relationships in the knowledge graph:</span>
+<span class="hljs-comment"># - The first element is the source node (e.g., &#x27;natural language processing&#x27;).</span>
+<span class="hljs-comment"># - The second element is the relationship between nodes (e.g., &#x27;is_a_subfield_of&#x27;).</span>
+<span class="hljs-comment"># - The third element is the target node (e.g., &#x27;computer science&#x27;).</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Этот вывод представляет собой результаты запроса к графу знаний, показывая сущности (узлы) и их взаимосвязи (ребра), извлеченные из обработанного набора данных. Каждый кортеж включает исходную сущность, тип связи и целевую сущность, а также метаданные, такие как уникальные идентификаторы, описания и временные метки. Граф выделяет ключевые понятия и их семантические связи, обеспечивая структурированное понимание набора данных.</p>
+<p>Этот вывод представляет собой результаты запроса к графу знаний, показывая сущности (узлы) и их взаимосвязи (ребра), извлеченные из обработанного набора данных. Каждый кортеж включает в себя исходную сущность, тип связи и целевую сущность, а также метаданные, такие как уникальные идентификаторы, описания и временные метки. Граф выделяет ключевые понятия и их семантические связи, обеспечивая структурированное понимание набора данных.</p>
 <p>Поздравляем, вы узнали о базовом использовании cognee с Milvus. Если вы хотите узнать о более продвинутом использовании cognee, пожалуйста, обратитесь к его официальной <a href="https://github.com/topoteretes/cognee">странице</a>.</p>

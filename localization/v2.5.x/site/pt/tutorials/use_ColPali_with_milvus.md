@@ -8,10 +8,10 @@ summary: >-
   utilizar o ColPali para recuperar páginas com base numa determinada consulta.
 title: Use ColPali para recuperação multimodal com Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Use ColPali para recuperação multimodal com Milvus<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
@@ -37,7 +37,7 @@ title: Use ColPali para recuperação multimodal com Milvus
   </span>
 </p>
 <p>A função MaxSim compara uma consulta com um documento (o que está a ser pesquisado) através da análise dos seus token embeddings. Para cada palavra na consulta, seleciona a palavra mais semelhante do documento (utilizando a semelhança de cosseno ou a distância L2 ao quadrado) e soma estas semelhanças máximas entre todas as palavras na consulta</p>
-<p>O ColPali é um método que combina a representação multi-vetorial do ColBERT com o PaliGemma (um modelo de linguagem multimodal de grande dimensão) para tirar partido das suas fortes capacidades de compreensão. Esta abordagem permite que uma página com texto e imagens seja representada utilizando uma incorporação multi-vetorial unificada. As incorporações dentro desta representação multi-vetorial podem capturar informações detalhadas, melhorando o desempenho da geração aumentada de recuperação (RAG) para dados multimodais.</p>
+<p>O ColPali é um método que combina a representação multi-vetorial do ColBERT com o PaliGemma (um modelo de linguagem multimodal de grande dimensão) para tirar partido das suas fortes capacidades de compreensão. Esta abordagem permite que uma página com texto e imagens seja representada utilizando uma incorporação multi-vetorial unificada. As incorporações dentro desta representação multi-vetorial podem captar informações detalhadas, melhorando o desempenho da geração aumentada de recuperação (RAG) para dados multimodais.</p>
 <p>Neste caderno, referimo-nos a este tipo de representação multi-vetorial como "ColBERT embeddings" por uma questão de generalidade. No entanto, o modelo real que está a ser utilizado é o <strong>modelo ColPali</strong>. Vamos demonstrar como utilizar o Milvus para a recuperação multi-vetorial. Com base nisso, apresentaremos como utilizar o ColPali para recuperar páginas com base numa determinada consulta.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"

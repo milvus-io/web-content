@@ -9,10 +9,10 @@ summary: >-
   с помощью встроенных в LlamaIndex фильтров метаданных и применять собственные
   выражения фильтрации Milvus к векторному хранилищу.
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Metadata-Filtering-with-LlamaIndex-and-Milvus" class="common-anchor-header">Фильтрация метаданных с помощью LlamaIndex и Milvus<button data-href="#Metadata-Filtering-with-LlamaIndex-and-Milvus" class="anchor-icon" translate="no">
@@ -181,7 +181,7 @@ result_nodes = retriever.retrieve(<span class="hljs-string">&quot;Books about li
 Life
 {'author': 'Keith Richards', 'genre': 'Memoir', 'year': 2010}
 </code></pre>
-<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">Несколько фильтров метаданных</h3><p>Вы также можете комбинировать несколько фильтров метаданных для создания более сложных запросов. LlamaIndex поддерживает условия <code translate="no">AND</code> и <code translate="no">OR</code> для объединения фильтров. Это позволяет более точно и гибко находить документы на основе их метаданных.</p>
+<h3 id="Multiple-Metdata-Filters" class="common-anchor-header">Несколько фильтров метаданных</h3><p>Вы также можете комбинировать несколько фильтров метаданных для создания более сложных запросов. LlamaIndex поддерживает условия <code translate="no">AND</code> и <code translate="no">OR</code> для объединения фильтров. Это позволяет более точно и гибко находить документы на основе их атрибутов метаданных.</p>
 <p><strong>Условие <code translate="no">AND</code></strong></p>
 <p>Попробуйте в качестве примера отфильтровать книги, опубликованные в период с 1979 по 2010 год (в частности, если 1979 &lt; год ≤ 2010):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> FilterCondition

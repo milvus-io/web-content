@@ -120,7 +120,7 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Segue-se uma demonstração simples que mostra como utilizar o Milvus Lite para pesquisa de texto. Existem <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">exemplos</a> mais abrangentes para usar o Milvus Lite para construir aplicações como <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>, <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb">pesquisa de imagens</a>, e usar o Milvus Lite em estruturas RAG populares como <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a> e <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a>!</p>
+    </button></h2><p>Segue-se uma demonstração simples que mostra como utilizar o Milvus Lite para pesquisa de texto. Existem <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">exemplos</a> mais abrangentes para usar o Milvus Lite para construir aplicações como <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>, <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb">pesquisa de imagens</a>, e usar o Milvus Lite em estruturas RAG populares como <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a> e <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a>!</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -244,7 +244,7 @@ res = client.delete(
 </table>
 <h3 id="Insert--Search" class="common-anchor-header">Inserir e pesquisar</h3><table>
 <thead>
-<tr><th>Método / Parâmetro</th><th>Suportado em Milvus Lite</th></tr>
+<tr><th>Método / Parâmetro</th><th>Suportado no Milvus Lite</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a></td><td>Suporte com parâmetros limitados</td></tr>
@@ -319,7 +319,7 @@ res = client.delete(
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">index_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a></td><td>A descrição dos índices é suportada.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a></td><td>A descrição de índices é suportada.</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">index_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
@@ -327,7 +327,7 @@ res = client.delete(
 </table>
 <h3 id="Vector-Index-Types" class="common-anchor-header">Tipos de índices vectoriais</h3><p>O Milvus Lite suporta apenas o tipo de índice <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Utiliza o tipo FLAT independentemente do tipo de índice especificado na coleção.</p>
 <h3 id="Search-Features" class="common-anchor-header">Recursos de pesquisa</h3><p>Milvus Lite suporta Vetor Esparso, Multi-vetor, Busca Híbrida.</p>
-<h3 id="Partition" class="common-anchor-header">Partição</h3><p>Milvus Lite não suporta partições e métodos relacionados a partições.</p>
+<h3 id="Partition" class="common-anchor-header">Partição</h3><p>O Milvus Lite não suporta partições e métodos relacionados a partições.</p>
 <h3 id="Users--Roles" class="common-anchor-header">Utilizadores e Funções</h3><p>Milvus Lite não suporta usuários e funções e métodos relacionados.</p>
 <h3 id="Alias" class="common-anchor-header">Alias</h3><p>O Milvus Lite não suporta aliases e métodos relacionados a aliases.</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Migrando dados do Milvus Lite<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
@@ -369,7 +369,7 @@ optional arguments:
 <span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
 <span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Com o ficheiro dump, pode carregar dados para o Zilliz Cloud via <a href="https://docs.zilliz.com/docs/data-import">Data Import</a>, ou carregar dados para os servidores Milvus via <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a>.</p>
+<p>Com o ficheiro dump, pode carregar os dados para o Zilliz Cloud via <a href="https://docs.zilliz.com/docs/data-import">Data Import</a>, ou carregar os dados para os servidores Milvus via <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a>.</p>
 <h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -7,10 +7,10 @@ summary: >-
   전체 텍스트 검색을 모두 통해 문서를 검색한 다음, 재랭크 프로세스를 통해 결과를 구체화하는 것입니다.
 title: Milvus로 전체 텍스트 검색
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Milvus로 전체 텍스트 검색<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">

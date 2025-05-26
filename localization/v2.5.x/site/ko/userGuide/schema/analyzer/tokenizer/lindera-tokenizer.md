@@ -36,7 +36,7 @@ summary: '린데라 토큰화기는 사전 기반의 형태소 분석을 수행�
       </svg>
     </button></h2><p><code translate="no">lindera</code> 토큰화기를 사용하여 분석기를 구성하려면 <code translate="no">tokenizer.type</code> 을 <code translate="no">lindera</code> 으로 설정하고 <code translate="no">dict_kind</code> 로 사전을 선택합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#plaintext">일반 텍스트</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
@@ -44,16 +44,16 @@ summary: '린데라 토큰화기는 사전 기반의 형태소 분석을 수행�
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
-analyzerParams.put(&quot;tokenizer&quot;,
-                new HashMap&lt;String, Object&gt;() {{
-                    put(&quot;type&quot;, &quot;lindera&quot;);
-                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;lindera&quot;</span>);
+                    put(<span class="hljs-string">&quot;dict_kind&quot;</span>, <span class="hljs-string">&quot;ipadic&quot;</span>);
                 }});
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>매개변수</p></th>
+     <th><p>파라미터</p></th>
      <th><p>설명</p></th>
    </tr>
    <tr>
@@ -88,7 +88,7 @@ analyzerParams.put(&quot;tokenizer&quot;,
       </svg>
     </button></h2><p>분석기 구성을 컬렉션 스키마에 적용하기 전에 <code translate="no">run_analyzer</code> 메서드를 사용하여 그 동작을 확인하세요.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">분석기 구성</h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#plaintext">일반 텍스트</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
@@ -96,11 +96,11 @@ analyzerParams.put(&quot;tokenizer&quot;,
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
-analyzerParams.put(&quot;tokenizer&quot;,
-                new HashMap&lt;String, Object&gt;() {{
-                    put(&quot;type&quot;, &quot;lindera&quot;);
-                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;lindera&quot;</span>);
+                    put(<span class="hljs-string">&quot;dict_kind&quot;</span>, <span class="hljs-string">&quot;ipadic&quot;</span>);
                 }});
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Verification-using-runanalyzer" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code></h3><div class="multipleCode">

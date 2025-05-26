@@ -18,8 +18,8 @@ summary: 本頁討論向量資料庫與 VoyageAI 的嵌入式 API 的整合。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南展示了如何將<a href="https://docs.voyageai.com/docs/embeddings">VoyageAI 的 Embedding API</a>與 Milvus 向量資料庫搭配使用，在文字上進行語意搜尋。</p>
 <h2 id="Getting-started" class="common-anchor-header">開始使用<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,12 +37,12 @@ summary: 本頁討論向量資料庫與 VoyageAI 的嵌入式 API 的整合。
         ></path>
       </svg>
     </button></h2><p>在開始之前，請確認您已準備好 Voyage API 金鑰，或者您可以從<a href="https://dash.voyageai.com/api-keys">VoyageAI 網站</a>取得一個。</p>
-<p>本範例使用的資料是書名。您可以<a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">在此</a>下載資料集，並將其放在執行下列程式碼的同一個目錄中。</p>
+<p>本範例使用的資料是書名。您可以<a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">在這裡</a>下載資料集，並將其放在執行下列程式碼的同一個目錄中。</p>
 <p>首先，安裝 Milvus 和 Voyage AI 的套件：</p>
 <pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的依賴項目，您可能需要<strong>重新啟動運行時間</strong>。(點選螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時間</strong>。(點選螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <p>有了這些，我們就可以產生 embeddings 並使用向量資料庫來進行語意搜尋了。</p>
 <h2 id="Searching-book-titles-with-VoyageAI--Milvus" class="common-anchor-header">使用 VoyageAI 和 Milvus 搜尋書名<button data-href="#Searching-book-titles-with-VoyageAI--Milvus" class="anchor-icon" translate="no">

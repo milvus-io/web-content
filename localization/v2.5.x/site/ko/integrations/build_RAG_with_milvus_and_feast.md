@@ -21,10 +21,10 @@ title: Milvus와 Feast로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>이 튜토리얼에서는 <a href="https://github.com/feast-dev/feast">Feast와</a> <a href="https://milvus.io/">Milvus를</a> 사용해 검색 증강 생성(RAG) 파이프라인을 구축합니다. Feast는 머신 러닝을 위한 기능 관리를 간소화하는 오픈 소스 기능 저장소로, 학습과 실시간 추론 모두를 위해 구조화된 데이터를 효율적으로 저장하고 검색할 수 있게 해줍니다. Milvus는 빠른 유사성 검색을 위해 설계된 고성능 벡터 데이터베이스로, RAG 워크플로우에서 관련 문서를 검색하는 데 이상적입니다.</p>
@@ -44,7 +44,7 @@ title: Milvus와 Feast로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Feast는 이 흐름에서 몇 가지 일반적인 문제를 해결합니다:</p>
+    </button></h1><p>Feast는 이러한 흐름에서 몇 가지 일반적인 문제를 해결합니다:</p>
 <ol>
 <li><strong>온라인 검색:</strong> 추론 시점에 LLM은 쉽게 사용할 수 없고 다른 데이터 소스에서 미리 계산해야 하는 데이터에 액세스해야 하는 경우가 많습니다.<ul>
 <li>Feast는 다양한 온라인 스토어(예: Milvus, DynamoDB, Redis, Google Cloud Datastore)에 대한 배포를 관리하고 추론 시점에 필요한 기능을 일관되게 <em>사용할 수</em> 있고 <em>새로 계산되도록</em> 보장합니다.</li>

@@ -3,10 +3,10 @@ id: full_text_search_with_milvus_and_haystack.md
 summary: 本教學示範如何使用 Haystack 和 Milvus 在應用程式中實作全文和混合搜尋。
 title: 使用 Milvus 和 Haystack 進行全文檢索
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-text-search-with-Milvus-and-Haystack" class="common-anchor-header">使用 Milvus 和 Haystack 進行全文檢索<button data-href="#Full-text-search-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
@@ -244,7 +244,7 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>分析器是全文檢索中不可或缺的工具，它可將句子分割成字元，並執行詞彙分析，例如刪除詞幹和停止詞。分析器通常是特定語言的。您可以參考<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">本指南</a>以瞭解更多關於 Milvus 分析器的資訊。</p>
+    </button></h2><p>分析器是全文檢索中不可或缺的工具，它可將句子分割成字元，並執行詞彙分析，例如刪除字莖和停止詞。分析器通常是特定語言的。您可以參考<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">本指南</a>以瞭解更多關於 Milvus 分析器的資訊。</p>
 <p>Milvus 支援兩種類型的分析器：<strong>內建分析器</strong>和<strong>自訂分析器</strong>。在預設情況下，<code translate="no">BM25BuiltInFunction</code> 會使用<a href="https://milvus.io/docs/standard-analyzer.md">標準的內建分析器</a>，這是最基本的分析器，會用標點符號來標記文字。</p>
 <p>如果您想使用不同的分析器或自訂分析器，可以在<code translate="no">BM25BuiltInFunction</code> 初始化時傳入<code translate="no">analyzer_params</code> 參數。</p>
 <pre><code translate="no" class="language-python">analyzer_params_custom = {
@@ -315,7 +315,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     </button></h2><p>我們已學會如何在 Haystack 和 Milvus 中使用基本的 BM25 內建函式，並準備了載入的<code translate="no">document_store</code> 。讓我們介紹使用混合搜尋的最佳化 RAG 實作。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

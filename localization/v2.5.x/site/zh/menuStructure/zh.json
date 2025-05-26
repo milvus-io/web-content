@@ -1249,7 +1249,7 @@
             ]
           },
           {
-            "label": "将 Pulsa 与 Milvus 搭配使用",
+            "label": "将 Pulsar 与 Milvus 配合使用",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,

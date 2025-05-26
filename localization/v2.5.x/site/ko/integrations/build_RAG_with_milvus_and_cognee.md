@@ -3,16 +3,16 @@ id: build_RAG_with_milvus_and_cognee.md
 summary: 이 튜토리얼에서는 Milvus와 Cognee를 사용하여 RAG(검색 증강 생성) 파이프라인을 구축하는 방법을 보여드리겠습니다.
 title: 밀버스 및 코그니로 RAG 구축하기
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h3 id="Build-RAG-with-Milvus-and-Cognee" class="common-anchor-header">Milvus와 Cognee로 RAG 구축하기</h3><p><a href="https://www.cognee.ai">Cognee는</a> 확장 가능한 모듈식 ECL(추출, 인지, 로드) 파이프라인을 통해 AI 애플리케이션 개발을 간소화하는 개발자 우선 플랫폼입니다. Milvus와 원활하게 통합되어 대화, 문서, 트랜스크립션의 효율적인 연결과 검색을 지원하는 Cognee는 착각을 줄이고 운영 비용을 최적화합니다.</p>
+<h3 id="Build-RAG-with-Milvus-and-Cognee" class="common-anchor-header">Milvus와 Cognee로 RAG 구축하기</h3><p><a href="https://www.cognee.ai">Cognee는</a> 확장 가능한 모듈식 ECL(추출, 인지, 로드) 파이프라인을 통해 AI 애플리케이션 개발을 간소화하는 개발자 우선 플랫폼입니다. Milvus와 원활하게 통합되어 대화, 문서, 트랜스크립션을 효율적으로 연결하고 검색할 수 있는 Cognee는 착각을 줄이고 운영 비용을 최적화합니다.</p>
 <p>Milvus와 같은 벡터 저장소, 그래프 데이터베이스, LLM을 강력하게 지원하는 Cognee는 검색 증강 생성(RAG) 시스템 구축을 위한 유연하고 사용자 정의 가능한 프레임워크를 제공합니다. 프로덕션에 바로 사용할 수 있는 아키텍처는 AI 기반 애플리케이션의 정확성과 효율성을 향상시킵니다.</p>
 <p>이 튜토리얼에서는 Milvus 및 Cognee를 사용하여 검색 증강 세대(RAG) 파이프라인을 구축하는 방법을 보여드립니다.</p>
-<pre><code translate="no" class="language-shell">$ pip install pymilvus git+<span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/topoteretes/cognee.git</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus git+https://github.com/topoteretes/cognee.git</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
@@ -23,11 +23,11 @@ title: 밀버스 및 코그니로 RAG 구축하기
 
 <span class="hljs-keyword">import</span> cognee
 
-cognee.<span class="hljs-property">config</span>.<span class="hljs-title function_">set_llm_api_key</span>(<span class="hljs-string">&quot;YOUR_OPENAI_API_KEY&quot;</span>)
+cognee.config.set_llm_api_key(<span class="hljs-string">&quot;YOUR_OPENAI_API_KEY&quot;</span>)
 
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;VECTOR_DB_PROVIDER&quot;</span>] = <span class="hljs-string">&quot;milvus&quot;</span>
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;VECTOR_DB_URL&quot;</span>] = <span class="hljs-string">&quot;./milvus.db&quot;</span>
+os.environ[<span class="hljs-string">&quot;VECTOR_DB_PROVIDER&quot;</span>] = <span class="hljs-string">&quot;milvus&quot;</span>
+os.environ[<span class="hljs-string">&quot;VECTOR_DB_URL&quot;</span>] = <span class="hljs-string">&quot;./milvus.db&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>환경 변수는 <code translate="no">VECTOR_DB_URL</code> 와 <code translate="no">VECTOR_DB_KEY</code> 입니다:</p>
@@ -39,10 +39,10 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;VE
 <p></a></p>
 <h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비</h3><p><a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 문서 2.4.x의</a> FAQ 페이지를 RAG의 비공개 지식으로 사용하며, 이는 간단한 RAG 파이프라인을 위한 좋은 데이터 소스입니다.</p>
 <p>zip 파일을 다운로드하고 문서를 <code translate="no">milvus_docs</code> 폴더에 압축을 풉니다.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
-$ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">milvus_docs/en/faq</code> 폴더에서 모든 마크다운 파일을 로드합니다. 각 문서에 대해 &quot;#&quot;를 사용하여 파일의 내용을 구분하기만 하면 마크다운 파일의 각 주요 부분의 내용을 대략적으로 구분할 수 있습니다.</p>
+<p><code translate="no">milvus_docs/en/faq</code> 폴더에서 모든 마크다운 파일을 로드합니다. 각 문서에 대해 "#"를 사용하여 파일의 내용을 구분하기만 하면 마크다운 파일의 각 주요 부분의 내용을 대략적으로 구분할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -91,10 +91,10 @@ search_results = <span class="hljs-keyword">await</span> cognee.search(SearchTyp
 </code></pre>
 <p>이 쿼리는 지식 그래프에서 쿼리 텍스트와 관련된 요약을 검색하고 가장 관련성이 높은 후보가 인쇄됩니다.</p>
 <h3 id="Querying-for-Chunks" class="common-anchor-header">청크 쿼리하기</h3><p>요약은 개괄적인 인사이트를 제공하지만, 더 세분화된 세부 정보를 얻으려면 처리된 데이터 세트에서 직접 특정 데이터 청크를 쿼리할 수 있습니다. 이러한 청크는 지식 그래프를 만드는 동안 추가되고 분석된 원본 데이터에서 파생됩니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.<span class="hljs-property">api</span>.<span class="hljs-property">v1</span>.<span class="hljs-property">search</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">SearchType</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.api.v1.search <span class="hljs-keyword">import</span> SearchType
 
 query_text = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
-search_results = <span class="hljs-keyword">await</span> cognee.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchType</span>.<span class="hljs-property">CHUNKS</span>, query_text=query_text)
+search_results = <span class="hljs-keyword">await</span> cognee.search(SearchType.CHUNKS, query_text=query_text)
 <button class="copy-code-btn"></button></code></pre>
 <p>가독성을 높이기 위해 서식을 지정하고 표시해 보겠습니다!</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_and_print</span>(<span class="hljs-params">data</span>):
@@ -139,19 +139,19 @@ text = <span class="hljs-string">&quot;&quot;&quot;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Querying-for-Insights" class="common-anchor-header">인사이트 쿼리하기</h3><p>이 작은 데이터 세트에 집중함으로써 이제 지식 그래프 내의 관계와 구조를 명확하게 분석할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;Tell me about NLP&quot;</span>
-search_results = await cognee.search(SearchType.INSIGHTS, query_text=query_text)
+search_results = <span class="hljs-keyword">await</span> cognee.search(SearchType.INSIGHTS, query_text=query_text)
 
-<span class="hljs-keyword">for</span> result_text in search_results:
+<span class="hljs-keyword">for</span> result_text <span class="hljs-keyword">in</span> search_results:
     <span class="hljs-built_in">print</span>(result_text)
 
-# Example output:
-# ({<span class="hljs-string">&#x27;id&#x27;</span>: UUID(<span class="hljs-string">&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;</span>), <span class="hljs-string">&#x27;updated_at&#x27;</span>: datetime.datetime(<span class="hljs-number">2024</span>, <span class="hljs-number">11</span>, <span class="hljs-number">21</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">1</span>, <span class="hljs-number">211808</span>, tzinfo=datetime.timezone.utc), <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;natural language processing&#x27;</span>, <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;An interdisciplinary subfield of computer science and information retrieval.&#x27;</span>}, {<span class="hljs-string">&#x27;relationship_name&#x27;</span>: <span class="hljs-string">&#x27;is_a_subfield_of&#x27;</span>, <span class="hljs-string">&#x27;source_node_id&#x27;</span>: UUID(<span class="hljs-string">&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;</span>), <span class="hljs-string">&#x27;target_node_id&#x27;</span>: UUID(<span class="hljs-string">&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;</span>), <span class="hljs-string">&#x27;updated_at&#x27;</span>: datetime.datetime(<span class="hljs-number">2024</span>, <span class="hljs-number">11</span>, <span class="hljs-number">21</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">15</span>, <span class="hljs-number">473137</span>, tzinfo=datetime.timezone.utc)}, {<span class="hljs-string">&#x27;id&#x27;</span>: UUID(<span class="hljs-string">&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;</span>), <span class="hljs-string">&#x27;updated_at&#x27;</span>: datetime.datetime(<span class="hljs-number">2024</span>, <span class="hljs-number">11</span>, <span class="hljs-number">21</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">1</span>, <span class="hljs-number">211808</span>, tzinfo=datetime.timezone.utc), <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;computer science&#x27;</span>, <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;The study of computation and information processing.&#x27;</span>})
-# (...)
-#
-# It represents nodes and relationships in the knowledge graph:
-# - The first element is the source node (e.g., <span class="hljs-string">&#x27;natural language processing&#x27;</span>).
-# - The second element is the relationship between nodes (e.g., <span class="hljs-string">&#x27;is_a_subfield_of&#x27;</span>).
-# - The third element is the target node (e.g., <span class="hljs-string">&#x27;computer science&#x27;</span>).
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># ({&#x27;id&#x27;: UUID(&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;), &#x27;updated_at&#x27;: datetime.datetime(2024, 11, 21, 12, 23, 1, 211808, tzinfo=datetime.timezone.utc), &#x27;name&#x27;: &#x27;natural language processing&#x27;, &#x27;description&#x27;: &#x27;An interdisciplinary subfield of computer science and information retrieval.&#x27;}, {&#x27;relationship_name&#x27;: &#x27;is_a_subfield_of&#x27;, &#x27;source_node_id&#x27;: UUID(&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;), &#x27;target_node_id&#x27;: UUID(&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;), &#x27;updated_at&#x27;: datetime.datetime(2024, 11, 21, 12, 23, 15, 473137, tzinfo=datetime.timezone.utc)}, {&#x27;id&#x27;: UUID(&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;), &#x27;updated_at&#x27;: datetime.datetime(2024, 11, 21, 12, 23, 1, 211808, tzinfo=datetime.timezone.utc), &#x27;name&#x27;: &#x27;computer science&#x27;, &#x27;description&#x27;: &#x27;The study of computation and information processing.&#x27;})</span>
+<span class="hljs-comment"># (...)</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># It represents nodes and relationships in the knowledge graph:</span>
+<span class="hljs-comment"># - The first element is the source node (e.g., &#x27;natural language processing&#x27;).</span>
+<span class="hljs-comment"># - The second element is the relationship between nodes (e.g., &#x27;is_a_subfield_of&#x27;).</span>
+<span class="hljs-comment"># - The third element is the target node (e.g., &#x27;computer science&#x27;).</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이 출력은 지식 그래프 쿼리의 결과를 나타내며, 처리된 데이터 세트에서 추출된 엔티티(노드)와 그 관계(에지)를 보여줍니다. 각 튜플에는 소스 엔터티, 관계 유형, 대상 엔터티와 함께 고유 ID, 설명, 타임스탬프와 같은 메타데이터가 포함됩니다. 그래프는 주요 개념과 그 의미론적 연결을 강조하여 데이터 집합을 구조적으로 이해할 수 있도록 해줍니다.</p>
 <p>Milvus를 통해 코그니의 기본 사용법을 배웠습니다. 코그니의 고급 사용법을 더 알고 싶으시다면 공식 <a href="https://github.com/topoteretes/cognee">페이지</a> 를 참조하세요.</p>

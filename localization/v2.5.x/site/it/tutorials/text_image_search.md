@@ -8,10 +8,10 @@ summary: >-
   somiglianza.
 title: Ricerca da testo a immagine con Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">Ricerca da testo a immagine con Milvus<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
@@ -30,7 +30,7 @@ title: Ricerca da testo a immagine con Milvus
         ></path>
       </svg>
     </button></h1><p>La ricerca da testo a immagine è una tecnologia avanzata che consente agli utenti di cercare immagini utilizzando descrizioni testuali in linguaggio naturale. Sfrutta un modello multimodale preaddestrato per convertire sia il testo che le immagini in incorporazioni in uno spazio semantico condiviso, consentendo confronti basati sulla somiglianza.</p>
-<p>In questa esercitazione esploreremo come implementare il recupero di immagini basato sul testo utilizzando il modello CLIP (Contrastive Language-Image Pretraining) di OpenAI e Milvus. Genereremo embeddings di immagini con CLIP, li memorizzeremo in Milvus ed eseguiremo ricerche di similarità efficienti.</p>
+<p>In questa esercitazione esploreremo come implementare il recupero di immagini basato sul testo utilizzando il modello CLIP (Contrastive Language-Image Pretraining) di OpenAI e Milvus. Genereremo le incorporazioni delle immagini con CLIP, le memorizzeremo in Milvus ed eseguiremo ricerche di similarità efficienti.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

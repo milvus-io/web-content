@@ -1249,7 +1249,7 @@
             ]
           },
           {
-            "label": "밀버스와 함께 펄사 사용",
+            "label": "밀버스와 함께 펄서 사용",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,

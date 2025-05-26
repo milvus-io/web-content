@@ -5,10 +5,10 @@ summary: >-
   Generation）パイプラインを構築する方法を紹介する。与えられたクエリに基づいてテキストを生成するためにGeminiモデルを使用します。また、Milvusを使用して、生成されたテキストの保存と取得を行う。
 title: MilvusとGeminiでRAGを構築する
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-RAG-with-Milvus-and-Gemini" class="common-anchor-header">MilvusとGeminiでRAGを構築する<button data-href="#Build-RAG-with-Milvus-and-Gemini" class="anchor-icon" translate="no">
@@ -26,7 +26,7 @@ title: MilvusとGeminiでRAGを構築する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini APIと</a> <a href="https://ai.google.dev/aistudio">Google AI Studioを</a>使えば、Googleの最新モデルを使って作業を開始し、あなたのアイデアをスケールの大きなアプリケーションにすることができます。Geminiは、テキスト生成、文書処理、視覚、音声分析などのタスクのために、<code translate="no">Gemini-2.0-Flash</code> 、<code translate="no">Gemini-2.0-Pro</code> 、その他のバージョンのような強力な言語モデルへのアクセスを提供します。APIを利用することで、何百万ものトークンを含む長いコンテキストを入力したり、特定のタスクのためにモデルを微調整したり、JSONのような構造化された出力を生成したり、セマンティック検索やコード実行のような機能を活用したりすることができる。</p>
+    </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini APIと</a> <a href="https://ai.google.dev/aistudio">Google AI Studioを</a>使えば、Googleの最新モデルを使って作業を開始し、あなたのアイデアをスケールの大きなアプリケーションにすることができます。Geminiは、テキスト生成、文書処理、視覚、音声分析などのタスクのために、<code translate="no">Gemini-2.0-Flash</code> 、<code translate="no">Gemini-2.0-Pro</code> 、その他のバージョンのような強力な言語モデルへのアクセスを提供します。APIを使用することで、何百万ものトークンを含む長いコンテキストを入力したり、特定のタスクのためにモデルを微調整したり、JSONのような構造化された出力を生成したり、セマンティック検索やコード実行のような機能を活用したりすることができる。</p>
 <p>このチュートリアルでは、MilvusとGeminiを使ってRAG（Retrieval-Augmented Generation）パイプラインを構築する方法を紹介する。Geminiモデルを使用して、Milvusから取得した関連情報を追加した、与えられたクエリに基づいたレスポンスを生成します。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ title: MilvusとGeminiでRAGを構築する
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動する</strong>必要があるかもしれない（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択する）。</p>
 </div>
-<p>まずGoogle AI Studioプラットフォームにログインし、環境変数として<a href="https://aistudio.google.com/apikey">api key</a> <code translate="no">GEMINI_API_KEY</code> 。</p>
+<p>まずGoogle AI Studioプラットフォームにログインし、<a href="https://aistudio.google.com/apikey">api key</a> <code translate="no">GEMINI_API_KEY</code> を環境変数として用意します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
@@ -121,8 +121,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <p>引数<code translate="no">MilvusClient</code> ：</p>
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法である。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
 <p>コレクションが既に存在するか確認し、存在する場合は削除します。</p>
@@ -139,7 +139,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>テキスト行を繰り返し、エンベッディングを作成し、milvusにデータを挿入します。</p>
-<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマで定義されていないフィールドです。これは、予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱うことができます。</p>
+<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマで定義されていないフィールドです。これは予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱うことができる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []

@@ -1249,7 +1249,7 @@
             ]
           },
           {
-            "label": "パルサとmilvusの併用",
+            "label": "Milvusでパルサーを使う",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,

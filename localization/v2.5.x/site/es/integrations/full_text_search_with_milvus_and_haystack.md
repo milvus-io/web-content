@@ -5,10 +5,10 @@ summary: >-
   en su aplicación utilizando Haystack y Milvus.
 title: Búsqueda de texto completo con Milvus y Haystack
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-text-search-with-Milvus-and-Haystack" class="common-anchor-header">Búsqueda de texto completo con Milvus y Haystack<button data-href="#Full-text-search-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
@@ -33,7 +33,7 @@ title: Búsqueda de texto completo con Milvus y Haystack
 <p>Para utilizar el almacén vectorial Milvus, especifique su servidor Milvus <code translate="no">URI</code> (y opcionalmente con el <code translate="no">TOKEN</code>). Para iniciar un servidor Milvus, puede configurar un servidor Milvus siguiendo la <a href="https://milvus.io/docs/install-overview.md">guía de instalación de Milvus</a> o simplemente <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">probando Zilliz Cloud</a>(Milvus totalmente gestionado) de forma gratuita.</p>
 <div class="alert note">
 <ul>
-<li>La búsqueda de texto completo está disponible actualmente en Milvus Standalone, Milvus Distributed y Zilliz Cloud, aunque todavía no está soportada en Milvus Lite (que tiene esta característica prevista para una futura implementación). Póngase en contacto con support@zilliz.com para obtener más información.</li>
+<li>La búsqueda de texto completo está disponible actualmente en Milvus Standalone, Milvus Distributed y Zilliz Cloud, aunque todavía no es compatible con Milvus Lite (que tiene prevista esta función para una futura implementación). Póngase en contacto con support@zilliz.com para obtener más información.</li>
 <li>Antes de continuar con este tutorial, asegúrese de tener una comprensión básica de la <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">búsqueda de texto completo</a> y el <a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">uso básico</a> de la integración de Haystack Milvus.</li>
 </ul>
 </div>
@@ -85,7 +85,7 @@ documents = [
     Document(content=<span class="hljs-string">&quot;Charlie likes white dogs&quot;</span>, meta={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>La integración de la búsqueda de texto completo en un sistema RAG equilibra la búsqueda semántica con una recuperación precisa y predecible basada en palabras clave. También puede optar por utilizar únicamente la búsqueda de texto completo, aunque se recomienda combinarla con la búsqueda semántica para obtener mejores resultados. A modo de demostración, mostraremos aquí la búsqueda de texto completo sola y la búsqueda híbrida.</p>
+<p>La integración de la búsqueda de texto completo en un sistema RAG equilibra la búsqueda semántica con una recuperación precisa y predecible basada en palabras clave. También puede optar por utilizar sólo la búsqueda de texto completo, aunque se recomienda combinar la búsqueda de texto completo con la búsqueda semántica para obtener mejores resultados de búsqueda. A modo de demostración, mostraremos aquí la búsqueda de texto completo sola y la búsqueda híbrida.</p>
 <h2 id="BM25-search-without-embedding" class="common-anchor-header">BM25 búsqueda sin incrustación<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -317,7 +317,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     </button></h2><p>Hemos aprendido a utilizar la función básica BM25 incorporada en Haystack y Milvus y hemos preparado un <code translate="no">document_store</code> cargado. Vamos a introducir una implementación optimizada de RAG con búsqueda híbrida.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

@@ -5,10 +5,10 @@ summary: >-
   Castilloの論文をMilvusで編集したものです。
 title: MilvusによるHDBSCANクラスタリング
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">MilvusによるHDBSCANクラスタリング<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
@@ -26,7 +26,7 @@ title: MilvusによるHDBSCANクラスタリング
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>データはディープラーニングモデルを使って埋め込みに変換することができ、元のデータの意味のある表現を捉えることができる。教師なしクラスタリングアルゴリズムを適用することで、固有のパターンに基づいて類似のデータポイントをグループ化することができる。HDBSCAN(Hierarchical Density-Based Spatial Clustering of Applications with Noise)は、データ点の密度と距離を分析することで効率的にデータ点をグループ化する、広く使われているクラスタリングアルゴリズムである。様々な形や大きさのクラスタを発見するのに特に有用です。このノートブックでは、HDBSCANと高性能ベクトルデータベースMilvusを使って、埋め込みに基づいてデータ点を異なるグループにクラスタリングします。</p>
+    </button></h1><p>データはディープラーニングモデルを使って埋め込みに変換することができ、元のデータの意味のある表現を捉えることができる。教師なしクラスタリングアルゴリズムを適用することで、固有のパターンに基づいて類似のデータポイントをグループ化することができる。HDBSCAN(Hierarchical Density-Based Spatial Clustering of Applications with Noise)は、データ点の密度と距離を分析することで効率的にデータ点をグループ化する、広く使われているクラスタリングアルゴリズムである。様々な形や大きさのクラスタを発見するのに特に有用です。このノートブックでは、HDBSCANと高性能ベクトルデータベースMilvusを使って、データ点をその埋め込みに基づく明確なグループにクラスタリングします。</p>
 <p>HDBSCAN（Hierarchical Density-Based Spatial Clustering of Applications with Noise）は、埋め込み空間におけるデータ点間の距離計算に依存するクラスタリングアルゴリズムです。ディープラーニングモデルによって作成されたこれらの埋め込みは、高次元形式でデータを表現する。類似したデータ点をグループ化するために、HDBSCANはそれらの近接性と密度を決定するが、これらの距離を効率的に計算することは、特に大規模なデータセットでは困難な場合がある。</p>
 <p>高性能ベクトルデータベースであるMilvusは、埋め込みデータを格納しインデックスを付けることでこのプロセスを最適化し、類似ベクトルの高速検索を可能にします。HDBSCANとMilvusを併用することで、埋め込み空間における大規模データセットの効率的なクラスタリングが可能になります。</p>
 <p>このノートブックでは、BGE-M3埋め込みモデルを使ってニュースのヘッドラインデータセットから埋め込みを抽出し、Milvusを使って埋め込み間の距離を効率的に計算し、HDBSCANのクラスタリングを支援します。このノートブックは、<a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">Dylan Castilloの論文を</a>Milvusに翻案したものです。</p>
@@ -241,7 +241,7 @@ hdb = h.fit(dist_metric)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我々はすでにHDBSCANを使ってデータをクラスタ化し、各データポイントのラベルを得ることができた。しかし、いくつかの可視化技術を使えば、直感的な分析のためにクラスタの全体像を得ることができる。これからUMAPを使ってクラスタを可視化する。UMAPは、次元削減のために使用される効率的な手法であり、高次元データの構造を保持しながら、可視化やさらなる分析のために低次元空間に投影する。UMAPを用いることで、元の高次元データを2次元または3次元空間に可視化し、クラスターを明確に見ることができる。 ここでも、データ点を反復処理し、元データのIDとテキストを取得する。次に、plotyを用いて、これらのメタ情報を持つデータ点を図にプロットし、異なるクラスターを表すために異なる色を用いる。</p>
+    </button></h2><p>我々はすでにHDBSCANを使ってデータをクラスタ化し、各データポイントのラベルを得ることができた。しかし、いくつかの可視化技術を使えば、直感的な分析のためにクラスタの全体像を得ることができる。これからUMAPを使ってクラスタを可視化する。UMAPは、次元削減のために使用される効率的な手法であり、高次元データの構造を保持しながら、可視化やさらなる分析のために低次元空間に投影する。UMAPを用いることで、元の高次元データを2次元または3次元空間に可視化し、クラスターを明確に見ることができる。 ここでも、データ点を反復処理し、元データのidとテキストを取得する。次に、plotyを用いて、これらのメタ情報を持つデータ点を図にプロットし、異なるクラスターを表すために異なる色を用いる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> plotly.io <span class="hljs-keyword">as</span> pio
 
 pio.renderers.default = <span class="hljs-string">&quot;notebook&quot;</span>
@@ -280,6 +280,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/hdbscan_clustering_with_milvus.png?raw=true" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>イメージ</span> </span></p>
 <p>ここでは、データがうまくクラスタ化されていることを示し、点の上にカーソルを置くと、それらが表すテキストを確認することができます。このノートブックで、HDBSCANを使ってMilvusで埋め込みデータを効率的にクラスタリングする方法を学んでいただければと思います。大規模な言語モデルと組み合わせることで、大規模なデータ分析が可能になります。</p>

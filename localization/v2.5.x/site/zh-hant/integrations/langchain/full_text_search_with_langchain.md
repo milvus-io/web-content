@@ -18,14 +18,14 @@ title: 使用 LangChain 和 Milvus 進行全文檢索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文</a>檢索是一種透過匹配文字中特定關鍵字或短語來檢索文件的傳統方法。它會根據詞彙頻率等因素計算出的相關性分數對結果進行排序。語意搜尋更擅長於理解意義和上下文，而全文搜尋則擅長於精確的關鍵字匹配，因此是語意搜尋的有效補充。BM25 演算法廣泛用於全文檢索的排序，並在檢索增強世代 (Retrieval-Augmented Generation, RAG) 中扮演關鍵角色。</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>引進了使用 BM25 的原生全文搜尋功能。此方法可將文字轉換成代表 BM25 分數的稀疏向量。您只需輸入原始文字，Milvus 就會自動產生並儲存稀疏向量，不需要手動產生稀疏嵌入。</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>引入了使用 BM25 的原生全文搜尋功能。此方法可將文字轉換成代表 BM25 分數的稀疏向量。您只需輸入原始文字，Milvus 就會自動產生並儲存稀疏向量，不需要手動產生稀疏嵌入。</p>
 <p>LangChain 與 Milvus 的整合也引進了這項功能，簡化了將全文檢索融入 RAG 應用程式的過程。透過結合全文檢索與密集向量的語意檢索，您可以達成一種混合方法，同時利用密集內嵌的語意上下文與字詞比對的精確關鍵字相關性。這種整合可以增強搜尋系統的精確度、相關性和使用者體驗。</p>
 <p>本教學將介紹如何使用 LangChain 和 Milvus 在您的應用程式中實作全文搜尋。</p>
 <div class="alert note">
@@ -334,7 +334,7 @@ rag_chain = (
 
 <span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用特定的問題來呼叫 RAG 鏈，並擷取回應</p>
+<p>以特定的問題來啟動 RAG 鏈，並擷取回應</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
 res = rag_chain.invoke(query)
 res

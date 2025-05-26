@@ -3,10 +3,10 @@ id: mistral_ocr_with_milvus.md
 summary: このチュートリアルでは、MilvusとMistral OCRを使って文書理解システムを構築する方法を紹介します。
 title: Mistral OCRとmilvusを使った文書理解
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">Mistral OCRとmilvusを使った文書理解<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
@@ -656,4 +656,4 @@ Content: | Model | Answer |
 <li>テキストとベクトルの両方をMilvusに保存</li>
 <li>処理されたすべての文書に対してセマンティック検索を実行</li>
 </ol>
-<p>このアプローチにより、単純なキーワードマッチングを超えた強力な文書理解機能が実現し、ユーザーはテキストの完全一致ではなく、意味に基づいて情報を検索できるようになります。</p>
+<p>このアプローチにより、単純なキーワードマッチングを超えた強力な文書理解機能が実現し、ユーザーはテキストの完全一致ではなく、意味に基づいて情報を見つけることができます。</p>

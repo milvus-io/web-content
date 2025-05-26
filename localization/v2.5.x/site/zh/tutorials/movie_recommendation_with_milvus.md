@@ -21,13 +21,13 @@ title: 用 Milvus 推荐电影
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>在本笔记本中，我们将探讨如何使用 OpenAI 生成电影描述的 Embeddings，并在 Milvus 中利用这些 Embeddings 来推荐符合您偏好的电影。为了增强搜索结果，我们将利用过滤功能来执行元数据搜索。本示例中使用的数据集来自 HuggingFace 数据集，包含 8000 多个电影条目，为电影推荐提供了丰富的选择。</p>
+<p>在本笔记本中，我们将探讨如何使用 OpenAI 生成电影描述的 Embeddings，并在 Milvus 中利用这些嵌入式描述来推荐符合您偏好的电影。为了增强搜索结果，我们将利用过滤功能来执行元数据搜索。本示例中使用的数据集来自 HuggingFace 数据集，包含 8000 多个电影条目，为电影推荐提供了丰富的选择。</p>
 <h2 id="Dependencies-and-Environment" class="common-anchor-header">依赖项和环境<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,7 +52,7 @@ title: 用 Milvus 推荐电影
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Initialize-OpenAI-client-and-Milvus" class="common-anchor-header">初始化 OpenAI 客户端和 Milvus<button data-href="#Initialize-OpenAI-client-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,15 +70,15 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
         ></path>
       </svg>
     </button></h2><p>初始化 OpenAI 客户端。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
-openai_client = <span class="hljs-title class_">OpenAI</span>()
+openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
 <p>为 Embeddings 设置 Collections 名称和维度。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-variable constant_">COLLECTION_NAME</span> = <span class="hljs-string">&quot;movie_search&quot;</span>
-<span class="hljs-variable constant_">DIMENSION</span> = <span class="hljs-number">1536</span>
+<pre><code translate="no" class="language-python">COLLECTION_NAME = <span class="hljs-string">&quot;movie_search&quot;</span>
+DIMENSION = <span class="hljs-number">1536</span>
 
-<span class="hljs-variable constant_">BATCH_SIZE</span> = <span class="hljs-number">1000</span>
+BATCH_SIZE = <span class="hljs-number">1000</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>连接 Milvus。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -90,8 +90,8 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
 <p>至于<code translate="no">url</code> 和<code translate="no">token</code> 的参数：</p>
 <ul>
 <li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
-<li>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器地址和端口作为 uri，例如<code translate="no">http://localhost:19530</code> 。如果在 Milvus 上启用了身份验证功能，请使用"&lt;your_username&gt;:&lt;your_password&gt;"作为令牌，否则不要设置令牌。</li>
-<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
+<li>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器地址和端口作为 uri，例如<code translate="no">http://localhost:19530</code> 。如果在 Milvus 上启用了身份验证功能，请使用 "<your_username>:<your_password>" 作为令牌，否则不要设置令牌。</li>
+<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Remove collection if it already exists</span>
@@ -159,7 +159,7 @@ client.load_collection(collection_name=COLLECTION_NAME, replica_number=<span cla
     </button></h2><p>Milvus 启动并运行后，我们就可以开始抓取数据了。<code translate="no">Hugging Face Datasets</code> 是一个拥有许多不同用户数据集的集线器，在这个示例中，我们使用 HuggingLearners 的 netflix-shows 数据集。该数据集包含 8000 多部电影及其元数据对。我们将嵌入每条描述，并将其与标题、类型、发行年份和评分一起存储在 Milvus 中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 
-dataset = <span class="hljs-title function_">load_dataset</span>(<span class="hljs-string">&quot;hugginglearners/netflix-shows&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
+dataset = load_dataset(<span class="hljs-string">&quot;hugginglearners/netflix-shows&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-the-Data" class="common-anchor-header">插入数据<button data-href="#Insert-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -176,7 +176,7 @@ dataset = <span class="hljs-title function_">load_dataset</span>(<span class="hl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>现在我们的机器上已经有了数据，我们可以开始嵌入数据并将其插入 Milvus。Embeddings 函数接收文本，并以列表格式返回嵌入数据。</p>
+    </button></h2><p>现在我们的机器上已经有了数据，我们可以开始嵌入数据并将其插入 Milvus。嵌入函数接收文本，并以列表格式返回嵌入结果。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_texts</span>(<span class="hljs-params">texts</span>):
     res = openai_client.embeddings.create(<span class="hljs-built_in">input</span>=texts, model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
     <span class="hljs-keyword">return</span> [res_data.embedding <span class="hljs-keyword">for</span> res_data <span class="hljs-keyword">in</span> res.data]
@@ -223,7 +223,7 @@ batch = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>数据安全地插入 Milvus 后，我们就可以执行查询了。查询将输入一个元组，其中包括要搜索的电影描述和要使用的过滤器。有关过滤器的更多信息，请<a href="https://milvus.io/docs/boolean.md">点击此处</a>。搜索首先会打印出描述和过滤器表达式。然后，我们会为每个结果打印分数、标题、类型、发行年份、评分和结果电影的描述。</p>
+    </button></h2><p>数据安全地插入 Milvus 后，我们就可以执行查询了。查询将输入一个元组，其中包括要搜索的电影描述和要使用的过滤器。有关过滤器的更多信息，请<a href="https://milvus.io/docs/boolean.md">点击此处</a>。搜索首先会打印出描述和过滤器表达式。然后，我们会为每个结果打印得分、标题、类型、发行年份、评分和结果电影的描述。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> textwrap
 
 

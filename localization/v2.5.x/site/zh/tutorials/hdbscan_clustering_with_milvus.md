@@ -5,10 +5,10 @@ summary: >-
   进行聚类，然后使用 UMAP 方法将结果可视化以进行分析。本笔记本是 Milvus 对 Dylan Castillo 文章的改编。
 title: 利用 Milvus 进行 HDBSCAN 聚类
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">利用 Milvus 进行 HDBSCAN 聚类<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
@@ -115,7 +115,7 @@ connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <div class="alert note">
 <blockquote>
 <ul>
-<li>如果你只需要一个本地向量数据库，用于小规模数据或原型设计，那么将 uri 设置为本地文件，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储到这个文件中。</li>
+<li>如果你只需要一个本地向量数据库，用于小规模数据或原型设计，那么将 uri 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储到这个文件中。</li>
 <li>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器地址和端口作为 uri，例如<code translate="no">http://localhost:19530</code> 。如果在 Milvus 上启用了身份验证功能，请使用 "<your_username>:<your_password>" 作为令牌，否则不要设置令牌。</li>
 <li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端点和 API 密钥</a>相对应。</li>
 </ul>
@@ -187,7 +187,7 @@ dist = {}
 
 embeddings = []
 <button class="copy-code-btn"></button></code></pre>
-<p>我们将遍历 Milvus Collections 中的所有嵌入。对于每个 Embeddings，我们将搜索其在同一 Collections 中的前 k 个邻居，获取它们的 id 和距离。然后，我们还需要创建一个字典，将原始 ID 映射到距离矩阵中的连续索引。完成后，我们需要创建一个初始化所有元素为无穷大的距离矩阵，并填充我们搜索到的元素。这样，远距离点之间的距离将被忽略。最后，我们使用 HDBSCAN 库，利用创建的距离矩阵对点进行聚类。我们需要将度量设置为 "预计算"，以表明数据是距离矩阵而非原始嵌入。</p>
+<p>我们将遍历 Milvus Collections 中的所有嵌入。对于每个 Embeddings，我们将搜索其在同一 Collections 中的前 k 个邻居，获取它们的 id 和距离。然后，我们还需要创建一个字典，将原始 ID 映射到距离矩阵中的连续索引。完成后，我们需要创建一个初始化所有元素为无穷大的距离矩阵，并填充我们搜索到的元素。这样，远距离点之间的距离将被忽略。最后，我们使用 HDBSCAN 库，利用我们创建的距离矩阵对点进行聚类。我们需要将度量值设置为 "预计算"，以表明数据是距离矩阵而非原始嵌入。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     batch = iterator.<span class="hljs-built_in">next</span>()
     batch_ids = [data[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
@@ -280,6 +280,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/hdbscan_clustering_with_milvus.png?raw=true" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>图像</span> </span></p>
 <p>在这里，我们展示了数据的良好聚类，你可以将鼠标悬停在点上查看它们所代表的文本。通过本笔记本，我们希望您能学会如何使用 HDBSCAN 对 Milvus 的嵌入数据进行高效聚类，这也可以应用于其他类型的数据。结合大型语言模型，这种方法可以对您的数据进行大规模的深入分析。</p>

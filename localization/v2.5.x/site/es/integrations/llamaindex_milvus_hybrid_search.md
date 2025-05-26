@@ -9,10 +9,10 @@ summary: >-
   exploraremos otros métodos alternativos de incrustación dispersa y la
   personalización del reranker híbrido.
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="common-anchor-header">RAG utiliza la búsqueda híbrida con Milvus y LlamaIndex<button data-href="#RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
@@ -160,7 +160,7 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">Personalizar el analizador de texto</h3><p>Los analizadores desempeñan un papel fundamental en la búsqueda de texto completo, ya que descomponen las frases en tokens y realizan procesamientos léxicos, como la eliminación de palabras vacías y de palabras clave. Suelen ser específicos de cada idioma. Para más detalles, consulte la <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Guía de analizadores</a> de Milvus.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">Personalizar el analizador de texto</h3><p>Los analizadores desempeñan un papel fundamental en la búsqueda de texto completo, ya que descomponen las frases en tokens y llevan a cabo el procesamiento léxico, como la eliminación de palabras vacías y de palabras clave. Suelen ser específicos de cada idioma. Para más detalles, consulte la <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Guía de analizadores</a> de Milvus.</p>
 <p>Milvus admite dos tipos de analizadores: <strong>Analizadores incorporados</strong> y <strong>Analizadores personalizados</strong>. Por defecto, si <code translate="no">enable_sparse</code> está configurado como True, <code translate="no">MilvusVectorStore</code> utiliza <code translate="no">BM25BuiltInFunction</code> con las configuraciones por defecto, empleando el analizador incorporado estándar que tokeniza el texto basándose en la puntuación.</p>
 <p>Para utilizar un analizador diferente o personalizar el existente, puede proporcionar valores al argumento <code translate="no">analyzer_params</code> cuando construya <code translate="no">BM25BuiltInFunction</code>. A continuación, establezca esta función como <code translate="no">sparse_embedding_function</code> en <code translate="no">MilvusVectorStore</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction

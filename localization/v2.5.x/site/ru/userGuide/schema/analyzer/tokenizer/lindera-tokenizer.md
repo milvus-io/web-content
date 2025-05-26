@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>Чтобы сконфигурировать анализатор, использующий токенизатор <code translate="no">lindera</code>, установите <code translate="no">tokenizer.type</code> на <code translate="no">lindera</code> и выберите словарь с <code translate="no">dict_kind</code>.</p>
 <div class="multipleCode">
-   <a href="#plaintext">Обычный текст</a> <a href="#python">Python</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
@@ -47,11 +47,11 @@ summary: >-
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
-analyzerParams.put(&quot;tokenizer&quot;,
-                new HashMap&lt;String, Object&gt;() {{
-                    put(&quot;type&quot;, &quot;lindera&quot;);
-                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;lindera&quot;</span>);
+                    put(<span class="hljs-string">&quot;dict_kind&quot;</span>, <span class="hljs-string">&quot;ipadic&quot;</span>);
                 }});
 <button class="copy-code-btn"></button></code></pre>
 <table>
@@ -91,7 +91,7 @@ analyzerParams.put(&quot;tokenizer&quot;,
       </svg>
     </button></h2><p>Прежде чем применять конфигурацию анализатора к схеме коллекции, проверьте его работу с помощью метода <code translate="no">run_analyzer</code>.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">Конфигурация анализатора</h3><div class="multipleCode">
-   <a href="#plaintext">Обычный текст</a> <a href="#python">Python</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
@@ -99,11 +99,11 @@ analyzerParams.put(&quot;tokenizer&quot;,
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
-analyzerParams.put(&quot;tokenizer&quot;,
-                new HashMap&lt;String, Object&gt;() {{
-                    put(&quot;type&quot;, &quot;lindera&quot;);
-                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;lindera&quot;</span>);
+                    put(<span class="hljs-string">&quot;dict_kind&quot;</span>, <span class="hljs-string">&quot;ipadic&quot;</span>);
                 }});
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Verification-using-runanalyzer" class="common-anchor-header">Проверка с помощью <code translate="no">run_analyzer</code></h3><div class="multipleCode">

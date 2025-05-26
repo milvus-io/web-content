@@ -18,12 +18,12 @@ title: 使用 Milvus 和 Camel 的檢索-擴充世代 (RAG)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南展示了如何使用 CAMEL 和 Milvus 建立一個檢索-增強生成 (RAG) 系統。</p>
 <p>RAG 系統結合了檢索系統與生成模型，可根據給定的提示生成新的文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
 <p><a href="https://www.camel-ai.org/">CAMEL</a>是一個多重代理框架。<a href="https://milvus.io/">Milvus</a>是世界上最先進的開放原始碼向量資料庫，專門用於嵌入相似性搜尋和人工智能應用程式。</p>
-<p>在本筆記簿中，我們展示了 CAMEL Retrieve 模組在自訂和自動兩種方式中的用法。我們也將展示如何結合<code translate="no">AutoRetriever</code> 與<code translate="no">ChatAgent</code> ，並透過<code translate="no">Function Calling</code> 進一步結合<code translate="no">AutoRetriever</code> 與<code translate="no">RolePlaying</code> 。</p>
+<p>在本筆記簿中，我們展示了 CAMEL Retrieve 模組在自訂方式和自動方式中的使用。我們也將展示如何結合<code translate="no">AutoRetriever</code> 與<code translate="no">ChatAgent</code> ，並透過<code translate="no">Function Calling</code> 進一步結合<code translate="no">AutoRetriever</code> 與<code translate="no">RolePlaying</code> 。</p>
 <p>包括四個主要部分：</p>
 <ul>
 <li>自訂 RAG</li>
@@ -79,12 +79,12 @@ response = requests.get(url)
       </svg>
     </button></h2><p>在本節中，我們將設定自訂的 RAG 管道，以<code translate="no">VectorRetriever</code> 為例。我們將設定<code translate="no">OpenAIEmbedding</code> 為嵌入模型，<code translate="no">MilvusStorage</code> 為其儲存空間。</p>
 <p>要設定 OpenAI 的嵌入，我們需要設定<code translate="no">OPENAI_API_KEY</code> 。</p>
-<pre><code translate="no" class="language-python">os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
+<pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>匯入並設定嵌入實例：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">embeddings</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbedding</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.embeddings <span class="hljs-keyword">import</span> OpenAIEmbedding
 
-embedding_instance = <span class="hljs-title class_">OpenAIEmbedding</span>()
+embedding_instance = OpenAIEmbedding()
 <button class="copy-code-btn"></button></code></pre>
 <p>匯入並設定向量儲存實例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.storages <span class="hljs-keyword">import</span> MilvusStorage
@@ -108,14 +108,14 @@ storage_instance = MilvusStorage(
 </div>
 <p>匯入並設定 retriever instance：</p>
 <p>預設情況下，<code translate="no">similarity_threshold</code> 設定為 0.75。您可以變更它。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">VectorRetriever</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> VectorRetriever
 
-vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
+vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>我們使用整合的<code translate="no">Unstructured Module</code> 來將內容分割成小塊，內容會利用其<code translate="no">chunk_by_title</code> 功能自動分割，每個小塊的最大字元為 500 個字元，這是<code translate="no">OpenAIEmbedding</code> 的合適長度。分塊中的所有文字都會嵌入並儲存到向量儲存實例中，這需要一些時間，請稍候。</p>
-<pre><code translate="no" class="language-python">vector_retriever.<span class="hljs-title function_">process</span>(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
+<pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
 [nltk_data]   Unzipping tokenizers/punkt.zip.

@@ -18,10 +18,10 @@ title: 使用 LangChain 和 Milvus 进行全文检索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文搜索</a>是一种通过匹配文本中特定关键词或短语来检索文档的传统方法。它根据词频等因素计算出的相关性分数对结果进行排序。语义搜索更善于理解含义和上下文，而全文搜索则擅长精确的关键词匹配，因此是语义搜索的有益补充。BM25 算法被广泛用于全文搜索的排序，并在检索增强生成（RAG）中发挥着关键作用。</p>
@@ -143,7 +143,7 @@ vectorstore.vector_fields
 </code></pre>
 <p>在这个示例中，我们有三个向量字段。其中，<code translate="no">sparse</code> 作为<code translate="no">BM25BuiltInFunction</code> 的输出字段，而其他两个字段<code translate="no">dense1</code> 和<code translate="no">dense2</code> 则被自动指定为两个<code translate="no">OpenAIEmbeddings</code> 模型的输出字段（根据顺序）。</p>
 <p>这样，就可以定义多个向量场，并为其分配不同的嵌入或函数组合，从而实现混合搜索。</p>
-<p>执行混合搜索时，我们只需传入查询文本，并选择性地设置 topK 和 Reranker 参数。<code translate="no">vectorstore</code> 实例会自动处理向量嵌入和内置函数，最后使用 Reranker 精炼结果。搜索过程的底层实现细节对用户是隐藏的。</p>
+<p>执行混合搜索时，我们只需传入查询文本，并选择性地设置 topK 和 Reranker 参数。<code translate="no">vectorstore</code> 实例会自动处理向量嵌入和内置函数，最后使用 Reranker 对结果进行细化。搜索过程的底层实现细节对用户是隐藏的。</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
 )  <span class="hljs-comment"># , ranker_type=&quot;weighted&quot;, ranker_params={&quot;weights&quot;:[0.3, 0.3, 0.4]})</span>

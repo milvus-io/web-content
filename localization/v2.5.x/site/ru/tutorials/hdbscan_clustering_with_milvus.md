@@ -8,10 +8,10 @@ summary: >-
   UMAP. Этот блокнот является адаптацией Milvus статьи Дилана Кастильо.
 title: Кластеризация HDBSCAN с помощью Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">Кластеризация HDBSCAN с помощью Milvus<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
@@ -283,6 +283,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/hdbscan_clustering_with_milvus.png?raw=true" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>изображение</span> </span></p>
 <p>Здесь мы демонстрируем, что данные хорошо кластеризованы, и вы можете навести курсор на точки, чтобы проверить текст, который они представляют. Мы надеемся, что с помощью этого блокнота вы узнаете, как эффективно использовать HDBSCAN для кластеризации вкраплений с помощью Milvus, что также может быть применено к другим типам данных. В сочетании с большими языковыми моделями этот подход позволяет проводить более глубокий анализ данных в больших масштабах.</p>

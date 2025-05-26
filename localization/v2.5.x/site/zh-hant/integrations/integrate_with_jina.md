@@ -18,8 +18,8 @@ title: 整合 Milvus 與 Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_with_Jina.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_with_Jina.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南展示了如何使用 Jina AI 嵌入和 Milvus 來進行相似性搜索和檢索任務。</p>
 <h2 id="Who-is-Jina-AI" class="common-anchor-header">誰是 Jina AI<button data-href="#Who-is-Jina-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,7 +36,7 @@ title: 整合 Milvus 與 Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI 於 2020 年在柏林成立，是一家先進的人工智能公司，專注於透過其搜尋基礎徹底改變人工智能的未來。Jina AI 專精於多模態人工智慧，旨在透過其整合式元件套件，包括嵌入式、reerankers、prompt ops 和核心基礎架構，讓企業和開發人員能夠利用多模態資料的力量來創造價值和節省成本。 Jina AI 的尖端嵌入式擁有頂級效能，其 8192 符記長度模型是全面資料表達的理想選擇。這些嵌入式提供多語言支援，並與 OpenAI 等領先平台無縫整合，有助於跨語言應用程式的發展。</p>
+    </button></h2><p>Jina AI 於 2020 年在柏林成立，是一家先進的人工智能公司，專注於透過其搜尋基礎徹底改變人工智能的未來。Jina AI 專精於多模態人工智慧，旨在透過其整合式元件套件，包括嵌入式、reerankers、prompt ops 和核心基礎架構，讓企業和開發人員能夠利用多模態資料的力量來創造價值和節省成本。 Jina AI 的尖端嵌入式擁有頂級效能，其 8192 符記長度模型是全面資料表達的理想選擇。這些嵌入式提供多語言支援，並可與 OpenAI 等領先平台無縫整合，有助於跨語言應用程式的發展。</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Milvus 與 Jina AI 的嵌入式系統<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,16 +124,16 @@ dvecs = ef.encode_documents([doc])  <span class="hljs-comment"># This method use
         ></path>
       </svg>
     </button></h2><p>Jina AI 的雙語模型增強了多語言平台、全球支援和跨語言內容發現。它們專為德英和中英翻譯而設計，可促進多種語言群體之間的理解，簡化跨語言互動。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">JinaEmbeddingFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
-ef = <span class="hljs-title class_">JinaEmbeddingFunction</span>(<span class="hljs-string">&quot;jina-embeddings-v2-base-de&quot;</span>, jina_api_key)
+ef = JinaEmbeddingFunction(<span class="hljs-string">&quot;jina-embeddings-v2-base-de&quot;</span>, jina_api_key)
 
 query = <span class="hljs-string">&quot;what is information retrieval?&quot;</span>
 doc = <span class="hljs-string">&quot;Information Retrieval ist der Prozess, relevante Informationen aus einer großen Sammlung von Daten oder Dokumenten zu finden.&quot;</span>
 
-qvecs = ef.<span class="hljs-title function_">encode_queries</span>([query])
-dvecs = ef.<span class="hljs-title function_">encode_documents</span>([doc])
+qvecs = ef.encode_queries([query])
+dvecs = ef.encode_documents([doc])
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Code-Embeddings" class="common-anchor-header">程式碼嵌入<button data-href="#Code-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -281,11 +281,11 @@ res = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>在使用 embeddings 搜尋之後，Jina Ai 也提供了 reranker 來進一步提升檢索品質。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">reranker</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">JinaRerankFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> JinaRerankFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
 
-rf = <span class="hljs-title class_">JinaRerankFunction</span>(<span class="hljs-string">&quot;jina-reranker-v1-base-en&quot;</span>, jina_api_key)
+rf = JinaRerankFunction(<span class="hljs-string">&quot;jina-reranker-v1-base-en&quot;</span>, jina_api_key)
 
 query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
@@ -296,7 +296,7 @@ documents = [
     <span class="hljs-string">&quot;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&quot;</span>,
 ]
 
-<span class="hljs-title function_">rf</span>(query, documents)
+rf(query, documents)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[RerankResult(text=&quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term 'artificial intelligence' and laid out its basic goals.&quot;, score=0.9370958209037781, index=1),
  RerankResult(text='The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.', score=0.35420963168144226, index=3),

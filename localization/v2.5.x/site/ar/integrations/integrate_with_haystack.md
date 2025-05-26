@@ -5,10 +5,10 @@ summary: >-
   Haystack و Milvus.
 title: التوليد المعزز للاسترجاع (RAG) باستخدام ميلفوس وهايستاك
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="common-anchor-header">التوليد المعزز للاسترجاع (RAG) باستخدام ميلفوس وهايستاك<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
@@ -28,7 +28,7 @@ title: التوليد المعزز للاسترجاع (RAG) باستخدام م�
       </svg>
     </button></h1><p>يوضح هذا الدليل كيفية بناء نظام الاسترجاع-التوليد المعزز (RAG) باستخدام Haystack وMilvus.</p>
 <p>يجمع نظام RAG بين نظام الاسترجاع والنموذج التوليدي لتوليد نص جديد بناءً على مطالبة معينة. يقوم النظام أولاً باسترجاع المستندات ذات الصلة من مجموعة مستندات باستخدام Milvus، ثم يستخدم نموذجًا توليديًا لتوليد نص جديد بناءً على المستندات المسترجعة.</p>
-<p><a href="https://haystack.deepset.ai/">هايستاك</a> هو إطار عمل بايثون مفتوح المصدر من شركة ديبست لبناء تطبيقات مخصصة مع نماذج لغوية كبيرة (LLMs). <a href="https://milvus.io/">Milvus</a> هي قاعدة البيانات المتجهة مفتوحة المصدر الأكثر تقدمًا في العالم، وهي مصممة لتشغيل تطبيقات البحث عن التشابه المضمنة وتطبيقات الذكاء الاصطناعي.</p>
+<p><a href="https://haystack.deepset.ai/">هايستاك</a> هو إطار عمل بايثون مفتوح المصدر من deepset لبناء تطبيقات مخصصة مع نماذج لغوية كبيرة (LLMs). <a href="https://milvus.io/">Milvus</a> هي قاعدة البيانات المتجهة مفتوحة المصدر الأكثر تقدمًا في العالم، وهي مصممة لتشغيل تطبيقات البحث عن التشابه المضمنة وتطبيقات الذكاء الاصطناعي.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

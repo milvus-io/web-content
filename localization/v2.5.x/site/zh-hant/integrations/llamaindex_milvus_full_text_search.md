@@ -6,10 +6,10 @@ summary: >-
   在本教程中，您將學習如何使用 LlamaIndex 和 Milvus 來建立一個使用全文檢索和混合檢索的 RAG
   系統。我們會先單獨實作全文檢索，然後透過整合語意檢索來強化它，以獲得更全面的結果。
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Using-Full-Text-Search-with-LlamaIndex-and-Milvus" class="common-anchor-header">使用 LlamaIndex 和 Milvus 進行全文搜尋<button data-href="#Using-Full-Text-Search-with-LlamaIndex-and-Milvus" class="anchor-icon" translate="no">
@@ -28,7 +28,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p><strong>全文檢索</strong>使用精確的關鍵字匹配，通常利用 BM25 等演算法來依據相關性排列文件。在<strong>檢索增強世代 (RAG)</strong>系統中，此方法會檢索相關的文字，以增強 AI 所產生的回應。</p>
-<p>同時，<strong>語意搜尋會</strong>詮釋上下文的意義，以提供更廣泛的結果。結合這兩種方法創造出<strong>混合搜尋</strong>，可改善資訊檢索，尤其是在單一方法無法達到要求的情況下。</p>
+<p>同時，<strong>語意搜尋會</strong>詮釋上下文的意義，以提供更廣泛的結果。結合這兩種方法可創造出<strong>混合搜尋</strong>，改善資訊檢索，尤其是在單一方法無法達到要求的情況下。</p>
 <p>使用<a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> 的 Sparse-BM25 方法，原始文字會自動轉換為稀疏向量。這樣就不需要手動生成稀疏嵌入，並實現混合搜尋策略，在語義理解和關鍵字相關性之間取得平衡。</p>
 <p>在本教程中，您將學習如何使用 LlamaIndex 和 Milvus 來建立一個使用全文檢索和混合檢索的 RAG 系統。我們會先單獨實作全文檢索，然後透過整合語意檢索來強化它，以獲得更全面的結果。</p>
 <blockquote>
@@ -57,7 +57,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>如果您使用的是 Google Colab，您可能需要<strong>重新啟動運行時</strong>（導航至介面上方的「運行<strong>時</strong>」功能表，並從下拉式功能表中選擇「重新啟動會話」）。</p>
+<p>如果您使用的是 Google Colab，您可能需要<strong>重新啟動運行時</strong>（導航至介面頂端的「運行<strong>時</strong>」功能表，並從下拉式功能表中選擇「重新啟動會話」）。</p>
 </blockquote>
 </div>
 <p><strong>設定帳號</strong></p>

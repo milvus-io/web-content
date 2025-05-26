@@ -6,10 +6,10 @@ summary: >-
   AI 시스템에 없어서는 안 될 구성 요소입니다.
 title: Dynamiq 및 Milvus 시작하기
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_rag_with_dynamiq.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Getting-Started-with-Dynamiq-and-Milvus" class="common-anchor-header">Dynamiq 및 Milvus 시작하기<button data-href="#Getting-Started-with-Dynamiq-and-Milvus" class="anchor-icon" translate="no">
@@ -34,7 +34,7 @@ title: Dynamiq 및 Milvus 시작하기
 <li><p><strong>문서 색인 흐름</strong>: 입력 파일(예: PDF)을 처리하고, 그 콘텐츠를 벡터 임베딩으로 변환하여 Milvus에 저장하는 방법을 알아보세요. Milvus의 고성능 인덱싱 기능을 활용하면 데이터를 신속하게 검색할 수 있습니다.</p></li>
 <li><p><strong>문서 검색 흐름</strong>: Milvus에서 관련 문서 임베딩을 쿼리하고 이를 사용하여 Dynamiq의 LLM 에이전트로 통찰력 있는 컨텍스트 인식 응답을 생성하여 원활한 AI 기반 사용자 환경을 구축하는 방법을 알아보세요.</p></li>
 </ul>
-<p>이 튜토리얼을 마치면 Milvus와 Dynamiq이 어떻게 협력하여 필요에 맞게 확장 가능한 상황 인식 AI 시스템을 구축하는지 확실히 이해할 수 있을 것입니다.</p>
+<p>이 튜토리얼을 마치면 Milvus와 Dynamiq이 어떻게 협력하여 필요에 맞게 확장 가능한 상황 인식 AI 시스템을 구축하는지에 대해 확실히 이해할 수 있을 것입니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비 사항<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +50,7 @@ title: Dynamiq 및 Milvus 시작하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">필요한 라이브러리 다운로드</h3><pre><code translate="no" class="language-shell">$ pip install dynamiq pymilvus
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">필요한 라이브러리 다운로드</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
@@ -58,7 +58,7 @@ title: Dynamiq 및 Milvus 시작하기
 <h3 id="Configure-the-LLM-agent" class="common-anchor-header">LLM 에이전트 구성</h3><p>이 예제에서는 OpenAI를 LLM으로 사용하겠습니다. 환경 변수로 <code translate="no">OPENAI_API_KEY</code> <a href="https://platform.openai.com/docs/quickstart">API 키를</a> 준비해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="RAG---Document-Indexing-Flow" class="common-anchor-header">RAG - 문서 색인 흐름<button data-href="#RAG---Document-Indexing-Flow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 튜토리얼에서는 Milvus를 벡터 데이터베이스로 사용하여 문서를 색인하기 위한 검색 증강 생성(RAG) 워크플로우를 보여드립니다. 이 워크플로에서는 입력 PDF 파일을 가져와서 더 작은 덩어리로 처리하고, OpenAI의 임베딩 모델을 사용해 벡터 임베딩을 생성한 다음, 효율적인 검색을 위해 임베딩을 Milvus 컬렉션에 저장합니다.</p>
+    </button></h2><p>이 튜토리얼에서는 Milvus를 벡터 데이터베이스로 사용하여 문서를 색인하기 위한 검색 증강 생성(RAG) 워크플로우를 보여드립니다. 이 워크플로에서는 입력 PDF 파일을 가져와서 더 작은 청크로 처리하고, OpenAI의 임베딩 모델을 사용해 벡터 임베딩을 생성한 다음, 효율적인 검색을 위해 임베딩을 Milvus 컬렉션에 저장합니다.</p>
 <p>이 워크플로우가 끝나면 시맨틱 검색과 질문 답변과 같은 향후 RAG 작업을 지원하는 확장 가능하고 효율적인 문서 색인 시스템을 갖추게 됩니다.</p>
 <h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">필요한 라이브러리 가져오기 및 워크플로우 초기화</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Importing necessary libraries for the workflow</span>
 <span class="hljs-keyword">from</span> io <span class="hljs-keyword">import</span> BytesIO

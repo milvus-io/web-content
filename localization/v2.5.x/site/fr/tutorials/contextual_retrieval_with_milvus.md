@@ -27,11 +27,11 @@ title: Récupération contextuelle avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/contextual_retrieval_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/contextual_retrieval_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/contextual_retrieval_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/contextual_retrieval_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/images/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/pics/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
     La </span><a href="https://www.anthropic.com/news/contextual-retrieval">recherche contextuelle d'</a> <span class="img-wrapper"> <span>images</span> </span>est une méthode de recherche avancée proposée par Anthropic pour résoudre le problème de l'isolation sémantique des morceaux, qui se pose dans les solutions actuelles de génération améliorée de recherche (RAG). Dans le paradigme pratique actuel de la RAG, les documents sont divisés en plusieurs morceaux, et une base de données vectorielle est utilisée pour rechercher la requête, en récupérant les morceaux les plus pertinents. Un LLM répond ensuite à la requête en utilisant ces morceaux récupérés. Toutefois, ce processus de découpage peut entraîner la perte d'informations contextuelles, ce qui rend difficile la détermination de la pertinence par l'utilisateur.</p>
 <p>La recherche contextuelle améliore les systèmes de recherche traditionnels en ajoutant un contexte pertinent à chaque fragment de document avant l'intégration ou l'indexation, ce qui augmente la précision et réduit les erreurs de recherche. Combinée à des techniques telles que la recherche hybride et le reranking, elle améliore les systèmes RAG (Retrieval-Augmented Generation), en particulier pour les grandes bases de connaissances. En outre, elle offre une solution rentable lorsqu'elle est associée à une mise en cache rapide, réduisant de manière significative la latence et les coûts opérationnels, les morceaux contextualisés coûtant environ 1,02 dollar par million de jetons de document. Il s'agit donc d'une approche évolutive et efficace pour le traitement de grandes bases de connaissances. La solution d'Anthropic présente deux aspects intéressants :</p>
 <ul>
@@ -54,9 +54,9 @@ title: Récupération contextuelle avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Installer les dépendances</h3><pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
-$ pip install tqdm
-$ pip install anthropic
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Installer les dépendances</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install anthropic</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
@@ -78,8 +78,8 @@ $ pip install anthropic
         ></path>
       </svg>
     </button></h2><p>La commande suivante permet de télécharger les données d'exemple utilisées dans la <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">démonstration</a> originale <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">d'</a>Anthropic.</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
-$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-Retriever" class="common-anchor-header">Définir le récupérateur<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -441,9 +441,9 @@ $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.git
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Total queries: <span class="hljs-subst">{results[<span class="hljs-string">&#x27;total_queries&#x27;</span>]}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous devez maintenant initialiser ces modèles pour les expériences suivantes. Vous pouvez facilement passer à d'autres modèles en utilisant la bibliothèque de modèles PyMilvus.</p>
-<pre><code translate="no" class="language-python">dense_ef = <span class="hljs-title class_">VoyageEmbeddingFunction</span>(api_key=<span class="hljs-string">&quot;your-voyage-api-key&quot;</span>, model_name=<span class="hljs-string">&quot;voyage-2&quot;</span>)
-sparse_ef = <span class="hljs-title class_">BGEM3EmbeddingFunction</span>()
-cohere_rf = <span class="hljs-title class_">CohereRerankFunction</span>(api_key=<span class="hljs-string">&quot;your-cohere-api-key&quot;</span>)
+<pre><code translate="no" class="language-python">dense_ef = VoyageEmbeddingFunction(api_key=<span class="hljs-string">&quot;your-voyage-api-key&quot;</span>, model_name=<span class="hljs-string">&quot;voyage-2&quot;</span>)
+sparse_ef = BGEM3EmbeddingFunction()
+cohere_rf = CohereRerankFunction(api_key=<span class="hljs-string">&quot;your-cohere-api-key&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Fetching 30 files:   0%|          | 0/30 [00:00&lt;?, ?it/s]
 </code></pre>
@@ -467,12 +467,12 @@ cohere_rf = <span class="hljs-title class_">CohereRerankFunction</span>(api_key=
         ></path>
       </svg>
     </button></h2><p>La recherche standard utilise uniquement des encastrements denses pour retrouver des documents liés. Dans cette expérience, nous utiliserons Pass@5 pour reproduire les résultats de la base de données originale.</p>
-<pre><code translate="no" class="language-python">standard_retriever = <span class="hljs-title class_">MilvusContextualRetriever</span>(
+<pre><code translate="no" class="language-python">standard_retriever = MilvusContextualRetriever(
     uri=<span class="hljs-string">&quot;standard.db&quot;</span>, collection_name=<span class="hljs-string">&quot;standard&quot;</span>, dense_embedding_function=dense_ef
 )
 
-standard_retriever.<span class="hljs-title function_">build_collection</span>()
-<span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> <span class="hljs-attr">dataset</span>:
+standard_retriever.build_collection()
+<span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> dataset:
     doc_content = doc[<span class="hljs-string">&quot;content&quot;</span>]
     <span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> doc[<span class="hljs-string">&quot;chunks&quot;</span>]:
         metadata = {
@@ -483,9 +483,9 @@ standard_retriever.<span class="hljs-title function_">build_collection</span>()
             <span class="hljs-string">&quot;content&quot;</span>: chunk[<span class="hljs-string">&quot;content&quot;</span>],
         }
         chunk_content = chunk[<span class="hljs-string">&quot;content&quot;</span>]
-        standard_retriever.<span class="hljs-title function_">insert_data</span>(chunk_content, metadata)
+        standard_retriever.insert_data(chunk_content, metadata)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-title function_">evaluate_db</span>(standard_retriever, <span class="hljs-string">&quot;evaluation_set.jsonl&quot;</span>, <span class="hljs-number">5</span>)
+<pre><code translate="no" class="language-python">evaluate_db(standard_retriever, <span class="hljs-string">&quot;evaluation_set.jsonl&quot;</span>, <span class="hljs-number">5</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Evaluating retrieval: 100%|██████████| 248/248 [01:29&lt;00:00,  2.77it/s]
 
@@ -531,7 +531,7 @@ hybrid_retriever.build_collection()
         chunk_content = chunk[<span class="hljs-string">&quot;content&quot;</span>]
         hybrid_retriever.insert_data(chunk_content, metadata)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-title function_">evaluate_db</span>(hybrid_retriever, <span class="hljs-string">&quot;evaluation_set.jsonl&quot;</span>, <span class="hljs-number">5</span>)
+<pre><code translate="no" class="language-python">evaluate_db(hybrid_retriever, <span class="hljs-string">&quot;evaluation_set.jsonl&quot;</span>, <span class="hljs-number">5</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Evaluating retrieval: 100%|██████████| 248/248 [02:09&lt;00:00,  1.92it/s]
 
@@ -555,7 +555,7 @@ Total queries: 248
         ></path>
       </svg>
     </button></h2><p>L'extraction hybride montre une amélioration, mais les résultats peuvent être encore améliorés en appliquant une méthode d'extraction contextuelle. Pour ce faire, nous utiliserons le modèle linguistique d'Anthropic pour ajouter le contexte du document entier pour chaque morceau.</p>
-<pre><code translate="no" class="language-python">anthropic_client = anthropic.<span class="hljs-title class_">Anthropic</span>(
+<pre><code translate="no" class="language-python">anthropic_client = anthropic.Anthropic(
     api_key=<span class="hljs-string">&quot;your-anthropic-api-key&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -585,7 +585,7 @@ contextual_retriever.build_collection()
             doc_content, chunk_content, metadata
         )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-title function_">evaluate_db</span>(contextual_retriever, <span class="hljs-string">&quot;evaluation_set.jsonl&quot;</span>, <span class="hljs-number">5</span>)
+<pre><code translate="no" class="language-python">evaluate_db(contextual_retriever, <span class="hljs-string">&quot;evaluation_set.jsonl&quot;</span>, <span class="hljs-number">5</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"> Evaluating retrieval: 100%|██████████| 248/248 [01:55&lt;00:00,  2.15it/s]
 Pass@5: 87.14%
@@ -611,7 +611,7 @@ Total queries: 248
 <pre><code translate="no" class="language-python">contextual_retriever.use_reranker = <span class="hljs-literal">True</span>
 contextual_retriever.rerank_function = cohere_rf
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-title function_">evaluate_db</span>(contextual_retriever, <span class="hljs-string">&quot;evaluation_set.jsonl&quot;</span>, <span class="hljs-number">5</span>)
+<pre><code translate="no" class="language-python">evaluate_db(contextual_retriever, <span class="hljs-string">&quot;evaluation_set.jsonl&quot;</span>, <span class="hljs-number">5</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Evaluating retrieval: 100%|██████████| 248/248 [02:02&lt;00:00,  2.00it/s]
 Pass@5: 90.91%

@@ -7,10 +7,10 @@ summary: >-
   باستخدام CLIP، وتخزينها في Milvus، وإجراء عمليات بحث فعالة عن التشابه.
 title: البحث من نص إلى صورة باستخدام ميلفوس
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">البحث من نص إلى صورة باستخدام ميلفوس<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
@@ -29,7 +29,7 @@ title: البحث من نص إلى صورة باستخدام ميلفوس
         ></path>
       </svg>
     </button></h1><p>البحث من نص إلى صورة هو تقنية متقدمة تسمح للمستخدمين بالبحث عن الصور باستخدام أوصاف نصية بلغة طبيعية. وهي تستفيد من نموذج متعدد الوسائط تم تدريبه مسبقًا لتحويل كل من النص والصور إلى تضمينات في فضاء دلالي مشترك، مما يتيح إجراء مقارنات قائمة على التشابه.</p>
-<p>في هذا البرنامج التعليمي، سنستكشف في هذا البرنامج التعليمي كيفية تنفيذ استرجاع الصور المستند إلى النص باستخدام نموذج CLIP (التدريب المسبق على اللغة المتباينة والصور) من OpenAI و Milvus. سنقوم بتوليد تضمينات الصور باستخدام CLIP، وتخزينها في Milvus، وإجراء عمليات بحث فعالة عن التشابه.</p>
+<p>في هذا البرنامج التعليمي، سنستكشف في هذا البرنامج التعليمي كيفية تنفيذ استرجاع الصور المستند إلى النص باستخدام نموذج CLIP (التدريب المسبق على اللغة المتباينة والصور) من OpenAI و Milvus. سنقوم بإنشاء تضمينات للصور باستخدام CLIP، وتخزينها في Milvus، وإجراء عمليات بحث فعالة عن التشابه.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +87,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
         ></path>
       </svg>
     </button></h2><p>الآن بعد أن أصبحت لديك التبعيات والبيانات اللازمة، حان الوقت لإعداد مستخرجات الميزات وبدء العمل مع ميلفوس. سيرشدك هذا القسم إلى الخطوات الرئيسية لبناء نظام بحث من نص إلى صورة. أخيرًا، سنشرح كيفية استرداد الصور وتصورها بناءً على استعلامات نصية.</p>
-<h3 id="Define-feature-extractors" class="common-anchor-header">تحديد مستخرجات الميزات</h3><p>سنستخدم نموذج CLIP المدرّب مسبقًا لإنشاء تضمينات الصور والنصوص. في هذا القسم، سنقوم بتحميل متغير <strong>ViT-B/32</strong> المدرب مسبقًا من CLIP وتعريف الدوال المساعدة لترميز الصور والنصوص:</p>
+<h3 id="Define-feature-extractors" class="common-anchor-header">تحديد مستخرجات الميزات</h3><p>سنستخدم نموذج CLIP المدرّب مسبقًا لإنشاء تضمينات الصور والنصوص. في هذا القسم، سنقوم بتحميل متغير <strong>ViT-B/32</strong> المدرب مسبقًا من CLIP وتحديد الدوال المساعدة لترميز الصور والنصوص:</p>
 <ul>
 <li><code translate="no">encode_image(image_path)</code>: معالجة الصور وترميزها إلى متجهات ميزات</li>
 <li><code translate="no">encode_text(text)</code>: ترميز الاستعلامات النصية إلى متجهات ميزات</li>

@@ -83,12 +83,12 @@ summary: 정규식 필터는 토큰 생성기가 생성한 토큰이 사용자�
       </svg>
     </button></h2><p>분석기 구성을 컬렉션 스키마에 적용하기 전에 <code translate="no">run_analyzer</code> 메서드를 사용하여 그 동작을 확인하세요.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">분석기 구성</h3><div class="multipleCode">
-   <a href="#plaintext">일반 텍스트</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-plaintext">{
-    &quot;tokenizer&quot;: &quot;standard&quot;,
-    &quot;filter&quot;: [{
-        &quot;type&quot;: &quot;regex&quot;,
-        &quot;expr&quot;: &quot;^(?!test)&quot;
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">{
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [{
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;regex&quot;</span>,
+        <span class="hljs-string">&quot;expr&quot;</span>: <span class="hljs-string">&quot;^(?!test)&quot;</span>
     }]
 }
 <button class="copy-code-btn"></button></code></pre>

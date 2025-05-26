@@ -1,12 +1,12 @@
 ---
 id: full_text_search_with_milvus_and_haystack.md
-summary: 本教程演示如何使用 HayStack 和 Milvus 在应用程序中实现全文和混合搜索。
+summary: 本教程演示了如何使用 HayStack 和 Milvus 在应用程序中实现全文和混合搜索。
 title: 使用 Milvus 和 HayStack 进行全文检索
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-text-search-with-Milvus-and-Haystack" class="common-anchor-header">使用 Milvus 和 HayStack 进行全文检索<button data-href="#Full-text-search-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
@@ -26,13 +26,13 @@ title: 使用 Milvus 和 HayStack 进行全文检索
       </svg>
     </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文搜索</a>是一种通过匹配文本中特定关键词或短语来检索文档的传统方法。它根据术语频率等因素计算出的相关性分数对结果进行排序。语义搜索更善于理解含义和上下文，而全文搜索则擅长精确的关键词匹配，因此是语义搜索的有益补充。BM25 算法被广泛用于全文搜索的排序，并在检索增强生成（RAG）中发挥着关键作用。</p>
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>引入了使用 BM25 的本地全文搜索功能。这种方法将文本转换为代表 BM25 分数的稀疏向量。您只需输入原始文本，Milvus 就会自动生成并存储稀疏向量，无需手动生成稀疏嵌入。</p>
-<p><a href="https://haystack.deepset.ai/">HayStack</a>现在支持 Milvus 的这一功能，从而可以轻松地将全文搜索添加到 RAG 应用程序中。您可以将全文搜索与密集向量语义搜索结合起来，采用混合方法，从语义理解和关键词匹配精度中获益。这种组合提高了搜索的准确性，为用户提供了更好的搜索结果。</p>
+<p><a href="https://haystack.deepset.ai/">HayStack</a>现在支持 Milvus 的这一功能，使 RAG 应用程序可以轻松添加全文检索功能。您可以将全文搜索与密集向量语义搜索结合起来，采用混合方法，从语义理解和关键词匹配精度中获益。这种组合提高了搜索的准确性，为用户提供了更好的搜索结果。</p>
 <p>本教程演示了如何使用 HayStack 和 Milvus 在应用程序中实现全文和混合搜索。</p>
 <p>要使用 Milvus 向量存储，请指定你的 Milvus 服务器<code translate="no">URI</code> （也可选择使用<code translate="no">TOKEN</code> ）。要启动 Milvus 服务器，可以按照<a href="https://milvus.io/docs/install-overview.md">Milvus 安装指南</a>设置 Milvus 服务器，或者直接免费<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">试用 Zilliz Cloud</a>（全面管理 Milvus）。</p>
 <div class="alert note">
 <ul>
 <li>目前，Milvus Standalone、Milvus Distributed 和 Zilliz Cloud 均提供全文搜索功能，但 Milvus Lite 尚不支持该功能（该功能计划在未来实施）。如需了解更多信息，请访问 support@zilliz.com。</li>
-<li>在继续本教程之前，请确保您已基本了解<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文搜索</a>和 HayStack Milvus 集成的<a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">基本用法</a>。</li>
+<li>在继续本教程之前，请确保您已基本了解<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文检索</a>和 HayStack Milvus 集成的<a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">基本用法</a>。</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -84,7 +84,7 @@ documents = [
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>将全文检索集成到 RAG 系统中，可以在语义搜索和基于关键字的精确、可预测检索之间取得平衡。您也可以选择只使用全文检索，但建议将全文检索与语义搜索结合起来，以获得更好的搜索结果。在此，我们将展示单独的全文搜索和混合搜索。</p>
-<h2 id="BM25-search-without-embedding" class="common-anchor-header">不带 Embeddings 的 BM25 搜索<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
+<h2 id="BM25-search-without-embedding" class="common-anchor-header">不使用 Embeddings 的 BM25 搜索<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,11 +315,11 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     </button></h2><p>我们已经学习了如何在 HayStack 和 Milvus 中使用基本的 BM25 内置函数，并准备了一个加载的<code translate="no">document_store</code> 。下面我们来介绍使用混合搜索的优化 RAG 实现。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>该图显示了混合检索与 Rerankers 流程，结合了用于关键词匹配的 BM25 和用于语义检索的密集向量搜索。来自两种方法的结果会被合并、Rerankers 并传递给 LLM 以生成最终答案。</p>
+<p>此图显示了混合检索与 Rerankers 流程，结合了用于关键词匹配的 BM25 和用于语义检索的密集向量搜索。来自两种方法的结果会被合并、Rerankers 并传递给 LLM 以生成最终答案。</p>
 <p>混合搜索兼顾了精确性和语义理解，提高了各种查询的准确性和稳健性。它通过 BM25 全文检索和向量搜索检索候选内容，同时确保语义、上下文感知和精确检索。</p>
 <p>让我们尝试使用混合搜索优化 RAG 实现。</p>
 <pre><code translate="no" class="language-python">prompt_template = <span class="hljs-string">&quot;&quot;&quot;Answer the following query based on the provided context. If the context does

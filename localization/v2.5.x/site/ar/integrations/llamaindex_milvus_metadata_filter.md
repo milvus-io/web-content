@@ -8,10 +8,10 @@ summary: >-
   الوصفية وإجراء عمليات بحث عن المتجهات باستخدام مرشحات البيانات الوصفية المضمنة
   في LlamaIndex، وتطبيق تعبيرات التصفية الأصلية ل Milvus على مخزن المتجهات.
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Metadata-Filtering-with-LlamaIndex-and-Milvus" class="common-anchor-header">تصفية البيانات الوصفية باستخدام LlamaIndex و Milvus<button data-href="#Metadata-Filtering-with-LlamaIndex-and-Milvus" class="anchor-icon" translate="no">
@@ -239,7 +239,7 @@ result_nodes = retriever.retrieve(<span class="hljs-string">&quot;Books about li
 Life: A User's Manual
 {'author': 'Georges Perec', 'genre': 'Postmodern Fiction', 'year': 1978}
 </code></pre>
-<h2 id="Use-Milvuss-Keyword-Arguments" class="common-anchor-header">استخدم حجج الكلمات الرئيسية لميلفوس<button data-href="#Use-Milvuss-Keyword-Arguments" class="anchor-icon" translate="no">
+<h2 id="Use-Milvuss-Keyword-Arguments" class="common-anchor-header">استخدم حجج الكلمات المفتاحية في ميلفوس<button data-href="#Use-Milvuss-Keyword-Arguments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

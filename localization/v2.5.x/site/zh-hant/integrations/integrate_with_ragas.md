@@ -3,10 +3,10 @@ id: integrate_with_ragas.md
 summary: 本指南說明如何使用 Ragas 來評估建立在 Milvus 上的 Retrieval-Augmented Generation (RAG) 管道。
 title: 使用 Ragas 進行評估
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Evaluation-with-Ragas" class="common-anchor-header">使用 Ragas 進行評估<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">

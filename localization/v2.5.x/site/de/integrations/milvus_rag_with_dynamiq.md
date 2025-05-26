@@ -9,10 +9,10 @@ summary: >-
   präzisen kontextbezogenen Datenzugriff erfordern.
 title: Erste Schritte mit Dynamiq und Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_rag_with_dynamiq.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Getting-Started-with-Dynamiq-and-Milvus" class="common-anchor-header">Erste Schritte mit Dynamiq und Milvus<button data-href="#Getting-Started-with-Dynamiq-and-Milvus" class="anchor-icon" translate="no">
@@ -37,7 +37,7 @@ title: Erste Schritte mit Dynamiq und Milvus
 <li><p><strong>Document Indexing Flow</strong>: Lernen Sie, wie Sie Eingabedateien (z.B. PDFs) verarbeiten, ihren Inhalt in Vektoreinbettungen umwandeln und sie in Milvus speichern. Die Nutzung der leistungsstarken Indizierungsfunktionen von Milvus stellt sicher, dass Ihre Daten für einen schnellen Abruf bereit sind.</p></li>
 <li><p><strong>Document Retrieval Flow</strong>: Erfahren Sie, wie Sie Milvus nach relevanten Dokumenteneinbettungen abfragen und diese nutzen, um mit den LLM-Agenten von Dynamiq aufschlussreiche, kontextbezogene Antworten zu generieren und so eine nahtlose KI-gestützte Benutzererfahrung zu schaffen.</p></li>
 </ul>
-<p>Am Ende dieses Tutorials werden Sie ein solides Verständnis dafür erlangen, wie Milvus und Dynamiq zusammenarbeiten, um skalierbare, kontextbezogene KI-Systeme zu entwickeln, die auf Ihre Bedürfnisse zugeschnitten sind.</p>
+<p>Am Ende dieses Tutorials werden Sie ein solides Verständnis dafür erlangen, wie Milvus und Dynamiq zusammenarbeiten, um skalierbare, kontextbewusste KI-Systeme zu entwickeln, die auf Ihre Bedürfnisse zugeschnitten sind.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ title: Erste Schritte mit Dynamiq und Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Herunterladen der erforderlichen Bibliotheken</h3><pre><code translate="no" class="language-shell">$ pip install dynamiq pymilvus
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Herunterladen der erforderlichen Bibliotheken</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü Runtime" am oberen Rand des Bildschirms und wählen Sie Sitzung neu starten" aus dem Dropdown-Menü).</p>
@@ -61,7 +61,7 @@ title: Erste Schritte mit Dynamiq und Milvus
 <h3 id="Configure-the-LLM-agent" class="common-anchor-header">Konfigurieren Sie den LLM-Agenten</h3><p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="RAG---Document-Indexing-Flow" class="common-anchor-header">RAG - Fluss der Dokumentenindizierung<button data-href="#RAG---Document-Indexing-Flow" class="anchor-icon" translate="no">
       <svg translate="no"

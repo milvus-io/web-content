@@ -18,10 +18,10 @@ title: RAG multimodal dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Jika Anda ingin merasakan efek akhir dari tutorial ini, Anda dapat langsung membuka <a href="https://demos.milvus.io/multimodal-image-search/">demo online</a> dan mencobanya.</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>Tutorial ini menampilkan RAG multimodal yang didukung oleh Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">model BGE yang divisualisasikan</a>, dan <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Dengan sistem ini, pengguna dapat mengunggah gambar dan mengedit instruksi teks, yang diproses oleh model pengambilan yang disusun oleh BGE untuk mencari gambar kandidat. GPT-4o kemudian bertindak sebagai pemeringkat, memilih gambar yang paling sesuai dan memberikan alasan di balik pilihan tersebut. Kombinasi yang kuat ini memungkinkan pengalaman pencarian gambar yang mulus dan intuitif, memanfaatkan Milvus untuk pengambilan yang efisien, model BGE untuk pemrosesan dan pencocokan gambar yang tepat, dan GPT-4o untuk pemeringkatan ulang tingkat lanjut.</p>
 <h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
@@ -39,25 +39,25 @@ title: RAG multimodal dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Instal Ketergantungan</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Instal Ketergantungan</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/FlagOpen/FlagEmbedding.git
-$ pip install -e FlagEmbedding
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/FlagOpen/FlagEmbedding.git</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -e FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">Unduh Data</h3><p>Perintah berikut ini akan mengunduh data contoh dan mengekstrak ke folder lokal "./images_folder", termasuk:</p>
 <ul>
-<li><p><strong>images</strong>: Bagian dari <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> yang berisi sekitar 900 gambar dari kategori &quot;Alat&quot;, &quot;Ponsel dan Aksesori&quot;, dan &quot;Elektronik&quot;.</p></li>
+<li><p><strong>images</strong>: Bagian dari <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> yang berisi sekitar 900 gambar dari kategori "Alat", "Ponsel dan Aksesori", dan "Elektronik".</p></li>
 <li><p>macan<strong>tutul.jpg</strong>: Contoh gambar kueri.</p></li>
 </ul>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
-$ tar -xzf amazon_reviews_2023_subset.<span class="hljs-property">tar</span>.<span class="hljs-property">gz</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf amazon_reviews_2023_subset.tar.gz</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Load-Embedding-Model" class="common-anchor-header">Model Penyematan Muatan</h3><p>Kami akan menggunakan model BGE yang divisualisasikan "bge-visualized-base-en-v1.5" untuk menghasilkan sematan baik untuk gambar maupun teks.</p>
 <p><strong>1. Berat unduhan</strong></p>
-<pre><code translate="no" class="language-shell">$ wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>2. Bangun pembuat enkode</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
@@ -422,4 +422,4 @@ best_img.show()
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
    </span> <span class="img-wrapper"> <span>Hasil terbaik</span> </span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Penerapan Cepat</h3><p>Untuk mempelajari tentang cara memulai demo online dengan tutorial ini, silakan lihat <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">contoh aplikasi</a>.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Penerapan Cepat</h3><p>Untuk mempelajari tentang cara memulai demo online dengan tutorial ini, silakan lihat <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">contoh aplikasi</a>.</p>

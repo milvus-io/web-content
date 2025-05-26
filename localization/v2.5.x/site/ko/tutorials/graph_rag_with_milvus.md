@@ -18,10 +18,10 @@ title: Milvus를 사용한 그래프 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>대규모 언어 모델이 광범위하게 적용되면서 응답의 정확성과 관련성을 개선하는 것이 중요해졌습니다. 검색 증강 생성(RAG)은 외부 지식 베이스로 모델을 강화하여 더 많은 맥락 정보를 제공하고 환각이나 지식 부족과 같은 문제를 완화합니다. 그러나 단순한 RAG 패러다임에만 의존하는 것은 한계가 있으며, 특히 모델이 정확한 답변을 제공하기 어려운 복잡한 개체 관계와 멀티홉 질문을 다룰 때는 더욱 그렇습니다.</p>
-<p>지식 그래프(KG)를 RAG 시스템에 도입하면 새로운 해결책을 찾을 수 있습니다. KG는 엔티티와 그 관계를 구조화된 방식으로 제시하여 보다 정확한 검색 정보를 제공하고 RAG가 복잡한 질문 답변 작업을 더 잘 처리할 수 있도록 도와줍니다. KG-RAG는 아직 초기 단계에 있으며, KG에서 엔티티와 관계를 효과적으로 검색하는 방법이나 벡터 유사도 검색을 그래프 구조와 통합하는 방법에 대한 합의가 아직 이루어지지 않은 상태입니다.</p>
+<p>지식 그래프(KG)를 RAG 시스템에 도입하면 새로운 해결책을 찾을 수 있습니다. KG는 엔티티와 그 관계를 구조화된 방식으로 제시하여 보다 정확한 검색 정보를 제공하고 RAG가 복잡한 질문 답변 작업을 더 잘 처리할 수 있도록 도와줍니다. KG-RAG는 아직 초기 단계에 있으며, KG에서 엔티티와 관계를 효과적으로 검색하는 방법이나 벡터 유사성 검색을 그래프 구조와 통합하는 방법에 대한 합의가 아직 이루어지지 않았습니다.</p>
 <p>이 노트북에서는 이 시나리오의 성능을 크게 향상시킬 수 있는 간단하면서도 강력한 접근 방식을 소개합니다. 이 방법은 다방향 검색 후 재순위를 매기는 단순한 RAG 패러다임이지만 그래프 RAG를 논리적으로 구현하고 멀티홉 질문을 처리하는 데 있어 최첨단 성능을 달성합니다. 어떻게 구현되는지 살펴보겠습니다.</p>
 <p>
   <span class="img-wrapper">
@@ -53,28 +53,28 @@ title: Milvus를 사용한 그래프 RAG
 <p>OpenAI의 모델을 사용합니다. 환경 변수로 <code translate="no">OPENAI_API_KEY</code> <a href="https://platform.openai.com/docs/quickstart">API 키를</a> 준비해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>필요한 라이브러리와 종속성을 가져옵니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
-<span class="hljs-keyword">from</span> scipy.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> csr_matrix
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">messages</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">AIMessage</span>, <span class="hljs-title class_">HumanMessage</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">prompts</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatPromptTemplate</span>, <span class="hljs-title class_">HumanMessagePromptTemplate</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">output_parsers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">StrOutputParser</span>, <span class="hljs-title class_">JsonOutputParser</span>
-<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatOpenAI</span>, <span class="hljs-title class_">OpenAIEmbeddings</span>
+<span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> langchain_core.messages <span class="hljs-keyword">import</span> AIMessage, HumanMessage
+<span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate, HumanMessagePromptTemplate
+<span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser, JsonOutputParser
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI, OpenAIEmbeddings
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 클라이언트, LLM 및 임베딩 모델의 인스턴스를 초기화합니다.</p>
-<pre><code translate="no" class="language-python">milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
+<pre><code translate="no" class="language-python">milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
 
-llm = <span class="hljs-title class_">ChatOpenAI</span>(
+llm = ChatOpenAI(
     model=<span class="hljs-string">&quot;gpt-4o&quot;</span>,
     temperature=<span class="hljs-number">0</span>,
 )
-embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
+embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>MilvusClient의 인수를 사용합니다:</p>
@@ -167,30 +167,30 @@ embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=
 <li>여기서 우리는 주어, 서술어, 목적어를 공백을 사이에 두고 직접 연결하여 관계 개념을 구축합니다.</li>
 </ul>
 <p>또한 나중에 사용할 수 있도록 엔티티 ID를 관계 ID에 매핑하는 딕셔너리와 관계 ID를 구절 ID에 매핑하는 또 다른 딕셔너리를 준비합니다.</p>
-<pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(list)
-relationid_2_passageids = defaultdict(list)
+<pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(<span class="hljs-built_in">list</span>)
+relationid_2_passageids = defaultdict(<span class="hljs-built_in">list</span>)
 
 entities = []
 relations = []
 passages = []
-<span class="hljs-keyword">for</span> passage_id, dataset_info in enumerate(nano_dataset):
+<span class="hljs-keyword">for</span> passage_id, dataset_info <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(nano_dataset):
     passage, triplets = dataset_info[<span class="hljs-string">&quot;passage&quot;</span>], dataset_info[<span class="hljs-string">&quot;triplets&quot;</span>]
-    passages.<span class="hljs-built_in">append</span>(passage)
-    <span class="hljs-keyword">for</span> triplet in triplets:
-        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">0</span>] not in entities:
-            entities.<span class="hljs-built_in">append</span>(triplet[<span class="hljs-number">0</span>])
-        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">2</span>] not in entities:
-            entities.<span class="hljs-built_in">append</span>(triplet[<span class="hljs-number">2</span>])
+    passages.append(passage)
+    <span class="hljs-keyword">for</span> triplet <span class="hljs-keyword">in</span> triplets:
+        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">0</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> entities:
+            entities.append(triplet[<span class="hljs-number">0</span>])
+        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">2</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> entities:
+            entities.append(triplet[<span class="hljs-number">2</span>])
         relation = <span class="hljs-string">&quot; &quot;</span>.join(triplet)
-        <span class="hljs-keyword">if</span> relation not in relations:
-            relations.<span class="hljs-built_in">append</span>(relation)
-            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">0</span>])].<span class="hljs-built_in">append</span>(
+        <span class="hljs-keyword">if</span> relation <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> relations:
+            relations.append(relation)
+            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">0</span>])].append(
                 <span class="hljs-built_in">len</span>(relations) - <span class="hljs-number">1</span>
             )
-            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">2</span>])].<span class="hljs-built_in">append</span>(
+            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">2</span>])].append(
                 <span class="hljs-built_in">len</span>(relations) - <span class="hljs-number">1</span>
             )
-        relationid_2_passageids[relations.index(relation)].<span class="hljs-built_in">append</span>(passage_id)
+        relationid_2_passageids[relations.index(relation)].append(passage_id)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Data-Insertion" class="common-anchor-header">데이터 삽입</h3><p>엔티티, 관계 및 구절에 대한 Milvus 컬렉션을 만듭니다. 엔티티 컬렉션과 관계 컬렉션은 우리 방식에서 그래프 구성을 위한 주요 컬렉션으로 사용되며, 구절 컬렉션은 네이티브 RAG 검색 비교 또는 보조 목적으로 사용됩니다.</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-built_in">len</span>(embedding_model.embed_query(<span class="hljs-string">&quot;foo&quot;</span>))
@@ -283,12 +283,12 @@ query_ner_embeddings = [
     embedding_model.embed_query(query_ner) <span class="hljs-keyword">for</span> query_ner <span class="hljs-keyword">in</span> query_ner_list
 ]
 
-top_k = 3
+top_k = <span class="hljs-number">3</span>
 
 entity_search_res = milvus_client.search(
     collection_name=entity_col_name,
     data=query_ner_embeddings,
-    <span class="hljs-built_in">limit</span>=top_k,
+    limit=top_k,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
 )
 
@@ -297,9 +297,9 @@ query_embedding = embedding_model.embed_query(query)
 relation_search_res = milvus_client.search(
     collection_name=relation_col_name,
     data=[query_embedding],
-    <span class="hljs-built_in">limit</span>=top_k,
+    limit=top_k,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
-)[0]
+)[<span class="hljs-number">0</span>]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">하위 그래프 확장</h3><p>검색된 엔티티와 관계를 사용하여 하위 그래프를 확장하고 후보 관계를 얻은 다음 두 가지 방법에서 병합합니다. 다음은 하위 그래프 확장 프로세스의 순서도입니다:  <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
@@ -448,11 +448,11 @@ rerank_relation_ids = rerank_relations(
 
 final_passages = []
 final_passage_ids = []
-<span class="hljs-keyword">for</span> relation_id in rerank_relation_ids:
-    <span class="hljs-keyword">for</span> passage_id in relationid_2_passageids[relation_id]:
-        <span class="hljs-keyword">if</span> passage_id not in final_passage_ids:
-            final_passage_ids.<span class="hljs-built_in">append</span>(passage_id)
-            final_passages.<span class="hljs-built_in">append</span>(passages[passage_id])
+<span class="hljs-keyword">for</span> relation_id <span class="hljs-keyword">in</span> rerank_relation_ids:
+    <span class="hljs-keyword">for</span> passage_id <span class="hljs-keyword">in</span> relationid_2_passageids[relation_id]:
+        <span class="hljs-keyword">if</span> passage_id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> final_passage_ids:
+            final_passage_ids.append(passage_id)
+            final_passages.append(passages[passage_id])
 passages_from_our_method = final_passages[:final_top_k]
 <button class="copy-code-btn"></button></code></pre>
 <p>구절 컬렉션에서 직접 쿼리 임베딩을 기반으로 상위 K개의 구절을 검색하는 나이브 RAG 메서드와 결과를 비교할 수 있습니다.</p>

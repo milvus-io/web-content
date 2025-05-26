@@ -14,10 +14,10 @@ summary: >-
   Verfeinerung der Ergebnisse.
 title: Volltextsuche mit Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Volltextsuche mit Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
@@ -35,7 +35,7 @@ title: Volltextsuche mit Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Volltextsuche</a> ist eine traditionelle Methode zum Auffinden von Dokumenten durch die Suche nach bestimmten Schlüsselwörtern oder Phrasen im Text. Sie ordnet die Ergebnisse auf der Grundlage von Relevanzwerten ein, die aus Faktoren wie der Häufigkeit von Begriffen berechnet werden. Während die semantische Suche besser in der Lage ist, die Bedeutung und den Kontext zu verstehen, zeichnet sich die Volltextsuche durch einen präzisen Abgleich von Schlüsselwörtern aus, was sie zu einer nützlichen Ergänzung der semantischen Suche macht. Ein gängiger Ansatz zur Erstellung einer Retrieval-Augmented Generation (RAG)-Pipeline besteht darin, Dokumente sowohl über die semantische Suche als auch über die Volltextsuche abzurufen, gefolgt von einem Reranking-Prozess zur Verfeinerung der Ergebnisse.</p>
+    </button></h1><p>Die<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Volltextsuche</a> ist eine traditionelle Methode zum Auffinden von Dokumenten durch die Suche nach bestimmten Schlüsselwörtern oder Phrasen im Text. Sie ordnet die Ergebnisse auf der Grundlage von Relevanzwerten ein, die aus Faktoren wie der Häufigkeit von Begriffen berechnet werden. Während die semantische Suche besser in der Lage ist, die Bedeutung und den Kontext zu verstehen, zeichnet sich die Volltextsuche durch einen präzisen Abgleich von Schlüsselwörtern aus, was sie zu einer nützlichen Ergänzung der semantischen Suche macht. Ein gängiger Ansatz zum Aufbau einer Retrieval-Augmented Generation (RAG)-Pipeline umfasst das Abrufen von Dokumenten sowohl über die semantische Suche als auch über die Volltextsuche, gefolgt von einem Reranking-Prozess zur Verfeinerung der Ergebnisse.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
@@ -176,7 +176,7 @@ schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 100}, 'is_primary': True, 'auto_id': True}, {'name': 'content', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535, 'enable_match': True, 'enable_analyzer': True, 'analyzer_params': {'tokenizer': 'standard', 'filter': ['lowercase']}}}, {'name': 'sparse_vector', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}, {'name': 'dense_vector', 'description': '', 'type': &lt;DataType.FLOAT_VECTOR: 101&gt;, 'params': {'dim': 1536}}, {'name': 'metadata', 'description': '', 'type': &lt;DataType.JSON: 23&gt;}], 'enable_dynamic_field': False, 'functions': [{'name': 'bm25', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['content'], 'output_field_names': ['sparse_vector'], 'params': {}}]}
 </code></pre>
-<h3 id="Indexing-and-Collection-Creation" class="common-anchor-header">Indizierung und Erstellung von Sammlungen</h3><p>Um die Suchleistung zu optimieren, erstellen wir Indizes sowohl für sparse als auch für dense Vektorfelder und legen dann die Sammlung in Milvus an.</p>
+<h3 id="Indexing-and-Collection-Creation" class="common-anchor-header">Indizierung und Erstellung von Sammlungen</h3><p>Um die Suchleistung zu optimieren, erstellen wir Indizes sowohl für sparse als auch für dense Vektorfelder und erstellen dann die Sammlung in Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define indexes</span>
 index_params = MilvusClient.prepare_index_params()
 index_params.add_index(
@@ -280,7 +280,7 @@ client.insert(collection_name, entities)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können die Methoden <code translate="no">search()</code> oder <code translate="no">hybrid_search()</code> flexibel einsetzen, um eine Volltextsuche (sparse), eine semantische Suche (dense) und eine hybride Suche zu implementieren, um robustere und genauere Suchergebnisse zu erzielen.</p>
+    </button></h2><p>Sie können die Methoden <code translate="no">search()</code> oder <code translate="no">hybrid_search()</code> flexibel verwenden, um eine Volltextsuche (sparse), eine semantische Suche (dense) und eine hybride Suche zu implementieren, um robustere und genauere Suchergebnisse zu erzielen.</p>
 <h3 id="Full-Text-Search" class="common-anchor-header">Volltext-Suche</h3><p>Bei der spärlichen Suche wird der BM25-Algorithmus genutzt, um Dokumente zu finden, die bestimmte Schlüsselwörter oder Ausdrücke enthalten. Diese herkömmliche Suchmethode zeichnet sich durch eine präzise Begriffsabstimmung aus und ist besonders effektiv, wenn die Benutzer genau wissen, wonach sie suchen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for keyword search</span>
 query = <span class="hljs-string">&quot;full-text search keywords&quot;</span>

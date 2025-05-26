@@ -18,8 +18,8 @@ title: 빠른 시작
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>신경망 모델의 출력 데이터 형식인 벡터는 정보를 효과적으로 인코딩하고 지식 베이스, 시맨틱 검색, 검색 증강 생성(RAG) 등과 같은 AI 애플리케이션에서 중추적인 역할을 할 수 있습니다.</p>
 <p>Milvus는 오픈 소스 벡터 데이터베이스로, Jupyter 노트북에서 데모 챗봇을 실행하는 것부터 수십억 명의 사용자에게 서비스를 제공하는 웹 규모 검색 구축에 이르기까지 모든 규모의 AI 애플리케이션에 적합합니다. 이 가이드에서는 몇 분 안에 Milvus를 로컬에서 설정하고 Python 클라이언트 라이브러리를 사용하여 벡터를 생성, 저장 및 검색하는 방법을 안내해 드립니다.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus 설치하기<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -255,7 +255,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>출력은 각각 벡터 검색 쿼리에 매핑되는 결과 목록입니다. 각 쿼리에는 결과 목록이 포함되며, 각 결과에는 엔티티 기본 키, 쿼리 벡터까지의 거리 및 지정된 <code translate="no">output_fields</code> 으로 엔티티 세부 정보가 포함됩니다.</p>
+<p>출력은 각각 벡터 검색 쿼리에 매핑되는 결과 목록입니다. 각 쿼리에는 결과 목록이 포함되며, 각 결과에는 엔티티 기본 키, 쿼리 벡터까지의 거리, 지정된 <code translate="no">output_fields</code> 으로 엔티티 세부 정보가 포함됩니다.</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">메타데이터 필터링을 사용한 벡터 검색<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

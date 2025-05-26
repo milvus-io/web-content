@@ -18,8 +18,8 @@ title: 用 Vanna 和 Milvus 编写 SQL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><a href="https://vanna.ai/">Vanna</a>是一个开源 Python RAG（检索增强生成）框架，用于生成 SQL 和相关功能。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，用于支持 Embeddings 相似性搜索和人工智能应用。</p>
 <p>Vanna 的工作分为两个简单的步骤--在你的数据上训练一个 RAG "模型"，然后提出问题，这些问题将返回 SQL 查询，这些查询可以设置为在你的数据库上运行。本指南演示了如何使用 Vanna 根据存储在数据库中的数据生成并执行 SQL 查询。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -46,7 +46,7 @@ title: 用 Vanna 和 Milvus 编写 SQL
 <p>你还需要在环境变量中设置<code translate="no">OPENAI_API_KEY</code> 。您可以从<a href="https://platform.openai.com/docs/guides/production-best-practices/api-keys">OpenAI</a> 获取 API 密钥。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Data-preparation" class="common-anchor-header">数据准备<button data-href="#Data-preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>首先，我们需要继承 Vanna 的<code translate="no">Milvus_VectorStore</code> 和<code translate="no">OpenAI_Chat</code> 类，并定义一个新类<code translate="no">VannaMilvus</code> ，该类结合了这两个类的功能。</p>
+    </button></h2><p>首先，我们需要继承 Vanna 的<code translate="no">Milvus_VectorStore</code> 和<code translate="no">OpenAI_Chat</code> 类，并定义一个新类<code translate="no">VannaMilvus</code> ，将两者的功能结合起来。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, model
 <span class="hljs-keyword">from</span> vanna.milvus <span class="hljs-keyword">import</span> Milvus_VectorStore
 <span class="hljs-keyword">from</span> vanna.openai <span class="hljs-keyword">import</span> OpenAI_Chat
@@ -300,8 +300,8 @@ training_data
       </svg>
     </button></h2><p>由于我们已经对 DDL 数据进行了训练，因此现在可以使用表结构来生成 SQL 查询。</p>
 <p>让我们尝试一个简单的问题。</p>
-<pre><code translate="no" class="language-python">sql = vn_milvus.<span class="hljs-title function_">generate_sql</span>(<span class="hljs-string">&quot;what is the phone number of John Doe?&quot;</span>)
-vn_milvus.<span class="hljs-title function_">run_sql</span>(sql)
+<pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;what is the phone number of John Doe?&quot;</span>)
+vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">SQL Prompt: [{'role': 'system', 'content': &quot;You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE Customer (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Name TEXT NOT NULL,\n    Company TEXT NOT NULL,\n    City TEXT NOT NULL,\n    Phone TEXT NOT NULL\n)\n\nCREATE TABLE User (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Username TEXT NOT NULL UNIQUE,\n    Email TEXT NOT NULL UNIQUE\n)\n\n\n===Additional Context \n\nABC Corp specializes in cutting-edge technology solutions and innovation.\n\nXYZ Inc is a global leader in manufacturing and supply chain management.\n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n&quot;}, {'role': 'user', 'content': 'What are the details of the customer named John Doe?'}, {'role': 'assistant', 'content': &quot;SELECT * FROM Customer WHERE Name = 'John Doe'&quot;}, {'role': 'user', 'content': 'what is the phone number of John Doe?'}]
 Using model gpt-3.5-turbo for 367.25 tokens (approx)
@@ -324,8 +324,8 @@ LLM Response: SELECT Phone FROM Customer WHERE Name = 'John Doe'
 </table>
 </div>
 <p>下面是一个更复杂的问题。制造公司名称信息在文档数据中，属于背景信息。生成的 SQL 查询将根据特定的制造公司名称检索客户信息。</p>
-<pre><code translate="no" class="language-python">sql = vn_milvus.<span class="hljs-title function_">generate_sql</span>(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
-vn_milvus.<span class="hljs-title function_">run_sql</span>(sql)
+<pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
+vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">SQL Prompt: [{'role': 'system', 'content': &quot;You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE Company (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Name TEXT NOT NULL,\n    Industry TEXT NOT NULL,\n    Location TEXT NOT NULL,\n    EmployeeCount INTEGER NOT NULL\n)\n\nCREATE TABLE Customer (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Name TEXT NOT NULL,\n    Company TEXT NOT NULL,\n    City TEXT NOT NULL,\n    Phone TEXT NOT NULL\n)\n\n\n===Additional Context \n\nXYZ Inc is a global leader in manufacturing and supply chain management.\n\nABC Corp specializes in cutting-edge technology solutions and innovation.\n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n&quot;}, {'role': 'user', 'content': 'What are the details of the customer named John Doe?'}, {'role': 'assistant', 'content': &quot;SELECT * FROM Customer WHERE Name = 'John Doe'&quot;}, {'role': 'user', 'content': 'which customer works for a manufacturing corporation?'}]
 Using model gpt-3.5-turbo for 384.25 tokens (approx)
@@ -358,8 +358,8 @@ WHERE Company = 'XYZ Inc'
 </table>
 </div>
 <p>断开 SQLite 和 Milvus 的连接并将其删除，以释放资源。</p>
-<pre><code translate="no" class="language-python">sql_connect.<span class="hljs-built_in">close</span>()
-milvus_client.<span class="hljs-built_in">close</span>()
+<pre><code translate="no" class="language-python">sql_connect.close()
+milvus_client.close()
 
 os.remove(sqlite_path)
 <span class="hljs-keyword">if</span> os.path.exists(milvus_uri):

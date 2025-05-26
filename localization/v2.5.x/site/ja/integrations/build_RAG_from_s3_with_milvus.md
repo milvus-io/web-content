@@ -2,13 +2,13 @@
 id: build_RAG_from_s3_with_milvus.md
 summary: >-
   このチュートリアルでは、MilvusとAmazon S3を使用したRAG(Retrieval-Augmented
-  Generation)パイプラインの構築プロセスを説明します。S3バケットからドキュメントを効率的にロードし、管理可能なチャンクに分割し、高速でスケーラブルな検索のためにMilvusにベクトル埋め込みを保存する方法を学びます。このプロセスを効率化するために、S3からデータをロードし、Milvusに保存するためのツールとしてLangChainを使用します。
+  Generation)パイプラインの構築プロセスを説明します。S3バケットからドキュメントを効率的にロードし、管理可能なチャンクに分割し、高速でスケーラブルな検索のためにMilvusにベクトル埋め込みを保存する方法を学びます。このプロセスを効率化するために、S3からデータをロードし、Milvusへの保存を容易にするツールとしてLangChainを使用します。
 title: RAGパイプラインの構築S3からMilvusへのデータロード
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_from_s3_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_from_s3_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_from_s3_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_from_s3_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Building-a-RAG-Pipeline-Loading-Data-from-S3-into-Milvus" class="common-anchor-header">RAGパイプラインの構築S3からMilvusへのデータロード<button data-href="#Building-a-RAG-Pipeline-Loading-Data-from-S3-into-Milvus" class="anchor-icon" translate="no">
@@ -47,7 +47,7 @@ title: RAGパイプラインの構築S3からMilvusへのデータロード
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択）。</p>
 </div>
-<p>この例では、LLMとしてOpenAIを使います。環境変数として、<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を用意してください。</p>
+<p>この例では、LLMとしてOpenAIを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;your-openai-api-key&quot;</span>
@@ -87,7 +87,7 @@ loader = S3FileLoader(
 )
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li><strong>ドキュメントをロード</strong>する：設定が完了したら、S3からパイプラインにドキュメントをロードします：</li>
+<li><strong>ドキュメントをロード</strong>する：設定したら、S3からパイプラインにドキュメントをロードします：</li>
 </ol>
 <pre><code translate="no" class="language-python">documents = loader.load()
 <button class="copy-code-btn"></button></code></pre>
@@ -121,7 +121,7 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 's3://milvus-s3-example/WhatIsMilvus.docx'}, page_content='Milvus offers three deployment modes, covering a wide range of data scales—from local prototyping in Jupyter Notebooks to massive Kubernetes clusters managing tens of billions of vectors: \n\nMilvus Lite is a Python library that can be easily integrated into your applications. As a lightweight version of Milvus, it’s ideal for quick prototyping in Jupyter Notebooks or running on edge devices with limited resources. Learn more.\nMilvus Standalone is a single-machine server deployment, with all components bundled into a single Docker image for convenient deployment. Learn more.\nMilvus Distributed can be deployed on Kubernetes clusters, featuring a cloud-native architecture designed for billion-scale or even larger scenarios. This architecture ensures redundancy in critical components. Learn more. \n\nWhat Makes Milvus so Fast\U0010fc00 \n\nMilvus was designed from day one to be a highly efficient vector database system. In most cases, Milvus outperforms other vector databases by 2-5x (see the VectorDBBench results). This high performance is the result of several key design decisions: \n\nHardware-aware Optimization: To accommodate Milvus in various hardware environments, we have optimized its performance specifically for many hardware architectures and platforms, including AVX512, SIMD, GPUs, and NVMe SSD. \n\nAdvanced Search Algorithms: Milvus supports a wide range of in-memory and on-disk indexing/search algorithms, including IVF, HNSW, DiskANN, and more, all of which have been deeply optimized. Compared to popular implementations like FAISS and HNSWLib, Milvus delivers 30%-70% better performance.')
 </code></pre>
-<p>この段階で、ドキュメントはS3からロードされ、より小さなチャンクに分割され、RAG（Retrieval-Augmented Generation）パイプラインでの更なる処理の準備が整う。</p>
+<p>この段階で、ドキュメントはS3からロードされ、小さなチャンクに分割され、RAG（Retrieval-Augmented Generation）パイプラインでさらに処理する準備が整う。</p>
 <h2 id="Build-RAG-chain-with-Milvus-Vector-Store" class="common-anchor-header">Milvusベクターストアを使ったRAGチェーンの構築<button data-href="#Build-RAG-chain-with-Milvus-Vector-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

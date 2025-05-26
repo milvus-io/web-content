@@ -3,8 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: Гибридный поиск с Milvus
 title: Гибридный поиск с Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Гибридный поиск с Milvus<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +21,7 @@ title: Гибридный поиск с Milvus
         ></path>
       </svg>
     </button></h1><p>Если вы хотите увидеть окончательный эффект от этого урока, вы можете перейти по ссылке https://demos.milvus.io/hybrid-search/.</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>В этом уроке мы покажем, как проводить гибридный поиск с помощью <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> и <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">модели BGE-M3</a>. Модель BGE-M3 может преобразовывать текст в плотные и разреженные векторы. Milvus поддерживает хранение обоих типов векторов в одной коллекции, что позволяет осуществлять гибридный поиск, повышающий релевантность результатов.</p>
 <p>Milvus поддерживает плотный, разреженный и гибридный методы поиска:</p>
 <ul>
@@ -292,7 +292,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Какой бизнес лучше<span style='color:red'> начать</span> в Хайдарабаде<span style='color:red'>?</span></p>
 <p>Как лучше всего<span style='color:red'> начать</span> заниматься робототехникой<span style='color:red'>?</span> Какая самая лучшая плата для разработки, чтобы я мог<span style='color:red'> начать</span> работать на ней<span style='color:red'>?</span></p>
 <p>Какая математика нужна новичку<span style='color:red'> для</span> понимания алгоритмов компьютерного<span style='color:red'> программирования?</span> Какие книги по алгоритмам подходят для новичков<span style='color:red'>?</span></p>
-<p><span style='color:red'>Как</span> сделать так, чтобы жизнь устраивала вас и не позволяла издеваться <span style='color:red'>над</span> вами психически и эмоционально<span style='color:red'>?</span></p>
+<p><span style='color:red'>Как</span> сделать так, чтобы жизнь устраивала вас и не позволяла <span style='color:red'>издеваться</span> над вами психически и эмоционально<span style='color:red'>?</span></p>
 <p><strong>Результаты поиска по запросу Гибрид:</strong></p>
 <p>Как лучше всего<span style='color:red'> начать</span> заниматься робототехникой<span style='color:red'>?</span> Какая плата лучше для разработки, чтобы я мог<span style='color:red'> начать</span> работать на ней<span style='color:red'>?</span></p>
 <p>Что такое<span style='color:red'> программирование</span> на Java<span style='color:red'>?</span><span style='color:red'> Как</span> выучить язык программирования Java?</p>
@@ -310,5 +310,5 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Какой бизнес лучше<span style='color:red'> начать</span> в Хайдарабаде<span style='color:red'>?</span></p>
 <p>Какой бизнес лучше<span style='color:red'> начать</span> в Хайдарабаде<span style='color:red'>?</span></p>
 <p>Какая математика нужна новичку<span style='color:red'> для</span> понимания алгоритмов компьютерного<span style='color:red'> программирования?</span> Какие книги по алгоритмам подходят для начинающих<span style='color:red'>?</span></p>
-<p><span style='color:red'>Как</span> сделать так, чтобы жизнь вас устраивала, и не дать жизни издеваться <span style='color:red'>над</span> вами психически и эмоционально<span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Быстрое развертывание</h3><p>Чтобы узнать, как запустить онлайн-демонстрацию с помощью этого учебника, пожалуйста, обратитесь к <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">примеру приложения</a>.</p>
+<p><span style='color:red'>Как</span> сделать так, чтобы жизнь вас устраивала, и не дать жизни <span style='color:red'>издеваться</span> над вами психически и эмоционально<span style='color:red'>?</span></p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Быстрое развертывание</h3><p>Чтобы узнать, как запустить онлайн-демонстрацию с помощью этого учебника, пожалуйста, обратитесь к <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">примеру приложения</a>.</p>

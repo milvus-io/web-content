@@ -24,10 +24,10 @@ title: Memulai dengan Mem0 dan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/quickstart_mem0_with_milvus.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://mem0.ai/">Mem0</a> adalah lapisan memori cerdas untuk aplikasi AI, yang dirancang untuk menghadirkan interaksi yang dipersonalisasi dan efisien dengan mempertahankan preferensi pengguna dan terus beradaptasi dari waktu ke waktu. Ideal untuk chatbot dan alat yang digerakkan oleh AI, Mem0 menciptakan pengalaman yang mulus dan sesuai dengan konteks.</p>
@@ -47,7 +47,7 @@ title: Memulai dengan Mem0 dan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Unduh pustaka yang diperlukan</h3><pre><code translate="no" class="language-shell">$ pip install mem0ai pymilvus
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Unduh pustaka yang diperlukan</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
@@ -55,7 +55,7 @@ title: Memulai dengan Mem0 dan Milvus
 <h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Mengkonfigurasi Mem0 dengan Milvus</h3><p>Kita akan menggunakan OpenAI sebagai LLM dalam contoh ini. Anda harus menyiapkan <a href="https://platform.openai.com/docs/quickstart">kunci api</a> <code translate="no">OPENAI_API_KEY</code> sebagai variabel lingkungan.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Sekarang, kita dapat mengonfigurasi Mem0 untuk menggunakan Milvus sebagai penyimpan vektor</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define Config</span>
@@ -79,7 +79,7 @@ m = Memory.from_config(config)
 <blockquote>
 <ul>
 <li>Jika Anda hanya membutuhkan basis data vektor lokal untuk data skala kecil atau pembuatan prototipe, mengatur uri sebagai file lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
-<li>Jika Anda memiliki data berskala besar, misalnya lebih dari satu juta vektor, Anda dapat menyiapkan server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan alamat dan port server sebagai uri Anda, misalnya<code translate="no">http://localhost:19530</code>. Jika Anda mengaktifkan fitur autentikasi di Milvus, gunakan "&lt;nama_user Anda&gt;:&lt;kata sandi Anda&gt;" sebagai token, jika tidak, jangan setel token.</li>
+<li>Jika Anda memiliki data berskala besar, misalnya lebih dari satu juta vektor, Anda dapat menyiapkan server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan alamat dan port server sebagai uri Anda, misalnya<code translate="no">http://localhost:19530</code>. Jika Anda mengaktifkan fitur autentikasi pada Milvus, gunakan "<your_username>:<your_password>" sebagai token, jika tidak, jangan setel token.</li>
 <li>Jika Anda menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint dan kunci API</a> di Zilliz Cloud.</li>
 </ul>
 </blockquote>
@@ -125,7 +125,7 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
 <pre><code translate="no">{'message': 'Memory updated successfully!'}
 </code></pre>
 <h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Mendapatkan Semua Memori Untuk Seorang Pengguna</h3><p>Kita dapat menggunakan fungsi <code translate="no">get_all</code> untuk melihat semua memori yang disisipkan atau memfilter dengan <code translate="no">user_id</code> di Milvus.</p>
-<p>Perhatikan bahwa kita dapat melihat memori sekarang berubah dari &quot;Bekerja untuk meningkatkan kemampuan tenis&quot; menjadi &quot;Suka bermain tenis di akhir pekan&quot;.</p>
+<p>Perhatikan bahwa kita dapat melihat memori sekarang berubah dari "Bekerja untuk meningkatkan kemampuan tenis" menjadi "Suka bermain tenis di akhir pekan".</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -157,14 +157,14 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 </code></pre>
 <h3 id="Search-Memory" class="common-anchor-header">Cari Memori</h3><p>Kita dapat menggunakan fungsi <code translate="no">search</code> untuk mencari memori yang paling berhubungan dengan pengguna.</p>
 <p>Mari kita mulai dengan menambahkan memori lain untuk Alice.</p>
-<pre><code translate="no" class="language-python">new_mem = m.<span class="hljs-keyword">add</span>(
+<pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
     user_id=<span class="hljs-string">&quot;alice&quot;</span>,
     metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;task&quot;</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Sekarang, kita panggil <code translate="no">get_all</code> dengan menyebutkan user_id untuk memverifikasi bahwa kita memang memiliki 2 entri memori untuk user Alice.</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-title function_">get_all</span>(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
+<pre><code translate="no" class="language-python">m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
    'memory': 'Likes to play tennis on weekends',
@@ -182,7 +182,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'user_id': 'alice'}]}
 </code></pre>
 <p>Kita dapat melakukan <code translate="no">search</code> sekarang dengan menyediakan <code translate="no">query</code> dan <code translate="no">user_id</code>. Perhatikan bahwa kita secara default menggunakan metrik <code translate="no">L2</code> untuk pencarian kemiripan, jadi <code translate="no">score</code> yang lebih kecil berarti kemiripan yang lebih besar.</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-title function_">search</span>(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
+<pre><code translate="no" class="language-python">m.search(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
    'memory': 'Likes to play tennis on weekends',
@@ -203,7 +203,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 </code></pre>
 <h3 id="Delete-Memory" class="common-anchor-header">Menghapus Memori</h3><p>Kita juga dapat <code translate="no">delete</code> sebuah memori dengan memberikan <code translate="no">memory_id</code> yang sesuai.</p>
 <p>Kita akan menghapus memori "Suka bermain tenis di akhir pekan" karena <code translate="no">memory_id</code> telah diambil, dan memanggil <code translate="no">get_all</code> untuk memverifikasi bahwa penghapusan telah berhasil.</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-built_in">delete</span>(memory_id=memory_id)
+<pre><code translate="no" class="language-python">m.delete(memory_id=memory_id)
 
 m.get_all(<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>

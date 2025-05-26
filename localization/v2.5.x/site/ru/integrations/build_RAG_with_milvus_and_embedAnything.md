@@ -8,10 +8,10 @@ summary: >-
   форматируются, индексируются и хранятся в целевом векторном хранилище.
 title: Создание RAG с помощью Milvus и EmbedAnything
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">Создание RAG с помощью Milvus и EmbedAnything<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
@@ -33,7 +33,7 @@ title: Создание RAG с помощью Milvus и EmbedAnything
 <p>В этом руководстве мы покажем, как построить конвейер Retrieval-Augmented Generation (RAG), используя EmbedAnything вместе с <a href="https://milvus.io">Milvus</a>. Вместо жесткой связи с конкретной базой данных EmbedAnything использует подключаемую систему <strong>адаптеров</strong> - адаптеры служат обертками, которые определяют, как эмбеддинги форматируются, индексируются и хранятся в целевом векторном хранилище.</p>
 <p>Соединив EmbedAnything с адаптером Milvus, вы сможете генерировать эмбеддинги из различных типов файлов и эффективно хранить их в Milvus всего за несколько строк кода.</p>
 <blockquote>
-<p>⚠️ Примечание: Хотя адаптер в EmbedAnything обрабатывает вставку в Milvus, он не поддерживает поиск из коробки. Чтобы построить полноценный конвейер RAG, вам нужно будет отдельно создать MilvusClient и реализовать логику поиска (например, поиск сходства по векторам) как часть вашего приложения.</p>
+<p>⚠️ Примечание: Хотя адаптер в EmbedAnything обрабатывает вставку в Milvus, он не поддерживает поиск из коробки. Чтобы построить полноценный конвейер RAG, вам нужно будет отдельно создать MilvusClient и реализовать логику поиска (например, поиск сходства по векторам) в своем приложении.</p>
 </blockquote>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,8 +135,8 @@ Collection 'embed_anything_milvus_collection' created with index.
 <li>Если вы хотите использовать <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, полностью управляемый облачный сервис для Milvus, настройте <code translate="no">uri</code> и <code translate="no">token</code>, которые соответствуют <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">публичной конечной точке и ключу Api</a> в Zilliz Cloud.</li>
 </ul>
 </div>
-<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">Инициализация модели встраивания и встраивание PDF-документа</h3><p>Теперь мы инициализируем модель встраивания. Мы воспользуемся моделью <code translate="no">all-MiniLM-L12-v2 model</code> из библиотеки sentence-transformers, которая представляет собой легкую, но мощную модель для генерации вкраплений текста. Она генерирует 384-мерные вкрапления, так что это соответствует размерности нашей коллекции Milvus, установленной на 384. Это выравнивание очень важно и обеспечивает совместимость между размерами векторов, хранящихся в Milvus, и теми, которые генерирует модель.</p>
-<p>EmbedAnything поддерживает гораздо больше моделей встраивания. За более подробной информацией обращайтесь к <a href="https://github.com/StarlightSearch/EmbedAnything">официальной документации</a>.</p>
+<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">Инициализация модели встраивания и встраивание PDF-документа</h3><p>Теперь мы инициализируем модель встраивания. Мы воспользуемся моделью <code translate="no">all-MiniLM-L12-v2 model</code> из библиотеки sentence-transformers, которая представляет собой легкую, но мощную модель для генерации вкраплений текста. Она создает 384-мерные вкрапления, так что это соответствует размерности нашей коллекции Milvus, установленной на 384. Это выравнивание очень важно и обеспечивает совместимость между размерами векторов, хранящихся в Milvus, и теми, которые генерирует модель.</p>
+<p>EmbedAnything поддерживает гораздо больше моделей встраивания. Для получения более подробной информации обратитесь к <a href="https://github.com/StarlightSearch/EmbedAnything">официальной документации</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the embedding model</span>
 model = EmbeddingModel.from_pretrained_hf(
     WhichModel.Bert, model_id=<span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L12-v2&quot;</span>

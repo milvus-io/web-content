@@ -9,10 +9,10 @@ summary: >-
   determinada.
 title: Utilizar ColPali para la recuperación multimodal con Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Utilizar ColPali para la recuperación multimodal con Milvus<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
@@ -37,8 +37,8 @@ title: Utilizar ColPali para la recuperación multimodal con Milvus
     <span></span>
   </span>
 </p>
-<p>La función MaxSim compara una consulta con un documento (lo que se está buscando) examinando sus incrustaciones de tokens. Para cada palabra de la consulta, elige la palabra más similar del documento (utilizando la similitud coseno o la distancia L2 al cuadrado) y suma estas similitudes máximas entre todas las palabras de la consulta.</p>
-<p>ColPali es un método que combina la representación multivectorial de ColBERT con PaliGemma (un gran modelo de lenguaje multimodal) para aprovechar sus grandes capacidades de comprensión. Este método permite representar una página con texto e imágenes mediante una incrustación multivectorial unificada. Las incrustaciones dentro de esta representación multivectorial pueden capturar información detallada, mejorando el rendimiento de la generación aumentada de recuperación (RAG) para datos multimodales.</p>
+<p>La función MaxSim compara una consulta con un documento (lo que se está buscando) observando sus incrustaciones de tokens. Para cada palabra de la consulta, elige la palabra más similar del documento (utilizando la similitud coseno o la distancia L2 al cuadrado) y suma estas similitudes máximas entre todas las palabras de la consulta.</p>
+<p>ColPali es un método que combina la representación multivectorial de ColBERT con PaliGemma (un gran modelo de lenguaje multimodal) para aprovechar sus grandes capacidades de comprensión. Este enfoque permite representar una página con texto e imágenes mediante una incrustación multivectorial unificada. Las incrustaciones dentro de esta representación multivectorial pueden capturar información detallada, mejorando el rendimiento de la generación aumentada de recuperación (RAG) para datos multimodales.</p>
 <p>En este cuaderno, nos referimos a este tipo de representación multivectorial como "incrustaciones ColBERT" por razones de generalidad. Sin embargo, el modelo real que se utiliza es <strong>el modelo ColPali</strong>. Demostraremos cómo utilizar Milvus para la recuperación multivectorial. A partir de ahí, presentaremos cómo utilizar ColPali para recuperar páginas a partir de una consulta determinada.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"

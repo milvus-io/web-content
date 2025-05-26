@@ -19,7 +19,7 @@ summary: linderaトークナイザは辞書ベースの形態素解析を行い�
         ></path>
       </svg>
     </button></h1><p><code translate="no">lindera</code> トークナイザーは辞書ベースの形態素解析を行います。日本語、韓国語、中国語など、単語がスペースで区切られていない言語に適しています。</p>
-<h2 id="Configuration" class="common-anchor-header">構成<button data-href="#Configuration" class="anchor-icon" translate="no">
+<h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,7 +36,7 @@ summary: linderaトークナイザは辞書ベースの形態素解析を行い�
       </svg>
     </button></h2><p><code translate="no">lindera</code> トークナイザを使用する解析器を設定するには、<code translate="no">tokenizer.type</code> を<code translate="no">lindera</code> に設定し、<code translate="no">dict_kind</code> で辞書を選択します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#plaintext">プレーンテキスト</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
@@ -44,11 +44,11 @@ summary: linderaトークナイザは辞書ベースの形態素解析を行い�
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
-analyzerParams.put(&quot;tokenizer&quot;,
-                new HashMap&lt;String, Object&gt;() {{
-                    put(&quot;type&quot;, &quot;lindera&quot;);
-                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;lindera&quot;</span>);
+                    put(<span class="hljs-string">&quot;dict_kind&quot;</span>, <span class="hljs-string">&quot;ipadic&quot;</span>);
                 }});
 <button class="copy-code-btn"></button></code></pre>
 <table>
@@ -87,8 +87,8 @@ analyzerParams.put(&quot;tokenizer&quot;,
         ></path>
       </svg>
     </button></h2><p>アナライザ設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用して動作を確認してください。</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザ設定</h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#plaintext">プレーンテキスト</a></div>
+<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザ構成</h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
@@ -96,11 +96,11 @@ analyzerParams.put(&quot;tokenizer&quot;,
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
-analyzerParams.put(&quot;tokenizer&quot;,
-                new HashMap&lt;String, Object&gt;() {{
-                    put(&quot;type&quot;, &quot;lindera&quot;);
-                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;lindera&quot;</span>);
+                    put(<span class="hljs-string">&quot;dict_kind&quot;</span>, <span class="hljs-string">&quot;ipadic&quot;</span>);
                 }});
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Verification-using-runanalyzer" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code></h3><div class="multipleCode">

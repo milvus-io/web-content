@@ -1249,7 +1249,7 @@
             ]
           },
           {
-            "label": "Pulsa mit Milvus verwenden",
+            "label": "Pulsar mit Milvus verwenden",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,

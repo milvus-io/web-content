@@ -25,10 +25,10 @@ title: Introdução ao Mem0 e ao Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/quickstart_mem0_with_milvus.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://mem0.ai/">O Mem0</a> é uma camada de memória inteligente para aplicações de IA, concebida para proporcionar interações personalizadas e eficientes, retendo as preferências do utilizador e adaptando-se continuamente ao longo do tempo. Ideal para chatbots e ferramentas orientadas por IA, o Mem0 cria experiências perfeitas e conscientes do contexto.</p>
@@ -48,7 +48,7 @@ title: Introdução ao Mem0 e ao Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Descarregar as bibliotecas necessárias</h3><pre><code translate="no" class="language-shell">$ pip install mem0ai pymilvus
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Descarregar as bibliotecas necessárias</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -56,7 +56,7 @@ title: Introdução ao Mem0 e ao Milvus
 <h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Configurar o Mem0 com o Milvus</h3><p>Neste exemplo, vamos utilizar o OpenAI como LLM. Deve preparar a <a href="https://platform.openai.com/docs/quickstart">chave api</a> <code translate="no">OPENAI_API_KEY</code> como uma variável de ambiente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Agora, podemos configurar o Mem0 para usar o Milvus como o armazenamento de vetores</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define Config</span>
@@ -80,8 +80,8 @@ m = Memory.from_config(config)
 <blockquote>
 <ul>
 <li>Se só precisar de uma base de dados vetorial local para dados de pequena escala ou prototipagem, definir o uri como um ficheiro local, por exemplo<code translate="no">./milvus.db</code>, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
-<li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nessa configuração, use o endereço e a porta do servidor como seu uri, por exemplo,<code translate="no">http://localhost:19530</code>. Se ativar a funcionalidade de autenticação no Milvus, utilize "&lt;your_username&gt;:&lt;your_password&gt;" como token, caso contrário não defina o token.</li>
-<li>Se utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os endereços <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">chave API</a> no Zilliz Cloud.</li>
+<li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu uri, por exemplo,<code translate="no">http://localhost:19530</code>. Se ativar a funcionalidade de autenticação no Milvus, utilize "<your_username>:<your_password>" como token, caso contrário não defina o token.</li>
+<li>Se utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">chave API</a> no Zilliz Cloud.</li>
 </ul>
 </blockquote>
 </div>
@@ -126,7 +126,7 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
 <pre><code translate="no">{'message': 'Memory updated successfully!'}
 </code></pre>
 <h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Obter todas as memórias de um utilizador</h3><p>Podemos utilizar a função <code translate="no">get_all</code> para visualizar todas as memórias inseridas ou filtrar por <code translate="no">user_id</code> no Milvus.</p>
-<p>Repare que podemos ver que a memória foi alterada de &quot;Trabalhar para melhorar as capacidades de ténis&quot; para &quot;Gosta de jogar ténis aos fins-de-semana&quot;.</p>
+<p>Repare que podemos ver que a memória foi alterada de "A trabalhar para melhorar as capacidades de ténis" para "Gosta de jogar ténis aos fins-de-semana".</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -158,14 +158,14 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 </code></pre>
 <h3 id="Search-Memory" class="common-anchor-header">Procurar memória</h3><p>Podemos utilizar a função <code translate="no">search</code> para procurar a memória mais relacionada com o utilizador.</p>
 <p>Vamos começar por adicionar outra memória para a Alice.</p>
-<pre><code translate="no" class="language-python">new_mem = m.<span class="hljs-keyword">add</span>(
+<pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
     user_id=<span class="hljs-string">&quot;alice&quot;</span>,
     metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;task&quot;</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Agora, chamamos <code translate="no">get_all</code> especificando o user_id para verificar se temos de facto 2 entradas de memória para a utilizadora Alice.</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-title function_">get_all</span>(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
+<pre><code translate="no" class="language-python">m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
    'memory': 'Likes to play tennis on weekends',
@@ -183,7 +183,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'user_id': 'alice'}]}
 </code></pre>
 <p>Podemos executar <code translate="no">search</code> agora fornecendo <code translate="no">query</code> e <code translate="no">user_id</code>. Note-se que, por defeito, estamos a utilizar a métrica <code translate="no">L2</code> para a pesquisa de semelhanças, pelo que um <code translate="no">score</code> mais pequeno significa maior semelhança.</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-title function_">search</span>(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
+<pre><code translate="no" class="language-python">m.search(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
    'memory': 'Likes to play tennis on weekends',
@@ -204,7 +204,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 </code></pre>
 <h3 id="Delete-Memory" class="common-anchor-header">Apagar memória</h3><p>Também podemos <code translate="no">delete</code> uma memória fornecendo o <code translate="no">memory_id</code> correspondente.</p>
 <p>Vamos apagar a memória "Gosta de jogar ténis aos fins-de-semana", uma vez que o seu <code translate="no">memory_id</code> já foi recuperado, e chamar <code translate="no">get_all</code> para verificar se a eliminação foi bem sucedida.</p>
-<pre><code translate="no" class="language-python">m.<span class="hljs-built_in">delete</span>(memory_id=memory_id)
+<pre><code translate="no" class="language-python">m.delete(memory_id=memory_id)
 
 m.get_all(<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>

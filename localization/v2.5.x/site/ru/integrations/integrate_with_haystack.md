@@ -5,10 +5,10 @@ summary: >-
   Generation (RAG) с помощью Haystack и Milvus.
 title: Retrieval-Augmented Generation (RAG) с помощью Milvus и Haystack
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="common-anchor-header">Retrieval-Augmented Generation (RAG) с помощью Milvus и Haystack<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
@@ -27,8 +27,8 @@ title: Retrieval-Augmented Generation (RAG) с помощью Milvus и Haystack
         ></path>
       </svg>
     </button></h1><p>В этом руководстве показано, как построить систему Retrieval-Augmented Generation (RAG) с помощью Haystack и Milvus.</p>
-<p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает соответствующие документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
-<p><a href="https://haystack.deepset.ai/">Haystack</a> - это Python-фреймворк с открытым исходным кодом от deepset для создания пользовательских приложений с большими языковыми моделями (LLM). <a href="https://milvus.io/">Milvus</a> - самая продвинутая в мире векторная база данных с открытым исходным кодом, созданная для использования в приложениях для поиска сходства встраивания и искусственного интеллекта.</p>
+<p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает релевантные документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
+<p><a href="https://haystack.deepset.ai/">Haystack</a> - это Python-фреймворк с открытым исходным кодом от deepset для создания пользовательских приложений с большими языковыми моделями (LLM). <a href="https://milvus.io/">Milvus</a> - самая продвинутая в мире векторная база данных с открытым исходным кодом, созданная для работы с приложениями поиска сходства встраивания и искусственного интеллекта.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +48,7 @@ title: Retrieval-Augmented Generation (RAG) с помощью Milvus и Haystack
 <pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Если вы используете Google Colab, то для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей может потребоваться <strong>перезапуск среды выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </div>
 <p>Мы будем использовать модели из OpenAI. Вам необходимо подготовить <a href="https://platform.openai.com/docs/quickstart">api ключ</a> <code translate="no">OPENAI_API_KEY</code> в качестве переменной окружения.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os

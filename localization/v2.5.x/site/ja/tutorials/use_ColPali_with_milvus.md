@@ -4,10 +4,10 @@ summary: >-
   このノートブックでは、一般性のためにこの種のマルチベクトル表現を「ColBERT埋め込み」と呼ぶ。しかし、実際に使われているモデルはColPaliモデルである。Milvusをマルチベクトル検索に利用する方法を紹介する。その上で、与えられたクエリに基づいてページを検索するためのColPaliの使い方を紹介する。
 title: Milvusでマルチモーダル検索にColPaliを使う
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Milvusでマルチモーダル検索にColPaliを使う<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
@@ -32,9 +32,9 @@ title: Milvusでマルチモーダル検索にColPaliを使う
     <span></span>
   </span>
 </p>
-<p>MaxSim関数は、クエリとドキュメント（検索対象）のトークン埋め込みを比較します。クエリ内の各単語について、ドキュメントから最も類似した単語を選び（コサイン類似度またはL2距離の2乗を使用）、クエリ内の全単語にわたってこれらの最大類似度を合計する。</p>
+<p>MaxSim関数は、クエリとドキュメント（検索対象）のトークン埋め込みを比較します。クエリ内の各単語について、ドキュメントから最も類似した単語を選び（コサイン類似度またはL2距離の二乗を使用）、クエリ内の全単語にわたってこれらの最大類似度を合計する。</p>
 <p>ColPali は、ColBERT のマルチベクトル表現と PaliGemma（マルチモーダル大規模言語モデル）を組み合 わせ、その強力な理解能力を活用する手法である。このアプローチにより、テキストと画像の両方を含むページを、統一されたマルチベクター埋め込みを用いて表現することができる。このマルチベクトル表現内の埋め込みは詳細な情報を捉えることができ、マルチモーダルデータに対する検索支援生成（RAG）の性能を向上させる。</p>
-<p>このノートブックでは、一般性のために、この種のマルチベクトル表現を「ColBERT埋め込み」と呼ぶ。しかし、実際に使われているモデルは<strong>ColPaliモデル</strong>である。Milvusをマルチベクトル検索に利用する方法を紹介する。その上で、与えられたクエリに基づくページ検索にColPaliを使う方法を紹介する。</p>
+<p>このノートブックでは、一般性のために、この種のマルチベクトル表現を「ColBERT埋め込み」と呼ぶ。しかし、実際に使われているモデルは<strong>ColPaliモデル</strong>である。Milvusをマルチベクトル検索に利用する方法を紹介する。その上で、与えられたクエリに基づいてページを検索するためのColPaliの使い方を紹介する。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

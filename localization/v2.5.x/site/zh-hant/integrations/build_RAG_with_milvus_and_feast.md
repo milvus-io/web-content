@@ -21,10 +21,10 @@ title: 使用 Milvus 和 Feast 建立 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>在本教程中，我們將使用<a href="https://github.com/feast-dev/feast">Feast</a>和<a href="https://milvus.io/">Milvus</a> 建立一個檢索增強生成 (RAG) 管道。Feast 是一個開放源碼的特徵儲存，可以簡化機器學習的特徵管理，為訓練和即時推理實現高效的結構化資料儲存和檢索。Milvus 是專為快速相似性搜尋而設計的高效能向量資料庫，非常適合在 RAG 工作流程中檢索相關文件。</p>
@@ -44,14 +44,14 @@ title: 使用 Milvus 和 Feast 建立 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Feast 解決了此流程中的幾個常見問題：</p>
+    </button></h1><p>Feast 可解決此流程中的幾個常見問題：</p>
 <ol>
 <li><strong>線上檢索：</strong>在推論時，LLM 經常需要存取並非現成可用的資料，而且需要從其他資料來源預先計算。<ul>
 <li>Feast 可以管理部署到各種線上商店（例如 Milvus、DynamoDB、Redis、Google Cloud Datastore）的資料，並確保必要的特徵在推論時一致<em>可用</em>，而且<em>是新計算的</em>。</li>
 </ul></li>
 <li><strong>向量搜尋：</strong>Feast 內建向量相似性搜尋支援，可輕鬆以宣告式方式設定，讓使用者能專注於其應用程式。Milvus 提供強大且有效率的向量相似性搜尋功能。</li>
 <li><strong>更豐富的結構化資料：</strong>除了向量搜尋外，使用者還可以查詢標準結構化欄位，以注入 LLM 上下文，獲得更好的使用者體驗。</li>
-<li><strong>特徵/上下文與版本管理：</strong>組織內的不同團隊通常無法跨專案與服務重複使用資料，造成應用程式邏輯重複。模型具有需要版本化的資料依賴性，例如在模型/提示版本上執行 A/B 測試時。<ul>
+<li><strong>特徵/上下文與版本管理：</strong>組織內的不同團隊通常無法跨專案和服務重複使用資料，導致應用程式邏輯重複。模型具有需要版本化的資料依賴性，例如在模型/提示版本上執行 A/B 測試時。<ul>
 <li>Feast 可讓您發現先前使用過的文件、功能並進行協作，還可讓資料集進行版本化。</li>
 </ul></li>
 </ol>

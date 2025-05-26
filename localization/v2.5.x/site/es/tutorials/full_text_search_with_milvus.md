@@ -9,15 +9,15 @@ summary: >-
   búsqueda de texto completo destaca en la concordancia precisa de palabras
   clave, lo que la convierte en un complemento útil de la búsqueda semántica. Un
   enfoque común para construir una cadena de Generación Mejorada de Recuperación
-  (RAG) implica la recuperación de documentos a través de la búsqueda semántica
-  y la búsqueda de texto completo, seguida de un proceso de reordenación para
+  (RAG) consiste en recuperar documentos a través de la búsqueda semántica y la
+  búsqueda de texto completo, seguidas de un proceso de renumeración para
   refinar los resultados.
 title: Búsqueda de texto completo con Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Búsqueda de texto completo con Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
@@ -46,7 +46,7 @@ title: Búsqueda de texto completo con Milvus
 <p>Milvus también admite la recuperación híbrida combinando la búsqueda de texto completo con la búsqueda semántica basada en vectores densos. Suele mejorar la calidad de la búsqueda y ofrece mejores resultados a los usuarios al equilibrar la concordancia de palabras clave y la comprensión semántica.</p>
 <div class="alert note">
 <ul>
-<li>La búsqueda de texto completo está disponible actualmente en Milvus Standalone, Milvus Distributed y Zilliz Cloud, aunque todavía no es compatible con Milvus Lite (que tiene prevista esta función para una futura implementación). Póngase en contacto con support@zilliz.com para obtener más información.</li>
+<li>La búsqueda de texto completo está disponible actualmente en Milvus Standalone, Milvus Distributed y Zilliz Cloud, aunque todavía no es compatible con Milvus Lite (que tiene esta función prevista para una futura implementación). Póngase en contacto con support@zilliz.com para obtener más información.</li>
 </ul>
 </div>
 <h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">

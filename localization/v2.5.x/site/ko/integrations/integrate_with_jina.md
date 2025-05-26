@@ -3,7 +3,7 @@ id: integrate_with_jina.md
 summary: 이 가이드에서는 Jina 임베딩과 Milvus를 사용하여 유사성 검색 및 검색 작업을 수행하는 방법을 설명합니다.
 title: Milvus와 Jina 통합
 ---
-<h1 id="Integrate-Milvus-with-Jina-AI" class="common-anchor-header">Milvus와 Jina AI 통합<button data-href="#Integrate-Milvus-with-Jina-AI" class="anchor-icon" translate="no">
+<h1 id="Integrate-Milvus-with-Jina-AI" class="common-anchor-header">Milvus와 Jina AI 통합하기<button data-href="#Integrate-Milvus-with-Jina-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Milvus와 Jina 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_with_Jina.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_with_Jina.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>이 가이드에서는 Jina AI 임베딩과 Milvus를 사용하여 유사도 검색 및 검색 작업을 수행하는 방법을 설명합니다.</p>
 <h2 id="Who-is-Jina-AI" class="common-anchor-header">Jina AI란?<button data-href="#Who-is-Jina-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -124,16 +124,16 @@ dvecs = ef.encode_documents([doc])  <span class="hljs-comment"># This method use
         ></path>
       </svg>
     </button></h2><p>Jina AI의 이중 언어 모델은 다국어 플랫폼, 글로벌 지원 및 다국어 콘텐츠 검색을 강화합니다. 독일어-영어 및 중국어-영어 번역을 위해 설계된 이 모델은 다양한 언어 그룹 간의 이해를 촉진하여 언어 간 상호 작용을 간소화합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">JinaEmbeddingFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
-ef = <span class="hljs-title class_">JinaEmbeddingFunction</span>(<span class="hljs-string">&quot;jina-embeddings-v2-base-de&quot;</span>, jina_api_key)
+ef = JinaEmbeddingFunction(<span class="hljs-string">&quot;jina-embeddings-v2-base-de&quot;</span>, jina_api_key)
 
 query = <span class="hljs-string">&quot;what is information retrieval?&quot;</span>
 doc = <span class="hljs-string">&quot;Information Retrieval ist der Prozess, relevante Informationen aus einer großen Sammlung von Daten oder Dokumenten zu finden.&quot;</span>
 
-qvecs = ef.<span class="hljs-title function_">encode_queries</span>([query])
-dvecs = ef.<span class="hljs-title function_">encode_documents</span>([doc])
+qvecs = ef.encode_queries([query])
+dvecs = ef.encode_documents([doc])
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Code-Embeddings" class="common-anchor-header">코드 임베딩<button data-href="#Code-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -281,11 +281,11 @@ res = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>Jina Ai는 임베딩을 이용한 검색 후 검색 품질을 더욱 향상시키기 위한 리랭커도 제공합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">reranker</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">JinaRerankFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> JinaRerankFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
 
-rf = <span class="hljs-title class_">JinaRerankFunction</span>(<span class="hljs-string">&quot;jina-reranker-v1-base-en&quot;</span>, jina_api_key)
+rf = JinaRerankFunction(<span class="hljs-string">&quot;jina-reranker-v1-base-en&quot;</span>, jina_api_key)
 
 query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
@@ -296,7 +296,7 @@ documents = [
     <span class="hljs-string">&quot;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&quot;</span>,
 ]
 
-<span class="hljs-title function_">rf</span>(query, documents)
+rf(query, documents)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[RerankResult(text=&quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term 'artificial intelligence' and laid out its basic goals.&quot;, score=0.9370958209037781, index=1),
  RerankResult(text='The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.', score=0.35420963168144226, index=3),

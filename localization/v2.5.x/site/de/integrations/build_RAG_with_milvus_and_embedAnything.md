@@ -1,17 +1,17 @@
 ---
 id: build_RAG_with_milvus_and_embedAnything.md
 summary: >-
-  In diesem Tutorial wird gezeigt, wie eine Retrieval-Augmented Generation (RAG)
-  Pipeline mit EmbedAnything und Milvus aufgebaut wird. EmbedAnything ist nicht
+  In diesem Tutorial wird gezeigt, wie man eine Retrieval-Augmented Generation
+  (RAG) Pipeline mit EmbedAnything und Milvus erstellt. EmbedAnything ist nicht
   eng mit einer bestimmten Datenbank gekoppelt, sondern verwendet ein steckbares
   Adaptersystem. Adapter dienen als Wrapper, die definieren, wie Einbettungen
   formatiert, indiziert und im Zielvektorspeicher gespeichert werden.
 title: RAG mit Milvus und EmbedAnything aufbauen
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">RAG mit Milvus und EmbedAnything aufbauen<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
@@ -31,7 +31,7 @@ title: RAG mit Milvus und EmbedAnything aufbauen
       </svg>
     </button></h1><p><a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a> ist eine blitzschnelle, leichtgewichtige Einbettungspipeline in Rust, die Text, PDFs, Bilder, Audio und mehr unterstützt.</p>
 <p>In diesem Tutorial zeigen wir, wie man eine Retrieval-Augmented Generation (RAG) Pipeline mit EmbedAnything und <a href="https://milvus.io">Milvus</a> erstellt. EmbedAnything ist nicht eng mit einer bestimmten Datenbank gekoppelt, sondern verwendet ein steckbares <strong>Adaptersystem</strong> - Adapter dienen als Wrapper, die definieren, wie Einbettungen formatiert, indiziert und im Zielvektorspeicher gespeichert werden.</p>
-<p>Indem Sie EmbedAnything mit einem Milvus-Adapter verbinden, können Sie Einbettungen aus verschiedenen Dateitypen generieren und sie effizient in Milvus in nur wenigen Zeilen Code speichern.</p>
+<p>Indem Sie EmbedAnything mit einem Milvus-Adapter verbinden, können Sie Einbettungen aus verschiedenen Dateitypen generieren und diese effizient in Milvus speichern - und das mit nur wenigen Zeilen Code.</p>
 <blockquote>
 <p>⚠️ Hinweis: Während der Adapter in EmbedAnything das Einfügen in Milvus handhabt, unterstützt er die Suche nicht von Haus aus. Um eine vollständige RAG-Pipeline zu erstellen, müssen Sie einen separaten MilvusClient instanziieren und die Abfragelogik (z. B. Ähnlichkeitssuche über Vektoren) als Teil Ihrer Anwendung implementieren.</p>
 </blockquote>

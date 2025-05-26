@@ -26,10 +26,10 @@ title: Criar RAG com Milvus e Feast
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>Neste tutorial, vamos construir um pipeline Retrieval-Augmented Generation (RAG) usando <a href="https://github.com/feast-dev/feast">Feast</a> e <a href="https://milvus.io/">Milvus</a>. O Feast é um armazenamento de recursos de código aberto que simplifica o gerenciamento de recursos para aprendizado de máquina, permitindo o armazenamento e a recuperação eficientes de dados estruturados para treinamento e inferência em tempo real. O Milvus é uma base de dados vetorial de elevado desempenho concebida para uma pesquisa rápida de semelhanças, o que o torna ideal para recuperar documentos relevantes em fluxos de trabalho RAG.</p>
@@ -524,7 +524,7 @@ display(context_data)
       <td>6</td>
       <td>Nova Iorque, Nova Iorque</td>
       <td>Nova Iorque é o centro geográfico e demográfico...</td>
-      <td>Nova Iorque, muitas vezes chamada de Cidade de Nova Iorque ou simplesmente...</td>
+      <td>Nova Iorque, frequentemente designada por Cidade de Nova Iorque ou simplesmente...</td>
       <td>0.739733</td>
     </tr>
     <tr>

@@ -3,10 +3,10 @@ id: mistral_ocr_with_milvus.md
 summary: 이 튜토리얼에서는 Milvus와 Mistral OCR을 사용하여 문서 이해 시스템을 구축하는 방법을 설명합니다.
 title: Mistral OCR 및 Milvus를 사용한 문서 이해
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">Mistral OCR 및 Milvus를 사용한 문서 이해<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
@@ -656,4 +656,4 @@ Content: | Model | Answer |
 <li>Milvus에 텍스트와 벡터 모두 저장</li>
 <li>처리된 모든 문서에서 시맨틱 검색 수행</li>
 </ol>
-<p>이 접근 방식은 단순한 키워드 매칭을 넘어서는 강력한 문서 이해 기능을 지원하여 사용자가 정확한 텍스트 매칭이 아닌 의미를 기반으로 정보를 찾을 수 있게 해줍니다.</p>
+<p>이 접근 방식은 단순한 키워드 매칭을 넘어서는 강력한 문서 이해 기능을 지원하여 사용자가 정확한 텍스트 매칭이 아닌 의미를 기반으로 정보를 찾을 수 있도록 합니다.</p>

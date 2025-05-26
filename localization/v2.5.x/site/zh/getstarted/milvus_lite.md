@@ -82,7 +82,7 @@ title: 本地运行 Milvus Lite
 <button class="copy-code-btn"></button></code></pre>
 <p>我们建议使用<code translate="no">pymilvus</code> 。由于<code translate="no">milvus-lite</code> 已包含在<code translate="no">pymilvus</code> 2.4.2 或更高版本中，因此可通过<code translate="no">pip install</code> 与<code translate="no">-U</code> 强制更新到最新版本，<code translate="no">milvus-lite</code> 会自动安装。</p>
 <p>如果你想明确安装<code translate="no">milvus-lite</code> 软件包，或者你已经安装了旧版本的<code translate="no">milvus-lite</code> 并想更新它，可以使用<code translate="no">pip install -U milvus-lite</code> 。</p>
-<h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">连接到 Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
+<h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">连接 Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,7 +120,7 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下是如何使用 Milvus Lite 进行文本搜索的简单演示。还有更多使用 Milvus Lite 构建<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>、<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb">图像搜索</a>等应用程序的综合<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">示例</a>，以及在<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a>和<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a> 等流行 RAG 框架中使用 Milvus Lite 的<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">示例</a>！</p>
+    </button></h2><p>以下是如何使用 Milvus Lite 进行文本搜索的简单演示。还有更多使用 Milvus Lite 构建<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>、<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb">图像搜索</a>等应用程序的综合<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">示例</a>，以及在<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a>和<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a> 等流行 RAG 框架中使用 Milvus Lite 的<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">示例</a>！</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -346,7 +346,7 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>所有存储在 Milvus Lite 中的数据都可以轻松导出并加载到其他类型的 Milvus 部署中，例如 Docker 上的 Milvus Standalone、K8s 上的 Milvus Distributed 或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的全托管 Milvus。</p>
-<p>Milvus Lite 提供了一个命令行工具，可以将数据转储到一个 json 文件，该文件可以导入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务）。milvus-lite 命令将与 milvus-lite python 软件包一起安装。</p>
+<p>Milvus Lite 提供了一个命令行工具，可以将数据转储到 json 文件，该文件可以导入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务）。milvus-lite 命令将与 milvus-lite python 软件包一起安装。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
 pip install -U &quot;pymilvus[bulk_writer]&quot;
 

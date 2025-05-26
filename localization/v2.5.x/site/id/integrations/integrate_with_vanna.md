@@ -20,8 +20,8 @@ title: Menulis SQL dengan Vanna dan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><a href="https://vanna.ai/">Vanna</a> adalah kerangka kerja Python RAG (Retrieval-Augmented Generation) sumber terbuka untuk pembuatan SQL dan fungsionalitas terkait. <a href="https://milvus.io/">Milvus</a> adalah basis data vektor sumber terbuka yang paling canggih di dunia, yang dibangun untuk mendukung pencarian kemiripan dan aplikasi AI.</p>
 <p>Vanna bekerja dalam dua langkah mudah - melatih "model" RAG pada data Anda, dan kemudian mengajukan pertanyaan yang akan menghasilkan kueri SQL yang dapat diatur untuk dijalankan pada database Anda. Panduan ini mendemonstrasikan cara menggunakan Vanna untuk membuat dan menjalankan kueri SQL berdasarkan data Anda yang tersimpan di database.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -48,7 +48,7 @@ title: Menulis SQL dengan Vanna dan Milvus
 <p>Dan Anda perlu mengatur <code translate="no">OPENAI_API_KEY</code> dalam variabel lingkungan Anda. Anda dapat memperoleh kunci API dari <a href="https://platform.openai.com/docs/guides/production-best-practices/api-keys">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Data-preparation" class="common-anchor-header">Persiapan data<button data-href="#Data-preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -302,8 +302,8 @@ training_data
       </svg>
     </button></h2><p>Seperti yang telah kita latih dengan data DDL, struktur tabel sekarang tersedia untuk membuat kueri SQL.</p>
 <p>Mari kita coba sebuah pertanyaan sederhana.</p>
-<pre><code translate="no" class="language-python">sql = vn_milvus.<span class="hljs-title function_">generate_sql</span>(<span class="hljs-string">&quot;what is the phone number of John Doe?&quot;</span>)
-vn_milvus.<span class="hljs-title function_">run_sql</span>(sql)
+<pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;what is the phone number of John Doe?&quot;</span>)
+vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">SQL Prompt: [{'role': 'system', 'content': &quot;You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE Customer (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Name TEXT NOT NULL,\n    Company TEXT NOT NULL,\n    City TEXT NOT NULL,\n    Phone TEXT NOT NULL\n)\n\nCREATE TABLE User (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Username TEXT NOT NULL UNIQUE,\n    Email TEXT NOT NULL UNIQUE\n)\n\n\n===Additional Context \n\nABC Corp specializes in cutting-edge technology solutions and innovation.\n\nXYZ Inc is a global leader in manufacturing and supply chain management.\n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n&quot;}, {'role': 'user', 'content': 'What are the details of the customer named John Doe?'}, {'role': 'assistant', 'content': &quot;SELECT * FROM Customer WHERE Name = 'John Doe'&quot;}, {'role': 'user', 'content': 'what is the phone number of John Doe?'}]
 Using model gpt-3.5-turbo for 367.25 tokens (approx)
@@ -326,8 +326,8 @@ LLM Response: SELECT Phone FROM Customer WHERE Name = 'John Doe'
 </table>
 </div>
 <p>Ini adalah pertanyaan yang lebih kompleks. Informasi nama perusahaan manufaktur ada dalam data dokumen, yang merupakan informasi latar belakang. Kueri SQL yang dihasilkan akan mengambil informasi pelanggan berdasarkan nama perusahaan manufaktur tertentu.</p>
-<pre><code translate="no" class="language-python">sql = vn_milvus.<span class="hljs-title function_">generate_sql</span>(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
-vn_milvus.<span class="hljs-title function_">run_sql</span>(sql)
+<pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
+vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">SQL Prompt: [{'role': 'system', 'content': &quot;You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE Company (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Name TEXT NOT NULL,\n    Industry TEXT NOT NULL,\n    Location TEXT NOT NULL,\n    EmployeeCount INTEGER NOT NULL\n)\n\nCREATE TABLE Customer (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Name TEXT NOT NULL,\n    Company TEXT NOT NULL,\n    City TEXT NOT NULL,\n    Phone TEXT NOT NULL\n)\n\n\n===Additional Context \n\nXYZ Inc is a global leader in manufacturing and supply chain management.\n\nABC Corp specializes in cutting-edge technology solutions and innovation.\n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n&quot;}, {'role': 'user', 'content': 'What are the details of the customer named John Doe?'}, {'role': 'assistant', 'content': &quot;SELECT * FROM Customer WHERE Name = 'John Doe'&quot;}, {'role': 'user', 'content': 'which customer works for a manufacturing corporation?'}]
 Using model gpt-3.5-turbo for 384.25 tokens (approx)
@@ -360,8 +360,8 @@ WHERE Company = 'XYZ Inc'
 </table>
 </div>
 <p>Putuskan sambungan dari SQLite dan Milvus dan hapus untuk membebaskan sumber daya.</p>
-<pre><code translate="no" class="language-python">sql_connect.<span class="hljs-built_in">close</span>()
-milvus_client.<span class="hljs-built_in">close</span>()
+<pre><code translate="no" class="language-python">sql_connect.close()
+milvus_client.close()
 
 os.remove(sqlite_path)
 <span class="hljs-keyword">if</span> os.path.exists(milvus_uri):

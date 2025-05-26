@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>Um einen Analyzer zu konfigurieren, der den <code translate="no">lindera</code> Tokenizer verwendet, setzen Sie <code translate="no">tokenizer.type</code> auf <code translate="no">lindera</code> und wählen Sie ein Wörterbuch mit <code translate="no">dict_kind</code>.</p>
 <div class="multipleCode">
-   <a href="#plaintext">Python-Klartext</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
@@ -47,11 +47,11 @@ summary: >-
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
-analyzerParams.put(&quot;tokenizer&quot;,
-                new HashMap&lt;String, Object&gt;() {{
-                    put(&quot;type&quot;, &quot;lindera&quot;);
-                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;lindera&quot;</span>);
+                    put(<span class="hljs-string">&quot;dict_kind&quot;</span>, <span class="hljs-string">&quot;ipadic&quot;</span>);
                 }});
 <button class="copy-code-btn"></button></code></pre>
 <table>
@@ -91,7 +91,7 @@ analyzerParams.put(&quot;tokenizer&quot;,
       </svg>
     </button></h2><p>Bevor Sie die Analyzer-Konfiguration auf Ihr Sammelschema anwenden, überprüfen Sie das Verhalten mit der Methode <code translate="no">run_analyzer</code>.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">Analyzer-Konfiguration</h3><div class="multipleCode">
-   <a href="#plaintext">Python-Klartext</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
@@ -99,15 +99,15 @@ analyzerParams.put(&quot;tokenizer&quot;,
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">Map&lt;String, Object&gt; analyzerParams = new HashMap&lt;&gt;();
-analyzerParams.put(&quot;tokenizer&quot;,
-                new HashMap&lt;String, Object&gt;() {{
-                    put(&quot;type&quot;, &quot;lindera&quot;);
-                    put(&quot;dict_kind&quot;, &quot;ipadic&quot;);
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;lindera&quot;</span>);
+                    put(<span class="hljs-string">&quot;dict_kind&quot;</span>, <span class="hljs-string">&quot;ipadic&quot;</span>);
                 }});
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verifizierung mit <code translate="no">run_analyzer</code></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a></div>
+   <a href="#java">Python-Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )

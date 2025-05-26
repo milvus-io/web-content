@@ -20,8 +20,8 @@ title: Система Retrieval-Augmented Generation (RAG) с помощью Mil
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>В этом руководстве показано, как построить систему Retrieval-Augmented Generation (RAG) с помощью CAMEL и Milvus.</p>
 <p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает релевантные документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
 <p><a href="https://www.camel-ai.org/">CAMEL</a> - это мультиагентный фреймворк. <a href="https://milvus.io/">Milvus</a> - самая продвинутая в мире векторная база данных с открытым исходным кодом, созданная для работы с приложениями поиска сходства встраивания и искусственного интеллекта.</p>
@@ -81,12 +81,12 @@ response = requests.get(url)
       </svg>
     </button></h2><p>В этом разделе мы настроим наш индивидуальный конвейер RAG, в качестве примера мы возьмем <code translate="no">VectorRetriever</code>. Мы установим <code translate="no">OpenAIEmbedding</code> в качестве модели встраивания и <code translate="no">MilvusStorage</code> в качестве хранилища для нее.</p>
 <p>Чтобы установить встраивание OpenAI, нам нужно установить <code translate="no">OPENAI_API_KEY</code>, как показано ниже.</p>
-<pre><code translate="no" class="language-python">os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
+<pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Импортируйте и установите экземпляр эмбеддинга:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">embeddings</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbedding</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.embeddings <span class="hljs-keyword">import</span> OpenAIEmbedding
 
-embedding_instance = <span class="hljs-title class_">OpenAIEmbedding</span>()
+embedding_instance = OpenAIEmbedding()
 <button class="copy-code-btn"></button></code></pre>
 <p>Импортируйте и установите экземпляр векторного хранилища:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.storages <span class="hljs-keyword">import</span> MilvusStorage
@@ -110,14 +110,14 @@ storage_instance = MilvusStorage(
 </div>
 <p>Импортируйте и настройте экземпляр ретривера:</p>
 <p>По умолчанию <code translate="no">similarity_threshold</code> установлен на 0,75. Вы можете изменить его.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">VectorRetriever</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> VectorRetriever
 
-vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
+vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Мы используем встроенный <code translate="no">Unstructured Module</code> для разделения контента на небольшие фрагменты, контент будет разделен автоматически с помощью функции <code translate="no">chunk_by_title</code>, максимальное количество символов для каждого фрагмента составляет 500 символов, что является подходящей длиной для <code translate="no">OpenAIEmbedding</code>. Весь текст в кусках будет встроен и сохранен в экземпляр векторного хранилища, это займет некоторое время, пожалуйста, подождите.</p>
-<pre><code translate="no" class="language-python">vector_retriever.<span class="hljs-title function_">process</span>(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
+<pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
 [nltk_data]   Unzipping tokenizers/punkt.zip.

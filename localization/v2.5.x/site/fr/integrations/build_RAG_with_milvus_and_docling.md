@@ -8,10 +8,10 @@ summary: >-
   contexte.
 title: Construire RAG avec Milvus et Docling
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-RAG-with-Milvus-and-Docling" class="common-anchor-header">Construire RAG avec Milvus et Docling<button data-href="#Build-RAG-with-Milvus-and-Docling" class="anchor-icon" translate="no">
@@ -50,7 +50,7 @@ title: Construire RAG avec Milvus et Docling
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus docling openai</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, puis sélectionnez "Restart session" (Redémarrer la session) dans le menu déroulant).</p>
+<p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, puis sélectionnez "Restart session" dans le menu déroulant).</p>
 </div>
 <h3 id="Setting-Up-API-Keys" class="common-anchor-header">Configuration des clés API</h3><p>Nous utiliserons OpenAI comme LLM dans cet exemple. Vous devez préparer la <a href="https://platform.openai.com/docs/quickstart">clé OPENAI_API_KEY</a> en tant que variable d'environnement.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -94,7 +94,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Docling peut analyser différents formats de documents en une représentation unifiée (Docling Document), qui peut ensuite être exportée vers différents formats de sortie. Pour une liste complète des formats d'entrée et de sortie supportés, veuillez vous référer à la <a href="https://docling-project.github.io/docling/usage/supported_formats/">documentation officielle</a>.</p>
+    </button></h2><p>Docling peut analyser différents formats de documents dans une représentation unifiée (Docling Document), qui peut ensuite être exportée vers différents formats de sortie. Pour une liste complète des formats d'entrée et de sortie supportés, veuillez vous référer à la <a href="https://docling-project.github.io/docling/usage/supported_formats/">documentation officielle</a>.</p>
 <p>Dans ce tutoriel, nous utiliserons un fichier Markdown<a href="https://milvus.io/docs/overview.md">(source</a>) comme entrée. Nous traiterons le document à l'aide d'un <strong>HierarchicalChunker</strong> fourni par Docling pour générer des morceaux structurés et hiérarchiques adaptés aux tâches RAG en aval.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> docling.document_converter <span class="hljs-keyword">import</span> DocumentConverter
 <span class="hljs-keyword">from</span> docling_core.transforms.chunker <span class="hljs-keyword">import</span> HierarchicalChunker

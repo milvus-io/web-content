@@ -3,8 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: Recherche hybride avec Milvus
 title: Recherche hybride avec Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Recherche hybride avec Milvus<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +21,7 @@ title: Recherche hybride avec Milvus
         ></path>
       </svg>
     </button></h1><p>Si vous souhaitez découvrir l'effet final de ce tutoriel, vous pouvez vous rendre directement sur le site https://demos.milvus.io/hybrid-search/.</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>Dans ce tutoriel, nous allons montrer comment effectuer une recherche hybride avec <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> et le <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">modèle BGE-M3</a>. Le modèle BGE-M3 peut convertir le texte en vecteurs denses et épars. Milvus prend en charge le stockage des deux types de vecteurs dans une collection, ce qui permet d'effectuer une recherche hybride qui améliore la pertinence des résultats.</p>
 <p>Milvus prend en charge les méthodes de recherche denses, éparses et hybrides :</p>
 <ul>
@@ -308,7 +308,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>Comment</span> créer un nouveau terminal et un nouvel interpréteur de commandes sous Linux en utilisant la<span style='color:red'> programmation</span> C<span style='color:red'>?</span></p>
 <p><span style='color:red'>Comment</span> créer un nouveau shell dans un nouveau terminal en utilisant la<span style='color:red'> programmation</span> C (terminal Linux)<span style='color:red'>?</span></p>
 <p>Quelle est la meilleure entreprise<span style='color:red'> à démarrer</span> à Hyderabad<span style='color:red'>?</span></p>
-<p>Quelle est la meilleure façon de<span style='color:red'> démarrer</span> une entreprise à Hyderabad<span style='color:red'>?</span></p>
+<p>Quelle est la meilleure façon de<span style='color:red'> démarrer une</span> entreprise à Hyderabad<span style='color:red'>?</span></p>
 <p>Quelles sont les mathématiques dont un débutant a besoin<span style='color:red'> pour</span> comprendre les algorithmes de<span style='color:red'> programmation</span> informatique<span style='color:red'>?</span> Quels sont les livres sur les algorithmes qui conviennent à un débutant complet<span style='color:red'>?</span></p>
 <p><span style='color:red'>Comment</span> faire en sorte que la vie vous convienne et qu'elle cesse de vous <span style='color:red'>maltraiter</span> mentalement et émotionnellement<span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide</h3><p>Pour savoir comment démarrer une démonstration en ligne avec ce tutoriel, veuillez vous référer à l <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">'exemple d'application.</a></p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide</h3><p>Pour savoir comment démarrer une démonstration en ligne avec ce tutoriel, veuillez vous référer à l <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">'exemple d'application.</a></p>

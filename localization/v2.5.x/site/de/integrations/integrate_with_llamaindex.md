@@ -20,8 +20,8 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und LlamaIndex
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Diese Anleitung zeigt, wie man ein Retrieval-Augmented Generation (RAG) System mit LlamaIndex und Milvus aufbaut.</p>
 <p>Das RAG-System kombiniert ein Retrieval-System mit einem generativen Modell, um neuen Text auf der Grundlage einer vorgegebenen Aufforderung zu generieren. Das System sucht zunächst mit Milvus relevante Dokumente aus einem Korpus und verwendet dann ein generatives Modell, um neuen Text auf der Grundlage der gefundenen Dokumente zu generieren.</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a> ist ein einfaches, flexibles Daten-Framework für die Verbindung benutzerdefinierter Datenquellen mit großen Sprachmodellen (LLMs). <a href="https://milvus.io/">Milvus</a> ist die weltweit fortschrittlichste Open-Source-Vektordatenbank, die für die Einbettung von Ähnlichkeitssuche und KI-Anwendungen entwickelt wurde.</p>
@@ -125,7 +125,7 @@ documents = SimpleDirectoryReader(
 <li>Für "WeightedRanker" wird erwartet:<ul>
 <li>"Gewichte" (Liste von Floats): Eine Liste mit genau zwei Gewichten:<ol>
 <li>Die Gewichtung für die dichte Einbettungskomponente.</li>
-<li>Das Gewicht für die spärliche Einbettungskomponente. Diese Gewichte werden verwendet, um die Bedeutung der dichten und spärlichen Komponenten der Einbettungen im hybriden Retrievalprozess anzupassen. Der Standardwert ist ein leeres Wörterbuch, was bedeutet, dass der Ranker mit seinen vordefinierten Standardeinstellungen arbeitet.</li>
+<li>Die Gewichtung für die spärliche Einbettungskomponente. Diese Gewichte werden verwendet, um die Bedeutung der dichten und spärlichen Komponenten der Einbettungen im hybriden Retrievalprozess anzupassen. Der Standardwert ist ein leeres Wörterbuch, was bedeutet, dass der Ranker mit seinen vordefinierten Standardeinstellungen arbeitet.</li>
 </ol></li>
 </ul></li>
 </ul></li>
@@ -153,7 +153,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <ul>
 <li>Die Einstellung von <code translate="no">uri</code> als lokale Datei, z. B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> automatisch alle Daten in dieser Datei speichert.</li>
 <li>Wenn Sie große Datenmengen haben, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Server-Uri, z. B.<code translate="no">http://localhost:19530</code>, als <code translate="no">uri</code>.</li>
-<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, nutzen möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
+<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 </div>
 <h3 id="Query-the-data" class="common-anchor-header">Abfrage der Daten</h3><p>Nun, da unser Dokument im Index gespeichert ist, können wir Fragen an den Index stellen. Der Index wird die in ihm gespeicherten Daten als Wissensbasis für chatgpt verwenden.</p>

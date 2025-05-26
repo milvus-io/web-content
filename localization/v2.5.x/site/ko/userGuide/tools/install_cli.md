@@ -59,7 +59,7 @@ title: Milvus_CLI 설치
       </svg>
     </button></h2><p>Milvus_CLI는 도커로 설치할 수 있습니다.</p>
 <h3 id="Prerequisites" class="common-anchor-header">전제 조건</h3><p>Docker 19.03 이상이 필요합니다.</p>
-<h3 id="Install-based-on-Docker-image" class="common-anchor-header">도커 이미지를 기반으로 설치</h3><pre><code translate="no" class="language-shell">$ docker run -it zilliz/milvus_cli:latest
+<h3 id="Install-based-on-Docker-image" class="common-anchor-header">Docker 이미지를 기반으로 설치</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -it zilliz/milvus_cli:latest</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-from-source-code" class="common-anchor-header">소스 코드에서 설치<button data-href="#Install-from-source-code" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,12 +79,12 @@ title: Milvus_CLI 설치
     </button></h2><ol>
 <li>다음 명령을 실행하여 <code translate="no">milvus_cli</code> 리포지토리를 다운로드합니다.</li>
 </ol>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus_cli.git
+<pre><code translate="no" class="language-shell">git clone https://github.com/zilliztech/milvus_cli.git
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>다음 명령을 실행하여 <code translate="no">milvus_cli</code> 폴더에 들어갑니다.</li>
 </ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> milvus_cli
+<pre><code translate="no" class="language-shell">cd milvus_cli
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>다음 명령어를 실행하여 Milvus_CLI를 설치합니다.</li>

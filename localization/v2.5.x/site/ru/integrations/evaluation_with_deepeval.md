@@ -20,8 +20,8 @@ title: Оценка с помощью DeepEval
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_deepeval.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_deepeval.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_deepeval.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_deepeval.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Это руководство демонстрирует, как использовать <a href="https://docs.confident-ai.com/">DeepEval</a> для оценки конвейера Retrieval-Augmented Generation (RAG), построенного на базе <a href="https://milvus.io/">Milvus</a>.</p>
 <p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает релевантные документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
 <p>DeepEval - это фреймворк, который помогает оценивать конвейеры RAG. Существуют инструменты и фреймворки, которые помогают создавать такие конвейеры, но оценить их и определить количественную производительность может быть непросто. Именно здесь на помощь приходит DeepEval.</p>
@@ -49,7 +49,7 @@ title: Оценка с помощью DeepEval
 <p>В этом примере мы будем использовать OpenAI в качестве LLM. Вам следует подготовить <a href="https://platform.openai.com/docs/quickstart">api ключ</a> <code translate="no">OPENAI_API_KEY</code> в качестве переменной окружения.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-*****************&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-*****************&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-the-RAG-pipeline" class="common-anchor-header">Определение конвейера RAG<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -175,10 +175,10 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
             <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content, retrieved_texts
 <button class="copy-code-btn"></button></code></pre>
 <p>Инициализируем класс RAG с клиентами OpenAI и Milvus.</p>
-<pre><code translate="no" class="language-python">openai_client = <span class="hljs-title class_">OpenAI</span>()
-milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python">openai_client = OpenAI()
+milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
-my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_client, milvus_client=milvus_client)
+my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Что касается аргумента <code translate="no">MilvusClient</code>:</p>
@@ -395,7 +395,7 @@ Evaluating 3 test case(s) in parallel: |██████████|100% (3/3
     </button></h2><p>Чтобы оценить качество генерируемых результатов в больших языковых моделях (LLM), важно сосредоточиться на двух ключевых аспектах:</p>
 <ol>
 <li><p><strong>Релевантность</strong>: Оцените, насколько эффективно подсказка направляет LLM на генерацию полезных и контекстуально подходящих ответов.</p></li>
-<li><p><strong>Верность</strong>: Измерьте точность результатов, чтобы убедиться, что модель выдает информацию, которая является фактологически верной и не содержит галлюцинаций или противоречий. Генерируемый контент должен соответствовать фактической информации, предоставленной в контексте поиска.</p></li>
+<li><p><strong>Верность</strong>: Измерьте точность результатов, чтобы убедиться, что модель выдает информацию, которая соответствует фактам и не содержит галлюцинаций или противоречий. Генерируемый контент должен соответствовать фактической информации, предоставленной в контексте поиска.</p></li>
 </ol>
 <p>Все эти факторы в совокупности обеспечивают актуальность и надежность результатов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> deepeval.metrics <span class="hljs-keyword">import</span> AnswerRelevancyMetric, FaithfulnessMetric

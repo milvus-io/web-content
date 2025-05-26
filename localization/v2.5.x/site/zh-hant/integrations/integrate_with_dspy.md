@@ -18,8 +18,8 @@ title: 整合 Milvus 與 DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="What-is-DSPy" class="common-anchor-header">什麼是 DSPy<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ title: 整合 Milvus 與 DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPy 由 Stanford NLP Group 推出，是一個突破性的程式框架，專門用來優化語言模型內的提示和權重，尤其是在大型語言模型 (LLM) 整合於管道多個階段的情況下，更顯重要。DSPy 採用了以學習為基礎的方法，有別於依賴手動製作和調整的傳統提示工程技術。透過吸收問答範例，DSPy 可針對特定任務動態產生最佳化的提示。這種創新的方法能夠無縫地重新組合整個管道，省去持續手動調整提示的需要。DSPy 的 Pythonic 語法提供各種可組合與宣告式模組，簡化了 LLM 的指令。</p>
+    </button></h2><p>DSPy 由 Stanford NLP Group 推出，是一個突破性的程式框架，專門用來優化語言模型中的提示和權重，尤其是在大型語言模型 (LLM) 整合在管道的多個階段的情況下，更有價值。DSPy 採用了以學習為基礎的方法，有別於依賴手動製作和調整的傳統提示工程技術。透過吸收問答範例，DSPy 可針對特定任務動態產生最佳化的提示。這種創新的方法能夠無縫地重新組合整個管道，省去持續手動調整提示的需要。DSPy 的 Pythonic 語法提供各種可組合與宣告式模組，簡化了 LLM 的指令。</p>
 <h2 id="Benefits-of-using-DSPy" class="common-anchor-header">使用 DSPy 的優點<button data-href="#Benefits-of-using-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,7 +76,7 @@ title: 整合 Milvus 與 DSPy
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>DSPy 模組</span> </span></p>
-<p>簽名：DSPy 中的簽章 (Signature) 是宣告性的規格，概述模組的輸入/輸出行為，在執行任務時引導語言模型。 模組 (Module)：DSPy 模組是程式利用語言模型 (LM) 的基本元件。它們抽象出各種提示技術，例如連鎖思考或 ReAct，並可適應處理任何 DSPy Signature。這些模組具有可學習的參數，以及處理輸入和產生輸出的能力，可以結合成更大的程式，其靈感來自 PyTorch 中的 NN 模組，但專為 LM 應用程式量身打造。 優化器：DSPy 中的優化器可微調 DSPy 程式的參數，例如提示和 LLM 權重，以最大化指定的準確度等指標，進而提升程式效率。</p>
+<p>簽名：DSPy 中的簽章 (Signature) 是宣告性的規格，概述模組的輸入/輸出行為，在執行任務時引導語言模型。 模組 (Module)：DSPy 模組是程式利用語言模型 (LM) 的基本元件。它們抽象出各種提示技術，例如連鎖思考或 ReAct，並可適應處理任何 DSPy Signature。這些模組具有可學習的參數，以及處理輸入和產生輸出的能力，可結合形成更大的程式，其靈感來自 PyTorch 中的 NN 模組，但專為 LM 應用程式量身打造。 優化器：DSPy 中的優化器可微調 DSPy 程式的參數，例如提示和 LLM 權重，以最大化指定的準確度等指標，進而提升程式效率。</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">為什麼在 DSPy 中使用 Milvus<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

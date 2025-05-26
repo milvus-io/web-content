@@ -1249,7 +1249,7 @@
             ]
           },
           {
-            "label": "Utilizzare Pulsa con Milvus",
+            "label": "Utilizzare Pulsar con Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1827,7 +1827,7 @@
             "children": []
           },
           {
-            "label": "Dificare",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []

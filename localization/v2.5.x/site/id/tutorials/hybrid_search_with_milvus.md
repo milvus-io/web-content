@@ -3,8 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: Pencarian Hibrida dengan Milvus
 title: Pencarian Hibrida dengan Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Pencarian Hibrida dengan Milvus<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +21,7 @@ title: Pencarian Hibrida dengan Milvus
         ></path>
       </svg>
     </button></h1><p>Jika Anda ingin merasakan efek akhir dari tutorial ini, Anda dapat langsung mengunjungi https://demos.milvus.io/hybrid-search/</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>Dalam tutorial ini, kami akan mendemonstrasikan cara melakukan pencarian hybrid dengan <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> dan <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">model BGE-M3</a>. Model BGE-M3 dapat mengubah teks menjadi vektor padat dan jarang. Milvus mendukung penyimpanan kedua jenis vektor tersebut dalam satu koleksi, sehingga memungkinkan pencarian hibrida yang meningkatkan relevansi hasil.</p>
 <p>Milvus mendukung metode pencarian Dense, Sparse, dan Hybrid:</p>
 <ul>
@@ -140,7 +140,7 @@ query_embeddings = ef([query])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">How to start learning programming?
 </code></pre>
-<h3 id="Run-the-Search" class="common-anchor-header">Jalankan Pencarian</h3><p>Pertama-tama kita akan menyiapkan beberapa fungsi yang berguna untuk menjalankan pencarian:</p>
+<h3 id="Run-the-Search" class="common-anchor-header">Jalankan Pencarian</h3><p>Pertama-tama kami akan menyiapkan beberapa fungsi yang berguna untuk menjalankan pencarian:</p>
 <ul>
 <li><code translate="no">dense_search</code>: hanya mencari di bidang vektor yang padat</li>
 <li><code translate="no">sparse_search</code>: hanya mencari di bidang vektor yang jarang</li>
@@ -311,4 +311,4 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Bisnis mana yang bagus untuk<span style='color:red'> memulai</span> di Hyderabad<span style='color:red'>?</span></p>
 <p>Matematika apa yang dibutuhkan seorang pemula<span style='color:red'> untuk</span> memahami algoritma<span style='color:red'> pemrograman</span> komputer<span style='color:red'>?</span> Buku algoritma apa yang cocok untuk pemula yang lengkap<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> Anda membuat hidup sesuai dengan Anda dan menghentikan hidup <span style='color:red'>menyiksa</span> Anda secara mental dan emosional<span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Penerapan Cepat</h3><p>Untuk mempelajari tentang cara memulai demo online dengan tutorial ini, silakan lihat <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">contoh aplikasi</a>.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Penerapan Cepat</h3><p>Untuk mempelajari tentang cara memulai demo online dengan tutorial ini, silakan lihat <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">contoh aplikasi</a>.</p>

@@ -6,7 +6,7 @@ summary: >-
   no texto. Classifica os resultados com base em pontuações de relevância
   calculadas a partir de factores como a frequência de termos. Enquanto a
   pesquisa semântica é melhor na compreensão do significado e do contexto, a
-  pesquisa em texto integral é excelente na correspondência exacta de
+  pesquisa de texto integral é excelente na correspondência exacta de
   palavras-chave, o que a torna um complemento útil da pesquisa semântica. Uma
   abordagem comum para a construção de um pipeline RAG (Retrieval-Augmented
   Generation) envolve a recuperação de documentos através da pesquisa semântica
@@ -14,10 +14,10 @@ summary: >-
   para refinar os resultados.
 title: Pesquisa de texto integral com Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Pesquisa de texto integral com Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
@@ -46,7 +46,7 @@ title: Pesquisa de texto integral com Milvus
 <p>O Milvus também suporta a recuperação híbrida, combinando a pesquisa de texto integral com a pesquisa semântica baseada em vectores densos. Normalmente, melhora a qualidade da pesquisa e fornece melhores resultados aos utilizadores, equilibrando a correspondência de palavras-chave e a compreensão semântica.</p>
 <div class="alert note">
 <ul>
-<li>A pesquisa de texto integral está atualmente disponível no Milvus Standalone, no Milvus Distributed e no Zilliz Cloud, embora ainda não seja suportada no Milvus Lite (que tem esta funcionalidade planeada para implementação futura). Contacte support@zilliz.com para obter mais informações.</li>
+<li>A pesquisa de texto integral está atualmente disponível no Milvus Standalone, Milvus Distributed e Zilliz Cloud, embora ainda não seja suportada no Milvus Lite (que tem esta funcionalidade planeada para implementação futura). Contacte support@zilliz.com para obter mais informações.</li>
 </ul>
 </div>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">

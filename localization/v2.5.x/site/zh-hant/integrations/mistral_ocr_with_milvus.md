@@ -3,10 +3,10 @@ id: mistral_ocr_with_milvus.md
 summary: 本教學示範如何使用 Milvus 和 Mistral OCR 建立一個文件理解系統。
 title: 使用 Mistral OCR 和 Milvus 理解文件
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">使用 Mistral OCR 和 Milvus 理解文件<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
@@ -64,7 +64,7 @@ title: 使用 Mistral OCR 和 Milvus 理解文件
       </svg>
     </button></h2><ul>
 <li>將文字轉換為數值表示：</li>
-<li>將文字轉換為 1024 維向量</li>
+<li>將文字轉換成 1024 維向量</li>
 <li>捕捉概念之間的語意關係</li>
 <li>可根據意義進行相似性比對</li>
 <li>提供語意搜尋的基礎</li>

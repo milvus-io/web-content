@@ -9,10 +9,10 @@ summary: >-
   indexados e armazenados no armazém de vectores de destino.
 title: Construindo RAG com Milvus e EmbedAnything
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">Construindo RAG com Milvus e EmbedAnything<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
@@ -136,7 +136,7 @@ Collection 'embed_anything_milvus_collection' created with index.
 <li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>
 </div>
-<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">Inicializar o modelo de incorporação e incorporar o documento PDF</h3><p>Agora vamos inicializar o modelo de incorporação. Usaremos o <code translate="no">all-MiniLM-L12-v2 model</code> da biblioteca sentence-transformers, que é um modelo leve, mas poderoso, para gerar embeddings de texto. Produz 384 dimensões de embeddings, o que se alinha com a dimensão da nossa coleção Milvus, que está definida para 384. Este alinhamento é crucial e garante a compatibilidade entre as dimensões vectoriais armazenadas no Milvus e as geradas pelo modelo.</p>
+<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">Inicializar o modelo de incorporação e incorporar o documento PDF</h3><p>Agora vamos inicializar o modelo de incorporação. Usaremos o <code translate="no">all-MiniLM-L12-v2 model</code> da biblioteca sentence-transformers, que é um modelo leve, mas poderoso, para gerar embeddings de texto. Produz 384 dimensões de embeddings, o que se alinha com a dimensão da nossa coleção Milvus que está definida para 384. Este alinhamento é crucial e garante a compatibilidade entre as dimensões vectoriais armazenadas no Milvus e as geradas pelo modelo.</p>
 <p>O EmbedAnything suporta muitos mais modelos de incorporação. Para mais pormenores, consulte a <a href="https://github.com/StarlightSearch/EmbedAnything">documentação oficial</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the embedding model</span>
 model = EmbeddingModel.from_pretrained_hf(

@@ -9,10 +9,10 @@ summary: >-
   altri metodi alternativi di incorporazione rada e la personalizzazione del
   reranker ibrido.
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="common-anchor-header">RAG con ricerca ibrida con Milvus e LlamaIndex<button data-href="#RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
@@ -300,7 +300,7 @@ prestigious, and the challenges and rewards of running a startup.
 <li><code translate="no">hybrid_ranker (str)</code>: Specifica il tipo di ranker utilizzato nelle query di ricerca ibrida. Attualmente supporta solo ["RRFRanker", "WeightedRanker"]. L'impostazione predefinita è "RRFRanker".</li>
 <li><code translate="no">hybrid_ranker_params (dict, optional)</code>: Parametri di configurazione per il ranker ibrido. La struttura di questo dizionario dipende dal ranker specifico utilizzato:<ul>
 <li>Per "RRFRanker", dovrebbe includere:<ul>
-<li>"k" (int): Un parametro utilizzato nella Reciprocal Rank Fusion (RRF). Questo valore viene utilizzato per calcolare i punteggi di rango come parte dell'algoritmo RRF, che combina più strategie di ranking in un unico punteggio per migliorare la rilevanza della ricerca. Il valore predefinito è 60 se non specificato.</li>
+<li>"k" (int): Un parametro utilizzato nella Reciprocal Rank Fusion (RRF). Questo valore viene utilizzato per calcolare i punteggi di rango come parte dell'algoritmo RRF, che combina più strategie di classificazione in un unico punteggio per migliorare la rilevanza della ricerca. Il valore predefinito è 60 se non specificato.</li>
 </ul></li>
 <li>Per "WeightedRanker", si aspetta:<ul>
 <li>"weights" (elenco di float): Un elenco di esattamente due pesi:<ol>

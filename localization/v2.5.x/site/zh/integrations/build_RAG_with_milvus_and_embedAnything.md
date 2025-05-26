@@ -5,10 +5,10 @@ summary: >-
   使用可插拔的适配器系统，而不是与任何特定数据库紧密耦合，适配器作为封装器，定义了嵌入数据的格式化、索引和在目标向量存储中的存储方式。
 title: 用 Milvus 和 EmbedAnything 构建 RAG
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">用 Milvus 和 EmbedAnything 构建 RAG<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
@@ -27,10 +27,10 @@ title: 用 Milvus 和 EmbedAnything 构建 RAG
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a>是用 Rust 构建的快速、轻量级嵌入管道，支持文本、PDF、图像、音频等。</p>
-<p>在本教程中，我们将演示如何使用 EmbedAnything 和<a href="https://milvus.io">Milvus</a> 一起构建检索增强生成（RAG）管道。EmbedAnything 并不与任何特定数据库紧密耦合，而是使用可插拔的<strong>适配器</strong>系统--适配器作为封装器，可定义嵌入数据的格式、索引和在目标向量存储中的存储方式。</p>
+<p>在本教程中，我们将演示如何使用 EmbedAnything 和<a href="https://milvus.io">Milvus</a> 一起构建检索增强生成（RAG）管道。EmbedAnything 使用可插拔的<strong>适配器</strong>系统，而不是与任何特定数据库紧密耦合--适配器就像包装器一样，定义嵌入数据的格式化、索引和在目标向量存储中的存储方式。</p>
 <p>通过将 EmbedAnything 与 Milvus 适配器配对，只需几行代码，您就可以从不同的文件类型生成嵌入信息，并将其高效地存储到 Milvus 中。</p>
 <blockquote>
-<p>⚠️ 注：虽然 EmbedAnything 中的适配器可以处理插入 Milvus 的问题，但它并不支持开箱即用的搜索。要建立一个完整的 RAG 管道，您还需要单独实例化一个 MilvusClient，并将检索逻辑（如向量的相似性搜索）作为应用程序的一部分来实现。</p>
+<p>⚠️ 注：虽然 EmbedAnything 中的适配器可以处理插入 Milvus 的问题，但它不支持开箱即用的搜索。要建立一个完整的 RAG 管道，您还需要单独实例化一个 MilvusClient，并将检索逻辑（如向量的相似性搜索）作为应用程序的一部分来实现。</p>
 </blockquote>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +139,7 @@ model = EmbeddingModel.from_pretrained_hf(
     WhichModel.Bert, model_id=<span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L12-v2&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>现在，让我们嵌入一个 PDF 文件。EmbedAnything 可以轻松处理 PDF（和更多）文档，并将其嵌入内容直接存储在 Milvus 中。</p>
+<p>现在，让我们嵌入一个 PDF 文件。EmbedAnything 可以轻松处理 PDF（和更多）文档，并将其嵌入直接存储在 Milvus 中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Embed a PDF file</span>
 data = embed_anything.embed_file(
     <span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>,

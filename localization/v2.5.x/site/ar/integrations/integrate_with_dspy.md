@@ -20,8 +20,8 @@ title: دمج ميلفوس مع DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="What-is-DSPy" class="common-anchor-header">ما هو DSPy<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +56,7 @@ title: دمج ميلفوس مع DSPy
     </button></h2><ul>
 <li>نهج البرمجة: يوفر DSPy نهج برمجة منهجي لتطوير خطوط أنابيب LLM من خلال تجريد خطوط الأنابيب كرسوم بيانية لتحويل النصوص بدلاً من مجرد المطالبة فقط بآليات LLM. تتيح وحداته التوضيحية تصميمًا منظمًا وتحسينًا منظمًا، لتحل محل طريقة التجربة والخطأ في قوالب المطالبة التقليدية.</li>
 <li>تحسين الأداء: يُظهر DSPy مكاسب كبيرة في الأداء مقارنةً بالطرق الحالية. ومن خلال دراسات الحالة، يتفوق على نماذج المطالبة القياسية والعروض التوضيحية التي أنشأها الخبراء، مما يُظهر تعدد استخداماته وفعاليته حتى عند تجميعها في نماذج LM أصغر.</li>
-<li>التجريد المعياري: يُلخص DSPy بفعالية الجوانب المعقدة لتطوير خط أنابيب LM، مثل التحلل والضبط الدقيق واختيار النموذج. وباستخدام DSPy، يمكن ترجمة برنامج موجز بسلاسة إلى تعليمات لنماذج مختلفة، مثل GPT-4 أو Llama2-13b أو T5-base، مما يسهل عملية التطوير ويعزز الأداء.</li>
+<li>التجريد المعياري: يُلخص DSPy بفعالية الجوانب المعقدة لتطوير خط أنابيب إدارة التعلم الآلي بشكل فعال، مثل التحلل والضبط الدقيق واختيار النموذج. وباستخدام DSPy، يمكن ترجمة برنامج موجز بسلاسة إلى تعليمات لنماذج مختلفة، مثل GPT-4 أو Llama2-13b أو T5-base، مما يسهل عملية التطوير ويعزز الأداء.</li>
 </ul>
 <h2 id="Modules" class="common-anchor-header">الوحدات النمطية<button data-href="#Modules" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,7 +193,7 @@ dspy.settings.configure(lm=turbo)
     question = dspy.InputField()
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>نقوم بتضمين أوصاف قصيرة للحقول <code translate="no">context</code> و <code translate="no">answer</code> لتحديد إرشادات أوضح حول ما سيتلقاه النموذج وما يجب أن يولده.</p>
+<p>نقوم بتضمين أوصاف قصيرة للحقلين <code translate="no">context</code> و <code translate="no">answer</code> لتحديد إرشادات أوضح حول ما سيتلقاه النموذج وما يجب أن يولده.</p>
 <h3 id="Building-the-pipeline" class="common-anchor-header">بناء خط الأنابيب</h3><p>الآن، دعونا نحدد خط أنابيب RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rm</span>):

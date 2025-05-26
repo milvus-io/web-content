@@ -1,16 +1,16 @@
 ---
 id: build_RAG_with_milvus_and_docling.md
 summary: >-
-  Neste tutorial, mostraremos como construir um pipeline RAG
-  (Retrieval-Augmented Generation) usando Milvus e Docling. O pipeline integra o
-  Docling para análise de documentos, o Milvus para armazenamento de vectores e
-  o OpenAI para gerar respostas perspicazes e sensíveis ao contexto.
+  Neste tutorial, mostraremos como criar um pipeline RAG (Retrieval-Augmented
+  Generation) usando Milvus e Docling. O pipeline integra o Docling para análise
+  de documentos, o Milvus para armazenamento de vectores e o OpenAI para gerar
+  respostas perspicazes e sensíveis ao contexto.
 title: Construir RAG com Milvus e Docling
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-RAG-with-Milvus-and-Docling" class="common-anchor-header">Construir RAG com Milvus e Docling<button data-href="#Build-RAG-with-Milvus-and-Docling" class="anchor-icon" translate="no">
@@ -215,7 +215,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Vejamos os resultados da pesquisa da consulta</p>
+<p>Vamos dar uma vista de olhos aos resultados da pesquisa da consulta</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [

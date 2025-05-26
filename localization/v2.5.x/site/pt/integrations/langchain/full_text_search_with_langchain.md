@@ -20,10 +20,10 @@ title: Utilização da pesquisa de texto integral com LangChain e Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">A pesquisa de texto integral</a> é um método tradicional de recuperação de documentos através da correspondência de palavras-chave ou frases específicas no texto. Classifica os resultados com base em pontuações de relevância calculadas a partir de factores como a frequência de termos. Enquanto a pesquisa semântica é melhor na compreensão do significado e do contexto, a pesquisa de texto integral é excelente na correspondência exacta de palavras-chave, o que a torna um complemento útil da pesquisa semântica. O algoritmo BM25 é amplamente utilizado para a classificação na pesquisa de texto integral e desempenha um papel fundamental na Retrieval-Augmented Generation (RAG).</p>
@@ -55,7 +55,7 @@ title: Utilização da pesquisa de texto integral com LangChain e Milvus
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
 <p>Vamos utilizar os modelos do OpenAI. Deve preparar as variáveis de ambiente <code translate="no">OPENAI_API_KEY</code> do <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -116,7 +116,7 @@ vectorstore = Milvus.from_documents(
 </ul>
 <p>Note-se que nos parâmetros de inicialização do Milvus acima mencionados, também especificamos <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code>. Uma vez que o campo <code translate="no">sparse</code> é tomado como o campo de saída definido por <code translate="no">BM25BuiltInFunction</code>, o outro campo <code translate="no">dense</code> será automaticamente atribuído ao campo de saída de OpenAIEmbeddings.</p>
 <p>Na prática, especialmente quando se combinam vários embeddings ou funções, recomendamos que se especifiquem explicitamente os campos de entrada e saída de cada função para evitar ambiguidades.</p>
-<p>No exemplo seguinte, especificamos explicitamente os campos de entrada e de saída de <code translate="no">BM25BuiltInFunction</code>, tornando claro para que campo se destina a função incorporada.</p>
+<p>No exemplo seguinte, especificamos explicitamente os campos de entrada e saída de <code translate="no">BM25BuiltInFunction</code>, tornando claro para que campo se destina a função incorporada.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
 embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
@@ -171,7 +171,7 @@ vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['sparse']
 </code></pre>
-<h2 id="Customize-analyzer" class="common-anchor-header">Personalizar analisador<button data-href="#Customize-analyzer" class="anchor-icon" translate="no">
+<h2 id="Customize-analyzer" class="common-anchor-header">Personalizar o analisador<button data-href="#Customize-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,7 +186,7 @@ vectorstore.vector_fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os analisadores são essenciais na pesquisa de texto completo, dividindo a frase em tokens e efectuando a análise lexical, como a remoção de stemming e stop word. Os analisadores são normalmente específicos do idioma. Pode consultar <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">este guia</a> para saber mais sobre os analisadores no Milvus.</p>
+    </button></h2><p>Os analisadores são essenciais na pesquisa de texto completo, dividindo a frase em tokens e efectuando a análise lexical, como a remoção de palavras de tronco e de paragem. Os analisadores são normalmente específicos do idioma. Pode consultar <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">este guia</a> para saber mais sobre os analisadores no Milvus.</p>
 <p>O Milvus suporta dois tipos de analisadores: <strong>Analisadores incorporados</strong> e <strong>Analisadores personalizados</strong>. Por predefinição, o <code translate="no">BM25BuiltInFunction</code> utilizará o <a href="https://milvus.io/docs/standard-analyzer.md">analisador incorporado padrão</a>, que é o analisador mais básico que simboliza o texto com pontuação.</p>
 <p>Se você quiser usar um analisador diferente ou personalizar o analisador, pode passar o parâmetro <code translate="no">analyzer_params</code> na inicialização <code translate="no">BM25BuiltInFunction</code>.</p>
 <pre><code translate="no" class="language-python">analyzer_params_custom = {

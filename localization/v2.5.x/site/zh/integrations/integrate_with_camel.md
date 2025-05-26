@@ -18,8 +18,8 @@ title: 使用 Milvus 和 Camel 的检索增强生成 (RAG) 系统
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南演示了如何使用 Camel 和 Milvus 建立一个检索-增强生成（RAG）系统。</p>
 <p>RAG 系统将检索系统与生成模型相结合，根据给定提示生成新文本。该系统首先使用 Milvus 从语料库中检索相关文档，然后使用生成模型根据检索到的文档生成新文本。</p>
 <p><a href="https://www.camel-ai.org/">Camel</a>是一个多 Agents 框架。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，专为支持 Embeddings 相似性搜索和人工智能应用而构建。</p>
@@ -46,7 +46,7 @@ title: 使用 Milvus 和 Camel 的检索增强生成 (RAG) 系统
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>让我们首先从 https://arxiv.org/pdf/2303.17760.pdf 加载 Camel 文件。这将是我们的本地示例数据。</p>
+    </button></h2><p>首先从 https://arxiv.org/pdf/2303.17760.pdf 加载 Camel 文件。这将是我们的本地示例数据。</p>
 <pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -78,13 +78,13 @@ response = requests.get(url)
         ></path>
       </svg>
     </button></h2><p>在本节中，我们将设置自定义 RAG 管道，以<code translate="no">VectorRetriever</code> 为例。我们将把<code translate="no">OpenAIEmbedding</code> 设置为嵌入模型，把<code translate="no">MilvusStorage</code> 设置为其存储空间。</p>
-<p>要设置 OpenAI 嵌入，我们需要设置<code translate="no">OPENAI_API_KEY</code> 。</p>
-<pre><code translate="no" class="language-python">os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
+<p>要设置 OpenAI 嵌入，我们需要在下面的<code translate="no">OPENAI_API_KEY</code> 中进行设置。</p>
+<pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>导入并设置嵌入实例：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">embeddings</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbedding</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.embeddings <span class="hljs-keyword">import</span> OpenAIEmbedding
 
-embedding_instance = <span class="hljs-title class_">OpenAIEmbedding</span>()
+embedding_instance = OpenAIEmbedding()
 <button class="copy-code-btn"></button></code></pre>
 <p>导入并设置向量存储实例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.storages <span class="hljs-keyword">import</span> MilvusStorage
@@ -108,14 +108,14 @@ storage_instance = MilvusStorage(
 </div>
 <p>导入并设置检索器实例：</p>
 <p>默认情况下，<code translate="no">similarity_threshold</code> 设置为 0.75。您可以更改。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">VectorRetriever</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> VectorRetriever
 
-vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
+vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>我们使用集成的<code translate="no">Unstructured Module</code> 将内容分割成小块，内容将通过<code translate="no">chunk_by_title</code> 功能自动分割，每个小块的最大字符数为 500 字符，这是<code translate="no">OpenAIEmbedding</code> 的合适长度。分块中的所有文本将被嵌入并存储到向量存储实例中，这需要一些时间，请稍候。</p>
-<pre><code translate="no" class="language-python">vector_retriever.<span class="hljs-title function_">process</span>(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
+<pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
 [nltk_data]   Unzipping tokenizers/punkt.zip.
@@ -164,7 +164,7 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
 <p>您需要做的是</p>
 <ul>
 <li>设置内容输入路径，可以是本地路径或远程网址</li>
-<li>为 Milvus 设置远程网址和 api 密钥</li>
+<li>为 Milvus 设置远程 url 和 api 密钥</li>
 <li>提供查询</li>
 </ul>
 <p>自动 RAG 管道将为给定的内容输入路径创建 Collections，Collection 名称将根据内容输入路径名称自动设置，如果该 Collections 存在，它将直接进行检索。</p>
@@ -214,7 +214,7 @@ Retrieved Context:
         ></path>
       </svg>
     </button></h2><p>在本节中，我们将展示如何将<code translate="no">AutoRetriever</code> 与一个<code translate="no">ChatAgent</code> 结合起来。</p>
-<p>让我们设置一个 Agents 函数，在该函数中，我们可以通过向该代理提供查询来获取响应。</p>
+<p>让我们设置一个 Agents 函数，在此函数中，我们可以通过向该代理提供查询来获取响应。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> RoleType

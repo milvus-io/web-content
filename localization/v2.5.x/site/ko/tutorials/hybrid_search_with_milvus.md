@@ -3,8 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: Milvus를 사용한 하이브리드 검색
 title: Milvus를 사용한 하이브리드 검색
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Milvus를 사용한 하이브리드 검색<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +21,7 @@ title: Milvus를 사용한 하이브리드 검색
         ></path>
       </svg>
     </button></h1><p>이 튜토리얼의 최종 효과를 경험하고 싶다면 https://demos.milvus.io/hybrid-search/ 으로 바로 이동하세요.</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>이 튜토리얼에서는 <a href="https://milvus.io/docs/multi-vector-search.md">Milvus와</a> <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 모델을</a> 사용하여 하이브리드 검색을 수행하는 방법을 보여드리겠습니다. BGE-M3 모델은 텍스트를 고밀도 및 희소 벡터로 변환할 수 있습니다. Milvus는 두 가지 유형의 벡터를 하나의 컬렉션에 저장하여 결과 연관성을 향상시키는 하이브리드 검색을 지원합니다.</p>
 <p>Milvus는 밀도, 스파스, 하이브리드 검색 방식을 지원합니다:</p>
 <ul>
@@ -291,8 +291,8 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>하이데라바드에서 어떤 사업을<span style='color:red'> 시작하는</span> 것이 더 낫습니까<span style='color:red'>?</span></p>
 <p>하이데라바드에서 어떤 사업을<span style='color:red'> 시작하는</span> 것이 좋은가요<span style='color:red'>?</span></p>
 <p>로봇 공학을<span style='color:red'> 시작하는</span> 가장 좋은 방법은 무엇인가요<span style='color:red'>?</span> 작업을<span style='color:red'> 시작할</span> 수있는 최고의 개발 보드는 무엇입니까<span style='color:red'>?</span></p>
-<p>초보자가 컴퓨터<span style='color:red'> 프로그래밍</span> 알고리즘을<span style='color:red'> 이해하려면</span> 어떤 수학이 필요하나요<span style='color:red'>?</span> 완전 초보자에게 적합한 알고리즘 관련 서적은 무엇인가요<span style='color:red'>?</span></p>
-<p><span style='color:red'>어떻게</span> 하면 삶이 자신에게 적합하게 만들고 삶이 정신적, 정서적으로 <span style='color:red'>학대하는</span> 것을 막을 수 있습니까<span style='color:red'>?</span></p>
+<p>완전 초보자가 컴퓨터<span style='color:red'> 프로그래밍</span> 알고리즘을<span style='color:red'> 이해하려면</span> 어떤 수학이 필요하나요<span style='color:red'>?</span> 완전 초보자에게 적합한 알고리즘 관련 서적은 무엇인가요<span style='color:red'>?</span></p>
+<p><span style='color:red'>어떻게</span> 하면 삶이 자신에게 적합하게 만들고 삶이 정신적, 정서적으로 자신을 <span style='color:red'>학대하는</span> 것을 막을 수 있습니까<span style='color:red'>?</span></p>
 <p><strong>하이브리드 검색 결과:</strong></p>
 <p>로봇 공학을<span style='color:red'> 시작하는</span> 가장 좋은 방법은 무엇인가요<span style='color:red'>?</span> 작업을<span style='color:red'> 시작할</span> 수있는 최고의 개발 보드는 무엇입니까<span style='color:red'>?</span></p>
 <p>자바<span style='color:red'> 프로그래밍이란</span> 무엇인가요<span style='color:red'>?</span> 자바 프로그래밍 언어를 배우는<span style='color:red'> 방법</span>?</p>
@@ -311,4 +311,4 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>하이데라바드에서 어떤 사업을<span style='color:red'> 시작하는</span> 것이 좋은가요<span style='color:red'>?</span></p>
 <p>완전한 초보자가 컴퓨터<span style='color:red'> 프로그래밍</span> 알고리즘을<span style='color:red'> 이해하려면</span> 어떤 수학이 필요합니까<span style='color:red'>?</span> 완전한 초보자에게 적합한 알고리즘에 관한 책은 무엇입니까<span style='color:red'>?</span></p>
 <p><span style='color:red'>어떻게</span> 삶을 자신에게 적합하게 만들고 삶이 정신적, 정서적으로 당신을 <span style='color:red'>학대하는</span> 것을 막을 수 있습니까<span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">빠른 배포</h3><p>이 튜토리얼을 통해 온라인 데모를 시작하는 방법에 대해 알아보려면 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">예제 애플리케이션을</a> 참조하세요.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">빠른 배포</h3><p>이 튜토리얼을 통해 온라인 데모를 시작하는 방법에 대해 알아보려면 <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">예제 애플리케이션을</a> 참조하세요.</p>

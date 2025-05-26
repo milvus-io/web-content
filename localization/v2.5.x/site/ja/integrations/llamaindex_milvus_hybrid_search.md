@@ -7,10 +7,10 @@ summary: >-
   RAGパイプラインでのハイブリッド検索にMilvusを使用する方法を示します。推奨されるデフォルトのハイブリッド検索（semantic +
   BM25）から始め、他の代替スパース埋め込み方法とハイブリッドリランカーのカスタマイズを探ります。
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="common-anchor-header">MilvusとLlamaIndexによるハイブリッド検索を使用したRAG<button data-href="#RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
@@ -158,7 +158,7 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">テキストアナライザーをカスタマイズする</h3><p>アナライザーは、文章をトークンに分割し、ステミングやストップワード除去などの語彙処理を行うことで、全文検索において重要な役割を果たします。アナライザーは通常、言語固有です。詳細は<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus Analyzer Guideを</a>ご参照ください。</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">テキストアナライザーをカスタマイズする</h3><p>アナライザーは、文章をトークンに分割し、ステミングやストップワード除去などの語彙処理を行うことで、全文検索において重要な役割を果たします。アナライザは通常、言語固有です。詳細は<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus Analyzer Guideを</a>ご参照ください。</p>
 <p>Milvusは2種類のアナライザをサポートしています：<strong>ビルトイン アナライザと</strong> <strong>カスタム アナライザ</strong>です。デフォルトでは、<code translate="no">enable_sparse</code> が True に設定されている場合、<code translate="no">MilvusVectorStore</code> はデフォルト設定の<code translate="no">BM25BuiltInFunction</code> を利用し、句読点に基づいてテキストをトークン化する標準の組み込みアナライザを採用します。</p>
 <p>別の解析器を使用したり、既存の解析器をカスタマイズしたりするには、<code translate="no">BM25BuiltInFunction</code> を構築する際に<code translate="no">analyzer_params</code> 引数に値を指定します。その後、この関数を<code translate="no">MilvusVectorStore</code> の<code translate="no">sparse_embedding_function</code> として設定します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
@@ -243,7 +243,7 @@ prestigious, and the challenges and rewards of running a startup.
 <li><code translate="no">encode_queries</code>:このメソッドは、テキストをクエリ用のスパース埋め込みリストに変換します。</li>
 <li><code translate="no">encode_documents</code>:このメソッドは、テキストを文書用のスパース埋め込みリストに変換します。</li>
 </ul>
-<p>各メソッドの出力は、辞書のリストであるスパース埋込みの形式に従う必要があります。各辞書は，次元を表すキー（整数）と，その次元における埋込みの大きさを表す対応する値（浮動小数点数）を持つ必要があります（例：{1: 0.5, 2: 0.3}）．</p>
+<p>各メソッドの出力は、辞書のリストであるスパース埋込みの形式に従う必要があります。各辞書は，次元を表すキー（整数）と，その次元における埋込みの大きさを表す対応する値（浮動小数点数）を持つ必要があります（例えば，{1: 0.5, 2: 0.3}）．</p>
 <p>例えば、BGE-M3を使ったカスタムスパース埋め込み関数の実装です：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> FlagEmbedding <span class="hljs-keyword">import</span> BGEM3FlagModel
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>

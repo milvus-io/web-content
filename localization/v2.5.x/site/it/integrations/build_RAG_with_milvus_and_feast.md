@@ -26,10 +26,10 @@ title: Costruire RAG con Milvus e Feast
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>In questa esercitazione, costruiremo una pipeline Retrieval-Augmented Generation (RAG) utilizzando <a href="https://github.com/feast-dev/feast">Feast</a> e <a href="https://milvus.io/">Milvus</a>. Feast è un archivio di funzioni open-source che semplifica la gestione delle funzioni per l'apprendimento automatico, consentendo l'archiviazione e il recupero efficiente di dati strutturati sia per l'addestramento che per l'inferenza in tempo reale. Milvus è un database vettoriale ad alte prestazioni progettato per una rapida ricerca di similarità, che lo rende ideale per il recupero di documenti rilevanti nei flussi di lavoro RAG.</p>
@@ -268,7 +268,7 @@ display(df.head())
   </tbody>
 </table>
 </div>
-<h2 id="Register-Feature-Definitions-and-Deploy-the-Feature-Store" class="common-anchor-header">Registrare le definizioni di funzionalità e distribuire il Feature Store<button data-href="#Register-Feature-Definitions-and-Deploy-the-Feature-Store" class="anchor-icon" translate="no">
+<h2 id="Register-Feature-Definitions-and-Deploy-the-Feature-Store" class="common-anchor-header">Registrare le definizioni delle funzioni e distribuire il Feature Store<button data-href="#Register-Feature-Definitions-and-Deploy-the-Feature-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,7 +284,7 @@ display(df.head())
         ></path>
       </svg>
     </button></h2><p>Dopo aver scaricato <code translate="no">feature_repo</code>, è necessario eseguire <code translate="no">feast apply</code> per registrare le feature view e le entità definite in <code translate="no">example_repo.py</code> e impostare <strong>Milvus</strong> come tabelle del negozio online.</p>
-<p>Assicuratevi di esservi collegati alla directory <code translate="no">feature_repo</code> prima di eseguire il comando.</p>
+<p>Assicurarsi di essersi collegati alla directory <code translate="no">feature_repo</code> prima di eseguire il comando.</p>
 <pre><code translate="no" class="language-bash">feast apply
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Load-Features-into-Milvus" class="common-anchor-header">Caricare le caratteristiche in Milvus<button data-href="#Load-Features-into-Milvus" class="anchor-icon" translate="no">
@@ -460,7 +460,7 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Recuperare vettori e dati in tempo reale per l'inferenza online</h3><p>Una volta trasformata la query in un embedding, il passo successivo consiste nel recuperare i documenti rilevanti dall'archivio vettoriale. Al momento dell'inferenza, sfruttiamo la ricerca di somiglianza vettoriale per trovare le incorporazioni di documenti più rilevanti memorizzate nell'archivio di caratteristiche online, utilizzando <code translate="no">retrieve_online_documents_v2()</code>. Questi vettori di caratteristiche possono essere inseriti nel contesto dell'LLM.</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Recuperare vettori e dati in tempo reale per l'inferenza online</h3><p>Una volta trasformata la query in un embedding, il passo successivo consiste nel recuperare i documenti rilevanti dall'archivio vettoriale. Al momento dell'inferenza, sfruttiamo la ricerca di somiglianza vettoriale per trovare gli incorporamenti di documenti più rilevanti memorizzati nell'archivio di caratteristiche online, utilizzando <code translate="no">retrieve_online_documents_v2()</code>. Questi vettori di caratteristiche possono essere inseriti nel contesto dell'LLM.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)

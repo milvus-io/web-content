@@ -9,10 +9,10 @@ summary: >-
   artikel Dylan Castillo.
 title: Pengelompokan HDBSCAN dengan Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">Pengelompokan HDBSCAN dengan Milvus<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
@@ -284,6 +284,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/hdbscan_clustering_with_milvus.png?raw=true" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>gambar</span> </span></p>
 <p>Di sini, kami mendemonstrasikan bahwa data dikelompokkan dengan baik, dan Anda dapat mengarahkan kursor ke titik-titik tersebut untuk memeriksa teks yang diwakilinya. Dengan buku catatan ini, kami harap Anda dapat mempelajari cara menggunakan HDBSCAN untuk mengelompokkan embedding dengan Milvus secara efisien, yang juga dapat diterapkan pada jenis data lainnya. Dikombinasikan dengan model bahasa yang besar, pendekatan ini memungkinkan analisis yang lebih dalam pada data Anda dalam skala besar.</p>

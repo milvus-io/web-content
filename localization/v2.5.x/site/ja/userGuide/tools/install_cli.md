@@ -59,7 +59,7 @@ title: Milvus_CLIのインストール
       </svg>
     </button></h2><p>Dockerを使用してMilvus_CLIをインストールします。</p>
 <h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>Docker 19.03以降が必要です。</p>
-<h3 id="Install-based-on-Docker-image" class="common-anchor-header">Dockerイメージからのインストール</h3><pre><code translate="no" class="language-shell">$ docker run -it zilliz/milvus_cli:latest
+<h3 id="Install-based-on-Docker-image" class="common-anchor-header">Dockerイメージからのインストール</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -it zilliz/milvus_cli:latest</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-from-source-code" class="common-anchor-header">ソースコードからのインストール<button data-href="#Install-from-source-code" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,12 +79,12 @@ title: Milvus_CLIのインストール
     </button></h2><ol>
 <li>以下のコマンドを実行し、<code translate="no">milvus_cli</code> リポジトリをダウンロードします。</li>
 </ol>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus_cli.git
+<pre><code translate="no" class="language-shell">git clone https://github.com/zilliztech/milvus_cli.git
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>以下のコマンドを実行し、<code translate="no">milvus_cli</code> フォルダに入ります。</li>
 </ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> milvus_cli
+<pre><code translate="no" class="language-shell">cd milvus_cli
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>以下のコマンドを実行し、Milvus_CLIをインストールします。</li>

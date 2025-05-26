@@ -9,10 +9,10 @@ summary: >-
   una determinata query.
 title: Utilizzare ColPali per il recupero multimodale con Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Utilizzare ColPali per il recupero multimodale con Milvus<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
@@ -100,7 +100,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 </ul>
 </div>
 <p>Definiremo una classe MilvusColbertRetriever per avvolgere il client Milvus per il recupero di dati multivettoriali. L'implementazione appiattisce le incorporazioni ColBERT e le inserisce in una raccolta, dove ogni riga rappresenta una singola incorporazione dall'elenco delle incorporazioni ColBERT. Inoltre, registra il doc_id e il seq_id per risalire all'origine di ogni embedding.</p>
-<p>Quando si effettua una ricerca con un elenco di incorporazioni ColBERT, vengono effettuate più ricerche, una per ogni incorporazione ColBERT. I doc_id recuperati saranno quindi deduplicati. Verrà eseguito un processo di reranking, in cui verranno recuperati gli embedding completi per ogni doc_id e verrà calcolato il punteggio MaxSim per produrre i risultati finali classificati.</p>
+<p>Quando si effettua una ricerca con un elenco di incorporazioni ColBERT, vengono condotte più ricerche, una per ogni incorporazione ColBERT. I doc_id recuperati saranno quindi deduplicati. Verrà eseguito un processo di reranking, in cui verranno recuperati gli embedding completi per ogni doc_id e verrà calcolato il punteggio MaxSim per produrre i risultati finali classificati.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
         <span class="hljs-comment"># Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.</span>

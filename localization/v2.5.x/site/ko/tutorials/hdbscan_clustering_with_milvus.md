@@ -6,10 +6,10 @@ summary: >-
   카스티요의 기사를 Milvus로 각색한 것입니다.
 title: Milvus를 사용한 HDBSCAN 클러스터링
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">Milvus를 사용한 HDBSCAN 클러스터링<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
@@ -116,7 +116,7 @@ connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <div class="alert note">
 <blockquote>
 <ul>
-<li>소규모 데이터나 프로토타이핑을 위해 로컬 벡터 데이터베이스만 필요한 경우, URL을 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</li>
+<li>소규모 데이터나 프로토타이핑을 위해 로컬 벡터 데이터베이스만 필요한 경우, URL을 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법이며, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</li>
 <li>백만 개 이상의 벡터와 같이 대규모 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에서</a> 더 성능이 뛰어난 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "<your_username>:<your_password>"을 사용하고, 그렇지 않은 경우 토큰을 설정하지 마세요.</li>
 <li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하는 경우, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 조정합니다.</li>
 </ul>
@@ -242,7 +242,7 @@ hdb = h.fit(dist_metric)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이미 HDBSCAN을 사용하여 데이터를 클러스터링했으며 각 데이터 요소에 대한 레이블을 얻을 수 있습니다. 그러나 몇 가지 시각화 기법을 사용하면 직관적인 분석을 위해 클러스터의 전체 그림을 얻을 수 있습니다. 이제 클러스터를 시각화하기 위해 UMAP을 사용하겠습니다. UMAP은 고차원 데이터의 구조를 보존하면서 시각화 또는 추가 분석을 위해 저차원 공간에 투영하는 차원 축소에 사용되는 효율적인 방법입니다. 이를 통해 원본 고차원 데이터를 2D 또는 3D 공간에서 시각화하고 클러스터를 명확하게 볼 수 있습니다. 여기서도 데이터 포인트를 반복하여 원본 데이터의 ID와 텍스트를 얻은 다음, 플로티를 사용하여 이러한 메타정보를 가진 데이터 포인트를 그림으로 플로팅하고 다른 색상을 사용하여 서로 다른 클러스터를 표현합니다.</p>
+    </button></h2><p>이미 HDBSCAN을 사용하여 데이터를 클러스터링했으며 각 데이터 요소에 대한 레이블을 얻을 수 있습니다. 그러나 몇 가지 시각화 기법을 사용하면 직관적인 분석을 위해 클러스터의 전체 그림을 얻을 수 있습니다. 이제 클러스터를 시각화하기 위해 UMAP을 사용하겠습니다. UMAP은 고차원 데이터의 구조를 보존하면서 시각화 또는 추가 분석을 위해 저차원 공간에 투영하는 차원 축소에 사용되는 효율적인 방법입니다. 이를 통해 원본 고차원 데이터를 2D 또는 3D 공간에서 시각화하고 클러스터를 명확하게 볼 수 있습니다. 여기서도 데이터 포인트를 반복하여 원본 데이터의 ID와 텍스트를 얻은 다음, 플로티를 사용하여 이러한 메타정보를 가진 데이터 포인트를 그림으로 표시하고 다른 색상을 사용하여 서로 다른 클러스터를 나타냅니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> plotly.io <span class="hljs-keyword">as</span> pio
 
 pio.renderers.default = <span class="hljs-string">&quot;notebook&quot;</span>
@@ -281,6 +281,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/hdbscan_clustering_with_milvus.png?raw=true" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>이미지</span> </span></p>
-<p>여기에서는 데이터가 잘 클러스터링되어 있음을 보여드리며, 포인트 위로 마우스를 가져가서 포인트가 나타내는 텍스트를 확인할 수 있습니다. 이 노트북을 통해 Milvus로 임베딩을 효율적으로 클러스터링하는 방법을 배우고 다른 유형의 데이터에도 적용할 수 있기를 바랍니다. 대규모 언어 모델과 결합하여 이 접근 방식을 사용하면 대규모로 데이터를 심층적으로 분석할 수 있습니다.</p>
+<p>여기에서는 데이터가 잘 클러스터링되어 있음을 보여드리며, 포인트 위로 마우스를 가져가서 포인트가 나타내는 텍스트를 확인할 수 있습니다. 이 노트북을 통해 Milvus로 임베딩을 효율적으로 클러스터링하는 방법을 배우고 다른 유형의 데이터에도 적용할 수 있기를 바랍니다. 대규모 언어 모델과 결합하면 이 접근 방식을 통해 대규모로 데이터를 심층적으로 분석할 수 있습니다.</p>

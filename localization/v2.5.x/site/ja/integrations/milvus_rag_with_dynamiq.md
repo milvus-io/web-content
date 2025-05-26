@@ -2,15 +2,15 @@
 id: milvus_rag_with_dynamiq.md
 summary: >-
   このチュートリアルでは、RAGワークフローのために作られた高性能ベクトルデータベースMilvusとDynamiqをシームレスに使用する方法を探ります。Milvusは、ベクトル埋め込みデータの効率的な保存、インデックス付け、検索に優れており、高速かつ正確なコンテキストデータへのアクセスを必要とするAIシステムに不可欠なコンポーネントです。
-title: DynamiqとMilvusをはじめよう
+title: Getting Started with Dynamiq and Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_rag_with_dynamiq.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Getting-Started-with-Dynamiq-and-Milvus" class="common-anchor-header">DynamiqとMilvusをはじめよう<button data-href="#Getting-Started-with-Dynamiq-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Getting-Started-with-Dynamiq-and-Milvus" class="common-anchor-header">Getting Started with Dynamiq and Milvus<button data-href="#Getting-Started-with-Dynamiq-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,15 +25,15 @@ title: DynamiqとMilvusをはじめよう
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://www.getdynamiq.ai/">Dynamiqは</a>、AIを搭載したアプリケーションの開発を効率化する強力なGen AIフレームワークです。検索拡張世代（RAG）と大規模言語モデル（LLM）エージェントを強力にサポートするDynamiqは、開発者が簡単かつ効率的にインテリジェントで動的なシステムを作成できるようにします。</p>
-<p>このチュートリアルでは、RAGワークフローのために作られた高性能ベクトルデータベースである<a href="https://milvus.io/">Milvusと</a>Dynamiqをシームレスに使用する方法を探ります。Milvusは、ベクトル埋め込みデータの効率的な保存、インデックス付け、検索に優れており、高速かつ正確なコンテキストデータへのアクセスを必要とするAIシステムに不可欠なコンポーネントとなっています。</p>
-<p>このステップバイステップガイドでは、2つのコアなRAGワークフローをカバーします：</p>
+    </button></h1><p><a href="https://www.getdynamiq.ai/">Dynamiq</a> is a powerful Gen AI framework that streamlines the development of AI-powered applications. With robust support for retrieval-augmented generation (RAG) and large language model (LLM) agents, Dynamiq empowers developers to create intelligent, dynamic systems with ease and efficiency.</p>
+<p>In this tutorial, we’ll explore how to seamlessly use Dynamiq with <a href="https://milvus.io/">Milvus</a>, the high-performance vector database purpose-built for RAG workflows. Milvus excels at efficient storage, indexing, and retrieval of vector embeddings, making it an indispensable component for AI systems that demand fast and precise contextual data access.</p>
+<p>This step-by-step guide will cover two core RAG workflows:</p>
 <ul>
-<li><p><strong>ドキュメントインデキシングフロー</strong>：入力ファイル（PDFなど）を処理し、その内容をベクトル埋め込みデータに変換し、Milvusに格納する方法を学びます。Milvusの高性能なインデックス作成機能を活用することで、データを迅速に検索できる状態にします。</p></li>
-<li><p><strong>ドキュメント検索フロー</strong>： Milvusに関連するドキュメントの埋め込みをクエリし、DynamiqのLLMエージェントでコンテキストを考慮した洞察に満ちたレスポンスを生成するためにそれらを使用し、AIを活用したシームレスなユーザーエクスペリエンスを実現する方法をご覧ください。</p></li>
+<li><p><strong>Document Indexing Flow</strong>: Learn how to process input files (e.g., PDFs), transform their content into vector embeddings, and store them in Milvus. Leveraging Milvus’s high-performance indexing capabilities ensures your data is ready for rapid retrieval.</p></li>
+<li><p><strong>Document Retrieval Flow</strong>: Discover how to query Milvus for relevant document embeddings and use them to generate insightful, context-aware responses with Dynamiq’s LLM agents, creating a seamless AI-powered user experience.</p></li>
 </ul>
-<p>このチュートリアルが終わる頃には、MilvusとDynamiqがどのように連携し、ニーズに合わせたスケーラブルでコンテキストを考慮したAIシステムを構築するのかについて、しっかりと理解できるようになるでしょう。</p>
-<h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>By the end of this tutorial, you’ll gain a solid understanding of how Milvus and Dynamiq work together to build scalable, context-aware AI systems tailored to your needs.</p>
+<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -48,17 +48,17 @@ title: DynamiqとMilvusをはじめよう
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">必要なライブラリのダウンロード</h3><pre><code translate="no" class="language-shell">$ pip install dynamiq pymilvus
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Download required libraries</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があります（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
 </div>
-<h3 id="Configure-the-LLM-agent" class="common-anchor-header">LLMエージェントの設定</h3><p>この例では、LLMとしてOpenAIを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意してください。</p>
+<h3 id="Configure-the-LLM-agent" class="common-anchor-header">Configure the LLM agent</h3><p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="RAG---Document-Indexing-Flow" class="common-anchor-header">RAG - ドキュメントのインデックス作成フロー<button data-href="#RAG---Document-Indexing-Flow" class="anchor-icon" translate="no">
+<h2 id="RAG---Document-Indexing-Flow" class="common-anchor-header">RAG - Document Indexing Flow<button data-href="#RAG---Document-Indexing-Flow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,9 +73,9 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このチュートリアルでは、Milvusをベクターデータベースとして文書をインデックス化するRAG（Retrieval-Augmented Generation）ワークフローを示します。このワークフローは、入力されたPDFファイルを受け取り、より小さな塊に処理し、OpenAIの埋め込みモデルを使用してベクトル埋め込みを生成し、効率的な検索のために埋め込みをMilvusコレクションに保存します。</p>
-<p>このワークフローが終了する頃には、セマンティック検索や質問応答のような将来のRAGタスクをサポートする、スケーラブルで効率的なドキュメントインデキシングシステムが完成していることでしょう。</p>
-<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">必要なライブラリのインポートとワークフローの初期化</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Importing necessary libraries for the workflow</span>
+    </button></h2><p>This tutorial demonstrates a Retrieval-Augmented Generation (RAG) workflow for indexing documents with Milvus as the vector database. The workflow takes input PDF files, processes them into smaller chunks, generates vector embeddings using OpenAI’s embedding model, and stores the embeddings in a Milvus collection for efficient retrieval.</p>
+<p>By the end of this workflow, you will have a scalable and efficient document indexing system that supports future RAG tasks like semantic search and question answering.</p>
+<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Import Required Libraries and Initialize Workflow</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Importing necessary libraries for the workflow</span>
 <span class="hljs-keyword">from</span> io <span class="hljs-keyword">import</span> BytesIO
 <span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
 <span class="hljs-keyword">from</span> dynamiq.nodes <span class="hljs-keyword">import</span> InputTransformer
@@ -92,12 +92,12 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
 <span class="hljs-comment"># Initialize the workflow</span>
 rag_wf = Workflow()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-PDF-Converter-Node" class="common-anchor-header">PDFコンバータノードの定義</h3><pre><code translate="no" class="language-python">converter = PyPDFConverter(document_creation_mode=<span class="hljs-string">&quot;one-doc-per-page&quot;</span>)
+<h3 id="Define-PDF-Converter-Node" class="common-anchor-header">Define PDF Converter Node</h3><pre><code translate="no" class="language-python">converter = PyPDFConverter(document_creation_mode=<span class="hljs-string">&quot;one-doc-per-page&quot;</span>)
 converter_added = rag_wf.flow.add_nodes(
     converter
 )  <span class="hljs-comment"># Add node to the DAG (Directed Acyclic Graph)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Document-Splitter-Node" class="common-anchor-header">ドキュメント分割ノードの定義</h3><pre><code translate="no" class="language-python">document_splitter = DocumentSplitter(
+<h3 id="Define-Document-Splitter-Node" class="common-anchor-header">Define Document Splitter Node</h3><pre><code translate="no" class="language-python">document_splitter = DocumentSplitter(
     split_by=<span class="hljs-string">&quot;sentence&quot;</span>,  <span class="hljs-comment"># Splits documents into sentences</span>
     split_length=<span class="hljs-number">10</span>,
     split_overlap=<span class="hljs-number">1</span>,
@@ -111,7 +111,7 @@ converter_added = rag_wf.flow.add_nodes(
 )  <span class="hljs-comment"># Set dependency on the PDF converter</span>
 splitter_added = rag_wf.flow.add_nodes(document_splitter)  <span class="hljs-comment"># Add to the DAG</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Embedding-Node" class="common-anchor-header">埋め込みノードの定義</h3><pre><code translate="no" class="language-python">embedder = OpenAIDocumentEmbedder(
+<h3 id="Define-Embedding-Node" class="common-anchor-header">Define Embedding Node</h3><pre><code translate="no" class="language-python">embedder = OpenAIDocumentEmbedder(
     connection=OpenAIConnection(api_key=os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>]),
     input_transformer=InputTransformer(
         selector={
@@ -123,7 +123,7 @@ splitter_added = rag_wf.flow.add_nodes(document_splitter)  <span class="hljs-com
 )  <span class="hljs-comment"># Set dependency on the splitter</span>
 document_embedder_added = rag_wf.flow.add_nodes(embedder)  <span class="hljs-comment"># Add to the DAG</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Milvus-Vector-Store-Node" class="common-anchor-header">Milvusベクターストアノードの定義</h3><pre><code translate="no" class="language-python">vector_store = (
+<h3 id="Define-Milvus-Vector-Store-Node" class="common-anchor-header">Define Milvus Vector Store Node</h3><pre><code translate="no" class="language-python">vector_store = (
     MilvusDocumentWriter(
         connection=MilvusConnection(
             deployment_type=MilvusDeploymentType.FILE, uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
@@ -147,37 +147,37 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 2024-11-19 22:14:05 - DEBUG - Successfully created an index on collection: my_milvus_collection
 </code></pre>
 <div class="alert note">
-<p>Milvusは2つのデプロイメントタイプを提供しています：</p>
+<p>Milvus offers two deployment types, catering to different use cases:</p>
 <ol>
 <li><strong>MilvusDeploymentType.FILE</strong></li>
 </ol>
 <ul>
-<li><strong>ローカルのプロトタイピングや</strong> <strong>小規模なデータ</strong>保存に最適です。</li>
-<li><code translate="no">uri</code> 、ローカルのファイルパス(例:<code translate="no">./milvus.db</code>)を設定することで、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteが</a>自動的に指定されたファイルにすべてのデータを保存します。</li>
-<li>これは<strong>迅速なセットアップと</strong> <strong>実験に</strong>便利なオプションです。</li>
+<li>Ideal for <strong>local prototyping</strong> or <strong>small-scale data</strong> storage.</li>
+<li>Set the <code translate="no">uri</code> to a local file path (e.g., <code translate="no">./milvus.db</code>) to leverage <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>, which automatically stores all data in the specified file.</li>
+<li>This is a convenient option for <strong>quick setup</strong> and <strong>experimentation</strong>.</li>
 </ul>
 <ol start="2">
 <li><strong>MilvusDeploymentType.HOST</strong></li>
 </ol>
 <ul>
-<li><p>100万以上のベクターを管理するような<strong>大規模データ</strong>シナリオ用に設計されています。</p>
-<p><strong>セルフホストサーバ</strong></p>
+<li><p>Designed for <strong>large-scale data</strong> scenarios, such as managing over a million vectors.</p>
+<p><strong>Self-Hosted Server</strong></p>
 <ul>
-<li><a href="https://milvus.io/docs/quickstart.md">DockerまたはKubernetesを</a>使用して高性能なMilvusサーバーをデプロイします。</li>
-<li>サーバのアドレスとポートを<code translate="no">uri</code> (例:<code translate="no">http://localhost:19530</code>) に設定します。</li>
-<li>認証が有効な場合：</li>
-<li><code translate="no">token</code> に<code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> を指定する。</li>
-<li>認証が無効の場合：</li>
-<li><code translate="no">token</code> は未設定のままにします。</li>
+<li>Deploy a high-performance Milvus server using <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>.</li>
+<li>Configure the server’s address and port as the <code translate="no">uri</code> (e.g., <code translate="no">http://localhost:19530</code>).</li>
+<li>If authentication is enabled:</li>
+<li>Provide <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> as the <code translate="no">token</code>.</li>
+<li>If authentication is disabled:</li>
+<li>Leave the <code translate="no">token</code> unset.</li>
 </ul>
-<p><strong>Zillizクラウド（マネージドサービス）</strong></p>
+<p><strong>Zilliz Cloud (Managed Service)</strong></p>
 <ul>
-<li>フルマネージドでクラウドベースのMilvusをご利用いただくには、<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用ください。</li>
-<li>Zilliz Cloud コンソールで提供される<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint と API キーに従って</a> <code translate="no">uri</code> と<code translate="no">token</code> を設定します。</li>
+<li>For a fully managed, cloud-based Milvus experience, use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</li>
+<li>Set the <code translate="no">uri</code> and <code translate="no">token</code> according to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> provided in the Zilliz Cloud console.</li>
 </ul></li>
 </ul>
 </div>
-<h3 id="Define-Input-Data-and-Run-the-Workflow" class="common-anchor-header">入力データの定義とワークフローの実行</h3><pre><code translate="no" class="language-python">file_paths = [<span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>]
+<h3 id="Define-Input-Data-and-Run-the-Workflow" class="common-anchor-header">Define Input Data and Run the Workflow</h3><pre><code translate="no" class="language-python">file_paths = [<span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>]
 input_data = {
     <span class="hljs-string">&quot;files&quot;</span>: [BytesIO(<span class="hljs-built_in">open</span>(path, <span class="hljs-string">&quot;rb&quot;</span>).read()) <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> file_paths],
     <span class="hljs-string">&quot;metadata&quot;</span>: [{<span class="hljs-string">&quot;filename&quot;</span>: path} <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> file_paths],
@@ -210,9 +210,9 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 2024-11-19 22:14:10 - INFO - Flow b30b48ec-d5d2-4e4c-8e25-d6976c8a9c17: execution succeeded in 1.3s.
 2024-11-19 22:14:10 - INFO - Workflow 87878444-6a3d-43f3-ae32-0127564a959f: execution succeeded in 1.3s.
 </code></pre>
-<p>このワークフローを通して、Milvusをベクトルデータベースとして使用し、OpenAIの埋め込みモデルをセマンティック表現に使用したドキュメントインデキシングパイプラインの実装に成功した。このセットアップにより、高速かつ正確なベクトルベースの検索が可能になり、意味検索、文書検索、コンテキストAI主導型インタラクションのようなRAGワークフローの基盤が形成される。</p>
-<p>Milvusのスケーラブルなストレージ機能とDynamiqのオーケストレーションにより、このソリューションはプロトタイピングと大規模な本番導入の両方に対応しています。このパイプラインを拡張して、検索ベースの質問応答やAI主導のコンテンツ生成などのタスクを追加することができます。</p>
-<h2 id="RAG-Document-Retrieval-Flow" class="common-anchor-header">RAGドキュメント検索フロー<button data-href="#RAG-Document-Retrieval-Flow" class="anchor-icon" translate="no">
+<p>Through this workflow, we have successfully implemented a document indexing pipeline using Milvus as the vector database and OpenAI’s embedding model for semantic representation. This setup enables fast and accurate vector-based retrieval, forming the foundation for RAG workflows like semantic search, document retrieval, and contextual AI-driven interactions.</p>
+<p>With Milvus’s scalable storage capabilities and Dynamiq’s orchestration, this solution is ready for both prototyping and large-scale production deployments. You can now extend this pipeline to include additional tasks like retrieval-based question answering or AI-driven content generation.</p>
+<h2 id="RAG-Document-Retrieval-Flow" class="common-anchor-header">RAG Document Retrieval Flow<button data-href="#RAG-Document-Retrieval-Flow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -227,9 +227,9 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このチュートリアルでは、RAG（Retrieval-Augmented Generation）文書検索ワークフローを実装します。このワークフローでは、ユーザークエリを受け取り、それに対するベクトル埋め込みを生成し、Milvusベクトルデータベースから最も関連性の高い文書を検索し、大規模言語モデル（LLM）を使用して、検索された文書に基づいて詳細かつコンテキストを考慮した回答を生成します。</p>
-<p>このワークフローに従うことで、ベクトルベースの文書検索のパワーとOpenAIの高度なLLMの機能を組み合わせた、意味検索と質問応答のためのエンドツーエンドのソリューションを作成することができます。このアプローチは、ドキュメントデータベースに保存された知識を活用することで、ユーザーからの問い合わせに対して効率的でインテリジェントな応答を可能にします。</p>
-<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">必要なライブラリのインポートとワークフローの初期化</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
+    </button></h2><p>In this tutorial, we implement a Retrieval-Augmented Generation (RAG) document retrieval workflow. This workflow takes a user query, generates a vector embedding for it, retrieves the most relevant documents from a Milvus vector database, and uses a large language model (LLM) to generate a detailed and context-aware answer based on the retrieved documents.</p>
+<p>By following this workflow, you will create an end-to-end solution for semantic search and question answering, combining the power of vector-based document retrieval with the capabilities of OpenAI’s advanced LLMs. This approach enables efficient and intelligent responses to user queries by leveraging the stored knowledge in your document database.</p>
+<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Import Required Libraries and Initialize Workflow</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
 <span class="hljs-keyword">from</span> dynamiq.connections <span class="hljs-keyword">import</span> (
     OpenAI <span class="hljs-keyword">as</span> OpenAIConnection,
     Milvus <span class="hljs-keyword">as</span> MilvusConnection,
@@ -243,7 +243,7 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 <span class="hljs-comment"># Initialize the workflow</span>
 retrieval_wf = Workflow()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-OpenAI-Connection-and-Text-Embedder" class="common-anchor-header">OpenAI接続とテキストエンベッダーの定義</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Establish OpenAI connection</span>
+<h3 id="Define-OpenAI-Connection-and-Text-Embedder" class="common-anchor-header">Define OpenAI Connection and Text Embedder</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Establish OpenAI connection</span>
 openai_connection = OpenAIConnection(api_key=os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>])
 
 <span class="hljs-comment"># Define the text embedder node</span>
@@ -255,7 +255,7 @@ embedder = OpenAITextEmbedder(
 <span class="hljs-comment"># Add the embedder node to the workflow</span>
 embedder_added = retrieval_wf.flow.add_nodes(embedder)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Milvus-Document-Retriever" class="common-anchor-header">Milvusドキュメントレトリバーの定義</h3><pre><code translate="no" class="language-python">document_retriever = (
+<h3 id="Define-Milvus-Document-Retriever" class="common-anchor-header">Define Milvus Document Retriever</h3><pre><code translate="no" class="language-python">document_retriever = (
     MilvusDocumentRetriever(
         connection=MilvusConnection(
             deployment_type=MilvusDeploymentType.FILE, uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
@@ -276,7 +276,7 @@ milvus_retriever_added = retrieval_wf.flow.add_nodes(document_retriever)
 2024-11-19 22:14:19 - DEBUG - Created new connection using: 98d1132773af4298a894ad5925845fd2
 2024-11-19 22:14:19 - INFO - Collection my_milvus_collection already exists. Skipping creation.
 </code></pre>
-<h3 id="Define-the-Prompt-Template" class="common-anchor-header">プロンプトテンプレートの定義</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the prompt template for the LLM</span>
+<h3 id="Define-the-Prompt-Template" class="common-anchor-header">Define the Prompt Template</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the prompt template for the LLM</span>
 prompt_template = <span class="hljs-string">&quot;&quot;&quot;
 Please answer the question based on the provided context.
 
@@ -291,7 +291,7 @@ Context:
 <span class="hljs-comment"># Create the prompt object</span>
 prompt = Prompt(messages=[Message(content=prompt_template, role=<span class="hljs-string">&quot;user&quot;</span>)])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-the-Answer-Generator" class="common-anchor-header">回答ジェネレータの定義</h3><pre><code translate="no" class="language-python">answer_generator = (
+<h3 id="Define-the-Answer-Generator" class="common-anchor-header">Define the Answer Generator</h3><pre><code translate="no" class="language-python">answer_generator = (
     OpenAI(
         connection=openai_connection,
         model=<span class="hljs-string">&quot;gpt-4o&quot;</span>,
@@ -309,7 +309,7 @@ prompt = Prompt(messages=[Message(content=prompt_template, role=<span class="hlj
 <span class="hljs-comment"># Add the answer generator node to the workflow</span>
 answer_generator_added = retrieval_wf.flow.add_nodes(answer_generator)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Run-the-Workflow" class="common-anchor-header">ワークフローの実行</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Run the workflow with a sample query</span>
+<h3 id="Run-the-Workflow" class="common-anchor-header">Run the Workflow</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Run the workflow with a sample query</span>
 sample_query = <span class="hljs-string">&quot;What is the Advanced Search Algorithms in Milvus?&quot;</span>
 
 result = retrieval_wf.run(input_data={<span class="hljs-string">&quot;query&quot;</span>: sample_query})

@@ -20,8 +20,8 @@ title: Integrar Milvus con Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_with_Jina.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_with_Jina.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Esta guía muestra cómo utilizar las incrustaciones de Jina AI y Milvus para realizar tareas de búsqueda y recuperación de similitudes.</p>
 <h2 id="Who-is-Jina-AI" class="common-anchor-header">Quién es Jina AI<button data-href="#Who-is-Jina-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +38,7 @@ title: Integrar Milvus con Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI, fundada en 2020 en Berlín, es una empresa pionera en IA centrada en revolucionar el futuro de la inteligencia artificial a través de su base de búsqueda. Especializada en IA multimodal, Jina AI tiene como objetivo capacitar a empresas y desarrolladores para aprovechar el poder de los datos multimodales para la creación de valor y el ahorro de costes a través de su conjunto integrado de componentes, incluyendo incrustaciones, rerankers, operaciones rápidas e infraestructura central. Las incrustaciones de vanguardia de Jina AI cuentan con un rendimiento de primer nivel, con un modelo de longitud de token 8192 ideal para la representación integral de datos. Al ofrecer compatibilidad multilingüe y una integración perfecta con plataformas líderes como OpenAI, estas incrustaciones facilitan las aplicaciones multilingües.</p>
+    </button></h2><p>Jina AI, fundada en 2020 en Berlín, es una empresa pionera en IA centrada en revolucionar el futuro de la inteligencia artificial a través de su base de búsqueda. Especializada en IA multimodal, Jina AI tiene como objetivo capacitar a empresas y desarrolladores para aprovechar el poder de los datos multimodales para la creación de valor y el ahorro de costes a través de su conjunto integrado de componentes, incluyendo incrustaciones, rerankers, operaciones rápidas e infraestructura central. Las incrustaciones de vanguardia de Jina AI cuentan con un rendimiento de primer nivel, con un modelo de longitud de token 8192 ideal para la representación de datos completa. Al ofrecer compatibilidad multilingüe y una integración perfecta con plataformas líderes como OpenAI, estas incrustaciones facilitan las aplicaciones multilingües.</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Incrustación de Milvus y Jina AI<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +93,7 @@ $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El modelo de incrustación central de Jina AI destaca en la comprensión de texto detallado, por lo que resulta ideal para la búsqueda semántica, la clasificación de contenidos, el análisis avanzado de sentimientos, el resumen de textos y los sistemas de recomendación personalizados.</p>
+    </button></h2><p>El modelo de incrustación principal de Jina AI destaca en la comprensión de texto detallado, por lo que es ideal para la búsqueda semántica, la clasificación de contenidos, el análisis avanzado de sentimientos, el resumen de texto y los sistemas de recomendación personalizados.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
@@ -126,16 +126,16 @@ dvecs = ef.encode_documents([doc])  <span class="hljs-comment"># This method use
         ></path>
       </svg>
     </button></h2><p>Los modelos bilingües de Jina AI mejoran las plataformas multilingües, el soporte global y el descubrimiento de contenidos en varios idiomas. Diseñados para traducciones alemán-inglés y chino-inglés, fomentan el entendimiento entre diversos grupos lingüísticos, simplificando las interacciones entre idiomas.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">JinaEmbeddingFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
-ef = <span class="hljs-title class_">JinaEmbeddingFunction</span>(<span class="hljs-string">&quot;jina-embeddings-v2-base-de&quot;</span>, jina_api_key)
+ef = JinaEmbeddingFunction(<span class="hljs-string">&quot;jina-embeddings-v2-base-de&quot;</span>, jina_api_key)
 
 query = <span class="hljs-string">&quot;what is information retrieval?&quot;</span>
 doc = <span class="hljs-string">&quot;Information Retrieval ist der Prozess, relevante Informationen aus einer großen Sammlung von Daten oder Dokumenten zu finden.&quot;</span>
 
-qvecs = ef.<span class="hljs-title function_">encode_queries</span>([query])
-dvecs = ef.<span class="hljs-title function_">encode_documents</span>([doc])
+qvecs = ef.encode_queries([query])
+dvecs = ef.encode_documents([doc])
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Code-Embeddings" class="common-anchor-header">Incrustación de código<button data-href="#Code-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -283,11 +283,11 @@ res = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>Jina Ai también proporciona rerankers para mejorar aún más la calidad de recuperación después de la búsqueda utilizando incrustaciones.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">reranker</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">JinaRerankFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> JinaRerankFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
 
-rf = <span class="hljs-title class_">JinaRerankFunction</span>(<span class="hljs-string">&quot;jina-reranker-v1-base-en&quot;</span>, jina_api_key)
+rf = JinaRerankFunction(<span class="hljs-string">&quot;jina-reranker-v1-base-en&quot;</span>, jina_api_key)
 
 query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
@@ -298,7 +298,7 @@ documents = [
     <span class="hljs-string">&quot;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&quot;</span>,
 ]
 
-<span class="hljs-title function_">rf</span>(query, documents)
+rf(query, documents)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[RerankResult(text=&quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term 'artificial intelligence' and laid out its basic goals.&quot;, score=0.9370958209037781, index=1),
  RerankResult(text='The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.', score=0.35420963168144226, index=3),

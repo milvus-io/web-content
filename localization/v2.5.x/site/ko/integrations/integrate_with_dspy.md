@@ -18,8 +18,8 @@ title: Milvus와 DSPy 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="What-is-DSPy" class="common-anchor-header">DSPy란?<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ title: Milvus와 DSPy 통합
       </svg>
     </button></h2><ul>
 <li>프로그래밍 접근 방식: DSPy는 단순히 LLM에 명령을 내리는 대신 파이프라인을 텍스트 변환 그래프로 추상화하여 LM 파이프라인 개발을 위한 체계적인 프로그래밍 접근 방식을 제공합니다. 선언적 모듈을 통해 구조화된 설계와 최적화가 가능하므로 기존 프롬프트 템플릿의 시행착오적인 방식을 대체할 수 있습니다.</li>
-<li>성능 향상: DSPy는 기존 방식에 비해 상당한 성능 향상을 보여줍니다. 사례 연구를 통해 표준 프롬프트 및 전문가가 만든 데모보다 성능이 뛰어나며, 더 작은 LM 모델에 컴파일된 경우에도 그 다양성과 효율성을 보여줍니다.</li>
+<li>성능 향상: DSPy는 기존 방식에 비해 상당한 성능 향상을 보여줍니다. 사례 연구를 통해 표준 프롬프트 및 전문가가 만든 데모보다 성능이 뛰어나며, 더 작은 LM 모델로 컴파일했을 때도 그 다양성과 효율성을 보여줍니다.</li>
 <li>모듈화된 추상화: DSPy는 분해, 미세 조정 및 모델 선택과 같은 LM 파이프라인 개발의 복잡한 측면을 효과적으로 추상화합니다. DSPy를 사용하면 간결한 프로그램을 GPT-4, Llama2-13b 또는 T5-base와 같은 다양한 모델에 대한 지침으로 원활하게 변환하여 개발을 간소화하고 성능을 향상시킬 수 있습니다.</li>
 </ul>
 <h2 id="Modules" class="common-anchor-header">모듈<button data-href="#Modules" class="anchor-icon" translate="no">
@@ -114,7 +114,7 @@ title: Milvus와 DSPy 통합
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Google Colab을 사용하는 경우 방금 설치한 종속성을 활성화하려면 **런타임을 다시 시작**해야 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택합니다).</div>
+Google Colab을 사용하는 경우 방금 설치한 의존성을 활성화하려면 **런타임을 다시 시작**해야 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</div>
 <h3 id="Loading-the-dataset" class="common-anchor-header">데이터 세트 로드하기</h3><p>이 예에서는 복잡한 질문-답변 쌍의 모음인 HotPotQA를 훈련 데이터셋으로 사용합니다. HotPotQA 클래스를 통해 로드할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 

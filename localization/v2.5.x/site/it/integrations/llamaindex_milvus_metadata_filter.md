@@ -9,10 +9,10 @@ summary: >-
   filtri di metadati integrati in LlamaIndex e ad applicare le espressioni di
   filtraggio native di Milvus all'archivio vettoriale.
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Metadata-Filtering-with-LlamaIndex-and-Milvus" class="common-anchor-header">Filtraggio dei metadati con LlamaIndex e Milvus<button data-href="#Metadata-Filtering-with-LlamaIndex-and-Milvus" class="anchor-icon" translate="no">
@@ -240,7 +240,7 @@ result_nodes = retriever.retrieve(<span class="hljs-string">&quot;Books about li
 Life: A User's Manual
 {'author': 'Georges Perec', 'genre': 'Postmodern Fiction', 'year': 1978}
 </code></pre>
-<h2 id="Use-Milvuss-Keyword-Arguments" class="common-anchor-header">Usare gli argomenti delle parole chiave di Milvus<button data-href="#Use-Milvuss-Keyword-Arguments" class="anchor-icon" translate="no">
+<h2 id="Use-Milvuss-Keyword-Arguments" class="common-anchor-header">Utilizzare gli argomenti delle parole chiave di Milvus<button data-href="#Use-Milvuss-Keyword-Arguments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -255,7 +255,7 @@ Life: A User's Manual
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Oltre alle funzionalità di filtraggio integrate, è possibile utilizzare le espressioni di filtraggio native di Milvus con l'argomento parola chiave <code translate="no">string_expr</code>. Ciò consente di passare espressioni di filtro specifiche direttamente a Milvus durante le operazioni di ricerca, andando oltre il filtraggio standard dei metadati per accedere alle capacità di filtraggio avanzate di Milvus.</p>
+    </button></h2><p>Oltre alle funzionalità di filtraggio incorporate, è possibile utilizzare le espressioni di filtraggio native di Milvus con l'argomento parola chiave <code translate="no">string_expr</code>. Ciò consente di passare espressioni di filtro specifiche direttamente a Milvus durante le operazioni di ricerca, andando oltre il filtraggio standard dei metadati per accedere alle capacità di filtraggio avanzate di Milvus.</p>
 <p>Milvus offre opzioni di filtraggio potenti e flessibili che consentono di interrogare con precisione i dati vettoriali:</p>
 <ul>
 <li>Operatori di base: Operatori di confronto, filtri di intervallo, operatori aritmetici e operatori logici.</li>

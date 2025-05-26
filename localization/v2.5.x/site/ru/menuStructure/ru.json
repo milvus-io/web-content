@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -623,7 +623,7 @@
             "children": []
           },
           {
-            "label": "Собственноручно",
+            "label": "Руки вверх",
             "id": "schema-hands-on.md",
             "order": 13,
             "children": []
@@ -1041,7 +1041,7 @@
                 "children": []
               },
               {
-                "label": "С рулевым",
+                "label": "С рулем",
                 "id": "configure-helm.md",
                 "order": 1,
                 "children": []
@@ -1249,7 +1249,7 @@
             ]
           },
           {
-            "label": "Используйте Pulsa с Milvus",
+            "label": "Используйте Пульсар с Мильвусом",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,

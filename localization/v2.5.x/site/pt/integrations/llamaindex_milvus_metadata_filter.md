@@ -9,10 +9,10 @@ summary: >-
   filtros de metadados incorporados no LlamaIndex e a aplicar as expressões de
   filtragem nativas do Milvus ao armazenamento de vectores.
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Metadata-Filtering-with-LlamaIndex-and-Milvus" class="common-anchor-header">Filtragem de metadados com LlamaIndex e Milvus<button data-href="#Metadata-Filtering-with-LlamaIndex-and-Milvus" class="anchor-icon" translate="no">
@@ -31,7 +31,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Este bloco de notas ilustra a utilização do armazenamento vetorial Milvus no LlamaIndex, centrando-se nas capacidades de filtragem de metadados. Aprenderá a indexar documentos com metadados, a efetuar pesquisas vectoriais com os filtros de metadados incorporados no LlamaIndex e a aplicar as expressões de filtragem nativas do Milvus ao armazenamento de vectores.</p>
-<p>No final deste caderno, compreenderá como utilizar as funcionalidades de filtragem do Milvus para limitar os resultados da pesquisa com base nos metadados do documento.</p>
+<p>No final deste caderno, compreenderá como utilizar as funcionalidades de filtragem do Milvus para restringir os resultados da pesquisa com base nos metadados do documento.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

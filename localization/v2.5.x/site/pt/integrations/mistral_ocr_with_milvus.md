@@ -5,10 +5,10 @@ summary: >-
   utilizando o Milvus e o Mistral OCR.
 title: Compreensão de documentos com Mistral OCR e Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">Compreensão de documentos com Mistral OCR e Milvus<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
@@ -99,7 +99,7 @@ title: Compreensão de documentos com Mistral OCR e Milvus
 <li>Processar documentos (PDFs/imagens) através de URLs</li>
 <li>Extrair texto usando OCR</li>
 <li>Armazenar o texto e os embeddings vectoriais em Milvus</li>
-<li>Efetuar pesquisa semântica na sua coleção de documentos</li>
+<li>Efetuar pesquisas semânticas na sua coleção de documentos</li>
 </ol>
 <hr>
 <h2 id="Setup-and-Dependencies" class="common-anchor-header">Configuração e dependências<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">

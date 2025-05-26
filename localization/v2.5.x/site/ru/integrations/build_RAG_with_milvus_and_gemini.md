@@ -7,10 +7,10 @@ summary: >-
   Milvus для хранения и получения сгенерированного текста.
 title: Создайте RAG с помощью Milvus и Gemini
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-RAG-with-Milvus-and-Gemini" class="common-anchor-header">Создайте RAG с помощью Milvus и Gemini<button data-href="#Build-RAG-with-Milvus-and-Gemini" class="anchor-icon" translate="no">
@@ -29,7 +29,7 @@ title: Создайте RAG с помощью Milvus и Gemini
         ></path>
       </svg>
     </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">API Gemini</a> и <a href="https://ai.google.dev/aistudio">Google AI Studio</a> помогут вам начать работу с новейшими моделями Google и воплотить свои идеи в масштабируемых приложениях. Gemini предоставляет доступ к мощным языковым моделям, таким как <code translate="no">Gemini-2.0-Flash</code>, <code translate="no">Gemini-2.0-Pro</code> и другим версиям, для таких задач, как генерация текста, обработка документов, зрение, анализ аудио и многое другое. API позволяет вводить длинные контексты с миллионами лексем, точно настраивать модели для конкретных задач, генерировать структурированные выходные данные, такие как JSON, и использовать такие возможности, как семантический поиск и выполнение кода.</p>
-<p>В этом руководстве мы покажем вам, как построить конвейер RAG (Retrieval-Augmented Generation) с помощью Milvus и Gemini. Мы будем использовать модель Gemini для генерации ответов на основе заданного запроса, дополненного релевантной информацией, полученной из Milvus.</p>
+<p>В этом уроке мы покажем вам, как построить конвейер RAG (Retrieval-Augmented Generation) с помощью Milvus и Gemini. Мы будем использовать модель Gemini для генерации ответов на основе заданного запроса, дополненного релевантной информацией, полученной из Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,8 +3,8 @@ id: hybrid_search_with_milvus.md
 summary: البحث الهجين مع ميلفوس
 title: البحث الهجين مع ميلفوس
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">البحث الهجين مع ميلفوس<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +21,7 @@ title: البحث الهجين مع ميلفوس
         ></path>
       </svg>
     </button></h1><p>إذا كنت ترغب في تجربة التأثير النهائي لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى https://demos.milvus.io/hybrid-search/</p>
-<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
+<p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>في هذا البرنامج التعليمي، سنشرح في هذا البرنامج التعليمي كيفية إجراء بحث هجين باستخدام <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> ونموذج <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3</a>. يمكن لنموذج BGE-M3 تحويل النص إلى متجهات كثيفة ومتناثرة. يدعم Milvus تخزين كلا النوعين من المتجهات في مجموعة واحدة، مما يسمح بالبحث الهجين الذي يعزز أهمية النتائج.</p>
 <p>يدعم Milvus طرق الاسترجاع الكثيفة والمتناثرة والهجينة:</p>
 <ul>
@@ -291,7 +291,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>ما هو العمل الأفضل<span style='color:red'> للبدء</span> في حيدر<span style='color:red'> أباد؟</span></p>
 <p>ما هو العمل التجاري الأفضل<span style='color:red'> للبدء</span> في حيدر<span style='color:red'> أباد؟</span></p>
 <p>ما هي أفضل طريقة<span style='color:red'> لبدء</span><span style='color:red'> الروبوتات؟</span> ما هي أفضل لوحة تطوير يمكنني<span style='color:red'> البدء</span> في العمل<span style='color:red'> عليها؟</span></p>
-<p>ما هي الرياضيات التي يحتاجها المبتدئ<span style='color:red'> لفهم</span> خوارزميات<span style='color:red'> برمجة الكمبيوتر</span> ؟ ما هي الكتب عن الخوارزميات المناسبة للمبتدئ<span style='color:red'> الكامل؟</span></p>
+<p>ما هي الرياضيات التي يحتاجها المبتدئ<span style='color:red'> لفهم</span> خوارزميات<span style='color:red'> برمجة الكمبيوتر؟</span> ما هي الكتب عن الخوارزميات المناسبة للمبتدئ<span style='color:red'> الكامل؟</span></p>
 <p><span style='color:red'>كيف</span> تجعل الحياة تناسبك وتمنع الحياة من <span style='color:red'>الإساءة</span> إليك عقلياً<span style='color:red'> وعاطفياً؟</span></p>
 <p><strong>نتائج البحث الهجين:</strong></p>
 <p>ما هي أفضل طريقة<span style='color:red'> لبدء</span> برمجة<span style='color:red'> الروبوتات؟</span> ما هي أفضل لوحة تطوير يمكنني<span style='color:red'> البدء في</span> العمل<span style='color:red'> عليها؟</span></p>
@@ -311,4 +311,4 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>ما هو العمل التجاري الأفضل<span style='color:red'> للبدء</span> في حيدر<span style='color:red'> أباد؟</span></p>
 <p>ما هي الرياضيات التي يحتاجها المبتدئ<span style='color:red'> لفهم</span> خوارزميات<span style='color:red'> برمجة الكمبيوتر؟</span> ما هي الكتب عن الخوارزميات المناسبة للمبتدئ<span style='color:red'> الكامل؟</span></p>
 <p><span style='color:red'>كيف</span> تجعل الحياة تناسبك وتمنع الحياة من <span style='color:red'>الإساءة</span> إليك عقليًا<span style='color:red'> وعاطفيًا؟</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">النشر السريع</h3><p>لمعرفة كيفية بدء عرض توضيحي عبر الإنترنت باستخدام هذا البرنامج التعليمي، يرجى الرجوع إلى <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">مثال التطبيق</a>.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">النشر السريع</h3><p>لمعرفة كيفية بدء عرض توضيحي عبر الإنترنت باستخدام هذا البرنامج التعليمي، يرجى الرجوع إلى <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">مثال التطبيق</a>.</p>

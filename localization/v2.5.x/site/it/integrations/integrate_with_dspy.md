@@ -20,8 +20,8 @@ title: Integrare Milvus con DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="What-is-DSPy" class="common-anchor-header">Cos'è DSPy<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -129,7 +129,7 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Inserire i dati nel database vettoriale di Milvus</h3><p>Inseriamo le informazioni sul contesto nella raccolta Milvus per il recupero dei vettori. Questa collezione dovrebbe avere un campo <code translate="no">embedding</code> e un campo <code translate="no">text</code>. In questo caso, utilizziamo il modello <code translate="no">text-embedding-3-small</code> di OpenAI come funzione predefinita di incorporazione della query.</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Inserire i dati nel database vettoriale di Milvus</h3><p>Inseriamo le informazioni sul contesto nella raccolta Milvus per il recupero dei vettori. Questa collezione dovrebbe avere un campo <code translate="no">embedding</code> e un campo <code translate="no">text</code>. In questo caso utilizziamo il modello <code translate="no">text-embedding-3-small</code> di OpenAI come funzione predefinita di incorporazione della query.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -230,9 +230,9 @@ metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Ottimizzazione della pipeline</h3><p>Dopo aver definito il programma, il passo successivo è la compilazione. Questo processo aggiorna i parametri di ciascun modulo per migliorare le prestazioni. Il processo di compilazione dipende da tre fattori critici:</p>
+<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Ottimizzazione della pipeline</h3><p>Dopo aver definito il programma, il passo successivo è la compilazione. Questo processo aggiorna i parametri di ogni modulo per migliorare le prestazioni. Il processo di compilazione dipende da tre fattori critici:</p>
 <ul>
-<li>Set di allenamento: Per questa dimostrazione utilizzeremo i 20 esempi di domande e risposte del nostro set di dati di addestramento.</li>
+<li>Set di allenamento: Per questa dimostrazione utilizzeremo i 20 esempi di domande e risposte del nostro set di dati di allenamento.</li>
 <li>Metrica di convalida: Stabiliamo una semplice metrica <code translate="no">validate_context_and_answer</code>. Questa metrica verifica l'accuratezza della risposta prevista e assicura che il contesto recuperato includa la risposta.</li>
 <li>Ottimizzatore specifico (Teleprompter): Il compilatore di DSPy incorpora più telepromptori progettati per ottimizzare efficacemente i programmi.</li>
 </ul>

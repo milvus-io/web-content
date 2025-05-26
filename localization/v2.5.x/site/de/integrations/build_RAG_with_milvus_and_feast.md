@@ -9,9 +9,9 @@ summary: >-
   ist eine hochleistungsfähige Vektordatenbank, die für eine schnelle
   Ähnlichkeitssuche entwickelt wurde und sich daher ideal für das Auffinden
   relevanter Dokumente in RAG-Workflows eignet.
-title: RAG mit Milvus und Feast aufbauen
+title: RAG mit Milvus und Feast erstellen
 ---
-<h1 id="Build-RAG-with-Milvus-and-Feast" class="common-anchor-header">RAG mit Milvus und Feast aufbauen<button data-href="#Build-RAG-with-Milvus-and-Feast" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Feast" class="common-anchor-header">RAG mit Milvus und Feast erstellen<button data-href="#Build-RAG-with-Milvus-and-Feast" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,10 +26,10 @@ title: RAG mit Milvus und Feast aufbauen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>In diesem Tutorial werden wir eine Retrieval-Augmented Generation (RAG) Pipeline mit <a href="https://github.com/feast-dev/feast">Feast</a> und <a href="https://milvus.io/">Milvus</a> aufbauen. Feast ist ein Open-Source-Feature-Store, der die Feature-Verwaltung für maschinelles Lernen vereinfacht und eine effiziente Speicherung und Abfrage strukturierter Daten sowohl für das Training als auch für Echtzeit-Inferenzen ermöglicht. Milvus ist eine hochleistungsfähige Vektordatenbank, die für eine schnelle Ähnlichkeitssuche entwickelt wurde und sich daher ideal für das Auffinden relevanter Dokumente in RAG-Workflows eignet.</p>
@@ -158,7 +158,7 @@ llm_client = OpenAI(
 <li>Vorberechnete Einbettungen (384-dimensionale Vektoren)</li>
 <li>Zugehörige Metadaten wie Städtenamen und Bundesländer</li>
 </ul>
-<p>Diese Dateien arbeiten zusammen, um einen Merkmalspeicher zu erstellen, der die Vektorsuchfunktionen von Milvus mit dem Merkmalsmanagement von Feast kombiniert und so ein effizientes Abrufen relevanter Stadtinformationen für unsere RAG-Anwendung ermöglicht.</p>
+<p>Diese Dateien arbeiten zusammen, um einen Merkmalspeicher zu erstellen, der die Vektorsuchfunktionen von Milvus mit der Merkmalsverwaltung von Feast kombiniert und so eine effiziente Suche nach relevanten Stadtinformationen für unsere RAG-Anwendung ermöglicht.</p>
 <h2 id="Inspect-the-Data" class="common-anchor-header">Prüfen der Daten<button data-href="#Inspect-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -460,7 +460,7 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Abrufen von Echtzeit-Vektoren und Daten für die Online-Inferenz</h3><p>Sobald die Anfrage in eine Einbettung umgewandelt wurde, besteht der nächste Schritt darin, relevante Dokumente aus dem Vektorspeicher abzurufen. Zum Zeitpunkt der Inferenz nutzen wir die Vektorähnlichkeitssuche, um die relevantesten Dokumenteneinbettungen zu finden, die im Online-Feature-Store gespeichert sind, und verwenden dazu <code translate="no">retrieve_online_documents_v2()</code>. Diese Merkmalsvektoren können dann in den Kontext des LLM eingespeist werden.</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Abrufen von Echtzeit-Vektoren und Daten für die Online-Inferenz</h3><p>Sobald die Anfrage in eine Einbettung umgewandelt wurde, besteht der nächste Schritt darin, relevante Dokumente aus dem Vektorspeicher abzurufen. Zum Zeitpunkt der Inferenz nutzen wir die Vektorähnlichkeitssuche, um die relevantesten Dokumenteneinbettungen zu finden, die im Online-Feature-Store gespeichert sind, und zwar unter <code translate="no">retrieve_online_documents_v2()</code>. Diese Merkmalsvektoren können dann in den Kontext des LLM eingespeist werden.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)

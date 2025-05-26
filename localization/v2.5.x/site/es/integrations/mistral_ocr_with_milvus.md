@@ -5,10 +5,10 @@ summary: >-
   utilizando Milvus y Mistral OCR.
 title: Comprensión de documentos con Mistral OCR y Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">Comprensión de documentos con Mistral OCR y Milvus<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
@@ -88,7 +88,7 @@ title: Comprensión de documentos con Mistral OCR y Milvus
       </svg>
     </button></h2><p>Base de datos especializada en la búsqueda de similitudes vectoriales:</p>
 <ul>
-<li>Fuente abierta</li>
+<li>Código abierto</li>
 <li>Realiza búsquedas vectoriales eficaces</li>
 <li>Se adapta a grandes colecciones de documentos</li>
 <li>Admite la búsqueda híbrida (similitud vectorial + filtrado de metadatos)</li>

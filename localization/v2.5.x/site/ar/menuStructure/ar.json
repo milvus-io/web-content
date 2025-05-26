@@ -74,7 +74,7 @@
             "children": []
           },
           {
-            "label": "تشغيل ميلفوس مستقل",
+            "label": "تشغيل ميلفوس ستاندالون",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -1249,7 +1249,7 @@
             ]
           },
           {
-            "label": "استخدم بولسّا مع ميلفوس",
+            "label": "استخدم بولسار مع ميلفوس",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,

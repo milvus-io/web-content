@@ -6,10 +6,10 @@ summary: >-
   在本教程中，您将学习如何使用 LlamaIndex 和 Milvus 建立一个使用全文搜索和混合搜索的 RAG
   系统。我们将首先单独实施全文搜索，然后通过整合语义搜索来增强其功能，以获得更全面的结果。
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_full_text_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Using-Full-Text-Search-with-LlamaIndex-and-Milvus" class="common-anchor-header">使用 LlamaIndex 和 Milvus 进行全文搜索<button data-href="#Using-Full-Text-Search-with-LlamaIndex-and-Milvus" class="anchor-icon" translate="no">
@@ -68,7 +68,7 @@ openai.api_key = <span class="hljs-string">&quot;sk-&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>要使用 Milvus 向量存储，请指定您的 Milvus 服务器<code translate="no">URI</code> （可选择使用<code translate="no">TOKEN</code> ）。要启动 Milvus 服务器，可以按照<a href="https://milvus.io/docs/install-overview.md">Milvus 安装指南</a>设置 Milvus 服务器，或者直接免费试用<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>。</p>
 <blockquote>
-<p>Milvus Standalone、Milvus Distributed 和 Zilliz Cloud 目前支持全文搜索，但 Milvus Lite 尚不支持全文搜索（计划将来实施）。如需了解更多信息，请联系 support@zilliz.com。</p>
+<p>Milvus Standalone、Milvus Distributed 和 Zilliz Cloud 目前支持全文搜索，但 Milvus Lite 尚不支持全文搜索（计划今后实施）。如需了解更多信息，请联系 support@zilliz.com。</p>
 </blockquote>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = &quot;&quot;</span>
@@ -104,7 +104,7 @@ data/paul_graham/pa 100%[===================&gt;]  73.28K  --.-KB/s    in 0.07s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>将全文检索集成到 RAG 系统中，可在语义搜索与基于关键字的精确、可预测检索之间取得平衡。您也可以选择只使用全文检索，但建议将全文检索与语义搜索结合起来，以获得更好的搜索结果。在此，我们将单独演示全文搜索和混合搜索。</p>
+    </button></h2><p>将全文搜索集成到 RAG 系统中，可在语义搜索与基于关键字的精确、可预测检索之间取得平衡。您也可以选择只使用全文检索，但建议将全文检索与语义搜索结合起来，以获得更好的搜索结果。在此，我们将单独演示全文搜索和混合搜索。</p>
 <p>要开始使用，请使用<code translate="no">SimpleDirectoryReaderLoad</code> 加载保罗-格雷厄姆（Paul Graham）的文章 "What I Worked On"：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> SimpleDirectoryReader
 
@@ -151,7 +151,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <p>上述代码将示例文档插入 Milvus 并建立索引，以启用 BM25 排名进行全文搜索。它禁用了密集嵌入（dense embedding），并使用带有默认参数的<code translate="no">BM25BuiltInFunction</code> 。</p>
 <p>您可以在<code translate="no">BM25BuiltInFunction</code> 参数中指定输入和输出字段：</p>
 <ul>
-<li><code translate="no">input_field_names (str)</code>:输入文本字段（默认值："text"）。它表示 BM25 算法应用于哪个文本字段。如果使用不同文本字段名称的自己的 Collections，请更改此项。</li>
+<li><code translate="no">input_field_names (str)</code>:输入文本字段（默认："text"）。它表示 BM25 算法应用于哪个文本字段。如果使用不同文本字段名称的自己的 Collections，请更改此项。</li>
 <li><code translate="no">output_field_names (str)</code>:存储此 BM25 函数输出的字段（默认值："sparse_embedding"）。</li>
 </ul>
 <p>向量存储设置完成后，就可以使用 Milvus 执行全文搜索查询，查询模式为 "sparse "或 "text_search"：</p>

@@ -20,10 +20,10 @@ title: SQL schreiben mit Vanna und Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><a href="https://vanna.ai/">Vanna</a> ist ein Open-Source-Python-RAG-Framework (Retrieval-Augmented Generation) für die SQL-Generierung und verwandte Funktionen. <a href="https://milvus.io/">Milvus</a> ist die fortschrittlichste Open-Source-Vektordatenbank der Welt, die für die Einbettung von Ähnlichkeitssuche und KI-Anwendungen entwickelt wurde.</p>
-<p>Vanna funktioniert in zwei einfachen Schritten: Trainieren Sie ein RAG-"Modell" auf Ihren Daten, und stellen Sie dann Fragen, die SQL-Abfragen zurückgeben, die in Ihrer Datenbank ausgeführt werden können. Dieser Leitfaden zeigt Ihnen, wie Sie mit Vanna SQL-Abfragen auf der Grundlage Ihrer in einer Datenbank gespeicherten Daten erstellen und ausführen können.</p>
+<p>Vanna funktioniert in zwei einfachen Schritten: Trainieren Sie ein RAG-"Modell" auf Ihren Daten, und stellen Sie dann Fragen, die SQL-Abfragen zurückgeben, die auf Ihrer Datenbank ausgeführt werden können. Dieser Leitfaden zeigt Ihnen, wie Sie mit Vanna SQL-Abfragen auf der Grundlage Ihrer in einer Datenbank gespeicherten Daten erstellen und ausführen können.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +48,7 @@ title: SQL schreiben mit Vanna und Milvus
 <p>Außerdem müssen Sie die <code translate="no">OPENAI_API_KEY</code> in Ihren Umgebungsvariablen festlegen. Sie können den API-Schlüssel von <a href="https://platform.openai.com/docs/guides/production-best-practices/api-keys">OpenAI</a> erhalten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Data-preparation" class="common-anchor-header">Vorbereitung der Daten<button data-href="#Data-preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,7 +166,7 @@ vn_milvus.connect_to_sqlite(sqlite_path)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wir können das Modell mit den DDL-Daten der SQLite-Datenbank trainieren. Wir holen uns die DDL-Daten und füttern damit die Funktion <code translate="no">train</code>.</p>
+    </button></h2><p>Wir können das Modell mit den DDL-Daten der SQLite-Datenbank trainieren. Wir erhalten die DDL-Daten und füttern damit die Funktion <code translate="no">train</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># If there exists training data, we should remove it before training.</span>
 existing_training_data = vn_milvus.get_training_data()
 <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(existing_training_data) &gt; <span class="hljs-number">0</span>:
@@ -302,8 +302,8 @@ training_data
       </svg>
     </button></h2><p>Da wir mit den DDL-Daten geübt haben, ist die Tabellenstruktur nun für die Generierung von SQL-Abfragen verfügbar.</p>
 <p>Versuchen wir es mit einer einfachen Frage.</p>
-<pre><code translate="no" class="language-python">sql = vn_milvus.<span class="hljs-title function_">generate_sql</span>(<span class="hljs-string">&quot;what is the phone number of John Doe?&quot;</span>)
-vn_milvus.<span class="hljs-title function_">run_sql</span>(sql)
+<pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;what is the phone number of John Doe?&quot;</span>)
+vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">SQL Prompt: [{'role': 'system', 'content': &quot;You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE Customer (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Name TEXT NOT NULL,\n    Company TEXT NOT NULL,\n    City TEXT NOT NULL,\n    Phone TEXT NOT NULL\n)\n\nCREATE TABLE User (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Username TEXT NOT NULL UNIQUE,\n    Email TEXT NOT NULL UNIQUE\n)\n\n\n===Additional Context \n\nABC Corp specializes in cutting-edge technology solutions and innovation.\n\nXYZ Inc is a global leader in manufacturing and supply chain management.\n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n&quot;}, {'role': 'user', 'content': 'What are the details of the customer named John Doe?'}, {'role': 'assistant', 'content': &quot;SELECT * FROM Customer WHERE Name = 'John Doe'&quot;}, {'role': 'user', 'content': 'what is the phone number of John Doe?'}]
 Using model gpt-3.5-turbo for 367.25 tokens (approx)
@@ -326,8 +326,8 @@ LLM Response: SELECT Phone FROM Customer WHERE Name = 'John Doe'
 </table>
 </div>
 <p>Hier ist eine komplexere Frage. Die Informationen über den Namen des Fertigungsunternehmens befinden sich in den Dokumentdaten, bei denen es sich um Hintergrundinformationen handelt. Die generierte SQL-Abfrage ruft die Kundeninformationen auf der Grundlage des spezifischen Namens des Fertigungsunternehmens ab.</p>
-<pre><code translate="no" class="language-python">sql = vn_milvus.<span class="hljs-title function_">generate_sql</span>(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
-vn_milvus.<span class="hljs-title function_">run_sql</span>(sql)
+<pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
+vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">SQL Prompt: [{'role': 'system', 'content': &quot;You are a SQLite expert. Please help to generate a SQL query to answer the question. Your response should ONLY be based on the given context and follow the response guidelines and format instructions. \n===Tables \nCREATE TABLE Company (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Name TEXT NOT NULL,\n    Industry TEXT NOT NULL,\n    Location TEXT NOT NULL,\n    EmployeeCount INTEGER NOT NULL\n)\n\nCREATE TABLE Customer (\n    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n    Name TEXT NOT NULL,\n    Company TEXT NOT NULL,\n    City TEXT NOT NULL,\n    Phone TEXT NOT NULL\n)\n\n\n===Additional Context \n\nXYZ Inc is a global leader in manufacturing and supply chain management.\n\nABC Corp specializes in cutting-edge technology solutions and innovation.\n\n===Response Guidelines \n1. If the provided context is sufficient, please generate a valid SQL query without any explanations for the question. \n2. If the provided context is almost sufficient but requires knowledge of a specific string in a particular column, please generate an intermediate SQL query to find the distinct strings in that column. Prepend the query with a comment saying intermediate_sql \n3. If the provided context is insufficient, please explain why it can't be generated. \n4. Please use the most relevant table(s). \n5. If the question has been asked and answered before, please repeat the answer exactly as it was given before. \n&quot;}, {'role': 'user', 'content': 'What are the details of the customer named John Doe?'}, {'role': 'assistant', 'content': &quot;SELECT * FROM Customer WHERE Name = 'John Doe'&quot;}, {'role': 'user', 'content': 'which customer works for a manufacturing corporation?'}]
 Using model gpt-3.5-turbo for 384.25 tokens (approx)
@@ -360,8 +360,8 @@ WHERE Company = 'XYZ Inc'
 </table>
 </div>
 <p>Trennen Sie die Verbindung zu SQLite und Milvus und entfernen Sie sie, um Ressourcen freizugeben.</p>
-<pre><code translate="no" class="language-python">sql_connect.<span class="hljs-built_in">close</span>()
-milvus_client.<span class="hljs-built_in">close</span>()
+<pre><code translate="no" class="language-python">sql_connect.close()
+milvus_client.close()
 
 os.remove(sqlite_path)
 <span class="hljs-keyword">if</span> os.path.exists(milvus_uri):

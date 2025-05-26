@@ -9,10 +9,10 @@ summary: >-
   ist eine Milvus-Anpassung des Artikels von Dylan Castillo.
 title: HDBSCAN-Clustering mit Milvus
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">HDBSCAN-Clustering mit Milvus<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
@@ -33,7 +33,7 @@ title: HDBSCAN-Clustering mit Milvus
     </button></h1><p>Daten können mithilfe von Deep-Learning-Modellen in Einbettungen umgewandelt werden, die aussagekräftige Repräsentationen der ursprünglichen Daten erfassen. Durch die Anwendung eines unüberwachten Clustering-Algorithmus können wir ähnliche Datenpunkte auf der Grundlage ihrer inhärenten Muster zusammenfassen. HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) ist ein weit verbreiteter Clustering-Algorithmus, der Datenpunkte durch Analyse ihrer Dichte und ihres Abstands effizient gruppiert. Er ist besonders nützlich für die Entdeckung von Clustern unterschiedlicher Form und Größe. In diesem Notizbuch werden wir HDBSCAN mit Milvus, einer leistungsstarken Vektordatenbank, verwenden, um Datenpunkte auf der Grundlage ihrer Einbettungen in verschiedene Gruppen zu gruppieren.</p>
 <p>HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) ist ein Clustering-Algorithmus, der auf der Berechnung von Abständen zwischen Datenpunkten im Einbettungsraum beruht. Diese Einbettungen, die von Deep-Learning-Modellen erstellt werden, stellen die Daten in einer hochdimensionalen Form dar. Um ähnliche Datenpunkte zu gruppieren, bestimmt HDBSCAN ihre Nähe und Dichte, aber die effiziente Berechnung dieser Abstände, insbesondere bei großen Datensätzen, kann eine Herausforderung darstellen.</p>
 <p>Milvus, eine leistungsstarke Vektordatenbank, optimiert diesen Prozess, indem sie Einbettungen speichert und indiziert und so ein schnelles Auffinden ähnlicher Vektoren ermöglicht. Im Zusammenspiel ermöglichen HDBSCAN und Milvus eine effiziente Clusterung großer Datensätze im Einbettungsraum.</p>
-<p>In diesem Notebook verwenden wir das BGE-M3 Einbettungsmodell, um Einbettungen aus einem Datensatz von Nachrichtenschlagzeilen zu extrahieren, Milvus zur effizienten Berechnung von Distanzen zwischen Einbettungen zu verwenden, um HDBSCAN beim Clustering zu unterstützen, und die Ergebnisse anschließend für die Analyse mit der UMAP-Methode zu visualisieren. Dieses Notizbuch ist eine Milvus-Anpassung des <a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">Artikels von Dylan Castillo</a>.</p>
+<p>In diesem Notebook verwenden wir das BGE-M3 Einbettungsmodell, um Einbettungen aus einem Datensatz von Nachrichtenschlagzeilen zu extrahieren, Milvus zur effizienten Berechnung von Distanzen zwischen Einbettungen zu verwenden, um HDBSCAN beim Clustern zu unterstützen, und die Ergebnisse dann für die Analyse mit der UMAP-Methode zu visualisieren. Dieses Notizbuch ist eine Milvus-Anpassung des <a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">Artikels von Dylan Castillo</a>.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -284,6 +284,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/images/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/hdbscan_clustering_with_milvus.png?raw=true" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>Bild</span> </span></p>
 <p>Hier zeigen wir, dass die Daten gut geclustert sind, und Sie können den Mauszeiger über die Punkte bewegen, um den Text zu sehen, den sie darstellen. Wir hoffen, dass Sie mit diesem Notizbuch lernen, wie Sie HDBSCAN zum effizienten Clustern von Einbettungen mit Milvus verwenden können. In Kombination mit großen Sprachmodellen ermöglicht dieser Ansatz eine tiefere Analyse Ihrer Daten in großem Maßstab.</p>

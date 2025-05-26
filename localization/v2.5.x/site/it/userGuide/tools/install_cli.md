@@ -59,7 +59,7 @@ title: Installare Milvus_CLI
       </svg>
     </button></h2><p>È possibile installare Milvus_CLI con docker.</p>
 <h3 id="Prerequisites" class="common-anchor-header">Prerequisiti</h3><p>È necessario Docker 19.03 o successivo.</p>
-<h3 id="Install-based-on-Docker-image" class="common-anchor-header">Installazione basata sull'immagine Docker</h3><pre><code translate="no" class="language-shell">$ docker run -it zilliz/milvus_cli:latest
+<h3 id="Install-based-on-Docker-image" class="common-anchor-header">Installazione basata sull'immagine Docker</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -it zilliz/milvus_cli:latest</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-from-source-code" class="common-anchor-header">Installazione dal codice sorgente<button data-href="#Install-from-source-code" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,12 +79,12 @@ title: Installare Milvus_CLI
     </button></h2><ol>
 <li>Eseguire il seguente comando per scaricare un repository <code translate="no">milvus_cli</code>.</li>
 </ol>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus_cli.git
+<pre><code translate="no" class="language-shell">git clone https://github.com/zilliztech/milvus_cli.git
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>Eseguire il comando seguente per entrare nella cartella <code translate="no">milvus_cli</code>.</li>
 </ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> milvus_cli
+<pre><code translate="no" class="language-shell">cd milvus_cli
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>Eseguire il seguente comando per installare Milvus_CLI.</li>

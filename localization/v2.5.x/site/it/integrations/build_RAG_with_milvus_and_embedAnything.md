@@ -9,10 +9,10 @@ summary: >-
   formattati, indicizzati e memorizzati nel vector store di destinazione.
 title: Costruire RAG con Milvus e EmbedAnything
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">Costruire RAG con Milvus e EmbedAnything<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
@@ -154,7 +154,7 @@ data = embed_anything.embed_file(
 <pre><code translate="no">Converted 12 embeddings for insertion.
 Successfully inserted 12 embeddings.
 </code></pre>
-<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">Recuperare e generare la risposta</h3><p>Anche in questo caso, <code translate="no">MilvusVectorAdapter</code> di EmbedAnything è attualmente un'astrazione leggera solo per l'ingestione e l'indicizzazione dei vettori. <strong>Non supporta</strong> query di <strong>ricerca</strong> o di recupero. Pertanto, per cercare documenti rilevanti per costruire la nostra pipeline RAG, dobbiamo usare direttamente l'istanza <code translate="no">MilvusClient</code> (<code translate="no">milvus_client</code>) per interrogare il nostro archivio vettoriale Milvus.</p>
+<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">Recuperare e generare la risposta</h3><p>Anche in questo caso, <code translate="no">MilvusVectorAdapter</code> di EmbedAnything è attualmente un'astrazione leggera solo per l'ingestione e l'indicizzazione dei vettori. <strong>Non supporta</strong> query <strong>di ricerca</strong> o di recupero. Pertanto, per cercare documenti rilevanti per costruire la nostra pipeline RAG, dobbiamo usare direttamente l'istanza <code translate="no">MilvusClient</code> (<code translate="no">milvus_client</code>) per interrogare il nostro archivio vettoriale Milvus.</p>
 <p>Definire una funzione per recuperare i documenti rilevanti da Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">retrieve_documents</span>(<span class="hljs-params">question, top_k=<span class="hljs-number">3</span></span>):
     query_vector = <span class="hljs-built_in">list</span>(

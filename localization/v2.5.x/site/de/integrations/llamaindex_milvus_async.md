@@ -26,10 +26,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_async.ipynb" target="_parent">
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_async.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_async.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_async.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>Dieses Tutorial zeigt, wie man <a href="https://www.llamaindex.ai/">LlamaIndex</a> mit <a href="https://milvus.io/">Milvus</a> verwendet, um eine asynchrone Dokumentenverarbeitungspipeline für RAG zu erstellen. LlamaIndex bietet eine Möglichkeit, Dokumente zu verarbeiten und in einer Vektor-Datenbank wie Milvus zu speichern. Durch die Nutzung der asynchronen API von LlamaIndex und der Python-Client-Bibliothek von Milvus können wir den Durchsatz der Pipeline erhöhen, um große Datenmengen effizient zu verarbeiten und zu indizieren.</p>
@@ -58,12 +58,12 @@ summary: >-
 <p>Wir werden die Modelle von OpenAI verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Wenn Sie Jupyter Notebook verwenden, müssen Sie diese Codezeile ausführen, bevor Sie den asynchronen Code starten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> nest_asyncio
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-data" class="common-anchor-header">Daten vorbereiten</h3><p>Sie können Beispieldaten mit den folgenden Befehlen herunterladen:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
@@ -91,12 +91,12 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">import</span> time
 
-<span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">core</span>.<span class="hljs-property">schema</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">TextNode</span>, <span class="hljs-title class_">NodeRelationship</span>, <span class="hljs-title class_">RelatedNodeInfo</span>
-<span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">core</span>.<span class="hljs-property">vector_stores</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">VectorStoreQuery</span>
-<span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">vector_stores</span>.<span class="hljs-property">milvus</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusVectorStore</span>
+<span class="hljs-keyword">from</span> llama_index.core.schema <span class="hljs-keyword">import</span> TextNode, NodeRelationship, RelatedNodeInfo
+<span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> VectorStoreQuery
+<span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
 
-<span class="hljs-variable constant_">URI</span> = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-variable constant_">DIM</span> = <span class="hljs-number">768</span>
+URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+DIM = <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
@@ -106,17 +106,17 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 </ul>
 </div>
 <p>Definieren Sie eine Initialisierungsfunktion, die wir wieder verwenden können, um die Milvus-Sammlung neu aufzubauen.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-function">def <span class="hljs-title">init_vector_store</span>():
-    <span class="hljs-keyword">return</span> <span class="hljs-title">MilvusVectorStore</span>(<span class="hljs-params">
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
+    <span class="hljs-keyword">return</span> MilvusVectorStore(
         uri=URI,
-        # token=TOKEN,
+        <span class="hljs-comment"># token=TOKEN,</span>
         dim=DIM,
         collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (`<span class="hljs-string">&quot;Strong&quot;</span>`, `<span class="hljs-string">&quot;Session&quot;</span>`, `<span class="hljs-string">&quot;Bounded&quot;</span>`, `<span class="hljs-string">&quot;Eventually&quot;</span>`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-        overwrite</span>=True,  <span class="hljs-meta"># To overwrite the collection <span class="hljs-keyword">if</span> it already exists</span>
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
     )
 
 
@@ -137,10 +137,10 @@ documents = SimpleDirectoryReader(
 <pre><code translate="no">Document ID: 41a6f99c-489f-49ff-9821-14e2561140eb
 </code></pre>
 <p>Instanziieren Sie ein Hugging Face Einbettungsmodell lokal. Die Verwendung eines lokalen Modells vermeidet das Risiko, bei der asynchronen Dateneinfügung an die Grenzen der API-Rate zu stoßen, da sich gleichzeitige API-Anforderungen schnell summieren und Ihr Budget für die öffentliche API aufbrauchen können. Wenn Sie jedoch ein hohes Ratenlimit haben, können Sie sich stattdessen für die Verwendung eines Remote-Modelldienstes entscheiden.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">embeddings</span>.<span class="hljs-property">huggingface</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">HuggingFaceEmbedding</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.embeddings.huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbedding
 
 
-embed_model = <span class="hljs-title class_">HuggingFaceEmbedding</span>(model_name=<span class="hljs-string">&quot;BAAI/bge-base-en-v1.5&quot;</span>)
+embed_model = HuggingFaceEmbedding(model_name=<span class="hljs-string">&quot;BAAI/bge-base-en-v1.5&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Erstellen Sie einen Index und fügen Sie das Dokument ein.</p>
 <p>Wir setzen die <code translate="no">use_async</code> auf <code translate="no">True</code>, um den asynchronen Einfügemodus zu aktivieren.</p>
@@ -156,9 +156,9 @@ index = VectorStoreIndex.from_documents(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Initialisieren Sie den LLM.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">llms</span>.<span class="hljs-property">openai</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.llms.openai <span class="hljs-keyword">import</span> OpenAI
 
-llm = <span class="hljs-title class_">OpenAI</span>(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
+llm = OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Bei der Erstellung der Query Engine können Sie auch den Parameter <code translate="no">use_async</code> auf <code translate="no">True</code> setzen, um die asynchrone Suche zu aktivieren.</p>
 <pre><code translate="no" class="language-python">query_engine = index.as_query_engine(use_async=<span class="hljs-literal">True</span>, llm=llm)
@@ -223,7 +223,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
     end_time = time.time()
     <span class="hljs-keyword">return</span> end_time - start_time
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python">add_counts = [10, 100, 1000]
+<pre><code translate="no" class="language-python">add_counts = [<span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1000</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>Holen Sie die Ereignisschleife.</p>
 <pre><code translate="no" class="language-python">loop = asyncio.get_event_loop()
@@ -267,7 +267,7 @@ Sync add for 1000 took 62.91 seconds
 <h3 id="Async-search" class="common-anchor-header">Asynchrone Suche</h3><p>Re-initialisieren Sie den Vektorspeicher und fügen Sie einige Dokumente hinzu, bevor Sie die Suche starten.</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 node_list = produce_nodes(num_adding=<span class="hljs-number">1000</span>)
-inserted_ids = vector_store.<span class="hljs-keyword">add</span>(node_list)
+inserted_ids = vector_store.add(node_list)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:08:57,982 [DEBUG][_create_connection]: Created new connection using: 351dc7ea4fb14d4386cfab02621ab7d1 (async_milvus_client.py:600)
 </code></pre>
@@ -285,7 +285,7 @@ inserted_ids = vector_store.<span class="hljs-keyword">add</span>(node_list)
     end_time = time.time()
     <span class="hljs-keyword">return</span> end_time - start_time
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python">query_counts = [10, 100, 1000]
+<pre><code translate="no" class="language-python">query_counts = [<span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1000</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>Asynchrone Suche im Milvus-Speicher.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> query_counts:
@@ -301,7 +301,7 @@ inserted_ids = vector_store.<span class="hljs-keyword">add</span>(node_list)
 Async search for 100 queries took 1.39 seconds
 Async search for 1000 queries took 8.81 seconds
 </code></pre>
-<h4 id="Compare-with-synchronous-search" class="common-anchor-header">Vergleich mit synchroner Suche</h4><p>Definieren Sie eine synchrone Suchfunktion. Messen Sie dann die Laufzeit unter den gleichen Bedingungen.</p>
+<h4 id="Compare-with-synchronous-search" class="common-anchor-header">Vergleich mit synchroner Suche</h4><p>Definieren Sie eine synchrone Suchfunktion. Messen Sie dann die Laufzeit unter der gleichen Bedingung.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_search</span>(<span class="hljs-params">num_queries</span>):
     start_time = time.time()
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_queries):

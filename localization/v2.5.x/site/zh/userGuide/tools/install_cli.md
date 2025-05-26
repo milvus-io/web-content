@@ -59,7 +59,7 @@ title: 安装 Milvus_CLI
       </svg>
     </button></h2><p>你可以使用 docker 安装 Milvus_CLI。</p>
 <h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>需要 Docker 19.03 或更高版本。</p>
-<h3 id="Install-based-on-Docker-image" class="common-anchor-header">根据 Docker 映像安装</h3><pre><code translate="no" class="language-shell">$ docker run -it zilliz/milvus_cli:latest
+<h3 id="Install-based-on-Docker-image" class="common-anchor-header">根据 Docker 映像安装</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -it zilliz/milvus_cli:latest</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-from-source-code" class="common-anchor-header">从源代码安装<button data-href="#Install-from-source-code" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,12 +79,12 @@ title: 安装 Milvus_CLI
     </button></h2><ol>
 <li>运行以下命令下载<code translate="no">milvus_cli</code> 代码库。</li>
 </ol>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus_cli.git
+<pre><code translate="no" class="language-shell">git clone https://github.com/zilliztech/milvus_cli.git
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>运行以下命令进入<code translate="no">milvus_cli</code> 文件夹。</li>
 </ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> milvus_cli
+<pre><code translate="no" class="language-shell">cd milvus_cli
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>运行以下命令安装 Milvus_CLI。</li>

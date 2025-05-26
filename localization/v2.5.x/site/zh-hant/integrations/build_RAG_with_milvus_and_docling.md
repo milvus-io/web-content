@@ -5,10 +5,10 @@ summary: >-
   管道。這個管道整合了 Docling (用於文件解析)、Milvus (用於向量儲存)，以及 OpenAI (用於產生具有洞察力、上下文感知的回應)。
 title: 使用 Milvus 和 Docling 建立 RAG
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_docling.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-RAG-with-Milvus-and-Docling" class="common-anchor-header">使用 Milvus 和 Docling 建立 RAG<button data-href="#Build-RAG-with-Milvus-and-Docling" class="anchor-icon" translate="no">
@@ -26,7 +26,7 @@ title: 使用 Milvus 和 Docling 建立 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/docling-project/docling">Docling</a>可為 AI 應用程式簡化不同格式的文件解析與理解。透過先進的 PDF 理解能力和統一的文件表示法，Docling 可讓非結構化文檔資料為下游工作流程做好準備。</p>
+    </button></h1><p><a href="https://github.com/docling-project/docling">Docling</a>可為人工智能應用程式簡化跨多種格式的文件解析與理解。透過先進的 PDF 理解能力和統一的文件表示法，Docling 可讓非結構化文檔資料為下游工作流程做好準備。</p>
 <p>在本教程中，我們將告訴您如何使用 Milvus 和 Docling 建立一個檢索-增強世代 (RAG) 管道。這個管道整合了 Docling 用於文件解析、Milvus 用於向量儲存，以及 OpenAI 用於產生有洞察力、上下文感知的回應。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 
 openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
-<p>定義一個函式來使用 OpenAI client 產生文字嵌入。我們使用<a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-small</a>模型作為範例。</p>
+<p>定義一個使用 OpenAI 用戶端產生文字嵌入的函式。我們使用<a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-small</a>模型作為範例。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
         openai_client.embeddings.create(<span class="hljs-built_in">input</span>=text, model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
