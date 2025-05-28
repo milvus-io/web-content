@@ -21,10 +21,11 @@ import {
   getTitleFromMarkdown,
 } from "./utils.js";
 import { remarkToHtml } from "./remark.js";
+import versionJson from "../version.json" assert { type: "json" };
 
 const MOCK_TRANSLATE = false;
 const VERSIONS = ["v2.5.x", "v2.4.x"];
-const LATEST_VERSION = VERSIONS[0];
+const LATEST_VERSION = versionJson.version;
 const sourceFilePath = "site/en";
 const sourceLang = "en";
 const targetLangs = [
@@ -114,7 +115,7 @@ async function bootstrap() {
           lang: targetLang,
           version,
           betaTag: data.beta,
-          latestVersion: LATEST_VERSION
+          latestVersion: LATEST_VERSION,
         };
         const {
           html: htmlContent,
@@ -200,14 +201,14 @@ async function bootstrap() {
           "utf8"
         );
 
-        total++;
-
         console.info(
           `-> ${targetLang.toUpperCase()}: file translated successfully:`,
           targetFilePath,
           ` (${total}/${updatedFiles.length})`
         );
       }
+
+      total++;
 
       if (!cache[version]) {
         cache[version] = {};
