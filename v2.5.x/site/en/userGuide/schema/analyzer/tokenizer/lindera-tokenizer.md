@@ -15,7 +15,7 @@ To use the `lindera` tokenizer, you need to use a specially compiled Milvus vers
 
 To enable specific dictionaries, include them in the compilation command:
 
-```bash
+```
 make milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
 ```
 
@@ -23,7 +23,7 @@ The complete list of available dictionaries is: `lindera-ipadic`, `lindera-ipadi
 
 For example, to enable all dictionaries:
 
-```bash
+```
 make milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ipadic-neologd,lindera-unidic,lindera-ko-dic,lindera-cc-cedict
 ```
 
