@@ -2,6 +2,7 @@
 id: regex-filter.md
 title: "Regex"
 summary: "The regex filter is a regular expression filter: any token produced by the tokenizer is kept only if it matches the expression you provide; everything else is discarded."
+beta: Milvus 2.5.11+
 ---
 
 # Regex
