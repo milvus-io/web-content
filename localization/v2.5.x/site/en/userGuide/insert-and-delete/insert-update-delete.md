@@ -355,8 +355,7 @@ System.out.println(insertResp);
 
 <span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">partition_name</span>: <span class="hljs-string">&quot;partitionA&quot;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">partition_name</span>: <span class="hljs-string">&quot;partitionA&quot;</span>,</span>
     <span class="hljs-attr">data</span>: data,
 })
 

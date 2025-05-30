@@ -128,20 +128,16 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)​
         .dataType(DataType.Int64)​
-        <span class="hljs-comment">// highlight-start​</span>
-        .isPrimaryKey(<span class="hljs-literal">true</span>)​
-        .autoID(<span class="hljs-literal">false</span>)​
-        <span class="hljs-comment">// highlight-end​</span>
+<span class="highlighted-comment-line">        .isPrimaryKey(<span class="hljs-literal">true</span>)​</span>
+<span class="highlighted-comment-line">        .autoID(<span class="hljs-literal">false</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,​
-    <span class="hljs-comment">// highlight-start​</span>
-    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,​
-    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>​
-    <span class="hljs-comment">// highlight-end​</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,​</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -195,16 +191,14 @@ export schema='{​
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
         .dataType(DataType.FloatVector)​
-        <span class="hljs-comment">// highlight-next-line​</span>
-        .dimension(<span class="hljs-number">5</span>)​
+<span class="highlighted-wrapper-line">        .dimension(<span class="hljs-number">5</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,​
-    <span class="hljs-comment">// highlight-next-line​</span>
-    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>​
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -270,16 +264,14 @@ export schema=&quot;{​
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
         .dataType(DataType.VarChar)​
-        <span class="hljs-comment">// highlight-next-line​</span>
-        .maxLength(<span class="hljs-number">512</span>)​
+<span class="highlighted-wrapper-line">        .maxLength(<span class="hljs-number">512</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,​
-    <span class="hljs-comment">// highlight-next-line​</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>​
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>

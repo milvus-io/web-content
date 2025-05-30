@@ -150,8 +150,7 @@ schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
         .dataType(DataType.VarChar)
         .maxLength(<span class="hljs-number">512</span>)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .isPartitionKey(<span class="hljs-literal">true</span>)
+<span class="highlighted-wrapper-line">        .isPartitionKey(<span class="hljs-literal">true</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
@@ -206,8 +205,7 @@ schema.WithField(entity.NewField().
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
         <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
-        <span class="hljs-comment">// highlight-next-line</span>
-        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span></span>
     }
 ]
 <button class="copy-code-btn"></button></code></pre>

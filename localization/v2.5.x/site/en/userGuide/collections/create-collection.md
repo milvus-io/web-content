@@ -562,16 +562,14 @@ client.create_collection(
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq3</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_3&quot;</span>)
     .collectionSchema(collectionSchema)
-    <span class="hljs-comment">// highlight-next-line</span>
-    .numShards(<span class="hljs-number">1</span>)
+<span class="highlighted-wrapper-line">    .numShards(<span class="hljs-number">1</span>)</span>
     .build();
 client.createCollection(customizedSetupReq3);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_3&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">shards_num</span>: <span class="hljs-number">1</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">shards_num</span>: <span class="hljs-number">1</span></span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_3&quot;</span>, schema).WithShardNum(<span class="hljs-number">1</span>))
@@ -620,8 +618,7 @@ client.create_collection(
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq4</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;customized_setup_4&quot;</span>)
         .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)</span>
         .build();
 client.createCollection(customizedSetupReq4);
 <button class="copy-code-btn"></button></code></pre>
@@ -684,19 +681,16 @@ client.create_collection(
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq5</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
         .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)</span>
         .build();
 client.createCollection(customizedSetupReq5);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_5&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">properties</span>: {
-        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">86400</span>
-    }
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">properties</span>: {</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">86400</span></span>
+<span class="highlighted-comment-line">    }</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_5&quot;</span>, schema).
@@ -746,8 +740,7 @@ client.create_collection(
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq6</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;customized_setup_6&quot;</span>)
         .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
+<span class="highlighted-wrapper-line">        .consistencyLevel(ConsistencyLevel.BOUNDED)</span>
         .build();
 client.createCollection(customizedSetupReq6);
 <button class="copy-code-btn"></button></code></pre>
@@ -756,7 +749,6 @@ client.createCollection(customizedSetupReq6);
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-comment">// highlight-next</span>
     <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
-    <span class="hljs-comment">// highlight-end</span>
 }
 
 client.<span class="hljs-title function_">createCollection</span>(createCollectionReq);

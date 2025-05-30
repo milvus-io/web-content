@@ -586,8 +586,7 @@ fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetC
 <span class="hljs-comment">// Use get</span>
 <span class="hljs-keyword">var</span> res = client.<span class="hljs-title function_">query</span>({
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     filter=<span class="hljs-string">&#x27;color like &quot;red%&quot;&#x27;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     <span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
@@ -596,8 +595,7 @@ fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetC
 <span class="hljs-comment">// Use query</span>
 res = client.<span class="hljs-title function_">query</span>({
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     filter=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     <span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)

@@ -228,12 +228,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">data</span>: [query_vector],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">params</span>: {
-        <span class="hljs-string">&quot;radius&quot;</span>: <span class="hljs-number">0.4</span>,
-        <span class="hljs-string">&quot;range_filter&quot;</span>: <span class="hljs-number">0.6</span>
-    }
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">params</span>: {</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;radius&quot;</span>: <span class="hljs-number">0.4</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;range_filter&quot;</span>: <span class="hljs-number">0.6</span></span>
+<span class="highlighted-comment-line">    }</span>
 })
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
