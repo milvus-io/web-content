@@ -40,11 +40,11 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h2><p>To use the <code translate="no">lindera</code> tokenizer, you need to use a specially compiled Milvus version. All dictionaries must be explicitly enabled during compilation to be used.</p>
 <p>To enable specific dictionaries, include them in the compilation command:</p>
-<pre><code translate="no" class="language-bash">make milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
+<pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
 <button class="copy-code-btn"></button></code></pre>
 <p>The complete list of available dictionaries is: <code translate="no">lindera-ipadic</code>, <code translate="no">lindera-ipadic-neologd</code>, <code translate="no">lindera-unidic</code>, <code translate="no">lindera-ko-dic</code>, <code translate="no">lindera-cc-cedict</code>.</p>
 <p>For example, to enable all dictionaries:</p>
-<pre><code translate="no" class="language-bash">make milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ipadic-neologd,lindera-unidic,lindera-ko-dic,lindera-cc-cedict
+<pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ipadic-neologd,lindera-unidic,lindera-ko-dic,lindera-cc-cedict
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
