@@ -85,7 +85,7 @@ Before applying the analyzer configuration to your collection schema, verify its
 # restful
 ```
 
-### Verification using `run_analyzer` | Milvus 2.5.11+
+### Verification using `run_analyzer`
 
 <div class="multipleCode">
     <a href="#python">Python</a>

@@ -56,7 +56,7 @@ analyzerParams.put("tokenizer",
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": map[string]any{"type": "lindera", "dict_kind": "ipadic"}}
 ```
 
 <table>

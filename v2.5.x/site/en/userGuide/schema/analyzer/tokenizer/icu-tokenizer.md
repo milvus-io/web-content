@@ -2,6 +2,7 @@
 id: icu-tokenizer.md
 title: "ICU"
 summary: "The icu tokenizer is built on the Internationalization Components of Unicode (ICU) open‑source project, which provides key tools for software internationalization. By using ICU's word‑break algorithm, the tokenizer can accurately split text into words across the majority of the world’s languages."
+beta: Milvus 2.5.11+
 ---
 
 # ICU
@@ -117,7 +118,7 @@ analyzerParams = map[string]any{"tokenizer": "icu"}
 # curl
 ```
 
-### Verification using `run_analyzer` | Milvus 2.5.11+
+### Verification using `run_analyzer`
 
 <div class="multipleCode">
     <a href="#python">Python</a>
