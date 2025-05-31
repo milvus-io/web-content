@@ -224,7 +224,7 @@ analyzerParams = map[string]any{"type": "jieba", "dict": []any{"结巴分词器"
 # restful
 ```
 
-### Verification using `run_analyzer`
+### Verification using `run_analyzer` | Milvus 2.5.11+
 
 <div class="multipleCode">
     <a href="#python">Python</a>

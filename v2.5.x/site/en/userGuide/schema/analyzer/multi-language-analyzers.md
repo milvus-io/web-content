@@ -2,6 +2,7 @@
 id: multi-language-analyzers.md
 title: "Multi-language Analyzers"
 summary: "When Milvus performs text analysis, it typically applies a single analyzer across an entire text field in a collection. If that analyzer is optimized for English, it struggles with the very different tokenization and stemming rules required by other languages, such as Chinese, Spanish, or French, resulting a lower recall rate. For instance, a search for the Spanish word \"teléfono\" (meaning \"phone\") would trip up an English‑focused analyzer: it may drop the accent and apply no Spanish‑specific stemming, causing relevant results to be overlooked."
+beta: Milvus 2.5.11+
 ---
 
 # Multi-language Analyzers
@@ -419,9 +420,9 @@ export textField='{
   "dataType": "VarChar",
   "elementTypeParams": {
     "max_length": 8192,
-    "enable_analyzer": true
+    "enable_analyzer": true，
+    "multiAnalyzerParam": '"$multi_analyzer_params"'
   },
-  "multiAnalyzerParam": '"$multi_analyzer_params"'
 }'
 
 export sparseField='{

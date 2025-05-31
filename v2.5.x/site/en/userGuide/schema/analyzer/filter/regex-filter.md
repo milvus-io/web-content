@@ -104,7 +104,7 @@ Before applying the analyzer configuration to your collection schema, verify its
 # curl
 ```
 
-### Verification using `run_analyzer`
+### Verification using `run_analyzer` | Milvus 2.5.11+
 
 <div class="multipleCode">
     <a href="#python">Python</a>

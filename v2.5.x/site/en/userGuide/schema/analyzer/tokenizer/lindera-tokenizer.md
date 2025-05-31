@@ -119,7 +119,7 @@ analyzerParams.put("tokenizer",
 analyzerParams = map[string]any{"tokenizer": map[string]any{"type": "lindera", "dict_kind": "ipadic"}}
 ```
 
-### Verification using `run_analyzer`
+### Verification using `run_analyzer` | Milvus 2.5.11+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
