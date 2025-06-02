@@ -1,10 +1,11 @@
 ---
 id: removepunct-filter.md
-title: 句読点の除去
+title: 句読点の除去Compatible with Milvus 2.5.11+
 summary: >-
   removepunctフィルタは、jieba、lindera、icuなどのいくつかのトークナイザーが通常保持する句読点、空白、改行を取り除きます。カンマ、ピリオド、その他の句読点を取り除き、意味のあるテキスト・トークンだけを含む、よりクリーンなトークン・ストリームを作りたい場合に使用します。
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">句読点の除去<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">句読点の除去<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

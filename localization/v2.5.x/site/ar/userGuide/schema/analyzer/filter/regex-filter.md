@@ -1,12 +1,13 @@
 ---
 id: regex-filter.md
-title: ريجكس
+title: ريجكسCompatible with Milvus 2.5.11+
 summary: >-
   عامل تصفية regex هو عامل تصفية للتعبير العادي: أي رمز رمزي يُنتجه مُصنِّف
   الرموز يتم الاحتفاظ به فقط إذا كان يطابق التعبير الذي تُقدِّمه؛ ويتم تجاهل أي
   شيء آخر.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">ريجكس<button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex" class="common-anchor-header">ريجكس<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

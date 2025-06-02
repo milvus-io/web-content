@@ -1,14 +1,15 @@
 ---
 id: icu-tokenizer.md
-title: ICU
+title: ICUCompatible with Milvus 2.5.11+
 summary: >-
   Der icu-Tokenizer basiert auf dem Open-Source-Projekt Internationalization
   Components of Unicode (ICU), das wichtige Werkzeuge für die
   Internationalisierung von Software bereitstellt. Durch die Verwendung des
-  ICU-Worttrennungsalgorithmus kann der Tokenizer Text in den meisten Sprachen
-  der Welt präzise in Wörter aufteilen.
+  Worttrennungsalgorithmus von ICU kann der Tokenizer Text in den meisten
+  Sprachen der Welt präzise in Wörter aufteilen.
+beta: Milvus 2.5.11+
 ---
-<h1 id="ICU" class="common-anchor-header">ICU<button data-href="#ICU" class="anchor-icon" translate="no">
+<h1 id="ICU" class="common-anchor-header">ICU<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#ICU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,7 +74,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie auf ein <code translate="no">VARCHAR</code> Feld anwenden, wenn Sie ein Auflistungsschema definieren. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Weitere Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Anwendungsbeispiele</a>.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie auf ein <code translate="no">VARCHAR</code> Feld anwenden, wenn Sie ein Auflistungsschema definieren. Dadurch kann Milvus den Text in diesem Feld mit dem angegebenen Analysator für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten dazu finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Anwendungsbeispiele</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

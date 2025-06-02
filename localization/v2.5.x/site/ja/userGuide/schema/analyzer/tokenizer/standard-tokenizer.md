@@ -55,7 +55,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;tokenizer&quot;: &quot;standard&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">standard</code> トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードでは、<code translate="no">standard</code> トー クナイザと<code translate="no">lowercase</code> フィルタを使用する解析器を定義します：</p>
+<p><code translate="no">standard</code> トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードでは、<code translate="no">standard</code> トー クナイザーと<code translate="no">lowercase</code> フィルタを使用する解析器を定義しています：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -119,7 +119,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#javascript">Java NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURLを使用した</a>検証</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,

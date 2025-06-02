@@ -1,9 +1,10 @@
 ---
 id: regex-filter.md
-title: 정규식
+title: 정규식Compatible with Milvus 2.5.11+
 summary: 정규식 필터는 토큰 생성기가 생성한 토큰이 사용자가 제공한 표현식과 일치하는 경우에만 유지되고 그 외에는 모두 폐기되는 정규식 필터입니다.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">정규식<button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex" class="common-anchor-header">정규식<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

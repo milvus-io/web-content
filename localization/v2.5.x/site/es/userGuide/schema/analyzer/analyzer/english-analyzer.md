@@ -39,7 +39,7 @@ summary: >-
     </button></h2><p>El analizador <code translate="no">english</code> utiliza los siguientes componentes:</p>
 <ul>
 <li><p><strong>Tokenizador</strong>: Utiliza el<a href="/docs/es/standard-tokenizer.md"> tokenizador</a> <code translate="no">standard</code><a href="/docs/es/standard-tokenizer.md"></a> para dividir el texto en unidades discretas de palabras.</p></li>
-<li><p><strong>Filtros</strong>: Incluye varios filtros para el tratamiento completo del texto:</p>
+<li><p><strong>Filtros</strong>: Incluye varios filtros para el tratamiento exhaustivo del texto:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Convierte todos los tokens a minúsculas, lo que permite realizar búsquedas sin distinción entre mayúsculas y minúsculas.</p></li>
 <li><p><code translate="no">stemmer</code>: Reduce las palabras a su raíz para permitir una búsqueda más amplia (por ejemplo, "correr" se convierte en "correr").</p></li>
@@ -229,7 +229,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verificación mediante <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verificación mediante <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,

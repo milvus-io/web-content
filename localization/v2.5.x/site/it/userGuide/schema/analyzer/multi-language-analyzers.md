@@ -1,6 +1,6 @@
 ---
 id: multi-language-analyzers.md
-title: Analizzatori multilingue
+title: Analizzatori multilingueCompatible with Milvus 2.5.11+
 summary: >-
   Quando Milvus esegue l'analisi del testo, in genere applica un singolo
   analizzatore all'intero campo di testo di una raccolta. Se questo analizzatore
@@ -12,8 +12,9 @@ summary: >-
   sull'inglese: potrebbe eliminare l'accento e non applicare alcuno stemming
   specifico per lo spagnolo, facendo sì che i risultati rilevanti vengano
   ignorati.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Multi-language-Analyzers" class="common-anchor-header">Analizzatori multilingue<button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
+<h1 id="Multi-language-Analyzers" class="common-anchor-header">Analizzatori multilingue<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,7 +47,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Questa funzione funziona solo con il recupero del testo basato su BM25 e i vettori sparsi. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca di testo completo</a>.</p></li>
+<li><p>Questa funzione funziona solo con il recupero del testo basato su BM25 e con vettori sparsi. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca di testo completo</a>.</p></li>
 <li><p>Ogni documento di una singola raccolta può utilizzare un solo analizzatore, determinato dal valore del campo identificativo della lingua.</p></li>
 <li><p>Le prestazioni possono variare a seconda della complessità degli analizzatori e delle dimensioni dei dati di testo.</p></li>
 </ul>
@@ -91,7 +92,7 @@ summary: >-
 <li><p><strong>Inserire dati con identificatori di lingua</strong>:</p>
 <ul>
 <li><p>Aggiungere documenti contenenti testo in varie lingue, dove ogni documento include un valore identificativo che specifica quale analizzatore utilizzare.</p></li>
-<li><p>Milvus seleziona l'analizzatore appropriato in base al campo dell'identificatore e i documenti con identificatori sconosciuti usano l'analizzatore <code translate="no">default</code>.</p></li>
+<li><p>Milvus seleziona l'analizzatore appropriato in base al campo dell'identificatore, mentre i documenti con identificatori sconosciuti utilizzano l'analizzatore <code translate="no">default</code>.</p></li>
 </ul></li>
 <li><p><strong>Ricerca con analizzatori specifici per la lingua</strong>:</p>
 <ul>
@@ -446,9 +447,9 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;VarChar&quot;,
   &quot;elementTypeParams&quot;: {
     &quot;max_length&quot;: 8192,
-    &quot;enable_analyzer&quot;: true
+    &quot;enable_analyzer&quot;: true，
+    &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
   },
-  &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> sparseField=<span class="hljs-string">&#x27;{

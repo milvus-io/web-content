@@ -90,7 +90,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
 <p>存檔的 repo 仍可使用於 4.0.31 之前的圖表。對於之後的版本，請使用新的 repo。</p>
 </div>
@@ -246,7 +246,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>執行以下指令，將正在運行的 Milvus 集群升級到最新版本：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --reset-then-reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">卸載 Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

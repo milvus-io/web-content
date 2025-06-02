@@ -3,8 +3,8 @@ id: decompounder-filter.md
 title: Dekompounder
 summary: >-
   Der Decompounder-Filter zerlegt zusammengesetzte Wörter auf der Grundlage
-  eines angegebenen Wörterbuchs in einzelne Komponenten, um die Suche nach
-  Teilen zusammengesetzter Begriffe zu erleichtern. Dieser Filter ist besonders
+  eines bestimmten Wörterbuchs in einzelne Komponenten, was die Suche nach
+  Teilen zusammengesetzter Begriffe erleichtert. Dieser Filter ist besonders
   nützlich für Sprachen, die häufig zusammengesetzte Wörter verwenden, wie z. B.
   Deutsch.
 ---
@@ -171,7 +171,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&quot;</span>

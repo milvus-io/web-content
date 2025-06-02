@@ -3,7 +3,7 @@ id: chinese-analyzer.md
 title: Chinois
 summary: >-
   L'analyseur chinois est conçu spécifiquement pour traiter les textes chinois,
-  offrant une segmentation et une tokenisation efficaces.
+  en fournissant une segmentation et une tokenisation efficaces.
 ---
 <h1 id="Chinese" class="common-anchor-header">Chinois<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,7 +109,7 @@ analyzerParams.put(<span class="hljs-string">&quot;type&quot;</span>, <span clas
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,

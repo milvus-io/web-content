@@ -19,6 +19,65 @@ title: 版本说明
         ></path>
       </svg>
     </button></h1><p>了解 Milvus 的新功能！本页总结了每个版本的新功能、改进、已知问题和错误修复。您可以在本部分找到 v2.5.0 之后每个版本的发布说明。我们建议您定期访问此页面以了解更新信息。</p>
+<h2 id="v2512" class="common-anchor-header">v2.5.12<button data-href="#v2512" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Milvus 版本</th><th>Python SDK 版本</th><th>Node.js SDK 版本</th><th>Java SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.12</td><td>2.5.10</td><td>2.5.9</td><td>2.5.9</td></tr>
+</tbody>
+</table>
+<p>我们很高兴为您带来 Milvus 2.5.12！该版本引入了一些新功能，如支持<code translate="no">contains</code> 表达式的 JSON 索引，以及一些改进，包括更新了<code translate="no">DescribeCollection</code> API 响应和更严格的数据过期压缩。我们鼓励您升级到 Milvus 2.5.12，以受益于这些最新的改进和修复！</p>
+<h3 id="Features" class="common-anchor-header">功能</h3><ul>
+<li>为 JSON<code translate="no">contains</code> expr<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>) 添加了 JSON 索引支持。</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">改进</h3><ul>
+<li><code translate="no">DescribeCollection</code> API 现在在其结果中包含更新时间戳<a href="https://github.com/milvus-io/milvus/pull/41600">（＃41600</a>）。</li>
+<li><code translate="no">DescribeIndex</code> 接口现在可输出索引版本信息<a href="https://github.com/milvus-io/milvus/pull/41841">(#41841</a>)。</li>
+<li>新增了对更严格的过期压缩的支持，从而无需等待大量删除即可清理已删除的数据<a href="https://github.com/milvus-io/milvus/pull/41856">(#41856</a>)。</li>
+<li>提升依赖版本以解决 CVE 问题<a href="https://github.com/milvus-io/milvus/pull/41590">（#41590</a>、<a href="https://github.com/milvus-io/milvus/pull/41878">#41878</a>、<a href="https://github.com/milvus-io/milvus/pull/41742">#41742</a>、<a href="https://github.com/milvus-io/milvus/pull/41697">#41697</a>）。</li>
+<li>为<code translate="no">DescribeCollection</code> 和<code translate="no">DescribeDatabase</code> 任务添加了授权检查<a href="https://github.com/milvus-io/milvus/pull/41799">（＃41799</a>）。</li>
+<li>RESTful API 现在支持查询/获取操作的一致性级别<a href="https://github.com/milvus-io/milvus/pull/41830">（＃41830</a>）。</li>
+<li>新增了对更改 Collections 描述的支持<a href="https://github.com/milvus-io/milvus/pull/41547">(#41547</a>)。</li>
+<li>CDC 现在支持同步多个 DDL API<a href="https://github.com/milvus-io/milvus/pull/41594">（＃41594</a>、<a href="https://github.com/milvus-io/milvus/pull/41679">＃41679</a>）。</li>
+<li>为<code translate="no">MQMsgStream</code> 中的消息接收添加了超时<a href="https://github.com/milvus-io/milvus/pull/41603">（#41603</a>）。</li>
+<li>现在可跳过 L0 导入的磁盘配额检查<a href="https://github.com/milvus-io/milvus/pull/41572">（＃41572</a>）。</li>
+<li>添加了忽略配置类型异常的参数<a href="https://github.com/milvus-io/milvus/pull/41773">(#41773</a>)。</li>
+<li>将独立模式下的 Worker<code translate="no">totalSlot</code> 设置为集群模式下的一半<a href="https://github.com/milvus-io/milvus/pull/41731">(#41731</a>)。</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">错误修复</h3><ul>
+<li>修正了<code translate="no">ants.pool</code> 中的一个 goroutine 漏洞<a href="https://github.com/milvus-io/milvus/pull/41893">(#41893</a>)。</li>
+<li>修正了混合搜索子请求中未设置分析器名称的问题<a href="https://github.com/milvus-io/milvus/pull/41897">（#41897</a>）。</li>
+<li>修正了<code translate="no">ChannelManager</code> 中的重复赋值问题<a href="https://github.com/milvus-io/milvus/pull/41877">(#41877</a>)。</li>
+<li>修正了<code translate="no">ThreadWatcher</code> 中日志级别设置无效的问题<a href="https://github.com/milvus-io/milvus/pull/41887">(#41887</a>)。</li>
+<li>启用统计时，防止为未排序的导入片段创建索引<a href="https://github.com/milvus-io/milvus/pull/41865">(#41865</a>)。</li>
+<li>修正了导入阅读器中的一个程序泄漏<a href="https://github.com/milvus-io/milvus/pull/41870">(#41870</a>)。</li>
+<li>修正了因函数运行程序未关闭而导致的分析器内存泄漏<a href="https://github.com/milvus-io/milvus/pull/41840">（#41840</a>）。</li>
+<li>修正了按分区而非 Collections 分组收集计数的问题<a href="https://github.com/milvus-io/milvus/pull/41789">(#41789</a>)。</li>
+<li>修正了根用户密码出乎意料的问题<a href="https://github.com/milvus-io/milvus/pull/41818">（#41818</a>）。</li>
+<li>防止<code translate="no">contains_all</code> 或<code translate="no">contains_any</code> 在使用空数组时崩溃<a href="https://github.com/milvus-io/milvus/pull/41756">（＃41756</a>）。</li>
+<li>修正了 Windows 上的编译问题<a href="https://github.com/milvus-io/milvus/pull/41617">（#41617</a>）。</li>
+<li>在 ARM 架构上禁用块和互斥剖析以防止 SIGSEGV 错误<a href="https://github.com/milvus-io/milvus/pull/41823">(#41823</a>)。</li>
+<li>修正了小型导入任务的<code translate="no">no candidate segments</code> 错误<a href="https://github.com/milvus-io/milvus/pull/41772">(#41772</a>)。</li>
+<li>确保在升级到<code translate="no">MixCoord</code> 时回退到<code translate="no">MixCoord</code> 会话<a href="https://github.com/milvus-io/milvus/pull/41773">(#41773</a>)。</li>
+<li><code translate="no">GetValueFromConfig</code> 现在返回 ，而不是抛出异常<code translate="no">nullopt</code> <a href="https://github.com/milvus-io/milvus/pull/41711">(#41711</a>)。</li>
+<li>在<code translate="no">DropSegmentsOfPartition</code> 中添加了独占锁互斥，以避免在分区上并发 DDL 时可能出现的崩溃<a href="https://github.com/milvus-io/milvus/pull/41619">（＃41619</a>）。</li>
+</ul>
 <h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +102,7 @@ title: 版本说明
 </tbody>
 </table>
 <p>我们很高兴地宣布 Milvus 2.5.11 正式发布！该版本引入了强大的新功能，如多分析器功能和扩展的标记符支持（Jieba、Lindera、ICU、Language Identifier）。我们还进行了多项改进，包括动态分段加载线程池更新和优化 binlog 导入过程中的删除过滤。主要的错误修复解决了潜在的段丢失问题、BM25 搜索失败和 JSON 统计过滤错误。</p>
-<p>我们建议您升级到 2.5.11，以利用这些改进和修复！</p>
+<p>我们建议您升级到 2.5.11 以利用这些改进和修复！</p>
 <h3 id="Features" class="common-anchor-header">功能</h3><ul>
 <li>增加了为多语言支持配置多个分析器（标记器）的功能，并可根据输入数据的指令选择适当的分析器<a href="https://github.com/milvus-io/milvus/pull/41444">（#41444</a>）。</li>
 <li>增强了 BM25 分析器功能<a href="https://github.com/milvus-io/milvus/pull/41456">（#41456</a>）。<ul>
@@ -56,7 +115,7 @@ title: 版本说明
 </ul></li>
 <li>过滤器<ul>
 <li>扩展了对内置停止词过滤器的语言支持。更多信息，请参阅<a href="/docs/zh/stop-filter.md">停止</a>。</li>
-<li>添加了<code translate="no">remove_punct</code> 过滤器以移除标点符号。有关更多信息，请参阅<a href="/docs/zh/removepunct-filter.md">删除标点符号</a>。</li>
+<li>添加了<code translate="no">remove_punct</code> 过滤器以移除标点符号。更多信息，请参阅<a href="/docs/zh/removepunct-filter.md">移除标点符号</a>。</li>
 <li>添加了<code translate="no">regex</code> 过滤器，用于基于模式的文本过滤。更多信息，请参阅<a href="/docs/zh/regex-filter.md">Regex</a>。</li>
 </ul></li>
 </ul></li>
@@ -109,7 +168,7 @@ title: 版本说明
 <tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.10 提高了搜索和加载性能，增强了度量报告功能，并扩大了对加速度量计算的 SVE 支持。该版本还包含多个错误修复，提高了稳定性和正确性。我们鼓励您升级或试用，您的反馈对我们改进 Milvus 非常宝贵！</p>
+<p>Milvus 2.5.10 提高了搜索和加载性能，增强了度量报告功能，并扩大了对加速度量计算的 SVE 支持。该版本还包含多个错误修复，提高了稳定性和正确性。我们鼓励您升级或试用，您的反馈对我们改进 Milvus 非常有价值！</p>
 <h3 id="Improvements" class="common-anchor-header">改进</h3><ul>
 <li>忽略为不存在的索引报告索引指标<a href="https://github.com/milvus-io/milvus/pull/41296">（#41296）</a></li>
 <li>即使存在反转索引，也为 LIKE 使用扫描模式<a href="https://github.com/milvus-io/milvus/pull/41309">(#41309</a>)</li>

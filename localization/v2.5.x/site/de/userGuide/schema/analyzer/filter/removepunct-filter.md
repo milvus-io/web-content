@@ -1,14 +1,15 @@
 ---
 id: removepunct-filter.md
-title: Satzzeichen entfernen
+title: Satzzeichen entfernenCompatible with Milvus 2.5.11+
 summary: >-
   Der removepunct-Filter entfernt Interpunktionszeichen, Leerzeichen und
   Zeilenumbrüche, die einige Tokenizer - wie jieba, lindera und icu -
   normalerweise beibehalten. Verwenden Sie ihn, wenn Sie einen sauberen
   Token-Stream wünschen, der nur sinnvolle Text-Token enthält, frei von Kommas,
   Punkten und anderen Satzzeichen.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Satzzeichen entfernen<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Satzzeichen entfernen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +57,7 @@ summary: >-
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Der Filter <code translate="no">removepunct</code> arbeitet mit den vom Tokenizer generierten Begriffen, muss also in Kombination mit einem Tokenizer verwendet werden.</p>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten finden Sie im Abschnitt <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

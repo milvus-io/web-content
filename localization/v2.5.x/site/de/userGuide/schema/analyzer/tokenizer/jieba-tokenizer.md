@@ -124,7 +124,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
      <td><p>Eine Liste von Wörterbüchern, die der Analyzer als Vokabularquelle laden wird. Eingebaute Optionen:</p>
 <ul>
 <li><p><code translate="no">"_default_"</code>: Lädt das eingebaute Wörterbuch der Engine für vereinfachtes Chinesisch. Details finden Sie in <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li>
-<li><p><code translate="no">"_extend_default_"</code>: Lädt alles, was auf <code translate="no">"_default_"</code> steht, plus eine zusätzliche Ergänzung in traditionellem Chinesisch. Einzelheiten dazu finden Sie in <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p>
+<li><p><code translate="no">"_extend_default_"</code>: Lädt alles, was in <code translate="no">"_default_"</code> steht, plus eine zusätzliche Ergänzung in traditionellem Chinesisch. Einzelheiten dazu finden Sie in <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p>
 <p>Sie können auch das integrierte Wörterbuch mit einer beliebigen Anzahl von benutzerdefinierten Wörterbüchern mischen. Beispiel: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li>
 </ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
@@ -141,7 +141,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">hmm</code></p></td>
-     <td><p>Ein boolesches Flag, das angibt, ob das Hidden Markov Model (HMM) für die probabilistische Segmentierung von Wörtern, die nicht im Wörterbuch enthalten sind, aktiviert werden soll.</p></td>
+     <td><p>Ein boolesches Flag, das angibt, ob das Hidden Markov Model (HMM) zur probabilistischen Segmentierung von Wörtern, die nicht im Wörterbuch gefunden werden, aktiviert werden soll.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
@@ -185,7 +185,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,

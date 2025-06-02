@@ -1,11 +1,12 @@
 ---
 id: icu-tokenizer.md
-title: ICU
+title: ICUCompatible with Milvus 2.5.11+
 summary: >-
   icuトークナイザーは、ソフトウェアの国際化のための重要なツールを提供するICU（Internationalization Components of
   Unicode）オープンソースプロジェクトに基づいて構築されています。ICUのワードブレイクアルゴリズムを使用することで、トークナイザーは世界の大半の言語でテキストを正確に単語に分割することができます。
+beta: Milvus 2.5.11+
 ---
-<h1 id="ICU" class="common-anchor-header">ICU<button data-href="#ICU" class="anchor-icon" translate="no">
+<h1 id="ICU" class="common-anchor-header">ICU<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#ICU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,7 +53,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">icu</code> トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードでは、<code translate="no">icu</code> トー クナイザと<a href="/docs/ja/removepunct-filter.md">remove punct フィルタを</a>使用する解析器を定義しています：</p>
+<p><code translate="no">icu</code> トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードでは、<code translate="no">icu</code> トー クナイザと<a href="/docs/ja/removepunct-filter.md">remove punct フィルタを</a>使用する解析器を定義します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

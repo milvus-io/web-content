@@ -413,7 +413,7 @@ curl --request POST \
 <li>Milvus tidak mem-parsing atau mengubah kunci JSON di luar casting yang Anda tentukan. Jika data sumber tidak konsisten (misalnya, beberapa baris menyimpan string untuk kunci <code translate="no">&quot;k&quot;</code> sementara yang lain menyimpan angka), beberapa baris tidak akan diindeks.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">Mengindeks bidang vektor</h3><p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code>, menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe datanya. Anda juga dapat menyesuaikan tipe indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
+<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Mengindeks bidang vektor<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code>, menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe datanya. Anda juga dapat menyesuaikan tipe indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

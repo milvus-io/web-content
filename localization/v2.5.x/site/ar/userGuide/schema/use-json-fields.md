@@ -409,12 +409,12 @@ curl --request POST \
 </ul></li>
 <li><p><strong>تكامل البيانات</strong>:</p>
 <ul>
-<li>لا يقوم Milvus بتحليل مفاتيح JSON أو تحويلها خارج نطاق الصب المحدد. إذا كانت بيانات المصدر غير متناسقة (على سبيل المثال، تخزن بعض الصفوف سلسلة للمفتاح <code translate="no">&quot;k&quot;</code> بينما تخزن أخرى رقمًا)، فلن تتم فهرسة بعض الصفوف.</li>
+<li>لا يقوم Milvus بتحليل مفاتيح JSON أو تحويلها خارج نطاق الصب المحدد. إذا كانت البيانات المصدر غير متناسقة (على سبيل المثال، تخزن بعض الصفوف سلسلة للمفتاح <code translate="no">&quot;k&quot;</code> بينما تخزن أخرى رقمًا)، فلن تتم فهرسة بعض الصفوف.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">فهرسة حقل متجه</h3><p>يقوم المثال التالي بإنشاء فهرس على الحقل المتجه <code translate="no">embedding</code> ، باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار ميلفوس تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
+<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">فهرسة حقل متجه<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>يقوم المثال التالي بإنشاء فهرس على الحقل المتجه <code translate="no">embedding</code> ، باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار ميلفوس تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()

@@ -1,9 +1,10 @@
 ---
 id: regex-filter.md
-title: 正規表現
+title: 正規表現Compatible with Milvus 2.5.11+
 summary: regexフィルターは正規表現フィルターです。トークナイザーが生成するトークンは、指定した式にマッチする場合のみ保持され、それ以外はすべて破棄されます。
+beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">正規表現<button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex" class="common-anchor-header">正規表現<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

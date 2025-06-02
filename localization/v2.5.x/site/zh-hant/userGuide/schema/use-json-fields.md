@@ -1,7 +1,7 @@
 ---
 id: use-json-fields.md
 title: JSON 欄位
-summary: JSON 欄位是一種標量欄位，它以鍵值對的方式，與向量嵌入一起儲存附加資訊。以下是以 JSON 格式儲存資料的範例：
+summary: JSON 欄位是一個標量欄位，它以鍵值對的方式，將額外的資訊與向量嵌入一起儲存。以下是以 JSON 格式儲存資料的範例：
 ---
 <h1 id="JSON-Field" class="common-anchor-header">JSON 欄位<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -376,7 +376,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(可選）自訂索引名稱。如果您在同一 JSON 欄位上建立多個索引，請指定不同的名稱。</p></td>
+     <td><p>(可選）自訂索引名稱。如果在同一 JSON 欄位上建立多個索引，請指定不同的名稱。</p></td>
      <td><p><code translate="no">"json_index_1"</code></p></td>
    </tr>
    <tr>
@@ -403,14 +403,14 @@ curl --request POST \
 </ul></li>
 <li><p><strong>數值精確度</strong>：</p>
 <ul>
-<li>在內部，Milvus 將所有數值欄位索引為雙倍。如果數值超過<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>，就會失去精確度，對這些超出範圍的數值進行查詢時，可能無法完全匹配。</li>
+<li>在內部，Milvus 將所有數值欄位索引為雙倍。如果數值超過<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>，它就會失去精確度，對這些超出範圍的數值進行查詢可能無法完全匹配。</li>
 </ul></li>
 <li><p><strong>資料完整性</strong>：</p>
 <ul>
-<li>Milvus 不會解析或轉換超出您指定的鑄造範圍的 JSON 鍵。如果來源資料不一致 (例如，某些資料列的 key<code translate="no">&quot;k&quot;</code> 儲存字串，而其他資料列則儲存數字)，某些資料列將不會被索引。</li>
+<li>Milvus 不會解析或轉換超出您指定的鑄造範圍的 JSON 鍵。如果來源資料不一致（例如，某些資料列的 key<code translate="no">&quot;k&quot;</code> 儲存了字串，而其他資料列則儲存了數字），某些資料列將不會被索引。</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">索引向量欄位</h3><p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引類型在向量欄位<code translate="no">embedding</code> 上建立索引。使用這種類型，Milvus 會根據資料類型自動選擇最合適的索引。您也可以自訂每個欄位的索引類型和參數。詳情請參閱<a href="/docs/zh-hant/index-explained.md">Index Explained</a>。</p>
+<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">索引向量欄位<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引類型在向量欄位<code translate="no">embedding</code> 上建立索引。使用這種類型，Milvus 會根據資料類型自動選擇最合適的索引。您也可以自訂每個欄位的索引類型和參數。詳情請參閱<a href="/docs/zh-hant/index-explained.md">Index Explained</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -981,4 +981,4 @@ curl --request POST \
 
 <span class="hljs-comment">##{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 支援進階的 JSON 過濾運算元，例如<code translate="no">JSON_CONTAINS</code>,<code translate="no">JSON_CONTAINS_ALL</code>, 和<code translate="no">JSON_CONTAINS_ANY</code> ，可進一步增強查詢功能。如需詳細資訊，請參閱<a href="/docs/zh-hant/json-operators.md">JSON 運算符</a>。</p>
+<p>此外，Milvus 支援進階的 JSON 過濾運算元，例如<code translate="no">JSON_CONTAINS</code>,<code translate="no">JSON_CONTAINS_ALL</code>, 和<code translate="no">JSON_CONTAINS_ANY</code> ，可以進一步增強查詢功能。如需詳細資訊，請參閱<a href="/docs/zh-hant/json-operators.md">JSON 運算符</a>。</p>

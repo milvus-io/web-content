@@ -1,14 +1,15 @@
 ---
 id: removepunct-filter.md
-title: Удаление знаков препинания
+title: Удаление знаков препинанияCompatible with Milvus 2.5.11+
 summary: >-
   Фильтр removepunct удаляет знаки препинания, пробелы и переносы строк, которые
   некоторые токенизаторы, такие как jieba, lindera и icu, обычно сохраняют.
   Используйте его, когда вам нужен более чистый поток токенов, содержащий только
   значимые текстовые токены, свободные от запятых, точек и других знаков
   препинания.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Удаление знаков препинания<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Удаление знаков препинания<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +57,7 @@ summary: >-
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Фильтр <code translate="no">removepunct</code> работает с терминами, сгенерированными токенизатором, поэтому он должен использоваться в сочетании с токенизатором.</p>
-<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/analyzer-overview.md#Example-use">Примеры использования</a>.</p>
+<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/analyzer-overview.md#Example-use">Пример использования</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

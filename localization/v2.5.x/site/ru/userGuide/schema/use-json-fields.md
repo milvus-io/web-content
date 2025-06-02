@@ -397,7 +397,7 @@ curl --request POST \
 <li><p><strong>Логика фильтрации</strong>:</p>
 <ul>
 <li><p>Если вы <strong>создаете индекс двойного типа</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), только условия фильтра числового типа могут использовать этот индекс. Если фильтр сравнивает двойной индекс с нечисловым условием, Milvus возвращается к поиску методом грубой силы.</p></li>
-<li><p>Если вы <strong>создаете индекс типа varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), только условия фильтра строкового типа могут использовать этот индекс. В противном случае Milvus возвращается к грубой силе.</p></li>
+<li><p>Если вы <strong>создадите индекс типа varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), только условия фильтра строкового типа могут использовать этот индекс. В противном случае Milvus возвращается к грубой силе.</p></li>
 <li><p><strong>Булевое</strong> индексирование ведет себя аналогично varchar-типу.</p></li>
 </ul></li>
 <li><p><strong>Выражения терминов</strong>:</p>
@@ -413,7 +413,7 @@ curl --request POST \
 <li>Milvus не разбирает и не преобразует ключи JSON за пределами указанного вами кастинга. Если исходные данные непоследовательны (например, в одних строках хранится строка для ключа <code translate="no">&quot;k&quot;</code>, а в других - число), некоторые строки не будут проиндексированы.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">Индексирование векторного поля</h3><p>В следующем примере создается индекс для векторного поля <code translate="no">embedding</code>, используя тип индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/index-explained.md">"Объяснение индекса</a>".</p>
+<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Индексирование векторного поля<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>В следующем примере создается индекс для векторного поля <code translate="no">embedding</code>, используя тип индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/index-explained.md">"Объяснение индекса</a>".</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

@@ -1,11 +1,12 @@
 ---
 id: removepunct-filter.md
-title: 去除标点符号
+title: 去除标点符号Compatible with Milvus 2.5.11+
 summary: >-
   removepunct 过滤器会去掉一些标记符号化器（如 jieba、linda 和
   icu）通常会保留的标点符号、空格和换行符。当你想要一个更干净的标记流，只包含有意义的文本标记，不含逗号、句号和其他标点符号时，就可以使用它。
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">去除标点符号<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">去除标点符号<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

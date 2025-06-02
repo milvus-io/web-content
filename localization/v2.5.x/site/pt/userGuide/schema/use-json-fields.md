@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Um campo <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> é um campo escalar que armazena informações adicionais juntamente com incorporações vectoriais, em pares de valores chave. Aqui está um exemplo de como os dados são armazenados no formato JSON:</p>
+    </button></h1><p>Um campo <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> é um campo escalar que armazena informações adicionais juntamente com incorporações vectoriais, em pares chave-valor. Aqui está um exemplo de como os dados são armazenados no formato JSON:</p>
 <pre><code translate="no" class="language-python">{
   <span class="hljs-string">&quot;metadata&quot;</span>: {
     <span class="hljs-string">&quot;product_info&quot;</span>: {
@@ -410,10 +410,10 @@ curl --request POST \
 </ul></li>
 <li><p><strong>Integridade dos dados</strong>:</p>
 <ul>
-<li>O Milvus não analisa nem transforma chaves JSON para além do casting especificado. Se os dados de origem forem inconsistentes (por exemplo, algumas linhas armazenam uma string para a chave <code translate="no">&quot;k&quot;</code> enquanto outras armazenam um número), algumas linhas não serão indexadas.</li>
+<li>O Milvus não analisa ou transforma chaves JSON para além do casting especificado. Se os dados de origem forem inconsistentes (por exemplo, algumas linhas armazenam uma string para a chave <code translate="no">&quot;k&quot;</code> enquanto outras armazenam um número), algumas linhas não serão indexadas.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">Indexar um campo de vetor</h3><p>O exemplo seguinte cria um índice no campo vetorial <code translate="no">embedding</code>, utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
+<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Indexar um campo de vetor<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>O exemplo seguinte cria um índice no campo vetorial <code translate="no">embedding</code>, utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -709,7 +709,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de inserir entidades, use o método <code translate="no">query</code> para recuperar entidades que correspondam às expressões de filtro especificadas.</p>
+    </button></h2><p>Depois de inserir entidades, use o método <code translate="no">query</code> para recuperar entidades que correspondem às expressões de filtro especificadas.</p>
 <div class="alert note">
 <p>Para campos JSON que permitem valores nulos, o campo será tratado como nulo se todo o objeto JSON estiver em falta ou definido como <code translate="no">None</code>. Para obter mais informações, consulte <a href="/docs/pt/basic-operators.md#JSON-Fields-with-Null-Values">Campos JSON com valores nulos</a>.</p>
 </div>
@@ -787,7 +787,7 @@ fmt.Println(<span class="hljs-string">&quot;metadata&quot;</span>, rs.GetColumn(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1},{&quot;metadata&quot;:&quot;&quot;,&quot;pk&quot;:2},{&quot;metadata&quot;:&quot;&quot;,&quot;pk&quot;:3},{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: null, \&quot;brand\&quot;: \&quot;BrandB\&quot;}, \&quot;price\&quot;: 59.99, \&quot;in_stock\&quot;: null}&quot;,&quot;pk&quot;:4}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para recuperar entidades em que <code translate="no">metadata[&quot;product_info&quot;][&quot;category&quot;]</code> é <code translate="no">&quot;electronics&quot;</code>:</p>
+<p>Para recuperar entidades onde <code translate="no">metadata[&quot;product_info&quot;][&quot;category&quot;]</code> é <code translate="no">&quot;electronics&quot;</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>

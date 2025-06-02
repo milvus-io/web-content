@@ -1,12 +1,13 @@
 ---
 id: icu-tokenizer.md
-title: ICU
+title: ICUCompatible with Milvus 2.5.11+
 summary: >-
   icu 토큰화기는 소프트웨어 국제화를 위한 핵심 도구를 제공하는 ICU(Internationalization Components of
   Unicode) 오픈 소스 프로젝트를 기반으로 합니다. ICU의 단어 분할 알고리즘을 사용하여 토큰화기는 전 세계 대부분의 언어에서 텍스트를
   단어로 정확하게 분할할 수 있습니다.
+beta: Milvus 2.5.11+
 ---
-<h1 id="ICU" class="common-anchor-header">ICU<button data-href="#ICU" class="anchor-icon" translate="no">
+<h1 id="ICU" class="common-anchor-header">ICU<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#ICU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

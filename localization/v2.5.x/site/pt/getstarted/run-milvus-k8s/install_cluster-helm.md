@@ -90,7 +90,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
 <p>O repositório arquivado ainda está disponível para os gráficos até à versão 4.0.31. Para versões posteriores, utilize o novo repositório.</p>
 </div>
@@ -120,9 +120,9 @@ helm upgrade my-release zilliztech/milvus
 <p>O comando acima implementa um cluster Milvus com seus componentes e dependências usando configurações padrão. Para personalizar estas definições, recomendamos que utilize a <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> para ajustar as configurações com base no tamanho real dos seus dados e, em seguida, transfira o ficheiro YAML correspondente. Para saber mais sobre os parâmetros de configuração, consulte a <a href="https://milvus.io/docs/system_configuration.md">Lista de verificação das configurações do sistema Milvus</a>.</p>
 <div class="alert note">
   <ul>
-    <li>O nome da versão deve conter apenas letras, números e traços. Não são permitidos pontos no nome da versão.</li>
+    <li>O nome da versão deve conter apenas letras, números e traços. Os pontos não são permitidos no nome da versão.</li>
     <li>A linha de comando padrão instala a versão de cluster do Milvus durante a instalação do Milvus com o Helm. São necessárias outras definições durante a instalação do Milvus autónomo.</li>
-    <li>De acordo com o <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">guia de migração de APIs obsoletas do Kubernetes</a>, a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget não é mais servida a partir da versão 1.25. Sugere-se que você migre manifestos e clientes de API para usar a versão de API <b>policy/v1</b>. <br/>Como solução alternativa para os usuários que ainda usam a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget no Kubernetes v1.25 e posterior, você pode executar o seguinte comando para instalar o Milvus:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+    <li>De acordo com o <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">guia de migração de APIs obsoletas do Kubernetes</a>, a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget não é mais servida a partir da versão 1.25. Sugere-se que você migre manifestos e clientes de API para usar a versão de API <b>policy/v1</b>. <br/>Como solução alternativa para usuários que ainda usam a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget no Kubernetes v1.25 e posterior, você pode executar o seguinte comando para instalar o Milvus:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>Consulte <a href="https://artifacthub.io/packages/helm/milvus/milvus">Gráfico de Helm do Milvus</a> e <a href="https://helm.sh/docs/">Helm</a> para obter mais informações.</li>
   </ul>
 </div>
@@ -246,7 +246,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Execute o seguinte comando para atualizar o seu cluster Milvus em execução para a versão mais recente:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --reset-then-reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Desinstalar o Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -304,6 +304,6 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
 <li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
-<li><p>Explore o <a href="https://github.com/zilliztech/attu">Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

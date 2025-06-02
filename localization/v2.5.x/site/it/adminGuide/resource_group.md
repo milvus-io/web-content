@@ -90,7 +90,7 @@ title: Gestire i gruppi di risorse
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tutti gli esempi di codice di questa pagina sono in PyMilvus 2.5.6. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
+<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.5.10. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
 </div>
 <ol>
 <li><p>Creare un gruppo di risorse.</p>
@@ -198,7 +198,7 @@ num_replicas = <span class="hljs-number">1</span>
 <span class="hljs-comment"># Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Eliminare un gruppo di risorse.</p>
-<p>È possibile eliminare un gruppo di risorse che non contiene nodi di query (<code translate="no">limits.node_num = 0</code>) in qualsiasi momento. In questa guida, il gruppo di risorse <code translate="no">rg</code> ha ora un nodo di query. È necessario prima modificare la configurazione <code translate="no">limits.node_num</code> del gruppo di risorse in zero.</p>
+<p>È possibile eliminare un gruppo di risorse che non contiene nodi di query (<code translate="no">limits.node_num = 0</code>) in qualsiasi momento. In questa guida, il gruppo di risorse <code translate="no">rg</code> ha ora un nodo di query. È necessario modificare prima la configurazione <code translate="no">limits.node_num</code> del gruppo di risorse in zero.</p>
 <pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
 try:
     milvus_client.update_resource_groups({
@@ -328,8 +328,8 @@ scale_to(<span class="hljs-number">4</span>)
         ></path>
       </svg>
     </button></h2><ul>
-<li>Le repliche di un singolo insieme e i gruppi di risorse hanno una relazione N a N.</li>
-<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti uniformemente tra le repliche, assicurando che la differenza nel numero di QueryNode di ogni replica non superi 1.</li>
+<li>Le repliche di una singola collezione e i gruppi di risorse hanno una relazione N a N.</li>
+<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti in modo uniforme tra le repliche, assicurando che la differenza nel numero di QueryNode di ciascuna replica non superi 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Cosa fare dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

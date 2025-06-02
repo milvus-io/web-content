@@ -2,7 +2,7 @@
 id: standard-analyzer.md
 title: 標準アナライザー
 summary: >-
-  標準アナライザーはMilvusのデフォルトアナライザーであり、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法に基づいたトークン化を使用するため、ほとんどの言語に有効です。
+  標準アナライザーはMilvusのデフォルトアナライザーで、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法に基づいたトークン化を使用するため、ほとんどの言語に有効です。
 ---
 <h1 id="Standard-Analyzer" class="common-anchor-header">標準アナライザー<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -175,7 +175,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#javascript">Java NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURLを使用した</a>検証</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,

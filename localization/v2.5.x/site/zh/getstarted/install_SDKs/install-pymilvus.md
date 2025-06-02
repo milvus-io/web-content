@@ -60,7 +60,7 @@ title: 安装 Milvus Python SDK
     </button></h2><p>PyMilvus 可在<a href="https://pypi.org/project/pymilvus/">Python 包索引</a>中找到。</p>
 <div class="alert note">
 建议安装与所安装 Milvus 服务器版本相匹配的 PyMilvus 版本。更多信息，请参阅<a href="/docs/zh/release_notes.md">发行说明</a>。</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">6</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">10</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">验证安装<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

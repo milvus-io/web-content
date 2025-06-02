@@ -3,7 +3,7 @@ id: cncharonly-filter.md
 title: Cncharonly
 summary: >-
   cncharonly
-  フィルタは、中国語以外の文字を含むトークンを取り除きます。このフィルタは、中国語テキストだけに絞って、他のスクリプトや数字、記号を含むトークンをフィルタリングしたいときに便利です。
+  フィルタは、中国語以外の文字を含むトークンを取り除きます。このフィルタは中国語のテキストだけに注目し、他の文字や数字、記号を含むトークンを除外したいときに便利です。
 ---
 <h1 id="Cncharonly" class="common-anchor-header">Cncharonly<button data-href="#Cncharonly" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,7 +99,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#javascript">Java NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURLを使用した</a>検証</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。&quot;</span>

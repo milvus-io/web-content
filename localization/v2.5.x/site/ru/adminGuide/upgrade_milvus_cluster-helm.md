@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы можете выбрать путь обновления для своего Milvus следующим образом:</p>
-<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.5.10.</div>
+<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.5.12.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.5.10.</p></li>
-<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.5.10.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.5.12.</p></li>
+<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.5.12.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Проведение скользящего обновления<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Операция</td><td><code translate="no">update</code></td><td>Ложь</td></tr>
 </tbody>
 </table>
-<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.5.10.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.10 -w &#x27;milvusdb/milvus:v2.5.10&#x27;
+<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.5.12.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.12 -w &#x27;milvusdb/milvus:v2.5.12&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

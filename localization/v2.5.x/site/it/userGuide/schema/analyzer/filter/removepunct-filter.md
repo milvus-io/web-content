@@ -1,14 +1,15 @@
 ---
 id: removepunct-filter.md
-title: Rimuovere la punteggiatura
+title: Rimuovere la punteggiaturaCompatible with Milvus 2.5.11+
 summary: >-
   Il filtro removepunct elimina i segni di punteggiatura, gli spazi e le
   interruzioni di riga che alcuni tokenizzatori, come jieba, lindera e icu,
   mantengono normalmente. Si usa quando si vuole un flusso di token più pulito,
   che contenga solo token di testo significativi, senza virgole, punti e altri
   segni di punteggiatura.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Rimuovere la punteggiatura<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Rimuovere la punteggiatura<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +57,7 @@ summary: >-
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Il filtro <code translate="no">removepunct</code> opera sui termini generati dal tokenizer, quindi deve essere usato in combinazione con un tokenizer.</p>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarlo a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo utilizzando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, consultare l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarlo a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo utilizzando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

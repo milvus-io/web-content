@@ -1,12 +1,13 @@
 ---
 id: regex-filter.md
-title: Regex
+title: RegexCompatible with Milvus 2.5.11+
 summary: >-
   Фильтр regex - это фильтр регулярных выражений: любой токен, созданный
   токенизатором, сохраняется только в том случае, если он соответствует
   заданному вами выражению; все остальное отбрасывается.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">Regex<button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex" class="common-anchor-header">Regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

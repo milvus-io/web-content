@@ -90,9 +90,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
-<p>Il repository archiviato è ancora disponibile per i grafici fino alla versione 4.0.31. Per le versioni successive, utilizzare invece il nuovo repo.</p>
+<p>Il repo archiviato è ancora disponibile per i grafici fino alla versione 4.0.31. Per le versioni successive, utilizzare invece il nuovo repo.</p>
 </div>
 <p>Quindi prelevare i grafici di Milvus dal repository come segue:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
@@ -246,7 +246,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Eseguite il seguente comando per aggiornare il cluster Milvus in esecuzione alla versione più recente:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --reset-then-reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Disinstallare Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

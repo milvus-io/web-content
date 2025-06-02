@@ -1,9 +1,10 @@
 ---
 id: regex-filter.md
-title: 正規表達式
+title: 正規表達式Compatible with Milvus 2.5.11+
 summary: regex 過濾器是正規表達式過濾器：由 tokenizer 產生的任何 token 只有在符合您提供的表達式時才會被保留；其他的都會被捨棄。
+beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">正規表達式<button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex" class="common-anchor-header">正規表達式<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

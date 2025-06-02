@@ -1,6 +1,6 @@
 ---
 id: multi-language-analyzers.md
-title: Многоязычные анализаторы
+title: Многоязычные анализаторыCompatible with Milvus 2.5.11+
 summary: >-
   Когда Milvus выполняет анализ текста, он обычно применяет один анализатор ко
   всем текстовым полям в коллекции. Если этот анализатор оптимизирован для
@@ -11,8 +11,9 @@ summary: >-
   ориентированный на английский язык, может не заметить ударения и не применить
   испаноязычное стеблирование, в результате чего релевантные результаты будут
   пропущены.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Multi-language-Analyzers" class="common-anchor-header">Многоязычные анализаторы<button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
+<h1 id="Multi-language-Analyzers" class="common-anchor-header">Многоязычные анализаторы<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,7 +29,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Когда Milvus выполняет анализ текста, он обычно применяет один анализатор ко всем текстовым полям в коллекции. Если этот анализатор оптимизирован для английского языка, он не справляется с различными правилами токенизации и стемминга, требуемыми для других языков, таких как китайский, испанский или французский, что приводит к снижению коэффициента отзыва. Например, при поиске испанского слова <em>"teléfono"</em> (что означает <em>"телефон")</em> анализатор, ориентированный на английский язык, не справится с задачей: он может опустить ударение и не применить испаноязычное стеблирование, в результате чего релевантные результаты будут пропущены.</p>
-<p>Мультиязычные анализаторы решают эту проблему, позволяя настраивать несколько анализаторов для текстового поля в одной коллекции. Таким образом, вы можете хранить в текстовом поле многоязычные документы, а Milvus будет анализировать текст в соответствии с правилами языка для каждого документа.</p>
+<p>Мультиязычные анализаторы решают эту проблему, позволяя настраивать несколько анализаторов для одного текстового поля в одной коллекции. Таким образом, вы можете хранить в текстовом поле многоязычные документы, а Milvus будет анализировать текст в соответствии с правилами языка для каждого документа.</p>
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -445,9 +446,9 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;VarChar&quot;,
   &quot;elementTypeParams&quot;: {
     &quot;max_length&quot;: 8192,
-    &quot;enable_analyzer&quot;: true
+    &quot;enable_analyzer&quot;: true，
+    &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
   },
-  &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> sparseField=<span class="hljs-string">&#x27;{

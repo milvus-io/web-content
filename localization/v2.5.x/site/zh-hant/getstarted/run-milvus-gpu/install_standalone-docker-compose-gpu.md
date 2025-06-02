@@ -59,12 +59,12 @@ title: 使用 Docker Compose 運行支援 GPU 的 Milvus
         ></path>
       </svg>
     </button></h2><p>若要使用 Docker Compose 安裝支援 GPU 的 Milvus，請遵循下列步驟。</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下載並設定 YAML 檔案</h3><p>下載 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.10/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>並手動儲存為 docker-compose.yml，或使用下列指令。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.10/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下載並設定 YAML 檔案</h3><p>下載 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>並手動儲存為 docker-compose.yml，或使用下列指令。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要對 YAML 檔案中獨立服務的環境變數做一些變更，如下所示：</p>
 <ul>
-<li>若要指定特定的 GPU 裝置給 Milvus，請找到<code translate="no">standalone</code> 服務定義中的<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> 欄位，並將其值換成所需 GPU 的 ID。您可以使用 NVIDIA GPU 顯示驅動程式隨附的<code translate="no">nvidia-smi</code> 工具來確定 GPU 裝置的 ID。Milvus 支援多個 GPU 裝置。</li>
+<li>若要指定特定的 GPU 裝置給 Milvus，請找到<code translate="no">standalone</code> 服務定義中的<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> 欄位，並將其值更換為所需 GPU 的 ID。您可以使用 NVIDIA GPU 顯示驅動程式隨附的<code translate="no">nvidia-smi</code> 工具來確定 GPU 裝置的 ID。Milvus 支援多個 GPU 裝置。</li>
 </ul>
 <p>指定單一 GPU 裝置至 Milvus：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>

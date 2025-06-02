@@ -412,7 +412,7 @@ curl --request POST \
 <li>Milvus는 사용자가 지정한 형 변환을 넘어서는 JSON 키를 구문 분석하거나 변환하지 않습니다. 소스 데이터가 일관성이 없는 경우(예: 일부 행은 <code translate="no">&quot;k&quot;</code> 키에 대해 문자열을 저장하고 다른 행은 숫자를 저장하는 경우), 일부 행은 색인되지 않습니다.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">벡터 필드 색인 생성</h3><p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 에 인덱스를 생성하는 예입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
+<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">벡터 필드 색인 생성<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 에 인덱스를 생성하는 예입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

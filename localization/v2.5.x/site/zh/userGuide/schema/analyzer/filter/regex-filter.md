@@ -1,9 +1,10 @@
 ---
 id: regex-filter.md
-title: 正则表达式
+title: 正则表达式Compatible with Milvus 2.5.11+
 summary: regex 过滤器是一种正则表达式过滤器：令牌生成器生成的任何令牌只有在与您提供的表达式相匹配时才会被保留，否则都会被丢弃。
+beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">正则表达式<button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex" class="common-anchor-header">正则表达式<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

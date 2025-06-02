@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusのアップグレードパスは以下のように選択できます：</p>
-<div style="display: none;">- Milvus v2.2.3およびそれ以降のリリースからv2.5.10への[ローリングアップグレード](#conduct-a-rolling-upgrade)。</div>
+<div style="display: none;">- Milvus v2.2.3およびそれ以降のリリースからv2.5.12への[ローリングアップグレード](#conduct-a-rolling-upgrade)。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.5.10へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
-<li><p>Milvus v2.1.xからv2.5.10へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.5.12へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
+<li><p>Milvus v2.1.xからv2.5.12へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">ローリングアップグレードの実施<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -131,7 +131,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>Milvus 2.2.3以降では、Milvusコーディネータをアクティブスタンバイ モードで動作するように設定し、コーディネータのローリングアップグレード機能を有効にすることで、コーディネータのアップグレード中にMilvusが受信したリクエストに応答できるようになります。以前のリリースでは、アップグレード中にコーディネータを削除してから作成するため、サービスのダウンタイムが発生する可能性がありました。</p>
 <p>ローリングアップグレードでは、コーディネータをアクティブスタンバイで動作させる必要があります。弊社が提供する<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">スクリプトを</a>使用して、コーディネーターをアクティブスタンバイ モードで動作するように設定し、ローリングアップグレードを開始できます。</p>
-<p>Kubernetesが提供するローリングアップデートの機能に基づいて、上記のスクリプトは、デプロイメントの依存関係に従って順序付けられたアップデートを強制します。さらに、Milvusはアップグレード中もそのコンポーネントに依存しているコンポーネントとの互換性を維持するメカニズムを実装し、潜在的なサービスのダウンタイムを大幅に削減します。</p>
+<p>Kubernetesが提供するローリングアップデートの機能に基づいて、上記のスクリプトは、デプロイメントの依存関係に従って順序付けられたアップデートを強制します。さらに、Milvusはアップグレード中もそのコンポーネントに依存しているコンポーネントとの互換性を維持するメカニズムを実装し、潜在的なサービスダウンタイムを大幅に削減します。</p>
 <p>このスクリプトは、HelmとともにインストールされたMilvusのアップグレードにのみ適用されます。次の表は、スクリプトで使用可能なコマンドフラグの一覧です。</p>
 <table>
 <thead>
@@ -145,13 +145,13 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作方法</td><td><code translate="no">update</code></td><td>偽</td></tr>
 </tbody>
 </table>
-<p>Milvusインスタンスのすべてのデプロイメントが正常な状態であることを確認したら、以下のコマンドを実行してMilvusインスタンスを2.5.10にアップグレードします。以下のコマンドを実行することで、Milvusインスタンスを2.5.10にアップグレードすることができます。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.10 -w &#x27;milvusdb/milvus:v2.5.10&#x27;
+<p>Milvusインスタンスのすべてのデプロイが正常な状態であることを確認したら、以下のコマンドを実行してください。以下のコマンドを実行することで、Milvusインスタンスを2.5.12にアップグレードすることができます。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.12 -w &#x27;milvusdb/milvus:v2.5.12&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
 <li>スクリプトはデプロイのアップグレード順序をハードコードしており、変更することはできません。</li>
-<li>このスクリプトでは、<code translate="no">kubectl patch</code> を使用してデプロイメントを更新し、<code translate="no">kubectl rollout status</code> を使用してステータスを監視します。</li>
+<li>このスクリプトは、<code translate="no">kubectl patch</code> を使用してデプロイメントを更新し、<code translate="no">kubectl rollout status</code> を使用してステータスを監視します。</li>
 <li>スクリプトは<code translate="no">kubectl patch</code> を使って、デプロイメントの<code translate="no">app.kubernetes.io/version</code> ラベルを、コマンドの<code translate="no">-t</code> フラグの後に指定したラベルに更新します。</li>
 </ol>
 </div>

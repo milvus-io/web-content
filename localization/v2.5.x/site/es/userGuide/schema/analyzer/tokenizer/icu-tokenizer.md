@@ -1,14 +1,15 @@
 ---
 id: icu-tokenizer.md
-title: ICU
+title: ICUCompatible with Milvus 2.5.11+
 summary: >-
   El tokenizador icu se basa en el proyecto de código abierto
   Internationalization Components of Unicode (ICU), que proporciona herramientas
   clave para la internacionalización del software. Al utilizar el algoritmo de
   ruptura de palabras de ICU, el tokenizador puede dividir con precisión el
   texto en palabras en la mayoría de los idiomas del mundo.
+beta: Milvus 2.5.11+
 ---
-<h1 id="ICU" class="common-anchor-header">ICU<button data-href="#ICU" class="anchor-icon" translate="no">
+<h1 id="ICU" class="common-anchor-header">ICU<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#ICU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

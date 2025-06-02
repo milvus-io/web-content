@@ -1,12 +1,13 @@
 ---
 id: regex-filter.md
-title: Expression régulière
+title: Expression régulièreCompatible with Milvus 2.5.11+
 summary: >-
   Le filtre regex est un filtre d'expression régulière : tout jeton produit par
   le tokenizer n'est conservé que s'il correspond à l'expression que vous avez
   fournie ; tout le reste est rejeté.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">Expression régulière<button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex" class="common-anchor-header">Expression régulière<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,7 +69,7 @@ summary: >-
    </tr>
 </table>
 <p>Le filtre <code translate="no">regex</code> opère sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer.</p>
-<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collecte. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, voir <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
+<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collecte. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

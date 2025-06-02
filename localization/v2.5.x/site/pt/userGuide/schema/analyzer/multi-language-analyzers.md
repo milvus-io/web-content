@@ -1,6 +1,6 @@
 ---
 id: multi-language-analyzers.md
-title: Analisadores Multi-língua
+title: Analisadores Multi-línguaCompatible with Milvus 2.5.11+
 summary: >-
   Quando o Milvus faz análise de texto, normalmente aplica um único analisador
   em todo o campo de texto de uma coleção. Se esse analisador estiver optimizado
@@ -11,8 +11,9 @@ summary: >-
   "telefone") seria uma armadilha para um analisador centrado no inglês: poderia
   omitir o acento e não aplicar qualquer stemming específico do espanhol,
   fazendo com que os resultados relevantes fossem ignorados.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Multi-language-Analyzers" class="common-anchor-header">Analisadores Multi-língua<button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
+<h1 id="Multi-language-Analyzers" class="common-anchor-header">Analisadores Multi-língua<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,7 +65,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O diagrama seguinte mostra o fluxo de trabalho da configuração e utilização de analisadores multilingues no Milvus:</p>
+    </button></h2><p>O diagrama seguinte mostra o fluxo de trabalho da configuração e utilização de analisadores multilingues em Milvus:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
@@ -94,7 +95,7 @@ summary: >-
 </ul></li>
 <li><p><strong>Pesquisar com analisadores específicos do idioma</strong>:</p>
 <ul>
-<li><p>Fornece o texto da consulta com um nome de analisador especificado, e o Milvus processa a consulta usando o analisador especificado.</p></li>
+<li><p>Fornecer texto de consulta com um nome de analisador especificado, e o Milvus processa a consulta usando o analisador especificado.</p></li>
 <li><p>A tokenização ocorre de acordo com as regras específicas do idioma, e a pesquisa retorna resultados apropriados ao idioma com base na similaridade.</p></li>
 </ul></li>
 </ol>
@@ -445,9 +446,9 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;VarChar&quot;,
   &quot;elementTypeParams&quot;: {
     &quot;max_length&quot;: 8192,
-    &quot;enable_analyzer&quot;: true
+    &quot;enable_analyzer&quot;: true，
+    &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
   },
-  &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> sparseField=<span class="hljs-string">&#x27;{
@@ -555,7 +556,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
   }
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O índice melhora o desempenho da pesquisa organizando vetores esparsos para cálculos eficientes de similaridade do BM25.</p>
+<p>O índice melhora o desempenho da pesquisa ao organizar vetores esparsos para cálculos eficientes de similaridade do BM25.</p>
 <h3 id="Create-the-collection" class="common-anchor-header">Criar a coleção</h3><p>Esta etapa final de criação reúne todas as suas configurações anteriores:</p>
 <ul>
 <li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> nomeia sua coleção para referência futura.</p></li>
@@ -621,7 +622,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste ponto, Milvus cria uma coleção vazia com suporte de analisador multilingue, pronta a receber dados.</p>
+<p>Nesta fase, Milvus cria uma coleção vazia com suporte de analisador multilingue, pronta a receber dados.</p>
 <h2 id="Step-3-Insert-example-data" class="common-anchor-header">Passo 3: Inserir dados de exemplo<button data-href="#Step-3-Insert-example-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -784,7 +785,7 @@ curl --request POST \
 <li><p>Lê o campo <code translate="no">language</code> de cada documento</p></li>
 <li><p>Aplica o analisador correspondente ao campo <code translate="no">text</code> </p></li>
 <li><p>Gera uma representação vetorial esparsa através da função BM25</p></li>
-<li><p>Armazena tanto o texto original como o vetor esparso gerado</p></li>
+<li><p>Armazena o texto original e o vetor esparso gerado</p></li>
 </ol>
 <div class="alert note">
 <p>Não é necessário fornecer o vetor esparso diretamente; a função BM25 gera-o automaticamente com base no seu texto e no analisador especificado.</p>

@@ -19,6 +19,65 @@ title: Notas de lançamento
         ></path>
       </svg>
     </button></h1><p>Descubra o que há de novo no Milvus! Esta página resume as novas funcionalidades, melhorias, problemas conhecidos e correcções de erros em cada versão. Pode encontrar as notas de lançamento para cada versão lançada após a v2.5.0 nesta secção. Sugerimos que visite regularmente esta página para se informar sobre as actualizações.</p>
+<h2 id="v2512" class="common-anchor-header">v2.5.12<button data-href="#v2512" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Versão do Milvus</th><th>Versão do Python SDK</th><th>Versão do SDK do Node.js</th><th>Versão do Java SDK</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.12</td><td>2.5.10</td><td>2.5.9</td><td>2.5.9</td></tr>
+</tbody>
+</table>
+<p>Temos o prazer de lhe apresentar o Milvus 2.5.12! Esta versão introduz novas capacidades, como o suporte de índice JSON para expressões <code translate="no">contains</code>, juntamente com várias melhorias, incluindo respostas actualizadas da API <code translate="no">DescribeCollection</code> e compactação de expiração de dados mais rigorosa. Esta versão também incorpora importantes actualizações de dependências para corrigir CVEs e numerosas correcções de erros para melhorar a estabilidade e o desempenho. Encorajamo-lo a atualizar para o Milvus 2.5.12 para beneficiar destas últimas melhorias e correcções!</p>
+<h3 id="Features" class="common-anchor-header">Caraterísticas</h3><ul>
+<li>Adicionado suporte a índice JSON para JSON <code translate="no">contains</code> expr<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Melhorias</h3><ul>
+<li>A API <code translate="no">DescribeCollection</code> inclui agora o carimbo de data/hora da atualização nos seus resultados<a href="https://github.com/milvus-io/milvus/pull/41600">(#41600</a>).</li>
+<li>A interface <code translate="no">DescribeIndex</code> agora fornece informações sobre a versão do índice<a href="https://github.com/milvus-io/milvus/pull/41841">(#41841</a>).</li>
+<li>Adicionado suporte para compactação de expiração mais rigorosa para limpar dados eliminados sem necessariamente esperar por um grande número de eliminações<a href="https://github.com/milvus-io/milvus/pull/41856">(#41856</a>).</li>
+<li>Versões de dependência aumentadas para endereçar CVEs<a href="https://github.com/milvus-io/milvus/pull/41590">(#41590</a>, <a href="https://github.com/milvus-io/milvus/pull/41878">#41878</a>, <a href="https://github.com/milvus-io/milvus/pull/41742">#41742</a>, <a href="https://github.com/milvus-io/milvus/pull/41697">#41697</a>).</li>
+<li>Adicionadas verificações de autorização para as tarefas <code translate="no">DescribeCollection</code> e <code translate="no">DescribeDatabase</code> <a href="https://github.com/milvus-io/milvus/pull/41799">(#41799</a>).</li>
+<li>A API RESTful suporta agora níveis de consistência para operações de consulta/obtenção<a href="https://github.com/milvus-io/milvus/pull/41830">(#41830</a>).</li>
+<li>Adicionado suporte para alterar descrições de colecções<a href="https://github.com/milvus-io/milvus/pull/41547">(#41547</a>).</li>
+<li>O CDC suporta agora a sincronização de múltiplas APIs DDL<a href="https://github.com/milvus-io/milvus/pull/41594">(#41594</a>, <a href="https://github.com/milvus-io/milvus/pull/41679">#41679</a>).</li>
+<li>Adicionado um tempo limite para a receção de mensagens em <code translate="no">MQMsgStream</code> <a href="https://github.com/milvus-io/milvus/pull/41603">(#41603</a>).</li>
+<li>Verificações de quota de disco são agora ignoradas para importações L0<a href="https://github.com/milvus-io/milvus/pull/41572">(#41572</a>).</li>
+<li>Adicionados parâmetros para ignorar excepções de tipo de configuração<a href="https://github.com/milvus-io/milvus/pull/41773">(#41773</a>).</li>
+<li>Definido worker <code translate="no">totalSlot</code> em modo standalone para metade do que em modo cluster<a href="https://github.com/milvus-io/milvus/pull/41731">(#41731</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correcções de erros</h3><ul>
+<li>Corrigida uma fuga de goroutine em <code translate="no">ants.pool</code> <a href="https://github.com/milvus-io/milvus/pull/41893">(#41893</a>).</li>
+<li>Foi corrigido um problema em que o nome do analisador não era definido em sub-solicitações de pesquisa híbrida<a href="https://github.com/milvus-io/milvus/pull/41897">(#41897</a>).</li>
+<li>Corrigido um problema de atribuição dupla em <code translate="no">ChannelManager</code> <a href="https://github.com/milvus-io/milvus/pull/41877">(#41877</a>).</li>
+<li>Foi corrigido um problema em que as definições de nível de registo eram ineficazes em <code translate="no">ThreadWatcher</code> <a href="https://github.com/milvus-io/milvus/pull/41887">(#41887</a>).</li>
+<li>Impedida a criação de índices para segmentos de importação não ordenados quando as estatísticas estão activadas<a href="https://github.com/milvus-io/milvus/pull/41865">(#41865</a>).</li>
+<li>Corrigida uma fuga de goroutine no leitor de importação<a href="https://github.com/milvus-io/milvus/pull/41870">(#41870</a>).</li>
+<li>Corrigida uma fuga de memória do analisador causada pelo corredor da função não estar fechado<a href="https://github.com/milvus-io/milvus/pull/41840">(#41840</a>).</li>
+<li>Corrigido um problema em que as contagens eram recolhidas agrupadas por partição em vez de recolha<a href="https://github.com/milvus-io/milvus/pull/41789">(#41789</a>).</li>
+<li>Corrigido um problema com palavras-passe inesperadas para o utilizador root<a href="https://github.com/milvus-io/milvus/pull/41818">(#41818</a>).</li>
+<li>Evitaram-se crashes quando <code translate="no">contains_all</code> ou <code translate="no">contains_any</code> é usado com um array vazio<a href="https://github.com/milvus-io/milvus/pull/41756">(#41756</a>).</li>
+<li>Corrigidos problemas de compilação no Windows<a href="https://github.com/milvus-io/milvus/pull/41617">(#41617</a>).</li>
+<li>Desativado o perfil de blocos e mutex na arquitetura ARM para prevenir erros SIGSEGV<a href="https://github.com/milvus-io/milvus/pull/41823">(#41823</a>).</li>
+<li>Corrigido um erro <code translate="no">no candidate segments</code> para pequenas tarefas de importação<a href="https://github.com/milvus-io/milvus/pull/41772">(#41772</a>).</li>
+<li>Assegurado o fallback para a sessão <code translate="no">MixCoord</code> ao atualizar para <code translate="no">MixCoord</code> <a href="https://github.com/milvus-io/milvus/pull/41773">(#41773</a>).</li>
+<li><code translate="no">GetValueFromConfig</code> agora devolve <code translate="no">nullopt</code> em vez de lançar uma exceção<a href="https://github.com/milvus-io/milvus/pull/41711">(#41711</a>).</li>
+<li>Adicionado um mutex de bloqueio exclusivo em <code translate="no">DropSegmentsOfPartition</code> para evitar potenciais falhas com DDL concorrente em partições<a href="https://github.com/milvus-io/milvus/pull/41619">(#41619</a>).</li>
+</ul>
 <h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +133,7 @@ title: Notas de lançamento
 <li>Atualização da versão Go para 1.24.1 para resolver CVEs<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Correções de erros</h3><ul>
-<li>Corrigido um problema em que os segmentos poderiam não ser descartados corretamente ao descartar uma partição<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
+<li>Corrigido um problema em que os segmentos podiam não ser descartados corretamente ao descartar uma partição<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
 <li>Corrigida a inserção em massa para utilizar a lista de campos de entrada do executor da função em vez da lista de campos do esquema<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561</a>).</li>
 <li>Corrigidas as falhas de pesquisa BM25 que ocorriam quando <code translate="no">avgdl</code> (comprimento médio do documento) era NaN<a href="https://github.com/milvus-io/milvus/pull/41503">(#41503</a>).</li>
 <li>Correção de etiquetas imprecisas nas métricas QueryNode<a href="https://github.com/milvus-io/milvus/pull/41422">(#41422</a>).</li>
@@ -209,7 +268,7 @@ title: Notas de lançamento
 <p>Temos o prazer de anunciar o lançamento do Milvus 2.5.8, com melhorias nas expressões JSON, validação UTF-8, uso de memória e lógica de balanceamento. Esta versão também inclui várias correcções de erros importantes para melhorar a concorrência e o tratamento de dados. Encorajamo-lo a atualizar ou a experimentar e, como sempre, o seu feedback ajuda-nos a aperfeiçoar continuamente o Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Caraterísticas</h3><ul>
 <li>Suporte a expressões JSON <code translate="no">null</code>/<code translate="no">exists</code> <a href="https://github.com/milvus-io/milvus/pull/41002">(#41002</a>)</li>
-<li>Suporte a análise de vectores esparsos de estruturas Parquet em inserções em massa<a href="https://github.com/milvus-io/milvus/pull/40874">(#40874</a>)</li>
+<li>Suporte à análise de vectores esparsos de estruturas Parquet em inserções em massa<a href="https://github.com/milvus-io/milvus/pull/40874">(#40874</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Melhorias</h3><ul>
 <li>Equilibra a coleção com a maior contagem de linhas primeiro<a href="https://github.com/milvus-io/milvus/pull/40958">(#40958</a>)</li>
@@ -227,7 +286,7 @@ title: Notas de lançamento
 <h3 id="Bug-fixes" class="common-anchor-header">Correcções de erros</h3><ul>
 <li>Corrigida uma falha envolvendo entrada anulável e tipos de dados mmap crescentes<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
 <li>Corrigida a potencial perda de dados em operações de eliminação causada por IDs de binlogs duplicados<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>),<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
-<li>Adicionados bloqueios de índices de campo para <code translate="no">GetSegmentsIndexStates</code> para evitar potenciais panes na inserção durante a criação de colecções<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
+<li>Adicionados bloqueios de índice de campo para <code translate="no">GetSegmentsIndexStates</code> para evitar potenciais pânicos na inserção durante a criação de colecções<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
 <li>Corrigidos problemas de concorrência no registo do consumidor Rocksmq<a href="https://github.com/milvus-io/milvus/pull/40885">(#40885</a>)</li>
 <li>Recuperação de todos os registos delta filhos para carregamento de segmentos<a href="https://github.com/milvus-io/milvus/pull/40957">(#40957</a>)</li>
 <li>Correção de resultados errados causados pela utilização do índice JSON quando <code translate="no">iterative_filter</code> é especificado<a href="https://github.com/milvus-io/milvus/pull/40946">(#40946</a>)</li>
@@ -338,7 +397,7 @@ title: Notas de lançamento
 <h3 id="Bug-fixes" class="common-anchor-header">Correcções de erros</h3><ul>
 <li>Corrigida a corrupção de array causada por ignorar a validade<a href="https://github.com/milvus-io/milvus/pull/40433">(#40433</a>)</li>
 <li>Foi corrigido um problema em que as expressões <code translate="no">null</code> não funcionavam para campos JSON<a href="https://github.com/milvus-io/milvus/pull/40457">(#40457</a>)</li>
-<li>Corrigido um problema que armazenava o deslocamento errado ao construir Tantivy com um campo anulável<a href="https://github.com/milvus-io/milvus/pull/40453">(#40453</a>)</li>
+<li>Corrigido um problema que armazenava o offset errado ao construir Tantivy com um campo anulável<a href="https://github.com/milvus-io/milvus/pull/40453">(#40453</a>)</li>
 <li>Saltava a execução de estatísticas para segmentos zero<a href="https://github.com/milvus-io/milvus/pull/40449">(#40449</a>)</li>
 <li>Corrigida a estimativa de tamanho de memória para arrays<a href="https://github.com/milvus-io/milvus/pull/40377">(#40377</a>)</li>
 <li>Passado um ponteiro knapsack para evitar múltiplas compactações<a href="https://github.com/milvus-io/milvus/pull/40401">(#40401</a>)</li>
@@ -383,7 +442,7 @@ title: Notas de lançamento
 <p>O Milvus 2.5.5 traz melhorias significativas no número de colecções e partições que um único cluster pode suportar. Agora é totalmente viável executar o Milvus com 10K coleções e 100K partições. Esta versão também resolve vários bugs críticos, incluindo estatísticas de correspondência ausentes e um problema de deadlock em consultas de vários estágios. Além disso, inclui várias melhorias de observabilidade e segurança. Recomendamos vivamente que todos os utilizadores que estejam a executar o Milvus 2.5.x façam a atualização o mais rapidamente possível.</p>
 <h3 id="Dependency-Upgrade" class="common-anchor-header">Atualização de dependências</h3><p>Atualizado para ETCD 3.5.18 para corrigir vários CVEs.</p>
 <ul>
-<li>[2.5] Atualização do raft para cuvs<a href="https://github.com/milvus-io/milvus/pull/39221">(#39221</a>)</li>
+<li>[2.5] Atualizado raft para cuvs<a href="https://github.com/milvus-io/milvus/pull/39221">(#39221</a>)</li>
 <li>[2.5] Versão actualizada do Knowhere<a href="https://github.com/milvus-io/milvus/pull/39673">(#39673</a>, <a href="https://github.com/milvus-io/milvus/pull/39574">#39574</a>)</li>
 </ul>
 <h3 id="Critical-Bugs" class="common-anchor-header">Bugs Críticos</h3><ul>
@@ -452,7 +511,7 @@ title: Notas de lançamento
 <li>[2.5] Exportado o intervalo de tempo limite do pedido de índice na configuração<a href="https://github.com/milvus-io/milvus/pull/40118">(#40118</a>)</li>
 <li>[2.5] Valor padrão proxy.maxTaskNum sincronizado para 1024<a href="https://github.com/milvus-io/milvus/pull/40073">(#40073</a>)</li>
 <li>Diminuído o limite de snapshot de dump de 10w para 1w<a href="https://github.com/milvus-io/milvus/pull/40102">(#40102</a>)</li>
-<li>[2.5] Evitou a cópia de bytes de string para slice para o lote pk existe<a href="https://github.com/milvus-io/milvus/pull/40097">(#40097</a>)</li>
+<li>[2.5] Evitou a cópia de bytes de string para slice para batch pk existe<a href="https://github.com/milvus-io/milvus/pull/40097">(#40097</a>)</li>
 <li>Suportado o retorno de propriedades configuráveis ao descrever o índice<a href="https://github.com/milvus-io/milvus/pull/40043">(#40043</a>)</li>
 <li>Optimizado o desempenho da expressão para certos pontos<a href="https://github.com/milvus-io/milvus/pull/39938">(#39938</a>)</li>
 <li>[2.5] Formato de resultado optimizado de getQueryNodeDistribution<a href="https://github.com/milvus-io/milvus/pull/39926">(#39926</a>)</li>
@@ -529,7 +588,7 @@ title: Notas de lançamento
 <li>Corrigida a indexação lenta causada por ter demasiadas threads<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
 <li>Corrigido um problema que impedia que as verificações de quota de disco fossem ignoradas durante a importação em massa<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
 <li>Resolvidos os problemas de congelamento causados por demasiados consumidores da fila de mensagens, limitando a concorrência<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
-<li>Corrigidos os timeouts de consulta causados pelos reinícios do MixCoord durante as compactações em grande escala<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
+<li>Corrigidos os timeouts de consulta causados por reinícios do MixCoord durante compactações em grande escala<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
 <li>Corrigidos os problemas de desequilíbrio de canal causados pelo tempo de inatividade do nó<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
 <li>Corrigido um problema que poderia fazer com que o equilíbrio do canal ficasse preso.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
 <li>Corrigido um problema em que as verificações de nível de privilégio do grupo personalizado RBAC tornavam-se ineficazes<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
@@ -713,7 +772,7 @@ title: Notas de lançamento
 </ul>
 <h4 id="Iterator-Enhancements" class="common-anchor-header">Aprimoramentos do iterador</h4><ul>
 <li><strong>Suporte a MVCC</strong>: Os utilizadores podem agora utilizar iteradores sem serem afectados por alterações de dados subsequentes, como inserções e eliminações, graças ao Controlo de Concorrência Multi-Versão (MVCC).</li>
-<li><strong>Cursor Persistente</strong>: O Milvus agora suporta um cursor persistente para o QueryIterator, permitindo que os utilizadores retomem a iteração a partir da última posição após um reinício do Milvus sem necessidade de reiniciar todo o processo de iteração.</li>
+<li><strong>Cursor Persistente</strong>: O Milvus suporta agora um cursor persistente para o QueryIterator, permitindo aos utilizadores retomar a iteração a partir da última posição após um reinício do Milvus sem necessidade de reiniciar todo o processo de iteração.</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Melhorias</h3><h4 id="Deletion-Optimization" class="common-anchor-header">Otimização da eliminação</h4><p>Melhoria da velocidade e redução da utilização de memória para eliminações em grande escala, optimizando a utilização de bloqueios e a gestão de memória.</p>
 <h4 id="Dependencies-Upgrade" class="common-anchor-header">Atualização de dependências</h4><p>Atualizada para ETCD 3.5.16 e Pulsar 3.0.7 LTS, corrigindo CVEs existentes e melhorando a segurança. Nota: A atualização para o Pulsar 3.x não é compatível com as versões anteriores 2.x.</p>

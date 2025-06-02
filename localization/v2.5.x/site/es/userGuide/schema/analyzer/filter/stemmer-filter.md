@@ -2,11 +2,11 @@
 id: stemmer-filter.md
 title: Stemmer
 summary: >-
-  El filtro stemmer reduce las palabras a su forma básica o raíz (lo que se
-  conoce como stemming), lo que facilita la búsqueda de palabras con
-  significados similares en distintas inflexiones. El filtro stemmer es
-  compatible con varios idiomas, lo que permite realizar búsquedas e
-  indexaciones eficaces en diversos contextos lingüísticos.
+  El filtro stemmer reduce las palabras a su forma base o raíz (lo que se conoce
+  como stemming), lo que facilita la búsqueda de palabras con significados
+  similares en distintas inflexiones. El filtro stemmer es compatible con varios
+  idiomas, lo que permite realizar búsquedas e indexaciones eficaces en diversos
+  contextos lingüísticos.
 ---
 <h1 id="Stemmer" class="common-anchor-header">Stemmer<button data-href="#Stemmer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,7 +157,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verificación mediante <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verificación mediante <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;running runs looked ran runner&quot;</span>

@@ -90,7 +90,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
 <p>لا يزال الريبو المؤرشف متاحًا للمخططات حتى الإصدار 4.0.31. للإصدارات الأحدث، استخدم الريبو الجديد بدلاً من ذلك.</p>
 </div>
@@ -117,12 +117,12 @@ helm upgrade my-release zilliztech/milvus
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install my-release milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>في الأمر أعلاه، <code translate="no">my-release</code> هو اسم الإصدار، و <code translate="no">milvus/milvus</code> هو مستودع المخطط المثبت محليًا. لاستخدام اسم مختلف، استبدل <code translate="no">my-release</code> بالاسم الذي تراه مناسبًا.</p>
-<p>ينشر الأمر أعلاه مجموعة Milvus بمكوناتها وتوابعها باستخدام التكوينات الافتراضية. لتخصيص هذه الإعدادات، نوصيك باستخدام <a href="https://milvus.io/tools/sizing">أداة Milvus Sizing Tool</a> لضبط التكوينات بناءً على حجم بياناتك الفعلي ثم تنزيل ملف YAML المقابل. لمعرفة المزيد حول معلمات التكوين، راجع <a href="https://milvus.io/docs/system_configuration.md">قائمة مراجعة تكوينات نظام Milvus</a>.</p>
+<p>ينشر الأمر أعلاه مجموعة Milvus مع مكوناتها وتوابعها باستخدام التكوينات الافتراضية. لتخصيص هذه الإعدادات، نوصيك باستخدام <a href="https://milvus.io/tools/sizing">أداة Milvus Sizing Tool</a> لضبط التكوينات بناءً على حجم بياناتك الفعلي ثم تنزيل ملف YAML المقابل. لمعرفة المزيد حول معلمات التكوين، راجع <a href="https://milvus.io/docs/system_configuration.md">قائمة مراجعة تكوينات نظام Milvus</a>.</p>
 <div class="alert note">
   <ul>
     <li>يجب أن يحتوي اسم الإصدار على أحرف وأرقام وشرطات فقط. النقاط غير مسموح بها في اسم الإصدار.</li>
     <li>يقوم سطر الأوامر الافتراضي بتثبيت الإصدار العنقودي من Milvus أثناء تثبيت Milvus مع Helm. هناك حاجة إلى مزيد من الإعدادات أثناء تثبيت Milvus مستقل.</li>
-    <li>وفقًا <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">لدليل ترحيل واجهة برمجة التطبيقات المهملة لـ Kubernetes،</a> لم يعد يتم تقديم إصدار واجهة برمجة التطبيقات <b>السياسة/إصدار v1beta1</b> من PodDisruptionBudget اعتبارًا من الإصدار v1.25. يُقترح عليك ترحيل البيانات وعملاء واجهة برمجة التطبيقات لاستخدام إصدار واجهة برمجة تطبيقات <b>السياسة/ الإصدار الأول</b> بدلاً من ذلك. <br/>كحل بديل للمستخدمين الذين لا يزالون يستخدمون إصدار <b>السياسة/ الإصدار الأول</b> من واجهة برمجة التطبيقات من PodDisruptionBudget على Kubernetes v1.25 والإصدارات الأحدث، يمكنك بدلاً من ذلك تشغيل الأمر التالي لتثبيت Milvus:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+    <li>وفقًا <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">لدليل ترحيل واجهة برمجة التطبيقات المهملة لـ Kubernetes،</a> لم يعد يتم تقديم إصدار واجهة برمجة التطبيقات <b>السياسة/إصدار v1beta1</b> من PodDisruptionBudget اعتبارًا من الإصدار v1.25. يُقترح عليك ترحيل البيانات وعملاء واجهة برمجة التطبيقات لاستخدام إصدار واجهة برمجة تطبيقات <b>السياسة/الإصدار الأول</b> بدلاً من ذلك. <br/>كحل بديل للمستخدمين الذين لا يزالون يستخدمون إصدار <b>السياسة/ الإصدار الأول</b> من واجهة برمجة التطبيقات من PodDisruptionBudget على Kubernetes v1.25 والإصدارات الأحدث، يمكنك بدلاً من ذلك تشغيل الأمر التالي لتثبيت Milvus:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>انظر <a href="https://artifacthub.io/packages/helm/milvus/milvus">مخطط Milvus Helm</a> و <a href="https://helm.sh/docs/">Helm</a> لمزيد من المعلومات.</li>
   </ul>
 </div>
@@ -246,7 +246,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>قم بتشغيل الأمر التالي لترقية مجموعة Milvus قيد التشغيل إلى أحدث إصدار:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --reset-then-reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">إلغاء تثبيت ميلفوس<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

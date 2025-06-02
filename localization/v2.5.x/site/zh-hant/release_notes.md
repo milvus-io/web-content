@@ -19,6 +19,65 @@ title: 發佈筆記
         ></path>
       </svg>
     </button></h1><p>瞭解 Milvus 的新功能！本頁總結了每個版本的新功能、改進、已知問題和錯誤修正。您可以在本節中找到 v2.5.0 以後每個版本的發行說明。我們建議您定期造訪此頁面以瞭解更新資訊。</p>
+<h2 id="v2512" class="common-anchor-header">v2.5.12<button data-href="#v2512" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Milvus 版本</th><th>Python SDK 版本</th><th>Node.js SDK 版本</th><th>Java SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.12</td><td>2.5.10</td><td>2.5.9</td><td>2.5.9</td></tr>
+</tbody>
+</table>
+<p>我們很高興為您帶來 Milvus 2.5.12！此版本引入了新功能，例如為<code translate="no">contains</code> 表達式提供 JSON 索引支援，以及多項改進，包括更新的<code translate="no">DescribeCollection</code> API 回應和更嚴格的資料過期壓縮。我們鼓勵您升級至 Milvus 2.5.12，從這些最新的增強和修正中獲益！</p>
+<h3 id="Features" class="common-anchor-header">功能</h3><ul>
+<li>新增 JSON<code translate="no">contains</code> expr 的 JSON 索引支援<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>)。</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">改進</h3><ul>
+<li><code translate="no">DescribeCollection</code> API 現在在其結果中包含更新時間戳<a href="https://github.com/milvus-io/milvus/pull/41600">(#41600</a>)。</li>
+<li><code translate="no">DescribeIndex</code> 介面現在輸出索引版本資訊<a href="https://github.com/milvus-io/milvus/pull/41841">(#41841</a>)。</li>
+<li>新增更嚴格的到期壓縮支援，以清理刪除的資料，而不需等待大量刪除<a href="https://github.com/milvus-io/milvus/pull/41856">(#41856</a>)。</li>
+<li>提升相依版本以處理 CVE<a href="https://github.com/milvus-io/milvus/pull/41590">(#41590</a>,<a href="https://github.com/milvus-io/milvus/pull/41878">#41878</a>,<a href="https://github.com/milvus-io/milvus/pull/41742">#41742</a>,<a href="https://github.com/milvus-io/milvus/pull/41697">#41697</a>)。</li>
+<li>新增<code translate="no">DescribeCollection</code> 和<code translate="no">DescribeDatabase</code> 任務的授權檢查<a href="https://github.com/milvus-io/milvus/pull/41799">(#41799</a>)。</li>
+<li>RESTful API 現在支援查詢/獲取操作的一致性層級<a href="https://github.com/milvus-io/milvus/pull/41830">(#41830</a>)。</li>
+<li>新增更改集合描述的支援<a href="https://github.com/milvus-io/milvus/pull/41547">(#41547</a>)。</li>
+<li>CDC 現在支援同步多個 DDL API<a href="https://github.com/milvus-io/milvus/pull/41594">(#41594</a>,<a href="https://github.com/milvus-io/milvus/pull/41679">#41679</a>)。</li>
+<li>在<code translate="no">MQMsgStream</code> 中新增了訊息接收的超時<a href="https://github.com/milvus-io/milvus/pull/41603">（#41603</a>）。</li>
+<li>現在 L0 匯入會跳過磁碟配額檢查<a href="https://github.com/milvus-io/milvus/pull/41572">(#41572</a>)。</li>
+<li>新增忽略配置類型異常的參數<a href="https://github.com/milvus-io/milvus/pull/41773">(#41773</a>)。</li>
+<li>將單機模式下的 Worker<code translate="no">totalSlot</code> 設定為群集模式下的一半<a href="https://github.com/milvus-io/milvus/pull/41731">(#41731</a>)。</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">修正錯誤</h3><ul>
+<li>修正<code translate="no">ants.pool</code> 中的 goroutine 洩漏<a href="https://github.com/milvus-io/milvus/pull/41893">(#41893</a>)。</li>
+<li>修正了混合搜尋子請求中沒有設定分析器名稱的問題<a href="https://github.com/milvus-io/milvus/pull/41897">(#41897</a>)。</li>
+<li>修正<code translate="no">ChannelManager</code> <a href="https://github.com/milvus-io/milvus/pull/41877">(#41877</a>) 中的雙重分配問題。</li>
+<li>修正了<code translate="no">ThreadWatcher</code> 中日誌層級設定無效的問題<a href="https://github.com/milvus-io/milvus/pull/41887">(#41887</a>)。</li>
+<li>當啟用統計時，防止為未排序的匯入區段建立索引<a href="https://github.com/milvus-io/milvus/pull/41865">(#41865</a>)。</li>
+<li>修正匯入閱讀器的 goroutine 洩漏<a href="https://github.com/milvus-io/milvus/pull/41870">(#41870</a>)。</li>
+<li>修正了由於函數 runner 未關閉造成的分析器記憶體洩漏<a href="https://github.com/milvus-io/milvus/pull/41840">(#41840</a>)。</li>
+<li>修正了按分區而非集合收集計數的問題<a href="https://github.com/milvus-io/milvus/pull/41789">(#41789</a>)。</li>
+<li>修正了 root 使用者的密碼出乎意料的問題<a href="https://github.com/milvus-io/milvus/pull/41818">(#41818</a>)。</li>
+<li>防止在<code translate="no">contains_all</code> 或<code translate="no">contains_any</code> 與空陣列一起使用時發生崩潰<a href="https://github.com/milvus-io/milvus/pull/41756">(#41756</a>)。</li>
+<li>修正 Windows 上的編譯問題<a href="https://github.com/milvus-io/milvus/pull/41617">(#41617</a>)。</li>
+<li>在 ARM 架構上停用區塊和互斥剖析以防止 SIGSEGV 錯誤<a href="https://github.com/milvus-io/milvus/pull/41823">(#41823</a>)。</li>
+<li>修正小型匯入任務的<code translate="no">no candidate segments</code> 錯誤<a href="https://github.com/milvus-io/milvus/pull/41772">(#41772</a>)。</li>
+<li>升級至<code translate="no">MixCoord</code> 時，確保回退至<code translate="no">MixCoord</code> session<a href="https://github.com/milvus-io/milvus/pull/41773">(#41773</a>)。</li>
+<li><code translate="no">GetValueFromConfig</code> 現在返回 而不是產生異常<code translate="no">nullopt</code> <a href="https://github.com/milvus-io/milvus/pull/41711">(#41711</a>)。</li>
+<li>在<code translate="no">DropSegmentsOfPartition</code> 中增加了排他鎖互斥，以避免分區上的並發 DDL 可能造成的崩潰<a href="https://github.com/milvus-io/milvus/pull/41619">(#41619</a>)。</li>
+</ul>
 <h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +284,7 @@ title: 發佈筆記
 <li>在<code translate="no">MsgDispatcher</code> 中引入批量訂閱<a href="https://github.com/milvus-io/milvus/pull/40596">(#40596</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">錯誤修正</h3><ul>
-<li>修正了涉及可空輸入和成長的 mmap 資料類型的當機問題<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
+<li>修正了涉及可空輸入和成長中的 mmap 資料類型的當機問題<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
 <li>修正了在刪除操作中，由於重複 binlog IDs 而造成的潛在資料遺失<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>)、<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
 <li>為<code translate="no">GetSegmentsIndexStates</code> 新增欄位索引鎖，以避免在建立集合時插入可能造成的恐慌<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
 <li>修正 Rocksmq 消費者註冊的並發問題<a href="https://github.com/milvus-io/milvus/pull/40885">(#40885</a>)</li>
@@ -401,7 +460,7 @@ title: 發佈筆記
 <li>[2.5] 修正了角落情況下 querycoord 的恐慌<a href="https://github.com/milvus-io/milvus/pull/40058">(#40058</a>)</li>
 <li>[2.5] 增強 isbalanced 函數，以正確計算引號對<a href="https://github.com/milvus-io/milvus/pull/40002">(#40002</a>)</li>
 <li>[2.5] 修正負 -1 執行壓縮任務的問題<a href="https://github.com/milvus-io/milvus/pull/39955">(#39955</a>)</li>
-<li>[2.5] 修正了一個區段可能永遠無法從封存轉移到沖洗的錯誤<a href="https://github.com/milvus-io/milvus/pull/39996">(#39996</a>)</li>
+<li>[2.5] 修正了一個區段可能永遠不會從封存轉移到沖洗的錯誤<a href="https://github.com/milvus-io/milvus/pull/39996">(#39996</a>)</li>
 <li>載入 pk 索引時跳過建立主索引<a href="https://github.com/milvus-io/milvus/pull/39922">(#39922</a>)</li>
 <li>[2.5] 當排序後段為零時，跳過文字索引的建立<a href="https://github.com/milvus-io/milvus/pull/39969">(#39969</a>)</li>
 <li>[2.5] 修正了尋找最早位置的失敗<a href="https://github.com/milvus-io/milvus/pull/39966">(#39966</a>)</li>
@@ -700,7 +759,7 @@ title: 發佈筆記
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">基於 Faiss 的 HNSW SQ/PQ/PRQ</h4><p>透過與 Faiss 社群的密切合作，Faiss 中的 HNSW 演算法在功能和效能上都有顯著的改善。基於穩定性和可維護性的考量，Milvus 2.5 正式將 HNSW 的支援從 hnswlib 移轉到 Faiss。</p>
 <p>在 Faiss 的基礎上，Milvus 2.5 支援 HNSW 的多種量化方法，以滿足不同場景的需求：SQ (Scalar Quantizers)、PQ (Product Quantizer)、PRQ (Product Residual Quantizer)。SQ 和 PQ 比較常見；SQ 提供良好的查詢效能和建立速度，而 PQ 則在相同的壓縮比下提供較佳的召回率。許多向量資料庫普遍使用二進位量化，這是 SQ 量化的一種簡單形式。</p>
 <p>PRQ 是 PQ 與 AQ (Additive Quantizer) 的融合。與 PQ 相比，它需要更長的建立時間，才能提供更好的召回率，尤其是在高壓縮率時，說二進位壓縮。</p>
-<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">聚類壓縮 (測試版)</h4><p>Milvus 2.5 引入了聚類壓縮 (Clustering Compaction)，以加速搜尋並降低大型資料庫的成本。透過指定標量欄位作為聚類關鍵，資料會依範圍重新分配，以最佳化儲存與擷取。此功能的作用類似全局索引，可讓 Milvus 在根據聚類元資料進行查詢時，有效地剪裁資料，並在套用標量篩選器時提升搜尋效能。</p>
+<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">聚類壓縮 (測試版)</h4><p>Milvus 2.5 引入了聚類壓縮 (Clustering Compaction)，以加速搜尋並降低大型資料庫的成本。透過指定標量欄位作為聚類關鍵，資料會依範圍重新分配，以最佳化儲存與擷取。此功能的作用類似全局索引，可讓 Milvus 在根據聚類元資料進行查詢時，有效地剪裁資料，並在套用標量篩選條件時，提升搜尋效能。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/clustering-compaction.md">聚類壓縮</a>。</p>
 <h3 id="Other-Features" class="common-anchor-header">其他功能</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">串流節點 (測試版)</h4><p>Milvus 2.5 引入了一個稱為串流節點的新元件，提供先寫後記錄 (WAL) 服務。這可讓 Milvus 在讀寫通道前後達成共識，釋放新特性、功能和最佳化。Milvus 2.5 預設停用此功能，並將於 3.0 版正式提供。</p>
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6 支援</h4><p>Milvus 現在支援 IPv6，擴大網路連線性與相容性。</p>
@@ -716,12 +775,12 @@ title: 發佈筆記
 <li><strong>持久游標</strong>：Milvus 現在支援 QueryIterator 的持久游標，讓使用者可以在 Milvus 重新啟動後，從最後一個位置恢復迭代，而不需要重新啟動整個迭代過程。</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">改進</h3><h4 id="Deletion-Optimization" class="common-anchor-header">刪除優化</h4><p>透過優化鎖的使用和記憶體管理，提高了大規模刪除的速度並降低了記憶體使用量。</p>
-<h4 id="Dependencies-Upgrade" class="common-anchor-header">相依性升級</h4><p>升級至 ETCD 3.5.16 及 Pulsar 3.0.7 LTS，修正現有 CVE 並加強安全性。注意：升級至 Pulsar 3.x 與之前的 2.x 版本不相容。</p>
+<h4 id="Dependencies-Upgrade" class="common-anchor-header">相依性升級</h4><p>升級至 ETCD 3.5.16 與 Pulsar 3.0.7 LTS，修正現有的 CVE 並加強安全性。注意：升級至 Pulsar 3.x 與之前的 2.x 版本不相容。</p>
 <p>對於已經有一個正常運作的 Milvus 部署的使用者，您需要先升級 ETCD 和 Pulsar 元件，才能使用新的特性和功能。詳情請參考<a href="/docs/zh-hant/upgrade-pulsar-v3.md">Pulsar 從 2.x 升級到 3.x</a></p>
 <h4 id="Local-Storage-V2" class="common-anchor-header">本機儲存 V2</h4><p>在 Milvus 2.5 中引入了新的本地文件格式，提高了標量資料的載入和查詢效率，減少了記憶體開銷，並為未來的優化奠定了基礎。</p>
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">表達式解析最佳化</h4><p>透過對重複表達式實施快取、升級 ANTLR，以及優化<code translate="no">NOT IN</code> 子句的效能，改善表達式解析。</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">改善 DDL 並發效能</h4><p>優化了資料定義語言 (DDL) 作業的並發效能。</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">RESTful API 功能對齊</h4><p>將 RESTful API 的功能與其他 SDK 統一。</p>
 <h4 id="Security--Configuration-Updates" class="common-anchor-header">安全性與組態更新</h4><p>支援 TLS 以確保在更複雜或企業環境中的節點間通訊安全。如需詳細資訊，請參閱<a href="/docs/zh-hant/tls.md">安全性設定</a>。</p>
-<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">壓縮效能增強</h4><p>移除混合壓縮的最大區段限制，現在會優先處理較小的區段，以提高效率並加快大型或分散資料集的查詢速度。</p>
+<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">壓縮效能增強</h4><p>移除混合壓縮中的最大區段限制，現在會優先處理較小的區段，以提高效率並加快大型或分散資料集的查詢速度。</p>
 <h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">基於分數的通道平衡</h4><p>引進可動態平衡各通道負載的政策，在大規模部署中提高資源利用率和整體穩定性。</p>

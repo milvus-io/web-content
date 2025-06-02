@@ -41,7 +41,7 @@ summary: >-
     </button></h2><p>O analisador <code translate="no">standard</code> é composto por:</p>
 <ul>
 <li><p><strong>Tokenizador</strong>: Usa o tokenizador <code translate="no">standard</code> para dividir o texto em unidades de palavras discretas com base em regras gramaticais. Para obter mais informações, consulte <a href="/docs/pt/standard-tokenizer.md">Padrão</a>.</p></li>
-<li><p><strong>Filtro</strong>: Usa o<a href="/docs/pt/lowercase-filter.md"> filtro</a> <code translate="no">lowercase</code><a href="/docs/pt/lowercase-filter.md"></a> para converter todos os tokens em minúsculas, permitindo pesquisas sem distinção entre maiúsculas e minúsculas. Para obter mais informações, consulte</p></li>
+<li><p><strong>Filtro</strong>: Utiliza o<a href="/docs/pt/lowercase-filter.md"> filtro</a> <code translate="no">lowercase</code><a href="/docs/pt/lowercase-filter.md"></a> para converter todos os tokens em minúsculas, permitindo pesquisas sem distinção entre maiúsculas e minúsculas. Para obter mais informações, consulte</p></li>
 </ul>
 <p>A funcionalidade do analisador <code translate="no">standard</code> é equivalente à seguinte configuração de analisador personalizado:</p>
 <div class="multipleCode">
@@ -178,7 +178,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verificação usando <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verificação usando <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,

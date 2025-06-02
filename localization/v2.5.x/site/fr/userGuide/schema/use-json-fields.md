@@ -3,8 +3,8 @@ id: use-json-fields.md
 title: Champ JSON
 summary: >-
   Un champ JSON est un champ scalaire qui stocke des informations
-  supplémentaires, ainsi que des vecteurs, sous forme de paires clé-valeur.
-  Voici un exemple de la manière dont les données sont stockées au format JSON :
+  supplémentaires ainsi que des vecteurs, sous forme de paires clé-valeur. Voici
+  un exemple de la manière dont les données sont stockées au format JSON :
 ---
 <h1 id="JSON-Field" class="common-anchor-header">Champ JSON<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, et <code translate="no">&quot;a\\&quot;b&quot;</code> sont stockés tels quels.</p></li>
 <li><p><code translate="no">'a'b'</code> et <code translate="no">&quot;a&quot;b&quot;</code> sont considérés comme non valides.</p></li>
 </ul></li>
-<li><p><strong>Indexation JSON</strong>: Lors de l'indexation d'un champ JSON, vous pouvez spécifier un ou plusieurs chemins d'accès dans le champ JSON afin d'accélérer le filtrage. Chaque chemin supplémentaire augmente la charge de travail de l'indexation, c'est pourquoi vous devez planifier votre stratégie d'indexation avec soin. Pour plus d'informations sur l'indexation d'un champ JSON, reportez-vous à la section <a href="/docs/fr/use-json-fields.md#Considerations-on-JSON-indexing">Considérations sur l'indexation JSON</a>.</p></li>
+<li><p><strong>Indexation JSON</strong>: Lors de l'indexation d'un champ JSON, vous pouvez spécifier un ou plusieurs chemins d'accès dans le champ JSON afin d'accélérer le filtrage. Chaque chemin supplémentaire augmente la charge d'indexation, c'est pourquoi vous devez planifier votre stratégie d'indexation avec soin. Pour plus d'informations sur l'indexation d'un champ JSON, reportez-vous à la section <a href="/docs/fr/use-json-fields.md#Considerations-on-JSON-indexing">Considérations sur l'indexation JSON</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">Ajouter un champ JSON<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -413,7 +413,7 @@ curl --request POST \
 <li>Milvus n'analyse pas et ne transforme pas les clés JSON au-delà de la distribution spécifiée. Si les données source sont incohérentes (par exemple, certaines lignes stockent une chaîne pour la clé <code translate="no">&quot;k&quot;</code> alors que d'autres stockent un nombre), certaines lignes ne seront pas indexées.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">Indexation d'un champ vectoriel</h3><p>L'exemple suivant crée un index sur le champ vectoriel <code translate="no">embedding</code>, en utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, reportez-vous à <a href="/docs/fr/index-explained.md">Index Explained</a>.</p>
+<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Indexation d'un champ vectoriel<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>L'exemple suivant crée un index sur le champ vectoriel <code translate="no">embedding</code>, en utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, reportez-vous à <a href="/docs/fr/index-explained.md">Index Explained</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

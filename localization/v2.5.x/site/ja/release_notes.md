@@ -19,6 +19,65 @@ title: リリースノート
         ></path>
       </svg>
     </button></h1><p>Milvusの新機能をご確認ください！このページでは、各リリースの新機能、改善点、既知の問題、バグ修正についてまとめています。v2.5.0以降の各バージョンのリリースノートはこのセクションにあります。定期的にこのページをご覧いただき、アップデート情報をご確認ください。</p>
+<h2 id="v2512" class="common-anchor-header">v2.5.12<button data-href="#v2512" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Milvusバージョン</th><th>Python SDKバージョン</th><th>Node.js SDKバージョン</th><th>Java SDKバージョン</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.12</td><td>2.5.10</td><td>2.5.9</td><td>2.5.9</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.12をリリースいたしました！このリリースでは、<code translate="no">contains</code> 式に対する JSON インデックスのサポートなどの新機能が導入され、<code translate="no">DescribeCollection</code> API レスポンスの更新やデータの有効期限コンパクションの厳格化など、いくつかの改善が加えられています。また、CVEsを修正するための重要な依存関係の更新や、安定性とパフォーマンスを向上させるための多数のバグ修正も含まれています。 Milvus 2.5.12へのアップグレードをお勧めいたします！</p>
+<h3 id="Features" class="common-anchor-header">機能</h3><ul>
+<li>JSON<code translate="no">contains</code> exprにおけるJSONインデックスのサポートを追加しました<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>)。</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">改良点</h3><ul>
+<li><code translate="no">DescribeCollection</code> APIが更新タイムスタンプを結果に含めるようになりました<a href="https://github.com/milvus-io/milvus/pull/41600">(#41600</a>)。</li>
+<li><code translate="no">DescribeIndex</code> インターフェースがインデックスのバージョン情報を出力するようになった<a href="https://github.com/milvus-io/milvus/pull/41841">(#41841</a>)。</li>
+<li>より厳格な期限切れコンパクションをサポートし、必ずしも大量の削除を待たずに 削除されたデータを消去できるようになった<a href="https://github.com/milvus-io/milvus/pull/41856">(#41856</a>)。</li>
+<li>CVEに対処するため、依存関係のバージョンをバンプした<a href="https://github.com/milvus-io/milvus/pull/41590">(#41590</a>,<a href="https://github.com/milvus-io/milvus/pull/41878">#41878</a>,<a href="https://github.com/milvus-io/milvus/pull/41742">#41742</a>,<a href="https://github.com/milvus-io/milvus/pull/41697">#41697</a>)。</li>
+<li><code translate="no">DescribeCollection</code> 、<code translate="no">DescribeDatabase</code> タスクの権限チェックを追加した<a href="https://github.com/milvus-io/milvus/pull/41799">(#41799</a>)。</li>
+<li>RESTful APIで、query/get操作の一貫性レベルをサポートした<a href="https://github.com/milvus-io/milvus/pull/41830">(#41830</a>)。</li>
+<li>コレクションの記述を変更できるようになりました<a href="https://github.com/milvus-io/milvus/pull/41547">(#41547</a>)。</li>
+<li>CDCが複数のDDL APIの同期をサポートしました<a href="https://github.com/milvus-io/milvus/pull/41594">(#41594</a>,<a href="https://github.com/milvus-io/milvus/pull/41679">#41679</a>)。</li>
+<li><code translate="no">MQMsgStream</code> 、メッセージ受信のタイムアウトを追加しました<a href="https://github.com/milvus-io/milvus/pull/41603">(#41603</a>)。</li>
+<li>L0インポートにおいて、ディスククォータチェックをスキップするようになった<a href="https://github.com/milvus-io/milvus/pull/41572">(#41572</a>)。</li>
+<li>設定タイプの例外を無視するパラメータを追加した<a href="https://github.com/milvus-io/milvus/pull/41773">(#41773</a>)。</li>
+<li>スタンドアロンモードのワーカー<code translate="no">totalSlot</code> を、クラスタモードの半分に設定するようにしました<a href="https://github.com/milvus-io/milvus/pull/41731">(#41731</a>)。</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">バグ修正</h3><ul>
+<li><code translate="no">ants.pool</code> のゴルーチンリークを修正した<a href="https://github.com/milvus-io/milvus/pull/41893">(#41893</a>)。</li>
+<li>ハイブリッド検索サブリクエストにおいて、解析器名が設定されない問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/41897">(#41897</a>)。</li>
+<li><code translate="no">ChannelManager</code> における二重割り当ての問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/41877">(#41877</a>)。</li>
+<li><code translate="no">ThreadWatcher</code> において、ログレベルの設定が有効でなかった問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/41887">(#41887</a>)。</li>
+<li>統計が有効な場合に、ソートされていないインポートセグメントに対してインデックスが作成されないようにした<a href="https://github.com/milvus-io/milvus/pull/41865">(#41865</a>)。</li>
+<li>インポートリーダにおけるゴルーチンのリークを修正した<a href="https://github.com/milvus-io/milvus/pull/41870">(#41870</a>)。</li>
+<li>ファンクションランナーが閉じられていないことによるアナライザーのメモリリークを修正した<a href="https://github.com/milvus-io/milvus/pull/41840">(#41840</a>)。</li>
+<li>カウントがコレクションではなくパーティションごとにグループ化されて収集される問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/41789">(#41789</a>)。</li>
+<li>rootユーザに予期しないパスワードが設定される問題を修正した<a href="https://github.com/milvus-io/milvus/pull/41818">(#41818</a>)。</li>
+<li>空の配列で<code translate="no">contains_all</code> または<code translate="no">contains_any</code> を使用した場合にクラッシュしないようにした<a href="https://github.com/milvus-io/milvus/pull/41756">(#41756</a>)。</li>
+<li>Windowsにおけるコンパイルの問題を修正した<a href="https://github.com/milvus-io/milvus/pull/41617">(#41617</a>)。</li>
+<li>SIGSEGVエラーを防ぐため、ARMアーキテクチャ上でブロックおよびミューテックスのプロファイリングを無効にした<a href="https://github.com/milvus-io/milvus/pull/41823">(#41823</a>)。</li>
+<li>小さなインポートタスクの<code translate="no">no candidate segments</code> エラーを修正した<a href="https://github.com/milvus-io/milvus/pull/41772">(#41772</a>)。</li>
+<li><code translate="no">MixCoord</code> へのアップグレード時に<code translate="no">MixCoord</code> セッションへのフォールバックを保証した<a href="https://github.com/milvus-io/milvus/pull/41773">(#41773</a>)。</li>
+<li><code translate="no">GetValueFromConfig</code> 例外を投げる代わりに を返すようにした<code translate="no">nullopt</code> <a href="https://github.com/milvus-io/milvus/pull/41711">(#41711</a>)。</li>
+<li><code translate="no">DropSegmentsOfPartition</code> に排他ロックミュートを追加し、パーティションでの同時DDLによるクラッシュの可能性を回避しました<a href="https://github.com/milvus-io/milvus/pull/41619">(#41619</a>)。</li>
+</ul>
 <h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -206,7 +265,7 @@ title: リリースノート
 <tr><td>2.5.8</td><td>2.5.6</td><td>2.5.7</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>JSON式、UTF-8バリデーション、メモリ使用量、バランシングロジックの強化を特徴とするMilvus 2.5.8のリリースを発表できることを嬉しく思います。このバージョンには、同時実行性とデータハンドリングを改善するための複数の重要なバグ修正も含まれています。また、皆様からのフィードバックは、Milvusの継続的な改良に役立たせていただきます！</p>
+<p>JSON式、UTF-8検証、メモリ使用量、バランシングロジックが強化されたMilvus 2.5.8がリリースされました。このバージョンには、同時実行性とデータハンドリングを改善するための複数の重要なバグ修正も含まれています。また、皆様からのフィードバックは、Milvusの継続的な改良に役立たせていただきます！</p>
 <h3 id="Features" class="common-anchor-header">機能</h3><ul>
 <li>JSON<code translate="no">null</code>/<code translate="no">exists</code> 式のサポート<a href="https://github.com/milvus-io/milvus/pull/41002">(#41002</a>)</li>
 <li>一括挿入におけるParquet構造体からのスパースベクトルの解析に対応しました<a href="https://github.com/milvus-io/milvus/pull/40874">。</a></li>
@@ -225,7 +284,7 @@ title: リリースノート
 <li><code translate="no">MsgDispatcher</code> でバッチサブスクリプションを導入した<a href="https://github.com/milvus-io/milvus/pull/40596">(#40596</a>)。</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">バグ修正</h3><ul>
-<li>NULL可能な入力や成長するmmapデータ型に関するクラッシュを修正した<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)。</li>
+<li>NULL可能な入力と成長するmmapデータ型に関するクラッシュを修正した<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)。</li>
 <li>ビンログIDの重複による削除操作のデータ損失の可能性を修正<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>)、<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
 <li><code translate="no">GetSegmentsIndexStates</code> 、コレクション作成時の挿入によるパニックを回避するため、フィールドインデックスロックを追加した<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)。</li>
 <li>Rocksmqコンシューマ登録における同時実行問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/40885">(#40885</a>)。</li>
@@ -347,9 +406,9 @@ title: リリースノート
 <li><code translate="no">null</code> オフセットの同時実行に関する問題を修正<a href="https://github.com/milvus-io/milvus/pull/40363">(#40363</a>)、<a href="https://github.com/milvus-io/milvus/pull/40365">(#40365</a>)</li>
 <li><code translate="no">import end ts</code> の解析を修正した<a href="https://github.com/milvus-io/milvus/pull/40333">(#40333</a>)。</li>
 <li><code translate="no">InitMetaCache</code> 関数のエラー処理と単体テストの改善<a href="https://github.com/milvus-io/milvus/pull/40324">(#40324</a>)</li>
-<li><code translate="no">CreateIndex</code> 、パラメータの重複チェックを追加した<a href="https://github.com/milvus-io/milvus/pull/40330">(#40330</a>)</li>
+<li><code translate="no">CreateIndex</code> 、パラメータの重複チェックを追加<a href="https://github.com/milvus-io/milvus/pull/40330">(#40330</a>)</li>
 <li>サイズが最大制限を超えた場合にコンパクションタスクが発生しない問題を解決<a href="https://github.com/milvus-io/milvus/pull/40350">(#40350</a>)</li>
-<li>不可視セグメントに対するストリームからの重複消費を修正した(<a href="https://github.com/milvus-io/milvus/pull/40318">#40318</a>)</li>
+<li>不可視セグメントのストリームからの重複消費を修正した<a href="https://github.com/milvus-io/milvus/pull/40318">(#40318</a>)</li>
 <li>CMake 変数を<code translate="no">knowhere-cuvs</code> に切り替えるように変更した(<a href="https://github.com/milvus-io/milvus/pull/40289">#40289</a>)。</li>
 <li>RESTful経由でのDBプロパティの削除に失敗する問題を修正した<a href="https://github.com/milvus-io/milvus/pull/40260">(#40260</a>)</li>
 <li><code translate="no">OperatePrivilegeV2</code> APIで異なるメッセージタイプを使用するようにした<a href="https://github.com/milvus-io/milvus/pull/40193">(#40193</a>)</li>
@@ -689,7 +748,7 @@ title: リリースノート
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">クラスタ管理WebUI（ベータ版）</h4><p>膨大なデータと豊富な機能をより良くサポートするために、Milvusの洗練された設計には様々な依存関係、多数のノードの役割、複雑なデータ構造などが含まれています。このような側面は、使用やメンテナンスに困難をもたらす可能性があります。</p>
 <p>Milvus 2.5では、組み込みのクラスタ管理WebUIを導入し、Milvusの複雑な実行環境情報を可視化することで、システムメンテナンスの難易度を下げています。これにはデータベースやコレクション、セグメント、チャネル、依存関係、ノードのヘルスステータス、タスク情報、スロークエリなどの詳細が含まれます。</p>
 <p>詳細は<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご参照ください。</p>
-<h4 id="Text-Match" class="common-anchor-header">テキストマッチ</h4><p>Milvus 2.5では、<a href="https://github.com/quickwit-oss/tantivy">Tantivyの</a>アナライザとインデックスを活用してテキストの前処理とインデックスを作成し、特定の用語に基づいたテキストデータの正確な自然言語マッチングをサポートしています。この機能は主に特定の条件を満たすフィルタリング検索に使用され、クエリー結果を絞り込むためにスカラーフィルタリングを組み込むことができ、スカラー条件を満たすベクトル内の類似検索を可能にします。</p>
+<h4 id="Text-Match" class="common-anchor-header">テキストマッチ</h4><p>Milvus 2.5では、<a href="https://github.com/quickwit-oss/tantivy">Tantivyの</a>アナライザとインデックス作成機能を活用し、テキストの前処理とインデックス作成を行い、特定の用語に基づいたテキストデータの正確な自然言語マッチングをサポートします。この機能は主に特定の条件を満たすフィルタリング検索に使用され、クエリー結果を絞り込むためにスカラーフィルタリングを組み込むことができ、スカラー条件を満たすベクトル内の類似検索を可能にします。</p>
 <p>詳細は<a href="/docs/ja/analyzer-overview.md">アナライザーの概要と</a> <a href="/docs/ja/keyword-match.md">テキストマッチを</a>参照。</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">ビットマップインデックス</h4><p>Milvusファミリーに新しいスカラーデータインデックスが追加されました。BitMap インデックスは行数と同じ長さのビットの配列を使用して値の存在を表し、検索を高速化します。</p>
 <p>ビットマップインデックスは伝統的に、値の数が少ない、つまり、性別情報を含むカラムの値が男性と女性の2つしかないような、カーディナリティの低いフィールドに有効であった。</p>
@@ -698,7 +757,7 @@ title: リリースノート
 <p>デフォルト値とNULL可能なプロパティはMilvusに大きな柔軟性を与えます。ユーザは、コレクションを作成する際に、不確かな値を持つフィールドに対してこの機能を利用することができます。また、他のデータベースシステムからMilvusへのデータ移行を簡素化し、元のデフォルト値設定を保持したままNULL値を含むデータセットを扱うことができます。</p>
 <p>詳細は<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default Value</a> を参照してください。</p>
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">FaissベースのHNSW SQ/PQ/PRQ</h4><p>Faissコミュニティとの緊密な連携により、FaissのHNSWアルゴリズムは、機能と性能の両面で大幅に改善されました。安定性と保守性を考慮し、Milvus 2.5はHNSWのサポートをhnswlibからFaissに正式に移行しました。</p>
-<p>Faissに基づき、Milvus 2.5はHNSWの複数の量子化方式をサポートし、様々なシナリオのニーズに応えます：SQ (Scalar Quantizers)、PQ (Product Quantizer)、PRQ (Product Residual Quantizer)です。SQとPQはより一般的で、SQは優れたクエリ性能と構築速度を提供し、PQは同じ圧縮率でより優れたリコールを提供する。多くのベクトルデータベースでは、SQ量子化の単純な形式であるバイナリ量子化が一般的に使われている。</p>
+<p>Faissに基づき、Milvus 2.5はHNSWの複数の量子化方式をサポートし、様々なシナリオのニーズに応えます：SQ (Scalar Quantizers)、PQ (Product Quantizer)、PRQ (Product Residual Quantizer)です。SQとPQはより一般的で、SQは優れたクエリ性能と構築速度を提供し、PQは同じ圧縮率でより優れたリコールを提供する。多くのベクトルデータベースでは、SQ量子化の単純な形式であるバイナリ量子化が一般的に使用されている。</p>
 <p>PRQはPQとAQ（Additive Quantizer）の融合である。PQと比較すると、特にバイナリ圧縮と言って、高い圧縮率でより良いリコールを実現するために、より長い構築時間を必要とする。</p>
 <h4 id="Clustering-Compaction-Beta" class="common-anchor-header">クラスタリング圧縮（ベータ）</h4><p>Milvus2.5では、大規模なコレクションの検索を高速化し、コストを削減するために、クラスタリングコンパクションが導入された。クラスタリングキーとしてスカラーフィールドを指定することで、データを範囲ごとに再分散し、保存と検索を最適化します。グローバルインデックスのように動作するこの機能により、Milvusはクラスタリングメタデータに基づいたクエリ時に効率的にデータを刈り込み、スカラーフィルタが適用された際の検索パフォーマンスを向上させることができます。</p>
 <p>詳細は<a href="/docs/ja/clustering-compaction.md">クラスタリング・コンパクションを</a>ご参照ください。</p>

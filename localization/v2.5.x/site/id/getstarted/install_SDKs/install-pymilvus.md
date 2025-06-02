@@ -60,7 +60,7 @@ title: Menginstal Milvus Python SDK
     </button></h2><p>PyMilvus tersedia di <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <div class="alert note">
 Direkomendasikan untuk menginstal versi PyMilvus yang sesuai dengan versi server Milvus yang Anda instal. Untuk informasi lebih lanjut, lihat <a href="/docs/id/release_notes.md">Catatan Rilis</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">6</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">10</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifikasi instalasi<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

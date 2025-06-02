@@ -381,7 +381,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>指定要索引的 JSON 路径。可以针对嵌套键、数组位置或两者（如<code translate="no">metadata["product_info"]["category"]</code> 或<code translate="no">metadata["tags"][0]</code> ）。如果路径缺失或数组元素不存在于某一行，则在索引过程中会跳过该行，不会抛出错误。</p></td>
+     <td><p>指定要索引的 JSON 路径。可以针对嵌套键、数组位置或两者（如<code translate="no">metadata["product_info"]["category"]</code> 或<code translate="no">metadata["tags"][0]</code> ）。如果路径缺失或数组元素不存在于某一行，则在索引过程中会跳过该行，不会出错。</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
@@ -410,7 +410,7 @@ curl --request POST \
 <li>Milvus 不会解析或转换超出你指定铸造的 JSON 键。如果源数据不一致（例如，某些行的键<code translate="no">&quot;k&quot;</code> 存储的是字符串，而其他行存储的是数字），某些行将不会被索引。</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">索引一个向量字段</h3><p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 创建了一个索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。你也可以为每个字段自定义索引类型和参数。有关详情，请参阅<a href="/docs/zh/index-explained.md">索引解释</a>。</p>
+<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">索引一个向量字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 创建了一个索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。你也可以为每个字段自定义索引类型和参数。有关详情，请参阅<a href="/docs/zh/index-explained.md">索引解释</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -874,7 +874,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了基本的标量字段筛选外，您还可以将向量相似性搜索与标量字段筛选结合起来。例如，以下代码展示了如何在向量搜索中添加标量字段过滤器：</p>
+    </button></h2><p>除了基本的标量字段筛选外，您还可以将向量相似性搜索与标量字段筛选结合起来。例如，下面的代码展示了如何在向量搜索中添加标量字段过滤器：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>

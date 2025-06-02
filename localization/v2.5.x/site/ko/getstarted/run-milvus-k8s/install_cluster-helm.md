@@ -90,7 +90,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
 <p>보관된 리포지토리는 4.0.31까지 차트에 계속 사용할 수 있습니다. 이후 릴리스에서는 대신 새 리포지토리를 사용하세요.</p>
 </div>
@@ -122,7 +122,7 @@ helm upgrade my-release zilliztech/milvus
   <ul>
     <li>릴리스 이름에는 문자, 숫자 및 대시만 포함해야 합니다. 릴리스 이름에는 점을 사용할 수 없습니다.</li>
     <li>기본 명령줄은 헬름과 함께 Milvus를 설치하는 동안 클러스터 버전의 Milvus를 설치합니다. Milvus를 독립형으로 설치할 때는 추가 설정이 필요하다.</li>
-    <li><a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">쿠버네티스의 더 이상 사용되지 않는 API 마이그레이션 가이드에</a> 따르면, v1.25부터 파드장애예산 <b>정책/v1beta1</b> API 버전은 더 이상 제공되지 않는다. 대신 <b>정책/v1</b> API 버전을 사용하도록 매니페스트와 API 클라이언트를 마이그레이션하는 것이 좋다. <br/>쿠버네티스 v1.25 이상에서 여전히 <b>정책/v1beta1</b> 버전의 파드디스럽션예산 API 버전을 사용하는 사용자를 위한 해결 방법으로, 대신 다음 명령을 실행하여 밀버스를 설치할 수 있다:<br/>. <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+    <li><a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">쿠버네티스의 더 이상 사용되지 않는 API 마이그레이션 가이드에</a> 따르면, v1.25부터 파드장애예산 <b>정책/v1beta1</b> API 버전은 더 이상 제공되지 않는다. 대신 <b>정책/v1</b> API 버전을 사용하도록 매니페스트와 API 클라이언트를 마이그레이션하는 것이 좋다. <br/>쿠버네티스 v1.25 이상에서 여전히 파드디스럽션버짓의 <b>정책/v1beta1</b> API 버전을 사용하는 사용자를 위한 해결 방법으로, 다음 명령을 실행하여 밀버스를 설치할 수 있다:<br/>. <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>자세한 내용은 <a href="https://artifacthub.io/packages/helm/milvus/milvus">밀버스 헬름 차트와</a> <a href="https://helm.sh/docs/">헬름을</a> 참고한다.</li>
   </ul>
 </div>
@@ -246,7 +246,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>다음 명령어를 실행하여 실행 중인 Milvus 클러스터를 최신 버전으로 업그레이드합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --reset-then-reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Milvus 제거<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -1,12 +1,13 @@
 ---
 id: regex-filter.md
-title: Regex
+title: RegexCompatible with Milvus 2.5.11+
 summary: >-
   Il filtro regex è un filtro di espressione regolare: qualsiasi token prodotto
   dal tokenizer viene mantenuto solo se corrisponde all'espressione fornita;
   tutto il resto viene scartato.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Regex" class="common-anchor-header">Regex<button data-href="#Regex" class="anchor-icon" translate="no">
+<h1 id="Regex" class="common-anchor-header">Regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -1,12 +1,13 @@
 ---
 id: multi-language-analyzers.md
-title: 多語言分析器
+title: 多語言分析器Compatible with Milvus 2.5.11+
 summary: >-
   當 Milvus 執行文字分析時，它通常會在資料集中的整個文字欄位應用單一分析器。如果該分析器是針對英文最佳化，它就很難應付其他語言
   (例如中文、西班牙文或法文)
   所需的非常不同的標記化和字莖規則，導致召回率降低。舉例來說，搜尋西班牙文「teléfono」（意指「電話」）一詞時，以英文為重點的分析器可能會被絆倒：它可能會去掉重音，並且不應用西班牙文特定的字莖，導致相關結果被忽略。
+beta: Milvus 2.5.11+
 ---
-<h1 id="Multi-language-Analyzers" class="common-anchor-header">多語言分析器<button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
+<h1 id="Multi-language-Analyzers" class="common-anchor-header">多語言分析器<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -439,9 +440,9 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;VarChar&quot;,
   &quot;elementTypeParams&quot;: {
     &quot;max_length&quot;: 8192,
-    &quot;enable_analyzer&quot;: true
+    &quot;enable_analyzer&quot;: true，
+    &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
   },
-  &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> sparseField=<span class="hljs-string">&#x27;{

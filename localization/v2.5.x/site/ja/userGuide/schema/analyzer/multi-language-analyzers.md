@@ -1,11 +1,12 @@
 ---
 id: multi-language-analyzers.md
-title: 多言語アナライザ
+title: 多言語アナライザCompatible with Milvus 2.5.11+
 summary: >-
   Milvusがテキスト分析を行う場合、通常、コレクション内のテキストフィールド全体に単一の分析器を適用します。その分析ツールが英語用に最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる非常に異なるトークン化やステミングのルールと格闘することになり、結果として想起率が低下します。たとえば、スペイン語の「teléfono」（「電話」を意味する）を検索すると、英語に特化したアナライザはつまずきます。
   アクセントが削除され、スペイン語固有のステミングが適用されないため、関連する結果が見落とされる可能性があります。
+beta: Milvus 2.5.11+
 ---
-<h1 id="Multi-language-Analyzers" class="common-anchor-header">多言語アナライザ<button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
+<h1 id="Multi-language-Analyzers" class="common-anchor-header">多言語アナライザ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,7 +86,7 @@ summary: >-
 <li><p>様々な言語のテキストを含む文書を追加し、各文書にはどの解析器を使用するかを指定する識別子値が含まれる。</p></li>
 <li><p>Milvusは識別子フィールドに基づいて適切な分析器を選択し、識別子が不明な文書は<code translate="no">default</code> 。</p></li>
 </ul></li>
-<li><p><strong>言語固有のアナライザを使用した検索</strong>：</p>
+<li><p><strong>言語固有のアナライザによる検索</strong>：</p>
 <ul>
 <li><p>Milvusは指定された解析器を使用してクエリを処理します。</p></li>
 <li><p>言語固有のルールに従ってトークン化が行われ、類似性に基づいてその言語に適した検索結果が返される。</p></li>
@@ -106,7 +107,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">multi_analyzer_params</code> 、Milvusが各エンティティに適切なアナライザーを選択する方法を決定する1つのJSONオブジェクトです：</p>
+    </button></h2><p><code translate="no">multi_analyzer_params</code> 、Milvusが各エンティティに適切な解析器を選択する方法を決定する単一のJSONオブジェクトです：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">multi_analyzer_params = {
@@ -438,9 +439,9 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;VarChar&quot;,
   &quot;elementTypeParams&quot;: {
     &quot;max_length&quot;: 8192,
-    &quot;enable_analyzer&quot;: true
+    &quot;enable_analyzer&quot;: true，
+    &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
   },
-  &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> sparseField=<span class="hljs-string">&#x27;{

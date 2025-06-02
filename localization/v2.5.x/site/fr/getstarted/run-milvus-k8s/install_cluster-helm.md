@@ -90,7 +90,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
 <p>Le dépôt archivé est toujours disponible pour les cartes jusqu'à la version 4.0.31. Pour les versions ultérieures, utilisez plutôt le nouveau repo.</p>
 </div>
@@ -161,7 +161,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <div class="alert note">
 <p>Si vous avez déployé Milvus en mode autonome, modifiez le nom du pod de <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> à <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>.</p>
 </div>
-<p>Ensuite, exécutez la commande suivante pour transférer un port local vers le port sur lequel Milvus fonctionne.</p>
+<p>Ensuite, exécutez la commande suivante pour transférer un port local vers le port auquel Milvus sert.</p>
 <pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus 27017:19530
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -246,7 +246,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Exécutez la commande suivante pour mettre à niveau votre cluster Milvus en cours d'exécution vers la dernière version :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --reset-then-reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Désinstaller Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

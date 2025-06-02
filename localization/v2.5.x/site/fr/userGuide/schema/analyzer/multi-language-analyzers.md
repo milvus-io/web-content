@@ -1,6 +1,6 @@
 ---
 id: multi-language-analyzers.md
-title: Analyseurs multilingues
+title: Analyseurs multilinguesCompatible with Milvus 2.5.11+
 summary: >-
   Lorsque Milvus effectue une analyse de texte, il applique généralement un
   analyseur unique à l'ensemble d'un champ de texte d'une collection. Si cet
@@ -10,10 +10,11 @@ summary: >-
   plus faible. Par exemple, une recherche portant sur le mot espagnol "teléfono"
   (qui signifie "téléphone") ferait trébucher un analyseur axé sur l'anglais :
   il pourrait laisser tomber l'accent et ne pas appliquer de troncature
-  spécifique à l'espagnol, ce qui ferait passer des résultats pertinents à la
-  trappe.
+  spécifique à l'espagnol, ce qui ferait passer des résultats pertinents
+  inaperçus.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Multi-language-Analyzers" class="common-anchor-header">Analyseurs multilingues<button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
+<h1 id="Multi-language-Analyzers" class="common-anchor-header">Analyseurs multilingues<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -446,9 +447,9 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;VarChar&quot;,
   &quot;elementTypeParams&quot;: {
     &quot;max_length&quot;: 8192,
-    &quot;enable_analyzer&quot;: true
+    &quot;enable_analyzer&quot;: true，
+    &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
   },
-  &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> sparseField=<span class="hljs-string">&#x27;{

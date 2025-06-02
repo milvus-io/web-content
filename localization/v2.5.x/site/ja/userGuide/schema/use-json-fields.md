@@ -75,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>この JSON フィールド<code translate="no">metadata</code> をコレクションスキーマに追加するには、<code translate="no">DataType.JSON</code> を使用します。以下の例では、ヌル値を許可する JSON フィールド<code translate="no">metadata</code> を定義しています：</p>
+    </button></h2><p>この JSON フィールド<code translate="no">metadata</code> をコレクションスキーマに追加するには、<code translate="no">DataType.JSON</code> を使用します。以下の例では、NULL 値を許可する JSON フィールド<code translate="no">metadata</code> を定義しています：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
@@ -387,7 +387,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Milvusがインデックスを作成する際に、抽出されたJSON値をキャストするデータ型。有効な値</p><ul><li><code translate="no">"bool"</code> または<code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> または<code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> or<code translate="no">"VARCHAR"</code><strong>注意</strong>: 整数値の場合、Milvusは内部的にdoubleをインデックスに使用します。2^53以上の大きな整数は精度を失います。(型の不一致により)型キャストに失敗した場合、エラーは発生せず、その行の値はインデックスされません。</li></ul></td>
+     <td><p>Milvusがインデックスを作成する際に、抽出されたJSON値をキャストするデータ型。有効な値</p><ul><li><code translate="no">"bool"</code> または<code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> または<code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> or<code translate="no">"VARCHAR"</code><strong>注意</strong>: 整数値の場合、Milvusは内部的にdoubleをインデックスに使用します。2^53以上の大きな整数は精度を失います。(型の不一致により)型キャストに失敗した場合、エラーは発生せず、その行の値はインデックス化されません。</li></ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -411,7 +411,7 @@ curl --request POST \
 <li>Milvusは指定されたキャスティングを超えるJSONキーの解析や変換を行いません。ソースデータに一貫性がない場合(例えば、キー<code translate="no">&quot;k&quot;</code> に文字列を格納する行と数値を格納する行がある)、インデックスが作成されない行があります。</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">ベクトル・フィールドのインデックス</h3><p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス型を使用して、ベクトルフィールド<code translate="no">embedding</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて最適なインデックスを自動的に選択します。各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細については、「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」を参照してください。</p>
+<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">ベクトル・フィールドのインデックス<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス型を使用して、ベクトルフィールド<code translate="no">embedding</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて最適なインデックスを自動的に選択します。各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細については、「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」を参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -707,9 +707,9 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>エンティティの挿入後、<code translate="no">query</code> メソッドを使用して、指定したフィルタ式に一致するエンティティを取得します。</p>
+    </button></h2><p>エンティティの挿入後、<code translate="no">query</code> メソッドを使用して、指定されたフィルター式に一致するエンティティを取得します。</p>
 <div class="alert note">
-<p>NULL 値を許可する JSON フィールドの場合、JSON オブジェクト全体がないか、<code translate="no">None</code> に設定されていると、フィールドは NULL として扱われます。詳細については、「<a href="/docs/ja/basic-operators.md#JSON-Fields-with-Null-Values">NULL 値を持つ JSON フィールド</a>」を参照してください。</p>
+<p>NULL 値を許容する JSON フィールドの場合、JSON オブジェクト全体がないか、<code translate="no">None</code> に設定されていると、フィールドは NULL として扱われます。詳細については、「<a href="/docs/ja/basic-operators.md#JSON-Fields-with-Null-Values">NULL 値を持つ JSON フィールド</a>」を参照してください。</p>
 </div>
 <p><code translate="no">metadata</code> が NULL ではないエンティティを取得するには：</p>
 <div class="multipleCode">
@@ -982,4 +982,4 @@ curl --request POST \
 
 <span class="hljs-comment">##{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>さらに、Milvusは、<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 、<code translate="no">JSON_CONTAINS_ANY</code> などの高度なJSONフィルタリング演算子をサポートしており、クエリ機能をさらに強化することができます。詳細については、<a href="/docs/ja/json-operators.md">JSON演算</a>子を参照してください。</p>
+<p>さらに、Milvusは<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 、<code translate="no">JSON_CONTAINS_ANY</code> などの高度なJSONフィルタリング演算子をサポートしており、クエリ機能をさらに強化することができます。詳細については、<a href="/docs/ja/json-operators.md">JSON演算</a>子を参照してください。</p>

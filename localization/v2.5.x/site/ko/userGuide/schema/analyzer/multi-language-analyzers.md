@@ -1,13 +1,14 @@
 ---
 id: multi-language-analyzers.md
-title: 다중 언어 분석기
+title: 다중 언어 분석기Compatible with Milvus 2.5.11+
 summary: >-
   Milvus는 텍스트 분석을 수행할 때 일반적으로 컬렉션의 전체 텍스트 필드에 단일 분석기를 적용합니다. 이 분석기가 영어에 최적화된 경우
   중국어, 스페인어 또는 프랑스어와 같은 다른 언어에 필요한 토큰화 및 어간 규칙이 매우 달라서 리콜률이 낮아질 수 있습니다. 예를 들어,
   스페인어 단어 "teléfono"('전화'라는 뜻)를 검색하면 영어에 초점을 맞춘 분석기가 악센트를 삭제하고 스페인어 전용 어간을 적용하지
   않아 관련 결과를 간과하게 될 수 있습니다.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Multi-language-Analyzers" class="common-anchor-header">다중 언어 분석기<button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
+<h1 id="Multi-language-Analyzers" class="common-anchor-header">다중 언어 분석기<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -440,9 +441,9 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;VarChar&quot;,
   &quot;elementTypeParams&quot;: {
     &quot;max_length&quot;: 8192,
-    &quot;enable_analyzer&quot;: true
+    &quot;enable_analyzer&quot;: true，
+    &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
   },
-  &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> sparseField=<span class="hljs-string">&#x27;{
@@ -924,7 +925,7 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Strong&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">중국어 분석기 사용</h3><p>이 예에서는 다른 쿼리 텍스트에 대해 중국어 분석기(별칭 <code translate="no">&quot;cn&quot;</code>)로 전환하는 방법을 보여 줍니다. 다른 모든 매개 변수는 동일하게 유지되지만 이제 쿼리 텍스트는 중국어 전용 토큰화 규칙을 사용하여 처리됩니다.</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">중국어 분석기 사용</h3><p>이 예는 다른 쿼리 텍스트에 대해 중국어 분석기(별칭 <code translate="no">&quot;cn&quot;</code>)로 전환하는 것을 보여줍니다. 다른 모든 매개 변수는 동일하게 유지되지만 이제 쿼리 텍스트는 중국어 전용 토큰화 규칙을 사용하여 처리됩니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>

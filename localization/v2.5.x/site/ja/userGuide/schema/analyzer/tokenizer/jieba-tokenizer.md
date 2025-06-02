@@ -81,7 +81,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>パラメータの詳細については、<a href="/docs/ja/jieba-tokenizer.md#Custom-configuration">カスタム</a>構成を参照してください。</p>
-<h3 id="Custom-configuration" class="common-anchor-header">カスタム設定</h3><p>より詳細に制御するには、カスタム辞書を指定し、セグメンテーション・モードを選択し、隠れマルコフ・モデル (HMM) を有効または無効にするカスタム設定を提供できます。例えば</p>
+<h3 id="Custom-configuration" class="common-anchor-header">カスタム設定</h3><p>より詳細に制御するには、カスタム辞書を指定し、セグメンテーションモードを選択し、隠れマルコフモデル（HMM）を有効または無効にするカスタム構成を提供できます。例えば</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom configuration with user-defined settings</span>
@@ -183,7 +183,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#javascript">Java NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURLを使用した</a>検証</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,

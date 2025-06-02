@@ -1,14 +1,15 @@
 ---
 id: removepunct-filter.md
-title: Eliminar signos de puntuación
+title: Eliminar signos de puntuaciónCompatible with Milvus 2.5.11+
 summary: >-
   El filtro removepunct elimina los signos de puntuación, los espacios y los
   saltos de línea que algunos tokenizadores -como jieba, lindera e icu-
   conservan normalmente. Utilícelo cuando desee un flujo de tokens más limpio
   que sólo contenga tokens de texto con sentido, sin comas, puntos ni otros
   signos de puntuación.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Eliminar signos de puntuación<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Eliminar signos de puntuación<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
