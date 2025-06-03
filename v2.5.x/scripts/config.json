@@ -269,6 +269,26 @@
                         "token": "ZDYIwC1HwhTrdlbfOgNcOZ4OnWg",
                         "type": "board",
                         "alt_text": "multi-language-analyzers-workflow"
+                    },
+                    {
+                        "token": "VPhswBhHmhJrh3byaVnc3onYnPc",
+                        "type": "board",
+                        "alt_text": "sparse-vector-representation"
+                    },
+                    {
+                        "token": "A7FvwnB5bhpBlKbgrzYcQijbnxg",
+                        "type": "board",
+                        "alt_text": "sparse-vector-workflow"
+                    },
+                    {
+                        "token": "Qx7UwgI6jhrku8bAxZqcYxZMnSe",
+                        "type": "board",
+                        "alt_text": "hybrid-search-workflow"
+                    },
+                    {
+                        "token": "Kc3Cweq1AhAmMGbrVgRcTlTKnUf",
+                        "type": "board",
+                        "alt_text": "data-model-anatomy"
                     }
                 ]
             }
