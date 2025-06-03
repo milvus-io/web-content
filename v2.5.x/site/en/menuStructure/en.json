@@ -56,9 +56,15 @@
         "children": []
       },
       {
+        "label": "Data Model Design for Search",
+        "id": "schema-hands-on.md",
+        "order": 1,
+        "children": []
+      },
+      {
         "label": "Install Milvus",
         "id": "install_milvus",
-        "order": 1,
+        "order": 2,
         "isMenu": true,
         "children": [
           {
@@ -158,12 +164,6 @@
             ]
           }
         ]
-      },
-      {
-        "label": "Data Model Design for Search",
-        "id": "schema-hands-on.md",
-        "order": 2,
-        "children": []
       },
       {
         "label": "Install SDKs",
