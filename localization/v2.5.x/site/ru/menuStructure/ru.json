@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -160,9 +160,15 @@
         ]
       },
       {
+        "label": "Разработка модели данных для поиска",
+        "id": "schema-hands-on.md",
+        "order": 2,
+        "children": []
+      },
+      {
         "label": "Установите SDK",
         "id": "install_sdks",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "PyMilvus",
@@ -620,12 +626,6 @@
             "label": "Изменить поле коллекции",
             "id": "alter-collection-field.md",
             "order": 12,
-            "children": []
-          },
-          {
-            "label": "Руки вверх",
-            "id": "schema-hands-on.md",
-            "order": 13,
             "children": []
           }
         ]

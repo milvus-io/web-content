@@ -160,9 +160,15 @@
         ]
       },
       {
+        "label": "Conception d'un modèle de données pour la recherche",
+        "id": "schema-hands-on.md",
+        "order": 2,
+        "children": []
+      },
+      {
         "label": "Installer les SDK",
         "id": "install_sdks",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "PyMilvus",
@@ -620,12 +626,6 @@
             "label": "Modifier le champ de collecte",
             "id": "alter-collection-field.md",
             "order": 12,
-            "children": []
-          },
-          {
-            "label": "Travaux pratiques",
-            "id": "schema-hands-on.md",
-            "order": 13,
             "children": []
           }
         ]
@@ -1845,7 +1845,7 @@
             "children": []
           },
           {
-            "label": "PrivateGPT",
+            "label": "PrivéGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []

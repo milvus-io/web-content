@@ -160,9 +160,15 @@
         ]
       },
       {
+        "label": "Desain Model Data untuk Pencarian",
+        "id": "schema-hands-on.md",
+        "order": 2,
+        "children": []
+      },
+      {
         "label": "Menginstal SDK",
         "id": "install_sdks",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "PyMilvus",
@@ -620,12 +626,6 @@
             "label": "Ubah Bidang Koleksi",
             "id": "alter-collection-field.md",
             "order": 12,
-            "children": []
-          },
-          {
-            "label": "Hands-On",
-            "id": "schema-hands-on.md",
-            "order": 13,
             "children": []
           }
         ]

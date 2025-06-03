@@ -958,7 +958,7 @@
     "v2.5.x/site/en/about/milvus_adopters.md": "2025-01-14T08:40:20.649Z",
     "v2.5.x/site/en/about/overview.md": "2025-04-10T02:38:08.132Z",
     "v2.5.x/site/en/about/roadmap.md": "2025-03-10T08:26:35.775Z",
-    "v2.5.x/site/en/menuStructure/en.json": "2025-05-26T09:37:49.403Z",
+    "v2.5.x/site/en/menuStructure/en.json": "2025-06-03T03:46:15.544Z",
     "v2.5.x/site/en/adminGuide/allocate.md": "2025-01-14T08:43:02.166Z",
     "v2.5.x/site/en/adminGuide/authenticate.md": "2025-01-14T08:43:03.251Z",
     "v2.5.x/site/en/adminGuide/chunk_cache.md": "2025-01-14T08:43:04.262Z",
@@ -1224,7 +1224,7 @@
     "v2.5.x/site/en/userGuide/schema/primary-field.md": "2025-04-23T11:21:13.339Z",
     "v2.5.x/site/en/userGuide/schema/schema-hands-on.md": "2025-04-23T11:21:34.635Z",
     "v2.5.x/site/en/userGuide/schema/schema.md": "2025-04-10T02:42:06.984Z",
-    "v2.5.x/site/en/userGuide/schema/sparse_vector.md": "2025-04-23T11:21:52.665Z",
+    "v2.5.x/site/en/userGuide/schema/sparse_vector.md": "2025-06-03T03:31:51.035Z",
     "v2.5.x/site/en/userGuide/schema/string.md": "2025-05-05T08:36:29.478Z",
     "v2.5.x/site/en/userGuide/schema/use-json-fields.md": "2025-06-02T08:43:08.571Z",
     "v2.5.x/site/en/userGuide/search-query-get/boolean/array-operators.md": "2025-04-23T11:23:05.613Z",
@@ -1240,7 +1240,7 @@
     "v2.5.x/site/en/userGuide/search-query-get/grouping-search.md": "2025-04-23T11:25:49.870Z",
     "v2.5.x/site/en/userGuide/search-query-get/keyword-match.md": "2025-04-23T11:26:06.604Z",
     "v2.5.x/site/en/userGuide/search-query-get/mmap.md": "2025-04-23T11:26:39.250Z",
-    "v2.5.x/site/en/userGuide/search-query-get/multi-vector-search.md": "2025-05-16T10:09:09.695Z",
+    "v2.5.x/site/en/userGuide/search-query-get/multi-vector-search.md": "2025-06-03T03:32:13.477Z",
     "v2.5.x/site/en/userGuide/search-query-get/range-search.md": "2025-04-23T11:27:15.604Z",
     "v2.5.x/site/en/userGuide/search-query-get/reranking.md": "2025-04-23T11:27:42.053Z",
     "v2.5.x/site/en/userGuide/search-query-get/single-vector-search.md": "2025-05-16T10:09:32.980Z",
@@ -1309,7 +1309,8 @@
     "v2.5.x/site/en/integrations/milvus_and_n8n.md": "2025-05-16T10:05:56.176Z",
     "v2.5.x/site/en/integrations/use_milvus_in_anythingllm.md": "2025-05-16T10:06:06.604Z",
     "v2.5.x/site/en/userGuide/schema/analyzer/multi-language-analyzers.md": "2025-06-02T08:41:57.562Z",
-    "v2.5.x/site/en/integrations/NLWeb_with_milvus.md": "2025-05-21T22:21:15.709Z"
+    "v2.5.x/site/en/integrations/NLWeb_with_milvus.md": "2025-05-21T22:21:15.709Z",
+    "v2.5.x/site/en/getstarted/schema-hands-on.md": "2025-06-03T03:31:31.836Z"
   },
   "v2.6.x": {
     "v2.6.x/site/en/about/comparison.md": "2025-05-28T08:34:22.013Z",

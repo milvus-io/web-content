@@ -160,9 +160,15 @@
         ]
       },
       {
+        "label": "搜索数据模型设计",
+        "id": "schema-hands-on.md",
+        "order": 2,
+        "children": []
+      },
+      {
         "label": "安装 SDK",
         "id": "install_sdks",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "PyMilvus",
@@ -620,12 +626,6 @@
             "label": "更改 Collections 字段",
             "id": "alter-collection-field.md",
             "order": 12,
-            "children": []
-          },
-          {
-            "label": "动手操作",
-            "id": "schema-hands-on.md",
-            "order": 13,
             "children": []
           }
         ]
@@ -1528,7 +1528,7 @@
         "children": []
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [

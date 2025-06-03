@@ -160,9 +160,15 @@
         ]
       },
       {
+        "label": "Diseño del modelo de datos para la búsqueda",
+        "id": "schema-hands-on.md",
+        "order": 2,
+        "children": []
+      },
+      {
         "label": "Instalar SDK",
         "id": "install_sdks",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "PyMilvus",
@@ -620,12 +626,6 @@
             "label": "Alterar campo de recogida",
             "id": "alter-collection-field.md",
             "order": 12,
-            "children": []
-          },
-          {
-            "label": "Práctico",
-            "id": "schema-hands-on.md",
-            "order": 13,
             "children": []
           }
         ]

@@ -160,9 +160,15 @@
         ]
       },
       {
+        "label": "검색을 위한 데이터 모델 설계",
+        "id": "schema-hands-on.md",
+        "order": 2,
+        "children": []
+      },
+      {
         "label": "SDK 설치",
         "id": "install_sdks",
-        "order": 2,
+        "order": 3,
         "children": [
           {
             "label": "PyMilvus",
@@ -620,12 +626,6 @@
             "label": "수집 필드 변경",
             "id": "alter-collection-field.md",
             "order": 12,
-            "children": []
-          },
-          {
-            "label": "실습",
-            "id": "schema-hands-on.md",
-            "order": 13,
             "children": []
           }
         ]

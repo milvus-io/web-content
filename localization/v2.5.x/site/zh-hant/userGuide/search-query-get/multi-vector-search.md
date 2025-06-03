@@ -1,11 +1,13 @@
 ---
 id: multi-vector-search.md
-title: 混合搜尋
+title: 多向量混合搜尋
 summary: >-
-  混合搜尋指的是一種同時進行多個 ANN 搜尋、從這些 ANN
-  搜尋中重新排序多組結果，並最終返回單一結果集的搜尋方法。使用混合搜尋可以提高搜尋準確度。Milvus 支援在具有多向量領域的集合上進行混合搜尋。
+  在許多應用程式中，可以透過豐富的資訊（例如標題和描述）或多種模式（例如文字、影像和音訊）來搜尋物件。例如，包含一段文字和一張圖片的
+  tweet，如果文字或圖片符合搜尋查詢的語意，就會被搜尋。混合搜尋透過結合這些不同領域的搜尋來增強搜尋體驗。Milvus
+  支援此功能，允許在多向量領域進行搜尋，同時進行多個近似近鄰 (ANN)
+  搜尋。如果您想要同時搜尋文字與影像、描述同一物件的多個文字欄位，或是密集與稀疏向量，多向量混合搜尋對改善搜尋品質特別有用。
 ---
-<h1 id="Hybrid-Search" class="common-anchor-header">混合搜尋<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
+<h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">多向量混合搜尋<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,61 +22,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>混合搜尋指的是一種同時進行多個 ANN 搜尋、從這些 ANN 搜尋中重新排序多組結果，並最終返回單一結果集的搜尋方法。使用混合搜尋可以提高搜尋準確性。Milvus 支援在具有多向量領域的集合上執行混合搜尋。</p>
-<p>Hybrid Search 最常用於稀疏密集向量搜尋和多模式搜尋等情況。本指南將用一個具體的例子來演示如何在 Milvus 中進行混合搜索。</p>
-<h2 id="Scenarios" class="common-anchor-header">場景<button data-href="#Scenarios" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>混合搜尋適用於以下兩種情況：</p>
-<h3 id="Sparse-Dense-Vector-Search" class="common-anchor-header">稀疏-密集向量搜尋</h3><p>不同類型的向量可以代表不同的資訊，使用不同的嵌入模型可以更全面地代表資料的不同特徵和面向。例如，對同一句子使用不同的嵌入模型，可以產生表示語義的密集向量和表示句子中詞彙頻率的稀疏向量。</p>
-<ul>
-<li><p><strong>稀疏向量：</strong>稀疏向量的特點是向量維度高，而且只有很少的非零值存在。這種結構使它們特別適合傳統的資訊檢索應用。在大多數情況下，稀疏向量所使用的維數對應於一種或多種語言的不同詞彙。每個維度都會被指定一個值，表示該標記在文件中的相對重要性。對於涉及關鍵字比對的任務而言，這種佈局很有優勢。</p></li>
-<li><p><strong>密集向量：</strong>密集向量是源自於神經網路的嵌入。當排列成有序陣列時，這些向量可以捕捉輸入文字的語意精髓。請注意，密集向量並不限於文字處理；它們也被廣泛用於電腦視覺，以表示視覺資料的語意。這些密集向量通常是由文字嵌入模型產生，其特點是大部分或所有元素都非零。因此，密集向量對於語意搜尋應用特別有效，因為即使沒有完全符合的關鍵字，它們也能根據向量距離傳回最相似的結果。此功能可讓搜尋結果更細緻、更能感知上下文，通常可捕捉基於關鍵字的方法可能遺漏的概念之間的關係。</p></li>
-</ul>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>和<a href="/docs/zh-hant/dense-vector.md">Dense Vector</a>。</p>
-<h3 id="Multimodal-Search" class="common-anchor-header">多模式搜尋</h3><p>多模態搜尋是指跨多種模態（如圖像、視訊、音訊、文字等）的非結構化資料相似性搜尋。例如，可以使用指紋、聲紋和臉部特徵等多種模式的資料來表示一個人。混合搜尋支援同時進行多重搜尋。例如，使用相似的指紋和聲紋搜尋一個人。</p>
-<h2 id="Workflow" class="common-anchor-header">工作流程<button data-href="#Workflow" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>進行混合搜尋的主要工作流程如下：</p>
-<ol>
-<li><p>透過<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI">Transformers</a> 等嵌入模型產生密集向量。</p></li>
-<li><p>透過<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3">BGE-M3</a>、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE">SPLADE</a> 等嵌入模型產生稀疏向量。</p></li>
-<li><p>在 Milvus 中建立一個集合，並定義集合模式，其中包含密集與稀疏向量領域。</p></li>
-<li><p>將稀疏密集向量插入上一步中剛建立的集合中。</p></li>
-<li><p>進行混合搜尋：稠密向量上的 ANN Search 將會傳回一組 Top-K 最相似的結果，而稀疏向量上的文字匹配也會傳回一組 Top-K 結果。</p></li>
-<li><p>歸一化：將兩組 Top-K 結果的分數歸一化，將分數轉換為 [0,1] 之間的範圍。</p></li>
-<li><p>選擇合適的重新排序策略來合併兩組 Top-K 結果並進行重新排序，最終傳回一組 Top-K 結果。</p></li>
-</ol>
+    </button></h1><p>在許多應用程式中，可以透過豐富的資訊（例如標題和描述）或多種模式（例如文字、影像和音訊）來搜尋物件。例如，包含一段文字和一張圖片的 tweet，如果文字或圖片符合搜尋查詢的語意，就會被搜尋。混合搜尋透過結合這些不同領域的搜尋來增強搜尋體驗。Milvus 支援此功能，允許在多向量領域進行搜尋，同時進行多個近似近鄰 (ANN) 搜尋。如果您要同時搜尋文字和影像、描述同一物件的多個文字欄位，或密集和稀疏向量以改善搜尋品質，多向量混合搜尋就特別有用。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hybrid-search.png" alt="Hybrid Search" class="doc-image" id="hybrid-search" />
-   </span> <span class="img-wrapper"> <span>混合搜尋</span> </span></p>
-<h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
+   </span> <span class="img-wrapper"> <span>混合搜尋工作流程</span> </span></p>
+<p>多向量混合搜尋整合了不同的搜尋方法，或跨越各種模式的嵌入：</p>
+<ul>
+<li><p><strong>稀疏-密集向量搜尋</strong>：<a href="/docs/zh-hant/dense-vector.md">Dense Vector</a>是捕捉語意關係的絕佳方法，而<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>則是精確關鍵字比對的高效方法。混合搜尋結合了這些方法，既能提供廣泛的概念理解，又能提供精確的詞彙相關性，從而改善搜尋結果。混合搜尋利用每種方法的優點，克服獨立方法的限制，為複雜的查詢提供更好的效能。以下是結合語意搜尋與全文檢索的混合式檢索的詳細<a href="/docs/zh-hant/full_text_search_with_milvus.md">指南</a>。</p></li>
+<li><p><strong>多模式向量搜尋</strong>：多模態向量搜尋是一種功能強大的技術，可讓您跨各種資料類型進行搜尋，包括文字、影像、音訊等。這種方法的主要優勢在於它能將不同的模式統一為無縫且具凝聚力的搜尋體驗。例如，在產品搜尋中，使用者可能會輸入文字查詢，以尋找以文字和影像描述的產品。透過混合搜尋方法結合這些模式，您可以提高搜尋準確度或豐富搜尋結果。</p></li>
+</ul>
+<h2 id="Example" class="common-anchor-header">範例<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -89,21 +47,43 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本節將使用一個特定範例來說明如何在稀疏密集向量上進行混合搜尋，以提高文字搜尋的精確度。</p>
-<h3 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">建立具有多向量欄位的集合</h3><p>建立集合的過程包括三個部分：定義集合模式、配置索引參數，以及建立集合。</p>
-<h4 id="Define-schema" class="common-anchor-header">定義模式</h4><p>在本範例中，需要在集合模式中定義多個向量欄位。目前，每個集合預設最多可包含 4 個向量欄位。但您也可以根據需要修改<code translate="no">proxy.maxVectorFieldNum</code> 的值，在集合中最多包含 10 個向量欄位。</p>
-<p>以下範例定義了一個集合模式，其中<code translate="no">dense</code> 和<code translate="no">sparse</code> 是兩個向量欄位：</p>
+    </button></h2><p>讓我們考慮一個真實世界的使用案例，其中每個產品都包含文字說明和圖片。根據可用的資料，我們可以進行三種類型的搜尋：</p>
 <ul>
-<li><p><code translate="no">id</code>:這個欄位作為儲存文字 ID 的主索引鍵。這個欄位的資料類型是 INT64。</p></li>
-<li><p><code translate="no">text</code>:這個欄位用來儲存文字內容。這個欄位的資料類型是 VARCHAR，最大長度為 1000 個字元。</p></li>
-<li><p><code translate="no">dense</code>:這個欄位用來儲存文字的密集向量。這個欄位的資料類型是 FLOAT_VECTOR，向量尺寸是 768。</p></li>
-<li><p><code translate="no">sparse</code>:這個欄位用來儲存文字的稀疏向量。這個欄位的資料類型是 SPARSE_FLOAT_VECTOR。</p></li>
+<li><p><strong>語意文字搜尋：</strong>這包括使用密集向量來查詢產品的文字說明。可以使用<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>等模型或<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a> 等服務來產生文字內嵌。</p></li>
+<li><p><strong>全文檢索</strong>：在此，我們使用關鍵字匹配稀疏向量來查詢產品的文字描述。<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>等演算法或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a>或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>等稀疏嵌入模型都可以用來達到此目的。</p></li>
+<li><p><strong>多模態影像搜尋：</strong>此方法使用密集向量的文字查詢來查詢影像。圖像嵌入可以使用<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a> 等模型產生。</p></li>
 </ul>
+<p>本指南將引導您參考一個結合上述搜尋方法的多模態混合搜尋範例，給定產品的原始文字描述和圖像嵌入。我們將示範如何儲存多向量資料，並使用重排策略執行混合搜尋。</p>
+<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">以多向量欄位建立集合<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>建立集合的過程包含三個關鍵步驟：定義集合模式、配置索引參數，以及建立集合。</p>
+<h3 id="Define-schema" class="common-anchor-header">定義模式</h3><p>對於多向量混合搜尋，我們應該在一個集合模式中定義多個向量欄位。預設情況下，每個集合最多可容納 4 個向量欄位。但是，如果有必要，您可以調整<code translate="no">proxy.maxVectorFieldNum</code> ，以根據需要在一個集合中最多包含 10 個向量欄位。</p>
+<p>本範例在模式中加入下列欄位：</p>
+<ul>
+<li><p><code translate="no">id</code>:作為儲存文字 ID 的主索引鍵。這個欄位的資料類型是<code translate="no">INT64</code> 。</p></li>
+<li><p><code translate="no">text</code>:用於儲存文字內容。此欄位的資料類型為<code translate="no">VARCHAR</code> ，最大長度為 1000 位元組。<code translate="no">enable_analyzer</code> 選項設定為<code translate="no">True</code> ，以方便全文檢索。</p></li>
+<li><p><code translate="no">text_dense</code>:用於儲存文字的密集向量。此欄位的資料類型為<code translate="no">FLOAT_VECTOR</code> ，向量尺寸為 768。</p></li>
+<li><p><code translate="no">text_sparse</code>:用於儲存文字的稀疏向量。這個欄位的資料類型是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
+<li><p><code translate="no">image_dense</code>:用於儲存產品影像的密集向量。此欄位的資料類型為<code translate="no">FLOAT_VETOR</code> ，向量維度為 512。</p></li>
+</ul>
+<p>由於我們會使用內建的 BM25 演算法來對文字欄位執行全文檢索，因此有必要在模式中加入 Milvus<code translate="no">Function</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create a collection in customized setup mode</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
-    MilvusClient, DataType
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
+    MilvusClient, DataType, Function, FunctionType
 )
 
 client = MilvusClient(
@@ -111,22 +91,34 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Create schema</span>
-schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
-)
+<span class="hljs-comment"># Init schema with auto_id disabled</span>
+schema = MilvusClient.create_schema(auto_id=<span class="hljs-literal">False</span>)
+
 <span class="hljs-comment"># Add fields to schema</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
-schema.add_field(field_name=<span class="hljs-string">&quot;dense&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;product id&quot;</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;raw text of product description&quot;</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;text_dense&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;text dense embedding&quot;</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;text_sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;text sparse embedding auto-generated by the built-in BM25 function&quot;</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;image_dense&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">512</span>, description=<span class="hljs-string">&quot;image dense embedding&quot;</span>)
+
+<span class="hljs-comment"># Add function to schema</span>
+bm25_function = Function(
+    name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>,
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+    output_field_names=[<span class="hljs-string">&quot;text_sparse&quot;</span>],
+    function_type=FunctionType.BM25,
+)
+schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+<span class="hljs-keyword">import</span> java.util.*;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -134,6 +126,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;dense&quot;</span>, 
         .build());
 
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
+
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
         .dataType(DataType.Int64)
@@ -145,17 +138,31 @@ schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;text&quot;</span>)
         .dataType(DataType.VarChar)
         .maxLength(<span class="hljs-number">1000</span>)
+        .enableAnalyzer(<span class="hljs-literal">true</span>)
         .build());
 
 schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;dense&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;text_dense&quot;</span>)
         .dataType(DataType.FloatVector)
-        .dimension(<span class="hljs-number">5</span>)
+        .dimension(<span class="hljs-number">768</span>)
         .build());
 
 schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
         .dataType(DataType.SparseFloatVector)
+        .build());
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;image_dense&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">512</span>)
+        .build());
+
+schema.addFunction(Function.builder()
+        .functionType(FunctionType.BM25)
+        .name(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text_sparse&quot;</span>))
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
@@ -181,7 +188,14 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 }
 <span class="hljs-keyword">defer</span> client.Close(ctx)
 
-schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">true</span>)
+function := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>).
+    WithInputFields(<span class="hljs-string">&quot;text&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;text_sparse&quot;</span>).
+    WithType(entity.FunctionTypeBM25)
+
+schema := entity.NewSchema()
+
 schema.WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;id&quot;</span>).
     WithDataType(entity.FieldTypeInt64).
@@ -189,15 +203,20 @@ schema.WithField(entity.NewField().
 ).WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;text&quot;</span>).
     WithDataType(entity.FieldTypeVarChar).
+    WithEnableAnalyzer(<span class="hljs-literal">true</span>).
     WithMaxLength(<span class="hljs-number">1000</span>),
 ).WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;sparse&quot;</span>).
+    WithName(<span class="hljs-string">&quot;text_dense&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">768</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;text_sparse&quot;</span>).
     WithDataType(entity.FieldTypeSparseVector),
 ).WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;dense&quot;</span>).
+    WithName(<span class="hljs-string">&quot;image_dense&quot;</span>).
     WithDataType(entity.FieldTypeFloatVector).
-    WithDim(<span class="hljs-number">5</span>),
-)
+    WithDim(<span class="hljs-number">512</span>),
+).WithFunction(function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -205,7 +224,6 @@ schema.WithField(entity.NewField().
 <span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
 
-<span class="hljs-comment">// Create a collection in customized setup mode</span>
 <span class="hljs-comment">// Define fields</span>
 <span class="hljs-keyword">const</span> fields = [
     {
@@ -217,22 +235,48 @@ schema.WithField(entity.NewField().
     {
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
-        <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>
+        <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>,
+        <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>
     },
     {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_dense&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+        <span class="hljs-attr">dim</span>: <span class="hljs-number">768</span>
+    },
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">SPARSE_FLOAT_VECTOR</span>
     },
     {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;image_dense&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
-        <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
+        <span class="hljs-attr">dim</span>: <span class="hljs-number">512</span>
     }
-]
+];
+
+<span class="hljs-comment">// define function</span>
+<span class="hljs-keyword">const</span> functions = [
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_bm25_emb&quot;</span>,
+      <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;text bm25 function&quot;</span>,
+      <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">BM25</span>,
+      <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;text&quot;</span>],
+      <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&quot;text_sparse&quot;</span>],
+      <span class="hljs-attr">params</span>: {},
+    },
+]；
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> bm25Function=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;text_bm25_emb&quot;,
+    &quot;type&quot;: &quot;BM25&quot;,
+    &quot;inputFieldNames&quot;: [&quot;text&quot;],
+    &quot;outputFieldNames&quot;: [&quot;text_sparse&quot;],
+    &quot;params&quot;: {}
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: false,
-        &quot;enabledDynamicField&quot;: true,
+        &quot;functions&quot;: [$bm25Function],
         &quot;fields&quot;: [
             {
                 &quot;fieldName&quot;: &quot;id&quot;,
@@ -243,26 +287,32 @@ schema.WithField(entity.NewField().
                 &quot;fieldName&quot;: &quot;text&quot;,
                 &quot;dataType&quot;: &quot;VarChar&quot;,
                 &quot;elementTypeParams&quot;: {
-                    &quot;max_length&quot;: 1000
+                    &quot;max_length&quot;: 1000,
+                    &quot;enable_analyzer&quot;: true
                 }
             },
             {
-                &quot;fieldName&quot;: &quot;sparse&quot;,
+                &quot;fieldName&quot;: &quot;text_dense&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: &quot;768&quot;
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;text_sparse&quot;,
                 &quot;dataType&quot;: &quot;SparseFloatVector&quot;
             },
             {
-                &quot;fieldName&quot;: &quot;dense&quot;,
+                &quot;fieldName&quot;: &quot;image_dense&quot;,
                 &quot;dataType&quot;: &quot;FloatVector&quot;,
                 &quot;elementTypeParams&quot;: {
-                    &quot;dim&quot;: &quot;5&quot;
+                    &quot;dim&quot;: &quot;512&quot;
                 }
             }
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在稀疏向量搜尋過程中，您可以利用全文檢索 (Full-Text Search) 功能來簡化產生稀疏嵌入向量的過程。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>。</p>
-<h4 id="Create-index" class="common-anchor-header">建立索引</h4><p>定義資料集模式後，有必要設定向量索引和相似度指標。在本範例中，為密集向量欄位<code translate="no">dense</code> ，以及稀疏向量欄位<code translate="no">sparse</code> 建立<strong>AUTOINDEX</strong>類型的索引。您可以根據需要使用其他索引類型。要瞭解支援的索引類型，請參閱<a href="/docs/zh-hant/index-vector-fields.md">可用的索引類型</a>。</p>
-<div class="multipleCode">
+<h3 id="Create-index" class="common-anchor-header">建立索引</h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -271,18 +321,25 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Add indexes</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;dense&quot;</span>,
-    index_name=<span class="hljs-string">&quot;dense_index&quot;</span>,
+    field_name=<span class="hljs-string">&quot;text_dense&quot;</span>,
+    index_name=<span class="hljs-string">&quot;text_dense_index&quot;</span>,
     index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
-    index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors</span>
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Currently, only IP (Inner Product) is supported for sparse vectors</span>
-    params={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing</span>
+    field_name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+    index_name=<span class="hljs-string">&quot;text_sparse_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># or &quot;DAAT_WAND&quot; or &quot;TAAT_NAIVE&quot;</span>
+)
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;image_dense&quot;</span>,
+    index_name=<span class="hljs-string">&quot;image_dense_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
@@ -290,58 +347,86 @@ index_params.add_index(
 
 Map&lt;String, Object&gt; denseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 
-<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForDenseField</span> <span class="hljs-operator">=</span> IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;dense&quot;</span>)
-        .indexName(<span class="hljs-string">&quot;dense_index&quot;</span>)
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForTextDense</span> <span class="hljs-operator">=</span> IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;text_dense&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;text_dense_index&quot;</span>)
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.IP)
         .build();
 
 Map&lt;String, Object&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-sparseParams.put(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);
-<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForSparseField</span> <span class="hljs-operator">=</span> IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .indexName(<span class="hljs-string">&quot;sparse_index&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
+sparseParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForTextSparse</span> <span class="hljs-operator">=</span> IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;text_sparse_index&quot;</span>)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+        .metricType(IndexParam.MetricType.BM25)
         .extraParams(sparseParams)
         .build();
 
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForImageDense</span> <span class="hljs-operator">=</span> IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;image_dense&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;image_dense_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.IP)
+        .build();
+
 List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexParams.add(indexParamForDenseField);
-indexParams.add(indexParamForSparseField);
+indexParams.add(indexParamForTextDense);
+indexParams.add(indexParamForTextSparse);
+indexParams.add(indexParamForImageDense);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">indexOption1 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>,
-    index.NewSparseInvertedIndex(entity.IP, <span class="hljs-number">0.2</span>))
-indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dense&quot;</span>,
+<pre><code translate="no" class="language-go">indexOption1 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;text_dense&quot;</span>,
     index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;text_sparse&quot;</span>,
+    index.NewSparseInvertedIndex(entity.BM25, <span class="hljs-number">0.2</span>))
+indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;image_dense&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [{
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;text_dense&quot;</span>,
+    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;text_dense_index&quot;</span>,
     <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;IP&quot;</span>
 },{
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
+    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;text_sparse_index&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;IndexType.SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+    <span class="hljs-attr">params</span>: {
+      <span class="hljs-attr">inverted_index_algo</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, 
+    }
+},{
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;image_dense&quot;</span>,
+    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;image_dense_index&quot;</span>,
     <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;IP&quot;</span>
 }]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
-            &quot;fieldName&quot;: &quot;dense&quot;,
+            &quot;fieldName&quot;: &quot;text_dense&quot;,
             &quot;metricType&quot;: &quot;IP&quot;,
-            &quot;indexName&quot;: &quot;dense_index&quot;,
+            &quot;indexName&quot;: &quot;text_dense_index&quot;,
             &quot;indexType&quot;:&quot;AUTOINDEX&quot;
         },
         {
-            &quot;fieldName&quot;: &quot;sparse&quot;,
+            &quot;fieldName&quot;: &quot;text_sparse&quot;,
+            &quot;metricType&quot;: &quot;BM25&quot;,
+            &quot;indexName&quot;: &quot;text_sparse_index&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+        },
+        {
+            &quot;fieldName&quot;: &quot;image_dense&quot;,
             &quot;metricType&quot;: &quot;IP&quot;,
-            &quot;indexName&quot;: &quot;sparse_index&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+            &quot;indexName&quot;: &quot;image_dense_index&quot;,
+            &quot;indexType&quot;:&quot;AUTOINDEX&quot;
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Create-collection" class="common-anchor-header">建立集合</h4><p>使用前兩個步驟中設定的集合模式和索引，建立一個名為<code translate="no">demo</code> 的集合。</p>
+<h3 id="Create-collection" class="common-anchor-header">建立集合</h3><p>使用前兩個步驟中設定的集合模式和索引，建立一個名為<code translate="no">demo</code> 的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -386,15 +471,54 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">插入資料</h3><p>將稀疏密集向量插入集合<code translate="no">demo</code> 。</p>
+<h2 id="Insert-data" class="common-anchor-header">插入資料<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>本節根據之前定義的模式將資料插入<code translate="no">my_collection</code> 集合。在插入過程中，確保所有欄位 (有自動產生數值的欄位除外) 都有正確格式的資料。在此範例中</p>
+<ul>
+<li><p><code translate="no">id</code>代表產品 ID 的整數</p></li>
+<li><p><code translate="no">text</code>：包含產品描述的字串</p></li>
+<li><p><code translate="no">text_dense</code>：768 個浮點值的清單，代表文字描述的密集嵌入</p></li>
+<li><p><code translate="no">image_dense</code>代表產品圖片密集嵌入的 512 個浮點值清單。</p></li>
+</ul>
+<p>您可以使用相同或不同的模型為每個欄位產生密集內嵌。在這個範例中，兩個密集內嵌有不同的尺寸，顯示它們是由不同的模型產生。稍後定義每項搜尋時，請務必使用對應的模型來產生適當的查詢內嵌。</p>
+<p>由於本範例使用內建的 BM25 函式從文字欄位產生稀疏內嵌，因此您不需要手動提供稀疏向量。但是，如果您選擇不使用 BM25，則必須自行預先計算並提供稀疏內嵌。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 data=[
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">9637</span>: <span class="hljs-number">0.30856525997853057</span>, <span class="hljs-number">4399</span>: <span class="hljs-number">0.19771651149001523</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...]},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">6959</span>: <span class="hljs-number">0.31025067641541815</span>, <span class="hljs-number">1729</span>: <span class="hljs-number">0.8265339135915016</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...]},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}]
+    {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>,
+        <span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...],
+        <span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6366019600530924</span>, -<span class="hljs-number">0.09323198122475052</span>, ...]
+    }，
+    {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>,
+        <span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...],
+        <span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6414180010301553</span>, <span class="hljs-number">0.8976979978567611</span>, ...]
+    },
+    {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>,
+        <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...],
+        <span class="hljs-string">&quot;image_dense&quot;</span>: [-<span class="hljs-number">0.6901259768402174</span>, <span class="hljs-number">0.6100500332193755</span>, ...]
+    }
+]
 
 res = client.insert(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -408,22 +532,22 @@ res = client.insert(
 
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
-row1.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>);
-row1.add(<span class="hljs-string">&quot;dense&quot;</span>, gson.toJsonTree(dense1));
-row1.add(<span class="hljs-string">&quot;sparse&quot;</span>, gson.toJsonTree(sparse1));
+row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">0</span>);
+row1.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>);
+row1.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(text_dense1));
+row1.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(image_dense));
 
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
-row2.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>);
-row2.add(<span class="hljs-string">&quot;dense&quot;</span>, gson.toJsonTree(dense2));
-row2.add(<span class="hljs-string">&quot;sparse&quot;</span>, gson.toJsonTree(sparse2));
+row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
+row2.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>);
+row2.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(text_dense2));
+row2.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(image_dense2));
 
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row3.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">3</span>);
-row3.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>);
-row3.add(<span class="hljs-string">&quot;dense&quot;</span>, gson.toJsonTree(dense3));
-row3.add(<span class="hljs-string">&quot;sparse&quot;</span>, gson.toJsonTree(sparse3));
+row3.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
+row3.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>);
+row3.add(<span class="hljs-string">&quot;text_dense&quot;</span>, gson.toJsonTree(dense3));
+row3.add(<span class="hljs-string">&quot;image_dense&quot;</span>, gson.toJsonTree(sparse3));
 
 List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 <span class="hljs-type">InsertReq</span> <span class="hljs-variable">insertReq</span> <span class="hljs-operator">=</span> InsertReq.builder()
@@ -433,28 +557,23 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertResp</span> <span class="hljs-operator">=</span> client.insert(insertReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">v := <span class="hljs-built_in">make</span>([]entity.SparseEmbedding, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>)
-sparseVector1, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">9637</span>, <span class="hljs-number">4399</span>, <span class="hljs-number">3573</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.30856525997853057</span>, <span class="hljs-number">0.19771651149001523</span>, <span class="hljs-number">0.1576378135</span>})
-v = <span class="hljs-built_in">append</span>(v, sparseVector1)
-sparseVector2, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">6959</span>, <span class="hljs-number">1729</span>, <span class="hljs-number">5263</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.31025067641541815</span>, <span class="hljs-number">0.8265339135915016</span>, <span class="hljs-number">0.68647322132</span>})
-v = <span class="hljs-built_in">append</span>(v, sparseVector2)
-sparseVector3, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">1220</span>, <span class="hljs-number">7335</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">0.9436728846033107</span>})
-v = <span class="hljs-built_in">append</span>(v, sparseVector3)
-sparseColumn := column.NewColumnSparseVectors(<span class="hljs-string">&quot;sparse&quot;</span>, v)
-
-_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
     WithInt64Column(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>}).
     WithVarcharColumn(<span class="hljs-string">&quot;text&quot;</span>, []<span class="hljs-type">string</span>{
-        <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
-        <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
-        <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
+        <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>,
+        <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>,
+        <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>,
     }).
-    WithFloatVectorColumn(<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-number">5</span>, [][]<span class="hljs-type">float32</span>{
-        {<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, <span class="hljs-number">-0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>},
-        {<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>},
-        {<span class="hljs-number">0.43742130801983836</span>, <span class="hljs-number">-0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, <span class="hljs-number">0.7894058910881185</span>, <span class="hljs-number">0.20785793220625592</span>},
+    WithFloatVectorColumn(<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-number">768</span>, [][]<span class="hljs-type">float32</span>{
+        {<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...},
+        {<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...},
+        {<span class="hljs-number">0.43742130801983836</span>, <span class="hljs-number">-0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...},
     }).
-    WithColumns(sparseColumn))
+    WithFloatVectorColumn(<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-number">512</span>, [][]<span class="hljs-type">float32</span>{
+        {<span class="hljs-number">0.6366019600530924</span>, <span class="hljs-number">-0.09323198122475052</span>, ...},
+        {<span class="hljs-number">0.6414180010301553</span>, <span class="hljs-number">0.8976979978567611</span>, ...},
+        {<span class="hljs-number">-0.6901259768402174</span>, <span class="hljs-number">0.6100500332193755</span>, ...},
+    }).
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle err</span>
@@ -463,9 +582,9 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
 
 <span class="hljs-keyword">var</span> data = [
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>, <span class="hljs-attr">sparse</span>:[<span class="hljs-number">9637</span>: <span class="hljs-number">0.30856525997853057</span>, <span class="hljs-number">4399</span>: <span class="hljs-number">0.19771651149001523</span>, ...] , <span class="hljs-attr">dense</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>, <span class="hljs-attr">sparse</span>:[<span class="hljs-number">6959</span>: <span class="hljs-number">0.31025067641541815</span>, <span class="hljs-number">1729</span>: <span class="hljs-number">0.8265339135915016</span>, ...] , <span class="hljs-attr">dense</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>]},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span> , <span class="hljs-attr">sparse</span>:[<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...] , <span class="hljs-attr">dense</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, <span class="hljs-number">0.7894058910881185</span>, <span class="hljs-number">0.20785793220625592</span>]}       
+    {<span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span> , <span class="hljs-attr">text_dense</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...], <span class="hljs-attr">image_dense</span>: [<span class="hljs-number">0.6366019600530924</span>, -<span class="hljs-number">0.09323198122475052</span>, ...]},
+    {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span> , <span class="hljs-attr">text_dense</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...], <span class="hljs-attr">image_dense</span>: [<span class="hljs-number">0.6414180010301553</span>, <span class="hljs-number">0.8976979978567611</span>, ...]},
+    {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span> , <span class="hljs-attr">text_dense</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...], <span class="hljs-attr">image_dense</span>: [-<span class="hljs-number">0.6901259768402174</span>, <span class="hljs-number">0.6100500332193755</span>, ...]}
 ]
 
 <span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
@@ -479,174 +598,181 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
-        {&quot;id&quot;: 0, &quot;text&quot;: &quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;, &quot;sparse&quot;:{&quot;9637&quot;: 0.30856525997853057, &quot;4399&quot;: 0.19771651149001523}, &quot;dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]},
-        {&quot;id&quot;: 1, &quot;text&quot;: &quot;Alan Turing was the first person to conduct substantial research in AI.&quot;, &quot;sparse&quot;:{&quot;6959&quot;: 0.31025067641541815, &quot;1729&quot;: 0.8265339135915016}, &quot;dense&quot;: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, ...]},
-        {&quot;id&quot;: 2, &quot;text&quot;: &quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;, &quot;sparse&quot;:{&quot;1220&quot;: 0.15303302147479103, &quot;7335&quot;: 0.9436728846033107}, &quot;dense&quot;: [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, ...]}
+        {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
+        {&quot;id&quot;: 1, &quot;text&quot;: &quot;Wireless noise-cancelling over-ear headphones&quot; , &quot;text_dense&quot;: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, ...], &quot;image_dense&quot;: [0.6414180010301553, 0.8976979978567611, ...]},
+        {&quot;id&quot;: 2, &quot;text&quot;: &quot;Stainless steel water bottle, 500ml&quot; , &quot;text_dense&quot;: [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, ...], &quot;image_dense&quot;: [-0.6901259768402174, 0.6100500332193755, ...]}
     ],
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">建立多個 AnnSearchRequest 實體</h3><p>Hybrid Search 是透過在<code translate="no">hybrid_search()</code> 函式中建立多個<code translate="no">AnnSearchRequest</code> 來實作，其中每個<code translate="no">AnnSearchRequest</code> 代表特定向量領域的基本 ANN 搜尋請求。因此，在進行 Hybrid Search 之前，有必要為每個向量領域建立一個<code translate="no">AnnSearchRequest</code> 。</p>
-<p>透過在<code translate="no">AnnSearchRequest</code> 中設定<code translate="no">expr</code> 參數，您可以為混合搜尋設定過濾條件。請參閱<a href="/docs/zh-hant/filtered-search.md">過濾搜尋與</a> <a href="/docs/zh-hant/filtering">過濾</a>。</p>
+<h2 id="Perform-Hybrid-Search" class="common-anchor-header">執行混合搜尋<button data-href="#Perform-Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">建立多個 AnnSearchRequest 實體</h3><p>Hybrid Search 是透過在<code translate="no">hybrid_search()</code> 函式中建立多個<code translate="no">AnnSearchRequest</code> 來實作，其中每個<code translate="no">AnnSearchRequest</code> 代表特定向量領域的基本 ANN 搜尋請求。因此，在進行 Hybrid Search 之前，必須為每個向量欄位建立一個<code translate="no">AnnSearchRequest</code> 。</p>
+<p>此外，透過在<code translate="no">AnnSearchRequest</code> 中設定<code translate="no">expr</code> 參數，您可以設定混合搜尋的過濾條件。請參閱<a href="/docs/zh-hant/filtered-search.md">過濾搜尋與</a> <a href="/docs/zh-hant/filtering">過濾</a>。</p>
 <div class="alert note">
-<p>在混合搜尋中，每個<code translate="no">AnnSearchRequest</code> 只支援一個查詢向量。</p>
+<p>在混合搜尋中，每個<code translate="no">AnnSearchRequest</code> 只支援一個查詢資料。</p>
 </div>
-<p>假設查詢文字 "Who started AI research? "已經轉換成稀疏向量和密集向量。在此基礎上，分別針對<code translate="no">sparse</code> 與<code translate="no">dense</code> 向量字段建立兩個<code translate="no">AnnSearchRequest</code> 搜尋請求，如以下範例所示。</p>
+<p>為了示範各種搜尋向量字段的功能，我們將使用一個範例查詢來建構三個<code translate="no">AnnSearchRequest</code> 搜尋請求。在此過程中，我們也會使用其預先計算的密集向量。搜尋請求將以下列向量領域為目標：</p>
+<ul>
+<li><p><code translate="no">text_dense</code> 用於語意文字搜尋，允許基於意義而非直接關鍵字匹配進行上下文理解和檢索。</p></li>
+<li><p><code translate="no">text_sparse</code>用於全文檢索或關鍵字比對，著重於文字中的精確單字或短語匹配。</p></li>
+<li><p><code translate="no">image_dense</code>用於多模式文字到圖片搜尋，根據查詢的語意內容擷取相關的產品圖片。</p></li>
+</ul>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
-query_dense_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
+query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
+query_dense_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.5142999509918703</span>, ...]
+query_multimodal_vector = [<span class="hljs-number">0.015829865178701663</span>, <span class="hljs-number">0.5264158340734488</span>, ...]
 
+<span class="hljs-comment"># text semantic search (dense)</span>
 search_param_1 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_dense_vector],
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
-    },
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_dense&quot;</span>,
+    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>, <span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}
+<span class="hljs-comment"># full-text search (sparse)</span>
 search_param_2 = {
-    <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}
-    },
+    <span class="hljs-string">&quot;data&quot;</span>: [query_text],
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
+    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 request_2 = AnnSearchRequest(**search_param_2)
 
-reqs = [request_1, request_2]
+<span class="hljs-comment"># text-to-image search (multimodal)</span>
+search_param_3 = {
+    <span class="hljs-string">&quot;data&quot;</span>: [query_multimodal_vector],
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;image_dense&quot;</span>,
+    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
+}
+request_3 = AnnSearchRequest(**search_param_3)
+
+reqs = [request_1, request_2, request_3]
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.BaseVector;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.SparseFloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 
-<span class="hljs-type">float</span>[] dense = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.0475336798f</span>,  <span class="hljs-number">0.0521207601f</span>,  <span class="hljs-number">0.0904406682f</span>, ...};
-SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;Long, Float&gt;() {{
-    put(<span class="hljs-number">3573L</span>, <span class="hljs-number">0.34701499f</span>);
-    put(<span class="hljs-number">5263L</span>, <span class="hljs-number">0.263937551f</span>);
-    ...
-}};
+<span class="hljs-type">float</span>[] queryDense = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.0475336798f</span>,  <span class="hljs-number">0.0521207601f</span>,  <span class="hljs-number">0.0904406682f</span>, ...};
+<span class="hljs-type">float</span>[] queryMultimodal = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.0158298651f</span>, <span class="hljs-number">0.5264158340f</span>, ...}
 
-List&lt;BaseVector&gt; queryDenseVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(dense));
-List&lt;BaseVector&gt; querySparseVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">SparseFloatVec</span>(sparse));
+List&lt;BaseVector&gt; queryTexts = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>);)
+List&lt;BaseVector&gt; queryDenseVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryDense));
+List&lt;BaseVector&gt; queryMultimodalVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryMultimodal));
 
 List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;dense&quot;</span>)
+        .vectorFieldName(<span class="hljs-string">&quot;text_dense&quot;</span>)
         .vectors(queryDenseVectors)
-        .metricType(IndexParam.MetricType.IP)
         .params(<span class="hljs-string">&quot;{\&quot;nprobe\&quot;: 10}&quot;</span>)
         .topK(<span class="hljs-number">2</span>)
         .build());
 searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .vectors(querySparseVectors)
-        .metricType(IndexParam.MetricType.IP)
-        .params(<span class="hljs-string">&quot;{\&quot;drop_ratio_build\&quot;: 0.2}&quot;</span>)
+        .vectorFieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+        .vectors(queryTexts)
+        .params(<span class="hljs-string">&quot;{\&quot;drop_ratio_search\&quot;: 0.2}&quot;</span>)
+        .topK(<span class="hljs-number">2</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;image_dense&quot;</span>)
+        .vectors(queryMultimodalVectors)
+        .params(<span class="hljs-string">&quot;{\&quot;nprobe\&quot;: 10}&quot;</span>)
         .topK(<span class="hljs-number">2</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, <span class="hljs-number">-0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>}
-sparseVector, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">3573</span>, <span class="hljs-number">5263</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.34701499</span>, <span class="hljs-number">0.263937551</span>})
+<pre><code translate="no" class="language-go">queryText := entity.Text({<span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>})
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...}
+queryMultimodalVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.015829865178701663</span>, <span class="hljs-number">0.5264158340734488</span>, ...}
 
-request1 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-number">2</span>, entity.FloatVector(queryVector)).
-    WithAnnParam(index.NewIvfAnnParam(<span class="hljs-number">10</span>)).
-    WithSearchParam(index.MetricTypeKey, <span class="hljs-string">&quot;IP&quot;</span>)
+request1 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;text_dense&quot;</span>, <span class="hljs-number">2</span>, entity.FloatVector(queryVector)).
+    WithAnnParam(index.NewIvfAnnParam(<span class="hljs-number">10</span>))
+
 annParam := index.NewSparseAnnParam()
 annParam.WithDropRatio(<span class="hljs-number">0.2</span>)
-request2 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;sparse&quot;</span>, <span class="hljs-number">2</span>, sparseVector).
-    WithAnnParam(annParam).
-    WithSearchParam(index.MetricTypeKey, <span class="hljs-string">&quot;IP&quot;</span>)
+request2 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;text_sparse&quot;</span>, <span class="hljs-number">2</span>, queryText).
+    WithAnnParam(annParam)
+
+request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_dense&quot;</span>, <span class="hljs-number">2</span>, entity.FloatVector(queryMultimodalVector)).
+    WithAnnParam(index.NewIvfAnnParam(<span class="hljs-number">10</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> search_param_1 = {
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
+<span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...]
+<span class="hljs-keyword">const</span> query_multimodal_vector = [<span class="hljs-number">0.015829865178701663</span>, <span class="hljs-number">0.5264158340734488</span>, ...]
+
+<span class="hljs-keyword">const</span> search_param_1 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, 
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
-    },
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_dense&quot;</span>, 
+    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 
 <span class="hljs-keyword">const</span> search_param_2 = {
-    <span class="hljs-string">&quot;data&quot;</span>: query_sparse_vector, 
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}
-    },
+    <span class="hljs-string">&quot;data&quot;</span>: query_text, 
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>, 
+    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
+}
+
+<span class="hljs-keyword">const</span> search_param_3 = {
+    <span class="hljs-string">&quot;data&quot;</span>: query_multimodal_vector, 
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;image_dense&quot;</span>, 
+    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> req=<span class="hljs-string">&#x27;[
     {
-        &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592,....]],
-        &quot;annsField&quot;: &quot;dense&quot;,
-        &quot;params&quot;: {
-            &quot;params&quot;: {
-                &quot;nprobe&quot;: 10
-             }
-        },
+        &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]],
+        &quot;annsField&quot;: &quot;text_dense&quot;,
+        &quot;params&quot;: {&quot;nprobe&quot;: 10},
         &quot;limit&quot;: 2
     },
     {
-        &quot;data&quot;: [{&quot;3573&quot;: 0.34701499565746674}, {&quot;5263&quot;: 0.2639375518635271}],
-        &quot;annsField&quot;: &quot;sparse&quot;,
-        &quot;params&quot;: {
-            &quot;params&quot;: {
-                &quot;drop_ratio_build&quot;: 0.2
-             }
-        },
+        &quot;data&quot;: [&quot;white headphones, quiet and comfortable&quot;],
+        &quot;annsField&quot;: &quot;text_sparse&quot;,
+        &quot;params&quot;: {&quot;drop_ratio_search&quot;: 0.2},
+        &quot;limit&quot;: 2
+    },
+    {
+        &quot;data&quot;: [[0.015829865178701663, 0.5264158340734488, ...]],
+        &quot;annsField&quot;: &quot;image_dense&quot;,
+        &quot;params&quot;: {&quot;nprobe&quot;: 10},
         &quot;limit&quot;: 2
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>由於參數<code translate="no">limit</code> 設為 2，因此每個<code translate="no">AnnSearchRequest</code> 會返回 2 個搜尋結果。在本範例中，會建立 2 個<code translate="no">AnnSearchRequest</code> ，因此總共會傳回 4 個搜尋結果。</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">設定重新排序策略</h3><p>要合併兩組 ANN 搜尋結果並將其重新排序，必須選擇適當的重新排序策略。Milvus 支援兩種重排策略：<strong>WeightedRanker</strong>和<strong>RRFRanker</strong>。選擇重排策略時，需要考慮的一件事是，是否需要強調向量場上的一個或多個基本 ANN 搜尋。</p>
+<p>鑑於參數<code translate="no">limit</code> 設定為 2，每個<code translate="no">AnnSearchRequest</code> 會返回 2 個搜尋結果。在本範例中，會建立 3 個<code translate="no">AnnSearchRequest</code> 實體，因此總共會有 6 個搜尋結果。</p>
+<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">設定重新排序策略</h3><p>要合併 ANN 搜尋結果集並重新排序，選擇適當的重新排序策略是必要的。Milvus 提供兩種重排策略：</p>
 <ul>
-<li><p><strong>WeightedRanker</strong>：如果您要求結果強調特定向量領域，建議使用此策略。WeightedRanker 允許您為某些向量領域指定較高的權重，使其更受重視。例如，在多模式搜尋中，圖片的文字描述可能會被認為比這張圖片的顏色更重要。</p></li>
-<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)：</strong>當沒有特定的重點時，建議使用此策略。RRF 可以有效平衡每個向量場的重要性。</p></li>
+<li><p><strong>加權排名</strong>：如果結果需要強調特定向量領域，請使用此策略。WeightedRanker 允許您為特定向量領域分配更大的權重，使其更加突出。</p></li>
+<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)：</strong>當不需要特別強調時，請選擇此策略。RRFRanker 能有效平衡每個向量欄位的重要性。</p></li>
 </ul>
-<p>有關這兩種重排策略機制的詳細資訊，請參閱<a href="/docs/zh-hant/reranking.md">Reranking</a>。</p>
-<p>以下兩個範例示範如何使用 WeightedRanker 和 RRFRanker 重排策略：</p>
-<ol>
-<li><p><strong>範例 1：使用 WeightedRanker</strong></p>
-<p>使用 WeightedRanker 策略時，需要在<code translate="no">WeightedRanker</code> 函式中輸入權重值。混合搜尋中的基本 ANN 搜尋數量與需要輸入的值數量相對應。輸入的值應該在 [0,1] 的範圍內，值越接近 1 表示重要性越高。</p>
-<p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#go">Go</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
-
-ranker = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) 
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.WeightedRanker;
-
-<span class="hljs-type">BaseRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeightedRanker</span>(Arrays.asList(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.3f</span>));
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">reranker := milvusclient.NewWeightedReranker([]<span class="hljs-type">float64</span>{<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>})
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
-        &quot;strategy&quot;: &quot;ws&quot;,
-        &quot;params&quot;: {&quot;weights&quot;: [0.8,0.3]}
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>範例 2：使用 RRFRanker</strong></p>
-<p>使用 RRFRanker 策略時，您需要將參數值<code translate="no">k</code> 輸入 RRFRanker。<code translate="no">k</code> 的預設值是 60。此參數有助於決定如何結合來自不同 ANN 搜尋的排名，目的是平衡和混合所有搜尋的重要性。</p>
-<p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#go">Go</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
+<p>有關這些重新排名機制的詳細資訊，請參閱<a href="/docs/zh-hant/reranking">重新排名</a>。</p>
+<p>在本範例中，由於不需要特別強調特定的搜尋查詢，因此我們將採用 RRFRanker 策略。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
@@ -666,9 +792,8 @@ ranker = RRFRanker(<span class="hljs-number">100</span>)
         &quot;strategy&quot;: &quot;rrf&quot;,
         &quot;params&quot;: { &quot;k&quot;: 100}
     }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-</ol>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">執行混合搜尋</h3><p>在執行混合搜尋之前，必須先將集合載入記憶體。如果集合中的任何向量欄位沒有索引或沒有載入，在呼叫 Hybrid Search 方法時將會發生錯誤。</p>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">執行混合搜尋</h3><p>在啟動混合搜尋之前，請確保資料集已載入。如果集合中的任何向量欄位缺乏索引或未載入記憶體，則執行 Hybrid Search 方法時會發生錯誤。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -702,6 +827,7 @@ res = client.hybrid_search(
     <span class="hljs-number">2</span>,
     request1,
     request2,
+    request3,
 ).WithReranker(reranker))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -723,9 +849,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-keyword">const</span> search = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">data</span>: [search_param_1, search_param_2],
+  <span class="hljs-attr">data</span>: [search_param_1, search_param_2, search_param_3],
   <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">rerank</span>: <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>)
+  <span class="hljs-attr">rerank</span>: rerank
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -737,19 +863,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
     \&quot;rerank\&quot;: {
         \&quot;strategy\&quot;:\&quot;rrf\&quot;,
-        \&quot;params\&quot;: {
-            \&quot;k\&quot;: 10
-        }
+        \&quot;params\&quot;: <span class="hljs-variable">${rerank}</span>
     },
-    \&quot;limit\&quot;: 3,
-    \&quot;outputFields\&quot;: [
-        \&quot;user_id\&quot;,
-        \&quot;word_count\&quot;,
-        \&quot;book_describe\&quot;
-    ]
+    \&quot;limit\&quot;: 2
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>輸出如下：</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>由於在 Hybrid Search 中指定了<code translate="no">limit=2</code> ，Milvus 會將步驟 3 中的四個搜尋結果重新排序，最終只會返回前兩個最相似的搜尋結果。</p>
+<p>在為 Hybrid Search 指定<code translate="no">limit=2</code> 參數後，Milvus 會將三次搜尋所得的六個結果重新排序。最終，它們只會返回最相似的前兩個結果。</p>

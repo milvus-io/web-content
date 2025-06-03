@@ -2,12 +2,12 @@
 id: sparse_vector.md
 title: Vectores dispersos
 summary: >-
-  Los vectores dispersos son un método importante de representación de datos en
-  la recuperación de información y el procesamiento del lenguaje natural. Aunque
-  los vectores densos son populares por su excelente capacidad de comprensión
-  semántica, los vectores dispersos suelen ofrecer resultados más precisos
-  cuando se trata de aplicaciones que requieren una correspondencia exacta de
-  palabras clave o frases.
+  Los vectores dispersos son un método importante para capturar la coincidencia
+  de términos a nivel superficial en la recuperación de información y el
+  procesamiento del lenguaje natural. Mientras que los vectores densos destacan
+  en la comprensión semántica, los vectores dispersos suelen ofrecer resultados
+  de coincidencia más predecibles, sobre todo cuando se buscan términos
+  especiales o identificadores textuales.
 ---
 <h1 id="Sparse-Vector" class="common-anchor-header">Vectores dispersos<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Los vectores dispersos son un método importante de representación de datos en la recuperación de información y el procesamiento del lenguaje natural. Aunque los vectores densos son populares por su excelente capacidad de comprensión semántica, los vectores dispersos suelen ofrecer resultados más precisos cuando se trata de aplicaciones que requieren una correspondencia exacta de palabras clave o frases.</p>
+    </button></h1><p>Los vectores dispersos son un método importante para capturar la coincidencia de términos a nivel superficial en la recuperación de información y el procesamiento del lenguaje natural. Mientras que los vectores densos destacan en la comprensión semántica, los vectores dispersos suelen proporcionar resultados de coincidencia más predecibles, sobre todo cuando se buscan términos especiales o identificadores textuales.</p>
 <h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,28 +40,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un vector disperso es una representación especial de vectores de alta dimensión en la que la mayoría de los elementos son cero y sólo unas pocas dimensiones tienen valores distintos de cero. Esta característica hace que los vectores dispersos sean particularmente eficaces en el manejo de datos a gran escala, de alta dimensión pero dispersos. Las aplicaciones más comunes son:</p>
+    </button></h2><p>Un vector disperso es un vector especial de alta dimensión en el que la mayoría de los elementos son cero y sólo unas pocas dimensiones tienen valores distintos de cero. Como se muestra en el diagrama siguiente, los vectores densos suelen representarse como matrices continuas en las que cada posición tiene un valor (por ejemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). En cambio, los vectores dispersos sólo almacenan elementos distintos de cero y sus índices de dimensión, a menudo representados como pares clave-valor de <code translate="no">{ index: value}</code> (por ejemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   </span> <span class="img-wrapper"> <span>Representación de vectores dispersos</span> </span></p>
+<p>Con la tokenización y la puntuación, los documentos pueden representarse como vectores de bolsa de palabras, donde cada dimensión corresponde a una palabra específica del vocabulario. Sólo las palabras presentes en el documento tienen valores distintos de cero, lo que crea una representación vectorial dispersa. Los vectores dispersos pueden generarse mediante dos enfoques:</p>
 <ul>
-<li><p><strong>Análisis de textos:</strong> Representación de documentos como vectores bolsa de palabras, en los que cada dimensión corresponde a una palabra y sólo las palabras que aparecen en el documento tienen valores distintos de cero.</p></li>
-<li><p><strong>Sistemas de recomendación:</strong> Matrices de interacción usuario-artículo, en las que cada dimensión representa la valoración de un usuario para un artículo concreto, y la mayoría de los usuarios sólo interactúan con unos pocos artículos.</p></li>
-<li><p><strong>Tratamiento de imágenes:</strong> Representación de características locales, centrándose sólo en los puntos clave de la imagen, lo que da lugar a vectores dispersos de alta dimensión.</p></li>
+<li><p><strong>Las técnicas estadísticas tradicionales</strong>, como <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) y <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), asignan pesos a las palabras en función de su frecuencia e importancia en un corpus. Estos métodos calculan estadísticas simples como puntuaciones para cada dimensión, que representa un token.  Milvus ofrece una <strong>búsqueda de texto completo</strong> integrada con el método BM25, que convierte automáticamente el texto en vectores dispersos, eliminando la necesidad de preprocesamiento manual. Este método es ideal para la búsqueda basada en palabras clave, donde la precisión y las coincidencias exactas son importantes. Para más información, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p></li>
+<li><p><strong>Los modelos neuronales de incrustación dispers</strong> a son métodos aprendidos para generar representaciones dispersas mediante el entrenamiento en grandes conjuntos de datos. Suelen ser modelos de aprendizaje profundo con arquitectura Transformer, capaces de expandir y ponderar términos basándose en el contexto semántico. Milvus también admite incrustaciones dispersas generadas externamente a partir de modelos como <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Ver <a href="/docs/es/embeddings.md#Embedding-Overview">Embeddings</a> para más detalles.</include></p></li>
 </ul>
-<p>Como se muestra en el diagrama siguiente, los vectores densos suelen representarse como matrices continuas en las que cada posición tiene un valor (por ejemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). En cambio, los vectores dispersos sólo almacenan elementos distintos de cero y sus índices, a menudo representados como pares clave-valor (por ejemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>). Esta representación reduce significativamente el espacio de almacenamiento y aumenta la eficiencia computacional, especialmente cuando se trata de datos de dimensiones extremadamente altas (por ejemplo, 10.000 dimensiones).</p>
+<p>Los vectores dispersos y el texto original pueden almacenarse en Milvus para una recuperación eficiente. El siguiente diagrama describe el proceso general.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Sparse Vector" class="doc-image" id="sparse-vector" />
-   </span> <span class="img-wrapper"> <span>Vectores dispersos</span> </span></p>
-<p>Los vectores dispersos pueden generarse utilizando varios métodos, como <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) y <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> en el tratamiento de textos. Además, Milvus ofrece métodos prácticos para ayudar a generar y procesar vectores dispersos. Para más detalles, consulte Embeddings.</p>
-<p>Para los datos de texto, Milvus también proporciona capacidades de búsqueda de texto completo, lo que le permite realizar búsquedas de vectores directamente en los datos de texto sin procesar sin utilizar modelos de incrustación externos para generar vectores dispersos. Para más información, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
-<p>Tras la vectorización, los datos pueden almacenarse en Milvus para su gestión y recuperación de vectores. El diagrama siguiente ilustra el proceso básico.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use Sparse Vector" class="doc-image" id="use-sparse-vector" />
-   </span> <span class="img-wrapper"> <span>Utilizar vectores dispersos</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   </span> <span class="img-wrapper"> <span>Flujo de trabajo de vectores dispersos</span> </span></p>
 <div class="alert note">
 <p>Además de los vectores dispersos, Milvus también admite vectores densos y vectores binarios. Los vectores densos son ideales para capturar relaciones semánticas profundas, mientras que los vectores binarios sobresalen en escenarios como comparaciones rápidas de similitud y deduplicación de contenido. Para obtener más información, consulte <a href="/docs/es/dense-vector.md">Vectores densos</a> y <a href="/docs/es/binary-vector.md">vectores binarios</a>.</p>
 </div>
-<h2 id="Use-sparse-vectors" class="common-anchor-header">Utilizar vectores dispersos<button data-href="#Use-sparse-vectors" class="anchor-icon" translate="no">
+<h2 id="Data-Formats" class="common-anchor-header">Formatos de datos<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,43 +73,51 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus permite representar vectores dispersos en cualquiera de los siguientes formatos:</p>
+    </button></h2><p>En las siguientes secciones, demostramos cómo almacenar vectores a partir de modelos de incrustación dispersa aprendidos como SPLADE. Si está buscando un complemento para la búsqueda semántica basada en vectores densos, le recomendamos <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a> con BM25 en lugar de SPLADE por su simplicidad. Si ha realizado una evaluación de calidad y se ha decidido a utilizar SPLADE, puede consultar <a href="/docs/es/embeddings.md#Embedding-Overview">Embeddings</a> para saber cómo generar vectores dispersos con SPLADE.</p>
+<p>Milvus soporta la entrada de vectores dispersos con los siguientes formatos:</p>
 <ul>
+<li><p><strong>Lista de diccionarios (formateada como <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a dictionary</span>
+sparse_vectors = [{<span class="hljs-number">27</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">5369</span>: <span class="hljs-number">0.6</span>} , {<span class="hljs-number">100</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">3</span>: <span class="hljs-number">0.8</span>}]
+<button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Matriz dispersa (utilizando la clase <code translate="no">scipy.sparse</code> )</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix
 
-<span class="hljs-comment"># Create a sparse matrix</span>
-row = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>]
-col = [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
-data = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]
-sparse_matrix = csr_matrix((data, (row, col)), shape=(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>))
-
-<span class="hljs-comment"># Represent sparse vector using the sparse matrix</span>
-sparse_vector = sparse_matrix.getrow(<span class="hljs-number">0</span>)
+<span class="hljs-comment"># First vector: indices [27, 100, 5369] with values [0.5, 0.3, 0.6]</span>
+<span class="hljs-comment"># Second vector: indices [3, 100] with values [0.8, 0.1]</span>
+indices = [[<span class="hljs-number">27</span>, <span class="hljs-number">100</span>, <span class="hljs-number">5369</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">100</span>]]
+values = [[<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.1</span>]]
+sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Lista de diccionarios (formateada como <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
-<p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a></div></p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent sparse vector using a dictionary</span>
-sparse_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>, <span class="hljs-number">1024</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">5000</span>: <span class="hljs-number">0.6</span>}]
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">SortedMap&lt;Long, Float&gt; sparseVector = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
-sparseVector.put(<span class="hljs-number">1L</span>, <span class="hljs-number">0.5f</span>);
-sparseVector.put(<span class="hljs-number">100L</span>, <span class="hljs-number">0.3f</span>);
-sparseVector.put(<span class="hljs-number">500L</span>, <span class="hljs-number">0.8f</span>);
-sparseVector.put(<span class="hljs-number">1024L</span>, <span class="hljs-number">0.2f</span>);
-sparseVector.put(<span class="hljs-number">5000L</span>, <span class="hljs-number">0.6f</span>);
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Lista de iteradores de tupla (formateada como <code translate="no">[(dimension_index, value)]</code>)</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent sparse vector using a list of tuples</span>
-sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>), (<span class="hljs-number">100</span>, <span class="hljs-number">0.3</span>), (<span class="hljs-number">500</span>, <span class="hljs-number">0.8</span>), (<span class="hljs-number">1024</span>, <span class="hljs-number">0.2</span>), (<span class="hljs-number">5000</span>, <span class="hljs-number">0.6</span>)]]
+<li><p><strong>Lista de tuplas iterables (por ejemplo, <code translate="no">[(dimension_index, value)]</code>)</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a list of iterables (e.g. tuples)</span>
+sparse_vector = [
+    [(<span class="hljs-number">27</span>, <span class="hljs-number">0.5</span>), (<span class="hljs-number">100</span>, <span class="hljs-number">0.3</span>), (<span class="hljs-number">5369</span>, <span class="hljs-number">0.6</span>)],
+    [(<span class="hljs-number">100</span>, <span class="hljs-number">0.1</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">0.8</span>)]
+    ]
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Add-vector-field" class="common-anchor-header">Añadir campo vectorial</h3><p>Para utilizar vectores dispersos en Milvus, defina un campo para almacenar vectores dispersos al crear una colección. Este proceso incluye:</p>
-<ol>
-<li><p>Establecer <code translate="no">datatype</code> al tipo de datos de vectores dispersos soportado, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p>No es necesario especificar la dimensión.</p></li>
-</ol>
+<h2 id="Define-Collection-Schema" class="common-anchor-header">Definir el esquema de la colección<button data-href="#Define-Collection-Schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Antes de crear una colección, es necesario especificar el esquema de la colección, que define los campos y, opcionalmente, una función para convertir un campo de texto en la correspondiente representación vectorial dispersa.</p>
+<h3 id="Add-fields" class="common-anchor-header">Añadir campos</h3><p>Para utilizar vectores dispersos en Milvus, debe crear una colección con un esquema que incluya los siguientes campos:</p>
+<ul>
+<li><p>Un campo <code translate="no">SPARSE_FLOAT_VECTOR</code> reservado para almacenar vectores dispersos, ya sea autogenerado a partir de un campo <code translate="no">VARCHAR</code> o proporcionado directamente en los datos de entrada.</p></li>
+<li><p>Normalmente, el texto en bruto que representa el vector disperso también se almacena en la colección. Puedes utilizar un campo <code translate="no">VARCHAR</code> para almacenar el texto en bruto.</p></li>
+</ul>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -126,6 +131,7 @@ schema = client.create_schema(
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
+schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>, enable_analyzer=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -147,10 +153,15 @@ schema.addField(AddFieldReq.builder()
         .autoID(<span class="hljs-literal">true</span>)
         .maxLength(<span class="hljs-number">100</span>)
         .build());
-
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
         .dataType(DataType.SparseFloatVector)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;text&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">65535</span>)
+        .enableAnalyzer(<span class="hljs-literal">true</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
@@ -168,7 +179,14 @@ schema.addField(AddFieldReq.builder()
   {
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">SparseFloatVector</span>,
-  }
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;VarChar&quot;</span>,
+    <span class="hljs-attr">enable_analyzer</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">65535</span>,
+  },
 ];
 
 <button class="copy-code-btn"></button></code></pre>
@@ -205,6 +223,11 @@ schema.WithField(entity.NewField().
 ).WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;sparse_vector&quot;</span>).
     WithDataType(entity.FieldTypeSparseVector),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;text&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithEnableAnalyzer(<span class="hljs-literal">true</span>).
+    WithMaxLength(<span class="hljs-number">65535</span>),
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{
@@ -221,16 +244,49 @@ schema.WithField(entity.NewField().
     &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 
+<span class="hljs-built_in">export</span> textField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;text&quot;,
+    &quot;dataType&quot;: &quot;VarChar&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;max_length&quot;: 65535,
+        &quot;enable_analyzer&quot;: true
+    }
+}&#x27;</span>
+
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;autoID\&quot;: true,
     \&quot;fields\&quot;: [
         <span class="hljs-variable">$primaryField</span>,
-        <span class="hljs-variable">$vectorField</span>
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$textField</span>
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, se añade un campo vectorial llamado <code translate="no">sparse_vector</code> para almacenar vectores dispersos. El tipo de datos de este campo es <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Establecer parámetros de índice para el campo vectorial</h3><p>El proceso de creación de un índice para vectores dispersos es similar al de <a href="/docs/es/dense-vector.md">los vectores densos</a>, pero con diferencias en el tipo de índice especificado (<code translate="no">index_type</code>), la métrica de distancia (<code translate="no">metric_type</code>) y los parámetros del índice (<code translate="no">params</code>).</p>
+<p>En este ejemplo, se añaden tres campos</p>
+<ul>
+<li><p><code translate="no">pk</code>: Este campo almacena claves primarias utilizando el tipo de datos <code translate="no">VARCHAR</code>, que se autogenera con una longitud máxima de 100 bytes.</p></li>
+<li><p><code translate="no">sparse_vector</code>: Este campo almacena vectores dispersos utilizando el tipo de datos <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">text</code>: Este campo almacena cadenas de texto utilizando el tipo de datos <code translate="no">VARCHAR</code>, con una longitud máxima de 65535 bytes.</p></li>
+</ul>
+<div class="alert note">
+<p>Para habilitar Milvus o generar incrustaciones de vectores dispersos a partir de un campo de texto especificado durante la inserción de datos, debe realizarse un paso adicional que implica una función. Para más información, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
+</div>
+<h2 id="Set-Index-Parameters" class="common-anchor-header">Establecer parámetros de índice<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>El proceso de creación de un índice para vectores dispersos es similar al de <a href="/docs/es/dense-vector.md">los vectores densos</a>, pero con diferencias en el tipo de índice especificado (<code translate="no">index_type</code>), la métrica de distancia (<code translate="no">metric_type</code>) y los parámetros del índice (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -254,66 +310,60 @@ extraParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>
 
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
-
         .indexName(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
         .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
-
         .metricType(IndexParam.MetricType.IP)
-
         .extraParams(extraParams)
-
         .build());
+
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
+<pre><code translate="no" class="language-javascript">
+<span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-title class_">MetricType</span>.<span class="hljs-property">IP</span>,
-
     <span class="hljs-attr">index_name</span>: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     <span class="hljs-attr">index_type</span>: <span class="hljs-title class_">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>,
     <span class="hljs-attr">params</span>: {
       <span class="hljs-attr">inverted_index_algo</span>: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>, 
     },
-
 });
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">idx := index.NewSparseInvertedIndex(entity.IP, <span class="hljs-number">0.2</span>)
 indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse_vector&quot;</span>, idx)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+<pre><code translate="no" class="language-bash">
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
             &quot;fieldName&quot;: &quot;sparse_vector&quot;,
             &quot;metricType&quot;: &quot;IP&quot;,
-
             &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
             &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
             &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
-
         }
     ]&#x27;</span>
+
 <button class="copy-code-btn"></button></code></pre>
-<p>En el ejemplo anterior:</p>
+<p>Este ejemplo utiliza el tipo de índice <code translate="no">SPARSE_INVERTED_INDEX</code> con <code translate="no">IP</code> como métrica. Para más detalles, consulta los siguientes recursos:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: El tipo de índice a crear para el campo vectorial disperso.</p>
-<ul>
-<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Un índice invertido de propósito general para vectores dispersos.</li>
+<li><a href="/docs/es/metric.md">Tipos de métrica</a>: Tipos de métrica admitidos para distintos tipos de campo</li>
 </ul>
-<p><div class="alert note"></p>
-<p>A partir de Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> queda obsoleto. En su lugar, se recomienda utilizar <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> por equivalencia manteniendo la compatibilidad.</p>
-<p></div></p></li>
-<li><p><code translate="no">metric_type</code>: La métrica utilizada para calcular la similitud entre vectores dispersos. Valores válidos:</p>
-<ul>
-<li><p><code translate="no">IP</code> (Producto interior): Mide la similitud utilizando el producto punto.</p></li>
-<li><p><code translate="no">BM25</code>: Se utiliza normalmente para la búsqueda de texto completo, centrándose en la similitud textual.</p>
-<p>Para más detalles, consulte <a href="/docs/es/metric.md">Tipos de métricas</a> y <a href="/docs/es/full-text-search.md">búsqueda de texto completo</a>.</p></li>
-</ul></li>
-<li><p><code translate="no">params.inverted_index_algo</code>: El algoritmo utilizado para construir y consultar el índice. Valores válidos:</p>
-<ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (por defecto): Procesamiento optimizado de consultas documento a documento (DAAT) mediante el algoritmo MaxScore. MaxScore proporciona un mejor rendimiento para valores altos de <em>k</em> o consultas con muchos términos al omitir términos y documentos que probablemente tengan un impacto mínimo. Para ello, divide los términos en grupos esenciales y no esenciales en función de sus puntuaciones máximas de impacto, centrándose en los términos que pueden contribuir a los resultados k más importantes.</p></li>
-<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Procesamiento optimizado de consultas DAAT mediante el algoritmo WAND. WAND evalúa un menor número de documentos coincidentes aprovechando las puntuaciones de impacto máximo para omitir los documentos no competitivos, pero tiene una mayor sobrecarga por coincidencia. Esto hace que WAND sea más eficiente para consultas con valores de <em>k</em> pequeños o consultas cortas, en las que saltar es más factible.</p></li>
-<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Procesamiento de consultas básicas término a término (TAAT). Aunque es más lento que <code translate="no">DAAT_MAXSCORE</code> y <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> ofrece una ventaja única. A diferencia de los algoritmos DAAT, que utilizan puntuaciones de impacto máximo almacenadas en caché que permanecen estáticas independientemente de los cambios en el parámetro de colección global (avgdl), <code translate="no">TAAT_NAIVE</code> se adapta dinámicamente a dichos cambios.</p></li>
-</ul></li>
-</ul>
-<h3 id="Create-collection" class="common-anchor-header">Creación de la colección</h3><p>Una vez completados los ajustes de vectores dispersos e índices, puede crear una colección que contenga vectores dispersos. El siguiente ejemplo utiliza el método <code translate="no">create_collection</code> para crear una colección llamada <code translate="no">my_collection</code>.</p>
+<h2 id="Create-Collection" class="common-anchor-header">Crear colección<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Una vez completada la configuración de vectores dispersos e índices, puede crear una colección que contenga vectores dispersos. El siguiente ejemplo utiliza el método <code translate="no">create_collection</code> para crear una colección llamada <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -359,17 +409,37 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insertar datos</h3><p>Después de crear la colección, inserta datos que contengan vectores dispersos.</p>
+<h2 id="Insert-data" class="common-anchor-header">Insertar datos<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Debe proporcionar datos para todos los campos definidos durante la creación de la colección, excepto para los campos autogenerados (como la clave primaria con <code translate="no">auto_id</code> activado). Si utiliza la función BM25 incorporada para autogenerar vectores dispersos, también debe omitir el campo de vector disperso al insertar los datos.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">sparse_vectors = [
-    {<span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>}},
-    {<span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}},
+<pre><code translate="no" class="language-python">data = [
+    {
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>,
+        <span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>}
+    },
+    {
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>,
+        <span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}
 ]
 
 client.insert(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=sparse_vectors
+    data=data
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
@@ -377,10 +447,18 @@ client.insert(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
 
-List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.SortedMap;
+<span class="hljs-keyword">import</span> java.util.TreeMap;
+
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+
 {
     <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>);
+    
     SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
     sparse.put(<span class="hljs-number">1L</span>, <span class="hljs-number">0.5f</span>);
     sparse.put(<span class="hljs-number">100L</span>, <span class="hljs-number">0.3f</span>);
@@ -390,6 +468,8 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
 }
 {
     <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>);
+    
     SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
     sparse.put(<span class="hljs-number">10L</span>, <span class="hljs-number">0.1f</span>);
     sparse.put(<span class="hljs-number">200L</span>, <span class="hljs-number">0.7f</span>);
@@ -398,30 +478,46 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
     rows.add(row);
 }
 
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
+<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertResp</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
-  { <span class="hljs-attr">sparse_vector</span>: { <span class="hljs-string">&quot;1&quot;</span>: <span class="hljs-number">0.5</span>, <span class="hljs-string">&quot;100&quot;</span>: <span class="hljs-number">0.3</span>, <span class="hljs-string">&quot;500&quot;</span>: <span class="hljs-number">0.8</span> } },
-  { <span class="hljs-attr">sparse_vector</span>: { <span class="hljs-string">&quot;10&quot;</span>: <span class="hljs-number">0.1</span>, <span class="hljs-string">&quot;200&quot;</span>: <span class="hljs-number">0.7</span>, <span class="hljs-string">&quot;1000&quot;</span>: <span class="hljs-number">0.9</span> } },
+    {
+        <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>,
+        <span class="hljs-attr">sparse_vector</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>}
+    {
+        <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>,
+        <span class="hljs-attr">sparse_vector</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}
+    },
 ];
-client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">data</span>: data,
-});
 
+client.<span class="hljs-title function_">insert</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">data</span>: data
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">v := <span class="hljs-built_in">make</span>([]entity.SparseEmbedding, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)
+<pre><code translate="no" class="language-go">texts := []<span class="hljs-type">string</span>{
+    <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>,
+    <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>,
+}
+textColumn := entity.NewColumnVarChar(<span class="hljs-string">&quot;text&quot;</span>, texts)
+
+<span class="hljs-comment">// Prepare sparse vectors</span>
+sparseVectors := <span class="hljs-built_in">make</span>([]entity.SparseEmbedding, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)
 sparseVector1, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">1</span>, <span class="hljs-number">100</span>, <span class="hljs-number">500</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.8</span>})
-v = <span class="hljs-built_in">append</span>(v, sparseVector1)
+sparseVectors = <span class="hljs-built_in">append</span>(sparseVectors, sparseVector1)
 sparseVector2, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">10</span>, <span class="hljs-number">200</span>, <span class="hljs-number">1000</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.9</span>})
-v = <span class="hljs-built_in">append</span>(v, sparseVector2)
-column := column.NewColumnSparseVectors(<span class="hljs-string">&quot;sparse_vector&quot;</span>, v)
+sparseVectors = <span class="hljs-built_in">append</span>(sparseVectors, sparseVector2)
+sparseVectorColumn := entity.NewColumnSparseVectors(<span class="hljs-string">&quot;sparse_vector&quot;</span>, sparseVectors)
 
 _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithColumns(column))
+    WithColumns(
+        sparseVectorColumn,
+        textColumn
+        
+    ))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle err</span>
@@ -433,30 +529,83 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
-        {&quot;sparse_vector&quot;: {&quot;1&quot;: 0.5, &quot;100&quot;: 0.3, &quot;500&quot;: 0.8}},
-        {&quot;sparse_vector&quot;: {&quot;10&quot;: 0.1, &quot;200&quot;: 0.7, &quot;1000&quot;: 0.9}}        
+        {
+            &quot;text&quot;: &quot;information retrieval is a field of study.&quot;,
+            &quot;sparse_vector&quot;: {&quot;1&quot;: 0.5, &quot;100&quot;: 0.3, &quot;500&quot;: 0.8}
+        },
+        {
+            &quot;text&quot;: &quot;information retrieval focuses on finding relevant information in large datasets.&quot;,
+            &quot;sparse_vector&quot;: {&quot;10&quot;: 0.1, &quot;200&quot;: 0.7, &quot;1000&quot;: 0.9}
+        }     
     ],
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
-
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572534&quot;,&quot;453577185629572535&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Realizar la búsqueda de similitud</h3><p>Para realizar una búsqueda de similitudes utilizando vectores dispersos, prepare el vector de consulta y los parámetros de búsqueda.</p>
+<h2 id="Perform-Similarity-Search" class="common-anchor-header">Búsqueda de similitudes<button data-href="#Perform-Similarity-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Para realizar una búsqueda de similitud utilizando vectores dispersos, prepare tanto los datos de consulta como los parámetros de búsqueda.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
 search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># A tunable drop ratio parameter with a valid range between 0 and 1</span>
 }
 
-<span class="hljs-comment"># Prepare the query vector</span>
-query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
+<span class="hljs-comment"># Query with sparse vector</span>
+query_data = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, <code translate="no">drop_ratio_search</code> es un parámetro opcional específico para vectores dispersos, que permite el ajuste fino de pequeños valores en el vector de consulta durante la búsqueda. Por ejemplo, con <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, el 20% de los valores más pequeños del vector de consulta se ignorarán durante la búsqueda.</p>
-<p>A continuación, ejecuta la búsqueda de similitud utilizando el método <code translate="no">search</code>:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.SparseFloatVec;
+
+<span class="hljs-comment">// Prepare search parameters</span>
+Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+searchParams.put(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
+
+<span class="hljs-comment">// Query with the sparse vector</span>
+SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
+sparse.put(<span class="hljs-number">1L</span>, <span class="hljs-number">0.2f</span>);
+sparse.put(<span class="hljs-number">50L</span>, <span class="hljs-number">0.4f</span>);
+sparse.put(<span class="hljs-number">1000L</span>, <span class="hljs-number">0.7f</span>);
+<span class="hljs-type">SparseFloatVec</span> <span class="hljs-variable">queryData</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SparseFloatVec</span>(sparse);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// Prepare search parameters</span>
+annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>)
+
+<span class="hljs-comment">// Query with the sparse vector</span>
+queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">1</span>, <span class="hljs-number">50</span>, <span class="hljs-number">1000</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.7</span>})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Prepare search parameters</span>
+<span class="hljs-keyword">const</span> searchParams = {<span class="hljs-attr">drop_ratio_search</span>: <span class="hljs-number">0.2</span>}
+
+<span class="hljs-comment">// Query with the sparse vector</span>
+<span class="hljs-keyword">const</span> queryData = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Prepare search parameters</span>
+<span class="hljs-built_in">export</span> queryData=<span class="hljs-string">&#x27;[&quot;What is information retrieval?&quot;]&#x27;</span>
+
+<span class="hljs-comment"># Query with the sparse vector</span>
+<span class="hljs-built_in">export</span> queryData=<span class="hljs-string">&#x27;[{1: 0.2, 50: 0.4, 1000: 0.7}]&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>A continuación, ejecute la búsqueda por similitud utilizando el método <code translate="no">search</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=query_vector,
+    data=query_data,
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;pk&quot;</span>],
     search_params=search_params,
@@ -468,22 +617,13 @@ query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172266&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172266&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172265&#x27;, &#x27;distance&#x27;: 0.10000000149011612, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172265&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.SparseFloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
-
-Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.put(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
-
-SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
-sparse.put(<span class="hljs-number">1L</span>, <span class="hljs-number">0.2f</span>);
-sparse.put(<span class="hljs-number">50L</span>, <span class="hljs-number">0.4f</span>);
-sparse.put(<span class="hljs-number">1000L</span>, <span class="hljs-number">0.7f</span>);
 
 <span class="hljs-type">SparseFloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SparseFloatVec</span>(sparse);
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchR</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(Collections.singletonList(queryVector))
+        .data(Collections.singletonList(queryData))
         .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
         .searchParams(searchParams)
         .topK(<span class="hljs-number">3</span>)
@@ -498,22 +638,16 @@ System.out.println(searchR.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    <span class="hljs-attr">data</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>},
+    <span class="hljs-attr">data</span>: queryData,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],
-    <span class="hljs-attr">params</span>: {
-        <span class="hljs-attr">drop_ratio_search</span>: <span class="hljs-number">0.2</span>
-    }
+    <span class="hljs-attr">params</span>: searchParams
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryVector, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">1</span>, <span class="hljs-number">50</span>, <span class="hljs-number">1000</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.7</span>})
-
-annSearchParams := index.NewCustomAnnParam()
-annSearchParams.WithExtraParam(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>)
-resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
-    <span class="hljs-number">3</span>,                      <span class="hljs-comment">// limit</span>
-    []entity.Vector{entity.SparseEmbedding(queryVector)},
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-number">3</span>, <span class="hljs-comment">// limit</span>
+    []entity.Vector{queryData},
 ).WithANNSField(<span class="hljs-string">&quot;sparse_vector&quot;</span>).
     WithOutputFields(<span class="hljs-string">&quot;pk&quot;</span>).
     WithAnnParam(annSearchParams))
@@ -540,17 +674,13 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;data&quot;: [
-        {&quot;1&quot;: 0.2, &quot;50&quot;: 0.4, &quot;1000&quot;: 0.7}
-    ],
+    &quot;data&quot;: $queryData,
     &quot;annsField&quot;: &quot;sparse_vector&quot;,
     &quot;limit&quot;: 3,
-    &quot;searchParams&quot;:{
-        &quot;params&quot;:{&quot;drop_ratio_search&quot;: 0.2}
-    },
+    &quot;searchParams&quot;: $searchParams,
     &quot;outputFields&quot;: [&quot;pk&quot;]
 }&#x27;</span>
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener más información sobre los parámetros de búsqueda por similitud, consulte <a href="/docs/es/single-vector-search.md">Búsqueda básica de RNA</a>.</p>
+<p>Para obtener más información sobre los parámetros de búsqueda de similitud, consulte <a href="/docs/es/single-vector-search.md">Búsqueda vectorial básica</a>.</p>

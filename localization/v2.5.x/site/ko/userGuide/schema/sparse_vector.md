@@ -2,8 +2,8 @@
 id: sparse_vector.md
 title: 스파스 벡터
 summary: >-
-  스파스 벡터는 정보 검색과 자연어 처리에서 데이터를 표현하는 중요한 방법입니다. 고밀도 벡터는 뛰어난 의미 이해 기능으로 인기가 있지만,
-  키워드나 구문을 정확하게 일치시켜야 하는 애플리케이션의 경우 희소 벡터가 더 정확한 결과를 제공하는 경우가 많습니다.
+  스파스 벡터는 정보 검색과 자연어 처리에서 표면 수준의 용어 일치를 포착하는 중요한 방법입니다. 고밀도 벡터는 의미론적 이해에 탁월하지만,
+  희소 벡터는 특히 특수 용어나 텍스트 식별자를 검색할 때 더 예측 가능한 일치 결과를 제공하는 경우가 많습니다.
 ---
 <h1 id="Sparse-Vector" class="common-anchor-header">스파스 벡터<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>스파스 벡터는 정보 검색과 자연어 처리에서 데이터를 표현하는 중요한 방법입니다. 고밀도 벡터는 뛰어난 의미 이해 기능으로 인기가 있지만, 키워드나 구문을 정확하게 일치시켜야 하는 애플리케이션의 경우 희소 벡터가 더 정확한 결과를 제공하는 경우가 많습니다.</p>
+    </button></h1><p>스파스 벡터는 정보 검색과 자연어 처리에서 표면 수준의 용어 일치를 포착하는 중요한 방법입니다. 고밀도 벡터는 의미 이해에 탁월하지만, 희소 벡터는 특히 특수 용어나 텍스트 식별자를 검색할 때 더 예측 가능한 일치 결과를 제공하는 경우가 많습니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,28 +36,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>스파스 벡터는 대부분의 요소가 0이고 일부 차원만 0이 아닌 값을 갖는 고차원 벡터의 특수한 표현입니다. 이러한 특성으로 인해 희소 벡터는 대규모의 고차원이지만 희박한 데이터를 처리하는 데 특히 효과적입니다. 일반적인 응용 분야는 다음과 같습니다:</p>
+    </button></h2><p>스파스 벡터는 대부분의 요소가 0이고 일부 차원만 0이 아닌 값을 갖는 특수한 고차원 벡터입니다. 아래 다이어그램에서 볼 수 있듯이 고밀도 벡터는 일반적으로 각 위치에 값이 있는 연속 배열로 표현됩니다(예: <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). 이와 대조적으로 희소 벡터는 0이 아닌 요소와 해당 차원의 인덱스만 저장하며, 종종 <code translate="no">{ index: value}</code> 의 키-값 쌍으로 표현됩니다(예: <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   </span> <span class="img-wrapper"> <span>스파스 벡터 표현</span> </span></p>
+<p>토큰화 및 점수화를 통해 문서는 각 차원이 어휘의 특정 단어에 해당하는 단어 가방 벡터로 표현될 수 있습니다. 문서에 존재하는 단어만 0이 아닌 값을 가지므로 희소 벡터 표현이 생성됩니다. 스파스 벡터는 두 가지 접근 방식을 사용하여 생성할 수 있습니다:</p>
 <ul>
-<li><p><strong>텍스트 분석:</strong> 각 차원이 단어에 해당하고 문서에 나타나는 단어만 0이 아닌 값을 갖는 단어 가방 벡터로 문서를 표현합니다.</p></li>
-<li><p><strong>추천 시스템:</strong> 사용자-항목 상호 작용 행렬: 각 차원은 특정 항목에 대한 사용자의 평가를 나타내며, 대부분의 사용자는 몇 개의 항목과만 상호 작용합니다.</p></li>
-<li><p><strong>이미지 처리:</strong> 이미지의 핵심 포인트에만 초점을 맞춘 로컬 특징 표현으로, 고차원 스파스 벡터를 생성합니다.</p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (용어 빈도 역 문서 빈도) 및 <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (베스트 매칭 25)와 같은<strong>전통적인 통계 기법은</strong> 말뭉치 전체에서 단어의 빈도와 중요도에 따라 가중치를 할당합니다. 이러한 방법은 토큰을 나타내는 각 차원에 대한 점수로 간단한 통계를 계산합니다.  Milvus는 텍스트를 스파스 벡터로 자동 변환하여 수동 전처리가 필요 없는 BM25 방식의 내장형 <strong>전체 텍스트 검색을</strong> 제공합니다. 이 방식은 정밀도와 정확한 일치가 중요한 키워드 기반 검색에 이상적입니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
+<li><p><strong>신경 스파스 임베딩 모델은</strong> 대규모 데이터 세트에 대한 학습을 통해 스파스 표현을 생성하는 학습된 방법입니다. 일반적으로 트랜스포머 아키텍처를 사용하는 딥 러닝 모델로, 의미론적 컨텍스트에 따라 용어를 확장하고 가중치를 부여할 수 있습니다. Milvus는 <a href="https://arxiv.org/abs/2109.10086">SPLADE와</a> 같은 모델에서 외부에서 생성된 스파스 임베딩도 지원합니다. 자세한 내용은 <a href="/docs/ko/embeddings.md#Embedding-Overview">임베딩을</a> 참조하세요.</include></p></li>
 </ul>
-<p>아래 다이어그램에서 볼 수 있듯이 고밀도 벡터는 일반적으로 각 위치에 값이 있는 연속 배열로 표현됩니다(예: <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). 반면, 스파스 벡터는 0이 아닌 요소와 그 인덱스만 저장하며, 키-값 쌍으로 표현되는 경우가 많습니다(예: <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>). 이러한 표현은 저장 공간을 크게 줄이고 특히 매우 높은 차원(예: 10,000 차원)의 데이터를 다룰 때 계산 효율성을 높입니다.</p>
+<p>효율적인 검색을 위해 스파스 벡터와 원본 텍스트를 Milvus에 저장할 수 있습니다. 아래 다이어그램은 전체 프로세스를 간략하게 설명합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Sparse Vector" class="doc-image" id="sparse-vector" />
-   </span> <span class="img-wrapper"> <span>스파스 벡터</span> </span></p>
-<p>희소 벡터는 텍스트 처리에서 <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (용어 빈도 역 문서 빈도) 및 <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25와</a> 같은 다양한 방법을 사용하여 생성할 수 있습니다. 또한 Milvus는 스파스 벡터를 생성하고 처리하는 데 도움이 되는 편리한 방법을 제공합니다. 자세한 내용은 임베딩을 참조하세요.</p>
-<p>텍스트 데이터의 경우, Milvus는 전체 텍스트 검색 기능도 제공하므로 외부 임베딩 모델을 사용해 스파스 벡터를 생성하지 않고도 원시 텍스트 데이터에서 직접 벡터 검색을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
-<p>벡터화 후에는 데이터를 Milvus에 저장하여 관리 및 벡터 검색을 할 수 있습니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use Sparse Vector" class="doc-image" id="use-sparse-vector" />
-   </span> <span class="img-wrapper"> <span>스파스 벡터 사용</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   </span> <span class="img-wrapper"> <span>스파스 벡터 워크플로</span> </span></p>
 <div class="alert note">
-<p>밀버스는 스파스 벡터 외에도 고밀도 벡터와 바이너리 벡터도 지원합니다. 고밀도 벡터는 깊은 의미 관계를 캡처하는 데 이상적이며, 이진 벡터는 빠른 유사도 비교 및 콘텐츠 중복 제거와 같은 시나리오에 탁월합니다. 자세한 내용은 <a href="/docs/ko/dense-vector.md">고밀도 벡터</a> 및 <a href="/docs/ko/binary-vector.md">이진 벡터를</a> 참조하세요.</p>
+<p>밀버스는 스파스 벡터 외에도 고밀도 벡터와 바이너리 벡터도 지원합니다. 고밀도 벡터는 심층적인 의미 관계를 캡처하는 데 이상적이며, 이진 벡터는 빠른 유사도 비교 및 콘텐츠 중복 제거와 같은 시나리오에 탁월합니다. 자세한 내용은 <a href="/docs/ko/dense-vector.md">고밀도 벡터</a> 및 <a href="/docs/ko/binary-vector.md">바이너리 벡터를</a> 참조하세요.</p>
 </div>
-<h2 id="Use-sparse-vectors" class="common-anchor-header">스파스 벡터 사용<button data-href="#Use-sparse-vectors" class="anchor-icon" translate="no">
+<h2 id="Data-Formats" class="common-anchor-header">데이터 형식<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,43 +69,51 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 다음 형식의 스파스 벡터 표현을 지원합니다:</p>
+    </button></h2><p>다음 섹션에서는 SPLADE와 같은 학습된 스파스 임베딩 모델에서 벡터를 저장하는 방법을 설명합니다. 고밀도 벡터 기반 시맨틱 검색을 보완할 무언가를 찾고 계신다면, 간소화를 위해 SPLADE보다 BM25를 사용한 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 권장합니다. 품질 평가를 실행하고 SPLADE를 사용하기로 결정한 경우, <a href="/docs/ko/embeddings.md#Embedding-Overview">임베딩을</a> 통해 스파스 벡터를 생성하는 방법에 대한 내용을 참조할 수 있습니다.</p>
+<p>밀버스는 다음과 같은 형식의 스파스 벡터 입력을 지원합니다:</p>
 <ul>
+<li><p><strong>사전 목록( <code translate="no">{dimension_index: value, ...}</code> 형식)</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a dictionary</span>
+sparse_vectors = [{<span class="hljs-number">27</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">5369</span>: <span class="hljs-number">0.6</span>} , {<span class="hljs-number">100</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">3</span>: <span class="hljs-number">0.8</span>}]
+<button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>스파스 행렬( <code translate="no">scipy.sparse</code> 클래스 사용)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix
 
-<span class="hljs-comment"># Create a sparse matrix</span>
-row = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>]
-col = [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
-data = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]
-sparse_matrix = csr_matrix((data, (row, col)), shape=(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>))
-
-<span class="hljs-comment"># Represent sparse vector using the sparse matrix</span>
-sparse_vector = sparse_matrix.getrow(<span class="hljs-number">0</span>)
+<span class="hljs-comment"># First vector: indices [27, 100, 5369] with values [0.5, 0.3, 0.6]</span>
+<span class="hljs-comment"># Second vector: indices [3, 100] with values [0.8, 0.1]</span>
+indices = [[<span class="hljs-number">27</span>, <span class="hljs-number">100</span>, <span class="hljs-number">5369</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">100</span>]]
+values = [[<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.1</span>]]
+sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>사전 목록( <code translate="no">{dimension_index: value, ...}</code> 형식)</strong></p>
-<p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a></div></p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent sparse vector using a dictionary</span>
-sparse_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>, <span class="hljs-number">1024</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">5000</span>: <span class="hljs-number">0.6</span>}]
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">SortedMap&lt;Long, Float&gt; sparseVector = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
-sparseVector.put(<span class="hljs-number">1L</span>, <span class="hljs-number">0.5f</span>);
-sparseVector.put(<span class="hljs-number">100L</span>, <span class="hljs-number">0.3f</span>);
-sparseVector.put(<span class="hljs-number">500L</span>, <span class="hljs-number">0.8f</span>);
-sparseVector.put(<span class="hljs-number">1024L</span>, <span class="hljs-number">0.2f</span>);
-sparseVector.put(<span class="hljs-number">5000L</span>, <span class="hljs-number">0.6f</span>);
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>튜플 이터레이터 목록( <code translate="no">[(dimension_index, value)]</code> 형식으로 형식화)</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent sparse vector using a list of tuples</span>
-sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>), (<span class="hljs-number">100</span>, <span class="hljs-number">0.3</span>), (<span class="hljs-number">500</span>, <span class="hljs-number">0.8</span>), (<span class="hljs-number">1024</span>, <span class="hljs-number">0.2</span>), (<span class="hljs-number">5000</span>, <span class="hljs-number">0.6</span>)]]
+<li><p><strong>튜플 이터러블 목록(예: <code translate="no">[(dimension_index, value)]</code>)</strong></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a list of iterables (e.g. tuples)</span>
+sparse_vector = [
+    [(<span class="hljs-number">27</span>, <span class="hljs-number">0.5</span>), (<span class="hljs-number">100</span>, <span class="hljs-number">0.3</span>), (<span class="hljs-number">5369</span>, <span class="hljs-number">0.6</span>)],
+    [(<span class="hljs-number">100</span>, <span class="hljs-number">0.1</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">0.8</span>)]
+    ]
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Add-vector-field" class="common-anchor-header">벡터 필드 추가</h3><p>Milvus에서 스파스 벡터를 사용하려면 컬렉션을 만들 때 스파스 벡터를 저장할 필드를 정의하세요. 이 과정에는 다음이 포함됩니다:</p>
-<ol>
-<li><p><code translate="no">datatype</code> 을 지원되는 스파스 벡터 데이터 유형인 <code translate="no">SPARSE_FLOAT_VECTOR</code> 으로 설정합니다.</p></li>
-<li><p>차원을 지정할 필요가 없습니다.</p></li>
-</ol>
+<h2 id="Define-Collection-Schema" class="common-anchor-header">컬렉션 스키마 정의<button data-href="#Define-Collection-Schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>컬렉션을 만들기 전에 필드를 정의하는 컬렉션 스키마를 지정해야 하며, 선택적으로 텍스트 필드를 해당 스파스 벡터 표현으로 변환하는 함수도 지정할 수 있습니다.</p>
+<h3 id="Add-fields" class="common-anchor-header">필드 추가</h3><p>Milvus에서 스파스 벡터를 사용하려면 다음 필드를 포함하는 스키마로 컬렉션을 만들어야 합니다:</p>
+<ul>
+<li><p><code translate="no">VARCHAR</code> 필드에서 자동 생성되거나 입력 데이터에서 직접 제공된 희소 벡터를 저장하기 위해 예약된 <code translate="no">SPARSE_FLOAT_VECTOR</code> 필드.</p></li>
+<li><p>일반적으로 스파스 벡터가 나타내는 원시 텍스트도 컬렉션에 저장됩니다. <code translate="no">VARCHAR</code> 필드를 사용하여 원시 텍스트를 저장할 수 있습니다.</p></li>
+</ul>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -122,6 +127,7 @@ schema = client.create_schema(
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
+schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>, enable_analyzer=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -143,10 +149,15 @@ schema.addField(AddFieldReq.builder()
         .autoID(<span class="hljs-literal">true</span>)
         .maxLength(<span class="hljs-number">100</span>)
         .build());
-
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
         .dataType(DataType.SparseFloatVector)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;text&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">65535</span>)
+        .enableAnalyzer(<span class="hljs-literal">true</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
@@ -164,7 +175,14 @@ schema.addField(AddFieldReq.builder()
   {
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">SparseFloatVector</span>,
-  }
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;VarChar&quot;</span>,
+    <span class="hljs-attr">enable_analyzer</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">65535</span>,
+  },
 ];
 
 <button class="copy-code-btn"></button></code></pre>
@@ -201,6 +219,11 @@ schema.WithField(entity.NewField().
 ).WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;sparse_vector&quot;</span>).
     WithDataType(entity.FieldTypeSparseVector),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;text&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithEnableAnalyzer(<span class="hljs-literal">true</span>).
+    WithMaxLength(<span class="hljs-number">65535</span>),
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{
@@ -217,16 +240,49 @@ schema.WithField(entity.NewField().
     &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 
+<span class="hljs-built_in">export</span> textField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;text&quot;,
+    &quot;dataType&quot;: &quot;VarChar&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;max_length&quot;: 65535,
+        &quot;enable_analyzer&quot;: true
+    }
+}&#x27;</span>
+
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;autoID\&quot;: true,
     \&quot;fields\&quot;: [
         <span class="hljs-variable">$primaryField</span>,
-        <span class="hljs-variable">$vectorField</span>
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$textField</span>
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예에서는 스파스 벡터를 저장하기 위해 <code translate="no">sparse_vector</code> 이라는 이름의 벡터 필드가 추가됩니다. 이 필드의 데이터 유형은 <code translate="no">SPARSE_FLOAT_VECTOR</code> 입니다.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정</h3><p>스파스 벡터에 대한 인덱스를 생성하는 과정은 <a href="/docs/ko/dense-vector.md">밀도 벡터에</a> 대한 인덱스 생성 과정과 유사하지만 지정된 인덱스 유형(<code translate="no">index_type</code>), 거리 메트릭(<code translate="no">metric_type</code>), 인덱스 매개변수(<code translate="no">params</code>)에 차이가 있습니다.</p>
+<p>이 예제에서는 세 개의 필드가 추가되었습니다:</p>
+<ul>
+<li><p><code translate="no">pk</code>: 이 필드는 최대 100바이트 길이로 자동 생성되는 <code translate="no">VARCHAR</code> 데이터 유형을 사용하여 기본 키를 저장합니다.</p></li>
+<li><p><code translate="no">sparse_vector</code>: 이 필드는 <code translate="no">SPARSE_FLOAT_VECTOR</code> 데이터 유형을 사용하여 스파스 벡터를 저장합니다.</p></li>
+<li><p><code translate="no">text</code>: 이 필드는 <code translate="no">VARCHAR</code> 데이터 유형을 사용하여 텍스트 문자열을 저장하며 최대 길이는 65535바이트입니다.</p></li>
+</ul>
+<div class="alert note">
+<p>데이터 삽입 중에 Milvus를 활성화하거나 지정된 텍스트 필드에서 스파스 벡터 임베딩을 생성하려면 함수와 관련된 추가 단계를 수행해야 합니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
+</div>
+<h2 id="Set-Index-Parameters" class="common-anchor-header">인덱스 매개변수 설정<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>희소 벡터에 대한 인덱스를 생성하는 과정은 <a href="/docs/ko/dense-vector.md">고밀도 벡터의</a> 경우와 유사하지만 지정된 인덱스 유형(<code translate="no">index_type</code>), 거리 메트릭(<code translate="no">metric_type</code>) 및 인덱스 매개변수(<code translate="no">params</code>)에 차이가 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -250,66 +306,60 @@ extraParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>
 
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
-
         .indexName(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
         .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
-
         .metricType(IndexParam.MetricType.IP)
-
         .extraParams(extraParams)
-
         .build());
+
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
+<pre><code translate="no" class="language-javascript">
+<span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-title class_">MetricType</span>.<span class="hljs-property">IP</span>,
-
     <span class="hljs-attr">index_name</span>: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     <span class="hljs-attr">index_type</span>: <span class="hljs-title class_">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>,
     <span class="hljs-attr">params</span>: {
       <span class="hljs-attr">inverted_index_algo</span>: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>, 
     },
-
 });
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">idx := index.NewSparseInvertedIndex(entity.IP, <span class="hljs-number">0.2</span>)
 indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse_vector&quot;</span>, idx)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+<pre><code translate="no" class="language-bash">
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
             &quot;fieldName&quot;: &quot;sparse_vector&quot;,
             &quot;metricType&quot;: &quot;IP&quot;,
-
             &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
             &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
             &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
-
         }
     ]&#x27;</span>
+
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 예제에서</p>
+<p>이 예에서는 <code translate="no">SPARSE_INVERTED_INDEX</code> 인덱스 유형과 <code translate="no">IP</code> 을 메트릭으로 사용합니다. 자세한 내용은 다음 리소스를 참조하세요:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: 스파스 벡터 필드에 대해 생성할 인덱스 유형입니다.</p>
-<ul>
-<li><code translate="no">SPARSE_INVERTED_INDEX</code>: 희소 벡터를 위한 범용 반전 인덱스입니다.</li>
+<li><a href="/docs/ko/metric.md">메트릭 유형</a>: 다양한 필드 유형에 대해 지원되는 메트릭 유형</li>
 </ul>
-<p><div class="alert note"></p>
-<p>Milvus 2.5.4부터 <code translate="no">SPARSE_WAND</code> 은 더 이상 사용되지 않습니다. 대신 호환성을 유지하면서 동등성을 위해 <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 을 사용하는 것이 좋습니다.</p>
-<p></div></p></li>
-<li><p><code translate="no">metric_type</code>: 스파스 벡터 간의 유사성을 계산하는 데 사용되는 메트릭입니다. 유효한 값:</p>
-<ul>
-<li><p><code translate="no">IP</code> (내적 곱): 도트 곱을 사용하여 유사도를 측정합니다.</p></li>
-<li><p><code translate="no">BM25</code>: 일반적으로 텍스트 유사성에 초점을 맞춘 전체 텍스트 검색에 사용됩니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형</a> 및 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
-</ul></li>
-<li><p><code translate="no">params.inverted_index_algo</code>: 인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 유효한 값입니다:</p>
-<ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (기본값): MaxScore 알고리즘을 사용하여 DAAT(Document-at-a-Time) 쿼리 처리를 최적화합니다. MaxScore는 영향이 미미할 것 같은 용어와 문서를 건너뛰는 방식으로 높은 <em>k</em> 값이나 많은 용어가 포함된 쿼리에 대해 더 나은 성능을 제공합니다. 최대 영향력 점수를 기준으로 용어를 필수 및 비필수 그룹으로 분류하여 상위 k 결과에 기여할 수 있는 용어에 집중함으로써 이를 달성합니다.</p></li>
-<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: WAND 알고리즘을 사용하여 최적화된 DAAT 쿼리 처리. WAND는 최대 영향력 점수를 활용하여 비경쟁 문서를 건너뛰기 때문에 히트 문서를 더 적게 평가하지만, 히트당 오버헤드가 더 높습니다. 따라서 건너뛰기가 더 용이한 작은 <em>k</em> 값의 쿼리나 짧은 쿼리에는 WAND가 더 효율적입니다.</p></li>
-<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: 기본 TAAT(Term-at-a-Time) 쿼리 처리. <code translate="no">DAAT_MAXSCORE</code> 및 <code translate="no">DAAT_WAND</code> 에 비해 느리지만 <code translate="no">TAAT_NAIVE</code> 은 고유한 이점을 제공합니다. 전역 컬렉션 매개변수(avgdl)의 변경에 관계없이 정적으로 유지되는 캐시된 최대 영향 점수를 사용하는 DAAT 알고리즘과 달리 <code translate="no">TAAT_NAIVE</code> 은 이러한 변경에 동적으로 적응합니다.</p></li>
-</ul></li>
-</ul>
-<h3 id="Create-collection" class="common-anchor-header">컬렉션 생성</h3><p>스파스 벡터 및 인덱스 설정이 완료되면 스파스 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
+<h2 id="Create-Collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>스파스 벡터 및 인덱스 설정이 완료되면 스파스 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 만듭니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -355,17 +405,37 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>컬렉션을 생성한 후 스파스 벡터가 포함된 데이터를 삽입합니다.</p>
+<h2 id="Insert-data" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>자동 생성되는 필드(예: <code translate="no">auto_id</code> 가 활성화된 기본 키)를 제외하고 컬렉션을 만드는 동안 정의된 모든 필드에 대한 데이터를 제공해야 합니다. 내장된 BM25 함수를 사용하여 스파스 벡터를 자동 생성하는 경우 데이터를 삽입할 때 스파스 벡터 필드도 생략해야 합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">sparse_vectors = [
-    {<span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>}},
-    {<span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}},
+<pre><code translate="no" class="language-python">data = [
+    {
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>,
+        <span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>}
+    },
+    {
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>,
+        <span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}
 ]
 
 client.insert(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=sparse_vectors
+    data=data
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
@@ -373,10 +443,18 @@ client.insert(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
 
-List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.SortedMap;
+<span class="hljs-keyword">import</span> java.util.TreeMap;
+
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+
 {
     <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>);
+    
     SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
     sparse.put(<span class="hljs-number">1L</span>, <span class="hljs-number">0.5f</span>);
     sparse.put(<span class="hljs-number">100L</span>, <span class="hljs-number">0.3f</span>);
@@ -386,6 +464,8 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
 }
 {
     <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>);
+    
     SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
     sparse.put(<span class="hljs-number">10L</span>, <span class="hljs-number">0.1f</span>);
     sparse.put(<span class="hljs-number">200L</span>, <span class="hljs-number">0.7f</span>);
@@ -394,30 +474,46 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
     rows.add(row);
 }
 
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
+<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertResp</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
-  { <span class="hljs-attr">sparse_vector</span>: { <span class="hljs-string">&quot;1&quot;</span>: <span class="hljs-number">0.5</span>, <span class="hljs-string">&quot;100&quot;</span>: <span class="hljs-number">0.3</span>, <span class="hljs-string">&quot;500&quot;</span>: <span class="hljs-number">0.8</span> } },
-  { <span class="hljs-attr">sparse_vector</span>: { <span class="hljs-string">&quot;10&quot;</span>: <span class="hljs-number">0.1</span>, <span class="hljs-string">&quot;200&quot;</span>: <span class="hljs-number">0.7</span>, <span class="hljs-string">&quot;1000&quot;</span>: <span class="hljs-number">0.9</span> } },
+    {
+        <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>,
+        <span class="hljs-attr">sparse_vector</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>}
+    {
+        <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>,
+        <span class="hljs-attr">sparse_vector</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}
+    },
 ];
-client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">data</span>: data,
-});
 
+client.<span class="hljs-title function_">insert</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">data</span>: data
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">v := <span class="hljs-built_in">make</span>([]entity.SparseEmbedding, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)
+<pre><code translate="no" class="language-go">texts := []<span class="hljs-type">string</span>{
+    <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>,
+    <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>,
+}
+textColumn := entity.NewColumnVarChar(<span class="hljs-string">&quot;text&quot;</span>, texts)
+
+<span class="hljs-comment">// Prepare sparse vectors</span>
+sparseVectors := <span class="hljs-built_in">make</span>([]entity.SparseEmbedding, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)
 sparseVector1, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">1</span>, <span class="hljs-number">100</span>, <span class="hljs-number">500</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.8</span>})
-v = <span class="hljs-built_in">append</span>(v, sparseVector1)
+sparseVectors = <span class="hljs-built_in">append</span>(sparseVectors, sparseVector1)
 sparseVector2, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">10</span>, <span class="hljs-number">200</span>, <span class="hljs-number">1000</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.9</span>})
-v = <span class="hljs-built_in">append</span>(v, sparseVector2)
-column := column.NewColumnSparseVectors(<span class="hljs-string">&quot;sparse_vector&quot;</span>, v)
+sparseVectors = <span class="hljs-built_in">append</span>(sparseVectors, sparseVector2)
+sparseVectorColumn := entity.NewColumnSparseVectors(<span class="hljs-string">&quot;sparse_vector&quot;</span>, sparseVectors)
 
 _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithColumns(column))
+    WithColumns(
+        sparseVectorColumn,
+        textColumn
+        
+    ))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle err</span>
@@ -429,30 +525,83 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
-        {&quot;sparse_vector&quot;: {&quot;1&quot;: 0.5, &quot;100&quot;: 0.3, &quot;500&quot;: 0.8}},
-        {&quot;sparse_vector&quot;: {&quot;10&quot;: 0.1, &quot;200&quot;: 0.7, &quot;1000&quot;: 0.9}}        
+        {
+            &quot;text&quot;: &quot;information retrieval is a field of study.&quot;,
+            &quot;sparse_vector&quot;: {&quot;1&quot;: 0.5, &quot;100&quot;: 0.3, &quot;500&quot;: 0.8}
+        },
+        {
+            &quot;text&quot;: &quot;information retrieval focuses on finding relevant information in large datasets.&quot;,
+            &quot;sparse_vector&quot;: {&quot;10&quot;: 0.1, &quot;200&quot;: 0.7, &quot;1000&quot;: 0.9}
+        }     
     ],
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
-
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572534&quot;,&quot;453577185629572535&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">유사도 검색 수행</h3><p>스파스 벡터를 사용하여 유사도 검색을 수행하려면 쿼리 벡터와 검색 매개변수를 준비합니다.</p>
+<h2 id="Perform-Similarity-Search" class="common-anchor-header">유사도 검색 수행<button data-href="#Perform-Similarity-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>스파스 벡터를 사용하여 유사도 검색을 수행하려면 쿼리 데이터와 검색 매개변수를 모두 준비합니다.</p>
+<div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
 search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># A tunable drop ratio parameter with a valid range between 0 and 1</span>
 }
 
-<span class="hljs-comment"># Prepare the query vector</span>
-query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
+<span class="hljs-comment"># Query with sparse vector</span>
+query_data = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예에서 <code translate="no">drop_ratio_search</code> 은 희소 벡터를 위한 선택적 파라미터로, 검색 중에 쿼리 벡터의 작은 값을 미세 조정할 수 있습니다. 예를 들어 <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> 을 사용하면 쿼리 벡터에서 가장 작은 20%의 값은 검색 중에 무시됩니다.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.SparseFloatVec;
+
+<span class="hljs-comment">// Prepare search parameters</span>
+Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+searchParams.put(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
+
+<span class="hljs-comment">// Query with the sparse vector</span>
+SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
+sparse.put(<span class="hljs-number">1L</span>, <span class="hljs-number">0.2f</span>);
+sparse.put(<span class="hljs-number">50L</span>, <span class="hljs-number">0.4f</span>);
+sparse.put(<span class="hljs-number">1000L</span>, <span class="hljs-number">0.7f</span>);
+<span class="hljs-type">SparseFloatVec</span> <span class="hljs-variable">queryData</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SparseFloatVec</span>(sparse);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// Prepare search parameters</span>
+annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>)
+
+<span class="hljs-comment">// Query with the sparse vector</span>
+queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">1</span>, <span class="hljs-number">50</span>, <span class="hljs-number">1000</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.7</span>})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Prepare search parameters</span>
+<span class="hljs-keyword">const</span> searchParams = {<span class="hljs-attr">drop_ratio_search</span>: <span class="hljs-number">0.2</span>}
+
+<span class="hljs-comment">// Query with the sparse vector</span>
+<span class="hljs-keyword">const</span> queryData = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Prepare search parameters</span>
+<span class="hljs-built_in">export</span> queryData=<span class="hljs-string">&#x27;[&quot;What is information retrieval?&quot;]&#x27;</span>
+
+<span class="hljs-comment"># Query with the sparse vector</span>
+<span class="hljs-built_in">export</span> queryData=<span class="hljs-string">&#x27;[{1: 0.2, 50: 0.4, 1000: 0.7}]&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>그런 다음 <code translate="no">search</code> 메서드를 사용하여 유사도 검색을 실행합니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=query_vector,
+    data=query_data,
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;pk&quot;</span>],
     search_params=search_params,
@@ -464,22 +613,13 @@ query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172266&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172266&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172265&#x27;, &#x27;distance&#x27;: 0.10000000149011612, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172265&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.SparseFloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
-
-Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.put(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
-
-SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
-sparse.put(<span class="hljs-number">1L</span>, <span class="hljs-number">0.2f</span>);
-sparse.put(<span class="hljs-number">50L</span>, <span class="hljs-number">0.4f</span>);
-sparse.put(<span class="hljs-number">1000L</span>, <span class="hljs-number">0.7f</span>);
 
 <span class="hljs-type">SparseFloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SparseFloatVec</span>(sparse);
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchR</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(Collections.singletonList(queryVector))
+        .data(Collections.singletonList(queryData))
         .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
         .searchParams(searchParams)
         .topK(<span class="hljs-number">3</span>)
@@ -494,22 +634,16 @@ System.out.println(searchR.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    <span class="hljs-attr">data</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>},
+    <span class="hljs-attr">data</span>: queryData,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],
-    <span class="hljs-attr">params</span>: {
-        <span class="hljs-attr">drop_ratio_search</span>: <span class="hljs-number">0.2</span>
-    }
+    <span class="hljs-attr">params</span>: searchParams
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryVector, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">1</span>, <span class="hljs-number">50</span>, <span class="hljs-number">1000</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.7</span>})
-
-annSearchParams := index.NewCustomAnnParam()
-annSearchParams.WithExtraParam(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>)
-resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
-    <span class="hljs-number">3</span>,                      <span class="hljs-comment">// limit</span>
-    []entity.Vector{entity.SparseEmbedding(queryVector)},
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-number">3</span>, <span class="hljs-comment">// limit</span>
+    []entity.Vector{queryData},
 ).WithANNSField(<span class="hljs-string">&quot;sparse_vector&quot;</span>).
     WithOutputFields(<span class="hljs-string">&quot;pk&quot;</span>).
     WithAnnParam(annSearchParams))
@@ -536,17 +670,13 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;data&quot;: [
-        {&quot;1&quot;: 0.2, &quot;50&quot;: 0.4, &quot;1000&quot;: 0.7}
-    ],
+    &quot;data&quot;: $queryData,
     &quot;annsField&quot;: &quot;sparse_vector&quot;,
     &quot;limit&quot;: 3,
-    &quot;searchParams&quot;:{
-        &quot;params&quot;:{&quot;drop_ratio_search&quot;: 0.2}
-    },
+    &quot;searchParams&quot;: $searchParams,
     &quot;outputFields&quot;: [&quot;pk&quot;]
 }&#x27;</span>
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/single-vector-search.md">기본 ANN 검색을</a> 참조하세요.</p>
+<p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/single-vector-search.md">기본 벡터 검색을</a> 참조하세요.</p>
