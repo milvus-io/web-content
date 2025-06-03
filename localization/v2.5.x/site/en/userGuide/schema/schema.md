@@ -115,10 +115,8 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,​
     datatype=DataType.INT64,​
-    <span class="hljs-comment"># highlight-start​</span>
-    is_primary=<span class="hljs-literal">True</span>,​
-    auto_id=<span class="hljs-literal">False</span>,​
-    <span class="hljs-comment"># highlight-end​</span>
+<span class="highlighted-comment-line">    is_primary=<span class="hljs-literal">True</span>,​</span>
+<span class="highlighted-comment-line">    auto_id=<span class="hljs-literal">False</span>,​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -183,8 +181,7 @@ export schema='{​
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,​
     datatype=DataType.FLOAT_VECTOR,​
-    <span class="hljs-comment"># highlight-next-line​</span>
-    dim=<span class="hljs-number">5</span>​
+<span class="highlighted-wrapper-line">    dim=<span class="hljs-number">5</span>​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -256,8 +253,7 @@ export schema=&quot;{​
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,​
     datatype=DataType.VARCHAR,​
-    <span class="hljs-comment"># highlight-next-line​</span>
-    max_length=<span class="hljs-number">512</span>​
+<span class="highlighted-wrapper-line">    max_length=<span class="hljs-number">512</span>​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>

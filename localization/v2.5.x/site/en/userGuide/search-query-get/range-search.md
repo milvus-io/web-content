@@ -121,12 +121,10 @@ res = client.search(
     data=[query_vector],
     limit=<span class="hljs-number">3</span>,
     search_params={
-        <span class="hljs-comment"># highlight-start</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {
-            <span class="hljs-string">&quot;radius&quot;</span>: <span class="hljs-number">0.4</span>,
-            <span class="hljs-string">&quot;range_filter&quot;</span>: <span class="hljs-number">0.6</span>
-        }
-        <span class="hljs-comment"># highlight-end</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;params&quot;</span>: {</span>
+<span class="highlighted-comment-line">            <span class="hljs-string">&quot;radius&quot;</span>: <span class="hljs-number">0.4</span>,</span>
+<span class="highlighted-comment-line">            <span class="hljs-string">&quot;range_filter&quot;</span>: <span class="hljs-number">0.6</span></span>
+<span class="highlighted-comment-line">        }</span>
     }
 )
 

@@ -554,8 +554,7 @@ curl --request POST \
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_3&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    num_shards=<span class="hljs-number">1</span>
+<span class="highlighted-wrapper-line">    num_shards=<span class="hljs-number">1</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// With shard number</span>
@@ -608,8 +607,7 @@ curl --request POST \
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_4&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    enable_mmap=<span class="hljs-literal">False</span>
+<span class="highlighted-wrapper-line">    enable_mmap=<span class="hljs-literal">False</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;
@@ -668,11 +666,9 @@ curl --request POST \
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_5&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-start</span>
-    properties={
-        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">86400</span>
-    }
-    <span class="hljs-comment"># highlight-end</span>
+<span class="highlighted-comment-line">    properties={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">86400</span></span>
+<span class="highlighted-comment-line">    }</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;

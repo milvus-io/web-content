@@ -471,8 +471,7 @@ client = MilvusClient(
 
 res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
@@ -486,8 +485,7 @@ client = MilvusClient(
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -504,8 +502,7 @@ connections.connect(
 collection = Collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 
 iterator = collection.query_iterator(
-    <span class="hljs-comment"># highlight-next-line</span>
-    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     batch_size=<span class="hljs-number">10</span>,
     expr=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;color&quot;</span>]

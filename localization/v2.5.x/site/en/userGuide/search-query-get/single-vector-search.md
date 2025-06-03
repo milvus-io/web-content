@@ -536,8 +536,7 @@ curl --request POST \
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     data=[query_vector],
     limit=<span class="hljs-number">3</span>,
 )
@@ -699,8 +698,7 @@ res = client.search(
     data=[query_vector],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，
-    <span class="hljs-comment"># highlight-next-line</span>
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]
+<span class="highlighted-wrapper-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -898,8 +896,7 @@ res = client.search(
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
     search_params={
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
-        <span class="hljs-comment"># highlight-next-line</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">10</span> <span class="hljs-comment"># The records to skip</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">10</span> <span class="hljs-comment"># The records to skip</span></span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>

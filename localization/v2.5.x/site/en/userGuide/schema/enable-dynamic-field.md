@@ -71,8 +71,7 @@ client= MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     dimension=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    enable_dynamic_field=<span class="hljs-literal">True</span>
+<span class="highlighted-wrapper-line">    enable_dynamic_field=<span class="hljs-literal">True</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
@@ -452,10 +451,8 @@ res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
     limit=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-start</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot;&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]
-    <span class="hljs-comment"># highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot;&#x27;</span>,</span>
+<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]</span>
 )
 
 <span class="hljs-built_in">print</span>(res)

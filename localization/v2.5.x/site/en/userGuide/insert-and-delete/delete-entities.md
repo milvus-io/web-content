@@ -53,8 +53,7 @@ client = MilvusClient(
 
 res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span></span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -162,8 +161,7 @@ curl --request POST \
 </div>
 <pre><code translate="no" class="language-python">res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>]
+<span class="highlighted-wrapper-line">    ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>]</span>
 )
 
 <span class="hljs-built_in">print</span>(res)

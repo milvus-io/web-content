@@ -292,8 +292,7 @@ curl --request POST \
 
 res = client.insert(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>,
+<span class="highlighted-wrapper-line">    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>,</span>
     data=data
 )
 
