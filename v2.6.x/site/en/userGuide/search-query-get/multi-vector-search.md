@@ -642,7 +642,7 @@ curl --request POST \
 
 Hybrid Search is implemented by creating multiple `AnnSearchRequest` in the `hybrid_search()` function, where each `AnnSearchRequest` represents a basic ANN search request for a specific vector field. Therefore, before conducting a Hybrid Search, it is necessary to create an `AnnSearchRequest` for each vector field.
 
-In addition, by configuring the `expr` parameter in an `AnnSearchRequest`, you can set the filtering conditions for your hybrid search. Please refer to [Filtered Search](filtered-search.md) and [Filtering](filtering).
+In addition, by configuring the `expr` parameter in an `AnnSearchRequest`, you can set the filtering conditions for your hybrid search. Please refer to [Filtered Search](filtered-search.md) and [Filtering](boolean.md).
 
 <div class="alert note">
 
