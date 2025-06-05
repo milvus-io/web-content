@@ -486,7 +486,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">建立多個 AnnSearchRequest 實體</h3><p>Hybrid Search 是透過在<code translate="no">hybrid_search()</code> 函式中建立多個<code translate="no">AnnSearchRequest</code> 來實作，其中每個<code translate="no">AnnSearchRequest</code> 代表針對特定向量領域的基本 ANN 搜尋請求。因此，在進行 Hybrid Search 之前，有必要為每個向量領域建立一個<code translate="no">AnnSearchRequest</code> 。</p>
+<h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">建立多個 AnnSearchRequest 實體</h3><p>Hybrid Search 是透過在<code translate="no">hybrid_search()</code> 函式中建立多個<code translate="no">AnnSearchRequest</code> 來實作，其中每個<code translate="no">AnnSearchRequest</code> 代表特定向量領域的基本 ANN 搜尋請求。因此，在進行 Hybrid Search 之前，有必要為每個向量領域建立一個<code translate="no">AnnSearchRequest</code> 。</p>
 <p>透過在<code translate="no">AnnSearchRequest</code> 中設定<code translate="no">expr</code> 參數，您可以為混合搜尋設定過濾條件。請參閱<a href="/docs/zh-hant/filtered-search.md">過濾搜尋與</a> <a href="/docs/zh-hant/filtering">過濾</a>。</p>
 <div class="alert note">
 <p>在混合搜尋中，每個<code translate="no">AnnSearchRequest</code> 只支援一個查詢向量。</p>

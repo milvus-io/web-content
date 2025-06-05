@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Sie haben Ihre Daten bereits vorbereitet und in den Milvus-Bucket gelegt.</p>
-<p>Wenn nicht, sollten Sie zuerst <strong>RemoteBulkWriter</strong> verwenden, um Ihre Daten vorzubereiten, und sicherstellen, dass die vorbereiteten Daten bereits in den Milvus-Bucket auf der MinIO-Instanz übertragen wurden, die zusammen mit Ihrer Milvus-Instanz gestartet wurde. Details hierzu finden Sie unter <a href="/docs/de/prepare-source-data.md">Quelldaten vorbereiten</a>.</p></li>
+<p>Falls nicht, sollten Sie zuerst <strong>RemoteBulkWriter</strong> verwenden, um Ihre Daten vorzubereiten, und sicherstellen, dass die vorbereiteten Daten bereits in den Milvus-Bucket der MinIO-Instanz übertragen wurden, die zusammen mit Ihrer Milvus-Instanz gestartet wurde. Details hierzu finden Sie unter <a href="/docs/de/prepare-source-data.md">Quelldaten vorbereiten</a>.</p></li>
 <li><p>Sie haben bereits eine Sammlung mit dem Schema erstellt, das Sie zur Vorbereitung Ihrer Daten verwenden. Falls nicht, lesen Sie bitte den Abschnitt <a href="/docs/de/manage-collections.md">Verwalten von Sammlungen</a>.</p></li>
 </ul>
 <div class="language-python">
@@ -384,7 +384,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>Einschränkungen bezüglich des Löschverhaltens:</p>
 <ul>
 <li><p>Bevor der Status des Importauftrags " <strong>Abgeschlossen"</strong> lautet, ist das Löschen nicht garantiert und kann erfolgreich sein oder nicht.</p></li>
-<li><p>Das Löschen nach <strong>Abschluss</strong> des Auftragsstatus ist garantiert erfolgreich.</p></li>
+<li><p>Das Löschen nach <strong>Beendigung</strong> des Auftrags ist garantiert erfolgreich.</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">Empfehlungen<button data-href="#Recommendations" class="anchor-icon" translate="no">

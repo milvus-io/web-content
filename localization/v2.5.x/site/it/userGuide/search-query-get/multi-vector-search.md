@@ -623,7 +623,7 @@ request2 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;sparse&qu
 <p>I due esempi seguenti mostrano come utilizzare le strategie di reranking WeightedRanker e RRFRanker:</p>
 <ol>
 <li><p><strong>Esempio 1: Uso del WeightedRanker</strong></p>
-<p>Quando si utilizza la strategia WeightedRanker, è necessario inserire i valori di peso nella funzione <code translate="no">WeightedRanker</code>. Il numero di ricerche della RNA di base in una ricerca ibrida corrisponde al numero di valori che devono essere immessi. I valori inseriti devono essere compresi nell'intervallo [0,1], con valori più vicini a 1 che indicano una maggiore importanza.</p>
+<p>Quando si utilizza la strategia WeightedRanker, è necessario inserire i valori dei pesi nella funzione <code translate="no">WeightedRanker</code>. Il numero di ricerche della RNA di base in una ricerca ibrida corrisponde al numero di valori che devono essere immessi. I valori inseriti devono essere compresi nell'intervallo [0,1], con valori più vicini a 1 che indicano una maggiore importanza.</p>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#go">Go</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker

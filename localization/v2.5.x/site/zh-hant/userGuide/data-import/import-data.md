@@ -122,12 +122,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>請求體包含兩個欄位：</p>
+<p>請求正文包含兩個欄位：</p>
 <ul>
 <li><p><code translate="no">collectionName</code></p>
 <p>目標資料集的名稱。</p></li>
 <li><p><code translate="no">files</code></p>
-<p>一個檔案路徑清單，相對於與您的 Milvus 實例一起啟動的 MioIO 實例上 Milvus 資料桶的根路徑。可能的子清單如下：</p>
+<p>一個檔案路徑清單，相對於與您的 Milvus 實例一同啟動的 MioIO 實例上 Milvus 資料桶的根路徑。可能的子清單如下：</p>
 <ul>
 <li><p><strong>JSON 檔案</strong></p>
 <p>如果準備的檔案是 JSON 格式，<strong>每個子清單應該包含單一準備的 JSON 檔案路徑</strong>。</p>
@@ -347,7 +347,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>並發匯入要求的最大數目限制為<strong>1024</strong>。</p></li>
 </ul>
 <ul>
-<li>匯入請求中只能指定一個磁碟分割名稱。如果沒有指定磁碟分割名稱，資料會插入預設磁碟分割。此外，如果已在目標集合中設定了分割區金鑰，則無法在匯入請求中設定分割區名稱。</li>
+<li>匯入請求中只能指定一個磁碟分割名稱。如果沒有指定磁碟分割名稱，資料會插入預設磁碟分割。此外，如果您已在目標資料集中設定了分割區金鑰，則無法在匯入請求中設定分割區名稱。</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">限制條件<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -400,4 +400,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我們強烈建議您使用多檔案匯入功能，它允許您在單一要求中上傳多個檔案。此方法不僅可簡化匯入程序，還可大幅提升匯入效能。同時，透過整合上傳，您可以減少花在資料管理上的時間，並使您的工作流程更有效率。</p>
+    </button></h2><p>我們強烈建議您使用多檔案匯入功能，它允許您在單一要求中上傳多個檔案。此方法不僅能簡化匯入程序，還能大幅提升匯入效能。同時，透過整合上傳，您可以減少花在資料管理上的時間，並使您的工作流程更有效率。</p>

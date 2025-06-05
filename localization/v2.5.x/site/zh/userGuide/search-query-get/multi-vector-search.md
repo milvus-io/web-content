@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>混合搜索适用于以下两种情况：</p>
-<h3 id="Sparse-Dense-Vector-Search" class="common-anchor-header">稀疏-密集向量搜索</h3><p>不同类型的向量可以表示不同的信息，使用不同的嵌入模型可以更全面地表示数据的不同特征和方面。例如，对同一个句子使用不同的 Embeddings 模型，可以生成表示语义的密集向量和表示句子中词频的稀疏向量。</p>
+<h3 id="Sparse-Dense-Vector-Search" class="common-anchor-header">稀疏-密集向量搜索</h3><p>不同类型的向量可以表示不同的信息，使用各种嵌入模型可以更全面地表示数据的不同特征和方面。例如，对同一个句子使用不同的 Embeddings 模型，可以生成表示语义的密集向量和表示句子中词频的稀疏向量。</p>
 <ul>
 <li><p><strong>稀疏向量：</strong>稀疏向量的特点是其向量维度高，存在很少的非零值。这种结构使其特别适合传统的信息检索应用。在大多数情况下，稀疏向量中使用的维数对应于一种或多种语言中的不同词块。每个维度都有一个值，表示该标记在文档中的相对重要性。这种布局对于涉及关键词匹配的任务非常有利。</p></li>
 <li><p><strong>密集向量：</strong>密集向量是从神经网络中衍生出来的嵌入。当排列成有序数组时，这些向量能捕捉到输入文本的语义本质。需要注意的是，稠密向量并不局限于文本处理；它们还广泛应用于计算机视觉领域，以表示视觉数据的语义。这些稠密向量通常由文本 Embeddings 模型生成，其特点是大部分或所有元素都非零。因此，密集向量对于语义搜索应用特别有效，因为即使在没有精确关键词匹配的情况下，它们也能根据向量距离返回最相似的结果。这种功能可以获得更细致入微、更能感知上下文的搜索结果，通常可以捕捉到基于关键词的方法可能忽略的概念之间的关系。</p></li>
@@ -89,7 +89,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本节将使用一个具体示例来说明如何在稀疏密集向量上进行混合搜索，以提高文本搜索的准确性。</p>
+    </button></h2><p>本节将通过一个具体示例来说明如何在稀疏密集向量上进行混合搜索，以提高文本搜索的准确性。</p>
 <h3 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">创建具有多个向量场的 Collections</h3><p>创建 Collections 的过程包括三个部分：定义 Collections Schema、配置索引参数和创建 Collections。</p>
 <h4 id="Define-schema" class="common-anchor-header">定义 Schema</h4><p>在本例中，需要在 Collections Schema 中定义多个向量字段。目前，每个 Collection 默认最多可包含 4 个向量字段。但也可以根据需要修改<code translate="no">proxy.maxVectorFieldNum</code> 的值，在集合中最多包含 10 个向量字段。</p>
 <p>下面的示例定义了一个 Collection Schema，其中<code translate="no">dense</code> 和<code translate="no">sparse</code> 是两个向量字段：</p>
@@ -341,7 +341,7 @@ indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Create-collection" class="common-anchor-header">创建 Collections</h4><p>使用前两个步骤中配置的集合 Schema 和索引创建名为<code translate="no">demo</code> 的集合。</p>
+<h4 id="Create-collection" class="common-anchor-header">创建 Collections</h4><p>使用前两个步骤中配置的集合 Schema 和索引创建名为<code translate="no">demo</code> 的 Collection。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

@@ -382,7 +382,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>有关删除行为的限制：</p>
 <ul>
 <li><p>在导入任务状态为 "<strong>已完成 "</strong>之前，不保证删除成功。</p></li>
-<li><p>在任务状态为 "<strong>已完成</strong>"之后，删除将保证成功。</p></li>
+<li><p>在任务状态为 "<strong>已完成</strong>"后，则保证删除成功。</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">建议<button data-href="#Recommendations" class="anchor-icon" translate="no">

@@ -382,7 +382,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>Restrições relativas ao comportamento de eliminação:</p>
 <ul>
 <li><p>Antes de o estado da tarefa de importação ser <strong>Concluído</strong>, a eliminação não é garantida e pode ou não ser bem sucedida.</p></li>
-<li><p>A eliminação após o estado da tarefa ser <strong>Concluído</strong> é garantida.</p></li>
+<li><p>A eliminação depois de o estado da tarefa ser <strong>Concluído</strong> é garantida.</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">Recomendações<button data-href="#Recommendations" class="anchor-icon" translate="no">
