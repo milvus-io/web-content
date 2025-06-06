@@ -29,17 +29,17 @@ RaBitQ introduces several innovative concepts:
 
 **Theoretical Foundation**: The core distance approximation formula is:
 
-$${\lVert}\bold{o_r}-\bold{q_r}{\rVert}^2 \approx {\lVert}\bold{o_r}-\bold{c_o}{\rVert}^2+{\lVert}\bold{q_r}-\bold{c_o}{\rVert}^2-2 \cdot C(\bold{o_r},\bold{c_o}) \cdot (\tilde{\bold{o}},\bold{q_r}-\bold{c_o}) + C_1(\bold{o_r},\bold{c_o})$$
+$$ \lVert \mathbf{o_r} - \mathbf{q_r} \rVert^2 \approx \lVert \mathbf{o_r} - \mathbf{c_o} \rVert^2 + \lVert \mathbf{q_r} - \mathbf{c_o} \rVert^2 - 2 \cdot C(\mathbf{o_r}, \mathbf{c_o}) \cdot \langle \tilde{\mathbf{o}}, \mathbf{q_r} - \mathbf{c_o} \rangle + C_1(\mathbf{o_r}, \mathbf{c_o}) $$
 
 Where:
-- $\bold{o_r}$ is a data vector from the dataset
-- $\bold{q_r}$ is a query vector
-- $\bold{c_o}$ is the nearest IVF centroid vector for $\bold{o_r}$
-- $C(\bold{o_r},\bold{c_o})$ and $C_1(\bold{o_r},\bold{c_o})$ are precomputed constants
-- $\tilde{\bold{o}}$ is the quantized binary vector stored in the index
-- $(\tilde{\bold{o}},\bold{q_r}-\bold{c_o})$ represents the dot-product operation
+- $\mathbf{o_r}$ is a data vector from the dataset
+- $\mathbf{q_r}$ is a query vector
+- $\mathbf{c_o}$ is the nearest IVF centroid vector for $\mathbf{o_r}$
+- $C(\mathbf{o_r}, \mathbf{c_o})$ and $C_1(\mathbf{o_r}, \mathbf{c_o})$ are precomputed constants
+- $\tilde{\mathbf{o}}$ is the quantized binary vector stored in the index
+- $\langle \tilde{\mathbf{o}}, \mathbf{q_r} - \mathbf{c_o} \rangle$ represents the dot-product operation
 
-**Computational Efficiency**: The binary nature of $\tilde{\bold{o}}$ makes distance calculations extremely fast, particularly benefiting from modern CPU architectures with dedicated `AVX512VPOPCNTDQ` instructions on Intel IceLake+ or AMD Zen 4+ processors.
+**Computational Efficiency**: The binary nature of $\tilde{\mathbf{o}}$ makes distance calculations extremely fast, particularly benefiting from modern CPU architectures with dedicated `AVX-512 VPOPCNTDQ` instructions on Intel Ice Lake+ or AMD Zen 4+ processors.
 
 **Algorithmic Enhancements**: RaBitQ integrates effectively with established techniques like the [`FastScan` approach](https://www.vldb.org/pvldb/vol9/p288-andre.pdf) and [random rotations](https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing) for improved performance.
 

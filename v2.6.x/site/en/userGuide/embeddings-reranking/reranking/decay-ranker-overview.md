@@ -100,7 +100,7 @@ In this example, decay scores reflect how relevance diminishes with time—newer
      <td><p>2 weeks ago</p></td>
      <td><p>0.80</p></td>
      <td><p>0.68</p></td>
-     <td><h1 id="2">2</h1></td>
+     <td>2</td>
    </tr>
    <tr>
      <td><p>Paper B</p></td>
@@ -109,7 +109,7 @@ In this example, decay scores reflect how relevance diminishes with time—newer
      <td><p>6 months ago</p></td>
      <td><p>0.45</p></td>
      <td><p>0.41</p></td>
-     <td><h1 id="3">3</h1></td>
+     <td>3</td>
    </tr>
    <tr>
      <td><p>Paper C</p></td>
@@ -118,7 +118,7 @@ In this example, decay scores reflect how relevance diminishes with time—newer
      <td><p>1 day ago</p></td>
      <td><p>0.98</p></td>
      <td><p>0.74</p></td>
-     <td><h1 id="1">1</h1></td>
+     <td>1</td>
    </tr>
    <tr>
      <td><p>Paper D</p></td>
@@ -127,7 +127,7 @@ In this example, decay scores reflect how relevance diminishes with time—newer
      <td><p>3 weeks ago</p></td>
      <td><p>0.70</p></td>
      <td><p>0.53</p></td>
-     <td><h1 id="4">4</h1></td>
+     <td>4</td>
    </tr>
 </table>
 

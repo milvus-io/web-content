@@ -2,7 +2,6 @@
 id: rrf-ranker.md
 title: "RRF Ranker"
 summary: "Reciprocal Rank Fusion (RRF) Ranker is a reranking strategy for Milvus hybrid search that balances results from multiple vector search paths based on their ranking positions rather than their raw similarity scores. Like a sports tournament that considers players' rankings rather than individual statistics, RRF Ranker combines search results based on how highly each item ranks in different search paths, creating a fair and balanced final ranking."
-beta: Milvus 2.6.x
 ---
 
 # RRF Ranker

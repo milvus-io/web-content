@@ -377,7 +377,7 @@ For collections with multiple scalar fields requiring text-to-vector conversion,
 
 After defining the schema with necessary fields and the built-in function, set up the index for your collection. To simplify this process, use `AUTOINDEX` as the `index_type`, an option that allows Milvus to choose and configure the most suitable index type based on the structure of your data.
 
-```plaintext
+```python
 # Prepare index parameters
 index_params = client.prepare_index_params()
 
@@ -393,7 +393,7 @@ index_params.add_index(
 
 Now create the collection using the schema and index parameters defined.
 
-```plaintext
+```python
 # Create collection named "demo"
 client.create_collection(
     collection_name='demo', 

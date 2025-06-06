@@ -48,7 +48,7 @@ For a full list of parameters and valid values, refer to [Index params](hnsw-sq.
 
 To build an `HNSW_PQ` index on a vector field in Milvus, use the `add_index()` method, specifying the `index_type`, `metric_type`, and additional parameters for the index.
 
-```plaintext
+```python
 from pymilvus import MilvusClient
 
 # Prepare index building params
@@ -84,7 +84,7 @@ Once the index parameters are configured, you can create the index by using the 
 
 Once the index is built and entities are inserted, you can perform similarity searches on the index.
 
-```plaintext
+```python
 search_params = {
     "params": {
         "ef": 10, # Parameter controlling query time/accuracy trade-off

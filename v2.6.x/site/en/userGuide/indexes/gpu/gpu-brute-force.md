@@ -41,7 +41,7 @@ Once the index parameters are configured, you can create the index by using the 
 
 Once the index is built and entities are inserted, you can perform similarity searches on the index.
 
-```plaintext
+```python
 res = MilvusClient.search(
     collection_name="your_collection_name", # Collection name
     anns_field="vector_field", # Vector field name

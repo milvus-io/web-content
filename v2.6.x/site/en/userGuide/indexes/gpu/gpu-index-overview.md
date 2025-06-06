@@ -66,7 +66,7 @@ The default `initMemSize` is 1/2 of the available GPU memory when Milvus starts,
 
 Up until Milvus 2.4.1, Milvus uses a unified GPU memory pool. For versions prior to 2.4.1, it was recommended to set both of the value to 0.
 
-```plaintext
+```yaml
 gpu:
   initMemSize: 0 #set the initial memory pool size.
   maxMemSize: 0 #maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. 
@@ -74,7 +74,7 @@ gpu:
 
 From Milvus 2.4.1 onwards, the GPU memory pool is only used for temporary GPU data during searches. Therefore, it is recommended to set it to 2048 and 4096.
 
-```plaintext
+```yaml
 gpu:
   initMemSize: 2048 #set the initial memory pool size.
   maxMemSize: 4096 #maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. 

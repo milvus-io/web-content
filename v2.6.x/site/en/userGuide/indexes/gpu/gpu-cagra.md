@@ -12,7 +12,7 @@ The **GPU_CAGRA** index is a graph-based index optimized for GPUs. Using inferen
 
 To build a `GPU_CAGRA` index on a vector field in Milvus, use the `add_index()` method, specifying the `index_type`, `metric_type`, and additional parameters for the index.
 
-```plaintext
+```python
 from pymilvus import MilvusClient
 
 # Prepare index building params

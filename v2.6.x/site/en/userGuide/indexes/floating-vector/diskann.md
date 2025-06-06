@@ -38,7 +38,7 @@ The following figure shows how a Vamana graph is constructed.
 
         The `search_list_size` parameter determines the breadth of the graph refinement process. A higher `search_list_size` extends the search for neighbors during construction and can improve final accuracy, but increases index-building time.
 
-To learn more about parameter tuning, refer to [DISKANN params](diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd).
+To learn more about parameter tuning, refer to [DISKANN params](diskann.md#diskann-params).
 
 #### PQ
 

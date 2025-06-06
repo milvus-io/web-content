@@ -12,7 +12,7 @@ The **GPU_IVF_FLAT** index is a GPU-accelerated version of the IVF_FLAT index, d
 
 To build a `GPU_IVF_FLAT` index on a vector field in Milvus, use the `add_index()` method, specifying the `index_type`, `metric_type`, and additional parameters for the index.
 
-```plaintext
+```python
 from pymilvus import MilvusClient
 
 # Prepare index building params

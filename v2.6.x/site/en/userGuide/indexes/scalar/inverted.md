@@ -32,7 +32,7 @@ Because the dictionary is sorted, term-based filtering can be handled efficientl
 
 For scalar fields like **BOOL**, **INT8**, **INT16**, **INT32**, **INT64**, **FLOAT**, **DOUBLE**, **VARCHAR**, and **ARRAY**, creating an inverted index is straightforward. Use the `create_index()` method with the `index_type` parameter set to `"INVERTED"`.
 
-```plaintext
+```python
 from pymilvus import MilvusClient
 
 client = MilvusClient(

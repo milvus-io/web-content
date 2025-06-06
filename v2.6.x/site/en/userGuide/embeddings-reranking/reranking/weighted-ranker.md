@@ -2,7 +2,6 @@
 id: weighted-ranker.md
 title: "Weighted Ranker"
 summary: "Weighted Ranker intelligently combines and prioritizes results from multiple search paths by assigning different importance weights to each. Similar to how a skilled chef balances multiple ingredients to create the perfect dish, Weighted Ranker balances different search results to deliver the most relevant combined outcomes. This approach is ideal when searching across multiple vector fields or modalities where certain fields should contribute more significantly to the final ranking than others."
-beta: Milvus 2.6.x
 ---
 
 # Weighted Ranker

@@ -12,7 +12,7 @@ The **GPU_IVF_PQ** index builds on the **IVF_PQ** concept by combining inverted 
 
 To build a `GPU_IVF_PQ` index on a vector field in Milvus, use the `add_index()` method, specifying the `index_type`, `metric_type`, and additional parameters for the index.
 
-```plaintext
+```python
 from pymilvus import MilvusClient
 
 # Prepare index building params
