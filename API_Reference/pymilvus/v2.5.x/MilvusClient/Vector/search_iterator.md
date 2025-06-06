@@ -2,7 +2,7 @@
 
 This operation returns a Python iterator for you to iterate over the search results. It is useful especially when the search result contains a large volume of data.
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```plaintext
 def search_iterator(
