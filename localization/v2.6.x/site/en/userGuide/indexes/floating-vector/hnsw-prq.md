@@ -91,25 +91,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>To build an <code translate="no">HNSW_PRQ</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
-<pre><code translate="no" class="language-plaintext">from pymilvus import MilvusClient
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-# Prepare index building params
+<span class="hljs-comment"># Prepare index building params</span>
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=&quot;your_vector_field_name&quot;, # Name of the vector field to be indexed
-    index_type=&quot;HNSW_PRQ&quot;, # Type of the index to create
-    index_name=&quot;vector_index&quot;, # Name of the index to create
-    metric_type=&quot;L2&quot;, # Metric type used to measure similarity
+    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+    index_type=<span class="hljs-string">&quot;HNSW_PRQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
     params={
-        &quot;M&quot;: 30, # Maximum number of neighbors each node can connect to in the graph
-        &quot;efConstruction&quot;: 360, # Number of candidate neighbors considered for connection during index construction
-        &quot;m&quot;: 384, 
-        &quot;nbits&quot;: 8,
-        &quot;nrq&quot;: 1,
-        &quot;refine&quot;: true, # Whether to enable the refinement step
-        &quot;refine_type&quot;: &quot;SQ8&quot; # Precision level of data used for refinement
-    } # Index building params
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">360</span>, <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
+        <span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">384</span>, 
+        <span class="hljs-string">&quot;nbits&quot;</span>: <span class="hljs-number">8</span>,
+        <span class="hljs-string">&quot;nrq&quot;</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-string">&quot;refine&quot;</span>: true, <span class="hljs-comment"># Whether to enable the refinement step</span>
+        <span class="hljs-string">&quot;refine_type&quot;</span>: <span class="hljs-string">&quot;SQ8&quot;</span> <span class="hljs-comment"># Precision level of data used for refinement</span>
+    } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>In this configuration:</p>
@@ -135,18 +135,18 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
-<pre><code translate="no" class="language-plaintext">search_params = {
-    &quot;params&quot;: {
-        &quot;ef&quot;: 10, # Parameter controlling query time/accuracy trade-off
-        &quot;refine_k&quot;: 1 # The magnification factor
+<pre><code translate="no" class="language-python">search_params = {
+    <span class="hljs-string">&quot;params&quot;</span>: {
+        <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
+        <span class="hljs-string">&quot;refine_k&quot;</span>: <span class="hljs-number">1</span> <span class="hljs-comment"># The magnification factor</span>
     }
 }
 
 res = MilvusClient.search(
-    collection_name=&quot;your_collection_name&quot;, # Collection name
-    anns_field=&quot;vector_field&quot;,  # Vector field name
-    data=[[0.1, 0.2, 0.3, 0.4, 0.5]],  # Query vector
-    limit=3,  # TopK results to return
+    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
+    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
+    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>

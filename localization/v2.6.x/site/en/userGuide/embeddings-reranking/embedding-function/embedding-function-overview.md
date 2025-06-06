@@ -401,20 +401,20 @@ schema.add_function(text_embedding_function)
 <p>For collections with multiple scalar fields requiring text-to-vector conversion, add separate functions to the collection schema, ensuring each function has a unique name and <code translate="no">output_field_names</code> value.</p>
 </div>
 <h3 id="Step-3-Configure-index" class="common-anchor-header">Step 3: Configure index</h3><p>After defining the schema with necessary fields and the built-in function, set up the index for your collection. To simplify this process, use <code translate="no">AUTOINDEX</code> as the <code translate="no">index_type</code>, an option that allows Milvus to choose and configure the most suitable index type based on the structure of your data.</p>
-<pre><code translate="no" class="language-plaintext"># Prepare index parameters
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
-# Add AUTOINDEX to automatically select optimal indexing method
+<span class="hljs-comment"># Add AUTOINDEX to automatically select optimal indexing method</span>
 index_params.add_index(
-    field_name=&quot;dense&quot;,
-    index_type=&quot;AUTOINDEX&quot;,
-    metric_type=&quot;COSINE&quot; 
+    field_name=<span class="hljs-string">&quot;dense&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Create-collection" class="common-anchor-header">Step 4: Create collection</h3><p>Now create the collection using the schema and index parameters defined.</p>
-<pre><code translate="no" class="language-plaintext"># Create collection named &quot;demo&quot;
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
-    collection_name=&#x27;demo&#x27;, 
+    collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
     schema=schema, 
     index_params=index_params
 )

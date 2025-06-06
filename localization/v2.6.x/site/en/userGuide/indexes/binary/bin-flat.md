@@ -79,12 +79,12 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
-<pre><code translate="no" class="language-plaintext">res = MilvusClient.search(
-    collection_name=&quot;your_collection_name&quot;, # Collection name
-    anns_field=&quot;binary_vector_field&quot;,  # Binary vector field name
-    data=[query_binary_vector],  # Query binary vector
-    limit=3,  # TopK results to return
-    search_params={&quot;params&quot;: {}}  # No additional parameters required for BIN_FLAT
+<pre><code translate="no" class="language-python">res = MilvusClient.search(
+    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;binary_vector_field&quot;</span>,  <span class="hljs-comment"># Binary vector field name</span>
+    data=[query_binary_vector],  <span class="hljs-comment"># Query binary vector</span>
+    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
+    search_params={<span class="hljs-string">&quot;params&quot;</span>: {}}  <span class="hljs-comment"># No additional parameters required for BIN_FLAT</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>For more information, refer to <a href="/docs/binary-vector.md">Binary Vector</a>.</p>

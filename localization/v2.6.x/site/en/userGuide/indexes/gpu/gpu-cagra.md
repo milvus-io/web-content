@@ -38,23 +38,23 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>To build a <code translate="no">GPU_CAGRA</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
-<pre><code translate="no" class="language-plaintext">from pymilvus import MilvusClient
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-# Prepare index building params
+<span class="hljs-comment"># Prepare index building params</span>
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=&quot;your_vector_field_name&quot;, # Name of the vector field to be indexed
-    index_type=&quot;GPU_CAGRA&quot;, # Type of the index to create
-    index_name=&quot;vector_index&quot;, # Name of the index to create
-    metric_type=&quot;L2&quot;, # Metric type used to measure similarity
+    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+    index_type=<span class="hljs-string">&quot;GPU_CAGRA&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
     params={
-        &quot;intermediate_graph_degree&quot;: 32, # Affects recall and build time by determining the graph’s degree before pruning
-        &quot;graph_degree&quot;: 64, # Affets search performance and recall by setting the graph’s degree after pruning
-        &quot;build_algo&quot;: &quot;IVF_PQ&quot;, # Selects the graph generation algorithm before pruning
-        &quot;cache_dataset_on_device&quot;: &quot;true&quot;, # Decides whether to cache the original dataset in GPU memory
-        &quot;adapt_for_cpu&quot;: &quot;false&quot;, # Decides whether to use GPU for index-building and CPU for search
-    } # Index building params
+        <span class="hljs-string">&quot;intermediate_graph_degree&quot;</span>: <span class="hljs-number">32</span>, <span class="hljs-comment"># Affects recall and build time by determining the graph’s degree before pruning</span>
+        <span class="hljs-string">&quot;graph_degree&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Affets search performance and recall by setting the graph’s degree after pruning</span>
+        <span class="hljs-string">&quot;build_algo&quot;</span>: <span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Selects the graph generation algorithm before pruning</span>
+        <span class="hljs-string">&quot;cache_dataset_on_device&quot;</span>: <span class="hljs-string">&quot;true&quot;</span>, <span class="hljs-comment"># Decides whether to cache the original dataset in GPU memory</span>
+        <span class="hljs-string">&quot;adapt_for_cpu&quot;</span>: <span class="hljs-string">&quot;false&quot;</span>, <span class="hljs-comment"># Decides whether to use GPU for index-building and CPU for search</span>
+    } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>In this configuration:</p>

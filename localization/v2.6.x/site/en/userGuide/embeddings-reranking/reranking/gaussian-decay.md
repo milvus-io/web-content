@@ -125,21 +125,21 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>The mathematical formula for calculating a Gaussian decay score is:</p>
 <p>$$
-S(doc) = \exp\left( -\frac{\left( \max\left(0, \left|fieldvalue_{doc} - origin\right| - offset \right) \right)^2}{2\sigma^2} \right)
+S(\text{doc}) = \exp\left( -\frac{\left( \max\left(0, \left|\text{fieldvalue}_{\text{doc}} - \text{origin}\right| - \text{offset} \right) \right)^2}{2\sigma^2} \right)
 $$</p>
 <p>Where:</p>
 <p>$$
-\sigma^2 = -\frac{scale^2}{2 \cdot \ln(decay)}
+\sigma^2 = -\frac{\text{scale}^2}{2 \cdot \ln(\text{decay})}
 $$</p>
 <p>Breaking this down in plain language:</p>
 <ol>
-<li><p>Calculate how far the field value is from the origin:  $|fieldvalue_{doc} - origin|$</p></li>
-<li><p>Subtract the offset (if any) but never go below zero: $\max(0, distance - offset)$</p></li>
-<li><p>Square this adjusted distance: $(adjusted_distance)^2$</p></li>
+<li><p>Calculate how far the field value is from the origin:  $|\text{fieldvalue}_{\text{doc}} - \text{origin}|$</p></li>
+<li><p>Subtract the offset (if any) but never go below zero: $\max(0, \text{distance} - \text{offset})$</p></li>
+<li><p>Square this adjusted distance: $(\text{adjusted_distance})^2$</p></li>
 <li><p>Divide by $2\sigma^2$, which is calculated from your scale and decay parameters</p></li>
-<li><p>Take the negative exponent, which gives you a value between 0 and 1: $\exp(-value)$</p></li>
+<li><p>Take the negative exponent, which gives you a value between 0 and 1: $\exp(-\text{value})$</p></li>
 </ol>
-<p>The $\sigma^2$ calculation converts your scale and decay parameters into the standard deviation squared for the Gaussian distribution. This is what gives the function its characteristic bell shape.</p>
+<p>The $\sigma^{2}$ calculation converts your scale and decay parameters into the standard deviation squared for the Gaussian distribution. This is what gives the function its characteristic bell shape.</p>
 <h2 id="Use-Gaussian-decay" class="common-anchor-header">Use Gaussian decay<button data-href="#Use-Gaussian-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

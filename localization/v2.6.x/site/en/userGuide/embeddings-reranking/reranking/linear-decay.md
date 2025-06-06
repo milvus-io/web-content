@@ -131,19 +131,19 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>The mathematical formula for calculating a linear decay score is:</p>
 <p>$$
-S(doc) = \max\left( \frac{s - \max(0, |fieldvalue_{doc} - origin| - offset)}{s}, 0 \right)
+S(\text{doc}) = \max\left( \frac{s - \max(0, |\text{fieldvalue}_{\text{doc}} - \text{origin}| - \text{offset})}{s}, 0 \right)
 $$</p>
 <p>Where:</p>
 <p>$$
-s = \frac {scale}{(1.0 - decay)}
+s = \frac{\text{scale}}{(1.0 - \text{decay})}
 $$</p>
 <p>Breaking this down in plain language:</p>
 <ol>
-<li><p>Calculate how far the field value is from the origin: $|fieldvalue_{doc} - origin|$.</p></li>
-<li><p>Subtract the offset (if any) but never go below zero: $\max(0, distance - offset)$.</p></li>
+<li><p>Calculate how far the field value is from the origin: $|\text{fieldvalue}_{\text{doc}} - \text{origin}|$</p></li>
+<li><p>Subtract the offset (if any) but never go below zero: $\max(0, \text{distance} - \text{offset})$</p></li>
 <li><p>Determine the parameter $s$ from your scale and decay values.</p></li>
-<li><p>Subtract the adjusted distance from $s$ and divide by $s$.</p></li>
-<li><p>Ensure the result never goes below zero: $\max(result, 0)$.</p></li>
+<li><p>Subtract the adjusted distance from $s$ and divide by $s$</p></li>
+<li><p>Ensure the result never goes below zero: $\max(\text{result}, 0)$</p></li>
 </ol>
 <p>The $s$ calculation transforms your scale and decay parameters into the point where the score reaches zero. For example, with decay=0.5 and scale=7, the score will reach exactly zero at distance=14 (twice the scale value).</p>
 <h2 id="Use-linear-decay" class="common-anchor-header">Use linear decay<button data-href="#Use-linear-decay" class="anchor-icon" translate="no">

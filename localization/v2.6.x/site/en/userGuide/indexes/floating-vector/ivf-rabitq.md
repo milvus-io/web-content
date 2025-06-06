@@ -47,17 +47,17 @@ beta: Milvus 2.6.x
 <p>RaBitQ introduces several innovative concepts:</p>
 <p><strong>Angular Information Encoding</strong>: Unlike traditional spatial encoding, RaBitQ encodes angular information through vector normalization. In IVF_RABITQ, data vectors are normalized against their nearest IVF centroid, enhancing the precision of the quantization process.</p>
 <p><strong>Theoretical Foundation</strong>: The core distance approximation formula is:</p>
-<p>$${\lVert}\bold{o_r}-\bold{q_r}{\rVert}^2 \approx {\lVert}\bold{o_r}-\bold{c_o}{\rVert}^2+{\lVert}\bold{q_r}-\bold{c_o}{\rVert}^2-2 \cdot C(\bold{o_r},\bold{c_o}) \cdot (\tilde{\bold{o}},\bold{q_r}-\bold{c_o}) + C_1(\bold{o_r},\bold{c_o})$$</p>
+<p>$$ \lVert \mathbf{o_r} - \mathbf{q_r} \rVert^2 \approx \lVert \mathbf{o_r} - \mathbf{c_o} \rVert^2 + \lVert \mathbf{q_r} - \mathbf{c_o} \rVert^2 - 2 \cdot C(\mathbf{o_r}, \mathbf{c_o}) \cdot \langle \tilde{\mathbf{o}}, \mathbf{q_r} - \mathbf{c_o} \rangle + C_1(\mathbf{o_r}, \mathbf{c_o}) $$</p>
 <p>Where:</p>
 <ul>
-<li>$\bold{o_r}$ is a data vector from the dataset</li>
-<li>$\bold{q_r}$ is a query vector</li>
-<li>$\bold{c_o}$ is the nearest IVF centroid vector for $\bold{o_r}$</li>
-<li>$C(\bold{o_r},\bold{c_o})$ and $C_1(\bold{o_r},\bold{c_o})$ are precomputed constants</li>
-<li>$\tilde{\bold{o}}$ is the quantized binary vector stored in the index</li>
-<li>$(\tilde{\bold{o}},\bold{q_r}-\bold{c_o})$ represents the dot-product operation</li>
+<li>$\mathbf{o_r}$ is a data vector from the dataset</li>
+<li>$\mathbf{q_r}$ is a query vector</li>
+<li>$\mathbf{c_o}$ is the nearest IVF centroid vector for $\mathbf{o_r}$</li>
+<li>$C(\mathbf{o_r}, \mathbf{c_o})$ and $C_1(\mathbf{o_r}, \mathbf{c_o})$ are precomputed constants</li>
+<li>$\tilde{\mathbf{o}}$ is the quantized binary vector stored in the index</li>
+<li>$\langle \tilde{\mathbf{o}}, \mathbf{q_r} - \mathbf{c_o} \rangle$ represents the dot-product operation</li>
 </ul>
-<p><strong>Computational Efficiency</strong>: The binary nature of $\tilde{\bold{o}}$ makes distance calculations extremely fast, particularly benefiting from modern CPU architectures with dedicated <code translate="no">AVX512VPOPCNTDQ</code> instructions on Intel IceLake+ or AMD Zen 4+ processors.</p>
+<p><strong>Computational Efficiency</strong>: The binary nature of $\tilde{\mathbf{o}}$ makes distance calculations extremely fast, particularly benefiting from modern CPU architectures with dedicated <code translate="no">AVX-512 VPOPCNTDQ</code> instructions on Intel Ice Lake+ or AMD Zen 4+ processors.</p>
 <p><strong>Algorithmic Enhancements</strong>: RaBitQ integrates effectively with established techniques like the <a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf"><code translate="no">FastScan</code> approach</a> and <a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">random rotations</a> for improved performance.</p>
 <h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p>The <strong>IVF_RABITQ</strong> index combines IVF’s efficient clustering with RaBitQ’s advanced binary quantization:</p>
 <ol>

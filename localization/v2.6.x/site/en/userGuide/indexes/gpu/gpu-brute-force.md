@@ -77,12 +77,12 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
-<pre><code translate="no" class="language-plaintext">res = MilvusClient.search(
-    collection_name=&quot;your_collection_name&quot;, # Collection name
-    anns_field=&quot;vector_field&quot;, # Vector field name
-    data=[[0.1, 0.2, 0.3, 0.4, 0.5]],  # Query vector
-    limit=3,  # TopK results to return
-    search_params={&quot;params&quot;: {}}  # No additional parameters required for GPU_BRUTE_FORCE
+<pre><code translate="no" class="language-python">res = MilvusClient.search(
+    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
+    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
+    search_params={<span class="hljs-string">&quot;params&quot;</span>: {}}  <span class="hljs-comment"># No additional parameters required for GPU_BRUTE_FORCE</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">

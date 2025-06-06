@@ -49,7 +49,7 @@ summary: >-
 </ol>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/HNSW.png" alt="HNSW" class="doc-image" id="hnsw" />
+    <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
     <span>HNSW</span>
   </span>
 </p>

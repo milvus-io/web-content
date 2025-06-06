@@ -72,21 +72,21 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>For scalar fields like <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, and <strong>ARRAY</strong>, creating an inverted index is straightforward. Use the <code translate="no">create_index()</code> method with the <code translate="no">index_type</code> parameter set to <code translate="no">&quot;INVERTED&quot;</code>.</p>
-<pre><code translate="no" class="language-plaintext">from pymilvus import MilvusClient
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=&quot;http://localhost:19530&quot;,
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
 )
 
-index_params = client.create_index_params() # Prepare an empty IndexParams object, without having to specify any index parameters
+index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 index_params.add_index(
-    field_name=&quot;scalar_field_1&quot;, # Name of the scalar field to be indexed
-    index_type=&quot;INVERTED&quot;, # Type of index to be created
-    index_name=&quot;inverted_index&quot; # Name of the index to be created
+    field_name=<span class="hljs-string">&quot;scalar_field_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
+    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-    collection_name=&quot;my_collection&quot;, # Specify the collection name
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>

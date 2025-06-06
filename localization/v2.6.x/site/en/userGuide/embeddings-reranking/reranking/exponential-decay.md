@@ -130,18 +130,18 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>The mathematical formula for calculating an exponential decay score is:</p>
 <p>$$
-S(doc) = \exp\left( \lambda \cdot \max\left(0, \left|fieldvalue_{doc} - origin\right| - offset \right) \right)
+S(\text{doc}) = \exp\left( \lambda \cdot \max\left(0, \left|\text{fieldvalue}_{\text{doc}} - \text{origin}\right| - \text{offset} \right) \right)
 $$</p>
 <p>Where:</p>
 <p>$$
-\lambda = \frac{\ln(decay)}{scale}
+\lambda = \frac{\ln(\text{decay})}{\text{scale}}
 $$</p>
 <p>Breaking this down in plain language:</p>
 <ol>
-<li><p>Calculate how far the field value is from the origin: $|fieldvalue_{doc} - origin|$.</p></li>
-<li><p>Subtract the offset (if any) but never go below zero: $\max(0, distance - offset)$.</p></li>
+<li><p>Calculate how far the field value is from the origin: $|\text{fieldvalue}_{\text{doc}} - \text{origin}|$.</p></li>
+<li><p>Subtract the offset (if any) but never go below zero: $\max(0, \text{distance} - \text{offset})$.</p></li>
 <li><p>Multiply by $\lambda$, which is calculated from your scale and decay parameters.</p></li>
-<li><p>Take the exponent, which gives you a value between 0 and 1: $\exp(\lambda \cdot value)$.</p></li>
+<li><p>Take the exponent, which gives you a value between 0 and 1: $\exp(\lambda \cdot \text{value})$.</p></li>
 </ol>
 <p>The $\lambda$ calculation converts your scale and decay parameters into the rate parameter for the exponential function. A more negative $\lambda$ creates a steeper initial drop.</p>
 <h2 id="Use-exponential-decay" class="common-anchor-header">Use exponential decay<button data-href="#Use-exponential-decay" class="anchor-icon" translate="no">

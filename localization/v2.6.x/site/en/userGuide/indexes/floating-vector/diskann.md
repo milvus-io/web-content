@@ -62,7 +62,7 @@ summary: >-
 <p>The <code translate="no">search_list_size</code> parameter determines the breadth of the graph refinement process. A higher <code translate="no">search_list_size</code> extends the search for neighbors during construction and can improve final accuracy, but increases index-building time.</p></li>
 </ul></li>
 </ol>
-<p>To learn more about parameter tuning, refer to <a href="/docs/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN params</a>.</p>
+<p>To learn more about parameter tuning, refer to <a href="/docs/diskann.md#diskann-params">DISKANN params</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN uses <strong>PQ</strong> to compress high-dimensional vectors into smaller representations (<strong>PQ codes</strong>), which are stored in memory for rapid approximate distance calculations.</p>
 <p>The <code translate="no">pq_code_budget_gb_ratio</code> parameter manages the memory footprint dedicated to storing these PQ codes. It represents a ratio between the total size of the vectors (in gigabytes) and the space allocated for storing the PQ codes. You can calculate the actual PQ code budget (in gigabytes) with this formula:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio

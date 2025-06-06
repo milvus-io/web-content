@@ -9,9 +9,8 @@ summary: >-
   combined outcomes. This approach is ideal when searching across multiple
   vector fields or modalities where certain fields should contribute more
   significantly to the final ranking than others.
-beta: Milvus 2.6.x
 ---
-<h1 id="Weighted-Ranker" class="common-anchor-header">Weighted Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
+<h1 id="Weighted-Ranker" class="common-anchor-header">Weighted Ranker<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

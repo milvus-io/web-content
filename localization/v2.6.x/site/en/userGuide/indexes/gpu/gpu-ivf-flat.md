@@ -42,19 +42,19 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>To build a <code translate="no">GPU_IVF_FLAT</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
-<pre><code translate="no" class="language-plaintext">from pymilvus import MilvusClient
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-# Prepare index building params
+<span class="hljs-comment"># Prepare index building params</span>
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=&quot;your_vector_field_name&quot;, # Name of the vector field to be indexed
-    index_type=&quot;GPU_IVF_FLAT&quot;, # Type of the index to create
-    index_name=&quot;vector_index&quot;, # Name of the index to create
-    metric_type=&quot;L2&quot;, # Metric type used to measure similarity
+    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+    index_type=<span class="hljs-string">&quot;GPU_IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
     params={
-        &quot;nlist&quot;: 1024, # Number of clusters for the index
-    } # Index building params
+        <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">1024</span>, <span class="hljs-comment"># Number of clusters for the index</span>
+    } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>In this configuration:</p>
