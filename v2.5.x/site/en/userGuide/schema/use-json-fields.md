@@ -217,7 +217,7 @@ Indexing helps Milvus quickly filter or search across large volumes of data. In 
 
 - **Optional** for JSON fields (to speed up scalar filters on specific JSON paths).
 
-### Index a JSON field
+### Index a JSON field | Milvus 2.5.10+
 
 By default, JSON fields are not indexed, so any filter queries (e.g., `metadata["price"] < 100`) must scan all rows. If you want to accelerate queries on specific paths within the `metadata` field, you can create an **inverted index** on each path you care about.
 
@@ -378,12 +378,19 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code>params.json_path</code></p></td>
-     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code>metadata["product_info"]["category"]</code> or <code>metadata["tags"][0]</code>). If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
+     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code>metadata["product_info"]["category"]</code> or <code>metadata["tags"][0]</code>).
+ If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
      <td><p><code>"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code>params.json_cast_type</code></p></td>
-     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p><ul><li><code>"bool"</code> or <code>"BOOL"</code></li><li><code>"double"</code> or <code>"DOUBLE"</code></li><li><code>"varchar"</code> or <code>"VARCHAR"</code><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If type casting fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</li></ul></td>
+     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
+<ul>
+<li><code>"bool"</code> or <code>"BOOL"</code></li>
+<li><code>"double"</code> or <code>"DOUBLE"</code></li>
+<li><code>"varchar"</code> or <code>"VARCHAR"</code>
+<strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If type casting fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</li>
+</ul></td>
      <td><p><code>"varchar"</code></p></td>
    </tr>
 </table>
@@ -410,7 +417,7 @@ curl --request POST \
 
     - Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key `"k"` while others store a number), some rows will not be indexed.
 
-### Index a vector field | Milvus 2.5.10+
+### Index a vector field
 
 The following example creates an index on the vector field `embedding`, using the `AUTOINDEX` index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to [Index Explained](index-explained.md).
 
@@ -425,8 +432,6 @@ The following example creates an index on the vector field `embedding`, using th
 ```python
 # Set index params
 
-index_params = client.prepare_index_params()
-
 # Index `embedding` with AUTOINDEX and specify similarity metric type
 index_params.add_index(
     field_name="embedding",
@@ -440,7 +445,6 @@ index_params.add_index(
 import io.milvus.v2.common.IndexParam;
 import java.util.*;
 
-List<IndexParam> indexes = new ArrayList<>();
 indexes.add(IndexParam.builder()
         .fieldName("embedding")
         .indexName("vector_index")
