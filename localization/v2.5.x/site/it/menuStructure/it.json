@@ -56,9 +56,15 @@
         "children": []
       },
       {
+        "label": "Progettazione del modello di dati per la ricerca",
+        "id": "schema-hands-on.md",
+        "order": 1,
+        "children": []
+      },
+      {
         "label": "Installare Milvus",
         "id": "install_milvus",
-        "order": 1,
+        "order": 2,
         "isMenu": true,
         "children": [
           {
@@ -160,12 +166,6 @@
         ]
       },
       {
-        "label": "Progettazione del modello di dati per la ricerca",
-        "id": "schema-hands-on.md",
-        "order": 2,
-        "children": []
-      },
-      {
         "label": "Installare gli SDK",
         "id": "install_sdks",
         "order": 3,
@@ -217,7 +217,7 @@
             "children": []
           },
           {
-            "label": "Archiviazione/Computing",
+            "label": "Storage/Computing",
             "id": "four_layers.md",
             "order": 1,
             "children": []

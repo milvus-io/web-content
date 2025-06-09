@@ -51,7 +51,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Feldgröße</strong>: JSON-Felder sind auf eine Größe von 65.536 Byte begrenzt.</p></li>
-<li><p><strong>Verschachtelte Wörterbücher</strong>: Alle verschachtelten Dictionaries innerhalb von JSON-Feldwerten werden bei der Speicherung als einfache Strings behandelt.</p></li>
+<li><p><strong>Verschachtelte Wörterbücher</strong>: Alle verschachtelten Dictionaries innerhalb von JSON-Feldwerten werden bei der Speicherung als einfache Zeichenketten behandelt.</p></li>
 <li><p><strong>Standardwerte</strong>: JSON-Felder unterstützen keine Standardwerte. Sie können jedoch das Attribut <code translate="no">nullable</code> auf <code translate="no">True</code> setzen, um Nullwerte zuzulassen. Einzelheiten finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
 <li><p><strong>Typübereinstimmung</strong>: Wenn der Schlüsselwert eines JSON-Feldes ein Integer- oder Float-Wert ist, kann er nur (über Ausdrucksfilter) mit einem anderen numerischen Schlüssel desselben Typs verglichen werden.</p></li>
 <li><p><strong>Benennung</strong>: Es wird empfohlen, bei der Benennung von JSON-Schlüsseln nur Buchstaben, Zahlen und Unterstriche zu verwenden. Die Verwendung anderer Zeichen kann zu Problemen bei der Filterung oder Suche führen.</p></li>
@@ -243,7 +243,7 @@ schema.WithField(entity.NewField().
 <li><p><strong>Obligatorisch</strong> für Vektorfelder (um Ähnlichkeitssuchen effizient durchzuführen).</p></li>
 <li><p><strong>Optional</strong> für JSON-Felder (um skalare Filter auf bestimmten JSON-Pfaden zu beschleunigen).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field" class="common-anchor-header">Indizieren eines JSON-Feldes</h3><p>Standardmäßig sind JSON-Felder nicht indiziert, so dass alle Filterabfragen (z. B. <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) alle Zeilen durchsuchen müssen. Wenn Sie Abfragen auf bestimmten Pfaden innerhalb des Feldes <code translate="no">metadata</code> beschleunigen möchten, können Sie einen <strong>invertierten Index</strong> auf jedem Pfad erstellen, der Sie interessiert.</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">Indizieren eines JSON-Feldes<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>Standardmäßig sind JSON-Felder nicht indiziert, so dass alle Filterabfragen (z. B. <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) alle Zeilen durchsuchen müssen. Wenn Sie Abfragen auf bestimmten Pfaden innerhalb des Feldes <code translate="no">metadata</code> beschleunigen möchten, können Sie einen <strong>invertierten Index</strong> auf jedem Pfad erstellen, der Sie interessiert.</p>
 <p>In diesem Beispiel werden wir zwei Indizes auf verschiedenen Pfaden innerhalb des JSON-Feldes <code translate="no">metadata</code> erstellen:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -384,12 +384,17 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Gibt an, welcher JSON-Pfad indiziert werden soll. Sie können auf verschachtelte Schlüssel, Array-Positionen oder beides abzielen (z. B. <code translate="no">metadata["product_info"]["category"]</code> oder <code translate="no">metadata["tags"][0]</code>). Wenn der Pfad fehlt oder das Array-Element für eine bestimmte Zeile nicht existiert, wird diese Zeile bei der Indizierung einfach übersprungen und es wird kein Fehler ausgelöst.</p></td>
+     <td><p>Gibt an, welcher JSON-Pfad indiziert werden soll. Sie können auf verschachtelte Schlüssel, Array-Positionen oder beides abzielen (z.B. <code translate="no">metadata["product_info"]["category"]</code> oder <code translate="no">metadata["tags"][0]</code>). Wenn der Pfad fehlt oder das Array-Element für eine bestimmte Zeile nicht existiert, wird diese Zeile während der Indizierung einfach übersprungen und es wird kein Fehler ausgelöst.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Datentyp, in den Milvus die extrahierten JSON-Werte umwandelt, wenn der Index erstellt wird. Gültige Werte:</p><ul><li><code translate="no">"bool"</code> oder <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> oder <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> oder <code translate="no">"VARCHAR"</code><strong>Hinweis</strong>: Für ganzzahlige Werte verwendet Milvus intern double für den Index. Große Ganzzahlen über 2^53 verlieren an Präzision. Wenn das Typ-Casting fehlschlägt (aufgrund einer Typ-Fehlanpassung), wird kein Fehler ausgelöst und der Wert dieser Zeile wird nicht indiziert.</li></ul></td>
+     <td><p>Datentyp, in den Milvus die extrahierten JSON-Werte umwandelt, wenn der Index erstellt wird. Gültige Werte:</p>
+<ul>
+<li><code translate="no">"bool"</code> oder <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> oder <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> oder <code translate="no">"VARCHAR"</code><strong>Hinweis</strong>: Für ganzzahlige Werte verwendet Milvus intern double für den Index. Große Ganzzahlen über 2^53 verlieren an Präzision. Wenn das Typ-Casting fehlschlägt (aufgrund einer Typ-Fehlanpassung), wird kein Fehler ausgelöst und der Wert dieser Zeile wird nicht indiziert.</li>
+</ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -413,12 +418,10 @@ curl --request POST \
 <li>Milvus parst oder transformiert JSON-Schlüssel nicht über das von Ihnen angegebene Casting hinaus. Wenn die Quelldaten inkonsistent sind (z. B. speichern einige Zeilen einen String für den Schlüssel <code translate="no">&quot;k&quot;</code>, während andere eine Zahl speichern), werden einige Zeilen nicht indiziert.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Indizieren eines Vektorfeldes<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>Im folgenden Beispiel wird ein Index für das Vektorfeld <code translate="no">embedding</code> erstellt, wobei der Indextyp <code translate="no">AUTOINDEX</code> verwendet wird. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Details finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">Indizieren eines Vektorfeldes</h3><p>Im folgenden Beispiel wird ein Index für das Vektorfeld <code translate="no">embedding</code> erstellt, wobei der Indextyp <code translate="no">AUTOINDEX</code> verwendet wird. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Details finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
-
-index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
@@ -431,7 +434,6 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)

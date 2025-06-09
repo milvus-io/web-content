@@ -21,7 +21,7 @@ title: Indice dei campi scalari
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, un indice scalare viene utilizzato per velocizzare il metafiltraggio in base a un valore specifico di un campo non vettoriale, in modo simile a un indice tradizionale di un database. Questa guida illustra la creazione e la configurazione di indici scalari per campi come numeri interi, stringhe, ecc.</p>
+    </button></h1><p>In Milvus, un indice scalare viene utilizzato per accelerare il metafiltraggio in base a un valore specifico di un campo non vettoriale, in modo simile a un indice tradizionale di un database. Questa guida illustra la creazione e la configurazione di indici scalari per campi come numeri interi, stringhe, ecc.</p>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Tipi di indicizzazione scalare<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -219,7 +219,7 @@ client.createIndex(createIndexReq);
 <li><strong>indexType</strong><em>(String</em>) Il tipo di indice scalare da creare. Per l'indicizzazione implicita, lasciare vuoto o omettere questo parametro. Per l'indicizzazione personalizzata, i valori validi sono:<ul>
 <li><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/scalar_index.md">Indice scalare</a>.</li>
 <li><strong>STL_SORT</strong>: Ordina i campi scalari utilizzando l'algoritmo di ordinamento standard della libreria template. Supporta campi booleani e numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta campi VARCHAR.</li>
+<li><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta i campi VARCHAR.</li>
 </ul></li>
 </ul></li>
 <li><strong>CreateIndexReq</strong>Crea l'indice nella collezione specificata.<ul>
@@ -307,21 +307,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>Attualmente, l'indicizzazione scalare supporta i tipi di dati INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR e ARRAY, ma non il tipo di dati JSON.</li>
-</ul>

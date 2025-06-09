@@ -628,7 +628,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Membuat beberapa instance AnnSearchRequest</h3><p>Pencarian Hibrida diimplementasikan dengan membuat beberapa <code translate="no">AnnSearchRequest</code> dalam fungsi <code translate="no">hybrid_search()</code>, di mana setiap <code translate="no">AnnSearchRequest</code> merepresentasikan permintaan pencarian ANN dasar untuk bidang vektor tertentu. Oleh karena itu, sebelum melakukan Pencarian Hibrida, perlu untuk membuat <code translate="no">AnnSearchRequest</code> untuk setiap bidang vektor.</p>
-<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> di <code translate="no">AnnSearchRequest</code>, Anda dapat mengatur kondisi pemfilteran untuk pencarian hybrid Anda. Silakan lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/filtering">Pemfilteran</a>.</p>
+<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> di <code translate="no">AnnSearchRequest</code>, Anda dapat mengatur kondisi pemfilteran untuk pencarian hybrid Anda. Silakan lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/boolean.md">Pemfilteran</a>.</p>
 <div class="alert note">
 <p>Dalam Pencarian Hibrida, setiap <code translate="no">AnnSearchRequest</code> hanya mendukung satu data kueri.</p>
 </div>
@@ -776,7 +776,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>Pemeringkat Tertimbang</strong>: Gunakan strategi ini jika hasil pencarian perlu menekankan bidang vektor tertentu. WeightedRanker memungkinkan Anda untuk memberikan bobot yang lebih besar pada bidang vektor tertentu, menyorotnya dengan lebih menonjol.</p></li>
 <li><p><strong>RRFRanker (Pemeringkat Fusi Peringkat Timbal Balik)</strong>: Pilih strategi ini ketika tidak ada penekanan khusus yang diperlukan. RRFRanker secara efektif menyeimbangkan pentingnya setiap bidang vektor.</p></li>
 </ul>
-<p>Untuk detail lebih lanjut tentang mekanisme pemeringkatan ulang ini, silakan lihat <a href="/docs/id/reranking">Pemeringkatan</a> Ulang.</p>
+<p>Untuk detail lebih lanjut tentang mekanisme pemeringkatan ulang ini, silakan lihat <a href="/docs/id/reranking.md">Pemeringkatan</a> Ulang.</p>
 <p>Dalam contoh ini, karena tidak ada penekanan khusus pada kueri penelusuran tertentu, kita akan melanjutkan dengan strategi RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

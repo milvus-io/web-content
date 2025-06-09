@@ -630,7 +630,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Créer plusieurs instances AnnSearchRequest</h3><p>La recherche hybride est mise en œuvre en créant plusieurs <code translate="no">AnnSearchRequest</code> dans la fonction <code translate="no">hybrid_search()</code>, où chaque <code translate="no">AnnSearchRequest</code> représente une demande de recherche ANN de base pour un champ vectoriel spécifique. Par conséquent, avant d'effectuer une recherche hybride, il est nécessaire de créer un site <code translate="no">AnnSearchRequest</code> pour chaque champ vectoriel.</p>
-<p>En outre, en configurant le paramètre <code translate="no">expr</code> dans un <code translate="no">AnnSearchRequest</code>, vous pouvez définir les conditions de filtrage de votre recherche hybride. Veuillez vous référer aux sections <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/filtering">Filtrage</a>.</p>
+<p>En outre, en configurant le paramètre <code translate="no">expr</code> dans un <code translate="no">AnnSearchRequest</code>, vous pouvez définir les conditions de filtrage de votre recherche hybride. Veuillez vous référer aux sections <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/boolean.md">Filtrage</a>.</p>
 <div class="alert note">
 <p>Dans la recherche hybride, chaque site <code translate="no">AnnSearchRequest</code> ne prend en charge qu'une seule donnée d'interrogation.</p>
 </div>
@@ -778,7 +778,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>WeightedRanker</strong>: Utilisez cette stratégie si les résultats doivent mettre l'accent sur un champ vectoriel particulier. WeightedRanker permet d'attribuer un poids plus important à certains champs vectoriels et de les mettre en évidence.</p></li>
 <li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Choisissez cette stratégie lorsqu'aucune importance particulière n'est requise. RRFRanker équilibre efficacement l'importance de chaque champ vectoriel.</p></li>
 </ul>
-<p>Pour plus de détails sur ces mécanismes de reclassement, veuillez vous référer à la section <a href="/docs/fr/reranking">Reranking</a>.</p>
+<p>Pour plus de détails sur ces mécanismes de reclassement, veuillez vous référer à la section <a href="/docs/fr/reranking.md">Reranking</a>.</p>
 <p>Dans cet exemple, étant donné qu'il n'y a pas d'importance particulière à accorder à des requêtes de recherche spécifiques, nous utiliserons la stratégie RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

@@ -56,9 +56,15 @@
         "children": []
       },
       {
+        "label": "搜尋的資料模型設計",
+        "id": "schema-hands-on.md",
+        "order": 1,
+        "children": []
+      },
+      {
         "label": "安裝 Milvus",
         "id": "install_milvus",
-        "order": 1,
+        "order": 2,
         "isMenu": true,
         "children": [
           {
@@ -158,12 +164,6 @@
             ]
           }
         ]
-      },
-      {
-        "label": "搜尋的資料模型設計",
-        "id": "schema-hands-on.md",
-        "order": 2,
-        "children": []
       },
       {
         "label": "安裝 SDK",

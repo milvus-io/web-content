@@ -56,9 +56,15 @@
         "children": []
       },
       {
+        "label": "搜索数据模型设计",
+        "id": "schema-hands-on.md",
+        "order": 1,
+        "children": []
+      },
+      {
         "label": "安装 Milvus",
         "id": "install_milvus",
-        "order": 1,
+        "order": 2,
         "isMenu": true,
         "children": [
           {
@@ -158,12 +164,6 @@
             ]
           }
         ]
-      },
-      {
-        "label": "搜索数据模型设计",
-        "id": "schema-hands-on.md",
-        "order": 2,
-        "children": []
       },
       {
         "label": "安装 SDK",
@@ -1528,7 +1528,7 @@
         "children": []
       },
       {
-        "label": "Milvus 备份",
+        "label": "Milvus 后备电源",
         "id": "milvus_backup",
         "order": 1,
         "children": [

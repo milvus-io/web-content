@@ -240,7 +240,7 @@ schema.WithField(entity.NewField().
 <li><p><strong>必须</strong>为向量字段<strong>建立</strong>索引（以高效运行相似性搜索）。</p></li>
 <li><p>JSON 字段<strong>可选</strong>（加快特定 JSON 路径上的标量过滤器）。</p></li>
 </ul>
-<h3 id="Index-a-JSON-field" class="common-anchor-header">为 JSON 字段建立索引</h3><p>默认情况下，JSON 字段未编入索引，因此任何过滤查询（如<code translate="no">metadata[&quot;price&quot;] &lt; 100</code> ）都必须扫描所有行。如果想加速对<code translate="no">metadata</code> 字段中特定路径的查询，可以在关心的每条路径上创建一个<strong>反向索引</strong>。</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">为 JSON 字段建立索引<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>默认情况下，JSON 字段未编入索引，因此任何过滤查询（如<code translate="no">metadata[&quot;price&quot;] &lt; 100</code> ）都必须扫描所有行。如果想加速对<code translate="no">metadata</code> 字段中特定路径的查询，可以在关心的每条路径上创建一个<strong>反向索引</strong>。</p>
 <p>在本例中，我们将针对 JSON 字段<code translate="no">metadata</code> 中的不同路径创建两个索引：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -381,12 +381,17 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>指定要索引的 JSON 路径。可以针对嵌套键、数组位置或两者（如<code translate="no">metadata["product_info"]["category"]</code> 或<code translate="no">metadata["tags"][0]</code> ）。如果路径缺失或数组元素不存在于某一行，则在索引过程中会跳过该行，不会出错。</p></td>
+     <td><p>指定要索引的 JSON 路径。可以针对嵌套键、数组位置或两者（如<code translate="no">metadata["product_info"]["category"]</code> 或<code translate="no">metadata["tags"][0]</code> ）。如果缺少路径或某一行不存在数组元素，则在索引过程中会跳过该行，不会出错。</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>在建立索引时，Milvus 将把提取的 JSON 值转换成的数据类型。有效值</p><ul><li><code translate="no">"bool"</code> 或<code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> 或<code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> 或<code translate="no">"VARCHAR"</code><strong>注意</strong>：对于整数值，Milvus 内部使用 double 作为索引。超过 2^53 的大整数会降低精度。如果类型转换失败（由于类型不匹配），不会抛出错误，也不会索引该行的值。</li></ul></td>
+     <td><p>在建立索引时，Milvus 将把提取的 JSON 值转换成的数据类型。有效值</p>
+<ul>
+<li><code translate="no">"bool"</code> 或<code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> 或<code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> 或<code translate="no">"VARCHAR"</code><strong>注意</strong>：对于整数值，Milvus 内部使用 double 作为索引。超过 2^53 的大整数会降低精度。如果类型转换失败（由于类型不匹配），不会抛出错误，也不会索引该行的值。</li>
+</ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -410,12 +415,10 @@ curl --request POST \
 <li>Milvus 不会解析或转换超出你指定铸造的 JSON 键。如果源数据不一致（例如，某些行的键<code translate="no">&quot;k&quot;</code> 存储的是字符串，而其他行存储的是数字），某些行将不会被索引。</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">索引一个向量字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 创建了一个索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。你也可以为每个字段自定义索引类型和参数。有关详情，请参阅<a href="/docs/zh/index-explained.md">索引解释</a>。</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">索引一个向量字段</h3><p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 创建了一个索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。你也可以为每个字段自定义索引类型和参数。有关详情，请参阅<a href="/docs/zh/index-explained.md">索引解释</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
-
-index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
@@ -428,7 +431,6 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)

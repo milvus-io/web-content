@@ -626,7 +626,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">إنشاء مثيلات AnnSearchRequest متعددة</h3><p>يتم تنفيذ البحث الهجين من خلال إنشاء عدة <code translate="no">AnnSearchRequest</code> في الدالة <code translate="no">hybrid_search()</code> ، حيث يمثل كل <code translate="no">AnnSearchRequest</code> طلب بحث ANN أساسي لحقل متجه معين. لذلك، قبل إجراء بحث مختلط، من الضروري إنشاء <code translate="no">AnnSearchRequest</code> لكل حقل متجه.</p>
-<p>بالإضافة إلى ذلك، من خلال تكوين المعلمة <code translate="no">expr</code> في <code translate="no">AnnSearchRequest</code> ، يمكنك تعيين شروط التصفية للبحث الهجين الخاص بك. يرجى الرجوع إلى <a href="/docs/ar/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/filtering">والتصفية</a>.</p>
+<p>بالإضافة إلى ذلك، من خلال تكوين المعلمة <code translate="no">expr</code> في <code translate="no">AnnSearchRequest</code> ، يمكنك تعيين شروط التصفية للبحث الهجين الخاص بك. يرجى الرجوع إلى <a href="/docs/ar/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/boolean.md">والتصفية</a>.</p>
 <div class="alert note">
 <p>في البحث المختلط، يدعم كل <code translate="no">AnnSearchRequest</code> بيانات استعلام واحدة فقط في البحث المختلط.</p>
 </div>
@@ -774,7 +774,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>استراتيجية إعادة الترتيب المرجحة</strong>: استخدم هذه الاستراتيجية إذا كانت النتائج تحتاج إلى التركيز على مجال متجه معين. يسمح لك WeightedRanker بتعيين وزن أكبر لحقول متجهات معينة، وإبرازها بشكل أكثر بروزًا.</p></li>
 <li><p><strong>RRRFRanker (مصنف دمج الرتب المتبادل)</strong>: اختر هذه الاستراتيجية عند عدم الحاجة إلى تركيز محدد. يوازن RRRFRanker بشكل فعال بين أهمية كل حقل متجه.</p></li>
 </ul>
-<p>لمزيد من التفاصيل حول آليات إعادة الترتيب هذه، يرجى الرجوع إلى <a href="/docs/ar/reranking">إعادة الترتيب</a>.</p>
+<p>لمزيد من التفاصيل حول آليات إعادة الترتيب هذه، يرجى الرجوع إلى <a href="/docs/ar/reranking.md">إعادة الترتيب</a>.</p>
 <p>في هذا المثال، بما أنه لا يوجد تركيز معين على استعلامات بحث محددة، سنستمر في استخدام استراتيجية RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>

@@ -243,7 +243,7 @@ schema.WithField(entity.NewField().
 <li><p><strong>Wajib</strong> untuk bidang vektor (untuk menjalankan pencarian kemiripan secara efisien).</p></li>
 <li><p><strong>Opsional</strong> untuk bidang JSON (untuk mempercepat penyaringan skalar pada jalur JSON tertentu).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field" class="common-anchor-header">Mengindeks bidang JSON</h3><p>Secara default, bidang JSON tidak diindeks, sehingga kueri filter apa pun (misalnya, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) harus memindai semua baris. Jika Anda ingin mempercepat kueri pada jalur tertentu di dalam bidang <code translate="no">metadata</code>, Anda dapat membuat <strong>indeks terbalik</strong> pada setiap jalur yang Anda inginkan.</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">Mengindeks bidang JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>Secara default, bidang JSON tidak diindeks, sehingga kueri filter apa pun (misalnya, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) harus memindai semua baris. Jika Anda ingin mempercepat kueri pada jalur tertentu di dalam bidang <code translate="no">metadata</code>, Anda dapat membuat <strong>indeks terbalik</strong> pada setiap jalur yang Anda inginkan.</p>
 <p>Dalam contoh ini, kita akan membuat dua indeks pada jalur yang berbeda di dalam bidang JSON <code translate="no">metadata</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -384,12 +384,17 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Menentukan jalur JSON mana yang akan diindeks. Anda dapat menargetkan kunci bersarang, posisi larik, atau keduanya (misalnya, <code translate="no">metadata["product_info"]["category"]</code> atau <code translate="no">metadata["tags"][0]</code>). Jika jalurnya tidak ada atau elemen lariknya tidak ada untuk baris tertentu, maka baris tersebut akan dilewati begitu saja saat pengindeksan, dan tidak ada kesalahan yang dilemparkan.</p></td>
+     <td><p>Menentukan jalur JSON mana yang akan diindeks. Anda dapat menargetkan kunci bersarang, posisi larik, atau keduanya (misalnya, <code translate="no">metadata["product_info"]["category"]</code> atau <code translate="no">metadata["tags"][0]</code>). Jika jalur tidak ada atau elemen larik tidak ada untuk baris tertentu, maka baris tersebut akan dilewati begitu saja saat pengindeksan, dan tidak ada kesalahan yang akan muncul.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Tipe data yang akan digunakan Milvus untuk meng-cast nilai JSON yang diekstrak ketika membangun indeks. Nilai yang valid:</p><ul><li><code translate="no">"bool"</code> atau <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> atau <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> atau <code translate="no">"VARCHAR"</code><strong>Catatan</strong>: Untuk nilai bilangan bulat, Milvus secara internal menggunakan double untuk indeks. Bilangan bulat besar di atas 2^53 akan kehilangan presisi. Jika pengecekan tipe gagal (karena ketidakcocokan tipe), tidak ada kesalahan yang dilemparkan, dan nilai baris tersebut tidak diindeks.</li></ul></td>
+     <td><p>Tipe data yang akan digunakan Milvus untuk meng-cast nilai JSON yang diekstrak ketika membangun indeks. Nilai yang valid:</p>
+<ul>
+<li><code translate="no">"bool"</code> atau <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> atau <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> atau <code translate="no">"VARCHAR"</code><strong>Catatan</strong>: Untuk nilai bilangan bulat, Milvus secara internal menggunakan double untuk indeks. Bilangan bulat besar di atas 2^53 akan kehilangan presisi. Jika pengecekan tipe gagal (karena ketidakcocokan tipe), tidak ada kesalahan yang dilemparkan, dan nilai baris tersebut tidak diindeks.</li>
+</ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -413,12 +418,10 @@ curl --request POST \
 <li>Milvus tidak mem-parsing atau mengubah kunci JSON di luar casting yang Anda tentukan. Jika data sumber tidak konsisten (misalnya, beberapa baris menyimpan string untuk kunci <code translate="no">&quot;k&quot;</code> sementara yang lain menyimpan angka), beberapa baris tidak akan diindeks.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Mengindeks bidang vektor<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code>, menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe datanya. Anda juga dapat menyesuaikan tipe indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">Mengindeks bidang vektor</h3><p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code>, menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe datanya. Anda juga dapat menyesuaikan tipe indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
-
-index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
@@ -431,7 +434,6 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)

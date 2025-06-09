@@ -242,7 +242,7 @@ schema.WithField(entity.NewField().
 <li><p><strong>إلزامي</strong> للحقول المتجهة (لتشغيل عمليات البحث عن التشابه بكفاءة).</p></li>
 <li><p><strong>اختياري</strong> لحقول JSON (لتسريع عمليات التصفية العددية على مسارات JSON محددة).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field" class="common-anchor-header">فهرسة حقل JSON</h3><p>بشكل افتراضي، لا تتم فهرسة حقول JSON، لذا يجب على أي استعلامات تصفية (على سبيل المثال، <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) مسح جميع الصفوف. إذا كنت ترغب في تسريع الاستعلامات على مسارات محددة داخل الحقل <code translate="no">metadata</code> ، يمكنك إنشاء فهرس <strong>مقلوب</strong> على كل مسار تهتم به.</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">فهرسة حقل JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>بشكل افتراضي، لا تتم فهرسة حقول JSON، لذا يجب على أي استعلامات تصفية (على سبيل المثال، <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) مسح جميع الصفوف. إذا كنت ترغب في تسريع الاستعلامات على مسارات محددة داخل الحقل <code translate="no">metadata</code> ، يمكنك إنشاء فهرس <strong>مقلوب</strong> على كل مسار تهتم به.</p>
 <p>في هذا المثال، سننشئ فهرسين على مسارات مختلفة داخل حقل JSON <code translate="no">metadata</code>:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
@@ -383,12 +383,17 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>تحديد مسار JSON المراد فهرسته. يمكنك استهداف المفاتيح المتداخلة أو مواضع الصفيف أو كليهما (على سبيل المثال، <code translate="no">metadata["product_info"]["category"]</code> أو <code translate="no">metadata["tags"][0]</code>). إذا كان المسار مفقودًا أو كان عنصر المصفوفة غير موجود لصف معين، يتم ببساطة تخطي هذا الصف أثناء الفهرسة، ولا يتم طرح أي خطأ.</p></td>
+     <td><p>تحديد مسار JSON المراد فهرسته. يمكنك استهداف المفاتيح المتداخلة أو مواضع المصفوفات أو كليهما (على سبيل المثال، <code translate="no">metadata["product_info"]["category"]</code> أو <code translate="no">metadata["tags"][0]</code>). إذا كان المسار مفقودًا أو كان عنصر المصفوفة غير موجود لصف معين، يتم ببساطة تخطي هذا الصف أثناء الفهرسة، ولا يتم طرح أي خطأ.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>نوع البيانات الذي سيقوم ميلفوس بإرسال قيم JSON المستخرجة إليه عند بناء الفهرس. القيم الصالحة:</p><ul><li><code translate="no">"bool"</code> أو <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> أو <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> أو <code translate="no">"VARCHAR"</code><strong>ملاحظة</strong>: بالنسبة لقيم الأعداد الصحيحة، يستخدم Milvus داخليًا مزدوجًا للفهرس. الأعداد الصحيحة الكبيرة التي تزيد عن 2^53 تفقد الدقة. في حالة فشل صب النوع (بسبب عدم تطابق النوع)، لا يتم طرح أي خطأ، ولا تتم فهرسة قيمة هذا الصف.</li></ul></td>
+     <td><p>نوع البيانات الذي سيقوم ميلفوس بإرسال قيم JSON المستخرجة إليه عند بناء الفهرس. القيم الصالحة:</p>
+<ul>
+<li><code translate="no">"bool"</code> أو <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> أو <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> أو <code translate="no">"VARCHAR"</code><strong>ملاحظة</strong>: بالنسبة لقيم الأعداد الصحيحة، يستخدم Milvus داخليًا مزدوجًا للفهرس. الأعداد الصحيحة الكبيرة التي تزيد عن 2^53 تفقد الدقة. في حالة فشل صب النوع (بسبب عدم تطابق النوع)، لا يتم طرح أي خطأ، ولا تتم فهرسة قيمة هذا الصف.</li>
+</ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -412,12 +417,10 @@ curl --request POST \
 <li>لا يقوم Milvus بتحليل مفاتيح JSON أو تحويلها خارج نطاق الصب المحدد. إذا كانت البيانات المصدر غير متناسقة (على سبيل المثال، تخزن بعض الصفوف سلسلة للمفتاح <code translate="no">&quot;k&quot;</code> بينما تخزن أخرى رقمًا)، فلن تتم فهرسة بعض الصفوف.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">فهرسة حقل متجه<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>يقوم المثال التالي بإنشاء فهرس على الحقل المتجه <code translate="no">embedding</code> ، باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار ميلفوس تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">فهرسة حقل متجه</h3><p>يقوم المثال التالي بإنشاء فهرس على الحقل المتجه <code translate="no">embedding</code> ، باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار ميلفوس تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
-
-index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
@@ -430,7 +433,6 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)

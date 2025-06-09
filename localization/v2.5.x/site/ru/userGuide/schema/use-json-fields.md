@@ -243,7 +243,7 @@ schema.WithField(entity.NewField().
 <li><p><strong>Обязательным</strong> для векторных полей (для эффективного поиска по сходству).</p></li>
 <li><p><strong>Необязательно</strong> для полей JSON (для ускорения скалярных фильтров по определенным путям JSON).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field" class="common-anchor-header">Индексирование поля JSON</h3><p>По умолчанию поля JSON не индексируются, поэтому любые запросы к фильтрам (например, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) должны сканировать все строки. Если вы хотите ускорить выполнение запросов по определенным путям внутри поля <code translate="no">metadata</code>, вы можете создать <strong>инвертированный индекс</strong> для каждого пути, который вас интересует.</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">Индексирование поля JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>По умолчанию поля JSON не индексируются, поэтому любые запросы к фильтрам (например, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) должны сканировать все строки. Если вы хотите ускорить выполнение запросов по определенным путям внутри поля <code translate="no">metadata</code>, вы можете создать <strong>инвертированный индекс</strong> для каждого пути, который вас интересует.</p>
 <p>В этом примере мы создадим два индекса по разным путям внутри JSON-поля <code translate="no">metadata</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -384,12 +384,17 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Указывает, какой путь JSON индексировать. Можно указать вложенные ключи, позиции массива или и то, и другое (например, <code translate="no">metadata["product_info"]["category"]</code> или <code translate="no">metadata["tags"][0]</code>). Если путь отсутствует или элемент массива не существует для конкретной строки, эта строка просто пропускается при индексации, и ошибка не возникает.</p></td>
+     <td><p>Указывает, какой путь JSON индексировать. Можно указать вложенные ключи, позиции массива или и то, и другое (например, <code translate="no">metadata["product_info"]["category"]</code> или <code translate="no">metadata["tags"][0]</code>). Если путь отсутствует или элемент массива не существует для определенной строки, эта строка просто пропускается при индексировании, и ошибка не возникает.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Тип данных, к которому Milvus будет приводить извлеченные JSON-значения при построении индекса. Допустимые значения:</p><ul><li><code translate="no">"bool"</code> или <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> или <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> или <code translate="no">"VARCHAR"</code><strong>Примечание</strong>: Для целых значений Milvus использует double для индекса. Большие целые числа больше 2^53 теряют точность. Если приведение типов не удается (из-за несоответствия типов), ошибка не возникает, и значение строки не индексируется.</li></ul></td>
+     <td><p>Тип данных, к которому Milvus будет приводить извлеченные JSON-значения при построении индекса. Допустимые значения:</p>
+<ul>
+<li><code translate="no">"bool"</code> или <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> или <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> или <code translate="no">"VARCHAR"</code><strong>Примечание</strong>: Для целых значений Milvus использует для индекса тип double. Большие целые числа больше 2^53 теряют точность. Если приведение типов не удается (из-за несоответствия типов), ошибка не возникает, и значение строки не индексируется.</li>
+</ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -413,12 +418,10 @@ curl --request POST \
 <li>Milvus не разбирает и не преобразует ключи JSON за пределами указанного вами кастинга. Если исходные данные непоследовательны (например, в одних строках хранится строка для ключа <code translate="no">&quot;k&quot;</code>, а в других - число), некоторые строки не будут проиндексированы.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Индексирование векторного поля<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>В следующем примере создается индекс для векторного поля <code translate="no">embedding</code>, используя тип индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/index-explained.md">"Объяснение индекса</a>".</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">Индексирование векторного поля</h3><p>В следующем примере создается индекс для векторного поля <code translate="no">embedding</code>, используя тип индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/index-explained.md">"Объяснение индекса</a>".</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
-
-index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
@@ -431,7 +434,6 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)

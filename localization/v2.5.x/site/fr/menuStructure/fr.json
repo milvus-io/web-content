@@ -56,9 +56,15 @@
         "children": []
       },
       {
+        "label": "Conception d'un modèle de données pour la recherche",
+        "id": "schema-hands-on.md",
+        "order": 1,
+        "children": []
+      },
+      {
         "label": "Installer Milvus",
         "id": "install_milvus",
-        "order": 1,
+        "order": 2,
         "isMenu": true,
         "children": [
           {
@@ -158,12 +164,6 @@
             ]
           }
         ]
-      },
-      {
-        "label": "Conception d'un modèle de données pour la recherche",
-        "id": "schema-hands-on.md",
-        "order": 2,
-        "children": []
       },
       {
         "label": "Installer les SDK",
@@ -1575,7 +1575,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre dans un environnement S3",
+                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -1845,7 +1845,7 @@
             "children": []
           },
           {
-            "label": "PrivéGPT",
+            "label": "PrivateGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []

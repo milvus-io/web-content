@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Um campo <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> é um campo escalar que armazena informações adicionais juntamente com incorporações vectoriais, em pares chave-valor. Aqui está um exemplo de como os dados são armazenados no formato JSON:</p>
+    </button></h1><p>Um campo <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> é um campo escalar que armazena informações adicionais juntamente com incorporações vectoriais, em pares de valores chave. Aqui está um exemplo de como os dados são armazenados no formato JSON:</p>
 <pre><code translate="no" class="language-python">{
   <span class="hljs-string">&quot;metadata&quot;</span>: {
     <span class="hljs-string">&quot;product_info&quot;</span>: {
@@ -243,7 +243,7 @@ schema.WithField(entity.NewField().
 <li><p><strong>Obrigatória</strong> para campos vetoriais (para executar eficientemente pesquisas de similaridade).</p></li>
 <li><p><strong>Opcional</strong> para campos JSON (para acelerar filtros escalares em caminhos JSON específicos).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field" class="common-anchor-header">Indexar um campo JSON</h3><p>Por padrão, os campos JSON não são indexados, portanto, qualquer consulta de filtro (por exemplo, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) deve examinar todas as linhas. Se quiser acelerar as consultas em caminhos específicos dentro do campo <code translate="no">metadata</code>, pode criar um <strong>índice invertido</strong> em cada caminho que lhe interessa.</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">Indexar um campo JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>Por padrão, os campos JSON não são indexados, portanto, qualquer consulta de filtro (por exemplo, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) deve examinar todas as linhas. Se quiser acelerar as consultas em caminhos específicos dentro do campo <code translate="no">metadata</code>, pode criar um <strong>índice invertido</strong> em cada caminho que lhe interessa.</p>
 <p>Neste exemplo, criaremos dois índices em caminhos diferentes dentro do campo JSON <code translate="no">metadata</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -384,12 +384,17 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Especifica o caminho JSON a indexar. Pode direcionar chaves aninhadas, posições de matriz ou ambas (por exemplo, <code translate="no">metadata["product_info"]["category"]</code> ou <code translate="no">metadata["tags"][0]</code>). Se o caminho estiver ausente ou o elemento do array não existir para uma determinada linha, essa linha será simplesmente ignorada durante a indexação e nenhum erro será lançado.</p></td>
+     <td><p>Especifica qual o caminho JSON a indexar. Você pode direcionar chaves aninhadas, posições de matriz ou ambos (por exemplo, <code translate="no">metadata["product_info"]["category"]</code> ou <code translate="no">metadata["tags"][0]</code>). Se o caminho estiver ausente ou o elemento da matriz não existir para uma linha específica, essa linha será simplesmente ignorada durante a indexação e nenhum erro será lançado.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Tipo de dados para o qual o Milvus converterá os valores JSON extraídos ao criar o índice. Valores válidos:</p><ul><li><code translate="no">"bool"</code> ou <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> ou <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> or <code translate="no">"VARCHAR"</code><strong>Nota</strong>: Para valores inteiros, Milvus utiliza internamente double para o índice. Os números inteiros grandes acima de 2^53 perdem a precisão. Se a conversão de tipos falhar (devido a incompatibilidade de tipos), nenhum erro é lançado e o valor dessa linha não é indexado.</li></ul></td>
+     <td><p>Tipo de dados para o qual o Milvus converterá os valores JSON extraídos ao criar o índice. Valores válidos:</p>
+<ul>
+<li><code translate="no">"bool"</code> ou <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> ou <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> or <code translate="no">"VARCHAR"</code><strong>Nota</strong>: Para valores inteiros, Milvus utiliza internamente double para o índice. Os números inteiros grandes acima de 2^53 perdem a precisão. Se a conversão de tipos falhar (devido a incompatibilidade de tipos), nenhum erro é lançado e o valor dessa linha não é indexado.</li>
+</ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -413,12 +418,10 @@ curl --request POST \
 <li>O Milvus não analisa ou transforma chaves JSON para além do casting especificado. Se os dados de origem forem inconsistentes (por exemplo, algumas linhas armazenam uma string para a chave <code translate="no">&quot;k&quot;</code> enquanto outras armazenam um número), algumas linhas não serão indexadas.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Indexar um campo de vetor<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>O exemplo seguinte cria um índice no campo vetorial <code translate="no">embedding</code>, utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">Indexar um campo de vetor</h3><p>O exemplo seguinte cria um índice no campo vetorial <code translate="no">embedding</code>, utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
-
-index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
@@ -431,7 +434,6 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)
@@ -787,7 +789,7 @@ fmt.Println(<span class="hljs-string">&quot;metadata&quot;</span>, rs.GetColumn(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1},{&quot;metadata&quot;:&quot;&quot;,&quot;pk&quot;:2},{&quot;metadata&quot;:&quot;&quot;,&quot;pk&quot;:3},{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: null, \&quot;brand\&quot;: \&quot;BrandB\&quot;}, \&quot;price\&quot;: 59.99, \&quot;in_stock\&quot;: null}&quot;,&quot;pk&quot;:4}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para recuperar entidades onde <code translate="no">metadata[&quot;product_info&quot;][&quot;category&quot;]</code> é <code translate="no">&quot;electronics&quot;</code>:</p>
+<p>Para recuperar entidades em que <code translate="no">metadata[&quot;product_info&quot;][&quot;category&quot;]</code> é <code translate="no">&quot;electronics&quot;</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>

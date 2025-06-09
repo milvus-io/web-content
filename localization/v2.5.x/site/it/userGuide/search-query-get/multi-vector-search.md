@@ -628,7 +628,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Creare istanze multiple di AnnSearchRequest</h3><p>La ricerca ibrida viene implementata creando più <code translate="no">AnnSearchRequest</code> nella funzione <code translate="no">hybrid_search()</code>, dove ogni <code translate="no">AnnSearchRequest</code> rappresenta una richiesta di ricerca ANN di base per uno specifico campo vettoriale. Pertanto, prima di effettuare una ricerca ibrida, è necessario creare un <code translate="no">AnnSearchRequest</code> per ogni campo vettoriale.</p>
-<p>Inoltre, configurando il parametro <code translate="no">expr</code> in un <code translate="no">AnnSearchRequest</code>, è possibile impostare le condizioni di filtraggio per la ricerca ibrida. Fare riferimento a <a href="/docs/it/filtered-search.md">Ricerca filtrata</a> e <a href="/docs/it/filtering">filtraggio</a>.</p>
+<p>Inoltre, configurando il parametro <code translate="no">expr</code> in un <code translate="no">AnnSearchRequest</code>, è possibile impostare le condizioni di filtraggio per la ricerca ibrida. Fare riferimento a <a href="/docs/it/filtered-search.md">Ricerca filtrata</a> e <a href="/docs/it/boolean.md">filtraggio</a>.</p>
 <div class="alert note">
 <p>Nella ricerca ibrida, ogni <code translate="no">AnnSearchRequest</code> supporta solo una query di dati.</p>
 </div>
@@ -776,7 +776,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>WeightedRanker</strong>: Utilizzare questa strategia se i risultati devono enfatizzare un particolare campo vettoriale. WeightedRanker consente di assegnare un peso maggiore a determinati campi vettoriali, mettendoli più in evidenza.</p></li>
 <li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Scegliete questa strategia quando non è richiesta un'enfasi specifica. RRFRanker bilancia efficacemente l'importanza di ciascun campo vettoriale.</p></li>
 </ul>
-<p>Per maggiori dettagli su questi meccanismi di reranking, consultare <a href="/docs/it/reranking">Reranking</a>.</p>
+<p>Per maggiori dettagli su questi meccanismi di reranking, consultare <a href="/docs/it/reranking.md">Reranking</a>.</p>
 <p>In questo esempio, poiché non c'è un'enfasi particolare su specifiche query di ricerca, procederemo con la strategia RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

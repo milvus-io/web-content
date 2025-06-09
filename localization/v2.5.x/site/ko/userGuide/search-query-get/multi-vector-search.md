@@ -3,7 +3,7 @@ id: multi-vector-search.md
 title: 다중 벡터 하이브리드 검색
 summary: >-
   많은 애플리케이션에서 개체는 제목, 설명과 같은 다양한 정보 또는 텍스트, 이미지, 오디오와 같은 여러 양식으로 검색할 수 있습니다. 예를
-  들어, 텍스트와 이미지가 포함된 트윗의 경우 텍스트나 이미지 중 하나가 검색 쿼리의 의미와 일치하면 검색됩니다. 하이브리드 검색은 이러한
+  들어, 텍스트와 이미지가 포함된 트윗의 경우 텍스트나 이미지 중 하나라도 검색 쿼리의 의미와 일치하면 검색됩니다. 하이브리드 검색은 이러한
   다양한 분야의 검색을 결합하여 검색 경험을 향상시킵니다. 밀버스는 여러 벡터 필드에 대한 검색을 허용하고 여러 개의 근사 이웃(ANN)
   검색을 동시에 수행함으로써 이를 지원합니다. 다중 벡터 하이브리드 검색은 텍스트와 이미지, 동일한 객체를 설명하는 여러 텍스트 필드 또는
   검색 품질을 개선하기 위해 조밀하고 희박한 벡터를 모두 검색하려는 경우에 특히 유용합니다.
@@ -622,11 +622,11 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">여러 개의 AnnSearchRequest 인스턴스 생성하기</h3><p>하이브리드 검색은 <code translate="no">hybrid_search()</code> 함수에 <code translate="no">AnnSearchRequest</code> 을 여러 개 생성하여 구현되며, 각 <code translate="no">AnnSearchRequest</code> 은 특정 벡터 필드에 대한 기본 ANN 검색 요청을 나타냅니다. 따라서 하이브리드 검색을 수행하기 전에 각 벡터 필드에 대해 <code translate="no">AnnSearchRequest</code> 을 생성해야 합니다.</p>
-<p>또한 <code translate="no">AnnSearchRequest</code> 에서 <code translate="no">expr</code> 파라미터를 구성하여 하이브리드 검색의 필터링 조건을 설정할 수 있습니다. <a href="/docs/ko/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/filtering">필터링을</a> 참조하세요.</p>
+<p>또한 <code translate="no">AnnSearchRequest</code> 에서 <code translate="no">expr</code> 파라미터를 구성하여 하이브리드 검색의 필터링 조건을 설정할 수 있습니다. <a href="/docs/ko/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/boolean.md">필터링을</a> 참조하세요.</p>
 <div class="alert note">
 <p>하이브리드 검색에서 각 <code translate="no">AnnSearchRequest</code> 은 하나의 쿼리 데이터만 지원합니다.</p>
 </div>
-<p>다양한 검색 벡터 필드의 기능을 보여드리기 위해 샘플 쿼리를 사용하여 세 개의 <code translate="no">AnnSearchRequest</code> 검색 요청을 구성하겠습니다. 또한 이 과정에서 미리 계산된 고밀도 벡터를 사용합니다. 검색 요청은 다음 벡터 필드를 대상으로 합니다:</p>
+<p>다양한 검색 벡터 필드의 기능을 보여드리기 위해 샘플 쿼리를 사용하여 3개의 <code translate="no">AnnSearchRequest</code> 검색 요청을 구성하겠습니다. 또한 이 과정에서 미리 계산된 고밀도 벡터를 사용합니다. 검색 요청은 다음 벡터 필드를 대상으로 합니다:</p>
 <ul>
 <li><p><code translate="no">text_dense</code> 시맨틱 텍스트 검색의 경우, 직접적인 키워드 매칭이 아닌 의미를 기반으로 문맥을 이해하고 검색할 수 있도록 합니다.</p></li>
 <li><p><code translate="no">text_sparse</code>전체 텍스트 검색 또는 키워드 검색의 경우, 텍스트 내의 정확한 단어나 구문 일치에 중점을 둡니다.</p></li>
@@ -770,7 +770,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>가중 순위</strong>: 결과에서 특정 벡터 필드를 강조해야 하는 경우 이 전략을 사용합니다. 가중랭커를 사용하면 특정 벡터 필드에 더 큰 가중치를 할당하여 더 눈에 띄게 강조할 수 있습니다.</p></li>
 <li><p><strong>RRFRanker(상호 순위 융합 랭커)</strong>: 특별히 강조할 필요가 없는 경우 이 전략을 선택하세요. RRFRanker는 각 벡터 필드의 중요도를 효과적으로 균형 있게 조정합니다.</p></li>
 </ul>
-<p>이러한 순위 재조정 메커니즘에 대한 자세한 내용은 순위 <a href="/docs/ko/reranking">재조정을</a> 참조하세요.</p>
+<p>이러한 순위 재조정 메커니즘에 대한 자세한 내용은 순위 <a href="/docs/ko/reranking.md">재조정을</a> 참조하세요.</p>
 <p>이 예제에서는 특정 검색 쿼리에 특별히 중점을 두지 않으므로 RRFRanker 전략을 진행하겠습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

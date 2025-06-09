@@ -37,7 +37,7 @@ summary: >-
 <p>La búsqueda híbrida multivectorial integra diferentes métodos de búsqueda o abarca incrustaciones de varias modalidades:</p>
 <ul>
 <li><p><strong>Búsqueda</strong> de<strong>vectores dispersos-densos</strong>: Los <a href="/docs/es/sparse_vector.md">vectores</a> <a href="/docs/es/dense-vector.md">densos</a> son excelentes para captar las relaciones semánticas, mientras que <a href="/docs/es/sparse_vector.md">los vectores</a> dispersos son muy eficaces para la concordancia precisa de palabras clave. La búsqueda híbrida combina estos enfoques para proporcionar tanto una amplia comprensión conceptual como la relevancia exacta de los términos, mejorando así los resultados de las búsquedas. Al aprovechar los puntos fuertes de cada método, la búsqueda híbrida supera las limitaciones de los enfoques individuales y ofrece un mejor rendimiento para consultas complejas. Aquí encontrará una <a href="/docs/es/full_text_search_with_milvus.md">guía</a> más detallada sobre la recuperación híbrida que combina la búsqueda semántica con la búsqueda de texto completo.</p></li>
-<li><p><strong>Búsqueda vectorial multimodal</strong>: La búsqueda vectorial multimodal es una potente técnica que permite buscar en varios tipos de datos, como texto, imágenes, audio y otros. La principal ventaja de este enfoque es su capacidad para unificar distintas modalidades en una experiencia de búsqueda fluida y cohesionada. Por ejemplo, en la búsqueda de productos, un usuario puede introducir una consulta de texto para encontrar productos descritos con texto e imágenes. Al combinar estas modalidades mediante un método de búsqueda híbrido, se puede mejorar la precisión de la búsqueda o enriquecer los resultados de la misma.</p></li>
+<li><p><strong>Búsqueda vectorial multimodal</strong>: La búsqueda vectorial multimodal es una potente técnica que permite buscar en varios tipos de datos, como texto, imágenes, audio y otros. La principal ventaja de este enfoque es su capacidad para unificar distintas modalidades en una experiencia de búsqueda fluida y cohesionada. Por ejemplo, en la búsqueda de productos, un usuario puede introducir una consulta de texto para encontrar productos descritos con texto e imágenes. Combinando estas modalidades mediante un método de búsqueda híbrido, se puede mejorar la precisión de la búsqueda o enriquecer los resultados de la misma.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Ejemplo<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -628,7 +628,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Crear varias instancias de AnnSearchRequest</h3><p>La Búsqueda Híbrida se implementa creando múltiples <code translate="no">AnnSearchRequest</code> en la función <code translate="no">hybrid_search()</code>, donde cada <code translate="no">AnnSearchRequest</code> representa una petición de búsqueda ANN básica para un campo vectorial específico. Por lo tanto, antes de realizar una Búsqueda Híbrida, es necesario crear un <code translate="no">AnnSearchRequest</code> para cada campo vectorial.</p>
-<p>Además, configurando el parámetro <code translate="no">expr</code> en un <code translate="no">AnnSearchRequest</code>, puede establecer las condiciones de filtrado para su búsqueda híbrida. Consulte <a href="/docs/es/filtered-search.md">Búsqueda filtrada</a> y <a href="/docs/es/filtering">filtrado</a>.</p>
+<p>Además, configurando el parámetro <code translate="no">expr</code> en un <code translate="no">AnnSearchRequest</code>, puede establecer las condiciones de filtrado para su búsqueda híbrida. Consulte <a href="/docs/es/filtered-search.md">Búsqueda filtrada</a> y <a href="/docs/es/boolean.md">filtrado</a>.</p>
 <div class="alert note">
 <p>En la búsqueda híbrida, cada <code translate="no">AnnSearchRequest</code> sólo admite un dato de consulta.</p>
 </div>
@@ -776,7 +776,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>WeightedRanker</strong>: Utilice esta estrategia si los resultados deben hacer hincapié en un campo vectorial concreto. WeightedRanker le permite asignar mayor peso a determinados campos vectoriales, resaltándolos más.</p></li>
 <li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Elija esta estrategia cuando no se requiera un énfasis específico. RRFRanker equilibra eficazmente la importancia de cada campo vectorial.</p></li>
 </ul>
-<p>Para obtener más información sobre estos mecanismos de reordenación, consulte <a href="/docs/es/reranking">Reordenación</a>.</p>
+<p>Para obtener más información sobre estos mecanismos de reordenación, consulte <a href="/docs/es/reranking.md">Reordenación</a>.</p>
 <p>En este ejemplo, dado que no hay un énfasis particular en consultas de búsqueda específicas, procederemos con la estrategia RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

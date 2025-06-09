@@ -19,7 +19,7 @@ title: 索引標量欄位
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，標量索引用來加速以特定的非向量欄位值進行元篩選，類似於傳統的資料庫索引。本指南將引導您為整數、字串等欄位建立及設定標量索引。</p>
+    </button></h1><p>在 Milvus 中，標量索引用來加速以特定的非向量欄位值進行元篩選，類似於傳統的資料庫索引。本指南將教您如何為整數、字串等欄位建立及設定標量索引。</p>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">標量索引的類型<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +58,7 @@ title: 索引標量欄位
 <p>若要使用自動索引，請省略以下的<strong>index_type</strong>參數 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>中省略 index_type 參數，這樣 Milvus 可以根據標量值欄位類型推斷索引類型。</p>
 </div>
 <div class="language-java">
-<p>要使用自動<strong>索引</strong>，請省略在 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>中省略 indexType 參數，這樣 Milvus 就可以根據標量值欄位類型推斷索引類型。</p>
+<p>要使用自動<strong>索引</strong>，請省略在 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>中省略 indexType 參數，這樣 Milvus 可以根據標量值欄位類型推斷索引類型。</p>
 </div>
 <div class="language-javascript">
 <p>若要使用自動索引，請省略...中的<strong>index_type</strong>參數。 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>中省略 index_type 參數，這樣 Milvus 就可以根據標量值欄位類型推斷索引類型。</p>
@@ -305,21 +305,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>目前，標量索引支援 INT8、INT16、INT32、INT64、FLOAT、DOUBLE、BOOL、VARCHAR 和 ARRAY 資料類型，但不支援 JSON 資料類型。</li>
-</ul>

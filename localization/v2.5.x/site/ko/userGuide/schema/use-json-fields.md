@@ -242,7 +242,7 @@ schema.WithField(entity.NewField().
 <li><p>벡터 필드의 경우<strong>필수</strong> (유사도 검색을 효율적으로 실행하기 위해).</p></li>
 <li><p>JSON 필드의 경우<strong>선택 사항</strong> (특정 JSON 경로에서 스칼라 필터의 속도를 높이기 위해).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field" class="common-anchor-header">JSON 필드 색인화</h3><p>기본적으로 JSON 필드는 색인화되지 않으므로 모든 필터 쿼리(예: <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>)는 모든 행을 스캔해야 합니다. <code translate="no">metadata</code> 필드 내의 특정 경로에 대한 쿼리를 가속화하려면 관심 있는 각 경로에 <strong>반전된 인덱스를</strong> 만들 수 있습니다.</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">JSON 필드 색인화<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>기본적으로 JSON 필드는 색인화되지 않으므로 모든 필터 쿼리(예: <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>)는 모든 행을 스캔해야 합니다. <code translate="no">metadata</code> 필드 내의 특정 경로에 대한 쿼리를 가속화하려면 관심 있는 각 경로에 <strong>반전된 인덱스를</strong> 만들 수 있습니다.</p>
 <p>이 예제에서는 <code translate="no">metadata</code> 필드 내의 서로 다른 경로에 두 개의 인덱스를 생성합니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -383,12 +383,17 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>인덱싱할 JSON 경로를 지정합니다. 중첩된 키, 배열 위치 또는 둘 다를 대상으로 지정할 수 있습니다(예: <code translate="no">metadata["product_info"]["category"]</code> 또는 <code translate="no">metadata["tags"][0]</code>). 경로가 누락되거나 특정 행에 대한 배열 요소가 존재하지 않는 경우, 해당 행은 인덱싱 중에 건너뛰기만 하고 오류는 발생하지 않습니다.</p></td>
+     <td><p>인덱싱할 JSON 경로를 지정합니다. 중첩된 키, 배열 위치 또는 둘 다(예: <code translate="no">metadata["product_info"]["category"]</code> 또는 <code translate="no">metadata["tags"][0]</code>)를 대상으로 할 수 있습니다. 경로가 누락되거나 특정 행에 대한 배열 요소가 존재하지 않으면 해당 행은 인덱싱 중에 건너뛰고 오류가 발생되지 않습니다.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>인덱스를 생성할 때 Milvus가 추출된 JSON 값을 캐스팅할 데이터 유형입니다. 유효한 값</p><ul><li><code translate="no">"bool"</code> 또는 <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> 또는 <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> 또는 <code translate="no">"VARCHAR"</code><strong>참고</strong>: 정수 값의 경우, Milvus는 내부적으로 인덱스에 double을 사용합니다. 2^53 이상의 큰 정수는 정밀도가 떨어집니다. 유형 불일치로 인해 유형 캐스팅에 실패하면 오류가 발생하지 않으며 해당 행의 값은 색인되지 않습니다.</li></ul></td>
+     <td><p>인덱스를 생성할 때 Milvus가 추출된 JSON 값을 캐스팅할 데이터 유형입니다. 유효한 값</p>
+<ul>
+<li><code translate="no">"bool"</code> 또는 <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> 또는 <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> 또는 <code translate="no">"VARCHAR"</code><strong>참고</strong>: 정수 값의 경우, Milvus는 내부적으로 인덱스에 double을 사용합니다. 2^53 이상의 큰 정수는 정밀도가 떨어집니다. 유형 불일치로 인해 유형 캐스팅에 실패하면 오류가 발생하지 않으며 해당 행의 값은 색인되지 않습니다.</li>
+</ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -412,12 +417,10 @@ curl --request POST \
 <li>Milvus는 사용자가 지정한 형 변환을 넘어서는 JSON 키를 구문 분석하거나 변환하지 않습니다. 소스 데이터가 일관성이 없는 경우(예: 일부 행은 <code translate="no">&quot;k&quot;</code> 키에 대해 문자열을 저장하고 다른 행은 숫자를 저장하는 경우), 일부 행은 색인되지 않습니다.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">벡터 필드 색인 생성<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 에 인덱스를 생성하는 예입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">벡터 필드 색인 생성</h3><p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 에 인덱스를 생성하는 예입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
-
-index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
@@ -430,7 +433,6 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)

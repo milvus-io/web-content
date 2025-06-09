@@ -243,7 +243,7 @@ schema.WithField(entity.NewField().
 <li><p><strong>Obligatoire</strong> pour les champs vectoriels (pour exécuter efficacement les recherches de similarité).</p></li>
 <li><p><strong>Facultatif</strong> pour les champs JSON (pour accélérer les filtres scalaires sur des chemins JSON spécifiques).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field" class="common-anchor-header">Indexer un champ JSON</h3><p>Par défaut, les champs JSON ne sont pas indexés, de sorte que toutes les requêtes de filtrage (par exemple, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) doivent analyser toutes les lignes. Si vous souhaitez accélérer les requêtes sur des chemins spécifiques dans le champ <code translate="no">metadata</code>, vous pouvez créer un <strong>index inversé</strong> sur chaque chemin qui vous intéresse.</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">Indexer un champ JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>Par défaut, les champs JSON ne sont pas indexés, de sorte que toutes les requêtes de filtrage (par exemple, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) doivent analyser toutes les lignes. Si vous souhaitez accélérer les requêtes sur des chemins spécifiques dans le champ <code translate="no">metadata</code>, vous pouvez créer un <strong>index inversé</strong> sur chaque chemin qui vous intéresse.</p>
 <p>Dans cet exemple, nous allons créer deux index sur des chemins différents à l'intérieur du champ JSON <code translate="no">metadata</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -389,7 +389,12 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Type de données vers lequel Milvus convertira les valeurs JSON extraites lors de la construction de l'index. Valeurs valides :</p><ul><li><code translate="no">"bool"</code> ou <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> ou <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> ou <code translate="no">"VARCHAR"</code><strong>Remarque</strong>: pour les valeurs entières, Milvus utilise en interne double pour l'index. Les grands nombres entiers supérieurs à 2^53 perdent en précision. Si le moulage de type échoue (en raison d'une incompatibilité de type), aucune erreur n'est générée et la valeur de cette ligne n'est pas indexée.</li></ul></td>
+     <td><p>Type de données vers lequel Milvus convertira les valeurs JSON extraites lors de la construction de l'index. Valeurs valides :</p>
+<ul>
+<li><code translate="no">"bool"</code> ou <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> ou <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> ou <code translate="no">"VARCHAR"</code><strong>Remarque</strong>: pour les valeurs entières, Milvus utilise en interne double pour l'index. Les grands nombres entiers supérieurs à 2^53 perdent en précision. Si le moulage de type échoue (en raison d'une incompatibilité de type), aucune erreur n'est générée et la valeur de cette ligne n'est pas indexée.</li>
+</ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -413,12 +418,10 @@ curl --request POST \
 <li>Milvus n'analyse pas et ne transforme pas les clés JSON au-delà de la distribution spécifiée. Si les données source sont incohérentes (par exemple, certaines lignes stockent une chaîne pour la clé <code translate="no">&quot;k&quot;</code> alors que d'autres stockent un nombre), certaines lignes ne seront pas indexées.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Indexation d'un champ vectoriel<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>L'exemple suivant crée un index sur le champ vectoriel <code translate="no">embedding</code>, en utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, reportez-vous à <a href="/docs/fr/index-explained.md">Index Explained</a>.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">Indexation d'un champ vectoriel</h3><p>L'exemple suivant crée un index sur le champ vectoriel <code translate="no">embedding</code>, en utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, reportez-vous à <a href="/docs/fr/index-explained.md">Index Explained</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
-
-index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
@@ -431,7 +434,6 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)

@@ -621,7 +621,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">建立多個 AnnSearchRequest 實體</h3><p>Hybrid Search 是透過在<code translate="no">hybrid_search()</code> 函式中建立多個<code translate="no">AnnSearchRequest</code> 來實作，其中每個<code translate="no">AnnSearchRequest</code> 代表特定向量領域的基本 ANN 搜尋請求。因此，在進行 Hybrid Search 之前，必須為每個向量欄位建立一個<code translate="no">AnnSearchRequest</code> 。</p>
-<p>此外，透過在<code translate="no">AnnSearchRequest</code> 中設定<code translate="no">expr</code> 參數，您可以設定混合搜尋的過濾條件。請參閱<a href="/docs/zh-hant/filtered-search.md">過濾搜尋與</a> <a href="/docs/zh-hant/filtering">過濾</a>。</p>
+<p>此外，透過在<code translate="no">AnnSearchRequest</code> 中設定<code translate="no">expr</code> 參數，您可以設定混合搜尋的過濾條件。請參閱<a href="/docs/zh-hant/filtered-search.md">過濾搜尋與</a> <a href="/docs/zh-hant/boolean.md">過濾</a>。</p>
 <div class="alert note">
 <p>在混合搜尋中，每個<code translate="no">AnnSearchRequest</code> 只支援一個查詢資料。</p>
 </div>
@@ -769,7 +769,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>加權排名</strong>：如果結果需要強調特定向量領域，請使用此策略。WeightedRanker 允許您為特定向量領域分配更大的權重，使其更加突出。</p></li>
 <li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)：</strong>當不需要特別強調時，請選擇此策略。RRFRanker 能有效平衡每個向量欄位的重要性。</p></li>
 </ul>
-<p>有關這些重新排名機制的詳細資訊，請參閱<a href="/docs/zh-hant/reranking">重新排名</a>。</p>
+<p>有關這些重新排名機制的詳細資訊，請參閱<a href="/docs/zh-hant/reranking.md">重新排名</a>。</p>
 <p>在本範例中，由於不需要特別強調特定的搜尋查詢，因此我們將採用 RRFRanker 策略。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

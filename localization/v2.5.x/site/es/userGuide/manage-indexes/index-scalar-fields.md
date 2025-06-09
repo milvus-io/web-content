@@ -21,7 +21,7 @@ title: Índice de campos escalares
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En Milvus, un índice escalar se utiliza para acelerar el metafiltrado por un valor de campo no vectorial específico, de forma similar a un índice de base de datos tradicional. Esta guía le guiará a través de la creación y configuración de índices escalares para campos como enteros, cadenas, etc.</p>
+    </button></h1><p>En Milvus, un índice escalar se utiliza para acelerar el metafiltrado por un valor de campo no vectorial específico, de forma similar a un índice de base de datos tradicional. Esta guía le mostrará cómo crear y configurar índices escalares para campos como enteros, cadenas, etc.</p>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Tipos de indexación escalar<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,7 +128,7 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto utilizando el parámetro <strong>index_type</strong> en el archivo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto mediante el parámetro <strong>index_type</strong> en el archivo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto utilizando el parámetro <strong>indexType</strong> en <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
@@ -307,21 +307,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>Actualmente, la indexación escalar soporta los tipos de datos INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR y ARRAY, pero no el tipo de datos JSON.</li>
-</ul>

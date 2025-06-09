@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>多くのアプリケーションにおいて、オブジェクトはタイトルや説明文などの豊富な情報セット、あるいはテキスト、画像、音声などの複数のモダリティで検索することができる。例えば、テキストと画像を含むツイートは、テキストか画像のどちらかが検索クエリのセマンティックにマッチすれば検索される。ハイブリッド検索は、これらの多様な分野にわたる検索を組み合わせることによって、検索体験を向上させる。Milvusは、複数のベクトルフィールドの検索を可能にし、複数の近似最近傍（ANN）検索を同時に行うことで、これをサポートしている。マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、または検索品質を向上させるために密なベクトルと疎なベクトルを検索したい場合に特に便利です。</p>
+    </button></h1><p>多くのアプリケーションにおいて、オブジェクトはタイトルや説明文などの豊富な情報セット、あるいはテキスト、画像、音声などの複数のモダリティによって検索される。例えば、テキストと画像を含むツイートは、テキストか画像のどちらかが検索クエリのセマンティックにマッチすれば検索される。ハイブリッド検索は、これらの多様な分野にわたる検索を組み合わせることによって、検索体験を向上させる。Milvusは、複数のベクトルフィールドの検索を可能にし、複数の近似最近傍（ANN）検索を同時に行うことで、これをサポートしている。マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、または検索品質を向上させるために密なベクトルと疎なベクトルを検索したい場合に特に便利です。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
@@ -618,7 +618,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">複数のAnnSearchRequestインスタンスを作成する。</h3><p>ハイブリッド・サーチは、<code translate="no">hybrid_search()</code> 関数で複数の<code translate="no">AnnSearchRequest</code> を作成することで実装される。各<code translate="no">AnnSearchRequest</code> は、特定のベクトル・フィールドに対する基本的なANNサーチ・リクエストを表す。従って、ハイブリッド・サーチを行う前に、各ベクトル・フィールドに対して<code translate="no">AnnSearchRequest</code> を作成する必要がある。</p>
-<p>また、<code translate="no">AnnSearchRequest</code> の<code translate="no">expr</code> パラメータを設定することで、ハイブリッドサーチのフィルタリング条件を設定することができます。<a href="/docs/ja/filtered-search.md">フィルタリング検索と</a> <a href="/docs/ja/filtering">フィルタリングを</a>参照してください。</p>
+<p>また、<code translate="no">AnnSearchRequest</code> の<code translate="no">expr</code> パラメータを設定することで、ハイブリッドサーチのフィルタリング条件を設定することができます。<a href="/docs/ja/filtered-search.md">フィルタリング検索と</a> <a href="/docs/ja/boolean.md">フィルタリングを</a>参照してください。</p>
 <div class="alert note">
 <p>ハイブリッド検索では、<code translate="no">AnnSearchRequest</code> 、それぞれ1つのクエリーデータのみをサポートします。</p>
 </div>
@@ -766,7 +766,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>WeightedRanker</strong>：結果が特定のベクトルフィールドを強調する必要がある場合、この戦略を使用する。WeightedRankerでは、特定のベクトルフィールドに大きなウェイトを割り当て、より目立つように強調することができます。</p></li>
 <li><p><strong>RRFRanker（Reciprocal Rank Fusion Ranker）</strong>：特に強調する必要がない場合は、このストラテジーを選択してください。RRFRankerは、各ベクトルフィールドの重要度を効果的にバランスさせます。</p></li>
 </ul>
-<p>これらの再ランク付けメカニズムの詳細については、<a href="/docs/ja/reranking">再ランク付けを</a>参照してください。</p>
+<p>これらの再ランク付けメカニズムの詳細については、<a href="/docs/ja/reranking.md">再ランク付けを</a>参照してください。</p>
 <p>この例では、特定の検索クエリを特に強調する必要がないため、RRFRanker戦略で進める。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

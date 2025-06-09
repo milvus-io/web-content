@@ -243,7 +243,7 @@ schema.WithField(entity.NewField().
 <li><p><strong>Obbligatoria</strong> per i campi vettoriali (per eseguire in modo efficiente le ricerche di similarità).</p></li>
 <li><p><strong>Opzionale</strong> per i campi JSON (per velocizzare i filtri scalari su percorsi JSON specifici).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field" class="common-anchor-header">Indicizzare un campo JSON</h3><p>Per impostazione predefinita, i campi JSON non sono indicizzati, quindi qualsiasi query di filtro (ad esempio, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) deve eseguire la scansione di tutte le righe. Se si desidera accelerare le query su percorsi specifici all'interno del campo <code translate="no">metadata</code>, è possibile creare un <strong>indice invertito</strong> su ciascun percorso interessato.</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">Indicizzare un campo JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>Per impostazione predefinita, i campi JSON non sono indicizzati, quindi qualsiasi query di filtro (ad esempio, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) deve eseguire la scansione di tutte le righe. Se si desidera accelerare le query su percorsi specifici all'interno del campo <code translate="no">metadata</code>, è possibile creare un <strong>indice invertito</strong> su ciascun percorso interessato.</p>
 <p>In questo esempio, creeremo due indici su percorsi diversi all'interno del campo JSON <code translate="no">metadata</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -384,12 +384,17 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Specifica quale percorso JSON indicizzare. Si può puntare su chiavi annidate, posizioni di array o entrambi (ad esempio, <code translate="no">metadata["product_info"]["category"]</code> o <code translate="no">metadata["tags"][0]</code>). Se il percorso manca o l'elemento dell'array non esiste per una determinata riga, questa viene semplicemente saltata durante l'indicizzazione e non viene lanciato alcun errore.</p></td>
+     <td><p>Specifica quale percorso JSON indicizzare. Si può puntare su chiavi annidate, su posizioni di array o su entrambi (ad esempio, <code translate="no">metadata["product_info"]["category"]</code> o <code translate="no">metadata["tags"][0]</code>). Se il percorso manca o l'elemento dell'array non esiste per una determinata riga, quella riga viene semplicemente saltata durante l'indicizzazione e non viene lanciato alcun errore.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Tipo di dati in cui Milvus trasformerà i valori JSON estratti durante la creazione dell'indice. Valori validi:</p><ul><li><code translate="no">"bool"</code> o <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> o <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> o <code translate="no">"VARCHAR"</code><strong>Nota</strong>: Per i valori interi, Milvus utilizza internamente double per l'indice. I valori interi di grandi dimensioni superiori a 2^53 perdono precisione. Se il type casting fallisce (a causa di una mancata corrispondenza di tipo), non viene lanciato alcun errore e il valore della riga non viene indicizzato.</li></ul></td>
+     <td><p>Tipo di dati in cui Milvus trasformerà i valori JSON estratti durante la creazione dell'indice. Valori validi:</p>
+<ul>
+<li><code translate="no">"bool"</code> o <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> o <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> o <code translate="no">"VARCHAR"</code><strong>Nota</strong>: Per i valori interi, Milvus utilizza internamente double per l'indice. I valori interi di grandi dimensioni superiori a 2^53 perdono precisione. Se il type casting fallisce (a causa di una mancata corrispondenza di tipo), non viene lanciato alcun errore e il valore della riga non viene indicizzato.</li>
+</ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -413,12 +418,10 @@ curl --request POST \
 <li>Milvus non analizza né trasforma le chiavi JSON al di là del casting specificato. Se i dati di origine sono incoerenti (ad esempio, alcune righe memorizzano una stringa per la chiave <code translate="no">&quot;k&quot;</code> mentre altre memorizzano un numero), alcune righe non saranno indicizzate.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field--Milvus-2510+" class="common-anchor-header">Indicizzare un campo vettoriale<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>L'esempio seguente crea un indice sul campo vettoriale <code translate="no">embedding</code>, utilizzando il tipo di indice <code translate="no">AUTOINDEX</code>. Con questo tipo, Milvus seleziona automaticamente l'indice più adatto in base al tipo di dati. È anche possibile personalizzare il tipo di indice e i parametri per ogni campo. Per maggiori dettagli, consultare la sezione <a href="/docs/it/index-explained.md">Indice spiegato</a>.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">Indicizzare un campo vettoriale</h3><p>L'esempio seguente crea un indice sul campo vettoriale <code translate="no">embedding</code>, utilizzando il tipo di indice <code translate="no">AUTOINDEX</code>. Con questo tipo, Milvus seleziona automaticamente l'indice più adatto in base al tipo di dati. È anche possibile personalizzare il tipo di indice e i parametri per ogni campo. Per maggiori dettagli, consultare la sezione <a href="/docs/it/index-explained.md">Indice spiegato</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
-
-index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
@@ -431,7 +434,6 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
         .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)
@@ -459,7 +461,7 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Creare la collezione<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">Creare la raccolta<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

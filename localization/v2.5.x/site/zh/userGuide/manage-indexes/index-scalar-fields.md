@@ -190,7 +190,7 @@ client.createIndex(createIndexReq);
 <p>要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。</p>
 <p>对于自定义索引，有效值为</p>
 <ul>
-<li><p><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记化单词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</p></li>
+<li><p><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</p></li>
 <li><p><strong>BITMAP</strong>：<strong>位图</strong>索引：一种存储字段中所有唯一值的位图的索引类型。有关详情，请参阅<a href="/docs/zh/bitmap.md">BITMAP</a>。</p></li>
 <li><p><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。仅支持数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</p></li>
 <li><p><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</p></li>
@@ -305,21 +305,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>目前，标量索引支持 INT8、INT16、INT32、INT64、FLOAT、DOUBLE、BOOL、VARCHAR 和 ARRAY 数据类型，但不支持 JSON 数据类型。</li>
-</ul>
