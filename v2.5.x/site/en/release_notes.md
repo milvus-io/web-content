@@ -8,6 +8,58 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.13
+
+Release date: June 10, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.13          | 2.5.11            | 2.5.10              | 2.5.10           |
+
+We're excited to announce Milvus 2.5.13! This version enhances your experience with new features, such as the ability to drop field properties and use a `cast` function for JSON indexes. It also delivers a range of general performance and stability enhancements, while resolving numerous bugs to ensure a more robust system. We encourage you to upgrade to 2.5.13 and explore these latest updates!
+
+### Features
+
+- Added support for dropping properties from a field ([#41954](https://github.com/milvus-io/milvus/pull/41954)).
+- Added a `cast` function for use with JSON indexes ([#42504](https://github.com/milvus-io/milvus/pull/42504)).
+
+### Improvements
+
+- Increased the default import buffer size ([#42542](https://github.com/milvus-io/milvus/pull/42542)).
+- Accelerated the dispatcher building process ([#42544](https://github.com/milvus-io/milvus/pull/42544)).
+- Removed balance constraints between channel and segment tasks ([#42410](https://github.com/milvus-io/milvus/pull/42410)).
+- Set the CAGRA GPU image as the default ([#42193](https://github.com/milvus-io/milvus/pull/42193)).
+- The `DescribeIndex` RESTful API now supports returning index parameters ([#42080](https://github.com/milvus-io/milvus/pull/42080)).
+- Enabled running an analyzer by a collection's field to avoid frequent analyzer creation and destruction ([#42119](https://github.com/milvus-io/milvus/pull/42119)).
+- Added support for balancing multiple collections in a single trigger ([#42134](https://github.com/milvus-io/milvus/pull/42134)).
+- Now considers `nq` (number of queries) when identifying slow queries ([#42125](https://github.com/milvus-io/milvus/pull/42125)).
+- The server side now automatically fills absent nullable fields ([#42120](https://github.com/milvus-io/milvus/pull/42120)).
+- Added support for filtering out expired data using TTL ([#41960](https://github.com/milvus-io/milvus/pull/41960), [#42121](https://github.com/milvus-io/milvus/pull/42121), [#42103](https://github.com/milvus-io/milvus/pull/42103)).
+- Refined expiring compaction to reclaim space from a small number of older deletions ([#42052](https://github.com/milvus-io/milvus/pull/42052)).
+- Access logs now support fetching hybrid search expressions and fields ([#41921](https://github.com/milvus-io/milvus/pull/41921)).
+- Added explicit move semantics to the `get_batch_view` interface ([#42402](https://github.com/milvus-io/milvus/pull/42402)).
+
+### Bug fixes
+
+- Fixed a pipeline/delegator leak ([#42583](https://github.com/milvus-io/milvus/pull/42583)).
+- Fixed the delegator selection logic when releasing a segment to avoid a potential MixCoord panic ([#42572](https://github.com/milvus-io/milvus/pull/42572)).
+- Fixed a bug that could cause data write corruption during validation ([#42555](https://github.com/milvus-io/milvus/pull/42555)).
+- Added a check to ensure the cast type is an array for JSON `contains` expressions ([#42185](https://github.com/milvus-io/milvus/pull/42185)).
+- Fixed an issue with duplicate auto-IDs between import and insert operations ([#42520](https://github.com/milvus-io/milvus/pull/42520)).
+- Ensured importing segments stats tasks are triggered only by the `import_checker` ([#42487](https://github.com/milvus-io/milvus/pull/42487)).
+- Fixed a bug with `is null` for the Marisa index ([#42421](https://github.com/milvus-io/milvus/pull/42421)).
+- Ensured stats tasks are only triggered for flushed segments ([#42425](https://github.com/milvus-io/milvus/pull/42425)).
+- Reset compaction status when segment stats are finished ([#42005](https://github.com/milvus-io/milvus/pull/42005)).
+- Updated the Tantivy version to fix a stemmer panic ([#42172](https://github.com/milvus-io/milvus/pull/42172)).
+- Fixed an issue where vector output fields could not be retrieved when using a new interim index ([#42183](https://github.com/milvus-io/milvus/pull/42183)).
+- Avoided relying on Knowhere for thread control when calling the Knowhere iterator ([#42133](https://github.com/milvus-io/milvus/pull/42133)).
+- Fixed an issue where segments could be released prematurely during a balance channel operation ([#42043](https://github.com/milvus-io/milvus/pull/42043)).
+- The `DescribeIndex` RESTful interface now includes a timestamp ([#42105](https://github.com/milvus-io/milvus/pull/42105)).
+- Used locking to ensure the atomicity of dropping segment indexes ([#42076](https://github.com/milvus-io/milvus/pull/42076)).
+- Fixed a proxy panic in the shard client manager ([#42026](https://github.com/milvus-io/milvus/pull/42026)).
+- Fixed the import slot assignment logic ([#41982](https://github.com/milvus-io/milvus/pull/41982)).
+- Fixed a bug where the time point for force expiry compaction failed to reset ([#42000](https://github.com/milvus-io/milvus/pull/42000)).
+
 ## v2.5.12
 
 | Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
