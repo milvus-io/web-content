@@ -2,9 +2,9 @@
 id: configure_proxy.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure proxy for Milvus.
+summary: 學習如何設定 Milvus 的代理。
 ---
-<h1 id="proxy-related-Configurations" class="common-anchor-header">proxy-related Configurations<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="proxy-related-Configurations" class="common-anchor-header">代理相關組態<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure proxy for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of proxy, used to validate client requests and reduce the returned results.</p>
+    </button></h1><p>proxy 的相關設定，用來驗證用戶端的請求，並減少傳回的結果。</p>
 <h2 id="proxytimeTickInterval" class="common-anchor-header"><code translate="no">proxy.timeTickInterval</code><button data-href="#proxytimeTickInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,13 +38,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.timeTickInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval at which proxy synchronizes the time tick, unit: ms.      </td>
+      <td>        代理同步時間刻度的間隔，單位：毫秒。      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -67,13 +67,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.healthCheckTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ms, the interval that to do component healthy check      </td>
+      <td>        毫秒，進行元件健康檢查的間隔      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -96,13 +96,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.msgStream.timeTick.bufSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of messages can be buffered in the timeTick message stream of the proxy when producing messages.      </td>
+      <td>        當產生訊息時，proxy 的 timeTick 訊息串流可以緩衝的最大訊息數。      </td>
       <td>512</td>
     </tr>
   </tbody>
@@ -125,13 +125,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxNameLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum length of the name or alias that can be created in Milvus, including the collection name, collection alias, partition name, and field name.      </td>
+      <td>        可在 Milvus 中建立的名稱或別名的最大長度，包括集合名稱、集合別名、分割區名稱和欄位名稱。      </td>
       <td>255</td>
     </tr>
   </tbody>
@@ -154,13 +154,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxFieldNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of field can be created when creating in a collection. It is strongly DISCOURAGED to set maxFieldNum >= 64.      </td>
+      <td>        在集合中建立欄位時，可建立的最大欄位數。強烈建議設定 maxFieldNum &gt;=64。      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -183,13 +183,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxVectorFieldNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of vector fields that can be specified in a collection. Value range: [1, 10].      </td>
+      <td>        可在集合中指定的向量欄位最大數目。值範圍：[1, 10].      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -212,13 +212,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxShardNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of shards can be created when creating in a collection.      </td>
+      <td>        在集合中建立分片時，可建立的最大分片數。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -241,13 +241,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxDimension">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of dimensions of a vector can have when creating in a collection.      </td>
+      <td>        在集合中建立時，向量的最大尺寸數。      </td>
       <td>32768</td>
     </tr>
   </tbody>
@@ -270,16 +270,16 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ginLogging">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to produce gin logs.\n</li>      
-        <li>please adjust in embedded Milvus: false</li>      </td>
-      <td>true</td>
+        <li>是否產生吟唱日誌。</li>      
+        <li>請在內嵌的 Milvus 中調整：false</li>      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -301,13 +301,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ginLogSkipPaths">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        skip url path for gin log      </td>
+      <td>        跳過 gin 日誌的 URL 路徑      </td>
       <td>/</td>
     </tr>
   </tbody>
@@ -330,13 +330,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxTaskNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of tasks in the task queue of the proxy.      </td>
+      <td>        代理任務佇列中的最大任務數。      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -359,13 +359,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ddlConcurrency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The concurrent execution number of DDL at proxy.      </td>
+      <td>        代理 DDL 的同時執行數。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -388,13 +388,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.dclConcurrency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The concurrent execution number of DCL at proxy.      </td>
+      <td>        代理伺服器中 DCL 的同時執行數。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -417,14 +417,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.mustUsePartitionKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch for whether proxy must use partition key for the collection      </td>
-      <td>false</td>
+      <td>        代理是否必須使用收集的分割區金鑰的開關      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -446,13 +446,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable the access log feature.      </td>
+      <td>        是否啟用存取記錄功能。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -475,14 +475,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.minioEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to upload local access log files to MinIO. This parameter can be specified when proxy.accessLog.filename is not empty.      </td>
-      <td>false</td>
+      <td>        是否上傳本機存取日誌檔案到 MinIO。此參數可在 proxy.accessLog.filename 不為空時指定。      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -504,13 +504,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.localPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The local folder path where the access log file is stored. This parameter can be specified when proxy.accessLog.filename is not empty.      </td>
+      <td>        儲存存取記錄檔案的本機資料夾路徑。此參數可在 proxy.accessLog.filename 不為空時指定。      </td>
       <td>/tmp/milvus_access</td>
     </tr>
   </tbody>
@@ -533,13 +533,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.filename">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The name of the access log file. If you leave this parameter empty, access logs will be printed to stdout.      </td>
+      <td>        存取記錄檔案的名稱。如果將此參數留空，存取日誌會列印到 stdout。      </td>
       <td></td>
     </tr>
   </tbody>
@@ -562,13 +562,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.maxSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file. Unit: MB.      </td>
+      <td>        單一存取記錄檔允許的最大大小。如果日誌檔案大小達到此限制，就會啟動輪替程序。此程序會封鎖目前的存取記錄檔，建立新的記錄檔，並清除原始記錄檔的內容。單位：MB。      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -591,13 +591,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.rotatedTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum time interval allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one. Unit: seconds      </td>
+      <td>        允許輪換單一存取記錄檔的最大時間間隔。達到指定的時間間隔時，會觸發輪換程序，建立新的存取記錄檔，並封存先前的存取記錄檔。單位：秒      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -620,13 +620,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.remotePath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The path of the object storage for uploading access log files.      </td>
+      <td>        上傳存取記錄檔案的物件儲存路徑。      </td>
       <td>access_log/</td>
     </tr>
   </tbody>
@@ -649,13 +649,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.remoteMaxTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature.      </td>
+      <td>        允許上傳存取記錄檔的時間間隔。如果日誌檔案的上傳時間超過此時間間隔，檔案會被刪除。將值設定為 0 會停用此功能。      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -678,13 +678,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.cacheSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Size of log of write cache, in byte. (Close write cache if size was 0)      </td>
+      <td>        寫入快取記憶體的記錄大小，位元組。(如果大小為 0，則關閉寫快取記憶體)      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -707,13 +707,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.cacheFlushInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        time interval of auto flush write cache, in seconds. (Close auto flush if interval was 0)      </td>
+      <td>        自動沖洗寫入快取記憶體的時間間隔，以秒為單位。(若間隔為 0 則關閉自動刷新)      </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -736,13 +736,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.connectionCheckIntervalSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval time(in seconds) for connection manager to scan inactive client info      </td>
+      <td>        連線管理員掃描非動態用戶端資訊的時間間隔 (秒)     </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -765,13 +765,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.connectionClientInfoTTLSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        inactive client info TTL duration, in seconds      </td>
+      <td>        非作用中用戶端資訊 TTL 持續時間 (秒)     </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -794,13 +794,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxConnectionNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the max client info numbers that proxy should manage, avoid too many client infos      </td>
+      <td>        代理應管理的最大用戶端資訊數，避免用戶端資訊過多      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -823,13 +823,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        強制停止節點而不優先停止      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -852,13 +852,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.slowQuerySpanInSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        query whose executed time exceeds the `slowQuerySpanInSeconds` can be considered slow, in seconds.      </td>
+      <td>        執行時間超過 `slowQuerySpanInSeconds` 的查詢會被視為慢速，以秒為單位。      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -881,13 +881,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.queryNodePooling.size">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the size for shardleader(querynode) client pool      </td>
+      <td>        shardleader (querynode) 用戶端池的大小      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -910,14 +910,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable the http server      </td>
-      <td>true</td>
+      <td>        是否啟用 http 伺服器      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -939,14 +939,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.debug_mode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable http server debug mode      </td>
-      <td>false</td>
+      <td>        是否啟用 http 伺服器除錯模式      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -968,13 +968,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        high-level restful api      </td>
+      <td>        高階穩定 api   </td>
       <td></td>
     </tr>
   </tbody>
@@ -997,14 +997,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.acceptTypeAllowInt64">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        high-level restful api, whether http client can deal with int64      </td>
-      <td>true</td>
+      <td>        高階穩定 api，http 用戶端是否可以處理 int64     </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -1026,13 +1026,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.enablePprof">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable pprof middleware on the metrics port      </td>
+      <td>        是否在 metrics 連接埠上啟用 pprof 中介軟體      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1055,13 +1055,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of proxy. If not specified, use the first unicastable address      </td>
+      <td>        代理的 TCP/IP 位址。如果未指定，則使用第一個可單點傳送的位址。      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1084,13 +1084,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of proxy      </td>
+      <td>        代理的 TCP 埠   </td>
       <td>19530</td>
     </tr>
   </tbody>
@@ -1113,13 +1113,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the proxy can send, unit: byte      </td>
+      <td>        代理可傳送的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1142,13 +1142,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the proxy can receive, unit: byte      </td>
+      <td>        代理可接收的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -1171,13 +1171,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on proxy can send, unit: byte      </td>
+      <td>        代理上的用戶端可以傳送的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1200,13 +1200,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on proxy can receive, unit: byte      </td>
+      <td>        代理用戶端可以接收的每個 RPC 請求的最大大小，單位：位元組      </td>
       <td>67108864</td>
     </tr>
   </tbody>

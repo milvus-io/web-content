@@ -1,18 +1,10 @@
 ---
 id: dense-vector.md
-title: Dense Vector
+title: 密集向量
 summary: >-
-  Dense vectors are numerical data representations widely used in machine
-  learning and data analysis. They consist of arrays with real numbers, where
-  most or all elements are non-zero. Compared to sparse vectors, dense vectors
-  contain more information at the same dimensional level, as each dimension
-  holds meaningful values. This representation can effectively capture complex
-  patterns and relationships, making data easier to analyze and process in
-  high-dimensional spaces. Dense vectors typically have a fixed number of
-  dimensions, ranging from a few dozen to several hundred or even thousands,
-  depending on the specific application and requirements.
+  密集向量是機器學習和資料分析中廣泛使用的數值資料表示。它們由實數陣列組成，其中大多數或所有元素都是非零的。與稀疏向量相比，密集向量在相同的維度層級上包含更多的資訊，因為每個維度都持有有意義的值。這種表示方式可以有效捕捉複雜的模式和關係，讓資料更容易在高維空間中分析和處理。密集向量通常有固定的維數，從幾十到幾百甚至上千不等，視特定的應用程式和需求而定。
 ---
-<h1 id="Dense-Vector" class="common-anchor-header">Dense Vector<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
+<h1 id="Dense-Vector" class="common-anchor-header">密集向量<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,9 +19,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dense vectors are numerical data representations widely used in machine learning and data analysis. They consist of arrays with real numbers, where most or all elements are non-zero. Compared to sparse vectors, dense vectors contain more information at the same dimensional level, as each dimension holds meaningful values. This representation can effectively capture complex patterns and relationships, making data easier to analyze and process in high-dimensional spaces. Dense vectors typically have a fixed number of dimensions, ranging from a few dozen to several hundred or even thousands, depending on the specific application and requirements.</p>
-<p>Dense vectors are mainly used in scenarios that require understanding the semantics of data, such as semantic search and recommendation systems. In semantic search, dense vectors help capture the underlying connections between queries and documents, improving the relevance of search results. In recommendation systems, they aid in identifying similarities between users and items, offering more personalized suggestions.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>密集向量是廣泛用於機器學習和資料分析的數值資料表示。它們由實數陣列組成，其中大多數或所有元素都是非零的。相較於稀疏向量，密集向量在相同的維度層級包含更多的資訊，因為每個維度都持有有意義的數值。這種表示方式可以有效捕捉複雜的模式和關係，讓資料更容易在高維空間中分析和處理。密集向量通常有固定的維數，從幾十到幾百甚至上千不等，這取決於特定的應用程式和需求。</p>
+<p>密集向量主要用於需要瞭解資料語意的情境，例如語意搜尋和推薦系統。在語意搜尋中，密集向量有助於捕捉查詢與文件之間的潛在關聯，從而改善搜尋結果的相關性。在推薦系統中，密集向量有助於識別使用者與項目之間的相似性，提供更個人化的建議。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,20 +36,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dense vectors are typically represented as arrays of floating-point numbers with a fixed length, such as <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. The dimensionality of these vectors usually ranges from hundreds to thousands, such as 128, 256, 768, or 1024. Each dimension captures specific semantic features of an object, making it applicable to various scenarios through similarity calculations.</p>
+    </button></h2><p>密集向量通常以固定長度的浮點數陣列表示，例如<code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code> 。這些向量的維度通常從數百到數千不等，例如 128、256、768 或 1024。每個維度都能捕捉物件的特定語意特徵，使其透過相似度計算適用於各種情境。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
-    <span>Dense Vector</span>
-  </span>
-</p>
-<p>The image above illustrates the representation of dense vectors in a 2D space. Although dense vectors in real-world applications often have much higher dimensions, this 2D illustration effectively conveys several key concepts:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
+   </span> <span class="img-wrapper"> <span>密集向量</span> </span></p>
+<p>上圖說明密集向量在 2D 空間中的表示。雖然實際應用中的密集向量通常有更高的維度，但這個 2D 圖解有效地傳達了幾個關鍵概念：</p>
 <ul>
-<li><p><strong>Multidimensional Representation:</strong> Each point represents a conceptual object (like <strong>Milvus</strong>, <strong>vector database</strong>, <strong>retrieval system</strong>, etc.), with its position determined by the values of its dimensions.</p></li>
-<li><p><strong>Semantic Relationships:</strong> The distances between points reflect the semantic similarity between concepts. Closer points indicate concepts that are more semantically related.</p></li>
-<li><p><strong>Clustering Effect:</strong> Related concepts (such as <strong>Milvus</strong>, <strong>vector database</strong>, and <strong>retrieval system</strong>) are positioned close to each other in space, forming a semantic cluster.</p></li>
+<li><p><strong>多維表示：</strong>每個點代表一個概念物件 (如<strong>Milvus</strong>、<strong>向量資料庫</strong>、<strong>檢索系統</strong>等)，其位置由其維度值來決定。</p></li>
+<li><p><strong>語意關係：</strong>點與點之間的距離反映了概念之間的語義相似性。較近的點則表示語義關係較密切的概念。</p></li>
+<li><p><strong>聚類效應：</strong>相關的概念（例如<strong>Milvus</strong>、<strong>向量資料庫</strong>和<strong>檢索系統</strong>）在空間中的位置彼此接近，形成一個語意叢集。</p></li>
 </ul>
-<p>Below is an example of a real dense vector representing the text <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:</p>
+<p>以下是表示文字<code translate="no">&quot;Milvus is an efficient vector database&quot;</code> 的真實密集向量範例：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-number">-0.013052909</span><span class="hljs-punctuation">,</span>
     <span class="hljs-number">0.020387933</span><span class="hljs-punctuation">,</span>
@@ -71,18 +61,16 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Dense vectors can be generated using various <a href="https://en.wikipedia.org/wiki/Embedding">embedding</a> models, such as CNN models (like <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) for images and language models (like <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) for text. These models transform raw data into points in high-dimensional space, capturing the semantic features of the data. Additionally, Milvus offers convenient methods to help users generate and process dense vectors, as detailed in Embeddings.</p>
-<p>Once data is vectorized, it can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.</p>
+<p>稠密向量可以使用各種<a href="https://en.wikipedia.org/wiki/Embedding">嵌入</a>模型產生，例如針對影像的 CNN 模型 (如<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>、<a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>)，以及針對文字的語言模型 (如<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>、<a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>)。這些模型可將原始資料轉換為高維空間中的點數，捕捉資料的語意特徵。此外，Milvus 還提供方便的方法，協助使用者產生和處理密集向量，詳情請參閱 Embeddings。</p>
+<p>一旦資料被向量化，就可以儲存在 Milvus 中進行管理和向量檢索。下圖顯示基本流程。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
-    <span>Use Dense Vector</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
+   </span> <span class="img-wrapper"> <span>使用密集向量</span> </span></p>
 <div class="alert note">
-<p>Besides dense vectors, Milvus also supports sparse vectors and binary vectors. Sparse vectors are suitable for precise matches based on specific terms, such as keyword search and term matching, while binary vectors are commonly used for efficiently handling binarized data, such as image pattern matching and certain hashing applications. For more information, refer to <a href="/docs/binary-vector.md">Binary Vector</a> and <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
+<p>除了密集向量，Milvus 也支援稀疏向量和二進位向量。稀疏向量適用於基於特定詞彙的精確匹配，例如關鍵字搜尋和詞彙匹配；而二進制向量則常用於有效處理二進制資料，例如圖像模式匹配和某些雜湊應用。如需詳細資訊，請參閱<a href="/docs/zh-hant/binary-vector.md">二進位向量</a>和<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>。</p>
 </div>
-<h2 id="Use-dense-vectors" class="common-anchor-header">Use dense vectors<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Use-dense-vectors" class="common-anchor-header">使用密集向量<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,19 +85,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Add vector field</h3><p>To use dense vectors in Milvus, first define a vector field for storing dense vectors when creating a collection. This process includes:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">新增向量領域</h3><p>要在 Milvus 中使用密集向量，首先要在建立集合時定義一個向量欄位來儲存密集向量。這個過程包括</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to a supported dense vector data type. For supported dense vector data types, see Data Types.</p></li>
-<li><p>Specifying the dimensions of the dense vector using the <code translate="no">dim</code> parameter.</p></li>
+<li><p>將<code translate="no">datatype</code> 設定為支援的密集向量資料類型。關於支援的密集向量資料類型，請參閱資料類型。</p></li>
+<li><p>使用<code translate="no">dim</code> 參數指定密集向量的尺寸。</p></li>
 </ol>
-<p>In the example below, we add a vector field named <code translate="no">dense_vector</code> to store dense vectors. The field’s data type is <code translate="no">FLOAT_VECTOR</code>, with a dimension of <code translate="no">4</code>.</p>
+<p>在下面的範例中，我們新增一個名為<code translate="no">dense_vector</code> 的向量欄位來儲存密集向量。欄位的資料類型是<code translate="no">FLOAT_VECTOR</code> ，維度是<code translate="no">4</code> 。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -219,37 +202,32 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Supported data types for dense vector fields</strong>:</p>
+<p><strong>密集向量欄位支援的資料類型</strong>：</p>
 <table>
    <tr>
-     <th><p>Data Type</p></th>
-     <th><p>Description</p></th>
+     <th><p>資料類型</p></th>
+     <th><p>說明</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>Stores 32-bit floating-point numbers, commonly used for representing real numbers in scientific computations and machine learning. Ideal for scenarios requiring high precision, such as distinguishing similar vectors.</p></td>
+     <td><p>儲存 32 位元浮點數，常用於表示科學計算和機器學習中的實數。適用於需要高精度的場景，例如區分相似向量。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>Stores 16-bit half-precision floating-point numbers, used for deep learning and GPU computations. It saves storage space in scenarios where precision is less critical, such as in the low-precision recall phase of recommendation systems.</p></td>
+     <td><p>儲存 16 位元半精確浮點數，用於深度學習和 GPU 運算。在精確度不太重要的情況下，例如推薦系統的低精確度召回階段，可節省儲存空間。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>Stores 16-bit Brain Floating Point (bfloat16) numbers, offering the same range of exponents as Float32 but with reduced precision. Suitable for scenarios that need to process large volumes of vectors quickly, such as large-scale image retrieval.</p></td>
+     <td><p>儲存 16 位元腦浮點 (bfloat16) 數字，提供與 Float32 相同的指數範圍，但精確度較低。適用於需要快速處理大量向量的情況，例如大規模的影像檢索。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Stores vectors whose individual elements in each dimension are 8-bit integers (int8), with each element ranging from –128 to 127. Designed for quantized deep learning models (e.g., ResNet, EfficientNet), INT8_VECTOR reduces model size and speeds up inference with minimal precision loss.</p></td>
+     <td><p>儲存向量，其每個維度的個別元素為 8 位元整數 (int8)，每個元素的範圍為 -128 到 127。INT8_VECTOR 專為量化深度學習模型 (例如 ResNet、EfficientNet) 而設計，可減少模型大小，並加快推論速度，同時將精確度損失降至最低。</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Set index params for vector field</h3><p>To accelerate semantic searches, an index must be created for the vector field. Indexing can significantly improve the retrieval efficiency of large-scale vector data.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">為向量場設定索引參數</h3><p>為了加速語意搜尋，必須為向量欄位建立索引。索引可以顯著改善大規模向量資料的檢索效率。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -291,17 +269,12 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the example above, an index named <code translate="no">dense_vector_index</code> is created for the <code translate="no">dense_vector</code> field using the <code translate="no">AUTOINDEX</code> index type. The <code translate="no">metric_type</code> is set to <code translate="no">IP</code>, indicating that inner product will be used as the distance metric.</p>
-<p>Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.</p>
-<p>Milvus supports other metric types. For more information, refer to <a href="/docs/metric.md">Metric Types</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Create collection</h3><p>Once the dense vector and index param settings are complete, you can create a collection containing dense vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_collection</code>.</p>
+<p>在上面的範例中，使用<code translate="no">AUTOINDEX</code> 索引類型為<code translate="no">dense_vector</code> 欄位建立一個名為<code translate="no">dense_vector_index</code> 的索引。<code translate="no">metric_type</code> 設定為<code translate="no">IP</code> ，表示將使用內積作為距離指標。</p>
+<p>Milvus 提供多種索引類型，以提供更好的向量搜尋體驗。AUTOINDEX 是一種特殊的索引類型，專為平滑向量搜尋的學習曲線而設計。有很多索引類型可供您選擇。詳情請參考 xxx。</p>
+<p>Milvus 支援其他公制類型。如需詳細資訊，請參考<a href="/docs/zh-hant/metric.md">公制類型</a>。</p>
+<h3 id="Create-collection" class="common-anchor-header">建立集合</h3><p>一旦密集向量和索引參數設定完成，你就可以建立一個包含密集向量的集合。以下範例使用<code translate="no">create_collection</code> 方法建立一個名為<code translate="no">my_collection</code> 的集合。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -353,14 +326,9 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>After creating the collection, use the <code translate="no">insert</code> method to add data containing dense vectors. Ensure that the dimensionality of the dense vectors being inserted matches the <code translate="no">dim</code> value defined when adding the dense vector field.</p>
+<h3 id="Insert-data" class="common-anchor-header">插入資料</h3><p>建立集合後，使用<code translate="no">insert</code> 方法加入包含密集向量的資料。確保插入的密集向量的維度與新增密集向量欄位時定義的<code translate="no">dim</code> 值相符。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]},
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>]},
@@ -421,14 +389,9 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Perform similarity search</h3><p>Semantic search based on dense vectors is one of the core features of Milvus, allowing you to quickly find data that is most similar to a query vector based on the distance between vectors. To perform a similarity search, prepare the query vector and search parameters, then call the <code translate="no">search</code> method.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">執行相似性搜尋</h3><p>基於密集向量的語意搜尋是 Milvus 的核心功能之一，可讓您根據向量之間的距離，快速找到與查詢向量最相似的資料。若要執行相似性搜尋，請準備查詢向量和搜尋參數，然後調用<code translate="no">search</code> 方法。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -524,4 +487,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic ANN Search</a>.</p>
+<p>有關相似性搜尋參數的詳細資訊，請參閱<a href="/docs/zh-hant/single-vector-search.md">基本 ANN 搜尋</a>。</p>

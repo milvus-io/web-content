@@ -1,11 +1,9 @@
 ---
 id: openai_agents_milvus.md
 summary: >-
-  This notebook shows how to create an agent that can query Milvus using natural
-  language through Function Calling. We'll combine OpenAI's Agents framework
-  with Milvus's powerful vector search capabilities to create a nice search
-  experience.
-title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
+  本筆記展示如何透過 Function Calling 建立一個可以使用自然語言查詢 Milvus 的代理程式。我們將結合 OpenAI 的 Agents
+  架構與 Milvus 強大的向量搜尋功能，創造出優異的搜尋體驗。
+title: Milvus 與 OpenAI Agents 的整合：逐步指南
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/openai_agents_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -13,7 +11,7 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/openai_agents_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Milvus Integration with OpenAI Agents: A Step-by-Step Guide<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
+<h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Milvus 與 OpenAI Agents 的整合：逐步指南<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,7 +26,7 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This notebook shows how to create an agent that can query Milvus using natural language through Function Calling. We’ll combine OpenAI’s Agents framework with Milvus’s powerful vector search capabilities to create a nice search experience.</p>
+    </button></h1><p>本手冊將介紹如何透過 Function Calling 建立一個可以使用自然語言查詢 Milvus 的 Agents。我們將結合 OpenAI 的 Agents 架構與 Milvus 強大的向量搜尋功能，創造出優質的搜尋體驗。</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">OpenAI Agents<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,13 +42,13 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The OpenAI Agents SDK enables you to build agentic AI apps in a lightweight, easy-to-use package with very few abstractions. It’s a production-ready upgrade of their previous experimentation for agents, Swarm. The Agents SDK has a very small set of primitives:</p>
+    </button></h2><p>OpenAI Agents SDK 可讓您以輕量、易用且抽象程度極低的套件，建立代理式 AI 應用程式。這是他們之前代理實驗 Swarm 的生產就緒升級版。Agents SDK 有一套非常小的基元：</p>
 <ul>
-<li>Agents, which are LLMs equipped with instructions and tools</li>
-<li>Handoffs, which allow agents to delegate to other agents for specific tasks</li>
-<li>Guardrails, which enable the inputs to agents to be validated</li>
+<li>代理 (Agents)，也就是配備了指令與工具的 LLM。</li>
+<li>交接 (Handoffs)，可讓代理委派其他代理執行特定任務</li>
+<li>Guardrails (護欄)，可讓代理的輸入得到驗證。</li>
 </ul>
-<p>In combination with Python, these primitives are powerful enough to express complex relationships between tools and agents, and allow you to build real-world applications without a steep learning curve. In addition, the SDK comes with built-in tracing that lets you visualize and debug your agentic flows, as well as evaluate them and even fine-tune models for your application.</p>
+<p>結合 Python，這些基元功能強大，足以表達工具與代理之間的複雜關係，讓您不需經過艱辛的學習就能建立真實世界的應用程式。此外，SDK 還內建追蹤功能，讓您可視化和除錯您的代理流程，以及評估它們，甚至針對您的應用程式微調模型。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
@@ -72,8 +70,8 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus is a high-performance, highly scalable Open-Source vector database that runs efficiently across a wide range of environments, from a laptop to large-scale distributed systems. It is available as both open-source software and a <a href="https://zilliz.com/">Cloud Offering</a>.</p>
-<h2 id="Setup-and-Dependencies" class="common-anchor-header">Setup and Dependencies<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus 是一個高效能、高度可擴充的開放原始碼向量資料庫，可在從筆記型電腦到大型分散式系統等各種環境中有效率地執行。它同時提供開放原始碼軟體與<a href="https://zilliz.com/">雲端服務</a>。</p>
+<h2 id="Setup-and-Dependencies" class="common-anchor-header">設定與相依性<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,11 +86,11 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>First, we need to set up our environment with the necessary libraries and initialize asyncio for Jupyter compatibility.</p>
+    </button></h2><p>首先，我們需要使用必要的函式庫設定環境，並初始化 asyncio 以取得 Jupyter 的相容性。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> asyncio
 <span class="hljs-keyword">import</span> nest_asyncio
@@ -102,12 +100,12 @@ load_dotenv()
 
 nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
-<p>We will use the models from OpenAI. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>我們將使用 OpenAI 的模型。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">Connecting to Milvus and Creating a Schema<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
+<h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">連接至 Milvus 並建立模式<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,19 +120,19 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we’ll connect to our Milvus instance and create a schema for our collection. This schema will define the structure of our data, including:</p>
+    </button></h2><p>現在我們將連線到 Milvus 實例，並為我們的集合建立一個模式。這個模式將定義我們的資料結構，包括</p>
 <ul>
-<li>An ID field as the primary key</li>
-<li>A text field to store our document content</li>
-<li>A sparse vector field to store the BM25 embeddings</li>
+<li>一個 ID 欄位作為主索引鍵</li>
+<li>一個文字欄位來儲存我們的文件內容</li>
+<li>儲存 BM25 內嵌的稀疏向量欄位</li>
 </ul>
-<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Full-Text Search in Milvus 2.5</h3><ul>
-<li>Unified system for both vector and keyword search (unified APIs)</li>
-<li>Built-in sparse-BM25 algorithm (similar as Elasticsearch use but vector based)</li>
-<li>No need to manually generate embeddings for keyword search</li>
+<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Milvus 2.5 中的全文檢索</h3><ul>
+<li>向量與關鍵字搜尋的統一系統 (統一 API)</li>
+<li>內建稀疏 BM25 演算法 (類似 Elasticsearch 的使用，但以向量為基礎)</li>
+<li>不需要手動產生關鍵字搜尋的 embeddings</li>
 </ul>
 <p><img translate="no" src="https://milvus.io/docs/v2.5.x/assets/full-text-search.png" width="70%" alt="img"></p>
-<h2 id="Install-Milvus-with-Docker" class="common-anchor-header">Install Milvus with Docker<button data-href="#Install-Milvus-with-Docker" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus-with-Docker" class="common-anchor-header">使用 Docker 安裝 Milvus<button data-href="#Install-Milvus-with-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,7 +147,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before running this example, make sure to install Milvus and start it with Docker, have a look at our documentation - https://milvus.io/docs/install_standalone-docker.md</p>
+    </button></h2><p>在執行本範例之前，請務必安裝 Milvus 並使用 Docker 啟動它，請參閱我們的說明文件 - https://milvus.io/docs/install_standalone-docker.md。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -167,7 +165,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': &lt;DataType.INT64: 5&gt;, 'is_primary': True, 'auto_id': True}, {'name': 'text', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 1000, 'enable_analyzer': True}}, {'name': 'sparse', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;}], 'enable_dynamic_field': False}
 </code></pre>
-<h2 id="Setting-Up-BM25-for-Full-Text-Search" class="common-anchor-header">Setting Up BM25 for Full-Text Search<button data-href="#Setting-Up-BM25-for-Full-Text-Search" class="anchor-icon" translate="no">
+<h2 id="Setting-Up-BM25-for-Full-Text-Search" class="common-anchor-header">為全文檢索設定 BM25<button data-href="#Setting-Up-BM25-for-Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -182,7 +180,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports full-text search through BM25 functions. Here we define a function that will automatically convert our text data into sparse vector representations optimized for text search.</p>
+    </button></h2><p>Milvus 透過 BM25 函式支援全文檢索。這裡我們定義了一個函數，它會自動將我們的文字資料轉換成最適合文字搜尋的稀疏向量表示。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function
 
 <span class="hljs-comment"># Milvus handles tokenization and BM25 conversion</span>
@@ -199,7 +197,7 @@ schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': &lt;DataType.INT64: 5&gt;, 'is_primary': True, 'auto_id': True}, {'name': 'text', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 1000, 'enable_analyzer': True}}, {'name': 'sparse', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}], 'enable_dynamic_field': False, 'functions': [{'name': 'text_bm25_emb', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['text'], 'output_field_names': ['sparse'], 'params': {}}]}
 </code></pre>
-<h2 id="Creating-the-Collection-and-Loading-Sample-Data" class="common-anchor-header">Creating the Collection and Loading Sample Data<button data-href="#Creating-the-Collection-and-Loading-Sample-Data" class="anchor-icon" translate="no">
+<h2 id="Creating-the-Collection-and-Loading-Sample-Data" class="common-anchor-header">建立資料集並載入樣本資料<button data-href="#Creating-the-Collection-and-Loading-Sample-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -214,7 +212,7 @@ schema.add_function(bm25_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we’ll create our collection with the schema and index parameters, then load some sample data about information retrieval and Milvus.</p>
+    </button></h2><p>現在我們使用模式和索引參數建立集合，然後載入一些關於資訊檢索和 Milvus 的範例資料。</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, metric_type=<span class="hljs-string">&quot;BM25&quot;</span>)
@@ -328,7 +326,7 @@ client.insert(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'insert_count': 37, 'ids': [456486814660619140, 456486814660619141, 456486814660619142, 456486814660619143, 456486814660619144, 456486814660619145, 456486814660619146, 456486814660619147, 456486814660619148, 456486814660619149, 456486814660619150, 456486814660619151, 456486814660619152, 456486814660619153, 456486814660619154, 456486814660619155, 456486814660619156, 456486814660619157, 456486814660619158, 456486814660619159, 456486814660619160, 456486814660619161, 456486814660619162, 456486814660619163, 456486814660619164, 456486814660619165, 456486814660619166, 456486814660619167, 456486814660619168, 456486814660619169, 456486814660619170, 456486814660619171, 456486814660619172, 456486814660619173, 456486814660619174, 456486814660619175, 456486814660619176], 'cost': 0}
 </code></pre>
-<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">Defining Output Types for Structured Results<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
+<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">定義結構化結果的輸出類型<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -343,7 +341,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To make our search results more structured and easier to work with, we’ll define Pydantic models that specify the format of our search results.</p>
+    </button></h2><p>為了讓我們的搜尋結果更有條理且更容易使用，我們將定義 Pydantic 模型，指定搜尋結果的格式。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pydantic <span class="hljs-keyword">import</span> BaseModel
 
 
@@ -357,7 +355,7 @@ client.insert(
     results: <span class="hljs-built_in">list</span>[MilvusSearchResult]
     query: <span class="hljs-built_in">str</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Creating-a-Custom-Search-Tool" class="common-anchor-header">Creating a Custom Search Tool<button data-href="#Creating-a-Custom-Search-Tool" class="anchor-icon" translate="no">
+<h2 id="Creating-a-Custom-Search-Tool" class="common-anchor-header">建立自訂搜尋工具<button data-href="#Creating-a-Custom-Search-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -372,11 +370,11 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Next, we’ll create a custom function tool that our agent can use to search the Milvus database. This tool will:</p>
+    </button></h2><p>接下來，我們將建立一個自訂功能工具，讓我們的代理可用來搜尋 Milvus 資料庫。這個工具將會</p>
 <ol>
-<li>Accept a collection name, query text, and limit parameter</li>
-<li>Execute a BM25 search against the Milvus collection</li>
-<li>Return the results in a structured format</li>
+<li>接受集合名稱、查詢文字和限制參數</li>
+<li>針對 Milvus 資料庫執行 BM25 搜尋</li>
+<li>以結構化格式傳回結果</li>
 </ol>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Any</span>
@@ -419,7 +417,7 @@ client.insert(
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Exception is: <span class="hljs-subst">{e}</span>&quot;</span>)
         <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Error searching Milvus: <span class="hljs-subst">{<span class="hljs-built_in">str</span>(e)}</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Building-the-Agent" class="common-anchor-header">Building the Agent<button data-href="#Building-the-Agent" class="anchor-icon" translate="no">
+<h2 id="Building-the-Agent" class="common-anchor-header">建立代理程式<button data-href="#Building-the-Agent" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -434,7 +432,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we’ll create an agent that can use our search tool. We’ll give it instructions on how to handle search requests and specify that it should return results in our structured format.</p>
+    </button></h2><p>現在我們要建立一個可以使用搜尋工具的代理程式。我們將指示它如何處理搜尋要求，並指定它應該以我們的結構化格式傳回結果。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> agents <span class="hljs-keyword">import</span> Agent, Runner, WebSearchTool, trace
 
 

@@ -1,11 +1,9 @@
 ---
 id: privilege_group.md
-title: Create Privilege Group
-summary: >-
-  To streamline the process of granting privileges, it is recommended that you
-  combine multiple privileges into a privilege group.
+title: 建立特權群組
+summary: 為了簡化授予權限的程序，建議您將多個權限合併為一個權限群。
 ---
-<h1 id="Create-Privilege-Group" class="common-anchor-header">Create Privilege Group<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
+<h1 id="Create-Privilege-Group" class="common-anchor-header">建立特權群組<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>To streamline the process of granting privileges, it is recommended that you combine multiple privileges into a privilege group.</p>
-<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">Privilege group vs. privileges<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
+    </button></h1><p>為了簡化授予特權的流程，建議您將多個特權合併為一個特權群組。</p>
+<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">特權群組與特權<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,20 +34,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A privilege group consists of multiple privileges.</p>
+    </button></h2><p>特權群組由多個特權組成。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
-    <span>Privilege Group Illustrated</span>
-  </span>
-</p>
-<p>As shown in the figure above, suppose you need to grant three different privileges to a role.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
+   </span> <span class="img-wrapper"> <span>特權群組圖解</span> </span></p>
+<p>如上圖所示，假設您需要賦予一個角色三種不同的特權。</p>
 <ul>
-<li><p>If you do not use a privilege group, you need to grant the privileges three times.</p></li>
-<li><p>If you use a privilege group, you only need to create a privilege group and add the three privileges to this privilege group and grant the privilege group to Role A.</p></li>
+<li><p>如果不使用特權群組，則需要授予三次特權。</p></li>
+<li><p>如果使用特權群組，則只需建立一個特權群組，並將三種特權加入此特權群組，然後將特權群組授權給角色 A。</p></li>
 </ul>
-<p>By using a privilege group, you can grant multiple privileges in bulk to a role.</p>
-<h2 id="Built-in-privilege-groups" class="common-anchor-header">Built-in privilege groups<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
+<p>透過使用特權群組，您可以批量授予角色多項特權。</p>
+<h2 id="Built-in-privilege-groups" class="common-anchor-header">內建的特權群組<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,38 +60,38 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For ease-of-use, Milvus provides a total of 9 built-in privileges on the collection, database, and instance level: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW and Cluster_Admin.</p>
+    </button></h2><p>為了易於使用，Milvus 在集合、資料庫和實例層面上提供了共 9 個內建的權限：COLL_RO、COLL_RW、COLL_ADMIN、DB_RO、DB_RW、DB_Admin、Cluster_RO、Cluster_RW 及 Cluster_Admin。</p>
 <div class="alert note">
-<p>The three levels of built-in privilege groups do not have a cascading relationship. Setting a privilege group at the instance level does not automatically set permissions for all databases and collections under that instance. Privileges at the database and collection levels need to be set manually.</p>
+<p>這三層內建的權限群組沒有階級關係。在實體層級設定權限群組，並不會自動設定該實體下所有資料庫和資料集的權限。資料庫和資料集層級的權限需要手動設定。</p>
 </div>
-<p>The following tables explains the privileges includes in each of the built-in privilege group.</p>
-<h3 id="Collection-level" class="common-anchor-header">Collection level</h3><ul>
-<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: includes privileges to read collection data</p></li>
-<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: includes privileges to read and write collection data</p></li>
-<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: includes privileges to read and write collection data and manage collections.</p></li>
+<p>下表說明每個內建權限群組所包含的權限。</p>
+<h3 id="Collection-level" class="common-anchor-header">資料集層級</h3><ul>
+<li><p><strong>CollectionReadOnly (COLL_RO)</strong>：包含讀取集合資料的權限。</p></li>
+<li><p><strong>CollectionReadWrite (COLL_RW)</strong>：包含讀取及寫入收集資料的權限<strong>。</strong></p></li>
+<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>：包含讀取和寫入集合資料以及管理集合的權限。</p></li>
 </ul>
-<p>The table below lists the specific privileges included in the three built-in privilege groups at the collection level:</p>
+<p>下表列出集合層級的三個內建權限群組所包含的特定權限：</p>
 <table>
    <tr>
-     <th><p><strong>Privilege</strong></p></th>
-     <th><p><strong>CollectionReadOnly</strong></p></th>
-     <th><p><strong>CollectionReadWrite</strong></p></th>
-     <th><p><strong>CollectionAdmin</strong></p></th>
+     <th><p><strong>權限</strong></p></th>
+     <th><p><strong>僅讀取集合</strong></p></th>
+     <th><p><strong>收集讀寫</strong></p></th>
+     <th><p><strong>收集管理員</strong></p></th>
    </tr>
    <tr>
-     <td><p>Query</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>Search</p></td>
+     <td><p>查詢</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>IndexDetail</p></td>
+     <td><p>搜尋</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>索引詳細資料</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -107,7 +103,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>GetLoadState</p></td>
+     <td><p>取得載入狀態</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -125,49 +121,49 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ShowPartitions</p></td>
+     <td><p>顯示分區</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ListAliases</p></td>
+     <td><p>列出別名</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeCollection</p></td>
+     <td><p>描述集合</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeAlias</p></td>
+     <td><p>描述別名</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>GetStatistics</p></td>
+     <td><p>取得統計資料</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateIndex</p></td>
+     <td><p>建立索引</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropIndex</p></td>
+     <td><p>下拉索引</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreatePartition</p></td>
+     <td><p>建立分區</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -179,257 +175,257 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Load</p></td>
+     <td><p>載入</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Release</p></td>
+     <td><p>釋放</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Insert</p></td>
+     <td><p>插入</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Delete</p></td>
+     <td><p>刪除</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Upsert</p></td>
+     <td><p>上傳</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Import</p></td>
+     <td><p>輸入</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Flush</p></td>
+     <td><p>同花順</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Compaction</p></td>
+     <td><p>壓實</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>LoadBalance</p></td>
+     <td><p>負載平衡</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateAlias</p></td>
+     <td><p>建立別名</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropAlias</p></td>
+     <td><p>刪除別名</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+</table>
+<h3 id="Database-level" class="common-anchor-header">資料庫層級</h3><ul>
+<li><p><strong>僅讀取資料庫 (DB_RO)</strong>：包含讀取資料庫資料的權限</p></li>
+<li><p>資料<strong>庫讀寫 (DB_RW)</strong>：包含讀取及寫入資料庫資料的權限</p></li>
+<li><p><strong>DatabaseAdmin (DB_Admin)</strong>：包含讀寫資料庫資料和管理資料庫的權限。</p></li>
+</ul>
+<p>下表列出資料庫層級的三個內建權限群組所包含的特定權限：</p>
+<table>
+   <tr>
+     <th><p><strong>權限</strong></p></th>
+     <th><p><strong>資料庫只讀取</strong></p></th>
+     <th><p><strong>資料庫讀寫</strong></p></th>
+     <th><p><strong>資料庫管理員</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>顯示資料庫</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>描述資料庫</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>建立集合</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>丟棄收藏集</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>改變資料庫</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Database-level" class="common-anchor-header">Database level</h3><ul>
-<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: includes privileges to read database data</p></li>
-<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: includes privileges to read and write database data</p></li>
-<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: includes privileges to read and write database data and manage databases.</p></li>
+<h3 id="Cluster-level" class="common-anchor-header">叢集層級</h3><ul>
+<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>：包含讀取實體資料的權限</p></li>
+<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>：包含讀取和寫入實體資料的權限</p></li>
+<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>：包含讀寫實體資料和管理實體的權限。</p></li>
 </ul>
-<p>The table below lists the specific privileges included in the three built-in privilege groups at the database level:</p>
+<p>下表列出了实例级别的三个内置权限组所包含的特定权限：</p>
 <table>
    <tr>
-     <th><p><strong>Privilege</strong></p></th>
-     <th><p><strong>DatabaseReadOnly</strong></p></th>
-     <th><p><strong>DatabaseReadWrite</strong></p></th>
-     <th><p><strong>DatabaseAdmin</strong></p></th>
+     <th><p><strong>權限</strong></p></th>
+     <th><p><strong>僅限群集讀取</strong></p></th>
+     <th><p><strong>群集讀寫</strong></p></th>
+     <th><p><strong>群集管理</strong></p></th>
    </tr>
    <tr>
-     <td><p>ShowCollections</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>DescribeDatabase</p></td>
+     <td><p>列出資料庫</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateCollection</p></td>
+     <td><p>重新命名資料庫</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropCollection</p></td>
+     <td><p>建立所有權</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>AlterDatabase</p></td>
-     <td><p>❌</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-</table>
-<h3 id="Cluster-level" class="common-anchor-header">Cluster level</h3><ul>
-<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: includes privileges to read instance data</p></li>
-<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: includes privileges to read and write instance data</p></li>
-<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: includes privileges to read and write instance data and manage instances.</p></li>
-</ul>
-<p>The table below lists the specific privileges included in the three built-in privilege groups at the instance level:</p>
-<table>
-   <tr>
-     <th><p><strong>Privilege</strong></p></th>
-     <th><p><strong>ClusterReadOnly</strong></p></th>
-     <th><p><strong>ClusterReadWrite</strong></p></th>
-     <th><p><strong>ClusterAdmin</strong></p></th>
-   </tr>
-   <tr>
-     <td><p>ListDatabases</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>RenameCollection</p></td>
+     <td><p>更新使用者</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateOwnership</p></td>
+     <td><p>刪除所有權</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>UpdateUser</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>DropOwnership</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>SelectOwnership</p></td>
+     <td><p>選擇所有權</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ManageOwnership</p></td>
+     <td><p>管理所有權</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>SelectUser</p></td>
+     <td><p>選擇使用者</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>BackupRBAC</p></td>
+     <td><p>備份RBAC</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>RestoreRBAC</p></td>
+     <td><p>還原RBAC</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateResourceGroup</p></td>
+     <td><p>建立資源群組</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropResourceGroup</p></td>
+     <td><p>刪除資源群組</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>UpdateResourceGroups</p></td>
+     <td><p>更新資源群組</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeResourceGroup</p></td>
+     <td><p>描述資源群組</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ListResourceGroups</p></td>
+     <td><p>列出資源群組</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>TransferNode</p></td>
+     <td><p>傳輸節點</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>TransferReplica</p></td>
+     <td><p>傳輸複製</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateDatabase</p></td>
+     <td><p>建立資料庫</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropDatabase</p></td>
+     <td><p>刪除資料庫</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>FlushAll</p></td>
+     <td><p>全部清除</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreatePrivilegeGroup</p></td>
+     <td><p>建立權限群組</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropPrivilegeGroup</p></td>
+     <td><p>刪除權限群組</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -441,13 +437,13 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>OperatePrivilegeGroup</p></td>
+     <td><p>操作特權群組</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h2 id="Procedures" class="common-anchor-header">Procedures<button data-href="#Procedures" class="anchor-icon" translate="no">
+<h2 id="Procedures" class="common-anchor-header">程序<button data-href="#Procedures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -462,15 +458,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create a privilege group and then add privileges to the privilege group.</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">Create a privilege group</h3><p>The following example demonstrates how to create a privilege group named <code translate="no">privilege_group_1</code>.</p>
+    </button></h2><p>您可以建立特權群組，然後將特權加入特權群組。</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">建立特權群組</h3><p>以下範例示範如何建立一個名為<code translate="no">privilege_group_1</code> 的特權群組。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）
 <button class="copy-code-btn"></button></code></pre>
@@ -500,14 +491,9 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Add privileges to a privilege group</h3><p>The following example demonstrates how to add privileges <code translate="no">PrivilegeBackupRBAC</code> and <code translate="no">PrivilegeRestoreRBAC</code> to the privilege group <code translate="no">privilege_group_1</code> that is just created.</p>
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">在特權群組中加入特權</h3><p>下面的示例演示了如何將權限<code translate="no">PrivilegeBackupRBAC</code> 和<code translate="no">PrivilegeRestoreRBAC</code> 添加到剛剛創建的權限組<code translate="no">privilege_group_1</code> 中。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.add_privileges_to_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
@@ -542,14 +528,9 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Remove privileges from a privilege group</h3><p>The following example demonstrates how to remove the privilege <code translate="no">PrivilegeRestoreRBAC</code> from the privilege group <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">從權限群組移除權限</h3><p>以下範例示範如何從權限群<code translate="no">privilege_group_1</code> 移除權限<code translate="no">PrivilegeRestoreRBAC</code> 。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -582,14 +563,9 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">List privilege groups</h3><p>The following example demonstrates how to list all existing privilege groups.</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">列出特權群組</h3><p>以下範例示範如何列出所有現有的特權群組。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.list_privilege_groups()
 <button class="copy-code-btn"></button></code></pre>
@@ -617,17 +593,12 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output.</p>
+<p>以下是一個輸出範例。</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">Drop a privilege group</h3><p>The following example demonstrates how to drop the privilege group <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">刪除特權群組</h3><p>以下範例示範如何刪除特權群組<code translate="no">privilege_group_1</code> 。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.drop_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>

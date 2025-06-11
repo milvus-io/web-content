@@ -1,14 +1,11 @@
 ---
 id: boolean.md
-title: Filtering Explained
+title: 篩選說明
 summary: >-
-  Milvus provides powerful filtering capabilities that enable precise querying
-  of your data. Filter expressions allow you to target specific scalar fields
-  and refine search results with different conditions. This guide explains how
-  to use filter expressions in Milvus, with examples focused on query
-  operations. You can also apply these filters in search and delete requests.
+  Milvus 提供強大的篩選功能，可精確查詢資料。篩選表達式允許您針對特定的標量欄位，以不同的條件精細化搜尋結果。本指南將解釋如何在 Milvus
+  中使用篩選表達式，並以查詢作業為重點範例。您也可以在搜尋和刪除請求中應用這些篩選表達式。
 ---
-<h1 id="Filtering-Explained" class="common-anchor-header">Filtering Explained<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
+<h1 id="Filtering-Explained" class="common-anchor-header">篩選說明<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus provides powerful filtering capabilities that enable precise querying of your data. Filter expressions allow you to target specific scalar fields and refine search results with different conditions. This guide explains how to use filter expressions in Milvus, with examples focused on query operations. You can also apply these filters in search and delete requests.</p>
-<h2 id="Basic-operators" class="common-anchor-header">Basic operators<button data-href="#Basic-operators" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus 提供強大的篩選功能，使您能夠精確查詢資料。篩選表達式允許您針對特定的標量欄位，使用不同的條件精煉搜尋結果。本指南解釋如何在 Milvus 中使用篩選表達式，並以查詢操作為主。您也可以在搜尋和刪除請求中套用這些篩選條件。</p>
+<h2 id="Basic-operators" class="common-anchor-header">基本運算符號<button data-href="#Basic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,24 +36,24 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports several basic operators for filtering data:</p>
+    </button></h2><p>Milvus 支援幾種基本運算符號來篩選資料：</p>
 <ul>
-<li><p><strong>Comparison Operators</strong>: <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, and <code translate="no">&lt;=</code> allow filtering based on numeric or text fields.</p></li>
-<li><p><strong>Range Filters</strong>: <code translate="no">IN</code> and <code translate="no">LIKE</code> help match specific value ranges or sets.</p></li>
-<li><p><strong>Arithmetic Operators</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, and <code translate="no">**</code> are used for calculations involving numeric fields.</p></li>
-<li><p><strong>Logical Operators</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code> combine multiple conditions into complex expressions.</p></li>
+<li><p><strong>比較運算符</strong>：<code translate="no">==</code>,<code translate="no">!=</code>,<code translate="no">&gt;</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;=</code>, 和<code translate="no">&lt;=</code> 允許基於數值或文字欄位進行篩選。</p></li>
+<li><p><strong>範圍篩選器</strong>：<code translate="no">IN</code> 和<code translate="no">LIKE</code> 有助於匹配特定的值範圍或集合。</p></li>
+<li><p><strong>算術運算符</strong>：<code translate="no">+</code>,<code translate="no">-</code>,<code translate="no">*</code>,<code translate="no">/</code>,<code translate="no">%</code>, 和<code translate="no">**</code> 用於涉及數字字段的計算。</p></li>
+<li><p><strong>邏輯運算符號</strong>：<code translate="no">AND</code>,<code translate="no">OR</code>, 和<code translate="no">NOT</code> 將多個條件結合成複雜的表達式。</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Example: Filtering by Color</h3><p>To find entities with primary colors (red, green, or blue) in a scalar field <code translate="no">color</code>, use the following filter expression:</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">範例：依顏色篩選</h3><p>若要在標量欄位<code translate="no">color</code> 中找出具有三原色 (紅、綠或藍) 的實體，請使用下列篩選表達式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Example: Filtering JSON Fields</h3><p>Milvus allows referencing keys in JSON fields. For instance, if you have a JSON field <code translate="no">product</code> with keys <code translate="no">price</code> and <code translate="no">model</code>, and want to find products with a specific model and price lower than 1,850, use this filter expression:</p>
+<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">範例篩選 JSON 欄位</h3><p>Milvus 允許在 JSON 欄位中參考鍵。例如，如果您有一個 JSON 欄位<code translate="no">product</code> ，其鍵為<code translate="no">price</code> 和<code translate="no">model</code> ，並希望找到具有特定型號和價格低於 1,850 的產品，請使用此過濾表達式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Example: Filtering Array Fields</h3><p>If you have an array field <code translate="no">history_temperatures</code> containing the records of average temperatures reported by observatories since the year 2000, and want to find observatories where the temperature in 2009 (the 10th recorded ) exceeds 23°C, use this expression:</p>
+<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">範例：篩選陣列欄位</h3><p>如果您有一個陣列欄位<code translate="no">history_temperatures</code> ，其中包含天文台自 2000 年以來所報告的平均溫度記錄，並且想要找出 2009 年（第 10 次記錄）溫度超過 23°C 的天文台，請使用此表達式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on these basic operators, refer to <a href="/docs/basic-operators.md">Basic Operators</a>.</p>
-<h2 id="Filter-expression-templates" class="common-anchor-header">Filter expression templates<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
+<p>有關這些基本運算符的詳細資訊，請參閱<a href="/docs/zh-hant/basic-operators.md">基本運算符</a>。</p>
+<h2 id="Filter-expression-templates" class="common-anchor-header">篩選表達式範本<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,17 +68,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When filtering using CJK characters, processing can be more complex due to their larger character sets and encoding differences. This can result in slower performance, especially with the <code translate="no">IN</code> operator.</p>
-<p>Milvus introduces filter expression templating to optimize performance when working with CJK characters. By separating dynamic values from the filter expression, the query engine handles parameter insertion more efficiently.</p>
-<h3 id="Example" class="common-anchor-header">Example</h3><p>To find individuals over the age of 25 living in either “北京” (Beijing) or “上海” (Shanghai), use the following template expression:</p>
+    </button></h2><p>使用中日韓字符進行篩選時，由於其字符集較大且編碼存在差異，處理過程可能會更加複雜。這可能會導致效能變慢，尤其是使用<code translate="no">IN</code> 運算符時。</p>
+<p>Milvus 引入了篩選表達式模板，以優化處理中日韓字符時的效能。透過將動態值從篩選表達式中分離出來，查詢引擎可以更有效率地處理參數插入。</p>
+<h3 id="Example" class="common-anchor-header">範例</h3><p>要查找居住在 「北京」（Beijing）或 「上海」（Shanghai）的 25 歲以上的個人，請使用以下模板表達式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To improve performance, use this variation with parameters:</p>
+<p>為了提高效能，請使用這個帶參數的變體：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>This approach reduces parsing overhead and improves query speed. For more information, see <a href="/docs/filtering-templating.md">Filter Templating</a>.</p>
-<h2 id="Data-type-specific-operators" class="common-anchor-header">Data type-specific operators<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
+<p>此方法可減少解析開銷，並提高查詢速度。如需詳細資訊，請參閱<a href="/docs/zh-hant/filtering-templating.md">篩選模板</a>。</p>
+<h2 id="Data-type-specific-operators" class="common-anchor-header">特定資料類型的運算符號<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,46 +93,46 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides advanced filtering operators for specific data types, such as JSON, ARRAY, and VARCHAR fields.</p>
-<h3 id="JSON-field-specific-operators" class="common-anchor-header">JSON field-specific operators</h3><p>Milvus offers advanced operators for querying JSON fields, enabling precise filtering within complex JSON structures:</p>
-<p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: Checks if a JSON expression exists in the field.</p>
+    </button></h2><p>Milvus 為特定資料類型提供進階過濾運算子，例如 JSON、ARRAY 和 VARCHAR 欄位。</p>
+<h3 id="JSON-field-specific-operators" class="common-anchor-header">JSON 特定欄位運算符號</h3><p>Milvus 為查詢 JSON 欄位提供進階運算子，可在複雜的 JSON 結構中進行精確過濾：</p>
+<p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>:檢查字段中是否存在 JSON 表達式。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">JSON_CONTAINS_ALL(identifier, jsonExpr)</code>: Ensures all elements of the JSON expression are present.</p>
+<p><code translate="no">JSON_CONTAINS_ALL(identifier, jsonExpr)</code>:確保 JSON 表達式的所有元素都存在。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;, &quot;discount&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">JSON_CONTAINS_ANY(identifier, jsonExpr)</code>: Filters for entities where at least one element exists in the JSON expression.</p>
+<p><code translate="no">JSON_CONTAINS_ANY(identifier, jsonExpr)</code>:篩選 JSON 表達式中至少存在一個元素的實體。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more details on JSON operators, refer to <a href="/docs/json-operators.md">JSON Operators</a>.</p>
-<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">ARRAY field-specific operators</h3><p>Milvus provides advanced filtering operators for array fields, such as <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, and <code translate="no">ARRAY_LENGTH</code>, which allow fine-grained control over array data:</p>
-<p><code translate="no">ARRAY_CONTAINS</code>: Filters entities containing a specific element.</p>
+<p>有關 JSON 運算符的詳細資訊，請參閱<a href="/docs/zh-hant/json-operators.md">JSON 運算符</a>。</p>
+<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">ARRAY 特定欄位運算符號</h3><p>Milvus 為陣列欄位提供進階過濾運算符，例如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code>, 和<code translate="no">ARRAY_LENGTH</code> ，可對陣列資料進行精細控制：</p>
+<p><code translate="no">ARRAY_CONTAINS</code>:過濾包含特定元素的實體。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">ARRAY_CONTAINS_ALL</code>: Filters entities where all elements in a list are present.</p>
+<p><code translate="no">ARRAY_CONTAINS_ALL</code>:篩選列表中所有元素都存在的實體。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(history_temperatures, [23, 24])&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">ARRAY_CONTAINS_ANY</code>: Filters entities containing any element from the list.</p>
+<p><code translate="no">ARRAY_CONTAINS_ANY</code>:篩選包含清單中任何元素的實體。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">ARRAY_LENGTH</code>: Filters based on the length of the array.</p>
+<p><code translate="no">ARRAY_LENGTH</code>:根據陣列的長度進行篩選。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more details on array operators, see <a href="/docs/array-operators.md">ARRAY Operators</a>.</p>
-<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">VARCHAR field-specific operators</h3><p>Milvus provides specialized operators for precise text-based searches on VARCHAR fields:</p>
-<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operator</h4><p>The <code translate="no">TEXT_MATCH</code> operator allows precise document retrieval based on specific query terms. It is particularly useful for filtered searches that combine scalar filters with vector similarity searches. Unlike semantic searches, Text Match focuses on exact term occurrences.</p>
-<p>Milvus uses Tantivy to support inverted indexing and term-based text search. The process involves:</p>
+<p>有關陣列運算元的詳細資訊，請參閱<a href="/docs/zh-hant/array-operators.md">ARRAY 運算元</a>。</p>
+<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">特定於 VARCHAR 欄位的運算符號</h3><p>Milvus 提供了專門的運算符號，用於在 VARCHAR 欄位上進行精確的基於文字的搜尋：</p>
+<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> 運算符號</h4><p><code translate="no">TEXT_MATCH</code> 運算符允許根據特定查詢字詞進行精確的文件檢索。它對於結合標量篩選與向量相似性搜尋的篩選搜尋特別有用。與語意搜尋不同，文字匹配專注於精確的詞彙出現。</p>
+<p>Milvus 使用 Tantivy 來支援倒置索引和基於詞彙的文字搜尋。過程包括</p>
 <ol>
-<li><p><strong>Analyzer</strong>: Tokenizes and processes input text.</p></li>
-<li><p><strong>Indexing</strong>: Creates an inverted index mapping unique tokens to documents.</p></li>
+<li><p><strong>分析器</strong>：對輸入文字進行標記化和處理。</p></li>
+<li><p><strong>建立索引</strong>：建立倒置索引，將唯一的標記對應到文件。</p></li>
 </ol>
-<p>For more details, refer to <a href="/docs/keyword-match.md">Text Match</a>.</p>
-<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>The <strong>PHRASE_MATCH</strong> operator enables precise retrieval of documents based on exact phrase matches, considering both the order and adjacency of query terms.</p>
-<p>For more details, refer to <a href="/docs/phrase-match.md">Phrase Match</a>.</p>
-<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">Random sampling operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/keyword-match.md">文字匹配</a>。</p>
+<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> 運算符號<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p><strong>PHRASE_MATCH</strong>運算子可根據精確的詞組匹配來精確擷取文件，並同時考慮查詢詞的順序和相鄰性。</p>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/phrase-match.md">短語匹配</a>。</p>
+<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">隨機抽樣操作員<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,26 +147,26 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Random sampling allows you to extract a subset of data samples from a collection at the segment level, making it ideal for exploring and processing massive datasets. This feature is valuable for these use cases:</p>
+    </button></h2><p>隨機抽樣可讓您從段層級的資料集中抽取資料樣本的子集，非常適合探索和處理大量資料集。此功能對於這些使用個案非常有價值：</p>
 <ul>
-<li><p><strong>Quick data preview</strong>: It returns representative sample data with minimal resource usage, which allows you to quickly grasp the overall structure and content of large vector datasets.</p></li>
-<li><p><strong>Combined filtering</strong>: When performing multi-criteria filtering (e.g., selecting documents by attributes), combining it with random sampling enables quick statistical summaries and previews on the filtered results.</p></li>
-<li><p><strong>Resource saving in large-scale data processing</strong>: For very large datasets, aggregating and analyzing full data can be resource-intensive. Random sampling reduces the processing load by lowering the amount of data handled.</p></li>
+<li><p><strong>快速資料預覽</strong>：它能以最少的資源使用量傳回有代表性的樣本資料，讓您快速掌握大型向量資料集的整體結構與內容。</p></li>
+<li><p><strong>組合篩選</strong>：在執行多條件篩選 (例如依據屬性選擇文件) 時，結合隨機抽樣可快速對篩選結果進行統計摘要與預覽。</p></li>
+<li><p><strong>大規模資料處理的資源節省</strong>：對於非常大的資料集，彙集和分析完整的資料可能會耗費大量資源。隨機抽樣可降低處理的資料量，從而減少處理負載。</p></li>
 </ul>
-<p>Use the following syntax for random sampling:</p>
+<p>使用下列語法進行隨機抽樣：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = RANDOM_SAMPLE(<span class="hljs-built_in">float</span>)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">float</code><strong>:</strong> A sampling factor in the range (0, 1), excluding the boundaries. For example, <code translate="no">RANDOM_SAMPLE(0.001)</code> selects approximately 0.1% of the results.</li>
+<li><code translate="no">float</code><strong>:</strong>範圍 (0, 1) 內的取樣因子，不包括邊界。例如，<code translate="no">RANDOM_SAMPLE(0.001)</code> 選取約 0.1% 的結果。</li>
 </ul>
 <div class="alert note">
-<p>The <code translate="no">RANDOM_SAMPLE</code> expression is case-insensitive. You can use either <code translate="no">RANDOM_SAMPLE</code> or <code translate="no">random_sample</code>.</p>
+<p><code translate="no">RANDOM_SAMPLE</code> 表達式不區分大小寫。您可以使用<code translate="no">RANDOM_SAMPLE</code> 或<code translate="no">random_sample</code> 。</p>
 </div>
-<h3 id="Combine-with-other-filters" class="common-anchor-header">Combine with other filters</h3><p>The random sampling operator must be combined with other filtering expressions using logical <code translate="no">AND</code>. For example:</p>
+<h3 id="Combine-with-other-filters" class="common-anchor-header">與其他篩選器結合</h3><p>隨機抽樣運算符號必須使用邏輯<code translate="no">AND</code> 與其他篩選表達式結合。舉例來說：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Here, Milvus first applies the condition <code translate="no">color = 'red'</code> and then performs random sampling on the result set.</p>
-<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">Example: Random sampling without an additional filter</h3><p>In this example, the query samples a random subset (approximately 1%) of the entire data in the specified collection:</p>
+<p>在此，Milvus 首先套用條件<code translate="no">color = 'red'</code> ，然後對結果集執行隨機抽樣。</p>
+<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">範例：無附加篩選條件的隨機抽樣</h3><p>在這個範例中，查詢會從指定集合的全部資料中隨機抽取一個子集（約 1%）：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>
 
 result = MilvusClient.query(
@@ -178,7 +175,7 @@ result = MilvusClient.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">Example: Combined filtering with random sampling</h3><p>In this example, the query first filters documents based on a specific attribute (in this case, documents where <code translate="no">color</code> equals <code translate="no">'red'</code>). After filtering, the random sampling operator is applied to return roughly 0.1% of the filtered results:</p>
+<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">範例：結合篩選與隨機抽樣</h3><p>在此範例中，查詢首先根據特定屬性篩選文件 (在此範例中，<code translate="no">color</code> 等於<code translate="no">'red'</code> 的文件)。過濾之後，應用隨機抽樣運算子來傳回約 0.1% 的過濾結果：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
 
 result = MilvusClient.query(

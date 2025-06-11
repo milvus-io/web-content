@@ -1,11 +1,9 @@
 ---
 id: delete-entities.md
-title: Delete Entities
-summary: >-
-  You can delete the entities that are no longer needed by filtering conditions
-  or their primary keys.
+title: 刪除實體
+summary: 您可以透過篩選條件或其主索引鍵，刪除不再需要的實體。
 ---
-<h1 id="Delete-Entities" class="common-anchor-header">Delete Entities<button data-href="#Delete-Entities" class="anchor-icon" translate="no">
+<h1 id="Delete-Entities" class="common-anchor-header">刪除實體<button data-href="#Delete-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can delete the entities that are no longer needed by filtering conditions or their primary keys.</p>
-<h2 id="Delete-Entities-by-Filtering-Conditions" class="common-anchor-header">Delete Entities by Filtering Conditions<button data-href="#Delete-Entities-by-Filtering-Conditions" class="anchor-icon" translate="no">
+    </button></h1><p>您可以透過篩選條件或其主鍵刪除不再需要的實體。</p>
+<h2 id="Delete-Entities-by-Filtering-Conditions" class="common-anchor-header">透過篩選條件刪除實體<button data-href="#Delete-Entities-by-Filtering-Conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +34,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When deleting multiple entities that share some attributes in a batch, you can use filter expressions. The example code below uses the <strong>in</strong> operator to bulk delete all Entities with their <strong>color</strong> field set to the values of <strong>red</strong> and <strong>purple</strong>. You can also use other operators to construct filter expressions that meet your requirements. For more information about filter expressions, please refer to <a href="/docs/filtering">Filtering</a>.</p>
+    </button></h2><p>在批量刪除共享某些屬性的多個實體時，您可以使用篩選表達式。下面的示例代碼使用<strong>in</strong>運算符批量刪除所有<strong>顏色</strong>欄位設定為<strong>紅色</strong>和<strong>紫色</strong>值的實體。您也可以使用其他運算符來建構符合您需求的篩選表達式。有關過濾表達式的詳細資訊，請參閱<a href="/docs/zh-hant/filtering">過濾</a>。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -136,7 +129,7 @@ curl --request POST \
     &quot;filter&quot;: &quot;color in [\&quot;red_7025\&quot;, \&quot;purple_4976\&quot;]&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Entities-by-Primary-Keys" class="common-anchor-header">Delete Entities by Primary Keys<button data-href="#Delete-Entities-by-Primary-Keys" class="anchor-icon" translate="no">
+<h2 id="Delete-Entities-by-Primary-Keys" class="common-anchor-header">依據主鍵刪除實體<button data-href="#Delete-Entities-by-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,14 +144,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In most cases, a primary key uniquely identifies an Entity. You can delete Entities by setting their primary keys in the delete request. The example code below demonstrates how to delete two entities with primary keys <strong>18</strong> and <strong>19</strong>.</p>
+    </button></h2><p>在大多數情況下，一個主鍵唯一地識別一個 Entity。您可以透過在刪除請求中設定 Entity 的 primary key 來刪除 Entity。下面的示例代碼演示了如何刪除兩個具有主鍵<strong>18</strong>和<strong>19</strong> 的實體。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 <span class="highlighted-wrapper-line">    ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>]</span>
@@ -213,7 +201,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Entities-from-Partitions" class="common-anchor-header">Delete Entities from Partitions<button data-href="#Delete-Entities-from-Partitions" class="anchor-icon" translate="no">
+<h2 id="Delete-Entities-from-Partitions" class="common-anchor-header">從分區刪除實體<button data-href="#Delete-Entities-from-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,14 +216,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also delete entities stored in specific partitions. The following code snippets assume that you have a partition named <strong>PartitionA</strong> in your collection.</p>
+    </button></h2><p>您也可以刪除儲存在特定分區中的實體。以下的程式碼片段假設您的集合中有一個名為<strong>PartitionA</strong>的分割區。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>],

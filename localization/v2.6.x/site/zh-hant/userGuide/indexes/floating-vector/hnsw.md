@@ -35,7 +35,7 @@ summary: HNSW 索引是一種基於圖的索引演算法，可以提高搜尋高
         ></path>
       </svg>
     </button></h2><p>Hierarchical Navigable Small World (HNSW) 演算法會建立多層圖形，有點像是有不同縮放程度的地圖。<strong>底層</strong>包含所有資料點，<strong>上層則</strong>由從底層取樣的資料點子集組成。</p>
-<p>在這個層次架構中，每層都包含代表資料點的節點，這些節點由表示其接近程度的邊連接。上層提供長距離跳躍以快速接近目標，而下層則可進行細粒度搜尋以獲得最精確的結果。</p>
+<p>在這個層級架構中，每層都包含代表資料點的節點，這些節點由表示其接近程度的邊連接。上層提供長距離跳躍以快速接近目標，而下層則可進行細粒度搜尋以獲得最精確的結果。</p>
 <p>以下是它的運作方式：</p>
 <ol>
 <li><p><strong>入口點</strong>：搜尋始於頂層的固定入口點，也就是圖形中的預定節點。</p></li>
@@ -162,7 +162,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>每個節點在圖表中可擁有的最大連線 (或邊) 數量，包括傳出邊和傳入邊。此參數直接影響索引建構和搜尋。</p></td>
+     <td><p>每個節點在圖表中可擁有的最大連線（或邊緣）數量，包括傳出和傳入的邊緣。此參數直接影響索引建構和搜尋。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[2, 2048]</p><p><strong>預設值</strong>：<code translate="no">30</code> (每個節點最多可有 30 條出站邊和 30 條入站邊)</p></td>
      <td><p>較大的<code translate="no">M</code> 通常會帶來<strong>較高的精確度</strong>，但會<strong>增加記憶體開銷</strong>，<strong>並減慢索引建立和搜尋的速度</strong>。對於高維度的資料集或高召回率非常重要時，請考慮增加<code translate="no">M</code> 。</p><p>如果記憶體佔用量和搜尋速度是主要考量，則考慮降低<code translate="no">M</code> 。</p><p>在大多數情況下，我們建議您在此範圍內設定一個值：[5, 100].</p></td>
    </tr>
@@ -183,7 +183,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>控制最近鄰檢索時的搜尋範圍。它決定有多少節點會被造訪並評估為潛在最近鄰居。  此參數僅影響搜尋過程，且僅適用於圖的底層。</p></td>
+     <td><p>控制最近鄰檢索時的搜尋範圍。它決定有多少節點會被造訪並評估為潛在的最近鄰居。  此參數僅影響搜尋過程，且僅適用於圖的底層。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1、<em>int_max］</em></p><p><strong>預設值</strong>:<em>limit</em>(要回傳的 TopK 最近鄰居)</p></td>
      <td><p>較大的<code translate="no">ef</code> 通常會導致<strong>較高的搜尋準確度</strong>，因為會考慮更多的潛在鄰居。不過，這也會<strong>增加搜尋時間</strong>。當達到高召回率是關鍵，而搜尋速度較不重要時，請考慮增加<code translate="no">ef</code> 。</p><p>考慮降低<code translate="no">ef</code> 以優先加快搜尋速度，尤其是在可以接受稍微降低精確度的情況下。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[K, 10K]。</p></td>
    </tr>

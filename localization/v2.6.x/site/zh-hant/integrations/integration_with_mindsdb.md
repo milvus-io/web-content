@@ -1,13 +1,11 @@
 ---
 id: integration_with_mindsdb.md
 summary: >-
-  This tutorial demonstrates how to integrate Milvus with MindsDB, enabling you
-  to leverage MindsDB's AI capabilities with Milvus's vector database
-  functionality through SQL-like operations for managing and querying vector
-  embeddings.
-title: Integrate Milvus with MindsDB
+  本教學示範了如何將 Milvus 與 MindsDB 整合，使您能夠透過類似 SQL 的操作來管理和查詢向量嵌入，從而利用 MindsDB 的 AI 功能與
+  Milvus 的向量資料庫功能。
+title: 整合 Milvus 與 MindsDB
 ---
-<h1 id="Integrate-Milvus-with-MindsDB" class="common-anchor-header">Integrate Milvus with MindsDB<button data-href="#Integrate-Milvus-with-MindsDB" class="anchor-icon" translate="no">
+<h1 id="Integrate-Milvus-with-MindsDB" class="common-anchor-header">整合 Milvus 與 MindsDB<button data-href="#Integrate-Milvus-with-MindsDB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,12 +20,12 @@ title: Integrate Milvus with MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB</a> is a powerful tool for integrating AI applications with diverse enterprise data sources. It acts as a federated query engine that brings order to data sprawl while meticulously answering queries across both structured and unstructured data. Whether your data is scattered across SaaS applications, databases, or data warehouses, MindsDB can connect and query it all using standard SQL. It features state-of-the-art autonomous RAG systems through Knowledge Bases, supports hundreds of data sources, and provides flexible deployment options from local development to cloud environments.</p>
-<p>This tutorial demonstrates how to integrate Milvus with MindsDB, enabling you to leverage MindsDB’s AI capabilities with Milvus’s vector database functionality through SQL-like operations for managing and querying vector embeddings.</p>
+    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB</a>是一種功能強大的工具，可將 AI 應用程式與多種企業資料來源相整合。它可作為一個聯合查詢引擎，在仔細回答結構化和非結構化資料查詢的同時，為分散的資料帶來秩序。無論您的資料是否分散在 SaaS 應用程式、資料庫或資料倉庫中，MindsDB 都能使用標準 SQL 連接並查詢所有資料。它通過知識庫提供最先進的自主 RAG 系統，支持數百個數據源，並提供從本地開發到雲環境的靈活部署選項。</p>
+<p>本教學示範了如何將Milvus與MindsDB整合，通過類似SQL的操作來管理和查詢向量嵌入，使您能夠利用MindsDB的AI功能和Milvus的向量資料庫功能。</p>
 <div class="alert note">
-<p>This tutorial mainly refers to the official documentation of the <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">MindsDB Milvus Handler</a>. If you find any outdated parts in this tutorial, you can prioritize following the official documentation and create an issue for us.</p>
+<p>本教學主要參考<a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">MindsDB Milvus Handler</a>的官方文檔。如果您在本教程中發現任何過時的部分，可以優先按照官方文檔進行，並為我們創建一個問題。</p>
 </div>
-<h2 id="Install-MindsDB" class="common-anchor-header">Install MindsDB<button data-href="#Install-MindsDB" class="anchor-icon" translate="no">
+<h2 id="Install-MindsDB" class="common-anchor-header">安裝MindsDB<button data-href="#Install-MindsDB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,9 +40,9 @@ title: Integrate Milvus with MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before we start, install MindsDB locally via <a href="https://docs.mindsdb.com/setup/self-hosted/docker">Docker</a> or <a href="https://docs.mindsdb.com/setup/self-hosted/docker-desktop">Docker Desktop</a>.</p>
-<p>Before proceeding, ensure you have a solid understanding of the fundamental concepts and operations of both MindsDB and Milvus.</p>
-<h2 id="Arguments-Introduction" class="common-anchor-header">Arguments Introduction<button data-href="#Arguments-Introduction" class="anchor-icon" translate="no">
+    </button></h2><p>在我們開始之前，通過<a href="https://docs.mindsdb.com/setup/self-hosted/docker">Docker</a>或<a href="https://docs.mindsdb.com/setup/self-hosted/docker-desktop">Docker Desktop</a>在本地安裝MindsDB。</p>
+<p>在繼續之前，請確保您對MindsDB和Milvus的基本概念和操作都有扎實的理解。</p>
+<h2 id="Arguments-Introduction" class="common-anchor-header">參數介紹<button data-href="#Arguments-Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,34 +57,34 @@ title: Integrate Milvus with MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The required arguments to establish a connection are:</p>
+    </button></h2><p>建立連接所需的參數如下</p>
 <ul>
-<li><code translate="no">uri</code>: uri for milvus database, can be set to local “.db” file or docker or cloud service</li>
-<li><code translate="no">token</code>: token to support docker or cloud service according to uri option</li>
+<li><code translate="no">uri</code>milvus資料庫的uri，可以設置為本機的".db "文件或docker或雲端服務。</li>
+<li><code translate="no">token</code>: 令牌，根據 uri 選項來支援 docker 或雲端服務。</li>
 </ul>
-<p>The optional arguments to establish a connection are:</p>
-<p>These are used for <code translate="no">SELECT</code> queries:</p>
+<p>建立連線的可選參數有</p>
+<p>這些用於<code translate="no">SELECT</code> 查詢：</p>
 <ul>
-<li><code translate="no">search_default_limit</code>: default limit to be passed in select statements (default=100)</li>
-<li><code translate="no">search_metric_type</code>: metric type used for searches (default="L2")</li>
-<li><code translate="no">search_ignore_growing</code>: whether to ignore growing segments during similarity searches (default=False)</li>
-<li><code translate="no">search_params</code>: specific to the <code translate="no">search_metric_type</code> (default={"nprobe": 10})</li>
+<li><code translate="no">search_default_limit</code>：在 select 語句中傳遞的預設限制 (default=100)</li>
+<li><code translate="no">search_metric_type</code>：用於搜尋的度量類型 (預設="L2")</li>
+<li><code translate="no">search_ignore_growing</code>：相似性搜尋時是否忽略成長中的區段 (預設值=False)</li>
+<li><code translate="no">search_params</code>：特定於<code translate="no">search_metric_type</code> (default={"nprobe": 10})</li>
 </ul>
-<p>These are used for <code translate="no">CREATE</code> queries:</p>
+<p>這些用於<code translate="no">CREATE</code> 查詢：</p>
 <ul>
-<li><code translate="no">create_auto_id</code>: whether to auto generate id when inserting records with no ID (default=False)</li>
-<li><code translate="no">create_id_max_len</code>: maximum length of the id field when creating a table (default=64)</li>
-<li><code translate="no">create_embedding_dim</code>: embedding dimension for creating table (default=8)</li>
-<li><code translate="no">create_dynamic_field</code>: whether or not the created tables have dynamic fields or not (default=True)</li>
-<li><code translate="no">create_content_max_len</code>: max length of the content column (default=200)</li>
-<li><code translate="no">create_content_default_value</code>: default value of content column (default=’’)</li>
-<li><code translate="no">create_schema_description</code>: description of the created schemas (default=’’)</li>
-<li><code translate="no">create_alias</code>: alias of the created schemas (default=’default’)</li>
-<li><code translate="no">create_index_params</code>: parameters of the index created on embeddings column (default={})</li>
-<li><code translate="no">create_index_metric_type</code>: metric used to create the index (default=’L2’)</li>
-<li><code translate="no">create_index_type</code>: the type of index (default=’AUTOINDEX’)</li>
+<li><code translate="no">create_auto_id</code>：插入沒有 ID 的記錄時，是否自動產生 ID (預設值=False)</li>
+<li><code translate="no">create_id_max_len</code>在建立資料表時，id 欄位的最大長度 (default=64)</li>
+<li><code translate="no">create_embedding_dim</code>：創建表時的嵌入維度 (預設值=8)</li>
+<li><code translate="no">create_dynamic_field</code>：建立的資料表是否有動態欄位 (預設值=True)</li>
+<li><code translate="no">create_content_max_len</code>：內容欄的最大長度 (預設值=200)</li>
+<li><code translate="no">create_content_default_value</code>：內容欄的預設值 (default='')</li>
+<li><code translate="no">create_schema_description</code>模式的描述 (default='')</li>
+<li><code translate="no">create_alias</code>模式的別名 (default='default')</li>
+<li><code translate="no">create_index_params</code>： 在 embeddings 列上建立索引的參數 (default={})</li>
+<li><code translate="no">create_index_metric_type</code>： 用於創建索引的度量 (default='L2')</li>
+<li><code translate="no">create_index_type</code>索引類型 (default='AUTOINDEX')</li>
 </ul>
-<h2 id="Usage" class="common-anchor-header">Usage<button data-href="#Usage" class="anchor-icon" translate="no">
+<h2 id="Usage" class="common-anchor-header">使用方法<button data-href="#Usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -101,8 +99,8 @@ title: Integrate Milvus with MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before continuing, make sure that <code translate="no">pymilvus</code> version is same as this <a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">pinned version</a>. If you find any issues with version compatibility, you can roll back your version of pymilvus, or customize it in this <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">requirement file</a>.</p>
-<h3 id="Creating-connection" class="common-anchor-header">Creating connection</h3><p>In order to make use of this handler and connect to a Milvus server in MindsDB, the following syntax can be used:</p>
+    </button></h2><p>繼續之前，請確認<code translate="no">pymilvus</code> 版本與此<a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">pinned 版本</a>相同。如果您發現任何版本相容性問題，您可以回滾您的 pymilvus 版本，或在此<a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">需求檔案</a>中自訂。</p>
+<h3 id="Creating-connection" class="common-anchor-header">建立連線</h3><p>為了使用此處理器並連接到MindsDB中的Milvus伺服器，可以使用以下語法：</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> DATABASE milvus_datasource
 <span class="hljs-keyword">WITH</span>
   ENGINE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;milvus&#x27;</span>,
@@ -115,50 +113,50 @@ title: Integrate Milvus with MindsDB
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <ul>
-<li>If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>For larger scale data and traffic in production, you can set up a Milvus server on <a href="https://milvus.io/docs/install-overview.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your <code translate="no">uri</code>, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, set the <code translate="no">token</code> as <code translate="no">&quot;&lt;your_username&gt;:&lt;your_password&gt;&quot;</code>, otherwise there is no need to set the token.</li>
-<li>You can also use fully managed Milvus on <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Simply set the <code translate="no">uri</code> and <code translate="no">token</code> to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> of your Zilliz Cloud instance.</li>
+<li>如果你只需要一個本地的向量資料庫來進行小規模的數據或原型設計，將uri設置為一個本地文件，例如：<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有數據存儲在這個文件中。</li>
+<li>對於生產中較大規模的資料和流量，您可以在<a href="https://milvus.io/docs/install-overview.md">Docker 或 Kubernetes</a> 上架設 Milvus 伺服器。在此設定中，請使用伺服器位址和連接埠作為您的<code translate="no">uri</code> ，例如<code translate="no">http://localhost:19530</code> 。如果您啟用 Milvus 的驗證功能，請將<code translate="no">token</code> 設定為<code translate="no">&quot;&lt;your_username&gt;:&lt;your_password&gt;&quot;</code> ，否則不需要設定令牌。</li>
+<li>您也可以在<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上使用完全管理的 Milvus。只需將<code translate="no">uri</code> 和<code translate="no">token</code> 設定為 Zilliz Cloud 實例的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端點和 API 金鑰</a>。</li>
 </ul>
 </blockquote>
-<h3 id="Dropping-connection" class="common-anchor-header">Dropping connection</h3><p>To drop the connection, use this command</p>
+<h3 id="Dropping-connection" class="common-anchor-header">放棄連線</h3><p>若要放棄連線，請使用此指令</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DROP</span> DATABASE milvus_datasource;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Creating-tables" class="common-anchor-header">Creating tables</h3><p>To insert data from a pre-existing table, use <code translate="no">CREATE</code></p>
+<h3 id="Creating-tables" class="common-anchor-header">建立表格</h3><p>若要從預先存在的資料表插入資料，請使用<code translate="no">CREATE</code></p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> milvus_datasource.test
 (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sqlitedb.test);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Dropping-collections" class="common-anchor-header">Dropping collections</h3><p>Dropping a collection is not supported</p>
-<h3 id="Querying-and-selecting" class="common-anchor-header">Querying and selecting</h3><p>To query database using a search vector, you can use <code translate="no">search_vector</code> in <code translate="no">WHERE</code> clause</p>
-<p>Caveats:</p>
+<h3 id="Dropping-collections" class="common-anchor-header">丟棄集合</h3><p>不支援刪除集合</p>
+<h3 id="Querying-and-selecting" class="common-anchor-header">查詢和選擇</h3><p>要使用搜尋向量查詢資料庫，可以在<code translate="no">WHERE</code> 子句中使用<code translate="no">search_vector</code> </p>
+<p>注意事項：</p>
 <ul>
-<li>If you omit <code translate="no">LIMIT</code>, the <code translate="no">search_default_limit</code> is used since Milvus requires it</li>
-<li>Metadata column is not supported, but if the collection has dynamic schema enabled, you can query like normal, see the example below</li>
-<li>Dynamic fields cannot be displayed but can be queried</li>
+<li>如果省略<code translate="no">LIMIT</code> ，會使用<code translate="no">search_default_limit</code> ，因為 Milvus 需要它</li>
+<li>不支援 Metadata 欄位，但如果資料集已啟用動態模式，您可以像平常一樣查詢，請參閱下面的範例</li>
+<li>動態欄位無法顯示，但可以查詢</li>
 </ul>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> milvus_datasource.test
 <span class="hljs-keyword">WHERE</span> search_vector <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;[3.0, 1.0, 2.0, 4.5]&#x27;</span>
 LIMIT <span class="hljs-number">10</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p>If you omit the <code translate="no">search_vector</code>, this becomes a basic search and <code translate="no">LIMIT</code> or <code translate="no">search_default_limit</code> amount of entries in collection are returned</p>
+<p>如果您省略<code translate="no">search_vector</code> ，這會變成基本搜尋，並傳送<code translate="no">LIMIT</code> 或<code translate="no">search_default_limit</code> 資料集中的項目數量。</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> milvus_datasource.test
 <button class="copy-code-btn"></button></code></pre>
-<p>You can use <code translate="no">WHERE</code> clause on dynamic fields like normal SQL</p>
+<p>您可以在動態欄位上使用<code translate="no">WHERE</code> 子句，就像一般的 SQL。</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> milvus_datasource.createtest
 <span class="hljs-keyword">WHERE</span> category <span class="hljs-operator">=</span> &quot;science&quot;;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Deleting-records" class="common-anchor-header">Deleting records</h3><p>You can delete entries using <code translate="no">DELETE</code> just like in SQL.</p>
-<p>Caveats:</p>
+<h3 id="Deleting-records" class="common-anchor-header">刪除記錄</h3><p>您可以使用<code translate="no">DELETE</code> 刪除詞條，就像在 SQL 中一樣。</p>
+<p>注意事項：</p>
 <ul>
-<li>Milvus only supports deleting entities with clearly specified primary keys</li>
-<li>You can only use <code translate="no">IN</code> operator</li>
+<li>Milvus 只支援刪除具有明確指定主鍵的實體。</li>
+<li>只能使用<code translate="no">IN</code> 運算符</li>
 </ul>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> milvus_datasource.test
 <span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">IN</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Inserting-records" class="common-anchor-header">Inserting records</h3><p>You can also insert individual rows like so:</p>
+<h3 id="Inserting-records" class="common-anchor-header">插入記錄</h3><p>您也可以像這樣插入單獨的記錄：</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> milvus_test.testable (id,content,metadata,embeddings)
 <span class="hljs-keyword">VALUES</span> (&quot;id3&quot;, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Updating" class="common-anchor-header">Updating</h3><p>Updating records is not supported by Milvus API. You can try using combination of <code translate="no">DELETE</code> and <code translate="no">INSERT</code></p>
+<h3 id="Updating" class="common-anchor-header">更新</h3><p>Milvus API 不支援更新記錄。您可以嘗試使用<code translate="no">DELETE</code> 和<code translate="no">INSERT</code></p>
 <hr>
-<p>For more details and examples, please refer to the <a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB Official Documentation</a>.</p>
+<p>更多的細節和例子，請參考<a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB官方文檔</a>。</p>

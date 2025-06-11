@@ -1,15 +1,11 @@
 ---
 id: use-partition-key.md
-title: Use Partition Key
+title: 使用分區鑰匙
 summary: >-
-  The Partition Key is a search optimization solution based on partitions. By
-  designating a specific scalar field as the Partition Key and specifying
-  filtering conditions based on the Partition Key during the search, the search
-  scope can be narrowed down to several partitions, thereby improving search
-  efficiency. This article will introduce how to use the Partition Key and
-  related considerations.
+  分區關鍵（Partition
+  Key）是一種基於分區的搜尋優化解決方案。透過指定特定的標量欄位為分區關鍵，並在搜尋過程中根據分區關鍵指定篩選條件，可將搜尋範圍縮小為數個分區，進而提高搜尋效率。本文將介紹如何使用分區關鍵及相關注意事項。
 ---
-<h1 id="Use-Partition-Key" class="common-anchor-header">Use Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+<h1 id="Use-Partition-Key" class="common-anchor-header">使用分區鑰匙<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Partition Key is a search optimization solution based on partitions. By designating a specific scalar field as the Partition Key and specifying filtering conditions based on the Partition Key during the search, the search scope can be narrowed down to several partitions, thereby improving search efficiency. This article will introduce how to use the Partition Key and related considerations.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>分區關鍵是基於分區的搜尋最佳化解決方案。透過指定特定的標量欄位為分區關鍵 (Partition Key)，並在搜尋過程中根據分區關鍵指定篩選條件，可將搜尋範圍縮小為數個分區，進而提高搜尋效率。本文將介紹如何使用分區關鍵及相關注意事項。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,26 +36,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you can use partitions to implement data segregation and improve search performance by restricting the search scope to specific partitions. If you choose to manage partitions manually, you can create a maximum of 1,024 partitions in a collection, and insert entities into these partitions based on a specific rule so that you can narrow the search scope by restricting searches within a specific number of partitions.</p>
-<p>Milvus introduces the Partition Key for you to reuse partitions in data segregation to overcome the limit on the number of partitions you can create in a collection. When creating a collection, you can use a scalar field as the Partition Key. Once the collection is ready, Milvus creates the specified number of partitions inside the collection. Upon receiving an inserted entity, Milvus calculates a hash value using the Partition Key value of the entity, executes a modulo operation based on the hash value and the <code translate="no">partitions_num</code> property of the collection to obtain the target partition ID, and stores the entity in the target partition.</p>
+    </button></h2><p>在 Milvus 中，您可以使用磁碟分割來實現資料分隔，並透過限制搜尋範圍到特定磁碟分割來改善搜尋效能。如果您選擇手動管理分區，您可以在一個集合中建立最多 1,024 個分區，並根據特定規則插入實體到這些分區中，這樣您就可以通過限制在特定數量的分區中進行搜索來縮窄搜索範圍。</p>
+<p>Milvus 引入了分區鑰匙，讓您在資料分隔中重複使用分區，以克服在集合中建立分區數量的限制。當建立一個資料集時，您可以使用一個標量欄位作為分割鍵。一旦集合就緒，Milvus 會在集合內建立指定數量的分區。當接收到插入的實體時，Milvus 會使用實體的 Partition Key 值計算雜湊值，根據雜湊值和集合的<code translate="no">partitions_num</code> 屬性執行 modulo 運算，以獲得目標分割 ID，並將實體儲存到目標分割中。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
-    <span>Partition Vs Partition Key</span>
-  </span>
-</p>
-<p>The following figure illustrates how Milvus processes the search requests in a collection with or without the Partition Key feature enabled.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
+   </span> <span class="img-wrapper"> <span>分割區與分割區金鑰</span> </span></p>
+<p>下圖說明 Milvus 在啟用或未啟用分割區金鑰功能的情況下，如何處理集合中的搜尋要求。</p>
 <ul>
-<li><p>If the Partition Key is disabled, Milvus searches for entities that are the most similar to the query vector within the collection. You can narrow the search scope if you know which partition contains the most relevant results.</p></li>
-<li><p>If the Partition Key is enabled, Milvus determines the search scope based on the Partition Key value specified in a search filter and scans only the entities within the partitions that match.</p></li>
+<li><p>如果禁用了分區鍵功 能，Milvus 會在資料集中搜尋與查詢向量最相似的實體。如果您知道哪個分區包含最相關的結果，就可以縮小搜尋範圍。</p></li>
+<li><p>如果啟用了分割區金鑰，Milvus 會根據搜尋篩選器中指定的分割區金鑰值來決定搜尋範圍，並且只掃描分割區中符合條件的實體。</p></li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" />
-    <span>With And Without Partition Key</span>
-  </span>
-</p>
-<h2 id="Use-Partition-Key" class="common-anchor-header">Use Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" />
+   </span> <span class="img-wrapper"> <span>使用和不使用磁碟分割索引鍵</span> </span></p>
+<h2 id="Use-Partition-Key" class="common-anchor-header">使用分割區金鑰<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,23 +66,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use the Partition Key, you need to</p>
+    </button></h2><p>要使用分區鍵值，您需要</p>
 <ul>
-<li><p><a href="/docs/use-partition-key.md#Set-Partition-Key">Set the Partition Key</a>,</p></li>
-<li><p><a href="/docs/use-partition-key.md#Set-Partition-Numbers">Set the number of partitions to create</a> (Optional), and</p></li>
-<li><p><a href="/docs/use-partition-key.md#Create-Filtering-Condition">Create a filtering condition based on the Partition Key</a>.</p></li>
+<li><p><a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Key">設定分割區金鑰</a>、</p></li>
+<li><p><a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Numbers">設定要建立的分割區數量</a>(選用)，以及</p></li>
+<li><p><a href="/docs/zh-hant/use-partition-key.md#Create-Filtering-Condition">根據分割區金鑰建立篩選條件</a>。</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">Set Partition Key</h3><p>To designate a scalar field as the Partition Key, you need to set its <code translate="no">is_partition_key</code> attribute to <code translate="no">true</code> when you add the scalar field.</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">設定分割區金鑰</h3><p>若要指定標量欄位為分割區金鑰，您需要在新增標量欄位時，將其<code translate="no">is_partition_key</code> 屬性設定為<code translate="no">true</code> 。</p>
 <div class="alert note">
-<p>When you set a scalar field as the Partition Key, the field values cannot be empty or null.</p>
+<p>當您設定標量欄位為分割區金鑰時，欄位值不能為空或 null。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType
 )
@@ -235,15 +222,10 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">Set Partition Numbers</h3><p>When you designate a scalar field in a collection as the Partition Key, Milvus automatically creates 16 partitions in the collection. Upon receiving an entity, Milvus chooses a partition based on the Partition Key value of this entity and stores the entity in the partition, resulting in some or all partitions holding entities with different Partition Key values.</p>
-<p>You can also determine the number of partitions to create along with the collection. This is valid only if you have a scalar field designated as the Partition Key.</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">設定分割區號碼</h3><p>當您指定一個集合中的標量欄位為分區鍵時，Milvus 會自動在集合中建立 16 個分區。當接收到一個實體時，Milvus 會根據該實體的 Partition Key 值選擇一個分區，並將該實體存儲在該分區中，結果是某些或所有分區持有不同 Partition Key 值的實體。</p>
+<p>您也可以決定要與集合一起建立的分割區數量。只有當您指定一個標量欄位作為 Partition Key 時，這才有效。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -290,16 +272,11 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">Create Filtering Condition</h3><p>When conducting ANN searches in a collection with the Partition Key feature enabled, you need to include a filtering expression involving the Partition Key in the search request. In the filtering expression, you can restrict the Partition Key value within a specific range so that Milvus restricts the search scope within the corresponding partitions.</p>
-<p>When performing delete operations, It is advisable to include a filter expression that specifies a single partition key to achieve more efficient deletion. This approach limits the delete operation to a particular partition, reducing write amplification during compaction and conserving resources for compaction and indexing.</p>
-<p>The following examples demonstrate Partition-Key-based filtering based on a specific Partition Key value and a set of Partition Key values.</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">建立篩選條件</h3><p>在啟用了分割區金鑰功能的資料集中執行 ANN 搜尋時，您需要在搜尋請求中包含涉及分割區金鑰的篩選表達式。在篩選表達式中，您可以限制 Partition Key 的值在特定範圍內，這樣 Milvus 就可以將搜尋範圍限制在相應的分區內。</p>
+<p>執行刪除作業時，建議包含指定單一磁碟分割索引鍵的篩選表達式，以達到更有效率的刪除。此方法可將刪除作業限制在特定的分割區內，減少壓縮期間的寫入擴大，並節省壓縮和索引的資源。</p>
+<p>以下範例示範基於特定的分割區金鑰值和一組分割區金鑰值，進行基於分割區金鑰的篩選。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 
@@ -331,9 +308,9 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <span class="hljs-built_in">export</span> filter=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>You have to replace <code translate="no">partition_key</code> with the name of the field that is designated as the partition key.</p>
+<p>您必須以指定為分割區金鑰的欄位名稱取代<code translate="no">partition_key</code> 。</p>
 </div>
-<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">Use Partition Key Isolation<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">使用分割區金鑰隔離<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -348,26 +325,19 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the multi-tenancy scenario, you can designate the scalar field related to tenant identities as the partition key and create a filter based on a specific value in this scalar field. To further improve search performance in similar scenarios, Milvus introduces the Partition Key Isolation feature.</p>
+    </button></h2><p>在多租戶情境中，您可以指定與租戶身分相關的標量欄位為分割區金鑰，並根據此標量欄位中的特定值建立篩選器。為了進一步改善類似情況下的搜尋效能，Milvus 介紹了分割區金鑰隔離功能。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
-    <span>Partition Key Isolation</span>
-  </span>
-</p>
-<p>As shown in the above figure, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance.</p>
-<p>Once you have enabled Partition Key Isolation, you must include only one specific value in the Partition-key-based filter so that Milvus can restrict the search scope within the entities included in the index that match.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
+   </span> <span class="img-wrapper"> <span>分割區金鑰隔離</span> </span></p>
+<p>如上圖所示，Milvus 根據分區鍵值將實體分組，並為每個分組建立獨立索引。當接收到搜尋要求時，Milvus 會根據過濾條件中指定的 Partition Key 值找到索引，並將搜尋範圍限制在索引所包含的實體內，從而避免在搜尋過程中掃描不相關的實體，大大提升搜尋效能。</p>
+<p>一旦啟用「分割區金鑰區隔」，您必須在基於分割區金鑰的篩選條件中只包含一個特定值，以便 Milvus 能夠在符合條件的索引所包含的實體中限制搜尋範圍。</p>
 <div class="alert note">
-<p>Currently, the Partition-Key Isolation feature applies only to searches with the index type set to HNSW.</p>
+<p>目前，「分割區金鑰隔離」功能僅適用於索引類型設定為 HNSW 的搜尋。</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Enable Partition Key Isolation</h3><p>The following code examples demonstrate how to enable Partition Key Isolation.</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">啟用分割區金鑰隔離</h3><p>以下程式碼範例說明如何啟用分割區金鑰隔離。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -418,4 +388,4 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Once you have enabled Partition Key Isolation, you can still set the Partition Key and number of partitions as described in <a href="/docs/use-partition-key.md#Set-Partition-Numbers">Set Partition Numbers</a>. Note that the Partition-Key-based filter should include only a specific Partition Key value.</p>
+<p>啟用磁碟分割區金鑰隔離後，您仍可依照<a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Numbers">Set Partition Numbers（設定磁碟分割區號碼</a>）一節所述，設定磁碟分割區金鑰和磁碟分割<a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Numbers">區號碼</a>。請注意，基於分割區金鑰的篩選程式應該只包含特定的分割區金鑰值。</p>

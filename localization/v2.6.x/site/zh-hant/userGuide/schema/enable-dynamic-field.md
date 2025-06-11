@@ -1,13 +1,9 @@
 ---
 id: enable-dynamic-field.md
-title: Dynamic Field
-summary: >-
-  All fields defined in the schema of a collection must be included in the
-  entities to be inserted. If you want some fields to be optional, consider
-  enabling the dynamic field. This topic describes how to enable and use the
-  dynamic field.
+title: 動態欄位
+summary: 在要插入的實體中，必須包含在集合的模式中定義的所有欄位。如果您希望某些欄位是可選的，請考慮啟用動態欄位。本主題描述如何啟用和使用動態欄位。
 ---
-<h1 id="Dynamic-Field" class="common-anchor-header">Dynamic Field<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
+<h1 id="Dynamic-Field" class="common-anchor-header">動態欄位<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>All fields defined in the schema of a collection must be included in the entities to be inserted. If you want some fields to be optional, consider enabling the dynamic field. This topic describes how to enable and use the dynamic field.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>在要插入的實體中，必須包含在集合的模式中定義的所有欄位。如果您希望某些欄位是可選的，請考慮啟用動態欄位。本主題描述如何啟用和使用動態欄位。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,10 +34,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you can create a collection schema by setting the names and data types for each field in the collection. When you add a field to the schema, make sure that this field is included in the entity you intend to insert. If you want some fields to be optional, enabling the dynamic field is one option.</p>
-<p>The dynamic field is a reserved field named <strong>$meta</strong>, which is of the JavaScript Object Notation (JSON) type. Any fields in the entities that are not defined in the schema will be stored in this reserved JSON field as key-value pairs.</p>
-<p>For a collection with the dynamic field enabled, you can use keys in the dynamic field for scalar filtering, just as you would with fields explicitly defined in the schema.</p>
-<h2 id="Enable-dynamic-field" class="common-anchor-header">Enable dynamic field<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
+    </button></h2><p>在 Milvus 中，您可以透過設定集合中每個欄位的名稱和資料類型來建立集合模式。當您在模式中加入欄位時，請確認此欄位包含在您要插入的實體中。如果您希望某些欄位是可選的，啟用動態欄位是一個選擇。</p>
+<p>動態欄位是名為<strong>$meta</strong> 的保留欄位，屬於 JavaScript Object Notation (JSON) 類型。實體中任何未在模式中定義的欄位，都會以鍵值對的形式儲存在這個保留的 JSON 欄位中。</p>
+<p>對於啟用動態欄位的集合，您可以使用動態欄位中的鍵進行標量篩選，就像使用模式中明確定義的欄位一樣。</p>
+<h2 id="Enable-dynamic-field" class="common-anchor-header">啟用動態欄位<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,14 +52,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can enable the dynamic field manually when creating a collection with custom settings.</p>
+    </button></h2><p>您可以在使用自訂設定建立集合時，手動啟用動態欄位。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client= MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -140,7 +131,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
     &quot;enableDynamicField&quot;: true
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-dynamic-field" class="common-anchor-header">Use dynamic field<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="Use-dynamic-field" class="common-anchor-header">使用動態欄位<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,8 +146,8 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When the dynamic field is enabled in your collection, all fields and their values that are not defined in the schema will be stored as key-value pairs in the dynamic field.</p>
-<p>For example, suppose your collection schema defines only two fields, named <code translate="no">id</code> and <code translate="no">vector</code>, with the dynamic field enabled. Now, insert the following dataset into this collection.</p>
+    </button></h2><p>當您的集合啟用動態欄位時，模式中未定義的所有欄位及其值都會以鍵值對的方式儲存在動態欄位中。</p>
+<p>例如，假設您的集合模式只定義了兩個欄位，分別命名為<code translate="no">id</code> 和<code translate="no">vector</code> ，並啟用了動態欄位。現在，將下列資料集插入此集合。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.19886812562848388</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.06023560599112088</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6976963061752597</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2614474506242501</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.838729485096104</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_7025&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -170,15 +161,10 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">9</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.5718280481994695</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.24070317428066512</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.3737913482606834</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.06726932177492717</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6980531615588608</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;purple_4976&quot;</span><span class="hljs-punctuation">}</span>        
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The dataset above contains 10 entities, each including the fields <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code>. Here, the <code translate="no">color</code> field is not defined in the schema. Since the collection has the dynamic field enabled, the field <code translate="no">color</code> will be stored as a key-value pair within the dynamic field.</p>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>The following code demonstrates how to insert this dataset into the collection.</p>
+<p>上面的資料集包含 10 個實體，每個實體都包括欄位<code translate="no">id</code>,<code translate="no">vector</code>, 和<code translate="no">color</code> 。這裡，模式中沒有定義<code translate="no">color</code> 欄位。由於集合已啟用動態欄位，因此欄位<code translate="no">color</code> 將以鍵值對的形式儲存在動態欄位中。</p>
+<h3 id="Insert-data" class="common-anchor-header">插入資料</h3><p>以下程式碼示範如何將此資料集插入集合。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -330,26 +316,21 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">Index a scalar field in the dynamic field</h3><p>When you enable a dynamic field, any undefined scalar fields are stored as key-value pairs in JSON format. Milvus supports creating an index on such an undefined scalar field, effectively by building a JSON path index. Here’s how it works:</p>
+<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">在動態欄位中索引標量欄位</h3><p>當您啟用動態欄位時，任何未定義的標量欄位都會以 JSON 格式的鍵值對儲存。Milvus 支援在這種未定義的標量字段上建立索引，有效的方式是建立一個 JSON 路徑索引。工作原理如下</p>
 <ol>
-<li><p><strong>Choose the dynamic field key</strong> you want to index. For example, <code translate="no">&quot;color&quot;</code> in the example above.</p></li>
-<li><p><strong>Decide on a cast type</strong> for the values found at that key. Milvus will parse the dynamic field, extract the values under the specified key, and cast them to the type you configure.</p>
+<li><p><strong>選擇</strong>您想要索引<strong>的動態欄位關鍵字</strong>。例如，上面範例中的<code translate="no">&quot;color&quot;</code> 。</p></li>
+<li><p><strong>決定</strong>該關鍵值的<strong>轉換類型</strong>。Milvus 將解析動態欄位，擷取指定鍵下的值，並將它們轉換成您設定的類型。</p>
 <ul>
-<li><p>Supported <code translate="no">json_cast_type</code> values are <code translate="no">bool</code> (or <code translate="no">BOOL</code>), <code translate="no">double</code> (or <code translate="no">DOUBLE</code>), and <code translate="no">varchar</code> (or <code translate="no">VARCHAR</code>).</p></li>
-<li><p>If parsing or casting fails (for example, trying to parse a string as double), those rows will be skipped in the index.</p></li>
+<li><p>支援的<code translate="no">json_cast_type</code> 值為<code translate="no">bool</code> (或<code translate="no">BOOL</code>)、<code translate="no">double</code> (或<code translate="no">DOUBLE</code>) 及<code translate="no">varchar</code> (或<code translate="no">VARCHAR</code>)。</p></li>
+<li><p>如果解析或轉換失敗 (例如，嘗試將字串解析為 double)，索引會跳過這些資料。</p></li>
 </ul></li>
-<li><p><strong>Specify the JSON path</strong> to that key as <code translate="no">json_path</code>. Since the dynamic field is stored as JSON, you can specify something like <code translate="no">&quot;color&quot;</code>, or if you have nested structures, you can specify deeper paths (e.g. <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
-<li><p><strong>Create an INVERTED index</strong>. Currently, only <code translate="no">INVERTED</code> type is supported for JSON path indexing.</p></li>
+<li><p><strong>指定</strong>該鍵的<strong>JSON 路徑</strong>為<code translate="no">json_path</code> 。由於動態欄位是以 JSON 格式儲存，您可以指定類似<code translate="no">&quot;color&quot;</code> 之類的路徑，如果您有巢狀結構，也可以指定更深的路徑 (例如<code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>)。</p></li>
+<li><p><strong>建立 INVERTED 索引</strong>。目前，JSON 路徑索引只支援<code translate="no">INVERTED</code> 類型。</p></li>
 </ol>
-<p>For details on parameters and considerations, refer to <a href="/docs/use-json-fields.md#Index-a-JSON-field">Index a JSON field</a>.</p>
-<p>Below is an example of how to create an index on the <code translate="no">&quot;color&quot;</code> field:</p>
+<p>有關參數和注意事項的詳細資訊，請參閱<a href="/docs/zh-hant/use-json-fields.md#Index-a-JSON-field">JSON 欄位的索引</a>。</p>
+<p>以下是如何在<code translate="no">&quot;color&quot;</code> 欄位上建立索引的範例：</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -437,14 +418,9 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">Query and search with dynamic field</h3><p>Milvus supports the use of filter expressions during queries and searches, allowing you to specify which fields to include in the results. The following example demonstrates how to perform queries and searches using the <code translate="no">color</code> field, which is not defined in the schema, by using the dynamic field.</p>
+<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">使用動態欄位查詢和搜尋</h3><p>Milvus 支援在查詢和搜尋過程中使用篩選表達式，允許您指定在結果中包含哪些欄位。以下範例示範如何透過動態欄位，使用模式中未定義的<code translate="no">color</code> 欄位執行查詢與搜尋。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
 res = client.search(
@@ -536,7 +512,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the filter expression used in the code example above, <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>, the conditions specify that the value of the <code translate="no">color</code> field must start with <strong>“red”</strong>. In the sample data, only two entities meet this condition. Thus, when <code translate="no">limit</code> (topK) is set to <code translate="no">3</code> or fewer, both of these entities will be returned.</p>
+<p>在上述程式碼範例中使用的篩選表達式<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 中，條件指定<code translate="no">color</code> 欄位的值必須以<strong>"red "</strong>開頭。在樣本資料中，只有兩個實體符合此條件。因此，當<code translate="no">limit</code> (topK) 設定為<code translate="no">3</code> 或更少時，這兩個實體都會被傳回。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> 

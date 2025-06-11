@@ -215,6 +215,6 @@ index_params.add_index(
 </ul></li>
 <li><p><strong>資料完整性</strong>：</p>
 <ul>
-<li>Milvus 不會解析或轉換超出您指定的鑄造範圍的 JSON 鍵。如果來源資料不一致（例如，有些資料列的 key<code translate="no">&quot;k&quot;</code> 儲存了字串，有些則儲存了數字），有些資料列將不會被索引。</li>
+<li>Milvus 不會解析或轉換超出您指定的鑄造範圍的 JSON 鍵。如果來源資料不一致（例如，某些資料列的 key<code translate="no">&quot;k&quot;</code> 儲存了字串，而其他資料列則儲存了數字），某些資料列將不會被索引。</li>
 </ul></li>
 </ul>

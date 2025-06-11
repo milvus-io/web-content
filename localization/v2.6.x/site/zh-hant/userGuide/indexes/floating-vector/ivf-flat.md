@@ -178,7 +178,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>搜尋候選集的簇數。較高的值允許搜尋更多的叢集，藉由擴大搜尋範圍來改善召回率，但代價是增加查詢延遲。</p></td>
+     <td><p>搜尋候選集的簇數。較高的值允許搜尋更多的叢集，藉由擴大搜尋範圍來提高召回率，但代價是增加查詢延遲。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1,<em>nlist］</em></p><p><strong>預設值</strong>：<code translate="no">8</code></p></td>
      <td><p>增加此值可提高召回率，但可能會減慢搜尋速度。設定<code translate="no">nprobe</code> 與<code translate="no">nlist</code> 成比例，以平衡速度與精確度。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[1, nlist]。</p></td>
    </tr>

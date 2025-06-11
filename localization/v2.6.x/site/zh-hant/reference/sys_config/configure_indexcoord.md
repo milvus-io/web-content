@@ -2,9 +2,9 @@
 id: configure_indexcoord.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure indexCoord for Milvus.
+summary: 了解如何為 Milvus 設定 indexCoord。
 ---
-<h1 id="indexCoord-related-Configurations" class="common-anchor-header">indexCoord-related Configurations<button data-href="#indexCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="indexCoord-related-Configurations" class="common-anchor-header">索引樓層相關設定<button data-href="#indexCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure indexCoord for Milvus.
     </button></h2><table id="indexCoord.segment.minSegmentNumRowsToEnableIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        It's a threshold. When the segment num rows is less than this value, the segment will not be indexed      </td>
+      <td>        這是一個臨界值。當區段的行數小於此值時，區段將不會被索引。      </td>
       <td>1024</td>
     </tr>
   </tbody>

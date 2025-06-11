@@ -1,12 +1,9 @@
 ---
 id: use_ColPali_with_milvus.md
 summary: >-
-  In this notebook, we refer to this kind of multi-vector representation as
-  "ColBERT embeddings" for generality. However, the actual model being used is
-  the ColPali model. We will demonstrate how to use Milvus for multi-vector
-  retrieval. Building on that, we will introduce how to use ColPali for
-  retrieving pages based on a given query.
-title: Use ColPali for Multi-Modal Retrieval with Milvus
+  在本筆記簿中，為了一般性起見，我們將這種多向量表示法稱為「ColBERT 內嵌」。然而，實際使用的模型是 ColPali 模型。我們將示範如何使用
+  Milvus 進行多向量檢索。在此基礎上，我們將介紹如何使用 ColPali 根據給定的查詢檢索頁面。
+title: 使用 ColPali 與 Milvus 進行多模式檢索
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -14,7 +11,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Use ColPali for Multi-Modal Retrieval with Milvus<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">使用 ColPali 與 Milvus 進行多模式檢索<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,17 +26,17 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Modern retrieval models typically use a single embedding to represent text or images. ColBERT, however, is a neural model that utilizes a list of embeddings for each data instance and employs a “MaxSim” operation to calculate the similarity between two texts. Beyond textual data, figures, tables, and diagrams also contain rich information, which is often disregarded in text-based information retrieval.</p>
+    </button></h1><p>現代的檢索模型通常使用單一的嵌入來表示文字或影像。然而，ColBERT 是一種神經模型，它利用每個資料實例的嵌入清單，並採用「MaxSim」運算來計算兩個文字之間的相似度。除了文字資料之外，圖形、表格和圖表也包含豐富的資訊，這些資訊在以文字為基礎的資訊檢索中往往被忽略。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>MaxSim function compares a query with a document (what you’re searching in) by looking at their token embeddings. For each word in the query, it picks the most similar word from the document (using cosine similarity or squared L2 distance) and sums these maximum similarities across all words in the query</p>
-<p>ColPali is a method that combines ColBERT’s multi-vector representation with PaliGemma (a multimodal large language model) to leverage its strong understanding capabilities. This approach enables a page with both text and images to be represented using a unified multi-vector embedding. The embeddings within this multi-vector representation can capture detailed information, improving the performance of retrieval-augmented generation (RAG) for multimodal data.</p>
-<p>In this notebook, we refer to this kind of multi-vector representation as “ColBERT embeddings” for generality. However, the actual model being used is the <strong>ColPali model</strong>. We will demonstrate how to use Milvus for multi-vector retrieval. Building on that, we will introduce how to use ColPali for retrieving pages based on a given query.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>MaxSim 功能是透過查看查詢與文件 (您要搜尋的內容) 的代號嵌入 (token embeddings) 來比較它們。對於查詢中的每個單字，它會從文件中挑出最相似的單字 (使用余弦相似度或平方 L2 距離)，然後將查詢中所有單字的最大相似度相加。</p>
+<p>ColPali 是一種結合 ColBERT 的多向量表示法與 PaliGemma（多模態大語言模型）的方法，以利用其強大的理解能力。這種方法可以使用統一的多向量嵌入來表示包含文字和圖像的頁面。這個多向量表達中的嵌入可以捕捉到詳細的資訊，改善多模態資料的檢索增強生成 (RAG) 的效能。</p>
+<p>在本筆記簿中，為了一般性起見，我們將這種多向量表示法稱為「ColBERT 嵌入」。然而，實際使用的模型是<strong>ColPali 模型</strong>。我們將示範如何使用 Milvus 進行多向量檢索。在此基礎上，我們將介紹如何使用 ColPali 根據給定的查詢來檢索網頁。</p>
+<h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +57,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pillow</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-the-data" class="common-anchor-header">Prepare the data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-data" class="common-anchor-header">準備資料<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +72,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We will use PDF RAG as our example. You can download <a href="https://arxiv.org/pdf/2004.12832">ColBERT</a> paper and put it into <code translate="no">./pdf</code>. ColPali does not process text directly; instead, the entire page is rasterized into an image. The ColPali model excels at understanding the textual information contained within these images. Therefore, we will convert each PDF page into an image for processing.</p>
+    </button></h2><p>我們將以 PDF RAG 為例。您可以下載<a href="https://arxiv.org/pdf/2004.12832">ColBERT</a>paper 並將其放入<code translate="no">./pdf</code> 。ColPali 並不直接處理文字，而是將整個頁面光柵化為影像。ColPali 模型擅長理解這些圖像中包含的文字資訊。因此，我們會將每個 PDF 頁面轉換成影像來處理。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pdf2image <span class="hljs-keyword">import</span> convert_from_path
 
 pdf_path = <span class="hljs-string">&quot;pdfs/2004.12832v2.pdf&quot;</span>
@@ -84,7 +81,7 @@ images = convert_from_path(pdf_path)
 <span class="hljs-keyword">for</span> i, image <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(images):
     image.save(<span class="hljs-string">f&quot;pages/page_<span class="hljs-subst">{i + <span class="hljs-number">1</span>}</span>.png&quot;</span>, <span class="hljs-string">&quot;PNG&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Next, we will initialize a database using Milvus Lite. You can easily switch to a full Milvus instance by setting the uri to the appropriate address where your Milvus service is hosted.</p>
+<p>接下來，我們將使用 Milvus Lite 來初始化資料庫。您可以透過設定 uri 到您的 Milvus 服務託管的適當位址，輕鬆切換到完整的 Milvus 實例。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> concurrent.futures
@@ -93,13 +90,13 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
-<li>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>如果您只需要一個本機向量資料庫來進行小規模的資料或原型設計，將 uri 設定為一個本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
+<li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器位址和連接埠作為您的 uri，例如<code translate="no">http://localhost:19530</code> 。如果您在 Milvus 上啟用認證功能，請使用 "<your_username>:<your_password>" 作為令牌，否則請勿設定令牌。</li>
+<li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，它們對應於 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
 </ul>
 </div>
-<p>We will define a MilvusColbertRetriever class to wrap around the Milvus client for multi-vector data retrieval. The implementation flattens ColBERT embeddings and inserts them into a collection, where each row represents an individual embedding from the ColBERT embedding list. It also records the doc_id and seq_id to trace the origin of each embedding.</p>
-<p>When searching with a ColBERT embedding list, multiple searches will be conducted—one for each ColBERT embedding. The retrieved doc_ids will then be deduplicated. A reranking process will be performed, where the full embeddings for each doc_id are fetched, and the MaxSim score is calculated to produce the final ranked results.</p>
+<p>我們將定義一個 MilvusColbertRetriever 類別，用來包圍 Milvus 用戶端進行多向量資料擷取。該實作會將 ColBERT embeddings 平面化，並將它們插入一個集合，其中每一行代表 ColBERT embedding 清單中的一個個別 embedding。它還記錄了 doc_id 和 seq_id，以便追蹤每個內嵌的來源。</p>
+<p>使用 ColBERT 嵌入列表進行搜尋時，會進行多次搜尋，每次搜尋一個 ColBERT 嵌入。擷取的 doc_ids 將被重複。將執行重新排序過程，在此過程中，每個 doc_id 的完整內嵌被擷取，並計算 MaxSim 得分，以產生最終的排序結果。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
         <span class="hljs-comment"># Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.</span>
@@ -240,7 +237,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
             ],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>We will use the <a href="https://github.com/illuin-tech/colpali">colpali_engine</a> to extract embedding lists for two queries and retrieve the relevant information from the PDF pages.</p>
+<p>我們將使用<a href="https://github.com/illuin-tech/colpali">colpali_engine</a>來提取兩個查詢的嵌入列表，並從 PDF 頁面中擷取相關資訊。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> colpali_engine.models <span class="hljs-keyword">import</span> ColPali
 <span class="hljs-keyword">from</span> colpali_engine.models.paligemma.colpali.processing_colpali <span class="hljs-keyword">import</span> ColPaliProcessor
 <span class="hljs-keyword">from</span> colpali_engine.utils.processing_utils <span class="hljs-keyword">import</span> BaseVisualRetrieverProcessor
@@ -279,7 +276,7 @@ qs: <span class="hljs-type">List</span>[torch.Tensor] = []
         embeddings_query = model(**batch_query)
     qs.extend(<span class="hljs-built_in">list</span>(torch.unbind(embeddings_query.to(<span class="hljs-string">&quot;cpu&quot;</span>))))
 <button class="copy-code-btn"></button></code></pre>
-<p>Additionally, we will need to extract the embedding list for each page and it shows there are 1030 128-dimensional embeddings for each page.</p>
+<p>此外，我們還要抽取每個頁面的嵌入列表，它顯示每個頁面有 1030 個 128 維嵌入。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 <span class="hljs-keyword">import</span> os
@@ -308,12 +305,12 @@ ds: <span class="hljs-type">List</span>[torch.Tensor] = []
 
 torch.Size([1030, 128])
 </code></pre>
-<p>We will create a collection called “colpali” using MilvusColbertRetriever.</p>
+<p>我們將使用 MilvusColbertRetriever 建立一個名為「colpali」的集合。</p>
 <pre><code translate="no" class="language-python">retriever = MilvusColbertRetriever(collection_name=<span class="hljs-string">&quot;colpali&quot;</span>, milvus_client=client)
 retriever.create_collection()
 retriever.create_index()
 <button class="copy-code-btn"></button></code></pre>
-<p>We will insert embedding lists to the Milvus database.</p>
+<p>我們將插入嵌入清單到 Milvus 資料庫。</p>
 <pre><code translate="no" class="language-python">filepaths = [<span class="hljs-string">&quot;./pages/&quot;</span> + name <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> os.listdir(<span class="hljs-string">&quot;./pages&quot;</span>)]
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(filepaths)):
     data = {
@@ -323,7 +320,7 @@ retriever.create_index()
     }
     retriever.insert(data)
 <button class="copy-code-btn"></button></code></pre>
-<p>Now we can search the most relevant page using query embedding list.</p>
+<p>現在我們可以使用查詢嵌入清單搜尋最相關的頁面。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query <span class="hljs-keyword">in</span> qs:
     query = query.<span class="hljs-built_in">float</span>().numpy()
     result = retriever.search(query, topk=<span class="hljs-number">1</span>)
@@ -332,4 +329,4 @@ retriever.create_index()
 <pre><code translate="no">./pages/page_5.png
 ./pages/page_7.png
 </code></pre>
-<p>Finally, we retrieve the original page name. With ColPali, we can retrieve multimodal documents without the need for complex processing techniques to extract text and images from the documents. By leveraging large vision models, more information—such as tables and figures—can be analyzed without significant information loss.</p>
+<p>最後，我們擷取原始的頁面名稱。透過 ColPali，我們可以擷取多模態文件，而不需要複雜的處理技術來擷取文件中的文字和影像。透過利用大型視覺模型，可以分析更多的資訊，例如表格和圖表，而不會造成重大的資訊損失。</p>

@@ -1,11 +1,9 @@
 ---
 id: drop_users_roles.md
-title: Drop Users & Roles
-summary: >-
-  To ensure data security, it is recommend that you drop users and roles that
-  are no longer in use. This guide introduces how to drop users and roles.
+title: 刪除使用者和角色
+summary: 為了確保資料安全，建議您刪除不再使用的使用者和角色。本指南將介紹如何刪除使用者和角色。
 ---
-<h1 id="Drop-Users--Roles" class="common-anchor-header">Drop Users & Roles<button data-href="#Drop-Users--Roles" class="anchor-icon" translate="no">
+<h1 id="Drop-Users--Roles" class="common-anchor-header">刪除使用者和角色<button data-href="#Drop-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>To ensure data security, it is recommend that you drop users and roles that are no longer in use. This guide introduces how to drop users and roles.</p>
-<h2 id="Drop-a-user" class="common-anchor-header">Drop a user<button data-href="#Drop-a-user" class="anchor-icon" translate="no">
+    </button></h1><p>為確保資料安全，建議您刪除不再使用的使用者和角色。本指南將介紹如何停用使用者和角色。</p>
+<h2 id="Drop-a-user" class="common-anchor-header">刪除使用者<button data-href="#Drop-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,17 +34,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to drop the user <code translate="no">user_1</code>.</p>
+    </button></h2><p>以下範例示範如何停用使用者<code translate="no">user_1</code> 。</p>
 <div class="alert note">
-<p>The <code translate="no">root</code> user cannot be dropped.</p>
+<p><code translate="no">root</code> 使用者無法被 drop。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#plaintext">plaintext</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">plaintext</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -120,14 +113,9 @@ curl --request POST \
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the user is dropped, you can list all existing users to check if the drop operation is successful.</p>
+<p>一旦用戶被 drop，您可以列出所有現有的用戶，以檢查 drop 操作是否成功。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.list_users()
@@ -152,10 +140,10 @@ List&lt;String&gt; resp = client.listUsers();
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output. There is no <code translate="no">user_1</code> in the list. The drop operation is successful.</p>
+<p>以下是一個輸出範例。清單中沒有<code translate="no">user_1</code> 。刪除操作成功。</p>
 <pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;root&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-a-role" class="common-anchor-header">Drop a role<button data-href="#Drop-a-role" class="anchor-icon" translate="no">
+<h2 id="Drop-a-role" class="common-anchor-header">刪除角色<button data-href="#Drop-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -170,17 +158,12 @@ List&lt;String&gt; resp = client.listUsers();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to drop the role <code translate="no">role_a</code>.</p>
+    </button></h2><p>以下範例示範如何刪除角色<code translate="no">role_a</code> 。</p>
 <div class="alert note">
-<p>The built-in role <code translate="no">admin</code> cannot be dropped.</p>
+<p>內建的角色<code translate="no">admin</code> 無法刪除。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.drop_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -212,14 +195,9 @@ client.dropRole(dropRoleReq);
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the role is dropped, you can list all existing roles to check if the drop operation is successful.</p>
+<p>一旦刪除角色，您可以列出所有現有角色，以檢查刪除作業是否成功。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.list_roles()
@@ -242,6 +220,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output. There is no <code translate="no">role_a</code> in the list. The drop operation is successful.</p>
+<p>以下是一個輸出範例。清單中沒有<code translate="no">role_a</code> 。刪除操作成功。</p>
 <pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>
