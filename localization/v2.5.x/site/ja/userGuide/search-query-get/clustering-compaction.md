@@ -4,6 +4,7 @@ title: クラスタリング・コンパクション
 summary: >-
   クラスタリング・コンパクションは、大規模なコレクションの検索パフォーマンスを向上させ、コストを削減するために設計されています。このガイドでは、クラスタリング・コンパクションと、この機能による検索パフォーマンスの向上について説明します。
 ---
+
 <h1 id="Clustering-Compaction" class="common-anchor-header">クラスタリング・コンパクション<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +47,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>クラスタリングコンパクション</span> </span></p>
-<p><strong>PartitionStatsを</strong>参照として、Milvusはクラスタリングキー値を持つ検索/クエリリクエストを受信した際に無関係なデータを刈り込み、その値にマッピングされたセグメント内で検索範囲を制限することで、検索パフォーマンスを向上させることができます。性能向上の詳細については、<a href="/docs/ja/clustering-compaction.md#Benchmark-Test">ベンチマーク</a>テストを参照してください。</p>
+<p><strong>PartitionStatsを</strong>参照として、Milvusはクラスタリングキー値を持つ検索/クエリリクエストを受信した際に無関係なデータを刈り込み、その値にマッピングされたセグメント内で検索範囲を制限することで、検索パフォーマンスを向上させることができます。性能向上の詳細については、<a href="/docs/ja/v2.5.x/clustering-compaction.md#Benchmark-Test">ベンチマーク</a>テストを参照してください。</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">クラスタリング・コンパクションの使用<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,15 +77,16 @@ summary: >-
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
 
 <span class="hljs-attr">datanode:</span>
-  <span class="hljs-attr">clusteringCompaction:</span>
-    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
-    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+<span class="hljs-attr">clusteringCompaction:</span>
+<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
+<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
+<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p>設定項目</p></th>
@@ -159,7 +161,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>上記の変更をMilvusクラスタに適用するには、<a href="/docs/ja/configure-helm.md#Configure-Milvus-via-configuration-file">HelmによるMilvusの設定</a>および<a href="/docs/ja/configure_operator.md">Milvus OperatorsによるMilvusの</a>設定の手順に従ってください。</p>
+<p>上記の変更をMilvusクラスタに適用するには、<a href="/docs/ja/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">HelmによるMilvusの設定</a>および<a href="/docs/ja/v2.5.x/configure_operator.md">Milvus OperatorsによるMilvusの</a>設定の手順に従ってください。</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">コレクションの構成</h3><p>特定のコレクションでクラスタリングコンパクトを行うには、クラスタリングキーとしてコレクションからスカラーフィールドを選択する必要があります。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -169,8 +171,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -180,10 +182,11 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-    schema=schema
+collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -284,9 +287,10 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-    job_id=job_id,
+job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;

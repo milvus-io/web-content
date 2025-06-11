@@ -8,6 +8,7 @@ summary: >-
   requerir bastante menos memoria, lo que lo convierte en una opción práctica
   para grandes conjuntos de datos.
 ---
+
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +49,7 @@ summary: >-
 <li><p><strong>Índice invertido:</strong> Se crea un índice que asigna el centroide de cada cluster a la lista de vectores asignados a ese cluster.</p></li>
 <li><p><strong>Búsqueda:</strong> Cuando se buscan los vecinos más cercanos, el algoritmo de búsqueda compara el vector de consulta con los centroides de los clústeres y selecciona el clúster o clústeres más prometedores. A continuación, la búsqueda se reduce a los vectores que se encuentran dentro de esos clusters seleccionados.</p></li>
 </ol>
-<p>Para obtener más información sobre los detalles técnicos, consulte <a href="/docs/es/ivf-flat.md">IVF_FLAT</a>.</p>
+<p>Para obtener más información sobre los detalles técnicos, consulte <a href="/docs/es/v2.5.x/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>La cuantificación de productos (PQ)</strong> es un método de compresión de vectores de alta dimensión que reduce significativamente los requisitos de almacenamiento y permite realizar rápidas operaciones de búsqueda de similitudes.</p>
 <p>El proceso PQ consta de las siguientes etapas</p>
 <p>
@@ -61,7 +62,7 @@ summary: >-
 <li><p><strong>Cuantificación</strong><strong>vectorial</strong>: Para cada subvector del vector original, PQ identifica su centroide más cercano dentro del subespacio correspondiente utilizando un tipo de métrica específico. Este proceso asigna cada subvector a su vector representativo más cercano en el libro de códigos. En lugar de almacenar todas las coordenadas del subvector, sólo se conserva el índice del centroide correspondiente.</p></li>
 <li><p><strong>Representación comprimida</strong>: La representación comprimida final consta de <code translate="no">m</code> índices, uno de cada subespacio, denominados colectivamente <strong>códigos PQ</strong>. Esta codificación reduce los requisitos de almacenamiento de <em>D × 32</em> bits (suponiendo números en coma flotante de 32 bits) a <em>m</em> × <em>nbits</em> bits, con lo que se consigue una compresión sustancial al tiempo que se conserva la capacidad de aproximar distancias vectoriales.</p></li>
 </ol>
-<p>Para obtener más información sobre el ajuste y la optimización de los parámetros, consulte <a href="/docs/es/ivf-pq.md#Index-params">Parámetros del índice</a>.</p>
+<p>Para obtener más información sobre el ajuste y la optimización de los parámetros, consulte <a href="/docs/es/v2.5.x/ivf-pq.md#Index-params">Parámetros del índice</a>.</p>
 <div class="alert note">
 <p>Considere un vector con <em>D = 128</em> dimensiones utilizando números de coma flotante de 32 bits. Con los parámetros PQ <em>m = 64</em> (subvectores) y <em>nbits = 8</em> (por tanto <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>= 256</em> centroides por subespacio), podemos comparar los requisitos de almacenamiento:</p>
 <ul>
@@ -95,7 +96,7 @@ summary: >-
 <li><p><strong>Filtrado grueso con IVF</strong>: IVF particiona el espacio vectorial en clusters, reduciendo el alcance de la búsqueda. En lugar de evaluar todo el conjunto de datos, el algoritmo se centra sólo en los clusters más cercanos al vector de consulta.</p></li>
 <li><p><strong>Comparación detallada con PQ</strong>: dentro de los conglomerados seleccionados, PQ utiliza representaciones vectoriales comprimidas y cuantizadas para calcular rápidamente distancias aproximadas.</p></li>
 </ol>
-<p>El rendimiento del índice <strong>IVF_PQ</strong> depende en gran medida de los parámetros que controlan los algoritmos IVF y PQ. El ajuste de estos parámetros es crucial para lograr los resultados óptimos para un conjunto de datos y una aplicación determinados. Encontrará información más detallada sobre estos parámetros y cómo ajustarlos en <a href="/docs/es/ivf-pq.md#Index-params">Parámetros del índice</a>.</p>
+<p>El rendimiento del índice <strong>IVF_PQ</strong> depende en gran medida de los parámetros que controlan los algoritmos IVF y PQ. El ajuste de estos parámetros es crucial para lograr los resultados óptimos para un conjunto de datos y una aplicación determinados. Encontrará información más detallada sobre estos parámetros y cómo ajustarlos en <a href="/docs/es/v2.5.x/ivf-pq.md#Index-params">Parámetros del índice</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Crear índice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,26 +119,27 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>En esta configuración:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: El tipo de índice a construir. En este ejemplo, establezca el valor <code translate="no">IVF_PQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: El método utilizado para calcular la distancia entre vectores. Los valores soportados incluyen <code translate="no">COSINE</code>, <code translate="no">L2</code>, y <code translate="no">IP</code>. Para más detalles, consulte <a href="/docs/es/metric.md">Tipos de métricas</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: El método utilizado para calcular la distancia entre vectores. Los valores soportados incluyen <code translate="no">COSINE</code>, <code translate="no">L2</code>, y <code translate="no">IP</code>. Para más detalles, consulte <a href="/docs/es/v2.5.x/metric.md">Tipos de métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opciones de configuración adicionales para construir el índice.</p>
 <ul>
 <li><code translate="no">m</code>: Número de subvectores en los que se divide el vector.</li>
 </ul>
-<p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="/docs/es/ivf-pq.md#Index-building-params">Parámetros de construcción del índice</a>.</p></li>
+<p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="/docs/es/v2.5.x/ivf-pq.md#Index-building-params">Parámetros de construcción del índice</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/v2.5.x/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,20 +163,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>En esta configuración:</p>
 <ul>
 <li><p><code translate="no">params</code>: Opciones de configuración adicionales para la búsqueda en el índice.</p>
 <ul>
 <li><code translate="no">nprobe</code>: Número de clusters a buscar.</li>
 </ul>
-<p>Para conocer más parámetros de búsqueda disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="/docs/es/ivf-pq.md#Index-specific-search-params">Parámetros de búsqueda específicos del índice</a>.</p></li>
+<p>Para conocer más parámetros de búsqueda disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="/docs/es/v2.5.x/ivf-pq.md#Index-specific-search-params">Parámetros de búsqueda específicos del índice</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parámetros del índice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -192,7 +195,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>En esta sección se ofrece una descripción general de los parámetros utilizados para crear un índice y realizar búsquedas en él.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices</h3><p>La siguiente tabla enumera los parámetros que pueden configurarse en <code translate="no">params</code> al <a href="/docs/es/ivf-pq.md#Build-index">crear un índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices</h3><p>La siguiente tabla enumera los parámetros que pueden configurarse en <code translate="no">params</code> al <a href="/docs/es/v2.5.x/ivf-pq.md#Build-index">crear un índice</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -222,7 +225,7 @@ res = MilvusClient.search(
      <td><p>Un valor más alto de <code translate="no">nbits</code> permite libros de códigos más grandes, lo que potencialmente conduce a representaciones más precisas de los vectores originales. Sin embargo, también implica utilizar más bits para almacenar cada índice, lo que se traduce en una menor compresión. En la mayoría de los casos, recomendamos establecer un valor dentro de este rango: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos de cada índice</h3><p>En la tabla siguiente se enumeran los parámetros que pueden configurarse en <code translate="no">search_params.params</code> al <a href="/docs/es/ivf-pq.md#Search-on-index">buscar en el índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos de cada índice</h3><p>En la tabla siguiente se enumeran los parámetros que pueden configurarse en <code translate="no">search_params.params</code> al <a href="/docs/es/v2.5.x/ivf-pq.md#Search-on-index">buscar en el índice</a>.</p>
 <table>
    <tr>
      <th></th>

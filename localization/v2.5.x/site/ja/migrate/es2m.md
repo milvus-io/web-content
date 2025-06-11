@@ -3,6 +3,7 @@ id: es2m.md
 summary: 本ガイドでは、ElasticsearchからMilvus 2.xへのデータ移行について、包括的なステップバイステップのプロセスを提供します。
 title: Elasticsearch から
 ---
+
 <h1 id="From-Elasticsearch" class="common-anchor-header">Elasticsearch から<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +42,7 @@ title: Elasticsearch から
 <li>インストールの詳細については、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Elasticsearchのインストールと</a> <a href="https://milvus.io/docs/install_standalone-docker.md">Milvusのインストールを</a>ご参照ください。</li>
 </ul></li>
 <li><strong>必要なツール</strong><ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツール</a>。インストールの詳細については、<a href="/docs/ja/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツール</a>。インストールの詳細については、<a href="/docs/ja/v2.5.x/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
 </ul></li>
 <li><strong>マイグレーションでサポートされるデータタイプ</strong>移行元の Elasticsearch インデックスから移行するフィールドのデータ型は以下の通りです -<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>。ここに記載されていないデータ型は、現在マイグレーションに対応していません。MilvusコレクションとElasticsearchインデックス間のデータマッピングの詳細については、<a href="#field-mapping-reference">フィールドマッピングリファレンスを</a>参照してください。</li>
 <li><strong>Elasticsearch インデックスの要件</strong><ul>

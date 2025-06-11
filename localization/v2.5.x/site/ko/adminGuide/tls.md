@@ -3,6 +3,7 @@ id: tls.md
 title: 전송 중 암호화
 summary: Milvus에서 TLS 프록시를 활성화하는 방법을 알아보세요.
 ---
+
 <h1 id="Encryption-in-Transit" class="common-anchor-header">전송 중 암호화<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ summary: Milvus에서 TLS 프록시를 활성화하는 방법을 알아보세요
     </button></h1><p>TLS(전송 계층 보안)는 통신 보안을 보장하기 위한 암호화 프로토콜입니다. Milvus 프록시는 TLS 단방향 및 양방향 인증을 사용합니다.</p>
 <p>이 항목에서는 Milvus 프록시에서 gRPC 및 RESTful 트래픽 모두에 대해 TLS를 활성화하는 방법에 대해 설명합니다.</p>
 <div class="alert note">
-<p>TLS와 사용자 인증은 서로 다른 두 가지 보안 접근 방식입니다. Milvus 시스템에서 사용자 인증과 TLS를 모두 사용 설정한 경우 사용자 이름, 비밀번호 및 인증서 파일 경로를 제공해야 합니다. 사용자 인증을 활성화하는 방법에 대한 자세한 내용은 <a href="/docs/ko/authenticate.md">사용자 액세스 인증을</a> 참조하세요.</p>
+<p>TLS와 사용자 인증은 서로 다른 두 가지 보안 접근 방식입니다. Milvus 시스템에서 사용자 인증과 TLS를 모두 사용 설정한 경우 사용자 이름, 비밀번호 및 인증서 파일 경로를 제공해야 합니다. 사용자 인증을 활성화하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/authenticate.md">사용자 액세스 인증을</a> 참조하세요.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">나만의 인증서 만들기<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,6 +97,7 @@ openssl req -new -key client.key\
     -extfile ./openssl.cnf -extensions v3_req
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p></details></p>
 <p><code translate="no">gen.sh</code> 파일의 변수는 인증서 서명 요청 파일을 만드는 절차에 중요합니다. 처음 5개의 변수는 국가, 주, 위치, 조직, 조직 단위를 포함한 기본 서명 정보입니다. <code translate="no">CommonName</code> 는 클라이언트-서버 통신 중에 확인되므로 구성할 때 주의가 필요합니다.</p>
 <h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header"><code translate="no">gen.sh</code> 을 실행하여 인증서 생성</h3><p><code translate="no">gen.sh</code> 파일을 실행하여 인증서를 생성합니다.</p>
@@ -175,9 +177,10 @@ openssl req -new -key client.key\
   <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/milvus/tls/ca.pem</span>
 
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span>
+<span class="hljs-attr">security:</span>
+<span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>파라미터</p>
 <ul>
 <li><code translate="no">serverPemPath</code>: 서버 인증서 파일의 경로입니다.</li>
@@ -195,9 +198,10 @@ openssl req -new -key client.key\
   <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/milvus/tls/ca.pem</span>
 
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">internaltlsEnabled:</span> <span class="hljs-literal">true</span> 
+<span class="hljs-attr">security:</span>
+<span class="hljs-attr">internaltlsEnabled:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>매개변수</p>
 <ul>
 <li><code translate="no">serverPemPath</code>: 서버 인증서 파일의 경로입니다.</li>
@@ -408,24 +412,26 @@ helm install my-release milvus/milvus -f values.yaml
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
-    secure=<span class="hljs-literal">True</span>,
-    server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
-    server_name=<span class="hljs-string">&quot;localhost&quot;</span>
+uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
+secure=<span class="hljs-literal">True</span>,
+server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
+server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Two-way-TLS-connection" class="common-anchor-header">양방향 TLS 연결</h3><p><code translate="no">client.pem</code>, <code translate="no">client.key</code> 및 <code translate="no">ca.pem</code> 경로를 제공하고 <code translate="no">server_name</code> 이 인증서에 구성된 <code translate="no">CommonName</code> 과 일치하는지 확인합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
-    secure=<span class="hljs-literal">True</span>,
-    client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
-    client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
-    ca_pem_path=<span class="hljs-string">&quot;path_to/ca.pem&quot;</span>,
-    server_name=<span class="hljs-string">&quot;localhost&quot;</span>
+uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
+secure=<span class="hljs-literal">True</span>,
+client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
+client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
+ca_pem_path=<span class="hljs-string">&quot;path_to/ca.pem&quot;</span>,
+server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>자세한 내용은 <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls1.py">예제_tls1.py</a> 및 <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls2.py">예제_tls2.py를</a> 참조하세요.</p>
 <h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">TLS를 사용하여 Milvus RESTful 서버에 연결하기<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"

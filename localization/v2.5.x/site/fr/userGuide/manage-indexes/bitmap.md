@@ -7,6 +7,7 @@ summary: >-
   améliorer les performances des requêtes sur des champs scalaires à faible
   cardinalité.
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">BITMAP<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,8 +88,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Dans cet exemple, nous créons un index bitmap sur le champ <code translate="no">category</code> de la collection <code translate="no">my_collection</code>. La méthode <code translate="no">add_index()</code> est utilisée pour spécifier le nom du champ, le type d'index et le nom de l'index.</p>
-<p>Une fois l'index bitmap créé, vous pouvez utiliser le paramètre <code translate="no">filter</code> dans les opérations de requête pour effectuer un filtrage scalaire basé sur le champ indexé. Cela vous permet de réduire efficacement les résultats de la recherche à l'aide de l'index bitmap. Pour plus d'informations, voir <a href="/docs/fr/boolean.md">Filtrage des métadonnées</a>.</p>
+<p>Une fois l'index bitmap créé, vous pouvez utiliser le paramètre <code translate="no">filter</code> dans les opérations de requête pour effectuer un filtrage scalaire basé sur le champ indexé. Cela vous permet de réduire efficacement les résultats de la recherche à l'aide de l'index bitmap. Pour plus d'informations, voir <a href="/docs/fr/v2.5.x/boolean.md">Filtrage des métadonnées</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

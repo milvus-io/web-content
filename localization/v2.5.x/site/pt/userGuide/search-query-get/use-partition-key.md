@@ -9,6 +9,7 @@ summary: >-
   melhorando assim a eficiência da pesquisa. Este artigo apresentará como
   utilizar a Chave de partição e considerações relacionadas.
 ---
+
 <h1 id="Use-Partition-Key" class="common-anchor-header">Utilizar a Chave de Partição<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,9 +73,9 @@ summary: >-
       </svg>
     </button></h2><p>Para usar a Chave de Partição, é necessário</p>
 <ul>
-<li><p><a href="/docs/pt/use-partition-key.md#Set-Partition-Key">Definir a Chave de partição</a>,</p></li>
-<li><p><a href="/docs/pt/use-partition-key.md#Set-Partition-Numbers">Definir o número de partições a serem criadas</a> (Opcional), e</p></li>
-<li><p><a href="/docs/pt/use-partition-key.md#Create-Filtering-Condition">Criar uma condição de filtragem com base na Chave de partição</a>.</p></li>
+<li><p><a href="/docs/pt/v2.5.x/use-partition-key.md#Set-Partition-Key">Definir a Chave de partição</a>,</p></li>
+<li><p><a href="/docs/pt/v2.5.x/use-partition-key.md#Set-Partition-Numbers">Definir o número de partições a serem criadas</a> (Opcional), e</p></li>
+<li><p><a href="/docs/pt/v2.5.x/use-partition-key.md#Create-Filtering-Condition">Criar uma condição de filtragem com base na Chave de partição</a>.</p></li>
 </ul>
 <h3 id="Set-Partition-Key" class="common-anchor-header">Definir chave de partição</h3><p>Para designar um campo escalar como a Chave de Partição, é necessário definir o atributo <code translate="no">is_partition_key</code> como <code translate="no">true</code> quando adicionar o campo escalar.</p>
 <div class="alert note">
@@ -87,29 +88,30 @@ summary: >-
 )
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>,
-    datatype=DataType.INT64,
-    is_primary=<span class="hljs-literal">True</span>)
-    
+datatype=DataType.INT64,
+is_primary=<span class="hljs-literal">True</span>)
+
 schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-    datatype=DataType.FLOAT_VECTOR,
-    dim=<span class="hljs-number">5</span>)
+datatype=DataType.FLOAT_VECTOR,
+dim=<span class="hljs-number">5</span>)
 
 <span class="hljs-comment"># Add the partition key</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">512</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    is_partition_key=<span class="hljs-literal">True</span>,
+field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
+datatype=DataType.VARCHAR,
+max_length=<span class="hljs-number">512</span>,
+<span class="hljs-comment"># highlight-next-line</span>
+is_partition_key=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -243,12 +245,13 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-                .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-                .collectionSchema(schema)
-                .numPartitions(<span class="hljs-number">128</span>)
-                .build();
-        client.createCollection(createCollectionReq);
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.numPartitions(<span class="hljs-number">128</span>)
+.build();
+client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithNumPartitions(<span class="hljs-number">128</span>))
@@ -291,6 +294,7 @@ curl --request POST \
 <span class="hljs-comment"># Filter based on multiple partition key values</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 
@@ -359,12 +363,13 @@ Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <sp
 properties.put(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .properties(properties)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.properties(properties)
+.build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithProperty(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-literal">true</span>))
@@ -397,4 +402,4 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Depois de ativar o isolamento da chave de partição, pode ainda definir a chave de partição e o número de partições, conforme descrito em <a href="/docs/pt/use-partition-key.md#Set-Partition-Numbers">Definir números de partição</a>. Observe que o filtro baseado na Chave de partição deve incluir apenas um valor específico de Chave de partição.</p>
+<p>Depois de ativar o isolamento da chave de partição, pode ainda definir a chave de partição e o número de partições, conforme descrito em <a href="/docs/pt/v2.5.x/use-partition-key.md#Set-Partition-Numbers">Definir números de partição</a>. Observe que o filtro baseado na Chave de partição deve incluir apenas um valor específico de Chave de partição.</p>

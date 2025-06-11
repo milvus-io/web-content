@@ -6,6 +6,7 @@ summary: >-
   Erfahren Sie, wie Sie einen Milvus-Cluster hinter einem Layer-7-Loadbalancer
   auf AWS bereitstellen.
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Einrichten eines Layer-7-Load-Balancers für Milvus auf AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,9 +25,9 @@ summary: >-
     </button></h1><p>Im Vergleich zu einem Layer-4-Load-Balancer bietet ein Layer-7-Load-Balancer intelligente Load-Balancing- und Caching-Funktionen und ist eine gute Wahl für Cloud-native Services.</p>
 <p>Diese Anleitung führt Sie durch die Einrichtung eines Layer-7 Load Balancers für einen Milvus-Cluster, der bereits hinter einem Layer-4 Load Balancer läuft.</p>
 <h3 id="Before-your-start" class="common-anchor-header">Bevor Sie beginnen</h3><ul>
-<li>Sie haben <a href="/docs/de/eks.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf AWS bereitgestellt</a>.</li>
+<li>Sie haben <a href="/docs/de/v2.5.x/eks.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf AWS bereitgestellt</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Anpassen der Milvus-Konfigurationen</h3><p>In dieser Anleitung wird davon ausgegangen, dass Sie bereits <a href="/docs/de/eks.md">einen Milvus-Cluster hinter einem Layer-4-Load-Balancer auf AWS bereitgestellt</a> haben.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Anpassen der Milvus-Konfigurationen</h3><p>In dieser Anleitung wird davon ausgegangen, dass Sie bereits <a href="/docs/de/v2.5.x/eks.md">einen Milvus-Cluster hinter einem Layer-4-Load-Balancer auf AWS bereitgestellt</a> haben.</p>
 <p>Bevor Sie einen Layer-7-Loadbalancer für diesen Milvus-Cluster einrichten, führen Sie den folgenden Befehl aus, um den Layer-4-Loadbalancer zu entfernen.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -50,19 +51,18 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: <span class="hljs-string">&quot;arn:aws:acm:region:account-id:certificate/certificate-id&quot;</span>
 
 spec:
-  ingressClassName: alb
-  rules:
-    - host: milvus-demo.milvus.io
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: milvus-demo
-              port:
-                number: 19530
+ingressClassName: alb
+rules: - host: milvus-demo.milvus.io
+http:
+paths: - path: /
+pathType: Prefix
+backend:
+service:
+name: milvus-demo
+port:
+number: 19530
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Dann können Sie den Ingress erstellen, indem Sie die Datei auf Ihren EKS-Cluster anwenden.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -101,6 +101,7 @@ milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778
 
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;k8s-milvus-milvusde-2f72215c02-778371620.us-east-2.elb.amazonaws.com&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;milvus-demo.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li>Den <strong>host</strong> und <strong>server_name</strong> sollten Sie durch Ihren eigenen ersetzen.</li>

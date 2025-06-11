@@ -5,6 +5,7 @@ summary: >-
   يمكنك إعادة تسمية مجموعة أو تغيير إعداداتها. تركز هذه الصفحة على كيفية تعديل
   مجموعة.
 ---
+
 <h1 id="Modify-Collection" class="common-anchor-header">تعديل المجموعة<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,15 +43,16 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.rename_collection(
-    old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
+old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.RenameCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -146,10 +148,11 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
 <span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
@@ -199,15 +202,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>إذا كانت هناك حاجة إلى حذف بيانات مجموعة ما بعد فترة محددة، ففكر في تعيين وقت التشغيل بالثواني. وبمجرد انتهاء مدة TTL، يقوم Milvus بحذف جميع الكيانات من المجموعة.  يكون الحذف غير متزامن، مما يشير إلى أن عمليات البحث والاستعلامات لا تزال ممكنة قبل اكتمال الحذف. لمزيد من التفاصيل، راجع <a href="/docs/ar/set-collection-ttl.md">تعيين TTL للمجموعة</a>.</p></td>
+     <td><p>إذا كانت هناك حاجة إلى حذف بيانات مجموعة ما بعد فترة محددة، ففكر في تعيين وقت التشغيل بالثواني. وبمجرد انتهاء مدة TTL، يقوم Milvus بحذف جميع الكيانات من المجموعة.  يكون الحذف غير متزامن، مما يشير إلى أن عمليات البحث والاستعلامات لا تزال ممكنة قبل اكتمال الحذف. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/set-collection-ttl.md">تعيين TTL للمجموعة</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>يتيح تعيين الذاكرة (Mmap) الوصول المباشر للذاكرة إلى الملفات الكبيرة على القرص، مما يسمح لـ Milvus بتخزين الفهارس والبيانات في كل من الذاكرة والأقراص الصلبة. يساعد هذا النهج في تحسين سياسة وضع البيانات استناداً إلى تكرار الوصول، مما يزيد من سعة التخزين للمجموعات دون التأثير على أداء البحث.</p><p>لمزيد من التفاصيل، راجع <a href="/docs/ar/mmap.md">استخدام mmap</a>.</p></td>
+     <td><p>يتيح تعيين الذاكرة (Mmap) الوصول المباشر للذاكرة إلى الملفات الكبيرة على القرص، مما يسمح لـ Milvus بتخزين الفهارس والبيانات في كل من الذاكرة والأقراص الصلبة. يساعد هذا النهج في تحسين سياسة وضع البيانات استناداً إلى تكرار الوصول، مما يزيد من سعة التخزين للمجموعات دون التأثير على أداء البحث.</p><p>لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/mmap.md">استخدام mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>عند تمكين عزل مفتاح التقسيم، يقوم Milvus بتجميع الكيانات استناداً إلى قيمة مفتاح التقسيم ويقوم بإنشاء فهرس منفصل لكل مجموعة من هذه المجموعات. عند تلقي طلب بحث، يقوم Milvus بتحديد موقع الفهرس استناداً إلى قيمة مفتاح التقسيم المحددة في شرط التصفية ويقيد نطاق البحث ضمن الكيانات المضمنة في الفهرس، وبالتالي تجنب مسح الكيانات غير ذات الصلة أثناء البحث وتحسين أداء البحث بشكل كبير. لمزيد من التفاصيل، راجع <a href="/docs/ar/use-partition-key.md#Use-Partition-Key-Isolation">استخدام عزل مفتاح التقسيم</a>.</p></td>
+     <td><p>عند تمكين عزل مفتاح التقسيم، يقوم Milvus بتجميع الكيانات استناداً إلى قيمة مفتاح التقسيم ويقوم بإنشاء فهرس منفصل لكل مجموعة من هذه المجموعات. عند تلقي طلب بحث، يقوم Milvus بتحديد موقع الفهرس استناداً إلى قيمة مفتاح التقسيم المحددة في شرط التصفية ويقيد نطاق البحث ضمن الكيانات المضمنة في الفهرس، وبالتالي تجنب مسح الكيانات غير ذات الصلة أثناء البحث وتحسين أداء البحث بشكل كبير. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/use-partition-key.md#Use-Partition-Key-Isolation">استخدام عزل مفتاح التقسيم</a>.</p></td>
    </tr>
 </table>
 <h2 id="Drop-Collection-Properties" class="common-anchor-header">إسقاط خصائص المجموعة<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">

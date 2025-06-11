@@ -5,6 +5,7 @@ summary: >-
   يصف هذا الموضوع كيفية جمع السجلات باستخدام Loki وسجلات الاستعلام لمجموعة
   Milvus باستخدام Grafana.
 ---
+
 <h1 id="Configure-Grafana-Loki" class="common-anchor-header">تكوين Grafana Loki<button data-href="#Configure-Grafana-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>لقد قمت بتثبيت <a href="/docs/ar/install_cluster-helm.md">مجموعة ميلفوس على K8s</a>.</li>
+<li>لقد قمت بتثبيت <a href="/docs/ar/v2.5.x/install_cluster-helm.md">مجموعة ميلفوس على K8s</a>.</li>
 <li>قمت بتثبيت الأدوات اللازمة، بما في ذلك <a href="https://helm.sh/docs/intro/install/">Helm</a> و <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">نشر لوكي<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">
@@ -75,8 +76,9 @@ helm repo update
   <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
 
 <span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
+<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>الخيار 2: استخدام AWS S3 للتخزين</p>
 <p>في المثال التالي، استبدل <code translate="no">&lt;accessKey&gt;</code> و <code translate="no">&lt;keyId&gt;</code> بمفتاح ومعرف الوصول إلى S3 الخاص بك، و <code translate="no">s3.endpoint</code> بنقطة نهاية S3، و <code translate="no">s3.region</code> بمنطقة S3.</p>
 <pre><code translate="no" class="language-yaml">loki:

@@ -3,6 +3,7 @@ id: main_components.md
 summary: Узнайте об основных компонентах автономной и кластерной системы Milvus.
 title: Основные компоненты
 ---
+
 <h1 id="Main-Components" class="common-anchor-header">Основные компоненты<button data-href="#Main-Components" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,5 +95,5 @@ title: Основные компоненты
         ></path>
       </svg>
     </button></h2><ul>
-<li>Прочитайте <a href="/docs/ru/four_layers.md">раздел "Вычисления/распределение хранилищ"</a>, чтобы понять механизм и принцип работы Milvus.</li>
+<li>Прочитайте <a href="/docs/ru/v2.5.x/four_layers.md">раздел "Вычисления/распределение хранилищ"</a>, чтобы понять механизм и принцип работы Milvus.</li>
 </ul>

@@ -1,9 +1,10 @@
 ---
 id: configure-querynode-localdisk.md
 title: 로컬 디스크로 Milvus QueryNode 구성하기
-related_key: 'querynode, query node, local disk'
+related_key: "querynode, query node, local disk"
 summary: 로컬 디스크를 사용하도록 Milvus QueryNode를 구성하는 방법을 알아보세요.
 ---
+
 <h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">로컬 디스크로 Milvus QueryNode 구성하기<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,11 +39,11 @@ summary: 로컬 디스크를 사용하도록 Milvus QueryNode를 구성하는 �
     </button></h2><p>Milvus는 방대한 양의 벡터 데이터를 효율적으로 저장하고 검색할 수 있도록 맞춤화된 AI 중심 벡터 데이터베이스입니다. 이미지 및 동영상 분석, 자연어 처리, 추천 시스템과 같은 작업에 이상적입니다. 최적의 성능을 보장하려면 디스크 읽기 지연 시간을 최소화하는 것이 중요합니다. 지연을 방지하고 시스템 안정성을 유지하려면 로컬 NVMe SSD를 사용하는 것이 좋습니다.</p>
 <p>로컬 디스크 스토리지가 중요한 역할을 하는 주요 기능은 다음과 같습니다:</p>
 <ul>
-<li><a href="/docs/ko/chunk_cache.md"><strong>청크 캐시</strong></a>: 빠른 검색을 위해 로컬 디스크 캐시에 데이터를 미리 로드합니다.</li>
-<li><a href="/docs/ko/mmap.md"><strong>MMap</strong></a>: 메모리 효율성을 높이기 위해 파일 콘텐츠를 메모리에 직접 매핑합니다.</li>
-<li><a href="/docs/ko/disk_index.md"><strong>DiskANN 인덱스</strong></a>: 효율적인 인덱스 관리를 위해 디스크 스토리지가 필요합니다.</li>
+<li><a href="/docs/ko/v2.5.x/chunk_cache.md"><strong>청크 캐시</strong></a>: 빠른 검색을 위해 로컬 디스크 캐시에 데이터를 미리 로드합니다.</li>
+<li><a href="/docs/ko/v2.5.x/mmap.md"><strong>MMap</strong></a>: 메모리 효율성을 높이기 위해 파일 콘텐츠를 메모리에 직접 매핑합니다.</li>
+<li><a href="/docs/ko/v2.5.x/disk_index.md"><strong>DiskANN 인덱스</strong></a>: 효율적인 인덱스 관리를 위해 디스크 스토리지가 필요합니다.</li>
 </ul>
-<p>이 문서에서는 클라우드 플랫폼에 <a href="/docs/ko/install-overview.md#Milvus-Distributed">Milvus Distributed를</a> 배포하는 방법과 NVMe 디스크 스토리지를 사용하도록 쿼리 노드를 구성하는 방법에 대해 중점적으로 설명합니다. 다음 표에는 다양한 클라우드 제공업체의 권장 머신 유형이 나와 있습니다.</p>
+<p>이 문서에서는 클라우드 플랫폼에 <a href="/docs/ko/v2.5.x/install-overview.md#Milvus-Distributed">Milvus Distributed를</a> 배포하는 방법과 NVMe 디스크 스토리지를 사용하도록 쿼리 노드를 구성하는 방법에 대해 중점적으로 설명합니다. 다음 표에는 다양한 클라우드 제공업체의 권장 머신 유형이 나와 있습니다.</p>
 <table>
 <thead>
 <tr><th style="text-align:center">클라우드 제공자</th><th style="text-align:center">머신 유형</th></tr>
@@ -86,21 +87,22 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <span class="hljs-comment">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Running custom user data script&quot;</span>
 <span class="hljs-keyword">if</span> ( lsblk | fgrep -q nvme1n1 ); <span class="hljs-keyword">then</span>
-    <span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
-    mkfs.xfs /dev/nvme1n1
-    mount /dev/nvme1n1 /mnt/data
-    <span class="hljs-built_in">chmod</span> 0755 /mnt/data
-    <span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
-    <span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
-    UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
-    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span>     /mnt/data   xfs    defaults,noatime  1   1&quot;</span> &gt;&gt; /etc/fstab
+<span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
+mkfs.xfs /dev/nvme1n1
+mount /dev/nvme1n1 /mnt/data
+<span class="hljs-built_in">chmod</span> 0755 /mnt/data
+<span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
+<span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
+<span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
+<span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
+UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span> /mnt/data xfs defaults,noatime 1 1&quot;</span> &gt;&gt; /etc/fstab
 <span class="hljs-keyword">fi</span>
 <span class="hljs-built_in">echo</span> 10485760 &gt; /proc/sys/fs/aio-max-nr
 
 --==MYBOUNDARY==--
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>위의 예에서는 NVMe 디스크가 <code translate="no">/dev/nvme1n1</code> 이라고 가정합니다. 특정 구성에 맞게 스크립트를 수정해야 합니다.</p>
 </div>
@@ -122,6 +124,7 @@ mkfs.xfs /dev/md0
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/dev/md0 /var/lib/kubelet xfs defaults 0 0&#x27;</span> &gt;&gt; /etc/fstab
 mount -a
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>위의 예에서는 NVMe 디스크가 <code translate="no">/dev/nvme0n1</code> 및 <code translate="no">/dev/nvme1n1</code> 이라고 가정합니다. 특정 구성에 맞게 스크립트를 수정해야 합니다.</p>
 </div>
@@ -134,7 +137,7 @@ mkfs.xfs /dev/nvme0n1
 mount -a
 
 <span class="hljs-built_in">mkdir</span> -p /mnt/data/kubelet /mnt/data/containerd /mnt/data/log/pods
-<span class="hljs-built_in">mkdir</span> -p  /var/lib/kubelet /var/lib/containerd /var/log/pods
+<span class="hljs-built_in">mkdir</span> -p /var/lib/kubelet /var/lib/containerd /var/log/pods
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/kubelet /var/lib/kubelet none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/containerd /var/lib/containerd none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
@@ -143,6 +146,7 @@ mount -a
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init end...&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>위 예제에서는 NVMe 디스크가 <code translate="no">/dev/nvme0n1</code> 이라고 가정합니다. 특정 구성에 맞게 스크립트를 수정해야 합니다.</p>
 </div>
@@ -219,8 +223,9 @@ fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numj
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
-fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1  --<span class="hljs-built_in">readonly</span>
+fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1 --<span class="hljs-built_in">readonly</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력은 다음과 같아야 합니다:</p>
 <pre><code translate="no" class="language-bash">Jobs: <span class="hljs-number">128</span> (f=<span class="hljs-number">128</span>): [r(<span class="hljs-number">128</span>)][<span class="hljs-number">100.0</span>%][r=1458MiB/s][r=373k IOPS][eta 00m:00s]
 iops-test-job: (groupid=<span class="hljs-number">0</span>, jobs=<span class="hljs-number">128</span>): err= <span class="hljs-number">0</span>: pid=<span class="hljs-number">768</span>: Mon Jun <span class="hljs-number">24</span> 09:<span class="hljs-number">35</span>:06 <span class="hljs-number">2024</span>
@@ -266,7 +271,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>확인 결과가 만족스러우면 다음 단계에 따라 Milvus Distributed를 배포할 수 있습니다:</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">헬름을 사용하여 밀버스 배포를 위한 팁</h3><p>쿼리노드 파드는 기본적으로 NVMe 디스크를 EmptyDir 볼륨으로 사용한다. 최적의 성능을 보장하려면 NVMe 디스크를 쿼리노드 파드 내의 <code translate="no">/var/lib/milvus/data</code> 에 마운트하는 것이 좋다.</p>
-<p>헬름을 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>
+<p>헬름을 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">밀버스 오퍼레이터를 사용하여 밀버스 디스트리뷰티드 배포를 위한 팁</h3><p>밀버스 오퍼레이터는 NVMe 디스크를 EmptyDir 볼륨으로 사용하도록 쿼리노드 파드를 자동으로 구성한다. <code translate="no">MilvusCluster</code> 사용자 정의 리소스에 다음 구성을 추가하는 것이 좋습니다:</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -279,4 +284,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>이렇게 하면 쿼리노드 파드가 NVMe 디스크를 데이터 볼륨으로 사용하게 됩니다. 밀버스 오퍼레이터를 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/install_cluster-milvusoperator.md">밀버스 오퍼레이터로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>
+<p>이렇게 하면 쿼리노드 파드가 NVMe 디스크를 데이터 볼륨으로 사용하게 됩니다. 밀버스 오퍼레이터를 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/install_cluster-milvusoperator.md">밀버스 오퍼레이터로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>

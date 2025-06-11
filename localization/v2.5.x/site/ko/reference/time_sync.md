@@ -3,6 +3,7 @@ id: time_sync.md
 title: 시간 동기화
 summary: Milvus의 시간 동기화 시스템에 대해 알아보세요.
 ---
+
 <h1 id="Time-Synchronization" class="common-anchor-header">시간 동기화<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: Milvus의 시간 동기화 시스템에 대해 알아보세요.
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/timestamp.md">타임스탬프의</a> 개념에 대해 알아보세요.</li>
-<li>Milvus의 <a href="/docs/ko/data_processing.md">데이터 처리 워크플로우에</a> 대해 알아보세요.</li>
+<li><a href="/docs/ko/v2.5.x/timestamp.md">타임스탬프의</a> 개념에 대해 알아보세요.</li>
+<li>Milvus의 <a href="/docs/ko/v2.5.x/data_processing.md">데이터 처리 워크플로우에</a> 대해 알아보세요.</li>
 </ul>

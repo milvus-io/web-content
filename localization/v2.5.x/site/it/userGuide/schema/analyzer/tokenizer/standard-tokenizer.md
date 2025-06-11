@@ -5,6 +5,7 @@ summary: >-
   Il tokenizer standard di Milvus divide il testo in base agli spazi e ai segni
   di punteggiatura, rendendolo adatto alla maggior parte delle lingue.
 ---
+
 <h1 id="Standard-Tokenizer" class="common-anchor-header">Tokenizzatore standard<button data-href="#Standard-Tokenizer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,9 +86,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Per una configurazione più semplice, si può scegliere di utilizzare l'<a href="/docs/it/standard-analyzer.md">analizzatore</a> <code translate="no">standard</code>, che combina il tokenizer <code translate="no">standard</code> con il<a href="/docs/it/lowercase-filter.md"> filtro</a> <code translate="no">lowercase</code><a href="/docs/it/lowercase-filter.md"></a>.</p>
+<p>Per una configurazione più semplice, si può scegliere di utilizzare l'<a href="/docs/it/v2.5.x/standard-analyzer.md">analizzatore</a> <code translate="no">standard</code>, che combina il tokenizer <code translate="no">standard</code> con il<a href="/docs/it/v2.5.x/lowercase-filter.md"> filtro</a> <code translate="no">lowercase</code><a href="/docs/it/v2.5.x/lowercase-filter.md"></a>.</p>
 </div>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Questo permette a Milvus di elaborare il testo di quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, consultare l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Questo permette a Milvus di elaborare il testo di quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, consultare l'<a href="/docs/it/v2.5.x/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,6 +137,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

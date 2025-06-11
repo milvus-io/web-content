@@ -5,6 +5,7 @@ summary: >-
   信息检索（IR）系统，又称搜索引擎，对于检索增强生成（RAG）、图像搜索和产品推荐等各种人工智能应用至关重要。开发 IR
   系统的第一步是设计数据模型，其中包括分析业务需求、确定如何组织信息以及为数据编制索引，使其具有语义可搜索性。
 ---
+
 <h1 id="Schema-Design-Hands-On" class="common-anchor-header">Schema 设计实践<button data-href="#Schema-Design-Hands-On" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,19 +118,20 @@ collection_name = <span class="hljs-string">&quot;my_collection&quot;</span>
 client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
+auto_id=<span class="hljs-literal">False</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;article_id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;article id&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;title&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">200</span>, description=<span class="hljs-string">&quot;article title&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;author_info&quot;</span>, datatype=DataType.JSON, description=<span class="hljs-string">&quot;author information&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>, datatype=DataType.INT32, description=<span class="hljs-string">&quot;publish timestamp&quot;</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;image_url&quot;</span>, datatype=DataType.VARCHAR,  max_length=<span class="hljs-number">500</span>, description=<span class="hljs-string">&quot;image URL&quot;</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;image_url&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">500</span>, description=<span class="hljs-string">&quot;image URL&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;image_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;image vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, description=<span class="hljs-string">&quot;article summary&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;summary dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;summary sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -365,8 +367,8 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <p>您可能会注意到<code translate="no">MilvusClient</code> 中的参数<code translate="no">uri</code> ，它用于连接 Milvus 服务器。参数设置如下：</p>
 <ul>
-<li><p>如果你只需要一个本地向量数据库，用于小规模数据或原型设计，那么将 uri 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="/docs/zh/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</p></li>
-<li><p>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="/docs/zh/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器地址和端口作为 uri，例如<code translate="no">http://localhost:19530</code> 。如果在 Milvus 上启用了身份验证功能，请使用 "<your_username>:<your_password>" 作为令牌，否则不要设置令牌。</p></li>
+<li><p>如果你只需要一个本地向量数据库，用于小规模数据或原型设计，那么将 uri 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="/docs/zh/v2.5.x/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</p></li>
+<li><p>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="/docs/zh/v2.5.x/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器地址和端口作为 uri，例如<code translate="no">http://localhost:19530</code> 。如果在 Milvus 上启用了身份验证功能，请使用 "<your_username>:<your_password>" 作为令牌，否则不要设置令牌。</p></li>
 <li><p>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的公共端点和 API 密钥相对应。</p></li>
 </ul>
 <p>至于<code translate="no">MilvusClient.create_schema</code> 中的<code translate="no">auto_id</code> ，AutoID 是主字段的一个属性，用于决定是否启用主字段自动递增。  由于我们将字段<code translate="no">article_id</code> 设置为主键，并希望手动添加文章 id，因此我们将<code translate="no">auto_id</code> 设置为 False 以禁用此功能。</p>
@@ -377,25 +379,26 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>,
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
+field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>,
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 <span class="hljs-keyword">import</span> java.util.ArrayList;
@@ -490,7 +493,7 @@ indexParams=<span class="hljs-string">&#x27;[
 
 <button class="copy-code-btn"></button></code></pre>
 <p>一旦设置并应用了索引参数，Milvus 就能优化处理向量和标量数据的复杂查询。这种索引增强了 Collections 内相似性搜索的性能和准确性，可根据图像向量和摘要向量高效检索文章。通过利用针对密集向量的<code translate="no">AUTOINDEX</code> 、针对稀疏向量的<code translate="no">SPARSE_INVERTED_INDEX</code> 和针对标量的<code translate="no">INVERTED_INDEX</code> ，Milvus 可以快速识别并返回最相关的结果，从而显著改善数据检索过程的整体用户体验和效率。</p>
-<p>索引和度量指标有多种类型。有关它们的更多信息，可参考<a href="/docs/zh/overview.md#Index-types">Milvus 索引类型</a>和<a href="/docs/zh/glossary.md#Metric-type">Milvus 度量类型</a>。</p>
+<p>索引和度量指标有多种类型。有关它们的更多信息，可参考<a href="/docs/zh/v2.5.x/overview.md#Index-types">Milvus 索引类型</a>和<a href="/docs/zh/v2.5.x/glossary.md#Metric-type">Milvus 度量类型</a>。</p>
 <h3 id="Create-Collection" class="common-anchor-header">创建 Collections</h3><p>定义好 Schema 和索引后，我们就可以用这些参数创建一个 "Collection"。对于 Milvus 来说，Collection 就像关系数据库中的表。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -533,6 +536,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>我们可以通过描述集合来验证集合是否已成功创建。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -584,4 +588,4 @@ curl --request POST \
       </svg>
     </button></h2><h3 id="Loading-Index" class="common-anchor-header">加载索引</h3><p>在 Milvus 中创建 Collections 时，你可以选择立即加载索引，或者推迟到批量摄取一些数据之后再加载。通常情况下，您不需要对此做出明确的选择，因为上述示例显示，在创建 Collections 后，会立即为任何摄取的数据自动建立索引。这样就能立即搜索到采集的数据。不过，如果在创建 Collections 后有大量批量插入，并且在某一点之前不需要搜索任何数据，那么可以通过在创建 Collections 时省略 index_params 来推迟索引构建，并在摄取所有数据后通过显式调用 load 来构建索引。这种方法对于在大型 Collections 上建立索引更有效，但在调用 load() 之前不能进行任何搜索。</p>
 <h3 id="How-to-Define-Data-Model-For-Multi-tenancy" class="common-anchor-header">如何为多租户定义数据模型</h3><p>多租户的概念通常用于单个软件应用程序或服务需要为多个独立用户或组织提供服务的情况，每个用户或组织都有自己的独立环境。这种情况经常出现在云计算、SaaS（软件即服务）应用和数据库系统中。例如，云存储服务可以利用多租户功能，允许不同公司分别存储和管理数据，同时共享相同的底层基础设施。这种方法可以最大限度地提高资源利用率和效率，同时确保每个租户的数据安全和隐私。</p>
-<p>区分租户的最简单方法是将其数据和资源相互隔离。每个租户要么独享特定资源，要么与其他租户共享资源，以管理数据库、Collections 和分区等 Milvus 实体。有与这些实体相匹配的特定方法来实现多租户。你可以参考<a href="/docs/zh/multi_tenancy.md#Multi-tenancy-strategies">Milvus 多租户页面</a>了解更多信息。</p>
+<p>区分租户的最简单方法是将其数据和资源相互隔离。每个租户要么独享特定资源，要么与其他租户共享资源，以管理数据库、Collections 和分区等 Milvus 实体。有与这些实体相匹配的特定方法来实现多租户。你可以参考<a href="/docs/zh/v2.5.x/multi_tenancy.md#Multi-tenancy-strategies">Milvus 多租户页面</a>了解更多信息。</p>

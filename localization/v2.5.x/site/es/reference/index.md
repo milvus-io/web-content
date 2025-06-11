@@ -4,6 +4,7 @@ related_key: index
 summary: Mecanismo de índice en Milvus.
 title: Índice en memoria
 ---
+
 <h1 id="In-memory-Index" class="common-anchor-header">Índice en memoria<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,9 +20,9 @@ title: Índice en memoria
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este tema enumera varios tipos de índices en memoria que Milvus soporta, los escenarios que mejor se adaptan a cada uno de ellos y los parámetros que los usuarios pueden configurar para lograr un mejor rendimiento de búsqueda. Para índices en disco, consulte <strong><a href="/docs/es/disk_index.md">Índice en disco</a></strong>.</p>
+    </button></h1><p>Este tema enumera varios tipos de índices en memoria que Milvus soporta, los escenarios que mejor se adaptan a cada uno de ellos y los parámetros que los usuarios pueden configurar para lograr un mejor rendimiento de búsqueda. Para índices en disco, consulte <strong><a href="/docs/es/v2.5.x/disk_index.md">Índice en disco</a></strong>.</p>
 <p>La indexación es el proceso de organización eficiente de los datos, y desempeña un papel fundamental en la utilidad de la búsqueda de similitudes al acelerar drásticamente las consultas que consumen mucho tiempo en grandes conjuntos de datos.</p>
-<p>Para mejorar el rendimiento de las consultas, puede <a href="/docs/es/index-vector-fields.md">especificar un tipo de índice</a> para cada campo vectorial.</p>
+<p>Para mejorar el rendimiento de las consultas, puede <a href="/docs/es/v2.5.x/index-vector-fields.md">especificar un tipo de índice</a> para cada campo vectorial.</p>
 <div class="alert note">
 Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina automáticamente el índice antiguo al cambiar el tipo de índice.</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">Índices vectoriales ANNS<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +61,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <div class="filter">
  <a href="#sparse">Incrustaciones</a> <a href="#floating">en coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incrustaciones de coma flotante</h3><p>En el caso de las incrustaciones de coma flotante de 128 dimensiones (vectores), el almacenamiento que ocupan es de 128 * el tamaño de float = 512 bytes. Y las <a href="/docs/es/metric.md">métricas de distancia</a> utilizadas para las incrustaciones en coma flotante son la distancia euclidiana (<code translate="no">L2</code>) y el producto interior (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incrustaciones de coma flotante</h3><p>En el caso de las incrustaciones de coma flotante de 128 dimensiones (vectores), el almacenamiento que ocupan es de 128 * el tamaño de float = 512 bytes. Y las <a href="/docs/es/v2.5.x/metric.md">métricas de distancia</a> utilizadas para las incrustaciones en coma flotante son la distancia euclidiana (<code translate="no">L2</code>) y el producto interior (<code translate="no">IP</code>).</p>
 <p>Estos tipos de índices incluyen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, y <code translate="no">SCANN</code> para búsquedas RNA basadas en CPU.</p>
 </div>
 <div class="filter-binary">
@@ -71,7 +72,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Índices para incrustaciones dispersas</h3><p>Los índices para incrustaciones dispersas sólo admiten las métricas <code translate="no">IP</code> y <code translate="no">BM25</code> (para búsqueda de texto completo).</p>
 <p>Tipo de índice admitido para incrustaciones dispersas: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
-<p>A partir de Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> queda obsoleto. En su lugar, se recomienda utilizar <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> por equivalencia y manteniendo la compatibilidad. Para más información, consulte <a href="/docs/es/sparse_vector.md#Set-index-params-for-vector-field">Vector disperso</a>.</p>
+<p>A partir de Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> queda obsoleto. En su lugar, se recomienda utilizar <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> por equivalencia y manteniendo la compatibilidad. Para más información, consulte <a href="/docs/es/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">Vector disperso</a>.</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
@@ -247,7 +248,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <tr><th>Parámetro</th><th>Descripción</th><th>Rango</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Opcional] La métrica de distancia elegida.</td><td>Véase <a href="/docs/es/metric.md">Métricas admitidas</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Opcional] La métrica de distancia elegida.</td><td>Véase <a href="/docs/es/v2.5.x/metric.md">Métricas admitidas</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -537,7 +538,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <tr><th>Parámetro</th><th>Descripción</th><th>Rango</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Opcional] La métrica de distancia elegida.</td><td>Véase <a href="/docs/es/metric.md">Métricas admitidas</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Opcional] La métrica de distancia elegida.</td><td>Véase <a href="/docs/es/v2.5.x/metric.md">Métricas admitidas</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -591,7 +592,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <tr><th>Parámetro</th><th>Descripción</th><th>Rango</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>El algoritmo utilizado para construir y consultar el índice. Para más detalles, consulte <a href="/docs/es/sparse_vector.md#Set-index-params-for-vector-field">Vector disperso</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (por defecto), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>El algoritmo utilizado para construir y consultar el índice. Para más detalles, consulte <a href="/docs/es/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">Vector disperso</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (por defecto), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 <tr><td><code translate="no">bm25_k1</code></td><td>Controla la saturación de la frecuencia de términos. Los valores más altos aumentan la importancia de las frecuencias de términos en la clasificación de documentos.</td><td>[1.2, 2.0]</td></tr>
 <tr><td><code translate="no">bm25_b</code></td><td>Controla el grado de normalización de la longitud del documento. El valor predeterminado es 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
@@ -651,5 +652,5 @@ Consulte <a href="https://medium.com/unstructured-data-service/how-to-choose-an-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Obtenga más información sobre <a href="/docs/es/metric.md">las métricas de similitud</a> admitidas en Milvus.</li>
+<li>Obtenga más información sobre <a href="/docs/es/v2.5.x/metric.md">las métricas de similitud</a> admitidas en Milvus.</li>
 </ul>

@@ -4,6 +4,7 @@ title: Milvus 로드맵
 related_key: Milvus roadmap
 summary: Milvus는 AI 애플리케이션을 구동하기 위해 구축된 오픈 소스 벡터 데이터베이스입니다. 개발 로드맵은 다음과 같습니다.
 ---
+
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus 로드맵<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,7 +76,7 @@ summary: Milvus는 AI 애플리케이션을 구동하기 위해 구축된 오픈
 <li>저희 로드맵은 일반적으로 가장 최근 릴리즈, 다음 릴리즈, 그리고 향후 1년 이내의 중장기 비전 등 세 부분으로 구성됩니다.</li>
 <li>진행 과정에서 지속적으로 학습하고 필요에 따라 항목을 추가하거나 제거하면서 초점을 조정하기도 합니다.</li>
 <li>이러한 계획은 참고용이며 변경될 수 있으며 구독 서비스에 따라 달라질 수 있습니다.</li>
-<li>저희는 꾸준히 로드맵을 준수하고 있으며, <a href="/docs/ko/release_notes.md">릴리즈 노트는</a> 참고 자료로 활용하고 있습니다.</li>
+<li>저희는 꾸준히 로드맵을 준수하고 있으며, <a href="/docs/ko/v2.5.x/release_notes.md">릴리즈 노트는</a> 참고 자료로 활용하고 있습니다.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">기여 방법<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -5,6 +5,7 @@ summary: >-
   Découvrez le concept d'horodatage et les quatre principaux paramètres liés à
   l'horodatage dans la base de données vectorielle Milvus.
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">Horodatage<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,5 +106,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Découvrez comment l <a href="/docs/fr/consistency.md">'horodatage garanti permet une cohérence réglable dans Milvus</a>.</li>
+<li>Découvrez comment l <a href="/docs/fr/v2.5.x/consistency.md">'horodatage garanti permet une cohérence réglable dans Milvus</a>.</li>
 </ul>

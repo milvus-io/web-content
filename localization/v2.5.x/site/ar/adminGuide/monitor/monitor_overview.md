@@ -1,11 +1,12 @@
 ---
 id: monitor_overview.md
 title: نظرة عامة على الشاشة
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: >-
   تعرّف على كيفية استخدام Prometheus وGrafana في Milvus لمراقبة خدمات المراقبة
   والتنبيه.
 ---
+
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">نظرة عامة على إطار عمل مراقبة ميلفوس<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +108,7 @@ summary: >-
       </svg>
     </button></h2><p>بعد التعرف على سير العمل الأساسي للمراقبة والتنبيه، تعلّم</p>
 <ul>
-<li><a href="/docs/ar/monitor.md">نشر خدمات المراقبة</a></li>
-<li><a href="/docs/ar/visualize.md">تصور مقاييس ميلفوس</a></li>
-<li><a href="/docs/ar/alert.md">إنشاء تنبيه</a></li>
+<li><a href="/docs/ar/v2.5.x/monitor.md">نشر خدمات المراقبة</a></li>
+<li><a href="/docs/ar/v2.5.x/visualize.md">تصور مقاييس ميلفوس</a></li>
+<li><a href="/docs/ar/v2.5.x/alert.md">إنشاء تنبيه</a></li>
 </ul>

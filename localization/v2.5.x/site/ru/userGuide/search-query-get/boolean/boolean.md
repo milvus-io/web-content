@@ -10,6 +10,7 @@ summary: >-
   операции запроса. Вы также можете применять эти фильтры в запросах на поиск и
   удаление.
 ---
+
 <h1 id="Filtering-Explained" class="common-anchor-header">Объяснение фильтрации<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +58,7 @@ summary: >-
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Пример: Фильтрация полей массива</h3><p>Если у вас есть поле массива <code translate="no">history_temperatures</code>, содержащее записи о средних температурах, зарегистрированных обсерваториями с 2000 года, и вы хотите найти обсерватории, в которых температура в 2009 году (10-я запись) превысила 23 °C, используйте это выражение:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительные сведения об этих базовых операторах см. в разделе <a href="/docs/ru/basic-operators.md">Базовые операторы</a>.</p>
+<p>Дополнительные сведения об этих базовых операторах см. в разделе <a href="/docs/ru/v2.5.x/basic-operators.md">Базовые операторы</a>.</p>
 <h2 id="Filter-expression-templates" class="common-anchor-header">Шаблоны выражений фильтрации<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +83,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>Такой подход снижает накладные расходы на синтаксический разбор и повышает скорость выполнения запросов. Дополнительные сведения см. в разделе <a href="/docs/ru/filtering-templating.md">Шаблонизация фильтров</a>.</p>
+<p>Такой подход снижает накладные расходы на синтаксический разбор и повышает скорость выполнения запросов. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/filtering-templating.md">Шаблонизация фильтров</a>.</p>
 <h2 id="Data-type-specific-operators" class="common-anchor-header">Операторы, специфичные для типов данных<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,7 +113,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Более подробную информацию об операторах JSON см. в разделе <a href="/docs/ru/json-operators.md">Операторы JSON</a>.</p>
+<p>Более подробную информацию об операторах JSON см. в разделе <a href="/docs/ru/v2.5.x/json-operators.md">Операторы JSON</a>.</p>
 <h3 id="ARRAY-field-specific-operators" class="common-anchor-header">Операторы, специфичные для полей ARRAY</h3><p>Milvus предоставляет расширенные операторы фильтрации для полей массивов, таких как <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, и <code translate="no">ARRAY_LENGTH</code>, которые позволяют осуществлять тонкий контроль над данными массива:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: : Фильтрует сущности, содержащие определенный элемент.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
@@ -126,7 +127,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_LENGTH</code>: Фильтрует на основе длины массива.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Более подробную информацию об операторах массивов см. в разделе <a href="/docs/ru/array-operators.md">Операторы ARRAY</a>.</p>
+<p>Более подробную информацию об операторах массивов см. в разделе <a href="/docs/ru/v2.5.x/array-operators.md">Операторы ARRAY</a>.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Операторы, специфичные для полей VARCHAR</h3><p>Milvus предоставляет специализированные операторы для точного текстового поиска по полям VARCHAR:</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> оператор</h4><p>Оператор <code translate="no">TEXT_MATCH</code> позволяет осуществлять точный поиск документов на основе определенных терминов запроса. Он особенно полезен для фильтрованного поиска, сочетающего скалярные фильтры с поиском по векторному сходству. В отличие от семантического поиска, Text Match фокусируется на точных вхождениях терминов.</p>
 <p>Milvus использует Tantivy для поддержки инвертированного индексирования и текстового поиска по терминам. Процесс включает в себя:</p>
@@ -134,4 +135,4 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>Анализатор</strong>: Токенизирует и обрабатывает входной текст.</p></li>
 <li><p><strong>Индексирование</strong>: Создает инвертированный индекс, сопоставляющий уникальные лексемы с документами.</p></li>
 </ol>
-<p>Более подробную информацию см. в разделе <a href="/docs/ru/keyword-match.md">"Сопоставление текста"</a>.</p>
+<p>Более подробную информацию см. в разделе <a href="/docs/ru/v2.5.x/keyword-match.md">"Сопоставление текста"</a>.</p>

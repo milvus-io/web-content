@@ -4,6 +4,7 @@ title: 再ランキング
 summary: >-
   ハイブリッド・サーチは、複数のANN検索を同時に行うことで、より正確な検索結果を実現する。複数の検索は複数の結果セットを返すため、結果をマージし、並べ替え、単一の結果セットを返すためのリランキング戦略が必要となります。このガイドでは、Milvusがサポートするリランキング戦略を紹介し、適切なリランキング戦略を選択するためのヒントを提供します。
 ---
+
 <h1 id="Reranking" class="common-anchor-header">再ランキング<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,8 +43,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>マルチベクトル再ランク</span> </span></p>
 <p>ハイブリッド検索において、再ランク付けは複数のベクトル検索の結果を統合し、最終的な出力が最も関連性が高く正確であることを保証する重要なステップです。現在、Milvusは以下の2つのリランキング戦略をサポートしています：</p>
 <ul>
-<li><p><strong><a href="/docs/ja/reranking.md#WeightedRanker">WeightedRanker</a></strong>：このストラテジーは、異なるベクトル検索からのスコア（または距離）に重み付けされたスコアを計算することで結果を統合します。重み付けは各ベクトルフィールドの重要度に基づいて割り当てられるため、特定のユースケースの優先順位に従ってカスタマイズすることができます。</p></li>
-<li><p><strong><a href="/docs/ja/reranking.md#RRFRanker">RRFRanker（Reciprocal</a>Rank Fusion Ranker）</strong>：このストラテジーは、ランキングに基づいて結果を組み合わせる。異なる検索結果のランクをバランスさせる方法を使用し、多くの場合、多様なデータタイプやモダリティをより公平かつ効果的に統合します。</p></li>
+<li><p><strong><a href="/docs/ja/v2.5.x/reranking.md#WeightedRanker">WeightedRanker</a></strong>：このストラテジーは、異なるベクトル検索からのスコア（または距離）に重み付けされたスコアを計算することで結果を統合します。重み付けは各ベクトルフィールドの重要度に基づいて割り当てられるため、特定のユースケースの優先順位に従ってカスタマイズすることができます。</p></li>
+<li><p><strong><a href="/docs/ja/v2.5.x/reranking.md#RRFRanker">RRFRanker（Reciprocal</a>Rank Fusion Ranker）</strong>：このストラテジーは、ランキングに基づいて結果を組み合わせる。異なる検索結果のランクをバランスさせる方法を使用し、多くの場合、多様なデータタイプやモダリティをより公平かつ効果的に統合します。</p></li>
 </ul>
 <h2 id="WeightedRanker" class="common-anchor-header">重み付けランカー<button data-href="#WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -225,8 +226,9 @@ summary: >-
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
-rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) 
+rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.WeightedRanker;
 
 <span class="hljs-type">WeightedRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeightedRanker</span>(Arrays.asList(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.3f</span>))
@@ -423,6 +425,7 @@ reranker := milvusclient.NewWeightedReranker([]<span class="hljs-type">float64</
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 <span class="hljs-type">RRFRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);

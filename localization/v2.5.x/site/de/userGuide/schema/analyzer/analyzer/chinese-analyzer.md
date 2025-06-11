@@ -5,6 +5,7 @@ summary: >-
   Der chinesische Analyzer wurde speziell für die Bearbeitung chinesischer Texte
   entwickelt und bietet eine effektive Segmentierung und Tokenisierung.
 ---
+
 <h1 id="Chinese" class="common-anchor-header">Chinesisch<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,8 +24,8 @@ summary: >-
     </button></h1><p>Der <code translate="no">chinese</code> analyzer wurde speziell für die Bearbeitung von chinesischem Text entwickelt und bietet eine effektive Segmentierung und Tokenisierung.</p>
 <h3 id="Definition" class="common-anchor-header">Definition</h3><p>Der <code translate="no">chinese</code> Analyzer besteht aus:</p>
 <ul>
-<li><p><strong>Tokenisierer</strong>: Verwendet den <code translate="no">jieba</code> Tokenizer, um chinesischen Text auf der Grundlage von Vokabular und Kontext in Token zu segmentieren. Weitere Informationen finden Sie unter <a href="/docs/de/jieba-tokenizer.md">Jieba</a>.</p></li>
-<li><p><strong>Filter</strong>: Verwendet den <code translate="no">cnalphanumonly</code> Filter, um Token zu entfernen, die nicht-chinesische Zeichen enthalten. Weitere Informationen finden Sie unter <a href="/docs/de/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
+<li><p><strong>Tokenisierer</strong>: Verwendet den <code translate="no">jieba</code> Tokenizer, um chinesischen Text auf der Grundlage von Vokabular und Kontext in Token zu segmentieren. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/jieba-tokenizer.md">Jieba</a>.</p></li>
+<li><p><strong>Filter</strong>: Verwendet den <code translate="no">cnalphanumonly</code> Filter, um Token zu entfernen, die nicht-chinesische Zeichen enthalten. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
 <p>Die Funktionalität des <code translate="no">chinese</code> Analyzers entspricht der folgenden benutzerdefinierten Analyzer-Konfiguration:</p>
 <div class="multipleCode">
@@ -54,6 +55,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Configuration" class="common-anchor-header">Konfiguration</h3><p>Um den <code translate="no">chinese</code> Analyzer auf ein Feld anzuwenden, setzen Sie einfach <code translate="no">type</code> auf <code translate="no">chinese</code> in <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -124,6 +126,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是一个高性能、可扩
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

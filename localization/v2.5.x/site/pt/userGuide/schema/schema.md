@@ -7,6 +7,7 @@ summary: >-
   compreender o esquema da coleção e a conceber um exemplo de esquema por si
   próprio.
 ---
+
 <h1 id="Schema-Explained​" class="common-anchor-header">Explicação do esquema<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +47,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Desenho do esquema</span> </span></p>
 <p>A conceção do modelo de dados de um sistema de pesquisa envolve a análise das necessidades comerciais e a abstração da informação num modelo de dados expresso em esquema. Por exemplo, a pesquisa de um texto deve ser "indexada" convertendo a cadeia literal num vetor através de "embedding" e permitindo a pesquisa vetorial. Para além deste requisito essencial, pode ser necessário armazenar outras propriedades, como o carimbo temporal da publicação e o autor. Estes metadados permitem que as pesquisas semânticas sejam refinadas através de filtragem, devolvendo apenas textos publicados após uma data específica ou por um determinado autor. Também pode obter estes escalares com o texto principal para apresentar o resultado da pesquisa na aplicação. A cada um deles deve ser atribuído um identificador único para organizar estas partes de texto, expresso como um número inteiro ou uma cadeia de caracteres. Esses elementos são essenciais para obter uma lógica de pesquisa sofisticada.</p>
-<p>Consulte a secção <a href="/docs/pt/schema-hands-on.md">Prática de conceção de esquemas</a> para saber como criar um esquema bem concebido.</p>
+<p>Consulte a secção <a href="/docs/pt/v2.5.x/schema-hands-on.md">Prática de conceção de esquemas</a> para saber como criar um esquema bem concebido.</p>
 <h2 id="Create-Schema​" class="common-anchor-header">Criar esquema<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,6 +71,7 @@ summary: >-
 schema = MilvusClient.create_schema()​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;​
 ​
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();​
@@ -113,6 +115,7 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; ​
 ​
@@ -152,7 +155,7 @@ export schema='{​
 </code></pre>
 <p>Ao adicionar um campo, pode clarificar explicitamente o campo como o campo primário, definindo a sua propriedade <code translate="no">is_primary</code> para <code translate="no">True</code>. Um campo primário aceita valores <strong>Int64</strong> por defeito. Neste caso, o valor do campo primário deve ser um número inteiro semelhante a <code translate="no">12345</code>. Se optar por utilizar valores <strong>VarChar</strong> no campo primário, o valor deve ser uma cadeia de caracteres semelhante a <code translate="no">my_entity_1234</code>.</p>
 <p>Também pode definir as propriedades <code translate="no">autoId</code> para <code translate="no">True</code> para que o Milvus atribua automaticamente os valores do campo primário aquando da inserção de dados.</p>
-<p>Para mais pormenores, consulte <a href="/docs/pt/primary-field.md">Primary Field &amp; AutoID</a>.</p>
+<p>Para mais pormenores, consulte <a href="/docs/pt/v2.5.x/primary-field.md">Primary Field &amp; AutoID</a>.</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">Adicionar campos vectoriais<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -179,6 +182,7 @@ export schema='{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
         .dataType(DataType.FloatVector)​
@@ -239,7 +243,7 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>Em casos comuns, pode utilizar campos escalares para armazenar os metadados das incorporações vectoriais armazenadas no Milvus e realizar pesquisas ANN com filtragem de metadados para melhorar a correção dos resultados da pesquisa. O Milvus suporta vários tipos de campos escalares, incluindo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> e JSON.</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">Adicionar campos String</h3><p>No Milvus, é possível usar campos VarChar para armazenar strings. Para saber mais sobre o campo VarChar, consulte <a href="/docs/pt/string.md">Campo String</a>.</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">Adicionar campos String</h3><p>No Milvus, é possível usar campos VarChar para armazenar strings. Para saber mais sobre o campo VarChar, consulte <a href="/docs/pt/v2.5.x/string.md">Campo String</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -250,6 +254,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
         .dataType(DataType.VarChar)​
@@ -284,7 +289,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">Adicionar campos numéricos</h3><p>Os tipos de números que o Milvus suporta são <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, e <code translate="no">Double</code>. Para mais informações sobre os campos numéricos, consulte <a href="/docs/pt/number.md">Campo numérico</a>.</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">Adicionar campos numéricos</h3><p>Os tipos de números que o Milvus suporta são <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, e <code translate="no">Double</code>. Para mais informações sobre os campos numéricos, consulte <a href="/docs/pt/v2.5.x/number.md">Campo numérico</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -293,6 +298,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)​
         .dataType(DataType.Int64)​
@@ -330,6 +336,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)​
         .dataType(DataType.Bool)​
@@ -359,7 +366,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">Adicionar campos JSON</h3><p>Um campo JSON armazena normalmente dados JSON semi-estruturados. Para saber mais sobre os campos JSON, consulte <a href="/docs/pt/use-json-fields.md">Campo JSON</a>.</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">Adicionar campos JSON</h3><p>Um campo JSON armazena normalmente dados JSON semi-estruturados. Para saber mais sobre os campos JSON, consulte <a href="/docs/pt/v2.5.x/use-json-fields.md">Campo JSON</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -368,6 +375,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)​
         .dataType(DataType.JSON)​
@@ -398,7 +406,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">Adicionar campos de matriz</h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos num campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/array_data_type.md">Campo de matriz</a>.</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">Adicionar campos de matriz</h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos num campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/v2.5.x/array_data_type.md">Campo de matriz</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -410,6 +418,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)​
         .dataType(DataType.Array)​

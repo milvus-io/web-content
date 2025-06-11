@@ -11,6 +11,7 @@ summary: >-
   menerima input teks mentah, secara otomatis mengubah data teks Anda menjadi
   sematan yang jarang tanpa perlu membuat sematan vektor secara manual.
 ---
+
 <h1 id="Full-Text-Search" class="common-anchor-header">Pencarian Teks Lengkap<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -29,7 +30,7 @@ summary: >-
     </button></h1><p>Pencarian teks lengkap adalah fitur yang mengambil dokumen yang mengandung istilah atau frasa tertentu dalam kumpulan data teks, lalu memberi peringkat hasil berdasarkan relevansi. Fitur ini mengatasi keterbatasan pencarian semantik, yang mungkin mengabaikan istilah yang tepat, sehingga memastikan Anda menerima hasil yang paling akurat dan relevan secara kontekstual. Selain itu, fitur ini menyederhanakan pencarian vektor dengan menerima input teks mentah, secara otomatis mengubah data teks Anda menjadi sematan yang jarang tanpa perlu membuat sematan vektor secara manual.</p>
 <p>Dengan menggunakan algoritme BM25 untuk penilaian relevansi, fitur ini sangat berharga dalam skenario retrieval-augmented generation (RAG), yang memprioritaskan dokumen yang sangat cocok dengan istilah pencarian tertentu.</p>
 <div class="alert note">
-<p>Dengan mengintegrasikan pencarian teks lengkap dengan pencarian vektor padat berbasis semantik, Anda dapat meningkatkan akurasi dan relevansi hasil pencarian. Untuk informasi lebih lanjut, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a>.</p>
+<p>Dengan mengintegrasikan pencarian teks lengkap dengan pencarian vektor padat berbasis semantik, Anda dapat meningkatkan akurasi dan relevansi hasil pencarian. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/multi-vector-search.md">Pencarian Hibrida</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Ikhtisar<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +50,7 @@ summary: >-
     </button></h2><p>Pencarian teks lengkap menyederhanakan proses pencarian berbasis teks dengan menghilangkan kebutuhan penyematan manual. Fitur ini beroperasi melalui alur kerja berikut ini:</p>
 <ol>
 <li><p><strong>Masukan teks</strong>: Anda memasukkan dokumen teks mentah atau memberikan teks kueri tanpa perlu penyematan manual.</p></li>
-<li><p><strong>Analisis teks</strong>: Milvus menggunakan <a href="/docs/id/analyzer-overview.md">penganalisis</a> untuk memberi tanda pada teks masukan menjadi istilah individual yang dapat dicari.</p></li>
+<li><p><strong>Analisis teks</strong>: Milvus menggunakan <a href="/docs/id/v2.5.x/analyzer-overview.md">penganalisis</a> untuk memberi tanda pada teks masukan menjadi istilah individual yang dapat dicari.</p></li>
 <li><p><strong>Pemrosesan fungsi</strong>: Fungsi bawaan menerima istilah yang diberi token dan mengubahnya menjadi representasi vektor yang jarang.</p></li>
 <li><p><strong>Penyimpanan koleksi</strong>: Milvus menyimpan penyematan yang jarang ini dalam sebuah koleksi untuk pengambilan yang efisien.</p></li>
 <li><p><strong>Penilaian BM25</strong>: Selama pencarian, Milvus menerapkan algoritme BM25 untuk menghitung skor untuk dokumen yang tersimpan dan memberi peringkat hasil yang cocok berdasarkan relevansi dengan teks kueri.</p></li>
@@ -60,9 +61,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Pencarian Teks Lengkap</span> </span></p>
 <p>Untuk menggunakan pencarian teks lengkap, ikuti langkah-langkah utama berikut:</p>
 <ol>
-<li><p><a href="/docs/id/full-text-search.md#Create-a-collection-for-full-text-search">Buat koleksi</a>: Siapkan koleksi dengan bidang yang diperlukan dan tentukan fungsi untuk mengubah teks mentah menjadi sematan jarang.</p></li>
-<li><p><a href="/docs/id/full-text-search.md#Insert-text-data">Memasukkan data</a>: Memasukkan dokumen teks mentah Anda ke dalam koleksi.</p></li>
-<li><p><a href="/docs/id/full-text-search.md#Perform-full-text-search">Melakukan pencarian</a>: Gunakan teks kueri untuk mencari di dalam koleksi Anda dan mengambil hasil yang relevan.</p></li>
+<li><p><a href="/docs/id/v2.5.x/full-text-search.md#Create-a-collection-for-full-text-search">Buat koleksi</a>: Siapkan koleksi dengan bidang yang diperlukan dan tentukan fungsi untuk mengubah teks mentah menjadi sematan jarang.</p></li>
+<li><p><a href="/docs/id/v2.5.x/full-text-search.md#Insert-text-data">Memasukkan data</a>: Memasukkan dokumen teks mentah Anda ke dalam koleksi.</p></li>
+<li><p><a href="/docs/id/v2.5.x/full-text-search.md#Perform-full-text-search">Melakukan pencarian</a>: Gunakan teks kueri untuk mencari di dalam koleksi Anda dan mengambil hasil yang relevan.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">Membuat koleksi untuk pencarian teks lengkap<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,8 +92,8 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
@@ -101,6 +102,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, dat
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -216,7 +218,7 @@ schema.WithField(entity.NewField().
 <p>Dalam konfigurasi ini,</p>
 <ul>
 <li><p><code translate="no">id</code>: berfungsi sebagai kunci utama dan secara otomatis dibuat dengan <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: menyimpan data teks mentah Anda untuk operasi pencarian teks lengkap. Tipe datanya harus <code translate="no">VARCHAR</code>, karena <code translate="no">VARCHAR</code> adalah tipe data string Milvus untuk penyimpanan teks. Setel <code translate="no">enable_analyzer=True</code> untuk mengizinkan Milvus memberi token pada teks. Secara default, Milvus menggunakan<a href="/docs/id/standard-analyzer.md"> penganalisis</a> <code translate="no">standard</code><a href="/docs/id/standard-analyzer.md"></a> untuk analisis teks. Untuk mengonfigurasi penganalisis yang berbeda, lihat <a href="/docs/id/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p></li>
+<li><p><code translate="no">text</code>: menyimpan data teks mentah Anda untuk operasi pencarian teks lengkap. Tipe datanya harus <code translate="no">VARCHAR</code>, karena <code translate="no">VARCHAR</code> adalah tipe data string Milvus untuk penyimpanan teks. Setel <code translate="no">enable_analyzer=True</code> untuk mengizinkan Milvus memberi token pada teks. Secara default, Milvus menggunakan<a href="/docs/id/v2.5.x/standard-analyzer.md"> penganalisis</a> <code translate="no">standard</code><a href="/docs/id/v2.5.x/standard-analyzer.md"></a> untuk analisis teks. Untuk mengonfigurasi penganalisis yang berbeda, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p></li>
 <li><p><code translate="no">sparse</code>bidang vektor yang disediakan untuk menyimpan sematan jarang yang dihasilkan secara internal untuk operasi pencarian teks lengkap. Tipe data harus <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Sekarang, tentukan fungsi yang akan mengubah teks Anda menjadi representasi vektor yang jarang dan kemudian tambahkan ke skema:</p>
@@ -231,6 +233,7 @@ schema.WithField(entity.NewField().
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -325,7 +328,7 @@ schema.WithFunction(function)
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
+field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
 
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
@@ -337,6 +340,7 @@ index_params.add_index(
 
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
@@ -376,7 +380,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Jenis indeks yang akan dibuat. <code translate="no">AUTOINDEX</code> memungkinkan Milvus mengoptimalkan pengaturan indeks secara otomatis. Jika Anda membutuhkan kontrol lebih besar atas pengaturan indeks Anda, Anda dapat memilih dari berbagai jenis indeks yang tersedia untuk vektor jarang di Milvus. Untuk informasi lebih lanjut, lihat <a href="/docs/id/index.md#Indexes-supported-in-Milvus">Indeks yang didukung di Milvus</a>.</p></td>
+     <td><p>Jenis indeks yang akan dibuat. <code translate="no">AUTOINDEX</code> memungkinkan Milvus mengoptimalkan pengaturan indeks secara otomatis. Jika Anda membutuhkan kontrol lebih besar atas pengaturan indeks Anda, Anda dapat memilih dari berbagai jenis indeks yang tersedia untuk vektor jarang di Milvus. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/index.md#Indexes-supported-in-Milvus">Indeks yang didukung di Milvus</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -416,12 +420,13 @@ indexes.add(IndexParam.builder()
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.indexParams(indexes)
+.build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
@@ -481,16 +486,17 @@ curl --request POST \
 
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
 List&lt;JsonObject&gt; rows = Arrays.asList(
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.class)
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.class),
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.class),
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.class)
 );
 
 client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(rows)
-        .build());
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.data(rows)
+.build());
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
@@ -546,6 +552,7 @@ client.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -623,7 +630,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proporsi istilah yang kurang penting untuk diabaikan selama pencarian. Untuk detailnya, lihat <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</p></td>
+     <td><p>Proporsi istilah yang kurang penting untuk diabaikan selama pencarian. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/sparse_vector.md">Vektor Jarang</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>

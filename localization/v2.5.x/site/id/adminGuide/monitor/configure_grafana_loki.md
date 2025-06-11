@@ -5,6 +5,7 @@ summary: >-
   Topik ini menjelaskan cara mengumpulkan log menggunakan Loki dan melakukan
   query log untuk cluster Milvus menggunakan Grafana.
 ---
+
 <h1 id="Configure-Grafana-Loki" class="common-anchor-header">Mengkonfigurasi Grafana Loki<button data-href="#Configure-Grafana-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Anda telah <a href="/docs/id/install_cluster-helm.md">menginstal cluster Milvus pada K8.</a></li>
+<li>Anda telah <a href="/docs/id/v2.5.x/install_cluster-helm.md">menginstal cluster Milvus pada K8.</a></li>
 <li>Anda telah menginstal alat yang diperlukan, termasuk <a href="https://helm.sh/docs/intro/install/">Helm</a> dan <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Menerapkan Loki<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">
@@ -75,8 +76,9 @@ helm repo update
   <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
 
 <span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
+<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Opsi 2: Menggunakan AWS S3 untuk penyimpanan</p>
 <p>Pada contoh berikut, ganti <code translate="no">&lt;accessKey&gt;</code> dan <code translate="no">&lt;keyId&gt;</code> dengan kunci akses dan ID S3 Anda sendiri, <code translate="no">s3.endpoint</code> dengan titik akhir S3, dan <code translate="no">s3.region</code> dengan wilayah S3.</p>
 <pre><code translate="no" class="language-yaml">loki:

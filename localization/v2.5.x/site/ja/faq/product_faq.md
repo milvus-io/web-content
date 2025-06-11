@@ -3,6 +3,7 @@ id: product_faq.md
 summary: 世界で最も先進的なベクターデータベースに関するよくある質問の回答をご覧ください。
 title: 製品に関するFAQ
 ---
+
 <h1 id="Product-FAQ" class="common-anchor-header">製品に関するFAQ<button data-href="#Product-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ title: 製品に関するFAQ
 <h4 id="Can-indexes-be-created-after-inserting-vectors" class="common-anchor-header">ベクター挿入後にインデックスを作成できますか?</h4><p>Milvusは、以前<code translate="no">create_index()</code> 、コレクションに対してインデックスを作成したことがある場合、その後に挿入されたベクターに対しても自動的にインデックスを作成します。ただし、Milvusは、新しく挿入されたベクターがセグメント全体を満たし、新しく作成されたインデックスファイルが以前のものから分離されるまで、インデックスを作成しません。</p>
 <h4 id="How-are-the-FLAT-and-IVFFLAT-indexes-different" class="common-anchor-header">FLATインデックスとIVF_FLATインデックスの違いは何ですか？</h4><p>IVF_FLATインデックスはベクター空間をリスト・クラスターに分割します。デフォルトのリスト値16,384の場合、Milvusはターゲットベクトルと16,384クラスタすべてのセントロイド間の距離を比較し、最も近いクラスタを返します。その後、Milvusはターゲットベクトルと選択されたクラスタ内のベクトルとの距離を比較し、最近接ベクトルを取得します。IVF_FLATとは異なり、FLATはターゲットベクトルと他のすべてのベクトルとの距離を直接比較します。</p>
 <p>ベクトルの総数がnlistにほぼ等しい場合、IVF_FLATとFLATの間には計算要件と探索性能の点でほとんど差がありません。しかし、ベクトル数が nlist の 2 倍以上になると、IVF_FLAT の方が性能面で有利になります。</p>
-<p>詳細は<a href="/docs/ja/index.md">ベクターインデックスを</a>参照してください。</p>
+<p>詳細は<a href="/docs/ja/v2.5.x/index.md">ベクターインデックスを</a>参照してください。</p>
 <h4 id="How-does-Milvus-flush-data" class="common-anchor-header">Milvusはどのようにデータをフラッシュするのですか？</h4><p>挿入されたデータがメッセージキューに取り込まれると、Milvusは成功を返します。しかし、データはまだディスクにフラッシュされていません。その後、Milvusのデータノードがメッセージキュー内のデータをインクリメンタルログとして永続ストレージに書き込みます。<code translate="no">flush()</code> が呼び出された場合、データノードはメッセージキュー内の全データを直ちに永続ストレージに書き込むよう強制される。</p>
 <h4 id="What-is-normalization-Why-is-normalization-needed" class="common-anchor-header">正規化とは何ですか？なぜ正規化が必要なのですか？</h4><p>正規化とは、ノルムが1になるようにベクトルを変換する処理のことです。ベクトルの類似度を計算するために内積を使用する場合、ベクトルは正規化されなければなりません。正規化後、内積は余弦類似度に等しくなります。</p>
 <p>詳しくは<a href="https://en.wikipedia.org/wiki/Unit_vector">ウィキペディアを</a>参照。</p>
@@ -55,11 +56,11 @@ title: 製品に関するFAQ
 <h4 id="Why-do-I-get-fewer-than-k-vectors-when-searching-for-topk-vectors" class="common-anchor-header"><code translate="no">topk</code> ベクトルを検索すると、なぜk個以下のベクトルしか得られないのですか？</h4><p>Milvusがサポートしているインデックスのうち、IVF_FLATとIVF_SQ8はk-meansクラスタリング法を実装しています。データ空間は<code translate="no">nlist</code> クラスタに分割され、挿入されたベクトルはこれらのクラスタに分配されます。そしてmilvusは<code translate="no">nprobe</code> 最も近いクラスタを選択し、ターゲットベクトルと選択されたクラスタ内のすべてのベクトルとの距離を比較して最終結果を返す。</p>
 <p><code translate="no">nlist</code> と<code translate="no">topk</code> が大きく、nprobe が小さい場合、nprobe クラスタ内のベクトル数が<code translate="no">k</code> より少なくなることがあります。そのため、<code translate="no">topk</code> に最も近いベクトルを検索すると、返されるベクトル数が<code translate="no">k</code> より少なくなります。</p>
 <p>これを避けるには、<code translate="no">nprobe</code> を大きく、<code translate="no">nlist</code> と<code translate="no">k</code> を小さく設定してみてください。</p>
-<p>詳しくは<a href="/docs/ja/index.md">ベクトル・インデックス</a>をご覧ください。</p>
+<p>詳しくは<a href="/docs/ja/v2.5.x/index.md">ベクトル・インデックス</a>をご覧ください。</p>
 <h4 id="What-is-the-maximum-vector-dimension-supported-in-Milvus" class="common-anchor-header">Milvusでサポートされている最大ベクトル次元は?</h4><p>Milvusはデフォルトで32,768次元までのベクターを管理できます。<code translate="no">Proxy.maxDimension</code> の値を大きくすることで、より大きな次元のベクトルを扱うことができます。</p>
 <h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">MilvusはApple M1 CPUをサポートしていますか？</h4><p>現在のMilvusはApple M1 CPUを直接サポートしておりません。Milvus 2.3以降では、ARM64アーキテクチャ用のDockerイメージが提供されます。</p>
 <h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvusはプライマリキーフィールドでどのようなデータタイプをサポートしていますか？</h4><p>現在のリリースでは、MilvusはINT64と文字列の両方をサポートしています。</p>
-<h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvusはスケーラブルですか？</h4><p>Kubernetes上のHelm Chartを利用することで、複数ノードのMilvusクラスタをデプロイすることができます。詳しくは<a href="/docs/ja/scaleout.md">スケールガイドを</a>ご参照ください。</p>
+<h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvusはスケーラブルですか？</h4><p>Kubernetes上のHelm Chartを利用することで、複数ノードのMilvusクラスタをデプロイすることができます。詳しくは<a href="/docs/ja/v2.5.x/scaleout.md">スケールガイドを</a>ご参照ください。</p>
 <h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">growing segmentとsealed segmentとは何ですか？</h4><p>Milvusは検索要求が来ると、インクリメンタルデータとヒストリカルデータの両方を検索します。増分データは最近更新されたデータで、オブジェクトストレージに永続化される閾値に達する前にメモリにバッファリングされ、より効率的なインデックスが構築される成長セグメントに保存されます。一方、履歴データは少し前に更新されたもので、オブジェクト・ストレージに永続化される前にメモリ上にバッファリングされる。インクリメンタルデータとヒストリカルデータは一緒に検索用のデータセット全体を構成する。この設計により、Milvusに取り込まれたデータは即座に検索可能となる。Milvus Distributedの場合、インジェストされたばかりのレコードがいつ検索結果に表示されるかは、より複雑な要因によって決定される。その詳細については<a href="https://milvus.io/docs/consistency.md">一貫性レベルを</a>ご覧ください。</p>
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvusは同時検索に対応していますか？</h4><p>はい。Milvusは、同じコレクションに対するクエリの場合、インクリメンタルデータと履歴データを同時に検索します。ただし、異なるコレクションに対するクエリは直列に行われます。履歴データは非常に巨大なデータセットになる可能性がありますが、履歴データに対する検索は比較的時間がかかり、基本的に直列に実行されます。</p>
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">対応するコレクションが削除された後も、MinIOのデータが残るのはなぜですか？</h4><p>MinIOのデータは、データのロールバックの便宜のため、一定期間残るように設計されています。</p>
@@ -79,7 +80,7 @@ title: 製品に関するFAQ
 <li><strong>ガベージコレクション</strong>：ガベージコレクション (GC) と呼ばれる別プロセスが、定期的に "Dropped" セグメントを削除する。これにより、ストレージの効率的な使用が保証されますが、削除とスペースの再利用の間に若干の遅延が生じる可能性があります。</li>
 </ul>
 <h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">挿入、削除、またはアップサートされたデータを、フラッシュを待たずに操作直後に見ることはできますか？</h4><p>Milvusでは、ストレージとコンピュートの分離アーキテクチャを採用しているため、データの可視性はフラッシュ操作に直接関係しません。一貫性レベルを使用してデータの可読性を管理することができます。</p>
-<p>一貫性レベルを選択する際には、一貫性とパフォーマンスのトレードオフを考慮してください。即時の可視性が必要な操作には、"Strong "一貫性レベルを使用する。書き込みを高速に行うには、一貫性を弱くすることを優先する（データはすぐには見えないかもしれない）。詳細については、「<a href="/docs/ja/consistency.md">一貫性</a>」を参照してください。</p>
+<p>一貫性レベルを選択する際には、一貫性とパフォーマンスのトレードオフを考慮してください。即時の可視性が必要な操作には、"Strong "一貫性レベルを使用する。書き込みを高速に行うには、一貫性を弱くすることを優先する（データはすぐには見えないかもしれない）。詳細については、「<a href="/docs/ja/v2.5.x/consistency.md">一貫性</a>」を参照してください。</p>
 <h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">パーティション・キー機能を有効にした後、milvusのデフォルト値<code translate="no">num_partitions</code> 。</h4><p>パーティションキー機能を有効にすると、Milvusの<code translate="no">num_partitions</code> のデフォルト値は<code translate="no">16</code> に設定されます。このデフォルト値は安定性とパフォーマンス上の理由から選択されています。<code translate="no">create_collection</code> 関数で指定することにより、必要に応じて<code translate="no">num_partitions</code> の値を調整することができます。</p>
 <h4 id="Is-there-a-maximum-length-limit-for-scalar-filtering-expressions" class="common-anchor-header">スカラーフィルタリング式の長さの上限はありますか？</h4><p>はい、スカラー・フィルタリング式の最大長は、<code translate="no">milvus.yaml</code> 設定ファイルで定義される RPC 転送制限によって制約されます。具体的には、この制限はプロキシ・セクションの<code translate="no">serverMaxRecvSize</code> パラメータによって設定されます：</p>
 <pre><code translate="no" class="language-yaml">proxy:
@@ -110,8 +111,9 @@ value_set = <span class="hljs-built_in">set</span>()
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(res)):
         value_set.add(res[i][<span class="hljs-string">&quot;target&quot;</span>])
 
-<span class="hljs-comment"># value_set will contain unique values for target column    </span>
+<span class="hljs-comment"># value_set will contain unique values for target column </span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="What-are-the-limitations-of-using-dynamic-fields-For-example-are-there-size-limits-modification-methods-or-indexing-restrictions" class="common-anchor-header">動的フィールドの使用にはどのような制限がありますか？例えば、サイズ制限、修正方法、インデックス作成の制限などがありますか？</h4><p>ダイナミック・フィールドは内部的にJSONフィールドで表現され、サイズ制限は65,536バイトです。動的フィールドはアップサートをサポートしており、フィールドの追加や更新が可能です。しかし、Milvus 2.5.1では、ダイナミックフィールドはインデックスをサポートしていません。JSONのインデックス追加サポートは将来のリリースで導入される予定です。</p>
 <h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">Milvusはスキーマの変更をサポートしていますか？</h4><p>Milvusバージョン2.5.0では、スキーマの変更は、<code translate="no">mmap</code> パラメータのようなプロパティの調整など、特定の変更に限定されています。また、varcharフィールドの<code translate="no">max_length</code> 、配列フィールドの<code translate="no">max_capacity</code> 。しかしながら、スキーマのフィールドの追加や削除は将来のリリースで計画されており、Milvusのスキーマ管理の柔軟性を向上させます。</p>
 <h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">VarCharのmax_lengthを変更する場合、データの再編成が必要ですか?</h4><p>いいえ、VarCharフィールドの<code translate="no">max_length</code> を変更しても、圧縮や再編成などのデータ再編成は必要ありません。この調整では主に、フィールドに挿入される新しいデータの検証基準が更新され、既存のデータは影響を受けません。その結果、この変更は軽量とみなされ、システムに大きなオーバーヘッドを課しません。</p>

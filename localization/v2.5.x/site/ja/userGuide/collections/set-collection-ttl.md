@@ -4,6 +4,7 @@ title: コレクションTTLの設定
 summary: >-
   一度データがコレクションに挿入されると、デフォルトでそのまま残ります。しかし、シナリオによっては、一定期間後にデータを削除またはクリーンアップしたい場合があります。そのような場合、コレクションのTTL（Time-to-Live）プロパティを設定することで、TTLが切れるとMilvusは自動的にデータを削除します。
 ---
+
 <h1 id="Set-Collection-TTL" class="common-anchor-header">コレクションTTLの設定<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,8 +57,8 @@ summary: >-
       </svg>
     </button></h2><p>TTLプロパティを設定できるのは、以下の場合です。</p>
 <ul>
-<li><p><a href="/docs/ja/set-collection-ttl.md#Set-TTL-when-creating-a-collection">コレクションを作成する。</a></p></li>
-<li><p><a href="/docs/ja/set-collection-ttl.md#Set-TTL-for-an-existing-collection">既存のコレクションのTTLプロパティを変更する。</a></p></li>
+<li><p><a href="/docs/ja/v2.5.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">コレクションを作成する。</a></p></li>
+<li><p><a href="/docs/ja/v2.5.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">既存のコレクションのTTLプロパティを変更する。</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">コレクションの作成時にTTLを設定する</h3><p>次のコード・スニペットは、コレクションを作成するときにTTLプロパティを設定する方法を示しています。</p>
 <div class="multipleCode">
@@ -66,15 +67,16 @@ summary: >-
 
 <span class="hljs-comment"># With TTL</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    schema=schema,
-    <span class="hljs-comment"># highlight-start</span>
-    properties={
-        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>
-    }
-    <span class="hljs-comment"># highlight-end</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+schema=schema,
+<span class="hljs-comment"># highlight-start</span>
+properties={
+<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>
+}
+<span class="hljs-comment"># highlight-end</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.param.Constant;
@@ -136,12 +138,13 @@ curl --request POST \
 properties.put(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>, <span class="hljs-string">&quot;1209600&quot;</span>);
 
 <span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .properties(properties)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.properties(properties)
+.build();
 
 client.alterCollection(alterCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">properties</span>: {
@@ -194,12 +197,13 @@ client.alterCollection(alterCollectionReq);
 propertyKeys[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;collection.ttl.second&quot;</span>
 
 <span class="hljs-type">DropCollectionReq</span> <span class="hljs-variable">dropCollectionReq</span> <span class="hljs-operator">=</span> DropCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .propertyKeys(propertyKeys)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.propertyKeys(propertyKeys)
+.build();
 
 client.dropCollection(dropCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollectionProperties</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">properties</span>: [<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>]

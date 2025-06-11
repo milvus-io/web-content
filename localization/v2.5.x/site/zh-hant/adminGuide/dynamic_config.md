@@ -4,6 +4,7 @@ related_key: configure
 summary: 了解 Milvus 的動態配置。
 title: 即時配置 Milvus
 ---
+
 <h1 id="Configure-Milvus-on-the-Fly" class="common-anchor-header">即時配置 Milvus<button data-href="#Configure-Milvus-on-the-Fly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,14 +38,14 @@ title: 即時配置 Milvus
       </svg>
     </button></h2><p>您需要確保： 您已安裝 Birdwatcher。</p>
 <ul>
-<li>您已安裝 Birdwatcher。詳情請參閱<a href="/docs/zh-hant/birdwatcher_install_guides.md">安裝 Birdwatcher</a>、</li>
+<li>您已安裝 Birdwatcher。詳情請參閱<a href="/docs/zh-hant/v2.5.x/birdwatcher_install_guides.md">安裝 Birdwatcher</a>、</li>
 <li>您已安裝 etcdctl。詳情請參閱<a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">與 etcd 互動</a>，或</li>
 <li>您安裝了其他 etcd 用戶端，例如 Python 用戶端。</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>本指南中的示例將<code translate="no">proxy.minPasswordLength</code> 的值更改成<code translate="no">8</code> 。您可以使用<a href="/docs/zh-hant/dynamic_config.md#Applicable-configuration-items">Applicable configuration items（適用的組態項目</a>）中列出的適用的鍵來替換。</li>
-<li>本指南的範例假設你的 Milvus 的根目錄為<code translate="no">by-dev</code> 。所有配置都列在路徑<code translate="no">by-dev/config</code> 下。Milvus 根路徑會因安裝方式而異。對於使用 Helm 圖表安裝的實體，根目錄預設為<code translate="no">by-dev</code> 。如果您不知道根目錄，請參考<a href="/docs/zh-hant/birdwatcher_usage_guides.md#Connect-to-etcd">Connect to etcd</a>。</li>
+<li>本指南中的示例將<code translate="no">proxy.minPasswordLength</code> 的值更改成<code translate="no">8</code> 。您可以使用<a href="/docs/zh-hant/v2.5.x/dynamic_config.md#Applicable-configuration-items">Applicable configuration items（適用的組態項目</a>）中列出的適用的鍵來替換。</li>
+<li>本指南的範例假設你的 Milvus 的根目錄為<code translate="no">by-dev</code> 。所有配置都列在路徑<code translate="no">by-dev/config</code> 下。Milvus 根路徑會因安裝方式而異。對於使用 Helm 圖表安裝的實體，根目錄預設為<code translate="no">by-dev</code> 。如果您不知道根目錄，請參考<a href="/docs/zh-hant/v2.5.x/birdwatcher_usage_guides.md#Connect-to-etcd">Connect to etcd</a>。</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">變更組態<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +204,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>了解更多關於<a href="/docs/zh-hant/system_configuration.md">系統組態</a>。</li>
-<li>了解如何使用<a href="/docs/zh-hant/configure_operator.md">Milvus Operator</a>、<a href="/docs/zh-hant/configure-helm.md">Helm 圖表</a>和<a href="/docs/zh-hant/configure-docker.md">Docker</a> 配置已安裝的<a href="/docs/zh-hant/configure_operator.md">Milvus</a>。</li>
+<li>了解更多關於<a href="/docs/zh-hant/v2.5.x/system_configuration.md">系統組態</a>。</li>
+<li>了解如何使用<a href="/docs/zh-hant/v2.5.x/configure_operator.md">Milvus Operator</a>、<a href="/docs/zh-hant/v2.5.x/configure-helm.md">Helm 圖表</a>和<a href="/docs/zh-hant/v2.5.x/configure-docker.md">Docker</a> 配置已安裝的<a href="/docs/zh-hant/v2.5.x/configure_operator.md">Milvus</a>。</li>
 </ul>

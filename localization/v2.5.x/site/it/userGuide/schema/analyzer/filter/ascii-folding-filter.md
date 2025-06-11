@@ -7,6 +7,7 @@ summary: >-
   trasforma caratteri come í in i, rendendo l'elaborazione del testo più
   semplice e coerente, soprattutto per i contenuti multilingue.
 ---
+
 <h1 id="ASCII-folding" class="common-anchor-header">Piegatura ASCII<button data-href="#ASCII-folding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,8 +67,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Il filtro <code translate="no">asciifolding</code> opera sui termini generati dal tokenizer, quindi deve essere usato in combinazione con un tokenizer. Per un elenco dei tokenizer disponibili in Milvus, consultare <a href="/docs/it/standard-tokenizer.md">Standard Tokenizer</a> e le sue pagine collaterali.</p>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarlo a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+
+<p>Il filtro <code translate="no">asciifolding</code> opera sui termini generati dal tokenizer, quindi deve essere usato in combinazione con un tokenizer. Per un elenco dei tokenizer disponibili in Milvus, consultare <a href="/docs/it/v2.5.x/standard-tokenizer.md">Standard Tokenizer</a> e le sue pagine collaterali.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarlo a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/v2.5.x/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -116,6 +118,7 @@ sample_text = <span class="hljs-string">&quot;Café Möller serves crème brûl�
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

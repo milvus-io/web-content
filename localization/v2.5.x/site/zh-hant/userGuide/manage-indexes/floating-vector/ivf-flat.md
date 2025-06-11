@@ -3,6 +3,7 @@ id: ivf-flat.md
 title: IVF_FLAT
 summary: IVF_FLAT 索引是一種索引演算法，可提高浮點向量的搜尋效能。
 ---
+
 <h1 id="IVFFLAT" class="common-anchor-header">IVF_FLAT<button data-href="#IVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +57,7 @@ summary: IVF_FLAT 索引是一種索引演算法，可提高浮點向量的搜�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>IVF FLAT 工作流程 2</span> </span></p>
-<p>透過增加<code translate="no">nprobe</code> 的值，您可以在搜尋時包含更多的分區，這有助於確保不會遺漏與查詢最接近的嵌入，即使它位於不同的分區中。不過，這樣做的代價是增加搜尋時間，因為需要評估更多的候選項目。有關索引參數調整的詳細資訊，請參閱<a href="/docs/zh-hant/ivf-flat.md#Index-params">索引參數</a>。</p>
+<p>透過增加<code translate="no">nprobe</code> 的值，您可以在搜尋時包含更多的分區，這有助於確保不會遺漏與查詢最接近的嵌入，即使它位於不同的分區中。不過，這樣做的代價是增加搜尋時間，因為需要評估更多的候選項目。有關索引參數調整的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/ivf-flat.md#Index-params">索引參數</a>。</p>
 <h2 id="Build-index" class="common-anchor-header">建立索引<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,26 +80,27 @@ summary: IVF_FLAT 索引是一種索引演算法，可提高浮點向量的搜�
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在此設定中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引類型。在本範例中，設定值為<code translate="no">IVF_FLAT</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用來計算向量間距離的方法。支援的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用來計算向量間距離的方法。支援的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/metric.md">公制類型</a>。</p></li>
 <li><p><code translate="no">params</code>:建立索引的附加設定選項。</p>
 <ul>
 <li><code translate="no">nlist</code>:分割資料集的叢集數。</li>
 </ul>
-<p>要瞭解<code translate="no">IVF_FLAT</code> 索引可用的更多建立參數，請參閱<a href="/docs/zh-hant/ivf-flat.md#Index-building-params">索引建立參數</a>。</p></li>
+<p>要瞭解<code translate="no">IVF_FLAT</code> 索引可用的更多建立參數，請參閱<a href="/docs/zh-hant/v2.5.x/ivf-flat.md#Index-building-params">索引建立參數</a>。</p></li>
 </ul>
-<p>一旦配置好索引參數，您就可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
+<p>一旦配置好索引參數，您就可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/create-collection.md">建立集合</a>。</p>
 <h2 id="Search-on-index" class="common-anchor-header">在索引上搜尋<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,20 +124,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">params</code>:在索引上搜尋的其他設定選項。</p>
 <ul>
 <li><code translate="no">nprobe</code>:要搜尋的群集數量。</li>
 </ul>
-<p>要瞭解<code translate="no">IVF_FLAT</code> 索引可用的更多搜尋參數，請參閱<a href="/docs/zh-hant/ivf-flat.md#Index-specific-search-params">特定</a>於索引的搜尋參數。</p></li>
+<p>要瞭解<code translate="no">IVF_FLAT</code> 索引可用的更多搜尋參數，請參閱<a href="/docs/zh-hant/v2.5.x/ivf-flat.md#Index-specific-search-params">特定</a>於索引的搜尋參數。</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">索引參數<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +156,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本節概述用於建立索引和在索引上執行搜尋的參數。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/ivf-flat.md#Build-index">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/v2.5.x/ivf-flat.md#Build-index">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th><p>參數</p></th>
@@ -168,7 +171,7 @@ res = MilvusClient.search(
      <td><p>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善召回率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/ivf-flat.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/v2.5.x/ivf-flat.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th><p>參數</p></th>

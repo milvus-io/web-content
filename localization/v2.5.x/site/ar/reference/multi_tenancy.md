@@ -5,6 +5,7 @@ summary: >-
   في Milvus، يعني تعدد الاستئجار في Milvus مشاركة عدة عملاء أو فرق - يُشار إليهم
   بالمستأجرين - في نفس المجموعة مع الحفاظ على بيئات بيانات معزولة.
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">تنفيذ الإيجار المتعدد<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>يدعم ميلفوس الإيجار المتعدد على أربعة مستويات: <strong>قاعدة البيانات</strong> <strong>والمجموعة</strong> <strong>والتقسيم</strong> <strong>ومفتاح التقسيم ومفتاح التقسيم</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى قاعدة البيانات</h3><p>من خلال الإيجار المتعدد على مستوى قاعدة البيانات، يتلقى كل مستأجر <a href="/docs/ar/manage_databases.md">قاعدة بيانات</a> مطابقة تحتوي على مجموعة واحدة أو أكثر.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى قاعدة البيانات</h3><p>من خلال الإيجار المتعدد على مستوى قاعدة البيانات، يتلقى كل مستأجر <a href="/docs/ar/v2.5.x/manage_databases.md">قاعدة بيانات</a> مطابقة تحتوي على مجموعة واحدة أو أكثر.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -49,7 +50,7 @@ summary: >-
 <li><p><strong>المرونة</strong>: يمكن أن تحتوي كل قاعدة بيانات على مجموعات بمخططات مختلفة، مما يوفر تنظيمًا مرنًا للغاية للبيانات ويسمح لكل مستأجر أن يكون لكل مستأجر مخطط بيانات خاص به.</p></li>
 <li><p><strong>أخرى</strong>: تدعم هذه الاستراتيجية أيضًا نظام RBAC، مما يتيح التحكم الدقيق في وصول المستخدم لكل مستأجر. بالإضافة إلى ذلك، يمكنك تحميل البيانات أو إصدارها بمرونة لمستأجرين محددين لإدارة البيانات الساخنة والباردة بفعالية.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى المجموعة</h3><p>من خلال الإيجار المتعدد على مستوى المجموعة، يتم تعيين <a href="/docs/ar/manage-collections.md">مجموعة</a> لكل مستأجر، مما يوفر عزلاً قوياً للبيانات.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى المجموعة</h3><p>من خلال الإيجار المتعدد على مستوى المجموعة، يتم تعيين <a href="/docs/ar/v2.5.x/manage-collections.md">مجموعة</a> لكل مستأجر، مما يوفر عزلاً قوياً للبيانات.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -60,7 +61,7 @@ summary: >-
 <li><p><strong>المرونة</strong>: تسمح هذه الاستراتيجية بأن يكون لكل مجموعة مخططها الخاص، مما يستوعب المستأجرين الذين لديهم مخططات بيانات مختلفة.</p></li>
 <li><p><strong>أخرى</strong>: تدعم هذه الاستراتيجية أيضًا نظام RBAC، مما يسمح بالتحكم الدقيق في الوصول إلى المستأجرين. بالإضافة إلى ذلك، يمكنك تحميل البيانات أو إصدارها بمرونة لمستأجرين محددين لإدارة البيانات الساخنة والباردة بفعالية.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى القسم</h3><p>في الإيجار المتعدد على مستوى القسم، يتم تعيين كل مستأجر إلى <a href="/docs/ar/manage-partitions.md">قسم</a> تم إنشاؤه يدوياً ضمن مجموعة مشتركة.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى القسم</h3><p>في الإيجار المتعدد على مستوى القسم، يتم تعيين كل مستأجر إلى <a href="/docs/ar/v2.5.x/manage-partitions.md">قسم</a> تم إنشاؤه يدوياً ضمن مجموعة مشتركة.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -71,7 +72,7 @@ summary: >-
 <li><p><strong>المرونة</strong>: تتطلب هذه الاستراتيجية مشاركة جميع المستأجرين نفس مخطط البيانات. ويجب إنشاء الأقسام يدوياً.</p></li>
 <li><p><strong>أخرى</strong>: لا يتم دعم RBAC على مستوى الأقسام. يمكن الاستعلام عن المستأجرين إما بشكل فردي أو عبر أقسام متعددة، مما يجعل هذا النهج مناسبًا تمامًا للسيناريوهات التي تتضمن استعلامات مجمعة أو تحليلات عبر شرائح المستأجرين. بالإضافة إلى ذلك، يمكنك تحميل البيانات أو إصدارها بمرونة لمستأجرين محددين لإدارة البيانات الساخنة والباردة بفعالية.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى مفتاح التقسيم</h3><p>باستخدام هذه الاستراتيجية، يشترك جميع المستأجرين في مجموعة واحدة ومخطط واحد، ولكن يتم توجيه بيانات كل مستأجر تلقائيًا إلى 16 قسمًا معزولًا فعليًا استنادًا إلى قيمة <a href="/docs/ar/use-partition-key.md">مفتاح القسم</a>. على الرغم من أن كل قسم فعلي يمكن أن يحتوي على مستأجرين متعددين، إلا أن البيانات من مستأجرين مختلفين تظل منفصلة منطقياً.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">الإيجار المتعدد على مستوى مفتاح التقسيم</h3><p>باستخدام هذه الاستراتيجية، يشترك جميع المستأجرين في مجموعة واحدة ومخطط واحد، ولكن يتم توجيه بيانات كل مستأجر تلقائيًا إلى 16 قسمًا معزولًا فعليًا استنادًا إلى قيمة <a href="/docs/ar/v2.5.x/use-partition-key.md">مفتاح القسم</a>. على الرغم من أن كل قسم فعلي يمكن أن يحتوي على مستأجرين متعددين، إلا أن البيانات من مستأجرين مختلفين تظل منفصلة منطقياً.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

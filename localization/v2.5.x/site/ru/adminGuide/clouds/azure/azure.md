@@ -2,8 +2,9 @@
 id: azure.md
 title: Развертывание Milvus в Microsoft Azure с помощью Kubernetes
 related_key: cluster
-summary: 'Узнайте, как развернуть кластер Milvus в Azure.'
+summary: "Узнайте, как развернуть кластер Milvus в Azure."
 ---
+
 <h1 id="Deploy-Milvus-on-Azure-with-AKS" class="common-anchor-header">Развертывание Milvus в Azure с помощью AKS<button data-href="#Deploy-Milvus-on-Azure-with-AKS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -200,27 +201,28 @@ az storage container create -n testmilvus --account-name milvustesting1
   enabled: <span class="hljs-literal">true</span>
 
 service:
-  <span class="hljs-built_in">type</span>: LoadBalancer
+<span class="hljs-built_in">type</span>: LoadBalancer
 
 extraConfigFiles:
-  user.yaml: |+
-    common:
-      storageType: remote
+user.yaml: |+
+common:
+storageType: remote
 
 minio:
-  enabled: <span class="hljs-literal">false</span>
+enabled: <span class="hljs-literal">false</span>
 
 externalS3:
-  enabled: <span class="hljs-literal">true</span>
-  host: core.windows.net
-  port: 443
-  rootPath: my-release
-  bucketName: testmilvus <span class="hljs-comment"># the storage account container name</span>
-  cloudProvider: azure
-  useSSL: <span class="hljs-literal">true</span>
-  accessKey: <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># the storage account name</span>
-  secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span> 
+enabled: <span class="hljs-literal">true</span>
+host: core.windows.net
+port: 443
+rootPath: my-release
+bucketName: testmilvus <span class="hljs-comment"># the storage account container name</span>
+cloudProvider: azure
+useSSL: <span class="hljs-literal">true</span>
+accessKey: <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># the storage account name</span>
+secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Deploy-Milvus" class="common-anchor-header">Развертывание Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,6 +296,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>Если вы хотите узнать, как развернуть Milvus в других облаках:</p>
 <ul>
-<li><a href="/docs/ru/eks.md">Развертывание кластера Milvus на AWS с помощью Kubernetes</a></li>
-<li><a href="/docs/ru/gcp.md">Развертывание кластера Milvus на GCP с помощью Kubernetes</a></li>
+<li><a href="/docs/ru/v2.5.x/eks.md">Развертывание кластера Milvus на AWS с помощью Kubernetes</a></li>
+<li><a href="/docs/ru/v2.5.x/gcp.md">Развертывание кластера Milvus на GCP с помощью Kubernetes</a></li>
 </ul>

@@ -2,8 +2,9 @@
 id: openshift.md
 title: Развертывание кластера Milvus на OpenShift
 related_key: cluster
-summary: 'Узнайте, как развернуть кластер Milvus на OpenShift.'
+summary: "Узнайте, как развернуть кластер Milvus на OpenShift."
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">Развертывание кластера Milvus на OpenShift<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +178,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>Если вы хотите узнать, как развернуть Milvus в других облаках:</p>
 <ul>
-<li><a href="/docs/ru/eks.md">Развертывание кластера Milvus на AWS с помощью Kubernetes</a></li>
-<li><a href="/docs/ru/azure.md">Развертывание кластера Milvus на Azure с помощью Kubernetes</a></li>
-<li><a href="/docs/ru/gcp.md">Развертывание кластера Milvus на GCP с помощью Kubernetes</a></li>
+<li><a href="/docs/ru/v2.5.x/eks.md">Развертывание кластера Milvus на AWS с помощью Kubernetes</a></li>
+<li><a href="/docs/ru/v2.5.x/azure.md">Развертывание кластера Milvus на Azure с помощью Kubernetes</a></li>
+<li><a href="/docs/ru/v2.5.x/gcp.md">Развертывание кластера Milvus на GCP с помощью Kubernetes</a></li>
 </ul>

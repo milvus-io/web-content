@@ -4,6 +4,7 @@ title: メトリクスの種類
 summary: >-
   類似度メトリクスは、ベクトル間の類似度を測定するために使用される。適切な距離メトリックを選択することで、分類やクラスタリングの性能を大幅に向上させることができる。
 ---
+
 <h1 id="Metric-Types" class="common-anchor-header">メトリクスの種類<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +63,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code> 型のベクトル・フィールドについては、全文検索を実行する場合にのみ<code translate="no">BM25</code> メトリック型を使用する。詳細については、「<a href="/docs/ja/full-text-search.md">全文検索</a>」を参照してください。</p></li>
+<li><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code> 型のベクトル・フィールドについては、全文検索を実行する場合にのみ<code translate="no">BM25</code> メトリック型を使用する。詳細については、「<a href="/docs/ja/v2.5.x/full-text-search.md">全文検索</a>」を参照してください。</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code> 型のベクトル・フィールドの場合、次元値 (<code translate="no">dim</code>) は 8 の倍数でなければなりません。</p></li>
 </ul>
 </div>
@@ -245,7 +246,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25は広く使われているテキスト関連性測定法で、特に<a href="/docs/ja/full-text-search.md">全文検索</a>用に設計されている。以下の3つの重要な要素を組み合わせている：</p>
+    </button></h2><p>BM25は広く使われているテキスト関連性測定法で、特に<a href="/docs/ja/v2.5.x/full-text-search.md">全文検索</a>用に設計されている。以下の3つの重要な要素を組み合わせている：</p>
 <ul>
 <li><p><strong>用語頻度（TF）：</strong>ある用語が文書に出現する頻度を測定する。頻度が高いほど重要度が高いことを示すことが多いが、BM25では飽和パラメータ<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">1</annotation><mrow><msub><mi>k_1</mi></msub></mrow></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span>k<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>を使用し、頻度が高すぎる用語が関連性スコアを支配するのを防ぐ。</p></li>
 <li><p><strong>逆文書頻度（IDF）：</strong>コーパス全体における用語の重要度を反映する。より少ない文書に出現する用語ほどIDF値が高くなり、関連性に大きく寄与していることを示す。</p></li>

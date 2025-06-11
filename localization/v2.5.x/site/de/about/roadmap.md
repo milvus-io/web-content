@@ -6,6 +6,7 @@ summary: >-
   Milvus ist eine Open-Source-Vektordatenbank, die für KI-Anwendungen entwickelt
   wurde. Hier ist unsere Roadmap, die unsere Entwicklung leitet.
 ---
+
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus-Fahrplan<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +78,7 @@ summary: >-
 <li>Unsere Roadmap ist in der Regel in drei Teile gegliedert: die letzte Version, die nächste Version und eine mittel- bis langfristige Vision für das nächste Jahr.</li>
 <li>Während wir Fortschritte machen, lernen wir ständig dazu und passen unseren Fokus gelegentlich an, indem wir je nach Bedarf Punkte hinzufügen oder entfernen.</li>
 <li>Diese Pläne sind unverbindlich und können je nach Abonnement variieren.</li>
-<li>Wir halten uns strikt an unsere Roadmap, wobei unsere <a href="/docs/de/release_notes.md">Versionshinweise</a> als Referenz dienen.</li>
+<li>Wir halten uns strikt an unsere Roadmap, wobei unsere <a href="/docs/de/v2.5.x/release_notes.md">Versionshinweise</a> als Referenz dienen.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">Wie Sie beitragen können<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

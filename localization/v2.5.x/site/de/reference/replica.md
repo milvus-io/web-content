@@ -3,6 +3,7 @@ id: replica.md
 summary: Erfahren Sie mehr über die In-Memory-Replikation in Milvus.
 title: In-Memory-Replikation
 ---
+
 <h1 id="In-Memory-Replica" class="common-anchor-header">In-Memory-Replikation<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: In-Memory-Replikation
         ></path>
       </svg>
     </button></h1><p>In diesem Thema wird der Mechanismus der In-Memory-Replikation (Replikation) in Milvus vorgestellt, der mehrere Segmentreplikationen im Arbeitsspeicher ermöglicht, um die Leistung und Verfügbarkeit zu verbessern.</p>
-<p>Informationen zur Konfiguration von In-Memory-Replikaten finden Sie unter <a href="/docs/de/configure_querynode.md#queryNodereplicas">Abfrageknotenbezogene Konfigurationen</a>.</p>
+<p>Informationen zur Konfiguration von In-Memory-Replikaten finden Sie unter <a href="/docs/de/v2.5.x/configure_querynode.md#queryNodereplicas">Abfrageknotenbezogene Konfigurationen</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

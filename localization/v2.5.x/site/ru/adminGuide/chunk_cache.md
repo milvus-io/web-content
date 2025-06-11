@@ -2,6 +2,7 @@
 id: chunk_cache.md
 title: Настройка кэш-памяти
 ---
+
 <h1 id="Configure-Chunk-Cache" class="common-anchor-header">Настройка кэш-памяти<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,11 +54,11 @@ title: Настройка кэш-памяти
     </button></h2><p>В этом руководстве приведены инструкции по настройке механизма кэширования чанков для экземпляра Milvus. Конфигурация зависит от способа установки экземпляра Milvus.</p>
 <ul>
 <li><p>Для экземпляров Milvus, установленных с помощью Helm Charts</p>
-<p>Добавьте конфигурацию в файл <code translate="no">values.yaml</code> в разделе <code translate="no">config</code>. Подробнее см. в разделе <a href="/docs/ru/configure-helm.md">Настройка Milvus с помощью Helm Charts</a>.</p></li>
+<p>Добавьте конфигурацию в файл <code translate="no">values.yaml</code> в разделе <code translate="no">config</code>. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/configure-helm.md">Настройка Milvus с помощью Helm Charts</a>.</p></li>
 <li><p>Для экземпляров Milvus, установленных с помощью Docker Compose</p>
-<p>Добавьте конфигурацию в файл <code translate="no">milvus.yaml</code>, который вы использовали для запуска экземпляра Milvus. Подробнее см. в разделе <a href="/docs/ru/configure-docker.md">Настройка Milvus с помощью Docker Compose</a>.</p></li>
+<p>Добавьте конфигурацию в файл <code translate="no">milvus.yaml</code>, который вы использовали для запуска экземпляра Milvus. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/configure-docker.md">Настройка Milvus с помощью Docker Compose</a>.</p></li>
 <li><p>Для экземпляров Milvus, установленных с помощью Operator</p>
-<p>Добавьте конфигурацию в раздел <code translate="no">spec.components</code> пользовательского ресурса <code translate="no">Milvus</code>. Подробнее см. в разделе <a href="/docs/ru/configure_operator.md">Настройка Milvus с помощью Operator</a>.</p></li>
+<p>Добавьте конфигурацию в раздел <code translate="no">spec.components</code> пользовательского ресурса <code translate="no">Milvus</code>. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/configure_operator.md">Настройка Milvus с помощью Operator</a>.</p></li>
 </ul>
 <h3 id="Configuration-options" class="common-anchor-header">Параметры конфигурации</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode</span>:
     <span class="hljs-attr">cache</span>:

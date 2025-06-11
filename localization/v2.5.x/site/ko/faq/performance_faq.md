@@ -1,8 +1,9 @@
 ---
 id: performance_faq.md
-summary: '검색 성능, 성능 향상 및 기타 성능 관련 문제에 대해 자주 묻는 질문에 대한 답변을 찾아보세요.'
+summary: "검색 성능, 성능 향상 및 기타 성능 관련 문제에 대해 자주 묻는 질문에 대한 답변을 찾아보세요."
 title: 성능 FAQ
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">성능 FAQ<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -31,7 +32,7 @@ title: 성능 FAQ
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">CPU 사용량에 영향을 미치는 요인은 무엇인가요?</h4><p>Milvus가 인덱스를 구축하거나 쿼리를 실행할 때 CPU 사용량이 증가합니다. 일반적으로 인덱스 구축은 단일 스레드에서 실행되는 Annoy를 사용하는 경우를 제외하고는 CPU 집약적입니다.</p>
 <p>쿼리를 실행할 때 CPU 사용량은 <code translate="no">nq</code> 와 <code translate="no">nprobe</code> 에 의해 영향을 받습니다. <code translate="no">nq</code> 과 <code translate="no">nprobe</code> 이 작으면 동시성이 낮고 CPU 사용량이 낮게 유지됩니다.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">데이터 삽입과 검색을 동시에 수행하면 쿼리 성능에 영향을 주나요?</h4><p>삽입 작업은 CPU를 많이 사용하지 않습니다. 그러나 새 세그먼트가 인덱스 구축 임계값에 도달하지 않았을 수 있기 때문에 Milvus는 무차별 대입 검색을 사용하므로 쿼리 성능에 상당한 영향을 미칩니다.</p>
-<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 매개변수는 세그먼트의 인덱스 구축 임계값을 결정하며, 기본적으로 1024행으로 설정되어 있습니다. 자세한 내용은 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
+<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 매개변수는 세그먼트의 인덱스 구축 임계값을 결정하며, 기본적으로 1024행으로 설정되어 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">VARCHAR 필드를 색인하면 삭제 속도가 향상될 수 있나요?</h4><p>예. VARCHAR 필드를 인덱싱하면 '표현식 기준 삭제' 작업 속도를 높일 수 있지만 특정 조건에서만 가능합니다:</p>
 <ul>
 <li><strong>반전 인덱스</strong>: 이 인덱스는 기본 키가 아닌 VARCHAR 필드에 대한 <code translate="no">IN</code> 또는 <code translate="no">==</code> 표현식에 도움이 됩니다.</li>

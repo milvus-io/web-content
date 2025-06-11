@@ -3,6 +3,7 @@ id: replica.md
 summary: En savoir plus sur la réplique en mémoire dans Milvus.
 title: Réplique en mémoire
 ---
+
 <h1 id="In-Memory-Replica" class="common-anchor-header">Réplique en mémoire<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: Réplique en mémoire
         ></path>
       </svg>
     </button></h1><p>Cette rubrique présente le mécanisme de réplique en mémoire (réplication) de Milvus qui permet de répliquer plusieurs segments dans la mémoire de travail afin d'améliorer les performances et la disponibilité.</p>
-<p>Pour plus d'informations sur la configuration des répliques en mémoire, voir <a href="/docs/fr/configure_querynode.md#queryNodereplicas">Configurations relatives aux nœuds de requête</a>.</p>
+<p>Pour plus d'informations sur la configuration des répliques en mémoire, voir <a href="/docs/fr/v2.5.x/configure_querynode.md#queryNodereplicas">Configurations relatives aux nœuds de requête</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

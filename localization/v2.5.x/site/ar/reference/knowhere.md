@@ -3,6 +3,7 @@ id: knowhere.md
 summary: تعرّف على "نولوجي" في ميلفوس.
 title: نوير
 ---
+
 <h1 id="Knowhere" class="common-anchor-header">نوير<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,8 +75,8 @@ title: نوير
     </button></h2><p>فيما يلي مزايا نوير على فايس.</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">دعم BitsetView</h4><p>يقدم ميلفوس آلية مجموعة البتات لتحقيق &quot;الحذف الناعم&quot;. لا يزال المتجه المحذوف حذفًا ناعمًا موجودًا في قاعدة البيانات ولكن لن يتم حسابه أثناء البحث أو الاستعلام عن تشابه المتجهات.</p>
 <p>يتوافق كل بت في مجموعة البتات مع متجه مفهرس. إذا تم وضع علامة "1" على أحد المتجهات في مجموعة البتات، فهذا يعني أن هذا المتجه محذوف بشكل ناعم ولن يتم تضمينه أثناء البحث عن المتجهات. يتم تطبيق معلمة مجموعة البتات على جميع واجهات برمجة تطبيقات استعلام فهرس فايس المكشوفة في نوير، بما في ذلك فهارس وحدة المعالجة المركزية ووحدة معالجة الرسومات.</p>
-<p>لمزيد من المعلومات حول آلية مجموعة البتات، راجع <a href="/docs/ar/bitset.md">مجموعة البتات</a>.</p>
-<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">دعم مقاييس تشابه متعددة لفهرسة المتجهات الثنائية</h4><p>يدعم Knowhere مقاييس <a href="/docs/ar/metric.md#Hamming-distance">هامينج</a> <a href="/docs/ar/metric.md#Jaccard-distance">وجاكارد</a> <a href="/docs/ar/metric.md#Tanimoto-distance">وتانيموتو</a> <a href="/docs/ar/metric.md#Superstructure">والبنية الفوقية</a> <a href="/docs/ar/metric.md#Substructure">والبنية الفرعية</a>. يمكن استخدام Jaccard وTanimoto لقياس التشابه بين مجموعتي عينات بينما يمكن استخدام البنية الفائقة والبنية الفرعية لقياس تشابه البنى الكيميائية.</p>
+<p>لمزيد من المعلومات حول آلية مجموعة البتات، راجع <a href="/docs/ar/v2.5.x/bitset.md">مجموعة البتات</a>.</p>
+<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">دعم مقاييس تشابه متعددة لفهرسة المتجهات الثنائية</h4><p>يدعم Knowhere مقاييس <a href="/docs/ar/v2.5.x/metric.md#Hamming-distance">هامينج</a> <a href="/docs/ar/v2.5.x/metric.md#Jaccard-distance">وجاكارد</a> <a href="/docs/ar/v2.5.x/metric.md#Tanimoto-distance">وتانيموتو</a> <a href="/docs/ar/v2.5.x/metric.md#Superstructure">والبنية الفوقية</a> <a href="/docs/ar/v2.5.x/metric.md#Substructure">والبنية الفرعية</a>. يمكن استخدام Jaccard وTanimoto لقياس التشابه بين مجموعتي عينات بينما يمكن استخدام البنية الفائقة والبنية الفرعية لقياس تشابه البنى الكيميائية.</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">دعم مجموعة تعليمات AVX512</h4><p>بصرف النظر عن <a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a> <a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">وSSE4.2</a> <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">وAVX2،</a> وهي مجموعات التعليمات المدعومة بالفعل من قبل Faiss، يدعم Knowhere أيضًا <a href="https://en.wikipedia.org/wiki/AVX-512">AVX512،</a> والذي يمكنه <a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">تحسين أداء بناء الفهرس والاستعلام بنسبة 20% إلى 30%</a> مقارنةً ب AVX2.</p>
 <h4 id="Automatic-SIMD-instruction-selection" class="common-anchor-header">التحديد التلقائي لتعليمات SIMD</h4><p>يدعم برنامج Knowhere استدعاء تعليمات SIMD المناسبة تلقائياً (على سبيل المثال، SIMD SSE وAVX وAVX2 وAVX512) على أي معالج وحدة معالجة مركزية (سواءً في الموقع أو على المنصات السحابية)، بحيث لا يحتاج المستخدمون إلى تحديد علامة SIMD يدوياً (على سبيل المثال، "-msse4") أثناء التجميع.</p>
 <p>تم بناء Knowhere من خلال إعادة هيكلة قاعدة كود Faiss. يتم تحليل الدوال الشائعة (على سبيل المثال، حوسبة التشابه) التي تعتمد على تسريع SIMD. ثم يتم تنفيذ أربعة إصدارات لكل دالة (أي SSE، AVX، AVX2، AVX512) ويتم وضع كل منها في ملف مصدر منفصل. ثم يتم تجميع الملفات المصدرية بشكل فردي مع علامة SIMD المقابلة. لذلك، في وقت التشغيل، يمكن ل Knowhere اختيار تعليمات SIMD الأنسب تلقائيًا في وقت التشغيل بناءً على علامات وحدة المعالجة المركزية الحالية ثم ربط مؤشرات الدالة الصحيحة باستخدام التثبيت.</p>
@@ -173,7 +174,7 @@ title: نوير
       </svg>
     </button></h2><p>بعد التعرف على كيفية عمل Knowhere في ميلفوس، قد ترغب أيضًا في:</p>
 <ul>
-<li><p>التعرف على <a href="/docs/ar/index.md">الأنواع المختلفة من المؤشرات التي يدعمها ملفوس</a>.</p></li>
-<li><p>التعرف على <a href="/docs/ar/bitset.md">آلية مجموعة البتات</a>.</p></li>
-<li><p>فهم <a href="/docs/ar/data_processing.md">كيفية معالجة البيانات</a> في ملفوس.</p></li>
+<li><p>التعرف على <a href="/docs/ar/v2.5.x/index.md">الأنواع المختلفة من المؤشرات التي يدعمها ملفوس</a>.</p></li>
+<li><p>التعرف على <a href="/docs/ar/v2.5.x/bitset.md">آلية مجموعة البتات</a>.</p></li>
+<li><p>فهم <a href="/docs/ar/v2.5.x/data_processing.md">كيفية معالجة البيانات</a> في ملفوس.</p></li>
 </ul>

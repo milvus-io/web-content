@@ -6,6 +6,7 @@ summary: >-
   perlu membuat desain skemanya. Halaman ini membantu Anda memahami skema
   koleksi dan merancang contoh skema sendiri.
 ---
+
 <h1 id="Schema-Explained​" class="common-anchor-header">Penjelasan Skema<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +46,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Rancangan skema</span> </span></p>
 <p>Desain model data dari sistem pencarian melibatkan analisis kebutuhan bisnis dan abstraksi informasi ke dalam model data yang diekspresikan dengan skema. Misalnya, pencarian sepotong teks harus "diindeks" dengan mengubah string literal menjadi vektor melalui "penyematan" dan memungkinkan pencarian vektor. Di luar persyaratan penting ini, menyimpan properti lain seperti stempel waktu publikasi dan penulis mungkin diperlukan. Metadata ini memungkinkan pencarian semantik disempurnakan melalui penyaringan, yang hanya mengembalikan teks yang diterbitkan setelah tanggal tertentu atau oleh penulis tertentu. Anda juga dapat mengambil skalar ini dengan teks utama untuk merender hasil pencarian dalam aplikasi. Masing-masing harus diberi pengenal unik untuk mengatur potongan-potongan teks ini, yang dinyatakan sebagai bilangan bulat atau string. Elemen-elemen ini sangat penting untuk mencapai logika pencarian yang canggih.</p>
-<p>Lihat Panduan <a href="/docs/id/schema-hands-on.md">Praktis Desain Skema</a> untuk mengetahui cara membuat skema yang dirancang dengan baik.</p>
+<p>Lihat Panduan <a href="/docs/id/v2.5.x/schema-hands-on.md">Praktis Desain Skema</a> untuk mengetahui cara membuat skema yang dirancang dengan baik.</p>
 <h2 id="Create-Schema​" class="common-anchor-header">Membuat Skema<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,6 +70,7 @@ summary: >-
 schema = MilvusClient.create_schema()​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;​
 ​
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();​
@@ -112,6 +114,7 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; ​
 ​
@@ -151,7 +154,7 @@ export schema='{​
 </code></pre>
 <p>Ketika menambahkan bidang, Anda dapat secara eksplisit mengklarifikasi bidang tersebut sebagai bidang utama dengan menyetel properti <code translate="no">is_primary</code> ke <code translate="no">True</code>. Bidang utama menerima nilai <strong>Int64</strong> secara default. Dalam kasus ini, nilai field utama harus berupa bilangan bulat yang mirip dengan <code translate="no">12345</code>. Jika Anda memilih untuk menggunakan nilai <strong>VarChar</strong> di field utama, nilainya harus berupa string yang mirip dengan <code translate="no">my_entity_1234</code>.</p>
 <p>Anda juga dapat mengatur properti <code translate="no">autoId</code> ke <code translate="no">True</code> untuk membuat Milvus secara otomatis mengalokasikan nilai field utama pada saat penyisipan data.</p>
-<p>Untuk detailnya, lihat <a href="/docs/id/primary-field.md">Bidang Utama &amp; AutoID</a>.</p>
+<p>Untuk detailnya, lihat <a href="/docs/id/v2.5.x/primary-field.md">Bidang Utama &amp; AutoID</a>.</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">Menambahkan Bidang Vektor<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,6 +181,7 @@ export schema='{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
         .dataType(DataType.FloatVector)​
@@ -238,7 +242,7 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>Dalam kasus yang umum, Anda dapat menggunakan bidang skalar untuk menyimpan metadata dari sematan vektor yang disimpan di Milvus, dan melakukan pencarian JST dengan pemfilteran metadata untuk meningkatkan ketepatan hasil pencarian. Milvus mendukung berbagai jenis bidang skalar, termasuk <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong>, dan JSON.</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">Menambahkan Bidang String</h3><p>Di Milvus, Anda dapat menggunakan field VarChar untuk menyimpan string. Untuk mengetahui lebih lanjut mengenai bidang VarChar, lihat <a href="/docs/id/string.md">Bidang String</a>.</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">Menambahkan Bidang String</h3><p>Di Milvus, Anda dapat menggunakan field VarChar untuk menyimpan string. Untuk mengetahui lebih lanjut mengenai bidang VarChar, lihat <a href="/docs/id/v2.5.x/string.md">Bidang String</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -249,6 +253,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
         .dataType(DataType.VarChar)​
@@ -283,7 +288,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">Menambahkan Bidang Angka</h3><p>Jenis-jenis angka yang didukung oleh Milvus adalah <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, dan <code translate="no">Double</code>. Untuk informasi lebih lanjut tentang bidang angka, lihat <a href="/docs/id/number.md">Bidang Angka</a>.</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">Menambahkan Bidang Angka</h3><p>Jenis-jenis angka yang didukung oleh Milvus adalah <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, dan <code translate="no">Double</code>. Untuk informasi lebih lanjut tentang bidang angka, lihat <a href="/docs/id/v2.5.x/number.md">Bidang Angka</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -292,6 +297,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)​
         .dataType(DataType.Int64)​
@@ -329,6 +335,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)​
         .dataType(DataType.Bool)​
@@ -358,7 +365,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">Menambahkan bidang JSON</h3><p>Bidang JSON biasanya menyimpan data JSON setengah terstruktur. Untuk mengetahui lebih lanjut tentang bidang JSON, lihat <a href="/docs/id/use-json-fields.md">Bidang JSON</a>.</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">Menambahkan bidang JSON</h3><p>Bidang JSON biasanya menyimpan data JSON setengah terstruktur. Untuk mengetahui lebih lanjut tentang bidang JSON, lihat <a href="/docs/id/v2.5.x/use-json-fields.md">Bidang JSON</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -367,6 +374,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)​
         .dataType(DataType.JSON)​
@@ -397,7 +405,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">Menambahkan Bidang Array</h3><p>Bidang array menyimpan daftar elemen. Tipe data dari semua elemen di dalam bidang array harus sama. Untuk informasi lebih lanjut tentang bidang array, lihat <a href="/docs/id/array_data_type.md">Bidang Array</a>.</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">Menambahkan Bidang Array</h3><p>Bidang array menyimpan daftar elemen. Tipe data dari semua elemen di dalam bidang array harus sama. Untuk informasi lebih lanjut tentang bidang array, lihat <a href="/docs/id/v2.5.x/array_data_type.md">Bidang Array</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -409,6 +417,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)​
         .dataType(DataType.Array)​

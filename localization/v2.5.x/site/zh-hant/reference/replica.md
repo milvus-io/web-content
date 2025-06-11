@@ -3,6 +3,7 @@ id: replica.md
 summary: 瞭解 Milvus 中的記憶體內複製。
 title: 記憶體內複製
 ---
+
 <h1 id="In-Memory-Replica" class="common-anchor-header">記憶體內複製<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: 記憶體內複製
         ></path>
       </svg>
     </button></h1><p>本主題介紹 Milvus 的記憶體內複製（複製）機制，可在工作記憶體中實現多段複製，以提高性能和可用性。</p>
-<p>有關如何配置記憶體內複製的資訊，請參閱<a href="/docs/zh-hant/configure_querynode.md#queryNodereplicas">查詢節點相關配置</a>。</p>
+<p>有關如何配置記憶體內複製的資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure_querynode.md#queryNodereplicas">查詢節點相關配置</a>。</p>
 <h2 id="Overview" class="common-anchor-header">概觀<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

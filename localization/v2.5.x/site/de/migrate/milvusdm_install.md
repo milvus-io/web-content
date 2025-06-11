@@ -5,6 +5,7 @@ summary: >-
   migrieren.
 title: Migrationswerkzeug installieren
 ---
+
 <h1 id="Install-Migration-Tool" class="common-anchor-header">Migrationswerkzeug installieren<button data-href="#Install-Migration-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +88,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Nach der Installation des Milvus-Migrationswerkzeugs können Sie Daten aus verschiedenen Quellen migrieren:</p>
 <ul>
-<li><a href="/docs/de/es2m.md">Von Elasticsearch</a></li>
-<li><a href="/docs/de/f2m.md">Von Faiss</a></li>
-<li><a href="/docs/de/m2m.md">Von Milvus 1.x</a></li>
+<li><a href="/docs/de/v2.5.x/es2m.md">Von Elasticsearch</a></li>
+<li><a href="/docs/de/v2.5.x/f2m.md">Von Faiss</a></li>
+<li><a href="/docs/de/v2.5.x/m2m.md">Von Milvus 1.x</a></li>
 </ul>

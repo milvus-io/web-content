@@ -3,6 +3,7 @@ id: bitset.md
 summary: Pelajari tentang bitset di Milvus.
 title: Bitset
 ---
+
 <h1 id="Bitset" class="common-anchor-header">Bitset<button data-href="#Bitset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +36,7 @@ title: Bitset
         ></path>
       </svg>
     </button></h2><p>Bitset adalah sekumpulan bit. Bit adalah elemen dengan hanya dua nilai yang mungkin, biasanya <code translate="no">0</code> dan <code translate="no">1</code>, atau nilai boolean <code translate="no">true</code> dan <code translate="no">false</code>. Dalam Milvus, bitset adalah array dari angka bit <code translate="no">0</code> dan <code translate="no">1</code> yang dapat digunakan untuk merepresentasikan data tertentu secara ringkas dan efisien dibandingkan dengan ints, float, atau char. Nomor bit adalah <code translate="no">0</code> secara default dan hanya diatur ke <code translate="no">1</code> jika memenuhi persyaratan tertentu.</p>
-<p>Operasi pada bit-bit dilakukan dengan <a href="/docs/id/boolean.md">logika boolean</a>, di mana nilai keluarannya valid atau tidak valid, yang juga dilambangkan dengan <code translate="no">1</code> dan <code translate="no">0</code>. Sebagai contoh, <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">operator logika</a> <code translate="no">AND</code> dapat digunakan untuk membandingkan dua bitset berdasarkan item pada posisi indeks yang sama dan menghasilkan bitset baru dengan hasilnya. Jika dua item dalam sebuah posisi adalah sama, maka dalam bitset baru <code translate="no">1</code> akan dituliskan pada posisi tersebut; <code translate="no">0</code> jika berbeda.</p>
+<p>Operasi pada bit-bit dilakukan dengan <a href="/docs/id/v2.5.x/boolean.md">logika boolean</a>, di mana nilai keluarannya valid atau tidak valid, yang juga dilambangkan dengan <code translate="no">1</code> dan <code translate="no">0</code>. Sebagai contoh, <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">operator logika</a> <code translate="no">AND</code> dapat digunakan untuk membandingkan dua bitset berdasarkan item pada posisi indeks yang sama dan menghasilkan bitset baru dengan hasilnya. Jika dua item dalam sebuah posisi adalah sama, maka dalam bitset baru <code translate="no">1</code> akan dituliskan pada posisi tersebut; <code translate="no">0</code> jika berbeda.</p>
 <h2 id="Implementation" class="common-anchor-header">Implementasi<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

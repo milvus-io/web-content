@@ -6,6 +6,7 @@ summary: >-
   Milvus هي قاعدة بيانات متجهة مفتوحة المصدر مصممة لتشغيل تطبيقات الذكاء
   الاصطناعي. إليك خارطة طريقنا لتوجيه تطويرنا.
 ---
+
 <h1 id="Milvus-Roadmap" class="common-anchor-header">خارطة طريق ميلفوس<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +78,7 @@ summary: >-
 <li>تنقسم خارطة الطريق الخاصة بنا عادةً إلى ثلاثة أجزاء: الإصدار الأحدث، والإصدار القادم القادم، ورؤية متوسطة إلى طويلة المدى خلال العام القادم.</li>
 <li>ومع تقدمنا في العمل، نتعلم باستمرار ونقوم بتعديل تركيزنا من حين لآخر، ونضيف أو نحذف العناصر حسب الحاجة.</li>
 <li>هذه الخطط إرشادية وقابلة للتغيير، وقد تختلف بناءً على خدمات الاشتراك.</li>
-<li>نحن نلتزم بثبات بخارطة الطريق الخاصة بنا، مع استخدام <a href="/docs/ar/release_notes.md">ملاحظات الإصدار</a> الخاصة بنا كمرجع.</li>
+<li>نحن نلتزم بثبات بخارطة الطريق الخاصة بنا، مع استخدام <a href="/docs/ar/v2.5.x/release_notes.md">ملاحظات الإصدار</a> الخاصة بنا كمرجع.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">كيفية المساهمة<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

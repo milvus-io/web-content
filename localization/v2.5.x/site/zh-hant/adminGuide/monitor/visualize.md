@@ -1,9 +1,10 @@
 ---
 id: visualize.md
 title: 可視化指標
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: 瞭解如何在 Grafana 中視覺化 Milvus 的度量指標。
 ---
+
 <h1 id="Visualize-Milvus-Metrics-in-Grafana" class="common-anchor-header">在 Grafana 中視覺化 Milvus 的度量指標<button data-href="#Visualize-Milvus-Metrics-in-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ summary: 瞭解如何在 Grafana 中視覺化 Milvus 的度量指標。
         ></path>
       </svg>
     </button></h1><p>本主題描述如何使用 Grafana 可視化 Milvus metrics。</p>
-<p><a href="/docs/zh-hant/monitor.md">如監控指南</a>所述，指標包含有用的資訊，例如特定 Milvus 元件使用了多少記憶體。監控指標有助於您更好地瞭解 Milvus 的性能及其運行狀態，以便及時調整資源分配。</p>
+<p><a href="/docs/zh-hant/v2.5.x/monitor.md">如監控指南</a>所述，指標包含有用的資訊，例如特定 Milvus 元件使用了多少記憶體。監控指標有助於您更好地瞭解 Milvus 的性能及其運行狀態，以便及時調整資源分配。</p>
 <p>可視化是一種顯示資源使用量在不同時間變化的圖表，它使您更容易快速查看和注意到資源使用量的變化，特別是在事件發生時。</p>
 <p>本教學使用時間序列分析的開放原始碼平台 Grafana 來視覺化部署在 Kubernetes (K8s) 上的 Milvus 叢集的各種效能指標。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -39,8 +40,8 @@ summary: 瞭解如何在 Grafana 中視覺化 Milvus 的度量指標。
         ></path>
       </svg>
     </button></h2><ul>
-<li>您已<a href="/docs/zh-hant/install_cluster-helm.md">在 K8s 上安裝 Milvus 叢集</a>。）</li>
-<li>在使用 Grafana 可視化指標之前，您需要<a href="/docs/zh-hant/monitor.md">設定 Prometheus</a>以監控和收集指標。如果設定成功，您可以從<code translate="no">http://localhost:3000</code> 存取 Grafana。或者您也可以使用<code translate="no">admin:admin</code> 的預設 Grafana<code translate="no">user:password</code> 存取 Grafana。</li>
+<li>您已<a href="/docs/zh-hant/v2.5.x/install_cluster-helm.md">在 K8s 上安裝 Milvus 叢集</a>。）</li>
+<li>在使用 Grafana 可視化指標之前，您需要<a href="/docs/zh-hant/v2.5.x/monitor.md">設定 Prometheus</a>以監控和收集指標。如果設定成功，您可以從<code translate="no">http://localhost:3000</code> 存取 Grafana。或者您也可以使用<code translate="no">admin:admin</code> 的預設 Grafana<code translate="no">user:password</code> 存取 Grafana。</li>
 </ul>
 <h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">使用 Grafana 可視化度量指標<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,11 +91,11 @@ summary: 瞭解如何在 Grafana 中視覺化 Milvus 的度量指標。
       </svg>
     </button></h2><ul>
 <li>如果您已將 Grafana 設定為可視化 Milvus 的度量指標，您可能還想要<ul>
-<li>瞭解如何<a href="/docs/zh-hant/alert.md">為 Milvus 服務建立警示</a></li>
-<li>調整您的<a href="/docs/zh-hant/allocate.md">資源分配</a></li>
-<li><a href="/docs/zh-hant/scaleout.md">擴大或擴充 Milvus 叢集</a></li>
+<li>瞭解如何<a href="/docs/zh-hant/v2.5.x/alert.md">為 Milvus 服務建立警示</a></li>
+<li>調整您的<a href="/docs/zh-hant/v2.5.x/allocate.md">資源分配</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/scaleout.md">擴大或擴充 Milvus 叢集</a></li>
 </ul></li>
 <li>如果您有興趣升級 Milvus 版本、<ul>
-<li>閱讀<a href="/docs/zh-hant/upgrade_milvus_cluster-operator.md">升級 Milvus 集群</a>和<a href="/docs/zh-hant/upgrade_milvus_standalone-operator.md">升級 Milvus 單機的</a> <a href="/docs/zh-hant/upgrade_milvus_cluster-operator.md">指南</a>。</li>
+<li>閱讀<a href="/docs/zh-hant/v2.5.x/upgrade_milvus_cluster-operator.md">升級 Milvus 集群</a>和<a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-operator.md">升級 Milvus 單機的</a> <a href="/docs/zh-hant/v2.5.x/upgrade_milvus_cluster-operator.md">指南</a>。</li>
 </ul></li>
 </ul>

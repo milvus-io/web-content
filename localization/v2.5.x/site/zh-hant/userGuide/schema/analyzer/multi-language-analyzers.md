@@ -7,6 +7,7 @@ summary: >-
   所需的非常不同的標記化和字莖規則，導致召回率降低。舉例來說，搜尋西班牙文「teléfono」（意指「電話」）一詞時，以英文為重點的分析器可能會被絆倒：它可能會去掉重音，並且不應用西班牙文特定的字莖，導致相關結果被忽略。
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="Multi-language-Analyzers" class="common-anchor-header">多語言分析器<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +41,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>此功能僅適用於基於 BM25 的文字檢索和稀疏向量。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>。</p></li>
+<li><p>此功能僅適用於基於 BM25 的文字檢索和稀疏向量。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/full-text-search.md">全文檢索</a>。</p></li>
 <li><p>單一資料集中的每個文件只能使用一個分析器，由其語言識別碼欄位值決定。</p></li>
 <li><p>效能可能會因分析器的複雜性和文字資料的大小而有所不同。</p></li>
 </ul>
@@ -67,7 +68,7 @@ beta: Milvus 2.5.11+
 <ol>
 <li><p><strong>設定多語言分析器</strong>：</p>
 <ul>
-<li><p>使用格式設定多個特定語言分析器：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, 其中每個<code translate="no">analyzer_config</code> 遵循標準<code translate="no">analyzer_params</code> 配置，如<a href="/docs/zh-hant/analyzer-overview.md#Analyzer-types">Analyzer Overview</a> 中所述。</p></li>
+<li><p>使用格式設定多個特定語言分析器：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, 其中每個<code translate="no">analyzer_config</code> 遵循標準<code translate="no">analyzer_params</code> 配置，如<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Analyzer-types">Analyzer Overview</a> 中所述。</p></li>
 <li><p>定義特殊識別字段，以決定每個文件的分析器選擇。</p></li>
 <li><p>設定<code translate="no">default</code> 分析器，以處理未知語言。</p></li>
 </ul></li>
@@ -193,6 +194,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p>參數</p></th>
@@ -205,7 +207,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p>是</p></td>
      <td><p>列出 Milvus 可以用來處理文字的每一種特定語言分析器。<code translate="no">analyzers</code> 中的每個分析器都遵循以下格式：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code> 。</p></td>
      <td><ul>
-<li>使用標準<code translate="no">analyzer_params</code> 語法定義每個分析器 (請參閱<a href="/docs/zh-hant/analyzer-overview.md#Analyzer-types">分析器概述</a>)。</li>
+<li>使用標準<code translate="no">analyzer_params</code> 語法定義每個分析器 (請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Analyzer-types">分析器概述</a>)。</li>
 <li>添加一個關鍵值為<code translate="no">default</code> 的項目；當<code translate="no">by_field</code> 中儲存的值與任何其他分析器名稱不匹配時，Milvus 就會返回到這個分析器。</li>
 </ul></td>
    </tr>
@@ -256,7 +258,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
 
 <span class="hljs-comment"># Initialize client</span>
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
 )
 
 <span class="hljs-comment"># Initialize a new schema</span>
@@ -264,35 +266,36 @@ schema = client.create_schema()
 
 <span class="hljs-comment"># Step 2.1: Add a primary key field for unique document identification</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;id&quot;</span>,                  <span class="hljs-comment"># Field name</span>
-    datatype=DataType.INT64,          <span class="hljs-comment"># Integer data type</span>
-    is_primary=<span class="hljs-literal">True</span>,                  <span class="hljs-comment"># Designate as primary key</span>
-    auto_id=<span class="hljs-literal">True</span>                      <span class="hljs-comment"># Auto-generate IDs (recommended)</span>
+field_name=<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-comment"># Field name</span>
+datatype=DataType.INT64, <span class="hljs-comment"># Integer data type</span>
+is_primary=<span class="hljs-literal">True</span>, <span class="hljs-comment"># Designate as primary key</span>
+auto_id=<span class="hljs-literal">True</span> <span class="hljs-comment"># Auto-generate IDs (recommended)</span>
 )
 
 <span class="hljs-comment"># Step 2.2: Add language identifier field</span>
 <span class="hljs-comment"># This MUST match the &quot;by_field&quot; value in language_analyzer_config</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;language&quot;</span>,       <span class="hljs-comment"># Field name</span>
-    datatype=DataType.VARCHAR,   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length (adjust as needed)</span>
+field_name=<span class="hljs-string">&quot;language&quot;</span>, <span class="hljs-comment"># Field name</span>
+datatype=DataType.VARCHAR, <span class="hljs-comment"># String data type</span>
+max_length=<span class="hljs-number">255</span> <span class="hljs-comment"># Maximum length (adjust as needed)</span>
 )
 
 <span class="hljs-comment"># Step 2.3: Add text content field with multi-language analysis capability</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;text&quot;</span>,                           <span class="hljs-comment"># Field name</span>
-    datatype=DataType.VARCHAR,                   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
-    enable_analyzer=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># Enable text analysis</span>
-    multi_analyzer_params=multi_analyzer_params  <span class="hljs-comment"># Connect with our language analyzers</span>
+field_name=<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-comment"># Field name</span>
+datatype=DataType.VARCHAR, <span class="hljs-comment"># String data type</span>
+max_length=<span class="hljs-number">8192</span>, <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
+enable_analyzer=<span class="hljs-literal">True</span>, <span class="hljs-comment"># Enable text analysis</span>
+multi_analyzer_params=multi_analyzer_params <span class="hljs-comment"># Connect with our language analyzers</span>
 )
 
 <span class="hljs-comment"># Step 2.4: Add sparse vector field to store the BM25 output</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,                   <span class="hljs-comment"># Field name</span>
-    datatype=DataType.SPARSE_FLOAT_VECTOR  <span class="hljs-comment"># Sparse vector data type</span>
+field_name=<span class="hljs-string">&quot;sparse&quot;</span>, <span class="hljs-comment"># Field name</span>
+datatype=DataType.SPARSE_FLOAT_VECTOR <span class="hljs-comment"># Sparse vector data type</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
@@ -464,6 +467,7 @@ bm25_function = Function(
 <span class="hljs-comment"># Add the function to our schema</span>
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">function</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
         .functionType(FunctionType.BM25)
         .name(<span class="hljs-string">&quot;text_to_vector&quot;</span>)
@@ -510,7 +514,7 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>這個函式會根據每個文字項的語言識別碼，自動套用適當的分析器。關於基於 BM25 的文字檢索的更多資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>。</p>
+<p>這個函式會根據每個文字項的語言識別碼，自動套用適當的分析器。關於基於 BM25 的文字檢索的更多資訊，請參閱<a href="/docs/zh-hant/v2.5.x/full-text-search.md">全文檢索</a>。</p>
 <h3 id="Configure-index-params" class="common-anchor-header">設定索引參數</h3><p>為了允許有效率的搜尋，請在稀疏向量場上建立索引：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -519,11 +523,12 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Add index for sparse vector field</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,        <span class="hljs-comment"># Field to index (our vector field)</span>
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,     <span class="hljs-comment"># Let Milvus choose optimal index type</span>
-    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>          <span class="hljs-comment"># Must be BM25 for this feature</span>
+field_name=<span class="hljs-string">&quot;sparse&quot;</span>, <span class="hljs-comment"># Field to index (our vector field)</span>
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Let Milvus choose optimal index type</span>
+metric_type=<span class="hljs-string">&quot;BM25&quot;</span> <span class="hljs-comment"># Must be BM25 for this feature</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
@@ -564,16 +569,17 @@ COLLECTION_NAME = <span class="hljs-string">&quot;multilingual_documents&quot;</
 
 <span class="hljs-comment"># Check if collection already exists</span>
 <span class="hljs-keyword">if</span> client.has_collection(COLLECTION_NAME):
-    client.drop_collection(COLLECTION_NAME)  <span class="hljs-comment"># Remove it for this example</span>
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Dropped existing collection: <span class="hljs-subst">{COLLECTION_NAME}</span>&quot;</span>)
+client.drop_collection(COLLECTION_NAME) <span class="hljs-comment"># Remove it for this example</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Dropped existing collection: <span class="hljs-subst">{COLLECTION_NAME}</span>&quot;</span>)
 
 <span class="hljs-comment"># Create the collection</span>
 client.create_collection(
-    collection_name=COLLECTION_NAME,       <span class="hljs-comment"># Collection name</span>
-    schema=schema,                         <span class="hljs-comment"># Our multilingual schema</span>
-    index_params=index_params              <span class="hljs-comment"># Our search index configuration</span>
+collection_name=COLLECTION_NAME, <span class="hljs-comment"># Collection name</span>
+schema=schema, <span class="hljs-comment"># Our multilingual schema</span>
+index_params=index_params <span class="hljs-comment"># Our search index configuration</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">client.dropCollection(DropCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;multilingual_documents&quot;</span>)
         .build());
@@ -661,7 +667,7 @@ documents = [
 result = client.insert(COLLECTION_NAME, documents)
 
 <span class="hljs-comment"># Print results</span>
-inserted = result[<span class="hljs-string">&quot;insert_count&quot;</span>]            
+inserted = result[<span class="hljs-string">&quot;insert_count&quot;</span>]  
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Successfully inserted <span class="hljs-subst">{inserted}</span> documents&quot;</span>)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Documents by language: 2 English, 2 Chinese&quot;</span>)
 
@@ -669,6 +675,7 @@ inserted = result[<span class="hljs-string">&quot;insert_count&quot;</span>]
 <span class="hljs-comment"># Successfully inserted 4 documents</span>
 <span class="hljs-comment"># Documents by language: 2 English, 2 Chinese</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">List&lt;String&gt; texts = Arrays.asList(
         <span class="hljs-string">&quot;Artificial intelligence is transforming technology&quot;</span>,
         <span class="hljs-string">&quot;Machine learning models require large datasets&quot;</span>,
@@ -803,7 +810,7 @@ curl --request POST \
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> 必須符合您的索引設定。</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> 指定哪個分析器應用於您的查詢文字。這與用於儲存文件的分析器無關。</p></li>
-<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> 控制 BM25 特有的行為；在此，它保留搜尋中的所有詞彙。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p></li>
+<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> 控制 BM25 特有的行為；在此，它保留搜尋中的所有詞彙。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/sparse_vector.md">Sparse Vector</a>。</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -815,25 +822,26 @@ curl --request POST \
 
 <span class="hljs-comment"># Execute the search</span>
 english_results = client.search(
-    collection_name=COLLECTION_NAME,  <span class="hljs-comment"># Collection to search</span>
-    data=[<span class="hljs-string">&quot;artificial intelligence&quot;</span>],                <span class="hljs-comment"># Query text</span>
-    anns_field=<span class="hljs-string">&quot;sparse&quot;</span>,              <span class="hljs-comment"># Field to search against</span>
-    search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
-    limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
-    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+collection_name=COLLECTION_NAME, <span class="hljs-comment"># Collection to search</span>
+data=[<span class="hljs-string">&quot;artificial intelligence&quot;</span>], <span class="hljs-comment"># Query text</span>
+anns_field=<span class="hljs-string">&quot;sparse&quot;</span>, <span class="hljs-comment"># Field to search against</span>
+search_params=search_params, <span class="hljs-comment"># Search configuration</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># Max results to return</span>
+output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>], <span class="hljs-comment"># Fields to include in the output</span>
+consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>, <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display English search results</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== English Search Results ===&quot;</span>)
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(english_results[<span class="hljs-number">0</span>]):
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. [<span class="hljs-subst">{hit.score:<span class="hljs-number">.4</span>f}</span>] <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;text&#x27;</span>)}</span> &quot;</span>
-          <span class="hljs-string">f&quot;(Language: <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;language&#x27;</span>)}</span>)&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. [<span class="hljs-subst">{hit.score:<span class="hljs-number">.4</span>f}</span>] <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;text&#x27;</span>)}</span> &quot;</span>
+<span class="hljs-string">f&quot;(Language: <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;language&#x27;</span>)}</span>)&quot;</span>)
 
 <span class="hljs-comment"># Expected output:</span>
 <span class="hljs-comment"># === English Search Results ===</span>
 <span class="hljs-comment"># 1. [2.7881] Artificial intelligence is transforming technology (Language: english)</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 searchParams.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>);
 searchParams.put(<span class="hljs-string">&quot;analyzer_name&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
@@ -930,25 +938,26 @@ curl --request POST \
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>
 
 chinese_results = client.search(
-    collection_name=COLLECTION_NAME,  <span class="hljs-comment"># Collection to search</span>
-    data=[<span class="hljs-string">&quot;人工智能&quot;</span>],                <span class="hljs-comment"># Query text</span>
-    anns_field=<span class="hljs-string">&quot;sparse&quot;</span>,              <span class="hljs-comment"># Field to search against</span>
-    search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
-    limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
-    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+collection_name=COLLECTION_NAME, <span class="hljs-comment"># Collection to search</span>
+data=[<span class="hljs-string">&quot;人工智能&quot;</span>], <span class="hljs-comment"># Query text</span>
+anns_field=<span class="hljs-string">&quot;sparse&quot;</span>, <span class="hljs-comment"># Field to search against</span>
+search_params=search_params, <span class="hljs-comment"># Search configuration</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># Max results to return</span>
+output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>], <span class="hljs-comment"># Fields to include in the output</span>
+consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>, <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display Chinese search results</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== Chinese Search Results ===&quot;</span>)
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(chinese_results[<span class="hljs-number">0</span>]):
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. [<span class="hljs-subst">{hit.score:<span class="hljs-number">.4</span>f}</span>] <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;text&#x27;</span>)}</span> &quot;</span>
-          <span class="hljs-string">f&quot;(Language: <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;language&#x27;</span>)}</span>)&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. [<span class="hljs-subst">{hit.score:<span class="hljs-number">.4</span>f}</span>] <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;text&#x27;</span>)}</span> &quot;</span>
+<span class="hljs-string">f&quot;(Language: <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;language&#x27;</span>)}</span>)&quot;</span>)
 
 <span class="hljs-comment"># Expected output:</span>
 <span class="hljs-comment"># === Chinese Search Results ===</span>
 <span class="hljs-comment"># 1. [3.3814] 人工智能正在改变技术领域 (Language: chinese)</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">searchParams.put(<span class="hljs-string">&quot;analyzer_name&quot;</span>, <span class="hljs-string">&quot;cn&quot;</span>);
 searchResp = client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;multilingual_documents&quot;</span>)

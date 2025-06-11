@@ -3,6 +3,7 @@ id: allocate.md
 title: Mengalokasikan Sumber Daya ke Milvus di Kubernetes
 summary: Pelajari cara mengalokasikan sumber daya ke Milvus di Kubernetes.
 ---
+
 <h1 id="Allocate-Resources-on-Kubernetes" class="common-anchor-header">Mengalokasikan Sumber Daya di Kubernetes<button data-href="#Allocate-Resources-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ summary: Pelajari cara mengalokasikan sumber daya ke Milvus di Kubernetes.
         ></path>
       </svg>
     </button></h1><p>Topik ini menjelaskan cara mengalokasikan sumber daya ke cluster Milvus di Kubernetes.</p>
-<p>Secara umum, sumber daya yang Anda alokasikan ke klaster Milvus dalam produksi harus proporsional dengan beban kerja mesin. Anda juga harus mempertimbangkan jenis mesin saat mengalokasikan sumber daya. Meskipun Anda dapat memperbarui konfigurasi saat klaster berjalan, kami sarankan untuk menetapkan nilainya sebelum <a href="/docs/id/install_cluster-helm.md">menerapkan klaster.</a></p>
+<p>Secara umum, sumber daya yang Anda alokasikan ke klaster Milvus dalam produksi harus proporsional dengan beban kerja mesin. Anda juga harus mempertimbangkan jenis mesin saat mengalokasikan sumber daya. Meskipun Anda dapat memperbarui konfigurasi saat klaster berjalan, kami sarankan untuk menetapkan nilainya sebelum <a href="/docs/id/v2.5.x/install_cluster-helm.md">menerapkan klaster.</a></p>
 <div class="alert note">
 <p>Untuk informasi tentang cara mengalokasikan sumber daya dengan Milvus Operator, lihat Mengalokasikan <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">Sumber Daya dengan Milvus Operator</a>.</p>
 </div>
@@ -59,8 +60,8 @@ summary: Pelajari cara mengalokasikan sumber daya ke Milvus di Kubernetes.
 Menggunakan Helm untuk meningkatkan sumber daya akan menyebabkan pod yang sedang berjalan melakukan pembaruan bergulir.</div>
 <p>Ada dua cara untuk mengalokasikan sumber daya:</p>
 <ul>
-<li><a href="/docs/id/allocate.md#Allocate-resources-with-commands">Gunakan perintah</a></li>
-<li><a href="/docs/id/allocate.md#Allocate-resources-by-setting-configuration-file">Mengatur parameter dalam berkas <code translate="no">YAML</code> </a></li>
+<li><a href="/docs/id/v2.5.x/allocate.md#Allocate-resources-with-commands">Gunakan perintah</a></li>
+<li><a href="/docs/id/v2.5.x/allocate.md#Allocate-resources-by-setting-configuration-file">Mengatur parameter dalam berkas <code translate="no">YAML</code> </a></li>
 </ul>
 <h3 id="Allocate-resources-with-commands" class="common-anchor-header">Mengalokasikan sumber daya dengan perintah</h3><p>Anda perlu mengatur variabel sumber daya untuk setiap komponen Milvus jika Anda menggunakan <code translate="no">--set</code> untuk memperbarui konfigurasi sumber daya.</p>
 <div class="filter">
@@ -129,13 +130,13 @@ Jika <code translate="no">resources.limits</code> tidak ditentukan, pod akan men
       </svg>
     </button></h2><ul>
 <li>Anda mungkin juga ingin mempelajari caranya:<ul>
-<li><a href="/docs/id/scaleout.md">Menetapkan skala cluster Milvus</a></li>
-<li><a href="/docs/id/upgrade_milvus_cluster-operator.md">Memutakhirkan Milvus Cluster</a></li>
-<li><a href="/docs/id/upgrade_milvus_standalone-operator.md">Memutakhirkan Milvus Standalone</a></li>
+<li><a href="/docs/id/v2.5.x/scaleout.md">Menetapkan skala cluster Milvus</a></li>
+<li><a href="/docs/id/v2.5.x/upgrade_milvus_cluster-operator.md">Memutakhirkan Milvus Cluster</a></li>
+<li><a href="/docs/id/v2.5.x/upgrade_milvus_standalone-operator.md">Memutakhirkan Milvus Standalone</a></li>
 </ul></li>
 <li>Jika Anda siap untuk menerapkan cluster Anda di cloud:<ul>
-<li>Pelajari cara <a href="/docs/id/eks.md">Menerapkan Milvus di Amazon EKS dengan Terraform</a></li>
-<li>Pelajari cara <a href="/docs/id/gcp.md">Menerapkan Milvus Cluster di GCP dengan Kubernetes</a></li>
-<li>Pelajari cara <a href="/docs/id/azure.md">Menerapkan Milvus di Microsoft Azure dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.5.x/eks.md">Menerapkan Milvus di Amazon EKS dengan Terraform</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.5.x/gcp.md">Menerapkan Milvus Cluster di GCP dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.5.x/azure.md">Menerapkan Milvus di Microsoft Azure dengan Kubernetes</a></li>
 </ul></li>
 </ul>

@@ -1,8 +1,9 @@
 ---
 id: milvusdm_install.md
-summary: 'Узнайте, как установить Milvus-Migration для переноса данных.'
+summary: "Узнайте, как установить Milvus-Migration для переноса данных."
 title: Установка инструмента миграции
 ---
+
 <h1 id="Install-Migration-Tool" class="common-anchor-header">Установка инструмента миграции<button data-href="#Install-Migration-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +86,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Установив инструмент Milvus-migration, вы можете переносить данные из различных источников:</p>
 <ul>
-<li><a href="/docs/ru/es2m.md">Из Elasticsearch</a></li>
-<li><a href="/docs/ru/f2m.md">Из Faiss</a></li>
-<li><a href="/docs/ru/m2m.md">Из Milvus 1.x</a></li>
+<li><a href="/docs/ru/v2.5.x/es2m.md">Из Elasticsearch</a></li>
+<li><a href="/docs/ru/v2.5.x/f2m.md">Из Faiss</a></li>
+<li><a href="/docs/ru/v2.5.x/m2m.md">Из Milvus 1.x</a></li>
 </ul>

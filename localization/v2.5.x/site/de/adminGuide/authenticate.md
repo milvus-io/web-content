@@ -5,6 +5,7 @@ summary: >-
   können.
 title: Benutzerzugriff authentifizieren
 ---
+
 <h1 id="Authenticate-User-Access" class="common-anchor-header">Benutzerzugriff authentifizieren<button data-href="#Authenticate-User-Access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,7 +24,7 @@ title: Benutzerzugriff authentifizieren
     </button></h1><p>In diesem Handbuch wird erklärt, wie die Benutzerauthentifizierung in Milvus verwaltet wird, einschließlich der Aktivierung der Authentifizierung, der Verbindung als Benutzer und der Änderung der Benutzeranmeldedaten.</p>
 <div class="alert note">
 <ul>
-<li><p>TLS und Benutzerauthentifizierung sind zwei unterschiedliche Sicherheitsansätze. Wenn Sie sowohl die Benutzerauthentifizierung als auch TLS in Ihrem Milvus-System aktiviert haben, müssen Sie einen Benutzernamen, ein Passwort und Pfade für Zertifikatsdateien angeben. Informationen zur Aktivierung von TLS finden Sie unter <a href="/docs/de/tls.md">Verschlüsselung bei der Übermittlung</a>.</p></li>
+<li><p>TLS und Benutzerauthentifizierung sind zwei unterschiedliche Sicherheitsansätze. Wenn Sie sowohl die Benutzerauthentifizierung als auch TLS in Ihrem Milvus-System aktiviert haben, müssen Sie einen Benutzernamen, ein Passwort und Pfade für Zertifikatsdateien angeben. Informationen zur Aktivierung von TLS finden Sie unter <a href="/docs/de/v2.5.x/tls.md">Verschlüsselung bei der Übermittlung</a>.</p></li>
 <li><p>Die Codeschnipsel auf dieser Seite verwenden den neuen <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) zur Interaktion mit Milvus. Neue MilvusClient SDKs für andere Sprachen werden in zukünftigen Updates veröffentlicht.</p></li>
 </ul>
 </div>
@@ -102,10 +103,11 @@ spec:
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-) 
+uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 Wenn Sie bei der Verbindung zu Milvus mit aktivierter Authentifizierung kein gültiges Token angeben, erhalten Sie einen gRPC-Fehler.</div>
 <h2 id="Create-a-new-user" class="common-anchor-header">Erstellen Sie einen neuen Benutzer<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
@@ -137,6 +139,7 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Weitere Informationen zum Erstellen von Benutzern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
 <h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">Verbindung zu Milvus mit einem neuen Benutzer<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,10 +160,11 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># connect to milvus with the newly created user</span>
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Update-user-password" class="common-anchor-header">Benutzerpasswort aktualisieren<button data-href="#Update-user-password" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,11 +184,12 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># update password</span>
 
 client.update_password(
-    user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
-    old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
-    new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
+user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
+old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
+new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Weitere Informationen zum Aktualisieren von Benutzerpasswörtern finden Sie in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
 <p>Wenn Sie Ihr altes Passwort vergessen haben, bietet Milvus einen Konfigurationspunkt, der es Ihnen ermöglicht, bestimmte Benutzer als Superuser zu bestimmen. Dadurch wird das alte Passwort nicht mehr benötigt, wenn Sie das Passwort zurücksetzen.</p>
 <p>Standardmäßig ist das Feld <code translate="no">common.security.superUsers</code> in der Milvus-Konfigurationsdatei leer, was bedeutet, dass alle Benutzer beim Zurücksetzen ihres Passworts das alte Passwort angeben müssen. Sie können jedoch bestimmte Benutzer als Superuser bezeichnen, die das alte Passwort nicht angeben müssen. Im folgenden Ausschnitt werden <code translate="no">root</code> und <code translate="no">foo</code> als Superuser bezeichnet.</p>
@@ -233,6 +238,7 @@ Um einen Benutzer zu löschen, dürfen Sie nicht der zu löschende Benutzer sein
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Limitations" class="common-anchor-header">Beschränkungen<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -269,11 +275,11 @@ client.list_users()
       </svg>
     </button></h2><ul>
 <li>Sie möchten vielleicht auch lernen, wie man:<ul>
-<li><a href="/docs/de/scaleout.md">Skalieren eines Milvus-Clusters</a></li>
+<li><a href="/docs/de/v2.5.x/scaleout.md">Skalieren eines Milvus-Clusters</a></li>
 </ul></li>
 <li>Wenn Sie bereit sind, Ihren Cluster in der Cloud einzusetzen:<ul>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a> können</li>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.5.x/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.5.x/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.5.x/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
 </ul></li>
 </ul>

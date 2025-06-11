@@ -2,6 +2,7 @@
 id: configure_access_logs.md
 title: Mengonfigurasi Log Akses
 ---
+
 <h1 id="Configure-Access-Logs" class="common-anchor-header">Mengonfigurasi Log Akses<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,9 +22,9 @@ title: Mengonfigurasi Log Akses
 <p>Panduan ini memberikan instruksi terperinci tentang cara mengonfigurasi log akses di Milvus.</p>
 <p>Konfigurasi log akses tergantung pada metode instalasi Milvus:</p>
 <ul>
-<li><strong>Instalasi Helm</strong>: Konfigurasi di <code translate="no">values.yaml</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/configure-helm.md">Mengkonfigurasi Milvus dengan Helm Charts</a>.</li>
-<li><strong>Instalasi Docker</strong>: Konfigurasikan di <code translate="no">milvus.yaml</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/configure-docker.md">Mengkonfigurasi Milvus dengan Docker Compose</a>.</li>
-<li><strong>Instalasi Operator</strong>: Ubah <code translate="no">spec.components</code> dalam berkas konfigurasi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/configure_operator.md">Mengkonfigurasi Milvus dengan Operator Milvus</a>.</li>
+<li><strong>Instalasi Helm</strong>: Konfigurasi di <code translate="no">values.yaml</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/configure-helm.md">Mengkonfigurasi Milvus dengan Helm Charts</a>.</li>
+<li><strong>Instalasi Docker</strong>: Konfigurasikan di <code translate="no">milvus.yaml</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/configure-docker.md">Mengkonfigurasi Milvus dengan Docker Compose</a>.</li>
+<li><strong>Instalasi Operator</strong>: Ubah <code translate="no">spec.components</code> dalam berkas konfigurasi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/configure_operator.md">Mengkonfigurasi Milvus dengan Operator Milvus</a>.</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Opsi konfigurasi<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

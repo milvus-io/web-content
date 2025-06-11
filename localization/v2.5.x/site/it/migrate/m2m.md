@@ -5,6 +5,7 @@ summary: >-
   migrazione dei dati da Milvus 1.x (incluso 0.9.x e precedenti) a Milvus 2.x.
 title: Da Milvus 1.x
 ---
+
 <h1 id="From-Milvus-1x" class="common-anchor-header">Da Milvus 1.x<button data-href="#From-Milvus-1x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ title: Da Milvus 1.x
 <li>Milvus di destinazione: 2.x</li>
 </ul></li>
 <li><strong>Strumenti necessari</strong>:<ul>
-<li>Strumento di<a href="https://github.com/zilliztech/milvus-migration">migrazione Milvus</a>. Per i dettagli sull'installazione, fate riferimento a <a href="/docs/it/milvusdm_install.md">Installare lo strumento di migrazione</a>.</li>
+<li>Strumento di<a href="https://github.com/zilliztech/milvus-migration">migrazione Milvus</a>. Per i dettagli sull'installazione, fate riferimento a <a href="/docs/it/v2.5.x/milvusdm_install.md">Installare lo strumento di migrazione</a>.</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">Esportare i metadati dell'installazione Milvus di partenza<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

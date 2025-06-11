@@ -7,6 +7,7 @@ summary: >-
   ditentukan. Penganalisis ini menggunakan tokenisasi berbasis tata bahasa,
   sehingga efektif untuk sebagian besar bahasa.
 ---
+
 <h1 id="Standard-Analyzer" class="common-anchor-header">Penganalisis Standar<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,8 +41,8 @@ summary: >-
       </svg>
     </button></h2><p>Penganalisis <code translate="no">standard</code> terdiri dari:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Menggunakan tokenizer <code translate="no">standard</code> untuk membagi teks menjadi unit kata terpisah berdasarkan aturan tata bahasa. Untuk informasi lebih lanjut, lihat <a href="/docs/id/standard-tokenizer.md">Standar</a>.</p></li>
-<li><p><strong>Filter</strong>: Menggunakan<a href="/docs/id/lowercase-filter.md"> filter</a> <code translate="no">lowercase</code><a href="/docs/id/lowercase-filter.md"></a> untuk mengubah semua token menjadi huruf kecil, sehingga memungkinkan pencarian yang tidak peka huruf besar/kecil. Untuk informasi lebih lanjut, lihat</p></li>
+<li><p><strong>Tokenizer</strong>: Menggunakan tokenizer <code translate="no">standard</code> untuk membagi teks menjadi unit kata terpisah berdasarkan aturan tata bahasa. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/standard-tokenizer.md">Standar</a>.</p></li>
+<li><p><strong>Filter</strong>: Menggunakan<a href="/docs/id/v2.5.x/lowercase-filter.md"> filter</a> <code translate="no">lowercase</code><a href="/docs/id/v2.5.x/lowercase-filter.md"></a> untuk mengubah semua token menjadi huruf kecil, sehingga memungkinkan pencarian yang tidak peka huruf besar/kecil. Untuk informasi lebih lanjut, lihat</p></li>
 </ul>
 <p>Fungsionalitas penganalisis <code translate="no">standard</code> setara dengan konfigurasi penganalisis khusus berikut ini:</p>
 <div class="multipleCode">
@@ -138,7 +139,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks di dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk informasi lebih lanjut, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Penggunaan contoh</a>.</p>
+<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks di dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md#Example-use">Penggunaan contoh</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,6 +194,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

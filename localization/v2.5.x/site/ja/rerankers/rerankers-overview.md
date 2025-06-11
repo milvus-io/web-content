@@ -4,6 +4,7 @@ order: 1
 summary: PyMilvusモデルライブラリは、最初の検索から返される結果の順序を最適化するための再ランク関数を統合しています。
 title: リランカーの概要
 ---
+
 <h1 id="Rerankers-Overview" class="common-anchor-header">リランカーの概要<button data-href="#Rerankers-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: リランカーの概要
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>情報検索や生成AIの領域において、リランカーは最初の検索結果の順序を最適化するために不可欠なツールである。リランカーは、従来の<a href="/docs/ja/embeddings.md">埋め込みモデルとは</a>異なり、クエリと文書を入力とし、埋め込み値の代わりに類似度スコアを直接返す。このスコアは、入力されたクエリと文書の関連性を示す。</p>
+    </button></h1><p>情報検索や生成AIの領域において、リランカーは最初の検索結果の順序を最適化するために不可欠なツールである。リランカーは、従来の<a href="/docs/ja/v2.5.x/embeddings.md">埋め込みモデルとは</a>異なり、クエリと文書を入力とし、埋め込み値の代わりに類似度スコアを直接返す。このスコアは、入力されたクエリと文書の関連性を示す。</p>
 <p>再ランカーは、通常ベクトル近似最近傍（ANN）技術によって行われる第一段階の検索の後に採用されることが多い。ANN検索は、関連する可能性のある結果を幅広く取得するのに効率的であるが、クエリとの実際の意味的な近さという点で、必ずしも結果に優先順位をつけるとは限らない。ここでrerankersは、BERTや他のTransformerベースのモデルのような高度な機械学習モデルを活用し、より深い文脈分析を用いて結果の順序を最適化するために使用される。こうすることで、リランカーはユーザーに提示される最終結果の精度と関連性を劇的に高めることができる。</p>
 <p>PyMilvusモデルライブラリは、最初の検索から返される結果の順序を最適化するためのリランク関数を統合しています。Milvusから最近傍の埋め込みを取得した後、検索結果の精度を高めるためにこれらの再ランクツールを活用して検索結果を絞り込むことができます。</p>
 <table>
@@ -55,7 +56,7 @@ title: リランカーの概要
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>この例では、特定のクエリに基づいて<a href="/docs/ja/rerankers-bge.md">BGEリランカーを使って</a>検索結果をランク付けする方法を示します。</p>
+    </button></h2><p>この例では、特定のクエリに基づいて<a href="/docs/ja/v2.5.x/rerankers-bge.md">BGEリランカーを使って</a>検索結果をランク付けする方法を示します。</p>
 <p><a href="https://github.com/milvus-io/milvus-model">PyMilvusモデル</a>ライブラリでリランカーを使うには、まずPyMilvusモデルライブラリと、必要なリランキングユーティリティをすべて含むモデルサブパッケージをインストールします：</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -73,14 +74,15 @@ title: リランカーの概要
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [
-    <span class="hljs-string">&quot;In 1950, Alan Turing published his seminal paper, &#x27;Computing Machinery and Intelligence,&#x27; proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.&quot;</span>,
-    <span class="hljs-string">&quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term &#x27;artificial intelligence&#x27; and laid out its basic goals.&quot;</span>,
-    <span class="hljs-string">&quot;In 1951, British mathematician and computer scientist Alan Turing also developed the first program designed to play chess, demonstrating an early example of AI in game strategy.&quot;</span>,
-    <span class="hljs-string">&quot;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&quot;</span>
+<span class="hljs-string">&quot;In 1950, Alan Turing published his seminal paper, &#x27;Computing Machinery and Intelligence,&#x27; proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.&quot;</span>,
+<span class="hljs-string">&quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term &#x27;artificial intelligence&#x27; and laid out its basic goals.&quot;</span>,
+<span class="hljs-string">&quot;In 1951, British mathematician and computer scientist Alan Turing also developed the first program designed to play chess, demonstrating an early example of AI in game strategy.&quot;</span>,
+<span class="hljs-string">&quot;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&quot;</span>
 ]
 
 <span class="hljs-title function_">bge_rf</span>(query, documents)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>期待される出力は以下のようなものです：</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-title class_">RerankResult</span>(text=<span class="hljs-string">&quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term &#x27;artificial intelligence&#x27; and laid out its basic goals.&quot;</span>, score=<span class="hljs-number">0.9911615761470803</span>, index=<span class="hljs-number">1</span>),
  <span class="hljs-title class_">RerankResult</span>(text=<span class="hljs-string">&quot;In 1950, Alan Turing published his seminal paper, &#x27;Computing Machinery and Intelligence,&#x27; proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.&quot;</span>, score=<span class="hljs-number">0.0326971950177779</span>, index=<span class="hljs-number">0</span>),
@@ -113,14 +115,14 @@ documents = [
 <p><strong>データセットの構成要素</strong></p>
 <ul>
 <li><code translate="no">doc_id</code>:各文書の一意な識別子。</li>
-<li><code translate="no">doc_vector</code>:文書を表す埋め込みベクトル。埋め込みベクトル生成の手引きは<a href="/docs/ja/embeddings.md">Embeddings</a> を参照。</li>
+<li><code translate="no">doc_vector</code>:文書を表す埋め込みベクトル。埋め込みベクトル生成の手引きは<a href="/docs/ja/v2.5.x/embeddings.md">Embeddings</a> を参照。</li>
 <li><code translate="no">doc_text</code>:文書のテキスト内容。</li>
 </ul>
 <h3 id="Preparations" class="common-anchor-header">準備</h3><p>類似検索を開始する前に、Milvusとの接続を確立し、コレクションを作成し、データを準備し、そのコレクションに挿入する必要があります。以下のコード・スニペットは、これらの準備手順を示しています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://10.102.6.214:19530&quot;</span> <span class="hljs-comment"># replace with your own Milvus server address</span>
+uri=<span class="hljs-string">&quot;http://10.102.6.214:19530&quot;</span> <span class="hljs-comment"># replace with your own Milvus server address</span>
 )
 
 client.drop_collection(<span class="hljs-string">&#x27;test_collection&#x27;</span>)
@@ -150,20 +152,22 @@ client.insert(collection_name=<span class="hljs-string">&quot;test_collection&qu
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># {&#x27;insert_count&#x27;: 4, &#x27;ids&#x27;: [0, 1, 2, 3]}</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Conduct-a-similarity-search" class="common-anchor-header">類似検索の実行</h3><p>データ挿入後、<code translate="no">search</code> メソッドを使用して類似検索を実行します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># search results based on our query</span>
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
-    data=[[-<span class="hljs-number">0.045217834</span>, <span class="hljs-number">0.035171617</span>, ..., -<span class="hljs-number">0.025117004</span>]], <span class="hljs-comment"># replace with your query vector</span>
-    limit=<span class="hljs-number">3</span>,
-    output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;doc_text&quot;</span>]
+collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
+data=[[-<span class="hljs-number">0.045217834</span>, <span class="hljs-number">0.035171617</span>, ..., -<span class="hljs-number">0.025117004</span>]], <span class="hljs-comment"># replace with your query vector</span>
+limit=<span class="hljs-number">3</span>,
+output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;doc_text&quot;</span>]
 )
 
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;distance: <span class="hljs-subst">{i[<span class="hljs-string">&quot;distance&quot;</span>]}</span>&#x27;</span>)
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;doc_text: <span class="hljs-subst">{i[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;doc_text&quot;</span>]}</span>&#x27;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;distance: <span class="hljs-subst">{i[<span class="hljs-string">&quot;distance&quot;</span>]}</span>&#x27;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;doc_text: <span class="hljs-subst">{i[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;doc_text&quot;</span>]}</span>&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>期待される出力は以下のようなものである：</p>
 <pre><code translate="no" class="language-python">distance: <span class="hljs-number">0.7235960960388184</span>
 doc_text: The Dartmouth Conference <span class="hljs-keyword">in</span> <span class="hljs-number">1956</span> <span class="hljs-keyword">is</span> considered the birthplace of artificial intelligence <span class="hljs-keyword">as</span> a field; here, John McCarthy <span class="hljs-keyword">and</span> others coined the term <span class="hljs-string">&#x27;artificial intelligence&#x27;</span> <span class="hljs-keyword">and</span> laid <span class="hljs-keyword">out</span> its basic goals.
@@ -178,26 +182,27 @@ doc_text: The invention of the Logic Theorist <span class="hljs-keyword">by</spa
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CrossEncoderRerankFunction
 
 ce_rf = CrossEncoderRerankFunction(
-    model_name=<span class="hljs-string">&quot;cross-encoder/ms-marco-MiniLM-L-6-v2&quot;</span>,  <span class="hljs-comment"># Specify the model name.</span>
-    device=<span class="hljs-string">&quot;cpu&quot;</span> <span class="hljs-comment"># Specify the device to use, e.g., &#x27;cpu&#x27; or &#x27;cuda:0&#x27;</span>
+model_name=<span class="hljs-string">&quot;cross-encoder/ms-marco-MiniLM-L-6-v2&quot;</span>, <span class="hljs-comment"># Specify the model name.</span>
+device=<span class="hljs-string">&quot;cpu&quot;</span> <span class="hljs-comment"># Specify the device to use, e.g., &#x27;cpu&#x27; or &#x27;cuda:0&#x27;</span>
 )
 
 reranked_results = ce_rf(
-    query=<span class="hljs-string">&#x27;What event in 1956 marked the official birth of artificial intelligence as a discipline?&#x27;</span>,
-    documents=[
-        <span class="hljs-string">&quot;In 1950, Alan Turing published his seminal paper, &#x27;Computing Machinery and Intelligence,&#x27; proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.&quot;</span>,
-        <span class="hljs-string">&quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term &#x27;artificial intelligence&#x27; and laid out its basic goals.&quot;</span>,
-        <span class="hljs-string">&quot;In 1951, British mathematician and computer scientist Alan Turing also developed the first program designed to play chess, demonstrating an early example of AI in game strategy.&quot;</span>,
-        <span class="hljs-string">&quot;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&quot;</span>
-    ],
-    top_k=<span class="hljs-number">3</span>
+query=<span class="hljs-string">&#x27;What event in 1956 marked the official birth of artificial intelligence as a discipline?&#x27;</span>,
+documents=[
+<span class="hljs-string">&quot;In 1950, Alan Turing published his seminal paper, &#x27;Computing Machinery and Intelligence,&#x27; proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.&quot;</span>,
+<span class="hljs-string">&quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term &#x27;artificial intelligence&#x27; and laid out its basic goals.&quot;</span>,
+<span class="hljs-string">&quot;In 1951, British mathematician and computer scientist Alan Turing also developed the first program designed to play chess, demonstrating an early example of AI in game strategy.&quot;</span>,
+<span class="hljs-string">&quot;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&quot;</span>
+],
+top_k=<span class="hljs-number">3</span>
 )
 
 <span class="hljs-comment"># print the reranked results</span>
 <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> reranked_results:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;score: <span class="hljs-subst">{result.score}</span>&#x27;</span>)
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;doc_text: <span class="hljs-subst">{result.text}</span>&#x27;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;score: <span class="hljs-subst">{result.score}</span>&#x27;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;doc_text: <span class="hljs-subst">{result.text}</span>&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>期待される出力は以下のようなものです：</p>
 <pre><code translate="no" class="language-python">score: <span class="hljs-number">6.250532627105713</span>
 doc_text: The Dartmouth Conference <span class="hljs-keyword">in</span> <span class="hljs-number">1956</span> <span class="hljs-keyword">is</span> considered the birthplace of artificial intelligence <span class="hljs-keyword">as</span> a field; here, John McCarthy <span class="hljs-keyword">and</span> others coined the term <span class="hljs-string">&#x27;artificial intelligence&#x27;</span> <span class="hljs-keyword">and</span> laid <span class="hljs-keyword">out</span> its basic goals.

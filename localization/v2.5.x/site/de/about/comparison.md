@@ -3,6 +3,7 @@ id: comparison.md
 title: Vergleich
 summary: Dieser Artikel vergleicht Milvus mit anderen Vektorsuchlösungen.
 ---
+
 <h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">Vergleich von Milvus mit Alternativen<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,6 +155,6 @@ summary: Dieser Artikel vergleicht Milvus mit anderen Vektorsuchlösungen.
       </svg>
     </button></h2><ul>
 <li><p><strong>Testen</strong>: Erleben Sie Milvus aus erster Hand, indem Sie mit dem Milvus <a href="https://milvus.io/docs/quickstart.md">Quickstart</a> beginnen oder <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">sich für die Zilliz Cloud anmelden</a>.</p></li>
-<li><p><strong>Mehr erfahren</strong>: Vertiefen Sie die Funktionen von Milvus in unseren umfassenden <a href="/docs/de/glossary.md">Terminologie-</a> und <a href="https://milvus.io/docs/manage-collections.md">Benutzerhandbüchern</a>.</p></li>
+<li><p><strong>Mehr erfahren</strong>: Vertiefen Sie die Funktionen von Milvus in unseren umfassenden <a href="/docs/de/v2.5.x/glossary.md">Terminologie-</a> und <a href="https://milvus.io/docs/manage-collections.md">Benutzerhandbüchern</a>.</p></li>
 <li><p><strong>Erkunden Sie Alternativen</strong>: Für einen umfassenderen Vergleich von Vektordatenbankoptionen finden Sie weitere Ressourcen auf <a href="https://zilliz.com/comparison">dieser Seite</a>.</p></li>
 </ul>

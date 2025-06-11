@@ -3,6 +3,7 @@ id: clustering-compaction.md
 title: 聚類壓縮
 summary: 聚類壓縮的目的是在大型資料集中提高搜尋效能並降低成本。本指南將協助您瞭解聚類壓縮以及此功能如何改善搜尋效能。
 ---
+
 <h1 id="Clustering-Compaction" class="common-anchor-header">聚類壓縮<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +46,7 @@ summary: 聚類壓縮的目的是在大型資料集中提高搜尋效能並降�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>聚類壓縮</span> </span></p>
-<p>使用<strong>PartitionStats</strong>作為參考，Milvus 可以在收到帶有聚類關鍵值的搜尋/查詢請求時，修剪不相關的資料，並將搜尋範圍限制在與該值對應的區段內，從而改善搜尋效能。有關效能改善的詳細資訊，請參閱<a href="/docs/zh-hant/clustering-compaction.md#Benchmark-Test">基準測試</a>。</p>
+<p>使用<strong>PartitionStats</strong>作為參考，Milvus 可以在收到帶有聚類關鍵值的搜尋/查詢請求時，修剪不相關的資料，並將搜尋範圍限制在與該值對應的區段內，從而改善搜尋效能。有關效能改善的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/clustering-compaction.md#Benchmark-Test">基準測試</a>。</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">使用聚類壓縮<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,15 +76,16 @@ summary: 聚類壓縮的目的是在大型資料集中提高搜尋效能並降�
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
 
 <span class="hljs-attr">datanode:</span>
-  <span class="hljs-attr">clusteringCompaction:</span>
-    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
-    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+<span class="hljs-attr">clusteringCompaction:</span>
+<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
+<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
+<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p>設定項目</p></th>
@@ -158,7 +160,7 @@ summary: 聚類壓縮的目的是在大型資料集中提高搜尋效能並降�
      <td></td>
    </tr>
 </table>
-<p>要將上述變更套用到您的 Milvus 叢集，請遵循「<a href="/docs/zh-hant/configure-helm.md#Configure-Milvus-via-configuration-file">使用 Helm 設定 Milvus</a>」和<a href="/docs/zh-hant/configure_operator.md">「使用 Milvus Operators 設定 Milvus</a>」中的步驟。</p>
+<p>要將上述變更套用到您的 Milvus 叢集，請遵循「<a href="/docs/zh-hant/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">使用 Helm 設定 Milvus</a>」和<a href="/docs/zh-hant/v2.5.x/configure_operator.md">「使用 Milvus Operators 設定 Milvus</a>」中的步驟。</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">叢集設定</h3><p>若要在特定的集合中進行聚類壓縮，您應該從集合中選擇一個標量欄位作為聚類關鍵。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -168,8 +170,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -179,10 +181,11 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-    schema=schema
+collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -283,9 +286,10 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-    job_id=job_id,
+job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;

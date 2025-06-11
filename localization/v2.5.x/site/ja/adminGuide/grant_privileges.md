@@ -3,6 +3,7 @@ id: grant_privileges.md
 title: ロールへの特権または特権グループの付与
 summary: ロールを作成すると、そのロールに権限を付与することができます。このガイドでは、ロールに特権または特権グループを付与する方法を紹介します。
 ---
+
 <h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">ロールへの特権または特権グループの付与<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +108,7 @@ summary: ロールを作成すると、そのロールに権限を付与する�
    </tr>
 </table>
 <ul>
-<li><p><strong>特権</strong>：ロールに付与する必要のある特定の権限または<a href="/docs/ja/privilege_group.md">権限グループ</a>。現在、Milvusでは56種類の権限を付与することができます。下の表はMilvusの権限の一覧です。</p>
+<li><p><strong>特権</strong>：ロールに付与する必要のある特定の権限または<a href="/docs/ja/v2.5.x/privilege_group.md">権限グループ</a>。現在、Milvusでは56種類の権限を付与することができます。下の表はMilvusの権限の一覧です。</p>
 <p><div class="alert note"></p>
 <p>下表のタイプ列は権限の検索を容易にするためのものであり、分類の目的のみに使用されます。権限を付与する際、タイプを理解する必要はありません。対応する権限を入力するだけです。</p>
 <p></div></p>
@@ -122,27 +123,27 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <td rowspan="5"><p>データベース権限</p></td>
 <td><p>データベースの一覧表示</p></td>
 <td><p>現在のインスタンスのすべてのデータベースを表示する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースの一覧</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage_databases.md">データベースの一覧</a></p></td>
 </tr>
 <tr>
 <td><p>データベースの詳細を表示する</p></td>
 <td><p>データベースの詳細を表示する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースの詳細を表示する</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage_databases.md">データベースの詳細を表示する</a></p></td>
 </tr>
 <tr>
 <td><p>データベースの作成</p></td>
 <td><p>データベースを作成する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースを作成する</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage_databases.md">データベースを作成する</a></p></td>
 </tr>
 <tr>
 <td><p>データベースの削除</p></td>
 <td><p>データベースを削除する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースの削除</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage_databases.md">データベースの削除</a></p></td>
 </tr>
 <tr>
 <td><p>データベースの変更</p></td>
 <td><p>データベースのプロパティを変更する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースの変更</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage_databases.md">データベースの変更</a></p></td>
 </tr>
 <tr>
 <td rowspan="18"><p>コレクション権限</p></td>
@@ -163,7 +164,7 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <tr>
 <td><p>コレクションの表示</p></td>
 <td><p>コレクション権限ですべてのコレクションを表示する</p></td>
-<td><p><a href="/docs/ja/view-collections.md">コレクションを表示</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/view-collections.md">コレクションを表示</a></p></td>
 </tr>
 <tr>
 <td><p>エイリアス一覧</p></td>
@@ -188,12 +189,12 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <tr>
 <td><p>CreateCollection</p></td>
 <td><p>コレクションを作成する</p></td>
-<td><p><a href="/docs/ja/create-collection.md">コレクションの作成</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/create-collection.md">コレクションの作成</a></p></td>
 </tr>
 <tr>
 <td><p>コレクションの削除</p></td>
 <td><p>コレクションを削除する</p></td>
-<td><p><a href="/docs/ja/drop-collection.md">コレクションの削除</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/drop-collection.md">コレクションの削除</a></p></td>
 </tr>
 <tr>
 <td><p>ロード</p></td>
@@ -203,7 +204,7 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <tr>
 <td><p>解放</p></td>
 <td><p>コレクションを解放する</p></td>
-<td><p><a href="/docs/ja/load-and-release.md">コレクションを解放する</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/load-and-release.md">コレクションを解放する</a></p></td>
 </tr>
 <tr>
 <td><p>フラッシュ</p></td>
@@ -218,17 +219,17 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <tr>
 <td><p>コレクション名の変更</p></td>
 <td><p>コレクション名の変更</p></td>
-<td><p><a href="/docs/ja/modify-collection.md">コレクション名の変更</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/modify-collection.md">コレクション名の変更</a></p></td>
 </tr>
 <tr>
 <td><p>エイリアスの作成</p></td>
 <td><p>コレクションのエイリアスを作成する</p></td>
-<td><p><a href="/docs/ja/manage-aliases.md">エイリアスの作成</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage-aliases.md">エイリアスの作成</a></p></td>
 </tr>
 <tr>
 <td><p>エイリアスの削除</p></td>
 <td><p>コレクションのエイリアスを削除する</p></td>
-<td><p><a href="/docs/ja/manage-aliases.md">エイリアスの削除</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage-aliases.md">エイリアスの削除</a></p></td>
 </tr>
 <tr>
 <td><p>FlushAll</p></td>
@@ -239,44 +240,44 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <td rowspan="4"><p>パーティション特権</p></td>
 <td><p>HasPartition</p></td>
 <td><p>パーティションが存在するかチェックする</p></td>
-<td><p><a href="/docs/ja/manage-partitions.md">ハス・パーティション</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage-partitions.md">ハス・パーティション</a></p></td>
 </tr>
 <tr>
 <td><p>パーティションの表示</p></td>
 <td><p>コレクション内のすべてのパーティションを表示する</p></td>
-<td><p><a href="/docs/ja/manage-partitions.md">パーティションの表示</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage-partitions.md">パーティションの表示</a></p></td>
 </tr>
 <tr>
 <td><p>パーティションの作成</p></td>
 <td><p>パーティションを作成する</p></td>
-<td><p><a href="/docs/ja/manage-partitions.md">パーティションの作成</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage-partitions.md">パーティションの作成</a></p></td>
 </tr>
 <tr>
 <td><p>パーティションの削除</p></td>
 <td><p>パーティションを削除する</p></td>
-<td><p><a href="/docs/ja/manage-partitions.md">パーティションの削除</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/manage-partitions.md">パーティションの削除</a></p></td>
 </tr>
 <tr>
 <td rowspan="3"><p>インデックスの権限</p></td>
 <td><p>インデックスの詳細</p></td>
 <td><p>インデックスの詳細を表示する</p></td>
-<td><p><a href="/docs/ja/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
 </tr>
 <tr>
 <td><p>インデックスの作成</p></td>
 <td><p>インデックスの作成</p></td>
-<td><p><a href="/docs/ja/index-vector-fields.md">インデックスの作成</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/index-vector-fields.md">インデックスの作成</a></p></td>
 </tr>
 <tr>
 <td><p>インデックスの削除</p></td>
 <td><p>インデックスの削除</p></td>
-<td><p><a href="/docs/ja/index-vector-fields.md">インデックスの削除</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/index-vector-fields.md">インデックスの削除</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>リソース管理権限</p></td>
 <td><p>ロードバランス</p></td>
 <td><p>ロードバランスを実現する</p></td>
-<td><p><a href="/docs/ja/resource_group.md">ロードバランス</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/resource_group.md">ロードバランス</a></p></td>
 </tr>
 <tr>
 <td><p>リソースグループの作成</p></td>
@@ -286,32 +287,32 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <tr>
 <td><p>リソースグループの削除</p></td>
 <td><p>リソースグループの削除</p></td>
-<td><p><a href="/docs/ja/resource_group.md">リソースグループの削除</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/resource_group.md">リソースグループの削除</a></p></td>
 </tr>
 <tr>
 <td><p>リソースグループの更新</p></td>
 <td><p>リソースグループの更新</p></td>
-<td><p><a href="/docs/ja/resource_group.md">リソースグループの更新</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/resource_group.md">リソースグループの更新</a></p></td>
 </tr>
 <tr>
 <td><p>リソースグループの詳細表示</p></td>
 <td><p>リソースグループの詳細を表示する</p></td>
-<td><p><a href="/docs/ja/resource_group.md">リソースグループの詳細表示</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/resource_group.md">リソースグループの詳細表示</a></p></td>
 </tr>
 <tr>
 <td><p>リソースグループの一覧</p></td>
 <td><p>現在のインスタンスの全てのリソースグループを表示</p></td>
-<td><p><a href="/docs/ja/resource_group.md">リソースグループの一覧</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/resource_group.md">リソースグループの一覧</a></p></td>
 </tr>
 <tr>
 <td><p>転送ノード</p></td>
 <td><p>リソースグループ間のノード転送</p></td>
-<td><p><a href="/docs/ja/resource_group.md">トランスファーノード</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/resource_group.md">トランスファーノード</a></p></td>
 </tr>
 <tr>
 <td><p>トランスファーレプリカ</p></td>
 <td><p>リソースグループ間でレプリカを転送</p></td>
-<td><p><a href="/docs/ja/resource_group.md">トランスファーレプリカ</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/resource_group.md">トランスファーレプリカ</a></p></td>
 </tr>
 <tr>
 <td><p>バックアップRBAC</p></td>
@@ -327,83 +328,83 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <td rowspan="6"><p>エンティティ権限</p></td>
 <td><p>クエリ</p></td>
 <td><p>クエリを実行する</p></td>
-<td><p><a href="/docs/ja/get-and-scalar-query.md">クエリ</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/get-and-scalar-query.md">クエリ</a></p></td>
 </tr>
 <tr>
 <td><p>検索</p></td>
 <td><p>検索を行う</p></td>
-<td><p><a href="/docs/ja/single-vector-search.md">検索</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/single-vector-search.md">検索</a></p></td>
 </tr>
 <tr>
 <td><p>挿入</p></td>
 <td><p>エンティティの挿入</p></td>
-<td><p><a href="/docs/ja/insert-update-delete.md">挿入</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/insert-update-delete.md">挿入</a></p></td>
 </tr>
 <tr>
 <td><p>削除</p></td>
 <td><p>エンティティの削除</p></td>
-<td><p><a href="/docs/ja/delete-entities.md">削除</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/delete-entities.md">削除</a></p></td>
 </tr>
 <tr>
 <td><p>アップサート</p></td>
 <td><p>エンティティのアップサート</p></td>
-<td><p><a href="/docs/ja/upsert-entities.md">アップサート</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/upsert-entities.md">アップサート</a></p></td>
 </tr>
 <tr>
 <td><p>インポート</p></td>
 <td><p>エンティティの一括挿入またはインポート</p></td>
-<td><p><a href="/docs/ja/import-data.md">一括挿入/インポート</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/import-data.md">一括挿入/インポート</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>RBAC権限</p></td>
 <td><p>オーナーシップの作成</p></td>
 <td><p>ユーザーまたはロールの作成</p></td>
-<td><p><a href="/docs/ja/users_and_roles.md">ユーザ作成/ロール作成</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/users_and_roles.md">ユーザ作成/ロール作成</a></p></td>
 </tr>
 <tr>
 <td><p>ユーザの更新</p></td>
 <td><p>ユーザーのパスワードを更新する</p></td>
-<td><p><a href="/docs/ja/users_and_roles.md">クレデンシャルの更新</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/users_and_roles.md">クレデンシャルの更新</a></p></td>
 </tr>
 <tr>
 <td><p>所有権の削除</p></td>
 <td><p>ユーザのパスワードまたはロールを削除する</p></td>
-<td><p><a href="/docs/ja/drop_users_roles.md">クレデンシャルの削除/ロールの削除</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/drop_users_roles.md">クレデンシャルの削除/ロールの削除</a></p></td>
 </tr>
 <tr>
 <td><p>オーナーシップの選択</p></td>
 <td><p>特定のロールが付与されているすべてのユーザーを表示</p></td>
-<td><p><a href="/docs/ja/grant_roles.md">選択ロール/選択グラント</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/grant_roles.md">選択ロール/選択グラント</a></p></td>
 </tr>
 <tr>
 <td><p>オーナーシップの管理</p></td>
 <td><p>ユーザーまたはロールの管理、またはユーザーへのロールの付与</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2。</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2。</a></p></td>
 </tr>
 <tr>
 <td><p>ユーザ選択</p></td>
 <td><p>ユーザーに付与されたすべてのロールを表示</p></td>
-<td><p><a href="/docs/ja/grant_roles.md">ユーザの選択</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/grant_roles.md">ユーザの選択</a></p></td>
 </tr>
 <tr>
 <td><p>特権グループの作成</p></td>
 <td><p>特権グループの作成</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">特権グループの作成</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/privilege_group.md">特権グループの作成</a></p></td>
 </tr>
 <tr>
 <td><p>特権グループの削除</p></td>
 <td><p>特権グループの削除</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">特権グループの削除</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/privilege_group.md">特権グループの削除</a></p></td>
 </tr>
 <tr>
 <td><p>特権グループの一覧表示</p></td>
 <td><p>現在のインスタンスのすべての特権グループを表示</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">特権グループの一覧</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/privilege_group.md">特権グループの一覧</a></p></td>
 </tr>
 <tr>
 <td><p>特権グループの操作</p></td>
 <td><p>特権グループへの特権の追加または特権グループからの特権の削除</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">特権グループの操作</a></p></td>
+<td><p><a href="/docs/ja/v2.5.x/privilege_group.md">特権グループの操作</a></p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -413,31 +414,32 @@ summary: ロールを作成すると、そのロールに権限を付与する�
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;Search&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
-)
-    
-client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;Search&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+)
+
+client.grant_privilege_v2(
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2
 
 client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
@@ -582,6 +584,7 @@ curl --request POST \
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.response.DescribeRoleResp;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq
 
@@ -657,12 +660,13 @@ client.revoke_privilege_v2(
 )
 
 client.revoke_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2
 
 client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()

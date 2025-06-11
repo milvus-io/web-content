@@ -5,6 +5,7 @@ summary: >-
   資訊檢索系統，也稱為搜尋引擎，對於各種人工智慧應用，如檢索增生
   (RAG)、視覺搜尋和產品推薦，都是不可或缺的。這些系統的核心是精心設計的資料模型，用以組織、索引和擷取資訊。
 ---
+
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">搜尋的資料模型設計<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,8 +90,8 @@ summary: >-
       </svg>
     </button></h2><p>在 Milvus 中，資料模型透過集合模式來表達。在集合模式中設計正確的欄位是實現有效檢索的關鍵。每個欄位定義了儲存於資料集中的特定資料類型，並在搜尋過程中扮演獨特的角色。在高層次上，Milvus 支援兩種主要的欄位類型：<strong>向量欄位</strong>和<strong>標量欄位</strong>。</p>
 <p>現在，您可以將資料模型映射為欄位模式，包括向量和任何輔助標量欄位。確保每個欄位都與資料模型的屬性相關，尤其要注意向量類型（dense 或 spase）及其維度。</p>
-<h3 id="Vector-Field" class="common-anchor-header">向量欄位</h3><p>向量欄位會儲存文字、影像和音訊等非結構化資料類型的嵌入。這些嵌入可能是密集、稀疏或二進位，視資料類型和使用的檢索方法而定。通常，密集向量用於語意搜尋，而稀疏向量則較適合全文或詞彙比對。當儲存和計算資源有限時，二進位向量就很有用。一個資料集可能包含數個向量欄位，以啟用多模式或混合式的檢索策略。有關此主題的詳細指南，請參考<a href="/docs/zh-hant/multi-vector-search.md">多向量混合檢索</a>。</p>
-<p>Milvus 支援向量資料類型：<code translate="no">FLOAT_VECTOR</code> 代表<a href="/docs/zh-hant/dense-vector.md">密集向量</a>，<code translate="no">SPARSE_FLOAT_VECTOR</code> 代表<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>，<code translate="no">BINARY_VECTOR</code> 代表<a href="/docs/zh-hant/binary-vector.md">二進位向量</a></p>
+<h3 id="Vector-Field" class="common-anchor-header">向量欄位</h3><p>向量欄位會儲存文字、影像和音訊等非結構化資料類型的嵌入。這些嵌入可能是密集、稀疏或二進位，視資料類型和使用的檢索方法而定。通常，密集向量用於語意搜尋，而稀疏向量則較適合全文或詞彙比對。當儲存和計算資源有限時，二進位向量就很有用。一個資料集可能包含數個向量欄位，以啟用多模式或混合式的檢索策略。有關此主題的詳細指南，請參考<a href="/docs/zh-hant/v2.5.x/multi-vector-search.md">多向量混合檢索</a>。</p>
+<p>Milvus 支援向量資料類型：<code translate="no">FLOAT_VECTOR</code> 代表<a href="/docs/zh-hant/v2.5.x/dense-vector.md">密集向量</a>，<code translate="no">SPARSE_FLOAT_VECTOR</code> 代表<a href="/docs/zh-hant/v2.5.x/sparse_vector.md">稀疏向量</a>，<code translate="no">BINARY_VECTOR</code> 代表<a href="/docs/zh-hant/v2.5.x/binary-vector.md">二進位向量</a></p>
 <h3 id="Scalar-Field" class="common-anchor-header">標量欄位</h3><p>標量欄位儲存原始、結構化的值，通常稱為元資料，例如數字、字串或日期。這些值可以與向量搜尋結果一起傳回，對於篩選和排序非常重要。它們允許您根據特定屬性縮小搜尋結果的範圍，例如將文件限制在特定類別或定義的時間範圍內。</p>
 <p>Milvus 支援標量類型，例如<code translate="no">BOOL</code>,<code translate="no">INT8/16/32/64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>,<code translate="no">VARCHAR</code>,<code translate="no">JSON</code>, 和<code translate="no">ARRAY</code> ，用於儲存和過濾非向量資料。這些類型增強了搜尋作業的精確度與客製化。</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">在模式設計中利用進階功能<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
@@ -110,13 +111,13 @@ summary: >-
       </svg>
     </button></h2><p>設計模式時，僅使用支援的資料類型將資料映射到欄位是不夠的。必須徹底瞭解欄位之間的關係以及可用於配置的策略。在設計階段牢記關鍵功能，可確保模式不僅能滿足當前的資料處理需求，還能擴充並適應未來的需求。通過仔細整合這些功能，您可以建立一個強大的數據架構，最大限度地發揮 Milvus 的功能，並支持您更廣泛的數據策略和目標。以下是建立集合模式的主要功能概述：</p>
 <h3 id="Primary-Key" class="common-anchor-header">主鍵</h3><p>主鍵字段是模式的基本組成部分，因為它唯一識別集合中的每個實體。定義主索引鍵是必須的。它必須是整數或字串類型的標量欄位，並標示為<code translate="no">is_primary=True</code> 。您可以選擇為主索引鍵啟用<code translate="no">auto_id</code> ，主索引鍵會自動指派整數，並隨著更多資料被擷取到資料集中而單一成長。</p>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/primary-field.md">Primary Field &amp; AutoID</a>。</p>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/primary-field.md">Primary Field &amp; AutoID</a>。</p>
 <h3 id="Partitioning" class="common-anchor-header">分割</h3><p>為了加快搜尋速度，您可以選擇開啟分割。透過指定特定的標量欄位進行分割，並在搜尋過程中根據此欄位指定篩選條件，可有效地將搜尋範圍限制為僅相關的分割。此方法可縮小搜尋範圍，大幅提升檢索作業的效率。</p>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割鍵</a>。</p>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/use-partition-key.md">使用分割鍵</a>。</p>
 <h3 id="Analyzer" class="common-anchor-header">分析器</h3><p>分析器是處理和轉換文字資料的重要工具。它的主要功能是將原始文字轉換為標記，並將它們結構化，以便編制索引和進行檢索。分析器會將字串標記化、刪除停頓字詞，並將個別字詞轉化成標記。</p>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">Analyzer 概觀</a>。</p>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md">Analyzer 概觀</a>。</p>
 <h3 id="Function" class="common-anchor-header">功能</h3><p>Milvus 允許您定義內建函式作為模式的一部分，以自動衍生某些欄位。例如，您可以新增內建 BM25 函式，從<code translate="no">VARCHAR</code> 欄位產生稀疏向量，以支援全文檢索。這些由函式衍生的欄位可簡化預先處理程序，並確保資料集維持自足且可隨時查詢。</p>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/full-text-search.md">全文</a>檢索。</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">真實世界範例<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -146,7 +147,7 @@ summary: >-
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
      <td><p>啟用後自動產生<code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/zh-hant/get-and-scalar-query.md">使用 Get 進行查詢</a></p></td>
+     <td><p><a href="/docs/zh-hant/v2.5.x/get-and-scalar-query.md">使用 Get 進行查詢</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -155,7 +156,7 @@ summary: >-
    <tr>
      <td><p>標題 (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>文章標題</p></td>
-     <td><p><a href="/docs/zh-hant/keyword-match.md">文字匹配</a></p></td>
+     <td><p><a href="/docs/zh-hant/v2.5.x/keyword-match.md">文字匹配</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -164,7 +165,7 @@ summary: >-
    <tr>
      <td><p>時間戳 (<code translate="no">INT32</code>)</p></td>
      <td><p>發佈日期</p></td>
-     <td><p><a href="/docs/zh-hant/use-partition-key.md">依分割區金鑰篩選</a></p></td>
+     <td><p><a href="/docs/zh-hant/v2.5.x/use-partition-key.md">依分割區金鑰篩選</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -173,7 +174,7 @@ summary: >-
    <tr>
      <td><p>文字 (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>文章原始文本</p></td>
-     <td><p><a href="/docs/zh-hant/multi-vector-search.md">多向量混合搜尋</a></p></td>
+     <td><p><a href="/docs/zh-hant/v2.5.x/multi-vector-search.md">多向量混合搜尋</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -198,7 +199,7 @@ summary: >-
      <td><p>輸出</p></td>
    </tr>
 </table>
-<p>如需更多關於模式的資訊，以及新增各類欄位的詳細指引，請參閱<a href="/docs/zh-hant/schema.md">Schema Explained</a>。</p>
+<p>如需更多關於模式的資訊，以及新增各類欄位的詳細指引，請參閱<a href="/docs/zh-hant/v2.5.x/schema.md">Schema Explained</a>。</p>
 <h3 id="Initialize-schema" class="common-anchor-header">初始化模式</h3><p>首先，我們需要建立一個空模式。此步驟為定義資料模型建立基礎結構。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -206,6 +207,7 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -242,6 +244,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, d
 schema.add_field(field_name=<span class="hljs-string">&quot;text_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;text dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;text sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
@@ -404,14 +407,15 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
-    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
-    output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
-    function_type=FunctionType.BM25,
+name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
+function_type=FunctionType.BM25,
 )
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -477,6 +481,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/zh-hant/create-collection.md">建立集合</a></p></li>
-<li><p><a href="/docs/zh-hant/alter-collection-field.md">更改集合欄位</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/create-collection.md">建立集合</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/alter-collection-field.md">更改集合欄位</a></p></li>
 </ul>

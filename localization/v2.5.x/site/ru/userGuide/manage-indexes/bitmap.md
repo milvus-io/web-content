@@ -7,6 +7,7 @@ summary: >-
   повышения производительности запросов к скалярным полям с низкой
   кардинальностью.
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">BITMAP<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,8 +88,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>В этом примере мы создаем растровый индекс по полю <code translate="no">category</code> коллекции <code translate="no">my_collection</code>. Метод <code translate="no">add_index()</code> используется для указания имени поля, типа индекса и имени индекса.</p>
-<p>После создания растрового индекса можно использовать параметр <code translate="no">filter</code> в операциях запроса для выполнения скалярной фильтрации на основе проиндексированного поля. Это позволяет эффективно сузить результаты поиска с помощью растрового индекса. Дополнительные сведения см. в разделе <a href="/docs/ru/boolean.md">Фильтрация метаданных</a>.</p>
+<p>После создания растрового индекса можно использовать параметр <code translate="no">filter</code> в операциях запроса для выполнения скалярной фильтрации на основе проиндексированного поля. Это позволяет эффективно сузить результаты поиска с помощью растрового индекса. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/boolean.md">Фильтрация метаданных</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

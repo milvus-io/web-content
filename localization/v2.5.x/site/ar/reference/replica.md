@@ -3,6 +3,7 @@ id: replica.md
 summary: تعرف على النسخ المتماثل في الذاكرة في ميلفوس.
 title: النسخ المتماثل داخل الذاكرة
 ---
+
 <h1 id="In-Memory-Replica" class="common-anchor-header">النسخ المتماثل داخل الذاكرة<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: النسخ المتماثل داخل الذاكرة
         ></path>
       </svg>
     </button></h1><p>يقدم هذا الموضوع آلية النسخ المتماثل داخل الذاكرة (النسخ المتماثل) في ميلفوس التي تتيح نسخ متماثلة متعددة المقاطع في الذاكرة العاملة لتحسين الأداء والتوافر.</p>
-<p>للحصول على معلومات حول كيفية تكوين النسخ المتماثلة في الذاكرة، راجع <a href="/docs/ar/configure_querynode.md#queryNodereplicas">التكوينات المتعلقة بالعقدة الاستعلامية</a>.</p>
+<p>للحصول على معلومات حول كيفية تكوين النسخ المتماثلة في الذاكرة، راجع <a href="/docs/ar/v2.5.x/configure_querynode.md#queryNodereplicas">التكوينات المتعلقة بالعقدة الاستعلامية</a>.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

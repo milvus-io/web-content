@@ -3,6 +3,7 @@ id: length-filter.md
 title: 長さ
 summary: 長さフィルタは、指定された長さの要件を満たさないトークンを削除し、テキスト処理中に保持されるトークンの長さを制御できるようにします。
 ---
+
 <h1 id="Length" class="common-anchor-header">長さ<button data-href="#Length" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,6 +80,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p><code translate="no">length</code> フィルタは以下の設定可能なパラメータを受け付けます。</p>
 <table>
    <tr>
@@ -90,8 +92,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>トークンの最大長を設定します。この長さより長いトークンは削除されます。</p></td>
    </tr>
 </table>
-<p><code translate="no">length</code> フィルタはトークナイザによって生成された用語に対して動作するため、トークナイザと組み合わせて使用する必要があります。Milvusで利用可能なトークナイザーのリストについては、<a href="/docs/ja/standard-tokenizer.md">Standard Tokenizerと</a>その兄弟ページを参照してください。</p>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">length</code> フィルタはトークナイザによって生成された用語に対して動作するため、トークナイザと組み合わせて使用する必要があります。Milvusで利用可能なトークナイザーのリストについては、<a href="/docs/ja/v2.5.x/standard-tokenizer.md">Standard Tokenizerと</a>その兄弟ページを参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/v2.5.x/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,6 +147,7 @@ sample_text = <span class="hljs-string">&quot;The length filter allows control o
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

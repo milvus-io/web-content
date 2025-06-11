@@ -5,6 +5,7 @@ summary: >-
   IVF_PQ 인덱스는 고차원 공간에서 대략적인 최접근 이웃 검색을 위한 양자화 기반 인덱싱 알고리즘입니다. 일부 그래프 기반 방법만큼
   빠르지는 않지만 IVF_PQ는 메모리를 훨씬 적게 필요로 하므로 대규모 데이터 세트에 실용적인 선택입니다.
 ---
+
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +46,7 @@ summary: >-
 <li><p><strong>반전 인덱스:</strong> 각 클러스터 중심을 해당 클러스터에 할당된 벡터 목록에 매핑하는 인덱스가 생성됩니다.</p></li>
 <li><p><strong>검색:</strong> 가장 가까운 이웃을 검색할 때 검색 알고리즘은 쿼리 벡터와 클러스터 중심을 비교하여 가장 가능성이 높은 클러스터를 선택합니다. 그런 다음 선택한 클러스터 내의 벡터로 검색 범위가 좁혀집니다.</p></li>
 </ol>
-<p>기술적 세부 사항에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-flat.md">IVF_FLAT을</a> 참조하세요.</p>
+<p>기술적 세부 사항에 대해 자세히 알아보려면 <a href="/docs/ko/v2.5.x/ivf-flat.md">IVF_FLAT을</a> 참조하세요.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>제품 정량화(PQ)</strong> 는 고차원 벡터를 위한 압축 방법으로, 유사도 검색 작업을 빠르게 수행하면서 스토리지 요구 사항을 크게 줄여줍니다.</p>
 <p>PQ 프로세스에는 다음과 같은 주요 단계가 포함됩니다:</p>
 <p>
@@ -58,7 +59,7 @@ summary: >-
 <li><p><strong>벡터</strong> <strong>양자화</strong>: 원본 벡터의 각 하위 벡터에 대해 PQ는 특정 메트릭 유형을 사용하여 해당 하위 공간 내에서 가장 가까운 중심을 식별합니다. 이 프로세스는 각 하위 벡터를 코드북에서 가장 가까운 대표 벡터에 효과적으로 매핑합니다. 전체 하위 벡터 좌표를 저장하는 대신 일치하는 중심점의 인덱스만 유지됩니다.</p></li>
 <li><p><strong>압축 표현</strong>: 최종 압축 표현은 각 하위 공간에서 하나씩, 총칭하여 <strong>PQ 코드라고</strong> 하는 <code translate="no">m</code> 인덱스로 구성됩니다. 이 인코딩은 저장 요구 사항을 <em>D × 32비트</em> (32비트 부동소수점 숫자 가정)에서 <em>m</em> × <em>n비트</em> 비트로 줄여 벡터 거리를 근사화하는 기능을 유지하면서 상당한 압축을 달성합니다.</p></li>
 </ol>
-<p>매개변수 조정 및 최적화에 대한 자세한 내용은 <a href="/docs/ko/ivf-pq.md#Index-params">인덱스 매개변수를</a> 참조하세요.</p>
+<p>매개변수 조정 및 최적화에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/ivf-pq.md#Index-params">인덱스 매개변수를</a> 참조하세요.</p>
 <div class="alert note">
 <p>32비트 부동 소수점 숫자를 사용하는 <em>D = 128</em> 차원의 벡터를 예로 들어 보겠습니다. PQ 매개변수 <em>m = 64</em> (하위 벡터), <em>n비트 = 8</em> (따라서 <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>=</em> 하위 공간당 <em> 256개의</em> 중심)을 사용하면 저장 공간 요구 사항을 비교할 수 있습니다:</p>
 <ul>
@@ -92,7 +93,7 @@ summary: >-
 <li><p>IVF를<strong>사용한 거친 필터링</strong>: IVF는 벡터 공간을 클러스터로 분할하여 검색 범위를 줄입니다. 이 알고리즘은 전체 데이터 세트를 평가하는 대신 쿼리 벡터에 가장 가까운 클러스터에만 집중합니다.</p></li>
 <li><p><strong>PQ와의 세분화된 비교</strong>: 선택한 클러스터 내에서 PQ는 압축 및 양자화된 벡터 표현을 사용해 대략적인 거리를 빠르게 계산합니다.</p></li>
 </ol>
-<p><strong>IVF_PQ</strong> 인덱스의 성능은 IVF와 PQ 알고리즘을 모두 제어하는 매개변수에 의해 크게 영향을 받습니다. 주어진 데이터 세트와 애플리케이션에 대해 최적의 결과를 얻으려면 이러한 매개변수를 조정하는 것이 중요합니다. 이러한 매개변수에 대한 자세한 정보와 조정 방법은 <a href="/docs/ko/ivf-pq.md#Index-params">인덱스</a> 매개변수에서 확인할 수 있습니다.</p>
+<p><strong>IVF_PQ</strong> 인덱스의 성능은 IVF와 PQ 알고리즘을 모두 제어하는 매개변수에 의해 크게 영향을 받습니다. 주어진 데이터 세트와 애플리케이션에 대해 최적의 결과를 얻으려면 이러한 매개변수를 조정하는 것이 중요합니다. 이러한 매개변수에 대한 자세한 정보와 조정 방법은 <a href="/docs/ko/v2.5.x/ivf-pq.md#Index-params">인덱스</a> 매개변수에서 확인할 수 있습니다.</p>
 <h2 id="Build-index" class="common-anchor-header">인덱스 구축<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,26 +116,27 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">index_type</code>: 빌드할 인덱스 유형입니다. 이 예에서는 값을 <code translate="no">IVF_PQ</code> 로 설정합니다.</p></li>
-<li><p><code translate="no">metric_type</code>: 벡터 간의 거리를 계산하는 데 사용되는 메서드입니다. 지원되는 값은 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code> 입니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p></li>
+<li><p><code translate="no">metric_type</code>: 벡터 간의 거리를 계산하는 데 사용되는 메서드입니다. 지원되는 값은 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code> 입니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/metric.md">메트릭 유형을</a> 참조하세요.</p></li>
 <li><p><code translate="no">params</code>: 인덱스 구축을 위한 추가 구성 옵션입니다.</p>
 <ul>
 <li><code translate="no">m</code>: 벡터를 분할할 하위 벡터의 수입니다.</li>
 </ul>
-<p><code translate="no">IVF_PQ</code> 인덱스에 사용할 수 있는 구축 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-pq.md#Index-building-params">인덱스 구축</a> 매개변수를 참조하세요.</p></li>
+<p><code translate="no">IVF_PQ</code> 인덱스에 사용할 수 있는 구축 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/v2.5.x/ivf-pq.md#Index-building-params">인덱스 구축</a> 매개변수를 참조하세요.</p></li>
 </ul>
-<p>인덱스 파라미터를 구성한 후에는 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 만들 수 있습니다. 자세한 내용은 <a href="/docs/ko/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
+<p>인덱스 파라미터를 구성한 후에는 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 만들 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
 <h2 id="Search-on-index" class="common-anchor-header">인덱스에서 검색<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,20 +160,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">params</code>: 색인에서 검색을 위한 추가 구성 옵션.</p>
 <ul>
 <li><code translate="no">nprobe</code>: 검색할 클러스터 수입니다.</li>
 </ul>
-<p><code translate="no">IVF_PQ</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-pq.md#Index-specific-search-params">인덱스별 검색 매개변수를</a> 참조하세요.</p></li>
+<p><code translate="no">IVF_PQ</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/v2.5.x/ivf-pq.md#Index-specific-search-params">인덱스별 검색 매개변수를</a> 참조하세요.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">인덱스 매개변수<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -189,7 +192,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 인덱스를 만들고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/ivf-pq.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/ivf-pq.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th></th>
@@ -219,7 +222,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">nbits</code> 값이 클수록 코드북이 커져 원본 벡터를 더 정확하게 표현할 수 있습니다. 하지만 각 인덱스를 저장하는 데 더 많은 비트를 사용하므로 압축률이 떨어집니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/ivf-pq.md#Search-on-index">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 파라미터가 나와 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/ivf-pq.md#Search-on-index">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 파라미터가 나와 있습니다.</p>
 <table>
    <tr>
      <th></th>

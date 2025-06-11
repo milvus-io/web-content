@@ -4,6 +4,7 @@ related_key: disk_index
 summary: Plattenindex-Mechanismus in Milvus für plattenoptimierte Vektorsuche.
 title: On-Disk-Index
 ---
+
 <h1 id="On-disk-Index" class="common-anchor-header">On-Disk-Index<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ title: On-Disk-Index
         ></path>
       </svg>
     </button></h1><p>Dieser Artikel stellt DiskANN vor, einen On-Disk-Indexierungsalgorithmus für festplattenoptimierte Vektorsuchen. DiskANN basiert auf Vamana-Graphen und ermöglicht effiziente On-Disk-Vektorsuchen in großen Datensätzen.</p>
-<p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/index-vector-fields.md">einen Index-Typ angeben</a>.</p>
+<p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/v2.5.x/index-vector-fields.md">einen Index-Typ angeben</a>.</p>
 <div class="alert note"> 
 Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automatisch den alten Index, wenn der Indextyp gewechselt wird.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">

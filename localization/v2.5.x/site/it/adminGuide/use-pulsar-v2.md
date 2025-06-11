@@ -7,6 +7,7 @@ summary: >-
   attraverso i passaggi per continuare a utilizzare Pulsar v2 con Milvus v2.5.x.
 title: Utilizzare Pulsar v2 con Milvus v2.5.x
 ---
+
 <h1 id="Use-Pulsar-v2-with-Milvus-v25x" class="common-anchor-header">Utilizzare Pulsar v2 con Milvus v2.5.x<button data-href="#Use-Pulsar-v2-with-Milvus-v25x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ title: Utilizzare Pulsar v2 con Milvus v2.5.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus consiglia di aggiornare Pulsar alla versione v3 per l'esecuzione di Milvus v2.5.x. Per ulteriori informazioni, consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar</a>. Tuttavia, se preferite utilizzare Pulsar v2 con Milvus v2.5.x, questo articolo vi guiderà attraverso la procedura per l'esecuzione di Milvus v2.5.x con Pulsar v2.</p>
+    </button></h1><p>Milvus consiglia di aggiornare Pulsar alla versione v3 per l'esecuzione di Milvus v2.5.x. Per ulteriori informazioni, consultare <a href="/docs/it/v2.5.x/upgrade-pulsar-v3.md">Aggiornamento di Pulsar</a>. Tuttavia, se preferite utilizzare Pulsar v2 con Milvus v2.5.x, questo articolo vi guiderà attraverso la procedura per l'esecuzione di Milvus v2.5.x con Pulsar v2.</p>
 <p>Se avete già un'istanza Milvus in esecuzione e volete aggiornarla alla v2.5.x ma continuare a usare Pulsar v2, potete seguire i passaggi di questa pagina.</p>
 <h2 id="Continue-using-Pulsar-v2-while-upgrading-Milvus-v25x" class="common-anchor-header">Continuare a usare Pulsar v2 mentre si aggiorna Milvus v2.5.x<button data-href="#Continue-using-Pulsar-v2-while-upgrading-Milvus-v25x" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +41,7 @@ title: Utilizzare Pulsar v2 con Milvus v2.5.x
         ></path>
       </svg>
     </button></h2><p>Questa sezione vi guiderà attraverso i passaggi per continuare a usare Pulsar v2 mentre aggiornate la vostra istanza Milvus in esecuzione a Milvus v2.5.x.</p>
-<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Per gli utenti di Milvus Operator</h3><p>Milvus Operator è compatibile con gli aggiornamenti di Pulsar v2 per impostazione predefinita. È possibile aggiornare l'istanza Milvus alla v2.5.x facendo riferimento a <a href="/docs/it/upgrade_milvus_cluster-operator.md">Aggiornamento del cluster Milvus con Milvus Operator</a>.</p>
+<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Per gli utenti di Milvus Operator</h3><p>Milvus Operator è compatibile con gli aggiornamenti di Pulsar v2 per impostazione predefinita. È possibile aggiornare l'istanza Milvus alla v2.5.x facendo riferimento a <a href="/docs/it/v2.5.x/upgrade_milvus_cluster-operator.md">Aggiornamento del cluster Milvus con Milvus Operator</a>.</p>
 <p>Una volta completato l'aggiornamento, è possibile continuare a utilizzare Pulsar v2 con la propria istanza Milvus.</p>
 <h3 id="For-Helm-users" class="common-anchor-header">Per gli utenti di Helm</h3><p>Prima dell'aggiornamento, assicurarsi che</p>
 <ul>
@@ -97,7 +98,7 @@ helm repo update milvus
         ></path>
       </svg>
     </button></h2><p>Questa sezione vi guiderà attraverso le fasi di creazione di una nuova istanza Milvus con Pulsar v2.</p>
-<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Per gli utenti di Milvus Operator</h3><p>Prima di distribuire Milvus v2.5.x, è necessario scaricare e modificare il file Milvus Customer Resource Definition (CRD). Per i dettagli su come installare Milvus usando Milvus Operator, fate riferimento a <a href="/docs/it/install_cluster-milvusoperator.md">Installare Milvus Cluster con Milvus Operator</a>.</p>
+<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Per gli utenti di Milvus Operator</h3><p>Prima di distribuire Milvus v2.5.x, è necessario scaricare e modificare il file Milvus Customer Resource Definition (CRD). Per i dettagli su come installare Milvus usando Milvus Operator, fate riferimento a <a href="/docs/it/v2.5.x/install_cluster-milvusoperator.md">Installare Milvus Cluster con Milvus Operator</a>.</p>
 <ol>
 <li><p>Scaricare il file CRD.</p>
 <pre><code translate="no" class="language-bash">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
@@ -122,7 +123,7 @@ helm repo update milvus
 <pre><code translate="no" class="language-bash">kubectl apply -f milvus_cluster_default.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="For-Helm-users" class="common-anchor-header">Per gli utenti di Helm</h3><p>Prima di distribuire Milvus v2.5.x, è possibile preparare un file <code translate="no">values.yaml</code> o utilizzare i parametri in linea per specificare la versione di Pulsar. Per i dettagli su come installare Milvus usando Helm, fate riferimento a <a href="/docs/it/install_cluster-helm.md">Installare Milvus Cluster con Helm</a>.</p>
+<h3 id="For-Helm-users" class="common-anchor-header">Per gli utenti di Helm</h3><p>Prima di distribuire Milvus v2.5.x, è possibile preparare un file <code translate="no">values.yaml</code> o utilizzare i parametri in linea per specificare la versione di Pulsar. Per i dettagli su come installare Milvus usando Helm, fate riferimento a <a href="/docs/it/v2.5.x/install_cluster-helm.md">Installare Milvus Cluster con Helm</a>.</p>
 <ul>
 <li><p>Usare i parametri inline per specificare la versione di Pulsar come v2.</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">true</span>,pulsarv3.enabled=<span class="hljs-literal">false</span>

@@ -4,6 +4,7 @@ title: アナライザーの概要
 summary: >-
   テキスト処理において、アナライザーは生テキストを構造化された検索可能な形式に変換する重要なコンポーネントである。各分析器は通常、トークナイザーとフィルターという2つのコア要素で構成される。これらは共に、入力テキストをトークンに変換し、これらのトークンを洗練させ、効率的な索引付けと検索に備える。
 ---
+
 <h1 id="Analyzer-Overview" class="common-anchor-header">アナライザーの概要<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>テキスト処理において、<strong>アナライザーは</strong>生テキストを構造化された検索可能な形式に変換する重要なコンポーネントである。アナライザーは通常、<strong>トークナイザーと</strong> <strong>フィルターという</strong>2つのコア要素で構成される。これらは共に入力テキストをトークンに変換し、トークンを洗練させ、効率的なインデックス作成と検索に備えます。</p>
-<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細は、<a href="/docs/ja/keyword-match.md">Text Match</a>または<a href="/docs/ja/full-text-search.md">Full Text Search</a> を参照してください。</p>
+<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細は、<a href="/docs/ja/v2.5.x/keyword-match.md">Text Match</a>または<a href="/docs/ja/v2.5.x/full-text-search.md">Full Text Search</a> を参照してください。</p>
 <div class="alert note">
 <p>アナライザの使用は、パフォーマンスに影響する場合があります：</p>
 <ul>
@@ -77,7 +78,7 @@ summary: >-
 <li><p><strong>カスタムアナライザー</strong>：より高度な要件に対応するカスタム・アナライザでは、トークナイザとゼロ個以上のフィルタの両方を指定することで、独自の設定を定義できます。このレベルのカスタマイズは、テキスト処理を正確に制御する必要がある特殊なユースケースで特に役立ちます。</p></li>
 </ul>
 <div class="alert note">
-<p>コレクション作成時にアナライザ設定を省略した場合、Milvusはデフォルトですべてのテキスト処理に<code translate="no">standard</code> アナライザを使用します。詳細については、「<a href="/docs/ja/standard-analyzer.md">標準</a>」を参照してください。</p>
+<p>コレクション作成時にアナライザ設定を省略した場合、Milvusはデフォルトですべてのテキスト処理に<code translate="no">standard</code> アナライザを使用します。詳細については、「<a href="/docs/ja/v2.5.x/standard-analyzer.md">標準</a>」を参照してください。</p>
 </div>
 <h3 id="Built-in-analyzer" class="common-anchor-header">内蔵アナライザ</h3><p>Milvusのビルトインアナライザは、特定のトークナイザやフィルタがあらかじめ設定されており、これらのコンポーネントを自分で定義することなく、すぐに使用することができます。各ビルトインアナライザは、予め設定されたトークナイザーとフィルタを含むテンプレートとして機能し、カスタマイズのためのオプションパラメータが用意されています。</p>
 <p>たとえば、<code translate="no">standard</code> 組み込みアナライザを使用するには、<code translate="no">standard</code> という名前を<code translate="no">type</code> と指定し、オプションで<code translate="no">stop_words</code> など、このアナライザ・タイプに固有の追加設定を含めるだけです：</p>
@@ -112,10 +113,11 @@ text = <span class="hljs-string">&quot;An efficient system relies on a robust an
 
 <span class="hljs-comment"># Run analyzer</span>
 result = client.run_analyzer(
-    text,
-    analyzer_params
+text,
+analyzer_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
 
@@ -162,7 +164,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
 <p>これは、解析器が入力テキストを適切にトークン化し、ストップワード<code translate="no">&quot;a&quot;</code> 、<code translate="no">&quot;an&quot;</code> 、<code translate="no">&quot;for&quot;</code> をフィルタリングして、残りの意味のあるトークンを返していることを示しています。</p>
-<p>上記の<code translate="no">standard</code> 組み込み解析器の設定は、以下のパラメータで<a href="/docs/ja/analyzer-overview.md#Custom-analyzer">カスタム解析器を</a>設定するのと同じです。<code translate="no">tokenizer</code> と<code translate="no">filter</code> オプションは、同様の機能を実現するために明示的に定義されています：</p>
+<p>上記の<code translate="no">standard</code> 組み込み解析器の設定は、以下のパラメータで<a href="/docs/ja/v2.5.x/analyzer-overview.md#Custom-analyzer">カスタム解析器を</a>設定するのと同じです。<code translate="no">tokenizer</code> と<code translate="no">filter</code> オプションは、同様の機能を実現するために明示的に定義されています：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -251,11 +253,11 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <ul>
 <li><p><strong>組み込みフィルター</strong>：Milvusによって事前に設定されており、最小限のセットアップで済みます。これらのフィルタは、名前を指定することですぐに使用することができます。以下のフィルタは直接使用できるように組み込まれています：</p>
 <ul>
-<li><p><code translate="no">lowercase</code>:テキストを小文字に変換し、大文字小文字を区別せずにマッチングします。詳細は<a href="/docs/ja/lowercase-filter.md">小文字を</a>参照してください。</p></li>
-<li><p><code translate="no">asciifolding</code>:非ASCII文字をASCII等価文字に変換し、多言語テキスト処理を簡素化します。詳細については、<a href="/docs/ja/ascii-folding-filter.md">ASCII 字形統合を</a>参照してください。</p></li>
-<li><p><code translate="no">alphanumonly</code>:英数字だけを残し、他の文字を削除します。詳しくは<a href="/docs/ja/alphanumonly-filter.md">英数字のみ</a> を参照。</p></li>
-<li><p><code translate="no">cnalphanumonly</code>:漢字、英字、数字以外の文字を含むトークンを削除する。詳細は<a href="/docs/ja/cnalphanumonly-filter.md">Cnalphanumonly</a> を参照。</p></li>
-<li><p><code translate="no">cncharonly</code>:中国語以外の文字を含むトークンを削除します。詳細は<a href="/docs/ja/cncharonly-filter.md">Cncharonlyを</a>参照。</p></li>
+<li><p><code translate="no">lowercase</code>:テキストを小文字に変換し、大文字小文字を区別せずにマッチングします。詳細は<a href="/docs/ja/v2.5.x/lowercase-filter.md">小文字を</a>参照してください。</p></li>
+<li><p><code translate="no">asciifolding</code>:非ASCII文字をASCII等価文字に変換し、多言語テキスト処理を簡素化します。詳細については、<a href="/docs/ja/v2.5.x/ascii-folding-filter.md">ASCII 字形統合を</a>参照してください。</p></li>
+<li><p><code translate="no">alphanumonly</code>:英数字だけを残し、他の文字を削除します。詳しくは<a href="/docs/ja/v2.5.x/alphanumonly-filter.md">英数字のみ</a> を参照。</p></li>
+<li><p><code translate="no">cnalphanumonly</code>:漢字、英字、数字以外の文字を含むトークンを削除する。詳細は<a href="/docs/ja/v2.5.x/cnalphanumonly-filter.md">Cnalphanumonly</a> を参照。</p></li>
+<li><p><code translate="no">cncharonly</code>:中国語以外の文字を含むトークンを削除します。詳細は<a href="/docs/ja/v2.5.x/cncharonly-filter.md">Cncharonlyを</a>参照。</p></li>
 </ul>
 <p><strong>組み込みフィルタの使用例：</strong></p>
 <p><div class="multipleCode">
@@ -284,9 +286,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>カスタムフィルター</strong>：カスタム・フィルター：カスタム・フィルターを使用すると、特殊な設定を行うことができます。有効なフィルター・タイプ (<code translate="no">filter.type</code>) を選択し、各フィルター・タイプに固有の設定を追加することで、カスタム・フィルターを定義できます。カスタマイズをサポートするフィルター・タイプの例：</p>
 <ul>
-<li><p><code translate="no">stop</code>:ストップワードのリストを設定することで、指定された一般的な単語を削除します (例:<code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>)。詳細については、「<a href="/docs/ja/stop-filter.md">ストップ</a>」を参照してください。</p></li>
-<li><p><code translate="no">length</code>:トークンの最大長を設定するなど、長さの基準に基づいてトークンを除外する。詳細は「<a href="/docs/ja/length-filter.md">長さ</a>」を参照。</p></li>
-<li><p><code translate="no">stemmer</code>:より柔軟なマッチングのために、単語を語根の形に変換します。詳細については、「<a href="/docs/ja/stemmer-filter.md">ステマー</a>」を参照してください。</p></li>
+<li><p><code translate="no">stop</code>:ストップワードのリストを設定することで、指定された一般的な単語を削除します (例:<code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>)。詳細については、「<a href="/docs/ja/v2.5.x/stop-filter.md">ストップ</a>」を参照してください。</p></li>
+<li><p><code translate="no">length</code>:トークンの最大長を設定するなど、長さの基準に基づいてトークンを除外する。詳細は「<a href="/docs/ja/v2.5.x/length-filter.md">長さ</a>」を参照。</p></li>
+<li><p><code translate="no">stemmer</code>:より柔軟なマッチングのために、単語を語根の形に変換します。詳細については、「<a href="/docs/ja/v2.5.x/stemmer-filter.md">ステマー</a>」を参照してください。</p></li>
 </ul>
 <p><strong>カスタム・フィルターの設定例：</strong></p>
 <p><div class="multipleCode">
@@ -372,6 +374,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="hljs-comment"># Create a new schema</span>
 schema = client.create_schema(auto_id=<span class="hljs-literal">True</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -443,6 +446,7 @@ result = client.run_analyzer(sample_text, analyzer_params_built_in)
 <span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
 
@@ -518,6 +522,7 @@ result = client.run_analyzer(sample_text, analyzer_params_custom)
 <span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
 Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
@@ -603,12 +608,12 @@ schema.add_field(
 
 <span class="hljs-comment"># Add VARCHAR field &#x27;title&#x27; using the custom analyzer configuration</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
-    datatype=DataType.VARCHAR,
-    max_length=<span class="hljs-number">1000</span>,
-    enable_analyzer=<span class="hljs-literal">True</span>,
-    analyzer_params=analyzer_params_custom,
-    enable_match=<span class="hljs-literal">True</span>,
+field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
+datatype=DataType.VARCHAR,
+max_length=<span class="hljs-number">1000</span>,
+enable_analyzer=<span class="hljs-literal">True</span>,
+analyzer_params=analyzer_params_custom,
+enable_match=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Add a vector field for embeddings</span>
@@ -617,6 +622,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</spa
 <span class="hljs-comment"># Add a primary key field</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -701,11 +707,12 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot
 
 <span class="hljs-comment"># Create the collection with the defined schema and index parameters</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    schema=schema,
-    index_params=index_params
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+schema=schema,
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Set up index params for vector field</span>
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()

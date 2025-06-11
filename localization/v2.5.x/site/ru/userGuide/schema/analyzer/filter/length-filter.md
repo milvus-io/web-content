@@ -5,6 +5,7 @@ summary: >-
   Фильтр длины удаляет лексемы, которые не соответствуют заданным требованиям к
   длине, позволяя контролировать длину лексем, сохраняемых при обработке текста.
 ---
+
 <h1 id="Length" class="common-anchor-header">Длина<button data-href="#Length" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,6 +82,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Фильтр <code translate="no">length</code> принимает следующие настраиваемые параметры.</p>
 <table>
    <tr>
@@ -92,8 +94,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Устанавливает максимальную длину токена. Токены, превышающие эту длину, удаляются.</p></td>
    </tr>
 </table>
-<p>Фильтр <code translate="no">length</code> работает с терминами, сгенерированными токенизатором, поэтому он должен использоваться в сочетании с токенизатором. Список токенизаторов, доступных в Milvus, см. на странице <a href="/docs/ru/standard-tokenizer.md">Standard Tokenizer</a> и других страницах.</p>
-<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/analyzer-overview.md#Example-use">Примеры использования</a>.</p>
+<p>Фильтр <code translate="no">length</code> работает с терминами, сгенерированными токенизатором, поэтому он должен использоваться в сочетании с токенизатором. Список токенизаторов, доступных в Milvus, см. на странице <a href="/docs/ru/v2.5.x/standard-tokenizer.md">Standard Tokenizer</a> и других страницах.</p>
+<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/analyzer-overview.md#Example-use">Примеры использования</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,6 +149,7 @@ sample_text = <span class="hljs-string">&quot;The length filter allows control o
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

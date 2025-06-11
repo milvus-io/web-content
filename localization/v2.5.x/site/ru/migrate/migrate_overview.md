@@ -5,6 +5,7 @@ summary: >-
   поддерживаемые миграции, функции и архитектуру.
 title: Обзор миграции Milvus
 ---
+
 <h1 id="Milvus-Migration-Overview" class="common-anchor-header">Обзор миграции Milvus<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,10 +39,10 @@ title: Обзор миграции Milvus
       </svg>
     </button></h2><p>Инструмент <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> поддерживает различные пути миграции для удовлетворения различных потребностей пользователей:</p>
 <ul>
-<li><a href="/docs/ru/es2m.md">Elasticsearch на Milvus 2.x</a>: Позволяет пользователям переносить данные из сред Elasticsearch, чтобы воспользоваться преимуществами оптимизированного векторного поиска Milvus.</li>
-<li><a href="/docs/ru/f2m.md">Faiss - Milvus 2.x</a>: Предоставление экспериментальной поддержки для переноса данных из Faiss, популярной библиотеки для эффективного поиска по сходству.</li>
-<li><a href="/docs/ru/m2m.md">Milvus 1.x - Milvus 2.x</a>: Обеспечение плавного перехода данных из предыдущих версий на новейший фреймворк.</li>
-<li><a href="/docs/ru/from-m2x.md">Milvus 2.3.x - Milvus 2.3.x или выше</a>: Одноразовый переход для пользователей, которые уже перешли на 2.3.x.</li>
+<li><a href="/docs/ru/v2.5.x/es2m.md">Elasticsearch на Milvus 2.x</a>: Позволяет пользователям переносить данные из сред Elasticsearch, чтобы воспользоваться преимуществами оптимизированного векторного поиска Milvus.</li>
+<li><a href="/docs/ru/v2.5.x/f2m.md">Faiss - Milvus 2.x</a>: Предоставление экспериментальной поддержки для переноса данных из Faiss, популярной библиотеки для эффективного поиска по сходству.</li>
+<li><a href="/docs/ru/v2.5.x/m2m.md">Milvus 1.x - Milvus 2.x</a>: Обеспечение плавного перехода данных из предыдущих версий на новейший фреймворк.</li>
+<li><a href="/docs/ru/v2.5.x/from-m2x.md">Milvus 2.3.x - Milvus 2.3.x или выше</a>: Одноразовый переход для пользователей, которые уже перешли на 2.3.x.</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">Особенности<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

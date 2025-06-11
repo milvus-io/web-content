@@ -3,6 +3,7 @@ id: timestamp.md
 title: Milvusでのタイムスタンプ
 summary: タイムスタンプの概念と、Milvusベクトルデータベースにおけるタイムスタンプ関連の4つの主要パラメータについて学ぶ。
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">タイムスタンプ<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,5 +104,5 @@ summary: タイムスタンプの概念と、Milvusベクトルデータベー�
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/consistency.md">ギャランティタイムスタンプがmilvusで</a>どのように<a href="/docs/ja/consistency.md">整合性を調整できるかを</a>学ぶ。</li>
+<li><a href="/docs/ja/v2.5.x/consistency.md">ギャランティタイムスタンプがmilvusで</a>どのように<a href="/docs/ja/v2.5.x/consistency.md">整合性を調整できるかを</a>学ぶ。</li>
 </ul>

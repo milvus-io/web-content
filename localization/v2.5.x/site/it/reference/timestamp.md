@@ -5,6 +5,7 @@ summary: >-
   Imparate a conoscere il concetto di timestamp e i quattro principali parametri
   relativi al timestamp nel database vettoriale Milvus.
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">Timestamp<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,5 +106,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Scoprite come il <a href="/docs/it/consistency.md">timestamp di garanzia consente di regolare la coerenza in Milvus</a>.</li>
+<li>Scoprite come il <a href="/docs/it/v2.5.x/consistency.md">timestamp di garanzia consente di regolare la coerenza in Milvus</a>.</li>
 </ul>

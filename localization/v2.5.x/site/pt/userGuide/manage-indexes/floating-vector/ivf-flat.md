@@ -5,6 +5,7 @@ summary: >-
   O índice IVF_FLAT é um algoritmo de indexação que pode melhorar o desempenho
   da pesquisa de vectores de vírgula flutuante.
 ---
+
 <h1 id="IVFFLAT" class="common-anchor-header">IVF_FLAT<button data-href="#IVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +59,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>Fluxo de trabalho 2 do IVF FLAT</span> </span></p>
-<p>Ao aumentar o valor de <code translate="no">nprobe</code>, pode incluir mais partições na pesquisa, o que pode ajudar a garantir que a incorporação mais próxima da consulta não é perdida, mesmo que resida numa partição diferente. No entanto, isso tem o custo de aumentar o tempo de pesquisa, pois mais candidatos precisam ser avaliados. Para obter mais informações sobre o ajuste de parâmetros de índice, consulte <a href="/docs/pt/ivf-flat.md#Index-params">Parâmetros de índice</a>.</p>
+<p>Ao aumentar o valor de <code translate="no">nprobe</code>, pode incluir mais partições na pesquisa, o que pode ajudar a garantir que a incorporação mais próxima da consulta não é perdida, mesmo que resida numa partição diferente. No entanto, isso tem o custo de aumentar o tempo de pesquisa, pois mais candidatos precisam ser avaliados. Para obter mais informações sobre o ajuste de parâmetros de índice, consulte <a href="/docs/pt/v2.5.x/ivf-flat.md#Index-params">Parâmetros de índice</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Construir índice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,26 +82,27 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Nesta configuração:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: O tipo de índice a construir. Neste exemplo, defina o valor para <code translate="no">IVF_FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: O método utilizado para calcular a distância entre vectores. Os valores suportados incluem <code translate="no">COSINE</code>, <code translate="no">L2</code>, e <code translate="no">IP</code>. Para obter detalhes, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: O método utilizado para calcular a distância entre vectores. Os valores suportados incluem <code translate="no">COSINE</code>, <code translate="no">L2</code>, e <code translate="no">IP</code>. Para obter detalhes, consulte <a href="/docs/pt/v2.5.x/metric.md">Tipos de métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opções de configuração adicionais para criar o índice.</p>
 <ul>
 <li><code translate="no">nlist</code>: Número de clusters para dividir o conjunto de dados.</li>
 </ul>
-<p>Para saber mais sobre os parâmetros de construção disponíveis para o índice <code translate="no">IVF_FLAT</code>, consulte <a href="/docs/pt/ivf-flat.md#Index-building-params">Parâmetros de construção do índice</a>.</p></li>
+<p>Para saber mais sobre os parâmetros de construção disponíveis para o índice <code translate="no">IVF_FLAT</code>, consulte <a href="/docs/pt/v2.5.x/ivf-flat.md#Index-building-params">Parâmetros de construção do índice</a>.</p></li>
 </ul>
-<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para obter detalhes, consulte <a href="/docs/pt/create-collection.md">Criar coleção</a>.</p>
+<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para obter detalhes, consulte <a href="/docs/pt/v2.5.x/create-collection.md">Criar coleção</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Pesquisar no índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,20 +126,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Nesta configuração:</p>
 <ul>
 <li><p><code translate="no">params</code>: Opções de configuração adicionais para pesquisar no índice.</p>
 <ul>
 <li><code translate="no">nprobe</code>: Número de clusters a serem pesquisados.</li>
 </ul>
-<p>Para saber mais sobre os parâmetros de pesquisa disponíveis para o índice <code translate="no">IVF_FLAT</code>, consulte <a href="/docs/pt/ivf-flat.md#Index-specific-search-params">Parâmetros de pesquisa específicos do índice</a>.</p></li>
+<p>Para saber mais sobre os parâmetros de pesquisa disponíveis para o índice <code translate="no">IVF_FLAT</code>, consulte <a href="/docs/pt/v2.5.x/ivf-flat.md#Index-specific-search-params">Parâmetros de pesquisa específicos do índice</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parâmetros de índice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,7 +158,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e efetuar pesquisas no índice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/ivf-flat.md#Build-index">construir um índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/v2.5.x/ivf-flat.md#Build-index">construir um índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>
@@ -170,7 +173,7 @@ res = MilvusClient.search(
      <td><p>Valores maiores <code translate="no">nlist</code> melhoram a recuperação, criando clusters mais refinados, mas aumentam o tempo de construção do índice. Optimize com base no tamanho do conjunto de dados e nos recursos disponíveis. Na maioria dos casos, recomendamos que você defina um valor dentro deste intervalo: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/ivf-flat.md#Search-on-index">pesquisar no índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/v2.5.x/ivf-flat.md#Search-on-index">pesquisar no índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>

@@ -6,6 +6,7 @@ summary: >-
   필수적입니다. IR 시스템 개발의 첫 번째 단계는 데이터 모델을 설계하는 것으로, 여기에는 비즈니스 요구 사항을 분석하고 정보를 구성하는
   방법을 결정하며 의미론적으로 검색할 수 있도록 데이터를 색인화하는 작업이 포함됩니다.
 ---
+
 <h1 id="Schema-Design-Hands-On" class="common-anchor-header">스키마 디자인 실습<button data-href="#Schema-Design-Hands-On" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,19 +119,20 @@ collection_name = <span class="hljs-string">&quot;my_collection&quot;</span>
 client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
+auto_id=<span class="hljs-literal">False</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;article_id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;article id&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;title&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">200</span>, description=<span class="hljs-string">&quot;article title&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;author_info&quot;</span>, datatype=DataType.JSON, description=<span class="hljs-string">&quot;author information&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>, datatype=DataType.INT32, description=<span class="hljs-string">&quot;publish timestamp&quot;</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;image_url&quot;</span>, datatype=DataType.VARCHAR,  max_length=<span class="hljs-number">500</span>, description=<span class="hljs-string">&quot;image URL&quot;</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;image_url&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">500</span>, description=<span class="hljs-string">&quot;image URL&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;image_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;image vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, description=<span class="hljs-string">&quot;article summary&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;summary dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;summary sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -366,8 +368,8 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">MilvusClient</code> 에서 <code translate="no">uri</code> 인수를 볼 수 있으며, 이는 Milvus 서버에 연결하는 데 사용됩니다. 인수는 다음과 같이 설정할 수 있습니다:</p>
 <ul>
-<li><p>소규모 데이터나 프로토타이핑을 위해 로컬 벡터 데이터베이스만 필요한 경우, 예를 들어<code translate="no">./milvus.db</code> 와 같이 로컬 파일로 URL을 설정하는 것이 가장 편리한 방법이며, 이 파일에 모든 데이터를 저장하기 위해 <a href="/docs/ko/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</p></li>
-<li><p>백만 개 이상의 벡터와 같이 대규모 데이터가 있는 경우, <a href="/docs/ko/quickstart.md">Docker 또는 Kubernetes에서</a> 더 성능이 뛰어난 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "<your_username>:<your_password>"을 사용하고, 그렇지 않은 경우 토큰을 설정하지 마세요.</p></li>
+<li><p>소규모 데이터나 프로토타이핑을 위해 로컬 벡터 데이터베이스만 필요한 경우, 예를 들어<code translate="no">./milvus.db</code> 와 같이 로컬 파일로 URL을 설정하는 것이 가장 편리한 방법이며, 이 파일에 모든 데이터를 저장하기 위해 <a href="/docs/ko/v2.5.x/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</p></li>
+<li><p>백만 개 이상의 벡터와 같이 대규모 데이터가 있는 경우, <a href="/docs/ko/v2.5.x/quickstart.md">Docker 또는 Kubernetes에서</a> 더 성능이 뛰어난 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "<your_username>:<your_password>"을 사용하고, 그렇지 않은 경우 토큰을 설정하지 마세요.</p></li>
 <li><p>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하는 경우, 질리즈 클라우드의 퍼블릭 엔드포인트와 API 키에 해당하는 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 조정합니다.</p></li>
 </ul>
 <p><code translate="no">MilvusClient.create_schema</code> 의 <code translate="no">auto_id</code> 는 기본 필드의 속성으로 기본 필드에 대한 자동 증분 활성화 여부를 결정합니다.  <code translate="no">article_id</code> 필드를 기본 키로 설정하고 문서 ID를 수동으로 추가하고자 하므로 <code translate="no">auto_id</code> False를 설정하여 이 기능을 비활성화합니다.</p>
@@ -378,25 +380,26 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>,
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
+field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>,
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 <span class="hljs-keyword">import</span> java.util.ArrayList;
@@ -491,7 +494,7 @@ indexParams=<span class="hljs-string">&#x27;[
 
 <button class="copy-code-btn"></button></code></pre>
 <p>인덱스 매개변수를 설정하고 적용하면 Milvus는 벡터 및 스칼라 데이터에 대한 복잡한 쿼리를 처리하는 데 최적화됩니다. 이 인덱싱은 컬렉션 내 유사성 검색의 성능과 정확성을 향상시켜 이미지 벡터와 요약 벡터를 기반으로 한 문서를 효율적으로 검색할 수 있게 해줍니다. 밀도 벡터를 위한 <code translate="no">AUTOINDEX</code>, 스파스 벡터를 위한 <code translate="no">SPARSE_INVERTED_INDEX</code>, 스칼라를 위한 <code translate="no">INVERTED_INDEX</code> 인덱스를 활용함으로써 밀버스는 가장 관련성이 높은 결과를 신속하게 식별하고 반환하여 전반적인 사용자 경험과 데이터 검색 프로세스의 효율성을 크게 개선할 수 있습니다.</p>
-<p>다양한 유형의 인덱스와 메트릭이 있습니다. 이에 대한 자세한 내용은 <a href="/docs/ko/overview.md#Index-types">Milvus 인덱스 유형</a> 및 <a href="/docs/ko/glossary.md#Metric-type">Milvus 메트릭 유형을</a> 참조하세요.</p>
+<p>다양한 유형의 인덱스와 메트릭이 있습니다. 이에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/overview.md#Index-types">Milvus 인덱스 유형</a> 및 <a href="/docs/ko/v2.5.x/glossary.md#Metric-type">Milvus 메트릭 유형을</a> 참조하세요.</p>
 <h3 id="Create-Collection" class="common-anchor-header">컬렉션 만들기</h3><p>스키마와 인덱스가 정의되면 이러한 매개변수를 사용하여 "컬렉션"을 만듭니다. Milvus에 대한 컬렉션은 관계형 DB에 대한 테이블과 같습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -534,6 +537,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>컬렉션에 대한 설명을 통해 컬렉션이 성공적으로 생성되었는지 확인할 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -585,4 +589,4 @@ curl --request POST \
       </svg>
     </button></h2><h3 id="Loading-Index" class="common-anchor-header">인덱스 로드</h3><p>Milvus에서 컬렉션을 만들 때 인덱스를 즉시 로드하거나 일부 데이터를 대량으로 수집할 때까지 연기하도록 선택할 수 있습니다. 위의 예제에서는 수집 생성 직후 수집된 모든 데이터에 대해 인덱스가 자동으로 생성되므로 일반적으로 이에 대해 명시적으로 선택할 필요가 없습니다. 이렇게 하면 수집된 데이터를 즉시 검색할 수 있습니다. 그러나 컬렉션 생성 후 대량의 대량 삽입이 있고 특정 시점까지 데이터를 검색할 필요가 없는 경우, 컬렉션 생성에서 index_params를 생략하여 인덱스 구축을 연기하고 모든 데이터를 수집한 후 명시적으로 load를 호출하여 인덱스를 구축할 수 있습니다. 이 방법은 대규모 컬렉션에서 인덱스를 구축하는 데 더 효율적이지만 load()를 호출하기 전까지는 검색을 수행할 수 없습니다.</p>
 <h3 id="How-to-Define-Data-Model-For-Multi-tenancy" class="common-anchor-header">멀티테넌시를 위한 데이터 모델을 정의하는 방법</h3><p>다중 테넌트 개념은 단일 소프트웨어 애플리케이션이나 서비스가 각각 고립된 환경을 가진 여러 독립 사용자나 조직에 서비스를 제공해야 하는 시나리오에서 일반적으로 사용됩니다. 이는 클라우드 컴퓨팅, SaaS(서비스형 소프트웨어) 애플리케이션 및 데이터베이스 시스템에서 자주 볼 수 있습니다. 예를 들어, 클라우드 스토리지 서비스는 멀티테넌시를 활용하여 여러 회사가 동일한 기본 인프라를 공유하면서 데이터를 개별적으로 저장하고 관리할 수 있도록 할 수 있습니다. 이 접근 방식은 리소스 활용도와 효율성을 극대화하는 동시에 각 테넌트의 데이터 보안과 개인정보 보호를 보장합니다.</p>
-<p>테넌트를 구분하는 가장 쉬운 방법은 데이터와 리소스를 서로 분리하는 것입니다. 각 테넌트는 특정 리소스에 대한 독점적 액세스 권한을 갖거나 데이터베이스, 컬렉션, 파티션과 같은 Milvus 엔티티를 관리하기 위해 다른 테넌트와 리소스를 공유합니다. 멀티 테넌시를 구현하기 위해 이러한 엔티티에 맞춰진 특정 방법이 있습니다. 자세한 내용은 <a href="/docs/ko/multi_tenancy.md#Multi-tenancy-strategies">Milvus 멀티테넌시 페이지를</a> 참조하세요.</p>
+<p>테넌트를 구분하는 가장 쉬운 방법은 데이터와 리소스를 서로 분리하는 것입니다. 각 테넌트는 특정 리소스에 대한 독점적 액세스 권한을 갖거나 데이터베이스, 컬렉션, 파티션과 같은 Milvus 엔티티를 관리하기 위해 다른 테넌트와 리소스를 공유합니다. 멀티 테넌시를 구현하기 위해 이러한 엔티티에 맞춰진 특정 방법이 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/multi_tenancy.md#Multi-tenancy-strategies">Milvus 멀티테넌시 페이지를</a> 참조하세요.</p>

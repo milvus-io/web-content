@@ -5,6 +5,7 @@ related_key: SDK
 summary: 學習如何安裝 Milvus 的 Python SDK。
 title: 安裝 Milvus Python SDK
 ---
+
 <h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">安裝 Milvus Python SDK<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +60,7 @@ title: 安裝 Milvus Python SDK
       </svg>
     </button></h2><p>PyMilvus 可在<a href="https://pypi.org/project/pymilvus/">Python Package Index</a> 中找到。</p>
 <div class="alert note">
-建議安裝與您安裝的 Milvus 伺服器版本相符的 PyMilvus 版本。如需詳細資訊，請參閱<a href="/docs/zh-hant/release_notes.md">Release Notes</a>。</div>
+建議安裝與您安裝的 Milvus 伺服器版本相符的 PyMilvus 版本。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/release_notes.md">Release Notes</a>。</div>
 <pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">11</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">驗證安裝<button data-href="#Verify-installation" class="anchor-icon" translate="no">
@@ -99,11 +100,11 @@ title: 安裝 Milvus Python SDK
 <ul>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh-hant/manage-collections.md">管理集合</a></li>
-<li><a href="/docs/zh-hant/manage-partitions.md">管理分區</a></li>
-<li><a href="/docs/zh-hant/insert-update-delete.md">插入、倒置與刪除</a></li>
-<li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
-<li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-collections.md">管理集合</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-partitions.md">管理分區</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/insert-update-delete.md">插入、倒置與刪除</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/single-vector-search.md">單向量搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
 <li><p>探索<a href="/api-reference/pymilvus/v2.4.x/About.md">PyMilvus API 參考</a></p></li>
 </ul>

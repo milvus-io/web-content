@@ -7,6 +7,7 @@ summary: >-
   يشرح هذا الدليل كيفية استخدام تعبيرات التصفية في ملفوس، مع أمثلة تركز على
   عمليات الاستعلام. يمكنك أيضًا تطبيق هذه المرشحات في طلبات البحث والحذف.
 ---
+
 <h1 id="Filtering-Explained" class="common-anchor-header">شرح التصفية<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +55,7 @@ summary: >-
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">مثال: تصفية حقول المصفوفات</h3><p>إذا كان لديك حقل مصفوفة <code translate="no">history_temperatures</code> يحتوي على سجلات متوسط درجات الحرارة التي أبلغت عنها المراصد منذ عام 2000، وتريد العثور على المراصد التي تجاوزت فيها درجة الحرارة في عام 2009 (العاشر المسجل) 23 درجة مئوية، استخدم هذا التعبير:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول هذه العوامل الأساسية، راجع <a href="/docs/ar/basic-operators.md">المعاملات الأساسية</a>.</p>
+<p>لمزيد من المعلومات حول هذه العوامل الأساسية، راجع <a href="/docs/ar/v2.5.x/basic-operators.md">المعاملات الأساسية</a>.</p>
 <h2 id="Filter-expression-templates" class="common-anchor-header">قوالب تعبيرات التصفية<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,7 +80,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>هذا الأسلوب يقلل من عبء التحليل ويحسن سرعة الاستعلام. للمزيد من المعلومات، راجع <a href="/docs/ar/filtering-templating.md">نموذج التصفية</a>.</p>
+<p>هذا الأسلوب يقلل من عبء التحليل ويحسن سرعة الاستعلام. للمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/filtering-templating.md">نموذج التصفية</a>.</p>
 <h2 id="Data-type-specific-operators" class="common-anchor-header">المشغلات الخاصة بنوع البيانات<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +110,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من التفاصيل حول مشغلي JSON، راجع <a href="/docs/ar/json-operators.md">مشغلي JSON</a>.</p>
+<p>لمزيد من التفاصيل حول مشغلي JSON، راجع <a href="/docs/ar/v2.5.x/json-operators.md">مشغلي JSON</a>.</p>
 <h3 id="ARRAY-field-specific-operators" class="common-anchor-header">المشغلات الخاصة بحقل ARRAY</h3><p>يوفر ميلفوس عوامل تصفية متقدمة لحقول المصفوفات، مثل <code translate="no">ARRAY_CONTAINS</code> و <code translate="no">ARRAY_CONTAINS_ALL</code> و <code translate="no">ARRAY_CONTAINS_ANY</code> و <code translate="no">ARRAY_LENGTH</code> ، والتي تسمح بالتحكم الدقيق في بيانات المصفوفات:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: تصفية الكيانات التي تحتوي على عنصر معين.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
@@ -123,7 +124,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_LENGTH</code>: تصفيات بناءً على طول المصفوفة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من التفاصيل حول مشغلي المصفوفة، راجع <a href="/docs/ar/array-operators.md">مشغلي ARRAY</a>.</p>
+<p>لمزيد من التفاصيل حول مشغلي المصفوفة، راجع <a href="/docs/ar/v2.5.x/array-operators.md">مشغلي ARRAY</a>.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">المشغلات الخاصة بحقل VARCHAR</h3><p>يوفر ميلفوس مشغلات متخصصة لعمليات بحث دقيقة تستند إلى النص على حقول VARCHAR:</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> المشغل</h4><p>يسمح المشغل <code translate="no">TEXT_MATCH</code> باسترجاع المستندات بدقة بناءً على مصطلحات استعلام محددة. وهو مفيد بشكل خاص لعمليات البحث المصفاة التي تجمع بين المرشحات القياسية وعمليات البحث عن التشابه المتجه. على عكس عمليات البحث الدلالية، يركّز Text Match على التكرارات الدقيقة للمصطلحات.</p>
 <p>يستخدم ميلفوس تانتيفي لدعم الفهرسة المقلوبة والبحث النصي القائم على المصطلحات. تتضمن العملية</p>
@@ -131,4 +132,4 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>المحلّل</strong>: ترميز النص المدخلات ومعالجتها.</p></li>
 <li><p><strong>الفهرسة</strong>: ينشئ فهرسًا مقلوبًا يعيّن الرموز الفريدة للمستندات.</p></li>
 </ol>
-<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/keyword-match.md">مطابقة النص</a>.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/keyword-match.md">مطابقة النص</a>.</p>

@@ -6,6 +6,7 @@ summary: >-
   Tenants - denselben Cluster gemeinsam nutzen und dabei isolierte
   Datenumgebungen beibehalten.
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">Implementieren Sie Multi-Tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus unterstützt Multi-Tenancy auf vier Ebenen: <strong>Datenbank</strong>, <strong>Sammlung</strong>, <strong>Partition</strong> und <strong>Partitionsschlüssel</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Mehrmandantenfähigkeit auf Datenbankebene</h3><p>Bei der Mandantenfähigkeit auf Datenbankebene erhält jeder Mandant eine entsprechende <a href="/docs/de/manage_databases.md">Datenbank</a>, die eine oder mehrere Sammlungen enthält.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Mehrmandantenfähigkeit auf Datenbankebene</h3><p>Bei der Mandantenfähigkeit auf Datenbankebene erhält jeder Mandant eine entsprechende <a href="/docs/de/v2.5.x/manage_databases.md">Datenbank</a>, die eine oder mehrere Sammlungen enthält.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -50,7 +51,7 @@ summary: >-
 <li><p><strong>Flexibel</strong>: Jede Datenbank kann Sammlungen mit unterschiedlichen Schemata enthalten, was eine äußerst flexible Datenorganisation ermöglicht und jedem Mandanten sein eigenes Datenschema zur Verfügung stellt.</p></li>
 <li><p><strong>Andere</strong>: Diese Strategie unterstützt auch RBAC und ermöglicht eine fein abgestufte Kontrolle des Benutzerzugriffs pro Mandant. Darüber hinaus können Sie Daten für bestimmte Mandanten flexibel laden oder freigeben, um heiße und kalte Daten effektiv zu verwalten.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-Tenancy auf Sammlungsebene</h3><p>Bei der Mandantenfähigkeit auf Sammlungsebene wird jedem Mandanten eine <a href="/docs/de/manage-collections.md">Sammlung</a> zugewiesen, die eine starke Datenisolierung bietet.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-Tenancy auf Sammlungsebene</h3><p>Bei der Mandantenfähigkeit auf Sammlungsebene wird jedem Mandanten eine <a href="/docs/de/v2.5.x/manage-collections.md">Sammlung</a> zugewiesen, die eine starke Datenisolierung bietet.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -61,7 +62,7 @@ summary: >-
 <li><p><strong>Flexibel</strong>: Bei dieser Strategie kann jede Sammlung ihr eigenes Schema haben, so dass Tenants mit unterschiedlichen Datenschemata untergebracht werden können.</p></li>
 <li><p><strong>Andere</strong>: Diese Strategie unterstützt auch RBAC und ermöglicht eine granulare Zugriffskontrolle für Mandanten. Außerdem können Sie Daten für bestimmte Mandanten flexibel laden oder freigeben, um heiße und kalte Daten effektiv zu verwalten.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-Tenancy auf Partitionsebene</h3><p>Bei der Mandantenfähigkeit auf Partitionsebene wird jeder Mandant einer manuell erstellten <a href="/docs/de/manage-partitions.md">Partition</a> innerhalb einer gemeinsamen Sammlung zugewiesen.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-Tenancy auf Partitionsebene</h3><p>Bei der Mandantenfähigkeit auf Partitionsebene wird jeder Mandant einer manuell erstellten <a href="/docs/de/v2.5.x/manage-partitions.md">Partition</a> innerhalb einer gemeinsamen Sammlung zugewiesen.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -72,7 +73,7 @@ summary: >-
 <li><p><strong>Flexibel</strong>: Bei dieser Strategie müssen alle Tenants dasselbe Datenschema verwenden. Und Partitionen müssen manuell erstellt werden.</p></li>
 <li><p><strong>Andere</strong>: RBAC wird auf Partitionsebene nicht unterstützt. Tenants können entweder einzeln oder über mehrere Partitionen hinweg abgefragt werden, wodurch sich dieser Ansatz gut für Szenarien mit aggregierten Abfragen oder Analysen über Tenant-Segmente hinweg eignet. Außerdem können Sie Daten für bestimmte Tenants flexibel laden oder freigeben, um Hot- und Cold-Data effektiv zu verwalten.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Mehrmandantenfähigkeit auf Partitionsschlüssel-Ebene</h3><p>Bei dieser Strategie teilen sich alle Tenants eine einzige Sammlung und ein einziges Schema, aber die Daten jedes Tenants werden automatisch auf der Grundlage des <a href="/docs/de/use-partition-key.md">Partitionsschlüsselwerts</a> in 16 physisch isolierte Partitionen geleitet. Obwohl jede physische Partition mehrere Tenants enthalten kann, bleiben die Daten der verschiedenen Tenants logisch getrennt.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Mehrmandantenfähigkeit auf Partitionsschlüssel-Ebene</h3><p>Bei dieser Strategie teilen sich alle Tenants eine einzige Sammlung und ein einziges Schema, aber die Daten jedes Tenants werden automatisch auf der Grundlage des <a href="/docs/de/v2.5.x/use-partition-key.md">Partitionsschlüsselwerts</a> in 16 physisch isolierte Partitionen geleitet. Obwohl jede physische Partition mehrere Tenants enthalten kann, bleiben die Daten der verschiedenen Tenants logisch getrennt.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

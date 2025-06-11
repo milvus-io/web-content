@@ -7,6 +7,7 @@ summary: >-
   المرئي والتوصية بالمنتجات. ويقع في صميم هذه الأنظمة نموذج بيانات مصمم بعناية
   لتنظيم المعلومات وفهرستها واسترجاعها.
 ---
+
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">تصميم نموذج البيانات للبحث<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,8 +92,8 @@ summary: >-
       </svg>
     </button></h2><p>في ميلفوس، يتم التعبير عن نموذج البيانات من خلال مخطط المجموعة. يعد تصميم الحقول الصحيحة داخل مخطط المجموعة أمرًا أساسيًا لتمكين الاسترجاع الفعال. يحدد كل حقل نوعًا معينًا من البيانات المخزنة في المجموعة ويلعب دورًا مميزًا في عملية البحث. على المستوى العالي، يدعم Milvus نوعين رئيسيين من الحقول: <strong>الحقول المتجهة</strong> <strong>والحقول القياسية</strong>.</p>
 <p>الآن، يمكنك تعيين نموذج البيانات الخاص بك إلى مخطط للحقول، بما في ذلك المتجهات وأي حقول قياسية مساعدة. تأكد من ارتباط كل حقل بالسمات من نموذج البيانات الخاص بك، وانتبه بشكل خاص إلى نوع المتجه (كثيف أو قياسي) وبُعده.</p>
-<h3 id="Vector-Field" class="common-anchor-header">الحقل المتجه</h3><p>تخزن الحقول المتجهة تضمينات لأنواع البيانات غير المنظمة مثل النصوص والصور والصوت. قد تكون هذه التضمينات كثيفة أو متناثرة أو ثنائية، اعتمادًا على نوع البيانات وطريقة الاسترجاع المستخدمة. عادةً ما يتم استخدام المتجهات الكثيفة للبحث الدلالي، في حين أن المتجهات المتفرقة مناسبة بشكل أفضل لمطابقة النص الكامل أو المطابقة المعجمية. تكون المتجهات الثنائية مفيدة عندما تكون موارد التخزين والموارد الحاسوبية محدودة. قد تحتوي المجموعة على العديد من حقول المتجهات لتمكين استراتيجيات الاسترجاع متعدد الوسائط أو المختلطة. للحصول على دليل مفصل حول هذا الموضوع، يرجى الرجوع إلى <a href="/docs/ar/multi-vector-search.md">البحث الهجين متعدد المتجهات</a>.</p>
-<p>يدعم ميلفوس أنواع بيانات المتجهات: <code translate="no">FLOAT_VECTOR</code> للمتجهات <a href="/docs/ar/dense-vector.md">الكثيفة،</a> <code translate="no">SPARSE_FLOAT_VECTOR</code> للمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a> و <code translate="no">BINARY_VECTOR</code> <a href="/docs/ar/binary-vector.md">للمتجهات الثنائية</a></p>
+<h3 id="Vector-Field" class="common-anchor-header">الحقل المتجه</h3><p>تخزن الحقول المتجهة تضمينات لأنواع البيانات غير المنظمة مثل النصوص والصور والصوت. قد تكون هذه التضمينات كثيفة أو متناثرة أو ثنائية، اعتمادًا على نوع البيانات وطريقة الاسترجاع المستخدمة. عادةً ما يتم استخدام المتجهات الكثيفة للبحث الدلالي، في حين أن المتجهات المتفرقة مناسبة بشكل أفضل لمطابقة النص الكامل أو المطابقة المعجمية. تكون المتجهات الثنائية مفيدة عندما تكون موارد التخزين والموارد الحاسوبية محدودة. قد تحتوي المجموعة على العديد من حقول المتجهات لتمكين استراتيجيات الاسترجاع متعدد الوسائط أو المختلطة. للحصول على دليل مفصل حول هذا الموضوع، يرجى الرجوع إلى <a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين متعدد المتجهات</a>.</p>
+<p>يدعم ميلفوس أنواع بيانات المتجهات: <code translate="no">FLOAT_VECTOR</code> للمتجهات <a href="/docs/ar/v2.5.x/dense-vector.md">الكثيفة،</a> <code translate="no">SPARSE_FLOAT_VECTOR</code> للمتجهات <a href="/docs/ar/v2.5.x/sparse_vector.md">المتفرقة</a> و <code translate="no">BINARY_VECTOR</code> <a href="/docs/ar/v2.5.x/binary-vector.md">للمتجهات الثنائية</a></p>
 <h3 id="Scalar-Field" class="common-anchor-header">الحقول العددية</h3><p>تخزن الحقول العددية قيمًا بدائية منظمة - يشار إليها عادةً بالبيانات الوصفية - مثل الأرقام أو السلاسل أو التواريخ. يمكن إرجاع هذه القيم جنبًا إلى جنب مع نتائج البحث المتجهة وهي ضرورية للتصفية والفرز. فهي تسمح لك بتضييق نتائج البحث بناءً على سمات محددة، مثل حصر المستندات في فئة معينة أو نطاق زمني محدد.</p>
 <p>يدعم ميلفوس أنواعًا قياسية مثل <code translate="no">BOOL</code> و <code translate="no">INT8/16/32/64</code> و و <code translate="no">FLOAT</code> و <code translate="no">DOUBLE</code> و <code translate="no">VARCHAR</code> و <code translate="no">JSON</code> و <code translate="no">ARRAY</code> لتخزين وتصفية البيانات غير المتجهة. تعزز هذه الأنواع دقة عمليات البحث وتخصيصها.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">الاستفادة من الميزات المتقدمة في تصميم المخطط<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
@@ -112,13 +113,13 @@ summary: >-
       </svg>
     </button></h2><p>عند تصميم مخطط، لا يكفي مجرد تعيين بياناتك إلى الحقول باستخدام أنواع البيانات المدعومة. من الضروري أن يكون لديك فهم شامل للعلاقات بين الحقول والاستراتيجيات المتاحة للتكوين. إن وضع الميزات الرئيسية في الاعتبار أثناء مرحلة التصميم يضمن أن المخطط لا يلبي متطلبات معالجة البيانات الفورية فحسب، بل إنه قابل للتطوير والتكيف مع الاحتياجات المستقبلية. من خلال دمج هذه الميزات بعناية، يمكنك بناء بنية بيانات قوية تزيد من إمكانيات ميلفوس وتدعم استراتيجية وأهداف البيانات الأوسع نطاقًا. فيما يلي نظرة عامة على الميزات الرئيسية التي تنشئ مخطط تجميع:</p>
 <h3 id="Primary-Key" class="common-anchor-header">المفتاح الأساسي</h3><p>يعد حقل المفتاح الأساسي مكونًا أساسيًا في المخطط، حيث إنه يحدد بشكل فريد كل كيان داخل المجموعة. تعريف المفتاح الأساسي إلزامي. يجب أن يكون حقلًا قياسيًا من النوع الصحيح أو السلسلة ويتم تمييزه على أنه <code translate="no">is_primary=True</code>. اختياريًا، يمكنك تمكين <code translate="no">auto_id</code> للمفتاح الأساسي، والذي يتم تعيينه تلقائيًا بأرقام صحيحة تنمو بشكل متجانس كلما تم إدخال المزيد من البيانات في المجموعة.</p>
-<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/primary-field.md">الحقل الأساسي والمعرف التلقائي</a>.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/primary-field.md">الحقل الأساسي والمعرف التلقائي</a>.</p>
 <h3 id="Partitioning" class="common-anchor-header">التقسيم</h3><p>لتسريع البحث، يمكنك اختياريًا تشغيل التقسيم. من خلال تعيين حقل قياسي محدد للتقسيم وتحديد معايير التصفية استنادًا إلى هذا الحقل أثناء عمليات البحث، يمكن أن يقتصر نطاق البحث بشكل فعال على الأقسام ذات الصلة فقط. تعمل هذه الطريقة على تحسين كفاءة عمليات الاسترجاع بشكل كبير من خلال تقليل نطاق البحث.</p>
-<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p>
 <h3 id="Analyzer" class="common-anchor-header">المحلل</h3><p>يعد المحلل أداة أساسية لمعالجة البيانات النصية وتحويلها. وتتمثل وظيفته الرئيسية في تحويل النص الخام إلى رموز وهيكلتها للفهرسة والاسترجاع. وهو يقوم بذلك عن طريق ترميز السلسلة، وإسقاط كلمات التوقف، وتجزئة الكلمات الفردية إلى رموز.</p>
-<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحلِّل</a>.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/v2.5.x/analyzer-overview.md">المحلِّل</a>.</p>
 <h3 id="Function" class="common-anchor-header">الوظيفة</h3><p>يسمح لك Milvus بتعريف الدوال المضمنة كجزء من المخطط لاشتقاق حقول معينة تلقائيًا. على سبيل المثال، يمكنك إضافة دالة BM25 مضمنة تقوم بإنشاء متجه متناثر من حقل <code translate="no">VARCHAR</code> لدعم البحث في النص الكامل. تعمل هذه الحقول المشتقة من الدالة على تبسيط المعالجة المسبقة وضمان بقاء المجموعة مكتفية بذاتها وجاهزة للاستعلام.</p>
-<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/full-text-search.md">البحث عن النص الكامل</a>.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">مثال من العالم الحقيقي<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -148,7 +149,7 @@ summary: >-
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
      <td><p>تم إنشاؤه تلقائيًا مع تمكين <code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/ar/get-and-scalar-query.md">استعلام باستخدام Get</a></p></td>
+     <td><p><a href="/docs/ar/v2.5.x/get-and-scalar-query.md">استعلام باستخدام Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -157,7 +158,7 @@ summary: >-
    <tr>
      <td><p>العنوان (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>عنوان المقالة</p></td>
-     <td><p><a href="/docs/ar/keyword-match.md">تطابق النص</a></p></td>
+     <td><p><a href="/docs/ar/v2.5.x/keyword-match.md">تطابق النص</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -166,7 +167,7 @@ summary: >-
    <tr>
      <td><p>الطابع الزمني (<code translate="no">INT32</code>)</p></td>
      <td><p>تاريخ النشر</p></td>
-     <td><p><a href="/docs/ar/use-partition-key.md">تصفية حسب مفتاح التقسيم</a></p></td>
+     <td><p><a href="/docs/ar/v2.5.x/use-partition-key.md">تصفية حسب مفتاح التقسيم</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -175,7 +176,7 @@ summary: >-
    <tr>
      <td><p>النص (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>النص الخام للمقال</p></td>
-     <td><p><a href="/docs/ar/multi-vector-search.md">البحث الهجين متعدد النواقل</a></p></td>
+     <td><p><a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين متعدد النواقل</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -200,7 +201,7 @@ summary: >-
      <td><p>الإخراج</p></td>
    </tr>
 </table>
-<p>لمزيد من المعلومات حول المخططات وإرشادات مفصلة حول إضافة أنواع مختلفة من الحقول، يرجى الرجوع إلى <a href="/docs/ar/schema.md">شرح المخطط</a>.</p>
+<p>لمزيد من المعلومات حول المخططات وإرشادات مفصلة حول إضافة أنواع مختلفة من الحقول، يرجى الرجوع إلى <a href="/docs/ar/v2.5.x/schema.md">شرح المخطط</a>.</p>
 <h3 id="Initialize-schema" class="common-anchor-header">تهيئة المخطط</h3><p>للبدء، نحتاج إلى إنشاء مخطط فارغ. تؤسس هذه الخطوة بنية أساسية لتحديد نموذج البيانات.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -208,6 +209,7 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -244,6 +246,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, d
 schema.add_field(field_name=<span class="hljs-string">&quot;text_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;text dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;text sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
@@ -406,14 +409,15 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
-    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
-    output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
-    function_type=FunctionType.BM25,
+name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
+function_type=FunctionType.BM25,
 )
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -479,6 +483,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ar/create-collection.md">إنشاء مجموعة</a></p></li>
-<li><p><a href="/docs/ar/alter-collection-field.md">تغيير حقل المجموعة</a></p></li>
+<li><p><a href="/docs/ar/v2.5.x/create-collection.md">إنشاء مجموعة</a></p></li>
+<li><p><a href="/docs/ar/v2.5.x/alter-collection-field.md">تغيير حقل المجموعة</a></p></li>
 </ul>

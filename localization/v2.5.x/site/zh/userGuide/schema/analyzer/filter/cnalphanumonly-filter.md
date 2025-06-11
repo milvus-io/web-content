@@ -3,6 +3,7 @@ id: cnalphanumonly-filter.md
 title: Cnalphanumonly
 summary: cnalphanumonly 过滤器会删除包含除汉字、英文字母或数字以外的任何字符的标记。
 ---
+
 <h1 id="Cnalphanumonly" class="common-anchor-header">Cnalphanumonly<button data-href="#Cnalphanumonly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,8 +62,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">cnalphanumonly</code> 过滤器对标记符生成的术语进行操作，因此必须与标记符结合使用。有关 Milvus 中可用的标记化器列表，请参阅<a href="/docs/zh/standard-tokenizer.md">标准</a>标记化器及其同类页面。</p>
-<p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
+<p><code translate="no">cnalphanumonly</code> 过滤器对标记符生成的术语进行操作，因此必须与标记符结合使用。有关 Milvus 中可用的标记化器列表，请参阅<a href="/docs/zh/v2.5.x/standard-tokenizer.md">标准</a>标记化器及其同类页面。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/v2.5.x/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,6 +106,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Founda
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

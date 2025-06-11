@@ -1,9 +1,10 @@
 ---
 id: monitor_overview.md
 title: 监视器概述
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和警报服务。
 ---
+
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvus 监控框架概述<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +106,7 @@ summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和
       </svg>
     </button></h2><p>了解了监控和警报的基本工作流程后，请学习：</p>
 <ul>
-<li><a href="/docs/zh/monitor.md">部署监控服务</a></li>
-<li><a href="/docs/zh/visualize.md">实现 Milvus 指标可视化</a></li>
-<li><a href="/docs/zh/alert.md">创建警报</a></li>
+<li><a href="/docs/zh/v2.5.x/monitor.md">部署监控服务</a></li>
+<li><a href="/docs/zh/v2.5.x/visualize.md">实现 Milvus 指标可视化</a></li>
+<li><a href="/docs/zh/v2.5.x/alert.md">创建警报</a></li>
 </ul>

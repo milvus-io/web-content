@@ -5,6 +5,7 @@ summary: >-
   RBAC(역할 기반 액세스 제어)는 역할에 기반한 액세스 제어 방식입니다. RBAC를 사용하면 사용자가 수행할 수 있는 작업을 컬렉션,
   데이터베이스, 인스턴스 수준에서 세밀하게 제어하여 데이터 보안을 강화할 수 있습니다.
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">RBAC 설명<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,9 +68,9 @@ summary: >-
       </svg>
     </button></h2><p>RBAC를 통해 액세스 제어를 달성하려면 아래 단계를 따라야 합니다:</p>
 <ol>
-<li><p><strong><a href="/docs/ko/users_and_roles.md#Create-a-user">사용자를 만듭니다</a></strong>: Milvus의 기본 사용자 <code translate="no">root</code> 외에도 새 사용자를 만들고 데이터 보안을 보호하기 위해 비밀번호를 설정할 수 있습니다.</p></li>
-<li><p><strong><a href="/docs/ko/users_and_roles.md#Create-a-role">역할 만들기</a></strong>: 필요에 따라 사용자 지정 역할을 만들 수 있습니다. 역할의 구체적인 기능은 해당 권한에 따라 결정됩니다.</p></li>
-<li><p><strong><a href="/docs/ko/privilege_group.md">권한 그룹을 만듭니다</a></strong>: 여러 권한을 하나의 권한 그룹으로 결합하여 역할에 권한을 부여하는 프로세스를 간소화할 수 있습니다.</p></li>
-<li><p><strong><a href="/docs/ko/grant_privileges.md">역할에 권한 또는 권한 그룹을 부여합니다</a></strong>: 역할의 기능을 정의하여 이 역할에 권한 또는 권한 그룹을 부여할 수 있습니다.</p></li>
-<li><p><strong><a href="/docs/ko/grant_roles.md">사용자에게 역할 부여하기</a></strong>: 사용자에게 특정 권한이 있는 역할을 부여하여 사용자가 역할의 권한을 가질 수 있도록 합니다. 하나의 역할을 여러 사용자에게 부여할 수 있습니다.</p></li>
+<li><p><strong><a href="/docs/ko/v2.5.x/users_and_roles.md#Create-a-user">사용자를 만듭니다</a></strong>: Milvus의 기본 사용자 <code translate="no">root</code> 외에도 새 사용자를 만들고 데이터 보안을 보호하기 위해 비밀번호를 설정할 수 있습니다.</p></li>
+<li><p><strong><a href="/docs/ko/v2.5.x/users_and_roles.md#Create-a-role">역할 만들기</a></strong>: 필요에 따라 사용자 지정 역할을 만들 수 있습니다. 역할의 구체적인 기능은 해당 권한에 따라 결정됩니다.</p></li>
+<li><p><strong><a href="/docs/ko/v2.5.x/privilege_group.md">권한 그룹을 만듭니다</a></strong>: 여러 권한을 하나의 권한 그룹으로 결합하여 역할에 권한을 부여하는 프로세스를 간소화할 수 있습니다.</p></li>
+<li><p><strong><a href="/docs/ko/v2.5.x/grant_privileges.md">역할에 권한 또는 권한 그룹을 부여합니다</a></strong>: 역할의 기능을 정의하여 이 역할에 권한 또는 권한 그룹을 부여할 수 있습니다.</p></li>
+<li><p><strong><a href="/docs/ko/v2.5.x/grant_roles.md">사용자에게 역할 부여하기</a></strong>: 사용자에게 특정 권한이 있는 역할을 부여하여 사용자가 역할의 권한을 가질 수 있도록 합니다. 하나의 역할을 여러 사용자에게 부여할 수 있습니다.</p></li>
 </ol>

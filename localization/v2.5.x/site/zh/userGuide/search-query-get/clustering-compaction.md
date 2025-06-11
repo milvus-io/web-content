@@ -3,6 +3,7 @@ id: clustering-compaction.md
 title: 聚类压缩
 summary: 聚类压缩旨在提高搜索性能，降低大型 Collections 的成本。本指南将帮助您了解聚类压缩以及该功能如何提高搜索性能。
 ---
+
 <h1 id="Clustering-Compaction" class="common-anchor-header">聚类压缩<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +46,7 @@ summary: 聚类压缩旨在提高搜索性能，降低大型 Collections 的成�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>聚类压缩</span> </span></p>
-<p>以<strong>PartitionStats</strong>为参考，Milvus 可以在收到带有聚类键值的搜索/查询请求时，剪切不相关的数据，并将搜索范围限制在与键值映射的段内，从而提高搜索性能。有关性能改进的详细信息，请参阅<a href="/docs/zh/clustering-compaction.md#Benchmark-Test">基准测试</a>。</p>
+<p>以<strong>PartitionStats</strong>为参考，Milvus 可以在收到带有聚类键值的搜索/查询请求时，剪切不相关的数据，并将搜索范围限制在与键值映射的段内，从而提高搜索性能。有关性能改进的详细信息，请参阅<a href="/docs/zh/v2.5.x/clustering-compaction.md#Benchmark-Test">基准测试</a>。</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">使用聚类压缩<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,15 +76,16 @@ summary: 聚类压缩旨在提高搜索性能，降低大型 Collections 的成�
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
 
 <span class="hljs-attr">datanode:</span>
-  <span class="hljs-attr">clusteringCompaction:</span>
-    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
-    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+<span class="hljs-attr">clusteringCompaction:</span>
+<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
+<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
+<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p>配置项目</p></th>
@@ -158,7 +160,7 @@ summary: 聚类压缩旨在提高搜索性能，降低大型 Collections 的成�
      <td></td>
    </tr>
 </table>
-<p>要将上述更改应用到 Milvus 群集，请按照 "<a href="/docs/zh/configure-helm.md#Configure-Milvus-via-configuration-file">使用 Helm 配置 Milvus</a>"和 "<a href="/docs/zh/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>"中的步骤<a href="/docs/zh/configure_operator.md">操作</a>。</p>
+<p>要将上述更改应用到 Milvus 群集，请按照 "<a href="/docs/zh/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">使用 Helm 配置 Milvus</a>"和 "<a href="/docs/zh/v2.5.x/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>"中的步骤<a href="/docs/zh/v2.5.x/configure_operator.md">操作</a>。</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Collection 配置</h3><p>要在特定 Collections 中进行聚类压缩，应从该 Collections 中选择一个标量字段作为聚类密钥。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -168,8 +170,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -179,10 +181,11 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-    schema=schema
+collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -283,9 +286,10 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-    job_id=job_id,
+job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;

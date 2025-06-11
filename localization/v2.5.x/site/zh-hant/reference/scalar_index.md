@@ -4,6 +4,7 @@ related_key: scalar_index
 summary: Milvus 中的標量指數。
 title: 標量索引
 ---
+
 <h1 id="Scalar-Index" class="common-anchor-header">標量索引<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ title: 標量索引
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中執行向量相似性搜尋時，您可以使用邏輯運算符號將標量欄位組織成布林表達式。</p>
-<p>當 Milvus 接收到具有這種布林表達式的搜尋請求，它會將布林表達式解析為抽象語法樹 (AST)，以產生屬性篩選的實體計劃。Milvus 接著會在每個區段套用實體規劃，產生一個<a href="/docs/zh-hant/bitset.md">bitset</a>作為篩選結果，並將結果包含在向量搜尋參數中，以縮窄搜尋範圍。在這種情況下，向量搜尋的速度在很大程度上依賴於屬性篩選的速度。</p>
+<p>當 Milvus 接收到具有這種布林表達式的搜尋請求，它會將布林表達式解析為抽象語法樹 (AST)，以產生屬性篩選的實體計劃。Milvus 接著會在每個區段套用實體規劃，產生一個<a href="/docs/zh-hant/v2.5.x/bitset.md">bitset</a>作為篩選結果，並將結果包含在向量搜尋參數中，以縮窄搜尋範圍。在這種情況下，向量搜尋的速度在很大程度上依賴於屬性篩選的速度。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +155,12 @@ title: 標量索引
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>若要為標量欄位<a href="/docs/zh-hant/index-scalar-fields.md">建立</a>索引，請閱讀<a href="/docs/zh-hant/index-scalar-fields.md">建立標量索引</a>。</p></li>
+<li><p>若要為標量欄位<a href="/docs/zh-hant/v2.5.x/index-scalar-fields.md">建立</a>索引，請閱讀<a href="/docs/zh-hant/v2.5.x/index-scalar-fields.md">建立標量索引</a>。</p></li>
 <li><p>若要瞭解上述相關詞彙和規則的更多資訊，請閱讀</p>
 <ul>
-<li><a href="/docs/zh-hant/bitset.md">位元集</a></li>
-<li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
-<li><a href="/docs/zh-hant/boolean.md">布林表達規則</a></li>
-<li><a href="/docs/zh-hant/schema.md#Supported-data-type">支援的資料類型</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/bitset.md">位元集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/multi-vector-search.md">混合搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/boolean.md">布林表達規則</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/schema.md#Supported-data-type">支援的資料類型</a></li>
 </ul></li>
 </ul>

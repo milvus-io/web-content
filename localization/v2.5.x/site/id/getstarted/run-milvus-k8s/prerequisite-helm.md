@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: Pelajari persiapan yang diperlukan sebelum memasang Milvus dengan Helm.
 title: Persyaratan untuk menjalankan Milvus di Kubernetes
 ---
+
 <h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">Persyaratan untuk menjalankan Milvus di Kubernetes<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,8 +142,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>Jika perangkat keras dan perangkat lunak Anda memenuhi persyaratan, Anda bisa:</p>
 <ul>
-<li><a href="/docs/id/install_cluster-milvusoperator.md">Menjalankan Milvus di Kubernet dengan Operator Milvus</a></li>
-<li><a href="/docs/id/install_cluster-helm.md">Menjalankan Milvus di Kubernet dengan Helm</a></li>
+<li><a href="/docs/id/v2.5.x/install_cluster-milvusoperator.md">Menjalankan Milvus di Kubernet dengan Operator Milvus</a></li>
+<li><a href="/docs/id/v2.5.x/install_cluster-helm.md">Menjalankan Milvus di Kubernet dengan Helm</a></li>
 </ul></li>
-<li><p>Lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a> untuk parameter yang dapat Anda atur saat menginstal Milvus.</p></li>
+<li><p>Lihat <a href="/docs/id/v2.5.x/system_configuration.md">Konfigurasi Sistem</a> untuk parameter yang dapat Anda atur saat menginstal Milvus.</p></li>
 </ul>

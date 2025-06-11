@@ -2,6 +2,7 @@
 id: glossary.md
 title: Terminologi
 ---
+
 <h1 id="Terminology" class="common-anchor-header">Terminologi<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +81,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a> adalah alat debugging untuk Milvus yang terhubung ke etcd, memungkinkan Anda untuk memonitor status server Milvus dan membuat penyesuaian secara real-time. Alat ini juga mendukung backup file etcd, membantu pengembang dalam pemecahan masalah.</p>
+    </button></h2><p><a href="/docs/id/v2.5.x/birdwatcher_overview.md">Birdwatcher</a> adalah alat debugging untuk Milvus yang terhubung ke etcd, memungkinkan Anda untuk memonitor status server Milvus dan membuat penyesuaian secara real-time. Alat ini juga mendukung backup file etcd, membantu pengembang dalam pemecahan masalah.</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">Penulis Massal<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +161,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam Milvus, koleksi setara dengan tabel dalam sistem manajemen basis data relasional (RDBMS). Koleksi adalah objek logis utama yang digunakan untuk menyimpan dan mengelola entitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/manage-collections.md">Mengelola Koleksi</a>.</p>
+    </button></h2><p>Dalam Milvus, koleksi setara dengan tabel dalam sistem manajemen basis data relasional (RDBMS). Koleksi adalah objek logis utama yang digunakan untuk menyimpan dan mengelola entitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/manage-collections.md">Mengelola Koleksi</a>.</p>
 <h2 id="Dependency" class="common-anchor-header">Ketergantungan<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +193,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Skema dinamis memungkinkan Anda menyisipkan entitas dengan bidang baru ke dalam koleksi tanpa mengubah skema yang sudah ada. Ini berarti Anda dapat menyisipkan data tanpa mengetahui skema lengkap koleksi dan dapat menyertakan bidang yang belum didefinisikan. Anda dapat mengaktifkan kemampuan bebas skema ini dengan mengaktifkan bidang dinamis saat membuat koleksi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Mengaktifkan Bidang Dinamis</a>.</p>
+    </button></h2><p>Skema dinamis memungkinkan Anda menyisipkan entitas dengan bidang baru ke dalam koleksi tanpa mengubah skema yang sudah ada. Ini berarti Anda dapat menyisipkan data tanpa mengetahui skema lengkap koleksi dan dapat menyertakan bidang yang belum didefinisikan. Anda dapat mengaktifkan kemampuan bebas skema ini dengan mengaktifkan bidang dinamis saat membuat koleksi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/enable-dynamic-field.md">Mengaktifkan Bidang Dinamis</a>.</p>
 <h2 id="Embeddings" class="common-anchor-header">Penyematan<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +226,7 @@ title: Terminologi
         ></path>
       </svg>
     </button></h2><p>Entitas terdiri dari sekelompok bidang yang merepresentasikan objek dunia nyata. Setiap entitas di Milvus diwakili oleh sebuah kunci primer yang unik.</p>
-<p>Anda dapat menyesuaikan kunci utama. Jika anda tidak mengkonfigurasi secara manual, Milvus akan secara otomatis memberikan primary key ke entitas. Jika Anda memilih untuk menyesuaikan primary key, perhatikan bahwa Milvus tidak mendukung de-duplikasi primary key untuk saat ini. Oleh karena itu, bisa saja terdapat duplikat primary key dalam koleksi yang sama. Untuk informasi lebih lanjut, lihat <a href="/docs/id/insert-update-delete.md#Insert-entities">Menyisipkan Entitas</a>.</p>
+<p>Anda dapat menyesuaikan kunci utama. Jika anda tidak mengkonfigurasi secara manual, Milvus akan secara otomatis memberikan primary key ke entitas. Jika Anda memilih untuk menyesuaikan primary key, perhatikan bahwa Milvus tidak mendukung de-duplikasi primary key untuk saat ini. Oleh karena itu, bisa saja terdapat duplikat primary key dalam koleksi yang sama. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/insert-update-delete.md#Insert-entities">Menyisipkan Entitas</a>.</p>
 <h2 id="Field" class="common-anchor-header">Field<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,7 +274,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pencarian yang difilter menerapkan filter skalar ke pencarian vektor, memungkinkan Anda untuk menyaring hasil pencarian berdasarkan kriteria tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/single-vector-search.md#Filtered-search">Pencarian</a> yang <a href="/docs/id/single-vector-search.md#Filtered-search">difilter</a>.</p>
+    </button></h2><p>Pencarian yang difilter menerapkan filter skalar ke pencarian vektor, memungkinkan Anda untuk menyaring hasil pencarian berdasarkan kriteria tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/single-vector-search.md#Filtered-search">Pencarian</a> yang <a href="/docs/id/v2.5.x/single-vector-search.md#Filtered-search">difilter</a>.</p>
 <h2 id="Hybrid-search" class="common-anchor-header">Pencarian hibrida<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +290,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">Pencarian Hibrida</a> adalah API untuk pencarian hibrida sejak Milvus 2.4.0. Anda dapat mencari beberapa bidang vektor dan menggabungkannya. Untuk pencarian vektor yang digabungkan dengan pemfilteran bidang skalar, ini disebut sebagai &quot;pencarian yang difilter&quot;. Untuk informasi lebih lanjut, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a>.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">Pencarian Hibrida</a> adalah API untuk pencarian hibrida sejak Milvus 2.4.0. Anda dapat mencari beberapa bidang vektor dan menggabungkannya. Untuk pencarian vektor yang digabungkan dengan pemfilteran bidang skalar, ini disebut sebagai &quot;pencarian yang difilter&quot;. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/multi-vector-search.md">Pencarian Hibrida</a>.</p>
 <h2 id="Index" class="common-anchor-header">Indeks<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -545,7 +546,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus mendukung beberapa bidang vektor dalam satu koleksi sejak versi 2.4.0. Untuk informasi lebih lanjut, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a>.</p>
+    </button></h2><p>Milvus mendukung beberapa bidang vektor dalam satu koleksi sejak versi 2.4.0. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/multi-vector-search.md">Pencarian Hibrida</a>.</p>
 <h2 id="Partition" class="common-anchor-header">Partisi<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

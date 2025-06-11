@@ -5,6 +5,7 @@ summary: >-
   RBAC（Role-Based Access
   Control）は、ロールに基づくアクセス制御手法です。RBACを使用すると、ユーザーが実行できる操作をコレクション、データベース、およびインスタンス・レベルで細かく制御できるため、データ・セキュリティが強化されます。
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">RBACの説明<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,9 +68,9 @@ summary: >-
       </svg>
     </button></h2><p>RBACによるアクセス制御を行うには、以下の手順が必要です：</p>
 <ol>
-<li><p><strong><a href="/docs/ja/users_and_roles.md#Create-a-user">ユーザを作成</a></strong>します：ユーザの作成: Milvus のデフォルトユーザ<code translate="no">root</code> に加え、新しいユーザを作成し、データセキュリティを保護するためのパスワードを設定することができます。</p></li>
-<li><p><strong><a href="/docs/ja/users_and_roles.md#Create-a-role">ロールを作成する</a></strong>：ニーズに応じてカスタマイズしたロールを作成することができます。ロールの具体的な機能はその権限によって決定されます。</p></li>
-<li><p><strong><a href="/docs/ja/privilege_group.md">特権グループの作成</a></strong>：複数の権限を1つの権限グループにまとめることで、ロールへの権限付与プロセスを効率化できます。</p></li>
-<li><p><strong><a href="/docs/ja/grant_privileges.md">ロールに特権または特権グループを付与</a></strong>します：このロールに特権または特権グループを付与することで、ロールの能力を定義します。</p></li>
-<li><p><strong><a href="/docs/ja/grant_roles.md">ユーザにロールを付与する</a></strong>：ユーザがロールの特権を持てるように、特定の特権を持つロールをユーザに付与します。1つのロールを複数のユーザに付与することができます。</p></li>
+<li><p><strong><a href="/docs/ja/v2.5.x/users_and_roles.md#Create-a-user">ユーザを作成</a></strong>します：ユーザの作成: Milvus のデフォルトユーザ<code translate="no">root</code> に加え、新しいユーザを作成し、データセキュリティを保護するためのパスワードを設定することができます。</p></li>
+<li><p><strong><a href="/docs/ja/v2.5.x/users_and_roles.md#Create-a-role">ロールを作成する</a></strong>：ニーズに応じてカスタマイズしたロールを作成することができます。ロールの具体的な機能はその権限によって決定されます。</p></li>
+<li><p><strong><a href="/docs/ja/v2.5.x/privilege_group.md">特権グループの作成</a></strong>：複数の権限を1つの権限グループにまとめることで、ロールへの権限付与プロセスを効率化できます。</p></li>
+<li><p><strong><a href="/docs/ja/v2.5.x/grant_privileges.md">ロールに特権または特権グループを付与</a></strong>します：このロールに特権または特権グループを付与することで、ロールの能力を定義します。</p></li>
+<li><p><strong><a href="/docs/ja/v2.5.x/grant_roles.md">ユーザにロールを付与する</a></strong>：ユーザがロールの特権を持てるように、特定の特権を持つロールをユーザに付与します。1つのロールを複数のユーザに付与することができます。</p></li>
 </ol>

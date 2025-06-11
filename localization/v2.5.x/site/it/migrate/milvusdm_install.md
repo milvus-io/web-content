@@ -3,6 +3,7 @@ id: milvusdm_install.md
 summary: Scoprite come installare Milvus-Migration per migrare i vostri dati.
 title: Installare lo strumento di migrazione
 ---
+
 <h1 id="Install-Migration-Tool" class="common-anchor-header">Installare lo strumento di migrazione<button data-href="#Install-Migration-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +86,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Avendo installato lo strumento Milvus-migration, è possibile migrare i dati da varie fonti:</p>
 <ul>
-<li><a href="/docs/it/es2m.md">Da Elasticsearch</a></li>
-<li><a href="/docs/it/f2m.md">Da Faiss</a></li>
-<li><a href="/docs/it/m2m.md">Da Milvus 1.x</a></li>
+<li><a href="/docs/it/v2.5.x/es2m.md">Da Elasticsearch</a></li>
+<li><a href="/docs/it/v2.5.x/f2m.md">Da Faiss</a></li>
+<li><a href="/docs/it/v2.5.x/m2m.md">Da Milvus 1.x</a></li>
 </ul>

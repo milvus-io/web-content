@@ -3,6 +3,7 @@ id: modify-collection.md
 title: 修改收藏集
 summary: 您可以重新命名一個集合或變更其設定。本頁主要介紹如何修改收藏集。
 ---
+
 <h1 id="Modify-Collection" class="common-anchor-header">修改收藏集<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,15 +41,16 @@ summary: 您可以重新命名一個集合或變更其設定。本頁主要介�
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.rename_collection(
-    old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
+old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.RenameCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -144,10 +146,11 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
 <span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
@@ -197,15 +200,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>如果一個 collection 的資料需要在特定時間後刪除，可以考慮設定它的 Time-To-Live (TTL)，單位是秒。一旦 TTL 超時，Milvus 會刪除集合中的所有實體。  刪除是異步的，表示在刪除完成之前，搜尋和查詢仍是可能的。詳情請參閱<a href="/docs/zh-hant/set-collection-ttl.md">設定集合 TTL</a>。</p></td>
+     <td><p>如果一個 collection 的資料需要在特定時間後刪除，可以考慮設定它的 Time-To-Live (TTL)，單位是秒。一旦 TTL 超時，Milvus 會刪除集合中的所有實體。  刪除是異步的，表示在刪除完成之前，搜尋和查詢仍是可能的。詳情請參閱<a href="/docs/zh-hant/v2.5.x/set-collection-ttl.md">設定集合 TTL</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>記憶體映射 (Mmap) 可以直接存取磁碟上的大型檔案，讓 Milvus 可以同時在記憶體和硬碟中儲存索引和資料。此方法有助於根據存取頻率最佳化資料放置政策，在不影響搜尋效能的情況下擴充資料集的儲存容量。</p><p>如需詳細資訊，請參閱<a href="/docs/zh-hant/mmap.md">使用 mmap</a>。</p></td>
+     <td><p>記憶體映射 (Mmap) 可以直接存取磁碟上的大型檔案，讓 Milvus 可以同時在記憶體和硬碟中儲存索引和資料。此方法有助於根據存取頻率最佳化資料放置政策，在不影響搜尋效能的情況下擴充資料集的儲存容量。</p><p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/mmap.md">使用 mmap</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>在啟用「分割區金鑰隔離」的情況下，Milvus 會根據分割區金鑰值將實體分組，並為每個分組建立獨立索引。收到搜尋請求後，Milvus 會根據過濾條件中指定的 Partition Key 值找到索引，並將搜尋範圍限制在索引包含的實體內，從而避免在搜尋過程中掃描不相關的實體，大幅提升搜尋效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md#Use-Partition-Key-Isolation">使用分割區金鑰隔離</a>。</p></td>
+     <td><p>在啟用「分割區金鑰隔離」的情況下，Milvus 會根據分割區金鑰值將實體分組，並為每個分組建立獨立索引。收到搜尋請求後，Milvus 會根據過濾條件中指定的 Partition Key 值找到索引，並將搜尋範圍限制在索引包含的實體內，從而避免在搜尋過程中掃描不相關的實體，大幅提升搜尋效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/use-partition-key.md#Use-Partition-Key-Isolation">使用分割區金鑰隔離</a>。</p></td>
    </tr>
 </table>
 <h2 id="Drop-Collection-Properties" class="common-anchor-header">丟棄集合屬性<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">

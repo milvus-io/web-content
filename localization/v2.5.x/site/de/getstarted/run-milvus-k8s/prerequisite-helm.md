@@ -7,6 +7,7 @@ summary: >-
   von Milvus mit Helm.
 title: Anforderungen für den Betrieb von Milvus auf Kubernetes
 ---
+
 <h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">Anforderungen für den Betrieb von Milvus auf Kubernetes<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -143,8 +144,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>Wenn Ihre Hardware und Software die Anforderungen erfüllen, können Sie:</p>
 <ul>
-<li><a href="/docs/de/install_cluster-milvusoperator.md">Milvus in Kubernetes mit Milvus Operator ausführen</a></li>
-<li><a href="/docs/de/install_cluster-helm.md">Milvus in Kubernetes mit Helm ausführen</a></li>
+<li><a href="/docs/de/v2.5.x/install_cluster-milvusoperator.md">Milvus in Kubernetes mit Milvus Operator ausführen</a></li>
+<li><a href="/docs/de/v2.5.x/install_cluster-helm.md">Milvus in Kubernetes mit Helm ausführen</a></li>
 </ul></li>
-<li><p>Siehe <a href="/docs/de/system_configuration.md">Systemkonfiguration</a> für Parameter, die Sie bei der Installation von Milvus einstellen können.</p></li>
+<li><p>Siehe <a href="/docs/de/v2.5.x/system_configuration.md">Systemkonfiguration</a> für Parameter, die Sie bei der Installation von Milvus einstellen können.</p></li>
 </ul>

@@ -4,6 +4,7 @@ title: マルチテナントの実装
 summary: >-
   Milvusにおけるマルチテナントとは、複数の顧客またはチーム（テナントと呼ばれる）が、分離されたデータ環境を維持しながら同じクラスタを共有することを意味する。
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">マルチテナントの実装<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvusは4つのレベルでマルチテナンシーをサポートしています：<strong>データベース</strong>、<strong>コレクション</strong>、<strong>パーティション</strong>、<strong>パーティションキー</strong>です。</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">データベースレベルのマルチテナンシー</h3><p>データベースレベルのマルチテナンシーでは、各テナントは1つまたは複数のコレクションを含む対応する<a href="/docs/ja/manage_databases.md">データベースを</a>受け取ります。</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">データベースレベルのマルチテナンシー</h3><p>データベースレベルのマルチテナンシーでは、各テナントは1つまたは複数のコレクションを含む対応する<a href="/docs/ja/v2.5.x/manage_databases.md">データベースを</a>受け取ります。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -48,7 +49,7 @@ summary: >-
 <li><p><strong>柔軟性</strong>：各データベースは異なるスキーマのコレクションを持つことができるため、柔軟性の高いデータ編成が可能で、各テナントは独自のデータスキーマを持つことができます。</p></li>
 <li><p><strong>その他</strong>このストラテジーはRBACにも対応しており、テナントごとのユーザーアクセスをきめ細かく制御できます。さらに、特定のテナントのデータを柔軟にロードまたはリリースして、ホットデータとコールドデータを効率的に管理できます。</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">コレクションレベルのマルチテナント</h3><p>コレクションレベルのマルチテナントでは、各テナントに<a href="/docs/ja/manage-collections.md">コレクションが</a>割り当てられるため、データを強力に分離できます。</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">コレクションレベルのマルチテナント</h3><p>コレクションレベルのマルチテナントでは、各テナントに<a href="/docs/ja/v2.5.x/manage-collections.md">コレクションが</a>割り当てられるため、データを強力に分離できます。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -59,7 +60,7 @@ summary: >-
 <li><p><strong>柔軟性</strong>：この戦略では、各コレクションが独自のスキーマを持つことができ、異なるデータスキーマを持つテナントに対応できます。</p></li>
 <li><p><strong>その他</strong>このストラテジーはRBACにも対応しており、テナントに対するきめ細かなアクセス制御が可能です。さらに、ホットデータとコールドデータを効果的に管理するために、特定のテナントに対して柔軟にデータをロードまたはリリースできます。</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">パーティションレベルのマルチテナント</h3><p>パーティションレベルのマルチテナントでは、各テナントは共有コレクション内で手動で作成した<a href="/docs/ja/manage-partitions.md">パーティションに</a>割り当てられます。</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">パーティションレベルのマルチテナント</h3><p>パーティションレベルのマルチテナントでは、各テナントは共有コレクション内で手動で作成した<a href="/docs/ja/v2.5.x/manage-partitions.md">パーティションに</a>割り当てられます。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -70,7 +71,7 @@ summary: >-
 <li><p><strong>柔軟性</strong>：この戦略では、すべてのテナントが同じデータスキーマを共有する必要があります。また、パーティションは手動で作成する必要がある。</p></li>
 <li><p><strong>その他</strong>パーティションレベルでのRBACはサポートされていない。テナントは個別に、または複数のパーティションにまたがってクエリを実行できるため、テナント・セグメントにまたがる集計クエリや分析を含むシナリオに適しています。さらに、特定のテナントのデータを柔軟にロードまたはリリースして、ホットデータとコールドデータを効率的に管理できます。</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">パーティションキーレベルのマルチテナント</h3><p>この戦略では、すべてのテナントが単一のコレクションとスキーマを共有しますが、各テナントのデータは<a href="/docs/ja/use-partition-key.md">パーティション・キーの</a>値に基づいて、物理的に分離された16のパーティションに自動的にルーティングされます。各物理パーティションには複数のテナントを含めることができますが、異なるテナントのデータは論理的に分離されたままです。</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">パーティションキーレベルのマルチテナント</h3><p>この戦略では、すべてのテナントが単一のコレクションとスキーマを共有しますが、各テナントのデータは<a href="/docs/ja/v2.5.x/use-partition-key.md">パーティション・キーの</a>値に基づいて、物理的に分離された16のパーティションに自動的にルーティングされます。各物理パーティションには複数のテナントを含めることができますが、異なるテナントのデータは論理的に分離されたままです。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

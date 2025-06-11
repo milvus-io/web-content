@@ -8,6 +8,7 @@ summary: >-
   produtos. No centro destes sistemas está um modelo de dados cuidadosamente
   concebido para organizar, indexar e recuperar a informação.
 ---
+
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">Conceção de modelos de dados para pesquisa<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,8 +93,8 @@ summary: >-
       </svg>
     </button></h2><p>No Milvus, o modelo de dados é expresso através de um esquema de coleção. A conceção dos campos certos dentro de um esquema de coleção é fundamental para permitir uma recuperação eficaz. Cada campo define um tipo específico de dados armazenados na coleção e desempenha um papel distinto no processo de pesquisa. Em termos gerais, Milvus suporta dois tipos principais de campos: <strong>campos</strong> <strong>vectoriais</strong> e <strong>campos escalares</strong>.</p>
 <p>Agora, pode mapear o seu modelo de dados para um esquema de campos, incluindo vectores e quaisquer campos escalares auxiliares. Certifique-se de que cada campo está correlacionado com os atributos do seu modelo de dados, prestando especial atenção ao seu tipo de vetor (denso ou spase) e à sua dimensão.</p>
-<h3 id="Vector-Field" class="common-anchor-header">Campo vetorial</h3><p>Os campos vectoriais armazenam embeddings para tipos de dados não estruturados, como texto, imagens e áudio. Esses embeddings podem ser densos, esparsos ou binários, dependendo do tipo de dados e do método de recuperação utilizado. Normalmente, os vectores densos são utilizados para a pesquisa semântica, enquanto os vectores esparsos são mais adequados para a correspondência de texto completo ou lexical. Os vectores binários são úteis quando os recursos de armazenamento e computacionais são limitados. Uma coleção pode conter vários campos vectoriais para permitir estratégias de recuperação multimodais ou híbridas. Para um guia detalhado sobre este tema, consulte a <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida multi-vetorial</a>.</p>
-<p>O Milvus suporta os tipos de dados vectoriais: <code translate="no">FLOAT_VECTOR</code> para <a href="/docs/pt/dense-vector.md">Vetor Denso</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> para <a href="/docs/pt/sparse_vector.md">Vetor Esparso</a> e <code translate="no">BINARY_VECTOR</code> para <a href="/docs/pt/binary-vector.md">Vetor Binário</a></p>
+<h3 id="Vector-Field" class="common-anchor-header">Campo vetorial</h3><p>Os campos vectoriais armazenam embeddings para tipos de dados não estruturados, como texto, imagens e áudio. Esses embeddings podem ser densos, esparsos ou binários, dependendo do tipo de dados e do método de recuperação utilizado. Normalmente, os vectores densos são utilizados para a pesquisa semântica, enquanto os vectores esparsos são mais adequados para a correspondência de texto completo ou lexical. Os vectores binários são úteis quando os recursos de armazenamento e computacionais são limitados. Uma coleção pode conter vários campos vectoriais para permitir estratégias de recuperação multimodais ou híbridas. Para um guia detalhado sobre este tema, consulte a <a href="/docs/pt/v2.5.x/multi-vector-search.md">Pesquisa híbrida multi-vetorial</a>.</p>
+<p>O Milvus suporta os tipos de dados vectoriais: <code translate="no">FLOAT_VECTOR</code> para <a href="/docs/pt/v2.5.x/dense-vector.md">Vetor Denso</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> para <a href="/docs/pt/v2.5.x/sparse_vector.md">Vetor Esparso</a> e <code translate="no">BINARY_VECTOR</code> para <a href="/docs/pt/v2.5.x/binary-vector.md">Vetor Binário</a></p>
 <h3 id="Scalar-Field" class="common-anchor-header">Campo escalar</h3><p>Os campos escalares armazenam valores primitivos e estruturados - geralmente chamados de metadados - como números, cadeias de caracteres ou datas. Esses valores podem ser retornados juntamente com os resultados da pesquisa vetorial e são essenciais para filtragem e classificação. Permitem-lhe limitar os resultados da pesquisa com base em atributos específicos, como limitar os documentos a uma determinada categoria ou a um intervalo de tempo definido.</p>
 <p>Milvus suporta tipos escalares como <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, e <code translate="no">ARRAY</code> para armazenar e filtrar dados não vectoriais. Estes tipos aumentam a precisão e a personalização das operações de pesquisa.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Tirar partido de funcionalidades avançadas na conceção de esquemas<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
@@ -113,13 +114,13 @@ summary: >-
       </svg>
     </button></h2><p>Ao conceber um esquema, não basta mapear os dados para os campos utilizando os tipos de dados suportados. É essencial ter um conhecimento profundo das relações entre campos e das estratégias disponíveis para configuração. Ter em mente as principais caraterísticas durante a fase de conceção garante que o esquema não só satisfaz os requisitos imediatos de tratamento de dados, como também é escalável e adaptável a necessidades futuras. Ao integrar cuidadosamente estas caraterísticas, pode construir uma arquitetura de dados forte que maximiza as capacidades do Milvus e apoia a sua estratégia e objectivos de dados mais amplos. Aqui está uma visão geral das principais caraterísticas que criam um esquema de coleção:</p>
 <h3 id="Primary-Key" class="common-anchor-header">Chave primária</h3><p>Um campo de chave primária é um componente fundamental de um esquema, uma vez que identifica de forma única cada entidade dentro de uma coleção. A definição de uma chave primária é obrigatória. Deve ser um campo escalar de tipo inteiro ou de cadeia de caracteres e marcado como <code translate="no">is_primary=True</code>. Opcionalmente, pode ativar <code translate="no">auto_id</code> para a chave primária, à qual são atribuídos automaticamente números inteiros que crescem monoliticamente à medida que mais dados são ingeridos na coleção.</p>
-<p>Para obter mais detalhes, consulte <a href="/docs/pt/primary-field.md">Campo primário e AutoID</a>.</p>
+<p>Para obter mais detalhes, consulte <a href="/docs/pt/v2.5.x/primary-field.md">Campo primário e AutoID</a>.</p>
 <h3 id="Partitioning" class="common-anchor-header">Particionamento</h3><p>Para acelerar a pesquisa, pode opcionalmente ativar o particionamento. Ao designar um campo escalar específico para o particionamento e ao especificar critérios de filtragem com base neste campo durante as pesquisas, o âmbito da pesquisa pode ser efetivamente limitado apenas às partições relevantes. Este método aumenta significativamente a eficiência das operações de recuperação, reduzindo o domínio de pesquisa.</p>
-<p>Para mais pormenores, consulte <a href="/docs/pt/use-partition-key.md">Utilizar chave de partição</a>.</p>
+<p>Para mais pormenores, consulte <a href="/docs/pt/v2.5.x/use-partition-key.md">Utilizar chave de partição</a>.</p>
 <h3 id="Analyzer" class="common-anchor-header">Analisador</h3><p>Um analisador é uma ferramenta essencial para o processamento e transformação de dados de texto. A sua principal função é converter texto em bruto em tokens e estruturá-los para indexação e recuperação. Fá-lo através da tokenização da cadeia de caracteres, eliminando as palavras de paragem e transformando as palavras individuais em tokens.</p>
-<p>Para obter mais detalhes, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p>
+<p>Para obter mais detalhes, consulte <a href="/docs/pt/v2.5.x/analyzer-overview.md">Visão geral do analisador</a>.</p>
 <h3 id="Function" class="common-anchor-header">Funções</h3><p>O Milvus permite-lhe definir funções incorporadas como parte do esquema para derivar automaticamente determinados campos. Por exemplo, pode adicionar uma função BM25 integrada que gera um vetor esparso a partir de um campo <code translate="no">VARCHAR</code> para suportar a pesquisa de texto integral. Estes campos derivados de funções simplificam o pré-processamento e asseguram que a coleção permanece autónoma e pronta a ser consultada.</p>
-<p>Para mais pormenores, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a>.</p>
+<p>Para mais pormenores, consulte <a href="/docs/pt/v2.5.x/full-text-search.md">Pesquisa de texto integral</a>.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">Um exemplo do mundo real<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,7 +150,7 @@ summary: >-
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
      <td><p>gerado automaticamente com a opção activada <code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/pt/get-and-scalar-query.md">Consulta utilizando Get</a></p></td>
+     <td><p><a href="/docs/pt/v2.5.x/get-and-scalar-query.md">Consulta utilizando Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -158,7 +159,7 @@ summary: >-
    <tr>
      <td><p>título (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>título do artigo</p></td>
-     <td><p><a href="/docs/pt/keyword-match.md">Correspondência de texto</a></p></td>
+     <td><p><a href="/docs/pt/v2.5.x/keyword-match.md">Correspondência de texto</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -167,7 +168,7 @@ summary: >-
    <tr>
      <td><p>carimbo de data/hora (<code translate="no">INT32</code>)</p></td>
      <td><p>data de publicação</p></td>
-     <td><p><a href="/docs/pt/use-partition-key.md">Filtrar por chave de partição</a></p></td>
+     <td><p><a href="/docs/pt/v2.5.x/use-partition-key.md">Filtrar por chave de partição</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -176,7 +177,7 @@ summary: >-
    <tr>
      <td><p>texto (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>texto em bruto do artigo</p></td>
-     <td><p><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida multi-vetorial</a></p></td>
+     <td><p><a href="/docs/pt/v2.5.x/multi-vector-search.md">Pesquisa híbrida multi-vetorial</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -201,7 +202,7 @@ summary: >-
      <td><p>saída</p></td>
    </tr>
 </table>
-<p>Para mais informações sobre esquemas e orientações pormenorizadas sobre a adição de vários tipos de campos, consulte <a href="/docs/pt/schema.md">Schema Explained</a>.</p>
+<p>Para mais informações sobre esquemas e orientações pormenorizadas sobre a adição de vários tipos de campos, consulte <a href="/docs/pt/v2.5.x/schema.md">Schema Explained</a>.</p>
 <h3 id="Initialize-schema" class="common-anchor-header">Inicializar o esquema</h3><p>Para começar, precisamos de criar um esquema vazio. Esta etapa estabelece uma estrutura básica para definir o modelo de dados.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -209,6 +210,7 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -245,6 +247,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, d
 schema.add_field(field_name=<span class="hljs-string">&quot;text_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;text dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;text sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
@@ -407,14 +410,15 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
-    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
-    output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
-    function_type=FunctionType.BM25,
+name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
+function_type=FunctionType.BM25,
 )
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -480,6 +484,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/pt/create-collection.md">Criar coleção</a></p></li>
-<li><p><a href="/docs/pt/alter-collection-field.md">Alterar campo da coleção</a></p></li>
+<li><p><a href="/docs/pt/v2.5.x/create-collection.md">Criar coleção</a></p></li>
+<li><p><a href="/docs/pt/v2.5.x/alter-collection-field.md">Alterar campo da coleção</a></p></li>
 </ul>
