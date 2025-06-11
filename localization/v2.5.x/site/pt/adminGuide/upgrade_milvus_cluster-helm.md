@@ -7,7 +7,6 @@ related_key: upgrade Milvus Cluster
 summary: Saiba como atualizar o cluster Milvus com o Helm Chart.
 title: Atualizar o Cluster Milvus com o Gráfico Helm
 ---
-
 <div class="tab-wrapper"><a href="/docs/pt/v2.5.x/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/pt/v2.5.x/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">Atualizar o Cluster Milvus com o Gráfico Helm<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +44,7 @@ title: Atualizar o Cluster Milvus com o Gráfico Helm
 <li>Versão do Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Desde a versão 4.2.21 do gráfico Milvus-Helm, introduzimos o gráfico pulsar-v3.x como dependência. Para compatibilidade com versões anteriores, atualize seu helm para a versão v3.14 ou posterior, e certifique-se de adicionar a opção <code translate="no">--reset-then-reuse-values</code> sempre que usar <code translate="no">helm upgrade</code>.</p>
+<p>Desde a versão 4.2.21 do gráfico Milvus-Helm, introduzimos o gráfico pulsar-v3.x como dependência. Para compatibilidade com versões anteriores, atualize seu helm para a versão v3.14 ou posterior e certifique-se de adicionar a opção <code translate="no">--reset-then-reuse-values</code> sempre que usar <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">Verificar a carta do Milvus Helm<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Pode escolher o caminho de atualização para o seu Milvus da seguinte forma:</p>
-<div style="display: none;">- [Conduzir uma atualização contínua](#conduct-a-rolling-upgrade) do Milvus v2.2.3 e versões posteriores para a v2.5.12.</div>
+<div style="display: none;">- [Conduzir uma atualização contínua](#conduct-a-rolling-upgrade) do Milvus v2.2.3 e versões posteriores para a v2.5.13.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Atualizar o Milvus utilizando o Helm</a> para uma atualização de uma versão menor antes da v2.2.3 para a v2.5.12.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrar os metadados</a> antes da atualização do Milvus v2.1.x para a v2.5.12.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Atualizar o Milvus utilizando o Helm</a> para uma atualização de uma versão menor antes da v2.2.3 para a v2.5.13.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrar os metadados</a> antes da atualização do Milvus v2.1.x para a v2.5.13.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar uma atualização contínua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -133,7 +132,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
     </button></h2><p>Desde a versão 2.2.3 do Milvus, é possível configurar os coordenadores do Milvus para funcionarem em modo de espera ativa e ativar a funcionalidade de atualização contínua para os mesmos, de modo a que o Milvus possa responder aos pedidos recebidos durante as actualizações dos coordenadores. Nas versões anteriores, os coordenadores devem ser removidos e depois criados durante uma atualização, o que pode provocar um certo tempo de inatividade do serviço.</p>
 <p>As actualizações contínuas requerem que os coordenadores trabalhem em modo de espera ativa. Pode utilizar <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">o script</a> que fornecemos para configurar os coordenadores para trabalharem em modo de espera ativa e iniciar a atualização contínua.</p>
 <p>Com base nos recursos de atualização contínua fornecidos pelo Kubernetes, o script acima impõe uma atualização ordenada das implantações de acordo com suas dependências. Além disso, o Milvus implementa um mecanismo para garantir que os seus componentes permanecem compatíveis com os que dependem deles durante a atualização, reduzindo significativamente o potencial tempo de inatividade do serviço.</p>
-<p>O script aplica-se apenas à atualização do Milvus instalado com o Helm. A tabela seguinte lista as flags de comando disponíveis nos scripts.</p>
+<p>O script aplica-se apenas à atualização do Milvus instalado com o Helm. A tabela a seguir lista os sinalizadores de comando disponíveis nos scripts.</p>
 <table>
 <thead>
 <tr><th>Parâmetros</th><th>Descrição</th><th>Valor por defeito</th><th>Necessário</th></tr>
@@ -146,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Funcionamento</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Depois de se certificar de que todas as implementações na sua instância Milvus estão no seu estado normal. Pode executar o seguinte comando para atualizar a instância do Milvus para a versão 2.5.12.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.12 -w &#x27;milvusdb/milvus:v2.5.12&#x27;
+<p>Depois de se ter assegurado de que todas as implementações na sua instância Milvus estão no seu estado normal. Pode executar o seguinte comando para atualizar a instância do Milvus para a versão 2.5.13.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.13 -w &#x27;milvusdb/milvus:v2.5.13&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

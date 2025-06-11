@@ -19,6 +19,66 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2512" class="common-anchor-header">v2.5.12<button data-href="#v2512" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.12</td><td>2.5.10</td><td>2.5.9</td><td>2.5.9</td></tr>
+</tbody>
+</table>
+<p>We’re pleased to bring you Milvus 2.5.12! This release introduces new capabilities such as JSON index support for <code translate="no">contains</code> expressions, along with several improvements including updated <code translate="no">DescribeCollection</code> API responses and stricter data expiry compaction. This version also incorporates important dependency updates to fix CVEs and numerous bug fixes to enhance stability and performance.
+We encourage you to upgrade to Milvus 2.5.12 to benefit from these latest enhancements and fixes!</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Added JSON index support for JSON <code translate="no">contains</code> expr (<a href="https://github.com/milvus-io/milvus/pull/41658">#41658</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>The <code translate="no">DescribeCollection</code> API now includes the update timestamp in its results (<a href="https://github.com/milvus-io/milvus/pull/41600">#41600</a>).</li>
+<li>The <code translate="no">DescribeIndex</code> interface now outputs index version information (<a href="https://github.com/milvus-io/milvus/pull/41841">#41841</a>).</li>
+<li>Added support for stricter expiry compaction to clean deleted data without necessarily waiting for a large number of deletions (<a href="https://github.com/milvus-io/milvus/pull/41856">#41856</a>).</li>
+<li>Bumped dependency versions to address CVEs (<a href="https://github.com/milvus-io/milvus/pull/41590">#41590</a>, <a href="https://github.com/milvus-io/milvus/pull/41878">#41878</a>, <a href="https://github.com/milvus-io/milvus/pull/41742">#41742</a>, <a href="https://github.com/milvus-io/milvus/pull/41697">#41697</a>).</li>
+<li>Added authorization checks for <code translate="no">DescribeCollection</code> and <code translate="no">DescribeDatabase</code> tasks (<a href="https://github.com/milvus-io/milvus/pull/41799">#41799</a>).</li>
+<li>The RESTful API now supports consistency levels for query/get operations (<a href="https://github.com/milvus-io/milvus/pull/41830">#41830</a>).</li>
+<li>Added support for altering collection descriptions (<a href="https://github.com/milvus-io/milvus/pull/41547">#41547</a>).</li>
+<li>CDC now supports synchronizing multiple DDL APIs (<a href="https://github.com/milvus-io/milvus/pull/41594">#41594</a>, <a href="https://github.com/milvus-io/milvus/pull/41679">#41679</a>).</li>
+<li>Added a timeout for message reception in <code translate="no">MQMsgStream</code> (<a href="https://github.com/milvus-io/milvus/pull/41603">#41603</a>).</li>
+<li>Disk quota checks are now skipped for L0 imports (<a href="https://github.com/milvus-io/milvus/pull/41572">#41572</a>).</li>
+<li>Added parameters to ignore configuration type exceptions (<a href="https://github.com/milvus-io/milvus/pull/41773">#41773</a>).</li>
+<li>Set worker <code translate="no">totalSlot</code> in standalone mode to half of that in cluster mode (<a href="https://github.com/milvus-io/milvus/pull/41731">#41731</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed a goroutine leak in <code translate="no">ants.pool</code> (<a href="https://github.com/milvus-io/milvus/pull/41893">#41893</a>).</li>
+<li>Fixed an issue where the analyzer name was not set in hybrid search sub-requests (<a href="https://github.com/milvus-io/milvus/pull/41897">#41897</a>).</li>
+<li>Fixed a double assignment issue in <code translate="no">ChannelManager</code> (<a href="https://github.com/milvus-io/milvus/pull/41877">#41877</a>).</li>
+<li>Fixed an issue where log level settings were ineffective in <code translate="no">ThreadWatcher</code> (<a href="https://github.com/milvus-io/milvus/pull/41887">#41887</a>).</li>
+<li>Prevented index creation for unsorted importing segments when statistics are enabled (<a href="https://github.com/milvus-io/milvus/pull/41865">#41865</a>).</li>
+<li>Fixed a goroutine leak in the import reader (<a href="https://github.com/milvus-io/milvus/pull/41870">#41870</a>).</li>
+<li>Fixed an analyzer memory leak caused by the function runner not being closed (<a href="https://github.com/milvus-io/milvus/pull/41840">#41840</a>).</li>
+<li>Fixed an issue that counts are collected grouped by partition instead of collection (<a href="https://github.com/milvus-io/milvus/pull/41789">#41789</a>).</li>
+<li>Fixed an issue with unexpected passwords for the root user (<a href="https://github.com/milvus-io/milvus/pull/41818">#41818</a>).</li>
+<li>Prevented crashes when <code translate="no">contains_all</code> or <code translate="no">contains_any</code> is used with an empty array (<a href="https://github.com/milvus-io/milvus/pull/41756">#41756</a>).</li>
+<li>Fixed issues of compilation on Windows (<a href="https://github.com/milvus-io/milvus/pull/41617">#41617</a>).</li>
+<li>Disabled block and mutex profiling on ARM architecture to prevent SIGSEGV errors (<a href="https://github.com/milvus-io/milvus/pull/41823">#41823</a>).</li>
+<li>Fixed a <code translate="no">no candidate segments</code> error for small import tasks (<a href="https://github.com/milvus-io/milvus/pull/41772">#41772</a>).</li>
+<li>Ensured fallback to <code translate="no">MixCoord</code> session when upgrading to <code translate="no">MixCoord</code> (<a href="https://github.com/milvus-io/milvus/pull/41773">#41773</a>).</li>
+<li><code translate="no">GetValueFromConfig</code> now returns <code translate="no">nullopt</code> instead of throwing an exception (<a href="https://github.com/milvus-io/milvus/pull/41711">#41711</a>).</li>
+<li>Added an exclusive lock mutex in <code translate="no">DropSegmentsOfPartition</code> to avoid potential crashes with concurrent DDL upon partitions (<a href="https://github.com/milvus-io/milvus/pull/41619">#41619</a>).</li>
+</ul>
 <h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

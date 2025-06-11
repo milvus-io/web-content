@@ -3,7 +3,6 @@ id: release_notes.md
 summary: Catatan Rilis Milvus
 title: Catatan Rilis
 ---
-
 <h1 id="Release-Notes" class="common-anchor-header">Catatan Rilis<button data-href="#Release-Notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,6 +19,70 @@ title: Catatan Rilis
         ></path>
       </svg>
     </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug di setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.5.0 di bagian ini. Kami menyarankan agar Anda secara teratur mengunjungi halaman ini untuk mengetahui pembaruan.</p>
+<h2 id="v2513" class="common-anchor-header">v2.5.13<button data-href="#v2513" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Tanggal rilis: 10 Juni 2025</p>
+<table>
+<thead>
+<tr><th>Versi Milvus</th><th>Versi Python SDK</th><th>Versi SDK Node.js</th><th>Versi Java SDK</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.13</td><td>2.5.11</td><td>2.5.10</td><td>2.5.10</td></tr>
+</tbody>
+</table>
+<p>Kami sangat senang mengumumkan Milvus 2.5.13! Versi ini meningkatkan pengalaman Anda dengan fitur-fitur baru, seperti kemampuan untuk menghapus properti field dan menggunakan fungsi <code translate="no">cast</code> untuk indeks JSON. Versi ini juga memberikan berbagai peningkatan kinerja dan stabilitas secara umum, sambil menyelesaikan berbagai bug untuk memastikan sistem yang lebih kuat. Kami mendorong Anda untuk meningkatkan ke 2.5.13 dan menjelajahi pembaruan terbaru ini!</p>
+<h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
+<li>Menambahkan dukungan untuk menjatuhkan properti dari sebuah bidang<a href="https://github.com/milvus-io/milvus/pull/41954">(#41954</a>).</li>
+<li>Menambahkan fungsi <code translate="no">cast</code> untuk digunakan dengan indeks JSON<a href="https://github.com/milvus-io/milvus/pull/42504">(#42504)</a>.</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<li>Meningkatkan ukuran buffer impor default<a href="https://github.com/milvus-io/milvus/pull/42542">(#42542)</a>.</li>
+<li>Mempercepat proses pembangunan dispatcher<a href="https://github.com/milvus-io/milvus/pull/42544">(#42544</a>)<a href="https://github.com/milvus-io/milvus/pull/42544">.</a></li>
+<li>Menghilangkan batasan keseimbangan antara tugas saluran dan segmen<a href="https://github.com/milvus-io/milvus/pull/42410">(#42410).</a></li>
+<li>Menetapkan gambar GPU CAGRA sebagai default<a href="https://github.com/milvus-io/milvus/pull/42193">(#42193)</a>.</li>
+<li>API RESTful <code translate="no">DescribeIndex</code> sekarang mendukung pengembalian parameter indeks<a href="https://github.com/milvus-io/milvus/pull/42080">(#42080).</a></li>
+<li>Memungkinkan menjalankan penganalisis berdasarkan bidang koleksi untuk menghindari pembuatan dan penghancuran penganalisis yang sering dilakukan<a href="https://github.com/milvus-io/milvus/pull/42119">(#42119).</a></li>
+<li>Menambahkan dukungan untuk menyeimbangkan beberapa koleksi dalam satu pemicu<a href="https://github.com/milvus-io/milvus/pull/42134">(#42134).</a></li>
+<li>Sekarang mempertimbangkan <code translate="no">nq</code> (jumlah kueri) ketika mengidentifikasi kueri yang lambat<a href="https://github.com/milvus-io/milvus/pull/42125">(#42125</a>)<a href="https://github.com/milvus-io/milvus/pull/42125">.</a></li>
+<li>Sisi server sekarang secara otomatis mengisi bidang yang tidak dapat dinullkan<a href="https://github.com/milvus-io/milvus/pull/42120">(#42120</a>)<a href="https://github.com/milvus-io/milvus/pull/42120">.</a></li>
+<li>Menambahkan dukungan untuk menyaring data yang sudah kedaluwarsa menggunakan TTL<a href="https://github.com/milvus-io/milvus/pull/41960">(#41960</a>, <a href="https://github.com/milvus-io/milvus/pull/42121">#42121</a>, <a href="https://github.com/milvus-io/milvus/pull/42103">#42103</a>).</li>
+<li>Pemadatan kedaluwarsa yang disempurnakan untuk mendapatkan kembali ruang dari sejumlah kecil penghapusan yang lebih lama<a href="https://github.com/milvus-io/milvus/pull/42052">(#42052).</a></li>
+<li>Log akses sekarang mendukung pengambilan ekspresi pencarian hibrida dan bidang<a href="https://github.com/milvus-io/milvus/pull/41921">(#41921).</a></li>
+<li>Menambahkan semantik pemindahan eksplisit ke antarmuka <code translate="no">get_batch_view</code> <a href="https://github.com/milvus-io/milvus/pull/42402">(#42402)</a>.</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<li>Memperbaiki kebocoran pipeline/delegator<a href="https://github.com/milvus-io/milvus/pull/42583">(#42583)</a>.</li>
+<li>Memperbaiki logika pemilihan delegator ketika melepaskan segmen untuk menghindari potensi kepanikan MixCoord<a href="https://github.com/milvus-io/milvus/pull/42572">(#42572).</a></li>
+<li>Memperbaiki bug yang dapat menyebabkan kerusakan penulisan data selama validasi<a href="https://github.com/milvus-io/milvus/pull/42555">(#42555).</a></li>
+<li>Menambahkan pemeriksaan untuk memastikan tipe cast adalah array untuk ekspresi JSON <code translate="no">contains</code> <a href="https://github.com/milvus-io/milvus/pull/42185">(#42185).</a></li>
+<li>Memperbaiki masalah dengan duplikasi auto-ID antara operasi impor dan penyisipan<a href="https://github.com/milvus-io/milvus/pull/42520">(#42520).</a></li>
+<li>Memastikan tugas mengimpor statistik segmen hanya dipicu oleh <code translate="no">import_checker</code> <a href="https://github.com/milvus-io/milvus/pull/42487">(#42487).</a></li>
+<li>Memperbaiki bug pada <code translate="no">is null</code> untuk indeks Marisa<a href="https://github.com/milvus-io/milvus/pull/42421">(#42421</a>).</li>
+<li>Memastikan tugas statistik hanya dipicu untuk segmen yang memerah<a href="https://github.com/milvus-io/milvus/pull/42425">(#42425).</a></li>
+<li>Mengatur ulang status pemadatan ketika statistik segmen selesai<a href="https://github.com/milvus-io/milvus/pull/42005">(#42005)</a>.</li>
+<li>Memperbarui versi Tantivy untuk memperbaiki kepanikan stemmer<a href="https://github.com/milvus-io/milvus/pull/42172">(#42172).</a></li>
+<li>Memperbaiki masalah di mana bidang keluaran vektor tidak dapat diambil ketika menggunakan indeks sementara yang baru<a href="https://github.com/milvus-io/milvus/pull/42183">(#42183).</a></li>
+<li>Menghindari ketergantungan pada Knowhere untuk kontrol thread ketika memanggil iterator Knowhere<a href="https://github.com/milvus-io/milvus/pull/42133">(#42133</a>)<a href="https://github.com/milvus-io/milvus/pull/42133">.</a></li>
+<li>Memperbaiki masalah di mana segmen dapat dilepaskan sebelum waktunya selama operasi saluran keseimbangan<a href="https://github.com/milvus-io/milvus/pull/42043">(#42043)</a>.</li>
+<li>Antarmuka <code translate="no">DescribeIndex</code> RESTful sekarang menyertakan cap waktu<a href="https://github.com/milvus-io/milvus/pull/42105">(#42105</a>)<a href="https://github.com/milvus-io/milvus/pull/42105">.</a></li>
+<li>Penguncian yang digunakan untuk memastikan atomisitas indeks segmen yang dijatuhkan<a href="https://github.com/milvus-io/milvus/pull/42076">(#42076).</a></li>
+<li>Memperbaiki kepanikan proxy di shard client manager<a href="https://github.com/milvus-io/milvus/pull/42026">(#42026).</a></li>
+<li>Memperbaiki logika penugasan slot impor<a href="https://github.com/milvus-io/milvus/pull/41982">(#41982)</a>.</li>
+<li>Memperbaiki bug di mana titik waktu untuk pemadatan force expiry gagal diatur ulang<a href="https://github.com/milvus-io/milvus/pull/42000">(#42000)</a>.</li>
+</ul>
 <h2 id="v2512" class="common-anchor-header">v2.5.12<button data-href="#v2512" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -777,7 +840,7 @@ title: Catatan Rilis
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Peningkatan</h3><h4 id="Deletion-Optimization" class="common-anchor-header">Optimalisasi Penghapusan</h4><p>Meningkatkan kecepatan dan mengurangi penggunaan memori untuk penghapusan berskala besar dengan mengoptimalkan penggunaan kunci dan manajemen memori.</p>
 <h4 id="Dependencies-Upgrade" class="common-anchor-header">Peningkatan Ketergantungan</h4><p>Peningkatan ke ETCD 3.5.16 dan Pulsar 3.0.7 LTS, memperbaiki CVE yang ada dan meningkatkan keamanan. Catatan: Upgrade ke Pulsar 3.x tidak kompatibel dengan versi 2.x sebelumnya.</p>
-<p>Untuk pengguna yang sudah memiliki penerapan Milvus yang berfungsi, Anda perlu meng-upgrade komponen ETCD dan Pulsar sebelum dapat menggunakan fitur dan fungsi baru. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/upgrade-pulsar-v3.md">Meningkatkan Pulsar dari 2.x ke 3.x</a></p>
+<p>Untuk pengguna yang sudah memiliki penerapan Milvus yang berfungsi, Anda perlu mengupgrade komponen ETCD dan Pulsar sebelum dapat menggunakan fitur dan fungsi baru. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/upgrade-pulsar-v3.md">Meningkatkan Pulsar dari 2.x ke 3.x</a></p>
 <h4 id="Local-Storage-V2" class="common-anchor-header">Penyimpanan Lokal V2</h4><p>Memperkenalkan format file lokal baru di Milvus 2.5, meningkatkan efisiensi pemuatan dan kueri untuk data skalar, mengurangi overhead memori, dan meletakkan dasar untuk pengoptimalan di masa mendatang.</p>
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">Pengoptimalan Penguraian Ekspresi</h4><p>Penguraian ekspresi yang lebih baik dengan mengimplementasikan caching untuk ekspresi yang diulang, meningkatkan ANTLR, dan mengoptimalkan kinerja klausa <code translate="no">NOT IN</code>.</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">Peningkatan Kinerja Konkurensi DDL</h4><p>Mengoptimalkan kinerja konkurensi operasi Data Definition Language (DDL).</p>

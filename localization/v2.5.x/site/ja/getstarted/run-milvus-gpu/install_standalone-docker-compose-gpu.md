@@ -5,7 +5,6 @@ related_key: Kubernetes
 summary: KubernetesにMilvusクラスタをインストールする方法をご紹介します。
 title: Docker Composeを使用したGPUサポート付きMilvusの実行
 ---
-
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">Docker Composeを使用したGPUサポート付きMilvusの実行<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,10 +59,10 @@ title: Docker Composeを使用したGPUサポート付きMilvusの実行
         ></path>
       </svg>
     </button></h2><p>Docker Composeを使用してGPUをサポートしたMilvusをインストールするには、以下の手順に従ってください。</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.YAMLファイルのダウンロードと設定</h3><p>ダウンロード <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>をダウンロードし、docker-compose.ymlとして手動または以下のコマンドで保存します。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.YAMLファイルのダウンロードと設定</h3><p>ダウンロード <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>をダウンロードし、docker-compose.ymlとして手動または以下のコマンドで保存します。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>YAMLファイル内のスタンドアロンサービスの環境変数に以下のように変更を加える必要があります：</p>
+<p>YAMLファイル内のスタンドアロンサービスの環境変数に、以下のように変更を加える必要があります：</p>
 <ul>
 <li>特定の GPU デバイスを Milvus に割り当てるには、<code translate="no">standalone</code> サービスの定義で<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> フィールドを探し、その値を目的の GPU の ID に置き換えます。NVIDIA GPUディスプレイドライバに含まれる<code translate="no">nvidia-smi</code> ツールを使用して、GPUデバイスのIDを決定することができます。Milvusは複数のGPUデバイスをサポートしています。</li>
 </ul>
@@ -96,11 +95,10 @@ title: Docker Composeを使用したGPUサポート付きMilvusの実行
 <h3 id="2-Start-Milvus" class="common-anchor-header">2.Milvusを起動します。</h3><p>docker-compose.ymlが格納されているディレクトリで、Milvusを起動します：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd ... done
+Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p>上記のコマンドを実行できなかった場合は、システムにDocker Compose V1がインストールされているかどうかを確認してください。上記のコマンドを実行できなかった場合は、Docker Compose V1がインストールされているか確認してください。</p>
 </div>
@@ -116,14 +114,11 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
-
----
-
-milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
-milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
-milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-
 <p>また、Milvus WebUI（<code translate="no">http://127.0.0.1:9091/webui/</code> ）にもアクセスし、Milvusインスタンスの詳細を確認することができる。詳しくは<a href="/docs/ja/v2.5.x/milvus-webui.md">Milvus WebUIを</a>ご参照ください。</p>
 <p>docker-compose.ymlでMilvusに複数のGPUデバイスを割り当てた場合、どのGPUデバイスを可視化するか、または使用可能にするかを指定できます。</p>
 <p>GPUデバイス<code translate="no">0</code> をMilvusから見えるようにします：</p>
@@ -223,7 +218,7 @@ docker start &lt;milvus_container_id&gt;
 </ul></li>
 <li><p><a href="/docs/ja/v2.5.x/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/v2.5.x/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
 <li><p><a href="/docs/ja/v2.5.x/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/v2.5.x/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
-<li><p><a href="/docs/ja/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>：Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール。</p></li>
+<li><p>Milvusのデバッグとダイナミックな設定更新のためのオープンソースツール、<a href="/docs/ja/v2.5.x/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/v2.5.x/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

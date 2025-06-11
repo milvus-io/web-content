@@ -279,7 +279,7 @@ vectorstore.vector_fields
 <div class="alert note">
 <p>Please keep the order of list of index params consistent with the order of <code translate="no">vectorstore.vector_fields</code> to avoid confusion.</p>
 </div>
-<h3 id="Rerank-the-candidates" class="common-anchor-header">Rerank the candidates</h3><p>After the first stage of retrieval, we need to rerank the candidates to get a better result. You can choose <a href="https://milvus.io/docs/reranking.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> or <a href="https://milvus.io/docs/reranking.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> depending on your requirements. You can refer to the <a href="https://milvus.io/docs/reranking.md#Reranking">Reranking</a> for more information.</p>
+<h3 id="Rerank-the-candidates" class="common-anchor-header">Rerank the candidates</h3><p>After the first stage of retrieval, we need to rerank the candidates to get a better result. You can choose <a href="https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> or <a href="https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> depending on your requirements. You can refer to the <a href="https://milvus.io/docs/weighted-ranker.md#Reranking">Reranking</a> for more information.</p>
 <p>Here is an example for weighted reranking:</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,

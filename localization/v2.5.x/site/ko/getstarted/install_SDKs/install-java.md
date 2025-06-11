@@ -5,7 +5,6 @@ related_key: SDK
 summary: Milvus의 Java SDK를 설치하는 방법을 알아보세요.
 title: Milvus Java SDK 설치
 ---
-
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Milvus Java SDK 설치<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,13 +63,13 @@ title: Milvus Java SDK 설치
 <pre><code translate="no" class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.milvus<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>milvus-sdk-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.5.9<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.5.10<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.5.9&#x27;</span>
+<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.5.10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -89,7 +88,7 @@ title: Milvus Java SDK 설치
       </svg>
     </button></h2><p>Milvus Java SDK를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p>Milvus의 기본 작업을 학습합니다:</p>
+<li><p>Milvus의 기본 동작을 학습합니다:</p>
 <ul>
 <li><a href="/docs/ko/v2.5.x/manage-collections.md">컬렉션 관리</a></li>
 <li><a href="/docs/ko/v2.5.x/manage-partitions.md">파티션 관리</a></li>

@@ -352,9 +352,11 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
       </svg>
     </button></h2><ul>
 <li><p>Each import file size should not exceed <strong>16 GB</strong>.</p></li>
-<li><p>The maximum number of import requests is limited to <strong>1024</strong>.</p></li>
-<li><p>The maximum number of file per import request should not exceed <strong>1024</strong>.</p></li>
-<li><p>Only one partition name can be specified in an import request. If no partition name is specified, the data will be inserted into the default partition. Additionally, you cannot set a partition name in the import request if you have set the Partition Key in the target collection.</p></li>
+<li><p>The maximum number of files per import request should not exceed <strong>1024</strong>. Each import request can have at most 16GB per file * 1024 files = 16TB of data.</p></li>
+<li><p>The maximum number of concurrent import requests is limited to <strong>1024</strong>.</p></li>
+</ul>
+<ul>
+<li>Only one partition name can be specified in an import request. If no partition name is specified, the data will be inserted into the default partition. Additionally, you cannot set a partition name in the import request if you have set the Partition Key in the target collection.</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">Constraints<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"

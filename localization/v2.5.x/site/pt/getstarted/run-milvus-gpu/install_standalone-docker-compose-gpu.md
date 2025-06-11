@@ -5,7 +5,6 @@ related_key: Kubernetes
 summary: Saiba como instalar o cluster Milvus no Kubernetes.
 title: Executar o Milvus com suporte a GPU usando o Docker Compose
 ---
-
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">Executar o Milvus com suporte a GPU usando o Docker Compose<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +41,7 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
 <li><a href="/docs/pt/v2.5.x/prerequisite-gpu.md">Verifique os requisitos de hardware e software</a> antes da instalação.</li>
 </ul>
 <div class="alert note">
-<p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos fornecer-lhe o suporte necessário.</p>
+<p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e fornecer-lhe-emos o apoio necessário.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar o Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,14 +59,14 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
         ></path>
       </svg>
     </button></h2><p>Para instalar o Milvus com suporte a GPU usando o Docker Compose, siga estas etapas.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>É necessário fazer algumas alterações nas variáveis de ambiente do serviço autónomo no ficheiro YAML, como se segue:</p>
 <ul>
 <li>Para atribuir um dispositivo GPU específico ao Milvus, localize o campo <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> na definição do serviço <code translate="no">standalone</code> e substitua o seu valor pelo ID da GPU pretendida. Pode utilizar a ferramenta <code translate="no">nvidia-smi</code>, incluída nos controladores de visualização da GPU NVIDIA, para determinar a ID de um dispositivo GPU. O Milvus suporta múltiplos dispositivos GPU.</li>
 </ul>
-<p>Atribuir um único dispositivo GPU ao Milvus:</p>
+<p>Atribua um único dispositivo GPU ao Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-string">...</span>
@@ -96,11 +95,10 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
 <h3 id="2-Start-Milvus" class="common-anchor-header">2. Iniciar o Milvus</h3><p>No diretório que contém o docker-compose.yml, inicie o Milvus executando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd ... done
+Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p>Se não conseguiu executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se este for o caso, é aconselhável migrar para o Docker Compose V2 devido às notas nesta <a href="https://docs.docker.com/compose/">página</a>.</p>
 </div>
@@ -116,14 +114,11 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
-
----
-
-milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
-milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
-milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Também pode aceder à WebUI do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para obter detalhes, consulte <a href="/docs/pt/v2.5.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>Se tiver atribuído vários dispositivos de GPU ao Milvus em docker-compose.yml, pode especificar que dispositivo de GPU está visível ou disponível para utilização.</p>
 <p>Torne o dispositivo de GPU <code translate="no">0</code> visível para o Milvus:</p>
@@ -160,7 +155,7 @@ milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp,
 </div>
 <p>Para configurar o pool de memória, modifique as definições <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> no ficheiro <code translate="no">milvus.yaml</code> da seguinte forma.</p>
 <ol>
-<li><p>Utilize o seguinte comando para copiar <code translate="no">milvus.yaml</code> do contentor Milvus para a sua máquina local. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID de contentor Milvus atual.</p>
+<li><p>Utilize o seguinte comando para copiar <code translate="no">milvus.yaml</code> do contentor Milvus para a sua máquina local. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID real do contentor Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Abra o ficheiro <code translate="no">milvus.yaml</code> copiado com o seu editor de texto preferido. Por exemplo, usando o vim:</p>
@@ -175,7 +170,7 @@ milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp,
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><code translate="no">initMemSize</code>: Initial size of the memory pool. A predefinição é 1024.</li>
-<li><code translate="no">maxMemSize</code>: Tamanho máximo do conjunto de memória. A predefinição é 2048.</li>
+<li><code translate="no">maxMemSize</code>: Tamanho máximo do conjunto de memória. O padrão é 2048.</li>
 </ul></li>
 <li><p>Utilize o seguinte comando para copiar o ficheiro <code translate="no">milvus.yaml</code> modificado de volta para o contentor Milvus. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID real do contentor Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml

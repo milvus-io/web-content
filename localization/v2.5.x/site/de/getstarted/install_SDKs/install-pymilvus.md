@@ -2,10 +2,9 @@
 id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
-summary: "Erfahren Sie, wie Sie das Python-SDK von Milvus installieren."
+summary: 'Erfahren Sie, wie Sie das Python-SDK von Milvus installieren.'
 title: Milvus Python SDK installieren
 ---
-
 <h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">Milvus Python SDK installieren<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +60,7 @@ title: Milvus Python SDK installieren
     </button></h2><p>PyMilvus ist im <a href="https://pypi.org/project/pymilvus/">Python Package Index</a> verfügbar.</p>
 <div class="alert note">
 Es wird empfohlen, eine PyMilvus-Version zu installieren, die mit der Version des Milvus-Servers übereinstimmt, den Sie installiert haben. Weitere Informationen finden Sie in den <a href="/docs/de/v2.5.x/release_notes.md">Release Notes</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">10</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">11</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Überprüfen Sie die Installation<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

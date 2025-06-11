@@ -5,7 +5,6 @@ related_key: Kubernetes
 summary: 學習如何在 Kubernetes 上安裝 Milvus 叢集。
 title: 使用 Docker Compose 運行支援 GPU 的 Milvus
 ---
-
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">使用 Docker Compose 運行支援 GPU 的 Milvus<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,12 +59,12 @@ title: 使用 Docker Compose 運行支援 GPU 的 Milvus
         ></path>
       </svg>
     </button></h2><p>若要使用 Docker Compose 安裝支援 GPU 的 Milvus，請遵循下列步驟。</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下載並設定 YAML 檔案</h3><p>下載 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>並手動儲存為 docker-compose.yml，或使用下列指令。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下載並設定 YAML 檔案</h3><p>下載 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>並手動儲存為 docker-compose.yml，或使用下列指令。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要對 YAML 檔案中獨立服務的環境變數做一些變更，如下所示：</p>
 <ul>
-<li>若要指定特定的 GPU 裝置給 Milvus，請找到<code translate="no">standalone</code> 服務定義中的<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> 欄位，並將其值更換為所需 GPU 的 ID。您可以使用 NVIDIA GPU 顯示驅動程式隨附的<code translate="no">nvidia-smi</code> 工具來確定 GPU 裝置的 ID。Milvus 支援多個 GPU 裝置。</li>
+<li>若要指定特定的 GPU 裝置給 Milvus，請找到<code translate="no">standalone</code> 服務定義中的<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> 欄位，並將其值換成所需 GPU 的 ID。您可以使用 NVIDIA GPU 顯示驅動程式隨附的<code translate="no">nvidia-smi</code> 工具來確定 GPU 裝置的 ID。Milvus 支援多個 GPU 裝置。</li>
 </ul>
 <p>指定單一 GPU 裝置至 Milvus：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -96,11 +95,10 @@ title: 使用 Docker Compose 運行支援 GPU 的 Milvus
 <h3 id="2-Start-Milvus" class="common-anchor-header">2.啟動 Milvus</h3><p>在存放 docker-compose.yml 的目錄中，執行啟動 Milvus：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd ... done
+Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p>如果您無法執行上述指令，請檢查您的系統是否已安裝 Docker Compose V1。如果是這樣的話，建議您根據<a href="https://docs.docker.com/compose/">本頁面</a>的說明，轉換到 Docker Compose V2。</p>
 </div>
@@ -116,14 +114,11 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
-
----
-
-milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
-milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
-milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-
 <p>您也可以存取 Milvus WebUI，網址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，以瞭解更多關於您的 Milvus 實例的資訊。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <p>如果您在 docker-compose.yml 中指定了多個 GPU 裝置給 Milvus，您可以指定哪個 GPU 裝置是可見或可用的。</p>
 <p>讓 GPU 裝置<code translate="no">0</code> 對 Milvus 是可見的：</p>

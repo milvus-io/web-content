@@ -461,7 +461,7 @@ res = client.query(
 <li><p>A kNN search on the <code translate="no">vector</code> field using the provided query vector.</p></li>
 </ul>
 <p>Each retriever contributes up to 50 top matches, which are reranked by RRF, and the final top 10 results are returned.</p>
-<p>In Milvus, you can achieve a similar hybrid search by combining searches across multiple vector fields, applying a reranking strategy, and retrieving the top-K results from the combined list. Milvus supports both RRF and weighted reranker strategies. For more details, refer to <a href="/docs/reranking.md">Reranking</a>.</p>
+<p>In Milvus, you can achieve a similar hybrid search by combining searches across multiple vector fields, applying a reranking strategy, and retrieving the top-K results from the combined list. Milvus supports both RRF and weighted reranker strategies. For more details, refer to <a href="/docs/weighted-ranker.md">Reranking</a>.</p>
 <p>The following is a non-strict equivalence of the above Elasticsearch example in Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

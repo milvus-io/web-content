@@ -7,7 +7,6 @@ related_key: upgrade Milvus Cluster
 summary: Aprenda a actualizar el clúster Milvus con Helm Chart.
 title: Actualizar Milvus Cluster con Helm Chart
 ---
-
 <div class="tab-wrapper"><a href="/docs/es/v2.5.x/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/es/v2.5.x/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">Actualizar Milvus Cluster con Helm Chart<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Puede elegir la ruta de actualización para su Milvus de la siguiente manera:</p>
-<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.5.12.</div>
+<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.5.13.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.5.12.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.5.12.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.5.13.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.5.13.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar una actualización continua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -146,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operación</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Una vez que se haya asegurado de que todos los despliegues en su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.5.12.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.12 -w &#x27;milvusdb/milvus:v2.5.12&#x27;
+<p>Una vez que se haya asegurado de que todos los despliegues en su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.5.13.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.13 -w &#x27;milvusdb/milvus:v2.5.13&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
