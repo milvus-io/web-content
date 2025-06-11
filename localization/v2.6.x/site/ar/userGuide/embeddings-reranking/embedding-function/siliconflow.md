@@ -1,12 +1,10 @@
 ---
 id: siliconflow.md
-title: SiliconFLow
-summary: >-
-  This topic describes how to configure and use SiliconFLow embedding functions
-  in Milvus.
+title: سيليكون فلوCompatible with Milvus 2.6.x
+summary: يصف هذا الموضوع كيفية تكوين واستخدام وظائف تضمين SiliconFLow في Milvus.
 beta: Milvus 2.6.x
 ---
-<h1 id="SiliconFLow" class="common-anchor-header">SiliconFLow<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#SiliconFLow" class="anchor-icon" translate="no">
+<h1 id="SiliconFLow" class="common-anchor-header">سيليكون فلو<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#SiliconFLow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +19,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic describes how to configure and use SiliconFLow embedding functions in Milvus.</p>
-<h2 id="Choose-an-embedding-model" class="common-anchor-header">Choose an embedding model<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
+    </button></h1><p>يصف هذا الموضوع كيفية تكوين واستخدام وظائف تضمين SiliconFLow في Milvus.</p>
+<h2 id="Choose-an-embedding-model" class="common-anchor-header">اختيار نموذج التضمين<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,46 +35,46 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports embedding models provided by SiliconFLow. Below are the currently available SiliconFLow embedding models for quick reference:</p>
+    </button></h2><p>يدعم Milvus نماذج التضمين التي توفرها SiliconFLow. فيما يلي نماذج تضمين SiliconFLow المتوفرة حاليًا للرجوع إليها سريعًا:</p>
 <table>
    <tr>
-     <th><p>Model Name</p></th>
-     <th><p>Dimensions</p></th>
-     <th><p>Max Tokens</p></th>
-     <th><p>Description</p></th>
+     <th><p>اسم النموذج</p></th>
+     <th><p>الأبعاد</p></th>
+     <th><p>الحد الأقصى للرموز</p></th>
+     <th><p>الوصف</p></th>
    </tr>
    <tr>
      <td><p>BAAI/bge-large-zh-v1.5</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>A large Chinese text embedding model, which is part of the BGE (BAAI General Embedding) series.</p></td>
+     <td><p>نموذج تضمين نص صيني كبير، وهو جزء من سلسلة BAAI General Embedding (BAAI General Embedding).</p></td>
    </tr>
    <tr>
      <td><p>BAAI/bge-large-en-v1.5</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>A large English text embedding model, which is part of the BGE (BAAI General Embedding) series.</p></td>
+     <td><p>نموذج تضمين نص إنجليزي كبير، وهو جزء من سلسلة BGE (BAAI General Embedding).</p></td>
    </tr>
    <tr>
      <td><p>netease-youdao/bce-embedding-base_v1</p></td>
      <td><p>768</p></td>
      <td><p>512</p></td>
-     <td><p>A bilingual and cross-lingual embedding model developed by NetEase Youdao. The model exhibits excellent performance in Chinese and English semantic representation and retrieval tasks, especially excelling in cross-lingual scenarios.</p></td>
+     <td><p>نموذج تضمين ثنائي اللغة ومتعدد اللغات تم تطويره بواسطة NetEase Youdao. يُظهر النموذج أداءً ممتازًا في مهام التمثيل الدلالي والاسترجاع باللغتين الصينية والإنجليزية، ويتفوق بشكل خاص في السيناريوهات متعددة اللغات.</p></td>
    </tr>
    <tr>
      <td><p>BAAI/bge-m3</p></td>
      <td><p>1,024</p></td>
      <td><p>8,192</p></td>
-     <td><p>A multifunctional, multilingual, multi-granularity text embedding model. It supports three common retrieval functions: dense retrieval, multi-vector retrieval, and sparse retrieval.</p></td>
+     <td><p>نموذج تضمين نص متعدد الوظائف ومتعدد اللغات ومتعدد الحبيبات. وهو يدعم ثلاث وظائف استرجاع شائعة: الاسترجاع الكثيف، والاسترجاع متعدد النواقل، والاسترجاع المتناثر.</p></td>
    </tr>
    <tr>
-     <td><p>Pro/BAAI/bge-m3</p></td>
+     <td><p>Pro/BAAI/Bge-m3</p></td>
      <td><p>1,024</p></td>
      <td><p>8,192</p></td>
-     <td><p>A multifunctional, multilingual, multi-granularity text embedding model. It supports three common retrieval functions: dense retrieval, multi-vector retrieval, and sparse retrieval. The model can process inputs in over 100 languages and is capable of handling different granularities.</p></td>
+     <td><p>نموذج تضمين نص متعدد الوظائف، متعدد اللغات، ومتعدد اللغات، ومتعدد الحبيبات. وهو يدعم ثلاث وظائف استرجاع شائعة: الاسترجاع الكثيف والاسترجاع متعدد المتجهات والاسترجاع المتناثر. يمكن للنموذج معالجة المدخلات بأكثر من 100 لغة، وهو قادر على التعامل مع مختلف التفريعات.</p></td>
    </tr>
 </table>
-<h2 id="Configure-credentials" class="common-anchor-header">Configure credentials<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<h2 id="Configure-credentials" class="common-anchor-header">تكوين بيانات الاعتماد<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,19 +89,19 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus must know your SiliconFlow API key before it can request embeddings. Milvus provides two methods to configure credentials:</p>
+    </button></h2><p>يجب أن يعرف Milvus مفتاح واجهة برمجة تطبيقات SiliconFlow قبل أن يتمكن من طلب التضمينات. يوفر Milvus طريقتين لتكوين بيانات الاعتماد:</p>
 <ul>
-<li><p><strong>Configuration file (recommended):</strong> Store the API key in <code translate="no">milvus.yaml</code> so every restart and node picks it up automatically.</p></li>
-<li><p><strong>Environment variables:</strong> Inject the key at deploy time—ideal for Docker Compose.</p></li>
+<li><p><strong>ملف التكوين (موصى به):</strong> قم بتخزين مفتاح واجهة برمجة التطبيقات في <code translate="no">milvus.yaml</code> بحيث تلتقطه كل عملية إعادة تشغيل وعقدة تلقائياً.</p></li>
+<li><p><strong>متغيرات البيئة:</strong> أدخل المفتاح في وقت النشر - مثالي لـ Docker Compose.</p></li>
 </ul>
-<p>Choose one of the two methods below—the configuration file is easier to maintain on bare-metal and VMs, while the env-var route fits container workflows.</p>
+<p>اختر إحدى الطريقتين أدناه - من الأسهل الحفاظ على ملف التهيئة على الأجهزة العارية والأجهزة الافتراضية، بينما يناسب مسار env-var سير عمل الحاوية.</p>
 <div class="alert note">
-<p>If an API key for the same provider is present in both the configuration file and an environment variable, Milvus always uses the value in <code translate="no">milvus.yaml</code> and ignores the environment variable.</p>
+<p>إذا كان مفتاح واجهة برمجة التطبيقات لنفس الموفر موجودًا في كل من ملف التكوين ومتغير البيئة، يستخدم Milvus دائمًا القيمة في <code translate="no">milvus.yaml</code> ويتجاهل متغير البيئة.</p>
 </div>
-<h3 id="Option-1-Configuration-file" class="common-anchor-header">Option 1: Configuration file</h3><p>Keep your API keys in <code translate="no">milvus.yaml</code>; Milvus reads them at startup and overrides any environment variable for the same provider.</p>
+<h3 id="Option-1-Configuration-file" class="common-anchor-header">الخيار 1: ملف التكوين</h3><p>احتفظ بمفاتيح واجهة برمجة التطبيقات الخاصة بك في <code translate="no">milvus.yaml</code> ؛ يقرأها Milvus عند بدء التشغيل ويتجاوز أي متغير بيئة لنفس الموفر.</p>
 <ol>
-<li><p>**Declare your keys under <code translate="no">credential:</code></p>
-<p>You may list one or many API keys—give each a label you invent and will reference later.</p>
+<li><p>**أعلن مفاتيحك تحت <code translate="no">credential:</code></p>
+<p>يمكنك إدراج مفتاح واحد أو أكثر من مفاتيح واجهة برمجة التطبيقات - أعطِ كل مفتاح تسمية تخترعها وستشير إليها لاحقًا.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -111,9 +109,9 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Putting the API keys here makes them persistent across restarts and lets you switch keys just by changing a label.</p></li>
-<li><p><strong>Tell Milvus which key to use for service calls</strong></p>
-<p>In the same file, point the SiliconFlow provider at the label you want it to use.</p>
+<p>وضع مفاتيح واجهة برمجة التطبيقات هنا يجعلها ثابتة عند إعادة التشغيل ويتيح لك تبديل المفاتيح بمجرد تغيير التسمية.</p></li>
+<li><p><strong>أخبر ميلفوس بالمفتاح الذي سيستخدمه لاستدعاءات الخدمة</strong></p>
+<p>في نفس الملف، وجّه موفر SiliconFlow إلى التسمية التي تريده أن يستخدمها.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -121,23 +119,23 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.siliconflow.cn/v1/embeddings   # (optional) custom endpoint</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This binds a specific key to every request Milvus sends to the OpenAI embeddings endpoint.</p></li>
+<p>هذا يربط مفتاحًا محددًا لكل طلب يرسله Milvus إلى نقطة نهاية تضمينات OpenAI.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Environment variable</h3><p>Use this method when you run Milvus with Docker Compose and prefer to keep secrets out of files and images.</p>
-<p>Milvus falls back to the environment variable only if no key for the provider is found in <code translate="no">milvus.yaml</code>.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">الخيار 2: متغير البيئة</h3><p>استخدم هذه الطريقة عندما تقوم بتشغيل Milvus مع Docker Compose وتفضل الاحتفاظ بالأسرار خارج الملفات والصور.</p>
+<p>يعود Milvus إلى متغير البيئة فقط إذا لم يتم العثور على مفتاح للموفر في <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
-     <th><p>Variable</p></th>
-     <th><p>Required</p></th>
-     <th><p>Description</p></th>
+     <th><p>المتغير</p></th>
+     <th><p>مطلوب</p></th>
+     <th><p>الوصف</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">MILVUSAI_SILICONFLOW_API_KEY</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Your valid SiliconFlow API key.</p></td>
+     <td><p>نعم</p></td>
+     <td><p>مفتاح واجهة برمجة تطبيقات SiliconFlow الصالح الخاص بك.</p></td>
    </tr>
 </table>
-<p>In your <strong>docker-compose.yaml</strong> file, set the <code translate="no">MILVUSAI_SILICONFLOW_API_KEY</code> environment variable.</p>
+<p>في ملف <strong>docker-compose.yaml</strong> الخاص بك، قم بتعيين متغير البيئة <code translate="no">MILVUSAI_SILICONFLOW_API_KEY</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -146,8 +144,8 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the SiliconFlow API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_SILICONFLOW_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_SILICONFLOW_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">environment:</code> block injects the key only into the Milvus container, leaving your host OS untouched. For details, refer to <a href="/docs/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configure Milvus with Docker Compose</a>.</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p>تقوم كتلة <code translate="no">environment:</code> بحقن المفتاح فقط في حاوية Milvus، تاركةً نظام التشغيل المضيف الخاص بك دون تغيير. لمزيد من التفاصيل، راجع <a href="/docs/ar/configure-docker.md#Configure-Milvus-with-Docker-Compose">تكوين Milvus مع Docker Compose</a>.</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">استخدام وظيفة التضمين<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,14 +160,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once credentials are configured, follow these steps to define and use embedding functions.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Step 1: Define schema fields</h3><p>To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:</p>
+    </button></h2><p>بمجرد تكوين بيانات الاعتماد، اتبع هذه الخطوات لتعريف دوال التضمين واستخدامها.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">الخطوة 1: تحديد حقول المخطط</h3><p>لاستخدام دالة التضمين، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية على الأقل:</p>
 <ul>
-<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
-<li><p>A scalar field that stores raw data to be embedded.</p></li>
-<li><p>A vector field reserved to store vector embeddings that the function will generate for the scalar field.</p></li>
+<li><p>الحقل الأساسي الذي يحدد بشكل فريد كل كيان في المجموعة.</p></li>
+<li><p>حقل قياسي يخزن البيانات الأولية المراد تضمينها.</p></li>
+<li><p>حقل متجه محجوز لتخزين التضمينات المتجهة التي ستقوم الدالة بإنشائها للحقل القياسي.</p></li>
 </ul>
-<p>The following example defines a schema with one scalar field <code translate="no">&quot;document&quot;</code> for storing textual data and one vector field <code translate="no">&quot;dense&quot;</code> for storing embeddings to be generated by the Function module. Remember to set the vector dimension (<code translate="no">dim</code>) to match the output of your chosen embedding model.</p>
+<p>يحدد المثال التالي مخططًا يحتوي على حقل قياسي واحد <code translate="no">&quot;document&quot;</code> لتخزين البيانات النصية وحقل متجه واحد <code translate="no">&quot;dense&quot;</code> لتخزين التضمينات التي سيتم إنشاؤها بواسطة الوحدة النمطية للدالة. تذكر تعيين البعد المتجه (<code translate="no">dim</code>) لمطابقة مخرجات نموذج التضمين الذي اخترته.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -190,9 +188,9 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Step 2: Add embedding function to schema</h3><p>The Function module in Milvus automatically converts raw data stored in a scalar field into embeddings and stores them into the explicitly defined vector field.</p>
-<p>The example below adds a Function module (<code translate="no">siliconflow_embedding</code>) that converts the scalar field <code translate="no">&quot;document&quot;</code> into embeddings, storing the resulting vectors in the <code translate="no">&quot;dense&quot;</code> vector field defined earlier.</p>
-<p>Once you have defined your embedding function, add it to your collection schema. This instructs Milvus to use the specified embedding function to process and store embeddings from your text data.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط</h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل المتجه المحدد صراحةً.</p>
+<p>يضيف المثال أدناه وحدة الدالة (<code translate="no">siliconflow_embedding</code>) التي تقوم بتحويل الحقل القياسي <code translate="no">&quot;document&quot;</code> إلى تضمينات، وتخزين المتجهات الناتجة في الحقل المتجه <code translate="no">&quot;dense&quot;</code> المحدد مسبقًا.</p>
+<p>بمجرد تعريف دالة التضمين الخاصة بك، قم بإضافتها إلى مخطط مجموعتك. هذا يوجه ميلفوس لاستخدام دالة التضمين المحددة لمعالجة التضمينات وتخزينها من بياناتك النصية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;siliconflow_embedding&quot;</span>,                        <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -211,7 +209,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">الخطوات التالية<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -226,4 +224,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After configuring the embedding function, refer to the <a href="/docs/embedding-function-overview.md">Function Overview</a> for additional guidance on index configuration, data insertion examples, and semantic search operations.</p>
+    </button></h2><p>بعد تكوين دالة التضمين، ارجع إلى <a href="/docs/ar/embedding-function-overview.md">نظرة عامة على الدالة</a> للحصول على إرشادات إضافية حول تكوين الفهرس وأمثلة إدراج البيانات وعمليات البحث الدلالي.</p>

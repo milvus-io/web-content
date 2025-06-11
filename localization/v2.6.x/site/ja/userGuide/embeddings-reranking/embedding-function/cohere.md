@@ -1,9 +1,7 @@
 ---
 id: cohere.md
-title: Cohere
-summary: >-
-  This topic describes how to configure and use Cohere embedding functions in
-  Milvus.
+title: CohereCompatible with Milvus 2.6.x
+summary: このトピックでは、MilvusにおけるCohere埋め込み関数の設定方法と使用方法について説明します。
 beta: Milvus 2.6.x
 ---
 <h1 id="Cohere" class="common-anchor-header">Cohere<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Cohere" class="anchor-icon" translate="no">
@@ -21,8 +19,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic describes how to configure and use Cohere embedding functions in Milvus.</p>
-<h2 id="Choose-an-embedding-model" class="common-anchor-header">Choose an embedding model<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
+    </button></h1><p>このトピックでは、MilvusでCohereエンベッディング関数を設定し、使用する方法について説明します。</p>
+<h2 id="Choose-an-embedding-model" class="common-anchor-header">埋め込みモデルの選択<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,59 +35,59 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports embedding models provided by Cohere. Below are the currently available embedding models for quick reference:</p>
+    </button></h2><p>MilvusはCohereが提供するエンベッディングモデルをサポートしています。以下は現在利用可能な埋め込みモデルです：</p>
 <table>
    <tr>
-     <th><p>Model Name</p></th>
-     <th><p>Dimensions</p></th>
-     <th><p>Max Tokens</p></th>
-     <th><p>Description</p></th>
+     <th><p>モデル名</p></th>
+     <th><p>寸法</p></th>
+     <th><p>最大トークン数</p></th>
+     <th><p>説明</p></th>
    </tr>
    <tr>
-     <td><p>embed-english-v3.0</p></td>
+     <td><p>エンベッド-英語-v3.0</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>A model that allows for text to be classified or turned into embeddings. English only.</p></td>
+     <td><p>テキストを分類したり、埋め込みにしたりできるモデル。英語のみ。</p></td>
    </tr>
    <tr>
-     <td><p>embed-multilingual-v3.0</p></td>
+     <td><p>エンベッブ多言語-v3.0</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>Provides multilingual classification and embedding support. <a href="https://docs.cohere.com/docs/supported-languages">See supported languages here</a>.</p></td>
+     <td><p>多言語による分類と埋め込みをサポートします。<a href="https://docs.cohere.com/docs/supported-languages">対応言語はこちら</a>。</p></td>
    </tr>
    <tr>
-     <td><p>embed-english-light-v3.0</p></td>
+     <td><p>エンベッド-英語-ライト-v3.0</p></td>
      <td><p>384</p></td>
      <td><p>512</p></td>
-     <td><p>A smaller, faster version of <code translate="no">embed-english-v3.0</code>. Almost as capable, but a lot faster. English only.</p></td>
+     <td><p><code translate="no">embed-english-v3.0</code> の、より小さく、より高速なバージョン。 ほぼ同等の機能ですが、より高速です。英語のみ。</p></td>
    </tr>
    <tr>
-     <td><p>embed-multilingual-light-v3.0</p></td>
+     <td><p>エンベッドマルチリンガルライト-v3.0</p></td>
      <td><p>384</p></td>
      <td><p>512</p></td>
-     <td><p>A smaller, faster version of <code translate="no">embed-multilingual-v3.0</code>. Almost as capable, but a lot faster. Supports multiple languages.</p></td>
+     <td><p><code translate="no">embed-multilingual-v3.0</code> の、より小さく高速なバージョン。多言語をサポートしています。</p></td>
    </tr>
    <tr>
-     <td><p>embed-english-v2.0</p></td>
+     <td><p>エンベッド-英語-v2.0</p></td>
      <td><p>4,096</p></td>
      <td><p>512</p></td>
-     <td><p>Older embeddings model that allows for text to be classified or turned into embeddings. English only.</p></td>
+     <td><p>テキストを分類したり埋め込みに変えたりできる古い埋め込みモデル。英語のみ。</p></td>
    </tr>
    <tr>
-     <td><p>embed-english-light-v2.0</p></td>
+     <td><p>エンベッディング-英語-ライト-v2.0</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>A smaller, faster version of embed-english-v2.0. Almost as capable, but a lot faster. English only.</p></td>
+     <td><p>embed-english-v2.0の小型高速版。ほぼ同等の機能ですが、より高速です。英語のみ。</p></td>
    </tr>
    <tr>
      <td><p>embed-multilingual-v2.0</p></td>
      <td><p>768</p></td>
      <td><p>256</p></td>
-     <td><p>Provides multilingual classification and embedding support. <a href="https://docs.cohere.com/docs/supported-languages">See supported languages here</a>.</p></td>
+     <td><p>多言語分類と埋め込みサポートを提供します。<a href="https://docs.cohere.com/docs/supported-languages">サポートされている言語はこちら</a>。</p></td>
    </tr>
 </table>
-<p>For details, refer to <a href="https://docs.cohere.com/docs/cohere-embed">Cohere’s Embed Models</a>.</p>
-<h2 id="Configure-credentials" class="common-anchor-header">Configure credentials<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<p>詳細については、<a href="https://docs.cohere.com/docs/cohere-embed">Cohere の Embed Models</a> を参照してください。</p>
+<h2 id="Configure-credentials" class="common-anchor-header">認証情報の設定<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,19 +102,19 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus must know your Cohere API key before it can request embeddings. Milvus provides two methods to configure credentials:</p>
+    </button></h2><p>Milvus は、埋め込みを要求する前に Cohere API キーを知る必要があります。Milvusは、クレデンシャルを設定するための2つの方法を提供します：</p>
 <ul>
-<li><p><strong>Configuration file (recommended):</strong> Store the API key in <code translate="no">milvus.yaml</code> so every restart and node picks it up automatically.</p></li>
-<li><p><strong>Environment variables:</strong> Inject the key at deploy time—ideal for Docker Compose.</p></li>
+<li><p><strong>設定ファイル（推奨）：</strong> <code translate="no">milvus.yaml</code> に API キーを保存し、再起動やノードが自動的に API キーを取得するようにします。</p></li>
+<li><p><strong>環境変数：</strong>Docker Composeに最適です。</p></li>
 </ul>
-<p>Choose one of the two methods below—the configuration file is easier to maintain on bare-metal and VMs, while the env-var route fits container workflows.</p>
+<p>コンフィギュレーション・ファイルはベアメタルやVMでメンテナンスしやすく、env-varルートはコンテナのワークフローに適している。</p>
 <div class="alert note">
-<p>If an API key for the same provider is present in both the configuration file and an environment variable, Milvus always uses the value in <code translate="no">milvus.yaml</code> and ignores the environment variable.</p>
+<p>同じプロバイダのAPIキーが設定ファイルと環境変数の両方に存在する場合、milvusは常に<code translate="no">milvus.yaml</code> の値を使用し、環境変数は無視します。</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1: Configuration file (recommended & higher priority)</h3><p>Keep your API keys in <code translate="no">milvus.yaml</code>; Milvus reads them at startup and overrides any environment variable for the same provider.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">オプション 1: 設定ファイル (推奨 &amp; 優先度高)</h3><p><code translate="no">milvus.yaml</code>Milvusは起動時にAPIキーを読み込み、同じプロバイダの環境変数を上書きします。</p>
 <ol>
-<li><p>**Declare your keys under <code translate="no">credential:</code></p>
-<p>You may list one or many API keys—give each a label you invent and will reference later.</p>
+<li><p>**の下にキーを宣言してください。<code translate="no">credential:</code></p>
+<p>APIキーは1つでも複数でもかまいません。それぞれに、後で参照するためのラベルを付けてください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -124,9 +122,9 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Putting the API keys here makes them persistent across restarts and lets you switch keys just by changing a label.</p></li>
-<li><p><strong>Tell Milvus which key to use for OpenAI calls</strong></p>
-<p>In the same file, point the Cohere provider at the label you want it to use.</p>
+<p>APIキーをここに記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
+<li><p><strong>MilvusにOpenAIの呼び出しに使うキーを教える</strong></p>
+<p>同じファイルで、Cohere プロバイダーに使用したいラベルを指定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -134,23 +132,23 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.cohere.com/v2/embed   # (optional) custom endpoint</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This binds a specific key to every request Milvus sends to the Cohere embeddings endpoint.</p></li>
+<p>これにより、MilvusがCohere embeddingsエンドポイントに送信するすべてのリクエストに特定のキーがバインドされます。</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Environment variable</h3><p>Use this method when you run Milvus with Docker Compose and prefer to keep secrets out of files and images.</p>
-<p>Milvus falls back to the environment variable only if no key for the provider is found in <code translate="no">milvus.yaml</code>.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">オプション 2: 環境変数</h3><p>Docker ComposeでMilvusを実行し、ファイルやイメージから秘密を守りたい場合は、この方法を使用してください。</p>
+<p>Milvusは、<code translate="no">milvus.yaml</code> にプロバイダのキーが見つからない場合のみ、環境変数にフォールバックします。</p>
 <table>
    <tr>
-     <th><p>Variable</p></th>
-     <th><p>Required</p></th>
-     <th><p>Description</p></th>
+     <th><p>変数</p></th>
+     <th><p>必須</p></th>
+     <th><p>説明</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">MILVUSAI_COHERE_API_KEY</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Your valid Cohere API key.</p></td>
+     <td><p>はい</p></td>
+     <td><p>有効な Cohere API キー。</p></td>
    </tr>
 </table>
-<p>In your <strong>docker-compose.yaml</strong> file, set the <code translate="no">MILVUSAI_COHERE_API_KEY</code> environment variable.</p>
+<p><strong>docker-compose.yaml</strong>ファイルで、<code translate="no">MILVUSAI_COHERE_API_KEY</code> 環境変数を設定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -159,8 +157,8 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the OpenAI API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_COHERE_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_COHERE_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">environment:</code> block injects the key only into the Milvus container, leaving your host OS untouched. For details, refer to <a href="/docs/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configure Milvus with Docker Compose</a>.</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p><code translate="no">environment:</code> ブロックは、Milvus コンテナにのみキーを注入し、ホスト OS はそのままにします。詳しくは、<a href="/docs/ja/configure-docker.md#Configure-Milvus-with-Docker-Compose">Docker Composeでmilvusを設定するを</a>参照してください。</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">埋め込み関数の使用<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -175,14 +173,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once credentials are configured, follow these steps to define and use embedding functions.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Step 1: Define schema fields</h3><p>To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:</p>
+    </button></h2><p>認証情報の設定が完了したら、以下の手順で埋め込み関数を定義し、使用します。</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1: スキーマフィールドの定義</h3><p>埋め込み関数を使用するには、特定のスキーマを持つコレクションを作成します。このスキーマには、少なくとも3つの必要なフィールドが含まれていなければなりません：</p>
 <ul>
-<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
-<li><p>A scalar field that stores raw data to be embedded.</p></li>
-<li><p>A vector field reserved to store vector embeddings that the function will generate for the scalar field.</p></li>
+<li><p>コレクション内の各エンティティを一意に識別するプライマリフィールド。</p></li>
+<li><p>埋め込む生データを格納するスカラーフィールド。</p></li>
+<li><p>スカラー・フィールドに対して関数が生成するベクトル埋め込みを格納するために予約されたベクトル・フィールド。</p></li>
 </ul>
-<p>The following example defines a schema with one scalar field <code translate="no">&quot;document&quot;</code> for storing textual data and one vector field <code translate="no">&quot;dense&quot;</code> for storing embeddings to be generated by the Function module. Remember to set the vector dimension (<code translate="no">dim</code>) to match the output of your chosen embedding model.</p>
+<p>次の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -203,9 +201,9 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Step 2: Add embedding function to schema</h3><p>The Function module in Milvus automatically converts raw data stored in a scalar field into embeddings and stores them into the explicitly defined vector field.</p>
-<p>The example below adds a Function module (<code translate="no">cohere_func</code>) that converts the scalar field <code translate="no">&quot;document&quot;</code> into embeddings, storing the resulting vectors in the <code translate="no">&quot;dense&quot;</code> vector field defined earlier.</p>
-<p>Once you have defined your embedding function, add it to your collection schema. This instructs Milvus to use the specified embedding function to process and store embeddings from your text data.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">ステップ 2: スキーマへの埋め込み関数の追加</h3><p>MilvusのFunctionモジュールは、スカラーフィールドに格納された生データを自動的に埋め込みデータに変換し、明示的に定義されたベクトルフィールドに格納します。</p>
+<p>下の例では、スカラーフィールド<code translate="no">&quot;document&quot;</code> をエンベッディングに変換する Function モジュール (<code translate="no">cohere_func</code>) を追加し、結果のベクトルを先に定義した<code translate="no">&quot;dense&quot;</code> ベクトルフィールドに格納しています。</p>
+<p>埋め込み関数を定義したら、コレクションスキーマに追加します。これにより、Milvusは指定された埋め込み関数を使用して、テキストデータの埋め込みを処理し、格納するようになります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;cohere_func&quot;</span>,                                 <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -225,7 +223,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -240,4 +238,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After configuring the embedding function, refer to the <a href="/docs/embedding-function-overview.md">Function Overview</a> for additional guidance on index configuration, data insertion examples, and semantic search operations.</p>
+    </button></h2><p>埋め込み関数を設定した後、インデックス設定、データ挿入例、セマンティック検索操作に関する追加ガイダンスについては、「<a href="/docs/ja/embedding-function-overview.md">関数の概要</a>」を参照してください。</p>
