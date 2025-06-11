@@ -16,7 +16,7 @@ To integrate Milvus Lite into your applications, run `pip install pymilvus` to i
 
 ## Milvus Standalone
 
-Milvus Standalone is a single-machine server deployment. All components of Milvus Standalone are packed into a single [Docker image](https://milvus.io/docs/install_standalone-docker.md), making deployment convenient. If you have a production workload but prefer not to use Kubernetes, running Milvus Standalone on a single machine with sufficient memory is a good option. Additionally, Milvus Standalone supports high availability through master-slave replication.
+Milvus Standalone is a single-machine server deployment. All components of Milvus Standalone are packed into a single [Docker image](https://milvus.io/docs/install_standalone-docker.md), making deployment convenient. If you have a production workload but prefer not to use Kubernetes, running Milvus Standalone on a single machine with sufficient memory is a good option.
 
 ## Milvus Distributed
 
