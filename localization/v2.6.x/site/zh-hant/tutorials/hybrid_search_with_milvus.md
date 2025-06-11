@@ -1,11 +1,11 @@
 ---
 id: hybrid_search_with_milvus.md
-summary: Hybrid Search with Milvus
-title: Hybrid Search with Milvus
+summary: 使用 Milvus 進行混合搜尋
+title: 使用 Milvus 進行混合搜尋
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Hybrid Search with Milvus<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">使用 Milvus 進行混合搜尋<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,24 +20,24 @@ title: Hybrid Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>If you want to experience the final effect of this tutorial, you can go directly to https://demos.milvus.io/hybrid-search/</p>
+    </button></h1><p>如果您想體驗本教學的最終效果，可以直接到 https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>In this tutorial, we will demonstrate how to conduct hybrid search with <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> and <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 model</a>. BGE-M3 model can convert text into dense and sparse vectors. Milvus supports storing both types of vectors in one collection, allowing for hybrid search that enhances the result relevance.</p>
-<p>Milvus supports Dense, Sparse, and Hybrid retrieval methods:</p>
+<p>在本教程中，我們將示範如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>進行混合搜索。BGE-M3 模型可以將文字轉換成密集向量和稀疏向量。Milvus 支援在一個集合中同時儲存這兩種向量，允許進行混合搜尋，以提高搜尋結果的相關性。</p>
+<p>Milvus 支援密集、稀疏和混合檢索方法：</p>
 <ul>
-<li>Dense Retrieval: Utilizes semantic context to understand the meaning behind queries.</li>
-<li>Sparse Retrieval: Emphasizes keyword matching to find results based on specific terms, equivalent to full-text search.</li>
-<li>Hybrid Retrieval: Combines both Dense and Sparse approaches, capturing the full context and specific keywords for comprehensive search results.</li>
+<li>密集檢索：利用語意上下文來瞭解查詢背後的意義。</li>
+<li>稀疏檢索：強調關鍵字比對，根據特定詞彙尋找結果，相當於全文檢索。</li>
+<li>混合式檢索：結合 Dense 與 Sparse 兩種方法，擷取完整的上下文與特定關鍵字，以獲得全面的搜尋結果。</li>
 </ul>
-<p>By integrating these methods, the Milvus Hybrid Search balances semantic and lexical similarities, improving the overall relevance of search outcomes. This notebook will walk through the process of setting up and using these retrieval strategies, highlighting their effectiveness in various search scenarios.</p>
-<h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<p>透過整合這些方法，Milvus Hybrid Search 可平衡語義與詞彙的相似性，改善搜尋結果的整體相關性。本手冊將介紹設定和使用這些檢索策略的過程，並強調它們在各種搜尋情況下的有效性。</p>
+<h3 id="Dependencies-and-Environment" class="common-anchor-header">依賴與環境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Download-Dataset" class="common-anchor-header">Download Dataset</h3><p>To demonstrate search, we need a corpus of documents. Let’s use the Quora Duplicate Questions dataset and place it in the local directory.</p>
-<p>Source of the dataset: <a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">First Quora Dataset Release: Question Pairs</a></p>
+<h3 id="Download-Dataset" class="common-anchor-header">下載資料集</h3><p>為了示範搜尋，我們需要一個文件語料庫。讓我們使用 Quora 重複問題資料集，並將其放置在本機目錄中。</p>
+<p>資料集的來源：<a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">第一次 Quora 資料集發佈：問題對</a></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Run this cell to download the dataset</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-and-Prepare-Data" class="common-anchor-header">Load and Prepare Data</h3><p>We will load the dataset and prepare a small corpus for search.</p>
+<h3 id="Load-and-Prepare-Data" class="common-anchor-header">載入並準備資料</h3><p>我們將載入資料集，並準備一個小型語料庫，以供搜尋。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 file_path = <span class="hljs-string">&quot;quora_duplicate_questions.tsv&quot;</span>
@@ -57,7 +57,7 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
-<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Use BGE-M3 Model for Embeddings</h3><p>The BGE-M3 model can embed texts as dense and sparse vectors.</p>
+<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">使用 BGE-M3 模型進行嵌入</h3><p>BGE-M3 模型可以將文字嵌入為密集向量和稀疏向量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
@@ -69,12 +69,12 @@ docs_embeddings = ef(docs)
 <pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 302473.85it/s]
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
-<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Setup Milvus Collection and Index</h3><p>We will set up the Milvus collection and create indices for the vector fields.</p>
+<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">設定 Milvus 收集與索引</h3><p>我們將設定 Milvus 套件，並為向量欄位建立索引。</p>
 <div class="alert alert-info">
 <ul>
-<li>Setting the uri as a local file, e.g. "./milvus.db", is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server uri, e.g.http://localhost:19530, as your uri.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the uri and token, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>將 uri 設定為本機檔案，例如 "./milvus.db" 是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
+<li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器的 uri，例如：http://localhost:19530。</li>
+<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務，請調整 uri 和 token，對應 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -117,7 +117,7 @@ dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span cl
 col.create_index(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
 col.load()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Insert Data into Milvus Collection</h3><p>Insert documents and their embeddings into the collection.</p>
+<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">將資料插入 Milvus 套件</h3><p>插入文件及其嵌入到資料集中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># For efficiency, we insert 50 records in each small batch</span>
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(docs), <span class="hljs-number">50</span>):
     batched_entities = [
@@ -130,7 +130,7 @@ col.load()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Number of entities inserted: 502
 </code></pre>
-<h3 id="Enter-Your-Search-Query" class="common-anchor-header">Enter Your Search Query</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
+<h3 id="Enter-Your-Search-Query" class="common-anchor-header">輸入您的搜尋查詢</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
 query = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;Enter your search query: &quot;</span>)
 <span class="hljs-built_in">print</span>(query)
 
@@ -140,11 +140,11 @@ query_embeddings = ef([query])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">How to start learning programming?
 </code></pre>
-<h3 id="Run-the-Search" class="common-anchor-header">Run the Search</h3><p>We will first prepare some helpful functions to run the search:</p>
+<h3 id="Run-the-Search" class="common-anchor-header">執行搜尋</h3><p>我們會先準備一些有用的函式來執行搜尋：</p>
 <ul>
-<li><code translate="no">dense_search</code>: only search across dense vector field</li>
-<li><code translate="no">sparse_search</code>: only search across sparse vector field</li>
-<li><code translate="no">hybrid_search</code>: search across both dense and vector fields with a weighted reranker</li>
+<li><code translate="no">dense_search</code>只在密集向量場中搜尋</li>
+<li><code translate="no">sparse_search</code>：僅在稀疏向量場中搜尋</li>
+<li><code translate="no">hybrid_search</code>：同時在密集向量場和向量場中使用加權重排器進行搜尋</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     AnnSearchRequest,
@@ -201,7 +201,7 @@ query_embeddings = ef([query])
     )[<span class="hljs-number">0</span>]
     <span class="hljs-keyword">return</span> [hit.get(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s run three different searches with defined functions:</p>
+<p>讓我們使用定義的函式執行三種不同的搜尋：</p>
 <pre><code translate="no" class="language-python">dense_results = dense_search(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
 sparse_results = sparse_search(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][[<span class="hljs-number">0</span>]])
 hybrid_results = hybrid_search(
@@ -212,7 +212,7 @@ hybrid_results = hybrid_search(
     dense_weight=<span class="hljs-number">1.0</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Display-Search-Results" class="common-anchor-header">Display Search Results</h3><p>To display the results for Dense, Sparse, and Hybrid searches, we need some utilities to format the results.</p>
+<h3 id="Display-Search-Results" class="common-anchor-header">顯示搜尋結果</h3><p>要顯示密集、稀疏和混合搜尋的結果，我們需要一些工具來格式化結果。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">doc_text_formatting</span>(<span class="hljs-params">ef, query, docs</span>):
     tokenizer = ef.model.tokenizer
     query_tokens_ids = tokenizer.encode(query, return_offsets_mapping=<span class="hljs-literal">True</span>)
@@ -250,7 +250,7 @@ hybrid_results = hybrid_search(
         formatted_texts.append(formatted_text)
     <span class="hljs-keyword">return</span> formatted_texts
 <button class="copy-code-btn"></button></code></pre>
-<p>Then we can display search results in text with highlights:</p>
+<p>然後，我們就可以將搜尋結果顯示在有高亮點的文字中：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> Markdown, display
 
 <span class="hljs-comment"># Dense search results</span>
@@ -271,44 +271,44 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> formatted_results:
     display(Markdown(result))
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Dense Search Results:</strong></p>
-<p>What’s the best way to start learning robotics?</p>
-<p>How do I learn a computer language like java?</p>
-<p>How can I get started to learn information security?</p>
-<p>What is Java programming? How To Learn Java Programming Language ?</p>
-<p>How can I learn computer security?</p>
-<p>What is the best way to start robotics? Which is the best development board that I can start working on it?</p>
-<p>How can I learn to speak English fluently?</p>
-<p>What are the best ways to learn French?</p>
-<p>How can you make physics easy to learn?</p>
-<p>How do we prepare for UPSC?</p>
-<p><strong>Sparse Search Results:</strong></p>
-<p>What is Java<span style='color:red'> programming? How</span> To Learn Java Programming Language ?</p>
-<p>What’s the best way<span style='color:red'> to start learning</span> robotics<span style='color:red'>?</span></p>
-<p>What is the alternative<span style='color:red'> to</span> machine<span style='color:red'> learning?</span></p>
-<p><span style='color:red'>How</span> do I create a new Terminal and new shell in Linux using C<span style='color:red'> programming?</span></p>
-<p><span style='color:red'>How</span> do I create a new shell in a new terminal using C<span style='color:red'> programming</span> (Linux terminal)<span style='color:red'>?</span></p>
-<p>Which business is better<span style='color:red'> to start</span> in Hyderabad<span style='color:red'>?</span></p>
-<p>Which business is good<span style='color:red'> start</span> up in Hyderabad<span style='color:red'>?</span></p>
-<p>What is the best way<span style='color:red'> to start</span> robotics<span style='color:red'>?</span> Which is the best development board that I can<span style='color:red'> start</span> working on it<span style='color:red'>?</span></p>
-<p>What math does a complete newbie need<span style='color:red'> to</span> understand algorithms for computer<span style='color:red'> programming?</span> What books on algorithms are suitable for a complete beginner<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> do you make life suit you and stop life from abusi<span style='color:red'>ng</span> you mentally and emotionally<span style='color:red'>?</span></p>
-<p><strong>Hybrid Search Results:</strong></p>
-<p>What is the best way<span style='color:red'> to start</span> robotics<span style='color:red'>?</span> Which is the best development board that I can<span style='color:red'> start</span> working on it<span style='color:red'>?</span></p>
-<p>What is Java<span style='color:red'> programming? How</span> To Learn Java Programming Language ?</p>
-<p>What’s the best way<span style='color:red'> to start learning</span> robotics<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> do we prepare for UPSC<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> can you make physics easy<span style='color:red'> to</span> learn<span style='color:red'>?</span></p>
-<p>What are the best ways<span style='color:red'> to</span> learn French<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> can I learn<span style='color:red'> to</span> speak English fluently<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> can I learn computer security<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> can I get started<span style='color:red'> to</span> learn information security<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> do I learn a computer language like java<span style='color:red'>?</span></p>
-<p>What is the alternative<span style='color:red'> to</span> machine<span style='color:red'> learning?</span></p>
-<p><span style='color:red'>How</span> do I create a new Terminal and new shell in Linux using C<span style='color:red'> programming?</span></p>
-<p><span style='color:red'>How</span> do I create a new shell in a new terminal using C<span style='color:red'> programming</span> (Linux terminal)<span style='color:red'>?</span></p>
-<p>Which business is better<span style='color:red'> to start</span> in Hyderabad<span style='color:red'>?</span></p>
-<p>Which business is good<span style='color:red'> start</span> up in Hyderabad<span style='color:red'>?</span></p>
-<p>What math does a complete newbie need<span style='color:red'> to</span> understand algorithms for computer<span style='color:red'> programming?</span> What books on algorithms are suitable for a complete beginner<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> do you make life suit you and stop life from abusi<span style='color:red'>ng</span> you mentally and emotionally<span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Quick Deploy</h3><p>To learn about how to start an online demo with this tutorial, please refer to <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">the example application</a>.</p>
+<p><strong>密集搜尋結果：</strong></p>
+<p>開始學習機器人的最佳方法是什麼？</p>
+<p>如何學習 java 等電腦語言？</p>
+<p>如何開始學習資訊安全？</p>
+<p>什麼是 Java 程式設計？如何學習 Java 程式語言 ?</p>
+<p>如何學習電腦安全？</p>
+<p>如何開始學習機器人？哪種開發板最適合我開始工作？</p>
+<p>如何學習流利的英語？</p>
+<p>學習法語的最佳方法是什麼？</p>
+<p>如何讓物理變得容易學習？</p>
+<p>如何準備 UPSC？</p>
+<p><strong>稀疏搜尋結果：</strong></p>
+<p>什麼是 Java<span style='color:red'> 程式</span>語言？<span style='color:red'> 如何</span>學習 Java 程式語言 ?</p>
+<p><span style='color:red'> 開始學習</span>機器人的最佳方式是什麼<span style='color:red'>？</span></p>
+<p>機器<span style='color:red'> 學習的</span>替代方法是什麼？</p>
+<p><span style='color:red'>如何</span>使用 C<span style='color:red'> 程式</span>語言在 Linux 中建立新終端和新 shell<span style='color:red'> ？</span></p>
+<p><span style='color:red'>如何</span>使用 C<span style='color:red'> 程式</span>語言在 Linux 終端建立新的 shell<span style='color:red'>？</span></p>
+<p>在海德拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
+<p>在海得拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
+<p><span style='color:red'> 開辦</span>機器人的最佳方式是什麼<span style='color:red'>？</span>哪種開發板最適合我<span style='color:red'> 開始</span>工作<span style='color:red'>？</span></p>
+<p>一個完全的新手需要哪些<span style='color:red'> 數學來</span>理解電腦<span style='color:red'> 程式設計</span>的演算法<span style='color:red'> ？</span>哪些有關演算法的書籍適合完全的初學者<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>讓生活適合自己，讓生活不再在精神上和情緒上<span style='color:red'>虐待</span>自己<span style='color:red'>？</span></p>
+<p><strong>混合搜尋結果：</strong></p>
+<p><span style='color:red'> 開始學習</span>機器人的最佳方式是什麼<span style='color:red'>？</span>哪種開發板最好，我可以<span style='color:red'> 開始</span>工作<span style='color:red'>？</span></p>
+<p>什麼是 Java<span style='color:red'> 程式設計？如何</span>學習 Java 程式語言？</p>
+<p><span style='color:red'> 開始學習</span>機器人的最佳方式是什麼<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>準備 UPSC<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>讓物理<span style='color:red'> 變得</span>容易學習<span style='color:red'>？</span></p>
+<p>學習法語<span style='color:red'> 的</span>最佳方法是什麼<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span><span style='color:red'> 才能</span>學會說流利的英語<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>學習電腦安全<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>開始<span style='color:red'> 學習</span>資訊安全<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>學習 java 等電腦語言<span style='color:red'>？</span></p>
+<p>機器<span style='color:red'> 學習</span><span style='color:red'> 的</span>替代方法是什麼？</p>
+<p><span style='color:red'>如何</span>在 Linux 中使用 C<span style='color:red'> 程式</span>建立新的 Terminal 和新的 shell<span style='color:red'> ？</span></p>
+<p><span style='color:red'>如何</span>使用 C<span style='color:red'> 程式</span>語言在新的終端（Linux 終端）建立新的 shell<span style='color:red'>？</span></p>
+<p>在海德拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
+<p>在海得拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
+<p>一個完全的新手需要哪些數學知識<span style='color:red'> 才能</span>理解電腦<span style='color:red'> 程式設計</span>的演算法<span style='color:red'> ？</span>有哪些有關演算法的書籍適合初學者<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>讓生活適合您，並避免生活在精神上和情緒上<span style='color:red'>虐待</span>您<span style='color:red'>？</span></p>
+<h3 id="Quick-Deploy" class="common-anchor-header">快速部署</h3><p>若要瞭解如何利用本教學開始線上示範，請參考<a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">範例應用程式</a>。</p>

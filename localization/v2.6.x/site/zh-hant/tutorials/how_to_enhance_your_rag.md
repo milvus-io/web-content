@@ -1,14 +1,11 @@
 ---
 id: how_to_enhance_your_rag.md
 summary: >-
-  With the increasing popularity of Retrieval Augmented Generation RAG
-  applications, there is a growing concern about improving their performance.
-  This article presents all possible ways to optimize RAG pipelines and provides
-  corresponding illustrations to help you quickly understand the mainstream RAG
-  optimization strategies.
-title: How to Enhance the Performance of Your RAG Pipeline
+  隨著 Retrieval Augmented Generation RAG 應用程式的日益普及，提升其效能的問題也愈來愈受到關注。本文將介紹優化 RAG
+  管道的所有可能方式，並提供相應的圖解，協助您快速瞭解主流的 RAG 優化策略。
+title: 如何增強 RAG 管道的效能
 ---
-<h1 id="How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="common-anchor-header">How to Enhance the Performance of Your RAG Pipeline<button data-href="#How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="anchor-icon" translate="no">
+<h1 id="How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="common-anchor-header">如何增強 RAG 管道的效能<button data-href="#How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +20,9 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>With the increasing popularity of Retrieval Augmented Generation (<a href="https://zilliz.com/learn/Retrieval-Augmented-Generation">RAG</a>) applications, there is a growing concern about improving their performance. This article presents all possible ways to optimize RAG pipelines and provides corresponding illustrations to help you quickly understand the mainstream RAG optimization strategies.</p>
-<p>It’s important to note that we’ll only provide a high-level exploration of these strategies and techniques, focusing on how they integrate into a RAG system. However, we won’t delve into intricate details or guide you through step-by-step implementation.</p>
-<h2 id="A-Standard-RAG-Pipeline" class="common-anchor-header">A Standard RAG Pipeline<button data-href="#A-Standard-RAG-Pipeline" class="anchor-icon" translate="no">
+    </button></h1><p>隨著 Retrieval Augmented Generation<a href="https://zilliz.com/learn/Retrieval-Augmented-Generation">(RAG</a>) 應用程式的日益普及，提升其效能的問題也日益受到關注。本文將介紹優化 RAG 管道的所有可能方式，並提供相應的圖解，協助您快速瞭解主流的 RAG 優化策略。</p>
+<p>需要注意的是，我們只會對這些策略和技術進行高層次的探討，著重於它們如何整合到 RAG 系統中。但是，我們不會深入探討複雜的細節，也不會引導您逐步實施。</p>
+<h2 id="A-Standard-RAG-Pipeline" class="common-anchor-header">標準的 RAG 管線<button data-href="#A-Standard-RAG-Pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,14 +37,14 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The diagram below shows the most straightforward vanilla RAG pipeline. First, document chunks are loaded into a vector store (such as <a href="https://milvus.io/docs">Milvus</a> or <a href="https://zilliz.com/cloud">Zilliz cloud</a>). Then, the vector store retrieves the Top-K most relevant chunks related to the query. These relevant chunks are then injected into the <a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM</a>'s context prompt, and finally, the LLM returns the final answer.</p>
+    </button></h2><p>下圖顯示了最直接的 RAG 流水線。首先，文件塊會載入向量儲存庫 (例如<a href="https://milvus.io/docs">Milvus</a>或<a href="https://zilliz.com/cloud">Zilliz cloud</a>)。接著，向量儲存庫擷取與查詢最相關的 Top-K 文檔區。這些相關的文件塊會被注入到<a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM</a> 的上下文提示中，最後由 LLM 傳回最終的答案。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="Various-Types-of-RAG-Enhancement-Techniques" class="common-anchor-header">Various Types of RAG Enhancement Techniques<button data-href="#Various-Types-of-RAG-Enhancement-Techniques" class="anchor-icon" translate="no">
+<h2 id="Various-Types-of-RAG-Enhancement-Techniques" class="common-anchor-header">各種類型的 RAG 增強技術<button data-href="#Various-Types-of-RAG-Enhancement-Techniques" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,16 +59,16 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We can classify different RAG enhancement approaches based on their roles in the RAG pipeline stages.</p>
+    </button></h2><p>我們可以根據 RAG 管道階段中的角色，將不同的 RAG 增強方法分類。</p>
 <ul>
-<li><strong>Query Enhancement</strong>: Modifying and manipulating the query process of the RAG input to better express or process the query intent.</li>
-<li><strong>Indexing Enhancement</strong>: Optimizing the creation of chunking indexes using techniques such as multi-chunking, step-wise indexing, or multi-way indexing.</li>
-<li><strong>Retriever Enhancement</strong>: Applying optimization techniques and strategies during the retrieval process.</li>
-<li><strong>Generator Enhancement</strong>: Adjusting and optimizing prompts when assembling prompts for the LLM to provide better responses.</li>
-<li><strong>RAG Pipeline Enhancement</strong>: Dynamically switching processes within the entire RAG pipeline, including using agents or tools to optimize key steps in the RAG pipeline.</li>
+<li><strong>查詢增強</strong>：修改和處理 RAG 輸入的查詢過程，以更好地表達或處理查詢意圖。</li>
+<li><strong>索引增強</strong>：使用多重分塊（multi-chunking）、逐步索引（step-wise indexing）或多向索引（multi-way indexing）等技術優化分塊索引的建立。</li>
+<li><strong>Retriever 增強</strong>：在檢索過程中應用最佳化技術與策略。</li>
+<li><strong>生成器增強</strong>：在為 LLM 組合提示時調整和優化提示，以提供更好的回應。</li>
+<li><strong>RAG Pipeline 增強功能</strong>：在整個 RAG 管道中動態切換流程，包括使用代理程式或工具來最佳化 RAG 管道中的關鍵步驟。</li>
 </ul>
-<p>Next, we will introduce specific methods under each of these categories.</p>
-<h2 id="Query-Enhancement" class="common-anchor-header">Query Enhancement<button data-href="#Query-Enhancement" class="anchor-icon" translate="no">
+<p>接下來，我們將介紹每個類別下的特定方法。</p>
+<h2 id="Query-Enhancement" class="common-anchor-header">查詢增強<button data-href="#Query-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,51 +83,51 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s explore four effective methods to enhance your query experience: Hypothetical Questions, Hypothetical Document Embeddings, Sub-Queries, and Stepback Prompts.</p>
-<h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">Creating Hypothetical Questions</h3><p>Creating hypothetical questions involves utilizing an LLM to generate multiple questions that users might ask about the content within each document chunk. Before the user’s actual query reaches the LLM, the vector store retrieves the most relevant hypothetical questions related to the real query, along with their corresponding document chunks, and forwards them to the LLM.</p>
+    </button></h2><p>讓我們探索四種有效的方法來增強您的查詢體驗：假設問題 (Hypothetical Questions)、假設文件嵌入 (Hypothetical Document Embeddings)、子查詢 (Sub-Queries) 和回溯提示 (Stepback Prompts)。</p>
+<h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">建立假設問題</h3><p>製作假設性問題是利用 LLM 來產生使用者可能針對每個文件區塊中的內容提出的多個問題。在使用者的實際查詢傳送至 LLM 之前，向量儲存器會擷取與實際查詢最相關的假設問題，以及其相對應的文件區塊，並將它們轉送至 LLM。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This methodology bypasses the cross-domain asymmetry problem in the vector search process by directly engaging in query-to-query searches, alleviating the burden on vector searches. However, it introduces additional overhead and uncertainty in generating hypothetical questions.</p>
-<h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (Hypothetical Document Embeddings)</h3><p>HyDE stands for Hypothetical Document Embeddings. It leverages an LLM to craft a "<strong><em>Hypothetical Document</em></strong>" or a <strong><em>fake</em></strong> answer in response to a user query devoid of contextual information. This fake answer is then converted into vector embeddings and employed to query the most relevant document chunks within a vector database. Subsequently, the vector database retrieves the Top-K most relevant document chunks and transmits them to the LLM and the original user query to generate the final answer.</p>
+<p>這種方法繞過向量搜尋過程中的跨領域不對稱問題，直接進行查詢對查詢的搜尋，減輕向量搜尋的負擔。然而，它會在產生假設問題時引入額外的開銷和不確定性。</p>
+<h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (假設性文件嵌入)</h3><p>HyDE 是 Hypothetical Document Embeddings 的縮寫。它利用 LLM 來製作<strong><em>「假設文件</em></strong>」或<strong><em>虛假</em></strong>答案，以回應沒有上下文資訊的使用者查詢。此假答案隨後會轉換成向量嵌入，並用於查詢向量資料庫中最相關的文件塊。之後，向量資料庫會擷取 Top-K 最相關的文件塊，並將它們傳送給 LLM 和原始使用者查詢，以產生最終答案。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This method is similar to the hypothetical question technique in addressing cross-domain asymmetry in vector searches. However, it also has drawbacks, such as the added computational costs and uncertainties of generating fake answers.</p>
-<p>For more information, refer to the <a href="https://arxiv.org/abs/2212.10496">HyDE</a> paper.</p>
-<h3 id="Creating-Sub-Queries" class="common-anchor-header">Creating Sub-Queries</h3><p>When a user query is too complicated, we can use an LLM to break it down into simpler sub-queries before passing them on to the vector database and the LLM. Let’s take a look at an example.</p>
-<p>Imagine a user asking: "<strong><em>What are the differences in features between Milvus and Zilliz Cloud?</em></strong>" This question is quite complex and might not have a straightforward answer in our knowledge base. To tackle this issue, we can split it into two simpler sub-queries:</p>
+<p>在解決向量搜尋中的跨領域不對稱問題時，此方法與假設問題技術相似。不過，它也有缺點，例如增加了計算成本和產生假答案的不確定性。</p>
+<p>如需詳細資訊，請參閱<a href="https://arxiv.org/abs/2212.10496">HyDE</a>論文。</p>
+<h3 id="Creating-Sub-Queries" class="common-anchor-header">建立子查詢</h3><p>當使用者的查詢太複雜時，我們可以使用 LLM 將它分解成較簡單的子查詢，然後再傳給向量資料庫和 LLM。讓我們來看看一個範例。</p>
+<p>想像一下使用者會問<strong><em>「Milvus 和 Zilliz Cloud 在功能上有哪些差異？</em></strong>」這個問題相當複雜，在我們的知識庫中可能沒有直接的答案。要解決這個問題，我們可以將它分割成兩個較簡單的子查詢：</p>
 <ul>
-<li>Sub-query 1: “What are the features of Milvus?”</li>
-<li>Sub-query 2: “What are the features of Zilliz Cloud?”</li>
+<li>子查詢 1：「Milvus 有哪些功能？</li>
+<li>子查詢 2：「Zilliz Cloud 有哪些功能？</li>
 </ul>
-<p>Once we have these sub-queries, we send them all to the vector database after converting them into vector embeddings. The vector database then finds the Top-K document chunks most relevant to each sub-query. Finally, the LLM uses this information to generate a better answer.</p>
+<p>有了這些子查詢之後，我們將它們全部轉換成向量嵌入之後傳送給向量資料庫。向量資料庫會找出與每個子查詢最相關的 Top-K 文件塊。最後，LLM 會使用這些資訊來產生更好的答案。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>By breaking down the user query into sub-queries, we make it easier for our system to find relevant information and provide accurate answers, even to complex questions.</p>
-<h3 id="Creating-Stepback-Prompts" class="common-anchor-header">Creating Stepback Prompts</h3><p>Another way to simplify complex user queries is by creating <strong><em>stepback prompts</em></strong>. This technique involves abstracting complicated user queries into <em><em>"</em>stepback questions</em>"** using an LLM. Then, a vector database uses these stepback questions to retrieve the most relevant document chunks. Finally, the LLM generates a more accurate answer based on these retrieved document chunks.</p>
-<p>Let’s illustrate this technique with an example. Consider the following query, which is quite complex and not straightforward to answer directly:</p>
-<p><strong><em>Original User Query: “I have a dataset with 10 billion records and want to store it in Milvus for querying. Is it possible?”</em></strong></p>
-<p>To simplify this user query, we can use an LLM to generate a more straightforward stepback question:</p>
-<p><strong><em>Stepback Question: “What is the dataset size limit that Milvus can handle?”</em></strong></p>
+<p>透過將用戶查詢分解為子查詢，我們可以讓系統更容易找到相關資訊並提供準確的答案，即使是複雜的問題也不例外。</p>
+<h3 id="Creating-Stepback-Prompts" class="common-anchor-header">建立回溯提示</h3><p>另一種簡化複雜使用者查詢的方法是建立<strong><em>回溯提示</em></strong>。此技術包括使用 LLM 將複雜的使用者查詢抽象為<em><em>「</em>回溯問題</em>」**。然後，向量資料庫會使用這些回溯問題來擷取最相關的文件區塊。最後，LLM 會根據這些擷取的文件區塊產生更精確的答案。</p>
+<p>讓我們用一個例子來說明這項技術。考慮以下的查詢，這個查詢相當複雜，而且無法直接回答：</p>
+<p><strong><em>原始使用者查詢："我有一個有 100 億筆記錄的資料集，想要將它儲存在 Milvus 中進行查詢。可以嗎？"</em></strong></p>
+<p>為了簡化這個使用者查詢，我們可以使用 LLM 來產生一個更直接的回溯問題：</p>
+<p><strong><em>回溯問題：「Milvus 可以處理的資料集大小限制是多少？」</em></strong></p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This method can help us get better and more accurate answers to complex queries. It breaks down the original question into a simpler form, making it easier for our system to find relevant information and provide accurate responses.</p>
-<h2 id="Indexing-Enhancement" class="common-anchor-header">Indexing Enhancement<button data-href="#Indexing-Enhancement" class="anchor-icon" translate="no">
+<p>這個方法可以幫助我們對複雜的查詢得到更好、更準確的答案。它可以將原始問題分解成更簡單的形式，讓我們的系統更容易找到相關資訊，並提供準確的回應。</p>
+<h2 id="Indexing-Enhancement" class="common-anchor-header">強化索引<button data-href="#Indexing-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -145,33 +142,33 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Enhancing indexing is another strategy for enhancing the performance of your RAG applications. Let’s explore three indexing enhancement techniques.</p>
-<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Merging Document Chunks Automatically</h3><p>When building an index, we can employ two granularity levels: child chunks and their corresponding parent chunks. Initially, we search for child chunks at a finer level of detail. Then, we apply a merging strategy: if a specific number, <strong><em>n</em></strong>, of child chunks from the first <strong><em>k</em></strong> child chunks belong to the same parent chunk, we provide this parent chunk to the LLM as contextual information.</p>
+    </button></h2><p>增強索引是增強 RAG 應用程式效能的另一項策略。讓我們探索三種索引增強技術。</p>
+<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">自動合併文件塊</h3><p>在建立索引時，我們可以使用兩個粒度層級：子文件塊及其對應的父文件塊。一開始，我們以較細的細節層級搜尋子資料塊。接著，我們會使用合併策略：如果前<strong><em>k 個子</em></strong>資料塊中有特定數量（<strong><em>n</em></strong>）的子資料塊屬於相同的父資料塊，我們就會將此父資料塊提供給 LLM 作為上下文資訊。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This methodology has been implemented in <a href="https://docs.llamaindex.ai/en/stable/examples/retrievers/recursive_retriever_nodes.html">LlamaIndex</a>.</p>
-<h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">Constructing Hierarchical Indices</h3><p>When creating indices for documents, we can establish a two-level index: one for document summaries and another for document chunks. The vector search process comprises two stages: initially, we filter relevant documents based on the summary, and subsequently, we retrieve corresponding document chunks exclusively within these relevant documents.</p>
+<p>這個方法已經在<a href="https://docs.llamaindex.ai/en/stable/examples/retrievers/recursive_retriever_nodes.html">LlamaIndex</a> 中實施。</p>
+<h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">建構分層索引</h3><p>為文件建立索引時，我們可以建立兩層索引：一層是文件摘要索引，另一層是文件片段索引。向量搜尋過程分為兩個階段：首先，我們根據摘要篩選相關的文件，接著，我們在這些相關文件中檢索相對應的文件塊。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach proves beneficial in situations involving extensive data volumes or instances where data is hierarchical, such as content retrieval within a library collection.</p>
-<h3 id="Hybrid-Retrieval-and-Reranking" class="common-anchor-header">Hybrid Retrieval and Reranking</h3><p>The Hybrid Retrieval and Reranking technique integrates one or more supplementary retrieval methods with <a href="https://zilliz.com/learn/vector-similarity-search">vector similarity retrieval</a>. Then, a <a href="https://zilliz.com/learn/optimize-rag-with-rerankers-the-role-and-tradeoffs#What-is-a-Reranker">reranker</a> reranks the retrieved results based on their relevancy to the user query.</p>
-<p>Common supplementary retrieval algorithms include lexical frequency-based methods like <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a> or big models utilizing sparse embeddings like <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. Re-ranking algorithms include RRF or more sophisticated models such as <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, which resembles BERT-like architectures.</p>
+<p>這種方法在涉及大量資料或資料分層的情況下非常有用，例如圖書館館藏中的內容檢索。</p>
+<h3 id="Hybrid-Retrieval-and-Reranking" class="common-anchor-header">混合擷取與重新排序</h3><p>混合檢索與重新排序技術將一種或多種輔助檢索方法與<a href="https://zilliz.com/learn/vector-similarity-search">向量相似性檢索</a>整合在一起。然後，<a href="https://zilliz.com/learn/optimize-rag-with-rerankers-the-role-and-tradeoffs#What-is-a-Reranker">重新排序器會</a>根據擷取結果與使用者查詢的相關性重新排序。</p>
+<p>常見的補充檢索演算法包括以詞彙頻率為基礎的方法 (如<a href="https://milvus.io/docs/embed-with-bm25.md">BM25)</a>或利用稀疏嵌入 (sparse embeddings) 的大型模型 (如<a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>)。重新排序演算法包括 RRF 或更複雜的模型，如<a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>，類似 BERT 架構。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach leverages diverse retrieval methods to improve retrieval quality and address potential gaps in vector recall.</p>
-<h2 id="Retriever-Enhancement" class="common-anchor-header">Retriever Enhancement<button data-href="#Retriever-Enhancement" class="anchor-icon" translate="no">
+<p>此方法利用不同的檢索方法來改善檢索品質，並處理向量召回中的潛在缺口。</p>
+<h2 id="Retriever-Enhancement" class="common-anchor-header">強化檢索器<button data-href="#Retriever-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,23 +183,23 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Refinement of the retriever component within the RAG system can also improve RAG applications. Let’s explore some effective methods for enhancing the retriever.</p>
-<h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Sentence Window Retrieval</h3><p>In a basic RAG system, the document chunk given to the LLM is a larger window encompassing the retrieved embedding chunk. This ensures that the information provided to the LLM includes a broader range of contextual details, minimizing information loss. The Sentence Window Retrieval technique decouples the document chunk used for embedding retrieval from the chunk provided to the LLM.</p>
+    </button></h2><p>完善 RAG 系統中的 Retriever 元件也可以改善 RAG 應用。讓我們來探討一些強化檢索器的有效方法。</p>
+<h3 id="Sentence-Window-Retrieval" class="common-anchor-header">句子視窗檢索</h3><p>在基本的 RAG 系統中，提供給 LLM 的文件塊是一個包含擷取嵌入塊的較大視窗。這可確保提供給 LLM 的資訊包含更廣泛的上下文細節，以減少資訊遺失。句子視窗擷取技術將嵌入擷取所使用的文件區塊與提供給 LLM 的區塊分離。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>However, expanding the window size may introduce additional interfering information. We can adjust the size of the window expansion based on the specific business needs.</p>
-<h3 id="Meta-data-Filtering" class="common-anchor-header">Meta-data Filtering</h3><p>To ensure more precise answers, we can refine the retrieved documents by filtering metadata like time and category before passing them to the LLM. For instance, if financial reports spanning multiple years are retrieved, filtering based on the desired year will refine the information to meet specific requirements. This method proves effective in situations with extensive data and detailed metadata, such as content retrieval in library collections.</p>
+<p>然而，擴大視窗大小可能會引入額外的干擾資訊。我們可以根據具體的業務需求調整視窗擴展的大小。</p>
+<h3 id="Meta-data-Filtering" class="common-anchor-header">元資料篩選</h3><p>為了確保更精確的答案，我們可以在將擷取的文件傳送給 LLM 之前，先過濾時間和類別等元資料，以精簡擷取的文件。舉例來說，如果要擷取跨越多年的財務報告，則根據所需年份進行篩選，即可精簡資訊以符合特定需求。這種方法在有大量資料和詳細元資料的情況下非常有效，例如圖書館館藏的內容檢索。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="Generator-Enhancement" class="common-anchor-header">Generator Enhancement<button data-href="#Generator-Enhancement" class="anchor-icon" translate="no">
+<h2 id="Generator-Enhancement" class="common-anchor-header">生成器增強<button data-href="#Generator-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -217,24 +214,24 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s explore more RAG optimizing techniques by improving the generator within a RAG system.</p>
-<h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">Compressing the LLM prompt</h3><p>The noise information within retrieved document chunks can significantly impact the accuracy of RAG’s final answer. The limited prompt window in LLMs also presents a hurdle for more accurate answers. To address this challenge, we can compress irrelevant details, emphasize key paragraphs, and reduce the overall context length of retrieved document chunks.</p>
+    </button></h2><p>讓我們透過改進 RAG 系統中的產生器，探索更多 RAG 優化技術。</p>
+<h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">壓縮 LLM 提示</h3><p>檢索到的文件塊中的雜訊資訊會對 RAG 最終答案的準確性造成重大影響。LLM 中有限的提示視窗也對更精確的答案造成障礙。為了解決這個難題，我們可以壓縮不相關的細節、強調關鍵段落，並減少擷取文件塊的整體上下文長度。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach is similar to the earlier discussed hybrid retrieval and reranking method, wherein a reranker is utilized to sift out irrelevant document chunks.</p>
-<h3 id="Adjusting-the-chunk-order-in-the-prompt" class="common-anchor-header">Adjusting the chunk order in the prompt</h3><p>In the paper "<a href="https://arxiv.org/abs/2307.03172">Lost in the middle</a>," researchers observed that LLMs often overlook information in the middle of given documents during the reasoning process. Instead, they tend to rely more on the information presented at the beginning and end of the documents.</p>
-<p>Based on this observation, we can adjust the order of retrieved chunks to improve the answer quality: when retrieving multiple knowledge chunks, chunks with relatively low confidence are placed in the middle, and chunks with relatively high confidence are positioned at both ends.</p>
+<p>此方法類似於先前討論過的混合擷取與重新排序 (Reranking) 方法，利用重新排序器 (Reranker) 來篩選出不相關的文件區塊。</p>
+<h3 id="Adjusting-the-chunk-order-in-the-prompt" class="common-anchor-header">調整提示中的文塊順序</h3><p>在論文<a href="https://arxiv.org/abs/2307.03172">「Lost in the middle</a>」中，研究人員觀察到 LLMs 在推理過程中經常忽略給定文件中間的資訊。相反，他們傾向於更依賴文件開頭和結尾的資訊。</p>
+<p>基於這個觀察，我們可以調整擷取知識區塊的順序來改善答案品質：當擷取多個知識區塊時，置信度相對較低的知識區塊會被放在中間，而置信度相對較高的知識區塊會被放在兩端。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="RAG-Pipeline-Enhancement" class="common-anchor-header">RAG Pipeline Enhancement<button data-href="#RAG-Pipeline-Enhancement" class="anchor-icon" translate="no">
+<h2 id="RAG-Pipeline-Enhancement" class="common-anchor-header">RAG Pipeline 強化<button data-href="#RAG-Pipeline-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -249,18 +246,18 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We can also improve the performance of your RAG applications by enhancing the whole RAG pipeline.</p>
-<h3 id="Self-reflection" class="common-anchor-header">Self-reflection</h3><p>This approach incorporates the concept of self-reflection within AI agents. Then, how does this technique work?</p>
-<p>Some initially retrieved Top-K document chunks are ambiguous and may not answer the user question directly. In such cases, we can conduct a second round of reflection to verify whether these chunks can genuinely address the query.</p>
-<p>We can conduct the reflection using efficient reflection methods such as Natural Language Inference(NLI) models or additional tools like internet searches for verification.</p>
+    </button></h2><p>我們也可以透過強化整個 RAG Pipeline 來提升您的 RAG 應用程式效能。</p>
+<h3 id="Self-reflection" class="common-anchor-header">自我反省</h3><p>此方法將自我反省的概念納入 AI 代理內。那麼，這項技術是如何運作的呢？</p>
+<p>有些最初擷取的 Top-K 文件塊是模棱兩可的，可能無法直接回答使用者的問題。在這種情況下，我們可以進行第二輪反思，以驗證這些文件塊是否能真正回答查詢。</p>
+<p>我們可以使用有效率的反省方法來進行反省，例如自然語言推論 (NLI) 模型或其他工具，例如網際網路搜尋來進行驗證。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This concept of self-reflection has been explored in several papers or projects, including <a href="https://arxiv.org/pdf/2310.11511.pdf">Self-RAG</a>, <a href="https://arxiv.org/pdf/2401.15884.pdf">Corrective RAG</a>, <a href="https://github.com/langchain-ai/langgraph/blob/main/examples/reflexion/reflexion.ipynb">LangGraph</a>, etc.</p>
-<h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">Query Routing with an Agent</h3><p>Sometimes, we don’t have to use a RAG system to answer simple questions as it might result in more misunderstanding and inference from misleading information. In such cases, we can use an agent as a router at the querying stage. This agent assesses whether the query needs to go through the RAG pipeline. If it does, the subsequent RAG pipeline is initiated; otherwise, the LLM directly addresses the query.</p>
+<p>這個自我反省的概念已經在多篇論文或專案中被探討過，包括<a href="https://arxiv.org/pdf/2310.11511.pdf">Self-RAG</a>、<a href="https://arxiv.org/pdf/2401.15884.pdf">Corrective RAG</a>、<a href="https://github.com/langchain-ai/langgraph/blob/main/examples/reflexion/reflexion.ipynb">LangGraph</a> 等。</p>
+<h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">使用代理進行查詢路由</h3><p>有時候，我們不一定要使用 RAG 系統來回答簡單的問題，因為這可能會造成更多的誤解和誤導資訊的推論。在這種情況下，我們可以在查詢階段使用代理作為路由器。這個代理會評估查詢是否需要經過 RAG 管道。如果需要，則啟動後續的 RAG 管道；否則，LLM 直接處理查詢。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
@@ -273,10 +270,10 @@ title: How to Enhance the Performance of Your RAG Pipeline
     <span></span>
   </span>
 </p>
-<p>The agent could take various forms, including an LLM, a small classification model, or even a set of rules.</p>
-<p>By routing queries based on user intent, you can redirect a portion of the queries, leading to a significant boost in response time and a noticeable reduction in unnecessary noise.</p>
-<p>We can extend the query routing technique to other processes within the RAG system, such as determining when to utilize tools like web searches, conducting sub-queries, or searching for images. This approach ensures that each step in the RAG system is optimized based on the specific requirements of the query, leading to more efficient and accurate information retrieval.</p>
-<h2 id="Summary" class="common-anchor-header">Summary<button data-href="#Summary" class="anchor-icon" translate="no">
+<p>代理可以採取各種形式，包括 LLM、小型分類模型，甚至是一組規則。</p>
+<p>透過根據使用者意圖來路由查詢，可以將部分查詢重新導向，從而大幅提升回應時間，並顯著減少不必要的雜訊。</p>
+<p>我們可以將查詢路由技術擴展到 RAG 系統中的其他流程，例如決定何時使用網路搜尋等工具、進行子查詢或搜尋圖片。此方法可確保 RAG 系統中的每個步驟都能根據查詢的特定需求進行最佳化，從而提高資訊檢索的效率與精確度。</p>
+<h2 id="Summary" class="common-anchor-header">總結<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -291,6 +288,6 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>While a vanilla RAG pipeline may appear simple, achieving optimal business performance often requires more sophisticated optimization techniques.</p>
-<p>This article summarizes various popular approaches to enhancing the performance of your RAG applications. We also provided clear illustrations to help you quickly understand these concepts and techniques and expedite their implementation and optimization.</p>
-<p>You can get the simple implementations of the major approaches listed in this article at this <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag">GitHub link</a>.</p>
+    </button></h2><p>雖然一般的 RAG 管道看似簡單，但要達到最佳的業務效能，往往需要更複雜的最佳化技術。</p>
+<p>本文總結了各種常用的方法，以增強 RAG 應用程式的效能。我們也提供了清晰的說明，以協助您快速瞭解這些概念和技術，並加速其實作和最佳化。</p>
+<p>您可以從這個<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag">GitHub 連結</a>取得本文所列主要方法的簡單實作。</p>

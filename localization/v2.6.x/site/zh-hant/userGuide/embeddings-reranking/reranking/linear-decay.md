@@ -101,12 +101,12 @@ beta: Milvus 2.6.x
 <p>上圖顯示線性衰減如何影響票務平台上的活動清單：</p>
 <ul>
 <li><p><code translate="no">origin</code> (當前日期）：當下，相關性處於最大值 (1.0)。</p></li>
-<li><p><code translate="no">offset</code> (1 天)：即時事件視窗」- 所有在隔天內發生的事件都會維持完整的相關性評分 (1.0)，以確保即將發生的事件不會因為微小的時間差異而受到懲罰。</p></li>
+<li><p><code translate="no">offset</code> (1 天)：即時事件視窗」- 所有在隔天內發生的事件都會維持完整的相關性評分 (1.0)，確保即將發生的事件不會因為微小的時間差異而受到懲罰。</p></li>
 <li><p><code translate="no">decay</code> (0.5):刻度距離的分數 - 此參數控制相關性的下降速度。</p></li>
 <li><p><code translate="no">scale</code> (10 天)：相關性下降到衰減值的時間段 - 距離 10 天的事件，其相關性分數會減半 (0.5)。</p></li>
 </ul>
-<p>從直線曲線可以看出，距離約 16 天以上的事件相關性完全為零，完全不會出現在搜尋結果中。這創造了一個明確的界限，確保使用者只能在定義的時間視窗內看到相關的即將發生事件。</p>
-<p>此行為反映了活動規劃的典型運作方式 - 近期的活動最為相關，未來幾週內的活動重要性遞減，而太遠的未來活動 (或已過去的活動) 則完全不該出現。</p>
+<p>從直線曲線可以看出，距離約 16 天以上的事件相關性完全為零，完全不會出現在搜尋結果中。這創造了一個明確的界限，確保使用者只能在定義的時間視窗內看到相關的即將發生的事件。</p>
+<p>此行為反映了活動規劃的典型運作方式 - 近期的活動最為相關，未來幾週內的活動重要性遞減，而太遠的未來活動 (或已過去的活動) 則完全不應該出現。</p>
 <h2 id="Formula" class="common-anchor-header">計算公式<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,7 +154,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>在使用衰減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於衰減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker Tutorial</a>。</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>在您的資料集中設定了數值欄位 (在本範例中，<code translate="no">event_date</code> ，即從現在開始的秒數)，請建立線性衰減排名器：</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>在您的資料集中設定了數值欄位 (在本範例中，<code translate="no">event_date</code> ，即從現在開始的秒數)，請建立一個線性衰減排名器：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> time
 
@@ -176,7 +176,7 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">套用到標準向量搜尋</h3><p>定義衰落排序器之後，您可以將它傳給<code translate="no">ranker</code> 參數，在搜尋操作中應用它：</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">套用到標準向量搜尋</h3><p>定義衰減排序器後，您可以將它傳給<code translate="no">ranker</code> 參數，在搜尋作業中應用它：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,

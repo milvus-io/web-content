@@ -155,7 +155,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本節概述用於建立索引和在索引上執行搜尋的參數。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">建立索引</a>時可以在<code translate="no">params</code> 中設定的參數。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th></th>

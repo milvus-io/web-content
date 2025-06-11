@@ -2,9 +2,9 @@
 id: configure_quotaandlimits.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure quotaAndLimits for Milvus.
+summary: 瞭解如何為 Milvus 設定 quotaAndLimits。
 ---
-<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">quotaAndLimits-related Configurations<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">配額和限制相關配置<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,21 +19,21 @@ summary: Learn how to configure quotaAndLimits for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>QuotaConfig, configurations of Milvus quota and limits.</p>
-<p>By default, we enable:</p>
+    </button></h1><p>QuotaConfig, Milvus 配額和限制的設定。</p>
+<p>預設啟用</p>
 <ol>
-<li><p>TT protection;</p></li>
-<li><p>Memory protection.</p></li>
-<li><p>Disk quota protection.</p></li>
+<li><p>TT 保護；</p></li>
+<li><p>記憶體保護。</p></li>
+<li><p>磁碟配額保護。</p></li>
 </ol>
-<p>You can enable:</p>
+<p>您可以啟用</p>
 <ol>
-<li><p>DML throughput limitation;</p></li>
-<li><p>DDL, DQL qps/rps limitation;</p></li>
-<li><p>DQL Queue length/latency protection;</p></li>
-<li><p>DQL result rate protection;</p></li>
+<li><p>DML 吞吐量限制；</p></li>
+<li><p>DDL, DQL qps/rps 限制；</p></li>
+<li><p>DQL 佇列長度/延遲保護；</p></li>
+<li><p>DQL 結果率保護；</p></li>
 </ol>
-<p>If necessary, you can also manually force to deny RW requests.</p>
+<p>必要時，您也可以手動強制拒絕 RW 請求。</p>
 <h2 id="quotaAndLimitsenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.enabled</code><button data-href="#quotaAndLimitsenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,14 +52,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        `true` to enable quota and limits, `false` to disable.      </td>
-      <td>true</td>
+      <td>        `true` 表示啟用配額和限制，`false` 表示停用。      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -81,16 +81,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.quotaCenterCollectInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>quotaCenterCollectInterval is the time interval that quotaCenter</li>      
-        <li>collects metrics from Proxies, Query cluster and Data cluster.</li>      
-        <li>seconds, (0 ~ 65536)</li>      </td>
+        <li>quotaCenterCollectInterval 是 quotaCenter 從代理、查詢群集和資料群集收集度量的時間間隔。</li>      
+        <li>從代理、查詢群集和資料群集收集度量資訊的時間間隔。</li>      
+        <li>秒，(0 ~ 65536)</li>      </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -113,13 +113,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.allocRetryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry times when delete alloc forward data from rate limit failed      </td>
+      <td>        從速率限制刪除分配轉送資料失敗時的重試次數      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -142,13 +142,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.allocWaitInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry wait duration when delete alloc forward data rate failed, in millisecond      </td>
+      <td>        刪除速率限制中的分配轉送資料失敗時的重試等待時間，以毫秒為單位      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -171,14 +171,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.complexDeleteLimitEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether complex delete check forward data by limiter      </td>
-      <td>false</td>
+      <td>        是否使用限制器複合刪除檢查前向資料      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -200,13 +200,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxCollectionNumPerDB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of collections per database.      </td>
+      <td>        每個資料庫的最大集合數。      </td>
       <td>65536</td>
     </tr>
   </tbody>
@@ -229,13 +229,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxInsertSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum size of a single insert request, in bytes, -1 means no limit      </td>
+      <td>        單次插入請求的最大大小，以位元組表示，-1 表示無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -258,13 +258,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxResourceGroupNumOfQueryNode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum number of resource groups of query nodes      </td>
+      <td>        查詢節點資源群組的最大數目      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -287,13 +287,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxGroupSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum size for one single group when doing search group by      </td>
+      <td>        以群組搜尋時，單一群組的最大大小      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -316,14 +316,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DDL request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        是否啟用 DDL 請求節流。      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -345,16 +345,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.collectionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of collection-related DDL requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 collection-related DDL requests per second, including collection creation requests, collection drop requests, collection load requests, and collection release requests.</li>      
-        <li>To use this setting, set quotaAndLimits.ddl.enabled to true at the same time.</li>      </td>
+        <li>每秒處理集合相關 DDL 請求的最大數目。</li>      
+        <li>將此項目設定為 10 表示 Milvus 每秒處理不超過 10 個與集合相關的 DDL 請求，包括集合建立請求、集合刪除請求、集合載入請求，以及集合釋放請求。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.ddl.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -377,16 +377,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.partitionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of partition-related DDL requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 partition-related requests per second, including partition creation requests, partition drop requests, partition load requests, and partition release requests.</li>      
-        <li>To use this setting, set quotaAndLimits.ddl.enabled to true at the same time.</li>      </td>
+        <li>每秒與分割區相關的 DDL 請求的最大數目。</li>      
+        <li>將此項目設定為 10 表示 Milvus 每秒處理的分割區相關請求不超過 10 個，包括分割區建立請求、分割區移除請求、分割區載入請求及分割區釋放請求。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.ddl.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -409,13 +409,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.db.collectionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level , default no limit, rate for CreateCollection, DropCollection, LoadCollection, ReleaseCollection      </td>
+      <td>        db 層級的 qps，預設無限制，用於 CreateCollection、DropCollection、LoadCollection、ReleaseCollection 的速率      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -438,13 +438,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.db.partitionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for CreatePartition, DropPartition, LoadPartition, ReleasePartition      </td>
+      <td>        db 層級的 qps，預設無限制，CreatePartition、DropPartition、LoadPartition、ReleasePartition 的速率      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -467,14 +467,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether index-related request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        是否啟用索引相關請求節流。      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -496,16 +496,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of index-related requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 partition-related requests per second, including index creation requests and index drop requests.</li>      
-        <li>To use this setting, set quotaAndLimits.indexRate.enabled to true at the same time.</li>      </td>
+        <li>每秒與索引相關的最大請求數。</li>      
+        <li>將此項目設定為 10 表示 Milvus 每秒處理不超過 10 個分割區相關的請求，包括索引建立請求和索引丟棄請求。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.indexRate.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -528,13 +528,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for CreateIndex, DropIndex      </td>
+      <td>        db 層級的 qps，預設無限制，CreateIndex、DropIndex 的速率      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -557,14 +557,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether flush request throttling is enabled.      </td>
-      <td>true</td>
+      <td>        是否啟用刷新請求節流。      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -586,16 +586,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of flush requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 flush requests per second.</li>      
-        <li>To use this setting, set quotaAndLimits.flushRate.enabled to true at the same time.</li>      </td>
+        <li>每秒刷新請求的最大數目。</li>      
+        <li>將此項目設定為 10 表示 Milvus 每秒處理的刷新請求不超過 10 個。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.flushRate.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -618,13 +618,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit, rate for flush at collection level.      </td>
+      <td>        qps，預設無限制，在集合層級的刷新率。      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -647,13 +647,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for flush      </td>
+      <td>        db 層級的 qps，預設無限制，用於沖洗的速率      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -676,14 +676,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether manual compaction request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        是否啟用手動壓縮請求節流。      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -705,16 +705,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of manual-compaction requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 manual-compaction requests per second.</li>      
-        <li>To use this setting, set quotaAndLimits.compaction.enabled to true at the same time.</li>      </td>
+        <li>每秒手動壓縮請求的最大數目。</li>      
+        <li>將此項目設定為 10 表示 Milvus 每秒處理的手動壓縮請求不超過 10 個。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.compaction.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -737,13 +737,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for manualCompaction      </td>
+      <td>        db 層級的 qps，預設無限制，手動壓縮的速率      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -766,14 +766,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DML request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        是否啟用 DML 請求節流。      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -795,16 +795,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data insertion rate per second.</li>      
-        <li>Setting this item to 5 indicates that Milvus only allows data insertion at the rate of 5 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>每秒最高資料插入速率。</li>      
+        <li>將此項目設定為 5 表示 Milvus 只允許以每秒 5 MB 的速率插入資料。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.dml.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -827,13 +827,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -856,16 +856,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data insertion rate per collection per second.</li>      
-        <li>Setting this item to 5 indicates that Milvus only allows data insertion to any collection at the rate of 5 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>每秒每個資料集的最高資料插入速率。</li>      
+        <li>將此項目設定為 5 表示 Milvus 只允許以每秒 5 MB 的速率插入資料到任何資料集中。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.dml.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -888,13 +888,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -917,13 +917,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/秒，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -946,13 +946,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/秒，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -975,13 +975,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/秒，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1004,13 +1004,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/秒，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1033,16 +1033,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data deletion rate per second.</li>      
-        <li>Setting this item to 0.1 indicates that Milvus only allows data deletion at the rate of 0.1 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>每秒最高資料刪除速率。</li>      
+        <li>將此項目設定為 0.1 表示 Milvus 只允許以每秒 0.1 MB 的速率刪除資料。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.dml.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1065,13 +1065,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1094,16 +1094,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data deletion rate per second.</li>      
-        <li>Setting this item to 0.1 indicates that Milvus only allows data deletion from any collection at the rate of 0.1 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>每秒最高資料刪除速率。</li>      
+        <li>將此項目設定為 0.1 表示 Milvus 只允許從任何資料集中以每秒 0.1 MB 的速率刪除資料。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.dml.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1126,13 +1126,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1155,13 +1155,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit bulkLoad rate      </td>
+      <td>        MB/s，預設無限制，尚未支援。TODO: 限制 bulkLoad 速率      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1184,13 +1184,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit db bulkLoad rate      </td>
+      <td>        MB/s, 預設無限制，尚未支援。TODO: limit db bulkLoad rate    </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1213,13 +1213,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit collection bulkLoad rate      </td>
+      <td>        MB/s, 預設無限制，尚未支援。TODO: 限制 collection bulkLoad rate    </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1242,13 +1242,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit partition bulkLoad rate      </td>
+      <td>        MB/s, 預設無限制，尚未支援。TODO: 限制分割區的大量載入速率      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1271,14 +1271,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DQL request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        是否啟用 DQL 請求節流。      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -1300,16 +1300,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of vectors to search per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows searching 100 vectors per second no matter whether these 100 vectors are all in one search or scattered across multiple searches.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>每秒搜尋向量的最大數量。</li>      
+        <li>將此項目設定為 100 表示 Milvus 每秒只允許搜尋 100 個向量，不論這 100 個向量是全部在一次搜尋中，或是分散在多次搜尋中。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.dql.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1332,13 +1332,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        vps (vectors per second), default no limit      </td>
+      <td>        vps（每秒向量數量），預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1361,16 +1361,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of vectors to search per collection per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows searching 100 vectors per second per collection no matter whether these 100 vectors are all in one search or scattered across multiple searches.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>每秒每個集合搜尋的向量數量上限。</li>      
+        <li>將此項目設定為 100 表示 Milvus 每秒只允許每個集合搜尋 100 個向量，不論這 100 個向量是全部在一次搜尋中，或是分散在多次搜尋中。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.dql.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1393,13 +1393,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        vps (vectors per second), default no limit      </td>
+      <td>        vps（每秒向量數量），預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1422,16 +1422,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of queries per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows 100 queries per second.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>每秒最大查詢次數。</li>      
+        <li>將此項目設定為 100 表示 Milvus 每秒只允許 100 次查詢。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.dql.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1454,13 +1454,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit      </td>
+      <td>        qps，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1483,16 +1483,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of queries per collection per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows 100 queries per collection per second.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>每秒每個集合的最大查詢次數。</li>      
+        <li>將此項目設定為 100 表示 Milvus 每秒只允許針對每個集合進行 100 次查詢。</li>      
+        <li>若要使用此設定，請同時設定 quotaAndLimits.dql.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1515,13 +1515,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit      </td>
+      <td>        qps，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1544,15 +1544,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.forceDeny">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false means dml requests are allowed (except for some</li>      
-        <li>specific conditions, such as memory of nodes to water marker), true means always reject all dml requests.</li>      </td>
+        <li>forceDeny false 表示允許 dml 請求 (除了某些特定的條件，例如</li>      
+        <li>特定條件，例如記憶體節點到水標記），true 表示永遠拒絕所有 dml 請求。</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1575,17 +1575,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxTimeTickDelay indicates the backpressure for DML Operations.</li>      
-        <li>DML rates would be reduced according to the ratio of time tick delay to maxTimeTickDelay,</li>      
-        <li>if time tick delay is greater than maxTimeTickDelay, all DML requests would be rejected.</li>      
-        <li>seconds</li>      </td>
+        <li>maxTimeTickDelay 表示 DML 作業的背壓。</li>      
+        <li>DML 速率會根據 time tick delay 與 maxTimeTickDelay 的比率降低、</li>      
+        <li>如果 time tick delay 大於 maxTimeTickDelay，所有 DML 請求都會被拒絕。</li>      
+        <li>秒</li>      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -1608,17 +1608,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>When memory usage > memoryHighWaterLevel, all dml requests would be rejected;</li>      
-        <li>When memoryLowWaterLevel < memory usage < memoryHighWaterLevel, reduce the dml rate;</li>      
-        <li>When memory usage < memoryLowWaterLevel, no action.</li>      </td>
-      <td>true</td>
+        <li>當記憶體使用量 &gt; memoryHighWaterLevel 時，所有 DML 請求都會被拒絕；</li>      
+        <li>當 memoryLowWaterLevel &lt; 記憶體使用量 &lt; memoryHighWaterLevel 時，降低 dml 速率；</li>      
+        <li>當記憶體使用量 &lt; memoryLowWaterLevel 時，不採取任何動作。</li>      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -1640,13 +1640,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryLowWaterLevel in DataNodes      </td>
+      <td>        (0，1]，資料節點中的 memoryLowWaterLevel      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1669,13 +1669,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryHighWaterLevel in DataNodes      </td>
+      <td>        (0,1]、數據節點中的記憶體高水位值      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1698,13 +1698,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryLowWaterLevel in QueryNodes      </td>
+      <td>        (0,1]，查詢節點中的記憶體低水準      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1727,13 +1727,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryHighWaterLevel in QueryNodes      </td>
+      <td>        (0,1]、查詢節點中的記憶體高水位值      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1756,17 +1756,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.growingSegmentsSizeProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>No action will be taken if the growing segments size is less than the low watermark.</li>      
-        <li>When the growing segments size exceeds the low watermark, the dml rate will be reduced,</li>      
-        <li>but the rate will not be lower than minRateRatio * dmlRate.</li>      </td>
-      <td>false</td>
+        <li>如果成長中的區段大小小於低水準，則不會採取任何動作。</li>      
+        <li>如果成長中的區段大小超過低水準，dml 的速率會降低、</li>      
+        <li>但速率不會低於 minRateRatio * dmlRate。</li>      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -1788,14 +1788,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        When the total file size of object storage is greater than `diskQuota`, all dml requests would be rejected;      </td>
-      <td>true</td>
+      <td>        當物件儲存的檔案總大小大於 `diskQuota` 時，所有的 dml 請求都會被拒絕；      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -1817,13 +1817,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuota">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB，(0, +inf)，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1846,13 +1846,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerDB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB，(0，+inf)，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1875,13 +1875,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB，(0，+inf)，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1904,13 +1904,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerPartition">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB，(0，+inf)，預設無限制      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1933,14 +1933,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch to enable l0 segment row count quota      </td>
-      <td>false</td>
+      <td>        切換啟用 l0 區段行數配額      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -1962,13 +1962,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.lowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level      </td>
+      <td>        l0 區段行數配額，低水位      </td>
       <td>30000000</td>
     </tr>
   </tbody>
@@ -1991,13 +1991,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.highWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, high water level      </td>
+      <td>        l0 區段行數配額，高水位      </td>
       <td>50000000</td>
     </tr>
   </tbody>
@@ -2020,14 +2020,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch to enable delete buffer row count quota      </td>
-      <td>false</td>
+      <td>        開啟刪除緩衝區行數配額的開關      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -2049,13 +2049,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.lowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        delete buffer row count quota, low water level      </td>
+      <td>        刪除緩衝區行數配額，低水位      </td>
       <td>32768</td>
     </tr>
   </tbody>
@@ -2078,13 +2078,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.highWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        delete buffer row count quota, high water level      </td>
+      <td>        刪除緩衝區行數配額，高水位      </td>
       <td>65536</td>
     </tr>
   </tbody>
@@ -2107,14 +2107,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch to enable delete buffer size quota      </td>
-      <td>false</td>
+      <td>        開啟刪除緩衝區大小配額的開關      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -2136,13 +2136,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.lowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        delete buffer size quota, low water level      </td>
+      <td>        刪除緩衝區大小配額，低水位      </td>
       <td>134217728</td>
     </tr>
   </tbody>
@@ -2165,13 +2165,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.highWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        delete buffer size quota, high water level      </td>
+      <td>        刪除緩衝區大小配額，高水位      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2194,15 +2194,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.forceDeny">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false means dql requests are allowed (except for some</li>      
-        <li>specific conditions, such as collection has been dropped), true means always reject all dql requests.</li>      </td>
+        <li>forceDeny false 表示允許 dql 請求 (除了某些特定情況，例如</li>      
+        <li>true表示永遠拒絕所有 dql 請求。</li>      </td>
       <td>false</td>
     </tr>
   </tbody>

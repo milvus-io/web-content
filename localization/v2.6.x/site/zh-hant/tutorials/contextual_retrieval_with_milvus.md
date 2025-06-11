@@ -1,17 +1,14 @@
 ---
 id: contextual_retrieval_with_milvus.md
 summary: >-
-  Contextal Retrieval is an advanced retrieval method proposed by Anthropic to
-  address the issue of semantic isolation of chunks, which arises in current
-  Retrieval-Augmented Generation (RAG) solutions. In the current practical RAG
-  paradigm, documents are divided into several chunks, and a vector database is
-  used to search for the query, retrieving the most relevant chunks. An LLM then
-  responds to the query using these retrieved chunks. However, this chunking
-  process can result in the loss of contextual information, making it difficult
-  for the retriever to determine relevance.
-title: Contextual Retrieval with Milvus
+  上下文檢索（Contextal Retrieval）是 Anthropic
+  提出的一種先進檢索方法，用以解決目前的檢索增強世代（Retrieval-Augmented
+  Generation，RAG）解決方案中出現的文塊語意隔離（semantic isolation of chunks）問題。在目前實用的 RAG
+  范例中，文件會被分割成幾個區塊，並使用向量資料庫來搜尋查詢，擷取最相關的區塊。之後，LLM
+  會使用這些擷取的分塊來回應查詢。然而，這種分塊過程可能會導致上下文資訊的遺失，使得擷取器難以判斷相關性。
+title: 使用 Milvus 進行上下文檢索
 ---
-<h1 id="Contextual-Retrieval-with-Milvus" class="common-anchor-header">Contextual Retrieval with Milvus<button data-href="#Contextual-Retrieval-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Contextual-Retrieval-with-Milvus" class="common-anchor-header">使用 Milvus 進行上下文檢索<button data-href="#Contextual-Retrieval-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,19 +26,16 @@ title: Contextual Retrieval with Milvus
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/contextual_retrieval_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/contextual_retrieval_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/pics/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
-    <span>image</span>
-  </span>
-
-<a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrieval</a> is an advanced retrieval method proposed by Anthropic to address the issue of semantic isolation of chunks, which arises in current Retrieval-Augmented Generation (RAG) solutions. In the current practical RAG paradigm, documents are divided into several chunks, and a vector database is used to search for the query, retrieving the most relevant chunks. An LLM then responds to the query using these retrieved chunks. However, this chunking process can result in the loss of contextual information, making it difficult for the retriever to determine relevance.</p>
-<p>Contextual Retrieval improves traditional retrieval systems by adding relevant context to each document chunk before embedding or indexing, boosting accuracy and reducing retrieval errors. Combined with techniques like hybrid retrieval and reranking, it enhances Retrieval-Augmented Generation (RAG) systems, especially for large knowledge bases. Additionally, it offers a cost-effective solution when paired with prompt caching, significantly reducing latency and operational costs, with contextualized chunks costing approximately $1.02 per million document tokens. This makes it a scalable and efficient approach for handling large knowledge bases. Anthropic’s solution shows two insightful aspects:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/pics/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
+   </span> <span class="img-wrapper"> <span>image</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrieval</a>是 Anthropic 提出的進階檢索方法，用以解決目前的 Retrieval-Augmented Generation (RAG) 解決方案中出現的語意分離問題 (semantic isolation of chunks)。在目前實用的 RAG 范例中，文件會被分割成幾個區塊，並使用向量資料庫來搜尋查詢，擷取最相關的區塊。之後，LLM 會使用這些擷取的分塊來回應查詢。然而，這個分塊過程可能會造成上下文資訊的遺失，使得擷取者難以判斷相關性。</p>
+<p>上下文檢索改善了傳統的檢索系統，在嵌入或編入索引之前，先將相關上下文加入每個文件塊，以提高準確性並減少檢索錯誤。結合混合檢索和重排等技術，它可以增強檢索-增強生成 (RAG) 系統，特別是針對大型知識庫。此外，如果搭配即時快取，它還能提供具成本效益的解決方案，大幅降低延遲時間和作業成本，每百萬個文件標記的上下文區塊成本約為 1.02 美元。這使其成為處理大型知識庫的可擴充且有效率的方法。Anthropic 的解決方案展現出兩項精闢之處：</p>
 <ul>
-<li><code translate="no">Document Enhancement</code>: Query rewriting is a crucial technique in modern information retrieval, often using auxiliary information to make the query more informative. Similarly, to achieve better performance in RAG, preprocessing documents with an LLM (e.g., cleaning the data source, complementing lost information, summarizing, etc.) before indexing can significantly improve the chances of retrieving relevant documents. In other words, this preprocessing step helps bring the documents closer to the queries in terms of relevance.</li>
-<li><code translate="no">Low-Cost Processing by Caching Long Context</code>: One common concern when using LLMs to process documents is the cost. The KVCache is a popular solution that allows reuse of intermediate results for the same preceding context. While most hosted LLM vendors make this feature transparent to user, Anthropic gives users control over the caching process. When a cache hit occurs, most computations can be saved (this is common when the long context remains the same, but the instruction for each query changes). For more details, click <a href="https://www.anthropic.com/news/prompt-caching">here</a>.</li>
+<li><code translate="no">Document Enhancement</code>:查詢重寫（Query rewriting）是現代資訊檢索的重要技術，通常會使用輔助資訊來使查詢內容更豐富。同樣地，為了在 RAG 中達到更好的效能，在索引之前使用 LLM 對文件進行預處理（例如清理資料來源、補充遺失的資訊、總結等），可以大幅提高檢索到相關文件的機會。換句話說，這個預處理步驟有助於使文件在相關性方面更接近查詢。</li>
+<li><code translate="no">Low-Cost Processing by Caching Long Context</code>:使用 LLM 處理文件時，一個常見的顧慮是成本問題。KVCache 是一種流行的解決方案，它允許重覆使用相同前文的中間結果。雖然大多數主機 LLM 供應商會讓這項功能對使用者透明，但 Anthropic 卻讓使用者可以控制快取過程。當快取命中時，大部分的計算都可以被儲存（這在長上下文保持相同，但每個查詢的指令改變時很常見）。如需詳細資訊，請點<a href="https://www.anthropic.com/news/prompt-caching">選此</a>處。</li>
 </ul>
-<p>In this notebook, we will demonstrate how to perform contextual retrieval using Milvus with an LLM, combining dense-sparse hybrid retrieval and a reranker to create a progressively more powerful retrieval system. The data and experimental setup are based on the <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">contextual retrieval</a>.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>在本筆記簿中，我們將示範如何使用 Milvus 與 LLM 執行上下文檢索，結合密集-稀疏混合檢索與 reranker 來建立一個逐步強大的檢索系統。資料和實驗設定都是以<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">上下文檢索</a>為基礎。</p>
+<h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,15 +50,15 @@ title: Contextual Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Install Dependencies</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">安裝相依性</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install anthropic</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的依賴項目，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
-<p>You will need API keys from Cohere, Voyage, and Anthropic to run the code.</p>
-<h2 id="Download-Data" class="common-anchor-header">Download Data<button data-href="#Download-Data" class="anchor-icon" translate="no">
+<p>您需要 Cohere、Voyage 和 Anthropic 的 API 金鑰才能執行程式碼。</p>
+<h2 id="Download-Data" class="common-anchor-header">下載資料<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,11 +73,11 @@ title: Contextual Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following command will download the example data used in original Anthropic <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">demo</a>.</p>
+    </button></h2><p>以下指令將下載原始 Anthropic<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">演示</a>中使用的範例資料。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-Retriever" class="common-anchor-header">Define Retriever<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
+<h2 id="Define-Retriever" class="common-anchor-header">定義 Retriever<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,7 +92,7 @@ title: Contextual Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This class is designed to be flexible, allowing you to choose between different retrieval modes based on your needs. By specifying options in the initialization method, you can determine whether to use contextual retrieval, hybrid search (combining dense and sparse retrieval methods), or a reranker for enhanced results.</p>
+    </button></h2><p>這個類別的設計非常靈活，讓您可以根據需求選擇不同的擷取模式。透過在初始化方法中指定選項，您可以決定是否使用上下文擷取、混合搜尋（結合密集與稀疏的擷取方法），或是使用 reranker 來強化結果。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CohereRerankFunction
@@ -442,7 +436,7 @@ title: Contextual Retrieval with Milvus
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Total Score: <span class="hljs-subst">{results[<span class="hljs-string">&#x27;average_score&#x27;</span>]}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Total queries: <span class="hljs-subst">{results[<span class="hljs-string">&#x27;total_queries&#x27;</span>]}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Now you need to initialize these models for the following experiments. You can easily switch to other models using the PyMilvus model library.</p>
+<p>現在您需要為接下來的實驗初始化這些模型。您可以使用 PyMilvus 模型庫輕鬆切換到其他模型。</p>
 <pre><code translate="no" class="language-python">dense_ef = VoyageEmbeddingFunction(api_key=<span class="hljs-string">&quot;your-voyage-api-key&quot;</span>, model_name=<span class="hljs-string">&quot;voyage-2&quot;</span>)
 sparse_ef = BGEM3EmbeddingFunction()
 cohere_rf = CohereRerankFunction(api_key=<span class="hljs-string">&quot;your-cohere-api-key&quot;</span>)
@@ -453,7 +447,7 @@ cohere_rf = CohereRerankFunction(api_key=<span class="hljs-string">&quot;your-co
 <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:
     dataset = json.load(f)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Experiment-I-Standard-Retrieval" class="common-anchor-header">Experiment I: Standard Retrieval<button data-href="#Experiment-I-Standard-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Experiment-I-Standard-Retrieval" class="common-anchor-header">實驗一：標準檢索<button data-href="#Experiment-I-Standard-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -468,7 +462,7 @@ cohere_rf = CohereRerankFunction(api_key=<span class="hljs-string">&quot;your-co
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Standard retrieval uses only dense embeddings to retrieve related documents. In this experiment, we will use Pass@5 to reproduce the results from the original repo.</p>
+    </button></h2><p>標準擷取只使用密集內嵌來擷取相關的文件。在這個實驗中，我們會使用 Pass@5 來重現原始 repo 的結果。</p>
 <pre><code translate="no" class="language-python">standard_retriever = MilvusContextualRetriever(
     uri=<span class="hljs-string">&quot;standard.db&quot;</span>, collection_name=<span class="hljs-string">&quot;standard&quot;</span>, dense_embedding_function=dense_ef
 )
@@ -495,7 +489,7 @@ Pass@5: 80.92%
 Total Score: 0.8091877880184332
 Total queries: 248
 </code></pre>
-<h2 id="Experiment-II-Hybrid-Retrieval" class="common-anchor-header">Experiment II: Hybrid Retrieval<button data-href="#Experiment-II-Hybrid-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Experiment-II-Hybrid-Retrieval" class="common-anchor-header">實驗二：混合式檢索<button data-href="#Experiment-II-Hybrid-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -510,7 +504,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that we’ve obtained promising results with the Voyage embedding, we will move on to performing hybrid retrieval using the BGE-M3 model which generates powerful sparse embeddings. The results from dense retrieval and sparse retrieval will be combined using the Reciprocal Rank Fusion (RRF) method to produce a hybrid result.</p>
+    </button></h2><p>既然我們使用 Voyage embedding 已經獲得了令人滿意的結果，我們將繼續使用 BGE-M3 模型進行混合檢索，該模型會產生強大的稀疏嵌入。密集檢索與稀疏檢索的結果將使用 Reciprocal Rank Fusion (RRF) 方法結合，產生混合結果。</p>
 <pre><code translate="no" class="language-python">hybrid_retriever = MilvusContextualRetriever(
     uri=<span class="hljs-string">&quot;hybrid.db&quot;</span>,
     collection_name=<span class="hljs-string">&quot;hybrid&quot;</span>,
@@ -541,7 +535,7 @@ Pass@5: 84.69%
 Total Score: 0.8469182027649771
 Total queries: 248
 </code></pre>
-<h2 id="Experiment-III-Contextual-Retrieval" class="common-anchor-header">Experiment III: Contextual Retrieval<button data-href="#Experiment-III-Contextual-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Experiment-III-Contextual-Retrieval" class="common-anchor-header">實驗三：內容檢索<button data-href="#Experiment-III-Contextual-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -556,7 +550,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Hybrid retrieval shows an improvement, but the results can be further enhanced by applying a contextual retrieval method. To achieve this, we will use Anthropic’s language model to prepend the context from whole document for each chunk.</p>
+    </button></h2><p>混合式檢索顯示出了改進，但是應用上下文檢索方法可以進一步增強檢索結果。為了達到這個目的，我們會使用 Anthropic 的語言模型，為每個 chunk 預先加入整個文件的上下文。</p>
 <pre><code translate="no" class="language-python">anthropic_client = anthropic.Anthropic(
     api_key=<span class="hljs-string">&quot;your-anthropic-api-key&quot;</span>,
 )
@@ -594,7 +588,7 @@ Pass@5: 87.14%
 Total Score: 0.8713517665130568
 Total queries: 248 
 </code></pre>
-<h2 id="Experiment-IV-Contextual-Retrieval-with-Reranker" class="common-anchor-header">Experiment IV: Contextual Retrieval with Reranker<button data-href="#Experiment-IV-Contextual-Retrieval-with-Reranker" class="anchor-icon" translate="no">
+<h2 id="Experiment-IV-Contextual-Retrieval-with-Reranker" class="common-anchor-header">實驗四：使用 Reranker 進行上下文檢索<button data-href="#Experiment-IV-Contextual-Retrieval-with-Reranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -609,7 +603,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The results can be further improved by adding a Cohere reranker. Without initializing a new retriever with reranker separately, we can simply configure the existing retriever to use the reranker for enhanced performance.</p>
+    </button></h2><p>加入 Cohere reranker 可以進一步改善結果。我們不需要另外初始化一個帶有 reranker 的新retriever，只要簡單地設定現有的 retriever 使用 reranker 就可以增強效能。</p>
 <pre><code translate="no" class="language-python">contextual_retriever.use_reranker = <span class="hljs-literal">True</span>
 contextual_retriever.rerank_function = cohere_rf
 <button class="copy-code-btn"></button></code></pre>
@@ -620,4 +614,4 @@ Pass@5: 90.91%
 Total Score: 0.9090821812596005
 Total queries: 248
 </code></pre>
-<p>We have demonstrated several methods to improve retrieval performance. With more ad-hoc design tailored to the scenario, contextual retrieval shows significant potential to preprocess documents at a low cost, leading to a better RAG system.</p>
+<p>我們已經展示了幾種改善擷取效能的方法。透過更多針對情境的臨時設計，情境擷取顯示出以低成本預先處理文件的巨大潛力，進而產生更好的 RAG 系統。</p>

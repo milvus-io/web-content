@@ -1,12 +1,9 @@
 ---
 id: integrate_with_hugging-face.md
-summary: >-
-  This tutorial shows how to build a question answering system using Hugging
-  Face as the data loader & embedding generator for data processing and Milvus
-  as the vector database for semantic search.
-title: Question Answering Using Milvus and Hugging Face
+summary: 本教學展示如何使用 Hugging Face 作為資料處理的資料載入器與嵌入產生器，以及 Milvus 作為語意搜尋的向量資料庫，來建立一個問題回答系統。
+title: 使用 Milvus 和擁抱臉回答問題
 ---
-<h1 id="Question-Answering-Using-Milvus-and-Hugging-Face" class="common-anchor-header">Question Answering Using Milvus and Hugging Face<button data-href="#Question-Answering-Using-Milvus-and-Hugging-Face" class="anchor-icon" translate="no">
+<h1 id="Question-Answering-Using-Milvus-and-Hugging-Face" class="common-anchor-header">使用 Milvus 和擁抱臉回答問題<button data-href="#Question-Answering-Using-Milvus-and-Hugging-Face" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +20,9 @@ title: Question Answering Using Milvus and Hugging Face
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>A question answering system based on semantic search works by finding the most similar question from a dataset of question-answer pairs for a given query question. Once the most similar question is identified, the corresponding answer from the dataset is considered as the answer for the query. This approach relies on semantic similarity measures to determine the similarity between questions and retrieve relevant answers.</p>
-<p>This tutorial shows how to build a question answering system using <a href="https://huggingface.co">Hugging Face</a> as the data loader & embedding generator for data processing and <a href="https://milvus.io">Milvus</a> as the vector database for semantic search.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<p>基於語意搜尋的問題回答系統的工作方式，是針對給定的查詢問題，從問答對資料集中找出最相似的問題。一旦找出最相似的問題，資料集中相應的答案就會被視為查詢的答案。此方法依賴語意相似性量測來判斷問題之間的相似性，並擷取相關的答案。</p>
+<p>本教學說明如何使用<a href="https://huggingface.co">Hugging Face</a>作為資料載入與嵌入產生器來處理資料，並使用<a href="https://milvus.io">Milvus</a>作為向量資料庫來進行語意搜尋，以建立一個問題回答系統。</p>
+<h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,18 +37,18 @@ title: Question Answering Using Milvus and Hugging Face
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You need to make sure all required dependencies are installed:</p>
+    </button></h2><p>您需要確認所有所需的相依性都已安裝：</p>
 <ul>
-<li><code translate="no">pymilvus</code>: a python package works with the vector database service powered by Milvus or Zilliz Cloud.</li>
-<li><code translate="no">datasets</code>, <code translate="no">transformers</code>: Hugging Face packages manage data and utilize models.</li>
-<li><code translate="no">torch</code>: a powerful library provides efficient tensor computation and deep learning tools.</li>
+<li><code translate="no">pymilvus</code>: python 套件可與 Milvus 或 Zilliz Cloud 所提供的向量資料庫服務搭配使用。</li>
+<li><code translate="no">datasets</code>,<code translate="no">transformers</code>: Hugging Face 套件可管理資料並運用模型。</li>
+<li><code translate="no">torch</code>：一個功能強大的函式庫提供高效的張量計算和深度學習工具。</li>
 </ul>
 <pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時間</strong>。(按一下螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
-<h2 id="Prepare-data" class="common-anchor-header">Prepare data<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+<h2 id="Prepare-data" class="common-anchor-header">準備資料<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,7 +63,7 @@ title: Question Answering Using Milvus and Hugging Face
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we will load example question-answer pairs from the Hugging Face Datasets. As a demo, we only take partial data from the validation split of <a href="https://huggingface.co/datasets/rajpurkar/squad">SQuAD</a>.</p>
+    </button></h2><p>在本節中，我們將載入擁抱臉資料集中的範例問題-答案對。作為示範，我們只從<a href="https://huggingface.co/datasets/rajpurkar/squad">SQuAD</a> 的驗證分割中抽取部分資料。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 
 
@@ -90,7 +87,7 @@ data = data.<span class="hljs-built_in">map</span>(
     num_rows: 11
 })
 </code></pre>
-<p>To generate embeddings for questions, you are able to select a text embedding model from Hugging Face Models. In this tutorial, we will use a small sentencce embedding model <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a> as example.</p>
+<p>要產生問題的嵌入模型，您可以從 Hugging Face Models 中選擇一個文字嵌入模型。在本教程中，我們將以一個小型的句子嵌入模型<a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a>為例。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> transformers <span class="hljs-keyword">import</span> AutoTokenizer, AutoModel
 <span class="hljs-keyword">import</span> torch
 
@@ -134,7 +131,7 @@ model = AutoModel.from_pretrained(MODEL)
 data = data.<span class="hljs-built_in">map</span>(encode_text, batched=<span class="hljs-literal">True</span>, batch_size=INFERENCE_BATCH_SIZE)
 data_list = data.to_list()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">插入資料<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,8 +146,8 @@ data_list = data.to_list()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we have question-answer pairs ready with question embeddings. The next step is to insert them into the vector database.</p>
-<p>We will first need to connect to Milvus service and create a Milvus collection.</p>
+    </button></h2><p>現在我們已經準備好問題嵌入的問題-答案對。下一步就是將它們插入向量資料庫。</p>
+<p>我們首先需要連線到 Milvus 服務，並建立一個 Milvus 套件。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 
@@ -171,21 +168,21 @@ milvus_client.create_collection(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>至於<code translate="no">MilvusClient</code> 的參數：</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>將<code translate="no">uri</code> 設定為本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
+<li>如果您有大規模的資料，您可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器的 uri，例如<code translate="no">http://localhost:19530</code> ，作為您的<code translate="no">uri</code> 。</li>
+<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務），請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，與 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>對應。</li>
 </ul>
 </div>
-<p>Insert all data into the collection:</p>
+<p>將所有資料插入收集：</p>
 <pre><code translate="no" class="language-python">milvus_client.insert(collection_name=COLLECTION_NAME, data=data_list)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'insert_count': 11,
  'ids': [450072488481390592, 450072488481390593, 450072488481390594, 450072488481390595, 450072488481390596, 450072488481390597, 450072488481390598, 450072488481390599, 450072488481390600, 450072488481390601, 450072488481390602],
  'cost': 0}
 </code></pre>
-<h2 id="Ask-questions" class="common-anchor-header">Ask questions<button data-href="#Ask-questions" class="anchor-icon" translate="no">
+<h2 id="Ask-questions" class="common-anchor-header">提出問題<button data-href="#Ask-questions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -200,7 +197,7 @@ milvus_client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once all the data is inserted into Milvus, we can ask questions and see what the closest answers are.</p>
+    </button></h2><p>一旦所有資料都插入 Milvus，我們就可以提出問題，看看最接近的答案是什麼。</p>
 <pre><code translate="no" class="language-python">questions = {
     <span class="hljs-string">&quot;question&quot;</span>: [
         <span class="hljs-string">&quot;What is LGM?&quot;</span>,
