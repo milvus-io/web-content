@@ -1,8 +1,8 @@
 ---
 id: scale-dependencies.md
-title: Dépendances d'échelle
+title: Scale Dependencies
 ---
-<h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Dépendances de Scale Milvus<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
+<h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Scale Milvus Dependencies<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,11 +17,11 @@ title: Dépendances d'échelle
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus s'appuie sur diverses dépendances telles que MinIO, Kafka, Pulsar et etcd. La mise à l'échelle de ces composants peut améliorer l'adaptabilité de Milvus à différentes exigences.</p>
+    </button></h1><p>Milvus relies on various dependencies such as MinIO, Kafka, Pulsar, and etcd. Scaling these components can enhance Milvus’s adaptability to different requirements.</p>
 <div class="alert note">
-<p>Pour les utilisateurs de Milvus Operator, voir <a href="/docs/fr/object_storage_operator.md">Configurer le stockage d'objets avec Milvus Oper</a>ator, <a href="/docs/fr/meta_storage_operator.md">Configurer le méta stockage avec Milvus Oper</a>ator et <a href="/docs/fr/message_storage_operator.md">Configurer le stockage de messages avec Milvus Operator</a>.</p>
+<p>For Milvus Operator users, refer to <a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a>, <a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a>, and <a href="/docs/message_storage_operator.md">Configure Message Storage with Milvus Operator</a>.</p>
 </div>
-<h2 id="Scale-MinIO" class="common-anchor-header">Mise à l'échelle de MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
+<h2 id="Scale-MinIO" class="common-anchor-header">Scale MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,7 +36,7 @@ title: Dépendances d'échelle
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Augmenter les ressources par pod MinIO</h3><p>MinIO, un système de stockage d'objets utilisé par Milvus, peut voir ses ressources CPU et mémoire augmentées pour chaque pod.</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Increase resources per MinIO pod</h3><p>MinIO, an object storage system used by Milvus, can have its CPU and memory resources increased for each pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">resources:</span>
@@ -44,31 +44,31 @@ title: Dépendances d'échelle
        <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
        <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les modifications à l'aide de la commande suivante :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Vous pouvez également augmenter la capacité du disque pour le cluster MioIO en modifiant manuellement la valeur de <code translate="no">spec.resources.requests.storage</code> pour chaque Persistent Volume Claim (PVC) de MioIO. Notez que votre classe de stockage par défaut doit permettre l'extension du volume.</p>
-<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Ajouter un pool de serveurs MinIO supplémentaire (recommandé)</h3><p>Il est conseillé d'ajouter un pool de serveurs MioIO supplémentaire pour votre instance Milvus.</p>
+<p>You can also increase the disk capacity for the MioIO cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each MioIO Persistent Volume Claim (PVC). Note that your default storage class should allow volume expansion.</p>
+<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Add an extra MinIO server pool (Recommended)</h3><p>You are advised to add an extra MioIO server pool for your Milvus instance.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">zones:</span> <span class="hljs-number">2</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les modifications à l'aide de la commande suivante :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Ceci ajoute un pool de serveurs supplémentaire à votre cluster MinIO, ce qui permet à Milvus d'écrire dans le pool de serveurs MinIO en fonction de la capacité de disque libre de chaque pool de serveurs. Par exemple, si un groupe de trois pools dispose d'un total de 10 TiB d'espace libre réparti entre les pools comme suit :</p>
+<p>This adds an additional server pool to your MinIO cluster, allowing Milvus to write to the MinIO server pool based on the free disk capacity of each server pool. For example, if a group of three pools has a total of 10 TiB free space distributed across the pools as follows:</p>
 <table>
 <thead>
-<tr><th></th><th>Espace libre</th><th>Possibilité d'écriture</th></tr>
+<tr><th></th><th>Free space</th><th>Write possibility</th></tr>
 </thead>
 <tbody>
 <tr><td>Pool A</td><td>3 TiB</td><td>30% (3/10)</td></tr>
 <tr><td>Pool B</td><td>2 TiB</td><td>20% (2/10)</td></tr>
-<tr><td>Groupe C</td><td>5 TiB</td><td>50% (5/10)</td></tr>
+<tr><td>Pool C</td><td>5 TiB</td><td>50% (5/10)</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>MinIO ne rééquilibre pas automatiquement les objets entre les nouveaux pools de serveurs. Vous pouvez lancer manuellement une procédure de rééquilibrage à l'adresse <code translate="no">mc admin rebalance</code> si nécessaire.</p>
+<p>MinIO does not automatically rebalance objects across new server pools. You can manually initiate a rebalance procedure with <code translate="no">mc admin rebalance</code> if needed.</p>
 </div>
 <h2 id="Kafka" class="common-anchor-header">Kafka<button data-href="#Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,7 +85,7 @@ title: Dépendances d'échelle
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Augmentation des ressources par pod de courtier Kafka</h3><p>Augmentez la capacité du courtier Kafka en ajustant les ressources de CPU et de mémoire pour chaque pod de courtier.</p>
+    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Increase resource per Kafka broker pod</h3><p>Enhance the Kafka broker capacity by adjusting the CPU and memory resources for each broker pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">resources:</span>
@@ -93,11 +93,11 @@ title: Dépendances d'échelle
         <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
         <span class="hljs-attr">memory:</span> <span class="hljs-string">12Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les modifications à l'aide de la commande suivante :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-bash">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Vous pouvez également augmenter la capacité du disque pour le cluster Kafka en modifiant manuellement la valeur de <code translate="no">spec.resources.requests.storage</code> pour chaque Kafka Persistent Volume Claim (PVC). Assurez-vous que votre classe de stockage par défaut permet l'extension du volume.</p>
-<h2 id="Add-an-extra-Kafka-broker-pool-Recommended" class="common-anchor-header">Ajouter un pool de courtiers Kafka supplémentaire (recommandé)<button data-href="#Add-an-extra-Kafka-broker-pool-Recommended" class="anchor-icon" translate="no">
+<p>You can also increase the disk capacity for the Kafka cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each Kafka Persistent Volume Claim (PVC). Ensure your default storage class allows volume expansion.</p>
+<h2 id="Add-an-extra-Kafka-broker-pool-Recommended" class="common-anchor-header">Add an extra Kafka broker pool (Recommended)<button data-href="#Add-an-extra-Kafka-broker-pool-Recommended" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,17 +112,17 @@ title: Dépendances d'échelle
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il est conseillé d'ajouter un pool de serveurs Kafka supplémentaire pour votre instance Milvus.</p>
+    </button></h2><p>You are advised to add an extra Kafka server pool for your Milvus instance.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">4</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les modifications à l'aide de la commande suivante :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Cela ajoutera un courtier supplémentaire à votre cluster Kafka.</p>
+<p>This will add an extra broker to your Kafka cluster.</p>
 <div class="alert note">
-<p>Kafka ne rééquilibre pas automatiquement les sujets entre tous les courtiers. Rééquilibrez manuellement les sujets/partitions entre tous les courtiers Kafka à l'aide de <code translate="no">bin/kafka-reassign-partitions.sh</code> après vous être connecté à chaque pod de courtier Kafka si nécessaire.</p>
+<p>Kafka does not automatically rebalance topics across all brokers. Manually rebalance topics/partitions across all Kafka brokers using <code translate="no">bin/kafka-reassign-partitions.sh</code> after logging into each Kafka broker pod if needed.</p>
 </div>
 <h2 id="Pulsar" class="common-anchor-header">Pulsar<button data-href="#Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,8 +139,8 @@ title: Dépendances d'échelle
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar sépare le calcul et le stockage. Vous pouvez augmenter indépendamment la capacité des brokers Pulsar (calcul) et des bookies Pulsar (stockage).</p>
-<h2 id="Increase-resources-per-Pulsar-broker-pod" class="common-anchor-header">Augmenter les ressources par module de courtier Pulsar<button data-href="#Increase-resources-per-Pulsar-broker-pod" class="anchor-icon" translate="no">
+    </button></h2><p>Pulsar separates computation and storage. You can independently increase the capacity of Pulsar brokers (computation) and Pulsar bookies (storage).</p>
+<h2 id="Increase-resources-per-Pulsar-broker-pod" class="common-anchor-header">Increase resources per Pulsar broker pod<button data-href="#Increase-resources-per-Pulsar-broker-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -163,10 +163,10 @@ title: Dépendances d'échelle
          <span class="hljs-attr">cpu:</span> <span class="hljs-number">4</span>
          <span class="hljs-attr">memory:</span> <span class="hljs-string">16Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les modifications à l'aide de la commande suivante :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Increase-resources-per-Pulsar-bookie-pod" class="common-anchor-header">Augmenter les ressources par pod de bookmaker Pulsar<button data-href="#Increase-resources-per-Pulsar-bookie-pod" class="anchor-icon" translate="no">
+<h2 id="Increase-resources-per-Pulsar-bookie-pod" class="common-anchor-header">Increase resources per Pulsar bookie pod<button data-href="#Increase-resources-per-Pulsar-bookie-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,11 +189,11 @@ title: Dépendances d'échelle
          <span class="hljs-attr">cpu:</span> <span class="hljs-number">4</span>
          <span class="hljs-attr">memory:</span> <span class="hljs-string">16Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les changements avec la commande suivante : Augmenter les ressources par module de courtage Pulsar :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Vous pouvez également augmenter la capacité du disque pour le cluster Pulsar en modifiant manuellement la valeur de <code translate="no">spec.resources.requests.storage</code> pour chaque revendication de volume persistant (PVC) du bookmaker Pulsar. Notez que votre classe de stockage par défaut doit permettre l'expansion du volume.</p>
-<p>Un pod de bookmaker Pulsar dispose de deux types de stockage : <code translate="no">journal</code> et <code translate="no">legers</code>. Pour le type de stockage <code translate="no">journal</code>, envisagez d'utiliser <code translate="no">ssd</code> ou <code translate="no">gp3</code> comme classe de stockage. Voici un exemple pour spécifier la classe de stockage pour le journal Pulsar.</p>
+<p>You can also increase the disk capacity for the Pulsar cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each Pulsar bookie’s Persistent Volume Claim (PVC). Note that your default storage class should allow volume expansion.</p>
+<p>A Pulsar bookie pod has two types of storage: <code translate="no">journal</code> and <code translate="no">legers</code>. For the <code translate="no">journal</code> type of storage, consider using <code translate="no">ssd</code> or <code translate="no">gp3</code> as the storage class. Here’s an example to specify storageclass for pulsar journal.</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">volumes:</span>
@@ -201,20 +201,20 @@ title: Dépendances d'échelle
         <span class="hljs-attr">size:</span> <span class="hljs-string">20Gi</span>
         <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">gp3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Ajouter un pod de broker Pulsar supplémentaire</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Add an extra Pulsar broker pod</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">broker:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les modifications à l'aide de la commande suivante :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Ajouter un pod supplémentaire pour le bookmaker Pulsar (Recommandé)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Add an extra Pulsar bookie pod (Recommended)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir sauvegardé le fichier, appliquez les changements avec la commande suivante :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="etcd" class="common-anchor-header">etcd<button data-href="#etcd" class="anchor-icon" translate="no">
@@ -232,21 +232,21 @@ title: Dépendances d'échelle
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Augmenter les ressources par module etcd (recommandé)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Increase resources per etcd pod (recommended)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">resources:</span>
      <span class="hljs-attr">limits:</span>
        <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
        <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les changements avec la commande suivante :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-extra-etcd-pods" class="common-anchor-header">Ajouter des modules etcd supplémentaires</h3><p>Le nombre total de pods etcd doit être impair.</p>
+<h3 id="Add-extra-etcd-pods" class="common-anchor-header">Add extra etcd pods</h3><p>The total number of etcd pods should be in odd numbers.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">5</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les changements avec la commande suivante :</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>

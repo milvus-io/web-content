@@ -2,11 +2,10 @@
 id: ivf-pq.md
 title: IVF_PQ
 summary: >-
-  Индекс IVF_PQ - это основанный на квантовании алгоритм индексации для
-  приближенного поиска ближайших соседей в высокоразмерных пространствах. Хотя
-  IVF_PQ не так быстр, как некоторые методы на основе графов, он часто требует
-  значительно меньше памяти, что делает его практичным выбором для больших
-  наборов данных.
+  The IVF_PQ index is a quantization-based indexing algorithm for approximate
+  nearest neighbor search in high-dimensional spaces. While not as fast as some
+  graph-based methods, IVF_PQ often requires significantly less memory, making
+  it a practical choice for large datasets.
 ---
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Индекс <strong>IVF_PQ</strong> - это <strong>основанный на квантовании</strong> алгоритм индексации для приближенного поиска ближайших соседей в высокоразмерных пространствах. Хотя <strong>IVF_PQ</strong> не так быстр, как некоторые методы на основе графов, он часто требует значительно меньше памяти, что делает его практичным выбором для больших наборов данных.</p>
-<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>The <strong>IVF_PQ</strong> index is a <strong>quantization-based</strong> indexing algorithm for approximate nearest neighbor search in high-dimensional spaces. While not as fast as some graph-based methods, <strong>IVF_PQ</strong> often requires significantly less memory, making it a practical choice for large datasets.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,64 +38,68 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>IVF_PQ</strong> означает <strong>Inverted File with Product Quantization</strong>- гибридный подход, сочетающий индексирование и сжатие для эффективного векторного поиска и извлечения информации. В нем задействованы два основных компонента: <strong>Inverted File (IVF)</strong> и <strong>Product Quantization (PQ)</strong>.</p>
-<h3 id="IVF" class="common-anchor-header">ЭКО</h3><p>ЭКО напоминает создание индекса в книге. Вместо того чтобы сканировать каждую страницу (или, в нашем случае, каждый вектор), вы ищете определенные ключевые слова (кластеры) в индексе, чтобы быстро найти соответствующие страницы (векторы). В нашем сценарии векторы сгруппированы в кластеры, и алгоритм будет искать в нескольких кластерах, которые близки к вектору запроса.</p>
-<p>Вот как это работает:</p>
+    </button></h2><p>The <strong>IVF_PQ</strong> stands for <strong>Inverted File with Product Quantization</strong>, a hybrid approach that combines indexing and compression for efficient vector search and retrieval. It leverages two core components: <strong>Inverted File (IVF)</strong> and <strong>Product Quantization (PQ)</strong>.</p>
+<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF is like creating an index in a book. Instead of scanning every page (or, in our case, every vector), you look up specific keywords (clusters) in the index to quickly find the relevant pages (vectors). In our scenario, vectors are grouped into clusters, and the algorithm will search within a few clusters that are close to the query vector.</p>
+<p>Here’s how it works:</p>
 <ol>
-<li><p><strong>Кластеризация:</strong> Ваш набор векторных данных делится на определенное количество кластеров с помощью алгоритма кластеризации, например k-means. Каждый кластер имеет центроид (репрезентативный вектор для кластера).</p></li>
-<li><p><strong>Назначение:</strong> Каждый вектор назначается в кластер, центроид которого находится ближе всего к нему.</p></li>
-<li><p><strong>Инвертированный индекс:</strong> Создается индекс, сопоставляющий центроид каждого кластера со списком векторов, отнесенных к этому кластеру.</p></li>
-<li><p><strong>Поиск:</strong> При поиске ближайших соседей алгоритм поиска сравнивает вектор запроса с центроидами кластеров и выбирает наиболее перспективный кластер (кластеры). Затем поиск сужается до векторов, входящих в эти выбранные кластеры.</p></li>
+<li><p><strong>Clustering:</strong> Your vector dataset is divided into a specified number of clusters, using a clustering algorithm like k-means. Each cluster has a centroid (a representative vector for the cluster).</p></li>
+<li><p><strong>Assignment:</strong> Each vector is assigned to the cluster whose centroid is closest to it.</p></li>
+<li><p><strong>Inverted Index:</strong> An index is created, mapping each cluster centroid to the list of vectors assigned to that cluster.</p></li>
+<li><p><strong>Search:</strong> When you search for nearest neighbors, the search algorithm compares your query vector with the cluster centroids and selects the most promising cluster(s). The search is then narrowed down to the vectors within those selected clusters.</p></li>
 </ol>
-<p>Чтобы узнать больше о технических деталях, обратитесь к <a href="/docs/ru/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Квантование по продукту (PQ)</strong> - это метод сжатия высокоразмерных векторов, который значительно снижает требования к хранению данных и обеспечивает быстрое выполнение операций поиска по сходству.</p>
-<p>Процесс PQ включает в себя следующие основные этапы:</p>
+<p>To learn more about its technical details , refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
+<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ)</strong> is a compression method for high-dimensional vectors that significantly reduces storage requirements while enabling fast similarity search operations.</p>
+<p>The PQ process involves these key stages:</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-1.png" alt="Ivf Pq 1" class="doc-image" id="ivf-pq-1" />
-   </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-1.png" alt="Ivf Pq 1" class="doc-image" id="ivf-pq-1" />
+    <span>Ivf Pq 1</span>
+  </span>
+</p>
 <ol>
-<li><p><strong>Декомпозиция размерности</strong>: Алгоритм начинает с разложения каждого высокоразмерного вектора на <code translate="no">m</code> равных по размеру подвекторов. Это разложение преобразует исходное D-мерное пространство в <code translate="no">m</code> дизъюнктивные подпространства, где каждое подпространство содержит <em>D/m</em> измерений. Параметр <code translate="no">m</code> управляет гранулярностью разложения и напрямую влияет на степень сжатия.</p></li>
-<li><p><strong>Генерация кодовой книги подпространства</strong>: Внутри каждого подпространства алгоритм применяет <a href="https://en.wikipedia.org/wiki/K-means_clustering">кластеризацию k-means</a> для получения набора репрезентативных векторов (центроидов). Эти центроиды в совокупности формируют кодовую книгу для данного подпространства. Количество центроидов в каждой кодовой книге определяется параметром <code translate="no">nbits</code>, где каждая кодовая книга содержит <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits центроидов. Например, если</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code>, то каждая кодовая книга будет содержать 256 центроидов. Каждому центроиду присваивается уникальный индекс с <code translate="no">nbits</code> бит.</p></li>
-<li><p><strong>Векторное</strong> <strong>квантование</strong>: Для каждого подвектора в исходном векторе PQ определяет ближайший центроид в соответствующем подпространстве, используя определенный тип метрики. Этот процесс эффективно сопоставляет каждый подвектор с ближайшим вектором-представителем в кодовой книге. Вместо того чтобы хранить полные координаты подвектора, сохраняется только индекс соответствующего центроида.</p></li>
-<li><p><strong>Сжатое представление</strong>: Окончательное сжатое представление состоит из индексов <code translate="no">m</code>, по одному из каждого подпространства, которые в совокупности называются <strong>PQ-кодами</strong>. Такое кодирование позволяет сократить объем памяти с <em>D × 32</em> бит (в предположении 32-битных чисел с плавающей точкой) до <em>m</em> × <em>n бит</em>, что обеспечивает значительное сжатие при сохранении возможности аппроксимации расстояний между векторами.</p></li>
+<li><p><strong>Dimension decomposition</strong>: The algorithm begins by decomposing each high-dimensional vector into <code translate="no">m</code> equal-sized sub-vectors. This decomposition transforms the original D-dimensional space into <code translate="no">m</code> disjoint subspaces, where each subspace contains <em>D/m</em> dimensions. The parameter <code translate="no">m</code> controls the granularity of the decomposition and directly influences the compression ratio.</p></li>
+<li><p><strong>Subspace codebook generation</strong>: Within each subspace, the algorithm applies <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a> to learn a set of representative vectors (centroids). These centroids collectively form a codebook for that subspace. The number of centroids in each codebook is determined by the parameter <code translate="no">nbits</code>, where each codebook contains <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mtext mathvariant="italic">nbits</mtext></msup></mrow><annotation encoding="application/x-tex">2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textit mtight">nbits</span></span></span></span></span></span></span></span></span></span></span></span></span> centroids. For example, if <code translate="no">nbits = 8</code>, each codebook will contain 256 centroids. Each centroid is assigned a unique index with <code translate="no">nbits</code> bits.</p></li>
+<li><p><strong>Vector</strong> <strong>quantization</strong>: For each sub-vector in the original vector, PQ identifies its nearest centroid within the corresponding subspace using a specific metric type. This process effectively maps each sub-vector to its closest representative vector in the codebook. Instead of storing the full sub-vector coordinates, only the index of the matched centroid is retained.</p></li>
+<li><p><strong>Compressed representation</strong>: The final compressed representation consists of <code translate="no">m</code> indices, one from each subspace, collectively referred to as <strong>PQ codes</strong>. This encoding reduces the storage requirement from <em>D × 32</em> bits (assuming 32-bit floating-point numbers) to <em>m</em> × <em>nbits</em> bits, achieving substantial compression while preserving the ability to approximate vector distances.</p></li>
 </ol>
-<p>Более подробную информацию о настройке и оптимизации параметров см. в разделе <a href="/docs/ru/ivf-pq.md#Index-params">Index params</a>.</p>
+<p>For more details on parameter tuning and optimization, refer to <a href="/docs/ivf-pq.md#Index-params">Index params</a>.</p>
 <div class="alert note">
-<p>Рассмотрим вектор с размерностью <em>D = 128</em>, использующий 32-битные числа с плавающей точкой. При параметрах PQ <em>m = 64</em> (подвекторы) и <em>nbits = 8</em> (таким образом, <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>= 256</em> центроидов на подпространство), мы можем сравнить требования к хранению:</p>
+<p>Consider a vector with <em>D = 128</em> dimensions using 32-bit floating-point numbers. With PQ parameters <em>m = 64</em> (sub-vectors) and <em>nbits = 8</em> (thus <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">2^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span> <em>= 256</em> centroids per subspace), we can compare the storage requirements:</p>
 <ul>
-<li><p>Оригинальный вектор: 128 измерений × 32 бита = 4 096 бит.</p></li>
-<li><p>PQ-сжатый вектор: 64 подвектора × 8 бит = 512 бит.</p></li>
+<li><p>Original vector: 128 dimensions × 32 bits = 4,096 bits</p></li>
+<li><p>PQ-compressed vector: 64 sub-vectors × 8 bits = 512 bits</p></li>
 </ul>
-<p>Это означает 8-кратное сокращение требований к хранению.</p>
+<p>This represents an 8x reduction in storage requirements.</p>
 </div>
-<p><strong>Вычисление расстояния с помощью PQ</strong></p>
-<p>При выполнении поиска по сходству с вектором запроса PQ обеспечивает эффективное вычисление расстояния за счет следующих шагов:</p>
+<p><strong>Distance computation with PQ</strong></p>
+<p>When performing similarity search with a query vector, PQ enables efficient distance computation through the following steps:</p>
 <ol>
-<li><p><strong>Препроцессирование запроса</strong></p>
+<li><p><strong>Query preprocessing</strong></p>
 <ul>
-<li><p>Вектор запроса декомпозируется на подвекторы <code translate="no">m</code> в соответствии с оригинальной структурой декомпозиции PQ.</p></li>
-<li><p>Для каждого подвектора запроса и соответствующей ему кодовой книги (содержащей <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits центроидов), вычисляются и сохраняются расстояния до всех центроидов.</span></span></span></span></span></span></span></span></span> </p></li>
-<li><p>При этом создается <code translate="no">m</code> таблиц поиска, где каждая таблица содержит <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits расстояний.</span></span></span></span></span></span></span></span></span> </p></li>
+<li><p>The query vector is decomposed into <code translate="no">m</code> sub-vectors, matching the original PQ decomposition structure.</p></li>
+<li><p>For each query sub-vector and its corresponding codebook (containing <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mtext mathvariant="italic">nbits</mtext></msup></mrow><annotation encoding="application/x-tex">2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textit mtight">nbits</span></span></span></span></span></span></span></span></span></span></span></span></span> centroids), compute and store distances to all centroids.</p></li>
+<li><p>This generates <code translate="no">m</code> lookup tables, where each table contains <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mtext mathvariant="italic">nbits</mtext></msup></mrow><annotation encoding="application/x-tex">2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textit mtight">nbits</span></span></span></span></span></span></span></span></span></span></span></span></span> distances.</p></li>
 </ul></li>
-<li><p><strong>Аппроксимация расстояний</strong></p>
-<p>Для любого вектора базы данных, представленного кодами PQ, его приблизительное расстояние до вектора запроса вычисляется следующим образом:</p>
+<li><p><strong>Distance approximation</strong></p>
+<p>For any database vector represented by PQ codes, its approximate distance to the query vector is computed as follows:</p>
 <ul>
-<li><p>Для каждого из подвекторов <code translate="no">m</code> извлекаем предварительно вычисленное расстояние из соответствующей таблицы поиска, используя сохраненный индекс центроида.</p></li>
-<li><p>Просуммируйте эти <code translate="no">m</code> расстояния, чтобы получить приблизительное расстояние, основанное на определенном типе метрики (например, евклидово расстояние).</p></li>
+<li><p>For each of the <code translate="no">m</code> sub-vectors, retrieve the pre-computed distance from the corresponding lookup table using the stored centroid index.</p></li>
+<li><p>Sum these <code translate="no">m</code> distances to obtain the approximate distance based on a specific metric type (e.g. Euclidean distance).</p></li>
 </ul></li>
 </ol>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
-   </span> <span class="img-wrapper"> <span>Ivf Pq 2</span> </span></p>
-<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>Индекс <strong>IVF_PQ</strong> объединяет сильные стороны <strong>IVF</strong> и <strong>PQ</strong> для ускорения поиска. Процесс работает в два этапа:</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
+    <span>Ivf Pq 2</span>
+  </span>
+</p>
+<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>The <strong>IVF_PQ</strong> index combines the strengths of <strong>IVF</strong> and <strong>PQ</strong> to accelerate searches. The process works in two steps:</p>
 <ol>
-<li><p><strong>Грубая фильтрация с помощью ЭКО</strong>: ЭКО разбивает векторное пространство на кластеры, сокращая объем поиска. Вместо того чтобы оценивать весь набор данных, алгоритм фокусируется только на кластерах, наиболее близких к вектору запроса.</p></li>
-<li><p><strong>Тонкое сравнение с помощью PQ</strong>: внутри выбранных кластеров PQ использует сжатые и квантованные представления векторов для быстрого вычисления приблизительных расстояний.</p></li>
+<li><p><strong>Coarse filtering with IVF</strong>: IVF partitions the vector space into clusters, reducing the search scope. Instead of evaluating the entire dataset, the algorithm focuses only on the clusters closest to the query vector.</p></li>
+<li><p><strong>Fine-grained comparison with PQ</strong>: Within the selected clusters, PQ uses compressed and quantized vector representations to compute approximate distances quickly.</p></li>
 </ol>
-<p>На производительность индекса <strong>IVF_PQ</strong> существенно влияют параметры, управляющие алгоритмами IVF и PQ. Настройка этих параметров очень важна для достижения оптимальных результатов для конкретного набора данных и приложения. Более подробную информацию об этих параметрах и о том, как их настраивать, можно найти в разделе <a href="/docs/ru/ivf-pq.md#Index-params">Index params</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Построение индекса<button data-href="#Build-index" class="anchor-icon" translate="no">
+<p>The performance of the <strong>IVF_PQ</strong> index is significantly impacted by the parameters that control both the IVF and PQ algorithms. Tuning these parameters is crucial to achieve the optimal results for a given dataset and application. More detailed information about these parameters and how to tune them can be found in <a href="/docs/ivf-pq.md#Index-params">Index params</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -111,7 +114,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы построить индекс <code translate="no">IVF_PQ</code> по векторному полю в Milvus, используйте метод <code translate="no">add_index()</code>, указав <code translate="no">index_type</code>, <code translate="no">metric_type</code> и дополнительные параметры для индекса.</p>
+    </button></h2><p>To build an <code translate="no">IVF_PQ</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -127,18 +130,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>В данной конфигурации:</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: Тип индекса, который будет построен. В этом примере задайте значение <code translate="no">IVF_PQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Метод, используемый для вычисления расстояния между векторами. Поддерживаются следующие значения: <code translate="no">COSINE</code>, <code translate="no">L2</code> и <code translate="no">IP</code>. Подробнее см. в разделе <a href="/docs/ru/metric.md">Типы метрик</a>.</p></li>
-<li><p><code translate="no">params</code>: Дополнительные параметры конфигурации для построения индекса.</p>
+<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">IVF_PQ</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
-<li><code translate="no">m</code>: Количество субвекторов, на которые нужно разбить вектор.</li>
+<li><code translate="no">m</code>: Number of sub-vectors to split the vector into.</li>
 </ul>
-<p>Чтобы узнать больше параметров построения, доступных для индекса <code translate="no">IVF_PQ</code>, обратитесь к разделу <a href="/docs/ru/ivf-pq.md#Index-building-params">Параметры построения индекса</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/ivf-pq.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>После того как параметры индекса настроены, вы можете создать индекс, используя метод <code translate="no">create_index()</code> напрямую или передавая параметры индекса в метод <code translate="no">create_collection</code>. Подробности см. в разделе <a href="/docs/ru/create-collection.md">Создание коллекции</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Поиск по индексу<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,7 +156,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После того как индекс создан и сущности вставлены, можно выполнять поиск по сходству в индексе.</p>
+    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -168,15 +171,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>В этой конфигурации:</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">params</code>: Дополнительные параметры конфигурации для поиска по индексу.</p>
+<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
 <ul>
-<li><code translate="no">nprobe</code>: Количество кластеров для поиска.</li>
+<li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
 </ul>
-<p>Чтобы узнать больше параметров поиска, доступных для индекса <code translate="no">IVF_PQ</code>, обратитесь к разделу <a href="/docs/ru/ivf-pq.md#Index-specific-search-params">Параметры поиска по индексу</a>.</p></li>
+<p>To learn more search parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/ivf-pq.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Параметры индекса<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -191,51 +194,51 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В этом разделе представлен обзор параметров, используемых для построения индекса и выполнения поиска по нему.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/ivf-pq.md#Build-index">построении индекса</a>.</p>
+    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/ivf-pq.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Параметр</p></th>
-     <th><p>Описание</p></th>
-     <th><p>Диапазон значений</p></th>
-     <th><p>Предложение по настройке</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
-     <td><p>ЭКО</p></td>
+     <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>Количество кластеров, создаваемых с помощью алгоритма k-means при построении индекса.</p></td>
-     <td><p><strong>Тип</strong>: Integer <strong>Диапазон</strong>: [1, 65536]</p><p><strong>Значение по умолчанию</strong>: <code translate="no">128</code></p></td>
-     <td><p>Большие значения <code translate="no">nlist</code> улучшают отзыв за счет создания более точных кластеров, но увеличивают время построения индекса. Оптимизируйте значение в зависимости от размера набора данных и доступных ресурсов. В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [32, 4096].</p></td>
+     <td><p>The number of clusters to create using the k-means algorithm during index building.</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 65536]</p><p><strong>Default value</strong>: <code translate="no">128</code></p></td>
+     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources. In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
    </tr>
    <tr>
      <td rowspan="2"><p>PQ</p></td>
      <td><p><code translate="no">m</code></p></td>
-     <td><p>Количество подвекторов (используемых для квантования), на которые нужно разделить каждый высокоразмерный вектор в процессе квантования.</p></td>
-     <td><p><strong>Тип</strong>: Целое число <strong>Диапазон</strong>: [1, 65536]</p><p><strong>Значение по умолчанию</strong>: Нет</p></td>
-     <td><p>Большее значение <code translate="no">m</code> может повысить точность, но также увеличивает сложность вычислений и потребление памяти. <code translate="no">m</code> должно быть делителем размерности вектора<em>(D</em>), чтобы обеспечить правильное разложение. Обычно рекомендуемое значение <em>m = D/2</em>.</p><p>В большинстве случаев мы рекомендуем задавать значение в этом диапазоне: [D/8, D].</p></td>
+     <td><p>The number of sub-vectors (used for quantization) to divide each high-dimensional vector into during the quantization process.</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 65536]</p><p><strong>Default value</strong>: None</p></td>
+     <td><p>A higher <code translate="no">m</code> value can improve accuracy, but it also increases the computational complexity and memory usage. <code translate="no">m</code> must be a divisor of the vector dimension (<em>D</em>) to ensure proper decomposition. A commonly recommended value is <em>m = D/2</em>.</p><p>In most cases, we recommend you set a value within this range: [D/8, D].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>Количество битов, используемых для представления индекса центроида каждого субвектора в сжатом виде. Оно напрямую определяет размер каждой кодовой книги. Каждая кодовая книга будет содержать $2^{\textit{nbits}}$ центроидов. Например, если <code translate="no">nbits</code> имеет значение 8, то каждый субвектор будет представлен 8-битным индексом центроида. Это позволяет иметь $2^8$ (256) возможных центроидов в кодовой книге для данного субвектора.</p></td>
-     <td><p><strong>Тип</strong>: Целое число <strong>Диапазон</strong>: [1, 64]</p><p><strong>Значение по умолчанию</strong>: <code translate="no">8</code></p></td>
-     <td><p>Большее значение <code translate="no">nbits</code> позволяет использовать большие кодовые книги, что потенциально приводит к более точному представлению исходных векторов. Однако это также означает использование большего количества битов для хранения каждого индекса, что приводит к меньшему сжатию. В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [1, 16].</p></td>
+     <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook. Each codebook will contain $2^{\textit{nbits}}$ centroids. For example, if <code translate="no">nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for $2^8$ (256) possible centroids in the codebook for that sub-vector.</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 64]</p><p><strong>Default value</strong>: <code translate="no">8</code></p></td>
+     <td><p>A higher <code translate="no">nbits</code> value allows for larger codebooks, potentially leading to more accurate representations of the original vectors. However, it also means using more bits to store each index, resulting in less compression. In most cases, we recommend you set a value within this range: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индексов</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/ivf-pq.md#Search-on-index">поиске по индексу</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/ivf-pq.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Параметр</p></th>
-     <th><p>Описание</p></th>
-     <th><p>Диапазон значений</p></th>
-     <th><p>Предложение по настройке</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
-     <td><p>ЭКО</p></td>
+     <td><p>IVF</p></td>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>Количество кластеров для поиска кандидатов.</p></td>
-     <td><p><strong>Тип</strong>: Целое число <strong>Диапазон</strong>: [1, <em>nlist</em>].</p><p><strong>Значение по умолчанию</strong>: <code translate="no">8</code></p></td>
-     <td><p>Большие значения позволяют искать больше кластеров, что улучшает запоминание благодаря расширению области поиска, но ценой увеличения задержки запроса. Установите значение <code translate="no">nprobe</code> пропорционально значению <code translate="no">nlist</code>, чтобы сбалансировать скорость и точность.</p><p>В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [1, nlist].</p></td>
+     <td><p>The number of clusters to search for candidates.</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, <em>nlist</em>]</p><p><strong>Default value</strong>: <code translate="no">8</code></p></td>
+     <td><p>Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency. Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p><p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
    </tr>
 </table>

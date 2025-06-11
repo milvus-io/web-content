@@ -1,13 +1,13 @@
 ---
 id: inverted.md
-title: TERBALIK
+title: INVERTED
 summary: >-
-  Indeks INVERTED di Milvus dirancang untuk mempercepat kueri penyaringan pada
-  bidang skalar dan bidang JSON terstruktur. Dengan memetakan istilah ke dokumen
-  atau catatan yang berisi istilah tersebut, indeks terbalik sangat meningkatkan
-  kinerja kueri dibandingkan dengan pencarian brute force.
+  The INVERTED index in Milvus is designed to accelerate filter queries on both
+  scalar fields and structured JSON fields. By mapping terms to the documents or
+  records that contain them, inverted indexes greatly improve query performance
+  compared to brute-force searches.
 ---
-<h1 id="INVERTED" class="common-anchor-header">TERBALIK<button data-href="#INVERTED" class="anchor-icon" translate="no">
+<h1 id="INVERTED" class="common-anchor-header">INVERTED<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Indeks <code translate="no">INVERTED</code> di Milvus dirancang untuk mempercepat kueri penyaringan pada bidang skalar dan bidang JSON terstruktur. Dengan memetakan istilah ke dokumen atau catatan yang berisi istilah tersebut, indeks terbalik sangat meningkatkan kinerja kueri dibandingkan dengan pencarian brute force.</p>
-<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>The <code translate="no">INVERTED</code> index in Milvus is designed to accelerate filter queries on both scalar fields and structured JSON fields. By mapping terms to the documents or records that contain them, inverted indexes greatly improve query performance compared to brute-force searches.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,23 +38,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Didukung oleh <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus mengimplementasikan pengindeksan terbalik untuk mempercepat kueri filter, terutama untuk data tekstual. Berikut cara kerjanya:</p>
+    </button></h2><p>Powered by <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus implements inverted indexing to accelerate filter queries, especially for textual data. Here’s how it works:</p>
 <ol>
-<li><p>Memberi<strong>Token pada Data</strong>: Milvus mengambil data mentah Anda-dalam contoh ini, dua kalimat:</p>
+<li><p><strong>Tokenize the Data</strong>: Milvus takes your raw data—in this example, two sentences:</p>
 <ul>
-<li><p><strong>"Milvus adalah basis data vektor asli cloud."</strong></p></li>
-<li><p><strong>"Milvus sangat bagus dalam hal kinerja."</strong></p></li>
+<li><p><strong>“Milvus is a cloud-native vector database.”</strong></p></li>
+<li><p><strong>“Milvus is very good at performance.”</strong></p></li>
 </ul>
-<p>dan memecahnya menjadi kata-kata unik (misalnya, <em>Milvus</em>, <em>adalah</em>, <em>cloud-native</em>, <em>vektor</em>, <em>basis data</em>, <em>sangat</em>, <em>baik</em>, <em>pada</em>, <em>kinerja</em>).</p></li>
-<li><p><strong>Membangun Kamus Istilah</strong>: Kata-kata unik ini disimpan dalam daftar terurut yang disebut <strong>Kamus Istilah</strong>. Kamus ini memungkinkan Milvus dengan cepat memeriksa apakah sebuah kata ada dan menemukan posisinya di dalam indeks.</p></li>
-<li><p><strong>Membuat Daftar Terbalik</strong>: Untuk setiap kata dalam Kamus Istilah, Milvus menyimpan <strong>Daftar Terbalik</strong> yang menunjukkan dokumen mana saja yang mengandung kata tersebut. Misalnya, <strong>"Milvus"</strong> muncul di kedua kalimat, sehingga daftar terbalik menunjuk ke kedua ID dokumen.</p></li>
+<p>and breaks them into unique words (e.g., <em>Milvus</em>, <em>is</em>, <em>cloud-native</em>, <em>vector</em>, <em>database</em>, <em>very</em>, <em>good</em>, <em>at</em>, <em>performance</em>).</p></li>
+<li><p><strong>Build the Term Dictionary</strong>: These unique words are stored in a sorted list called the <strong>Term Dictionary</strong>. This dictionary lets Milvus quickly check if a word exists and locate its position in the index.</p></li>
+<li><p><strong>Create the Inverted List</strong>: For each word in the Term Dictionary, Milvus keeps an <strong>Inverted List</strong> showing which documents contain that word. For instance, <strong>“Milvus”</strong> appears in both sentences, so its inverted list points to both document IDs.</p></li>
 </ol>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
-   </span> <span class="img-wrapper"> <span>Terbalik</span> </span></p>
-<p>Karena kamus diurutkan, pemfilteran berbasis istilah dapat ditangani secara efisien. Alih-alih memindai semua dokumen, Milvus hanya mencari istilah dalam kamus dan mengambil daftar terbalik-secara signifikan mempercepat pencarian dan penyaringan pada set data yang besar.</p>
-<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">Mengindeks bidang skalar biasa<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
+    <span>Inverted</span>
+  </span>
+</p>
+<p>Because the dictionary is sorted, term-based filtering can be handled efficiently. Instead of scanning all documents, Milvus just looks up the term in the dictionary and retrieves its inverted list—significantly speeding up searches and filters on large datasets.</p>
+<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">Index a regular scalar field<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,7 +71,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk bidang skalar seperti <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, dan <strong>ARRAY</strong>, membuat indeks terbalik sangatlah mudah. Gunakan metode <code translate="no">create_index()</code> dengan parameter <code translate="no">index_type</code> yang disetel ke <code translate="no">&quot;INVERTED&quot;</code>.</p>
+    </button></h2><p>For scalar fields like <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, and <strong>ARRAY</strong>, creating an inverted index is straightforward. Use the <code translate="no">create_index()</code> method with the <code translate="no">index_type</code> parameter set to <code translate="no">&quot;INVERTED&quot;</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -88,7 +90,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-a-JSON-field" class="common-anchor-header">Mengindeks bidang JSON<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Index-a-JSON-field" class="common-anchor-header">Index a JSON field<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,12 +105,12 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus memperluas kemampuan pengindeksannya ke bidang JSON, sehingga Anda dapat memfilter secara efisien pada data bersarang atau terstruktur yang disimpan dalam satu kolom. Tidak seperti kolom skalar, ketika mengindeks kolom JSON, Anda harus menyediakan dua parameter tambahan:</p>
+    </button></h2><p>Milvus extends its indexing capabilities to JSON fields, allowing you to efficiently filter on nested or structured data stored within a single column. Unlike scalar fields, when indexing a JSON field you must provide two additional parameters:</p>
 <ul>
-<li><p><code translate="no">json_path</code><strong>:</strong> Menentukan kunci bersarang untuk mengindeks.</p></li>
-<li><p><code translate="no">json_cast_type</code><strong>:</strong> Menentukan tipe data (misalnya, <code translate="no">&quot;varchar&quot;</code>, <code translate="no">&quot;double&quot;</code>, atau <code translate="no">&quot;bool&quot;</code>) yang akan digunakan untuk meng-cast nilai JSON yang diekstrak.</p></li>
+<li><p><code translate="no">json_path</code><strong>:</strong> Specifies the nested key to index.</p></li>
+<li><p><code translate="no">json_cast_type</code><strong>:</strong> Defines the data type (e.g., <code translate="no">&quot;varchar&quot;</code>, <code translate="no">&quot;double&quot;</code>, or <code translate="no">&quot;bool&quot;</code>) to which the extracted JSON value will be cast.</p></li>
 </ul>
-<p>Sebagai contoh, pertimbangkan bidang JSON bernama <code translate="no">metadata</code> dengan struktur berikut:</p>
+<p>For example, consider a JSON field named <code translate="no">metadata</code> with the following structure:</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;metadata&quot;: {
     &quot;product_info&quot;: {
@@ -121,7 +123,7 @@ client.create_index(
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk membuat indeks terbalik pada jalur JSON tertentu, Anda dapat menggunakan pendekatan berikut:</p>
+<p>To create inverted indexes on specific JSON paths, you can use the following approach:</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string.</span>
@@ -150,42 +152,43 @@ index_params.add_index(
 <table>
    <tr>
      <th><p>Parameter</p></th>
-     <th><p>Deskripsi</p></th>
-     <th><p>Contoh Nilai</p></th>
+     <th><p>Description</p></th>
+     <th><p>Example Value</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>Nama bidang JSON dalam skema Anda.</p></td>
+     <td><p>Name of the JSON field in your schema.</p></td>
      <td><p><code translate="no">"metadata"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Jenis indeks yang akan dibuat; saat ini hanya <code translate="no">INVERTED</code> yang didukung untuk pengindeksan jalur JSON.</p></td>
+     <td><p>Index type to create; currently only <code translate="no">INVERTED</code> is supported for JSON path indexing.</p></td>
      <td><p><code translate="no">"INVERTED"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(Opsional) Nama indeks khusus. Tentukan nama yang berbeda jika Anda membuat beberapa indeks pada bidang JSON yang sama.</p></td>
+     <td><p>(Optional) A custom index name. Specify different names if you create multiple indexes on the same JSON field.</p></td>
      <td><p><code translate="no">"json_index_1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Menentukan jalur JSON mana yang akan diindeks. Anda dapat menargetkan kunci bersarang, posisi larik, atau keduanya (misalnya, <code translate="no">metadata["product_info"]["category"]</code> atau <code translate="no">metadata["tags"][0]</code>). Jika jalur tidak ada atau elemen larik tidak ada untuk baris tertentu, maka baris tersebut akan dilewati begitu saja saat pengindeksan, dan tidak ada kesalahan yang akan muncul.</p></td>
+     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code translate="no">metadata["product_info"]["category"]</code> or <code translate="no">metadata["tags"][0]</code>).
+ If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Tipe data yang akan digunakan Milvus untuk meng-cast nilai JSON yang diekstrak ketika membangun indeks. Nilai yang valid:</p>
+     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
 <ul>
-<li><p><code translate="no">"bool"</code> atau <code translate="no">"BOOL"</code></p></li>
-<li><p><code translate="no">"double"</code> atau <code translate="no">"DOUBLE"</code></p></li>
-<li><p><code translate="no">"varchar"</code> atau <code translate="no">"VARCHAR"</code></p>
-<p><strong>Catatan</strong>: Untuk nilai bilangan bulat, Milvus secara internal menggunakan double untuk indeks. Bilangan bulat besar di atas 2^53 akan kehilangan presisi. Jika cast gagal (karena ketidakcocokan tipe), tidak ada kesalahan yang dilemparkan, dan nilai baris tersebut tidak diindeks.</p></li>
+<li><p><code translate="no">"bool"</code> or <code translate="no">"BOOL"</code></p></li>
+<li><p><code translate="no">"double"</code> or <code translate="no">"DOUBLE"</code></p></li>
+<li><p><code translate="no">"varchar"</code> or <code translate="no">"VARCHAR"</code></p>
+<p><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If the cast fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</p></li>
 </ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
-<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">Pertimbangan tentang pengindeksan JSON<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
+<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">Considerations on JSON indexing<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -201,22 +204,22 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Logika pemfilteran</strong>:</p>
+<li><p><strong>Filtering logic</strong>:</p>
 <ul>
-<li><p>Jika Anda <strong>membuat indeks tipe ganda</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), hanya kondisi filter tipe numerik yang dapat menggunakan indeks tersebut. Jika filter membandingkan indeks ganda dengan kondisi non-numerik, Milvus akan kembali ke pencarian brute force.</p></li>
-<li><p>Jika Anda <strong>membuat indeks tipe varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), hanya kondisi filter tipe string yang dapat menggunakan indeks tersebut. Jika tidak, Milvus akan kembali ke pencarian brute force.</p></li>
-<li><p>Pengindeksan<strong>boolean</strong> berperilaku serupa dengan tipe varchar.</p></li>
+<li><p>If you <strong>create a double-type index</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), only numeric-type filter conditions can use the index. If the filter compares a double index to a non-numeric condition, Milvus falls back to brute force search.</p></li>
+<li><p>If you <strong>create a varchar-type index</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), only string-type filter conditions can use the index. Otherwise, Milvus falls back to brute force.</p></li>
+<li><p><strong>Boolean</strong> indexing behaves similarly to varchar-type.</p></li>
 </ul></li>
-<li><p><strong>Ekspresi istilah</strong>:</p>
+<li><p><strong>Term expressions</strong>:</p>
 <ul>
-<li>Anda dapat menggunakan <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. Namun, indeks hanya bekerja untuk nilai skalar yang disimpan di bawah jalur tersebut. Jika <code translate="no">json[&quot;field&quot;]</code> adalah larik, kueri akan kembali ke pengindeksan brute force (pengindeksan tipe larik belum didukung).</li>
+<li>You can use <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. However, the index works only for scalar values stored under that path. If <code translate="no">json[&quot;field&quot;]</code> is an array, the query falls back to brute force (array-type indexing is not yet supported).</li>
 </ul></li>
-<li><p><strong>Ketepatan numerik</strong>:</p>
+<li><p><strong>Numeric precision</strong>:</p>
 <ul>
-<li>Secara internal, Milvus mengindeks semua bidang numerik sebagai ganda. Jika nilai numerik melebihi <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, maka nilai tersebut akan kehilangan presisi, dan kueri pada nilai di luar rentang tersebut mungkin tidak akan cocok dengan tepat.</li>
+<li>Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>53</mn></msup></mrow><annotation encoding="application/x-tex">2^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, it loses precision, and queries on those out-of-range values may not match exactly.</li>
 </ul></li>
-<li><p><strong>Integritas data</strong>:</p>
+<li><p><strong>Data integrity</strong>:</p>
 <ul>
-<li>Milvus tidak mem-parsing atau mengubah kunci JSON di luar casting yang Anda tentukan. Jika data sumber tidak konsisten (misalnya, beberapa baris menyimpan string untuk kunci <code translate="no">&quot;k&quot;</code> sementara yang lain menyimpan angka), beberapa baris tidak akan diindeks.</li>
+<li>Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key <code translate="no">&quot;k&quot;</code> while others store a number), some rows will not be indexed.</li>
 </ul></li>
 </ul>

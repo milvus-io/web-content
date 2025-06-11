@@ -1,9 +1,11 @@
 ---
 id: grant_privileges.md
-title: ロールへの特権または特権グループの付与
-summary: ロールを作成すると、そのロールに権限を付与することができます。このガイドでは、ロールに特権または特権グループを付与する方法を紹介します。
+title: Grant Privilege or Privilege Group to Roles
+summary: >-
+  Once a role is created, you can grant privileges to the role. This guide
+  introduces how to grant privileges or privilege groups to a role.
 ---
-<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">ロールへの特権または特権グループの付与<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
+<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">Grant Privilege or Privilege Group to Roles<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +20,8 @@ summary: ロールを作成すると、そのロールに権限を付与する�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ロールを作成すると、そのロールに特権を付与することができます。このガイドでは、ロールに特権または特権グループを付与する方法を紹介します。</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">ロールへの特権または特権グループの付与<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
+    </button></h1><p>Once a role is created, you can grant privileges to the role. This guide introduces how to grant privileges or privilege groups to a role.</p>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">Grant a privilege or a privilege group to a role<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,22 +36,22 @@ summary: ロールを作成すると、そのロールに権限を付与する�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus2.5では、付与操作を効率化する新しいバージョンのAPIが導入されました。ロールに権限を付与する際に、オブジェクトタイプを調べる必要がなくなりました。以下にパラメータとその説明を示します。</p>
+    </button></h2><p>Milvus 2.5 introduces a new version of API which streamlines the grant operation. You no longer need to look up the object type when granting a privilege to a role. The following are the parameters and corresponding explanations.</p>
 <ul>
-<li><p><strong>role_name:</strong>特権または特権グループを付与する対象となるロールの名前です。</p></li>
-<li><p><strong>リソース</strong>：特定のインスタンス、データベース、コレクションを指定することができます。</p></li>
+<li><p><strong>role_name:</strong> The name of the target role to which privilege(s) or privilege group(s) need to be granted.</p></li>
+<li><p><strong>Resource</strong>: The target resource of a privilege, which can be a specific instance, database, or collection.</p></li>
 </ul>
-<p>以下の表では、<code translate="no">client.grantV2()</code> メソッドでリソースを指定する方法を説明します。</p>
+<p>The following table explains how to specify the resource in the <code translate="no">client.grantV2()</code> method.</p>
 <table>
    <tr>
-     <th><p><strong>レベル</strong></p></th>
-     <th><p><strong>リソース</strong></p></th>
-     <th><p><strong>付与方法</strong></p></th>
-     <th><p><strong>注意事項</strong></p></th>
+     <th><p><strong>Level</strong></p></th>
+     <th><p><strong>Resource</strong></p></th>
+     <th><p><strong>Grant Method</strong></p></th>
+     <th><p><strong>Notes</strong></p></th>
    </tr>
    <tr>
-     <td rowspan="2"><p><strong>コレクション</strong></p></td>
-     <td><p>特定のコレクション</p></td>
+     <td rowspan="2"><p><strong>Collection</strong></p></td>
+     <td><p>A specific collection</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -57,10 +59,10 @@ summary: ロールを作成すると、そのロールに権限を付与する�
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>対象となるコレクションの名前と、対象となるコレクションが属するデータベースの名前を入力します。</p></td>
+     <td><p>Input the name of your target collection and the name of the database to which the target collection belongs.</p></td>
    </tr>
    <tr>
-     <td><p>特定のデータベース下のすべてのコレクション</p></td>
+     <td><p>All collections under a specific database</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -68,11 +70,11 @@ summary: ロールを作成すると、そのロールに権限を付与する�
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>対象のデータベース名と、コレクション名としてワイルドカード<code translate="no">*</code> を入力します。</p></td>
+     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
    </tr>
    <tr>
-     <td rowspan="2"><p><strong>データベース</strong></p></td>
-     <td><p>特定のデータベース</p></td>
+     <td rowspan="2"><p><strong>Database</strong></p></td>
+     <td><p>A specific database</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -80,10 +82,10 @@ summary: ロールを作成すると、そのロールに権限を付与する�
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>対象のデータベース名と、コレクション名としてワイルドカード<code translate="no">*</code> を入力します。</p></td>
+     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
    </tr>
    <tr>
-     <td><p>現在のインスタンス配下のすべてのデータベース</p></td>
+     <td><p>All databases under the current instance</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -91,11 +93,11 @@ summary: ロールを作成すると、そのロールに権限を付与する�
      db_name="*"
  )
 </code></pre></td>
-     <td><p>データベース名として<code translate="no">*</code> を、コレクション名として<code translate="no">*</code> を入力します。</p></td>
+     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
    </tr>
    <tr>
-     <td><p><strong>インスタンス</strong></p></td>
-     <td><p>現在のインスタンス</p></td>
+     <td><p><strong>Instance</strong></p></td>
+     <td><p>The current instance</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="ClusterAdmin", 
@@ -103,313 +105,318 @@ summary: ロールを作成すると、そのロールに権限を付与する�
      db_name="*"
  )
 </code></pre></td>
-     <td><p>データベース名として<code translate="no">*</code> を、コレクション名として<code translate="no">*</code> を入力します。</p></td>
+     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
    </tr>
 </table>
 <ul>
-<li><p><strong>特権</strong>：ロールに付与する必要のある特定の権限または<a href="/docs/ja/privilege_group.md">権限グループ</a>。現在、Milvusでは56種類の権限を付与することができます。下の表はMilvusの権限の一覧です。</p>
+<li><p><strong>Privilege</strong>: The specific privilege or <a href="/docs/privilege_group.md">privilege group</a> that you need to grant to a role. Currently, Milvus provides 56 types of privileges that you can grant. The table below lists the privileges in Milvus.</p>
 <p><div class="alert note"></p>
-<p>下表のタイプ列は権限の検索を容易にするためのものであり、分類の目的のみに使用されます。権限を付与する際、タイプを理解する必要はありません。対応する権限を入力するだけです。</p>
+<p>The type column in the table below are user to facilitate your quick lookup for privileges and is used for classification purposes only. When granting privileges, you do not need to understand the types. You just need to input the corresponding privileges.</p>
 <p></div></p>
 <p><table>
 <tr>
-<th><p><strong>タイプ</strong></p></th>
-<th><p><strong>権限</strong></p></th>
-<th><p><strong>説明</strong></p></th>
-<th><p><strong>クライアント側の関連APIの説明</strong></p></th>
+<th><p><strong>Type</strong></p></th>
+<th><p><strong>Privilege</strong></p></th>
+<th><p><strong>Description</strong></p></th>
+<th><p><strong>Relevant API description on the client side</strong></p></th>
 </tr>
 <tr>
-<td rowspan="5"><p>データベース権限</p></td>
-<td><p>データベースの一覧表示</p></td>
-<td><p>現在のインスタンスのすべてのデータベースを表示する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースの一覧</a></p></td>
+<td rowspan="5"><p>Database Privileges</p></td>
+<td><p>ListDatabases</p></td>
+<td><p>View all databases in the current instance</p></td>
+<td><p><a href="/docs/manage_databases.md">ListDatabases</a></p></td>
 </tr>
 <tr>
-<td><p>データベースの詳細を表示する</p></td>
-<td><p>データベースの詳細を表示する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースの詳細を表示する</a></p></td>
+<td><p>DescribeDatabase</p></td>
+<td><p>View the details of a database</p></td>
+<td><p><a href="/docs/manage_databases.md">DescribeDatabase</a></p></td>
 </tr>
 <tr>
-<td><p>データベースの作成</p></td>
-<td><p>データベースを作成する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースを作成する</a></p></td>
+<td><p>CreateDatabase</p></td>
+<td><p>Create a database</p></td>
+<td><p><a href="/docs/manage_databases.md">CreateDatabase</a></p></td>
 </tr>
 <tr>
-<td><p>データベースの削除</p></td>
-<td><p>データベースを削除する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースの削除</a></p></td>
+<td><p>DropDatabase</p></td>
+<td><p>Drop a database</p></td>
+<td><p><a href="/docs/manage_databases.md">DropDatabase</a></p></td>
 </tr>
 <tr>
-<td><p>データベースの変更</p></td>
-<td><p>データベースのプロパティを変更する</p></td>
-<td><p><a href="/docs/ja/manage_databases.md">データベースの変更</a></p></td>
+<td><p>AlterDatabase</p></td>
+<td><p>Modify the properties of a database</p></td>
+<td><p><a href="/docs/manage_databases.md">AlterDatabase</a></p></td>
 </tr>
 <tr>
-<td rowspan="18"><p>コレクション権限</p></td>
+<td rowspan="18"><p>Collection Privileges</p></td>
 <td><p>GetFlushState</p></td>
-<td><p>コレクションのフラッシュ操作のステータスを確認する</p></td>
+<td><p>Check the status of the collection flush operation</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadState</p></td>
-<td><p>コレクションのロード状態を確認する</p></td>
+<td><p>Check the load status of a collection</p></td>
 <td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadingProgress</p></td>
-<td><p>コレクションの読み込み状況を確認する</p></td>
+<td><p>Check the loading progress of a collection</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
 </tr>
 <tr>
-<td><p>コレクションの表示</p></td>
-<td><p>コレクション権限ですべてのコレクションを表示する</p></td>
-<td><p><a href="/docs/ja/view-collections.md">コレクションを表示</a></p></td>
+<td><p>ShowCollections</p></td>
+<td><p>View all collections with collection privileges</p></td>
+<td><p><a href="/docs/view-collections.md">ShowCollections</a></p></td>
 </tr>
 <tr>
-<td><p>エイリアス一覧</p></td>
-<td><p>コレクションのエイリアスをすべて表示する</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">エイリアスの一覧</a></p></td>
+<td><p>ListAliases</p></td>
+<td><p>View all aliases of a collection</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">ListAliases</a></p></td>
 </tr>
 <tr>
-<td><p>コレクションの説明</p></td>
-<td><p>コレクションの詳細を表示</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">コレクションの詳細</a></p></td>
+<td><p>DescribeCollection</p></td>
+<td><p>View the details of a collection</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">DescribeCollection</a></p></td>
 </tr>
 <tr>
-<td><p>エイリアスの一覧</p></td>
-<td><p>エイリアスの詳細を表示</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">エイリアスを記述する</a></p></td>
+<td><p>DescribeAlias</p></td>
+<td><p>View the details of an alias</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">DescribeAlias</a></p></td>
 </tr>
 <tr>
 <td><p>GetStatistics</p></td>
-<td><p>コレクションの統計情報を取得します (例：コレクション内のエンティティ数)。</p></td>
+<td><p>Obtain the statistics of a collection (eg. The number of entities in a collection)</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
 </tr>
 <tr>
 <td><p>CreateCollection</p></td>
-<td><p>コレクションを作成する</p></td>
-<td><p><a href="/docs/ja/create-collection.md">コレクションの作成</a></p></td>
+<td><p>Create a collection</p></td>
+<td><p><a href="/docs/create-collection.md">CreateCollection</a></p></td>
 </tr>
 <tr>
-<td><p>コレクションの削除</p></td>
-<td><p>コレクションを削除する</p></td>
-<td><p><a href="/docs/ja/drop-collection.md">コレクションの削除</a></p></td>
+<td><p>DropCollection</p></td>
+<td><p>Drop a collection</p></td>
+<td><p><a href="/docs/drop-collection.md">DropCollection</a></p></td>
 </tr>
 <tr>
-<td><p>ロード</p></td>
-<td><p>コレクションをロードする</p></td>
-<td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">LoadCollection/GetLoadingProgress/GetLoadState</a></p></td>
+<td><p>Load</p></td>
+<td><p>Load a collection</p></td>
+<td><p><a href="/docs/load-and-release.md">LoadCollection</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a>/<a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
 </tr>
 <tr>
-<td><p>解放</p></td>
-<td><p>コレクションを解放する</p></td>
-<td><p><a href="/docs/ja/load-and-release.md">コレクションを解放する</a></p></td>
+<td><p>Release</p></td>
+<td><p>Release a collection</p></td>
+<td><p><a href="/docs/load-and-release.md">ReleaseCollection</a></p></td>
 </tr>
 <tr>
-<td><p>フラッシュ</p></td>
-<td><p>コレクション内のすべてのエンティティを密封されたセグメントに永続化する。フラッシュ操作の後に挿入されたエンティティは、新しいセグメントに格納されます。</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">フラッシュ</a><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">/</a><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
+<td><p>Flush</p></td>
+<td><p>Persist all entities in a collection to a sealed segment. Any entity inserted after the flush operation will be stored in a new segment.</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">Flush</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
 </tr>
 <tr>
-<td><p>コンパクション</p></td>
-<td><p>手動でコンパクションをトリガする</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">コンパクト化</a></p></td>
+<td><p>Compaction</p></td>
+<td><p>Manually trigger compaction</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">Compact</a></p></td>
 </tr>
 <tr>
-<td><p>コレクション名の変更</p></td>
-<td><p>コレクション名の変更</p></td>
-<td><p><a href="/docs/ja/modify-collection.md">コレクション名の変更</a></p></td>
+<td><p>RenameCollection</p></td>
+<td><p>Rename a collection</p></td>
+<td><p><a href="/docs/modify-collection.md">RenameCollection</a></p></td>
 </tr>
 <tr>
-<td><p>エイリアスの作成</p></td>
-<td><p>コレクションのエイリアスを作成する</p></td>
-<td><p><a href="/docs/ja/manage-aliases.md">エイリアスの作成</a></p></td>
+<td><p>CreateAlias</p></td>
+<td><p>Create an alias for a collection</p></td>
+<td><p><a href="/docs/manage-aliases.md">CreateAlias</a></p></td>
 </tr>
 <tr>
-<td><p>エイリアスの削除</p></td>
-<td><p>コレクションのエイリアスを削除する</p></td>
-<td><p><a href="/docs/ja/manage-aliases.md">エイリアスの削除</a></p></td>
+<td><p>DropAlias</p></td>
+<td><p>Drop the alias of a collection</p></td>
+<td><p><a href="/docs/manage-aliases.md">DropAlias</a></p></td>
 </tr>
 <tr>
 <td><p>FlushAll</p></td>
-<td><p>データベース内のすべてのコレクションをフラッシュします</p></td>
+<td><p>Flush all collections in a database</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
 </tr>
 <tr>
-<td rowspan="4"><p>パーティション特権</p></td>
+<td rowspan="4"><p>Partition Privileges</p></td>
 <td><p>HasPartition</p></td>
-<td><p>パーティションが存在するかチェックする</p></td>
-<td><p><a href="/docs/ja/manage-partitions.md">ハス・パーティション</a></p></td>
+<td><p>Check whether a partition exists</p></td>
+<td><p><a href="/docs/manage-partitions.md">HasPartition</a></p></td>
 </tr>
 <tr>
-<td><p>パーティションの表示</p></td>
-<td><p>コレクション内のすべてのパーティションを表示する</p></td>
-<td><p><a href="/docs/ja/manage-partitions.md">パーティションの表示</a></p></td>
+<td><p>ShowPartitions</p></td>
+<td><p>View all partitions in a collection</p></td>
+<td><p><a href="/docs/manage-partitions.md">ShowPartitions</a></p></td>
 </tr>
 <tr>
-<td><p>パーティションの作成</p></td>
-<td><p>パーティションを作成する</p></td>
-<td><p><a href="/docs/ja/manage-partitions.md">パーティションの作成</a></p></td>
+<td><p>CreatePartition</p></td>
+<td><p>Create a partition</p></td>
+<td><p><a href="/docs/manage-partitions.md">CreatePartition</a></p></td>
 </tr>
 <tr>
-<td><p>パーティションの削除</p></td>
-<td><p>パーティションを削除する</p></td>
-<td><p><a href="/docs/ja/manage-partitions.md">パーティションの削除</a></p></td>
+<td><p>DropPartition</p></td>
+<td><p>Drop a partition</p></td>
+<td><p><a href="/docs/manage-partitions.md">DropPartition</a></p></td>
 </tr>
 <tr>
-<td rowspan="3"><p>インデックスの権限</p></td>
-<td><p>インデックスの詳細</p></td>
-<td><p>インデックスの詳細を表示する</p></td>
-<td><p><a href="/docs/ja/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
+<td rowspan="3"><p>Index Privileges</p></td>
+<td><p>IndexDetail</p></td>
+<td><p>View the details of an index</p></td>
+<td><p><a href="/docs/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
 </tr>
 <tr>
-<td><p>インデックスの作成</p></td>
-<td><p>インデックスの作成</p></td>
-<td><p><a href="/docs/ja/index-vector-fields.md">インデックスの作成</a></p></td>
+<td><p>CreateIndex</p></td>
+<td><p>Create an index</p></td>
+<td><p><a href="/docs/index-vector-fields.md">CreateIndex</a></p></td>
 </tr>
 <tr>
-<td><p>インデックスの削除</p></td>
-<td><p>インデックスの削除</p></td>
-<td><p><a href="/docs/ja/index-vector-fields.md">インデックスの削除</a></p></td>
+<td><p>DropIndex</p></td>
+<td><p>Drop an index</p></td>
+<td><p><a href="/docs/index-vector-fields.md">DropIndex</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>リソース管理権限</p></td>
-<td><p>ロードバランス</p></td>
-<td><p>ロードバランスを実現する</p></td>
-<td><p><a href="/docs/ja/resource_group.md">ロードバランス</a></p></td>
+<td rowspan="10"><p>Resource Management Privileges</p></td>
+<td><p>LoadBalance</p></td>
+<td><p>Achieve load balance</p></td>
+<td><p><a href="/docs/resource_group.md">LoadBalance</a></p></td>
 </tr>
 <tr>
-<td><p>リソースグループの作成</p></td>
-<td><p>リソースグループの作成</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">リソースグループの作成</a></p></td>
+<td><p>CreateResourceGroup</p></td>
+<td><p>Create a resource group</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
 </tr>
 <tr>
-<td><p>リソースグループの削除</p></td>
-<td><p>リソースグループの削除</p></td>
-<td><p><a href="/docs/ja/resource_group.md">リソースグループの削除</a></p></td>
+<td><p>DropResourceGroup</p></td>
+<td><p>Drop a resource group</p></td>
+<td><p><a href="/docs/resource_group.md">DropResourceGroup</a></p></td>
 </tr>
 <tr>
-<td><p>リソースグループの更新</p></td>
-<td><p>リソースグループの更新</p></td>
-<td><p><a href="/docs/ja/resource_group.md">リソースグループの更新</a></p></td>
+<td><p>UpdateResourceGroups</p></td>
+<td><p>Update a resource group</p></td>
+<td><p><a href="/docs/resource_group.md">UpdateResourceGroups</a></p></td>
 </tr>
 <tr>
-<td><p>リソースグループの詳細表示</p></td>
-<td><p>リソースグループの詳細を表示する</p></td>
-<td><p><a href="/docs/ja/resource_group.md">リソースグループの詳細表示</a></p></td>
+<td><p>DescribeResourceGroup</p></td>
+<td><p>View the details of a resource group</p></td>
+<td><p><a href="/docs/resource_group.md">DescribeResourceGroup</a></p></td>
 </tr>
 <tr>
-<td><p>リソースグループの一覧</p></td>
-<td><p>現在のインスタンスの全てのリソースグループを表示</p></td>
-<td><p><a href="/docs/ja/resource_group.md">リソースグループの一覧</a></p></td>
+<td><p>ListResourceGroups</p></td>
+<td><p>View all resource groups of the current instance</p></td>
+<td><p><a href="/docs/resource_group.md">ListResourceGroups</a></p></td>
 </tr>
 <tr>
-<td><p>転送ノード</p></td>
-<td><p>リソースグループ間のノード転送</p></td>
-<td><p><a href="/docs/ja/resource_group.md">トランスファーノード</a></p></td>
+<td><p>TransferNode</p></td>
+<td><p>Transfer nodes between resource groups</p></td>
+<td><p><a href="/docs/resource_group.md">TransferNode</a></p></td>
 </tr>
 <tr>
-<td><p>トランスファーレプリカ</p></td>
-<td><p>リソースグループ間でレプリカを転送</p></td>
-<td><p><a href="/docs/ja/resource_group.md">トランスファーレプリカ</a></p></td>
+<td><p>TransferReplica</p></td>
+<td><p>Transfer replicas between resource groups</p></td>
+<td><p><a href="/docs/resource_group.md">TransferReplica</a></p></td>
 </tr>
 <tr>
-<td><p>バックアップRBAC</p></td>
-<td><p>現在のインスタンスのすべてのRBAC関連操作のバックアップを作成する</p></td>
-<td><p>バックアップRBAC</p></td>
+<td><p>BackupRBAC</p></td>
+<td><p>Create a backup for all RBAC related operations in the current instance</p></td>
+<td><p>BackupRBAC</p></td>
 </tr>
 <tr>
-<td><p>リストアRBAC</p></td>
-<td><p>現在のインスタンスのすべてのRBAC関連操作のバックアップをリストアする</p></td>
-<td><p>リストアRBAC</p></td>
+<td><p>RestoreRBAC</p></td>
+<td><p>Restore a backup of all RBAC related operations in the current instance</p></td>
+<td><p>RestoreRBAC</p></td>
 </tr>
 <tr>
-<td rowspan="6"><p>エンティティ権限</p></td>
-<td><p>クエリ</p></td>
-<td><p>クエリを実行する</p></td>
-<td><p><a href="/docs/ja/get-and-scalar-query.md">クエリ</a></p></td>
+<td rowspan="6"><p>Entity Privileges</p></td>
+<td><p>Query</p></td>
+<td><p>Conduct a query</p></td>
+<td><p><a href="/docs/get-and-scalar-query.md">Query</a></p></td>
 </tr>
 <tr>
-<td><p>検索</p></td>
-<td><p>検索を行う</p></td>
-<td><p><a href="/docs/ja/single-vector-search.md">検索</a></p></td>
+<td><p>Search</p></td>
+<td><p>Conduct a search</p></td>
+<td><p><a href="/docs/single-vector-search.md">Search</a></p></td>
 </tr>
 <tr>
-<td><p>挿入</p></td>
-<td><p>エンティティの挿入</p></td>
-<td><p><a href="/docs/ja/insert-update-delete.md">挿入</a></p></td>
+<td><p>Insert</p></td>
+<td><p>Insert entities</p></td>
+<td><p><a href="/docs/insert-update-delete.md">Insert</a></p></td>
 </tr>
 <tr>
-<td><p>削除</p></td>
-<td><p>エンティティの削除</p></td>
-<td><p><a href="/docs/ja/delete-entities.md">削除</a></p></td>
+<td><p>Delete</p></td>
+<td><p>Delete entities</p></td>
+<td><p><a href="/docs/delete-entities.md">Delete</a></p></td>
 </tr>
 <tr>
-<td><p>アップサート</p></td>
-<td><p>エンティティのアップサート</p></td>
-<td><p><a href="/docs/ja/upsert-entities.md">アップサート</a></p></td>
+<td><p>Upsert</p></td>
+<td><p>Upsert entities</p></td>
+<td><p><a href="/docs/upsert-entities.md">Upsert</a></p></td>
 </tr>
 <tr>
-<td><p>インポート</p></td>
-<td><p>エンティティの一括挿入またはインポート</p></td>
-<td><p><a href="/docs/ja/import-data.md">一括挿入/インポート</a></p></td>
+<td><p>Import</p></td>
+<td><p>Bulk insert or import entities</p></td>
+<td><p><a href="/docs/import-data.md">BulkInsert/Import</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>RBAC権限</p></td>
-<td><p>オーナーシップの作成</p></td>
-<td><p>ユーザーまたはロールの作成</p></td>
-<td><p><a href="/docs/ja/users_and_roles.md">ユーザ作成/ロール作成</a></p></td>
+<td rowspan="10"><p>RBAC Privileges</p></td>
+<td><p>CreateOwnership</p></td>
+<td><p>Create a user or a role</p></td>
+<td><p><a href="/docs/users_and_roles.md">CreateUser/CreateRole</a></p></td>
 </tr>
 <tr>
-<td><p>ユーザの更新</p></td>
-<td><p>ユーザーのパスワードを更新する</p></td>
-<td><p><a href="/docs/ja/users_and_roles.md">クレデンシャルの更新</a></p></td>
+<td><p>UpdateUser</p></td>
+<td><p>Update the password of a user</p></td>
+<td><p><a href="/docs/users_and_roles.md">UpdateCredential</a></p></td>
 </tr>
 <tr>
-<td><p>所有権の削除</p></td>
-<td><p>ユーザのパスワードまたはロールを削除する</p></td>
-<td><p><a href="/docs/ja/drop_users_roles.md">クレデンシャルの削除/ロールの削除</a></p></td>
+<td><p>DropOwnership</p></td>
+<td><p>Drop a user password or a role</p></td>
+<td><p><a href="/docs/drop_users_roles.md">DeleteCredential/DropRole</a></p></td>
 </tr>
 <tr>
-<td><p>オーナーシップの選択</p></td>
-<td><p>特定のロールが付与されているすべてのユーザーを表示</p></td>
-<td><p><a href="/docs/ja/grant_roles.md">選択ロール/選択グラント</a></p></td>
+<td><p>SelectOwnership</p></td>
+<td><p>View all users that are granted a specific role</p></td>
+<td><p><a href="/docs/grant_roles.md">SelectRole/SelectGrant</a></p></td>
 </tr>
 <tr>
-<td><p>オーナーシップの管理</p></td>
-<td><p>ユーザーまたはロールの管理、またはユーザーへのロールの付与</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2。</a></p></td>
+<td><p>ManageOwnership</p></td>
+<td><p>Manage a user or a role or grant a role to a user</p></td>
+<td><p><a href="/docs/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
 </tr>
 <tr>
-<td><p>ユーザ選択</p></td>
-<td><p>ユーザーに付与されたすべてのロールを表示</p></td>
-<td><p><a href="/docs/ja/grant_roles.md">ユーザの選択</a></p></td>
+<td><p>SelectUser</p></td>
+<td><p>View all roles granted to a user</p></td>
+<td><p><a href="/docs/grant_roles.md">SelectUser</a></p></td>
 </tr>
 <tr>
-<td><p>特権グループの作成</p></td>
-<td><p>特権グループの作成</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">特権グループの作成</a></p></td>
+<td><p>CreatePrivilegeGroup</p></td>
+<td><p>Create a privilege group</p></td>
+<td><p><a href="/docs/privilege_group.md">CreatePrivilegeGroup</a></p></td>
 </tr>
 <tr>
-<td><p>特権グループの削除</p></td>
-<td><p>特権グループの削除</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">特権グループの削除</a></p></td>
+<td><p>DropPrivilegeGroup</p></td>
+<td><p>Drop a privilege group</p></td>
+<td><p><a href="/docs/privilege_group.md">DropPrivilegeGroup</a></p></td>
 </tr>
 <tr>
-<td><p>特権グループの一覧表示</p></td>
-<td><p>現在のインスタンスのすべての特権グループを表示</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">特権グループの一覧</a></p></td>
+<td><p>ListPrivilegeGroups</p></td>
+<td><p>View all privilege groups in the current instance</p></td>
+<td><p><a href="/docs/privilege_group.md">ListPrivilegeGroups</a></p></td>
 </tr>
 <tr>
-<td><p>特権グループの操作</p></td>
-<td><p>特権グループへの特権の追加または特権グループからの特権の削除</p></td>
-<td><p><a href="/docs/ja/privilege_group.md">特権グループの操作</a></p></td>
+<td><p>OperatePrivilegeGroup</p></td>
+<td><p>Add privileges to or remove privileges from a privilege group</p></td>
+<td><p><a href="/docs/privilege_group.md">OperatePrivilegeGroup</a></p></td>
 </tr>
 </table></p></li>
 </ul>
-<p>以下の例では、<code translate="no">default</code> データベース下の<code translate="no">collection_01</code> で特権<code translate="no">PrivilegeSearch</code> を付与する方法と、<code translate="no">privilege_group_1</code> という特権グループを<code translate="no">role_a</code> というロールに付与する方法を示します。</p>
+<p>The following example demonstrates how to grant the privilege <code translate="no">PrivilegeSearch</code> on <code translate="no">collection_01</code> under the <code translate="no">default</code> database as well as a privilege group named <code translate="no">privilege_group_1</code> to the role <code translate="no">role_a</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -560,7 +567,7 @@ curl --request POST \
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-a-role" class="common-anchor-header">ロールの記述<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
+<h2 id="Describe-a-role" class="common-anchor-header">Describe a role<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -575,9 +582,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次の例では、<code translate="no">describe_role</code> メソッドを使用して、ロール<code translate="no">role_a</code> に付与された権限を表示する方法を示します。</p>
+    </button></h2><p>The following example demonstrates how to view the privileges granted to the role <code translate="no">role_a</code> using the <code translate="no">describe_role</code> method.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -609,7 +621,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以下は出力例です。</p>
+<p>Below is an example output.</p>
 <pre><code translate="no" class="language-python">{
      <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
      <span class="hljs-string">&quot;privileges&quot;</span>: [
@@ -624,7 +636,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
      ]
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">ロールから権限または権限グループを取り消す<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
+<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">Revoke a privilege or a privilege group from a role<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -639,9 +651,14 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次の例は、<code translate="no">default</code> データベース下の<code translate="no">collection_01</code> の特権<code translate="no">PrivilegeSearch</code> と、<code translate="no">role_a</code> ロールに付与された特権グループ<code translate="no">privilege_group_1</code> を取り消す方法を示しています。</p>
+    </button></h2><p>The following example demonstrates how to revoke the privilege <code translate="no">PrivilegeSearch</code> on <code translate="no">collection_01</code> under the <code translate="no">default</code> database as well as the privilege group <code translate="no">privilege_group_1</code> that have been granted to the role <code translate="no">role_a</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
     privilege=<span class="hljs-string">&quot;Search&quot;</span>,

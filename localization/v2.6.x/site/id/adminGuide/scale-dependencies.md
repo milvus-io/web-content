@@ -1,8 +1,8 @@
 ---
 id: scale-dependencies.md
-title: Ketergantungan Skala
+title: Scale Dependencies
 ---
-<h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Skala Ketergantungan Milvus<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
+<h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Scale Milvus Dependencies<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,11 +17,11 @@ title: Ketergantungan Skala
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus bergantung pada berbagai ketergantungan seperti MinIO, Kafka, Pulsar, dan lain-lain. Menskalakan komponen-komponen ini dapat meningkatkan kemampuan beradaptasi Milvus terhadap kebutuhan yang berbeda.</p>
+    </button></h1><p>Milvus relies on various dependencies such as MinIO, Kafka, Pulsar, and etcd. Scaling these components can enhance Milvus’s adaptability to different requirements.</p>
 <div class="alert note">
-<p>Untuk pengguna Milvus Operator, lihat <a href="/docs/id/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a>, Mengonfigurasi <a href="/docs/id/meta_storage_operator.md">Penyimpanan Meta dengan Milvus Operator</a>, dan <a href="/docs/id/message_storage_operator.md">Mengonfigurasi Penyimpanan Pesan dengan Milvus Operator</a>.</p>
+<p>For Milvus Operator users, refer to <a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a>, <a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a>, and <a href="/docs/message_storage_operator.md">Configure Message Storage with Milvus Operator</a>.</p>
 </div>
-<h2 id="Scale-MinIO" class="common-anchor-header">Skala MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
+<h2 id="Scale-MinIO" class="common-anchor-header">Scale MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,7 +36,7 @@ title: Ketergantungan Skala
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Meningkatkan sumber daya per pod MinIO</h3><p>MinIO, sistem penyimpanan objek yang digunakan oleh Milvus, dapat ditingkatkan sumber daya CPU dan memorinya untuk setiap pod.</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Increase resources per MinIO pod</h3><p>MinIO, an object storage system used by Milvus, can have its CPU and memory resources increased for each pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">resources:</span>
@@ -44,22 +44,22 @@ title: Ketergantungan Skala
        <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
        <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan file, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda juga dapat meningkatkan kapasitas disk untuk cluster MioIO dengan mengubah nilai <code translate="no">spec.resources.requests.storage</code> secara manual untuk setiap MioIO Persistent Volume Claim (PVC). Perhatikan bahwa kelas penyimpanan default Anda harus mengizinkan ekspansi volume.</p>
-<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Menambahkan kumpulan server MioIO tambahan (Disarankan)</h3><p>Anda disarankan untuk menambahkan pool server MioIO ekstra untuk instance Milvus Anda.</p>
+<p>You can also increase the disk capacity for the MioIO cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each MioIO Persistent Volume Claim (PVC). Note that your default storage class should allow volume expansion.</p>
+<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Add an extra MinIO server pool (Recommended)</h3><p>You are advised to add an extra MioIO server pool for your Milvus instance.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">zones:</span> <span class="hljs-number">2</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan file, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Ini akan menambahkan sebuah pool server tambahan ke cluster MinIO Anda, sehingga Milvus dapat menulis ke pool server MinIO berdasarkan kapasitas disk kosong dari setiap pool server. Sebagai contoh, jika sebuah grup yang terdiri dari tiga pool memiliki total ruang kosong 10 TiB yang didistribusikan di seluruh pool sebagai berikut:</p>
+<p>This adds an additional server pool to your MinIO cluster, allowing Milvus to write to the MinIO server pool based on the free disk capacity of each server pool. For example, if a group of three pools has a total of 10 TiB free space distributed across the pools as follows:</p>
 <table>
 <thead>
-<tr><th></th><th>Ruang kosong</th><th>Kemungkinan penulisan</th></tr>
+<tr><th></th><th>Free space</th><th>Write possibility</th></tr>
 </thead>
 <tbody>
 <tr><td>Pool A</td><td>3 TiB</td><td>30% (3/10)</td></tr>
@@ -68,7 +68,7 @@ title: Ketergantungan Skala
 </tbody>
 </table>
 <div class="alert note">
-<p>MinIO tidak secara otomatis menyeimbangkan kembali objek di seluruh pool server baru. Anda dapat memulai prosedur penyeimbangan ulang secara manual dengan <code translate="no">mc admin rebalance</code> jika diperlukan.</p>
+<p>MinIO does not automatically rebalance objects across new server pools. You can manually initiate a rebalance procedure with <code translate="no">mc admin rebalance</code> if needed.</p>
 </div>
 <h2 id="Kafka" class="common-anchor-header">Kafka<button data-href="#Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,7 +85,7 @@ title: Ketergantungan Skala
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Tingkatkan sumber daya per pod broker Kafka</h3><p>Tingkatkan kapasitas broker Kafka dengan menyesuaikan sumber daya CPU dan memori untuk setiap pod broker.</p>
+    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Increase resource per Kafka broker pod</h3><p>Enhance the Kafka broker capacity by adjusting the CPU and memory resources for each broker pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">resources:</span>
@@ -93,11 +93,11 @@ title: Ketergantungan Skala
         <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
         <span class="hljs-attr">memory:</span> <span class="hljs-string">12Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan file, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-bash">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda juga dapat meningkatkan kapasitas disk untuk cluster Kafka dengan mengubah nilai <code translate="no">spec.resources.requests.storage</code> secara manual untuk setiap Kafka Persistent Volume Claim (PVC). Pastikan kelas penyimpanan default Anda mengizinkan ekspansi volume.</p>
-<h2 id="Add-an-extra-Kafka-broker-pool-Recommended" class="common-anchor-header">Tambahkan kumpulan broker Kafka ekstra (Disarankan)<button data-href="#Add-an-extra-Kafka-broker-pool-Recommended" class="anchor-icon" translate="no">
+<p>You can also increase the disk capacity for the Kafka cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each Kafka Persistent Volume Claim (PVC). Ensure your default storage class allows volume expansion.</p>
+<h2 id="Add-an-extra-Kafka-broker-pool-Recommended" class="common-anchor-header">Add an extra Kafka broker pool (Recommended)<button data-href="#Add-an-extra-Kafka-broker-pool-Recommended" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,17 +112,17 @@ title: Ketergantungan Skala
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda disarankan untuk menambahkan pool server Kafka tambahan untuk instance Milvus Anda.</p>
+    </button></h2><p>You are advised to add an extra Kafka server pool for your Milvus instance.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">4</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan berkas, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Ini akan menambahkan satu broker tambahan ke kluster Kafka Anda.</p>
+<p>This will add an extra broker to your Kafka cluster.</p>
 <div class="alert note">
-<p>Kafka tidak secara otomatis menyeimbangkan kembali topik di semua broker. Seimbangkan kembali topik/partisi secara manual di semua broker Kafka menggunakan <code translate="no">bin/kafka-reassign-partitions.sh</code> setelah masuk ke setiap pod broker Kafka jika diperlukan.</p>
+<p>Kafka does not automatically rebalance topics across all brokers. Manually rebalance topics/partitions across all Kafka brokers using <code translate="no">bin/kafka-reassign-partitions.sh</code> after logging into each Kafka broker pod if needed.</p>
 </div>
 <h2 id="Pulsar" class="common-anchor-header">Pulsar<button data-href="#Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,8 +139,8 @@ title: Ketergantungan Skala
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar memisahkan komputasi dan penyimpanan. Anda dapat secara mandiri meningkatkan kapasitas broker Pulsar (komputasi) dan bandar judi Pulsar (penyimpanan).</p>
-<h2 id="Increase-resources-per-Pulsar-broker-pod" class="common-anchor-header">Meningkatkan sumber daya per pod broker Pulsar<button data-href="#Increase-resources-per-Pulsar-broker-pod" class="anchor-icon" translate="no">
+    </button></h2><p>Pulsar separates computation and storage. You can independently increase the capacity of Pulsar brokers (computation) and Pulsar bookies (storage).</p>
+<h2 id="Increase-resources-per-Pulsar-broker-pod" class="common-anchor-header">Increase resources per Pulsar broker pod<button data-href="#Increase-resources-per-Pulsar-broker-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -163,10 +163,10 @@ title: Ketergantungan Skala
          <span class="hljs-attr">cpu:</span> <span class="hljs-number">4</span>
          <span class="hljs-attr">memory:</span> <span class="hljs-string">16Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan file, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Increase-resources-per-Pulsar-bookie-pod" class="common-anchor-header">Tingkatkan sumber daya per pod bandar Pulsar<button data-href="#Increase-resources-per-Pulsar-bookie-pod" class="anchor-icon" translate="no">
+<h2 id="Increase-resources-per-Pulsar-bookie-pod" class="common-anchor-header">Increase resources per Pulsar bookie pod<button data-href="#Increase-resources-per-Pulsar-bookie-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,11 +189,11 @@ title: Ketergantungan Skala
          <span class="hljs-attr">cpu:</span> <span class="hljs-number">4</span>
          <span class="hljs-attr">memory:</span> <span class="hljs-string">16Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan file, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda juga dapat meningkatkan kapasitas disk untuk cluster Pulsar dengan mengubah nilai <code translate="no">spec.resources.requests.storage</code> secara manual untuk setiap Persistent Volume Claim (PVC) bandar Pulsar. Perhatikan bahwa kelas penyimpanan default Anda harus mengizinkan ekspansi volume.</p>
-<p>Sebuah pod bandar Pulsar memiliki dua jenis penyimpanan: <code translate="no">journal</code> dan <code translate="no">legers</code>. Untuk jenis penyimpanan <code translate="no">journal</code>, pertimbangkan untuk menggunakan <code translate="no">ssd</code> atau <code translate="no">gp3</code> sebagai kelas penyimpanan. Berikut adalah contoh untuk menentukan kelas penyimpanan untuk jurnal pulsar.</p>
+<p>You can also increase the disk capacity for the Pulsar cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each Pulsar bookie’s Persistent Volume Claim (PVC). Note that your default storage class should allow volume expansion.</p>
+<p>A Pulsar bookie pod has two types of storage: <code translate="no">journal</code> and <code translate="no">legers</code>. For the <code translate="no">journal</code> type of storage, consider using <code translate="no">ssd</code> or <code translate="no">gp3</code> as the storage class. Here’s an example to specify storageclass for pulsar journal.</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">volumes:</span>
@@ -201,20 +201,20 @@ title: Ketergantungan Skala
         <span class="hljs-attr">size:</span> <span class="hljs-string">20Gi</span>
         <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">gp3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Menambahkan pod broker Pulsar tambahan</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Add an extra Pulsar broker pod</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">broker:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan file, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Tambahkan sebuah pod bandar Pulsar tambahan (Disarankan)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Add an extra Pulsar bookie pod (Recommended)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan file, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="etcd" class="common-anchor-header">etcd<button data-href="#etcd" class="anchor-icon" translate="no">
@@ -232,21 +232,21 @@ title: Ketergantungan Skala
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Meningkatkan sumber daya per pod etcd (disarankan)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Increase resources per etcd pod (recommended)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">resources:</span>
      <span class="hljs-attr">limits:</span>
        <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
        <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan berkas, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-extra-etcd-pods" class="common-anchor-header">Menambahkan pod etcd tambahan</h3><p>Jumlah total pod etcd harus dalam angka ganjil.</p>
+<h3 id="Add-extra-etcd-pods" class="common-anchor-header">Add extra etcd pods</h3><p>The total number of etcd pods should be in odd numbers.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">5</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah menyimpan berkas, terapkan perubahan dengan perintah berikut:</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>

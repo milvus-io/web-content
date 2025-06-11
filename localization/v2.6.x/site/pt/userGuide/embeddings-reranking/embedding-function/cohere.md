@@ -1,9 +1,9 @@
 ---
 id: cohere.md
-title: CohereCompatible with Milvus 2.6.x
+title: Cohere
 summary: >-
-  Este tópico descreve como configurar e usar as funções de incorporação do
-  Cohere no Milvus.
+  This topic describes how to configure and use Cohere embedding functions in
+  Milvus.
 beta: Milvus 2.6.x
 ---
 <h1 id="Cohere" class="common-anchor-header">Cohere<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Cohere" class="anchor-icon" translate="no">
@@ -21,8 +21,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este tópico descreve como configurar e usar as funções de incorporação Cohere no Milvus.</p>
-<h2 id="Choose-an-embedding-model" class="common-anchor-header">Escolha um modelo de incorporação<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
+    </button></h1><p>This topic describes how to configure and use Cohere embedding functions in Milvus.</p>
+<h2 id="Choose-an-embedding-model" class="common-anchor-header">Choose an embedding model<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,59 +37,59 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus suporta modelos de incorporação fornecidos pelo Cohere. Abaixo estão os modelos de incorporação atualmente disponíveis para referência rápida:</p>
+    </button></h2><p>Milvus supports embedding models provided by Cohere. Below are the currently available embedding models for quick reference:</p>
 <table>
    <tr>
-     <th><p>Nome do modelo</p></th>
-     <th><p>Dimensões</p></th>
-     <th><p>Tokens máximos</p></th>
-     <th><p>Descrição</p></th>
+     <th><p>Model Name</p></th>
+     <th><p>Dimensions</p></th>
+     <th><p>Max Tokens</p></th>
+     <th><p>Description</p></th>
    </tr>
    <tr>
      <td><p>embed-english-v3.0</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>Um modelo que permite que o texto seja classificado ou transformado em embeddings. Apenas em inglês.</p></td>
+     <td><p>A model that allows for text to be classified or turned into embeddings. English only.</p></td>
    </tr>
    <tr>
      <td><p>embed-multilingual-v3.0</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>Fornece suporte para classificação e incorporação multilíngüe. <a href="https://docs.cohere.com/docs/supported-languages">Veja os idiomas suportados aqui</a>.</p></td>
+     <td><p>Provides multilingual classification and embedding support. <a href="https://docs.cohere.com/docs/supported-languages">See supported languages here</a>.</p></td>
    </tr>
    <tr>
      <td><p>embed-english-light-v3.0</p></td>
      <td><p>384</p></td>
      <td><p>512</p></td>
-     <td><p>Uma versão mais pequena e mais rápida de <code translate="no">embed-english-v3.0</code>. Quase tão capaz, mas muito mais rápida. Apenas em inglês.</p></td>
+     <td><p>A smaller, faster version of <code translate="no">embed-english-v3.0</code>. Almost as capable, but a lot faster. English only.</p></td>
    </tr>
    <tr>
      <td><p>embed-multilingual-light-v3.0</p></td>
      <td><p>384</p></td>
      <td><p>512</p></td>
-     <td><p>Uma versão mais pequena e mais rápida de <code translate="no">embed-multilingual-v3.0</code>. Quase com a mesma capacidade, mas muito mais rápida. Suporta vários idiomas.</p></td>
+     <td><p>A smaller, faster version of <code translate="no">embed-multilingual-v3.0</code>. Almost as capable, but a lot faster. Supports multiple languages.</p></td>
    </tr>
    <tr>
      <td><p>embed-english-v2.0</p></td>
      <td><p>4,096</p></td>
      <td><p>512</p></td>
-     <td><p>Modelo de embeddings mais antigo que permite que o texto seja classificado ou transformado em embeddings. Apenas em inglês.</p></td>
+     <td><p>Older embeddings model that allows for text to be classified or turned into embeddings. English only.</p></td>
    </tr>
    <tr>
      <td><p>embed-english-light-v2.0</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>Uma versão mais pequena e mais rápida do embed-english-v2.0. Quase tão capaz, mas muito mais rápida. Apenas em inglês.</p></td>
+     <td><p>A smaller, faster version of embed-english-v2.0. Almost as capable, but a lot faster. English only.</p></td>
    </tr>
    <tr>
      <td><p>embed-multilingual-v2.0</p></td>
      <td><p>768</p></td>
      <td><p>256</p></td>
-     <td><p>Fornece classificação multilingue e suporte para incorporação. <a href="https://docs.cohere.com/docs/supported-languages">Veja os idiomas suportados aqui</a>.</p></td>
+     <td><p>Provides multilingual classification and embedding support. <a href="https://docs.cohere.com/docs/supported-languages">See supported languages here</a>.</p></td>
    </tr>
 </table>
-<p>Para obter detalhes, consulte <a href="https://docs.cohere.com/docs/cohere-embed">os modelos de incorporação do Cohere</a>.</p>
-<h2 id="Configure-credentials" class="common-anchor-header">Configurar credenciais<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<p>For details, refer to <a href="https://docs.cohere.com/docs/cohere-embed">Cohere’s Embed Models</a>.</p>
+<h2 id="Configure-credentials" class="common-anchor-header">Configure credentials<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,19 +104,19 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus precisa saber sua chave de API do Cohere para poder solicitar incorporações. O Milvus fornece dois métodos para configurar as credenciais:</p>
+    </button></h2><p>Milvus must know your Cohere API key before it can request embeddings. Milvus provides two methods to configure credentials:</p>
 <ul>
-<li><p><strong>Arquivo de configuração (recomendado):</strong> Armazene a chave de API em <code translate="no">milvus.yaml</code> para que cada reinicialização e nó a pegue automaticamente.</p></li>
-<li><p><strong>Variáveis de ambiente:</strong> Injetar a chave no momento da implantação - ideal para o Docker Compose.</p></li>
+<li><p><strong>Configuration file (recommended):</strong> Store the API key in <code translate="no">milvus.yaml</code> so every restart and node picks it up automatically.</p></li>
+<li><p><strong>Environment variables:</strong> Inject the key at deploy time—ideal for Docker Compose.</p></li>
 </ul>
-<p>Escolha um dos dois métodos abaixo - o arquivo de configuração é mais fácil de manter em bare-metal e VMs, enquanto a rota env-var se encaixa nos fluxos de trabalho do contêiner.</p>
+<p>Choose one of the two methods below—the configuration file is easier to maintain on bare-metal and VMs, while the env-var route fits container workflows.</p>
 <div class="alert note">
-<p>Se uma chave de API para o mesmo fornecedor estiver presente tanto no ficheiro de configuração como numa variável de ambiente, o Milvus utiliza sempre o valor em <code translate="no">milvus.yaml</code> e ignora a variável de ambiente.</p>
+<p>If an API key for the same provider is present in both the configuration file and an environment variable, Milvus always uses the value in <code translate="no">milvus.yaml</code> and ignores the environment variable.</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Opção 1: Ficheiro de configuração (recomendado e de maior prioridade)</h3><p>Manter as suas chaves API em <code translate="no">milvus.yaml</code>; o Milvus lê-as no arranque e substitui qualquer variável de ambiente para o mesmo fornecedor.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1: Configuration file (recommended & higher priority)</h3><p>Keep your API keys in <code translate="no">milvus.yaml</code>; Milvus reads them at startup and overrides any environment variable for the same provider.</p>
 <ol>
-<li><p>**Declare as suas chaves em <code translate="no">credential:</code></p>
-<p>Pode listar uma ou várias chaves API - dê a cada uma delas uma etiqueta que invente e que referenciará mais tarde.</p>
+<li><p>**Declare your keys under <code translate="no">credential:</code></p>
+<p>You may list one or many API keys—give each a label you invent and will reference later.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -124,9 +124,9 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Colocar as chaves da API aqui torna-as persistentes através de reinicializações e permite-lhe mudar de chave apenas alterando uma etiqueta.</p></li>
-<li><p><strong>Dizer ao Milvus qual a chave a utilizar para as chamadas OpenAI</strong></p>
-<p>No mesmo ficheiro, aponte o fornecedor Cohere para a etiqueta que pretende utilizar.</p>
+<p>Putting the API keys here makes them persistent across restarts and lets you switch keys just by changing a label.</p></li>
+<li><p><strong>Tell Milvus which key to use for OpenAI calls</strong></p>
+<p>In the same file, point the Cohere provider at the label you want it to use.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -134,23 +134,23 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.cohere.com/v2/embed   # (optional) custom endpoint</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Isso vincula uma chave específica a cada solicitação que o Milvus envia ao endpoint de embeddings do Cohere.</p></li>
+<p>This binds a specific key to every request Milvus sends to the Cohere embeddings endpoint.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Opção 2: variável de ambiente</h3><p>Utilize este método quando executar o Milvus com o Docker Compose e preferir manter os segredos fora dos ficheiros e das imagens.</p>
-<p>O Milvus recorre à variável de ambiente somente se nenhuma chave para o provedor for encontrada em <code translate="no">milvus.yaml</code>.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Environment variable</h3><p>Use this method when you run Milvus with Docker Compose and prefer to keep secrets out of files and images.</p>
+<p>Milvus falls back to the environment variable only if no key for the provider is found in <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
-     <th><p>Variável</p></th>
-     <th><p>Necessária</p></th>
-     <th><p>Descrição</p></th>
+     <th><p>Variable</p></th>
+     <th><p>Required</p></th>
+     <th><p>Description</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">MILVUSAI_COHERE_API_KEY</code></p></td>
-     <td><p>Sim</p></td>
-     <td><p>A sua chave de API Cohere válida.</p></td>
+     <td><p>Yes</p></td>
+     <td><p>Your valid Cohere API key.</p></td>
    </tr>
 </table>
-<p>No seu ficheiro <strong>docker-compose.yaml</strong>, defina a variável de ambiente <code translate="no">MILVUSAI_COHERE_API_KEY</code>.</p>
+<p>In your <strong>docker-compose.yaml</strong> file, set the <code translate="no">MILVUSAI_COHERE_API_KEY</code> environment variable.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -159,8 +159,8 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the OpenAI API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_COHERE_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_COHERE_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O bloco <code translate="no">environment:</code> injeta a chave apenas no contêiner do Milvus, deixando o sistema operacional do host intacto. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configurar o Milvus com o Docker Compose</a>.</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">Usar a função de incorporação<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p>The <code translate="no">environment:</code> block injects the key only into the Milvus container, leaving your host OS untouched. For details, refer to <a href="/docs/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configure Milvus with Docker Compose</a>.</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -175,14 +175,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois que as credenciais forem configuradas, siga estas etapas para definir e usar funções de incorporação.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Etapa 1: definir campos de esquema</h3><p>Para usar uma função de incorporação, crie uma coleção com um esquema específico. Este esquema deve incluir pelo menos três campos necessários:</p>
+    </button></h2><p>Once credentials are configured, follow these steps to define and use embedding functions.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Step 1: Define schema fields</h3><p>To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:</p>
 <ul>
-<li><p>O campo primário que identifica de forma exclusiva cada entidade numa coleção.</p></li>
-<li><p>Um campo escalar que armazena os dados brutos a serem incorporados.</p></li>
-<li><p>Um campo vetorial reservado para armazenar as incorporações vectoriais que a função irá gerar para o campo escalar.</p></li>
+<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
+<li><p>A scalar field that stores raw data to be embedded.</p></li>
+<li><p>A vector field reserved to store vector embeddings that the function will generate for the scalar field.</p></li>
 </ul>
-<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar as incorporações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
+<p>The following example defines a schema with one scalar field <code translate="no">&quot;document&quot;</code> for storing textual data and one vector field <code translate="no">&quot;dense&quot;</code> for storing embeddings to be generated by the Function module. Remember to set the vector dimension (<code translate="no">dim</code>) to match the output of your chosen embedding model.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -203,9 +203,9 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Adicionar a função de incorporação ao esquema</h3><p>O módulo Function em Milvus converte automaticamente os dados brutos armazenados num campo escalar em embeddings e armazena-os no campo vetorial explicitamente definido.</p>
-<p>O exemplo abaixo adiciona um módulo Function (<code translate="no">cohere_func</code>) que converte o campo escalar <code translate="no">&quot;document&quot;</code> em embeddings, armazenando os vectores resultantes no campo vetorial <code translate="no">&quot;dense&quot;</code> definido anteriormente.</p>
-<p>Depois de ter definido a sua função de incorporação, adicione-a ao seu esquema de coleção. Isto instrui o Milvus a utilizar a função de incorporação especificada para processar e armazenar os embeddings dos seus dados de texto.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Step 2: Add embedding function to schema</h3><p>The Function module in Milvus automatically converts raw data stored in a scalar field into embeddings and stores them into the explicitly defined vector field.</p>
+<p>The example below adds a Function module (<code translate="no">cohere_func</code>) that converts the scalar field <code translate="no">&quot;document&quot;</code> into embeddings, storing the resulting vectors in the <code translate="no">&quot;dense&quot;</code> vector field defined earlier.</p>
+<p>Once you have defined your embedding function, add it to your collection schema. This instructs Milvus to use the specified embedding function to process and store embeddings from your text data.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;cohere_func&quot;</span>,                                 <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -225,7 +225,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-steps" class="common-anchor-header">Próximos passos<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -240,4 +240,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de configurar a função de incorporação, consulte a <a href="/docs/pt/embedding-function-overview.md">Visão geral da função</a> para obter orientações adicionais sobre a configuração do índice, exemplos de inserção de dados e operações de pesquisa semântica.</p>
+    </button></h2><p>After configuring the embedding function, refer to the <a href="/docs/embedding-function-overview.md">Function Overview</a> for additional guidance on index configuration, data insertion examples, and semantic search operations.</p>

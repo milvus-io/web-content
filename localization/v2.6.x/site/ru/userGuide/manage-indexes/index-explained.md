@@ -1,17 +1,16 @@
 ---
 id: index-explained.md
-title: Объяснение индекса
+title: Index Explained
 summary: >-
-  Индекс - это дополнительная структура, построенная поверх данных. Его
-  внутренняя структура зависит от используемого алгоритма поиска ближайших
-  соседей. Индекс ускоряет поиск, но требует дополнительного времени на
-  предварительную обработку, места и оперативной памяти во время поиска. Кроме
-  того, использование индекса обычно снижает коэффициент запоминания (хотя этот
-  эффект и незначителен, но все же имеет значение). Поэтому в этой статье
-  рассказывается о том, как минимизировать затраты на использование индекса и
-  при этом получить максимальную выгоду.
+  An index is an additional structure built on top of data. Its internal
+  structure depends on the approximate nearest neighbor search algorithm in use.
+  An index speeds up the search, but incurs additional preprocessing time,
+  space, and RAM during the search. Moreover, using an index typically lowers
+  the recall rate (though the effect is negligible, it still matters).
+  Therefore, this article explains how to minimize the costs of using an index
+  while maximizing the benefits.
 ---
-<h1 id="Index-Explained" class="common-anchor-header">Объяснение индекса<button data-href="#Index-Explained" class="anchor-icon" translate="no">
+<h1 id="Index-Explained" class="common-anchor-header">Index Explained<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,8 +25,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Индекс - это дополнительная структура, построенная поверх данных. Его внутренняя структура зависит от используемого алгоритма поиска ближайших соседей. Индекс ускоряет поиск, но требует дополнительного времени на предварительную обработку, места и оперативной памяти во время поиска. Кроме того, использование индекса обычно снижает коэффициент запоминания (хотя этот эффект и незначителен, но все же имеет значение). Поэтому в этой статье мы расскажем, как минимизировать затраты на использование индекса и при этом получить максимальную выгоду.</p>
-<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>An index is an additional structure built on top of data. Its internal structure depends on the approximate nearest neighbor search algorithm in use. An index speeds up the search, but incurs additional preprocessing time, space, and RAM during the search. Moreover, using an index typically lowers the recall rate (though the effect is negligible, it still matters). Therefore, this article explains how to minimize the costs of using an index while maximizing the benefits.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,57 +41,57 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В Milvus индексы специфичны для полей, а применимые типы индексов зависят от типов данных целевых полей. Будучи профессиональной векторной базой данных, Milvus уделяет особое внимание повышению производительности как векторного поиска, так и скалярной фильтрации, поэтому предлагает различные типы индексов.</p>
-<p>В следующей таблице перечислены связи между типами данных полей и применимыми типами индексов.</p>
+    </button></h2><p>In Milvus, indexes are specific to fields, and the applicable index types vary according to the data types of the target fields. As a professional vector database, Milvus focuses on enhancing both the performance of vector searches and scalar filtering, which is why it offers various index types.</p>
+<p>The following table lists the mapping relationship between field data types and applicable index types.</p>
 <table>
    <tr>
-     <th><p>Тип данных поля</p></th>
-     <th><p>Применяемые типы индексов</p></th>
+     <th><p>Field Data Type</p></th>
+     <th><p>Applicable Index Types</p></th>
    </tr>
    <tr>
      <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
      <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
    </tr>
    <tr>
-     <td><p>БИНАРНЫЙ_ВЕКТОР</p></td>
+     <td><p>BINARY_VECTOR</p></td>
      <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
    </tr>
    <tr>
-     <td><p>РАЗРЕЖЕННЫЙ_ПЛОСКИЙ_ВЕКТОР</p></td>
-     <td><p>РАЗРЕЖЕННЫЙ_ИНВЕРТИРОВАННЫЙ_ИНДЕКС</p></td>
+     <td><p>SPARSE_FLOAT_VECTOR</p></td>
+     <td><p>SPARSE_INVERTED_INDEX</p></td>
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>ИНВЕРТИРОВАННЫЙ (Рекомендуется)</p></li><li><p>BITMAP</p></li><li><p>Тройка</p></li></ul></td>
+     <td><ul><li><p>INVERTED (Reommended)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP (рекомендуется)</li><li>ИНВЕРТИРОВАННЫЙ</li></ul></td>
+     <td><ul><li>BITMAP (Recommended)</li><li>INVERTED</li></ul></td>
    </tr>
    <tr>
      <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>ИНВЕРТИРОВАННЫЙ</li><li>STL_SORT</li></ul></td>
+     <td><ul><li>INVERTED</li><li>STL_SORT</li></ul></td>
    </tr>
    <tr>
      <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
-     <td><p>ИНВЕРТИРОВАННЫЙ</p></td>
+     <td><p>INVERTED</p></td>
    </tr>
    <tr>
-     <td><p>ARRAY <sup>(элементы типов BOOL, INT8/16/32/64 и VARCHAR)</sup></p></td>
-     <td><p>BITMAP (рекомендуется)</p></td>
+     <td><p>ARRAY <sup>(elements of the BOOL, INT8/16/32/64, and VARCHAR types)</sup></p></td>
+     <td><p>BITMAP (Recommended)</p></td>
    </tr>
    <tr>
-     <td><p>ARRAY <sup>(элементы типов BOOL, INT8/16/32/64, FLOAT, DOUBLE и VARCHAR)</sup></p></td>
-     <td><p>ИНВЕРТИРОВАННЫЙ</p></td>
+     <td><p>ARRAY <sup>(elements of the BOOL, INT8/16/32/64, FLOAT, DOUBLE, and VARCHAR types)</sup></p></td>
+     <td><p>INVERTED</p></td>
    </tr>
    <tr>
      <td><p>JSON</p></td>
-     <td><p>ИНВЕРТИРОВАННЫЙ</p></td>
+     <td><p>INVERTED</p></td>
    </tr>
 </table>
-<p>Эта статья посвящена тому, как выбрать подходящие векторные индексы. Для скалярных полей вы всегда можете использовать рекомендуемый тип индекса.</p>
-<p>Выбор подходящего типа индекса для векторного поиска может существенно повлиять на производительность и использование ресурсов. При выборе типа индекса для векторного поля необходимо учитывать различные факторы, включая базовую структуру данных, использование памяти и требования к производительности.</p>
-<h2 id="Vector-Index-anatomy" class="common-anchor-header">Анатомия векторного индекса<button data-href="#Vector-Index-anatomy" class="anchor-icon" translate="no">
+<p>This article focuses on how to select appropriate vector indexes. For scalar fields, you can always use the recommended index type.</p>
+<p>Selecting an appropriate index type for a vector search can significantly impact performance and resource usage. When choosing an index type for a vector field, it is essential to consider various factors, including the underlying data structure, memory usage, and performance requirements.</p>
+<h2 id="Vector-Index-anatomy" class="common-anchor-header">Vector Index anatomy<button data-href="#Vector-Index-anatomy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,31 +106,33 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Как показано на диаграмме ниже, тип индекса в Milvus состоит из трех основных компонентов, а именно: <strong>структуры данных</strong>, <strong>квантования</strong> и <strong>уточнителя</strong>. Квантование и рафинер необязательны, но широко используются из-за значительного баланса "выгода-лучше-чем-затраты".</p>
+    </button></h2><p>As demonstrated in the diagram below, an index type in Milvus consists of three core components, namely <strong>data structure</strong>, <strong>quantization</strong>, and <strong>refiner</strong>. Quantization and refiner are optional, but are widely used because of a significant gains-better-than-costs balance.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
-   </span> <span class="img-wrapper"> <span>Анатомия векторного индекса</span> </span></p>
-<p>Во время создания индекса Milvus комбинирует выбранную структуру данных и метод квантования, чтобы определить оптимальную <strong>скорость расширения</strong>. Во время запроса система извлекает <code translate="no">topK × expansion rate</code> векторов-кандидатов, применяет рафинер для пересчета расстояний с большей точностью и, наконец, возвращает наиболее точные результаты <code translate="no">topK</code>. Этот гибридный подход позволяет сбалансировать скорость и точность, ограничивая ресурсоемкое уточнение отфильтрованным подмножеством кандидатов.</p>
-<h3 id="Data-structure" class="common-anchor-header">Структура данных</h3><p>Структура данных является основополагающим слоем индекса. К распространенным типам относятся:</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+    <span>Vector Index Anatomy</span>
+  </span>
+</p>
+<p>During index creation, Milvus combines the chosen data structure and quantization method to determine an optimal <strong>expansion rate</strong>. At query time, the system retrieves <code translate="no">topK × expansion rate</code> candidate vectors, applies the refiner to recalculate distances with higher precision, and finally returns the most accurate <code translate="no">topK</code> results. This hybrid approach balances speed and accuracy by restricting resource-intensive refinement to a filtered subset of candidates.</p>
+<h3 id="Data-structure" class="common-anchor-header">Data structure</h3><p>The data structure forms the foundational layer of the index. Common types include:</p>
 <ul>
-<li><p><strong>Инвертированный файл (IVF)</strong></p>
-<p>Типы индексов серии IVF позволяют Milvus группировать векторы в ведра с помощью разбиения на основе центроида. В общем случае можно предположить, что все векторы в ведерке, скорее всего, будут близки к вектору запроса, если центроид ведерка близок к вектору запроса. Исходя из этого предположения, Milvus сканирует только вкрапления векторов в тех ведрах, центроиды которых близки к вектору запроса, вместо того чтобы исследовать весь набор данных. Эта стратегия позволяет снизить вычислительные затраты, сохраняя приемлемую точность.</p>
-<p>Такой тип индексной структуры данных идеально подходит для больших массивов данных, требующих высокой производительности.</p></li>
-<li><p><strong>Структура на основе графов</strong></p>
-<p>Графовая структура данных для векторного поиска, например Hierarchical Navigable Small World<a href="https://arxiv.org/abs/1603.09320">(HNSW</a>), представляет собой многоуровневый граф, в котором каждый вектор соединяется со своими ближайшими соседями. Запросы перемещаются по этой иерархии, начиная с грубых верхних слоев и переходя на нижние, что обеспечивает эффективную сложность поиска за логарифмическое время.</p>
-<p>Этот тип индексной структуры данных отлично подходит для высокоразмерных пространств и сценариев, требующих запросов с низкой задержкой.</p></li>
+<li><p><strong>Inverted File (IVF)</strong></p>
+<p>IVF-series index types allow Milvus to cluster vectors into buckets through centroid-based partitioning. It is generally safe to assume that all vectors in a bucket are likely to be close to the query vector if the bucket centroid is close to the query vector. Based on this premise, Milvus scans only the vector embeddings in those buckets where the centroids are near the query vector, rather than examining the entire dataset. This strategy reduces computational costs while maintaining acceptable accuracy.</p>
+<p>This type of index data structure is ideal for large-scale datasets requiring fast throughput.</p></li>
+<li><p><strong>Graph-based structure</strong></p>
+<p>A graph-based data structure for vector search, such as Hierarchical Navigable Small World (<a href="https://arxiv.org/abs/1603.09320">HNSW</a>), constructs a layered graph where each vector connects to its nearest neighbors. Queries navigate this hierarchy, starting from coarse upper layers and switching through lower layers, enabling efficient logarithmic-time search complexity.</p>
+<p>This type of index data structure excels in high-dimensional spaces and scenarios demanding low-latency queries.</p></li>
 </ul>
-<h3 id="Quantization" class="common-anchor-header">Квантование</h3><p>Квантование позволяет сократить занимаемую память и вычислительные затраты за счет более грубого представления:</p>
+<h3 id="Quantization" class="common-anchor-header">Quantization</h3><p>Quantization reduces memory footprint and computational costs through a coarser representation:</p>
 <ul>
-<li><p><strong>Скалярная квантование</strong> (например, <strong>SQ8</strong>) позволяет Milvus сжимать каждую размерность вектора в один байт (8 бит), сокращая использование памяти на 75 % по сравнению с 32-битными плавающими числами при сохранении разумной точности.</p></li>
-<li><p><strong>Product Quantization</strong><strong>(PQ</strong>) позволяет Milvus разбивать векторы на подвекторы и кодировать их с помощью кластеризации на основе кодовой книги. Это позволяет достичь более высоких коэффициентов сжатия (например, 4-32x) ценой незначительного снижения запоминания, что делает его подходящим для сред с ограниченным объемом памяти.</p></li>
+<li><p><strong>Scalar Quantization</strong> (e.g. <strong>SQ8</strong>) enables Milvus to compress each vector dimension into a single byte (8-bit), reducing memory usage by 75% compared to 32-bit floats while preserving reasonable accuracy.</p></li>
+<li><p><strong>Product Quantization</strong> (<strong>PQ</strong>) enables Milvus to split vectors into subvectors and encode them using codebook-based clustering. This achieves higher compression ratios (e.g., 4-32x) at the cost of marginally reduced recall, making it suitable for memory-constrained environments.</p></li>
 </ul>
-<h3 id="Refiner" class="common-anchor-header">Рафинер</h3><p>Квантование по своей сути несет потери. Для поддержания коэффициента отзыва квантование постоянно создает больше кандидатов top-K, чем необходимо, что позволяет рафинерам использовать более высокую точность для дальнейшего отбора результатов top-K из этих кандидатов, повышая коэффициент отзыва.</p>
-<p>Например, рафинер FP32 работает с кандидатами результатов поиска, возвращенными квантованием, пересчитывая расстояния, используя точность FP32, а не квантованные значения.</p>
-<p>Это очень важно для приложений, требующих компромисса между эффективностью и точностью поиска, таких как семантический поиск или рекомендательные системы, где незначительные изменения расстояния существенно влияют на качество результата.</p>
-<h3 id="Summary" class="common-anchor-header">Резюме</h3><p>Эта многоуровневая архитектура - грубая фильтрация с помощью структур данных, эффективные вычисления с помощью квантования и настройка точности с помощью уточнения - позволяет Milvus адаптивно оптимизировать компромисс между точностью и производительностью.</p>
-<h2 id="Performance-trade-offs" class="common-anchor-header">Компромиссы в производительности<button data-href="#Performance-trade-offs" class="anchor-icon" translate="no">
+<h3 id="Refiner" class="common-anchor-header">Refiner</h3><p>Quantization is inherently lossy. To maintain the recall rate, quantization consistently produces more top-K candidates than necessary, allowing refiners to use higher precision to further select the top-K results from these candidates, enhancing the recall rate.</p>
+<p>For instance, the FP32 refiner operates on the search result candidates returned by quantization by recalculating distances using FP32 precision rather than the quantized values.</p>
+<p>This is critical for applications requiring a tradeoff between search efficiency and precision, such as semantic search or recommendation systems, where minor distance variations significantly impact result quality.</p>
+<h3 id="Summary" class="common-anchor-header">Summary</h3><p>This tiered architecture – coarse filtering via data structures, efficient computation through quantization, and precision tuning via refinement – allows Milvus to optimize the accuracy-performance tradeoff adaptively.</p>
+<h2 id="Performance-trade-offs" class="common-anchor-header">Performance trade-offs<button data-href="#Performance-trade-offs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -146,76 +147,76 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>При оценке производительности очень важно сбалансировать <strong>время сборки</strong>, <strong>количество запросов в секунду (QPS)</strong> и <strong>скорость запоминания</strong>. Общие правила таковы:</p>
+    </button></h2><p>When evaluating performance, it is crucial to balance <strong>build time</strong>, <strong>query per second (QPS)</strong>, and <strong>recall rate</strong>. The general rules are as follows:</p>
 <ul>
-<li><p><strong>Графовые типы индексов</strong> обычно превосходят <strong>варианты ЭКО</strong> по <strong>QPS</strong>.</p></li>
-<li><p><strong>ЭКО-варианты</strong> особенно хорошо подходят для сценариев с <strong>большим topK (например, более 2 000)</strong>.</p></li>
-<li><p><strong>PQ</strong> обычно обеспечивает лучший коэффициент запоминания при одинаковой степени сжатия по сравнению с <strong>SQ</strong>, хотя последний обеспечивает более высокую производительность.</p></li>
-<li><p>Использование жестких дисков для части индекса (как в <strong>DiskANN</strong>) помогает управлять большими наборами данных, но при этом возникают потенциальные узкие места в IOPS.</p></li>
+<li><p><strong>Graph-based index types</strong> usually outperform <strong>IVF variants</strong> in terms of <strong>QPS</strong>.</p></li>
+<li><p><strong>IVF variants</strong> particularly fit in the scenarios with <strong>a large topK (for example, over 2,000)</strong>.</p></li>
+<li><p><strong>PQ</strong> typically offers a better recall rate at similar compression rates when compared to <strong>SQ</strong>, though the latter provides faster performance.</p></li>
+<li><p>Using hard drives for part of the index (as in <strong>DiskANN</strong>) helps manage large datasets, but it also introduces potential IOPS bottlenecks.</p></li>
 </ul>
-<h3 id="Capacity" class="common-anchor-header">Емкость</h3><p>Пропускная способность обычно включает в себя соотношение между размером данных и доступной оперативной памятью. Когда речь идет о емкости, учитывайте следующее:</p>
+<h3 id="Capacity" class="common-anchor-header">Capacity</h3><p>Capacity usually involves the relationship between data size and available RAM. When dealing with capacity, consider the following:</p>
 <ul>
-<li><p>Если четверть необработанных данных помещается в памяти, рассмотрите DiskANN из-за его стабильной задержки.</p></li>
-<li><p>Если все исходные данные помещаются в память, рассмотрите типы индексов на основе памяти и mmap.</p></li>
-<li><p>Вы можете использовать типы индексов с квантованием и mmap, чтобы обменять точность на максимальную емкость.</p></li>
-</ul>
-<div class="alert note">
-<p>Mmap не всегда является решением. Если большая часть данных находится на диске, DiskANN обеспечивает лучшую задержку.</p>
-</div>
-<h3 id="Recall" class="common-anchor-header">Отзыв</h3><p>Отзыв обычно связан с коэффициентом фильтрации, который относится к данным, отфильтрованным перед поиском. При работе с отзывом учитывайте следующее:</p>
-<ul>
-<li><p>Если коэффициент фильтрации составляет менее 85 %, индексы на основе графов превосходят варианты ЭКО.</p></li>
-<li><p>Если коэффициент фильтрации составляет от 85 % до 95 %, используйте варианты ЭКО.</p></li>
-<li><p>Если коэффициент фильтрации превышает 98 %, используйте Brute-Force (FLAT) для получения наиболее точных результатов поиска.</p></li>
+<li><p>If a quarter of your raw data fits into memory, consider DiskANN for its stable latency.</p></li>
+<li><p>If all your raw data fits into memory, consider memory-based index types and mmap.</p></li>
+<li><p>You can use the quantization-applied index types and mmap to trade accuracy for the maximum capacity.</p></li>
 </ul>
 <div class="alert note">
-<p>Вышеперечисленные пункты не всегда верны. Советуем вам настроить отзыв с разными типами индексов, чтобы определить, какой тип индекса работает.</p>
+<p>Mmap is not always the solution. When most of your data is on disk, DiskANN provides better latency.</p>
 </div>
-<h3 id="Performance" class="common-anchor-header">Производительность</h3><p>Производительность поиска обычно включает в себя top-K, то есть количество записей, которые возвращает поиск. При работе с производительностью учитывайте следующее:</p>
+<h3 id="Recall" class="common-anchor-header">Recall</h3><p>The recall usually involves the filter ratio, which refers to the data that is filtered out before searches. When dealing with recall, consider the following:</p>
 <ul>
-<li><p>Для поиска с небольшим top-K (например, 2 000), требующего высокого коэффициента запоминания, графовые типы индексов превосходят варианты ЭКО.</p></li>
-<li><p>Для поиска с большим top-K (по сравнению с общим количеством векторных вкраплений) варианты ЭКО являются лучшим выбором, чем графовые типы индексов.</p></li>
-<li><p>Для поиска со средним размером top-K и высоким коэффициентом фильтрации лучше использовать варианты ЭКО.</p></li>
+<li><p>If the filter ratio is less than 85%, graph-based index types outperform IVF variants.</p></li>
+<li><p>If the filter ratio is between 85% and 95%, use IVF variants.</p></li>
+<li><p>If the filter ratio is over 98%, use Brute-Force (FLAT) for the most accurate search results.</p></li>
 </ul>
-<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Матрица принятия решений: Выбор наиболее подходящего типа индекса</h3><p>Следующая таблица представляет собой матрицу решений, на которую вы можете ориентироваться при выборе подходящего типа индекса.</p>
+<div class="alert note">
+<p>The above items are not always correct. You are advised to tune the recall with different index types to determine which index type works.</p>
+</div>
+<h3 id="Performance" class="common-anchor-header">Performance</h3><p>The performance of a search usually involves the top-K, which refers to the number of records that the search returns. When dealing with performance, consider the following:</p>
+<ul>
+<li><p>For a search with a small top-K (e.g., 2,000) requiring a high recall rate, graph-based index types outperform IVF variants.</p></li>
+<li><p>For a search with a great top-K (compared with the total number of vector embeddings), IVF variants are a better choice than graph-based index types.</p></li>
+<li><p>For a search with a medium-sized top-K and a high filter ratio, IVF variants are better choices.</p></li>
+</ul>
+<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Decision Matrix: Choosing the most appropriate index type</h3><p>The following table is a decision matrix for you to refer to when choosing an appropriate index type.</p>
 <table>
    <tr>
-     <th><p>Сценарий</p></th>
-     <th><p>Рекомендуемый индекс</p></th>
-     <th><p>Примечания</p></th>
+     <th><p>Scenario</p></th>
+     <th><p>Recommended Index</p></th>
+     <th><p>Notes</p></th>
    </tr>
    <tr>
-     <td><p>Исходные данные помещаются в памяти</p></td>
-     <td><p>HNSW, ЭКО + уточнение</p></td>
-     <td><p>Используйте HNSW для низкого<code translate="no">k</code>/ высокого запоминания.</p></td>
+     <td><p>Raw data fits in memory</p></td>
+     <td><p>HNSW, IVF + Refinement</p></td>
+     <td><p>Use HNSW for low-<code translate="no">k</code>/high recall.</p></td>
    </tr>
    <tr>
-     <td><p>Сырые данные на диске, SSD</p></td>
+     <td><p>Raw data on disk, SSD</p></td>
      <td><p>DiskANN</p></td>
-     <td><p>Оптимально для запросов, чувствительных к задержкам.</p></td>
+     <td><p>Optimal for latency-sensitive queries.</p></td>
    </tr>
    <tr>
-     <td><p>Необработанные данные на диске, ограниченное количество оперативной памяти</p></td>
+     <td><p>Raw data on disk, limited RAM</p></td>
      <td><p>IVFPQ/SQ + mmap</p></td>
-     <td><p>Баланс между доступом к памяти и диску.</p></td>
+     <td><p>Balances memory and disk access.</p></td>
    </tr>
    <tr>
-     <td><p>Высокий коэффициент фильтрации (&gt;95 %)</p></td>
+     <td><p>High filter ratio (&gt;95%)</p></td>
      <td><p>Brute-Force (FLAT)</p></td>
-     <td><p>Избегает накладных расходов на индексы для маленьких наборов кандидатов.</p></td>
+     <td><p>Avoids index overhead for tiny candidate sets.</p></td>
    </tr>
    <tr>
-     <td><p>Большой <code translate="no">k</code> (≥1 % от набора данных)</p></td>
-     <td><p>ЭКО</p></td>
-     <td><p>Обрезка кластеров сокращает вычисления.</p></td>
+     <td><p>Large <code translate="no">k</code> (≥1% of dataset)</p></td>
+     <td><p>IVF</p></td>
+     <td><p>Cluster pruning reduces computation.</p></td>
    </tr>
    <tr>
-     <td><p>Чрезвычайно высокий коэффициент отзыва (&gt;99 %)</p></td>
-     <td><p>Brute-Force (FLAT) + GPU</p></td>
+     <td><p>Extremely high recall rate (&gt;99%)</p></td>
+     <td><p>Brute-Force (FLAT) + GPUs</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
-<h2 id="Memory-usage-estimation" class="common-anchor-header">Оценка использования памяти<button data-href="#Memory-usage-estimation" class="anchor-icon" translate="no">
+<h2 id="Memory-usage-estimation" class="common-anchor-header">Memory usage estimation<button data-href="#Memory-usage-estimation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,88 +232,88 @@ summary: >-
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Этот раздел посвящен расчету потребления памяти конкретным типом индекса и включает множество технических деталей. Вы можете смело пропустить этот раздел, если он не соответствует вашим интересам.</p>
+<p>This section focuses on calculating the memory consumption of a specific index type and includes many technical details. You can skip this section safely if it does not align with your interests.</p>
 </div>
-<p>На потребление памяти индексом влияют его структура данных, степень сжатия за счет квантования и используемый рефайнер. Вообще говоря, индексы на основе графов обычно занимают больше памяти из-за структуры графа (например, <strong>HNSW</strong>), что обычно влечет за собой заметные накладные расходы на пространство в расчете на вектор. ЭКО и его разновидности, напротив, более эффективны с точки зрения памяти, так как занимают меньше места на векторе. Однако продвинутые техники, такие как <strong>DiskANN</strong>, позволяют размещать части индекса, например граф или рефайнер, на диске, что снижает нагрузку на память при сохранении производительности.</p>
-<p>В частности, использование памяти индексом может быть рассчитано следующим образом:</p>
-<h3 id="IVF-index-memory-usage" class="common-anchor-header">Использование памяти ЭКО-индекса</h3><p>ЭКО-индексы балансируют между эффективностью использования памяти и производительностью поиска за счет разбиения данных на кластеры. Ниже приведена разбивка памяти, используемой 1 миллионом 128-мерных векторов, проиндексированных с помощью вариантов ЭКО.</p>
+<p>The memory consumption of an index is influenced by its data structure, compression rate through quantization, and the refiner in use. Generally speaking, graph-based indices typically have a higher memory footprint due to the graph’s structure (e.g., <strong>HNSW</strong>), which usually implies a noticeable per-vector space overhead. In contrast, IVF and its variants are more memory-efficient because less per-vector space overhead applies. However, advanced techniques such as <strong>DiskANN</strong> allow parts of the index, like the graph or the refiner, to reside on disk, reducing memory load while maintaining performance.</p>
+<p>Specifically, the memory usage of an index can be calculated as follows:</p>
+<h3 id="IVF-index-memory-usage" class="common-anchor-header">IVF index memory usage</h3><p>IVF indexes balance memory efficiency with search performance by partitioning data into clusters. Below is a breakdown of the memory used by 1 million 128-dimensional vectors indexed using IVF variants.</p>
 <ol>
-<li><p><strong>Рассчитайте память, используемую центроидами.</strong></p>
-<p>Типы индексов серии IVF позволяют Milvus группировать векторы в кластеры с помощью разбиения на основе центроидов. Каждый центроид включается в индекс при встраивании необработанных векторов. Если разделить векторы на 2 000 кластеров, расход памяти можно рассчитать следующим образом:</p>
+<li><p><strong>Calculate the memory used by centroids.</strong></p>
+<p>IVF-series index types enable Milvus to cluster vectors into buckets using centroid-based partitioning. Each centroid is included in the index in raw vector embedding. When you divide the vectors into 2,000 clusters, the memory usage can be calculated as follows:</p>
 <pre><code translate="no" class="language-plaintext">2,000 clusters × 128 dimensions × 4 bytes = 1.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Вычислите память, используемую при назначении кластеров.</strong></p>
-<p>Каждый векторный эмбеддинг назначается кластеру и хранится в виде целочисленных идентификаторов. Для 2 000 кластеров достаточно целого числа размером 2 байта. Использование памяти можно рассчитать следующим образом:</p>
+<li><p><strong>Calculate the memory used by cluster assignments.</strong></p>
+<p>Each vector embedding is assigned to a cluster and stored as integer IDs. For 2,000 clusters, a 2-byte integer suffices. The memory usage can be calculated as follows:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 2 bytes = 2.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Рассчитайте сжатие, вызванное квантованием.</strong></p>
-<p>В вариантах ЭКО обычно используются PQ и SQ8, и расход памяти можно оценить следующим образом:</p>
+<li><p><strong>Calculate the compression caused by quantization.</strong></p>
+<p>IVF variants typically use PQ and SQ8, and the memory usage can be estimated as follows:</p>
 <ul>
-<li><p>Использование PQ с 8 субквантователями</p>
+<li><p>Using PQ with 8 subquantizers</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Использование SQ8</p>
+<li><p>Using SQ8</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 128 dimensions × 1 byte = 128 MB 
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>В следующей таблице приведены расчетные значения использования памяти при различных конфигурациях:</p>
+<p>The following table lists the estimated memory usage with different configurations:</p>
 <p><table>
 <tr>
-<th><p>Конфигурация</p></th>
-<th><p>Оценка памяти</p></th>
-<th><p>Общая память</p></th>
+<th><p>Configuration</p></th>
+<th><p>Memory Estimation</p></th>
+<th><p>Total Memory</p></th>
 </tr>
 <tr>
-<td><p>IVF-PQ (без доработки)</p></td>
-<td><p>1,0 МБ + 2,0 МБ + 8,0 МБ</p></td>
-<td><p>11,0 МБ</p></td>
+<td><p>IVF-PQ (no refinement)</p></td>
+<td><p>1.0 MB + 2.0 MB + 8.0 MB</p></td>
+<td><p>11.0 MB</p></td>
 </tr>
 <tr>
-<td><p>IVF-PQ + 10% необработанное уточнение</p></td>
-<td><p>1,0 МБ + 2,0 МБ + 8,0 МБ + 51,2 МБ</p></td>
-<td><p>62,2 МБ</p></td>
+<td><p>IVF-PQ + 10% raw refinement</p></td>
+<td><p>1.0 MB + 2.0 MB + 8.0 MB + 51.2 MB</p></td>
+<td><p>62.2 MB</p></td>
 </tr>
 <tr>
-<td><p>ЭКО-SQ8 (без доработки)</p></td>
-<td><p>1,0 МБ + 2,0 МБ + 128 МБ</p></td>
-<td><p>131,0 МБ</p></td>
+<td><p>IVF-SQ8 (no refinement)</p></td>
+<td><p>1.0 MB + 2.0 MB + 128 MB</p></td>
+<td><p>131.0 MB</p></td>
 </tr>
 <tr>
-<td><p>IVF-FLAT (полные необработанные векторы)</p></td>
-<td><p>1,0 МБ + 2,0 МБ + 512 МБ</p></td>
-<td><p>515,0 МБ</p></td>
+<td><p>IVF-FLAT (full raw vectors)</p></td>
+<td><p>1.0 MB + 2.0 MB + 512 MB</p></td>
+<td><p>515.0 MB</p></td>
 </tr>
 </table></p></li>
-<li><p><strong>Рассчитайте накладные расходы на уточнение.</strong></p>
-<p>Варианты ЭКО часто используются в паре с рефайнером для повторного ранжирования кандидатов. Для поиска, извлекающего 10 лучших результатов с коэффициентом расширения 5, затраты на уточнение можно оценить следующим образом:</p>
+<li><p><strong>Calculate the refinement overhead.</strong></p>
+<p>IVF variants often pair with a refiner to re-rank candidates. For a search retrieving the top 10 results with an expansion rate of 5, the refinement overhead can be estimated as follows:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">Использование памяти индекса на основе графов</h3><p>Индексы на основе графов, такие как HNSW, требуют значительного объема памяти для хранения как структуры графа, так и исходных векторных вкраплений. Ниже приводится подробная разбивка памяти, потребляемой 1 миллионом 128-мерных векторов, проиндексированных с помощью индекса типа HNSW.</p>
+<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">Graph-based index memory usage</h3><p>Graph-based index types like HNSW require significant memory to store both the graph structure and raw vector embeddings. Below is a detailed breakdown of the memory consumed by 1 million 128-dimensional vectors indexed using the HNSW index type.</p>
 <ol>
-<li><p><strong>Вычислите память, используемую структурой графа.</strong></p>
-<p>Каждый вектор в HNSW поддерживает связи со своими соседями. При степени графа (ребра на узел), равной 32, потребляемая память может быть рассчитана следующим образом:</p>
+<li><p><strong>Calculate the memory used by the graph structure.</strong></p>
+<p>Each vector in HNSW maintains connections to its neighbors. With a graph degree (edges per node) of 32, the memory consumed can be calculated as follows:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 32 links × 4 bytes (for 32-bit integer storage) = 128 MB  
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Вычислите память, используемую необработанными векторными вкраплениями.</strong></p>
-<p>Память, потребляемую при хранении несжатых векторов FP32, можно рассчитать следующим образом:</p>
+<li><p><strong>Calculate the memory used by the raw vector embeddings.</strong></p>
+<p>The memory consumed by storing uncompressed FP32 vectors can be calculated as follows:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 128 dimensions × 4 bytes = 512 MB  
 <button class="copy-code-btn"></button></code></pre>
-<p>При использовании HNSW для индексации 1 миллиона 128-мерных векторных вкраплений общее количество используемой памяти составит <strong>128 МБ (граф) + 512 МБ (векторы) = 640 МБ</strong>.</p></li>
-<li><p><strong>Рассчитайте сжатие, вызванное квантованием.</strong></p>
-<p>Квантование уменьшает размер вектора. Например, использование PQ с 8 субквантователями (8 байт на вектор) приводит к значительному сжатию. Память, занимаемую сжатыми векторными вкраплениями, можно рассчитать следующим образом:</p>
+<p>When you use HNSW to index the 1 million 128-dimensional vector embeddings, the total memory in use would be <strong>128 MB (graph) + 512 MB (vectors) = 640 MB</strong>.</p></li>
+<li><p><strong>Calculate the compression caused by quantization.</strong></p>
+<p>Quantization reduces vector size. For example, using PQ with 8 subquantizers (8 bytes per vector) leads to a drastic compression. The memory consumed by the compressed vector embeddings can be calculated as follows:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
-<p>При этом достигается 64-кратное сжатие по сравнению с вкраплениями необработанных векторов, а общее количество памяти, используемое индексом типа <strong>HNSWPQ</strong>, составит <strong>128 МБ (граф) + 8 МБ (сжатый вектор) = 136 МБ</strong>.</p></li>
-<li><p><strong>Рассчитайте накладные расходы на уточнение.</strong></p>
-<p>Уточнение, такое как повторное ранжирование с использованием необработанных векторов, временно загружает в память высокоточные данные. Для поиска, извлекающего 10 лучших результатов с частотой расширения 5, накладные расходы на уточнение можно оценить следующим образом:</p>
+<p>This achieves a 64-times compression rate when compared to the raw vector embeddings, and the total memory used by the <strong>HNSWPQ</strong> index type would be <strong>128 MB (graph) + 8 MB (compressed vector) = 136 MB</strong>.</p></li>
+<li><p><strong>Calculate the refinement overhead.</strong></p>
+<p>Refinement, such as re-ranking with raw vectors, temporarily loads high-precision data into memory. For a search retrieving the top 10 results with an expansion rate of 5, the refinement overhead can be estimated as follows:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Other-considerations" class="common-anchor-header">Другие соображения</h3><p>В то время как ЭКО и индексы на основе графов оптимизируют использование памяти за счет квантования, файлы с отображением памяти (mmap) и DiskANN решают проблемы, когда наборы данных превышают объем доступной памяти с произвольным доступом (RAM).</p>
-<h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN - это индекс на основе графа Vamana, который соединяет точки данных для эффективной навигации во время поиска, применяя при этом PQ для уменьшения размера векторов и быстрого вычисления приблизительного расстояния между ними.</p>
-<p>Граф Vamana хранится на диске, что позволяет DiskANN работать с большими наборами данных, которые в противном случае были бы слишком велики, чтобы поместиться в памяти. Это особенно полезно для наборов данных из миллиардов точек.</p>
-<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">Файлы с отображением памяти (mmap)</h4><p>Сопоставление с памятью (Mmap) обеспечивает прямой доступ из памяти к большим файлам на диске, позволяя Milvus хранить индексы и данные как в памяти, так и на жестких дисках. Такой подход помогает оптимизировать операции ввода-вывода, снижая накладные расходы на вызовы ввода-вывода в зависимости от частоты доступа, тем самым увеличивая емкость хранения коллекций без существенного влияния на производительность поиска.</p>
-<p>В частности, вы можете настроить Milvus на отображение в памяти исходных данных в определенных полях вместо их полной загрузки в память. Таким образом, вы можете получить прямой доступ к полям, не беспокоясь о проблемах с памятью, и расширить емкость коллекции.</p>
+<h3 id="Other-considerations" class="common-anchor-header">Other considerations</h3><p>While IVF and graph-based indexes optimize memory usage through quantization, memory-mapped files (mmap) and DiskANN address scenarios where datasets exceed available random access memory (RAM).</p>
+<h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN is a Vamana graph-based index that connects data points for efficient navigation during search while applying PQ to reduce the size of vectors and enable quick approximate distance calculation between vectors.</p>
+<p>The Vamana graph is stored on disk, which allows DiskANN to handle large datasets that would otherwise be too big to fit in memory. This is particularly useful for billion-point datasets.</p>
+<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">Memory-mapped files (mmap)</h4><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize I/O operations by reducing the overhead of I/O calls based on access frequency, thereby expanding storage capacity for collections without significantly impacting search performance.</p>
+<p>Specifically, you can configure Milvus to memory-map the raw data in certain fields instead of fully loading them into memory. This way, you can gain direct memory access to the fields without worrying about memory issues and extend the collection capacity.</p>

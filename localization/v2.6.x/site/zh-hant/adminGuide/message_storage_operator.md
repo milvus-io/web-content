@@ -1,10 +1,10 @@
 ---
 id: message_storage_operator.md
-title: 使用 Milvus Operator 設定訊息儲存
+title: Configure Message Storage with Milvus Operator
 related_key: 'minio, s3, storage, etcd, pulsar'
-summary: 學習如何使用 Milvus Operator 設定訊息儲存。
+summary: Learn how to configure message storage with Milvus Operator.
 ---
-<h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 設定訊息儲存<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">Configure Message Storage with Milvus Operator<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,14 +19,14 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 使用 RocksMQ、Pulsar 或 Kafka 來管理最近變更的日誌、輸出串流日誌，以及提供日誌訂閱。本主題介紹如何在使用 Milvus Operator 安裝 Milvus 時，設定訊息儲存的依賴性。如需詳細資訊，請參閱 Milvus Operator 套件庫中的<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configure Message Storage with Milvus Operator</a>。</p>
-<p>本主題假設您已部署 Milvus Operator。</p>
-<div class="alert note">請參閱<a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">部署 Milvus Operator</a>以取得更多資訊。 </div>
-<p>您需要指定使用 Milvus Operator 啟動 Milvus 叢集的設定檔。</p>
+    </button></h1><p>Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator. For more details, refer to <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configure Message Storage with Milvus Operator</a> in the Milvus Operator repository.</p>
+<p>This topic assumes that you have deployed Milvus Operator.</p>
+<div class="alert note">See <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
+<p>You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您只需編輯<code translate="no">milvus_cluster_default.yaml</code> 中的程式碼模板，即可設定第三方依賴。以下各節將分別介紹如何設定物件儲存、etcd 和 Pulsar。</p>
-<h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<p>You only need to edit the code template in <code translate="no">milvus_cluster_default.yaml</code> to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,27 +41,28 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下表顯示 Milvus 獨立模式和集群模式是否支援 RocksMQ、NATS、Pulsar 和 Kafka。</p>
+    </button></h2><p>The table below shows whether RocksMQ, NATS, Pulsar, and Kafka are supported in Milvus standalone and cluster mode.</p>
 <table>
 <thead>
-<tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">NATS</th><th style="text-align:center">Pulsar</th><th style="text-align:center">卡夫卡</th></tr>
+<tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">NATS</th><th style="text-align:center">Pulsar</th><th style="text-align:center">Kafka</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">單機模式</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
-<tr><td style="text-align:center">叢集模式</td><td style="text-align:center">✖️</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
+<tr><td style="text-align:center">Standalone mode</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
+<tr><td style="text-align:center">Cluster mode</td><td style="text-align:center">✖️</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
-<p>指定訊息儲存也有其他限制：</p>
+<p>There are also other limitations for specifying the message storage:</p>
 <ul>
-<li>一個 Milvus 實例只支援一個訊息儲存空間。然而，我們仍然向後相容為一個實例設定多個訊息儲存空間。優先順序如下：<ul>
-<li>獨立模式：  RocksMQ (預設) &gt; Pulsar &gt; Kafka</li>
-<li>群集模式：Pulsar (預設) &gt; Kafka</li>
-<li>為了向下相容性，2.3 中引入的 Nats 不參與這些優先順序規則。</li>
+<li>Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
+<ul>
+<li>standalone mode:  RocksMQ (default) > Pulsar > Kafka</li>
+<li>cluster mode: Pulsar (default) > Kafka</li>
+<li>Nats introduced in 2.3 do not participate in these priority rules for backward compatibility.</li>
 </ul></li>
-<li>當 Milvus 系統在執行時，訊息儲存是無法改變的。</li>
-<li>僅支援 Kafka 2.x 或 3.x 版本。</li>
+<li>The message storage cannot be changed while the Milvus system is running.</li>
+<li>Only Kafka 2.x or 3.x verison is supported.</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">Configure RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,11 +77,11 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RocksMQ 是 Milvus 單機版的預設訊息儲存空間。</p>
+    </button></h2><p>RocksMQ is the default message storage in Milvus standalone.</p>
 <div class="alert note">
-<p>目前，你只能透過 Milvus Operator 設定 RocksMQ 為 Milvus standalone 的訊息儲存空間。</p>
+<p>Currently, you can only configure RocksMQ as the message storage for Milvus standalone with Milvus Operator.</p>
 </div>
-<h4 id="Example" class="common-anchor-header">範例</h4><p>下面的例子配置了一個 RocksMQ 服務。</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a RocksMQ service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -103,16 +104,16 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">主要配置選項：</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: 明確設定 RocksMQ 為訊息佇列。</li>
-<li><code translate="no">persistence.enabled</code>:啟用 RocksMQ 資料的持久化儲存。</li>
-<li><code translate="no">persistence.pvcDeletion</code>:當設定為 true 時，PVC 會在 Milvus 刪除時被刪除。</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>:標準 Kubernetes PVC 規格</li>
-<li><code translate="no">accessModes</code>:通常<code translate="no">ReadWriteOnce</code> 用於區塊儲存</li>
-<li><code translate="no">storageClassName</code>:您集群的儲存類別</li>
-<li><code translate="no">storage</code>:持久卷的大小</li>
+<h5 id="Key-configuration-options" class="common-anchor-header">Key configuration options:</h5><ul>
+<li><code translate="no">msgStreamType</code>: rocksmq: Explicitly sets RocksMQ as the message queue</li>
+<li><code translate="no">persistence.enabled</code>: Enables persistent storage for RocksMQ data</li>
+<li><code translate="no">persistence.pvcDeletion</code>: When true, the PVC will be deleted when the Milvus instance is deleted</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Standard Kubernetes PVC specification</li>
+<li><code translate="no">accessModes</code>: Typically <code translate="no">ReadWriteOnce</code> for block storage</li>
+<li><code translate="no">storageClassName</code>: Your cluster’s storage class</li>
+<li><code translate="no">storage</code>: Size of the persistent volume</li>
 </ul>
-<h2 id="Configure-NATS" class="common-anchor-header">配置 NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h2 id="Configure-NATS" class="common-anchor-header">Configure NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -127,8 +128,8 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS 是 NATS 的另一種訊息儲存方式。</p>
-<h4 id="Example" class="common-anchor-header">範例</h4><p>下面的示例配置了一个 NATS 服务。</p>
+    </button></h2><p>NATS is an alternative message storage for NATS.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a NATS service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -170,25 +171,25 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>要將 RocksMQ 的訊息儲存空間遷移至 NATS，步驟如下：</p>
+<p>To migrate the message storage from RocksMQ to NATS, do as follows:</p>
 <ol>
-<li><p>停止所有 DDL 操作。</p></li>
-<li><p>调用 FlushAll API，然后在 API 调用执行完毕后停止 Milvus。</p></li>
-<li><p>將<code translate="no">msgStreamType</code> 改為<code translate="no">natsmq</code> ，並在<code translate="no">spec.dependencies.natsmq</code> 中對 NATS 設定進行必要的修改。</p></li>
-<li><p>再次啟動 Milvus 並檢查是否：</p>
+<li><p>Stop all DDL operations.</p></li>
+<li><p>Call the FlushAll API and then stop Milvus once the API call finishes executing.</p></li>
+<li><p>Change <code translate="no">msgStreamType</code> to <code translate="no">natsmq</code> and make necessary changes to NATS settings in <code translate="no">spec.dependencies.natsmq</code>.</p></li>
+<li><p>Start Milvus again and check whether:</p>
 <ul>
-<li>日誌中是否有讀取<code translate="no">mqType=natsmq</code> 的日誌項目。</li>
-<li>在<code translate="no">spec.dependencies.natsmq.server.storeDir</code> 中指定的目錄中是否存在名為<code translate="no">jetstream</code> 的目錄。</li>
+<li>A log entry that reads <code translate="no">mqType=natsmq</code> is present in the logs.</li>
+<li>A directory named <code translate="no">jetstream</code> is present in the directory specified in <code translate="no">spec.dependencies.natsmq.server.storeDir</code>.</li>
 </ul></li>
-<li><p>(可選）備份並清理 RocksMQ 儲存目錄中的資料檔案。</p></li>
+<li><p>(Optional) Back up and clean up the data files in the RocksMQ storage directory.</p></li>
 </ol>
 <div class="alert note">
-<p><strong>在 RocksMQ 和 NATS 之間做選擇？</strong></p>
-<p>RockMQ使用CGO與RocksDB互動，並自行管理記憶體，而內嵌在Milvus安裝中的純GO NATS則將記憶體管理委託給Go的垃圾收集器(GC)。</p>
-<p>在資料封包小於 64 kb 的情況下，RocksDB 在記憶體使用量、CPU 使用量和回應時間上都比較優勝。另一方面，如果資料封包大於 64 kb，NATS 在有足夠記憶體和理想 GC 排程的情況下，在回應時間上表現優異。</p>
-<p>目前，建議您僅在實驗中使用 NATS。</p>
+<p><strong>Choose between RocksMQ and NATS?</strong></p>
+<p>RockMQ uses CGO to interact with RocksDB and manages the memory by itself, while the pure-GO NATS embedded in the Milvus installation delegates its memory management to Go’s garbage collector (GC).</p>
+<p>In the scenario where the data packet is smaller than 64 kb, RocksDB outperforms in terms of memory usage, CPU usage, and response time. On the other hand, if the data packet is greater than 64 kb, NATS excels in terms of response time with sufficient memory and ideal GC scheduling.</p>
+<p>Currently, you are advised to use NATS only for experiments.</p>
 </div>
-<h2 id="Configure-Pulsar" class="common-anchor-header">設定 Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
+<h2 id="Configure-Pulsar" class="common-anchor-header">Configure Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,14 +204,15 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar 管理最近變更的日誌、輸出串流日誌，並提供日誌訂閱。Milvus 獨立版和 Milvus 集群都支援配置 Pulsar 作訊息儲存。然而，使用 Milvus Operator，您只能設定 Pulsar 為 Milvus 叢集的訊息儲存。添加<code translate="no">spec.dependencies.pulsar</code> 下的必填欄位以配置 Pulsar。</p>
-<p><code translate="no">pulsar</code> 支援 和 。<code translate="no">external</code> <code translate="no">inCluster</code></p>
-<h3 id="External-Pulsar" class="common-anchor-header">外部 Pulsar</h3><p><code translate="no">external</code> 表示使用外部 Pulsar 服務。 用於設定外部 Pulsar 服務的欄位包括：</p>
+    </button></h2><p>Pulsar manages logs of recent changes, outputs stream logs, and provides log subscriptions. Configuring Pulsar for message storage is supported in both Milvus standalone and Milvus cluster. However, with Milvus Operator, you can only configure Pulsar as message storage for Milvus cluster. Add required fields under <code translate="no">spec.dependencies.pulsar</code> to configure Pulsar.</p>
+<p><code translate="no">pulsar</code> supports <code translate="no">external</code> and <code translate="no">inCluster</code>.</p>
+<h3 id="External-Pulsar" class="common-anchor-header">External Pulsar</h3><p><code translate="no">external</code> indicates using an external Pulsar service.
+Fields used to configure an external Pulsar service include:</p>
 <ul>
-<li><code translate="no">external</code>:  <code translate="no">true</code> 值表示 Milvus 使用外部 Pulsar 服務。</li>
-<li><code translate="no">endpoints</code>:Pulsar 的端點。</li>
+<li><code translate="no">external</code>:  A <code translate="no">true</code> value indicates that Milvus uses an external Pulsar service.</li>
+<li><code translate="no">endpoints</code>: The endpoints of Pulsar.</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例設定外部 Pulsar 服務。</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external Pulsar service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -229,8 +231,8 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">內部 Pulsar</h3><p><code translate="no">inCluster</code> 表示當 Milvus 集群啟動時，Pulsar 服務會在集群中自動啟動。</p>
-<h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例設定內部 Pulsar 服務。</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">Internal Pulsar</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, a Pulsar service starts automatically in the cluster.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal Pulsar service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -269,12 +271,12 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">此範例指定 Pulsar 各元件的複製數量、Pulsar BookKeeper 的計算資源，以及其他配置。</div>
-<div class="alert note">在<a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a> 中找到配置內部 Pulsar 服務的完整配置項目。如前面的範例所示，在<code translate="no">pulsar.inCluster.values</code> 下依需要加入設定項目。</div>
-<p>假設設定檔名為<code translate="no">milvuscluster.yaml</code> ，執行下列指令套用設定。</p>
+<div class="alert note">This example specifies the numbers of replicas of each component of Pulsar, the compute resources of Pulsar BookKeeper, and other configurations.</div>
+<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>. Add configuration items as needed under <code translate="no">pulsar.inCluster.values</code> as shown in the preceding example.</div>
+<p>Assuming that the configuration file is named <code translate="no">milvuscluster.yaml</code>, run the following command to apply the configuration.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-Kafka" class="common-anchor-header">配置 Kafka<button data-href="#Configure-Kafka" class="anchor-icon" translate="no">
+<h2 id="Configure-Kafka" class="common-anchor-header">Configure Kafka<button data-href="#Configure-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -289,15 +291,15 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar 是 Milvus 叢集的預設訊息儲存空間。如果要使用 Kafka，請加入可選欄位<code translate="no">msgStreamType</code> 來設定 Kafka。</p>
-<p><code translate="no">kafka</code> 支援 和 。<code translate="no">external</code> <code translate="no">inCluster</code></p>
-<h3 id="External-Kafka" class="common-anchor-header">外部 Kafka</h3><p><code translate="no">external</code> 表示使用外部 Kafka 服務。</p>
-<p>用於設定外部 Kafka 服務的欄位包括</p>
+    </button></h2><p>Pulsar is the default message storage in a Milvus cluster. If you want to use Kafka, add the optional field <code translate="no">msgStreamType</code> to configure Kafka.</p>
+<p><code translate="no">kafka</code> supports <code translate="no">external</code> and <code translate="no">inCluster</code>.</p>
+<h3 id="External-Kafka" class="common-anchor-header">External Kafka</h3><p><code translate="no">external</code> indicates using an external Kafka service.</p>
+<p>Fields used to configure an external Kafka service include:</p>
 <ul>
-<li><code translate="no">external</code>:<code translate="no">true</code> 值表示 Milvus 使用外部 Kafka 服務。</li>
-<li><code translate="no">brokerList</code>:要將訊息傳送至的經紀人清單。</li>
+<li><code translate="no">external</code>: A <code translate="no">true</code> value indicates that Milvus uses an external Kafka service.</li>
+<li><code translate="no">brokerList</code>: The list of brokers to send the messages to.</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例設定外部 Kafka 服務。</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external Kafka service.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -325,10 +327,10 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>操作員 v0.8.5 或更高版本支援 SASL 配置。</p>
+<p>SASL configurations are supported in operator v0.8.5 or higher version.</p>
 </blockquote>
-<h3 id="Internal-Kafka" class="common-anchor-header">內部 Kafka</h3><p><code translate="no">inCluster</code> 表示當 Milvus 叢集啟動時，叢集中的 Kafka 服務會自動啟動。</p>
-<h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例設定內部 Kafka 服務。</p>
+<h3 id="Internal-Kafka" class="common-anchor-header">Internal Kafka</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, a Kafka service starts automatically in the cluster.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal Kafka service.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -344,11 +346,11 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p><a href="https://artifacthub.io/packages/helm/bitnami/kafka">在這裡</a>找到配置內部 Kafka 服務的完整配置項目。根據需要在<code translate="no">kafka.inCluster.values</code> 下添加配置項。</p>
-<p>假設配置檔名為<code translate="no">milvuscluster.yaml</code> ，執行下列指令套用配置。</p>
+<p>Find the complete configuration items to configure an internal Kafka service <a href="https://artifacthub.io/packages/helm/bitnami/kafka">here</a>. Add configuration items as needed under <code translate="no">kafka.inCluster.values</code>.</p>
+<p>Assuming that the configuration file is named <code translate="no">milvuscluster.yaml</code>, run the following command to apply the configuration.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -363,8 +365,8 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>學習如何使用 Milvus Operator 配置其他 Milvus 依賴項目：</p>
+    </button></h2><p>Learn how to configure other Milvus dependencies with Milvus Operator:</p>
 <ul>
-<li><a href="/docs/zh-hant/object_storage_operator.md">使用 Milvus Operator 配置物件儲存</a></li>
-<li><a href="/docs/zh-hant/meta_storage_operator.md">使用 Milvus Operator 配置元存儲</a></li>
+<li><a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a></li>
+<li><a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
 </ul>

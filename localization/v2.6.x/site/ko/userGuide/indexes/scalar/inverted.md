@@ -2,8 +2,10 @@
 id: inverted.md
 title: INVERTED
 summary: >-
-  Milvus의 반전 인덱스는 스칼라 필드와 구조화된 JSON 필드 모두에서 필터 쿼리를 가속화하도록 설계되었습니다. 용어가 포함된 문서나
-  레코드에 용어를 매핑함으로써 무차별 대입 검색에 비해 쿼리 성능을 크게 향상시키는 반전 인덱스입니다.
+  The INVERTED index in Milvus is designed to accelerate filter queries on both
+  scalar fields and structured JSON fields. By mapping terms to the documents or
+  records that contain them, inverted indexes greatly improve query performance
+  compared to brute-force searches.
 ---
 <h1 id="INVERTED" class="common-anchor-header">INVERTED<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus의 <code translate="no">INVERTED</code> 인덱스는 스칼라 필드와 구조화된 JSON 필드 모두에서 필터 쿼리를 가속화하도록 설계되었습니다. 용어가 포함된 문서나 레코드에 용어를 매핑함으로써, 반전된 인덱스는 무차별 대입 검색에 비해 쿼리 성능을 크게 향상시킵니다.</p>
-<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>The <code translate="no">INVERTED</code> index in Milvus is designed to accelerate filter queries on both scalar fields and structured JSON fields. By mapping terms to the documents or records that contain them, inverted indexes greatly improve query performance compared to brute-force searches.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,23 +38,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/quickwit-oss/tantivy">Tantivy를</a> 기반으로 하는 Milvus는 특히 텍스트 데이터의 필터 쿼리를 가속화하기 위해 반전 인덱싱을 구현합니다. 작동 원리는 다음과 같습니다:</p>
+    </button></h2><p>Powered by <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus implements inverted indexing to accelerate filter queries, especially for textual data. Here’s how it works:</p>
 <ol>
-<li><p><strong>데이터를 토큰화합니다</strong>: Milvus는 원시 데이터(이 예에서는 두 문장)를 가져옵니다:</p>
+<li><p><strong>Tokenize the Data</strong>: Milvus takes your raw data—in this example, two sentences:</p>
 <ul>
-<li><p><strong>"Milvus는 클라우드 네이티브 벡터 데이터베이스입니다."</strong></p></li>
-<li><p><strong>"Milvus는 성능이 매우 뛰어납니다."</strong></p></li>
+<li><p><strong>“Milvus is a cloud-native vector database.”</strong></p></li>
+<li><p><strong>“Milvus is very good at performance.”</strong></p></li>
 </ul>
-<p>를 고유한 단어(예: <em>Milvus</em>, <em>is</em>, <em>클라우드 네이티브</em>, <em>벡터</em>, <em>데이터베이스</em>, <em>매우</em>, <em>좋은</em>, <em>at</em>, <em>성능</em>)로 변환합니다.</p></li>
-<li><p><strong>용어 사전을 구축합니다</strong>: 이러한 고유 단어는 <strong>용어 사전</strong>이라는 정렬된 목록에 저장됩니다. 이 사전을 통해 Milvus는 단어의 존재 여부를 빠르게 확인하고 색인에서 해당 단어의 위치를 찾을 수 있습니다.</p></li>
-<li><p><strong>반전 목록 만들기</strong>: 용어 사전의 각 단어에 대해 Milvus는 해당 단어가 포함된 문서를 보여주는 <strong>반전 목록을</strong> 유지합니다. 예를 들어, <strong>"Milvus</strong> "는 두 문장에 모두 나타나므로 반전 목록은 두 문서 ID를 가리킵니다.</p></li>
+<p>and breaks them into unique words (e.g., <em>Milvus</em>, <em>is</em>, <em>cloud-native</em>, <em>vector</em>, <em>database</em>, <em>very</em>, <em>good</em>, <em>at</em>, <em>performance</em>).</p></li>
+<li><p><strong>Build the Term Dictionary</strong>: These unique words are stored in a sorted list called the <strong>Term Dictionary</strong>. This dictionary lets Milvus quickly check if a word exists and locate its position in the index.</p></li>
+<li><p><strong>Create the Inverted List</strong>: For each word in the Term Dictionary, Milvus keeps an <strong>Inverted List</strong> showing which documents contain that word. For instance, <strong>“Milvus”</strong> appears in both sentences, so its inverted list points to both document IDs.</p></li>
 </ol>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
-   </span> <span class="img-wrapper"> <span>반전</span> </span></p>
-<p>사전이 정렬되어 있기 때문에 용어 기반 필터링을 효율적으로 처리할 수 있습니다. Milvus는 모든 문서를 스캔하는 대신 사전에서 해당 용어를 찾아 반전된 목록을 검색하므로 대규모 데이터 세트의 검색 및 필터링 속도가 크게 빨라집니다.</p>
-<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">일반 스칼라 필드 색인<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
+    <span>Inverted</span>
+  </span>
+</p>
+<p>Because the dictionary is sorted, term-based filtering can be handled efficiently. Instead of scanning all documents, Milvus just looks up the term in the dictionary and retrieves its inverted list—significantly speeding up searches and filters on large datasets.</p>
+<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">Index a regular scalar field<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,7 +71,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>ARRAY와</strong> 같은 스칼라 필드의 경우, 반전 인덱스를 만드는 것은 간단합니다. <code translate="no">index_type</code> 매개변수를 <code translate="no">&quot;INVERTED&quot;</code> 로 설정한 <code translate="no">create_index()</code> 메서드를 사용합니다.</p>
+    </button></h2><p>For scalar fields like <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, and <strong>ARRAY</strong>, creating an inverted index is straightforward. Use the <code translate="no">create_index()</code> method with the <code translate="no">index_type</code> parameter set to <code translate="no">&quot;INVERTED&quot;</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -86,7 +90,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-a-JSON-field" class="common-anchor-header">JSON 필드 색인하기<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Index-a-JSON-field" class="common-anchor-header">Index a JSON field<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -101,12 +105,12 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 인덱싱 기능을 JSON 필드까지 확장하여 단일 열에 저장된 중첩 또는 구조화된 데이터를 효율적으로 필터링할 수 있습니다. 스칼라 필드와 달리 JSON 필드를 색인할 때는 두 개의 추가 매개변수를 제공해야 합니다:</p>
+    </button></h2><p>Milvus extends its indexing capabilities to JSON fields, allowing you to efficiently filter on nested or structured data stored within a single column. Unlike scalar fields, when indexing a JSON field you must provide two additional parameters:</p>
 <ul>
-<li><p><code translate="no">json_path</code><strong>:</strong> 인덱싱할 중첩된 키를 지정합니다.</p></li>
-<li><p><code translate="no">json_cast_type</code><strong>:</strong> 추출된 JSON 값을 캐스팅할 데이터 유형(예: <code translate="no">&quot;varchar&quot;</code>, <code translate="no">&quot;double&quot;</code>, 또는 <code translate="no">&quot;bool&quot;</code>)을 정의합니다.</p></li>
+<li><p><code translate="no">json_path</code><strong>:</strong> Specifies the nested key to index.</p></li>
+<li><p><code translate="no">json_cast_type</code><strong>:</strong> Defines the data type (e.g., <code translate="no">&quot;varchar&quot;</code>, <code translate="no">&quot;double&quot;</code>, or <code translate="no">&quot;bool&quot;</code>) to which the extracted JSON value will be cast.</p></li>
 </ul>
-<p>예를 들어, 다음과 같은 구조를 가진 <code translate="no">metadata</code> 이라는 JSON 필드를 생각해 보겠습니다:</p>
+<p>For example, consider a JSON field named <code translate="no">metadata</code> with the following structure:</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;metadata&quot;: {
     &quot;product_info&quot;: {
@@ -119,7 +123,7 @@ client.create_index(
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>특정 JSON 경로에 반전된 인덱스를 만들려면 다음과 같은 방법을 사용할 수 있습니다:</p>
+<p>To create inverted indexes on specific JSON paths, you can use the following approach:</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string.</span>
@@ -147,43 +151,44 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>매개변수</p></th>
-     <th><p>설명</p></th>
-     <th><p>예제 값</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Example Value</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>스키마에 있는 JSON 필드의 이름입니다.</p></td>
+     <td><p>Name of the JSON field in your schema.</p></td>
      <td><p><code translate="no">"metadata"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>생성할 인덱스 유형(현재 JSON 경로 인덱싱에는 <code translate="no">INVERTED</code> 만 지원됨).</p></td>
+     <td><p>Index type to create; currently only <code translate="no">INVERTED</code> is supported for JSON path indexing.</p></td>
      <td><p><code translate="no">"INVERTED"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(선택 사항) 사용자 정의 인덱스 이름. 동일한 JSON 필드에 여러 인덱스를 생성하는 경우 다른 이름을 지정합니다.</p></td>
+     <td><p>(Optional) A custom index name. Specify different names if you create multiple indexes on the same JSON field.</p></td>
      <td><p><code translate="no">"json_index_1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>인덱싱할 JSON 경로를 지정합니다. 중첩된 키, 배열 위치 또는 둘 다(예: <code translate="no">metadata["product_info"]["category"]</code> 또는 <code translate="no">metadata["tags"][0]</code>)를 대상으로 할 수 있습니다. 경로가 누락되거나 특정 행에 대한 배열 요소가 존재하지 않으면 해당 행은 인덱싱 중에 건너뛰고 오류가 발생되지 않습니다.</p></td>
+     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code translate="no">metadata["product_info"]["category"]</code> or <code translate="no">metadata["tags"][0]</code>).
+ If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>인덱스를 생성할 때 Milvus가 추출된 JSON 값을 캐스팅할 데이터 유형입니다. 유효한 값</p>
+     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
 <ul>
-<li><p><code translate="no">"bool"</code> 또는 <code translate="no">"BOOL"</code></p></li>
-<li><p><code translate="no">"double"</code> 또는 <code translate="no">"DOUBLE"</code></p></li>
-<li><p><code translate="no">"varchar"</code> 또는 <code translate="no">"VARCHAR"</code></p>
-<p><strong>참고</strong>: 정수 값의 경우, Milvus는 내부적으로 인덱스에 더블을 사용합니다. 2^53 이상의 큰 정수는 정밀도가 떨어집니다. 유형 불일치로 인해 형 변환이 실패하면 오류가 발생하지 않으며 해당 행의 값은 색인되지 않습니다.</p></li>
+<li><p><code translate="no">"bool"</code> or <code translate="no">"BOOL"</code></p></li>
+<li><p><code translate="no">"double"</code> or <code translate="no">"DOUBLE"</code></p></li>
+<li><p><code translate="no">"varchar"</code> or <code translate="no">"VARCHAR"</code></p>
+<p><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If the cast fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</p></li>
 </ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
-<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">JSON 인덱싱에 대한 고려 사항<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
+<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">Considerations on JSON indexing<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -199,22 +204,22 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>필터링 로직</strong>:</p>
+<li><p><strong>Filtering logic</strong>:</p>
 <ul>
-<li><p><strong>이중 유형 인덱스(</strong><code translate="no">json_cast_type=&quot;double&quot;</code><strong>)를 생성하는</strong> 경우 숫자 유형 필터 조건만 인덱스를 사용할 수 있습니다. 필터가 이중 인덱스를 숫자가 아닌 조건과 비교하는 경우, Milvus는 무차별 대입 검색으로 돌아갑니다.</p></li>
-<li><p><strong>바차르 타입 인덱스(</strong><code translate="no">json_cast_type=&quot;varchar&quot;</code><strong>)를 생성하는</strong> 경우 문자열 타입 필터 조건만 인덱스를 사용할 수 있습니다. 그렇지 않으면 Milvus는 무차별 대입 검색으로 돌아갑니다.</p></li>
-<li><p><strong>부울</strong> 인덱싱은 바차르 타입과 유사하게 작동합니다.</p></li>
+<li><p>If you <strong>create a double-type index</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), only numeric-type filter conditions can use the index. If the filter compares a double index to a non-numeric condition, Milvus falls back to brute force search.</p></li>
+<li><p>If you <strong>create a varchar-type index</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), only string-type filter conditions can use the index. Otherwise, Milvus falls back to brute force.</p></li>
+<li><p><strong>Boolean</strong> indexing behaves similarly to varchar-type.</p></li>
 </ul></li>
-<li><p><strong>용어 표현식</strong>:</p>
+<li><p><strong>Term expressions</strong>:</p>
 <ul>
-<li><code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code> 을 사용할 수 있습니다. 그러나 인덱스는 해당 경로 아래에 저장된 스칼라 값에 대해서만 작동합니다. <code translate="no">json[&quot;field&quot;]</code> 이 배열인 경우 쿼리는 무차별 대입으로 돌아갑니다(배열형 인덱싱은 아직 지원되지 않음).</li>
+<li>You can use <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. However, the index works only for scalar values stored under that path. If <code translate="no">json[&quot;field&quot;]</code> is an array, the query falls back to brute force (array-type indexing is not yet supported).</li>
 </ul></li>
-<li><p><strong>숫자 정밀도</strong>:</p>
+<li><p><strong>Numeric precision</strong>:</p>
 <ul>
-<li>내부적으로 Milvus는 모든 숫자 필드를 이중으로 색인합니다. 숫자 값이 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53을</span></span></span></span></span></span></span></span></span></span></span></span> 초과하면 정밀도가 떨어지며, 범위를 벗어난 값에 대한 쿼리는 정확히 일치하지 않을 수 있습니다.</li>
+<li>Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>53</mn></msup></mrow><annotation encoding="application/x-tex">2^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, it loses precision, and queries on those out-of-range values may not match exactly.</li>
 </ul></li>
-<li><p><strong>데이터 무결성</strong>:</p>
+<li><p><strong>Data integrity</strong>:</p>
 <ul>
-<li>Milvus는 지정된 형 변환을 넘어서는 JSON 키를 구문 분석하거나 변환하지 않습니다. 소스 데이터가 일관성이 없는 경우(예: 일부 행은 <code translate="no">&quot;k&quot;</code> 키에 대해 문자열을 저장하고 다른 행은 숫자를 저장하는 경우) 일부 행은 인덱싱되지 않습니다.</li>
+<li>Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key <code translate="no">&quot;k&quot;</code> while others store a number), some rows will not be indexed.</li>
 </ul></li>
 </ul>

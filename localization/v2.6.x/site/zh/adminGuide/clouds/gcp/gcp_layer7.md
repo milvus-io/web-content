@@ -1,10 +1,10 @@
 ---
 id: gcp_layer7.md
-title: 为 GCP 上的 Milvus 设置 Layer-7 负载平衡器
+title: Set up a Layer-7 Load Balancer for Milvus on GCP
 related_key: cluster
-summary: 了解如何在 GCP 上的 Layer-7 负载均衡器后面部署 Milvus 集群。
+summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on GCP.
 ---
-<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">为 GCP 上的 Milvus 设置 Layer-7 负载平衡器<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
+<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">Set up a Layer-7 Load Balancer for Milvus on GCP<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,31 +19,31 @@ summary: 了解如何在 GCP 上的 Layer-7 负载均衡器后面部署 Milvus �
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>与 Layer-4 负载平衡器相比，Layer-7 负载平衡器具有智能负载平衡和缓存功能，是云原生服务的最佳选择。</p>
-<p>本指南将指导您为已经在第 4 层负载平衡器后面运行的 Milvus 集群设置第 7 层负载平衡器。</p>
-<h3 id="Before-your-start" class="common-anchor-header">开始之前</h3><ul>
-<li><p>您的 GCP 账户中已经存在一个项目。</p>
-<p>要创建项目，请参阅<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">创建和管理项目</a>。本指南中使用的项目名称是<strong>milvus-testing-nonprod</strong>。</p></li>
-<li><p>您已在本地安装了<a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>、<a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> 和<a href="https://helm.sh/docs/intro/install/">Helm</a>，或者决定使用基于浏览器的<a href="https://cloud.google.com/shell">Cloud Shell</a>。</p></li>
-<li><p>您已使用 GCP 账户凭据<a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">初始化了 gcloud CLI</a>。</p></li>
-<li><p>您已<a href="/docs/zh/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 集群</a>。</p></li>
+    </button></h1><p>When compared to a Layer-4 load balancer, a Layer-7 load balancer offers smart load balancing and caching capabilities and is a great choice for cloud-native services.</p>
+<p>This guide walks you through setting up a layer-7 load balancer for a Milvus cluster already running behind a Layer-4 load balancer.</p>
+<h3 id="Before-your-start" class="common-anchor-header">Before your start</h3><ul>
+<li><p>A project already exists in your GCP account.</p>
+<p>To create a project, refer to <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creating and managing projects</a>. The name of the project used in this guide is <strong>milvus-testing-nonprod</strong>.</p></li>
+<li><p>You have locally installed <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>, and <a href="https://helm.sh/docs/intro/install/">Helm</a>, or decided to use the browser-based <a href="https://cloud.google.com/shell">Cloud Shell</a> instead.</p></li>
+<li><p>You have <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialized the gcloud CLI</a> with your GCP account credentials.</p></li>
+<li><p>You have <a href="/docs/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假定您已<a href="/docs/zh/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
-<p>在为该 Milvus 群集设置 Layer-7 负载平衡器之前，请运行以下命令移除 Layer-4 负载平衡器。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p>
+<p>Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
-<p>作为 Layer-7 负载平衡器的后端服务，Milvus 必须满足<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2">一定的加密要求</a>，这样才能理解来自负载平衡器的 HTTP/2 请求。因此，你需要在 Milvus 集群上启用 TLS，具体操作如下。</p>
+<p>As a backend service of the Layer-7 load balancer, Milvus has to meet <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2">certain encryption requirements</a> so that it can understand the HTTP/2 requests from the load balancer. Therefore, you need to enable TLS on your Milvus cluster as follows.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus -f tls.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>在负载均衡器上启用 TLS：</p>
+<p>the tls.yaml content:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     common:
       security:
         tlsMode: 1
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">设置健康检查端点</h3><p>为确保服务可用性，GCP 上的 Layer-7 负载均衡需要探测后端服务的健康状况。因此，我们需要设置一个 BackendConfig 来封装健康检查端点，并通过注解将 BackendConfig 与 Milvus 服务关联起来。</p>
-<p>以下代码段就是 BackendConfig 的设置。将其保存为<code translate="no">backendconfig.yaml</code> ，以便以后使用。</p>
+<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Set up a health check endpoint</h3><p>To ensure service availability, Layer-7 load balancing on GCP requires probing the health conditions of the backend service. Therefore, we need to set up a BackendConfig to wrap up the health check endpoint and associate the BackendConfig with the Milvus service through annotations.</p>
+<p>The following snippet is the BackendConfig settings. Save it as <code translate="no">backendconfig.yaml</code> for later use.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
 <span class="hljs-attr">metadata:</span>
@@ -55,10 +55,10 @@ summary: 了解如何在 GCP 上的 Layer-7 负载均衡器后面部署 Milvus �
     <span class="hljs-attr">requestPath:</span> <span class="hljs-string">/healthz</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">HTTP</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然后运行以下命令创建健康检查端点。</p>
+<p>Then run the following command to create the health check endpoint.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f backendconfig.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>最后，更新 Milvus 服务的注解，要求我们稍后创建的 Layer-7 负载平衡器使用刚刚创建的端点执行健康检查。</p>
+<p>Finally, update the annotations of the Milvus service to ask the Layer-7 load balancer that we will create later to perform health checks using the endpoint just created.</p>
 <pre><code translate="no" class="language-bash">kubectl annotate service my-release-milvus \
     cloud.google.com/app-protocols=<span class="hljs-string">&#x27;{&quot;milvus&quot;:&quot;HTTP2&quot;}&#x27;</span> \
     cloud.google.com/backend-config=<span class="hljs-string">&#x27;{&quot;default&quot;: &quot;my-release-backendconfig&quot;}&#x27;</span> \
@@ -66,17 +66,17 @@ summary: 了解如何在 GCP 上的 Layer-7 负载均衡器后面部署 Milvus �
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>关于第一个注释、</p>
-<p>Milvus 原生于基于 HTTP/2 的 gRPC。因此，我们可以使用 HTTP/2 作为 Layer-7 负载平衡器和 Milvus 之间的通信协议。</p></li>
-<li><p>至于第二个注释、</p>
-<p>Milvus 只通过 gRPC 和 HTTP/1 提供健康检查端点。我们需要设置一个 BackendConfig 来封装健康检查端点，并将其与 Milvus 服务关联起来，以便 Layer-7 负载平衡器探查该端点以了解 Milvus 的健康状况。</p></li>
-<li><p>至于第三个注释、</p>
-<p>它要求在创建入口后创建网络端点组（NEG）。当 NEG 与 GKE Ingress 一起使用时，Ingress 控制器会帮助创建负载平衡器的所有方面。这包括创建虚拟 IP 地址、转发规则、健康检查、防火墙规则等。有关详细信息，请参阅<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">Google Cloud 文档</a>。</p></li>
+<li><p>As to the first annotation,</p>
+<p>Milvus is native to gRPC, which is built upon HTTP/2. Therefore, we can use HTTP/2 as the communication protocol between the Layer-7 load balancer and Milvus.</p></li>
+<li><p>As to the second annotation,</p>
+<p>Milvus only offers the health check endpoint over gRPC and HTTP/1. We need to set up a BackendConfig to wrap the health check endpoint and associate it with the Milvus service so that the Layer-7 load balancer probes this endpoint for the health condition of Milvus.</p></li>
+<li><p>As to the third annotation,</p>
+<p>It asks for the creation of a network endpoint group (NEG) after an Ingress is created. When NEGs are used with GKE Ingress, the Ingress controller facilitates the creation of all aspects of the load balancer. This includes creating the virtual IP address, forwarding rules, health checks, firewall rules, and more. For details, refer to <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">Google Cloud docs</a>.</p></li>
 </ul>
 </div>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">准备 TLS 证书</h3><p>TLS 需要证书才能工作。<strong>创建证书有两种方法，即自我管理和 Google 管理。</strong></p>
-<p>本指南使用<strong>my-release.milvus.io</strong>作为访问我们 Milvus 服务的域名。</p>
-<h4 id="Create-self-managed-certificates" class="common-anchor-header">创建自我管理证书</h4><p>运行以下命令创建证书。</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Prepare TLS certificates</h3><p>TLS requires certificates to work. <strong>There are two ways to create certificates, namely self-managed and Google-managed.</strong></p>
+<p>This guide uses <strong>my-release.milvus.io</strong> as the domain name to access our Milvus service.</p>
+<h4 id="Create-self-managed-certificates" class="common-anchor-header">Create self-managed certificates</h4><p>Run the following commands to create a certificate.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Generates a tls.key.</span>
 openssl genrsa -out tls.key 2048
 
@@ -87,10 +87,10 @@ openssl req -new -key tls.key -out tls.csr \
 openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
     -out tls.crt
 <button class="copy-code-btn"></button></code></pre>
-<p>然后在 GKE 集群中用这些文件创建一个秘密，以供日后使用。</p>
+<p>Then create a secret in your GKE cluster with these files for later use.</p>
 <pre><code translate="no" class="language-bash">kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Create-Google-managed-certificates" class="common-anchor-header">创建谷歌管理证书</h4><p>以下代码段是 ManagedCertificate 设置。将其保存为<code translate="no">managed-crt.yaml</code> ，以便日后使用。</p>
+<h4 id="Create-Google-managed-certificates" class="common-anchor-header">Create Google-managed certificates</h4><p>The following snippet is a ManagedCertificate setting. Save it as <code translate="no">managed-crt.yaml</code> for later use.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.gke.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ManagedCertificate</span>
 <span class="hljs-attr">metadata:</span>
@@ -99,13 +99,13 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
   <span class="hljs-attr">domains:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">my-release.milvus.io</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 GKE 集群中应用以下设置，创建受管证书：</p>
+<p>Create a managed certificate by applying the setting to your GKE cluster as follows:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ./managed-crt.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>这可能会持续一段时间。您可以运行</p>
+<p>This could last for a while. You can check the progress by running</p>
 <pre><code translate="no" class="language-bash">kubectl get -f ./managed-crt.yaml -o yaml -w
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果应与下图类似：</p>
+<p>The output should be similar to the following:</p>
 <pre><code translate="no" class="language-shell">status:
   certificateName: mcrt-34446a53-d639-4764-8438-346d7871a76e
   certificateStatus: Provisioning
@@ -113,10 +113,10 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
   - domain: my-release.milvus.io
     status: Provisioning
 <button class="copy-code-btn"></button></code></pre>
-<p>一旦<strong>certificateStatus</strong>变为<strong>Active</strong>，您就可以设置负载平衡器了。</p>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">创建入口以生成 Layer-7 负载平衡器</h3><p>用以下代码段之一创建一个 YAML 文件。</p>
+<p>Once <strong>certificateStatus</strong> turns to <strong>Active</strong>, you are ready to set up the load balancer.</p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Create an Ingress to generate a Layer-7 Load Balancer</h3><p>Create a YAML file with one of the following snippets.</p>
 <ul>
-<li><p>使用自我管理证书</p>
+<li><p>Using self-managed certificates</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -139,7 +139,7 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
             <span class="hljs-attr">port:</span>
               <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>使用 Google 管理的证书</p>
+<li><p>Using Google-managed certificates</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -161,19 +161,19 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
               <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>然后，将该文件应用到 GKE 集群，即可创建 Ingress。</p>
+<p>Then you can create the Ingress by applying the file to your GKE cluster.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>现在，等待 Google 设置 Layer-7 负载均衡器。您可以运行</p>
+<p>Now, wait for Google to set up the Layer-7 load balancer. You can check the progress by running</p>
 <pre><code translate="no" class="language-bash">kubectl  -f ./config/samples/ingress.yaml get -w
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果应与下图类似：</p>
+<p>The output should be similar to the following:</p>
 <pre><code translate="no" class="language-shell">NAME                CLASS    HOSTS                  ADDRESS   PORTS   AGE
 my-release-milvus   &lt;none&gt;   my-release.milvus.io             80      4s
 my-release-milvus   &lt;none&gt;   my-release.milvus.io   34.111.144.65   80, 443   41m
 <button class="copy-code-btn"></button></code></pre>
-<p>一旦<strong>ADDRESS</strong>字段中显示了 IP 地址，Layer-7 负载平衡器就可以使用了。端口 80 和端口 443 都显示在上述输出中。请记住，为了您的利益，应始终使用端口 443。</p>
-<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">验证通过 Layer-7 负载均衡器的连接<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
+<p>Once an IP address is displayed in the <strong>ADDRESS</strong> field, the Layer-7 load balancer is ready to use. Both port 80 and port 443 are displayed in the above output. Remember, you should always use port 443 for your own good.</p>
+<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Verify the connection through the Layer-7 load balancer<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -188,8 +188,8 @@ my-release-milvus   &lt;none&gt;   my-release.milvus.io   34.111.144.65   80, 44
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本指南使用 PyMilvus 来验证与我们刚刚创建的 Layer-7 负载均衡器后面的 Milvus 服务的连接。有关详细步骤，请<a href="https://milvus.io/docs/v2.3.x/example_code.md">阅读此文</a>。</p>
-<p>请注意，连接参数会因<a href="#prepare-tls-certificates">准备 TLS 证书</a>中管理证书的方式而不同。</p>
+    </button></h2><p>This guide uses PyMilvus to verify the connection to the Milvus service behind the Layer-7 load balancer we have just created. For detailed steps, <a href="https://milvus.io/docs/v2.3.x/example_code.md">read this</a>.</p>
+<p>Notice that connection parameters vary with the way you choose to manage the certificates in <a href="#prepare-tls-certificates">Prepare TLS certificates</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     connections,
     utility,
@@ -207,7 +207,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><strong>host</strong>和<strong>port</strong>中的 IP 地址和<strong>端口号</strong>应与<a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">Create an Ingress to generate a Layer-7 Load Balancer</a> 末尾列出的一致。</li>
-<li>如果已设置 DNS 记录将域名映射到主机 IP 地址，请将<strong>host</strong>中的 IP 地址替换为域名，省略<strong>server_name</strong>。</li>
+<li>The IP address and port number in <strong>host</strong> and <strong>port</strong> should match those listed at the end of <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">Create an Ingress to generate a Layer-7 Load Balancer</a>.</li>
+<li>If you have set up a DNS record to map domain name to the host IP address, replace the IP address in <strong>host</strong> with the domain name and omit <strong>server_name</strong>.</li>
 </ul>
 </div>

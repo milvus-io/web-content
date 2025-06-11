@@ -132,6 +132,6 @@ title: Milvus 部署选项概述
 <tr><td>搜索功能</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td></tr>
 <tr><td>CRUD 操作符</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
 <tr><td>高级数据管理</td><td>不适用</td><td>访问控制<br/>分区<br/>分区密钥</td><td>访问控制<br/>分区<br/>分区密钥<br/>物理资源分组</td></tr>
-<tr><td>一致性级别</td><td>强</td><td>强<br/>有界稳定性<br/>会话<br/>最终</td><td>强<br/>有界稳定性<br/>会话<br/>最终</td></tr>
+<tr><td>一致性级别</td><td>强</td><td>强<br/>有界停滞<br/>会话<br/>最终</td><td>强<br/>有界稳定性<br/>会话<br/>最终</td></tr>
 </tbody>
 </table>

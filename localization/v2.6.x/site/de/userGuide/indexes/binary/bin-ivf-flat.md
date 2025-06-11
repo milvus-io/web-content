@@ -2,13 +2,12 @@
 id: bin-ivf-flat.md
 title: BIN_IVF_FLAT
 summary: >-
-  Der Index BIN_IVF_FLAT ist eine Variante des Index IVF_FLAT ausschließlich für
-  binäre Einbettungen. Er verbessert die Abfrageeffizienz, indem er zunächst die
-  Vektordaten in mehrere Cluster (nList-Einheiten) partitioniert und dann den
-  Zieleingabevektor mit dem Zentrum jedes Clusters vergleicht. BIN_IVF_FLAT
-  verkürzt die Abfragezeit erheblich und ermöglicht gleichzeitig eine
-  Feinabstimmung des Gleichgewichts zwischen Genauigkeit und Geschwindigkeit.
-  Weitere Informationen finden Sie unter IVF_FLAT.
+  The BIN_IVF_FLAT index is a variant of the IVF_FLAT index exclusively for
+  binary embeddings. It enhances query efficiency by first partitioning the
+  vector data into multiple clusters (nlist units) and then comparing the target
+  input vector to the center of each cluster. BIN_IVF_FLAT significantly reduces
+  query time while allowing users to fine-tune the balance between accuracy and
+  speed. For more information, refer to IVF_FLAT.
 ---
 <h1 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT<button data-href="#BINIVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der Index <strong>BIN_IVF_FLAT</strong> ist eine Variante des Index <strong>IVF_FLAT</strong> ausschließlich für binäre Einbettungen. Er verbessert die Abfrageeffizienz, indem er zunächst die Vektordaten in mehrere Cluster (nList-Einheiten) partitioniert und dann den Zieleingabevektor mit dem Zentrum jedes Clusters vergleicht. BIN_IVF_FLAT verkürzt die Abfragezeit erheblich und ermöglicht gleichzeitig eine Feinabstimmung des Gleichgewichts zwischen Genauigkeit und Geschwindigkeit. Weitere Informationen finden Sie unter <a href="/docs/de/ivf-flat.md">IVF_FLAT</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
+    </button></h1><p>The <strong>BIN_IVF_FLAT</strong> index is a variant of the <strong>IVF_FLAT</strong> index exclusively for binary embeddings. It enhances query efficiency by first partitioning the vector data into multiple clusters (nlist units) and then comparing the target input vector to the center of each cluster. BIN_IVF_FLAT significantly reduces query time while allowing users to fine-tune the balance between accuracy and speed. For more information, refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um einen <code translate="no">BIN_IVF_FLAT</code> -Index für ein Vektorfeld in Milvus zu erstellen, verwenden Sie die Methode <code translate="no">add_index()</code> und geben Sie die Parameter <code translate="no">index_type</code>, <code translate="no">metric_type</code> und zusätzliche Parameter für den Index an.</p>
+    </button></h2><p>To build a <code translate="no">BIN_IVF_FLAT</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -57,18 +56,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In dieser Konfiguration:</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: Der Typ des zu erstellenden Index. In diesem Beispiel setzen Sie den Wert auf <code translate="no">BIN_IVF_FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Die Methode zur Berechnung des Abstands zwischen Vektoren. Unterstützte Werte für binäre Einbettungen sind <code translate="no">HAMMING</code> (Standard) und <code translate="no">JACCARD</code>. Einzelheiten finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p></li>
-<li><p><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Erstellung des Indexes.</p>
+<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">BIN_IVF_FLAT</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values for binary embeddings include <code translate="no">HAMMING</code> (default) and <code translate="no">JACCARD</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
-<li><code translate="no">nlist</code>: Anzahl der Cluster zur Unterteilung des Datensatzes.</li>
+<li><code translate="no">nlist</code>: Number of clusters to divide the dataset.</li>
 </ul>
-<p>Weitere Informationen zu den für den Index <code translate="no">BIN_IVF_FLAT</code> verfügbaren Erstellungsparametern finden Sie unter <a href="/docs/de/bin-ivf-flat.md#Index-building-params">Indexerstellungsparameter</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/bin-ivf-flat.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Sobald die Indexparameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Indexparameter in der Methode <code translate="no">create_collection</code> übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Suche im Index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,7 +82,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald der Index erstellt und die Entitäten eingefügt sind, können Sie Ähnlichkeitssuchen im Index durchführen.</p>
+    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -98,15 +97,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In dieser Konfiguration:</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Suche im Index.</p>
+<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
 <ul>
-<li><code translate="no">nprobe</code>: Anzahl der Cluster, nach denen gesucht werden soll.</li>
+<li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
 </ul>
-<p>Weitere Suchparameter, die für den Index <code translate="no">BIN_IVF_FLAT</code> verfügbar sind, finden Sie unter <a href="/docs/de/bin-ivf-flat.md#Index-specific-search-params">Indexspezifische Suchparameter</a>.</p></li>
+<p>To learn more search parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/bin-ivf-flat.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Index-Parameter<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,37 +120,43 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/bin-ivf-flat.md#Index-building-params">Aufbau eines Index</a> konfiguriert werden können.</p>
+    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/bin-ivf-flat.md#Index-building-params">building an index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
-     <th><p>Beschreibung</p></th>
-     <th><p>Wertebereich</p></th>
-     <th><p>Tuning-Vorschlag</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>Die Anzahl der Cluster, die bei der Indexerstellung mit dem k-means-Algorithmus erstellt werden. Jeder Cluster, der durch einen Zentroid repräsentiert wird, speichert eine Liste von Vektoren. Durch Erhöhen dieses Parameters wird die Anzahl der Vektoren in jedem Cluster reduziert, wodurch kleinere, konzentriertere Partitionen entstehen.</p></td>
-     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 65536]</p>
-<p><strong>Standardwert</strong>: <code translate="no">128</code></p></td>
-     <td><p>Größere <code translate="no">nlist</code> Werte verbessern die Wiederauffindbarkeit durch die Erstellung von feineren Clustern, erhöhen aber die Indexerstellungszeit. Optimieren Sie den Wert je nach Größe des Datensatzes und der verfügbaren Ressourcen. In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: [32, 4096].</p></td>
+     <td><p>The number of clusters to create using the k-means algorithm during index building.
+ Each cluster, represented by a centroid, stores a list of vectors. Increasing this parameter reduces the number of vectors in each cluster, creating smaller, more focused partitions.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, 65536]</p>
+<p><strong>Default value</strong>: <code translate="no">128</code></p></td>
+     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources.
+ In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/bin-ivf-flat.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/bin-ivf-flat.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
-     <th><p>Beschreibung</p></th>
-     <th><p>Wertebereich</p></th>
-     <th><p>Tuning-Vorschlag</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>Die Anzahl der Cluster, in denen nach Kandidaten gesucht werden soll. Höhere Werte ermöglichen die Suche in mehr Clustern, was die Wiederauffindbarkeit durch die Erweiterung des Suchbereichs verbessert, allerdings auf Kosten einer erhöhten Abfragelatenz.</p></td>
-     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>nlist</em>]</p>
-<p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
-     <td><p>Eine Erhöhung dieses Wertes verbessert die Wiederauffindbarkeit, kann aber die Suche verlangsamen. <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code> einstellen, um ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit herzustellen.</p>
-<p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</p></td>
+     <td><p>The number of clusters to search for candidates.
+ Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, <em>nlist</em>]</p>
+<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
+     <td><p>Increasing this value improves recall but may slow down the search.
+ Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p>
+<p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
    </tr>
 </table>

@@ -2,9 +2,10 @@
 id: sparse-inverted-index.md
 title: SPARSE_INVERTED_INDEX
 summary: >-
-  SPARSE_INVERTED_INDEX 인덱스는 밀버스에서 스파스 벡터를 효율적으로 저장하고 검색하기 위해 사용하는 인덱스 유형입니다. 이
-  인덱스 유형은 반전 인덱싱의 원리를 활용하여 희소 데이터를 위한 매우 효율적인 검색 구조를 만듭니다. 자세한 내용은 INVERTED를
-  참조하세요.
+  The SPARSE_INVERTED_INDEX index is an index type used by Milvus to efficiently
+  store and search sparse vectors. This index type leverages the principles of
+  inverted indexing to create a highly efficient search structure for sparse
+  data. For more information, refer to INVERTED.
 ---
 <h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">SPARSE_INVERTED_INDEX</code> 인덱스는 밀버스에서 스파스 벡터를 효율적으로 저장하고 검색하기 위해 사용하는 인덱스 유형입니다. 이 인덱스 유형은 반전 인덱싱의 원리를 활용하여 희소 데이터에 대한 매우 효율적인 검색 구조를 만듭니다. 자세한 내용은 <a href="/docs/ko/inverted.md">INVERTED를</a> 참조하세요.</p>
-<h2 id="Build-index" class="common-anchor-header">색인 구축<button data-href="#Build-index" class="anchor-icon" translate="no">
+    </button></h1><p>The <code translate="no">SPARSE_INVERTED_INDEX</code> index is an index type used by Milvus to efficiently store and search sparse vectors. This index type leverages the principles of inverted indexing to create a highly efficient search structure for sparse data. For more information, refer to <a href="/docs/inverted.md">INVERTED</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus의 스파스 벡터 필드에 <code translate="no">SPARSE_INVERTED_INDEX</code> 인덱스를 구축하려면 <code translate="no">add_index()</code> 방법을 사용하여 <code translate="no">index_type</code>, <code translate="no">metric_type</code> 및 인덱스에 대한 추가 매개변수를 지정합니다.</p>
+    </button></h2><p>To build a <code translate="no">SPARSE_INVERTED_INDEX</code> index on a sparse vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -51,25 +52,25 @@ index_params.add_index(
     params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># Algorithm used for building and querying the index</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 구성에서는</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: 구축할 인덱스 유형입니다. 이 예에서는 값을 <code translate="no">SPARSE_INVERTED_INDEX</code> 로 설정합니다.</p></li>
-<li><p><code translate="no">metric_type</code>: 스파스 벡터 간의 유사성을 계산하는 데 사용되는 메트릭입니다. 유효한 값:</p>
+<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">SPARSE_INVERTED_INDEX</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: The metric used to calculate similarity between sparse vectors. Valid Values:</p>
 <ul>
-<li><p><code translate="no">IP</code> (내적 곱): 도트 곱을 사용하여 유사도를 측정합니다.</p></li>
-<li><p><code translate="no">BM25</code>: 일반적으로 텍스트 유사성에 초점을 맞춘 전체 텍스트 검색에 사용됩니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형</a> 및 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
+<li><p><code translate="no">IP</code> (Inner Product): Measures similarity using dot product.</p></li>
+<li><p><code translate="no">BM25</code>: Typically used for full-text search, focusing on textual similarity.</p>
+<p>For further details, refer to <a href="/docs/metric.md">Metric Types</a> and <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
 </ul></li>
-<li><p><code translate="no">params.inverted_index_algo</code>: 인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 유효한 값입니다:</p>
+<li><p><code translate="no">params.inverted_index_algo</code>: The algorithm used for building and querying the index. Valid values:</p>
 <ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (기본값): MaxScore 알고리즘을 사용하여 DAAT(Document-at-a-Time) 쿼리 처리를 최적화합니다. MaxScore는 영향이 미미할 것 같은 용어와 문서를 건너뛰는 방식으로 높은 <em>k</em> 값이나 많은 용어가 포함된 쿼리에 대해 더 나은 성능을 제공합니다. 최대 영향력 점수를 기준으로 용어를 필수 및 비필수 그룹으로 분류하여 상위 k 결과에 기여할 수 있는 용어에 집중함으로써 이를 달성합니다.</p></li>
-<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: WAND 알고리즘을 사용하여 최적화된 DAAT 쿼리 처리. WAND는 최대 영향력 점수를 활용하여 비경쟁 문서를 건너뛰기 때문에 히트 문서를 더 적게 평가하지만, 히트당 오버헤드가 더 높습니다. 따라서 건너뛰기가 더 용이한 작은 <em>k</em> 값의 쿼리나 짧은 쿼리에는 WAND가 더 효율적입니다.</p></li>
-<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: 기본 TAAT(Term-at-a-Time) 쿼리 처리. <code translate="no">DAAT_MAXSCORE</code> 및 <code translate="no">DAAT_WAND</code> 에 비해 느리지만 <code translate="no">TAAT_NAIVE</code> 은 고유한 이점을 제공합니다. 전역 수집 매개변수(avgdl)의 변경에 관계없이 정적으로 유지되는 캐시된 최대 영향 점수를 사용하는 DAAT 알고리즘과 달리 <code translate="no">TAAT_NAIVE</code> 은 이러한 변경에 동적으로 적응합니다.</p></li>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (default): Optimized Document-at-a-Time (DAAT) query processing using the MaxScore algorithm. MaxScore provides better performance for high <em>k</em> values or queries with many terms by skipping terms and documents likely to have minimal impact. It achieves this by partitioning terms into essential and non-essential groups based on their maximum impact scores, focusing on terms that can contribute to the top-k results.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small <em>k</em> values or short queries, where skipping is more feasible.</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to <code translate="no">DAAT_MAXSCORE</code> and <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (avgdl), <code translate="no">TAAT_NAIVE</code> dynamically adapts to such changes.</p></li>
 </ul>
-<p><code translate="no">SPARSE_INVERTED_INDEX</code> 인덱스에 사용할 수 있는 구축 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/sparse-inverted-index.md#Index-building-params">인덱스 구축</a> 매개변수를 참조하세요.</p></li>
+<p>To learn more building parameters available for the <code translate="no">SPARSE_INVERTED_INDEX</code> index, refer to <a href="/docs/sparse-inverted-index.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 만들 수 있습니다. 자세한 내용은 <a href="/docs/ko/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
-<h2 id="Search-on-index" class="common-anchor-header">인덱스에서 검색<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,7 +85,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>인덱스가 구축되고 엔티티가 삽입되면 인덱스에서 유사도 검색을 수행할 수 있습니다.</p>
+    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
 search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters</span>
@@ -101,15 +102,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 구성에서는</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">params</code>: 색인에서 검색을 위한 추가 구성 옵션.</p>
+<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
 <ul>
-<li><code translate="no">drop_ratio_search</code>: 검색 과정에서 무시할 작은 벡터 값의 비율을 지정하여 검색 성능을 미세 조정할 수 있습니다. 예를 들어 <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> 을 사용하면 검색 중에 쿼리 벡터에서 가장 작은 20%의 값이 무시됩니다.</li>
+<li><code translate="no">drop_ratio_search</code>: Fine-tunes search performance by specifying what proportion of small vector values to ignore during the search process. For example, with <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, the smallest 20% of values in the query vector will be ignored during the search.</li>
 </ul>
-<p><code translate="no">SPARSE_INVERTED_INDEX</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">인덱스별 검색 매개변수를</a> 참조하세요.</p></li>
+<p>To learn more search parameters available for the <code translate="no">SPARSE_INVERTED_INDEX</code> index, refer to <a href="/docs/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">Index-specific search params</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">인덱스 매개변수<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -124,36 +125,36 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 인덱스를 작성하고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/sparse-inverted-index.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/sparse-inverted-index.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
-     <th><p>파라미터</p></th>
-     <th><p>설명</p></th>
-     <th><p>값 범위</p></th>
-     <th><p>조정 제안</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">inverted_index_algo</code></p></td>
-     <td><p>인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 인덱스가 쿼리를 처리하는 방법을 결정합니다.</p></td>
-     <td><p><code translate="no">"DAAT_MAXSCORE"</code> (기본값), <code translate="no">"DAAT_WAND"</code>, <code translate="no">"TAAT_NAIVE"</code></p></td>
-     <td><p>k 값이 크거나 용어가 많은 쿼리의 경우 <code translate="no">"DAAT_MAXSCORE"</code> 를 사용하여 비경쟁 문서를 건너뛰면 이점을 얻을 수 있습니다. 
- k 값이 작거나 쿼리가 짧은 경우 보다 효율적인 건너뛰기를 활용하려면 <code translate="no">"DAAT_WAND"</code> 을 선택하세요.</p>
-<p>컬렉션 변경 사항(예: 평균값)에 대한 동적 조정이 필요한 경우 <code translate="no">"TAAT_NAIVE"</code> 을 사용하세요.</p></td>
+     <td><p>The algorithm used for building and querying the index. It determines how the index processes queries.</p></td>
+     <td><p><code translate="no">"DAAT_MAXSCORE"</code> (default), <code translate="no">"DAAT_WAND"</code>, <code translate="no">"TAAT_NAIVE"</code></p></td>
+     <td><p>Use <code translate="no">"DAAT_MAXSCORE"</code> for scenarios with high k values or queries with many terms, which can benefit from skipping non-competitive documents. 
+ Choose <code translate="no">"DAAT_WAND"</code> for queries with small k values or short queries to leverage more efficient skipping.</p>
+<p>Use <code translate="no">"TAAT_NAIVE"</code> if dynamic adjustment to collection changes (e.g., avgdl) is required.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/sparse-inverted-index.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/sparse-inverted-index.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
-     <th><p>매개변수</p></th>
-     <th><p>설명</p></th>
-     <th><p>값 범위</p></th>
-     <th><p>조정 제안</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">drop_ratio_search</code></p></td>
-     <td><p>검색 시 무시할 가장 작은 값의 비율로, 노이즈를 줄이는 데 도움이 됩니다.</p></td>
-     <td><p>0.0에서 1.0 사이의 분수(예: 0.2는 가장 작은 20%의 값을 무시합니다.)</p></td>
-     <td><p>쿼리 벡터의 희소성과 노이즈 수준에 따라 이 매개변수를 조정합니다. 예를 들어 0.2로 설정하면 검색 중에 더 중요한 값에 집중할 수 있어 정확도가 향상될 수 있습니다.</p></td>
+     <td><p>The proportion of the smallest values to ignore during search, helping to reduce noise.</p></td>
+     <td><p>Fraction between 0.0 and 1.0 (e.g., 0.2 ignores the smallest 20% of values)</p></td>
+     <td><p>Tune this parameter based on the sparsity and noise level of your query vectors. For example, setting it to 0.2 can help focus on more significant values during the search, potentially improving accuracy.</p></td>
    </tr>
 </table>

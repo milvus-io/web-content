@@ -1,10 +1,12 @@
 ---
 id: hpa.md
 related_key: scale Milvus cluster with HPA
-summary: Milvusクラスタを動的にスケールするHPA(Horizontal Pod Autoscaling)の設定方法をご紹介します。
-title: MilvusのHPA（Horizontal Pod Autoscaling）の設定
+summary: >-
+  Learn how to configure Horizontal Pod Autoscaling (HPA) to dynamically scale a
+  Milvus cluster.
+title: Configure Horizontal Pod Autoscaling (HPA) for Milvus
 ---
-<h1 id="Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="common-anchor-header">MilvusのHPA（Horizontal Pod Autoscaling）の設定<button data-href="#Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="anchor-icon" translate="no">
+<h1 id="Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="common-anchor-header">Configure Horizontal Pod Autoscaling (HPA) for Milvus<button data-href="#Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +21,7 @@ title: MilvusのHPA（Horizontal Pod Autoscaling）の設定
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,9 +36,9 @@ title: MilvusのHPA（Horizontal Pod Autoscaling）の設定
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Horizontal Pod Autoscaling (HPA)はKubernetesの機能で、CPUやメモリなどのリソース使用率に基づいてデプロイメント内のPod数を自動的に調整します。Milvusでは、<code translate="no">proxy</code>,<code translate="no">queryNode</code>,<code translate="no">dataNode</code>,<code translate="no">indexNode</code> のようなステートレスコンポーネントにHPAを適用することで、ワークロードの変化に応じてクラスタを動的にスケールさせることができます。</p>
-<p>このガイドでは、Milvus Operatorを使用してMilvusコンポーネントにHPAを設定する方法を説明します。</p>
-<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h2><p>Horizontal Pod Autoscaling (HPA) is a Kubernetes feature that automatically adjusts the number of Pods in a deployment based on resource utilization, such as CPU or memory. In Milvus, HPA can be applied to stateless components like <code translate="no">proxy</code>, <code translate="no">queryNode</code>, <code translate="no">dataNode</code>, and <code translate="no">indexNode</code> to dynamically scale the cluster in response to workload changes.</p>
+<p>This guide explains how to configure HPA for Milvus components using the Milvus Operator.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,11 +54,11 @@ title: MilvusのHPA（Horizontal Pod Autoscaling）の設定
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus Operatorを使用してデプロイされた稼働中のMilvusクラスタ。</li>
-<li>Kubernetesリソースを管理するための<code translate="no">kubectl</code> へのアクセス。</li>
-<li>MilvusアーキテクチャとKubernetes HPAに精通していること。</li>
+<li>A running Milvus cluster deployed with Milvus Operator.</li>
+<li>Access to <code translate="no">kubectl</code> for managing Kubernetes resources.</li>
+<li>Familiarity with Milvus architecture and Kubernetes HPA.</li>
 </ul>
-<h2 id="Configure-HPA-with-Milvus-Operator" class="common-anchor-header">Milvus Operatorを使用したHPAの設定<button data-href="#Configure-HPA-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Configure-HPA-with-Milvus-Operator" class="common-anchor-header">Configure HPA with Milvus Operator<button data-href="#Configure-HPA-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,18 +73,18 @@ title: MilvusのHPA（Horizontal Pod Autoscaling）の設定
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operatorで管理するMilvusクラスタでHPAを有効にするには、以下の手順に従います：</p>
+    </button></h2><p>To enable HPA in a Milvus cluster managed by the Milvus Operator, follow these steps:</p>
 <ol>
-<li><p><strong>Replicasを-1に設定</strong>します：</p>
-<p>Milvusカスタムリソース(CR)で、HPAでスケーリングしたいコンポーネントの<code translate="no">replicas</code> フィールドを<code translate="no">-1</code> に設定します。こ れに よ り 、 オペレー タ ではなく HPA にスケー リ ン グ制御が委譲 さ れます。CR を直接編集す る か、 以下の<code translate="no">kubectl patch</code> コ マ ン ド を使用す る こ と で、 HPA コ ン ト ロ ー ルへ迅速に切 り 替え る こ と がで き ます：</p>
+<li><p><strong>Set Replicas to -1</strong>:</p>
+<p>In the Milvus custom resource (CR), set the <code translate="no">replicas</code> field to <code translate="no">-1</code> for the component you want to scale with HPA. This delegates scaling control to HPA instead of the operator. You can edit the CR directly or use the following <code translate="no">kubectl patch</code> command to quickly switch to HPA control:</p>
 <pre><code translate="no" class="language-bash">kubectl patch milvus &lt;your-release-name&gt; --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;json&#x27;</span> -p=<span class="hljs-string">&#x27;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/components/proxy/replicas&quot;, &quot;value&quot;: -1}]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">&lt;your-release-name&gt;</code> をMilvusクラスタ名に置き換えてください。</p>
-<p>変更が適用されたことを確認するには、次のコマンドを実行します：</p>
+<p>Replace <code translate="no">&lt;your-release-name&gt;</code> with the name of your Milvus cluster.</p>
+<p>To verify that the change has been applied, run:</p>
 <pre><code translate="no" class="language-bash">kubectl get milvus &lt;your-release-name&gt; -o jsonpath=<span class="hljs-string">&#x27;{.spec.components.proxy.replicas}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">-1</code> <code translate="no">proxy</code> コ ン ポーネ ン ト が HPA 制御下にあ る こ と を確認で き ます。</p>
-<p>または、CR YAMLで定義することもできます：</p>
+<p>The expected output should be <code translate="no">-1</code>, confirming that the <code translate="no">proxy</code> component is now under HPA control.</p>
+<p>Alternatively, you can define it in the CR YAML:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -93,8 +95,8 @@ title: MilvusのHPA（Horizontal Pod Autoscaling）の設定
     <span class="hljs-attr">proxy:</span>
       <span class="hljs-attr">replicas:</span> <span class="hljs-number">-1</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>HPAリソースを定義</strong>します：</p>
-<p>HPA リソースを定義: 目的のコンポーネントのデプロイメントをターゲットとする HPA リソースを作成します。以下は<code translate="no">proxy</code> コンポーネントの例です：</p>
+<li><p><strong>Define an HPA Resource</strong>:</p>
+<p>Create an HPA resource to target the deployment of the desired component. Below is an example for the <code translate="no">proxy</code> component:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">autoscaling/v2</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">HorizontalPodAutoscaler</span>
 <span class="hljs-attr">metadata:</span>
@@ -132,26 +134,26 @@ title: MilvusのHPA（Horizontal Pod Autoscaling）の設定
           <span class="hljs-attr">value:</span> <span class="hljs-number">1</span>
           <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">60</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">metadata.name</code> および<code translate="no">spec.scaleTargetRef.name</code> の<code translate="no">my-release</code> を、実際の Milvus クラスタ名 (例:<code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> および<code translate="no">&lt;your-release-name&gt;-milvus-proxy</code>) に置き換えてください。</p></li>
-<li><p><strong>HPA構成を適用</strong>します：</p>
-<p>以下のコマンドを使用してHPAリソースをデプロイします：</p>
+<p>Replace <code translate="no">my-release</code> in <code translate="no">metadata.name</code> and <code translate="no">spec.scaleTargetRef.name</code> with your actual Milvus cluster name (e.g., <code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> and <code translate="no">&lt;your-release-name&gt;-milvus-proxy</code>).</p></li>
+<li><p><strong>Apply the HPA Configuration</strong>:</p>
+<p>Deploy the HPA resource using the following command:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f hpa.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>HPAが正常に作成されたことを確認するには、以下のコマンドを実行します：</p>
+<p>To verify that the HPA has been successfully created, run:</p>
 <pre><code translate="no" class="language-bash">kubectl get hpa
 <button class="copy-code-btn"></button></code></pre>
-<p>の よ う な出力が表示 さ れ る はずです：</p>
+<p>You should see output similar to:</p>
 <pre><code translate="no">NAME                          REFERENCE                            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>proxy<span class="hljs-operator">-</span>hpa   Deployment<span class="hljs-operator">/</span>my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>proxy   <span class="hljs-operator">&lt;</span><span class="hljs-keyword">some</span><span class="hljs-operator">&gt;</span><span class="hljs-operator">/</span><span class="hljs-number">60</span><span class="hljs-operator">%</span>      <span class="hljs-number">2</span>         <span class="hljs-number">10</span>        <span class="hljs-number">2</span>          <span class="hljs-operator">&lt;</span><span class="hljs-type">time</span><span class="hljs-operator">&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">NAME</code> および<code translate="no">REFERENCE</code> フィールドには、 クラスタ名が反映されます(例:<code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> および<code translate="no">Deployment/&lt;your-release-name&gt;-milvus-proxy</code>)。</p></li>
+<p>The <code translate="no">NAME</code> and <code translate="no">REFERENCE</code> fields will reflect your cluster name (e.g., <code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> and <code translate="no">Deployment/&lt;your-release-name&gt;-milvus-proxy</code>).</p></li>
 </ol>
 <ul>
-<li><code translate="no">scaleTargetRef</code>:スケーリングする配置を指定します(たとえば、<code translate="no">my-release-milvus-proxy</code>)。</li>
-<li><code translate="no">minReplicas</code> および : スケーリング範囲を設定します（この例では 2～10 Pods）。<code translate="no">maxReplicas</code></li>
-<li><code translate="no">metrics</code>:CPU とメモリの使用率に基づいてスケーリングを設定し、平均使用率 60% を目標にします。</li>
+<li><code translate="no">scaleTargetRef</code>: Specifies the deployment to scale (e.g., <code translate="no">my-release-milvus-proxy</code>).</li>
+<li><code translate="no">minReplicas</code> and <code translate="no">maxReplicas</code>: Sets the scaling range (2 to 10 Pods in this example).</li>
+<li><code translate="no">metrics</code>: Configures scaling based on CPU and memory utilization, targeting 60% average usage.</li>
 </ul>
-<h2 id="Conclusion" class="common-anchor-header">結論<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,4 +168,4 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HPAを利用することで、Milvusは様々なワークロードに効率的に適応することができます。<code translate="no">kubectl patch</code> コマンドを使用することで、CR全体を手動で編集することなく、コンポーネントを素早くHPA制御に切り替えることができます。詳細については、<a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">Kubernetes HPAのドキュメントを</a>参照してください。</p>
+    </button></h2><p>HPA allows Milvus to efficiently adapt to varying workloads. By using the <code translate="no">kubectl patch</code> command, you can quickly switch a component to HPA control without manually editing the full CR. For more details, refer to the <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">Kubernetes HPA documentation</a>.</p>

@@ -1,12 +1,10 @@
 ---
 id: gcp_layer7.md
-title: Menyiapkan Penyeimbang Beban Layer-7 untuk Milvus di GCP
+title: Set up a Layer-7 Load Balancer for Milvus on GCP
 related_key: cluster
-summary: >-
-  Pelajari cara menggunakan cluster Milvus di belakang penyeimbang beban Layer-7
-  pada GCP.
+summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on GCP.
 ---
-<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">Menyiapkan Penyeimbang Beban Layer-7 untuk Milvus di GCP<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
+<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">Set up a Layer-7 Load Balancer for Milvus on GCP<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,31 +19,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Jika dibandingkan dengan penyeimbang beban Layer-4, penyeimbang beban Layer-7 menawarkan kemampuan penyeimbangan beban dan caching yang cerdas dan merupakan pilihan yang tepat untuk layanan cloud-native.</p>
-<p>Panduan ini memandu Anda dalam menyiapkan penyeimbang beban Layer-7 untuk cluster Milvus yang sudah berjalan di belakang penyeimbang beban Layer-4.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Sebelum memulai</h3><ul>
-<li><p>Sebuah proyek sudah ada di akun GCP Anda.</p>
-<p>Untuk membuat proyek, lihat <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Membuat dan mengelola proyek</a>. Nama proyek yang digunakan dalam panduan ini adalah <strong>milvus-testing-nonprod</strong>.</p></li>
-<li><p>Anda telah menginstal <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>, dan <a href="https://helm.sh/docs/intro/install/">Helm</a> secara lokal, atau memutuskan untuk menggunakan <a href="https://cloud.google.com/shell">Cloud Shell</a> berbasis peramban.</p></li>
-<li><p>Anda telah <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">menginisialisasi gcloud CLI</a> dengan kredensial akun GCP Anda.</p></li>
-<li><p>Anda telah <a href="/docs/id/gcp.md">menerapkan cluster Milvus di belakang penyeimbang beban Layer-4 pada GCP</a>.</p></li>
+    </button></h1><p>When compared to a Layer-4 load balancer, a Layer-7 load balancer offers smart load balancing and caching capabilities and is a great choice for cloud-native services.</p>
+<p>This guide walks you through setting up a layer-7 load balancer for a Milvus cluster already running behind a Layer-4 load balancer.</p>
+<h3 id="Before-your-start" class="common-anchor-header">Before your start</h3><ul>
+<li><p>A project already exists in your GCP account.</p>
+<p>To create a project, refer to <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creating and managing projects</a>. The name of the project used in this guide is <strong>milvus-testing-nonprod</strong>.</p></li>
+<li><p>You have locally installed <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>, and <a href="https://helm.sh/docs/intro/install/">Helm</a>, or decided to use the browser-based <a href="https://cloud.google.com/shell">Cloud Shell</a> instead.</p></li>
+<li><p>You have <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialized the gcloud CLI</a> with your GCP account credentials.</p></li>
+<li><p>You have <a href="/docs/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Mengubah konfigurasi Milvus</h3><p>Panduan ini mengasumsikan bahwa Anda telah <a href="/docs/id/gcp.md">menggunakan cluster Milvus di belakang penyeimbang beban Layer-4 pada GCP</a>.</p>
-<p>Sebelum menyiapkan penyeimbang beban Layer-7 untuk klaster Milvus ini, jalankan perintah berikut untuk menghapus penyeimbang beban Layer-4.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p>
+<p>Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
-<p>Sebagai layanan backend dari penyeimbang beban Layer-7, Milvus harus memenuhi <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2">persyaratan enkripsi tertentu</a> agar dapat memahami permintaan HTTP/2 dari penyeimbang beban. Oleh karena itu, Anda perlu mengaktifkan TLS pada cluster Milvus Anda sebagai berikut.</p>
+<p>As a backend service of the Layer-7 load balancer, Milvus has to meet <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2">certain encryption requirements</a> so that it can understand the HTTP/2 requests from the load balancer. Therefore, you need to enable TLS on your Milvus cluster as follows.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus -f tls.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>konten tls.yaml:</p>
+<p>the tls.yaml content:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     common:
       security:
         tlsMode: 1
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Menyiapkan titik akhir pemeriksaan kesehatan</h3><p>Untuk memastikan ketersediaan layanan, penyeimbangan beban Layer-7 pada GCP memerlukan pemeriksaan kondisi kesehatan layanan backend. Oleh karena itu, kita perlu menyiapkan BackendConfig untuk membungkus titik akhir pemeriksaan kesehatan dan mengaitkan BackendConfig dengan layanan Milvus melalui anotasi.</p>
-<p>Cuplikan berikut ini adalah pengaturan BackendConfig. Simpan sebagai <code translate="no">backendconfig.yaml</code> untuk digunakan nanti.</p>
+<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Set up a health check endpoint</h3><p>To ensure service availability, Layer-7 load balancing on GCP requires probing the health conditions of the backend service. Therefore, we need to set up a BackendConfig to wrap up the health check endpoint and associate the BackendConfig with the Milvus service through annotations.</p>
+<p>The following snippet is the BackendConfig settings. Save it as <code translate="no">backendconfig.yaml</code> for later use.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
 <span class="hljs-attr">metadata:</span>
@@ -57,10 +55,10 @@ summary: >-
     <span class="hljs-attr">requestPath:</span> <span class="hljs-string">/healthz</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">HTTP</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian jalankan perintah berikut untuk membuat titik akhir pemeriksaan kesehatan.</p>
+<p>Then run the following command to create the health check endpoint.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f backendconfig.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Terakhir, perbarui anotasi pada layanan Milvus untuk meminta penyeimbang beban Layer-7 yang akan kita buat nanti untuk melakukan pemeriksaan kesehatan menggunakan endpoint yang baru saja dibuat.</p>
+<p>Finally, update the annotations of the Milvus service to ask the Layer-7 load balancer that we will create later to perform health checks using the endpoint just created.</p>
 <pre><code translate="no" class="language-bash">kubectl annotate service my-release-milvus \
     cloud.google.com/app-protocols=<span class="hljs-string">&#x27;{&quot;milvus&quot;:&quot;HTTP2&quot;}&#x27;</span> \
     cloud.google.com/backend-config=<span class="hljs-string">&#x27;{&quot;default&quot;: &quot;my-release-backendconfig&quot;}&#x27;</span> \
@@ -68,17 +66,17 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>Mengenai penjelasan pertama,</p>
-<p>Milvus adalah asli dari gRPC, yang dibangun di atas HTTP/2. Oleh karena itu, kita dapat menggunakan HTTP/2 sebagai protokol komunikasi antara penyeimbang beban Layer-7 dan Milvus.</p></li>
-<li><p>Mengenai penjelasan kedua,</p>
-<p>Milvus hanya menawarkan endpoint pemeriksaan kesehatan melalui gRPC dan HTTP/1. Kita perlu menyiapkan BackendConfig untuk membungkus endpoint pemeriksaan kesehatan dan mengasosiasikannya dengan layanan Milvus sehingga penyeimbang beban Layer-7 menyelidiki endpoint ini untuk mengetahui kondisi kesehatan Milvus.</p></li>
-<li><p>Mengenai anotasi ketiga,</p>
-<p>Ini meminta pembuatan grup titik akhir jaringan (NEG) setelah Ingress dibuat. Ketika NEG digunakan dengan GKE Ingress, pengontrol Ingress memfasilitasi pembuatan semua aspek penyeimbang beban. Ini termasuk membuat alamat IP virtual, aturan penerusan, pemeriksaan kesehatan, aturan firewall, dan banyak lagi. Untuk detailnya, lihat <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">dokumen Google Cloud</a>.</p></li>
+<li><p>As to the first annotation,</p>
+<p>Milvus is native to gRPC, which is built upon HTTP/2. Therefore, we can use HTTP/2 as the communication protocol between the Layer-7 load balancer and Milvus.</p></li>
+<li><p>As to the second annotation,</p>
+<p>Milvus only offers the health check endpoint over gRPC and HTTP/1. We need to set up a BackendConfig to wrap the health check endpoint and associate it with the Milvus service so that the Layer-7 load balancer probes this endpoint for the health condition of Milvus.</p></li>
+<li><p>As to the third annotation,</p>
+<p>It asks for the creation of a network endpoint group (NEG) after an Ingress is created. When NEGs are used with GKE Ingress, the Ingress controller facilitates the creation of all aspects of the load balancer. This includes creating the virtual IP address, forwarding rules, health checks, firewall rules, and more. For details, refer to <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">Google Cloud docs</a>.</p></li>
 </ul>
 </div>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Menyiapkan sertifikat TLS</h3><p>TLS memerlukan sertifikat agar dapat berfungsi. <strong>Ada dua cara untuk membuat sertifikat, yaitu dikelola sendiri dan dikelola Google.</strong></p>
-<p>Panduan ini menggunakan <strong>my-release.milvus.io</strong> sebagai nama domain untuk mengakses layanan Milvus.</p>
-<h4 id="Create-self-managed-certificates" class="common-anchor-header">Membuat sertifikat yang dikelola sendiri</h4><p>Jalankan perintah berikut ini untuk membuat sertifikat.</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Prepare TLS certificates</h3><p>TLS requires certificates to work. <strong>There are two ways to create certificates, namely self-managed and Google-managed.</strong></p>
+<p>This guide uses <strong>my-release.milvus.io</strong> as the domain name to access our Milvus service.</p>
+<h4 id="Create-self-managed-certificates" class="common-anchor-header">Create self-managed certificates</h4><p>Run the following commands to create a certificate.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Generates a tls.key.</span>
 openssl genrsa -out tls.key 2048
 
@@ -89,10 +87,10 @@ openssl req -new -key tls.key -out tls.csr \
 openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
     -out tls.crt
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian, buatlah rahasia di dalam cluster GKE Anda dengan berkas-berkas ini untuk digunakan nanti.</p>
+<p>Then create a secret in your GKE cluster with these files for later use.</p>
 <pre><code translate="no" class="language-bash">kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Create-Google-managed-certificates" class="common-anchor-header">Membuat sertifikat yang dikelola Google</h4><p>Cuplikan berikut ini adalah pengaturan ManagedCertificate. Simpan sebagai <code translate="no">managed-crt.yaml</code> untuk digunakan nanti.</p>
+<h4 id="Create-Google-managed-certificates" class="common-anchor-header">Create Google-managed certificates</h4><p>The following snippet is a ManagedCertificate setting. Save it as <code translate="no">managed-crt.yaml</code> for later use.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.gke.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ManagedCertificate</span>
 <span class="hljs-attr">metadata:</span>
@@ -101,13 +99,13 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
   <span class="hljs-attr">domains:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">my-release.milvus.io</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Buat sertifikat terkelola dengan menerapkan pengaturan ke cluster GKE Anda sebagai berikut:</p>
+<p>Create a managed certificate by applying the setting to your GKE cluster as follows:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ./managed-crt.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Hal ini dapat berlangsung selama beberapa saat. Anda dapat memeriksa kemajuannya dengan menjalankan</p>
+<p>This could last for a while. You can check the progress by running</p>
 <pre><code translate="no" class="language-bash">kubectl get -f ./managed-crt.yaml -o yaml -w
 <button class="copy-code-btn"></button></code></pre>
-<p>Keluarannya akan serupa dengan yang berikut ini:</p>
+<p>The output should be similar to the following:</p>
 <pre><code translate="no" class="language-shell">status:
   certificateName: mcrt-34446a53-d639-4764-8438-346d7871a76e
   certificateStatus: Provisioning
@@ -115,10 +113,10 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
   - domain: my-release.milvus.io
     status: Provisioning
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah <strong>certificateStatus</strong> berubah menjadi <strong>Active</strong>, Anda siap untuk menyiapkan penyeimbang beban.</p>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Membuat Ingress untuk menghasilkan Load Balancer Layer-7</h3><p>Buat berkas YAML dengan salah satu cuplikan berikut ini.</p>
+<p>Once <strong>certificateStatus</strong> turns to <strong>Active</strong>, you are ready to set up the load balancer.</p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Create an Ingress to generate a Layer-7 Load Balancer</h3><p>Create a YAML file with one of the following snippets.</p>
 <ul>
-<li><p>Menggunakan sertifikat yang dikelola sendiri</p>
+<li><p>Using self-managed certificates</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -141,7 +139,7 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
             <span class="hljs-attr">port:</span>
               <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Menggunakan sertifikat yang dikelola Google</p>
+<li><p>Using Google-managed certificates</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -163,19 +161,19 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
               <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>Kemudian, Anda dapat membuat Ingress dengan menerapkan berkas tersebut ke cluster GKE Anda.</p>
+<p>Then you can create the Ingress by applying the file to your GKE cluster.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Sekarang, tunggu Google menyiapkan penyeimbang beban Layer-7. Anda dapat memeriksa kemajuannya dengan menjalankan</p>
+<p>Now, wait for Google to set up the Layer-7 load balancer. You can check the progress by running</p>
 <pre><code translate="no" class="language-bash">kubectl  -f ./config/samples/ingress.yaml get -w
 <button class="copy-code-btn"></button></code></pre>
-<p>Keluarannya akan serupa dengan yang berikut ini:</p>
+<p>The output should be similar to the following:</p>
 <pre><code translate="no" class="language-shell">NAME                CLASS    HOSTS                  ADDRESS   PORTS   AGE
 my-release-milvus   &lt;none&gt;   my-release.milvus.io             80      4s
 my-release-milvus   &lt;none&gt;   my-release.milvus.io   34.111.144.65   80, 443   41m
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah alamat IP ditampilkan di bidang <strong>ADDRESS</strong>, penyeimbang beban Layer-7 siap digunakan. Baik port 80 dan port 443 ditampilkan pada output di atas. Ingat, Anda harus selalu menggunakan port 443 untuk kepentingan Anda.</p>
-<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Verifikasi koneksi melalui penyeimbang beban Layer-7<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
+<p>Once an IP address is displayed in the <strong>ADDRESS</strong> field, the Layer-7 load balancer is ready to use. Both port 80 and port 443 are displayed in the above output. Remember, you should always use port 443 for your own good.</p>
+<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Verify the connection through the Layer-7 load balancer<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -190,8 +188,8 @@ my-release-milvus   &lt;none&gt;   my-release.milvus.io   34.111.144.65   80, 44
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Panduan ini menggunakan PyMilvus untuk memverifikasi koneksi ke layanan Milvus di belakang penyeimbang beban Layer-7 yang baru saja kita buat. Untuk langkah-langkah terperinci, <a href="https://milvus.io/docs/v2.3.x/example_code.md">baca ini</a>.</p>
-<p>Perhatikan bahwa parameter koneksi bervariasi sesuai dengan cara yang Anda pilih untuk mengelola sertifikat di <a href="#prepare-tls-certificates">Siapkan sertifikat TLS</a>.</p>
+    </button></h2><p>This guide uses PyMilvus to verify the connection to the Milvus service behind the Layer-7 load balancer we have just created. For detailed steps, <a href="https://milvus.io/docs/v2.3.x/example_code.md">read this</a>.</p>
+<p>Notice that connection parameters vary with the way you choose to manage the certificates in <a href="#prepare-tls-certificates">Prepare TLS certificates</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     connections,
     utility,
@@ -209,7 +207,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Alamat IP dan nomor port pada <strong>host</strong> dan <strong>port</strong> harus sama dengan yang tercantum di akhir <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">Membuat Ingress untuk menghasilkan Load Balancer Layer-7.</a></li>
-<li>Jika Anda telah menyiapkan catatan DNS untuk memetakan nama domain ke alamat IP host, ganti alamat IP pada <strong>host</strong> dengan nama domain dan hilangkan <strong>nama_server</strong>.</li>
+<li>The IP address and port number in <strong>host</strong> and <strong>port</strong> should match those listed at the end of <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">Create an Ingress to generate a Layer-7 Load Balancer</a>.</li>
+<li>If you have set up a DNS record to map domain name to the host IP address, replace the IP address in <strong>host</strong> with the domain name and omit <strong>server_name</strong>.</li>
 </ul>
 </div>

@@ -1,13 +1,12 @@
 ---
 id: bitmap.md
-title: BITMAP
+title: BITMAP​
 related_key: bitmap
 summary: >-
-  Битовая индексация - это эффективная техника индексирования, разработанная для
-  повышения производительности запросов к скалярным полям с низкой
-  кардинальностью.
+  Bitmap indexing is an efficient indexing technique designed to improve query
+  performance on low-cardinality scalar fields.
 ---
-<h1 id="BITMAP​" class="common-anchor-header">BITMAP<button data-href="#BITMAP​" class="anchor-icon" translate="no">
+<h1 id="BITMAP​" class="common-anchor-header">BITMAP​<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Битовая карта - это эффективная техника индексирования, разработанная для повышения производительности запросов к скалярным полям с низкой кардинальностью. Под кардинальностью понимается количество отдельных значений в поле. Поля с меньшим количеством отдельных элементов считаются низкокардинальными.</p>
-<p>Этот тип индекса помогает сократить время поиска скалярных запросов, представляя значения полей в компактном двоичном формате и выполняя над ними эффективные побитовые операции. По сравнению с другими типами индексов, растровые индексы обычно занимают больше места и обеспечивают более высокую скорость выполнения запросов при работе с полями с низкой кардинальностью.</p>
-<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Bitmap indexing is an efficient indexing technique designed to improve query performance on low-cardinality scalar fields. Cardinality refers to the number of distinct values in a field. Fields with fewer distinct elements are considered low-cardinality.​</p>
+<p>This index type helps reduce the retrieval time of scalar queries by representing field values in a compact binary format and performing efficient bitwise operations on them. Compared to other types of indexes, bitmap indexes typically have higher space efficiency and faster query speeds when dealing with low-cardinality fields.​</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,24 +38,26 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Термин Bitmap объединяет два слова: <strong>Бит</strong> и <strong>Карта</strong>. Бит представляет собой наименьшую единицу данных в компьютере, которая может содержать только значение <strong>0</strong> или <strong>1</strong>. Карта, в данном контексте, означает процесс преобразования и организации данных в соответствии с тем, какое значение должно быть присвоено 0 и 1.</p>
-<p>Растровый индекс состоит из двух основных компонентов: растровых изображений и ключей. Ключи представляют собой уникальные значения в индексируемом поле. Для каждого уникального значения существует соответствующее битовое изображение. Длина этих битовых карт равна количеству записей в коллекции. Каждый бит в битовой карте соответствует одной записи в коллекции. Если значение индексируемого поля в записи совпадает с ключом, то соответствующий бит устанавливается в <strong>1</strong>, в противном случае - в <strong>0</strong>.</p>
-<p>Рассмотрим коллекцию документов с полями <strong>Category</strong> и <strong>Public</strong>. Мы хотим получить документы, которые относятся к категории <strong>Tech</strong> и открыты для <strong>публики</strong>. В этом случае ключами для наших растровых индексов будут <strong>Tech</strong> и <strong>Public</strong>.</p>
+    </button></h2><p>The term Bitmap combines two words: <strong>Bit</strong> and <strong>Map</strong>. A bit represents the smallest unit of data in a computer, which can only hold a value of either <strong>0</strong> or <strong>1</strong>. A map, in this context, refers to the process of transforming and organizing data according to what value should be assigned to 0 and 1.​</p>
+<p>A bitmap index consists of two main components: bitmaps and keys. Keys represent the unique values in the indexed field. For each unique value, there is a corresponding bitmap. The length of these bitmaps is equal to the number of records in the collection. Each bit in the bitmap corresponds to a record in the collection. If the value of the indexed field in a record matches the key, the corresponding bit is set to <strong>1</strong>; otherwise, it is set to <strong>0</strong>.​</p>
+<p>Consider a collection of documents with fields <strong>Category</strong> and <strong>Public</strong>. We want to retrieve documents that fall into the <strong>Tech</strong> category and are open to the <strong>Public</strong>. In this case, the keys for our bitmap indexes are <strong>Tech</strong> and <strong>Public</strong>.​</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap indexing" class="doc-image" id="bitmap-indexing" />
-   </span> <span class="img-wrapper"> <span>Растровое индексирование</span> </span></p>
-<p>Как показано на рисунке, растровые индексы для <strong>Category</strong> и <strong>Public</strong> будут следующими.</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap indexing" class="doc-image" id="bitmap-indexing" />
+    <span>Bitmap indexing</span>
+  </span>
+</p>
+<p>As shown in the figure, the bitmap indexes for <strong>Category</strong> and <strong>Public</strong> are:​</p>
 <ul>
-<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], что показывает, что только 1-й и 3-й документы попадают в категорию <strong>Tech</strong>.</p></li>
-<li><p><strong>Public</strong>: [1, 0, 0, 1, 0], что показывает, что только 1-й и 4-й документы открыты для <strong>публики</strong>.</p></li>
+<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], which shows that only the 1st and 3rd documents fall into the <strong>Tech</strong> category.​</p></li>
+<li><p><strong>Public</strong>: [1, 0, 0, 1, 0], which shows that only the 1st and 4th documents are open to the <strong>Public</strong>.​</p></li>
 </ul>
-<p>Чтобы найти документы, соответствующие обоим критериям, мы выполняем побитовую операцию AND на этих двух битовых картах.</p>
+<p>To find the documents that match both criteria, we perform a bitwise AND operation on these two bitmaps:​</p>
 <ul>
-<li><strong>Tech</strong> AND <strong>Public</strong>: [1, 0, 0, 0, 0]</li>
+<li><strong>Tech</strong> AND <strong>Public</strong>: [1, 0, 0, 0, 0]​</li>
 </ul>
-<p>Полученное битовое изображение [1, 0, 0, 0, 0] указывает на то, что только первый документ<strong>(ID</strong> <strong>1</strong>) удовлетворяет обоим критериям. Используя растровые индексы и эффективные побитовые операции, мы можем быстро сузить область поиска, избавившись от необходимости сканировать весь набор данных.</p>
-<h2 id="Create-a-bitmap-index" class="common-anchor-header">Создание растрового индекса<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
+<p>The resulting bitmap [1, 0, 0, 0, 0] indicates that only the first document (<strong>ID</strong> <strong>1</strong>) satisfies both criteria. By using bitmap indexes and efficient bitwise operations, we can quickly narrow down the search scope, eliminating the need to scan the entire dataset.​</p>
+<h2 id="Create-a-bitmap-index" class="common-anchor-header">Create a bitmap index<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +72,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы создать растровый индекс в Milvus, используйте метод <code translate="no">create_index()</code> и установите параметр <code translate="no">index_type</code> в значение <code translate="no">&quot;BITMAP&quot;</code>.</p>
+    </button></h2><p>To create a bitmap index in Milvus, use the <code translate="no">create_index()</code> method and set the <code translate="no">index_type</code> parameter to <code translate="no">&quot;BITMAP&quot;</code>.​</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters​</span>
@@ -87,9 +88,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>В этом примере мы создаем растровый индекс по полю <code translate="no">category</code> коллекции <code translate="no">my_collection</code>. Метод <code translate="no">add_index()</code> используется для указания имени поля, типа индекса и имени индекса.</p>
-<p>После создания растрового индекса можно использовать параметр <code translate="no">filter</code> в операциях запроса для выполнения скалярной фильтрации на основе проиндексированного поля. Это позволяет эффективно сузить результаты поиска с помощью растрового индекса. Дополнительные сведения см. в разделе <a href="/docs/ru/boolean.md">Фильтрация метаданных</a>.</p>
-<h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
+<p>In this example, we create a bitmap index on the <code translate="no">category</code> field of the <code translate="no">my_collection</code> collection. The <code translate="no">add_index()</code> method is used to specify the field name, index type, and index name.​</p>
+<p>Once the bitmap index is created, you can use the <code translate="no">filter</code> parameter in query operations to perform scalar filtering based on the indexed field. This allows you to efficiently narrow down the search results using the bitmap index. For more information, refer to <a href="/docs/boolean.md">Metadata Filtering</a>.​</p>
+<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,21 +106,21 @@ client.create_index(​
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Растровые индексы поддерживаются только для скалярных полей, которые не являются первичными ключами.</p></li>
-<li><p>Тип данных поля должен быть одним из следующих.</p>
+<li><p>Bitmap indexes are supported only for scalar fields that are not primary keys.​</p></li>
+<li><p>The data type of the field must be one of the following:​</p>
 <ul>
-<li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>.</p></li>
-<li><p><code translate="no">ARRAY</code> (элементы должны быть одного из следующих типов: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
+<li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>​</p></li>
+<li><p><code translate="no">ARRAY</code> (elements must be one of: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)​</p></li>
 </ul></li>
-<li><p>Растровые индексы не поддерживают следующие типы данных.</p>
+<li><p>Bitmap indexes do not support the following data types:​</p>
 <ul>
-<li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Типы с плавающей точкой не совместимы с двоичной природой растровых индексов.</p></li>
-<li><p><code translate="no">JSON</code>: Типы данных JSON имеют сложную структуру, которая не может быть эффективно представлена с помощью растровых индексов.</p></li>
+<li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Floating-point types are not compatible with the binary nature of bitmap indexes.​</p></li>
+<li><p><code translate="no">JSON</code>: JSON data types have a complex structure that cannot be efficiently represented using bitmap indexes.​</p></li>
 </ul></li>
-<li><p>Растровые индексы не подходят для полей с высокой кардинальностью (т. е. для полей с большим количеством различных значений).</p>
+<li><p>Bitmap indexes are not suitable for fields with high cardinality (i.e., fields with a large number of distinct values).​</p>
 <ul>
-<li><p>Как правило, растровые индексы наиболее эффективны, когда кардинальность поля не превышает 500.</p></li>
-<li><p>При увеличении кардинальности сверх этого порога преимущества растровых индексов в плане производительности снижаются, а накладные расходы на хранение становятся значительными.</p></li>
-<li><p>Для полей с высокой кардинальностью следует рассмотреть возможность использования альтернативных методов индексирования, таких как инвертированные индексы, в зависимости от конкретного случая использования и требований к запросам.</p></li>
+<li><p>As a general guideline, bitmap indexes are most effective when the cardinality of a field is less than 500.​</p></li>
+<li><p>When the cardinality increases beyond this threshold, the performance benefits of bitmap indexes diminish, and the storage overhead becomes significant.​</p></li>
+<li><p>For high-cardinality fields, consider using alternative indexing techniques such as inverted indexes, depending on your specific use case and query requirements.​</p></li>
 </ul></li>
 </ul>

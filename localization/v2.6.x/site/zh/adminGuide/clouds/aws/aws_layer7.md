@@ -1,10 +1,10 @@
 ---
 id: aws_layer7.md
-title: 在 AWS 上为 Milvus 设置 Layer-7 负载平衡器
+title: Set up a Layer-7 Load Balancer for Milvus on AWS
 related_key: cluster
-summary: 了解如何在 AWS 上的 Layer-7 负载均衡器后面部署 Milvus 集群。
+summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on AWS.
 ---
-<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">在 AWS 上为 Milvus 设置 Layer-7 负载平衡器<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
+<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Set up a Layer-7 Load Balancer for Milvus on AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,22 +19,22 @@ summary: 了解如何在 AWS 上的 Layer-7 负载均衡器后面部署 Milvus �
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>与 Layer-4 负载平衡器相比，Layer-7 负载平衡器具有智能负载平衡和缓存功能，是云原生服务的最佳选择。</p>
-<p>本指南将指导您为已经在第 4 层负载平衡器后面运行的 Milvus 集群设置第 7 层负载平衡器。</p>
-<h3 id="Before-your-start" class="common-anchor-header">开始之前</h3><ul>
-<li>您已<a href="/docs/zh/eks.md">在 AWS 上的第 4 层负载平衡器后面部署了一个 Milvus 群集</a>。</li>
+    </button></h1><p>When compared to a Layer-4 load balancer, a Layer-7 load balancer offers smart load balancing and caching capabilities and is a great choice for cloud-native services.</p>
+<p>This guide walks you through setting up a layer-7 load balancer for a Milvus cluster already running behind a Layer-4 load balancer.</p>
+<h3 id="Before-your-start" class="common-anchor-header">Before your start</h3><ul>
+<li>You have <a href="/docs/eks.md">deployed a Milvus cluster behind a Layer-4 load balancer on AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假设您已<a href="/docs/zh/eks.md">在 AWS 上的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
-<p>在为该 Milvus 群集设置 Layer-7 负载平衡器之前，请运行以下命令移除 Layer-4 负载平衡器。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/eks.md">deployed a Milvus cluster behind a Layer-4 load balancer on AWS</a>.</p>
+<p>Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">准备 TLS 证书</h3><p>TLS 需要证书才能工作。我们使用<a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a>管理证书，因此需要将现有证书导入 ACM。请参阅<a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">导入证书</a>。下面是一个示例。</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Prepare TLS certificates</h3><p>TLS requires certificates to work. We’re using <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> to manage certificates and need to import an existing certificate into ACM. Refer to <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Import Certificate</a>. The following is an example.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># If the import-certificate command is successful, it returns the arn of the imported certificate.</span>
 aws acm import-certificate --certificate fileb://Certificate.pem \
       --certificate-chain fileb://CertificateChain.pem \
       --private-key fileb://PrivateKey.pem  
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">创建入口以生成 Layer-7 负载平衡器</h3><p>按以下步骤准备输入文件，并将其命名为<code translate="no">ingress.yaml</code> 。<strong>将证书 arn 和 host 替换为您自己的。</strong></p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Create an Ingress to generate a Layer-7 Load Balancer</h3><p>Prepare the ingress file as follows and name it <code translate="no">ingress.yaml</code>. <strong>Do replace the certificate arn and host with your own.</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -61,18 +61,18 @@ aws acm import-certificate --certificate fileb://Certificate.pem \
               <span class="hljs-attr">port:</span>
                 <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然后，将该文件应用于 EKS 群集，即可创建 Ingress。</p>
+<p>Then you can create the Ingress by applying the file to your EKS cluster.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>现在，等待 AWS 设置 Layer-7 负载均衡器。您可以运行</p>
+<p>Now, wait for AWS to set up the Layer-7 load balancer. You can check the progress by running</p>
 <pre><code translate="no" class="language-bash">kubectl -f ingress.yaml get -w
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果应与下图类似：</p>
+<p>The output should be similar to the following:</p>
 <pre><code translate="no" class="language-shell">NAME          CLASS   HOSTS                   ADDRESS                                                                PORTS   AGE
 milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778371620.us-east-2.elb.amazonaws.com   80      10m
 <button class="copy-code-btn"></button></code></pre>
-<p>一旦<strong>ADDRESS</strong>字段中显示地址，Layer-7 负载平衡器就可以使用了。</p>
-<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">验证通过 Layer-7 负载平衡器的连接<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
+<p>Once an address is displayed in the <strong>ADDRESS</strong> field, the Layer-7 load balancer is ready to use.</p>
+<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Verify the connection through the Layer-7 load balancer<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,7 +87,7 @@ milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本指南使用 PyMilvus 来验证与我们刚刚创建的 Layer-7 负载均衡器后面的 Milvus 服务的连接。有关详细步骤，请<a href="https://milvus.io/docs/v2.3.x/example_code.md">阅读此文</a>。</p>
+    </button></h2><p>This guide uses PyMilvus to verify the connection to the Milvus service behind the Layer-7 load balancer we have just created. For detailed steps, <a href="https://milvus.io/docs/v2.3.x/example_code.md">read this</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     connections,
     utility,
@@ -101,7 +101,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><strong>host</strong>和<strong>server_name</strong>应替换为您自己的<strong>名称</strong>。</li>
-<li>如果已设置 DNS 记录将域名映射到 alb，请将<strong>host</strong>替换为域名，省略<strong>server_name</strong>。</li>
+<li>The <strong>host</strong> and <strong>server_name</strong> should replace with your own.</li>
+<li>If you have set up a DNS record to map domain name to the alb, replace the <strong>host</strong> with the domain name and omit <strong>server_name</strong>.</li>
 </ul>
 </div>

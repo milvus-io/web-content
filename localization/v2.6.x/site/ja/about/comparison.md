@@ -1,9 +1,9 @@
 ---
 id: comparison.md
-title: 比較
-summary: この記事では、Milvusと他のベクトル検索ソリューションを比較する。
+title: Comparison
+summary: This article compares Milvus with other vector search solutions.
 ---
-<h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">Milvusと代替製品の比較<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
+<h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">Comparing Milvus with Alternatives<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ summary: この記事では、Milvusと他のベクトル検索ソリューシ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>様々なベクターデータベースの選択肢を検討する際、この包括的なガイドは、Milvusのユニークな機能を理解し、特定のニーズに最適なデータベースを選択するのに役立ちます。Milvusはオープンソースの主要なベクターデータベースであり、<a href="https://zilliz.com/cloud">Zilliz Cloudは</a>Milvusのフルマネージドサービスを提供しています。Milvusを競合他社に対して客観的に評価するには、<a href="https://github.com/zilliztech/VectorDBBench#quick-start">ベンチマークツールを</a>使用してパフォーマンス指標を分析することを検討してください。</p>
-<h2 id="Milvus-highlights" class="common-anchor-header">Milvusのハイライト<button data-href="#Milvus-highlights" class="anchor-icon" translate="no">
+    </button></h1><p>When exploring various vector database options, this comprehensive guide will help you understand Milvus’s unique features, ensuring you choose a database that best fits your specific needs. Notably, Milvus is a leading open-source vector database, and <a href="https://zilliz.com/cloud">Zilliz Cloud</a> offers a fully-managed Milvus service. To objectively evaluate Milvus against its competitors, consider using <a href="https://github.com/zilliztech/VectorDBBench#quick-start">benchmark tools</a> to analyze performance metrics.</p>
+<h2 id="Milvus-highlights" class="common-anchor-header">Milvus highlights<button data-href="#Milvus-highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,12 +35,12 @@ summary: この記事では、Milvusと他のベクトル検索ソリューシ�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>機能性</strong>：Milvusは、基本的なベクトル類似検索にとどまらず、<a href="https://milvus.io/docs/sparse_vector.md">スパースベクトル</a>、<a href="https://milvus.io/docs/single-vector-search.md#Bulk-vector-search">バルクベクトル</a>、<a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">フィルタリング検索</a>、<a href="https://milvus.io/docs/multi-vector-search.md">ハイブリッド検索などの</a>高度な機能をサポートしています。</p></li>
-<li><p><strong>柔軟性</strong>：Milvusは、堅牢で統合されたエコシステムの中で、様々な展開モードと複数のSDKに対応しています。</p></li>
-<li><p><strong>パフォーマンス</strong>：Milvusは、<a href="https://milvus.io/docs/index.md#HNSW">HNSWや</a> <a href="https://milvus.io/docs/disk_index.md">DiskANNなどの</a>最適化されたインデックス作成アルゴリズムと高度な<a href="https://milvus.io/docs/gpu_index.md">GPUアクセラレーションにより</a>、高スループットと低レイテンシーによるリアルタイム処理を保証します。</p></li>
-<li><p><strong>スケーラビリティ</strong>：特注の分散アーキテクチャにより、小規模なデータセットから100億ベクトルを超えるコレクションまで、容易に拡張することができます。</p></li>
+<li><p><strong>Functionality</strong>: Milvus goes beyond basic vector similarity search by supporting advanced functionalities like <a href="https://milvus.io/docs/sparse_vector.md">sparse vector</a>, <a href="https://milvus.io/docs/single-vector-search.md#Bulk-vector-search">bulk-vector</a>, <a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">filtered search</a>, and <a href="https://milvus.io/docs/multi-vector-search.md">hybrid search</a> capabilities.</p></li>
+<li><p><strong>Flexibility</strong>: Milvus accommodates various deployment modes and multiple SDKs, all within a robust, integrated ecosystem.</p></li>
+<li><p><strong>Performance</strong>: Milvus guarantees real-time processing with high throughput and low latency, powered by optimized indexing algorithms such as <a href="https://milvus.io/docs/index.md#HNSW">HNSW</a> and <a href="https://milvus.io/docs/disk_index.md">DiskANN</a>, and advanced <a href="https://milvus.io/docs/gpu_index.md">GPU acceleration</a>.</p></li>
+<li><p><strong>Scalability</strong>: Its bespoke distributed architecture effortlessly scales, accommodating anything from small datasets to collections exceeding 10 billion vectors.</p></li>
 </ul>
-<h2 id="Overall-comparison" class="common-anchor-header">全体的な比較<button data-href="#Overall-comparison" class="anchor-icon" translate="no">
+<h2 id="Overall-comparison" class="common-anchor-header">Overall comparison<button data-href="#Overall-comparison" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,22 +55,22 @@ summary: この記事では、Milvusと他のベクトル検索ソリューシ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusとPinecone、2つのベクトルデータベースソリューションを比較するために、以下の表は様々な機能の違いを強調するように構成されています。</p>
+    </button></h2><p>To compare between Milvus and Pinecone, two vector database solutions, the following table is structured to highlight differences across various features.</p>
 <table>
 <thead>
-<tr><th>特徴</th><th>Pinecone</th><th>Milvus</th><th>備考</th></tr>
+<tr><th>Feature</th><th>Pinecone</th><th>Milvus</th><th>Remarks</th></tr>
 </thead>
 <tbody>
-<tr><td>展開モード</td><td>SaaSのみ</td><td>Milvus Lite、オンプレミスタンドアロン＆クラスタ、クラウドSaaS＆BYOC</td><td>Milvusはより柔軟なデプロイメントモードを提供します。</td></tr>
-<tr><td>サポートSDK</td><td>Python、JavaScript/TypeScript</td><td>Python、Java、NodeJS、Go、Restful API、C#、Rust</td><td>Milvusはより幅広いプログラミング言語をサポートしています。</td></tr>
-<tr><td>オープンソースステータス</td><td>クローズド</td><td>オープンソース</td><td>Milvusはオープンソースのベクターデータベースです。</td></tr>
-<tr><td>スケーラビリティ</td><td>スケールアップ/ダウンのみ</td><td>スケールアウト/インおよびスケールアップ/ダウン</td><td>Milvusは分散アーキテクチャを採用し、スケーラビリティを強化しています。</td></tr>
-<tr><td>可用性</td><td>利用可能ゾーン内のポッドベースアーキテクチャ</td><td>利用可能ゾーンのフェイルオーバーとクロスリージョンHA</td><td>Milvus CDC (Change Data Capture)によるプライマリ/スタンバイモードによる高い可用性</td></tr>
-<tr><td>パーフコスト（100万クエリーあたりドル）</td><td>中規模データセットで$0.178から、大規模データセットで$1.222から</td><td>Zilliz Cloudは中規模データセットで$0.148から、大規模データセットで$0.635から。</td><td><a href="https://zilliz.com/vector-database-benchmark-tool?database=ZillizCloud,Milvus,ElasticCloud,PgVector,Pinecone,QdrantCloud,WeaviateCloud&amp;dataset=medium&amp;filter=none,low,high&amp;tab=2">コストランキングレポートを</a>参照。</td></tr>
-<tr><td>GPUアクセラレーション</td><td>サポートなし</td><td>NVIDIA GPUをサポート</td><td>GPUアクセラレーションはパフォーマンスを大幅に向上させます。</td></tr>
+<tr><td>Deployment Modes</td><td>SaaS-only</td><td>Milvus Lite, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC</td><td>Milvus offers greater flexibility in deployment modes.</td></tr>
+<tr><td>Supported SDKs</td><td>Python, JavaScript/TypeScript</td><td>Python, Java, NodeJS, Go, Restful API, C#, Rust</td><td>Milvus supports a wider array of programming languages.</td></tr>
+<tr><td>Open-source Status</td><td>Closed</td><td>Open-source</td><td>Milvus is a popular open-source vector database.</td></tr>
+<tr><td>Scalability</td><td>Scale up/down only</td><td>Scale out/in and Scale up/down</td><td>Milvus features a distributed architecture for enhanced scalability.</td></tr>
+<tr><td>Availability</td><td>Pod-based architecture within available zones</td><td>Available zone failover and cross-region HA</td><td>Milvus CDC (Change Data Capture) enables primary/standby modes for higher availability.</td></tr>
+<tr><td>Perf-Cost (Dollar per million queries)</td><td>Starts at $0.178 for a medium dataset, $1.222 for a large dataset</td><td>Zilliz Cloud starts at $0.148 for a medium dataset, $0.635 for a large dataset; free version available</td><td>Refer to <a href="https://zilliz.com/vector-database-benchmark-tool?database=ZillizCloud,Milvus,ElasticCloud,PgVector,Pinecone,QdrantCloud,WeaviateCloud&amp;dataset=medium&amp;filter=none,low,high&amp;tab=2">Cost Ranking report</a>.</td></tr>
+<tr><td>GPU Acceleration</td><td>Not supported</td><td>Support NVIDIA GPU</td><td>GPU acceleration significantly enhances performance, often by orders of magnitude.</td></tr>
 </tbody>
 </table>
-<h2 id="Terminology-comparison" class="common-anchor-header">用語の比較<button data-href="#Terminology-comparison" class="anchor-icon" translate="no">
+<h2 id="Terminology-comparison" class="common-anchor-header">Terminology comparison<button data-href="#Terminology-comparison" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,21 +85,21 @@ summary: この記事では、Milvusと他のベクトル検索ソリューシ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusとPineconeはベクターデータベースとして同様の機能を果たしますが、MilvusとPineconeのドメイン固有の用語には若干の違いがあります。詳しい用語の比較は以下の通りです。</p>
+    </button></h2><p>Although both serve similar functions as vector databases, the domain-specific terminology between Milvus and Pinecone shows slight variations. A detailed terminology comparison is as follows.</p>
 <table>
 <thead>
-<tr><th>Pinecone</th><th>Milvus</th><th>備考</th></tr>
+<tr><th>Pinecone</th><th>Milvus</th><th>Remarks</th></tr>
 </thead>
 <tbody>
-<tr><td>インデックス</td><td><a href="https://zilliz.com/comparison">コレクション</a></td><td>Pineconeでは、インデックスが同一サイズのベクトルを保存・管理するための組織単位として機能し、このインデックスはポッドと呼ばれるハードウェアと密接に統合されています。一方、Milvusのコレクションは同様の役割を果たしますが、1つのインスタンス内で複数のコレクションを扱うことができます。</td></tr>
-<tr><td>コレクション</td><td><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">バックアップ</a></td><td>Pineconeでは、コレクションは基本的にインデックスの静的スナップショットであり、主にバックアップ目的で使用され、クエリを実行することはできません。Milvusでは、バックアップを作成するための同等の機能はより透過的でわかりやすい名前になっています。</td></tr>
-<tr><td>名前空間</td><td><a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">パーティションキー</a></td><td>名前空間を使用すると、インデックス内のベクトルをサブセットに分割することができます。Milvusはパーティションやパーティションキーのような複数の方法を提供し、コレクション内の効率的なデータ分離を保証します。</td></tr>
-<tr><td>メタデータ</td><td><a href="https://milvus.io/docs/boolean.md">スカラーフィールド</a></td><td>Pineconeのメタデータ処理はキーと値のペアに依存していますが、Milvusでは標準的なデータ型や動的なJSONフィールドを含む複雑なスカラーフィールドを使用できます。</td></tr>
-<tr><td>クエリ</td><td><a href="https://milvus.io/docs/single-vector-search.md">検索</a></td><td>指定されたベクトルの最近傍を検索するために使用されるメソッドの名前。</td></tr>
-<tr><td>使用不可</td><td><a href="https://milvus.io/docs/with-iterators.md">イテレータ</a></td><td>Pinecone にはインデックス内のすべてのベクトルを反復処理する機能がありません。Milvus は Search Iterator と Query Iterator メソッドを導入し、データセット間のデータ検索機能を強化しています。</td></tr>
+<tr><td>Index</td><td><a href="https://zilliz.com/comparison">Collection</a></td><td>In Pinecone, an index serves as the organizational unit for storing and managing vectors of identical size, and this index is closely integrated with the hardware, known as pods. In contrast, Milvus collections serve a similar purpose but enable handling multiple collections within a single instance.</td></tr>
+<tr><td>Collection</td><td><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Backup</a></td><td>In Pinecone, a collection is essentially a static snapshot of an index, used mainly for backup purposes and cannot be queried. In Milvus, the equivalent feature for creating backups is more transparent and straightforwardly named.</td></tr>
+<tr><td>Namespace</td><td><a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Partition key</a></td><td>Namespaces allow the partitioning of vectors in an index into subsets. Milvus provides multiple methods like partition or partition key to ensure efficient data isolation within a collection.</td></tr>
+<tr><td>Metadata</td><td><a href="https://milvus.io/docs/boolean.md">Scalar field</a></td><td>Pinecone’s metadata handling relies on key-value pairs, while Milvus allows for complex scalar fields, including standard data types and dynamic JSON fields.</td></tr>
+<tr><td>Query</td><td><a href="https://milvus.io/docs/single-vector-search.md">Search</a></td><td>Name of the method used to find the nearest neighbors for a given vector, possibly with some additional filters applied on top.</td></tr>
+<tr><td>Not available</td><td><a href="https://milvus.io/docs/with-iterators.md">Iterator</a></td><td>Pinecone lacks a feature for iterating through all vectors in an index. Milvus introduces Search Iterator and Query Iterator methods, enhancing data retrieval capabilities across datasets.</td></tr>
 </tbody>
 </table>
-<h2 id="Capability-comparison" class="common-anchor-header">機能の比較<button data-href="#Capability-comparison" class="anchor-icon" translate="no">
+<h2 id="Capability-comparison" class="common-anchor-header">Capability comparison<button data-href="#Capability-comparison" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -116,28 +116,28 @@ summary: この記事では、Milvusと他のベクトル検索ソリューシ�
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>機能</th><th>Pinecone</th><th>Milvus</th></tr>
+<tr><th>Capability</th><th>Pinecone</th><th>Milvus</th></tr>
 </thead>
 <tbody>
-<tr><td>展開モード</td><td>SaaSのみ</td><td>Milvus Lite、オンプレミスタンドアロン＆クラスタ、クラウドSaaS＆BYOC</td></tr>
-<tr><td>組み込み機能</td><td>利用不可</td><td><a href="https://github.com/milvus-io/milvus-model">pymilvus[model]</a>でサポート</td></tr>
-<tr><td>データ型</td><td>文字列, 数値, ブール, 文字列のリスト</td><td>String、VarChar、Number (Int, Float, Double)、Bool、Array、JSON、Float Vector、Binary Vector、BFloat16、Float16、Sparse Vector</td></tr>
-<tr><td>メトリックおよびインデックス型</td><td>Cos、Dot、ユークリッド<br/>P-ファミリー、S-ファミリー</td><td>Cosine, IP (Dot), L2 (Euclidean), Hamming, Jaccard<br/>FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, GPU インデックス</td></tr>
-<tr><td>スキーマ設計</td><td>柔軟モード</td><td>柔軟モード, 厳密モード</td></tr>
-<tr><td>複数ベクトルフィールド</td><td>該当なし</td><td>マルチ・ベクトルおよびハイブリッド検索</td></tr>
-<tr><td>ツール</td><td>データセット、テキストユーティリティ、スパークコネクタ</td><td>Attu、Birdwatcher、Backup、CLI、CDC、Spark、Kafkaコネクタ</td></tr>
+<tr><td>Deployment Modes</td><td>SaaS-only</td><td>Milvus Lite, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC</td></tr>
+<tr><td>Embedding Functions</td><td>Not available</td><td>Support with <a href="https://github.com/milvus-io/milvus-model">pymilvus[model]</a></td></tr>
+<tr><td>Data Types</td><td>String, Number, Bool, List of String</td><td>String, VarChar, Number (Int, Float, Double), Bool, Array, JSON, Float Vector, Binary Vector, BFloat16, Float16, Sparse Vector</td></tr>
+<tr><td>Metric and Index Types</td><td>Cos, Dot, Euclidean<br/>P-family, S-family</td><td>Cosine, IP (Dot), L2 (Euclidean),  Hamming, Jaccard<br/>FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, GPU Indexes</td></tr>
+<tr><td>Schema Design</td><td>Flexible mode</td><td>Flexible mode, Strict mode</td></tr>
+<tr><td>Multiple Vector Fields</td><td>N/A</td><td>Multi-vector and hybrid search</td></tr>
+<tr><td>Tools</td><td>Datasets, text utilities, spark connector</td><td>Attu, Birdwatcher, Backup, CLI, CDC, Spark and Kafka connectors</td></tr>
 </tbody>
 </table>
-<h3 id="Key-insights" class="common-anchor-header">主なインサイト</h3><ul>
-<li><p><strong>デプロイメントモード</strong>：Milvusは、ローカルデプロイメント、Docker、オンプレミスのKubernetes、クラウドSaaS、企業向けのBYOC（Bring Your Own Cloud）など、さまざまなデプロイメントオプションを提供しているが、PineconeはSaaSデプロイメントに限定されている。</p></li>
-<li><p><strong>組み込み機能</strong>：Milvusは追加のエンベッディングライブラリをサポートしており、エンベッディングモデルを直接使用してソースデータをベクトルに変換することができます。</p></li>
-<li><p><strong>データ型</strong>：Milvusは、配列やJSONなど、Pineconeよりも幅広いデータ型をサポートしています。Pineconeは文字列、数値、ブーリアン、文字列のリストを値とするフラットなメタデータ構造のみをサポートしているのに対し、MilvusはJSONフィールド内で、入れ子構造を含むあらゆるJSONオブジェクトを扱うことができます。Pineconeはメタデータのサイズをベクターあたり40KBに制限しています。</p></li>
-<li><p><strong>メトリックとインデックスタイプ</strong>：Milvusはさまざまなユースケースに対応するため、メトリックとインデックスのタイプを幅広くサポートしていますが、Pineconeはより限定的な選択となっています。Milvusではベクトルに対するインデックスが必須ですが、設定プロセスを合理化するためにAUTO_INDEXオプションが用意されています。</p></li>
-<li><p><strong>スキーマ設計</strong>Milvusはスキーマ設計のために、Pineconeのようなスキーマレスエクスペリエンスのためのダイナミックスキーマによるクイックセットアップや、リレーショナルデータベース管理システム（RDBMS）のような事前定義されたスキーマフィールドとインデックスによるカスタマイズセットアップなど、柔軟な<code translate="no">create_collection</code> モードを提供します。</p></li>
-<li><p><strong>複数のベクトルフィールド</strong>：Milvusでは、1つのコレクション内に複数のベクトルフィールドを格納することができます。ベクトルフィールドは疎でも密でもよく、次元もさまざまです。Pineconeには同等の機能はありません。</p></li>
-<li><p><strong>ツール</strong>：Milvusは、Attu、Birdwatcher、Backup、CLI、CDC、Spark、Kafkaコネクタなど、データベース管理と活用のためのツールをより豊富に取り揃えています。</p></li>
+<h3 id="Key-insights" class="common-anchor-header">Key insights</h3><ul>
+<li><p><strong>Deployment modes</strong>: Milvus offers a variety of deployment options, including local deployment, Docker, Kubernetes on-premises, Cloud SaaS, and Bring Your Own Cloud (BYOC) for enterprises, whereas Pinecone is limited to SaaS deployment.</p></li>
+<li><p><strong>Embedding functions</strong>: Milvus supports additional embedding libraries, enabling the direct use of embedding models to transform source data into vectors.</p></li>
+<li><p><strong>Data types</strong>: Milvus supports a wider range of data types than Pinecone, including arrays and JSON. Pinecone supports only a flat metadata structure with strings, numbers, booleans, or lists of strings as values, whereas Milvus can handle any JSON object, including nested structures, within a JSON field. Pinecone limits the metadata size to 40KB per vector.</p></li>
+<li><p><strong>Metric and index types</strong>: Milvus supports a broad selection of metric and index types to accommodate various use cases, while Pinecone has a more limited selection. While an index for vector is mandatory in Milvus, an AUTO_INDEX option is available to streamline the configuration process.</p></li>
+<li><p><strong>Schema design</strong>: Milvus offers flexible <code translate="no">create_collection</code> modes for schema design, including a quick setup with a dynamic schema for a schema-less experience similar to Pinecone and a customized setup with predefined schema fields and indexes akin to a relational database management system (RDBMS).</p></li>
+<li><p><strong>Multiple vector fields</strong>: Milvus enables the storage of multiple vector fields within a single collection, which can be either sparse or dense and may vary in dimensionality. Pinecone does not offer a comparable feature.</p></li>
+<li><p><strong>Tools</strong>: Milvus offers a more extensive selection of tools for database management and utilization, such as Attu, Birdwatcher, Backup, CLI, CDC and Spark and Kafka connector.</p></li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">次のページ<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,7 +153,7 @@ summary: この記事では、Milvusと他のベクトル検索ソリューシ�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>トライアル</strong>：Milvus<a href="https://milvus.io/docs/quickstart.md">クイックスタート</a>または<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloudにサインアップして</a>、Milvusを直接体験してください。</p></li>
-<li><p><strong>もっと知る</strong>：Milvusの<a href="/docs/ja/glossary.md">用語集と</a> <a href="https://milvus.io/docs/manage-collections.md">ユーザーガイドを</a>ご覧ください。</p></li>
-<li><p><strong>他の選択肢を探す</strong>：ベクターデータベースの選択肢をより幅広く比較するために、<a href="https://zilliz.com/comparison">このページの</a>その他のリソースをご覧ください。</p></li>
+<li><p><strong>Trial</strong>: Experience Milvus firsthand by starting with the Milvus <a href="https://milvus.io/docs/quickstart.md">quickstart</a> or <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">signing up for Zilliz Cloud</a>.</p></li>
+<li><p><strong>Learn more</strong>: Dive deeper into Milvus’s features through our comprehensive <a href="/docs/glossary.md">Terminology</a> and <a href="https://milvus.io/docs/manage-collections.md">User Guides</a>.</p></li>
+<li><p><strong>Explore alternatives</strong>: For a broader comparison of vector database options, explore additional resources on <a href="https://zilliz.com/comparison">this page</a>.</p></li>
 </ul>

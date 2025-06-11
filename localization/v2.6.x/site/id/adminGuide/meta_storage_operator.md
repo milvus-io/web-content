@@ -1,10 +1,10 @@
 ---
 id: meta_storage_operator.md
-title: Mengkonfigurasi Penyimpanan Meta dengan Operator Milvus
+title: Configure Meta Storage with Milvus Operator
 related_key: 'minio, s3, storage, etcd, pulsar'
-summary: Pelajari cara mengonfigurasi meta storage dengan Milvus Operator.
+summary: Learn how to configure meta storage with Milvus Operator.
 ---
-<h1 id="Configure-Meta-Storage-with-Milvus-Operator" class="common-anchor-header">Mengkonfigurasi Penyimpanan Meta dengan Operator Milvus<button data-href="#Configure-Meta-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Configure-Meta-Storage-with-Milvus-Operator" class="common-anchor-header">Configure Meta Storage with Milvus Operator<button data-href="#Configure-Meta-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,14 +19,14 @@ summary: Pelajari cara mengonfigurasi meta storage dengan Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus menggunakan etcd untuk menyimpan metadata. Topik ini memperkenalkan cara mengonfigurasi ketergantungan meta storage ketika Anda menginstal Milvus dengan Milvus Operator. Untuk detail lebih lanjut, lihat <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/meta-storage.md">Mengkonfigurasi Meta Storage dengan Milvus Operator</a> di repositori Milvus Operator.</p>
-<p>Topik ini mengasumsikan bahwa Anda telah men-deploy Milvus Operator.</p>
-<div class="alert note">Lihat Menerapkan <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Milvus Operator</a> untuk informasi lebih lanjut. </div>
-<p>Anda perlu menentukan file konfigurasi untuk menggunakan Milvus Operator untuk memulai cluster Milvus.</p>
+    </button></h1><p>Milvus uses etcd for storing metadata. This topic introduces how to configure meta storage dependency when you install Milvus with Milvus Operator. For more details, refer to <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/meta-storage.md">Configure Meta Storage with Milvus Operator</a> in the Milvus Operator repository.</p>
+<p>This topic assumes that you have deployed Milvus Operator.</p>
+<div class="alert note">See <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
+<p>You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda hanya perlu mengedit template kode di <code translate="no">milvus_cluster_default.yaml</code> untuk mengonfigurasi dependensi pihak ketiga. Bagian berikut ini memperkenalkan cara mengonfigurasi penyimpanan objek, etcd, dan Pulsar.</p>
-<h2 id="Configure-etcd" class="common-anchor-header">Mengkonfigurasi etcd<button data-href="#Configure-etcd" class="anchor-icon" translate="no">
+<p>You only need to edit the code template in <code translate="no">milvus_cluster_default.yaml</code> to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.</p>
+<h2 id="Configure-etcd" class="common-anchor-header">Configure etcd<button data-href="#Configure-etcd" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,14 +41,14 @@ summary: Pelajari cara mengonfigurasi meta storage dengan Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tambahkan bidang yang diperlukan di bawah <code translate="no">spec.dependencies.etcd</code> untuk mengkonfigurasi etcd.</p>
-<p><code translate="no">etcd</code> mendukung <code translate="no">external</code> dan <code translate="no">inCluster</code>.</p>
-<p>Bidang yang digunakan untuk mengkonfigurasi layanan etcd eksternal meliputi:</p>
+    </button></h2><p>Add required fields under <code translate="no">spec.dependencies.etcd</code> to configure etcd.</p>
+<p><code translate="no">etcd</code> supports <code translate="no">external</code> and <code translate="no">inCluster</code>.</p>
+<p>Fields used to configure an external etcd service include:</p>
 <ul>
-<li><code translate="no">external</code>: Nilai <code translate="no">true</code> mengindikasikan bahwa Milvus menggunakan layanan etcd eksternal.</li>
-<li><code translate="no">endpoints</code>: Titik akhir dari etcd.</li>
+<li><code translate="no">external</code>: A <code translate="no">true</code> value indicates that Milvus uses an external etcd service.</li>
+<li><code translate="no">endpoints</code>: The endpoints of etcd.</li>
 </ul>
-<h3 id="External-etcd" class="common-anchor-header">etcd eksternal</h3><h4 id="Example" class="common-anchor-header">Contoh</h4><p>Contoh berikut ini mengonfigurasi layanan etcd eksternal.</p>
+<h3 id="External-etcd" class="common-anchor-header">External etcd</h3><h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external etcd service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
@@ -66,8 +66,8 @@ summary: Pelajari cara mengonfigurasi meta storage dengan Milvus Operator.
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-etcd" class="common-anchor-header">Internal etcd</h3><p><code translate="no">inCluster</code> menunjukkan saat kluster Milvus dimulai, layanan etcd dimulai secara otomatis di dalam kluster.</p>
-<h4 id="Example" class="common-anchor-header">Contoh</h4><p>Contoh berikut ini mengonfigurasi layanan etcd internal.</p>
+<h3 id="Internal-etcd" class="common-anchor-header">Internal etcd</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, an etcd service starts automatically in the cluster.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal etcd service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -90,12 +90,12 @@ summary: Pelajari cara mengonfigurasi meta storage dengan Milvus Operator.
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}              
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">Contoh sebelumnya menetapkan jumlah replika sebagai <code translate="no">5</code> dan membatasi sumber daya komputasi untuk etcd.</div>
-<div class="alert note">Temukan item konfigurasi lengkap untuk mengonfigurasi layanan etcd internal di <a href="https://github.com/bitnami/charts/blob/ba6f8356e725a8342fe738a3b73ae40d5488b2ad/bitnami/etcd/values.yaml">values.yaml</a>. Tambahkan item konfigurasi sesuai kebutuhan di bawah <code translate="no">etcd.inCluster.values</code> seperti yang ditunjukkan pada contoh sebelumnya.</div>
-<p>Dengan asumsi bahwa berkas konfigurasi bernama <code translate="no">milvuscluster.yaml</code>, jalankan perintah berikut untuk menerapkan konfigurasi.</p>
+<div class="alert note">The preceding example specifies the number of replicas as <code translate="no">5</code> and limits the compute resources for etcd.</div>
+<div class="alert note">Find the complete configuration items to configure an internal etcd service in <a href="https://github.com/bitnami/charts/blob/ba6f8356e725a8342fe738a3b73ae40d5488b2ad/bitnami/etcd/values.yaml">values.yaml</a>. Add configuration items as needed under <code translate="no">etcd.inCluster.values</code> as shown in the preceding example.</div>
+<p>Assuming that the configuration file is named <code translate="no">milvuscluster.yaml</code>, run the following command to apply the configuration.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,8 +110,8 @@ summary: Pelajari cara mengonfigurasi meta storage dengan Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pelajari cara mengonfigurasi dependensi Milvus lainnya dengan Milvus Operator:</p>
+    </button></h2><p>Learn how to configure other Milvus dependencies with Milvus Operator:</p>
 <ul>
-<li><a href="/docs/id/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a></li>
-<li><a href="/docs/id/message_storage_operator.md">Mengonfigurasi Penyimpanan Pesan dengan Milvus Operator</a></li>
+<li><a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a></li>
+<li><a href="/docs/message_storage_operator.md">Configure Message Storage with Milvus Operator</a></li>
 </ul>

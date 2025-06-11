@@ -2,14 +2,13 @@
 id: gpu-ivf-flat.md
 title: GPU_IVF_FLAT
 summary: >-
-  L'index GPU_IVF_FLAT est une version accélérée par le GPU de l'index IVF_FLAT,
-  conçue exclusivement pour les environnements GPU. Il partitionne les données
-  vectorielles en n listes de clusters et calcule la similarité en comparant
-  d'abord le vecteur cible de la requête avec le centre de chaque cluster. En
-  ajustant le paramètre nprobe, seules les grappes les plus prometteuses sont
-  recherchées, ce qui réduit le temps d'interrogation tout en maintenant un
-  équilibre entre la précision et la vitesse. Pour plus d'informations sur les
-  concepts fondamentaux, voir IVF_FLAT.
+  The GPU_IVF_FLAT index is a GPU-accelerated version of the IVF_FLAT index,
+  designed exclusively for GPU environments. It partitions vector data into
+  nlist cluster units and computes similarity by first comparing the target
+  query vector with the center of each cluster. By tuning the nprobe parameter,
+  only the most promising clusters are searched, which reduces query time while
+  maintaining a balance between accuracy and speed. For more information on
+  foundational concepts, refer to IVF_FLAT.
 ---
 <h1 id="GPUIVFFLAT" class="common-anchor-header">GPU_IVF_FLAT<button data-href="#GPUIVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,8 +25,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'index <strong>GPU_IVF_FLAT</strong> est une version de l'index IVF_FLAT accélérée par le GPU et conçue exclusivement pour les environnements GPU. Il partitionne les données vectorielles en <code translate="no">nlist</code> unités de cluster et calcule la similarité en comparant d'abord le vecteur cible de la requête avec le centre de chaque cluster. En réglant le paramètre <code translate="no">nprobe</code>, seules les grappes les plus prometteuses sont recherchées, ce qui réduit le temps d'interrogation tout en maintenant un équilibre entre la précision et la vitesse. Pour plus d'informations sur les concepts fondamentaux, voir <a href="/docs/fr/ivf-flat.md">IVF_FLAT</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Création d'un index<button data-href="#Build-index" class="anchor-icon" translate="no">
+    </button></h1><p>The <strong>GPU_IVF_FLAT</strong> index is a GPU-accelerated version of the IVF_FLAT index, designed exclusively for GPU environments. It partitions vector data into <code translate="no">nlist</code> cluster units and computes similarity by first comparing the target query vector with the center of each cluster. By tuning the <code translate="no">nprobe</code> parameter, only the most promising clusters are searched, which reduces query time while maintaining a balance between accuracy and speed. For more information on foundational concepts, refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour construire un index <code translate="no">GPU_IVF_FLAT</code> sur un champ de vecteurs dans Milvus, utilisez la méthode <code translate="no">add_index()</code>, en spécifiant les paramètres <code translate="no">index_type</code>, <code translate="no">metric_type</code> et d'autres paramètres pour l'index.</p>
+    </button></h2><p>To build a <code translate="no">GPU_IVF_FLAT</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -58,18 +57,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cette configuration :</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: Le type d'index à construire. Dans cet exemple, définissez la valeur <code translate="no">GPU_IVF_FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: La méthode utilisée pour calculer la distance entre les vecteurs. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/metric.md">Types de métriques</a>.</p></li>
-<li><p><code translate="no">params</code>: Options de configuration supplémentaires pour la construction de l'index.</p>
+<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">GPU_IVF_FLAT</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
-<li><code translate="no">nlist</code>: Nombre de grappes pour diviser l'ensemble de données.</li>
+<li><code translate="no">nlist</code>: Number of clusters to divide the dataset.</li>
 </ul>
-<p>Pour en savoir plus sur les paramètres de construction disponibles pour l'index <code translate="no">GPU_IVF_FLAT</code>, reportez-vous à <a href="/docs/fr/gpu-ivf-flat.md#Index-building-params">Paramètres de construction de l'index</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">GPU_IVF_FLAT</code> index, refer to <a href="/docs/gpu-ivf-flat.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Une fois les paramètres de l'index configurés, vous pouvez créer l'index en utilisant directement la méthode <code translate="no">create_index()</code> ou en passant les paramètres de l'index dans la méthode <code translate="no">create_collection</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/create-collection.md">Créer une collection</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Recherche sur l'index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,7 +83,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois l'index construit et les entités insérées, vous pouvez effectuer des recherches de similarité sur l'index.</p>
+    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -99,15 +98,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cette configuration :</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">params</code>: Options de configuration supplémentaires pour la recherche sur l'index.</p>
+<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
 <ul>
-<li><code translate="no">nprobe</code>: Nombre de clusters à rechercher.</li>
+<li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
 </ul>
-<p>Pour en savoir plus sur les paramètres de recherche disponibles pour l'index <code translate="no">GPU_IVF_FLAT</code>, reportez-vous à <a href="/docs/fr/gpu-ivf-flat.md#Index-specific-search-params">Paramètres de recherche spécifiques à l'index</a>.</p></li>
+<p>To learn more search parameters available for the <code translate="no">GPU_IVF_FLAT</code> index, refer to <a href="/docs/gpu-ivf-flat.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Paramètres de l'index<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,37 +121,43 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cette section présente une vue d'ensemble des paramètres utilisés pour construire un index et effectuer des recherches sur l'index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/gpu-ivf-flat.md#Build-index">création d'un index</a>.</p>
+    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/gpu-ivf-flat.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
-     <th><p>Paramètre</p></th>
-     <th><p>Description de l'index</p></th>
-     <th><p>Plage de valeurs</p></th>
-     <th><p>Suggestion de réglage</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>Nombre de grappes à créer à l'aide de l'algorithme k-means lors de la construction de l'index. Chaque grappe, représentée par un centroïde, stocke une liste de vecteurs. L'augmentation de ce paramètre réduit le nombre de vecteurs dans chaque grappe, créant ainsi des partitions plus petites et plus ciblées.</p></td>
-     <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, 65536]</p>
-<p><strong>Valeur par défaut</strong>: <code translate="no">128</code></p></td>
-     <td><p>Les valeurs plus élevées de <code translate="no">nlist</code> améliorent le rappel en créant des grappes plus fines, mais augmentent le temps de construction de l'index. Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [32, 4096].</p></td>
+     <td><p>The number of clusters to create using the k-means algorithm during index building.
+ Each cluster, represented by a centroid, stores a list of vectors. Increasing this parameter reduces the number of vectors in each cluster, creating smaller, more focused partitions.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, 65536]</p>
+<p><strong>Default value</strong>: <code translate="no">128</code></p></td>
+     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources.
+ In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/gpu-ivf-flat.md#Search-on-index">recherche sur l'index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/gpu-ivf-flat.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
-     <th><p>Paramètre</p></th>
+     <th><p>Parameter</p></th>
      <th><p>Description</p></th>
-     <th><p>Plage de valeurs</p></th>
-     <th><p>Suggestion de réglage</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>Des valeurs plus élevées permettent de rechercher davantage de grappes, ce qui améliore le rappel en élargissant la portée de la recherche, mais au prix d'une latence accrue de la requête.</p></td>
-     <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, <em>nlist</em>]</p>
-<p><strong>Valeur par défaut</strong>: <code translate="no">8</code></p></td>
-     <td><p>L'augmentation de cette valeur améliore le rappel mais peut ralentir la recherche. Réglez <code translate="no">nprobe</code> proportionnellement à <code translate="no">nlist</code> pour équilibrer la vitesse et la précision.</p>
-<p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [1, nlist].</p></td>
+     <td><p>The number of clusters to search for candidates.
+ Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, <em>nlist</em>]</p>
+<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
+     <td><p>Increasing this value improves recall but may slow down the search.
+ Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p>
+<p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
    </tr>
 </table>

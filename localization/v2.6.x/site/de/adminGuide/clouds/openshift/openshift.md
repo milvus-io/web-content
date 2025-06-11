@@ -1,10 +1,10 @@
 ---
 id: openshift.md
-title: Bereitstellung eines Milvus-Clusters auf OpenShift
+title: Deploy a Milvus Cluster on OpenShift
 related_key: cluster
-summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf OpenShift bereitstellen.'
+summary: Learn how to deploy a Milvus cluster on OpenShift.
 ---
-<h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">Bereitstellung eines Milvus-Clusters auf OpenShift<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
+<h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">Deploy a Milvus Cluster on OpenShift<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf OpenShift bereitstellen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dieses Thema enthält eine Schritt-für-Schritt-Anleitung für die Bereitstellung von Milvus auf OpenShift.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>This topic provides a step-by-step guide on how to deploy Milvus on OpenShift.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,13 +35,13 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf OpenShift bereitstellen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bevor Sie mit dem Bereitstellungsprozess beginnen, stellen Sie sicher, dass Sie Folgendes haben</p>
+    </button></h2><p>Before beginning the deployment process, ensure you have:</p>
 <ul>
-<li>Ein laufender OpenShift-Cluster.</li>
-<li>Zugriff auf den OpenShift-Cluster mit ausreichenden Rechten (Rolle<code translate="no">cluster-admin</code> oder gleichwertig).</li>
-<li>Zugriff auf die Webkonsole der OpenShift Container Platform.</li>
+<li>A running OpenShift cluster.</li>
+<li>OpenShift cluster access with sufficient privileges (<code translate="no">cluster-admin</code> role or equivalent).</li>
+<li>Access to the OpenShift Container Platform web console.</li>
 </ul>
-<h2 id="Step-1-Install-Cert-Manager" class="common-anchor-header">Schritt 1: Installieren Sie Cert Manager<button data-href="#Step-1-Install-Cert-Manager" class="anchor-icon" translate="no">
+<h2 id="Step-1-Install-Cert-Manager" class="common-anchor-header">Step 1: Install Cert Manager<button data-href="#Step-1-Install-Cert-Manager" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,25 +56,29 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf OpenShift bereitstellen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cert Manager ist für die Verwaltung von TLS-Zertifikaten für Milvus Operator erforderlich.</p>
+    </button></h2><p>Cert Manager is required for managing TLS certificates for Milvus Operator.</p>
 <ol>
-<li><p>Suchen Sie eine geeignete Cert-Manager-Version für Ihre OpenShift-Version: <a href="https://cert-manager.io/docs/releases/">Cert Manager Releases</a>.</p></li>
-<li><p>Installieren Sie Cert Manager gemäß der offiziellen Anleitung: <a href="https://cert-manager.io/docs/installation/">Cert Manager-Installation</a>.</p></li>
-<li><p>Überprüfen Sie, ob Ihr Cert Manager funktioniert:</p>
+<li><p>Find a suitable cert-manager version for your OpenShift version: <a href="https://cert-manager.io/docs/releases/">Cert Manager Releases</a>.</p></li>
+<li><p>Install Cert Manager following the official guide: <a href="https://cert-manager.io/docs/installation/">Cert Manager Installation</a>.</p></li>
+<li><p>Verify your Cert Manager is working:</p>
 <ol>
-<li><p>Navigieren Sie in Ihrer OpenShift-Konsole zu <strong>Workloads</strong> &gt; <strong>Pods</strong>. Wählen Sie das Projekt <strong>cert-manager</strong>.</p>
+<li><p>In your openshift console, navigate to <strong>Workloads</strong> > <strong>Pods</strong>. Select the project <strong>cert-manager</strong>.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
-   </span> <span class="img-wrapper"> <span>cert-manager-1</span> </span></p></li>
-<li><p>Stellen Sie sicher, dass alle Pods bereit sind. Das Bild unten zeigt zum Beispiel, dass die Pods noch am Starten sind. Warten Sie, bis alle diese Pods bereit sind.</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
+    <span>cert-manager-1</span>
+  </span>
+</p></li>
+<li><p>Ensure all the pods are ready. For example, the image below suggests that the pods are still starting. Wait until all these pods are ready.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
-   </span> <span class="img-wrapper"> <span>cert-verwalter-2</span> </span></p></li>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
+    <span>cert-manager-2</span>
+  </span>
+</p></li>
 </ol></li>
 </ol>
-<h2 id="Step-2-Issue-a-Self-Signed-Certificate-for-Milvus-Operator" class="common-anchor-header">Schritt 2: Ausstellen eines selbstsignierten Zertifikats für Milvus Operator<button data-href="#Step-2-Issue-a-Self-Signed-Certificate-for-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Step-2-Issue-a-Self-Signed-Certificate-for-Milvus-Operator" class="common-anchor-header">Step 2: Issue a Self-Signed Certificate for Milvus Operator<button data-href="#Step-2-Issue-a-Self-Signed-Certificate-for-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -89,9 +93,9 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf OpenShift bereitstellen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vergewissern Sie sich, dass Sie als <code translate="no">kubeadmin</code> oder mit gleichwertigen Rechten angemeldet sind.</p>
+    </button></h2><p>Ensure you are logged in as <code translate="no">kubeadmin</code> or have equivalent privileges.</p>
 <ol>
-<li><p>Erstellen Sie die folgende Manifestdatei mit dem Namen <code translate="no">milvus-operator-certificate.yaml</code>:</p>
+<li><p>Create the following manifest file named <code translate="no">milvus-operator-certificate.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus-operator-certificate.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cert-manager.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Certificate</span>
@@ -115,11 +119,11 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf OpenShift bereitstellen
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">selfSigned:</span> {}
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Wenden Sie die Datei an:</p>
+<li><p>Apply the file:</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f milvus-operator-certificate.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Step-3-Install-Milvus-Operator" class="common-anchor-header">Schritt 3: Installieren Sie Milvus Operator<button data-href="#Step-3-Install-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Step-3-Install-Milvus-Operator" class="common-anchor-header">Step 3: Install Milvus Operator<button data-href="#Step-3-Install-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -134,17 +138,17 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf OpenShift bereitstellen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nun können Sie mit der Installation von Milvus Operator beginnen. Es wird empfohlen, Helm für die Installation von Milvus Operator zu verwenden, um den Konfigurationsprozess zu vereinfachen.</p>
+    </button></h2><p>Now you can start installing the Milvus Operator. It is recommended to use Helm to install Milvus Operator to simplify the configuration process.</p>
 <ol>
-<li><p>Fügen Sie das Milvus Operator Helm-Repository hinzu:</p>
+<li><p>Add the Milvus Operator Helm repository:</p>
 <pre><code translate="no" class="language-shell">helm repo add milvus-operator https://zilliztech.github.io/milvus-operator/
 helm repo update milvus-operator
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Installieren Sie Milvus Operator:</p>
+<li><p>Install Milvus Operator:</p>
 <pre><code translate="no" class="language-shell">helm -n milvus-operator upgrade --install --create-namespace milvus-operator milvus-operator/milvus-operator
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Step-4-Deploy-Milvus" class="common-anchor-header">Schritt 4: Milvus bereitstellen<button data-href="#Step-4-Deploy-Milvus" class="anchor-icon" translate="no">
+<h2 id="Step-4-Deploy-Milvus" class="common-anchor-header">Step 4: Deploy Milvus<button data-href="#Step-4-Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -159,8 +163,8 @@ helm repo update milvus-operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Folgen Sie dem Rest der Anleitung auf der Milvus-Dokumentationsseite: <a href="https://milvus.io/docs/install_cluster-milvusoperator.md#Deploy-Milvus">Milvus bereitstellen</a>.</p>
-<h2 id="Whats-Next" class="common-anchor-header">Was kommt als nächstes?<button data-href="#Whats-Next" class="anchor-icon" translate="no">
+    </button></h2><p>Follow the rest of the guide on the Milvus documentation site: <a href="https://milvus.io/docs/install_cluster-milvusoperator.md#Deploy-Milvus">Deploy Milvus</a>.</p>
+<h2 id="Whats-Next" class="common-anchor-header">What’s Next<button data-href="#Whats-Next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -175,9 +179,9 @@ helm repo update milvus-operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie erfahren möchten, wie Sie Milvus in anderen Clouds einsetzen können:</p>
+    </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
 <ul>
-<li><a href="/docs/de/eks.md">Bereitstellung von Milvus Cluster auf AWS mit Kubernetes</a></li>
-<li><a href="/docs/de/azure.md">Bereitstellung von Milvus Cluster auf Azure mit Kubernetes</a></li>
-<li><a href="/docs/de/gcp.md">Bereitstellung von Milvus Cluster auf GCP mit Kubernetes</a></li>
+<li><a href="/docs/eks.md">Deploy Milvus Cluster on AWS with Kubernetes</a></li>
+<li><a href="/docs/azure.md">Deploy Milvus Cluster on Azure with Kubernetes</a></li>
+<li><a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
 </ul>

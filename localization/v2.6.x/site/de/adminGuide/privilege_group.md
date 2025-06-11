@@ -1,11 +1,11 @@
 ---
 id: privilege_group.md
-title: Privilegiengruppe erstellen
+title: Create Privilege Group
 summary: >-
-  Um den Prozess der Rechtevergabe zu rationalisieren, empfiehlt es sich,
-  mehrere Rechte in einer Rechtegruppe zusammenzufassen.
+  To streamline the process of granting privileges, it is recommended that you
+  combine multiple privileges into a privilege group.
 ---
-<h1 id="Create-Privilege-Group" class="common-anchor-header">Privilegiengruppe erstellen<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
+<h1 id="Create-Privilege-Group" class="common-anchor-header">Create Privilege Group<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Um den Prozess der Vergabe von Privilegien zu rationalisieren, wird empfohlen, mehrere Privilegien in einer Privilegiengruppe zusammenzufassen.</p>
-<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">Privilegiengruppe vs. Privilegien<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
+    </button></h1><p>To streamline the process of granting privileges, it is recommended that you combine multiple privileges into a privilege group.</p>
+<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">Privilege group vs. privileges<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,18 +36,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Eine Berechtigungsgruppe besteht aus mehreren Privilegien.</p>
+    </button></h2><p>A privilege group consists of multiple privileges.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
-   </span> <span class="img-wrapper"> <span>Privilegiengruppe illustriert</span> </span></p>
-<p>Wie in der obigen Abbildung dargestellt, nehmen Sie an, dass Sie einer Rolle drei verschiedene Berechtigungen gewähren müssen.</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
+    <span>Privilege Group Illustrated</span>
+  </span>
+</p>
+<p>As shown in the figure above, suppose you need to grant three different privileges to a role.</p>
 <ul>
-<li><p>Wenn Sie keine Berechtigungsgruppe verwenden, müssen Sie die Berechtigungen dreimal erteilen.</p></li>
-<li><p>Wenn Sie eine Berechtigungsgruppe verwenden, brauchen Sie nur eine Berechtigungsgruppe zu erstellen, die drei Berechtigungen zu dieser Berechtigungsgruppe hinzuzufügen und die Berechtigungsgruppe der Rolle A zu gewähren.</p></li>
+<li><p>If you do not use a privilege group, you need to grant the privileges three times.</p></li>
+<li><p>If you use a privilege group, you only need to create a privilege group and add the three privileges to this privilege group and grant the privilege group to Role A.</p></li>
 </ul>
-<p>Durch die Verwendung einer Berechtigungsgruppe können Sie einer Rolle mehrere Privilegien im Ganzen gewähren.</p>
-<h2 id="Built-in-privilege-groups" class="common-anchor-header">Eingebaute Berechtigungsgruppen<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
+<p>By using a privilege group, you can grant multiple privileges in bulk to a role.</p>
+<h2 id="Built-in-privilege-groups" class="common-anchor-header">Built-in privilege groups<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,32 +64,32 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um die Benutzung zu erleichtern, bietet Milvus insgesamt 9 eingebaute Berechtigungen auf der Ebene der Sammlung, der Datenbank und der Instanz: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW und Cluster_Admin.</p>
+    </button></h2><p>For ease-of-use, Milvus provides a total of 9 built-in privileges on the collection, database, and instance level: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW and Cluster_Admin.</p>
 <div class="alert note">
-<p>Die drei Ebenen der eingebauten Berechtigungsgruppen stehen nicht in einer kaskadierenden Beziehung. Wenn Sie eine Berechtigungsgruppe auf Instanzebene festlegen, werden nicht automatisch Berechtigungen für alle Datenbanken und Sammlungen unter dieser Instanz festgelegt. Berechtigungen auf Datenbank- und Sammlungsebene müssen manuell festgelegt werden.</p>
+<p>The three levels of built-in privilege groups do not have a cascading relationship. Setting a privilege group at the instance level does not automatically set permissions for all databases and collections under that instance. Privileges at the database and collection levels need to be set manually.</p>
 </div>
-<p>In den folgenden Tabellen werden die in jeder der integrierten Berechtigungsgruppen enthaltenen Berechtigungen erläutert.</p>
-<h3 id="Collection-level" class="common-anchor-header">Sammlungsebene</h3><ul>
-<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: umfasst die Berechtigung zum Lesen von Sammlungsdaten</p></li>
-<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: umfasst die Berechtigung zum Lesen und Schreiben von Sammlungsdaten</p></li>
-<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: umfasst die Berechtigung zum Lesen und Schreiben von Sammlungsdaten und zur Verwaltung von Sammlungen.</p></li>
+<p>The following tables explains the privileges includes in each of the built-in privilege group.</p>
+<h3 id="Collection-level" class="common-anchor-header">Collection level</h3><ul>
+<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: includes privileges to read collection data</p></li>
+<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: includes privileges to read and write collection data</p></li>
+<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: includes privileges to read and write collection data and manage collections.</p></li>
 </ul>
-<p>In der folgenden Tabelle sind die spezifischen Berechtigungen aufgeführt, die in den drei integrierten Berechtigungsgruppen auf der Sammlungsebene enthalten sind:</p>
+<p>The table below lists the specific privileges included in the three built-in privilege groups at the collection level:</p>
 <table>
    <tr>
-     <th><p><strong>Privileg</strong></p></th>
-     <th><p><strong>SammlungNurLesen</strong></p></th>
-     <th><p><strong>SammlungLesenSchreiben</strong></p></th>
-     <th><p><strong>SammlungAdmin</strong></p></th>
+     <th><p><strong>Privilege</strong></p></th>
+     <th><p><strong>CollectionReadOnly</strong></p></th>
+     <th><p><strong>CollectionReadWrite</strong></p></th>
+     <th><p><strong>CollectionAdmin</strong></p></th>
    </tr>
    <tr>
-     <td><p>Abfrage</p></td>
+     <td><p>Query</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Suche</p></td>
+     <td><p>Search</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -147,7 +149,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>GetStatistiken</p></td>
+     <td><p>GetStatistics</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -177,49 +179,49 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Laden</p></td>
+     <td><p>Load</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Freigeben</p></td>
+     <td><p>Release</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Einfügen</p></td>
+     <td><p>Insert</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Löschen</p></td>
+     <td><p>Delete</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Upsertieren</p></td>
+     <td><p>Upsert</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Importieren</p></td>
+     <td><p>Import</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Spülen</p></td>
+     <td><p>Flush</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Verdichtung</p></td>
+     <td><p>Compaction</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -243,21 +245,21 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Database-level" class="common-anchor-header">Datenbank-Ebene</h3><ul>
-<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: umfasst die Berechtigung zum Lesen von Datenbankdaten</p></li>
-<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: umfasst die Berechtigung zum Lesen und Schreiben von Datenbankdaten</p></li>
-<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: umfasst die Berechtigung zum Lesen und Schreiben von Datenbankdaten und zur Verwaltung von Datenbanken.</p></li>
+<h3 id="Database-level" class="common-anchor-header">Database level</h3><ul>
+<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: includes privileges to read database data</p></li>
+<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: includes privileges to read and write database data</p></li>
+<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: includes privileges to read and write database data and manage databases.</p></li>
 </ul>
-<p>In der folgenden Tabelle sind die spezifischen Berechtigungen aufgeführt, die in den drei integrierten Berechtigungsgruppen auf Datenbankebene enthalten sind:</p>
+<p>The table below lists the specific privileges included in the three built-in privilege groups at the database level:</p>
 <table>
    <tr>
-     <th><p><strong>Privileg</strong></p></th>
-     <th><p><strong>DatenbankNurLesen</strong></p></th>
-     <th><p><strong>DatenbankLesenSchreiben</strong></p></th>
-     <th><p><strong>DatenbankAdmin</strong></p></th>
+     <th><p><strong>Privilege</strong></p></th>
+     <th><p><strong>DatabaseReadOnly</strong></p></th>
+     <th><p><strong>DatabaseReadWrite</strong></p></th>
+     <th><p><strong>DatabaseAdmin</strong></p></th>
    </tr>
    <tr>
-     <td><p>Sammlungen anzeigen</p></td>
+     <td><p>ShowCollections</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -287,15 +289,15 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Cluster-level" class="common-anchor-header">Cluster-Ebene</h3><ul>
-<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: umfasst die Berechtigung zum Lesen von Instanzdaten</p></li>
-<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: umfasst die Berechtigung zum Lesen und Schreiben von Instanzdaten</p></li>
-<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: umfasst die Berechtigung zum Lesen und Schreiben von Instanzdaten und zur Verwaltung von Instanzen.</p></li>
+<h3 id="Cluster-level" class="common-anchor-header">Cluster level</h3><ul>
+<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: includes privileges to read instance data</p></li>
+<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: includes privileges to read and write instance data</p></li>
+<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: includes privileges to read and write instance data and manage instances.</p></li>
 </ul>
-<p>In der folgenden Tabelle sind die spezifischen Berechtigungen aufgeführt, die in den drei integrierten Berechtigungsgruppen auf Instanzebene enthalten sind:</p>
+<p>The table below lists the specific privileges included in the three built-in privilege groups at the instance level:</p>
 <table>
    <tr>
-     <th><p><strong>Privileg</strong></p></th>
+     <th><p><strong>Privilege</strong></p></th>
      <th><p><strong>ClusterReadOnly</strong></p></th>
      <th><p><strong>ClusterReadWrite</strong></p></th>
      <th><p><strong>ClusterAdmin</strong></p></th>
@@ -355,7 +357,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>WiederherstellenRBAC</p></td>
+     <td><p>RestoreRBAC</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -445,7 +447,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h2 id="Procedures" class="common-anchor-header">Prozeduren<button data-href="#Procedures" class="anchor-icon" translate="no">
+<h2 id="Procedures" class="common-anchor-header">Procedures<button data-href="#Procedures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -460,10 +462,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können eine Berechtigungsgruppe erstellen und dann der Berechtigungsgruppe Berechtigungen hinzufügen.</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">Erstellen einer Berechtigungsgruppe</h3><p>Das folgende Beispiel zeigt, wie Sie eine Berechtigungsgruppe mit dem Namen <code translate="no">privilege_group_1</code> erstellen.</p>
+    </button></h2><p>You can create a privilege group and then add privileges to the privilege group.</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">Create a privilege group</h3><p>The following example demonstrates how to create a privilege group named <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）
 <button class="copy-code-btn"></button></code></pre>
@@ -493,9 +500,14 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Hinzufügen von Berechtigungen zu einer Berechtigungsgruppe</h3><p>Das folgende Beispiel zeigt, wie man die Privilegien <code translate="no">PrivilegeBackupRBAC</code> und <code translate="no">PrivilegeRestoreRBAC</code> zu der gerade erstellten Privilegiengruppe <code translate="no">privilege_group_1</code> hinzufügt.</p>
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Add privileges to a privilege group</h3><p>The following example demonstrates how to add privileges <code translate="no">PrivilegeBackupRBAC</code> and <code translate="no">PrivilegeRestoreRBAC</code> to the privilege group <code translate="no">privilege_group_1</code> that is just created.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.add_privileges_to_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
@@ -530,9 +542,14 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Entfernen von Privilegien aus einer Privilegiengruppe</h3><p>Das folgende Beispiel demonstriert, wie man das Privileg <code translate="no">PrivilegeRestoreRBAC</code> aus der Privilegiengruppe <code translate="no">privilege_group_1</code> entfernt.</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Remove privileges from a privilege group</h3><p>The following example demonstrates how to remove the privilege <code translate="no">PrivilegeRestoreRBAC</code> from the privilege group <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -565,9 +582,14 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">Auflisten von Berechtigungsgruppen</h3><p>Das folgende Beispiel zeigt, wie man alle vorhandenen Berechtigungsgruppen auflistet.</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">List privilege groups</h3><p>The following example demonstrates how to list all existing privilege groups.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.list_privilege_groups()
 <button class="copy-code-btn"></button></code></pre>
@@ -595,12 +617,17 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Unten sehen Sie eine Beispielausgabe.</p>
+<p>Below is an example output.</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">Aufheben einer Berechtigungsgruppe</h3><p>Das folgende Beispiel demonstriert, wie die Berechtigungsgruppe <code translate="no">privilege_group_1</code> gelöscht wird.</p>
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">Drop a privilege group</h3><p>The following example demonstrates how to drop the privilege group <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.drop_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>

@@ -1,10 +1,12 @@
 ---
 id: AIMon_milvus_integration.md
-summary: このチュートリアルでは、質問に答える検索支援世代（RAG）チャットボットの構築をお手伝いします。
-title: AIMonとmilvusでLLM出願の検索品質を向上させる
+summary: >-
+  In this tutorial, we'll help you build a retrieval-augmented generation (RAG)
+  chatbot that answers questions.
+title: Improve retrieval quality of your LLM Application with AIMon and Milvus
 ---
 <p><a href="https://colab.research.google.com/drive/1GqAhNZ6_Fm3PN_wX69MiBe7Pc6g2PjtK#scrollTo=cf2bee4f-c0b2-49e1-8a9c-3688c2d5fb55" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<h1 id="Improve-retrieval-quality-of-your-LLM-Application-with-AIMon-and-Milvus" class="common-anchor-header">AIMonとmilvusでLLM出願の検索品質を向上させる<button data-href="#Improve-retrieval-quality-of-your-LLM-Application-with-AIMon-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Improve-retrieval-quality-of-your-LLM-Application-with-AIMon-and-Milvus" class="common-anchor-header">Improve retrieval quality of your LLM Application with AIMon and Milvus<button data-href="#Improve-retrieval-quality-of-your-LLM-Application-with-AIMon-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +21,7 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,14 +36,14 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このチュートリアルでは、<a href="https://meetingbank.github.io/">会議バンクのデータセットに関する</a>質問に回答する検索支援世代（RAG）チャットボットを構築するお手伝いをします。</p>
-<p>このチュートリアルでは以下のことを学びます：</p>
+    </button></h2><p>In this tutorial, we’ll help you build a retrieval-augmented generation (RAG) chatbot that answers questions on a <a href="https://meetingbank.github.io/">meeting bank dataset</a>.</p>
+<p>In this tutorial you will learn to:</p>
 <ul>
-<li>会議バンクデータセットに関連するユーザーの質問に答えるLLMアプリケーションを構築する。</li>
-<li>LLMアプリケーションの品質を定義し、測定します。</li>
-<li>ハイブリッド検索を使用したベクトルDBと最先端の再ランカーという2つのインクリメンタルアプローチを使用してアプリケーションの品質を向上させる。</li>
+<li>Build an LLM application that answers a user’s query related to the meeting bank dataset.</li>
+<li>Define and measure the quality of your LLM application.</li>
+<li>Improve the quality of your application using 2 incremental approaches: a vector DB using hybrid search and a state-of-the-art re-ranker.</li>
 </ul>
-<h2 id="Tech-Stack" class="common-anchor-header">技術スタック<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
+<h2 id="Tech-Stack" class="common-anchor-header">Tech Stack<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,12 +58,12 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>ベクトルデータベース</em></h4><p>このアプリケーションでは、<a href="https://milvus.io/">Milvusを</a>使用して、テキスト、画像、動画などの大規模な非構造化データを管理・検索する。</p>
-<h4 id="LLM-Framework" class="common-anchor-header"><em>LLMフレームワーク</em></h4><p>LlamaIndexは、オープンソースのデータオーケストレーションフレームワークであり、プライベートデータとLLMの統合を容易にすることで、大規模言語モデル（LLM）アプリケーションの構築を簡素化し、RAG（Retrieval-Augmented Generation）パイプラインを通じて、文脈を考慮した生成AIアプリケーションを可能にする。このチュートリアルではLlamaIndexを使用します。LlamaIndexは柔軟性に優れ、より低レベルのAPIを抽象化できるからです。</p>
-<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM出力品質の評価</em></h4><p><a href="https://www.aimon.ai">AIMonは</a>、幻覚、文脈品質問題、LLMの命令順守、検索品質、その他のLLMの信頼性タスクに対する独自の判定モデルを提供します。LLMアプリケーションの品質判定にAIMonを使用します。</p>
+    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Vector Database</em></h4><p>For this application, we will use <a href="https://milvus.io/">Milvus</a> to manage and search large-scale unstructured data, such as text, images, and videos.</p>
+<h4 id="LLM-Framework" class="common-anchor-header"><em>LLM Framework</em></h4><p>LlamaIndex is an open-source data orchestration framework that simplifies building large language model (LLM) applications by facilitating the integration of private data with LLMs, enabling context-augmented generative AI applications through a Retrieval-Augmented Generation (RAG) pipeline. We will use LlamaIndex for this tutorial since it offers a good amount of flexibility and better lower level API abstractions.</p>
+<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM Output Quality Evaluation</em></h4><p><a href="https://www.aimon.ai">AIMon</a> offers proprietary Judge models for Hallucination, Context Quality issues, Instruction Adherence of LLMs, Retrieval Quality and other LLM reliability tasks. We will use AIMon to judge the quality of the LLM application.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Pre-requisites" class="common-anchor-header">前提条件<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
+<h1 id="Pre-requisites" class="common-anchor-header">Pre-requisites<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,17 +79,18 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
         ></path>
       </svg>
     </button></h1><ol>
-<li><p><a href="https://docs.aimon.ai/quickstart">こちらからAIMonアカウントに</a>サインアップしてください。</p>
-<p>このシークレットをColab Secrets（左パネルの「鍵」マーク）に追加してください。 Google以外のColab環境にいる場合は、googleのColab関連コードをご自身で置き換えてください。</p>
+<li><p>Signup for an <a href="https://docs.aimon.ai/quickstart">AIMon account here</a>.</p>
+<p>Add this secret to the Colab Secrets (the “key” symbol on the left panel)
+If you are in another non-google colab environment, please replace the google colab-related code yourself</p>
 <ul>
 <li>AIMON_API_KEY</li>
 </ul></li>
-<li><p><a href="https://platform.openai.com/docs/overview">こちらからOpenAIのアカウントに</a>サインアップし、Colab secretsに以下のキーを追加してください：</p>
+<li><p>Signup for an <a href="https://platform.openai.com/docs/overview">OpenAI account here</a> and add the following key in Colab secrets:</p>
 <ul>
 <li>OPENAI_API_KEY</li>
 </ul></li>
 </ol>
-<h3 id="Required-API-keys" class="common-anchor-header">必要なAPIキー</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+<h3 id="Required-API-keys" class="common-anchor-header">Required API keys</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -100,7 +103,7 @@ openai_key = userdata.get(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</
 <span class="hljs-comment"># Set OpenAI key as an environment variable as well</span>
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = openai_key
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Utility-Functions" class="common-anchor-header">ユーティリティ関数<button data-href="#Utility-Functions" class="anchor-icon" translate="no">
+<h2 id="Utility-Functions" class="common-anchor-header">Utility Functions<button data-href="#Utility-Functions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,7 +118,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = openai
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、このノートブックを通して使用するユーティリティ関数を紹介します。</p>
+    </button></h2><p>This section contains utility functions that we will use throughout the notebook.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 oai_client = OpenAI(api_key=openai_key)
@@ -150,7 +153,7 @@ oai_client = OpenAI(api_key=openai_key)
     <span class="hljs-comment"># Extract and return the response text</span>
     <span class="hljs-keyword">return</span> completion.choices[<span class="hljs-number">0</span>].message.content
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Dataset" class="common-anchor-header">データセット<button data-href="#Dataset" class="anchor-icon" translate="no">
+<h1 id="Dataset" class="common-anchor-header">Dataset<button data-href="#Dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -165,8 +168,8 @@ oai_client = OpenAI(api_key=openai_key)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>既存のデータセットを補足するために、アメリカの主要6都市の市議会から作成されたベンチマークデータセットである<a href="https://meetingbank.github.io/">MeetingBank</a>データセットを使用します。このデータセットには、1,366の会議、3,579時間以上のビデオ、議事録のPDF文書、議題、その他のメタデータが含まれています。</p>
-<p>今回の演習では、より小規模なデータセットを作成した。それは<a href="https://drive.google.com/drive/folders/1v3vJahKtadi_r-8VJAsDd2eaiSRenmsa?usp=drive_link">ここに</a>あります。</p>
+    </button></h1><p>We will use the <a href="https://meetingbank.github.io/">MeetingBank</a> dataset which is a benchmark dataset created from the city councils of 6 major U.S. cities to supplement existing datasets. It contains 1,366 meetings with over 3,579 hours of video, as well as transcripts, PDF documents of meeting minutes, agenda, and other metadata.</p>
+<p>For this exercise, we have created a smaller dataset. It can be found <a href="https://drive.google.com/drive/folders/1v3vJahKtadi_r-8VJAsDd2eaiSRenmsa?usp=drive_link">here</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete the dataset folder if it already exists</span>
 
 <span class="hljs-keyword">import</span> shutil
@@ -242,18 +245,18 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">分析</h3><p>258のトランスクリプトがあり、これらのトランスクリプト全体で合計約1Mのトークンがあります。トランスクリプトあたりの平均トークン数は3864です。</p>
+<h3 id="Analysis" class="common-anchor-header">Analysis</h3><p>We have 258 transcripts with a total of about 1M tokens across all these transcripts. We have an average of 3864 number of tokens per transcript.</p>
 <table>
 <thead>
-<tr><th>メトリック</th><th>値</th></tr>
+<tr><th>Metric</th><th>Value</th></tr>
 </thead>
 <tbody>
-<tr><td>トランスクリプト数</td><td>258</td></tr>
-<tr><td>トランスクリプト内のトークン総数</td><td>1M</td></tr>
-<tr><td>平均# トランスクリプトあたりのトークン数</td><td>3864</td></tr>
+<tr><td>Number of transcripts</td><td>258</td></tr>
+<tr><td>Total # tokens in the transcripts</td><td>1M</td></tr>
+<tr><td>Avg. # tokens per transcript</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">クエリー</h3><p>以下は、上記のトランスクリプトに対して実行する12のクエリーです。</p>
+<h3 id="Queries" class="common-anchor-header">Queries</h3><p>Below are the 12 queries that we will run on the transcript above</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -277,7 +280,7 @@ queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_
  'What were the decisions made in the meeting?',
  'What did the team decide about the project timeline?']
 </code></pre>
-<h1 id="Metric-Definition" class="common-anchor-header">メトリックの定義<button data-href="#Metric-Definition" class="anchor-icon" translate="no">
+<h1 id="Metric-Definition" class="common-anchor-header">Metric Definition<button data-href="#Metric-Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -292,12 +295,12 @@ queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>この品質スコア指標は、上記のクエリセットに対するLLMの応答がどの程度優れているかを理解するのに役立ちます。アプリケーションの品質を測定するために、一連のクエリを実行し、これらすべてのクエリの品質スコアを集計します。</p>
-<p>LLMアプリケーション品質スコアは、AIMonの3つの個別品質メトリクスの組み合わせです：</p>
+    </button></h1><p>This quality score metric will help us understand how good the LLM responses are for the set of queries above. To measure quality of our application, we will run a set of queries and aggregate the quality scores across all these queries.</p>
+<p>LLM Application Quality Score is a combination of 3 individual quality metrics from AIMon:</p>
 <ol>
-<li><strong>幻覚スコア</strong>（hall_score）：生成されたテキストが提供されたコンテキストに根拠があるかどうかをチェックする。スコアが1.0に近いほど幻覚の兆候が強く、0.0に近いほど幻覚の兆候が低いことを意味する。したがって、最終的な品質スコアを計算する際には、ここでは（1.0-hall_score）を使用する。</li>
-<li><strong>指示遵守スコア</strong>（ia_score）：提供されたすべての明示的指示がLLMによって遵守されたかどうかをチェックする。ia_scoreが高いほど、指示の遵守度が高い。スコアが低いほど、指示の遵守度が低い。</li>
-<li><strong>検索関連度スコア</strong>（rr_score）：検索された文書がクエリに関連しているかどうかをチェックする。スコアが100.0に近いほどクエリとの関連性が高く、0.0に近いほどクエリとの関連性が低いことを意味する。</li>
+<li><strong>Hallucination Score</strong> (hall_score): checks if the generated text is grounded in the provided context. A score closer to 1.0 means that there is a strong indication of hallucination and a score closer to 0.0 means a lower indication of hallucination. Hence, we will use (1.0-hall_score) here when computing the final quality score.</li>
+<li><strong>Instruction Adherence Score</strong> (ia_score): checks if all explicit instructions provided have been followed by the LLM. The higher the ia_score the better the adherence to instructions. The lower the score, the poorer the adherence to instructions.</li>
+<li><strong>Retrieval Relevance Score</strong> (rr_score): checks if the retrieved documents are relevant to the query. A score closer to 100.0 means perfect relevance of document to query and a score closer to 0.0 means poor relevance of document to query.</li>
 </ol>
 <p><code translate="no">quality_score = 0.35 * (1.0 - hall_score) + 0.35 * ia_score + 0.3 * rr_score</code></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># We will check the LLM response against these instructions</span>
@@ -323,7 +326,7 @@ instructions_to_evaluate = <span class="hljs-string">&quot;&quot;&quot;
         + <span class="hljs-number">0.3</span> * (avg_retrieval_relevance_score / <span class="hljs-number">100</span>)
     ) * <span class="hljs-number">100.0</span>
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Setup-AIMon" class="common-anchor-header">AIMonのセットアップ<button data-href="#Setup-AIMon" class="anchor-icon" translate="no">
+<h1 id="Setup-AIMon" class="common-anchor-header">Setup AIMon<button data-href="#Setup-AIMon" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -338,7 +341,7 @@ instructions_to_evaluate = <span class="hljs-string">&quot;&quot;&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>前述したように、AIMonはLLMアプリケーションの品質を判定するために使用される。<a href="https://docs.aimon.ai/">ドキュメントはこちらにあります</a>。</p>
+    </button></h1><p>As mentioned previously, AIMon will be used to judge the quality of the LLM application. <a href="https://docs.aimon.ai/">Documentation can be found here</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> aimon <span class="hljs-keyword">import</span> Detect
 
 aimon_config = {
@@ -368,7 +371,7 @@ detect = Detect(
     model_name=<span class="hljs-string">&quot;OpenAI-gpt-4o-mini&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="1-Simple-brute-force-approach" class="common-anchor-header">1.単純な総当りアプローチ<button data-href="#1-Simple-brute-force-approach" class="anchor-icon" translate="no">
+<h1 id="1-Simple-brute-force-approach" class="common-anchor-header">1. Simple, brute-force approach<button data-href="#1-Simple-brute-force-approach" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -383,9 +386,9 @@ detect = Detect(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>この最初の単純なアプローチでは、与えられたクエリと文書をマッチさせるためにレーベンシュタイン距離を使う。最もマッチした上位3つの文書が、回答のためのコンテキストとしてLLMに送られる。</p>
-<p><strong>注意：このセルの実行には約3分かかります。</strong></p>
-<p>待っている間、お好きな飲み物をお楽しみください :)</p>
+    </button></h1><p>In this first simple approach, we will use Levenshtein Distance to match a document with a given query. The top 3 documents with the best match will be sent to the LLM as context for answering.</p>
+<p><strong>NOTE: This cell will take about 3 mins to execute</strong></p>
+<p>Enjoy your favorite beverage while you wait :)</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> fuzzywuzzy <span class="hljs-keyword">import</span> process
 <span class="hljs-keyword">import</span> time
 
@@ -460,8 +463,8 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for brute force approach: 14.31772340191865
 </code></pre>
-<p>これは<strong>ベースラインの</strong>LLMアプリの品質スコアです。AIMon<a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">UIでは</a>、AIMonが計算した幻覚スコアなどの個々のメトリクスを見ることもできます。</p>
-<h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2.ドキュメント検索にVectorDB（milvus）を使う<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
+<p>This is a <strong>baseline</strong> LLM app quality score. You can also see the individual metrics like hallucination scores etc. computed by AIMon on the <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">AIMon UI</a></p>
+<h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2. Use a VectorDB (Milvus) for document retrieval<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -476,13 +479,15 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>今度は、ベクトルDBを追加することで品質スコアを向上させる。これは、以前のアプローチと比較して、クエリのレイテンシを改善するのにも役立つ。</p>
-<p>注意すべき主なコンポーネントは2つある：インジェストとRAGベースのQ&amp;Aである。インジェストパイプラインは、Meeting Bankデータセットからトランスクリプトを処理し、Milvus Vectorデータベースに格納する。RAG Q&amp;Aパイプラインは、まずベクターストアから関連ドキュメントを取得することで、ユーザクエリを処理する。これらの文書はLLMが回答を生成するための基礎文書として使用される。AIMonを活用して品質スコアを計算し、<a href="https://docs.aimon.ai/detectors/hallucination">幻覚</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指示の順守</a>、<a href="https://docs.aimon.ai/checker-models/context_relevance">文脈の関連</a>性についてアプリケーションを継続的に監視する。これらは、上記の<code translate="no">quality</code> スコアの定義に使用したのと同じ3つのメトリクスです。</p>
+    </button></h1><p>Now, we will improve the quality score by adding in a vector DB. This will also help improve query latency compared to the previous approach.</p>
+<p>There are two main components we need to be aware of: Ingestion and RAG based Q&A. The ingestion pipeline processes the transcripts from the Meeting Bank dataset and stores it in the Milvus Vector database. The RAG Q&A pipeline processes a user query by first retrieving the relevant documents from the vector store. These documents will then be used as grounding documents for the LLM to generate its response. We leverage AIMon to calculate the quality score and continuously monitor the application for <a href="https://docs.aimon.ai/detectors/hallucination">hallucination</a>, , <a href="https://docs.aimon.ai/detectors/instruction_adherence">instruction adherence</a>,  <a href="https://docs.aimon.ai/checker-models/context_relevance">context relevance</a>. These are the same 3 metrics we used to define the <code translate="no">quality</code> score above.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
-   </span> <span class="img-wrapper"> <span>ワークフロー</span> </span></p>
-<p>以下は、ドキュメントの前処理と埋め込みを計算するためのユーティリティ関数です。</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+    <span>workflow</span>
+  </span>
+</p>
+<p>Below are some utility functions to pre-process and compute embeddings for documents.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -513,14 +518,14 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 
 documents = extract_and_create_documents(train_split[<span class="hljs-string">&quot;transcript&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Open AIベースの埋め込み計算モデルをセットアップする。</p>
+<p>Setup an Open AI based embedding computation model.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.embeddings.openai <span class="hljs-keyword">import</span> OpenAIEmbedding
 
 embedding_model = OpenAIEmbedding(
     model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>, embed_batch_size=<span class="hljs-number">100</span>, max_retries=<span class="hljs-number">3</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>このセルでは、<code translate="no">documents</code> の埋め込みを計算し、MilvusVectorStoreにインデックスを作成する。</p>
+<p>In this cell, we compute the embeddings for the <code translate="no">documents</code> and index them into the MilvusVectorStore.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
 
@@ -541,7 +546,7 @@ index = VectorStoreIndex.from_documents(
 
 Execution time: 38.74 seconds
 </code></pre>
-<p>VectorDBのインデックスがセットアップされたので、ユーザーのクエリに答えるために活用します。以下のセルでは、retrieverを作成し、LLMをセットアップし、ユーザーの質問に答えるためにretrieverとLLMとインターフェースするLLamaIndex Query Engineを構築する。</p>
+<p>Now that the VectorDB index has been setup, we will leverage it to answer user queries. In the cells below, we will create a retriever, setup the LLM and build a LLamaIndex Query Engine that interfaces with the retriever and the LLM to answer a user’s questions.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.retrievers <span class="hljs-keyword">import</span> VectorIndexRetriever
 <span class="hljs-keyword">from</span> llama_index.core.query_engine <span class="hljs-keyword">import</span> RetrieverQueryEngine
 
@@ -562,7 +567,7 @@ llm = OpenAI(model=<span class="hljs-string">&quot;gpt-4o-mini&quot;</span>, tem
 
 query_engine = RetrieverQueryEngine.from_args(retriever, llm)
 <button class="copy-code-btn"></button></code></pre>
-<p>この時点で、クエリーエンジン、レトリーバー、LLMのセットアップが完了した。次に、品質スコアを測定するためのAIMonをセットアップします。上の前のセルで作成したのと同じ<code translate="no">@detect</code> デコレーターを使用します。<code translate="no">ask_and_validate</code> 、AIMonがLLamaIndexから取得したドキュメントの "ノード "とインターフェースするためのコードを追加しただけだ。</p>
+<p>At this point, the query engine, retriever and LLM has been setup. Next, we setup AIMon to help us measure quality scores. We use the same <code translate="no">@detect</code> decorator that was created in the previous cells above. The only additional code in <code translate="no">ask_and_validate</code> here is to help AIMon interface with LLamaIndex’s retrieved document "nodes".</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> logging
 
 
@@ -696,8 +701,8 @@ ask_and_validate(<span class="hljs-string">&quot;Councilman Lopez&quot;</span>, 
    publish_response=[]
  ))
 </code></pre>
-<p><code translate="no">queries_df</code> 、LlamaIndexクエリーエンジンを通してすべてのクエリーを実行し、AIMonを使って総合的な品質スコアを計算してみましょう。</p>
-<p><strong>注意：これには約2分かかります</strong></p>
+<p>Lets run through all the queries through the LlamaIndex query engine in the <code translate="no">queries_df</code> and compute the overall quality score using AIMon.</p>
+<p><strong>NOTE: This will take about 2 mins</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
 quality_scores_vdb = []
@@ -755,7 +760,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for vector DB approach: 19.296728194100236
 </code></pre>
-<h2 id="🎉-Quality-Score-improved" class="common-anchor-header">品質スコアが向上した！<button data-href="#🎉-Quality-Score-improved" class="anchor-icon" translate="no">
+<h2 id="🎉-Quality-Score-improved" class="common-anchor-header">🎉 Quality Score improved!<button data-href="#🎉-Quality-Score-improved" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -770,8 +775,8 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RAGベースのQAシステムを使用した後、すべてのクエリの総合品質スコアが向上したことに注目してください。</p>
-<h1 id="3-Add-Re-ranking-to-your-retrieval" class="common-anchor-header">3.検索に再ランク付けを追加する<button data-href="#3-Add-Re-ranking-to-your-retrieval" class="anchor-icon" translate="no">
+    </button></h2><p>Notice that the overall quality score across all queries improved after using a RAG based QA system.</p>
+<h1 id="3-Add-Re-ranking-to-your-retrieval" class="common-anchor-header">3. Add Re-ranking to your retrieval<button data-href="#3-Add-Re-ranking-to-your-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -786,8 +791,8 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>次に、AIMonのLlamaIndex<a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">ポストプロセッサの再ランク統合を</a>使用して、AIMonの<a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">ドメイン適応可能な再ランク付けを</a>追加します。</p>
-<p>下図に示すように、再ランク付けは、より高度なクエリ-文書マッチング機能を使用することで、最も関連性の高い文書を上位にバブルアップするのに役立ちます。AIMonのリランカーのユニークな特徴は、ドメインごとにカスタマイズできることです。LLMのプロンプトエンジニアリングと同様に、<code translate="no">task_definition</code> フィールドを使用して、ドメインごとにリランカーのパフォーマンスをカスタマイズすることができます。この最先端のリランカーは、超低レイテンシー（～2kのコンテキストに対して）で動作し、そのパフォーマンスはMTEBリランキングリーダーボードのトップ5にランクインしている。</p>
+    </button></h1><p>Now, we will add in AIMon’s <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">domain adaptable re-ranker</a> using AIMon’s LlamaIndex <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">postprocessor re-rank integration</a>.</p>
+<p>As shown in the figure below, reranking helps bubble up the most relevant documents to the top by using a more advanced Query-Document matching function. The unique feature of AIMon’s re-ranker is the ability to customize it per domain. Similar to how you would prompt engineer an LLM, you can customize reranking performance per domain using the <code translate="no">task_definition</code> field. This state-of-the-art reranker runs at ultra low sub second latency (for a ~2k context) and its performance ranks in the top 5 of the MTEB reranking leaderboard.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
 
@@ -811,9 +816,9 @@ query_engine_with_reranking = RetrieverQueryEngine.from_args(
     retriever, llm, node_postprocessors=[aimon_rerank]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>もう一度クエリを実行し、全体的な品質スコアを再計算して、改善があるかどうかを見てみましょう。</p>
-<p><strong>AIMonの再ランキングは、レスポンスを生成するためにLLMに送信する必要があるコンテキスト・ドキュメントの量を減らし、ネットワークI/OとLLMトークンの処理コスト（お金と時間）の点で効率的なオペレーションを実現するため、追加のレイテンシー・オーバヘッドを追加すべきではありません。</strong></p>
-<p><strong>注意：このステップには2分かかります</strong></p>
+<p>Let’s run through the queries again and recompute the overall quality score to see if there is an improvement.</p>
+<p>✨ <strong>AIMon’s re-ranking should not add additional latency overhead since it actually reduces the amount of context documents that need to be sent to the LLM for generating a response making the operation efficient in terms of network I/O and LLM token processing cost (money and time).</strong></p>
+<p><strong>NOTE: This step will take 2 mins</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
 qual_scores_rr = []
@@ -855,7 +860,7 @@ Avg. Retrieval relevance score across chunks: 41.417109763746396 for query: What
 Avg. Retrieval relevance score across chunks: 43.34866213159572 for query: What did the team decide about the project timeline?
 Time elapsed: 97.93312644958496 seconds
 </code></pre>
-<p>リランカーを使用した場合と使用しなかった場合、そして素朴で力任せのアプローチを使用した場合の、文書関連性スコアの平均値の違いに注目してください。</p>
+<p>Notice the difference in average document relevance scores when using the reranker v/s when not using the reranker v/s using a naive, brute-force approach.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># This is the average quality score.</span>
 avg_quality_score_rr = statistics.mean(qual_scores_rr)
 <span class="hljs-built_in">print</span>(
@@ -876,7 +881,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for AIMon Re-ranking approach: 39.794702307038214
 </code></pre>
-<h2 id="🎉-Again-Quality-Score-improved" class="common-anchor-header">再び、品質スコアが向上しました！<button data-href="#🎉-Again-Quality-Score-improved" class="anchor-icon" translate="no">
+<h2 id="🎉-Again-Quality-Score-improved" class="common-anchor-header">🎉 Again, Quality Score improved!<button data-href="#🎉-Again-Quality-Score-improved" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -891,16 +896,16 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AIMonのリランカーを使用した後、全てのクエリにおける全体的な品質スコアが向上したことに注目してください。</p>
-<p>まとめると、下図に示すように、以下のことが実証されました：</p>
+    </button></h2><p>Notice that the overall quality score across all queries improved after using AIMon’s reranker.</p>
+<p>In sum, as shown in the figure below, we demonstrated the following:</p>
 <ul>
-<li>幻覚スコア、指示遵守スコア、検索関連性スコアの3つの異なる品質メトリクスの重み付けされた組み合わせを使用した品質スコアの計算。</li>
-<li>ブルートフォース（総当たり）文字列マッチング・アプローチを使って、クエリに文書をマッチングさせ、それをLLMに渡すことで、品質ベースラインを確立。</li>
-<li>ベクターDB（ここではmilvusを使用）を使ってベースラインの品質を改善。</li>
-<li>AIMonの低レイテンシーでドメインに適応可能な再ランカーを使い、品質スコアをさらに向上させた。</li>
-<li>また、AIMonのリランカーを追加することで、検索関連性が大幅に向上することも示した。</li>
+<li>Computing a quality score using a weighted combination of 3 different quality metrics: hallucination score, instruction adherence score and retrieval relevance score.</li>
+<li>Established a quality baseline using a brute force string matching approach to match documents to a query and pass that to an LLM.</li>
+<li>Improved the baseline quality using a Vector DB (here, we used Milvus)</li>
+<li>Further improved the quality score using AIMon’s low-latency, domain adaptable re-ranker.</li>
+<li>We also showed how retrieval relevance improves significantly by adding in AIMon’s re-ranker.</li>
 </ul>
-<p><strong>品質スコアを</strong>さらに向上させるために、このノートブックに示したさまざまなコンポーネントを試してみることをお勧めする。1つのアイデアは、上記のinstruction_adherence検出器の<code translate="no">instructions</code> フィールドを使用して、独自の品質定義を追加することです。もう1つのアイデアは、<a href="https://docs.aimon.ai/category/checker-models">AIMonのチェッカーモデルの</a>1つを品質メトリック計算の一部として追加することです。</p>
+<p>We encourage you to experiment with the different components shown in this notebook to further <strong>increase the quality score</strong>. One idea is to add your own definitions of quality using the <code translate="no">instructions</code> field in the instruction_adherence detector above. Another idea is to add another one of <a href="https://docs.aimon.ai/category/checker-models">AIMon’s checker models</a> as part of the quality metric calculation.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df_scores = pd.DataFrame(
@@ -938,17 +943,17 @@ df_scores
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>アプローチ</th>
-      <th>品質スコア</th>
-      <th>検索関連性スコア</th>
-      <th>品質スコアの増加</th>
-      <th>検索関連度スコアの増加(%)</th>
+      <th>Approach</th>
+      <th>Quality Score</th>
+      <th>Retrieval Relevance Score</th>
+      <th>Increase in Quality Score (%)</th>
+      <th>Increase in Retrieval Relevance Score (%)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>ブルートフォース</td>
+      <td>Brute-Force</td>
       <td>51.750446</td>
       <td>14.317723</td>
       <td>0.000000</td>
@@ -956,7 +961,7 @@ df_scores
     </tr>
     <tr>
       <th>1</th>
-      <td>ベクターDB</td>
+      <td>VectorDB</td>
       <td>67.180039</td>
       <td>19.296728</td>
       <td>29.815382</td>
@@ -972,5 +977,5 @@ df_scores
     </tr>
   </tbody>
 </table>
-<p>上記の表は、私たちの結果をまとめたものです。実際の数値は、LLM回答の品質のばらつき、VectorDBの最近傍探索のパフォーマンスなど、様々な要因によって異なります。</p>
-<p>結論として、下図に示すように、LLMアプリケーションの品質スコア、RAG関連性、命令フォロー能力を評価しました。AIMonのリランカーを使用して、アプリケーションの全体的な品質と、お客様のRAGから検索された文書の平均的な関連性を改善しました。</p>
+<p>The above table summarizes our results. Your actual numbers will vary depending on various factors such as variations in quality of LLM responses, performance of the nearest neighbor search in the VectorDB etc.</p>
+<p>In conclusion, as shown by the figure below, we evaluated quality score, RAG relevance and instruction following capabilities of your LLM application. We used AIMon’s re-ranker to improve the overall quality of the application and the average relevance of documents retrieved from your RAG.</p>

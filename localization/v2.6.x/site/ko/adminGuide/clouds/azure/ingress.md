@@ -1,10 +1,10 @@
 ---
 id: ingress.md
-title: Milvus로 인그레스 엔진스 구성하기
+title: Configure ingress nginx with Milvus
 related_key: ingress nginx
-summary: Milvus로 ingress nginx를 구성하는 방법을 알아보세요.
+summary: Learn how to configure ingress nginx with Milvus.
 ---
-<h1 id="Configure-ingress-nginx-with-Milvus" class="common-anchor-header">Milvus로 인그레스 엔진스 구성하기<button data-href="#Configure-ingress-nginx-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Configure-ingress-nginx-with-Milvus" class="common-anchor-header">Configure ingress nginx with Milvus<button data-href="#Configure-ingress-nginx-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,9 @@ summary: Milvus로 ingress nginx를 구성하는 방법을 알아보세요.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 항목에서는 Milvus로 ingress nginx를 구성하는 방법을 소개합니다. 자세한 내용은 <a href="https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli">ingress-nginx를</a> 참조하세요.</p>
-<h2 id="Configure-ingress-nginx" class="common-anchor-header">인그레스 엔진스 구성<button data-href="#Configure-ingress-nginx" class="anchor-icon" translate="no">
+    </button></h1><p>This topic introduces how to configure ingress nginx with Milvus.
+For more details, refer to <a href="https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli">ingress-nginx</a>.</p>
+<h2 id="Configure-ingress-nginx" class="common-anchor-header">Configure ingress nginx<button data-href="#Configure-ingress-nginx" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,13 +37,13 @@ summary: Milvus로 ingress nginx를 구성하는 방법을 알아보세요.
         ></path>
       </svg>
     </button></h2><ul>
-<li>환경 설정</li>
+<li>Set env.</li>
 </ul>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> DNS_LABEL=<span class="hljs-string">&quot;milvustest&quot;</span> <span class="hljs-comment"># Your DNS label must be unique within its Azure location.</span>
 <span class="hljs-built_in">export</span> NAMESPACE=<span class="hljs-string">&quot;ingress-basic&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>인그레스 nginx 설치</li>
+<li>Install ingress nginx</li>
 </ul>
 <pre><code translate="no" class="language-bash">helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
@@ -53,12 +54,12 @@ helm install ingress-nginx ingress-nginx/ingress-nginx \
     --<span class="hljs-built_in">set</span> controller.service.annotations.<span class="hljs-string">&quot;service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path&quot;</span>=/healthz
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>외부 IP 주소를 얻습니다.</li>
+<li>Get External IP address.</li>
 </ul>
 <pre><code translate="no" class="language-bash">kubectl --namespace <span class="hljs-variable">$NAMESPACE</span> get services -o wide -w ingress-nginx-controller
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>인그레스 컨트롤러의 FQDN을 구성합니다.</li>
+<li>Configure an FQDN for your ingress controller.</li>
 </ul>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Public IP address of your ingress controller</span>
 IP=<span class="hljs-string">&quot;MY_EXTERNAL_IP&quot;</span>
@@ -73,7 +74,7 @@ az network public-ip update --ids <span class="hljs-variable">$PUBLICIPID</span>
 az network public-ip show --ids <span class="hljs-variable">$PUBLICIPID</span> --query <span class="hljs-string">&quot;[dnsSettings.fqdn]&quot;</span> --output tsv
 <span class="hljs-comment"># sample output: milvustest.eastus2.cloudapp.azure.com</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Install-cert-manager" class="common-anchor-header">인증서 관리자 설치<button data-href="#Install-cert-manager" class="anchor-icon" translate="no">
+<h2 id="Install-cert-manager" class="common-anchor-header">Install cert-manager<button data-href="#Install-cert-manager" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +95,7 @@ helm install cert-manager jetstack/cert-manager \
     --namespace <span class="hljs-variable">$NAMESPACE</span> \
     --<span class="hljs-built_in">set</span> installCRDs=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-CA-cluster-issuer" class="common-anchor-header">CA 클러스터 발급자 만들기<button data-href="#Create-a-CA-cluster-issuer" class="anchor-icon" translate="no">
+<h2 id="Create-a-CA-cluster-issuer" class="common-anchor-header">Create a CA cluster issuer<button data-href="#Create-a-CA-cluster-issuer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,7 +111,7 @@ helm install cert-manager jetstack/cert-manager \
         ></path>
       </svg>
     </button></h2><ul>
-<li>다음 예제 매니페스트에 따라 클러스터 발급자(예: cluster-issuer.yaml)를 만듭니다. MY_EMAIL_ADDRESS를 조직의 유효한 주소로 바꿉니다.</li>
+<li>Create a cluster issuer, such as cluster-issuer.yaml, using the following example manifest. Replace MY_EMAIL_ADDRESS with a valid address from your organization.</li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cert-manager.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterIssuer</span>
@@ -128,11 +129,11 @@ helm install cert-manager jetstack/cert-manager \
           <span class="hljs-attr">class:</span> <span class="hljs-string">nginx</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>kubectl apply 명령을 사용하여 발급자를 적용한다.</li>
+<li>Apply the issuer using the kubectl apply command.</li>
 </ul>
 <pre><code translate="no" class="language-bash">kubectl apply -f cluster-issuer.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-Milvus" class="common-anchor-header">Milvus 배포<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus" class="common-anchor-header">Deploy Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,8 +148,8 @@ helm install cert-manager jetstack/cert-manager \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>를 참조하고, <code translate="no">service.type</code> 값을 <code translate="no">ClusterIP</code> 으로 변경해야 합니다.</p>
-<h2 id="Create-Milvus-ingress-route" class="common-anchor-header">Milvus 인그레스 경로 생성<button data-href="#Create-Milvus-ingress-route" class="anchor-icon" translate="no">
+    </button></h2><p>refer to <a href="https://milvus.io/docs/azure.md">Azure</a>, notice the config <code translate="no">service.type</code> value, you need change to <code translate="no">ClusterIP</code>.</p>
+<h2 id="Create-Milvus-ingress-route" class="common-anchor-header">Create Milvus ingress route<button data-href="#Create-Milvus-ingress-route" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -165,7 +166,7 @@ helm install cert-manager jetstack/cert-manager \
       </svg>
     </button></h2><pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>ingress.yaml 콘텐츠를 생성합니다:</p>
+<p>the ingress.yaml contents:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -230,6 +231,6 @@ my-release-milvus   nginx   milvustest.eastus2.cloudapp.azure.com   EXTERNAL-IP 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/v2.3.x/example_code.md">Hello Milvus를</a> 참조하여 URL 인수를 변경한 후 코드를 실행하세요.</p>
+    </button></h2><p>Please refer to <a href="https://milvus.io/docs/v2.3.x/example_code.md">Hello Milvus</a>, change uri args, then run the code.</p>
 <pre><code translate="no" class="language-python">connections.connect(<span class="hljs-string">&quot;default&quot;</span>,uri=<span class="hljs-string">&quot;https://milvustest.eastus2.cloudapp.azure.com:443&quot;</span>) 
 <button class="copy-code-btn"></button></code></pre>

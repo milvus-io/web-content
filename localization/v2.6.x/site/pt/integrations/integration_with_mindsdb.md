@@ -1,13 +1,13 @@
 ---
 id: integration_with_mindsdb.md
 summary: >-
-  Este tutorial demonstra como integrar o Milvus com o MindsDB, permitindo-lhe
-  tirar partido das capacidades de IA do MindsDB com a funcionalidade de base de
-  dados vetorial do Milvus através de operações do tipo SQL para gerir e
-  consultar embeddings vectoriais.
-title: Integrar o Milvus com o MindsDB
+  This tutorial demonstrates how to integrate Milvus with MindsDB, enabling you
+  to leverage MindsDB's AI capabilities with Milvus's vector database
+  functionality through SQL-like operations for managing and querying vector
+  embeddings.
+title: Integrate Milvus with MindsDB
 ---
-<h1 id="Integrate-Milvus-with-MindsDB" class="common-anchor-header">Integrar o Milvus com o MindsDB<button data-href="#Integrate-Milvus-with-MindsDB" class="anchor-icon" translate="no">
+<h1 id="Integrate-Milvus-with-MindsDB" class="common-anchor-header">Integrate Milvus with MindsDB<button data-href="#Integrate-Milvus-with-MindsDB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,12 +22,12 @@ title: Integrar o Milvus com o MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">O MindsDB</a> é uma ferramenta poderosa para integrar aplicações de IA com diversas fontes de dados empresariais. Ele atua como um mecanismo de consulta federado que coloca ordem na dispersão de dados, respondendo meticulosamente a consultas em dados estruturados e não estruturados. Quer seus dados estejam espalhados por aplicativos SaaS, bancos de dados ou data warehouses, o MindsDB pode conectar e consultar tudo isso usando SQL padrão. Ele apresenta sistemas RAG autônomos de última geração por meio de bases de conhecimento, suporta centenas de fontes de dados e oferece opções flexíveis de implantação, desde o desenvolvimento local até ambientes de nuvem.</p>
-<p>Este tutorial demonstra como integrar o Milvus com o MindsDB, permitindo-lhe tirar partido das capacidades de IA do MindsDB com a funcionalidade de base de dados de vectores do Milvus através de operações do tipo SQL para gerir e consultar embeddings de vectores.</p>
+    </button></h1><p><a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB</a> is a powerful tool for integrating AI applications with diverse enterprise data sources. It acts as a federated query engine that brings order to data sprawl while meticulously answering queries across both structured and unstructured data. Whether your data is scattered across SaaS applications, databases, or data warehouses, MindsDB can connect and query it all using standard SQL. It features state-of-the-art autonomous RAG systems through Knowledge Bases, supports hundreds of data sources, and provides flexible deployment options from local development to cloud environments.</p>
+<p>This tutorial demonstrates how to integrate Milvus with MindsDB, enabling you to leverage MindsDB’s AI capabilities with Milvus’s vector database functionality through SQL-like operations for managing and querying vector embeddings.</p>
 <div class="alert note">
-<p>Este tutorial refere-se principalmente à documentação oficial do <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">MindsDB Milvus Handler</a>. Se encontrar alguma parte desactualizada neste tutorial, pode dar prioridade ao seguimento da documentação oficial e criar um problema para nós.</p>
+<p>This tutorial mainly refers to the official documentation of the <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">MindsDB Milvus Handler</a>. If you find any outdated parts in this tutorial, you can prioritize following the official documentation and create an issue for us.</p>
 </div>
-<h2 id="Install-MindsDB" class="common-anchor-header">Instalar o MindsDB<button data-href="#Install-MindsDB" class="anchor-icon" translate="no">
+<h2 id="Install-MindsDB" class="common-anchor-header">Install MindsDB<button data-href="#Install-MindsDB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,9 +42,9 @@ title: Integrar o Milvus com o MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de começarmos, instale o MindsDB localmente via <a href="https://docs.mindsdb.com/setup/self-hosted/docker">Docker</a> ou <a href="https://docs.mindsdb.com/setup/self-hosted/docker-desktop">Docker Desktop</a>.</p>
-<p>Antes de prosseguir, certifique-se de ter uma sólida compreensão dos conceitos e operações fundamentais do MindsDB e do Milvus.</p>
-<h2 id="Arguments-Introduction" class="common-anchor-header">Introdução aos argumentos<button data-href="#Arguments-Introduction" class="anchor-icon" translate="no">
+    </button></h2><p>Before we start, install MindsDB locally via <a href="https://docs.mindsdb.com/setup/self-hosted/docker">Docker</a> or <a href="https://docs.mindsdb.com/setup/self-hosted/docker-desktop">Docker Desktop</a>.</p>
+<p>Before proceeding, ensure you have a solid understanding of the fundamental concepts and operations of both MindsDB and Milvus.</p>
+<h2 id="Arguments-Introduction" class="common-anchor-header">Arguments Introduction<button data-href="#Arguments-Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,34 +59,34 @@ title: Integrar o Milvus com o MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os argumentos necessários para estabelecer uma conexão são:</p>
+    </button></h2><p>The required arguments to establish a connection are:</p>
 <ul>
-<li><code translate="no">uri</code>uri para a base de dados milvus, pode ser definido para o ficheiro local ".db" ou para o serviço docker ou cloud</li>
-<li><code translate="no">token</code>token para suportar o serviço docker ou cloud de acordo com a opção uri</li>
+<li><code translate="no">uri</code>: uri for milvus database, can be set to local “.db” file or docker or cloud service</li>
+<li><code translate="no">token</code>: token to support docker or cloud service according to uri option</li>
 </ul>
-<p>Os argumentos opcionais para estabelecer uma ligação são:</p>
-<p>Estes são utilizados para as consultas <code translate="no">SELECT</code>:</p>
+<p>The optional arguments to establish a connection are:</p>
+<p>These are used for <code translate="no">SELECT</code> queries:</p>
 <ul>
-<li><code translate="no">search_default_limit</code>: limite predefinido a ser passado em instruções select (predefinição=100)</li>
-<li><code translate="no">search_metric_type</code>Tipo de métrica utilizado para pesquisas (predefinição="L2")</li>
-<li><code translate="no">search_ignore_growing</code>: se os segmentos crescentes devem ser ignorados durante as pesquisas de similaridade (por defeito=False)</li>
-<li><code translate="no">search_params</code>: específico para <code translate="no">search_metric_type</code> (pré-definição={"nprobe": 10})</li>
+<li><code translate="no">search_default_limit</code>: default limit to be passed in select statements (default=100)</li>
+<li><code translate="no">search_metric_type</code>: metric type used for searches (default="L2")</li>
+<li><code translate="no">search_ignore_growing</code>: whether to ignore growing segments during similarity searches (default=False)</li>
+<li><code translate="no">search_params</code>: specific to the <code translate="no">search_metric_type</code> (default={"nprobe": 10})</li>
 </ul>
-<p>Estas são utilizadas para as consultas <code translate="no">CREATE</code>:</p>
+<p>These are used for <code translate="no">CREATE</code> queries:</p>
 <ul>
-<li><code translate="no">create_auto_id</code>: se é necessário gerar automaticamente o id quando se inserem registos sem ID (pré-definição=False)</li>
-<li><code translate="no">create_id_max_len</code>: comprimento máximo do campo id ao criar uma tabela (predefinição=64)</li>
-<li><code translate="no">create_embedding_dim</code>: dimensão de incorporação para criar uma tabela (predefinição=8)</li>
-<li><code translate="no">create_dynamic_field</code>: se as tabelas criadas têm ou não campos dinâmicos (predefinição=Verdadeiro)</li>
-<li><code translate="no">create_content_max_len</code>: comprimento máximo da coluna de conteúdo (pré-definição=200)</li>
-<li><code translate="no">create_content_default_value</code>: valor por defeito da coluna de conteúdo (por defeito='')</li>
-<li><code translate="no">create_schema_description</code>: descrição dos esquemas criados (por defeito='')</li>
-<li><code translate="no">create_alias</code>alias dos esquemas criados (por defeito='default')</li>
-<li><code translate="no">create_index_params</code>: parâmetros do índice criado na coluna "embeddings" (predefinição={})</li>
-<li><code translate="no">create_index_metric_type</code>: métrica utilizada para criar o índice (predefinição='L2')</li>
-<li><code translate="no">create_index_type</code>o tipo de índice (predefinição='AUTOINDEX')</li>
+<li><code translate="no">create_auto_id</code>: whether to auto generate id when inserting records with no ID (default=False)</li>
+<li><code translate="no">create_id_max_len</code>: maximum length of the id field when creating a table (default=64)</li>
+<li><code translate="no">create_embedding_dim</code>: embedding dimension for creating table (default=8)</li>
+<li><code translate="no">create_dynamic_field</code>: whether or not the created tables have dynamic fields or not (default=True)</li>
+<li><code translate="no">create_content_max_len</code>: max length of the content column (default=200)</li>
+<li><code translate="no">create_content_default_value</code>: default value of content column (default=’’)</li>
+<li><code translate="no">create_schema_description</code>: description of the created schemas (default=’’)</li>
+<li><code translate="no">create_alias</code>: alias of the created schemas (default=’default’)</li>
+<li><code translate="no">create_index_params</code>: parameters of the index created on embeddings column (default={})</li>
+<li><code translate="no">create_index_metric_type</code>: metric used to create the index (default=’L2’)</li>
+<li><code translate="no">create_index_type</code>: the type of index (default=’AUTOINDEX’)</li>
 </ul>
-<h2 id="Usage" class="common-anchor-header">Utilização<button data-href="#Usage" class="anchor-icon" translate="no">
+<h2 id="Usage" class="common-anchor-header">Usage<button data-href="#Usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -101,8 +101,8 @@ title: Integrar o Milvus com o MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de continuar, certifique-se de que a versão <code translate="no">pymilvus</code> é igual a esta <a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">versão fixada</a>. Se encontrar quaisquer problemas com a compatibilidade de versões, pode reverter a sua versão do pymilvus ou personalizá-la neste <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">ficheiro de requisitos</a>.</p>
-<h3 id="Creating-connection" class="common-anchor-header">Criar uma ligação</h3><p>Para utilizar este manipulador e ligar-se a um servidor Milvus no MindsDB, pode ser utilizada a seguinte sintaxe:</p>
+    </button></h2><p>Before continuing, make sure that <code translate="no">pymilvus</code> version is same as this <a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">pinned version</a>. If you find any issues with version compatibility, you can roll back your version of pymilvus, or customize it in this <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">requirement file</a>.</p>
+<h3 id="Creating-connection" class="common-anchor-header">Creating connection</h3><p>In order to make use of this handler and connect to a Milvus server in MindsDB, the following syntax can be used:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> DATABASE milvus_datasource
 <span class="hljs-keyword">WITH</span>
   ENGINE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;milvus&#x27;</span>,
@@ -115,50 +115,50 @@ title: Integrar o Milvus com o MindsDB
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <ul>
-<li>Se apenas necessitar de uma base de dados vetorial local para dados de pequena escala ou prototipagem, definir o uri como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
-<li>Para dados de maior escala e tráfego em produção, pode configurar um servidor Milvus em <a href="https://milvus.io/docs/install-overview.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu <code translate="no">uri</code>, por exemplo,<code translate="no">http://localhost:19530</code>. Se ativar a funcionalidade de autenticação no Milvus, defina o <code translate="no">token</code> como <code translate="no">&quot;&lt;your_username&gt;:&lt;your_password&gt;&quot;</code>, caso contrário não é necessário definir o token.</li>
-<li>Também pode utilizar o Milvus totalmente gerido no <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Basta definir <code translate="no">uri</code> e <code translate="no">token</code> para o <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e a chave API</a> da sua instância Zilliz Cloud.</li>
+<li>If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
+<li>For larger scale data and traffic in production, you can set up a Milvus server on <a href="https://milvus.io/docs/install-overview.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your <code translate="no">uri</code>, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, set the <code translate="no">token</code> as <code translate="no">&quot;&lt;your_username&gt;:&lt;your_password&gt;&quot;</code>, otherwise there is no need to set the token.</li>
+<li>You can also use fully managed Milvus on <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Simply set the <code translate="no">uri</code> and <code translate="no">token</code> to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> of your Zilliz Cloud instance.</li>
 </ul>
 </blockquote>
-<h3 id="Dropping-connection" class="common-anchor-header">Abandonar a ligação</h3><p>Para abandonar a ligação, utilize este comando</p>
+<h3 id="Dropping-connection" class="common-anchor-header">Dropping connection</h3><p>To drop the connection, use this command</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DROP</span> DATABASE milvus_datasource;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Creating-tables" class="common-anchor-header">Criar tabelas</h3><p>Para inserir dados de uma tabela pré-existente, utilize <code translate="no">CREATE</code></p>
+<h3 id="Creating-tables" class="common-anchor-header">Creating tables</h3><p>To insert data from a pre-existing table, use <code translate="no">CREATE</code></p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> milvus_datasource.test
 (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sqlitedb.test);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Dropping-collections" class="common-anchor-header">Eliminar colecções</h3><p>A eliminação de uma coleção não é suportada</p>
-<h3 id="Querying-and-selecting" class="common-anchor-header">Consultar e selecionar</h3><p>Para consultar a base de dados utilizando um vetor de pesquisa, pode utilizar <code translate="no">search_vector</code> na cláusula <code translate="no">WHERE</code> </p>
-<p>Advertências:</p>
+<h3 id="Dropping-collections" class="common-anchor-header">Dropping collections</h3><p>Dropping a collection is not supported</p>
+<h3 id="Querying-and-selecting" class="common-anchor-header">Querying and selecting</h3><p>To query database using a search vector, you can use <code translate="no">search_vector</code> in <code translate="no">WHERE</code> clause</p>
+<p>Caveats:</p>
 <ul>
-<li>Se omitir <code translate="no">LIMIT</code>, a cláusula <code translate="no">search_default_limit</code> é utilizada, uma vez que o Milvus assim o exige</li>
-<li>A coluna de metadados não é suportada, mas se a coleção tiver um esquema dinâmico ativado, pode efetuar a consulta normalmente, ver o exemplo abaixo</li>
-<li>Os campos dinâmicos não podem ser apresentados, mas podem ser consultados</li>
+<li>If you omit <code translate="no">LIMIT</code>, the <code translate="no">search_default_limit</code> is used since Milvus requires it</li>
+<li>Metadata column is not supported, but if the collection has dynamic schema enabled, you can query like normal, see the example below</li>
+<li>Dynamic fields cannot be displayed but can be queried</li>
 </ul>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> milvus_datasource.test
 <span class="hljs-keyword">WHERE</span> search_vector <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;[3.0, 1.0, 2.0, 4.5]&#x27;</span>
 LIMIT <span class="hljs-number">10</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p>Se omitir a cláusula <code translate="no">search_vector</code>, esta torna-se uma pesquisa básica e é devolvida a quantidade de entradas na coleção <code translate="no">LIMIT</code> ou <code translate="no">search_default_limit</code> </p>
+<p>If you omit the <code translate="no">search_vector</code>, this becomes a basic search and <code translate="no">LIMIT</code> or <code translate="no">search_default_limit</code> amount of entries in collection are returned</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> milvus_datasource.test
 <button class="copy-code-btn"></button></code></pre>
-<p>Pode utilizar a cláusula <code translate="no">WHERE</code> nos campos dinâmicos como se fosse uma SQL normal.</p>
+<p>You can use <code translate="no">WHERE</code> clause on dynamic fields like normal SQL</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> milvus_datasource.createtest
 <span class="hljs-keyword">WHERE</span> category <span class="hljs-operator">=</span> &quot;science&quot;;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Deleting-records" class="common-anchor-header">Eliminar registos</h3><p>Pode eliminar registos utilizando <code translate="no">DELETE</code> tal como em SQL.</p>
-<p>Advertências:</p>
+<h3 id="Deleting-records" class="common-anchor-header">Deleting records</h3><p>You can delete entries using <code translate="no">DELETE</code> just like in SQL.</p>
+<p>Caveats:</p>
 <ul>
-<li>O Milvus apenas suporta a eliminação de entidades com chaves primárias claramente especificadas</li>
-<li>Só é possível utilizar o operador <code translate="no">IN</code> </li>
+<li>Milvus only supports deleting entities with clearly specified primary keys</li>
+<li>You can only use <code translate="no">IN</code> operator</li>
 </ul>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> milvus_datasource.test
 <span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">IN</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Inserting-records" class="common-anchor-header">Inserir registos</h3><p>Também pode inserir linhas individuais desta forma:</p>
+<h3 id="Inserting-records" class="common-anchor-header">Inserting records</h3><p>You can also insert individual rows like so:</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> milvus_test.testable (id,content,metadata,embeddings)
 <span class="hljs-keyword">VALUES</span> (&quot;id3&quot;, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Updating" class="common-anchor-header">Atualização</h3><p>A atualização de registos não é suportada pela API do Milvus. Pode tentar utilizar a combinação de <code translate="no">DELETE</code> e <code translate="no">INSERT</code></p>
+<h3 id="Updating" class="common-anchor-header">Updating</h3><p>Updating records is not supported by Milvus API. You can try using combination of <code translate="no">DELETE</code> and <code translate="no">INSERT</code></p>
 <hr>
-<p>Para obter mais detalhes e exemplos, consulte a <a href="https://docs.mindsdb.com/what-is-mindsdb">documentação oficial do MindsDB</a>.</p>
+<p>For more details and examples, please refer to the <a href="https://docs.mindsdb.com/what-is-mindsdb">MindsDB Official Documentation</a>.</p>

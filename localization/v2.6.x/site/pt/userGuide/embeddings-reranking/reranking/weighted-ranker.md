@@ -1,17 +1,16 @@
 ---
 id: weighted-ranker.md
-title: Classificador ponderado
+title: Weighted Ranker
 summary: >-
-  O Weighted Ranker combina e prioriza de forma inteligente os resultados de
-  vários caminhos de pesquisa, atribuindo pesos de importância diferentes a cada
-  um deles. Da mesma forma que um chef habilidoso equilibra vários ingredientes
-  para criar o prato perfeito, o Weighted Ranker equilibra diferentes resultados
-  de pesquisa para fornecer os resultados combinados mais relevantes. Esta
-  abordagem é ideal para pesquisas em vários campos vectoriais ou modalidades em
-  que determinados campos devem contribuir mais significativamente para a
-  classificação final do que outros.
+  Weighted Ranker intelligently combines and prioritizes results from multiple
+  search paths by assigning different importance weights to each. Similar to how
+  a skilled chef balances multiple ingredients to create the perfect dish,
+  Weighted Ranker balances different search results to deliver the most relevant
+  combined outcomes. This approach is ideal when searching across multiple
+  vector fields or modalities where certain fields should contribute more
+  significantly to the final ranking than others.
 ---
-<h1 id="Weighted-Ranker" class="common-anchor-header">Classificador ponderado<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
+<h1 id="Weighted-Ranker" class="common-anchor-header">Weighted Ranker<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,8 +25,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Weighted Ranker combina e prioriza de forma inteligente os resultados de vários caminhos de pesquisa, atribuindo pesos de importância diferentes a cada um deles. Da mesma forma que um chef habilidoso equilibra vários ingredientes para criar o prato perfeito, o Weighted Ranker equilibra diferentes resultados de pesquisa para fornecer os resultados combinados mais relevantes. Esta abordagem é ideal para pesquisas em vários campos vectoriais ou modalidades em que determinados campos devem contribuir mais significativamente para a classificação final do que outros.</p>
-<h2 id="When-to-use-Weighted-Ranker" class="common-anchor-header">Quando utilizar o Weighted Ranker<button data-href="#When-to-use-Weighted-Ranker" class="anchor-icon" translate="no">
+    </button></h1><p>Weighted Ranker intelligently combines and prioritizes results from multiple search paths by assigning different importance weights to each. Similar to how a skilled chef balances multiple ingredients to create the perfect dish, Weighted Ranker balances different search results to deliver the most relevant combined outcomes. This approach is ideal when searching across multiple vector fields or modalities where certain fields should contribute more significantly to the final ranking than others.</p>
+<h2 id="When-to-use-Weighted-Ranker" class="common-anchor-header">When to use Weighted Ranker<button data-href="#When-to-use-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,31 +41,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Weighted Ranker foi especificamente concebido para cenários de pesquisa híbrida em que é necessário combinar resultados de vários caminhos de pesquisa vetorial. É particularmente eficaz para:</p>
+    </button></h2><p>Weighted Ranker is specifically designed for hybrid search scenarios where you need to combine results from multiple vector search paths. It’s particularly effective for:</p>
 <table>
    <tr>
-     <th><p>Caso de uso</p></th>
-     <th><p>Exemplo de uso</p></th>
-     <th><p>Por que o Weighted Ranker funciona bem</p></th>
+     <th><p>Use Case</p></th>
+     <th><p>Example</p></th>
+     <th><p>Why Weighted Ranker Works Well</p></th>
    </tr>
    <tr>
-     <td><p>Pesquisa de comércio eletrónico</p></td>
-     <td><p>Pesquisa de produtos que combina semelhança de imagem e descrição de texto</p></td>
-     <td><p>Permite que os retalhistas dêem prioridade à semelhança visual para artigos de moda, enquanto dão ênfase às descrições de texto para produtos técnicos</p></td>
+     <td><p>E-commerce search</p></td>
+     <td><p>Product search combining image similarity and text description</p></td>
+     <td><p>Allows retailers to prioritize visual similarity for fashion items while emphasizing text descriptions for technical products</p></td>
    </tr>
    <tr>
-     <td><p>Pesquisa de conteúdos multimédia</p></td>
-     <td><p>Recuperação de vídeos utilizando caraterísticas visuais e transcrições de áudio</p></td>
-     <td><p>Equilibra a importância do conteúdo visual em relação ao diálogo falado com base na intenção da consulta</p></td>
+     <td><p>Media content search</p></td>
+     <td><p>Video retrieval using both visual features and audio transcripts</p></td>
+     <td><p>Balances the importance of visual content versus spoken dialogue based on query intent</p></td>
    </tr>
    <tr>
-     <td><p>Recuperação de documentos</p></td>
-     <td><p>Pesquisa de documentos empresariais com múltiplas incorporações para diferentes secções</p></td>
-     <td><p>Dá maior peso às incorporações de título e resumo, sem deixar de considerar as incorporações de texto integral</p></td>
+     <td><p>Document retrieval</p></td>
+     <td><p>Enterprise document search with multiple embeddings for different sections</p></td>
+     <td><p>Gives higher weight to title and abstract embeddings while still considering full-text embeddings</p></td>
    </tr>
 </table>
-<p>Se a sua aplicação de pesquisa híbrida requer a combinação de vários caminhos de pesquisa e o controlo da sua importância relativa, o Weighted Ranker é a escolha ideal.</p>
-<h2 id="Mechanism-of-Weighted-Ranker" class="common-anchor-header">Mecanismo do Weighted Ranker<button data-href="#Mechanism-of-Weighted-Ranker" class="anchor-icon" translate="no">
+<p>If your hybrid search application requires combining multiple search paths while controlling their relative importance, Weighted Ranker is your ideal choice.</p>
+<h2 id="Mechanism-of-Weighted-Ranker" class="common-anchor-header">Mechanism of Weighted Ranker<button data-href="#Mechanism-of-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,18 +80,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O fluxo de trabalho principal da estratégia do WeightedRanker é o seguinte:</p>
+    </button></h2><p>The main workflow of the WeightedRanker strategy is as follows:</p>
 <ol>
-<li><p><strong>Recolher resultados de pesquisa</strong>: Reúne os resultados e as pontuações de cada caminho de pesquisa vetorial (pontuação_1, pontuação_2).</p></li>
-<li><p><strong>Normalização da pontuação</strong>: Cada pesquisa pode usar diferentes métricas de similaridade, resultando em distribuições de pontuação variadas. Por exemplo, o uso do produto interno (IP) como um tipo de similaridade pode resultar em pontuações que variam de [-∞,+∞], enquanto o uso da distância euclidiana (L2) resulta em pontuações que variam de [0,+∞]. Como os intervalos de pontuação de diferentes pesquisas variam e não podem ser diretamente comparados, é necessário normalizar as pontuações de cada caminho de pesquisa. Normalmente, a função <code translate="no">arctan</code> é aplicada para transformar as pontuações num intervalo entre [0, 1] (pontuação_1_normalizada, pontuação_2_normalizada). As pontuações mais próximas de 1 indicam maior similaridade.</p></li>
-<li><p><strong>Atribuir pesos</strong>: Com base na importância atribuída aos diferentes campos vectoriais, são atribuídos pesos<strong>(wi</strong>) às pontuações normalizadas (score_1_normalized, score_2_normalized). Os pesos de cada caminho devem variar entre [0,1]. As pontuações ponderadas resultantes são pontuação_1_ponderada e pontuação_2_ponderada.</p></li>
-<li><p><strong>Mesclar pontuações</strong>: As pontuações ponderadas (score_1_weighted, score_2_weighted) são classificadas da mais alta para a mais baixa para produzir um conjunto final de pontuações (score_final).</p></li>
+<li><p><strong>Collect Search Scores</strong>: Gather the results and scores from each path of vector search (score_1, score_2).</p></li>
+<li><p><strong>Score Normalization</strong>: Each search may use different similarity metrics, resulting in varied score distributions. For instance, using Inner Product (IP) as a similarity type could result in scores ranging from [−∞,+∞], while using Euclidean distance (L2) results in scores ranging from [0,+∞]. Because the score ranges from different searches vary and cannot be directly compared, it is necessary to normalize the scores from each path of search. Typically, <code translate="no">arctan</code> function is applied to transform the scores into a range between [0, 1] (score_1_normalized, score_2_normalized). Scores closer to 1 indicate higher similarity.</p></li>
+<li><p><strong>Assign Weights</strong>: Based on the importance assigned to different vector fields, weights (<strong>wi</strong>) are allocated to the normalized scores (score_1_normalized, score_2_normalized). The weights of each path should range between [0,1]. The resulting weighted scores are score_1_weighted and score_2_weighted.</p></li>
+<li><p><strong>Merge Scores</strong>: The weighted scores (score_1_weighted, score_2_weighted) are ranked from highest to lowest to produce a final set of scores (score_final).</p></li>
 </ol>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/weighted-ranker.png" alt="Weighted Ranker" class="doc-image" id="weighted-ranker" />
-   </span> <span class="img-wrapper"> <span>Classificador ponderado</span> </span></p>
-<h2 id="Example-of-Weighted-Ranker" class="common-anchor-header">Exemplo de classificador ponderado<button data-href="#Example-of-Weighted-Ranker" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/weighted-ranker.png" alt="Weighted Ranker" class="doc-image" id="weighted-ranker" />
+    <span>Weighted Ranker</span>
+  </span>
+</p>
+<h2 id="Example-of-Weighted-Ranker" class="common-anchor-header">Example of Weighted Ranker<button data-href="#Example-of-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,14 +108,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Este exemplo demonstra uma Pesquisa Híbrida multimodal (topK=5) que envolve imagens e texto e ilustra como a estratégia WeightedRanker classifica os resultados de duas pesquisas ANN.</p>
+    </button></h2><p>This example demonstrates a multimodal Hybrid Search (topK=5) involving images and text and illustrates how the WeightedRanker strategy reranks the results from two ANN searches.</p>
 <ul>
-<li>Resultados da pesquisa ANN em imagens （topK=5)：</li>
+<li>Results of ANN search on images （topK=5)：</li>
 </ul>
 <table>
    <tr>
      <th><p><strong>ID</strong></p></th>
-     <th><p><strong>Pontuação (imagem)</strong></p></th>
+     <th><p><strong>Score (image)</strong></p></th>
    </tr>
    <tr>
      <td><p>101</p></td>
@@ -138,12 +139,12 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li>Resultados da pesquisa ANN em textos （topK=5)：</li>
+<li>Results of ANN search on texts （topK=5)：</li>
 </ul>
 <table>
    <tr>
      <th><p><strong>ID</strong></p></th>
-     <th><p><strong>Pontuação (texto)</strong></p></th>
+     <th><p><strong>Score (text)</strong></p></th>
    </tr>
    <tr>
      <td><p>198</p></td>
@@ -167,14 +168,14 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li>Utilize o WeightedRanker para atribuir pesos aos resultados da pesquisa de imagens e de texto. Suponha que o peso para a pesquisa ANN de imagens é 0,6 e o peso para a pesquisa de texto é 0,4.</li>
+<li>Use WeightedRanker assign weights to image and text search results. Suppose the weight for the image ANN search is 0.6 and the weight for the text search is 0.4.</li>
 </ul>
 <table>
    <tr>
      <th><p><strong>ID</strong></p></th>
-     <th><p><strong>Pontuação (imagem)</strong></p></th>
-     <th><p><strong>Pontuação (texto)</strong></p></th>
-     <th><p><strong>Pontuação ponderada</strong></p></th>
+     <th><p><strong>Score (image)</strong></p></th>
+     <th><p><strong>Score (text)</strong></p></th>
+     <th><p><strong>Weighted Score</strong></p></th>
    </tr>
    <tr>
      <td><p>101</p></td>
@@ -208,25 +209,25 @@ summary: >-
    </tr>
    <tr>
      <td><p>110</p></td>
-     <td><p>Não está na imagem</p></td>
+     <td><p>Not in Image</p></td>
      <td><p>0.85</p></td>
      <td><p>0.6×0+0.4×0.85=0.34</p></td>
    </tr>
    <tr>
      <td><p>250</p></td>
-     <td><p>Não está na imagem</p></td>
+     <td><p>Not in Image</p></td>
      <td><p>0.78</p></td>
      <td><p>0.6×0+0.4×0.78=0.312</p></td>
    </tr>
 </table>
 <ul>
-<li>Os resultados finais após o reranking（topK=5)：</li>
+<li>The final results after reranking（topK=5)：</li>
 </ul>
 <table>
    <tr>
-     <th><p><strong>Classificação</strong></p></th>
+     <th><p><strong>Rank</strong></p></th>
      <th><p><strong>ID</strong></p></th>
-     <th><p><strong>Pontuação final</strong></p></th>
+     <th><p><strong>Final Score</strong></p></th>
    </tr>
    <tr>
      <td><p>1</p></td>
@@ -254,7 +255,7 @@ summary: >-
      <td><p>0.51</p></td>
    </tr>
 </table>
-<h2 id="Usage-of-Weighted-Ranker" class="common-anchor-header">Utilização do Weighted Ranker<button data-href="#Usage-of-Weighted-Ranker" class="anchor-icon" translate="no">
+<h2 id="Usage-of-Weighted-Ranker" class="common-anchor-header">Usage of Weighted Ranker<button data-href="#Usage-of-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -269,13 +270,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ao utilizar a estratégia WeightedRanker, é necessário introduzir valores de peso. O número de valores de peso a introduzir deve corresponder ao número de pedidos de pesquisa básica da RNA na Pesquisa Híbrida. Os valores de peso de entrada devem estar no intervalo de [0,1], com valores mais próximos de 1 indicando maior importância.</p>
-<h3 id="Create-a-Weighted-Ranker" class="common-anchor-header">Criar um classificador ponderado</h3><p>Por exemplo, suponha que existam dois pedidos de pesquisa ANN básicos numa Pesquisa Híbrida: pesquisa de texto e pesquisa de imagem. Se a pesquisa de texto for considerada mais importante, deve ser-lhe atribuído um peso maior.</p>
+    </button></h2><p>When using the WeightedRanker strategy, it is necessary to input weight values. The number of weight values to input should correspond to the number of basic ANN search requests in the Hybrid Search. The input weight values should fall in the range of [0,1], with values closer to 1 indicating greater importance.</p>
+<h3 id="Create-a-Weighted-Ranker" class="common-anchor-header">Create a Weighted Ranker</h3><p>For example, suppose there are two basic ANN search requests in a Hybrid Search: text search and image search. If the text search is considered more important, it should be assigned a greater weight.</p>
 <div class="alert note">
-<p>O Milvus 2.6.x e posteriores permitem-lhe configurar estratégias de reranking diretamente através da API <code translate="no">Function</code>. Se estiver a utilizar uma versão anterior (antes da v2.6.0), consulte a documentação <a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">do Reranking</a> para obter instruções de configuração.</p>
+<p>Milvus 2.6.x and later let you configure reranking strategies directly via the <code translate="no">Function</code> API. If you’re using an earlier release (before v2.6.0), refer to the <a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">Reranking</a> documentation for setup instructions.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 rerank = Function(
@@ -299,51 +305,59 @@ rerank = Function(
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parâmetro</p></th>
-     <th><p>Necessário?</p></th>
-     <th><p>Descrição</p></th>
-     <th><p>Valor/Exemplo</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Required?</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value/Example</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Sim</p></td>
-     <td><p>Identificador único para esta função</p></td>
+     <td><p>Yes</p></td>
+     <td><p>Unique identifier for this Function</p></td>
      <td><p><code translate="no">"weight"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Sim</p></td>
-     <td><p>Lista de campos vectoriais aos quais aplicar a função (deve estar vazia para a classificação ponderada)</p></td>
+     <td><p>Yes</p></td>
+     <td><p>List of vector fields to apply the function to (must be empty for Weighted Ranker)</p></td>
      <td><p>[]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Sim</p></td>
-     <td><p>O tipo de função a invocar; utilize <code translate="no">RERANK</code> para especificar uma estratégia de classificação</p></td>
+     <td><p>Yes</p></td>
+     <td><p>The type of Function to invoke; use <code translate="no">RERANK</code> to specify a reranking strategy</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
-     <td><p>Sim</p></td>
-     <td><p>Especifica o método de reordenação a utilizar. Deve ser definido como <code translate="no">weighted</code> para utilizar a classificação ponderada.</p></td>
+     <td><p>Yes</p></td>
+     <td><p>Specifies the reranking method to use.
+ Must be set to <code translate="no">weighted</code> to use Weighted Ranker.</p></td>
      <td><p><code translate="no">"weighted"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.weights</code></p></td>
-     <td><p>Sim</p></td>
-     <td><p>Matriz de pesos correspondentes a cada caminho de pesquisa; valores ∈ [0,1]. Para obter detalhes, consulte <a href="/docs/pt/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Mecanismo de classificação ponderada</a>.</p></td>
+     <td><p>Yes</p></td>
+     <td><p>Array of weights corresponding to each search path; values ∈ [0,1].
+ For details, refer to <a href="/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Mechanism of Weighted Ranker</a>.</p></td>
      <td><p><code translate="no">[0.1, 0.9]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.norm_score</code></p></td>
-     <td><p>Não</p></td>
-     <td><p>Se a pontuação bruta deve ser normalizada (usando arctan) antes da ponderação. Para obter detalhes, consulte <a href="/docs/pt/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Mecanismo do classificador ponderado</a>.</p></td>
+     <td><p>No</p></td>
+     <td><p>Whether to normalize raw scores (using arctan) before weighting.
+ For details, refer to <a href="/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Mechanism of Weighted Ranker</a>.</p></td>
      <td><p><code translate="no">True</code></p></td>
    </tr>
 </table>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida</h3><p>O Weighted Ranker foi concebido especificamente para operações de pesquisa híbrida que combinam vários campos vectoriais. Ao executar a pesquisa híbrida, deve especificar os pesos para cada caminho de pesquisa:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Apply to hybrid search</h3><p>Weighted Ranker is designed specifically for hybrid search operations that combine multiple vector fields. When performing hybrid search, you must specify the weights for each search path:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, AnnSearchRequest
 
 <span class="hljs-comment"># Connect to Milvus server</span>
@@ -385,4 +399,4 @@ hybrid_results = milvus_client.hybrid_search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter mais informações sobre a pesquisa híbrida, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida multivectorial</a>.</p>
+<p>For more information on hybrid search, refer to <a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>

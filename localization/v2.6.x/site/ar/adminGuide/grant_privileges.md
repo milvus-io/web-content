@@ -1,11 +1,11 @@
 ---
 id: grant_privileges.md
-title: منح امتياز أو مجموعة امتيازات للأدوار
+title: Grant Privilege or Privilege Group to Roles
 summary: >-
-  بمجرد إنشاء الدور، يمكنك منح امتيازات للدور. يقدم هذا الدليل كيفية منح
-  امتيازات أو مجموعات امتيازات لدور ما.
+  Once a role is created, you can grant privileges to the role. This guide
+  introduces how to grant privileges or privilege groups to a role.
 ---
-<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">منح امتياز أو مجموعة امتيازات للأدوار<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
+<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">Grant Privilege or Privilege Group to Roles<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>بمجرد إنشاء الدور، يمكنك منح امتيازات للدور. يقدم هذا الدليل كيفية منح امتيازات أو مجموعات امتيازات إلى دور.</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">منح امتياز أو مجموعة امتيازات لدور ما<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
+    </button></h1><p>Once a role is created, you can grant privileges to the role. This guide introduces how to grant privileges or privilege groups to a role.</p>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">Grant a privilege or a privilege group to a role<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,22 +36,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقدم الإصدار Milvus 2.5 إصدارًا جديدًا من واجهة برمجة التطبيقات (API) التي تبسط عملية المنح. لم تعد بحاجة إلى البحث عن نوع الكائن عند منح امتياز إلى دور. فيما يلي المعلمات والتفسيرات المقابلة.</p>
+    </button></h2><p>Milvus 2.5 introduces a new version of API which streamlines the grant operation. You no longer need to look up the object type when granting a privilege to a role. The following are the parameters and corresponding explanations.</p>
 <ul>
-<li><p><strong>اسم الدور:</strong> اسم الدور المستهدف الذي يجب منحه الامتياز (الأدوار) أو مجموعة (مجموعات) الامتيازات.</p></li>
-<li><p><strong>المورد</strong>: المورد المستهدف للامتياز، والذي يمكن أن يكون مثيلًا أو قاعدة بيانات أو مجموعة محددة.</p></li>
+<li><p><strong>role_name:</strong> The name of the target role to which privilege(s) or privilege group(s) need to be granted.</p></li>
+<li><p><strong>Resource</strong>: The target resource of a privilege, which can be a specific instance, database, or collection.</p></li>
 </ul>
-<p>يشرح الجدول التالي كيفية تحديد المورد في الأسلوب <code translate="no">client.grantV2()</code>.</p>
+<p>The following table explains how to specify the resource in the <code translate="no">client.grantV2()</code> method.</p>
 <table>
    <tr>
-     <th><p><strong>المستوى</strong></p></th>
-     <th><p><strong>المورد</strong></p></th>
-     <th><p><strong>طريقة المنح</strong></p></th>
-     <th><p><strong>ملاحظات</strong></p></th>
+     <th><p><strong>Level</strong></p></th>
+     <th><p><strong>Resource</strong></p></th>
+     <th><p><strong>Grant Method</strong></p></th>
+     <th><p><strong>Notes</strong></p></th>
    </tr>
    <tr>
-     <td rowspan="2"><p><strong>المجموعة</strong></p></td>
-     <td><p>مجموعة محددة</p></td>
+     <td rowspan="2"><p><strong>Collection</strong></p></td>
+     <td><p>A specific collection</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -59,10 +59,10 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>أدخل اسم المجموعة المستهدفة واسم قاعدة البيانات التي تنتمي إليها المجموعة المستهدفة.</p></td>
+     <td><p>Input the name of your target collection and the name of the database to which the target collection belongs.</p></td>
    </tr>
    <tr>
-     <td><p>جميع المجموعات ضمن قاعدة بيانات محددة</p></td>
+     <td><p>All collections under a specific database</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -70,11 +70,11 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>أدخل اسم قاعدة البيانات المستهدفة وحرف البدل <code translate="no">*</code> كاسم المجموعة.</p></td>
+     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
    </tr>
    <tr>
-     <td rowspan="2"><p><strong>قاعدة بيانات</strong></p></td>
-     <td><p>قاعدة بيانات محددة</p></td>
+     <td rowspan="2"><p><strong>Database</strong></p></td>
+     <td><p>A specific database</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -82,10 +82,10 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>أدخل اسم قاعدة البيانات المستهدفة وحرف البدل <code translate="no">*</code> كاسم المجموعة.</p></td>
+     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
    </tr>
    <tr>
-     <td><p>جميع قواعد البيانات ضمن المثيل الحالي</p></td>
+     <td><p>All databases under the current instance</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -93,11 +93,11 @@ summary: >-
      db_name="*"
  )
 </code></pre></td>
-     <td><p>أدخل <code translate="no">*</code> كاسم قاعدة البيانات و <code translate="no">*</code> كاسم المجموعة.</p></td>
+     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
    </tr>
    <tr>
-     <td><p><strong>المثيل</strong></p></td>
-     <td><p>المثيل الحالي</p></td>
+     <td><p><strong>Instance</strong></p></td>
+     <td><p>The current instance</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="ClusterAdmin", 
@@ -105,313 +105,318 @@ summary: >-
      db_name="*"
  )
 </code></pre></td>
-     <td><p>أدخل <code translate="no">*</code> كاسم قاعدة البيانات و <code translate="no">*</code> كاسم المجموعة.</p></td>
+     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
    </tr>
 </table>
 <ul>
-<li><p><strong>الامتياز</strong>: الامتياز المحدد أو <a href="/docs/ar/privilege_group.md">مجموعة الامتيازات</a> التي تحتاج إلى منحها للدور. يوفر Milvus حاليًا 56 نوعًا من الامتيازات التي يمكنك منحها. يسرد الجدول أدناه الامتيازات في ملفوس.</p>
+<li><p><strong>Privilege</strong>: The specific privilege or <a href="/docs/privilege_group.md">privilege group</a> that you need to grant to a role. Currently, Milvus provides 56 types of privileges that you can grant. The table below lists the privileges in Milvus.</p>
 <p><div class="alert note"></p>
-<p>عمود النوع في الجدول أدناه مستخدم لتسهيل البحث السريع عن الامتيازات ويستخدم لأغراض التصنيف فقط. عند منح الامتيازات، لا تحتاج إلى فهم الأنواع. تحتاج فقط إلى إدخال الامتيازات المقابلة.</p>
+<p>The type column in the table below are user to facilitate your quick lookup for privileges and is used for classification purposes only. When granting privileges, you do not need to understand the types. You just need to input the corresponding privileges.</p>
 <p></div></p>
 <p><table>
 <tr>
-<th><p><strong>النوع</strong></p></th>
-<th><p><strong>الامتياز</strong></p></th>
-<th><p><strong>الوصف</strong></p></th>
-<th><p><strong>وصف واجهة برمجة التطبيقات ذات الصلة من جانب العميل</strong></p></th>
+<th><p><strong>Type</strong></p></th>
+<th><p><strong>Privilege</strong></p></th>
+<th><p><strong>Description</strong></p></th>
+<th><p><strong>Relevant API description on the client side</strong></p></th>
 </tr>
 <tr>
-<td rowspan="5"><p>امتيازات قاعدة البيانات</p></td>
-<td><p>سرد قواعد البيانات</p></td>
-<td><p>عرض كافة قواعد البيانات في المثيل الحالي</p></td>
-<td><p><a href="/docs/ar/manage_databases.md">سرد قواعد البيانات</a></p></td>
+<td rowspan="5"><p>Database Privileges</p></td>
+<td><p>ListDatabases</p></td>
+<td><p>View all databases in the current instance</p></td>
+<td><p><a href="/docs/manage_databases.md">ListDatabases</a></p></td>
 </tr>
 <tr>
-<td><p>وصف قاعدة البيانات</p></td>
-<td><p>عرض تفاصيل قاعدة البيانات</p></td>
-<td><p><a href="/docs/ar/manage_databases.md">وصف قاعدة البيانات</a></p></td>
+<td><p>DescribeDatabase</p></td>
+<td><p>View the details of a database</p></td>
+<td><p><a href="/docs/manage_databases.md">DescribeDatabase</a></p></td>
 </tr>
 <tr>
-<td><p>إنشاء قاعدة بيانات</p></td>
-<td><p>إنشاء قاعدة بيانات</p></td>
-<td><p><a href="/docs/ar/manage_databases.md">إنشاء قاعدة بيانات</a></p></td>
+<td><p>CreateDatabase</p></td>
+<td><p>Create a database</p></td>
+<td><p><a href="/docs/manage_databases.md">CreateDatabase</a></p></td>
 </tr>
 <tr>
-<td><p>إسقاط قاعدة بيانات</p></td>
-<td><p>إسقاط قاعدة بيانات</p></td>
-<td><p><a href="/docs/ar/manage_databases.md">إسقاط قاعدة بيانات</a></p></td>
+<td><p>DropDatabase</p></td>
+<td><p>Drop a database</p></td>
+<td><p><a href="/docs/manage_databases.md">DropDatabase</a></p></td>
 </tr>
 <tr>
-<td><p>تغيير قاعدة البيانات</p></td>
-<td><p>تعديل خصائص قاعدة البيانات</p></td>
-<td><p><a href="/docs/ar/manage_databases.md">تغيير قاعدة البيانات</a></p></td>
+<td><p>AlterDatabase</p></td>
+<td><p>Modify the properties of a database</p></td>
+<td><p><a href="/docs/manage_databases.md">AlterDatabase</a></p></td>
 </tr>
 <tr>
-<td rowspan="18"><p>امتيازات المجموعة</p></td>
+<td rowspan="18"><p>Collection Privileges</p></td>
 <td><p>GetFlushState</p></td>
-<td><p>التحقق من حالة عملية تدفق المجموعة</p></td>
+<td><p>Check the status of the collection flush operation</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
 </tr>
 <tr>
-<td><p>الحصول على حالة التحميل</p></td>
-<td><p>التحقق من حالة تحميل المجموعة</p></td>
-<td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">الحصول على حالة التحميل</a></p></td>
+<td><p>GetLoadState</p></td>
+<td><p>Check the load status of a collection</p></td>
+<td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadingProgress</p></td>
-<td><p>التحقق من تقدم التحميل لمجموعة ما</p></td>
+<td><p>Check the loading progress of a collection</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
 </tr>
 <tr>
-<td><p>إظهار المجموعات</p></td>
-<td><p>عرض كافة المجموعات مع امتيازات المجموعة</p></td>
-<td><p><a href="/docs/ar/view-collections.md">إظهار المجموعات</a></p></td>
+<td><p>ShowCollections</p></td>
+<td><p>View all collections with collection privileges</p></td>
+<td><p><a href="/docs/view-collections.md">ShowCollections</a></p></td>
 </tr>
 <tr>
-<td><p>سرد الأسماء المستعارة</p></td>
-<td><p>عرض كافة الأسماء المستعارة للمجموعة</p></td>
+<td><p>ListAliases</p></td>
+<td><p>View all aliases of a collection</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">ListAliases</a></p></td>
 </tr>
 <tr>
-<td><p>وصف المجموعة</p></td>
-<td><p>عرض تفاصيل المجموعة</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">وصف المجموعة</a></p></td>
+<td><p>DescribeCollection</p></td>
+<td><p>View the details of a collection</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">DescribeCollection</a></p></td>
 </tr>
 <tr>
-<td><p>وصف الأسماء المستعارة</p></td>
-<td><p>عرض تفاصيل الاسم المستعار</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">وصف الاسم المستعار</a></p></td>
+<td><p>DescribeAlias</p></td>
+<td><p>View the details of an alias</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">DescribeAlias</a></p></td>
 </tr>
 <tr>
-<td><p>الحصول على إحصائيات</p></td>
-<td><p>الحصول على إحصائيات مجموعة (مثل: عدد الكيانات في مجموعة)</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">الحصول على إحصائيات المجموعة</a></p></td>
+<td><p>GetStatistics</p></td>
+<td><p>Obtain the statistics of a collection (eg. The number of entities in a collection)</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
 </tr>
 <tr>
-<td><p>إنشاء مجموعة</p></td>
-<td><p>إنشاء مجموعة</p></td>
-<td><p><a href="/docs/ar/create-collection.md">إنشاء مجموعة</a></p></td>
+<td><p>CreateCollection</p></td>
+<td><p>Create a collection</p></td>
+<td><p><a href="/docs/create-collection.md">CreateCollection</a></p></td>
 </tr>
 <tr>
-<td><p>إسقاط مجموعة</p></td>
-<td><p>إسقاط مجموعة</p></td>
-<td><p><a href="/docs/ar/drop-collection.md">إسقاط مجموعة</a></p></td>
+<td><p>DropCollection</p></td>
+<td><p>Drop a collection</p></td>
+<td><p><a href="/docs/drop-collection.md">DropCollection</a></p></td>
 </tr>
 <tr>
-<td><p>تحميل</p></td>
-<td><p>تحميل مجموعة</p></td>
-<td><p><a href="/docs/ar/load-and-release.md">تحميل مجموعة/تحميل مجموعة/تحميل تقدم التحميل/تحميل</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">حالة</a><a href="/docs/ar/load-and-release.md">التحميل</a></p></td>
+<td><p>Load</p></td>
+<td><p>Load a collection</p></td>
+<td><p><a href="/docs/load-and-release.md">LoadCollection</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a>/<a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
 </tr>
 <tr>
-<td><p>تحرير</p></td>
-<td><p>تحرير مجموعة</p></td>
-<td><p><a href="/docs/ar/load-and-release.md">تحرير مجموعة</a></p></td>
+<td><p>Release</p></td>
+<td><p>Release a collection</p></td>
+<td><p><a href="/docs/load-and-release.md">ReleaseCollection</a></p></td>
 </tr>
 <tr>
-<td><p>مسح</p></td>
-<td><p>نقل جميع الكيانات في مجموعة إلى مقطع مغلق. أي كيان تم إدراجه بعد عملية التدفق سيتم تخزينه في مقطع جديد.</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">مسح/جلب</a><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">حالة</a><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">المسح</a></p></td>
+<td><p>Flush</p></td>
+<td><p>Persist all entities in a collection to a sealed segment. Any entity inserted after the flush operation will be stored in a new segment.</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">Flush</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
 </tr>
 <tr>
-<td><p>الضغط</p></td>
-<td><p>تشغيل الضغط يدويًا</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">ضغط</a></p></td>
+<td><p>Compaction</p></td>
+<td><p>Manually trigger compaction</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">Compact</a></p></td>
 </tr>
 <tr>
-<td><p>إعادة تسمية مجموعة</p></td>
-<td><p>إعادة تسمية مجموعة</p></td>
-<td><p><a href="/docs/ar/modify-collection.md">إعادة تسمية مجموعة</a></p></td>
+<td><p>RenameCollection</p></td>
+<td><p>Rename a collection</p></td>
+<td><p><a href="/docs/modify-collection.md">RenameCollection</a></p></td>
 </tr>
 <tr>
-<td><p>إنشاء اسم مستعار</p></td>
-<td><p>إنشاء اسم مستعار لمجموعة</p></td>
-<td><p><a href="/docs/ar/manage-aliases.md">إنشاء اسم مستعار</a></p></td>
+<td><p>CreateAlias</p></td>
+<td><p>Create an alias for a collection</p></td>
+<td><p><a href="/docs/manage-aliases.md">CreateAlias</a></p></td>
 </tr>
 <tr>
-<td><p>إسقاط اسم مستعار</p></td>
-<td><p>إسقاط الاسم المستعار للمجموعة</p></td>
-<td><p><a href="/docs/ar/manage-aliases.md">إسقاط اسم مستعار</a></p></td>
+<td><p>DropAlias</p></td>
+<td><p>Drop the alias of a collection</p></td>
+<td><p><a href="/docs/manage-aliases.md">DropAlias</a></p></td>
 </tr>
 <tr>
-<td><p>مسح الكل</p></td>
-<td><p>مسح كافة المجموعات في قاعدة البيانات</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">مسح الكل</a></p></td>
+<td><p>FlushAll</p></td>
+<td><p>Flush all collections in a database</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
 </tr>
 <tr>
-<td rowspan="4"><p>امتيازات التقسيم</p></td>
-<td><p>لديه قسم</p></td>
-<td><p>التحقق من وجود قسم من عدمه</p></td>
-<td><p><a href="/docs/ar/manage-partitions.md">لديه قسم</a></p></td>
+<td rowspan="4"><p>Partition Privileges</p></td>
+<td><p>HasPartition</p></td>
+<td><p>Check whether a partition exists</p></td>
+<td><p><a href="/docs/manage-partitions.md">HasPartition</a></p></td>
 </tr>
 <tr>
-<td><p>إظهار الأقسام</p></td>
-<td><p>عرض كافة الأقسام في المجموعة</p></td>
-<td><p><a href="/docs/ar/manage-partitions.md">إظهار الأقسام</a></p></td>
+<td><p>ShowPartitions</p></td>
+<td><p>View all partitions in a collection</p></td>
+<td><p><a href="/docs/manage-partitions.md">ShowPartitions</a></p></td>
 </tr>
 <tr>
-<td><p>إنشاء قسم</p></td>
-<td><p>إنشاء قسم</p></td>
-<td><p><a href="/docs/ar/manage-partitions.md">إنشاء قسم</a></p></td>
+<td><p>CreatePartition</p></td>
+<td><p>Create a partition</p></td>
+<td><p><a href="/docs/manage-partitions.md">CreatePartition</a></p></td>
 </tr>
 <tr>
-<td><p>إسقاط قسم</p></td>
-<td><p>إسقاط قسم</p></td>
-<td><p><a href="/docs/ar/manage-partitions.md">إسقاط قسم</a></p></td>
+<td><p>DropPartition</p></td>
+<td><p>Drop a partition</p></td>
+<td><p><a href="/docs/manage-partitions.md">DropPartition</a></p></td>
 </tr>
 <tr>
-<td rowspan="3"><p>امتيازات الفهرس</p></td>
-<td><p>تفاصيل الفهرس</p></td>
-<td><p>عرض تفاصيل الفهرس</p></td>
-<td><p><a href="/docs/ar/index-vector-fields.md">وصف الفهرس/إحضار الفهرس/إحضار الفهرس/إحضار تقدم إنشاء الفهرس</a></p></td>
+<td rowspan="3"><p>Index Privileges</p></td>
+<td><p>IndexDetail</p></td>
+<td><p>View the details of an index</p></td>
+<td><p><a href="/docs/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
 </tr>
 <tr>
-<td><p>إنشاء فهرس</p></td>
-<td><p>إنشاء فهرس</p></td>
-<td><p><a href="/docs/ar/index-vector-fields.md">إنشاء فهرس</a></p></td>
+<td><p>CreateIndex</p></td>
+<td><p>Create an index</p></td>
+<td><p><a href="/docs/index-vector-fields.md">CreateIndex</a></p></td>
 </tr>
 <tr>
-<td><p>إسقاط فهرس</p></td>
-<td><p>إسقاط فهرس</p></td>
-<td><p><a href="/docs/ar/index-vector-fields.md">إسقاط فهرس</a></p></td>
+<td><p>DropIndex</p></td>
+<td><p>Drop an index</p></td>
+<td><p><a href="/docs/index-vector-fields.md">DropIndex</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>امتيازات إدارة الموارد</p></td>
-<td><p>موازنة التحميل</p></td>
-<td><p>تحقيق توازن التحميل</p></td>
-<td><p><a href="/docs/ar/resource_group.md">LoadBalance</a></p></td>
+<td rowspan="10"><p>Resource Management Privileges</p></td>
+<td><p>LoadBalance</p></td>
+<td><p>Achieve load balance</p></td>
+<td><p><a href="/docs/resource_group.md">LoadBalance</a></p></td>
 </tr>
 <tr>
-<td><p>إنشاء مجموعة موارد</p></td>
-<td><p>إنشاء مجموعة موارد</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">إنشاءResResourceGroup</a></p></td>
+<td><p>CreateResourceGroup</p></td>
+<td><p>Create a resource group</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
 </tr>
 <tr>
-<td><p>إسقاط مجموعة موارد</p></td>
-<td><p>إسقاط مجموعة موارد</p></td>
-<td><p><a href="/docs/ar/resource_group.md">إسقاط مجموعة موارد</a></p></td>
+<td><p>DropResourceGroup</p></td>
+<td><p>Drop a resource group</p></td>
+<td><p><a href="/docs/resource_group.md">DropResourceGroup</a></p></td>
 </tr>
 <tr>
-<td><p>تحديثResourceResourceGroups</p></td>
-<td><p>تحديث مجموعة موارد</p></td>
-<td><p><a href="/docs/ar/resource_group.md">تحديثResResResourceGroups</a></p></td>
+<td><p>UpdateResourceGroups</p></td>
+<td><p>Update a resource group</p></td>
+<td><p><a href="/docs/resource_group.md">UpdateResourceGroups</a></p></td>
 </tr>
 <tr>
-<td><p>وصف مجموعة الموارد</p></td>
-<td><p>عرض تفاصيل مجموعة موارد</p></td>
-<td><p><a href="/docs/ar/resource_group.md">وصف مجموعة الموارد</a></p></td>
+<td><p>DescribeResourceGroup</p></td>
+<td><p>View the details of a resource group</p></td>
+<td><p><a href="/docs/resource_group.md">DescribeResourceGroup</a></p></td>
 </tr>
 <tr>
-<td><p>سرد مجموعات الموارد</p></td>
-<td><p>عرض كافة مجموعات الموارد الخاصة بالمثيل الحالي</p></td>
-<td><p><a href="/docs/ar/resource_group.md">ListResResourceGroups</a></p></td>
+<td><p>ListResourceGroups</p></td>
+<td><p>View all resource groups of the current instance</p></td>
+<td><p><a href="/docs/resource_group.md">ListResourceGroups</a></p></td>
 </tr>
 <tr>
-<td><p>نقل العقدة</p></td>
-<td><p>نقل العقد بين مجموعات الموارد</p></td>
-<td><p><a href="/docs/ar/resource_group.md">نقل العقدة</a></p></td>
+<td><p>TransferNode</p></td>
+<td><p>Transfer nodes between resource groups</p></td>
+<td><p><a href="/docs/resource_group.md">TransferNode</a></p></td>
 </tr>
 <tr>
-<td><p>نقل النسخ المتماثلة</p></td>
-<td><p>نقل النسخ المتماثلة بين مجموعات الموارد</p></td>
-<td><p><a href="/docs/ar/resource_group.md">نقل النسخ المتماثلة</a></p></td>
+<td><p>TransferReplica</p></td>
+<td><p>Transfer replicas between resource groups</p></td>
+<td><p><a href="/docs/resource_group.md">TransferReplica</a></p></td>
 </tr>
 <tr>
-<td><p>النسخ الاحتياطي RBAC</p></td>
-<td><p>إنشاء نسخة احتياطية لجميع العمليات المتعلقة ب RBAC في المثيل الحالي</p></td>
+<td><p>BackupRBAC</p></td>
+<td><p>Create a backup for all RBAC related operations in the current instance</p></td>
 <td><p>BackupRBAC</p></td>
 </tr>
 <tr>
-<td><p>استعادةRBAC</p></td>
-<td><p>استعادة نسخة احتياطية لجميع العمليات المتعلقة بـ RBAC في المثيل الحالي</p></td>
-<td><p>استعادةRBAC</p></td>
+<td><p>RestoreRBAC</p></td>
+<td><p>Restore a backup of all RBAC related operations in the current instance</p></td>
+<td><p>RestoreRBAC</p></td>
 </tr>
 <tr>
-<td rowspan="6"><p>امتيازات الكيان</p></td>
-<td><p>استعلام</p></td>
-<td><p>إجراء استعلام</p></td>
-<td><p><a href="/docs/ar/get-and-scalar-query.md">استعلام</a></p></td>
+<td rowspan="6"><p>Entity Privileges</p></td>
+<td><p>Query</p></td>
+<td><p>Conduct a query</p></td>
+<td><p><a href="/docs/get-and-scalar-query.md">Query</a></p></td>
 </tr>
 <tr>
-<td><p>بحث</p></td>
-<td><p>إجراء بحث</p></td>
-<td><p><a href="/docs/ar/single-vector-search.md">بحث</a></p></td>
+<td><p>Search</p></td>
+<td><p>Conduct a search</p></td>
+<td><p><a href="/docs/single-vector-search.md">Search</a></p></td>
 </tr>
 <tr>
-<td><p>إدراج</p></td>
-<td><p>إدراج كيانات</p></td>
-<td><p><a href="/docs/ar/insert-update-delete.md">إدراج</a></p></td>
+<td><p>Insert</p></td>
+<td><p>Insert entities</p></td>
+<td><p><a href="/docs/insert-update-delete.md">Insert</a></p></td>
 </tr>
 <tr>
-<td><p>حذف</p></td>
-<td><p>حذف كيانات</p></td>
-<td><p><a href="/docs/ar/delete-entities.md">حذف</a></p></td>
+<td><p>Delete</p></td>
+<td><p>Delete entities</p></td>
+<td><p><a href="/docs/delete-entities.md">Delete</a></p></td>
 </tr>
 <tr>
-<td><p>إدراج كيانات</p></td>
-<td><p>إدراج كيانات Upsert</p></td>
-<td><p><a href="/docs/ar/upsert-entities.md">Upsert</a></p></td>
+<td><p>Upsert</p></td>
+<td><p>Upsert entities</p></td>
+<td><p><a href="/docs/upsert-entities.md">Upsert</a></p></td>
 </tr>
 <tr>
-<td><p>استيراد</p></td>
-<td><p>إدراج كيانات أو استيراد كيانات بالجملة</p></td>
-<td><p><a href="/docs/ar/import-data.md">إدراج/استيراد مجمّع</a></p></td>
+<td><p>Import</p></td>
+<td><p>Bulk insert or import entities</p></td>
+<td><p><a href="/docs/import-data.md">BulkInsert/Import</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>امتيازات RBAC</p></td>
-<td><p>إنشاء ملكية</p></td>
-<td><p>إنشاء مستخدم أو دور</p></td>
-<td><p><a href="/docs/ar/users_and_roles.md">إنشاء مستخدم/إنشاء دور</a></p></td>
+<td rowspan="10"><p>RBAC Privileges</p></td>
+<td><p>CreateOwnership</p></td>
+<td><p>Create a user or a role</p></td>
+<td><p><a href="/docs/users_and_roles.md">CreateUser/CreateRole</a></p></td>
 </tr>
 <tr>
-<td><p>تحديث مستخدم</p></td>
-<td><p>تحديث كلمة مرور المستخدم</p></td>
-<td><p><a href="/docs/ar/users_and_roles.md">تحديثCredentialCredential</a></p></td>
+<td><p>UpdateUser</p></td>
+<td><p>Update the password of a user</p></td>
+<td><p><a href="/docs/users_and_roles.md">UpdateCredential</a></p></td>
 </tr>
 <tr>
-<td><p>إسقاط الملكية</p></td>
-<td><p>إسقاط كلمة مرور مستخدم أو دور</p></td>
-<td><p><a href="/docs/ar/drop_users_roles.md">حذفالمعتمد/إسقاط دور</a></p></td>
+<td><p>DropOwnership</p></td>
+<td><p>Drop a user password or a role</p></td>
+<td><p><a href="/docs/drop_users_roles.md">DeleteCredential/DropRole</a></p></td>
 </tr>
 <tr>
-<td><p>تحديدالملكية</p></td>
-<td><p>عرض جميع المستخدمين الذين تم منحهم دوراً محدداً</p></td>
-<td><p><a href="/docs/ar/grant_roles.md">تحديدالدور/اختيارالملكية</a></p></td>
+<td><p>SelectOwnership</p></td>
+<td><p>View all users that are granted a specific role</p></td>
+<td><p><a href="/docs/grant_roles.md">SelectRole/SelectGrant</a></p></td>
 </tr>
 <tr>
-<td><p>إدارةالملكية</p></td>
-<td><p>إدارة مستخدم أو دور أو منح دور لمستخدم ما</p></td>
-<td><p><a href="/docs/ar/privilege_group.md">تشغيلUserUserRole/تشغيل الامتياز/تشغيل الامتياز/تشغيل الامتياز V2</a></p></td>
+<td><p>ManageOwnership</p></td>
+<td><p>Manage a user or a role or grant a role to a user</p></td>
+<td><p><a href="/docs/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
 </tr>
 <tr>
-<td><p>تحديدالمستخدم</p></td>
-<td><p>عرض جميع الأدوار الممنوحة للمستخدم</p></td>
-<td><p><a href="/docs/ar/grant_roles.md">تحديد مستخدم</a></p></td>
+<td><p>SelectUser</p></td>
+<td><p>View all roles granted to a user</p></td>
+<td><p><a href="/docs/grant_roles.md">SelectUser</a></p></td>
 </tr>
 <tr>
-<td><p>إنشاء مجموعة امتيازات</p></td>
-<td><p>إنشاء مجموعة امتيازات</p></td>
-<td><p><a href="/docs/ar/privilege_group.md">إنشاء مجموعة امتيازات</a></p></td>
+<td><p>CreatePrivilegeGroup</p></td>
+<td><p>Create a privilege group</p></td>
+<td><p><a href="/docs/privilege_group.md">CreatePrivilegeGroup</a></p></td>
 </tr>
 <tr>
-<td><p>إسقاط مجموعة امتيازات</p></td>
-<td><p>إسقاط مجموعة امتيازات</p></td>
-<td><p><a href="/docs/ar/privilege_group.md">إسقاط مجموعة امتيازات</a></p></td>
+<td><p>DropPrivilegeGroup</p></td>
+<td><p>Drop a privilege group</p></td>
+<td><p><a href="/docs/privilege_group.md">DropPrivilegeGroup</a></p></td>
 </tr>
 <tr>
-<td><p>سرد مجموعات الامتيازات</p></td>
-<td><p>عرض كافة مجموعات الامتيازات في المثيل الحالي</p></td>
-<td><p><a href="/docs/ar/privilege_group.md">ListPrivilegeGroups</a></p></td>
+<td><p>ListPrivilegeGroups</p></td>
+<td><p>View all privilege groups in the current instance</p></td>
+<td><p><a href="/docs/privilege_group.md">ListPrivilegeGroups</a></p></td>
 </tr>
 <tr>
-<td><p>تشغيل مجموعة امتيازات</p></td>
-<td><p>إضافة امتيازات إلى مجموعة امتيازات أو إزالتها منها</p></td>
-<td><p><a href="/docs/ar/privilege_group.md">تشغيل مجموعة امتيازات</a></p></td>
+<td><p>OperatePrivilegeGroup</p></td>
+<td><p>Add privileges to or remove privileges from a privilege group</p></td>
+<td><p><a href="/docs/privilege_group.md">OperatePrivilegeGroup</a></p></td>
 </tr>
 </table></p></li>
 </ul>
-<p>يوضح المثال التالي كيفية منح الامتياز <code translate="no">PrivilegeSearch</code> على <code translate="no">collection_01</code> ضمن قاعدة البيانات <code translate="no">default</code> بالإضافة إلى مجموعة امتيازات باسم <code translate="no">privilege_group_1</code> للدور <code translate="no">role_a</code>.</p>
+<p>The following example demonstrates how to grant the privilege <code translate="no">PrivilegeSearch</code> on <code translate="no">collection_01</code> under the <code translate="no">default</code> database as well as a privilege group named <code translate="no">privilege_group_1</code> to the role <code translate="no">role_a</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -562,7 +567,7 @@ curl --request POST \
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-a-role" class="common-anchor-header">وصف الدور<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
+<h2 id="Describe-a-role" class="common-anchor-header">Describe a role<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -577,9 +582,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوضح المثال التالي كيفية عرض الامتيازات الممنوحة للدور <code translate="no">role_a</code> باستخدام الطريقة <code translate="no">describe_role</code>.</p>
+    </button></h2><p>The following example demonstrates how to view the privileges granted to the role <code translate="no">role_a</code> using the <code translate="no">describe_role</code> method.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -611,7 +621,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>فيما يلي مثال على الإخراج.</p>
+<p>Below is an example output.</p>
 <pre><code translate="no" class="language-python">{
      <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
      <span class="hljs-string">&quot;privileges&quot;</span>: [
@@ -626,7 +636,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
      ]
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">إبطال امتياز أو مجموعة امتيازات من دور ما<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
+<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">Revoke a privilege or a privilege group from a role<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -641,9 +651,14 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوضح المثال التالي كيفية إبطال الامتياز <code translate="no">PrivilegeSearch</code> على <code translate="no">collection_01</code> ضمن قاعدة البيانات <code translate="no">default</code> بالإضافة إلى مجموعة الامتيازات <code translate="no">privilege_group_1</code> التي تم منحها للدور <code translate="no">role_a</code>.</p>
+    </button></h2><p>The following example demonstrates how to revoke the privilege <code translate="no">PrivilegeSearch</code> on <code translate="no">collection_01</code> under the <code translate="no">default</code> database as well as the privilege group <code translate="no">privilege_group_1</code> that have been granted to the role <code translate="no">role_a</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جو جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
     privilege=<span class="hljs-string">&quot;Search&quot;</span>,

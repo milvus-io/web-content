@@ -2,10 +2,9 @@
 id: woodpecker_architecture.md
 title: Woodpecker
 summary: >-
-  Woodpecker adalah sistem WAL cloud-native di Milvus 2.6. Dengan arsitektur
-  tanpa disk dan dua mode penyebaran, sistem ini memberikan throughput tinggi,
-  overhead operasional yang rendah, dan skalabilitas tanpa batas pada
-  penyimpanan objek.
+  Woodpecker is a cloud-native WAL system in Milvus 2.6. With a zero-disk
+  architecture and two deployment modes, it delivers high throughput, low
+  operational overhead, and seamless scalability on object storage.
 ---
 <h1 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,14 +21,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Di Milvus 2.6, Woodpecker menggantikan Kafka dan Pulsar dengan sistem write-ahead log (WAL) yang dibuat khusus untuk keperluan cloud. Dirancang untuk penyimpanan objek, Woodpecker menyederhanakan operasi, memaksimalkan hasil, dan menskalakan dengan mudah.</p>
-<p>Sasaran desain Woodpecker:</p>
+    </button></h1><p>In Milvus 2.6, Woodpecker replaces Kafka and Pulsar with a purpose-built, cloud-native write-ahead log (WAL) system. Engineered for object storage, Woodpecker simplifies operations, maximizes throughput, and scales effortlessly.</p>
+<p>Woodpecker’s design goals:</p>
 <ul>
-<li><p>Throughput tertinggi di lingkungan cloud</p></li>
-<li><p>Pencatatan yang tahan lama dan hanya menambahkan untuk pemulihan yang andal</p></li>
-<li><p>Biaya operasional yang minimal tanpa disk lokal atau perantara eksternal</p></li>
+<li><p>Highest throughput in cloud environments</p></li>
+<li><p>Durable, append-only logging for reliable recovery</p></li>
+<li><p>Minimal operational overhead with no local disks or external brokers</p></li>
 </ul>
-<h2 id="Zero-disk-architecture" class="common-anchor-header">Arsitektur tanpa disk<button data-href="#Zero-disk-architecture" class="anchor-icon" translate="no">
+<h2 id="Zero-disk-architecture" class="common-anchor-header">Zero-disk architecture<button data-href="#Zero-disk-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,17 +43,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Inovasi inti Woodpecker adalah arsitektur tanpa disk:</p>
+    </button></h2><p>Woodpecker’s core innovation is its zero-disk architecture:</p>
 <ul>
-<li>Semua data log disimpan dalam penyimpanan objek cloud (seperti Amazon S3, Google Cloud Storage, atau Alibaba OS)</li>
-<li>Metadata dikelola melalui penyimpanan nilai kunci terdistribusi seperti <strong>etcd</strong></li>
-<li>Tidak ada ketergantungan disk lokal untuk operasi inti</li>
+<li>All log data stored in cloud object storage (such as Amazon S3, Google Cloud Storage, or Alibaba OS)</li>
+<li>Metadata managed through distributed key-value stores like <strong>etcd</strong></li>
+<li>No local disk dependencies for core operations</li>
 </ul>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_layers.png" alt="woodpecker layers" class="doc-image" id="woodpecker-layers" />
-   </span> <span class="img-wrapper"> <span>lapisan pelatuk</span> </span></p>
-<h2 id="Architecture-components" class="common-anchor-header">Komponen arsitektur<button data-href="#Architecture-components" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/woodpecker_layers.png" alt="woodpecker layers" class="doc-image" id="woodpecker-layers" />
+    <span>woodpecker layers</span>
+  </span>
+</p>
+<h2 id="Architecture-components" class="common-anchor-header">Architecture components<button data-href="#Architecture-components" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,14 +70,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Penerapan Woodpecker standar mencakup komponen-komponen berikut ini:</p>
+    </button></h2><p>A standard Woodpecker deployment includes the following components:</p>
 <ul>
-<li><strong>Klien</strong>: Lapisan antarmuka untuk mengeluarkan permintaan baca dan tulis</li>
-<li><strong>LogStore</strong>: Mengelola buffering tulis berkecepatan tinggi, unggahan asinkron ke penyimpanan, dan pemadatan log</li>
-<li><strong>Backend penyimpanan</strong>: Mendukung layanan penyimpanan yang dapat diskalakan dan berbiaya rendah seperti S3, GCS, dan sistem file seperti EFS</li>
-<li><strong>Dll</strong>: Menyimpan metadata dan mengoordinasikan status log di seluruh node yang terdistribusi</li>
+<li><strong>Client</strong>: Interface layer for issuing read and write requests</li>
+<li><strong>LogStore</strong>: Manages high-speed write buffering, asynchronous uploads to storage, and log compaction</li>
+<li><strong>Storage backend</strong>: Supports scalable, low-cost storage services such as S3, GCS, and file systems like EFS</li>
+<li><strong>Etcd</strong>: Stores metadata and coordinates log state across distributed nodes</li>
 </ul>
-<h2 id="Deployment-modes" class="common-anchor-header">Mode penyebaran<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
+<h2 id="Deployment-modes" class="common-anchor-header">Deployment modes<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,20 +92,24 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker menawarkan dua mode penerapan yang sesuai dengan kebutuhan spesifik Anda:</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Ringan dan bebas perawatan</h3><p>Mode MemoryBuffer menyediakan opsi penerapan yang sederhana dan ringan di mana Woodpecker menyangga sementara penulisan yang masuk ke dalam memori dan secara berkala membuangnya ke layanan penyimpanan objek cloud. Metadata dikelola menggunakan <strong>etcd</strong> untuk memastikan konsistensi dan koordinasi. Mode ini paling cocok untuk beban kerja batch-berat dalam penerapan skala kecil atau lingkungan produksi yang memprioritaskan kesederhanaan di atas kinerja, terutama ketika latensi tulis yang rendah tidak terlalu penting.</p>
+    </button></h2><p>Woodpecker offers two deployment modes to match your specific needs:</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Lightweight and maintenance-free</h3><p>MemoryBuffer mode provides a simple and lightweight deployment option where Woodpecker temporarily buffers incoming writes in memory and periodically flushes them to a cloud object storage service. Metadata is managed using <strong>etcd</strong> to ensure consistency and coordination. This mode is best suited for batch-heavy workloads in smaller-scale deployments or production environments that prioritize simplicity over performance, especially when low write latency is not critical.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
-   </span> <span class="img-wrapper"> <span>penerapan mode memori</span> </span>pelatuk</p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Dioptimalkan untuk latensi rendah, daya tahan tinggi</h3><p>Mode QuorumBuffer dirancang untuk beban kerja baca/tulis frekuensi tinggi yang peka terhadap latensi dan membutuhkan respons waktu nyata serta toleransi kesalahan yang kuat. Dalam mode ini, Woodpecker berfungsi sebagai buffer tulis berkecepatan tinggi dengan penulisan kuorum tiga replika, memastikan konsistensi yang kuat dan ketersediaan yang tinggi.</p>
-<p>Penulisan dianggap berhasil setelah direplikasi ke setidaknya dua dari tiga node, biasanya selesai dalam satu digit milidetik, setelah itu data secara asinkron ke penyimpanan objek cloud untuk daya tahan jangka panjang. Arsitektur ini meminimalkan status on-node, menghilangkan kebutuhan volume disk lokal yang besar, dan menghindari perbaikan anti-entropi yang rumit yang sering kali diperlukan dalam sistem berbasis kuorum tradisional.</p>
-<p>Hasilnya adalah lapisan WAL yang ramping dan kuat yang ideal untuk lingkungan produksi yang sangat penting di mana konsistensi, ketersediaan, dan pemulihan yang cepat sangat penting.</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
+    <span>woodpecker memory mode deployment</span>
+  </span>
+</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Optimized for low-latency, high-durability</h3><p>QuorumBuffer mode is designed for latency-sensitive, high-frequency read/write workloads requiring both real-time responsiveness and strong fault tolerance. In this mode, Woodpecker functions as a high-speed write buffer with three-replica quorum writes, ensuring strong consistency and high availability.</p>
+<p>A write is considered successful once it’s replicated to at least two of the three nodes, typically completing within single-digit milliseconds, after which the data is asynchronously flushed to cloud object storage for long-term durability. This architecture minimizes on-node state, eliminates the need for large local disk volumes, and avoids complex anti-entropy repairs often required in traditional quorum-based systems.</p>
+<p>The result is a streamlined, robust WAL layer ideal for mission-critical production environments where consistency, availability, and fast recovery are essential.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
-   </span> <span class="img-wrapper"> <span>penerapan mode memori woodpecker</span> </span></p>
-<h2 id="Performance-benchmarks" class="common-anchor-header">Tolok ukur kinerja<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
+    <span>woodpecker memory mode deployment</span>
+  </span>
+</p>
+<h2 id="Performance-benchmarks" class="common-anchor-header">Performance benchmarks<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,30 +124,30 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Kami menjalankan tolok ukur yang komprehensif untuk mengevaluasi kinerja Woodpecker dalam pengaturan single-node, single-client, single-log-stream. Hasilnya sangat mengesankan jika dibandingkan dengan Kafka dan Pulsar:</p>
+    </button></h2><p>We ran comprehensive benchmarks to evaluate Woodpecker’s performance in a single-node, single-client, single-log-stream setup. The results were impressive when compared to Kafka and Pulsar:</p>
 <table>
 <thead>
-<tr><th>Sistem</th><th>Kafka</th><th>Pulsar</th><th>WP Minio</th><th>WP Lokal</th><th>WP S3</th></tr>
+<tr><th>System</th><th>Kafka</th><th>Pulsar</th><th>WP Minio</th><th>WP Local</th><th>WP S3</th></tr>
 </thead>
 <tbody>
-<tr><td>Throughput</td><td>129,96MB/s</td><td>107MB/s</td><td>71MB/dtk</td><td>450MB/s</td><td>750MB/s</td></tr>
-<tr><td>latensi</td><td>58ms</td><td>35ms</td><td>184ms</td><td>1,8ms</td><td>166ms</td></tr>
+<tr><td>Throughput</td><td>129.96MB/s</td><td>107MB/s</td><td>71MB/s</td><td>450MB/s</td><td>750MB/s</td></tr>
+<tr><td>latency</td><td>58ms</td><td>35ms</td><td>184ms</td><td>1.8ms</td><td>166ms</td></tr>
 </tbody>
 </table>
-<p>Sebagai konteks, kami mengukur batas throughput teoretis dari berbagai backend penyimpanan yang berbeda pada mesin uji kami:</p>
+<p>For context, we measured the theoretical throughput limits of different storage backends on our test machine:</p>
 <ul>
 <li>MinIO: ~110 MB/s</li>
-<li>Sistem file lokal: 600-750 MB/s</li>
-<li>Amazon S3 (instance EC2 tunggal): hingga 1,1 GB/s</li>
+<li>Local file system: 600–750 MB/s</li>
+<li>Amazon S3 (single EC2 instance): up to 1.1 GB/s</li>
 </ul>
-<p>Hebatnya, Woodpecker secara konsisten mencapai 60-80% dari throughput maksimum yang dimungkinkan untuk setiap backend - tingkat efisiensi yang luar biasa untuk middleware.</p>
-<h3 id="Key-performance-insights" class="common-anchor-header">Wawasan kinerja utama</h3><ul>
-<li>Mode Sistem File Lokal: Woodpecker mencapai 450 MB/s - 3,5 kali lebih cepat daripada Kafka dan 4,2 kali lebih cepat daripada Pulsar - dengan latensi sangat rendah hanya 1,8 ms, sehingga ideal untuk penerapan node tunggal berkinerja tinggi.</li>
-<li>Mode Penyimpanan Cloud (S3): Saat menulis langsung ke S3, Woodpecker mencapai 750 MB/s (sekitar 68% dari batas teoretis S3), 5,8× lebih tinggi daripada Kafka dan 7× lebih tinggi daripada Pulsar. Meskipun latensi lebih tinggi (166 ms), pengaturan ini memberikan throughput yang luar biasa untuk beban kerja yang berorientasi pada batch.</li>
-<li>Mode Penyimpanan Objek (MinIO): Bahkan dengan MinIO, Woodpecker mencapai 71 MB/s-sekitar 65% dari kapasitas MinIO. Performa ini sebanding dengan Kafka dan Pulsar tetapi dengan kebutuhan sumber daya yang jauh lebih rendah.</li>
+<p>Remarkably, Woodpecker consistently achieved 60-80% of the maximum possible throughput for each backend—an exceptional efficiency level for middleware.</p>
+<h3 id="Key-performance-insights" class="common-anchor-header">Key performance insights</h3><ul>
+<li>Local File System Mode: Woodpecker achieved 450 MB/s—3.5× faster than Kafka and 4.2× faster than Pulsar—with ultra-low latency at just 1.8 ms, making it ideal for high-performance single-node deployments.</li>
+<li>Cloud Storage Mode (S3): When writing directly to S3, Woodpecker reached 750 MB/s (about 68% of S3’s theoretical limit), 5.8× higher than Kafka and 7× higher than Pulsar. While latency is higher (166 ms), this setup provides exceptional throughput for batch-oriented workloads.</li>
+<li>Object Storage Mode (MinIO): Even with MinIO, Woodpecker achieved 71 MB/s—around 65% of MinIO’s capacity. This performance is comparable to Kafka and Pulsar but with significantly lower resource requirements.</li>
 </ul>
-<p>Woodpecker secara khusus dioptimalkan untuk penulisan bervolume tinggi secara bersamaan di mana menjaga ketertiban sangatlah penting. Dan hasil ini hanya mencerminkan tahap awal pengembangan-optimasi yang sedang berlangsung dalam penggabungan I/O, buffering cerdas, dan prefetching diharapkan dapat mendorong kinerja lebih dekat lagi ke batas teoretis.</p>
-<h2 id="Operational-benefits" class="common-anchor-header">Manfaat operasional<button data-href="#Operational-benefits" class="anchor-icon" translate="no">
+<p>Woodpecker is particularly optimized for concurrent, high-volume writes where maintaining order is critical. And these results only reflect the early stages of development—ongoing optimizations in I/O merging, intelligent buffering, and prefetching are expected to push performance even closer to theoretical limits.</p>
+<h2 id="Operational-benefits" class="common-anchor-header">Operational benefits<button data-href="#Operational-benefits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -157,17 +162,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Arsitektur cloud-native Woodpecker menyederhanakan penerapan, mengurangi pemeliharaan, dan meningkatkan keandalan.</p>
-<h3 id="Simplified-infrastructure-management" class="common-anchor-header">Manajemen infrastruktur yang disederhanakan</h3><ul>
-<li><strong>Tidak ada manajemen penyimpanan lokal:</strong> Menghilangkan kebutuhan untuk mengelola volume disk, RAID, atau kegagalan disk.</li>
-<li><strong>Mengurangi ketergantungan perangkat keras:</strong> Menghilangkan konfigurasi dan pemantauan perangkat keras; daya tahan dan ketersediaan ditangani oleh penyimpanan objek cloud.</li>
-<li><strong>Perencanaan kapasitas yang disederhanakan:</strong> Skala penyimpanan secara otomatis dengan penyimpanan objek cloud, sehingga tidak perlu lagi melakukan prakiraan secara manual.</li>
+    </button></h2><p>Woodpecker’s cloud-native architecture streamlines deployment, reduces maintenance, and improves reliability.</p>
+<h3 id="Simplified-infrastructure-management" class="common-anchor-header">Simplified infrastructure management</h3><ul>
+<li><strong>No local storage management:</strong> Removes the need to manage disk volumes, RAID, or disk failures.</li>
+<li><strong>Reduced hardware dependency:</strong> Eliminates hardware configuration and monitoring; durability and availability are handled by cloud object storage.</li>
+<li><strong>Simplified capacity planning:</strong> Storage scales automatically with cloud object storage, removing the need for manual forecasting.</li>
 </ul>
-<h3 id="Simplified-deployment" class="common-anchor-header">Penerapan yang disederhanakan</h3><ul>
-<li><strong>Mode MemoryBuffer:</strong> Menggunakan sumber daya minimal dan terintegrasi dengan penyimpanan cloud, ideal untuk pengembangan dan produksi skala kecil.</li>
-<li><strong>Mode QuorumBuffer:</strong> Memberikan keandalan tingkat perusahaan tanpa kerumitan penyimpanan terdistribusi tradisional.</li>
+<h3 id="Simplified-deployment" class="common-anchor-header">Simplified deployment</h3><ul>
+<li><strong>MemoryBuffer mode:</strong> Uses minimal resources and integrates with cloud storage, ideal for development and small-scale production.</li>
+<li><strong>QuorumBuffer mode:</strong> Provides enterprise-grade reliability without the complexity of traditional distributed storage.</li>
 </ul>
-<h2 id="Cost-efficiency-and-resource-optimization" class="common-anchor-header">Efisiensi biaya dan optimalisasi sumber daya<button data-href="#Cost-efficiency-and-resource-optimization" class="anchor-icon" translate="no">
+<h2 id="Cost-efficiency-and-resource-optimization" class="common-anchor-header">Cost efficiency and resource optimization<button data-href="#Cost-efficiency-and-resource-optimization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -183,16 +188,16 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Penggunaan memori yang lebih rendah:</strong> Buffering yang efisien mengurangi kebutuhan memori dibandingkan dengan broker tradisional.</li>
-<li><strong>Penskalaan elastis:</strong> Penyimpanan cloud bayar sesuai penggunaan menghilangkan penyediaan yang berlebihan.</li>
-<li><strong>Mengurangi biaya overhead infrastruktur:</strong> Lebih sedikit komponen berarti biaya penerapan dan pemeliharaan yang lebih rendah.</li>
+<li><strong>Lower memory usage:</strong> Efficient buffering reduces memory requirements compared to traditional brokers.</li>
+<li><strong>Elastic scaling:</strong> Pay-as-you-go cloud storage eliminates over-provisioning.</li>
+<li><strong>Reduced infrastructure overhead:</strong> Fewer components mean lower deployment and maintenance costs.</li>
 </ul>
-<h3 id="Storage-cost-advantages" class="common-anchor-header">Keuntungan biaya penyimpanan</h3><ul>
-<li><strong>Penyimpanan berjenjang:</strong> Secara otomatis memigrasikan data ke tingkat penyimpanan awan yang hemat biaya untuk penyimpanan jangka panjang.</li>
-<li><strong>Kompresi dan deduplikasi:</strong> Fitur bawaan mengurangi biaya penyimpanan tanpa upaya operasional ekstra.</li>
-<li><strong>Tidak ada biaya overhead replikasi:</strong> Daya tahan dikelola oleh penyimpanan cloud, sehingga tidak perlu lagi melakukan manajemen replikasi secara manual.</li>
+<h3 id="Storage-cost-advantages" class="common-anchor-header">Storage cost advantages</h3><ul>
+<li><strong>Tiered storage:</strong> Automatically migrates data to cost-effective cloud storage tiers for long-term retention.</li>
+<li><strong>Compression and deduplication:</strong> Built-in features reduce storage costs without extra operational effort.</li>
+<li><strong>No replication overhead:</strong> Durability is managed by cloud storage, removing the need for manual replica management.</li>
 </ul>
-<h2 id="High-availability-and-disaster-recovery" class="common-anchor-header">Ketersediaan tinggi dan pemulihan bencana<button data-href="#High-availability-and-disaster-recovery" class="anchor-icon" translate="no">
+<h2 id="High-availability-and-disaster-recovery" class="common-anchor-header">High availability and disaster recovery<button data-href="#High-availability-and-disaster-recovery" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -207,17 +212,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Simplified-fault-tolerance" class="common-anchor-header">Toleransi kesalahan yang disederhanakan</h3><ul>
-<li><strong>Daya tahan asli awan:</strong> Memanfaatkan jaminan daya tahan 11-sembilan (99.999999999%) dari penyedia layanan cloud.</li>
-<li><strong>Pemulihan cepat:</strong> Status lokal minimal memungkinkan penggantian node dan pemulihan cluster yang cepat.</li>
-<li><strong>Ketahanan lintas wilayah:</strong> Mendukung replikasi lintas wilayah menggunakan fitur penyimpanan cloud.</li>
+    </button></h2><h3 id="Simplified-fault-tolerance" class="common-anchor-header">Simplified fault tolerance</h3><ul>
+<li><strong>Cloud-native durability:</strong> Leverages cloud providers’ 11-nines (99.999999999%) durability guarantees.</li>
+<li><strong>Fast recovery:</strong> Minimal local state enables rapid node replacement and cluster recovery.</li>
+<li><strong>Cross-region resilience:</strong> Supports cross-region replication using cloud storage features.</li>
 </ul>
-<h3 id="Operational-resilience" class="common-anchor-header">Ketahanan operasional</h3><ul>
-<li><strong>Lebih sedikit titik kegagalan tunggal:</strong> Jumlah komponen yang berkurang menurunkan risiko kegagalan.</li>
-<li><strong>Failover otomatis:</strong> Redundansi penyimpanan awan menyederhanakan proses peralihan.</li>
-<li><strong>Pencadangan yang disederhanakan:</strong> Penyimpanan awan terintegrasi menyediakan pencadangan dan pembuatan versi secara otomatis.</li>
+<h3 id="Operational-resilience" class="common-anchor-header">Operational resilience</h3><ul>
+<li><strong>Fewer single points of failure:</strong> Reduced component count lowers failure risk.</li>
+<li><strong>Automatic failover:</strong> Cloud storage redundancy simplifies failover.</li>
+<li><strong>Simplified backup:</strong> Integrated cloud storage provides automatic backup and versioning.</li>
 </ul>
-<h2 id="Development-and-operational-experience" class="common-anchor-header">Pengalaman pengembangan dan operasional<button data-href="#Development-and-operational-experience" class="anchor-icon" translate="no">
+<h2 id="Development-and-operational-experience" class="common-anchor-header">Development and operational experience<button data-href="#Development-and-operational-experience" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -232,15 +237,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Improved-development-workflow" class="common-anchor-header">Alur kerja pengembangan yang lebih baik</h3><ul>
-<li><strong>Penyiapan lingkungan yang lebih cepat:</strong> Ketergantungan minimal mempercepat pengembangan dan pengujian.</li>
-<li><strong>Arsitektur yang konsisten:</strong> Desain yang seragam di seluruh pengembangan, pementasan, dan produksi.</li>
-<li><strong>Integrasi cloud-native:</strong> Kompatibilitas tanpa hambatan dengan layanan cloud dan orkestrasi kontainer.</li>
+    </button></h2><h3 id="Improved-development-workflow" class="common-anchor-header">Improved development workflow</h3><ul>
+<li><strong>Faster environment setup:</strong> Minimal dependencies speed up development and testing.</li>
+<li><strong>Consistent architecture:</strong> Uniform design across development, staging, and production.</li>
+<li><strong>Cloud-native integration:</strong> Seamless compatibility with cloud services and container orchestration.</li>
 </ul>
-<h3 id="Enhanced-production-operations" class="common-anchor-header">Operasi produksi yang ditingkatkan</h3><ul>
-<li><strong>Performa yang dapat diprediksi:</strong> Hasil yang konsisten di seluruh skala dan konfigurasi penerapan.</li>
-<li><strong>Peningkatan yang disederhanakan:</strong> Desain tanpa status memungkinkan pembaruan bergulir dengan waktu henti yang minimal.</li>
-<li><strong>Prediktabilitas sumber daya:</strong> Penggunaan sumber daya yang lebih stabil dibandingkan dengan perantara pesan tradisional.</li>
+<h3 id="Enhanced-production-operations" class="common-anchor-header">Enhanced production operations</h3><ul>
+<li><strong>Predictable performance:</strong> Consistent results across deployment scales and configurations.</li>
+<li><strong>Simplified upgrades:</strong> Stateless design enables minimal-downtime rolling updates.</li>
+<li><strong>Resource predictability:</strong> More stable resource usage compared to traditional message brokers.</li>
 </ul>
-<p>Untuk basis data vektor yang mendukung RAG yang sangat penting, agen AI, dan beban kerja pencarian dengan latensi rendah, keuntungan operasional ini sangat revolusioner. Transisi dari tumpukan message broker yang kompleks ke arsitektur Woodpecker yang disederhanakan tidak hanya meningkatkan kinerja, tetapi juga secara signifikan mengurangi beban operasional pada tim pengembangan dan infrastruktur.</p>
-<p>Karena infrastruktur cloud terus berkembang dengan inovasi seperti S3 Express One Zone, arsitektur Woodpecker memungkinkan organisasi untuk secara otomatis mendapatkan manfaat dari kemajuan ini tanpa memerlukan perubahan operasional besar atau desain ulang sistem.</p>
+<p>For vector databases supporting mission-critical RAG, AI agents, and low-latency search workloads, these operational advantages are revolutionary. Transitioning from complex message broker stacks to Woodpecker’s simplified architecture not only boosts performance but also significantly reduces the operational burden on development and infrastructure teams.</p>
+<p>As cloud infrastructure continues to evolve with innovations like S3 Express One Zone, Woodpecker’s architecture enables organizations to automatically benefit from these advancements without requiring major operational changes or system redesigns.</p>
