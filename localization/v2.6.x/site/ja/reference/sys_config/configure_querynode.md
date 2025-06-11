@@ -2,9 +2,9 @@
 id: configure_querynode.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure queryNode for Milvus.
+summary: MilvusのqueryNodeの設定方法について説明します。
 ---
-<h1 id="queryNode-related-Configurations" class="common-anchor-header">queryNode-related Configurations<button data-href="#queryNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="queryNode-related-Configurations" class="common-anchor-header">queryNode関連設定<button data-href="#queryNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure queryNode for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of queryNode, used to run hybrid search between vector and scalar data.</p>
+    </button></h1><p>ベクトルデータとスカラーデータのハイブリッド検索を実行するために使用されるqueryNodeの関連コンフィギュレーション。</p>
 <h2 id="queryNodestatspublishInterval" class="common-anchor-header"><code translate="no">queryNode.stats.publishInterval</code><button data-href="#queryNodestatspublishInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,13 +38,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.stats.publishInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval that query node publishes the node statistics information, including segment status, cpu usage, memory usage, health status, etc. Unit: ms.      </td>
+      <td>        クエリ・ノードがセグメント・ステータス、CPU使用率、メモリ使用率、ヘルス・ステータスなどのノード統計情報を公開する間隔。単位：ms      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -67,13 +67,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.knowhereThreadPoolNumRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The number of threads in knowhere's thread pool. If disk is enabled, the pool size will multiply with knowhereThreadPoolNumRatio([1, 32]).      </td>
+      <td>        knowhere のスレッド・プールのスレッド数。ディスクが有効な場合、プール・サイズは knowhereThreadPoolNumRatio([1, 32])と乗算されます。      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -96,13 +96,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.chunkRows">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Row count by which Segcore divides a segment into chunks.      </td>
+      <td>        Segcoreがセグメントをチャンクに分割する行数。      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -125,16 +125,16 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.enableIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to create a temporary index for growing segments and sealed segments not yet indexed, improving search performance.</li>      
-        <li>Milvus will eventually seals and indexes all segments, but enabling this optimizes search performance for immediate queries following data insertion.</li>      
-        <li>This defaults to true, indicating that Milvus creates temporary index for growing segments and the sealed segments that are not indexed upon searches.</li>      </td>
+        <li>成長しているセグメントやまだインデックスが作成されていないセグメントに対して一時的なインデックスを作成し、検索性能を向上させるかどうか。</li>      
+        <li>Milvusは最終的にすべてのセグメントを封印し、インデックスを作成しますが、これを有効にすると、データ挿入直後のクエリの検索パフォーマンスが最適化されます。</li>      
+        <li>デフォルトは true で、Milvus は成長しているセグメントとまだインデックスが作成されていないセグメントに対して一時インデックスを作成します。</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -157,13 +157,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.nlist">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        temp index nlist, recommend to set sqrt(chunkRows), must smaller than chunkRows/8      </td>
+      <td>        一時インデックスnlist、sqrt(chunkRows)を設定することを推奨。      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -186,13 +186,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.nprobe">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        nprobe to search small index, based on your accuracy requirement, must smaller than nlist      </td>
+      <td>        小さなインデックスを検索するためのnprobe。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -215,13 +215,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.memExpansionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        extra memory needed by building interim index      </td>
+      <td>        中間インデックスの構築に必要な余分なメモリ      </td>
       <td>1.15</td>
     </tr>
   </tbody>
@@ -244,13 +244,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.buildParallelRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the ratio of building interim index parallel matched with cpu num      </td>
+      <td>        中間インデックスの並列構築とCPU数の比率      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -273,14 +273,14 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.multipleChunkedEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable multiple chunked search      </td>
-      <td>true</td>
+      <td>        複数のチャンク検索を有効にする      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -302,13 +302,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.knowhereScoreConsistency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable knowhere strong consistency score computation logic      </td>
+      <td>        Knowhere 強い一貫性スコア計算ロジックを有効にする      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -331,13 +331,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.loadMemoryUsageFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The multiply factor of calculating the memory usage while loading segments      </td>
+      <td>        セグメントをロードする際のメモリ使用量を計算する倍率      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -360,13 +360,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.enableDisk">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        enable querynode load disk index, and search on disk index      </td>
+      <td>        querynodeがディスクインデックスをロードし、ディスクインデックスを検索することを有効にする。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -389,13 +389,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.cache.memoryLimit">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        2 GB, 2 * 1024 *1024 *1024      </td>
+      <td>        2 GB、2 * 1024 * 1024 * 1024    </td>
       <td>2147483648</td>
     </tr>
   </tbody>
@@ -418,14 +418,14 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.cache.readAheadPolicy">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The read ahead policy of chunk cache, options: `normal, random, sequential, willneed, dontneed`      </td>
-      <td>willneed</td>
+      <td>        チャンクキャッシュの先読みポリシー：normal、random、sequential、willneed、dontneed`。      </td>
+      <td>ウィルニード</td>
     </tr>
   </tbody>
 </table>
@@ -447,20 +447,20 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.cache.warmup">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>options: async, sync, disable. </li>      
-        <li>Specifies the necessity for warming up the chunk cache. </li>      
-        <li>1. If set to "sync" or "async" the original vector data will be synchronously/asynchronously loaded into the </li>      
-        <li>chunk cache during the load process. This approach has the potential to substantially reduce query/search latency</li>      
-        <li>for a specific duration post-load, albeit accompanied by a concurrent increase in disk usage;</li>      
-        <li>2. If set to "disable" original vector data will only be loaded into the chunk cache during search/query.</li>      </td>
-      <td>disable</td>
+        <li>オプション: async、sync、disable。 </li>      
+        <li>チャンクキャッシュのウォームアップの必要性を指定する。 </li>      
+        <li>1.sync "または "async "に設定された場合、オリジナルのベクトル・データはロード処理中に同期／非同期でチャンク・キャッシュにロードされる。 </li>      
+        <li>チャンクキャッシュに同期／非同期でロードされる。このアプローチは、ロード後の特定の期間、クエリ/検索の待ち時間を大幅に短縮する可能性がある。</li>      
+        <li>を大幅に短縮する可能性がある。ただし、同時にディスク使用量が増加する；</li>      
+        <li>2.disable "に設定すると、オリジナルのベクターデータは検索/クエリ中にのみチャンクキャッシュにロードされます。</li>      </td>
+      <td>無効</td>
     </tr>
   </tbody>
 </table>
@@ -482,13 +482,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.vectorField">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for loading vector data      </td>
+      <td>        ベクターデータをロードするためにmmapを有効にする      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -511,13 +511,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.vectorIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for loading vector index      </td>
+      <td>        ベクトル・インデックスのロードのためにmmapを有効にする      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -540,13 +540,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.scalarField">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for loading scalar data      </td>
+      <td>        スカラーデータをロードするためにmmapを有効にする      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -569,13 +569,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.scalarIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for loading scalar index      </td>
+      <td>        スカラー・インデックスのロードのためにmmapを有効にする      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -598,13 +598,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.chunkCache">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for chunk cache (raw vector retrieving).      </td>
+      <td>        チャンクキャッシュ（生のベクトル検索）のためにmmapを有効にする。      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -627,17 +627,17 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.growingMmapEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Enable memory mapping (mmap) to optimize the handling of growing raw data. </li>      
-        <li>By activating this feature, the memory overhead associated with newly added or modified data will be significantly minimized. </li>      
-        <li>However, this optimization may come at the cost of a slight decrease in query latency for the affected data segments.</li>      </td>
-      <td>false</td>
+        <li>メモリ・マッピング(mmap)を有効にして、増大する生データの処理を最適化する。 </li>      
+        <li>この機能を有効にすると、新しく追加されたり変更されたりしたデータに関連するメモリ・オーバーヘッドが大幅に削減されます。 </li>      
+        <li>しかし、この最適化は、影響を受けるデータ・セグメントに対するクエリ・レイテンシをわずかに減少させるという代償を伴うかもしれません。</li>      </td>
+      <td>偽</td>
     </tr>
   </tbody>
 </table>
@@ -659,13 +659,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.fixedFileSizeForMmapAlloc">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        tmp file size for mmap chunk manager      </td>
+      <td>        mmapチャンク・マネージャのtmpファイル・サイズ      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -688,13 +688,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.maxDiskUsagePercentageForMmapAlloc">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        disk percentage used in mmap chunk manager      </td>
+      <td>        mmap チャンクマネージャーで使用されるディスクのパーセンテージ      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -717,13 +717,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable lazyload for loading data      </td>
+      <td>        データのロードに遅延ロードを有効にする      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -746,13 +746,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.waitTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max wait timeout duration in milliseconds before start to do lazyload search and retrieve      </td>
+      <td>        遅延ロードの検索と取得を開始するまでの最大待機タイムアウト時間(ミリ秒)      </td>
       <td>30000</td>
     </tr>
   </tbody>
@@ -775,13 +775,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.requestResourceTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max timeout in milliseconds for waiting request resource for lazy load, 5s by default      </td>
+      <td>        遅延ロードのためのリクエストリソースの待ち時間の最大タイムアウト(ミリ秒単位)。      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -804,13 +804,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.requestResourceRetryInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry interval in milliseconds for waiting request resource for lazy load, 2s by default      </td>
+      <td>        遅延ロードのリクエストリソース待ちの再試行間隔 (ミリ秒単位) デフォルト値 2s  </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -833,13 +833,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.maxRetryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max retry times for lazy load, 1 by default      </td>
+      <td>        遅延ロードの最大再試行回数、デフォルトは 1 </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -862,13 +862,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.maxEvictPerRetry">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max evict count for lazy load, 1 by default      </td>
+      <td>        遅延ロードの最大evict回数、デフォルトは1      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -891,13 +891,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.indexOffsetCacheEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        enable index offset cache for some scalar indexes, now is just for bitmap index, enable this param can improve performance for retrieving raw data from index      </td>
+      <td>        このパラメータを有効にすると、インデックスから生のデータを取得する際のパフォーマンスが向上します。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -920,17 +920,17 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.maxReadConcurrentRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxReadConcurrentRatio is the concurrency ratio of read task (search task and query task).</li>      
-        <li>Max read concurrency would be the value of hardware.GetCPUNum * maxReadConcurrentRatio.</li>      
-        <li>It defaults to 2.0, which means max read concurrency would be the value of hardware.GetCPUNum * 2.</li>      
-        <li>Max read concurrency must greater than or equal to 1, and less than or equal to hardware.GetCPUNum * 100.</li>      
+        <li>maxReadConcurrentRatioは読み込みタスク(検索タスクとクエリタスク)の同時実行率です。</li>      
+        <li>最大読み取り同時実行率は、hardware.GetCPUNum * maxReadConcurrentRatioの値になります。</li>      
+        <li>デフォルトは2.0であり、これは最大読み取り同時実行率がhardware.GetCPUNum * 2の値になることを意味する。</li>      
+        <li>最大読み取り同時実行数は 1 以上、hardware.GetCPUNum * 100 以下でなければなりません。</li>      
         <li>(0, 100]</li>      </td>
       <td>1</td>
     </tr>
@@ -954,13 +954,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.cpuRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ratio used to estimate read task cpu usage.      </td>
+      <td>        読み取りタスクの CPU 使用率の見積もりに使用される比率。      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -983,21 +983,21 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.name">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>fifo: A FIFO queue support the schedule.</li>      
-        <li>user-task-polling:</li>      
-        <li>    The user's tasks will be polled one by one and scheduled.</li>      
-        <li>    Scheduling is fair on task granularity.</li>      
-        <li>    The policy is based on the username for authentication.</li>      
-        <li>    And an empty username is considered the same user.</li>      
-        <li>    When there are no multi-users, the policy decay into FIFO"</li>      </td>
-      <td>fifo</td>
+        <li>fifo：スケジュールをサポートする FIFO キュー。</li>      
+        <li>user-task-polling：</li>      
+        <li>    ユーザーのタスクは1つずつポーリングされ、スケジューリングされる。</li>      
+        <li>    スケジューリングはタスクの粒度で公平に行われる。</li>      
+        <li>    ポリシーは、認証のためのユーザー名に基づいている。</li>      
+        <li>    また、空のユーザー名は同一ユーザーとみなされる。</li>      
+        <li>    マルチユーザーが存在しない場合、ポリシーはFIFOに減衰する。</li>      </td>
+      <td>フィフォ</td>
     </tr>
   </tbody>
 </table>
@@ -1019,13 +1019,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.taskQueueExpire">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Control how long (many seconds) that queue retains since queue is empty      </td>
+      <td>        キューが空になってから、キューが保持する時間 (何秒) を制御します。      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -1048,13 +1048,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.enableCrossUserGrouping">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable Cross user grouping when using user-task-polling policy. (Disable it if user's task can not merge each other)      </td>
+      <td>        user-task-pollingポリシー使用時に、cross user groupingを有効にする。(ユーザのタスクが互いにマージできない場合は無効にする)      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1077,13 +1077,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.maxPendingTaskPerUser">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Max pending task per user in scheduler      </td>
+      <td>        スケジューラでのユーザごとの保留タスクの最大数      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -1106,13 +1106,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.levelZeroForwardPolicy">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        delegator level zero deletion forward policy, possible option["FilterByBF", "RemoteLoad"]      </td>
+      <td>        デリゲータ・レベル・ゼロ削除フォワード・ポリシー、可能なオプション["FilterByBF", "RemoteLoad"] デリゲータ・レベル・ゼロ削除フォワード・ポリシー。      </td>
       <td>FilterByBF</td>
     </tr>
   </tbody>
@@ -1135,13 +1135,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.streamingDeltaForwardPolicy">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        delegator streaming deletion forward policy, possible option["FilterByBF", "Direct"]      </td>
+      <td>        デリゲータのストリーミング削除フォワードポリシー、可能なオプション["FilterByBF", "Direct"]。      </td>
       <td>FilterByBF</td>
     </tr>
   </tbody>
@@ -1164,13 +1164,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.dataSync.flowGraph.maxQueueLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of task queue cache in flow graph in query node.      </td>
+      <td>        クエリノードのフローグラフのタスクキューキャッシュの最大サイズ。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -1193,13 +1193,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.dataSync.flowGraph.maxParallelism">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of tasks executed in parallel in the flowgraph      </td>
+      <td>        フローグラフ内で並列実行されるタスクの最大数      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -1222,13 +1222,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.enableSegmentPrune">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        use partition stats to prune data in search/query on shard delegator      </td>
+      <td>        シャードデリゲータの検索/クエリでデータをプルーンするためにパーティション統計を使用する      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1251,13 +1251,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.queryStreamBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        return min batch size of stream query      </td>
+      <td>        ストリームクエリの最小バッチサイズを返す      </td>
       <td>4194304</td>
     </tr>
   </tbody>
@@ -1280,13 +1280,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.queryStreamMaxBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        return max batch size of stream query      </td>
+      <td>        ストリームクエリの最大バッチサイズを返す      </td>
       <td>134217728</td>
     </tr>
   </tbody>
@@ -1309,13 +1309,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.bloomFilterApplyParallelFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        parallel factor when to apply pk to bloom filter, default to 4*CPU_CORE_NUM      </td>
+      <td>        ブルームフィルタに pk を適用する際の並列係数、デフォルトは 4*CPU_CORE_NUM      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -1338,13 +1338,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.workerPooling.size">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the size for worker querynode client pool      </td>
+      <td>        ワーカークエリノードのクライアントプールのサイズ      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1367,13 +1367,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of queryNode. If not specified, use the first unicastable address      </td>
+      <td>        queryNodeのTCP/IPアドレス。指定されていない場合は、最初のユニキャスト可能なアドレスを使用します。      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1396,13 +1396,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of queryNode      </td>
+      <td>        queryNodeのTCPポート      </td>
       <td>21123</td>
     </tr>
   </tbody>
@@ -1425,13 +1425,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryNode can send, unit: byte      </td>
+      <td>        queryNodeが送信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1454,13 +1454,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryNode can receive, unit: byte      </td>
+      <td>        queryNodeが受信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1483,13 +1483,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryNode can send, unit: byte      </td>
+      <td>        queryNode上のクライアントが送信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1512,13 +1512,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryNode can receive, unit: byte      </td>
+      <td>        queryNode上のクライアントが受信できる各RPCリクエストの最大サイズ、単位：バイト      </td>
       <td>536870912</td>
     </tr>
   </tbody>

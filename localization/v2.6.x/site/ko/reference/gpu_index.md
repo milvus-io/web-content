@@ -1,10 +1,10 @@
 ---
 id: gpu_index.md
 related_key: gpu_index
-summary: GPU index mechanism in Milvus.
-title: GPU Index
+summary: Milvus의 GPU 인덱스 메커니즘.
+title: GPU 인덱스
 ---
-<h1 id="GPU-Index" class="common-anchor-header">GPU Index<button data-href="#GPU-Index" class="anchor-icon" translate="no">
+<h1 id="GPU-Index" class="common-anchor-header">GPU 인덱스<button data-href="#GPU-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,15 +19,13 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports various GPU index types to accelerate search performance and efficiency, especially in high-throughput, and high-recall scenarios. This topic provides an overview of the GPU index types supported by Milvus, their suitable use cases, and performance characteristics. For information on building indexes with GPU, refer to <a href="/docs/index-with-gpu.md">Index with GPU</a>.</p>
-<p>It’s important to note that using a GPU index may not necessarily reduce latency compared to using a CPU index. If you want to fully maximize throughput, you will need extremely high request pressure or a large number of query vectors.</p>
+    </button></h1><p>Milvus는 특히 처리량이 많고 호출 횟수가 많은 시나리오에서 검색 성능과 효율성을 가속화하기 위해 다양한 GPU 인덱스 유형을 지원합니다. 이 항목에서는 Milvus에서 지원하는 GPU 인덱스 유형, 적합한 사용 사례 및 성능 특성에 대한 개요를 제공합니다. GPU를 사용한 인덱스 구축에 대한 자세한 내용은 <a href="/docs/ko/index-with-gpu.md">GPU를 사용한 인덱스를</a> 참조하세요.</p>
+<p>GPU 인덱스를 사용한다고 해서 CPU 인덱스를 사용하는 것보다 지연 시간이 반드시 단축되는 것은 아니라는 점에 유의하세요. 처리량을 완전히 최대화하려면 요청 압력이 매우 높거나 쿼리 벡터의 수가 많아야 합니다.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
-    <span>performance</span>
-  </span>
-</p>
-<p>Milvus’ GPU support is contributed by Nvidia <a href="https://rapids.ai/">RAPIDS</a> team. The following are the GPU index types currently supported by Milvus.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   </span> <span class="img-wrapper"> <span>성능</span> </span></p>
+<p>Milvus의 GPU 지원은 Nvidia <a href="https://rapids.ai/">RAPIDS</a> 팀에 의해 제공되고 있습니다. 현재 Milvus에서 지원하는 GPU 인덱스 유형은 다음과 같습니다.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,46 +41,46 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs to run the Milvus GPU version can be more cost-effective compared to using expensive training-grade GPUs.</p>
+    </button></h2><p>GPU_CAGRA는 GPU에 최적화된 그래프 기반 인덱스로, 추론용 GPU를 사용하여 Milvus GPU 버전을 실행하면 고가의 훈련용 GPU를 사용하는 것보다 비용 효율이 높을 수 있습니다.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>인덱스 구축 매개변수</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>파라미터</th><th>설명</th><th>기본값</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">intermediate_graph_degree</code></td><td>Affects recall and build time by determining the graph’s degree before pruning. Recommended values are <code translate="no">32</code> or <code translate="no">64</code>.</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">graph_degree</code></td><td>Affects search performance and recall by setting the graph’s degree after pruning. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
-<tr><td><code translate="no">build_algo</code></td><td>Selects the graph generation algorithm before pruning. Possible values:</br><code translate="no">IVF_PQ</code>: Offers higher quality but slower build time.</br> <code translate="no">NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</td><td><code translate="no">IVF_PQ</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decides whether to cache the original dataset in GPU memory. Possible values:</br><code translate="no">“true”</code>: Caches the original dataset to enhance recall by refining search results.</br> <code translate="no">“false”</code>: Does not cache the original dataset to save gpu memory.</td><td><code translate="no">“false”</code></td></tr>
-<tr><td><code translate="no">adapt_for_cpu</code></td><td>Decides whether to use GPU for index-building and CPU for search. <br/>Setting this parameter to <code translate="no">true</code> requires the presence of the <code translate="no">ef</code> parameter in the search requests.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">intermediate_graph_degree</code></td><td>가지치기 전 그래프의 정도를 결정하여 리콜 및 구축 시간에 영향을 줍니다. 권장 값은 <code translate="no">32</code> 또는 <code translate="no">64</code> 입니다.</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">graph_degree</code></td><td>가지치기 후 그래프의 차수를 설정하여 검색 성능과 리콜에 영향을 줍니다. 이 두 도의 차이가 클수록 빌드 시간이 길어집니다. 이 값은 <strong>intermediate_graph_degree의</strong> 값보다 작아야 합니다.</td><td><code translate="no">64</code></td></tr>
+<tr><td><code translate="no">build_algo</code></td><td>가지치기 전 그래프 생성 알고리즘을 선택합니다. 가능한 값</br><code translate="no">IVF_PQ</code>: 더 높은 품질을 제공하지만 빌드 시간이 느립니다.</br> <code translate="no">NN_DESCENT</code> 더 빠른 빌드를 제공하지만 잠재적으로 더 낮은 리콜을 제공합니다.</td><td><code translate="no">IVF_PQ</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>원본 데이터 세트를 GPU 메모리에 캐시할지 여부를 결정합니다. 가능한 값</br><code translate="no">“true”</code>: 원본 데이터 세트를 캐시하여 검색 결과를 구체화하여 리콜을 향상시킵니다.</br> <code translate="no">“false”</code> GPU 메모리를 절약하기 위해 원본 데이터셋을 캐시하지 않습니다.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">adapt_for_cpu</code></td><td>인덱스 구축에 GPU를 사용할지, 검색에 CPU를 사용할지 결정합니다. <br/>이 파라미터를 <code translate="no">true</code> 로 설정하려면 검색 요청에 <code translate="no">ef</code> 파라미터가 있어야 합니다.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>검색 매개변수</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>파라미터</th><th>설명</th><th>기본값</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">itopk_size</code></td><td>Determines the size of intermediate results kept during the search. A larger value may improve recall at the expense of search performance. It should be at least equal to the final top-k (limit) value and is typically a power of 2 (e.g., 16, 32, 64, 128).</td><td>Empty</td></tr>
-<tr><td><code translate="no">search_width</code></td><td>Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance（e.g. 1, 2, 4, 8, 16, 32).</td><td>Empty</td></tr>
-<tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>Controls the search iteration process. By default, they are set to <code translate="no">0</code>, and CAGRA automatically determines the number of iterations based on <code translate="no">itopk_size</code> and <code translate="no">search_width</code>. Adjusting these values manually can help balance performance and accuracy.</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">team_size</code></td><td>Specifies the number of CUDA threads used for calculating metric distance on the GPU. Common values are a power of 2 up to 32 (e.g. 2, 4, 8, 16, 32). It has a minor impact on search performance. The default value is <code translate="no">0</code>, where Milvus automatically selects the <code translate="no">team_size</code> based on the vector dimension.</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">ef</code></td><td>Specifies the query time/accuracy trade-off. A higher <code translate="no">ef</code> value leads to more accurate but slower search. <br/>This parameter is mandatory if you set <code translate="no">adapt_for_cpu</code> to <code translate="no">true</code> when you build the index.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
+<tr><td><code translate="no">itopk_size</code></td><td>검색 중에 보관되는 중간 결과의 크기를 결정합니다. 값이 클수록 검색 성능이 저하되는 대신 검색 회수율이 향상될 수 있습니다. 이 값은 최소한 최종 상위 k(한계) 값과 같아야 하며 일반적으로 2의 거듭제곱(예: 16, 32, 64, 128)입니다.</td><td>Empty</td></tr>
+<tr><td><code translate="no">search_width</code></td><td>검색 중에 CAGRA 그래프에 포함할 진입점 수를 지정합니다. 이 값을 늘리면 기억력이 향상될 수 있지만 검색 성능에 영향을 줄 수 있습니다(예: 1, 2, 4, 8, 16, 32).</td><td>Empty</td></tr>
+<tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>검색 반복 프로세스를 제어합니다. 기본적으로 <code translate="no">0</code> 로 설정되어 있으며, CAGRA는 <code translate="no">itopk_size</code> 및 <code translate="no">search_width</code> 에 따라 반복 횟수를 자동으로 결정합니다. 이 값을 수동으로 조정하면 성능과 정확도의 균형을 맞추는 데 도움이 될 수 있습니다.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">team_size</code></td><td>GPU에서 메트릭 거리를 계산하는 데 사용되는 CUDA 스레드 수를 지정합니다. 일반적인 값은 2의 거듭제곱에서 최대 32입니다(예: 2, 4, 8, 16, 32). 검색 성능에 약간의 영향을 미칩니다. 기본값은 <code translate="no">0</code> 이며, Milvus는 벡터 차원에 따라 <code translate="no">team_size</code> 을 자동으로 선택합니다.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>쿼리 시간/정확도 절충을 지정합니다. <code translate="no">ef</code> 값이 클수록 검색 정확도는 높아지지만 검색 속도는 느려집니다. <br/>인덱스 구축 시 <code translate="no">adapt_for_cpu</code> 을 <code translate="no">true</code> 으로 설정한 경우 이 파라미터는 필수입니다.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 <ul>
-<li><p>Limits on search</p>
+<li><p>검색 제한</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Range</th></tr>
+<tr><th>파라미터</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><= 1024</td></tr>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (상위-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -102,42 +100,42 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Similar to <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, GPU_IVF_FLAT also divides vector data into <code translate="no">nlist</code> cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (<code translate="no">nprobe</code>), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.</p>
-<p>By adjusting <code translate="no">nprobe</code>, an ideal balance between accuracy and speed can be found for a given scenario. Results from the <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT performance test</a> demonstrate that query time increases sharply as both the number of target input vectors (<code translate="no">nq</code>), and the number of clusters to search (<code translate="no">nprobe</code>), increase.</p>
-<p>GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.</p>
-<p>When conducting searches, note that you can set the top-K up to 256 for any search against a GPU_IVF_FLAT-indexed collection.</p>
+    </button></h2><p><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT과</a> 마찬가지로 GPU_IVF_FLAT도 벡터 데이터를 <code translate="no">nlist</code> 클러스터 단위로 나눈 다음 대상 입력 벡터와 각 클러스터의 중심 사이의 거리를 비교합니다. 시스템이 쿼리하도록 설정된 클러스터 수에 따라(<code translate="no">nprobe</code>), 유사도 검색 결과는 대상 입력과 가장 유사한 클러스터의 벡터 간의 비교만을 기반으로 반환되므로 쿼리 시간이 크게 단축됩니다.</p>
+<p><code translate="no">nprobe</code> 을 조정하면 주어진 시나리오에서 정확도와 속도 사이의 이상적인 균형을 찾을 수 있습니다. <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 성능 테스트의</a> 결과는 대상 입력 벡터의 수(<code translate="no">nq</code>)와 검색할 클러스터의 수(<code translate="no">nprobe</code>)가 모두 증가함에 따라 쿼리 시간이 급격히 증가한다는 것을 보여줍니다.</p>
+<p>GPU_IVF_FLAT은 가장 기본적인 IVF 인덱스이며, 각 유닛에 저장된 인코딩된 데이터는 원본 데이터와 일치합니다.</p>
+<p>검색을 수행할 때, GPU_IVF_FLAT 인덱싱된 컬렉션에 대한 모든 검색에 대해 최대 256까지 top-K를 설정할 수 있다는 점에 유의하세요.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>인덱스 구축 매개변수</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>파라미터</th><th>설명</th><th>범위</th><th>기본값</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decides whether to cache the original dataset in GPU memory. Possible values:</br><code translate="no">“true”</code>: Caches the original dataset to enhance recall by refining search results.</br> <code translate="no">“false”</code>: Does not cache the original dataset to save gpu memory.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;flase&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
+<tr><td><code translate="no">nlist</code></td><td>클러스터 단위 수</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>원본 데이터 세트를 GPU 메모리에 캐시할지 여부를 결정합니다. 가능한 값은 다음과 같습니다:</br><code translate="no">“true”</code>: 원본 데이터 세트를 캐시하여 검색 결과를 세분화하여 리콜을 향상시킵니다.</br> <code translate="no">“false”</code> GPU 메모리를 절약하기 위해 원본 데이터 세트를 캐시하지 않습니다.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;flase&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>검색 매개변수</p>
 <ul>
-<li><p>Common search</p>
+<li><p>일반 검색</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>파라미터</th><th>설명</th><th>범위</th><th>기본값</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>쿼리할 단위 수</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
-<li><p>Limits on search</p>
+<li><p>검색 제한</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Range</th></tr>
+<tr><th>파라미터</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (상위-K)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -157,46 +155,46 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">PQ</code> (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of <code translate="no">m</code> low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.</p>
-<p>IVF_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.</p>
+    </button></h2><p><code translate="no">PQ</code> (곱 양자화)는 원래의 고차원 벡터 공간을 <code translate="no">m</code> 저차원 벡터 공간의 데카르트 곱으로 균일하게 분해한 다음 분해된 저차원 벡터 공간을 정량화합니다. 곱 양자화는 목표 벡터와 모든 단위의 중심 사이의 거리를 계산하는 대신 목표 벡터와 각 저차원 공간의 클러스터링 중심 사이의 거리를 계산할 수 있어 알고리즘의 시간 복잡도와 공간 복잡도를 크게 줄여줍니다.</p>
+<p>IVF_PQ는 벡터의 곱을 정량화하기 전에 IVF 인덱스 클러스터링을 수행합니다. 이 인덱스 파일은 IVF_SQ8보다 훨씬 작지만 벡터를 검색하는 동안 정확도가 떨어집니다.</p>
 <div class="alert note">
-<p>Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.</p>
-<p>When conducting searches, note that you can set the top-K up to 8192 for any search against a GPU_IVF_FLAT-indexed collection.</p>
+<p>인덱스 구축 파라미터와 검색 파라미터는 Milvus 분포에 따라 다릅니다. 먼저 Milvus 배포를 선택하세요.</p>
+<p>검색을 수행할 때, GPU_IVF_FLAT 인덱싱된 컬렉션에 대한 모든 검색에 대해 상위-K를 최대 8192까지 설정할 수 있다는 점에 유의하세요.</p>
 </div>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>인덱스 구축 매개변수</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>파라미터</th><th>설명</th><th>범위</th><th>기본값</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">m</code></td><td>Number of factors of product quantization,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Optional] Number of bits in which each low-dimensional vector is stored.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decides whether to cache the original dataset in GPU memory. Possible values:</br><code translate="no">“true”</code>: Caches the original dataset to enhance recall by refining search results.</br> <code translate="no">“false”</code>: Does not cache the original dataset to save gpu memory.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
+<tr><td><code translate="no">nlist</code></td><td>클러스터 단위 수</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">m</code></td><td>제품 양자화 요소의 수입니다,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[선택 사항] 각 저차원 벡터가 저장되는 비트 수입니다.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>원본 데이터 세트를 GPU 메모리에 캐시할지 여부를 결정합니다. 가능한 값</br><code translate="no">“true”</code>: 원본 데이터 세트를 캐시하여 검색 결과를 세분화하여 리콜을 향상시킵니다.</br> <code translate="no">“false”</code> GPU 메모리를 절약하기 위해 원본 데이터 세트를 캐시하지 않습니다.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>검색 매개변수</p>
 <ul>
-<li><p>Common search</p>
+<li><p>일반 검색</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>파라미터</th><th>설명</th><th>범위</th><th>기본값</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>쿼리할 단위 수</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
-<li><p>Limits on search</p>
+<li><p>검색 제한</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Range</th></tr>
+<tr><th>파라미터</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (상위-K)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -216,9 +214,9 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GPU_BRUTE_FORCE is tailored for cases where extremely high recall is crucial, guaranteeing a recall of 1 by comparing each query with all vectors in the dataset. It only requires the metric type (<code translate="no">metric_type</code>) and top-k (<code translate="no">limit</code>) as index building and search parameters.</p>
-<p>For GPU_BRUTE_FORCE, no addition index building parameters or search parameters are required.</p>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+    </button></h2><p>GPU_BRUTE_FORCE는 각 쿼리를 데이터 세트의 모든 벡터와 비교하여 1의 재현율을 보장함으로써 매우 높은 재현율이 중요한 경우에 맞게 조정됩니다. 인덱스 구축 및 검색 파라미터로 메트릭 유형(<code translate="no">metric_type</code>)과 top-k(<code translate="no">limit</code>)만 필요합니다.</p>
+<p>GPU_BRUTE_FORCE의 경우, 추가 인덱스 구축 파라미터나 검색 파라미터가 필요하지 않습니다.</p>
+<h2 id="Conclusion" class="common-anchor-header">결론<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -233,9 +231,9 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Currently, Milvus loads all indexes into GPU memory for efficient search operations. The amount of data that can be loaded depends on the size of the GPU memory:</p>
+    </button></h2><p>현재 Milvus는 효율적인 검색 작업을 위해 모든 인덱스를 GPU 메모리에 로드합니다. 로드할 수 있는 데이터의 양은 GPU 메모리의 크기에 따라 달라집니다:</p>
 <ul>
-<li><strong>GPU_CAGRA</strong>: Memory usage is approximately 1.8 times that of the original vector data.</li>
-<li><strong>GPU_IVF_FLAT</strong> and <strong>GPU_BRUTE_FORCE</strong>: Requires memory equal to the size of the original data.</li>
-<li><strong>GPU_IVF_PQ</strong>: Utilizes a smaller memory footprint, which depends on the compression parameter settings.</li>
+<li><strong>GPU_CAGRA</strong>: 메모리 사용량은 원본 벡터 데이터의 약 1.8배입니다.</li>
+<li><strong>GPU_IVF_FLAT</strong> 및 <strong>GPU_BRUTE_FORCE</strong>: 원본 데이터 크기와 동일한 메모리가 필요합니다.</li>
+<li><strong>GPU_IVF_PQ</strong>: 압축 파라미터 설정에 따라 더 작은 메모리 공간을 사용합니다.</li>
 </ul>

@@ -1,12 +1,11 @@
 ---
 id: integrate_with_hugging-face.md
 summary: >-
-  This tutorial shows how to build a question answering system using Hugging
-  Face as the data loader & embedding generator for data processing and Milvus
-  as the vector database for semantic search.
-title: Question Answering Using Milvus and Hugging Face
+  이 튜토리얼에서는 데이터 처리를 위한 데이터 로더 및 임베딩 생성기로 Hugging Face를, 의미 검색을 위한 벡터 데이터베이스로
+  Milvus를 사용하여 질문 답변 시스템을 구축하는 방법을 설명합니다.
+title: 밀버스와 허깅 페이스를 사용한 질문 답변하기
 ---
-<h1 id="Question-Answering-Using-Milvus-and-Hugging-Face" class="common-anchor-header">Question Answering Using Milvus and Hugging Face<button data-href="#Question-Answering-Using-Milvus-and-Hugging-Face" class="anchor-icon" translate="no">
+<h1 id="Question-Answering-Using-Milvus-and-Hugging-Face" class="common-anchor-header">밀버스와 허깅 페이스를 사용한 질문 답변하기<button data-href="#Question-Answering-Using-Milvus-and-Hugging-Face" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +22,9 @@ title: Question Answering Using Milvus and Hugging Face
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>A question answering system based on semantic search works by finding the most similar question from a dataset of question-answer pairs for a given query question. Once the most similar question is identified, the corresponding answer from the dataset is considered as the answer for the query. This approach relies on semantic similarity measures to determine the similarity between questions and retrieve relevant answers.</p>
-<p>This tutorial shows how to build a question answering system using <a href="https://huggingface.co">Hugging Face</a> as the data loader & embedding generator for data processing and <a href="https://milvus.io">Milvus</a> as the vector database for semantic search.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<p>시맨틱 검색을 기반으로 하는 질문 답변 시스템은 주어진 쿼리 질문에 대한 질문-답변 쌍의 데이터 세트에서 가장 유사한 질문을 찾는 방식으로 작동합니다. 가장 유사한 질문이 식별되면 데이터 세트의 해당 답변이 쿼리에 대한 답변으로 간주됩니다. 이 접근 방식은 의미론적 유사성 측정값을 사용하여 질문 간의 유사성을 결정하고 관련 답변을 검색합니다.</p>
+<p>이 튜토리얼에서는 데이터 처리를 위한 데이터 로더 및 임베딩 생성기로 <a href="https://huggingface.co">Hugging Face를</a>, 시맨틱 검색을 위한 벡터 데이터베이스로 <a href="https://milvus.io">Milvus를</a> 사용하여 질문 답변 시스템을 구축하는 방법을 보여드립니다.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,18 +39,18 @@ title: Question Answering Using Milvus and Hugging Face
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You need to make sure all required dependencies are installed:</p>
+    </button></h2><p>필요한 모든 종속성이 설치되어 있는지 확인해야 합니다:</p>
 <ul>
-<li><code translate="no">pymilvus</code>: a python package works with the vector database service powered by Milvus or Zilliz Cloud.</li>
-<li><code translate="no">datasets</code>, <code translate="no">transformers</code>: Hugging Face packages manage data and utilize models.</li>
-<li><code translate="no">torch</code>: a powerful library provides efficient tensor computation and deep learning tools.</li>
+<li><code translate="no">pymilvus</code>파이썬 패키지는 Milvus 또는 Zilliz Cloud에서 제공하는 벡터 데이터베이스 서비스와 함께 작동합니다.</li>
+<li><code translate="no">datasets</code>, <code translate="no">transformers</code>: Hugging Face 패키지는 데이터를 관리하고 모델을 활용합니다.</li>
+<li><code translate="no">torch</code>강력한 라이브러리는 효율적인 텐서 연산과 딥 러닝 도구를 제공합니다.</li>
 </ul>
 <pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colab을 사용하는 경우 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다. (화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택하세요.)</p>
 </div>
-<h2 id="Prepare-data" class="common-anchor-header">Prepare data<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+<h2 id="Prepare-data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,7 +65,7 @@ title: Question Answering Using Milvus and Hugging Face
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we will load example question-answer pairs from the Hugging Face Datasets. As a demo, we only take partial data from the validation split of <a href="https://huggingface.co/datasets/rajpurkar/squad">SQuAD</a>.</p>
+    </button></h2><p>이 섹션에서는 포옹하는 얼굴 데이터 세트에서 예시 질문-답변 쌍을 로드하겠습니다. 데모에서는 <a href="https://huggingface.co/datasets/rajpurkar/squad">SQuAD의</a> 유효성 검사 분할에서 일부 데이터만 가져옵니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 
 
@@ -90,7 +89,7 @@ data = data.<span class="hljs-built_in">map</span>(
     num_rows: 11
 })
 </code></pre>
-<p>To generate embeddings for questions, you are able to select a text embedding model from Hugging Face Models. In this tutorial, we will use a small sentencce embedding model <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a> as example.</p>
+<p>질문에 대한 임베딩을 생성하려면 포옹하는 얼굴 모델에서 텍스트 임베딩 모델을 선택할 수 있습니다. 이 튜토리얼에서는 작은 문장 임베딩 모델인 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2를</a> 예로 사용합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> transformers <span class="hljs-keyword">import</span> AutoTokenizer, AutoModel
 <span class="hljs-keyword">import</span> torch
 
@@ -134,7 +133,7 @@ model = AutoModel.from_pretrained(MODEL)
 data = data.<span class="hljs-built_in">map</span>(encode_text, batched=<span class="hljs-literal">True</span>, batch_size=INFERENCE_BATCH_SIZE)
 data_list = data.to_list()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">데이터 삽입하기<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,8 +148,8 @@ data_list = data.to_list()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we have question-answer pairs ready with question embeddings. The next step is to insert them into the vector database.</p>
-<p>We will first need to connect to Milvus service and create a Milvus collection.</p>
+    </button></h2><p>이제 질문 임베딩으로 질문-답변 쌍이 준비되었습니다. 다음 단계는 이를 벡터 데이터베이스에 삽입하는 것입니다.</p>
+<p>먼저 Milvus 서비스에 연결하여 Milvus 컬렉션을 생성해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 
@@ -171,21 +170,21 @@ milvus_client.create_collection(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p><code translate="no">MilvusClient</code> 의 인수는 다음과 같습니다:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li><code translate="no">uri</code> 를 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하여 모든 데이터를 이 파일에 저장하기 때문입니다.</li>
+<li>데이터 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 고성능의 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 <code translate="no">uri</code> 으로 사용하세요.</li>
+<li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정하세요.</li>
 </ul>
 </div>
-<p>Insert all data into the collection:</p>
+<p>모든 데이터를 수집에 삽입합니다:</p>
 <pre><code translate="no" class="language-python">milvus_client.insert(collection_name=COLLECTION_NAME, data=data_list)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'insert_count': 11,
  'ids': [450072488481390592, 450072488481390593, 450072488481390594, 450072488481390595, 450072488481390596, 450072488481390597, 450072488481390598, 450072488481390599, 450072488481390600, 450072488481390601, 450072488481390602],
  'cost': 0}
 </code></pre>
-<h2 id="Ask-questions" class="common-anchor-header">Ask questions<button data-href="#Ask-questions" class="anchor-icon" translate="no">
+<h2 id="Ask-questions" class="common-anchor-header">질문하기<button data-href="#Ask-questions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -200,7 +199,7 @@ milvus_client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once all the data is inserted into Milvus, we can ask questions and see what the closest answers are.</p>
+    </button></h2><p>모든 데이터가 Milvus에 삽입되면 질문을 하고 가장 가까운 답을 확인할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">questions = {
     <span class="hljs-string">&quot;question&quot;</span>: [
         <span class="hljs-string">&quot;What is LGM?&quot;</span>,

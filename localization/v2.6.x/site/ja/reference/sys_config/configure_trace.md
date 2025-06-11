@@ -2,9 +2,9 @@
 id: configure_trace.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure trace for Milvus.
+summary: Milvusのトレース設定方法について説明します。
 ---
-<h1 id="trace-related-Configurations" class="common-anchor-header">trace-related Configurations<button data-href="#trace-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="trace-related-Configurations" class="common-anchor-header">トレース関連設定<button data-href="#trace-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +37,15 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.exporter">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>trace exporter type, default is stdout,</li>      
-        <li>optional values: ['noop','stdout', 'jaeger', 'otlp']</li>      </td>
+        <li>トレースエクスポータータイプ、デフォルトは stdout、</li>      
+        <li>オプション値：オプション値: ['noop', 'stdout', 'jaeger', 'otlp'].</li>      </td>
       <td>noop</td>
     </tr>
   </tbody>
@@ -68,16 +68,16 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.sampleFraction">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>fraction of traceID based sampler,</li>      
-        <li>optional values: [0, 1]</li>      
-        <li>Fractions >= 1 will always sample. Fractions < 0 are treated as zero.</li>      </td>
+        <li>traceIDベースのサンプラーのfraction、</li>      
+        <li>オプションの値：[0, 1]</li>      
+        <li>分数 &gt;= 1 は常にサンプリングされる。分数 &lt; 0 はゼロとして扱われる。</li>      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -100,13 +100,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.jaeger.url">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        when exporter is jaeger should set the jaeger's URL      </td>
+      <td>        エクスポータがjaegerの場合、jaegerのURLを設定する。      </td>
       <td></td>
     </tr>
   </tbody>
@@ -129,13 +129,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.otlp.endpoint">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        example: "127.0.0.1:4317" for grpc, "127.0.0.1:4318" for http      </td>
+      <td>        例grpcの場合 "127.0.0.1:4317"、httpの場合 "127.0.0.1:4318"      </td>
       <td></td>
     </tr>
   </tbody>
@@ -158,13 +158,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.otlp.method">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        otlp export method, acceptable values: ["grpc", "http"],  using "grpc" by default      </td>
+      <td>        otlpのエクスポート方法：[デフォルトでは "grpc "を使う。      </td>
       <td></td>
     </tr>
   </tbody>
@@ -187,13 +187,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.initTimeoutSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segcore initialization timeout in seconds, preventing otlp grpc hangs forever      </td>
+      <td>        otlpのgrpcが永遠にハングするのを防ぐための、segcore初期化タイムアウト（秒）。      </td>
       <td>10</td>
     </tr>
   </tbody>

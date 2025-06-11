@@ -1,16 +1,11 @@
 ---
 id: build_RAG_with_milvus_and_feast.md
 summary: >-
-  In this tutorial, we will build a Retrieval-Augmented Generation (RAG)
-  pipeline using Feast and Milvus. Feast is an open-source feature store that
-  streamlines feature management for machine learning, enabling efficient
-  storage and retrieval of structured data for both training and real-time
-  inference. Milvus is a high-performance vector database designed for fast
-  similarity search, making it ideal for retrieving relevant documents in RAG
-  workflows.
-title: Build RAG with Milvus and Feast
+  このチュートリアルでは、FeastとMilvusを使ってRAG（Retrieval-Augmented
+  Generation）パイプラインを構築する。Feastは、機械学習のための特徴管理を合理化するオープンソースの特徴ストアであり、学習とリアルタイムの推論の両方で構造化データの効率的な保存と検索を可能にします。Milvusは、高速な類似検索用に設計された高性能ベクトルデータベースであり、RAGワークフローにおける関連文書の検索に最適です。
+title: MilvusとFeastを使ってRAGを構築する
 ---
-<h1 id="Build-RAG-with-Milvus-and-Feast" class="common-anchor-header">Build RAG with Milvus and Feast<button data-href="#Build-RAG-with-Milvus-and-Feast" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Feast" class="common-anchor-header">MilvusとFeastを使ってRAGを構築する<button data-href="#Build-RAG-with-Milvus-and-Feast" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -31,9 +26,9 @@ title: Build RAG with Milvus and Feast
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_feast.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>In this tutorial, we will build a Retrieval-Augmented Generation (RAG) pipeline using <a href="https://github.com/feast-dev/feast">Feast</a> and <a href="https://milvus.io/">Milvus</a>. Feast is an open-source feature store that streamlines feature management for machine learning, enabling efficient storage and retrieval of structured data for both training and real-time inference. Milvus is a high-performance vector database designed for fast similarity search, making it ideal for retrieving relevant documents in RAG workflows.</p>
-<p>Essentially, we’ll use Feast to inject documents and structured data (i.e., features) into the context of an LLM (Large Language Model) to power a RAG Application (Retrieval Augmented Generation) with Milvus as the online vector database.</p>
-<h1 id="Why-Feast" class="common-anchor-header">Why Feast?<button data-href="#Why-Feast" class="anchor-icon" translate="no">
+<p>このチュートリアルでは、<a href="https://github.com/feast-dev/feast">Feastと</a> <a href="https://milvus.io/">Milvusを使って</a>RAG（Retrieval-Augmented Generation）パイプラインを構築します。Feastは、機械学習のための特徴管理を合理化するオープンソースの特徴ストアであり、学習とリアルタイムの推論の両方で構造化データの効率的な保存と検索を可能にします。Milvusは、高速な類似検索のために設計された高性能ベクトルデータベースであり、RAGワークフローにおける関連文書の検索に最適である。</p>
+<p>基本的には、Milvusをオンラインベクターデータベースとして使用するRAGアプリケーション（Retrieval Augmented Generation）をパワーアップするために、LLM（大規模言語モデル）のコンテキストにドキュメントと構造化データ（すなわち特徴）を注入するためにFeastを使用します。</p>
+<h1 id="Why-Feast" class="common-anchor-header">なぜFeastなのか？<button data-href="#Why-Feast" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -48,35 +43,28 @@ title: Build RAG with Milvus and Feast
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Feast solves several common issues in this flow:</p>
+    </button></h1><p>Feastはこのフローに共通するいくつかの問題を解決します：</p>
 <ol>
-<li><strong>Online retrieval:</strong> At inference time, LLMs often need access to data that isn’t readily
-available and needs to be precomputed from other data sources.
-<ul>
-<li>Feast manages deployment to a variety of online stores (e.g. Milvus, DynamoDB, Redis, Google Cloud Datastore) and
-ensures necessary features are consistently <em>available</em> and <em>freshly computed</em> at inference time.</li>
+<li><strong>オンライン検索：</strong>推論時、LLMは多くの場合、すぐに利用できないデータにアクセスする必要があり、他のデータソースから事前に計算する必要があります。<ul>
+<li>Feastは、様々なオンラインストア（Milvus、DynamoDB、Redis、Google Cloud Datastoreなど）へのデプロイを管理し、推論時に必要な機能が一貫して<em>利用可能</em>で、<em>新鮮に計算される</em>ようにします。</li>
 </ul></li>
-<li><strong>Vector Search:</strong> Feast has built support for vector similarity search that is easily configured declaritively so users can focus on their application. Milvus provides powerful and efficient vector similarity search capabilities.</li>
-<li><strong>Richer structured data:</strong> Along with vector search, users can query standard structured fields to inject into the LLM context for better user experiences.</li>
-<li><strong>Feature/Context and versioning:</strong> Different teams within an organization are often unable to reuse
-data across projects and services, resulting in duplicate application logic. Models have data dependencies that need
-to be versioned, for example when running A/B tests on model/prompt versions.
-<ul>
-<li>Feast enables discovery of and collaboration on previously used documents, features, and enables versioning of sets of
-data.</li>
+<li><strong>ベクトル検索：</strong>Feastは、ユーザーがアプリケーションに集中できるように、宣言的に簡単に設定できるベクトル類似検索のサポートを構築しています。Milvusは強力で効率的なベクトル類似検索機能を提供します。</li>
+<li><strong>リッチな構造化データ：</strong>ベクトル検索に加え、標準的な構造化フィールドをクエリし、LLMコンテキストにインジェクションすることで、より良いユーザーエクスペリエンスを実現します。</li>
+<li><strong>フィーチャー/コンテキストとバージョニング：</strong>組織内の異なるチームは、プロジェクトやサービス間でデータを再利用できず、アプリケーション・ロジックが重複することがよくあります。モデル/プロンプトのバージョンでA/Bテストを実行する場合など、モデルにはバージョン管理が必要なデータ依存関係があります。<ul>
+<li>Feastは、以前に使用されたドキュメントや機能の発見とコラボレーションを可能にし、データセットのバージョン管理を可能にします。</li>
 </ul></li>
 </ol>
-<p>We will:</p>
+<p>私たちは次のことを行います：</p>
 <ol>
-<li>Deploy a local feature store with a <strong>Parquet file offline store</strong> and <strong>Milvus online store</strong>.</li>
-<li>Write/materialize the data (i.e., feature values) from the offline store (a parquet file) into the online store (Milvus).</li>
-<li>Serve the features using the Feast SDK with Milvus’s vector search capabilities</li>
-<li>Inject the document into the LLM’s context to answer questions</li>
+<li><strong>Parquetファイルオフラインストアと</strong> <strong>milvusオンラインストアで</strong>ローカルフィーチャーストアを展開します。</li>
+<li>オフラインストア（Parquetファイル）からオンラインストア（Milvus）へデータ（特徴値）を書き込み/マテリアライズする。</li>
+<li>Milvusのベクトル検索機能でFeast SDKを使用してフィーチャーを提供する。</li>
+<li>LLMのコンテキストにドキュメントを注入し、質問に答える</li>
 </ol>
 <div class="alert note">
-<p>This tutorial is based on the official Milvus integration guide from the <a href="https://github.com/feast-dev/feast/blob/master/examples/rag/milvus-quickstart.ipynb">Feast Repository</a>. While we strive to keep this tutorial up-to-date, if you encounter any discrepancies, please refer to the official guide and feel free to open an issue in our repository for any necessary updates.</p>
+<p>このチュートリアルは<a href="https://github.com/feast-dev/feast/blob/master/examples/rag/milvus-quickstart.ipynb">Feast</a>リポジトリの公式Milvus統合ガイドに基づいています。このチュートリアルは常に最新の状態に保つように努めていますが、もし何か矛盾がありましたら、公式ガイドを参照してください。</p>
 </div>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,12 +79,12 @@ data.</li>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies" class="common-anchor-header">Dependencies</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
+    </button></h2><h3 id="Dependencies" class="common-anchor-header">依存関係</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;feast[milvus]&#x27;</span> openai -U -q</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
-<p>We will use OpenAI as our LLM provider. You can login to its official website and prepare the <a href="https://platform.openai.com/api-keys">OPENAI_API_KEY</a> as an environment variable.</p>
+<p>LLMプロバイダーとしてOpenAIを使います。公式サイトにログインして、<a href="https://platform.openai.com/api-keys">OPENAI_API_KEYを</a>環境変数として用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
@@ -106,7 +94,7 @@ llm_client = OpenAI(
     api_key=os.environ.get(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>),
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-the-Data" class="common-anchor-header">Prepare the Data<button data-href="#Prepare-the-Data" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-Data" class="common-anchor-header">データの準備<button data-href="#Prepare-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,16 +109,16 @@ llm_client = OpenAI(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We will use the data from the following folder as our example:<br>
+    </button></h2><p>以下のフォルダにあるデータを例として使用します：<br>
 <a href="https://github.com/feast-dev/feast/tree/master/examples/rag/feature_repo">Feast RAG Feature Repo</a></p>
-<p>After downloading the data, you will find the following files:</p>
+<p>データをダウンロードすると、以下のファイルがあります：</p>
 <pre><code translate="no" class="language-bash">feature_repo/
 │── data/                  <span class="hljs-comment"># Contains pre-processed Wikipedia city data in Parquet format</span>
 │── example_repo.py        <span class="hljs-comment"># Defines feature views and entities for the city data</span>
 │── feature_store.yaml     <span class="hljs-comment"># Configures Milvus and feature store settings</span>
 │── test_workflow.py       <span class="hljs-comment"># Example workflow for Feast operations</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Key-Configuration-Files" class="common-anchor-header">Key Configuration Files</h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>This file configures the feature store infrastructure:</p>
+<h3 id="Key-Configuration-Files" class="common-anchor-header">キー設定ファイル</h3><h4 id="1-featurestoreyaml" class="common-anchor-header">1. feature_store.yaml</h4><p>このファイルは、フィーチャーストアのインフラストラクチャを設定します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">project:</span> <span class="hljs-string">rag</span>
 <span class="hljs-attr">provider:</span> <span class="hljs-string">local</span>
 <span class="hljs-attr">registry:</span> <span class="hljs-string">data/registry.db</span>
@@ -146,26 +134,26 @@ llm_client = OpenAI(
 <span class="hljs-attr">offline_store:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">file</span>              <span class="hljs-comment"># Uses file-based offline storage</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This configuration establishes:</p>
+<p>このコンフィギュレーションは、以下を確立します：</p>
 <ul>
-<li>Milvus as the online store for fast vector retrieval</li>
-<li>File-based offline storage for historical data processing</li>
-<li>Vector search capabilities with COSINE similarity</li>
+<li>Milvusをオンラインストアとして確立し、高速なベクトル検索を実現します。</li>
+<li>履歴データ処理用のファイルベースのオフラインストレージ</li>
+<li>COSINE類似度によるベクトル検索機能</li>
 </ul>
-<h4 id="2-examplerepopy" class="common-anchor-header">2. example_repo.py</h4><p>Contains the feature definitions for our city data, including:</p>
+<h4 id="2-examplerepopy" class="common-anchor-header">2. example_repo.py</h4><p>都市データの特徴定義が含まれています：</p>
 <ul>
-<li>Entity definitions for cities</li>
-<li>Feature views for city information and embeddings</li>
-<li>Schema specifications for the vector database</li>
+<li>都市のエンティティ定義</li>
+<li>都市情報とエンベッディングのフィーチャビュー</li>
+<li>ベクトルデータベースのスキーマ仕様</li>
 </ul>
-<h4 id="3-Data-Directory" class="common-anchor-header">3. Data Directory</h4><p>Contains our pre-processed Wikipedia city data with:</p>
+<h4 id="3-Data-Directory" class="common-anchor-header">3.データディレクトリ</h4><p>ウィキペディアの都市データを前処理したもの：</p>
 <ul>
-<li>City descriptions and summaries</li>
-<li>Pre-computed embeddings (384-dimensional vectors)</li>
-<li>Associated metadata like city names and states</li>
+<li>都市の説明と要約</li>
+<li>事前に計算された埋め込み（384次元ベクトル）</li>
+<li>都市名や州などの関連メタデータ</li>
 </ul>
-<p>These files work together to create a feature store that combines Milvus’s vector search capabilities with Feast’s feature management, enabling efficient retrieval of relevant city information for our RAG application.</p>
-<h2 id="Inspect-the-Data" class="common-anchor-header">Inspect the Data<button data-href="#Inspect-the-Data" class="anchor-icon" translate="no">
+<p>これらのファイルは、Milvusのベクトル検索機能とFeastの特徴管理を組み合わせた特徴ストアとして機能し、RAGアプリケーションに関連する都市情報の効率的な検索を可能にします。</p>
+<h2 id="Inspect-the-Data" class="common-anchor-header">データの検査<button data-href="#Inspect-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -180,7 +168,7 @@ llm_client = OpenAI(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The raw feature data we have in this demo is stored in a local parquet file. The dataset Wikipedia summaries of diferent cities. Let’s inspect the data first.</p>
+    </button></h2><p>このデモで使用している生の特徴データは、ローカルのparquetファイルに保存されています。このデータセットはWikipediaの様々な都市の要約です。まずデータを調べてみましょう。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df = pd.read_parquet(
@@ -198,10 +186,7 @@ display(df.head())
 <button class="copy-code-btn"></button></code></pre>
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<pre><code translate="no">.dataframe tbody tr th {
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }.<pre><code translate="no">.dataframe tbody tr th {
     vertical-align: top;
 }
 
@@ -216,11 +201,11 @@ display(df.head())
       <th></th>
       <th>id</th>
       <th>item_id</th>
-      <th>event_timestamp</th>
-      <th>state</th>
+      <th>イベント・タイムスタンプ</th>
+      <th>状態</th>
       <th>wiki_summary</th>
-      <th>sentence_chunks</th>
-      <th>vector</th>
+      <th>センテンスチャンクス</th>
+      <th>ベクター</th>
     </tr>
   </thead>
   <tbody>
@@ -229,9 +214,9 @@ display(df.head())
       <td>0</td>
       <td>0</td>
       <td>2025-01-09 13:36:59.280589</td>
-      <td>New York, New York</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>New York, often called New York City or simply...</td>
+      <td>ニューヨーク</td>
+      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）または単に...</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
       <td>[0.1465730518102646, -0.07317650318145752, 0.0...</td>
     </tr>
     <tr>
@@ -239,9 +224,9 @@ display(df.head())
       <td>1</td>
       <td>1</td>
       <td>2025-01-09 13:36:59.280589</td>
-      <td>New York, New York</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>The city comprises five boroughs, each of whic...</td>
+      <td>ニューヨーク</td>
+      <td>ニューヨーク（New York）は、ニューヨーク市（New York City）または単にニューヨーク（New York）と呼ばれることが多い。</td>
+      <td>この都市は5つの行政区で構成されており、それぞれの行政区は...</td>
       <td>[0.05218901485204697, -0.08449874818325043, 0....</td>
     </tr>
     <tr>
@@ -249,9 +234,9 @@ display(df.head())
       <td>2</td>
       <td>2</td>
       <td>2025-01-09 13:36:59.280589</td>
-      <td>New York, New York</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>New York is a global center of finance and com...</td>
+      <td>ニューヨーク</td>
+      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）または単に...と呼ばれる。</td>
+      <td>ニューヨークは、金融と商業の世界的な中心地である。</td>
       <td>[0.06769222766160965, -0.07371102273464203, -0...</td>
     </tr>
     <tr>
@@ -259,9 +244,9 @@ display(df.head())
       <td>3</td>
       <td>3</td>
       <td>2025-01-09 13:36:59.280589</td>
-      <td>New York, New York</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>New York City is the epicenter of the world's ...</td>
+      <td>ニューヨーク</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...と呼ばれる。</td>
+      <td>ニューヨーク市は、世界有数の...</td>
       <td>[0.12095861881971359, -0.04279915615916252, 0....</td>
     </tr>
     <tr>
@@ -269,15 +254,15 @@ display(df.head())
       <td>4</td>
       <td>4</td>
       <td>2025-01-09 13:36:59.280589</td>
-      <td>New York, New York</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>With an estimated population in 2022 of 8,335,...</td>
+      <td>ニューヨーク</td>
+      <td>ニューヨーク（New York）は、ニューヨーク市（New York City）または単に...と呼ばれることが多い。</td>
+      <td>2022年の推定人口は8,335人。</td>
       <td>[0.17943550646305084, -0.09458263963460922, 0....</td>
     </tr>
   </tbody>
 </table>
 </div>
-<h2 id="Register-Feature-Definitions-and-Deploy-the-Feature-Store" class="common-anchor-header">Register Feature Definitions and Deploy the Feature Store<button data-href="#Register-Feature-Definitions-and-Deploy-the-Feature-Store" class="anchor-icon" translate="no">
+<h2 id="Register-Feature-Definitions-and-Deploy-the-Feature-Store" class="common-anchor-header">フィーチャー定義の登録とフィーチャーストアのデプロイ<button data-href="#Register-Feature-Definitions-and-Deploy-the-Feature-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -292,11 +277,11 @@ display(df.head())
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After downloading the <code translate="no">feature_repo</code>, we need to run <code translate="no">feast apply</code> to register the feature views and entities defined in <code translate="no">example_repo.py</code>, and sets up <strong>Milvus</strong> as the online store tables.</p>
-<p>Make sure you have nagivated to the <code translate="no">feature_repo</code> directory before running the command.</p>
+    </button></h2><p><code translate="no">feature_repo</code> をダウンロードした後、<code translate="no">feast apply</code> を実行して、<code translate="no">example_repo.py</code> で定義されたフィーチャー・ビューとエンティティを登録し、<strong>Milvusを</strong>オンライン・ストアのテーブルとして設定します。</p>
+<p>コマンドを実行する前に、<code translate="no">feature_repo</code> ディレクトリに移動していることを確認してください。</p>
 <pre><code translate="no" class="language-bash">feast apply
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Features-into-Milvus" class="common-anchor-header">Load Features into Milvus<button data-href="#Load-Features-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-Features-into-Milvus" class="common-anchor-header">Milvusへのフィーチャーのロード<button data-href="#Load-Features-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -311,7 +296,7 @@ display(df.head())
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we load the features into Milvus. This step involves serializing feature values from the offline store and writing them into Milvus.</p>
+    </button></h2><p>Milvusにフィーチャーをロードします。このステップでは、オフラインストアからフィーチャの値をシリアライズし、Milvusに書き込みます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
 <span class="hljs-keyword">import</span> warnings
@@ -324,7 +309,7 @@ store = FeatureStore(repo_path=<span class="hljs-string">&quot;/path/to/feature_
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Connecting to Milvus in local mode using /Users/jinhonglin/Desktop/feature_repo/data/online_store.db
 </code></pre>
-<p>Note that now there are <code translate="no">online_store.db</code> and <code translate="no">registry.db</code>, which store the materialized features and schema information, respectively. We can take a look at the <code translate="no">online_store.db</code> file.</p>
+<p>現在、<code translate="no">online_store.db</code> と<code translate="no">registry.db</code> があり、それぞれマテリアライズド・フィーチャーとスキーマ情報を格納しています。<code translate="no">online_store.db</code> 。</p>
 <pre><code translate="no" class="language-python">pymilvus_client = store._provider._online_store._connect(store.config)
 COLLECTION_NAME = pymilvus_client.list_collections()[<span class="hljs-number">0</span>]
 
@@ -336,10 +321,7 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
 <button class="copy-code-btn"></button></code></pre>
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<pre><code translate="no">.dataframe tbody tr th {
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }.<pre><code translate="no">.dataframe tbody tr th {
     vertical-align: top;
 }
 
@@ -354,11 +336,11 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <th></th>
       <th>item_id_pk</th>
       <th>created_ts</th>
-      <th>event_ts</th>
-      <th>item_id</th>
-      <th>sentence_chunks</th>
-      <th>state</th>
-      <th>vector</th>
+      <th>イベント</th>
+      <th>アイテムID</th>
+      <th>文のチャンク</th>
+      <th>状態</th>
+      <th>ベクトル</th>
       <th>wiki_summary</th>
     </tr>
   </thead>
@@ -369,10 +351,10 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>0</td>
       <td>1736447819280589</td>
       <td>0</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>New York, New York</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
+      <td>ニューヨーク, ニューヨーク</td>
       <td>0.146573</td>
-      <td>New York, often called New York City or simply...</td>
+      <td>ニューヨーク（しばしばニューヨーク・シティまたは単に...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -380,10 +362,10 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>0</td>
       <td>1736447819280589</td>
       <td>0</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>New York, New York</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
+      <td>ニューヨーク, ニューヨーク</td>
       <td>-0.073177</td>
-      <td>New York, often called New York City or simply...</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -391,10 +373,10 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>0</td>
       <td>1736447819280589</td>
       <td>0</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>New York, New York</td>
+      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）または単に...</td>
+      <td>ニューヨーク, ニューヨーク</td>
       <td>0.052114</td>
-      <td>New York, often called New York City or simply...</td>
+      <td>ニューヨーク（しばしばニューヨーク・シティまたは単に...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -402,10 +384,10 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>0</td>
       <td>1736447819280589</td>
       <td>0</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>New York, New York</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
+      <td>ニューヨーク, ニューヨーク</td>
       <td>0.033187</td>
-      <td>New York, often called New York City or simply...</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -413,15 +395,15 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
       <td>0</td>
       <td>1736447819280589</td>
       <td>0</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>New York, New York</td>
+      <td>ニューヨークは、しばしばニューヨーク・シティまたは単に...</td>
+      <td>ニューヨーク, ニューヨーク</td>
       <td>0.012013</td>
-      <td>New York, often called New York City or simply...</td>
+      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）、または単に...</td>
     </tr>
   </tbody>
 </table>
 </div>
-<h2 id="Build-RAG" class="common-anchor-header">Build RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
+<h2 id="Build-RAG" class="common-anchor-header">ビルドRAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -436,7 +418,7 @@ pd.DataFrame(milvus_query_result[<span class="hljs-number">0</span>]).head()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1. Embedding a Query Using PyTorch and Sentence Transformers</h3><p>During inference (e.g., during when a user submits a chat message) we need to embed the input text. This can be thought of as a feature transformation of the input data. In this example, we’ll do this with a small Sentence Transformer from Hugging Face.</p>
+    </button></h2><h3 id="1-Embedding-a-Query-Using-PyTorch-and-Sentence-Transformers" class="common-anchor-header">1.PyTorchと文変換器を使ったクエリの埋め込み</h3><p>推論中（例えば、ユーザがチャットメッセージを送信している間）、入力テキストを埋め込む必要がある。これは入力データの特徴変換と考えることができます。この例では、Hugging Faceの小さなSentence Transformerを使ってこれを行います。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> feast <span class="hljs-keyword">import</span> FeatureStore
@@ -472,7 +454,7 @@ MODEL = <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&q
     sentence_embeddings = F.normalize(sentence_embeddings, p=<span class="hljs-number">2</span>, dim=<span class="hljs-number">1</span>)
     <span class="hljs-keyword">return</span> sentence_embeddings
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2. Fetching Real-time Vectors and Data for Online Inference</h3><p>Once the query has been transformed into an embedding, the next step is to retrieve relevant documents from the vector store. At inference time, we leverage vector similarity search to find the most relevant document embeddings stored in the online feature store, using <code translate="no">retrieve_online_documents_v2()</code>. These feature vectors can then be fed into the context of the LLM.</p>
+<h3 id="2-Fetching-Real-time-Vectors-and-Data-for-Online-Inference" class="common-anchor-header">2.オンライン推論のためのリアルタイムのベクトルとデータのフェッチ</h3><p>クエリがエンベッディングに変換されると、次のステップは、ベクトルストアから関連ドキュメントを取得することである。推論時には、ベクトル類似度検索を活用し、<code translate="no">retrieve_online_documents_v2()</code> を使用して、オンライン特徴ストアに格納されている最も関連性の高い文書埋め込みを検索します。そして、これらの特徴ベクトルをLLMのコンテキストに送り込むことができる。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Which city has the largest population in New York?&quot;</span>
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER)
@@ -499,10 +481,7 @@ display(context_data)
 <button class="copy-code-btn"></button></code></pre>
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<pre><code translate="no">.dataframe tbody tr th {
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }.<pre><code translate="no">.dataframe tbody tr th {
     vertical-align: top;
 }
 
@@ -515,12 +494,12 @@ display(context_data)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>vector</th>
+      <th>ベクトル</th>
       <th>item_id</th>
-      <th>state</th>
+      <th>状態</th>
       <th>sentence_chunks</th>
       <th>wiki_summary</th>
-      <th>distance</th>
+      <th>距離</th>
     </tr>
   </thead>
   <tbody>
@@ -528,33 +507,33 @@ display(context_data)
       <th>0</th>
       <td>[0.15548758208751678, -0.08017724752426147, -0...</td>
       <td>0</td>
-      <td>New York, New York</td>
-      <td>New York, often called New York City or simply...</td>
-      <td>New York, often called New York City or simply...</td>
+      <td>ニューヨーク, ニューヨーク</td>
+      <td>ニューヨーク（New York）は、ニューヨーク市（New York City）または単に...</td>
+      <td>ニューヨーク（New York）は、しばしばニューヨーク・シティ（New York City）または単に...</td>
       <td>0.743023</td>
     </tr>
     <tr>
       <th>1</th>
       <td>[0.15548758208751678, -0.08017724752426147, -0...</td>
       <td>6</td>
-      <td>New York, New York</td>
-      <td>New York is the geographical and demographic c...</td>
-      <td>New York, often called New York City or simply...</td>
+      <td>ニューヨーク州ニューヨーク</td>
+      <td>ニューヨーク（New York）は、ニューヨーク州の州都である。</td>
+      <td>ニューヨーク（New York）は、ニューヨーク市（New York City）または単に...</td>
       <td>0.739733</td>
     </tr>
     <tr>
       <th>2</th>
       <td>[0.15548758208751678, -0.08017724752426147, -0...</td>
       <td>7</td>
-      <td>New York, New York</td>
-      <td>With more than 20.1 million people in its metr...</td>
-      <td>New York, often called New York City or simply...</td>
+      <td>ニューヨーク, ニューヨーク州</td>
+      <td>2,010万人以上の人口を擁するニューヨーク州ニューヨーク市。</td>
+      <td>ニューヨーク（New York）は、ニューヨーク・シティ（New York City）または単に...</td>
       <td>0.728218</td>
     </tr>
   </tbody>
 </table>
 </div>
-<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3. Formatting Retrieved Documents for RAG Context</h3><p>After retrieving relevant documents, we need to format the data into a structured context that can be efficiently used in downstream applications. This step ensures that the extracted information is clean, organized, and ready for integration into the RAG pipeline.</p>
+<h3 id="3-Formatting-Retrieved-Documents-for-RAG-Context" class="common-anchor-header">3.RAGコンテキストのために取得した文書をフォーマットする</h3><p>関連文書を検索した後、データを、下流のアプリケーションで効率的に使用できる構造化されたコンテキストにフォーマットする必要がある。このステップによって、抽出された情報がきれいに整理され、RAGパイプラインに統合する準備が整う。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">context_df</span>):
     output_context = <span class="hljs-string">&quot;&quot;</span>
     unique_documents = context_df.drop_duplicates().apply(
@@ -581,7 +560,7 @@ New York City traces its origins to Fort Amsterdam and a trading post founded on
 Anchored by Wall Street in the Financial District of Lower Manhattan, New York City has been called both the world's premier financial and fintech center and the most economically powerful city in the world. As of 2022, the New York metropolitan area is the largest metropolitan economy in the world with a gross metropolitan product of over US$2.16 trillion. If the New York metropolitan area were its own country, it would have the tenth-largest economy in the world. The city is home to the world's two largest stock exchanges by market capitalization of their listed companies: the New York Stock Exchange and Nasdaq. New York City is an established safe haven for global investors. As of 2023, New York City is the most expensive city in the world for expatriates to live. New York City is home to the highest number of billionaires, individuals of ultra-high net worth (greater than US$30 million), and millionaires of any city in the world.}
 ****END DOCUMENT 0****
 </code></pre>
-<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4. Generating Responses Using Retrieved Context</h3><p>Now that we have formatted the retrieved documents, we can integrate them into a structured prompt for response generation. This step ensures that the assistant only relies on retrieved information and avoids hallucinating responses.</p>
+<h3 id="4-Generating-Responses-Using-Retrieved-Context" class="common-anchor-header">4.取得したコンテキストを使用してレスポンスを生成する</h3><p>検索されたドキュメントをフォーマットしたので、それらを応答生成のための構造化されたプロンプトに統合することができる。このステップは、アシスタントが検索された情報のみに依存し、幻覚のような応答を避けることを保証する。</p>
 <pre><code translate="no" class="language-python">FULL_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
 You are an assistant for answering questions about states. You will be provided documentation from Wikipedia. Provide a conversational answer.
 If you don&#x27;t know the answer, just say &quot;I do not know.&quot; Don&#x27;t make up an answer.

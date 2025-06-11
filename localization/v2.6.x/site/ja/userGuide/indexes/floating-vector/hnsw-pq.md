@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_PQは</strong>、HNSW（Hierarchical Navigable Small World）グラフとPQ（Product Quantization）を活用し、サイズと精度のトレードオフを制御可能な高度なベクトルインデックス作成手法を実現する。<a href="/docs/ja/hnsw-sq.md">HNSW_SQと</a>比較して、このインデックスタイプは、クエリ処理速度の低下とインデックス構築時間の延長はあるものの、同じ圧縮レベルでより高い想起率を実現している。</p>
+    </button></h1><p><strong>HNSW_PQは</strong>、HNSW（Hierarchical Navigable Small World）グラフとPQ（Product Quantization）を活用し、サイズと精度のトレードオフを制御可能な高度なベクトルインデックス作成手法である。<a href="/docs/ja/hnsw-sq.md">HNSW_SQと</a>比較して、このインデックスタイプは、クエリ処理速度の低下とインデックス構築時間の延長はあるものの、同じ圧縮レベルでより高い想起率を実現している。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

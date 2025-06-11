@@ -1,12 +1,10 @@
 ---
 id: index-scalar-fields.md
 order: 2
-summary: >-
-  This guide will walk you through creating and configuring scalar indexes for
-  fields such as integers, strings, etc.
-title: Index Scalar Fields
+summary: '이 가이드에서는 정수, 문자열 등과 같은 필드에 대한 스칼라 인덱스를 만들고 구성하는 방법을 안내합니다.'
+title: 스칼라 필드 인덱스
 ---
-<h1 id="Index-Scalar-Fields" class="common-anchor-header">Index Scalar Fields<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Scalar-Fields" class="common-anchor-header">스칼라 필드 인덱스<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +19,8 @@ title: Index Scalar Fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, a scalar index is used to speed up metafiltering by a specific non-vector field value, similar to a traditional database index. This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.</p>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">Types of scalar indexing<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus에서 스칼라 인덱스는 기존 데이터베이스 인덱스와 유사하게 특정 비벡터 필드 값을 기준으로 메타필터링 속도를 높이는 데 사용됩니다. 이 가이드에서는 정수, 문자열 등과 같은 필드에 대한 스칼라 인덱스를 만들고 구성하는 방법을 안내합니다.</p>
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">스칼라 인덱싱의 유형<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,10 +36,10 @@ title: Index Scalar Fields
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Auto indexing</a></strong>: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Custom indexing</a></strong>: You specify the exact index type, such as an inverted index or <a href="/docs/bitmap.md">bitmap index</a>. This provides more control over the index type selection.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">자동 인덱싱</a></strong>: Milvus는 스칼라 필드의 데이터 유형에 따라 인덱스 유형을 자동으로 결정합니다. 특정 인덱스 유형을 제어할 필요가 없는 경우에 적합합니다.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">사용자 지정 인덱싱</a></strong>: 반전 인덱스 또는 <a href="/docs/ko/bitmap.md">비트맵 인덱스와</a> 같은 정확한 인덱스 유형을 지정합니다. 이렇게 하면 인덱스 유형 선택을 더 세밀하게 제어할 수 있습니다.</p></li>
 </ul>
-<h2 id="Auto-indexing" class="common-anchor-header">Auto indexing<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
+<h2 id="Auto-indexing" class="common-anchor-header">자동 인덱싱<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,20 +55,17 @@ title: Index Scalar Fields
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To use auto indexing, omit the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
+<p>자동 인덱싱을 사용하려면 <strong>인덱스 유형</strong> 매개변수( <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>에서 인덱스 유형 매개변수를 생략하면 Milvus가 스칼라 필드 유형을 기반으로 인덱스 유형을 유추할 수 있습니다.</p>
 </div>
 <div class="language-java">
-<p>To use auto indexing, omit the <strong>indexType</strong> parameter in <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
+<p>자동 인덱싱을 사용하려면, 에서 <strong>indexType</strong> 매개변수를 생략하세요. <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>에서 인덱스 유형 매개변수를 생략하여 Milvus가 스칼라 필드 유형을 기반으로 인덱스 유형을 유추할 수 있도록 합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To use auto indexing, omit the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
+<p>자동 인덱싱을 사용하려면, 에서 <strong>index_type</strong> 파라미터를 생략하세요. <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>에서 인덱스 유형을 생략하면 Milvus가 스칼라 필드 유형에 따라 인덱스 유형을 유추할 수 있습니다.</p>
 </div>
-<p>For mappings between scalar data types and default indexing algorithms, refer to <a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">Scalar field indexing algorithms</a>.</p>
+<p>스칼라 데이터 유형과 기본 인덱싱 알고리즘 간의 매핑에 대해서는 <a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">스칼라 필드 인덱싱 알고리즘을</a> 참조하세요.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Auto indexing</span>
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -115,7 +110,7 @@ client.createIndex(createIndexReq);
     <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment">// Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
 })
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Custom-indexing" class="common-anchor-header">Custom indexing<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
+<h2 id="Custom-indexing" class="common-anchor-header">사용자 정의 인덱싱<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,20 +126,17 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To use custom indexing, specify a particular index type using the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>사용자 정의 인덱싱을 사용하려면 <strong>인덱스</strong> 유형 매개변수를 사용하여 특정 인덱스 유형을 지정합니다. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>To use custom indexing, specify a particular index type using the <strong>indexType</strong> parameter in <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
+<p>사용자 지정 인덱싱을 사용하려면 <strong>인덱스</strong> 유형 매개변수를 사용하여 특정 인덱스 유형을 지정합니다. <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>To use custom indexing, specify a particular index type using the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>사용자 지정 인덱싱을 사용하려면, 에서 <strong>index_type</strong> 매개 변수를 사용하여 특정 인덱스 유형을 지정한다. <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
-<p>The example below creates an inverted index for the scalar field <code translate="no">scalar_2</code>.</p>
+<p>아래 예제는 스칼라 필드 <code translate="no">scalar_2</code> 에 대한 반전 인덱스를 생성합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
@@ -185,90 +177,73 @@ client.createIndex(createIndexReq);
 })
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p><strong>Methods and Parameters</strong></p>
+<p><strong>메서드 및 매개변수</strong></p>
 <ul>
 <li><p><strong>prepare_index_params()</strong></p>
-<p>Prepares an <strong>IndexParams</strong> object.</p></li>
+<p><strong>IndexParams</strong> 객체를 준비합니다.</p></li>
 <li><p><strong>add_index()</strong></p>
-<p>Adds index configurations to the <strong>IndexParams</strong> object.</p>
+<p><strong>IndexParams</strong> 객체에 인덱스 구성을 추가합니다.</p>
 <ul>
-<li><p><strong>field_name</strong> (<em>string</em>)</p>
-<p>The name of the scalar field to index.</p></li>
-<li><p><strong>index_type</strong> (<em>string</em>):</p>
-<p>The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.</p>
-<p>For custom indexing, valid values are:</p>
+<li><p><strong>field_name</strong><em>(문자열</em>)</p>
+<p>인덱싱할 스칼라 필드의 이름입니다.</p></li>
+<li><p><strong>index_type</strong><em>(문자열</em>):</p>
+<p>생성할 스칼라 인덱스의 유형입니다. 암시적 인덱싱의 경우 이 매개변수를 비워 두거나 생략하세요.</p>
+<p>사용자 지정 인덱싱의 경우 유효한 값은 다음과 같습니다:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</p></li>
-<li><p><strong>BITMAP</strong>: An index type that stores a bitmap of all unique values in a field. For details, refer to <a href="/docs/bitmap.md">BITMAP</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
-<li><p><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</p></li>
+<li><p><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</p></li>
+<li><p><strong>비트맵</strong>: 필드에 있는 모든 고유 값의 비트맵을 저장하는 인덱스 유형입니다. 자세한 내용은 <a href="/docs/ko/bitmap.md">비트맵을</a> 참조하세요.</p></li>
+<li><p><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 숫자 필드만 지원합니다(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
+<li><p><strong>트라이</strong>: 빠른 접두사 검색 및 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</p></li>
 </ul></li>
-<li><p><strong>index_name</strong> (<em>string</em>)</p>
-<p>The name of the scalar index to create. Each scalar field supports one index.</p></li>
+<li><p><strong>index_name</strong><em>(문자열</em>)</p>
+<p>생성할 스칼라 인덱스의 이름입니다. 각 스칼라 필드는 하나의 인덱스를 지원합니다.</p></li>
 </ul></li>
 <li><p><strong>create_index()</strong></p>
-<p>Creates the index in the specified collection.</p>
+<p>지정된 컬렉션에 인덱스를 생성합니다.</p>
 <ul>
-<li><p><strong>collection_name</strong> (<em>string</em>)</p>
-<p>The name of the collection for which the index is created.</p></li>
+<li><p><strong>collection_name</strong><em>(문자열</em>)</p>
+<p>인덱스가 생성될 컬렉션의 이름입니다.</p></li>
 <li><p><strong>index_params</strong></p>
-<p>The <strong>IndexParams</strong> object that contains index configurations.</p></li>
+<p>인덱스 구성을 포함하는 <strong>IndexParams</strong> 객체입니다.</p></li>
 </ul></li>
 </ul>
 </div>
 <div class="language-java">
-<p><strong>Methods and Parameters</strong></p>
+<p><strong>메서드 및 매개변수</strong></p>
 <ul>
-<li><strong>IndexParam</strong>
-Prepares an IndexParam object.
-<ul>
-<li><strong>fieldName</strong> (<em>String</em>)
-The name of the scalar field to index.</li>
-<li><strong>indexName</strong> (<em>String</em>)
-The name of the scalar index to create. Each scalar field supports one index.</li>
-<li><strong>indexType</strong> (<em>String</em>)
-The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
-For custom indexing, valid values are:
-<ul>
-<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
-<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
+<li><strong>IndexParam</strong>IndexParam 객체를 준비합니다.<ul>
+<li><strong>fieldName</strong><em>(문자열</em>) 인덱싱할 스칼라 필드의 이름입니다.</li>
+<li><strong>indexName</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 이름입니다. 각 스칼라 필드는 하나의 인덱스를 지원합니다.</li>
+<li><strong>indexType</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 유형입니다. 암시적 인덱싱의 경우 이 매개변수를 비워 두거나 생략합니다. 사용자 정의 인덱싱의 경우 유효한 값은 다음과 같습니다:<ul>
+<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
+<li><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 부울 및 숫자 필드(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE)를 지원합니다.</li>
+<li><strong>트라이</strong>: 빠른 접두사 검색과 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</li>
 </ul></li>
 </ul></li>
-<li><strong>CreateIndexReq</strong>
-Creates the index in the specified collection.
-<ul>
-<li><strong>collectionName</strong> (<em>String</em>)
-The name of the collection for which the index is created.</li>
-<li><strong>indexParams</strong> (<em>List<IndexParam></em>)
-A list of IndexParam objects that contain index configurations.</li>
+<li><strong>CreateIndexReq</strong>지정된 컬렉션에 인덱스를 만듭니다.<ul>
+<li><strong>collectionName</strong><em>(문자열</em>) 인덱스가 생성되는 컬렉션의 이름입니다.</li>
+<li><strong>indexParams</strong><em>(목록<IndexParam></em>) 인덱스 구성을 포함하는 IndexParam 객체 목록입니다.</li>
 </ul></li>
 </ul>
 </div>
 <div class="language-javascript">
-<p><strong>Methods and Parameters</strong></p>
+<p><strong>메서드 및 매개변수</strong></p>
 <ul>
 <li><p><strong>createIndex</strong></p>
-<p>Creates the index in the specified collection.</p>
+<p>지정된 컬렉션에 인덱스를 생성합니다.</p>
 <ul>
-<li><strong>collection_name</strong> (<em>string</em>)
-The name of the collection for which the index is created.</li>
-<li><strong>field_name</strong> (<em>string</em>)
-The name of the scalar field to index.</li>
-<li><strong>index_name</strong> (<em>string</em>)
-The name of the scalar index to create. Each scalar field supports one index.</li>
-<li><strong>index_type</strong> (<em>string</em>)
-The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
-For custom indexing, valid values are:
-<ul>
-<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
-<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
+<li><strong>collection_name</strong><em>(문자열</em>) 인덱스가 생성되는 컬렉션의 이름입니다.</li>
+<li><strong>field_name</strong><em>(문자열</em>) 인덱싱할 스칼라 필드의 이름입니다.</li>
+<li><strong>index_name</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 이름입니다. 각 스칼라 필드는 하나의 인덱스를 지원합니다.</li>
+<li><strong>index_type</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 유형입니다. 암시적 인덱싱의 경우 이 매개변수를 비워 두거나 생략합니다. 사용자 지정 인덱싱의 경우 유효한 값은 다음과 같습니다:<ul>
+<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
+<li><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 부울 및 숫자 필드(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE)를 지원합니다.</li>
+<li><strong>트라이</strong>: 빠른 접두사 검색과 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
-<h2 id="Verifying-the-result" class="common-anchor-header">Verifying the result<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
+<h2 id="Verifying-the-result" class="common-anchor-header">결과 확인하기<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,19 +259,16 @@ For custom indexing, valid values are:
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> method to verify the creation of scalar indexes:</p>
+<p>메서드를 사용하여 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> 메서드를 사용하여 스칼라 인덱스 생성을 확인합니다:</p>
 </div>
 <div class="language-java">
-<p>Use the <code translate="no">listIndexes()</code> method to verify the creation of scalar indexes:</p>
+<p><code translate="no">listIndexes()</code> 메서드를 사용하여 스칼라 인덱스 생성을 확인합니다:</p>
 </div>
 <div class="language-javascript">
-<p>Use the <code translate="no">listIndexes()</code> method to verify the creation of scalar indexes:</p>
+<p><code translate="no">listIndexes()</code> 메서드를 사용하여 스칼라 인덱스 생성을 확인합니다:</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">client.list_indexes(
     collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>  <span class="hljs-comment"># Specify the collection name</span>
 )

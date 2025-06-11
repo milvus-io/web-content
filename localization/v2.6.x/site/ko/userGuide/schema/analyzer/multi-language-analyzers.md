@@ -1,18 +1,14 @@
 ---
 id: multi-language-analyzers.md
-title: Multi-language Analyzers
+title: 다중 언어 분석기Compatible with Milvus 2.5.11+
 summary: >-
-  When Milvus performs text analysis, it typically applies a single analyzer
-  across an entire text field in a collection. If that analyzer is optimized for
-  English, it struggles with the very different tokenization and stemming rules
-  required by other languages, such as Chinese, Spanish, or French, resulting a
-  lower recall rate. For instance, a search for the Spanish word "teléfono"
-  (meaning "phone") would trip up an English‑focused analyzer: it may drop the
-  accent and apply no Spanish‑specific stemming, causing relevant results to be
-  overlooked.
+  Milvus는 텍스트 분석을 수행할 때 일반적으로 컬렉션의 전체 텍스트 필드에 단일 분석기를 적용합니다. 이 분석기가 영어에 최적화된 경우
+  중국어, 스페인어 또는 프랑스어와 같은 다른 언어에 필요한 토큰화 및 어간 규칙이 매우 달라서 리콜률이 낮아질 수 있습니다. 예를 들어,
+  스페인어 단어 "teléfono"('전화'라는 뜻)를 검색하면 영어에 초점을 맞춘 분석기가 악센트를 삭제하고 스페인어 전용 어간을 적용하지
+  않아 관련 결과를 간과하게 될 수 있습니다.
 beta: Milvus 2.5.11+
 ---
-<h1 id="Multi-language-Analyzers" class="common-anchor-header">Multi-language Analyzers<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
+<h1 id="Multi-language-Analyzers" class="common-anchor-header">다중 언어 분석기<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,9 +23,9 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>When Milvus performs text analysis, it typically applies a single analyzer across an entire text field in a collection. If that analyzer is optimized for English, it struggles with the very different tokenization and stemming rules required by other languages, such as Chinese, Spanish, or French, resulting a lower recall rate. For instance, a search for the Spanish word <em>“teléfono”</em> (meaning <em>“phone”</em>) would trip up an English‑focused analyzer: it may drop the accent and apply no Spanish‑specific stemming, causing relevant results to be overlooked.</p>
-<p>Multi‑language analyzers resolve this issue by allowing you to configure multiple analyzers for a text field in a single collection. This way, you can store multilingual documents in a text field, and Milvus analyzes text according to the appropriate language rules for each document.</p>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus는 텍스트 분석을 수행할 때 일반적으로 컬렉션의 전체 텍스트 필드에 단일 분석기를 적용합니다. 해당 분석기가 영어에 최적화된 경우 중국어, 스페인어 또는 프랑스어와 같은 다른 언어에서 요구하는 매우 다른 토큰화 및 어간 규칙에 어려움을 겪게 되며, 그 결과 리콜률이 낮아지게 됩니다. 예를 들어, 스페인어 단어 <em>"teléfono</em> "( <em>'전화'라는</em> 뜻)를 검색하면 영어 중심의 분석기가 악센트를 삭제하고 스페인어 전용 어간을 적용하지 않아 관련 결과를 간과할 수 있습니다.</p>
+<p>다국어 분석기는 단일 컬렉션에서 텍스트 필드에 대해 여러 분석기를 구성할 수 있도록 함으로써 이 문제를 해결합니다. 이렇게 하면 텍스트 필드에 다국어 문서를 저장할 수 있으며, Milvus는 각 문서에 적합한 언어 규칙에 따라 텍스트를 분석합니다.</p>
+<h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,11 +41,11 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>This feature works only with BM25-based text retrieval and sparse vectors. For more information, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
-<li><p>Each document in a single collection can use only one analyzer, determined by its language identifier field value.</p></li>
-<li><p>Performance may vary depending on the complexity of your analyzers and the size of your text data.</p></li>
+<li><p>이 기능은 BM25 기반 텍스트 검색 및 스파스 벡터에서만 작동합니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
+<li><p>단일 컬렉션의 각 문서는 언어 식별자 필드 값에 따라 결정되는 하나의 분석기만 사용할 수 있습니다.</p></li>
+<li><p>성능은 분석기의 복잡성과 텍스트 데이터의 크기에 따라 달라질 수 있습니다.</p></li>
 </ul>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,43 +60,41 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following diagram shows the workflow of configuring and using multi-language analyzers in Milvus:</p>
+    </button></h2><p>다음 다이어그램은 Milvus에서 다중 언어 분석기를 구성하고 사용하는 워크플로우를 보여줍니다:</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
-    <span>Multi Language Analyzers Workflow</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
+   </span> <span class="img-wrapper"> <span>다중 언어 분석기 워크플로</span> </span></p>
 <ol>
-<li><p><strong>Configure Multi-language Analyzers</strong>:</p>
+<li><p><strong>다중 언어 분석기를 구성합니다</strong>:</p>
 <ul>
-<li><p>Set up multiple language-specific analyzers using the format: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, where each <code translate="no">analyzer_config</code> follows standard <code translate="no">analyzer_params</code> configuration as described in <a href="/docs/analyzer-overview.md#Analyzer-types">Analyzer Overview</a>.</p></li>
-<li><p>Define a special identifier field that will determine analyzer selection for each document.</p></li>
-<li><p>Configure a <code translate="no">default</code> analyzer for handling unknown languages.</p></li>
+<li><p>형식을 사용하여 여러 언어별 분석기를 설정합니다: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code> 여기서 각 <code translate="no">analyzer_config</code> 은 <a href="/docs/ko/analyzer-overview.md#Analyzer-types">분석기 개요에</a> 설명된 대로 표준 <code translate="no">analyzer_params</code> 구성을 따릅니다.</p></li>
+<li><p>각 문서에 대한 분석기 선택을 결정할 특수 식별자 필드를 정의합니다.</p></li>
+<li><p>알 수 없는 언어를 처리하기 위해 <code translate="no">default</code> 분석기를 구성합니다.</p></li>
 </ul></li>
-<li><p><strong>Create Collection</strong>:</p>
+<li><p><strong>컬렉션 만들기</strong>:</p>
 <ul>
-<li><p>Define schema with essential fields:</p>
+<li><p>필수 필드가 포함된 스키마를 정의합니다:</p>
 <ul>
-<li><p><strong>primary_key</strong>: Unique document identifier.</p></li>
-<li><p><strong>text_field</strong>: Stores original text content.</p></li>
-<li><p><strong>identifier_field</strong>: Indicates which analyzer to use for each document.</p></li>
-<li><p><strong>vector_field</strong>: Stores sparse embeddings to be generated by the BM25 function.</p></li>
+<li><p><strong>primary_key</strong>: 고유한 문서 식별자입니다.</p></li>
+<li><p><strong>text_field</strong>: 원본 텍스트 콘텐츠를 저장합니다.</p></li>
+<li><p><strong>identifier_field</strong>: 각 문서에 사용할 분석기를 나타냅니다.</p></li>
+<li><p><strong>벡터_필드</strong>: BM25 함수에 의해 생성될 스파스 임베딩을 저장합니다.</p></li>
 </ul></li>
-<li><p>Configure BM25 function and indexing parameters.</p></li>
+<li><p>BM25 함수와 인덱싱 매개변수를 구성합니다.</p></li>
 </ul></li>
-<li><p><strong>Insert Data with Language Identifiers</strong>:</p>
+<li><p><strong>언어 식별자가 있는 데이터 삽입</strong>:</p>
 <ul>
-<li><p>Add documents containing text in various languages, where each document includes an identifier value specifying which analyzer to use.</p></li>
-<li><p>Milvus selects the appropriate analyzer based on the identifier field, and documents with unknown identifiers use the <code translate="no">default</code> analyzer.</p></li>
+<li><p>다양한 언어로 된 텍스트가 포함된 문서를 추가하며, 각 문서에는 사용할 분석기를 지정하는 식별자 값이 포함됩니다.</p></li>
+<li><p>Milvus는 식별자 필드에 따라 적절한 분석기를 선택하며, 알 수 없는 식별자가 있는 문서는 <code translate="no">default</code> 분석기를 사용합니다.</p></li>
 </ul></li>
-<li><p><strong>Search with Language-Specific Analyzers</strong>:</p>
+<li><p><strong>언어별 분석기로 검색하기</strong>:</p>
 <ul>
-<li><p>Provide query text with an analyzer name specified, and Milvus processes the query using the specified analyzer.</p></li>
-<li><p>Tokenization occurs according to language-specific rules, and search returns language-appropriate results based on similarity.</p></li>
+<li><p>분석기 이름을 지정한 쿼리 텍스트를 입력하면 Milvus가 지정한 분석기를 사용하여 쿼리를 처리합니다.</p></li>
+<li><p>토큰화는 언어별 규칙에 따라 이루어지며, 검색은 유사도에 따라 언어에 적합한 결과를 반환합니다.</p></li>
 </ul></li>
 </ol>
-<h2 id="Step-1-Configure-multianalyzerparams" class="common-anchor-header">Step 1: Configure multi_analyzer_params<button data-href="#Step-1-Configure-multianalyzerparams" class="anchor-icon" translate="no">
+<h2 id="Step-1-Configure-multianalyzerparams" class="common-anchor-header">1단계: multi_analyzer_params 구성하기<button data-href="#Step-1-Configure-multianalyzerparams" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,14 +109,9 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">multi_analyzer_params</code> is a single JSON object that determines how Milvus selects the appropriate analyzer for each entity:</p>
+    </button></h2><p><code translate="no">multi_analyzer_params</code> 은 Milvus가 각 엔티티에 적합한 분석기를 선택하는 방법을 결정하는 단일 JSON 객체입니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">multi_analyzer_params = {
   <span class="hljs-comment"># Define language-specific analyzers</span>
   <span class="hljs-comment"># Each analyzer follows this format: &lt;analyzer_name&gt;: &lt;analyzer_params&gt;</span>
@@ -207,39 +196,38 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Required?</p></th>
-     <th><p>Description</p></th>
+     <th><p>파라미터</p></th>
+     <th><p>필수?</p></th>
+     <th><p>설명</p></th>
      <th><p>Rules</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">analyzers</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Lists every language‑specific analyzer that Milvus can use to process text.
- Each analyzer in <code translate="no">analyzers</code> follows this format: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
+     <td><p>Milvus에서 텍스트를 처리하는 데 사용할 수 있는 모든 언어별 분석기를 나열합니다. <code translate="no">analyzers</code> 의 각 분석기는 다음 형식을 따릅니다: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
      <td><ul>
-<li>Define each analyzer with the standard <code translate="no">analyzer_params</code> syntax (see <a href="/docs/analyzer-overview.md#Analyzer-types">Analyzer Overview</a>).</li>
-<li>Add an entry whose key is <code translate="no">default</code>; Milvus falls back to this analyzer whenever the value stored in <code translate="no">by_field</code> does not match any other analyzer name.</li>
+<li>표준 <code translate="no">analyzer_params</code> 구문을 사용하여 각 분석기를 정의하세요( <a href="/docs/ko/analyzer-overview.md#Analyzer-types">분석기 개요</a> 참조).</li>
+<li>키가 <code translate="no">default</code> 인 항목을 추가하면 <code translate="no">by_field</code> 에 저장된 값이 다른 분석기 이름과 일치하지 않을 때마다 Milvus가 이 분석기로 되돌아갑니다.</li>
 </ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">by_field</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Name of the field that stores, for every document, the language (that is, the analyzer name) Milvus should apply.</p></td>
+     <td><p>예</p></td>
+     <td><p>모든 문서에 대해 Milvus가 적용해야 하는 언어(즉, 분석기 이름)를 저장하는 필드의 이름입니다.</p></td>
      <td><ul>
-<li><p>Must be a <code translate="no">VARCHAR</code> field defined in the collection.</p></li>
-<li><p>The value in every row must exactly match one of the analyzer names (or aliases) listed in <code translate="no">analyzers</code>.</p></li>
-<li><p>If a row's value is missing or not found, Milvus automatically applies the <code translate="no">default</code> analyzer.</p></li>
+<li><p>컬렉션에 정의된 <code translate="no">VARCHAR</code> 필드여야 합니다.</p></li>
+<li><p>모든 행의 값은 <code translate="no">analyzers</code> 에 나열된 분석기 이름(또는 별칭) 중 하나와 정확히 일치해야 합니다.</p></li>
+<li><p>행의 값이 누락되었거나 찾을 수 없는 경우 Milvus는 자동으로 <code translate="no">default</code> 분석기를 적용합니다.</p></li>
 </ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">alias</code></p></td>
      <td><p>No</p></td>
-     <td><p>Creates shortcuts or alternative names for your analyzers, making them easier to reference in your code. Each analyzer can have one or more aliases.</p></td>
-     <td><p>Each alias must map to an existing analyzer key.</p></td>
+     <td><p>분석기에 대한 바로 가기 또는 대체 이름을 생성하여 코드에서 쉽게 참조할 수 있도록 합니다. 각 분석기는 하나 이상의 별칭을 가질 수 있습니다.</p></td>
+     <td><p>각 별칭은 기존 분석기 키에 매핑되어야 합니다.</p></td>
    </tr>
 </table>
-<h2 id="Step-2-Create-collection" class="common-anchor-header">Step 2: Create collection<button data-href="#Step-2-Create-collection" class="anchor-icon" translate="no">
+<h2 id="Step-2-Create-collection" class="common-anchor-header">2단계: 컬렉션 만들기<button data-href="#Step-2-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -254,21 +242,16 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Creating a collection with multi-language support requires configuring specific fields and indexes:</p>
-<h3 id="Add-fields" class="common-anchor-header">Add fields</h3><p>In this step, define the collection schema with four essential fields:</p>
+    </button></h2><p>다국어를 지원하는 컬렉션을 만들려면 특정 필드와 인덱스를 구성해야 합니다:</p>
+<h3 id="Add-fields" class="common-anchor-header">필드 추가</h3><p>이 단계에서는 네 가지 필수 필드로 컬렉션 스키마를 정의합니다:</p>
 <ul>
-<li><p><strong>Primary Key Field</strong> (<code translate="no">id</code>): A unique identifier for each entity in the collection. Setting <code translate="no">auto_id=True</code> enables Milvus to automatically generate these IDs.</p></li>
-<li><p><strong>Language Indicator Field</strong> (<code translate="no">language</code>): This VARCHAR field corresponds to the <code translate="no">by_field</code> specified in your <code translate="no">multi_analyzer_params</code>. It stores the language identifier for each entity, which tells Milvus which analyzer to use.</p></li>
-<li><p><strong>Text Content Field</strong> (<code translate="no">text</code>): This VARCHAR field stores the actual text data you want to analyze and search. Setting <code translate="no">enable_analyzer=True</code> is crucial as it activates text analysis capabilities for this field. The <code translate="no">multi_analyzer_params</code> configuration is attached directly to this field, establishing the connection between your text data and language-specific analyzers.</p></li>
-<li><p><strong>Vector Field</strong> (<code translate="no">sparse</code>): This field will store the sparse vectors generated by the BM25 function. These vectors represent the analyzable form of your text data and are what Milvus actually searches.</p></li>
+<li><p><strong>기본 키 필드</strong> (<code translate="no">id</code>): 컬렉션의 각 엔티티에 대한 고유 식별자입니다. <code translate="no">auto_id=True</code> 을 설정하면 Milvus에서 이러한 ID를 자동으로 생성할 수 있습니다.</p></li>
+<li><p><strong>언어 표시기 필드</strong> (<code translate="no">language</code>): 이 VARCHAR 필드는 <code translate="no">multi_analyzer_params</code> 에 지정된 <code translate="no">by_field</code> 에 해당합니다. 이 필드에는 각 엔티티의 언어 식별자가 저장되어 Milvus가 어떤 분석기를 사용할지 알려줍니다.</p></li>
+<li><p><strong>텍스트 콘텐츠 필드</strong> (<code translate="no">text</code>): 이 VARCHAR 필드에는 분석 및 검색하려는 실제 텍스트 데이터가 저장됩니다. <code translate="no">enable_analyzer=True</code> 설정은 이 필드에 대한 텍스트 분석 기능을 활성화하기 때문에 매우 중요합니다. <code translate="no">multi_analyzer_params</code> 구성은 이 필드에 직접 첨부되어 텍스트 데이터와 언어별 분석기 간의 연결을 설정합니다.</p></li>
+<li><p><strong>벡터 필드</strong> (<code translate="no">sparse</code>): 이 필드에는 BM25 함수에 의해 생성된 스파스 벡터가 저장됩니다. 이 벡터는 텍스트 데이터의 분석 가능한 형태를 나타내며 Milvus가 실제로 검색하는 것입니다.</p></li>
 </ul>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import required modules</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
@@ -468,14 +451,9 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-BM25-function" class="common-anchor-header">Define BM25 function</h3><p>Define a BM25 function to generate sparse vector representations from your raw text data:</p>
+<h3 id="Define-BM25-function" class="common-anchor-header">BM25 함수 정의</h3><p>원시 텍스트 데이터에서 스파스 벡터 표현을 생성하는 BM25 함수를 정의합니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
 bm25_function = Function(
     name=<span class="hljs-string">&quot;text_to_vector&quot;</span>,            <span class="hljs-comment"># Descriptive function name</span>
@@ -533,15 +511,10 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This function automatically applies the appropriate analyzer to each text entry based on its language identifier. For more information on BM25-based text retrieval, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
-<h3 id="Configure-index-params" class="common-anchor-header">Configure index params</h3><p>To allow efficient searching, create an index on the sparse vector field:</p>
+<p>이 함수는 언어 식별자에 따라 각 텍스트 항목에 적절한 분석기를 자동으로 적용합니다. BM25 기반 텍스트 검색에 대한 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
+<h3 id="Configure-index-params" class="common-anchor-header">색인 매개변수 구성</h3><p>효율적인 검색을 위해 스파스 벡터 필드에 인덱스를 생성합니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Configure index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -578,20 +551,15 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
   }
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The index improves search performance by organizing sparse vectors for efficient BM25 similarity calculations.</p>
-<h3 id="Create-the-collection" class="common-anchor-header">Create the collection</h3><p>This final creation step brings together all your previous configurations:</p>
+<p>이 인덱스는 효율적인 BM25 유사도 계산을 위해 스파스 벡터를 구성하여 검색 성능을 향상시킵니다.</p>
+<h3 id="Create-the-collection" class="common-anchor-header">컬렉션 만들기</h3><p>이 마지막 생성 단계에서는 이전의 모든 구성을 통합합니다:</p>
 <ul>
-<li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> names your collection for future reference.</p></li>
-<li><p><code translate="no">schema=schema</code> applies the field structure and function you defined.</p></li>
-<li><p><code translate="no">index_params=index_params</code> implements the indexing strategy for efficient searches.</p></li>
+<li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> 나중에 참조할 수 있도록 컬렉션의 이름을 지정합니다.</p></li>
+<li><p><code translate="no">schema=schema</code> 정의한 필드 구조와 기능을 적용합니다.</p></li>
+<li><p><code translate="no">index_params=index_params</code> 효율적인 검색을 위한 인덱싱 전략을 구현합니다.</p></li>
 </ul>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection</span>
 COLLECTION_NAME = <span class="hljs-string">&quot;multilingual_documents&quot;</span>
 
@@ -649,8 +617,8 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>At this point, Milvus creates an empty collection with multi-language analyzer support, ready to receive data.</p>
-<h2 id="Step-3-Insert-example-data" class="common-anchor-header">Step 3: Insert example data<button data-href="#Step-3-Insert-example-data" class="anchor-icon" translate="no">
+<p>이 시점에서 Milvus는 다국어 분석기를 지원하는 빈 컬렉션을 생성하여 데이터를 수신할 준비를 마칩니다.</p>
+<h2 id="Step-3-Insert-example-data" class="common-anchor-header">3단계: 예제 데이터 삽입<button data-href="#Step-3-Insert-example-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -665,14 +633,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When adding documents to your multi-language collection, each must include both text content and a language identifier:</p>
+    </button></h2><p>다국어 컬렉션에 문서를 추가할 때 각 문서에는 텍스트 콘텐츠와 언어 식별자가 모두 포함되어야 합니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare multilingual documents</span>
 documents = [
     <span class="hljs-comment"># English documents</span>
@@ -812,17 +775,17 @@ curl --request POST \
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>During insertion, Milvus:</p>
+<p>삽입하는 동안 Milvus:</p>
 <ol>
-<li><p>Reads each document’s <code translate="no">language</code> field</p></li>
-<li><p>Applies the corresponding analyzer to the <code translate="no">text</code> field</p></li>
-<li><p>Generates a sparse vector representation via the BM25 function</p></li>
-<li><p>Stores both the original text and the generated sparse vector</p></li>
+<li><p>각 문서의 <code translate="no">language</code> 필드를 읽습니다.</p></li>
+<li><p><code translate="no">text</code> 필드에 해당 분석기를 적용합니다.</p></li>
+<li><p>BM25 함수를 통해 스파스 벡터 표현을 생성합니다.</p></li>
+<li><p>원본 텍스트와 생성된 스파스 벡터를 모두 저장합니다.</p></li>
 </ol>
 <div class="alert note">
-<p>You don’t need to provide the sparse vector directly; the BM25 function generates it automatically based on your text and the specified analyzer.</p>
+<p>BM25 함수는 텍스트와 지정된 분석기를 기반으로 스파스 벡터를 자동으로 생성하므로 사용자가 직접 스파스 벡터를 제공할 필요가 없습니다.</p>
 </div>
-<h2 id="Step-4-Perform-search-operations" class="common-anchor-header">Step 4: Perform search operations<button data-href="#Step-4-Perform-search-operations" class="anchor-icon" translate="no">
+<h2 id="Step-4-Perform-search-operations" class="common-anchor-header">4단계: 검색 작업 수행<button data-href="#Step-4-Perform-search-operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -837,19 +800,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">Use English analyzer</h3><p>When searching with multi-language analyzers, <code translate="no">search_params</code> contains crucial configuration:</p>
+    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">영어 분석기 사용</h3><p>다국어 분석기로 검색할 때 <code translate="no">search_params</code> 에는 중요한 구성이 포함되어 있습니다:</p>
 <ul>
-<li><p><code translate="no">metric_type=&quot;BM25&quot;</code> must match your index configuration.</p></li>
-<li><p><code translate="no">analyzer_name=&quot;english&quot;</code> specifies which analyzer to apply to your query text. This is independent of the analyzers used on stored documents.</p></li>
-<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> controls BM25-specific behavior; here, it retains all terms in the search. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p></li>
+<li><p><code translate="no">metric_type=&quot;BM25&quot;</code> 색인 구성과 일치해야 합니다.</p></li>
+<li><p><code translate="no">analyzer_name=&quot;english&quot;</code> 쿼리 텍스트에 적용할 분석기를 지정합니다. 이는 저장된 문서에 사용되는 분석기와는 독립적입니다.</p></li>
+<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> BM25 관련 동작을 제어하며, 여기서는 검색의 모든 용어를 유지합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p></li>
 </ul>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,            <span class="hljs-comment"># Must match index configuration</span>
     <span class="hljs-string">&quot;analyzer_name&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>,  <span class="hljs-comment"># Analyzer that matches the query language</span>
@@ -967,14 +925,9 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Strong&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">Use Chinese analyzer</h3><p>This example demonstrates switching to the Chinese analyzer (using its alias <code translate="no">&quot;cn&quot;</code>) for different query text. All other parameters remain the same, but now the query text is processed using Chinese-specific tokenization rules.</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">중국어 분석기 사용</h3><p>이 예는 다른 쿼리 텍스트에 대해 중국어 분석기(별칭 <code translate="no">&quot;cn&quot;</code>)로 전환하는 것을 보여줍니다. 다른 모든 매개 변수는 동일하게 유지되지만 이제 쿼리 텍스트는 중국어 전용 토큰화 규칙을 사용하여 처리됩니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>
 
 chinese_results = client.search(

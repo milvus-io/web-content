@@ -1,11 +1,9 @@
 ---
 id: modify-collection.md
-title: Modify Collection
-summary: >-
-  You can rename a collection or change its settings. This page focuses on how
-  to modify a collection.
+title: コレクションの変更
+summary: コレクションの名前を変更したり、設定を変更することができます。このページでは、コレクションを変更する方法に焦点を当てます。
 ---
-<h1 id="Modify-Collection" class="common-anchor-header">Modify Collection<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
+<h1 id="Modify-Collection" class="common-anchor-header">コレクションの変更<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can rename a collection or change its settings. This page focuses on how to modify a collection.</p>
-<h2 id="Rename-Collection" class="common-anchor-header">Rename Collection<button data-href="#Rename-Collection" class="anchor-icon" translate="no">
+    </button></h1><p>コレクションの名前を変更したり、設定を変更したりできます。このページでは、コレクションを変更する方法を説明します。</p>
+<h2 id="Rename-Collection" class="common-anchor-header">コレクションの名前の変更<button data-href="#Rename-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +34,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can rename a collection as follows.</p>
+    </button></h2><p>コレクション名は以下のように変更できます。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -130,7 +123,7 @@ curl --request POST \
     &quot;newCollectionName&quot;: &quot;my_new_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Collection-Properties" class="common-anchor-header">Set Collection Properties<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Collection-Properties" class="common-anchor-header">コレクション・プロパティの設定<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -145,14 +138,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates how to set collection TTL.</p>
+    </button></h2><p>次のコード・スニペットは、コレクションのTTLを設定する方法を示しています。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -201,26 +189,26 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The applicable collection properties are as follows:</p>
+<p>該当するコレクション・プロパティは以下のとおりです：</p>
 <table>
    <tr>
-     <th><p>Property</p></th>
-     <th><p>When to Use</p></th>
+     <th><p>プロパティ</p></th>
+     <th><p>使用時期</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>If the data of a collection needs to be deleted after a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes all entities from the collection.  The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete. For details, refer to <a href="/docs/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
+     <td><p>コレクションのデータを特定の期間後に削除する必要がある場合、TTL（Time-To-Live）を秒単位で設定することを検討してください。TTLがタイムアウトすると、Milvusはコレクションからすべてのエンティティを削除します。  削除は非同期で行われるため、削除が完了するまで検索やクエリが可能です。詳細については、<a href="/docs/ja/set-collection-ttl.md">Set Collection TTLを</a>参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize data placement policy based on access frequency, expanding storage capacity for collections without impacting search performance.</p><p>For details, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></td>
+     <td><p>メモリマッピング(Mmap)はディスク上の大きなファイルへの直接メモリアクセスを可能にし、Milvusがメモリとハードディスクの両方にインデックスとデータを格納することを可能にします。このアプローチは、アクセス頻度に基づいてデータ配置ポリシーを最適化するのに役立ち、検索パフォーマンスに影響を与えることなくコレクションのストレージ容量を拡張します。</p><p>詳細については、<a href="/docs/ja/mmap.md">mmapの使用を</a>参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>With Partition Key Isolation enabled, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance. For details, refer to <a href="/docs/use-partition-key.md#Use-Partition-Key-Isolation">Use Partition Key Isolation</a>.</p></td>
+     <td><p>パーティションキーの分離を有効にすると、Milvusはパーティションキーの値に基づいてエンティティをグループ化し、これらのグループごとに個別のインデックスを作成します。検索要求を受信すると、Milvusはフィルタリング条件に指定されたパーティションキー値に基づいてインデックスを検索し、インデックスに含まれるエンティティ内で検索範囲を制限する。詳細については、「<a href="/docs/ja/use-partition-key.md#Use-Partition-Key-Isolation">パーティションキー分離の使用</a>」を参照してください。</p></td>
    </tr>
 </table>
-<h2 id="Drop-Collection-Properties" class="common-anchor-header">Drop Collection Properties<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+<h2 id="Drop-Collection-Properties" class="common-anchor-header">コレクション・プロパティの削除<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,14 +223,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also reset a collection property by dropping it as follows.</p>
+    </button></h2><p>以下のように、コレクション・プロパティをドロップしてリセットすることもできます。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[

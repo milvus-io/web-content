@@ -4,8 +4,8 @@ title: 지수 감쇠Compatible with Milvus 2.6.x
 summary: >-
   지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 만들어냅니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의
   중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색
-  가능하도록 유지합니다. 이 접근 방식은 근접성이나 최신성에 높은 우선순위를 부여하고 싶지만 먼 거리에 있는 옵션을 완전히 배제하고 싶지 않을
-  때 이상적입니다.
+  가능하도록 유지합니다. 이 접근 방식은 근접성이나 최신성을 우선순위로 두고 싶지만 더 먼 거리의 옵션을 완전히 배제하고 싶지 않을 때
+  이상적입니다.
 beta: Milvus 2.6.x
 ---
 <h1 id="Exponential-Decay" class="common-anchor-header">지수 감쇠<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Exponential-Decay" class="anchor-icon" translate="no">
@@ -173,7 +173,7 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기</h3><p>감쇠 순위자를 정의한 후 <code translate="no">ranker</code> 매개변수에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기</h3><p>디케이 랭커를 정의한 후 <code translate="no">ranker</code> 매개변수에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,

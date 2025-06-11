@@ -1,9 +1,7 @@
 ---
 id: integrate_with_ragas.md
-summary: >-
-  This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmented
-  Generation (RAG) pipeline built upon Milvus.
-title: Evaluation with Ragas
+summary: 이 가이드에서는 Ragas를 사용하여 Milvus를 기반으로 구축된 검색 증강 생성(RAG) 파이프라인을 평가하는 방법을 설명합니다.
+title: Ragas를 사용한 평가
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -11,7 +9,7 @@ title: Evaluation with Ragas
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Evaluation-with-Ragas" class="common-anchor-header">Evaluation with Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
+<h1 id="Evaluation-with-Ragas" class="common-anchor-header">Ragas를 사용한 평가<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,10 +24,10 @@ title: Evaluation with Ragas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmented Generation (RAG) pipeline built upon <a href="https://milvus.io/">Milvus</a>.</p>
-<p>The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.</p>
-<p><a href="https://docs.ragas.io/en/latest/index.html#">Ragas</a> is a framework that helps you evaluate your RAG pipelines. There are existing tools and frameworks that help you build these pipelines but evaluating it and quantifying your pipeline performance can be hard. This is where Ragas (RAG Assessment) comes in.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>이 가이드에서는 Ragas를 사용하여 <a href="https://milvus.io/">Milvus를</a> 기반으로 구축된 검색 증강 생성(RAG) 파이프라인을 평가하는 방법을 보여드립니다.</p>
+<p>RAG 시스템은 검색 시스템과 생성 모델을 결합하여 주어진 프롬프트에 따라 새 텍스트를 생성합니다. 시스템은 먼저 Milvus를 사용하여 말뭉치에서 관련 문서를 검색한 다음, 생성 모델을 사용하여 검색된 문서를 기반으로 새 텍스트를 생성합니다.</p>
+<p><a href="https://docs.ragas.io/en/latest/index.html#">Ragas는</a> RAG 파이프라인을 평가하는 데 도움이 되는 프레임워크입니다. 이러한 파이프라인을 구축하는 데 도움이 되는 기존 도구와 프레임워크가 있지만, 이를 평가하고 파이프라인 성능을 정량화하는 것은 어려울 수 있습니다. 이것이 바로 Ragas(RAG 평가)가 필요한 이유입니다.</p>
+<h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,18 +42,18 @@ title: Evaluation with Ragas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before running this notebook, make sure you have the following dependencies installed:</p>
+    </button></h2><p>이 노트북을 실행하기 전에 다음 종속성이 설치되어 있는지 확인하세요:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm pandas ragas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
-<p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>Google Colab을 사용하는 경우 방금 설치한 종속성을 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
+<p>이 예제에서는 OpenAI를 LLM으로 사용하겠습니다. 환경 변수로 <code translate="no">OPENAI_API_KEY</code> <a href="https://platform.openai.com/docs/quickstart">API 키를</a> 준비해야 합니다.</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">Define the RAG pipeline<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
+<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">RAG 파이프라인 정의하기<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,8 +68,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We will define the RAG class that use Milvus as the vector store, and OpenAI as the LLM.
-The class contains the <code translate="no">load</code> method, which loads the text data into Milvus, the <code translate="no">retrieve</code> method, which retrieves the most similar text data to the given question, and the <code translate="no">answer</code> method, which answers the given question with the retrieved knowledge.</p>
+    </button></h2><p>Milvus를 벡터 저장소로, OpenAI를 LLM으로 사용하는 RAG 클래스를 정의하겠습니다. 이 클래스에는 Milvus에 텍스트 데이터를 로드하는 <code translate="no">load</code> 메서드, 주어진 질문과 가장 유사한 텍스트 데이터를 검색하는 <code translate="no">retrieve</code> 메서드, 검색된 지식으로 주어진 질문에 답하는 <code translate="no">answer</code> 메서드가 포함되어 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
@@ -180,21 +177,21 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
         <span class="hljs-keyword">else</span>:
             <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content, retrieved_texts
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s initialize the RAG class with OpenAI and Milvus clients.</p>
+<p>OpenAI와 Milvus 클라이언트로 RAG 클래스를 초기화해 보겠습니다.</p>
 <pre><code translate="no" class="language-python">openai_client = OpenAI()
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p><code translate="no">MilvusClient</code> 의 인수는 다음과 같습니다:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li><code translate="no">uri</code> 를 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하여 모든 데이터를 이 파일에 저장하기 때문입니다.</li>
+<li>데이터 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 고성능의 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 <code translate="no">uri</code> 으로 사용하세요.</li>
+<li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정하세요.</li>
 </ul>
 </div>
-<h2 id="Run-the-RAG-pipeline-and-get-results" class="common-anchor-header">Run the RAG pipeline and get results<button data-href="#Run-the-RAG-pipeline-and-get-results" class="anchor-icon" translate="no">
+<h2 id="Run-the-RAG-pipeline-and-get-results" class="common-anchor-header">RAG 파이프라인을 실행하고 결과 얻기<button data-href="#Run-the-RAG-pipeline-and-get-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -209,8 +206,8 @@ my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We use the <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">Milvus development guide</a> to be as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
-<p>Download it and load it into the rag pipeline.</p>
+    </button></h2><p><a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">Milvus 개발 가이드는</a> 간단한 RAG 파이프라인을 위한 좋은 데이터 소스로서 RAG의 비공개 지식으로 사용합니다.</p>
+<p>이 가이드를 다운로드하여 RAG 파이프라인에 로드하세요.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> urllib.request
 
@@ -228,7 +225,7 @@ my_rag.load(text_lines)  <span class="hljs-comment"># Load the text data into RA
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Creating embeddings: 100%|██████████| 27/27 [00:20&lt;00:00,  1.34it/s]
 </code></pre>
-<p>Let’s define a query question about the content of the development guide documentation. And then use the <code translate="no">answer</code> method to get the answer and the retrieved context texts.</p>
+<p>개발 가이드 문서의 내용에 대한 쿼리 질문을 정의해 보겠습니다. 그런 다음 <code translate="no">answer</code> 메서드를 사용하여 답변과 검색된 컨텍스트 텍스트를 가져옵니다.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;what is the hardware requirements specification if I want to build Milvus and run from source code?&quot;</span>
 my_rag.answer(question, return_retrieved_text=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -237,7 +234,7 @@ my_rag.answer(question, return_retrieved_text=<span class="hljs-literal">True</s
   'Building Milvus on a local OS/shell environment\n\nThe details below outline the hardware and software requirements for building on Linux and MacOS.\n\n##',
   &quot;Software Requirements\n\nAll Linux distributions are available for Milvus development. However a majority of our contributor worked with Ubuntu or CentOS systems, with a small portion of Mac (both x86_64 and Apple Silicon) contributors. If you would like Milvus to build and run on other distributions, you are more than welcome to file an issue and contribute!\n\nHere's a list of verified OS types where Milvus can successfully build and run:\n\n- Debian/Ubuntu\n- Amazon Linux\n- MacOS (x86_64)\n- MacOS (Apple Silicon)\n\n##&quot;])
 </code></pre>
-<p>Now let’s prepare some questions with its corresponding ground truth answers. We get answers and contexts from our RAG pipeline.</p>
+<p>이제 해당 실측 답변이 포함된 몇 가지 질문을 준비해 보겠습니다. RAG 파이프라인에서 답변과 컨텍스트를 가져옵니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> EvaluationDataset
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> Dataset
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -275,10 +272,7 @@ df
 </code></pre>
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<pre><code translate="no">.dataframe tbody tr th {
+    .dataframe tbody tr th:only-of-type { 세로-정렬: 가운데; }<pre><code translate="no">.dataframe tbody tr th {
     vertical-align: top;
 }
 
@@ -294,35 +288,35 @@ df
       <th>user_input</th>
       <th>retrieved_contexts</th>
       <th>response</th>
-      <th>reference</th>
+      <th>참조</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>what is the hardware requirements specificatio...</td>
-      <td>[Hardware Requirements\n\nThe following specif...</td>
-      <td>The hardware requirements specification to bui...</td>
-      <td>If you want to build Milvus and run from sourc...</td>
+      <td>하드웨어 요구 사양은 어떻게 되나요?</td>
+      <td>[하드웨어 요구 사항\n\n다음 사양은 ...</td>
+      <td>빌드할 하드웨어 요구 사양은 무엇입니까?</td>
+      <td>밀버스를 빌드하고 소스에서 실행하려면 다음 사양이 필요합니다.</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>What is the programming language used to write...</td>
-      <td>[CMake &amp; Conan\n\nThe algorithm library of Mil...</td>
-      <td>The programming language used to write Knowher...</td>
-      <td>The programming language used to write Knowher...</td>
+      <td>작성에 사용되는 프로그래밍 언어는 무엇인가요?</td>
+      <td>[CMake &amp; Conan\n\n밀버스의 알고리즘 라이브러리는...</td>
+      <td>Knowher를 작성하는 데 사용되는 프로그래밍 언어는 무엇인가요?</td>
+      <td>Knowher를 작성하는 데 사용되는 프로그래밍 언어는 무엇입니까?</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>What should be ensured before running code cov...</td>
-      <td>[Code coverage\n\nBefore submitting your pull ...</td>
-      <td>Before running code coverage, it should be ens...</td>
-      <td>Before running code coverage, you should make ...</td>
+      <td>코드 커버리지를 실행하기 전에 확인해야 할 사항은 무엇인가요?</td>
+      <td>[코드 커버리지\n\n풀을 제출하기 전에 ...</td>
+      <td>코드 커버리지를 실행하기 전에 다음을 확인해야 합니다.</td>
+      <td>코드 커버리지를 실행하기 전에 다음을 수행해야 합니다.</td>
     </tr>
   </tbody>
 </table>
 </div>
-<h2 id="Evaluation-with-Ragas" class="common-anchor-header">Evaluation with Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
+<h2 id="Evaluation-with-Ragas" class="common-anchor-header">Ragas를 사용한 평가<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -337,8 +331,8 @@ df
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We use Ragas to evaluate the performance of our RAG pipeline results.</p>
-<p>Ragas provides a set of metrics that is easy to use. We take <code translate="no">Answer relevancy</code>, <code translate="no">Faithfulness</code>, <code translate="no">Context recall</code>, and <code translate="no">Context precision</code> as the metrics to evaluate our RAG pipeline. For more information about the metrics, please refer to the <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Ragas Metrics</a>.</p>
+    </button></h2><p>우리는 Ragas를 사용하여 RAG 파이프라인 결과의 성능을 평가합니다.</p>
+<p>Ragas는 사용하기 쉬운 메트릭 세트를 제공합니다. <code translate="no">Answer relevancy</code> , <code translate="no">Faithfulness</code>, <code translate="no">Context recall</code>, <code translate="no">Context precision</code> 을 RAG 파이프라인을 평가하는 메트릭으로 사용합니다. 메트릭에 대한 자세한 내용은 <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Ragas 메트릭을</a> 참조하세요.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> evaluate
 <span class="hljs-keyword">from</span> ragas.metrics <span class="hljs-keyword">import</span> AnswerRelevancy, Faithfulness, ContextRecall, ContextPrecision
 

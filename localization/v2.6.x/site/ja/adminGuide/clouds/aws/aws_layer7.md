@@ -1,10 +1,10 @@
 ---
 id: aws_layer7.md
-title: Set up a Layer-7 Load Balancer for Milvus on AWS
+title: Milvus on AWS用のレイヤー7ロードバランサーのセットアップ
 related_key: cluster
-summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on AWS.
+summary: AWSのLayer-7ロードバランサーの背後にmilvusクラスタをデプロイする方法を学びます。
 ---
-<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Set up a Layer-7 Load Balancer for Milvus on AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
+<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Milvus on AWS用のレイヤー7ロードバランサーのセットアップ<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,22 +19,22 @@ summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>When compared to a Layer-4 load balancer, a Layer-7 load balancer offers smart load balancing and caching capabilities and is a great choice for cloud-native services.</p>
-<p>This guide walks you through setting up a layer-7 load balancer for a Milvus cluster already running behind a Layer-4 load balancer.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Before your start</h3><ul>
-<li>You have <a href="/docs/eks.md">deployed a Milvus cluster behind a Layer-4 load balancer on AWS</a>.</li>
+    </button></h1><p>レイヤ4ロードバランサと比較すると、レイヤ7ロードバランサはスマートなロードバランシングとキャッシュ機能を提供し、クラウドネイティブなサービスに最適な選択です。</p>
+<p>このガイドでは、Layer-4ロードバランサーの背後で既に稼働しているMilvusクラスタにLayer-7ロードバランサーを設定する手順を説明します。</p>
+<h3 id="Before-your-start" class="common-anchor-header">始める前に</h3><ul>
+<li><a href="/docs/ja/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイして</a>いる。</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/eks.md">deployed a Milvus cluster behind a Layer-4 load balancer on AWS</a>.</p>
-<p>Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvusの設定を調整する</h3><p>このガイドでは、<a href="/docs/ja/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイ</a>済みであることを前提としています。</p>
+<p>このMilvusクラスタにLayer-7ロードバランサを設定する前に、次のコマンドを実行してLayer-4ロードバランサを削除します。</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Prepare TLS certificates</h3><p>TLS requires certificates to work. We’re using <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> to manage certificates and need to import an existing certificate into ACM. Refer to <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Import Certificate</a>. The following is an example.</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">TLS証明書の準備</h3><p>TLSを動作させるには証明書が必要だ。<a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACMを使って</a>証明書を管理しているので、既存の証明書をACMにインポートする必要がある。<a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">証明書のインポート</a>」を参照。以下はその例である。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># If the import-certificate command is successful, it returns the arn of the imported certificate.</span>
 aws acm import-certificate --certificate fileb://Certificate.pem \
       --certificate-chain fileb://CertificateChain.pem \
       --private-key fileb://PrivateKey.pem  
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Create an Ingress to generate a Layer-7 Load Balancer</h3><p>Prepare the ingress file as follows and name it <code translate="no">ingress.yaml</code>. <strong>Do replace the certificate arn and host with your own.</strong></p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">レイヤー7ロードバランサーを生成するためのイングレスの作成</h3><p>以下のようにイングレスファイルを準備し、名前を<code translate="no">ingress.yaml</code> とします。<strong>証明書の arn と host は自分のものに置き換えてください。</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -61,18 +61,18 @@ aws acm import-certificate --certificate fileb://Certificate.pem \
               <span class="hljs-attr">port:</span>
                 <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can create the Ingress by applying the file to your EKS cluster.</p>
+<p>このファイルをEKSクラスタに適用してIngressを作成します。</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, wait for AWS to set up the Layer-7 load balancer. You can check the progress by running</p>
+<p>あとはAWSがLayer-7ロードバランサーをセットアップするのを待つ。以下のように出力されるはずだ。</p>
 <pre><code translate="no" class="language-bash">kubectl -f ingress.yaml get -w
 <button class="copy-code-btn"></button></code></pre>
-<p>The output should be similar to the following:</p>
+<p>出力は以下のようになるはずだ：</p>
 <pre><code translate="no" class="language-shell">NAME          CLASS   HOSTS                   ADDRESS                                                                PORTS   AGE
 milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778371620.us-east-2.elb.amazonaws.com   80      10m
 <button class="copy-code-btn"></button></code></pre>
-<p>Once an address is displayed in the <strong>ADDRESS</strong> field, the Layer-7 load balancer is ready to use.</p>
-<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Verify the connection through the Layer-7 load balancer<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
+<p><strong>ADDRESS</strong>フィールドにアドレスが表示されたら、Layer-7 ロードバランサーの使用準備は完了です。</p>
+<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Layer-7 ロードバランサ経由の接続を確認する<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,7 +87,7 @@ milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This guide uses PyMilvus to verify the connection to the Milvus service behind the Layer-7 load balancer we have just created. For detailed steps, <a href="https://milvus.io/docs/v2.3.x/example_code.md">read this</a>.</p>
+    </button></h2><p>このガイドでは PyMilvus を使って、先ほど作成した Layer-7 ロードバランサーの背後にある Milvus サービスへの接続を検証します。詳しい手順はこちらを<a href="https://milvus.io/docs/v2.3.x/example_code.md">読んで</a>ください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     connections,
     utility,
@@ -101,7 +101,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>The <strong>host</strong> and <strong>server_name</strong> should replace with your own.</li>
-<li>If you have set up a DNS record to map domain name to the alb, replace the <strong>host</strong> with the domain name and omit <strong>server_name</strong>.</li>
+<li><strong>hostと</strong> <strong>server_nameは</strong>自分のものに置き換えてください。</li>
+<li>ドメイン名と alb を対応付ける DNS レコードを設定している場合は、<strong>host</strong>をドメイン名に置き換え、<strong>server_name を</strong>省略してください。</li>
 </ul>
 </div>

@@ -2,9 +2,9 @@
 id: configure_common.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure common for Milvus.
+summary: Milvus共通の設定方法をご紹介します。
 ---
-<h1 id="common-related-Configurations" class="common-anchor-header">common-related Configurations<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="common-related-Configurations" class="common-anchor-header">共通関連設定<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,14 +37,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.defaultPartitionName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Name of the default partition when a collection is created      </td>
-      <td>_default</td>
+      <td>        コレクション作成時のデフォルトパーティション名      </td>
+      <td>デフォルト</td>
     </tr>
   </tbody>
 </table>
@@ -66,13 +66,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.defaultIndexName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Name of the index when it is created with name unspecified      </td>
+      <td>        名前未指定でインデックスが作成された場合のインデックス名      </td>
       <td>_default_idx</td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.entityExpiration">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Entity expiration in seconds, CAUTION -1 means never expire      </td>
+      <td>        エンティティの有効期限を秒単位で指定。      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -124,13 +124,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.indexSliceSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Index slice size in MB      </td>
+      <td>        インデックススライスサイズ（MB      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -153,13 +153,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.highPriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in high priority pool      </td>
+      <td>        このパラメータは、スレッド数が高優先度プールのコア数の何倍になるかを指定する。      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.middlePriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in middle priority pool      </td>
+      <td>        このパラメータは、スレッド数を中優先度プールのコア数の何倍にするかを指定する。      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -211,13 +211,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.lowPriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in low priority pool      </td>
+      <td>        このパラメータは、スレッド数を低優先度プールのコア数の何倍にするかを指定する。      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -240,13 +240,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.gracefulTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        milliseconds. it represents the interval (in ms) by which the request arrival time needs to be subtracted in the case of Bounded Consistency.      </td>
+      <td>        ミリ秒。これは、Bounded Consistencyの場合にリクエスト到着時間を 引く必要がある間隔(ミリ秒)を表す。      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -269,13 +269,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. it will force quit the server if the graceful stop process is not completed during this time.      </td>
+      <td>        秒。この時間内にgraceful stop処理が完了しないと、サーバーを強制終了する。      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -298,14 +298,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.storageType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        please adjust in embedded Milvus: local, available values are [local, remote, opendal], value minio is deprecated, use remote instead      </td>
-      <td>remote</td>
+      <td>        利用可能な値は[local, remote, opendal]で、minioは非推奨です。      </td>
+      <td>リモート</td>
     </tr>
   </tbody>
 </table>
@@ -327,17 +327,17 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.simdType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Default value: auto</li>      
-        <li>Valid values: [auto, avx512, avx2, avx, sse4_2]</li>      
-        <li>This configuration is only used by querynode and indexnode, it selects CPU instruction set for Searching and Index-building.</li>      </td>
-      <td>auto</td>
+        <li>デフォルト値: auto</li>      
+        <li>有効な値：[auto、avx512、avx2、avx、sse4_2]。</li>      
+        <li>このコンフィギュレーションはquerynodeとindexnodeでのみ使用され、検索とインデックス構築のためのCPU命令セットを選択する。</li>      </td>
+      <td>オート</td>
     </tr>
   </tbody>
 </table>
@@ -359,15 +359,15 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.superUsers">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The superusers will ignore some system check processes,</li>      
-        <li>like the old password verification when updating the credential</li>      </td>
+        <li>スーパーユーザはいくつかのシステムチェック処理を無視します、</li>      
+        <li>例えば、クレデンシャルを更新する際の古いパスワードの確認など。</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -390,14 +390,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.defaultRootPassword">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        default password for root user. The maximum length is 72 characters, and double quotes are required.      </td>
-      <td>Milvus</td>
+      <td>        rootユーザーのデフォルトパスワード。最大長は72文字で、二重引用符が必要です。      </td>
+      <td>milvus</td>
     </tr>
   </tbody>
 </table>
@@ -419,13 +419,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rootShouldBindRole">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether the root user should bind a role when the authorization is enabled.      </td>
+      <td>        認証が有効な場合に、rootユーザがロールをバインドするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -448,13 +448,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.overrideBuiltInPrivilegeGroups.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to override build-in privilege groups      </td>
+      <td>        組み込みの特権グループを上書きするかどうか      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -477,14 +477,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.cluster.readonly.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Cluster level readonly privileges      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups</td>
+      <td>        クラスタレベルの読み取り専用特権      </td>
+      <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups</td>
     </tr>
   </tbody>
 </table>
@@ -506,14 +506,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.cluster.readwrite.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Cluster level readwrite privileges      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+      <td>        クラスタレベルの読み書き権限      </td>
+      <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups、FlushAll、TransferNode、TransferReplica、UpdateResourceGroups</td>
     </tr>
   </tbody>
 </table>
@@ -535,14 +535,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.cluster.admin.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Cluster level admin privileges      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase,DropDatabase,CreateOwnership,DropOwnership,ManageOwnership,CreateResourceGroup,DropResourceGroup,UpdateUser,RenameCollection,CreatePrivilegeGroup,DropPrivilegeGroup,OperatePrivilegeGroup</td>
+      <td>        クラスタ・レベルの管理者権限      </td>
+      <td>ListDatabases、SelectOwnership、SelectUser、DescribeResourceGroup、ListResourceGroups、ListPrivilegeGroups、FlushAll、TransferNode、TransferReplica、UpdateResourceGroups、BackupRBAC、RestoreRBAC、CreateDatabase、DropDatabase,CreateOwnership,DropOwnership,ManageOwnership,CreateResourceGroup,DropResourceGroup,UpdateUser,RenameCollection,CreatePrivilegeGroup,DropPrivilegeGroup,OperatePrivilegeGroup</td>
     </tr>
   </tbody>
 </table>
@@ -564,14 +564,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.database.readonly.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Database level readonly privileges      </td>
-      <td>ShowCollections,DescribeDatabase</td>
+      <td>        データベース・レベルの読み取り専用特権      </td>
+      <td>ShowCollections、DescribeDatabase</td>
     </tr>
   </tbody>
 </table>
@@ -593,14 +593,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.database.readwrite.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Database level readwrite privileges      </td>
-      <td>ShowCollections,DescribeDatabase,AlterDatabase</td>
+      <td>        データベース・レベルの読み書き権限      </td>
+      <td>データベースの表示,データベース記述,データベース変更</td>
     </tr>
   </tbody>
 </table>
@@ -622,14 +622,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.database.admin.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Database level admin privileges      </td>
-      <td>ShowCollections,DescribeDatabase,AlterDatabase,CreateCollection,DropCollection</td>
+      <td>        データベース・レベルの管理者権限      </td>
+      <td>ShowCollections、DescribeDatabase、AlterDatabase、CreateCollection、DropCollection</td>
     </tr>
   </tbody>
 </table>
@@ -651,14 +651,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.collection.readonly.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Collection level readonly privileges      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases</td>
+      <td>        コレクション・レベルの読み取り専用権限      </td>
+      <td>クエリ,検索,インデックス詳細,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases</td>
     </tr>
   </tbody>
 </table>
@@ -680,14 +680,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.collection.readwrite.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Collection level readwrite privileges      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition</td>
+      <td>        コレクション・レベルの読み書き権限      </td>
+      <td>クエリ,検索,インデックス詳細,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,ロード,リリース,挿入,削除,アップサート,インポート,フラッシュ,コンパクション,ロードバランス,CreateIndex,DropIndex,CreatePartition,DropPartition</td>
     </tr>
   </tbody>
 </table>
@@ -709,14 +709,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.collection.admin.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Collection level admin privileges      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition,CreateAlias,DropAlias</td>
+      <td>        コレクション・レベルの管理者権限      </td>
+      <td>クエリ、検索、インデックス詳細、GetFlushState、GetLoadState、GetLoadingProgress、HasPartition、ShowPartitions、DescribeCollection、DescribeAlias、GetStatistics、ListAlias、ロード、リリース、挿入、削除、アップサート、インポート、フラッシュ、コンパクション、ロードバランス、CreateIndex、DropIndex、CreatePartition、DropPartition、CreateAlias、DropAlias</td>
     </tr>
   </tbody>
 </table>
@@ -738,13 +738,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.session.ttl">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ttl value when session granting a lease to register service      </td>
+      <td>        セッションが登録サービスにリースを付与するときのttl値      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -767,13 +767,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.session.retryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry times when session sending etcd requests      </td>
+      <td>        セッションがetcdリクエストを送信する際のリトライ回数      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -796,13 +796,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.metrics.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether gather statistics for metrics locks      </td>
+      <td>        メトリクス・ロックの統計情報を収集するかどうか      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -825,13 +825,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.threshold.info">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum milliseconds for printing durations in info level      </td>
+      <td>        情報レベルの印刷時間の最小ミリ秒数      </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -854,13 +854,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.threshold.warn">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum milliseconds for printing durations in warn level      </td>
+      <td>        警告レベルの印刷時間の最小ミリ秒数      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -883,13 +883,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.maxWLockConditionalWaitTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum seconds for waiting wlock conditional      </td>
+      <td>        ロック条件待ちの最大秒数      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -912,17 +912,17 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.ttMsgEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to disable the internal time messaging mechanism for the system. </li>      
-        <li>If disabled (set to false), the system will not allow DML operations, including insertion, deletion, queries, and searches. </li>      
-        <li>This helps Milvus-CDC synchronize incremental data</li>      </td>
-      <td>true</td>
+        <li>システムの内部時間メッセージ・メカニズムを無効にするかどうか。 </li>      
+        <li>無効にした場合（falseに設定した場合）、システムは挿入、削除、クエリ、検索を含むDML操作を許可しません。 </li>      
+        <li>これはMilvus-CDCが増分データを同期するのに役立ちます。</li>      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -944,13 +944,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.traceLogMode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        trace request info      </td>
+      <td>        トレースリクエスト情報      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -973,13 +973,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter initial size      </td>
+      <td>        ブルームフィルタ初期サイズ      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -1002,14 +1002,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter type, support BasicBloomFilter and BlockedBloomFilter      </td>
-      <td>BlockedBloomFilter</td>
+      <td>        BasicBloomFilterとBlockedBloomFilterをサポートします。      </td>
+      <td>ブロックブルームフィルタ</td>
     </tr>
   </tbody>
 </table>
@@ -1031,13 +1031,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.maxBloomFalsePositive">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max false positive rate for bloom filter      </td>
+      <td>        ブルームフィルタの最大偽陽性率      </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -1060,13 +1060,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterApplyBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        batch size when to apply pk to bloom filter      </td>
+      <td>        ブルームフィルタにpkを適用する際のバッチサイズ      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -1089,13 +1089,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.collectionReplicateEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable collection replication.      </td>
+      <td>        コレクションの複製を有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1118,13 +1118,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.usePartitionKeyAsClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, do clustering compaction and segment prune on partition key field      </td>
+      <td>        trueの場合、パーティション・キー・フィールドでクラスタリング・コンパクションとセグメント・プルーニングを行う      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1147,13 +1147,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.useVectorAsClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, do clustering compaction and segment prune on vector field      </td>
+      <td>        trueの場合、ベクトルフィールドでクラスタリングコンパクションとセグメントプルーンを行う      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1176,13 +1176,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.enableVectorClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, enable vector clustering key and vector clustering compaction      </td>
+      <td>        trueの場合、ベクトル・クラスタリング・キーとベクトル・クラスタリング・コンパクションを有効にする      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1205,13 +1205,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.localRPCEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        enable local rpc for internal communication when mix or standalone mode.      </td>
+      <td>        mixまたはstandaloneモードのとき、内部通信にローカルRPCを有効にする。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1234,13 +1234,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.sync.taskPoolReleaseTimeoutSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum time to wait for the task to finish and release resources in the pool      </td>
+      <td>        タスクが終了してプールのリソースが解放されるまでの最大待機時間      </td>
       <td>60</td>
     </tr>
   </tbody>

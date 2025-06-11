@@ -1,11 +1,10 @@
 ---
 id: multi_tenancy.md
-title: Implement Multi-tenancy
+title: マルチテナントの実装
 summary: >-
-  In Milvus, multi-tenancy means multiple customers or teams—referred to as
-  tenants— share the same cluster while maintaining isolated data environments.
+  Milvusにおけるマルチテナントとは、複数の顧客またはチーム（テナントと呼ばれる）が、分離されたデータ環境を維持しながら同じクラスタを共有することを意味する。
 ---
-<h1 id="Implement-Multi-tenancy" class="common-anchor-header">Implement Multi-tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
+<h1 id="Implement-Multi-tenancy" class="common-anchor-header">マルチテナントの実装<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +19,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, multi-tenancy means multiple customers or teams—referred to as <strong>tenants</strong>— share the same cluster while maintaining isolated data environments.</p>
-<p>Milvus supports four multi-tenancy strategies, each offering a different trade-off between scalability, data isolation, and flexibility. This guide walks you through each option, helping you choose the most suitable strategy for your use case.</p>
-<h2 id="Multi-tenancy-strategies" class="common-anchor-header">Multi-tenancy strategies<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusにおけるマルチテナントとは、複数の顧客またはチーム（<strong>テナントと</strong>呼ばれる）が、分離されたデータ環境を維持しながら同じクラスタを共有することを意味します。</p>
+<p>Milvusは4つのマルチテナント戦略をサポートしており、それぞれスケーラビリティ、データ分離、柔軟性のトレードオフが異なります。このガイドでは、各オプションについて説明し、ユースケースに最適な戦略を選択できるようにします。</p>
+<h2 id="Multi-tenancy-strategies" class="common-anchor-header">マルチテナント戦略<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,60 +36,52 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports multi-tenancy at four levels: <strong>Database</strong>, <strong>Collection</strong>, <strong>Partition</strong>, and <strong>Partition Key</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Database-level multi-tenancy</h3><p>With database-level multi-tenancy, each tenant receives a corresponding <a href="/docs/manage_databases.md">database</a> containing one or more collections.</p>
+    </button></h2><p>Milvusは4つのレベルでマルチテナンシーをサポートしています：<strong>データベース</strong>、<strong>コレクション</strong>、<strong>パーティション</strong>、<strong>パーティションキー</strong>です。</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">データベースレベルのマルチテナンシー</h3><p>データベースレベルのマルチテナンシーでは、各テナントは1つまたは複数のコレクションを含む対応する<a href="/docs/ja/manage_databases.md">データベースを</a>受け取ります。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
-    <span>Database Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>データベースレベルのマルチテナンシー</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: The database-level multi-tenancy strategy  supports a maximum of 64 tenants by default.</p></li>
-<li><p><strong>Data isolation</strong>: The data in each database is fully separated, offering enterprise-grade data isolation ideal for regulated environments or customers with strict compliance needs.</p></li>
-<li><p><strong>Flexibility</strong>: Each database can have collections with different schemas, offering highly flexible data organization and allowing each tenant to have its own data schema.</p></li>
-<li><p><strong>Others</strong>: This strategy also supports RBAC, enabling fine-grained control over user access per tenant. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
+<li><p><strong>スケーラビリティ</strong>：データベースレベルのマルチテナント戦略は、デフォルトで最大64テナントをサポートします。</p></li>
+<li><p><strong>データの分離</strong>：各データベースのデータは完全に分離されており、規制環境や厳格なコンプライアンスを必要とするお客様に理想的なエンタープライズグレードのデータ分離を提供します。</p></li>
+<li><p><strong>柔軟性</strong>：各データベースは異なるスキーマのコレクションを持つことができるため、柔軟性の高いデータ編成が可能で、各テナントは独自のデータスキーマを持つことができます。</p></li>
+<li><p><strong>その他</strong>このストラテジーはRBACにも対応しており、テナントごとのユーザーアクセスをきめ細かく制御できます。さらに、特定のテナントのデータを柔軟にロードまたはリリースして、ホットデータとコールドデータを効率的に管理できます。</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Collection-level multi-tenancy</h3><p>With collection-level multi-tenancy, each tenant is assigned a <a href="/docs/manage-collections.md">collection</a>, offering strong data isolation.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">コレクションレベルのマルチテナント</h3><p>コレクションレベルのマルチテナントでは、各テナントに<a href="/docs/ja/manage-collections.md">コレクションが</a>割り当てられるため、データを強力に分離できます。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
-    <span>Collection Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>コレクションレベルのマルチテナント</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: Since a cluster can hold up to 65,536 collections by default, this strategy can accommodate the same number of tenants within the cluster.</p></li>
-<li><p><strong>Data isolation</strong>: Collections are physically isolated from one another. This strategy provides strong data isolation.</p></li>
-<li><p><strong>Flexibility</strong>: This strategy allows each collection to have its own schema, accommodating tenants with different data schemas.</p></li>
-<li><p><strong>Others</strong>: This strategy also supports RBAC, allowing for granular access control over tenants. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
+<li><p><strong>スケーラビリティ</strong>：クラスタはデフォルトで最大65,536のコレクションを保持できるため、この戦略ではクラスタ内で同じ数のテナントを収容できます。</p></li>
+<li><p><strong>データの分離</strong>：コレクションは互いに物理的に分離されています。このストラテジーは強力なデータ分離を提供します。</p></li>
+<li><p><strong>柔軟性</strong>：この戦略では、各コレクションが独自のスキーマを持つことができ、異なるデータスキーマを持つテナントに対応できます。</p></li>
+<li><p><strong>その他</strong>このストラテジーはRBACにも対応しており、テナントに対するきめ細かなアクセス制御が可能です。さらに、ホットデータとコールドデータを効果的に管理するために、特定のテナントに対して柔軟にデータをロードまたはリリースできます。</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Partition-level multi-tenancy</h3><p>In partition-level multi-tenancy, each tenant is assigned to a manually created <a href="/docs/manage-partitions.md">partition</a> within a shared collection.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">パーティションレベルのマルチテナント</h3><p>パーティションレベルのマルチテナントでは、各テナントは共有コレクション内で手動で作成した<a href="/docs/ja/manage-partitions.md">パーティションに</a>割り当てられます。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
-    <span>Partition Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>パーティションレベルのマルチテナント</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: A collection can hold up to 1,024 partitions per collection, allowing for the same number of tenants within it.</p></li>
-<li><p><strong>Data isolation</strong>: The data of each tenant is physically separated by partitions.</p></li>
-<li><p><strong>Flexibility</strong>: This strategy requires all tenants to share the same data schema. And partitions need to be manually created.</p></li>
-<li><p><strong>Others</strong>: RBAC is not supported on the partition level. Tenants can be queried either individually or across multiple partitions, which makes this approach well-suited for scenarios involving aggregated queries or analytics across tenant segments. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
+<li><p><strong>スケーラビリティ</strong>：コレクションごとに最大1,024のパーティションを保持でき、同じ数のテナントをコレクション内に配置できます。</p></li>
+<li><p><strong>データの分離</strong>：各テナントのデータはパーティションによって物理的に分離されます。</p></li>
+<li><p><strong>柔軟性</strong>：この戦略では、すべてのテナントが同じデータスキーマを共有する必要があります。また、パーティションは手動で作成する必要がある。</p></li>
+<li><p><strong>その他</strong>パーティションレベルでのRBACはサポートされていない。テナントは個別に、または複数のパーティションにまたがってクエリを実行できるため、テナント・セグメントにまたがる集計クエリや分析を含むシナリオに適しています。さらに、特定のテナントのデータを柔軟にロードまたはリリースして、ホットデータとコールドデータを効率的に管理できます。</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Partition key-level multi-tenancy</h3><p>With this strategy, all tenants share a single collection and schema, but each tenant’s data is automatically routed into 16 physically isolated partitions based on the <a href="/docs/use-partition-key.md">partition key</a> value. Although each physical partition can contain multiple tenants, the data from different tenants remains logically separated.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">パーティションキーレベルのマルチテナント</h3><p>この戦略では、すべてのテナントが単一のコレクションとスキーマを共有しますが、各テナントのデータは<a href="/docs/ja/use-partition-key.md">パーティション・キーの</a>値に基づいて、物理的に分離された16のパーティションに自動的にルーティングされます。各物理パーティションには複数のテナントを含めることができますが、異なるテナントのデータは論理的に分離されたままです。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
-    <span>Partition Key Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>パーティション・キー・レベルのマルチ・テナント</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: The partition key-level strategy offers the most scalable approach, supporting millions of tenants.</p></li>
-<li><p><strong>Data isolation</strong>: This strategy offers relatively weak data isolation because multiple tenants can share a physical partition.</p></li>
-<li><p><strong>Flexibility</strong>: Since all tenants must share the same data schema, this strategy offers limited data flexibility.</p></li>
-<li><p><strong>Others</strong>: RBAC is not supported on the partition-key level. Tenants can be queried either individually or across multiple partitions, which makes this approach well-suited for scenarios involving aggregated queries or analytics across tenant segments.</p></li>
+<li><p><strong>スケーラビリティ</strong>：パーティション・キー・レベルの戦略は、数百万テナントをサポートする最もスケーラブルなアプローチです。</p></li>
+<li><p><strong>データの分離</strong>：複数のテナントが物理パーティションを共有できるため、データの分離は比較的弱い。</p></li>
+<li><p><strong>柔軟性</strong>：すべてのテナントが同じデータスキーマを共有する必要があるため、この戦略ではデータの柔軟性が制限されます。</p></li>
+<li><p><strong>その他</strong>パーティション・キー・レベルでのRBACはサポートされていません。テナントは個別または複数のパーティションにまたがってクエリを実行できるため、テナント・セグメントにまたがる集計クエリや分析を含むシナリオに適しています。</p></li>
 </ul>
-<h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">Choosing the right multi-tenancy strategy<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
+<h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">適切なマルチテナント戦略の選択<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,77 +96,77 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The table below offers a comprehensive comparison between the four levels of multi-tenancy strategies.</p>
+    </button></h2><p>以下の表は、4つのレベルのマルチテナント戦略を包括的に比較したものです。</p>
 <table>
    <tr>
      <th></th>
-     <th><p><strong>Database-level</strong></p></th>
-     <th><p><strong>Collection-level</strong></p></th>
-     <th><p><strong>Partition-level</strong></p></th>
-     <th><p><strong>Partition key-level</strong></p></th>
+     <th><p><strong>データベースレベル</strong></p></th>
+     <th><p><strong>コレクションレベル</strong></p></th>
+     <th><p><strong>パーティション・レベル</strong></p></th>
+     <th><p><strong>パーティション・キー・レベル</strong></p></th>
    </tr>
    <tr>
-     <td><p><strong>Data Isolation</strong></p></td>
-     <td><p>Physical</p></td>
-     <td><p>Physical</p></td>
-     <td><p>Physical</p></td>
-     <td><p>Physical + Logical</p></td>
+     <td><p><strong>データ分離</strong></p></td>
+     <td><p>物理的</p></td>
+     <td><p>物理的</p></td>
+     <td><p>物理的</p></td>
+     <td><p>物理+論理</p></td>
    </tr>
    <tr>
-     <td><p><strong>Max. number of tenants</strong></p></td>
-     <td><p>By default, 64. You can increase it by modifying the <code translate="no">maxDatabaseNum</code> parameter in the Milvus.yaml configuration file. </p></td>
-     <td><p>By default, 65,536. You can increase it by modifying the <code translate="no">maxCollectionNum</code> parameter in the Milvus.yaml configuration file.</p></td>
-     <td><p>Up to 1,024 per collection. </p></td>
-     <td><p>Millions</p></td>
+     <td><p><strong>最大テナント数</strong></p></td>
+     <td><p>デフォルトでは64。Milvus.yaml設定ファイルの<code translate="no">maxDatabaseNum</code> パラメータを変更することで増やすことができます。 </p></td>
+     <td><p>デフォルトでは65,536。Milvus.yaml設定ファイルの<code translate="no">maxCollectionNum</code> パラメータを変更することで増やすことができます。</p></td>
+     <td><p>コレクションあたり最大1,024。 </p></td>
+     <td><p>数百万</p></td>
    </tr>
    <tr>
-     <td><p><strong>Data schema flexibility</strong></p></td>
-     <td><p>High</p></td>
-     <td><p>Medium</p></td>
-     <td><p>Low</p></td>
-     <td><p>Low</p></td>
+     <td><p><strong>データスキーマの柔軟性</strong></p></td>
+     <td><p>高</p></td>
+     <td><p>中</p></td>
+     <td><p>低い</p></td>
+     <td><p>低い</p></td>
    </tr>
    <tr>
-     <td><p><strong>RBAC support</strong></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
-     <td><p>No</p></td>
-     <td><p>No</p></td>
+     <td><p><strong>RBACサポート</strong></p></td>
+     <td><p>対応</p></td>
+     <td><p>あり</p></td>
+     <td><p>なし</p></td>
+     <td><p>いいえ</p></td>
    </tr>
    <tr>
-     <td><p><strong>Search performance</strong></p></td>
-     <td><p>Strong</p></td>
-     <td><p>Strong</p></td>
-     <td><p>Medium</p></td>
-     <td><p>Medium</p></td>
+     <td><p><strong>検索パフォーマンス</strong></p></td>
+     <td><p>強い</p></td>
+     <td><p>強い</p></td>
+     <td><p>中</p></td>
+     <td><p>中</p></td>
    </tr>
    <tr>
-     <td><p><strong>Cross-tenant search support</strong></p></td>
-     <td><p>No</p></td>
-     <td><p>No</p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
+     <td><p><strong>クロステナント検索サポート</strong></p></td>
+     <td><p>なし</p></td>
+     <td><p>なし</p></td>
+     <td><p>あり</p></td>
+     <td><p>あり</p></td>
    </tr>
    <tr>
-     <td><p><strong>Support for effective handling of hot and cold data</strong></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
-     <td><p>No Currently, not supported for the partition key-level strategy.</p></td>
+     <td><p><strong>ホットデータとコールドデータの効果的な処理のサポート</strong></p></td>
+     <td><p>はい</p></td>
+     <td><p>はい</p></td>
+     <td><p>はい</p></td>
+     <td><p>現在、パーティション・キー・レベル戦略はサポートされていない。</p></td>
    </tr>
 </table>
-<p>There are several factors to consider when you choose the multi-tenancy strategy in Milvus.</p>
+<p>Milvusのマルチテナント戦略を選択する際に考慮すべきいくつかの要素があります。</p>
 <ol>
-<li><p><strong>Scalability:</strong> Partition Key > Partition > Collection > Database</p>
-<p>If you expect to support a very large number of tenants (millions or more), use the partition key-level strategy.</p></li>
-<li><p><strong>Strong data isolation requirements</strong>: Database = Collection > Partition > Partition Key</p>
-<p>Choose database, collection, or partition-level strategies if you have strict physical data isolation requirements.</p></li>
-<li><p><strong>Flexible data schema for each tenant’s data:</strong> Database > Collection > Partition = Partition Key</p>
-<p>Database-level and collection-level strategies provide full flexibility in data schemas. If your tenants’ data structures are different, choose database-level or collection-level multi-tenancy.</p></li>
-<li><p><strong>Others</strong></p>
+<li><p><strong>スケーラビリティ：</strong>パーティション・キー &gt; パーティション &gt; コレクション &gt; データベース</p>
+<p>非常に多くのテナント（数百万以上）をサポートすることが予想される場合は、パーティション・キー・レベルの戦略を使用してください。</p></li>
+<li><p><strong>強力なデータ分離要件</strong>：データベース = コレクション &gt; パーティション &gt; パーティション・キー</p>
+<p>物理的なデータ分離要件が厳しい場合は、データベース、コレクション、またはパーティション・レベルのストラテジーを選択してください。</p></li>
+<li><p><strong>各テナントのデータに対する柔軟なデータ・スキーマ：</strong>データベース &gt; コレクション &gt; パーティション = パーティション・キー</p>
+<p>データベース・レベルとコレクション・レベルのストラテジーでは、データ・スキーマを完全に柔軟に変更できます。テナントのデータ構造が異なる場合は、データベースレベルまたはコレクションレベルのマルチテナントを選択してください。</p></li>
+<li><p><strong>その他</strong></p>
 <ol>
-<li><p><strong>Performance:</strong> Search performance is determined by various factors, including indexes, search parameters, and machine configurations. Milvus also support performance-tuning. It is recommended to test the actual performance before you select a multi-tenancy strategy.</p></li>
-<li><p><strong>Effective handling of hot and cold data</strong>: Currently, the database-level, collection-level, and partition-level strategies all support hot and cold data handling.</p></li>
-<li><p><strong>Cross-tenant searches</strong>: Only the partition-level and partition-key-level strategies support cross-tenant queries.</p></li>
+<li><p><strong>パフォーマンス：</strong>検索パフォーマンスは、インデックス、検索パラメータ、マシン構成など様々な要因によって決定されます。Milvusはパフォーマンスチューニングもサポートしています。マルチテナント戦略を選択する前に、実際のパフォーマンスをテストすることをお勧めします。</p></li>
+<li><p><strong>ホットデータとコールドデータの効果的な処理</strong>現在、データベースレベル、コレクションレベル、パーティションレベルのストラテジーはすべてホットデータとコールドデータの取り扱いをサポートしています。</p></li>
+<li><p><strong>クロステナント検索</strong>：パーティション・レベルとパーティション・キー・レベルのストラテジーのみが、クロステナント検索をサポートしています。</p></li>
 </ol></li>
 </ol>

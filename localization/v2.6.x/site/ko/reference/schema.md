@@ -1,12 +1,11 @@
 ---
 id: schema.md
-title: Schema Explained
+title: 스키마 설명
 summary: >-
-  A schema defines the data structure of a collection. Before creating a
-  collection, you need to work out a design of its schema. This page helps you
-  understand the collection schema and design an example schema on your own.
+  스키마는 컬렉션의 데이터 구조를 정의합니다. 컬렉션을 만들기 전에 컬렉션의 스키마를 설계해야 합니다. 이 페이지는 컬렉션 스키마를 이해하고
+  직접 스키마 예제를 디자인하는 데 도움이 됩니다.
 ---
-<h1 id="Schema-Explained" class="common-anchor-header">Schema Explained<button data-href="#Schema-Explained" class="anchor-icon" translate="no">
+<h1 id="Schema-Explained" class="common-anchor-header">스키마 설명<button data-href="#Schema-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A schema defines the data structure of a collection. Before creating a collection, you need to work out a design of its schema. This page helps you understand the collection schema and design an example schema on your own.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>스키마는 컬렉션의 데이터 구조를 정의합니다. 컬렉션을 만들기 전에 컬렉션의 스키마를 설계해야 합니다. 이 페이지는 컬렉션 스키마를 이해하고 직접 스키마 예제를 디자인하는 데 도움이 됩니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,18 +36,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>On Zilliz Cloud, a collection schema assembles a table in a relational database, which defines how Zilliz Cloud organizes data in the collection.</p>
-<p>A well-designed schema is essential as it abstracts the data model and decides if you can achieve the business objectives through a search. Furthermore, since every row of data inserted into the collection must follow the schema, it helps maintain data consistency and long-term quality. From a technical perspective, a well-defined schema leads to well-organized column data storage and a cleaner index structure, boosting search performance.</p>
-<p>A collection schema has a primary key, a maximum of four vector fields, and several scalar fields. The following diagram illustrates how to map an article to a list of schema fields.</p>
+    </button></h2><p>질리즈 클라우드에서 컬렉션 스키마는 관계형 데이터베이스의 테이블을 구성하는 것으로, 질리즈 클라우드가 컬렉션의 데이터를 구성하는 방식을 정의합니다.</p>
+<p>잘 설계된 스키마는 데이터 모델을 추상화하고 검색을 통해 비즈니스 목표를 달성할 수 있는지 여부를 결정하기 때문에 필수적입니다. 또한 컬렉션에 삽입되는 모든 데이터 행은 스키마를 따라야 하므로 데이터 일관성과 장기적인 품질을 유지하는 데 도움이 됩니다. 기술적 관점에서 보면, 잘 정의된 스키마는 잘 정리된 컬럼 데이터 저장과 깔끔한 인덱스 구조로 이어져 검색 성능을 향상시킵니다.</p>
+<p>컬렉션 스키마에는 기본 키, 최대 4개의 벡터 필드, 여러 개의 스칼라 필드가 있습니다. 다음 다이어그램은 문서를 스키마 필드 목록에 매핑하는 방법을 보여줍니다.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
-    <span>Schema Design Anatomy</span>
-  </span>
-</p>
-<p>The data model design of a search system involves analyzing business needs and abstracting information into a schema-expressed data model. For instance, searching a piece of text must be “indexed” by converting the literal string into a vector through “embedding” and enabling vector search. Beyond this essential requirement, storing other properties such as publication timestamp and author may be necessary. This metadata allows for semantic searches to be refined through filtering, returning only texts published after a specific date or by a particular author. You can also retrieve these scalars with the main text to render the search result in the application. Each should be assigned a unique identifier to organize these text pieces, expressed as an integer or string. These elements are essential for achieving sophisticated search logic.</p>
-<p>Refer to <a href="/docs/schema-hands-on.md">Schema Design Hands-On</a> to figure out how to make a well-designed schema.</p>
-<h2 id="Create-Schema" class="common-anchor-header">Create Schema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
+   </span> <span class="img-wrapper"> <span>스키마 디자인 구조</span> </span></p>
+<p>검색 시스템의 데이터 모델 설계에는 비즈니스 요구 사항을 분석하고 스키마로 표현된 데이터 모델로 정보를 추상화하는 작업이 포함됩니다. 예를 들어, 텍스트를 검색하려면 '임베딩'을 통해 리터럴 문자열을 벡터로 변환하고 벡터 검색을 활성화하여 '인덱싱'해야 합니다. 이 필수 요건 외에도 게시 타임스탬프나 작성자 같은 다른 속성을 저장해야 할 수도 있습니다. 이 메타데이터를 사용하면 필터링을 통해 시맨틱 검색을 세분화하여 특정 날짜 이후에 또는 특정 작성자가 게시한 텍스트만 반환할 수 있습니다. 또한 이러한 스칼라를 기본 텍스트와 함께 검색하여 애플리케이션에서 검색 결과를 렌더링할 수도 있습니다. 이러한 텍스트 조각을 구성하기 위해 각각에 정수 또는 문자열로 표현되는 고유 식별자를 할당해야 합니다. 이러한 요소는 정교한 검색 로직을 구현하는 데 필수적입니다.</p>
+<p>스키마 <a href="/docs/ko/schema-hands-on.md">디자인 실습을</a> 참조하여 잘 설계된 스키마를 만드는 방법을 알아보세요.</p>
+<h2 id="Create-Schema" class="common-anchor-header">스키마 만들기<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,14 +60,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates how to create a schema.</p>
+    </button></h2><p>다음 코드 스니펫은 스키마를 만드는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 schema = MilvusClient.create_schema()
@@ -91,7 +83,7 @@ schema := entity.NewSchema()
     &quot;fields&quot;: []
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Add-Primary-Field" class="common-anchor-header">Add Primary Field<button data-href="#Add-Primary-Field" class="anchor-icon" translate="no">
+<h2 id="Add-Primary-Field" class="common-anchor-header">기본 필드 추가<button data-href="#Add-Primary-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,14 +98,9 @@ schema := entity.NewSchema()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The primary field in a collection uniquely identifies an entity. It only accepts <strong>Int64</strong> or <strong>VarChar</strong> values. The following code snippets demonstrate how to add the primary field.</p>
+    </button></h2><p>컬렉션의 기본 필드는 엔티티를 고유하게 식별합니다. <strong>Int64</strong> 또는 <strong>VarChar</strong> 값만 허용합니다. 다음 코드 스니펫은 기본 필드를 추가하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
     datatype=DataType.INT64,
@@ -157,10 +144,10 @@ schema.addField(AddFieldReq.builder()
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>When adding a field, you can explicitly clarify the field as the primary field by setting its <code translate="no">is_primary</code> property to <code translate="no">True</code>. A primary field accepts <strong>Int64</strong> values by default. In this case, the primary field value should be integers similar to <code translate="no">12345</code>. If you choose to use <strong>VarChar</strong> values in the primary field, the value should be strings similar to <code translate="no">my_entity_1234</code>.</p>
-<p>You can also set the <code translate="no">autoId</code> properties to <code translate="no">True</code> to make Zilliz Cloud automatically allocate primary field values upon data insertions.</p>
-<p>For details, refer to <a href="/docs/primary-field.md">Primary Field & AutoId</a>.</p>
-<h2 id="Add-Vector-Fields" class="common-anchor-header">Add Vector Fields<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
+<p>필드를 추가할 때 <code translate="no">is_primary</code> 속성을 <code translate="no">True</code> 으로 설정하여 해당 필드가 기본 필드임을 명시적으로 명확히 할 수 있습니다. 기본 필드는 기본적으로 <strong>Int64</strong> 값을 허용합니다. 이 경우 기본 필드 값은 <code translate="no">12345</code> 과 유사한 정수여야 합니다. 기본 필드에 <strong>VarChar</strong> 값을 사용하도록 선택한 경우 값은 <code translate="no">my_entity_1234</code> 과 유사한 문자열이어야 합니다.</p>
+<p>또한 <code translate="no">autoId</code> 속성을 <code translate="no">True</code> 으로 설정하여 데이터 삽입 시 Zilliz Cloud가 자동으로 기본 필드 값을 할당하도록 할 수 있습니다.</p>
+<p>자세한 내용은 <a href="/docs/ko/primary-field.md">기본 필드 및 자동 ID를</a> 참조하세요.</p>
+<h2 id="Add-Vector-Fields" class="common-anchor-header">벡터 필드 추가하기<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -175,14 +162,9 @@ schema.addField(AddFieldReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vector fields accept various sparse and dense vector embeddings. On Zilliz Cloud, you can add four vector fields to a collection. The following code snippets demonstrate how to add a vector field.</p>
+    </button></h2><p>벡터 필드는 다양한 희소 및 고밀도 벡터 임베딩을 허용합니다. 질리즈 클라우드에서는 컬렉션에 4개의 벡터 필드를 추가할 수 있습니다. 다음 코드 스니펫은 벡터 필드를 추가하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
     datatype=DataType.FLOAT_VECTOR,
@@ -222,18 +204,18 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">dim</code> paramter in the above code snippets indicates the dimensionality of the vector embeddings to be held in the vector field. The <code translate="no">FLOAT_VECTOR</code> value indicates that the vector field holds a list of 32-bit floating numbers, which are usually used to represent antilogarithms.In addition to that, Zilliz Cloud also supports the following types of vector embeddings:</p>
+<p>위 코드 조각의 <code translate="no">dim</code> 매개변수는 벡터 필드에 담을 벡터 임베딩의 차원을 나타냅니다. <code translate="no">FLOAT_VECTOR</code> 값은 벡터 필드에 32비트 부동 소수점 목록이 들어있음을 나타내며, 일반적으로 반항수를 표현하는 데 사용됩니다.이 외에도 Zilliz Cloud는 다음 유형의 벡터 임베딩도 지원합니다:</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
-<p>A vector field of this type holds a list of 16-bit half-precision floating numbers and usually applies to memory- or bandwidth-restricted deep learning or GPU-based computing scenarios.</p></li>
+<p>이 유형의 벡터 필드는 16비트 반정밀도 부동 소수점 목록을 보유하며 일반적으로 메모리 또는 대역폭이 제한된 딥 러닝 또는 GPU 기반 컴퓨팅 시나리오에 적용됩니다.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
-<p>A vector field of this type holds a list of 16-bit floating-point numbers that have reduced precision but the same exponent range as Float32. This type of data is commonly used in deep learning scenarios, as it reduces memory usage without significantly impacting accuracy.</p></li>
+<p>이 유형의 벡터 필드에는 정밀도는 떨어지지만 지수 범위는 Float32와 동일한 16비트 부동 소수점 숫자 목록이 들어 있습니다. 이 유형의 데이터는 정확도에 큰 영향을 주지 않으면서 메모리 사용량을 줄이기 때문에 딥러닝 시나리오에서 일반적으로 사용됩니다.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
-<p>A vector field of this type holds a list of 0s and 1s. They serve as compact features for representing data in image processing and information retrieval scenarios.</p></li>
+<p>이 유형의 벡터 필드에는 0과 1의 목록이 들어 있습니다. 이미지 처리 및 정보 검색 시나리오에서 데이터를 표현하기 위한 간결한 기능으로 사용됩니다.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
-<p>A vector field of this type holds a list of non-zero numbers and their sequence numbers to represent sparse vector embeddings.</p></li>
+<p>이 유형의 벡터 필드에는 0이 아닌 숫자의 목록과 그 시퀀스 번호가 저장되어 희소 벡터 임베딩을 나타냅니다.</p></li>
 </ul>
-<h2 id="Add-Scalar-Fields" class="common-anchor-header">Add Scalar Fields<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
+<h2 id="Add-Scalar-Fields" class="common-anchor-header">스칼라 필드 추가<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -248,15 +230,10 @@ schema.addField(AddFieldReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In common cases, you can use scalar fields to store the metadata of the vector embeddings stored in Milvus, and conduct ANN searches with metadata filtering to improve the correctness of the search results. Zilliz Cloud supports multiple scalar field types, including <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong>, and <strong>JSON</strong>.</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">Add String Fields</h3><p>In Milvus, you can use VarChar fields to store strings. For more on the VarChar field, refer to <a href="/docs/string.md">String Field</a>.</p>
+    </button></h2><p>일반적인 경우, 스칼라 필드를 사용하여 밀버스에 저장된 벡터 임베딩의 메타데이터를 저장하고 메타데이터 필터링을 통해 ANN 검색을 수행하여 검색 결과의 정확도를 높일 수 있습니다. 질리즈 클라우드는 <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong>, <strong>JSON</strong> 등 다양한 스칼라 필드 타입을 지원합니다.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">문자열 필드 추가</h3><p>Milvus에서는 문자열을 저장하기 위해 VarChar 필드를 사용할 수 있습니다. VarChar 필드에 대한 자세한 내용은 <a href="/docs/ko/string.md">문자열 필드를</a> 참조하십시오.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
     datatype=DataType.VARCHAR,
@@ -297,14 +274,9 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Number-Fields" class="common-anchor-header">Add Number Fields</h3><p>The types of numbers that Milvus supports are <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, and <code translate="no">Double</code>. For more on the number fields, refer to <a href="/docs/number.md">Number Field</a>.</p>
+<h3 id="Add-Number-Fields" class="common-anchor-header">숫자 필드 추가</h3><p>Milvus가 지원하는 숫자 유형은 <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code> 입니다. 숫자 필드에 대한 자세한 내용은 <a href="/docs/ko/number.md">숫자 필드를</a> 참조하세요.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_int64&quot;</span>,
     datatype=DataType.INT64,
@@ -339,14 +311,9 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Boolean-Fields" class="common-anchor-header">Add Boolean Fields</h3><p>Milvus supports boolean fields. The following code snippets demonstrate how to add a boolean field.</p>
+<h3 id="Add-Boolean-Fields" class="common-anchor-header">부울 필드 추가</h3><p>Milvus는 부울 필드를 지원합니다. 다음 코드 스니펫은 부울 필드를 추가하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_bool&quot;</span>,
     datatype=DataType.BOOL,
@@ -382,14 +349,9 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-JSON-fields" class="common-anchor-header">Add JSON fields</h3><p>A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to <a href="/docs/use-json-fields.md">JSON Field</a>.</p>
+<h3 id="Add-JSON-fields" class="common-anchor-header">JSON 필드 추가</h3><p>JSON 필드는 일반적으로 반구조화된 JSON 데이터를 저장합니다. JSON 필드에 대한 자세한 내용은 <a href="/docs/ko/use-json-fields.md">JSON 필드를</a> 참조하세요.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_json&quot;</span>,
     datatype=DataType.JSON,
@@ -426,14 +388,9 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields" class="common-anchor-header">Add Array Fields</h3><p>An array field stores a list of elements. The data types of all elements in an array field should be the same. For more on the array fields, refer to <a href="/docs/array_data_type.md">Array Field</a>.</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">배열 필드 추가</h3><p>배열 필드는 요소 목록을 저장합니다. 배열 필드에 있는 모든 요소의 데이터 유형은 동일해야 합니다. 배열 필드에 대한 자세한 내용은 배열 <a href="/docs/ko/array_data_type.md">필드를</a> 참조하세요.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_array&quot;</span>,
     datatype=DataType.ARRAY,

@@ -1,15 +1,10 @@
 ---
 id: filtering-templating.md
-title: Filter Templating
+title: フィルタテンプレート
 summary: >-
-  In Milvus, complex filter expressions with numerous elements, especially those
-  involving non-ASCII characters like CJK characters, can significantly affect
-  query performance. To address this, Milvus introduces a filter expression
-  templating mechanism designed to improve efficiency by reducing the time spent
-  parsing complex expressions. This page explains using filter expression
-  templating in search, query, and delete operations.
+  Milvusでは、多数の要素を含む複雑なフィルタ式、特に日中韓文字のような非ASCII文字を含むフィルタ式は、クエリのパフォーマンスに大きな影響を与える可能性があります。この問題に対処するため、Milvusでは複雑な式の解析にかかる時間を短縮し、効率を向上させることを目的としたフィルタ式のテンプレート化機構を導入しています。このページでは、検索、クエリー、削除操作におけるフィルター式のテンプレート化について説明します。
 ---
-<h1 id="Filter-Templating" class="common-anchor-header">Filter Templating<button data-href="#Filter-Templating" class="anchor-icon" translate="no">
+<h1 id="Filter-Templating" class="common-anchor-header">フィルタテンプレート<button data-href="#Filter-Templating" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, complex filter expressions with numerous elements, especially those involving non-ASCII characters like CJK characters, can significantly affect query performance. To address this, Milvus introduces a filter expression templating mechanism designed to improve efficiency by reducing the time spent parsing complex expressions. This page explains using filter expression templating in search, query, and delete operations.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusでは、多数の要素を含む複雑なフィルタ式、特に日中韓文字のような非ASCII文字を含むフィルタ式は、クエリのパフォーマンスに大きな影響を与える可能性があります。この問題に対処するため、Milvusでは複雑な式の解析にかかる時間を短縮し、効率を向上させることを目的としたフィルタ式のテンプレート化機構を導入しています。このページでは、検索、クエリ、削除操作におけるフィルタ式のテンプレート化について説明します。</p>
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,19 +35,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Filter expression templating allows you to create filter expressions with placeholders, which can be dynamically substituted with values during query execution. Using templating, you avoid embedding large arrays or complex expressions directly into the filter, reducing parsing time and improving query performance.</p>
-<p>Let’s say you have a filter expression involving two fields, <code translate="no">age</code> and <code translate="no">city</code>, and you want to find all people whose age is greater than 25 and who live in either “北京” (Beijing) or “上海” (Shanghai). Instead of directly embedding the values in the filter expression, you can use a template:</p>
+    </button></h2><p>フィルタ式のテンプレート化により、プレースホルダを持つフィルタ式を作成し、クエリ実行時に動的に値を代入することができます。テンプレート化を使用すると、大きな配列や複雑な式を直接フィルタに埋め込む必要がなくなるので、解析時間が短縮され、クエリのパフォーマンスが向上します。</p>
+<p>例えば、<code translate="no">age</code> と<code translate="no">city</code> という2つのフィールドを含むフィルタ式があり、年齢が25歳以上で、"北京"（北京）か "上海"（上海）のどちらかに住んでいる人をすべて見つけたいとします。フィルター式に値を直接埋め込む代わりに、テンプレートを使うことができます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>Here, <code translate="no">{age}</code> and <code translate="no">{city}</code> are placeholders that will be replaced with the actual values in <code translate="no">filter_params</code> when the query is executed.</p>
-<p>Using filter expression templating in Milvus has several key advantages:</p>
+<p>ここで、<code translate="no">{age}</code> と<code translate="no">{city}</code> はプレースホルダで、クエリ実行時に<code translate="no">filter_params</code> の実際の値に置き換えられます。</p>
+<p>Milvusでフィルタ式のテンプレート化を使用すると、いくつかの重要な利点があります：</p>
 <ul>
-<li><p><strong>Reduced Parsing Time</strong>: By replacing large or complex filter expressions with placeholders, the system spends less time parsing and processing the filter.</p></li>
-<li><p><strong>Improved Query Performance</strong>: With reduced parsing overhead, query performance improves, leading to higher QPS and faster response times.</p></li>
-<li><p><strong>Scalability</strong>: As your datasets grow and filter expressions become more complex, templating ensures that performance remains efficient and scalable.</p></li>
+<li><p><strong>解析時間の短縮</strong>: 大きく複雑なフィルタ式をプレースホルダに置き換えることで、フィルタの解析と処理にかかる時間を短縮できます。</p></li>
+<li><p><strong>クエリパフォーマンスの向上</strong>：解析のオーバーヘッドが減ることで、クエリのパフォーマンスが向上し、QPSの向上とレスポンスタイムの短縮につながります。</p></li>
+<li><p><strong>スケーラビリティ</strong>：データセットが大きくなり、フィルター式が複雑になっても、テンプレート化によってパフォーマンスが効率的かつスケーラブルに維持されます。</p></li>
 </ul>
-<h2 id="Search-Operations" class="common-anchor-header">Search Operations<button data-href="#Search-Operations" class="anchor-icon" translate="no">
+<h2 id="Search-Operations" class="common-anchor-header">検索オペレーション<button data-href="#Search-Operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,7 +62,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For search operations in Milvus, the <code translate="no">filter</code> expression is used to define the filtering condition, and the <code translate="no">filter_params</code> parameter is used to specify the values for the placeholders. The <code translate="no">filter_params</code> dictionary contains the dynamic values that Milvus will use to substitute into the filter expression.</p>
+    </button></h2><p>Milvusの検索操作では、<code translate="no">filter</code> 式を使用してフィルタリング条件を定義し、<code translate="no">filter_params</code> パラメータを使用してプレースホルダの値を指定します。<code translate="no">filter_params</code> 辞書には、Milvusがフィルター式に代入するために使用する動的な値が含まれています。</p>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 res = client.search(
@@ -80,8 +75,8 @@ res = client.search(
     filter_params=filter_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, Milvus will dynamically replace <code translate="no">{age}</code> with <code translate="no">25</code> and <code translate="no">{city}</code> with <code translate="no">[&quot;北京&quot;, &quot;上海&quot;]</code> when executing the search.</p>
-<h2 id="Query-Operations" class="common-anchor-header">Query Operations<button data-href="#Query-Operations" class="anchor-icon" translate="no">
+<p>この例では、Milvusは検索を実行する際に、<code translate="no">{age}</code> を<code translate="no">25</code> に、<code translate="no">{city}</code> を<code translate="no">[&quot;北京&quot;, &quot;上海&quot;]</code> に動的に置き換えます。</p>
+<h2 id="Query-Operations" class="common-anchor-header">クエリ操作<button data-href="#Query-Operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,7 +91,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The same templating mechanism can be applied to query operations in Milvus. In the <code translate="no">query</code> function, you define the filter expression and use the <code translate="no">filter_params</code> to specify the values to substitute.</p>
+    </button></h2><p>Milvusのクエリーオペレーションにも同じテンプレート機構を適用することができます。<code translate="no">query</code> 、フィルタ式を定義し、<code translate="no">filter_params</code> 、置換する値を指定します。</p>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 res = client.query(
@@ -106,8 +101,8 @@ res = client.query(
     filter_params=filter_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>By using <code translate="no">filter_params</code>, Milvus efficiently handles the dynamic insertion of values, improving the speed of query execution.</p>
-<h2 id="Delete-Operations" class="common-anchor-header">Delete Operations<button data-href="#Delete-Operations" class="anchor-icon" translate="no">
+<p><code translate="no">filter_params</code> を使用することで、Milvusは値の動的挿入を効率的に処理し、クエリの実行速度を向上させます。</p>
+<h2 id="Delete-Operations" class="common-anchor-header">削除操作<button data-href="#Delete-Operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,7 +117,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also use filter expression templating in delete operations. Similar to search and query, the <code translate="no">filter</code> expression defines the conditions, and the <code translate="no">filter_params</code> provides the dynamic values for the placeholders.</p>
+    </button></h2><p>削除操作でもフィルタ式のテンプレート化を使用することができます。検索や問い合わせと同様に、<code translate="no">filter</code> 式が条件を定義し、<code translate="no">filter_params</code> がプレースホルダの動的値を提供します。</p>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 res = client.delete(
@@ -131,8 +126,8 @@ res = client.delete(
     filter_params=filter_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>This approach improves the performance of delete operations, especially when dealing with complex filter conditions.</p>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<p>この方法は、特に複雑なフィルター条件を扱う場合に、削除操作のパフォーマンスを向上させます。</p>
+<h2 id="Conclusion" class="common-anchor-header">結論<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,4 +142,4 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Filter expression templating is an essential tool for optimizing query performance in Milvus. By using placeholders and the <code translate="no">filter_params</code> dictionary, you can significantly reduce the time spent parsing complex filter expressions. This leads to faster query execution and better overall performance.</p>
+    </button></h2><p>フィルタ式のテンプレート化は、Milvusのクエリ性能を最適化するために不可欠なツールです。プレースホルダと<code translate="no">filter_params</code> 辞書を使用することで、複雑なフィルタ式の解析にかかる時間を大幅に短縮することができます。これにより、問い合わせの実行が速くなり、全体的なパフォーマンスが向上します。</p>

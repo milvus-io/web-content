@@ -1,12 +1,8 @@
 ---
 id: use_ColPali_with_milvus.md
 summary: >-
-  In this notebook, we refer to this kind of multi-vector representation as
-  "ColBERT embeddings" for generality. However, the actual model being used is
-  the ColPali model. We will demonstrate how to use Milvus for multi-vector
-  retrieval. Building on that, we will introduce how to use ColPali for
-  retrieving pages based on a given query.
-title: Use ColPali for Multi-Modal Retrieval with Milvus
+  このノートブックでは、一般性のためにこの種のマルチベクトル表現を「ColBERT埋め込み」と呼ぶ。しかし、実際に使われているモデルはColPaliモデルである。Milvusをマルチベクトル検索に利用する方法を紹介する。その上で、与えられたクエリに基づいてページを検索するためのColPaliの使い方を紹介する。
+title: Milvusでマルチモーダル検索にColPaliを使う
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -14,7 +10,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Use ColPali for Multi-Modal Retrieval with Milvus<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Milvusでマルチモーダル検索にColPaliを使う<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,17 +25,17 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Modern retrieval models typically use a single embedding to represent text or images. ColBERT, however, is a neural model that utilizes a list of embeddings for each data instance and employs a “MaxSim” operation to calculate the similarity between two texts. Beyond textual data, figures, tables, and diagrams also contain rich information, which is often disregarded in text-based information retrieval.</p>
+    </button></h1><p>最新の検索モデルでは、テキストや画像を表現するために単一の埋め込みを使用するのが一般的です。しかしColBERTは、各データインスタンスに対して埋め込みリストを利用するニューラルモデルであり、2つのテキスト間の類似度を計算するために「MaxSim」演算を採用しています。テキストデータだけでなく、図、表、ダイアグラムにも豊富な情報が含まれているが、テキストベースの情報検索では軽視されがちである。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>MaxSim function compares a query with a document (what you’re searching in) by looking at their token embeddings. For each word in the query, it picks the most similar word from the document (using cosine similarity or squared L2 distance) and sums these maximum similarities across all words in the query</p>
-<p>ColPali is a method that combines ColBERT’s multi-vector representation with PaliGemma (a multimodal large language model) to leverage its strong understanding capabilities. This approach enables a page with both text and images to be represented using a unified multi-vector embedding. The embeddings within this multi-vector representation can capture detailed information, improving the performance of retrieval-augmented generation (RAG) for multimodal data.</p>
-<p>In this notebook, we refer to this kind of multi-vector representation as “ColBERT embeddings” for generality. However, the actual model being used is the <strong>ColPali model</strong>. We will demonstrate how to use Milvus for multi-vector retrieval. Building on that, we will introduce how to use ColPali for retrieving pages based on a given query.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>MaxSim関数は、クエリとドキュメント（検索対象）のトークン埋め込みを比較します。クエリ内の各単語について、ドキュメントから最も類似した単語を選び（コサイン類似度またはL2距離の2乗を使用）、クエリ内の全単語にわたってこれらの最大類似度を合計する。</p>
+<p>ColPali は、ColBERT のマルチベクトル表現と PaliGemma（マルチモーダル大規模言語モデル）を組み合 わせ、その強力な理解能力を活用する手法である。このアプローチにより、テキストと画像の両方を含むページを、統一されたマルチベクター埋め込みを用いて表現することができる。このマルチベクトル表現内の埋め込みは詳細な情報を捉えることができ、マルチモーダルデータに対する検索支援生成（RAG）の性能を向上させる。</p>
+<p>このノートブックでは、一般性のために、この種のマルチベクトル表現を「ColBERT埋め込み」と呼ぶ。しかし、実際に使われているモデルは<strong>ColPaliモデル</strong>である。Milvusをマルチベクトル検索に利用する方法を紹介する。その上で、与えられたクエリに基づいてページを検索するためのColPaliの使い方を紹介する。</p>
+<h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +56,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pillow</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-the-data" class="common-anchor-header">Prepare the data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-data" class="common-anchor-header">データの準備<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +71,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We will use PDF RAG as our example. You can download <a href="https://arxiv.org/pdf/2004.12832">ColBERT</a> paper and put it into <code translate="no">./pdf</code>. ColPali does not process text directly; instead, the entire page is rasterized into an image. The ColPali model excels at understanding the textual information contained within these images. Therefore, we will convert each PDF page into an image for processing.</p>
+    </button></h2><p>PDF RAGを例として使用する。<a href="https://arxiv.org/pdf/2004.12832">ColBERT</a>論文をダウンロードし、<code translate="no">./pdf</code> 。ColPaliはテキストを直接処理するのではなく、ページ全体を画像にラスタライズする。ColPali モデルは、これらの画像に含まれるテキスト情報を理解することに優れています。したがって、各 PDF ページを画像に変換して処理します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pdf2image <span class="hljs-keyword">import</span> convert_from_path
 
 pdf_path = <span class="hljs-string">&quot;pdfs/2004.12832v2.pdf&quot;</span>
@@ -84,7 +80,7 @@ images = convert_from_path(pdf_path)
 <span class="hljs-keyword">for</span> i, image <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(images):
     image.save(<span class="hljs-string">f&quot;pages/page_<span class="hljs-subst">{i + <span class="hljs-number">1</span>}</span>.png&quot;</span>, <span class="hljs-string">&quot;PNG&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Next, we will initialize a database using Milvus Lite. You can easily switch to a full Milvus instance by setting the uri to the appropriate address where your Milvus service is hosted.</p>
+<p>次に、Milvus Liteを使ってデータベースを初期化します。Milvusサービスがホストされている適切なアドレスにuriを設定することで、簡単にフルMilvusインスタンスに切り替えることができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> concurrent.futures
@@ -93,13 +89,13 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
-<li>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>小規模なデータやプロトタイピングのためにローカルのベクターデータベースが必要なだけであれば、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
+<li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンとして "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloudを</a>ご利用の場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
-<p>We will define a MilvusColbertRetriever class to wrap around the Milvus client for multi-vector data retrieval. The implementation flattens ColBERT embeddings and inserts them into a collection, where each row represents an individual embedding from the ColBERT embedding list. It also records the doc_id and seq_id to trace the origin of each embedding.</p>
-<p>When searching with a ColBERT embedding list, multiple searches will be conducted—one for each ColBERT embedding. The retrieved doc_ids will then be deduplicated. A reranking process will be performed, where the full embeddings for each doc_id are fetched, and the MaxSim score is calculated to produce the final ranked results.</p>
+<p>MilvusColbertRetrieverクラスを定義し、Milvusクライアントをラップしてマルチベクターデータを取得できるようにします。この実装は、ColBERT 埋め込みデータを平坦化し、コレクションに挿入する。また、各埋め込みの出所を追跡するために、doc_id と seq_id を記録する。</p>
+<p>ColBERT 埋め込みリストで検索する場合、複数の検索が行われる。検索された doc_id は、重複排除される。再ランク付けプロセスが実行され、各 doc_id の完全な埋め込みが取得され、MaxSim スコアが計算され、最終的なランク付け結果が生成される。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
         <span class="hljs-comment"># Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.</span>
@@ -240,7 +236,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
             ],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>We will use the <a href="https://github.com/illuin-tech/colpali">colpali_engine</a> to extract embedding lists for two queries and retrieve the relevant information from the PDF pages.</p>
+<p><a href="https://github.com/illuin-tech/colpali">colpali_engineを</a>使用して、2つのクエリに対する埋め込みリストを抽出し、PDFページから関連する情報を取得します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> colpali_engine.models <span class="hljs-keyword">import</span> ColPali
 <span class="hljs-keyword">from</span> colpali_engine.models.paligemma.colpali.processing_colpali <span class="hljs-keyword">import</span> ColPaliProcessor
 <span class="hljs-keyword">from</span> colpali_engine.utils.processing_utils <span class="hljs-keyword">import</span> BaseVisualRetrieverProcessor
@@ -279,7 +275,7 @@ qs: <span class="hljs-type">List</span>[torch.Tensor] = []
         embeddings_query = model(**batch_query)
     qs.extend(<span class="hljs-built_in">list</span>(torch.unbind(embeddings_query.to(<span class="hljs-string">&quot;cpu&quot;</span>))))
 <button class="copy-code-btn"></button></code></pre>
-<p>Additionally, we will need to extract the embedding list for each page and it shows there are 1030 128-dimensional embeddings for each page.</p>
+<p>さらに、各ページの埋め込みリストを抽出する必要があり、それは各ページに1030個の128次元埋め込みがあることを示しています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 <span class="hljs-keyword">import</span> os
@@ -308,12 +304,12 @@ ds: <span class="hljs-type">List</span>[torch.Tensor] = []
 
 torch.Size([1030, 128])
 </code></pre>
-<p>We will create a collection called “colpali” using MilvusColbertRetriever.</p>
+<p>MilvusColbertRetrieverを使って "colpali "というコレクションを作成します。</p>
 <pre><code translate="no" class="language-python">retriever = MilvusColbertRetriever(collection_name=<span class="hljs-string">&quot;colpali&quot;</span>, milvus_client=client)
 retriever.create_collection()
 retriever.create_index()
 <button class="copy-code-btn"></button></code></pre>
-<p>We will insert embedding lists to the Milvus database.</p>
+<p>埋め込みリストをMilvusデータベースに挿入します。</p>
 <pre><code translate="no" class="language-python">filepaths = [<span class="hljs-string">&quot;./pages/&quot;</span> + name <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> os.listdir(<span class="hljs-string">&quot;./pages&quot;</span>)]
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(filepaths)):
     data = {
@@ -323,7 +319,7 @@ retriever.create_index()
     }
     retriever.insert(data)
 <button class="copy-code-btn"></button></code></pre>
-<p>Now we can search the most relevant page using query embedding list.</p>
+<p>これで、クエリ埋め込みリストを使って、最も関連性の高いページを検索することができる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query <span class="hljs-keyword">in</span> qs:
     query = query.<span class="hljs-built_in">float</span>().numpy()
     result = retriever.search(query, topk=<span class="hljs-number">1</span>)
@@ -332,4 +328,4 @@ retriever.create_index()
 <pre><code translate="no">./pages/page_5.png
 ./pages/page_7.png
 </code></pre>
-<p>Finally, we retrieve the original page name. With ColPali, we can retrieve multimodal documents without the need for complex processing techniques to extract text and images from the documents. By leveraging large vision models, more information—such as tables and figures—can be analyzed without significant information loss.</p>
+<p>最後に、元のページ名を取得します。ColPaliを使えば、文書からテキストや画像を抽出するための複雑な処理技術を必要とせずに、マルチモーダルな文書を検索することができる。大規模な視覚モデルを活用することで、表や図など、より多くの情報を大きな情報損失なしに解析することができる。</p>

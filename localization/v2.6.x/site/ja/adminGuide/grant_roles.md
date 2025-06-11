@@ -1,13 +1,10 @@
 ---
 id: grant_roles.md
-title: Grant Roles to Users
+title: ユーザへのロールの付与
 summary: >-
-  After creating a role and granting privileges to the role, you can grant the
-  role to users so that the users can access resources and perform actions that
-  are defined by the role. You can grant multiple roles to a user or grant a
-  role to multiple users. This guide introduces how to grant roles to users.
+  ロールを作成し、そのロールに特権を付与した後、そのロールをユーザに付与することで、ユーザはそのロールによって定義されたリソースへのアクセスやアクションを実行できるようになります。1人のユーザに複数のロールを付与することも、複数のユーザにロールを付与することもできます。このガイドでは、ユーザにロールを付与する方法を紹介します。
 ---
-<h1 id="Grant-Roles-to-Users" class="common-anchor-header">Grant Roles to Users<button data-href="#Grant-Roles-to-Users" class="anchor-icon" translate="no">
+<h1 id="Grant-Roles-to-Users" class="common-anchor-header">ユーザへのロールの付与<button data-href="#Grant-Roles-to-Users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,9 +19,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>After creating a role and granting privileges to the role, you can grant the role to users so that the users can access resources and perform actions that are defined by the role. You can grant multiple roles to a user or grant a role to multiple users. This guide introduces how to grant roles to users.</p>
-<p>The built-in user <code translate="no">root</code> in Milvus has already been granted the <code translate="no">admin</code> role, which has all privileges. You do not need to assign any other roles to it.</p>
-<h2 id="Grant-a-role-to-a-user" class="common-anchor-header">Grant a role to a user<button data-href="#Grant-a-role-to-a-user" class="anchor-icon" translate="no">
+    </button></h1><p>ロールを作成し、そのロールに権限を付与した後、そのロールをユーザに付与することで、ユーザはそのロールによって定義されたリソースにアクセスしたり、アクションを実行したりすることができます。1人のユーザに複数のロールを付与することも、複数のユーザに1つのロールを付与することもできます。このガイドでは、ユーザにロールを付与する方法を紹介します。</p>
+<p>Milvusの組み込みユーザ<code translate="no">root</code> には、すべての権限を持つ<code translate="no">admin</code> ロールがすでに付与されています。他のロールを割り当てる必要はありません。</p>
+<h2 id="Grant-a-role-to-a-user" class="common-anchor-header">ユーザへのロールの付与<button data-href="#Grant-a-role-to-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,14 +36,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to grant the role <code translate="no">role_a</code> to the user <code translate="no">user_1</code>.</p>
+    </button></h2><p>以下の例では、ユーザ<code translate="no">user_1</code> にロール<code translate="no">role_a</code> を付与する方法を示します。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -125,7 +117,7 @@ curl --request POST \
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-user" class="common-anchor-header">Describe user<button data-href="#Describe-user" class="anchor-icon" translate="no">
+<h2 id="Describe-user" class="common-anchor-header">ユーザの記述<button data-href="#Describe-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -140,15 +132,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you grant a role to a user, you can check if the grant operation is successful via the <code translate="no">describe_user()</code> method.</p>
-<p>The following example demonstrates how to check the role(s) of the user <code translate="no">user_1</code>.</p>
+    </button></h2><p>ユーザーにロールを付与したら、<code translate="no">describe_user()</code> メソッドで付与操作が成功したかどうかを確認できます。</p>
+<p>次の例は、ユーザ<code translate="no">user_1</code> のロールを確認する方法を示しています。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)
@@ -177,10 +164,10 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output.</p>
+<p>以下は出力例です。</p>
 <pre><code translate="no" class="language-bash">{<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>}
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Revoke-a-role" class="common-anchor-header">Revoke a role<button data-href="#Revoke-a-role" class="anchor-icon" translate="no">
+<h2 id="Revoke-a-role" class="common-anchor-header">ロールの取り消し<button data-href="#Revoke-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -195,15 +182,10 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also revoke a role that has been assigned to a user.</p>
-<p>The following example demonstrates how to revoke the role <code translate="no">role_a</code> assigned to the user <code translate="no">user_1</code>.</p>
+    </button></h2><p>ユーザーに割り当てられたロールを取り消すこともできます。</p>
+<p>次の例は、ユーザー<code translate="no">user_1</code> に割り当てられたロール<code translate="no">role_a</code> を取り消す方法を示しています。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.revoke_role(

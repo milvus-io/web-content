@@ -1,13 +1,10 @@
 ---
 id: number.md
-title: Number Field
+title: 数値フィールド
 summary: >-
-  A number field is a scalar field that stores numeric values. These values can
-  be whole numbers (integers) or decimal numbers (floating-point numbers). They
-  are typically used to represent quantities, measurements, or any data that
-  needs to be mathematically processed.
+  数値フィールドは、数値を格納するスカラー・フィールドである。これらの値は整数（整数）または小数（浮動小数点数）である。数値フィールドは通常、数量や測定値、あるいは数学的に処理する必要のあるデータを表すのに使われます。
 ---
-<h1 id="Number-Field" class="common-anchor-header">Number Field<button data-href="#Number-Field" class="anchor-icon" translate="no">
+<h1 id="Number-Field" class="common-anchor-header">数値フィールド<button data-href="#Number-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,47 +19,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A number field is a scalar field that stores numeric values. These values can be whole numbers (<strong>integers</strong>) or decimal numbers (<strong>floating-point numbers</strong>). They are typically used to represent quantities, measurements, or any data that needs to be mathematically processed.</p>
-<p>The table below describes the data types of number fields available in Milvus.</p>
+    </button></h1><p>数値フィールドは、数値を格納するスカラー・フィールドである。これらの値は整数<strong>（整数</strong>）または小数<strong>（浮動小数点数</strong>）である。数値フィールドは通常、数量や測定値、あるいは数学的処理が必要なデータを表すために使用されます。</p>
+<p>以下の表はMilvusで使用可能な数値フィールドのデータタイプを説明したものです。</p>
 <table>
    <tr>
-     <th><p>Field Type</p></th>
-     <th><p>Description</p></th>
+     <th><p>フィールドタイプ</p></th>
+     <th><p>説明</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">BOOL</code></p></td>
-     <td><p>Boolean type for storing <code translate="no">true</code> or <code translate="no">false</code>, suitable for describing binary states.</p></td>
+     <td><p><code translate="no">true</code> または<code translate="no">false</code> を格納するためのブール型。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8</code></p></td>
-     <td><p>8-bit integer, suitable for storing small-range integer data.</p></td>
+     <td><p>8 ビット整数型、小範囲の整数データを格納するのに適している。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT16</code></p></td>
-     <td><p>16-bit integer, for medium-range integer data.</p></td>
+     <td><p>16 ビット整数、中範囲の整数データの格納に適する。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT32</code></p></td>
-     <td><p>32-bit integer, ideal for general integer data storage like product quantities or user IDs.</p></td>
+     <td><p>32 ビット整数。製品数量やユーザー ID のような一般的な整数データの格納に最適。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT64</code></p></td>
-     <td><p>64-bit integer, suitable for storing large-range data like timestamps or identifiers.</p></td>
+     <td><p>64 ビット整数。タイムスタンプや識別子のような大範囲データの保存に適しています。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT</code></p></td>
-     <td><p>32-bit floating-point number, for data requiring general precision, such as ratings or temperature.</p></td>
+     <td><p>32ビット浮動小数点数：定格や温度など、一般的な精度を必要とするデータ用。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">DOUBLE</code></p></td>
-     <td><p>64-bit double-precision floating-point number, for high-precision data like financial information or scientific calculations.</p></td>
+     <td><p>64ビット倍精度浮動小数点数：財務情報や科学計算のような高精度データ用。</p></td>
    </tr>
 </table>
-<p>To declare a number field, simply set the <code translate="no">datatype</code> to one of the available numeric data types. For example, <code translate="no">DataType.INT64</code> for an integer field or <code translate="no">DataType.FLOAT</code> for a floating-point field.</p>
+<p>数値フィールドを宣言するには、<code translate="no">datatype</code> を使用可能な数値データ型の1つに設定するだけです。例えば、整数フィールドには<code translate="no">DataType.INT64</code> 、浮動小数点フィールドには<code translate="no">DataType.FLOAT</code> 。</p>
 <div class="alert note">
-<p>Milvus supports null values and default values for number fields. To enable these features, set <code translate="no">nullable</code> to <code translate="no">True</code> and <code translate="no">default_value</code> to a numeric value. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
+<p>Milvusは数値フィールドのNULL値とデフォルト値をサポートしています。これらの機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に、<code translate="no">default_value</code> を数値に設定してください。詳細は<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Defaultを</a>参照してください。</p>
 </div>
-<h2 id="Add-number-field" class="common-anchor-header">Add number field<button data-href="#Add-number-field" class="anchor-icon" translate="no">
+<h2 id="Add-number-field" class="common-anchor-header">数値フィールドの追加<button data-href="#Add-number-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,21 +74,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To store numeric data, define a number field in your collection schema. Below is an example of a collection schema with two number fields:</p>
+    </button></h2><p>数値データを格納するには、コレクションスキーマに数値フィールドを定義します。以下は、2 つの数値フィールドを持つコレクション・スキーマの例です：</p>
 <ul>
-<li><p><code translate="no">age</code>: stores integer data, allows null values, and has a default value of <code translate="no">18</code>.</p></li>
-<li><p><code translate="no">price</code>: stores float data, allows null values, but does not have a default value.</p></li>
+<li><p><code translate="no">age</code>整数データを格納し、NULL 値を許可し、デフォルト値は<code translate="no">18</code> です。</p></li>
+<li><p><code translate="no">price</code>float データを格納し、NULL 値を許可しますが、デフォルト値はありません。</p></li>
 </ul>
 <div class="alert note">
-<p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert scalar fields that were not defined in advance. However, this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">Dynamic Field</a>.</p>
+<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusは事前に定義されていないスカラーフィールドを挿入することができます。しかし、これによりクエリや管理が複雑になり、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -254,7 +246,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Set index params<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">インデックス・パラメータの設定<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -269,15 +261,10 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Indexing helps improve search and query performance. In Milvus, indexing is mandatory for vector fields but optional for scalar fields.</p>
-<p>The following example creates indexes on the vector field <code translate="no">embedding</code> and the scalar field <code translate="no">age</code>, both using the <code translate="no">AUTOINDEX</code> index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to <a href="/docs/index-explained.md">Index Explained</a>.</p>
+    </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。Milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
+<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> とスカラー・フィールド<code translate="no">age</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳しくは<a href="/docs/ja/index-explained.md">インデックス解説を</a>ご参照ください。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -343,7 +330,7 @@ indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Create collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -358,14 +345,9 @@ indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the schema and indexes are defined, create a collection that includes number fields.</p>
+    </button></h2><p>スキーマとインデックスが定義されたら、番号フィールドを含むコレクションを作成します。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -404,7 +386,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">データの挿入<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -419,14 +401,9 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, insert entities that match the schema.</p>
+    </button></h2><p>コレクションを作成したら、スキーマに一致するエンティティを挿入する。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},
@@ -511,7 +488,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">Query with filter expressions<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">フィルタ式によるクエリ<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -526,15 +503,10 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After inserting entities, use the <code translate="no">query</code> method to retrieve entities that match the specified filter expressions.</p>
-<p>To retrieve entities where the <code translate="no">age</code> is greater than 30:</p>
+    </button></h2><p>エンティティの挿入後、<code translate="no">query</code> メソッドを使用して、指定されたフィルタ式に一致するエンティティを取得します。</p>
+<p><code translate="no">age</code> が 30 より大きいエンティティを取得する：</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 
 res = client.query(
@@ -600,14 +572,9 @@ fmt.Println(<span class="hljs-string">&quot;price&quot;</span>, queryResult.GetC
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;pk&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:35,&quot;pk&quot;:3,&quot;price&quot;:199.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">price</code> is null:</p>
+<p><code translate="no">price</code> が NULL のエンティティを検索する：</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price is null&#x27;</span>
 
 res = client.query(
@@ -683,14 +650,9 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;age&quot;, &quot;price&quot;, &quot;pk&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where <code translate="no">age</code> has the value <code translate="no">18</code>, use the following expression below. As the default value of <code translate="no">age</code> is <code translate="no">18</code>, the expected result should include entities with <code translate="no">age</code> explicitly set to <code translate="no">18</code> or with <code translate="no">age</code> set to null.</p>
+<p><code translate="no">age</code> が値<code translate="no">18</code> を持つエンティティを検索するには、以下の式を使用する。<code translate="no">age</code> のデフォルト値は<code translate="no">18</code> であるため、期待される結果には、<code translate="no">age</code> が明示的に<code translate="no">18</code> に設定されたエンティティ、または<code translate="no">age</code> が NULL に設定されたエンティティが含まれるはずです。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age == 18&#x27;</span>
 
 res = client.query(
@@ -762,7 +724,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;age&quot;, &quot;price&quot;, &quot;pk&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Vector search with filter expressions<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">フィルター式によるベクトル検索<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -777,14 +739,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In addition to basic number field filtering, you can combine vector similarity searches with number field filters. For example, the following code shows how to add a number field filter to a vector search:</p>
+    </button></h2><p>基本的な数値フィールドのフィルタリングに加えて、ベクトルの類似性検索を数値フィールドのフィルタリングと組み合わせることができます。例えば、以下のコードはベクトル検索に数値フィールドフィルターを追加する方法を示しています：</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;25 &lt;= age &lt;= 35&quot;</span>
 
 res = client.search(
@@ -878,4 +835,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we first define a query vector and add a filter condition <code translate="no">25 &lt;= age &lt;= 35</code> during the search. This ensures that the search results are not only similar to the query vector but also meet the specified age range. For more information, refer to <a href="/docs/filtering">Filtering</a>.</p>
+<p>この例では、まずクエリー・ベクターを定義し、検索中にフィルター条件（<code translate="no">25 &lt;= age &lt;= 35</code> ）を追加します。これにより、検索結果がクエリ・ベクトルに類似しているだけでなく、指定された年齢範囲も満たすようになります。詳細については、<a href="/docs/ja/filtering">フィルタリングを</a>参照してください。</p>

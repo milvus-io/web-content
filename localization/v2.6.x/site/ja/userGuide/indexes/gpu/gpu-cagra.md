@@ -35,7 +35,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでベクトル場の<code translate="no">GPU_CAGRA</code> インデックスを構築するには、<code translate="no">add_index()</code> メソッドを使用し、<code translate="no">index_type</code> 、<code translate="no">metric_type</code> 、そしてインデックスの追加パラメータを指定します。</p>
+    </button></h2><p>Milvusでベクトル場に<code translate="no">GPU_CAGRA</code> インデックスを構築するには、<code translate="no">add_index()</code> メソッドを使用し、<code translate="no">index_type</code> 、<code translate="no">metric_type</code> 、そしてインデックスの追加パラメータを指定します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -59,7 +59,7 @@ index_params.add_index(
 <ul>
 <li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">GPU_CAGRA</code> とします。</p></li>
 <li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
-<li><p><code translate="no">params</code>:インデックスを構築するための追加構成オプション。<code translate="no">GPU_CAGRA</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/gpu-cagra.md#Index-building-params">インデックス構築パラメータを</a>参照してください。</p></li>
+<li><p><code translate="no">params</code>:インデックスを構築するための追加構成オプション。<code translate="no">GPU_CAGRA</code> インデックスで利用可能な構築パラメータについては、<a href="/docs/ja/gpu-cagra.md#Index-building-params">インデックス構築パラメータを</a>参照してください。</p></li>
 </ul>
 <p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>
 <h2 id="Search-on-index" class="common-anchor-header">インデックスでの検索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -95,7 +95,7 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>この構成では</p>
 <ul>
-<li><code translate="no">params</code>:インデックスで検索するための追加構成オプション。<code translate="no">GPU_CAGRA</code> インデックスで使用可能な検索パラメータについては、<a href="/docs/ja/gpu-cagra.md#Index-specific-search-params">インデックス固有の検索パラメータ</a> を参照してください。</li>
+<li><code translate="no">params</code>:インデックスで検索するための追加構成オプション。<code translate="no">GPU_CAGRA</code> インデックスで使用できる検索パラメータについては、<a href="/docs/ja/gpu-cagra.md#Index-specific-search-params">インデックス固有の検索パラメータを</a>参照してください。</li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">インデックスパラメータ<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -113,7 +113,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行するために使用されるパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/gpu-cagra.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/gpu-cagra.md#Build-index">インデックスを構築</a>する際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -143,7 +143,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
      <td><p>元のデータセットをGPUメモリにキャッシュするかどうかを決定します。可能な値：</p>
 <ul>
-<li><p><code translate="no">"true"</code>:元のデータセットをキャッシュし、検索結果を精緻化することでリコールを向上させる。</p></li>
+<li><p><code translate="no">"true"</code>:元のデータセットをキャッシュし、検索結果を絞り込むことで再現率を高めます。</p></li>
 <li><p><code translate="no">"false"</code>:GPUメモリを節約するため、元のデータセットをキャッシュしない。</p></li>
 </ul></td>
      <td><p><code translate="no">"false"</code></p></td>

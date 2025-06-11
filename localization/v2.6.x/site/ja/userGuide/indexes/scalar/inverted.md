@@ -182,7 +182,7 @@ index_params.add_index(
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
-<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">JSONインデックスの考慮点<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
+<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">JSONインデックスに関する考察<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

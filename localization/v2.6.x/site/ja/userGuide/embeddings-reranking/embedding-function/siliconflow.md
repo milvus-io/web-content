@@ -53,7 +53,7 @@ beta: Milvus 2.6.x
      <td><p>BAAI/bge-large-ja-v1.5</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>BGE (BAAI General Embedding)シリーズに含まれる大規模英語テキスト埋め込みモデル。</p></td>
+     <td><p>BGE (BAAI General Embedding)シリーズに含まれる大規模な英語テキスト埋め込みモデル。</p></td>
    </tr>
    <tr>
      <td><p>netease-youdao/bce-embedding-base_v1</p></td>
@@ -109,7 +109,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>APIキーをここに記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
+<p>ここにAPIキーを記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
 <li><p><strong>Milvusに、サービス呼び出しに使用するキーを知らせる。</strong></p>
 <p>同じファイルで、SiliconFlow プロバイダに使用するラベルを指定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>

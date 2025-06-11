@@ -1,11 +1,9 @@
 ---
 id: drop_users_roles.md
-title: Drop Users & Roles
-summary: >-
-  To ensure data security, it is recommend that you drop users and roles that
-  are no longer in use. This guide introduces how to drop users and roles.
+title: ユーザとロールの削除
+summary: データのセキュリティを確保するために、使用しなくなったユーザとロールは削除することをお勧めします。このガイドでは、ユーザとロールを削除する方法を紹介します。
 ---
-<h1 id="Drop-Users--Roles" class="common-anchor-header">Drop Users & Roles<button data-href="#Drop-Users--Roles" class="anchor-icon" translate="no">
+<h1 id="Drop-Users--Roles" class="common-anchor-header">ユーザとロールの削除<button data-href="#Drop-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>To ensure data security, it is recommend that you drop users and roles that are no longer in use. This guide introduces how to drop users and roles.</p>
-<h2 id="Drop-a-user" class="common-anchor-header">Drop a user<button data-href="#Drop-a-user" class="anchor-icon" translate="no">
+    </button></h1><p>データのセキュリティを確保するために、使用しなくなったユーザとロールは削除することをお勧めします。このガイドでは、ユーザとロールを削除する方法を紹介します。</p>
+<h2 id="Drop-a-user" class="common-anchor-header">ユーザの削除<button data-href="#Drop-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,17 +34,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to drop the user <code translate="no">user_1</code>.</p>
+    </button></h2><p>次の例は、ユーザ<code translate="no">user_1</code> を削除する方法を示しています。</p>
 <div class="alert note">
-<p>The <code translate="no">root</code> user cannot be dropped.</p>
+<p><code translate="no">root</code> ユーザは削除できません。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#plaintext">plaintext</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">プレーンテキスト</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -120,14 +113,9 @@ curl --request POST \
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the user is dropped, you can list all existing users to check if the drop operation is successful.</p>
+<p>ユーザをドロップすると、既存のすべてのユーザを一覧表示して、ドロップ操作が成功したかどうかを確認できます。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.list_users()
@@ -152,10 +140,10 @@ List&lt;String&gt; resp = client.listUsers();
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output. There is no <code translate="no">user_1</code> in the list. The drop operation is successful.</p>
+<p>以下は出力例です。リストに<code translate="no">user_1</code> 。ドロップ操作は成功しています。</p>
 <pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;root&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-a-role" class="common-anchor-header">Drop a role<button data-href="#Drop-a-role" class="anchor-icon" translate="no">
+<h2 id="Drop-a-role" class="common-anchor-header">ロールの削除<button data-href="#Drop-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -170,17 +158,12 @@ List&lt;String&gt; resp = client.listUsers();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to drop the role <code translate="no">role_a</code>.</p>
+    </button></h2><p>以下の例は、ロール<code translate="no">role_a</code> を削除する方法を示しています。</p>
 <div class="alert note">
-<p>The built-in role <code translate="no">admin</code> cannot be dropped.</p>
+<p>組み込みロール<code translate="no">admin</code> は削除できません。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.drop_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -212,14 +195,9 @@ client.dropRole(dropRoleReq);
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the role is dropped, you can list all existing roles to check if the drop operation is successful.</p>
+<p>ロールが削除されると、既存のすべてのロールを一覧表示して、削除操作が成功したかどうかを確認できます。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.list_roles()
@@ -242,6 +220,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output. There is no <code translate="no">role_a</code> in the list. The drop operation is successful.</p>
+<p>以下は出力例です。リストに<code translate="no">role_a</code> 。ドロップ操作は成功しています。</p>
 <pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>

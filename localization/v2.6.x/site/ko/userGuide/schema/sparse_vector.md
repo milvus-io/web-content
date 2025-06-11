@@ -1,14 +1,11 @@
 ---
 id: sparse_vector.md
-title: Sparse Vector
+title: 스파스 벡터
 summary: >-
-  Sparse vectors are an important method of capturing surface-level term
-  matching in information retrieval and natural language processing. While dense
-  vectors excel in semantic understanding, sparse vectors often provide more
-  predictable matching results, especially when searching for special terms or
-  textual identifiers.
+  스파스 벡터는 정보 검색과 자연어 처리에서 표면 수준의 용어 일치를 포착하는 중요한 방법입니다. 고밀도 벡터는 의미론적 이해에 탁월하지만,
+  희소 벡터는 특히 특수 용어나 텍스트 식별자를 검색할 때 더 예측 가능한 일치 결과를 제공하는 경우가 많습니다.
 ---
-<h1 id="Sparse-Vector" class="common-anchor-header">Sparse Vector<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
+<h1 id="Sparse-Vector" class="common-anchor-header">스파스 벡터<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Sparse vectors are an important method of capturing surface-level term matching in information retrieval and natural language processing. While dense vectors excel in semantic understanding, sparse vectors often provide more predictable matching results, especially when searching for special terms or textual identifiers.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>스파스 벡터는 정보 검색 및 자연어 처리에서 표면 수준의 용어 일치를 포착하는 중요한 방법입니다. 고밀도 벡터는 의미 이해에 탁월하지만, 희소 벡터는 특히 특수 용어나 텍스트 식별자를 검색할 때 더 예측 가능한 일치 결과를 제공하는 경우가 많습니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,29 +36,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A sparse vector is a special high-dimensional vector where most elements are zero, and only a few dimensions have non-zero values. As shown in the diagram below, dense vectors are typically represented as continuous arrays where each position has a value (e.g., <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). In contrast, sparse vectors store only non-zero elements and their indices of the dimension, often represented as key-value pairs of <code translate="no">{ index: value}</code> (e.g., <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
+    </button></h2><p>스파스 벡터는 대부분의 요소가 0이고 일부 차원만 0이 아닌 값을 갖는 특수한 고차원 벡터입니다. 아래 다이어그램에서 볼 수 있듯이 고밀도 벡터는 일반적으로 각 위치에 값이 있는 연속 배열로 표현됩니다(예: <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). 이와 대조적으로 희소 벡터는 0이 아닌 요소와 해당 차원의 인덱스만 저장하며, 종종 <code translate="no">{ index: value}</code> 의 키-값 쌍으로 표현됩니다(예: <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
-    <span>Sparse Vector Representation</span>
-  </span>
-</p>
-<p>With tokenization and scoring, documents can be represented as bag-of-words vectors, where each dimension corresponds to a specific word in the vocabulary. Only the words present in the document have non-zero values, creating a sparse vector representation. Sparse vectors can be generated using two approaches:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   </span> <span class="img-wrapper"> <span>스파스 벡터 표현</span> </span></p>
+<p>토큰화 및 점수화를 통해 문서는 각 차원이 어휘의 특정 단어에 해당하는 단어 가방 벡터로 표현될 수 있습니다. 문서에 존재하는 단어만 0이 아닌 값을 가지므로 희소 벡터 표현이 생성됩니다. 스파스 벡터는 두 가지 접근 방식을 사용하여 생성할 수 있습니다:</p>
 <ul>
-<li><p><strong>Traditional statistical techniques</strong>, such as <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) and <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), assign weights to words based on their frequency and importance across a corpus. These methods compute simple statistics as scores for each dimension, which represents a token.  Milvus provides built-in <strong>full-text search</strong> with the BM25 method, which automatically converts text into sparse vectors, eliminating the need for manual preprocessing. This approach is ideal for keyword-based search, where precision and exact matches are important. Refer to <a href="/docs/full-text-search.md">Full Text Search</a> for more information.</p></li>
-<li><p><strong>Neural sparse embedding models</strong> are learned methods to generate sparse representations by training on large datasets. They are typically deep learning models with Transformer architecture, able to expand and weigh terms based on semantic context. Milvus also supports externally generated sparse embeddings from models like <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. See <a href="/docs/embeddings.md#Embedding-Overview">Embeddings</a> for details.</include></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (용어 빈도 역 문서 빈도) 및 <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (베스트 매칭 25)와 같은<strong>전통적인 통계 기법은</strong> 말뭉치 전체에서 단어의 빈도와 중요도에 따라 가중치를 할당합니다. 이러한 방법은 토큰을 나타내는 각 차원에 대한 점수로 간단한 통계를 계산합니다.  Milvus는 텍스트를 스파스 벡터로 자동 변환하여 수동 전처리가 필요 없는 BM25 방식의 <strong>전체 텍스트 검색을</strong> 기본으로 제공합니다. 이 방식은 정밀도와 정확한 일치가 중요한 키워드 기반 검색에 이상적입니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
+<li><p><strong>신경 스파스 임베딩 모델은</strong> 대규모 데이터 세트에 대한 학습을 통해 스파스 표현을 생성하는 학습된 방법입니다. 일반적으로 트랜스포머 아키텍처를 사용하는 딥 러닝 모델로, 의미론적 컨텍스트에 따라 용어를 확장하고 가중치를 부여할 수 있습니다. Milvus는 <a href="https://arxiv.org/abs/2109.10086">SPLADE와</a> 같은 모델에서 외부에서 생성된 스파스 임베딩도 지원합니다. 자세한 내용은 <a href="/docs/ko/embeddings.md#Embedding-Overview">임베딩을</a> 참조하세요.</include></p></li>
 </ul>
-<p>Sparse vectors and the original text can be stored in Milvus for efficient retrieval. The diagram below outlines the overall process.</p>
+<p>효율적인 검색을 위해 스파스 벡터와 원본 텍스트를 Milvus에 저장할 수 있습니다. 아래 다이어그램은 전체 프로세스를 간략하게 설명합니다.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
-    <span>Sparse Vector Workflow</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   </span> <span class="img-wrapper"> <span>스파스 벡터 워크플로</span> </span></p>
 <div class="alert note">
-<p>In addition to sparse vectors, Milvus also supports dense vectors and binary vectors. Dense vectors are ideal for capturing deep semantic relationships, while binary vectors excel in scenarios like quick similarity comparisons and content deduplication. For more information, refer to <a href="/docs/dense-vector.md">Dense Vector</a> and <a href="/docs/binary-vector.md">Binary Vector</a>.</p>
+<p>밀버스는 스파스 벡터 외에도 고밀도 벡터와 바이너리 벡터도 지원합니다. 고밀도 벡터는 심층적인 의미 관계를 캡처하는 데 이상적이며, 이진 벡터는 빠른 유사도 비교 및 콘텐츠 중복 제거와 같은 시나리오에 탁월합니다. 자세한 내용은 <a href="/docs/ko/dense-vector.md">고밀도 벡터</a> 및 <a href="/docs/ko/binary-vector.md">바이너리 벡터를</a> 참조하세요.</p>
 </div>
-<h2 id="Data-Formats" class="common-anchor-header">Data Formats<button data-href="#Data-Formats" class="anchor-icon" translate="no">
+<h2 id="Data-Formats" class="common-anchor-header">데이터 형식<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,14 +69,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the following sections, we demonstrate how to store vectors from learned sparse embedding models like SPLADE. If you are looking for something to complement dense-vector-based semantic search, we recommend <a href="/docs/full-text-search.md">Full Text Search</a> with BM25 over SPLADE for simplicity. If you’ve ran quality evaluation and dediced to use SPLADE, you can refer to <a href="/docs/embeddings.md#Embedding-Overview">Embeddings</a> on how to generate sparse vectors with SPLADE.</p>
-<p>Milvus supports  sparse vector input with the following formats:</p>
+    </button></h2><p>다음 섹션에서는 SPLADE와 같은 학습된 스파스 임베딩 모델에서 벡터를 저장하는 방법을 설명합니다. 고밀도 벡터 기반 시맨틱 검색을 보완할 무언가를 찾고 계신다면, 간소화를 위해 SPLADE보다 BM25를 사용한 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 권장합니다. 품질 평가를 실행하고 SPLADE를 사용하기로 결정한 경우, <a href="/docs/ko/embeddings.md#Embedding-Overview">임베딩을</a> 통해 스파스 벡터를 생성하는 방법에 대한 도움말을 참조할 수 있습니다.</p>
+<p>밀버스는 다음과 같은 형식의 스파스 벡터 입력을 지원합니다:</p>
 <ul>
-<li><p><strong>List of Dictionaries (formatted as <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
+<li><p><strong>사전 목록( <code translate="no">{dimension_index: value, ...}</code> 형식)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a dictionary</span>
 sparse_vectors = [{<span class="hljs-number">27</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">5369</span>: <span class="hljs-number">0.6</span>} , {<span class="hljs-number">100</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">3</span>: <span class="hljs-number">0.8</span>}]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Sparse Matrix (using the <code translate="no">scipy.sparse</code> class)</strong></p>
+<li><p><strong>스파스 행렬( <code translate="no">scipy.sparse</code> 클래스 사용)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix
 
 <span class="hljs-comment"># First vector: indices [27, 100, 5369] with values [0.5, 0.3, 0.6]</span>
@@ -92,7 +85,7 @@ indices = [[<span class="hljs-number">27</span>, <span class="hljs-number">100</
 values = [[<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.1</span>]]
 sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>List of Tuple Iterables (e.g. <code translate="no">[(dimension_index, value)]</code>)</strong></p>
+<li><p><strong>튜플 이터러블 목록(예: <code translate="no">[(dimension_index, value)]</code>)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a list of iterables (e.g. tuples)</span>
 sparse_vector = [
     [(<span class="hljs-number">27</span>, <span class="hljs-number">0.5</span>), (<span class="hljs-number">100</span>, <span class="hljs-number">0.3</span>), (<span class="hljs-number">5369</span>, <span class="hljs-number">0.6</span>)],
@@ -100,7 +93,7 @@ sparse_vector = [
     ]
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Define-Collection-Schema" class="common-anchor-header">Define Collection Schema<button data-href="#Define-Collection-Schema" class="anchor-icon" translate="no">
+<h2 id="Define-Collection-Schema" class="common-anchor-header">컬렉션 스키마 정의<button data-href="#Define-Collection-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,19 +108,14 @@ sparse_vector = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before creating a collection, you need to specify the collection schema, which defines fields  and optionally a function to convert a text field into corresponding sparse vector representation.</p>
-<h3 id="Add-fields" class="common-anchor-header">Add fields</h3><p>To use sparse vectors in Milvus, you need to create a collection with a schema including the following fields:</p>
+    </button></h2><p>컬렉션을 만들기 전에 필드를 정의하는 컬렉션 스키마를 지정해야 하며, 선택적으로 텍스트 필드를 해당 스파스 벡터 표현으로 변환하는 함수도 지정할 수 있습니다.</p>
+<h3 id="Add-fields" class="common-anchor-header">필드 추가</h3><p>Milvus에서 스파스 벡터를 사용하려면 다음 필드를 포함하는 스키마로 컬렉션을 만들어야 합니다:</p>
 <ul>
-<li><p>A <code translate="no">SPARSE_FLOAT_VECTOR</code> field reserved for storing sparse vectors, either auto-generated from a <code translate="no">VARCHAR</code> field or provided directly in the input data.</p></li>
-<li><p>Typically, the raw text that the sparse vector represents is also stored in the collection. You can use a <code translate="no">VARCHAR</code> field for storing the raw text.</p></li>
+<li><p><code translate="no">VARCHAR</code> 필드에서 자동 생성되거나 입력 데이터에서 직접 제공된 희소 벡터를 저장하기 위해 예약된 <code translate="no">SPARSE_FLOAT_VECTOR</code> 필드.</p></li>
+<li><p>일반적으로 스파스 벡터가 나타내는 원시 텍스트도 컬렉션에 저장됩니다. <code translate="no">VARCHAR</code> 필드를 사용하여 원시 텍스트를 저장할 수 있습니다.</p></li>
 </ul>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -270,16 +258,16 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, three fields are added:</p>
+<p>이 예제에서는 세 개의 필드가 추가되었습니다:</p>
 <ul>
-<li><p><code translate="no">pk</code>: This field stores primary keys using the <code translate="no">VARCHAR</code> data type, which is auto-generated with a maximum length of 100 bytes.</p></li>
-<li><p><code translate="no">sparse_vector</code>: This field stores sparse vectors using the <code translate="no">SPARSE_FLOAT_VECTOR</code> data type.</p></li>
-<li><p><code translate="no">text</code>: This field stores text strings using the <code translate="no">VARCHAR</code> data type, with a maximum length of 65535 bytes.</p></li>
+<li><p><code translate="no">pk</code>: 이 필드는 최대 100바이트 길이로 자동 생성되는 <code translate="no">VARCHAR</code> 데이터 유형을 사용하여 기본 키를 저장합니다.</p></li>
+<li><p><code translate="no">sparse_vector</code>: 이 필드는 <code translate="no">SPARSE_FLOAT_VECTOR</code> 데이터 유형을 사용하여 스파스 벡터를 저장합니다.</p></li>
+<li><p><code translate="no">text</code>: 이 필드는 <code translate="no">VARCHAR</code> 데이터 유형을 사용하여 텍스트 문자열을 저장하며 최대 길이는 65535바이트입니다.</p></li>
 </ul>
 <div class="alert note">
-<p>To enable Milvus or  to generate sparse vector embeddings from a specified text field during data insertion, an additional step involving a function must be taken. For more information, please refer to  <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
+<p>데이터 삽입 중에 Milvus를 활성화하거나 지정된 텍스트 필드에서 스파스 벡터 임베딩을 생성하려면 함수와 관련된 추가 단계를 수행해야 합니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 </div>
-<h2 id="Set-Index-Parameters" class="common-anchor-header">Set Index Parameters<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
+<h2 id="Set-Index-Parameters" class="common-anchor-header">인덱스 매개변수 설정<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -294,14 +282,9 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The process of creating an index for sparse vectors is similar to that for <a href="/docs/dense-vector.md">dense vectors</a>, but with differences in the specified index type (<code translate="no">index_type</code>), distance metric (<code translate="no">metric_type</code>), and index parameters (<code translate="no">params</code>).</p>
+    </button></h2><p>희소 벡터에 대한 인덱스를 생성하는 과정은 <a href="/docs/ko/dense-vector.md">고밀도 벡터의</a> 경우와 유사하지만 지정된 인덱스 유형(<code translate="no">index_type</code>), 거리 메트릭(<code translate="no">metric_type</code>), 인덱스 매개변수(<code translate="no">params</code>)에서 차이가 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -357,11 +340,11 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This example uses the <code translate="no">SPARSE_INVERTED_INDEX</code> index type with <code translate="no">IP</code> as the metric. For more details, see the following resources:</p>
+<p>이 예에서는 <code translate="no">SPARSE_INVERTED_INDEX</code> 인덱스 유형과 <code translate="no">IP</code> 을 메트릭으로 사용합니다. 자세한 내용은 다음 리소스를 참조하세요:</p>
 <ul>
-<li><a href="/docs/metric.md">Metric Types</a>: Supported metric types for different field types</li>
+<li><a href="/docs/ko/metric.md">메트릭 유형</a>: 다양한 필드 유형에 대해 지원되는 메트릭 유형</li>
 </ul>
-<h2 id="Create-Collection" class="common-anchor-header">Create Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+<h2 id="Create-Collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -376,14 +359,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the sparse vector and index settings are complete, you can create a collection that contains sparse vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_collection</code>.</p>
+    </button></h2><p>스파스 벡터 및 인덱스 설정이 완료되면 스파스 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 만듭니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -427,7 +405,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -442,14 +420,9 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You must provide data for all fields defined during collection creation, except for fields that are auto-generated (such as the primary key with <code translate="no">auto_id</code> enabled). If you are using the built-in BM25 function to auto-generate sparse vectors, you should also omit the sparse vector field when inserting data.</p>
+    </button></h2><p>자동 생성되는 필드(예: <code translate="no">auto_id</code> 가 활성화된 기본 키)를 제외하고 컬렉션을 만드는 동안 정의된 모든 필드에 대한 데이터를 제공해야 합니다. 내장된 BM25 함수를 사용하여 스파스 벡터를 자동 생성하는 경우 데이터를 삽입할 때 스파스 벡터 필드도 생략해야 합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>,
@@ -564,7 +537,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Perform-Similarity-Search" class="common-anchor-header">Perform Similarity Search<button data-href="#Perform-Similarity-Search" class="anchor-icon" translate="no">
+<h2 id="Perform-Similarity-Search" class="common-anchor-header">유사도 검색 수행<button data-href="#Perform-Similarity-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -579,14 +552,9 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To perform a similarity search using sparse vectors, prepare both the query data and the search parameters.</p>
+    </button></h2><p>스파스 벡터를 사용하여 유사도 검색을 수행하려면 쿼리 데이터와 검색 매개변수를 모두 준비합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
 search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># A tunable drop ratio parameter with a valid range between 0 and 1</span>
@@ -628,14 +596,9 @@ queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32<
 <span class="hljs-comment"># Query with the sparse vector</span>
 <span class="hljs-built_in">export</span> queryData=<span class="hljs-string">&#x27;[{1: 0.2, 50: 0.4, 1000: 0.7}]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, execute the similarity search using the <code translate="no">search</code> method:</p>
+<p>그런 다음 <code translate="no">search</code> 메서드를 사용하여 유사도 검색을 실행합니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=query_data,
@@ -716,4 +679,4 @@ System.out.println(searchR.getSearchResults());
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic Vector Search</a>.</p>
+<p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/single-vector-search.md">기본 벡터 검색을</a> 참조하세요.</p>

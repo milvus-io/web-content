@@ -1,11 +1,9 @@
 ---
 id: manage-aliases.md
-title: Manage Aliases
-summary: >-
-  Milvus provides alias management capabilities. This page demonstrates the
-  procedures to create, list, alter, and drop aliases.
+title: 별칭 관리
+summary: 'Milvus는 별칭 관리 기능을 제공합니다. 이 페이지에서는 별칭을 만들고, 나열하고, 변경하고, 삭제하는 절차를 설명합니다.'
 ---
-<h1 id="Manage-Aliases" class="common-anchor-header">Manage Aliases<button data-href="#Manage-Aliases" class="anchor-icon" translate="no">
+<h1 id="Manage-Aliases" class="common-anchor-header">별칭 관리<button data-href="#Manage-Aliases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus provides alias management capabilities. This page demonstrates the procedures to create, list, alter, and drop aliases.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus는 별칭 관리 기능을 제공합니다. 이 페이지에서는 별칭을 만들고, 나열하고, 변경하고, 삭제하는 절차를 설명합니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,9 +34,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create aliases for your collections. A collection can have several aliases, but collections cannot share an alias.</p>
-<p>Upon receiving a request against a collection, Milvus locates the collection based on the provided name. If the collection by the provided name does not exist, Milvus continues locating the provided name as an alias. You can use collection aliases to adapt your code to different scenarios.</p>
-<h2 id="Create-Alias" class="common-anchor-header">Create Alias<button data-href="#Create-Alias" class="anchor-icon" translate="no">
+    </button></h2><p>컬렉션의 별칭을 만들 수 있습니다. 컬렉션에는 여러 개의 별칭을 가질 수 있지만 컬렉션은 별칭을 공유할 수 없습니다.</p>
+<p>컬렉션에 대한 요청을 받으면 Milvus는 제공된 이름을 기준으로 컬렉션을 찾습니다. 제공된 이름의 컬렉션이 존재하지 않는 경우 Milvus는 제공된 이름을 별칭으로 계속 찾습니다. 컬렉션 별칭을 사용하여 코드를 다양한 시나리오에 맞게 조정할 수 있습니다.</p>
+<h2 id="Create-Alias" class="common-anchor-header">별칭 만들기<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,14 +51,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates how to create an alias for a collection.</p>
+    </button></h2><p>다음 코드 스니펫은 컬렉션의 별칭을 만드는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -206,7 +199,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Aliases" class="common-anchor-header">List Aliases<button data-href="#List-Aliases" class="anchor-icon" translate="no">
+<h2 id="List-Aliases" class="common-anchor-header">목록 별칭<button data-href="#List-Aliases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -221,14 +214,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates the procedure to list the aliases allocated to a specific collection.</p>
+    </button></h2><p>다음 코드 스니펫은 특정 컬렉션에 할당된 별칭을 나열하는 절차를 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.2. List aliases</span>
 res = client.list_aliases(
     collection_name=<span class="hljs-string">&quot;my_collection_1&quot;</span>
@@ -298,7 +286,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-Alias" class="common-anchor-header">Describe Alias<button data-href="#Describe-Alias" class="anchor-icon" translate="no">
+<h2 id="Describe-Alias" class="common-anchor-header">별칭 설명<button data-href="#Describe-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -313,14 +301,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet describes a specific alias in detail, including the name of the collection to which it has been allocated.</p>
+    </button></h2><p>다음 코드 스니펫은 특정 별칭이 할당된 컬렉션의 이름을 포함하여 특정 별칭을 자세히 설명합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.3. Describe aliases</span>
 res = client.describe_alias(
     alias=<span class="hljs-string">&quot;bob&quot;</span>
@@ -403,7 +386,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alter-Alias" class="common-anchor-header">Alter Alias<button data-href="#Alter-Alias" class="anchor-icon" translate="no">
+<h2 id="Alter-Alias" class="common-anchor-header">별칭 변경<button data-href="#Alter-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -418,14 +401,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can reallocate the alias already allocated to a specific collection to another.</p>
+    </button></h2><p>특정 컬렉션에 이미 할당된 별칭을 다른 컬렉션에 재할당할 수 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.4 Reassign aliases to other collections</span>
 client.alter_alias(
     collection_name=<span class="hljs-string">&quot;my_collection_2&quot;</span>,
@@ -600,7 +578,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-Alias" class="common-anchor-header">Drop Alias<button data-href="#Drop-Alias" class="anchor-icon" translate="no">
+<h2 id="Drop-Alias" class="common-anchor-header">별칭 삭제<button data-href="#Drop-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -615,14 +593,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates the procedure to drop an alias.</p>
+    </button></h2><p>다음 코드 스니펫은 별칭을 삭제하는 절차를 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.5 Drop aliases</span>
 client.drop_alias(
     alias=<span class="hljs-string">&quot;bob&quot;</span>

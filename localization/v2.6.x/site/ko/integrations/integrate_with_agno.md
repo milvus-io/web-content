@@ -1,13 +1,11 @@
 ---
 id: integrate_with_agno.md
-title: Integrate Milvus with Agno
+title: Milvus와 Agno 통합
 summary: >-
-  Milvus vector database enable efficient storage and retrieval of information
-  as embeddings. With Milvus and Agno, you can easily integrate your knowledge
-  into your Agent workflows. This document is a basic guide on how to use Milvus
-  integration with Agno.
+  Milvus 벡터 데이터베이스를 사용하면 정보를 임베딩으로 효율적으로 저장하고 검색할 수 있습니다. Milvus와 Agno를 사용하면 지식을
+  에이전트 워크플로우에 쉽게 통합할 수 있습니다. 이 문서는 Milvus와 Agno의 통합을 사용하는 방법에 대한 기본 가이드입니다.
 ---
-<h1 id="Integrate-Milvus-with-Agno" class="common-anchor-header">Integrate Milvus with Agno<button data-href="#Integrate-Milvus-with-Agno" class="anchor-icon" translate="no">
+<h1 id="Integrate-Milvus-with-Agno" class="common-anchor-header">Milvus와 Agno 통합<button data-href="#Integrate-Milvus-with-Agno" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,9 +26,9 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/integrate_with_phidata.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://docs.agno.com/introduction">Agno</a>(formerly known as Phidata) is a lightweight library for building Multimodal Agents. It allows you to create multi-modal agents that can understand text, images, audio, and video, and leverage various tools and knowledge sources to accomplish complex tasks. Agno supports multi-agent orchestration, enabling teams of agents to collaborate and solve problems together. It also provides a beautiful Agent UI for interacting with your agents.</p>
-<p>Milvus vector database enable efficient storage and retrieval of information as embeddings. With Milvus and Agno, you can easily integrate your knowledge into your Agent workflows. This document is a basic guide on how to use Milvus integration with Agno.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p><a href="https://docs.agno.com/introduction">Agno</a>(구 Phidata)는 멀티모달 에이전트를 구축하기 위한 경량 라이브러리입니다. 이를 통해 텍스트, 이미지, 오디오 및 비디오를 이해하고 다양한 도구와 지식 소스를 활용하여 복잡한 작업을 수행할 수 있는 멀티모달 에이전트를 만들 수 있습니다. Agno는 멀티 에이전트 오케스트레이션을 지원하여 여러 에이전트 팀이 함께 협업하고 문제를 해결할 수 있도록 합니다. 또한 에이전트와의 상호 작용을 위한 멋진 에이전트 UI를 제공합니다.</p>
+<p>Milvus 벡터 데이터베이스를 통해 정보를 임베딩으로 효율적으로 저장하고 검색할 수 있습니다. Milvus와 Agno를 사용하면 지식을 상담원 워크플로우에 쉽게 통합할 수 있습니다. 이 문서는 Milvus와 Agno의 통합을 사용하는 방법에 대한 기본 가이드입니다.</p>
+<h2 id="Preparation" class="common-anchor-header">준비 단계<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,18 +43,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Install the necessary dependencies:</p>
+    </button></h2><p>필요한 종속 요소를 설치합니다:</p>
 <pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colab을 사용하는 경우 방금 설치한 종속성을 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
 </div>
-<p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>이 예제에서는 OpenAI를 LLM으로 사용하겠습니다. 환경 변수로 <code translate="no">OPENAI_API_KEY</code> <a href="https://platform.openai.com/docs/quickstart">API 키를</a> 준비해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-xxxx&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Initalize-Milvus" class="common-anchor-header">Initalize Milvus<button data-href="#Initalize-Milvus" class="anchor-icon" translate="no">
+<h2 id="Initalize-Milvus" class="common-anchor-header">Milvus 초기화<button data-href="#Initalize-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +69,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Import the packages and initialize the Milvus vector database instance.</p>
+    </button></h2><p>패키지를 가져와서 Milvus 벡터 데이터베이스 인스턴스를 초기화합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> agno.agent <span class="hljs-keyword">import</span> Agent
 <span class="hljs-keyword">from</span> agno.knowledge.pdf_url <span class="hljs-keyword">import</span> PDFUrlKnowledgeBase
 <span class="hljs-keyword">from</span> agno.vectordb.milvus <span class="hljs-keyword">import</span> Milvus
@@ -82,16 +80,16 @@ vector_db = Milvus(
     uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Specify the collection name and the uri and token(optinal) for your Milvus server.</p>
+<p>Milvus 서버의 컬렉션 이름과 uri 및 토큰(옵션)을 지정합니다.</p>
 <div class="alert note">
-<p>Here is how to set the uri and token:</p>
+<p>URL과 토큰을 설정하는 방법은 다음과 같습니다:</p>
 <ul>
-<li>If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
-<li>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>소규모 데이터나 프로토타이핑을 위한 로컬 벡터 데이터베이스만 필요한 경우, Uri를 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법이며, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</li>
+<li>백만 개 이상의 벡터와 같이 대규모 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에서</a> 더 성능이 뛰어난 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "<your_username>:<your_password>"을 사용하고, 그렇지 않은 경우 토큰을 설정하지 마세요.</li>
+<li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하는 경우, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 조정합니다.</li>
 </ul>
 </div>
-<h2 id="Load-data" class="common-anchor-header">Load data<button data-href="#Load-data" class="anchor-icon" translate="no">
+<h2 id="Load-data" class="common-anchor-header">데이터 로드<button data-href="#Load-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,7 +104,7 @@ vector_db = Milvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Create a PDF url knowledage base instance and load the data into the instance. We use a public recipe pdf data as an example.</p>
+    </button></h2><p>PDF URL 지식베이스 인스턴스를 생성하고 해당 인스턴스에 데이터를 로드합니다. 여기서는 공개 레시피 PDF 데이터를 예로 사용합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create knowledge base</span>
 knowledge_base = PDFUrlKnowledgeBase(
     urls=[<span class="hljs-string">&quot;https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf&quot;</span>],
@@ -120,7 +118,7 @@ INFO    Loading knowledge
 INFO    Reading: https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf       
 INFO    Added documents to knowledge base                                                                             
 </code></pre>
-<h2 id="Use-agent-to-response-to-a-question" class="common-anchor-header">Use agent to response to a question<button data-href="#Use-agent-to-response-to-a-question" class="anchor-icon" translate="no">
+<h2 id="Use-agent-to-response-to-a-question" class="common-anchor-header">에이전트를 사용하여 질문에 응답하기<button data-href="#Use-agent-to-response-to-a-question" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,7 +133,7 @@ INFO    Added documents to knowledge base
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Integrate the knowledge base into an agent, then we can ask the agent a question and get a response.</p>
+    </button></h2><p>지식창고를 에이전트에 연동하면 에이전트에게 질문하고 답변을 받을 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create and use the agent</span>
 agent = Agent(knowledge=knowledge_base, show_tool_calls=<span class="hljs-literal">True</span>)
 
@@ -191,4 +189,4 @@ agent.print_response(<span class="hljs-string">&quot;How to make Tom Kha Gai&quo
 ┃                                                                                                                                                             ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<p>Congratulations, you have learned the basics of using Milvus in Agno. If you want to know more about how to use Agno, please refer to the <a href="https://docs.agno.com/introduction">official documentation</a>.</p>
+<p>축하합니다, 아그노에서 밀버스 사용의 기본을 배웠습니다. 아그노 사용 방법에 대해 더 자세히 알고 싶으시면 <a href="https://docs.agno.com/introduction">공식 문서를</a> 참조하세요.</p>
