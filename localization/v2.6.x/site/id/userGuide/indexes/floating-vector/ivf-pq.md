@@ -2,10 +2,11 @@
 id: ivf-pq.md
 title: IVF_PQ
 summary: >-
-  The IVF_PQ index is a quantization-based indexing algorithm for approximate
-  nearest neighbor search in high-dimensional spaces. While not as fast as some
-  graph-based methods, IVF_PQ often requires significantly less memory, making
-  it a practical choice for large datasets.
+  Indeks IVF_PQ adalah algoritme pengindeksan berbasis kuantisasi untuk
+  perkiraan pencarian tetangga terdekat dalam ruang dimensi tinggi. Meskipun
+  tidak secepat beberapa metode berbasis grafik, IVF_PQ sering kali membutuhkan
+  lebih sedikit memori, sehingga menjadikannya pilihan praktis untuk kumpulan
+  data yang besar.
 ---
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <strong>IVF_PQ</strong> index is a <strong>quantization-based</strong> indexing algorithm for approximate nearest neighbor search in high-dimensional spaces. While not as fast as some graph-based methods, <strong>IVF_PQ</strong> often requires significantly less memory, making it a practical choice for large datasets.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Indeks <strong>IVF_PQ</strong> adalah algoritme pengindeksan <strong>berbasis kuantisasi</strong> untuk perkiraan pencarian tetangga terdekat dalam ruang berdimensi tinggi. Meskipun tidak secepat beberapa metode berbasis grafik, <strong>IVF_PQ</strong> sering kali membutuhkan lebih sedikit memori, sehingga menjadikannya pilihan praktis untuk kumpulan data yang besar.</p>
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,68 +39,64 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <strong>IVF_PQ</strong> stands for <strong>Inverted File with Product Quantization</strong>, a hybrid approach that combines indexing and compression for efficient vector search and retrieval. It leverages two core components: <strong>Inverted File (IVF)</strong> and <strong>Product Quantization (PQ)</strong>.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF is like creating an index in a book. Instead of scanning every page (or, in our case, every vector), you look up specific keywords (clusters) in the index to quickly find the relevant pages (vectors). In our scenario, vectors are grouped into clusters, and the algorithm will search within a few clusters that are close to the query vector.</p>
-<p>Here’s how it works:</p>
+    </button></h2><p><strong>IVF_PQ</strong> adalah singkatan dari <strong>Inverted File with Product Quantization</strong>, sebuah pendekatan hibrida yang menggabungkan pengindeksan dan kompresi untuk pencarian dan pengambilan vektor yang efisien. Pendekatan ini memanfaatkan dua komponen inti: <strong>Inverted File (IVF</strong> ) dan <strong>Kuantisasi Produk (PQ)</strong>.</p>
+<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF seperti membuat indeks dalam sebuah buku. Alih-alih memindai setiap halaman (atau, dalam kasus kami, setiap vektor), Anda mencari kata kunci tertentu (kelompok) dalam indeks untuk menemukan halaman yang relevan (vektor) dengan cepat. Dalam skenario kami, vektor dikelompokkan ke dalam kluster, dan algoritme akan mencari dalam beberapa kluster yang dekat dengan vektor kueri.</p>
+<p>Berikut cara kerjanya:</p>
 <ol>
-<li><p><strong>Clustering:</strong> Your vector dataset is divided into a specified number of clusters, using a clustering algorithm like k-means. Each cluster has a centroid (a representative vector for the cluster).</p></li>
-<li><p><strong>Assignment:</strong> Each vector is assigned to the cluster whose centroid is closest to it.</p></li>
-<li><p><strong>Inverted Index:</strong> An index is created, mapping each cluster centroid to the list of vectors assigned to that cluster.</p></li>
-<li><p><strong>Search:</strong> When you search for nearest neighbors, the search algorithm compares your query vector with the cluster centroids and selects the most promising cluster(s). The search is then narrowed down to the vectors within those selected clusters.</p></li>
+<li><p><strong>Pengelompokan:</strong> Kumpulan data vektor Anda dibagi ke dalam sejumlah klaster tertentu, menggunakan algoritme pengelompokan seperti k-means. Setiap klaster memiliki centroid (vektor representatif untuk klaster).</p></li>
+<li><p><strong>Penugasan:</strong> Setiap vektor ditugaskan ke klaster yang memiliki centroid yang paling dekat dengannya.</p></li>
+<li><p><strong>Indeks Terbalik:</strong> Sebuah indeks dibuat, memetakan setiap centroid klaster ke daftar vektor yang ditugaskan ke klaster tersebut.</p></li>
+<li><p><strong>Pencarian:</strong> Saat Anda mencari tetangga terdekat, algoritme pencarian membandingkan vektor kueri Anda dengan centroid klaster dan memilih klaster yang paling menjanjikan. Pencarian kemudian dipersempit menjadi vektor dalam klaster yang dipilih.</p></li>
 </ol>
-<p>To learn more about its technical details , refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ)</strong> is a compression method for high-dimensional vectors that significantly reduces storage requirements while enabling fast similarity search operations.</p>
-<p>The PQ process involves these key stages:</p>
+<p>Untuk mempelajari lebih lanjut tentang detail teknisnya, lihat <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>.</p>
+<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ</strong> ) adalah metode kompresi untuk vektor berdimensi tinggi yang secara signifikan mengurangi kebutuhan penyimpanan sekaligus memungkinkan operasi pencarian kemiripan yang cepat.</p>
+<p>Proses PQ melibatkan tahapan-tahapan utama berikut ini:</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-1.png" alt="Ivf Pq 1" class="doc-image" id="ivf-pq-1" />
-    <span>Ivf Pq 1</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-1.png" alt="Ivf Pq 1" class="doc-image" id="ivf-pq-1" />
+   </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
 <ol>
-<li><p><strong>Dimension decomposition</strong>: The algorithm begins by decomposing each high-dimensional vector into <code translate="no">m</code> equal-sized sub-vectors. This decomposition transforms the original D-dimensional space into <code translate="no">m</code> disjoint subspaces, where each subspace contains <em>D/m</em> dimensions. The parameter <code translate="no">m</code> controls the granularity of the decomposition and directly influences the compression ratio.</p></li>
-<li><p><strong>Subspace codebook generation</strong>: Within each subspace, the algorithm applies <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a> to learn a set of representative vectors (centroids). These centroids collectively form a codebook for that subspace. The number of centroids in each codebook is determined by the parameter <code translate="no">nbits</code>, where each codebook contains <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mtext mathvariant="italic">nbits</mtext></msup></mrow><annotation encoding="application/x-tex">2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textit mtight">nbits</span></span></span></span></span></span></span></span></span></span></span></span></span> centroids. For example, if <code translate="no">nbits = 8</code>, each codebook will contain 256 centroids. Each centroid is assigned a unique index with <code translate="no">nbits</code> bits.</p></li>
-<li><p><strong>Vector</strong> <strong>quantization</strong>: For each sub-vector in the original vector, PQ identifies its nearest centroid within the corresponding subspace using a specific metric type. This process effectively maps each sub-vector to its closest representative vector in the codebook. Instead of storing the full sub-vector coordinates, only the index of the matched centroid is retained.</p></li>
-<li><p><strong>Compressed representation</strong>: The final compressed representation consists of <code translate="no">m</code> indices, one from each subspace, collectively referred to as <strong>PQ codes</strong>. This encoding reduces the storage requirement from <em>D × 32</em> bits (assuming 32-bit floating-point numbers) to <em>m</em> × <em>nbits</em> bits, achieving substantial compression while preserving the ability to approximate vector distances.</p></li>
+<li><p><strong>Dekomposisi dimensi</strong>: Algoritme dimulai dengan menguraikan setiap vektor dimensi tinggi menjadi <code translate="no">m</code> sub-vektor berukuran sama. Dekomposisi ini mengubah ruang dimensi-D asli menjadi <code translate="no">m</code> subruang yang terpisah-pisah, di mana setiap subruang berisi dimensi <em>D/m</em>. Parameter <code translate="no">m</code> mengontrol granularitas dekomposisi dan secara langsung mempengaruhi rasio kompresi.</p></li>
+<li><p><strong>Pembuatan buku kode subruang</strong>: Di dalam setiap subruang, algoritme menerapkan <a href="https://en.wikipedia.org/wiki/K-means_clustering">pengelompokan k-means</a> untuk mempelajari sekumpulan vektor representatif (centroid). Centroid ini secara kolektif membentuk codebook untuk subruang tersebut. Jumlah centroid di setiap codebook ditentukan oleh parameter <code translate="no">nbits</code>, di mana setiap codebook berisi <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits centroid. Sebagai contoh, jika</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code>, setiap codebook akan berisi 256 centroid. Setiap centroid diberi indeks unik dengan <code translate="no">nbits</code> bit.</p></li>
+<li><p><strong>Kuantisasi</strong><strong>vektor</strong>: Untuk setiap sub-vektor dalam vektor asli, PQ mengidentifikasi centroid terdekat dalam subruang yang sesuai menggunakan jenis metrik tertentu. Proses ini secara efektif memetakan setiap sub-vektor ke vektor representatif terdekat dalam buku kode. Alih-alih menyimpan koordinat sub-vektor secara lengkap, hanya indeks dari centroid yang cocok yang disimpan.</p></li>
+<li><p><strong>Representasi terkompresi</strong>: Representasi terkompresi akhir terdiri dari <code translate="no">m</code> indeks, satu dari setiap sub-ruang, yang secara kolektif disebut sebagai <strong>kode PQ</strong>. Pengkodean ini mengurangi kebutuhan penyimpanan dari <em>D × 32</em> bit (dengan asumsi angka floating-point 32-bit) menjadi <em>m</em> × <em>n bit</em>, mencapai kompresi yang substansial sambil mempertahankan kemampuan untuk memperkirakan jarak vektor.</p></li>
 </ol>
-<p>For more details on parameter tuning and optimization, refer to <a href="/docs/ivf-pq.md#Index-params">Index params</a>.</p>
+<p>Untuk detail lebih lanjut tentang penyetelan dan pengoptimalan parameter, lihat Parameter <a href="/docs/id/ivf-pq.md#Index-params">indeks</a>.</p>
 <div class="alert note">
-<p>Consider a vector with <em>D = 128</em> dimensions using 32-bit floating-point numbers. With PQ parameters <em>m = 64</em> (sub-vectors) and <em>nbits = 8</em> (thus <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">2^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span> <em>= 256</em> centroids per subspace), we can compare the storage requirements:</p>
+<p>Pertimbangkan sebuah vektor dengan dimensi <em>D = 128</em> menggunakan angka floating-point 32-bit. Dengan parameter PQ <em>m = 64</em> (sub-vektor) dan <em>nbits = 8</em> (dengan demikian <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>= 256</em> centroid per subruang), kita dapat membandingkan kebutuhan penyimpanan:</p>
 <ul>
-<li><p>Original vector: 128 dimensions × 32 bits = 4,096 bits</p></li>
-<li><p>PQ-compressed vector: 64 sub-vectors × 8 bits = 512 bits</p></li>
+<li><p>Vektor asli: 128 dimensi × 32 bit = 4.096 bit</p></li>
+<li><p>Vektor yang dikompresi PQ: 64 sub-vektor × 8 bit = 512 bit</p></li>
 </ul>
-<p>This represents an 8x reduction in storage requirements.</p>
+<p>Ini merupakan pengurangan 8x lipat dalam kebutuhan penyimpanan.</p>
 </div>
-<p><strong>Distance computation with PQ</strong></p>
-<p>When performing similarity search with a query vector, PQ enables efficient distance computation through the following steps:</p>
+<p><strong>Komputasi jarak dengan PQ</strong></p>
+<p>Ketika melakukan pencarian kemiripan dengan vektor kueri, PQ memungkinkan komputasi jarak yang efisien melalui langkah-langkah berikut:</p>
 <ol>
-<li><p><strong>Query preprocessing</strong></p>
+<li><p><strong>Prapemrosesan kueri</strong></p>
 <ul>
-<li><p>The query vector is decomposed into <code translate="no">m</code> sub-vectors, matching the original PQ decomposition structure.</p></li>
-<li><p>For each query sub-vector and its corresponding codebook (containing <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mtext mathvariant="italic">nbits</mtext></msup></mrow><annotation encoding="application/x-tex">2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textit mtight">nbits</span></span></span></span></span></span></span></span></span></span></span></span></span> centroids), compute and store distances to all centroids.</p></li>
-<li><p>This generates <code translate="no">m</code> lookup tables, where each table contains <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mtext mathvariant="italic">nbits</mtext></msup></mrow><annotation encoding="application/x-tex">2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textit mtight">nbits</span></span></span></span></span></span></span></span></span></span></span></span></span> distances.</p></li>
+<li><p>Vektor kueri diuraikan menjadi sub-vektor <code translate="no">m</code>, sesuai dengan struktur penguraian PQ yang asli.</p></li>
+<li><p>Untuk setiap sub-vektor kueri dan buku kode yang sesuai (berisi <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits centroid), hitung dan simpan jarak ke semua centroid.</span></span></span></span></span></span></span></span></span> </p></li>
+<li><p>Hal ini menghasilkan tabel pencarian <code translate="no">m</code>, di mana setiap tabel berisi <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits jarak.</span></span></span></span></span></span></span></span></span> </p></li>
 </ul></li>
-<li><p><strong>Distance approximation</strong></p>
-<p>For any database vector represented by PQ codes, its approximate distance to the query vector is computed as follows:</p>
+<li><p><strong>Perkiraan jarak</strong></p>
+<p>Untuk setiap vektor basis data yang diwakili oleh kode PQ, perkiraan jaraknya ke vektor kueri dihitung sebagai berikut:</p>
 <ul>
-<li><p>For each of the <code translate="no">m</code> sub-vectors, retrieve the pre-computed distance from the corresponding lookup table using the stored centroid index.</p></li>
-<li><p>Sum these <code translate="no">m</code> distances to obtain the approximate distance based on a specific metric type (e.g. Euclidean distance).</p></li>
+<li><p>Untuk setiap sub-vektor <code translate="no">m</code>, ambil jarak yang telah dihitung sebelumnya dari tabel pencarian yang sesuai menggunakan indeks centroid yang tersimpan.</p></li>
+<li><p>Jumlahkan jarak <code translate="no">m</code> ini untuk mendapatkan perkiraan jarak berdasarkan jenis metrik tertentu (misalnya jarak Euclidean).</p></li>
 </ul></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
-    <span>Ivf Pq 2</span>
-  </span>
-</p>
-<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>The <strong>IVF_PQ</strong> index combines the strengths of <strong>IVF</strong> and <strong>PQ</strong> to accelerate searches. The process works in two steps:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
+   </span> <span class="img-wrapper"> <span>Ivf Pq 2</span> </span></p>
+<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>Indeks <strong>IVF_PQ</strong> menggabungkan kekuatan <strong>IVF</strong> dan <strong>PQ</strong> untuk mempercepat pencarian. Proses ini bekerja dalam dua langkah:</p>
 <ol>
-<li><p><strong>Coarse filtering with IVF</strong>: IVF partitions the vector space into clusters, reducing the search scope. Instead of evaluating the entire dataset, the algorithm focuses only on the clusters closest to the query vector.</p></li>
-<li><p><strong>Fine-grained comparison with PQ</strong>: Within the selected clusters, PQ uses compressed and quantized vector representations to compute approximate distances quickly.</p></li>
+<li><p><strong>Pemfilteran kasar dengan IVF</strong>: IVF mempartisi ruang vektor ke dalam kelompok-kelompok, sehingga mengurangi cakupan pencarian. Alih-alih mengevaluasi seluruh kumpulan data, algoritme ini hanya berfokus pada cluster yang paling dekat dengan vektor kueri.</p></li>
+<li><p><strong>Perbandingan yang lebih baik dengan PQ</strong>: Di dalam cluster yang dipilih, PQ menggunakan representasi vektor yang dikompresi dan dikuantisasi untuk menghitung perkiraan jarak dengan cepat.</p></li>
 </ol>
-<p>The performance of the <strong>IVF_PQ</strong> index is significantly impacted by the parameters that control both the IVF and PQ algorithms. Tuning these parameters is crucial to achieve the optimal results for a given dataset and application. More detailed information about these parameters and how to tune them can be found in <a href="/docs/ivf-pq.md#Index-params">Index params</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
+<p>Kinerja indeks <strong>IVF_PQ</strong> secara signifikan dipengaruhi oleh parameter yang mengontrol algoritma IVF dan PQ. Menyetel parameter ini sangat penting untuk mencapai hasil yang optimal untuk set data dan aplikasi tertentu. Informasi lebih rinci tentang parameter ini dan cara menyetelnya dapat ditemukan di <a href="/docs/id/ivf-pq.md#Index-params">Index params</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">Membangun indeks<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,7 +111,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To build an <code translate="no">IVF_PQ</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
+    </button></h2><p>Untuk membangun indeks <code translate="no">IVF_PQ</code> pada bidang vektor di Milvus, gunakan metode <code translate="no">add_index()</code>, tentukan <code translate="no">index_type</code>, <code translate="no">metric_type</code>, dan parameter tambahan untuk indeks.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -130,18 +127,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>Dalam konfigurasi ini:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">IVF_PQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
-<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
+<li><p><code translate="no">index_type</code>: Jenis indeks yang akan dibangun. Dalam contoh ini, tetapkan nilainya ke <code translate="no">IVF_PQ</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antara vektor. Nilai yang didukung termasuk <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p></li>
+<li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk membangun indeks.</p>
 <ul>
-<li><code translate="no">m</code>: Number of sub-vectors to split the vector into.</li>
+<li><code translate="no">m</code>: Jumlah sub-vektor yang akan dibagi menjadi vektor.</li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/ivf-pq.md#Index-building-params">Index building params</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut parameter pembuatan yang tersedia untuk indeks <code translate="no">IVF_PQ</code>, lihat Parameter <a href="/docs/id/ivf-pq.md#Index-building-params">pembuatan indeks</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/create-collection.md">Membuat Koleksi</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Mencari di indeks<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -156,7 +153,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
+    </button></h2><p>Setelah indeks dibuat dan entitas dimasukkan, Anda dapat melakukan pencarian kemiripan pada indeks.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -171,15 +168,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>Dalam konfigurasi ini:</p>
 <ul>
-<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
+<li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk pencarian pada indeks.</p>
 <ul>
-<li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
+<li><code translate="no">nprobe</code>: Jumlah kluster yang akan dicari.</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/ivf-pq.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">IVF_PQ</code>, lihat Parameter <a href="/docs/id/ivf-pq.md#Index-specific-search-params">pencarian khusus indeks</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Parameter indeks<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -194,51 +191,51 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/ivf-pq.md#Build-index">building an index</a>.</p>
+    </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/ivf-pq.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th></th>
      <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>Deskripsi</p></th>
+     <th><p>Rentang Nilai</p></th>
+     <th><p>Saran Penyetelan</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>The number of clusters to create using the k-means algorithm during index building.</p></td>
-     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 65536]</p><p><strong>Default value</strong>: <code translate="no">128</code></p></td>
-     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources. In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
+     <td><p>Jumlah klaster yang akan dibuat menggunakan algoritme k-means selama pembuatan indeks.</p></td>
+     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> bilangan bulat: [1, 65536]</p><p><strong>Nilai default</strong>: <code translate="no">128</code></p></td>
+     <td><p>Nilai <code translate="no">nlist</code> yang lebih besar meningkatkan daya ingat dengan membuat klaster yang lebih halus, tetapi meningkatkan waktu pembuatan indeks. Optimalkan berdasarkan ukuran set data dan sumber daya yang tersedia. Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [32, 4096].</p></td>
    </tr>
    <tr>
      <td rowspan="2"><p>PQ</p></td>
      <td><p><code translate="no">m</code></p></td>
-     <td><p>The number of sub-vectors (used for quantization) to divide each high-dimensional vector into during the quantization process.</p></td>
-     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 65536]</p><p><strong>Default value</strong>: None</p></td>
-     <td><p>A higher <code translate="no">m</code> value can improve accuracy, but it also increases the computational complexity and memory usage. <code translate="no">m</code> must be a divisor of the vector dimension (<em>D</em>) to ensure proper decomposition. A commonly recommended value is <em>m = D/2</em>.</p><p>In most cases, we recommend you set a value within this range: [D/8, D].</p></td>
+     <td><p>Jumlah sub-vektor (digunakan untuk kuantisasi) untuk membagi setiap vektor dimensi tinggi selama proses kuantisasi.</p></td>
+     <td><p><strong>Jenis</strong>: Bilangan bulat <strong>Rentang</strong>: [1, 65536]</p><p><strong>Nilai default</strong>: Tidak ada</p></td>
+     <td><p>Nilai <code translate="no">m</code> yang lebih tinggi dapat meningkatkan akurasi, tetapi juga meningkatkan kompleksitas komputasi dan penggunaan memori. <code translate="no">m</code> harus merupakan pembagi dimensi vektor<em>(D)</em> untuk memastikan penguraian yang tepat. Nilai yang umumnya direkomendasikan adalah <em>m = D/2</em>.</p><p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [D/8, D].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook. Each codebook will contain $2^{\textit{nbits}}$ centroids. For example, if <code translate="no">nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for $2^8$ (256) possible centroids in the codebook for that sub-vector.</p></td>
-     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 64]</p><p><strong>Default value</strong>: <code translate="no">8</code></p></td>
-     <td><p>A higher <code translate="no">nbits</code> value allows for larger codebooks, potentially leading to more accurate representations of the original vectors. However, it also means using more bits to store each index, resulting in less compression. In most cases, we recommend you set a value within this range: [1, 16].</p></td>
+     <td><p>Jumlah bit yang digunakan untuk merepresentasikan indeks centroid setiap sub-vektor dalam bentuk terkompresi. Secara langsung menentukan ukuran setiap codebook. Setiap codebook akan berisi $2^{\textit{nbits}}$ centroid. Sebagai contoh, jika <code translate="no">nbits</code> diatur ke 8, setiap sub-vektor akan diwakili oleh indeks centroid 8-bit. Hal ini memungkinkan adanya $2^8$ (256) kemungkinan centroid dalam buku kode untuk sub-vektor tersebut.</p></td>
+     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Bilangan Bulat: [1, 64]</p><p><strong>Nilai default</strong>: <code translate="no">8</code></p></td>
+     <td><p>Nilai <code translate="no">nbits</code> yang lebih tinggi memungkinkan codebook yang lebih besar, yang berpotensi menghasilkan representasi yang lebih akurat dari vektor asli. Namun, ini juga berarti menggunakan lebih banyak bit untuk menyimpan setiap indeks, sehingga kompresi menjadi lebih sedikit. Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/ivf-pq.md#Search-on-index">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat <a href="/docs/id/ivf-pq.md#Search-on-index">mencari di indeks</a>.</p>
 <table>
    <tr>
      <th></th>
      <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>Deskripsi</p></th>
+     <th><p>Rentang Nilai</p></th>
+     <th><p>Saran Penyetelan</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>The number of clusters to search for candidates.</p></td>
-     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, <em>nlist</em>]</p><p><strong>Default value</strong>: <code translate="no">8</code></p></td>
-     <td><p>Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency. Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p><p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
+     <td><p>Jumlah cluster untuk mencari kandidat.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat <strong>Rentang</strong>: [1, <em>nlist</em>]</p><p><strong>Nilai default</strong>: <code translate="no">8</code></p></td>
+     <td><p>Nilai yang lebih tinggi memungkinkan lebih banyak klaster untuk dicari, meningkatkan daya ingat dengan memperluas cakupan pencarian, tetapi dengan biaya peningkatan latensi kueri. Tetapkan <code translate="no">nprobe</code> secara proporsional dengan <code translate="no">nlist</code> untuk menyeimbangkan kecepatan dan akurasi.</p><p>Pada kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam kisaran ini: [1, nlist].</p></td>
    </tr>
 </table>

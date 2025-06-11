@@ -2,13 +2,13 @@
 id: gpu-ivf-pq.md
 title: GPU_IVF_PQ
 summary: >-
-  The GPU_IVF_PQ index builds on the IVF_PQ concept by combining inverted file
-  clustering with Product Quantization (PQ), which breaks down high-dimensional
-  vectors into smaller subspaces and quantizes them for efficient similarity
-  searches. Exclusively designed for GPU environments, GPU_IVF_PQ leverages
-  parallel processing to accelerate computations and handle large-scale vector
-  data effectively. For more information on foundational concepts, refer to
-  IVF_PQ.
+  Indeks GPU_IVF_PQ dibangun berdasarkan konsep IVF_PQ dengan menggabungkan
+  pengelompokan file terbalik dengan Product Quantization (PQ), yang memecah
+  vektor berdimensi tinggi menjadi subruang yang lebih kecil dan
+  mengkuantifikasinya untuk pencarian kemiripan yang efisien. Didesain khusus
+  untuk lingkungan GPU, GPU_IVF_PQ memanfaatkan pemrosesan paralel untuk
+  mempercepat komputasi dan menangani data vektor berskala besar secara efektif.
+  Untuk informasi lebih lanjut mengenai konsep dasar, lihat IVF_PQ.
 ---
 <h1 id="GPUIVFPQ" class="common-anchor-header">GPU_IVF_PQ<button data-href="#GPUIVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,8 +25,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <strong>GPU_IVF_PQ</strong> index builds on the <strong>IVF_PQ</strong> concept by combining inverted file clustering with Product Quantization (PQ), which breaks down high-dimensional vectors into smaller subspaces and quantizes them for efficient similarity searches. Exclusively designed for GPU environments, GPU_IVF_PQ leverages parallel processing to accelerate computations and handle large-scale vector data effectively. For more information on foundational concepts, refer to <a href="/docs/ivf-pq.md">IVF_PQ</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
+    </button></h1><p>Indeks <strong>GPU_IVF_PQ</strong> dibangun berdasarkan konsep <strong>IVF_PQ</strong> dengan menggabungkan pengelompokan file terbalik dengan Product Quantization (PQ), yang memecah vektor berdimensi tinggi menjadi subruang yang lebih kecil dan mengkuantifikasinya untuk pencarian kemiripan yang efisien. Didesain khusus untuk lingkungan GPU, GPU_IVF_PQ memanfaatkan pemrosesan paralel untuk mempercepat komputasi dan menangani data vektor berskala besar secara efektif. Untuk informasi lebih lanjut tentang konsep dasar, lihat <a href="/docs/id/ivf-pq.md">IVF_PQ</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">Membangun indeks<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To build a <code translate="no">GPU_IVF_PQ</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
+    </button></h2><p>Untuk membangun indeks <code translate="no">GPU_IVF_PQ</code> pada bidang vektor di Milvus, gunakan metode <code translate="no">add_index()</code>, tentukan <code translate="no">index_type</code>, <code translate="no">metric_type</code>, dan parameter tambahan untuk indeks.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -57,18 +57,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>Dalam konfigurasi ini:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">GPU_IVF_PQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
-<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
+<li><p><code translate="no">index_type</code>: Jenis indeks yang akan dibangun. Dalam contoh ini, tetapkan nilainya ke <code translate="no">GPU_IVF_PQ</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antara vektor. Nilai yang didukung termasuk <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p></li>
+<li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk membangun indeks.</p>
 <ul>
-<li><code translate="no">m</code>: Number of sub-vectors to split the vector into.</li>
+<li><code translate="no">m</code>: Jumlah sub-vektor yang akan dibagi menjadi vektor.</li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">GPU_IVF_PQ</code> index, refer to <a href="/docs/gpu-ivf-pq.md#Index-building-params">Index building params</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut parameter pembuatan yang tersedia untuk indeks <code translate="no">GPU_IVF_PQ</code>, lihat Parameter <a href="/docs/id/gpu-ivf-pq.md#Index-building-params">pembuatan indeks</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/create-collection.md">Membuat Koleksi</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Mencari di indeks<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,7 +83,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
+    </button></h2><p>Setelah indeks dibuat dan entitas dimasukkan, Anda dapat melakukan pencarian kemiripan pada indeks.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -98,15 +98,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>Dalam konfigurasi ini:</p>
 <ul>
-<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
+<li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk pencarian pada indeks.</p>
 <ul>
-<li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
+<li><code translate="no">nprobe</code>: Jumlah kluster yang akan dicari.</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">GPU_IVF_PQ</code> index, refer to <a href="/docs/gpu-ivf-pq.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">GPU_IVF_PQ</code>, lihat Parameter <a href="/docs/id/gpu-ivf-pq.md#Index-specific-search-params">pencarian khusus indeks</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Parameter indeks<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,79 +121,69 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/gpu-ivf-pq.md#Build-index">building an index</a>.</p>
+    </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/gpu-ivf-pq.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th></th>
      <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>Deskripsi</p></th>
+     <th><p>Rentang Nilai</p></th>
+     <th><p>Saran Penyetelan</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>The number of clusters to create using the k-means algorithm during index building.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, 65536]</p>
-<p><strong>Default value</strong>: <code translate="no">128</code></p></td>
-     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources.
- In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
+     <td><p>Jumlah klaster yang akan dibuat menggunakan algoritme k-means selama pembuatan indeks.</p></td>
+     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> bilangan bulat: [1, 65536]</p>
+<p><strong>Nilai default</strong>: <code translate="no">128</code></p></td>
+     <td><p>Nilai <code translate="no">nlist</code> yang lebih besar meningkatkan daya ingat dengan membuat klaster yang lebih halus, tetapi meningkatkan waktu pembuatan indeks. Optimalkan berdasarkan ukuran set data dan sumber daya yang tersedia. Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [32, 4096].</p></td>
    </tr>
    <tr>
      <td rowspan="2"><p>PQ</p></td>
      <td><p><code translate="no">m</code></p></td>
-     <td><p>The number of sub-vectors (used for quantization) to divide each high-dimensional vector into during the quantization process.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, 65536]</p>
-<p><strong>Default value</strong>: None</p></td>
-     <td><p>A higher <code translate="no">m</code> value can improve accuracy, but it also increases the computational complexity and memory usage.
- <code translate="no">m</code> must be a divisor of the vector dimension (<em>D</em>) to ensure proper decomposition. A commonly recommended value is <em>m = D/2</em>.</p>
-<p>In most cases, we recommend you set a value within this range: [D/8, D].</p></td>
+     <td><p>Jumlah sub-vektor (digunakan untuk kuantisasi) untuk membagi setiap vektor dimensi tinggi selama proses kuantisasi.</p></td>
+     <td><p><strong>Jenis</strong>: Bilangan bulat <strong>Rentang</strong>: [1, 65536]</p>
+<p><strong>Nilai default</strong>: Tidak ada</p></td>
+     <td><p>Nilai <code translate="no">m</code> yang lebih tinggi dapat meningkatkan akurasi, tetapi juga meningkatkan kompleksitas komputasi dan penggunaan memori. <code translate="no">m</code> harus merupakan pembagi dimensi vektor<em>(D)</em> untuk memastikan penguraian yang tepat. Nilai yang umumnya direkomendasikan adalah <em>m = D/2</em>.</p>
+<p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [D/8, D].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook.
- Each codebook will contain $2^{\textit{nbits}}$ centroids. For example, if <code translate="no">nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for $2^8$ (256) possible centroids in the codebook for that sub-vector.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, 64]</p>
-<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
-     <td><p>A higher <code translate="no">nbits</code> value allows for larger codebooks, potentially leading to more accurate representations of the original vectors. However, it also means using more bits to store each index, resulting in less compression.
- In most cases, we recommend you set a value within this range: [1, 16].</p></td>
+     <td><p>Jumlah bit yang digunakan untuk merepresentasikan indeks centroid setiap sub-vektor dalam bentuk terkompresi. Ini secara langsung menentukan ukuran setiap codebook. Setiap codebook akan berisi $2^{\textit{nbits}}$ centroid. Sebagai contoh, jika <code translate="no">nbits</code> diatur ke 8, setiap sub-vektor akan diwakili oleh indeks centroid 8-bit. Hal ini memungkinkan adanya $2^8$ (256) kemungkinan centroid dalam buku kode untuk sub-vektor tersebut.</p></td>
+     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Bilangan Bulat: [1, 64]</p>
+<p><strong>Nilai default</strong>: <code translate="no">8</code></p></td>
+     <td><p>Nilai <code translate="no">nbits</code> yang lebih tinggi memungkinkan codebook yang lebih besar, yang berpotensi menghasilkan representasi yang lebih akurat dari vektor asli. Namun, ini juga berarti menggunakan lebih banyak bit untuk menyimpan setiap indeks, yang menghasilkan kompresi yang lebih sedikit. Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [1, 16].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
-     <td><p>Decides whether to cache the original dataset in GPU memory. Possible values:</p>
+     <td><p>Memutuskan apakah akan menyimpan dataset asli dalam memori GPU. Nilai yang mungkin:</p>
 <ul>
-<li><p><code translate="no">"true"</code>: Caches the original dataset to enhance recall by refining search results.</p></li>
-<li><p><code translate="no">"false"</code>: Does not cache the original dataset to save gpu memory.</p></li>
+<li><p><code translate="no">"true"</code>: Menyimpan dataset asli untuk meningkatkan daya ingat dengan menyempurnakan hasil pencarian.</p></li>
+<li><p><code translate="no">"false"</code>: Tidak menyimpan set data asli untuk menghemat memori GPU.</p></li>
 </ul></td>
-     <td><p><strong>Type</strong>: String
- <strong>Range</strong>: [<code translate="no">"true"</code>, <code translate="no">"false"</code>]</p>
-<p><strong>Default value</strong>: <code translate="no">"false"</code></p></td>
-     <td><p>Setting it to <code translate="no">"true"</code> enhances recall by refining search results but uses more GPU memory. Setting it to <code translate="no">"false"</code> conserves GPU memory.</p></td>
+     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> String: [<code translate="no">"true"</code>, <code translate="no">"false"</code>]</p>
+<p><strong>Nilai default</strong>: <code translate="no">"false"</code></p></td>
+     <td><p>Mengaturnya ke <code translate="no">"true"</code> akan meningkatkan daya ingat dengan menyempurnakan hasil pencarian, tetapi menggunakan lebih banyak memori GPU. Mengaturnya ke <code translate="no">"false"</code> akan menghemat memori GPU.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/gpu-ivf-pq.md#Search-on-index">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat melakukan <a href="/docs/id/gpu-ivf-pq.md#Search-on-index">pencarian pada indeks</a>.</p>
 <table>
    <tr>
      <th></th>
      <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>Deskripsi</p></th>
+     <th><p>Rentang Nilai</p></th>
+     <th><p>Saran Penyetelan</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>The number of clusters to search for candidates.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, <em>nlist</em>]</p>
-<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
-     <td><p>Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.
- Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p>
-<p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
+     <td><p>Jumlah cluster untuk mencari kandidat.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat <strong>Rentang</strong>: [1, <em>nlist</em>]</p>
+<p><strong>Nilai default</strong>: <code translate="no">8</code></p></td>
+     <td><p>Nilai yang lebih tinggi memungkinkan lebih banyak klaster untuk dicari, meningkatkan daya ingat dengan memperluas cakupan pencarian, namun dengan biaya peningkatan latensi kueri. Tetapkan <code translate="no">nprobe</code> secara proporsional dengan <code translate="no">nlist</code> untuk menyeimbangkan kecepatan dan akurasi.</p>
+<p>Pada kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam kisaran ini: [1, nlist].</p></td>
    </tr>
 </table>

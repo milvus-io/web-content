@@ -2,12 +2,11 @@
 id: bin-ivf-flat.md
 title: BIN_IVF_FLAT
 summary: >-
-  The BIN_IVF_FLAT index is a variant of the IVF_FLAT index exclusively for
-  binary embeddings. It enhances query efficiency by first partitioning the
-  vector data into multiple clusters (nlist units) and then comparing the target
-  input vector to the center of each cluster. BIN_IVF_FLAT significantly reduces
-  query time while allowing users to fine-tune the balance between accuracy and
-  speed. For more information, refer to IVF_FLAT.
+  فهرس BIN_IVF_FLAT هو متغير من فهرس IVF_FLAT حصريًا للتضمينات الثنائية. يعمل
+  على تحسين كفاءة الاستعلام من خلال تقسيم بيانات المتجه أولاً إلى مجموعات متعددة
+  (وحدات nlist) ثم مقارنة متجه الإدخال المستهدف بمركز كل مجموعة. يعمل
+  BIN_IVF_FLAT على تقليل وقت الاستعلام بشكل كبير مع السماح للمستخدمين بضبط
+  التوازن بين الدقة والسرعة. لمزيد من المعلومات، راجع IVF_FLAT.
 ---
 <h1 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT<button data-href="#BINIVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <strong>BIN_IVF_FLAT</strong> index is a variant of the <strong>IVF_FLAT</strong> index exclusively for binary embeddings. It enhances query efficiency by first partitioning the vector data into multiple clusters (nlist units) and then comparing the target input vector to the center of each cluster. BIN_IVF_FLAT significantly reduces query time while allowing users to fine-tune the balance between accuracy and speed. For more information, refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
+    </button></h1><p>فهرس <strong>BIN_IVF_FLAT</strong> هو متغير من فهرس <strong>IVF_FLAT</strong> حصريًا للتضمينات الثنائية. وهو يحسّن كفاءة الاستعلام من خلال تقسيم بيانات المتجه أولاً إلى مجموعات متعددة (وحدات قائمة ن) ثم مقارنة متجه الإدخال المستهدف بمركز كل مجموعة. يعمل BIN_IVF_FLAT على تقليل وقت الاستعلام بشكل كبير مع السماح للمستخدمين بضبط التوازن بين الدقة والسرعة. لمزيد من المعلومات، راجع <a href="/docs/ar/ivf-flat.md">IVF_FLAT</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">إنشاء فهرس<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To build a <code translate="no">BIN_IVF_FLAT</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
+    </button></h2><p>لإنشاء فهرس <code translate="no">BIN_IVF_FLAT</code> على حقل متجه في ميلفوس، استخدم طريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> ومعلمات إضافية للفهرس.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -56,18 +55,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>في هذا التكوين</p>
 <ul>
-<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">BIN_IVF_FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values for binary embeddings include <code translate="no">HAMMING</code> (default) and <code translate="no">JACCARD</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
-<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
+<li><p><code translate="no">index_type</code>: نوع الفهرس المراد إنشاؤه. في هذا المثال، اضبط القيمة على <code translate="no">BIN_IVF_FLAT</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: الطريقة المستخدمة لحساب المسافة بين المتجهات. تتضمن القيم المدعومة للتضمينات الثنائية <code translate="no">HAMMING</code> (افتراضي) و <code translate="no">JACCARD</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p></li>
+<li><p><code translate="no">params</code>: خيارات التكوين الإضافية لبناء الفهرس.</p>
 <ul>
-<li><code translate="no">nlist</code>: Number of clusters to divide the dataset.</li>
+<li><code translate="no">nlist</code>: عدد المجموعات لتقسيم مجموعة البيانات.</li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/bin-ivf-flat.md#Index-building-params">Index building params</a>.</p></li>
+<p>لمعرفة المزيد من معلمات البناء المتوفرة للفهرس <code translate="no">BIN_IVF_FLAT</code> ، راجع <a href="/docs/ar/bin-ivf-flat.md#Index-building-params">بارامز بناء الفهرس</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>بمجرد تكوين معلمات الفهرس، يمكنك إنشاء الفهرس باستخدام الأسلوب <code translate="no">create_index()</code> مباشرةً أو تمرير بارامترات الفهرس في الأسلوب <code translate="no">create_collection</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/create-collection.md">إنشاء مجموعة</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">البحث في الفهرس<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +81,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
+    </button></h2><p>بمجرد إنشاء الفهرس وإدراج الكيانات، يمكنك إجراء عمليات بحث عن التشابه على الفهرس.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -97,15 +96,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>في هذا التكوين</p>
 <ul>
-<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
+<li><p><code translate="no">params</code>: خيارات التكوين الإضافية للبحث على الفهرس.</p>
 <ul>
-<li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
+<li><code translate="no">nprobe</code>: عدد المجموعات المطلوب البحث عنها.</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/bin-ivf-flat.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
+<p>لمعرفة المزيد من معلمات البحث المتوفرة للفهرس <code translate="no">BIN_IVF_FLAT</code> ، راجع <a href="/docs/ar/bin-ivf-flat.md#Index-specific-search-params">باراميات البحث الخاصة بالفهرس</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">بارامترات الفهرس<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,43 +119,37 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/bin-ivf-flat.md#Index-building-params">building an index</a>.</p>
+    </button></h2><p>يقدم هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
+<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/bin-ivf-flat.md#Index-building-params">إنشاء فهرس</a>.</p>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>المعلمة</p></th>
+     <th><p>الوصف</p></th>
+     <th><p>نطاق القيمة</p></th>
+     <th><p>اقتراح الضبط</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>The number of clusters to create using the k-means algorithm during index building.
- Each cluster, represented by a centroid, stores a list of vectors. Increasing this parameter reduces the number of vectors in each cluster, creating smaller, more focused partitions.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, 65536]</p>
-<p><strong>Default value</strong>: <code translate="no">128</code></p></td>
-     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources.
- In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
+     <td><p>عدد العناقيد المراد إنشاؤها باستخدام خوارزمية k-means أثناء بناء الفهرس. يخزن كل عنقود، ممثلاً بنقطة مركزية، قائمة من المتجهات. تؤدي زيادة هذه المعلمة إلى تقليل عدد المتجهات في كل مجموعة، مما يؤدي إلى إنشاء أقسام أصغر وأكثر تركيزًا.</p></td>
+     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1, 65536]</p>
+<p><strong>القيمة الافتراضية</strong>: <code translate="no">128</code></p></td>
+     <td><p>تعمل القيم الأكبر <code translate="no">nlist</code> على تحسين الاستدعاء من خلال إنشاء مجموعات أكثر دقة ولكنها تزيد من وقت بناء الفهرس. قم بالتحسين بناءً على حجم مجموعة البيانات والموارد المتاحة. في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/bin-ivf-flat.md#Search-on-index">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/bin-ivf-flat.md#Search-on-index">البحث في الفهرس</a>.</p>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>المعلمة</p></th>
+     <th><p>الوصف</p></th>
+     <th><p>نطاق القيمة</p></th>
+     <th><p>اقتراح الضبط</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>The number of clusters to search for candidates.
- Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, <em>nlist</em>]</p>
-<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
-     <td><p>Increasing this value improves recall but may slow down the search.
- Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p>
-<p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
+     <td><p>عدد العناقيد للبحث عن المرشحين. تسمح القيم الأعلى بالبحث عن المزيد من العناقيد، مما يحسن الاستدعاء من خلال توسيع نطاق البحث ولكن على حساب زيادة زمن انتقال الاستعلام.</p></td>
+     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1, <em>nlist</em>]</p>
+<p><strong>القيمة الافتراضية</strong>: <code translate="no">8</code></p></td>
+     <td><p>تؤدي زيادة هذه القيمة إلى تحسين الاستدعاء ولكنها قد تؤدي إلى إبطاء البحث. قم بتعيين <code translate="no">nprobe</code> بشكل متناسب مع <code translate="no">nlist</code> لتحقيق التوازن بين السرعة والدقة.</p>
+<p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [1، nlist].</p></td>
    </tr>
 </table>

@@ -2,12 +2,9 @@
 id: bin-ivf-flat.md
 title: BIN_IVF_FLAT
 summary: >-
-  The BIN_IVF_FLAT index is a variant of the IVF_FLAT index exclusively for
-  binary embeddings. It enhances query efficiency by first partitioning the
-  vector data into multiple clusters (nlist units) and then comparing the target
-  input vector to the center of each cluster. BIN_IVF_FLAT significantly reduces
-  query time while allowing users to fine-tune the balance between accuracy and
-  speed. For more information, refer to IVF_FLAT.
+  BIN_IVF_FLAT 索引是 IVF_FLAT 索引的變體，專門用於二進位嵌入。它首先將向量資料分割成多個叢集（nlist
+  單元），然後將目標輸入向量與每個叢集的中心進行比較，從而提高查詢效率。BIN_IVF_FLAT
+  可大幅減少查詢時間，同時允許使用者微調精確度與速度之間的平衡。如需詳細資訊，請參閱 IVF_FLAT。
 ---
 <h1 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT<button data-href="#BINIVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <strong>BIN_IVF_FLAT</strong> index is a variant of the <strong>IVF_FLAT</strong> index exclusively for binary embeddings. It enhances query efficiency by first partitioning the vector data into multiple clusters (nlist units) and then comparing the target input vector to the center of each cluster. BIN_IVF_FLAT significantly reduces query time while allowing users to fine-tune the balance between accuracy and speed. For more information, refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
+    </button></h1><p><strong>BIN_IVF_FLAT</strong>索引是<strong>IVF_FLAT</strong>索引的變體，專門用於二進位嵌入。它首先將向量資料分割成多個叢集（nlist 單元），然後將目標輸入向量與每個叢集的中心進行比較，從而提高查詢效率。BIN_IVF_FLAT 可大幅減少查詢時間，同時允許使用者微調精確度與速度之間的平衡。如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-flat.md">IVF_FLAT</a>。</p>
+<h2 id="Build-index" class="common-anchor-header">建立索引<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To build a <code translate="no">BIN_IVF_FLAT</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
+    </button></h2><p>要在 Milvus 中建立向量場的<code translate="no">BIN_IVF_FLAT</code> 索引，請使用<code translate="no">add_index()</code> 方法，指定<code translate="no">index_type</code>,<code translate="no">metric_type</code>, 以及索引的附加參數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -56,18 +53,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>在此設定中</p>
 <ul>
-<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">BIN_IVF_FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values for binary embeddings include <code translate="no">HAMMING</code> (default) and <code translate="no">JACCARD</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
-<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
+<li><p><code translate="no">index_type</code>:要建立的索引類型。在本範例中，設定值為<code translate="no">BIN_IVF_FLAT</code> 。</p></li>
+<li><p><code translate="no">metric_type</code>:用來計算向量間距離的方法。二元嵌入的支援值包括<code translate="no">HAMMING</code> (預設值) 和<code translate="no">JACCARD</code> 。詳情請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
+<li><p><code translate="no">params</code>:建立索引的附加設定選項。</p>
 <ul>
-<li><code translate="no">nlist</code>: Number of clusters to divide the dataset.</li>
+<li><code translate="no">nlist</code>:分割資料集的叢集數。</li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/bin-ivf-flat.md#Index-building-params">Index building params</a>.</p></li>
+<p>要瞭解<code translate="no">BIN_IVF_FLAT</code> 索引可用的更多建立參數，請參閱<a href="/docs/zh-hant/bin-ivf-flat.md#Index-building-params">索引建立參數</a>。</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>一旦配置好索引參數，您就可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
+<h2 id="Search-on-index" class="common-anchor-header">在索引上搜尋<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +79,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
+    </button></h2><p>索引建立且實體插入後，您就可以在索引上執行相似性搜尋。</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -97,15 +94,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>在此配置中</p>
 <ul>
-<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
+<li><p><code translate="no">params</code>:在索引上搜尋的其他設定選項。</p>
 <ul>
-<li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
+<li><code translate="no">nprobe</code>:要搜尋的群集數量。</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/bin-ivf-flat.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
+<p>要瞭解<code translate="no">BIN_IVF_FLAT</code> 索引可用的更多搜尋參數，請參閱<a href="/docs/zh-hant/bin-ivf-flat.md#Index-specific-search-params">特定</a>於索引的搜尋參數。</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">索引參數<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,43 +117,37 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/bin-ivf-flat.md#Index-building-params">building an index</a>.</p>
+    </button></h2><p>本節概述用於建立索引和在索引上執行搜尋的參數。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/bin-ivf-flat.md#Index-building-params">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>參數</p></th>
+     <th><p>說明</p></th>
+     <th><p>值範圍</p></th>
+     <th><p>調整建議</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>The number of clusters to create using the k-means algorithm during index building.
- Each cluster, represented by a centroid, stores a list of vectors. Increasing this parameter reduces the number of vectors in each cluster, creating smaller, more focused partitions.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, 65536]</p>
-<p><strong>Default value</strong>: <code translate="no">128</code></p></td>
-     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources.
- In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
+     <td><p>在建立索引時，使用 k-means 演算法建立的叢集數目。 每個叢集由一個中心點代表，儲存向量清單。增加此參數可減少每個叢集中的向量數量，從而建立更小、更集中的分割。</p></td>
+     <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 65536]</p>
+<p><strong>預設值</strong>：<code translate="no">128</code></p></td>
+     <td><p>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善召回率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。 在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/bin-ivf-flat.md#Search-on-index">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/bin-ivf-flat.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>參數</p></th>
+     <th><p>說明</p></th>
+     <th><p>值範圍</p></th>
+     <th><p>調整建議</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>The number of clusters to search for candidates.
- Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, <em>nlist</em>]</p>
-<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
-     <td><p>Increasing this value improves recall but may slow down the search.
- Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p>
-<p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
+     <td><p>搜尋候選資料的叢集數。 較高的值允許搜尋更多的叢集，藉由擴大搜尋範圍來改善召回率，但代價是增加查詢延遲。</p></td>
+     <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1,<em>nlist］</em></p>
+<p><strong>預設值</strong>：<code translate="no">8</code></p></td>
+     <td><p>增加此值可提高召回率，但可能會減慢搜尋速度。請依<code translate="no">nlist</code> 的比例設定<code translate="no">nprobe</code> ，以平衡速度與精確度。</p>
+<p>在大多數情況下，我們建議您設定此範圍內的值：[1, nlist]。</p></td>
    </tr>
 </table>

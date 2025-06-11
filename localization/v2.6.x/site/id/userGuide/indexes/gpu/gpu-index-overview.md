@@ -1,11 +1,12 @@
 ---
 id: gpu-index-overview.md
-title: GPU Index Overview
+title: Ikhtisar Indeks GPU
 summary: >-
-  Building an index with GPU support in Milvus can significantly improve search
-  performance in high-throughput and high-recall scenarios.
+  Membangun indeks dengan dukungan GPU di Milvus dapat secara signifikan
+  meningkatkan performa pencarian dalam skenario throughput tinggi dan recall
+  tinggi.
 ---
-<h1 id="GPU-Index-Overview" class="common-anchor-header">GPU Index Overview<button data-href="#GPU-Index-Overview" class="anchor-icon" translate="no">
+<h1 id="GPU-Index-Overview" class="common-anchor-header">Ikhtisar Indeks GPU<button data-href="#GPU-Index-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,15 +21,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Building an index with GPU support in Milvus can significantly improve search performance in high-throughput and high-recall scenarios.</p>
-<p>The following figure compares the query throughput (queries per second) of various index configurations across different hardware setups, vector datasets (Cohere and OpenAI), and search batch sizes, showing that <code translate="no">GPU_CAGRA</code> consistently outperforms other methods.</p>
+    </button></h1><p>Membangun indeks dengan dukungan GPU di Milvus dapat secara signifikan meningkatkan performa pencarian dalam skenario throughput dan recall tinggi.</p>
+<p>Gambar berikut ini membandingkan throughput kueri (kueri per detik) dari berbagai konfigurasi indeks di berbagai pengaturan perangkat keras, kumpulan data vektor (Cohere dan OpenAI), dan ukuran kumpulan pencarian, yang menunjukkan bahwa <code translate="no">GPU_CAGRA</code> secara konsisten mengungguli metode lainnya.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/gpu-index-performance.png" alt="Gpu Index Performance" class="doc-image" id="gpu-index-performance" />
-    <span>Gpu Index Performance</span>
-  </span>
-</p>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu-index-performance.png" alt="Gpu Index Performance" class="doc-image" id="gpu-index-performance" />
+   </span> <span class="img-wrapper"> <span>Kinerja Indeks Gpu</span> </span></p>
+<h2 id="Limits" class="common-anchor-header">Batas<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,14 +43,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>For <code translate="no">GPU_IVF_FLAT</code>, the maximum value for <code translate="no">limit</code> is 1,024.</p></li>
-<li><p>For <code translate="no">GPU_IVF_PQ</code> and <code translate="no">GPU_CAGRA</code>, the maximum value for <code translate="no">limit</code> is 1,024.</p></li>
-<li><p>While there is no set <code translate="no">limit</code> for <code translate="no">GPU_BRUTE_FORCE</code>, it is recommended not to exceed 4,096 to avoid potential performance issues.</p></li>
-<li><p>Currently, GPU indexes do not support <code translate="no">COSINE</code> distance. If <code translate="no">COSINE</code> distance is required, data should be normalized first, and then inner product (IP) distance can be used as a substitute.</p></li>
-<li><p>Loading OOM protection for GPU indexes is not fully supported, too much data might lead to QueryNode crashes.</p></li>
-<li><p>GPU indexes do not support search functions like <a href="/docs/range-search.md">range search</a> and <a href="/docs/grouping-search.md">grouping search</a>.</p></li>
+<li><p>Untuk <code translate="no">GPU_IVF_FLAT</code>, nilai maksimum untuk <code translate="no">limit</code> adalah 1.024.</p></li>
+<li><p>Untuk <code translate="no">GPU_IVF_PQ</code> dan <code translate="no">GPU_CAGRA</code>, nilai maksimum untuk <code translate="no">limit</code> adalah 1.024.</p></li>
+<li><p>Meskipun tidak ada <code translate="no">limit</code> yang ditetapkan untuk <code translate="no">GPU_BRUTE_FORCE</code>, disarankan untuk tidak melebihi 4.096 untuk menghindari potensi masalah kinerja.</p></li>
+<li><p>Saat ini, indeks GPU tidak mendukung jarak <code translate="no">COSINE</code>. Jika jarak <code translate="no">COSINE</code> diperlukan, data harus dinormalisasi terlebih dahulu, dan kemudian jarak inner product (IP) dapat digunakan sebagai pengganti.</p></li>
+<li><p>Memuat perlindungan OOM untuk indeks GPU tidak sepenuhnya didukung, terlalu banyak data dapat menyebabkan QueryNode mengalami crash.</p></li>
+<li><p>Indeks GPU tidak mendukung fungsi pencarian seperti <a href="/docs/id/range-search.md">pencarian rentang</a> dan <a href="/docs/id/grouping-search.md">pencarian pengelompokan</a>.</p></li>
 </ul>
-<h2 id="Supported-GPU-index-types" class="common-anchor-header">Supported GPU index types<button data-href="#Supported-GPU-index-types" class="anchor-icon" translate="no">
+<h2 id="Supported-GPU-index-types" class="common-anchor-header">Jenis indeks GPU yang didukung<button data-href="#Supported-GPU-index-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,35 +65,35 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following table lists the GPU index types supported by Milvus.</p>
+    </button></h2><p>Tabel berikut mencantumkan jenis indeks GPU yang didukung oleh Milvus.</p>
 <table>
    <tr>
-     <th><p>Index Type</p></th>
-     <th><p>Description</p></th>
-     <th><p>Memory Usage</p></th>
+     <th><p>Jenis Indeks</p></th>
+     <th><p>Deskripsi</p></th>
+     <th><p>Penggunaan Memori</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/gpu-cagra.md">GPU_CAGRA</a></p></td>
-     <td><p>GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs to run the Milvus GPU version can be more cost-effective compared to using expensive training-grade GPUs.</p></td>
-     <td><p>Memory usage is approximately 1.8 times that of the original vector data.</p></td>
+     <td><p><a href="/docs/id/gpu-cagra.md">GPU_CAGRA</a></p></td>
+     <td><p>GPU_CAGRA adalah indeks berbasis grafik yang dioptimalkan untuk GPU, Menggunakan GPU kelas inferensi untuk menjalankan versi GPU Milvus dapat lebih hemat biaya dibandingkan dengan menggunakan GPU kelas pelatihan yang mahal.</p></td>
+     <td><p>Penggunaan memori sekitar 1,8 kali lipat dari data vektor asli.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/gpu-ivf-flat.md">GPU_IVF_FLAT</a></p></td>
-     <td><p>GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data. When conducting searches, note that you can set the top-k (<code translate="no">limit</code>) up to 256 for any search against a GPU_IVF_FLAT-indexed collection.</p></td>
-     <td><p>Requires memory equal to the size of the original data.</p></td>
+     <td><p><a href="/docs/id/gpu-ivf-flat.md">GPU_IVF_FLAT</a></p></td>
+     <td><p>GPU_IVF_FLAT adalah indeks IVF yang paling dasar, dan data yang disandikan yang disimpan di setiap unit konsisten dengan data asli. Saat melakukan pencarian, perhatikan bahwa Anda dapat mengatur top-k (<code translate="no">limit</code>) hingga 256 untuk pencarian apa pun terhadap koleksi yang diindeks GPU_IVF_FLAT.</p></td>
+     <td><p>Memerlukan memori yang sama dengan ukuran data asli.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/gpu-ivf-pq.md">GPU_IVF_PQ</a></p></td>
-     <td><p>GPU_IVF_PQ performs IVF index clustering before quantizing the product of vectors. When conducting searches, note that you can set the top-k (<code translate="no">limit</code>) up to 8,192 for any search against a GPU_IVF_FLAT-indexed collection.</p></td>
-     <td><p>Utilizes a smaller memory footprint, which depends on the compression parameter settings.</p></td>
+     <td><p><a href="/docs/id/gpu-ivf-pq.md">GPU_IVF_PQ</a></p></td>
+     <td><p>GPU_IVF_PQ melakukan pengelompokan indeks IVF sebelum mengkuantisasi hasil perkalian vektor. Saat melakukan pencarian, perhatikan bahwa Anda dapat mengatur top-k (<code translate="no">limit</code>) hingga 8.192 untuk setiap pencarian terhadap koleksi yang diindeks GPU_IVF_FLAT.</p></td>
+     <td><p>Memanfaatkan jejak memori yang lebih kecil, yang bergantung pada pengaturan parameter kompresi.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/gpu-brute-force.md">GPU_BRUTE_FORCE</a></p></td>
-     <td><p>GPU_BRUTE_FORCE is tailored for cases where extremely high recall is crucial, guaranteeing a recall of 1 by comparing each query with all vectors in the dataset. It only requires the metric type (<code translate="no">metric_type</code>) and top-k (<code translate="no">limit</code>) as index building and search parameters.</p></td>
-     <td><p>Requires memory equal to the size of the original data.</p></td>
+     <td><p><a href="/docs/id/gpu-brute-force.md">GPU_BRUTE_FORCE</a></p></td>
+     <td><p>GPU_BRUTE_FORCE dirancang untuk kasus-kasus di mana pemanggilan yang sangat tinggi sangat penting, menjamin pemanggilan 1 dengan membandingkan setiap kueri dengan semua vektor dalam kumpulan data. Hanya membutuhkan tipe metrik (<code translate="no">metric_type</code>) dan top-k (<code translate="no">limit</code>) sebagai parameter pembangunan indeks dan pencarian.</p></td>
+     <td><p>Membutuhkan memori yang sama dengan ukuran data asli.</p></td>
    </tr>
 </table>
-<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configure Milvus settings for GPU memory control<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
+<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Mengonfigurasi pengaturan Milvus untuk kontrol memori GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -109,20 +108,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus uses a global graphics memory pool to allocate GPU memory. It supports two parameters <code translate="no">initMemSize</code> and <code translate="no">maxMemSize</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus config file</a>. The pool size is initially set to <code translate="no">initMemSize</code>, and will be automatically expanded to <code translate="no">maxMemSize</code> after exceeding this limit.</p>
-<p>The default <code translate="no">initMemSize</code> is 1/2 of the available GPU memory when Milvus starts, and the default <code translate="no">maxMemSize</code> is equal to all available GPU memory.</p>
-<p>Up until Milvus 2.4.1, Milvus uses a unified GPU memory pool. For versions prior to 2.4.1, it was recommended to set both of the value to 0.</p>
+    </button></h2><p>Milvus menggunakan kumpulan memori grafis global untuk mengalokasikan memori GPU. Ini mendukung dua parameter <code translate="no">initMemSize</code> dan <code translate="no">maxMemSize</code> dalam <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">file konfigurasi Milvus</a>. Ukuran pool pada awalnya diatur ke <code translate="no">initMemSize</code>, dan akan secara otomatis diperluas ke <code translate="no">maxMemSize</code> setelah melebihi batas ini.</p>
+<p>Default <code translate="no">initMemSize</code> adalah 1/2 dari memori GPU yang tersedia saat Milvus dijalankan, dan default <code translate="no">maxMemSize</code> sama dengan semua memori GPU yang tersedia.</p>
+<p>Hingga Milvus 2.4.1, Milvus menggunakan kumpulan memori GPU terpadu. Untuk versi sebelum 2.4.1, direkomendasikan untuk mengatur kedua nilai tersebut ke 0.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>From Milvus 2.4.1 onwards, the GPU memory pool is only used for temporary GPU data during searches. Therefore, it is recommended to set it to 2048 and 4096.</p>
+<p>Mulai Milvus 2.4.1 dan seterusnya, kumpulan memori GPU hanya digunakan untuk data GPU sementara selama pencarian. Oleh karena itu, disarankan untuk mengaturnya ke 2048 dan 4096.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">2048</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">4096</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To learn how to build a GPU index, refer to the specific guide for each index type.</p>
-<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+<p>Untuk mempelajari cara membuat indeks GPU, lihat panduan khusus untuk setiap jenis indeks.</p>
+<h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,8 +137,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>When is it appropriate to utilize a GPU index?</strong></p>
-<p>A GPU index is particularly beneficial in situations that demand high throughput or high recall. For instance, when dealing with large batches, the throughput of GPU indexing can surpass that of CPU indexing by as much as 100 times. In scenarios with smaller batches, GPU indexes still significantly outshine CPU indexes in terms of performance. Furthermore, if there’s a requirement for rapid data insertion, incorporating a GPU can substantially speed up the process of building indexes.</p></li>
-<li><p><strong>In which scenarios are GPU indexes like GPU_CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT, and GPU_BRUTE_FORCE most suitable?</strong></p>
-<p><code translate="no">GPU_CAGRA</code> indexes are ideal for scenarios that demand enhanced performance, albeit at the cost of consuming more memory. For environments where memory conservation is a priority, the <code translate="no">GPU_IVF_PQ</code> index can help minimize storage requirements, though this comes with a higher loss in precision. The <code translate="no">GPU_IVF_FLAT</code> index serves as a balanced option, offering a compromise between performance and memory usage. Lastly, the <code translate="no">GPU_BRUTE_FORCE</code> index is designed for exhaustive search operations, guaranteeing a recall rate of 1 by performing traversal searches.</p></li>
+<li><p><strong>Kapan waktu yang tepat untuk menggunakan indeks GPU?</strong></p>
+<p>Indeks GPU sangat bermanfaat dalam situasi yang menuntut throughput tinggi atau recall tinggi. Misalnya, saat menangani batch besar, throughput pengindeksan GPU dapat melampaui throughput pengindeksan CPU sebanyak 100 kali lipat. Dalam skenario dengan batch yang lebih kecil, indeks GPU masih secara signifikan mengungguli indeks CPU dalam hal kinerja. Selain itu, jika ada persyaratan untuk penyisipan data yang cepat, menggabungkan GPU dapat mempercepat proses pembuatan indeks secara substansial.</p></li>
+<li><p><strong>Dalam skenario apa indeks GPU seperti GPU_CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT, dan GPU_BRUTE_FORCE paling cocok?</strong></p>
+<p><code translate="no">GPU_CAGRA</code> Indeks ini ideal untuk skenario yang menuntut peningkatan performa, meskipun dengan mengorbankan konsumsi memori yang lebih besar. Untuk lingkungan di mana konservasi memori menjadi prioritas, indeks <code translate="no">GPU_IVF_PQ</code> dapat membantu meminimalkan kebutuhan penyimpanan, meskipun hal ini disertai dengan kehilangan presisi yang lebih tinggi. Indeks <code translate="no">GPU_IVF_FLAT</code> berfungsi sebagai opsi yang seimbang, menawarkan kompromi antara kinerja dan penggunaan memori. Terakhir, indeks <code translate="no">GPU_BRUTE_FORCE</code> dirancang untuk operasi pencarian yang lengkap, menjamin tingkat recall 1 dengan melakukan pencarian traversal.</p></li>
 </ul>

@@ -1,9 +1,9 @@
 ---
 id: bedrock.md
-title: Bedrock
+title: BedrockCompatible with Milvus 2.6.x
 summary: >-
-  This topic describes how to configure and use Amazon Bedrock embedding
-  functions in Milvus.
+  В этой теме описывается, как настраивать и использовать функции встраивания
+  Amazon Bedrock в Milvus.
 beta: Milvus 2.6.x
 ---
 <h1 id="Bedrock" class="common-anchor-header">Bedrock<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Bedrock" class="anchor-icon" translate="no">
@@ -21,8 +21,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic describes how to configure and use Amazon Bedrock embedding functions in Milvus.</p>
-<h2 id="Choose-an-embedding-model" class="common-anchor-header">Choose an embedding model<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
+    </button></h1><p>В этой теме описывается, как настраивать и использовать функции встраивания Amazon Bedrock в Milvus.</p>
+<h2 id="Choose-an-embedding-model" class="common-anchor-header">Выбор модели встраивания<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,23 +37,23 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports embedding models provided by Amazon Bedrock. Below are the currently available embedding models for quick reference:</p>
+    </button></h2><p>Milvus поддерживает модели встраивания, предоставляемые Amazon Bedrock. Ниже приведены доступные на данный момент модели встраивания для быстрого ознакомления:</p>
 <table>
    <tr>
-     <th><p>Model Name</p></th>
-     <th><p>Dimensions</p></th>
-     <th><p>Max Tokens</p></th>
-     <th><p>Description</p></th>
+     <th><p>Название модели</p></th>
+     <th><p>Размеры</p></th>
+     <th><p>Максимальное количество токенов</p></th>
+     <th><p>Описание</p></th>
    </tr>
    <tr>
      <td><p>amazon.titan-embed-text-v2:0</p></td>
-     <td><p>1,024 (default), 512, 256</p></td>
+     <td><p>1,024 (по умолчанию), 512, 256</p></td>
      <td><p>8,192</p></td>
-     <td><p>RAG, document search, reranking, classification, etc.</p></td>
+     <td><p>RAG, поиск документов, реранжирование, классификация и т. д.</p></td>
    </tr>
 </table>
-<p>For details, refer to <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html">Amazon Titan Text Embeddings models</a>.</p>
-<h2 id="Configure-credentials" class="common-anchor-header">Configure credentials<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<p>Подробнее см. в разделе <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html">Модели встраивания текста Amazon Titan</a>.</p>
+<h2 id="Configure-credentials" class="common-anchor-header">Настройка учетных данных<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,19 +68,19 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus must know your Bedrock access credentials before it can request embeddings. Milvus provides two methods to configure credentials:</p>
+    </button></h2><p>Milvus должен знать ваши учетные данные доступа к Bedrock, прежде чем он сможет запрашивать вкрапления. Milvus предоставляет два способа настройки учетных данных:</p>
 <ul>
-<li><p><strong>Configuration file (recommended):</strong> Store the credentials in <code translate="no">milvus.yaml</code> so every restart and node picks it up automatically.</p></li>
-<li><p><strong>Environment variables:</strong> Inject the credentials at deploy time—ideal for Docker Compose.</p></li>
+<li><p><strong>Файл конфигурации (рекомендуется):</strong> Храните учетные данные в <code translate="no">milvus.yaml</code>, чтобы при каждом перезапуске узла они автоматически подхватывались.</p></li>
+<li><p><strong>Переменные окружения:</strong> Ввод учетных данных во время развертывания - идеальный вариант для Docker Compose.</p></li>
 </ul>
-<p>Choose one of the two methods below—the configuration file is easier to maintain on bare-metal and VMs, while the env-var route fits container workflows.</p>
+<p>Выберите один из двух описанных ниже методов - конфигурационный файл проще поддерживать на пустом металле и виртуальных машинах, в то время как маршрут с переменными окружения подходит для контейнерных рабочих процессов.</p>
 <div class="alert note">
-<p>If a credential for the same provider is present in both the configuration file and an environment variable, Milvus always uses the value in <code translate="no">milvus.yaml</code> and ignores the environment variable.</p>
+<p>Если учетные данные для одного и того же провайдера присутствуют и в файле конфигурации, и в переменной окружения, Milvus всегда использует значение в <code translate="no">milvus.yaml</code> и игнорирует переменную окружения.</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1: Configuration file (recommended & higher priority)</h3><p>Keep your credentials in <code translate="no">milvus.yaml</code>; Milvus reads them at startup and overrides any environment variable for the same provider.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Вариант 1: Конфигурационный файл (рекомендуется и имеет более высокий приоритет)</h3><p>Храните свои учетные данные в <code translate="no">milvus.yaml</code>; Milvus считывает их при запуске и переопределяет любую переменную окружения для того же провайдера.</p>
 <ol>
-<li><p>**Declare your credentials under <code translate="no">credential:</code></p>
-<p>You may list one or many credentials—give each a label you invent and will reference later.</p>
+<li><p>** Объявите свои учетные данные в разделе <code translate="no">credential:</code></p>
+<p>Вы можете перечислить один или много учетных данных - дайте каждому из них ярлык, который вы придумаете и на который будете ссылаться позже.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">aksk_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -90,37 +90,37 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">access_key_id:</span> <span class="hljs-string">&lt;YOUR_PROD_ACCESS_KEY_ID&gt;</span>    
     <span class="hljs-attr">secret_access_key:</span> <span class="hljs-string">&lt;YOUR_PROD_SECRET_ACCESS_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Putting the credentials here makes them persistent across restarts and lets you switch credentials just by changing a label.</p></li>
-<li><p><strong>Tell Milvus which credential to use for service calls</strong></p>
-<p>In the same file, point the Bedrock provider at the label you want it to use.</p>
+<p>Размещение учетных данных здесь делает их постоянными при перезагрузке и позволяет вам переключаться между учетными данными, просто меняя метку.</p></li>
+<li><p><strong>Укажите Milvus, какие учетные данные использовать для вызовов служб</strong></p>
+<p>В том же файле укажите провайдеру Bedrock на метку, которую вы хотите использовать.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">bedrock:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">aksk_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This binds a specific credential to every request Milvus sends to the Bedrock embedding service.</p></li>
+<p>Это свяжет определенный мандат с каждым запросом, который Milvus отправляет службе встраивания Bedrock.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Environment variable</h3><p>Use this method when you run Milvus with Docker Compose and prefer to keep secrets out of files and images.</p>
-<p>Milvus falls back to the environment variable only if no credential for the provider is found in <code translate="no">milvus.yaml</code>.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Вариант 2: Переменная среды</h3><p>Используйте этот метод, если вы запускаете Milvus с Docker Compose и предпочитаете хранить секреты вне файлов и образов.</p>
+<p>Milvus возвращается к переменной окружения только в том случае, если учетная запись для провайдера не найдена в <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
-     <th><p>Variable</p></th>
-     <th><p>Required</p></th>
-     <th><p>Description</p></th>
+     <th><p>Переменная</p></th>
+     <th><p>Требуется</p></th>
+     <th><p>Описание</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">MILVUSAI_BEDROCK_ACCESS_KEY_ID</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Your AWS access key ID used for authentication with the Bedrock service.</p></td>
+     <td><p>Да</p></td>
+     <td><p>Идентификатор ключа доступа AWS, используемый для аутентификации в службе Bedrock.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">MILVUSAI_BEDROCK_SECRET_ACCESS_KEY</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Your AWS secret access key corresponding to your access key ID.</p></td>
+     <td><p>Да</p></td>
+     <td><p>Ваш секретный ключ доступа AWS, соответствующий идентификатору ключа доступа.</p></td>
    </tr>
 </table>
-<p>In your <strong>docker-compose.yaml</strong> file, set the <code translate="no">MILVUSAI_OPENAI_API_KEY</code> environment variable.</p>
+<p>В файле <strong>docker-compose.yaml</strong> установите переменную окружения <code translate="no">MILVUSAI_OPENAI_API_KEY</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -130,8 +130,8 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">MILVUSAI_BEDROCK_ACCESS_KEY_ID:</span> <span class="hljs-string">&lt;MILVUSAI_BEDROCK_ACCESS_KEY_ID&gt;</span>
     <span class="hljs-attr">MILVUSAI_BEDROCK_SECRET_ACCESS_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_BEDROCK_SECRET_ACCESS_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">environment:</code> block injects the key only into the Milvus container, leaving your host OS untouched. For details, refer to <a href="/docs/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configure Milvus with Docker Compose</a>.</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p>Блок <code translate="no">environment:</code> вводит ключ только в контейнер Milvus, оставляя ОС хоста нетронутой. Подробнее см. в разделе <a href="/docs/ru/configure-docker.md#Configure-Milvus-with-Docker-Compose">Настройка Milvus с помощью Docker Compose</a>.</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">Использование функции встраивания<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -146,14 +146,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once credentials are configured, follow these steps to define and use embedding functions.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Step 1: Define schema fields</h3><p>To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:</p>
+    </button></h2><p>После настройки учетных данных выполните следующие шаги, чтобы определить и использовать функции встраивания.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Шаг 1: Определите поля схемы</h3><p>Чтобы использовать функцию встраивания, создайте коллекцию с определенной схемой. Эта схема должна включать как минимум три необходимых поля:</p>
 <ul>
-<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
-<li><p>A scalar field that stores raw data to be embedded.</p></li>
-<li><p>A vector field reserved to store vector embeddings that the function will generate for the scalar field.</p></li>
+<li><p>Первичное поле, которое уникально идентифицирует каждую сущность в коллекции.</p></li>
+<li><p>Скалярное поле, в котором хранятся исходные данные для встраивания.</p></li>
+<li><p>Векторное поле, зарезервированное для хранения векторных вкраплений, которые функция будет генерировать для скалярного поля.</p></li>
 </ul>
-<p>The following example defines a schema with one scalar field <code translate="no">&quot;document&quot;</code> for storing textual data and one vector field <code translate="no">&quot;dense&quot;</code> for storing embeddings to be generated by the Function module. Remember to set the vector dimension (<code translate="no">dim</code>) to match the output of your chosen embedding model.</p>
+<p>Следующий пример определяет схему с одним скалярным полем <code translate="no">&quot;document&quot;</code> для хранения текстовых данных и одним векторным полем <code translate="no">&quot;dense&quot;</code> для хранения вкраплений, которые будут сгенерированы модулем Function. Не забудьте установить размерность вектора (<code translate="no">dim</code>) в соответствии с результатами выбранной вами модели вкраплений.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -174,9 +174,9 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-function-to-schema" class="common-anchor-header">Step 2: Add function to schema</h3><p>The Function module in Milvus automatically converts raw data stored in a scalar field into embeddings and stores them into the explicitly defined vector field.</p>
-<p>The example below adds a Function module (<code translate="no">bedrk</code>) that converts the scalar field <code translate="no">&quot;document&quot;</code> into embeddings, storing the resulting vectors in the <code translate="no">&quot;dense&quot;</code> vector field defined earlier.</p>
-<p>Once you have defined your embedding function, add it to your collection schema. This instructs Milvus to use the specified embedding function to process and store embeddings from your text data.</p>
+<h3 id="Step-2-Add-function-to-schema" class="common-anchor-header">Шаг 2: Добавьте функцию в схему</h3><p>Модуль Function в Milvus автоматически преобразует исходные данные, хранящиеся в скалярном поле, во вкрапления и сохраняет их в явно определенном векторном поле.</p>
+<p>В примере ниже добавлен модуль Function (<code translate="no">bedrk</code>), который преобразует скалярное поле <code translate="no">&quot;document&quot;</code> в эмбеддинги, сохраняя полученные векторы в векторном поле <code translate="no">&quot;dense&quot;</code>, определенном ранее.</p>
+<p>Определив функцию встраивания, добавьте ее в схему коллекции. Это даст указание Milvus использовать указанную функцию встраивания для обработки и хранения вкраплений из ваших текстовых данных.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for OpenAI provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;bedrk&quot;</span>,                                   <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -197,7 +197,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -212,4 +212,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After configuring the embedding function, refer to the <a href="/docs/embedding-function-overview.md">Function Overview</a> for additional guidance on index configuration, data insertion examples, and semantic search operations.</p>
+    </button></h2><p>После настройки функции встраивания обратитесь к <a href="/docs/ru/embedding-function-overview.md">обзору функций</a> для получения дополнительных указаний по настройке индекса, примеров вставки данных и операций семантического поиска.</p>

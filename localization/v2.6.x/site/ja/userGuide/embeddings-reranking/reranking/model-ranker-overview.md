@@ -1,16 +1,11 @@
 ---
 id: model-ranker-overview.md
-title: Model Ranker Overview
+title: モデル・ランカーの概要Compatible with Milvus 2.6.x
 summary: >-
-  Traditional vector search ranks results purely by mathematical similarity—how
-  closely vectors match in high-dimensional space. While efficient, this
-  approach often misses true semantic relevance. Consider searching for "best
-  practices for database optimization": you might receive documents with high
-  vector similarity that mention these terms frequently, but don't actually
-  provide actionable optimization strategies.
+  従来のベクトル検索は、純粋に数学的な類似性によって結果をランク付けする。効率的ではあるが、このアプローチはしばしば真の意味的関連性を見逃してしまう。データベース最適化のベストプラクティス」を検索することを考えてみましょう。ベクトル類似度が高く、これらの用語に頻繁に言及している文書を受け取るかもしれませんが、実際には実用的な最適化戦略を提供していません。
 beta: Milvus 2.6.x
 ---
-<h1 id="Model-Ranker-Overview" class="common-anchor-header">Model Ranker Overview<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
+<h1 id="Model-Ranker-Overview" class="common-anchor-header">モデル・ランカーの概要<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,9 +20,9 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Traditional vector search ranks results purely by mathematical similarity—how closely vectors match in high-dimensional space. While efficient, this approach often misses true semantic relevance. Consider searching for <strong>“best practices for database optimization”</strong>: you might receive documents with high vector similarity that mention these terms frequently, but don’t actually provide actionable optimization strategies.</p>
-<p>Model Ranker transforms Milvus search by integrating advanced language models that understand semantic relationships between queries and documents. Instead of relying solely on vector similarity, it evaluates content meaning and context to deliver more intelligent, relevant results.</p>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+    </button></h1><p>従来のベクトル検索は、純粋に数学的な類似性によって結果をランク付けする。効率的ではあるが、このアプローチはしばしば真の意味的関連性を見逃してしまう。例えば、<strong>「データベース最適化のベストプラクティス」を</strong>検索してみましょう。ベクトル類似度が高く、これらの用語に頻繁に言及している文書を受け取るかもしれませんが、実際には実用的な最適化戦略を提供しているわけではありません。</p>
+<p>Model Rankerは、クエリとドキュメント間の意味的関係を理解する高度な言語モデルを統合することで、Milvusの検索を変えます。ベクトル類似度だけに頼るのではなく、コンテンツの意味と文脈を評価し、よりインテリジェントで関連性の高い結果を提供します。</p>
+<h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,11 +38,11 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Model rankers cannot be used with grouping searches.</p></li>
-<li><p>Fields used for model reranking must be text type (<code translate="no">VARCHAR</code>).</p></li>
-<li><p>Each model ranker can use only one <code translate="no">VARCHAR</code> field at a time for evaluation.</p></li>
+<li><p>モデル・ランカーはグループ化検索では使用できません。</p></li>
+<li><p>モデル・ランカーに使用されるフィールドはテキスト型（<code translate="no">VARCHAR</code> ）でなければなりません。</p></li>
+<li><p>各モデルランカーは、一度に1つのフィールド（<code translate="no">VARCHAR</code> ）のみを評価に使用することができます。</p></li>
 </ul>
-<h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,27 +57,25 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Model rankers integrate language model understanding capabilities into the Milvus search process through a well-defined workflow:</p>
+    </button></h2><p>モデルランカーは明確に定義されたワークフローを通じて、言語モデル理解機能をMilvusの検索プロセスに統合します：</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" />
-    <span>Model Ranker Overview</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" />
+   </span> <span class="img-wrapper"> <span>モデルランカーの概要</span> </span></p>
 <ol>
-<li><p><strong>Initial query</strong>: Your application sends a query to Milvus</p></li>
-<li><p><strong>Vector search</strong>: Milvus performs standard vector search to identify candidate documents</p></li>
-<li><p><strong>Candidate retrieval</strong>: The system identifies the initial set of candidate documents based on vector similarity</p></li>
-<li><p><strong>Model evaluation</strong>: The Model Ranker Function processes query-document pairs:</p>
+<li><p><strong>最初のクエリ</strong>：お客様のアプリケーションからMilvusへクエリが送信されます。</p></li>
+<li><p><strong>ベクトル検索</strong>Milvusは標準的なベクトル検索を行い、候補文書を特定します。</p></li>
+<li><p><strong>候補文書の検索</strong>ベクトル類似度に基づいて候補文書の初期セットを特定する。</p></li>
+<li><p><strong>モデル評価</strong>モデルランカー機能はクエリと文書のペアを処理する：</p>
 <ul>
-<li><p>Sends the original query and candidate documents to an external model service</p></li>
-<li><p>The language model evaluates semantic relevance between query and each document</p></li>
-<li><p>Each document receives a relevance score based on semantic understanding</p></li>
+<li><p>元のクエリと候補文書を外部のモデルサービスに送る。</p></li>
+<li><p>言語モデルがクエリと各文書の意味的関連性を評価する。</p></li>
+<li><p>各文書は意味理解に基づく関連性スコアを受け取る</p></li>
 </ul></li>
-<li><p><strong>Intelligent reranking</strong>: Documents are reordered based on model-generated relevance scores</p></li>
-<li><p><strong>Enhanced results</strong>: Your application receives results ranked by semantic relevance rather than just vector similarity</p></li>
+<li><p><strong>インテリジェントな並べ替え</strong>：文書がモデルによって生成された関連性スコアに基づいて並べ替えられる。</p></li>
+<li><p><strong>充実した結果</strong>：アプリケーションはベクトルの類似性だけでなく、意味的な関連性によってランク付けされた結果を受け取ります。</p></li>
 </ol>
-<h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">Choose a model provider for your needs<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
+<h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">ニーズに合ったモデルプロバイダーを選択<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,43 +90,43 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports the following model service providers for reranking, each with distinct characteristics:</p>
+    </button></h2><p>Milvusは以下のリランキング用モデルサービスプロバイダをサポートしており、それぞれ特徴があります：</p>
 <table>
    <tr>
-     <th><p>Provider</p></th>
-     <th><p>Best For</p></th>
-     <th><p>Characteristics</p></th>
-     <th><p>Example Use Case</p></th>
+     <th><p>プロバイダ</p></th>
+     <th><p>最適</p></th>
+     <th><p>特徴</p></th>
+     <th><p>使用例</p></th>
    </tr>
    <tr>
      <td><p>vLLM</p></td>
-     <td><p>Complex applications requiring deep semantic understanding and customization</p></td>
+     <td><p>深い意味理解とカスタマイズを必要とする複雑なアプリケーション</p></td>
      <td><ul>
-<li><p>Supports various large language models</p></li>
-<li><p>Flexible deployment options</p></li>
-<li><p>Higher computational requirements</p></li>
-<li><p>Greater customization potential</p></li>
+<li><p>様々な大規模言語モデルをサポート</p></li>
+<li><p>柔軟な展開オプション</p></li>
+<li><p>より高い計算要件</p></li>
+<li><p>より大きなカスタマイズの可能性</p></li>
 </ul></td>
-     <td><p>Legal research platform deploying domain-specific models that understand legal terminology and case law relationships</p></td>
+     <td><p>法律用語と判例関係を理解するドメイン固有のモデルを展開する法律研究プラットフォーム</p></td>
    </tr>
    <tr>
      <td><p>TEI</p></td>
-     <td><p>Quick implementation with efficient resource usage</p></td>
+     <td><p>効率的なリソース使用による迅速な実装</p></td>
      <td><ul>
-<li><p>Lightweight service optimized for text operations</p></li>
-<li><p>Easier deployment with lower resource requirements</p></li>
-<li><p>Pre-optimized reranking models</p></li>
-<li><p>Minimal infrastructure overhead</p></li>
+<li><p>テキスト操作に最適化された軽量サービス</p></li>
+<li><p>少ないリソース要件で容易な導入</p></li>
+<li><p>最適化済みのリランキングモデル</p></li>
+<li><p>インフラストラクチャーのオーバーヘッドを最小化</p></li>
 </ul></td>
-     <td><p>Content management system needing efficient reranking capabilities with standard requirements</p></td>
+     <td><p>標準的な要件で効率的なリランキング機能を必要とするコンテンツ管理システム</p></td>
    </tr>
 </table>
-<p>For detailed information about implementation of each model service, refer to the dedicated documentation:</p>
+<p>各モデル・サービスの実装に関する詳細情報は、専用のドキュメントを参照してください：</p>
 <ul>
-<li><p><a href="/docs/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/ja/vllm-ranker.md">vLLM ランカー</a></p></li>
+<li><p><a href="/docs/ja/tei-ranker.md">TEIランカー</a></p></li>
 </ul>
-<h2 id="Implementation" class="common-anchor-header">Implementation<button data-href="#Implementation" class="anchor-icon" translate="no">
+<h2 id="Implementation" class="common-anchor-header">実装<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,14 +141,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before implementing Model Ranker, ensure you have:</p>
+    </button></h2><p>Model Rankerを実装する前に、以下を確認してください：</p>
 <ul>
-<li><p>A Milvus collection with a <code translate="no">VARCHAR</code> field containing the text to be reranked</p></li>
-<li><p>A running external model service (vLLM or TEI) accessible to your Milvus instance</p></li>
-<li><p>Appropriate network connectivity between Milvus and your chosen model service</p></li>
+<li><p>再ランクするテキストを含む<code translate="no">VARCHAR</code> フィールドを持つMilvusコレクション。</p></li>
+<li><p>Milvusインスタンスにアクセス可能な外部モデルサービス（vLLMまたはTEI）。</p></li>
+<li><p>Milvusと選択したモデルサービス間の適切なネットワーク接続性</p></li>
 </ul>
-<p>Model rankers integrate seamlessly with both standard vector search and hybrid search operations. The implementation involves creating a Function object that defines your reranking configuration and passing it to search operations.</p>
-<h3 id="Create-a-model-ranker" class="common-anchor-header">Create a model ranker</h3><p>To implement model reranking, first define a Function object with the appropriate configuration:</p>
+<p>モデルランカーは標準的なベクトル検索やハイブリッド検索操作とシームレスに統合されます。実装としては、リランキング設定を定義するFunctionオブジェクトを作成し、検索オペレーションに渡します。</p>
+<h3 id="Create-a-model-ranker" class="common-anchor-header">モデル・ランカーの作成</h3><p>モデル・ランカーを実装するには、まず適切な設定を持つFunctionオブジェクトを定義します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -179,64 +172,61 @@ model_ranker = Function(
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Required?</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value / Example</p></th>
+     <th><p>パラメータ</p></th>
+     <th><p>必須か？</p></th>
+     <th><p>説明</p></th>
+     <th><p>値 / 例</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Identifier for your function used when executing searches.</p></td>
+     <td><p>検索実行時に使用する関数の識別子。</p></td>
      <td><p><code translate="no">"semantic_ranker"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Name of the text field to use for reranking.
- Must be a <code translate="no">VARCHAR</code> type field.</p></td>
+     <td><p>はい</p></td>
+     <td><p>再ランク付けに使用するテキストフィールドの名前。<code translate="no">VARCHAR</code> タイプのフィールドでなければならない。</p></td>
      <td><p><code translate="no">["document"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Specifies the type of function being created.
- Must be set to <code translate="no">RERANK</code> for all model rankers.</p></td>
+     <td><p>はい</p></td>
+     <td><p>作成する関数のタイプを指定します。 すべてのモデルランカーに対して<code translate="no">RERANK</code> に設定する必要があります。</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Must be set to <code translate="no">"model"</code> to enable model reranking.</p></td>
+     <td><p>はい</p></td>
+     <td><p>モデルの再ランキングを有効にするには、<code translate="no">"model"</code> に設定する必要があります。</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>The model service provider to use for reranking.</p></td>
-     <td><p><code translate="no">"tei"</code> or <code translate="no">"vllm"</code></p></td>
+     <td><p>はい</p></td>
+     <td><p>リランキングに使用するモデルサービスプロバイダ。</p></td>
+     <td><p><code translate="no">"tei"</code> または<code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>List of query strings used by the reranking model to calculate relevance scores.
- The number of query strings must match exactly the number of queries in your search operation (even when using query vectors instead of text), otherwise an error will be reported.</p></td>
+     <td><p>リランキングモデルが関連性スコアの算出に使用するクエリ文字列のリスト。 クエリ文字列の数は、検索操作のクエリ数と正確に一致する必要があります (テキストの代わりにクエリベクタを使用する場合も同様)。</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.endpoint</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>URL of the model service.</p></td>
+     <td><p>はい</p></td>
+     <td><p>モデルサービスのURL。</p></td>
      <td><p><code translate="no">"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">maxBatch</code></p></td>
-     <td><p>No</p></td>
-     <td><p>Maximum number of documents to process in a single batch. Larger values increase throughput but require more memory.</p></td>
-     <td><p><code translate="no">32</code> (default)</p></td>
+     <td><p>いいえ</p></td>
+     <td><p>1バッチで処理する文書の最大数。値が大きいほどスループットは向上するが、より多くのメモリを必要とする。</p></td>
+     <td><p><code translate="no">32</code> (デフォルト)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Apply to standard vector search</h3><p>After defining your model ranker, you can apply it during search operations by passing it to the ranker parameter:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル検索への適用</h3><p>モデルランカーを定義した後、それをrankerパラメータに渡すことで、検索処理中に適用することができる：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
@@ -248,7 +238,7 @@ results = client.search(
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Apply to hybrid search</h3><p>Model rankers can also be applied to hybrid search operations that combine multiple vector fields:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用</h3><p>モデル・ランカーは複数のベクトル・フィールドを組み合わせたハイブリッド検索にも適用できます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>

@@ -1,13 +1,13 @@
 ---
 id: inverted.md
-title: INVERTED
+title: مقلوب
 summary: >-
-  The INVERTED index in Milvus is designed to accelerate filter queries on both
-  scalar fields and structured JSON fields. By mapping terms to the documents or
-  records that contain them, inverted indexes greatly improve query performance
-  compared to brute-force searches.
+  تم تصميم الفهرس المقلوب في Milvus لتسريع استعلامات التصفية على كل من الحقول
+  القياسية وحقول JSON المهيكلة. من خلال تعيين المصطلحات إلى المستندات أو السجلات
+  التي تحتوي عليها، تعمل الفهارس المقلوبة على تحسين أداء الاستعلام بشكل كبير
+  مقارنةً بعمليات البحث الغاشمة.
 ---
-<h1 id="INVERTED" class="common-anchor-header">INVERTED<button data-href="#INVERTED" class="anchor-icon" translate="no">
+<h1 id="INVERTED" class="common-anchor-header">مقلوب<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">INVERTED</code> index in Milvus is designed to accelerate filter queries on both scalar fields and structured JSON fields. By mapping terms to the documents or records that contain them, inverted indexes greatly improve query performance compared to brute-force searches.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>تم تصميم الفهرس <code translate="no">INVERTED</code> في Milvus لتسريع استعلامات التصفية على كل من الحقول القياسية وحقول JSON المهيكلة. من خلال تعيين المصطلحات إلى المستندات أو السجلات التي تحتوي عليها، تعمل الفهارس المقلوبة على تحسين أداء الاستعلام بشكل كبير مقارنةً بعمليات البحث الغاشمة.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,25 +38,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Powered by <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus implements inverted indexing to accelerate filter queries, especially for textual data. Here’s how it works:</p>
+    </button></h2><p>بدعم من <a href="https://github.com/quickwit-oss/tantivy">Tantivy،</a> يطبّق Milvus الفهرسة المقلوبة لتسريع استعلامات التصفية، خاصةً للبيانات النصية. إليك كيفية عملها</p>
 <ol>
-<li><p><strong>Tokenize the Data</strong>: Milvus takes your raw data—in this example, two sentences:</p>
+<li><p><strong>ترميز البيانات</strong>: يأخذ Milvus بياناتك الأولية - في هذا المثال، جملتان:</p>
 <ul>
-<li><p><strong>“Milvus is a cloud-native vector database.”</strong></p></li>
-<li><p><strong>“Milvus is very good at performance.”</strong></p></li>
+<li><p><strong>"Milvus هي قاعدة بيانات متجهة سحابية أصلية."</strong></p></li>
+<li><p><strong>"Milvus جيد جدًا في الأداء."</strong></p></li>
 </ul>
-<p>and breaks them into unique words (e.g., <em>Milvus</em>, <em>is</em>, <em>cloud-native</em>, <em>vector</em>, <em>database</em>, <em>very</em>, <em>good</em>, <em>at</em>, <em>performance</em>).</p></li>
-<li><p><strong>Build the Term Dictionary</strong>: These unique words are stored in a sorted list called the <strong>Term Dictionary</strong>. This dictionary lets Milvus quickly check if a word exists and locate its position in the index.</p></li>
-<li><p><strong>Create the Inverted List</strong>: For each word in the Term Dictionary, Milvus keeps an <strong>Inverted List</strong> showing which documents contain that word. For instance, <strong>“Milvus”</strong> appears in both sentences, so its inverted list points to both document IDs.</p></li>
+<p>ويقسمها إلى كلمات فريدة (على سبيل المثال، " <em>ميلفوس</em>"، <em>هي</em> <em>قاعدة</em> <em>بيانات</em> <em>سحابية</em> أصلية، <em>قاعدة بيانات</em> <em>متجهة،</em> <em>قاعدة بيان</em>ات، <em>جيد</em> <em>جداً،</em> جيد، <em>في،</em> <em>أداء</em>).</p></li>
+<li><p><strong>بناء قاموس المصطلحات</strong>: يتم تخزين هذه الكلمات الفريدة في قائمة مرتبة تسمى <strong>قاموس</strong> المصطلحات. يتيح هذا القاموس لـ Milvus التحقق بسرعة من وجود كلمة ما وتحديد موقعها في الفهرس.</p></li>
+<li><p><strong>إنشاء القائمة المقلوبة</strong>: لكل كلمة في قاموس المصطلحات، يحتفظ ميلفوس <strong>بقائمة</strong> مقلوبة توضح المستندات التي تحتوي على تلك الكلمة. على سبيل المثال، تظهر <strong>كلمة "ميلفوس"</strong> في كلتا الجملتين، لذا فإن القائمة المقلوبة تشير إلى كلا معرفي المستندين.</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
-    <span>Inverted</span>
-  </span>
-</p>
-<p>Because the dictionary is sorted, term-based filtering can be handled efficiently. Instead of scanning all documents, Milvus just looks up the term in the dictionary and retrieves its inverted list—significantly speeding up searches and filters on large datasets.</p>
-<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">Index a regular scalar field<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
+   </span> <span class="img-wrapper"> <span>مقلوب</span> </span></p>
+<p>نظرًا لأنه يتم فرز القاموس، يمكن التعامل مع التصفية القائمة على المصطلحات بكفاءة. فبدلاً من مسح جميع المستندات، يبحث "ميلفوس" فقط عن المصطلح في القاموس ويسترجع قائمته المقلوبة - مما يسرّع بشكل كبير من عمليات البحث والتصفية على مجموعات البيانات الكبيرة.</p>
+<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">فهرسة حقل قياسي عادي<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +69,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For scalar fields like <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, and <strong>ARRAY</strong>, creating an inverted index is straightforward. Use the <code translate="no">create_index()</code> method with the <code translate="no">index_type</code> parameter set to <code translate="no">&quot;INVERTED&quot;</code>.</p>
+    </button></h2><p>بالنسبة للحقول القياسية مثل <strong>BOOL</strong> و <strong>INT8</strong> و <strong>INT16</strong> و <strong>INT32</strong> و <strong>INT64</strong> و <strong>FLOAT و FLOAT</strong> و <strong>DOUBLE</strong> و <strong>VARCHAR</strong> و <strong>ARRAY،</strong> فإن إنشاء فهرس مقلوب أمر بسيط ومباشر. استخدم الأسلوب <code translate="no">create_index()</code> مع ضبط المعلمة <code translate="no">index_type</code> على <code translate="no">&quot;INVERTED&quot;</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -90,7 +88,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-a-JSON-field" class="common-anchor-header">Index a JSON field<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Index-a-JSON-field" class="common-anchor-header">فهرسة حقل JSON<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,12 +103,12 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus extends its indexing capabilities to JSON fields, allowing you to efficiently filter on nested or structured data stored within a single column. Unlike scalar fields, when indexing a JSON field you must provide two additional parameters:</p>
+    </button></h2><p>يوسع ميلفوس إمكانيات الفهرسة إلى حقول JSON، مما يسمح لك بتصفية البيانات المتداخلة أو المنظمة المخزنة داخل عمود واحد بكفاءة. على عكس الحقول العددية، عند فهرسة حقل JSON، يجب عليك توفير معلمتين إضافيتين:</p>
 <ul>
-<li><p><code translate="no">json_path</code><strong>:</strong> Specifies the nested key to index.</p></li>
-<li><p><code translate="no">json_cast_type</code><strong>:</strong> Defines the data type (e.g., <code translate="no">&quot;varchar&quot;</code>, <code translate="no">&quot;double&quot;</code>, or <code translate="no">&quot;bool&quot;</code>) to which the extracted JSON value will be cast.</p></li>
+<li><p><code translate="no">json_path</code><strong>:</strong> تحديد المفتاح المتداخل المراد فهرسته.</p></li>
+<li><p><code translate="no">json_cast_type</code><strong>:</strong> يحدد نوع البيانات (على سبيل المثال، <code translate="no">&quot;varchar&quot;</code> أو <code translate="no">&quot;double&quot;</code> أو أو <code translate="no">&quot;bool&quot;</code>) التي سيتم إرسال قيمة JSON المستخرجة إليها.</p></li>
 </ul>
-<p>For example, consider a JSON field named <code translate="no">metadata</code> with the following structure:</p>
+<p>على سبيل المثال، ضع في اعتبارك حقل JSON المسمى <code translate="no">metadata</code> بالبنية التالية:</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;metadata&quot;: {
     &quot;product_info&quot;: {
@@ -123,7 +121,7 @@ client.create_index(
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>To create inverted indexes on specific JSON paths, you can use the following approach:</p>
+<p>لإنشاء فهارس مقلوبة على مسارات JSON محددة، يمكنك استخدام الطريقة التالية:</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string.</span>
@@ -151,44 +149,43 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Example Value</p></th>
+     <th><p>المعلمة</p></th>
+     <th><p>الوصف</p></th>
+     <th><p>مثال القيمة</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>Name of the JSON field in your schema.</p></td>
+     <td><p>اسم حقل JSON في مخططك.</p></td>
      <td><p><code translate="no">"metadata"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Index type to create; currently only <code translate="no">INVERTED</code> is supported for JSON path indexing.</p></td>
+     <td><p>نوع الفهرس المراد إنشاؤه؛ حالياً فقط <code translate="no">INVERTED</code> مدعوم لفهرسة مسار JSON.</p></td>
      <td><p><code translate="no">"INVERTED"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(Optional) A custom index name. Specify different names if you create multiple indexes on the same JSON field.</p></td>
+     <td><p>(اختياري) اسم فهرس مخصص. حدد أسماء مختلفة إذا قمت بإنشاء فهارس متعددة على نفس حقل JSON.</p></td>
      <td><p><code translate="no">"json_index_1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code translate="no">metadata["product_info"]["category"]</code> or <code translate="no">metadata["tags"][0]</code>).
- If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
+     <td><p>تحديد مسار JSON المراد فهرسته. يمكنك استهداف مفاتيح متداخلة أو مواضع مصفوفة أو كليهما (على سبيل المثال، <code translate="no">metadata["product_info"]["category"]</code> أو <code translate="no">metadata["tags"][0]</code>). إذا كان المسار مفقودًا أو كان عنصر المصفوفة غير موجود لصف معين، يتم ببساطة تخطي هذا الصف أثناء الفهرسة، ولا يتم طرح أي خطأ.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
+     <td><p>نوع البيانات الذي سيقوم ميلفوس بإرسال قيم JSON المستخرجة إليه عند بناء الفهرس. القيم الصالحة:</p>
 <ul>
-<li><p><code translate="no">"bool"</code> or <code translate="no">"BOOL"</code></p></li>
-<li><p><code translate="no">"double"</code> or <code translate="no">"DOUBLE"</code></p></li>
-<li><p><code translate="no">"varchar"</code> or <code translate="no">"VARCHAR"</code></p>
-<p><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If the cast fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</p></li>
+<li><p><code translate="no">"bool"</code> أو <code translate="no">"BOOL"</code></p></li>
+<li><p><code translate="no">"double"</code> أو <code translate="no">"DOUBLE"</code></p></li>
+<li><p><code translate="no">"varchar"</code> أو <code translate="no">"VARCHAR"</code></p>
+<p><strong>ملاحظة</strong>: بالنسبة لقيم الأعداد الصحيحة، يستخدم Milvus داخليًا مزدوجًا للفهرس. الأعداد الصحيحة الكبيرة التي تزيد عن 2^53 تفقد الدقة. في حال فشل الإرسال (بسبب عدم تطابق النوع)، لا يتم طرح أي خطأ، ولا تتم فهرسة قيمة ذلك الصف.</p></li>
 </ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
-<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">Considerations on JSON indexing<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
+<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">اعتبارات حول فهرسة JSON<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,22 +201,22 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Filtering logic</strong>:</p>
+<li><p><strong>منطق الفهرسة</strong>:</p>
 <ul>
-<li><p>If you <strong>create a double-type index</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), only numeric-type filter conditions can use the index. If the filter compares a double index to a non-numeric condition, Milvus falls back to brute force search.</p></li>
-<li><p>If you <strong>create a varchar-type index</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), only string-type filter conditions can use the index. Otherwise, Milvus falls back to brute force.</p></li>
-<li><p><strong>Boolean</strong> indexing behaves similarly to varchar-type.</p></li>
+<li><p>إذا <strong>أنشأت فهرسًا من النوع المزدوج</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>)، يمكن فقط لشروط التصفية من النوع الرقمي استخدام الفهرس. إذا قارن عامل التصفية فهرسًا مزدوجًا بشرط غير رقمي، فإن ميلفوس يعود إلى البحث بالقوة الغاشمة.</p></li>
+<li><p>إذا قمت <strong>بإنشاء فهرس من نوع varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>)، يمكن فقط لشروط التصفية من نوع السلسلة استخدام الفهرس. خلاف ذلك، يعود ميلفوس إلى القوة الغاشمة.</p></li>
+<li><p>تتصرف الفهرسة<strong>المنطقية</strong> بشكل مشابه للنوع المتغير.</p></li>
 </ul></li>
-<li><p><strong>Term expressions</strong>:</p>
+<li><p><strong>تعبيرات المصطلحات</strong>:</p>
 <ul>
-<li>You can use <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. However, the index works only for scalar values stored under that path. If <code translate="no">json[&quot;field&quot;]</code> is an array, the query falls back to brute force (array-type indexing is not yet supported).</li>
+<li>يمكنك استخدام <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. ومع ذلك، يعمل الفهرس فقط للقيم العددية المخزنة تحت هذا المسار. إذا كان <code translate="no">json[&quot;field&quot;]</code> عبارة عن مصفوفة، يعود الاستعلام إلى القوة الغاشمة (الفهرسة من نوع الصفيف غير مدعومة بعد).</li>
 </ul></li>
-<li><p><strong>Numeric precision</strong>:</p>
+<li><p><strong>الدقة العددية</strong>:</p>
 <ul>
-<li>Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>53</mn></msup></mrow><annotation encoding="application/x-tex">2^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, it loses precision, and queries on those out-of-range values may not match exactly.</li>
+<li>داخليًا، يقوم ميلفوس بفهرسة جميع الحقول الرقمية كمضاعفات. إذا تجاوزت قيمة رقمية <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2532</mn></msup></mrow><annotation encoding="application/x-tex">^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53،</span></span></span></span></span></span></span></span></span></span></span></span> فإنها تفقد الدقة، وقد لا تتطابق الاستعلامات على تلك القيم خارج النطاق تمامًا.</li>
 </ul></li>
-<li><p><strong>Data integrity</strong>:</p>
+<li><p><strong>تكامل البيانات</strong>:</p>
 <ul>
-<li>Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key <code translate="no">&quot;k&quot;</code> while others store a number), some rows will not be indexed.</li>
+<li>لا يقوم Milvus بتحليل مفاتيح JSON أو تحويلها خارج نطاق الصب المحدد. إذا كانت بيانات المصدر غير متناسقة (على سبيل المثال، تخزن بعض الصفوف سلسلة للمفتاح <code translate="no">&quot;k&quot;</code> بينما تخزن أخرى رقمًا)، فلن تتم فهرسة بعض الصفوف.</li>
 </ul></li>
 </ul>
