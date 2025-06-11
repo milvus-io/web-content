@@ -146,7 +146,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>在 Milvus 中，高斯衰減可應用於標準向量搜尋和混合搜尋運算。以下是實現此功能的關鍵程式碼片段。</p>
 <div class="alert note">
-<p>在使用衰減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於衰減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">教學：在 Milvus 中實施以時間為基礎的排名</a>。</p>
+<p>在使用衰減函數之前，您必須先建立一個具有適當數值欄位（如時間戳記、距離等）的集合，這些欄位將用於衰減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">教學：在 Milvus 中實施以時間為基礎的排名</a>。</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>在您的集合設定為數值欄位 (在本範例中，<code translate="no">distance</code> ，單位為距離使用者的公尺) 之後，建立一個高斯衰減排名器：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

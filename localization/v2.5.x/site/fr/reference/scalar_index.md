@@ -4,7 +4,6 @@ related_key: scalar_index
 summary: Indice scalaire en Milvus.
 title: Index scalaire
 ---
-
 <h1 id="Scalar-Index" class="common-anchor-header">Index scalaire<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +68,7 @@ title: Index scalaire
 <tr><td>VARCHAR</td><td>Index inversé</td></tr>
 <tr><td>INT8</td><td>Index inversé</td></tr>
 <tr><td>INT16</td><td>Index inversé</td></tr>
-<tr><td>INT32</td><td>Index inversé</td></tr>
+<tr><td>INT32</td><td>Indice inversé</td></tr>
 <tr><td>INT64</td><td>Indice inversé</td></tr>
 <tr><td>FLOAT</td><td>Indice inversé</td></tr>
 <tr><td>DOUBLE</td><td>Index inversé</td></tr>

@@ -185,7 +185,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>I dati grezzi sono memorizzabili</p></td>
-     <td><p>HNSW, IVF + raffinamento</p></td>
+     <td><p>HNSW, FIV + raffinamento</p></td>
      <td><p>Utilizzare HNSW per un basso<code translate="no">k</code>/alto richiamo.</p></td>
    </tr>
    <tr>

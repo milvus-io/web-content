@@ -24,7 +24,7 @@ title: 利用 Milvus 和 Lepton AI 构建 RAG
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_lepton.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://www.lepton.ai/">Lepton AI</a>可让开发人员和企业在几分钟内高效运行人工智能应用程序，并达到可投入生产的规模。 Lepton AI 允许您以 Python 原生方式构建模型，在本地调试和测试模型，只需一条命令即可将模型部署到云中，并通过简单灵活的 API 在任何应用程序中使用模型。它为部署各种人工智能模型（包括大型语言模型（LLMs）和扩散模型）提供了一个全面的环境，而无需大量的基础设施设置。</p>
+<p><a href="https://www.lepton.ai/">Lepton AI</a>使开发人员和企业能够在几分钟内高效运行人工智能应用程序，并达到可投入生产的规模。 Lepton AI 使您能够以 Python 原生方式构建模型，在本地调试和测试模型，只需一个命令即可将模型部署到云中，并通过简单灵活的 API 在任何应用程序中使用模型。它为部署各种人工智能模型（包括大型语言模型（LLMs）和扩散模型）提供了一个全面的环境，而无需大量的基础设施设置。</p>
 <p>在本教程中，我们将向您展示如何使用 Milvus 和 Lepton AI 构建 RAG（检索-增强生成）管道。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,7 +119,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<p>检查 Collections 是否已存在，如果存在则删除。</p>
+<p>检查 Collections 是否已存在，如果已存在，则删除它。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
@@ -173,7 +173,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">为查询检索数据</h3><p>让我们指定一个关于 Milvus 的常见问题。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Collections 中搜索该问题并检索语义前 3 个匹配项。</p>
+<p>在 Collections 中搜索该问题，并检索语义前 3 个匹配项。</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=embedding_model.encode_queries(

@@ -150,7 +150,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
+    </button></h2><p>يوفر هذا القسم نظرة عامة على المعلمات المستخدمة لبناء فهرس وإجراء عمليات البحث على الفهرس.</p>
 <h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/hnsw-pq.md#Build-index">إنشاء فهرس</a>.</p>
 <table>
    <tr>
@@ -186,7 +186,7 @@ res = MilvusClient.search(
      <td><p>عدد المتجهات الفرعية (المستخدمة في التكميم) لتقسيم كل متجه عالي الأبعاد إلى متجهات عالية الأبعاد أثناء عملية التكميم.</p></td>
      <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1, 65536]</p>
 <p><strong>القيمة الافتراضية</strong>: لا يوجد</p></td>
-     <td><p>يمكن لقيمة <code translate="no">m</code> الأعلى أن تحسن الدقة، لكنها تزيد أيضًا من التعقيد الحسابي واستخدام الذاكرة. <code translate="no">m</code> يجب أن تكون القيمة قاسماً على البعد المتجه<em>(D</em>) لضمان التحلل الصحيح. القيمة الموصى بها عادةً هي <em>m = D/2</em>.</p>
+     <td><p>يمكن لقيمة <code translate="no">m</code> الأعلى أن تحسن الدقة، لكنها تزيد أيضًا من التعقيد الحسابي واستخدام الذاكرة. <code translate="no">m</code> يجب أن تكون القيمة قاسماً على بُعد المتجه<em>(D</em>) لضمان التحلل الصحيح. القيمة الموصى بها عادةً هي <em>m = D/2</em>.</p>
 <p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [D/8، D].</p></td>
    </tr>
    <tr>
@@ -209,7 +209,7 @@ res = MilvusClient.search(
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
      <td><p>يحدد دقة البيانات المستخدمة أثناء عملية التنقيح. يجب أن تكون هذه الدقة أعلى من دقة المتجهات المضغوطة (كما تم تعيينها بواسطة المعلمات <code translate="no">m</code> و <code translate="no">nbits</code> ).</p></td>
-     <td><p><strong>النوع</strong>: سلسلة <strong>المدى</strong>: [ <code translate="no">SQ6</code> ، <code translate="no">SQ8</code> ، ، <code translate="no">BF16</code> ، <code translate="no">FP16</code> ، <code translate="no">FP32</code> ]</p>
+     <td><p><strong>النوع</strong>: سلسلة <strong>النطاق</strong>: [ <code translate="no">SQ6</code> ، <code translate="no">SQ8</code> ، ، <code translate="no">BF16</code> ، <code translate="no">FP16</code> ، <code translate="no">FP32</code> ]</p>
 <p><strong>القيمة الافتراضية</strong>: لا يوجد</p></td>
      <td><p>استخدم <code translate="no">FP32</code> للحصول على أقصى قدر من الدقة بتكلفة ذاكرة أعلى، أو <code translate="no">SQ6</code>/<code translate="no">SQ8</code> للحصول على ضغط أفضل. <code translate="no">BF16</code> و <code translate="no">FP16</code> يقدمان بديلاً متوازنًا.</p></td>
    </tr>
@@ -230,7 +230,7 @@ res = MilvusClient.search(
  تؤثر هذه المعلمة على عملية البحث فقط وتطبق حصرياً على الطبقة السفلية من الرسم البياني.</p></td>
      <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1، <em>int_max</em>]</p>
 <p><strong>القيمة الافتراضية</strong>: <em>الحد</em> (أقرب عدد من الجيران الأقرب إلى أقرب جيران للإرجاع)</p></td>
-     <td><p>يؤدي وجود <code translate="no">ef</code> أكبر بشكل عام إلى <strong>دقة بحث أعلى</strong> حيث يتم النظر في المزيد من الجيران المحتملين. ومع ذلك، فإن هذا <strong>يزيد</strong> أيضًا <strong>من وقت البحث</strong>. ضع في اعتبارك زيادة <code translate="no">ef</code> عندما يكون تحقيق استرجاع عالٍ أمرًا بالغ الأهمية وتكون سرعة البحث أقل أهمية.</p>
+     <td><p>يؤدي وجود <code translate="no">ef</code> أكبر بشكل عام إلى <strong>دقة بحث أعلى</strong> حيث يتم النظر في المزيد من الجيران المحتملين. ومع ذلك، يؤدي ذلك أيضًا <strong>إلى زيادة وقت البحث</strong>. ضع في اعتبارك زيادة <code translate="no">ef</code> عندما يكون تحقيق استرجاع عالٍ أمرًا بالغ الأهمية وتكون سرعة البحث أقل أهمية.</p>
 <p>ضع في اعتبارك تقليل <code translate="no">ef</code> لإعطاء الأولوية لعمليات البحث الأسرع، خاصةً في السيناريوهات التي يكون فيها الانخفاض الطفيف في الدقة مقبولاً.</p>
 <p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [K, 10K].</p></td>
    </tr>

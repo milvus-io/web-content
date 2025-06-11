@@ -2,7 +2,7 @@
 id: bin-flat.md
 title: BIN_FLAT
 summary: >-
-  BIN_FLATインデックスは、FLATインデックスをバイナリ埋め込み専用に改良したものである。ベクトル類似性検索において、比較的小規模で100万個規模のデータセットに対して完璧な精度が要求される用途に優れています。BIN_FLATは、網羅的な検索手法-すべてのターゲット入力をデータセット内のすべてのベクトルと比較する-を採用することで、正確な結果を保証します。この精度の高さにより、再現率が100%に満たないような他のインデックスの性能を評価するための理想的なベンチマークとなっているが、その徹底的なアプローチにより、大規模データに対しては最も遅い選択肢となっている。
+  BIN_FLATインデックスは、FLATインデックスをバイナリ埋め込み専用に改良したものである。ベクトル類似性検索が、比較的小規模で100万個規模のデータセットに対して完璧な精度を要求するような用途に優れています。BIN_FLATは、網羅的な検索手法-すべてのターゲット入力をデータセット内のすべてのベクトルと比較する-を採用することで、正確な結果を保証します。この精度の高さにより、再現率が100%に満たないような他のインデックスの性能を評価するための理想的なベンチマークとなっているが、その徹底的なアプローチにより、大規模データに対しては最も遅い選択肢となっている。
 ---
 <h1 id="BINFLAT" class="common-anchor-header">BIN_FLAT<button data-href="#BINFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,8 +51,8 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>この設定では</p>
 <ul>
-<li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">BIN_FLAT</code> とします。</p></li>
-<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。バイナリ埋め込みでサポートされている値は、<code translate="no">HAMMING</code> （デフォルト）および<code translate="no">JACCARD</code> です。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
+<li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では、<code translate="no">BIN_FLAT</code> とします。</p></li>
+<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。バイナリ埋め込みでサポートされている値は、<code translate="no">HAMMING</code> （デフォルト）および<code translate="no">JACCARD</code> です。詳細については、<a href="/docs/ja/metric.md">メトリック型を</a>参照してください。</p></li>
 <li><p><code translate="no">params</code>:BIN_FLAT インデックスには追加のパラメータは必要ありません。</p></li>
 </ul>
 <p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>

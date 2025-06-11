@@ -35,8 +35,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HNSW（Hierarchical Navigable Small World）アルゴリズムは、異なるズームレベルの地図のような多層グラフを構築する。<strong>最下層は</strong>すべてのデータ点を含み、<strong>上位層は</strong>下位層からサンプリングされたデータ点のサブセットで構成される。</p>
-<p>この階層構造では、各レイヤーはデータポイントを表すノードを含み、それらの近接性を示すエッジで接続されている。上位のレイヤーはターゲットに素早く近づくための長距離ジャンプを提供し、下位のレイヤーは最も正確な結果を得るためのきめ細かい検索を可能にする。</p>
+    </button></h2><p>HNSW（Hierarchical Navigable Small World）アルゴリズムは、異なるズームレベルの地図のような多層グラフを構築する。<strong>最下層には</strong>すべてのデータ点が含まれ、<strong>上位層は</strong>下位層からサンプリングされたデータ点のサブセットで構成される。</p>
+<p>この階層構造では、各レイヤーはデータポイントを表すノードを含み、それらの近接性を示すエッジで接続されている。上位レイヤーはターゲットに素早く近づくための長距離ジャンプを提供し、下位レイヤーは最も正確な結果を得るためのきめ細かい検索を可能にする。</p>
 <p>その仕組みは以下の通りだ：</p>
 <ol>
 <li><p><strong>エントリーポイント</strong>：探索は、グラフ内のあらかじめ決められたノードである最上位レイヤーの固定されたエントリー・ポイントから開始される。</p></li>
@@ -52,7 +52,7 @@ summary: >-
 <ul>
 <li><p><code translate="no">M</code>:各ノードがグラフの各階層で持つことのできる最大エッジ数または最大接続数。<code translate="no">M</code> が高いほどグラフは密になり、探索する経路が増えるため、想起率と精度が向上する。上の画像に示すように、<strong>M = 5は</strong>、HNSWグラフの各ノードが最大5つの他のノードに直接接続されていることを示す。これにより、ノードが他のノードに到達するための複数の経路を持つ、適度に密なグラフ構造が形成される。</p></li>
 <li><p><code translate="no">efConstruction</code>:インデックス構築時に考慮される候補の数。一般に<code translate="no">efConstruction</code> が高いほど質の高いグラフになるが、構築により多くの時間を要する。</p></li>
-<li><p><code translate="no">ef</code>:検索時に評価される隣接ノードの数。<code translate="no">ef</code> を増やすと、最近傍を見つける可能性が向上しますが、検索プロセスが遅くなります。</p></li>
+<li><p><code translate="no">ef</code>:検索時に評価される近傍ノードの数。<code translate="no">ef</code> を増やすと、最近傍を見つける可能性は向上しますが、検索プロセスは遅くなります。</p></li>
 </ul>
 <p>これらの設定をニーズに合わせて調整する方法の詳細については、<a href="/docs/ja/hnsw.md#Index-params">Index paramsを</a>参照してください。</p>
 <h2 id="Build-index" class="common-anchor-header">インデックスの構築<button data-href="#Build-index" class="anchor-icon" translate="no">
@@ -186,6 +186,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">ef</code></p></td>
      <td><p>最近傍検索時の検索の幅を制御する。どれだけのノードが最近傍候補として訪問され、評価されるかを決定します。  このパラメータは検索プロセスのみに影響し、グラフの最下層にのみ適用される。</p></td>
      <td><p><strong>タイプ</strong>整数<strong>Range</strong>：[1,<em>int_max］</em></p><p><strong>デフォルト値</strong>:<em>limit</em>(TopK nearest neighbors to return)</p></td>
-     <td><p><code translate="no">ef</code> を大きくすると、より多くの近傍候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なる。しかし、これは<strong>検索時間を増加させます</strong>。高い想起率を達成することが重要であり、検索速度があまり気にならない場合は、<code translate="no">ef</code> を増やすことを検討する。</p><p>特に精度が多少低下しても構わないようなシナリオでは、<code translate="no">ef</code> を減らして、より高速な検索を優先させることを検討してください。</p><p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[K, 10K]。</p></td>
+     <td><p><code translate="no">ef</code> を大きくすると、より多くの近傍候補が考慮されるため、一般に<strong>検索精度が高く</strong>なる。しかし、これは<strong>検索時間を増加させます</strong>。高い想起率を達成することが重要であり、検索速度があまり気にならない場合は、<code translate="no">ef</code> を増やすことを検討してください。</p><p>特に精度が多少低下しても構わないようなシナリオでは、<code translate="no">ef</code> を減らして、より高速な検索を優先させることを検討してください。</p><p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[K, 10K]。</p></td>
    </tr>
 </table>

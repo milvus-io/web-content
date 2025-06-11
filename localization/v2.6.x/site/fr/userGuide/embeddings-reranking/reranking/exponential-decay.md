@@ -34,7 +34,7 @@ beta: Milvus 2.6.x
 <li><p>La désintégration gaussienne crée un déclin plus progressif, en forme de cloche</p></li>
 <li><p>La décroissance linéaire diminue à un rythme constant jusqu'à atteindre exactement zéro.</p></li>
 </ul>
-<p>La décroissance exponentielle "concentre" de manière unique la pénalité, en appliquant la plus grande partie de la réduction de pertinence au début, tout en maintenant une longue queue de pertinence minimale mais non nulle.</p>
+<p>La décroissance exponentielle "concentre" de manière unique la pénalité, en appliquant la plus grande partie de la réduction de pertinence au début tout en maintenant une longue queue de pertinence minimale mais non nulle.</p>
 <h2 id="When-to-use-exponential-decay" class="common-anchor-header">Quand utiliser la décroissance exponentielle ?<button data-href="#When-to-use-exponential-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,7 +112,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (24 heures) : Période à partir de laquelle la pertinence tombe à la valeur de décroissance - les articles d'actualité datant d'exactement 24 heures voient leur score de pertinence divisé par deux (0,5).</p></li>
 </ul>
 <p>Comme le montre la courbe, la pertinence des articles datant de plus de 24 heures continue de diminuer sans jamais atteindre zéro. Même les articles datant de plusieurs jours conservent une pertinence minimale, ce qui permet à des informations importantes mais plus anciennes d'apparaître dans votre fil d'actualité (bien qu'elles soient moins bien classées).</p>
-<p>Ce comportement reproduit le fonctionnement habituel de la pertinence des actualités : les articles très récents dominent largement, mais des articles plus anciens importants peuvent encore percer s'ils sont exceptionnellement pertinents par rapport aux centres d'intérêt de l'utilisateur.</p>
+<p>Ce comportement reproduit le fonctionnement habituel de la pertinence des actualités : les articles très récents dominent largement, mais les articles plus anciens peuvent encore percer s'ils sont exceptionnellement pertinents par rapport aux centres d'intérêt de l'utilisateur.</p>
 <h2 id="Formula" class="common-anchor-header">Formule<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

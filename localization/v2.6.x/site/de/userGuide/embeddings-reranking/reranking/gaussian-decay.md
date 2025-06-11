@@ -155,7 +155,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Bevor Sie die Abklingfunktionen verwenden, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempel, Entfernungen usw.) erstellen, die für die Abklingberechnungen verwendet werden sollen. Vollständige Arbeitsbeispiele, einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneinfügung, finden Sie im <a href="/docs/de/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Zeitbasiertes Ranking in Milvus implementieren</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Nachdem Sie Ihre Sammlung mit einem numerischen Feld eingerichtet haben (in diesem Beispiel <code translate="no">distance</code> in Metern vom Benutzer), erstellen Sie eine Gaußsche Abklingrangliste:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Nachdem Sie Ihre Sammlung mit einem numerischen Feld eingerichtet haben (in diesem Beispiel <code translate="no">distance</code> in Metern vom Benutzer), erstellen Sie einen Gauß'schen Zerfallsranker:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a Gaussian decay ranker for location-based restaurant search</span>

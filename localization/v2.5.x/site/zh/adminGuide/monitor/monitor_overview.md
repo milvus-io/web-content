@@ -1,10 +1,9 @@
 ---
 id: monitor_overview.md
 title: 监视器概述
-related_key: "monitor, alert"
+related_key: 'monitor, alert'
 summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和警报服务。
 ---
-
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvus 监控框架概述<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,14 +42,14 @@ summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和
 <li>Prometheus 操作符，用于有效管理 Prometheus 监控实例。</li>
 <li>Kube-prometheus 用于提供易于操作的端到端 Kubernetes 集群监控。</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">度量名称</h3><p>Prometheus 中有效的度量名称包含三个元素：命名空间、子系统和名称。这三个元素用&quot;_&quot;连接。</p>
-<p>Prometheus 监控的 Milvus 度量的命名空间是 &quot;milvus&quot;。根据度量指标所属的角色，其子系统应为以下八个角色之一：&quot;rootcoord&quot;、&quot;proxy&quot;、&quot;querycoord&quot;、&quot;querynode&quot;、&quot;indexcoord&quot;、&quot;indexnode&quot;、&quot;datacoord&quot;、&quot;datanode&quot;。</p>
+<h3 id="Metric-names" class="common-anchor-header">度量名称</h3><p>Prometheus 中有效的度量名称包含三个元素：命名空间、子系统和名称。这三个元素用"_"连接。</p>
+<p>Prometheus 监控的 Milvus 度量的命名空间是 "milvus"。根据度量指标所属的角色，其子系统应为以下八个角色之一："根节点"、"代理"、"查询节点"、"查询节点"、"索引节点"、"索引节点"、"数据节点"、"数据节点"。</p>
 <p>例如，计算查询向量总数的 Milvus 度量名为<code translate="no">milvus_proxy_search_vectors_count</code> 。</p>
 <h3 id="Metric-types" class="common-anchor-header">度量类型</h3><p>Prometheus 支持四种度量类型：</p>
 <ul>
 <li>计数器：一种累积度量类型，其值只能在重启时增加或重置为零。</li>
 <li>仪表：一种度量类型，其值可以上升或下降。</li>
-<li>直方图：一种根据可配置的桶进行计数的指标。常见的例子是请求持续时间。</li>
+<li>直方图：一种根据可配置的桶进行计数的指标类型。常见的例子是请求持续时间。</li>
 <li>摘要：与直方图类似的一种度量类型，可在滑动时间窗口内计算可配置的量化值。</li>
 </ul>
 <h3 id="Metric-labels" class="common-anchor-header">指标标签</h3><p>Prometheus 通过标签来区分具有相同度量名称的样本。标签是度量指标的特定属性。具有相同名称的度量值必须具有相同的<code translate="no">variable_labels</code> 字段值。下表列出了 Milvus 度量常见标签的名称和含义。</p>
@@ -60,16 +59,16 @@ summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和
 </thead>
 <tbody>
 <tr><td>"节点 ID</td><td>角色的唯一标识。</td><td>由 Milvus 生成的全局唯一 ID。</td></tr>
-<tr><td>状态</td><td>已处理操作或请求的状态。</td><td>&quot;放弃&quot;、&quot;成功 &quot;或 &quot;失败&quot;。</td></tr>
-<tr><td>"查询类型</td><td>读取请求的类型。</td><td>&quot;搜索 &quot;或 &quot;查询&quot;。</td></tr>
-<tr><td>"msg_type</td><td>信息的类型。</td><td>&quot;插入&quot;、&quot;删除&quot;、&quot;搜索 &quot;或 &quot;查询&quot;。</td></tr>
-<tr><td>"段状态</td><td>段的状态。</td><td>&quot;密封&quot;、&quot;增长&quot;、&quot;刷新&quot;、&quot;冲洗&quot;、&quot;丢弃 &quot;或 &quot;导入&quot;。</td></tr>
-<tr><td>"缓存状态</td><td>缓存对象的状态。</td><td>&quot;命中 &quot;或 &quot;未命中&quot;。</td></tr>
-<tr><td>"cache_name"（缓存名称</td><td>缓存对象的名称。该标签与 &quot;cache_state &quot;标签一起使用。</td><td>例如 &quot;CollectionID&quot;、&quot;Schema &quot;等。</td></tr>
-<tr><td>&quot;通道名称</td><td>消息存储（Pulsar 或 Kafka）中的物理主题。</td><td>例如：&quot;by-dev-rootcoord-dml_0&quot;、&quot;by-dev-rootcoord-dml_255 &quot;等。</td></tr>
-<tr><td>"函数名</td><td>处理特定请求的函数名称。</td><td>例如，&quot;CreateCollection&quot;（创建集合）、&quot;CreatePartition&quot;（创建分区）、&quot;CreateIndex&quot;（创建索引）等。</td></tr>
+<tr><td>状态</td><td>已处理操作或请求的状态。</td><td>"放弃"、"成功 "或 "失败"。</td></tr>
+<tr><td>"查询类型</td><td>读取请求的类型。</td><td>"搜索 "或 "查询"。</td></tr>
+<tr><td>"msg_type</td><td>信息的类型。</td><td>"插入"、"删除"、"搜索 "或 "查询"。</td></tr>
+<tr><td>"段状态</td><td>段的状态。</td><td>"密封"、"增长"、"刷新"、"冲洗"、"丢弃 "或 "导入"。</td></tr>
+<tr><td>"缓存状态</td><td>缓存对象的状态。</td><td>"命中 "或 "未命中"。</td></tr>
+<tr><td>"缓存名称</td><td>缓存对象的名称。该标签与 "cache_state "标签一起使用。</td><td>例如 "CollectionID"、"Schema "等。</td></tr>
+<tr><td>"通道名称</td><td>消息存储（Pulsar 或 Kafka）中的物理主题。</td><td>例如："by-dev-rootcoord-dml_0"、"by-dev-rootcoord-dml_255 "等。</td></tr>
+<tr><td>"函数名</td><td>处理特定请求的函数名称。</td><td>例如，"CreateCollection"（创建集合）、"CreatePartition"（创建分区）、"CreateIndex"（创建索引）等。</td></tr>
 <tr><td>"用户名</td><td>用于身份验证的用户名。</td><td>用户名由用户自行决定。</td></tr>
-<tr><td>"索引任务状态</td><td>索引任务在元存储中的状态。</td><td>&quot;未发布&quot;、&quot;进行中&quot;、&quot;失败&quot;、&quot;已完成 &quot;或 &quot;已回收&quot;。</td></tr>
+<tr><td>"索引任务状态</td><td>索引任务在元存储中的状态。</td><td>"未发布"、"进行中"、"失败"、"已完成 "或 "已回收"。</td></tr>
 </tbody>
 </table>
 <h2 id="Grafana-in-Milvus" class="common-anchor-header">Milvus 中的 Grafana<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">

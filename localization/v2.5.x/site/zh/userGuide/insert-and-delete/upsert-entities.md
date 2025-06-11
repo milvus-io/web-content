@@ -1,11 +1,11 @@
 ---
 id: upsert-entities.md
-title: Upsert 实体
+title: 更新实体
 summary: >-
   Upsert 操作结合了更新和插入数据的操作。Milvus 通过检查主键是否存在来决定执行更新还是插入操作。本节将介绍如何 Upsert
   实体，以及在不同情况下 Upsert 操作的具体行为。
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">Upsert 实体<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">更新实体<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

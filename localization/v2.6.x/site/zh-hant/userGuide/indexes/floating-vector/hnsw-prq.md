@@ -49,10 +49,10 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Hnsw Prq</span> </span></p>
 <ol>
 <li><p><strong>乘積量化 (PQ)</strong></p>
-<p>在此階段中，原始向量會被分割成較小的子向量，而每個子向量會被映射到學習到的編碼簿中最接近的中心點。這種映射方式可大幅減少資料大小，但由於每個子向量都是由單一中心點近似而成，因此會產生一些四捨五入的誤差。如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-pq.md#PQ">IVF_PQ</a>。</p></li>
+<p>在此階段中，原始向量會被分割成較小的子向量，而每個子向量會被映射到學習到的編碼簿中最接近的中心點。此對應方式可大幅減少資料大小，但由於每個子向量都是由單一中心點近似而成，因此會產生一些四捨五入的誤差。如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-pq.md#PQ">IVF_PQ</a>。</p></li>
 <li><p><strong>殘餘量化 (RQ)</strong></p>
 <p>在 PQ 階段之後，RQ 會使用額外的編碼本量化殘餘值 - 原始向量與其 PQ 近似值之間的差異。由於殘餘量通常小得多，因此可以更精確地編碼，而不會大量增加儲存空間。</p>
-<p>參數<code translate="no">nrq</code> 決定此殘餘值的反覆量化次數，讓您可以微調壓縮效率與精確度之間的平衡。</p></li>
+<p>參數<code translate="no">nrq</code> 決定此殘餘值被反覆量化的次數，讓您可以微調壓縮效率與精確度之間的平衡。</p></li>
 <li><p><strong>最終壓縮表示</strong></p>
 <p>當 RQ 完成量化殘餘值後，PQ 和 RQ 的整數編碼會合併為單一的壓縮索引。透過捕捉單獨 PQ 可能會遺漏的精細細節，RQ 可在不大幅增加儲存空間的情況下提升精確度。PQ 和 RQ 之間的協同作用就是 PRQ 的定義。</p></li>
 </ol>
@@ -60,7 +60,7 @@ summary: >-
 <ol>
 <li><p><strong>資料壓縮：</strong>首先透過 PQ 將每個向量轉換為粗略的表示，然後透過 RQ 對殘餘進行量化，以進一步精細化。結果是一組代表每個向量的精簡編碼。</p></li>
 <li><p><strong>圖形建構：</strong>壓縮向量（包括 PQ 和 RQ 編碼）是建立 HNSW 圖形的基礎。由於資料是以精簡的形式儲存，因此圖形所需的記憶體較少，並可加快瀏覽速度。</p></li>
-<li><p><strong>候選人檢索：</strong>在搜尋過程中，HNSW 會使用壓縮的表示法來遍歷圖形，並擷取候選資料庫。這可大幅減少需要考慮的向量數量。</p></li>
+<li><p><strong>候選人檢索：</strong>在搜尋過程中，HNSW 會使用壓縮表示法來遍歷圖形，並擷取候選人資料庫。這可大幅減少需要考慮的向量數量。</p></li>
 <li><p><strong>(可選）結果精煉：</strong>初始候選結果可以根據下列參數進行精煉，以獲得更高的精確度：</p>
 <ul>
 <li><p><code translate="no">refine</code>:控制是否啟動此精煉步驟。當設定為<code translate="no">true</code> 時，系統會使用更高精度或未壓縮的表示來重新計算距離。</p></li>
@@ -164,7 +164,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本節概述用於建立索引和在索引上執行搜尋的參數。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/hnsw-prq.md#Build-index">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/hnsw-prq.md#Build-index">建立索引</a>時可以在<code translate="no">params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th></th>
@@ -232,7 +232,7 @@ res = MilvusClient.search(
      <td><p>決定精煉過程中使用的資料精確度。 此精確度必須高於壓縮向量的精確度（由<code translate="no">m</code> 和<code translate="no">nbits</code> 參數設定）。</p></td>
      <td><p><strong>類型</strong>：字串<strong>範圍</strong>:[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code>,<code translate="no">FP32</code> ]。</p>
 <p><strong>預設值</strong>：無</p></td>
-     <td><p>使用<code translate="no">FP32</code> 可在較高記憶體成本下獲得最高精確度，使用<code translate="no">SQ6</code>/<code translate="no">SQ8</code> 則可獲得更好的壓縮效果。<code translate="no">BF16</code> 和<code translate="no">FP16</code> 提供一個平衡的替代方案。</p></td>
+     <td><p>使用<code translate="no">FP32</code> 可在較高記憶體成本下獲得最高精確度，使用<code translate="no">SQ6</code>/<code translate="no">SQ8</code> 則可獲得更好的壓縮效果。<code translate="no">BF16</code> 和<code translate="no">FP16</code> 提供了一個平衡的替代方案。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/hnsw-prq.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>

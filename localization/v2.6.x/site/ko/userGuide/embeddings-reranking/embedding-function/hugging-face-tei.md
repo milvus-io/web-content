@@ -49,7 +49,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Milvus에 TEI 기능을 구성하기 전에 TEI 서비스가 실행 중이어야 합니다. Milvus는 TEI 배포를 위해 두 가지 접근 방식을 지원합니다:</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">표준 배포(외부)</h3><p>Hugging Face의 공식 방법을 사용하여 독립형 서비스로 TEI를 배포할 수 있습니다. 이 접근 방식을 사용하면 TEI 서비스를 최대한 유연하게 제어할 수 있습니다.</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">표준 배포(외부)</h3><p>Hugging Face의 공식 방법을 사용하여 독립형 서비스로 TEI를 배포할 수 있습니다. 이 방식을 사용하면 TEI 서비스를 최대한 유연하게 제어할 수 있습니다.</p>
 <p>Docker 또는 기타 방법을 사용하여 TEI를 배포하는 방법에 대한 자세한 지침은 <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">Hugging Face 텍스트 임베딩 추론 공식 문서를</a> 참조하세요.</p>
 <p>배포 후에는 <a href="/docs/ko/hugging-face-tei.md#Use-embedding-function-">Milvus에서 TEI 기능을 사용할</a> 때 필요하므로 TEI 서비스 엔드포인트(예: <code translate="no">http://localhost:8080</code>)를 기록해 두세요.</p>
 <h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus 헬름 차트 배포(통합)</h3><p>쿠버네티스 환경의 경우, Milvus는 헬름 차트를 통해 통합 배포 옵션을 제공합니다. 이렇게 하면 Milvus와 함께 TEI를 배포하고 구성하여 프로세스를 간소화할 수 있습니다.</p>

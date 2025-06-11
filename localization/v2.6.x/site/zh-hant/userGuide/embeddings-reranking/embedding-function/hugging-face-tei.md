@@ -1,12 +1,12 @@
 ---
 id: hugging-face-tei.md
-title: 抱抱臉 TEICompatible with Milvus 2.6.x
+title: Hugging Face TEICompatible with Milvus 2.6.x
 summary: >-
-  Hugging Face Text Embeddings Inference (TEI) 是專為文字嵌入模型設計的高效能推論伺服器。本指南說明如何將
-  Hugging Face TEI 與 Milvus 搭配使用，以有效率地產生文字嵌入。
+  Hugging Face Text Embeddings Inference (TEI) 是專為文字嵌入模型設計的高效能推論伺服器。本指南說明如何使用
+  Hugging Face TEI 與 Milvus 進行高效率的文字嵌入產生。
 beta: Milvus 2.6.x
 ---
-<h1 id="Hugging-Face-TEI" class="common-anchor-header">抱抱臉 TEI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Hugging-Face-TEI" class="anchor-icon" translate="no">
+<h1 id="Hugging-Face-TEI" class="common-anchor-header">Hugging Face TEI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Hugging-Face-TEI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -254,4 +254,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>設定嵌入功能之後，請參閱<a href="/docs/zh-hant/embedding-function-overview.md">功能概述</a>，以取得有關索引設定、資料插入範例和語意搜尋作業的其他指引。</p>
+    </button></h2><p>設定好嵌入功能後，請參閱<a href="/docs/zh-hant/embedding-function-overview.md">功能概述</a>，以取得有關索引設定、資料插入範例和語意搜尋作業的其他指引。</p>

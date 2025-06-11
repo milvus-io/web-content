@@ -153,7 +153,7 @@ beta: Milvus 2.6.x
 <li><p>Um serviço de modelo externo em execução (vLLM ou TEI) acessível à sua instância Milvus</p></li>
 <li><p>Conectividade de rede apropriada entre Milvus e o serviço de modelo escolhido</p></li>
 </ul>
-<p>Os classificadores de modelos integram-se perfeitamente nas operações de pesquisa vetorial padrão e de pesquisa híbrida. A implementação envolve a criação de um objeto Function que define a sua configuração de reanálise e a sua transmissão às operações de pesquisa.</p>
+<p>Os classificadores de modelos integram-se perfeitamente nas operações de pesquisa vetorial padrão e de pesquisa híbrida. A implementação implica a criação de um objeto Function que define a sua configuração de reanálise e a sua transmissão às operações de pesquisa.</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">Criar um classificador de modelos</h3><p>Para implementar a reclassificação de modelos, comece por definir um objeto Function com a configuração adequada:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
@@ -228,7 +228,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">maxBatch</code></p></td>
      <td><p>Não</p></td>
-     <td><p>Número máximo de documentos a processar num único lote. Valores maiores aumentam o rendimento, mas exigem mais memória.</p></td>
+     <td><p>Número máximo de documentos a processar num único lote. Valores maiores aumentam a taxa de transferência, mas exigem mais memória.</p></td>
      <td><p><code translate="no">32</code> (predefinição)</p></td>
    </tr>
 </table>

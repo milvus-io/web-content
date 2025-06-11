@@ -49,7 +49,7 @@ summary: >-
 <ol>
 <li><p><strong>Compression des données</strong>: PQ divise chaque vecteur en plusieurs sous-vecteurs et les quantifie à l'aide d'un livre de codes de centroïdes, contrôlé par des paramètres tels que <code translate="no">m</code> (nombre de sous-vecteurs) et <code translate="no">nbits</code> (bits par sous-vecteur).</p></li>
 <li><p><strong>Construction du graphique</strong>: Les vecteurs compressés sont ensuite utilisés pour construire un graphe HNSW. Comme les vecteurs sont stockés sous une forme compressée, le graphe résultant est généralement plus petit, nécessite moins de mémoire et peut être parcouru plus rapidement, ce qui accélère considérablement l'étape de recherche des candidats.</p></li>
-<li><p><strong>Recherche de candidats</strong>: Lorsqu'une requête est exécutée, l'algorithme utilise les données compressées du graphe HNSW pour identifier efficacement un ensemble de voisins candidats. Cette recherche basée sur le graphe réduit considérablement le nombre de vecteurs à prendre en compte, améliorant ainsi la latence de la requête par rapport aux recherches brutes.</p></li>
+<li><p><strong>Recherche de candidats</strong>: Lorsqu'une requête est exécutée, l'algorithme utilise les données compressées du graphe HNSW pour identifier efficacement un ensemble de voisins candidats. Cette recherche basée sur le graphe réduit considérablement le nombre de vecteurs à prendre en compte, améliorant ainsi la latence de la requête par rapport à une recherche brute.</p></li>
 <li><p><strong>Affinage des résultats (facultatif)</strong>: Les résultats initiaux des candidats peuvent être affinés pour une meilleure précision, en fonction des paramètres suivants :</p>
 <ul>
 <li><p><code translate="no">refine</code>: Contrôle si cette étape d'affinage est activée. Lorsqu'il est défini sur <code translate="no">true</code>, le système recalcule les distances à l'aide de représentations non compressées ou de précision supérieure.</p></li>
@@ -167,7 +167,7 @@ res = MilvusClient.search(
      <td><p>Nombre maximal de connexions （ou d'arêtes) que chaque nœud peut avoir dans le graphe, y compris les arêtes sortantes et entrantes. Ce paramètre affecte directement la construction de l'index et la recherche.</p></td>
      <td><p><strong>Type</strong>: Integer (nombre entier) <strong>Plage</strong>: [2, 2048]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">30</code> (jusqu'à 30 arêtes sortantes et 30 arêtes entrantes par nœud)</p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">M</code> conduit généralement à une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données de grande dimensionnalité ou lorsqu'un rappel élevé est crucial.</p>
+     <td><p>Une valeur plus élevée de <code translate="no">M</code> conduit généralement à une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données à haute dimensionnalité ou lorsqu'un rappel élevé est crucial.</p>
 <p>Pensez à diminuer <code translate="no">M</code> lorsque l'utilisation de la mémoire et la vitesse de recherche sont des préoccupations majeures.</p>
 <p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [5, 100].</p></td>
    </tr>
@@ -241,6 +241,6 @@ res = MilvusClient.search(
      <td><p>Facteur d'agrandissement qui contrôle le nombre de candidats supplémentaires examinés au cours de l'étape d'affinage (reranking), par rapport aux K premiers résultats demandés.</p></td>
      <td><p><strong>Type</strong>: Flottant <strong>Plage</strong>: [1, <em>float_max</em>)</p>
 <p><strong>Valeur par défaut</strong>: 1</p></td>
-     <td><p>Des valeurs élevées de <code translate="no">refine_k</code> peuvent améliorer le rappel et la précision, mais augmentent également le temps de recherche et l'utilisation des ressources. Une valeur de 1 signifie que le processus d'affinage ne prend en compte que les K premiers résultats.</p></td>
+     <td><p>Des valeurs élevées de <code translate="no">refine_k</code> peuvent améliorer le rappel et la précision, mais augmentent également le temps de recherche et l'utilisation des ressources. Une valeur de 1 signifie que le processus d'affinement ne prend en compte que les K premiers résultats.</p></td>
    </tr>
 </table>

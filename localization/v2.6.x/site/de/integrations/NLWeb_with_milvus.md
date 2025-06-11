@@ -1,7 +1,7 @@
 ---
 id: NLWeb_with_milvus.md
 summary: >-
-  Lernen Sie, wie Sie Microsoft NLWeb mit Milvus integrieren können, um
+  Erfahren Sie, wie Sie Microsoft NLWeb mit Milvus integrieren können, um
   leistungsstarke natürlichsprachliche Schnittstellen für Websites zu erstellen.
   Dieses Tutorial zeigt Ihnen, wie Sie die Fähigkeiten der Vektordatenbank
   Milvus für eine effiziente semantische Suche, Einbettung und Kontextabfrage in

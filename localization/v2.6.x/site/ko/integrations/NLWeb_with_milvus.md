@@ -3,7 +3,7 @@ id: NLWeb_with_milvus.md
 summary: >-
   Microsoft NLWeb과 Milvus를 통합하여 웹사이트를 위한 강력한 자연어 인터페이스를 구축하는 방법을 알아보세요. 이
   튜토리얼에서는 Milvus의 벡터 데이터베이스 기능을 활용하여 NLWeb 애플리케이션에서 효율적인 시맨틱 검색, 임베딩 스토리지 및 컨텍스트
-  검색을 수행하는 방법을 설명합니다.
+  검색을 수행하는 방법을 보여드립니다.
 title: Milvus와 함께 NLWeb 사용
 ---
 <h1 id="Using-NLWeb-with-Milvus" class="common-anchor-header">Milvus와 함께 NLWeb 사용<button data-href="#Using-NLWeb-with-Milvus" class="anchor-icon" translate="no">

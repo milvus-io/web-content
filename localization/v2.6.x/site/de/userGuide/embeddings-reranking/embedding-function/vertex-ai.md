@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
 <li><p>text-embedding-005 (Aktuelles Texteinbettungsmodell)</p></li>
 <li><p>text-multilingual-embedding-002 (neuestes Modell für die mehrsprachige Texteinbettung)</p></li>
 </ul>
-<p>Einzelheiten finden Sie in der <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">Referenz der Texteinbettungsmodelle von Vertex AI</a>.</p>
+<p>Einzelheiten finden Sie in der <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">Referenz der Vertex AI-Texteinbettungsmodelle</a>.</p>
 <h2 id="Vertex-AI-deployment" class="common-anchor-header">Einsatz von Vertex AI<button data-href="#Vertex-AI-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -228,7 +228,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">task</code></p></td>
-     <td><p>Gibt den Typ der Einbettungsaufgabe an, der sich auf die Einbettungsergebnisse auswirkt. Akzeptierte Werte: DOC_RETRIEVAL (Standardwert), CODE_RETRIEVAL (nur 005 unterstützt), STS (Semantic Textual Similarity).</p></td>
+     <td><p>Gibt den Typ der Einbettungsaufgabe an, der sich auf die Einbettungsergebnisse auswirkt. Akzeptierte Werte: DOC_RETRIEVAL (Standard), CODE_RETRIEVAL (nur 005 unterstützt), STS (Semantic Textual Similarity).</p></td>
      <td><p>Nein</p></td>
      <td><p><code translate="no">"DOC_RETRIEVAL"</code></p></td>
    </tr>
@@ -254,4 +254,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nachdem Sie die Einbettungsfunktion konfiguriert haben, finden Sie in der <a href="/docs/de/embeddings.md">Funktionsübersicht</a> weitere Anleitungen zur Indexkonfiguration, Beispiele für das Einfügen von Daten und semantische Suchvorgänge.</p>
+    </button></h2><p>Nachdem Sie die Einbettungsfunktion konfiguriert haben, finden Sie in der <a href="/docs/de/embeddings.md">Funktionsübersicht</a> weitere Hinweise zur Indexkonfiguration, Beispiele für das Einfügen von Daten und semantische Suchvorgänge.</p>

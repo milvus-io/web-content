@@ -117,7 +117,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/gpu-ivf-pq.md#Build-index">インデックスを構築</a>する際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/gpu-ivf-pq.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>

@@ -2,9 +2,9 @@
 id: hnsw-pq.md
 title: HNSW_PQ
 summary: >-
-  HNSW_PQ는 계층적 탐색이 가능한 작은 세계(HNSW) 그래프와 제품 정량화(PQ)를 활용하여 크기와 정확도 사이에서 제어 가능한 균형을
-  제공하는 고급 벡터 인덱싱 방법을 생성합니다. 이 인덱스 유형은 HNSW_SQ에 비해 쿼리 처리 속도가 느리고 인덱스 구축 시간이 길지만,
-  동일한 압축 수준에서 더 높은 재검색률을 제공합니다.
+  HNSW_PQ는 계층적 탐색이 가능한 작은 세계(HNSW) 그래프와 제품 정량화(PQ)를 활용하여 크기와 정확도 간의 균형을 제어할 수 있는
+  고급 벡터 인덱싱 방법을 생성합니다. 이 인덱스 유형은 HNSW_SQ에 비해 쿼리 처리 속도가 느리고 인덱스 구축 시간이 길지만, 동일한
+  압축 수준에서 더 높은 재검색률을 제공합니다.
 ---
 <h1 id="HNSWPQ" class="common-anchor-header">HNSW_PQ<button data-href="#HNSWPQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -164,7 +164,7 @@ res = MilvusClient.search(
      <td><p>나가는 에지와 들어오는 에지를 모두 포함하여 그래프에서 각 노드가 가질 수 있는 최대 연결(또는 에지) 수입니다. 이 매개변수는 인덱스 구성과 검색 모두에 직접적인 영향을 줍니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [2, 2048]</p>
 <p><strong>기본값</strong>: <code translate="no">30</code> (노드당 최대 30개의 나가는 에지와 30개의 들어오는 에지)</p></td>
-     <td><p><code translate="no">M</code> 이 클수록 일반적으로 <strong>정확도는 높아지지만</strong> <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축과 검색 속도가 모두 느려집니다</strong>. 차원이 높은 데이터 세트나 높은 리콜이 중요한 경우 <code translate="no">M</code> 을 늘리는 것을 고려하세요.</p>
+     <td><p><code translate="no">M</code> 이 클수록 일반적으로 <strong>정확도는 높아지지만</strong> <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축과 검색 속도가 모두 느려집니다</strong>. 차원이 높거나 높은 리콜이 중요한 데이터 세트의 경우 <code translate="no">M</code> 을 늘리는 것을 고려하세요.</p>
 <p>메모리 사용량과 검색 속도가 주요 관심사인 경우 <code translate="no">M</code> 을 줄이는 것을 고려하세요.</p>
 <p>대부분의 경우, 이 범위 내에서 값을 설정하는 것이 좋습니다: [5, 100].</p></td>
    </tr>
@@ -235,7 +235,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>PQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>요청된 상위 K 결과와 비교하여 정제(순위 재조정) 단계에서 추가로 검토하는 후보자 수를 제어하는 배율 계수입니다.</p></td>
+     <td><p>요청된 상위 K 결과와 비교하여 구체화(순위 재조정) 단계에서 추가로 검토할 후보자 수를 제어하는 배율입니다.</p></td>
      <td><p><strong>유형</strong>: 실수 <strong>범위</strong>: [1, <em>float_max</em>)</p>
 <p><strong>기본값</strong>: 1</p></td>
      <td><p><code translate="no">refine_k</code> 값이 클수록 검색 회수율과 정확도가 향상되지만 검색 시간과 리소스 사용량도 증가합니다. 값이 1이면 구체화 프로세스에서 초기 상위 K 결과만 고려한다는 의미입니다.</p></td>

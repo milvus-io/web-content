@@ -151,7 +151,7 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>In questa configurazione:</p>
 <ul>
-<li><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la ricerca sull'indice. Per i dettagli, fare riferimento a <a href="/docs/it/hnsw-prq.md#Index-specific-search-params">Parametri di ricerca specifici dell'indice</a>.</li>
+<li><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la ricerca sull'indice. Per i dettagli, fare riferimento a <a href="/docs/it/hnsw-prq.md#Index-specific-search-params">Parametri di ricerca specifici per l'indice</a>.</li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parametri dell'indice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -219,7 +219,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>衰减排名器可应用于 Milvus 中的标准向量搜索和混合搜索操作。以下是实现这一功能的关键代码片段。</p>
 <div class="alert note">
-<p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collection，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅<a href="/docs/zh/tutorial-implement-a-time-based-ranking-in-milvus.md">教程：在 Milvus 中实施基于时间的排名</a>。</p>
+<p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collections，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅<a href="/docs/zh/tutorial-implement-a-time-based-ranking-in-milvus.md">教程：在 Milvus 中实施基于时间的排名</a>。</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">创建衰减排名器</h3><p>要实施衰减排名，首先要定义一个具有适当配置的<code translate="no">Function</code> 对象：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -307,7 +307,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>无</p></td>
-     <td><p><code translate="no">scale</code> 距离上的分数值，控制曲线的陡度。必须在 0 和 1 之间。</p></td>
+     <td><p><code translate="no">scale</code> 距离上的分数值，控制曲线的陡度。数值越小，下降曲线越陡峭；数值越大，下降曲线越平缓。 必须介于 0 和 1 之间。</p></td>
      <td><p><code translate="no">0.5</code> (默认值）</p></td>
    </tr>
 </table>

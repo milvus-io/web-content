@@ -48,7 +48,7 @@ summary: IVF_SQ8 索引是一種基於量化的索引演算法，專為解決大
 <li><p><strong>搜尋：</strong>搜尋最近鄰居時，搜尋演算法會比較您的查詢向量與群集中心點，並選擇最有希望的群集。然後將搜尋範圍縮小到這些選定叢集中的向量。</p></li>
 </ol>
 <p>要瞭解更多技術細節，請參閱<a href="/docs/zh-hant/ivf-flat.md">IVF_FLAT</a>。</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>標量量化 (Scalar Quantization, SQ) 是一種用更小、更緊湊的表示來取代高維向量的值，從而縮小其大小的技術。<strong>SQ8</strong>變體使用 8 位元整數取代典型的 32 位元浮點數來儲存向量的每個維度值。這大大降低了儲存資料所需的記憶體數量。</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>標量量化 (Scalar Quantization, SQ) 是一種用更小、更精簡的表示來取代高維向量的值，從而縮小其大小的技術。<strong>SQ8</strong>變體使用 8 位元整數取代典型的 32 位元浮點數來儲存向量的每個維度值。這大大降低了儲存資料所需的記憶體數量。</p>
 <p>以下是 SQ8 的運作方式：</p>
 <ol>
 <li><p><strong>範圍識別：</strong>首先，識別向量內的最小值和最大值。此範圍定義了量化的邊界。</p></li>
@@ -64,7 +64,7 @@ summary: IVF_SQ8 索引是一種基於量化的索引演算法，專為解決大
    </span> <span class="img-wrapper"> <span>Ivf Sq8</span> </span></p>
 <h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>IVF_SQ8 索引結合了 IVF 和 SQ8 來有效率地執行相似性搜尋：</p>
 <ol>
-<li><p><strong>IVF 縮小搜尋範圍</strong>：資料集被分成叢集，當發出查詢時，IVF 會先比較查詢與叢集中心點，選擇最相關的叢集。</p></li>
+<li><p><strong>IVF 縮小搜尋範圍</strong>：資料集被分成叢集，當發出查詢時，IVF 首先將查詢與叢集中心點比較，選出最相關的叢集。</p></li>
 <li><p><strong>SQ8 加速距離計算</strong>：在選定的叢集內，SQ8 會將向量壓縮為 8 位元整數，以減少記憶體使用量並加速距離計算。</p></li>
 </ol>
 <p>透過使用 IVF 聚焦搜尋和 SQ8 加速計算，IVF_SQ8 可同時達到快速搜尋時間和記憶體效率。</p>
@@ -176,7 +176,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>在建立索引時使用 k-means 演算法建立的叢集數。</p></td>
+     <td><p>在建立索引時使用 k-means 演算法建立的叢集數目。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 65536]</p>
 <p><strong>預設值</strong>：<code translate="no">128</code></p></td>
      <td><p>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善回復率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。 在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</p></td>

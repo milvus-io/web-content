@@ -163,14 +163,14 @@ summary: >-
 <div class="alert note">
 <p>Mmap ist nicht immer die Lösung. Wenn sich die meisten Ihrer Daten auf der Festplatte befinden, bietet DiskANN eine bessere Latenzzeit.</p>
 </div>
-<h3 id="Recall" class="common-anchor-header">Rückruf</h3><p>Beim Recall handelt es sich in der Regel um das Filterverhältnis, das sich auf die Daten bezieht, die vor der Suche herausgefiltert werden. Beim Recall ist Folgendes zu beachten:</p>
+<h3 id="Recall" class="common-anchor-header">Rückruf</h3><p>Beim Recall handelt es sich in der Regel um das Filterverhältnis, das sich auf die Daten bezieht, die vor der Suche herausgefiltert werden. Bei der Ermittlung des Rückrufs ist Folgendes zu beachten:</p>
 <ul>
 <li><p>Wenn das Filterverhältnis weniger als 85 % beträgt, sind graphbasierte Indextypen besser als IVF-Varianten.</p></li>
 <li><p>Liegt das Filterverhältnis zwischen 85% und 95%, sollten IVF-Varianten verwendet werden.</p></li>
 <li><p>Bei einem Filterverhältnis von über 98% sollten Sie Brute-Force (FLAT) verwenden, um die genauesten Suchergebnisse zu erhalten.</p></li>
 </ul>
 <div class="alert note">
-<p>Die oben genannten Punkte sind nicht immer korrekt. Es ist ratsam, den Abruf mit verschiedenen Indexarten abzustimmen, um festzustellen, welche Indexart am besten funktioniert.</p>
+<p>Die oben genannten Punkte sind nicht immer richtig. Es ist ratsam, den Abruf mit verschiedenen Indexarten abzustimmen, um festzustellen, welche Indexart am besten funktioniert.</p>
 </div>
 <h3 id="Performance" class="common-anchor-header">Leistung</h3><p>Die Leistung einer Suche bezieht sich in der Regel auf das Top-K, das sich auf die Anzahl der Datensätze bezieht, die die Suche zurückgibt. Wenn es um die Leistung geht, ist Folgendes zu beachten:</p>
 <ul>

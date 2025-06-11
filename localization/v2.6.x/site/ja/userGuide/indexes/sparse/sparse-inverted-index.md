@@ -2,7 +2,7 @@
 id: sparse-inverted-index.md
 title: sparse_inverted_index
 summary: >-
-  SPARSE_INVERTED_INDEXインデックスは、Milvusがスパースベクトルを効率的に格納・検索するために使用するインデックスタイプです。このインデックス型は逆インデックスの原理を利用し、スパースデータに対して非常に効率的な検索構造を作成します。詳細についてはINVERTEDを参照してください。
+  SPARSE_INVERTED_INDEXインデックスはMilvusがスパースベクトルを効率的に格納・検索するために使用するインデックスタイプです。このインデックス型は逆インデックスの原理を利用し、スパースデータに対して非常に効率的な検索構造を作成します。詳細についてはINVERTEDを参照してください。
 ---
 <h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">sparse_inverted_index<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ index_params.add_index(
 </ul></li>
 <li><p><code translate="no">params.inverted_index_algo</code>:インデックスの構築とクエリに使用されるアルゴリズム。有効な値：</p>
 <ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (デフォルト)：MaxScoreアルゴリズムを使用した最適化されたDocument-at-a-Time（DAAT）クエリ処理。MaxScoreは、高い<em>k</em>値や多くの用語を含むクエリに対して、影響が最小と思われる用語やドキュメントをスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (デフォルト)：MaxScoreアルゴリズムを使用した最適化されたDocument-at-a-Time（DAAT）クエリ処理。MaxScoreは、高い<em>k</em>値や多くの用語を含むクエリに対して、最小限の影響しか与えないと思われる用語や文書をスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li>
 <li><p><code translate="no">&quot;DAAT_WAND&quot;</code>:WANDアルゴリズムを使用したDAATクエリ処理の最適化。WANDは非競合文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDは<em>k</em>値が小さいクエリや短いクエリではスキップがより効率的である。</p></li>
 <li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>:Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると遅いが、<code translate="no">TAAT_NAIVE</code> にはユニークな利点がある。グローバル収集パラメータ（avgdl）の変更に関係なく静的なままキャッシュされた最大影響スコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> 、そのような変更に動的に適応する。</p></li>
 </ul>
@@ -82,7 +82,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックス上で類似検索を実行できます。</p>
+    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックスで類似検索を実行できます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
 search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters</span>

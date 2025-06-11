@@ -77,7 +77,7 @@ Creating milvus-standalone ... done
 <li>命名為<strong>milvus-</strong> <strong>standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器已啟動。<ul>
 <li><strong>milvus-etcd</strong>容器不向主機暴露任何連接埠，並將其資料映射到目前資料夾中的<strong>volumes/etcd</strong>。</li>
 <li><strong>milvus-minio</strong>容器使用預設的驗證憑證在本機服務連接埠<strong>9090</strong>和<strong>9091</strong>，並將其資料對應到目前資料夾中的<strong>volumes/minio</strong>。</li>
-<li><strong>milvus-standalone</strong>容器使用預設設定在本機服務連接埠<strong>19530</strong>，並將其資料對應到目前資料夾中的<strong>volumes/milvus</strong>。</li>
+<li><strong>milvus-standalone</strong>容器使用預設設定本機服務連接埠<strong>19530</strong>，並將其資料對應到目前資料夾中的<strong>volumes/milvus</strong>。</li>
 </ul></li>
 </ul>
 <p>您可以使用以下命令檢查容器是否已啟動和運行：</p>

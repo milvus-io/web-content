@@ -141,7 +141,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 </ul></li>
 <li><p><a href="/docs/pt/v2.5.x/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
 <li><p><a href="/docs/pt/v2.5.x/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
-<li><p>Implante seu cluster Milvus em nuvens:</p>
+<li><p>Implantar seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/v2.5.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/v2.5.x/gcp.md">Google Cloud</a></li>

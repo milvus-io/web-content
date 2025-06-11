@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der <strong>GPU_CAGRA-Index</strong> ist ein graphbasierter Index, der für GPUs optimiert ist. Die Verwendung von GPUs mit Inferenzqualität zur Ausführung der GPU-Version von Milvus kann im Vergleich zur Verwendung von teuren GPUs mit Trainingsqualität kostengünstiger sein.</p>
+    </button></h1><p>Der <strong>GPU_CAGRA-Index</strong> ist ein graphbasierter Index, der für GPUs optimiert ist. Die Verwendung von GPUs mit Inferenzqualität zur Ausführung der GPU-Version von Milvus kann im Vergleich zur Verwendung teurer GPUs mit Trainingsqualität kostengünstiger sein.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +98,7 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>In dieser Konfiguration:</p>
 <ul>
-<li><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Suche im Index. Um mehr über die für den <code translate="no">GPU_CAGRA</code> Index verfügbaren Suchparameter zu erfahren, lesen Sie bitte <a href="/docs/de/gpu-cagra.md#Index-specific-search-params">Index-spezifische Suchparameter</a>.</li>
+<li><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Suche im Index. Um mehr über die für den <code translate="no">GPU_CAGRA</code> Index verfügbaren Suchparameter zu erfahren, lesen Sie <a href="/docs/de/gpu-cagra.md#Index-specific-search-params">Index-spezifische Suchparameter</a>.</li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Index-Parameter<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>Entscheidet, ob die GPU für die Indexerstellung und die CPU für die Suche verwendet werden soll. Wenn dieser Parameter auf <code translate="no">"true"</code> gesetzt wird, muss der Parameter <code translate="no">ef</code> in den Suchanfragen vorhanden sein.</p></td>
+     <td><p>Entscheidet, ob die GPU für die Indexerstellung und die CPU für die Suche verwendet werden soll. Die Einstellung dieses Parameters auf <code translate="no">"true"</code> erfordert das Vorhandensein des Parameters <code translate="no">ef</code> in den Suchanfragen.</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>

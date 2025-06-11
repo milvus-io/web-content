@@ -177,7 +177,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>O número de clusters a criar utilizando o algoritmo k-means durante a construção do índice. Cada cluster, representado por um centroide, armazena uma lista de vectores. Aumentar este parâmetro reduz o número de vectores em cada cluster, criando partições mais pequenas e mais focadas.</p></td>
+     <td><p>O número de clusters a criar utilizando o algoritmo k-means durante a construção do índice. Cada cluster, representado por um centroide, armazena uma lista de vectores. O aumento deste parâmetro reduz o número de vectores em cada cluster, criando partições mais pequenas e mais focadas.</p></td>
      <td><p><strong>Tipo</strong>: Integer<br><strong>Intervalo</strong>: [1, 65536]<br><strong>Valor padrão</strong>: <code translate="no">128</code></p></td>
      <td><p>Valores maiores de <code translate="no">nlist</code> melhoram a recuperação ao criar clusters mais refinados, mas aumentam o tempo de construção do índice. Optimize com base no tamanho do conjunto de dados e nos recursos disponíveis. Na maioria dos casos, recomendamos que você defina um valor dentro deste intervalo: [32, 4096].</p></td>
    </tr>

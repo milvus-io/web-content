@@ -4,7 +4,7 @@ title: HNSW_PQ
 summary: >-
   HNSW_PQ 利用 Hierarchical Navigable Small World (HNSW) 圖形與 Product Quantization
   (PQ)，創造出先進的向量索引方法，提供可控制的大小與精確度權衡。與 HNSW_SQ
-  相比，此索引類型在相同的壓縮層級下提供更高的召回率，儘管查詢處理速度較低且索引建置時間較長。
+  相比，此索引類型在相同壓縮層級下提供更高的召回率，儘管查詢處理速度較低且索引建置時間較長。
 ---
 <h1 id="HNSWPQ" class="common-anchor-header">HNSW_PQ<button data-href="#HNSWPQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,7 +193,7 @@ res = MilvusClient.search(
      <td><p>用來以壓縮形式表示每個子向量中心點索引的位元數。每個編碼本將包含 $2^{textit{nbits}}$ 的中心點。例如，如果<code translate="no">nbits</code> 設定為 8，則每個子向量將由 8 位元的 centroid 索引表示。如此一來，該子向量的編碼簿中就有 2^8$ (256) 個可能的中心點。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 64]</p>
 <p><strong>預設值</strong>：<code translate="no">8</code></p></td>
-     <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼簿，可能會導致原始向量的表示更精確。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
+     <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼本，可能會導致原始向量的表示更精確。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -238,6 +238,6 @@ res = MilvusClient.search(
      <td><p>放大係數，用來控制在精細化（重新排序）階段中，相對於要求的前 K 個結果，有多少額外的候選人會被檢驗。</p></td>
      <td><p><strong>類型</strong>：浮動<strong>範圍</strong>：[1,<em>float_max</em>)</p>
 <p><strong>預設值</strong>：1</p></td>
-     <td><p><code translate="no">refine_k</code> 的較高值可以提高召回率和精確度，但也會增加搜尋時間和資源使用。值為 1 表示精煉過程只考慮初始的前 K 個結果。</p></td>
+     <td><p><code translate="no">refine_k</code> 的值越高，可提高召回率和準確度，但也會增加搜尋時間和資源使用。值為 1 表示精煉過程只考慮初始的前 K 個結果。</p></td>
    </tr>
 </table>

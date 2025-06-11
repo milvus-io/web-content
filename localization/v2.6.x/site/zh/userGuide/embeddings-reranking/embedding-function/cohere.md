@@ -111,7 +111,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>如果同一提供商的 API 密钥同时存在于配置文件和环境变量中，Milvus 将始终使用<code translate="no">milvus.yaml</code> 中的值，而忽略环境变量。</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">选项 1：配置文件（推荐且优先级更高）</h3><p>将 API 密钥保存在<code translate="no">milvus.yaml</code> 中；Milvus 会在启动时读取它们，并覆盖同一提供商的任何环境变量。</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">方案 1：配置文件（推荐且优先级更高）</h3><p>将 API 密钥保存在<code translate="no">milvus.yaml</code> 中；Milvus 会在启动时读取它们，并覆盖同一提供商的任何环境变量。</p>
 <ol>
 <li><p>**在<code translate="no">credential:</code></p>
 <p>你可以列出一个或多个 API 密钥--给每个密钥贴上你自创的标签，以便日后参考。</p>
@@ -122,7 +122,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>把 API 密钥放在这里，可以让它们在重启时保持不变，而且只需更改标签就能切换密钥。</p></li>
+<p>将 API 密钥放在这里，可以让它们在重启时保持不变，而且只需更改标签就能切换密钥。</p></li>
 <li><p><strong>告诉 Milvus 调用 OpenAI 时使用哪个密钥</strong></p>
 <p>在同一文件中，将 Cohere 提供程序指向您希望它使用的标签。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>

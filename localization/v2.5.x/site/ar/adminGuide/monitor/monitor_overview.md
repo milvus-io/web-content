@@ -1,12 +1,11 @@
 ---
 id: monitor_overview.md
 title: نظرة عامة على الشاشة
-related_key: "monitor, alert"
+related_key: 'monitor, alert'
 summary: >-
   تعرّف على كيفية استخدام Prometheus وGrafana في Milvus لمراقبة خدمات المراقبة
   والتنبيه.
 ---
-
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">نظرة عامة على إطار عمل مراقبة ميلفوس<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,8 +44,8 @@ summary: >-
 <li>مشغل بروميثيوس لإدارة مثيلات مراقبة بروميثيوس بفعالية.</li>
 <li>Kube-prometheus لتوفير مراقبة مجموعة Kubernetes من طرف إلى طرف سهلة التشغيل.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">أسماء المقاييس</h3><p>يحتوي الاسم المتري الصالح في Prometheus على ثلاثة عناصر: مساحة الاسم، والنظام الفرعي، والاسم. ترتبط هذه العناصر الثلاثة بحرف &quot;_&quot;.</p>
-<p>مساحة اسم مقاييس Milvus التي يراقبها Prometheus هي &quot;milvus&quot;. واعتمادًا على الدور الذي ينتمي إليه المقياس، يجب أن يكون النظام الفرعي الخاص به أحد الأدوار الثمانية التالية: &quot;جذر&quot;، &quot;وكيل&quot;، &quot;وكيل&quot;، &quot;استعلام&quot;، &quot;كويرينود&quot;، &quot;فهرس&quot;، &quot;فهرس&quot;، &quot;فهرس عقدة&quot;، &quot;داتاكورد&quot;، &quot;داتا كورد&quot;، &quot;داتانود&quot;.</p>
+<h3 id="Metric-names" class="common-anchor-header">أسماء المقاييس</h3><p>يحتوي الاسم المتري الصالح في Prometheus على ثلاثة عناصر: مساحة الاسم، والنظام الفرعي، والاسم. ترتبط هذه العناصر الثلاثة بحرف "_".</p>
+<p>مساحة اسم مقاييس Milvus التي يراقبها Prometheus هي "milvus". واعتمادًا على الدور الذي ينتمي إليه المقياس، يجب أن يكون النظام الفرعي الخاص به أحد الأدوار الثمانية التالية: "الدور الجذري"، "الوكيل"، "الدور الفرعي"، "الدور الفرعي للاستعلام"، "الدور الفرعي للاستعلام"، "الدور الفرعي للفهرس"، "الدور الفرعي للفهرس"، "الدور الفرعي للبيانات"، "الدور الفرعي للبيانات".</p>
 <p>على سبيل المثال، مقياس ميلفوس الذي يحسب إجمالي عدد المتجهات التي تم الاستعلام عنها يسمى <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
 <h3 id="Metric-types" class="common-anchor-header">أنواع المقاييس</h3><p>يدعم بروميثيوس أربعة أنواع من المقاييس:</p>
 <ul>
@@ -55,23 +54,23 @@ summary: >-
 <li>المدرج التكراري: نوع من المقاييس التي يتم حسابها بناءً على دلاء قابلة للتكوين. مثال شائع هو مدة الطلب.</li>
 <li>الملخص: نوع من المقاييس المشابهة للمدرج التكراري الذي يحسب الكميات القابلة للتكوين على مدى نافذة زمنية منزلقة.</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">التسميات المترية</h3><p>يميز Prometheus بين العينات التي تحمل نفس الاسم القياسي من خلال تسميتها. التسمية هي سمة معينة للمقياس. يجب أن يكون للمقاييس التي تحمل نفس الاسم نفس القيمة للحقل <code translate="no">variable_labels</code>. يسرد الجدول التالي أسماء ومعاني التسميات الشائعة لمقاييس ميلفوس.</p>
+<h3 id="Metric-labels" class="common-anchor-header">التسميات المترية</h3><p>يميز Prometheus العينات التي تحمل نفس الاسم القياسي من خلال تسميتها. التسمية هي سمة معينة للمقياس. يجب أن يكون للمقاييس التي تحمل نفس الاسم نفس القيمة للحقل <code translate="no">variable_labels</code>. يسرد الجدول التالي أسماء ومعاني التسميات الشائعة لمقاييس ميلفوس.</p>
 <table>
 <thead>
 <tr><th>اسم التسمية</th><th>التعريف</th><th>القيم</th></tr>
 </thead>
 <tbody>
 <tr><td>"node_id"</td><td>الهوية الفريدة للدور.</td><td>معرف فريد عالميًا تم إنشاؤه بواسطة ميلفوس.</td></tr>
-<tr><td>"الحالة"</td><td>حالة العملية أو الطلب الذي تمت معالجته.</td><td>&quot;التخلي&quot; أو &quot;نجاح&quot; أو &quot;فشل&quot;.</td></tr>
-<tr><td>"نوع_الاستعلام"</td><td>نوع طلب القراءة.</td><td>&quot;بحث&quot; أو &quot;استعلام&quot;.</td></tr>
-<tr><td>"msg_type"</td><td>نوع الرسائل.</td><td>&quot;إدراج&quot; أو &quot;حذف&quot; أو &quot;بحث&quot; أو &quot;استعلام&quot;.</td></tr>
-<tr><td>"حالة_قطاع"</td><td>حالة المقطع.</td><td>&quot;مغلق&quot; أو &quot;متزايد&quot; أو &quot;مسح&quot; أو &quot;مسح&quot; أو &quot;مسح&quot; أو &quot;إسقاط&quot; أو &quot;استيراد&quot;.</td></tr>
-<tr><td>"حالة_حالة_ذاكرة_مخبأة"</td><td>حالة الكائن المخزن مؤقتًا.</td><td>&quot;إصابة&quot; أو &quot;خطأ&quot;.</td></tr>
-<tr><td>"اسم_ذاكرة_مخبأة"</td><td>اسم الكائن المخزن مؤقتًا. تُستخدم هذه التسمية مع تسمية &quot;cache_state&quot;.</td><td>مثل &quot;معرّف المجموعة&quot; أو &quot;المخطط&quot;، إلخ.</td></tr>
-<tr><td>&quot;channel_name&quot;</td><td>المواضيع الفعلية في تخزين الرسائل (بولسار أو كافكا).</td><td>على سبيل المثال.&quot;by-dev-rootcoord-dml_0&quot;، &quot;by-dev-rootcoord-dml_255&quot;، إلخ.</td></tr>
-<tr><td>"اسم_الدالة"</td><td>اسم الدالة التي تعالج طلبات معينة.</td><td>مثل &quot;CreateCollection&quot;، &quot;CreatePartition&quot;، &quot;CreateIndex&quot;، إلخ.</td></tr>
+<tr><td>"الحالة"</td><td>حالة العملية أو الطلب الذي تمت معالجته.</td><td>"التخلي" أو "نجاح" أو "فشل".</td></tr>
+<tr><td>"نوع_الاستعلام"</td><td>نوع طلب القراءة.</td><td>"بحث" أو "استعلام".</td></tr>
+<tr><td>"msg_type"</td><td>نوع الرسائل.</td><td>"إدراج" أو "حذف" أو "بحث" أو "استعلام".</td></tr>
+<tr><td>"حالة_قطاع"</td><td>حالة المقطع.</td><td>"مغلق" أو "متزايد" أو "مسح" أو "مسح" أو "مسح" أو "إسقاط" أو "استيراد".</td></tr>
+<tr><td>"حالة_حالة_ذاكرة_مخبأة"</td><td>حالة الكائن المخزن مؤقتًا.</td><td>"إصابة" أو "خطأ".</td></tr>
+<tr><td>"اسم_ذاكرة_مخبأة"</td><td>اسم الكائن المخزن مؤقتًا. تُستخدم هذه التسمية مع تسمية "cache_state".</td><td>مثل "معرّف المجموعة" أو "المخطط"، إلخ.</td></tr>
+<tr><td>"channel_name"</td><td>المواضيع الفعلية في تخزين الرسائل (بولسار أو كافكا).</td><td>على سبيل المثال."by-dev-rootcoord-dml_0"، "by-dev-rootcoord-dml_255"، إلخ.</td></tr>
+<tr><td>"اسم_الدالة"</td><td>اسم الدالة التي تعالج طلبات معينة.</td><td>مثل "إنشاء مجموعة"، "إنشاء مجموعة"، "إنشاء قسم"، "إنشاء فهرس"، إلخ.</td></tr>
 <tr><td>"اسم_المستخدم"</td><td>اسم المستخدم المستخدم المستخدم للمصادقة.</td><td>اسم المستخدم الذي تفضله.</td></tr>
-<tr><td>"Index_task_status"</td><td>حالة مهمة الفهرس في التخزين التعريفي.</td><td>&quot;لم يتم إصدارها&quot; أو &quot;قيد التنفيذ&quot; أو &quot;فاشلة&quot; أو &quot;منتهية&quot; أو &quot;معاد تدويرها&quot;.</td></tr>
+<tr><td>"Index_task_status"</td><td>حالة مهمة الفهرس في التخزين التعريفي.</td><td>"لم يتم إصدارها" أو "قيد التنفيذ" أو "فاشلة" أو "منتهية" أو "معاد تدويرها".</td></tr>
 </tbody>
 </table>
 <h2 id="Grafana-in-Milvus" class="common-anchor-header">غرافانا في ميلفوس<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">

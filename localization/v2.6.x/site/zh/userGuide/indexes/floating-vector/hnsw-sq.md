@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_SQ 结合了两种索引技术：<strong>HNSW</strong>用于基于图的快速导航，<strong>SQ</strong>用于高效的向量压缩。</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在这个图中，节点根据其相似性进行连接，从而实现数据空间的快速遍历。分层结构允许搜索算法缩小候选邻居的范围，从而大大加快了高维空间的搜索过程。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在这个图中，节点根据其相似性进行连接，从而实现数据空间的快速遍历。分层结构允许搜索算法缩小候选邻域的范围，从而大大加快了高维空间的搜索过程。</p>
 <p>更多信息，请参阅<a href="/docs/zh/hnsw.md">HNSW</a>。</p>
 <h3 id="SQ" class="common-anchor-header">SQ</h3><p>SQ 是一种用较少比特表示向量的压缩方法。例如</p>
 <ul>
@@ -209,7 +209,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>决定用于细化的数据的精度。 该精度必须高于压缩向量的精度（由<code translate="no">sq_type</code> 设置），这会影响重新排序向量的精度及其内存占用。</p></td>
+     <td><p>确定用于细化的数据的精度。 该精度必须高于压缩向量的精度（由<code translate="no">sq_type</code> 设置），这会影响重新排序向量的精度及其内存占用。</p></td>
      <td><p><strong>类型</strong>： 字符串字符串<strong>范围</strong>：[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code>,<code translate="no">FP32</code> ]</p>
 <p><strong>默认值</strong>：无</p></td>
      <td><p><code translate="no">FP32</code> <code translate="no">SQ6</code><code translate="no">SQ8</code> <code translate="no">BF16</code> 和 提供了一个平衡的替代方案。<code translate="no">FP16</code> </p></td>

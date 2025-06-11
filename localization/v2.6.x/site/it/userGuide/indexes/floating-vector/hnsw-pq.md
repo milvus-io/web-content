@@ -165,11 +165,11 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Numero massimo di connessioni (o bordi) che ogni nodo può avere nel grafo, compresi i bordi in uscita e in entrata. Questo parametro influisce direttamente sulla costruzione dell'indice e sulla ricerca.</p></td>
+     <td><p>Numero massimo di connessioni (o bordi) che ogni nodo può avere nel grafo, compresi i bordi in uscita e in entrata. Questo parametro influisce direttamente sia sulla costruzione dell'indice che sulla ricerca.</p></td>
      <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [2, 2048]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 bordi uscenti e 30 bordi entranti per nodo)</p></td>
      <td><p>Un valore maggiore di <code translate="no">M</code> porta generalmente a una <strong>maggiore accuratezza</strong>, ma <strong>aumenta l'overhead di memoria</strong> e <strong>rallenta sia la costruzione dell'indice che la ricerca</strong>. Considerare di aumentare <code translate="no">M</code> per i set di dati con elevata dimensionalità o quando è fondamentale un richiamo elevato.</p>
-<p>Considerare di diminuire <code translate="no">M</code> quando l'uso della memoria e la velocità di ricerca sono le principali preoccupazioni.</p>
+<p>Si consiglia di diminuire <code translate="no">M</code> quando l'uso della memoria e la velocità di ricerca sono le principali preoccupazioni.</p>
 <p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [5, 100].</p></td>
    </tr>
    <tr>
@@ -178,7 +178,7 @@ res = MilvusClient.search(
      <td><p>Numero di vicini candidati considerati per la connessione durante la costruzione dell'indice. Per ogni nuovo elemento viene valutato un pool più ampio di candidati, ma il numero massimo di connessioni effettivamente stabilite è ancora limitato da <code translate="no">M</code>.</p></td>
      <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">360</code></p></td>
-     <td><p>Un valore più alto di <code translate="no">efConstruction</code> si traduce tipicamente in un <strong>indice più accurato</strong>, poiché vengono esplorate più connessioni potenziali. Tuttavia, questo comporta anche <strong>tempi di indicizzazione più lunghi e un maggiore utilizzo della memoria</strong> durante la costruzione. Considerare l'aumento di <code translate="no">efConstruction</code> per migliorare l'accuratezza, soprattutto in scenari in cui il tempo di indicizzazione è meno critico.</p>
+     <td><p>Un valore più alto di <code translate="no">efConstruction</code> si traduce tipicamente in un <strong>indice più accurato</strong>, poiché vengono esplorate più connessioni potenziali. Tuttavia, ciò comporta anche <strong>tempi di indicizzazione più lunghi e un maggiore utilizzo della memoria</strong> durante la costruzione. Considerare l'aumento di <code translate="no">efConstruction</code> per migliorare l'accuratezza, soprattutto in scenari in cui il tempo di indicizzazione è meno critico.</p>
 <p>Considerare di diminuire <code translate="no">efConstruction</code> per accelerare la costruzione dell'indice quando le risorse sono limitate.</p>
 <p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [50, 500].</p></td>
    </tr>

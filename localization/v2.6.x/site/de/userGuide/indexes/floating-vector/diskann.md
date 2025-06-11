@@ -53,7 +53,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
-<li><p><strong>Anfängliche zufällige Verbindungen:</strong> Jeder Datenpunkt (Vektor) wird als ein Knoten im Graphen dargestellt. Diese Knoten werden anfangs zufällig miteinander verbunden und bilden ein dichtes Netz. Normalerweise hat ein Knoten zu Beginn etwa 500 Kanten (oder Verbindungen), um eine breite Konnektivität zu erreichen.</p></li>
+<li><p><strong>Anfängliche zufällige Verbindungen:</strong> Jeder Datenpunkt (Vektor) wird als ein Knoten im Graphen dargestellt. Diese Knoten werden anfangs zufällig miteinander verbunden und bilden ein dichtes Netz. Normalerweise hat ein Knoten zu Beginn etwa 500 Kanten (oder Verbindungen), um eine breite Konnektivität zu gewährleisten.</p></li>
 <li><p><strong>Verfeinerung für mehr Effizienz:</strong> Der anfängliche Zufallsgraph wird einem Optimierungsprozess unterzogen, um ihn für die Suche effizienter zu machen. Dies umfasst zwei wichtige Schritte:</p>
 <ul>
 <li><p><strong>Ausschneiden überflüssiger Kanten:</strong> Der Algorithmus verwirft unnötige Verbindungen auf der Grundlage der Entfernungen zwischen den Knoten. Bei diesem Schritt werden Kanten höherer Qualität bevorzugt.</p>
@@ -221,7 +221,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Die Feinabstimmung der DISKANN-Parameter ermöglicht es Ihnen, das Verhalten von DISKANN an Ihren spezifischen Datensatz und Ihre Suchlast anzupassen und das richtige Gleichgewicht zwischen Geschwindigkeit, Genauigkeit und Speichernutzung zu finden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>Diese Parameter beeinflussen, wie der DISKANN-Index aufgebaut wird. Eine Anpassung dieser Parameter kann die Indexgröße, die Erstellungszeit und die Suchqualität beeinflussen.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>Diese Parameter beeinflussen, wie der DISKANN-Index aufgebaut wird. Die Anpassung dieser Parameter kann die Indexgröße, die Erstellungszeit und die Suchqualität beeinflussen.</p>
 <table>
    <tr>
      <th></th>
@@ -266,7 +266,7 @@ res = MilvusClient.search(
 <p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: (0,0625, 0,25)</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>Diese Parameter beeinflussen, wie DISKANN die Suche durchführt. Eine Anpassung dieser Parameter kann sich auf die Suchgeschwindigkeit, die Latenzzeit und die Ressourcennutzung auswirken.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>Diese Parameter beeinflussen, wie DISKANN die Suche durchführt. Ihre Einstellung kann sich auf die Suchgeschwindigkeit, die Latenzzeit und die Ressourcennutzung auswirken.</p>
 <table>
    <tr>
      <th></th>

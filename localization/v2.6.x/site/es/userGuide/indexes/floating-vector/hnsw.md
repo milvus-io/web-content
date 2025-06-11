@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El índice <strong>HNSW</strong> es un algoritmo de indexación <strong>basado en grafos</strong> que puede mejorar el rendimiento en la búsqueda de vectores flotantes de alta dimensión. Ofrece una <strong>excelente</strong> precisión de búsqueda y <strong>baja</strong> latencia, aunque requiere una <strong>gran</strong> sobrecarga de memoria para mantener su estructura de grafos jerárquicos.</p>
+    </button></h1><p>El índice <strong>HNSW</strong> es un algoritmo de indexación <strong>basado en grafos</strong> que puede mejorar el rendimiento en la búsqueda de vectores flotantes de alta dimensión. Ofrece una <strong>excelente</strong> precisión de búsqueda y <strong>baja</strong> latencia, aunque requiere una <strong>gran</strong> sobrecarga de memoria para mantener su estructura de grafo jerárquico.</p>
 <h2 id="Overview" class="common-anchor-header">Resumen<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -102,7 +102,7 @@ index_params.add_index(
 </ul>
 <p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">HNSW</code>, consulte <a href="/docs/es/hnsw.md#Index-building-params">Parámetros de construcción</a> del <a href="/docs/es/hnsw.md#Index-building-params">índice</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando el método <code translate="no">create_index()</code> directamente o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,7 +139,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">ef</code>: Número de vecinos a considerar durante una búsqueda.</li>
 </ul>
-<p>Para obtener más información sobre los parámetros de búsqueda disponibles para el índice <code translate="no">HNSW</code>, consulte <a href="/docs/es/hnsw.md#Index-specific-search-params">Parámetros de búsqueda específicos del índice</a>.</p></li>
+<p>Para conocer más parámetros de búsqueda disponibles para el índice <code translate="no">HNSW</code>, consulte <a href="/docs/es/hnsw.md#Index-specific-search-params">Parámetros de búsqueda específicos del índice</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parámetros del índice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"

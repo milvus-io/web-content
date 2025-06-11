@@ -124,7 +124,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <p>Rendre le périphérique GPU <code translate="no">0</code> visible par Milvus :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Rendre les périphériques GPU <code translate="no">0</code> et <code translate="no">1</code> visibles par Milvus :</p>
+<p>Rendre les dispositifs GPU <code translate="no">0</code> et <code translate="no">1</code> visibles par Milvus :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez arrêter et supprimer ce conteneur comme suit.</p>

@@ -46,7 +46,7 @@ title: MilvusとLepton AIでRAGを構築する
     </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus[model] openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択します）。</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
 <p>LeptonはOpenAIスタイルのAPIを有効にする。公式サイトにログインし、<a href="https://www.lepton.ai/docs">api key</a> <code translate="no">LEPTONAI_TOKEN</code> を環境変数として用意する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -116,7 +116,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <div class="alert note">
 <p><code translate="no">MilvusClient</code> の引数として， を指定する．</p>
 <ul>
-<li><code translate="no">./milvus.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定しておくと、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>利用して自動的にすべてのデータをこのファイルに保存してくれるので、最も便利な方法です。</li>
+<li><code translate="no">./milvus.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定しておくと、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>自動的に利用して、すべてのデータをこのファイルに格納することができるので、最も便利な方法です。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
@@ -214,7 +214,7 @@ retrieved_lines_with_distances = [
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>ラネージ・モデルのシステム・プロンプトとユーザー・プロンプトを定義する。このプロンプトはMilvusから検索された文書で組み立てられる。</p>
+<p>ラネージ・モデルのシステム・プロンプトとユーザー・プロンプトを定義する。このプロンプトはmilvusから検索された文書で組み立てられる。</p>
 <pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 &quot;&quot;&quot;</span>

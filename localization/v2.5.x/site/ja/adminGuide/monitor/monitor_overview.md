@@ -1,10 +1,9 @@
 ---
 id: monitor_overview.md
 title: モニターの概要
-related_key: "monitor, alert"
+related_key: 'monitor, alert'
 summary: PrometheusとGrafanaがMilvusでどのようにモニタリングとアラートサービスに使用されているかをご紹介します。
 ---
-
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvusモニタリングフレームワークの概要<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,8 +42,8 @@ summary: PrometheusとGrafanaがMilvusでどのようにモニタリングとア
 <li>Prometheus監視インスタンスを効率的に管理するPrometheusオペレータ。</li>
 <li>Kube-prometheus: Kubernetesクラスタの監視をエンドツーエンドで簡単に操作できます。</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">メトリック名</h3><p>Prometheusで有効なメトリック名は、namespace、subsystem、nameの3つの要素を含んでいます。これら3つの要素は&quot;_&quot;で結ばれています。</p>
-<p>Prometheusが監視するMilvusメトリックの名前空間は &quot;milvus &quot;です。メトリックが属する役割に応じて、そのサブシステムは次の8つの役割のうちの1つでなければなりません：&quot;rootcoord&quot;、&quot;proxy&quot;、&quot;querycoord&quot;、&quot;querynode&quot;、&quot;indexcoord&quot;、&quot;indexnode&quot;、&quot;datacoord&quot;、&quot;datanode&quot;。</p>
+<h3 id="Metric-names" class="common-anchor-header">メトリック名</h3><p>Prometheusで有効なメトリック名は、namespace、subsystem、nameの3つの要素を含んでいます。これら3つの要素は"_"で結ばれています。</p>
+<p>Prometheusが監視するMilvusメトリックの名前空間は "milvus "です。メトリクスが属する役割に応じて、そのサブシステムは以下の8つの役割のいずれかになります：「rootcoord"、"proxy"、"querycoord"、"querynode"、"indexcoord"、"indexnode"、"datacoord"、"datanode"。</p>
 <p>例えば、クエリされたベクトルの総数を計算するMilvusメトリックの名前は<code translate="no">milvus_proxy_search_vectors_count</code> 。</p>
 <h3 id="Metric-types" class="common-anchor-header">メトリックの種類</h3><p>Prometheus は、4 種類のメトリックをサポートしています：</p>
 <ul>
@@ -53,23 +52,23 @@ summary: PrometheusとGrafanaがMilvusでどのようにモニタリングとア
 <li>ヒストグラム：構成可能なバケットに基づいてカウントされるメトリクスのタイプ。一般的な例は、リクエストの持続時間です。</li>
 <li>サマリー（Summary）： ヒストグラムに似たメトリクスの一種で、スライディングする時間ウィンドウにわたって構成可能な分量を計算します。</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">メトリクス・ラベル</h3><p>プロメテウスは、同じメトリック名のサンプルにラベルを付けて区別します。ラベルはメトリックの特定の属性です。同じ名前のメトリクスは、<code translate="no">variable_labels</code> フィールドに同じ値を持つ必要があります。以下の表は、Milvus メトリックの一般的なラベルの名前と意味を示しています。</p>
+<h3 id="Metric-labels" class="common-anchor-header">メトリクス・ラベル</h3><p>プロメテウスは、同じメトリック名のサンプルにラベルを付けて区別します。ラベルはメトリックの特定の属性です。同じ名前のメトリクスは、<code translate="no">variable_labels</code> フィールドに同じ値を持つ必要があります。次の表は、Milvus メトリックの一般的なラベルの名前と意味を示しています。</p>
 <table>
 <thead>
 <tr><th>ラベル名</th><th>定義</th><th>値</th></tr>
 </thead>
 <tbody>
 <tr><td>"node_id"</td><td>ロールの一意のID。</td><td>milvusによって生成されるグローバルにユニークなID。</td></tr>
-<tr><td>"status"</td><td>処理された操作またはリクエストのステータス。</td><td>&quot;abandon&quot;、&quot;success&quot;、または &quot;fail&quot;。</td></tr>
-<tr><td>"query_type"</td><td>読み取りリクエストのタイプ。</td><td>「search &quot;または &quot;query&quot;。</td></tr>
-<tr><td>"msg_type"</td><td>メッセージのタイプ。</td><td>&quot;insert&quot;、&quot;delete&quot;、&quot;search&quot;、または &quot;query&quot;。</td></tr>
-<tr><td>"segment_state" セグメントの状態。</td><td>セグメントの状態。</td><td>&quot;Sealing&quot;、&quot;Growing&quot;、&quot;Flushed&quot;、&quot;Dropped&quot;、&quot;Importing&quot; のいずれか。</td></tr>
-<tr><td>"cache_state"</td><td>キャッシュされたオブジェクトの状態。</td><td>「hit &quot;または &quot;miss&quot;。</td></tr>
-<tr><td>"cache_name"</td><td>キャッシュされたオブジェクトの名前。このラベルは、&quot;cache_state&quot; ラベルとともに使用されます。</td><td>例：&quot;CollectionID&quot;、&quot;Schema &quot;など。</td></tr>
-<tr><td>&quot;channel_name&quot;</td><td>メッセージ・ストレージ（PulsarまたはKafka）の物理トピック。</td><td>例：&quot;by-dev-rootcoord-dml_0&quot;、&quot;by-dev-rootcoord-dml_255 &quot;など。</td></tr>
-<tr><td>"関数名"</td><td>特定のリクエストを処理する関数の名前。</td><td>例：&quot;CreateCollection&quot;、&quot;CreatePartition&quot;、&quot;CreateIndex &quot;など。</td></tr>
+<tr><td>"status"</td><td>処理された操作またはリクエストのステータス。</td><td>"abandon"、"success"、または "fail"。</td></tr>
+<tr><td>"query_type"</td><td>読み取りリクエストのタイプ。</td><td>「search "または "query"。</td></tr>
+<tr><td>"msg_type"</td><td>メッセージのタイプ。</td><td>"insert"、"delete"、"search"、または "query"。</td></tr>
+<tr><td>"segment_state" セグメントの状態。</td><td>セグメントの状態。</td><td>"Sealing"、"Growing"、"Flushed"、"Dropped"、"Importing" のいずれか。</td></tr>
+<tr><td>"cache_state"</td><td>キャッシュされたオブジェクトの状態。</td><td>「hit "または "miss"。</td></tr>
+<tr><td>"cache_name"</td><td>キャッシュされたオブジェクトの名前。このラベルは、"cache_state" ラベルとともに使用されます。</td><td>例："CollectionID"、"Schema "など。</td></tr>
+<tr><td>"channel_name"</td><td>メッセージ・ストレージ（PulsarまたはKafka）の物理トピック。</td><td>例："by-dev-rootcoord-dml_0"、"by-dev-rootcoord-dml_255 "など。</td></tr>
+<tr><td>"関数名"</td><td>特定のリクエストを処理する関数の名前。</td><td>例："CreateCollection"、"CreatePartition"、"CreateIndex "など。</td></tr>
 <tr><td>"user_name"</td><td>認証に使用するユーザー名。</td><td>お好みのユーザー名を指定してください。</td></tr>
-<tr><td>"index_task_status"</td><td>メタ・ストレージにおけるインデックス・タスクのステータス。</td><td>&quot;未発行&quot;、&quot;進行中&quot;、&quot;失敗&quot;、&quot;終了&quot;、または &quot;リサイクル&quot;。</td></tr>
+<tr><td>"index_task_status"</td><td>メタ・ストレージにおけるインデックス・タスクのステータス。</td><td>"未発行"、"進行中"、"失敗"、"終了"、または "リサイクル"。</td></tr>
 </tbody>
 </table>
 <h2 id="Grafana-in-Milvus" class="common-anchor-header">MilvusにおけるGrafana<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">

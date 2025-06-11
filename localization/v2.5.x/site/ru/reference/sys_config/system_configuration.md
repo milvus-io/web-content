@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Узнайте о конфигурации системы Milvus.
 ---
-
 <h1 id="Milvus-System-Configurations-Checklist" class="common-anchor-header">Контрольный список системных конфигураций Milvus<button data-href="#Milvus-System-Configurations-Checklist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +20,7 @@ summary: Узнайте о конфигурации системы Milvus.
         ></path>
       </svg>
     </button></h1><p>В этой теме представлены общие разделы системных конфигураций в Milvus.</p>
-<p>Milvus поддерживает значительное количество параметров, которые настраивают систему. Каждая конфигурация имеет значение по умолчанию, которое можно использовать напрямую. Вы можете гибко изменять эти параметры, чтобы Milvus мог лучше обслуживать ваше приложение. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.5.x/configure-docker.md">Настройка Milvus</a>.</p>
+<p>Milvus поддерживает значительное количество параметров, которые настраивают систему. Каждая конфигурация имеет значение по умолчанию, которое можно использовать напрямую. Вы можете гибко изменять эти параметры, чтобы Milvus мог лучше обслуживать ваше приложение. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/configure-docker.md">Настройка Milvus</a>.</p>
 <div class="alert note">
 В текущем выпуске все параметры вступают в силу только после настройки при запуске Milvus.</div>
 <h2 id="Sections" class="common-anchor-header">Разделы<button data-href="#Sections" class="anchor-icon" translate="no">
@@ -71,15 +70,14 @@ summary: Узнайте о конфигурации системы Milvus.
 <p>ssl:</p>
 <pre><code translate="no">enabled: false # whether to enable ssl mode
 
-tlsCert: # path to client's public key (PEM) used for authentication
+tlsCert:  # path to client's public key (PEM) used for authentication
 
-tlsKey: # path to client's private key (PEM) used for authentication
+tlsKey:  # path to client's private key (PEM) used for authentication
 
-tlsCaCert: # file or directory path to CA certificate(s) for verifying the broker's key
+tlsCaCert:  # file or directory path to CA certificate(s) for verifying the broker's key
 
-tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
+tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
-
 <p>readTimeout: 10</p>
 <p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/v2.5.x/configure_rocksmq.md">Конфигурации, связанные с rocksmq</a>.</p>
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>конфигурация natsmq.</p>

@@ -25,7 +25,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der <strong>IVF_RABITQ-Index</strong> ist ein <strong>auf binärer Quantisierung basierender</strong> Indizierungsalgorithmus, der FP32-Vektoren in binäre Darstellungen quantisiert. Dieser Index bietet eine außergewöhnliche Speichereffizienz mit einem Komprimierungsverhältnis von 1 zu 32 bei gleichzeitig relativ guten Wiederfindungsraten. Er unterstützt optionale Verfeinerungen, um eine höhere Wiederauffindbarkeit auf Kosten von zusätzlichem Speicherplatz zu erreichen, was ihn zu einem vielseitigen Ersatz für <a href="/docs/de/ivf-sq8.md">IVF_SQ8</a> und <a href="/docs/de/ivf-flat.md">IVF_FLAT</a> in Szenarien mit Speicherbeschränkungen macht.</p>
+    </button></h1><p>Der <strong>IVF_RABITQ-Index</strong> ist ein <strong>auf binärer Quantisierung basierender</strong> Indizierungsalgorithmus, der FP32-Vektoren in binäre Darstellungen quantisiert. Dieser Index bietet eine außergewöhnliche Speichereffizienz mit einem Komprimierungsverhältnis von 1 zu 32 bei gleichzeitig relativ guten Wiederfindungsraten. Er unterstützt eine optionale Verfeinerung, um eine höhere Wiederauffindbarkeit auf Kosten von zusätzlichem Speicherplatz zu erreichen, was ihn zu einem vielseitigen Ersatz für <a href="/docs/de/ivf-sq8.md">IVF_SQ8</a> und <a href="/docs/de/ivf-flat.md">IVF_FLAT</a> in Szenarien mit Speicherbeschränkungen macht.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
 <ol>
 <li><p><strong>Coarse Filtering</strong>: IVF unterteilt den Vektorraum in Cluster, wodurch der Suchumfang durch die Konzentration auf die relevantesten Clusterregionen erheblich reduziert wird.</p></li>
 <li><p><strong>Binäre Quantisierung</strong>: Innerhalb jedes Clusters komprimiert RaBitQ die Vektoren in binäre Darstellungen, wobei wesentliche Abstandsbeziehungen durch theoretische Garantien erhalten bleiben.</p></li>
-<li><p><strong>Optionale Verfeinerung</strong>: Wenn diese Option aktiviert ist, speichert der Index zusätzliche verfeinerte Daten in Formaten mit höherer Genauigkeit (SQ6, SQ8, FP16, BF16 oder FP32), um die Wiederauffindungsrate auf Kosten eines größeren Speicherplatzes zu verbessern.</p></li>
+<li><p><strong>Optionale Verfeinerung</strong>: Wenn diese Option aktiviert ist, speichert der Index zusätzliche verfeinerte Daten in Formaten mit höherer Genauigkeit (SQ6, SQ8, FP16, BF16 oder FP32), um die Wiederauffindungsrate zu verbessern, was allerdings mit mehr Speicherplatz verbunden ist.</p></li>
 </ol>
 <p>Milvus implementiert IVF_RABITQ unter Verwendung der folgenden FAISS-Fabrikstrings:</p>
 <ul>

@@ -240,7 +240,7 @@ vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
-<p>この例では、3つのベクトル場があります。その中で、<code translate="no">sparse</code> は<code translate="no">BM25BuiltInFunction</code> の出力フィールドとして使用され、他の2つ、<code translate="no">dense1</code> と<code translate="no">dense2</code> は、2つの<code translate="no">OpenAIEmbeddings</code> モデルの出力フィールドとして自動的に割り当てられる（順番に基づく）。</p>
+<p>この例では、3つのベクトル場があります。その中で、<code translate="no">sparse</code> は<code translate="no">BM25BuiltInFunction</code> の出力フィールドとして使用され、他の2つ、<code translate="no">dense1</code> と<code translate="no">dense2</code> は、（順番に基づき）2つの<code translate="no">OpenAIEmbeddings</code> モデルの出力フィールドとして自動的に割り当てられる。</p>
 <h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">マルチ・ベクトル・フィールドのインデックス・パラメータの指定</h3><p>デフォルトでは、各ベクトル・フィールドのインデックス・タイプは、埋め込みまたは組み込み関数のタイプによって自動的に決定されます。しかし、検索性能を最適化するために、各ベクトル・フィールドのインデックス・タイプを指定することもできます。</p>
 <pre><code translate="no" class="language-python">dense_index_param_1 = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,

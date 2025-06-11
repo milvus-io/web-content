@@ -27,7 +27,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>O HNSW_PRQ</strong> aproveita os gráficos Hierarchical Navigable Small World (HNSW) com Product Residual Quantization (PRQ), oferecendo um método avançado de indexação de vectores que permite ajustar a relação entre o tamanho do índice e a precisão. A PRQ vai além da Quantização de Produto (PQ) tradicional, introduzindo uma etapa de quantização residual (RQ) para capturar informações adicionais, resultando em maior precisão ou índices mais compactos em comparação com métodos puramente baseados em PQ. No entanto, os passos adicionais podem levar a um maior custo computacional durante a construção e pesquisa do índice.</p>
+    </button></h1><p><strong>O HNSW_PRQ</strong> aproveita os gráficos Hierarchical Navigable Small World (HNSW) com Product Residual Quantization (PRQ), oferecendo um método avançado de indexação de vectores que permite ajustar a relação entre o tamanho do índice e a precisão. A PRQ vai além da Quantização de Produto (PQ) tradicional, introduzindo uma etapa de quantização residual (RQ) para capturar informações adicionais, resultando em maior precisão ou índices mais compactos em comparação com métodos puramente baseados em PQ. No entanto, as etapas adicionais podem levar a um maior custo computacional durante a construção e pesquisa do índice.</p>
 <h2 id="Overview" class="common-anchor-header">Síntese<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,7 +117,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: O método utilizado para calcular a distância entre vectores. Os valores suportados incluem <code translate="no">COSINE</code>, <code translate="no">L2</code>, e <code translate="no">IP</code>. Para obter detalhes, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opções de configuração adicionais para criar o índice. Para obter detalhes, consulte <a href="/docs/pt/hnsw-prq.md#Index-building-params">Parâmetros de construção de índice</a>.</p></li>
 </ul>
-<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para obter detalhes, consulte <a href="/docs/pt/create-collection.md">Criar coleção</a>.</p>
+<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para mais informações, consulte <a href="/docs/pt/create-collection.md">Criar coleção</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Pesquisar no índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,7 +133,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser criado e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -151,7 +151,7 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>Nesta configuração:</p>
 <ul>
-<li><code translate="no">params</code>: Opções de configuração adicionais para pesquisar no índice. Para obter detalhes, consulte Parâmetros <a href="/docs/pt/hnsw-prq.md#Index-specific-search-params">de pesquisa específicos do índice</a>.</li>
+<li><code translate="no">params</code>: Opções de configuração adicionais para pesquisar no índice. Para obter detalhes, consulte <a href="/docs/pt/hnsw-prq.md#Index-specific-search-params">Parâmetros de pesquisa específicos do índice</a>.</li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parâmetros de índice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -168,7 +168,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para construir um índice e executar pesquisas no índice.</p>
+    </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e executar pesquisas no índice.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção de índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/hnsw-prq.md#Build-index">construir um índice</a>.</p>
 <table>
    <tr>
@@ -204,7 +204,7 @@ res = MilvusClient.search(
      <td><p>O número de sub-vectores (utilizados para quantização) para dividir cada vetor de alta dimensão durante o processo de quantização.</p></td>
      <td><p><strong>Tipo</strong>: Inteiro <strong>Intervalo</strong>: [1, 65536]</p>
 <p><strong>Valor predefinido</strong>: Nenhum</p></td>
-     <td><p>Um valor <code translate="no">m</code> mais elevado pode melhorar a precisão, mas também aumenta a complexidade computacional e a utilização de memória. <code translate="no">m</code> deve ser um divisor da dimensão do vetor<em>(D</em>) para garantir uma decomposição adequada. Um valor geralmente recomendado é <em>m = D/2</em>.</p>
+     <td><p>Um valor <code translate="no">m</code> mais elevado pode melhorar a precisão, mas também aumenta a complexidade computacional e a utilização de memória. <code translate="no">m</code> tem de ser um divisor da dimensão do vetor<em>(D</em>) para garantir uma decomposição adequada. Um valor geralmente recomendado é <em>m = D/2</em>.</p>
 <p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [D/8, D].</p></td>
    </tr>
    <tr>
@@ -213,7 +213,7 @@ res = MilvusClient.search(
      <td><p>O número de bits utilizados para representar o índice do centróide de cada sub-vetor na forma comprimida. Ele determina diretamente o tamanho de cada livro de códigos. Cada livro de códigos conterá $2^{\textit{nbits}}$ centroides. Por exemplo, se <code translate="no">nbits</code> estiver definido para 8, cada sub-vetor será representado por um índice de centróide de 8 bits. Isto permite $2^8$ (256) centróides possíveis no livro de códigos para esse sub-vetor.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, 64]</p>
 <p><strong>Valor predefinido</strong>: <code translate="no">8</code></p></td>
-     <td><p>Um valor mais alto em <code translate="no">nbits</code> permite livros de códigos maiores, potencialmente levando a representações mais precisas dos vectores originais. No entanto, também significa utilizar mais bits para armazenar cada índice, resultando numa menor compressão. Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [1, 16].</p></td>
+     <td><p>Um valor <code translate="no">nbits</code> mais alto permite livros de códigos maiores, potencialmente levando a representações mais precisas dos vectores originais. No entanto, também significa utilizar mais bits para armazenar cada índice, resultando numa menor compressão. Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [1, 16].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -256,7 +256,7 @@ res = MilvusClient.search(
  Este parâmetro afecta apenas o processo de pesquisa e aplica-se exclusivamente à camada inferior do gráfico.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valor por defeito</strong>: <em>limite</em> (TopK vizinhos mais próximos a devolver)</p></td>
-     <td><p>Um <code translate="no">ef</code> maior conduz geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais vizinhos potenciais. Considere aumentar <code translate="no">ef</code> quando a obtenção de uma alta recuperação é crítica e a velocidade de <strong>pesquisa</strong> é menos preocupante.</p>
+     <td><p>Um <code translate="no">ef</code> maior leva geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais vizinhos potenciais. Considere aumentar <code translate="no">ef</code> quando a obtenção de uma alta recuperação é crítica e a velocidade de <strong>pesquisa</strong> é menos preocupante.</p>
 <p>Considere diminuir <code translate="no">ef</code> para dar prioridade a pesquisas mais rápidas, especialmente em cenários em que uma ligeira redução na precisão é aceitável.</p>
 <p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [K, 10K].</p></td>
    </tr>

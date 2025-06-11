@@ -186,13 +186,13 @@ beta: Milvus 2.6.x
      <td><ul>
 <li><p>News feed, dove la ricorrenza è fondamentale</p></li>
 <li><p>Social media dove i contenuti freschi dovrebbero dominare</p></li>
-<li><p>Quando la prossimità è fortemente preferita, ma gli articoli eccezionalmente distanti dovrebbero rimanere visibili</p></li>
+<li><p>Quando la vicinanza è fortemente preferita, ma gli articoli eccezionalmente distanti dovrebbero rimanere visibili</p></li>
 </ul></td>
      <td><p>In un'app di notizie, le storie di ieri si posizionano molto più in alto rispetto ai contenuti di una settimana fa, ma gli articoli più vecchi altamente rilevanti possono ancora apparire</p></td>
    </tr>
    <tr>
      <td><p>Lineare (<code translate="no">linear</code>)</p></td>
-     <td><p>Declino coerente e prevedibile, con un limite ben definito</p></td>
+     <td><p>Declino coerente e prevedibile con un limite chiaro</p></td>
      <td><ul>
 <li><p>Applicazioni con confini naturali</p></li>
 <li><p>Servizi con limiti di distanza</p></li>
@@ -288,7 +288,7 @@ decay_ranker = Function(
      <td><p>Punto di riferimento dal quale viene calcolato il punteggio di decadimento. Gli elementi a questo valore ricevono il massimo punteggio di rilevanza.</p></td>
      <td><ul>
 <li>Per i timestamp: l'ora corrente (ad esempio, <code translate="no">int(time.time())</code>).</li>
-<li>Per la geolocalizzazione: coordinate correnti dell'utente</li>
+<li>Per la geolocalizzazione: le coordinate correnti dell'utente</li>
 </ul></td>
    </tr>
    <tr>

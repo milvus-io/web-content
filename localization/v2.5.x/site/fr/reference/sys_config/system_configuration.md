@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: En savoir plus sur la configuration du système Milvus.
 ---
-
 <h1 id="Milvus-System-Configurations-Checklist" class="common-anchor-header">Liste de contrôle des configurations du système Milvus<button data-href="#Milvus-System-Configurations-Checklist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,15 +70,14 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu'après avoir
 <p>ssl :</p>
 <pre><code translate="no">enabled: false # whether to enable ssl mode
 
-tlsCert: # path to client's public key (PEM) used for authentication
+tlsCert:  # path to client's public key (PEM) used for authentication
 
-tlsKey: # path to client's private key (PEM) used for authentication
+tlsKey:  # path to client's private key (PEM) used for authentication
 
-tlsCaCert: # file or directory path to CA certificate(s) for verifying the broker's key
+tlsCaCert:  # file or directory path to CA certificate(s) for verifying the broker's key
 
-tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
+tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
-
 <p>readTimeout : 10</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_rocksmq.md">configurations liées à rocksmq</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>Configuration natsmq.</p>
@@ -88,7 +86,7 @@ tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_s
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code></h3><p>Configuration connexe de rootCoord, utilisée pour traiter les requêtes en langage de définition des données (DDL) et en langage de contrôle des données (DCL).</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_rootcoord.md">configurations relatives à rootCoord</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code></h3><p>Configuration connexe du proxy, utilisée pour valider les demandes des clients et réduire les résultats renvoyés.</p>
-<p>Voir les <a href="/docs/fr/v2.5.x/configure_proxy.md">configurations relatives au proxy</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<p>Voir les <a href="/docs/fr/v2.5.x/configure_proxy.md">configurations liées au proxy</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code></h3><p>Configuration connexe de queryCoord, utilisée pour gérer la topologie et l'équilibrage de la charge pour les nœuds de requête, et le transfert de segments croissants vers des segments scellés.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_querycoord.md">configurations liées à queryCoord</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code></h3><p>Configuration connexe du nœud de requête, utilisée pour effectuer une recherche hybride entre les données vectorielles et scalaires.</p>

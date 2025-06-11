@@ -137,7 +137,7 @@ index_params.add_index(
 </ul>
 <p>Weitere Informationen zu den für den Index <code translate="no">IVF_PQ</code> verfügbaren Parametern finden Sie unter <a href="/docs/de/ivf-pq.md#Index-building-params">Parameter für den Indexaufbau</a>.</p></li>
 </ul>
-<p>Sobald die Index-Parameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Index-Parameter in der Methode <code translate="no">create_collection</code> übergeben. Einzelheiten finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
+<p>Sobald die Index-Parameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Index-Parameter in der Methode <code translate="no">create_collection</code> übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Suche im Index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

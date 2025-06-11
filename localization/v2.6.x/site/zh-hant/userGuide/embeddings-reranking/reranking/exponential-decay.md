@@ -23,10 +23,10 @@ beta: Milvus 2.6.x
     </button></h1><p>指數遞減在您的搜尋結果中創造了一個陡峭的初始下降，接著是一個長尾。就像突發性新聞週期一樣，一開始相關性迅速降低，但隨著時間的推移，有些新聞的重要性仍會保留，指數衰減對超出您理想範圍的項目施加急劇的懲罰，同時仍保持較遠的項目可以被發現。當您想要優先處理近似性或近期性，但又不想完全剔除較遠的選項時，這種方法是最理想的選擇。</p>
 <p>與其他衰減函數不同：</p>
 <ul>
-<li><p>高斯衰減創造出更漸進的鐘形衰減</p></li>
+<li><p>高斯衰減創造了更漸進的鐘形衰減</p></li>
 <li><p>線性衰減以固定速率遞減，直到完全為零</p></li>
 </ul>
-<p>指數遞減獨特地將懲罰 「前置」，提早應用大部分的相關性降低，同時維持最小但非零的長尾相關性。</p>
+<p>指數遞減獨特地將懲罰 「前置」，提早應用大部分的相關性減量，同時維持最小但非零的長尾相關性。</p>
 <h2 id="When-to-use-exponential-decay" class="common-anchor-header">何時使用指數遞減<button data-href="#When-to-use-exponential-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

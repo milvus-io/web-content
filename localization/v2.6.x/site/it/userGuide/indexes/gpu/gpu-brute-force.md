@@ -61,7 +61,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. Per i dettagli, fare riferimento a <a href="/docs/it/metric.md">Tipi metrici</a>.</p></li>
 <li><p><code translate="no">params</code>: Per l'indice GPU_BRUTE_FORCE non sono necessari altri parametri.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> oppure passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per maggiori dettagli, consultare la sezione <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

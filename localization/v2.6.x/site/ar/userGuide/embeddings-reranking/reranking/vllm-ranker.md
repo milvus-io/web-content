@@ -26,9 +26,9 @@ beta: Milvus 2.6.x
 <p>يعد vLLLM Ranker ذا قيمة خاصة للتطبيقات التي تكون فيها الدقة والسياق أمرًا بالغ الأهمية، مثل:</p>
 <ul>
 <li><p>البحث في الوثائق التقنية التي تتطلب فهماً عميقاً للمفاهيم</p></li>
-<li><p>قواعد البيانات البحثية التي تفوق فيها العلاقات الدلالية مطابقة الكلمات الرئيسية</p></li>
+<li><p>قواعد بيانات البحث حيث تفوق العلاقات الدلالية مطابقة الكلمات الرئيسية</p></li>
 <li><p>أنظمة دعم العملاء التي تحتاج إلى مطابقة مشاكل المستخدم مع الحلول ذات الصلة</p></li>
-<li><p>البحث في التجارة الإلكترونية التي يجب أن تفهم سمات المنتج ونية المستخدم</p></li>
+<li><p>بحث التجارة الإلكترونية الذي يجب أن يفهم سمات المنتج ونوايا المستخدم</p></li>
 </ul>
 <p>بالمقارنة مع <a href="/docs/ar/tei-ranker.md">مصنف TEI Ranker،</a> يوفر vLLM Ranker مرونة أكبر في اختيار النموذج والتخصيص، مما يجعله مثاليًا لتطبيقات البحث المتخصصة أو المعقدة حيث توفر خيارات التكوين الإضافية فوائد كبيرة.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -48,7 +48,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>قبل تطبيق vLLM Ranker في ميلفوس، تأكد من أن لديك:</p>
 <ul>
-<li><p>مجموعة Milvus مع حقل <code translate="no">VARCHAR</code> يحتوي على النص المراد إعادة تصنيفه</p></li>
+<li><p>مجموعة Milvus تحتوي على حقل <code translate="no">VARCHAR</code> يحتوي على النص المراد إعادة تصنيفه</p></li>
 <li><p>خدمة vLLLM قيد التشغيل مع إمكانات إعادة التصنيف. للحصول على إرشادات مفصلة حول إعداد خدمة vLLLM، راجع <a href="https://docs.vllm.ai/en/latest/getting_started/installation.html">وثائق vLLM الرسمية</a>. للتحقق من توفر خدمة vLLM:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Replace YOUR_VLLM_ENDPOINT_URL with the actual URL (e.g., http://&lt;service-ip&gt;:&lt;port&gt;/v1/rerank)</span>
 <span class="hljs-comment"># Replace &#x27;BAAI/bge-reranker-base&#x27; if you deployed a different model</span>

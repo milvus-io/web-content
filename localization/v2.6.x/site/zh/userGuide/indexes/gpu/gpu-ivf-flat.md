@@ -128,7 +128,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>在建立索引时使用 K-means 算法创建的簇的数量。 每个簇由一个中心点表示，存储一个向量列表。增加该参数可减少每个簇中的向量数量，从而创建更小、更集中的分区。</p></td>
+     <td><p>在索引构建过程中使用 K-means 算法创建的簇数。 每个簇由一个中心点表示，存储一个向量列表。增加该参数可减少每个簇中的向量数量，从而创建更小、更集中的分区。</p></td>
      <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[1, 65536]</p>
 <p><strong>默认值</strong>：<code translate="no">128</code></p></td>
      <td><p><code translate="no">nlist</code> 值越大，通过创建更精细的簇来提高召回率，但会增加索引构建时间。根据数据集大小和可用资源进行优化。 在大多数情况下，我们建议在此范围内设置值：[32, 4096].</p></td>
@@ -147,7 +147,7 @@ res = MilvusClient.search(
      <td><p>搜索候选集群的集群数。 数值越大，搜索的集群数越多，搜索范围越大，召回率越高，但代价是查询延迟增加。</p></td>
      <td><p><strong>类型</strong>： 整数整数[1，<em>nlist］</em></p>
 <p><strong>默认值</strong>：<code translate="no">8</code></p></td>
-     <td><p>增加该值可提高召回率，但可能会减慢搜索速度。将<code translate="no">nprobe</code> 设置为与<code translate="no">nlist</code> 成比例，以平衡速度和准确性。</p>
+     <td><p>增加该值可提高召回率，但可能会减慢搜索速度。设置<code translate="no">nprobe</code> 与<code translate="no">nlist</code> 成比例，以平衡速度和准确性。</p>
 <p>在大多数情况下，我们建议您在此范围内设置一个值：[1，nlist]。</p></td>
    </tr>
 </table>

@@ -56,7 +56,7 @@ beta: Milvus 2.6.x
 </ul>
 <p><strong>计算效率</strong>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">o~\tilde{\mathbf{o}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6813em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span> o</span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6813em;"><span style="top:-3.3634em;"><span class="pstrut" style="height:3em;"></span> ~ 的二进制性质使得距离计算速度极快，尤其受益于英特尔 Ice Lake+ 或 AMD Zen 4+ 处理器上带有专用</span></span></span></span></span></span></span></span> <code translate="no">AVX-512 VPOPCNTDQ</code> 指令的现代 CPU 架构。</p>
 <p><strong>算法增强</strong>：RaBitQ 与<a href="https://www.vldb.org/pvldb/vol9/p288-andre.pdf"><code translate="no">FastScan</code> 方法</a>和<a href="https://github.com/facebookresearch/faiss/wiki/Pre--and-post-processing">随机旋转</a>等成熟技术有效整合，提高了性能。</p>
-<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p><strong>IVF_RABITQ</strong>索引将 IVF 的高效聚类与 RaBitQ 的高级二进制量化相结合：</p>
+<h3 id="IVF-+-RaBitQ" class="common-anchor-header">IVF + RaBitQ</h3><p><strong>IVF_RABITQ</strong>索引将 IVF 的高效聚类与 RaBitQ 先进的二进制量化相结合：</p>
 <ol>
 <li><p><strong>粗过滤</strong>：IVF 将向量空间划分为若干簇，通过聚焦于最相关的簇区域，大大缩小了搜索范围。</p></li>
 <li><p><strong>二进制量化</strong>：在每个簇内，RaBitQ 将向量压缩为二进制表示，同时通过理论保证保留基本的距离关系。</p></li>

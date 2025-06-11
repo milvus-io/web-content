@@ -42,7 +42,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>功能模块嵌入的任何输入字段必须始终包含一个值；如果提供的是空值，模块会出错。</p></li>
-<li><p>Function 模块只处理 Collections Schema 中明确定义的字段；不会生成动态字段的嵌入。</p></li>
+<li><p>Function 模块只处理 Collections Schema 中明确定义的字段；不会为动态字段生成嵌入。</p></li>
 <li><p>要嵌入的输入字段必须是<code translate="no">VARCHAR</code> 类型。</p></li>
 <li><p>Function 模块可将输入字段嵌入到以下地址：</p>
 <ul>
@@ -277,7 +277,7 @@ beta: Milvus 2.6.x
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
 <li><p>一个向量字段，用于存储函数将为标量字段生成的向量嵌入。</p></li>
 </ul>
-<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记要设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
+<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

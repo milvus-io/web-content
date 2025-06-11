@@ -3,7 +3,7 @@ id: gpu-brute-force.md
 title: GPU_BRUTE_FORCE
 summary: >-
   GPU_BRUTE_FORCE 索引專為 GPU
-  環境設計，適用於對精確度要求極高的場景。它透過將每項查詢與資料集中的所有向量進行徹底比較，確保不會忽略任何潛在的匹配，從而保證召回率為 1。利用 GPU
+  環境設計，適用於對精確度要求極高的場景。它透過將每項查詢與資料集中的所有向量進行徹底比較，確保沒有遺漏任何潛在的匹配，從而保證召回率為 1。利用 GPU
   加速，GPU_BRUTE_FORCE 適合要求向量相似性搜尋絕對精確度的應用程式。
 ---
 <h1 id="GPUBRUTEFORCE" class="common-anchor-header">GPU_BRUTE_FORCE<button data-href="#GPUBRUTEFORCE" class="anchor-icon" translate="no">
@@ -57,7 +57,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>:用於計算向量間距離的方法。詳情請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
 <li><p><code translate="no">params</code>:GPU_BRUTE_FORCE 索引不需要額外的參數。</p></li>
 </ul>
-<p>一旦配置好索引參數，您就可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
+<p>索引參數設定完成後，您可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。詳情請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
 <h2 id="Search-on-index" class="common-anchor-header">在索引上搜尋<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

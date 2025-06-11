@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Erfahren Sie mehr über die Systemkonfiguration von Milvus.
 ---
-
 <h1 id="Milvus-System-Configurations-Checklist" class="common-anchor-header">Checkliste für Milvus-Systemkonfigurationen<button data-href="#Milvus-System-Configurations-Checklist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,15 +70,14 @@ In der aktuellen Version werden alle Parameter erst wirksam, nachdem sie beim St
 <p>ssl:</p>
 <pre><code translate="no">enabled: false # whether to enable ssl mode
 
-tlsCert: # path to client's public key (PEM) used for authentication
+tlsCert:  # path to client's public key (PEM) used for authentication
 
-tlsKey: # path to client's private key (PEM) used for authentication
+tlsKey:  # path to client's private key (PEM) used for authentication
 
-tlsCaCert: # file or directory path to CA certificate(s) for verifying the broker's key
+tlsCaCert:  # file or directory path to CA certificate(s) for verifying the broker's key
 
-tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
+tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
-
 <p>readTimeout: 10</p>
 <p>Siehe <a href="/docs/de/v2.5.x/configure_rocksmq.md">rocksmq-bezogene Konfigurationen</a> für eine detaillierte Beschreibung der einzelnen Parameter in diesem Abschnitt.</p>
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>natsmq-Konfiguration.</p>
