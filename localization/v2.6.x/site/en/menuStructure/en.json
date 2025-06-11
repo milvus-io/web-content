@@ -235,6 +235,12 @@
             "children": []
           },
           {
+            "label": "Woodpecker",
+            "id": "woodpecker_architecture.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Knowhere",
             "id": "knowhere.md",
             "order": 5,
@@ -267,59 +273,27 @@
         "children": []
       },
       {
-        "label": "Vector Index",
-        "id": "vector_index",
-        "order": 7,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "In-memory Index",
-            "id": "index.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "On-disk Index",
-            "id": "disk_index.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "GPU Index",
-            "id": "gpu_index.md",
-            "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Scalar Index",
-        "id": "scalar_index.md",
-        "order": 8,
-        "children": []
-      },
-      {
         "label": "Metric Types",
         "id": "metric.md",
-        "order": 9,
+        "order": 7,
         "children": []
       },
       {
         "label": "Consistency Level",
         "id": "tune_consistency.md",
-        "order": 10,
+        "order": 8,
         "children": []
       },
       {
         "label": "In-memory Replica",
         "id": "replica.md",
-        "order": 11,
+        "order": 9,
         "children": []
       },
       {
         "label": "Terminology",
         "id": "glossary.md",
-        "order": 12,
+        "order": 10,
         "children": []
       }
     ]
