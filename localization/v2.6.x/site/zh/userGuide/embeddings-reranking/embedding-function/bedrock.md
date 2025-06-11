@@ -88,7 +88,7 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">access_key_id:</span> <span class="hljs-string">&lt;YOUR_PROD_ACCESS_KEY_ID&gt;</span>    
     <span class="hljs-attr">secret_access_key:</span> <span class="hljs-string">&lt;YOUR_PROD_SECRET_ACCESS_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>将证书放在这里，可以使它们在重启时保持不变，而且只需更改标签就能切换证书。</p></li>
+<p>将证书放在这里，可以使它们在重启时保持不变，并让你只需更改标签就能切换证书。</p></li>
 <li><p><strong>告诉 Milvus 调用服务时使用哪个证书</strong></p>
 <p>在同一文件中，将 Bedrock 提供程序指向你希望它使用的标签。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>

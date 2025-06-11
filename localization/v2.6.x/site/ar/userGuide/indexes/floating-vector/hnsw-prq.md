@@ -67,7 +67,7 @@ summary: >-
 <li><p><strong>(اختياري) تنقيح النتائج:</strong> يمكن تنقيح النتائج الأولية المرشحة للحصول على دقة أفضل، بناءً على المعلمات التالية:</p>
 <ul>
 <li><p><code translate="no">refine</code>: يتحكم فيما إذا كانت خطوة التنقيح هذه مفعلة أم لا. عند ضبطها على <code translate="no">true</code> ، يقوم النظام بإعادة حساب المسافات باستخدام تمثيلات عالية الدقة أو غير مضغوطة.</p></li>
-<li><p><code translate="no">refine_type</code>: يحدد مستوى دقة البيانات المستخدمة أثناء التنقيح (على سبيل المثال، SQ6 أو SQ8 أو BF16). يمكن أن يؤدي الاختيار ذو الدقة الأعلى مثل <code translate="no">FP32</code> إلى نتائج أكثر دقة ولكنه يتطلب المزيد من الذاكرة. يجب أن يتجاوز هذا دقة مجموعة البيانات المضغوطة الأصلية <code translate="no">sq_type</code>.</p></li>
+<li><p><code translate="no">refine_type</code>: يحدد مستوى دقة البيانات المستخدمة أثناء التنقيح (على سبيل المثال، SQ6 أو SQ8 أو BF16). يمكن أن يؤدي اختيار دقة أعلى مثل <code translate="no">FP32</code> إلى نتائج أكثر دقة ولكنه يتطلب المزيد من الذاكرة. يجب أن يتجاوز هذا دقة مجموعة البيانات المضغوطة الأصلية <code translate="no">sq_type</code>.</p></li>
 <li><p><code translate="no">refine_k</code>: يعمل كعامل تكبير. على سبيل المثال، إذا كان أعلى <em>k</em> هو 100 و <code translate="no">refine_k</code> هو 2، فإن النظام يعيد ترتيب أفضل 200 مرشح ويعيد أفضل 100 مرشح، مما يعزز الدقة الإجمالية.</p></li>
 </ul></li>
 </ol>
@@ -87,7 +87,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لإنشاء فهرس <code translate="no">HNSW_PRQ</code> على حقل متجه في ميلفوس، استخدم الطريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> ومعلمات إضافية للفهرس.</p>
+    </button></h2><p>لإنشاء فهرس <code translate="no">HNSW_PRQ</code> على حقل متجه في ميلفوس، استخدم طريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> ومعلمات إضافية للفهرس.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -166,7 +166,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
+    </button></h2><p>يقدم هذا القسم نظرة عامة على المعلمات المستخدمة لبناء فهرس وإجراء عمليات البحث على الفهرس.</p>
 <h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/hnsw-prq.md#Build-index">إنشاء فهرس</a>.</p>
 <table>
    <tr>
@@ -233,7 +233,7 @@ res = MilvusClient.search(
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
      <td><p>يحدد دقة البيانات المستخدمة أثناء عملية التنقيح. يجب أن تكون هذه الدقة أعلى من دقة المتجهات المضغوطة (كما تم تعيينها بواسطة المعلمات <code translate="no">m</code> و <code translate="no">nbits</code> ).</p></td>
-     <td><p><strong>النوع</strong>: سلسلة <strong>النطاق</strong>: [ <code translate="no">SQ6</code> ، <code translate="no">SQ8</code> ، ، <code translate="no">BF16</code> ، <code translate="no">FP16</code> ، <code translate="no">FP32</code> ]</p>
+     <td><p><strong>النوع</strong>: سلسلة <strong>المدى</strong>: [ <code translate="no">SQ6</code> ، <code translate="no">SQ8</code> ، ، <code translate="no">BF16</code> ، <code translate="no">FP16</code> ، <code translate="no">FP32</code> ]</p>
 <p><strong>القيمة الافتراضية</strong>: لا يوجد</p></td>
      <td><p>استخدم <code translate="no">FP32</code> للحصول على أقصى قدر من الدقة بتكلفة ذاكرة أعلى، أو <code translate="no">SQ6</code>/<code translate="no">SQ8</code> للحصول على ضغط أفضل. <code translate="no">BF16</code> و <code translate="no">FP16</code> يقدمان بديلاً متوازنًا.</p></td>
    </tr>
@@ -264,6 +264,6 @@ res = MilvusClient.search(
      <td><p>عامل التكبير الذي يتحكم في عدد المرشحين الإضافيين الذين يتم فحصهم أثناء مرحلة التنقيح (إعادة الترتيب)، بالنسبة لأعلى النتائج K المطلوبة.</p></td>
      <td><p><strong>النوع</strong>: عائم <strong>المدى</strong>: [1, <em>float_max</em>)</p>
 <p><strong>القيمة الافتراضية</strong>: 1</p></td>
-     <td><p>يمكن أن تؤدي القيم الأعلى ل <code translate="no">refine_k</code> إلى تحسين الاستدعاء والدقة ولكنها ستزيد أيضًا من وقت البحث واستخدام الموارد. تعني القيمة 1 أن عملية التنقيح تأخذ في الاعتبار أفضل النتائج الأولية K فقط.</p></td>
+     <td><p>يمكن أن تؤدي القيم الأعلى ل <code translate="no">refine_k</code> إلى تحسين الاستدعاء والدقة ولكنها ستزيد أيضًا من وقت البحث واستخدام الموارد. تعني القيمة 1 أن عملية التنقيح تأخذ بعين الاعتبار أفضل النتائج الأولية K فقط.</p></td>
    </tr>
 </table>

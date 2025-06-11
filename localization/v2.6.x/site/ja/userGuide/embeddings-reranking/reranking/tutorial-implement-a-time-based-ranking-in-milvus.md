@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>多くの検索アプリケーションでは、コンテンツの新鮮さはその関連性と同じくらい重要です。ニュース記事、商品リスト、ソーシャルメディアへの投稿、研究論文などはすべて、意味的な関連性と最新性のバランスをとるランキングシステムから利益を得ています。このチュートリアルでは、Milvusでディケイランカーを使用して時間ベースのランキングを実装する方法を紹介します。</p>
+    </button></h1><p>多くの検索アプリケーションでは、コンテンツの新鮮さはその関連性と同じくらい重要です。ニュース記事、商品リスト、ソーシャルメディアへの投稿、研究論文などはすべて、意味的な関連性と最新性のバランスをとるランキングシステムから利益を得ています。このチュートリアルでは、ディケイランカーを使用してMilvusに時間ベースのランキングを実装する方法を示します。</p>
 <h2 id="Understand-decay-rankers-in-Milvus" class="common-anchor-header">Milvusのディケイランカーを理解する<button data-href="#Understand-decay-rankers-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>ディケイランカーを使用すると、基準点からの相対的な数値（タイムスタンプのような）に基づいてドキュメントをブーストしたりペナルティを与えたりすることができます。時間ベースのランキングでは、意味的な関連性が似ていても、新しい文書が古い文書より高いスコアを得ることができます。</p>
-<p>Milvusは3種類のディケイランカーをサポートしています：</p>
+<p>Milvusは3種類のディケイランカーをサポートしている：</p>
 <ul>
 <li><p><strong>ガウシアン</strong>(<code translate="no">gauss</code>)：滑らかで緩やかな減衰を提供するベル型の曲線。</p></li>
 <li><p><strong>指数</strong>(<code translate="no">exp</code>)：最近のコンテンツを強く強調するために、最初の減衰をよりシャープにします。</p></li>
@@ -617,7 +617,7 @@ print_search_results(linear_results, <span class="hljs-string">&quot;SEARCH RESU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>元の関連性と減衰ファクターを組み合わせることで、最終的なスコアがどのように計算されるかを分解してみましょう：</p>
+    </button></h2><p>元の関連性と減衰要素を組み合わせることで、最終的なスコアがどのように計算されるかを分解してみましょう：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a detailed breakdown for the first 3 results from Gaussian decay</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== SCORE CALCULATION BREAKDOWN (GAUSSIAN DECAY) ===&quot;</span>)
 <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> gaussian_results[<span class="hljs-number">0</span>][:<span class="hljs-number">3</span>]:

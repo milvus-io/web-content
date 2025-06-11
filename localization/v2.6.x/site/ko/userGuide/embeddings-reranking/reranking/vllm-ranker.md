@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
 <li><p>사용자 문제를 관련 솔루션과 일치시켜야 하는 고객 지원 시스템</p></li>
 <li><p>제품 속성과 사용자 의도를 이해해야 하는 이커머스 검색</p></li>
 </ul>
-<p><a href="/docs/ko/tei-ranker.md">TEI Rank</a>er에 비해 vLLM Ranker는 모델 선택 및 사용자 정의에 있어 더 큰 유연성을 제공하므로 추가 구성 옵션이 상당한 이점을 제공하는 전문적이거나 복잡한 검색 애플리케이션에 이상적입니다.</p>
+<p><a href="/docs/ko/tei-ranker.md">TEI Rank</a>er에 비해 vLLM Ranker는 모델 선택 및 사용자 정의에서 더 큰 유연성을 제공하므로 추가 구성 옵션이 상당한 이점을 제공하는 전문적이거나 복잡한 검색 애플리케이션에 이상적입니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

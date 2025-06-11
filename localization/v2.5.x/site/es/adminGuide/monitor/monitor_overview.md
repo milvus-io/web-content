@@ -1,12 +1,11 @@
 ---
 id: monitor_overview.md
 title: Resumen del monitor
-related_key: "monitor, alert"
+related_key: 'monitor, alert'
 summary: >-
   Descubra cómo se utilizan Prometheus y Grafana en Milvus para los servicios de
   supervisión y alerta.
 ---
-
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Visión general del marco de supervisión de Milvus<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,8 +44,8 @@ summary: >-
 <li>Prometheus operator para gestionar eficazmente las instancias de supervisión de Prometheus.</li>
 <li>Kube-prometheus para proporcionar una monitorización de clústeres Kubernetes de extremo a extremo fácil de operar.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">Nombres de métricas</h3><p>Un nombre de métrica válido en Prometheus contiene tres elementos: espacio de nombres, subsistema y nombre. Estos tres elementos están conectados con &quot;_&quot;.</p>
-<p>El espacio de nombres de las métricas de Milvus supervisadas por Prometheus es &quot;milvus&quot;. Dependiendo del rol al que pertenezca una métrica, su subsistema debe ser uno de los ocho roles siguientes: &quot;rootcoord&quot;, &quot;proxy&quot;, &quot;querycoord&quot;, &quot;querynode&quot;, &quot;indexcoord&quot;, &quot;indexnode&quot;, &quot;datacoord&quot;, &quot;datanode&quot;.</p>
+<h3 id="Metric-names" class="common-anchor-header">Nombres de métricas</h3><p>Un nombre de métrica válido en Prometheus contiene tres elementos: espacio de nombres, subsistema y nombre. Estos tres elementos están conectados con "_".</p>
+<p>El espacio de nombres de las métricas de Milvus supervisadas por Prometheus es "milvus". Dependiendo del rol al que pertenezca una métrica, su subsistema debe ser uno de los ocho roles siguientes: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
 <p>Por ejemplo, la métrica Milvus que calcula el número total de vectores consultados se denomina <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
 <h3 id="Metric-types" class="common-anchor-header">Tipos de métricas</h3><p>Prometheus admite cuatro tipos de métricas:</p>
 <ul>
@@ -62,16 +61,16 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>"node_id"</td><td>La identidad única de un rol.</td><td>Un ID único global generado por milvus.</td></tr>
-<tr><td>"status"</td><td>El estado de una operación o solicitud procesada.</td><td>&quot;abandono&quot;, &quot;éxito&quot; o &quot;fallo&quot;.</td></tr>
-<tr><td>"tipo_consulta"</td><td>El tipo de una solicitud de lectura.</td><td>&quot;search&quot; o &quot;query&quot;.</td></tr>
-<tr><td>"msg_type"</td><td>El tipo de mensajes.</td><td>&quot;insert&quot;, &quot;delete&quot;, &quot;search&quot; o &quot;query&quot;.</td></tr>
-<tr><td>"segment_state"</td><td>El estado de un segmento.</td><td>&quot;Sealed&quot;, &quot;Growing&quot;, &quot;Flushed&quot;, &quot;Flushing&quot;, &quot;Dropped&quot; o &quot;Importing&quot;.</td></tr>
-<tr><td>"cache_state"</td><td>Estado de un objeto almacenado en caché.</td><td>&quot;Acierto&quot; o &quot;fallo&quot;.</td></tr>
-<tr><td>"cache_name"</td><td>El nombre de un objeto almacenado en caché. Esta etiqueta se utiliza junto con la etiqueta &quot;cache_state&quot;.</td><td>Por ejemplo, &quot;CollectionID&quot;, &quot;Schema&quot;, etc.</td></tr>
-<tr><td>&quot;nombre_canal&quot;</td><td>Temas físicos en el almacenamiento de mensajes (Pulsar o Kafka).</td><td>Por ejemplo, &quot;by-dev-rootcoord-dml_0&quot;, &quot;by-dev-rootcoord-dml_255&quot;, etc.</td></tr>
-<tr><td>"nombre_función"</td><td>El nombre de una función que gestiona determinadas peticiones.</td><td>Por ejemplo, &quot;CreateCollection&quot;, &quot;CreatePartition&quot;, &quot;CreateIndex&quot;, etc.</td></tr>
+<tr><td>"status"</td><td>El estado de una operación o solicitud procesada.</td><td>"abandono", "éxito" o "fallo".</td></tr>
+<tr><td>"tipo_consulta"</td><td>El tipo de una solicitud de lectura.</td><td>"search" o "query".</td></tr>
+<tr><td>"msg_type"</td><td>El tipo de mensajes.</td><td>"insert", "delete", "search" o "query".</td></tr>
+<tr><td>"segment_state"</td><td>El estado de un segmento.</td><td>"Sealed", "Growing", "Flushed", "Flushing", "Dropped" o "Importing".</td></tr>
+<tr><td>"cache_state"</td><td>Estado de un objeto almacenado en caché.</td><td>"Acierto" o "fallo".</td></tr>
+<tr><td>"cache_name"</td><td>El nombre de un objeto almacenado en caché. Esta etiqueta se utiliza junto con la etiqueta "cache_state".</td><td>Por ejemplo, "CollectionID", "Schema", etc.</td></tr>
+<tr><td>"nombre_canal"</td><td>Temas físicos en el almacenamiento de mensajes (Pulsar o Kafka).</td><td>Por ejemplo, "by-dev-rootcoord-dml_0", "by-dev-rootcoord-dml_255", etc.</td></tr>
+<tr><td>"nombre_función"</td><td>El nombre de una función que gestiona determinadas peticiones.</td><td>Por ejemplo, "CreateCollection", "CreatePartition", "CreateIndex", etc.</td></tr>
 <tr><td>"nombre_usuario"</td><td>El nombre de usuario utilizado para la autenticación.</td><td>Un nombre de usuario de su preferencia.</td></tr>
-<tr><td>"estado_tarea_índice"</td><td>El estado de una tarea de índice en metaalmacenamiento.</td><td>&quot;no emitida&quot;, &quot;en curso&quot;, &quot;fallida&quot;, &quot;finalizada&quot; o &quot;reciclada&quot;.</td></tr>
+<tr><td>"estado_tarea_índice"</td><td>El estado de una tarea de índice en metaalmacenamiento.</td><td>"no emitida", "en curso", "fallida", "finalizada" o "reciclada".</td></tr>
 </tbody>
 </table>
 <h2 id="Grafana-in-Milvus" class="common-anchor-header">Grafana en Milvus<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">

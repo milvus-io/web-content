@@ -4,7 +4,6 @@ related_key: scalar_index
 summary: Milvusのスカラー指数。
 title: スカラーインデックス
 ---
-
 <h1 id="Scalar-Index" class="common-anchor-header">スカラーインデックス<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +41,7 @@ title: スカラーインデックス
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>セグメント内の属性フィルタリング</span> </span></p>
-<p>スカラーフィールドインデックスは、スカラーフィールドの値を特定の方法で並べ替えることで、属性フィルタリングの速度を確保し、情報検索を高速化する方法である。</p>
+<p>スカラー・フィールド・インデックスとは、スカラー・フィールドの値を特定の方法で並べ替えることで、属性フィルタリングの速度を確保し、情報検索を高速化する方法である。</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">スカラー・フィールド・インデックスのアルゴリズム<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

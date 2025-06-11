@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>منصة للتجارة الإلكترونية تعزز المنتجات الشائعة حتى عندما تكون أقل تشابهًا مع استعلام البحث</p></li>
 </ul>
 <p>تشترك جميع هذه السيناريوهات في حاجة مشتركة: موازنة التشابه المتجه مع عوامل رقمية أخرى مثل الوقت أو المسافة أو الشعبية.</p>
-<p>تعالج مصنفات التضاؤل في Milvus هذه الحاجة من خلال تعديل تصنيفات البحث بناءً على قيم الحقول الرقمية. فهي تسمح لك بموازنة تشابه المتجهات مع "الحداثة" أو "القرب" أو الخصائص الرقمية الأخرى لبياناتك، مما يخلق تجارب بحث أكثر سهولة وملاءمة للسياق.</p>
+<p>تلبي مصنفات التضاؤل في Milvus هذه الحاجة من خلال تعديل تصنيفات البحث بناءً على قيم الحقول الرقمية. فهي تسمح لك بموازنة تشابه المتجهات مع "الحداثة" أو "القرب" أو الخصائص الرقمية الأخرى لبياناتك، مما يخلق تجارب بحث أكثر سهولة وملاءمة للسياق.</p>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +177,7 @@ beta: Milvus 2.6.x
 <li><p>التطبيقات التي يكون لدى المستخدمين فيها إحساس بديهي بالمسافة</p></li>
 <li><p>عندما لا ينبغي أن تؤدي المسافة المعتدلة إلى معاقبة النتائج بشدة</p></li>
 </ul></td>
-     <td><p>في بحث عن مطعم، تظل الأماكن ذات الجودة العالية التي تبعد 3 كم قابلة للاكتشاف، على الرغم من أنها تحتل مرتبة أقل من الخيارات القريبة</p></td>
+     <td><p>في البحث عن مطعم، تظل الأماكن ذات الجودة العالية التي تبعد 3 كم قابلة للاكتشاف، على الرغم من أنها تحتل مرتبة أقل من الخيارات القريبة</p></td>
    </tr>
    <tr>
      <td><p>أسي (<code translate="no">exp</code>)</p></td>
@@ -225,7 +225,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>قبل استخدام دوال التضاؤل، يجب عليك أولاً إنشاء مجموعة تحتوي على حقول رقمية مناسبة (مثل الطوابع الزمنية والمسافات وغيرها) والتي سيتم استخدامها لحسابات التضاؤل. للحصول على أمثلة عملية كاملة بما في ذلك إعداد المجموعة وتعريف المخطط وإدراج البيانات، راجع <a href="/docs/ar/tutorial-implement-a-time-based-ranking-in-milvus.md">البرنامج التعليمي: تنفيذ الترتيب المستند إلى الوقت في ميلفوس</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">إنشاء مصنف اضمحلال</h3><p>لتنفيذ تصنيف الاضمحلال، قم أولاً بتعريف كائن <code translate="no">Function</code> بالتكوين المناسب:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">إنشاء مصنف اضمحلال</h3><p>لتنفيذ تصنيف التضاؤل، قم أولاً بتعريف كائن <code translate="no">Function</code> بالتكوين المناسب:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
@@ -266,7 +266,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>تحديد نوع الدالة التي يتم إنشاؤها. يجب تعيينها على <code translate="no">RERANK</code> لجميع مرتبات التضاؤل.</p></td>
+     <td><p>يحدد نوع الدالة التي يتم إنشاؤها. يجب تعيينها على <code translate="no">RERANK</code> لجميع مرتبات التضاؤل.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
@@ -327,7 +327,7 @@ results = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تنطبق على البحث الهجين</h3><p>يمكن أيضًا تطبيق مصنفات الاضمحلال على عمليات البحث الهجين التي تجمع بين حقول متجهات متعددة:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تنطبق على البحث الهجين</h3><p>يمكن أيضًا تطبيق مصنفات التضاؤل على عمليات البحث الهجين التي تجمع بين حقول متجهات متعددة:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>

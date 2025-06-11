@@ -9,8 +9,8 @@ summary: >-
   memperkenalkan langkah kuantisasi residu (RQ) untuk menangkap informasi
   tambahan, sehingga menghasilkan akurasi yang lebih tinggi atau indeks yang
   lebih ringkas dibandingkan dengan metode berbasis PQ murni. Namun, langkah
-  tambahan ini dapat menyebabkan overhead komputasi yang lebih tinggi selama
-  pembuatan indeks dan pencarian.
+  tambahan tersebut dapat menyebabkan overhead komputasi yang lebih tinggi
+  selama pembuatan indeks dan pencarian.
 ---
 <h1 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ<button data-href="#HNSWPRQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -27,7 +27,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_PRQ</strong> memanfaatkan grafik Hierarchical Navigable Small World (HNSW) dengan Product Residual Quantization (PRQ), menawarkan metode pengindeksan vektor tingkat lanjut yang memungkinkan Anda untuk menyelaraskan antara ukuran indeks dan akurasi. PRQ melampaui Kuantisasi Produk (PQ) tradisional dengan memperkenalkan langkah kuantisasi residu (RQ) untuk menangkap informasi tambahan, sehingga menghasilkan akurasi yang lebih tinggi atau indeks yang lebih ringkas dibandingkan dengan metode berbasis PQ murni. Namun, langkah tambahan ini dapat menyebabkan overhead komputasi yang lebih tinggi selama pembuatan dan pencarian indeks.</p>
+    </button></h1><p><strong>HNSW_PRQ</strong> memanfaatkan grafik Hierarchical Navigable Small World (HNSW) dengan Product Residual Quantization (PRQ), menawarkan metode pengindeksan vektor tingkat lanjut yang memungkinkan Anda untuk menyesuaikan secara tepat antara ukuran dan akurasi indeks. PRQ melampaui Kuantisasi Produk (PQ) tradisional dengan memperkenalkan langkah kuantisasi residu (RQ) untuk menangkap informasi tambahan, sehingga menghasilkan akurasi yang lebih tinggi atau indeks yang lebih ringkas dibandingkan dengan metode berbasis PQ murni. Namun, langkah tambahan ini dapat menyebabkan overhead komputasi yang lebih tinggi selama pembuatan dan pencarian indeks.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,7 +229,7 @@ res = MilvusClient.search(
      <td><p>Bendera boolean yang mengontrol apakah langkah penyempurnaan diterapkan selama pencarian. Refinement melibatkan pemeringkatan ulang hasil awal dengan menghitung jarak yang tepat antara vektor kueri dan kandidat.</p></td>
      <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Boolean: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
 <p><strong>Nilai default</strong>: <code translate="no">false</code></p></td>
-     <td><p>Setel ke <code translate="no">true</code> jika akurasi tinggi sangat penting dan Anda dapat mentoleransi waktu pencarian yang sedikit lebih lambat. Gunakan <code translate="no">false</code> jika kecepatan adalah prioritas dan kompromi kecil dalam akurasi dapat diterima.</p></td>
+     <td><p>Setel ke <code translate="no">true</code> jika akurasi tinggi sangat penting dan Anda dapat mentolerir waktu pencarian yang sedikit lebih lambat. Gunakan <code translate="no">false</code> jika kecepatan adalah prioritas dan kompromi kecil dalam akurasi dapat diterima.</p></td>
    </tr>
    <tr>
      <td></td>

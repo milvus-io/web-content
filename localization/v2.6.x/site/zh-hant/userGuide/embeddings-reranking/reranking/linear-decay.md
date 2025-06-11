@@ -3,7 +3,7 @@ id: linear-decay.md
 title: 線性衰減Compatible with Milvus 2.6.x
 summary: >-
   線性衰減 (Linear Decutation)
-  會在搜尋結果中產生直線下降，並以絕對零點為終點。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束為止，線性遞減會隨著項目離開您的理想點而穩定地降低相關性，直到它們完全消失為止。當您想要一致的衰減率且有明確的分界線時，這種方法是最理想的選擇，可確保超出特定界線的項目完全被排除在結果之外。
+  會在搜尋結果中創造一個直線下降，終點為絕對的零點。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束為止，線性遞減會隨著項目離開您的理想點而穩定地降低相關性，直到它們完全消失為止。當您想要一致的衰減率且有明確的分界線時，這種方法是最理想的選擇，可確保超過某個界限的項目完全被排除在結果之外。
 beta: Milvus 2.6.x
 ---
 <h1 id="Linear-Decay" class="common-anchor-header">線性衰減<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Linear-Decay" class="anchor-icon" translate="no">
@@ -68,7 +68,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>限制年齡的內容</p></td>
      <td><p>約會平台、媒體服務</p></td>
-     <td><p>建立確實的年齡門檻</p></td>
+     <td><p>建立確定的年齡門檻</p></td>
    </tr>
 </table>
 <p>在下列情況下選擇線性衰減</p>
@@ -106,7 +106,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (10 天)：相關性下降到衰減值的時間段 - 距離 10 天的事件，其相關性分數會減半 (0.5)。</p></li>
 </ul>
 <p>從直線曲線可以看出，距離約 16 天以上的事件相關性完全為零，完全不會出現在搜尋結果中。這創造了一個明確的界限，確保使用者只能在定義的時間視窗內看到相關的即將發生事件。</p>
-<p>此行為反映了活動規劃的典型運作方式 - 近期的活動最為相關，未來幾週內的活動重要性遞減，而太遠的未來活動 (或已過去的活動) 則完全不該出現。</p>
+<p>此行為反映了活動規劃的典型運作方式 - 近期的活動最為相關，未來幾週內的活動重要性遞減，而太遠的未來活動 (或已過去的活動) 則完全不應該出現。</p>
 <h2 id="Formula" class="common-anchor-header">計算公式<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,7 +154,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>在使用衰減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於衰減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker Tutorial</a>。</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>在您的資料集中設定了數值欄位 (在本範例中，<code translate="no">event_date</code> ，即從現在開始的秒數)，請建立線性衰減排名器：</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>在您的資料集中設定了數值欄位 (在本範例中，<code translate="no">event_date</code> ，即從現在開始的秒數)，請建立一個線性衰減排名器：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> time
 

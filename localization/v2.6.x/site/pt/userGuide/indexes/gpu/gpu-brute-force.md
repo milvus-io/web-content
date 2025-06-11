@@ -4,7 +4,7 @@ title: GPU_BRUTE_FORCE
 summary: >-
   Dedicado a ambientes de GPU, o índice GPU_BRUTE_FORCE foi concebido para
   cenários em que é essencial uma precisão sem compromissos. Garante uma
-  recuperação de 1, comparando exaustivamente cada consulta com todos os
+  recuperação de 1 ao comparar exaustivamente cada consulta com todos os
   vectores do conjunto de dados, assegurando que nenhuma correspondência
   potencial é ignorada. Aproveitando a aceleração da GPU, o GPU_BRUTE_FORCE é
   adequado para aplicações que exigem precisão absoluta em pesquisas de

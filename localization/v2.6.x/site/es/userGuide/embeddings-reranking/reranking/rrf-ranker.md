@@ -5,11 +5,11 @@ summary: >-
   Reciprocal Rank Fusion (RRF) Ranker es una estrategia de reordenación para la
   búsqueda híbrida Milvus que equilibra los resultados de múltiples rutas de
   búsqueda vectorial basándose en sus posiciones de clasificación en lugar de en
-  sus puntuaciones de similitud brutas. Al igual que un torneo deportivo en el
-  que se tienen en cuenta las clasificaciones de los jugadores en lugar de las
-  estadísticas individuales, el RRF Ranker combina los resultados de la búsqueda
-  en función de la posición que ocupa cada elemento en las distintas rutas de
-  búsqueda, creando una clasificación final justa y equilibrada.
+  sus puntuaciones de similitud brutas. Al igual que en un torneo deportivo en
+  el que se tienen en cuenta las clasificaciones de los jugadores en lugar de
+  las estadísticas individuales, el RRF Ranker combina los resultados de la
+  búsqueda en función de la posición que ocupa cada elemento en las distintas
+  rutas de búsqueda, creando una clasificación final justa y equilibrada.
 ---
 <h1 id="RRF-Ranker" class="common-anchor-header">Clasificador RRF<button data-href="#RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"

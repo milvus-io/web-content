@@ -3,10 +3,10 @@ id: add-fields-to-an-existing-collection.md
 title: Felder zu einer bestehenden Sammlung hinzufügenCompatible with Milvus 2.6.x
 summary: >-
   Mit Milvus können Sie dynamisch neue Felder zu bestehenden Sammlungen
-  hinzufügen, so dass Sie Ihr Datenschema leicht weiterentwickeln können, wenn
-  sich Ihre Anwendungsanforderungen ändern. Dieser Leitfaden zeigt Ihnen anhand
-  von praktischen Beispielen, wie Sie Felder in verschiedenen Szenarien
-  hinzufügen können.
+  hinzufügen und so Ihr Datenschema leicht weiterentwickeln, wenn sich Ihre
+  Anwendungsanforderungen ändern. Dieser Leitfaden zeigt Ihnen anhand von
+  praktischen Beispielen, wie Sie Felder in verschiedenen Szenarien hinzufügen
+  können.
 beta: Milvus 2.6.x
 ---
 <h1 id="Add-Fields-to-an-Existing-Collection" class="common-anchor-header">Felder zu einer bestehenden Sammlung hinzufügen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-Fields-to-an-Existing-Collection" class="anchor-icon" translate="no">

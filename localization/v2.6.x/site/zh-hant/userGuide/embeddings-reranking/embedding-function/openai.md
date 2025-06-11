@@ -62,7 +62,7 @@ beta: Milvus 2.6.x
      <td><p>前一代模型適合傳統管道或需要向後相容性的情況。</p></td>
    </tr>
 </table>
-<p>第三代嵌入模型<strong>(text-embedding-3</strong>) 支援透過<code translate="no">dim</code> 參數減少嵌入的大小。從運算、記憶體和儲存的角度來看，較大的嵌入通常較昂貴。能夠調整維度的數量，就能更有效地控制整體成本和效能。有關每個模型的詳細資訊，請參閱<a href="https://platform.openai.com/docs/guides/embeddings#embedding-models">嵌入模型</a>與<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI 公告部落格文章</a>。</p>
+<p>第三代嵌入模型<strong>(text-embedding-3</strong>) 支援透過<code translate="no">dim</code> 參數減少嵌入的大小。一般而言，從運算、記憶體和儲存的角度來看，較大的嵌入會比較昂貴。能夠調整維度的數量，可以更有效地控制整體成本和效能。有關每個模型的詳細資訊，請參閱<a href="https://platform.openai.com/docs/guides/embeddings#embedding-models">嵌入模型</a>與<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI 公告部落格文章</a>。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">配置憑證<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

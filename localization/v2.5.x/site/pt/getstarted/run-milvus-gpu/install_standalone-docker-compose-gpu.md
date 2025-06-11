@@ -41,7 +41,7 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
 <li><a href="/docs/pt/v2.5.x/prerequisite-gpu.md">Verifique os requisitos de hardware e software</a> antes da instalação.</li>
 </ul>
 <div class="alert note">
-<p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e fornecer-lhe-emos o apoio necessário.</p>
+<p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos fornecer-lhe o suporte necessário.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar o Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
 <ul>
 <li>Para atribuir um dispositivo GPU específico ao Milvus, localize o campo <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> na definição do serviço <code translate="no">standalone</code> e substitua o seu valor pelo ID da GPU pretendida. É possível utilizar a ferramenta <code translate="no">nvidia-smi</code>, incluída nos controladores de visualização da GPU NVIDIA, para determinar a ID de um dispositivo GPU. O Milvus suporta múltiplos dispositivos GPU.</li>
 </ul>
-<p>Atribua um único dispositivo GPU ao Milvus:</p>
+<p>Atribuir um único dispositivo GPU ao Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-string">...</span>
@@ -155,7 +155,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 </div>
 <p>Para configurar o pool de memória, modifique as definições <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> no ficheiro <code translate="no">milvus.yaml</code> da seguinte forma.</p>
 <ol>
-<li><p>Utilize o seguinte comando para copiar <code translate="no">milvus.yaml</code> do contentor Milvus para a sua máquina local. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID real do contentor Milvus.</p>
+<li><p>Utilize o seguinte comando para copiar <code translate="no">milvus.yaml</code> do contentor Milvus para a sua máquina local. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID de contentor Milvus atual.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Abra o ficheiro <code translate="no">milvus.yaml</code> copiado com o seu editor de texto preferido. Por exemplo, usando o vim:</p>
@@ -170,7 +170,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><code translate="no">initMemSize</code>: Initial size of the memory pool. A predefinição é 1024.</li>
-<li><code translate="no">maxMemSize</code>: Tamanho máximo do conjunto de memória. O padrão é 2048.</li>
+<li><code translate="no">maxMemSize</code>: Tamanho máximo do conjunto de memória. A predefinição é 2048.</li>
 </ul></li>
 <li><p>Utilize o seguinte comando para copiar o ficheiro <code translate="no">milvus.yaml</code> modificado de volta para o contentor Milvus. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID real do contentor Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml

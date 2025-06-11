@@ -2,7 +2,7 @@
 id: add-fields-to-an-existing-collection.md
 title: 向现有 Collections 添加字段Compatible with Milvus 2.6.x
 summary: >-
-  Milvus 允许你在现有的 Collections 中动态添加新字段，使你可以根据应用需求的变化，轻松地发展你的数据
+  Milvus 允许您在现有的 Collections 中动态添加新字段，使您可以根据应用需求的变化，轻松发展数据
   Schema。本指南通过实际示例向你展示如何在不同情况下添加字段。
 beta: Milvus 2.6.x
 ---

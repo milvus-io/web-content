@@ -44,7 +44,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>在設定 Milvus 與 Vertex AI 功能之前，您需要設定您的 Milvus 實例使用您的 Google Cloud 服務帳號憑證。Milvus 支援兩種主要的部署方式：</p>
-<h3 id="Standard-deployment-Docker-Compose" class="common-anchor-header">標準部署 (Docker Compose)</h3><p>在您的 docker-compose.yaml 檔案中，您需要掛載憑證檔案並設定<code translate="no">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</code> 環境變數。</p>
+<h3 id="Standard-deployment-Docker-Compose" class="common-anchor-header">標準部署 (Docker Compose)</h3><p>在您的 docker-compose.yaml 檔案中，您需要掛載憑證檔案，並設定<code translate="no">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</code> 環境變數。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -105,7 +105,7 @@ beta: Milvus 2.6.x
 <li><p><strong>環境變數</strong>- 最低優先順序</p></li>
 </ul>
 <p><strong>Milvus 配置檔案 (milvus.yaml)</strong></p>
-<p>對於持久性、群集範圍的設定，憑證 json 資料可以 base64 格式編碼，然後在 milvus.yaml 檔案中定義。<code translate="no">cat credentials.json|jq .|base64</code>替換<code translate="no">credentials.json</code> 到您的憑證檔案路徑</p>
+<p>對於持久性、群集範圍的設定，憑證 json 資料可以 base64 格式編碼，然後在 milvus.yaml 檔案中定義。<code translate="no">cat credentials.json|jq .|base64</code>將<code translate="no">credentials.json</code> 替換為您的憑證檔案路徑</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">credential:</span>
   <span class="hljs-attr">gcp1:</span>
     <span class="hljs-attr">credential_json:</span>  <span class="hljs-comment"># base64 based gcp credential data</span>
@@ -151,7 +151,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vertex AI 配置完成後，請遵循下列步驟定義並使用嵌入函式。</p>
+    </button></h2><p>Vertex AI 配置完成後，請遵循以下步驟定義並使用嵌入函式。</p>
 <h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步驟 1：定義模式欄位</h3><p>若要使用嵌入函式，請建立具有特定模式的集合。此模式必須包含至少三個必要欄位：</p>
 <ul>
 <li><p>唯一識別集合中每個實體的主要欄位。</p></li>
@@ -172,7 +172,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：新增嵌入函式至模式</h3><p>Milvus 的函式模組會自動將儲存於標量欄位的原始資料轉換成嵌入資料，並將它們儲存到明確定義的向量欄位。</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：新增嵌入函式至模式</h3><p>Milvus 的 Function 模組會自動將儲存於標量欄位的原始資料轉換成嵌入資料，並將它們儲存到明確定義的向量欄位。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;vert_func&quot;</span>,                           <span class="hljs-comment"># Unique identifier for this embedding function</span>

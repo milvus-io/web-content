@@ -171,7 +171,7 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Указывает, какой путь JSON индексировать. Можно указать вложенные ключи, позиции массива или и то, и другое (например, <code translate="no">metadata["product_info"]["category"]</code> или <code translate="no">metadata["tags"][0]</code>). Если путь отсутствует или элемент массива не существует для определенной строки, эта строка просто пропускается при индексировании, и ошибка не возникает.</p></td>
+     <td><p>Указывает, какой путь JSON индексировать. Можно указать вложенные ключи, позиции массива или и то, и другое (например, <code translate="no">metadata["product_info"]["category"]</code> или <code translate="no">metadata["tags"][0]</code>). Если путь отсутствует или элемент массива не существует для конкретного ряда, этот ряд просто пропускается при индексировании, и ошибка не возникает.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>

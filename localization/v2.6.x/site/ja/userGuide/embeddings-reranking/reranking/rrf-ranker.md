@@ -334,7 +334,7 @@ ranker = Function(
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索への適用</h3><p>RRF Rankerは、複数のベクトル場を組み合わせたハイブリッド検索操作に特化して設計されています。ハイブリッド検索での使い方を紹介しよう：</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索への適用</h3><p>RRF Rankerは複数のベクトル場を組み合わせたハイブリッド検索操作に特化して設計されています。ハイブリッド検索での使い方を紹介しよう：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, AnnSearchRequest

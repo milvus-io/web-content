@@ -96,7 +96,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>딱따구리 메모리 모드 배포</span> </span></p>
 <h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">쿼럼버퍼 - 짧은 지연 시간, 높은 내구성을 위해 최적화됨</h3><p>쿼럼버퍼 모드는 실시간 응답성과 강력한 내결함성이 모두 필요한 지연 시간에 민감하고 빈도가 높은 읽기/쓰기 워크로드를 위해 설계되었습니다. 이 모드에서 딱따구리는 3복제 쿼럼 쓰기를 통해 고속 쓰기 버퍼로 작동하여 강력한 일관성과 고가용성을 보장합니다.</p>
-<p>쓰기 작업은 3개 노드 중 2개 이상에 복제되면 성공한 것으로 간주되며, 일반적으로 한 자릿수 밀리초 이내에 완료되고 그 후에는 장기적인 내구성을 위해 데이터가 클라우드 오브젝트 스토리지로 비동기적으로 플러시됩니다. 이 아키텍처는 온노드 상태를 최소화하고, 대용량 로컬 디스크 볼륨이 필요하지 않으며, 기존 쿼럼 기반 시스템에서 종종 필요한 복잡한 엔트로피 방지 복구 작업을 피할 수 있습니다.</p>
+<p>쓰기 작업은 3개 노드 중 2개 이상에 복제되면 성공한 것으로 간주되며, 일반적으로 한 자릿수 밀리초 이내에 완료되고 그 후에는 장기적인 내구성을 위해 데이터가 클라우드 오브젝트 스토리지에 비동기적으로 플러시됩니다. 이 아키텍처는 온노드 상태를 최소화하고, 대용량 로컬 디스크 볼륨이 필요하지 않으며, 기존 쿼럼 기반 시스템에서 종종 필요한 복잡한 엔트로피 방지 복구 작업을 피할 수 있습니다.</p>
 <p>그 결과 일관성, 가용성, 빠른 복구가 필수적인 미션 크리티컬 프로덕션 환경에 이상적인 간소화되고 강력한 WAL 계층을 구축할 수 있습니다.</p>
 <p>
   

@@ -7,7 +7,6 @@ summary: >-
   comprender la compactación por clústeres y cómo esta función puede mejorar el
   rendimiento de la búsqueda.
 ---
-
 <h1 id="Clustering-Compaction" class="common-anchor-header">Compactación en clústeres<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,16 +79,15 @@ summary: >-
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
 
 <span class="hljs-attr">datanode:</span>
-<span class="hljs-attr">clusteringCompaction:</span>
-<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
-<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+  <span class="hljs-attr">clusteringCompaction:</span>
+    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
+    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
-
 <table>
    <tr>
      <th><p>Configurar Elemento</p></th>
@@ -174,8 +172,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -185,11 +183,10 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-schema=schema
+    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+    schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -290,10 +287,9 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-job_id=job_id,
+    job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;
@@ -407,7 +403,7 @@ System.out.println(stateResp.getState());
      <td><p>431.41</p></td>
    </tr>
 </table>
-<p>A medida que se reduce el rango de búsqueda en los filtros de búsqueda, aumenta el porcentaje de exclusión. Esto significa que se omiten más entidades durante el proceso de búsqueda. Si se comparan las estadísticas de la primera y la última fila, se observa que las búsquedas sin compactación por agrupación requieren escanear toda la colección. Por otro lado, las búsquedas con compactación por agrupación utilizando una clave específica pueden lograr una mejora de hasta 25 veces.</p>
+<p>A medida que se reduce el ámbito de búsqueda en los filtros de búsqueda, aumenta el porcentaje de exclusión. Esto significa que se omiten más entidades durante el proceso de búsqueda. Si se comparan las estadísticas de la primera y la última fila, se observa que las búsquedas sin compactación por agrupación requieren escanear toda la colección. Por otro lado, las búsquedas con compactación de agrupación utilizando una clave específica pueden lograr una mejora de hasta 25 veces.</p>
 <h2 id="Best-Practices" class="common-anchor-header">Buenas prácticas<button data-href="#Best-Practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -430,6 +426,6 @@ System.out.println(stateResp.getState());
 <li><p>Elija una clave de agrupación adecuada.</p>
 <p>Puede utilizar campos escalares empleados habitualmente como condiciones de filtrado como clave de agrupación. Para una colección que contiene datos de varios inquilinos, puede utilizar el campo que distingue a un inquilino de otro como clave de agrupación.</p></li>
 <li><p>Utilice la clave de partición como clave de agrupación.</p>
-<p>Puede configurar <code translate="no">common.usePartitionKeyAsClusteringKey</code> en <code translate="no">true</code> si desea habilitar esta función para todas las colecciones en su instancia de Milvus o si todavía tiene problemas de rendimiento en una colección grande con una clave de partición. Al hacerlo, tendrá una clave de agrupación y una clave de partición cuando elija un campo escalar en una colección como clave de partición.</p>
+<p>Puede configurar <code translate="no">common.usePartitionKeyAsClusteringKey</code> en <code translate="no">true</code> si desea habilitar esta función para todas las colecciones en su instancia de Milvus o si aún tiene problemas de rendimiento en una colección grande con una clave de partición. Al hacerlo, tendrá una clave de agrupación y una clave de partición cuando elija un campo escalar en una colección como clave de partición.</p>
 <p>Tenga en cuenta que esta configuración no le impide elegir otro campo escalar como clave de agrupación. La clave de agrupación designada explícitamente siempre tiene prioridad.</p></li>
 </ul>

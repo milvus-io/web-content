@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Imparare a conoscere la configurazione del sistema di Milvus.
 ---
-
 <h1 id="Milvus-System-Configurations-Checklist" class="common-anchor-header">Lista di controllo delle configurazioni del sistema Milvus<button data-href="#Milvus-System-Configurations-Checklist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,15 +70,14 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo essere stati c
 <p>ssl:</p>
 <pre><code translate="no">enabled: false # whether to enable ssl mode
 
-tlsCert: # path to client's public key (PEM) used for authentication
+tlsCert:  # path to client's public key (PEM) used for authentication
 
-tlsKey: # path to client's private key (PEM) used for authentication
+tlsKey:  # path to client's private key (PEM) used for authentication
 
-tlsCaCert: # file or directory path to CA certificate(s) for verifying the broker's key
+tlsCaCert:  # file or directory path to CA certificate(s) for verifying the broker's key
 
-tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
+tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
-
 <p>readTimeout: 10</p>
 <p>Vedere <a href="/docs/it/v2.5.x/configure_rocksmq.md">Configurazioni relative a rocksmq per</a> una descrizione dettagliata di ogni parametro in questa sezione.</p>
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>configurazione natsmq.</p>
@@ -130,9 +128,9 @@ tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_s
 <p>#se initMemSize e MaxMemSize sono entrambi impostati a zero,</p>
 <p>#milvus inizializzerà automaticamente metà della memoria disponibile della GPU,</p>
 <p>#maxMemSize sarà l'intera memoria disponibile della GPU.</p>
-<p>Vedere <a href="/docs/it/v2.5.x/configure_gpu.md">Configurazioni relative alla GPU per</a> una descrizione dettagliata di ogni parametro in questa sezione.</p>
+<p>Vedere <a href="/docs/it/v2.5.x/configure_gpu.md">Configurazioni relative alla gpu per</a> una descrizione dettagliata di ogni parametro in questa sezione.</p>
 <h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Qualsiasi configurazione relativa al server del nodo di streaming.</p>
-<p>Vedere <a href="/docs/it/v2.5.x/configure_streamingnode.md">Configurazioni relative a streamingNode</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
+<p>Per una descrizione dettagliata di ogni parametro di questa sezione, vedere <a href="/docs/it/v2.5.x/configure_streamingnode.md">Configurazioni relative a streamingNode</a>.</p>
 <h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Qualsiasi configurazione relativa al servizio di streaming.</p>
 <p>Vedere <a href="/docs/it/v2.5.x/configure_streaming.md">Configurazioni relative allo streaming</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
 <h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Qualsiasi configurazione relativa al motore di ricerca vettoriale knowhere.</p>

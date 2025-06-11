@@ -83,11 +83,11 @@ beta: Milvus 2.6.x
 <li><p><strong>配置文件（推荐）：</strong>将 API 密钥存储在<code translate="no">milvus.yaml</code> 中，以便每次重启和节点都能自动获取。</p></li>
 <li><p><strong>环境变量：</strong>在部署时注入密钥--最适合 Docker Compose。</p></li>
 </ul>
-<p>从以下两种方法中选择一种--配置文件在裸机和虚拟机上更易于维护，而环境变量方法适合容器工作流。</p>
+<p>从以下两种方法中选择一种--配置文件在裸机和虚拟机上更易于维护，而 env-var 路线则适合容器工作流。</p>
 <div class="alert note">
 <p>如果同一提供商的 API 密钥同时存在于配置文件和环境变量中，Milvus 将始终使用<code translate="no">milvus.yaml</code> 中的值，而忽略环境变量。</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">选项 1：配置文件（推荐且优先级更高）</h3><p>将 API 密钥保存在<code translate="no">milvus.yaml</code> 中；Milvus 会在启动时读取它们，并覆盖同一提供商的任何环境变量。</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">方案 1：配置文件（推荐且优先级更高）</h3><p>将 API 密钥保存在<code translate="no">milvus.yaml</code> 中；Milvus 会在启动时读取它们，并覆盖同一提供商的任何环境变量。</p>
 <ol>
 <li><p>**在<code translate="no">credential:</code></p>
 <p>你可以列出一个或多个 API 密钥--给每个密钥贴上你自创的标签，以便日后参考。</p>
@@ -98,7 +98,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>把 API 密钥放在这里，可以让它们在重启时保持不变，而且只需更改标签就能切换密钥。</p></li>
+<p>将 API 密钥放在这里，可以让它们在重启时保持不变，而且只需更改标签就能切换密钥。</p></li>
 <li><p><strong>告诉 Milvus 在 Azure OpenAI 调用中使用哪个密钥</strong></p>
 <p>在同一文件中，将 Azure OpenAI 提供程序指向你希望它使用的标签。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
@@ -140,7 +140,7 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">MILVUSAI_AZURE_OPENAI_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_AZURE_OPENAI_API_KEY&gt;</span>
     <span class="hljs-attr">MILVUSAI_AZURE_OPENAI_RESOURCE_NAME:</span> <span class="hljs-string">&lt;MILVUSAI_AZURE_OPENAI_RESOURCE_NAME&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">environment:</code> 块只将密钥注入 Milvus 容器，而不会触及主机操作系统。有关详情，请参阅<a href="/docs/zh/configure-docker.md#Configure-Milvus-with-Docker-Compose">使用 Docker Compose 配置 Milvus</a>。</p>
+<p><code translate="no">environment:</code> 块只将密钥注入 Milvus 容器，而不会触及你的主机操作系统。有关详情，请参阅<a href="/docs/zh/configure-docker.md#Configure-Milvus-with-Docker-Compose">使用 Docker Compose 配置 Milvus</a>。</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">使用 Embeddings 功能<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +163,7 @@ beta: Milvus 2.6.x
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
 <li><p>一个向量字段，用于存储函数将为标量字段生成的向量嵌入。</p></li>
 </ul>
-<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记要设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
+<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

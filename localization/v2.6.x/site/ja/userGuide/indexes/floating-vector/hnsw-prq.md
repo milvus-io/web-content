@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_PRQは</strong>、HNSW（Hierarchical Navigable Small World）グラフとPRQ（Product Residual Quantization）を活用し、インデックスサイズと精度のトレードオフを微調整できる高度なベクトルインデックス作成手法を提供します。PRQは、従来の積量子化(PQ)を超えて、残差量子化(RQ)ステップを導入することで、追加情報を取り込み、純粋なPQベースの手法と比較して、より高い精度やよりコンパクトなインデックスを実現します。しかし、余分なステップはインデックス構築時や検索時の計算オーバーヘッドを増大させる可能性がある。</p>
+    </button></h1><p><strong>HNSW_PRQは</strong>、HNSW(Hierarchical Navigable Small World)グラフとPRQ(Product Residual Quantization)を活用し、インデックスサイズと精度のトレードオフを微調整できる高度なベクトルインデックス作成手法を提供します。PRQは、従来の積量子化(PQ)を超えて、残差量子化(RQ)ステップを導入することで、追加情報を取り込み、純粋なPQベースの手法と比較して、より高い精度やよりコンパクトなインデックスを実現します。しかし、余分なステップはインデックス構築時や検索時の計算オーバーヘッドを増大させる可能性がある。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +177,7 @@ res = MilvusClient.search(
      <td><p>各ノードがグラフ内で持つことのできる接続(またはエッジ)の最大数。 このパラメータはインデックスの構築と検索の両方に直接影響する。</p></td>
      <td><p><strong>型</strong>：整数<strong>：</strong>[2, 2048]</p>
 <p><strong>デフォルト値</strong>:<code translate="no">30</code> (ノードあたり最大 30 の送信エッジと 30 の受信エッジ)</p></td>
-     <td><p><code translate="no">M</code> を大きくすると、一般的に<strong>精度が高く</strong>なるが、<strong>メモリ・オーバーヘッドが増加</strong>し、<strong>インデックス構築と検索の両方が遅くなる</strong>。 次元性の高いデータセットや、高い再現性が重要な場合は、<code translate="no">M</code> を大きくすることを検討する。</p>
+     <td><p><code translate="no">M</code> を大きくすると、一般的に<strong>精度は高く</strong>なるが、<strong>メモリ・オーバーヘッドが増加</strong>し、<strong>インデックス構築と検索の両方が遅くなる</strong>。 次元性の高いデータセットや、高い再現性が重要な場合は、<code translate="no">M</code> を大きくすることを検討する。</p>
 <p>メモリ使用量と検索速度が最大の関心事である場合は、<code translate="no">M</code> を減らすことを検討する。</p>
 <p>ほとんどの場合、この範囲内の値を設定することを推奨する：[5, 100].</p></td>
    </tr>

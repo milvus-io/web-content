@@ -1,10 +1,9 @@
 ---
 id: monitor_overview.md
 title: 모니터 개요
-related_key: "monitor, alert"
-summary: Milvus에서 Prometheus와 Grafana가 모니터링 및 알림 서비스에 어떻게 사용되는지 알아보세요.
+related_key: 'monitor, alert'
+summary: Milvus에서 Prometheus와 Grafana가 모니터링 및 알림 서비스를 위해 어떻게 사용되는지 알아보세요.
 ---
-
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvus 모니터링 프레임워크 개요<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,9 +42,9 @@ summary: Milvus에서 Prometheus와 Grafana가 모니터링 및 알림 서비스
 <li>Prometheus 모니터링 인스턴스를 효과적으로 관리하기 위한 Prometheus 운영자.</li>
 <li>엔드투엔드 Kubernetes 클러스터 모니터링을 쉽게 운영할 수 있는 Kube-prometheus.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">메트릭 이름</h3><p>Prometheus의 유효한 메트릭 이름에는 네임스페이스, 서브시스템, 이름이라는 세 가지 요소가 포함됩니다. 이 세 가지 요소는 &quot;_&quot;로 연결됩니다.</p>
-<p>Prometheus에서 모니터링하는 Milvus 메트릭의 네임스페이스는 &quot;milvus&quot;입니다. 메트릭이 속한 역할에 따라 하위 시스템은 다음 8가지 역할 중 하나에 속해야 합니다: &quot;rootcoord&quot;, &quot;proxy&quot;, &quot;querycoord&quot;, &quot;querynode&quot;, &quot;indexcoord&quot;, &quot;indexnode&quot;, &quot;datacoord&quot;, &quot;datanode&quot;.</p>
-<p>예를 들어, 쿼리된 벡터의 총 수를 계산하는 Milvus 메트릭의 이름은 <code translate="no">milvus_proxy_search_vectors_count</code> 입니다.</p>
+<h3 id="Metric-names" class="common-anchor-header">메트릭 이름</h3><p>Prometheus의 유효한 메트릭 이름에는 네임스페이스, 서브시스템, 이름이라는 세 가지 요소가 포함됩니다. 이 세 가지 요소는 "_"로 연결됩니다.</p>
+<p>Prometheus에서 모니터링하는 Milvus 메트릭의 네임스페이스는 "milvus"입니다. 메트릭이 속한 역할에 따라 해당 하위 시스템은 다음 8가지 역할 중 하나에 속해야 합니다: "rootcoord", "프록시", "쿼리코드", "쿼리노드", "인덱스코드", "인덱스노드", "데이터코드", "데이터노드".</p>
+<p>예를 들어 쿼리된 벡터의 총 수를 계산하는 Milvus 메트릭의 이름은 <code translate="no">milvus_proxy_search_vectors_count</code> 입니다.</p>
 <h3 id="Metric-types" class="common-anchor-header">메트릭 유형</h3><p>Prometheus는 네 가지 유형의 메트릭을 지원합니다:</p>
 <ul>
 <li>카운터: 재시작 시에만 값이 증가하거나 0으로 초기화될 수 있는 누적 메트릭 유형입니다.</li>
@@ -53,23 +52,23 @@ summary: Milvus에서 Prometheus와 Grafana가 모니터링 및 알림 서비스
 <li>히스토그램: 구성 가능한 버킷을 기준으로 카운트되는 메트릭 유형입니다. 일반적인 예로는 요청 지속 시간이 있습니다.</li>
 <li>요약: 히스토그램과 유사한 메트릭 유형으로 슬라이딩 시간 창에 대해 구성 가능한 사분위수를 계산합니다.</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">메트릭 레이블</h3><p>Prometheus는 동일한 메트릭 이름을 가진 샘플에 레이블을 지정하여 구분합니다. 레이블은 메트릭의 특정 속성입니다. 이름이 같은 메트릭은 <code translate="no">variable_labels</code> 필드에 대해 동일한 값을 가져야 합니다. 다음 표에는 Milvus 메트릭의 일반적인 레이블 이름과 의미가 나와 있습니다.</p>
+<h3 id="Metric-labels" class="common-anchor-header">메트릭 레이블</h3><p>Prometheus는 동일한 메트릭 이름을 가진 샘플에 레이블을 지정하여 구분합니다. 레이블은 메트릭의 특정 속성입니다. 이름이 같은 메트릭은 <code translate="no">variable_labels</code> 필드에 대해 동일한 값을 가져야 합니다. 다음 표에는 Milvus 메트릭의 일반적인 레이블의 이름과 의미가 나와 있습니다.</p>
 <table>
 <thead>
 <tr><th>레이블 이름</th><th>정의</th><th>값</th></tr>
 </thead>
 <tbody>
 <tr><td>"node_id"</td><td>역할의 고유 ID.</td><td>밀버스에서 생성된 전 세계적으로 고유한 ID입니다.</td></tr>
-<tr><td>"status"</td><td>처리된 작업 또는 요청의 상태입니다.</td><td>&quot;포기&quot;, &quot;성공&quot; 또는 &quot;실패&quot;.</td></tr>
-<tr><td>"쿼리 유형"</td><td>읽기 요청의 유형입니다.</td><td>&quot;검색&quot; 또는 &quot;쿼리&quot;.</td></tr>
-<tr><td>"msg_type"</td><td>메시지 유형입니다.</td><td>&quot;삽입&quot;, &quot;삭제&quot;, &quot;검색&quot; 또는 &quot;쿼리&quot;.</td></tr>
-<tr><td>"세그먼트_상태"</td><td>세그먼트의 상태입니다.</td><td>&quot;봉인됨&quot;, &quot;성장 중&quot;, &quot;플러시됨&quot;, &quot;플러싱&quot;, &quot;삭제됨&quot; 또는 &quot;가져오기&quot;.</td></tr>
-<tr><td>"캐시 상태"</td><td>캐시된 객체의 상태.</td><td>&quot;히트&quot; 또는 &quot;미스&quot;.</td></tr>
-<tr><td>"캐시_이름"</td><td>캐시된 객체의 이름입니다. 이 레이블은 &quot;cache_state&quot; 레이블과 함께 사용됩니다.</td><td>예: &quot;컬렉션ID&quot;, &quot;스키마&quot; 등.</td></tr>
-<tr><td>&quot;채널_이름&quot;</td><td>메시지 저장소의 물리적 토픽(Pulsar 또는 Kafka).</td><td>예: &quot;by-dev-rootcoord-dml_0&quot;, &quot;by-dev-rootcoord-dml_255&quot; 등.</td></tr>
-<tr><td>"function_name"</td><td>특정 요청을 처리하는 함수의 이름입니다.</td><td>예: &quot;CreateCollection&quot;, &quot;CreatePartition&quot;, &quot;CreateIndex&quot; 등.</td></tr>
+<tr><td>"status"</td><td>처리된 작업 또는 요청의 상태입니다.</td><td>"포기", "성공" 또는 "실패".</td></tr>
+<tr><td>"쿼리 유형"</td><td>읽기 요청의 유형입니다.</td><td>"검색" 또는 "쿼리".</td></tr>
+<tr><td>"msg_type"</td><td>메시지 유형입니다.</td><td>"삽입", "삭제", "검색" 또는 "쿼리".</td></tr>
+<tr><td>"세그먼트_상태"</td><td>세그먼트의 상태입니다.</td><td>"봉인됨", "성장 중", "플러시됨", "플러싱 중", "삭제됨" 또는 "가져오기".</td></tr>
+<tr><td>"캐시 상태"</td><td>캐시된 객체의 상태.</td><td>"히트" 또는 "미스".</td></tr>
+<tr><td>"캐시_이름"</td><td>캐시된 객체의 이름입니다. 이 레이블은 "cache_state" 레이블과 함께 사용됩니다.</td><td>예: "CollectionID", "스키마" 등.</td></tr>
+<tr><td>"채널_이름"</td><td>메시지 저장소의 물리적 토픽(Pulsar 또는 Kafka).</td><td>예: "by-dev-rootcoord-dml_0", "by-dev-rootcoord-dml_255" 등.</td></tr>
+<tr><td>"function_name"</td><td>특정 요청을 처리하는 함수의 이름입니다.</td><td>예: "CreateCollection", "CreatePartition", "CreateIndex" 등.</td></tr>
 <tr><td>"user_name"</td><td>인증에 사용되는 사용자 이름입니다.</td><td>원하는 사용자 이름입니다.</td></tr>
-<tr><td>"index_task_status"</td><td>메타 저장소에 있는 인덱스 작업의 상태입니다.</td><td>&quot;미발급&quot;, &quot;진행 중&quot;, &quot;실패&quot;, &quot;완료&quot; 또는 &quot;재활용&quot;.</td></tr>
+<tr><td>"index_task_status"</td><td>메타 저장소에 있는 인덱스 작업의 상태입니다.</td><td>"미발급", "진행 중", "실패", "완료" 또는 "재활용".</td></tr>
 </tbody>
 </table>
 <h2 id="Grafana-in-Milvus" class="common-anchor-header">Milvus의 Grafana<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">
@@ -88,7 +87,7 @@ summary: Milvus에서 Prometheus와 Grafana가 모니터링 및 알림 서비스
         ></path>
       </svg>
     </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana는</a> 모든 데이터 소스와 연결할 수 있는 오픈 소스 시각화 스택입니다. 메트릭을 가져와서 사용자가 방대한 데이터를 이해하고, 분석하고, 모니터링할 수 있도록 도와줍니다.</p>
-<p>Milvus는 메트릭 시각화를 위해 Grafana의 사용자 지정 가능한 대시보드를 사용합니다.</p>
+<p>Milvus는 메트릭 시각화를 위해 Grafana의 사용자 정의 가능한 대시보드를 사용합니다.</p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

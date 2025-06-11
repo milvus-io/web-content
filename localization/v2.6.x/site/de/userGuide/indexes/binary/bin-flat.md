@@ -4,8 +4,8 @@ title: BIN_FLAT
 summary: >-
   Der BIN_FLAT-Index ist eine Variante des FLAT-Index, die ausschließlich auf
   binäre Einbettungen zugeschnitten ist. Er eignet sich hervorragend für
-  Anwendungen, bei denen die Vektorähnlichkeitssuche eine perfekte Genauigkeit
-  bei relativ kleinen, millionenfachen Datensätzen erfordert. Durch die
+  Anwendungen, bei denen die Suche nach Vektorähnlichkeit perfekte Genauigkeit
+  in relativ kleinen Datensätzen mit Millionen von Daten erfordert. Durch die
   Anwendung einer erschöpfenden Suchmethodik, bei der jede Zieleingabe mit allen
   Vektoren des Datensatzes verglichen wird, garantiert BIN_FLAT exakte
   Ergebnisse. Diese Präzision macht ihn zu einem idealen Benchmark für die

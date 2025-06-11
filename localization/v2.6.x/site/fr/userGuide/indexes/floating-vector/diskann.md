@@ -133,7 +133,7 @@ summary: >-
 <li><p>En montant les données sur un SSD NVMe dans les deux types de nœuds, vous garantissez des vitesses de lecture et d'écriture rapides pour les opérations de recherche et d'indexation.</p></li>
 </ul></li>
 </ul>
-<p>Une fois ces modifications effectuées, redémarrez votre instance Milvus pour que les paramètres prennent effet. Désormais, Milvus exploitera les capacités de DISKANN pour traiter des ensembles de données volumineux et fournir une recherche vectorielle efficace et évolutive.</p>
+<p>Une fois ces modifications effectuées, redémarrez votre instance Milvus pour que les paramètres prennent effet. Désormais, Milvus exploitera les capacités de DISKANN pour traiter de grands ensembles de données, en fournissant une recherche vectorielle efficace et évolutive.</p>
 <h2 id="Configure-DISKANN" class="common-anchor-header">Configuration de DISKANN<button data-href="#Configure-DISKANN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

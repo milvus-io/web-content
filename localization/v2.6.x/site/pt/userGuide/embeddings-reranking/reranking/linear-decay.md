@@ -104,7 +104,7 @@ beta: Milvus 2.6.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
    </span> <span class="img-wrapper"> <span>Decaimento linear</span> </span></p>
-<p>O gráfico acima mostra como o decaimento linear afectaria as listagens de eventos numa plataforma de venda de bilhetes:</p>
+<p>O gráfico acima mostra como o declínio linear afectaria as listagens de eventos numa plataforma de venda de bilhetes:</p>
 <ul>
 <li><p><code translate="no">origin</code> (data atual): O momento atual, onde a relevância está no máximo (1,0).</p></li>
 <li><p><code translate="no">offset</code> (1 dia): A "janela de eventos imediatos" - todos os eventos que acontecem no dia seguinte mantêm pontuações de relevância completas (1,0), garantindo que eventos muito iminentes não sejam penalizados por pequenas diferenças de tempo.</p></li>
@@ -112,7 +112,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (10 dias): O período de tempo em que a relevância cai para o valor de decaimento - eventos a 10 dias de distância têm suas pontuações de relevância reduzidas à metade (0,5).</p></li>
 </ul>
 <p>Como pode ver na curva em linha reta, os eventos a mais de 16 dias de distância têm exatamente zero de relevância e não aparecem nos resultados de pesquisa. Isto cria um limite claro que garante que os utilizadores só vêem os próximos eventos relevantes dentro de uma janela de tempo definida.</p>
-<p>Este comportamento reflecte a forma como o planeamento de eventos funciona normalmente - os eventos iminentes são mais relevantes, os eventos nas próximas semanas têm uma importância cada vez menor e os eventos demasiado distantes no futuro (ou já passados) não devem aparecer de todo.</p>
+<p>Este comportamento reflecte a forma como o planeamento de eventos funciona normalmente - os eventos mais recentes são mais relevantes, os eventos nas próximas semanas têm uma importância cada vez menor e os eventos demasiado distantes no futuro (ou já passados) não devem aparecer de todo.</p>
 <h2 id="Formula" class="common-anchor-header">Fórmula<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

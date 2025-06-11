@@ -70,7 +70,7 @@ beta: Milvus 2.6.x
      <td><p>経験の関連性をバランスよく評価</p></td>
    </tr>
 </table>
-<p>厳しいペナルティや厳格なカットオフなしに、関連性が自然に低下していく感覚を必要とするアプリケーションの場合、ガウス減衰が最適な選択となるでしょう。</p>
+<p>厳しいペナルティや厳格なカットオフなしに、関連性が自然に低下していく感覚が必要な場合は、ガウス減衰が最適です。</p>
 <h2 id="Bell-curve-principle" class="common-anchor-header">ベル曲線の原理<button data-href="#Bell-curve-principle" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +165,7 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル検索に適用</h3><p>ディケイランカーを定義した後、<code translate="no">ranker</code> パラメータに渡すことで、検索操作中に適用することができます：</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル検索に適用</h3><p>ディケイランカを定義した後、<code translate="no">ranker</code> パラメータに渡すことで、検索操作中に適用することができます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to restaurant vector search</span>
 result = milvus_client.search(
     collection_name,

@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Milvus의 시스템 구성에 대해 알아보세요.
 ---
-
 <h1 id="Milvus-System-Configurations-Checklist" class="common-anchor-header">Milvus 시스템 구성 체크리스트<button data-href="#Milvus-System-Configurations-Checklist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +49,7 @@ summary: Milvus의 시스템 구성에 대해 알아보세요.
 <h3 id="localStorage" class="common-anchor-header"><code translate="no">localStorage</code></h3><p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/v2.5.x/configure_localstorage.md">로컬 스토리지 관련 구성을</a> 참조하세요.</p>
 <h3 id="minio" class="common-anchor-header"><code translate="no">minio</code></h3><p>MinIO/S3/GCS 또는 기타 서비스의 관련 설정은 Milvus의 데이터 지속성을 담당하는 S3 API를 지원합니다.</p>
 <p>다음 설명에서는 간결성을 위해 스토리지 서비스를 MinIO/S3로 지칭합니다.</p>
-<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/v2.5.x/configure_minio.md">미니오 관련 설정을</a> 참조하세요.</p>
+<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/v2.5.x/configure_minio.md">미니오 관련 구성을</a> 참조하세요.</p>
 <h3 id="mq" class="common-anchor-header"><code translate="no">mq</code></h3><p>Milvus는 락스엠큐(RockDB 기반), 낫스엠큐(임베디드 낫스 서버), 펄사, 카프카의 네 가지 MQ를 지원합니다.</p>
 <p>mq.type 필드를 설정하여 mq를 변경할 수 있습니다.</p>
 <p>mq.type 필드를 기본값으로 설정하지 않은 경우, 이 파일에 여러 개의 mq를 구성하는 경우 우선순위를 활성화하는 것에 대한 참고 사항이 있습니다.</p>
@@ -71,15 +70,14 @@ summary: Milvus의 시스템 구성에 대해 알아보세요.
 <p>ssl:</p>
 <pre><code translate="no">enabled: false # whether to enable ssl mode
 
-tlsCert: # path to client's public key (PEM) used for authentication
+tlsCert:  # path to client's public key (PEM) used for authentication
 
-tlsKey: # path to client's private key (PEM) used for authentication
+tlsKey:  # path to client's private key (PEM) used for authentication
 
-tlsCaCert: # file or directory path to CA certificate(s) for verifying the broker's key
+tlsCaCert:  # file or directory path to CA certificate(s) for verifying the broker's key
 
-tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
+tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
-
 <p>readTimeout: 10</p>
 <p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/v2.5.x/configure_rocksmq.md">rocksmq 관련 구성을</a> 참조하세요.</p>
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>natsmq 구성.</p>
@@ -134,6 +132,6 @@ tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_s
 <h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>스트리밍 노드 서버와 관련된 모든 구성.</p>
 <p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/v2.5.x/configure_streamingnode.md">스트리밍 노드 관련 구성을</a> 참조하세요.</p>
 <h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>스트리밍 서비스와 관련된 모든 구성입니다.</p>
-<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/v2.5.x/configure_streaming.md">스트리밍 관련 설정을</a> 참조하세요.</p>
+<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/v2.5.x/configure_streaming.md">스트리밍 관련 구성을</a> 참조하세요.</p>
 <h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>knowhere 벡터 검색 엔진과 관련된 모든 구성</p>
 <p>이 섹션의 각 매개변수에 대한 자세한 설명은 위치정보 <a href="/docs/ko/v2.5.x/configure_knowhere.md">관련 구성을</a> 참조하세요.</p>

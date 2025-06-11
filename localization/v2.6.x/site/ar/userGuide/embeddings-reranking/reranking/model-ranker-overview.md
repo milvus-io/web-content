@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
 <li><p>يجب أن تكون الحقول المستخدمة لإعادة ترتيب النماذج من النوع النصي (<code translate="no">VARCHAR</code>).</p></li>
 <li><p>يمكن لكل مصنف نماذج استخدام حقل واحد فقط <code translate="no">VARCHAR</code> في كل مرة للتقييم.</p></li>
 </ul>
-<h2 id="How-it-works" class="common-anchor-header">كيفية العمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">كيف تعمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,7 +73,7 @@ beta: Milvus 2.6.x
 <li><p><strong>استرجاع المستندات المرشحة</strong>: يحدد النظام المجموعة الأولية من المستندات المرشحة بناءً على تشابه المتجهات.</p></li>
 <li><p><strong>تقييم النموذج</strong>: تقوم وظيفة مصنف النماذج بمعالجة أزواج الاستعلام والمستندات:</p>
 <ul>
-<li><p>يرسل الاستعلام الأصلي والمستندات المرشحة إلى خدمة نموذج خارجي</p></li>
+<li><p>يرسل الاستعلام الأصلي والوثائق المرشحة إلى خدمة نموذج خارجي</p></li>
 <li><p>يقوم نموذج اللغة بتقييم الصلة الدلالية بين الاستعلام وكل مستند</p></li>
 <li><p>يحصل كل مستند على درجة ملاءمة بناءً على الفهم الدلالي</p></li>
 </ul></li>

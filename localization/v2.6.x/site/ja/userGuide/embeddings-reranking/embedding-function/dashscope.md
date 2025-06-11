@@ -62,7 +62,7 @@ beta: Milvus 2.6.x
      <td><p>中国語, 英語, スペイン語, フランス語, ポルトガル語, インドネシア語, 日本語, 韓国語, ドイツ語, ロシア語</p></td>
    </tr>
 </table>
-<p>埋め込みモデル<strong>text-embedding-v3は</strong>、<code translate="no">dim</code> パラメータによって埋め込みサイズを小さくすることができます。一般的に、埋め込みサイズが大きいと、計算、メモリ、ストレージの観点から、より高価になります。次元数を調整できることで、全体的なコストとパフォーマンスをよりコントロールできるようになります。各モデルの詳細については、<a href="https://help.aliyun.com/zh/model-studio/user-guide/embedding?disableWebsiteRedirect=true">エンベッディングを</a>参照してください。</p>
+<p>埋め込みモデル<strong>text-embedding-v3は</strong>、<code translate="no">dim</code> パラメータによって埋め込みサイズを小さくすることをサポートしています。一般的に、埋め込みサイズが大きいと、計算、メモリ、ストレージの観点から、より高価になります。次元数を調整できることで、全体的なコストとパフォーマンスをよりコントロールできるようになります。各モデルの詳細については、<a href="https://help.aliyun.com/zh/model-studio/user-guide/embedding?disableWebsiteRedirect=true">エンベッディングを</a>参照してください。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">認証情報の構成<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

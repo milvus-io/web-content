@@ -3,10 +3,10 @@ id: schema-hands-on.md
 title: Progettazione del modello di dati per la ricerca
 summary: >-
   I sistemi di Information Retrieval, noti anche come motori di ricerca, sono
-  essenziali per varie applicazioni di intelligenza artificiale, come la
-  Retrieval-augmented generation (RAG), la ricerca visiva e la raccomandazione
-  di prodotti. Il cuore di questi sistemi è un modello di dati accuratamente
-  progettato per organizzare, indicizzare e recuperare le informazioni.
+  essenziali per varie applicazioni di IA, come la Retrieval-augmented
+  generation (RAG), la ricerca visiva e la raccomandazione di prodotti. Il cuore
+  di questi sistemi è un modello di dati accuratamente progettato per
+  organizzare, indicizzare e recuperare le informazioni.
 ---
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">Progettazione del modello di dati per la ricerca<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,7 +51,7 @@ summary: >-
 <ul>
 <li><p>Recupero di documenti che corrispondono a una query in linguaggio naturale.</p></li>
 <li><p>Trovare immagini simili a un'immagine di riferimento o corrispondenti a una descrizione testuale</p></li>
-<li><p>Ricerca di prodotti in base ad attributi come il nome, la categoria o il marchio</p></li>
+<li><p>Ricerca di prodotti in base ad attributi quali il nome, la categoria o il marchio</p></li>
 <li><p>Filtrare gli articoli in base a metadati strutturati (ad esempio, data di pubblicazione, tag, valutazioni).</p></li>
 <li><p>Combinazione di più criteri in query ibride (ad esempio, nella ricerca visiva, considerando la somiglianza semantica delle immagini e delle loro didascalie).</p></li>
 </ul></li>
@@ -148,7 +148,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
-     <td><p>autogenerato con abilitazione <code translate="no">auto_id</code></p></td>
+     <td><p>autogenerato con abilitato <code translate="no">auto_id</code></p></td>
      <td><p><a href="/docs/it/get-and-scalar-query.md">Interrogazione con Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -395,7 +395,7 @@ schema.addField(AddFieldReq.builder()
     \&quot;fields\&quot;: <span class="hljs-variable">$fields</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, per i campi vengono specificati i seguenti attributi:</p>
+<p>In questo esempio, per i campi sono specificati i seguenti attributi:</p>
 <ul>
 <li><p>Chiave primaria: <code translate="no">article_id</code> è utilizzata come chiave primaria, consentendo l'assegnazione automatica delle chiavi primarie per le entità in arrivo.</p></li>
 <li><p>Chiave di partizione: <code translate="no">timestamp</code> è assegnata come chiave di partizione, consentendo il filtraggio per partizioni. Questa potrebbe essere</p></li>

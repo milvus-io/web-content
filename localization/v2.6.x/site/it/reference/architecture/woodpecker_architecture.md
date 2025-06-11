@@ -73,7 +73,7 @@ summary: >-
 <ul>
 <li><strong>Client</strong>: Livello di interfaccia per l'emissione di richieste di lettura e scrittura</li>
 <li><strong>LogStore</strong>: Gestisce il buffering di scrittura ad alta velocità, i caricamenti asincroni sullo storage e la compattazione dei registri</li>
-<li><strong>Backend di archiviazione</strong>: Supporta servizi di storage scalabili e a basso costo, come S3, GCS e file system come EFS</li>
+<li><strong>Backend di archiviazione</strong>: Supporta servizi di archiviazione scalabili e a basso costo come S3, GCS e file system come EFS</li>
 <li><strong>Etcd</strong>: Memorizza i metadati e coordina lo stato dei log tra i nodi distribuiti.</li>
 </ul>
 <h2 id="Deployment-modes" class="common-anchor-header">Modalità di distribuzione<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
@@ -97,9 +97,9 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>distribuzione della modalità di memoria woodpecker</span> </span></p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Ottimizzata per bassa latenza e alta durata</h3><p>La modalità QuorumBuffer è progettata per carichi di lavoro di lettura/scrittura sensibili alla latenza e ad alta frequenza, che richiedono una reattività in tempo reale e una forte tolleranza agli errori. In questa modalità, Woodpecker funziona come un buffer di scrittura ad alta velocità con scritture quorum a tre repliche, garantendo una forte coerenza e un'elevata disponibilità.</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Ottimizzato per bassa latenza e alta durata</h3><p>La modalità QuorumBuffer è progettata per carichi di lavoro di lettura/scrittura sensibili alla latenza e ad alta frequenza, che richiedono una reattività in tempo reale e una forte tolleranza agli errori. In questa modalità, Woodpecker funziona come un buffer di scrittura ad alta velocità con scritture quorum a tre repliche, garantendo una forte coerenza e un'elevata disponibilità.</p>
 <p>Una scrittura è considerata riuscita una volta replicata su almeno due dei tre nodi, e in genere viene completata entro una cifra di millisecondi, dopodiché i dati vengono scaricati in modo asincrono sull'archivio oggetti del cloud per una durata a lungo termine. Questa architettura riduce al minimo lo stato sui nodi, elimina la necessità di grandi volumi di dischi locali ed evita le complesse riparazioni anti-entropia spesso necessarie nei sistemi tradizionali basati sul quorum.</p>
-<p>Il risultato è un livello WAL snello e robusto, ideale per gli ambienti di produzione mission-critical in cui coerenza, disponibilità e ripristino rapido sono essenziali.</p>
+<p>Il risultato è un livello WAL snello e robusto, ideale per gli ambienti di produzione mission-critical dove coerenza, disponibilità e ripristino rapido sono essenziali.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
@@ -141,7 +141,7 @@ summary: >-
 <li>Modalità di archiviazione cloud (S3): Scrivendo direttamente su S3, Woodpecker ha raggiunto 750 MB/s (circa il 68% del limite teorico di S3), 5,8 volte superiore a Kafka e 7 volte superiore a Pulsar. Sebbene la latenza sia più elevata (166 ms), questa configurazione offre un throughput eccezionale per i carichi di lavoro orientati ai batch.</li>
 <li>Modalità di archiviazione degli oggetti (MinIO): Anche con MinIO, Woodpecker ha raggiunto 71 MB/s, circa il 65% della capacità di MinIO. Queste prestazioni sono paragonabili a quelle di Kafka e Pulsar, ma con requisiti di risorse significativamente inferiori.</li>
 </ul>
-<p>Woodpecker è particolarmente ottimizzato per le scritture concomitanti e ad alto volume, dove il mantenimento dell'ordine è fondamentale. Questi risultati riflettono solo le prime fasi di sviluppo: le ottimizzazioni in corso per quanto riguarda l'unione dell'I/O, il buffering intelligente e il prefetching dovrebbero portare le prestazioni ancora più vicino ai limiti teorici.</p>
+<p>Woodpecker è particolarmente ottimizzato per le scritture concomitanti ad alto volume, dove il mantenimento dell'ordine è fondamentale. Questi risultati riflettono solo le prime fasi di sviluppo: le ottimizzazioni in corso per quanto riguarda l'unione dell'I/O, il buffering intelligente e il prefetching dovrebbero portare le prestazioni ancora più vicino ai limiti teorici.</p>
 <h2 id="Operational-benefits" class="common-anchor-header">Vantaggi operativi<button data-href="#Operational-benefits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

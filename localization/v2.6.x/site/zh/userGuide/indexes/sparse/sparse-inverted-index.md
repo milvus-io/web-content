@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">SPARSE_INVERTED_INDEX</code> 索引是 Milvus 用来高效存储和搜索稀疏向量的一种索引类型。这种索引类型利用了倒排索引的原理，为稀疏数据创建了一种高效的搜索结构。如需了解更多信息，请参阅<a href="/docs/zh/inverted.md">INVERTED</a>。</p>
+    </button></h1><p><code translate="no">SPARSE_INVERTED_INDEX</code> 索引是 Milvus 用来高效存储和搜索稀疏向量的一种索引类型。这种索引类型利用了倒排索引的原理，为稀疏数据创建了一种高效的搜索结构。更多信息，请参阅<a href="/docs/zh/inverted.md">倒排</a>索引。</p>
 <h2 id="Build-index" class="common-anchor-header">建立索引<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">SPARSE_INVERTED_INDEX</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算稀疏向量之间相似性的度量。有效值：</p>
+<li><p><code translate="no">metric_type</code>:用于计算稀疏向量间相似性的度量。有效值：</p>
 <ul>
 <li><p><code translate="no">IP</code> (内积）：使用点积衡量相似性。</p></li>
 <li><p><code translate="no">BM25</code>:通常用于全文搜索，侧重于文本相似性。</p>

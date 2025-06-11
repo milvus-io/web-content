@@ -210,7 +210,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>リランキングモデルが関連性スコアの算出に使用するクエリ文字列のリスト。 クエリ文字列の数は、検索操作のクエリ数と正確に一致する必要があります (テキストの代わりにクエリベクタを使用する場合も同様)。</p></td>
+     <td><p>リランキングモデルが関連性スコアを計算するために使用するクエリ文字列のリスト。 クエリ文字列の数は、検索操作のクエリの数と正確に一致する必要があります（テキストの代わりにクエリベクタを使用する場合でも）。</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>
@@ -222,7 +222,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">maxBatch</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p>1バッチで処理する文書の最大数。値が大きいほどスループットは向上するが、より多くのメモリを必要とする。</p></td>
+     <td><p>1バッチで処理する文書の最大数。値が大きいほどスループットは向上しますが、より多くのメモリを必要とします。</p></td>
      <td><p><code translate="no">32</code> (デフォルト)</p></td>
    </tr>
 </table>

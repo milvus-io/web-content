@@ -4,7 +4,7 @@ title: 重み付けランカー
 summary: >-
   Weighted
   Rankerは、複数の検索経路から得られた結果をインテリジェントに組み合わせ、それぞれに異なる重要度の重みを割り当てることで優先順位を付けます。熟練したシェフが完璧な料理を作るために複数の食材のバランスを取るのと同様に、Weighted
-  Rankerは最も関連性の高い組み合わせの結果を提供するために、異なる検索結果のバランスを取ります。このアプローチは、特定のフィールドが他のフィールドよりも最終的なランキングに大きく貢献する必要がある、複数のベクトルフィールドやモダリティを横断して検索する場合に理想的です。
+  Rankerは最も関連性の高い組み合わせの結果を提供するために、異なる検索結果のバランスを取ります。このアプローチは、特定のフィールドが他のフィールドよりも最終的なランキングに大きく貢献するような、複数のベクトルフィールドやモダリティを横断して検索する場合に理想的です。
 ---
 <h1 id="Weighted-Ranker" class="common-anchor-header">重み付けランカー<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Weighted Rankerは特に、複数のベクトル検索パスからの結果を組み合わせる必要があるハイブリッド検索シナリオ用に設計されています。特に以下のような場合に有効です：</p>
+    </button></h2><p>Weighted Rankerは、複数のベクトル検索パスからの結果を組み合わせる必要があるハイブリッド検索シナリオのために特別に設計されています。特に以下のような場合に有効です：</p>
 <table>
    <tr>
      <th><p>使用例</p></th>
@@ -60,7 +60,7 @@ summary: >-
      <td><p>全文エンベッディングを考慮しつつ、タイトルと抄録エンベッディングに高いウェイトを与える。</p></td>
    </tr>
 </table>
-<p>ハイブリッド検索アプリケーションで、複数の検索パスを組み合わせ、それらの相対的な重要度をコントロールする必要がある場合、Weighted Rankerは理想的な選択です。</p>
+<p>ハイブリッド検索アプリケーションで、複数の検索パスを組み合わせて、それらの相対的な重要度をコントロールする必要がある場合、Weighted Rankerは理想的な選択です。</p>
 <h2 id="Mechanism-of-Weighted-Ranker" class="common-anchor-header">Weighted Rankerのメカニズム<button data-href="#Mechanism-of-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,7 +267,7 @@ summary: >-
     </button></h2><p>WeightedRankerストラテジーを使用する場合、重み値を入力する必要がある。入力する重み値の数は、ハイブリッド検索における基本ANN検索要求の数に対応させる必要がある。入力する重み値は[0,1]の範囲にあるべきで、1に近いほど重要度が高いことを示す。</p>
 <h3 id="Create-a-Weighted-Ranker" class="common-anchor-header">重み付きランカーの作成</h3><p>例えば、ハイブリッド検索にテキスト検索と画像検索の2つの基本ANN検索リクエストがあるとする。テキスト検索がより重要であると考えられる場合、より大きなウェイトが割り当てられるはずです。</p>
 <div class="alert note">
-<p>Milvus 2.6.x以降では、<code translate="no">Function</code> APIを介して直接リランキング戦略を設定することができます。それ以前のリリース（v2.6.0以前）をお使いの場合は、<a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">Rerankingの</a>ドキュメントを参照して設定を行ってください。</p>
+<p>Milvus 2.6.x以降では、<code translate="no">Function</code> APIを介して直接リランキング戦略を設定することができます。それ以前のリリース（v2.6.0以前）を使用している場合は、<a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">Rerankingの</a>ドキュメントを参照して設定を行ってください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -320,7 +320,7 @@ rerank = Function(
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>はい</p></td>
-     <td><p>使用するリランキング法を指定する。Weighted Ranker を使用するには<code translate="no">weighted</code> に設定する必要がある。</p></td>
+     <td><p>使用するリランキング法を指定する。Weighted Ranker を使用する場合は<code translate="no">weighted</code> に設定する必要がある。</p></td>
      <td><p><code translate="no">"weighted"</code></p></td>
    </tr>
    <tr>

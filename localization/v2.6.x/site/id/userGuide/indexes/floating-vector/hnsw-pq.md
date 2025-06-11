@@ -205,7 +205,7 @@ res = MilvusClient.search(
      <td><p>Bendera boolean yang mengontrol apakah langkah perbaikan diterapkan selama pencarian. Refinement melibatkan pemeringkatan ulang hasil awal dengan menghitung jarak yang tepat antara vektor kueri dan kandidat.</p></td>
      <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Boolean: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
 <p><strong>Nilai default</strong>: <code translate="no">false</code></p></td>
-     <td><p>Setel ke <code translate="no">true</code> jika akurasi tinggi sangat penting dan Anda dapat mentolerir waktu pencarian yang sedikit lebih lambat. Gunakan <code translate="no">false</code> jika kecepatan adalah prioritas dan kompromi kecil dalam akurasi dapat diterima.</p></td>
+     <td><p>Setel ke <code translate="no">true</code> jika akurasi tinggi sangat penting dan Anda dapat mentoleransi waktu pencarian yang sedikit lebih lambat. Gunakan <code translate="no">false</code> jika kecepatan adalah prioritas dan kompromi kecil dalam akurasi dapat diterima.</p></td>
    </tr>
    <tr>
      <td></td>

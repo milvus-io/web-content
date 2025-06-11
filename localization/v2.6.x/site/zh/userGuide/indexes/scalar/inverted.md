@@ -41,7 +41,7 @@ summary: Milvus 中的倒排索引旨在加速标量字段和结构化 JSON 字�
 <li><p><strong>"Milvus是一个云原生向量数据库"。</strong></p></li>
 <li><p><strong>"Milvus 在性能方面非常出色"。</strong></p></li>
 </ul>
-<p>并将它们分解为独特的单词（例如，<em>Milvus</em>、<em>是</em>、<em>云原生</em>、<em>向量</em>、<em>数据库</em>、<em>非常</em>、<em>擅长</em>、<em>性能</em>）。</p></li>
+<p>并将它们分解为独特的单词（例如，<em>Milvus</em>、<em>is</em>、<em>cloud</em> <em>-native</em>、<em>向量</em>、<em>数据库</em>、<em>very</em>、<em>good</em>、<em>at</em>、<em>performance</em>）。</p></li>
 <li><p><strong>建立术语词典</strong>：这些独特的单词被存储在一个名为 "<strong>术语字典</strong>"的分类列表中。通过这个词典，Milvus 可以快速检查某个词是否存在，并找到它在索引中的位置。</p></li>
 <li><p><strong>创建反向列表</strong>：对于术语词典中的每个单词，Milvus 会保存一个<strong>反向列表</strong>，显示哪些文档包含该单词。例如，<strong>"Milvus "</strong>出现在两个句子中，因此其倒置列表指向两个文档 ID。</p></li>
 </ol>
@@ -207,7 +207,7 @@ index_params.add_index(
 <ul>
 <li>可以使用<code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code> 。但是，索引只对存储在该路径下的标量值有效。如果<code translate="no">json[&quot;field&quot;]</code> 是一个数组，查询将退回到蛮力方式（尚未支持数组类型索引）。</li>
 </ul></li>
-<li><p><strong>数值精度</strong>：</p>
+<li><p><strong>数字精度</strong>：</p>
 <ul>
 <li>在内部，Milvus 将所有数值字段索引为双倍。如果数值超过<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>，就会失去精度，对这些超出范围的数值进行的查询可能无法完全匹配。</li>
 </ul></li>

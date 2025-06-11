@@ -4,7 +4,6 @@ related_key: scalar_index
 summary: Milvus 的标量指数。
 title: 标量索引
 ---
-
 <h1 id="Scalar-Index" class="common-anchor-header">标量索引<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,7 +87,7 @@ title: 标量索引
 <li><strong>范围查询</strong>：范围查询（如查找单词字母大于<strong>very 的</strong>文档）的效率也能通过排序术语字典得到提高。这种方法比暴力搜索更有效，能提供更快、更准确的结果。</li>
 </ul>
 <h3 id="Test-results" class="common-anchor-header">测试结果</h3><p>为了证明标量索引在 Milvus 中提供的性能改进，我们进行了一项实验，比较了在原始数据上使用倒排索引和暴力搜索的几种表达式的性能。</p>
-<p>实验包括在两种条件下测试各种表达式：倒排索引和暴力搜索。为确保公平性，每次测试都使用相同的 Collections，保持相同的数据分布。每次测试前，都会释放 Collections，并丢弃和重建索引。此外，每次测试前都会执行一次热查询，以尽量减少冷数据和热数据的影响，并且每次查询都会执行多次，以确保准确性。</p>
+<p>实验包括在两种条件下测试各种表达式：倒排索引和暴力搜索。为确保公平性，每次测试都使用相同的 Collections，保持相同的数据分布。每次测试前，都会释放 Collections，删除并重建索引。此外，每次测试前都会执行一次热查询，以尽量减少冷数据和热数据的影响，并且每次查询都会执行多次，以确保准确性。</p>
 <p>对于包含<strong>100 万条</strong>记录的数据集，使用<strong>反转索引</strong>最多可将点查询的性能提高<strong>30 倍</strong>。对于更大的数据集，性能提升可能会更显著。</p>
 <h2 id="Performance-recommandations" class="common-anchor-header">性能建议<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
       <svg translate="no"

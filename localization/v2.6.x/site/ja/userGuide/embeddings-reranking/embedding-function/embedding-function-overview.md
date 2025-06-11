@@ -39,7 +39,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>Functionモジュールが埋め込む入力フィールドは常に値を含んでいなければなりません。</p></li>
-<li><p>Functionモジュールは、コレクションスキーマで明示的に定義されたフィールドのみを処理します。</p></li>
+<li><p>Functionモジュールはコレクションスキーマで明示的に定義されたフィールドのみを処理します。</p></li>
 <li><p>埋め込む入力フィールドは<code translate="no">VARCHAR</code> 型でなければなりません。</p></li>
 <li><p>Functionモジュールは入力フィールドを次のように埋め込むことができる：</p>
 <ul>
@@ -274,7 +274,7 @@ beta: Milvus 2.6.x
 <li><p>埋め込む生データを格納するスカラーフィールド。</p></li>
 <li><p>スカラー・フィールドに対して関数が生成するベクトル埋め込みを格納するために予約されたベクトル・フィールド。</p></li>
 </ul>
-<p>以下の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
+<p>次の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -351,7 +351,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>埋め込み設定を格納する辞書。注:<code translate="no">params</code> 内のパラメータは、埋め込みモデルプロバイダによって異なります。</p></td>
+     <td><p>埋め込み設定を格納する辞書。注意：<code translate="no">params</code> 内のパラメータは、埋め込みモデルプロバイダによって異なります。</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>

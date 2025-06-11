@@ -47,7 +47,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
    </span> <span class="img-wrapper"> <span>Flujo de trabajo IVF FLAT</span> </span></p>
-<p>Este método de indexación acelera el proceso de búsqueda, pero presenta un posible inconveniente: el candidato encontrado como el más cercano a la incrustación de la consulta puede no ser exactamente el más cercano. Esto puede ocurrir si la incrustación más cercana a la incrustación de consulta reside en un clúster diferente del seleccionado en función del centroide más cercano (véase la visualización más abajo).</p>
+<p>Este método de indexación acelera el proceso de búsqueda, pero tiene un posible inconveniente: el candidato más cercano a la incrustación de la consulta puede no ser exactamente el más cercano. Esto puede ocurrir si la incrustación más cercana a la incrustación de consulta reside en un clúster diferente del seleccionado en función del centroide más cercano (véase la visualización más abajo).</p>
 <p>Para resolver este problema, <strong>IVF_FLAT</strong> proporciona dos hiperparámetros que podemos ajustar:</p>
 <ul>
 <li><p><code translate="no">nlist</code>: Especifica el número de particiones a crear mediante el algoritmo k-means.</p></li>

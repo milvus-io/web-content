@@ -88,7 +88,7 @@ summary: 啄木鸟是 Milvus 2.6 中的一个云原生 WAL 系统。它采用零
         ></path>
       </svg>
     </button></h2><p>啄木鸟提供两种部署模式，以满足您的特定需求：</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 轻便、免维护</h3><p>MemoryBuffer 模式提供了一种简单、轻量级的部署选项，Woodpecker 在内存中临时缓冲写入的内容，并定期将其刷新到云对象存储服务。元数据使用<strong>etcd</strong>管理，以确保一致性和协调性。这种模式最适合小规模部署或生产环境中批量繁重的工作负载，它们优先考虑的是简单性而不是性能，尤其是在低写入延迟并不重要的情况下。</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 轻便、免维护</h3><p>MemoryBuffer 模式提供了一种简单、轻量级的部署选项，Woodpecker 会在内存中临时缓冲写入的内容，并定期将其刷新到云对象存储服务。元数据使用<strong>etcd</strong>管理，以确保一致性和协调性。这种模式最适合小规模部署或生产环境中批量繁重的工作负载，它们优先考虑的是简单性而不是性能，尤其是在低写入延迟并不重要的情况下。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />

@@ -144,7 +144,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
      <td><p>원본 데이터세트를 GPU 메모리에 캐시할지 여부를 결정합니다. 가능한 값</p>
 <ul>
-<li><p><code translate="no">"true"</code>: 원본 데이터 세트를 캐시하여 검색 결과를 구체화하여 리콜을 향상시킵니다.</p></li>
+<li><p><code translate="no">"true"</code>: 원본 데이터 세트를 캐시하여 검색 결과를 구체화하여 회상률을 높입니다.</p></li>
 <li><p><code translate="no">"false"</code>: GPU 메모리를 절약하기 위해 원본 데이터셋을 캐시하지 않습니다.</p></li>
 </ul></td>
      <td><p><code translate="no">"false"</code></p></td>

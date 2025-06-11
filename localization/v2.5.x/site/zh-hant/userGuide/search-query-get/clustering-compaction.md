@@ -3,7 +3,6 @@ id: clustering-compaction.md
 title: 聚類壓縮
 summary: 聚類壓縮的目的是在大型資料集中提高搜尋效能並降低成本。本指南將協助您瞭解聚類壓縮以及此功能如何改善搜尋效能。
 ---
-
 <h1 id="Clustering-Compaction" class="common-anchor-header">聚類壓縮<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,16 +75,15 @@ summary: 聚類壓縮的目的是在大型資料集中提高搜尋效能並降�
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
 
 <span class="hljs-attr">datanode:</span>
-<span class="hljs-attr">clusteringCompaction:</span>
-<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
-<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+  <span class="hljs-attr">clusteringCompaction:</span>
+    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
+    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
-
 <table>
    <tr>
      <th><p>設定項目</p></th>
@@ -97,7 +95,7 @@ summary: 聚類壓縮的目的是在大型資料集中提高搜尋效能並降�
    </tr>
    <tr>
      <td><p><code translate="no">enable</code></p></td>
-     <td><p>指定是否啟用叢集壓縮。如果您需要為每個有群集鍵的集合啟用此功能，請將此值設定為<code translate="no">true</code> 。</p></td>
+     <td><p>指定是否啟用叢集壓縮。如果您需要為每個有群集鍵的集合啟用此功能，請將此項設定為<code translate="no">true</code> 。</p></td>
      <td><p>假</p></td>
    </tr>
    <tr>
@@ -122,7 +120,7 @@ summary: 聚類壓縮的目的是在大型資料集中提高搜尋效能並降�
    </tr>
    <tr>
      <td><p><code translate="no">newDataSizeThreshold</code></p></td>
-     <td><p>指定觸發聚類壓縮的上臨界值。只有當您將<code translate="no">autoEnable</code> 設定為<code translate="no">true</code> 時，這才適用。</p><p>一旦 Milvus 檢測到資料集中的資料量超過此值，就會啟動叢集壓縮程序。</p></td>
+     <td><p>指定觸發聚類壓縮的上臨界值。只有當您將<code translate="no">autoEnable</code> 設定為<code translate="no">true</code> 時，這才適用。</p><p>一旦 Milvus 偵測到資料集中的資料量超過此值，就會啟動叢集壓縮程序。</p></td>
      <td></td>
    </tr>
    <tr>
@@ -170,8 +168,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -181,11 +179,10 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-schema=schema
+    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+    schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -286,10 +283,9 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-job_id=job_id,
+    job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;
@@ -426,6 +422,6 @@ System.out.println(stateResp.getState());
 <li><p>選擇適當的群集關鍵字。</p>
 <p>您可以使用常被用作篩選條件的標量欄位作為叢集關鍵。對於包含來自多個租戶資料的集合，您可以使用區別一個租戶與另一個租戶的欄位作為簇集索引鍵。</p></li>
 <li><p>使用分割區金鑰作為群集金鑰。</p>
-<p>如果您想為 Milvus 實例中的所有集合啟用此功能，或在使用分割區金鑰的大型集合中仍面臨績效問題，則可將<code translate="no">common.usePartitionKeyAsClusteringKey</code> 設為<code translate="no">true</code> 。這樣做，當您選擇一個集合中的標量欄位作為分割鍵時，您就會有一個群集鍵和一個分割鍵。</p>
+<p>如果您想為 Milvus 實例中的所有集合啟用此功能，或在使用分割區金鑰的大型集合中仍然面臨效能問題，則可將<code translate="no">common.usePartitionKeyAsClusteringKey</code> 設為<code translate="no">true</code> 。這樣做，當您選擇一個集合中的標量欄位作為分割鍵時，您就會有一個群集鍵和一個分割鍵。</p>
 <p>請注意，此設定不會阻止您選擇其他標量欄位作為叢集索引鍵。明確指定的簇集索引鍵總是優先。</p></li>
 </ul>

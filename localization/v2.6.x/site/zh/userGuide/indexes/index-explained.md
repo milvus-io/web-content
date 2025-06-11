@@ -168,7 +168,7 @@ summary: >-
 <h3 id="Performance" class="common-anchor-header">性能</h3><p>搜索性能通常涉及 top-K，即搜索返回的记录数。在处理性能问题时，请考虑以下几点：</p>
 <ul>
 <li><p>对于 Top-K 较小的搜索（如 2,000），需要较高的召回率，基于图的索引类型优于 IVF 变体。</p></li>
-<li><p>对于 top-K 较大的搜索（与向量嵌入的总数相比），IVF 变体比基于图的索引类型是更好的选择。</p></li>
+<li><p>对于 top-K 较大（与向量嵌入总数相比）的搜索，IVF 变体是比基于图的索引类型更好的选择。</p></li>
 <li><p>对于 top-K 中等且过滤率较高的搜索，IVF 变体是更好的选择。</p></li>
 </ul>
 <h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">决策矩阵：选择最合适的索引类型</h3><p>下表是一个决策矩阵，供您在选择合适的索引类型时参考。</p>
@@ -307,6 +307,6 @@ summary: >-
 </ol>
 <h3 id="Other-considerations" class="common-anchor-header">其他考虑因素</h3><p>IVF 和基于图的索引可通过量化优化内存使用，而内存映射文件（mmap）和 DiskANN 则可解决数据集超出可用随机存取内存（RAM）的情况。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是一种基于 Vamana 图的索引，它将数据点连接起来，以便在搜索过程中高效导航，同时应用 PQ 来减小向量的大小，并能快速计算向量之间的近似距离。</p>
-<p>Vamana 图存储在磁盘上，这使得 DiskANN 能够处理那些内存无法容纳的大型数据集。这对十亿点数据集尤其有用。</p>
+<p>Vamana 图存储在磁盘上，这使得 DiskANN 可以处理那些内存无法容纳的大型数据集。这对十亿点数据集尤其有用。</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">内存映射文件 (mmap)</h4><p>内存映射（Mmap）可实现对磁盘上大型文件的直接内存访问，从而允许 Milvus 在内存和硬盘中同时存储索引和数据。这种方法可根据访问频率减少 I/O 调用的开销，有助于优化 I/O 操作，从而在不对搜索性能造成重大影响的情况下扩大 Collections 的存储容量。</p>
 <p>具体来说，你可以配置 Milvus 对某些字段中的原始数据进行内存映射，而不是将它们完全加载到内存中。这样，你就可以直接对字段进行内存访问，而不必担心内存问题，并扩展了 Collections 的容量。</p>

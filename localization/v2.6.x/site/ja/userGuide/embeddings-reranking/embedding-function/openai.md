@@ -50,7 +50,7 @@ beta: Milvus 2.6.x
      <td><p>コスト重視でスケーラブルなセマンティック検索に最適-低価格で強力なパフォーマンスを提供。</p></td>
    </tr>
    <tr>
-     <td><p>テキストエンベッディング-3-ラージ</p></td>
+     <td><p>テキスト埋め込み-3-ラージ</p></td>
      <td><p>デフォルト：3,072（3,072以下のディメンションサイズに短縮可能）</p></td>
      <td><p>8,191</p></td>
      <td><p>検索精度の向上と、より豊富な意味表現を必要とするアプリケーションに最適。</p></td>
@@ -59,7 +59,7 @@ beta: Milvus 2.6.x
      <td><p>テキスト埋め込み-ada-002</p></td>
      <td><p>固定：1,536（短縮不可）</p></td>
      <td><p>8,191</p></td>
-     <td><p>レガシーパイプラインや後方互換性を必要とするシナリオに適した前世代モデル。</p></td>
+     <td><p>レガシーパイプラインや後方互換性を必要とするシナリオに適した旧世代のモデル。</p></td>
    </tr>
 </table>
 <p>第三世代の埋め込みモデル<strong>（text-embedding-3</strong>）は、<code translate="no">dim</code> パラメータによって埋め込みサイズを小さくすることができます。一般的に、埋め込みサイズが大きいと、計算、メモリ、ストレージの観点からコストが高くなります。次元数を調整できることで、全体的なコストとパフォーマンスをよりコントロールできるようになります。各モデルの詳細については、<a href="https://platform.openai.com/docs/guides/embeddings#embedding-models">エンベッディングモデルと</a> <a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAIのアナウンスブログポストを</a>参照してください。</p>
@@ -179,7 +179,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">ステップ 2: スキーマへの埋め込み関数の追加</h3><p>MilvusのFunctionモジュールは、スカラーフィールドに格納された生データを自動的に埋め込みデータに変換し、明示的に定義されたベクトルフィールドに格納します。</p>
-<p>下の例では、スカラーフィールド<code translate="no">&quot;document&quot;</code> をエンベッディングに変換する Function モジュール (<code translate="no">openai_embedding</code>) を追加し、その結果のベクトルを先に定義した<code translate="no">&quot;dense&quot;</code> ベクトルフィールドに格納しています。</p>
+<p>下の例では、スカラーフィールド<code translate="no">&quot;document&quot;</code> をエンベッディングに変換する Function モジュール (<code translate="no">openai_embedding</code>) を追加し、結果のベクトルを先に定義した<code translate="no">&quot;dense&quot;</code> ベクトルフィールドに格納しています。</p>
 <p>埋め込み関数を定義したら、コレクションスキーマに追加します。これにより、Milvusは指定された埋め込み関数を使用して、テキストデータの埋め込みを処理し、格納するようになります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(

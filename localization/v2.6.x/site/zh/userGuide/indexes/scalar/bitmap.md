@@ -85,7 +85,7 @@ client.create_index(​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>在本例中，我们在<code translate="no">my_collection</code> Collections 的<code translate="no">category</code> 字段上创建位图索引。<code translate="no">add_index()</code> 方法用于指定字段名称、索引类型和索引名称。</p>
-<p>位图索引创建后，您可以在查询操作中使用<code translate="no">filter</code> 参数，根据索引字段执行标量过滤。这样就可以使用位图索引有效地缩小搜索结果的范围。更多信息，请参阅<a href="/docs/zh/boolean.md">元数据过滤</a>。</p>
+<p>位图索引创建后，您可以在查询操作中使用<code translate="no">filter</code> 参数，根据索引字段执行标量过滤。这样就可以使用位图索引有效地缩小搜索结果的范围。有关详细信息，请参阅<a href="/docs/zh/boolean.md">元数据过滤</a>。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,6 +117,6 @@ client.create_index(​
 <ul>
 <li><p>一般来说，当字段的 Cardinality 小于 500 时，位图索引最为有效。</p></li>
 <li><p>当 Cardinality 超过这个临界值时，位图索引的性能优势就会减弱，存储开销也会变得很大。</p></li>
-<li><p>对于高 Cardinality 字段，可根据具体使用情况和查询要求，考虑使用其他索引技术，如倒排索引。</p></li>
+<li><p>对于高 Cardinality 字段，可根据具体的使用情况和查询要求，考虑使用其他索引技术，如反转索引。</p></li>
 </ul></li>
 </ul>

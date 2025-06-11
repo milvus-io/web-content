@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PRQ 结合了两种索引技术：<strong>HSNW</strong>用于基于图的快速导航，<strong>PRQ</strong>用于高效的向量压缩。</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在该图中，节点根据其相似性进行连接，从而实现在数据空间中的快速遍历。分层结构允许搜索算法缩小候选邻居的范围，从而大大加快了高维空间的搜索过程。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在该图中，节点根据其相似性进行连接，从而实现在数据空间中的快速遍历。分层结构允许搜索算法缩小候选邻域的范围，从而大大加快了高维空间的搜索过程。</p>
 <p>更多信息，请参阅<a href="/docs/zh/hnsw.md">HNSW</a>。</p>
 <h3 id="PRQ" class="common-anchor-header">PRQ</h3><p>PRQ 是一种多阶段向量压缩方法，结合了两种互补技术：PQ 和 RQ。PRQ 首先将高维向量分割成较小的子向量（通过 PQ），然后对剩余的差值进行量化（通过 RQ），从而实现对原始数据紧凑而精确的表示。</p>
 <p>下图显示了其工作原理。</p>
@@ -53,16 +53,16 @@ summary: >-
 <p>在 PQ 阶段之后，RQ 使用额外的编码本量化残差--原始向量与其基于 PQ 的近似值之间的差值。由于残差通常要小得多，因此可以在不增加大量存储空间的情况下对其进行更精确的编码。</p>
 <p>参数<code translate="no">nrq</code> 决定了残差被迭代量化的次数，让你可以微调压缩效率和精确度之间的平衡。</p></li>
 <li><p><strong>最终压缩表示</strong></p>
-<p>RQ 完成对残差的量化后，PQ 和 RQ 的整数代码将合并为一个压缩索引。通过捕捉 PQ 可能忽略的精细细节，RQ 在不显著增加存储空间的情况下提高了准确性。PQ 和 RQ 之间的协同作用正是 PRQ 的定义。</p></li>
+<p>RQ 完成对残差的量化后，PQ 和 RQ 的整数代码将合并为一个压缩索引。通过捕捉 PQ 可能忽略的精细细节，RQ 在不显著增加存储空间的情况下提高了精确度。PQ 和 RQ 之间的协同作用正是 PRQ 的定义。</p></li>
 </ol>
 <h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ</h3><p>通过将 HNSW 与 PRQ 相结合，<strong>HNSW_PRQ</strong>保留了 HNSW 基于图形的快速搜索，同时利用了 PRQ 的多级压缩优势。工作流程如下</p>
 <ol>
 <li><p><strong>数据压缩：</strong>每个向量首先通过 PQ 转换为粗略表示，然后通过 RQ 对残差进行量化以进一步细化。最后得到一组表示每个向量的紧凑代码。</p></li>
-<li><p><strong>图形构建：</strong>压缩向量（包括 PQ 和 RQ 编码）是构建 HNSW 图表的基础。由于数据是以压缩的形式存储的，因此图表所需的内存更少，导航速度也更快。</p></li>
+<li><p><strong>图形构建：</strong>压缩向量（包括 PQ 和 RQ 编码）是构建 HNSW 图表的基础。由于数据是以压缩的形式存储的，因此图所需内存更少，导航速度也更快。</p></li>
 <li><p><strong>候选检索：</strong>在搜索过程中，HNSW 使用压缩表示法遍历图并检索候选库。这大大减少了需要考虑的向量数量。</p></li>
 <li><p><strong>(可选）结果完善：</strong>可根据以下参数对初始候选结果进行改进，以提高准确性：</p>
 <ul>
-<li><p><code translate="no">refine</code>:控制是否激活该细化步骤。当设置为<code translate="no">true</code> 时，系统会使用更高精度或未压缩的表示方法重新计算距离。</p></li>
+<li><p><code translate="no">refine</code>:控制是否激活该细化步骤。当设置为<code translate="no">true</code> 时，系统会使用更高精度或非压缩表示法重新计算距离。</p></li>
 <li><p><code translate="no">refine_type</code>:指定细化过程中使用的数据精度级别（如 SQ6、SQ8、BF16）。选择更高精度的数据，如<code translate="no">FP32</code> ，可以得到更精确的结果，但需要更多内存。这必须比原始压缩数据集的精度高<code translate="no">sq_type</code> 。</p></li>
 <li><p><code translate="no">refine_k</code>:放大系数。例如，如果您的前<em>k</em>值是 100，而<code translate="no">refine_k</code> 是 2，系统就会对前 200 个候选项重新排序，并返回最好的 100 个，从而提高整体准确性。</p></li>
 </ul></li>
@@ -204,7 +204,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>用于以压缩形式表示每个子向量中心点索引的比特数。它直接决定了每个编码本的大小。 每个编码本将包含 $2^{\textit{nbits}}$ 的中心点。例如，如果<code translate="no">nbits</code> 设置为 8，则每个子向量将由一个 8 位的中心点索引表示。这样，该子向量的编码本中就有 2^8$ (256) 个可能的中心点。</p></td>
+     <td><p>用于以压缩形式表示每个子向量中心点索引的比特数。每个编码本将包含 $2^{\textit{nbits}}$ 的中心点。例如，如果<code translate="no">nbits</code> 设置为 8，则每个子向量将由一个 8 位的中心点索引表示。这样，该子向量的编码本中就有 2^8$ (256) 个可能的中心点。</p></td>
      <td><p><strong>类型</strong>： 整数整数[1, 64]</p>
 <p><strong>默认值</strong>：<code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> 值越大，编码本越大，可能会更精确地表示原始向量。在大多数情况下，我们建议在此范围内设置一个值：[1, 16].</p></td>

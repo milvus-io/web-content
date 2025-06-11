@@ -4,7 +4,7 @@ title: BIN_IVF_FLAT
 summary: >-
   BIN_IVF_FLAT 索引是 IVF_FLAT 索引的变种，专门用于二元嵌入。它首先将向量数据划分为多个簇（nlist
   单元），然后将目标输入向量与每个簇的中心进行比较，从而提高了查询效率。BIN_IVF_FLAT
-  能显著缩短查询时间，同时允许用户微调准确性和速度之间的平衡。更多信息，请参阅 IVF_FLAT。
+  能显著缩短查询时间，同时允许用户在准确性和速度之间进行微调。更多信息，请参阅 IVF_FLAT。
 ---
 <h1 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT<button data-href="#BINIVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,7 +56,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">BIN_IVF_FLAT</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。二进制 Embeddings 的支持值包括<code translate="no">HAMMING</code> （默认）和<code translate="no">JACCARD</code> 。有关详情，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的二进制 Embeddings 值包括<code translate="no">HAMMING</code> （默认）和<code translate="no">JACCARD</code> 。有关详情，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
 <li><p><code translate="no">params</code>:用于构建索引的其他配置选项。</p>
 <ul>
 <li><code translate="no">nlist</code>:划分数据集的簇数。</li>
@@ -128,7 +128,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>在索引构建过程中使用 K-means 算法创建的簇数。 每个簇由一个中心点表示，存储一个向量列表。增加该参数可减少每个簇中的向量数量，从而创建更小、更集中的分区。</p></td>
+     <td><p>在建立索引时使用 K-means 算法创建的簇的数量。 每个簇由一个中心点表示，存储一个向量列表。增加该参数可减少每个簇中的向量数量，从而创建更小、更集中的分区。</p></td>
      <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[1, 65536]</p>
 <p><strong>默认值</strong>：<code translate="no">128</code></p></td>
      <td><p><code translate="no">nlist</code> 值越大，通过创建更精细的簇来提高召回率，但会增加索引构建时间。根据数据集大小和可用资源进行优化。 在大多数情况下，我们建议在此范围内设置值：[32, 4096].</p></td>

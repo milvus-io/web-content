@@ -2,7 +2,7 @@
 id: add-fields-to-an-existing-collection.md
 title: 既存コレクションへのフィールド追加Compatible with Milvus 2.6.x
 summary: >-
-  Milvusでは、既存のコレクションに新しいフィールドを動的に追加することができるため、アプリケーションのニーズの変化に応じてデータスキーマを簡単に進化させることができます。このガイドでは、実践的な例を使用して、さまざまなシナリオでフィールドを追加する方法を紹介します。
+  Milvusでは、既存のコレクションに新しいフィールドを動的に追加することができ、アプリケーションのニーズの変化に応じてデータスキーマを簡単に進化させることができます。このガイドでは、実践的な例を使用して、さまざまなシナリオでフィールドを追加する方法を紹介します。
 beta: Milvus 2.6.x
 ---
 <h1 id="Add-Fields-to-an-Existing-Collection" class="common-anchor-header">既存コレクションへのフィールド追加<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-Fields-to-an-Existing-Collection" class="anchor-icon" translate="no">
@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは既存のコレクションに新しいフィールドを動的に追加することができ、アプリケーションのニーズの変化に合わせてデータスキーマを簡単に進化させることができます。このガイドでは、実用的な例を使用して、さまざまなシナリオでフィールドを追加する方法を示します。</p>
+    </button></h1><p>Milvusでは既存のコレクションに新しいフィールドを動的に追加することができ、アプリケーションのニーズの変化に合わせてデータスキーマを簡単に進化させることができます。このガイドでは、実践的な例を使用して、さまざまなシナリオでフィールドを追加する方法を示します。</p>
 <h2 id="Considerations" class="common-anchor-header">考慮事項<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ beta: Milvus 2.6.x
 <li><p>スカラー・フィールド (<code translate="no">INT64</code>,<code translate="no">VARCHAR</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code> など) を追加できます。ベクター・フィールドを既存のコレクションに追加することはできません。</p></li>
 <li><p>新しいフィールドは、新しいフィールドの値を持たない既存のエンティティに対応するために、nullable（nullable=True）にする必要があります。</p></li>
 <li><p>ロードされたコレクションにフィールドを追加すると、メモリ使用量が増加します。</p></li>
-<li><p>コレクションあたりの合計フィールド数には上限があります。詳細は<a href="/docs/ja/limitations.md#Number-of-resources-in-a-collection">Milvus Limits</a> を参照してください。</p></li>
+<li><p>コレクションあたりのフィールド総数には上限があります。詳細は<a href="/docs/ja/limitations.md#Number-of-resources-in-a-collection">Milvus Limits</a> を参照してください。</p></li>
 <li><p>フィールド名は静的フィールド間で一意でなければなりません。</p></li>
 <li><p><code translate="no">enable_dynamic_field=True</code> で作成されていないコレクションに<code translate="no">$meta</code> フィールドを追加して動的フィールド機能を有効にすることはできません。</p></li>
 </ul>

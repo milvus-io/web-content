@@ -52,11 +52,11 @@ summary: >-
 <h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ 結合了 HNSW 和 SQ 的優點，以實現高效率的近似近鄰搜尋。以下是這個過程的運作方式：</p>
 <ol>
 <li><p><strong>資料壓縮：</strong>SQ 會使用<code translate="no">sq_type</code> (例如 SQ6 或 SQ8) 來壓縮向量，以減少記憶體使用量。這種壓縮可能會降低精確度，但卻能讓系統處理更大的資料集。</p></li>
-<li><p><strong>圖形建構：</strong>壓縮向量用於建立 HNSW 圖形。由於資料已壓縮，因此產生的圖形更小、搜尋速度更快。</p></li>
+<li><p><strong>圖形建構：</strong>壓縮向量用於建立 HNSW 圖形。由於資料已壓縮，因此產生的圖形較小，搜尋速度也較快。</p></li>
 <li><p><strong>候選檢索：</strong>當提供查詢向量時，演算法會使用壓縮資料，從 HNSW 圖中快速找出候選鄰居。</p></li>
 <li><p><strong>(可選）結果精進：</strong>初始候選結果可以根據下列參數進行精煉，以獲得更高的精確度：</p>
 <ul>
-<li><p><code translate="no">refine</code>:控制是否啟動此精煉步驟。當設定為<code translate="no">true</code> 時，系統會使用更高精度或未壓縮的表示來重新計算距離。</p></li>
+<li><p><code translate="no">refine</code>:控制是否啟動此精煉步驟。當設定為<code translate="no">true</code> 時，系統會使用更高精度或未壓縮的表示法重新計算距離。</p></li>
 <li><p><code translate="no">refine_type</code>:指定精煉過程中使用的資料精確度等級（例如 SQ6、SQ8、BF16）。更高精度的選擇，例如<code translate="no">FP32</code> ，可以產生更精確的結果，但需要更多的記憶體。這必須比原始壓縮資料集的精確度高出<code translate="no">sq_type</code> 。</p></li>
 <li><p><code translate="no">refine_k</code>:作為放大係數。例如，如果您的 top<em>k</em>是 100，而<code translate="no">refine_k</code> 是 2，系統會重新排序前 200 名候選人，並傳回最佳的 100 名，以提高整體精確度。</p></li>
 </ul></li>

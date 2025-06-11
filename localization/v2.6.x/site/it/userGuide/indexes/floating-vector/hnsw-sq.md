@@ -46,7 +46,7 @@ summary: >-
 <h3 id="SQ" class="common-anchor-header">SQ</h3><p>SQ è un metodo per comprimere i vettori rappresentandoli con un minor numero di bit. Ad esempio:</p>
 <ul>
 <li><p><strong>SQ8</strong> utilizza 8 bit, mappando i valori in 256 livelli.  Per ulteriori informazioni, consultare <a href="/docs/it/ivf-sq8.md#SQ8">FIV_SQ8</a>.</p></li>
-<li><p><strong>SQ6</strong> utilizza 6 bit per rappresentare ogni valore in virgola mobile, ottenendo 64 livelli discreti.</p></li>
+<li><p><strong>SQ6</strong> utilizza 6 bit per rappresentare ciascun valore in virgola mobile, ottenendo 64 livelli discreti.</p></li>
 </ul>
 <p>
   
@@ -62,7 +62,7 @@ summary: >-
 <ul>
 <li><p><code translate="no">refine</code>: Controlla se questa fase di affinamento è attivata. Se impostato su <code translate="no">true</code>, il sistema ricalcola le distanze utilizzando rappresentazioni di maggiore precisione o non compresse.</p></li>
 <li><p><code translate="no">refine_type</code>: Specifica il livello di precisione dei dati utilizzati durante il raffinamento (ad esempio, SQ6, SQ8, BF16). Una scelta di precisione superiore, come <code translate="no">FP32</code>, può dare risultati più accurati, ma richiede più memoria. Il livello di precisione deve essere superiore alla precisione dell'insieme di dati compresso originale di <code translate="no">sq_type</code>.</p></li>
-<li><p><code translate="no">refine_k</code>: Agisce come fattore di ingrandimento. Ad esempio, se il top <em>k</em> è 100 e <code translate="no">refine_k</code> è 2, il sistema classifica nuovamente i 200 candidati migliori e restituisce i 100 migliori, migliorando l'accuratezza complessiva.</p></li>
+<li><p><code translate="no">refine_k</code>: Agisce come fattore di ingrandimento. Ad esempio, se il top <em>k</em> è 100 e <code translate="no">refine_k</code> è 2, il sistema classifica nuovamente i 200 candidati migliori e restituisce i 100 migliori, migliorando la precisione complessiva.</p></li>
 </ul></li>
 </ol>
 <p>Per un elenco completo dei parametri e dei valori validi, consultare la sezione <a href="/docs/it/hnsw-sq.md#Index-params">Parametri dell'indice</a>.</p>
@@ -107,7 +107,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la costruzione dell'indice. Per i dettagli, fare riferimento a <a href="/docs/it/hnsw-sq.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, si può creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -200,12 +200,12 @@ res = MilvusClient.search(
 </ul></td>
      <td><p><strong>Tipo</strong>: Stringa <strong>Intervallo</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>La scelta di <code translate="no">sq_type</code> dipende dalle esigenze specifiche dell'applicazione. Se l'efficienza della memoria è una preoccupazione primaria, <code translate="no">SQ6</code> o <code translate="no">SQ8</code> potrebbero essere adatti. D'altra parte, se la precisione è fondamentale, si potrebbe preferire <code translate="no">BF16</code> o <code translate="no">FP16</code>.</p></td>
+     <td><p>La scelta di <code translate="no">sq_type</code> dipende dalle esigenze specifiche dell'applicazione. Se l'efficienza della memoria è una preoccupazione primaria, <code translate="no">SQ6</code> o <code translate="no">SQ8</code> potrebbero essere adatti. D'altra parte, se l'accuratezza è fondamentale, si potrebbe preferire <code translate="no">BF16</code> o <code translate="no">FP16</code>.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>Un flag booleano che controlla se viene applicata una fase di raffinamento durante la ricerca. L'affinamento consiste nel riordinare i risultati iniziali calcolando le distanze esatte tra il vettore della query e i candidati.</p></td>
+     <td><p>Un flag booleano che controlla se viene applicata una fase di raffinamento durante la ricerca. Il raffinamento consiste nel riordinare i risultati iniziali calcolando le distanze esatte tra il vettore della query e i candidati.</p></td>
      <td><p><strong>Tipo</strong>: Booleano <strong>Intervallo</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">false</code></p></td>
      <td><p>Impostare <code translate="no">true</code> se è essenziale un'elevata precisione e si possono tollerare tempi di ricerca leggermente più lenti. Utilizzare <code translate="no">false</code> se la velocità è una priorità e un piccolo compromesso nella precisione è accettabile.</p></td>
@@ -213,7 +213,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>Determina la precisione dei dati utilizzati per il raffinamento, che deve essere superiore a quella dei vettori compressi (impostata da <code translate="no">sq_type</code>), influenzando sia l'accuratezza dei vettori riordinati sia il loro ingombro in memoria.</p></td>
+     <td><p>Determina la precisione dei dati utilizzati per il raffinamento, che deve essere superiore a quella dei vettori compressi (impostata da <code translate="no">sq_type</code>), influenzando sia la precisione dei vettori riordinati sia il loro ingombro in memoria.</p></td>
      <td><p><strong>Tipo</strong>: Stringa <strong>Intervallo</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
 <p><strong>Valore predefinito</strong>: Nessuno</p></td>
      <td><p>Utilizzare <code translate="no">FP32</code> per ottenere la massima precisione con un costo di memoria più elevato, oppure <code translate="no">SQ6</code>/<code translate="no">SQ8</code> per una migliore compressione. <code translate="no">BF16</code> e <code translate="no">FP16</code> offrono un'alternativa equilibrata.</p></td>

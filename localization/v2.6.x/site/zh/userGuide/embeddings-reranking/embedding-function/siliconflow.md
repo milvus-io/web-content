@@ -94,7 +94,7 @@ beta: Milvus 2.6.x
 <li><p><strong>配置文件（推荐）：</strong>将 API 密钥存储在<code translate="no">milvus.yaml</code> 中，这样每次重启和节点都会自动获取它。</p></li>
 <li><p><strong>环境变量：</strong>在部署时注入密钥--最适合 Docker Compose。</p></li>
 </ul>
-<p>从以下两种方法中选择一种--配置文件在裸机和虚拟机上更易于维护，而 env-var 路线则适合容器工作流。</p>
+<p>从以下两种方法中选择一种--配置文件在裸机和虚拟机上更易于维护，而环境变量方法适合容器工作流。</p>
 <div class="alert note">
 <p>如果同一提供商的 API 密钥同时存在于配置文件和环境变量中，Milvus 将始终使用<code translate="no">milvus.yaml</code> 中的值，而忽略环境变量。</p>
 </div>
@@ -121,7 +121,7 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>这样，Milvus 向 OpenAI Embeddings 端点发送的每个请求都会绑定特定密钥。</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">方案 2：环境变量</h3><p>当你使用 Docker Compose 运行 Milvus，并希望不对文件和映像保密时，请使用这种方法。</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">方案 2：环境变量</h3><p>当您使用 Docker Compose 运行 Milvus，并希望不对文件和映像保密时，请使用这种方法。</p>
 <p>只有在<code translate="no">milvus.yaml</code> 中找不到提供程序的密钥时，Milvus 才会使用环境变量。</p>
 <table>
    <tr>
@@ -167,7 +167,7 @@ beta: Milvus 2.6.x
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
 <li><p>一个向量字段，用于存储函数将为标量字段生成的向量嵌入。</p></li>
 </ul>
-<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
+<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记要设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

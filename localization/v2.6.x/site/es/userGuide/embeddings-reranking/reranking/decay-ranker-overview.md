@@ -5,7 +5,7 @@ summary: >-
   En la búsqueda vectorial tradicional, los resultados se clasifican únicamente
   por similitud vectorial, es decir, por la coincidencia de los vectores en el
   espacio matemático. Pero en las aplicaciones del mundo real, lo que hace que
-  un contenido sea realmente relevante a menudo depende de algo más que de la
+  un contenido sea realmente relevante a menudo depende de algo más que la
   similitud semántica.
 beta: Milvus 2.6.x
 ---

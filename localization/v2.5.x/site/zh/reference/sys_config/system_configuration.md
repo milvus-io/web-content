@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: 了解 Milvus 的系统配置。
 ---
-
 <h1 id="Milvus-System-Configurations-Checklist" class="common-anchor-header">Milvus 系统配置检查表<button data-href="#Milvus-System-Configurations-Checklist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +38,7 @@ summary: 了解 Milvus 的系统配置。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>为方便维护，Milvus 根据组件、依赖关系和一般用法将配置分为 %s 个部分。</p>
+    </button></h2><p>为方便维护，Milvus 根据组件、依赖关系和一般使用情况，将配置分为 %s 个部分。</p>
 <h3 id="etcd" class="common-anchor-header"><code translate="no">etcd</code></h3><p>etcd 的相关配置，用于存储 Milvus 元数据和服务发现。</p>
 <p>请参阅<a href="/docs/zh/v2.5.x/configure_etcd.md">etcd 相关配置</a>，了解该部分下每个参数的详细说明。</p>
 <h3 id="metastore" class="common-anchor-header"><code translate="no">metastore</code></h3><p>本节下各参数的详细说明，请参见<a href="/docs/zh/v2.5.x/configure_metastore.md">元存储相关配置</a>。</p>
@@ -48,7 +47,7 @@ summary: 了解 Milvus 的系统配置。
 <p>当元数据大小需要更好的横向扩展能力时，TiKV 是一个不错的选择。</p>
 <p>有关本节下各参数的详细说明，请参见<a href="/docs/zh/v2.5.x/configure_tikv.md">tikv 相关配置</a>。</p>
 <h3 id="localStorage" class="common-anchor-header"><code translate="no">localStorage</code></h3><p>本节下各参数的详细说明，请参见<a href="/docs/zh/v2.5.x/configure_localstorage.md">localStorage 相关配置</a>。</p>
-<h3 id="minio" class="common-anchor-header"><code translate="no">minio</code></h3><p>MinIO/S3/GCS 或其他支持 S3 API 的服务的相关配置，S3 API 负责 Milvus 的数据持久化。</p>
+<h3 id="minio" class="common-anchor-header"><code translate="no">minio</code></h3><p>MinIO/S3/GCS 或其他支持 S3 API 的服务的相关配置，S3 API 负责 Milvus 的数据持久性。</p>
 <p>为简单起见，我们在下文中将存储服务称为 MinIO/S3。</p>
 <p>本节下每个参数的详细说明请参见<a href="/docs/zh/v2.5.x/configure_minio.md">minio 相关配置</a>。</p>
 <h3 id="mq" class="common-anchor-header"><code translate="no">mq</code></h3><p>Milvus 支持四种 MQ：rocksmq（基于 RockDB）、natsmq（嵌入式 nats-server）、Pulsar 和 Kafka。</p>
@@ -71,15 +70,14 @@ summary: 了解 Milvus 的系统配置。
 <p>ssl：</p>
 <pre><code translate="no">enabled: false # whether to enable ssl mode
 
-tlsCert: # path to client's public key (PEM) used for authentication
+tlsCert:  # path to client's public key (PEM) used for authentication
 
-tlsKey: # path to client's private key (PEM) used for authentication
+tlsKey:  # path to client's private key (PEM) used for authentication
 
-tlsCaCert: # file or directory path to CA certificate(s) for verifying the broker's key
+tlsCaCert:  # file or directory path to CA certificate(s) for verifying the broker's key
 
-tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
+tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
-
 <p>readTimeout：10</p>
 <p>本节下各参数的详细说明，请参见<a href="/docs/zh/v2.5.x/configure_rocksmq.md">rocksmq 相关配置</a>。</p>
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>natsmq 配置。</p>
@@ -92,7 +90,7 @@ tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_s
 <h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code></h3><p>queryCoord 的相关配置用于管理查询节点的拓扑和负载平衡，以及从增长网段到封存网段的切换。</p>
 <p>有关本节中每个参数的详细说明，请参阅<a href="/docs/zh/v2.5.x/configure_querycoord.md">queryCoord 相关配置</a>。</p>
 <h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code></h3><p>queryNode 的相关配置，用于在向量和标量数据之间运行混合搜索。</p>
-<p>有关本节中每个参数的详细说明，请参见<a href="/docs/zh/v2.5.x/configure_querynode.md">查询</a>节点<a href="/docs/zh/v2.5.x/configure_querynode.md">相关配置</a>。</p>
+<p>有关本节中各参数的详细说明，请参见<a href="/docs/zh/v2.5.x/configure_querynode.md">查询</a>节点<a href="/docs/zh/v2.5.x/configure_querynode.md">相关配置</a>。</p>
 <h3 id="indexCoord" class="common-anchor-header"><code translate="no">indexCoord</code></h3><p>有关本节中每个参数的详细说明，请参见<a href="/docs/zh/v2.5.x/configure_indexcoord.md">indexCoord 相关配置</a>。</p>
 <h3 id="indexNode" class="common-anchor-header"><code translate="no">indexNode</code></h3><p>有关本节中每个参数的详细说明，请参见<a href="/docs/zh/v2.5.x/configure_indexnode.md">indexNode 相关配置</a>。</p>
 <h3 id="dataCoord" class="common-anchor-header"><code translate="no">dataCoord</code></h3><p>请参阅<a href="/docs/zh/v2.5.x/configure_datacoord.md">dataCoord-related Configurations（数据</a>节点<a href="/docs/zh/v2.5.x/configure_datacoord.md">相关配置</a>），了解本节中各参数的详细说明。</p>
@@ -117,7 +115,7 @@ tlsKeyPassword: # private key passphrase for use with ssl.key.location and set_s
 <p>可以启用</p>
 <ol>
 <li><p>DML 吞吐量限制；</p></li>
-<li><p>DDL、DQL qps/rps 限制；</p></li>
+<li><p>DDL 和 DQL qps/rps 限制；</p></li>
 <li><p>DQL 队列长度/延迟保护；</p></li>
 <li><p>DQL 结果速率保护；</p></li>
 </ol>

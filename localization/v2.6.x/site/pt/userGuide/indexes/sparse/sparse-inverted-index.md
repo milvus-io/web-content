@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O índice <code translate="no">SPARSE_INVERTED_INDEX</code> é um tipo de índice utilizado pelo Milvus para armazenar e pesquisar eficazmente vectores esparsos. Este tipo de índice aproveita os princípios da indexação invertida para criar uma estrutura de pesquisa altamente eficiente para dados esparsos. Para mais informações, consulte <a href="/docs/pt/inverted.md">INVERTED</a>.</p>
+    </button></h1><p>O índice <code translate="no">SPARSE_INVERTED_INDEX</code> é um tipo de índice utilizado pelo Milvus para armazenar e pesquisar eficazmente vectores esparsos. Este tipo de índice aproveita os princípios da indexação invertida para criar uma estrutura de pesquisa altamente eficiente para dados esparsos. Para obter mais informações, consulte <a href="/docs/pt/inverted.md">INVERTED</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Criar índice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +64,7 @@ index_params.add_index(
 </ul></li>
 <li><p><code translate="no">params.inverted_index_algo</code>: O algoritmo utilizado para criar e consultar o índice. Valores válidos:</p>
 <ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (padrão): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores <em>k</em> elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (predefinição): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores <em>k</em> elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li>
 <li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Processamento optimizado de consultas DAAT utilizando o algoritmo WAND. O WAND avalia menos documentos atingidos, aproveitando as pontuações de impacto máximo para ignorar documentos não competitivos, mas tem uma sobrecarga mais elevada por hit. Isso torna o WAND mais eficiente para consultas com valores <em>k</em> pequenos ou consultas curtas, em que pular é mais viável.</p></li>
 <li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Processamento de consultas Basic Term-at-a-Time (TAAT). Embora seja mais lento em comparação com <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> oferece uma vantagem única. Ao contrário dos algoritmos DAAT, que utilizam pontuações de impacto máximo armazenadas em cache que permanecem estáticas independentemente das alterações ao parâmetro de recolha global (avgdl), o <code translate="no">TAAT_NAIVE</code> adapta-se dinamicamente a essas alterações.</p></li>
 </ul>
@@ -86,7 +86,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ser criado e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
 search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters</span>
@@ -139,7 +139,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">inverted_index_algo</code></p></td>
      <td><p>O algoritmo utilizado para construir e consultar o índice. Determina como o índice processa as consultas.</p></td>
      <td><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinição), <code translate="no">"DAAT_WAND"</code>, <code translate="no">"TAAT_NAIVE"</code></p></td>
-     <td><p>Utilize <code translate="no">"DAAT_MAXSCORE"</code> para cenários com valores k elevados ou consultas com muitos termos, que podem beneficiar do facto de ignorar documentos não competitivos. 
+     <td><p>Utilize <code translate="no">"DAAT_MAXSCORE"</code> para cenários com valores k elevados ou consultas com muitos termos, que podem beneficiar da omissão de documentos não competitivos. 
  Escolha <code translate="no">"DAAT_WAND"</code> para consultas com valores k pequenos ou consultas curtas para aproveitar a omissão mais eficiente.</p>
 <p>Utilize <code translate="no">"TAAT_NAIVE"</code> se for necessário um ajuste dinâmico às alterações da coleção (por exemplo, avgdl).</p></td>
    </tr>

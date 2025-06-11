@@ -1028,6 +1028,6 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
 <li><p>les listes de produits de commerce électronique</p></li>
 <li><p>les flux de contenu des médias sociaux</p></li>
 <li><p>les bases de connaissances et les systèmes de documentation</p></li>
-<li><p>les référentiels de documents de recherche.</p></li>
+<li><p>les dépôts de documents de recherche.</p></li>
 </ul>
 <p>En comprenant les mathématiques qui sous-tendent les fonctions de décroissance et en expérimentant différents paramètres, vous pouvez affiner votre système de recherche afin d'obtenir l'équilibre optimal entre pertinence et fraîcheur pour votre cas d'utilisation spécifique.</p>

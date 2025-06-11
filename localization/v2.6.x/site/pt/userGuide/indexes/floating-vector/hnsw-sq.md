@@ -123,7 +123,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ser criado e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -158,7 +158,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e executar pesquisas no índice.</p>
+    </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para construir um índice e executar pesquisas no índice.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção de índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">construir um índice</a>.</p>
 <table>
    <tr>
@@ -200,7 +200,7 @@ res = MilvusClient.search(
 </ul></td>
      <td><p><strong>Tipo</strong>: String <strong>Range</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p>
 <p><strong>Valor por defeito</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>A escolha de <code translate="no">sq_type</code> depende das necessidades específicas da aplicação. Se a eficiência da memória for a principal preocupação, <code translate="no">SQ6</code> ou <code translate="no">SQ8</code> podem ser adequados. Por outro lado, se a precisão for primordial, <code translate="no">BF16</code> ou <code translate="no">FP16</code> podem ser preferidos.</p></td>
+     <td><p>A escolha de <code translate="no">sq_type</code> depende das necessidades específicas da aplicação. Se a eficiência da memória for uma preocupação primordial, <code translate="no">SQ6</code> ou <code translate="no">SQ8</code> podem ser adequados. Por outro lado, se a precisão for primordial, <code translate="no">BF16</code> ou <code translate="no">FP16</code> podem ser preferidos.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -208,7 +208,7 @@ res = MilvusClient.search(
      <td><p>Um sinalizador booleano que controla se uma etapa de refinamento é aplicada durante a pesquisa. O refinamento envolve uma nova classificação dos resultados iniciais através do cálculo de distâncias exactas entre o vetor de consulta e os candidatos.</p></td>
      <td><p><strong>Tipo</strong>: Boolean <strong>Range</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
 <p><strong>Valor predefinido</strong>: <code translate="no">false</code></p></td>
-     <td><p>Defina como <code translate="no">true</code> se for essencial uma precisão elevada e puder tolerar tempos de pesquisa ligeiramente mais lentos. Utilize <code translate="no">false</code> se a velocidade for uma prioridade e for aceitável um pequeno compromisso na precisão.</p></td>
+     <td><p>Defina para <code translate="no">true</code> se uma precisão elevada for essencial e se puder tolerar tempos de pesquisa ligeiramente mais lentos. Utilize <code translate="no">false</code> se a velocidade for uma prioridade e for aceitável um pequeno compromisso na precisão.</p></td>
    </tr>
    <tr>
      <td></td>

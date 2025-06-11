@@ -7,7 +7,6 @@ summary: >-
   aiuterà a capire la compattazione del clustering e come questa funzione può
   migliorare le prestazioni di ricerca.
 ---
-
 <h1 id="Clustering-Compaction" class="common-anchor-header">Compattazione dei cluster<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,16 +79,15 @@ summary: >-
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
 
 <span class="hljs-attr">datanode:</span>
-<span class="hljs-attr">clusteringCompaction:</span>
-<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
-<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+  <span class="hljs-attr">clusteringCompaction:</span>
+    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
+    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
-
 <table>
    <tr>
      <th><p>Configurazione Voce</p></th>
@@ -139,7 +137,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">enableSegmentPrune</code></p></td>
-     <td><p>Specifica se Milvus deve effettuare il pruning dei dati facendo riferimento a PartitionStats quando riceve richieste di ricerca/query. Impostate questo valore su <code translate="no">true</code>, in modo che Milvus possa eliminare i dati alla ricezione di richieste di ricerca/query facendo riferimento a PartitionStats.</p></td>
+     <td><p>Specifica se Milvus esegue il pruning dei dati facendo riferimento a PartitionStats quando riceve richieste di ricerca/query. Impostate questo valore su <code translate="no">true</code>, in modo che Milvus possa eliminare i dati alla ricezione di richieste di ricerca/query facendo riferimento a PartitionStats.</p></td>
      <td></td>
    </tr>
    <tr>
@@ -147,7 +145,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">memoryBufferRatio</code></p></td>
-     <td><p>Specifica il rapporto del buffer di memoria per le attività di compattazione del cluster.  Milvus elimina i dati quando la dimensione dei dati supera la dimensione del buffer allocato calcolata con questo rapporto.</p></td>
+     <td><p>Specifica il rapporto del buffer di memoria per le attività di compattazione del cluster.  Milvus elimina i dati quando la dimensione dei dati supera la dimensione del buffer allocato, calcolata in base a questo rapporto.</p></td>
      <td></td>
    </tr>
    <tr>
@@ -174,8 +172,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -185,11 +183,10 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-schema=schema
+    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+    schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -290,10 +287,9 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-job_id=job_id,
+    job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;

@@ -2,7 +2,7 @@
 id: ivf-pq.md
 title: IVF_PQ
 summary: >-
-  IVF_PQ 索引是一種基於量化的索引演算法，用於高維空間的近似近鄰搜尋。雖然速度不如某些基於圖的方法，但 IVF_PQ
+  IVF_PQ 索引是一種基於量化的索引演算法，用於高維空間中的近似近鄰搜尋。雖然速度不如某些基於圖的方法，但 IVF_PQ
   通常需要較少的記憶體，使其成為大型資料集的實用選擇。
 ---
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
@@ -201,7 +201,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>在建立索引時使用 k-means 演算法建立的叢集數。</p></td>
+     <td><p>在建立索引時使用 k-means 演算法建立的叢集數目。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 65536]</p><p><strong>預設值</strong>：<code translate="no">128</code></p></td>
      <td><p>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善回復率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</p></td>
    </tr>
@@ -216,7 +216,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">nbits</code></p></td>
      <td><p>用來以壓縮形式表示每個子向量中心點索引的位元數。它直接決定每個編碼簿的大小。每個編碼本將包含 $2^{textit{nbits}}$ 的中心點。例如，如果<code translate="no">nbits</code> 設定為 8，則每個子向量將由 8 位元的 centroid 索引表示。如此一來，該子向量的編碼簿中就有 2^8$ (256) 個可能的中心點。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 64]</p><p><strong>預設值</strong>：<code translate="no">8</code></p></td>
-     <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼簿，可能會導致原始向量的表示更精確。不過，這也意味著要使用更多位元來儲存每個索引，導致較少的壓縮。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
+     <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼本，可能會導致原始向量的表示更精確。不過，這也意味著要使用更多位元來儲存每個索引，導致較少的壓縮。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/ivf-pq.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
