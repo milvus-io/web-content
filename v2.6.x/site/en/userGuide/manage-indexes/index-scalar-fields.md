@@ -327,7 +327,3 @@ console.log(res.indexes)
 //     "inverted_index"
 // ]   
 ```
-
-## Limits
-
-- Currently, scalar indexing supports INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR, and ARRAY data types, but not the JSON data type.

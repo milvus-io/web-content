@@ -146,13 +146,13 @@ Milvus uses Tantivy to support inverted indexing and term-based text search. The
 
 For more details, refer to [Text Match](keyword-match.md).
 
-#### `PHRASE_MATCH` operator
+#### `PHRASE_MATCH` operator | Milvus 2.6.x
 
 The **PHRASE_MATCH** operator enables precise retrieval of documents based on exact phrase matches, considering both the order and adjacency of query terms.
 
 For more details, refer to [Phrase Match](phrase-match.md).
 
-## Random sampling operator
+## Random sampling operator | Milvus 2.6.x
 
 Random sampling allows you to extract a subset of data samples from a collection at the segment level, making it ideal for exploring and processing massive datasets. This feature is valuable for these use cases:
 

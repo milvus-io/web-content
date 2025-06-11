@@ -67,7 +67,7 @@ When creating a collection, you can set the consistency level for the searches a
 client.create_collection(
     collection_name="my_collection",
     schema=schema,
-    # highlight-next
+    # highlight-next-line
     consistency_level="Strong",
 )
 ```
@@ -76,7 +76,7 @@ client.create_collection(
 CreateCollectionReq createCollectionReq = CreateCollectionReq.builder()
         .collectionName("my_collection")
         .collectionSchema(schema)
-        // highlight-next
+        // highlight-next-line
         .consistencyLevel(ConsistencyLevel.STRONG)
         .build();
 client.createCollection(createCollectionReq);
@@ -156,7 +156,7 @@ res = client.search(
     search_params={"metric_type": "IP"}，
     # highlight-start
     consistency_level="Bounded",
-    # highlight-next
+    # highlight-next-line
 )
 ```
 
@@ -220,7 +220,7 @@ res = client.query(
     limit=3，
     # highlight-start
     consistency_level="Eventually",
-    # highlight-next
+    # highlight-next-line
 )
 ```
 

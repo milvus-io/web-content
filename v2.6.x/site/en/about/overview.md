@@ -79,7 +79,7 @@ Milvus supports various types of search functions to meet the demands of differe
 - [Range Search](single-vector-search.md#Range-search): Finds vectors within a specified radius from your query vector.
 - [Hybrid Search](multi-vector-search.md): Conducts ANN search based on multiple vector fields.
 - [Full Text Search](full-text-search.md): Full text search based on BM25.
-- [Reranking](reranking.md): Adjusts the order of search results based on additional criteria or a secondary algorithm, refining the initial ANN search results.
+- [Reranking](weighted-ranker.md): Adjusts the order of search results based on additional criteria or a secondary algorithm, refining the initial ANN search results.
 - [Fetch](get-and-scalar-query.md#Get-Entities-by-ID): Retrieves data by their primary keys.
 - [Query](get-and-scalar-query.md#Use-Basic-Operators): Retrieves data using specific expressions.
 

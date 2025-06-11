@@ -7,7 +7,7 @@ title: "Retrieval-Augmented Generation: Crawling Websites with Apify and Saving 
 
 # Retrieval-Augmented Generation: Crawling Websites with Apify and Saving Data to Milvus for Question Answering
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/apify_milvus_rag.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/apify_milvus_rag.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 This tutorial explains how to crawl websites using Apify's Website Content Crawler and save the data into Milvus/Zilliz vector database to be later used for question answering.
 

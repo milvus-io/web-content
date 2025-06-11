@@ -291,7 +291,7 @@ Please keep the order of list of index params consistent with the order of `vect
 </div>
 
 ### Rerank the candidates
-After the first stage of retrieval, we need to rerank the candidates to get a better result. You can choose [WeightedRanker](https://milvus.io/docs/reranking.md#Weighted-Scoring-WeightedRanker) or [RRFRanker](https://milvus.io/docs/reranking.md#Reciprocal-Rank-Fusion-RRFRanker) depending on your requirements. You can refer to the [Reranking](https://milvus.io/docs/reranking.md#Reranking) for more information.
+After the first stage of retrieval, we need to rerank the candidates to get a better result. You can choose [WeightedRanker](https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker) or [RRFRanker](https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker) depending on your requirements. You can refer to the [Reranking](https://milvus.io/docs/weighted-ranker.md#Reranking) for more information.
 
 Here is an example for weighted reranking:
 
