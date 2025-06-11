@@ -5,7 +5,6 @@ related_key: Kubernetes
 summary: Aprenda a instalar el clúster Milvus en Kubernetes.
 title: Ejecutar Milvus con soporte GPU usando Docker Compose
 ---
-
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">Ejecutar Milvus con soporte GPU usando Docker Compose<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +41,7 @@ title: Ejecutar Milvus con soporte GPU usando Docker Compose
 <li><a href="/docs/es/v2.5.x/prerequisite-gpu.md">Compruebe los requisitos de hardware y software</a> antes de la instalación.</li>
 </ul>
 <div class="alert note">
-<p>Si encuentra algún problema al arrancar la imagen, póngase en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con detalles sobre el problema, y le proporcionaremos el soporte necesario.</p>
+<p>Si encuentra algún problema al arrancar la imagen, contacte con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con detalles sobre el problema, y le proporcionaremos el soporte necesario.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,11 +95,10 @@ title: Ejecutar Milvus con soporte GPU usando Docker Compose
 <h3 id="2-Start-Milvus" class="common-anchor-header">2. Inicie Milvus</h3><p>En el directorio que contiene docker-compose.yml, inicie Milvus ejecutando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd ... done
+Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p>Si no puede ejecutar el comando anterior, compruebe si su sistema tiene instalado Docker Compose V1. Si este es el caso, se le aconseja migrar a Docker Compose V2 debido a las notas en <a href="https://docs.docker.com/compose/">esta página</a>.</p>
 </div>
@@ -116,14 +114,11 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
-
----
-
-milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
-milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
-milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-
 <p>También puede acceder a Milvus WebUI en <code translate="no">http://127.0.0.1:9091/webui/</code> para obtener más información sobre su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/v2.5.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>Si ha asignado varios dispositivos GPU a Milvus en docker-compose.yml, puede especificar qué dispositivo GPU está visible o disponible para su uso.</p>
 <p>Haga que el dispositivo GPU <code translate="no">0</code> sea visible para Milvus:</p>

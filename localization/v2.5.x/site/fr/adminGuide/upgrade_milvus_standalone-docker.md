@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: Découvrez comment mettre à niveau Milvus en mode autonome avec Docker Compose.
 title: Mise à niveau de Milvus Standalone avec Docker Compose
 ---
-
 <div class="tab-wrapper"><a href="/docs/fr/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/fr/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/fr/v2.5.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Mise à niveau de Milvus Standalone avec Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

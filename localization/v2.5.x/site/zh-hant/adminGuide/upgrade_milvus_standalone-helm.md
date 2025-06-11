@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: 了解如何使用 Helm Chart 升級 Milvus 單機版。
 title: 使用 Helm 圖表升級 Milvus 單機版
 ---
-
 <div class="tab-wrapper"><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">使用 Helm 圖表升級 Milvus 單機版<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +44,7 @@ title: 使用 Helm 圖表升級 Milvus 單機版
 <li>Kubernetes 版本 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>自 Milvus Helm 圖表版本 4.2.21 起，我們引入 pulsar-v3.x 圖表作為相依性。為了向下相容性，請升級您的 helm 至 v3.14 或更高版本，並確保在使用<code translate="no">helm upgrade</code> 時加入<code translate="no">--reset-then-reuse-values</code> 選項。</p>
+<p>自 Milvus Helm 圖表版本 4.2.21 起，我們引入 pulsar-v3.x 圖表作為相依性。為了向下相容性，請升級您的 helm 到 v3.14 或更高版本，並確保在使用<code translate="no">helm upgrade</code> 時加入<code translate="no">--reset-then-reuse-values</code> 選項。</p>
 </div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">檢查 Milvus 版本<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"

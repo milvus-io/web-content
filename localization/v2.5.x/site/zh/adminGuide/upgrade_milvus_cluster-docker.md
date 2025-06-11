@@ -3,7 +3,6 @@ id: upgrade_milvus_cluster-docker.md
 summary: 了解如何使用 Docker Compose 升级 Milvus 集群。
 title: 使用 Docker Compose 升级 Milvus 群集
 ---
-
 <div class="tab-wrapper"><a href="/docs/zh/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/zh/v2.5.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/zh/v2.5.x/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/zh/v2.5.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升级 Milvus 群集<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

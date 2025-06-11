@@ -22,6 +22,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.</p>
+<div class="alert note">
+<p>If you dynamically add new fields after the collection has been created, queries that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -471,8 +474,7 @@ client = MilvusClient(
 
 res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
@@ -486,8 +488,7 @@ client = MilvusClient(
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -504,8 +505,7 @@ connections.connect(
 collection = Collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 
 iterator = collection.query_iterator(
-    <span class="hljs-comment"># highlight-next-line</span>
-    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     batch_size=<span class="hljs-number">10</span>,
     expr=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;color&quot;</span>]
@@ -586,8 +586,7 @@ fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetC
 <span class="hljs-comment">// Use get</span>
 <span class="hljs-keyword">var</span> res = client.<span class="hljs-title function_">query</span>({
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     filter=<span class="hljs-string">&#x27;color like &quot;red%&quot;&#x27;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     <span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
@@ -596,8 +595,7 @@ fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetC
 <span class="hljs-comment">// Use query</span>
 res = client.<span class="hljs-title function_">query</span>({
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     filter=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     <span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)

@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: MilvusスタンドアロンをHelm Chartでアップグレードする方法をご紹介します。
 title: MilvusスタンドアロンとHelmチャートのアップグレード
 ---
-
 <div class="tab-wrapper"><a href="/docs/ja/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ja/v2.5.x/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/ja/v2.5.x/upgrade_milvus_standalone-docker.md" class=''>コンポーザー</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">MilvusスタンドアロンとHelmチャートのアップグレード<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,7 +140,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tbody>
 <tr><td><code translate="no">i</code></td><td>Milvusインスタンス名</td><td><code translate="no">None</code></td><td>真</td></tr>
 <tr><td><code translate="no">n</code></td><td>Milvusがインストールされている名前空間</td><td><code translate="no">default</code></td><td>偽</td></tr>
-<tr><td><code translate="no">t</code></td><td>対象Milvusバージョン</td><td><code translate="no">None</code></td><td>真</td></tr>
+<tr><td><code translate="no">t</code></td><td>対象のMilvusバージョン</td><td><code translate="no">None</code></td><td>真</td></tr>
 <tr><td><code translate="no">w</code></td><td>新しいMilvusイメージタグ</td><td><code translate="no">milvusdb/milvus:v2.2.3</code></td><td>真</td></tr>
 <tr><td><code translate="no">o</code></td><td>操作方法</td><td><code translate="no">update</code></td><td>偽</td></tr>
 </tbody>

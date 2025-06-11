@@ -2,10 +2,9 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-summary: "Erfahren Sie, wie Sie das Java SDK von Milvus installieren."
+summary: 'Erfahren Sie, wie Sie das Java SDK von Milvus installieren.'
 title: Milvus Java SDK installieren
 ---
-
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Milvus Java SDK installieren<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

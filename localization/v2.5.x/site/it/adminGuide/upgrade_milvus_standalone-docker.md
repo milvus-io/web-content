@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: Scoprite come aggiornare Milvus standalone con Docker Compose.
 title: Aggiornamento di Milvus Standalone con Docker Compose
 ---
-
 <div class="tab-wrapper"><a href="/docs/it/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/it/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/it/v2.5.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Aggiornamento di Milvus Standalone con Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,7 +126,7 @@ docker compose up -d
 </ul></li>
 <li>Se siete pronti a distribuire il vostro cluster su cloud:<ul>
 <li>Imparare a <a href="/docs/it/v2.5.x/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
-<li>Imparare a distribuire <a href="/docs/it/v2.5.x/gcp.md">il cluster Milvus su GCP con Kubernetes</a></li>
+<li>Imparare a distribuire <a href="/docs/it/v2.5.x/gcp.md">un cluster Milvus su GCP con Kubernetes</a></li>
 <li>Imparare a <a href="/docs/it/v2.5.x/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 </ul>

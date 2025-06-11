@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: Saiba como atualizar o Milvus standalone com o Milvus operator.
 title: Atualizar o Milvus Standalone com o Milvus Operator
 ---
-
 <div class="tab-wrapper"><a href="/docs/pt/v2.5.x/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/pt/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/pt/v2.5.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Atualizar o Milvus Standalone com o Milvus Operator<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,7 +24,7 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
         ></path>
       </svg>
     </button></h1><p>Este guia descreve como atualizar o seu Milvus standalone com o Milvus Operator.</p>
-<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">Atualizar o seu Milvus Operator<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
+<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">Atualize seu Milvus Operator<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,7 +66,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>Desde a versão 2.2.3 do Milvus, é possível configurar os coordenadores do Milvus para funcionarem em modo de espera ativa e ativar a funcionalidade de atualização contínua para os mesmos, de modo a que o Milvus possa responder aos pedidos recebidos durante as actualizações do coordenador. Nas versões anteriores, os coordenadores devem ser removidos e depois criados durante uma atualização, o que pode provocar um certo tempo de inatividade do serviço.</p>
-<p>Com base nas capacidades de atualização contínua fornecidas pela Kubernetes, o operador do Milvus impõe uma atualização ordenada das implementações de acordo com as suas dependências. Além disso, o Milvus implementa um mecanismo para garantir que os seus componentes permanecem compatíveis com os que dependem deles durante a atualização, reduzindo significativamente o potencial tempo de inatividade do serviço.</p>
+<p>Com base nas capacidades de atualização contínua fornecidas pelo Kubernetes, o operador do Milvus impõe uma atualização ordenada das implementações de acordo com as suas dependências. Além disso, o Milvus implementa um mecanismo para garantir que os seus componentes permanecem compatíveis com os que deles dependem durante a atualização, reduzindo significativamente o potencial tempo de inatividade do serviço.</p>
 <p>A funcionalidade de atualização contínua está desactivada por defeito. É necessário activá-la explicitamente através de um ficheiro de configuração.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -120,7 +119,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em casos normais, pode simplesmente atualizar o seu Milvus para a versão mais recente alterando a sua imagem. No entanto, tenha em atenção que haverá um certo tempo de inatividade ao atualizar o Milvus desta forma.</p>
+    </button></h2><p>Em casos normais, pode simplesmente atualizar o seu Milvus para a versão mais recente, alterando a sua imagem. No entanto, tenha em atenção que haverá um certo tempo de inatividade ao atualizar o Milvus desta forma.</p>
 <p>Crie um ficheiro de configuração da seguinte forma e guarde-o como <strong>milvusupgrade.yaml</strong>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

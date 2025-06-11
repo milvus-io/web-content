@@ -5,7 +5,6 @@ related_key: Kubernetes
 summary: Kubernetes에 Milvus 클러스터를 설치하는 방법을 알아보세요.
 title: 도커 컴포즈를 사용하여 GPU 지원으로 Milvus 실행하기
 ---
-
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">도커 컴포즈를 사용하여 GPU 지원으로 Milvus 실행하기<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,11 +95,10 @@ title: 도커 컴포즈를 사용하여 GPU 지원으로 Milvus 실행하기
 <h3 id="2-Start-Milvus" class="common-anchor-header">2. Milvus 시작하기</h3><p>docker-compose.yml이 있는 디렉토리에서 Milvus를 실행하여 시작합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd ... done
+Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p>위 명령이 실행되지 않는 경우 시스템에 Docker Compose V1이 설치되어 있는지 확인하세요. <a href="https://docs.docker.com/compose/">이 경우 이 페이지의</a> 참고 사항에 따라 Docker Compose V2로 마이그레이션하는 것이 좋습니다.</p>
 </div>
@@ -116,14 +114,11 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
-
----
-
-milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
-milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
-milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Milvus WebUI( <code translate="no">http://127.0.0.1:9091/webui/</code> )에 액세스하여 Milvus 인스턴스에 대해 자세히 알아볼 수도 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/milvus-webui.md">Milvus WebUI를</a> 참조하세요.</p>
 <p>docker-compose.yml에서 Milvus에 여러 GPU 장치를 할당했다면 어떤 GPU 장치를 표시하거나 사용할 수 있는지 지정할 수 있습니다.</p>
 <p>Milvus에 GPU 장치 <code translate="no">0</code> 를 표시하도록 설정합니다:</p>

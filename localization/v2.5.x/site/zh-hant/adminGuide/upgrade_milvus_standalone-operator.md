@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: 了解如何使用 Milvus operator 升級 Milvus standalone。
 title: 使用 Milvus Operator 升級 Milvus 單機版
 ---
-
 <div class="tab-wrapper"><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 升級 Milvus 單機版<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +79,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.13</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上述配置文件中，將<code translate="no">spec.components.enableRollingUpdate</code> 設定為<code translate="no">true</code> ，並將<code translate="no">spec.components.image</code> 設定為所需的 Milvus 版本。</p>
-<p>預設情況下，Milvus 會以有序的方式為協調器執行滾動升級，在此過程中，它會一個接一個地更換協調器 pod 映像檔。若要縮短升級時間，可考慮將<code translate="no">spec.components.imageUpdateMode</code> 設為<code translate="no">all</code> ，讓 Milvus 同時取代所有 Pod 影像。</p>
+<p>預設情況下，Milvus 會以有序的方式為協調器執行滾動升級，在此過程中，它會一個接一個地更換協調器 pod 映像檔。若要減少升級時間，請考慮將<code translate="no">spec.components.imageUpdateMode</code> 設為<code translate="no">all</code> ，讓 Milvus 在同一時間取代所有 Pod 影像。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

@@ -3,7 +3,6 @@ id: release_notes.md
 summary: Milvus 發行紀錄
 title: 發佈筆記
 ---
-
 <h1 id="Release-Notes" class="common-anchor-header">發佈筆記<button data-href="#Release-Notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,7 +232,7 @@ title: 發佈筆記
 <tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.10 提供更佳的搜尋與載入效能、更強化的度量報告，並擴大 SVE 支援以加速度量計算。此版本也包含多項錯誤修正，以提升穩定性與正確性。我們鼓勵您升級或試用，您的回饋對於幫助我們讓 Milvus 更好是非常寶貴的！</p>
+<p>Milvus 2.5.10 提供更佳的搜尋與載入效能、更強化的度量報告，並擴大 SVE 支援以加速度量計算。此版本也包含多項錯誤修正，以提升穩定性與正確性。我們鼓勵您升級或試用，您的回饋對於我們改善 Milvus 是非常寶貴的！</p>
 <h3 id="Improvements" class="common-anchor-header">改進</h3><ul>
 <li>忽略報告不存在索引的索引度量<a href="https://github.com/milvus-io/milvus/pull/41296">(#41296</a>)</li>
 <li>即使存在反向索引，也對 LIKE 使用掃描模式<a href="https://github.com/milvus-io/milvus/pull/41309">(#41309</a>)</li>
@@ -330,7 +329,7 @@ title: 發佈筆記
 <tr><td>2.5.8</td><td>2.5.6</td><td>2.5.7</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>我們很高興宣佈 Milvus 2.5.8 正式發行，其特色在於強化 JSON 表達式、UTF-8 驗證、記憶體使用以及平衡邏輯。這個版本也包含多項重要的錯誤修正，以改善並發性和資料處理。我們鼓勵您升級或試用，您的回饋也會一如既往地幫助我們不斷改進 Milvus！</p>
+<p>我們很高興地宣布 Milvus 2.5.8 正式發行，其特色在於強化 JSON 表達式、UTF-8 驗證、記憶體使用以及平衡邏輯。這個版本也包含多項重要的錯誤修正，以改善並發性和資料處理。我們鼓勵您升級或試用，您的回饋也能幫助我們持續改進 Milvus！</p>
 <h3 id="Features" class="common-anchor-header">功能</h3><ul>
 <li>支援 JSON<code translate="no">null</code>/<code translate="no">exists</code> 表達式<a href="https://github.com/milvus-io/milvus/pull/41002">(#41002</a>)</li>
 <li>在大量插入時，支援從 Parquet 結構檔解析稀疏向量<a href="https://github.com/milvus-io/milvus/pull/40874">(#40874</a>)</li>
@@ -512,7 +511,7 @@ title: 發佈筆記
 </ul>
 <h3 id="Critical-Bugs" class="common-anchor-header">重大錯誤</h3><ul>
 <li>[2.5] 在 textmatchindex 空偏移文件中使用<code translate="no">text_log</code> 前綴<a href="https://github.com/milvus-io/milvus/pull/39936">(#39936</a>)</li>
-<li>[2.5] 為多階段任務新增子任務池以避免死鎖<a href="https://github.com/milvus-io/milvus/pull/40081">(#40081</a>)</li>
+<li>[2.5] 為多階段任務新增子任務池，以避免死鎖<a href="https://github.com/milvus-io/milvus/pull/40081">(#40081</a>)</li>
 </ul>
 <h3 id="Bug-Fixes" class="common-anchor-header">修正錯誤</h3><ul>
 <li>[2.5] 修正任務排程死鎖<a href="https://github.com/milvus-io/milvus/pull/40121">(#40121</a>)</li>
@@ -653,7 +652,7 @@ title: 發佈筆記
 <li>修正了因線程數過多而造成的索引緩慢問題<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
 <li>修正了在大量匯入時，無法跳過磁碟配額檢查的問題<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
 <li>透過限制並發量，解決了因太多訊息佇列消費者所造成的凍結問題<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
-<li>修正了在大規模壓縮期間，由於 MixCoord 重新啟動而導致的查詢超時問題<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
+<li>修正了在大規模壓縮期間，由於 MixCoord 重新啟動而造成的查詢超時問題<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
 <li>修正由於節點停機所造成的頻道不平衡問題<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
 <li>修正了可能導致頻道平衡卡住的問題。<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
 <li>修正了 RBAC 自訂群組權限等級檢查變得無效的問題<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
@@ -811,7 +810,7 @@ title: 發佈筆記
 <p>在<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> 的支援下，Milvus 2.5 內建了分析器和稀疏向量萃取，將 API 從僅接收向量作為輸入擴展到直接接受文字。當資料插入時，BM25 統計資訊會即時更新，提升可用性與精確度。此外，以近似近鄰 (ANN) 演算法為基礎的稀疏向量，提供比標準關鍵字搜尋系統更強大的效能。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md">Analyzer 概觀</a>與<a href="/docs/zh-hant/v2.5.x/full-text-search.md">全文</a>檢索。</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">叢集管理 WebUI (測試版)</h4><p>為了更好地支援海量資料和豐富的功能，Milvus 的精密設計包括各種依賴關係、眾多節點角色、複雜的資料結構等。這些方面都可能為使用和維護帶來挑戰。</p>
-<p>Milvus 2.5 引入了內建的叢集管理 WebUI，透過可視化 Milvus 複雜的運行環境資訊，降低系統維護的難度。這包括資料庫和資料集、網段、頻道、依存關係、節點健康狀態、任務資訊、緩慢查詢等詳細資訊。</p>
+<p>Milvus 2.5 引入了內建的群集管理 WebUI，透過可視化 Milvus 複雜的運行環境資訊，降低系統維護的難度。這包括資料庫和資料集、網段、頻道、依存關係、節點健康狀態、任務資訊、緩慢查詢等詳細資訊。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <h4 id="Text-Match" class="common-anchor-header">文字匹配</h4><p>Milvus 2.5 利用<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>的分析器和索引進行文字預處理和索引建立，支援根據特定詞彙對文字資料進行精確的自然語言匹配。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細查詢結果，允許在符合標量條件的向量內進行相似性搜尋。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md">Analyzer 概觀</a>和<a href="/docs/zh-hant/v2.5.x/keyword-match.md">文字匹配</a>。</p>
@@ -819,7 +818,7 @@ title: 發佈筆記
 <p>Bitmap 索引傳統上對於低心數欄位非常有效，因為低心數欄位只有少量不同的值--例如，包含性別資訊的欄位只有兩個可能的值：男性和女性。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/bitmap.md">位元圖索引</a>。</p>
 <h4 id="Nullable--Default-Value" class="common-anchor-header">可空值與預設值</h4><p>Milvus 現在支援為除主索引鍵欄位以外的標量欄位設定 nullable 屬性和預設值。對於標記為<code translate="no">nullable=True</code> 的標量欄位，使用者可以在插入資料時省略該欄位；系統會將其視為空值或預設值（如果已設定），而不會產生錯誤。</p>
-<p>預設值和可為空的屬性為 Milvus 提供了更大的靈活性。使用者在建立集合時，可以利用此功能來處理值不確定的欄位。它也簡化了從其他資料庫系統到 Milvus 的資料遷移，允許處理包含空值的資料集，同時保留原始的預設值設定。</p>
+<p>預設值和可為空的屬性為 Milvus 提供了更大的靈活性。使用者在建立集合時，可以利用此功能來處理值不確定的欄位。它也簡化了從其他資料庫系統到 Milvus 的資料遷移，允許處理包含 null 值的資料集，同時保留原始的預設值設定。</p>
 <p>詳情請參閱<a href="/docs/zh-hant/v2.5.x/nullable-and-default.md">Nullable &amp; Default Value</a>。</p>
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">基於 Faiss 的 HNSW SQ/PQ/PRQ</h4><p>透過與 Faiss 社群的密切合作，Faiss 中的 HNSW 演算法在功能和效能上都有顯著的改善。基於穩定性與可維護性的考量，Milvus 2.5 正式將 HNSW 的支援從 hnswlib 移轉到 Faiss。</p>
 <p>在 Faiss 的基礎上，Milvus 2.5 支援 HNSW 的多種量化方法，以滿足不同場景的需求：SQ (Scalar Quantizers)、PQ (Product Quantizer)、PRQ (Product Residual Quantizer)。SQ 和 PQ 比較常見；SQ 提供良好的查詢效能和建立速度，而 PQ 則在相同的壓縮比下提供較佳的召回率。許多向量資料庫普遍使用二進位量化，這是 SQ 量化的一種簡單形式。</p>
@@ -840,7 +839,7 @@ title: 發佈筆記
 <li><strong>持久游標</strong>：Milvus 現在支援 QueryIterator 的持久游標，讓使用者可以在 Milvus 重新啟動後，從最後一個位置恢復迭代，而不需要重新啟動整個迭代過程。</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">改進</h3><h4 id="Deletion-Optimization" class="common-anchor-header">刪除優化</h4><p>透過優化鎖的使用和記憶體管理，提高了大規模刪除的速度並降低了記憶體使用量。</p>
-<h4 id="Dependencies-Upgrade" class="common-anchor-header">相依性升級</h4><p>升級至 ETCD 3.5.16 與 Pulsar 3.0.7 LTS，修正現有的 CVE 並加強安全性。注意：升級至 Pulsar 3.x 與之前的 2.x 版本不相容。</p>
+<h4 id="Dependencies-Upgrade" class="common-anchor-header">相依性升級</h4><p>升級至 ETCD 3.5.16 及 Pulsar 3.0.7 LTS，修正現有 CVE 並加強安全性。注意：升級至 Pulsar 3.x 與之前的 2.x 版本不相容。</p>
 <p>對於已經有一個正常運作的 Milvus 部署的使用者，您需要先升級 ETCD 和 Pulsar 元件，才能使用新的特性和功能。詳情請參考<a href="/docs/zh-hant/v2.5.x/upgrade-pulsar-v3.md">Pulsar 從 2.x 升級到 3.x</a></p>
 <h4 id="Local-Storage-V2" class="common-anchor-header">本機儲存 V2</h4><p>在 Milvus 2.5 中引入了新的本地文件格式，提高了標量資料的載入和查詢效率，減少了記憶體開銷，並為未來的優化奠定了基礎。</p>
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">表達式解析最佳化</h4><p>透過對重複表達式實施快取、升級 ANTLR，以及優化<code translate="no">NOT IN</code> 子句的效能，改善表達式解析。</p>

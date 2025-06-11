@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: Scoprite come aggiornare Milvus standalone con Milvus operator.
 title: Aggiornamento di Milvus standalone con Milvus Operator
 ---
-
 <div class="tab-wrapper"><a href="/docs/it/v2.5.x/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/it/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/it/v2.5.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Aggiornamento di Milvus standalone con Milvus Operator<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +67,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
       </svg>
     </button></h2><p>A partire da Milvus 2.2.3, è possibile configurare i coordinatori di Milvus per lavorare in modalità active-standby e abilitare la funzione di aggiornamento continuo per loro, in modo che Milvus possa rispondere alle richieste in arrivo durante gli aggiornamenti dei coordinatori. Nelle versioni precedenti, i coordinatori dovevano essere rimossi e poi creati durante un aggiornamento, il che poteva comportare alcuni tempi di inattività del servizio.</p>
 <p>Basandosi sulle funzionalità di aggiornamento continuo fornite da Kubernetes, il gestore di Milvus impone un aggiornamento ordinato delle distribuzioni in base alle loro dipendenze. Inoltre, Milvus implementa un meccanismo per garantire che i suoi componenti rimangano compatibili con quelli che dipendono da loro durante l'aggiornamento, riducendo in modo significativo il potenziale downtime del servizio.</p>
-<p>La funzione di aggiornamento continuo è disattivata per impostazione predefinita. È necessario abilitarla esplicitamente attraverso un file di configurazione.</p>
+<p>La funzione di aggiornamento continuo è disabilitata per impostazione predefinita. È necessario abilitarla esplicitamente attraverso un file di configurazione.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

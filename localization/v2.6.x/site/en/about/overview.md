@@ -140,7 +140,7 @@ summary: >-
 <li><a href="/docs/single-vector-search.md#Range-search">Range Search</a>: Finds vectors within a specified radius from your query vector.</li>
 <li><a href="/docs/multi-vector-search.md">Hybrid Search</a>: Conducts ANN search based on multiple vector fields.</li>
 <li><a href="/docs/full-text-search.md">Full Text Search</a>: Full text search based on BM25.</li>
-<li><a href="/docs/reranking.md">Reranking</a>: Adjusts the order of search results based on additional criteria or a secondary algorithm, refining the initial ANN search results.</li>
+<li><a href="/docs/weighted-ranker.md">Reranking</a>: Adjusts the order of search results based on additional criteria or a secondary algorithm, refining the initial ANN search results.</li>
 <li><a href="/docs/get-and-scalar-query.md#Get-Entities-by-ID">Fetch</a>: Retrieves data by their primary keys.</li>
 <li><a href="/docs/get-and-scalar-query.md#Use-Basic-Operators">Query</a>: Retrieves data using specific expressions.</li>
 </ul>

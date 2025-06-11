@@ -86,11 +86,9 @@ iterator = collection.search_iterator(
     data=query_vectors,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
     param={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">16</span>}},
-    <span class="hljs-comment"># highlight-next-line</span>
-    batch_size=<span class="hljs-number">50</span>,
+<span class="highlighted-wrapper-line">    batch_size=<span class="hljs-number">50</span>,</span>
     output_fields=[<span class="hljs-string">&quot;color&quot;</span>],
-    <span class="hljs-comment"># highlight-next-line</span>
-    limit=<span class="hljs-number">20000</span>
+<span class="highlighted-wrapper-line">    limit=<span class="hljs-number">20000</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
@@ -171,11 +169,9 @@ iterator = collection.search_iterator(
 <pre><code translate="no" class="language-python">results = []
 
 <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
-    <span class="hljs-comment"># highlight-next-line</span>
-    result = iterator.<span class="hljs-built_in">next</span>()
+<span class="highlighted-wrapper-line">    result = iterator.<span class="hljs-built_in">next</span>()</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> result:
-        <span class="hljs-comment"># highlight-next-line</span>
-        iterator.close()
+<span class="highlighted-wrapper-line">        iterator.close()</span>
         <span class="hljs-keyword">break</span>
     
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> result:

@@ -117,10 +117,8 @@ schema := entity.NewSchema()
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
     datatype=DataType.INT64,
-    <span class="hljs-comment"># highlight-start</span>
-    is_primary=<span class="hljs-literal">True</span>,
-    auto_id=<span class="hljs-literal">False</span>,
-    <span class="hljs-comment"># highlight-end</span>
+<span class="highlighted-comment-line">    is_primary=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">    auto_id=<span class="hljs-literal">False</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -129,27 +127,21 @@ schema := entity.NewSchema()
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
         .dataType(DataType.Int64)
-        <span class="hljs-comment">// highlight-start</span>
-        .isPrimaryKey(<span class="hljs-literal">true</span>)
-        .autoID(<span class="hljs-literal">false</span>)
-        <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">        .isPrimaryKey(<span class="hljs-literal">true</span>)</span>
+<span class="highlighted-comment-line">        .autoID(<span class="hljs-literal">false</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span></span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
     WithDataType(entity.FieldTypeInt64).
-    <span class="hljs-comment">// highlight-start</span>
-    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
-    WithIsAutoID(<span class="hljs-literal">false</span>),
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    WithIsPrimaryKey(<span class="hljs-literal">true</span>).</span>
+<span class="highlighted-comment-line">    WithIsAutoID(<span class="hljs-literal">false</span>),</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{
@@ -194,28 +186,24 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
     datatype=DataType.FLOAT_VECTOR,
-    <span class="hljs-comment"># highlight-next-line</span>
-    dim=<span class="hljs-number">5</span>
+<span class="highlighted-wrapper-line">    dim=<span class="hljs-number">5</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)
         .dataType(DataType.FloatVector)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .dimension(<span class="hljs-number">5</span>)
+<span class="highlighted-wrapper-line">        .dimension(<span class="hljs-number">5</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span></span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
     WithDataType(entity.FieldTypeFloatVector).
-    <span class="hljs-comment">// highlight-next-line</span>
-    WithDim(<span class="hljs-number">5</span>),
+<span class="highlighted-wrapper-line">    WithDim(<span class="hljs-number">5</span>),</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
@@ -272,22 +260,19 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
     datatype=DataType.VARCHAR,
-    <span class="hljs-comment"># highlight-next-line</span>
-    max_length=<span class="hljs-number">512</span>
+<span class="highlighted-wrapper-line">    max_length=<span class="hljs-number">512</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
         .dataType(DataType.VarChar)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .maxLength(<span class="hljs-number">512</span>)
+<span class="highlighted-wrapper-line">        .maxLength(<span class="hljs-number">512</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span></span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).

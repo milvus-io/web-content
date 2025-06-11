@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: Docker ComposeでMilvusをスタンドアロンでアップグレードする方法をご紹介します。
 title: Docker Composeを使用したMilvusスタンドアロンのアップグレード
 ---
-
 <div class="tab-wrapper"><a href="/docs/ja/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>Milvus オペレータ</a><a href="/docs/ja/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>HelmDocker</a><a href="/docs/ja/v2.5.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Docker Composeを使用したMilvusスタンドアロンのアップグレード<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

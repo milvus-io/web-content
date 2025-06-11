@@ -2,10 +2,9 @@
 id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
-summary: "Erfahren Sie, wie Sie das Python-SDK von Milvus installieren."
+summary: 'Erfahren Sie, wie Sie das Python-SDK von Milvus installieren.'
 title: Milvus Python SDK installieren
 ---
-
 <h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">Milvus Python SDK installieren<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

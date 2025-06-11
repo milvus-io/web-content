@@ -5,7 +5,6 @@ related_key: configure
 summary: Настройте Milvus с помощью Docker Compose.
 title: Настройка Milvus с помощью Docker Compose
 ---
-
 <h1 id="Configure-Milvus-with-Docker-Compose" class="common-anchor-header">Настройка Milvus с помощью Docker Compose<button data-href="#Configure-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

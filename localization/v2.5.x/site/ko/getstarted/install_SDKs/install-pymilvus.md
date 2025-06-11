@@ -5,7 +5,6 @@ related_key: SDK
 summary: Milvus의 Python SDK를 설치하는 방법을 알아보세요.
 title: Milvus 파이썬 SDK 설치하기
 ---
-
 <h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">Milvus 파이썬 SDK 설치하기<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
