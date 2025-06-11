@@ -1,11 +1,9 @@
 ---
 id: grant_privileges.md
-title: Grant Privilege or Privilege Group to Roles
-summary: >-
-  Once a role is created, you can grant privileges to the role. This guide
-  introduces how to grant privileges or privilege groups to a role.
+title: 为角色授予权限或权限组
+summary: 创建角色后，就可以向角色授予权限。本指南将介绍如何向角色授予权限或权限组。
 ---
-<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">Grant Privilege or Privilege Group to Roles<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
+<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">为角色授予权限或权限组<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Once a role is created, you can grant privileges to the role. This guide introduces how to grant privileges or privilege groups to a role.</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">Grant a privilege or a privilege group to a role<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
+    </button></h1><p>创建角色后，就可以向角色授予权限。本指南将介绍如何向角色授予权限或权限组。</p>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">向角色授予权限或权限组<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,22 +34,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.5 introduces a new version of API which streamlines the grant operation. You no longer need to look up the object type when granting a privilege to a role. The following are the parameters and corresponding explanations.</p>
+    </button></h2><p>Milvus 2.5 引入了新版本的 API，简化了授予操作。向角色授予权限时，不再需要查找对象类型。以下是参数和相应的解释。</p>
 <ul>
-<li><p><strong>role_name:</strong> The name of the target role to which privilege(s) or privilege group(s) need to be granted.</p></li>
-<li><p><strong>Resource</strong>: The target resource of a privilege, which can be a specific instance, database, or collection.</p></li>
+<li><p><strong>role_name：</strong>需要授予权限或权限组的目标角色名称。</p></li>
+<li><p><strong>资源</strong>：权限的目标资源，可以是特定实例、数据库或 Collections。</p></li>
 </ul>
-<p>The following table explains how to specify the resource in the <code translate="no">client.grantV2()</code> method.</p>
+<p>下表解释了如何在<code translate="no">client.grantV2()</code> 方法中指定资源。</p>
 <table>
    <tr>
-     <th><p><strong>Level</strong></p></th>
-     <th><p><strong>Resource</strong></p></th>
-     <th><p><strong>Grant Method</strong></p></th>
-     <th><p><strong>Notes</strong></p></th>
+     <th><p><strong>级别</strong></p></th>
+     <th><p><strong>资源</strong></p></th>
+     <th><p><strong>授予方法</strong></p></th>
+     <th><p><strong>注释</strong></p></th>
    </tr>
    <tr>
-     <td rowspan="2"><p><strong>Collection</strong></p></td>
-     <td><p>A specific collection</p></td>
+     <td rowspan="2"><p><strong>Collections</strong></p></td>
+     <td><p>特定 Collections</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -59,10 +57,10 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Input the name of your target collection and the name of the database to which the target collection belongs.</p></td>
+     <td><p>输入目标 Collections 的名称以及目标 Collections 所属数据库的名称。</p></td>
    </tr>
    <tr>
-     <td><p>All collections under a specific database</p></td>
+     <td><p>特定数据库下的所有集合</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -70,11 +68,11 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
+     <td><p>输入目标数据库名称和通配符<code translate="no">*</code> 作为 Collection 名称。</p></td>
    </tr>
    <tr>
-     <td rowspan="2"><p><strong>Database</strong></p></td>
-     <td><p>A specific database</p></td>
+     <td rowspan="2"><p><strong>数据库</strong></p></td>
+     <td><p>特定数据库</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -82,10 +80,10 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
+     <td><p>输入目标数据库的名称和通配符<code translate="no">*</code> 作为 Collections 名称。</p></td>
    </tr>
    <tr>
-     <td><p>All databases under the current instance</p></td>
+     <td><p>当前实例下的所有数据库</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -93,11 +91,11 @@ summary: >-
      db_name="*"
  )
 </code></pre></td>
-     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
+     <td><p>输入<code translate="no">*</code> 作为数据库名称，输入<code translate="no">*</code> 作为 Collections 名称。</p></td>
    </tr>
    <tr>
-     <td><p><strong>Instance</strong></p></td>
-     <td><p>The current instance</p></td>
+     <td><p><strong>实例</strong></p></td>
+     <td><p>当前实例</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="ClusterAdmin", 
@@ -105,318 +103,313 @@ summary: >-
      db_name="*"
  )
 </code></pre></td>
-     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
+     <td><p>输入<code translate="no">*</code> 作为数据库名称，输入<code translate="no">*</code> 作为 Collections 名称。</p></td>
    </tr>
 </table>
 <ul>
-<li><p><strong>Privilege</strong>: The specific privilege or <a href="/docs/privilege_group.md">privilege group</a> that you need to grant to a role. Currently, Milvus provides 56 types of privileges that you can grant. The table below lists the privileges in Milvus.</p>
+<li><p><strong>权限</strong>：需要授予角色的特定权限或<a href="/docs/zh/privilege_group.md">权限组</a>。目前，Milvus 提供了 56 种可授予的特权。下表列出了 Milvus 中的特权。</p>
 <p><div class="alert note"></p>
-<p>The type column in the table below are user to facilitate your quick lookup for privileges and is used for classification purposes only. When granting privileges, you do not need to understand the types. You just need to input the corresponding privileges.</p>
+<p>下表中的类型列是用户为方便快速查找特权而设置的，仅用于分类目的。授予权限时，不需要了解类型。只需输入相应的权限即可。</p>
 <p></div></p>
 <p><table>
 <tr>
-<th><p><strong>Type</strong></p></th>
-<th><p><strong>Privilege</strong></p></th>
-<th><p><strong>Description</strong></p></th>
-<th><p><strong>Relevant API description on the client side</strong></p></th>
+<th><p><strong>类型</strong></p></th>
+<th><p><strong>权限</strong></p></th>
+<th><p><strong>说明</strong></p></th>
+<th><p><strong>客户端的相关 API 说明</strong></p></th>
 </tr>
 <tr>
-<td rowspan="5"><p>Database Privileges</p></td>
-<td><p>ListDatabases</p></td>
-<td><p>View all databases in the current instance</p></td>
-<td><p><a href="/docs/manage_databases.md">ListDatabases</a></p></td>
+<td rowspan="5"><p>数据库权限</p></td>
+<td><p>列出数据库</p></td>
+<td><p>查看当前实例中的所有数据库</p></td>
+<td><p><a href="/docs/zh/manage_databases.md">列出数据库</a></p></td>
 </tr>
 <tr>
-<td><p>DescribeDatabase</p></td>
-<td><p>View the details of a database</p></td>
-<td><p><a href="/docs/manage_databases.md">DescribeDatabase</a></p></td>
+<td><p>描述数据库</p></td>
+<td><p>查看数据库的详细信息</p></td>
+<td><p><a href="/docs/zh/manage_databases.md">描述数据库</a></p></td>
 </tr>
 <tr>
-<td><p>CreateDatabase</p></td>
-<td><p>Create a database</p></td>
-<td><p><a href="/docs/manage_databases.md">CreateDatabase</a></p></td>
+<td><p>创建数据库</p></td>
+<td><p>创建数据库</p></td>
+<td><p><a href="/docs/zh/manage_databases.md">创建数据库</a></p></td>
 </tr>
 <tr>
-<td><p>DropDatabase</p></td>
-<td><p>Drop a database</p></td>
-<td><p><a href="/docs/manage_databases.md">DropDatabase</a></p></td>
+<td><p>删除数据库</p></td>
+<td><p>删除数据库</p></td>
+<td><p><a href="/docs/zh/manage_databases.md">删除数据库</a></p></td>
 </tr>
 <tr>
-<td><p>AlterDatabase</p></td>
-<td><p>Modify the properties of a database</p></td>
-<td><p><a href="/docs/manage_databases.md">AlterDatabase</a></p></td>
+<td><p>更改数据库</p></td>
+<td><p>修改数据库属性</p></td>
+<td><p><a href="/docs/zh/manage_databases.md">更改数据库</a></p></td>
 </tr>
 <tr>
-<td rowspan="18"><p>Collection Privileges</p></td>
-<td><p>GetFlushState</p></td>
-<td><p>Check the status of the collection flush operation</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
+<td rowspan="18"><p>Collections 权限</p></td>
+<td><p>获取刷新状态</p></td>
+<td><p>检查 Collections 清除操作符的状态</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">获取刷新状态</a></p></td>
 </tr>
 <tr>
-<td><p>GetLoadState</p></td>
-<td><p>Check the load status of a collection</p></td>
-<td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
+<td><p>获取加载状态</p></td>
+<td><p>检查 Collections 的加载状态</p></td>
+<td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">获取加载状态</a></p></td>
 </tr>
 <tr>
-<td><p>GetLoadingProgress</p></td>
-<td><p>Check the loading progress of a collection</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
+<td><p>获取加载进度</p></td>
+<td><p>检查 Collections 的加载进度</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">获取加载进度</a></p></td>
 </tr>
 <tr>
-<td><p>ShowCollections</p></td>
-<td><p>View all collections with collection privileges</p></td>
-<td><p><a href="/docs/view-collections.md">ShowCollections</a></p></td>
+<td><p>显示收藏集</p></td>
+<td><p>查看具有收藏权限的所有 Collections</p></td>
+<td><p><a href="/docs/zh/view-collections.md">显示收藏集</a></p></td>
 </tr>
 <tr>
-<td><p>ListAliases</p></td>
-<td><p>View all aliases of a collection</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">ListAliases</a></p></td>
+<td><p>列出别名</p></td>
+<td><p>查看某个 Collection 的所有别名</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">列出别名</a></p></td>
 </tr>
 <tr>
-<td><p>DescribeCollection</p></td>
-<td><p>View the details of a collection</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">DescribeCollection</a></p></td>
+<td><p>描述收藏集</p></td>
+<td><p>查看 Collections 的详细信息</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">描述集合</a></p></td>
 </tr>
 <tr>
-<td><p>DescribeAlias</p></td>
-<td><p>View the details of an alias</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">DescribeAlias</a></p></td>
+<td><p>描述别名</p></td>
+<td><p>查看别名的详细信息</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">描述别名</a></p></td>
 </tr>
 <tr>
-<td><p>GetStatistics</p></td>
-<td><p>Obtain the statistics of a collection (eg. The number of entities in a collection)</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
+<td><p>获取统计数据</p></td>
+<td><p>获取 Collections 的统计数据（如 Collections 中实体的数量）</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">获取集合统计信息</a></p></td>
 </tr>
 <tr>
-<td><p>CreateCollection</p></td>
-<td><p>Create a collection</p></td>
-<td><p><a href="/docs/create-collection.md">CreateCollection</a></p></td>
+<td><p>创建集合</p></td>
+<td><p>创建 Collections</p></td>
+<td><p><a href="/docs/zh/create-collection.md">创建收藏集</a></p></td>
 </tr>
 <tr>
-<td><p>DropCollection</p></td>
-<td><p>Drop a collection</p></td>
-<td><p><a href="/docs/drop-collection.md">DropCollection</a></p></td>
+<td><p>删除收藏集</p></td>
+<td><p>删除 Collections</p></td>
+<td><p><a href="/docs/zh/drop-collection.md">删除收藏集</a></p></td>
 </tr>
 <tr>
-<td><p>Load</p></td>
-<td><p>Load a collection</p></td>
-<td><p><a href="/docs/load-and-release.md">LoadCollection</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a>/<a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
+<td><p>加载</p></td>
+<td><p>加载 Collections</p></td>
+<td><p><a href="/docs/zh/load-and-release.md">加载集合/</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">获取</a><a href="/docs/zh/load-and-release.md">加载进度/获取加载状态</a></p></td>
 </tr>
 <tr>
-<td><p>Release</p></td>
-<td><p>Release a collection</p></td>
-<td><p><a href="/docs/load-and-release.md">ReleaseCollection</a></p></td>
+<td><p>释放</p></td>
+<td><p>释放一个 Collections</p></td>
+<td><p><a href="/docs/zh/load-and-release.md">释放集合</a></p></td>
 </tr>
 <tr>
-<td><p>Flush</p></td>
-<td><p>Persist all entities in a collection to a sealed segment. Any entity inserted after the flush operation will be stored in a new segment.</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">Flush</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
+<td><p>刷新</p></td>
+<td><p>将 Collections 中的所有实体持久化到一个密封段中。任何在冲洗操作后插入的实体都将存储在新的段中。</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">刷新/获取刷新</a><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">状态</a></p></td>
 </tr>
 <tr>
-<td><p>Compaction</p></td>
-<td><p>Manually trigger compaction</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">Compact</a></p></td>
+<td><p>压缩</p></td>
+<td><p>手动触发压缩</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">压缩</a></p></td>
 </tr>
 <tr>
-<td><p>RenameCollection</p></td>
-<td><p>Rename a collection</p></td>
-<td><p><a href="/docs/modify-collection.md">RenameCollection</a></p></td>
+<td><p>重命名集合</p></td>
+<td><p>重命名 Collections</p></td>
+<td><p><a href="/docs/zh/modify-collection.md">重命名集合</a></p></td>
 </tr>
 <tr>
-<td><p>CreateAlias</p></td>
-<td><p>Create an alias for a collection</p></td>
-<td><p><a href="/docs/manage-aliases.md">CreateAlias</a></p></td>
+<td><p>创建别名</p></td>
+<td><p>为 Collections 创建别名</p></td>
+<td><p><a href="/docs/zh/manage-aliases.md">创建别名</a></p></td>
 </tr>
 <tr>
-<td><p>DropAlias</p></td>
-<td><p>Drop the alias of a collection</p></td>
-<td><p><a href="/docs/manage-aliases.md">DropAlias</a></p></td>
+<td><p>删除别名</p></td>
+<td><p>删除 Collections 的别名</p></td>
+<td><p><a href="/docs/zh/manage-aliases.md">删除别名</a></p></td>
 </tr>
 <tr>
-<td><p>FlushAll</p></td>
-<td><p>Flush all collections in a database</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
+<td><p>全部清除</p></td>
+<td><p>清除数据库中的所有 Collections</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">全部清除</a></p></td>
 </tr>
 <tr>
-<td rowspan="4"><p>Partition Privileges</p></td>
-<td><p>HasPartition</p></td>
-<td><p>Check whether a partition exists</p></td>
-<td><p><a href="/docs/manage-partitions.md">HasPartition</a></p></td>
+<td rowspan="4"><p>分区权限</p></td>
+<td><p>有分区</p></td>
+<td><p>检查是否存在分区</p></td>
+<td><p><a href="/docs/zh/manage-partitions.md">HasPartition</a></p></td>
 </tr>
 <tr>
-<td><p>ShowPartitions</p></td>
-<td><p>View all partitions in a collection</p></td>
-<td><p><a href="/docs/manage-partitions.md">ShowPartitions</a></p></td>
+<td><p>显示分区</p></td>
+<td><p>查看 Collections 中的所有分区</p></td>
+<td><p><a href="/docs/zh/manage-partitions.md">显示分区</a></p></td>
 </tr>
 <tr>
-<td><p>CreatePartition</p></td>
-<td><p>Create a partition</p></td>
-<td><p><a href="/docs/manage-partitions.md">CreatePartition</a></p></td>
+<td><p>创建分区</p></td>
+<td><p>创建分区</p></td>
+<td><p><a href="/docs/zh/manage-partitions.md">创建分区</a></p></td>
 </tr>
 <tr>
-<td><p>DropPartition</p></td>
-<td><p>Drop a partition</p></td>
-<td><p><a href="/docs/manage-partitions.md">DropPartition</a></p></td>
+<td><p>删除分区</p></td>
+<td><p>删除分区</p></td>
+<td><p><a href="/docs/zh/manage-partitions.md">删除分区</a></p></td>
 </tr>
 <tr>
-<td rowspan="3"><p>Index Privileges</p></td>
-<td><p>IndexDetail</p></td>
-<td><p>View the details of an index</p></td>
-<td><p><a href="/docs/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
+<td rowspan="3"><p>索引权限</p></td>
+<td><p>索引详情</p></td>
+<td><p>查看索引的详细信息</p></td>
+<td><p><a href="/docs/zh/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
 </tr>
 <tr>
-<td><p>CreateIndex</p></td>
-<td><p>Create an index</p></td>
-<td><p><a href="/docs/index-vector-fields.md">CreateIndex</a></p></td>
+<td><p>创建索引</p></td>
+<td><p>创建索引</p></td>
+<td><p><a href="/docs/zh/index-vector-fields.md">创建索引</a></p></td>
 </tr>
 <tr>
-<td><p>DropIndex</p></td>
-<td><p>Drop an index</p></td>
-<td><p><a href="/docs/index-vector-fields.md">DropIndex</a></p></td>
+<td><p>删除索引</p></td>
+<td><p>删除索引</p></td>
+<td><p><a href="/docs/zh/index-vector-fields.md">删除索引</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>Resource Management Privileges</p></td>
-<td><p>LoadBalance</p></td>
-<td><p>Achieve load balance</p></td>
-<td><p><a href="/docs/resource_group.md">LoadBalance</a></p></td>
+<td rowspan="10"><p>资源管理权限</p></td>
+<td><p>负载平衡</p></td>
+<td><p>实现负载平衡</p></td>
+<td><p><a href="/docs/zh/resource_group.md">负载平衡</a></p></td>
 </tr>
 <tr>
-<td><p>CreateResourceGroup</p></td>
-<td><p>Create a resource group</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
+<td><p>创建资源组</p></td>
+<td><p>创建资源组</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">创建资源组</a></p></td>
 </tr>
 <tr>
-<td><p>DropResourceGroup</p></td>
-<td><p>Drop a resource group</p></td>
-<td><p><a href="/docs/resource_group.md">DropResourceGroup</a></p></td>
+<td><p>删除资源组</p></td>
+<td><p>删除资源组</p></td>
+<td><p><a href="/docs/zh/resource_group.md">删除资源组</a></p></td>
 </tr>
 <tr>
-<td><p>UpdateResourceGroups</p></td>
-<td><p>Update a resource group</p></td>
-<td><p><a href="/docs/resource_group.md">UpdateResourceGroups</a></p></td>
+<td><p>更新资源组</p></td>
+<td><p>更新资源组</p></td>
+<td><p><a href="/docs/zh/resource_group.md">更新资源组</a></p></td>
 </tr>
 <tr>
-<td><p>DescribeResourceGroup</p></td>
-<td><p>View the details of a resource group</p></td>
-<td><p><a href="/docs/resource_group.md">DescribeResourceGroup</a></p></td>
+<td><p>描述资源组</p></td>
+<td><p>查看资源组的详细信息</p></td>
+<td><p><a href="/docs/zh/resource_group.md">描述资源组</a></p></td>
 </tr>
 <tr>
-<td><p>ListResourceGroups</p></td>
-<td><p>View all resource groups of the current instance</p></td>
-<td><p><a href="/docs/resource_group.md">ListResourceGroups</a></p></td>
+<td><p>列出资源组</p></td>
+<td><p>查看当前实例的所有资源组</p></td>
+<td><p><a href="/docs/zh/resource_group.md">列出资源组</a></p></td>
 </tr>
 <tr>
-<td><p>TransferNode</p></td>
-<td><p>Transfer nodes between resource groups</p></td>
-<td><p><a href="/docs/resource_group.md">TransferNode</a></p></td>
+<td><p>转移节点</p></td>
+<td><p>在资源组之间转移节点</p></td>
+<td><p><a href="/docs/zh/resource_group.md">传输节点</a></p></td>
 </tr>
 <tr>
-<td><p>TransferReplica</p></td>
-<td><p>Transfer replicas between resource groups</p></td>
-<td><p><a href="/docs/resource_group.md">TransferReplica</a></p></td>
+<td><p>传输副本</p></td>
+<td><p>在资源组之间传输副本</p></td>
+<td><p><a href="/docs/zh/resource_group.md">传输复制</a></p></td>
 </tr>
 <tr>
-<td><p>BackupRBAC</p></td>
-<td><p>Create a backup for all RBAC related operations in the current instance</p></td>
-<td><p>BackupRBAC</p></td>
+<td><p>备份 RBAC</p></td>
+<td><p>为当前实例中所有与 RBAC 相关的操作创建备份</p></td>
+<td><p>备份 RBAC</p></td>
 </tr>
 <tr>
-<td><p>RestoreRBAC</p></td>
-<td><p>Restore a backup of all RBAC related operations in the current instance</p></td>
-<td><p>RestoreRBAC</p></td>
+<td><p>还原 RBAC</p></td>
+<td><p>恢复当前实例中所有 RBAC 相关操作的备份</p></td>
+<td><p>还原 RBAC</p></td>
 </tr>
 <tr>
-<td rowspan="6"><p>Entity Privileges</p></td>
-<td><p>Query</p></td>
-<td><p>Conduct a query</p></td>
-<td><p><a href="/docs/get-and-scalar-query.md">Query</a></p></td>
+<td rowspan="6"><p>实体权限</p></td>
+<td><p>查询</p></td>
+<td><p>进行查询</p></td>
+<td><p><a href="/docs/zh/get-and-scalar-query.md">查询</a></p></td>
 </tr>
 <tr>
-<td><p>Search</p></td>
-<td><p>Conduct a search</p></td>
-<td><p><a href="/docs/single-vector-search.md">Search</a></p></td>
+<td><p>搜索</p></td>
+<td><p>进行搜索</p></td>
+<td><p><a href="/docs/zh/single-vector-search.md">搜索</a></p></td>
 </tr>
 <tr>
-<td><p>Insert</p></td>
-<td><p>Insert entities</p></td>
-<td><p><a href="/docs/insert-update-delete.md">Insert</a></p></td>
+<td><p>插入</p></td>
+<td><p>插入实体</p></td>
+<td><p><a href="/docs/zh/insert-update-delete.md">插入</a></p></td>
 </tr>
 <tr>
-<td><p>Delete</p></td>
-<td><p>Delete entities</p></td>
-<td><p><a href="/docs/delete-entities.md">Delete</a></p></td>
+<td><p>删除</p></td>
+<td><p>删除实体</p></td>
+<td><p><a href="/docs/zh/delete-entities.md">删除</a></p></td>
 </tr>
 <tr>
-<td><p>Upsert</p></td>
-<td><p>Upsert entities</p></td>
-<td><p><a href="/docs/upsert-entities.md">Upsert</a></p></td>
+<td><p>插入</p></td>
+<td><p>插入实体</p></td>
+<td><p><a href="/docs/zh/upsert-entities.md">插入</a></p></td>
 </tr>
 <tr>
-<td><p>Import</p></td>
-<td><p>Bulk insert or import entities</p></td>
-<td><p><a href="/docs/import-data.md">BulkInsert/Import</a></p></td>
+<td><p>导入</p></td>
+<td><p>批量插入或导入实体</p></td>
+<td><p><a href="/docs/zh/import-data.md">批量插入/导入</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>RBAC Privileges</p></td>
-<td><p>CreateOwnership</p></td>
-<td><p>Create a user or a role</p></td>
-<td><p><a href="/docs/users_and_roles.md">CreateUser/CreateRole</a></p></td>
+<td rowspan="10"><p>RBAC 权限</p></td>
+<td><p>创建所有权</p></td>
+<td><p>创建用户或角色</p></td>
+<td><p><a href="/docs/zh/users_and_roles.md">创建用户/创建角色</a></p></td>
 </tr>
 <tr>
-<td><p>UpdateUser</p></td>
-<td><p>Update the password of a user</p></td>
-<td><p><a href="/docs/users_and_roles.md">UpdateCredential</a></p></td>
+<td><p>更新用户</p></td>
+<td><p>更新用户密码</p></td>
+<td><p><a href="/docs/zh/users_and_roles.md">更新凭证</a></p></td>
 </tr>
 <tr>
-<td><p>DropOwnership</p></td>
-<td><p>Drop a user password or a role</p></td>
-<td><p><a href="/docs/drop_users_roles.md">DeleteCredential/DropRole</a></p></td>
+<td><p>删除所有权</p></td>
+<td><p>删除用户密码或角色</p></td>
+<td><p><a href="/docs/zh/drop_users_roles.md">删除凭证/删除角色</a></p></td>
 </tr>
 <tr>
-<td><p>SelectOwnership</p></td>
-<td><p>View all users that are granted a specific role</p></td>
-<td><p><a href="/docs/grant_roles.md">SelectRole/SelectGrant</a></p></td>
+<td><p>选择所有权</p></td>
+<td><p>查看被授予特定角色的所有用户</p></td>
+<td><p><a href="/docs/zh/grant_roles.md">选择角色/选择授权</a></p></td>
 </tr>
 <tr>
-<td><p>ManageOwnership</p></td>
-<td><p>Manage a user or a role or grant a role to a user</p></td>
-<td><p><a href="/docs/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
+<td><p>管理所有权</p></td>
+<td><p>管理用户或角色，或向用户授予角色</p></td>
+<td><p><a href="/docs/zh/privilege_group.md">操作用户角色/操作权限/操作权限 V2</a></p></td>
 </tr>
 <tr>
-<td><p>SelectUser</p></td>
-<td><p>View all roles granted to a user</p></td>
-<td><p><a href="/docs/grant_roles.md">SelectUser</a></p></td>
+<td><p>选择用户</p></td>
+<td><p>查看授予用户的所有角色</p></td>
+<td><p><a href="/docs/zh/grant_roles.md">选择用户</a></p></td>
 </tr>
 <tr>
-<td><p>CreatePrivilegeGroup</p></td>
-<td><p>Create a privilege group</p></td>
-<td><p><a href="/docs/privilege_group.md">CreatePrivilegeGroup</a></p></td>
+<td><p>创建权限组</p></td>
+<td><p>创建权限组</p></td>
+<td><p><a href="/docs/zh/privilege_group.md">创建权限组</a></p></td>
 </tr>
 <tr>
-<td><p>DropPrivilegeGroup</p></td>
-<td><p>Drop a privilege group</p></td>
-<td><p><a href="/docs/privilege_group.md">DropPrivilegeGroup</a></p></td>
+<td><p>删除权限组</p></td>
+<td><p>删除权限组</p></td>
+<td><p><a href="/docs/zh/privilege_group.md">删除特权组</a></p></td>
 </tr>
 <tr>
-<td><p>ListPrivilegeGroups</p></td>
-<td><p>View all privilege groups in the current instance</p></td>
-<td><p><a href="/docs/privilege_group.md">ListPrivilegeGroups</a></p></td>
+<td><p>列出特权组</p></td>
+<td><p>查看当前实例中的所有特权组</p></td>
+<td><p><a href="/docs/zh/privilege_group.md">列出特权组</a></p></td>
 </tr>
 <tr>
-<td><p>OperatePrivilegeGroup</p></td>
-<td><p>Add privileges to or remove privileges from a privilege group</p></td>
-<td><p><a href="/docs/privilege_group.md">OperatePrivilegeGroup</a></p></td>
+<td><p>操作特权组</p></td>
+<td><p>向特权组添加特权或从特权组移除特权</p></td>
+<td><p><a href="/docs/zh/privilege_group.md">操作特权组</a></p></td>
 </tr>
 </table></p></li>
 </ul>
-<p>The following example demonstrates how to grant the privilege <code translate="no">PrivilegeSearch</code> on <code translate="no">collection_01</code> under the <code translate="no">default</code> database as well as a privilege group named <code translate="no">privilege_group_1</code> to the role <code translate="no">role_a</code>.</p>
+<p>下面的示例演示了如何在<code translate="no">default</code> 数据库下的<code translate="no">collection_01</code> 上授予<code translate="no">PrivilegeSearch</code> 权限，以及如何将名为<code translate="no">privilege_group_1</code> 的特权组授予角色<code translate="no">role_a</code> 。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -567,7 +560,7 @@ curl --request POST \
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-a-role" class="common-anchor-header">Describe a role<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
+<h2 id="Describe-a-role" class="common-anchor-header">描述角色<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -582,14 +575,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to view the privileges granted to the role <code translate="no">role_a</code> using the <code translate="no">describe_role</code> method.</p>
+    </button></h2><p>下面的示例演示了如何使用<code translate="no">describe_role</code> 方法查看授予角色<code translate="no">role_a</code> 的权限。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -621,7 +609,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output.</p>
+<p>下面是一个输出示例。</p>
 <pre><code translate="no" class="language-python">{
      <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
      <span class="hljs-string">&quot;privileges&quot;</span>: [
@@ -636,7 +624,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
      ]
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">Revoke a privilege or a privilege group from a role<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
+<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">撤销角色的权限或权限组<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -651,14 +639,9 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to revoke the privilege <code translate="no">PrivilegeSearch</code> on <code translate="no">collection_01</code> under the <code translate="no">default</code> database as well as the privilege group <code translate="no">privilege_group_1</code> that have been granted to the role <code translate="no">role_a</code>.</p>
+    </button></h2><p>下面的示例演示了如何撤销<code translate="no">default</code> 数据库下<code translate="no">collection_01</code> 的特权<code translate="no">PrivilegeSearch</code> 以及授予角色<code translate="no">role_a</code> 的特权组<code translate="no">privilege_group_1</code> 。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
     privilege=<span class="hljs-string">&quot;Search&quot;</span>,

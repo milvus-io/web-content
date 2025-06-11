@@ -1,15 +1,12 @@
 ---
 id: mmap.md
-title: Use mmap
+title: 使用 mmap
 summary: >-
-  Memory mapping (Mmap) enables direct memory access to large files on disk,
-  allowing Milvus to store indexes and data in both memory and hard drives. This
-  approach helps optimize data placement policy based on access frequency,
-  expanding storage capacity for collections without significantly impacting
-  search performance. This page helps you understand how Milvus uses mmap to
-  enable fast and efficient data storage and retrieval.
+  内存映射（Mmap）实现了对磁盘上大型文件的直接内存访问，使 Milvus
+  可以在内存和硬盘中同时存储索引和数据。这种方法有助于根据访问频率优化数据放置策略，在不明显影响搜索性能的情况下扩大 Collections
+  的存储容量。本页帮助你了解 Milvus 如何使用 mmap 实现快速高效的数据存储和检索。
 ---
-<h1 id="Use-mmap" class="common-anchor-header">Use mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
+<h1 id="Use-mmap" class="common-anchor-header">使用 mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize data placement policy based on access frequency, expanding storage capacity for collections without significantly impacting search performance. This page helps you understand how Milvus uses mmap to enable fast and efficient data storage and retrieval.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>内存映射（Mmap）可实现对磁盘上大型文件的直接内存访问，使 Milvus 可以在内存和硬盘中同时存储索引和数据。这种方法有助于根据访问频率优化数据放置策略，在不明显影响搜索性能的情况下扩大 Collections 的存储容量。本页将帮助你了解 Milvus 如何使用 mmap 来实现快速高效的数据存储和检索。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,18 +37,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus uses collections to organize vector embeddings and their metadata, and each row in the collection represents an entity. As shown in the left figure below, the vector field stores vector embeddings, and the scalar fields store their metadata. When you have created indexes on certain fields and loaded the collection, Milvus loads the created indexes and field raw data into memory.</p>
+    </button></h2><p>Milvus 使用 Collections 来组织向量嵌入及其元数据，而 Collections 中的每一行都代表一个实体。如下左图所示，向量字段存储向量嵌入，标量字段存储其元数据。当你在某些字段上创建了索引并加载了 Collections 后，Milvus 会将创建的索引和字段原始数据加载到内存中。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
-    <span>Mmap Illustrated</span>
-  </span>
-</p>
-<p>Milvus is a memory-intensive database system, and the memory size available determines the capacity of a collection. Loading fields containing a large volume of data into memory is impossible if the data size exceeds the memory capacity, which is the usual case for AI-driven applications.</p>
-<p>To resolve such issues, Milvus introduces mmap to balance the loading of hot and cold data in collections. As shown in the right figure above, you can configure Milvus to memory-maps the raw data in certain fields instead of fully loading them into memory. This way, you can gain direct memory access to the fields without worrying about memory issues and extend the capacity of the collection.</p>
-<p>By comparing the data placement procedures in the left and right figures, you can figure out that the memory usage is much higher in the left figure than in the right one. With mmap enabled, the data that should have been loaded into memory is offloaded into the hard drive and cached in the page cache of the operating system, reducing memory footprint. However, cache hit failures may result in performance degradation. For details, refer to <a href="https://en.wikipedia.org/wiki/Mmap">this article</a>.</p>
-<p>When you configure mmap on Milvus, there is always a principle for you to adhere to: Always keep the frequently accessed data and indexes fully loaded into memory and use mmap for those in the remaining fields.</p>
-<h2 id="Use-mmap-in-Milvus" class="common-anchor-header">Use mmap in Milvus<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
+   </span> <span class="img-wrapper"> <span>Mmap 图解</span> </span></p>
+<p>Milvus 是内存密集型数据库系统，可用内存大小决定了 Collection 的容量。如果数据量超过内存容量，就无法将包含大量数据的字段加载到内存中，而人工智能驱动的应用程序通常就是这种情况。</p>
+<p>为了解决此类问题，Milvus 引入了 mmap 来平衡 Collections 中冷热数据的加载。如上右图所示，你可以配置 Milvus 对某些字段中的原始数据进行内存映射，而不是将它们完全加载到内存中。这样，你就可以直接获得字段的内存访问权限，而不必担心内存问题，并扩展了 Collections 的容量。</p>
+<p>通过比较左右两幅图中的数据放置程序，可以发现左图中的内存使用量要比右图中高得多。启用 mmap 后，本应加载到内存中的数据会被卸载到硬盘中，并缓存到操作系统的页面缓存中，从而减少内存占用。不过，缓存命中失败可能会导致性能下降。有关详细信息，请参阅<a href="https://en.wikipedia.org/wiki/Mmap">本文</a>。</p>
+<p>在 milvus 上配置 mmap 时，总有一个原则需要大家遵守：始终保持频繁访问的数据和索引完全加载到内存中，并对剩余字段中的数据和索引使用 mmap。</p>
+<h2 id="Use-mmap-in-Milvus" class="common-anchor-header">在 Milvus 中使用 mmap<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,8 +61,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides hierarchical mmap settings at global, field, index, and collection levels, where index and field levels take precedence over collection level, and collection level over global level.</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">Global mmap settings</h3><p>The cluster-level setting is the global setting and has the lowest precedence. Milvus provides several mmap-related settings in <code translate="no">milvus.yaml</code>. These settings will apply to all collections in the cluster.</p>
+    </button></h2><p>Milvus 在全局、字段、索引和 Collections 层面提供分层 mmap 设置，其中索引和字段层级优先于 Collections 层级，而 Collections 层级优先于全局层级。</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">全局 mmap 设置</h3><p>集群级设置是全局设置，优先级最低。Milvus 在<code translate="no">milvus.yaml</code> 中提供了多个 mmap 相关设置。这些设置将适用于群集中的所有 Collections。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -81,47 +76,42 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Configure Item</p></th>
-     <th><p>Description</p></th>
-     <th><p>Default Value</p></th>
+     <th><p>配置 项目</p></th>
+     <th><p>默认值</p></th>
+     <th><p>默认值</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarField</code></p></td>
-     <td><p>Specifies whether to map the raw data of all scalar fields into memory. Setting this to <code translate="no">true</code> makes Milvus map the raw data of scalar field data of a collection into memory instead of fully loading it upon receiving a load request against this collection.</p></td>
+     <td><p>指定是否将所有标量字段的原始数据映射到内存中。将此设置为<code translate="no">true</code> 时，Milvus 会将 Collections 标量字段数据的原始数据映射到内存中，而不是在收到针对此 Collections 的加载请求时完全加载。</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarIndex</code></p></td>
-     <td><p>Specifies whether to map all scalar field indexes into memory. Setting this to <code translate="no">true</code> makes Milvus map scalar field indexes of a collection into memory instead of fully loading them upon receiving a load request against this collection.</p><p>Currently, only the scalar field using the following index type is supported:</p><ul><li>INVERTED</li></ul></td>
+     <td><p>指定是否将所有标量字段索引映射到内存中。将此设置为<code translate="no">true</code> 会使 Milvus 在收到针对某个 Collection 的加载请求时，将该 Collection 的标量字段索引映射到内存中，而不是完全加载它们。</p><p>目前，只支持使用以下索引类型的标量字段：</p><ul><li>反转</li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorField</code></p></td>
-     <td><p>Specifies whether to map the raw data of all vector fields into memory. Setting this to <code translate="no">true</code> makes Milvus map the raw data of vector field data of a collection into memory instead of fully loading it upon receiving a load request against this collection.</p></td>
+     <td><p>指定是否将所有向量字段的原始数据映射到内存中。将此设置为<code translate="no">true</code> 会使 Milvus 在收到针对该 Collections 的加载请求时，将该 Collections 向量字段数据的原始数据映射到内存中，而不是完全加载。</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorIndex</code></p></td>
-     <td><p>Specifies whether to map all vector field indexes into memory. Setting this to <code translate="no">true</code> makes Milvus map vector field indexes of a collection into memory instead of fully loading them upon receiving a load request against this collection.</p><p>Currently, only the vector fields using the following index types are supported:</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>SPARSE_INVERTED_INDEX</p></li><li><p>SPARSE_WAND</p></li></ul></td>
+     <td><p>指定是否将所有向量场索引映射到内存中。将其设置为<code translate="no">true</code> 会使 Milvus 在收到针对某个 Collection 的加载请求时，将该 Collection 的向量字段索引映射到内存中，而不是完全加载它们。</p><p>目前，只支持使用以下索引类型的向量字段：</p><ul><li><p>平面</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>稀疏反转索引</p></li><li><p>SPARSE_WAND</p></li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.mmapDirPath</code></p></td>
-     <td><p>Specifies the path to the memory-mapped files. The default value applies if this is left unspecified. </p><p>The <code translate="no">localStorage.path</code> placeholder in the default value indicates the hard drive of Milvus QueryNodes. Ensure that your QueryNodes have a high-performance hard drive for optimal mmap advantages.</p></td>
+     <td><p>指定内存映射文件的路径。如果未指定，则使用默认值。 </p><p>默认值中的<code translate="no">localStorage.path</code> 占位符表示 Milvus QueryNodes 的硬盘驱动器。请确保您的 QueryNodes 拥有高性能硬盘，以获得最佳的内存映射优势。</p></td>
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
-<p>To apply the above settings to your Milvus cluster, please follow the steps in <a href="/docs/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a> and <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
-<p>Sometimes, global mmap settings are not flexible when facing particular use cases. To apply alternate settings to a specific collection or its indexes, consider configuring mmap specific to a collection, a field, or an index. You need to release and load a collection before the changes to the mmap settings take effect.</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Field-specific mmap settings</h3><p>To configure field-specific mmap, you need to include the <code translate="no">mmap_enabled</code> parameter when you add a field. You can enable mmap on this specific field by setting this parameter to <code translate="no">True</code>.</p>
-<p>The following example demonstrates how to configure field-specific mmap when you add a field.</p>
+<p>要将上述设置应用到你的 Milvus 集群，请按照《<a href="/docs/zh/configure-helm.md#Configure-Milvus-via-configuration-file">使用 Helm 配置 Milvus</a>》和《<a href="/docs/zh/configure_operator.md">使用 Milvus 操作符</a> <a href="/docs/zh/configure-helm.md#Configure-Milvus-via-configuration-file">配置</a> <a href="/docs/zh/configure_operator.md">Milvus</a>》中的步骤<a href="/docs/zh/configure_operator.md">操作</a>。</p>
+<p>有时，全局 mmap 设置在面对特定用例时不够灵活。要将备用设置应用于特定 Collections 或其索引，可以考虑配置特定于某个 Collections、某个字段或某个索引的 mmap。在对 mmap 设置的更改生效前，需要释放并加载 Collections。</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">特定字段的 mmap 设置</h3><p>要配置特定于字段的 mmap，需要在添加字段时包含<code translate="no">mmap_enabled</code> 参数。通过将该参数设置为<code translate="no">True</code> ，可以在特定字段上启用 mmap。</p>
+<p>下面的示例演示了如何在添加字段时配置特定于字段的 mmap。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -305,18 +295,13 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Consider enabling mmap for the fields that store large-volume data. Both scalar fields and vector fields are supported.</p>
+<p>考虑为存储大量数据的字段启用 mmap。标量字段和向量字段都支持。</p>
 </div>
-<p>Then, you can create a collection using the above-created schema. Upon receiving a request to load the collection, Milvus uses memory-maps the raw data of the <strong>doc_chunk</strong> field into memory.</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Index-specific mmap settings</h3><p>To configure index-specific mmap, you need to include the <code translate="no">mmap.enable</code> property in the index parameters when you add the index. You can enable mmap on this specific index by setting the property to <code translate="no">true</code>.</p>
-<p>The following example demonstrates how to configure index-specific mmap when you add an index.</p>
+<p>然后，可以使用上述创建的 Schema 创建一个 Collection。收到加载 Collections 的请求后，Milvus 会使用内存映射将<strong>doc_chunk</strong>字段的原始数据映射到内存中。</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">特定索引的内存映射设置</h3><p>要配置特定于索引的毫米映射，需要在添加索引时在索引参数中包含<code translate="no">mmap.enable</code> 属性。通过将该属性设置为<code translate="no">true</code> ，可以在该特定索引上启用 mmap。</p>
+<p>下面的示例演示了如何在添加索引时配置特定于索引的 mmap。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a varchar field</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;title&quot;</span>,
@@ -413,18 +398,13 @@ curl --request POST \
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>This applies to the indexes of both vector and scalar fields.</p>
+<p>这适用于向量和标量字段的索引。</p>
 </div>
-<p>Then you can reference the index parameters in a collection. Upon receiving a request to load the collection, Milvus memory-maps the index of the <strong>title</strong> field into memory.</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Collection-specific mmap settings</h3><p>To configure a collection-wide mmap strategy, you need to include the <code translate="no">mmap.enabled</code> property in the request to create a collection. You can enable mmap for a collection by setting this property to <code translate="no">true</code>.</p>
-<p>The following example demonstrates how to enable mmap in a collection named <strong>my_collection</strong> upon its creation. Upon receiving a request to load the collection, Milvus memory-maps the raw data of all fields into memory.</p>
+<p>然后就可以在一个 Collection 中引用索引参数。收到加载 Collection 的请求后，Milvus 会将<strong>标题字段</strong>的索引内存映射到内存中。</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">特定集合的毫米映射设置</h3><p>要配置整个 Collections 的 mmap 策略，需要在创建 Collections 的请求中包含<code translate="no">mmap.enabled</code> 属性。通过将此属性设置为<code translate="no">true</code> ，可以为某个 Collection 启用 mmap。</p>
+<p>下面的示例演示了如何在创建名为<strong>my_collection</strong>的 Collection 时启用 mmap。收到加载 Collection 的请求后，Milvus 会将所有字段的原始数据内存映射到内存中。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Enable mmap when creating a collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -459,14 +439,9 @@ client.createCollection(req);
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You can also change the mmap settings of an existing collection.</p>
+<p>您还可以更改现有 Collections 的 mmap 设置。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Release collection before change mmap settings</span>
 client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 
@@ -548,4 +523,4 @@ curl --request POST \
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You need to release the collection to make changes to its properties and reload the collection to make the changes take effect.</p>
+<p>您需要释放 Collections 以对其属性进行更改，并重新加载 Collections 使更改生效。</p>

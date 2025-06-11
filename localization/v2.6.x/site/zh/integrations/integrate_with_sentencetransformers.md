@@ -1,9 +1,9 @@
 ---
 id: integrate_with_sentencetransformers.md
-summary: This page discusses movie search using Milvus
-title: Movie Search Using Milvus and SentenceTransformers
+summary: 本页讨论如何使用 Milvus 进行电影搜索
+title: 使用 Milvus 和 SentenceTransformers 进行电影搜索
 ---
-<h1 id="Movie-Search-Using-Milvus-and-SentenceTransformers" class="common-anchor-header">Movie Search Using Milvus and SentenceTransformers<button data-href="#Movie-Search-Using-Milvus-and-SentenceTransformers" class="anchor-icon" translate="no">
+<h1 id="Movie-Search-Using-Milvus-and-SentenceTransformers" class="common-anchor-header">使用 Milvus 和 SentenceTransformers 进行电影搜索<button data-href="#Movie-Search-Using-Milvus-and-SentenceTransformers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,9 +18,9 @@ title: Movie Search Using Milvus and SentenceTransformers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In this example, we will search movie plot summaries using Milvus and the SentenceTransformers library. The dataset we will use is <a href="https://huggingface.co/datasets/vishnupriyavr/wiki-movie-plots-with-summaries">Wikipedia Movie Plots with Summaries</a> hosted on HuggingFace.</p>
-<p>Let’s get started!</p>
-<h2 id="Required-Libraries" class="common-anchor-header">Required Libraries<button data-href="#Required-Libraries" class="anchor-icon" translate="no">
+    </button></h1><p>在本示例中，我们将使用 Milvus 和 SentenceTransformers 库搜索电影情节摘要。我们将使用的数据集是<a href="https://huggingface.co/datasets/vishnupriyavr/wiki-movie-plots-with-summaries">维基百科电影情节与摘要</a>，托管在 HuggingFace 上。</p>
+<p>让我们开始吧！</p>
+<h2 id="Required-Libraries" class="common-anchor-header">所需库<button data-href="#Required-Libraries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +35,7 @@ title: Movie Search Using Milvus and SentenceTransformers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For this example, we will use <code translate="no">pymilvus</code> to connect to use Milvus, <code translate="no">sentence-transformers</code> to generate vector embeddings, and <code translate="no">datasets</code> to download the example dataset.</p>
+    </button></h2><p>在本例中，我们将使用<code translate="no">pymilvus</code> 连接使用 Milvus，使用<code translate="no">sentence-transformers</code> 生成向量嵌入，使用<code translate="no">datasets</code> 下载示例数据集。</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus sentence-transformers datasets tqdm
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
@@ -44,11 +44,11 @@ title: Movie Search Using Milvus and SentenceTransformers
 <span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<p>We’ll define some global parameters,</p>
+<p>我们将定义一些全局参数、</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-number">384</span>
 collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Downloading-and-Opening-the-Dataset" class="common-anchor-header">Downloading and Opening the Dataset<button data-href="#Downloading-and-Opening-the-Dataset" class="anchor-icon" translate="no">
+<h2 id="Downloading-and-Opening-the-Dataset" class="common-anchor-header">下载和打开数据集<button data-href="#Downloading-and-Opening-the-Dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,11 +63,11 @@ collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In a single line, <code translate="no">datasets</code> allows us to download and open a dataset. The library will cache the dataset locally and use that copy next time it is run. Each row contains the details of a movie that has an accompanying Wikipedia article. We make use of the <code translate="no">Title</code>, <code translate="no">PlotSummary</code>, <code translate="no">Release Year</code>, and <code translate="no">Origin/Ethnicity</code> columns.</p>
+    </button></h2><p>只需一行，<code translate="no">datasets</code> 就能让我们下载并打开数据集。库将在本地缓存数据集，并在下次运行时使用该副本。每一行都包含一部电影的详细信息，该电影在维基百科上有相应的文章。我们使用<code translate="no">Title</code> 、<code translate="no">PlotSummary</code> 、<code translate="no">Release Year</code> 和<code translate="no">Origin/Ethnicity</code> 列。</p>
 <pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connecting-to-the-Database" class="common-anchor-header">Connecting to the Database<button data-href="#Connecting-to-the-Database" class="anchor-icon" translate="no">
+<h2 id="Connecting-to-the-Database" class="common-anchor-header">连接数据库<button data-href="#Connecting-to-the-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,14 +82,14 @@ collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>At this point, we are going to begin setting up Milvus. The steps are as follows:</p>
+    </button></h2><p>此时，我们要开始设置 Milvus。具体步骤如下</p>
 <ol>
-<li>Create a Milvus Lite database in a local file. (Replace this URI to the server address for Milvus Standalone and Milvus Distributed.)</li>
+<li>在本地文件中创建 Milvus Lite 数据库。(将此 URI 替换为 Milvus Standalone 和 Milvus Distributed 的服务器地址）。</li>
 </ol>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;./sentence_transformers_example.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Create the data schema. This specifies the fields that comprise an element including the dimension of the vector embedding.</li>
+<li>创建数据 Schema。这将指定构成元素的字段，包括向量 Embeddings 的维度。</li>
 </ol>
 <pre><code translate="no" class="language-python">fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>),
@@ -103,14 +103,14 @@ schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li>Define the vector search indexing algorithm. Milvus Lite support FLAT index type, whereas Milvus Standalone and Milvus Distributed implement a wide variety of methods such as IVF, HNSW and DiskANN. For the small scale of data in this demo, any search index type suffices so we use the simplest one FLAT here.</li>
+<li>定义向量搜索索引算法。Milvus Lite 支持 FLAT 索引类型，而 Milvus Standalone 和 Milvus Distributed 实现了多种方法，如 IVF、HNSW 和 DiskANN。对于本演示中的小规模数据，任何搜索索引类型都已足够，因此我们在此使用最简单的 FLAT 索引类型。</li>
 </ol>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;IP&quot;</span>)
 client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
-<p>Once these steps are done, we are ready to insert data into the collection and perform a search. Any data added will be indexed automatically and be available to search immediately. If the data is very fresh, the search might be slower as brute force searching will be used on data that is still in process of getting indexed.</p>
-<h2 id="Inserting-the-Data" class="common-anchor-header">Inserting the Data<button data-href="#Inserting-the-Data" class="anchor-icon" translate="no">
+<p>完成这些步骤后，我们就可以将数据插入 Collections 并执行搜索了。任何添加的数据都将自动编入索引，并立即可供搜索。如果数据非常新，搜索可能会慢一些，因为将对仍在索引过程中的数据使用暴力搜索。</p>
+<h2 id="Inserting-the-Data" class="common-anchor-header">插入数据<button data-href="#Inserting-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -125,10 +125,10 @@ client.create_index(collection_name, index_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For this example, we are going to use the SentenceTransformers miniLM model to create embeddings of the plot text. This model returns 384-dimension embeddings.</p>
+    </button></h2><p>在本例中，我们将使用 SentenceTransformers miniLM 模型来创建情节文本的嵌入。该模型可返回 384 维嵌入。</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(<span class="hljs-string">&quot;all-MiniLM-L12-v2&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>We loop over the rows of the data, embed the plot summary field, and insert entities into the vector database. In general, you should perform this step over batches of data items to maximize CPU or GPU throughput for the embedding model, as we do here.</p>
+<p>我们循环浏览数据行，嵌入情节摘要字段，并将实体插入向量数据库。一般来说，应该像我们这里一样，在成批数据项上执行这一步骤，以最大限度地提高嵌入模型的 CPU 或 GPU 吞吐量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
     embeddings = model.encode(batch[<span class="hljs-string">&quot;PlotSummary&quot;</span>])
     data = [
@@ -140,9 +140,9 @@ client.create_index(collection_name, index_params)
     res = client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>The above operation is relatively time-consuming because embedding takes time. This step takes around 2 minutes using the CPU on a 2023 MacBook Pro and will be much faster with dedicated GPUs. Take a break and enjoy a cup of coffee!</p>
+<p>上述操作相对耗时，因为嵌入需要时间。在 2023 MacBook Pro 上使用 CPU 执行此步骤大约需要 2 分钟，而使用专用 GPU 则会更快。休息一下，喝杯咖啡吧！</p>
 </div>
-<h2 id="Performing-the-Search" class="common-anchor-header">Performing the Search<button data-href="#Performing-the-Search" class="anchor-icon" translate="no">
+<h2 id="Performing-the-Search" class="common-anchor-header">执行搜索<button data-href="#Performing-the-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -157,7 +157,7 @@ client.create_index(collection_name, index_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With all the data inserted into Milvus, we can start performing our searches. In this example, we are going to search for movies based on plot summaries from Wikipedia. Because we are doing a batch search, the search time is shared across the movie searches. (Can you guess what movie I had in mind to retrieve based on the query description text?)</p>
+    </button></h2><p>将所有数据插入 Milvus 后，我们就可以开始执行搜索了。在本例中，我们将根据维基百科的情节摘要搜索电影。由于我们进行的是批量搜索，因此搜索时间将在电影搜索中共享。(你能猜到我想根据查询描述文本检索哪部电影吗？）</p>
 <pre><code translate="no" class="language-python">queries = [
     <span class="hljs-string">&#x27;A shark terrorizes an LA beach.&#x27;</span>,
     <span class="hljs-string">&#x27;An archaeologist searches for ancient artifacts while fighting Nazis.&#x27;</span>,
@@ -191,7 +191,7 @@ res = client.search(
         <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;entity&quot;</span>].get(<span class="hljs-string">&quot;title&quot;</span>), <span class="hljs-string">&quot;(&quot;</span>, <span class="hljs-built_in">round</span>(hit[<span class="hljs-string">&quot;distance&quot;</span>], <span class="hljs-number">2</span>), <span class="hljs-string">&quot;)&quot;</span>)
     <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>The results are:</p>
+<p>结果如下</p>
 <pre><code translate="no" class="language-shell">Query: An archaeologist searches for ancient artifacts while fighting Nazis.
 Results:
 Love Slaves of the Amazons ( 0.4 )

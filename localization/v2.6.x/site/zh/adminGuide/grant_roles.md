@@ -1,13 +1,10 @@
 ---
 id: grant_roles.md
-title: Grant Roles to Users
+title: 向用户授予角色
 summary: >-
-  After creating a role and granting privileges to the role, you can grant the
-  role to users so that the users can access resources and perform actions that
-  are defined by the role. You can grant multiple roles to a user or grant a
-  role to multiple users. This guide introduces how to grant roles to users.
+  创建角色并授予角色权限后，就可以将角色授予用户，这样用户就可以访问资源并执行角色所定义的操作。可以向一个用户授予多个角色，也可以向多个用户授予一个角色。本指南将介绍如何向用户授予角色。
 ---
-<h1 id="Grant-Roles-to-Users" class="common-anchor-header">Grant Roles to Users<button data-href="#Grant-Roles-to-Users" class="anchor-icon" translate="no">
+<h1 id="Grant-Roles-to-Users" class="common-anchor-header">向用户授予角色<button data-href="#Grant-Roles-to-Users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,9 +19,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>After creating a role and granting privileges to the role, you can grant the role to users so that the users can access resources and perform actions that are defined by the role. You can grant multiple roles to a user or grant a role to multiple users. This guide introduces how to grant roles to users.</p>
-<p>The built-in user <code translate="no">root</code> in Milvus has already been granted the <code translate="no">admin</code> role, which has all privileges. You do not need to assign any other roles to it.</p>
-<h2 id="Grant-a-role-to-a-user" class="common-anchor-header">Grant a role to a user<button data-href="#Grant-a-role-to-a-user" class="anchor-icon" translate="no">
+    </button></h1><p>创建角色并授予角色权限后，就可以将角色授予用户，这样用户就可以访问资源并执行角色所定义的操作。可以向一个用户授予多个角色，也可以向多个用户授予一个角色。本指南将介绍如何向用户授予角色。</p>
+<p>milvus 中的内置用户<code translate="no">root</code> 已被授予<code translate="no">admin</code> 角色，该角色拥有所有权限。您不需要为其分配任何其他角色。</p>
+<h2 id="Grant-a-role-to-a-user" class="common-anchor-header">向用户授予角色<button data-href="#Grant-a-role-to-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,14 +36,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to grant the role <code translate="no">role_a</code> to the user <code translate="no">user_1</code>.</p>
+    </button></h2><p>下面的示例演示了如何向用户<code translate="no">user_1</code> 授予<code translate="no">role_a</code> 角色。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -125,7 +117,7 @@ curl --request POST \
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-user" class="common-anchor-header">Describe user<button data-href="#Describe-user" class="anchor-icon" translate="no">
+<h2 id="Describe-user" class="common-anchor-header">描述用户<button data-href="#Describe-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -140,15 +132,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you grant a role to a user, you can check if the grant operation is successful via the <code translate="no">describe_user()</code> method.</p>
-<p>The following example demonstrates how to check the role(s) of the user <code translate="no">user_1</code>.</p>
+    </button></h2><p>向用户授予角色后，可以通过<code translate="no">describe_user()</code> 方法检查授予操作是否成功。</p>
+<p>下面的示例演示了如何检查用户<code translate="no">user_1</code> 的角色。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)
@@ -177,10 +164,10 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output.</p>
+<p>下面是一个输出示例。</p>
 <pre><code translate="no" class="language-bash">{<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>}
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Revoke-a-role" class="common-anchor-header">Revoke a role<button data-href="#Revoke-a-role" class="anchor-icon" translate="no">
+<h2 id="Revoke-a-role" class="common-anchor-header">撤销角色<button data-href="#Revoke-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -195,15 +182,10 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also revoke a role that has been assigned to a user.</p>
-<p>The following example demonstrates how to revoke the role <code translate="no">role_a</code> assigned to the user <code translate="no">user_1</code>.</p>
+    </button></h2><p>您还可以撤销已分配给用户的角色。</p>
+<p>下面的示例演示了如何撤销分配给用户<code translate="no">role_a</code> 的角色<code translate="no">user_1</code> 。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.revoke_role(

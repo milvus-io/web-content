@@ -1,11 +1,9 @@
 ---
 id: architecture_overview.md
-summary: >-
-  Milvus provides a fast, reliable, and stable vector database built
-  specifically for similarity search and artificial intelligence.
-title: Milvus Architecture Overview
+summary: Milvus 提供快速、可靠、稳定的向量数据库，专为相似性搜索和人工智能而建。
+title: Milvus 架构概述
 ---
-<h1 id="Milvus-Architecture-Overview" class="common-anchor-header">Milvus Architecture Overview<button data-href="#Milvus-Architecture-Overview" class="anchor-icon" translate="no">
+<h1 id="Milvus-Architecture-Overview" class="common-anchor-header">Milvus 架构概述<button data-href="#Milvus-Architecture-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,22 +18,20 @@ title: Milvus Architecture Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Built on top of popular vector search libraries including Faiss, HNSW, DiskANN, SCANN and more, Milvus was designed for similarity search on dense vector datasets containing millions, billions, or even trillions of vectors. Before proceeding, familiarize yourself with the <a href="/docs/glossary.md">basic principles</a> of embedding retrieval.</p>
-<p>Milvus also supports data sharding, streaming data ingestion, dynamic schema, search combine vector and scalar data, multi-vector and hybrid search, sparse vector and many other advanced functions. The platform offers performance on demand and can be optimized to suit any embedding retrieval scenario. We recommend deploying Milvus using Kubernetes for optimal availability and elasticity.</p>
-<p>Milvus adopts a shared-storage architecture with fully disaggregated storage and compute layers, enabling horizontal scaling of compute nodes. By implementing Woodpecker as a zero-disk write-ahead-log (WAL) layer, Milvus becomes increasingly elastic and cloud-native, while also reducing operational overhead. Following the principle of data plane and control plane disaggregation, Milvus comprises <a href="/docs/four_layers.md">four layers</a>: access layer, coordinator service, worker node, and storage, each of which can be scaled out or recovered without impacting the others.</p>
+    </button></h1><p>Milvus 构建在 Faiss、HNSW、DiskANN、SCANN 等流行的向量搜索库之上，专为在包含数百万、数十亿甚至数万亿向量的密集向量数据集上进行相似性搜索而设计。在继续之前，请先熟悉一下 Embeddings 检索的<a href="/docs/zh/glossary.md">基本原理</a>。</p>
+<p>Milvus 还支持数据分片、流式数据摄取、动态 Schema、结合向量和标量数据的搜索、多向量和混合搜索、稀疏向量和其他许多高级功能。该平台可按需提供性能，并可进行优化，以适应任何嵌入式检索场景。我们建议使用 Kubernetes 部署 Milvus，以获得最佳的可用性和弹性。</p>
+<p>Milvus 采用共享存储架构，存储层和计算层完全分解，可实现计算节点的横向扩展。通过实施 Woodpecker 作为零磁盘前置日志（WAL）层，Milvus 变得越来越有弹性和云原生，同时还降低了操作符开销。按照数据平面和控制平面分解的原则，Milvus 包括<a href="/docs/zh/four_layers.md">四个层</a>：访问层、协调器服务、工作节点和存储，每个<a href="/docs/zh/four_layers.md">层</a>都可以在不影响其他<a href="/docs/zh/four_layers.md">层</a>的情况下进行扩展或恢复。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
-    <span>Architecture_diagram</span>
-  </span>
-</p>
-<p>According to the figure, interfaces can be classified into the following categories:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+   </span> <span class="img-wrapper"> <span>架构图</span> </span></p>
+<p>如图所示，接口可分为以下几类：</p>
 <ul>
-<li><strong>DDL / DCL:</strong> createCollection / createPartition / dropCollection / dropPartition / hasCollection / hasPartition</li>
-<li><strong>DML / Produce:</strong> insert / delete / upsert</li>
-<li><strong>DQL:</strong> search / query</li>
+<li><strong>DDL / DCL：</strong>createCollection / createPartition / dropCollection / dropPartition / hasCollection / hasPartition</li>
+<li><strong>DML / Produce：</strong>插入 / 删除 / 上移</li>
+<li><strong>DQL:</strong>搜索/查询</li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -51,6 +47,6 @@ title: Milvus Architecture Overview
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn more about <a href="/docs/four_layers.md">Computing/Storage Disaggregation</a> in Milvus</li>
-<li>Learn about the <a href="/docs/main_components.md">Main Components</a> in Milvus.</li>
+<li>了解更多有关 Milvus 中<a href="/docs/zh/four_layers.md">计算/存储分解的</a>信息</li>
+<li>了解 Milvus 中的<a href="/docs/zh/main_components.md">主要组件</a>。</li>
 </ul>

@@ -2,9 +2,8 @@
 id: rerankers-cohere.md
 order: 3
 summary: >-
-  Milvus supports Cohere reranker models through the `CohereRerankFunction`
-  class. This functionality allows you to score the relevance of query-document
-  pairs effectively.
+  Milvus 通过 `CohereRerankFunction` 类支持 Cohere Reranker
+  模型。该功能可让您有效地对查询-文档对的相关性进行评分。
 title: Rerankers Cohere
 ---
 <h1 id="Cohere" class="common-anchor-header">Cohere<button data-href="#Cohere" class="anchor-icon" translate="no">
@@ -22,12 +21,12 @@ title: Rerankers Cohere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports <a href="https://docs.cohere.com/docs/rerank-2">Cohere</a><a href="https://docs.cohere.com/docs/rerank-2"> reranker models</a> through the <code translate="no">CohereRerankFunction</code> class. This functionality allows you to score the relevance of query-document pairs effectively.</p>
-<p>To use this feature, install the necessary dependencies:</p>
+    </button></h1><p>Milvus 通过<code translate="no">CohereRerankFunction</code> 类支持<a href="https://docs.cohere.com/docs/rerank-2">Cohere</a><a href="https://docs.cohere.com/docs/rerank-2"> Reranker 模型</a>。通过该功能，您可以有效地对查询-文档对的相关性进行评分。</p>
+<p>要使用该功能，请安装必要的依赖项：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, instantiate the <code translate="no">CohereRerankFunction</code>:</p>
+<p>然后，实例化<code translate="no">CohereRerankFunction</code> ：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CohereRerankFunction
 
 <span class="hljs-comment"># Define the rerank function</span>
@@ -36,14 +35,14 @@ cohere_rf = CohereRerankFunction(
     api_key=COHERE_API_KEY <span class="hljs-comment"># Replace with your Cohere API key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Parameters</strong></p>
+<p><strong>参数</strong></p>
 <ul>
-<li><p><code translate="no">model_name</code> (<em>string</em>)</p>
-<p>The name of the model to use. You can specify any of the available Cohere reranker model names, for example, <code translate="no">rerank-english-v3.0</code>, <code translate="no">rerank-multilingual-v3.0</code>, etc. If you leave this parameter unspecified, <code translate="no">rerank-english-v2.0</code> will be used. For a list of available models, refer to <a href="https://docs.cohere.com/docs/rerank-2">Rerank</a>.</p></li>
-<li><p><code translate="no">api_key</code> (<em>string</em>)</p>
-<p>The API key for accessing the Cohere API. For information on how to create an API key, refer to <a href="https://dashboard.cohere.com/api-keys">Cohere dashboard</a>.</p></li>
+<li><p><code translate="no">model_name</code> <em>(字符串）</em></p>
+<p>要使用的模型名称。可以指定任何可用的 Cohere Reranker 模型名称，例如<code translate="no">rerank-english-v3.0</code>,<code translate="no">rerank-multilingual-v3.0</code> 等。如果不指定此参数，则将使用<code translate="no">rerank-english-v2.0</code> 。有关可用模型的列表，请参阅<a href="https://docs.cohere.com/docs/rerank-2">Rerankers</a>。</p></li>
+<li><p><code translate="no">api_key</code> <em>（字符串）</em></p>
+<p>访问 Cohere API 的 API 密钥。有关如何创建 API 密钥的信息，请参阅<a href="https://dashboard.cohere.com/api-keys">Cohere dashboard</a>。</p></li>
 </ul>
-<p>Then, use the following code to rerank documents based on the query:</p>
+<p>然后，使用以下代码根据查询结果对文档进行 Rerankers：</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [
@@ -64,7 +63,7 @@ results = cohere_rf(
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Score: <span class="hljs-subst">{result.score:<span class="hljs-number">.6</span>f}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Text: <span class="hljs-subst">{result.text}</span>\n&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>预期输出类似于下图：</p>
 <pre><code translate="no" class="language-python">Index: <span class="hljs-number">1</span>
 Score: <span class="hljs-number">0.99691266</span>
 Text: The Dartmouth Conference <span class="hljs-keyword">in</span> <span class="hljs-number">1956</span> <span class="hljs-keyword">is</span> considered the birthplace of artificial intelligence <span class="hljs-keyword">as</span> a field; here, John McCarthy <span class="hljs-keyword">and</span> others coined the term <span class="hljs-string">&#x27;artificial intelligence&#x27;</span> <span class="hljs-keyword">and</span> laid out its basic goals.

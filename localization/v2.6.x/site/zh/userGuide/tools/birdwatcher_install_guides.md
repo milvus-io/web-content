@@ -1,9 +1,9 @@
 ---
 id: birdwatcher_install_guides.md
-summary: Learn how to install Birdwatch to debug Milvus.
-title: Install Birdwatcher
+summary: 了解如何安装 Birdwatcher 以调试 Milvus。
+title: 安装 Birdwatcher
 ---
-<h1 id="Install-Birdwatcher" class="common-anchor-header">Install Birdwatcher<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
+<h1 id="Install-Birdwatcher" class="common-anchor-header">安装 Birdwatcher<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Install Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page demonstrates how to install Birdwatcher.</p>
-<h2 id="Local-install" class="common-anchor-header">Local install<button data-href="#Local-install" class="anchor-icon" translate="no">
+    </button></h1><p>本页演示如何安装 Birdwatcher。</p>
+<h2 id="Local-install" class="common-anchor-header">本地安装<button data-href="#Local-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,35 +34,35 @@ title: Install Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you have installed Milvus Standalone <a href="/docs/install_standalone-docker.md">using docker</a>, you’d better download and install the built binary, install Birdwatcher as a common Go module, or build Birdwatcher from the source.</p>
+    </button></h2><p>如果您<a href="/docs/zh/install_standalone-docker.md">使用 docker</a> 安装了 Milvus Standalone，最好下载并安装已构建的二进制文件，将 Birdwatcher 作为普通 Go 模块安装，或者从源代码构建 Birdwatcher。</p>
 <ul>
-<li><p>Install it as a common Go module.</p>
+<li><p>将其作为普通 Go 模块安装。</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
 cd birdwatcher
 go install github.com/milvus-io/birdwatcher
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can run Birdwatcher as follows:</p>
+<p>然后你就可以按如下方法运行 Birdwatcher：</p>
 <pre><code translate="no" class="language-shell">go run main.go
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Build it from the source.</p>
+<li><p>从源代码构建。</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
 cd birdwatcher
 go build -o birdwatcher main.go
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can run Birdwatcher as follows:</p>
+<p>然后按以下步骤运行 Birdwatcher：</p>
 <pre><code translate="no" class="language-shell">./birdwatcher
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Download the already-built binary</p>
-<p>First, open the <a href="https://github.com/milvus-io/birdwatcher/releases/latest">latest release page</a>, and find the prepared binaries.</p>
+<li><p>下载已构建的二进制文件</p>
+<p>首先，打开<a href="https://github.com/milvus-io/birdwatcher/releases/latest">最新发布页面</a>，找到准备好的二进制文件。</p>
 <pre><code translate="no" class="language-shell">wget -O birdwatcher.tar.gz \
 https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&lt;os&gt;_&lt;arch&gt;.tar.gz
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can decompress the tarball and use Birdwatcher as follows:</p>
+<p>然后解压压缩包，按如下方法使用 Birdwatcher：</p>
 <pre><code translate="no" class="language-shell">tar -xvzf birdwatcher.tar.gz
 ./birdwatcher
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Install-as-a-Kubernetes-pod" class="common-anchor-header">Install as a Kubernetes pod<button data-href="#Install-as-a-Kubernetes-pod" class="anchor-icon" translate="no">
+<h2 id="Install-as-a-Kubernetes-pod" class="common-anchor-header">作为 Kubernetes pod 安装<button data-href="#Install-as-a-Kubernetes-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,8 +77,8 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you have installed either Milvus Standalone <a href="/docs/install_standalone-helm.md">using the Helm charts</a> or <a href="/docs/install_standalone-operator.md">the Milvus Operator</a> or Milvus Cluster <a href="/docs/install_cluster-helm.md">using the Helm charts</a> or <a href="/docs/install_cluster-milvusoperator.md">the Milvus Operator</a>, you are advised to install Birdwatcher as a Kubernetes pod.</p>
-<h3 id="Prepare-deploymentyml" class="common-anchor-header">Prepare deployment.yml</h3><pre><code translate="no" class="language-yml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
+    </button></h2><p>如果您<a href="/docs/zh/install_standalone-helm.md">使用 Helm 图表</a>或<a href="/docs/zh/install_standalone-operator.md">Milvus Operator</a>安装了 Milvus Standalone 或<a href="/docs/zh/install_cluster-helm.md">使用 Helm 图表</a>或 Milvus<a href="/docs/zh/install_cluster-milvusoperator.md">Operator</a> 安装了 Milvus Cluster，建议您将 Birdwatcher 安装为 Kubernetes pod。</p>
+<h3 id="Prepare-deploymentyml" class="common-anchor-header">准备部署文件</h3><pre><code translate="no" class="language-yml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">birdwatcher</span>
@@ -100,12 +100,12 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
             <span class="hljs-attr">cpu:</span> <span class="hljs-string">&quot;500m&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If the image available on DockerHub is not the latest, you can build an image of Birdwatcher using the Dockerfile provided with the source code as follows:</p>
+<p>如果 DockerHub 上提供的镜像不是最新的，您可以使用源代码提供的 Dockerfile 构建 Birdwatcher 的镜像，如下所示：</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
 cd birdwatcher
 docker build -t milvusdb/birdwatcher .
 <button class="copy-code-btn"></button></code></pre>
-<p>To deploy a locally built image, you need to add <code translate="no">imagePullPolicy</code> to the above specs and set it to <code translate="no">Never</code>.</p>
+<p>要部署本地构建的镜像，需要在上述规格中添加<code translate="no">imagePullPolicy</code> ，并将其设置为<code translate="no">Never</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">birdwatcher</span>
         <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/birdwatcher</span>
@@ -113,6 +113,6 @@ docker build -t milvusdb/birdwatcher .
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Apply-deploymentyml" class="common-anchor-header">Apply deployment.yml</h3><p>Save the above YAML in a file and name it <code translate="no">deployment.yml</code>, and run the following command</p>
+<h3 id="Apply-deploymentyml" class="common-anchor-header">应用 deployment.yml</h3><p>将上述 YAML 保存在一个文件中并命名为<code translate="no">deployment.yml</code> ，然后运行以下命令</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f deployment.yml
 <button class="copy-code-btn"></button></code></pre>

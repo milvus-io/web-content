@@ -2,10 +2,10 @@
 id: prerequisite-helm.md
 label: Install on Kubernetes
 related_key: Kubernetes
-summary: Learn the necessary preparations before installing Milvus with Helm.
-title: Requirements for running Milvus on Kubernetes
+summary: 了解使用 Helm 安装 Milvus 之前的必要准备工作。
+title: 在 Kubernetes 上运行 Milvus 的要求
 ---
-<h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">Requirements for running Milvus on Kubernetes<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
+<h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">在 Kubernetes 上运行 Milvus 的要求<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: Requirements for running Milvus on Kubernetes
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page lists the hardware and software requirements to get Milvus up and running.</p>
-<h2 id="Hardware-requirements" class="common-anchor-header">Hardware requirements<button data-href="#Hardware-requirements" class="anchor-icon" translate="no">
+    </button></h1><p>本页列出了启动和运行 Milvus 所需的硬件和软件要求。</p>
+<h2 id="Hardware-requirements" class="common-anchor-header">硬件要求<button data-href="#Hardware-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,16 +38,16 @@ title: Requirements for running Milvus on Kubernetes
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Component</th><th>Requirement</th><th>Recommendation</th><th>Note</th></tr>
+<tr><th>组件</th><th>要求</th><th>建议</th><th>备注</th></tr>
 </thead>
 <tbody>
-<tr><td>CPU</td><td><ul><li>Intel 2nd Gen Core CPU or higher</li><li>Apple Silicon</li></ul></td><td><ul><li>Standalone: 4 core or more</li><li>Cluster: 8 core or more</li></ul></td><td></td></tr>
-<tr><td>CPU instruction set</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Vector similarity search and index building within Milvus require CPU’s support of single instruction, multiple data (SIMD) extension sets. Ensure that the CPU supports at least one of the SIMD extensions listed. See <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPUs with AVX</a> for more information.</td></tr>
-<tr><td>RAM</td><td><ul><li>Standalone: 8G</li><li>Cluster: 32G</li></ul></td><td><ul><li>Standalone: 16G</li><li>Cluster: 128G</li></ul></td><td>The size of RAM depends on the data volume.</td></tr>
-<tr><td>Hard drive</td><td>SATA 3.0 SSD or CloudStorage</td><td>NVMe SSD or higher</td><td>The size of hard drive depends on the data volume.</td></tr>
+<tr><td>中央处理器</td><td><ul><li>英特尔第二代酷睿处理器或更高版本</li><li>苹果硅</li></ul></td><td><ul><li>独立：4 核或更高</li><li>集群：8 核或更多</li></ul></td><td></td></tr>
+<tr><td>CPU 指令集</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Milvus 中的向量相似性搜索和索引建立需要 CPU 支持单指令、多数据（SIMD）扩展集。确保 CPU 至少支持所列 SIMD 扩展之一。有关详细信息，请参阅<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">带 AVX 的 CPU</a>。</td></tr>
+<tr><td>内存</td><td><ul><li>单机：8G</li><li>集群：32G</li></ul></td><td><ul><li>单机：16G</li><li>集群： 128G128G</li></ul></td><td>内存大小取决于数据量。</td></tr>
+<tr><td>硬盘</td><td>SATA 3.0 固态硬盘或 CloudStorage</td><td>NVMe SSD 或更高版本</td><td>硬盘大小取决于数据量。</td></tr>
 </tbody>
 </table>
-<h2 id="Software-requirements" class="common-anchor-header">Software requirements<button data-href="#Software-requirements" class="anchor-icon" translate="no">
+<h2 id="Software-requirements" class="common-anchor-header">软件要求<button data-href="#Software-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,34 +62,34 @@ title: Requirements for running Milvus on Kubernetes
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>It is recommended that you run the Kubernetes cluster on Linux platforms.</p>
-<p>kubectl is the command-line tool for Kubernetes. Use a kubectl version that is within one minor version difference of your cluster. Using the latest version of kubectl helps avoid unforeseen issues.</p>
-<p>minikube is required when running Kubernetes cluster locally. minikube requires Docker as a dependency. Ensure that you install Docker before installing Milvus using Helm. See <a href="https://docs.docker.com/get-docker">Get Docker</a> for more information.</p>
+    </button></h2><p>建议在 Linux 平台上运行 Kubernetes 集群。</p>
+<p>kubectl 是 Kubernetes 的命令行工具。使用的 kubectl 版本应与群集的版本相差一个小版本。使用最新版本的 kubectl 有助于避免不可预见的问题。</p>
+<p>本地运行 Kubernetes 集群时需要 minikube。确保在使用 Helm 安装 Milvus 之前安装 Docker。更多信息，请参阅<a href="https://docs.docker.com/get-docker">获取 Docker</a>。</p>
 <table>
 <thead>
-<tr><th>Operating system</th><th>Software</th><th>Note</th></tr>
+<tr><th>操作符</th><th>软件</th><th>注意</th></tr>
 </thead>
 <tbody>
-<tr><td>Linux platforms</td><td><ul><li>Kubernetes 1.16 or later</li><li>kubectl</li><li>Helm 3.0.0 or later</li><li>minikube (for Milvus standalone)</li><li>Docker 19.03 or later (for Milvus standalone)</li></ul></td><td>See <a href="https://helm.sh/docs/">Helm Docs</a> for more information.</td></tr>
+<tr><td>Linux 平台</td><td><ul><li>Kubernetes 1.16 或更高版本</li><li>kubectl</li><li>Helm 3.0.0 或更高版本</li><li>minikube（适用于 Milvus 单机版）</li><li>Docker 19.03 或更高版本（适用于 Milvus 单机版）</li></ul></td><td>更多信息，请参阅<a href="https://helm.sh/docs/">Helm 文档</a>。</td></tr>
 </tbody>
 </table>
 <table>
 <thead>
-<tr><th>Software</th><th>Version</th><th>Note</th></tr>
+<tr><th>软件</th><th>版本</th><th>备注</th></tr>
 </thead>
 <tbody>
-<tr><td>etcd</td><td>3.5.0</td><td>See <a href="#Additional-disk-requirements">additional disk requirements</a>.</td></tr>
+<tr><td>etcd</td><td>3.5.0</td><td>请参阅<a href="#Additional-disk-requirements">其他磁盘要求</a>。</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
+<tr><td>脉冲星</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Additional-disk-requirements" class="common-anchor-header">Additional disk requirements</h3><p>Disk performance is critical to etcd. It is highly recommended that you use local NVMe SSDs. Slower disk reponse may cause frequent cluster elections that will eventually degrade the etcd service.</p>
-<p>To test if your disk is qualified, use <a href="https://github.com/axboe/fio">fio</a>.</p>
+<h3 id="Additional-disk-requirements" class="common-anchor-header">其他磁盘要求</h3><p>磁盘性能对 etcd 至关重要。强烈建议使用本地 NVMe SSD。较慢的磁盘响应速度可能会导致频繁的群集选举，最终降低 etcd 服务的性能。</p>
+<p>要测试磁盘是否合格，请使用<a href="https://github.com/axboe/fio">fio</a>。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>Ideally, your disk should reach over 500  IOPS and below 10ms for the 99th percentile fsync latency. Read the etcd <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">Docs</a> for more detailed requirements.</p>
-<h2 id="FAQs" class="common-anchor-header">FAQs<button data-href="#FAQs" class="anchor-icon" translate="no">
+<p>理想情况下，磁盘应达到 500 IOPS 以上，第 99 百分位数 fsync 延迟应低于 10 毫秒。请阅读 etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">文档</a>了解更多详细要求。</p>
+<h2 id="FAQs" class="common-anchor-header">常见问题<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,26 +104,26 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">How can I start a K8s cluster locally for test purposes?</h3><p>You can use tools like <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a>, and <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a>, to quickly set up a Kubernetes cluster locally. The following procedure uses minikube as an example.</p>
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">如何在本地启动 K8s 集群进行测试？</h3><p>你可以使用<a href="https://minikube.sigs.k8s.io/docs/">minikube</a>、<a href="https://kind.sigs.k8s.io/">kind</a> 和<a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a> 等工具在本地快速建立 Kubernetes 集群。下面的步骤以 minikube 为例。</p>
 <ol>
-<li>Download minikube</li>
+<li>下载 minikube</li>
 </ol>
-<p>Go to the <a href="https://minikube.sigs.k8s.io/docs/start/">Get Started</a> page, check whether you have met the conditions listed in the <strong>What you’ll need</strong> section, click on the buttons that describe your target platform, and copy the commands to download and install the binary.</p>
+<p>转到 "<a href="https://minikube.sigs.k8s.io/docs/start/">开始</a>"页面，检查是否满足 "<strong>你需要什么 "</strong>部分列出的条件，点击描述目标平台的按钮，然后复制命令下载并安装二进制文件。</p>
 <ol start="2">
-<li>Start a K8s cluster using minikube</li>
+<li>使用 minikube 启动 K8s 集群</li>
 </ol>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">minikube start</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li>Check the status of the K8s cluster</li>
+<li>检查 K8s 群集的状态</li>
 </ol>
-<p>You can check the status of the K8s cluster installed using the following command.</p>
+<p>您可以使用以下命令检查已安装的 K8s 群集的状态。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl cluster-info</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Ensure that you can access the K8s cluster via <code translate="no">kubectl</code>. If you have not installed <code translate="no">kubectl</code> locally, see <a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">Use kubectl inside minikube</a>.</p>
+<p>确保可以通过<code translate="no">kubectl</code> 访问 K8s 群集。如果您尚未在本地安装<code translate="no">kubectl</code> ，请参阅<a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">在 minikube 内使用 kubectl</a>。</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,10 +139,10 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>If your hardware and software meet the requirements, you can:</p>
+<li><p>如果你的硬件和软件符合要求，你就可以</p>
 <ul>
-<li><a href="/docs/install_cluster-milvusoperator.md">Run Milvus in Kubernets with Milvus Operator</a></li>
-<li><a href="/docs/install_cluster-helm.md">Run Milvus in Kubernetes with Helm</a></li>
+<li><a href="/docs/zh/install_cluster-milvusoperator.md">使用 Milvus Operator 在 Kubernets 中操作 Milvus</a></li>
+<li><a href="/docs/zh/install_cluster-helm.md">使用 Helm 在 Kubernetes 中运行 Milvus</a></li>
 </ul></li>
-<li><p>See <a href="/docs/system_configuration.md">System Configuration</a> for parameters you can set while installing Milvus.</p></li>
+<li><p>有关安装 Milvus 时可设置的参数，请参阅<a href="/docs/zh/system_configuration.md">系统配置</a>。</p></li>
 </ul>

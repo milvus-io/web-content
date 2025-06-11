@@ -2,10 +2,10 @@
 id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
-summary: Learn how to install the Python SDK of Milvus.
-title: Install Milvus Python SDK
+summary: 了解如何安装 Milvus 的 Python SDK。
+title: 安装 Milvus Python SDK
 ---
-<h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">Install Milvus Python SDK<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">安装 Milvus Python SDK<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +20,9 @@ title: Install Milvus Python SDK
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic describes how to install Milvus python SDK pymilvus for Milvus.</p>
-<p>Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.</p>
-<h2 id="Requirements" class="common-anchor-header">Requirements<button data-href="#Requirements" class="anchor-icon" translate="no">
+    </button></h1><p>本主题介绍如何为 Milvus 安装 Milvus python SDK pymilvus。</p>
+<p>当前版本的 Milvus 支持 Python、Node.js、GO 和 Java SDK。</p>
+<h2 id="Requirements" class="common-anchor-header">要求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,11 +38,11 @@ title: Install Milvus Python SDK
         ></path>
       </svg>
     </button></h2><ul>
-<li>Python 3.7 or later is required.</li>
-<li>Google protobuf is installed. You can install it with the command <code translate="no">pip3 install protobuf==3.20.0</code>.</li>
-<li>grpcio-tools is installed. You can install it with the command <code translate="no">pip3 install grpcio-tools</code>.</li>
+<li>需要 Python 3.7 或更高版本。</li>
+<li>已安装 Google protobuf。可以使用<code translate="no">pip3 install protobuf==3.20.0</code> 命令安装。</li>
+<li>已安装 grpcio-tools。可以使用<code translate="no">pip3 install grpcio-tools</code> 命令安装。</li>
 </ul>
-<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Install PyMilvus via pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
+<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">通过 pip 安装 PyMilvus<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,13 +57,12 @@ title: Install Milvus Python SDK
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PyMilvus is available in <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
+    </button></h2><p>PyMilvus 可在<a href="https://pypi.org/project/pymilvus/">Python 包索引</a>中找到。</p>
 <div class="alert note">
-It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="/docs/release_notes.md">Release Notes</a>.
-</div>
+建议安装与所安装 Milvus 服务器版本相匹配的 PyMilvus 版本。更多信息，请参阅<a href="/docs/zh/release_notes.md">发行说明</a>。</div>
 <pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">10</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Verify-installation" class="common-anchor-header">Verify installation<button data-href="#Verify-installation" class="anchor-icon" translate="no">
+<h2 id="Verify-installation" class="common-anchor-header">验证安装<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,10 +77,10 @@ It is recommended to install a PyMilvus version that matches the version of the 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If PyMilvus is correctly installed, no exception will be raised when you run the following command.</p>
+    </button></h2><p>如果 PyMilvus 安装正确，运行以下命令时不会出现异常。</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,15 +95,15 @@ It is recommended to install a PyMilvus version that matches the version of the 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Having installed PyMilvus, you can:</p>
+    </button></h2><p>安装 PyMilvus 后，您可以</p>
 <ul>
-<li><p>Learn the basic operations of Milvus:</p>
+<li><p>学习 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p>Explore <a href="/api-reference/pymilvus/v2.4.x/About.md">PyMilvus API reference</a></p></li>
+<li><p>探索<a href="/api-reference/pymilvus/v2.4.x/About.md">PyMilvus API 参考</a></p></li>
 </ul>

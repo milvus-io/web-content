@@ -1,9 +1,7 @@
 ---
 id: embed-with-mgte.md
 order: 13
-summary: >-
-  This article describes how to use the MGTEEmbeddingFunction to encode
-  documents and queries using the mGTE embedding model.
+summary: 本文介绍如何使用 MGTEEmbeddingFunction 使用 mGTE 嵌入模型对文档和查询进行编码。
 title: mGTE
 ---
 <h1 id="mGTE" class="common-anchor-header">mGTE<button data-href="#mGTE" class="anchor-icon" translate="no">
@@ -21,25 +19,25 @@ title: mGTE
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>mGTE is a multilingual text representation model and reranking model for text retrieval tasks.</p>
-<p>Milvus integrates with the mGTE embedding model via the MGTEEmbeddingFunction class. This class provides methods for encoding documents and queries using the mGTE embedding model and returning the embeddings as dense and sparse vectors compatible with Milvus indexing.</p>
-<p>To use this feature, install the necessary dependencies:</p>
+    </button></h1><p>mGTE 是用于文本检索任务的多语言文本表示模型和 Rerankers 模型。</p>
+<p>Milvus 通过 MGTEEmbeddingFunction 类与 mGTE 嵌入模型集成。该类提供了使用 mGTE 嵌入模型对文档和查询进行编码的方法，并将嵌入结果返回为与 Milvus 索引兼容的密集向量和稀疏向量。</p>
+<p>要使用该功能，请安装必要的依赖项：</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, instantiate the MGTEEmbeddingFunction:</p>
+<p>然后，实例化 MGTEEmbeddingFunction：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> MGTEEmbeddingFunction
 
 ef = MGTEEmbeddingFunction(
     model_name=<span class="hljs-string">&quot;Alibaba-NLP/gte-multilingual-base&quot;</span>, <span class="hljs-comment"># Defaults to `Alibaba-NLP/gte-multilingual-base`</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Parameters</strong>:</p>
+<p><strong>参数</strong></p>
 <ul>
-<li><p><code translate="no">model_name</code> (<em>string</em>)</p>
-<p>The name of the mGTE embedding model to use for encoding. The value defaults to <code translate="no">Alibaba-NLP/gte-multilingual-base</code>.</p></li>
+<li><p><code translate="no">model_name</code> <em>(字符串）</em></p>
+<p>用于编码的 mGTE 嵌入模型名称。默认值为<code translate="no">Alibaba-NLP/gte-multilingual-base</code> 。</p></li>
 </ul>
-<p>To create embeddings for documents, use the <code translate="no">encode_documents()</code> method:</p>
+<p>要为文档创建嵌入模型，请使用<code translate="no">encode_documents()</code> 方法：</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
@@ -53,7 +51,7 @@ docs_embeddings = ef.encode_documents(docs)
 <span class="hljs-comment"># Print dimension of embeddings</span>
 <span class="hljs-built_in">print</span>(ef.dim)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>预期输出类似于下图：</p>
 <pre><code translate="no" class="language-python">Embeddings: {<span class="hljs-string">&#x27;dense&#x27;</span>: [tensor([-<span class="hljs-number">4.9149e-03</span>, <span class="hljs-number">1.6553e-02</span>, -<span class="hljs-number">9.5524e-03</span>, -<span class="hljs-number">2.1800e-02</span>, <span class="hljs-number">1.2075e-02</span>,
         <span class="hljs-number">1.8500e-02</span>, -<span class="hljs-number">3.0632e-02</span>, <span class="hljs-number">5.5909e-02</span>, <span class="hljs-number">8.7365e-02</span>, <span class="hljs-number">1.8763e-02</span>,
         <span class="hljs-number">2.1708e-03</span>, -<span class="hljs-number">2.7530e-02</span>, -<span class="hljs-number">1.1523e-01</span>, <span class="hljs-number">6.5810e-03</span>, -<span class="hljs-number">6.4674e-02</span>,
@@ -66,7 +64,7 @@ docs_embeddings = ef.encode_documents(docs)
 
 {<span class="hljs-string">&#x27;dense&#x27;</span>: <span class="hljs-number">768</span>, <span class="hljs-string">&#x27;sparse&#x27;</span>: <span class="hljs-number">250002</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>To create embeddings for queries, use the <code translate="no">encode_queries()</code> method:</p>
+<p>要为查询创建嵌入模型，请使用<code translate="no">encode_queries()</code> 方法：</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>,
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 
@@ -75,7 +73,7 @@ query_embeddings = ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Embeddings:&quot;</span>, query_embeddings)
 <span class="hljs-built_in">print</span>(ef.dim)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>预期输出类似于下面的内容：</p>
 <pre><code translate="no" class="language-python">Embeddings: {<span class="hljs-string">&#x27;dense&#x27;</span>: [tensor([ <span class="hljs-number">6.5883e-03</span>, -<span class="hljs-number">7.9415e-03</span>, -<span class="hljs-number">3.3669e-02</span>, -<span class="hljs-number">2.6450e-02</span>, <span class="hljs-number">1.4345e-02</span>,
         <span class="hljs-number">1.9612e-02</span>, -<span class="hljs-number">8.1679e-02</span>, <span class="hljs-number">5.6361e-02</span>, <span class="hljs-number">6.9020e-02</span>, <span class="hljs-number">1.9827e-02</span>,
        -<span class="hljs-number">9.2933e-03</span>, -<span class="hljs-number">1.9995e-02</span>, -<span class="hljs-number">1.0055e-01</span>, -<span class="hljs-number">5.4053e-02</span>, -<span class="hljs-number">8.5991e-02</span>,
