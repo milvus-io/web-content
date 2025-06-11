@@ -4,10 +4,10 @@ summary: In this notebook, we refer to this kind of multi-vector representation 
 title: Use ColPali for Multi-Modal Retrieval with Milvus
 ---
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 

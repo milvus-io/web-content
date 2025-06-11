@@ -8,6 +8,12 @@ summary: "The Upsert operation combines the actions of updating and inserting da
 
 The Upsert operation combines the actions of updating and inserting data. Milvus determines whether to perform an update or an insert operation by checking if the primary key exists. This section will introduce how to Upsert an Entity and the specific behaviors of the Upsert operation in different scenarios.
 
+<div class="alert note">
+
+If you dynamically add new fields after the collection has been created, and you do not specify values for these fields when upserting entities, Milvus automatically populates them with either their defined default values or NULL if defaults are not set. For details, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
+
+</div>
+
 ## Overview
 
 When you need to update an Entity in a Collection or are not sure whether to update or insert, you can try using the Upsert operation. When using this operation, it is essential to ensure that the Entity included in the Upsert request contains the primary key; otherwise, an error will occur. Upon receiving an Upsert request, Milvus will execute the following process:
