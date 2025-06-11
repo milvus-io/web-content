@@ -76,26 +76,26 @@ This behavior mimics how people naturally think about distance relevance—nearb
 The mathematical formula for calculating a Gaussian decay score is:
 
 $$
-S(\text{doc}) = \exp\left( -\frac{\left( \max\left(0, \left|\text{fieldvalue}_{\text{doc}} - \text{origin}\right| - \text{offset} \right) \right)^2}{2\sigma^2} \right)
+S(doc) = \exp\left( -\frac{\left( \max\left(0, \left|fieldvalue_{doc} - origin\right| - offset \right) \right)^2}{2\sigma^2} \right)
 $$
 
 Where:
 
 $$
-\sigma^2 = -\frac{\text{scale}^2}{2 \cdot \ln(\text{decay})}
+\sigma^2 = -\frac{scale^2}{2 \cdot \ln(decay)}
 $$
 
 Breaking this down in plain language:
 
-1. Calculate how far the field value is from the origin:  $|\text{fieldvalue}_{\text{doc}} - \text{origin}|$
+1. Calculate how far the field value is from the origin: $|fieldvalue_{doc} - origin|$
 
-1. Subtract the offset (if any) but never go below zero: $\max(0, \text{distance} - \text{offset})$
+2. Subtract the offset (if any) but never go below zero: $\max(0, distance - offset)$
 
-1. Square this adjusted distance: $(\text{adjusted\_distance})^2$
+3. Square this adjusted distance: $(adjusted\_distance)^2$
 
-1. Divide by $2\sigma^2$, which is calculated from your scale and decay parameters
+4. Divide by $2\sigma^2$, which is calculated from your scale and decay parameters
 
-1. Take the negative exponent, which gives you a value between 0 and 1: $\exp(-\text{value})$
+5. Take the negative exponent, which gives you a value between 0 and 1: $\exp(-value)$
 
 The $\sigma^{2}$ calculation converts your scale and decay parameters into the standard deviation squared for the Gaussian distribution. This is what gives the function its characteristic bell shape.
 
