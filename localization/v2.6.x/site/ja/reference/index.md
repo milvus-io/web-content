@@ -1,10 +1,10 @@
 ---
 id: index.md
 related_key: index
-summary: Index mechanism in Milvus.
-title: In-memory Index
+summary: Milvusのインデックス機構。
+title: インメモリインデックス
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">In-memory Index<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">インメモリインデックス<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,13 +19,12 @@ title: In-memory Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic lists various types of in-memory indexes Milvus supports, scenarios each of them best suits, and parameters users can configure to achieve better search performance. For on-disk indexes, see <strong><a href="/docs/disk_index.md">On-disk Index</a></strong>.</p>
-<p>Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.</p>
-<p>To improve query performance, you can <a href="/docs/index-vector-fields.md">specify an index type</a> for each vector field.</p>
+    </button></h1><p>このトピックでは、Milvusがサポートする様々なタイプのインメモリインデックス、それぞれのインデックスが最適なシナリオ、および、より良い検索パフォーマンスを達成するためにユーザが設定できるパラメータについて説明します。オンディスクインデックスについては、<strong><a href="/docs/ja/disk_index.md">オンディスクインデックスを</a></strong>参照してください。</p>
+<p>インデックスはデータを効率的に整理するプロセスであり、大規模なデータセットに対する時間のかかるクエリを劇的に高速化することで、類似検索を有用なものにする上で大きな役割を果たします。</p>
+<p>クエリー性能を向上させるために、各ベクトルフィールドに<a href="/docs/ja/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
 <div class="alert note">
-Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
-</div>
-<h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS vector indexes<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
+現在、ベクトルフィールドは1つのインデックスタイプしかサポートしていません。Milvusはインデックスタイプを切り替えると古いインデックスを自動的に削除します。</div>
+<h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNSベクトルインデックス<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,9 +39,9 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS) algorithms. Compared with accurate retrieval, which is usually very time-consuming, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.</p>
-<p>According to the implementation methods, the ANNS vector index can be categorized into four types: Tree-based, Graph-based, Hash-based, and Quantization-based.</p>
-<h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Indexes supported in Milvus<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusがサポートするベクトルインデックスタイプのほとんどは、近似最近傍探索(ANNS)アルゴリズムを使用しています。通常非常に時間のかかる正確な検索と比較して、ANNSの核となる考え方は、もはや最も正確な結果を返すことに限定されず、ターゲットの近傍のみを検索することです。ANNSは、許容範囲内の精度を犠牲にすることで、検索効率を向上させる。</p>
+<p>実装方法によって、ANNSベクトルインデックスは4つのタイプに分類される：ツリーベース、グラフベース、ハッシュベース、量子化ベースである。</p>
+<h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Milvusでサポートされるインデックス<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,132 +56,129 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports various index types, which are categorized by the type of vector embeddings they handle: <strong>floating-point embeddings</strong> (also known as floating point vectors or dense vectors), <strong>binary embeddings</strong> (also known as binary vectors), and <strong>sparse embeddings</strong> (also known as sparse vectors).</p>
+    </button></h2><p>Milvusは様々なインデックスタイプをサポートしており、それらは扱うベクトル埋め込みタイプによって分類されます：<strong>浮動小数点埋め込み</strong>（浮動小数点ベクトルまたは密ベクトルとも呼ばれる）、<strong>バイナリ埋め込み</strong>（バイナリベクトルとも呼ばれる）、<strong>スパース埋め込み</strong>（スパースベクトルとも呼ばれる）。</p>
 <div class="filter">
-  <a href="#floating">Floating-point embeddings</a>
-  <a href="#binary">Binary embeddings</a>
-  <a href="#sparse">Sparse embeddings</a>
-</div>
+ <a href="#floating">浮動小数点</a> <a href="#binary">埋め込み バイナリ埋め込み</a> <a href="#sparse">スパース埋め込み</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indexes for floating-point embeddings</h3><p>For 128-dimensional floating-point embeddings (vectors), the storage they take up is 128 * the size of float = 512 bytes. And the <a href="/docs/metric.md">distance metrics</a> used for float-point embeddings are Euclidean distance (<code translate="no">L2</code>) and Inner product (<code translate="no">IP</code>).</p>
-<p>These types of indexes include <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, and <code translate="no">SCANN</code> for CPU-based ANN searches.</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮動小数点埋込みのインデックス</h3><p>128次元の浮動小数点埋め込み（ベクトル）の場合、浮動小数点埋め込みが占有するストレージは128 * floatのサイズ = 512バイトです。また、浮動小数点埋め込みに使われる<a href="/docs/ja/metric.md">距離指標は</a>、ユークリッド距離 (<code translate="no">L2</code>) と内積 (<code translate="no">IP</code>) です。</p>
+<p>これらのタイプのインデックスには、<code translate="no">FLAT</code> 、<code translate="no">IVF_FLAT</code> 、<code translate="no">IVF_PQ</code> 、<code translate="no">IVF_SQ8</code> 、<code translate="no">HNSW</code> 、<code translate="no">HNSW_SQ</code> 、<code translate="no">HNSW_PQ</code> 、<code translate="no">HNSW_PRQ</code> 、<code translate="no">SCANN</code> 、CPUベースのANN検索用などがある。</p>
 </div>
 <div class="filter-binary">
-<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indexes for binary embeddings</h3><p>For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are <code translate="no">JACCARD</code> and <code translate="no">HAMMING</code>.</p>
-<p>This type of indexes include <code translate="no">BIN_FLAT</code> and <code translate="no">BIN_IVF_FLAT</code>.</p>
+<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">バイナリ埋め込み用インデックス</h3><p>128次元のバイナリ埋め込みでは、128 / 8 = 16バイトのストレージを占有する。そして、バイナリ埋め込みに使われる距離メトリックは<code translate="no">JACCARD</code> と<code translate="no">HAMMING</code> です。</p>
+<p>このタイプのインデックスには、<code translate="no">BIN_FLAT</code> と<code translate="no">BIN_IVF_FLAT</code> がある。</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indexes for sparse embeddings</h3><p>Indexes for sparse embeddings support the <code translate="no">IP</code> and <code translate="no">BM25</code> (for full-text search) metrics only.</p>
-<p>Index type supported for sparse embeddings: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">スパース埋め込みインデックス</h3><p>スパース埋め込み用のインデックスは、<code translate="no">IP</code> と<code translate="no">BM25</code> （全文検索用） メトリクスのみをサポートします。</p>
+<p>スパース埋め込みに対応するインデックスタイプ:<code translate="no">SPARSE_INVERTED_INDEX</code> 。</p>
 <div class="alert note">
-<p>From Milvus 2.5.4 onward, <code translate="no">SPARSE_WAND</code> is being deprecated. Instead, it is recommended to use <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> for equivalency while maintaining compatibility. For more information, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+<p>Milvus 2.5.4以降、<code translate="no">SPARSE_WAND</code> は廃止予定です。代わりに、互換性を維持しながら同等性を保つために<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> を使用することが推奨されます。詳細は<a href="/docs/ja/sparse_vector.md#Set-index-params-for-vector-field">スパースベクタを</a>参照してください。</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>対応インデックス</th>
+    <th>分類</th>
+    <th>シナリオ</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>FLAT</td>
-    <td>N/A</td>
+    <td>フラット</td>
+    <td>該当なし</td>
     <td>
       <ul>
-        <li>Relatively small dataset</li>
-        <li>Requires a 100% recall rate</li>
+        <li>比較的小さなデータセット</li>
+        <li>100%の再現率が必要</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>N/A</td>
+    <td>該当なし</td>
     <td>
       <ul>
-        <li>High-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
+        <li>高速クエリ</li>
+        <li>可能な限り高い回収率が必要</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>IVF_SQ8</td>
-    <td>Quantization-based index</td>
+    <td>量子化ベースのインデックス</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>超高速クエリ</li>
+        <li>限られたメモリリソース</li>
+        <li>想起率の多少の妥協は許容</li>
       </ul>
     </td>
   </tr>  
   <tr>
     <td>IVF_PQ</td>
-    <td>Quantization-based index</td>
+    <td>量子化ベースのインデックス</td>
     <td>
       <ul>
-        <li>High-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>高速クエリ</li>
+        <li>限られたメモリリソース</li>
+        <li>想起率のわずかな妥協を受け入れる</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>HNSW</td>
-    <td>Graph-based index</td>
+    <td>グラフベースのインデックス</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-        <li>Large memory resources</li>
+        <li>非常に高速なクエリ</li>
+        <li>可能な限り高い想起率を要求</li>
+        <li>大きなメモリリソース</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>HNSW_SQ</td>
-    <td>Quantization-based index</td>
+    <td>量子化ベースのインデックス</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>超高速クエリ</li>
+        <li>限られたメモリリソース</li>
+        <li>想起率に若干の妥協を許容</li>
       </ul>
     </td>
   </tr>
     <tr>
     <td>HNSW_PQ</td>
-    <td>Quantization-based index</td>
+    <td>量子化ベースのインデックス</td>
     <td>
       <ul>
-        <li>Medium speed query</li>
-        <li>Very limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>中速クエリ</li>
+        <li>非常に限られたメモリリソース</li>
+        <li>想起率に若干の妥協を許容</li>
       </ul>
     </td>
   </tr>
     </tr>
     <tr>
     <td>HNSW_PRQ</td>
-    <td>Quantization-based index</td>
+    <td>量子化ベースのインデックス</td>
     <td>
       <ul>
-        <li>Medium speed query</li>
-        <li>Very limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>中速クエリ</li>
+        <li>非常に限られたメモリリソース</li>
+        <li>想起率に若干の妥協を許容</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>SCANN</td>
-    <td>Quantization-based index</td>
+    <td>量子化ベースのインデックス</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-        <li>Large memory resources</li>
+        <li>非常に高速なクエリー</li>
+        <li>可能な限り高い想起率を要求</li>
+        <li>メモリリソースが大きい</li>
       </ul>
     </td>
   </tr>
@@ -193,28 +189,28 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <table id="binary">
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>対応インデックス</th>
+    <th>分類</th>
+    <th>シナリオ</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td>BIN_FLAT</td>
-    <td>Quantization-based index</td>
+    <td>量子化ベースのインデックス</td>
     <td><ul>
-      <li>Depends on relatively small datasets.</li>
-      <li>Requires perfect accuracy.</li>
-      <li>No compression applies.</li>
-      <li>Guarantee exact search results.</li>
+      <li>比較的小さなデータセットに依存。</li>
+      <li>完璧な精度が必要。</li>
+      <li>圧縮は適用されない。</li>
+      <li>正確な検索結果を保証する。</li>
     </ul></td>
   </tr>
   <tr>
     <td>BIN_IVF_FLAT</td>
-    <td>Quantization-based index</td>
+    <td>量子化ベースのインデックス</td>
     <td><ul>
-      <li>High-speed query</li>
-      <li>Requires a recall rate as high as possible</li>
+      <li>高速クエリ</li>
+      <li>可能な限り高い再現率が必要</li>
     </ul></td>
   </tr>
 </tbody>
@@ -224,362 +220,362 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <table id="sparse">
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>対応インデックス</th>
+    <th>分類</th>
+    <th>シナリオ</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>SPARSE_INVERTED_INDEX</td>
-    <td>Inverted index</td>
+    <td>sparse_inverted_index</td>
+    <td>転置インデックス</td>
     <td><ul>
-      <li>Depends on relatively small datasets.</li>
-      <li>Requires a 100% recall rate.</li>
+      <li>比較的小さなデータセットに依存。</li>
+      <li>100%の再現率が必要。</li>
     </ul></td>
   </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.</p>
-<p>FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every set of vectors in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters required for the FLAT index in Milvus, and using it does not need extra index buidling.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>完全な精度が要求され、比較的小規模な（100万個規模の）データセットに依存する ベクトル類似検索アプリケーションには、FLATインデックスが適している。FLATはベクトルを圧縮せず、正確な検索結果を保証できる唯一のインデックスである。FLATの結果は、再現率が100%に満たない他のインデックスが生成した結果の比較対象としても使用できる。</p>
+<p>FLATが正確なのは、検索に網羅的なアプローチをとるからである。つまり、クエリごとに、ターゲット入力がデータセット内のすべてのベクトル集合と比較される。このため、FLATは我々のリストの中で最も遅いインデックスであり、膨大なベクトルデータのクエリには適していない。MilvusではFLATインデックスに必要なパラメータはなく、FLATインデックスを使用することで追加のインデックス構築は必要ありません。</p>
 <ul>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[オプション] 選択された距離メトリック。</td><td><a href="/docs/ja/metric.md">サポートされるメトリックを</a>参照。</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT divides vector data into <code translate="no">nlist</code> cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (<code translate="no">nprobe</code>), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.</p>
-<p>By adjusting <code translate="no">nprobe</code>, an ideal balance between accuracy and speed can be found for a given scenario. Results from the <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT performance test</a> demonstrate that query time increases sharply as both the number of target input vectors (<code translate="no">nq</code>), and the number of clusters to search (<code translate="no">nprobe</code>), increase.</p>
-<p>IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT はベクトルデータを<code translate="no">nlist</code> クラスタ単位に分割し、ターゲット入力ベクトルと各クラスタの中心との距離を比較します。システムがクエリに設定したクラスタ数 (<code translate="no">nprobe</code>) に応じて、ターゲット入力と最も類似したクラスタ内のベクトルとの比較のみに基づいて類似性検索結果が返され、クエリ時間が大幅に短縮されます。</p>
+<p><code translate="no">nprobe</code> を調整することで、シナリオに応じた精度と速度の理想的なバランスを見つけることができる。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLATの性能テストの</a>結果は、ターゲット入力ベクトルの数(<code translate="no">nq</code>)と検索するクラスタの数(<code translate="no">nprobe</code>)の両方が増加すると、クエリ時間が急激に増加することを示しています。</p>
+<p>IVF_FLATは最も基本的なIVFインデックスであり、各ユニットに格納される符号化データは元データと一致している。</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス構築パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td><td>128</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>クラスタユニット数</td><td>[1, 65536]</td><td>128</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <ul>
-<li><p>Common search</p>
+<li><p>共通検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>クエリーするユニットの数</td><td>[1, nlist］</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>範囲検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>パラメータ</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td><br/>これは範囲検索パラメータであり、連続した空のバケツの数が指定された値に達する間、検索プロセスを終了する。<br/>この値を大きくすると、検索時間が長くなる代償として、リコール率を向上させることができる。</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT does not perform any compression, so the index files it produces are roughly the same size as the original, raw non-indexed vector data. For example, if the original 1B SIFT dataset is 476 GB, its IVF_FLAT index files will be slightly smaller (~470 GB). Loading all the index files into memory will consume 470 GB of storage.</p>
-<p>When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option than IVF_FLAT. This index type can convert each FLOAT (4 bytes) to UINT8 (1 byte) by performing Scalar Quantization (SQ). This reduces disk, CPU, and GPU memory consumption by 70–75%. For the 1B SIFT dataset, the IVF_SQ8 index files require just 140 GB of storage.</p>
+<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLATは圧縮を行わないため、生成されるインデックスファイルのサイズは、インデックス付けされていない元の生のベクトルデータとほぼ同じです。例えば、元の 1B SIFT データセットが 476 GB である場合、IVF_FLAT のインデックスファイルは若干小さくなります (~470 GB)。すべてのインデックスファイルをメモリにロードすると、470GBのストレージを消費します。</p>
+<p>ディスク、CPU、GPU のメモリリソースが限られている場合は、IVF_FLAT よりも IVF_SQ8 の方が適しています。このインデックスタイプは、スカラー量子化（SQ）を実行することで、各 FLOAT（4バイト）を UINT8（1バイト）に変換することができます。これにより、ディスク、CPU、GPUのメモリ消費量が70～75%削減される。1B SIFTデータセットの場合、IVF_SQ8インデックスファイルに必要なストレージはわずか140GBです。</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス作成パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>クラスタユニット数</td><td>[1, 65536]</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <ul>
-<li><p>Common search</p>
+<li><p>共通検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>検索するユニットの数</td><td>[1, nlist］</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>範囲検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>パラメータ</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td><br/>これは範囲検索パラメータであり、連続した空のバケツの数が指定された値に達する間、検索プロセスを終了する。<br/>この値を大きくすると、検索時間が長くなる代償として、リコール率を向上させることができる。</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of <code translate="no">m</code> low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.</p>
-<p>IVF_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) は、元の高次元ベクトル空間を、 低次元ベクトル空間のデカルト積に一様に分解し、分解された低次元ベクトル空間を量子化する。積量子化により、対象ベクトルと全ユニットの中心との距離を計算する代わりに、対象ベクトルと各低次元空間のクラスタリング中心との距離を計算することが可能となり、アルゴリズムの時間的複雑性と空間的複雑性を大幅に削減することができる。<code translate="no">m</code> </p>
+<p>IVF_PQ は，ベクトルの積を量子化する前にIVFインデックスクラスタリングを行います．そのインデックスファイルはIVF_SQ8よりもさらに小さいが、ベクトル探索時の精度が低下する。</p>
 <div class="alert note">
-<p>Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.</p>
+<p>インデックス作成パラメータと検索パラメータはMilvus分布によって異なります。まずはMilvusディストリビューションを選択してください。</p>
 </div>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス作成パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
-<tr><td><code translate="no">m</code></td><td>Number of factors of product quantization</td><td><code translate="no">dim mod m == 0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Optional] Number of bits in which each low-dimensional vector is stored.</td><td>[1, 64] (8 by default)</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>クラスタユニット数</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">m</code></td><td>積量子化の因子数</td><td><code translate="no">dim mod m == 0</code></td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[オプション] 各低次元ベクトルが格納されるビット数。</td><td>[1, 64] (デフォルトは8)</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <ul>
-<li><p>Common search</p>
+<li><p>共通検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>検索するユニットの数</td><td>[1, nlist］</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>範囲検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>パラメータ</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td><br/>これは範囲検索パラメータであり、連続した空のバケツの数が指定された値に達する間、検索プロセスを終了する。<br/>この値を大きくすると、検索時間が長くなる代償として、リコール率を向上させることができる。</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN (Scalable Nearest Neighbors) is similar to IVF_PQ in terms of vector clustering and product quantization. What makes them different lies in the implementation details of product quantization and the use of SIMD (Single-Instruction / Multi-data) for efficient calculation.</p>
+<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN (Scalable Nearest Neighbors) は、ベクトルクラスタリングと積量子化という点でIVF_PQに似ています。両者の違いは、積量子化の実装の詳細と、効率的な計算のためのSIMD（Single-Instruction / Multi-data）の使用にあります。</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス構築パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
-<tr><td><code translate="no">with_raw_data</code></td><td>Whether to include the raw data in the index</td><td><code translate="no">True</code> or <code translate="no">False</code>. Defaults to <code translate="no">True</code>.</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>クラスタユニット数</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">with_raw_data</code></td><td>生データをインデックスに含めるかどうか</td><td><code translate="no">True</code> または 。デフォルトは 。<code translate="no">False</code> <code translate="no">True</code></td></tr>
 </tbody>
 </table>
   <div class="alert note">
-<p>Unlike IVF_PQ, default values apply to <code translate="no">m</code> and <code translate="no">nbits</code> for optimized performance.</p>
+<p>IVF_PQ とは異なり、パフォーマンスを最適化するために、デフォルト値は<code translate="no">m</code> と<code translate="no">nbits</code> に適用されます。</p>
   </div>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <ul>
-<li><p>Common search</p>
+<li><p>共通検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td></td></tr>
-<tr><td><code translate="no">reorder_k</code></td><td>Number of candidate units to query</td><td>[<code translate="no">top_k</code>, ∞]</td><td><code translate="no">top_k</code></td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>検索するユニットの数</td><td>[1, nlist］</td><td></td></tr>
+<tr><td><code translate="no">reorder_k</code></td><td>クエリーするユニット候補の数</td><td>[<code translate="no">top_k</code>, ∞ ]を指定する。</td><td><code translate="no">top_k</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>範囲検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>パラメータ</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td><br/>これは範囲検索パラメータであり、連続した空のバケツの数が指定された値に達する間、検索プロセスを終了する。<br/>この値を大きくすると、検索時間が長くなる代償として、リコール率を向上させることができる。</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) is a graph-based indexing algorithm. It builds a multi-layer navigation structure for an image according to certain rules. In this structure, the upper layers are more sparse and the distances between nodes are farther; the lower layers are denser and the distances between nodes are closer. The search starts from the uppermost layer, finds the node closest to the target in this layer, and then enters the next layer to begin another search. After multiple iterations, it can quickly approach the target position.</p>
-<p>In order to improve performance, HNSW limits the maximum degree of nodes on each layer of the graph to <code translate="no">M</code>. In addition, you can use <code translate="no">efConstruction</code> (when building index) or <code translate="no">ef</code> (when searching targets) to specify a search range.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW（Hierarchical Navigable Small World Graph）は、グラフベースのインデックス作成アルゴリズムである。HNSWは、ある規則に従って、画像に対して多層のナビゲーション構造を構築する。この構造では、上層ほど疎でノード間の距離が遠く、下層ほど密でノード間の距離が近い。探索は最上層から開始し、この層でターゲットに最も近いノードを見つけ、次の層に入って別の探索を開始する。何度も繰り返すうちに、目標位置に素早く近づくことができる。</p>
+<p>パフォーマンスを向上させるために、HNSWはグラフの各レイヤー上のノードの最大次数を<code translate="no">M</code> に制限している。さらに、<code translate="no">efConstruction</code> （インデックス構築時）または<code translate="no">ef</code> （ターゲット検索時）を使って検索範囲を指定することができる。</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス構築パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>Mは、グラフ内の発信接続の最大数を定義する。M が大きいほど、固定 ef/efConstruction での精度/run_time が高くなる。</td><td>[2, 2048]</td><td>なし</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction はインデックス検索速度と構築速度のトレードオフを制御します。efConstructionパラメータを大きくするとインデックスの品質が向上しますが、インデックス作成時間が長くなる傾向があります。</td><td>[1, int_max］</td><td>なし</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">ef</code></td><td>検索時間と精度のトレードオフを制御するパラメータ。<code translate="no">ef</code> を高くすると、検索精度は高くなるが、検索時間は遅くなる。</td><td>[<code translate="no">top_k</code>, int_max］</td><td>なし</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>Scalar Quantization (SQ) is a technique used to discretize floating-point data into a finite set of values based on their magnitude. For example, <strong>SQ6</strong> represents quantization into (2^6 = 64) discrete values, where each floating-point number is encoded using 6 bits. Similarly, <strong>SQ8</strong> quantizes the data into (2^8 = 256) discrete values, with each floating-point number represented by 8 bits. This quantization reduces the memory footprint while preserving the essential structure of the data for efficient processing.</p>
-<p>Combined with SQ, HNSW_SQ offers a controllable trade-off between index size and accuracy, while maintaining high query-per-second (QPS) performance. Compared to standard HNSW, it results in a modest increase in index construction time.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>スカラー量子化(SQ)は、浮動小数点データをその大きさに基づいて有限の値の集合に離散化するために使用される技法である。例えば、<strong>SQ6 は</strong>(2^6 = 64) 個の離散値への量子化を表し、各浮動小数点数は 6 ビットでエンコードされる。同様に、<strong>SQ8 は</strong>データを (2^8 = 256) 個の離散値に量子化し、各浮動小数点数は 8 ビットで表されます。この量子化により、効率的な処理のためにデータの本質的な構造を保持しながら、メモリフットプリントを削減します。</p>
+<p>SQと組み合わせることで、HNSW_SQは高いクエリーパーセカンド（QPS）性能を維持しながら、インデックスサイズと精度のトレードオフを制御できる。標準的なHNSWと比較すると、インデックス構築時間の増加はわずかである。</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス構築パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">sq_type</code></td><td>Scalar quantizer type.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>Mは、グラフ内の発信接続の最大数を定義する。M が大きいほど、固定 ef/efConstruction での精度/run_time が高くなる。</td><td>[2, 2048]</td><td>なし</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction はインデックス検索速度と構築速度のトレードオフを制御します。efConstructionパラメータを大きくするとインデックスの品質が向上しますが、インデックス作成時間が長くなる傾向があります。</td><td>[1, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>スカラー量子化タイプ。</td><td><code translate="no">SQ6</code><code translate="no">SQ8</code>, 、<code translate="no">BF16</code> <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>インデックス構築時に洗練されたデータを予約するかどうか。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>リファインインデックスのデータ型。</td><td><code translate="no">SQ6</code> <code translate="no">SQ8</code>, , 、<code translate="no">BF16</code> <code translate="no">FP16</code> <code translate="no">FP32</code></td><td>なし</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>検索時間と精度のトレードオフを制御するパラメータ。<code translate="no">ef</code> を高くすると、検索精度は高くなるが、検索時間は遅くなる。</td><td>[<code translate="no">top_k</code>, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td><em>kに対する</em>refineの倍率。</td><td>[1,<em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>The basic idea of PQ is to split the vector into <code translate="no">m</code> sub-vectors, each of which will find 2^{<em>nbits</em>} centroids based on kmeans, and each sub-vector will select the nearest centroid as its approximate sub-vector. Then we record all the centriods, so each subvector can be encoded as <code translate="no">nbits</code>, and a floating vector of length <code translate="no">dim</code> can be encoded as <em>m ⋅ nbits</em> bits.</p>
-<p>Combined with PQ, HNSW_PQ offers a controllable tradeoff between index size and accuracy, but it has a lower QPS value and a higher recall rate than HNSW_SQ for the same compression rate. Compared with HNSW_SQ, it takes longer to build the index.</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>PQ の基本的な考え方は，ベクトルを<code translate="no">m</code> 個の部分ベクトルに分割し，それぞれの部分ベクトルが kmeans に基づいて<em>2^{nbits}</em> のセントロイドを見つけ，それぞれの部分ベクトルがその近似部分ベクトルとして最も近いセントロイドを選択することである．そして、すべてのセントロイドを記録する。したがって、各サブベクトルは<code translate="no">nbits</code> 、長さ<code translate="no">dim</code> の浮動ベクトルは<em>m・nビットとして</em>符号化できる。</p>
+<p>PQと組み合わせることで、HNSW_PQはインデックスサイズと精度のトレードオフを制御できるが、同じ圧縮率ではHNSW_SQよりQPS値が低く、想起率が高い。HNSW_SQと比較すると、インデックス構築に時間がかかる。</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス構築パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>Mは、グラフ内の発信接続の最大数を定義する。M が大きいほど、固定 ef/efConstruction での精度/run_time が高くなる。</td><td>[2, 2048]</td><td>なし</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction はインデックス検索速度と構築速度のトレードオフを制御します。efConstructionパラメータを大きくするとインデックスの品質が向上しますが、インデックス作成時間が長くなる傾向があります。</td><td>[1, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">m</code></td><td>ベクトルを分割するサブベクターグループの数。</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>各グループのサブベクトルを量子化するビット数。</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">refine</code></td><td>インデックス構築時に洗練されたデータを予約するかどうか。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>絞り込みインデックスのデータ型。</td><td><code translate="no">SQ6</code> <code translate="no">SQ8</code>, , 、<code translate="no">BF16</code> <code translate="no">FP16</code> <code translate="no">FP32</code></td><td>なし</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>検索時間と精度のトレードオフを制御するパラメータ。<code translate="no">ef</code> を高くすると、検索精度は高くなるが、検索時間は遅くなる。</td><td>[<code translate="no">top_k</code>, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td><em>kに対する</em>refineの倍率。</td><td>[1,<em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ is similar to PQ, and also divides the vector into <code translate="no">m</code> groups. Each sub-vector will be encoded as <code translate="no">nbits</code>. After completing a pq quantization, it will calculate the residual between the vector and the pq quantized vector, and apply pq quantization to the residual vector. A total of <code translate="no">nrq</code> complete pq quantizations will be performed, so a floating vector of length <code translate="no">dim</code> will be encoded as <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
-<p>Combined with a Product Residual Quantizer (PRQ), HNSW_PRQ offers an even higher controllable tradeoff between index size and accuracy. It has almost equivalent QPS value and a higher recall rate than HNSW_PQ for the same compression rate. Compared with HNSW_PQ, the time to build the index may increase several times.</p>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ は PQ に似ており、ベクトルを<code translate="no">m</code> グループに分割する。各サブベクトルは<code translate="no">nbits</code> として符号化される。pq 量子化が完了すると、ベクトルと pq 量子化されたベクトルとの残差を計算し、残差ベクトルに pq 量子化を適用する。合計<code translate="no">nrq</code> の完全な pq 量子化が実行されるため、長さ<code translate="no">dim</code> の浮動ベクトルは<em>m・nビット・nrq</em>ビットとして符号化されます。</p>
+<p>積残差量子化器（PRQ）と組み合わせることで、HNSW_PRQはインデックスサイズと精度のトレードオフをさらに高く制御できる。HNSW_PRQは同じ圧縮率でHNSW_PQとほぼ同等のQPS値と高い再現率を持つ。HNSW_PQと比較すると、インデックス構築にかかる時間は数倍になる可能性がある。</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス構築パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
-<tr><td><code translate="no">nrq</code></td><td>The number of residual subquantizers.</td><td>[1, 16]</td><td>2</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>Mは、グラフ内の発信接続の最大数を定義する。M が大きいほど、固定 ef/efConstruction での精度/run_time が高くなる。</td><td>[2, 2048]</td><td>なし</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction はインデックス検索速度と構築速度のトレードオフを制御します。efConstructionパラメータを大きくするとインデックスの品質が向上しますが、インデックス作成時間が長くなる傾向があります。</td><td>[1, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">m</code></td><td>ベクトルを分割するサブベクターグループの数。</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>各グループのサブベクトルを量子化するビット数。</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>残余部分量子化器の数。</td><td>[1, 16]</td><td>2</td></tr>
+<tr><td><code translate="no">refine</code></td><td>インデックス構築時にリファインデータを予約するかどうか。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>絞り込みインデックスのデータ型。</td><td><code translate="no">SQ6</code> <code translate="no">SQ8</code>, , 、<code translate="no">BF16</code> <code translate="no">FP16</code> <code translate="no">FP32</code></td><td>なし</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>検索時間と精度のトレードオフを制御するパラメータ。<code translate="no">ef</code> を高くすると、検索精度は高くなるが、検索時間は遅くなる。</td><td>[<code translate="no">top_k</code>, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td><em>kに対する</em>refineの倍率。</td><td>[1,<em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 </div>
 <div class="filter-binary">
-<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>This index is exactly the same as FLAT except that this can only be used for binary embeddings.</p>
-<p>For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the BIN_FLAT index is a good choice. BIN_FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from BIN_FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.</p>
-<p>BIN_FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to vectors in a dataset. This makes BIN_FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters for the BIN_FLAT index in Milvus, and using it does not require data training or additional storage.</p>
+<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>このインデックスはFLATと全く同じですが、バイナリ埋め込みにのみ使用できます。</p>
+<p>完璧な精度が要求され、比較的小さな（100万個規模の）データセットに依存するベクトル類似検索のアプリケーションでは、BIN_FLATインデックスが良い選択です。BIN_FLAT はベクトルを圧縮せず、正確な検索結果を保証できる唯一のインデックスです。BIN_FLATの結果は、再現率が100%に満たない他のインデックスが作成した結果の比較対象としても使用できます。</p>
+<p>BIN_FLATが正確なのは、検索に網羅的なアプローチを取るからである。つまり、クエリごとに、ターゲット入力がデータセットのベクトルと比較される。このため、BIN_FLATは我々のリストの中で最も遅いインデックスであり、膨大なベクトルデータのクエリには適していない。MilvusにはBIN_FLATインデックス用のパラメータはなく、これを使用することでデータトレーニングや追加ストレージを必要としない。</p>
 <ul>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[オプション] 選択された距離メトリック。</td><td><a href="/docs/ja/metric.md">サポートされるメトリックを</a>参照してください。</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>This index is exactly the same as IVF_FLAT except that this can only be used for binary embeddings.</p>
-<p>BIN_IVF_FLAT divides vector data into <code translate="no">nlist</code> cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (<code translate="no">nprobe</code>), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.</p>
-<p>By adjusting <code translate="no">nprobe</code>, an ideal balance between accuracy and speed can be found for a given scenario. Query time increases sharply as both the number of target input vectors (<code translate="no">nq</code>), and the number of clusters to search (<code translate="no">nprobe</code>), increase.</p>
-<p>BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in each unit is consistent with the original data.</p>
+<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>このインデックスは IVF_FLAT と全く同じですが、バイナリ埋め込みにのみ使用できます。</p>
+<p>BIN_IVF_FLAT はベクトルデータを<code translate="no">nlist</code> クラスタ単位に分割し、ターゲット入力ベクトルと各クラスタの中心との距離を比較します。システムがクエリに設定するクラスタ数（<code translate="no">nprobe</code> ）に応じて、ターゲット入力と最も類似したクラスタ（複数可）内のベクトル間の比較に基づく類似性検索結果が返され、クエリ時間が大幅に短縮されます。</p>
+<p><code translate="no">nprobe</code> を調整することで、精度と速度の理想的なバランスを見つけることができます。クエリ時間は、ターゲット入力ベクトルの数 (<code translate="no">nq</code>) と検索するクラスタの数 (<code translate="no">nprobe</code>) の両方が増加するにつれて急激に増加します。</p>
+<p>BIN_IVF_FLATは最も基本的なBIN_IVFインデックスであり、各ユニットに格納されるエンコードされたデータは元のデータと一致する。</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス構築パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>クラスタユニット数</td><td>[1, 65536]</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <ul>
-<li><p>Common search</p>
+<li><p>共通検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>検索するユニットの数</td><td>[1, nlist］</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>範囲検索</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>パラメータ</th><th>パラメータ</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td><br/>これは範囲検索パラメータであり、連続した空のバケツの数が指定された値に達する間、検索プロセスを終了する。<br/>この値を大きくすると、検索時間が長くなる代償として、リコール率を向上させることができる。</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -587,36 +583,36 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </ul>
 </div>
 <div class="filter-sparse">
-<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX</h3><p>Each dimension maintains a list of vectors that have a non-zero value at that dimension. During search, Milvus iterates through each dimension of the query vector and computes scores for vectors that have non-zero values in those dimensions.</p>
+<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">sparse_inverted_index</h3><p>各次元は、その次元で0でない値を持つベクトルのリストを保持する。検索中、milvusはクエリベクトルの各次元を繰り返し、その次元で非ゼロ値を持つベクトルのスコアを計算する。</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>インデックス構築パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>The algorithm used for building and querying the index. For details, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (default), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
-<tr><td><code translate="no">bm25_k1</code></td><td>Controls the term frequency saturation. Higher values increase the importance of term frequencies in document ranking.</td><td>[1.2, 2.0]</td></tr>
-<tr><td><code translate="no">bm25_b</code></td><td>Controls the extent to which document length is normalized. Defaults to 0.75.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>インデックスの構築とクエリに使用されるアルゴリズム。詳細は<a href="/docs/ja/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a> を参照。</td><td><code translate="no">DAAT_MAXSCORE</code> (デフォルト), 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>用語頻度の飽和度を制御する。値が高いほど、文書ランキングにおける用語頻度の重要度が増す。</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>文書の長さを正規化する範囲を制御する。デフォルトは0.75。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">
-<p>The <code translate="no">drop_ratio_build</code> parameter is deprecated since Milvus v2.5.4, which can still be accepted during index building, but will no longer have actual effect on the index.</p>
+<p>Milvus v2.5.4以降、<code translate="no">drop_ratio_build</code> パラメータは非推奨となりました。インデックス作成時に受け付けることはできますが、インデックスに実際の影響を与えることはありません。</p>
   </div>
 </li>
-<li><p>Search parameters</p>
+<li><p>検索パラメータ</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for <code translate="no">drop_ratio_search</code>, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>検索処理中に除外される小さなベクトル値の割合。このオプションは、クエリベクトル内の最小値を無視する割合を指定することで、検索処理を微調整することができます。検索精度とパフォーマンスのバランスをとるのに役立ちます。<code translate="no">drop_ratio_search</code> に設定する値が小さければ小さいほど、これらの小さな値が最終的なスコアに与える影響は小さくなります。いくつかの小さな値を無視することで、精度への影響を最小限に抑えながら検索性能を向上させることができる。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 </div>
-<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">よくある質問<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -632,17 +628,14 @@ Currently, a vector field only supports one index type. Milvus automatically del
         ></path>
       </svg>
     </button></h2><p><details>
-<summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary></p>
-<p>IVF_FLAT index divides a vector space into <code translate="no">nlist</code> clusters. If you keep the default value of <code translate="no">nlist</code> as 16384, Milvus compares the distances between the target vector and the centers of all 16384 clusters to get <code translate="no">nprobe</code> nearest clusters. Then Milvus compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and each and every vector.
-</p>
+<summary><font color="#4fc4f9">FLATインデックスとIVF_FLATインデックスの違いは何ですか？</font></summary></p>
+<p>IVF_FLAT インデックスはベクトル空間を<code translate="no">nlist</code> クラスタに分割します。<code translate="no">nlist</code> のデフォルト値を16384のままにしておくと、Milvusはターゲットベクトルと16384クラスタすべての中心との距離を比較し、<code translate="no">nprobe</code> 最も近いクラスタを取得します。次に、Milvusはターゲットベクトルと選択されたクラスタのベクトル間の距離を比較し、最も近いベクトルを得ます。IVF_FLATと異なり、FLATはターゲットベクトルと各ベクトル間の距離を直接比較します。</p>
 <p>
-Therefore, when the total number of vectors approximately equals <code translate="no">nlist</code>, IVF_FLAT and FLAT has little difference in the way of calculation required and search performance. But as the number of vectors grows to two times, three times, or n times of <code translate="no">nlist</code>, IVF_FLAT index begins to show increasingly greater advantages.
-</p>
+そのため、ベクトルの総数が<code translate="no">nlist</code> 程度であれば、IVF_FLAT と FLAT は、必要な計算方法や探索性能にほとんど差がありません。しかし、ベクトル数が<code translate="no">nlist</code> の2倍、3倍、n倍と増えるにつれて、IVF_FLATインデックスがますます大きな利点を示し始めます。</p>
 <p>
-See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">How to Choose an Index in Milvus</a> for more information.
-</p>
+詳しくは<a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">Milvusにおけるインデックスの選び方を</a>参照してください。</p>
 </details>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -658,5 +651,5 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn more about the <a href="/docs/metric.md">Similarity Metrics</a> supported in Milvus.</li>
+<li>Milvusでサポートされている<a href="/docs/ja/metric.md">類似度指標について</a>詳しく知る。</li>
 </ul>

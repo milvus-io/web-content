@@ -1,11 +1,9 @@
 ---
 id: grant_privileges.md
-title: Grant Privilege or Privilege Group to Roles
-summary: >-
-  Once a role is created, you can grant privileges to the role. This guide
-  introduces how to grant privileges or privilege groups to a role.
+title: 역할에 권한 또는 권한 그룹 부여하기
+summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있습니다. 이 가이드에서는 역할에 권한 또는 권한 그룹을 부여하는 방법을 소개합니다.
 ---
-<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">Grant Privilege or Privilege Group to Roles<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
+<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">역할에 권한 또는 권한 그룹 부여하기<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Once a role is created, you can grant privileges to the role. This guide introduces how to grant privileges or privilege groups to a role.</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">Grant a privilege or a privilege group to a role<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
+    </button></h1><p>역할이 만들어지면 해당 역할에 권한을 부여할 수 있습니다. 이 가이드에서는 역할에 권한 또는 권한 그룹을 부여하는 방법을 소개합니다.</p>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">역할에 권한 또는 권한 그룹 부여하기<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,22 +34,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.5 introduces a new version of API which streamlines the grant operation. You no longer need to look up the object type when granting a privilege to a role. The following are the parameters and corresponding explanations.</p>
+    </button></h2><p>Milvus 2.5에서는 권한 부여 작업을 간소화하는 새로운 버전의 API가 도입되었습니다. 역할에 권한을 부여할 때 더 이상 개체 유형을 조회할 필요가 없습니다. 다음은 매개변수와 해당 설명입니다.</p>
 <ul>
-<li><p><strong>role_name:</strong> The name of the target role to which privilege(s) or privilege group(s) need to be granted.</p></li>
-<li><p><strong>Resource</strong>: The target resource of a privilege, which can be a specific instance, database, or collection.</p></li>
+<li><p><strong>role_name:</strong> 권한 또는 권한 그룹을 부여해야 하는 대상 역할의 이름입니다.</p></li>
+<li><p><strong>리소스</strong>: 특정 인스턴스, 데이터베이스 또는 컬렉션이 될 수 있는 권한의 대상 리소스입니다.</p></li>
 </ul>
-<p>The following table explains how to specify the resource in the <code translate="no">client.grantV2()</code> method.</p>
+<p>다음 표에서는 <code translate="no">client.grantV2()</code> 메서드에서 리소스를 지정하는 방법을 설명합니다.</p>
 <table>
    <tr>
-     <th><p><strong>Level</strong></p></th>
-     <th><p><strong>Resource</strong></p></th>
-     <th><p><strong>Grant Method</strong></p></th>
-     <th><p><strong>Notes</strong></p></th>
+     <th><p><strong>레벨</strong></p></th>
+     <th><p><strong>리소스</strong></p></th>
+     <th><p><strong>부여 방법</strong></p></th>
+     <th><p><strong>참고</strong></p></th>
    </tr>
    <tr>
-     <td rowspan="2"><p><strong>Collection</strong></p></td>
-     <td><p>A specific collection</p></td>
+     <td rowspan="2"><p><strong>컬렉션</strong></p></td>
+     <td><p>특정 컬렉션</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -59,10 +57,10 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Input the name of your target collection and the name of the database to which the target collection belongs.</p></td>
+     <td><p>대상 컬렉션의 이름과 대상 컬렉션이 속한 데이터베이스의 이름을 입력합니다.</p></td>
    </tr>
    <tr>
-     <td><p>All collections under a specific database</p></td>
+     <td><p>특정 데이터베이스 아래의 모든 컬렉션</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -70,11 +68,11 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
+     <td><p>대상 데이터베이스의 이름과 와일드카드 <code translate="no">*</code> 를 컬렉션 이름으로 입력합니다.</p></td>
    </tr>
    <tr>
-     <td rowspan="2"><p><strong>Database</strong></p></td>
-     <td><p>A specific database</p></td>
+     <td rowspan="2"><p><strong>데이터베이스</strong></p></td>
+     <td><p>특정 데이터베이스</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -82,10 +80,10 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
+     <td><p>대상 데이터베이스의 이름과 와일드카드 <code translate="no">*</code> 를 컬렉션 이름으로 입력합니다.</p></td>
    </tr>
    <tr>
-     <td><p>All databases under the current instance</p></td>
+     <td><p>현재 인스턴스 아래의 모든 데이터베이스</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -93,11 +91,11 @@ summary: >-
      db_name="*"
  )
 </code></pre></td>
-     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
+     <td><p>데이터베이스 이름으로 <code translate="no">*</code>, 컬렉션 이름으로 <code translate="no">*</code> 을 입력합니다.</p></td>
    </tr>
    <tr>
-     <td><p><strong>Instance</strong></p></td>
-     <td><p>The current instance</p></td>
+     <td><p><strong>인스턴스</strong></p></td>
+     <td><p>현재 인스턴스</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="ClusterAdmin", 
@@ -105,318 +103,313 @@ summary: >-
      db_name="*"
  )
 </code></pre></td>
-     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
+     <td><p>데이터베이스 이름으로 <code translate="no">*</code>, 컬렉션 이름으로 <code translate="no">*</code> 을 입력합니다.</p></td>
    </tr>
 </table>
 <ul>
-<li><p><strong>Privilege</strong>: The specific privilege or <a href="/docs/privilege_group.md">privilege group</a> that you need to grant to a role. Currently, Milvus provides 56 types of privileges that you can grant. The table below lists the privileges in Milvus.</p>
+<li><p><strong>권한</strong>: 역할에 부여해야 하는 특정 권한 또는 <a href="/docs/ko/privilege_group.md">권한 그룹입니다</a>. 현재 Milvus는 부여할 수 있는 56가지 유형의 권한을 제공합니다. 아래 표에는 Milvus의 권한이 나열되어 있습니다.</p>
 <p><div class="alert note"></p>
-<p>The type column in the table below are user to facilitate your quick lookup for privileges and is used for classification purposes only. When granting privileges, you do not need to understand the types. You just need to input the corresponding privileges.</p>
+<p>아래 표의 유형 열은 권한을 빠르게 조회할 수 있도록 사용자별로 구분한 것으로, 분류 목적으로만 사용됩니다. 권한을 부여할 때 유형을 이해할 필요는 없습니다. 해당 권한을 입력하기만 하면 됩니다.</p>
 <p></div></p>
 <p><table>
 <tr>
-<th><p><strong>Type</strong></p></th>
-<th><p><strong>Privilege</strong></p></th>
-<th><p><strong>Description</strong></p></th>
-<th><p><strong>Relevant API description on the client side</strong></p></th>
+<th><p><strong>유형</strong></p></th>
+<th><p><strong>권한</strong></p></th>
+<th><p><strong>설명</strong></p></th>
+<th><p><strong>클라이언트 측의 관련 API 설명</strong></p></th>
 </tr>
 <tr>
-<td rowspan="5"><p>Database Privileges</p></td>
+<td rowspan="5"><p>데이터베이스 권한</p></td>
 <td><p>ListDatabases</p></td>
-<td><p>View all databases in the current instance</p></td>
-<td><p><a href="/docs/manage_databases.md">ListDatabases</a></p></td>
+<td><p>현재 인스턴스의 모든 데이터베이스 보기</p></td>
+<td><p><a href="/docs/ko/manage_databases.md">ListDatabases</a></p></td>
 </tr>
 <tr>
 <td><p>DescribeDatabase</p></td>
-<td><p>View the details of a database</p></td>
-<td><p><a href="/docs/manage_databases.md">DescribeDatabase</a></p></td>
+<td><p>데이터베이스의 세부 정보 보기</p></td>
+<td><p><a href="/docs/ko/manage_databases.md">DescribeDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>CreateDatabase</p></td>
-<td><p>Create a database</p></td>
-<td><p><a href="/docs/manage_databases.md">CreateDatabase</a></p></td>
+<td><p>데이터베이스 생성</p></td>
+<td><p><a href="/docs/ko/manage_databases.md">CreateDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>DropDatabase</p></td>
-<td><p>Drop a database</p></td>
-<td><p><a href="/docs/manage_databases.md">DropDatabase</a></p></td>
+<td><p>데이터베이스 삭제</p></td>
+<td><p><a href="/docs/ko/manage_databases.md">DropDatabase</a></p></td>
 </tr>
 <tr>
-<td><p>AlterDatabase</p></td>
-<td><p>Modify the properties of a database</p></td>
-<td><p><a href="/docs/manage_databases.md">AlterDatabase</a></p></td>
+<td><p>데이터베이스 변경</p></td>
+<td><p>데이터베이스 속성 수정</p></td>
+<td><p><a href="/docs/ko/manage_databases.md">AlterDatabase</a></p></td>
 </tr>
 <tr>
-<td rowspan="18"><p>Collection Privileges</p></td>
+<td rowspan="18"><p>수집 권한</p></td>
 <td><p>GetFlushState</p></td>
-<td><p>Check the status of the collection flush operation</p></td>
+<td><p>컬렉션 플러시 작업의 상태를 확인합니다.</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadState</p></td>
-<td><p>Check the load status of a collection</p></td>
+<td><p>컬렉션의 로드 상태 확인</p></td>
 <td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadingProgress</p></td>
-<td><p>Check the loading progress of a collection</p></td>
+<td><p>컬렉션의 로딩 진행률 확인</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
 </tr>
 <tr>
-<td><p>ShowCollections</p></td>
-<td><p>View all collections with collection privileges</p></td>
-<td><p><a href="/docs/view-collections.md">ShowCollections</a></p></td>
+<td><p>컬렉션 표시</p></td>
+<td><p>컬렉션 권한이 있는 모든 컬렉션 보기</p></td>
+<td><p><a href="/docs/ko/view-collections.md">ShowCollections</a></p></td>
 </tr>
 <tr>
 <td><p>ListAliases</p></td>
-<td><p>View all aliases of a collection</p></td>
+<td><p>컬렉션의 모든 별칭 보기</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">ListAliases</a></p></td>
 </tr>
 <tr>
 <td><p>DescribeCollection</p></td>
-<td><p>View the details of a collection</p></td>
+<td><p>컬렉션의 세부 정보 보기</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">DescribeCollection</a></p></td>
 </tr>
 <tr>
 <td><p>DescribeAlias</p></td>
-<td><p>View the details of an alias</p></td>
+<td><p>별칭의 세부 정보 보기</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">DescribeAlias</a></p></td>
 </tr>
 <tr>
 <td><p>GetStatistics</p></td>
-<td><p>Obtain the statistics of a collection (eg. The number of entities in a collection)</p></td>
+<td><p>컬렉션의 통계(예: 컬렉션의 엔티티 수)를 가져옵니다.</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
 </tr>
 <tr>
 <td><p>CreateCollection</p></td>
-<td><p>Create a collection</p></td>
-<td><p><a href="/docs/create-collection.md">CreateCollection</a></p></td>
+<td><p>컬렉션을 만듭니다.</p></td>
+<td><p><a href="/docs/ko/create-collection.md">CreateCollection</a></p></td>
 </tr>
 <tr>
 <td><p>DropCollection</p></td>
-<td><p>Drop a collection</p></td>
-<td><p><a href="/docs/drop-collection.md">DropCollection</a></p></td>
+<td><p>컬렉션 삭제</p></td>
+<td><p><a href="/docs/ko/drop-collection.md">DropCollection</a></p></td>
 </tr>
 <tr>
 <td><p>Load</p></td>
-<td><p>Load a collection</p></td>
-<td><p><a href="/docs/load-and-release.md">LoadCollection</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a>/<a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
+<td><p>컬렉션 로드</p></td>
+<td><p><a href="/docs/ko/load-and-release.md">로드 컬렉션/로드</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">진행률/로드</a><a href="/docs/ko/load-and-release.md">상태 가져오기</a></p></td>
 </tr>
 <tr>
-<td><p>Release</p></td>
-<td><p>Release a collection</p></td>
-<td><p><a href="/docs/load-and-release.md">ReleaseCollection</a></p></td>
+<td><p>릴리스</p></td>
+<td><p>컬렉션 릴리스</p></td>
+<td><p><a href="/docs/ko/load-and-release.md">ReleaseCollection</a></p></td>
 </tr>
 <tr>
 <td><p>Flush</p></td>
-<td><p>Persist all entities in a collection to a sealed segment. Any entity inserted after the flush operation will be stored in a new segment.</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">Flush</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
+<td><p>컬렉션의 모든 엔티티를 봉인된 세그먼트에 유지합니다. 플러시 작업 후에 삽입된 모든 엔티티는 새 세그먼트에 저장됩니다.</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">플러시/겟플로우</a><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">상태</a></p></td>
 </tr>
 <tr>
-<td><p>Compaction</p></td>
-<td><p>Manually trigger compaction</p></td>
+<td><p>압축</p></td>
+<td><p>수동으로 압축 트리거</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">Compact</a></p></td>
 </tr>
 <tr>
 <td><p>RenameCollection</p></td>
-<td><p>Rename a collection</p></td>
-<td><p><a href="/docs/modify-collection.md">RenameCollection</a></p></td>
+<td><p>컬렉션 이름 바꾸기</p></td>
+<td><p><a href="/docs/ko/modify-collection.md">RenameCollection</a></p></td>
 </tr>
 <tr>
 <td><p>CreateAlias</p></td>
-<td><p>Create an alias for a collection</p></td>
-<td><p><a href="/docs/manage-aliases.md">CreateAlias</a></p></td>
+<td><p>컬렉션의 별칭을 만듭니다.</p></td>
+<td><p><a href="/docs/ko/manage-aliases.md">CreateAlias</a></p></td>
 </tr>
 <tr>
 <td><p>DropAlias</p></td>
-<td><p>Drop the alias of a collection</p></td>
-<td><p><a href="/docs/manage-aliases.md">DropAlias</a></p></td>
+<td><p>컬렉션의 별칭 삭제</p></td>
+<td><p><a href="/docs/ko/manage-aliases.md">DropAlias</a></p></td>
 </tr>
 <tr>
 <td><p>FlushAll</p></td>
-<td><p>Flush all collections in a database</p></td>
+<td><p>데이터베이스의 모든 컬렉션을 플러시합니다.</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
 </tr>
 <tr>
-<td rowspan="4"><p>Partition Privileges</p></td>
+<td rowspan="4"><p>파티션 권한</p></td>
 <td><p>HasPartition</p></td>
-<td><p>Check whether a partition exists</p></td>
-<td><p><a href="/docs/manage-partitions.md">HasPartition</a></p></td>
+<td><p>파티션 존재 여부 확인</p></td>
+<td><p><a href="/docs/ko/manage-partitions.md">HasPartition</a></p></td>
 </tr>
 <tr>
 <td><p>ShowPartitions</p></td>
-<td><p>View all partitions in a collection</p></td>
-<td><p><a href="/docs/manage-partitions.md">ShowPartitions</a></p></td>
+<td><p>컬렉션의 모든 파티션 보기</p></td>
+<td><p><a href="/docs/ko/manage-partitions.md">ShowPartitions</a></p></td>
 </tr>
 <tr>
 <td><p>CreatePartition</p></td>
-<td><p>Create a partition</p></td>
-<td><p><a href="/docs/manage-partitions.md">CreatePartition</a></p></td>
+<td><p>파티션 만들기</p></td>
+<td><p><a href="/docs/ko/manage-partitions.md">CreatePartition</a></p></td>
 </tr>
 <tr>
 <td><p>DropPartition</p></td>
-<td><p>Drop a partition</p></td>
-<td><p><a href="/docs/manage-partitions.md">DropPartition</a></p></td>
+<td><p>파티션 삭제</p></td>
+<td><p><a href="/docs/ko/manage-partitions.md">DropPartition</a></p></td>
 </tr>
 <tr>
-<td rowspan="3"><p>Index Privileges</p></td>
+<td rowspan="3"><p>인덱스 권한</p></td>
 <td><p>IndexDetail</p></td>
-<td><p>View the details of an index</p></td>
-<td><p><a href="/docs/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
+<td><p>인덱스의 상세 정보 보기</p></td>
+<td><p><a href="/docs/ko/index-vector-fields.md">색인 설명/색인 상태 가져오기/색인 빌드 진행률 가져오기</a></p></td>
 </tr>
 <tr>
 <td><p>CreateIndex</p></td>
-<td><p>Create an index</p></td>
-<td><p><a href="/docs/index-vector-fields.md">CreateIndex</a></p></td>
+<td><p>인덱스 생성</p></td>
+<td><p><a href="/docs/ko/index-vector-fields.md">CreateIndex</a></p></td>
 </tr>
 <tr>
 <td><p>DropIndex</p></td>
-<td><p>Drop an index</p></td>
-<td><p><a href="/docs/index-vector-fields.md">DropIndex</a></p></td>
+<td><p>인덱스 삭제</p></td>
+<td><p><a href="/docs/ko/index-vector-fields.md">DropIndex</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>Resource Management Privileges</p></td>
+<td rowspan="10"><p>리소스 관리 권한</p></td>
 <td><p>LoadBalance</p></td>
-<td><p>Achieve load balance</p></td>
-<td><p><a href="/docs/resource_group.md">LoadBalance</a></p></td>
+<td><p>부하 분산 달성</p></td>
+<td><p><a href="/docs/ko/resource_group.md">LoadBalance</a></p></td>
 </tr>
 <tr>
 <td><p>CreateResourceGroup</p></td>
-<td><p>Create a resource group</p></td>
+<td><p>리소스 그룹 생성</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
 </tr>
 <tr>
 <td><p>DropResourceGroup</p></td>
-<td><p>Drop a resource group</p></td>
-<td><p><a href="/docs/resource_group.md">DropResourceGroup</a></p></td>
+<td><p>리소스 그룹 삭제</p></td>
+<td><p><a href="/docs/ko/resource_group.md">DropResourceGroup</a></p></td>
 </tr>
 <tr>
-<td><p>UpdateResourceGroups</p></td>
-<td><p>Update a resource group</p></td>
-<td><p><a href="/docs/resource_group.md">UpdateResourceGroups</a></p></td>
+<td><p>리소스 그룹 업데이트</p></td>
+<td><p>리소스 그룹 업데이트</p></td>
+<td><p><a href="/docs/ko/resource_group.md">UpdateResourceGroups</a></p></td>
 </tr>
 <tr>
 <td><p>DescribeResourceGroup</p></td>
-<td><p>View the details of a resource group</p></td>
-<td><p><a href="/docs/resource_group.md">DescribeResourceGroup</a></p></td>
+<td><p>리소스 그룹의 세부 정보 보기</p></td>
+<td><p><a href="/docs/ko/resource_group.md">DescribeResourceGroup</a></p></td>
 </tr>
 <tr>
 <td><p>ListResourceGroups</p></td>
-<td><p>View all resource groups of the current instance</p></td>
-<td><p><a href="/docs/resource_group.md">ListResourceGroups</a></p></td>
+<td><p>현재 인스턴스의 모든 리소스 그룹 보기</p></td>
+<td><p><a href="/docs/ko/resource_group.md">ListResourceGroups</a></p></td>
 </tr>
 <tr>
 <td><p>TransferNode</p></td>
-<td><p>Transfer nodes between resource groups</p></td>
-<td><p><a href="/docs/resource_group.md">TransferNode</a></p></td>
+<td><p>리소스 그룹 간 노드 전송</p></td>
+<td><p><a href="/docs/ko/resource_group.md">TransferNode</a></p></td>
 </tr>
 <tr>
 <td><p>TransferReplica</p></td>
-<td><p>Transfer replicas between resource groups</p></td>
-<td><p><a href="/docs/resource_group.md">TransferReplica</a></p></td>
+<td><p>리소스 그룹 간 복제본 전송</p></td>
+<td><p><a href="/docs/ko/resource_group.md">TransferReplica</a></p></td>
 </tr>
 <tr>
 <td><p>BackupRBAC</p></td>
-<td><p>Create a backup for all RBAC related operations in the current instance</p></td>
+<td><p>현재 인스턴스에서 모든 RBAC 관련 작업에 대한 백업을 생성합니다.</p></td>
 <td><p>BackupRBAC</p></td>
 </tr>
 <tr>
 <td><p>RestoreRBAC</p></td>
-<td><p>Restore a backup of all RBAC related operations in the current instance</p></td>
+<td><p>현재 인스턴스에 있는 모든 RBAC 관련 작업의 백업을 복원합니다.</p></td>
 <td><p>RestoreRBAC</p></td>
 </tr>
 <tr>
-<td rowspan="6"><p>Entity Privileges</p></td>
-<td><p>Query</p></td>
-<td><p>Conduct a query</p></td>
-<td><p><a href="/docs/get-and-scalar-query.md">Query</a></p></td>
+<td rowspan="6"><p>엔터티 권한</p></td>
+<td><p>쿼리</p></td>
+<td><p>쿼리 수행</p></td>
+<td><p><a href="/docs/ko/get-and-scalar-query.md">쿼리</a></p></td>
 </tr>
 <tr>
-<td><p>Search</p></td>
-<td><p>Conduct a search</p></td>
-<td><p><a href="/docs/single-vector-search.md">Search</a></p></td>
+<td><p>검색</p></td>
+<td><p>검색 수행</p></td>
+<td><p><a href="/docs/ko/single-vector-search.md">검색</a></p></td>
 </tr>
 <tr>
-<td><p>Insert</p></td>
-<td><p>Insert entities</p></td>
-<td><p><a href="/docs/insert-update-delete.md">Insert</a></p></td>
+<td><p>삽입</p></td>
+<td><p>엔티티 삽입</p></td>
+<td><p><a href="/docs/ko/insert-update-delete.md">삽입</a></p></td>
 </tr>
 <tr>
-<td><p>Delete</p></td>
-<td><p>Delete entities</p></td>
-<td><p><a href="/docs/delete-entities.md">Delete</a></p></td>
+<td><p>삭제</p></td>
+<td><p>엔터티 삭제</p></td>
+<td><p><a href="/docs/ko/delete-entities.md">삭제</a></p></td>
 </tr>
 <tr>
 <td><p>Upsert</p></td>
-<td><p>Upsert entities</p></td>
-<td><p><a href="/docs/upsert-entities.md">Upsert</a></p></td>
+<td><p>엔터티 위로 삽입</p></td>
+<td><p><a href="/docs/ko/upsert-entities.md">Upsert</a></p></td>
 </tr>
 <tr>
-<td><p>Import</p></td>
-<td><p>Bulk insert or import entities</p></td>
-<td><p><a href="/docs/import-data.md">BulkInsert/Import</a></p></td>
+<td><p>가져오기</p></td>
+<td><p>엔티티 대량 삽입 또는 가져오기</p></td>
+<td><p><a href="/docs/ko/import-data.md">대량 삽입/가져오기</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>RBAC Privileges</p></td>
-<td><p>CreateOwnership</p></td>
-<td><p>Create a user or a role</p></td>
-<td><p><a href="/docs/users_and_roles.md">CreateUser/CreateRole</a></p></td>
+<td rowspan="10"><p>RBAC 권한</p></td>
+<td><p>소유권 만들기</p></td>
+<td><p>사용자 또는 역할 만들기</p></td>
+<td><p><a href="/docs/ko/users_and_roles.md">사용자 만들기/역할 만들기</a></p></td>
 </tr>
 <tr>
 <td><p>UpdateUser</p></td>
-<td><p>Update the password of a user</p></td>
-<td><p><a href="/docs/users_and_roles.md">UpdateCredential</a></p></td>
+<td><p>사용자의 비밀번호 업데이트</p></td>
+<td><p><a href="/docs/ko/users_and_roles.md">UpdateCredential</a></p></td>
 </tr>
 <tr>
 <td><p>DropOwnership</p></td>
-<td><p>Drop a user password or a role</p></td>
-<td><p><a href="/docs/drop_users_roles.md">DeleteCredential/DropRole</a></p></td>
+<td><p>사용자 비밀번호 또는 역할 삭제</p></td>
+<td><p><a href="/docs/ko/drop_users_roles.md">자격증명 삭제/역할 삭제</a></p></td>
 </tr>
 <tr>
 <td><p>SelectOwnership</p></td>
-<td><p>View all users that are granted a specific role</p></td>
-<td><p><a href="/docs/grant_roles.md">SelectRole/SelectGrant</a></p></td>
+<td><p>특정 역할이 부여된 모든 사용자 보기</p></td>
+<td><p><a href="/docs/ko/grant_roles.md">SelectRole/SelectGrant</a></p></td>
 </tr>
 <tr>
-<td><p>ManageOwnership</p></td>
-<td><p>Manage a user or a role or grant a role to a user</p></td>
-<td><p><a href="/docs/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
+<td><p>소유권 관리</p></td>
+<td><p>사용자 또는 역할을 관리하거나 사용자에게 역할을 부여합니다.</p></td>
+<td><p><a href="/docs/ko/privilege_group.md">사용자 역할/권한 운영/권한 운영V2</a></p></td>
 </tr>
 <tr>
 <td><p>SelectUser</p></td>
-<td><p>View all roles granted to a user</p></td>
-<td><p><a href="/docs/grant_roles.md">SelectUser</a></p></td>
+<td><p>사용자에게 부여된 모든 역할 보기</p></td>
+<td><p><a href="/docs/ko/grant_roles.md">SelectUser</a></p></td>
 </tr>
 <tr>
-<td><p>CreatePrivilegeGroup</p></td>
-<td><p>Create a privilege group</p></td>
-<td><p><a href="/docs/privilege_group.md">CreatePrivilegeGroup</a></p></td>
+<td><p>권한 그룹 만들기</p></td>
+<td><p>권한 그룹 만들기</p></td>
+<td><p><a href="/docs/ko/privilege_group.md">CreatePrivilegeGroup</a></p></td>
 </tr>
 <tr>
 <td><p>DropPrivilegeGroup</p></td>
-<td><p>Drop a privilege group</p></td>
-<td><p><a href="/docs/privilege_group.md">DropPrivilegeGroup</a></p></td>
+<td><p>권한 그룹 삭제</p></td>
+<td><p><a href="/docs/ko/privilege_group.md">DropPrivilegeGroup</a></p></td>
 </tr>
 <tr>
 <td><p>ListPrivilegeGroups</p></td>
-<td><p>View all privilege groups in the current instance</p></td>
-<td><p><a href="/docs/privilege_group.md">ListPrivilegeGroups</a></p></td>
+<td><p>현재 인스턴스의 모든 권한 그룹 보기</p></td>
+<td><p><a href="/docs/ko/privilege_group.md">ListPrivilegeGroups</a></p></td>
 </tr>
 <tr>
-<td><p>OperatePrivilegeGroup</p></td>
-<td><p>Add privileges to or remove privileges from a privilege group</p></td>
-<td><p><a href="/docs/privilege_group.md">OperatePrivilegeGroup</a></p></td>
+<td><p>권한 그룹 운영</p></td>
+<td><p>권한 그룹에 권한을 추가하거나 권한 그룹에서 권한을 제거합니다.</p></td>
+<td><p><a href="/docs/ko/privilege_group.md">OperatePrivilegeGroup</a></p></td>
 </tr>
 </table></p></li>
 </ul>
-<p>The following example demonstrates how to grant the privilege <code translate="no">PrivilegeSearch</code> on <code translate="no">collection_01</code> under the <code translate="no">default</code> database as well as a privilege group named <code translate="no">privilege_group_1</code> to the role <code translate="no">role_a</code>.</p>
+<p>다음 예는 <code translate="no">default</code> 데이터베이스 아래의 <code translate="no">collection_01</code> 에 대한 <code translate="no">PrivilegeSearch</code> 권한과 <code translate="no">privilege_group_1</code> 라는 권한 그룹을 <code translate="no">role_a</code> 역할에 부여하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -567,7 +560,7 @@ curl --request POST \
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-a-role" class="common-anchor-header">Describe a role<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
+<h2 id="Describe-a-role" class="common-anchor-header">역할 설명하기<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -582,14 +575,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to view the privileges granted to the role <code translate="no">role_a</code> using the <code translate="no">describe_role</code> method.</p>
+    </button></h2><p>다음 예는 <code translate="no">describe_role</code> 메서드를 사용하여 <code translate="no">role_a</code> 역할에 부여된 권한을 보는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -621,7 +609,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output.</p>
+<p>다음은 출력 예시입니다.</p>
 <pre><code translate="no" class="language-python">{
      <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
      <span class="hljs-string">&quot;privileges&quot;</span>: [
@@ -636,7 +624,7 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
      ]
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">Revoke a privilege or a privilege group from a role<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
+<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">역할에서 권한 또는 권한 그룹 해지하기<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -651,14 +639,9 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to revoke the privilege <code translate="no">PrivilegeSearch</code> on <code translate="no">collection_01</code> under the <code translate="no">default</code> database as well as the privilege group <code translate="no">privilege_group_1</code> that have been granted to the role <code translate="no">role_a</code>.</p>
+    </button></h2><p>다음 예는 <code translate="no">default</code> 데이터베이스 아래의 <code translate="no">collection_01</code> 에 대한 권한 <code translate="no">PrivilegeSearch</code> 과 역할 <code translate="no">role_a</code> 에 부여된 권한 그룹 <code translate="no">privilege_group_1</code> 을 해지하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
     privilege=<span class="hljs-string">&quot;Search&quot;</span>,

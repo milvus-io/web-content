@@ -68,7 +68,7 @@ beta: Milvus 2.6.x
     </button></h2><p>감쇠 순위는 시간이나 지리적 거리와 같은 숫자 요소를 순위 프로세스에 통합하여 기존 벡터 검색을 향상시킵니다. 전체 프로세스는 다음 단계를 따릅니다:</p>
 <h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">1단계: 정규화된 유사도 점수 계산</h3><p>먼저, Milvus는 일관된 비교를 위해 벡터 유사도 점수를 계산하고 정규화합니다:</p>
 <ul>
-<li><p><strong>L2</strong> 및 <strong>JACCARD</strong> 거리 메트릭의 경우(값이 낮을수록 유사성이 높음을 나타냄):</p>
+<li><p><strong>L2</strong> 및 <strong>JACCARD</strong> 거리 메트릭(값이 낮을수록 유사성이 높음을 나타냄)의 경우:</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
 <button class="copy-code-btn"></button></code></pre>
 <p>거리를 0-1 사이의 유사도 점수로 변환하며, 점수가 높을수록 더 좋습니다.</p></li>

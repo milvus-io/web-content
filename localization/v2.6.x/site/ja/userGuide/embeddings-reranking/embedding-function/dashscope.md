@@ -1,7 +1,7 @@
 ---
 id: dashscope.md
 title: ダッシュスコープCompatible with Milvus 2.6.x
-summary: このトピックでは、MilvusにおけるDashScope埋め込み関数の設定方法と使用方法について説明します。
+summary: このトピックでは、MilvusにおけるDashScope埋め込み関数の設定と使用方法について説明します。
 beta: Milvus 2.6.x
 ---
 <h1 id="DashScope" class="common-anchor-header">ダッシュスコープ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#DashScope" class="anchor-icon" translate="no">

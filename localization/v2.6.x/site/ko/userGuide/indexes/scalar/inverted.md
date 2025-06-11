@@ -211,10 +211,10 @@ index_params.add_index(
 </ul></li>
 <li><p><strong>숫자 정밀도</strong>:</p>
 <ul>
-<li>내부적으로 Milvus는 모든 숫자 필드를 이중으로 색인합니다. 숫자 값이 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53을</span></span></span></span></span></span></span></span></span></span></span></span> 초과하면 정밀도가 떨어지며, 범위를 벗어난 값에 대한 쿼리는 정확히 일치하지 않을 수 있습니다.</li>
+<li>내부적으로 Milvus는 모든 숫자 필드를 이중으로 색인합니다. 숫자 값이 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53을</span></span></span></span></span></span></span></span></span></span></span></span> 초과하면 정밀도가 떨어지고 범위를 벗어난 값에 대한 쿼리가 정확히 일치하지 않을 수 있습니다.</li>
 </ul></li>
 <li><p><strong>데이터 무결성</strong>:</p>
 <ul>
-<li>Milvus는 지정된 형 변환을 넘어서는 JSON 키를 구문 분석하거나 변환하지 않습니다. 소스 데이터가 일관성이 없는 경우(예: 일부 행은 <code translate="no">&quot;k&quot;</code> 키에 대해 문자열을 저장하고 다른 행은 숫자를 저장하는 경우) 일부 행은 인덱싱되지 않습니다.</li>
+<li>Milvus는 사용자가 지정한 형 변환을 넘어서는 JSON 키를 구문 분석하거나 변환하지 않습니다. 소스 데이터가 일관성이 없는 경우(예: 일부 행은 <code translate="no">&quot;k&quot;</code> 키에 대해 문자열을 저장하고 다른 행은 숫자를 저장하는 경우) 일부 행은 인덱싱되지 않습니다.</li>
 </ul></li>
 </ul>

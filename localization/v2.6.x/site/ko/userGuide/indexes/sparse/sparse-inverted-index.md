@@ -53,7 +53,7 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>이 구성에서는</p>
 <ul>
-<li><p><code translate="no">index_type</code>: 구축할 인덱스 유형입니다. 이 예에서는 값을 <code translate="no">SPARSE_INVERTED_INDEX</code> 로 설정합니다.</p></li>
+<li><p><code translate="no">index_type</code>: 구축할 인덱스의 유형입니다. 이 예에서는 값을 <code translate="no">SPARSE_INVERTED_INDEX</code> 로 설정합니다.</p></li>
 <li><p><code translate="no">metric_type</code>: 스파스 벡터 간의 유사성을 계산하는 데 사용되는 메트릭입니다. 유효한 값:</p>
 <ul>
 <li><p><code translate="no">IP</code> (내적 곱): 도트 곱을 사용하여 유사도를 측정합니다.</p></li>

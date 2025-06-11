@@ -1,7 +1,7 @@
 ---
 id: bedrock.md
 title: ベッドロックCompatible with Milvus 2.6.x
-summary: このトピックでは、MilvusにおけるAmazon Bedrock埋め込み関数の設定方法と使用方法について説明します。
+summary: このトピックでは、MilvusでAmazon Bedrockの埋め込み関数を設定し、使用する方法について説明します。
 beta: Milvus 2.6.x
 ---
 <h1 id="Bedrock" class="common-anchor-header">ベッドロック<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Bedrock" class="anchor-icon" translate="no">

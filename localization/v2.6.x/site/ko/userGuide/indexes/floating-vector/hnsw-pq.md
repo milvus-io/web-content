@@ -2,9 +2,9 @@
 id: hnsw-pq.md
 title: HNSW_PQ
 summary: >-
-  HNSW_PQ는 계층적 탐색이 가능한 작은 세계(HNSW) 그래프와 제품 정량화(PQ)를 활용하여 크기와 정확도 사이에서 제어 가능한 균형을
-  제공하는 고급 벡터 인덱싱 방법을 생성합니다. 이 인덱스 유형은 HNSW_SQ에 비해 쿼리 처리 속도가 느리고 인덱스 구축 시간이 길지만,
-  동일한 압축 수준에서 더 높은 재검색률을 제공합니다.
+  HNSW_PQ는 계층적 탐색이 가능한 작은 세계(HNSW) 그래프와 제품 정량화(PQ)를 활용하여 크기와 정확도 간의 균형을 제어할 수 있는
+  고급 벡터 인덱싱 방법을 생성합니다. 이 인덱스 유형은 HNSW_SQ에 비해 쿼리 처리 속도가 느리고 인덱스 구축 시간이 길지만, 동일한
+  압축 수준에서 더 높은 재검색률을 제공합니다.
 ---
 <h1 id="HNSWPQ" class="common-anchor-header">HNSW_PQ<button data-href="#HNSWPQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ summary: >-
 <p>자세한 내용은 <a href="/docs/ko/hnsw.md">HNSW를</a> 참조하세요.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p>PQ는 고차원 벡터를 더 작은 하위 벡터로 분해한 다음 양자화하여 압축하는 벡터 압축 기법입니다. 이 압축은 메모리 요구량을 획기적으로 줄이고 거리 계산을 가속화합니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/ivf-pq.md#PQ">IVF_PQ를</a> 참조하세요.</p>
-<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ</h3><p>HNSW_PQ는 HNSW와 PQ의 강점을 결합하여 효율적인 근사 최인접 이웃 검색을 가능하게 합니다. PQ를 사용하여 데이터를 압축한 다음(따라서 메모리 사용량을 줄임), 이렇게 압축된 벡터에 HNSW 그래프를 구축하여 후보를 빠르게 검색할 수 있도록 합니다. 검색 중에 알고리즘은 정확도를 높이기 위해 선택적으로 더 정밀한 데이터를 사용하여 후보 결과를 구체화할 수 있습니다. 프로세스는 다음과 같이 작동합니다:</p>
+<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ</h3><p>HNSW_PQ는 HNSW와 PQ의 강점을 결합하여 효율적인 근사 근접 이웃 검색을 가능하게 합니다. PQ를 사용하여 데이터를 압축한 다음(따라서 메모리 사용량을 줄임), 이렇게 압축된 벡터에 HNSW 그래프를 구축하여 후보를 빠르게 검색할 수 있도록 합니다. 검색 중에 알고리즘은 정확도를 높이기 위해 선택적으로 더 정밀한 데이터를 사용하여 후보 결과를 구체화할 수 있습니다. 프로세스는 다음과 같이 작동합니다:</p>
 <ol>
 <li><p><strong>데이터 압축</strong>: PQ는 각 벡터를 여러 개의 하위 벡터로 분할하고 <code translate="no">m</code> (하위 벡터 수) 및 <code translate="no">nbits</code> (하위 벡터당 비트 수)와 같은 매개변수로 제어되는 중심 코드북을 사용하여 이를 정량화합니다.</p></li>
 <li><p><strong>그래프 구성</strong>: 그런 다음 압축된 벡터를 사용해 HNSW 그래프를 구축합니다. 벡터가 압축된 형태로 저장되기 때문에 결과 그래프는 일반적으로 더 작고, 더 적은 메모리를 필요로 하며, 더 빠르게 탐색할 수 있으므로 후보 검색 단계가 크게 빨라집니다.</p></li>
@@ -209,7 +209,7 @@ res = MilvusClient.search(
      <td><p>세분화 과정에서 사용되는 데이터의 정밀도를 결정합니다. 이 정밀도는 압축 벡터( <code translate="no">m</code> 및 <code translate="no">nbits</code> 매개변수에 의해 설정된 대로)보다 높아야 합니다.</p></td>
      <td><p><strong>Type</strong>: 문자열 <strong>범위</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]입니다.</p>
 <p><strong>기본값</strong>: None</p></td>
-     <td><p>더 높은 메모리 비용으로 정밀도를 최대화하려면 <code translate="no">FP32</code>, 더 나은 압축을 위해서는 <code translate="no">SQ6</code>/<code translate="no">SQ8</code> 을 사용하세요. <code translate="no">BF16</code> 과 <code translate="no">FP16</code> 은 균형 잡힌 대안을 제공합니다.</p></td>
+     <td><p>더 높은 메모리 비용으로 정밀도를 최대화하려면 <code translate="no">FP32</code>, 더 나은 압축을 위해서는 <code translate="no">SQ6</code>/<code translate="no">SQ8</code> 를 사용하세요. <code translate="no">BF16</code> 와 <code translate="no">FP16</code> 는 균형 잡힌 대안을 제공합니다.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/hnsw-pq.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>

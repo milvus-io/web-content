@@ -1,12 +1,11 @@
 ---
 id: load-and-release.md
-title: Load & Release
+title: 로드 및 릴리스
 summary: >-
-  Loading a collection is the prerequisite to conducting similarity searches and
-  queries in collections. This page focuses on the procedures for loading and
-  releasing a collection.
+  컬렉션을 로드하는 것은 컬렉션에서 유사도 검색 및 쿼리를 수행하기 위한 전제 조건입니다. 이 페이지에서는 컬렉션을 로드하고 해제하는 절차에
+  대해 중점적으로 설명합니다.
 ---
-<h1 id="Load--Release" class="common-anchor-header">Load & Release<button data-href="#Load--Release" class="anchor-icon" translate="no">
+<h1 id="Load--Release" class="common-anchor-header">로드 및 릴리스<button data-href="#Load--Release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Loading a collection is the prerequisite to conducting similarity searches and queries in collections. This page focuses on the procedures for loading and releasing a collection.</p>
-<h2 id="Load-Collection" class="common-anchor-header">Load Collection<button data-href="#Load-Collection" class="anchor-icon" translate="no">
+    </button></h1><p>컬렉션을 로드하는 것은 컬렉션에서 유사도 검색 및 쿼리를 수행하기 위한 전제 조건입니다. 이 페이지에서는 컬렉션을 로드하고 해제하는 절차에 대해 중점적으로 설명합니다.</p>
+<h2 id="Load-Collection" class="common-anchor-header">컬렉션 로드<button data-href="#Load-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +36,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you load a collection, Milvus loads the index files and the raw data of all fields into memory for rapid response to searches and queries. Entities inserted after a collection load are automatically indexed and loaded.</p>
-<p>The following code snippets demonstrate how to load a collection.</p>
+    </button></h2><p>컬렉션을 로드하면 검색 및 쿼리에 신속하게 응답할 수 있도록 Milvus는 인덱스 파일과 모든 필드의 원시 데이터를 메모리에 로드합니다. 컬렉션 로드 후에 삽입된 엔티티는 자동으로 인덱싱되어 로드됩니다.</p>
+<p>다음 코드 스니펫은 컬렉션을 로드하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -205,7 +199,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Specific-Fields" class="common-anchor-header">Load Specific Fields<button data-href="#Load-Specific-Fields" class="anchor-icon" translate="no">
+<h2 id="Load-Specific-Fields" class="common-anchor-header">특정 필드 로드<button data-href="#Load-Specific-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -220,18 +214,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus can load only the fields involved in searches and queries, reducing memory usage and improving search performance.</p>
+    </button></h2><p>Milvus는 검색 및 쿼리와 관련된 필드만 로드할 수 있어 메모리 사용량을 줄이고 검색 성능을 개선할 수 있습니다.</p>
 <div class="alert note">
-<p>Partial collection loading is currently in beta and not recommended for production use.</p>
+<p>부분 컬렉션 로딩은 현재 베타 버전이며 프로덕션 사용에는 권장되지 않습니다.</p>
 </div>
-<p>The following code snippet assumes that you have created a collection named <strong>my_collection</strong>, and there are two fields named <strong>my_id</strong> and <strong>my_vector</strong> in the collection.</p>
+<p>다음 코드 스니펫은 <strong>my_collection이라는</strong> 컬렉션을 생성하고 컬렉션에 <strong>my_id와</strong> <strong>my_vector라는</strong> 두 개의 필드가 있다고 가정합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span></span>
@@ -302,10 +291,10 @@ fmt.Println(state)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># REST</span>
 Not support yet
 <button class="copy-code-btn"></button></code></pre>
-<p>If you choose to load specific fields, it is worth noting that only the fields included in <code translate="no">load_fields</code> can be used as filters and output fields in searches and queries. You should always include the names of the primary field and at least one vector field in <code translate="no">load_fields</code>.</p>
-<p>You can also use <code translate="no">skip_load_dynamic_field</code> to determine whether to load the dynamic field. The dynamic field is a reserved JSON field named <strong>$meta</strong> and saves all non-schema-defined fields and their values in key-value pairs. When loading the dynamic field, all keys in the fields are loaded and available for filtering and output. If all keys in the dynamic field are not involved in metadata filtering and output, set <code translate="no">skip_load_dynamic_field</code> to <code translate="no">True</code>.</p>
-<p>To load more fields after the collection load, you need to release the collection first to avoid possible errors prompted because of index changes.</p>
-<h2 id="Release-Collection" class="common-anchor-header">Release Collection<button data-href="#Release-Collection" class="anchor-icon" translate="no">
+<p>특정 필드를 로드하도록 선택한 경우 <code translate="no">load_fields</code> 에 포함된 필드만 검색 및 쿼리에서 필터 및 출력 필드로 사용할 수 있다는 점에 유의할 필요가 있습니다. 항상 <code translate="no">load_fields</code> 에 기본 필드의 이름과 하나 이상의 벡터 필드를 포함해야 합니다.</p>
+<p><code translate="no">skip_load_dynamic_field</code> 을 사용하여 동적 필드를 로드할지 여부를 결정할 수도 있습니다. 동적 필드는 <strong>$meta라는</strong> 이름의 예약된 JSON 필드이며 스키마에 정의되지 않은 모든 필드와 해당 값을 키-값 쌍으로 저장합니다. 동적 필드를 로드할 때 필드의 모든 키가 로드되어 필터링 및 출력에 사용할 수 있습니다. 동적 필드의 모든 키가 메타데이터 필터링 및 출력에 포함되지 않는 경우 <code translate="no">skip_load_dynamic_field</code> 을 <code translate="no">True</code> 으로 설정합니다.</p>
+<p>컬렉션 로드 후 더 많은 필드를 로드하려면 먼저 컬렉션을 해제해야 인덱스 변경으로 인해 발생할 수 있는 오류를 방지할 수 있습니다.</p>
+<h2 id="Release-Collection" class="common-anchor-header">컬렉션 릴리스<button data-href="#Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -320,15 +309,10 @@ Not support yet
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Searches and queries are memory-intensive operations. To save the cost, you are advised to release the collections that are currently not in use.</p>
-<p>The following code snippet demonstrates how to release a collection.</p>
+    </button></h2><p>검색 및 쿼리는 메모리를 많이 사용하는 작업입니다. 비용을 절약하려면 현재 사용하지 않는 컬렉션을 해제하는 것이 좋습니다.</p>
+<p>다음 코드 조각은 컬렉션을 릴리스하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>
 client.release_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>

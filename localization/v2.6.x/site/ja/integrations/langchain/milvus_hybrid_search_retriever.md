@@ -1,11 +1,9 @@
 ---
 id: milvus_hybrid_search_retriever.md
-summary: >-
-  This notebook shows how to use functionality related to the Milvus vector
-  database.
-title: Milvus Hybrid Search Retriever
+summary: このノートブックでは、Milvusベクトルデータベースに関連する機能の使用方法を説明します。
+title: Milvusハイブリッド検索レトリバー
 ---
-<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Milvus Hybrid Search Retriever<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
+<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Milvusハイブリッド検索レトリバー<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,21 +18,21 @@ title: Milvus Hybrid Search Retriever
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Hybrid search combines the strengths of different search paradigms to enhance retrieval accuracy and robustness. It leverages the capabilities of both dense vector search and sparse vector search, as well as combinations of multiple dense vector search strategies, ensuring comprehensive and precise retrieval for diverse queries.</p>
+    </button></h1><p>ハイブリッド検索は異なる検索パラダイムの長所を組み合わせ、検索精度とロバスト性を高めます。密なベクトル検索と疎なベクトル検索、そして複数の密なベクトル検索ストラテジーの組み合わせの両方の機能を活用し、多様なクエリに対する包括的で正確な検索を保証します。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This diagram illustrates the most common hybrid search scenario, which is the dense + sparse hybrid search. In this case, candidates are retrieved using both semantic vector similarity and precise keyword matching. Results from these methods are merged, reranked, and passed to an LLM to generate the final answer. This approach balances precision and semantic understanding, making it highly effective for diverse query scenarios.</p>
-<p>In addition to dense + sparse hybrid search, hybrid strategies can also combine multiple dense vector models. For instance, one dense vector model might specialize in capturing semantic nuances, while another focuses on contextual embeddings or domain-specific representations. By merging results from these models and reranking them, this type of hybrid search ensures a more nuanced and context-aware retrieval process.</p>
-<p>LangChain Milvus integration provides a flexible way to implement hybrid search, it supports any number of vector fields, and any custom dense or sparse embedding models, which allows LangChain Milvus to flexibly adapt to various hybrid search usage scenarios, and at the same time compatible with other capabilities of LangChain.</p>
-<p>In this tutorial, we will start with the most common dense + sparse case, and then introduce any number of general hybrid search usage approachs.</p>
+<p>この図は、最も一般的なハイブリッド検索シナリオである、密＋疎ハイブリッド検索を示している。この場合、候補は意味ベクトル類似性と正確なキーワードマッチングの両方を用いて検索される。これらの方法からの結果はマージされ、再ランク付けされ、最終的な答えを生成するためにLLMに渡される。このアプローチは、精度と意味理解のバランスが取れており、多様なクエリーシナリオに非常に効果的である。</p>
+<p>密＋疎ハイブリッド検索に加えて、ハイブリッド戦略は複数の密ベクトルモデルを組み合わせることもできる。例えば、ある密なベクトルモデルは意味的なニュアンスを捉えることに特化し、別の密なベクトルモデルは文脈的な埋め込みやドメイン固有の表現に焦点を当てるかもしれない。これらのモデルからの結果をマージし、それらを再ランク付けすることで、このタイプのハイブリッド検索は、よりニュアンスがあり、コンテキストを考慮した検索プロセスを保証する。</p>
+<p>LangChain Milvus統合はハイブリッド検索を実装する柔軟な方法を提供し、任意の数のmilvusベクトルフィールドと、任意のカスタム密埋込みモデルまたは疎埋込みモデルをサポートします。</p>
+<p>このチュートリアルでは、最も一般的な密＋疎のケースから始め、一般的なハイブリッド検索の使い方を紹介します。</p>
 <div class="alert note">
-<p>The <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a>, which is another implementation of hybrid search with Milvus and LangChain, <strong>is about to be deprecated</strong>. Please use the approach in this document to implement hybrid search because it is more flexible and compatible with LangChain.</p>
+<p><a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">Milvusと</a>LangChainによるハイブリッド検索のもう一つの実装である<a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetrieverは</a> <strong>廃止予定です</strong>。LangChainとの互換性が高く、より柔軟なハイブリッド検索を実装するためには、本ドキュメントのアプローチをご利用ください。</p>
 </div>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -49,22 +47,22 @@ title: Milvus Hybrid Search Retriever
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before running this notebook, make sure you have the following dependencies installed:</p>
+    </button></h2><p>このノートブックを実行する前に、以下の依存関係がインストールされていることを確認してください：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
-<p>We will use the models from OpenAI. You should prepare the environment variables <code translate="no">OPENAI_API_KEY</code> from <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
+<p>OpenAIのモデルを使います。<a href="https://platform.openai.com/docs/quickstart">OpenAIの</a>環境変数<code translate="no">OPENAI_API_KEY</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Specify your Milvus server <code translate="no">URI</code> (and optionally the <code translate="no">TOKEN</code>). For how to install and start the Milvus server following this <a href="https://milvus.io/docs/install_standalone-docker-compose.md">guide</a>.</p>
+<p>Milvus サーバ<code translate="no">URI</code> (オプションで<code translate="no">TOKEN</code>) を指定してください。Milvusサーバのインストールと起動方法については、こちらの<a href="https://milvus.io/docs/install_standalone-docker-compose.md">ガイドを</a>参照してください。</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Prepare some example documents, which are fictional story summaries categorized by theme or genre.</p>
+<p>テーマやジャンルごとに分類された架空のストーリーをまとめたサンプルドキュメントを用意する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
@@ -110,7 +108,7 @@ docs = [
     ),
 ]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Dense-embedding-+-Sparse-embedding" class="common-anchor-header">Dense embedding + Sparse embedding<button data-href="#Dense-embedding-+-Sparse-embedding" class="anchor-icon" translate="no">
+<h2 id="Dense-embedding-+-Sparse-embedding" class="common-anchor-header">密埋め込み＋疎埋め込み<button data-href="#Dense-embedding-+-Sparse-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -125,7 +123,7 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">Option 1(Recommended): dense embedding + Milvus BM25 built-in function</h3><p>Use dense embedding + Milvus BM25 built-in function to assemble the hybrid retrieval vector store instance.</p>
+    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">オプション1（推奨）：密埋め込み＋Milvus BM25組み込み機能</h3><p>密埋め込み＋Milvus BM25組み込み関数を使って、ハイブリッド検索ベクトルストアのインスタンスを組み立てる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
@@ -144,14 +142,14 @@ vectorstore = Milvus.from_documents(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>When you use <code translate="no">BM25BuiltInFunction</code>, please note that the full-text search is available in Milvus Standalone and Milvus Distributed, but not in Milvus Lite, although it is on the roadmap for future inclusion. It will also be available in Zilliz Cloud (fully-managed Milvus) soon. Please reach out to <a href="mailto:support@zilliz.com">support@zilliz.com</a> for more information.</li>
+<li><code translate="no">BM25BuiltInFunction</code>全文検索はMilvus StandaloneとMilvus Distributedでは利用可能ですが、Milvus Liteでは利用できません。また、Milvusクラウド（フルマネージドMilvus）でも近日中に利用可能になる予定です。詳細は<a href="mailto:support@zilliz.com">support@zilliz.com</a>までお問い合わせください。</li>
 </ul>
 </div>
-<p>In the code above, we define an instance of <code translate="no">BM25BuiltInFunction</code> and pass it to the <code translate="no">Milvus</code> object. <code translate="no">BM25BuiltInFunction</code> is a lightweight wrapper class for <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> in Milvus. We can use it with <code translate="no">OpenAIEmbeddings</code>  to initialize a dense + sparse hybrid search Milvus vector store instance.</p>
-<p><code translate="no">BM25BuiltInFunction</code> does not require the client to pass corpus or training, all are automatically processed at the Milvus server’s end, so users do not need to care about any vocabulary and corpus. In addition, users can also customize the <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">analyzer</a> to implement the custom text processing in the BM25.</p>
-<p>For more information about <code translate="no">BM25BuiltInFunction</code>, please refer to the <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Full-Text-Search</a> and <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Using Full-Text Search with LangChain and Milvus</a>.</p>
-<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Option 2: Use dense and customized LangChain sparse embedding</h3><p>You can inherit the class <code translate="no">BaseSparseEmbedding</code> from <code translate="no">langchain_milvus.utils.sparse</code>, and implement the <code translate="no">embed_query</code> and <code translate="no">embed_documents</code> methods to customize the sparse embedding process. This allows you to customize any sparse embedding method both based on term frequency statistics(e.g. <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) or neural networks(e.g. <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
-<p>Here is an example:</p>
+<p>上記のコードでは、<code translate="no">BM25BuiltInFunction</code> のインスタンスを定義し、<code translate="no">Milvus</code> オブジェクトに渡しています。<code translate="no">BM25BuiltInFunction</code> は、Milvus の <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a>の軽量ラッパークラスです。密＋疎ハイブリッド検索Milvusベクトルストアのインスタンスを初期化するために<code translate="no">OpenAIEmbeddings</code> 。</p>
+<p><code translate="no">BM25BuiltInFunction</code> Milvusはコーパスやトレーニングをクライアントに渡す必要がなく、Milvusサーバ側で自動的に処理されるため、ユーザは語彙やコーパスを気にする必要がない。さらに、ユーザーは<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">アナライザーを</a>カスタマイズして、BM25にカスタムテキスト処理を実装することもできる。</p>
+<p><code translate="no">BM25BuiltInFunction</code> の詳細については<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Full-Text-Searchと</a> <a href="https://milvus.io/docs/full_text_search_with_langchain.md">LangChainとmilvusを使った全文検索を</a>ご参照ください。</p>
+<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">オプション2：高密度でカスタマイズされたLangChainスパース埋め込みを使う</h3><p><code translate="no">langchain_milvus.utils.sparse</code> から<code translate="no">BaseSparseEmbedding</code> クラスを継承し、<code translate="no">embed_query</code> と<code translate="no">embed_documents</code> メソッドを実装することで、スパース埋め込み処理をカスタマイズすることができます。これにより、項頻度統計(<a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25など</a>)やニューラルネットワーク(<a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADEなど</a>)に基づくスパース埋め込み方法をカスタマイズすることができます。</p>
+<p>以下に例を示します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BaseSparseEmbedding
 
@@ -179,8 +177,7 @@ vectorstore = Milvus.from_documents(
             }
         ] * <span class="hljs-built_in">len</span>(texts)
 <button class="copy-code-btn"></button></code></pre>
-<p>We have a demo class <code translate="no">BM25SparseEmbedding</code> inherited from <code translate="no">BaseSparseEmbedding</code> in <code translate="no">langchain_milvus.utils.sparse</code>.
-You can pass it into the initialization embedding list of the Milvus vector store instance just like other langchain dense embedding classes.</p>
+<p><code translate="no">langchain_milvus.utils.sparse</code> に<code translate="no">BaseSparseEmbedding</code> から継承したデモクラス<code translate="no">BM25SparseEmbedding</code> があります。 他のlangchain密埋め込みクラスと同様に、Milvusベクトルストアのインスタンスの初期化埋め込みリストに渡すことができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># BM25SparseEmbedding is inherited from BaseSparseEmbedding</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BM25SparseEmbedding
 
@@ -202,8 +199,8 @@ vectorstore = Milvus.from_documents(
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Although this is a way to use BM25, it requires users to manage the corpus for term frequency statistics. We recommend using the BM25 built-in function(Option 1) instead, as it handles everything on the Milvus server side. This eliminates the need for users to concern about managing the corpus or training a vocabulary. For more information, please refer to the <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Using Full-Text Search with LangChain and Milvus</a>.</p>
-<h2 id="Define-multiple-arbitrary-vector-fields" class="common-anchor-header">Define multiple arbitrary vector fields<button data-href="#Define-multiple-arbitrary-vector-fields" class="anchor-icon" translate="no">
+<p>これはBM25を使う方法ですが、用語頻度統計のためにコーパスを管理する必要があります。BM25はMilvusサーバ側で全ての処理を行うため、BM25組み込み関数(Option 1)を使用することをお勧めします。これにより、ユーザはコーパスの管理や語彙の学習に煩わされることがなくなります。詳しくは<a href="https://milvus.io/docs/full_text_search_with_langchain.md">LangChainとMilvusによる全文検索を</a>ご参照ください。</p>
+<h2 id="Define-multiple-arbitrary-vector-fields" class="common-anchor-header">複数の任意ベクトルフィールドの定義<button data-href="#Define-multiple-arbitrary-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,8 +215,7 @@ vectorstore = Milvus.from_documents(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When initializing the Milvus vector store, you can pass in the list of embeddings (and will also list of build-in functions in the future) to implement multi-ways retrival, and then rerank these candidates.
-Here is an example:</p>
+    </button></h2><p>Milvusのベクトルストアを初期化する際に、埋込み候補のリスト（将来的にはビルドイン関数のリストも）を渡すことで、複数の埋込み候補を検索し、再ランク付けすることができます。 以下に例を示します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
 embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
@@ -244,8 +240,8 @@ vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
-<p>In this example, we have three vector fields. Among them, <code translate="no">sparse</code> is used as the output field for <code translate="no">BM25BuiltInFunction</code>, while the other two, <code translate="no">dense1</code> and <code translate="no">dense2</code>, are automatically assigned as the output fields for the two <code translate="no">OpenAIEmbeddings</code> models (based on the order).</p>
-<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">Specify the index params for multi-vector fields</h3><p>By default, the index types of each vector field will be automatically determined by the type of embedding or built-in function. However, you can also specify the index type for each vector field to optimize the search performance.</p>
+<p>この例では、3つのベクトル場があります。その中で、<code translate="no">sparse</code> は<code translate="no">BM25BuiltInFunction</code> の出力フィールドとして使用され、他の2つ、<code translate="no">dense1</code> と<code translate="no">dense2</code> は、2つの<code translate="no">OpenAIEmbeddings</code> モデルの出力フィールドとして自動的に割り当てられる（順番に基づく）。</p>
+<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">マルチ・ベクトル・フィールドのインデックス・パラメータの指定</h3><p>デフォルトでは、各ベクトル・フィールドのインデックス・タイプは、埋め込みまたは組み込み関数のタイプによって自動的に決定されます。しかし、検索性能を最適化するために、各ベクトル・フィールドのインデックス・タイプを指定することもできます。</p>
 <pre><code translate="no" class="language-python">dense_index_param_1 = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
     <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;HNSW&quot;</span>,
@@ -277,10 +273,10 @@ vectorstore.vector_fields
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
 <div class="alert note">
-<p>Please keep the order of list of index params consistent with the order of <code translate="no">vectorstore.vector_fields</code> to avoid confusion.</p>
+<p>混乱を避けるため、インデックス・パラメタのリストの順番は、<code translate="no">vectorstore.vector_fields</code> の順番と一致させてください。</p>
 </div>
-<h3 id="Rerank-the-candidates" class="common-anchor-header">Rerank the candidates</h3><p>After the first stage of retrieval, we need to rerank the candidates to get a better result. You can choose <a href="https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> or <a href="https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> depending on your requirements. You can refer to the <a href="https://milvus.io/docs/weighted-ranker.md#Reranking">Reranking</a> for more information.</p>
-<p>Here is an example for weighted reranking:</p>
+<h3 id="Rerank-the-candidates" class="common-anchor-header">候補の再ランク付け</h3><p>検索の第一段階の後、より良い結果を得るために候補を再ランク付けする必要があります。要件に応じて<a href="https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a>または<a href="https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRankerを</a>選択することができます。詳しくは<a href="https://milvus.io/docs/weighted-ranker.md#Reranking">Rerankingを</a>参照してください。</p>
+<p>以下は重み付け再ランク付けの例です：</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -301,13 +297,13 @@ vectorstore.similarity_search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'pk': 454646931479252186, 'category': 'Heist/Thriller'}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
-<p>Here is an example of RRF reranking:</p>
+<p>以下はRRFリランカーの例です：</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'Heist/Thriller', 'pk': 454646931479252186}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
-<p>If you don’t pass any parameters about rerank, the average weighted rerank strategy is used by default.</p>
-<h2 id="Using-Hybrid-Search-and-Reranking-in-RAG" class="common-anchor-header">Using Hybrid Search and Reranking in RAG<button data-href="#Using-Hybrid-Search-and-Reranking-in-RAG" class="anchor-icon" translate="no">
+<p>再ランクに関するパラメータを渡さない場合、デフォルトで平均加重再ランク戦略が使用されます。</p>
+<h2 id="Using-Hybrid-Search-and-Reranking-in-RAG" class="common-anchor-header">RAGにおけるハイブリッド検索と再ランクの使用<button data-href="#Using-Hybrid-Search-and-Reranking-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -322,8 +318,8 @@ vectorstore.similarity_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the scenario of RAG, the most prevalent approach for hybrid search is dense + sparse retrieval, followed by reranking. The subsequent example demonstrates a straightforward end-to-end code.</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Prepare the data</h3><p>We use the Langchain WebBaseLoader to load documents from web sources and split them into chunks using the RecursiveCharacterTextSplitter.</p>
+    </button></h2><p>RAGのシナリオでは、ハイブリッド検索の最も一般的なアプローチは、密検索＋疎検索であり、その後に再ランク付けが続く。次の例は、エンド・ツー・エンドの簡単なコードを示している。</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">データの準備</h3><p>Langchain WebBaseLoaderを使ってウェブソースからドキュメントをロードし、RecursiveCharacterTextSplitterを使ってチャンクに分割する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
@@ -353,7 +349,7 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Load the document into Milvus vector store</h3><p>As the introduction above, we initialize and load the prepared documents into Milvus vector store, which contains two vector fields: <code translate="no">dense</code> is for the OpenAI embedding and <code translate="no">sparse</code> is for the BM25 function.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Milvusベクトルストアにドキュメントをロードする。</h3><p>Milvusベクターストアには2つのベクターフィールドがあります。<code translate="no">dense</code> はOpenAIのエンベッディング用、<code translate="no">sparse</code> はBM25関数用です。</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -366,7 +362,7 @@ docs[<span class="hljs-number">1</span>]
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-RAG-chain" class="common-anchor-header">Build RAG chain</h3><p>We prepare the LLM instance and prompt, then conbine them into a RAG pipeline using the LangChain Expression Language.</p>
+<h3 id="Build-RAG-chain" class="common-anchor-header">RAGチェーンの構築</h3><p>LLMインスタンスとプロンプトを準備し、LangChain Expression Languageを使ってRAGパイプラインに結合する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser
@@ -404,7 +400,7 @@ retriever = vectorstore.as_retriever()
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">format_docs</span>(<span class="hljs-params">docs</span>):
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;\n\n&quot;</span>.join(doc.page_content <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs)
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the LCEL(LangChain Expression Language) to build a RAG chain.</p>
+<p>LCEL(LangChain Expression Language)を使ってRAGチェインを構築する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the RAG (Retrieval-Augmented Generation) chain for AI response generation</span>
 rag_chain = (
     {<span class="hljs-string">&quot;context&quot;</span>: retriever | format_docs, <span class="hljs-string">&quot;question&quot;</span>: RunnablePassthrough()}
@@ -415,11 +411,11 @@ rag_chain = (
 
 <span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Invoke the RAG chain with a specific question and retrieve the response</p>
+<p>特定の質問でRAGチェーンを呼び出し、応答を取得する。</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
 res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'
 </code></pre>
-<p>Congratulations! You have built a hybrid(dense vector + sparse bm25 function) search RAG chain powered by Milvus and LangChain.</p>
+<p>おめでとう！MilvusとLangChainのハイブリッド（密なベクトル＋疎なbm25関数）検索RAGチェーンが構築できました。</p>

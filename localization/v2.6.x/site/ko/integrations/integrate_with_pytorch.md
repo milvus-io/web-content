@@ -1,9 +1,9 @@
 ---
 id: integrate_with_pytorch.md
-summary: This page demostrates how to build image search with PyTorch and Milvus
-title: Image Search with PyTorch and Milvus
+summary: 이 페이지는 PyTorch와 Milvus로 이미지 검색을 구축하는 방법을 설명합니다.
+title: PyTorch와 Milvus로 이미지 검색하기
 ---
-<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">Image Search with PyTorch and Milvus<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">PyTorch와 Milvus로 이미지 검색하기<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,9 +18,9 @@ title: Image Search with PyTorch and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide introduces an example of integrating PyTorch and Milvus to perform image search using embeddings. PyTorch is a powerful open-source deep learning framework widely used for building and deploying machine learning models. In this example, we’ll leverage its Torchvision library and a pre-trained ResNet50 model to generate feature vectors (embeddings) that represent image content. These embeddings will be stored in Milvus, a high-performance vector database, to enable efficient similarity search. The dataset used is the Impressionist-Classifier Dataset from <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. By combining the deep learning capabilities of PyTorch with the scalable search functionality of Milvus, this example demonstrates how to build a robust and efficient image retrieval system.</p>
-<p>Let’s get started!</p>
-<h2 id="Installing-the-requirements" class="common-anchor-header">Installing the requirements<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
+    </button></h1><p>이 가이드에서는 임베딩을 사용해 이미지 검색을 수행하기 위해 PyTorch와 Milvus를 통합하는 예제를 소개합니다. PyTorch는 머신 러닝 모델을 구축하고 배포하는 데 널리 사용되는 강력한 오픈 소스 딥 러닝 프레임워크입니다. 이 예제에서는 Torchvision 라이브러리와 사전 학습된 ResNet50 모델을 활용하여 이미지 콘텐츠를 나타내는 특징 벡터(임베딩)를 생성합니다. 이러한 임베딩은 고성능 벡터 데이터베이스인 Milvus에 저장되어 효율적인 유사도 검색을 가능하게 합니다. 사용된 데이터 세트는 <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle의</a> 인상주의-분류자 데이터 세트입니다. 이 예제는 PyTorch의 딥 러닝 기능과 Milvus의 확장 가능한 검색 기능을 결합하여 강력하고 효율적인 이미지 검색 시스템을 구축하는 방법을 보여줍니다.</p>
+<p>시작해 보겠습니다!</p>
+<h2 id="Installing-the-requirements" class="common-anchor-header">요구 사항 설치하기<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,10 +35,10 @@ title: Image Search with PyTorch and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For this example, we are going to be using <code translate="no">pymilvus</code> to connect to use Milvus, <code translate="no">torch</code> for running the embedding model, <code translate="no">torchvision</code> for the actual model and preprocessing, <code translate="no">gdown</code> to download the example dataset and <code translate="no">tqdm</code> for loading bars.</p>
+    </button></h2><p>이 예제에서는 Milvus 사용을 위한 연결은 <code translate="no">pymilvus</code>, 임베딩 모델 실행은 <code translate="no">torch</code>, 실제 모델 및 전처리는 <code translate="no">torchvision</code>, 예제 데이터 세트 다운로드는 <code translate="no">gdown</code>, 로딩 바는 <code translate="no">tqdm</code> 를 사용할 것입니다.</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus torch gdown torchvision tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Grabbing-the-data" class="common-anchor-header">Grabbing the data<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">
+<h2 id="Grabbing-the-data" class="common-anchor-header">데이터 가져오기<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,7 +53,7 @@ title: Image Search with PyTorch and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We are going to use <code translate="no">gdown</code> to grab the zip from Google Drive and then decompress it with the built-in <code translate="no">zipfile</code> library.</p>
+    </button></h2><p><code translate="no">gdown</code> 을 사용하여 Google 드라이브에서 압축 파일을 가져온 다음 기본 제공 <code translate="no">zipfile</code> 라이브러리로 압축을 해제하겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> gdown
 <span class="hljs-keyword">import</span> zipfile
 
@@ -65,9 +65,9 @@ gdown.download(url, output)
     zip_ref.extractall(<span class="hljs-string">&quot;./paintings&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>The size of the dataset is 2.35 GB, and the time spent downloading it depends on your network condition.</p>
+<p>데이터 세트의 크기는 2.35GB이며 다운로드하는 데 걸리는 시간은 네트워크 상태에 따라 다릅니다.</p>
 </div>
-<h2 id="Global-Arguments" class="common-anchor-header">Global Arguments<button data-href="#Global-Arguments" class="anchor-icon" translate="no">
+<h2 id="Global-Arguments" class="common-anchor-header">글로벌 인수<button data-href="#Global-Arguments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +82,7 @@ gdown.download(url, output)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>These are some of the main global arguments that we will be using for easier tracking and updating.</p>
+    </button></h2><p>다음은 추적과 업데이트를 쉽게 하기 위해 사용할 주요 글로벌 인수의 일부입니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Milvus Setup Arguments</span>
 COLLECTION_NAME = <span class="hljs-string">&#x27;image_search&#x27;</span>  <span class="hljs-comment"># Collection name</span>
 DIMENSION = <span class="hljs-number">2048</span>  <span class="hljs-comment"># Embedding vector size in this example</span>
@@ -93,7 +93,7 @@ MILVUS_PORT = <span class="hljs-string">&quot;19530&quot;</span>
 BATCH_SIZE = <span class="hljs-number">128</span>
 TOP_K = <span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Setting-up-Milvus" class="common-anchor-header">Setting up Milvus<button data-href="#Setting-up-Milvus" class="anchor-icon" translate="no">
+<h2 id="Setting-up-Milvus" class="common-anchor-header">Milvus 설정하기<button data-href="#Setting-up-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,22 +108,22 @@ TOP_K = <span class="hljs-number">3</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>At this point, we are going to begin setting up Milvus. The steps are as follows:</p>
+    </button></h2><p>이제 Milvus 설정을 시작하겠습니다. 단계는 다음과 같습니다:</p>
 <ol>
-<li><p>Connect to the Milvus instance using the provided URI.</p>
+<li><p>제공된 URI를 사용하여 Milvus 인스턴스에 연결합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
 
 <span class="hljs-comment"># Connect to the instance</span>
 connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>If the collection already exists, drop it.</p>
+<li><p>컬렉션이 이미 존재하는 경우 삭제합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> utility
 
 <span class="hljs-comment"># Remove any previous collections with the same name</span>
 <span class="hljs-keyword">if</span> utility.has_collection(COLLECTION_NAME):
     utility.drop_collection(COLLECTION_NAME)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Create the collection that holds the ID, the file path of the image, and its embedding.</p>
+<li><p>ID, 이미지의 파일 경로, 임베딩이 포함된 컬렉션을 생성합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType, Collection
 
 <span class="hljs-comment"># Create collection which includes the id, filepath of the image, and image embedding</span>
@@ -135,7 +135,7 @@ fields = [
 schema = CollectionSchema(fields=fields)
 collection = Collection(name=COLLECTION_NAME, schema=schema)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Create an index on the newly created collection and load it into memory.</p>
+<li><p>새로 생성된 컬렉션에 인덱스를 생성하고 메모리에 로드합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an AutoIndex index for collection</span>
 index_params = {
 <span class="hljs-string">&#x27;metric_type&#x27;</span>:<span class="hljs-string">&#x27;L2&#x27;</span>,
@@ -146,8 +146,8 @@ collection.create_index(field_name=<span class="hljs-string">&quot;image_embeddi
 collection.load()
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>Once these steps are done, the collection is ready to be inserted into and searched. Any added data will be indexed automatically and be available to search immediately. If the data is very fresh, the search might be slower as brute force searching will be used on data that is still in process of being indexed.</p>
-<h2 id="Inserting-the-data" class="common-anchor-header">Inserting the data<button data-href="#Inserting-the-data" class="anchor-icon" translate="no">
+<p>이 단계가 완료되면 컬렉션을 삽입하고 검색할 준비가 된 것입니다. 추가된 모든 데이터는 자동으로 색인화되어 즉시 검색할 수 있습니다. 데이터가 매우 새 데이터인 경우, 아직 색인 작업이 진행 중인 데이터에 무차별 대입 검색이 사용되므로 검색 속도가 느려질 수 있습니다.</p>
+<h2 id="Inserting-the-data" class="common-anchor-header">데이터 삽입하기<button data-href="#Inserting-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,17 +162,17 @@ collection.load()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For this example, we are going to use the ResNet50 model provided by <code translate="no">torch</code> and its model hub. To get the embeddings, we are taking off the final classification layer, which results in the model giving us embeddings of 2048 dimensions. All the vision models found on <code translate="no">torch</code> use the same preprocessing that we have included here.</p>
-<p>In these next few steps we will be:</p>
+    </button></h2><p>이 예에서는 <code translate="no">torch</code> 에서 제공하는 ResNet50 모델과 해당 모델 허브를 사용하겠습니다. 임베딩을 얻기 위해 최종 분류 계층을 제거하여 2048개의 차원을 임베딩하는 모델을 만들 것입니다. <code translate="no">torch</code> 에 있는 모든 비전 모델은 여기에 포함된 것과 동일한 전처리를 사용합니다.</p>
+<p>다음 몇 단계는 다음과 같습니다:</p>
 <ol>
-<li><p>Loading the data.</p>
+<li><p>데이터 로드하기.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> glob
 
 <span class="hljs-comment"># Get the filepaths of the images</span>
 paths = glob.glob(<span class="hljs-string">&#x27;./paintings/paintings/**/*.jpg&#x27;</span>, recursive=<span class="hljs-literal">True</span>)
 <span class="hljs-built_in">len</span>(paths)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Preprocessing the data into batches.</p>
+<li><p>데이터를 일괄 처리로 전처리하기.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 
 <span class="hljs-comment"># Load the embedding model with the last layer removed</span>
@@ -180,7 +180,7 @@ model = torch.hub.load(<span class="hljs-string">&#x27;pytorch/vision:v0.10.0&#x
 model = torch.nn.Sequential(*(<span class="hljs-built_in">list</span>(model.children())[:-<span class="hljs-number">1</span>]))
 model.<span class="hljs-built_in">eval</span>()
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Embedding the data.</p>
+<li><p>데이터 임베딩.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> torchvision <span class="hljs-keyword">import</span> transforms
 
 <span class="hljs-comment"># Preprocessing for images</span>
@@ -191,7 +191,7 @@ preprocess = transforms.Compose([
     transforms.Normalize(mean=[<span class="hljs-number">0.485</span>, <span class="hljs-number">0.456</span>, <span class="hljs-number">0.406</span>], std=[<span class="hljs-number">0.229</span>, <span class="hljs-number">0.224</span>, <span class="hljs-number">0.225</span>]),
 ])
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Inserting the data.</p>
+<li><p>데이터 삽입.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
@@ -221,13 +221,13 @@ collection.flush()
 <button class="copy-code-btn"></button></code></pre>
    <div class="alert note">
 <ul>
-<li>This step is relatively time-consuming because embedding takes time. Take a sip of coffee and relax.</li>
-<li>PyTorch may not work well with Python 3.9 and earlier versions. Consider using Python 3.10 and later versions instead.</li>
+<li>이 단계는 임베딩에 시간이 걸리기 때문에 상대적으로 시간이 오래 걸립니다. 커피 한 모금 마시고 긴장을 푸세요.</li>
+<li>Python 3.9 및 이전 버전에서는 PyTorch가 제대로 작동하지 않을 수 있습니다. 대신 Python 3.10 이상 버전을 사용하는 것이 좋습니다.</li>
 </ul>
    </div>
 </li>
 </ol>
-<h2 id="Performing-the-search" class="common-anchor-header">Performing the search<button data-href="#Performing-the-search" class="anchor-icon" translate="no">
+<h2 id="Performing-the-search" class="common-anchor-header">검색 수행하기<button data-href="#Performing-the-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,7 +242,7 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With all the data inserted into Milvus, we can start performing our searches. In this example, we are going to search for two example images. Because we are doing a batch search, the search time is shared across the images of the batch.</p>
+    </button></h2><p>Milvus에 모든 데이터를 삽입했으면 검색을 시작할 수 있습니다. 이 예제에서는 두 개의 예제 이미지를 검색하겠습니다. 일괄 검색을 수행하므로 검색 시간은 일괄 이미지 전체에 걸쳐 공유됩니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> glob
 
 <span class="hljs-comment"># Get the filepaths of the search images</span>
@@ -290,10 +290,8 @@ f, axarr = plt.subplots(<span class="hljs-built_in">len</span>(data_batch[<span 
 <span class="hljs-comment"># Save the search result in a separate image file alongside your script.</span>
 plt.savefig(<span class="hljs-string">&#x27;search_result.png&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The search result image should be similar to the following:</p>
+<p>검색 결과 이미지는 다음과 비슷해야 합니다:</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
-    <span>Image search output</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
+   </span> <span class="img-wrapper"> <span>이미지 검색 출력</span> </span></p>

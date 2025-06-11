@@ -45,7 +45,7 @@ summary: MilvusのGPUサポートによるインデックスの構築は、高�
 <li><p><code translate="no">GPU_BRUTE_FORCE</code> については、<code translate="no">limit</code> の設定はありませんが、潜在的なパフォーマンスの問題を避けるために、4,096 を超えないことが推奨されます。</p></li>
 <li><p>現在、GPU インデックスは<code translate="no">COSINE</code> 距離をサポートしていません。<code translate="no">COSINE</code> 距離が必要な場合は、まずデータを正規化し、それから内積（IP）距離を代用として使用します。</p></li>
 <li><p>GPU インデックスの OOM 保護のロードは完全にはサポートされておらず、データが多すぎると QueryNode がクラッシュする可能性があります。</p></li>
-<li><p>GPUインデックスは<a href="/docs/ja/range-search.md">範囲検索や</a> <a href="/docs/ja/grouping-search.md">グループ検索の</a>ような検索機能をサポートしていません。</p></li>
+<li><p>GPUインデックスは<a href="/docs/ja/range-search.md">範囲検索や</a> <a href="/docs/ja/grouping-search.md">グループ化検索の</a>ような検索機能をサポートしていません。</p></li>
 </ul>
 <h2 id="Supported-GPU-index-types" class="common-anchor-header">サポートされるGPUインデックス・タイプ<button data-href="#Supported-GPU-index-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ summary: MilvusのGPUサポートによるインデックスの構築は、高�
    </tr>
    <tr>
      <td><p><a href="/docs/ja/gpu-ivf-flat.md">GPU_IVF_FLAT</a></p></td>
-     <td><p>GPU_IVF_FLATは最も基本的なIVFインデックスで、各ユニットに格納されるエンコードされたデータは元のデータと一致します。検索を行う場合、GPU_IVF_FLAT インデックスのコレクションに対する検索では、top-k (<code translate="no">limit</code>) を256まで設定できることに注意してください。</p></td>
+     <td><p>GPU_IVF_FLATは最も基本的なIVFインデックスで、各ユニットに格納されるエンコードされたデータは元のデータと一致します。検索を行う場合、GPU_IVF_FLAT インデックスのコレクションに対する検索では、top-k (<code translate="no">limit</code>)を256まで設定できることに注意してください。</p></td>
      <td><p>元データのサイズと同じメモリが必要です。</p></td>
    </tr>
    <tr>
@@ -134,8 +134,8 @@ summary: MilvusのGPUサポートによるインデックスの構築は、高�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>どのような場合にGPUインデックスを利用するのが適切ですか？</strong></p>
-<p>GPUインデックスは、高スループットまたは高リコールが要求される状況で特に有益です。例えば、大きなバッチを扱う場合、GPUインデックスのスループットはCPUインデックスのそれを100倍も上回ることができます。より小さなバッチを扱うシナリオでは、GPUインデックスがCPUインデックスを性能面で大きく上回ることに変わりはありません。さらに、迅速なデータ挿入が必要な場合、GPUを組み込むことで、インデックスの構築プロセスを大幅にスピードアップすることができます。</p></li>
+<li><p><strong>GPUインデックスはどのような場合に利用するのが適切ですか？</strong></p>
+<p>GPUインデックスは、高スループットまたは高リコールが要求される状況で特に有益です。例えば、大きなバッチを扱う場合、GPUインデックスのスループットはCPUインデックスのそれを100倍も上回ることができます。より小さなバッチを扱うシナリオでは、GPUインデックスが性能の点でCPUインデックスを大きく上回ることに変わりはありません。さらに、迅速なデータ挿入が必要な場合、GPUを組み込むことで、インデックスの構築プロセスを大幅にスピードアップすることができます。</p></li>
 <li><p><strong>GPU_CAGRA、GPU_IVF_PQ、GPU_IVF_FLAT、GPU_BRUTE_FORCE などの GPU インデックスは、どのようなシナリオに最適ですか？</strong></p>
 <p><code translate="no">GPU_CAGRA</code> GPU_IVF_FQ、GPU_IVF_FLAT、GPU_BRUTE_FORCE のような GPU インデックスは、より多くのメモリを消費する代償はあるにせよ、より高いパフォーマンスを求めるシナリオに最適です。メモリの節約が優先される環境では、 インデックスがストレージ要件を最小化するのに役立ちますが、これは精度の高い損失を伴います。 インデックスは、性能とメモリ使用量の妥協点を提供する、バランスの取れたオプションとして機能する。最後に、 インデックスは、網羅的な検索操作のために設計されており、トラバーサル検索を実行することで、想起率1を保証している。<code translate="no">GPU_IVF_PQ</code> <code translate="no">GPU_IVF_FLAT</code> <code translate="no">GPU_BRUTE_FORCE</code> </p></li>
 </ul>

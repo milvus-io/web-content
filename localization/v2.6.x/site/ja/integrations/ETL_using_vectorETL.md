@@ -1,14 +1,8 @@
 ---
 id: ETL_using_vectorETL.md
 summary: >-
-  In this tutorial, we'll explore how to efficiently load data into Milvus using
-  [VectorETL](https://github.com/ContextData/VectorETL), a lightweight ETL
-  framework designed for vector databases. VectorETL simplifies the process of
-  extracting data from various sources, transforming it into vector embeddings
-  using AI models, and storing it in Milvus for fast and scalable retrieval. By
-  the end of this tutorial, you'll have a working ETL pipeline that allows you
-  to integrate and manage vector search systems with ease. Let’s dive in!
-title: Efficient Data Loading into Milvus with VectorETL
+  このチュートリアルでは、ベクトルデータベース用に設計された軽量なETLフレームワークである[VectorETL](https://github.com/ContextData/VectorETL)を使用して、Milvusに効率的にデータをロードする方法を探ります。VectorETLは、様々なソースからデータを抽出し、AIモデルを用いてベクトル埋め込みデータに変換し、Milvusに格納することで、高速かつスケーラブルな検索を可能にします。このチュートリアルが終わるころには、ベクター検索システムを簡単に統合・管理できるETLパイプラインが完成していることでしょう。さあ、始めましょう！
+title: VectorETLによるMilvusへの効率的なデータロード
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/ETL_using_vectorETL.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -16,7 +10,7 @@ title: Efficient Data Loading into Milvus with VectorETL
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/ETL_using_vectorETL.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Efficient-Data-Loading-into-Milvus-with-VectorETL" class="common-anchor-header">Efficient Data Loading into Milvus with VectorETL<button data-href="#Efficient-Data-Loading-into-Milvus-with-VectorETL" class="anchor-icon" translate="no">
+<h1 id="Efficient-Data-Loading-into-Milvus-with-VectorETL" class="common-anchor-header">VectorETLによるMilvusへの効率的なデータロード<button data-href="#Efficient-Data-Loading-into-Milvus-with-VectorETL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -31,8 +25,8 @@ title: Efficient Data Loading into Milvus with VectorETL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In this tutorial, we’ll explore how to efficiently load data into Milvus using <a href="https://github.com/ContextData/VectorETL">VectorETL</a>, a lightweight ETL framework designed for vector databases. VectorETL simplifies the process of extracting data from various sources, transforming it into vector embeddings using AI models, and storing it in Milvus for fast and scalable retrieval. By the end of this tutorial, you’ll have a working ETL pipeline that allows you to integrate and manage vector search systems with ease. Let’s dive in!</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+    </button></h1><p>このチュートリアルでは、ベクトルデータベース用に設計された軽量なETLフレームワークである<a href="https://github.com/ContextData/VectorETL">VectorETLを</a>使用して、Milvusに効率的にデータをロードする方法を探ります。VectorETLは、様々なソースからデータを抽出し、AIモデルを使用してベクトル埋め込みに変換し、高速かつスケーラブルな検索のためにMilvusに格納するプロセスを簡素化します。このチュートリアルが終わるころには、ベクター検索システムを簡単に統合・管理できるETLパイプラインが完成していることでしょう。さっそく始めましょう！</p>
+<h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,20 +41,20 @@ title: Efficient Data Loading into Milvus with VectorETL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependency-and-Environment" class="common-anchor-header">Dependency and Environment</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade vector-etl pymilvus</span>
+    </button></h2><h3 id="Dependency-and-Environment" class="common-anchor-header">依存性と環境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade vector-etl pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
-<p>VectorETL supports multiple data sources, including Amazon S3, Google Cloud Storage, Local File, etc. You can check out the full list of supported sources <a href="https://github.com/ContextData/VectorETL?tab=readme-ov-file#source-configuration">here</a>. In this tutorial, we’ll focus on Amazon S3 as a data source example.</p>
-<p>We will load documents from Amazon S3. Therefore, you need to prepare <code translate="no">AWS_ACCESS_KEY_ID</code> and <code translate="no">AWS_SECRET_ACCESS_KEY</code> as environment variables to securely access your S3 bucket. Additionally, we will use OpenAI’s <code translate="no">text-embedding-ada-002</code> embedding model to generate embeddings for the data. You should also prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>VectorETLはAmazon S3, Google Cloud Storage, Local Fileなど複数のデータソースをサポートしています。サポートされているソースの全リストは<a href="https://github.com/ContextData/VectorETL?tab=readme-ov-file#source-configuration">こちらで</a>確認できます。このチュートリアルでは、データソースの例として Amazon S3 を取り上げます。</p>
+<p>Amazon S3からドキュメントをロードします。そのため、S3バケットに安全にアクセスするための環境変数として、<code translate="no">AWS_ACCESS_KEY_ID</code> と<code translate="no">AWS_SECRET_ACCESS_KEY</code> を用意する必要があります。さらに、OpenAIの<code translate="no">text-embedding-ada-002</code> エンベッディング・モデルを使って、データのエンベッディングを生成します。また、<a href="https://platform.openai.com/docs/quickstart">apiキー</a> <code translate="no">OPENAI_API_KEY</code> も環境変数として用意する必要があります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;your-openai-api-key&quot;</span>
 os.environ[<span class="hljs-string">&quot;AWS_ACCESS_KEY_ID&quot;</span>] = <span class="hljs-string">&quot;your-aws-access-key-id&quot;</span>
 os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] = <span class="hljs-string">&quot;your-aws-secret-access-key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Workflow" class="common-anchor-header">Workflow<button data-href="#Workflow" class="anchor-icon" translate="no">
+<h2 id="Workflow" class="common-anchor-header">ワークフロー<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +69,7 @@ os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] =
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Defining-the-Data-Source-Amazon-S3" class="common-anchor-header">Defining the Data Source (Amazon S3)</h3><p>In this case, we are extracting documents from an Amazon S3 bucket. VectorETL allows us to specify the bucket name, the path to the files, and the type of data we are working with.</p>
+    </button></h2><h3 id="Defining-the-Data-Source-Amazon-S3" class="common-anchor-header">データソース（Amazon S3）の定義</h3><p>今回はAmazon S3のバケットからドキュメントを抽出します。VectorETLでは、バケット名、ファイルへのパス、扱うデータの種類を指定できる。</p>
 <pre><code translate="no" class="language-python">source = {
     <span class="hljs-string">&quot;source_data_type&quot;</span>: <span class="hljs-string">&quot;Amazon S3&quot;</span>,
     <span class="hljs-string">&quot;bucket_name&quot;</span>: <span class="hljs-string">&quot;my-bucket&quot;</span>,
@@ -85,14 +79,14 @@ os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] =
     <span class="hljs-string">&quot;aws_secret_access_key&quot;</span>: os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configuring-the-Embedding-Model-OpenAI" class="common-anchor-header">Configuring the Embedding Model (OpenAI)</h3><p>Once we have our data source set up, we need to define the embedding model that will transform our textual data into vector embeddings. Here, we use OpenAI’s <code translate="no">text-embedding-ada-002</code> in this example.</p>
+<h3 id="Configuring-the-Embedding-Model-OpenAI" class="common-anchor-header">埋め込みモデルの設定（OpenAI）</h3><p>データソースを設定したら、テキストデータをベクトル埋め込みに変換する埋め込みモデルを定義する必要があります。ここではOpenAIの<code translate="no">text-embedding-ada-002</code> 。</p>
 <pre><code translate="no" class="language-python">embedding = {
     <span class="hljs-string">&quot;embedding_model&quot;</span>: <span class="hljs-string">&quot;OpenAI&quot;</span>,
     <span class="hljs-string">&quot;api_key&quot;</span>: os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>],
     <span class="hljs-string">&quot;model_name&quot;</span>: <span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>,
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setting-Up-Milvus-as-the-Target-Database" class="common-anchor-header">Setting Up Milvus as the Target Database</h3><p>We need to store the generated embeddings in Milvus. Here, we define our Milvus connection parameters using Milvus Lite.</p>
+<h3 id="Setting-Up-Milvus-as-the-Target-Database" class="common-anchor-header">ターゲットデータベースとしてMilvusをセットアップする。</h3><p>生成された埋め込みデータをMilvusに格納します。ここでは、Milvus Liteを使ってMilvusの接続パラメータを定義します。</p>
 <pre><code translate="no" class="language-python">target = {
     <span class="hljs-string">&quot;target_database&quot;</span>: <span class="hljs-string">&quot;Milvus&quot;</span>,
     <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;./milvus.db&quot;</span>,  <span class="hljs-comment"># os.environ[&quot;ZILLIZ_CLOUD_PUBLIC_ENDPOINT&quot;] if using Zilliz Cloud</span>
@@ -102,17 +96,17 @@ os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] =
 }
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For the <code translate="no">host</code> and <code translate="no">api_key</code>:</p>
+<p><code translate="no">host</code> 、<code translate="no">api_key</code> ：</p>
 <ul>
-<li><p>Setting the <code translate="no">host</code> as a local file, e.g.<code translate="no">./milvus.db</code>, and leave <code translate="no">api_key</code> empty is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</p></li>
-<li><p>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">host</code> and leave <code translate="no">api_key</code> empty.</p></li>
-<li><p>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">host</code> and <code translate="no">api_key</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</p></li>
+<li><p><code translate="no">host</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とし、<code translate="no">api_key</code> を空にしておくと、自動的に<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteが</a>利用され、すべてのデータがこのファイルに格納されます。</p></li>
+<li><p>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのuri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">host</code> として使用し、<code translate="no">api_key</code> は空にしておいてください。</p></li>
+<li><p>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、<code translate="no">host</code> と<code translate="no">api_key</code> をZilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応させてください。</p></li>
 </ul>
 </div>
-<h3 id="Specifying-Columns-for-Embedding" class="common-anchor-header">Specifying Columns for Embedding</h3><p>Now, we need to specify which columns from our CSV files should be converted into embeddings. This ensures that only the relevant text fields are processed, optimizing both efficiency and storage.</p>
+<h3 id="Specifying-Columns-for-Embedding" class="common-anchor-header">埋め込みカラムの指定</h3><p>次に、CSVファイルから埋め込みに変換するカラムを指定する必要があります。これにより、関連するテキストフィールドのみが処理され、効率とストレージの両方が最適化されます。</p>
 <pre><code translate="no" class="language-python">embed_columns = [<span class="hljs-string">&quot;col_1&quot;</span>, <span class="hljs-string">&quot;col_2&quot;</span>, <span class="hljs-string">&quot;col_3&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Creating-and-Executing-the-VectorETL-Pipeline" class="common-anchor-header">Creating and Executing the VectorETL Pipeline</h3><p>With all configurations in place, we now initialize the ETL pipeline, set up the data flow, and execute it.</p>
+<h3 id="Creating-and-Executing-the-VectorETL-Pipeline" class="common-anchor-header">VectorETLパイプラインの作成と実行</h3><p>すべての設定が完了したので、次にETLパイプラインを初期化し、データフローを設定し、実行します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> vector_etl <span class="hljs-keyword">import</span> create_flow
 
 flow = create_flow()
@@ -124,4 +118,4 @@ flow.set_embed_columns(embed_columns)
 <span class="hljs-comment"># Execute the flow</span>
 flow.execute()
 <button class="copy-code-btn"></button></code></pre>
-<p>By following this tutorial, we have successfully built an end-to-end ETL pipeline to move documents from Amazon S3 to Milvus using VectorETL. VectorETL is flexible in data sources, so you can choose whatever data sources you like based on your specific application needs. With VectorETL’s modular design, you can easily extend this pipeline to support other data sources, embedding models, making it a powerful tool for AI and data engineering workflows!</p>
+<p>このチュートリアルに従うことで、VectorETLを使用してAmazon S3からmilvusにドキュメントを移動するエンドツーエンドのETLパイプラインを構築することに成功しました。VectorETLはデータソースに柔軟性があるので、特定のアプリケーションのニーズに基づいて好きなデータソースを選択することができます。VectorETLのモジュール設計により、このパイプラインを簡単に拡張して他のデータソースをサポートしたり、モデルを組み込んだりすることができ、AIやデータエンジニアリングワークフローのための強力なツールとなります！</p>

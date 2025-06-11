@@ -1,15 +1,10 @@
 ---
 id: use-partition-key.md
-title: Use Partition Key
+title: パーティション・キーの使用
 summary: >-
-  The Partition Key is a search optimization solution based on partitions. By
-  designating a specific scalar field as the Partition Key and specifying
-  filtering conditions based on the Partition Key during the search, the search
-  scope can be narrowed down to several partitions, thereby improving search
-  efficiency. This article will introduce how to use the Partition Key and
-  related considerations.
+  パーティション・キーは、パーティションに基づく検索最適化ソリューションです。特定のスカラー・フィールドをパーティション・キーとして指定し、検索時にパーティション・キーに基づくフィルタリング条件を指定することで、検索範囲を複数のパーティションに絞り込み、検索効率を向上させることができる。この記事では、パーティション・キーの使い方と、それに関連する注意点を紹介する。
 ---
-<h1 id="Use-Partition-Key" class="common-anchor-header">Use Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+<h1 id="Use-Partition-Key" class="common-anchor-header">パーティション・キーの使用<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Partition Key is a search optimization solution based on partitions. By designating a specific scalar field as the Partition Key and specifying filtering conditions based on the Partition Key during the search, the search scope can be narrowed down to several partitions, thereby improving search efficiency. This article will introduce how to use the Partition Key and related considerations.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>パーティション・キーはパーティションに基づく検索最適化ソリューションです。特定のスカラー・フィールドをパーティション・キーとして指定し、検索時にパーティション・キーに基づくフィルタリング条件を指定することで、検索範囲を複数のパーティションに絞り込み、検索効率を向上させることができる。本稿では、パーティション・キーの使い方と注意点について紹介する。</p>
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,26 +35,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you can use partitions to implement data segregation and improve search performance by restricting the search scope to specific partitions. If you choose to manage partitions manually, you can create a maximum of 1,024 partitions in a collection, and insert entities into these partitions based on a specific rule so that you can narrow the search scope by restricting searches within a specific number of partitions.</p>
-<p>Milvus introduces the Partition Key for you to reuse partitions in data segregation to overcome the limit on the number of partitions you can create in a collection. When creating a collection, you can use a scalar field as the Partition Key. Once the collection is ready, Milvus creates the specified number of partitions inside the collection. Upon receiving an inserted entity, Milvus calculates a hash value using the Partition Key value of the entity, executes a modulo operation based on the hash value and the <code translate="no">partitions_num</code> property of the collection to obtain the target partition ID, and stores the entity in the target partition.</p>
+    </button></h2><p>Milvusでは、パーティションを使ってデータの分離を行い、検索範囲を特定のパーティションに限定することで検索性能を向上させることができます。パーティションを手動で管理する場合、コレクション内に最大1,024個のパーティションを作成し、特定のルールに基づいてこれらのパーティションにエンティティを挿入することで、特定の数のパーティション内に検索を制限して検索範囲を絞り込むことができます。</p>
+<p>Milvusは、コレクションに作成できるパーティション数の制限を克服するために、データ分離でパーティションを再利用するためのパーティションキーを導入しています。コレクションを作成する際、パーティション・キーとしてスカラー・フィールドを使用することができます。コレクションの準備ができると、Milvusはコレクション内に指定された数のパーティションを作成します。挿入されたエンティティを受け取ると、Milvusはエンティティのパーティションキー値を使用してハッシュ値を計算し、ハッシュ値とコレクションの<code translate="no">partitions_num</code> プロパティに基づいてモジュロ演算を実行してターゲットパーティションIDを取得し、ターゲットパーティションにエンティティを格納します。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
-    <span>Partition Vs Partition Key</span>
-  </span>
-</p>
-<p>The following figure illustrates how Milvus processes the search requests in a collection with or without the Partition Key feature enabled.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
+   </span> <span class="img-wrapper"> <span>パーティション対パーティション・キー</span> </span></p>
+<p>次の図は、Milvusがパーティション・キー機能を有効にしている場合と無効にしていない場合で、コレクション内の検索要求をどのように処理するかを示しています。</p>
 <ul>
-<li><p>If the Partition Key is disabled, Milvus searches for entities that are the most similar to the query vector within the collection. You can narrow the search scope if you know which partition contains the most relevant results.</p></li>
-<li><p>If the Partition Key is enabled, Milvus determines the search scope based on the Partition Key value specified in a search filter and scans only the entities within the partitions that match.</p></li>
+<li><p>パーティション・キーが無効の場合、Milvusはコレクション内のクエリ・ベクタに最も類似したエンティティを検索します。どのパーティションに最も関連性の高い結果が含まれているかを知っていれば、検索範囲を狭めることができます。</p></li>
+<li><p>パーティション・キーが有効な場合、Milvusは検索フィルターで指定されたパーティション・キーの値に基づいて検索範囲を決定し、一致するパーティション内のエンティティだけをスキャンします。</p></li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" />
-    <span>With And Without Partition Key</span>
-  </span>
-</p>
-<h2 id="Use-Partition-Key" class="common-anchor-header">Use Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" />
+   </span> <span class="img-wrapper"> <span>パーティションキーの有無</span> </span></p>
+<h2 id="Use-Partition-Key" class="common-anchor-header">パーティション・キーの使用<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,23 +65,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use the Partition Key, you need to</p>
+    </button></h2><p>パーティション・キーを使用するには、以下の手順が必要です。</p>
 <ul>
-<li><p><a href="/docs/use-partition-key.md#Set-Partition-Key">Set the Partition Key</a>,</p></li>
-<li><p><a href="/docs/use-partition-key.md#Set-Partition-Numbers">Set the number of partitions to create</a> (Optional), and</p></li>
-<li><p><a href="/docs/use-partition-key.md#Create-Filtering-Condition">Create a filtering condition based on the Partition Key</a>.</p></li>
+<li><p><a href="/docs/ja/use-partition-key.md#Set-Partition-Key">パーティション・キーを設定</a>します、</p></li>
+<li><p><a href="/docs/ja/use-partition-key.md#Set-Partition-Numbers">作成するパーティション数を設定します</a>（オプション）。</p></li>
+<li><p><a href="/docs/ja/use-partition-key.md#Create-Filtering-Condition">パーティション・キーに基づいたフィルタリング条件を作成する</a>。</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">Set Partition Key</h3><p>To designate a scalar field as the Partition Key, you need to set its <code translate="no">is_partition_key</code> attribute to <code translate="no">true</code> when you add the scalar field.</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">パーティション・キーの設定</h3><p>スカラー・フィールドをパーティション・キーとして指定するには、スカラー・フィールドを追加するときに、その<code translate="no">is_partition_key</code> 属性を<code translate="no">true</code> に設定する必要があります。</p>
 <div class="alert note">
-<p>When you set a scalar field as the Partition Key, the field values cannot be empty or null.</p>
+<p>スカラー・フィールドをパーティション・キーに設定する場合、フィールドの値を空やNULLにすることはできません。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType
 )
@@ -235,15 +221,10 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">Set Partition Numbers</h3><p>When you designate a scalar field in a collection as the Partition Key, Milvus automatically creates 16 partitions in the collection. Upon receiving an entity, Milvus chooses a partition based on the Partition Key value of this entity and stores the entity in the partition, resulting in some or all partitions holding entities with different Partition Key values.</p>
-<p>You can also determine the number of partitions to create along with the collection. This is valid only if you have a scalar field designated as the Partition Key.</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">パーティション番号の設定</h3><p>コレクション内のスカラーフィールドをパーティションキーに指定すると、Milvusは自動的にコレクション内に16のパーティションを作成します。Milvusはエンティティを受信すると、このエンティティのパーティションキー値に基づいてパーティションを選択し、そのパーティションにエンティティを格納します。</p>
+<p>また、コレクションと一緒に作成するパーティションの数を決定することもできます。これは、パーティション・キーとしてスカラー・フィールドを指定した場合のみ有効です。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -290,16 +271,11 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">Create Filtering Condition</h3><p>When conducting ANN searches in a collection with the Partition Key feature enabled, you need to include a filtering expression involving the Partition Key in the search request. In the filtering expression, you can restrict the Partition Key value within a specific range so that Milvus restricts the search scope within the corresponding partitions.</p>
-<p>When performing delete operations, It is advisable to include a filter expression that specifies a single partition key to achieve more efficient deletion. This approach limits the delete operation to a particular partition, reducing write amplification during compaction and conserving resources for compaction and indexing.</p>
-<p>The following examples demonstrate Partition-Key-based filtering based on a specific Partition Key value and a set of Partition Key values.</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">フィルタリング条件の作成</h3><p>パーティション・キー機能を有効にしたコレクションでANN検索を行う場合、検索リクエストにパーティション・キーを含むフィルタリング式を含める必要があります。フィルタリング式では、Milvusが対応するパーティション内で検索範囲を制限するように、特定の範囲内でパーティションキーの値を制限することができます。</p>
+<p>削除操作を実行する場合、より効率的な削除を実現するために、単一のパーティション・キーを指定するフィルタ式を含めることをお勧めします。このアプローチは、削除操作を特定のパーティションに限定し、コンパクション時の書き込み増幅を減らし、コンパクションとインデックス作成のリソースを節約します。</p>
+<p>以下の例は、特定のパーティション・キー値とパーティション・キー値のセットに基づくパーティション・キー・ベース・フィルタリングを示しています。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 
@@ -331,9 +307,9 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <span class="hljs-built_in">export</span> filter=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>You have to replace <code translate="no">partition_key</code> with the name of the field that is designated as the partition key.</p>
+<p><code translate="no">partition_key</code> 、パーティション・キーとして指定されているフィールド名に置き換える必要があります。</p>
 </div>
-<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">Use Partition Key Isolation<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">パーティション・キーの分離を使用する<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -348,26 +324,19 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the multi-tenancy scenario, you can designate the scalar field related to tenant identities as the partition key and create a filter based on a specific value in this scalar field. To further improve search performance in similar scenarios, Milvus introduces the Partition Key Isolation feature.</p>
+    </button></h2><p>マルチテナントのシナリオでは、テナントIDに関連するスカラー・フィールドをパーティション・キーとして指定し、このスカラー・フィールドの特定の値に基づいてフィルターを作成できます。同様のシナリオにおける検索パフォーマンスをさらに向上させるために、Milvusはパーティションキーアイソレーション機能を導入しています。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
-    <span>Partition Key Isolation</span>
-  </span>
-</p>
-<p>As shown in the above figure, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance.</p>
-<p>Once you have enabled Partition Key Isolation, you must include only one specific value in the Partition-key-based filter so that Milvus can restrict the search scope within the entities included in the index that match.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
+   </span> <span class="img-wrapper"> <span>パーティションキーの分離</span> </span></p>
+<p>上図のように、Milvusはパーティションキーの値に基づいてエンティティをグループ化し、これらのグループごとに個別のインデックスを作成します。検索要求を受け取ると、Milvusはフィルタリング条件に指定されたパーティションキー値に基づいてインデックスを検索し、インデックスに含まれるエンティティ内で検索範囲を制限します。これにより、検索中に無関係なエンティティをスキャンすることがなくなり、検索パフォーマンスが大幅に向上します。</p>
+<p>Partition Key Isolationを有効にすると、Milvusが一致するインデックスに含まれるエンティティ内で検索範囲を制限できるように、Partition Keyベースのフィルタに特定の値を1つだけ含める必要があります。</p>
 <div class="alert note">
-<p>Currently, the Partition-Key Isolation feature applies only to searches with the index type set to HNSW.</p>
+<p>現在、パーティションキー分離機能は、インデックスタイプが HNSW に設定された検索にのみ適用されます。</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Enable Partition Key Isolation</h3><p>The following code examples demonstrate how to enable Partition Key Isolation.</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">パーティション・キー分離の有効化</h3><p>以下のコード例は、パーティション・キー分離を有効にする方法を示しています。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -418,4 +387,4 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Once you have enabled Partition Key Isolation, you can still set the Partition Key and number of partitions as described in <a href="/docs/use-partition-key.md#Set-Partition-Numbers">Set Partition Numbers</a>. Note that the Partition-Key-based filter should include only a specific Partition Key value.</p>
+<p>パーティション・キー・アイソレーションを有効にした後も、<a href="/docs/ja/use-partition-key.md#Set-Partition-Numbers">パーティション・ナンバーの設定</a> で説明するように、パーティション・キーとパーティション数を設定することができます。パーティション・キー・ベース・フィルターには、特定のパーティション・キーの値だけを含める必要があることに注意してください。</p>

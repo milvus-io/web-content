@@ -1,14 +1,12 @@
 ---
 id: with-iterators.md
-title: Search Iterator
+title: 검색 이터레이터
 summary: >-
-  The ANN Search has a maximum limit on the number of entities that can be
-  recalled in a single query, and simply using basic ANN Search may not meet the
-  demands of large-scale retrieval. For ANN Search requests where topK exceeds
-  16,384, it is advisable to consider using the SearchIterator. This section
-  will introduce how to use the SearchIterator and related considerations.
+  ANN 검색은 단일 쿼리에서 불러올 수 있는 엔티티 수에 최대 제한이 있으며, 기본 ANN 검색만으로는 대규모 검색 수요를 충족하지 못할 수
+  있습니다. topK가 16,384개를 초과하는 ANN 검색 요청의 경우 SearchIterator 사용을 고려하는 것이 좋습니다. 이
+  섹션에서는 SearchIterator를 사용하는 방법과 관련 고려 사항을 소개합니다.
 ---
-<h1 id="Search-Iterator" class="common-anchor-header">Search Iterator<button data-href="#Search-Iterator" class="anchor-icon" translate="no">
+<h1 id="Search-Iterator" class="common-anchor-header">검색 이터레이터<button data-href="#Search-Iterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The ANN Search has a maximum limit on the number of entities that can be recalled in a single query, and simply using basic ANN Search may not meet the demands of large-scale retrieval. For ANN Search requests where topK exceeds 16,384, it is advisable to consider using the SearchIterator. This section will introduce how to use the SearchIterator and related considerations.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>ANN 검색은 단일 쿼리에서 불러올 수 있는 엔티티 수에 최대 제한이 있으며, 기본 ANN 검색만으로는 대규모 검색 수요를 충족하지 못할 수 있습니다. topK가 16,384개를 초과하는 ANN 검색 요청의 경우 SearchIterator 사용을 고려하는 것이 좋습니다. 이 섹션에서는 SearchIterator를 사용하는 방법과 관련 고려 사항을 소개합니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,14 +37,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A Search request returns search results, while a SearchIterator returns an iterator. You can call the <strong>next()</strong> method of this iterator to get the search results.</p>
-<p>Specifically, you can use the SearchIterators as follows:</p>
+    </button></h2><p>Search 요청은 검색 결과를 반환하는 반면 SearchIterator는 반복자를 반환합니다. 이 이터레이터의 <strong>다음()</strong> 메서드를 호출하여 검색 결과를 가져올 수 있습니다.</p>
+<p>구체적으로 SearchIterator를 다음과 같이 사용할 수 있습니다:</p>
 <ol>
-<li><p>Create a SearchIterator and set <strong>the number of entities to return per search request</strong> and <strong>the total number of entities to return</strong>.</p></li>
-<li><p>Call the <strong>next()</strong> method of the SearchIterator in a loop to get the search result in a paginated manner.</p></li>
-<li><p>Call the <strong>close()</strong> method of the iterator to end the loop if the <strong>next()</strong> method returns an empty result.</p></li>
+<li><p>SearchIterator를 생성하고 <strong>검색 요청당 반환할 엔티티 수와</strong> <strong>반환할 총 엔티티 수를</strong> 설정합니다.</p></li>
+<li><p>SearchIterator의 <strong>next()</strong> 메서드를 루프에서 호출하여 페이지 매김 방식으로 검색 결과를 가져옵니다.</p></li>
+<li><p><strong>다음()</strong> 메서드가 빈 결과를 반환하면 이터레이터의 <strong>close()</strong> 메서드를 호출하여 루프를 종료합니다.</p></li>
 </ol>
-<h2 id="Create-SearchIterator" class="common-anchor-header">Create SearchIterator<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
+<h2 id="Create-SearchIterator" class="common-anchor-header">SearchIterator 생성<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,14 +59,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates how to create a SearchIterator.</p>
+    </button></h2><p>다음 코드 스니펫은 SearchIterator를 만드는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -142,8 +135,8 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above examples, you have set the number of entities to return per search (<strong>batch_size</strong>/<strong>batchSize</strong>) to 50, and the total number of entities to return (<strong>topK</strong>) to 20,000.</p>
-<h2 id="Use-SearchIterator" class="common-anchor-header">Use SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
+<p>위 예제에서는 검색당 반환할 엔티티 수<strong>(</strong><strong>batch_size/batchSize</strong>)를 50으로, 반환할 총 엔티티 수<strong>(topK</strong>)를 20,000으로 설정했습니다.</p>
+<h2 id="Use-SearchIterator" class="common-anchor-header">SearchIterator 사용<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,14 +151,9 @@ iterator = collection.search_iterator(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the SearchIterator is ready, you can call its next() method to get the search results in a paginated manner.</p>
+    </button></h2><p>SearchIterator가 준비되면 다음() 메서드를 호출하여 페이지 매김 방식으로 검색 결과를 가져올 수 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">results = []
 
 <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
@@ -199,4 +187,4 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above code examples, you have created an infinite loop and called the <strong>next()</strong> method in the loop to store the search results in a variable and closed the iterator when the <strong>next()</strong> returns nothing.</p>
+<p>위의 코드 예제에서는 무한 루프를 생성하고 루프에서 <strong>다음()</strong> 메서드를 호출하여 검색 결과를 변수에 저장하고 <strong>다음()</strong> 이 아무것도 반환하지 않으면 반복기를 닫았습니다.</p>

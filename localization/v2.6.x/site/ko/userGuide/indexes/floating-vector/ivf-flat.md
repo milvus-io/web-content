@@ -45,7 +45,7 @@ summary: IVF_FLAT 인덱스는 부동 소수점 벡터의 검색 성능을 향�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
    </span> <span class="img-wrapper"> <span>IVF 플랫 워크플로</span> </span></p>
-<p>이 인덱싱 방법은 검색 프로세스의 속도를 높여주지만 쿼리 임베딩에 가장 가까운 것으로 발견된 후보가 정확히 가장 가까운 후보가 아닐 수 있다는 잠재적인 단점이 있습니다. 쿼리 임베딩에 가장 가까운 임베딩이 가장 가까운 중심을 기준으로 선택한 클러스터와 다른 클러스터에 있는 경우 이러한 문제가 발생할 수 있습니다(아래 시각화 참조).</p>
+<p>이 인덱싱 방법은 검색 프로세스의 속도를 높여주지만, 쿼리 임베딩에 가장 가까운 것으로 발견된 후보가 정확히 가장 가까운 후보가 아닐 수 있다는 잠재적인 단점이 있습니다. 쿼리 임베딩에 가장 가까운 임베딩이 가장 가까운 중심을 기준으로 선택한 클러스터와 다른 클러스터에 있는 경우 이러한 문제가 발생할 수 있습니다(아래 시각화 참조).</p>
 <p>이 문제를 해결하기 위해 <strong>IVF_FLAT은</strong> 조정할 수 있는 두 가지 하이퍼파라미터를 제공합니다:</p>
 <ul>
 <li><p><code translate="no">nlist</code>: k-평균 알고리즘을 사용하여 생성할 파티션의 수를 지정합니다.</p></li>

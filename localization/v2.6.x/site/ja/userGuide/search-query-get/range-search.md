@@ -1,12 +1,10 @@
 ---
 id: range-search.md
-title: Range Search
+title: 範囲検索
 summary: >-
-  A range search improves search result relevancy by restricting the distance or
-  score of the returned entities within a specific range. This page helps you
-  understand what range search is and the procedures to conduct a range search.
+  範囲検索は、返されるエンティティの距離やスコアを特定の範囲内に制限することで、検索結果の関連性を向上させます。このページでは、範囲検索とは何か、範囲検索を行う手順について説明します。
 ---
-<h1 id="Range-Search" class="common-anchor-header">Range Search<button data-href="#Range-Search" class="anchor-icon" translate="no">
+<h1 id="Range-Search" class="common-anchor-header">範囲検索<button data-href="#Range-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A range search improves search result relevancy by restricting the distance or score of the returned entities within a specific range. This page helps you understand what range search is and the procedures to conduct a range search.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>範囲検索は、返されるエンティティの距離またはスコアを特定の範囲内に制限することで、検索結果の関連性を向上させます。このページでは、範囲検索とは何か、範囲検索を行う手順について説明します。</p>
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,53 +35,51 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When executing a Range Search request, Milvus uses the most similar vectors to the query vector from the ANN Search results as the center, with the <strong>radius</strong> specified in the Search request as the outer circle’s radius, and the <strong>range_filter</strong> as the inner circle’s radius to draw two concentric circles. All vectors with similarity scores that fall within the annular region formed by these two concentric circles will be returned. Here, the <strong>range_filter</strong> can be set to <strong>0</strong>, indicating that all entities within the specified similarity score (radius) will be returned.</p>
+    </button></h2><p>Milvusは範囲検索のリクエストを実行する際、ANN検索の結果からクエリベクトルに最も類似したベクトルを中心として、検索リクエストで指定された<strong>半径を</strong>外側の円の半径、<strong>range_filterを</strong>内側の円の半径として、2つの同心円を描きます。この2つの同心円で形成される環状領域内に入る類似度スコアを持つすべてのベクトルが返されます。ここで<strong>range_filter</strong>を<strong>0</strong> に設定すると、指定した類似度スコア（半径）内のすべてのエンティティが返される。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" />
-    <span>Range Search</span>
-  </span>
-</p>
-<p>The above diagram shows that a range search request carries two parameters: <strong>radius</strong> and <strong>range_filter</strong>. Upon receiving a range search request, Milvus does the following:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" />
+   </span> <span class="img-wrapper"> <span>範囲検索</span> </span></p>
+<p>上の図は、範囲検索要求が<strong>radius</strong>と<strong>range_filter</strong> という2つのパラメータを持つことを示している。範囲検索リクエストを受け取ると、Milvusは以下の処理を行います：</p>
 <ul>
-<li><p>Use the specified metric type (<strong>COSINE</strong>) to find all vector embeddings most similar to the query vector.</p></li>
-<li><p>Filter the vector embeddings whose <strong>distances</strong> or <strong>scores</strong> to the query vector fall within the range specified by the <strong>radius</strong> and <strong>range_filter</strong> parameters.</p></li>
-<li><p>Return the <strong>top-K</strong> entities from the filtered ones.</p></li>
+<li><p>指定されたメトリックタイプ<strong>(COSINE</strong>)を使用して、クエリベクトルに最も近いすべてのベクトル埋め込みを検索する。</p></li>
+<li><p>クエリベクトルとの<strong>距離</strong>または<strong>スコアが</strong> <strong>radius</strong>および<strong>range_filter</strong>パラメータで指定された範囲内にある埋め込みベクトルをフィルタリングする。</p></li>
+<li><p>フィルタリングされたエンティティから<strong>上位K個の</strong>エンティティを返す。</p></li>
 </ul>
-<p>The way to set <strong>radius</strong> and <strong>range_filter</strong> varies with the metric type of the search. The following table lists the requirements for setting these two parameters with different metric types.</p>
+<p><strong>radiusと</strong> <strong>range_filterの</strong>設定方法は、検索のメトリックタイプによって異なる。次の表は、メトリック・タイプの違いによるこれら2つのパラメータの設定条件を示している。</p>
 <table>
    <tr>
-     <th><p>Metric Type</p></th>
-     <th><p>Denotations</p></th>
-     <th><p>Requirements for Setting radius and range_filter</p></th>
+     <th><p>メトリックタイプ</p></th>
+     <th><p>表記</p></th>
+     <th><p>radiusとrange_filterの設定条件</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
-     <td><p>A smaller L2 distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>L2距離が小さいほど類似度が高いことを示す。</p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには、<code translate="no">range_filter</code> &lt;= distance &lt; を確保する。<code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
-     <td><p>A greater IP distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>IP距離が大きいほど類似度が高いことを示す。</p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには、<code translate="no">radius</code> &lt; distance &lt;= となるようにします。<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>A greater COSINE distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>COSINE 距離が大きいほど類似度が高いことを示します。</p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには，<code translate="no">radius</code> &lt; distance &lt;= とする．<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
-     <td><p>A smaller Jaccard distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Jaccard 距離が小さいほど，類似度が高いことを示す．</p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには、<code translate="no">range_filter</code> &lt;= distance &lt; を確認してください。<code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>A smaller Hamming distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>ハミング距離が小さいほど、類似度が高いことを示します。</p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには、<code translate="no">range_filter</code> &lt;= distance &lt; となるようにします。<code translate="no">radius</code></p></td>
    </tr>
 </table>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,15 +94,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section demonstrates how to conduct a range search. The search requests in the following code snippets do not carry a metric type, indicating the default metric type <strong>COSINE</strong> applies. In this case, ensure that the <strong>radius</strong> value is smaller than the <strong>range_filter</strong> value.</p>
-<p>In the following code snippets, set <code translate="no">radius</code> to <code translate="no">0.4</code> and <code translate="no">range_filter</code> to <code translate="no">0.6</code> so that Milvus returns all entities whose distances or scores to the query vector fall within <strong>0.4</strong> to <strong>0.6</strong>.</p>
+    </button></h2><p>このセクションでは、範囲検索の方法を示します。以下のコードスニペットの検索リクエストはメトリックタイプを持たず、デフォルトのメトリックタイプ<strong>COSINEが</strong>適用されることを示しています。この場合、<strong>radius</strong>値が<strong>range_filter</strong>値より小さいことを確認してください。</p>
+<p>以下のコードスニペットでは、milvusがクエリベクトルに対する距離またはスコアが<strong>0.4から</strong> <strong>0.6の</strong>範囲内にあるすべてのエンティティを返すように、<code translate="no">radius</code> を<code translate="no">0.4</code> に、<code translate="no">range_filter</code> を<code translate="no">0.6</code> に設定します。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(

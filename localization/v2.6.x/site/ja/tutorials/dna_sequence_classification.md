@@ -1,9 +1,9 @@
 ---
 id: dna_sequence_classification.md
-summary: Build a DNA sequence classification system with Milvus.
-title: DNA Sequence Classification
+summary: MilvusでDNA配列分類システムを構築する。
+title: DNA配列の分類
 ---
-<h1 id="DNA-Sequence-Classification" class="common-anchor-header">DNA Sequence Classification<button data-href="#DNA-Sequence-Classification" class="anchor-icon" translate="no">
+<h1 id="DNA-Sequence-Classification" class="common-anchor-header">DNA配列の分類<button data-href="#DNA-Sequence-Classification" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,21 +18,19 @@ title: DNA Sequence Classification
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This tutorial demonstrates how to use Milvus, the open-source vector database, to build a DNA sequence classification model.</p>
-<p>The ML model and third-party software used include:</p>
+    </button></h1><p>このチュートリアルでは、オープンソースのベクターデータベースであるMilvusを使ってDNA配列の分類モデルを構築する方法を示します。</p>
+<p>使用したMLモデルとサードパーティソフトウェアは以下の通りです：</p>
 <ul>
 <li>CountVectorizer</li>
 <li>MySQL</li>
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p><br/></p>
-<p>DNA sequence is a popular concept in gene traceability, species identification, disease diagnosis, and many more areas. Whereas all industries starve for a more intelligent and efficient research method, artificial intelligence has attracted much attention especially from biological and medical domains. More and more scientists and researchers are contributing to machine learning and deep learning in the field of bioinformatics. To make experimental results more convincing, one common option is to increase sample size. The collaboration with big data in genomics brings more possibilities of application in reality. However, the traditional sequence alignment has limitations, making it unsuitable for large datasets. In order to make less trade-off in reality, vectorization is a good choice for a large dataset of DNA sequences.</p>
+<p>DNA配列は、遺伝子のトレーサビリティ、種の同定、病気の診断、その他多くの分野でよく使われる概念である。あらゆる産業がより知的で効率的な研究手法に飢えている中、人工知能は特に生物学や医学の領域で大きな注目を集めている。ますます多くの科学者や研究者が、バイオインフォマティクスの分野で機械学習や深層学習に貢献している。実験結果をより説得力のあるものにするために、一般的な選択肢の一つはサンプルサイズを増やすことである。ゲノミクスにおけるビッグデータとの連携は、現実により多くの応用の可能性をもたらす。しかし、従来の配列アライメントには限界があり、大規模なデータセットには適さない。現実のトレードオフを少なくするために、ベクター化はDNA配列の大規模データセットに適した選択である。</p>
 <p><br/></p>
-<p>In this tutorial, you will learn how to build a DNA sequence classification model. This tutorial uses CountVectorizer to extract features of DNA sequences and convert them into vectors. Then, these vectors are stored in Milvus and their corresponding DNA classes are stored in MySQL. Users can conduct a vector similarity search in Milvus and recall the corresponding DNA classification from MySQL.</p>
+<p>このチュートリアルでは、DNA配列の分類モデルを構築する方法を学びます。このチュートリアルでは、CountVectorizerを用いてDNA配列の特徴を抽出し、それをベクトル化します。そして、これらのベクトルをMilvusに格納し、対応するDNAクラスをMySQLに格納する。ユーザはMilvusでベクトルの類似性検索を行い、MySQLから対応するDNA分類を呼び出すことができる。</p>
 <p><br/></p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/dna.png" alt="dna" class="doc-image" id="dna" />
-    <span>dna</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dna.png" alt="dna" class="doc-image" id="dna" />
+   </span> <span class="img-wrapper"> <span>DNA</span> </span></p>

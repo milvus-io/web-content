@@ -68,7 +68,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Milvus는 임베딩을 요청하기 전에 사용자의 Bedrock 액세스 자격 증명을 알고 있어야 합니다. Milvus는 두 가지 방법으로 자격 증명을 구성할 수 있습니다:</p>
 <ul>
-<li><p><strong>구성 파일(권장):</strong> 자격 증명을 <code translate="no">milvus.yaml</code> 에 저장하여 재시작할 때마다 노드가 자동으로 가져옵니다.</p></li>
+<li><p><strong>구성 파일(권장):</strong> 자격 증명을 <code translate="no">milvus.yaml</code> 에 저장하여 모든 재시작 및 노드가 자동으로 가져올 수 있도록 합니다.</p></li>
 <li><p><strong>환경 변수:</strong> 배포 시점에 자격 증명을 주입하는 방법(Docker Compose에 이상적).</p></li>
 </ul>
 <p>아래 두 가지 방법 중 하나를 선택하세요. 구성 파일은 베어메탈 및 가상 머신에서 유지 관리가 더 쉬운 반면, 환경 변수 경로는 컨테이너 워크플로에 적합합니다.</p>

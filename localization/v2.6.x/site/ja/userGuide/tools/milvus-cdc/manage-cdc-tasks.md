@@ -2,11 +2,11 @@
 id: manage-cdc-tasks.md
 order: 3
 summary: >-
-  A Capture Data Change (CDC) task enables the synchronization of data from a
-  source Milvus instance to a target Milvus instance.
-title: Manage CDC Tasks
+  Capture Data Change
+  (CDC)タスクは、ソースMilvusインスタンスからターゲットMilvusインスタンスへのデータの同期を可能にします。
+title: CDCタスクの管理
 ---
-<h1 id="Manage-CDC-Tasks" class="common-anchor-header">Manage CDC Tasks<button data-href="#Manage-CDC-Tasks" class="anchor-icon" translate="no">
+<h1 id="Manage-CDC-Tasks" class="common-anchor-header">CDCタスクの管理<button data-href="#Manage-CDC-Tasks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +21,9 @@ title: Manage CDC Tasks
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A Capture Data Change (CDC) task enables the synchronization of data from a source Milvus instance to a target Milvus instance. It monitors operation logs from the source and replicates data changes such as insertions, deletions, and index operations to the target in real-time. This facilitates real-time disaster recovery or active-active load balancing between Milvus deployments.</p>
-<p>This guide covers how to manage CDC tasks, including creation, pausing, resuming, retrieving details, listing, and deletion through HTTP requests.</p>
-<h2 id="Create-a-task" class="common-anchor-header">Create a task<button data-href="#Create-a-task" class="anchor-icon" translate="no">
+    </button></h1><p>データ変更キャプチャ(CDC)タスクはソースMilvusインスタンスからターゲットMilvusインスタンスへのデータ同期を可能にします。ソースからの操作ログを監視し、挿入、削除、インデックス操作などのデータ変更をリアルタイムでターゲットにレプリケートします。これにより、リアルタイムのディザスタリカバリやMilvusデプロイメント間のアクティブ-アクティブ負荷分散が容易になります。</p>
+<p>このガイドでは、HTTPリクエストによるCDCタスクの作成、一時停止、再開、詳細の取得、一覧表示、削除などの管理方法について説明します。</p>
+<h2 id="Create-a-task" class="common-anchor-header">タスクの作成<button data-href="#Create-a-task" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,8 +38,8 @@ title: Manage CDC Tasks
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Creating a CDC task allows data change operations in the source Milvus to be synced to the target Milvus.</p>
-<p>To create a CDC task:</p>
+    </button></h2><p>CDCタスクを作成することで、ソースMilvusのデータ変更操作をターゲットMilvusに同期させることができます。</p>
+<p>CDCタスクを作成するには</p>
 <pre><code translate="no" class="language-bash">curl -X POST http:_//localhost:8444/cdc \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
@@ -58,21 +58,21 @@ title: Manage CDC Tasks
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Replace <strong>localhost</strong> with the IP address of the target Milvus server.</p>
-<p><strong>Parameters</strong>:</p>
+<p><strong>localhostを</strong>ターゲットMilvusサーバーのIPアドレスに置き換えます。</p>
+<p><strong>パラメータ</strong></p>
 <ul>
-<li><p><strong>milvus_connect_param</strong>: Connection parameters of the target Milvus.</p>
+<li><p><strong>milvus_connect_param</strong>: ターゲットMilvusの接続パラメータ。</p>
 <ul>
-<li><p><strong>host</strong>: Hostname or IP address of the Milvus server.</p></li>
-<li><p><strong>port</strong>: Port number the Milvus server listens on.</p></li>
-<li><p><strong>username</strong>: Username for authenticating with the Milvus server.</p></li>
-<li><p><strong>password</strong>: Password for authenticating with the Milvus server.</p></li>
-<li><p><strong>enable_tls</strong>: Whether to use TLS/SSL encryption for the connection.</p></li>
-<li><p><strong>connect_timeout</strong>: Timeout period in seconds for establishing the connection.</p></li>
+<li><p><strong>host</strong>: Milvusサーバのホスト名またはIPアドレス。</p></li>
+<li><p><strong>port</strong>：Milvusサーバがリッスンするポート番号。</p></li>
+<li><p><strong>username</strong>: Milvusサーバと認証するためのユーザ名.</p></li>
+<li><p><strong>password</strong>: Milvusサーバで認証するためのパスワード。</p></li>
+<li><p><strong>enable_tls</strong>：接続に TLS/SSL 暗号化を使用するかどうか。</p></li>
+<li><p><strong>connect_timeout</strong>：接続確立のタイムアウト時間(秒)</p></li>
 </ul></li>
-<li><p><strong>collection_infos</strong>: Collections to synchronize. Currently, only an asterisk (<strong>*</strong>) is supported, as Milvus-CDC synchronizes at the cluster level, not individual collections.</p></li>
+<li><p><strong>collection_infos</strong>：同期するコレクション。Milvus-CDCは個々のコレクションではなくクラスタレベルで同期するため、現在のところアスタリスク<strong>(*</strong>)のみがサポートされています。</p></li>
 </ul>
-<p>Expected response:</p>
+<p>期待される応答</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -80,7 +80,7 @@ title: Manage CDC Tasks
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-tasks" class="common-anchor-header">List tasks<button data-href="#List-tasks" class="anchor-icon" translate="no">
+<h2 id="List-tasks" class="common-anchor-header">タスクのリスト<button data-href="#List-tasks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,13 +95,13 @@ title: Manage CDC Tasks
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To list all created CDC tasks:</p>
+    </button></h2><p>作成されたすべてのCDCタスクをリストする：</p>
 <pre><code translate="no" class="language-bash">curl -X POST -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -d <span class="hljs-string">&#x27;{
   &quot;request_type&quot;: &quot;list&quot;
 }&#x27;</span> http://localhost:8444/cdc
 <button class="copy-code-btn"></button></code></pre>
-<p>Replace <strong>localhost</strong> with the IP address of the target Milvus server.</p>
-<p>Expected response:</p>
+<p><strong>localhostを</strong>ターゲットMilvusサーバのIPアドレスに置き換えてください。</p>
+<p>期待される応答</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -123,7 +123,7 @@ title: Manage CDC Tasks
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Pause-a-task" class="common-anchor-header">Pause a task<button data-href="#Pause-a-task" class="anchor-icon" translate="no">
+<h2 id="Pause-a-task" class="common-anchor-header">タスクの一時停止<button data-href="#Pause-a-task" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,7 +138,7 @@ title: Manage CDC Tasks
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To pause a CDC task:</p>
+    </button></h2><p>CDCタスクを一時停止するには</p>
 <pre><code translate="no" class="language-bash">curl -X POST -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -d <span class="hljs-string">&#x27;{
   &quot;request_type&quot;:&quot;pause&quot;,
   &quot;request_data&quot;: {
@@ -146,18 +146,18 @@ title: Manage CDC Tasks
   }
 }&#x27;</span> http://localhost:8444/cdc
 <button class="copy-code-btn"></button></code></pre>
-<p>Replace <strong>localhost</strong> with the IP address of the target Milvus server.</p>
-<p><strong>Parameters</strong>:</p>
+<p><strong>localhostを</strong>ターゲットMilvusサーバーのIPアドレスに置き換える。</p>
+<p><strong>パラメータ</strong></p>
 <ul>
-<li><strong>task_id</strong>: ID of the CDC task to pause.</li>
+<li><strong>task_id</strong>：一時停止するCDCタスクのID。</li>
 </ul>
-<p>Expected response:</p>
+<p>期待される応答</p>
 <pre><code translate="no" class="language-bash">{
   <span class="hljs-string">&quot;code&quot;</span>: 200,
   <span class="hljs-string">&quot;data&quot;</span>: {}
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Resume-a-task" class="common-anchor-header">Resume a task<button data-href="#Resume-a-task" class="anchor-icon" translate="no">
+<h2 id="Resume-a-task" class="common-anchor-header">タスクの再開<button data-href="#Resume-a-task" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,7 +172,7 @@ title: Manage CDC Tasks
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To resume a paused CDC task:</p>
+    </button></h2><p>一時停止したCDCタスクを再開するには</p>
 <pre><code translate="no" class="language-bash">curl -X POST -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -d <span class="hljs-string">&#x27;{
   &quot;request_type&quot;:&quot;resume&quot;,
   &quot;request_data&quot;: {
@@ -180,18 +180,18 @@ title: Manage CDC Tasks
   }
 }&#x27;</span> http://localhost:8444/cdc
 <button class="copy-code-btn"></button></code></pre>
-<p>Replace <strong>localhost</strong> with the IP address of the target Milvus server.</p>
-<p><strong>Parameters</strong>:</p>
+<p><strong>localhostを</strong>ターゲットMilvusサーバのIPアドレスに置き換える。</p>
+<p><strong>パラメータ</strong></p>
 <ul>
-<li><strong>task_id</strong>: ID of the CDC task to resume.</li>
+<li><strong>task_id</strong>：再開するCDCタスクのID。</li>
 </ul>
-<p>Expected response:</p>
+<p>期待される応答</p>
 <pre><code translate="no" class="language-bash">{
   <span class="hljs-string">&quot;code&quot;</span>: 200,
   <span class="hljs-string">&quot;data&quot;</span>: {}
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Retrieve-task-details" class="common-anchor-header">Retrieve task details<button data-href="#Retrieve-task-details" class="anchor-icon" translate="no">
+<h2 id="Retrieve-task-details" class="common-anchor-header">タスクの詳細の取得<button data-href="#Retrieve-task-details" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -206,7 +206,7 @@ title: Manage CDC Tasks
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To retrieve the details of a specific CDC task:</p>
+    </button></h2><p>特定のCDCタスクの詳細を取得する：</p>
 <pre><code translate="no" class="language-bash">curl -X POST -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -d <span class="hljs-string">&#x27;{
   &quot;request_type&quot;:&quot;get&quot;,
   &quot;request_data&quot;: {
@@ -214,12 +214,12 @@ title: Manage CDC Tasks
   }
 }&#x27;</span> http://localhost:8444/cdc
 <button class="copy-code-btn"></button></code></pre>
-<p>Replace <strong>localhost</strong> with the IP address of the target Milvus server.</p>
-<p><strong>Parameters</strong>:</p>
+<p><strong>localhostを</strong>対象のMilvusサーバのIPアドレスに置き換える。</p>
+<p><strong>パラメータ</strong></p>
 <ul>
-<li><strong>task_id</strong>: ID of the CDC task to query.</li>
+<li><strong>task_id</strong>：問い合わせるCDCタスクのID。</li>
 </ul>
-<p>Expected response:</p>
+<p>期待される応答</p>
 <pre><code translate="no" class="language-bash">{
   <span class="hljs-string">&quot;code&quot;</span>: 200,
   <span class="hljs-string">&quot;data&quot;</span>: {
@@ -239,7 +239,7 @@ title: Manage CDC Tasks
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-a-task" class="common-anchor-header">Delete a task<button data-href="#Delete-a-task" class="anchor-icon" translate="no">
+<h2 id="Delete-a-task" class="common-anchor-header">タスクの削除<button data-href="#Delete-a-task" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -254,7 +254,7 @@ title: Manage CDC Tasks
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To delete a CDC task:</p>
+    </button></h2><p>CDCタスクを削除するには</p>
 <pre><code translate="no" class="language-bash">curl -X POST -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -d <span class="hljs-string">&#x27;{
   &quot;request_type&quot;:&quot;delete&quot;,
   &quot;request_data&quot;: {
@@ -262,12 +262,12 @@ title: Manage CDC Tasks
   }
 }&#x27;</span> http://localhost:8444/cdc
 <button class="copy-code-btn"></button></code></pre>
-<p>Replace <strong>localhost</strong> with the IP address of the target Milvus server.</p>
-<p><strong>Parameters</strong>:</p>
+<p><strong>localhostを</strong>対象のMilvusサーバのIPアドレスに置き換える。</p>
+<p><strong>パラメータ</strong></p>
 <ul>
-<li><strong>task_id</strong>: ID of the CDC task to delete.</li>
+<li><strong>task_id</strong>：削除するCDCタスクのID。</li>
 </ul>
-<p>Expected response:</p>
+<p>期待される応答</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
