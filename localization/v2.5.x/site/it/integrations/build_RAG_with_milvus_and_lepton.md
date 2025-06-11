@@ -69,7 +69,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Preparare l'LLM e il modello di incorporazione</h3><p>Lepton abilita l'API in stile OpenAI e si può usare la stessa API con piccoli aggiustamenti per chiamare l'LLM.</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Preparare l'LLM e il modello di incorporamento</h3><p>Lepton abilita l'API in stile OpenAI e si può usare la stessa API con piccoli aggiustamenti per chiamare l'LLM.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 lepton_client = OpenAI(

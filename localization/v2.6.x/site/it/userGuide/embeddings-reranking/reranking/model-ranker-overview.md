@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>I Model Ranker integrano le capacità di comprensione dei modelli linguistici nel processo di ricerca di Milvus attraverso un flusso di lavoro ben definito:</p>
+    </button></h2><p>I Model Ranker integrano le capacità di comprensione dei modelli linguistici nel processo di ricerca Milvus attraverso un flusso di lavoro ben definito:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" />
@@ -79,7 +79,7 @@ beta: Milvus 2.6.x
 <li><p>Il modello linguistico valuta la rilevanza semantica tra la query e ciascun documento</p></li>
 <li><p>Ogni documento riceve un punteggio di rilevanza basato sulla comprensione semantica.</p></li>
 </ul></li>
-<li><p><strong>Riordino intelligente</strong>: I documenti sono riordinati in base ai punteggi di rilevanza generati dal modello</p></li>
+<li><p><strong>Riordino intelligente</strong>: I documenti vengono riordinati in base ai punteggi di rilevanza generati dal modello</p></li>
 <li><p><strong>Risultati migliorati</strong>: L'applicazione riceve risultati classificati in base alla rilevanza semantica anziché alla sola somiglianza vettoriale.</p></li>
 </ol>
 <h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">Scegliete un fornitore di modelli per le vostre esigenze<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">

@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PQ 结合了两种索引技术：<strong>HNSW</strong>用于基于图的快速导航，<strong>PQ</strong>用于高效向量压缩。</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在该图中，节点根据其相似性进行连接，从而实现在数据空间中的快速遍历。分层结构允许搜索算法缩小候选邻域的范围，从而大大加快了高维空间的搜索过程。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在该图中，节点根据其相似性进行连接，从而实现在数据空间中的快速遍历。分层结构允许搜索算法缩小候选邻居的范围，从而大大加快了高维空间的搜索过程。</p>
 <p>更多信息，请参阅<a href="/docs/zh/hnsw.md">HNSW</a>。</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p>PQ 是一种向量压缩技术，可将高维向量分解成更小的子向量，然后对子向量进行量化和压缩。这种压缩技术大大降低了内存需求，并加快了距离计算速度。</p>
 <p>更多信息，请参阅<a href="/docs/zh/ivf-pq.md#PQ">IVF_PQ</a>。</p>
@@ -189,7 +189,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>用于以压缩形式表示每个子向量中心点索引的比特数。每个编码本将包含 $2^{\textit{nbits}}$ 的中心点。例如，如果<code translate="no">nbits</code> 设置为 8，则每个子向量将由一个 8 位的中心点索引表示。这样，该子向量的编码本中就有 2^8$ (256) 个可能的中心点。</p></td>
+     <td><p>用于以压缩形式表示每个子向量中心点索引的比特数。它直接决定了每个编码本的大小。 每个编码本将包含 $2^{\textit{nbits}}$ 的中心点。例如，如果<code translate="no">nbits</code> 设置为 8，则每个子向量将由一个 8 位的中心点索引表示。这样，该子向量的编码本中就有 2^8$ (256) 个可能的中心点。</p></td>
      <td><p><strong>类型</strong>： 整数整数[1, 64]</p>
 <p><strong>默认值</strong>：<code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> 值越大，编码本越大，可能会更精确地表示原始向量。在大多数情况下，我们建议在此范围内设置一个值：[1, 16].</p></td>
@@ -200,7 +200,7 @@ res = MilvusClient.search(
      <td><p>布尔标志，用于控制搜索过程中是否应用细化步骤。细化包括通过计算查询向量和候选向量之间的精确距离，对初始结果进行重新排序。</p></td>
      <td><p><strong>类型</strong>：布尔布尔<strong>范围</strong>：[<code translate="no">true</code>,<code translate="no">false</code>]</p>
 <p><strong>默认值</strong>：<code translate="no">false</code></p></td>
-     <td><p>如果需要高精确度，并且可以忍受稍慢的搜索时间，则设置为<code translate="no">true</code> 。如果速度是首要考虑因素，并且可以接受在精确度上稍有妥协，则使用<code translate="no">false</code> 。</p></td>
+     <td><p>如果需要高精确度，并且可以忍受稍慢的搜索时间，则设置为<code translate="no">true</code> 。如果速度是首要考虑因素，并且可以接受在精确度上略有妥协，则使用<code translate="no">false</code> 。</p></td>
    </tr>
    <tr>
      <td></td>
@@ -208,7 +208,7 @@ res = MilvusClient.search(
      <td><p>确定细化过程中使用的数据精度。 该精度必须高于压缩向量的精度（由<code translate="no">m</code> 和<code translate="no">nbits</code> 参数设置）。</p></td>
      <td><p><strong>类型</strong>： 字符串字符串<strong>范围</strong>：[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code>,<code translate="no">FP32</code> ]</p>
 <p><strong>默认值</strong>：无</p></td>
-     <td><p><code translate="no">FP32</code> <code translate="no">SQ6</code><code translate="no">SQ8</code> <code translate="no">BF16</code> 和 提供了一个平衡的选择。<code translate="no">FP16</code> </p></td>
+     <td><p>使用<code translate="no">FP32</code> 可获得最高精度，但内存成本较高；使用<code translate="no">SQ6</code>/<code translate="no">SQ8</code> 可获得更好的压缩效果。<code translate="no">BF16</code> 和<code translate="no">FP16</code> 提供了一个平衡的替代方案。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了<a href="/docs/zh/hnsw-pq.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>

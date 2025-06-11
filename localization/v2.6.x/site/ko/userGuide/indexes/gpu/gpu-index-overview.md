@@ -1,7 +1,7 @@
 ---
 id: gpu-index-overview.md
 title: GPU 인덱스 개요
-summary: Milvus에서 GPU를 지원하는 인덱스를 구축하면 처리량이 많고 호출 빈도가 높은 시나리오에서 검색 성능을 크게 향상시킬 수 있습니다.
+summary: Milvus에서 GPU를 지원하는 인덱스를 구축하면 처리량이 많고 호출 횟수가 많은 시나리오에서 검색 성능을 크게 향상시킬 수 있습니다.
 ---
 <h1 id="GPU-Index-Overview" class="common-anchor-header">GPU 인덱스 개요<button data-href="#GPU-Index-Overview" class="anchor-icon" translate="no">
       <svg translate="no"

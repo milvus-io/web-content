@@ -89,7 +89,7 @@ index_params.add_index(
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {}}  <span class="hljs-comment"># No additional parameters required for BIN_FLAT</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener más información, consulte <a href="/docs/es/binary-vector.md">Vector binario</a>.</p>
+<p>Para más información, consulta <a href="/docs/es/binary-vector.md">Vector binario</a>.</p>
 <h2 id="Index-params" class="common-anchor-header">Parámetros del índice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

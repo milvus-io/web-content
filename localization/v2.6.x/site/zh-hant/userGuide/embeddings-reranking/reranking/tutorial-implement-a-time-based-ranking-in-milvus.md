@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在許多搜尋應用中，內容的新鮮度與相關性同樣重要。新聞文章、產品列表、社交媒體文章和研究論文都受益於平衡語義相關性和新鮮度的排名系統。本教程演示了如何在 Milvus 中使用遞減排名器實現基於時間的排名。</p>
+    </button></h1><p>在許多搜尋應用中，內容的新鮮度與相關性同樣重要。新聞文章、產品列表、社交媒體文章和研究論文都受益於平衡語義相關性和新鮮度的排名系統。本教程演示了如何在 Milvus 中使用衰減排名器實現基於時間的排名。</p>
 <h2 id="Understand-decay-rankers-in-Milvus" class="common-anchor-header">瞭解 Milvus 中的遞減排名器<button data-href="#Understand-decay-rankers-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -313,7 +313,7 @@ linear_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在前面的程式碼中</p>
+<p>在前面的代碼中</p>
 <ul>
 <li><p><code translate="no">reranker</code>:設定為<code translate="no">decay</code> 用於基於時間的遞減功能</p></li>
 <li><p><code translate="no">function</code>:衰減函數的類型 (高斯、exp 或線性)</p></li>
@@ -322,7 +322,7 @@ linear_ranker = Function(
 <li><p><code translate="no">scale</code>:控制相關性在偏移後下降的速度</p></li>
 <li><p><code translate="no">decay</code>:偏移+標度時的衰減係數（例如，0.5 表示相關度減半）</p></li>
 </ul>
-<p>請注意，我們使用不同的參數設定了指數排名器，以示範您可以如何調整這些函數以符合不同的行為。</p>
+<p>請注意，我們使用不同的參數設定指數排名器，以示範您可以如何調整這些函數，以符合不同的行為。</p>
 <h2 id="Step-6-Visualize-the-decay-rankers" class="common-anchor-header">步驟 6：可視化衰減排序器<button data-href="#Step-6-Visualize-the-decay-rankers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -775,7 +775,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
    Published: <span class="hljs-number">2025</span>-01-<span class="hljs-number">15</span> (<span class="hljs-number">120</span> days ago)
    Score: <span class="hljs-number">0.0000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-11-Experiment-with-different-parameter-values" class="common-anchor-header">步驟 11：使用不同參數值進行實驗<button data-href="#Step-11-Experiment-with-different-parameter-values" class="anchor-icon" translate="no">
+<h2 id="Step-11-Experiment-with-different-parameter-values" class="common-anchor-header">步驟 11：使用不同的參數值進行實驗<button data-href="#Step-11-Experiment-with-different-parameter-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

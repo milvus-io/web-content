@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>GPU_IVF_PQ</strong> 인덱스는 고차원 벡터를 더 작은 하위 공간으로 분해하고 효율적인 유사도 검색을 위해 정량화하는 역파일 클러스터링과 제품 정량화(PQ)를 결합하여 <strong>IVF_PQ</strong> 개념을 기반으로 합니다. GPU 환경 전용으로 설계된 GPU_IVF_PQ는 병렬 처리를 활용해 계산을 가속화하고 대규모 벡터 데이터를 효과적으로 처리합니다. 기본 개념에 대한 자세한 내용은 <a href="/docs/ko/ivf-pq.md">IVF_PQ를</a> 참조하세요.</p>
+    </button></h1><p><strong>GPU_IVF_PQ</strong> 인덱스는 고차원 벡터를 더 작은 하위 공간으로 분해하고 효율적인 유사도 검색을 위해 이를 정량화하는 역 파일 클러스터링과 제품 정량화(PQ)를 결합하여 <strong>IVF_PQ</strong> 개념을 기반으로 합니다. GPU 환경 전용으로 설계된 GPU_IVF_PQ는 병렬 처리를 활용해 계산을 가속화하고 대규모 벡터 데이터를 효과적으로 처리합니다. 기본 개념에 대한 자세한 내용은 <a href="/docs/ko/ivf-pq.md">IVF_PQ를</a> 참조하세요.</p>
 <h2 id="Build-index" class="common-anchor-header">인덱스 구축<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -201,7 +201,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">endpoint</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>O endereço de rede que aponta para o seu serviço TEI implementado. Se for implementado através do Milvus Helm Chart, é normalmente o endereço interno do serviço.</p></td>
+     <td><p>O endereço de rede que aponta para o seu serviço TEI implementado. Se for implementado através do Milvus Helm Chart, este é normalmente o endereço interno do serviço.</p></td>
      <td><p>"http://localhost:8080", "http://my-release-milvus-tei:80"</p></td>
    </tr>
    <tr>

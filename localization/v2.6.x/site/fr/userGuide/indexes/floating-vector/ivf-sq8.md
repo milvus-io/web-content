@@ -41,7 +41,7 @@ summary: >-
       </svg>
     </button></h2><p>L'index IVF_SQ8 repose sur deux éléments clés :</p>
 <ul>
-<li><p><strong>Fichier inversé (IVF</strong>) : Il organise les données en grappes, ce qui permet à l'algorithme de recherche de se concentrer uniquement sur les sous-ensembles de vecteurs les plus pertinents.</p></li>
+<li><p><strong>Fichier inversé (IVF)</strong>: Il organise les données en grappes, ce qui permet à l'algorithme de recherche de se concentrer uniquement sur les sous-ensembles de vecteurs les plus pertinents.</p></li>
 <li><p><strong>Quantification scalaire (SQ8</strong>) : Compresse les vecteurs sous une forme plus compacte, ce qui réduit considérablement l'utilisation de la mémoire tout en conservant une précision suffisante pour des calculs de similarité rapides.</p></li>
 </ul>
 <h3 id="IVF" class="common-anchor-header">IVF</h3><p>Le FVI est comparable à la création d'un index dans un livre. Au lieu de parcourir chaque page (ou, dans notre cas, chaque vecteur), vous recherchez des mots-clés spécifiques (clusters) dans l'index pour trouver rapidement les pages (vecteurs) pertinentes. Dans notre scénario, les vecteurs sont regroupés en grappes et l'algorithme recherche dans quelques grappes proches du vecteur de la requête.</p>
@@ -184,7 +184,7 @@ res = MilvusClient.search(
      <td><p>Le nombre de grappes à créer à l'aide de l'algorithme k-means pendant la construction de l'index.</p></td>
      <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, 65536]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">128</code></p></td>
-     <td><p>Les valeurs élevées de <code translate="no">nlist</code> améliorent le rappel en créant des grappes plus fines, mais augmentent le temps de construction de l'index. Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [32, 4096].</p></td>
+     <td><p>Les valeurs plus élevées de <code translate="no">nlist</code> améliorent le rappel en créant des grappes plus fines, mais augmentent le temps de construction de l'index. Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [32, 4096].</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">recherche sur l'index</a>.</p>

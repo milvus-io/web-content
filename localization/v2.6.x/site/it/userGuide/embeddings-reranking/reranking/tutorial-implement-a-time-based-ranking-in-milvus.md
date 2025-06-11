@@ -5,11 +5,11 @@ title: >-
   with Milvus 2.6.x
 summary: >-
   In molte applicazioni di ricerca, la freschezza dei contenuti è importante
-  quanto la loro rilevanza. Gli articoli di cronaca, gli annunci di prodotti, i
-  post sui social media e i documenti di ricerca traggono vantaggio da sistemi
-  di classificazione che bilanciano la rilevanza semantica e la ricorrenza.
-  Questo tutorial mostra come implementare in Milvus una classificazione basata
-  sul tempo, utilizzando i classificatori di decadimento.
+  quanto la loro rilevanza. Articoli di cronaca, annunci di prodotti, post sui
+  social media e articoli di ricerca traggono vantaggio da sistemi di
+  classificazione che bilanciano la rilevanza semantica e la ricorrenza. Questo
+  tutorial mostra come implementare in Milvus un sistema di classificazione
+  basato sul tempo, utilizzando i classificatori di decadimento.
 beta: Milvus 2.6.x
 ---
 <h1 id="Tutorial-Implement-Time-based-Ranking-in-Milvus" class="common-anchor-header">Tutorial: Implementare la classificazione basata sul tempo in Milvus<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Tutorial-Implement-Time-based-Ranking-in-Milvus" class="anchor-icon" translate="no">
@@ -321,7 +321,7 @@ linear_ranker = Function(
 <button class="copy-code-btn"></button></code></pre>
 <p>Nel codice precedente:</p>
 <ul>
-<li><p><code translate="no">reranker</code>: Impostato su <code translate="no">decay</code> per le funzioni di decadimento basate sul tempo</p></li>
+<li><p><code translate="no">reranker</code>: Impostato su <code translate="no">decay</code> per le funzioni di decadimento basato sul tempo</p></li>
 <li><p><code translate="no">function</code>: Il tipo di funzione di decadimento (gauss, exp, o lineare)</p></li>
 <li><p><code translate="no">origin</code>: Il punto di riferimento (di solito l'ora corrente)</p></li>
 <li><p><code translate="no">offset</code>: Il periodo durante il quale i documenti mantengono la piena rilevanza</p></li>
@@ -932,7 +932,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vediamo come si comporta il ranking del decadimento con diverse query di ricerca:</p>
+    </button></h2><p>Vediamo come si comporta il ranking di decadimento con diverse query di ricerca:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Try different queries with Gaussian decay</span>
 <span class="hljs-keyword">for</span> test_query <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;machine learning&quot;</span>, <span class="hljs-string">&quot;neural networks&quot;</span>, <span class="hljs-string">&quot;ethics in AI&quot;</span>]:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n=== TESTING QUERY: &#x27;<span class="hljs-subst">{test_query}</span>&#x27; WITH GAUSSIAN DECAY ===&quot;</span>)
@@ -1029,4 +1029,4 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
 <li><p>Basi di conoscenza e sistemi di documentazione</p></li>
 <li><p>Repository di documenti di ricerca</p></li>
 </ul>
-<p>Comprendendo la matematica alla base delle funzioni di decadimento e sperimentando diversi parametri, è possibile mettere a punto il sistema di ricerca per fornire l'equilibrio ottimale tra pertinenza e freschezza per il caso d'uso specifico.</p>
+<p>Comprendendo la matematica alla base delle funzioni di decadimento e sperimentando diversi parametri, è possibile mettere a punto il sistema di ricerca per fornire l'equilibrio ottimale tra pertinenza e freschezza per il proprio caso d'uso specifico.</p>

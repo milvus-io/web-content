@@ -1,10 +1,9 @@
 ---
 id: monitor_overview.md
 title: 監視器概觀
-related_key: "monitor, alert"
+related_key: 'monitor, alert'
 summary: 瞭解 Milvus 如何使用 Prometheus 和 Grafana 來監控和警示服務。
 ---
-
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvus 監控框架概述<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +43,7 @@ summary: 瞭解 Milvus 如何使用 Prometheus 和 Grafana 來監控和警示服
 <li>Kube-prometheus 提供易於操作的端對端 Kubernetes 群集監控。</li>
 </ul>
 <h3 id="Metric-names" class="common-anchor-header">度量名稱</h3><p>Prometheus 中有效的度量名稱包含三個元素：命名空間、子系統和名稱。這三個元素以「_」連結。</p>
-<p>Prometheus 監控的 Milvus 公制的命名空間是 &quot;milvus&quot;。根據度量指標所屬的角色，其子系統應該是下列八種角色之一：&quot;rootcoord&quot;、&quot;proxy&quot;、&quot;querycoord&quot;、&quot;querynode&quot;、&quot;indexcoord&quot;、&quot;indexnode&quot;、&quot;datacoord&quot;、&quot;datanode&quot;。</p>
+<p>Prometheus 監控的 Milvus 公制的命名空間是 "milvus"。根據度量指標所屬的角色，其子系統應該是下列八種角色之一："rootcoord"、"proxy"、"querycoord"、"querynode"、"indexcoord"、"indexnode"、"datacoord"、"datanode"。</p>
 <p>例如，計算查詢向量總數的 Milvus 公制命名為<code translate="no">milvus_proxy_search_vectors_count</code> 。</p>
 <h3 id="Metric-types" class="common-anchor-header">度量類型</h3><p>Prometheus 支援四種度量類型：</p>
 <ul>
@@ -63,11 +62,11 @@ summary: 瞭解 Milvus 如何使用 Prometheus 和 Grafana 來監控和警示服
 <tr><td>狀態</td><td>已處理的作業或請求的狀態。</td><td>「放棄」、「成功 」或 「失敗」。</td></tr>
 <tr><td>"查詢類型</td><td>讀取請求的類型。</td><td>「搜尋 」或 「查詢」。</td></tr>
 <tr><td>"msg_type</td><td>訊息的類型。</td><td>「插入」、「刪除」、「搜尋 」或 「查詢」。</td></tr>
-<tr><td>"segment_state" 區段的狀態。</td><td>區段的狀態。</td><td>&quot;Sealed&quot;、&quot;Growing&quot;、&quot;Flushed&quot;、&quot;Flushing&quot;、&quot;Dropped 「或 」Importing&quot;。</td></tr>
+<tr><td>"segment_state" 區段的狀態。</td><td>區段的狀態。</td><td>"Sealed"、"Growing"、"Flushed"、"Flushing"、"Dropped 「或 」Importing"。</td></tr>
 <tr><td>"cache_state" 快取物件的狀態。</td><td>快取物件的狀態。</td><td>「命中 」或 「未命中」。</td></tr>
-<tr><td>"快取名稱</td><td>快取物件的名稱。此標籤與 &quot;cache_state&quot; 標籤一起使用。</td><td>例如：&quot;CollectionID&quot;、&quot;Schema &quot;等。</td></tr>
-<tr><td>&quot;通道名稱</td><td>訊息儲存（Pulsar 或 Kafka）中的實體主題。</td><td>例如：&quot;by-dev-rootcoord-dml_0&quot;、&quot;by-dev-rootcoord-dml_255 &quot;等。</td></tr>
-<tr><td>"function_name"（函式名</td><td>處理特定請求的函式名稱。</td><td>例如，&quot;CreateCollection&quot;、&quot;CreatePartition&quot;、&quot;CreateIndex &quot;等。</td></tr>
+<tr><td>"快取名稱</td><td>快取物件的名稱。此標籤與 "cache_state" 標籤一起使用。</td><td>例如："CollectionID"、"Schema "等。</td></tr>
+<tr><td>"通道名稱</td><td>訊息儲存（Pulsar 或 Kafka）中的實體主題。</td><td>例如："by-dev-rootcoord-dml_0"、"by-dev-rootcoord-dml_255 "等。</td></tr>
+<tr><td>"function_name"（函式名</td><td>處理特定請求的函式名稱。</td><td>例如，"CreateCollection"、"CreatePartition"、"CreateIndex "等。</td></tr>
 <tr><td>"使用者名稱</td><td>用於驗證的使用者名稱。</td><td>您偏好的使用者名稱。</td></tr>
 <tr><td>"索引任務的狀態</td><td>索引任務在元儲存中的狀態。</td><td>「未發佈」、「進行中」、「失敗」、「完成 」或 「回收」。</td></tr>
 </tbody>
@@ -88,7 +87,7 @@ summary: 瞭解 Milvus 如何使用 Prometheus 和 Grafana 來監控和警示服
         ></path>
       </svg>
     </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana</a>是一個開放原始碼的可視化堆疊，可連結所有資料來源。透過調出指標，它可以幫助使用者瞭解、分析和監控大量資料。</p>
-<p>Milvus 使用 Grafana 的客製化儀表板來進行度量可視化。</p>
+<p>Milvus 使用 Grafana 的可自訂儀表板來進行指標可視化。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

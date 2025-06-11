@@ -80,7 +80,7 @@ beta: Milvus 2.6.x
 </table>
 <p>Choisissez la décroissance linéaire lorsque :</p>
 <ul>
-<li><p>Votre application a une limite naturelle, un délai ou un seuil.</p></li>
+<li><p>Votre application a une limite naturelle, une date limite ou un seuil.</p></li>
 <li><p>Les éléments dépassant un certain seuil doivent être complètement exclus des résultats.</p></li>
 <li><p>Vous avez besoin d'un taux prévisible et cohérent de déclin de la pertinence.</p></li>
 <li><p>Les utilisateurs doivent voir une démarcation claire entre les éléments pertinents et ceux qui ne le sont pas.</p></li>

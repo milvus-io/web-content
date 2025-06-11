@@ -40,7 +40,7 @@ summary: HNSW 索引是一种基于图的索引算法，可以提高搜索高维
 <ol>
 <li><p><strong>入口点</strong>：搜索从顶层的一个固定入口点开始，该入口点是图中的一个预定节点。</p></li>
 <li><p><strong>贪婪搜索</strong>：算法贪婪地移动到当前层的最近邻居，直到无法再接近查询向量为止。上层起到导航作用，作为粗过滤器，为下层的精细搜索找到潜在的入口点。</p></li>
-<li><p><strong>层层下降</strong>：一旦当前层达到<strong>局部最小值</strong>，算法就会利用预先建立的连接跳转到下层，并重复贪婪搜索。</p></li>
+<li><p><strong>层层下降</strong>：一旦当前层达到<strong>局部最小值</strong>，算法就会通过预先建立的连接跳转到下层，并重复贪婪搜索。</p></li>
 <li><p><strong>最后</strong> <strong>细化</strong>：这一过程一直持续到最底层，在最底层进行最后的细化步骤，找出最近的邻居。</p></li>
 </ol>
 <p>
@@ -89,7 +89,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">HNSW</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详情，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详细信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
 <li><p><code translate="no">params</code>:用于建立索引的附加配置选项。</p>
 <ul>
 <li><p><code translate="no">M</code>:每个节点可连接的最大邻居数量。</p></li>
@@ -170,7 +170,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">efConstruction</code></p></td>
      <td><p>索引构建过程中考虑连接的候选邻居数量。每个新元素都会评估一个更大的候选池，但实际建立的最大连接数仍受<code translate="no">M</code> 限制。</p></td>
      <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[1，<em>int_max］</em></p><p><strong>默认值</strong>：<code translate="no">360</code></p></td>
-     <td><p><code translate="no">efConstruction</code> 越高，<strong>索引</strong>越<strong>准确</strong>，因为会探索更多潜在连接。不过，这也会导致建立<strong>索引的时间延长和内存使用量增加</strong>。考虑增加<code translate="no">efConstruction</code> 以提高准确性，尤其是在索引时间不太重要的情况下。</p><p>在资源紧张的情况下，可考虑降低<code translate="no">efConstruction</code> ，以加快索引构建速度。</p><p>在大多数情况下，我们建议在此范围内设置一个值：[50, 500].</p></td>
+     <td><p><code translate="no">efConstruction</code> 越高，<strong>索引</strong>越<strong>准确</strong>，因为会探索更多潜在连接。不过，这也会导致建立<strong>索引的时间延长和内存使用量增加</strong>。考虑增加<code translate="no">efConstruction</code> 以提高准确性，尤其是在索引时间不太重要的情况下。</p><p>在资源紧张的情况下，可以考虑降低<code translate="no">efConstruction</code> ，以加快索引构建速度。</p><p>在大多数情况下，我们建议在此范围内设置一个值：[50, 500].</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了<a href="/docs/zh/hnsw.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>

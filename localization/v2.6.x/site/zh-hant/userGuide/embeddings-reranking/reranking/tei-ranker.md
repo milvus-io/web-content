@@ -22,7 +22,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>TEI Ranker 利用 Hugging Face 的<a href="/docs/zh-hant/tei-ranker.md">Text Embedding Inference (TEI)</a>服務，透過語意重新排序來提升搜尋相關性。它代表了一種先進的搜尋結果排序方法，超越了傳統的向量相似性。</p>
-<p>與<a href="/docs/zh-hant/vllm-ranker.md">vLLM Ranker</a> 相比，TEI Ranker 可直接與 Hugging Face 的生態系統和預先訓練的重新排序模型整合，因此非常適合以易於部署和維護為優先考量的應用程式。</p>
+<p>與<a href="/docs/zh-hant/vllm-ranker.md">vLLM Ranker</a> 相比，TEI Ranker 可直接與 Hugging Face 的生態系統和預先訓練的重新排序模型整合，因此非常適合用於以易於部署和維護為優先考量的應用程式。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

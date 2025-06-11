@@ -4,7 +4,6 @@ related_key: scalar_index
 summary: Indice scalare in Milvus.
 title: Indice scalare
 ---
-
 <h1 id="Scalar-Index" class="common-anchor-header">Indice scalare<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +155,7 @@ title: Indice scalare
       </svg>
     </button></h2><ul>
 <li><p>Per indicizzare un campo scalare, leggere <a href="/docs/it/v2.5.x/index-scalar-fields.md">Costruire un indice sugli scalari</a>.</p></li>
-<li><p>Per saperne di più sui termini correlati e sulle regole sopra menzionate, leggete</p>
+<li><p>Per saperne di più sui termini correlati e sulle regole sopra menzionate, leggere</p>
 <ul>
 <li><a href="/docs/it/v2.5.x/bitset.md">Bitset</a></li>
 <li><a href="/docs/it/v2.5.x/multi-vector-search.md">Ricerca ibrida</a></li>

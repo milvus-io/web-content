@@ -273,4 +273,4 @@ results = client.query(
 )
 <span class="hljs-comment"># Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">Quanto tempo leva para um novo campo ficar disponível?</h3><p>Os campos adicionados ficam disponíveis quase imediatamente, mas pode haver um breve atraso devido à transmissão interna de alterações de esquema no cluster Milvus. Esta sincronização assegura que todos os nós estão cientes da atualização do esquema antes de processar as consultas que envolvem o novo campo.</p>
+<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">Quanto tempo é necessário para que um novo campo fique disponível?</h3><p>Os campos adicionados ficam disponíveis quase imediatamente, mas pode haver um breve atraso devido à transmissão interna de alterações de esquema no cluster Milvus. Esta sincronização assegura que todos os nós estão cientes da atualização do esquema antes de processar as consultas que envolvem o novo campo.</p>

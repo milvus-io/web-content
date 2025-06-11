@@ -3,8 +3,8 @@ id: woodpecker_architecture.md
 title: Woodpecker
 summary: >-
   Woodpecker adalah sistem WAL cloud-native di Milvus 2.6. Dengan arsitektur
-  tanpa disk dan dua mode penerapan, sistem ini memberikan throughput yang
-  tinggi, biaya operasional yang rendah, dan skalabilitas tanpa batas pada
+  tanpa disk dan dua mode penyebaran, sistem ini memberikan throughput tinggi,
+  overhead operasional yang rendah, dan skalabilitas tanpa batas pada
   penyimpanan objek.
 ---
 <h1 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">

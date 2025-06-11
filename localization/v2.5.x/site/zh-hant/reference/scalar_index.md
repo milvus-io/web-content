@@ -4,7 +4,6 @@ related_key: scalar_index
 summary: Milvus 中的標量指數。
 title: 標量索引
 ---
-
 <h1 id="Scalar-Index" class="common-anchor-header">標量索引<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,8 +75,8 @@ title: 標量索引
 </tbody>
 </table>
 <h3 id="Inverted-indexing" class="common-anchor-header">反向索引</h3><p>反向索引提供了一種靈活的方式，可透過手動指定索引參數為標量欄位建立索引。這種方法適用於各種情況，包括點查詢、模式匹配查詢、全文檢索、JSON 檢索、布林檢索，甚至前綴匹配查詢。</p>
-<p>Milvus 中實作的倒置索引是由<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>（一個全文本搜尋引擎函式庫）所支援。Tantivy 可確保 Milvus 中的倒排索引既高效又快速。</p>
-<p>倒排索引有兩個主要組成部分：詞彙字典和倒排清單。詞彙字典包含所有按字母順序排序的標記化詞彙，而倒序清單包含每個詞彙出現的文件清單。這種設定使點查詢和範圍查詢比暴力搜尋更快、更有效率。</p>
+<p>Milvus 中實作的反向索引是由<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>（一個全文本搜尋引擎函式庫）支援。Tantivy 可確保 Milvus 中的倒排索引既高效又快速。</p>
+<p>倒排索引有兩個主要組成部分：詞彙字典和倒排清單。詞彙字典包含所有按字母順序排序的標記化詞彙，而倒置清單包含每個詞彙出現的文件清單。這種設定使點查詢和範圍查詢比暴力搜尋更快、更有效率。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />

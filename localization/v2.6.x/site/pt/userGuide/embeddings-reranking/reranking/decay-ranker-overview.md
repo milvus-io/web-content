@@ -142,7 +142,7 @@ beta: Milvus 2.6.x
 </table>
 <p>Sem o decay reranking, o Documento B teria a classificação mais elevada com base na semelhança vetorial pura (0,92). No entanto, com a classificação decrescente aplicada:</p>
 <ul>
-<li><p>O artigo C salta para a posição #1, apesar da similaridade média, porque é muito recente (publicado ontem)</p></li>
+<li><p>O artigo C salta para a posição #1 apesar da similaridade média porque é muito recente (publicado ontem)</p></li>
 <li><p>O artigo B desce para a posição #3, apesar da excelente semelhança, porque é relativamente antigo</p></li>
 <li><p>O artigo D utiliza a distância L2 (em que quanto menor for, melhor), pelo que a sua pontuação é normalizada de 1,2 para 0,76 antes de aplicar a desclassificação</p></li>
 </ul>

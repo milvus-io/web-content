@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>GPU 환경 전용인 <strong>GPU_BRUTE_FORCE</strong> 인덱스는 타협하지 않는 정확도가 필수적인 시나리오를 위해 설계되었습니다. 각 쿼리를 데이터 세트의 모든 벡터와 철저하게 비교하여 잠재적인 일치 항목을 간과하지 않도록 함으로써 1의 리콜을 보장합니다. GPU 가속을 활용하는 GPU_BRUTE_FORCE는 벡터 유사도 검색에서 절대적인 정밀도를 요구하는 애플리케이션에 적합합니다.</p>
+    </button></h1><p>GPU 환경 전용인 <strong>GPU_BRUTE_FORCE</strong> 인덱스는 타협하지 않는 정확도가 필수적인 시나리오를 위해 설계되었습니다. 각 쿼리를 데이터 세트의 모든 벡터와 철저하게 비교하여 잠재적인 일치를 간과하지 않도록 함으로써 1의 리콜을 보장합니다. GPU 가속을 활용하는 GPU_BRUTE_FORCE는 벡터 유사도 검색에서 절대적인 정밀도를 요구하는 애플리케이션에 적합합니다.</p>
 <h2 id="Build-index" class="common-anchor-header">색인 구축<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>이 구성에서는</p>
 <ul>
-<li><p><code translate="no">index_type</code>: 빌드할 인덱스의 유형입니다. 이 예에서는 값을 <code translate="no">GPU_BRUTE_FORCE</code> 로 설정합니다.</p></li>
+<li><p><code translate="no">index_type</code>: 빌드할 인덱스 유형입니다. 이 예에서는 값을 <code translate="no">GPU_BRUTE_FORCE</code> 로 설정합니다.</p></li>
 <li><p><code translate="no">metric_type</code>: 벡터 간의 거리를 계산하는 데 사용되는 메서드입니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p></li>
 <li><p><code translate="no">params</code>: GPU_BRUTE_FORCE 인덱스에는 추가 파라미터가 필요하지 않습니다.</p></li>
 </ul>

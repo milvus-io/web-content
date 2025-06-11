@@ -3,8 +3,8 @@ id: ivf-sq8.md
 title: IVF_SQ8
 summary: >-
   El índice IVF_SQ8 es un algoritmo de indexación basado en la cuantización y
-  diseñado para afrontar retos de búsqueda de similitudes a gran escala. Este
-  tipo de índice permite realizar búsquedas más rápidas con un consumo de
+  diseñado para afrontar los retos de la búsqueda de similitudes a gran escala.
+  Este tipo de índice permite realizar búsquedas más rápidas con un consumo de
   memoria mucho menor que los métodos de búsqueda exhaustiva.
 ---
 <h1 id="IVFSQ8" class="common-anchor-header">IVF_SQ8<button data-href="#IVFSQ8" class="anchor-icon" translate="no">
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El índice <strong>IVF_SQ8</strong> es un algoritmo de indexación <strong>basado en la cuantización</strong> y diseñado para afrontar los retos de la búsqueda de similitudes a gran escala. Este tipo de índice consigue búsquedas más rápidas con una huella de memoria mucho menor en comparación con los métodos de búsqueda exhaustiva.</p>
+    </button></h1><p>El índice <strong>IVF_SQ8</strong> es un algoritmo de indexación <strong>basado en la cuantización</strong>, diseñado para afrontar los retos de la búsqueda de similitudes a gran escala. Este tipo de índice consigue búsquedas más rápidas con una huella de memoria mucho menor en comparación con los métodos de búsqueda exhaustiva.</p>
 <h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

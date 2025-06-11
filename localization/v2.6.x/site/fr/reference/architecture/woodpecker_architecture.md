@@ -92,13 +92,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpecker propose deux modes de déploiement pour répondre à vos besoins spécifiques :</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Léger et sans maintenance</h3><p>Le mode MemoryBuffer offre une option de déploiement simple et légère dans laquelle Woodpecker met temporairement en mémoire tampon les écritures entrantes et les évacue périodiquement vers un service de stockage d'objets dans le nuage. Les métadonnées sont gérées par <strong>etcd</strong> pour assurer la cohérence et la coordination. Ce mode convient mieux aux charges de travail lourdes en lots dans les déploiements à petite échelle ou les environnements de production qui donnent la priorité à la simplicité plutôt qu'aux performances, en particulier lorsqu'une faible latence d'écriture n'est pas critique.</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Léger et sans maintenance</h3><p>Le mode MemoryBuffer offre une option de déploiement simple et légère dans laquelle Woodpecker met temporairement en mémoire tampon les écritures entrantes et les évacue périodiquement vers un service de stockage d'objets dans le nuage. Les métadonnées sont gérées par <strong>etcd</strong> pour assurer la cohérence et la coordination. Ce mode est mieux adapté aux charges de travail lourdes en lots dans les déploiements à petite échelle ou les environnements de production qui donnent la priorité à la simplicité plutôt qu'aux performances, en particulier lorsqu'une faible latence d'écriture n'est pas critique.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>déploiement du mode mémoire woodpecker</span> </span></p>
 <h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Optimisé pour une faible latence et une grande durabilité</h3><p>Le mode QuorumBuffer est conçu pour les charges de travail en lecture/écriture sensibles à la latence et à haute fréquence, qui nécessitent à la fois une réactivité en temps réel et une forte tolérance aux pannes. Dans ce mode, Woodpecker fonctionne comme un tampon d'écriture à grande vitesse avec des écritures quorum à trois répliques, garantissant une forte cohérence et une haute disponibilité.</p>
-<p>Une écriture est considérée comme réussie lorsqu'elle est répliquée sur au moins deux des trois nœuds, généralement dans un délai de quelques millisecondes, après quoi les données sont évacuées de manière asynchrone vers le stockage d'objets dans le nuage pour une durabilité à long terme. Cette architecture minimise l'état sur le nœud, élimine le besoin de gros volumes de disques locaux et évite les réparations anti-entropie complexes souvent nécessaires dans les systèmes traditionnels basés sur le quorum.</p>
+<p>Une écriture est considérée comme réussie lorsqu'elle est répliquée sur au moins deux des trois nœuds, généralement dans un délai de quelques millisecondes, après quoi les données sont évacuées de manière asynchrone vers le stockage d'objets dans le nuage pour une durabilité à long terme. Cette architecture minimise l'état des nœuds, élimine le besoin de gros volumes de disques locaux et évite les réparations anti-entropie complexes souvent nécessaires dans les systèmes traditionnels basés sur le quorum.</p>
 <p>Il en résulte une couche WAL rationalisée et robuste, idéale pour les environnements de production critiques où la cohérence, la disponibilité et la restauration rapide sont essentielles.</p>
 <p>
   
@@ -131,11 +131,11 @@ summary: >-
 </table>
 <p>Pour le contexte, nous avons mesuré les limites de débit théoriques de différents backends de stockage sur notre machine de test :</p>
 <ul>
-<li>MinIO : ~110 MB/s</li>
+<li>MinIO : ~110 Mo/s</li>
 <li>Système de fichiers local : 600-750 Mo/s</li>
 <li>Amazon S3 (instance EC2 unique) : jusqu'à 1,1 Go/s</li>
 </ul>
-<p>Fait remarquable, Woodpecker a constamment atteint 60 à 80 % du débit maximal possible pour chaque backend, ce qui représente un niveau d'efficacité exceptionnel pour un intergiciel.</p>
+<p>Fait remarquable, Woodpecker a constamment atteint 60 à 80 % du débit maximal possible pour chaque backend, ce qui représente un niveau d'efficacité exceptionnel pour un middleware.</p>
 <h3 id="Key-performance-insights" class="common-anchor-header">Principales informations sur les performances</h3><ul>
 <li>Mode système de fichiers local : Woodpecker a atteint 450 Mo/s, soit 3,5 fois plus vite que Kafka et 4,2 fois plus vite que Pulsar, avec une latence ultra-faible de seulement 1,8 ms, ce qui en fait l'outil idéal pour les déploiements haute performance à un seul nœud.</li>
 <li>Mode de stockage dans le nuage (S3) : En écrivant directement sur S3, Woodpecker a atteint 750 Mo/s (environ 68 % de la limite théorique de S3), soit 5,8 fois plus que Kafka et 7 fois plus que Pulsar. Bien que la latence soit plus élevée (166 ms), cette configuration offre un débit exceptionnel pour les charges de travail par lots.</li>
@@ -188,7 +188,7 @@ summary: >-
 <li><strong>Réduction des frais généraux d'infrastructure :</strong> La réduction du nombre de composants se traduit par une diminution des coûts de déploiement et de maintenance.</li>
 </ul>
 <h3 id="Storage-cost-advantages" class="common-anchor-header">Avantages en termes de coûts de stockage</h3><ul>
-<li><strong>Stockage hiérarchisé :</strong> Migration automatique des données vers des niveaux de stockage en nuage rentables pour une conservation à long terme.</li>
+<li><strong>Stockage hiérarchisé :</strong> Migration automatique des données vers des niveaux de stockage en nuage économiques pour une conservation à long terme.</li>
 <li><strong>Compression et déduplication :</strong> Les fonctions intégrées réduisent les coûts de stockage sans effort opérationnel supplémentaire.</li>
 <li><strong>Pas de frais de réplication :</strong> La durabilité est gérée par le stockage en nuage, ce qui élimine la nécessité d'une gestion manuelle des répliques.</li>
 </ul>

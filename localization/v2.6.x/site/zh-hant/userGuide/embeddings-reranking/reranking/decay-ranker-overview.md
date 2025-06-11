@@ -19,11 +19,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在傳統的向量搜尋中，搜尋結果的排序純粹取決於向量的相似度-向量在數學空間中的匹配程度。但在現實世界的應用中，內容是否真正相關往往不只取決於語意相似度。</p>
+    </button></h1><p>在傳統的向量搜尋中，搜尋結果的排序純粹取決於向量的相似性-向量在數學空間中的匹配程度。但在現實世界的應用中，內容是否真正相關往往不只取決於語意相似度。</p>
 <p>請考慮這些日常情境：</p>
 <ul>
 <li><p>在新聞搜尋中，昨天的文章應該比三年前的類似文章排名更高</p></li>
-<li><p>餐廳搜尋器會優先搜尋 5 分鐘路程內的餐廳，而不是需要開車 30 分鐘的餐廳</p></li>
+<li><p>餐廳搜尋器會優先搜尋 5 分鐘車程內的餐廳，而非 30 分鐘車程內的餐廳</p></li>
 <li><p>一個電子商務平台，能提升趨勢商品的排名，即使這些商品與搜尋查詢的相似度稍低。</p></li>
 </ul>
 <p>這些情境都有一個共同的需求：平衡向量相似度與其他數值因素，例如時間、距離或知名度。</p>
@@ -219,7 +219,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>衰減排名器可以應用於 Milvus 中的標準向量搜索和混合搜索操作。以下是實現此功能的主要程式碼片段。</p>
 <div class="alert note">
-<p>在使用遞減功能之前，您必須先建立一個具有適當數值欄位（如時間戳記、距離等）的集合，這些欄位將用於遞減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">教學：在 Milvus 中實施以時間為基礎的排名</a>。</p>
+<p>在使用遞減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於遞減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">教學：在 Milvus 中實施以時間為基礎的排名</a>。</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>要實現衰變排名，首先要定義一個具有適當配置的<code translate="no">Function</code> 物件：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -307,7 +307,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>無</p></td>
-     <td><p><code translate="no">scale</code> 距離的分數值，控制曲線的陡度。較低的值會產生較陡的下降曲線；較高的值則會產生較漸進的下降曲線。 必須介於 0 和 1 之間。</p></td>
+     <td><p><code translate="no">scale</code> 距離的分數值，控制曲線的陡度。較低的值會產生較陡的下降曲線；較高的值會產生較漸進的下降曲線。 必須介於 0 和 1 之間。</p></td>
      <td><p><code translate="no">0.5</code> (預設值)</p></td>
    </tr>
 </table>

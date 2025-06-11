@@ -460,7 +460,7 @@ schema.WithFunction(function)
     \&quot;functions\&quot;: <span class="hljs-variable">$myFunctions</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、スキーマに組み込みのBM25関数を追加し、<code translate="no">text</code> フィールドを入力として利用し、結果のスパース・ベクトルを<code translate="no">text_sparse_vector</code> フィールドに格納しています。</p>
+<p>この例では、スキーマに組み込みのBM25関数を追加し、<code translate="no">text</code> フィールドを入力として利用し、結果のスパースベクトルを<code translate="no">text_sparse_vector</code> フィールドに格納しています。</p>
 <h2 id="Next-Steps" class="common-anchor-header">次のステップ<button data-href="#Next-Steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

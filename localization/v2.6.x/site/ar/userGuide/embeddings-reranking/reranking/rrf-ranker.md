@@ -141,7 +141,7 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li>نتائج بحث الشبكة العصبية الاصطناعية على متجهات كثيفة من النصوص （topK = 5)：</li>
+<li>نتائج بحث الشبكة العصبية الاصطناعية على متجهات كثيفة من النصوص （topK=5)：</li>
 </ul>
 <table>
    <tr>
@@ -337,7 +337,7 @@ ranker = Function(
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تنطبق على البحث الهجين</h3><p>تم تصميم RRRF Ranker خصيصًا لعمليات البحث الهجين التي تجمع بين حقول متجهات متعددة. إليك كيفية استخدامه في البحث الهجين:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تنطبق على البحث الهجين</h3><p>تم تصميم RRRF Ranker خصيصًا لعمليات البحث المختلطة التي تجمع بين حقول متجهات متعددة. إليك كيفية استخدامه في البحث الهجين:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, AnnSearchRequest

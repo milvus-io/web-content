@@ -4,7 +4,6 @@ related_key: scalar_index
 summary: Скалярный индекс в Мильвусе.
 title: Скалярный индекс
 ---
-
 <h1 id="Scalar-Index" class="common-anchor-header">Скалярный индекс<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

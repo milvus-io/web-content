@@ -45,7 +45,7 @@ summary: >-
 <ol>
 <li><p><strong>データ圧縮</strong>：PQは各ベクトルを複数のサブ・ベクトルに分割し、<code translate="no">m</code> （サブ・ベクトル数）や<code translate="no">nbits</code> （サブ・ベクトルあたりのビット数）などのパラメータで制御されたセントロイドのコードブックを使用して量子化する。</p></li>
 <li><p><strong>グラフの構築</strong>：圧縮されたベクトルは、HNSWグラフの構築に使用される。ベクターは圧縮された形で保存されるため、結果として得られるグラフは一般的に小さくなり、必要なメモリ量も少なく、より高速に走査できるようになる。</p></li>
-<li><p><strong>候補の検索</strong>：クエリが実行されると、アルゴリズムはHNSWグラフの圧縮データを使用して、候補となる隣接候補のプールを効率的に特定する。このグラフベースの検索により、考慮すべきベクトル数が大幅に削減され、総当たり検索と比較してクエリの待ち時間が改善される。</p></li>
+<li><p><strong>候補の検索</strong>：クエリが実行されると、アルゴリズムはHNSWグラフの圧縮データを使用して、候補となる隣接候補のプールを効率的に特定する。このグラフベースの検索により、考慮すべきベクトル数が大幅に削減され、総当たり検索に比べてクエリの待ち時間が改善される。</p></li>
 <li><p><strong>(オプション）結果の絞り込み</strong>：最初の候補結果は、以下のパラメータに基づいて、より精度の高いものに改良することができます：</p>
 <ul>
 <li><p><code translate="no">refine</code>:この絞り込みステップを有効にするかどうかを制御します。<code translate="no">true</code> に設定すると、システムはより高精度または非圧縮の表現を使用して距離を再計算します。</p></li>
@@ -112,7 +112,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックスで類似検索を実行できます。</p>
+    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックス上で類似検索を実行できます。</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -200,12 +200,12 @@ res = MilvusClient.search(
      <td><p>検索時に絞り込みステップを適用するかどうかを制御するブーリアン・フラグ。refinementは、クエリベクタと候補の間の正確な距離を計算することにより、最初の結果を再ランク付けすることを含む。</p></td>
      <td><p><strong>タイプ</strong>：ブール値の<strong>範囲</strong>：[<code translate="no">true</code>,<code translate="no">false</code>]。</p>
 <p><strong>デフォルト値</strong>：<code translate="no">false</code></p></td>
-     <td><p>高精度が必須で、検索時間が多少遅くても許容できる場合は、<code translate="no">true</code> に設定する。スピードを優先し、精度の多少の妥協が許容できる場合は<code translate="no">false</code> を使用します。</p></td>
+     <td><p>高精度が必須で、検索時間が多少遅くても許容できる場合は、<code translate="no">true</code> に設定する。スピードを優先し、精度の多少の妥協が許容できる場合は<code translate="no">false</code> を使用する。</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>精緻化処理で使用するデータの精度を決定します。 この精度は、圧縮されたベクトル（<code translate="no">m</code> と<code translate="no">nbits</code> パラメータで設定）の精度よりも高くなければなりません。</p></td>
+     <td><p>この精度は，圧縮ベクトル（<code translate="no">m</code> と<code translate="no">nbits</code> パラメータで設定）の精度よりも高くなければならない。</p></td>
      <td><p><strong>型</strong>：String<strong>Range:[</strong> <code translate="no">SQ6</code><strong>,</strong> <code translate="no">SQ8</code><strong>,</strong> <code translate="no">BF16</code><strong>,</strong> <code translate="no">FP16</code><strong>,</strong> <code translate="no">FP32</code> <strong>]。</strong></p>
 <p><strong>デフォルト値</strong>：なし</p></td>
      <td><p>より高いメモリコストで最大の精度を得るには<code translate="no">FP32</code> を使用し、より良い圧縮を得るには<code translate="no">SQ6</code>/<code translate="no">SQ8</code> を使用する。<code translate="no">BF16</code> と<code translate="no">FP16</code> は、バランスの取れた代替案を提供する。</p></td>

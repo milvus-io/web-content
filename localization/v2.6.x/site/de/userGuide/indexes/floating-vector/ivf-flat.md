@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>Der Begriff <strong>IVF_FLAT</strong> steht für <strong>Inverted File Flat</strong>, was den zweistufigen Ansatz für die Indizierung und Suche nach Fließkomma-Vektoren umschreibt:</p>
 <ul>
-<li><p><strong>Inverted File (IVF):</strong> Bezieht sich auf das Clustering des Vektorraums in handhabbare Regionen unter Verwendung von <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a>. Jeder Cluster wird durch einen <strong>Zentroid</strong> repräsentiert, der als Referenzpunkt für die Vektoren innerhalb des Clusters dient.</p></li>
+<li><p><strong>Inverted File (IVF):</strong> Bezieht sich auf das Clustering des Vektorraums in überschaubare Regionen unter Verwendung von <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a>. Jeder Cluster wird durch einen <strong>Zentroid</strong> repräsentiert, der als Referenzpunkt für die Vektoren darin dient.</p></li>
 <li><p><strong>Flach:</strong> Gibt an, dass die Vektoren innerhalb jedes Clusters in ihrer ursprünglichen Form (flache Struktur) gespeichert werden, ohne Komprimierung oder Quantisierung, um präzise Abstandsberechnungen zu ermöglichen.</p></li>
 </ul>
 <p>Die folgende Abbildung zeigt, wie dies funktioniert:</p>
@@ -182,6 +182,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">nprobe</code></p></td>
      <td><p>Die Anzahl der Cluster, in denen nach Kandidaten gesucht wird. Höhere Werte erlauben es, mehr Cluster zu durchsuchen, was die Wiederauffindbarkeit durch Erweiterung des Suchbereichs verbessert, allerdings auf Kosten einer erhöhten Abfragelatenz.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>nlist</em>]</p><p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
-     <td><p>Das Erhöhen dieses Wertes verbessert die Auffindbarkeit, kann aber die Suche verlangsamen. Stellen Sie <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code> ein, um Geschwindigkeit und Genauigkeit auszugleichen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</p></td>
+     <td><p>Eine Erhöhung dieses Wertes verbessert die Auffindbarkeit, kann aber die Suche verlangsamen. Stellen Sie <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code> ein, um Geschwindigkeit und Genauigkeit auszugleichen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</p></td>
    </tr>
 </table>

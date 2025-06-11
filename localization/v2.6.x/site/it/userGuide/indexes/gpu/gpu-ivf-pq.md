@@ -145,7 +145,7 @@ res = MilvusClient.search(
      <td><p>Numero di sottovettori (usati per la quantizzazione) in cui dividere ogni vettore ad alta dimensionalità durante il processo di quantizzazione.</p></td>
      <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, 65536]</p>
 <p><strong>Valore predefinito</strong>: Nessuno</p></td>
-     <td><p>Un valore più alto di <code translate="no">m</code> può migliorare l'accuratezza, ma aumenta anche la complessità computazionale e l'utilizzo di memoria. <code translate="no">m</code> deve essere un divisore della dimensione del vettore<em>(D</em>) per garantire una corretta decomposizione. Un valore comunemente consigliato è <em>m = D/2</em>.</p>
+     <td><p>Un valore più alto di <code translate="no">m</code> può migliorare l'accuratezza, ma aumenta anche la complessità computazionale e l'utilizzo di memoria. <code translate="no">m</code> deve essere un divisore della dimensione del vettore<em>(D</em>) per garantire una corretta decomposizione. Un valore comunemente raccomandato è <em>m = D/2</em>.</p>
 <p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [D/8, D].</p></td>
    </tr>
    <tr>

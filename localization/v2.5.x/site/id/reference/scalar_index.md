@@ -4,7 +4,6 @@ related_key: scalar_index
 summary: Indeks skalar dalam Milvus.
 title: Indeks Skalar
 ---
-
 <h1 id="Scalar-Index" class="common-anchor-header">Indeks Skalar<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,12 +1,11 @@
 ---
 id: monitor_overview.md
 title: Ikhtisar Monitor
-related_key: "monitor, alert"
+related_key: 'monitor, alert'
 summary: >-
   Pelajari bagaimana Prometheus dan Grafana digunakan di Milvus untuk layanan
   montoring dan peringatan.
 ---
-
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Gambaran umum kerangka kerja pemantauan Milvus<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,8 +44,8 @@ summary: >-
 <li>Operator Prometheus untuk mengelola instance pemantauan Prometheus secara efektif.</li>
 <li>Kube-prometheus untuk menyediakan pemantauan cluster Kubernetes end-to-end yang mudah dioperasikan.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">Nama metrik</h3><p>Nama metrik yang valid di Prometheus berisi tiga elemen: namespace, subsistem, dan nama. Ketiga elemen ini dihubungkan dengan &quot;_&quot;.</p>
-<p>Ruang nama metrik Milvus yang dipantau oleh Prometheus adalah &quot;milvus&quot;. Bergantung pada peran yang dimiliki metrik, subsistemnya haruslah salah satu dari delapan peran berikut: &quot;rootcoord&quot;, &quot;proxy&quot;, &quot;querycoord&quot;, &quot;querynode&quot;, &quot;indexcoord&quot;, &quot;indexnode&quot;, &quot;datacoord&quot;, &quot;datanode&quot;.</p>
+<h3 id="Metric-names" class="common-anchor-header">Nama metrik</h3><p>Nama metrik yang valid di Prometheus berisi tiga elemen: namespace, subsistem, dan nama. Ketiga elemen ini dihubungkan dengan "_".</p>
+<p>Ruang nama metrik Milvus yang dipantau oleh Prometheus adalah "milvus". Bergantung pada peran yang dimiliki metrik, subsistemnya haruslah salah satu dari delapan peran berikut ini: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
 <p>Misalnya, metrik Milvus yang menghitung jumlah total vektor yang ditanyakan diberi nama <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
 <h3 id="Metric-types" class="common-anchor-header">Jenis metrik</h3><p>Prometheus mendukung empat jenis metrik:</p>
 <ul>
@@ -62,16 +61,16 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>"node_id"</td><td>Identitas unik dari sebuah peran.</td><td>ID unik global yang dihasilkan oleh milvus.</td></tr>
-<tr><td>"status"</td><td>Status operasi atau permintaan yang sedang diproses.</td><td>&quot;meninggalkan&quot;, &quot;sukses&quot;, atau &quot;gagal&quot;.</td></tr>
-<tr><td>"tipe_query"</td><td>Jenis permintaan baca.</td><td>&quot;cari&quot; atau &quot;kueri&quot;.</td></tr>
-<tr><td>"msg_type"</td><td>Jenis pesan.</td><td>&quot;masukkan&quot;, &quot;hapus&quot;, &quot;cari&quot;, atau &quot;kueri&quot;.</td></tr>
-<tr><td>"segment_state"</td><td>Status sebuah segmen.</td><td>&quot;Disegel&quot;, &quot;Tumbuh&quot;, &quot;Memerah&quot;, &quot;Pembilasan&quot;, &quot;Menjatuhkan&quot;, atau &quot;Mengimpor&quot;.</td></tr>
-<tr><td>"cache_state"</td><td>Status objek yang di-cache.</td><td>&quot;hit&quot; atau &quot;miss&quot;.</td></tr>
-<tr><td>"cache_name"</td><td>Nama objek yang ditembolok. Label ini digunakan bersama dengan label &quot;cache_state&quot;.</td><td>Misalnya &quot;CollectionID&quot;, &quot;Schema&quot;, dll.</td></tr>
-<tr><td>&quot;channel_name&quot;</td><td>Topik fisik dalam penyimpanan pesan (Pulsar atau Kafka).</td><td>Contoh: &quot;by-dev-rootcoord-dml_0&quot;, &quot;by-dev-rootcoord-dml_255&quot;, dsb.</td></tr>
-<tr><td>"nama_fungsi"</td><td>Nama fungsi yang menangani permintaan tertentu.</td><td>Misalnya &quot;CreateCollection&quot;, &quot;CreatePartition&quot;, &quot;CreateIndex&quot;, dll.</td></tr>
+<tr><td>"status"</td><td>Status operasi atau permintaan yang sedang diproses.</td><td>"meninggalkan", "sukses", atau "gagal".</td></tr>
+<tr><td>"tipe_query"</td><td>Jenis permintaan baca.</td><td>"cari" atau "kueri".</td></tr>
+<tr><td>"msg_type"</td><td>Jenis pesan.</td><td>"masukkan", "hapus", "cari", atau "kueri".</td></tr>
+<tr><td>"segment_state"</td><td>Status sebuah segmen.</td><td>"Disegel", "Tumbuh", "Memerah", "Pembilasan", "Menjatuhkan", atau "Mengimpor".</td></tr>
+<tr><td>"cache_state"</td><td>Status objek yang di-cache.</td><td>"hit" atau "miss".</td></tr>
+<tr><td>"cache_name"</td><td>Nama objek yang ditembolok. Label ini digunakan bersama dengan label "cache_state".</td><td>Misalnya "CollectionID", "Schema", dll.</td></tr>
+<tr><td>"channel_name"</td><td>Topik fisik dalam penyimpanan pesan (Pulsar atau Kafka).</td><td>Contoh: "by-dev-rootcoord-dml_0", "by-dev-rootcoord-dml_255", dsb.</td></tr>
+<tr><td>"nama_fungsi"</td><td>Nama fungsi yang menangani permintaan tertentu.</td><td>Misalnya "CreateCollection", "CreatePartition", "CreateIndex", dll.</td></tr>
 <tr><td>"user_name"</td><td>Nama pengguna yang digunakan untuk autentikasi.</td><td>Nama pengguna pilihan Anda.</td></tr>
-<tr><td>"index_task_status"</td><td>Status tugas indeks dalam penyimpanan meta.</td><td>&quot;belum diterbitkan&quot;, &quot;sedang dalam proses&quot;, &quot;gagal&quot;, &quot;selesai&quot;, atau &quot;didaur ulang&quot;.</td></tr>
+<tr><td>"index_task_status"</td><td>Status tugas indeks dalam penyimpanan meta.</td><td>"belum diterbitkan", "sedang dalam proses", "gagal", "selesai", atau "didaur ulang".</td></tr>
 </tbody>
 </table>
 <h2 id="Grafana-in-Milvus" class="common-anchor-header">Grafana di Milvus<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">

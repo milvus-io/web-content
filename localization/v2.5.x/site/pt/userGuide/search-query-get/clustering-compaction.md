@@ -7,7 +7,6 @@ summary: >-
   compactação de clusters e a forma como esta funcionalidade pode melhorar o
   desempenho da pesquisa.
 ---
-
 <h1 id="Clustering-Compaction" class="common-anchor-header">Compactação de clusters<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,16 +79,15 @@ summary: >-
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
 
 <span class="hljs-attr">datanode:</span>
-<span class="hljs-attr">clusteringCompaction:</span>
-<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
-<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+  <span class="hljs-attr">clusteringCompaction:</span>
+    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
+    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
-
 <table>
    <tr>
      <th><p>Configurar Item</p></th>
@@ -101,7 +99,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">enable</code></p></td>
-     <td><p>Especifica se a compactação de clusters deve ser activada. Definir este valor para <code translate="no">true</code> se for necessário ativar esta funcionalidade para todas as colecções que tenham uma chave de agrupamento.</p></td>
+     <td><p>Especifica se a compactação do agrupamento deve ser activada. Definir este valor para <code translate="no">true</code> se for necessário ativar esta funcionalidade para todas as colecções que tenham uma chave de agrupamento.</p></td>
      <td><p>false</p></td>
    </tr>
    <tr>
@@ -174,8 +172,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -185,11 +183,10 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-schema=schema
+    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+    schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -290,10 +287,9 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-job_id=job_id,
+    job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;
@@ -430,6 +426,6 @@ System.out.println(stateResp.getState());
 <li><p>Escolha uma chave de agrupamento adequada.</p>
 <p>Pode utilizar campos escalares normalmente empregues como condições de filtragem como chave de agrupamento. Para uma coleção que contém dados de vários inquilinos, pode utilizar o campo que distingue um inquilino de outro como chave de agrupamento.</p></li>
 <li><p>Usar a chave de partição como a chave de clustering.</p>
-<p>Pode definir <code translate="no">common.usePartitionKeyAsClusteringKey</code> para <code translate="no">true</code> se pretender ativar esta funcionalidade para todas as colecções na sua instância Milvus ou se continuar a ter problemas de desempenho numa coleção grande com uma chave de partição. Ao fazê-lo, terá uma chave de agrupamento e uma chave de partição quando escolher um campo escalar numa coleção como chave de partição.</p>
+<p>Pode definir <code translate="no">common.usePartitionKeyAsClusteringKey</code> para <code translate="no">true</code> se pretender ativar esta funcionalidade para todas as colecções na sua instância Milvus ou se continuar a ter problemas de desempenho numa coleção grande com uma chave de partição. Ao fazê-lo, terá uma chave de clustering e uma chave de partição quando escolher um campo escalar numa coleção como chave de partição.</p>
 <p>Note que esta definição não impede a escolha de outro campo escalar como chave de agrupamento. A chave de clustering explicitamente designada tem sempre precedência.</p></li>
 </ul>

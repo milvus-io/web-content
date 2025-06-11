@@ -4,10 +4,11 @@ title: DISKANN
 summary: >-
   Em cenários de grande escala, em que os conjuntos de dados podem incluir
   biliões ou mesmo triliões de vectores, os métodos de indexação padrão na
-  memória (por exemplo, HNSW, IVF_FLAT) muitas vezes não conseguem acompanhar o
-  ritmo devido a limitações de memória. O DISKANN oferece uma abordagem baseada
-  em disco que aborda esses desafios, mantendo alta precisão e velocidade de
-  pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.
+  memória (por exemplo, HNSW, IVF_FLAT) não conseguem frequentemente acompanhar
+  o ritmo devido a limitações de memória. O DISKANN oferece uma abordagem
+  baseada em disco que aborda esses desafios, mantendo alta precisão e
+  velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM
+  disponível.
 ---
 <h1 id="DISKANN" class="common-anchor-header">DISKANN<button data-href="#DISKANN" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Em cenários de grande escala, onde os conjuntos de dados podem incluir biliões ou mesmo triliões de vectores, os métodos padrão de indexação na memória (por exemplo, <a href="/docs/pt/hnsw.md">HNSW</a>, <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a>) muitas vezes não conseguem acompanhar o ritmo devido a limitações de memória. <strong>O DISKANN</strong> oferece uma abordagem baseada em disco que aborda esses desafios, mantendo alta precisão e velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.</p>
+    </button></h1><p>Em cenários de grande escala, onde os conjuntos de dados podem incluir biliões ou mesmo triliões de vectores, os métodos de indexação padrão na memória (por exemplo, <a href="/docs/pt/hnsw.md">HNSW</a>, <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a>) muitas vezes não conseguem acompanhar o ritmo devido a limitações de memória. <strong>O DISKANN</strong> oferece uma abordagem baseada em disco que aborda esses desafios, mantendo alta precisão e velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>O DISKANN</strong> combina duas técnicas fundamentais para uma pesquisa vetorial eficiente:</p>
+    </button></h2><p><strong>O DISKANN</strong> combina duas técnicas-chave para uma pesquisa vetorial eficiente:</p>
 <ul>
 <li><p><strong>Gráfico Vamana</strong> - Um índice <strong>baseado em disco</strong> e <strong>em gráficos</strong> que liga pontos de dados (ou vectores) para uma navegação eficiente durante a pesquisa.</p></li>
 <li><p><strong>Quantização de produtos (PQ)</strong> - Um método de compressão <strong>na memória</strong> que reduz o tamanho dos vectores, permitindo cálculos rápidos de distância aproximada entre vectores.</p></li>
@@ -82,7 +83,7 @@ summary: >-
 <li><p><strong>Exploração de vizinhança:</strong> O algoritmo reúne potenciais candidatos a vizinhos (círculos a vermelho na figura) a partir das arestas do nó atual, utilizando códigos PQ na memória para aproximar as distâncias entre estes candidatos e o vetor de consulta. Estes potenciais candidatos a vizinhos são os nós diretamente ligados ao ponto de entrada selecionado através de arestas no gráfico Vamana.</p></li>
 <li><p><strong>Seleção de nós para o cálculo exato da distância:</strong> A partir dos resultados aproximados, um subconjunto dos vizinhos mais promissores (círculos a verde na figura) é selecionado para avaliações precisas da distância utilizando os seus vectores originais não comprimidos. Isto requer a leitura de dados do disco, o que pode ser demorado. O DISKANN utiliza dois parâmetros para controlar este delicado equilíbrio entre precisão e velocidade:</p>
 <ul>
-<li><p><code translate="no">beam_width_ratio</code>: Uma razão que controla a amplitude da pesquisa, determinando quantos vizinhos candidatos são selecionados em paralelo para explorar os seus vizinhos. Um <code translate="no">beam_width_ratio</code> maior resulta numa exploração mais ampla, potencialmente conduzindo a uma maior precisão, mas também aumentando o custo computacional e a E/S do disco. A largura do feixe, ou o número de nós selecionados, é determinada utilizando a fórmula: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
+<li><p><code translate="no">beam_width_ratio</code>: Uma ração que controla a amplitude da pesquisa, determinando quantos vizinhos candidatos são selecionados em paralelo para explorar os seus vizinhos. Um <code translate="no">beam_width_ratio</code> maior resulta numa exploração mais ampla, potencialmente conduzindo a uma maior precisão, mas também aumentando o custo computacional e a E/S do disco. A largura do feixe, ou o número de nós selecionados, é determinada utilizando a fórmula: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>: A proporção de memória atribuída para armazenar em cache os dados do disco frequentemente acedidos. Este armazenamento em cache ajuda a minimizar a E/S do disco, tornando as pesquisas repetidas mais rápidas, uma vez que os dados já estão na memória.</p></li>
 </ul>
 <p>Para saber mais sobre a afinação de parâmetros, consulte <a href="/docs/pt/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Configurações do DISKANN</a>.</p></li>
@@ -116,7 +117,7 @@ summary: >-
 </ol></li>
 <li><p><strong>Otimizar o armazenamento para DISKANN</strong></p></li>
 </ol>
-<p>Para garantir o melhor desempenho com o DISKANN, é recomendável armazenar os dados do Milvus num SSD NVMe rápido. Veja como fazer isso para implantações do Milvus Standalone e do Cluster:</p>
+<p>Para garantir o melhor desempenho com o DISKANN, é recomendável armazenar seus dados do Milvus em um SSD NVMe rápido. Veja como fazer isso para implantações do Milvus Standalone e do Cluster:</p>
 <ul>
 <li><p><strong>Milvus Standalone</strong></p>
 <ul>
@@ -151,7 +152,7 @@ summary: >-
     </button></h2><p>Os parâmetros do DISKANN podem ser configurados usando dois métodos principais:</p>
 <ul>
 <li><p><strong>Ficheiro de configuração Milvus:</strong> Ajuste os parâmetros DISKANN através do ficheiro de configuração Milvus. Este método é adequado para definir opções de configuração gerais para a sua instância Milvus.</p></li>
-<li><p><strong>Milvus SDK:</strong> Ajuste os parâmetros DISKANN usando o Milvus SDK durante a criação de índices ou operações de pesquisa. Isto permite um controlo mais granular e ajustes dinâmicos dos parâmetros com base em casos de utilização específicos.</p></li>
+<li><p><strong>Milvus SDK:</strong> Ajuste fino dos parâmetros DISKANN usando o Milvus SDK durante a criação de índices ou operações de pesquisa. Isto permite um controlo mais granular e ajustes dinâmicos dos parâmetros com base em casos de utilização específicos.</p></li>
 </ul>
 <div class="alert note">
 <p>A configuração efectuada pelo SDK substitui quaisquer definições definidas no ficheiro de configuração, oferecendo flexibilidade e controlo para aplicações e conjuntos de dados específicos.</p>

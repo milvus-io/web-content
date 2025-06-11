@@ -73,7 +73,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Konfigurationsdatei (empfohlen):</strong> Speichern Sie die Zugangsdaten in <code translate="no">milvus.yaml</code>, damit sie bei jedem Neustart und jedem Knoten automatisch übernommen werden.</p></li>
 <li><p><strong>Umgebungsvariablen:</strong> Injizieren Sie die Anmeldeinformationen zum Zeitpunkt der Bereitstellung - ideal für Docker Compose.</p></li>
 </ul>
-<p>Entscheiden Sie sich für eine der beiden Methoden: Die Konfigurationsdatei ist auf Bare-Metal- und VM-Systemen einfacher zu verwalten, während die Umgebungsvariablen für Container-Workflows geeignet sind.</p>
+<p>Entscheiden Sie sich für eine der beiden Methoden: Die Konfigurationsdatei ist auf Bare-Metal- und VM-Systemen einfacher zu pflegen, während die Umgebungsvariablen für Container-Workflows geeignet sind.</p>
 <div class="alert note">
 <p>Wenn ein Credential für denselben Provider sowohl in der Konfigurationsdatei als auch in einer Umgebungsvariablen vorhanden ist, verwendet Milvus immer den Wert in <code translate="no">milvus.yaml</code> und ignoriert die Umgebungsvariable.</p>
 </div>
@@ -176,7 +176,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Add-function-to-schema" class="common-anchor-header">Schritt 2: Funktion zum Schema hinzufügen</h3><p>Das Function-Modul in Milvus wandelt Rohdaten, die in einem Skalarfeld gespeichert sind, automatisch in Einbettungen um und speichert sie in dem explizit definierten Vektorfeld.</p>
 <p>Das folgende Beispiel fügt ein Funktionsmodul (<code translate="no">bedrk</code>) hinzu, das das Skalarfeld <code translate="no">&quot;document&quot;</code> in Einbettungen umwandelt und die resultierenden Vektoren in dem zuvor definierten Vektorfeld <code translate="no">&quot;dense&quot;</code> speichert.</p>
-<p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammlungsschema hinzu. Dadurch wird Milvus angewiesen, die angegebene Einbettungsfunktion zur Verarbeitung und Speicherung von Einbettungen aus Ihren Textdaten zu verwenden.</p>
+<p>Sobald Sie Ihre Einbettungsfunktion definiert haben, fügen Sie sie zu Ihrem Sammelschema hinzu. Dadurch wird Milvus angewiesen, die angegebene Einbettungsfunktion zur Verarbeitung und Speicherung von Einbettungen aus Ihren Textdaten zu verwenden.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for OpenAI provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;bedrk&quot;</span>,                                   <span class="hljs-comment"># Unique identifier for this embedding function</span>

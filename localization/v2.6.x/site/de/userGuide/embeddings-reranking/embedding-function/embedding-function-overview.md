@@ -2,17 +2,16 @@
 id: embedding-function-overview.md
 title: Überblick über die EinbettungsfunktionCompatible with Milvus 2.6.x
 summary: >-
-  Mit dem Function-Modul in Milvus können Sie Text-Rohdaten in
-  Vektoreinbettungen umwandeln, indem Sie automatisch externe Modellanbieter
-  (wie OpenAI, AWS Bedrock, Google Vertex AI usw.) aufrufen. Mit dem
-  Funktionsmodul müssen Sie sich nicht mehr manuell mit Einbettungs-APIs
-  verbinden - Milvus übernimmt den gesamten Prozess des Sendens von Anfragen an
-  Anbieter, des Empfangs von Einbettungen und des Speicherns in Ihren
-  Sammlungen. Für die semantische Suche müssen Sie nur die Rohdaten der Abfrage
-  bereitstellen, nicht aber einen Abfragevektor. Milvus generiert den
-  Abfragevektor mit demselben Modell, das Sie für die Aufnahme verwendet haben,
-  vergleicht ihn mit den gespeicherten Vektoren und gibt die relevantesten
-  Ergebnisse zurück.
+  Mit dem Function-Modul in Milvus können Sie Rohtextdaten in Vektoreinbettungen
+  umwandeln, indem Sie automatisch externe Modellanbieter (wie OpenAI, AWS
+  Bedrock, Google Vertex AI usw.) aufrufen. Mit dem Funktionsmodul müssen Sie
+  sich nicht mehr manuell mit Einbettungs-APIs verbinden - Milvus übernimmt den
+  gesamten Prozess des Sendens von Anfragen an Anbieter, des Empfangs von
+  Einbettungen und des Speicherns in Ihren Sammlungen. Für die semantische Suche
+  müssen Sie nur die Rohdaten der Abfrage bereitstellen, nicht aber einen
+  Abfragevektor. Milvus generiert den Abfragevektor mit demselben Modell, das
+  Sie für die Aufnahme verwendet haben, vergleicht ihn mit den gespeicherten
+  Vektoren und gibt die relevantesten Ergebnisse zurück.
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">Überblick über die Einbettungsfunktion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
@@ -385,7 +384,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Die Anzahl der Dimensionen für die Ausgabe-Embeddings. Bei den Modellen der dritten Generation von OpenAI können Sie den vollständigen Vektor kürzen, um Kosten und Latenzzeit zu reduzieren, ohne dass ein signifikanter Verlust an semantischen Informationen entsteht. Weitere Informationen finden Sie im <a href="https://openai.com/blog/new-embedding-models-and-api-updates">Blogbeitrag zur Ankündigung von OpenAI</a>. <strong>Hinweis:</strong> Wenn Sie die Vektordimension verkürzen, stellen Sie sicher, dass der in der <code translate="no">add_field</code> -Methode des Schemas für das Vektorfeld angegebene Wert <code translate="no">dim</code> mit der endgültigen Ausgabedimension Ihrer Einbettungsfunktion übereinstimmt.</p></td>
+     <td><p>Die Anzahl der Dimensionen für die Ausgabe-Embeddings. Bei den OpenAI-Modellen der dritten Generation können Sie den vollständigen Vektor kürzen, um Kosten und Latenzzeit zu reduzieren, ohne dass ein signifikanter Verlust an semantischen Informationen entsteht. Weitere Informationen finden Sie im <a href="https://openai.com/blog/new-embedding-models-and-api-updates">Blogbeitrag zur Ankündigung von OpenAI</a>. <strong>Hinweis:</strong> Wenn Sie die Vektordimension verkürzen, stellen Sie sicher, dass der in der <code translate="no">add_field</code> -Methode des Schemas für das Vektorfeld angegebene Wert <code translate="no">dim</code> mit der endgültigen Ausgabedimension Ihrer Einbettungsfunktion übereinstimmt.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -424,7 +423,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Schritt 6: Vektorsuche durchführen</h3><p>Nach dem Einfügen der Daten führen Sie eine semantische Suche mit dem Rohtext der Abfrage durch. Milvus wandelt Ihre Abfrage automatisch in einen Einbettungsvektor um, sucht relevante Dokumente auf der Grundlage der Ähnlichkeit und gibt die am besten übereinstimmenden Ergebnisse zurück.</p>
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Schritt 6: Vektorsuche durchführen</h3><p>Führen Sie nach dem Einfügen der Daten eine semantische Suche mit dem Rohtext der Abfrage durch. Milvus wandelt Ihre Abfrage automatisch in einen Einbettungsvektor um, sucht relevante Dokumente auf der Grundlage der Ähnlichkeit und gibt die am besten übereinstimmenden Ergebnisse zurück.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -439,4 +438,4 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Informationen zu Such- und Abfrageoperationen finden Sie unter <a href="/docs/de/single-vector-search.md">Grundlegende Vektorsuche</a> und <a href="/docs/de/get-and-scalar-query.md">-abfrage</a>.</p>
+<p>Weitere Informationen über Such- und Abfrageoperationen finden Sie unter <a href="/docs/de/single-vector-search.md">Grundlegende Vektorsuche</a> und <a href="/docs/de/get-and-scalar-query.md">-abfrage</a>.</p>

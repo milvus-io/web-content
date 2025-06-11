@@ -130,7 +130,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>在建立索引時使用 k-means 演算法建立的叢集數目。</p></td>
+     <td><p>在建立索引時使用 k-means 演算法建立的叢集數。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 65536]</p>
 <p><strong>預設值</strong>：<code translate="no">128</code></p></td>
      <td><p>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善回復率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。 在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</p></td>
@@ -149,7 +149,7 @@ res = MilvusClient.search(
      <td><p>用來以壓縮形式表示每個子向量中心點索引的位元數。每個編碼本將包含 $2^{textit{nbits}}$ 的中心點。例如，如果<code translate="no">nbits</code> 設定為 8，則每個子向量將由 8 位元的 centroid 索引表示。如此一來，該子向量的編碼簿中就有 2^8$ (256) 個可能的中心點。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 64]</p>
 <p><strong>預設值</strong>：<code translate="no">8</code></p></td>
-     <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼簿，可能會導致原始向量的表示更精確。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
+     <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼本，可能會導致原始向量的表示更精確。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -161,7 +161,7 @@ res = MilvusClient.search(
 </ul></td>
      <td><p><strong>類型</strong>：字串<strong>範圍</strong>：[<code translate="no">"true"</code>,<code translate="no">"false"</code>]</p>
 <p><strong>預設值</strong>：<code translate="no">"false"</code></p></td>
-     <td><p>將其設定為<code translate="no">"true"</code> ，可透過精煉搜尋結果提高召回率，但會使用更多 GPU 記憶體。設定為<code translate="no">"false"</code> 則可節省 GPU 記憶體。</p></td>
+     <td><p>將其設定為<code translate="no">"true"</code> 會透過精煉搜尋結果來增強召回能力，但會使用更多 GPU 記憶體。設定為<code translate="no">"false"</code> 則可節省 GPU 記憶體。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/gpu-ivf-pq.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>

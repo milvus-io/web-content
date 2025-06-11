@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>제품 목록</p></td>
      <td><p>목표 근처에 가격이 책정된 품목</p></td>
-     <td><p>가격이 목표에서 벗어남에 따라 관련성 점진적 감소</p></td>
+     <td><p>가격이 목표에서 벗어남에 따라 관련성 감소 완만하게 감소</p></td>
    </tr>
    <tr>
      <td><p>전문가 매칭</p></td>
@@ -129,7 +129,7 @@ beta: Milvus 2.6.x
 <li><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2σ22\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">2σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span></span></span></span></span></span></span></span> 2로 나누고, 이는 스케일 및 감쇠 매개변수에서 계산됩니다.</p></li>
 <li><p>음수 지수를 취하면 0과 1 사이의 값을 얻을 수 있습니다: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo>(</mo><mtext>-값</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exp(-\text{value})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mord">(</span><span class="mord text"><span class="mord">-값</span></span><span class="mclose">)</span></span></span></span></p></li>
 </ol>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">σ2\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2 계산은 스케일 및 감쇠 매개변수를 가우스 분포의 표준편차 제곱으로 변환합니다. 이것이 함수에 특징적인 종 모양을 부여합니다.</p>
+<p> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">σ2\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2 계산은 스케일 및 감쇠 매개변수를 가우스 분포의 표준편차 제곱으로 변환합니다. 이것이 함수에 특징적인 종 모양을 부여합니다.</p>
 <h2 id="Use-Gaussian-decay" class="common-anchor-header">가우스 감쇠 사용<button data-href="#Use-Gaussian-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

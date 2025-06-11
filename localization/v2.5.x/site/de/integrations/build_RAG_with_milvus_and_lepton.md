@@ -53,7 +53,7 @@ title: RAG mit Milvus und Lepton AI aufbauen
 
 os.environ[<span class="hljs-string">&quot;LEPTONAI_TOKEN&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-data" class="common-anchor-header">Bereiten Sie die Daten vor</h3><p>Wir verwenden die FAQ-Seiten aus der <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus-Dokumentation 2.4.x</a> als privates Wissen in unserer RAG, was eine gute Datenquelle für eine einfache RAG-Pipeline ist.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Bereiten Sie die Daten vor</h3><p>Wir verwenden die FAQ-Seiten aus der <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus-Dokumentation 2.4.x</a> als privates Wissen in unserem RAG, was eine gute Datenquelle für eine einfache RAG-Pipeline ist.</p>
 <p>Laden Sie die Zip-Datei herunter und entpacken Sie die Dokumente in den Ordner <code translate="no">milvus_docs</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>

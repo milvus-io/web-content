@@ -240,4 +240,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted data in Milvus, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental logs. Milvus supports multiple object storage backends such as MinIO, AWS S3, Google Cloud Storage, Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage (COS). Metadata are generated within Milvus and stored in etcd.
 </code></pre>
-<p>Génial ! Nous avons réussi à construire un pipeline RAG avec Milvus et Lepton AI.</p>
+<p>C'est super ! Nous avons réussi à construire un pipeline RAG avec Milvus et Lepton AI.</p>

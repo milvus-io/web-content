@@ -53,7 +53,7 @@ beta: Milvus 2.6.x
      <td><p>BAAI/bge-large-ja-v1.5</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>BGE (BAAI General Embedding)シリーズに含まれる大規模英語テキスト埋め込みモデル。</p></td>
+     <td><p>BGE (BAAI General Embedding)シリーズに含まれる大規模な英語テキスト埋め込みモデル。</p></td>
    </tr>
    <tr>
      <td><p>netease-youdao/bce-embedding-base_v1</p></td>
@@ -109,7 +109,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>APIキーをここに記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
+<p>ここにAPIキーを記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
 <li><p><strong>Milvusに、サービス呼び出しに使用するキーを知らせる。</strong></p>
 <p>同じファイルで、SiliconFlow プロバイダに使用するラベルを指定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
@@ -119,7 +119,7 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.siliconflow.cn/v1/embeddings   # (optional) custom endpoint</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、MilvusがOpenAIのembeddingsエンドポイントに送信するすべてのリクエストに特定のキーがバインドされます。</p></li>
+<p>これにより、MilvusがOpenAIのエンベッディングエンドポイントに送信するすべてのリクエストに特定のキーがバインドされます。</p></li>
 </ol>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">オプション 2: 環境変数</h3><p>Docker ComposeでMilvusを実行し、ファイルやイメージから秘密を守りたい場合は、この方法を使用してください。</p>
 <p>Milvus は<code translate="no">milvus.yaml</code> にプロバイダのキーが見つからない場合のみ、環境変数にフォールバックします。</p>
@@ -189,7 +189,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">ステップ 2: スキーマへの埋め込み関数の追加</h3><p>MilvusのFunctionモジュールは、スカラーフィールドに格納された生データを自動的に埋め込みデータに変換し、明示的に定義されたベクトルフィールドに格納します。</p>
-<p>下の例では、スカラーフィールド<code translate="no">&quot;document&quot;</code> をエンベッディングに変換する Function モジュール (<code translate="no">siliconflow_embedding</code>) を追加し、その結果のベクトルを先に定義した<code translate="no">&quot;dense&quot;</code> ベクトルフィールドに格納しています。</p>
+<p>下の例では、スカラーフィールド<code translate="no">&quot;document&quot;</code> をエンベッディングに変換する Function モジュール (<code translate="no">siliconflow_embedding</code>) を追加し、結果のベクトルを先に定義した<code translate="no">&quot;dense&quot;</code> ベクトルフィールドに格納しています。</p>
 <p>埋め込み関数を定義したら、コレクションスキーマに追加します。これにより、Milvusは指定された埋め込み関数を使用して、テキストデータの埋め込みを処理し、格納するようになります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>
 text_embedding_function = Function(

@@ -92,7 +92,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>:用來計算向量間距離的方法。支援的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
 <li><p><code translate="no">params</code>:建立索引的附加設定選項。</p>
 <ul>
-<li><p><code translate="no">M</code>:每個節點可以連線的最大鄰居數量。</p></li>
+<li><p><code translate="no">M</code>:每個節點可以連線的最大鄰居數。</p></li>
 <li><p><code translate="no">efConstruction</code>:索引建構期間考慮連接的候選鄰居數量。</p></li>
 </ul>
 <p>若要瞭解<code translate="no">HNSW</code> 索引可用的更多建置參數，請參閱<a href="/docs/zh-hant/hnsw.md#Index-building-params">索引建置參數</a>。</p></li>

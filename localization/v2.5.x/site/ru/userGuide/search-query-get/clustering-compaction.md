@@ -7,7 +7,6 @@ summary: >-
   понять, что такое уплотнение кластеров и как эта функция может повысить
   производительность поиска.
 ---
-
 <h1 id="Clustering-Compaction" class="common-anchor-header">Кластерное уплотнение<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +43,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Без уплотнения кластеризации</span> </span></p>
-<p>Если Milvus может распределить сущности между сегментами на основе значений в определенном поле, область поиска может быть ограничена одним сегментом, что повышает производительность поиска.</p>
+<p>Если Milvus может распределить сущности между сегментами на основе значений в определенном поле, область поиска может быть ограничена в пределах одного сегмента, что повышает производительность поиска.</p>
 <p><strong>Clustering Compaction</strong> - это функция в Milvus, которая перераспределяет сущности между сегментами в коллекции на основе значений в скалярном поле. Чтобы включить эту функцию, сначала нужно выбрать скалярное поле в качестве <strong>ключа кластеризации</strong>. Это позволит Milvus перераспределять сущности в сегмент, если значения их ключа кластеризации попадают в определенный диапазон. Когда вы запускаете уплотнение кластеризации, Milvus генерирует/обновляет глобальный индекс <strong>PartitionStats</strong>, который записывает отношения сопоставления между сегментами и значениями ключей кластеризации.</p>
 <p>
   
@@ -80,16 +79,15 @@ summary: >-
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
 
 <span class="hljs-attr">datanode:</span>
-<span class="hljs-attr">clusteringCompaction:</span>
-<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
-<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+  <span class="hljs-attr">clusteringCompaction:</span>
+    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
+    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
-
 <table>
    <tr>
      <th><p>Конфигурация Элемент</p></th>
@@ -174,8 +172,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -185,11 +183,10 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-schema=schema
+    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+    schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -290,10 +287,9 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-job_id=job_id,
+    job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;

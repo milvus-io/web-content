@@ -56,7 +56,7 @@ summary: IVF_FLAT 索引是一種索引演算法，可提高浮點向量的搜�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>IVF FLAT 工作流程 2</span> </span></p>
-<p>透過增加<code translate="no">nprobe</code> 的值，您可以在搜尋時包含更多的分區，這有助於確保不會遺漏與查詢最接近的嵌入，即使它位於不同的分區中。不過，這樣做的代價是增加搜尋時間，因為需要評估更多的候選項目。有關索引參數調整的詳細資訊，請參閱<a href="/docs/zh-hant/ivf-flat.md#Index-params">索引參數</a>。</p>
+<p>透過增加<code translate="no">nprobe</code> 的值，您可以在搜尋時包含更多的分區，這有助於確保不會遺漏與查詢最接近的嵌入，即使它位於不同的分區中。但是，這樣做的代價是增加搜尋時間，因為需要評估更多的候選項目。有關索引參數調整的詳細資訊，請參閱<a href="/docs/zh-hant/ivf-flat.md#Index-params">索引參數</a>。</p>
 <h2 id="Build-index" class="common-anchor-header">建立索引<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,7 +178,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>搜尋候選集的簇數。較高的值允許搜尋更多的叢集，藉由擴大搜尋範圍來改善召回率，但代價是增加查詢延遲。</p></td>
+     <td><p>搜尋候選集的簇數。較高的值允許搜尋更多的叢集，藉由擴大搜尋範圍來提高召回率，但代價是增加查詢延遲。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1,<em>nlist］</em></p><p><strong>預設值</strong>：<code translate="no">8</code></p></td>
      <td><p>增加此值可提高召回率，但可能會減慢搜尋速度。設定<code translate="no">nprobe</code> 與<code translate="no">nlist</code> 成比例，以平衡速度與精確度。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[1, nlist]。</p></td>
    </tr>

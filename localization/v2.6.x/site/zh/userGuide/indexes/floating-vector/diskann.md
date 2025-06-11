@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在大规模场景中，数据集可能包括数十亿甚至数万亿个向量，标准的内存索引方法（如<a href="/docs/zh/hnsw.md">HNSW</a>、<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>）往往因内存限制而跟不上步伐。<strong>DISKANN</strong>提供了一种基于磁盘的方法，可以在数据集大小超过可用 RAM 时保持较高的搜索精度和速度，从而应对这些挑战。</p>
+    </button></h1><p>在大规模场景中，数据集可能包括数十亿甚至数万亿向量，标准的内存索引方法（如<a href="/docs/zh/hnsw.md">HNSW</a>、<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>）往往会因内存限制而跟不上步伐。<strong>DISKANN</strong>提供了一种基于磁盘的方法，可以在数据集大小超过可用 RAM 时保持较高的搜索精度和速度，从而应对这些挑战。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,15 +51,15 @@ summary: >-
 <li><p><strong>初始随机连接：</strong>每个数据点（向量）在图中表示为一个节点。这些节点最初是随机连接的，形成一个密集的网络。通常情况下，一个节点开始时会有大约 500 条边（或连接），以实现广泛的连接。</p></li>
 <li><p><strong>细化以提高效率：</strong>初始随机图需要经过优化过程，以提高搜索效率。这包括两个关键步骤：</p>
 <ul>
-<li><p><strong>修剪多余的边：</strong>算法会根据节点之间的距离丢弃不必要的连接。这一步优先处理质量较高的边。</p>
+<li><p><strong>修剪多余的边：</strong>算法根据节点之间的距离丢弃不必要的连接。这一步优先处理质量较高的边。</p>
 <p><code translate="no">max_degree</code> 参数限制了每个节点的最大边数。<code translate="no">max_degree</code> 越高，图的密度越大，有可能找到更多相关的邻居（召回率更高），但也会增加内存使用量和搜索时间。</p></li>
 <li><p><strong>添加战略捷径：</strong>Vamana 引入了长距离边，将向量空间中相距甚远的数据点连接起来。这些捷径允许搜索在图中快速跳转，绕过中间节点，大大加快了导航速度。</p>
-<p><code translate="no">search_list_size</code> 参数决定了图细化过程的广度。较高的<code translate="no">search_list_size</code> 可以在构建过程中扩展对邻接节点的搜索，从而提高最终准确率，但会增加索引构建时间。</p></li>
+<p><code translate="no">search_list_size</code> 参数决定了图细化过程的广度。较高的<code translate="no">search_list_size</code> 可以在构建过程中扩展对邻接节点的搜索，从而提高最终准确性，但会增加索引构建时间。</p></li>
 </ul></li>
 </ol>
 <p>要了解有关参数调整的更多信息，请参阅<a href="/docs/zh/diskann.md#diskann-params">DISKANN params</a>。</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN 使用<strong>PQ</strong>将高维向量压缩成较小的表示<strong>（PQ 代码</strong>），并将其存储在内存中，以便快速计算近似距离。</p>
-<p><code translate="no">pq_code_budget_gb_ratio</code> 参数用于管理存储这些 PQ 代码的内存占用。它表示向量总大小（千兆字节）与分配用于存储 PQ 代码的空间之间的比率。您可以通过以下公式计算实际的 PQ 代码预算（以千兆字节为单位）：</p>
+<p><code translate="no">pq_code_budget_gb_ratio</code> 参数用于管理存储这些 PQ 代码的内存占用。它表示向量的总大小（千兆字节）与分配用于存储 PQ 代码的空间之间的比率。您可以通过以下公式计算实际的 PQ 代码预算（以千兆字节为单位）：</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
 <button class="copy-code-btn"></button></code></pre>
 <p>其中</p>
@@ -74,7 +74,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
-<li><p><strong>查询和入口点：</strong>提供一个查询向量以查找其最近的邻居。DISKANN 从 Vamana 图中选定的入口点开始，通常是数据集全球中心点附近的一个节点。全局中心点代表了所有向量的平均值，这有助于最小化图中的遍历距离，从而找到所需的邻居。</p></li>
+<li><p><strong>查询和入口点：</strong>提供一个查询向量以定位其最近的邻居。DISKANN 从 Vamana 图中选定的入口点开始，通常是数据集全球中心点附近的一个节点。全局中心点代表所有向量的平均值，这有助于最小化图中的遍历距离，从而找到所需的邻居。</p></li>
 <li><p><strong>邻居探索：</strong>该算法从当前节点的边缘收集潜在的候选邻居（图中红色圆圈），利用内存中的 PQ 代码来近似这些候选邻居与查询向量之间的距离。这些潜在的候选邻居是通过 Vamana 图中的边直接连接到所选入口点的节点。</p></li>
 <li><p><strong>选择节点进行精确距离计算：</strong>从近似结果中，选择最有希望的邻居（图中绿色圆圈）子集，使用它们未经压缩的原始向量进行精确距离评估。这需要从磁盘中读取数据，非常耗时。DISKANN 使用两个参数来控制精确度和速度之间的微妙平衡：</p>
 <ul>
@@ -152,7 +152,7 @@ summary: >-
 <div class="alert note">
 <p>SDK 所做的配置会覆盖配置文件中定义的任何设置，从而为特定应用和数据集提供灵活性和控制。</p>
 </div>
-<h3 id="Milvus-configuration-file" class="common-anchor-header">Milvus 配置文件</h3><p>以下是如何在<code translate="no">milvus.yaml</code> 文件中设置 DISKANN 参数的示例：</p>
+<h3 id="Milvus-configuration-file" class="common-anchor-header">Milvus 配置文件</h3><p>下面是如何在<code translate="no">milvus.yaml</code> 文件中设置 DISKANN 参数的示例：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
   <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># When enable this configuration, the index parameters defined following will be automatically populated as index parameters, without requiring user input.</span>
   <span class="hljs-attr">DISKANN:</span>
@@ -165,7 +165,7 @@ summary: >-
       <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="SDK-configuration" class="common-anchor-header">SDK 配置</h3><p>以下是如何使用 Milvus SDK 设置 DISKANN 参数的示例。</p>
-<h4 id="Build" class="common-anchor-header">构建</h4><p>要在 Milvus 中建立一个向量场的<code translate="no">IVF_FLAT</code> 索引，请使用<code translate="no">add_index()</code> 方法，为索引指定<code translate="no">index_type</code>,<code translate="no">metric_type</code>, 以及附加参数。</p>
+<h4 id="Build" class="common-anchor-header">构建</h4><p>要在 Milvus 中建立一个向量场的<code translate="no">IVF_FLAT</code> 索引，请使用<code translate="no">add_index()</code> 方法，为索引指定<code translate="no">index_type</code>,<code translate="no">metric_type</code>, 和附加参数。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -276,6 +276,6 @@ res = MilvusClient.search(
      <td><p>通过确定相对于可用 CPU 内核数的最大并行磁盘 I/O 请求数，控制搜索过程中的并行程度。</p></td>
      <td><p><strong>类型</strong>：浮点<strong>范围</strong>：[1，max(128 / CPU 核数，16)</p>
 <p><strong>默认值</strong>：<code translate="no">4.0</code></p></td>
-     <td><p>数值越大，并行性越强，这可以加快使用强大 CPU 和 SSD 的系统的搜索速度。在大多数情况下，我们建议在此范围内设置值：[1.0, 4.0].</p></td>
+     <td><p>数值越大，并行性越高，这可以加快使用强大 CPU 和 SSD 的系统的搜索速度。在大多数情况下，我们建议在此范围内设置值：[1.0, 4.0].</p></td>
    </tr>
 </table>

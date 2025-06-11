@@ -37,10 +37,10 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>IVF_RABITQ는</strong> 효율적인 벡터 검색과 저장을 위해 두 가지 강력한 기술을 결합한 <strong>RaBitQ 양자화 역파일(Inverted File)</strong>의 약자입니다.</p>
+    </button></h2><p><strong>IVF_RABITQ는</strong> 효율적인 벡터 검색과 저장을 위해 두 가지 강력한 기술을 결합한 <strong>RaBitQ 양자화를 사용한 역파일(Inverted File)</strong>의 약자입니다.</p>
 <h3 id="IVF" class="common-anchor-header">IVF</h3><p><strong>반전 파일(IVF)은</strong> <a href="https://en.wikipedia.org/wiki/K-means_clustering">K-평균 클러스터링을</a> 사용하여 벡터 공간을 관리 가능한 영역으로 구성합니다. 각 클러스터는 중심점으로 표시되며, 중심점은 해당 클러스터 내의 벡터에 대한 기준점 역할을 합니다. 이 클러스터링 접근 방식은 쿼리 처리 중에 알고리즘이 가장 관련성이 높은 클러스터에만 집중할 수 있도록 하여 검색 공간을 줄여줍니다.</p>
 <p>IVF 기술 세부 사항에 대한 자세한 내용은 <a href="/docs/ko/ivf-flat.md">IVF_FLAT을</a> 참조하세요.</p>
-<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQ는</strong> 이론적으로 보장된 최첨단 이진 양자화 방법으로, Jianyang Gao와 Cheng Long의 연구 논문 "RaBitQ: 근사 최인접 이웃 검색을 위한 이론적 오차 한계를 가진 고차원 벡터 양자화"에서 소개된 바 있습니다.</p>
+<h3 id="RaBitQ" class="common-anchor-header">RaBitQ</h3><p><strong>RaBitQ는</strong> 이론적으로 보장되는 최첨단 이진 양자화 방법으로, Jianyang Gao와 Cheng Long의 연구 논문 "RaBitQ: 근사 최인접 이웃 검색을 위한 이론적 오차 한계를 가진 고차원 벡터 양자화"에 소개되어 있습니다.</p>
 <p>RaBitQ는 몇 가지 혁신적인 개념을 소개합니다:</p>
 <p><strong>각도 정보 인코딩</strong>: 기존의 공간 인코딩과 달리, RaBitQ는 벡터 정규화를 통해 각도 정보를 인코딩합니다. IVF_RABITQ에서 데이터 벡터는 가장 가까운 IVF 중심점에 대해 정규화되어 양자화 프로세스의 정밀도를 향상시킵니다.</p>
 <p><strong>이론적 기반</strong>: 핵심 거리 근사화 공식은 다음과 같습니다:</p>

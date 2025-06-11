@@ -105,7 +105,7 @@ client.create_index(
 <li><p><code translate="no">json_path</code><strong>:</strong>インデックスを作成するネストされたキーを指定します。</p></li>
 <li><p><code translate="no">json_cast_type</code><strong>:</strong>抽出されたJSON値がキャストされるデータ型（例えば、<code translate="no">&quot;varchar&quot;</code> 、<code translate="no">&quot;double&quot;</code> 、<code translate="no">&quot;bool&quot;</code> ）を定義します。</p></li>
 </ul>
-<p>例えば、<code translate="no">metadata</code> という名前のJSONフィールドが以下のような構造になっているとする：</p>
+<p>例えば、以下の構造を持つ<code translate="no">metadata</code> というJSONフィールドを考える：</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;metadata&quot;: {
     &quot;product_info&quot;: {
@@ -214,6 +214,6 @@ index_params.add_index(
 </ul></li>
 <li><p><strong>データの完全性</strong>：</p>
 <ul>
-<li>Milvusは指定されたキャスティングを超えるJSONキーの解析や変換を行いません。ソースデータに一貫性がない場合（例えば、<code translate="no">&quot;k&quot;</code> キーに文字列を格納する行と数値を格納する行がある）、インデックスが作成されない行があります。</li>
+<li>Milvusは、指定されたキャスティングを超えるJSONキーの解析や変換を行いません。ソースデータに一貫性がない場合（例えば、<code translate="no">&quot;k&quot;</code> キーに文字列を格納する行と数値を格納する行がある）、インデックスが作成されない行があります。</li>
 </ul></li>
 </ul>

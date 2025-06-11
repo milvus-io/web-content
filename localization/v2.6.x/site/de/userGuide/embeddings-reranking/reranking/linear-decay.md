@@ -112,7 +112,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">decay</code> (0.5): Die Punktzahl in der Skalendistanz - dieser Parameter steuert die Geschwindigkeit der Abnahme der Relevanz.</p></li>
 <li><p><code translate="no">scale</code> (10 Tage): Der Zeitraum, in dem die Relevanz auf den Abklingwert fällt - bei Ereignissen, die 10 Tage entfernt sind, wird die Relevanzbewertung halbiert (0,5).</p></li>
 </ul>
-<p>Wie Sie der geradlinigen Kurve entnehmen können, haben Ereignisse, die mehr als 16 Tage entfernt sind, genau null Relevanz und werden in den Suchergebnissen überhaupt nicht angezeigt. Damit wird eine klare Grenze gezogen, die sicherstellt, dass die Nutzer nur relevante Veranstaltungen innerhalb eines bestimmten Zeitfensters sehen.</p>
+<p>Wie Sie aus der geradlinigen Kurve ersehen können, haben Ereignisse, die mehr als 16 Tage entfernt sind, genau null Relevanz und werden in den Suchergebnissen überhaupt nicht mehr angezeigt. Damit wird eine klare Grenze gezogen, die sicherstellt, dass die Nutzer nur relevante Veranstaltungen innerhalb eines bestimmten Zeitfensters sehen.</p>
 <p>Dieses Verhalten spiegelt wider, wie die Veranstaltungsplanung in der Regel funktioniert: Unmittelbar bevorstehende Veranstaltungen sind am relevantesten, Veranstaltungen in den kommenden Wochen haben eine abnehmende Bedeutung, und Veranstaltungen, die zu weit in der Zukunft liegen (oder bereits vergangen sind), sollten überhaupt nicht angezeigt werden.</p>
 <h2 id="Formula" class="common-anchor-header">Formel<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"

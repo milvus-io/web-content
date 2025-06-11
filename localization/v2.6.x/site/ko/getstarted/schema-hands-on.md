@@ -3,7 +3,7 @@ id: schema-hands-on.md
 title: 검색을 위한 데이터 모델 설계
 summary: >-
   검색 엔진이라고도 하는 정보 검색 시스템은 검색 증강 생성(RAG), 시각적 검색, 제품 추천과 같은 다양한 AI 애플리케이션에
-  필수적입니다. 이러한 시스템의 핵심은 정보를 구성, 색인화 및 검색하기 위해 신중하게 설계된 데이터 모델입니다.
+  필수적입니다. 이러한 시스템의 핵심은 정보를 구성, 색인화 및 검색하기 위해 세심하게 설계된 데이터 모델입니다.
 ---
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">검색을 위한 데이터 모델 설계<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"

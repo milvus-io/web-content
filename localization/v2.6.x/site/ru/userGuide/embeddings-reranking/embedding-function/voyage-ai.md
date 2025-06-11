@@ -126,7 +126,7 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>Размещение ключей API здесь делает их постоянными при перезагрузке и позволяет вам переключаться между ключами, просто меняя метку.</p></li>
 <li><p><strong>Укажите Milvus, какой ключ использовать для вызовов служб</strong></p>
-<p>В том же файле укажите провайдеру Voyage AI на метку, которую вы хотите использовать.</p>
+<p>В том же файле укажите провайдеру Voyage AI на метку, которую он должен использовать.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>

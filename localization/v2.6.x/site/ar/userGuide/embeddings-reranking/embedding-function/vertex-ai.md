@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
 <p>يدعم Vertex AI العديد من نماذج التضمين لحالات استخدام مختلفة:</p>
 <ul>
 <li><p>تضمين النص-005 (أحدث نموذج تضمين نصي)</p></li>
-<li><p>تضمين النص متعدد اللغات-تضمين النص-002 (أحدث نموذج تضمين نص متعدد اللغات)</p></li>
+<li><p>تضمين نص متعدد اللغات-تضمين النص-002 (أحدث نموذج تضمين نص متعدد اللغات)</p></li>
 </ul>
 <p>للحصول على التفاصيل، ارجع إلى <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">مرجع نماذج تضمين النص Vertex AI</a>.</p>
 <h2 id="Vertex-AI-deployment" class="common-anchor-header">نشر فيرتكس للذكاء الاصطناعي<button data-href="#Vertex-AI-deployment" class="anchor-icon" translate="no">
@@ -233,7 +233,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>بُعد متجهات تضمين الإخراج. يقبل الأعداد الصحيحة بين 1 و768. <strong>ملاحظة:</strong> إذا تم تحديدها، تأكد من أن بُعد حقل المتجه في المخطط يطابق هذه القيمة.</p></td>
+     <td><p>بُعد ناقلات تضمين الإخراج. يقبل الأعداد الصحيحة بين 1 و768. <strong>ملاحظة:</strong> في حالة تحديدها، تأكد من أن بُعد حقل المتجه في المخطط يطابق هذه القيمة.</p></td>
      <td><p>لا يوجد</p></td>
      <td><p><code translate="no">768</code></p></td>
    </tr>

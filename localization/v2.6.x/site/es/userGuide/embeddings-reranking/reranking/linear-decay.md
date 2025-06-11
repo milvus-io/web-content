@@ -60,7 +60,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Listados de eventos</p></td>
      <td><p>Plataformas de entradas para conciertos</p></td>
-     <td><p>Crea un límite claro para eventos demasiado lejanos en el tiempo</p></td>
+     <td><p>Crea un límite claro para los eventos demasiado lejanos en el tiempo</p></td>
    </tr>
    <tr>
      <td><p>Ofertas por tiempo limitado</p></td>

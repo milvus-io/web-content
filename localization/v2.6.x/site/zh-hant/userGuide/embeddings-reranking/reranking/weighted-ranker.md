@@ -3,7 +3,7 @@ id: weighted-ranker.md
 title: 加權排名器
 summary: >-
   Weighted Ranker
-  可透過為每個搜尋路徑指定不同的重要性權重，智慧地結合多個搜尋路徑的結果並排定優先順序。與技藝高超的廚師平衡多種食材以創造完美菜餚的方式類似，Weighted
+  可透過為每個搜尋路徑指定不同的重要性權重，智慧地結合多個搜尋路徑的結果並排定優先順序。與技藝高超的廚師平衡多種材料以創造完美菜餚的方式類似，Weighted
   Ranker
   平衡不同的搜尋結果，以提供最相關的結合結果。當您在多個向量領域或模式中進行搜尋時，某些領域對最終排名的貢獻應該比其他領域更大，因此這種方法非常理想。
 ---
@@ -80,7 +80,7 @@ summary: >-
     </button></h2><p>WeightedRanker 策略的主要工作流程如下：</p>
 <ol>
 <li><p><strong>收集搜尋分數</strong>：收集向量搜尋每條路徑的結果和分數 (score_1, score_2)。</p></li>
-<li><p><strong>Score Normalization（分數規範化</strong>）：每次搜尋可能會使用不同的相似度指標，造成不同的分數分佈。例如，使用 Inner Product (IP) 作為相似度類型可能會產生 [-∞,+∞] 的分數範圍，而使用 Euclidean distance (L2) 則會產生 [0,+∞] 的分數範圍。由於不同搜尋的分數範圍各異，無法直接比較，因此有必要將每條搜尋路徑的分數歸一化。一般而言，<code translate="no">arctan</code> 函數會將分數轉換成 [0, 1] 之間的範圍 (score_1_normalized, score_2_normalized)。分數越接近 1 表示相似度越高。</p></li>
+<li><p><strong>Score Normalization（分數規範化</strong>）：每次搜尋可能會使用不同的相似度指標，造成不同的分數分佈。例如，使用 Inner Product (IP) 作為相似度類型可能會產生 [-∞,+∞] 的分數範圍，而使用 Euclidean distance (L2) 則會產生 [0,+∞] 的分數範圍。由於不同搜尋的分數範圍各異，無法直接比較，因此有必要將各搜尋路徑的分數歸一化。一般而言，<code translate="no">arctan</code> 函數會將分數轉換成 [0, 1] 之間的範圍 (score_1_normalized, score_2_normalized)。分數越接近 1 表示相似度越高。</p></li>
 <li><p><strong>指定權重</strong>：根據分配給不同向量領域的重要性，將權重 (<strong>wi</strong>) 分配給歸一化的分數 (score_1_normalized, score_2_normalized)。每條路徑的權重範圍應該在 [0,1] 之間。所得的加權分數為 score_1_weighted 及 score_2_weighted。</p></li>
 <li><p><strong>合併分數</strong>：將加權得分 (score_1_weighted, score_2_weighted) 由高到低排序，產生最後的得分集 (score_final)。</p></li>
 </ol>
@@ -321,7 +321,7 @@ rerank = Function(
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>是</p></td>
-     <td><p>指定要使用的排名方法。必須設定為<code translate="no">weighted</code> 才能使用 Weighted Ranker。</p></td>
+     <td><p>指定要使用的排序方法。必須設定為<code translate="no">weighted</code> 才能使用 Weighted Ranker。</p></td>
      <td><p><code translate="no">"weighted"</code></p></td>
    </tr>
    <tr>

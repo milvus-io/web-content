@@ -5,7 +5,6 @@ summary: >-
   클러스터링 압축은 대규모 컬렉션에서 검색 성능을 개선하고 비용을 절감하기 위해 고안되었습니다. 이 가이드는 클러스터링 압축을 이해하고 이
   기능을 통해 검색 성능을 개선하는 방법을 이해하는 데 도움이 됩니다.
 ---
-
 <h1 id="Clustering-Compaction" class="common-anchor-header">클러스터링 압축<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +47,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>클러스터링 압축</span> </span></p>
-<p>Milvus는 <strong>PartitionStats를</strong> 참조로 사용하여 클러스터링 키 값이 포함된 검색/쿼리 요청을 수신하면 관련 없는 데이터를 정리하고 해당 값에 매핑되는 세그먼트 내에서 검색 범위를 제한하여 검색 성능을 개선할 수 있습니다. 성능 향상에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/clustering-compaction.md#Benchmark-Test">벤치마크 테스트를</a> 참조하세요.</p>
+<p>Milvus는 <strong>PartitionStats를</strong> 참조로 사용하여 클러스터링 키 값을 포함하는 검색/쿼리 요청을 수신하면 관련 없는 데이터를 정리하고 해당 값에 매핑되는 세그먼트 내에서 검색 범위를 제한하여 검색 성능을 개선할 수 있습니다. 성능 향상에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/clustering-compaction.md#Benchmark-Test">벤치마크 테스트를</a> 참조하세요.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">클러스터링 압축 사용<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,16 +77,15 @@ summary: >-
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
 
 <span class="hljs-attr">datanode:</span>
-<span class="hljs-attr">clusteringCompaction:</span>
-<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
-<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+  <span class="hljs-attr">clusteringCompaction:</span>
+    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
+    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
-
 <table>
    <tr>
      <th><p>구성 항목</p></th>
@@ -172,8 +170,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -183,11 +181,10 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-schema=schema
+    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+    schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -288,10 +285,9 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-job_id=job_id,
+    job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;
@@ -405,7 +401,7 @@ System.out.println(stateResp.getState());
      <td><p>431.41</p></td>
    </tr>
 </table>
-<p>검색 필터에서 검색 범위가 좁아질수록 프룬 비율이 증가합니다. 이는 검색 과정에서 더 많은 엔티티가 생략된다는 의미입니다. 첫 번째 행과 마지막 행의 통계를 비교하면 클러스터링 압축이 없는 검색은 전체 컬렉션을 스캔해야 한다는 것을 알 수 있습니다. 반면에 특정 키를 사용해 클러스터링 압축을 적용한 검색은 최대 25배까지 개선할 수 있습니다.</p>
+<p>검색 필터에서 검색 범위가 좁아질수록 프룬 비율이 증가합니다. 이는 검색 과정에서 더 많은 엔티티가 생략된다는 의미입니다. 첫 번째 행과 마지막 행의 통계를 비교하면 클러스터링 압축이 없는 검색은 전체 컬렉션을 스캔해야 한다는 것을 알 수 있습니다. 반면, 특정 키를 사용해 클러스터링 압축을 적용한 검색은 최대 25배까지 개선될 수 있습니다.</p>
 <h2 id="Best-Practices" class="common-anchor-header">모범 사례<button data-href="#Best-Practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

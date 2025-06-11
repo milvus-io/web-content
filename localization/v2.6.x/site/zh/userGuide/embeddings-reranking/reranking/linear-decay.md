@@ -2,7 +2,7 @@
 id: linear-decay.md
 title: 线性衰减Compatible with Milvus 2.6.x
 summary: >-
-  线性衰减会使搜索结果中的相关性直线下降，并以绝对零点为终点。就像即将发生的事件倒计时一样，相关性会逐渐减弱，直到事件过去，线性衰减会随着项目远离您的理想点而使相关性可预测地稳步下降，直到完全消失。这种方法非常适合在需要一致的衰减率和明确的分界线时使用，可确保超出一定界限的项目完全被排除在搜索结果之外。
+  线性衰减会使搜索结果中的相关性直线下降，并以绝对零点为终点。就像即将发生的事件倒计时一样，相关性会逐渐减弱，直到事件过去，线性衰减会随着项目远离您的理想点而使相关性可预测地稳步降低，直到完全消失。这种方法非常适合在需要一致的衰减率和明确的分界线时使用，可确保超出一定界限的项目完全被排除在搜索结果之外。
 beta: Milvus 2.6.x
 ---
 <h1 id="Linear-Decay" class="common-anchor-header">线性衰减<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Linear-Decay" class="anchor-icon" translate="no">
@@ -92,7 +92,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>线性衰减是指以恒定的速度直线下降，直至降到零。这种模式出现在许多日常场景中，如倒计时器、库存耗尽以及相关性有明确到期点的截止日期临近。</p>
+    </button></h2><p>线性衰减是指以恒定的速度直线下降，直至降到零。这种模式出现在许多日常场景中，如倒计时器、库存耗尽和截止日期临近，在这些场景中，相关性有一个明确的到期点。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
@@ -105,7 +105,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (10天）：相关性下降到衰减值的时间段--10 天后的事件相关性得分减半（0.5）。</p></li>
 </ul>
 <p>从直线曲线中可以看出，超过大约 16 天的事件相关性正好为零，根本不会出现在搜索结果中。这就形成了一个明确的界限，确保用户只能在规定的时间窗口内看到相关的即将发生的事件。</p>
-<p>这种行为反映了活动计划的典型运作方式--近期的活动最相关，未来几周内的活动重要性递减，而过于久远的活动（或已经过去的活动）则根本不应该出现。</p>
+<p>这种行为反映了活动计划的典型运作方式--近期的活动最相关，未来几周内的活动重要性递减，而太远（或已经过去）的活动则根本不应该出现。</p>
 <h2 id="Formula" class="common-anchor-header">计算公式<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

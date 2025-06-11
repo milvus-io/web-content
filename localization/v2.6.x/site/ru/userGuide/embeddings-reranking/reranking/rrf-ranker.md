@@ -334,7 +334,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">params.k</code></p></td>
      <td><p>Нет</p></td>
-     <td><p>Параметр сглаживания, контролирующий влияние рангов документов; более высокий <code translate="no">k</code> снижает чувствительность к верхним рангам. Диапазон: (0, 16384); по умолчанию: <code translate="no">60</code>. Подробности см. в разделе <a href="/docs/ru/rrf-ranker.md#Mechanism-of-RRF-Ranker">Механизм работы RRF Ranker</a>.</p></td>
+     <td><p>Параметр сглаживания, который контролирует влияние рангов документов; более высокий <code translate="no">k</code> снижает чувствительность к верхним рангам. Диапазон: (0, 16384); по умолчанию: <code translate="no">60</code>. Подробности см. в разделе <a href="/docs/ru/rrf-ranker.md#Mechanism-of-RRF-Ranker">Механизм работы RRF Ranker</a>.</p></td>
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>

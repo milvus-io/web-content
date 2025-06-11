@@ -26,7 +26,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>El índice <strong>BIN_IVF_FLAT</strong> es una variante del índice <strong>IVF_FLAT</strong> exclusivamente para incrustaciones binarias. Aumenta la eficacia de la consulta dividiendo primero los datos vectoriales en varios clústeres (unidades nlist) y comparando después el vector de entrada objetivo con el centro de cada clúster. BIN_IVF_FLAT reduce significativamente el tiempo de consulta al tiempo que permite a los usuarios ajustar con precisión el equilibrio entre precisión y velocidad. Para más información, consulte <a href="/docs/es/ivf-flat.md">IVF_FLAT</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Creación de índices<button data-href="#Build-index" class="anchor-icon" translate="no">
+<h2 id="Build-index" class="common-anchor-header">Crear un índice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

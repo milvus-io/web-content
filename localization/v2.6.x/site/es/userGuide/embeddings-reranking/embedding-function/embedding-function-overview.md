@@ -154,8 +154,8 @@ beta: Milvus 2.6.x
 <li><p><strong>Llama a la función</strong>: Especifique opcionalmente el argumento <code translate="no">credential</code>.</p>
 <ul>
 <li><p>Si proporciona un nombre de credencial con la definición de la función, Milvus utiliza la credencial especificada.</p></li>
-<li><p>Si omite el argumento, Milvus utilizará automáticamente la credencial configurada para ese modelo de proveedor en <code translate="no">milvus.yaml</code>.</p>
-<p>En cualquier caso, la clave secreta nunca abandona el servidor.</p></li>
+<li><p>Si omite el argumento, Milvus vuelve automáticamente a la credencial configurada para ese modelo de proveedor en <code translate="no">milvus.yaml</code>.</p>
+<p>De cualquier forma, la clave secreta nunca abandona el servidor.</p></li>
 </ul></li>
 </ol>
 <p>

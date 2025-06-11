@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O módulo Function em Milvus permite transformar dados de texto bruto em embeddings vetoriais chamando automaticamente provedores de modelos externos (como OpenAI, AWS Bedrock, Google Vertex AI, etc.). Com o módulo Function, já não é necessário estabelecer uma interface manual com as APIs de incorporação - o Milvus trata de todo o processo de envio de pedidos aos fornecedores, receção de incorporação e armazenamento nas suas colecções. Para a pesquisa semântica, é necessário fornecer apenas dados de consulta em bruto, não um vetor de consulta. O Milvus gera o vetor de consulta com o mesmo modelo que utilizou para a ingestão, compara-o com os vectores armazenados e devolve os resultados mais relevantes.</p>
+    </button></h1><p>O módulo Function em Milvus permite transformar dados de texto bruto em embeddings vetoriais chamando automaticamente provedores de modelos externos (como OpenAI, AWS Bedrock, Google Vertex AI, etc.). Com o módulo Function, já não precisa de interagir manualmente com as APIs de incorporação - o Milvus trata de todo o processo de envio de pedidos aos fornecedores, receção de incorporação e armazenamento nas suas colecções. Para a pesquisa semântica, é necessário fornecer apenas dados de consulta em bruto, não um vetor de consulta. O Milvus gera o vetor de consulta com o mesmo modelo que utilizou para a ingestão, compara-o com os vectores armazenados e devolve os resultados mais relevantes.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,7 +141,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Armazenar embeddings</strong>: Os embeddings resultantes são armazenados em campos vectoriais explicitamente definidos nas colecções do Milvus.</p></li>
 <li><p><strong>Consultar texto</strong>: Os utilizadores submetem consultas de texto ao Milvus.</p></li>
 <li><p><strong>Pesquisa semântica</strong>: O Milvus converte internamente as consultas em embeddings vectoriais, efectua pesquisas de semelhança com os embeddings armazenados e obtém os resultados relevantes.</p></li>
-<li><p><strong>Devolver resultados</strong>: O Milvus devolve à aplicação os resultados com maior correspondência.</p></li>
+<li><p><strong>Devolver resultados</strong>: O Milvus devolve à aplicação os melhores resultados correspondentes.</p></li>
 </ol>
 <p>
   
@@ -306,7 +306,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># For sparse vector, data type must be SPARSE_FLOAT_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Adicionar a função de incorporação ao esquema</h3><p>O módulo Function em Milvus converte automaticamente os dados brutos armazenados num campo escalar em embeddings e armazena-os no campo vetorial explicitamente definido.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Adicionar a função de incorporação ao esquema</h3><p>O módulo Function do Milvus converte automaticamente os dados brutos armazenados num campo escalar em embeddings e armazena-os no campo vetorial explicitamente definido.</p>
 <p>O exemplo abaixo adiciona um módulo Function (<code translate="no">openai_embedding</code>) que converte o campo escalar <code translate="no">&quot;document&quot;</code> em embeddings, armazenando os vectores resultantes no campo vetorial <code translate="no">&quot;dense&quot;</code> definido anteriormente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
@@ -438,4 +438,4 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter mais informações sobre operações de pesquisa e consulta, consulte <a href="/docs/pt/single-vector-search.md">Pesquisa</a> e <a href="/docs/pt/get-and-scalar-query.md">consulta</a> <a href="/docs/pt/single-vector-search.md">vetorial básica</a>.</p>
+<p>Para obter mais informações sobre as operações de pesquisa e consulta, consulte <a href="/docs/pt/single-vector-search.md">Pesquisa</a> e <a href="/docs/pt/get-and-scalar-query.md">consulta</a> <a href="/docs/pt/single-vector-search.md">vetorial básica</a>.</p>

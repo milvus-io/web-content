@@ -70,7 +70,7 @@ summary: >-
      <td><p>Erzeugt konsensfähige Rankings, wenn verschiedene Systeme unvergleichbare Bewertungsmethoden verwenden</p></td>
    </tr>
 </table>
-<p>Wenn Ihre hybride Suchanwendung einen demokratischen Ausgleich mehrerer Suchpfade erfordert, ohne explizite Gewichtungen zu vergeben, ist RRF Ranker die ideale Wahl.</p>
+<p>Wenn Ihre hybride Suchanwendung eine demokratische Abwägung mehrerer Suchpfade erfordert, ohne explizite Gewichtungen zu vergeben, ist RRF Ranker die ideale Wahl.</p>
 <h2 id="Mechanism-of-RRF-Ranker" class="common-anchor-header">Mechanismus des RRF Ranker<button data-href="#Mechanism-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -323,7 +323,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Der Typ der aufzurufenden Funktion; verwenden Sie <code translate="no">RERANK</code>, um eine Rangordnungsstrategie anzugeben.</p></td>
+     <td><p>Der Typ der aufzurufenden Funktion; verwenden Sie <code translate="no">RERANK</code>, um eine Ranglistenstrategie anzugeben.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>

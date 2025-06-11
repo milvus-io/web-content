@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>incorporação de texto-3-pequeno</p></td>
-     <td><p>Predefinição: 1.536 (truncável para uma dimensão inferior a 1536)</p></td>
+     <td><p>Predefinição: 1.536 (truncável para um tamanho de dimensão inferior a 1536)</p></td>
      <td><p>8,191</p></td>
      <td><p>Ideal para pesquisa semântica escalável e sensível aos custos - oferece um forte desempenho a um preço mais baixo.</p></td>
    </tr>

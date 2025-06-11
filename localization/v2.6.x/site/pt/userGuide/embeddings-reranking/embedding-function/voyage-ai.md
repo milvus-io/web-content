@@ -67,7 +67,7 @@ beta: Milvus 2.6.x
      <td><p>voyage-code-3</p></td>
      <td><p>1.024 (padrão), 256, 512, 2.048</p></td>
      <td><p>32,000</p></td>
-     <td><p>Optimizado para recuperação de código. Consulte a <a href="https://blog.voyageai.com/2024/12/04/voyage-code-3/">publicação no blogue</a> para obter mais informações.</p></td>
+     <td><p>Optimizado para recuperação de código. Consulte a <a href="https://blog.voyageai.com/2024/12/04/voyage-code-3/">postagem do blog</a> para obter detalhes.</p></td>
    </tr>
    <tr>
      <td><p>voyage-finance-2</p></td>
@@ -124,7 +124,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Colocar as chaves da API aqui torna-as persistentes através de reinicializações e permite-lhe mudar de chave apenas mudando uma etiqueta.</p></li>
+<p>Colocar as chaves da API aqui torna-as persistentes através de reinicializações e permite-lhe mudar de chave apenas alterando uma etiqueta.</p></li>
 <li><p><strong>Diga ao Milvus qual chave usar para chamadas de serviço</strong></p>
 <p>No mesmo ficheiro, aponte o fornecedor do Voyage AI para a etiqueta que pretende utilizar.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
@@ -182,7 +182,7 @@ beta: Milvus 2.6.x
 <li><p>Um campo escalar que armazena os dados brutos a serem incorporados.</p></li>
 <li><p>Um campo vetorial reservado para armazenar as incorporações vectoriais que a função irá gerar para o campo escalar.</p></li>
 </ul>
-<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar as incorporações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
+<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar incrustações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

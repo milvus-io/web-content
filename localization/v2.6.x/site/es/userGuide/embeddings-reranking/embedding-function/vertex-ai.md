@@ -157,7 +157,7 @@ beta: Milvus 2.6.x
 <h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Paso 1: Definir campos de esquema</h3><p>Para utilizar una función de incrustación, cree una colección con un esquema específico. Este esquema debe incluir al menos tres campos necesarios:</p>
 <ul>
 <li><p>El campo primario que identifica de forma única a cada entidad de una colección.</p></li>
-<li><p>Un campo escalar que almacene los datos brutos que se van a incrustar.</p></li>
+<li><p>Un campo escalar que almacena los datos brutos que se van a incrustar.</p></li>
 <li><p>Un campo vectorial reservado para almacenar las incrustaciones vectoriales que la función generará para el campo escalar.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType, CollectionSchema, FieldSchema

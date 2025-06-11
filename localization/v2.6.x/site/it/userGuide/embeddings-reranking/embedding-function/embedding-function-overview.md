@@ -46,15 +46,15 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Qualsiasi campo di input che il modulo Function incorpora deve sempre contenere un valore; se viene fornito un null, il modulo lancia un errore.</p></li>
-<li><p>Il modulo Function elabora solo i campi definiti esplicitamente nello schema della collezione; non genera incorporazioni per i campi dinamici.</p></li>
+<li><p>Qualsiasi campo di input incorporato dal modulo Function deve sempre contenere un valore; se viene fornito un null, il modulo lancia un errore.</p></li>
+<li><p>Il modulo Function elabora solo i campi definiti esplicitamente nello schema della collezione; non genera incorporazioni per campi dinamici.</p></li>
 <li><p>I campi di input da incorporare devono essere del tipo <code translate="no">VARCHAR</code>.</p></li>
 <li><p>Il modulo Function può incorporare un campo di input in:</p>
 <ul>
 <li><p><code translate="no">FLOAT_VECTOR</code></p></li>
 <li><p><code translate="no">INT8_VECTOR</code></p></li>
 </ul>
-<p>Le conversioni in <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code> o <code translate="no">BFLOAT16_VECTOR</code> non sono supportate.</p></li>
+<p>Non sono supportate le conversioni in <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code> o <code translate="no">BFLOAT16_VECTOR</code>.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -376,7 +376,7 @@ schema.add_function(text_embedding_function)
      <td><p><code translate="no">credential</code></p></td>
      <td><p>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential:</code> di <code translate="no">milvus.yaml</code>. </p>
 <ul>
-<li><p>Se fornita, Milvus recupera la coppia di chiavi o il token API corrispondenti e firma la richiesta sul lato server.</p></li>
+<li><p>Se fornita, Milvus recupera la coppia di chiavi o il token API corrispondente e firma la richiesta sul lato server.</p></li>
 <li><p>Se omesso (<code translate="no">None</code>), Milvus ricorre alla credenziale esplicitamente configurata per il fornitore del modello di destinazione in <code translate="no">milvus.yaml</code>.</p></li>
 <li><p>Se l'etichetta è sconosciuta o la chiave di riferimento è mancante, la chiamata fallisce.</p></li>
 </ul></td>

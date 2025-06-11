@@ -1,7 +1,7 @@
 ---
 id: add-fields-to-an-existing-collection.md
 title: 添加欄位到現有的集合Compatible with Milvus 2.6.x
-summary: Milvus 允許您動態新增欄位到現有的集合，讓您可以輕鬆地隨著應用程式需求的改變而演進您的資料模式。本指南使用實例向您展示如何在不同的情況下添加欄位。
+summary: Milvus 允許您動態新增欄位到現有的集合，讓您可以輕鬆地隨應用程式需求的改變而演進您的資料模式。本指南使用實例向您展示如何在不同的情況下添加欄位。
 beta: Milvus 2.6.x
 ---
 <h1 id="Add-Fields-to-an-Existing-Collection" class="common-anchor-header">添加欄位到現有的集合<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-Fields-to-an-Existing-Collection" class="anchor-icon" translate="no">

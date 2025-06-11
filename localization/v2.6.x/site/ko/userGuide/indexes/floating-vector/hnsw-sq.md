@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_SQ는</strong> 계층 탐색이 가능한 작은 세계(HNSW) 그래프와 스칼라 양자화(SQ)를 결합하여 크기와 정확도 간의 균형을 제어할 수 있는 고급 벡터 인덱싱 방법을 생성합니다. 이 인덱스 유형은 표준 <a href="/docs/ko/hnsw.md">HNSW에</a> 비해 쿼리 처리 속도가 빠른 반면 인덱스 구축 시간이 약간 증가합니다.</p>
+    </button></h1><p><strong>HNSW_SQ는</strong> 계층적 탐색 가능한 작은 세계(HNSW) 그래프와 스칼라 양자화(SQ)를 결합하여 크기와 정확도 간의 균형을 제어할 수 있는 고급 벡터 인덱싱 방법을 생성합니다. 이 인덱스 유형은 표준 <a href="/docs/ko/hnsw.md">HNSW에</a> 비해 쿼리 처리 속도가 빠른 반면 인덱스 구축 시간이 약간 증가합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -171,8 +171,8 @@ res = MilvusClient.search(
      <td><p>나가는 에지와 들어오는 에지를 모두 포함하여 그래프에서 각 노드가 가질 수 있는 최대 연결(또는 에지) 수입니다. 이 매개변수는 인덱스 구성과 검색 모두에 직접적인 영향을 줍니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [2, 2048]</p>
 <p><strong>기본값</strong>: <code translate="no">30</code> (노드당 최대 30개의 나가는 에지와 30개의 들어오는 에지)</p></td>
-     <td><p><code translate="no">M</code> 이 클수록 일반적으로 <strong>정확도는 높아지지만</strong> <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축과 검색 속도가 모두 느려집니다</strong>. 차원이 높은 데이터 세트나 높은 리콜이 중요한 경우 <code translate="no">M</code> 을 늘리는 것을 고려하세요.</p>
-<p>메모리 사용량과 검색 속도가 주요 관심사인 경우 <code translate="no">M</code> 을 낮추는 것이 좋습니다.</p>
+     <td><p><code translate="no">M</code> 이 클수록 일반적으로 <strong>정확도는 높아지지만</strong> <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축과 검색 속도가 모두 느려집니다</strong>. 차원이 높거나 높은 리콜이 중요한 데이터 세트의 경우 <code translate="no">M</code> 을 늘리는 것을 고려하세요.</p>
+<p>메모리 사용량과 검색 속도가 주요 관심사인 경우 <code translate="no">M</code> 을 줄이는 것을 고려하세요.</p>
 <p>대부분의 경우, 이 범위 내에서 값을 설정하는 것이 좋습니다: [5, 100].</p></td>
    </tr>
    <tr>
@@ -197,7 +197,7 @@ res = MilvusClient.search(
 </ul></td>
      <td><p><strong>유형</strong>: 문자열 <strong>범위</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p><code translate="no">sq_type</code> 선택은 특정 애플리케이션의 요구 사항에 따라 달라집니다. 메모리 효율성이 주요 관심사인 경우 <code translate="no">SQ6</code> 또는 <code translate="no">SQ8</code> 이 적합할 수 있습니다. 반면 정확성이 가장 중요한 경우 <code translate="no">BF16</code> 또는 <code translate="no">FP16</code> 을 선호할 수 있습니다.</p></td>
+     <td><p><code translate="no">sq_type</code> 선택은 특정 애플리케이션의 요구 사항에 따라 달라집니다. 메모리 효율성이 주요 관심사인 경우 <code translate="no">SQ6</code> 또는 <code translate="no">SQ8</code> 이 적합할 수 있습니다. 반면 정확성이 가장 중요한 경우에는 <code translate="no">BF16</code> 또는 <code translate="no">FP16</code> 을 선호할 수 있습니다.</p></td>
    </tr>
    <tr>
      <td></td>

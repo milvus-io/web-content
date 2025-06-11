@@ -7,7 +7,6 @@ summary: >-
   aidera à comprendre le compactage en grappes et la manière dont cette
   fonctionnalité peut améliorer les performances de recherche.
 ---
-
 <h1 id="Clustering-Compaction" class="common-anchor-header">Compaction de la mise en grappe<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,16 +79,15 @@ summary: >-
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
 
 <span class="hljs-attr">datanode:</span>
-<span class="hljs-attr">clusteringCompaction:</span>
-<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
-<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+  <span class="hljs-attr">clusteringCompaction:</span>
+    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
+    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
-
 <table>
    <tr>
      <th><p>Configurer Elément</p></th>
@@ -160,7 +158,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">usePartitionKeyAsClusteringKey</code></p></td>
-     <td><p>Spécifie s'il faut utiliser la clé de partition dans les collections comme clé de clustering. En définissant ce paramètre sur true, Milvus traite les clés de partition des collections comme la clé de clustering. </p><p>Vous pouvez toujours remplacer ce paramètre dans une collection en définissant explicitement une clé de regroupement.</p></td>
+     <td><p>Spécifie s'il faut utiliser la clé de partition dans les collections comme clé de regroupement. En définissant ce paramètre sur true, Milvus traite les clés de partition des collections comme la clé de clustering. </p><p>Vous pouvez toujours remplacer ce paramètre dans une collection en définissant explicitement une clé de regroupement.</p></td>
      <td></td>
    </tr>
 </table>
@@ -174,8 +172,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -185,11 +183,10 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-schema=schema
+    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+    schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -290,10 +287,9 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-job_id=job_id,
+    job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;

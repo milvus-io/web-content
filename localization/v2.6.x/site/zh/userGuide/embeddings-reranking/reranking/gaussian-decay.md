@@ -2,7 +2,7 @@
 id: gaussian-decay.md
 title: 高斯衰减Compatible with Milvus 2.6.x
 summary: >-
-  高斯衰减也称为正常衰减，它能对搜索结果进行最自然的调整。就像人的视力会随着距离的增加而逐渐模糊一样，高斯衰减会创建一条平滑的钟形曲线，随着条目远离您的理想点，相关性也会逐渐降低。这种方法非常适合您需要一种平衡的衰减，既不会对您偏好范围之外的项目造成严重影响，又能显著降低远处项目的相关性。
+  高斯衰减也称为正常衰减，它能对搜索结果进行最自然的调整。就像人的视力会随着距离的增加而逐渐模糊一样，高斯衰减会创建一条平滑的钟形曲线，随着项目远离您的理想点，相关性也会逐渐降低。这种方法非常适合您需要一种平衡的衰减方式，既不会对您偏好范围之外的项目造成严重影响，又能显著降低远处项目的相关性。
 beta: Milvus 2.6.x
 ---
 <h1 id="Gaussian-Decay" class="common-anchor-header">高斯衰减<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Gaussian-Decay" class="anchor-icon" translate="no">
@@ -96,7 +96,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">origin</code> (0公里）：您的当前位置，相关性最大 (1.0)。</p></li>
 <li><p><code translate="no">offset</code> (±300 m):您周围的 "满分区"--300 米内的所有餐厅都保持满分（1.0），确保附近的餐厅不会因为微小的距离差异而受到不必要的惩罚。</p></li>
 <li><p><code translate="no">scale</code> (±2公里）：相关性下降到衰减值的距离--2 公里外的餐厅相关性得分减半（0.5）。</p></li>
-<li><p><code translate="no">decay</code> (0.5):刻度距离上的分数--该参数主要控制分数随距离减小的速度。</p></li>
+<li><p><code translate="no">decay</code> (0.5):刻度距离上的得分--该参数主要控制得分随距离减小的速度。</p></li>
 </ul>
 <p>从曲线上可以看出，超过 2 公里的餐厅相关性会继续降低，但不会完全归零。即使是 4-5 公里以外的餐厅，也能保持最低限度的相关性，使优秀但距离较远的餐厅仍能出现在您的搜索结果中（尽管排名较低）。</p>
 <p>这种行为模仿了人们对距离相关性的自然思维方式--附近的地方是首选，但我们愿意去更远的地方寻找特别的选择。</p>
