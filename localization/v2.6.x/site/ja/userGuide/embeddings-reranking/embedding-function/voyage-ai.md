@@ -1,7 +1,9 @@
 ---
 id: voyage-ai.md
-title: Voyage AICompatible with Milvus 2.6.x
-summary: このトピックでは、MilvusにおけるVoyage AI組み込み関数の設定方法と使用方法について説明します。
+title: Voyage AI
+summary: >-
+  This topic describes how to configure and use Voyage AI embedding functions in
+  Milvus.
 beta: Milvus 2.6.x
 ---
 <h1 id="Voyage-AI" class="common-anchor-header">Voyage AI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Voyage-AI" class="anchor-icon" translate="no">
@@ -19,8 +21,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、MilvusにおけるVoyage AIエンベッディング機能の設定方法と使用方法について説明します。</p>
-<h2 id="Choose-an-embedding-model" class="common-anchor-header">埋め込みモデルの選択<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
+    </button></h1><p>This topic describes how to configure and use Voyage AI embedding functions in Milvus.</p>
+<h2 id="Choose-an-embedding-model" class="common-anchor-header">Choose an embedding model<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,59 +37,59 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusはVoyage AIが提供するエンベッディングモデルに対応しています。以下に現在利用可能なエンベッディングモデルを示しますので、ご参照ください：</p>
+    </button></h2><p>Milvus supports embedding models provided by Voyage AI. Below are the currently available embedding models for quick reference:</p>
 <table>
    <tr>
-     <th><p>モデル名</p></th>
-     <th><p>寸法</p></th>
-     <th><p>最大トークン数</p></th>
-     <th><p>説明</p></th>
+     <th><p>Model Name</p></th>
+     <th><p>Dimensions</p></th>
+     <th><p>Max Tokens</p></th>
+     <th><p>Description</p></th>
    </tr>
    <tr>
      <td><p>voyage-3-large</p></td>
-     <td><p>1,024（デフォルト）、256、512、2,048</p></td>
+     <td><p>1,024 (default), 256, 512, 2,048</p></td>
      <td><p>32,000</p></td>
-     <td><p>最高の汎用性と多言語検索品質。</p></td>
+     <td><p>The best general-purpose and multilingual retrieval quality.</p></td>
    </tr>
    <tr>
      <td><p>voyage-3</p></td>
      <td><p>1,024</p></td>
      <td><p>32,000</p></td>
-     <td><p>汎用性と多言語検索品質に最適化。詳細は<a href="https://blog.voyageai.com/2024/09/18/voyage-3/">ブログ記事を</a>ご参照ください。</p></td>
+     <td><p>Optimized for general-purpose and multilingual retrieval quality. Refer to <a href="https://blog.voyageai.com/2024/09/18/voyage-3/">blog post</a> for details.</p></td>
    </tr>
    <tr>
      <td><p>voyage-3-lite</p></td>
      <td><p>512</p></td>
      <td><p>32,000</p></td>
-     <td><p>レイテンシとコストを最適化。詳細は<a href="https://blog.voyageai.com/2024/09/18/voyage-3/">ブログ</a>記事を参照。</p></td>
+     <td><p>Optimized for latency and cost. Refer to <a href="https://blog.voyageai.com/2024/09/18/voyage-3/">blog post</a> for details.</p></td>
    </tr>
    <tr>
-     <td><p>ボヤージュ-コード-3</p></td>
-     <td><p>1,024（デフォルト）、256、512、2,048</p></td>
+     <td><p>voyage-code-3</p></td>
+     <td><p>1,024 (default), 256, 512, 2,048</p></td>
      <td><p>32,000</p></td>
-     <td><p>コード検索に最適化。詳細は<a href="https://blog.voyageai.com/2024/12/04/voyage-code-3/">ブログ</a>記事を参照。</p></td>
+     <td><p>Optimized for code retrieval. Refer to <a href="https://blog.voyageai.com/2024/12/04/voyage-code-3/">blog post</a> for details.</p></td>
    </tr>
    <tr>
-     <td><p>ボヤージュファイナンス-2</p></td>
+     <td><p>voyage-finance-2</p></td>
      <td><p>1,024</p></td>
      <td><p>32,000</p></td>
-     <td><p>ファイナンス検索とRAGに最適化。詳細は<a href="https://blog.voyageai.com/2024/06/03/domain-specific-embeddings-finance-edition-voyage-finance-2/">ブログ</a>記事を参照。</p></td>
+     <td><p>Optimized for finance retrieval and RAG. Refer to <a href="https://blog.voyageai.com/2024/06/03/domain-specific-embeddings-finance-edition-voyage-finance-2/">blog post</a> for details.</p></td>
    </tr>
    <tr>
-     <td><p>ボヤージュ-法律-2</p></td>
+     <td><p>voyage-law-2</p></td>
      <td><p>1,024</p></td>
      <td><p>16,000</p></td>
-     <td><p>法務検索とRAGを最適化。全ドメインのパフォーマンスも向上。詳細は<a href="https://blog.voyageai.com/2024/04/15/domain-specific-embeddings-and-retrieval-legal-edition-voyage-law-2/">ブログ記事を</a>参照。</p></td>
+     <td><p>Optimized for legal retrieval and RAG. Also improved performance across all domains. Refer to <a href="https://blog.voyageai.com/2024/04/15/domain-specific-embeddings-and-retrieval-legal-edition-voyage-law-2/">blog post</a> for details.</p></td>
    </tr>
    <tr>
-     <td><p>ボヤージコード-2</p></td>
+     <td><p>voyage-code-2</p></td>
      <td><p>1,536</p></td>
      <td><p>16,000</p></td>
-     <td><p>コード検索に最適化（代替品より17%向上）／前世代のコード埋め込み。詳細は<a href="https://blog.voyageai.com/2024/01/23/voyage-code-2-elevate-your-code-retrieval/">ブログ記事を</a>参照。</p></td>
+     <td><p>Optimized for code retrieval (17% better than alternatives) / Previous generation of code embeddings. Refer to <a href="https://blog.voyageai.com/2024/01/23/voyage-code-2-elevate-your-code-retrieval/">blog post</a> for details.</p></td>
    </tr>
 </table>
-<p>詳細は<a href="https://docs.voyageai.com/reference/embeddings-api">テキスト埋め込み</a>モデルを参照。</p>
-<h2 id="Configure-credentials" class="common-anchor-header">認証情報の設定<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<p>For details, refer to <a href="https://docs.voyageai.com/reference/embeddings-api">Text embedding models</a>.</p>
+<h2 id="Configure-credentials" class="common-anchor-header">Configure credentials<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -102,19 +104,19 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusはエンベッディングをリクエストする前にVoyage AI APIキーを知る必要があります。Milvusはクレデンシャルを設定するために2つの方法を提供します：</p>
+    </button></h2><p>Milvus must know your Voyage AI API key before it can request embeddings. Milvus provides two methods to configure credentials:</p>
 <ul>
-<li><p><strong>設定ファイル（推奨）：</strong> <code translate="no">milvus.yaml</code> にAPIキーを保存し、再起動やノードが自動的にAPIキーを取得するようにします。</p></li>
-<li><p><strong>環境変数：</strong>Docker Composeに最適です。</p></li>
+<li><p><strong>Configuration file (recommended):</strong> Store the API key in <code translate="no">milvus.yaml</code> so every restart and node picks it up automatically.</p></li>
+<li><p><strong>Environment variables:</strong> Inject the key at deploy time—ideal for Docker Compose.</p></li>
 </ul>
-<p>コンフィギュレーション・ファイルはベアメタルやVMでメンテナンスしやすく、env-varルートはコンテナのワークフローに適している。</p>
+<p>Choose one of the two methods below—the configuration file is easier to maintain on bare-metal and VMs, while the env-var route fits container workflows.</p>
 <div class="alert note">
-<p>同じプロバイダのAPIキーが設定ファイルと環境変数の両方に存在する場合、milvusは常に<code translate="no">milvus.yaml</code> の値を使用し、環境変数は無視します。</p>
+<p>If an API key for the same provider is present in both the configuration file and an environment variable, Milvus always uses the value in <code translate="no">milvus.yaml</code> and ignores the environment variable.</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">オプション 1: 設定ファイル (推奨 &amp; 優先度高)</h3><p><code translate="no">milvus.yaml</code>Milvusは起動時にAPIキーを読み込み、同じプロバイダの環境変数を上書きします。</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1: Configuration file (recommended & higher priority)</h3><p>Keep your API keys in <code translate="no">milvus.yaml</code>; Milvus reads them at startup and overrides any environment variable for the same provider.</p>
 <ol>
-<li><p>**の下にキーを宣言してください。<code translate="no">credential:</code></p>
-<p>APIキーは1つでも複数でもかまいません。それぞれに、後で参照するためのラベルを付けてください。</p>
+<li><p>**Declare your keys under <code translate="no">credential:</code></p>
+<p>You may list one or many API keys—give each a label you invent and will reference later.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -122,9 +124,9 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>ここにAPIキーを記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
-<li><p><strong>Milvusにサービス呼び出しに使用するキーを知らせる。</strong></p>
-<p>同じファイルで、Voyage AIプロバイダーに使用したいラベルを指定する。</p>
+<p>Putting the API keys here makes them persistent across restarts and lets you switch keys just by changing a label.</p></li>
+<li><p><strong>Tell Milvus which key to use for service calls</strong></p>
+<p>In the same file, point the Voyage AI provider at the label you want it to use.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -132,23 +134,23 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.voyageai.com/v1/embeddings   # (optional) custom endpoint</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、MilvusがVoyage AI embeddingsエンドポイントに送信するすべてのリクエストに特定のキーがバインドされます。</p></li>
+<p>This binds a specific key to every request Milvus sends to the Voyage AI embeddings endpoint.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">オプション 2: 環境変数</h3><p>Docker ComposeでMilvusを実行し、ファイルやイメージから秘密を守りたい場合は、この方法を使用してください。</p>
-<p>Milvusは、<code translate="no">milvus.yaml</code> にプロバイダのキーが見つからない場合のみ、環境変数にフォールバックします。</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Environment variable</h3><p>Use this method when you run Milvus with Docker Compose and prefer to keep secrets out of files and images.</p>
+<p>Milvus falls back to the environment variable only if no key for the provider is found in <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
-     <th><p>変数</p></th>
-     <th><p>必須</p></th>
-     <th><p>説明</p></th>
+     <th><p>Variable</p></th>
+     <th><p>Required</p></th>
+     <th><p>Description</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">MILVUSAI_VOYAGEAI_API_KEY</code></p></td>
-     <td><p>はい</p></td>
-     <td><p>有効なVoyage AI APIキー。</p></td>
+     <td><p>Yes</p></td>
+     <td><p>Your valid Voyage AI API key.</p></td>
    </tr>
 </table>
-<p><strong>docker-compose.yaml</strong>ファイルで<code translate="no">MILVUSAI_VOYAGEAI_API_KEY</code> 環境変数を設定してください。</p>
+<p>In your <strong>docker-compose.yaml</strong> file, set the <code translate="no">MILVUSAI_VOYAGEAI_API_KEY</code> environment variable.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -157,8 +159,8 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the Voyage AI API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_VOYAGEAI_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_VOYAGEAI_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">environment:</code> ブロックは、Milvus コンテナにのみキーを注入し、ホスト OS はそのままにします。詳しくは、<a href="/docs/ja/configure-docker.md#Configure-Milvus-with-Docker-Compose">Docker Composeでmilvusを設定するを</a>参照してください。</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">埋め込み関数の使用<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p>The <code translate="no">environment:</code> block injects the key only into the Milvus container, leaving your host OS untouched. For details, refer to <a href="/docs/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configure Milvus with Docker Compose</a>.</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -173,14 +175,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>認証情報の設定が完了したら、以下の手順で埋め込み関数を定義し、使用します。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">ステップ1: スキーマフィールドの定義</h3><p>埋め込み関数を使用するには、特定のスキーマを持つコレクションを作成します。このスキーマには、少なくとも3つの必要なフィールドが含まれていなければなりません：</p>
+    </button></h2><p>Once credentials are configured, follow these steps to define and use embedding functions.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Step 1: Define schema fields</h3><p>To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:</p>
 <ul>
-<li><p>コレクション内の各エンティティを一意に識別するプライマリフィールド。</p></li>
-<li><p>埋め込む生データを格納するスカラーフィールド。</p></li>
-<li><p>スカラー・フィールドに対して関数が生成するベクトル埋め込みを格納するために予約されたベクトル・フィールド。</p></li>
+<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
+<li><p>A scalar field that stores raw data to be embedded.</p></li>
+<li><p>A vector field reserved to store vector embeddings that the function will generate for the scalar field.</p></li>
 </ul>
-<p>次の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
+<p>The following example defines a schema with one scalar field <code translate="no">&quot;document&quot;</code> for storing textual data and one vector field <code translate="no">&quot;dense&quot;</code> for storing embeddings to be generated by the Function module. Remember to set the vector dimension (<code translate="no">dim</code>) to match the output of your chosen embedding model.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -201,9 +203,9 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">ステップ 2: スキーマへの埋め込み関数の追加</h3><p>MilvusのFunctionモジュールは、スカラーフィールドに格納された生データを自動的に埋め込みデータに変換し、明示的に定義されたベクトルフィールドに格納します。</p>
-<p>下の例では、スカラーフィールド<code translate="no">&quot;document&quot;</code> をエンベッディングに変換する Function モジュール (<code translate="no">voya</code>) を追加し、その結果のベクトルを先に定義した<code translate="no">&quot;dense&quot;</code> ベクトルフィールドに格納しています。</p>
-<p>埋め込み関数を定義したら、コレクションスキーマに追加します。これにより、Milvusは指定された埋め込み関数を使用して、テキストデータの埋め込みを処理し、格納するようになります。</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Step 2: Add embedding function to schema</h3><p>The Function module in Milvus automatically converts raw data stored in a scalar field into embeddings and stores them into the explicitly defined vector field.</p>
+<p>The example below adds a Function module (<code translate="no">voya</code>) that converts the scalar field <code translate="no">&quot;document&quot;</code> into embeddings, storing the resulting vectors in the <code translate="no">&quot;dense&quot;</code> vector field defined earlier.</p>
+<p>Once you have defined your embedding function, add it to your collection schema. This instructs Milvus to use the specified embedding function to process and store embeddings from your text data.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;voya&quot;</span>,                                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -224,7 +226,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -239,4 +241,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>埋め込み関数を設定した後、インデックス設定、データ挿入例、セマンティック検索操作に関する追加ガイダンスについては、「<a href="/docs/ja/embedding-function-overview.md">関数の概要</a>」を参照してください。</p>
+    </button></h2><p>After configuring the embedding function, refer to the <a href="/docs/embedding-function-overview.md">Function Overview</a> for additional guidance on index configuration, data insertion examples, and semantic search operations.</p>

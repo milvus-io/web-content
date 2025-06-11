@@ -1,19 +1,17 @@
 ---
 id: gaussian-decay.md
-title: Gaußscher ZerfallCompatible with Milvus 2.6.x
+title: Gaussian Decay
 summary: >-
-  Gaußscher Zerfall, auch bekannt als normaler Zerfall, erzeugt die natürlichste
-  Anpassung Ihrer Suchergebnisse. Ähnlich wie bei der menschlichen Sehkraft, die
-  mit zunehmender Entfernung allmählich verschwimmt, erzeugt der Gaußsche
-  Zerfall eine sanfte, glockenförmige Kurve, die die Relevanz sanft verringert,
-  wenn sich die Elemente von Ihrem Idealpunkt entfernen. Dieser Ansatz ist
-  ideal, wenn Sie einen ausgewogenen Abklingvorgang wünschen, bei dem Artikel,
-  die knapp außerhalb Ihres bevorzugten Bereichs liegen, nicht hart bestraft
-  werden, aber dennoch die Relevanz von weit entfernten Artikeln deutlich
-  reduziert wird.
+  Gaussian decay, also known as normal decay, creates the most natural-feeling
+  adjustment to your search results. Like human vision that gradually blurs with
+  distance, Gaussian decay creates a smooth, bell-shaped curve that gently
+  reduces relevance as items move away from your ideal point. This approach is
+  ideal when you want a balanced decay that doesn't harshly penalize items just
+  outside your preferred range but still significantly reduces the relevance of
+  distant items.
 beta: Milvus 2.6.x
 ---
-<h1 id="Gaussian-Decay" class="common-anchor-header">Gaußscher Zerfall<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Gaussian-Decay" class="anchor-icon" translate="no">
+<h1 id="Gaussian-Decay" class="common-anchor-header">Gaussian Decay<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Gaussian-Decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,14 +26,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Gaußscher Zerfall, auch bekannt als normaler Zerfall, erzeugt die natürlichste Anpassung Ihrer Suchergebnisse. Ähnlich wie beim menschlichen Sehen, das mit zunehmender Entfernung allmählich verschwimmt, erzeugt der Gaußsche Zerfall eine sanfte, glockenförmige Kurve, die die Relevanz sanft verringert, wenn sich die Elemente von Ihrem Idealpunkt entfernen. Dieser Ansatz ist ideal, wenn Sie einen ausgewogenen Abklingvorgang wünschen, bei dem Artikel, die knapp außerhalb Ihres bevorzugten Bereichs liegen, nicht hart bestraft werden, aber dennoch die Relevanz weiter entfernter Artikel deutlich reduziert wird.</p>
-<p>Im Gegensatz zu anderen Zerfallsrankern:</p>
+    </button></h1><p>Gaussian decay, also known as normal decay, creates the most natural-feeling adjustment to your search results. Like human vision that gradually blurs with distance, Gaussian decay creates a smooth, bell-shaped curve that gently reduces relevance as items move away from your ideal point. This approach is ideal when you want a balanced decay that doesn’t harshly penalize items just outside your preferred range but still significantly reduces the relevance of distant items.</p>
+<p>Unlike other decay rankers:</p>
 <ul>
-<li><p>Exponentieller Verfall fällt anfangs stark ab, was zu einer stärkeren anfänglichen Bestrafung führt.</p></li>
-<li><p>Der lineare Verfall nimmt mit einer konstanten Rate ab, bis er den Wert Null erreicht, wodurch eine klare Grenze gesetzt wird.</p></li>
+<li><p>Exponential decay drops sharply at first, creating a stronger initial penalty</p></li>
+<li><p>Linear decay decreases at a constant rate until reaching zero, creating a clear cutoff</p></li>
 </ul>
-<p>Gaußscher Zerfall bietet einen ausgewogenen, intuitiven Ansatz, der sich für die Nutzer natürlich anfühlt.</p>
-<h2 id="When-to-use-Gaussian-decay" class="common-anchor-header">Wann wird Gaußscher Zerfall verwendet?<button data-href="#When-to-use-Gaussian-decay" class="anchor-icon" translate="no">
+<p>Gaussian decay provides a more balanced, intuitive approach that feels natural to users.</p>
+<h2 id="When-to-use-Gaussian-decay" class="common-anchor-header">When to use Gaussian decay<button data-href="#When-to-use-Gaussian-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,36 +48,36 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gaußscher Zerfall ist besonders effektiv für:</p>
+    </button></h2><p>Gaussian decay is particularly effective for:</p>
 <table>
    <tr>
-     <th><p>Anwendungsfall</p></th>
-     <th><p>Beispiel</p></th>
-     <th><p>Warum Gaussian gut funktioniert</p></th>
+     <th><p>Use Case</p></th>
+     <th><p>Example</p></th>
+     <th><p>Why Gaussian Works Well</p></th>
    </tr>
    <tr>
-     <td><p>Standortbezogene Suche</p></td>
-     <td><p>Restaurant-Finder, Ladenlokalisierer</p></td>
-     <td><p>Nachahmung der natürlichen menschlichen Wahrnehmung von Entfernungsrelevanz</p></td>
+     <td><p>Location-based searches</p></td>
+     <td><p>Restaurant finders, store locators</p></td>
+     <td><p>Mimics natural human perception of distance relevance</p></td>
    </tr>
    <tr>
-     <td><p>Empfehlungen zu Inhalten</p></td>
-     <td><p>Artikelvorschläge basierend auf dem Veröffentlichungsdatum</p></td>
-     <td><p>Allmähliche Abnahme der Relevanz mit zunehmendem Alter der Inhalte</p></td>
+     <td><p>Content recommendations</p></td>
+     <td><p>Article suggestions based on publication date</p></td>
+     <td><p>Gradual decline in relevance as content ages</p></td>
    </tr>
    <tr>
-     <td><p>Produktauflistungen</p></td>
-     <td><p>Artikel mit Preisen in der Nähe eines Ziels</p></td>
-     <td><p>Sanfter Rückgang der Relevanz bei Preisabweichungen vom Ziel</p></td>
+     <td><p>Product listings</p></td>
+     <td><p>Items priced near a target</p></td>
+     <td><p>Smooth relevance decline as prices deviate from target</p></td>
    </tr>
    <tr>
-     <td><p>Abgleich von Fachwissen</p></td>
-     <td><p>Auffinden von Fachleuten mit relevanter Erfahrung</p></td>
-     <td><p>Ausgewogene Bewertung der Relevanz von Erfahrungen</p></td>
+     <td><p>Expertise matching</p></td>
+     <td><p>Finding professionals with relevant experience</p></td>
+     <td><p>Balanced assessment of experience relevance</p></td>
    </tr>
 </table>
-<p>Wenn Ihre Anwendung ein natürliches Gefühl von abnehmender Relevanz ohne harte Strafen oder strenge Grenzwerte erfordert, ist der Gaußsche Zerfall wahrscheinlich die beste Wahl.</p>
-<h2 id="Bell-curve-principle" class="common-anchor-header">Prinzip der Glockenkurve<button data-href="#Bell-curve-principle" class="anchor-icon" translate="no">
+<p>If your application requires a natural feeling of declining relevance without harsh penalties or strict cutoffs, Gaussian decay is likely your best choice.</p>
+<h2 id="Bell-curve-principle" class="common-anchor-header">Bell curve principle<button data-href="#Bell-curve-principle" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,21 +92,23 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Gaußsche Zerfall erzeugt eine sanfte, glockenförmige Kurve, die die Relevanz mit zunehmender Entfernung von einem Idealpunkt allmählich verringert. Diese nach dem Mathematiker Carl Friedrich Gauß benannte Verteilung kommt in der Natur und in der Statistik häufig vor, was erklärt, warum sie sich für die menschliche Wahrnehmung so intuitiv anfühlt.</p>
+    </button></h2><p>Gaussian decay creates a smooth, bell-shaped curve that gradually reduces relevance as distance increases from an ideal point. Named after mathematician Carl Friedrich Gauss, this distribution appears frequently in nature and statistics, which explains why it feels so intuitive to human perception.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gaussian-decay.png" alt="Gaussian Decay" class="doc-image" id="gaussian-decay" />
-   </span> <span class="img-wrapper"> <span>Gaußscher Zerfall</span> </span></p>
-<p>Das obige Diagramm zeigt, wie sich der Gauß'sche Zerfall auf das Ranking von Restaurants in einer mobilen Such-App auswirken würde:</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/gaussian-decay.png" alt="Gaussian Decay" class="doc-image" id="gaussian-decay" />
+    <span>Gaussian Decay</span>
+  </span>
+</p>
+<p>The graph above shows how Gaussian decay would affect restaurant rankings in a mobile search app:</p>
 <ul>
-<li><p><code translate="no">origin</code> (0 km): Ihr aktueller Standort, wo die Relevanz am höchsten ist (1,0).</p></li>
-<li><p><code translate="no">offset</code> (±300 m): Die "perfekte Bewertungszone" um Sie herum - alle Restaurants in einem Umkreis von 300 Metern behalten ihre volle Relevanzbewertung (1,0), um sicherzustellen, dass nahe gelegene Optionen nicht unnötig für winzige Entfernungsunterschiede bestraft werden.</p></li>
-<li><p><code translate="no">scale</code> (±2 km): Die Entfernung, bei der die Relevanz auf den Abklingwert sinkt - bei Restaurants, die genau 2 Kilometer entfernt sind, wird die Relevanzbewertung halbiert (0,5).</p></li>
-<li><p><code translate="no">decay</code> (0.5): Die Punktzahl bei der Skalendistanz - dieser Parameter steuert im Wesentlichen, wie schnell die Punktzahlen mit der Entfernung abnehmen.</p></li>
+<li><p><code translate="no">origin</code> (0 km): Your current location, where relevance is at its maximum (1.0).</p></li>
+<li><p><code translate="no">offset</code> (±300 m): The “perfect score zone” around you—all restaurants within 300 meters maintain full relevance scores (1.0), ensuring that very nearby options aren’t needlessly penalized for tiny distance differences.</p></li>
+<li><p><code translate="no">scale</code> (±2 km): The distance at which relevance drops to the decay value—restaurants exactly 2 kilometers away have their relevance scores halved (0.5).</p></li>
+<li><p><code translate="no">decay</code> (0.5): The score at the scale distance—this parameter essentially controls how quickly scores diminish with distance.</p></li>
 </ul>
-<p>Wie Sie der Kurve entnehmen können, nimmt die Relevanz von Restaurants in mehr als 2 km Entfernung weiter ab, erreicht aber nie ganz den Wert Null. Selbst Restaurants in einer Entfernung von 4 bis 5 Kilometern behalten eine gewisse minimale Relevanz, so dass ausgezeichnete, aber weit entfernte Restaurants immer noch in Ihren Ergebnissen erscheinen (wenn auch in einer niedrigeren Rangfolge).</p>
-<p>Dieses Verhalten ahmt nach, wie Menschen natürlicherweise über die Relevanz von Entfernungen denken - nahe gelegene Orte werden bevorzugt, aber wir sind bereit, für außergewöhnliche Optionen weiter zu reisen.</p>
-<h2 id="Formula" class="common-anchor-header">Formel<button data-href="#Formula" class="anchor-icon" translate="no">
+<p>As you can see from the curve, restaurants beyond 2 km continue to decrease in relevance but never quite reach zero. Even restaurants 4-5 kilometers away retain some minimal relevance, allowing excellent but distant restaurants to still appear in your results (albeit ranked lower).</p>
+<p>This behavior mimics how people naturally think about distance relevance—nearby places are preferred, but we’re willing to travel farther for exceptional options.</p>
+<h2 id="Formula" class="common-anchor-header">Formula<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -123,20 +123,20 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die mathematische Formel für die Berechnung eines Gauß'schen Zerfallswertes lautet:</p>
+    </button></h2><p>The mathematical formula for calculating a Gaussian decay score is:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mtext>doc</mtext><mo stretchy="false">)</mo><mo>=</mo><mi>exp</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mo>−</mo><mfrac><msup><mrow><mo fence="true">(</mo><mi>max</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mrow><mo fence="true">∣</mo><msub><mtext>fieldvalue</mtext><mtext>doc</mtext></msub><mo>−</mo><mtext>origin</mtext><mo fence="true">∣</mo></mrow><mo>−</mo><mtext>offset</mtext><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow><mn>2</mn></msup><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">S(\text{doc}) = \exp\left( -\frac{\left( \max\left(0, \left|\text{fieldvalue}_{\text{doc}} - \text{origin}\right| - \text{offset} \right) \right)^2}{2\sigma^2} \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord text"><span class="mord">doc</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3em;vertical-align:-1.25em;"></span><span class="mop">exp</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">(</span></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.631em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mop">max</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">∣</span><span class="mord"><span class="mord text"><span class="mord">fieldvalue</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">doc</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">origin</span></span><span class="mclose delimcenter" style="top:0em;">∣</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">offset</span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">)</span></span></span></span></span></span></span></p>
-<p>Wobei:</p>
+<p>Where:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><mo>−</mo><mfrac><msup><mtext>scale</mtext><mn>2</mn></msup><mrow><mn>2</mn><mo>⋅</mo><mi>ln</mi><mo>⁡</mo><mo stretchy="false">(</mo><mtext>decay</mtext><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\sigma^2 = -\frac{\text{scale}^2}{2 \cdot \ln(\text{decay})}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.5114em;vertical-align:-0.936em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5754em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop">ln</span><span class="mopen">(</span><span class="mord text"><span class="mord">decay</span></span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord text"><span class="mord">scale</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984em;"><span style="top:-3.1473em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>In einfacher Sprache ausgedrückt:</p>
+<p>Breaking this down in plain language:</p>
 <ol>
-<li><p>Berechnen Sie, wie weit der Feldwert vom Ursprung entfernt ist: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> ∣fieldvaluedoc-origin∣|\text{fieldvalue}_{\text{doc}}</annotation></semantics></math></span> - <span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">\text{origin}|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord text"><span class="mord">∣feldwert</span></span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">doc</span></span></span></span></span></span></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span> <span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span> <span class="mord">origin∣</span></span></span></span></p></li>
-<li><p>Subtrahieren Sie den Offset (falls vorhanden), aber gehen Sie nie unter Null: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>max</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mtext>distance-offset</mtext><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\max <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(0, \text{distance} - \text{offset})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">distance</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">offset</span></span><span class="mclose">)</span></span></span></span></p></li>
-<li><p>Quadrieren Sie diesen angepassten Abstand: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mtext>angepasster_Abstand</mtext><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(\text{angepasster\_Abstand})^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1241em;vertical-align:-0.31em;"></span><span class="mord text"><span class="mord">(angepasster_Abstand</span></span><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2</p></li>
-<li><p>Dividieren Sie durch <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2σ22\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">2σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span></span></span></span></span></span></span></span> 2, das aus Ihren Skalen- und Abklingparametern berechnet wird.</p></li>
-<li><p>Nehmen Sie den negativen Exponenten, der Ihnen einen Wert zwischen 0 und 1 liefert: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo>(</mo><mtext>-value</mtext><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\exp <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(-\text{value})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mord">(</span><span class="mord text"><span class="mord">-value</span></span><span class="mclose">)</span></span></span></span></p></li>
+<li><p>Calculate how far the field value is from the origin:  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><msub><mtext>fieldvalue</mtext><mtext>doc</mtext></msub><mo>−</mo><mtext>origin</mtext><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">|\text{fieldvalue}_{\text{doc}} - \text{origin}|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord"><span class="mord text"><span class="mord">fieldvalue</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">doc</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">origin</span></span><span class="mord">∣</span></span></span></span></p></li>
+<li><p>Subtract the offset (if any) but never go below zero: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mtext>distance</mtext><mo>−</mo><mtext>offset</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\max(0, \text{distance} - \text{offset})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">distance</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">offset</span></span><span class="mclose">)</span></span></span></span></p></li>
+<li><p>Square this adjusted distance: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mtext>adjusted_distance</mtext><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(\text{adjusted\_distance})^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1241em;vertical-align:-0.31em;"></span><span class="mopen">(</span><span class="mord text"><span class="mord">adjusted_distance</span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p></li>
+<li><p>Divide by <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>, which is calculated from your scale and decay parameters</p></li>
+<li><p>Take the negative exponent, which gives you a value between 0 and 1: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><mo>−</mo><mtext>value</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exp(-\text{value})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord">−</span><span class="mord text"><span class="mord">value</span></span><span class="mclose">)</span></span></span></span></p></li>
 </ol>
-<p>Die Berechnung <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> σ2\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2 wandelt Ihre Skalen- und Zerfallsparameter in die quadrierte Standardabweichung der Gaußverteilung um. Dadurch erhält die Funktion ihre charakteristische Glockenform.</p>
-<h2 id="Use-Gaussian-decay" class="common-anchor-header">Verwendung des Gaußschen Abklingens<button data-href="#Use-Gaussian-decay" class="anchor-icon" translate="no">
+<p>The <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> calculation converts your scale and decay parameters into the standard deviation squared for the Gaussian distribution. This is what gives the function its characteristic bell shape.</p>
+<h2 id="Use-Gaussian-decay" class="common-anchor-header">Use Gaussian decay<button data-href="#Use-Gaussian-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,11 +151,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gaußscher Zerfall kann sowohl auf die Standard-Vektorsuche als auch auf hybride Suchoperationen in Milvus angewendet werden. Im Folgenden finden Sie die wichtigsten Codeschnipsel für die Implementierung dieser Funktion.</p>
+    </button></h2><p>Gaussian decay can be applied to both standard vector search and hybrid search operations in Milvus. Below are the key code snippets for implementing this feature.</p>
 <div class="alert note">
-<p>Bevor Sie die Abklingfunktionen verwenden, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempel, Entfernungen usw.) erstellen, die für die Abklingberechnungen verwendet werden sollen. Vollständige Arbeitsbeispiele, einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneinfügung, finden Sie im <a href="/docs/de/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Zeitbasiertes Ranking in Milvus implementieren</a>.</p>
+<p>Before using decay functions, you must first create a collection with appropriate numeric fields (like timestamps, distances, etc.) that will be used for decay calculations. For complete working examples including collection setup, schema definition, and data insertion, refer to <a href="/docs/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implement Time-based Ranking in Milvus</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Nachdem Sie Ihre Sammlung mit einem numerischen Feld eingerichtet haben (in diesem Beispiel <code translate="no">distance</code> in Metern vom Benutzer), erstellen Sie einen Gauß'schen Zerfallsranker:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Create a decay ranker</h3><p>After your collection is set up with a numeric field (in this example, <code translate="no">distance</code> in meters from the user), create a Gaussian decay ranker:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a Gaussian decay ranker for location-based restaurant search</span>
@@ -173,7 +173,7 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Auf die Standard-Vektorsuche anwenden</h3><p>Nachdem Sie Ihren Decay Ranker definiert haben, können Sie ihn bei Suchvorgängen anwenden, indem Sie ihn an den Parameter <code translate="no">ranker</code> übergeben:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Apply to standard vector search</h3><p>After defining your decay ranker, you can apply it during search operations by passing it to the <code translate="no">ranker</code> parameter:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to restaurant vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -185,7 +185,7 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Auf hybride Suche anwenden</h3><p>Decay Rankers können auch auf hybride Suchoperationen angewendet werden, die mehrere Vektorfelder kombinieren:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Apply to hybrid search</h3><p>Decay rankers can also be applied to hybrid search operations that combine multiple vector fields:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>
@@ -213,4 +213,4 @@ hybrid_results = milvus_client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Informationen zu hybriden Suchoperationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche mit mehreren Vektoren</a>.</p>
+<p>For more information on hybrid search operations, refer to <a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>

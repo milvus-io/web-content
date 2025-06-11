@@ -1,8 +1,10 @@
 ---
 id: embed-with-jina.md
 order: 8
-summary: この記事では、JinaEmbeddingFunctionを使って、Jina AIエンベッディングモデルを使って文書やクエリをエンコードする方法を説明します。
-title: ジーナAI - エンベッド
+summary: >-
+  This article describes how to use the JinaEmbeddingFunction to encode
+  documents and queries using the Jina AI embedding model.
+title: Jina AI - Embed
 ---
 <h1 id="Jina-AI" class="common-anchor-header">Jina AI<button data-href="#Jina-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,13 +21,13 @@ title: ジーナAI - エンベッド
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Jina AIの埋め込みモデルは、テキスト入力を数値表現に変換し、テキストのセマンティクスを捉えることができる高性能テキスト埋め込みモデルです。これらのモデルは、高密度検索、意味的テキスト類似性、多言語理解などの用途に優れています。</p>
-<p>Milvusは、<code translate="no">JinaEmbeddingFunction</code> クラスを介してJina AIの埋め込みモデルと統合されています。このクラスは、Jina AIの埋め込みモデルを使って文書やクエリをエンコードし、Milvusのインデックスと互換性のある密なベクトルとして埋め込みを返すためのメソッドを提供します。この機能を利用するには、<a href="https://jina.ai/embeddings/">Jina AIから</a>APIキーを取得してください。</p>
-<p>この機能を使用するには、必要な依存関係をインストールします：</p>
+    </button></h1><p>Jina AI’s embedding models are high-performance text embedding models that can translate textual inputs into numerical representations, capturing the semantics of the text. These models excel in applications like dense retrieval, semantic textual similarity, and multilingual understanding.</p>
+<p>Milvus integrates with Jina AI’s embedding models via the <code translate="no">JinaEmbeddingFunction</code> class. This class provides methods for encoding documents and queries using the Jina AI embedding models and returning the embeddings as dense vectors compatible with Milvus indexing. To utilize this functionality, obtain an API key from <a href="https://jina.ai/embeddings/">Jina AI</a>.</p>
+<p>To use this feature, install the necessary dependencies:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、<code translate="no">JinaEmbeddingFunction</code> をインスタンス化する：</p>
+<p>Then, instantiate the <code translate="no">JinaEmbeddingFunction</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_ef = JinaEmbeddingFunction(
@@ -35,27 +37,27 @@ jina_ef = JinaEmbeddingFunction(
     dimensions=<span class="hljs-number">1024</span>, <span class="hljs-comment"># Defaults to 1024</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>パラメータ</strong>：</p>
+<p><strong>Parameters</strong>:</p>
 <ul>
-<li><p><code translate="no">model_name</code> <em>(文字列）</em></p>
-<p>エンコードに使用するJina AIエンベッディングモデルの名前。利用可能なJina AIエンベッディング・モデル名のいずれかを指定できます。例えば、<code translate="no">jina-embeddings-v3</code> 、<code translate="no">jina-embeddings-v2-base-en</code> など。このパラメータを未指定のままにすると、<code translate="no">jina-embeddings-v3</code> が使用されます。利用可能なモデルのリストについては、<a href="https://jina.ai/embeddings">Jina Embeddingsを</a>参照してください。</p></li>
-<li><p><code translate="no">api_key</code> <em>(文字列</em>)</p>
-<p>Jina AI APIにアクセスするためのAPIキー。</p></li>
-<li><p><code translate="no">task</code> <em>(文字列</em>)</p>
-<p>モデルに渡される入力のタイプ。エンベッディングモデルv3以降では必須。</p>
+<li><p><code translate="no">model_name</code> (<em>string</em>)</p>
+<p>The name of the Jina AI embedding model to use for encoding. You can specify any of the available Jina AI embedding model names, for example, <code translate="no">jina-embeddings-v3</code>, <code translate="no">jina-embeddings-v2-base-en</code>, etc. If you leave this parameter unspecified, <code translate="no">jina-embeddings-v3</code> will be used. For a list of available models, refer to <a href="https://jina.ai/embeddings">Jina Embeddings</a>.</p></li>
+<li><p><code translate="no">api_key</code> (<em>string</em>)</p>
+<p>The API key for accessing the Jina AI API.</p></li>
+<li><p><code translate="no">task</code> (<em>string</em>)</p>
+<p>The type of input passed to the model. Required for embedding models v3 and higher.</p>
 <ul>
-<li><code translate="no">&quot;retrieval.passage&quot;</code>:インデックス作成時の検索タスクで、大きな文書をエンコードするために使われる。</li>
-<li><code translate="no">&quot;retrieval.query&quot;</code>:検索タスクにおいて、ユーザーからの問い合わせや質問を符号化するために使用される。</li>
-<li><code translate="no">&quot;classification&quot;</code>:テキスト分類タスクでテキストを符号化する。</li>
-<li><code translate="no">&quot;text-matching&quot;</code>:2つの文の類似度を測定するような、類似度マッチングのためにテキストを符号化する。</li>
-<li><code translate="no">&quot;clustering&quot;</code>:クラスタリングやリランキングに使用される。</li>
+<li><code translate="no">&quot;retrieval.passage&quot;</code>: Used to encode large documents in retrieval tasks at indexing time.</li>
+<li><code translate="no">&quot;retrieval.query&quot;</code>: Used to encode user queries or questions in retrieval tasks.</li>
+<li><code translate="no">&quot;classification&quot;</code>: Used to encode text for text classification tasks.</li>
+<li><code translate="no">&quot;text-matching&quot;</code>: Used to encode text for similarity matching, such as measuring similarity between two sentences.</li>
+<li><code translate="no">&quot;clustering&quot;</code>: Used for clustering or reranking tasks.</li>
 </ul></li>
-<li><p><code translate="no">dimensions</code> <em>(int</em>)</p>
-<p>埋め込み結果の次元数。デフォルトは1024です。埋め込みモデルv3以降でのみサポートされる。</p></li>
-<li><p><code translate="no">late_chunking</code> <em>(bool</em>)</p>
-<p>このパラメータは、<a href="https://arxiv.org/abs/2409.04701">Jina AIが先月導入した</a>新しいチャンキング手法を、文の一括エンコーディングに使用するかどうかを制御する。デフォルトは<code translate="no">False</code> 。<code translate="no">True</code> に設定すると、Jina AI APIは入力フィールドのすべての文章を連結し、1つの文字列としてモデルに与えます。内部的には、モデルはこの長く連結された文字列を埋め込み、その後チャンキングを行い、入力リストのサイズに一致する埋め込みリストを返す。</p></li>
+<li><p><code translate="no">dimensions</code> (<em>int</em>)</p>
+<p>The number of dimensions the resulting output embeddings should have. Defaults to 1024. Only supported for embedding models v3 and higher.</p></li>
+<li><p><code translate="no">late_chunking</code> (<em>bool</em>)</p>
+<p>This parameter controls whether to use the new chunking method <a href="https://arxiv.org/abs/2409.04701">Jina AI introduced last month</a> for encoding a batch of sentences. Defaults to <code translate="no">False</code>. When set to <code translate="no">True</code>, Jina AI API will concatenate all sentences in the input field and feed them as a single string to the model. Internally, the model embeds this long concatenated string and then performs late chunking, returning a list of embeddings that matches the size of the input list.</p></li>
 </ul>
-<p>ドキュメントの埋め込みを作成するには、<code translate="no">encode_documents()</code> メソッドを使います。このメソッドは、検索や推薦タスクのための文書のインデックス付けのような、非対称検索タスクにおける文書の埋め込み用に設計されている。このメソッドはタスクとして<code translate="no">retrieval.passage</code> 。</p>
+<p>To create embeddings for documents, use the <code translate="no">encode_documents()</code> method. This method is designed for documents embeddings in asymmetric retrieval tasks, such as indexing documents for search or recommendation tasks. This method uses <code translate="no">retrieval.passage</code> as the task.</p>
 <pre><code translate="no" class="language-python:">
 ```python
 docs = [
@@ -71,7 +73,7 @@ print(&quot;Embeddings:&quot;, docs_embeddings)
 # Print dimension and shape of embeddings
 print(&quot;Dim:&quot;, jina_ef.dim, docs_embeddings[0].shape)
 </code></pre>
-<p>期待される出力は以下のようなものです：</p>
+<p>The expected output is similar to the following:</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">9.80641991e-02</span>, -<span class="hljs-number">8.51697400e-02</span>,  <span class="hljs-number">7.36531913e-02</span>,  <span class="hljs-number">1.42558888e-02</span>,
        -<span class="hljs-number">2.23589484e-02</span>,  <span class="hljs-number">1.68494112e-03</span>, -<span class="hljs-number">3.50753777e-02</span>, -<span class="hljs-number">3.11530549e-02</span>,
        -<span class="hljs-number">3.26012149e-02</span>,  <span class="hljs-number">5.04568312e-03</span>,  <span class="hljs-number">3.69836427e-02</span>,  <span class="hljs-number">3.48948985e-02</span>,
@@ -82,7 +84,7 @@ print(&quot;Dim:&quot;, jina_ef.dim, docs_embeddings[0].shape)
        -<span class="hljs-number">1.08831357e-02</span>, -<span class="hljs-number">4.00776342e-02</span>,  <span class="hljs-number">3.25369164e-02</span>, -<span class="hljs-number">1.42691191e-03</span>])]
 Dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<p>クエリの埋め込みを作成するには、<code translate="no">encode_queries()</code> 。このメソッドは、検索クエリや質問などの非対称検索タスクにおけるクエリ埋め込み用に設計されています。このメソッドは<code translate="no">retrieval.query</code> をタスクとして使用します。</p>
+<p>To create embeddings for queries, use the <code translate="no">encode_queries()</code> method. This method is designed for query embeddings in asymmetric retrieval tasks, such as search queries or questions. This method uses <code translate="no">retrieval.query</code> as the task.</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 
@@ -91,7 +93,7 @@ query_embeddings = jina_ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Embeddings:&quot;</span>, query_embeddings)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, jina_ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>期待される出力は以下のようなものです：</p>
+<p>The expected output is similar to the following:</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">8.79201014e-03</span>,  <span class="hljs-number">1.47551354e-02</span>,  <span class="hljs-number">4.02722731e-02</span>, -<span class="hljs-number">2.52991207e-02</span>,
         <span class="hljs-number">1.12719582e-02</span>,  <span class="hljs-number">3.75947170e-02</span>,  <span class="hljs-number">3.97946090e-02</span>, -<span class="hljs-number">7.36681819e-02</span>,
        -<span class="hljs-number">2.17952449e-02</span>, -<span class="hljs-number">1.16298944e-02</span>, -<span class="hljs-number">6.83426252e-03</span>, -<span class="hljs-number">5.12507409e-02</span>,
@@ -102,7 +104,7 @@ query_embeddings = jina_ef.encode_queries(queries)
        -<span class="hljs-number">1.65050142e-02</span>, -<span class="hljs-number">4.26847413e-02</span>,  <span class="hljs-number">2.02664156e-02</span>, -<span class="hljs-number">1.72684863e-02</span>])]
 Dim <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<p>類似マッチング（STS や対称検索タスクなど）、テキスト分類、クラスタリング、リランキングタスクの入力の埋め込みを作成するには、<code translate="no">JinaEmbeddingFunction</code> クラスをインスタンス化するときに、適切な<code translate="no">task</code> パラメータ値を使用します。</p>
+<p>To create embeddings of inputs for similarity matching (such as STS or symmetric retrieval tasks), text classification, clustering, or reranking tasks, use the appropriate <code translate="no">task</code> parameter value when instantiating the <code translate="no">JinaEmbeddingFunction</code> class.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_ef = JinaEmbeddingFunction(

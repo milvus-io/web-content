@@ -1,10 +1,12 @@
 ---
 id: monitor_overview.md
-title: 监视器概述
+title: Monitor Overview
 related_key: 'monitor, alert'
-summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和警报服务。
+summary: >-
+  Learn how Prometheus and Grafana are used in Milvus for montoring and alerting
+  services.
 ---
-<h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvus 监控框架概述<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
+<h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvus monitoring framework overview<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +21,8 @@ summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主题介绍 Milvus 如何使用 Prometheus 来监控指标，以及如何使用 Grafana 来可视化指标和创建警报。</p>
-<h2 id="Prometheus-in-Milvus" class="common-anchor-header">Milvus 中的 Prometheus<button data-href="#Prometheus-in-Milvus" class="anchor-icon" translate="no">
+    </button></h1><p>This topic explains how Milvus uses Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.</p>
+<h2 id="Prometheus-in-Milvus" class="common-anchor-header">Prometheus in Milvus<button data-href="#Prometheus-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,43 +37,43 @@ summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://prometheus.io/docs/introduction/overview/">Prometheus</a>是用于 Kubernetes 实施的开源监控和警报工具包。它以时间序列数据的形式收集和存储度量。这意味着度量值在记录时带有时间戳，并与称为标签的可选键值对一起存储。</p>
-<p>目前，Milvus 使用 Prometheus 的以下组件：</p>
+    </button></h2><p><a href="https://prometheus.io/docs/introduction/overview/">Prometheus</a> is an open-source monitoring and alerting toolkit for Kubernetes implementations. It collects and stores metrics as time-series data. This means that metrics are stored with timestamps when recorded, alongside with optional key-value pairs called labels.</p>
+<p>Currently Milvus uses the following components of Prometheus:</p>
 <ul>
-<li>Prometheus 端点，用于从出口商设置的端点提取数据。</li>
-<li>Prometheus 操作符，用于有效管理 Prometheus 监控实例。</li>
-<li>Kube-prometheus 用于提供易于操作的端到端 Kubernetes 集群监控。</li>
+<li>Prometheus endpoint to pull data from endpoints set by exporters.</li>
+<li>Prometheus operator to effectively manage Prometheus monitoring instances.</li>
+<li>Kube-prometheus to provide easy to operate end-to-end Kubernetes cluster monitoring.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">度量名称</h3><p>Prometheus 中有效的度量名称包含三个元素：命名空间、子系统和名称。这三个元素用"_"连接。</p>
-<p>Prometheus 监控的 Milvus 度量的命名空间是 "milvus"。根据度量指标所属的角色，其子系统应为以下八个角色之一："根节点"、"代理"、"查询节点"、"查询节点"、"索引节点"、"索引节点"、"数据节点"、"数据节点"。</p>
-<p>例如，计算查询向量总数的 Milvus 度量名为<code translate="no">milvus_proxy_search_vectors_count</code> 。</p>
-<h3 id="Metric-types" class="common-anchor-header">度量类型</h3><p>Prometheus 支持四种度量类型：</p>
+<h3 id="Metric-names" class="common-anchor-header">Metric names</h3><p>A valid metric name in Prometheus contains three elements: namespace, subsystem, and name. These three elements are connected with "_".</p>
+<p>The namespace of Milvus metrics monitored by Prometheus is "milvus". Depending on the role that a metric belongs to, its subsystem should be one of the following eight roles: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
+<p>For instance, the Milvus metric that calculates the total number of vectors queried is named <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
+<h3 id="Metric-types" class="common-anchor-header">Metric types</h3><p>Prometheus supports four types of metrics:</p>
 <ul>
-<li>计数器：一种累积度量类型，其值只能在重启时增加或重置为零。</li>
-<li>仪表：一种度量类型，其值可以上升或下降。</li>
-<li>直方图：一种根据可配置的桶进行计数的指标类型。常见的例子是请求持续时间。</li>
-<li>摘要：与直方图类似的一种度量类型，可在滑动时间窗口内计算可配置的量化值。</li>
+<li>Counter: a type of cumulative metrics whose value can only increase or be reset to zero upon restart.</li>
+<li>Gauge: a type of metrics whose value can either go up and down.</li>
+<li>Histogram: a type of metrics that are counted based on configurable buckets. A common example is request duration.</li>
+<li>Summary: a type of metrics similar to histogram that calculates configurable quantiles over a sliding time window.</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">指标标签</h3><p>Prometheus 通过标签来区分具有相同度量名称的样本。标签是度量指标的特定属性。具有相同名称的度量值必须具有相同的<code translate="no">variable_labels</code> 字段值。下表列出了 Milvus 度量常见标签的名称和含义。</p>
+<h3 id="Metric-labels" class="common-anchor-header">Metric labels</h3><p>Prometheus differentiates samples with the same metric name by labeling them. A label is a certain attribute of a metric. Metrics with the same name must have the same value for the <code translate="no">variable_labels</code> field. The following table lists the names and meanings of common labels of Milvus metrics.</p>
 <table>
 <thead>
-<tr><th>标签名称</th><th>定义</th><th>值</th></tr>
+<tr><th>Label name</th><th>Definition</th><th>Values</th></tr>
 </thead>
 <tbody>
-<tr><td>"节点 ID</td><td>角色的唯一标识。</td><td>由 Milvus 生成的全局唯一 ID。</td></tr>
-<tr><td>状态</td><td>已处理操作或请求的状态。</td><td>"放弃"、"成功 "或 "失败"。</td></tr>
-<tr><td>"查询类型</td><td>读取请求的类型。</td><td>"搜索 "或 "查询"。</td></tr>
-<tr><td>"msg_type</td><td>信息的类型。</td><td>"插入"、"删除"、"搜索 "或 "查询"。</td></tr>
-<tr><td>"段状态</td><td>段的状态。</td><td>"密封"、"增长"、"刷新"、"冲洗"、"丢弃 "或 "导入"。</td></tr>
-<tr><td>"缓存状态</td><td>缓存对象的状态。</td><td>"命中 "或 "未命中"。</td></tr>
-<tr><td>"cache_name"（缓存名称</td><td>缓存对象的名称。该标签与 "cache_state "标签一起使用。</td><td>例如 "CollectionID"、"Schema "等。</td></tr>
-<tr><td>"通道名称</td><td>消息存储（Pulsar 或 Kafka）中的物理主题。</td><td>例如："by-dev-rootcoord-dml_0"、"by-dev-rootcoord-dml_255 "等。</td></tr>
-<tr><td>"函数名</td><td>处理特定请求的函数名称。</td><td>例如，"CreateCollection"（创建集合）、"CreatePartition"（创建分区）、"CreateIndex"（创建索引）等。</td></tr>
-<tr><td>"用户名</td><td>用于身份验证的用户名。</td><td>用户名由用户自行决定。</td></tr>
-<tr><td>"索引任务状态</td><td>索引任务在元存储中的状态。</td><td>"未发布"、"进行中"、"失败"、"已完成 "或 "已回收"。</td></tr>
+<tr><td>“node_id”</td><td>The unique identity of a role.</td><td>A globally unique ID generated by milvus.</td></tr>
+<tr><td>“status”</td><td>The status of a processed operation or request.</td><td>"abandon", "success", or "fail".</td></tr>
+<tr><td>“query_type”</td><td>The type of a read request.</td><td>“search” or "query".</td></tr>
+<tr><td>“msg_type”</td><td>The type of messages.</td><td>"insert", "delete", "search", or "query".</td></tr>
+<tr><td>“segment_state”</td><td>The status of a segment.</td><td>"Sealed", "Growing", "Flushed", "Flushing", "Dropped", or "Importing".</td></tr>
+<tr><td>“cache_state”</td><td>The status of a cached object.</td><td>“hit” or "miss".</td></tr>
+<tr><td>“cache_name”</td><td>The name of a cached object. This label is used together with the label "cache_state".</td><td>Eg. "CollectionID", "Schema", etc.</td></tr>
+<tr><td>“channel_name"</td><td>Physical topics in message storage (Pulsar or Kafka).</td><td>Eg."by-dev-rootcoord-dml_0", "by-dev-rootcoord-dml_255", etc.</td></tr>
+<tr><td>“function_name”</td><td>The name of a function that handles certain requests.</td><td>Eg. "CreateCollection", "CreatePartition", "CreateIndex", etc.</td></tr>
+<tr><td>“user_name”</td><td>The user name used for authentication.</td><td>A user name of your preference.</td></tr>
+<tr><td>“index_task_status”</td><td>The status of an index task in meta storage.</td><td>"unissued", "in-progress", "failed", "finished", or "recycled".</td></tr>
 </tbody>
 </table>
-<h2 id="Grafana-in-Milvus" class="common-anchor-header">Milvus 中的 Grafana<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">
+<h2 id="Grafana-in-Milvus" class="common-anchor-header">Grafana in Milvus<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,9 +88,9 @@ summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana</a>是一个开源的可视化堆栈，可以连接所有数据源。通过调出指标，它可以帮助用户理解、分析和监控海量数据。</p>
-<p>Milvus 使用 Grafana 的可定制仪表盘进行指标可视化。</p>
-<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana</a> is an open-source visualizing stack that can connect with all data sources. By pulling up metrics, it helps users understand, analyze and monitor massive data.</p>
+<p>Milvus uses Grafana’s customizable dashboards for metric visualization.</p>
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,9 +105,9 @@ summary: 了解如何在 Milvus 中使用 Prometheus 和 Grafana 进行监控和
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>了解了监控和警报的基本工作流程后，请学习：</p>
+    </button></h2><p>After learning about the basic workflow of monitoring and alerting, learn:</p>
 <ul>
-<li><a href="/docs/zh/monitor.md">部署监控服务</a></li>
-<li><a href="/docs/zh/visualize.md">实现 Milvus 指标可视化</a></li>
-<li><a href="/docs/zh/alert.md">创建警报</a></li>
+<li><a href="/docs/monitor.md">Deploy monitoring services</a></li>
+<li><a href="/docs/visualize.md">Visualize Milvus metrics</a></li>
+<li><a href="/docs/alert.md">Create an alert</a></li>
 </ul>

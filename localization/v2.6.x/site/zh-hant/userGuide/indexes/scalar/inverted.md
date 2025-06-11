@@ -1,11 +1,13 @@
 ---
 id: inverted.md
-title: 反轉
+title: INVERTED
 summary: >-
-  Milvus 中的 INVERTED 索引旨在加速標量欄位和結構化 JSON
-  欄位的篩選查詢。透過將詞彙對應到包含這些詞彙的文件或記錄，倒轉式索引可大幅提升查詢效能。
+  The INVERTED index in Milvus is designed to accelerate filter queries on both
+  scalar fields and structured JSON fields. By mapping terms to the documents or
+  records that contain them, inverted indexes greatly improve query performance
+  compared to brute-force searches.
 ---
-<h1 id="INVERTED" class="common-anchor-header">反轉<button data-href="#INVERTED" class="anchor-icon" translate="no">
+<h1 id="INVERTED" class="common-anchor-header">INVERTED<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 中的<code translate="no">INVERTED</code> 索引旨在加速標量欄位和結構化 JSON 欄位的過濾查詢。透過將詞彙對應到包含這些詞彙的文件或記錄，倒轉式索引可大幅提升查詢效能。</p>
-<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>The <code translate="no">INVERTED</code> index in Milvus is designed to accelerate filter queries on both scalar fields and structured JSON fields. By mapping terms to the documents or records that contain them, inverted indexes greatly improve query performance compared to brute-force searches.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,23 +38,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> 的支援下，Milvus 實作了倒置索引來加速篩選查詢，尤其是針對文字資料。以下是其運作方式：</p>
+    </button></h2><p>Powered by <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus implements inverted indexing to accelerate filter queries, especially for textual data. Here’s how it works:</p>
 <ol>
-<li><p><strong>將資料標記化</strong>：Milvus 採用您的原始資料 (本範例中為兩句話)：</p>
+<li><p><strong>Tokenize the Data</strong>: Milvus takes your raw data—in this example, two sentences:</p>
 <ul>
-<li><p><strong>「Milvus是一個雲端原生向量資料庫」。</strong></p></li>
-<li><p><strong>「Milvus 非常擅長效能」。</strong></p></li>
+<li><p><strong>“Milvus is a cloud-native vector database.”</strong></p></li>
+<li><p><strong>“Milvus is very good at performance.”</strong></p></li>
 </ul>
-<p>並將它們分割成獨特的詞彙 (例如：<em>Milvus</em>、<em>is</em>、<em>cloud-native</em>、<em>向量</em>、<em>資料庫</em>、<em>very</em>、<em>good</em>、<em>at</em>、<em>performance</em>)。</p></li>
-<li><p><strong>建立詞彙辭典</strong>：這些獨特的詞彙會儲存在一個排序清單中，稱為<strong>詞彙辭典</strong>。這個詞典可讓 Milvus 快速檢查單字是否存在，並找出它在索引中的位置。</p></li>
-<li><p><strong>建立反向清單</strong>：對於詞彙辭典中的每個詞彙，Milvus 保存一個<strong>反向列表</strong>，顯示哪些文件包含該詞彙。例如，<strong>"Milvus "</strong>出現在兩個句子中，所以它的反向列表指向兩個文件 ID。</p></li>
+<p>and breaks them into unique words (e.g., <em>Milvus</em>, <em>is</em>, <em>cloud-native</em>, <em>vector</em>, <em>database</em>, <em>very</em>, <em>good</em>, <em>at</em>, <em>performance</em>).</p></li>
+<li><p><strong>Build the Term Dictionary</strong>: These unique words are stored in a sorted list called the <strong>Term Dictionary</strong>. This dictionary lets Milvus quickly check if a word exists and locate its position in the index.</p></li>
+<li><p><strong>Create the Inverted List</strong>: For each word in the Term Dictionary, Milvus keeps an <strong>Inverted List</strong> showing which documents contain that word. For instance, <strong>“Milvus”</strong> appears in both sentences, so its inverted list points to both document IDs.</p></li>
 </ol>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
-   </span> <span class="img-wrapper"> <span>倒置</span> </span></p>
-<p>由於字典已排序，因此可以有效率地處理基於詞彙的篩選。Milvus 不需要掃描所有的文件，只需在字典中查詢該詞彙，並擷取其倒置清單 - 大幅加快大型資料集的搜尋與篩選速度。</p>
-<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">索引一般的標量欄位<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
+    <span>Inverted</span>
+  </span>
+</p>
+<p>Because the dictionary is sorted, term-based filtering can be handled efficiently. Instead of scanning all documents, Milvus just looks up the term in the dictionary and retrieves its inverted list—significantly speeding up searches and filters on large datasets.</p>
+<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">Index a regular scalar field<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,7 +71,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>對於<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong> 和<strong>ARRAY</strong> 等標量字段，建立反演索引非常簡單。使用<code translate="no">create_index()</code> 方法，並將<code translate="no">index_type</code> 參數設為<code translate="no">&quot;INVERTED&quot;</code> 。</p>
+    </button></h2><p>For scalar fields like <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, and <strong>ARRAY</strong>, creating an inverted index is straightforward. Use the <code translate="no">create_index()</code> method with the <code translate="no">index_type</code> parameter set to <code translate="no">&quot;INVERTED&quot;</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -86,7 +90,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-a-JSON-field" class="common-anchor-header">索引一個 JSON 欄位<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Index-a-JSON-field" class="common-anchor-header">Index a JSON field<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -101,12 +105,12 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 將其索引功能擴展到 JSON 欄位，允許您有效地過濾儲存在單列中的嵌套或結構化資料。與標量欄位不同，當索引一個 JSON 欄位時，您必須提供兩個額外的參數：</p>
+    </button></h2><p>Milvus extends its indexing capabilities to JSON fields, allowing you to efficiently filter on nested or structured data stored within a single column. Unlike scalar fields, when indexing a JSON field you must provide two additional parameters:</p>
 <ul>
-<li><p><code translate="no">json_path</code><strong>:</strong>指定要索引的巢狀關鍵字。</p></li>
-<li><p><code translate="no">json_cast_type</code><strong>:</strong>定義資料類型 (例如<code translate="no">&quot;varchar&quot;</code>,<code translate="no">&quot;double&quot;</code>, 或<code translate="no">&quot;bool&quot;</code>)，擷取的 JSON 值將被轉換成這種類型。</p></li>
+<li><p><code translate="no">json_path</code><strong>:</strong> Specifies the nested key to index.</p></li>
+<li><p><code translate="no">json_cast_type</code><strong>:</strong> Defines the data type (e.g., <code translate="no">&quot;varchar&quot;</code>, <code translate="no">&quot;double&quot;</code>, or <code translate="no">&quot;bool&quot;</code>) to which the extracted JSON value will be cast.</p></li>
 </ul>
-<p>例如，考慮一個名為<code translate="no">metadata</code> 的 JSON 欄位，其結構如下：</p>
+<p>For example, consider a JSON field named <code translate="no">metadata</code> with the following structure:</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;metadata&quot;: {
     &quot;product_info&quot;: {
@@ -119,7 +123,7 @@ client.create_index(
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>若要在特定的 JSON 路徑上建立反向索引，您可以使用下列方法：</p>
+<p>To create inverted indexes on specific JSON paths, you can use the following approach:</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string.</span>
@@ -147,43 +151,44 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>參數</p></th>
-     <th><p>說明</p></th>
-     <th><p>範例 值</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Example Value</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>模式中 JSON 欄位的名稱。</p></td>
+     <td><p>Name of the JSON field in your schema.</p></td>
      <td><p><code translate="no">"metadata"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>要建立的索引類型；目前只有<code translate="no">INVERTED</code> 支援 JSON 路徑索引。</p></td>
+     <td><p>Index type to create; currently only <code translate="no">INVERTED</code> is supported for JSON path indexing.</p></td>
      <td><p><code translate="no">"INVERTED"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(可選）自訂索引名稱。如果您在同一 JSON 欄位上建立多個索引，請指定不同的名稱。</p></td>
+     <td><p>(Optional) A custom index name. Specify different names if you create multiple indexes on the same JSON field.</p></td>
      <td><p><code translate="no">"json_index_1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>指定要索引的 JSON 路徑。您可以針對巢狀索引鍵、陣列位置或兩者 (例如<code translate="no">metadata["product_info"]["category"]</code> 或<code translate="no">metadata["tags"][0]</code>)。如果路徑遺失或某一行的陣列元素不存在，索引過程中會直接跳過該行，且不會產生錯誤。</p></td>
+     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code translate="no">metadata["product_info"]["category"]</code> or <code translate="no">metadata["tags"][0]</code>).
+ If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>在建立索引時，Milvus 會將抽取的 JSON 值轉換成的資料類型。有效值：</p>
+     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
 <ul>
-<li><p><code translate="no">"bool"</code> 或<code translate="no">"BOOL"</code></p></li>
-<li><p><code translate="no">"double"</code> 或<code translate="no">"DOUBLE"</code></p></li>
-<li><p><code translate="no">"varchar"</code> 或<code translate="no">"VARCHAR"</code></p>
-<p><strong>注意</strong>：對於整數值，Milvus 內部使用 double 來建立索引。超過 2^53 的大整數會失去精確度。如果轉換失敗（由於類型不匹配），不會產生錯誤，該行的值也不會被索引。</p></li>
+<li><p><code translate="no">"bool"</code> or <code translate="no">"BOOL"</code></p></li>
+<li><p><code translate="no">"double"</code> or <code translate="no">"DOUBLE"</code></p></li>
+<li><p><code translate="no">"varchar"</code> or <code translate="no">"VARCHAR"</code></p>
+<p><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If the cast fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</p></li>
 </ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
-<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">JSON 索引的注意事項<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
+<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">Considerations on JSON indexing<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -199,22 +204,22 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>過濾邏輯</strong>：</p>
+<li><p><strong>Filtering logic</strong>:</p>
 <ul>
-<li><p>如果您<strong>建立了雙重類型的索引</strong>(<code translate="no">json_cast_type=&quot;double&quot;</code>)，則只有數值類型的篩選條件才能使用該索引。如果篩選條件將雙索引與非數字條件比較，Milvus 會退回到暴力搜尋。</p></li>
-<li><p>如果您<strong>建立了 varchar 類型的索引</strong>(<code translate="no">json_cast_type=&quot;varchar&quot;</code>)，只有字串類型的篩選條件可以使用該索引。否則，Milvus 會回到暴力搜尋。</p></li>
-<li><p><strong>布林</strong>索引的行為與 varchar-type 類似。</p></li>
+<li><p>If you <strong>create a double-type index</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), only numeric-type filter conditions can use the index. If the filter compares a double index to a non-numeric condition, Milvus falls back to brute force search.</p></li>
+<li><p>If you <strong>create a varchar-type index</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), only string-type filter conditions can use the index. Otherwise, Milvus falls back to brute force.</p></li>
+<li><p><strong>Boolean</strong> indexing behaves similarly to varchar-type.</p></li>
 </ul></li>
-<li><p><strong>術語表達式</strong>：</p>
+<li><p><strong>Term expressions</strong>:</p>
 <ul>
-<li>您可以使用<code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code> 。但是，索引只對存放在該路徑下的標量值有效。如果<code translate="no">json[&quot;field&quot;]</code> 是一個陣列，查詢會退回到暴力查詢 (目前尚未支援陣列類型索引)。</li>
+<li>You can use <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. However, the index works only for scalar values stored under that path. If <code translate="no">json[&quot;field&quot;]</code> is an array, the query falls back to brute force (array-type indexing is not yet supported).</li>
 </ul></li>
-<li><p><strong>數值精確度</strong>：</p>
+<li><p><strong>Numeric precision</strong>:</p>
 <ul>
-<li>在內部，Milvus 將所有數值欄位索引為雙倍。如果數值超過<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>，就會失去精確度，對這些超出範圍的數值進行查詢時，可能無法完全匹配。</li>
+<li>Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>53</mn></msup></mrow><annotation encoding="application/x-tex">2^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, it loses precision, and queries on those out-of-range values may not match exactly.</li>
 </ul></li>
-<li><p><strong>資料完整性</strong>：</p>
+<li><p><strong>Data integrity</strong>:</p>
 <ul>
-<li>Milvus 不會解析或轉換超出您指定的鑄造範圍的 JSON 鍵。如果來源資料不一致（例如，某些資料列的 key<code translate="no">&quot;k&quot;</code> 儲存了字串，而其他資料列則儲存了數字），某些資料列將不會被索引。</li>
+<li>Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key <code translate="no">&quot;k&quot;</code> while others store a number), some rows will not be indexed.</li>
 </ul></li>
 </ul>

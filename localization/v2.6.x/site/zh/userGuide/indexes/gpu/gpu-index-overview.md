@@ -1,9 +1,11 @@
 ---
 id: gpu-index-overview.md
-title: GPU 索引概述
-summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高吞吐量和高调用场景下的搜索性能。
+title: GPU Index Overview
+summary: >-
+  Building an index with GPU support in Milvus can significantly improve search
+  performance in high-throughput and high-recall scenarios.
 ---
-<h1 id="GPU-Index-Overview" class="common-anchor-header">GPU 索引概述<button data-href="#GPU-Index-Overview" class="anchor-icon" translate="no">
+<h1 id="GPU-Index-Overview" class="common-anchor-header">GPU Index Overview<button data-href="#GPU-Index-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,13 +20,15 @@ summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高吞吐量和高调用情况下的搜索性能。</p>
-<p>下图比较了各种索引配置在不同硬件设置、向量数据集（Cohere 和 OpenAI）和搜索批量大小下的查询吞吐量（每秒查询次数），显示<code translate="no">GPU_CAGRA</code> 始终优于其他方法。</p>
+    </button></h1><p>Building an index with GPU support in Milvus can significantly improve search performance in high-throughput and high-recall scenarios.</p>
+<p>The following figure compares the query throughput (queries per second) of various index configurations across different hardware setups, vector datasets (Cohere and OpenAI), and search batch sizes, showing that <code translate="no">GPU_CAGRA</code> consistently outperforms other methods.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu-index-performance.png" alt="Gpu Index Performance" class="doc-image" id="gpu-index-performance" />
-   </span> <span class="img-wrapper"> <span>GPU 索引性能</span> </span></p>
-<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/gpu-index-performance.png" alt="Gpu Index Performance" class="doc-image" id="gpu-index-performance" />
+    <span>Gpu Index Performance</span>
+  </span>
+</p>
+<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,14 +44,14 @@ summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>对于<code translate="no">GPU_IVF_FLAT</code> ，<code translate="no">limit</code> 的最大值为 1,024。</p></li>
-<li><p>对于<code translate="no">GPU_IVF_PQ</code> 和<code translate="no">GPU_CAGRA</code> ，<code translate="no">limit</code> 的最大值为 1,024。</p></li>
-<li><p>虽然<code translate="no">GPU_BRUTE_FORCE</code> 没有设定<code translate="no">limit</code> ，但建议不要超过 4,096 以避免潜在的性能问题。</p></li>
-<li><p>目前，GPU 索引不支持<code translate="no">COSINE</code> 距离。如果需要使用<code translate="no">COSINE</code> 距离，应首先对数据进行归一化处理，然后使用内积 (IP) 距离作为替代。</p></li>
-<li><p>GPU 索引不完全支持加载 OOM 保护，过多的数据可能会导致 QueryNode 崩溃。</p></li>
-<li><p>GPU 索引不支持<a href="/docs/zh/range-search.md">范围</a>搜索和<a href="/docs/zh/grouping-search.md">分组搜索</a>等搜索功能。</p></li>
+<li><p>For <code translate="no">GPU_IVF_FLAT</code>, the maximum value for <code translate="no">limit</code> is 1,024.</p></li>
+<li><p>For <code translate="no">GPU_IVF_PQ</code> and <code translate="no">GPU_CAGRA</code>, the maximum value for <code translate="no">limit</code> is 1,024.</p></li>
+<li><p>While there is no set <code translate="no">limit</code> for <code translate="no">GPU_BRUTE_FORCE</code>, it is recommended not to exceed 4,096 to avoid potential performance issues.</p></li>
+<li><p>Currently, GPU indexes do not support <code translate="no">COSINE</code> distance. If <code translate="no">COSINE</code> distance is required, data should be normalized first, and then inner product (IP) distance can be used as a substitute.</p></li>
+<li><p>Loading OOM protection for GPU indexes is not fully supported, too much data might lead to QueryNode crashes.</p></li>
+<li><p>GPU indexes do not support search functions like <a href="/docs/range-search.md">range search</a> and <a href="/docs/grouping-search.md">grouping search</a>.</p></li>
 </ul>
-<h2 id="Supported-GPU-index-types" class="common-anchor-header">支持的 GPU 索引类型<button data-href="#Supported-GPU-index-types" class="anchor-icon" translate="no">
+<h2 id="Supported-GPU-index-types" class="common-anchor-header">Supported GPU index types<button data-href="#Supported-GPU-index-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,35 +66,35 @@ summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下表列出了 Milvus 支持的 GPU 索引类型。</p>
+    </button></h2><p>The following table lists the GPU index types supported by Milvus.</p>
 <table>
    <tr>
-     <th><p>索引类型</p></th>
-     <th><p>说明</p></th>
-     <th><p>内存使用量</p></th>
+     <th><p>Index Type</p></th>
+     <th><p>Description</p></th>
+     <th><p>Memory Usage</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/gpu-cagra.md">GPU_CAGRA</a></p></td>
-     <td><p>与使用昂贵的训练级 GPU 相比，使用推理级 GPU 运行 Milvus GPU 版本更具成本效益。</p></td>
-     <td><p>内存使用量约为原始向量数据的 1.8 倍。</p></td>
+     <td><p><a href="/docs/gpu-cagra.md">GPU_CAGRA</a></p></td>
+     <td><p>GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs to run the Milvus GPU version can be more cost-effective compared to using expensive training-grade GPUs.</p></td>
+     <td><p>Memory usage is approximately 1.8 times that of the original vector data.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/gpu-ivf-flat.md">GPU_IVF_FLAT</a></p></td>
-     <td><p>GPU_IVF_FLAT 是最基本的 IVF 索引，每个单元中存储的编码数据与原始数据一致。在进行搜索时，请注意针对 GPU_IVF_FLAT 索引 Collections 的任何搜索，都可以将 top-k (<code translate="no">limit</code>) 设置为最多 256。</p></td>
-     <td><p>需要与原始数据大小相等的内存。</p></td>
+     <td><p><a href="/docs/gpu-ivf-flat.md">GPU_IVF_FLAT</a></p></td>
+     <td><p>GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data. When conducting searches, note that you can set the top-k (<code translate="no">limit</code>) up to 256 for any search against a GPU_IVF_FLAT-indexed collection.</p></td>
+     <td><p>Requires memory equal to the size of the original data.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/gpu-ivf-pq.md">GPU_IVF_PQ</a></p></td>
-     <td><p>GPU_IVF_PQ 在量化向量的乘积之前执行 IVF 索引聚类。在进行搜索时，请注意可以将针对 GPU_IVF_FLAT 索引 Collections 的任何搜索的 top-k (<code translate="no">limit</code>) 设置为最高 8,192。</p></td>
-     <td><p>利用较小的内存占用，这取决于压缩参数的设置。</p></td>
+     <td><p><a href="/docs/gpu-ivf-pq.md">GPU_IVF_PQ</a></p></td>
+     <td><p>GPU_IVF_PQ performs IVF index clustering before quantizing the product of vectors. When conducting searches, note that you can set the top-k (<code translate="no">limit</code>) up to 8,192 for any search against a GPU_IVF_FLAT-indexed collection.</p></td>
+     <td><p>Utilizes a smaller memory footprint, which depends on the compression parameter settings.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/gpu-brute-force.md">GPU_BRUTE_FORCE</a></p></td>
-     <td><p>GPU_BRUTE_FORCE 专为对召回率要求极高的情况定制，通过将每个查询与数据集中的所有向量进行比较，保证召回率为 1。它只需要度量类型 (<code translate="no">metric_type</code>) 和 top-k (<code translate="no">limit</code>) 作为索引构建和搜索参数。</p></td>
-     <td><p>所需的内存与原始数据的大小相等。</p></td>
+     <td><p><a href="/docs/gpu-brute-force.md">GPU_BRUTE_FORCE</a></p></td>
+     <td><p>GPU_BRUTE_FORCE is tailored for cases where extremely high recall is crucial, guaranteeing a recall of 1 by comparing each query with all vectors in the dataset. It only requires the metric type (<code translate="no">metric_type</code>) and top-k (<code translate="no">limit</code>) as index building and search parameters.</p></td>
+     <td><p>Requires memory equal to the size of the original data.</p></td>
    </tr>
 </table>
-<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">为 GPU 内存控制配置 Milvus 设置<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
+<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configure Milvus settings for GPU memory control<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,20 +109,20 @@ summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 使用全局图形内存池分配 GPU 内存。它支持<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus 配置文件</a>中的两个参数<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 。内存池大小初始设置为<code translate="no">initMemSize</code> ，超过此限制后将自动扩展至<code translate="no">maxMemSize</code> 。</p>
-<p>Milvus 启动时，默认<code translate="no">initMemSize</code> 为可用 GPU 内存的 1/2，默认<code translate="no">maxMemSize</code> 等于所有可用 GPU 内存。</p>
-<p>在 Milvus 2.4.1 之前，Milvus 使用统一的 GPU 内存池。对于 2.4.1 之前的版本，建议将这两个值都设为 0。</p>
+    </button></h2><p>Milvus uses a global graphics memory pool to allocate GPU memory. It supports two parameters <code translate="no">initMemSize</code> and <code translate="no">maxMemSize</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus config file</a>. The pool size is initially set to <code translate="no">initMemSize</code>, and will be automatically expanded to <code translate="no">maxMemSize</code> after exceeding this limit.</p>
+<p>The default <code translate="no">initMemSize</code> is 1/2 of the available GPU memory when Milvus starts, and the default <code translate="no">maxMemSize</code> is equal to all available GPU memory.</p>
+<p>Up until Milvus 2.4.1, Milvus uses a unified GPU memory pool. For versions prior to 2.4.1, it was recommended to set both of the value to 0.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>从 Milvus 2.4.1 起，GPU 内存池仅用于搜索期间的临时 GPU 数据。因此，建议将其设置为 2048 和 4096。</p>
+<p>From Milvus 2.4.1 onwards, the GPU memory pool is only used for temporary GPU data during searches. Therefore, it is recommended to set it to 2048 and 4096.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">2048</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">4096</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>要了解如何建立 GPU 索引，请参阅每种索引类型的具体指南。</p>
-<h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
+<p>To learn how to build a GPU index, refer to the specific guide for each index type.</p>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -134,8 +138,8 @@ summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>何时适合使用 GPU 索引？</strong></p>
-<p>GPU 索引尤其适用于需要高吞吐量或高召回率的情况。例如，在处理大批量数据时，GPU 索引的吞吐量可比 CPU 索引高出 100 倍之多。在批量较小的情况下，GPU 索引在性能上仍明显优于 CPU 索引。此外，如果需要快速插入数据，采用 GPU 可以大大加快索引的建立过程。</p></li>
-<li><p><strong>GPU_CAGRA、GPU_IVF_PQ、GPU_IVF_FLAT 和 GPU_BRUTE_FORCE 等 GPU 索引最适合哪些应用场景？</strong></p>
-<p><code translate="no">GPU_CAGRA</code> GPU_IVF_FLAT、GPU_BRUTE_FORCE 和 GPU_CAGRA 索引非常适合需要增强性能的应用场景，尽管代价是消耗更多内存。对于优先考虑节省内存的环境， 索引可以帮助最大限度地减少存储需求，不过这也会带来较高的精度损失。 索引是一个平衡的选择，在性能和内存使用之间提供了一个折中方案。最后， 索引专为穷举搜索操作而设计，通过执行遍历搜索可保证召回率为 1。<code translate="no">GPU_IVF_PQ</code> <code translate="no">GPU_IVF_FLAT</code> <code translate="no">GPU_BRUTE_FORCE</code> </p></li>
+<li><p><strong>When is it appropriate to utilize a GPU index?</strong></p>
+<p>A GPU index is particularly beneficial in situations that demand high throughput or high recall. For instance, when dealing with large batches, the throughput of GPU indexing can surpass that of CPU indexing by as much as 100 times. In scenarios with smaller batches, GPU indexes still significantly outshine CPU indexes in terms of performance. Furthermore, if there’s a requirement for rapid data insertion, incorporating a GPU can substantially speed up the process of building indexes.</p></li>
+<li><p><strong>In which scenarios are GPU indexes like GPU_CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT, and GPU_BRUTE_FORCE most suitable?</strong></p>
+<p><code translate="no">GPU_CAGRA</code> indexes are ideal for scenarios that demand enhanced performance, albeit at the cost of consuming more memory. For environments where memory conservation is a priority, the <code translate="no">GPU_IVF_PQ</code> index can help minimize storage requirements, though this comes with a higher loss in precision. The <code translate="no">GPU_IVF_FLAT</code> index serves as a balanced option, offering a compromise between performance and memory usage. Lastly, the <code translate="no">GPU_BRUTE_FORCE</code> index is designed for exhaustive search operations, guaranteeing a recall rate of 1 by performing traversal searches.</p></li>
 </ul>

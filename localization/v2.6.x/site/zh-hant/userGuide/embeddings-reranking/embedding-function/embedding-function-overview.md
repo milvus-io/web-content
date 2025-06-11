@@ -1,14 +1,19 @@
 ---
 id: embedding-function-overview.md
-title: 嵌入函數概述Compatible with Milvus 2.6.x
+title: Embedding Function Overview
 summary: >-
-  Milvus 的 Function 模組可讓您透過自動呼叫外部模型提供者（如 OpenAI、AWS Bedrock、Google Vertex AI
-  等），將原始文字資料轉換為向量嵌入。有了 Function 模組，您就不需要再手動與嵌入式 API 連接-Milvus
-  會處理向提供者傳送請求、接收嵌入式資料，以及將其儲存在您的集合中的整個過程。對於語意搜尋，您只需要提供原始查詢資料，而不需要查詢向量。Milvus
-  會以您用於擷取的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。
+  The Function module in Milvus allows you to transform raw text data into
+  vector embeddings by automatically calling external model providers (like
+  OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no
+  longer need to manually interface with embedding APIs—Milvus handles the
+  entire process of sending requests to providers, receiving embeddings, and
+  storing them in your collections. For semantic search, you need provide only
+  raw query data, not a query vector. Milvus generates the query vector with the
+  same model you used for ingestion, compares it to the stored vectors, and
+  returns the most relevant results.
 beta: Milvus 2.6.x
 ---
-<h1 id="Embedding-Function-Overview" class="common-anchor-header">嵌入函數概述<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
+<h1 id="Embedding-Function-Overview" class="common-anchor-header">Embedding Function Overview<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +28,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 的 Function 模組可讓您透過自動呼叫外部模型提供者（如 OpenAI、AWS Bedrock、Google Vertex AI 等），將原始文字資料轉換為向量嵌入。有了 Function 模組，您就不需要再手動與嵌入式 API 連接-Milvus 會處理向提供者傳送請求、接收嵌入式資料，以及將其儲存在您的集合中的整個過程。對於語意搜尋，您只需要提供原始查詢資料，而不需要查詢向量。Milvus 以您用於接收的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。</p>
-<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
+    </button></h1><p>The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external model providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results.</p>
+<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,17 +45,17 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Function 模組嵌入的任何輸入欄位必須始終包含一個值；如果提供的是空值，模組將拋出一個錯誤。</p></li>
-<li><p>Function 模組只處理集合模式中明確定義的欄位；它不會產生動態欄位的嵌入。</p></li>
-<li><p>要嵌入的輸入欄位必須是<code translate="no">VARCHAR</code> 類型。</p></li>
-<li><p>Function 模組可以將輸入欄位嵌入到：</p>
+<li><p>Any input field that the Function module embeds must always contain a value; if a null is supplied, the module will throw an error.</p></li>
+<li><p>The Function module processes only fields that are explicitly defined in the collection schema; it does not generate embeddings for dynamic fields.</p></li>
+<li><p>Input fields to be embedded must be of the <code translate="no">VARCHAR</code> type.</p></li>
+<li><p>The Function module can embed an input field to:</p>
 <ul>
 <li><p><code translate="no">FLOAT_VECTOR</code></p></li>
 <li><p><code translate="no">INT8_VECTOR</code></p></li>
 </ul>
-<p>不支援轉換為<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 或<code translate="no">BFLOAT16_VECTOR</code> 。</p></li>
+<p>Conversions to <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, or <code translate="no">BFLOAT16_VECTOR</code> are not supported.</p></li>
 </ul>
-<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,101 +70,105 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Function 模組透過呼叫您所選擇的外部模型提供者，將原始文字轉換成向量嵌入。不同的提供者支援不同的模型、嵌入格式和認證方法，總結如下。</p>
-<h3 id="Supported-model-providers" class="common-anchor-header">支援的模型提供者</h3><table>
+    </button></h2><p>The Function module turns raw text into vector embeddings by calling an external model provider of your choice. Different providers support different models, embedding formats, and authentication methods, all summarized below.</p>
+<h3 id="Supported-model-providers" class="common-anchor-header">Supported model providers</h3><table>
    <tr>
-     <th><p>提供者</p></th>
-     <th><p>典型模型</p></th>
-     <th><p>嵌入類型</p></th>
-     <th><p>驗證方法</p></th>
+     <th><p>Provider</p></th>
+     <th><p>Typical Models</p></th>
+     <th><p>Embedding Type</p></th>
+     <th><p>Authentication Method</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh-hant/openai.md">OpenAI</a></p></td>
-     <td><p>文字嵌入-3-*</p></td>
-     <td><p>密集 (<code translate="no">FLOAT_VECTOR</code>)</p></td>
-     <td><p>API 金鑰</p></td>
+     <td><p><a href="/docs/openai.md">OpenAI</a></p></td>
+     <td><p>text-embedding-3-*</p></td>
+     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh-hant/azure-openai.md">Azure OpenAI</a></p></td>
-     <td><p>基於部署</p></td>
-     <td><p>密集 (<code translate="no">FLOAT_VECTOR</code>)</p></td>
-     <td><p>API 金鑰</p></td>
+     <td><p><a href="/docs/azure-openai.md">Azure OpenAI</a></p></td>
+     <td><p>Deployment-based</p></td>
+     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh-hant/dashscope.md">DashScope</a></p></td>
+     <td><p><a href="/docs/dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
      <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
-     <td><p>API 金鑰</p></td>
+     <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh-hant/bedrock.md">床岩</a></p></td>
-     <td><p>墊.titan-embed-text-v2</p></td>
-     <td><p>密集 (<code translate="no">FLOAT_VECTOR</code>)</p></td>
-     <td><p>AK/SK 對</p></td>
+     <td><p><a href="/docs/bedrock.md">Bedrock</a></p></td>
+     <td><p>amazon.titan-embed-text-v2</p></td>
+     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p>AK/SK pair</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh-hant/vertex-ai.md">頂點 AI</a></p></td>
-     <td><p>文字嵌入-005</p></td>
-     <td><p>密集 (<code translate="no">FLOAT_VECTOR</code>)</p></td>
-     <td><p>GCP 服務帳戶 JSON</p></td>
+     <td><p><a href="/docs/vertex-ai.md">Vertex AI</a></p></td>
+     <td><p>text-embedding-005</p></td>
+     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p>GCP service-account JSON</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh-hant/voyage-ai.md">航程 AI</a></p></td>
+     <td><p><a href="/docs/voyage-ai.md">Voyage AI</a></p></td>
      <td><p>voyage-3, voyage-lite-02</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code> /<code translate="no">INT8_VECTOR</code>)</p></td>
-     <td><p>API 金鑰</p></td>
+     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code>)</p></td>
+     <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh-hant/cohere.md">邏輯</a></p></td>
+     <td><p><a href="/docs/cohere.md">Cohere</a></p></td>
      <td><p>embed-english-v3.0</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code> /<code translate="no">INT8_VECTOR</code>)</p></td>
-     <td><p>API 金鑰</p></td>
+     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code>)</p></td>
+     <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh-hant/siliconflow.md">矽流</a></p></td>
+     <td><p><a href="/docs/siliconflow.md">SiliconFlow</a></p></td>
      <td><p>BAAI/bge-large-zh-v1.5</p></td>
      <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
-     <td><p>API 金鑰</p></td>
+     <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh-hant/hugging-face-tei.md">擁抱臉</a></p></td>
-     <td><p>任何 TEI 服務的模型</p></td>
-     <td><p>密集 (<code translate="no">FLOAT_VECTOR</code>)</p></td>
-     <td><p>可選 API 金鑰</p></td>
+     <td><p><a href="/docs/hugging-face-tei.md">Hugging Face</a></p></td>
+     <td><p>Any TEI-served model</p></td>
+     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p>Optional API key</p></td>
    </tr>
 </table>
-<h3 id="Workflow" class="common-anchor-header">工作流程</h3><p>下圖顯示 Milvus 功能的運作方式。</p>
+<h3 id="Workflow" class="common-anchor-header">Workflow</h3><p>The following diagram shows how the Function works in Milvus.</p>
 <ol>
-<li><p><strong>輸入文字</strong>：使用者將原始資料（例如文件）插入 Milvus。</p></li>
-<li><p><strong>產生嵌入</strong>：Milvus 中的 Function 模組會自動呼叫已設定的模型提供者，將原始資料轉換成向量嵌入。</p></li>
-<li><p><strong>儲存嵌入資料</strong>：產生的嵌入資料會儲存在 Milvus 集合中明確定義的向量欄位中。</p></li>
-<li><p><strong>查詢文字</strong>：使用者向 Milvus 提交文字查詢。</p></li>
-<li><p><strong>語意搜尋</strong>：Milvus 內部會將查詢轉換為向量嵌入，針對儲存的嵌入進行相似性搜尋，並擷取相關結果。</p></li>
-<li><p><strong>傳回結果</strong>：Milvus 會將最匹配的結果傳回給應用程式。</p></li>
+<li><p><strong>Input text</strong>: Users insert raw data (e.g. documents) into Milvus.</p></li>
+<li><p><strong>Generate embeddings</strong>: The Function module within Milvus automatically calls the configured model provider to convert raw data into vector embeddings.</p></li>
+<li><p><strong>Store embeddings</strong>: The resulting embeddings are stored in explicitly defined vector fields within Milvus collections.</p></li>
+<li><p><strong>Query text</strong>: Users submit text queries to Milvus.</p></li>
+<li><p><strong>Semantic search</strong>: Milvus internally converts queries to vector embeddings, conducts similarity searches against stored embeddings, and retrieves relevant results.</p></li>
+<li><p><strong>Return results</strong>: Milvus returns top-matching results to the application.</p></li>
 </ol>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
-   </span> <span class="img-wrapper"> <span>嵌入功能概述</span> </span></p>
-<h3 id="Credential-management" class="common-anchor-header">憑證管理</h3><p>連接至外部嵌入 API 需要認證憑證（API 金鑰或存取/保密金鑰對）。在您的應用程式碼中暴露這些認證會造成安全風險。Milvus 通過在 Milvus 配置文件 (<code translate="no">milvus.yaml</code>) 中安全地存儲憑證來解決這個問題。</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
+    <span>Embedding Function Overview</span>
+  </span>
+</p>
+<h3 id="Credential-management" class="common-anchor-header">Credential management</h3><p>Connecting to external embedding APIs requires authentication credentials (API keys or access/secret key pairs). Exposing these credentials in your application code creates security risks. Milvus solves this by storing credentials securely in the Milvus configuration file (<code translate="no">milvus.yaml</code>).</p>
 <ol>
-<li><p><strong>新增憑證</strong>：在頂層<code translate="no">credential:</code> 區塊下，給每個憑證一個唯一的標籤；然後在<code translate="no">function:</code> 區塊中指向該標籤。</p></li>
-<li><p><strong>伺服器載入設定</strong>：Milvus 讀取 YAML 檔案，將原始金鑰快取到記憶體中，並只記住它們的標籤 (例如<code translate="no">apikey1</code>)。</p></li>
-<li><p><strong>呼叫函式</strong>：可選擇指定<code translate="no">credential</code> 參數。</p>
+<li><p><strong>Add credentials</strong>: Under the top-level <code translate="no">credential:</code> block, give each credential a unique label; then point to that label in the <code translate="no">function:</code> block.</p></li>
+<li><p><strong>Server loads config</strong>: Milvus reads the YAML file, caches the raw keys in memory, and remembers only their labels (e.g. <code translate="no">apikey1</code>).</p></li>
+<li><p><strong>Call function</strong>: Optionally specify the <code translate="no">credential</code> argument.</p>
 <ul>
-<li><p>如果您在函式定義時提供憑證名稱，Milvus 會使用指定的憑證。</p></li>
-<li><p>如果省略參數，Milvus 會自動回復到<code translate="no">milvus.yaml</code> 中為該模型提供者設定的憑證。</p>
-<p>無論哪種方式，秘鑰都不會離開伺服器。</p></li>
+<li><p>If you supply a credential name with function definition, Milvus uses the specified credential.</p></li>
+<li><p>If you omit the argument, Milvus automatically falls back to the credential configured for that model provider in <code translate="no">milvus.yaml</code>.</p>
+<p>Either way, the secret key never leaves the server.</p></li>
 </ul></li>
 </ol>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
-   </span> <span class="img-wrapper"> <span>憑證配置溢出</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+    <span>Credential Config Overflow</span>
+  </span>
+</p>
 <div class="alert note">
-<p>如果您使用 Docker Compose 部署 Milvus，您也可以透過環境變數注入相同的欄位。有關確切的變量名稱，請參閱特定提供者的指南。</p>
+<p>If you deploy Milvus with Docker Compose, you can also inject the same fields through environment variables. Refer to the provider-specific guides for exact variable names.</p>
 </div>
-<h2 id="Configure-credentials" class="common-anchor-header">配置憑證<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<h2 id="Configure-credentials" class="common-anchor-header">Configure credentials<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -174,8 +183,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在使用 Milvus 的嵌入功能之前，請先設定存取憑證。</p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration" class="common-anchor-header">步驟 1：在 Milvus 配置中加入憑證</h3><p>在<code translate="no">milvus.yaml</code> 檔案中，編輯<code translate="no">credential</code> 區塊，為您需要存取的每個提供者加入項目：</p>
+    </button></h2><p>Before using an embedding function with Milvus, configure access credentials.</p>
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration" class="common-anchor-header">Step 1: Add credentials to Milvus configuration</h3><p>In your <code translate="no">milvus.yaml</code> file, edit the <code translate="no">credential</code> block with entries for each provider you need to access:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -198,13 +207,13 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>提供商類型</p></th>
-     <th><p>必填欄位</p></th>
-     <th><p>配置範例</p></th>
+     <th><p>Provider Type</p></th>
+     <th><p>Required Fields</p></th>
+     <th><p>Example Config</p></th>
    </tr>
    <tr>
-     <td><p>AK/SK 對 (AWS Bedrock)</p></td>
-     <td><p><code translate="no">access_key_id</code>,<code translate="no">secret_access_key</code></p></td>
+     <td><p>AK/SK pair (AWS Bedrock)</p></td>
+     <td><p><code translate="no">access_key_id</code>, <code translate="no">secret_access_key</code></p></td>
      <td><pre><code translate="no" class="yaml language-yaml"> credential:
      ...
      aksk1:    # custom label
@@ -214,7 +223,7 @@ beta: Milvus 2.6.x
 </code></pre></td>
    </tr>
    <tr>
-     <td><p>基於 API 鑰匙 (OpenAI、Voyage AI 等)</p></td>
+     <td><p>API-key based (OpenAI, Voyage AI, etc.)</p></td>
      <td><p><code translate="no">apikey</code></p></td>
      <td><pre><code translate="no" class="yaml language-yaml"> credential:
      ...
@@ -224,7 +233,7 @@ beta: Milvus 2.6.x
 </code></pre></td>
    </tr>
    <tr>
-     <td><p>GCP 服務帳戶 JSON (Vertex AI)</p></td>
+     <td><p>GCP service-account JSON (Vertex AI)</p></td>
      <td><p><code translate="no">credential_json</code></p></td>
      <td><pre><code translate="no" class="yaml language-yaml"> credential:
      ...
@@ -234,7 +243,7 @@ beta: Milvus 2.6.x
 </code></pre></td>
    </tr>
 </table>
-<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">步驟 2：配置提供者設定</h3><p>在同一組態檔案中，編輯<code translate="no">function</code> 區塊，告訴 Milvus 使用哪個 key 來嵌入服務呼叫：</p>
+<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">Step 2: Configure provider settings</h3><p>In the same configuration file, edit the <code translate="no">function</code> block to tell Milvus which key to use for embedding service calls:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -253,8 +262,8 @@ beta: Milvus 2.6.x
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關如何套用 Milvus 設定的詳細資訊，請參閱<a href="/docs/zh-hant/dynamic_config.md">Configure Milvus on the Fly</a>。</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">使用嵌入功能<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p>For more information on how to apply Milvus configuration, refer to <a href="/docs/dynamic_config.md">Configure Milvus on the Fly</a>.</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -269,14 +278,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦配置了憑證，請按照以下步驟定義和使用嵌入函數。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步驟 1：定義模式欄位</h3><p>若要使用嵌入功能，請建立具有特定模式的集合。此模式必須包含至少三個必要欄位：</p>
+    </button></h2><p>Once credentials are configured, follow these steps to define and use embedding functions.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Step 1: Define schema fields</h3><p>To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:</p>
 <ul>
-<li><p>唯一識別集合中每個實體的主要欄位。</p></li>
-<li><p>儲存要嵌入的原始資料的標量欄位。</p></li>
-<li><p>預留向量欄位，用來儲存函式將為標量欄位產生的向量嵌入。</p></li>
+<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
+<li><p>A scalar field that stores raw data to be embedded.</p></li>
+<li><p>A vector field reserved to store vector embeddings that the function will generate for the scalar field.</p></li>
 </ul>
-<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense&quot;</code> 用來儲存函式模組要產生的嵌入資料。切記設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
+<p>The following example defines a schema with one scalar field <code translate="no">&quot;document&quot;</code> for storing textual data and one vector field <code translate="no">&quot;dense&quot;</code> for storing embeddings to be generated by the Function module. Remember to set the vector dimension (<code translate="no">dim</code>) to match the output of your chosen embedding model.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -300,8 +309,8 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># For sparse vector, data type must be SPARSE_FLOAT_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：在模式中加入嵌入函數</h3><p>Milvus 中的 Function 模組會自動將儲存在標量欄位中的原始資料轉換為嵌入資料，並將其儲存在明確定義的向量欄位中。</p>
-<p>下面的範例新增了一個 Function 模組 (<code translate="no">openai_embedding</code>)，將標量欄位<code translate="no">&quot;document&quot;</code> 轉換成嵌入式資料，將產生的向量儲存到之前定義的<code translate="no">&quot;dense&quot;</code> 向量欄位中。</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Step 2: Add embedding function to schema</h3><p>The Function module in Milvus automatically converts raw data stored in a scalar field into embeddings and stores them into the explicitly defined vector field.</p>
+<p>The example below adds a Function module (<code translate="no">openai_embedding</code>) that converts the scalar field <code translate="no">&quot;document&quot;</code> into embeddings, storing the resulting vectors in the <code translate="no">&quot;dense&quot;</code> vector field defined earlier.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                        <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -323,74 +332,75 @@ schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>參數</p></th>
-     <th><p>說明</p></th>
-     <th><p>範例值</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Example Value</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Milvus 內嵌入函數的唯一識別碼。</p></td>
+     <td><p>Unique identifier for the embedding function within Milvus.</p></td>
      <td><p><code translate="no">"openai_embedding"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>使用的嵌入函數類型。可能的值：</p>
+     <td><p>Type of embedding function used. Possible values:</p>
 <ul>
-<li><p><code translate="no">FunctionType.TEXTEMBEDDING</code>:產生密集向量，捕捉文字中的語意。</p></li>
-<li><p><code translate="no">FunctionType.BM25</code>:根據 BM25 排序演算法產生稀疏向量，該演算法使用詞彙頻率和反向文件頻率計算相關性分數。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>。</p></li>
+<li><p><code translate="no">FunctionType.TEXTEMBEDDING</code>: Generates dense vectors that capture semantic meaning within the text.</p></li>
+<li><p><code translate="no">FunctionType.BM25</code>: Generates sparse vectors based on the BM25 ranking algorithm, which computes relevance scores using term frequency and inverse document frequency. For more information, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
 </ul></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>包含要嵌入的原始資料的標量欄位。目前，此參數只接受一個欄位名稱。</p></td>
+     <td><p>Scalar field containing raw data to be embedded. Currently, this parameter accepts only one field name.</p></td>
      <td><p><code translate="no">["document"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>向量欄位，用於儲存已產生的嵌入。目前，此參數只接受一個欄位名稱。</p></td>
+     <td><p>Vector field for storing generated embeddings. Currently, this parameter accepts only one field name.</p></td>
      <td><p><code translate="no">["dense"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>包含嵌入配置的字典。註：<code translate="no">params</code> 內的參數會因嵌入模型提供者而異。</p></td>
+     <td><p>Dictionary containing embedding configurations. Note: Parameters within <code translate="no">params</code> vary depending on the embedding model providers.</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
-     <td><p>嵌入模型提供者。</p></td>
+     <td><p>The embedding model provider.</p></td>
      <td><p><code translate="no">"openai"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
-     <td><p>指定要使用的嵌入模型。</p></td>
+     <td><p>Specifies which embedding model to use.</p></td>
      <td><p><code translate="no">"text-embedding-3-small"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>在<code translate="no">milvus.yaml</code> 的頂層<code translate="no">credential:</code> 部分定義的憑證的標籤。 </p>
+     <td><p>The label of a credential defined in the top-level <code translate="no">credential:</code> section of <code translate="no">milvus.yaml</code>. </p>
 <ul>
-<li><p>提供時，Milvus 會擷取匹配的金鑰對或 API 令牌，並在伺服器端簽署請求。</p></li>
-<li><p>如果省略 (<code translate="no">None</code>)，Milvus 會回退到<code translate="no">milvus.yaml</code> 中為目標模型提供者明確配置的憑證。</p></li>
-<li><p>如果標籤未知或參考的金鑰遺失，則呼叫失敗。</p></li>
+<li><p>When provided, Milvus retrieves the matching key pair or API token and signs the request on the server side.</p></li>
+<li><p>When omitted (<code translate="no">None</code>), Milvus falls back to the credential explicitly configured for the target model provider in <code translate="no">milvus.yaml</code>.</p></li>
+<li><p>If the label is unknown or the referenced key is missing, the call fails.</p></li>
 </ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>輸出嵌入的維數。對於 OpenAI 的第三代模型，您可以縮短全向量以降低成本和延遲，而不會造成語意資訊的重大損失。如需詳細資訊，請參閱<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI 公佈部落格文章</a>。<strong>注意：</strong>如果您縮短向量維度，請確保在模式的<code translate="no">add_field</code> 方法中為向量欄位指定的<code translate="no">dim</code> 值與您嵌入函式的最終輸出維度相符。</p></td>
+     <td><p>The number of dimensions for the output embeddings. For OpenAI's third-generation models, you can shorten the full vector to reduce cost and latency without a significant loss of semantic information. For more information, refer to <a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI announcement blog post</a>.
+ <strong>Note:</strong> If you shorten the vector dimension, ensure the <code translate="no">dim</code> value specified in the schema's <code translate="no">add_field</code> method for the vector field matches the final output dimension of your embedding function.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">user</code></p></td>
-     <td><p>用於追蹤 API 使用情況的使用者層級識別碼。</p></td>
+     <td><p>A user-level identifier for tracking API usage.</p></td>
      <td><p><code translate="no">"user123"</code></p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>對於具有多個需要將文字轉換為向量的標量欄位的集合，請在集合模式中加入單獨的函式，確保每個函式都有唯一的名稱和<code translate="no">output_field_names</code> 值。</p>
+<p>For collections with multiple scalar fields requiring text-to-vector conversion, add separate functions to the collection schema, ensuring each function has a unique name and <code translate="no">output_field_names</code> value.</p>
 </div>
-<h3 id="Step-3-Configure-index" class="common-anchor-header">步驟 3：配置索引</h3><p>定義包含必要欄位和內建函式的模式後，為您的集合設定索引。為了簡化這個過程，請使用<code translate="no">AUTOINDEX</code> 作為<code translate="no">index_type</code> ，這個選項允許 Milvus 根據您的資料結構選擇和配置最適合的索引類型。</p>
+<h3 id="Step-3-Configure-index" class="common-anchor-header">Step 3: Configure index</h3><p>After defining the schema with necessary fields and the built-in function, set up the index for your collection. To simplify this process, use <code translate="no">AUTOINDEX</code> as the <code translate="no">index_type</code>, an option that allows Milvus to choose and configure the most suitable index type based on the structure of your data.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -401,7 +411,7 @@ index_params.add_index(
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Create-collection" class="common-anchor-header">步驟 4：建立集合</h3><p>現在使用已定義的模式和索引參數建立資料集。</p>
+<h3 id="Step-4-Create-collection" class="common-anchor-header">Step 4: Create collection</h3><p>Now create the collection using the schema and index parameters defined.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -409,7 +419,7 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">步驟 5：插入資料</h3><p>設定資料集和索引後，您就可以插入原始資料了。在這個過程中，您只需要提供原始文字。我們之前定義的 Function 模組會自動為每個文字項目產生相對應的稀疏向量。</p>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">Step 5: Insert data</h3><p>After setting up your collection and index, you’re ready to insert your raw data. In this process, you need only to provide the raw text. The Function module we defined earlier automatically generates the corresponding sparse vector for each text entry.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -417,7 +427,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">步驟 6：執行向量搜尋</h3><p>插入資料後，使用原始查詢文字執行語意搜尋。Milvus 會自動將您的查詢轉換成嵌入向量，根據相似度擷取相關文件，並傳回最匹配的結果。</p>
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Step 6: Perform vector search</h3><p>After data insertion, perform a semantic search using raw query text. Milvus automatically converts your query into an embedding vector, retrieves relevant documents based on similarity, and returns the top-matching results.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -432,4 +442,4 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關搜尋和查詢操作的詳細資訊，請參閱<a href="/docs/zh-hant/single-vector-search.md">基本向量</a> <a href="/docs/zh-hant/get-and-scalar-query.md">搜尋和查詢</a>。</p>
+<p>For more information about search and query operations, refer to <a href="/docs/single-vector-search.md">Basic Vector Search</a> and <a href="/docs/get-and-scalar-query.md">Query</a>.</p>

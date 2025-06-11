@@ -1,14 +1,13 @@
 ---
 id: grant_roles.md
-title: Conceder funções aos utilizadores
+title: Grant Roles to Users
 summary: >-
-  Depois de criar uma função e conceder privilégios à função, pode conceder a
-  função aos utilizadores para que estes possam aceder a recursos e executar
-  acções definidas pela função. É possível conceder várias funções a um
-  utilizador ou conceder uma função a vários utilizadores. Este guia apresenta a
-  forma de conceder funções aos utilizadores.
+  After creating a role and granting privileges to the role, you can grant the
+  role to users so that the users can access resources and perform actions that
+  are defined by the role. You can grant multiple roles to a user or grant a
+  role to multiple users. This guide introduces how to grant roles to users.
 ---
-<h1 id="Grant-Roles-to-Users" class="common-anchor-header">Conceder funções aos utilizadores<button data-href="#Grant-Roles-to-Users" class="anchor-icon" translate="no">
+<h1 id="Grant-Roles-to-Users" class="common-anchor-header">Grant Roles to Users<button data-href="#Grant-Roles-to-Users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +22,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Depois de criar uma função e conceder privilégios à função, pode conceder a função aos utilizadores para que estes possam aceder a recursos e executar acções definidas pela função. É possível conceder várias funções a um utilizador ou conceder uma função a vários utilizadores. Este guia apresenta a forma de conceder funções aos utilizadores.</p>
-<p>Ao utilizador interno <code translate="no">root</code> do Milvus já foi atribuída a função <code translate="no">admin</code>, que tem todos os privilégios. Não é necessário atribuir-lhe quaisquer outros papéis.</p>
-<h2 id="Grant-a-role-to-a-user" class="common-anchor-header">Atribuir uma função a um utilizador<button data-href="#Grant-a-role-to-a-user" class="anchor-icon" translate="no">
+    </button></h1><p>After creating a role and granting privileges to the role, you can grant the role to users so that the users can access resources and perform actions that are defined by the role. You can grant multiple roles to a user or grant a role to multiple users. This guide introduces how to grant roles to users.</p>
+<p>The built-in user <code translate="no">root</code> in Milvus has already been granted the <code translate="no">admin</code> role, which has all privileges. You do not need to assign any other roles to it.</p>
+<h2 id="Grant-a-role-to-a-user" class="common-anchor-header">Grant a role to a user<button data-href="#Grant-a-role-to-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,9 +39,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O exemplo seguinte demonstra como atribuir a função <code translate="no">role_a</code> ao utilizador <code translate="no">user_1</code>.</p>
+    </button></h2><p>The following example demonstrates how to grant the role <code translate="no">role_a</code> to the user <code translate="no">user_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -121,7 +125,7 @@ curl --request POST \
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-user" class="common-anchor-header">Descrever o utilizador<button data-href="#Describe-user" class="anchor-icon" translate="no">
+<h2 id="Describe-user" class="common-anchor-header">Describe user<button data-href="#Describe-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -136,10 +140,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de conceder uma função a um utilizador, pode verificar se a operação de concessão foi bem sucedida através do método <code translate="no">describe_user()</code>.</p>
-<p>O exemplo seguinte demonstra como verificar a(s) função(ões) do utilizador <code translate="no">user_1</code>.</p>
+    </button></h2><p>Once you grant a role to a user, you can check if the grant operation is successful via the <code translate="no">describe_user()</code> method.</p>
+<p>The following example demonstrates how to check the role(s) of the user <code translate="no">user_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)
@@ -168,10 +177,10 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
     &quot;userName&quot;: &quot;user_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Abaixo está um exemplo de saída.</p>
+<p>Below is an example output.</p>
 <pre><code translate="no" class="language-bash">{<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>}
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Revoke-a-role" class="common-anchor-header">Revogar uma função<button data-href="#Revoke-a-role" class="anchor-icon" translate="no">
+<h2 id="Revoke-a-role" class="common-anchor-header">Revoke a role<button data-href="#Revoke-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,10 +195,15 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Também é possível revogar uma função que tenha sido atribuída a um utilizador.</p>
-<p>O exemplo seguinte demonstra como revogar a função <code translate="no">role_a</code> atribuída ao utilizador <code translate="no">user_1</code>.</p>
+    </button></h2><p>You can also revoke a role that has been assigned to a user.</p>
+<p>The following example demonstrates how to revoke the role <code translate="no">role_a</code> assigned to the user <code translate="no">user_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.revoke_role(

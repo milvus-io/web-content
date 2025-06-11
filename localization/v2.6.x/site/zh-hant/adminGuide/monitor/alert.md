@@ -1,10 +1,10 @@
 ---
 id: alert.md
-title: 建立警報
+title: Create an alert
 related_key: monitor and alert.
-summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
+summary: Learn how to create an alert for Milvus services in Grafana.
 ---
-<h1 id="Create-an-Alert-for-Milvus-Services" class="common-anchor-header">為 Milvus 服務建立警報<button data-href="#Create-an-Alert-for-Milvus-Services" class="anchor-icon" translate="no">
+<h1 id="Create-an-Alert-for-Milvus-Services" class="common-anchor-header">Create an Alert for Milvus Services<button data-href="#Create-an-Alert-for-Milvus-Services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,10 +19,10 @@ summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主題介紹 Milvus 服務的警示機制，並解釋為何、何時及如何在 Milvus 中建立警示。</p>
-<p>透過建立警示，當特定指標的值超過您預先定義的臨界值時，您可以收到通知。</p>
-<p>例如，您創建一個警報，並設定 80 MB 為 Milvus 元件記憶體使用的最大值。如果實際使用量超過預先定義的數字，您將收到警報，提醒您 Milvus 元件的記憶體使用量超過 80 MB。收到警報後，您可以相應地及時調整資源分配，以確保服務的可用性。</p>
-<h2 id="Scenarios-for-creating-alerts" class="common-anchor-header">建立警報的情況<button data-href="#Scenarios-for-creating-alerts" class="anchor-icon" translate="no">
+    </button></h1><p>This topic introduces the alert mechanism for Milvus services and explains why, when, and how to create alerts in Milvus.</p>
+<p>By creating alerts, you can receive notifications when the value of a specific metric exceeds the threshold you have predefined.</p>
+<p>For example, you create an alert and set 80 MB as the maximum value for memory usage by Milvus components. If the actual usage exceeds the predefined number, you will receive alerts reminding you that the memory usage by Milvus component surpasses 80 MB. Upon the alert, you can then adjust the allocation of resources accordingly and timely to ensure service availability.</p>
+<h2 id="Scenarios-for-creating-alerts" class="common-anchor-header">Scenarios for creating alerts<button data-href="#Scenarios-for-creating-alerts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,26 +37,26 @@ summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下是一些您需要建立警報的常見情況。</p>
+    </button></h2><p>Below are some common scenarios where you need to create an alert for.</p>
 <ul>
-<li>Milvus 元件的 CPU 或記憶體使用率過高。</li>
-<li>Milvus 元件 pod 的磁碟空間不足。</li>
-<li>Milvus 元件 pod 重新啟動的頻率太高。</li>
+<li>CPU or memory usage by Milvus components is too high.</li>
+<li>Milvus component pods are running low on disk space.</li>
+<li>Milvus component pods are restarting too frequently.</li>
 </ul>
-<p>下列指標可用於警示設定：</p>
+<p>The following metrics are available for alerting configuration:</p>
 <table>
 <thead>
-<tr><th>公制</th><th>說明</th><th>測量單位</th></tr>
+<tr><th>Metric</th><th>Description</th><th>Unit of measure</th></tr>
 </thead>
 <tbody>
-<tr><td>CPU 使用量</td><td>Milvus 元件的 CPU 使用量，由 CPU 的運行時間顯示。</td><td>秒</td></tr>
-<tr><td>記憶體</td><td>Milvus 元件消耗的記憶體資源。</td><td>MB</td></tr>
-<tr><td>動畫</td><td>在 GO 語言中同時執行的活動。</td><td>/</td></tr>
-<tr><td>作業系統線程</td><td>線程或作業系統中的輕量級進程。</td><td>/</td></tr>
-<tr><td>已開啟的進程檔案</td><td>目前使用的檔案描述符數量。</td><td>/</td></tr>
+<tr><td>CPU Usage</td><td>CPU usage by Milvus components that is indicated by the running time of CPU.</td><td>Second</td></tr>
+<tr><td>Memory</td><td>Memory resources consumed by Milvus components.</td><td>MB</td></tr>
+<tr><td>Goroutines</td><td>Concurrent executing activities in GO language.</td><td>/</td></tr>
+<tr><td>OS Threads</td><td>Threads, or lightweight processes in an operating system.</td><td>/</td></tr>
+<tr><td>Process Opened Fds</td><td>The current number of used file descriptors.</td><td>/</td></tr>
 </tbody>
 </table>
-<h2 id="Set-up-alerts" class="common-anchor-header">設定警報<button data-href="#Set-up-alerts" class="anchor-icon" translate="no">
+<h2 id="Set-up-alerts" class="common-anchor-header">Set up alerts<button data-href="#Set-up-alerts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,39 +71,51 @@ summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本指南以建立 Milvus 元件記憶體使用警示為例。若要建立其他類型的警示，請相應調整您的指令。如果您在過程中遇到任何問題，請隨時到<a href="https://discuss.milvus.io/">Milvus 論壇</a>詢問或在<a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a> 上啟動討論。</p>
-<h3 id="Prerequisites" class="common-anchor-header">先決條件</h3><p>本教學假設您已安裝和設定 Grafana。如果沒有，建議閱讀<a href="/docs/zh-hant/monitor.md">監控指南</a>。</p>
-<h3 id="1-Add-a-new-query" class="common-anchor-header">1.新增查詢</h3><p>要為 Milvus 元件的記憶體使用量新增警示，請編輯記憶體面板。然後，新增一個有 metric 的新查詢：<code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
+    </button></h2><p>This guide takes the example of creating an alert for the memory usage of Milvus components. To create other types of alerts, please adjust your commands accordingly. If you encounter any problems during the process, feel free to ask in the <a href="https://discuss.milvus.io/">Milvus forum</a> or initiate a discussion on <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Prerequisites</h3><p>This tutorial assumes that you have Grafana installed and configured. If not, we recommend reading the <a href="/docs/monitor.md">monitoring guide</a>.</p>
+<h3 id="1-Add-a-new-query" class="common-anchor-header">1. Add a new query</h3><p>To add an alert for the memory usage of Milvus components, edit the Memory panel. Then, add a new query with the metric: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
-   </span> <span class="img-wrapper"> <span>Alert_metric</span> </span></p>
-<h3 id="2-Save-the-dashboard" class="common-anchor-header">2.儲存儀表板</h3><p>儲存儀表板，等待幾分鐘就可以看到警示。</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+    <span>Alert_metric</span>
+  </span>
+</p>
+<h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Save the dashboard</h3><p>Save the dashboard, and wait for a few minutes to see the alert.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
-   </span> <span class="img-wrapper"> <span>警報儀表板</span> </span></p>
-<p>Grafana 警報查詢不支援範本變數。因此，您應該在標籤中加入第二個不含任何範本變數的查詢。第二個查詢預設命名為「A」。您可以按一下下拉式選單來重新命名。</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+    <span>Alert_dashboard</span>
+  </span>
+</p>
+<p>Grafana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels. The second query is named as “A” by default. You can rename it by clicking on the dropdown.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
-   </span> <span class="img-wrapper"> <span>警報查詢</span> </span></p>
-<h3 id="3-Add-alert-notifications" class="common-anchor-header">3.新增警示通知</h3><p>若要接收警示通知，請新增「通知頻道」。然後，在欄位「傳送至」中指定頻道。</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+    <span>Alert_query</span>
+  </span>
+</p>
+<h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Add alert notifications</h3><p>To receive alert notifications, add a "notification channel". Then, specify the channel in the field "Send to".</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
-   </span> <span class="img-wrapper"> <span>警報通知</span> </span></p>
-<p>如果成功建立並觸發警報，您會收到如下截圖所示的通知。</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+    <span>Alert_notification</span>
+  </span>
+</p>
+<p>If the alert is successfully created and triggered, you will receive the notification as shown in the screenshot below.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
-   </span> <span class="img-wrapper"> <span>通知訊息</span> </span></p>
-<p>若要刪除警報，請移至「警報」面板，然後按一下刪除按鈕。</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+    <span>Notification_message</span>
+  </span>
+</p>
+<p>To delete an alert, go to the “Alert” panel and click the delete button.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
-   </span> <span class="img-wrapper"> <span>刪除警報</span> </span></p>
-<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+    <span>Delete_alert</span>
+  </span>
+</p>
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,14 +131,17 @@ summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
         ></path>
       </svg>
     </button></h2><ul>
-<li>如果您需要開始監控 Milvus 的服務：<ul>
-<li>閱讀<a href="/docs/zh-hant/monitor.md">監控指南</a></li>
-<li>了解如何<a href="/docs/zh-hant/visualize.md">可視化監控指標</a></li>
+<li>If you need to start monitoring services for Milvus:
+<ul>
+<li>Read the <a href="/docs/monitor.md">monitoring guide</a></li>
+<li>Learn how to <a href="/docs/visualize.md">visualize monitoring metrics</a></li>
 </ul></li>
-<li>如果您已經為 Milvus 元件的記憶體使用創建了警報：<ul>
-<li>學習如何<a href="/docs/zh-hant/allocate.md#standalone">分配資源</a></li>
+<li>If you have created alerts for memory usage by Milvus components:
+<ul>
+<li>Learn how to <a href="/docs/allocate.md#standalone">allocate resources</a></li>
 </ul></li>
-<li>如果您正在尋找關於如何擴展 Milvus 叢集的資訊：<ul>
-<li>了解如何<a href="/docs/zh-hant/scaleout.md">擴充 Milvus 叢集</a></li>
+<li>If you are looking for information about how to scale a Milvus cluster:
+<ul>
+<li>Learn <a href="/docs/scaleout.md">scale a Milvus cluster</a></li>
 </ul></li>
 </ul>

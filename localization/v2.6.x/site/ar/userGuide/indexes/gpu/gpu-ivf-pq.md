@@ -2,12 +2,13 @@
 id: gpu-ivf-pq.md
 title: GPU_IVF_PQ
 summary: >-
-  يعتمد فهرس GPU_IVF_PQ على مفهوم IVF_PQ من خلال الجمع بين تجميع الملفات المقلوب
-  مع تجميع المنتج الكمي (PQ)، والذي يقسم المتجهات عالية الأبعاد إلى مساحات فرعية
-  أصغر ويحدد كميتها من أجل عمليات بحث فعالة عن التشابه. تم تصميم GPU_IVF_PQ
-  حصريًا لبيئات وحدة معالجة الرسومات، ويستفيد من المعالجة المتوازية لتسريع
-  العمليات الحسابية والتعامل مع البيانات المتجهة واسعة النطاق بفعالية. لمزيد من
-  المعلومات حول المفاهيم التأسيسية، راجع IVF_IVF_PQ.
+  The GPU_IVF_PQ index builds on the IVF_PQ concept by combining inverted file
+  clustering with Product Quantization (PQ), which breaks down high-dimensional
+  vectors into smaller subspaces and quantizes them for efficient similarity
+  searches. Exclusively designed for GPU environments, GPU_IVF_PQ leverages
+  parallel processing to accelerate computations and handle large-scale vector
+  data effectively. For more information on foundational concepts, refer to
+  IVF_PQ.
 ---
 <h1 id="GPUIVFPQ" class="common-anchor-header">GPU_IVF_PQ<button data-href="#GPUIVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,8 +25,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يعتمد فهرس <strong>GPU_IVF_PQ</strong> على مفهوم <strong>IVF_PQ</strong> من خلال الجمع بين تجميع الملفات المقلوب مع تجميع المنتج الكمي (PQ)، والذي يقسم المتجهات عالية الأبعاد إلى مساحات فرعية أصغر ويحدد كميتها من أجل عمليات بحث فعالة عن التشابه. تم تصميم GPU_IVF_PQ حصريًا لبيئات وحدة معالجة الرسومات، ويستفيد من المعالجة المتوازية لتسريع العمليات الحسابية والتعامل مع البيانات المتجهة واسعة النطاق بفعالية. لمزيد من المعلومات حول المفاهيم التأسيسية، راجع <a href="/docs/ar/ivf-pq.md">IVF_IVF_PQ</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">إنشاء فهرس<button data-href="#Build-index" class="anchor-icon" translate="no">
+    </button></h1><p>The <strong>GPU_IVF_PQ</strong> index builds on the <strong>IVF_PQ</strong> concept by combining inverted file clustering with Product Quantization (PQ), which breaks down high-dimensional vectors into smaller subspaces and quantizes them for efficient similarity searches. Exclusively designed for GPU environments, GPU_IVF_PQ leverages parallel processing to accelerate computations and handle large-scale vector data effectively. For more information on foundational concepts, refer to <a href="/docs/ivf-pq.md">IVF_PQ</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لإنشاء فهرس <code translate="no">GPU_IVF_PQ</code> على حقل متجه في ميلفوس، استخدم طريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> ومعلمات إضافية للفهرس.</p>
+    </button></h2><p>To build a <code translate="no">GPU_IVF_PQ</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -56,18 +57,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا التكوين</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: نوع الفهرس المراد إنشاؤه. في هذا المثال، اضبط القيمة على <code translate="no">GPU_IVF_PQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: الطريقة المستخدمة لحساب المسافة بين المتجهات. تتضمن القيم المدعومة <code translate="no">COSINE</code> و <code translate="no">L2</code> و <code translate="no">IP</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p></li>
-<li><p><code translate="no">params</code>: : خيارات التكوين الإضافية لبناء الفهرس.</p>
+<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">GPU_IVF_PQ</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
-<li><code translate="no">m</code>: عدد المتجهات الفرعية المراد تقسيم المتجه إليها.</li>
+<li><code translate="no">m</code>: Number of sub-vectors to split the vector into.</li>
 </ul>
-<p>لمعرفة المزيد من معلمات البناء المتوفرة للفهرس <code translate="no">GPU_IVF_PQ</code> ، راجع <a href="/docs/ar/gpu-ivf-pq.md#Index-building-params">بارامترات بناء الفهرس</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">GPU_IVF_PQ</code> index, refer to <a href="/docs/gpu-ivf-pq.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>بمجرد تكوين معلمات الفهرس، يمكنك إنشاء الفهرس باستخدام الأسلوب <code translate="no">create_index()</code> مباشرةً أو تمرير بارامترات الفهرس في الأسلوب <code translate="no">create_collection</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/create-collection.md">إنشاء مجموعة</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">البحث في الفهرس<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +83,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد إنشاء الفهرس وإدراج الكيانات، يمكنك إجراء عمليات بحث عن التشابه على الفهرس.</p>
+    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -97,15 +98,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا التكوين</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">params</code>: خيارات التكوين الإضافية للبحث على الفهرس.</p>
+<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
 <ul>
-<li><code translate="no">nprobe</code>: عدد المجموعات المطلوب البحث عنها.</li>
+<li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
 </ul>
-<p>لمعرفة المزيد من معلمات البحث المتوفرة للفهرس <code translate="no">GPU_IVF_PQ</code> ، راجع <a href="/docs/ar/gpu-ivf-pq.md#Index-specific-search-params">باراميات البحث الخاصة بالفهرس</a>.</p></li>
+<p>To learn more search parameters available for the <code translate="no">GPU_IVF_PQ</code> index, refer to <a href="/docs/gpu-ivf-pq.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">بارامترات الفهرس<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,69 +121,79 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقدم هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
-<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/gpu-ivf-pq.md#Build-index">إنشاء فهرس</a>.</p>
+    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/gpu-ivf-pq.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>المعلمة</p></th>
-     <th><p>الوصف</p></th>
-     <th><p>نطاق القيمة</p></th>
-     <th><p>اقتراح الضبط</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
-     <td><p>عامل التجميع</p></td>
+     <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>عدد المجموعات المراد إنشاؤها باستخدام خوارزمية k-means أثناء بناء الفهرس.</p></td>
-     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1, 65536]</p>
-<p><strong>القيمة الافتراضية</strong>: <code translate="no">128</code></p></td>
-     <td><p>تعمل القيم الأكبر <code translate="no">nlist</code> على تحسين الاسترجاع من خلال إنشاء مجموعات أكثر دقة ولكنها تزيد من وقت بناء الفهرس. قم بالتحسين بناءً على حجم مجموعة البيانات والموارد المتاحة. في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [32, 4096].</p></td>
+     <td><p>The number of clusters to create using the k-means algorithm during index building.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, 65536]</p>
+<p><strong>Default value</strong>: <code translate="no">128</code></p></td>
+     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources.
+ In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
    </tr>
    <tr>
      <td rowspan="2"><p>PQ</p></td>
      <td><p><code translate="no">m</code></p></td>
-     <td><p>عدد المتجهات الفرعية (المستخدمة في التكميم) لتقسيم كل متجه عالي الأبعاد إلى متجهات عالية الأبعاد أثناء عملية التكميم.</p></td>
-     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1, 65536]</p>
-<p><strong>القيمة الافتراضية</strong>: لا يوجد</p></td>
-     <td><p>يمكن لقيمة <code translate="no">m</code> الأعلى أن تحسن الدقة، لكنها تزيد أيضًا من التعقيد الحسابي واستخدام الذاكرة. <code translate="no">m</code> يجب أن تكون القيمة قاسماً على البعد المتجه<em>(D</em>) لضمان التحلل الصحيح. القيمة الموصى بها عادةً هي <em>m = D/2</em>.</p>
-<p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [D/8، D].</p></td>
+     <td><p>The number of sub-vectors (used for quantization) to divide each high-dimensional vector into during the quantization process.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, 65536]</p>
+<p><strong>Default value</strong>: None</p></td>
+     <td><p>A higher <code translate="no">m</code> value can improve accuracy, but it also increases the computational complexity and memory usage.
+ <code translate="no">m</code> must be a divisor of the vector dimension (<em>D</em>) to ensure proper decomposition. A commonly recommended value is <em>m = D/2</em>.</p>
+<p>In most cases, we recommend you set a value within this range: [D/8, D].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>عدد البتات المستخدمة لتمثيل فهرس مركزية كل متجه فرعي في النموذج المضغوط. وهو يحدد مباشرةً حجم كل دفتر رموز، حيث سيحتوي كل دفتر رموز على 2 ^{\نص{نبت}}$ من وحدات مركزية. على سبيل المثال، إذا تم تعيين <code translate="no">nbits</code> على 8، فسيتم تمثيل كل متجه فرعي بفهرس مركزية من 8 بت. وهذا يسمح بوجود 2^8$ (256) مركزية ممكنة في دفتر الرموز لهذا المتجه الفرعي.</p></td>
-     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1, 64]</p>
-<p><strong>القيمة الافتراضية</strong>: <code translate="no">8</code></p></td>
-     <td><p>تسمح القيمة الأعلى <code translate="no">nbits</code> بوجود دفاتر رموز أكبر، مما قد يؤدي إلى تمثيلات أكثر دقة للمتجهات الأصلية. ومع ذلك، فإن ذلك يعني أيضًا استخدام المزيد من البتات لتخزين كل فهرس، مما يؤدي إلى ضغط أقل. في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [1, 16].</p></td>
+     <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook.
+ Each codebook will contain $2^{\textit{nbits}}$ centroids. For example, if <code translate="no">nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for $2^8$ (256) possible centroids in the codebook for that sub-vector.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, 64]</p>
+<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
+     <td><p>A higher <code translate="no">nbits</code> value allows for larger codebooks, potentially leading to more accurate representations of the original vectors. However, it also means using more bits to store each index, resulting in less compression.
+ In most cases, we recommend you set a value within this range: [1, 16].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
-     <td><p>يقرر ما إذا كان سيتم تخزين مجموعة البيانات الأصلية مؤقتًا في ذاكرة وحدة معالجة الرسومات. القيم الممكنة:</p>
+     <td><p>Decides whether to cache the original dataset in GPU memory. Possible values:</p>
 <ul>
-<li><p><code translate="no">"true"</code>: تخزين مجموعة البيانات الأصلية مؤقتًا لتحسين الاسترجاع من خلال تحسين نتائج البحث.</p></li>
-<li><p><code translate="no">"false"</code>: لا يخزن مجموعة البيانات الأصلية مؤقتًا لحفظ ذاكرة وحدة معالجة الرسومات.</p></li>
+<li><p><code translate="no">"true"</code>: Caches the original dataset to enhance recall by refining search results.</p></li>
+<li><p><code translate="no">"false"</code>: Does not cache the original dataset to save gpu memory.</p></li>
 </ul></td>
-     <td><p><strong>النوع</strong>: سلسلة <strong>النطاق</strong>: [<code translate="no">"true"</code> ، <code translate="no">"false"</code>]</p>
-<p><strong>القيمة الافتراضية</strong>: <code translate="no">"false"</code></p></td>
-     <td><p>يعمل تعيينها على <code translate="no">"true"</code> على تحسين الاستدعاء من خلال تحسين نتائج البحث ولكنه يستخدم المزيد من ذاكرة وحدة معالجة الرسومات. تعيينه إلى <code translate="no">"false"</code> يحافظ على ذاكرة وحدة معالجة الرسومات.</p></td>
+     <td><p><strong>Type</strong>: String
+ <strong>Range</strong>: [<code translate="no">"true"</code>, <code translate="no">"false"</code>]</p>
+<p><strong>Default value</strong>: <code translate="no">"false"</code></p></td>
+     <td><p>Setting it to <code translate="no">"true"</code> enhances recall by refining search results but uses more GPU memory. Setting it to <code translate="no">"false"</code> conserves GPU memory.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/gpu-ivf-pq.md#Search-on-index">البحث في الفهرس</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/gpu-ivf-pq.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>المعلمة</p></th>
-     <th><p>الوصف</p></th>
-     <th><p>نطاق القيمة</p></th>
-     <th><p>اقتراح الضبط</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
-     <td><p>عامل التهيئة</p></td>
+     <td><p>IVF</p></td>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>عدد المجموعات للبحث عن المرشحين.</p></td>
-     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1, <em>nlist</em>]</p>
-<p><strong>القيمة الافتراضية</strong>: <code translate="no">8</code></p></td>
-     <td><p>تسمح القيم الأعلى بالبحث في عدد أكبر من المجموعات، مما يحسّن الاستدعاء من خلال توسيع نطاق البحث ولكن على حساب زيادة زمن انتقال الاستعلام. قم بتعيين <code translate="no">nprobe</code> بشكل متناسب مع <code translate="no">nlist</code> لتحقيق التوازن بين السرعة والدقة.</p>
-<p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [1, nlist].</p></td>
+     <td><p>The number of clusters to search for candidates.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, <em>nlist</em>]</p>
+<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
+     <td><p>Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.
+ Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p>
+<p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
    </tr>
 </table>

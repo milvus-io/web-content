@@ -1,10 +1,10 @@
 ---
 id: dynamic_config.md
 related_key: configure
-summary: Узнайте о динамической конфигурации Milvus.
-title: Настройка Milvus на лету
+summary: Learn about the dynamic configuration of Milvus.
+title: Configure Milvus on the Fly
 ---
-<h1 id="Configure-Milvus-on-the-Fly" class="common-anchor-header">Настройка Milvus на лету<button data-href="#Configure-Milvus-on-the-Fly" class="anchor-icon" translate="no">
+<h1 id="Configure-Milvus-on-the-Fly" class="common-anchor-header">Configure Milvus on the Fly<button data-href="#Configure-Milvus-on-the-Fly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus позволяет изменять некоторые конфигурации "на лету".</p>
-<h2 id="Before-you-start" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus allows you to change some of its configurations on the fly.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,19 +35,19 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вам необходимо убедиться, что：</p>
+    </button></h2><p>You need to ensure that：</p>
 <ul>
-<li>У вас установлен Birdwatcher. Подробнее см. в разделе <a href="/docs/ru/birdwatcher_install_guides.md">Установка Birdwatcher</a>,</li>
-<li>У вас установлен etcdctl. Подробнее см. в разделе <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Взаимодействие с etcd</a>, или</li>
-<li>У вас установлены другие клиенты etcd, например, клиент Python.</li>
+<li>You have Birdwatcher installed. For details, refer to <a href="/docs/birdwatcher_install_guides.md">Install Birdwatcher</a>,</li>
+<li>You have etcdctl installed. For details, refer to <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Interacting with etcd</a>, or</li>
+<li>You have other etcd clients, such as the Python client, installed.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>В примерах этого руководства значение <code translate="no">proxy.minPasswordLength</code> заменено на <code translate="no">8</code>. Вы можете заменить эти ключи на подходящие, перечисленные в разделе <a href="/docs/ru/dynamic_config.md#Applicable-configuration-items">Применяемые элементы конфигурации</a>.</li>
-<li>В примерах этого руководства предполагается, что корневой путь вашего Milvus - <code translate="no">by-dev</code>. Все конфигурации перечислены по пути <code translate="no">by-dev/config</code>. Корневой путь Milvus зависит от способа установки. Для экземпляров, установленных с помощью диаграмм Helm, корневой путь по умолчанию равен <code translate="no">by-dev</code>. Если вы не знаете корневой путь, обратитесь к разделу <a href="/docs/ru/birdwatcher_usage_guides.md#Connect-to-etcd">Подключение к etcd</a>.</li>
+<li>Examples in this guide change the value of <code translate="no">proxy.minPasswordLength</code> to <code translate="no">8</code>. You can replace the key with the applicable ones listed in <a href="/docs/dynamic_config.md#Applicable-configuration-items">Applicable configuration items</a>.</li>
+<li>Examples in this guide assume that the root path of your Milvus is <code translate="no">by-dev</code>. All configurations are listed under the path <code translate="no">by-dev/config</code>. The Milvus root path varies with the way you install it. For the instances installed using the Helm charts, the root path defaults to <code translate="no">by-dev</code>. If you do not know the root path, refer to <a href="/docs/birdwatcher_usage_guides.md#Connect-to-etcd">Connect to etcd</a>.</li>
 </ul>
 </div>
-<h2 id="Change-configurations" class="common-anchor-header">Изменение конфигураций<button data-href="#Change-configurations" class="anchor-icon" translate="no">
+<h2 id="Change-configurations" class="common-anchor-header">Change configurations<button data-href="#Change-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,15 +62,15 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В Milvus значение <code translate="no">proxy.minPasswordLength</code> по умолчанию установлено на <code translate="no">6</code>. Чтобы изменить это значение, вы можете сделать следующее:</p>
+    </button></h2><p>On Milvus, <code translate="no">proxy.minPasswordLength</code> is set to <code translate="no">6</code> by default. To change this value, you can do as follows:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl put by-dev/config/proxy/minPasswordLength 8</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">or</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,set config-etcd --key by-dev/config/proxy/minPasswordLength --value 8&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Затем вы можете проверить конфигурацию следующим образом:</p>
+<p>Then you can check the configurations as follows:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get by-dev/config/proxy/minPasswordLength</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Roll-back-configurations" class="common-anchor-header">Откат конфигураций<button data-href="#Roll-back-configurations" class="anchor-icon" translate="no">
+<h2 id="Roll-back-configurations" class="common-anchor-header">Roll back configurations<button data-href="#Roll-back-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,15 +85,15 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus также позволяет откатить конфигурацию, если измененное значение больше не подходит.</p>
+    </button></h2><p>Milvus also allows you to roll back your configurations in case the changed value no longer applies.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl del by-dev/config/proxy/minPasswordLength</span> 
 <span class="hljs-meta prompt_"># </span><span class="language-bash">or</span> 
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,remove config-etcd --key by-dev/config/proxy/minPasswordLength&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Затем вы можете проверить конфигурации следующим образом:</p>
+<p>Then you can check the configurations as follows:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get by-dev/config/proxy/minPasswordLength</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="View-configurations" class="common-anchor-header">Просмотр конфигураций<button data-href="#View-configurations" class="anchor-icon" translate="no">
+<h2 id="View-configurations" class="common-anchor-header">View configurations<button data-href="#View-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,18 +108,18 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вместо просмотра значения конкретного элемента конфигурации можно также вывести список всех элементов.</p>
+    </button></h2><p>Instead of viewing the value of a specific configuration item, you can also list all of them.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get --prefix by-dev/config</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">or</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,show config-etcd&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы просмотреть конфигурации определенного узла:</p>
+<p>To view the configurations of a specific node:</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --etcd ip:port 
 Milvus(by-dev) &gt; show session          # List all nodes with their server ID
 Milvus(by-dev) &gt; visit querycoord 1    # Visit a node by server ID
 QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Applicable-configuration-items" class="common-anchor-header">Применимые элементы конфигурации<button data-href="#Applicable-configuration-items" class="anchor-icon" translate="no">
+<h2 id="Applicable-configuration-items" class="common-anchor-header">Applicable configuration items<button data-href="#Applicable-configuration-items" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -134,10 +134,10 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В настоящее время можно изменять следующие элементы конфигурации "на лету".</p>
+    </button></h2><p>Currently, you can change the following configuration items on the fly.</p>
 <table>
 <thead>
-<tr><th>Элемент конфигурации</th><th>Значение по умолчанию</th></tr>
+<tr><th>Configuration item</th><th>Default value</th></tr>
 </thead>
 <tbody>
 <tr><td>pulsar.maxMessageSize</td><td>5242880</td></tr>
@@ -170,9 +170,9 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>quotaAndLimits.limitReading.resultProtection.maxReadResultRate</td><td>+INF</td></tr>
 <tr><td>quotaAndLimits.limitReading.coolOffSpeed</td><td>0.9</td></tr>
 <tr><td>autoIndex.enable</td><td>FALSE</td></tr>
-<tr><td>autoIndex.params.build</td><td>""</td></tr>
-<tr><td>autoIndex.params.extra</td><td>""</td></tr>
-<tr><td>autoIndex.params.search</td><td>""</td></tr>
+<tr><td>autoIndex.params.build</td><td>“”</td></tr>
+<tr><td>autoIndex.params.extra</td><td>“”</td></tr>
+<tr><td>autoIndex.params.search</td><td>“”</td></tr>
 <tr><td>proxy.maxNameLength</td><td>255</td></tr>
 <tr><td>proxy.maxUsernameLength</td><td>32</td></tr>
 <tr><td>proxy.minPasswordLength</td><td>6</td></tr>
@@ -187,7 +187,7 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>dataCoord.compaction.enableAutoCompaction</td><td>TRUE</td></tr>
 </tbody>
 </table>
-<h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,6 +203,6 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
         ></path>
       </svg>
     </button></h2><ul>
-<li>Узнайте больше о <a href="/docs/ru/system_configuration.md">системных конфигурациях</a>.</li>
-<li>Узнайте, как настроить Milvus, установленный с помощью <a href="/docs/ru/configure_operator.md">Milvus Operator</a>, <a href="/docs/ru/configure-helm.md">диаграмм Helm</a> и <a href="/docs/ru/configure-docker.md">Docker</a>.</li>
+<li>Learn more about <a href="/docs/system_configuration.md">System Configurations</a>.</li>
+<li>Learn how to configure Milvus installed using <a href="/docs/configure_operator.md">Milvus Operator</a>, <a href="/docs/configure-helm.md">Helm charts</a>, and <a href="/docs/configure-docker.md">Docker</a>.</li>
 </ul>

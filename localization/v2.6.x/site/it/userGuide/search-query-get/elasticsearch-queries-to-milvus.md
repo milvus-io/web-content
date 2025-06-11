@@ -1,18 +1,17 @@
 ---
 id: elasticsearch-queries-to-milvus.md
-title: Query Elasticsearch a Milvus
+title: Elasticsearch Queries to Milvus
 summary: >-
-  Elasticsearch, basato su Apache Lucene, è uno dei principali motori di ricerca
-  open-source. Tuttavia, nelle moderne applicazioni di intelligenza artificiale
-  deve affrontare delle sfide, tra cui gli elevati costi di aggiornamento, le
-  scarse prestazioni in tempo reale, la gestione inefficiente degli shard, un
-  design non cloud-native e un'eccessiva richiesta di risorse. Come database
-  vettoriale cloud-nativo, Milvus supera questi problemi grazie alla
-  disgiunzione tra archiviazione e calcolo, all'indicizzazione efficiente per i
-  dati ad alta dimensionalità e alla perfetta integrazione con le infrastrutture
-  moderne. Offre prestazioni e scalabilità superiori per i carichi di lavoro AI.
+  Elasticsearch, built on Apache Lucene, is a leading open-source search engine.
+  However, it faces challenges in modern AI applications, including high update
+  costs, poor real-time performance, inefficient shard management, a
+  non-cloud-native design, and excessive resource demands. As a cloud-native
+  vector database, Milvus overcomes these issues with decoupled storage and
+  computing, efficient indexing for high-dimensional data, and seamless
+  integration with modern infrastructures. It offers superior performance and
+  scalability for AI workloads.
 ---
-<h1 id="Elasticsearch-Queries-to-Milvus" class="common-anchor-header">Query Elasticsearch a Milvus<button data-href="#Elasticsearch-Queries-to-Milvus" class="anchor-icon" translate="no">
+<h1 id="Elasticsearch-Queries-to-Milvus" class="common-anchor-header">Elasticsearch Queries to Milvus<button data-href="#Elasticsearch-Queries-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,9 +26,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Elasticsearch, basato su Apache Lucene, è uno dei principali motori di ricerca open-source. Tuttavia, nelle moderne applicazioni di intelligenza artificiale deve affrontare delle sfide, tra cui gli elevati costi di aggiornamento, le scarse prestazioni in tempo reale, la gestione inefficiente degli shard, un design non cloud-native e un'eccessiva richiesta di risorse. Come database vettoriale cloud-nativo, Milvus supera questi problemi grazie alla disgiunzione tra archiviazione e calcolo, all'indicizzazione efficiente per i dati ad alta dimensionalità e alla perfetta integrazione con le infrastrutture moderne. Offre prestazioni e scalabilità superiori per i carichi di lavoro di intelligenza artificiale.</p>
-<p>Questo articolo mira a facilitare la migrazione della vostra base di codice da Elasticsearch a Milvus, fornendo vari esempi di conversione delle query.</p>
-<h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Elasticsearch, built on Apache Lucene, is a leading open-source search engine. However, it faces challenges in modern AI applications, including high update costs, poor real-time performance, inefficient shard management, a non-cloud-native design, and excessive resource demands. As a cloud-native vector database, Milvus overcomes these issues with decoupled storage and computing, efficient indexing for high-dimensional data, and seamless integration with modern infrastructures. It offers superior performance and scalability for AI workloads.</p>
+<p>This article aims to facilitate the migration of your code base from Elasticsearch to Milvus, providing various examples of converting queries in between.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,70 +43,70 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Elasticsearch, le operazioni nel contesto della query generano punteggi di rilevanza, mentre quelle nel contesto del filtro non lo fanno. Allo stesso modo, le ricerche di Milvus producono punteggi di similarità, mentre le sue query simili a filtri non lo fanno. Quando si migra la base di codice da Elasticsearch a Milvus, il principio chiave è la conversione dei campi utilizzati nel contesto di query di Elasticsearch in campi vettoriali per consentire la generazione di punteggi di similarità.</p>
-<p>La tabella seguente illustra alcuni modelli di query Elasticsearch e i loro corrispondenti equivalenti in Milvus.</p>
+    </button></h2><p>In Elasticsearch, operations in the query context generate relevance scores, while those in the filter context do not. Similarly, Milvus searches produce similarity scores, whereas its filter-like queries do not. When migrating your code base from Elasticsearch to Milvus, the key principle is converting fields used in Elasticsearch’s query context into vector fields to enable similarity score generation.</p>
+<p>The table below outlines some Elasticsearch query patterns and their corresponding equivalents in Milvus.</p>
 <table>
    <tr>
-     <th><p>Query Elasticsearch</p></th>
-     <th><p>Equivalenti in Milvus</p></th>
-     <th><p>Osservazioni</p></th>
+     <th><p>Elasticsearch Queries</p></th>
+     <th><p>Milvus Equivalents</p></th>
+     <th><p>Remarks</p></th>
    </tr>
    <tr>
-     <td colspan="3"><p><strong>Query full-text</strong></p></td>
+     <td colspan="3"><p><strong>Full-text queries</strong></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#Match-query">Query di corrispondenza</a></p></td>
-     <td><p>Ricerca full-text</p></td>
-     <td><p>Entrambi forniscono un insieme di funzionalità simili.</p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#Match-query">Match query</a></p></td>
+     <td><p>Full-text search</p></td>
+     <td><p>Both provide similar sets of capabilities.</p></td>
    </tr>
    <tr>
-     <td colspan="3"><p><strong>Query a livello di termine</strong></p></td>
+     <td colspan="3"><p><strong>Term-level queries</strong></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#IDs">ID</a></p></td>
-     <td><p><code translate="no">in</code> operatore</p></td>
-     <td rowspan="6"><p>Entrambi forniscono un insieme di funzionalità identiche o simili quando queste query Elasticsearch vengono utilizzate nel contesto del filtro.</p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#IDs">IDs</a></p></td>
+     <td><p><code translate="no">in</code> operator</p></td>
+     <td rowspan="6"><p>Both provide the same or similar set of capabilities when these Elasticsearch queries are used in the filter context.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#Prefix-query">Query con prefisso</a></p></td>
-     <td><p><code translate="no">like</code> operatore</p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#Prefix-query">Prefix query</a></p></td>
+     <td><p><code translate="no">like</code> operator</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#Range-query">Intervallo di query</a></p></td>
-     <td><p>Operatori di confronto come <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, e <code translate="no">&lt;=</code></p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#Range-query">Range query</a></p></td>
+     <td><p>Comparison operators like <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, and <code translate="no">&lt;=</code></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#Term-query">Query a termine</a></p></td>
-     <td><p>Operatori di confronto come <code translate="no">==</code></p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#Term-query">Term query</a></p></td>
+     <td><p>Comparison operators like <code translate="no">==</code></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#Terms-query">Interrogazione a termini</a></p></td>
-     <td><p><code translate="no">in</code> operatore</p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#Terms-query">Terms query</a></p></td>
+     <td><p><code translate="no">in</code> operator</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#Wildcard-query">Interrogazione con caratteri jolly</a></p></td>
-     <td><p><code translate="no">like</code> operatore</p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#Wildcard-query">Wildcard query</a></p></td>
+     <td><p><code translate="no">like</code> operator</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#Boolean-query">Interrogazione booleana</a></p></td>
-     <td><p>Operatori logici come <code translate="no">AND</code></p></td>
-     <td><p>Entrambi forniscono un insieme di funzionalità simili quando vengono utilizzati nel contesto del filtro.</p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#Boolean-query">Boolean query</a></p></td>
+     <td><p>Logical operators like <code translate="no">AND</code></p></td>
+     <td><p>Both provide similar sets of capabilities when used in the filter context.</p></td>
    </tr>
    <tr>
-     <td colspan="3"><p><strong>Query vettoriali</strong></p></td>
+     <td colspan="3"><p><strong>Vector queries</strong></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#Knn-query">Interrogazione kNN</a></p></td>
-     <td><p>Ricerca</p></td>
-     <td><p>Milvus offre funzionalità di ricerca vettoriale più avanzate.</p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#Knn-query">kNN query</a></p></td>
+     <td><p>Search</p></td>
+     <td><p>Milvus provides more advanced vector search capabilities.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/elasticsearch-queries-to-milvus.md#Reciprocal-rank-fusion">Fusione reciproca dei ranghi</a></p></td>
-     <td><p>Ricerca ibrida</p></td>
-     <td><p>Milvus supporta diverse strategie di reranking.</p></td>
+     <td><p><a href="/docs/elasticsearch-queries-to-milvus.md#Reciprocal-rank-fusion">Reciprocal rank fusion</a></p></td>
+     <td><p>Hybrid Search</p></td>
+     <td><p>Milvus supports multiple reranking strategies.</p></td>
    </tr>
 </table>
-<h2 id="Full-text-queries" class="common-anchor-header">Query full-text<button data-href="#Full-text-queries" class="anchor-icon" translate="no">
+<h2 id="Full-text-queries" class="common-anchor-header">Full-text queries<button data-href="#Full-text-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,9 +121,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Elasticsearch, le query full-text consentono di cercare in campi di testo analizzati, come il corpo di un'e-mail. La stringa di query viene elaborata utilizzando lo stesso analizzatore applicato al campo durante l'indicizzazione.</p>
-<h3 id="Match-query" class="common-anchor-header">Query di corrispondenza</h3><p>In Elasticsearch, una query match restituisce i documenti che corrispondono a un testo, un numero, una data o un valore booleano. Il testo fornito viene analizzato prima della corrispondenza.</p>
-<p>Di seguito è riportato un esempio di richiesta di ricerca Elasticsearch con una query di corrispondenza.</p>
+    </button></h2><p>In Elasticsearch, the full text queries enable you to search analyzed text fields such as the body of an email. The query string is processed using the same analyzer that was applied to the field during indexing.</p>
+<h3 id="Match-query" class="common-anchor-header">Match query</h3><p>In Elasticsearch, a match query returns documents that match a provided text, number, date, or boolean value. The provided text is analyzed before matching.</p>
+<p>The following is an example Elasticsearch search request with a match query.</p>
 <pre><code translate="no" class="language-bash">resp = client.search(
     query={
         <span class="hljs-string">&quot;match&quot;</span>: {
@@ -136,7 +135,7 @@ summary: >-
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus offre la stessa capacità attraverso la funzione di ricerca full-text. È possibile convertire la query Elasticsearch di cui sopra in Milvus come segue:</p>
+<p>Milvus provides the same capability through the full-text search feature. You can convert the above Elasticsearch query into Milvus as follows:</p>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[<span class="hljs-string">&#x27;How is the weather in Jamaica?&#x27;</span>],
@@ -144,9 +143,9 @@ summary: >-
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;message&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nell'esempio precedente, <code translate="no">message_sparse</code> è un campo vettoriale rado derivato da un campo VarChar denominato <code translate="no">message</code>. Milvus utilizza il modello di incorporamento BM25 per convertire i valori del campo <code translate="no">message</code> in incorporazioni vettoriali rade e li memorizza nel campo <code translate="no">message_sparse</code>. Alla ricezione della richiesta di ricerca, Milvus incorpora il payload della query in testo semplice utilizzando lo stesso modello BM25 ed esegue una ricerca vettoriale rada e restituisce i campi <code translate="no">id</code> e <code translate="no">message</code> specificati nel parametro <code translate="no">output_fields</code> insieme ai punteggi di similarità corrispondenti.</p>
-<p>Per utilizzare questa funzionalità, è necessario abilitare l'analizzatore sul campo <code translate="no">message</code> e definire una funzione per ricavare il campo <code translate="no">message_sparse</code> da esso. Per istruzioni dettagliate sull'abilitazione dell'analizzatore e sulla creazione della funzione derivata in Milvus, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p>
-<h2 id="Term-level-queries" class="common-anchor-header">Query a livello di termine<button data-href="#Term-level-queries" class="anchor-icon" translate="no">
+<p>In the example above, <code translate="no">message_sparse</code> is a sparse vector field derived from a VarChar field named <code translate="no">message</code>. Milvus uses the BM25 embedding model to convert the values in the <code translate="no">message</code> field into sparse vector embeddings and stores them in the <code translate="no">message_sparse</code> field. Upon receiving the search request, Milvus embeds the plain text query payload using the same BM25 model and performs a sparse vector search and returns the <code translate="no">id</code> and <code translate="no">message</code> fields specified in the <code translate="no">output_fields</code> parameter along with the corresponding similarity scores.</p>
+<p>To use this functionality, you must enable the analyzer on the <code translate="no">message</code> field and define a function to derive the <code translate="no">message_sparse</code> field from it. For detailed instructions on enabling the analyzer and creating the derivative function in Milvus, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
+<h2 id="Term-level-queries" class="common-anchor-header">Term-level queries<button data-href="#Term-level-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -161,8 +160,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Elasticsearch, le query a livello di termine sono utilizzate per trovare documenti basati su valori esatti in dati strutturati, come intervalli di date, indirizzi IP, prezzi o ID di prodotti. Questa sezione illustra i possibili equivalenti di alcune query a livello di termine di Elasticsearch in Milvus. Tutti gli esempi in questa sezione sono adattati per operare nel contesto del filtro per allinearsi alle capacità di Milvus.</p>
-<h3 id="IDs" class="common-anchor-header">ID</h3><p>In Elasticsearch, è possibile trovare i documenti in base ai loro ID nel contesto del filtro, come segue:</p>
+    </button></h2><p>In Elasticsearch, term-level queries are used to find documents based on exact values in structured data, such as date ranges, IP addresses, prices, or product IDs. This section outlines the possible equivalents of some Elasticsearch term-level queries in Milvus. All examples in this section are adapted to operate within the filter context to align with Milvus’s capabilities.</p>
+<h3 id="IDs" class="common-anchor-header">IDs</h3><p>In Elasticsearch, you can find documents based on their IDs in the filter context as follows:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -179,7 +178,7 @@ summary: >-
     },
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In Milvus, è anche possibile trovare entità in base ai loro ID, come segue:</p>
+<p>In Milvus, you can also find entities based on their IDs as follows:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the filter parameter</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -194,8 +193,8 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'esempio di Elasticsearch è disponibile in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">questa pagina</a>. Per maggiori dettagli sulle richieste di query e get e sulle espressioni di filtro in Milvus, consultare <a href="/docs/it/get-and-scalar-query.md">Query</a> e <a href="/docs/it/filtering">filtri</a>.</p>
-<h3 id="Prefix-query" class="common-anchor-header">Query con prefisso</h3><p>In Elasticsearch, è possibile trovare i documenti che contengono un prefisso specifico in un campo fornito nel contesto del filtro come segue:</p>
+<p>You can find the Elasticsearch example on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">this page</a>. For details on query and get requests as well as the filter expressions in Milvus, refer to <a href="/docs/get-and-scalar-query.md">Query</a> and <a href="/docs/filtering">Filtering</a>.</p>
+<h3 id="Prefix-query" class="common-anchor-header">Prefix query</h3><p>In Elasticsearch, you can find documents that contain a specific prefix in a provided field in the filter context as follows:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -211,15 +210,15 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In Milvus, è possibile trovare le entità i cui valori iniziano con il prefisso specificato come segue:</p>
+<p>In Milvus, you can find the entities whose values start with the specified prefix as follows:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;user like &quot;ki%&quot;&#x27;</span>,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'esempio di Elasticsearch è disponibile in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html">questa pagina</a>. Per maggiori dettagli sull'operatore <code translate="no">like</code> in Milvus, consultare la sezione <a href="/docs/it/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching">Utilizzo di </a><code translate="no">LIKE</code><a href="/docs/it/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> per la corrispondenza dei pattern</a>.</p>
-<h3 id="Range-query" class="common-anchor-header">Interrogazione dell'intervallo</h3><p>In Elasticsearch, è possibile trovare i documenti che contengono termini all'interno di un intervallo fornito, come segue:</p>
+<p>You can find the Elasticsearch example on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html">this page</a>. For details on the <code translate="no">like</code> operator in Milvus, refer to <a href="/docs/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching">Using </a><code translate="no">LIKE</code><a href="/docs/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> for Pattern Matching</a>.</p>
+<h3 id="Range-query" class="common-anchor-header">Range query</h3><p>In Elasticsearch, you can find documents that contain terms within a provided range as follows:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -236,15 +235,15 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In Milvus, è possibile trovare le entità i cui valori in un campo specifico si trovano all'interno di un intervallo fornito come segue:</p>
+<p>In Milvus, you can find the entities whose values in a specific field are within a provided range as follows:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;10 &lt;= age &lt;= 20&#x27;</span>,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'esempio di Elasticsearch è disponibile in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">questa pagina</a>. Per maggiori dettagli sugli operatori di confronto in Milvus, vedere <a href="/docs/it/basic-operators.md#Comparison-operators">Operatori di confronto</a>.</p>
-<h3 id="Term-query" class="common-anchor-header">Query a termine</h3><p>In Elasticsearch, è possibile trovare i documenti che contengono un termine <strong>esatto</strong> in un campo fornito, come segue:</p>
+<p>You can find the Elasticsearch example on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">this page</a>. For details on comparison operators in Milvus, see <a href="/docs/basic-operators.md#Comparison-operators">Comparison operators</a>.</p>
+<h3 id="Term-query" class="common-anchor-header">Term query</h3><p>In Elasticsearch, you can find documents that contain an <strong>exact</strong> term in a provided field as follows:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -260,7 +259,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In Milvus, è possibile trovare le entità i cui valori nel campo specificato sono esattamente il termine specificato come segue:</p>
+<p>In Milvus, you can find the entities whose values in the specified field are exactly the specified term as follows:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use ==</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -275,8 +274,8 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'esempio di Elasticsearch è disponibile in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">questa pagina</a>. Per maggiori dettagli sugli operatori di confronto in Milvus, vedere <a href="/docs/it/basic-operators.md#Comparison-operators">Operatori di confronto</a>.</p>
-<h3 id="Terms-query" class="common-anchor-header">Interrogazione dei termini</h3><p>In Elasticsearch, è possibile trovare documenti che contengono uno o più termini <strong>esatti</strong> in un campo fornito, come segue:</p>
+<p>You can find the Elasticsearch example on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">this page</a>. For details on comparison operators in Milvus, see <a href="/docs/basic-operators.md#Comparison-operators">Comparison operators</a>.</p>
+<h3 id="Terms-query" class="common-anchor-header">Terms query</h3><p>In Elasticsearch, you can find documents that contain one or more <strong>exact</strong> terms in a provided field as follows:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -293,7 +292,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus non ha un'equivalenza completa di questa. Tuttavia, è possibile trovare le entità i cui valori nel campo specificato sono uno dei termini specificati come segue:</p>
+<p>Milvus does not have a complete equivalence of this one. However, you can find the entities whose values in the specified field are one of the specified terms as follows:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use in</span>
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -308,8 +307,8 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;degree&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'esempio di Elasticsearch è disponibile in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html">questa pagina</a>. Per maggiori dettagli sugli operatori di intervallo in Milvus, consultare <a href="/docs/it/basic-operators.md#Range-operators">Operatori di intervallo</a>.</p>
-<h3 id="Wildcard-query" class="common-anchor-header">Query con caratteri jolly</h3><p>In Elasticsearch, è possibile trovare documenti che contengono termini che corrispondono a un modello jolly, come segue:</p>
+<p>You can find the Elasticsearch example on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html">this page</a>. For details on range operators in Milvus, refer to <a href="/docs/basic-operators.md#Range-operators">Range operators</a>.</p>
+<h3 id="Wildcard-query" class="common-anchor-header">Wildcard query</h3><p>In Elasticsearch, you can find documents that contain terms matching a wildcard pattern as follows:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -325,15 +324,15 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus non supporta i caratteri jolly nelle condizioni di filtraggio. Tuttavia, è possibile utilizzare l'operatore <code translate="no">like</code> per ottenere un effetto simile, come segue:</p>
+<p>Milvus does not support wildcard in its filtering conditions. However, you can use the <code translate="no">like</code> operator to achieve the similar effect as follows:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;user like &quot;ki%&quot; AND user like &quot;%y&quot;&#x27;</span>,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'esempio di Elasticsearch è disponibile in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html">questa pagina</a>. Per maggiori dettagli sugli operatori di intervallo in Milvus, consultare <a href="/docs/it/basic-operators.md#Range-operators">Operatori di intervallo</a>.</p>
-<h2 id="Boolean-query" class="common-anchor-header">Interrogazione booleana<button data-href="#Boolean-query" class="anchor-icon" translate="no">
+<p>You can find the Elasticsearch example on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html">this page</a>. For details on the range operators in Milvus, refer to <a href="/docs/basic-operators.md#Range-operators">Range operators</a>.</p>
+<h2 id="Boolean-query" class="common-anchor-header">Boolean query<button data-href="#Boolean-query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -348,8 +347,8 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Elasticsearch, una query booleana è un'interrogazione che corrisponde a documenti che corrispondono a combinazioni booleane di altre query.</p>
-<p>L'esempio seguente è adattato da un esempio presente nella documentazione di Elasticsearch in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html">questa pagina</a>. La query restituirà gli utenti che hanno <code translate="no">kimchy</code> nel loro nome con un tag <code translate="no">production</code>.</p>
+    </button></h2><p>In Elasticsearch, a boolean query is a query that matches documents matching boolean combinations of other queries.</p>
+<p>The following example is adapted from an example in Elasticsearch documentation on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html">this page</a>. The query will return users with <code translate="no">kimchy</code> in their names with a <code translate="no">production</code> tag.</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -368,7 +367,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In Milvus, si può fare una cosa simile come segue:</p>
+<p>In Milvus, you can do the similar thing as follows:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = 
 
 res = client.query(
@@ -377,8 +376,8 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'esempio precedente presuppone che nell'insieme di destinazione siano presenti un campo <code translate="no">user</code> di tipo <strong>VarChar</strong> e un campo <code translate="no">tags</code> di tipo <strong>Array</strong>. La query restituirà gli utenti con <code translate="no">kimchy</code> nel nome con un tag <code translate="no">production</code>.</p>
-<h2 id="Vector-queries" class="common-anchor-header">Query vettoriali<button data-href="#Vector-queries" class="anchor-icon" translate="no">
+<p>The above example assumes that you have a <code translate="no">user</code> field of the <strong>VarChar</strong> type and a <code translate="no">tags</code> field of the <strong>Array</strong> type, in the target collection. The query will return users with <code translate="no">kimchy</code> in their names with a <code translate="no">production</code> tag.</p>
+<h2 id="Vector-queries" class="common-anchor-header">Vector queries<button data-href="#Vector-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -393,8 +392,8 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Elasticsearch, le query vettoriali sono query specializzate che lavorano su campi vettoriali per eseguire in modo efficiente la ricerca semantica.</p>
-<h3 id="Knn-query" class="common-anchor-header">Query Knn</h3><p>Elasticsearch supporta sia le query kNN approssimate che le query kNN esatte, con forza bruta. In entrambi i casi è possibile trovare i <em>k</em> vettori più vicini a un vettore di query, misurati da una metrica di somiglianza, come segue:</p>
+    </button></h2><p>In Elasticsearch, vector queries are specialized queries that work on vector fields to efficiently perform semantic search.</p>
+<h3 id="Knn-query" class="common-anchor-header">Knn query</h3><p>Elasticsearch supports both approximate kNN queries and exact, brute-force kNN queries. You can find the <em>k</em> nearest vectors to a query vector in either way, as measured by a similarity metric, as follows:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     index=<span class="hljs-string">&quot;my-image-index&quot;</span>,
     size=<span class="hljs-number">3</span>,
@@ -412,8 +411,8 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus, in quanto database vettoriale specializzato, utilizza i tipi di indice per ottimizzare le ricerche vettoriali. In genere, privilegia la ricerca approssimata del vicino (RNA) per i dati vettoriali ad alta dimensione. La ricerca kNN a forza bruta con il tipo di indice FLAT fornisce risultati precisi, ma richiede molto tempo e risorse. Al contrario, la ricerca ANN con AUTOINDEX o altri tipi di indice bilancia velocità e precisione, offrendo prestazioni significativamente più veloci ed efficienti in termini di risorse rispetto a kNN.</p>
-<p>Un'equivalenza simile alla query vettoriale di cui sopra in Mlivus è la seguente:</p>
+<p>Milvus, as a specialized vector database, uses index types to optimize vector searches. Typically, it prioritizes approximate nearest neighbor (ANN) search for high-dimensional vector data. While brute-force kNN search with the FLAT index type delivers precise results, it is both time-consuming and resource-intensive. In contrast, ANN search using AUTOINDEX or other index types balances speed and accuracy, offering significantly faster and more resource-efficient performance than kNN.</p>
+<p>A similar equivalence to the above vector query in Mlivus goes like this:</p>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     anns_field=<span class="hljs-string">&quot;image-vector&quot;</span>
@@ -421,9 +420,9 @@ res = client.query(
     limit=<span class="hljs-number">10</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'esempio Elasticsearch è disponibile a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-knn-query.html">questa pagina</a>. Per maggiori dettagli sulle ricerche ANN in Milvus, leggere <a href="/docs/it/single-vector-search.md">Ricerca ANN di base</a>.</p>
-<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">Fusione di rango reciproco</h3><p>Elasticsearch offre la funzione Reciprocal Rank Fusion (RRF) per combinare più set di risultati con diversi indicatori di rilevanza in un unico set di risultati classificati.</p>
-<p>L'esempio seguente mostra la combinazione di una ricerca tradizionale basata sui termini con una ricerca vettoriale k-nearest neighbors (kNN) per migliorare la rilevanza della ricerca:</p>
+<p>You can find the Elasticsearch example on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-knn-query.html">this page</a>. For details on ANN searches in Milvus, read <a href="/docs/single-vector-search.md">Basic ANN Search</a>.</p>
+<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">Reciprocal Rank Fusion</h3><p>Elasticsearch provides Reciprocal Rank Fusion (RRF) to combine multiple result sets with different relevance indicators into a single ranked result set.</p>
+<p>The following example demonstrates combining a traditional term-based search with a k-nearest neighbors (kNN) vector search to improve search relevance:</p>
 <pre><code translate="no" class="language-python">client.search(
     index=<span class="hljs-string">&quot;my_index&quot;</span>,
     size=<span class="hljs-number">10</span>,
@@ -456,14 +455,14 @@ res = client.query(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, RRF combina i risultati di due retrievers:</p>
+<p>In this example, RRF combines results from two retrievers:</p>
 <ul>
-<li><p>Una ricerca standard basata sui termini per i documenti contenenti il termine <code translate="no">&quot;shoes&quot;</code> nel campo <code translate="no">text</code>.</p></li>
-<li><p>Una ricerca kNN sul campo <code translate="no">vector</code> utilizzando il vettore di query fornito.</p></li>
+<li><p>A standard term-based search for documents containing the term <code translate="no">&quot;shoes&quot;</code> in the <code translate="no">text</code> field.</p></li>
+<li><p>A kNN search on the <code translate="no">vector</code> field using the provided query vector.</p></li>
 </ul>
-<p>Ciascun retriever contribuisce con un massimo di 50 top match, che vengono riclassificati da RRF e i 10 risultati finali vengono restituiti.</p>
-<p>In Milvus è possibile ottenere una ricerca ibrida simile, combinando le ricerche su più campi vettoriali, applicando una strategia di reranking e recuperando i risultati top-K dall'elenco combinato. Milvus supporta sia le strategie di reranking RRF che quelle ponderate. Per maggiori dettagli, consultare <a href="/docs/it/reranking.md">Reranking</a>.</p>
-<p>Di seguito viene presentata un'equivalenza non rigorosa dell'esempio Elasticsearch di cui sopra in Milvus.</p>
+<p>Each retriever contributes up to 50 top matches, which are reranked by RRF, and the final top 10 results are returned.</p>
+<p>In Milvus, you can achieve a similar hybrid search by combining searches across multiple vector fields, applying a reranking strategy, and retrieving the top-K results from the combined list. Milvus supports both RRF and weighted reranker strategies. For more details, refer to <a href="/docs/weighted-ranker.md">Reranking</a>.</p>
+<p>The following is a non-strict equivalence of the above Elasticsearch example in Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,
@@ -494,14 +493,14 @@ res = client.hybrid_search(
     limit=<span class="hljs-number">10</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Questo esempio dimostra una ricerca ibrida in Milvus che combina:</p>
+<p>This example demonstrates a hybrid search in Milvus that combines:</p>
 <ol>
-<li><p><strong>Ricerca vettoriale densa</strong>: Utilizzo della metrica del prodotto interno (IP) con <code translate="no">nprobe</code> impostato su 10 per la ricerca approssimata del vicino (RNA) sul campo <code translate="no">vector</code>.</p></li>
-<li><p><strong>Ricerca vettoriale rada</strong>: Utilizzando la metrica di similarità BM25 con un parametro <code translate="no">drop_ratio_search</code> di 0,2 sul campo <code translate="no">text_sparse</code>.</p></li>
+<li><p><strong>Dense vector search</strong>: Using the inner product (IP) metric with <code translate="no">nprobe</code> set to 10 for approximate nearest neighbor (ANN) search on the <code translate="no">vector</code> field.</p></li>
+<li><p><strong>Sparse vector search</strong>: Using the BM25 similarity metric with a <code translate="no">drop_ratio_search</code> parameter of 0.2 on the <code translate="no">text_sparse</code> field.</p></li>
 </ol>
-<p>I risultati di queste ricerche vengono eseguiti separatamente, combinati e riclassificati utilizzando il ranker Reciprocal Rank Fusion (RRF). La ricerca ibrida restituisce le prime 10 entità dell'elenco rielaborato.</p>
-<p>A differenza del classificatore RRF di Elasticsearch, che unisce i risultati di query standard basate sul testo e di ricerche kNN, Milvus combina i risultati di ricerche vettoriali rade e dense, fornendo una capacità di ricerca ibrida unica, ottimizzata per i dati multimodali.</p>
-<h2 id="Recap" class="common-anchor-header">Ricostruzione<button data-href="#Recap" class="anchor-icon" translate="no">
+<p>The results from these searches are executed separately, combined, and reranked using the Reciprocal Rank Fusion (RRF) ranker. The hybrid search returns the top 10 entities from the reranked list.</p>
+<p>Unlike Elasticsearch’s RRF ranking, which merges results from standard text-based queries and kNN searches, Milvus combines results from sparse and dense vector searches, providing a unique hybrid search capability optimized for multimodal data.</p>
+<h2 id="Recap" class="common-anchor-header">Recap<button data-href="#Recap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -516,4 +515,4 @@ res = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questo articolo abbiamo affrontato le conversioni di query tipiche di Elasticsearch nei loro equivalenti di Milvus, comprese le query a livello di termine, le query booleane, le query full-text e le query vettoriali. Se avete altre domande sulla conversione di altre query Elasticsearch, non esitate a contattarci.</p>
+    </button></h2><p>In this article, we covered the conversions of typical Elasticsearch queries to their Milvus equivalents, including term-level queries, boolean queries, full-text queries, and vector queries. If you have further questions about converting other Elasticsearch queries, feel free to reach out to us.</p>

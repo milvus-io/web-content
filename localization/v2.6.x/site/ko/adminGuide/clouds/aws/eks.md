@@ -1,10 +1,10 @@
 ---
 id: eks.md
-title: EKS에 Milvus 클러스터 배포하기
+title: Deploy a Milvus Cluster on EKS
 related_key: cluster
-summary: EKS에 Milvus 클러스터를 배포하는 방법 알아보기
+summary: Learn how to deploy a Milvus cluster on EKS
 ---
-<h1 id="Deploy-a-Milvus-Cluster-on-EKS" class="common-anchor-header">EKS에 Milvus 클러스터 배포하기<button data-href="#Deploy-a-Milvus-Cluster-on-EKS" class="anchor-icon" translate="no">
+<h1 id="Deploy-a-Milvus-Cluster-on-EKS" class="common-anchor-header">Deploy a Milvus Cluster on EKS<button data-href="#Deploy-a-Milvus-Cluster-on-EKS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: EKS에 Milvus 클러스터를 배포하는 방법 알아보기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 항목에서는 <a href="https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html">Amazon EKS에</a> Milvus 클러스터를 배포하는 방법에 대해 설명합니다.</p>
-<h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>This topic describes how to deploy a Milvus cluster on <a href="https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html">Amazon EKS</a>.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,17 +36,20 @@ summary: EKS에 Milvus 클러스터를 배포하는 방법 알아보기
         ></path>
       </svg>
     </button></h2><ul>
-<li>이 문서에서 다루는 작업을 수행할 엔드포인트 역할을 하는 로컬 PC 또는 Amazon EC2에 AWS CLI가 설치되어 있어야 합니다. Amazon Linux 2 또는 Amazon Linux 2023의 경우, AWS CLI 도구가 이미 설치되어 있습니다. 로컬 PC에 AWS CLi를 설치하려면 다음과 같이 하세요. <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">AWS CLI 설치 방법을</a> 참조하세요.</li>
-<li>선호하는 엔드포인트 장치에 Kubernetes 및 EKS 도구를 설치했습니다:<ul>
+<li>You have AWS CLI installed on your local PC or an Amazon EC2, which will serve as your endpoint to do the operations covered in this document. For an Amazon Linux 2 or Amazon Linux 2023, the AWS CLI tools are already installed. To install AWS CLi on your local PC. Refer to <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">How to install AWS CLI</a>.</li>
+<li>You have installed Kubernetes and EKS tools installed on the preferred endpoint device, including:
+<ul>
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html"><code translate="no">kubectl</code></a></li>
 <li><a href="https://helm.sh/docs/intro/install/"><code translate="no">helm</code></a></li>
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html"><code translate="no">eksctl</code></a></li>
 </ul></li>
-<li>AWS IAM 권한이 올바르게 부여되었습니다. 사용 중인 IAM 보안 주체는 Amazon EKS IAM 역할, 서비스 관련 역할, AWS CloudFormation, VPC 및 기타 관련 리소스를 사용할 수 있는 권한을 가지고 있어야 합니다. 다음 방법 중 하나를 사용하여 보안 담당자에게 적절한 권한을 부여할 수 있습니다.<ul>
-<li>(권장하지 않음) 사용 중인 사용자/역할의 연결 정책을 AWS 관리 정책에 설정하기만 하면 됩니다 <code translate="no">AdministratorAccess</code>.</li>
-<li>(적극 권장) 최소 권한 원칙을 구현하려면 다음과 같이 하세요:<ul>
-<li><p><code translate="no">eksctl</code> 에 대한 권한을 설정하려면 <a href="https://eksctl.io/usage/minimum-iam-policies/"> <code translate="no">eksctl</code> 에 대한 최소 권한을</a> 참조하세요.</p></li>
-<li><p>AWS S3 버킷을 생성/삭제하기 위한 권한을 설정하려면 다음 권한 설정을 참조하세요:</p>
+<li>AWS IAM permissions have been granted properly. The IAM security principal you are using must have permission to use Amazon EKS IAM roles, service-related roles, AWS CloudFormation, VPCs, and other related resources. You can follow either of the following ways to grant your principal proper permissions.
+<ul>
+<li>(Not recommended) Simply set the association policy of the user/role that you used to AWS managed policy <code translate="no">AdministratorAccess</code>.</li>
+<li>(Strongly recommended) To implement the principle of least privilege, do as follows:
+<ul>
+<li><p>To set up permission for <code translate="no">eksctl</code>, refer to <a href="https://eksctl.io/usage/minimum-iam-policies/">Minimum permission for <code translate="no">eksctl</code></a>.</p></li>
+<li><p>To set up permission for creating/deleting AWS S3 buckets, refer to the following permission settings:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -66,7 +69,7 @@ summary: EKS에 Milvus 클러스터를 배포하는 방법 알아보기
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>IAM 정책을 생성/삭제하기 위한 권한을 설정하려면 다음 권한 설정을 참조하세요. <code translate="no">YOUR_ACCOUNT_ID</code> 을 자신의 것으로 바꾸세요.</p>
+<li><p>To set up permissions for creating/deleting IAM policies, refer to the following permission settings. Do replace <code translate="no">YOUR_ACCOUNT_ID</code> with your own.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -85,7 +88,7 @@ summary: EKS에 Milvus 클러스터를 배포하는 방법 알아보기
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="Set-up-AWS-Resources" class="common-anchor-header">AWS 리소스 설정<button data-href="#Set-up-AWS-Resources" class="anchor-icon" translate="no">
+<h2 id="Set-up-AWS-Resources" class="common-anchor-header">Set up AWS Resources<button data-href="#Set-up-AWS-Resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,10 +103,10 @@ summary: EKS에 Milvus 클러스터를 배포하는 방법 알아보기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AWS 관리 콘솔, AWS CLI 또는 Terraform과 같은 IaC 도구를 사용하여 AWS S3 버킷 및 EKS 클러스터를 포함한 필수 AWS 리소스를 설정할 수 있습니다. 이 문서에서는 AWS 리소스를 설정하는 방법을 설명하기 위해 AWS CLI를 선호합니다.</p>
-<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Amazon S3 버킷 만들기</h3><ul>
-<li><p>AWS S3 버킷을 생성합니다.</p>
-<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">버킷 이름</a> 지정 규칙을 읽고 AWS S3 버킷의 이름을 지정할 때 이름 지정 규칙을 준수하세요.</p>
+    </button></h2><p>You can set up the required AWS resources, including an AWS S3 bucket and an EKS cluster, using either AWS Management Console, AWS CLI, or IaC tools, such as Terraform. In this document, the AWS CLI is preferred to demonstrate how to set up the AWS resources.</p>
+<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Create an Amazon S3 Bucket</h3><ul>
+<li><p>Create an AWS S3 bucket.</p>
+<p>Read <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket Naming Rules</a> and observe the naming rules when naming your AWS S3 bucket.</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=&quot;milvus-bucket-$(openssl rand -hex 12)&quot;
 
 aws s3api create-bucket --bucket &quot;$milvus_bucket_name&quot; --region &#x27;us-east-2&#x27; --acl private  --object-ownership ObjectWriter --create-bucket-configuration LocationConstraint=&#x27;us-east-2&#x27;
@@ -113,7 +116,7 @@ aws s3api create-bucket --bucket &quot;$milvus_bucket_name&quot; --region &#x27;
 <span class="hljs-meta prompt_">#</span><span class="language-bash">
 <span class="hljs-comment"># &quot;Location&quot;: &quot;http://milvus-bucket-039dd013c0712f085d60e21f.s3.amazonaws.com/&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>위에서 생성한 버킷 내에서 오브젝트 읽기 및 쓰기를 위한 IAM 정책을 생성합니다. <strong>버킷 이름을 자신의 이름으로 바꾸세요.</strong></p>
+<li><p>Create an IAM policy for reading and writing objects within the bucket created above. <strong>Do replace the bucket name with your own.</strong></p>
 <pre><code translate="no" class="language-shell">echo &#x27;{
   &quot;Version&quot;: &quot;2012-10-17&quot;,
   &quot;Statement&quot;: [
@@ -152,12 +155,12 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
 <span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>    
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>정책을 AWS 사용자에 첨부합니다.</p>
+<li><p>Attach the policy to your AWS User.</p>
 <pre><code translate="no" class="language-shell">aws iam attach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot;arn:aws:iam::&lt;your-iam-account-id&gt;:policy/MilvusS3ReadWrite&quot;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Amazon EKS 클러스터 생성</h3><ul>
-<li><p>다음과 같이 클러스터 구성 파일을 준비하고 이름을 <code translate="no">eks_cluster.yaml</code> 으로 지정합니다.</p>
+<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Create an Amazon EKS Cluster</h3><ul>
+<li><p>Prepare a cluster configuration file as follows and name it <code translate="no">eks_cluster.yaml</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">eksctl.io/v1alpha5</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterConfig</span>
 
@@ -197,19 +200,19 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
   <span class="hljs-attr">wellKnownPolicies:</span>
     <span class="hljs-attr">ebsCSIController:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>다음 명령어를 실행하여 EKS 클러스터를 생성합니다.</p>
+<li><p>Run the following command to create an EKS cluster.</p>
 <pre><code translate="no" class="language-bash">eksctl create cluster -f eks_cluster.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>kubeconfig 파일을 가져옵니다.</p>
+<li><p>Get the kubeconfig file.</p>
 <pre><code translate="no" class="language-bash">aws eks update-kubeconfig --region <span class="hljs-string">&#x27;us-east-2&#x27;</span> --name <span class="hljs-string">&#x27;milvus-eks-cluster&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>EKS 클러스터를 확인합니다.</p>
+<li><p>Verify the EKS cluster.</p>
 <pre><code translate="no" class="language-bash">kubectl cluster-info
 
 kubectl get nodes -A -o wide
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Create-a-StorageClass" class="common-anchor-header">스토리지 클래스 생성<button data-href="#Create-a-StorageClass" class="anchor-icon" translate="no">
+<h2 id="Create-a-StorageClass" class="common-anchor-header">Create a StorageClass<button data-href="#Create-a-StorageClass" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -224,7 +227,7 @@ kubectl get nodes -A -o wide
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 <code translate="no">etcd</code> 를 메타 스토리지로 사용하며, <code translate="no">gp3</code> StorageClass를 사용하여 PVC를 생성하고 관리해야 합니다.</p>
+    </button></h2><p>Milvus uses <code translate="no">etcd</code> as meta storage and needs to rely on the <code translate="no">gp3</code> StorageClass to create and manage PVC.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">cat</span> <span class="hljs-string">&lt;&lt;EOF</span> <span class="hljs-string">|</span> <span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-bullet">-</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">storage.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">StorageClass</span>
@@ -238,26 +241,26 @@ kubectl get nodes -A -o wide
   <span class="hljs-attr">type:</span> <span class="hljs-string">gp3</span>
 <span class="hljs-string">EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>원래 gp2 StorageClass를 기본값이 아닌 것으로 설정합니다.</p>
+<p>Set the original gp2 StorageClass to non-default.</p>
 <pre><code translate="no" class="language-shell">kubectl patch storageclass gp2 -p &#x27;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;false&quot;}}}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">AWS 로드밸런서 컨트롤러를 설치한다.</h3><ul>
-<li><p>헬름 문자 리포지토리를 추가한다.</p>
+<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">Install AWS LoadBalancer Controller</h3><ul>
+<li><p>Add Helm chars repo.</p>
 <pre><code translate="no" class="language-shell">helm repo add eks https://aws.github.io/eks-charts
 helm repo update
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>AWS 로드밸런서 컨트롤러를 설치한다.</p>
+<li><p>Install the AWS Load Balancer Controller.</p>
 <pre><code translate="no" class="language-shell">helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
   --set clusterName=&#x27;milvus-eks-cluster&#x27; \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>설치 확인</p>
+<li><p>Verify the installation</p>
 <pre><code translate="no" class="language-shell">kubectl get deployment -n kube-system aws-load-balancer-controller
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Deploy-Milvus" class="common-anchor-header">밀버스 배포<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus" class="common-anchor-header">Deploy Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -272,17 +275,17 @@ helm repo update
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 가이드에서는 밀버스 헬름 차트를 사용하여 밀버스 클러스터를 배포한다. 차트는 <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">여기에서</a> 찾을 수 있습니다.</p>
+    </button></h2><p>In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You can find the charts <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">here</a>.</p>
 <ul>
-<li><p>Milvus 헬름 차트 리포지토리를 추가한다.</p>
+<li><p>Add Milvus Helm Chart repo.</p>
 <pre><code translate="no" class="language-bash">helm repo add milvus https://zilliztech.github.io/milvus-helm/
 helm repo update
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Milvus 구성 파일 <code translate="no">milvus.yaml</code> 을 준비하고 <code translate="no">&lt;bucket-name&gt; &lt;s3-access-key&gt; &lt;s3-secret-key&gt;</code> 을 사용자 구성 파일로 바꿉니다.</p>
+<li><p>Prepare the Milvus configuration file <code translate="no">milvus.yaml</code>, and replace <code translate="no">&lt;bucket-name&gt; &lt;s3-access-key&gt; &lt;s3-secret-key&gt;</code> with your own.</p>
 <p><div class="alert note"></p>
 <ul>
-<li>Milvus에 대한 HA를 구성하려면 <a href="https://milvus.io/tools/sizing/">이 계산기를</a> 참조하여 자세한 정보를 확인하세요. 관련 구성은 계산기에서 직접 다운로드할 수 있으며, MinIO 관련 구성은 제거해야 합니다.</li>
-<li>코디네이터의 멀티 레플리카 배포를 구현하려면 <code translate="no">xxCoordinator.activeStandby.enabled</code> 을 <code translate="no">true</code> 으로 설정합니다.</li>
+<li>To configure HA for your Milvus, refer to <a href="https://milvus.io/tools/sizing/">this calculator</a> for more information. You can download the related configurations directly from the calculator, and you should remove MinIO-related configurations.</li>
+<li>To implement multi-replica deployments of coordinators, set <code translate="no">xxCoordinator.activeStandby.enabled</code> to <code translate="no">true</code>.</li>
 </ul>
 <p></div></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>
@@ -357,20 +360,20 @@ helm repo update
       <span class="hljs-attr">cpu:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">memory:</span> <span class="hljs-string">2Gi</span>  
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Milvus를 설치합니다.</p>
+<li><p>Install Milvus.</p>
 <pre><code translate="no" class="language-shell">helm install milvus-demo milvus/milvus -n milvus -f milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>모든 파드가 <code translate="no">Running</code> 이 될 때까지 기다린다.</p>
+<li><p>Wait until all pods are <code translate="no">Running</code>.</p>
 <pre><code translate="no" class="language-shell">kubectl get pods -n milvus
 <button class="copy-code-btn"></button></code></pre>
 <p><div class="alert note"></p>
-<p>헬름은 서비스 생성 순서를 예약하는 기능을 지원하지 않는다. 초기 단계에서 <code translate="no">etcd</code> 와 <code translate="no">pulsar</code> 가 가동되기 전에 비즈니스 파드를 한두 번 재시작하는 것이 일반적이다.</p>
+<p>Helm does not support scheduling the order of service creation. It is normal that business pods to restart for one or two times before <code translate="no">etcd</code> and <code translate="no">pulsar</code> are up in the early stage.</p>
 <p></div></p></li>
-<li><p>밀버스 서비스 주소를 가져온다.</p>
+<li><p>Get Milvus service address.</p>
 <pre><code translate="no" class="language-shell">kubectl get svc -n milvus
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Verify-the-installation" class="common-anchor-header">설치 확인<button data-href="#Verify-the-installation" class="anchor-icon" translate="no">
+<h2 id="Verify-the-installation" class="common-anchor-header">Verify the installation<button data-href="#Verify-the-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -385,12 +388,12 @@ helm repo update
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>아래의 간단한 가이드에 따라 설치를 확인할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/v2.3.x/example_code.md">이 예제를</a> 참조하세요.</p>
+    </button></h2><p>You can follow the simple guide below to verify the installation. For more details, refer to <a href="https://milvus.io/docs/v2.3.x/example_code.md">this example</a>.</p>
 <ul>
-<li><p>예제 코드를 다운로드합니다.</p>
+<li><p>Download the example code.</p>
 <pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/hello_milvus.py
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>예제 코드의 <code translate="no">host</code> 인수를 위의 Milvus 서비스 주소로 변경합니다.</p></li>
+<li><p>Change the <code translate="no">host</code> argument in the example code to the Milvus service address above.</p></li>
 </ul>
 <pre><code translate="no">```python
 ...
@@ -399,10 +402,10 @@ connections.connect(&quot;default&quot;, host=&quot;milvus-service-06b515b1ce9ad
 ```
 </code></pre>
 <ul>
-<li><p>예제 코드를 실행합니다.</p>
+<li><p>Run the example code.</p>
 <pre><code translate="no" class="language-shell">python3 hello_milvus.py
 <button class="copy-code-btn"></button></code></pre>
-<p>출력은 다음과 유사해야 합니다:</p>
+<p>The output should be similar to the following:</p>
 <pre><code translate="no" class="language-shell">=== start connecting to Milvus     ===
 
 Does collection hello_milvus exist in Milvus: False
@@ -462,7 +465,7 @@ query after delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result:
 === Drop collection `hello_milvus` ===
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Clean-up-works" class="common-anchor-header">정리 작업<button data-href="#Clean-up-works" class="anchor-icon" translate="no">
+<h2 id="Clean-up-works" class="common-anchor-header">Clean-up works<button data-href="#Clean-up-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -477,16 +480,16 @@ query after delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus를 제거하고, EKS 클러스터를 삭제하고, AWS S3 버킷 및 관련 IAM 정책을 삭제하여 환경을 복원해야 하는 경우.</p>
+    </button></h2><p>In case you need to restore the environment by uninstalling Milvus, destroying the EKS cluster, and deleting the AWS S3 buckets and related IAM policies.</p>
 <ul>
-<li><p>Milvus를 제거합니다.</p>
+<li><p>Uninstall Milvus.</p>
 <pre><code translate="no" class="language-shell">helm uninstall milvus-demo -n milvus
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>EKS 클러스터를 삭제합니다.</p>
+<li><p>Destroy the EKS cluster.</p>
 <pre><code translate="no" class="language-shell">eksctl delete cluster --name milvus-eks-cluster --region us-east-2
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>AWS S3 버킷 및 관련 IAM 정책을 삭제합니다.</p>
-<p><strong>버킷 이름과 정책 ARN을 사용자 이름으로 바꿔야 합니다.</strong></p>
+<li><p>Delete the AWS S3 bucket and related IAM policies.</p>
+<p><strong>You should replace the bucket name and policy ARN with your own.</strong></p>
 <pre><code translate="no" class="language-shell">aws s3 rm s3://milvus-bucket-039dd013c0712f085d60e21f --recursive
 
 aws s3api delete-bucket --bucket milvus-bucket-039dd013c0712f085d60e21f --region us-east-2
@@ -496,7 +499,7 @@ aws iam detach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot
 aws iam delete-policy --policy-arn &#x27;arn:aws:iam::12345678901:policy/MilvusS3ReadWrite&#x27;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -511,8 +514,8 @@ aws iam delete-policy --policy-arn &#x27;arn:aws:iam::12345678901:policy/MilvusS
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다른 클라우드에 Milvus를 배포하는 방법을 배우려면 다음과 같이 하세요:</p>
+    </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
 <ul>
-<li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터 배포하기</a></li>
-<li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Azure에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li><a href="/docs/azure.md">Deploy Milvus Cluster on Azure With Kubernetes</a></li>
 </ul>

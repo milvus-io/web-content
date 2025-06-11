@@ -1,7 +1,9 @@
 ---
 id: siliconflow.md
-title: SiliconFLowCompatible with Milvus 2.6.x
-summary: 本主題描述如何在 Milvus 中配置和使用 SiliconFLow 嵌入功能。
+title: SiliconFLow
+summary: >-
+  This topic describes how to configure and use SiliconFLow embedding functions
+  in Milvus.
 beta: Milvus 2.6.x
 ---
 <h1 id="SiliconFLow" class="common-anchor-header">SiliconFLow<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#SiliconFLow" class="anchor-icon" translate="no">
@@ -19,8 +21,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主題描述如何在 Milvus 設定和使用 SiliconFLow 嵌入功能。</p>
-<h2 id="Choose-an-embedding-model" class="common-anchor-header">選擇嵌入模型<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
+    </button></h1><p>This topic describes how to configure and use SiliconFLow embedding functions in Milvus.</p>
+<h2 id="Choose-an-embedding-model" class="common-anchor-header">Choose an embedding model<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,46 +37,46 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 支援 SiliconFLow 提供的嵌入模型。以下是目前可用的 SiliconFLow 嵌入模型，以供快速參考：</p>
+    </button></h2><p>Milvus supports embedding models provided by SiliconFLow. Below are the currently available SiliconFLow embedding models for quick reference:</p>
 <table>
    <tr>
-     <th><p>型號名稱</p></th>
-     <th><p>尺寸</p></th>
-     <th><p>最大代幣</p></th>
-     <th><p>說明</p></th>
+     <th><p>Model Name</p></th>
+     <th><p>Dimensions</p></th>
+     <th><p>Max Tokens</p></th>
+     <th><p>Description</p></th>
    </tr>
    <tr>
      <td><p>BAAI/bge-large-zh-v1.5</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>大型中文文字嵌入模型，屬於 BGE (BAAI General Embedding) 系列。</p></td>
+     <td><p>A large Chinese text embedding model, which is part of the BGE (BAAI General Embedding) series.</p></td>
    </tr>
    <tr>
      <td><p>BAAI/bge-large-en-v1.5</p></td>
      <td><p>1,024</p></td>
      <td><p>512</p></td>
-     <td><p>大型英文文字嵌入模型，屬於 BGE (BAAI General Embedding) 系列。</p></td>
+     <td><p>A large English text embedding model, which is part of the BGE (BAAI General Embedding) series.</p></td>
    </tr>
    <tr>
      <td><p>netease-youdao/bce-embedding-base_v1</p></td>
      <td><p>768</p></td>
      <td><p>512</p></td>
-     <td><p>由網易有道開發的雙語及跨語言嵌入模型。該模型在中英文語義表達和檢索任務中都表現出優異的性能，尤其是在跨語言的場合中表現突出。</p></td>
+     <td><p>A bilingual and cross-lingual embedding model developed by NetEase Youdao. The model exhibits excellent performance in Chinese and English semantic representation and retrieval tasks, especially excelling in cross-lingual scenarios.</p></td>
    </tr>
    <tr>
      <td><p>BAAI/bge-m3</p></td>
      <td><p>1,024</p></td>
      <td><p>8,192</p></td>
-     <td><p>一個多功能、多語言、多粒度的文字嵌入模型。它支援三種常見的檢索功能：密集檢索、多向量檢索和稀疏檢索。</p></td>
+     <td><p>A multifunctional, multilingual, multi-granularity text embedding model. It supports three common retrieval functions: dense retrieval, multi-vector retrieval, and sparse retrieval.</p></td>
    </tr>
    <tr>
      <td><p>Pro/BAAI/bge-m3</p></td>
      <td><p>1,024</p></td>
      <td><p>8,192</p></td>
-     <td><p>多功能、多語言、多粒度的文字嵌入模型。它支援三種常見的檢索功能：密集檢索、多向量檢索和稀疏檢索。該模型可處理超過 100 種語言的輸入，並能處理不同的粒度。</p></td>
+     <td><p>A multifunctional, multilingual, multi-granularity text embedding model. It supports three common retrieval functions: dense retrieval, multi-vector retrieval, and sparse retrieval. The model can process inputs in over 100 languages and is capable of handling different granularities.</p></td>
    </tr>
 </table>
-<h2 id="Configure-credentials" class="common-anchor-header">配置憑證<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<h2 id="Configure-credentials" class="common-anchor-header">Configure credentials<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -89,19 +91,19 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 必須知道您的 SiliconFlow API 金鑰，才能請求嵌入。Milvus 提供兩種配置憑證的方法：</p>
+    </button></h2><p>Milvus must know your SiliconFlow API key before it can request embeddings. Milvus provides two methods to configure credentials:</p>
 <ul>
-<li><p><strong>配置文件（推薦）：</strong>將 API 金鑰儲存在<code translate="no">milvus.yaml</code> ，以便每次重新啟動和節點都會自動取得。</p></li>
-<li><p><strong>環境變數：</strong>在部署時注入金鑰 - 最適合 Docker Compose。</p></li>
+<li><p><strong>Configuration file (recommended):</strong> Store the API key in <code translate="no">milvus.yaml</code> so every restart and node picks it up automatically.</p></li>
+<li><p><strong>Environment variables:</strong> Inject the key at deploy time—ideal for Docker Compose.</p></li>
 </ul>
-<p>在以下兩種方法中選擇一種--配置檔案在裸機和虛擬機器上較容易維護，而 env-var 路線則適合容器工作流程。</p>
+<p>Choose one of the two methods below—the configuration file is easier to maintain on bare-metal and VMs, while the env-var route fits container workflows.</p>
 <div class="alert note">
-<p>如果相同提供者的 API 金鑰同時出現在組態檔案和環境變數中，Milvus 會永遠使用<code translate="no">milvus.yaml</code> 中的值，而忽略環境變數。</p>
+<p>If an API key for the same provider is present in both the configuration file and an environment variable, Milvus always uses the value in <code translate="no">milvus.yaml</code> and ignores the environment variable.</p>
 </div>
-<h3 id="Option-1-Configuration-file" class="common-anchor-header">選項 1：組態檔</h3><p>將您的 API 金鑰保留在<code translate="no">milvus.yaml</code> ；Milvus 會在啟動時讀取它們，並覆寫相同提供者的任何環境變數。</p>
+<h3 id="Option-1-Configuration-file" class="common-anchor-header">Option 1: Configuration file</h3><p>Keep your API keys in <code translate="no">milvus.yaml</code>; Milvus reads them at startup and overrides any environment variable for the same provider.</p>
 <ol>
-<li><p>**在以下位置宣告您的金鑰<code translate="no">credential:</code></p>
-<p>您可以列出一個或多個 API 金鑰 - 給每個金鑰一個您自創的標籤，稍後可以參考。</p>
+<li><p>**Declare your keys under <code translate="no">credential:</code></p>
+<p>You may list one or many API keys—give each a label you invent and will reference later.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -109,9 +111,9 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>將 API 金鑰放在這裡可以讓它們在重新啟動時保持不變，並讓您只需更改標籤就可以切換金鑰。</p></li>
-<li><p><strong>告訴 Milvus 哪個金鑰用於服務呼叫</strong></p>
-<p>在同一個檔案中，將 SiliconFlow 提供者指向您希望它使用的標籤。</p>
+<p>Putting the API keys here makes them persistent across restarts and lets you switch keys just by changing a label.</p></li>
+<li><p><strong>Tell Milvus which key to use for service calls</strong></p>
+<p>In the same file, point the SiliconFlow provider at the label you want it to use.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -119,23 +121,23 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.siliconflow.cn/v1/embeddings   # (optional) custom endpoint</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>這會將特定的金鑰綁定到 Milvus 傳送至 OpenAI embeddings endpoint 的每個請求。</p></li>
+<p>This binds a specific key to every request Milvus sends to the OpenAI embeddings endpoint.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">選項 2：環境變數</h3><p>當您使用 Docker Compose 執行 Milvus，並希望不在檔案和影像中洩露秘密時，請使用此方法。</p>
-<p>只有在<code translate="no">milvus.yaml</code> 中找不到提供者的金鑰時，Milvus 才會使用環境變數。</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Environment variable</h3><p>Use this method when you run Milvus with Docker Compose and prefer to keep secrets out of files and images.</p>
+<p>Milvus falls back to the environment variable only if no key for the provider is found in <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
-     <th><p>變數</p></th>
-     <th><p>需要</p></th>
-     <th><p>說明</p></th>
+     <th><p>Variable</p></th>
+     <th><p>Required</p></th>
+     <th><p>Description</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">MILVUSAI_SILICONFLOW_API_KEY</code></p></td>
-     <td><p>是</p></td>
-     <td><p>您有效的 SiliconFlow API 金鑰。</p></td>
+     <td><p>Yes</p></td>
+     <td><p>Your valid SiliconFlow API key.</p></td>
    </tr>
 </table>
-<p>在你的<strong>docker-compose.yaml</strong>檔案中，設定<code translate="no">MILVUSAI_SILICONFLOW_API_KEY</code> 環境變數。</p>
+<p>In your <strong>docker-compose.yaml</strong> file, set the <code translate="no">MILVUSAI_SILICONFLOW_API_KEY</code> environment variable.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -144,8 +146,8 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the SiliconFlow API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_SILICONFLOW_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_SILICONFLOW_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">environment:</code> 區塊只會將金鑰注入 Milvus 容器，而不會碰觸到您的主機作業系統。詳情請參考<a href="/docs/zh-hant/configure-docker.md#Configure-Milvus-with-Docker-Compose">使用 Docker Compose 設定 Milvus</a>。</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">使用嵌入功能<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p>The <code translate="no">environment:</code> block injects the key only into the Milvus container, leaving your host OS untouched. For details, refer to <a href="/docs/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configure Milvus with Docker Compose</a>.</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -160,14 +162,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦配置了憑證，請按照以下步驟定義和使用嵌入函數。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步驟 1：定義模式欄位</h3><p>若要使用嵌入函式，請建立具有特定模式的集合。此模式必須包含至少三個必要欄位：</p>
+    </button></h2><p>Once credentials are configured, follow these steps to define and use embedding functions.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Step 1: Define schema fields</h3><p>To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:</p>
 <ul>
-<li><p>唯一識別集合中每個實體的主要欄位。</p></li>
-<li><p>儲存要嵌入的原始資料的標量欄位。</p></li>
-<li><p>預留向量欄位，用來儲存函式將為標量欄位產生的向量嵌入。</p></li>
+<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
+<li><p>A scalar field that stores raw data to be embedded.</p></li>
+<li><p>A vector field reserved to store vector embeddings that the function will generate for the scalar field.</p></li>
 </ul>
-<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense&quot;</code> 用來儲存函式模組要產生的嵌入資料。切記設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
+<p>The following example defines a schema with one scalar field <code translate="no">&quot;document&quot;</code> for storing textual data and one vector field <code translate="no">&quot;dense&quot;</code> for storing embeddings to be generated by the Function module. Remember to set the vector dimension (<code translate="no">dim</code>) to match the output of your chosen embedding model.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -188,9 +190,9 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：在模式中加入嵌入函數</h3><p>Milvus 中的 Function 模組會自動將儲存在標量欄位中的原始資料轉換成嵌入式資料，並將其儲存在明確定義的向量欄位中。</p>
-<p>下面的範例新增了一個 Function 模組 (<code translate="no">siliconflow_embedding</code>)，將標量欄位<code translate="no">&quot;document&quot;</code> 轉換為嵌入，將產生的向量儲存到之前定義的<code translate="no">&quot;dense&quot;</code> 向量欄位中。</p>
-<p>定義好嵌入函數後，將它加入集合模式。這會指示 Milvus 使用指定的 embedding 函式來處理和儲存文字資料的 embeddings。</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Step 2: Add embedding function to schema</h3><p>The Function module in Milvus automatically converts raw data stored in a scalar field into embeddings and stores them into the explicitly defined vector field.</p>
+<p>The example below adds a Function module (<code translate="no">siliconflow_embedding</code>) that converts the scalar field <code translate="no">&quot;document&quot;</code> into embeddings, storing the resulting vectors in the <code translate="no">&quot;dense&quot;</code> vector field defined earlier.</p>
+<p>Once you have defined your embedding function, add it to your collection schema. This instructs Milvus to use the specified embedding function to process and store embeddings from your text data.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;siliconflow_embedding&quot;</span>,                        <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -209,7 +211,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -224,4 +226,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>配置完嵌入函數後，請參閱函數<a href="/docs/zh-hant/embedding-function-overview.md">概觀</a>，以獲得關於索引配置、資料插入範例和語意搜尋作業的其他指引。</p>
+    </button></h2><p>After configuring the embedding function, refer to the <a href="/docs/embedding-function-overview.md">Function Overview</a> for additional guidance on index configuration, data insertion examples, and semantic search operations.</p>

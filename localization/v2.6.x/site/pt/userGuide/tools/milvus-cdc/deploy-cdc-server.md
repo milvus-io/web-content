@@ -1,12 +1,10 @@
 ---
 id: deploy-cdc-server.md
 order: 2
-summary: >-
-  Este guia fornece um processo passo-a-passo para a implantação de um servidor
-  Milvus-CDC.
-title: Implantar o servidor CDC
+summary: This guide provides a step-by-step process for deploying a Milvus-CDC server.
+title: Deploy CDC Server
 ---
-<h1 id="Deploy-CDC-Server" class="common-anchor-header">Implantar o servidor CDC<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
+<h1 id="Deploy-CDC-Server" class="common-anchor-header">Deploy CDC Server<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +19,8 @@ title: Implantar o servidor CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia fornece um processo passo-a-passo para a implantação de um servidor Milvus-CDC.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>This guide provides a step-by-step process for deploying a Milvus-CDC server.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,17 +35,17 @@ title: Implantar o servidor CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Assegure-se de que as seguintes condições sejam atendidas antes de implantar um servidor Milvus-CDC:</p>
+    </button></h2><p>Ensure the following conditions are met before deploying a Milvus-CDC server:</p>
 <ul>
-<li><p><strong>Instâncias do Milvus</strong>: Tanto o Milvus de origem quanto pelo menos um Milvus de destino devem estar implantados e operacionais.</p>
+<li><p><strong>Milvus Instances</strong>: Both the source Milvus and at least one target Milvus should be deployed and operational.</p>
 <ul>
-<li><p>As versões do Milvus de origem e de destino devem ser 2.3.2 ou superior, de preferência 2.4.x. Recomendamos a utilização da mesma versão para o Milvus de origem e de destino para garantir a compatibilidade.</p></li>
-<li><p>Defina a configuração <code translate="no">common.ttMsgEnabled</code> do Milvus de destino para <code translate="no">false</code>.</p></li>
-<li><p>Configure o Milvus de origem e o Milvus de destino com definições distintas de meta e armazenamento de mensagens para evitar conflitos. Por exemplo, evite usar as mesmas configurações de etcd e rootPath, bem como serviços Pulsar idênticos e <code translate="no">chanNamePrefix</code> em várias instâncias do Milvus.</p></li>
+<li><p>Both the source and target Milvus versions must be 2.3.2 or higher, preferably 2.4.x. We recommend uisng the same version for the source and target Milvus to ensure compatibility.</p></li>
+<li><p>Set the <code translate="no">common.ttMsgEnabled</code> configuration of the target Milvus to <code translate="no">false</code>.</p></li>
+<li><p>Configure the source and target Milvus with distinct meta and message storage settings to prevent conflicts. For instance, avoid using the same etcd and rootPath configurations, as well as identical Pulsar services and <code translate="no">chanNamePrefix</code> in multiple Milvus instances.</p></li>
 </ul></li>
-<li><p><strong>Metastore</strong>: Tenha um banco de dados etcd ou MySQL pronto para o metastore do Milvus-CDC.</p></li>
+<li><p><strong>Metastore</strong>: Have an etcd or MySQL database ready for the Milvus-CDC metastore.</p></li>
 </ul>
-<h2 id="Steps" class="common-anchor-header">Etapas<button data-href="#Steps" class="anchor-icon" translate="no">
+<h2 id="Steps" class="common-anchor-header">Steps<button data-href="#Steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,21 +60,21 @@ title: Implantar o servidor CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Obter o arquivo de configuração do Milvus-CDC</h3><p>Clone o <a href="https://github.com/zilliztech/milvus-cdc">repositório Milvus-CDC</a> e navegue até ao diretório <code translate="no">milvus-cdc/server/configs</code> para aceder ao ficheiro de configuração <code translate="no">cdc.yaml</code>.</p>
+    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Obtain the Milvus-CDC config file</h3><p>Clone the <a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC repo</a> and navigate to the <code translate="no">milvus-cdc/server/configs</code> directory to access the <code translate="no">cdc.yaml</code> config file.</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus-cdc.git
 
 <span class="hljs-built_in">cd</span> milvus-cdc/server/configs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Edit-the-config-file" class="common-anchor-header">Editar o ficheiro de configuração</h3><p>No diretório <code translate="no">milvus-cdc/server/configs</code>, modifique o ficheiro <code translate="no">cdc.yaml</code> para personalizar as configurações relacionadas com o metastore do Milvus-CDC e os detalhes de ligação do Milvus de origem.</p>
+<h3 id="Edit-the-config-file" class="common-anchor-header">Edit the config file</h3><p>In the <code translate="no">milvus-cdc/server/configs</code> directory, modify the <code translate="no">cdc.yaml</code> file to customize configurations related to the Milvus-CDC metastore and connection details of the source Milvus.</p>
 <ul>
-<li><p><strong>Configuração do metastore</strong>:</p>
+<li><p><strong>Metastore Configuration</strong>:</p>
 <ul>
-<li><p><code translate="no">metaStoreConfig.storeType</code>: Tipo de metastore para o Milvus-CDC. Os valores possíveis são <code translate="no">etcd</code> ou <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Endereço de ligação ao etcd do Milvus-CDC. Obrigatório se <code translate="no">storeType</code> estiver definido como <code translate="no">etcd</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Endereço de ligação da base de dados MySQL para o servidor Milvus-CDC. Obrigatório se <code translate="no">storeType</code> estiver definido como <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>: Caminho da raiz do metastore do Milvus-CDC. Esta configuração permite o multilocatário, permitindo que vários serviços CDC utilizem a mesma instância etcd ou MySQL, ao mesmo tempo que obtêm o isolamento através de diferentes caminhos de raiz.</p></li>
+<li><p><code translate="no">metaStoreConfig.storeType</code>: Type of metastore for Milvus-CDC. Possible values are <code translate="no">etcd</code> or <code translate="no">mysql</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Address for connecting to the etcd of Milvus-CDC. Required if <code translate="no">storeType</code> is set to <code translate="no">etcd</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Connection address of the MySQL database for the Milvus-CDC server. Required if <code translate="no">storeType</code> is set to <code translate="no">mysql</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>: Root path of the Milvus-CDC metastore. This configuration enables multi-tenancy, allowing multiple CDC services to utilize the same etcd or MySQL instance while achieving isolation through different root paths.</p></li>
 </ul>
-<p>Exemplo de configuração:</p>
+<p>Example configuration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
 <span class="hljs-attr">metaStoreConfig:</span>
   <span class="hljs-comment"># the metastore type, available value: etcd, mysql</span>
@@ -89,21 +87,21 @@ title: Implantar o servidor CDC
   <span class="hljs-comment"># meta data prefix, if multiple cdc services use the same store service, you can set different rootPaths to achieve multi-tenancy</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">cdc</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Configuração do Milvus de origem:</strong></p>
-<p>Especifique os detalhes de ligação do Milvus de origem, incluindo o etcd e o armazenamento de mensagens, para estabelecer uma ligação entre o servidor Milvus-CDC e o Milvus de origem.</p>
+<li><p><strong>Source Milvus Configuration:</strong></p>
+<p>Specify the connection details of the source Milvus, including etcd and message storage, to establish a connection between the Milvus-CDC server and the source Milvus.</p>
 <ul>
-<li><p><code translate="no">sourceConfig.etcdAddress</code>: Endereço para conexão com o etcd do Milvus de origem. Para mais informações, consulte <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">Configurações relacionadas com o etcd</a>.</p></li>
-<li><p><code translate="no">sourceConfig.etcdRootPath</code>: Prefixo da raiz da chave onde o Milvus de origem armazena os dados no etcd. O valor pode variar com base no método de implantação da instância do Milvus:</p>
+<li><p><code translate="no">sourceConfig.etcdAddress</code>: Address for connecting to the etcd of the source Milvus. For more information, refer to <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">etcd-related Configurations</a>.</p></li>
+<li><p><code translate="no">sourceConfig.etcdRootPath</code>: Root prefix of the key where the source Milvus stores data in etcd. The value may vary based on the deployment method of the Milvus instance:</p>
 <ul>
-<li><p><strong>Helm</strong> ou <strong>Docker Compose</strong>: A predefinição é <code translate="no">by-dev</code>.</p></li>
-<li><p><strong>Operator (Operador</strong>): O valor predefinido é <code translate="no">&lt;release_name&gt;</code>.</p></li>
+<li><p><strong>Helm</strong> or <strong>Docker Compose</strong>: Defaults to <code translate="no">by-dev</code>.</p></li>
+<li><p><strong>Operator</strong>: Defaults to <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
-<li><p><code translate="no">replicateChan</code>Nome do canal de replicação do milvus, que é <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> no ficheiro milvus.yaml</p></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: Configurações do Pulsar para o Milvus de origem. Se o Milvus de origem usa Kafka para armazenamento de mensagens, remova todas as configurações relacionadas ao Pulsar. Para obter mais informações, consulte <a href="https://milvus.io/docs/configure_pulsar.md">Configurações relacionadas ao Pulsar</a>.</p></li>
-<li><p><code translate="no">sourceConfig.kafka.address</code>: Endereço do Kafka para o Milvus de origem. Descomente esta configuração se o Milvus de origem usa Kafka para armazenamento de mensagens.</p></li>
+<li><p><code translate="no">replicateChan</code>: milvus replicate channel name, which is <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> in the milvus.yaml file</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: Pulsar configurations for the source Milvus. If the source Milvus uses Kafka for message storage, remove all Pulsar-related configurations. For more information, refer to <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar-related Configurations</a>.</p></li>
+<li><p><code translate="no">sourceConfig.kafka.address</code>: Kafka address for the source Milvus. Uncomment this configuration if the source Milvus uses Kafka for message storage.</p></li>
 </ul></li>
 </ul>
-<p>Exemplo de configuração:</p>
+<p>Example configuration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus-source config, these settings are basically the same as the corresponding configuration of milvus.yaml in milvus source.</span>
 <span class="hljs-attr">sourceConfig:</span>
   <span class="hljs-comment"># etcd config</span>
@@ -128,19 +126,19 @@ title: Implantar o servidor CDC
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compilar o servidor Milvus-CDC</h3><p>Depois de guardar o ficheiro <code translate="no">cdc.yaml</code>, navegue até ao diretório <code translate="no">milvus-cdc</code> e execute um dos seguintes comandos para compilar o servidor:</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compile the Milvus-CDC server</h3><p>After saving the <code translate="no">cdc.yaml</code> file, navigate to the <code translate="no">milvus-cdc</code> directory and run one of the following commands to compile the server:</p>
 <ul>
-<li><p>Para um ficheiro binário:</p>
+<li><p>For a binary file:</p>
 <pre><code translate="no" class="language-bash">make build
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Para uma imagem do Docker:</p>
+<li><p>For a Docker image:</p>
 <pre><code translate="no" class="language-bash">bash build_image.sh
 <button class="copy-code-btn"></button></code></pre>
-<p>Para uma imagem Docker, monte o ficheiro compilado em <code translate="no">/app/server/configs/cdc.yaml</code> dentro do contentor.</p></li>
+<p>For a Docker image, mount the compiled file to <code translate="no">/app/server/configs/cdc.yaml</code> within the container.</p></li>
 </ul>
-<h3 id="Start-the-server" class="common-anchor-header">Iniciar o servidor</h3><ul>
-<li><p>Usando o binário</p>
-<p>Navegue até o diretório que contém o binário <code translate="no">milvus-cdc</code> e o diretório <code translate="no">configs</code> com o arquivo <code translate="no">cdc.yaml</code> e, em seguida, inicie o servidor:</p>
+<h3 id="Start-the-server" class="common-anchor-header">Start the server</h3><ul>
+<li><p>Using the binary</p>
+<p>Navigate to the directory containing the <code translate="no">milvus-cdc</code> binary and the <code translate="no">configs</code> directory with the <code translate="no">cdc.yaml</code> file, then start the server:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>
 .
 ├── milvus-cdc <span class="hljs-comment"># build from source code or download from release page</span>
@@ -150,7 +148,7 @@ title: Implantar o servidor CDC
 <span class="hljs-comment"># start milvus cdc</span>
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Usando o Docker Compose:</p>
+<li><p>Using Docker Compose:</p>
 <pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

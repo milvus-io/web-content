@@ -2,11 +2,11 @@
 id: hpa.md
 related_key: scale Milvus cluster with HPA
 summary: >-
-  تعرّف على كيفية تكوين التوسيع التلقائي للحاوية الأفقية (HPA) لتوسيع نطاق
-  مجموعة Milvus بشكل ديناميكي.
-title: تكوين التحجيم التلقائي للحاوية الأفقية (HPA) ل Milvus
+  Learn how to configure Horizontal Pod Autoscaling (HPA) to dynamically scale a
+  Milvus cluster.
+title: Configure Horizontal Pod Autoscaling (HPA) for Milvus
 ---
-<h1 id="Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="common-anchor-header">تكوين التحجيم التلقائي للحاوية الأفقية (HPA) ل Milvus<button data-href="#Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="anchor-icon" translate="no">
+<h1 id="Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="common-anchor-header">Configure Horizontal Pod Autoscaling (HPA) for Milvus<button data-href="#Configure-Horizontal-Pod-Autoscaling-HPA-for-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ title: تكوين التحجيم التلقائي للحاوية الأفقية 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,9 +36,9 @@ title: تكوين التحجيم التلقائي للحاوية الأفقية 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>التحجيم الأفقي للقرنة الأفقية التلقائي (HPA) هي ميزة Kubernetes التي تقوم تلقائيًا بضبط عدد القرون في عملية النشر بناءً على استخدام الموارد، مثل وحدة المعالجة المركزية أو الذاكرة. في Milvus، يمكن تطبيق HPA على مكونات عديمة الحالة مثل <code translate="no">proxy</code> و <code translate="no">queryNode</code> و <code translate="no">dataNode</code> و <code translate="no">indexNode</code> لتوسيع نطاق المجموعة ديناميكيًا استجابةً لتغيرات عبء العمل.</p>
-<p>يشرح هذا الدليل كيفية تكوين HPA لمكونات Milvus باستخدام مشغل Milvus.</p>
-<h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h2><p>Horizontal Pod Autoscaling (HPA) is a Kubernetes feature that automatically adjusts the number of Pods in a deployment based on resource utilization, such as CPU or memory. In Milvus, HPA can be applied to stateless components like <code translate="no">proxy</code>, <code translate="no">queryNode</code>, <code translate="no">dataNode</code>, and <code translate="no">indexNode</code> to dynamically scale the cluster in response to workload changes.</p>
+<p>This guide explains how to configure HPA for Milvus components using the Milvus Operator.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,11 +54,11 @@ title: تكوين التحجيم التلقائي للحاوية الأفقية 
         ></path>
       </svg>
     </button></h2><ul>
-<li>مجموعة Milvus قيد التشغيل تم نشرها باستخدام مشغل Milvus.</li>
-<li>الوصول إلى <code translate="no">kubectl</code> لإدارة موارد Kubernetes.</li>
-<li>الإلمام ببنية Milvus و Kubernetes HPA.</li>
+<li>A running Milvus cluster deployed with Milvus Operator.</li>
+<li>Access to <code translate="no">kubectl</code> for managing Kubernetes resources.</li>
+<li>Familiarity with Milvus architecture and Kubernetes HPA.</li>
 </ul>
-<h2 id="Configure-HPA-with-Milvus-Operator" class="common-anchor-header">تكوين HPA باستخدام مشغل Milvus<button data-href="#Configure-HPA-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Configure-HPA-with-Milvus-Operator" class="common-anchor-header">Configure HPA with Milvus Operator<button data-href="#Configure-HPA-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,18 +73,18 @@ title: تكوين التحجيم التلقائي للحاوية الأفقية 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لتمكين HPA في مجموعة Milvus التي يديرها مشغل Milvus، اتبع الخطوات التالية:</p>
+    </button></h2><p>To enable HPA in a Milvus cluster managed by the Milvus Operator, follow these steps:</p>
 <ol>
-<li><p><strong>اضبط النسخ المتماثلة على -1</strong>:</p>
-<p>في مورد Milvus المخصص (CR)، قم بتعيين الحقل <code translate="no">replicas</code> إلى <code translate="no">-1</code> للمكون الذي تريد توسيع نطاقه باستخدام HPA. هذا يفوض التحكم في القياس إلى HPA بدلاً من المشغل. يمكنك تحرير المورد المخصص مباشرةً أو استخدام الأمر التالي <code translate="no">kubectl patch</code> للتبديل بسرعة إلى التحكم في HPA:</p>
+<li><p><strong>Set Replicas to -1</strong>:</p>
+<p>In the Milvus custom resource (CR), set the <code translate="no">replicas</code> field to <code translate="no">-1</code> for the component you want to scale with HPA. This delegates scaling control to HPA instead of the operator. You can edit the CR directly or use the following <code translate="no">kubectl patch</code> command to quickly switch to HPA control:</p>
 <pre><code translate="no" class="language-bash">kubectl patch milvus &lt;your-release-name&gt; --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;json&#x27;</span> -p=<span class="hljs-string">&#x27;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/components/proxy/replicas&quot;, &quot;value&quot;: -1}]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>استبدل <code translate="no">&lt;your-release-name&gt;</code> باسم مجموعة ميلفوس العنقودية الخاصة بك.</p>
-<p>للتحقق من تطبيق التغيير، قم بالتشغيل:</p>
+<p>Replace <code translate="no">&lt;your-release-name&gt;</code> with the name of your Milvus cluster.</p>
+<p>To verify that the change has been applied, run:</p>
 <pre><code translate="no" class="language-bash">kubectl get milvus &lt;your-release-name&gt; -o jsonpath=<span class="hljs-string">&#x27;{.spec.components.proxy.replicas}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يجب أن يكون الناتج المتوقع هو <code translate="no">-1</code> ، مما يؤكد أن المكون <code translate="no">proxy</code> أصبح الآن تحت سيطرة HPA.</p>
-<p>بدلاً من ذلك، يمكنك تعريفه في CR YAML:</p>
+<p>The expected output should be <code translate="no">-1</code>, confirming that the <code translate="no">proxy</code> component is now under HPA control.</p>
+<p>Alternatively, you can define it in the CR YAML:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -95,8 +95,8 @@ title: تكوين التحجيم التلقائي للحاوية الأفقية 
     <span class="hljs-attr">proxy:</span>
       <span class="hljs-attr">replicas:</span> <span class="hljs-number">-1</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>تعريف مورد HPA</strong>:</p>
-<p>قم بإنشاء مورد HPA لاستهداف نشر المكون المطلوب. فيما يلي مثال للمكون <code translate="no">proxy</code>:</p>
+<li><p><strong>Define an HPA Resource</strong>:</p>
+<p>Create an HPA resource to target the deployment of the desired component. Below is an example for the <code translate="no">proxy</code> component:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">autoscaling/v2</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">HorizontalPodAutoscaler</span>
 <span class="hljs-attr">metadata:</span>
@@ -134,26 +134,26 @@ title: تكوين التحجيم التلقائي للحاوية الأفقية 
           <span class="hljs-attr">value:</span> <span class="hljs-number">1</span>
           <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">60</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>استبدل <code translate="no">my-release</code> في <code translate="no">metadata.name</code> و <code translate="no">spec.scaleTargetRef.name</code> باسم مجموعة ميلفوس الفعلي الخاص بك (على سبيل المثال، <code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> و <code translate="no">&lt;your-release-name&gt;-milvus-proxy</code>).</p></li>
-<li><p><strong>قم بتطبيق تكوين HPA</strong>:</p>
-<p>انشر مورد HPA باستخدام الأمر التالي:</p>
+<p>Replace <code translate="no">my-release</code> in <code translate="no">metadata.name</code> and <code translate="no">spec.scaleTargetRef.name</code> with your actual Milvus cluster name (e.g., <code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> and <code translate="no">&lt;your-release-name&gt;-milvus-proxy</code>).</p></li>
+<li><p><strong>Apply the HPA Configuration</strong>:</p>
+<p>Deploy the HPA resource using the following command:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f hpa.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>للتحقق من إنشاء HPA بنجاح، قم بتشغيله:</p>
+<p>To verify that the HPA has been successfully created, run:</p>
 <pre><code translate="no" class="language-bash">kubectl get hpa
 <button class="copy-code-btn"></button></code></pre>
-<p>يجب أن ترى مخرجات مشابهة لـ:</p>
+<p>You should see output similar to:</p>
 <pre><code translate="no">NAME                          REFERENCE                            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>proxy<span class="hljs-operator">-</span>hpa   Deployment<span class="hljs-operator">/</span>my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>proxy   <span class="hljs-operator">&lt;</span><span class="hljs-keyword">some</span><span class="hljs-operator">&gt;</span><span class="hljs-operator">/</span><span class="hljs-number">60</span><span class="hljs-operator">%</span>      <span class="hljs-number">2</span>         <span class="hljs-number">10</span>        <span class="hljs-number">2</span>          <span class="hljs-operator">&lt;</span><span class="hljs-type">time</span><span class="hljs-operator">&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>سيعكس الحقلان <code translate="no">NAME</code> و <code translate="no">REFERENCE</code> اسم المجموعة (على سبيل المثال، <code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> و <code translate="no">Deployment/&lt;your-release-name&gt;-milvus-proxy</code>).</p></li>
+<p>The <code translate="no">NAME</code> and <code translate="no">REFERENCE</code> fields will reflect your cluster name (e.g., <code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> and <code translate="no">Deployment/&lt;your-release-name&gt;-milvus-proxy</code>).</p></li>
 </ol>
 <ul>
-<li><code translate="no">scaleTargetRef</code>: يحدد النشر لتوسيع النطاق (على سبيل المثال، <code translate="no">my-release-milvus-proxy</code>).</li>
-<li><code translate="no">minReplicas</code> و <code translate="no">maxReplicas</code>: يحدد نطاق القياس (من 2 إلى 10 كبسولات في هذا المثال).</li>
-<li><code translate="no">metrics</code>: يقوم بتهيئة القياس بناءً على استخدام وحدة المعالجة المركزية والذاكرة، مستهدفًا متوسط استخدام بنسبة 60%.</li>
+<li><code translate="no">scaleTargetRef</code>: Specifies the deployment to scale (e.g., <code translate="no">my-release-milvus-proxy</code>).</li>
+<li><code translate="no">minReplicas</code> and <code translate="no">maxReplicas</code>: Sets the scaling range (2 to 10 Pods in this example).</li>
+<li><code translate="no">metrics</code>: Configures scaling based on CPU and memory utilization, targeting 60% average usage.</li>
 </ul>
-<h2 id="Conclusion" class="common-anchor-header">الخلاصة<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,4 +168,4 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يسمح HPA لـ Milvus بالتكيف بكفاءة مع أعباء العمل المختلفة. باستخدام الأمر <code translate="no">kubectl patch</code> ، يمكنك تبديل أحد المكونات بسرعة إلى التحكم في HPA دون تحرير CR الكامل يدويًا. لمزيد من التفاصيل، راجع <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">وثائق Kubernetes HPA</a>.</p>
+    </button></h2><p>HPA allows Milvus to efficiently adapt to varying workloads. By using the <code translate="no">kubectl patch</code> command, you can quickly switch a component to HPA control without manually editing the full CR. For more details, refer to the <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">Kubernetes HPA documentation</a>.</p>

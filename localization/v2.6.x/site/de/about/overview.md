@@ -1,14 +1,14 @@
 ---
 id: overview.md
-title: Was ist Milvus
+title: What is Milvus
 related_key: Milvus Overview
 summary: >-
-  Milvus ist eine leistungsstarke, hoch skalierbare Vektordatenbank, die in
-  einer Vielzahl von Umgebungen, vom Laptop bis zu großen verteilten Systemen,
-  effizient läuft. Sie ist sowohl als Open-Source-Software als auch als
-  Cloud-Service verfügbar.
+  Milvus is a high-performance, highly scalable vector database that runs
+  efficiently across a wide range of environments, from a laptop to large-scale
+  distributed systems. It is available as both open-source software and a cloud
+  service.
 ---
-<h1 id="What-is-Milvus" class="common-anchor-header">Was ist Milvus?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
+<h1 id="What-is-Milvus" class="common-anchor-header">What is Milvus?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,13 +36,16 @@ summary: >-
     cursor: pointer;
     margin-left: 4px;
   " onclick="document.getElementById('milvus-audio').play()"></span>
-</span></span> ist ein Raubvogel der Gattung Milvus aus der Familie der Habichte (Accipaitridae), der für seine Fluggeschwindigkeit, sein scharfes Sehvermögen und seine bemerkenswerte Anpassungsfähigkeit bekannt ist.</p>
+</span></span> is a bird of prey in the genus Milvus of the hawk family Accipaitridae, celebrated for its speed in flight, keen vision, and remarkable adaptability.</p>
 <style>
-  audio::-webkit-media-controls { display: none !important; }</style>
-<p>Zilliz hat den Namen Milvus für seine hochleistungsfähige, hoch skalierbare Open-Source-Vektordatenbank gewählt, die effizient in einer Vielzahl von Umgebungen läuft, von einem Laptop bis zu großen verteilten Systemen. Sie ist sowohl als Open-Source-Software als auch als Cloud-Service verfügbar.</p>
-<p>Milvus wurde von Zilliz entwickelt und bald darauf an die LF AI &amp; Data Foundation unter der Linux Foundation gespendet und hat sich zu einem der weltweit führenden Open-Source-Vektordatenbankprojekte entwickelt. Es wird unter der Apache 2.0-Lizenz vertrieben, und die meisten Mitwirkenden sind Experten aus der High-Performance-Computing (HPC)-Gemeinschaft, die sich auf den Aufbau von Großsystemen und die Optimierung von hardwaregerechtem Code spezialisiert haben. Zu den wichtigsten Mitwirkenden gehören Experten von Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba und Microsoft.</p>
-<p>Interessanterweise ist jedes Open-Source-Projekt von Zilliz nach einem Vogel benannt, was eine Namenskonvention ist, die Freiheit, Weitsicht und die agile Entwicklung von Technologie symbolisiert.</p>
-<h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Unstrukturierte Daten, Einbettungen und Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
+  audio::-webkit-media-controls {
+    display: none !important;
+  }
+</style>
+<p>Zilliz adopts the name Milvus for its open-source high-performance, highly scalable vector database that runs efficiently across a wide range of environments, from a laptop to large-scale distributed systems. It is available as both open-source software and a cloud service.</p>
+<p>Developed by Zilliz and soon donated to the LF AI & Data Foundation under the Linux Foundation, Milvus has become one of the world’s leading open-source vector database projects. It is distributed under the Apache 2.0 license, and most contributors are experts from the high-performance computing (HPC) community, specializing in building large-scale systems and optimizing hardware-aware code. Core contributors include professionals from Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba, and Microsoft.</p>
+<p>Interestingly, every Zilliz open‑source project is named after a bird, which is a naming convention that symbolizes freedom, foresight, and the agile evolution of technology.</p>
+<h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Unstructured Data, Embeddings, and Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,19 +60,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unstrukturierte Daten, wie Texte, Bilder und Audiodaten, haben unterschiedliche Formate und eine umfangreiche zugrunde liegende Semantik, was ihre Analyse schwierig macht. Um diese Komplexität zu bewältigen, werden Einbettungen verwendet, um unstrukturierte Daten in numerische Vektoren umzuwandeln, die ihre wesentlichen Merkmale erfassen. Diese Vektoren werden dann in einer Vektordatenbank gespeichert, die schnelle und skalierbare Such- und Analysevorgänge ermöglicht.</p>
-<p>Milvus bietet robuste Datenmodellierungsfunktionen, mit denen Sie Ihre unstrukturierten oder multimodalen Daten in strukturierten Sammlungen organisieren können. Milvus unterstützt eine breite Palette von Datentypen für die Modellierung verschiedener Attribute, darunter gängige Zahlen- und Zeichentypen, verschiedene Vektortypen, Arrays, Sets und JSON, was Ihnen den Aufwand für die Pflege mehrerer Datenbanksysteme erspart.</p>
+    </button></h2><p>Unstructured data, such as text, images, and audio, varies in format and carries rich underlying semantics, making it challenging to analyze. To manage this complexity, embeddings are used to convert unstructured data into numerical vectors that capture its essential characteristics. These vectors are then stored in a vector database, enabling fast and scalable searches and analytics.</p>
+<p>Milvus offers robust data modeling capabilities, enabling you to organize your unstructured or multi-modal data into structured collections. It supports a wide range of data types for different attribute modeling, including common numerical and character types, various vector types, arrays, sets, and JSON, saving you from the effort of maintaining multiple database systems.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
-   </span> <span class="img-wrapper"> <span>Unstrukturierte Daten, Einbettungen und Milvus</span> </span></p>
-<p>Milvus bietet drei Bereitstellungsmodi, die ein breites Spektrum an Datenskalen abdecken - vom lokalen Prototyping in Jupyter Notebooks bis hin zu massiven Kubernetes-Clustern, die Dutzende von Milliarden Vektoren verwalten:</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
+    <span>Untructured data, embeddings, and Milvus</span>
+  </span>
+</p>
+<p>Milvus offers three deployment modes, covering a wide range of data scales—from local prototyping in Jupyter Notebooks to massive Kubernetes clusters managing tens of billions of vectors:</p>
 <ul>
-<li>Milvus Lite ist eine Python-Bibliothek, die einfach in Ihre Anwendungen integriert werden kann. Als leichtgewichtige Version von Milvus ist sie ideal für schnelles Prototyping in Jupyter Notebooks oder die Ausführung auf Edge-Geräten mit begrenzten Ressourcen. <a href="/docs/de/milvus_lite.md">Erfahren Sie mehr</a>.</li>
-<li>Milvus Standalone ist eine Serverimplementierung für eine einzelne Maschine, bei der alle Komponenten in einem einzigen Docker-Image gebündelt sind, um eine einfache Bereitstellung zu ermöglichen. <a href="/docs/de/install_standalone-docker.md">Erfahren Sie mehr</a>.</li>
-<li>Milvus Distributed kann auf Kubernetes-Clustern bereitgestellt werden und verfügt über eine Cloud-native Architektur, die für Szenarien im Milliardenmaßstab oder noch größer ausgelegt ist. Diese Architektur gewährleistet Redundanz bei kritischen Komponenten. <a href="/docs/de/install_cluster-milvusoperator.md">Erfahren Sie mehr</a>.</li>
+<li>Milvus Lite is a Python library that can be easily integrated into your applications. As a lightweight version of Milvus, it’s ideal for quick prototyping in Jupyter Notebooks or running on edge devices with limited resources. <a href="/docs/milvus_lite.md">Learn more</a>.</li>
+<li>Milvus Standalone is a single-machine server deployment, with all components bundled into a single Docker image for convenient deployment. <a href="/docs/install_standalone-docker.md">Learn more</a>.</li>
+<li>Milvus Distributed can be deployed on Kubernetes clusters, featuring a cloud-native architecture designed for billion-scale or even larger scenarios. This architecture ensures redundancy in critical components. <a href="/docs/install_cluster-milvusoperator.md">Learn more</a>.</li>
 </ul>
-<h2 id="What-Makes-Milvus-so-Fast" class="common-anchor-header">Was macht Milvus so schnell？<button data-href="#What-Makes-Milvus-so-Fast" class="anchor-icon" translate="no">
+<h2 id="What-Makes-Milvus-so-Fast" class="common-anchor-header">What Makes Milvus so Fast？<button data-href="#What-Makes-Milvus-so-Fast" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,12 +89,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus wurde vom ersten Tag an als hocheffizientes Vektordatenbanksystem konzipiert. In den meisten Fällen übertrifft Milvus andere Vektordatenbanken um das 2-5fache (siehe die Ergebnisse des VectorDBBench). Diese hohe Leistung ist das Ergebnis mehrerer wichtiger Designentscheidungen:</p>
-<p><strong>Hardware-gerechte Optimierung</strong>: Um Milvus in verschiedenen Hardwareumgebungen einsetzen zu können, haben wir seine Leistung speziell für viele Hardwarearchitekturen und Plattformen optimiert, darunter AVX512, SIMD, GPUs und NVMe SSD.</p>
-<p><strong>Erweiterte Suchalgorithmen</strong>: Milvus unterstützt eine breite Palette von In-Memory- und On-Disk-Indizierungs-/Suchalgorithmen, einschließlich IVF, HNSW, DiskANN und mehr, die alle tiefgreifend optimiert wurden. Im Vergleich zu gängigen Implementierungen wie FAISS und HNSWLib bietet Milvus eine um 30-70 % bessere Leistung.</p>
-<p><strong>Suchmaschine in C++</strong>: Über 80 % der Leistung einer Vektordatenbank wird durch ihre Suchmaschine bestimmt. Milvus verwendet C++ für diese kritische Komponente aufgrund der hohen Leistung, der Low-Level-Optimierung und der effizienten Ressourcenverwaltung dieser Sprache. Am wichtigsten ist jedoch, dass Milvus zahlreiche hardwarenahe Code-Optimierungen integriert, die von Vektorisierung auf Assembler-Ebene bis hin zu Multi-Thread-Parallelisierung und Scheduling reichen, um die Möglichkeiten der Hardware voll auszuschöpfen.</p>
-<p><strong>Spaltenorientiert</strong>: Milvus ist ein spaltenorientiertes Vektor-Datenbanksystem. Die Hauptvorteile ergeben sich aus den Datenzugriffsmustern. Bei der Durchführung von Abfragen liest eine spaltenorientierte Datenbank nur die spezifischen Felder, die an der Abfrage beteiligt sind, und nicht ganze Zeilen, was die Menge der abgerufenen Daten erheblich reduziert. Darüber hinaus können Operationen auf spaltenbasierte Daten leicht vektorisiert werden, so dass Operationen auf die gesamten Spalten auf einmal angewendet werden können, was die Leistung weiter verbessert.</p>
-<h2 id="What-Makes-Milvus-so-Scalable" class="common-anchor-header">Was macht Milvus so skalierbar?<button data-href="#What-Makes-Milvus-so-Scalable" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus was designed from day one to be a highly efficient vector database system. In most cases, Milvus outperforms other vector databases by 2-5x (see the VectorDBBench results). This high performance is the result of several key design decisions:</p>
+<p><strong>Hardware-aware Optimization</strong>: To accommodate Milvus in various hardware environments, we have optimized its performance specifically for many hardware architectures and platforms, including AVX512, SIMD, GPUs, and NVMe SSD.</p>
+<p><strong>Advanced Search Algorithms</strong>: Milvus supports a wide range of in-memory and on-disk indexing/search algorithms, including IVF, HNSW, DiskANN, and more, all of which have been deeply optimized. Compared to popular implementations like FAISS and HNSWLib, Milvus delivers 30%-70% better performance.</p>
+<p><strong>Search Engine in C++</strong>: Over 80% of a vector database’s performance is determined by its search engine. Milvus uses C++ for this critical component due to the language’s high performance, low-level optimization, and efficient resource management. Most importantly, Milvus integrates numerous hardware-aware code optimizations, ranging from assembly-level vectorization to multi-thread parallelization and scheduling, to fully leverage hardware capabilities.</p>
+<p><strong>Column-Oriented</strong>: Milvus is a column-oriented vector database system. The primary advantages come from the data access patterns. When performing queries, a column-oriented database reads only the specific fields involved in the query, rather than entire rows, which greatly reduces the amount of data accessed. Additionally, operations on column-based data can be easily vectorized, allowing for operations to be applied in the entire columns at once, further enhancing performance.</p>
+<h2 id="What-Makes-Milvus-so-Scalable" class="common-anchor-header">What Makes Milvus so Scalable<button data-href="#What-Makes-Milvus-so-Scalable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,14 +109,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Im Jahr 2022 unterstützte Milvus Vektoren im Milliardenbereich und im Jahr 2023 skalierte es mit gleichbleibender Stabilität auf Dutzende von Milliarden und unterstützte Großszenarien für über 300 große Unternehmen, darunter Salesforce, PayPal, Shopee, Airbnb, eBay, NVIDIA, IBM, AT&amp;T, LINE, ROBLOX, Inflection usw.</p>
-<p>Die Cloud-native und hochgradig entkoppelte Systemarchitektur von Milvus stellt sicher, dass das System kontinuierlich mit dem Datenwachstum wachsen kann:</p>
+    </button></h2><p>In 2022, Milvus supported billion-scale vectors, and in 2023, it scaled up to tens of billions with consistent stability, powering large-scale scenarios for over 300 major enterprises, including Salesforce, PayPal, Shopee, Airbnb, eBay, NVIDIA, IBM, AT&T, LINE, ROBLOX, Inflection, etc.</p>
+<p>Milvus’s cloud-native and highly decoupled system architecture ensures that the system can continuously expand as data grows:</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
-   </span> <span class="img-wrapper"> <span>Hochgradig entkoppelte Systemarchitektur von Milvus</span> </span></p>
-<p>Milvus selbst ist vollständig zustandslos, sodass es mit Hilfe von Kubernetes oder öffentlichen Clouds leicht skaliert werden kann. Darüber hinaus sind die Milvus-Komponenten gut entkoppelt, wobei die drei kritischsten Aufgaben - die Suche, das Einfügen von Daten und die Indizierung/Verdichtung - als leicht parallelisierbare Prozesse konzipiert sind, bei denen die komplexe Logik ausgegliedert ist. Dadurch wird sichergestellt, dass die entsprechenden Abfrage-, Daten- und Indexknoten unabhängig voneinander skaliert werden können, wodurch Leistung und Kosteneffizienz optimiert werden.</p>
-<h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Von Milvus unterstützte Arten von Suchvorgängen<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+    <span>Highly decoupled system architecture of Milvus</span>
+  </span>
+</p>
+<p>Milvus itself is fully stateless so it can be easily scaled with the help of Kubernetes or public clouds. In addition, Milvus components are well decoupled, with the three most critical tasks—search, data insertion, and indexing/compaction—designed as easily parallelized processes, with complex logic separated out. This ensures that the corresponding query node, data node, and index node can scale both up and out independently, optimizing performance and cost efficiency.</p>
+<h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Types of Searches Supported by Milvus<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,18 +133,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus unterstützt verschiedene Arten von Suchfunktionen, um die Anforderungen verschiedener Anwendungsfälle zu erfüllen:</p>
+    </button></h2><p>Milvus supports various types of search functions to meet the demands of different use cases:</p>
 <ul>
-<li><a href="/docs/de/single-vector-search.md#Basic-search">ANN-Suche</a>: Findet die besten K Vektoren, die Ihrem Abfragevektor am nächsten kommen.</li>
-<li><a href="/docs/de/single-vector-search.md#Filtered-search">Filternde Suche</a>: Führt eine ANN-Suche unter bestimmten Filterbedingungen durch.</li>
-<li><a href="/docs/de/single-vector-search.md#Range-search">Bereichssuche</a>: Findet Vektoren innerhalb eines bestimmten Radius von Ihrem Abfragevektor.</li>
-<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a>: Führt die ANN-Suche auf der Grundlage mehrerer Vektorfelder durch.</li>
-<li><a href="/docs/de/full-text-search.md">Volltextsuche</a>: Volltextsuche auf der Grundlage von BM25.</li>
-<li><a href="/docs/de/reranking.md">Neu ordnen</a>: Passt die Reihenfolge der Suchergebnisse auf der Grundlage zusätzlicher Kriterien oder eines sekundären Algorithmus an und verfeinert die ursprünglichen ANN-Suchergebnisse.</li>
-<li><a href="/docs/de/get-and-scalar-query.md#Get-Entities-by-ID">Abrufen</a>: Ruft Daten anhand ihrer Primärschlüssel ab.</li>
-<li><a href="/docs/de/get-and-scalar-query.md#Use-Basic-Operators">Abfragen</a>: Ruft Daten anhand bestimmter Ausdrücke ab.</li>
+<li><a href="/docs/single-vector-search.md#Basic-search">ANN Search</a>: Finds the top K vectors closest to your query vector.</li>
+<li><a href="/docs/single-vector-search.md#Filtered-search">Filtering Search</a>: Performs ANN search under specified filtering conditions.</li>
+<li><a href="/docs/single-vector-search.md#Range-search">Range Search</a>: Finds vectors within a specified radius from your query vector.</li>
+<li><a href="/docs/multi-vector-search.md">Hybrid Search</a>: Conducts ANN search based on multiple vector fields.</li>
+<li><a href="/docs/full-text-search.md">Full Text Search</a>: Full text search based on BM25.</li>
+<li><a href="/docs/weighted-ranker.md">Reranking</a>: Adjusts the order of search results based on additional criteria or a secondary algorithm, refining the initial ANN search results.</li>
+<li><a href="/docs/get-and-scalar-query.md#Get-Entities-by-ID">Fetch</a>: Retrieves data by their primary keys.</li>
+<li><a href="/docs/get-and-scalar-query.md#Use-Basic-Operators">Query</a>: Retrieves data using specific expressions.</li>
 </ul>
-<h2 id="Comprehensive-Feature-Set" class="common-anchor-header">Umfassender Funktionssatz<button data-href="#Comprehensive-Feature-Set" class="anchor-icon" translate="no">
+<h2 id="Comprehensive-Feature-Set" class="common-anchor-header">Comprehensive Feature Set<button data-href="#Comprehensive-Feature-Set" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -152,45 +159,62 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zusätzlich zu den oben erwähnten Schlüsselfunktionen bietet Milvus eine Reihe von Funktionen, die um ANN-Suchen herum implementiert wurden, so dass Sie die Möglichkeiten von Milvus voll ausschöpfen können.</p>
-<h3 id="API-and-SDK" class="common-anchor-header">API und SDK</h3><ul>
-<li><a href="https://milvus.io/api-reference/restful/v2.4.x/About.md">RESTful API</a> (offiziell)</li>
-<li><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">PyMilvus</a> (Python SDK) (offiziell)</li>
-<li><a href="https://milvus.io/api-reference/go/v2.4.x/About.md">Go SDK</a> (offiziell)</li>
-<li><a href="https://milvus.io/api-reference/java/v2.4.x/About.md">Java SDK</a> (offiziell)</li>
-<li><a href="https://milvus.io/api-reference/node/v2.4.x/About.md">Node.js</a> (JavaScript) SDK (offiziell)</li>
-<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (beigesteuert von Microsoft)</li>
+    </button></h2><p>In addition to the key search features mentioned above, Milvus also provides a set of features implemented around ANN searches so that you can fully utilize its capabilities.</p>
+<h3 id="API-and-SDK" class="common-anchor-header">API and SDK</h3><ul>
+<li><a href="https://milvus.io/api-reference/restful/v2.4.x/About.md">RESTful API</a> (official)</li>
+<li><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">PyMilvus</a> (Python SDK) (official)</li>
+<li><a href="https://milvus.io/api-reference/go/v2.4.x/About.md">Go SDK</a> (official)</li>
+<li><a href="https://milvus.io/api-reference/java/v2.4.x/About.md">Java SDK</a> (official)</li>
+<li><a href="https://milvus.io/api-reference/node/v2.4.x/About.md">Node.js</a> (JavaScript) SDK (official)</li>
+<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (contributed by Microsoft)</li>
 </ul>
-<h3 id="Advanced-Data-Types" class="common-anchor-header">Erweiterte Datentypen</h3><p>Zusätzlich zu den primitiven Datentypen unterstützt Milvus verschiedene fortgeschrittene Datentypen und ihre jeweils anwendbaren Abstandsmetriken.</p>
+<h3 id="Advanced-Data-Types" class="common-anchor-header">Advanced Data Types</h3><p>In addition to primitive data types, Milvus supports various advanced data types and their respective applicable distance metrics.</p>
 <ul>
-<li><a href="/docs/de/sparse_vector.md">Spärliche Vektoren</a></li>
-<li><a href="/docs/de/index-vector-fields.md">Binäre Vektoren</a></li>
-<li><a href="/docs/de/use-json-fields.md">JSON-Unterstützung</a></li>
-<li><a href="/docs/de/array_data_type.md">Array-Unterstützung</a></li>
-<li><a href="/docs/de/metric.md">Abstandsmetriken</a></li>
+<li><a href="/docs/sparse_vector.md">Sparse Vectors</a></li>
+<li><a href="/docs/index-vector-fields.md">Binary Vectors</a></li>
+<li><a href="/docs/use-json-fields.md">JSON Support</a></li>
+<li><a href="/docs/array_data_type.md">Array Support</a></li>
+<li><a href="/docs/metric.md">Distance Metrics</a></li>
 </ul>
-<h3 id="Acceleration" class="common-anchor-header">Beschleunigung</h3><ul>
-<li><p>Suchalgorithmen Milvus unterstützt eine Reihe von einstellbaren Indizierungs- und Suchalgorithmen. Details finden Sie unter <a href="/docs/de/index.md">In-memory Index</a>, <a href="/docs/de/disk_index.md">On-disk Index</a> und <a href="/docs/de/gpu_index.md">GPU Index</a>.</p></li>
-<li><p>Partitionen und Partitionsschlüssel Partitionen sind Unterabteilungen einer Milvus-Sammlung. Sie können ein skalares Feld als Partitionsschlüssel wählen, um die Suchleistung zu verbessern. Weitere Informationen finden Sie unter <a href="/docs/de/manage-partitions.md">Verwalten von Partitionen</a> und <a href="/docs/de/use-partition-key.md">Verwenden von Partitionsschlüsseln</a>.</p></li>
-<li><p>Abstimmbares Konsistenzmodell Konsistenz stellt sicher, dass jeder Milvus-Knoten oder jede Replik dieselbe Sicht auf die Daten hat, wenn sie zu einem bestimmten Zeitpunkt Daten schreiben oder lesen. Sie können die Konsistenzstufe bei der Durchführung von ANN-Suchen in Milvus leicht abstimmen. Details finden Sie unter <a href="/docs/de/consistency.md">Konsistenz</a>.</p></li>
-<li><p>Hochdurchsatz-Datenimport Um eine große Datenmenge in Milvus zu importieren, anstatt sie nacheinander einzufügen, sollten Sie unsere Hochdurchsatz-Datenimport-Tools verwenden. Einzelheiten finden Sie unter <a href="/docs/de/prepare-source-data.md">Vorbereiten von Quelldaten</a> und <a href="/docs/de/import-data.md">Importieren von Daten</a>.</p></li>
-<li><p>Unterstützung von Mehrmandantenfähigkeit Milvus hat viele Funktionen implementiert, die auf Mehrmandantenszenarien ausgerichtet sind, einschließlich Partitionsschlüssel, Clustering-Schlüssel und mehr. Details finden Sie unter <a href="/docs/de/multi_tenancy.md">Mehrmandanten-Strategien</a>.</p></li>
+<h3 id="Acceleration" class="common-anchor-header">Acceleration</h3><ul>
+<li><p>Search Algorithms
+Milvus supports a set of tunable indexing and search algorithms. For details, see <a href="/docs/index.md">In-memory Index</a>, <a href="/docs/disk_index.md">On-disk Index</a>, and <a href="/docs/gpu_index.md">GPU Index</a>.</p></li>
+<li><p>Partitions and Partition Keys
+Partitions are sub-divisions of a Milvus collection. You can choose a scalar field as the partition key for better search performance. For details, see <a href="/docs/manage-partitions.md">Manage Partitions</a> and <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p></li>
+<li><p>Tunable Consistency Model
+Consistency ensures every Milvus node or replica has the same view of data when writing or reading data at a given time. You can easily tune the consistency level when conducting ANN searches in Milvus. For details, see <a href="/docs/consistency.md">Consistency</a>.</p></li>
+<li><p>High-throughput Data Import
+To import a large volume of data into Milvus instead of inserting them one after another, consider using our high-throughput data import tools. For details, refer to <a href="/docs/prepare-source-data.md">Prepare Source Data</a> and <a href="/docs/import-data.md">Import Data</a>.</p></li>
+<li><p>Multi-tenancy Support
+Milvus has implemented a lot of features oriented to multi-tenancy scenarios, including Partition Key, Clustering Key, and more. For details, see <a href="/docs/multi_tenancy.md">Multi-tenancy Strategies</a>.</p></li>
 </ul>
-<h3 id="Security-and-Authorization" class="common-anchor-header">Sicherheit und Autorisierung</h3><ul>
-<li><p>Abstimmbares Konsistenzmodell Konsistenz stellt sicher, dass jeder Milvus-Knoten oder jede Replik dieselbe Sicht auf die Daten hat, wenn sie zu einem bestimmten Zeitpunkt Daten schreiben oder lesen. Sie können die Konsistenzstufe bei der Durchführung von ANN-Suchen in Milvus leicht abstimmen. Für Details siehe <a href="/docs/de/consistency.md">Konsistenz</a>.</p></li>
-<li><p>Datenisolierung und Ressourcenkontrolle Für Multi-Tenancy-Szenarien ist die Datenisolierung die grundlegende Sicherheitsanforderung. Milvus implementiert mehrere Funktionen, um Ihre Sicherheitsbedenken auszuräumen. Details finden Sie unter <a href="/docs/de/resource_group.md">Verwalten von Ressourcengruppen</a> und <a href="/docs/de/clustering-compaction.md">Clustering Compaction</a>.</p></li>
+<h3 id="Security-and-Authorization" class="common-anchor-header">Security and Authorization</h3><ul>
+<li><p>Tunable Consistency Model
+Consistency ensures every Milvus node or replica has the same view of data when writing or reading data at a given time. You can easily tune the consistency level when conducting ANN searches in Milvus. For details, see <a href="/docs/consistency.md">Consistency</a>.</p></li>
+<li><p>Data Isolation and Resource Control
+For multi-tenancy scenarios, data isolation is the basic security requirement. Milvus implements several features to resolve your security concerns. For details, see <a href="/docs/resource_group.md">Manage Resource Groups</a> and <a href="/docs/clustering-compaction.md">Clustering Compaction</a>.</p></li>
 </ul>
-<h3 id="AI-Integrations" class="common-anchor-header">AI-Integrationen</h3><ul>
-<li><p>Einbettungsmodell-Integrationen Einbettungsmodelle konvertieren unstrukturierte Daten in ihre numerische Darstellung im hochdimensionalen Datenraum, so dass Sie sie in Milvus speichern können. Derzeit sind in PyMilvus, dem Python-SDK, mehrere Einbettungsmodelle integriert, so dass Sie Ihre Daten schnell in Vektoreinbettungen aufbereiten können. Details finden Sie unter <a href="/docs/de/embeddings.md">Einbettungsübersicht</a>.</p></li>
-<li><p>Integration von Reranking-Modellen Im Bereich des Information Retrieval und der generativen KI ist ein Reranker ein unverzichtbares Werkzeug, das die Reihenfolge der Ergebnisse der ersten Suche optimiert. PyMilvus integriert auch mehrere Reranking-Modelle, um die Reihenfolge der Ergebnisse aus den ersten Suchen zu optimieren. Weitere Informationen finden Sie unter <a href="/docs/de/rerankers-overview.md">Rerankers Übersicht</a>.</p></li>
-<li><p>LangChain und andere KI-Tool-Integrationen In der GenAI-Ära gewinnen Tools wie LangChain viel Aufmerksamkeit von Anwendungsentwicklern. Als Kernkomponente dient Milvus normalerweise als Vektorspeicher in solchen Tools. Um zu erfahren, wie Sie Milvus in Ihre bevorzugten KI-Tools integrieren können, lesen Sie bitte unsere <a href="/docs/de/integrate_with_openai.md">Integrationen</a> und <a href="/docs/de/build-rag-with-milvus.md">Tutorials</a>.</p></li>
+<h3 id="AI-Integrations" class="common-anchor-header">AI Integrations</h3><ul>
+<li><p>Embedding Model Integrations
+Embedding Models convert unstructured data to their numeric representation in high-dimensional data space so that you can store them in Milvus. Currently, PyMilvus, the Python SDK, integrates several embedding models so that you can quickly prepare your data into vector embeddings. For details, see <a href="/docs/embeddings.md">Embedding Overview</a>.</p></li>
+<li><p>Reranking Model Integrations
+In the realm of information retrieval and generative AI, a reranker is an essential tool that optimizes the order of results from initial searches. PyMilvus also integrates several reranking models to optimize the order of results returned from initial searches. For details, refer to <a href="/docs/rerankers-overview.md">Rerankers Overview</a>.</p></li>
+<li><p>LangChain and other AI Tool Integrations
+In the GenAI era, tools, such as LangChain, gain much attentions from application developers. As a core component, Milvus usually serves as the vector stores in such tools. To learn how to integrate Milvus in your favorite AI tools, refer to our <a href="/docs/integrate_with_openai.md">Integrations</a> and <a href="/docs/build-rag-with-milvus.md">Tutorials</a>.</p></li>
 </ul>
-<h3 id="Tools-and-Ecosystem" class="common-anchor-header">Werkzeuge und Ökosystem</h3><ul>
-<li><p>Attu Attu ist eine intuitiv bedienbare Benutzeroberfläche, mit der Sie Milvus und die darin gespeicherten Daten verwalten können. Details finden Sie im <a href="https://github.com/zilliztech/attu">Attu-Repository</a>.</p></li>
-<li><p>Birdwatcher Birdwatcher ist ein Debugging-Tool für Milvus. Mit ihm können Sie sich mit etcd verbinden, um den Zustand Ihres Milvus-Systems zu überprüfen oder es im laufenden Betrieb zu konfigurieren. Details finden Sie unter <a href="/docs/de/birdwatcher_overview.md">BirdWatcher</a>.</p></li>
-<li><p>Promethus- und Grafana-Integrationen Prometheus ist ein Open-Source-Toolkit zur Systemüberwachung und Alarmierung für Kubernetes. Grafana ist ein Open-Source-Visualisierungs-Stack, der mit allen Datenquellen verbunden werden kann. Sie können Promethus &amp; Grafana als Überwachungsdienstanbieter verwenden, um die Leistung von Milvus distributed visuell zu überwachen. Details finden Sie unter <a href="/docs/de/monitor.md">Bereitstellen von Überwachungsdiensten</a>.</p></li>
-<li><p>Milvus Backup Milvus Backup ist ein Tool, mit dem Benutzer Milvus-Daten sichern und wiederherstellen können. Es bietet sowohl CLI als auch API, um sich in verschiedene Anwendungsszenarien einzupassen. Einzelheiten finden Sie unter <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>.</p></li>
-<li><p>Milvus Capture Data Change (CDC) Milvus-CDC kann inkrementelle Daten in Milvus-Instanzen erfassen und synchronisieren und stellt die Zuverlässigkeit von Geschäftsdaten sicher, indem es sie nahtlos zwischen Quell- und Zielinstanzen überträgt, was eine einfache inkrementelle Sicherung und Notfallwiederherstellung ermöglicht. Einzelheiten finden Sie unter <a href="/docs/de/milvus-cdc-overview.md">Milvus CDC</a>.</p></li>
-<li><p>Milvus-Konnektoren Milvus hat eine Reihe von Konnektoren für die nahtlose Integration von Milvus mit Tools von Drittanbietern, wie z. B. Apache Spark, geplant. Derzeit können Sie unseren Spark-Konnektor verwenden, um Ihre Milvus-Daten an Apache Spark für die Verarbeitung durch maschinelles Lernen weiterzuleiten. Einzelheiten finden Sie unter <a href="/docs/de/integrate_with_spark.md">Spark-Milvus Connector</a>.</p></li>
-<li><p>Vector Transmission Services (VTS) Milvus bietet eine Reihe von Tools, mit denen Sie Ihre Daten zwischen einer Milvus-Instanz und einer Reihe von Datenquellen übertragen können, darunter Zilliz-Cluster, Elasticsearch, Postgres (PgVector) und eine andere Milvus-Instanz. Einzelheiten finden Sie unter <a href="https://github.com/zilliztech/vts">VTS</a>.</p></li>
+<h3 id="Tools-and-Ecosystem" class="common-anchor-header">Tools and Ecosystem</h3><ul>
+<li><p>Attu
+Attu is an all-in-one intuitive GUI that helps you manage Milvus and the data it stores. For details, refer to the <a href="https://github.com/zilliztech/attu">Attu</a> repository.</p></li>
+<li><p>Birdwatcher
+Birdwatcher is a debugging tool for Milvus. Using it to connect to etcd, you can check the state of your Milvus system or configure it on the fly. For details, refer to <a href="/docs/birdwatcher_overview.md">BirdWatcher</a>.</p></li>
+<li><p>Promethus & Grafana integrations
+Prometheus is an open-source system monitoring and alerting toolkit for Kubernetes. Grafana is an open-source visualizing stack that can connect with all data sources. You can use Promethus & Grafana as the monitoring service provider to visually monitor the performance of Milvus distributed. For details, see <a href="/docs/monitor.md">Deploying Monitoring Services</a>.</p></li>
+<li><p>Milvus Backup
+Milvus Backup is a tool that allows users to back up and restore Milvus data. It provides both CLI and API to fit itself into different application scenarios. For details, refer to <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>.</p></li>
+<li><p>Milvus Capture Data Change (CDC)
+Milvus-CDC can capture and synchronize incremental data in Milvus instances and ensures the reliability of business data by seamlessly transferring it between source and target instances, allowing for easy incremental backup and disaster recovery. For details, refer to <a href="/docs/milvus-cdc-overview.md">Milvus CDC</a>.</p></li>
+<li><p>Milvus Connectors
+Milvus has planned a set of connectors for you to seamlessly integrate Milvus with third-party tools, such as Apache Spark. Currently, you can use our Spark Connector to feed your Milvus data to Apache Spark for machine-learning processing. For details, refer to <a href="/docs/integrate_with_spark.md">Spark-Milvus Connector</a>.</p></li>
+<li><p>Vector Transmission Services (VTS)
+Milvus provides a set of tools for you to transfer your data between a Milvus instance and a bunch of data sources, including Zilliz clusters, Elasticsearch, Postgres (PgVector), and another Milvus instance. For details, refer to <a href="https://github.com/zilliztech/vts">VTS</a>.</p></li>
 </ul>

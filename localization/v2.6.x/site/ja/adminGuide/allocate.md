@@ -1,9 +1,9 @@
 ---
 id: allocate.md
-title: Kubernetes上のMilvusにリソースを割り当てる
-summary: Kubernetes上でMilvusにリソースを割り当てる方法をご紹介します。
+title: Allocate Resources to Milvus on Kubernetes
+summary: Learn how to allocate resources to Milvus on Kubernetes.
 ---
-<h1 id="Allocate-Resources-on-Kubernetes" class="common-anchor-header">Kubernetes上でのリソースの割り当て<button data-href="#Allocate-Resources-on-Kubernetes" class="anchor-icon" translate="no">
+<h1 id="Allocate-Resources-on-Kubernetes" class="common-anchor-header">Allocate Resources on Kubernetes<button data-href="#Allocate-Resources-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,12 +18,12 @@ summary: Kubernetes上でMilvusにリソースを割り当てる方法をご紹�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、Kubernetes上のMilvusクラスタにリソースを割り当てる方法について説明します。</p>
-<p>一般的に、本番環境でMilvusクラスタに割り当てるリソースは、マシンのワークロードに比例させる必要があります。また、リソースを割り当てる際にはマシンタイプも考慮する必要があります。クラスタの実行中に設定を更新することもできますが、<a href="/docs/ja/install_cluster-helm.md">クラスタをデプロイする</a>前に値を設定することをお勧めします。</p>
+    </button></h1><p>This topic describes how to allocate resources to a Milvus cluster on Kubernetes.</p>
+<p>Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend setting the values before <a href="/docs/install_cluster-helm.md">deploying the cluster</a>.</p>
 <div class="alert note">
-<p>Milvus Operatorでリソースを割り当てる方法については、<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">Milvus Operatorでリソースを割り当てるを</a>参照してください。</p>
+<p>For information on how to allocate resources with Milvus Operator, refer to <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">Allocate Resources with Milvus Operator</a>.</p>
 </div>
-<h2 id="1-View-available-resources" class="common-anchor-header">1.利用可能なリソースの表示<button data-href="#1-View-available-resources" class="anchor-icon" translate="no">
+<h2 id="1-View-available-resources" class="common-anchor-header">1. View available resources<button data-href="#1-View-available-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,8 +38,8 @@ summary: Kubernetes上でMilvusにリソースを割り当てる方法をご紹�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">kubectl describe nodes</code> を実行して、プロビジョニングしたインスタンスで利用可能なリソースを表示します。</p>
-<h2 id="2-Allocate-resources" class="common-anchor-header">2.リソースの割り当て<button data-href="#2-Allocate-resources" class="anchor-icon" translate="no">
+    </button></h2><p>Run <code translate="no">kubectl describe nodes</code> to view the available resources on the instances that you have provisioned.</p>
+<h2 id="2-Allocate-resources" class="common-anchor-header">2. Allocate resources<button data-href="#2-Allocate-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,17 +54,19 @@ summary: Kubernetes上でMilvusにリソースを割り当てる方法をご紹�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Helmを使用して、MilvusコンポーネントにCPUとメモリのリソースを割り当てます。</p>
+    </button></h2><p>Use Helm to allocate CPU and memory resources to Milvus components.</p>
 <div class="alert note">
-Helmを使用してリソースをアップグレードすると、実行中のポッドがローリングアップデートを実行します。</div>
-<p>リソースを割り当てるには2つの方法があります：</p>
+Using Helm to upgrade resources will cause the running pods to perform rolling update.
+</div>
+<p>There are two ways to allocate resources:</p>
 <ul>
-<li><a href="/docs/ja/allocate.md#Allocate-resources-with-commands">コマンドを使用する</a></li>
-<li><a href="/docs/ja/allocate.md#Allocate-resources-by-setting-configuration-file"> <code translate="no">YAML</code> ファイルでパラメータを設定する</a></li>
+<li><a href="/docs/allocate.md#Allocate-resources-with-commands">Use the commands</a></li>
+<li><a href="/docs/allocate.md#Allocate-resources-by-setting-configuration-file">Set the parameters in the <code translate="no">YAML</code> file</a></li>
 </ul>
-<h3 id="Allocate-resources-with-commands" class="common-anchor-header">コマンドでリソースを割り当てる</h3><p><code translate="no">--set</code> を使用してリソース設定を更新する場合は、Milvus コンポーネントごとにリソース変数を設定する必要があります。</p>
+<h3 id="Allocate-resources-with-commands" class="common-anchor-header">Allocate resources with commands</h3><p>You need to set the resource variables for each Milvus component if you use <code translate="no">--set</code> to update the resource configurations.</p>
 <div class="filter">
-<a href="#standalone">Milvus スタンドアロン</a> <a href="#cluster">Milvus クラスタ</a></div>
+<a href="#standalone">Milvus standalone</a> <a href="#cluster">Milvus cluster</a>
+</div>
 <div class="table-wrapper filter-standalone" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
@@ -73,7 +75,7 @@ Helmを使用してリソースをアップグレードすると、実行中の�
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">設定ファイルによるリソース割り当て</h3><p><code translate="no">resources.yaml</code> ファイルのパラメータ<code translate="no">resources.requests</code> および<code translate="no">resources.limits</code> を指定して、CPU およびメモリリソースを割り当てることもできます。</p>
+<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">Allocate resources by setting configuration file</h3><p>You can also allocate CPU and memory resources by specifying the parameters <code translate="no">resources.requests</code> and <code translate="no">resources.limits</code> in the <code translate="no">resources.yaml</code> file.</p>
 <pre><code translate="no" class="language-Yaml"><span class="hljs-attr">dataNode:</span>
   <span class="hljs-attr">resources:</span>
     <span class="hljs-attr">limits:</span>
@@ -91,7 +93,7 @@ Helmを使用してリソースをアップグレードすると、実行中の�
       <span class="hljs-attr">cpu:</span> <span class="hljs-string">&quot;1&quot;</span>
       <span class="hljs-attr">memory:</span> <span class="hljs-string">&quot;4Gi&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="3-Apply-configurations" class="common-anchor-header">3.設定の適用<button data-href="#3-Apply-configurations" class="anchor-icon" translate="no">
+<h2 id="3-Apply-configurations" class="common-anchor-header">3. Apply configurations<button data-href="#3-Apply-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,13 +108,14 @@ Helmを使用してリソースをアップグレードすると、実行中の�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコマンドを実行し、新しい設定をMilvusクラスタに適用します。</p>
+    </button></h2><p>Run the following command to apply the new configurations to your Milvus cluster.</p>
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values -f resources.yaml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<code translate="no">resources.limits</code> が指定されていない場合、ポッドは利用可能なすべてのCPUおよびメモリリソースを消費します。そのため、同じインスタンス上で他の実行タスクがより多くのメモリ消費を必要とする場合にリソースのオーバーオールロケーションを避けるために、<code translate="no">resources.requests</code> と<code translate="no">resources.limits</code> を必ず指定してください。</div>
-<p>リソースの管理に関する詳細は、<a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetesのドキュメントを</a>参照してください。</p>
-<h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
+If <code translate="no">resources.limits</code> is not specified, the pods will consume all the CPU and memory resources available. Therefore, ensure to specify <code translate="no">resources.requests</code> and <code translate="no">resources.limits</code> to avoid overallocation of resources when other running tasks on the same instance require more memory consumption.
+</div>
+<p>See <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes documentation</a> for more information about managing resources.</p>
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,14 +131,16 @@ Helmを使用してリソースをアップグレードすると、実行中の�
         ></path>
       </svg>
     </button></h2><ul>
-<li>次の方法についても学びましょう：<ul>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
-<li><a href="/docs/ja/upgrade_milvus_cluster-operator.md">Milvusクラスタのアップグレード</a></li>
-<li><a href="/docs/ja/upgrade_milvus_standalone-operator.md">Milvusスタンドアロンのアップグレード</a></li>
+<li>You might also want to learn how to:
+<ul>
+<li><a href="/docs/scaleout.md">Scale a Milvus cluster</a></li>
+<li><a href="/docs/upgrade_milvus_cluster-operator.md">Upgrade Milvus Cluster</a></li>
+<li><a href="/docs/upgrade_milvus_standalone-operator.md">Upgrade Milvus Standalone</a></li>
 </ul></li>
-<li>クラウド上にクラスタをデプロイする準備ができたら<ul>
-<li><a href="/docs/ja/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法</li>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使ってGCPにMilvusクラスタをデプロイ</a>する方法</li>
-<li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法</li>
+<li>If you are ready to deploy your cluster on clouds:
+<ul>
+<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
+<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul></li>
 </ul>

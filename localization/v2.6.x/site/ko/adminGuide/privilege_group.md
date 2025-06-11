@@ -1,9 +1,11 @@
 ---
 id: privilege_group.md
-title: 권한 그룹 만들기
-summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한을 하나의 권한 그룹으로 결합하는 것이 좋습니다.
+title: Create Privilege Group
+summary: >-
+  To streamline the process of granting privileges, it is recommended that you
+  combine multiple privileges into a privilege group.
 ---
-<h1 id="Create-Privilege-Group" class="common-anchor-header">권한 그룹 만들기<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
+<h1 id="Create-Privilege-Group" class="common-anchor-header">Create Privilege Group<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +20,8 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>권한을 부여하는 프로세스를 간소화하려면 여러 권한을 하나의 권한 그룹으로 결합하는 것이 좋습니다.</p>
-<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">권한 그룹과 권한 비교<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
+    </button></h1><p>To streamline the process of granting privileges, it is recommended that you combine multiple privileges into a privilege group.</p>
+<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">Privilege group vs. privileges<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,18 +36,20 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>권한 그룹은 여러 권한으로 구성됩니다.</p>
+    </button></h2><p>A privilege group consists of multiple privileges.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
-   </span> <span class="img-wrapper"> <span>권한 그룹 예시</span> </span></p>
-<p>위 그림과 같이 한 역할에 세 가지 다른 권한을 부여해야 한다고 가정해 보겠습니다.</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
+    <span>Privilege Group Illustrated</span>
+  </span>
+</p>
+<p>As shown in the figure above, suppose you need to grant three different privileges to a role.</p>
 <ul>
-<li><p>권한 그룹을 사용하지 않는 경우에는 권한을 세 번 부여해야 합니다.</p></li>
-<li><p>권한 그룹을 사용하는 경우에는 권한 그룹을 만든 다음 이 권한 그룹에 세 가지 권한을 추가하고 역할 A에 권한 그룹을 부여하기만 하면 됩니다.</p></li>
+<li><p>If you do not use a privilege group, you need to grant the privileges three times.</p></li>
+<li><p>If you use a privilege group, you only need to create a privilege group and add the three privileges to this privilege group and grant the privilege group to Role A.</p></li>
 </ul>
-<p>권한 그룹을 사용하면 한 역할에 여러 권한을 일괄적으로 부여할 수 있습니다.</p>
-<h2 id="Built-in-privilege-groups" class="common-anchor-header">기본 제공 권한 그룹<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
+<p>By using a privilege group, you can grant multiple privileges in bulk to a role.</p>
+<h2 id="Built-in-privilege-groups" class="common-anchor-header">Built-in privilege groups<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,22 +64,22 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 사용 편의성을 위해 컬렉션, 데이터베이스, 인스턴스 수준에서 총 9개의 기본 제공 권한을 제공합니다: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW 및 Cluster_Admin입니다.</p>
+    </button></h2><p>For ease-of-use, Milvus provides a total of 9 built-in privileges on the collection, database, and instance level: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW and Cluster_Admin.</p>
 <div class="alert note">
-<p>기본 제공 권한 그룹의 세 가지 수준은 계단식 관계가 없습니다. 인스턴스 수준에서 권한 그룹을 설정한다고 해서 해당 인스턴스 아래의 모든 데이터베이스 및 컬렉션에 대한 권한이 자동으로 설정되는 것은 아닙니다. 데이터베이스 및 컬렉션 수준에서의 권한은 수동으로 설정해야 합니다.</p>
+<p>The three levels of built-in privilege groups do not have a cascading relationship. Setting a privilege group at the instance level does not automatically set permissions for all databases and collections under that instance. Privileges at the database and collection levels need to be set manually.</p>
 </div>
-<p>다음 표에서는 각 기본 제공 권한 그룹에 포함된 권한에 대해 설명합니다.</p>
-<h3 id="Collection-level" class="common-anchor-header">컬렉션 수준</h3><ul>
-<li><p><strong>CollectionReadOnly(COLL_RO</strong>): 컬렉션 데이터를 읽을 수 있는 권한이 포함됩니다.</p></li>
-<li><p><strong>CollectionReadWrite(COLL_RW</strong>): 컬렉션 데이터를 읽고 쓸 수 있는 권한이 포함됩니다.</p></li>
-<li><p><strong>CollectionAdmin(COLL_ADMIN)</strong>: 컬렉션 데이터를 읽고 쓸 수 있는 권한과 컬렉션을 관리할 수 있는 권한을 포함합니다.</p></li>
+<p>The following tables explains the privileges includes in each of the built-in privilege group.</p>
+<h3 id="Collection-level" class="common-anchor-header">Collection level</h3><ul>
+<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: includes privileges to read collection data</p></li>
+<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: includes privileges to read and write collection data</p></li>
+<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: includes privileges to read and write collection data and manage collections.</p></li>
 </ul>
-<p>아래 표에는 컬렉션 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나열되어 있습니다:</p>
+<p>The table below lists the specific privileges included in the three built-in privilege groups at the collection level:</p>
 <table>
    <tr>
-     <th><p><strong>권한</strong></p></th>
-     <th><p><strong>컬렉션 읽기 전용</strong></p></th>
-     <th><p><strong>컬렉션 읽기/쓰기</strong></p></th>
+     <th><p><strong>Privilege</strong></p></th>
+     <th><p><strong>CollectionReadOnly</strong></p></th>
+     <th><p><strong>CollectionReadWrite</strong></p></th>
      <th><p><strong>CollectionAdmin</strong></p></th>
    </tr>
    <tr>
@@ -85,7 +89,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>검색</p></td>
+     <td><p>Search</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -181,7 +185,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>릴리스</p></td>
+     <td><p>Release</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -193,7 +197,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>삭제</p></td>
+     <td><p>Delete</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -241,17 +245,17 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Database-level" class="common-anchor-header">데이터베이스 수준</h3><ul>
-<li><p><strong>데이터베이스 읽기 전용(DB_RO</strong>): 데이터베이스 데이터를 읽을 수 있는 권한을 포함합니다.</p></li>
-<li><p>데이터베이스 읽기/쓰기<strong>(DB_RW</strong>): 데이터베이스 데이터를 읽고 쓸 수 있는 권한 포함</p></li>
-<li><p><strong>DatabaseAdmin(DB_Admin)</strong>: 데이터베이스 데이터를 읽고 쓸 수 있는 권한과 데이터베이스를 관리하는 권한이 포함됩니다.</p></li>
+<h3 id="Database-level" class="common-anchor-header">Database level</h3><ul>
+<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: includes privileges to read database data</p></li>
+<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: includes privileges to read and write database data</p></li>
+<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: includes privileges to read and write database data and manage databases.</p></li>
 </ul>
-<p>아래 표에는 데이터베이스 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나열되어 있습니다:</p>
+<p>The table below lists the specific privileges included in the three built-in privilege groups at the database level:</p>
 <table>
    <tr>
-     <th><p><strong>권한</strong></p></th>
-     <th><p><strong>데이터베이스 읽기 전용</strong></p></th>
-     <th><p><strong>데이터베이스 읽기/쓰기</strong></p></th>
+     <th><p><strong>Privilege</strong></p></th>
+     <th><p><strong>DatabaseReadOnly</strong></p></th>
+     <th><p><strong>DatabaseReadWrite</strong></p></th>
      <th><p><strong>DatabaseAdmin</strong></p></th>
    </tr>
    <tr>
@@ -261,7 +265,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>데이터베이스 설명</p></td>
+     <td><p>DescribeDatabase</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -285,16 +289,16 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Cluster-level" class="common-anchor-header">클러스터 수준</h3><ul>
-<li><p><strong>클러스터 읽기 전용(Cluster_RO</strong>): 인스턴스 데이터를 읽을 수 있는 권한을 포함합니다.</p></li>
-<li><p><strong>ClusterReadWrite(Cluster_RW</strong>): 인스턴스 데이터를 읽고 쓸 수 있는 권한을 포함합니다.</p></li>
-<li><p><strong>ClusterAdmin(Cluster_Admin)</strong>: 인스턴스 데이터 읽기 및 쓰기 권한과 인스턴스 관리 권한이 포함됩니다.</p></li>
+<h3 id="Cluster-level" class="common-anchor-header">Cluster level</h3><ul>
+<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: includes privileges to read instance data</p></li>
+<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: includes privileges to read and write instance data</p></li>
+<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: includes privileges to read and write instance data and manage instances.</p></li>
 </ul>
-<p>아래 표에는 인스턴스 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나열되어 있습니다:</p>
+<p>The table below lists the specific privileges included in the three built-in privilege groups at the instance level:</p>
 <table>
    <tr>
-     <th><p><strong>권한</strong></p></th>
-     <th><p><strong>클러스터 읽기 전용</strong></p></th>
+     <th><p><strong>Privilege</strong></p></th>
+     <th><p><strong>ClusterReadOnly</strong></p></th>
      <th><p><strong>ClusterReadWrite</strong></p></th>
      <th><p><strong>ClusterAdmin</strong></p></th>
    </tr>
@@ -371,7 +375,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>업데이트 리소스 그룹</p></td>
+     <td><p>UpdateResourceGroups</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -383,7 +387,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>리소스 그룹 나열</p></td>
+     <td><p>ListResourceGroups</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -443,7 +447,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h2 id="Procedures" class="common-anchor-header">절차<button data-href="#Procedures" class="anchor-icon" translate="no">
+<h2 id="Procedures" class="common-anchor-header">Procedures<button data-href="#Procedures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -458,10 +462,15 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>권한 그룹을 만든 다음 권한 그룹에 권한을 추가할 수 있습니다.</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">권한 그룹 만들기</h3><p>다음 예는 <code translate="no">privilege_group_1</code> 라는 권한 그룹을 만드는 방법을 보여줍니다.</p>
+    </button></h2><p>You can create a privilege group and then add privileges to the privilege group.</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">Create a privilege group</h3><p>The following example demonstrates how to create a privilege group named <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#go">Go</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）
 <button class="copy-code-btn"></button></code></pre>
@@ -491,9 +500,14 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">권한 그룹에 권한 추가하기</h3><p>다음 예는 방금 만든 권한 그룹 <code translate="no">privilege_group_1</code> 에 <code translate="no">PrivilegeBackupRBAC</code> 및 <code translate="no">PrivilegeRestoreRBAC</code> 권한을 추가하는 방법을 보여줍니다.</p>
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Add privileges to a privilege group</h3><p>The following example demonstrates how to add privileges <code translate="no">PrivilegeBackupRBAC</code> and <code translate="no">PrivilegeRestoreRBAC</code> to the privilege group <code translate="no">privilege_group_1</code> that is just created.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#go">Go</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.add_privileges_to_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
@@ -528,9 +542,14 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">권한 그룹에서 권한 제거하기</h3><p>다음 예제는 권한 그룹 <code translate="no">privilege_group_1</code> 에서 <code translate="no">PrivilegeRestoreRBAC</code> 권한을 제거하는 방법을 보여줍니다.</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Remove privileges from a privilege group</h3><p>The following example demonstrates how to remove the privilege <code translate="no">PrivilegeRestoreRBAC</code> from the privilege group <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#go">Go</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -563,9 +582,14 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">권한 그룹 나열하기</h3><p>다음은 기존의 모든 권한 그룹을 나열하는 방법을 설명합니다.</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">List privilege groups</h3><p>The following example demonstrates how to list all existing privilege groups.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.list_privilege_groups()
 <button class="copy-code-btn"></button></code></pre>
@@ -593,12 +617,17 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>아래는 출력 예시입니다.</p>
+<p>Below is an example output.</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">권한 그룹 삭제하기</h3><p>다음은 권한 그룹을 삭제하는 방법을 보여주는 예제입니다. <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">Drop a privilege group</h3><p>The following example demonstrates how to drop the privilege group <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#go">Go</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.drop_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>

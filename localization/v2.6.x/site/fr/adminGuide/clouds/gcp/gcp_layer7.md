@@ -1,12 +1,10 @@
 ---
 id: gcp_layer7.md
-title: Configurer un équilibreur de charge de couche 7 pour Milvus sur GCP
+title: Set up a Layer-7 Load Balancer for Milvus on GCP
 related_key: cluster
-summary: >-
-  Découvrez comment déployer un cluster Milvus derrière un équilibreur de charge
-  Layer-7 sur GCP.
+summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on GCP.
 ---
-<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">Configurer un équilibreur de charge de couche 7 pour Milvus sur GCP<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
+<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">Set up a Layer-7 Load Balancer for Milvus on GCP<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,31 +19,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Comparé à un équilibreur de charge de couche 4, un équilibreur de charge de couche 7 offre des capacités intelligentes d'équilibrage de charge et de mise en cache et constitue un excellent choix pour les services natifs du nuage.</p>
-<p>Ce guide vous guide dans la configuration d'un équilibreur de charge de couche 7 pour un cluster Milvus fonctionnant déjà derrière un équilibreur de charge de couche 4.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Avant de commencer</h3><ul>
-<li><p>Un projet existe déjà dans votre compte GCP.</p>
-<p>Pour créer un projet, reportez-vous à la section <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Création et gestion de projets</a>. Le nom du projet utilisé dans ce guide est <strong>milvus-testing-nonprod</strong>.</p></li>
-<li><p>Vous avez installé localement <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> et <a href="https://helm.sh/docs/intro/install/">Helm</a>, ou vous avez décidé d'utiliser le <a href="https://cloud.google.com/shell">Cloud Shell</a> basé sur le navigateur à la place.</p></li>
-<li><p>Vous avez <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialisé le CLI gcloud</a> avec les informations d'identification de votre compte GCP.</p></li>
-<li><p>Vous avez <a href="/docs/fr/gcp.md">déployé un cluster Milvus derrière un équilibreur de charge de couche 4 sur GCP</a>.</p></li>
+    </button></h1><p>When compared to a Layer-4 load balancer, a Layer-7 load balancer offers smart load balancing and caching capabilities and is a great choice for cloud-native services.</p>
+<p>This guide walks you through setting up a layer-7 load balancer for a Milvus cluster already running behind a Layer-4 load balancer.</p>
+<h3 id="Before-your-start" class="common-anchor-header">Before your start</h3><ul>
+<li><p>A project already exists in your GCP account.</p>
+<p>To create a project, refer to <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creating and managing projects</a>. The name of the project used in this guide is <strong>milvus-testing-nonprod</strong>.</p></li>
+<li><p>You have locally installed <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>, and <a href="https://helm.sh/docs/intro/install/">Helm</a>, or decided to use the browser-based <a href="https://cloud.google.com/shell">Cloud Shell</a> instead.</p></li>
+<li><p>You have <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialized the gcloud CLI</a> with your GCP account credentials.</p></li>
+<li><p>You have <a href="/docs/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modifier les configurations Milvus</h3><p>Ce guide suppose que vous avez déjà <a href="/docs/fr/gcp.md">déployé un cluster Milvus derrière un équilibreur de charge de couche 4 sur GCP</a>.</p>
-<p>Avant de configurer un équilibreur de charge de couche 7 pour ce cluster Milvus, exécutez la commande suivante pour supprimer l'équilibreur de charge de couche 4.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p>
+<p>Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
-<p>En tant que service backend de l'équilibreur de charge de couche 7, Milvus doit répondre à <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2">certaines exigences de cryptage</a> afin de pouvoir comprendre les requêtes HTTP/2 de l'équilibreur de charge. Par conséquent, vous devez activer TLS sur votre cluster Milvus comme suit.</p>
+<p>As a backend service of the Layer-7 load balancer, Milvus has to meet <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2">certain encryption requirements</a> so that it can understand the HTTP/2 requests from the load balancer. Therefore, you need to enable TLS on your Milvus cluster as follows.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus -f tls.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Le contenu de tls.yaml :</p>
+<p>the tls.yaml content:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     common:
       security:
         tlsMode: 1
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Configurer un point d'extrémité de contrôle de santé</h3><p>Pour assurer la disponibilité du service, l'équilibrage de charge de couche 7 sur GCP nécessite de sonder les conditions de santé du service backend. Par conséquent, nous devons configurer un BackendConfig pour envelopper le point final de contrôle de santé et associer le BackendConfig au service Milvus par le biais d'annotations.</p>
-<p>L'extrait suivant représente les paramètres de BackendConfig. Enregistrez-le sous <code translate="no">backendconfig.yaml</code> pour une utilisation ultérieure.</p>
+<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Set up a health check endpoint</h3><p>To ensure service availability, Layer-7 load balancing on GCP requires probing the health conditions of the backend service. Therefore, we need to set up a BackendConfig to wrap up the health check endpoint and associate the BackendConfig with the Milvus service through annotations.</p>
+<p>The following snippet is the BackendConfig settings. Save it as <code translate="no">backendconfig.yaml</code> for later use.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
 <span class="hljs-attr">metadata:</span>
@@ -57,10 +55,10 @@ summary: >-
     <span class="hljs-attr">requestPath:</span> <span class="hljs-string">/healthz</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">HTTP</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Exécutez ensuite la commande suivante pour créer le point de terminaison du bilan de santé.</p>
+<p>Then run the following command to create the health check endpoint.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f backendconfig.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Enfin, mettez à jour les annotations du service Milvus pour demander à l'équilibreur de charge Layer-7 que nous créerons plus tard d'effectuer des contrôles de santé à l'aide du point de terminaison qui vient d'être créé.</p>
+<p>Finally, update the annotations of the Milvus service to ask the Layer-7 load balancer that we will create later to perform health checks using the endpoint just created.</p>
 <pre><code translate="no" class="language-bash">kubectl annotate service my-release-milvus \
     cloud.google.com/app-protocols=<span class="hljs-string">&#x27;{&quot;milvus&quot;:&quot;HTTP2&quot;}&#x27;</span> \
     cloud.google.com/backend-config=<span class="hljs-string">&#x27;{&quot;default&quot;: &quot;my-release-backendconfig&quot;}&#x27;</span> \
@@ -68,17 +66,17 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>En ce qui concerne la première annotation,</p>
-<p>Milvus est natif de gRPC, qui est construit sur HTTP/2. Par conséquent, nous pouvons utiliser HTTP/2 comme protocole de communication entre l'équilibreur de charge Layer-7 et Milvus.</p></li>
-<li><p>Pour ce qui est de la deuxième annotation, Milvus ne propose que le bilan de santé,</p>
-<p>Milvus n'offre que le point d'extrémité du bilan de santé via gRPC et HTTP/1. Nous devons configurer un BackendConfig pour envelopper le point d'extrémité du bilan de santé et l'associer au service Milvus afin que l'équilibreur de charge Layer-7 interroge ce point d'extrémité pour connaître l'état de santé de Milvus.</p></li>
-<li><p>Quant à la troisième annotation,</p>
-<p>Elle demande la création d'un groupe de points d'extrémité du réseau (NEG) après la création d'une entrée. Lorsque les NEG sont utilisés avec l'entrée GKE, le contrôleur d'entrée facilite la création de tous les aspects de l'équilibreur de charge. Cela inclut la création de l'adresse IP virtuelle, des règles de transfert, des contrôles de santé, des règles de pare-feu, etc. Pour plus de détails, consultez la <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">documentation de Google Cloud</a>.</p></li>
+<li><p>As to the first annotation,</p>
+<p>Milvus is native to gRPC, which is built upon HTTP/2. Therefore, we can use HTTP/2 as the communication protocol between the Layer-7 load balancer and Milvus.</p></li>
+<li><p>As to the second annotation,</p>
+<p>Milvus only offers the health check endpoint over gRPC and HTTP/1. We need to set up a BackendConfig to wrap the health check endpoint and associate it with the Milvus service so that the Layer-7 load balancer probes this endpoint for the health condition of Milvus.</p></li>
+<li><p>As to the third annotation,</p>
+<p>It asks for the creation of a network endpoint group (NEG) after an Ingress is created. When NEGs are used with GKE Ingress, the Ingress controller facilitates the creation of all aspects of the load balancer. This includes creating the virtual IP address, forwarding rules, health checks, firewall rules, and more. For details, refer to <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">Google Cloud docs</a>.</p></li>
 </ul>
 </div>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Préparer les certificats TLS</h3><p>Le protocole TLS nécessite des certificats pour fonctionner. <strong>Il existe deux façons de créer des certificats, à savoir les certificats autogérés et les certificats gérés par Google.</strong></p>
-<p>Ce guide utilise <strong>my-release.milvus.io</strong> comme nom de domaine pour accéder à notre service Milvus.</p>
-<h4 id="Create-self-managed-certificates" class="common-anchor-header">Créer des certificats autogérés</h4><p>Exécutez les commandes suivantes pour créer un certificat.</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Prepare TLS certificates</h3><p>TLS requires certificates to work. <strong>There are two ways to create certificates, namely self-managed and Google-managed.</strong></p>
+<p>This guide uses <strong>my-release.milvus.io</strong> as the domain name to access our Milvus service.</p>
+<h4 id="Create-self-managed-certificates" class="common-anchor-header">Create self-managed certificates</h4><p>Run the following commands to create a certificate.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Generates a tls.key.</span>
 openssl genrsa -out tls.key 2048
 
@@ -89,10 +87,10 @@ openssl req -new -key tls.key -out tls.csr \
 openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
     -out tls.crt
 <button class="copy-code-btn"></button></code></pre>
-<p>Créez ensuite un secret dans votre cluster GKE avec ces fichiers pour une utilisation ultérieure.</p>
+<p>Then create a secret in your GKE cluster with these files for later use.</p>
 <pre><code translate="no" class="language-bash">kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Create-Google-managed-certificates" class="common-anchor-header">Créer des certificats gérés par Google</h4><p>L'extrait suivant est un paramètre ManagedCertificate. Enregistrez-le sous <code translate="no">managed-crt.yaml</code> pour une utilisation ultérieure.</p>
+<h4 id="Create-Google-managed-certificates" class="common-anchor-header">Create Google-managed certificates</h4><p>The following snippet is a ManagedCertificate setting. Save it as <code translate="no">managed-crt.yaml</code> for later use.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.gke.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ManagedCertificate</span>
 <span class="hljs-attr">metadata:</span>
@@ -101,13 +99,13 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
   <span class="hljs-attr">domains:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">my-release.milvus.io</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Créez un certificat géré en appliquant le paramètre à votre cluster GKE comme suit :</p>
+<p>Create a managed certificate by applying the setting to your GKE cluster as follows:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ./managed-crt.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Cette opération peut durer un certain temps. Vous pouvez vérifier la progression en exécutant</p>
+<p>This could last for a while. You can check the progress by running</p>
 <pre><code translate="no" class="language-bash">kubectl get -f ./managed-crt.yaml -o yaml -w
 <button class="copy-code-btn"></button></code></pre>
-<p>La sortie devrait être similaire à ce qui suit :</p>
+<p>The output should be similar to the following:</p>
 <pre><code translate="no" class="language-shell">status:
   certificateName: mcrt-34446a53-d639-4764-8438-346d7871a76e
   certificateStatus: Provisioning
@@ -115,10 +113,10 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
   - domain: my-release.milvus.io
     status: Provisioning
 <button class="copy-code-btn"></button></code></pre>
-<p>Une fois que <strong>certificateStatus</strong> devient <strong>actif</strong>, vous êtes prêt à configurer l'équilibreur de charge.</p>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Créer un Ingress pour générer un équilibreur de charge de couche 7</h3><p>Créez un fichier YAML avec l'un des extraits suivants.</p>
+<p>Once <strong>certificateStatus</strong> turns to <strong>Active</strong>, you are ready to set up the load balancer.</p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Create an Ingress to generate a Layer-7 Load Balancer</h3><p>Create a YAML file with one of the following snippets.</p>
 <ul>
-<li><p>Utilisation de certificats autogérés</p>
+<li><p>Using self-managed certificates</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -141,7 +139,7 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
             <span class="hljs-attr">port:</span>
               <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Utilisation de certificats gérés par Google</p>
+<li><p>Using Google-managed certificates</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -163,19 +161,19 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
               <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>Vous pouvez ensuite créer l'Ingress en appliquant le fichier à votre cluster GKE.</p>
+<p>Then you can create the Ingress by applying the file to your GKE cluster.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Attendez maintenant que Google configure l'équilibreur de charge Layer-7. Vous pouvez vérifier la progression en exécutant</p>
+<p>Now, wait for Google to set up the Layer-7 load balancer. You can check the progress by running</p>
 <pre><code translate="no" class="language-bash">kubectl  -f ./config/samples/ingress.yaml get -w
 <button class="copy-code-btn"></button></code></pre>
-<p>La sortie devrait être similaire à ce qui suit :</p>
+<p>The output should be similar to the following:</p>
 <pre><code translate="no" class="language-shell">NAME                CLASS    HOSTS                  ADDRESS   PORTS   AGE
 my-release-milvus   &lt;none&gt;   my-release.milvus.io             80      4s
 my-release-milvus   &lt;none&gt;   my-release.milvus.io   34.111.144.65   80, 443   41m
 <button class="copy-code-btn"></button></code></pre>
-<p>Une fois qu'une adresse IP s'affiche dans le champ <strong>ADDRESS</strong>, l'équilibreur de charge Layer-7 est prêt à être utilisé. Les ports 80 et 443 sont tous deux affichés dans la sortie ci-dessus. N'oubliez pas que vous devez toujours utiliser le port 443 pour votre propre bien.</p>
-<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Vérifier la connexion via l'équilibreur de charge Layer-7<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
+<p>Once an IP address is displayed in the <strong>ADDRESS</strong> field, the Layer-7 load balancer is ready to use. Both port 80 and port 443 are displayed in the above output. Remember, you should always use port 443 for your own good.</p>
+<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Verify the connection through the Layer-7 load balancer<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -190,8 +188,8 @@ my-release-milvus   &lt;none&gt;   my-release.milvus.io   34.111.144.65   80, 44
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ce guide utilise PyMilvus pour vérifier la connexion au service Milvus derrière l'équilibreur de charge Layer-7 que nous venons de créer. Pour des étapes détaillées, <a href="https://milvus.io/docs/v2.3.x/example_code.md">lisez ceci</a>.</p>
-<p>Notez que les paramètres de connexion varient en fonction de la manière dont vous choisissez de gérer les certificats dans <a href="#prepare-tls-certificates">Prepare TLS certificates</a>.</p>
+    </button></h2><p>This guide uses PyMilvus to verify the connection to the Milvus service behind the Layer-7 load balancer we have just created. For detailed steps, <a href="https://milvus.io/docs/v2.3.x/example_code.md">read this</a>.</p>
+<p>Notice that connection parameters vary with the way you choose to manage the certificates in <a href="#prepare-tls-certificates">Prepare TLS certificates</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     connections,
     utility,
@@ -209,7 +207,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>L'adresse IP et le numéro de port dans <strong>host</strong> and <strong>port</strong> doivent correspondre à ceux indiqués à la fin de <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">Create an Ingress to generate a Layer-7 Load Balancer (Créer une entrée pour générer un équilibreur de charge de niveau 7)</a>.</li>
-<li>Si vous avez configuré un enregistrement DNS pour faire correspondre le nom de domaine à l'adresse IP de l'hôte, remplacez l'adresse IP dans <strong>host</strong> par le nom de domaine et omettez <strong>server_name</strong>.</li>
+<li>The IP address and port number in <strong>host</strong> and <strong>port</strong> should match those listed at the end of <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">Create an Ingress to generate a Layer-7 Load Balancer</a>.</li>
+<li>If you have set up a DNS record to map domain name to the host IP address, replace the IP address in <strong>host</strong> with the domain name and omit <strong>server_name</strong>.</li>
 </ul>
 </div>

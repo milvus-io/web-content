@@ -1,10 +1,12 @@
 ---
 id: scaleout.md
 related_key: scale Milvus cluster
-summary: Milvus 클러스터에서 수동 또는 자동으로 스케일아웃 및 스케일업하는 방법을 알아보세요.
-title: Milvus 클러스터 확장
+summary: >-
+  Learn how to manually or automatically scale out and scale in a Milvus
+  cluster.
+title: Scale a Milvus Cluster
 ---
-<h1 id="Scale-a-Milvus-Cluster" class="common-anchor-header">Milvus 클러스터 확장<button data-href="#Scale-a-Milvus-Cluster" class="anchor-icon" translate="no">
+<h1 id="Scale-a-Milvus-Cluster" class="common-anchor-header">Scale a Milvus Cluster<button data-href="#Scale-a-Milvus-Cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,13 +21,13 @@ title: Milvus 클러스터 확장
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 구성 요소의 수평적 확장을 지원합니다. 즉, 필요에 따라 각 유형의 워커 노드 수를 늘리거나 줄일 수 있습니다.</p>
-<p>이 항목에서는 Milvus 클러스터에서 스케일 아웃 및 스케일링하는 방법에 대해 설명합니다. 확장하기 전에 이미 <a href="/docs/ko/install_cluster-helm.md">Milvus 클러스터를 설치했다고</a> 가정합니다. 또한 시작하기 전에 <a href="/docs/ko/architecture_overview.md">Milvus 아키텍처를</a> 숙지하는 것이 좋습니다.</p>
-<p>이 튜토리얼에서는 3개의 쿼리 노드 스케일아웃을 예로 들어 설명합니다. 다른 유형의 노드를 스케일아웃하려면 명령줄에서 <code translate="no">queryNode</code> 를 해당 노드 유형으로 바꾸세요.</p>
+    </button></h1><p>Milvus supports horizontal scaling of its components. This means you can either increase or decrease  the number of worker nodes of each type according to your own need.</p>
+<p>This topic describes how to scale out and scale in a Milvus cluster. We assume that you have already <a href="/docs/install_cluster-helm.md">installed a Milvus cluster</a> before scaling. Also, we recommend familiarizing yourself with the <a href="/docs/architecture_overview.md">Milvus architecture</a> before you begin.</p>
+<p>This tutorial takes scaling out three query nodes as an example. To scale out other types of nodes, replace <code translate="no">queryNode</code> with the corresponding node type in the command line.</p>
 <div class="alert note">
-<p>밀버스 오퍼레이터로 클러스터를 확장하는 방법에 대한 자세한 내용은 <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">밀버스 오퍼레이터로 클러스터 확장하기를</a> 참조하세요.</p>
+<p>For information on how to scale a cluster with Milvus Operator, refer to <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">Scale a Cluster with Milvus Operator</a>.</p>
 </div>
-<h2 id="What-is-horizontal-scaling" class="common-anchor-header">수평 확장이란 무엇인가요?<button data-href="#What-is-horizontal-scaling" class="anchor-icon" translate="no">
+<h2 id="What-is-horizontal-scaling" class="common-anchor-header">What is horizontal scaling?<button data-href="#What-is-horizontal-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,35 +42,40 @@ title: Milvus 클러스터 확장
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>수평적 스케일링에는 스케일 아웃과 스케일 인이 포함됩니다.</p>
-<h3 id="Scaling-out" class="common-anchor-header">스케일 아웃</h3><p>스케일 아웃은 클러스터의 노드 수를 늘리는 것을 말합니다. 스케일업과 달리 스케일아웃은 클러스터의 한 노드에 더 많은 리소스를 할당할 필요가 없습니다. 대신, 스케일 아웃은 노드를 더 추가하여 클러스터를 수평적으로 확장합니다.</p>
+    </button></h2><p>Horizontal scaling includes scaling out and scaling in.</p>
+<h3 id="Scaling-out" class="common-anchor-header">Scaling out</h3><p>Scaling out refers to increasing the number of nodes in a cluster. Unlike scaling up, scaling out does not require you to allocate more resources to one node in the cluster. Instead, scaling out expands the cluster horizontally by adding more nodes.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
-   </span> <span class="img-wrapper"> <span>스케일아웃</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+    <span>Scaleout</span>
+  </span>
+</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
-   </span> <span class="img-wrapper"> <span>스케일업</span> </span></p>
-<p><a href="/docs/ko/architecture_overview.md">Milvus 아키텍처에</a> 따르면 상태 비저장 워커 노드에는 쿼리 노드, 데이터 노드, 인덱스 노드 및 프록시가 포함됩니다. 따라서 이러한 유형의 노드를 비즈니스 요구와 애플리케이션 시나리오에 맞게 스케일아웃할 수 있습니다. Milvus 클러스터는 수동 또는 자동으로 스케일아웃할 수 있습니다.</p>
-<p>일반적으로 Milvus 클러스터가 과도하게 사용되는 경우 생성한 클러스터를 스케일아웃해야 합니다. 다음은 Milvus 클러스터를 스케일아웃해야 할 수 있는 몇 가지 일반적인 상황입니다:</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+    <span>Scaleup</span>
+  </span>
+</p>
+<p>According to the <a href="/docs/architecture_overview.md">Milvus architecture</a>, stateless worker nodes include query node, data node, index node, and proxy. Therefore, you can scale out these type of nodes to suit your business needs and application scenarios. You can either scale out the Milvus cluster manually or automatically.</p>
+<p>Generally, you will need to scale out the Milvus cluster you created if it is over-utilized. Below are some typical situations where you may need to scale out the Milvus cluster:</p>
 <ul>
-<li>일정 기간 동안 CPU 및 메모리 사용률이 높은 경우.</li>
-<li>쿼리 처리량이 높아지는 경우.</li>
-<li>더 빠른 인덱싱 속도가 필요한 경우.</li>
-<li>대량의 대용량 데이터 세트를 처리해야 합니다.</li>
-<li>Milvus 서비스의 고가용성을 보장해야 합니다.</li>
+<li>The CPU and memory utilization is high for a period of time.</li>
+<li>The query throughput becomes higher.</li>
+<li>Higher speed for indexing is required.</li>
+<li>Massive volumes of large datasets need to be processed.</li>
+<li>High availability of the Milvus service needs to be ensured.</li>
 </ul>
-<h3 id="Scaling-in" class="common-anchor-header">스케일링 인</h3><p>스케일 인은 클러스터의 노드 수를 줄이는 것을 말합니다. 일반적으로 생성한 Milvus 클러스터의 활용도가 낮은 경우 스케일 인을 해야 합니다. 다음은 Milvus 클러스터에서 확장해야 하는 몇 가지 일반적인 상황입니다:</p>
+<h3 id="Scaling-in" class="common-anchor-header">Scaling in</h3><p>Scaling in refers to decreasing the number of nodes in a cluster. Generally, you will need to scale in the Milvus cluster you created if it is under-utilized. Below are some typical situations where you need to scale in the Milvus cluster:</p>
 <ul>
-<li>일정 기간 동안 CPU 및 메모리 사용률이 낮습니다.</li>
-<li>쿼리 처리량이 낮아집니다.</li>
-<li>인덱싱에 더 빠른 속도가 필요하지 않은 경우.</li>
-<li>처리할 데이터 세트의 크기가 작습니다.</li>
+<li>The CPU and memory utilization is low for a period of time.</li>
+<li>The query throughput becomes lower.</li>
+<li>Higher speed for indexing is not required.</li>
+<li>The size of the dataset to be processed is small.</li>
 </ul>
 <div class="alert note">
-작업자 노드 수를 급격하게 줄이는 것은 권장하지 않습니다. 예를 들어 클러스터에 5개의 데이터 노드가 있는 경우, 서비스 가용성을 보장하기 위해 한 번에 하나의 데이터 노드를 줄이는 것이 좋습니다. 첫 번째 스케일 인 시도 후 서비스를 사용할 수 있게 되면 계속해서 데이터 노드 수를 더 줄일 수 있습니다.</div>
-<h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+We do not recommend reducing the number of workers nodes dramatically. For example, if there are five data nodes in the cluster, we recommend reducing one data node at a time to ensure service availability. If the service is available after the first attempt of scaling in, you can continue to further reduce the number of the data node.
+</div>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,7 +90,7 @@ title: Milvus 클러스터 확장
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">kubectl get pods</code> 을 실행하여 생성한 Milvus 클러스터의 구성 요소 목록과 해당 구성 요소의 작동 상태를 확인합니다.</p>
+    </button></h2><p>Run <code translate="no">kubectl get pods</code> to get a list of the components and their working status in the Milvus cluster you created.</p>
 <pre><code translate="no">NAME                                            READY   STATUS       RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>      <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>datacoord<span class="hljs-number">-7</span>b5d84d8c6<span class="hljs-operator">-</span>rzjml    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>      <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m
@@ -98,8 +105,9 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>minio<span class="hljs-number">-5564</span>fbbddc<span class="hljs-number">-9</span>sbgv               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>      <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Milvus는 워커 노드 추가만 지원하며 코디네이터 구성 요소 추가는 지원하지 않습니다.</div>
-<h2 id="Scale-a-Milvus-cluster" class="common-anchor-header">Milvus 클러스터 확장하기<button data-href="#Scale-a-Milvus-cluster" class="anchor-icon" translate="no">
+Milvus only supports adding the worker nodes and does not support adding the coordinator components.
+</div>
+<h2 id="Scale-a-Milvus-cluster" class="common-anchor-header">Scale a Milvus cluster<button data-href="#Scale-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,10 +122,10 @@ Milvus는 워커 노드 추가만 지원하며 코디네이터 구성 요소 추
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 클러스터는 수동 또는 자동으로 확장할 수 있습니다. 수평 파드 자동 스케일링(HPA)을 사용한 자동 스케일링은 <a href="/docs/ko/hpa.md">Milvus용 HPA 구성을</a> 참조하세요. 자동 확장이 활성화되면 CPU 및 메모리 리소스 소비가 설정한 값에 도달하면 Milvus 클러스터가 자동으로 축소 또는 확장됩니다.</p>
-<p>현재 Milvus 2.1.0은 수동으로 스케일 인 및 스케일 아웃만 지원합니다.</p>
-<h4 id="Scaling-out" class="common-anchor-header">스케일 아웃</h4><p><code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> 을 실행하여 쿼리 노드를 수동으로 스케일 아웃합니다.</p>
-<p>성공하면 다음 예시와 같이 쿼리 노드에 실행 중인 3개의 파드가 추가됩니다.</p>
+    </button></h2><p>You can scale in your Milvus cluster either manually or automatically. For automatic scaling with Horizontal Pod Autoscaling (HPA), see <a href="/docs/hpa.md">Configure HPA for Milvus</a>. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value you have set.</p>
+<p>Currently, Milvus 2.1.0 only supports scaling in and out manually.</p>
+<h4 id="Scaling-out" class="common-anchor-header">Scaling out</h4><p>Run <code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> to manually scale out the query node.</p>
+<p>If successful, three running pods on the query node are added as shown in the following example.</p>
 <pre><code translate="no">NAME                                            READY   STATUS    RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>datacoord<span class="hljs-number">-7</span>b5d84d8c6<span class="hljs-operator">-</span>rzjml    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
@@ -133,8 +141,8 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>rootcoord<span class="hljs-number">-75585</span>dc57b<span class="hljs-operator">-</span>cjh87    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>minio<span class="hljs-number">-5564</span>fbbddc<span class="hljs-number">-9</span>sbgv               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Scaling-in" class="common-anchor-header">스케일 인</h4><p><code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=1 --reuse-values</code> 을 실행하여 쿼리 노드를 스케일 인합니다.</p>
-<p>성공하면 다음 예제와 같이 쿼리 노드에서 실행 중인 3개의 파드가 1개로 줄어듭니다.</p>
+<h4 id="Scaling-in" class="common-anchor-header">Scaling in</h4><p>Run <code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=1 --reuse-values</code> to scale in the query node.</p>
+<p>If successful, three running pods on the query node are reduced to one as shown in the following example.</p>
 <pre><code translate="no">NAME                                            READY   STATUS    RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>datacoord<span class="hljs-number">-7</span>b5d84d8c6<span class="hljs-operator">-</span>rzjml    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
@@ -148,7 +156,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>rootcoord<span class="hljs-number">-75585</span>dc57b<span class="hljs-operator">-</span>cjh87    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>minio<span class="hljs-number">-5564</span>fbbddc<span class="hljs-number">-9</span>sbgv               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -164,18 +172,18 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Milvus 서비스를 모니터링하고 알림을 생성하는 방법을 배우려면 다음과 같이 하세요:</p>
+<li><p>If you want to learn how to monitor the Milvus services and create alerts:</p>
 <ul>
-<li><a href="/docs/ko/monitor.md">Kubernetes에서 Prometheus Operator로 Milvus 모니터링</a> 배우기</li>
+<li>Learn <a href="/docs/monitor.md">Monitor Milvus with Prometheus Operator on Kubernetes</a></li>
 </ul></li>
-<li><p>클라우드에 클러스터를 배포할 준비가 되셨다면:</p>
+<li><p>If you are ready to deploy your cluster on clouds:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>
+<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
+<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul></li>
-<li><p>리소스를 할당하는 방법에 대한 지침을 찾고 계신다면 이 문서를 참조하세요:</p>
+<li><p>If you are looking for instructions on how to allocate resources:</p>
 <ul>
-<li><a href="/docs/ko/allocate.md#standalone">Kubernetes에서 리소스 할당하기</a></li>
+<li><a href="/docs/allocate.md#standalone">Allocate Resources on Kubernetes</a></li>
 </ul></li>
 </ul>
