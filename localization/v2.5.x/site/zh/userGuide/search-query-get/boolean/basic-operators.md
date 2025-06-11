@@ -5,6 +5,7 @@ summary: >-
   Milvus
   提供丰富的基本操作符，帮助您高效地过滤和查询数据。这些操作符允许您根据标量字段、数字计算、逻辑条件等来完善搜索条件。了解如何使用这些操作符对于建立精确查询和最大限度地提高搜索效率至关重要。
 ---
+
 <h1 id="Basic-Operators" class="common-anchor-header">基本操作符<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,27 +234,29 @@ summary: >-
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p><strong>例 2：检索<code translate="no">metadata</code> 不为空的实体</strong></p>
 <p>查找<code translate="no">metadata</code> 字段不是空值的实体：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">具有空值的 ARRAY 字段</h3><p>Milvus 允许过滤包含空值的 ARRAY 字段。ARRAY 字段在以下情况下被视为空值：</p>
 <ul>
 <li><p>整个 ARRAY 字段明确设置为 None（空），例如<code translate="no">&quot;tags&quot;: None</code> 。</p></li>
 <li><p>实体中完全没有 ARRAY 字段。</p></li>
 </ul>
 <div class="alert note">
-<p>ARRAY 字段不能包含部分空值，因为 ARRAY 字段中的所有元素必须具有相同的数据类型。有关详细信息，请参阅<a href="/docs/zh/array_data_type.md">数组字段</a>。</p>
+<p>ARRAY 字段不能包含部分空值，因为 ARRAY 字段中的所有元素必须具有相同的数据类型。有关详细信息，请参阅<a href="/docs/zh/v2.5.x/array_data_type.md">数组字段</a>。</p>
 </div>
 <p>为进一步说明 Milvus 如何处理带有空值的 ARRAY 字段，请考虑以下带有 ARRAY 字段<code translate="no">tags</code> 的示例数据：</p>
 <pre><code translate="no" class="language-python">data = [
@@ -282,20 +285,22 @@ summary: >-
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p><strong>例 2：检索<code translate="no">tags</code> 不为空的实体</strong></p>
 <p>检索<code translate="no">tags</code> 字段不为空的实体：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">在 JSON 和 ARRAY 字段中使用基本操作符的提示<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

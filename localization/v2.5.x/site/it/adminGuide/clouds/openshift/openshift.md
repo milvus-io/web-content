@@ -4,6 +4,7 @@ title: Distribuzione di un cluster Milvus su OpenShift
 related_key: cluster
 summary: Imparate a distribuire un cluster Milvus su OpenShift.
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">Distribuzione di un cluster Milvus su OpenShift<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +178,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>Se volete imparare a distribuire Milvus su altri cloud:</p>
 <ul>
-<li><a href="/docs/it/eks.md">Implementare il cluster Milvus su AWS con Kubernetes</a></li>
-<li><a href="/docs/it/azure.md">Implementazione del cluster Milvus su Azure con Kubernetes</a></li>
-<li><a href="/docs/it/gcp.md">Implementare il cluster Milvus su GCP con Kubernetes</a></li>
+<li><a href="/docs/it/v2.5.x/eks.md">Implementare il cluster Milvus su AWS con Kubernetes</a></li>
+<li><a href="/docs/it/v2.5.x/azure.md">Implementazione del cluster Milvus su Azure con Kubernetes</a></li>
+<li><a href="/docs/it/v2.5.x/gcp.md">Implementare il cluster Milvus su GCP con Kubernetes</a></li>
 </ul>

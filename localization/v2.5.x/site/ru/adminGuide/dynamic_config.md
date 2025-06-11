@@ -4,6 +4,7 @@ related_key: configure
 summary: Узнайте о динамической конфигурации Milvus.
 title: Настройка Milvus на лету
 ---
+
 <h1 id="Configure-Milvus-on-the-Fly" class="common-anchor-header">Настройка Milvus на лету<button data-href="#Configure-Milvus-on-the-Fly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,14 +38,14 @@ title: Настройка Milvus на лету
       </svg>
     </button></h2><p>Вам необходимо убедиться, что：</p>
 <ul>
-<li>У вас установлен Birdwatcher. Подробнее см. в разделе <a href="/docs/ru/birdwatcher_install_guides.md">Установка Birdwatcher</a>,</li>
+<li>У вас установлен Birdwatcher. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/birdwatcher_install_guides.md">Установка Birdwatcher</a>,</li>
 <li>У вас установлен etcdctl. Подробнее см. в разделе <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Взаимодействие с etcd</a>, или</li>
 <li>У вас установлены другие клиенты etcd, например, клиент Python.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>В примерах этого руководства значение <code translate="no">proxy.minPasswordLength</code> заменено на <code translate="no">8</code>. Вы можете заменить эти ключи на подходящие, перечисленные в разделе <a href="/docs/ru/dynamic_config.md#Applicable-configuration-items">Применяемые элементы конфигурации</a>.</li>
-<li>В примерах этого руководства предполагается, что корневой путь вашего Milvus - <code translate="no">by-dev</code>. Все конфигурации перечислены по пути <code translate="no">by-dev/config</code>. Корневой путь Milvus зависит от способа установки. Для экземпляров, установленных с помощью диаграмм Helm, корневой путь по умолчанию равен <code translate="no">by-dev</code>. Если вы не знаете корневой путь, обратитесь к разделу <a href="/docs/ru/birdwatcher_usage_guides.md#Connect-to-etcd">Подключение к etcd</a>.</li>
+<li>В примерах этого руководства значение <code translate="no">proxy.minPasswordLength</code> заменено на <code translate="no">8</code>. Вы можете заменить эти ключи на подходящие, перечисленные в разделе <a href="/docs/ru/v2.5.x/dynamic_config.md#Applicable-configuration-items">Применяемые элементы конфигурации</a>.</li>
+<li>В примерах этого руководства предполагается, что корневой путь вашего Milvus - <code translate="no">by-dev</code>. Все конфигурации перечислены по пути <code translate="no">by-dev/config</code>. Корневой путь Milvus зависит от способа установки. Для экземпляров, установленных с помощью диаграмм Helm, корневой путь по умолчанию равен <code translate="no">by-dev</code>. Если вы не знаете корневой путь, обратитесь к разделу <a href="/docs/ru/v2.5.x/birdwatcher_usage_guides.md#Connect-to-etcd">Подключение к etcd</a>.</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">Изменение конфигураций<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +204,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>Узнайте больше о <a href="/docs/ru/system_configuration.md">системных конфигурациях</a>.</li>
-<li>Узнайте, как настроить Milvus, установленный с помощью <a href="/docs/ru/configure_operator.md">Milvus Operator</a>, <a href="/docs/ru/configure-helm.md">диаграмм Helm</a> и <a href="/docs/ru/configure-docker.md">Docker</a>.</li>
+<li>Узнайте больше о <a href="/docs/ru/v2.5.x/system_configuration.md">системных конфигурациях</a>.</li>
+<li>Узнайте, как настроить Milvus, установленный с помощью <a href="/docs/ru/v2.5.x/configure_operator.md">Milvus Operator</a>, <a href="/docs/ru/v2.5.x/configure-helm.md">диаграмм Helm</a> и <a href="/docs/ru/v2.5.x/configure-docker.md">Docker</a>.</li>
 </ul>

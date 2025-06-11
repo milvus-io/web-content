@@ -3,6 +3,7 @@ id: replica.md
 summary: Узнайте о репликации in-memory в Milvus.
 title: Репликация в памяти
 ---
+
 <h1 id="In-Memory-Replica" class="common-anchor-header">Репликация в памяти<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: Репликация в памяти
         ></path>
       </svg>
     </button></h1><p>В этой теме описывается механизм реплик в памяти (репликаций) в Milvus, который позволяет реплицировать несколько сегментов в рабочей памяти для повышения производительности и доступности.</p>
-<p>Информацию о том, как настроить реплики in-memory, см. в разделе <a href="/docs/ru/configure_querynode.md#queryNodereplicas">Конфигурации, связанные с узлами запросов</a>.</p>
+<p>Информацию о том, как настроить реплики in-memory, см. в разделе <a href="/docs/ru/v2.5.x/configure_querynode.md#queryNodereplicas">Конфигурации, связанные с узлами запросов</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

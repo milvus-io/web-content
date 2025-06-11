@@ -6,6 +6,7 @@ summary: >-
   سيساعدك هذا الدليل على فهم ضغط المجموعات وكيف يمكن لهذه الميزة تحسين أداء
   البحث.
 ---
+
 <h1 id="Clustering-Compaction" class="common-anchor-header">ضغط التجميع<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +49,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>ضغط التجميع</span> </span></p>
-<p>باستخدام <strong>PartitionStats</strong> كمرجع، يمكن ل Milvus تشذيب البيانات غير ذات الصلة عند تلقي طلب بحث/استعلام يحمل قيمة مفتاح تجميع وتقييد نطاق البحث داخل المقاطع التي تم تعيينها إلى القيمة، وبالتالي تحسين أداء البحث. للحصول على تفاصيل حول تحسين الأداء، راجع <a href="/docs/ar/clustering-compaction.md#Benchmark-Test">الاختبارات المعيارية</a>.</p>
+<p>باستخدام <strong>PartitionStats</strong> كمرجع، يمكن ل Milvus تشذيب البيانات غير ذات الصلة عند تلقي طلب بحث/استعلام يحمل قيمة مفتاح تجميع وتقييد نطاق البحث داخل المقاطع التي تم تعيينها إلى القيمة، وبالتالي تحسين أداء البحث. للحصول على تفاصيل حول تحسين الأداء، راجع <a href="/docs/ar/v2.5.x/clustering-compaction.md#Benchmark-Test">الاختبارات المعيارية</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">استخدام ضغط التجميع<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,15 +79,16 @@ summary: >-
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
 
 <span class="hljs-attr">datanode:</span>
-  <span class="hljs-attr">clusteringCompaction:</span>
-    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
-    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+<span class="hljs-attr">clusteringCompaction:</span>
+<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
+<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
+<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p>تكوين العنصر</p></th>
@@ -161,7 +163,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>لتطبيق التغييرات المذكورة أعلاه على مجموعة Milvus الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
+<p>لتطبيق التغييرات المذكورة أعلاه على مجموعة Milvus الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/v2.5.x/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">تكوين التجميع</h3><p>لضغط التجميع في مجموعة معينة، يجب عليك تحديد حقل قياسي من المجموعة كمفتاح التجميع.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -171,8 +173,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -182,10 +184,11 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-    schema=schema
+collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -286,9 +289,10 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-    job_id=job_id,
+job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;

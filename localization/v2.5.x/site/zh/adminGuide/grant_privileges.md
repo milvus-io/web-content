@@ -5,6 +5,7 @@ summary: >-
   Once a role is created, you can grant privileges to the role. This guide
   introduces how to grant privileges or privilege groups to a role.
 ---
+
 <h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">为角色授予权限或权限组<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +110,7 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li><p><strong>权限</strong>：需要授予角色的特定权限或<a href="/docs/zh/privilege_group.md">权限组</a>。目前，Milvus 提供了 56 种可授予的特权。下表列出了 Milvus 中的特权。</p>
+<li><p><strong>权限</strong>：需要授予角色的特定权限或<a href="/docs/zh/v2.5.x/privilege_group.md">权限组</a>。目前，Milvus 提供了 56 种可授予的特权。下表列出了 Milvus 中的特权。</p>
 <p><div class="alert note"></p>
 <p>下表中的类型列是用户为方便快速查找特权而设置的，仅用于分类目的。授予权限时，不需要了解类型。只需输入相应的权限即可。</p>
 <p></div></p>
@@ -124,27 +125,27 @@ summary: >-
 <td rowspan="5"><p>数据库权限</p></td>
 <td><p>列出数据库</p></td>
 <td><p>查看当前实例中的所有数据库</p></td>
-<td><p><a href="/docs/zh/manage_databases.md">列出数据库</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage_databases.md">列出数据库</a></p></td>
 </tr>
 <tr>
 <td><p>描述数据库</p></td>
 <td><p>查看数据库的详细信息</p></td>
-<td><p><a href="/docs/zh/manage_databases.md">描述数据库</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage_databases.md">描述数据库</a></p></td>
 </tr>
 <tr>
 <td><p>创建数据库</p></td>
 <td><p>创建数据库</p></td>
-<td><p><a href="/docs/zh/manage_databases.md">创建数据库</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage_databases.md">创建数据库</a></p></td>
 </tr>
 <tr>
 <td><p>删除数据库</p></td>
 <td><p>删除数据库</p></td>
-<td><p><a href="/docs/zh/manage_databases.md">删除数据库</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage_databases.md">删除数据库</a></p></td>
 </tr>
 <tr>
 <td><p>更改数据库</p></td>
 <td><p>修改数据库属性</p></td>
-<td><p><a href="/docs/zh/manage_databases.md">更改数据库</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage_databases.md">更改数据库</a></p></td>
 </tr>
 <tr>
 <td rowspan="18"><p>Collections 权限</p></td>
@@ -165,7 +166,7 @@ summary: >-
 <tr>
 <td><p>显示收藏集</p></td>
 <td><p>查看具有收藏权限的所有 Collections</p></td>
-<td><p><a href="/docs/zh/view-collections.md">显示收藏集</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/view-collections.md">显示收藏集</a></p></td>
 </tr>
 <tr>
 <td><p>列出别名</p></td>
@@ -190,22 +191,22 @@ summary: >-
 <tr>
 <td><p>创建集合</p></td>
 <td><p>创建 Collections</p></td>
-<td><p><a href="/docs/zh/create-collection.md">创建收藏集</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/create-collection.md">创建收藏集</a></p></td>
 </tr>
 <tr>
 <td><p>删除收藏集</p></td>
 <td><p>删除 Collections</p></td>
-<td><p><a href="/docs/zh/drop-collection.md">删除收藏集</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/drop-collection.md">删除收藏集</a></p></td>
 </tr>
 <tr>
 <td><p>加载</p></td>
 <td><p>加载 Collections</p></td>
-<td><p><a href="/docs/zh/load-and-release.md">加载集合/获取加载进度/</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">获取</a><a href="/docs/zh/load-and-release.md">加载状态</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/load-and-release.md">加载集合/获取加载进度/</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">获取</a><a href="/docs/zh/v2.5.x/load-and-release.md">加载状态</a></p></td>
 </tr>
 <tr>
 <td><p>释放</p></td>
 <td><p>释放一个 Collections</p></td>
-<td><p><a href="/docs/zh/load-and-release.md">释放集合</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/load-and-release.md">释放集合</a></p></td>
 </tr>
 <tr>
 <td><p>刷新</p></td>
@@ -220,17 +221,17 @@ summary: >-
 <tr>
 <td><p>重命名集合</p></td>
 <td><p>重命名 Collections</p></td>
-<td><p><a href="/docs/zh/modify-collection.md">重命名集合</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/modify-collection.md">重命名集合</a></p></td>
 </tr>
 <tr>
 <td><p>创建别名</p></td>
 <td><p>为 Collections 创建别名</p></td>
-<td><p><a href="/docs/zh/manage-aliases.md">创建别名</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage-aliases.md">创建别名</a></p></td>
 </tr>
 <tr>
 <td><p>删除别名</p></td>
 <td><p>删除 Collections 的别名</p></td>
-<td><p><a href="/docs/zh/manage-aliases.md">删除别名</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage-aliases.md">删除别名</a></p></td>
 </tr>
 <tr>
 <td><p>全部清除</p></td>
@@ -241,44 +242,44 @@ summary: >-
 <td rowspan="4"><p>分区权限</p></td>
 <td><p>有分区</p></td>
 <td><p>检查是否存在分区</p></td>
-<td><p><a href="/docs/zh/manage-partitions.md">HasPartition</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage-partitions.md">HasPartition</a></p></td>
 </tr>
 <tr>
 <td><p>显示分区</p></td>
 <td><p>查看 Collections 中的所有分区</p></td>
-<td><p><a href="/docs/zh/manage-partitions.md">显示分区</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage-partitions.md">显示分区</a></p></td>
 </tr>
 <tr>
 <td><p>创建分区</p></td>
 <td><p>创建分区</p></td>
-<td><p><a href="/docs/zh/manage-partitions.md">创建分区</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage-partitions.md">创建分区</a></p></td>
 </tr>
 <tr>
 <td><p>删除分区</p></td>
 <td><p>删除分区</p></td>
-<td><p><a href="/docs/zh/manage-partitions.md">删除分区</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/manage-partitions.md">删除分区</a></p></td>
 </tr>
 <tr>
 <td rowspan="3"><p>索引权限</p></td>
 <td><p>索引详情</p></td>
 <td><p>查看索引的详细信息</p></td>
-<td><p><a href="/docs/zh/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
 </tr>
 <tr>
 <td><p>创建索引</p></td>
 <td><p>创建索引</p></td>
-<td><p><a href="/docs/zh/index-vector-fields.md">创建索引</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/index-vector-fields.md">创建索引</a></p></td>
 </tr>
 <tr>
 <td><p>删除索引</p></td>
 <td><p>删除索引</p></td>
-<td><p><a href="/docs/zh/index-vector-fields.md">删除索引</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/index-vector-fields.md">删除索引</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>资源管理权限</p></td>
 <td><p>负载平衡</p></td>
 <td><p>实现负载平衡</p></td>
-<td><p><a href="/docs/zh/resource_group.md">负载平衡</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/resource_group.md">负载平衡</a></p></td>
 </tr>
 <tr>
 <td><p>创建资源组</p></td>
@@ -288,32 +289,32 @@ summary: >-
 <tr>
 <td><p>删除资源组</p></td>
 <td><p>删除资源组</p></td>
-<td><p><a href="/docs/zh/resource_group.md">删除资源组</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/resource_group.md">删除资源组</a></p></td>
 </tr>
 <tr>
 <td><p>更新资源组</p></td>
 <td><p>更新资源组</p></td>
-<td><p><a href="/docs/zh/resource_group.md">更新资源组</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/resource_group.md">更新资源组</a></p></td>
 </tr>
 <tr>
 <td><p>描述资源组</p></td>
 <td><p>查看资源组的详细信息</p></td>
-<td><p><a href="/docs/zh/resource_group.md">描述资源组</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/resource_group.md">描述资源组</a></p></td>
 </tr>
 <tr>
 <td><p>列出资源组</p></td>
 <td><p>查看当前实例的所有资源组</p></td>
-<td><p><a href="/docs/zh/resource_group.md">列出资源组</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/resource_group.md">列出资源组</a></p></td>
 </tr>
 <tr>
 <td><p>转移节点</p></td>
 <td><p>在资源组之间转移节点</p></td>
-<td><p><a href="/docs/zh/resource_group.md">传输节点</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/resource_group.md">传输节点</a></p></td>
 </tr>
 <tr>
 <td><p>传输副本</p></td>
 <td><p>在资源组之间传输副本</p></td>
-<td><p><a href="/docs/zh/resource_group.md">传输复制</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/resource_group.md">传输复制</a></p></td>
 </tr>
 <tr>
 <td><p>备份 RBAC</p></td>
@@ -329,83 +330,83 @@ summary: >-
 <td rowspan="6"><p>实体权限</p></td>
 <td><p>查询</p></td>
 <td><p>进行查询</p></td>
-<td><p><a href="/docs/zh/get-and-scalar-query.md">查询</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/get-and-scalar-query.md">查询</a></p></td>
 </tr>
 <tr>
 <td><p>搜索</p></td>
 <td><p>进行搜索</p></td>
-<td><p><a href="/docs/zh/single-vector-search.md">搜索</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/single-vector-search.md">搜索</a></p></td>
 </tr>
 <tr>
 <td><p>插入</p></td>
 <td><p>插入实体</p></td>
-<td><p><a href="/docs/zh/insert-update-delete.md">插入</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/insert-update-delete.md">插入</a></p></td>
 </tr>
 <tr>
 <td><p>删除</p></td>
 <td><p>删除实体</p></td>
-<td><p><a href="/docs/zh/delete-entities.md">删除</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/delete-entities.md">删除</a></p></td>
 </tr>
 <tr>
 <td><p>插入</p></td>
 <td><p>插入实体</p></td>
-<td><p><a href="/docs/zh/upsert-entities.md">插入</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/upsert-entities.md">插入</a></p></td>
 </tr>
 <tr>
 <td><p>导入</p></td>
 <td><p>批量插入或导入实体</p></td>
-<td><p><a href="/docs/zh/import-data.md">批量插入/导入</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/import-data.md">批量插入/导入</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>RBAC 权限</p></td>
 <td><p>创建所有权</p></td>
 <td><p>创建用户或角色</p></td>
-<td><p><a href="/docs/zh/users_and_roles.md">创建用户/创建角色</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/users_and_roles.md">创建用户/创建角色</a></p></td>
 </tr>
 <tr>
 <td><p>更新用户</p></td>
 <td><p>更新用户密码</p></td>
-<td><p><a href="/docs/zh/users_and_roles.md">更新凭证</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/users_and_roles.md">更新凭证</a></p></td>
 </tr>
 <tr>
 <td><p>删除所有权</p></td>
 <td><p>删除用户密码或角色</p></td>
-<td><p><a href="/docs/zh/drop_users_roles.md">删除凭证/删除角色</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/drop_users_roles.md">删除凭证/删除角色</a></p></td>
 </tr>
 <tr>
 <td><p>选择所有权</p></td>
 <td><p>查看被授予特定角色的所有用户</p></td>
-<td><p><a href="/docs/zh/grant_roles.md">选择角色/选择授权</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/grant_roles.md">选择角色/选择授权</a></p></td>
 </tr>
 <tr>
 <td><p>管理所有权</p></td>
 <td><p>管理用户或角色，或向用户授予角色</p></td>
-<td><p><a href="/docs/zh/privilege_group.md">操作用户角色/操作权限/操作权限 V2</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/privilege_group.md">操作用户角色/操作权限/操作权限 V2</a></p></td>
 </tr>
 <tr>
 <td><p>选择用户</p></td>
 <td><p>查看授予用户的所有角色</p></td>
-<td><p><a href="/docs/zh/grant_roles.md">选择用户</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/grant_roles.md">选择用户</a></p></td>
 </tr>
 <tr>
 <td><p>创建权限组</p></td>
 <td><p>创建权限组</p></td>
-<td><p><a href="/docs/zh/privilege_group.md">创建权限组</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/privilege_group.md">创建权限组</a></p></td>
 </tr>
 <tr>
 <td><p>删除权限组</p></td>
 <td><p>删除权限组</p></td>
-<td><p><a href="/docs/zh/privilege_group.md">删除特权组</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/privilege_group.md">删除特权组</a></p></td>
 </tr>
 <tr>
 <td><p>列出特权组</p></td>
 <td><p>查看当前实例中的所有特权组</p></td>
-<td><p><a href="/docs/zh/privilege_group.md">列出特权组</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/privilege_group.md">列出特权组</a></p></td>
 </tr>
 <tr>
 <td><p>操作特权组</p></td>
 <td><p>向特权组添加特权或从特权组移除特权</p></td>
-<td><p><a href="/docs/zh/privilege_group.md">操作特权组</a></p></td>
+<td><p><a href="/docs/zh/v2.5.x/privilege_group.md">操作特权组</a></p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -415,31 +416,32 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;Search&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
-)
-    
-client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;Search&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+)
+
+client.grant_privilege_v2(
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2
 
 client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
@@ -584,6 +586,7 @@ curl --request POST \
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.response.DescribeRoleResp;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq
 
@@ -659,12 +662,13 @@ client.revoke_privilege_v2(
 )
 
 client.revoke_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2
 
 client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()

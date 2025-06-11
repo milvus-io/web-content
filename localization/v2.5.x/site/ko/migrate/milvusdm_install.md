@@ -3,6 +3,7 @@ id: milvusdm_install.md
 summary: 데이터를 마이그레이션하기 위해 Milvus-Migration을 설치하는 방법을 알아보세요.
 title: 마이그레이션 도구 설치
 ---
+
 <h1 id="Install-Migration-Tool" class="common-anchor-header">마이그레이션 도구 설치<button data-href="#Install-Migration-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +86,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Milvus-migration 도구가 설치되면 다양한 소스에서 데이터를 마이그레이션할 수 있습니다:</p>
 <ul>
-<li><a href="/docs/ko/es2m.md">Elasticsearch에서</a></li>
-<li><a href="/docs/ko/f2m.md">Faiss에서</a></li>
-<li><a href="/docs/ko/m2m.md">Milvus 1.x에서</a></li>
+<li><a href="/docs/ko/v2.5.x/es2m.md">Elasticsearch에서</a></li>
+<li><a href="/docs/ko/v2.5.x/f2m.md">Faiss에서</a></li>
+<li><a href="/docs/ko/v2.5.x/m2m.md">Milvus 1.x에서</a></li>
 </ul>

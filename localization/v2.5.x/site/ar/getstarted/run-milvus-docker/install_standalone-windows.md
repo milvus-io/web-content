@@ -5,6 +5,7 @@ related_key: Docker
 summary: تعرف على كيفية تثبيت Milvus مستقل مع Docker Desktop لنظام ويندوز.
 title: تشغيل Milvus في Docker (لينكس)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">تشغيل Milvus في Docker (ويندوز)<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,6 +65,7 @@ title: تشغيل Milvus في Docker (لينكس)
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
 </code></pre></li>
+
 <li><p>قم بتشغيل البرنامج النصي الذي تم تنزيله لبدء تشغيل ميلفوس كحاوية Docker.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;standalone.bat start​
 Wait for Milvus starting...​
@@ -71,6 +73,7 @@ Start successfully.​
 To change the default Milvus configuration, edit user.yaml and restart the service.​
 
 </code></pre>
+
 <p>بعد تشغيل البرنامج النصي للتثبيت.</p>
 <ul>
 <li><p>تم بدء تشغيل حاوية docker باسم <strong>milvus-standalone</strong> على المنفذ <strong>19530</strong>.</p></li>
@@ -88,6 +91,7 @@ Delete Milvus container successfully. # Container has been removed.​
 Delete successfully. # Data has been removed.​
 
 </code></pre></li>
+
 </ol>
 <h3 id="From-WSL-2​" class="common-anchor-header">من WSL 2</h3><p>إذا كنت تفضل بدء تشغيل ميلفوس باستخدام أوامر لينكس والبرامج النصية على ويندوز، تأكد من أنك قمت بالفعل بتثبيت الأمر WSL 2. للحصول على تفاصيل حول كيفية تثبيت الأمر WSL 2، يمكنك الرجوع إلى <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">مقالة مايكروسوفت</a> هذه.</p>
 <ol>
@@ -97,6 +101,7 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>قم بتنزيل البرنامج النصي للتثبيت</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Download the installation script​</span>
 $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh​
@@ -105,6 +110,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>ابدأ تشغيل ميلفوس كحاوية إرساء.</p>
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
@@ -112,6 +118,7 @@ Start successfully.​
 To change the default Milvus configuration, add your settings to the user.yaml file and <span class="hljs-keyword">then</span> restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>يمكنك استخدام الأوامر التالية لإدارة حاوية ميلفوس والبيانات المخزنة.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Stop Milvus​</span>
 $ bash standalone_embed.sh stop​
@@ -123,6 +130,7 @@ Delete Milvus container successfully.​
 Delete successfully.​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="Run-Milvus-with-Docker-Compose​" class="common-anchor-header">قم بتشغيل ميلفوس مع Docker Compose<button data-href="#Run-Milvus-with-Docker-Compose​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,6 +161,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
+
 <p>اعتمادًا على اتصال الشبكة لديك، قد يستغرق تنزيل الصور لتثبيت Milvus بعض الوقت. بمجرد أن تصبح الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd</strong> جاهزة، يمكنك مشاهدة ما يلي</p>
 <ul>
 <li><p>لا تعرض حاوية <strong>milvus-etcd</strong> أي منافذ للمضيف وتقوم بتعيين بياناتها إلى <strong>وحدات التخزين/etcd</strong> في المجلد الحالي.</p></li>
@@ -169,10 +178,12 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>قم بتنزيل ملف تهيئة ميلفوس.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>ابدأ تشغيل ميلفوس.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
@@ -181,6 +192,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="FAQs​" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQs​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -214,6 +226,7 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
+
 <li><p>تحقق مما إذا كان قد تم تثبيت WSL بشكل صحيح.</p>
 <p>يمكنك تشغيل الأمر التالي لتثبيت الأمر WSL 2 أو تحديثه.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
@@ -221,6 +234,7 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
+
 <li><p>تحقق مما إذا كان قد تم بدء تشغيل Docker Daemon.</p>
 <p>تحتاج إلى الانتقال إلى دليل تثبيت Docker Desktop وتشغيل <code translate="no">.\DockerCli.exe -SwitchDaemon</code> لبدء تشغيل Docker Daemon.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
@@ -228,6 +242,7 @@ C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
+
 <li><p>تحقق مما إذا كنت قد بدأت تشغيل Docker Desktop في وضع <strong>المسؤول</strong>.</p>
 <p>تأكد من بدء تشغيل Docker Desktop في وضع المسؤول. للقيام بذلك، انقر بزر الماوس الأيمن على <strong>Docker Desktop</strong> واختر <strong>تشغيل كمسؤول</strong>.</p>
 <p>
@@ -275,27 +290,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>التحقق من <a href="/docs/ar/quickstart.md">Quickstart</a> لمعرفة ما يمكن أن يفعله ميلفوس.</p></li>
+<li><p>التحقق من <a href="/docs/ar/v2.5.x/quickstart.md">Quickstart</a> لمعرفة ما يمكن أن يفعله ميلفوس.</p></li>
 <li><p>تعلم العمليات الأساسية لملفوس:</p>
 <ul>
-<li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
-<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
-<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.5.x/manage_databases.md">إدارة قواعد البيانات</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-partitions.md">إدارة الأقسام</a></li>
+<li><a href="/docs/ar/v2.5.x/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
+<li><a href="/docs/ar/v2.5.x/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
-<li><p><a href="/docs/ar/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام مخطط Helm</a>.</p></li>
-<li><p><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة ميلفوس الخاصة بك</a></p></li>
+<li><p><a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام مخطط Helm</a>.</p></li>
+<li><p><a href="/docs/ar/v2.5.x/scaleout.md">توسيع نطاق مجموعة ميلفوس الخاصة بك</a></p></li>
 <li><p>نشر مجموعة ميلفوس الخاصة بك على السحابة:</p>
 <ul>
-<li><a href="/docs/ar/eks.md">أمازون EKS</a></li>
-<li><a href="/docs/ar/gcp.md">جوجل كلاود</a></li>
-<li><a href="/docs/ar/azure.md">مايكروسوفت أزور</a></li>
+<li><a href="/docs/ar/v2.5.x/eks.md">أمازون EKS</a></li>
+<li><a href="/docs/ar/v2.5.x/gcp.md">جوجل كلاود</a></li>
+<li><a href="/docs/ar/v2.5.x/azure.md">مايكروسوفت أزور</a></li>
 </ul></li>
-<li><p>استكشف <a href="/docs/ar/milvus-webui.md">واجهة Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
-<li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
-<li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.5.x/milvus-webui.md">واجهة Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
+<li><p>استكشف Milvus <a href="/docs/ar/v2.5.x/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.5.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/v2.5.x/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

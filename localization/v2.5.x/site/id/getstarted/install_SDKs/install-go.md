@@ -5,6 +5,7 @@ related_key: SDK
 summary: Pelajari cara menginstal GO SDK dari Milvus.
 title: Menginstal Milvus Go SDK
 ---
+
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">Menginstal Milvus Go SDK<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +75,10 @@ title: Menginstal Milvus Go SDK
     </button></h2><p>Setelah menginstal Milvus GO SDK, Anda dapat:</p>
 <ul>
 <li>Mempelajari operasi dasar Milvus:<ul>
-<li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
-<li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
-<li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
+<li><a href="/docs/id/v2.5.x/manage-collections.md">Mengelola Koleksi</a></li>
+<li><a href="/docs/id/v2.5.x/manage-partitions.md">Mengelola Partisi</a></li>
+<li><a href="/docs/id/v2.5.x/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
+<li><a href="/docs/id/v2.5.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
+<li><a href="/docs/id/v2.5.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
 </ul>

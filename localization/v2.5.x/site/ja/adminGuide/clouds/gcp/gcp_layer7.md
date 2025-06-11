@@ -4,6 +4,7 @@ title: Milvus on GCP用のレイヤー7ロードバランサーのセットア�
 related_key: cluster
 summary: GCPのLayer-7ロードバランサーの背後にmilvusクラスタをデプロイする方法を紹介します。
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">Milvus on GCP用のレイヤー7ロードバランサーのセットアップ<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -26,9 +27,9 @@ summary: GCPのLayer-7ロードバランサーの背後にmilvusクラスタを�
 <p>プロジェクトを作成するには、<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">プロジェクトの作成と</a>管理を参照してください。このガイドで使用するプロジェクトの名前は<strong>milvus-testing-nonprod</strong> です。</p></li>
 <li><p><a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>、<a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>、および<a href="https://helm.sh/docs/intro/install/">Helm を</a>ローカルにインストールしたか、代わりにブラウザベースの<a href="https://cloud.google.com/shell">Cloud Shell</a>を使用することにしました。</p></li>
 <li><p>GCP アカウント認証情報を使用して<a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">gcloud CLI を初期化</a>しました。</p></li>
-<li><p><a href="/docs/ja/gcp.md">GCP上のLayer-4ロードバランサーの後ろにMilvusクラスタをデプロイ</a>しました。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/gcp.md">GCP上のLayer-4ロードバランサーの後ろにMilvusクラスタをデプロイ</a>しました。</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus設定の調整</h3><p>このガイドでは、<a href="/docs/ja/gcp.md">GCP上のLayer-4ロードバランサの背後にMilvusクラスタをデプロイ</a>済みであることを前提としています。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus設定の調整</h3><p>このガイドでは、<a href="/docs/ja/v2.5.x/gcp.md">GCP上のLayer-4ロードバランサの背後にMilvusクラスタをデプロイ</a>済みであることを前提としています。</p>
 <p>このMilvusクラスタにLayer-7ロードバランサを設定する前に、次のコマンドを実行してLayer-4ロードバランサを削除します。</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -82,11 +83,12 @@ openssl genrsa -<span class="hljs-keyword">out</span> tls.key <span class="hljs-
 
 <span class="hljs-meta"># Creates a certificate and signs it with the preceding key.</span>
 openssl req -<span class="hljs-keyword">new</span> -key tls.key -<span class="hljs-keyword">out</span> tls.csr \
-    -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
+ -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
 
 openssl x509 -req -days <span class="hljs-number">99999</span> -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
-    -<span class="hljs-keyword">out</span> tls.crt
+ -<span class="hljs-keyword">out</span> tls.crt
 <button class="copy-code-btn"></button></code></pre>
+
 <p>その後、後で使用するために、これらのファイルを使ってGKEクラスタにシークレットを作成します。</p>
 <pre><code translate="no" class="language-bash">kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 <button class="copy-code-btn"></button></code></pre>
@@ -205,6 +207,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <span class="hljs-comment"># For Google-managed certificates, there is not need to do so.</span>
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;34.111.144.65&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;my-release.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li><strong>host</strong>と<strong>port</strong>の IP アドレスとポート番号は、<a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">Create an Ingress to generate a Layer-7 Load Balancer</a> の最後に挙げたものと一致させる。</li>

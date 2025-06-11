@@ -5,6 +5,7 @@ summary: >-
   Milvus 1.x (включая 0.9.x и выше) в Milvus 2.x.
 title: С Milvus 1.x
 ---
+
 <h1 id="From-Milvus-1x" class="common-anchor-header">С Milvus 1.x<button data-href="#From-Milvus-1x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ title: С Milvus 1.x
 <li>Целевой Milvus: 2.x</li>
 </ul></li>
 <li><strong>Необходимые инструменты</strong>:<ul>
-<li>Инструмент<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. Подробности установки см. в разделе <a href="/docs/ru/milvusdm_install.md">Установка инструмента миграции</a>.</li>
+<li>Инструмент<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. Подробности установки см. в разделе <a href="/docs/ru/v2.5.x/milvusdm_install.md">Установка инструмента миграции</a>.</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">Экспорт метаданных исходной установки Milvus<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

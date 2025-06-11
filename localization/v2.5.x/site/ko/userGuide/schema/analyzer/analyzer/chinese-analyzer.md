@@ -3,6 +3,7 @@ id: chinese-analyzer.md
 title: 중국어
 summary: 중국어 분석기는 중국어 텍스트를 처리하도록 특별히 설계되어 효과적인 세분화 및 토큰화를 제공합니다.
 ---
+
 <h1 id="Chinese" class="common-anchor-header">중국어<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,8 +22,8 @@ summary: 중국어 분석기는 중국어 텍스트를 처리하도록 특별히
     </button></h1><p><code translate="no">chinese</code> 분석기는 중국어 텍스트를 처리하도록 특별히 설계되어 효과적인 세분화 및 토큰화를 제공합니다.</p>
 <h3 id="Definition" class="common-anchor-header">정의</h3><p><code translate="no">chinese</code> 분석기는 다음으로 구성됩니다:</p>
 <ul>
-<li><p><strong>토큰화 도구</strong>: <code translate="no">jieba</code> 토큰화기를 사용하여 어휘와 문맥에 따라 중국어 텍스트를 토큰으로 분할합니다. 자세한 내용은 <a href="/docs/ko/jieba-tokenizer.md">Jieba를</a> 참조하세요.</p></li>
-<li><p><strong>필터</strong>: <code translate="no">cnalphanumonly</code> 필터를 사용하여 중국어 이외의 문자가 포함된 토큰을 제거합니다. 자세한 내용은 <a href="/docs/ko/cnalphanumonly-filter.md">한자만을</a> 참조하세요.</p></li>
+<li><p><strong>토큰화 도구</strong>: <code translate="no">jieba</code> 토큰화기를 사용하여 어휘와 문맥에 따라 중국어 텍스트를 토큰으로 분할합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/jieba-tokenizer.md">Jieba를</a> 참조하세요.</p></li>
+<li><p><strong>필터</strong>: <code translate="no">cnalphanumonly</code> 필터를 사용하여 중국어 이외의 문자가 포함된 토큰을 제거합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/cnalphanumonly-filter.md">한자만을</a> 참조하세요.</p></li>
 </ul>
 <p><code translate="no">chinese</code> 분석기의 기능은 다음 사용자 지정 분석기 구성과 동일합니다:</p>
 <div class="multipleCode">
@@ -52,6 +53,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Configuration" class="common-anchor-header">구성</h3><p><code translate="no">chinese</code> 분석기를 필드에 적용하려면 <code translate="no">analyzer_params</code> 에서 <code translate="no">type</code> 을 <code translate="no">chinese</code> 로 설정하면 됩니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -122,6 +124,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是一个高性能、可扩
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

@@ -7,6 +7,7 @@ summary: >-
   دمج التصفية القياسية لتنقيح نتائج الاستعلام، مما يسمح بالبحث عن التشابه داخل
   المتجهات التي تستوفي المعايير القياسية.
 ---
+
 <h1 id="Text-Match" class="common-anchor-header">مطابقة النص<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,7 +25,7 @@ summary: >-
       </svg>
     </button></h1><p>تتيح مطابقة النص في ميلفوس استرجاع المستندات بدقة بناءً على مصطلحات محددة. تُستخدم هذه الميزة في المقام الأول للبحث المصفى لتلبية شروط محددة ويمكنها دمج التصفية القياسية لتحسين نتائج الاستعلام، مما يسمح بالبحث عن التشابه داخل المتجهات التي تستوفي المعايير القياسية.</p>
 <div class="alert note">
-<p>تركز المطابقة النصية على العثور على التكرارات الدقيقة لمصطلحات الاستعلام، دون تسجيل مدى ملاءمة المستندات المتطابقة. إذا كنت ترغب في استرداد المستندات الأكثر صلة بناءً على المعنى الدلالي وأهمية مصطلحات الاستعلام، نوصيك باستخدام <a href="/docs/ar/full-text-search.md">البحث في النص الكامل</a>.</p>
+<p>تركز المطابقة النصية على العثور على التكرارات الدقيقة لمصطلحات الاستعلام، دون تسجيل مدى ملاءمة المستندات المتطابقة. إذا كنت ترغب في استرداد المستندات الأكثر صلة بناءً على المعنى الدلالي وأهمية مصطلحات الاستعلام، نوصيك باستخدام <a href="/docs/ar/v2.5.x/full-text-search.md">البحث في النص الكامل</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,8 +44,8 @@ summary: >-
       </svg>
     </button></h2><p>يدمج ميلفوس <a href="https://github.com/quickwit-oss/tantivy">برنامج Tantivy</a> لتشغيل فهرسه المقلوب الأساسي والبحث النصي القائم على المصطلحات. لكل إدخال نصي، يقوم ميلفوس بفهرسته باتباع الإجراء:</p>
 <ol>
-<li><p><a href="/docs/ar/analyzer-overview.md">المحلّل</a>: يقوم المحلل بمعالجة النص المدخل عن طريق ترميزه إلى كلمات فردية أو رموز، ثم تطبيق المرشحات حسب الحاجة. وهذا يسمح لميلفوس ببناء فهرس بناءً على هذه الرموز.</p></li>
-<li><p><a href="/docs/ar/index-explained.md">الفهرسة</a>: بعد تحليل النص، ينشئ Milvus فهرسًا مقلوبًا يقوم بتعيين كل رمز مميز إلى المستندات التي تحتوي عليه.</p></li>
+<li><p><a href="/docs/ar/v2.5.x/analyzer-overview.md">المحلّل</a>: يقوم المحلل بمعالجة النص المدخل عن طريق ترميزه إلى كلمات فردية أو رموز، ثم تطبيق المرشحات حسب الحاجة. وهذا يسمح لميلفوس ببناء فهرس بناءً على هذه الرموز.</p></li>
+<li><p><a href="/docs/ar/v2.5.x/index-explained.md">الفهرسة</a>: بعد تحليل النص، ينشئ Milvus فهرسًا مقلوبًا يقوم بتعيين كل رمز مميز إلى المستندات التي تحتوي عليه.</p></li>
 </ol>
 <p>عندما يقوم المستخدم بإجراء مطابقة نصية، يتم استخدام الفهرس المقلوب لاسترداد جميع المستندات التي تحتوي على المصطلحات بسرعة. وهذا أسرع بكثير من المسح الضوئي لكل مستند على حدة.</p>
 <p>
@@ -66,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعمل المطابقة النصية على نوع الحقل <code translate="no">VARCHAR</code> ، وهو في الأساس نوع بيانات السلسلة في ملفوس. لتمكين مطابقة النص، قم بتعيين كل من <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> على <code translate="no">True</code> ثم قم اختياريًا بتكوين <a href="/docs/ar/analyzer-overview.md">محلل</a> لتحليل النص عند تحديد مخطط المجموعة الخاص بك.</p>
+    </button></h2><p>تعمل المطابقة النصية على نوع الحقل <code translate="no">VARCHAR</code> ، وهو في الأساس نوع بيانات السلسلة في ملفوس. لتمكين مطابقة النص، قم بتعيين كل من <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> على <code translate="no">True</code> ثم قم اختياريًا بتكوين <a href="/docs/ar/v2.5.x/analyzer-overview.md">محلل</a> لتحليل النص عند تحديد مخطط المجموعة الخاص بك.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">قم بتعيين <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code></h3><p>لتمكين مطابقة النص لحقل معين <code translate="no">VARCHAR</code> ، قم بتعيين كل من المعلمات <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> إلى <code translate="no">True</code> عند تحديد مخطط الحقل. هذا يرشد Milvus إلى ترميز النص وإنشاء فهرس مقلوب للحقل المحدد، مما يسمح بمطابقة نصية سريعة وفعالة.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
@@ -74,24 +75,25 @@ summary: >-
 
 schema = MilvusClient.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;id&quot;</span>,
-    datatype=DataType.INT64,
-    is_primary=<span class="hljs-literal">True</span>,
-    auto_id=<span class="hljs-literal">True</span>
+field_name=<span class="hljs-string">&quot;id&quot;</span>,
+datatype=DataType.INT64,
+is_primary=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">True</span>
 )
 schema.add_field(
-    field_name=<span class="hljs-string">&#x27;text&#x27;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>, <span class="hljs-comment"># Whether to enable text analysis for this field</span>
-    enable_match=<span class="hljs-literal">True</span> <span class="hljs-comment"># Whether to enable text match</span>
+field_name=<span class="hljs-string">&#x27;text&#x27;</span>,
+datatype=DataType.VARCHAR,
+max_length=<span class="hljs-number">1000</span>,
+enable_analyzer=<span class="hljs-literal">True</span>, <span class="hljs-comment"># Whether to enable text analysis for this field</span>
+enable_match=<span class="hljs-literal">True</span> <span class="hljs-comment"># Whether to enable text match</span>
 )
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;embeddings&quot;</span>,
-    datatype=DataType.FLOAT_VECTOR,
-    dim=<span class="hljs-number">5</span>
+field_name=<span class="hljs-string">&quot;embeddings&quot;</span>,
+datatype=DataType.FLOAT_VECTOR,
+dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -187,7 +189,7 @@ schema.WithField(entity.NewField().
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">اختياري: تكوين محلل</h3><p>يعتمد أداء ودقة مطابقة الكلمات المفتاحية على المحلل المحدد. المحللات المختلفة مصممة خصيصًا لمختلف اللغات والتراكيب النصية، لذا فإن اختيار المحلل المناسب يمكن أن يؤثر بشكل كبير على نتائج البحث لحالة الاستخدام الخاصة بك.</p>
-<p>بشكل افتراضي، يستخدم Milvus محلل <code translate="no">standard</code> ، الذي يقوم بترميز النص استنادًا إلى المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا حاجة إلى معلمات إضافية لتطبيق هذا الإعداد الافتراضي. لمزيد من المعلومات، راجع <a href="/docs/ar/standard-analyzer.md">Standard</a>.</p>
+<p>بشكل افتراضي، يستخدم Milvus محلل <code translate="no">standard</code> ، الذي يقوم بترميز النص استنادًا إلى المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا حاجة إلى معلمات إضافية لتطبيق هذا الإعداد الافتراضي. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/standard-analyzer.md">Standard</a>.</p>
 <p>في الحالات التي تتطلب محللًا مختلفًا، يمكنك تكوين محلل مختلف باستخدام المعلمة <code translate="no">analyzer_params</code>. على سبيل المثال، لتطبيق محلل <code translate="no">english</code> لمعالجة النص الإنجليزي:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جو جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
@@ -274,7 +276,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يوفر ميلفوس أيضًا العديد من المحللين الآخرين المناسبين للغات والسيناريوهات المختلفة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحلل</a>.</p>
+<p>يوفر ميلفوس أيضًا العديد من المحللين الآخرين المناسبين للغات والسيناريوهات المختلفة. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/v2.5.x/analyzer-overview.md">المحلل</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">استخدام مطابقة النص<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -349,15 +351,16 @@ schema.WithField(entity.NewField().
 
 <span class="hljs-comment"># Assuming &#x27;embeddings&#x27; is the vector field and &#x27;text&#x27; is the VARCHAR field</span>
 result = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
-    anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[query_vector], <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
+anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[query_vector], <span class="hljs-comment"># Query vector</span>
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>;
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
@@ -428,11 +431,12 @@ curl --request POST \
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>
 
 result = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>;
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()

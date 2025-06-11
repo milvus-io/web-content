@@ -9,6 +9,7 @@ summary: >-
   Punkten und anderen Satzzeichen.
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="Remove-Punct" class="common-anchor-header">Satzzeichen entfernen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +58,7 @@ beta: Milvus 2.5.11+
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Der Filter <code translate="no">removepunct</code> arbeitet mit den vom Tokenizer generierten Begriffen, muss also in Kombination mit einem Tokenizer verwendet werden.</p>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten finden Sie im Abschnitt <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten finden Sie im Abschnitt <a href="/docs/de/v2.5.x/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,6 +99,7 @@ sample_text = <span class="hljs-string">&quot;Привет! Как дела?&quo
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

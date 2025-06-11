@@ -12,6 +12,7 @@ summary: >-
   automáticamente los datos de texto en incrustaciones dispersas sin necesidad
   de generar manualmente incrustaciones vectoriales.
 ---
+
 <h1 id="Full-Text-Search" class="common-anchor-header">Búsqueda de texto completo<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -30,7 +31,7 @@ summary: >-
     </button></h1><p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados en función de su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que puede pasar por alto términos precisos, garantizando que usted reciba los resultados más exactos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar la entrada de texto sin formato, convirtiendo automáticamente los datos de texto en incrustaciones dispersas sin necesidad de generar manualmente incrustaciones vectoriales.</p>
 <p>Esta función, que utiliza el algoritmo BM25 para la puntuación de la relevancia, es especialmente valiosa en escenarios de generación de recuperación aumentada (RAG), donde da prioridad a los documentos que coinciden estrechamente con términos de búsqueda específicos.</p>
 <div class="alert note">
-<p>Al integrar la búsqueda de texto completo con la búsqueda de vectores densos basada en la semántica, puede mejorar la precisión y la relevancia de los resultados de búsqueda. Para obtener más información, consulte <a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a>.</p>
+<p>Al integrar la búsqueda de texto completo con la búsqueda de vectores densos basada en la semántica, puede mejorar la precisión y la relevancia de los resultados de búsqueda. Para obtener más información, consulte <a href="/docs/es/v2.5.x/multi-vector-search.md">Búsqueda híbrida</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,7 +51,7 @@ summary: >-
     </button></h2><p>La búsqueda de texto completo simplifica el proceso de búsqueda basada en texto eliminando la necesidad de incrustación manual. Esta función funciona mediante el siguiente flujo de trabajo:</p>
 <ol>
 <li><p><strong>Entrada de texto</strong>: Se insertan documentos de texto sin procesar o se proporciona un texto de consulta sin necesidad de incrustación manual.</p></li>
-<li><p><strong>Análisis del texto</strong>: Milvus utiliza un <a href="/docs/es/analyzer-overview.md">analizador</a> para convertir el texto de entrada en términos individuales susceptibles de búsqueda.</p></li>
+<li><p><strong>Análisis del texto</strong>: Milvus utiliza un <a href="/docs/es/v2.5.x/analyzer-overview.md">analizador</a> para convertir el texto de entrada en términos individuales susceptibles de búsqueda.</p></li>
 <li><p><strong>Procesamiento de funciones</strong>: La función incorporada recibe los términos tokenizados y los convierte en representaciones vectoriales dispersas.</p></li>
 <li><p><strong>Almacenamiento de colecciones</strong>: Milvus almacena estas representaciones dispersas en una colección para una recuperación eficiente.</p></li>
 <li><p><strong>Puntuación BM25</strong>: Durante una búsqueda, Milvus aplica el algoritmo BM25 para calcular las puntuaciones de los documentos almacenados y clasifica los resultados coincidentes en función de su relevancia para el texto consultado.</p></li>
@@ -61,9 +62,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Búsqueda de texto completo</span> </span></p>
 <p>Para utilizar la búsqueda de texto completo, siga estos pasos principales:</p>
 <ol>
-<li><p>Cree<a href="/docs/es/full-text-search.md#Create-a-collection-for-full-text-search">una colección</a>: Configure una colección con los campos necesarios y defina una función para convertir el texto en bruto en incrustaciones dispersas.</p></li>
-<li><p><a href="/docs/es/full-text-search.md#Insert-text-data">Inserte los datos</a>: Introduzca los documentos de texto sin formato en la colección.</p></li>
-<li><p><a href="/docs/es/full-text-search.md#Perform-full-text-search">Realizar búsquedas</a>: Utilice textos de consulta para buscar en su colección y obtener resultados relevantes.</p></li>
+<li><p>Cree<a href="/docs/es/v2.5.x/full-text-search.md#Create-a-collection-for-full-text-search">una colección</a>: Configure una colección con los campos necesarios y defina una función para convertir el texto en bruto en incrustaciones dispersas.</p></li>
+<li><p><a href="/docs/es/v2.5.x/full-text-search.md#Insert-text-data">Inserte los datos</a>: Introduzca los documentos de texto sin formato en la colección.</p></li>
+<li><p><a href="/docs/es/v2.5.x/full-text-search.md#Perform-full-text-search">Realizar búsquedas</a>: Utilice textos de consulta para buscar en su colección y obtener resultados relevantes.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">Crear una colección para la búsqueda de texto completo<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,8 +93,8 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
@@ -102,6 +103,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, dat
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -217,7 +219,7 @@ schema.WithField(entity.NewField().
 <p>En esta configuración</p>
 <ul>
 <li><p><code translate="no">id</code>: sirve como clave primaria y se genera automáticamente con <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: almacena los datos de texto sin procesar para las operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">VARCHAR</code>, ya que <code translate="no">VARCHAR</code> es el tipo de datos de cadena de Milvus para el almacenamiento de texto. Establezca <code translate="no">enable_analyzer=True</code> para permitir que Milvus tokenice el texto. Por defecto, Milvus utiliza el<a href="/docs/es/standard-analyzer.md"> analizador</a> <code translate="no">standard</code><a href="/docs/es/standard-analyzer.md"></a> para el análisis de texto. Para configurar un analizador diferente, consulte <a href="/docs/es/analyzer-overview.md">Visión general del analizador</a>.</p></li>
+<li><p><code translate="no">text</code>: almacena los datos de texto sin procesar para las operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">VARCHAR</code>, ya que <code translate="no">VARCHAR</code> es el tipo de datos de cadena de Milvus para el almacenamiento de texto. Establezca <code translate="no">enable_analyzer=True</code> para permitir que Milvus tokenice el texto. Por defecto, Milvus utiliza el<a href="/docs/es/v2.5.x/standard-analyzer.md"> analizador</a> <code translate="no">standard</code><a href="/docs/es/v2.5.x/standard-analyzer.md"></a> para el análisis de texto. Para configurar un analizador diferente, consulte <a href="/docs/es/v2.5.x/analyzer-overview.md">Visión general del analizador</a>.</p></li>
 <li><p><code translate="no">sparse</code>un campo vectorial reservado para almacenar incrustaciones dispersas generadas internamente para operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Ahora, defina una función que convierta su texto en representaciones vectoriales dispersas y añádala al esquema:</p>
@@ -232,6 +234,7 @@ schema.WithField(entity.NewField().
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -326,7 +329,7 @@ schema.WithFunction(function)
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
+field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
 
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
@@ -338,6 +341,7 @@ index_params.add_index(
 
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
@@ -377,7 +381,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>El tipo de índice a crear. <code translate="no">AUTOINDEX</code> permite a Milvus optimizar automáticamente la configuración del índice. Si necesita más control sobre la configuración del índice, puede elegir entre varios tipos de índice disponibles para vectores dispersos en Milvus. Para más información, consulte <a href="/docs/es/index.md#Indexes-supported-in-Milvus">Índices soportados en Milvus</a>.</p></td>
+     <td><p>El tipo de índice a crear. <code translate="no">AUTOINDEX</code> permite a Milvus optimizar automáticamente la configuración del índice. Si necesita más control sobre la configuración del índice, puede elegir entre varios tipos de índice disponibles para vectores dispersos en Milvus. Para más información, consulte <a href="/docs/es/v2.5.x/index.md#Indexes-supported-in-Milvus">Índices soportados en Milvus</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -417,12 +421,13 @@ indexes.add(IndexParam.builder()
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.indexParams(indexes)
+.build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
@@ -482,16 +487,17 @@ curl --request POST \
 
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
 List&lt;JsonObject&gt; rows = Arrays.asList(
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.class)
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.class),
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.class),
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.class)
 );
 
 client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(rows)
-        .build());
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.data(rows)
+.build());
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
@@ -547,6 +553,7 @@ client.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -624,7 +631,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proporción de términos de baja importancia que deben ignorarse durante la búsqueda. Para más detalles, consulte <a href="/docs/es/sparse_vector.md">Vector disperso</a>.</p></td>
+     <td><p>Proporción de términos de baja importancia que deben ignorarse durante la búsqueda. Para más detalles, consulte <a href="/docs/es/v2.5.x/sparse_vector.md">Vector disperso</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>

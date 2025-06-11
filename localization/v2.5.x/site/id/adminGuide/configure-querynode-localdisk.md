@@ -1,9 +1,10 @@
 ---
 id: configure-querynode-localdisk.md
 title: Mengkonfigurasi Milvus QueryNode dengan Disk Lokal
-related_key: 'querynode, query node, local disk'
+related_key: "querynode, query node, local disk"
 summary: Pelajari cara mengonfigurasi Milvus QueryNode untuk menggunakan disk lokal.
 ---
+
 <h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">Mengkonfigurasi Milvus QueryNode dengan Disk Lokal<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,11 +39,11 @@ summary: Pelajari cara mengonfigurasi Milvus QueryNode untuk menggunakan disk lo
     </button></h2><p>Milvus adalah basis data vektor yang berfokus pada AI yang dirancang untuk penyimpanan dan pengambilan data vektor dalam jumlah besar secara efisien. Sangat ideal untuk tugas-tugas seperti analisis gambar dan video, pemrosesan bahasa alami, dan sistem rekomendasi. Untuk memastikan performa yang optimal, sangat penting untuk meminimalkan latensi pembacaan disk. Menggunakan SSD NVMe lokal sangat disarankan untuk mencegah penundaan dan menjaga stabilitas sistem.</p>
 <p>Fitur utama yang berperan penting dalam penyimpanan disk lokal meliputi:</p>
 <ul>
-<li><a href="/docs/id/chunk_cache.md"><strong>Cache potongan</strong></a>: Memuat data sebelumnya ke dalam cache disk lokal untuk pencarian yang lebih cepat.</li>
-<li><a href="/docs/id/mmap.md"><strong>MMap</strong></a>: Memetakan konten file secara langsung ke dalam memori untuk efisiensi memori yang lebih baik.</li>
-<li><a href="/docs/id/disk_index.md"><strong>Indeks DiskANN</strong></a>: Memerlukan penyimpanan disk untuk manajemen indeks yang efisien.</li>
+<li><a href="/docs/id/v2.5.x/chunk_cache.md"><strong>Cache potongan</strong></a>: Memuat data sebelumnya ke dalam cache disk lokal untuk pencarian yang lebih cepat.</li>
+<li><a href="/docs/id/v2.5.x/mmap.md"><strong>MMap</strong></a>: Memetakan konten file secara langsung ke dalam memori untuk efisiensi memori yang lebih baik.</li>
+<li><a href="/docs/id/v2.5.x/disk_index.md"><strong>Indeks DiskANN</strong></a>: Memerlukan penyimpanan disk untuk manajemen indeks yang efisien.</li>
 </ul>
-<p>Dalam artikel ini, kita akan fokus pada penerapan <a href="/docs/id/install-overview.md#Milvus-Distributed">Milvus Distributed</a> di platform cloud, dan cara mengonfigurasi QueryNode untuk menggunakan penyimpanan disk NVMe. Tabel berikut mencantumkan jenis mesin yang direkomendasikan dari berbagai penyedia cloud.</p>
+<p>Dalam artikel ini, kita akan fokus pada penerapan <a href="/docs/id/v2.5.x/install-overview.md#Milvus-Distributed">Milvus Distributed</a> di platform cloud, dan cara mengonfigurasi QueryNode untuk menggunakan penyimpanan disk NVMe. Tabel berikut mencantumkan jenis mesin yang direkomendasikan dari berbagai penyedia cloud.</p>
 <table>
 <thead>
 <tr><th style="text-align:center">Penyedia Cloud</th><th style="text-align:center">Jenis Mesin</th></tr>
@@ -86,21 +87,22 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <span class="hljs-comment">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Running custom user data script&quot;</span>
 <span class="hljs-keyword">if</span> ( lsblk | fgrep -q nvme1n1 ); <span class="hljs-keyword">then</span>
-    <span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
-    mkfs.xfs /dev/nvme1n1
-    mount /dev/nvme1n1 /mnt/data
-    <span class="hljs-built_in">chmod</span> 0755 /mnt/data
-    <span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
-    <span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
-    UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
-    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span>     /mnt/data   xfs    defaults,noatime  1   1&quot;</span> &gt;&gt; /etc/fstab
+<span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
+mkfs.xfs /dev/nvme1n1
+mount /dev/nvme1n1 /mnt/data
+<span class="hljs-built_in">chmod</span> 0755 /mnt/data
+<span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
+<span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
+<span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
+<span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
+UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span> /mnt/data xfs defaults,noatime 1 1&quot;</span> &gt;&gt; /etc/fstab
 <span class="hljs-keyword">fi</span>
 <span class="hljs-built_in">echo</span> 10485760 &gt; /proc/sys/fs/aio-max-nr
 
 --==MYBOUNDARY==--
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>Pada contoh di atas, kami mengasumsikan bahwa disk NVMe adalah <code translate="no">/dev/nvme1n1</code>. Anda perlu memodifikasi skrip agar sesuai dengan konfigurasi spesifik Anda.</p>
 </div>
@@ -122,6 +124,7 @@ mkfs.xfs /dev/md0
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/dev/md0 /var/lib/kubelet xfs defaults 0 0&#x27;</span> &gt;&gt; /etc/fstab
 mount -a
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>Pada contoh di atas, kami mengasumsikan bahwa disk NVMe adalah <code translate="no">/dev/nvme0n1</code> dan <code translate="no">/dev/nvme1n1</code>. Anda perlu memodifikasi skrip agar sesuai dengan konfigurasi spesifik Anda.</p>
 </div>
@@ -134,7 +137,7 @@ mkfs.xfs /dev/nvme0n1
 mount -a
 
 <span class="hljs-built_in">mkdir</span> -p /mnt/data/kubelet /mnt/data/containerd /mnt/data/log/pods
-<span class="hljs-built_in">mkdir</span> -p  /var/lib/kubelet /var/lib/containerd /var/log/pods
+<span class="hljs-built_in">mkdir</span> -p /var/lib/kubelet /var/lib/containerd /var/log/pods
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/kubelet /var/lib/kubelet none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/containerd /var/lib/containerd none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
@@ -143,6 +146,7 @@ mount -a
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init end...&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>Pada contoh di atas, kami mengasumsikan bahwa disk NVMe adalah <code translate="no">/dev/nvme0n1</code>. Anda perlu memodifikasi skrip agar sesuai dengan konfigurasi spesifik Anda.</p>
 </div>
@@ -219,8 +223,9 @@ fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numj
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
-fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1  --<span class="hljs-built_in">readonly</span>
+fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1 --<span class="hljs-built_in">readonly</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Dan hasilnya akan terlihat seperti ini:</p>
 <pre><code translate="no" class="language-bash">Jobs: <span class="hljs-number">128</span> (f=<span class="hljs-number">128</span>): [r(<span class="hljs-number">128</span>)][<span class="hljs-number">100.0</span>%][r=1458MiB/s][r=373k IOPS][eta 00m:00s]
 iops-test-job: (groupid=<span class="hljs-number">0</span>, jobs=<span class="hljs-number">128</span>): err= <span class="hljs-number">0</span>: pid=<span class="hljs-number">768</span>: Mon Jun <span class="hljs-number">24</span> 09:<span class="hljs-number">35</span>:06 <span class="hljs-number">2024</span>
@@ -266,7 +271,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>Setelah hasil verifikasi memuaskan, Anda dapat menggunakan Milvus Distributed dengan langkah-langkah berikut:</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Kiat untuk men-deploy Milvus Distributed menggunakan Helm</h3><p>Pod QueryNode menggunakan disk NVMe sebagai volume EmptyDir secara default. Anda disarankan untuk memasang disk NVMe ke <code translate="no">/var/lib/milvus/data</code> di dalam pod QueryNode untuk memastikan performa yang optimal.</p>
-<p>Untuk detail tentang cara menggunakan Milvus Distributed menggunakan Helm, lihat Menjalankan <a href="/docs/id/install_cluster-helm.md">Milvus di Kubernetes dengan Helm</a>.</p>
+<p>Untuk detail tentang cara menggunakan Milvus Distributed menggunakan Helm, lihat Menjalankan <a href="/docs/id/v2.5.x/install_cluster-helm.md">Milvus di Kubernetes dengan Helm</a>.</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Kiat untuk menerapkan Milvus Distributed menggunakan Milvus Operator</h3><p>Milvus Operator secara otomatis mengonfigurasi pod QueryNode untuk menggunakan disk NVMe sebagai volume EmptyDir. Anda disarankan untuk menambahkan konfigurasi berikut ke sumber daya khusus <code translate="no">MilvusCluster</code>:</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -279,4 +284,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>Ini akan memastikan bahwa pod QueryNode menggunakan disk NVMe sebagai volume data. Untuk detail tentang cara menggunakan Milvus Distributed menggunakan Milvus Operator, lihat Menjalankan <a href="/docs/id/install_cluster-milvusoperator.md">Milvus di Kubernetes dengan Milvus Operator</a>.</p>
+<p>Ini akan memastikan bahwa pod QueryNode menggunakan disk NVMe sebagai volume data. Untuk detail tentang cara menggunakan Milvus Distributed menggunakan Milvus Operator, lihat Menjalankan <a href="/docs/id/v2.5.x/install_cluster-milvusoperator.md">Milvus di Kubernetes dengan Milvus Operator</a>.</p>

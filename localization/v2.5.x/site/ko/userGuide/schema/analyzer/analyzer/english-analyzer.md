@@ -3,6 +3,7 @@ id: english-analyzer.md
 title: 영어
 summary: Milvus의 영어 분석기는 토큰화 및 필터링에 언어별 규칙을 적용하여 영어 텍스트를 처리하도록 설계되었습니다.
 ---
+
 <h1 id="English" class="common-anchor-header">영어<button data-href="#English" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ summary: Milvus의 영어 분석기는 토큰화 및 필터링에 언어별 규�
       </svg>
     </button></h2><p><code translate="no">english</code> 분석기는 다음 구성 요소를 사용합니다:</p>
 <ul>
-<li><p><strong>토큰화 도구</strong>: <code translate="no">standard</code><a href="/docs/ko/standard-tokenizer.md"> 토큰화기를</a> 사용하여 텍스트를 개별 단어 단위로 분할합니다.</p></li>
+<li><p><strong>토큰화 도구</strong>: <code translate="no">standard</code><a href="/docs/ko/v2.5.x/standard-tokenizer.md"> 토큰화기를</a> 사용하여 텍스트를 개별 단어 단위로 분할합니다.</p></li>
 <li><p><strong>필터</strong>: 포괄적인 텍스트 처리를 위한 여러 필터가 포함되어 있습니다:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: 모든 토큰을 소문자로 변환하여 대소문자를 구분하지 않고 검색할 수 있도록 합니다.</p></li>
@@ -107,6 +108,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Configuration" class="common-anchor-header">구성<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,7 +186,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 효율적인 토큰화 및 필터링을 위해 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
+
+<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 효율적인 토큰화 및 필터링을 위해 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -227,6 +230,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -242,6 +246,7 @@ sample_text = <span class="hljs-string">&quot;Milvus is a vector database built 
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

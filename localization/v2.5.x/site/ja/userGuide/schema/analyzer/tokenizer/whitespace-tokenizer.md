@@ -3,6 +3,7 @@ id: whitespace-tokenizer.md
 title: 空白
 summary: 空白トークナイザーは、単語と単語の間にスペースがある場合、テキストを単語に分割する。
 ---
+
 <h1 id="Whitespace" class="common-anchor-header">空白<button data-href="#Whitespace" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +56,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;tokenizer&quot;: &quot;whitespace&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>空白トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードは<code translate="no">whitespace</code> トー クナイザと<code translate="no">lowercase</code><a href="/docs/ja/lowercase-filter.md"> フィルタを</a>使用する解析器を定義します：</p>
+<p>空白トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードは<code translate="no">whitespace</code> トー クナイザと<code translate="no">lowercase</code><a href="/docs/ja/v2.5.x/lowercase-filter.md"> フィルタを</a>使用する解析器を定義します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -82,7 +83,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に、<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定されたアナライザを使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に、<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定されたアナライザを使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/v2.5.x/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -131,6 +132,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

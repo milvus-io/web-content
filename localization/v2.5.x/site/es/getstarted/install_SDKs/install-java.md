@@ -5,6 +5,7 @@ related_key: SDK
 summary: Aprenda a instalar el SDK Java de Milvus.
 title: Instalar Milvus Java SDK
 ---
+
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Instalar Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,11 +91,11 @@ title: Instalar Milvus Java SDK
 <ul>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
-<li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
-<li><a href="/docs/es/manage-partitions.md">Gestionar particiones</a></li>
-<li><a href="/docs/es/insert-update-delete.md">Insertar, sobreinsertar y eliminar</a></li>
-<li><a href="/docs/es/single-vector-search.md">Búsqueda de un solo vector</a></li>
-<li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
+<li><a href="/docs/es/v2.5.x/manage-collections.md">Gestionar colecciones</a></li>
+<li><a href="/docs/es/v2.5.x/manage-partitions.md">Gestionar particiones</a></li>
+<li><a href="/docs/es/v2.5.x/insert-update-delete.md">Insertar, sobreinsertar y eliminar</a></li>
+<li><a href="/docs/es/v2.5.x/single-vector-search.md">Búsqueda de un solo vector</a></li>
+<li><a href="/docs/es/v2.5.x/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
 <li><p>Explorar <a href="/api-reference/java/v2.4.x/About.md">la referencia API Java de Milvus</a></p></li>
 </ul>

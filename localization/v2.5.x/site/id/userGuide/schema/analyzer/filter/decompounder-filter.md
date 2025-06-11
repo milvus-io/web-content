@@ -7,6 +7,7 @@ summary: >-
   dari istilah majemuk. Filter ini sangat berguna untuk bahasa yang sering
   menggunakan kata majemuk, seperti bahasa Jerman.
 ---
+
 <h1 id="Decompounder" class="common-anchor-header">Pengurai<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,6 +94,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Filter <code translate="no">decompounder</code> menerima parameter yang dapat dikonfigurasi berikut ini.</p>
 <table>
    <tr>
@@ -104,8 +106,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Daftar komponen kata yang digunakan untuk memisahkan istilah majemuk. Kamus ini menentukan bagaimana kata-kata majemuk diuraikan menjadi istilah-istilah individual.</p></td>
    </tr>
 </table>
-<p>Filter <code translate="no">decompounder</code> beroperasi pada istilah yang dihasilkan oleh tokenizer, sehingga harus digunakan bersama dengan tokenizer. Untuk daftar tokenizer yang tersedia di Milvus, lihat <a href="/docs/id/standard-tokenizer.md">Tokenizer Standar</a> dan halaman-halaman terkait.</p>
-<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> ketika mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
+<p>Filter <code translate="no">decompounder</code> beroperasi pada istilah yang dihasilkan oleh tokenizer, sehingga harus digunakan bersama dengan tokenizer. Untuk daftar tokenizer yang tersedia di Milvus, lihat <a href="/docs/id/v2.5.x/standard-tokenizer.md">Tokenizer Standar</a> dan halaman-halaman terkait.</p>
+<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> ketika mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,6 +172,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verifikasi menggunakan <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
@@ -179,6 +182,7 @@ sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&q
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

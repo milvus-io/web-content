@@ -4,6 +4,7 @@ related_key: gpu_index
 summary: Milvus 中的 GPU 索引機制。
 title: GPU 索引
 ---
+
 <h1 id="GPU-Index" class="common-anchor-header">GPU 索引<button data-href="#GPU-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: GPU 索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 支援多種 GPU 索引類型，以加速搜尋效能與效率，尤其是在高吞吐量與高回撥的情況下。本主題概述 Milvus 支援的 GPU 索引類型、適合的使用案例以及效能特性。有關使用 GPU 建立索引的資訊，請參閱<a href="/docs/zh-hant/index-with-gpu.md">Index with GPU</a>。</p>
+    </button></h1><p>Milvus 支援多種 GPU 索引類型，以加速搜尋效能與效率，尤其是在高吞吐量與高回撥的情況下。本主題概述 Milvus 支援的 GPU 索引類型、適合的使用案例以及效能特性。有關使用 GPU 建立索引的資訊，請參閱<a href="/docs/zh-hant/v2.5.x/index-with-gpu.md">Index with GPU</a>。</p>
 <p>值得注意的是，與使用 CPU 索引相比，使用 GPU 索引不一定會減少延遲。如果您想要完全發揮吞吐量的最大效益，您需要極高的請求壓力或大量的查詢向量。</p>
 <p>
   

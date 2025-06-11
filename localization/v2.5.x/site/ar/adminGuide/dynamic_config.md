@@ -4,6 +4,7 @@ related_key: configure
 summary: تعرف على التكوين الديناميكي لميلفوس.
 title: تكوين ميلفوس أثناء التنقل
 ---
+
 <h1 id="Configure-Milvus-on-the-Fly" class="common-anchor-header">تكوين ميلفوس أثناء التنقل<button data-href="#Configure-Milvus-on-the-Fly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,14 +38,14 @@ title: تكوين ميلفوس أثناء التنقل
       </svg>
     </button></h2><p>تحتاج إلى التأكد من أن: ：</p>
 <ul>
-<li>لديك برنامج Birdwatcher مثبتاً. لمزيد من التفاصيل، راجع <a href="/docs/ar/birdwatcher_install_guides.md">تثبيت Birdwatcher</a>,</li>
+<li>لديك برنامج Birdwatcher مثبتاً. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/birdwatcher_install_guides.md">تثبيت Birdwatcher</a>,</li>
 <li>لديك برنامج إلخdctl مثبت لديك. لمزيد من التفاصيل، راجع <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">التفاعل مع إلخ</a>d، أو</li>
 <li>إذا كان لديك عملاء آخرين لـ etcd، مثل عميل Python، مثبتين.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>تقوم الأمثلة في هذا الدليل بتغيير قيمة <code translate="no">proxy.minPasswordLength</code> إلى <code translate="no">8</code>. يمكنك استبدال المفتاح بالمفاتيح القابلة للتطبيق المدرجة في <a href="/docs/ar/dynamic_config.md#Applicable-configuration-items">عناصر التكوين القابلة للتطبيق</a>.</li>
-<li>تفترض الأمثلة في هذا الدليل أن المسار الجذر لـ Milvus الخاص بك هو <code translate="no">by-dev</code>. جميع التكوينات مدرجة تحت المسار <code translate="no">by-dev/config</code>. يختلف مسار جذر Milvus باختلاف طريقة تثبيته. بالنسبة للمثيلات المثبتة باستخدام مخططات Helm، يتم تعيين المسار الجذر افتراضيًا إلى <code translate="no">by-dev</code>. إذا كنت لا تعرف المسار الجذر، فارجع إلى <a href="/docs/ar/birdwatcher_usage_guides.md#Connect-to-etcd">الاتصال بـ etcd</a>.</li>
+<li>تقوم الأمثلة في هذا الدليل بتغيير قيمة <code translate="no">proxy.minPasswordLength</code> إلى <code translate="no">8</code>. يمكنك استبدال المفتاح بالمفاتيح القابلة للتطبيق المدرجة في <a href="/docs/ar/v2.5.x/dynamic_config.md#Applicable-configuration-items">عناصر التكوين القابلة للتطبيق</a>.</li>
+<li>تفترض الأمثلة في هذا الدليل أن المسار الجذر لـ Milvus الخاص بك هو <code translate="no">by-dev</code>. جميع التكوينات مدرجة تحت المسار <code translate="no">by-dev/config</code>. يختلف مسار جذر Milvus باختلاف طريقة تثبيته. بالنسبة للمثيلات المثبتة باستخدام مخططات Helm، يتم تعيين المسار الجذر افتراضيًا إلى <code translate="no">by-dev</code>. إذا كنت لا تعرف المسار الجذر، فارجع إلى <a href="/docs/ar/v2.5.x/birdwatcher_usage_guides.md#Connect-to-etcd">الاتصال بـ etcd</a>.</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">تغيير التكوينات<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +204,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>تعرف على المزيد حول <a href="/docs/ar/system_configuration.md">تكوينات النظام</a>.</li>
-<li>تعرف على كيفية تكوين Milvus المثبت باستخدام <a href="/docs/ar/configure_operator.md">مشغل Milvus</a> <a href="/docs/ar/configure-helm.md">ومخططات Helm</a> <a href="/docs/ar/configure-docker.md">وDocker</a>.</li>
+<li>تعرف على المزيد حول <a href="/docs/ar/v2.5.x/system_configuration.md">تكوينات النظام</a>.</li>
+<li>تعرف على كيفية تكوين Milvus المثبت باستخدام <a href="/docs/ar/v2.5.x/configure_operator.md">مشغل Milvus</a> <a href="/docs/ar/v2.5.x/configure-helm.md">ومخططات Helm</a> <a href="/docs/ar/v2.5.x/configure-docker.md">وDocker</a>.</li>
 </ul>

@@ -4,6 +4,7 @@ title: 在 AWS 上为 Milvus 设置 Layer-7 负载平衡器
 related_key: cluster
 summary: 了解如何在 AWS 上的 Layer-7 负载均衡器后面部署 Milvus 集群。
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">在 AWS 上为 Milvus 设置 Layer-7 负载平衡器<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,9 +23,9 @@ summary: 了解如何在 AWS 上的 Layer-7 负载均衡器后面部署 Milvus �
     </button></h1><p>与 Layer-4 负载平衡器相比，Layer-7 负载平衡器具有智能负载平衡和缓存功能，是云原生服务的最佳选择。</p>
 <p>本指南将指导您为已经在第 4 层负载平衡器后面运行的 Milvus 集群设置第 7 层负载平衡器。</p>
 <h3 id="Before-your-start" class="common-anchor-header">开始之前</h3><ul>
-<li>您已<a href="/docs/zh/eks.md">在 AWS 上的第 4 层负载平衡器后面部署了一个 Milvus 群集</a>。</li>
+<li>您已<a href="/docs/zh/v2.5.x/eks.md">在 AWS 上的第 4 层负载平衡器后面部署了一个 Milvus 群集</a>。</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假设您已<a href="/docs/zh/eks.md">在 AWS 上的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假设您已<a href="/docs/zh/v2.5.x/eks.md">在 AWS 上的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
 <p>在为该 Milvus 群集设置 Layer-7 负载平衡器之前，请运行以下命令移除 Layer-4 负载平衡器。</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -48,19 +49,18 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: <span class="hljs-string">&quot;arn:aws:acm:region:account-id:certificate/certificate-id&quot;</span>
 
 spec:
-  ingressClassName: alb
-  rules:
-    - host: milvus-demo.milvus.io
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: milvus-demo
-              port:
-                number: 19530
+ingressClassName: alb
+rules: - host: milvus-demo.milvus.io
+http:
+paths: - path: /
+pathType: Prefix
+backend:
+service:
+name: milvus-demo
+port:
+number: 19530
 <button class="copy-code-btn"></button></code></pre>
+
 <p>然后，将该文件应用于 EKS 群集，即可创建 Ingress。</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -99,6 +99,7 @@ milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778
 
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;k8s-milvus-milvusde-2f72215c02-778371620.us-east-2.elb.amazonaws.com&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;milvus-demo.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li><strong>host</strong>和<strong>server_name</strong>应替换为您自己的<strong>名称</strong>。</li>

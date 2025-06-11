@@ -3,6 +3,7 @@ id: array_data_type.md
 title: 配列フィールド
 summary: ARRAYフィールドは、同じデータ型の要素の順序付きセットを格納します。ARRAYフィールドがどのようにデータを格納するかの例を以下に示す：
 ---
+
 <h1 id="Array-Field" class="common-anchor-header">配列フィールド<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +41,7 @@ summary: ARRAYフィールドは、同じデータ型の要素の順序付きセ
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>デフォルト値</strong>：ARRAYフィールドはデフォルト値をサポートしていません。しかし、<code translate="no">nullable</code> 属性を<code translate="no">True</code> に設定することで、ヌル値を許可することができます。詳細は<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Defaultを</a>参照してください。</p></li>
+<li><p><strong>デフォルト値</strong>：ARRAYフィールドはデフォルト値をサポートしていません。しかし、<code translate="no">nullable</code> 属性を<code translate="no">True</code> に設定することで、ヌル値を許可することができます。詳細は<a href="/docs/ja/v2.5.x/nullable-and-default.md">Nullable &amp; Defaultを</a>参照してください。</p></li>
 <li><p><strong>データ型</strong>：データ型：配列フィールドの全要素は、<code translate="no">element_type</code> で指定されるように、同じデータ型を持つ必要があります。<code translate="no">element_type</code> を<code translate="no">VARCHAR</code> に設定した場合、配列要素にも<code translate="no">max_length</code> を設定する必要があります。</p></li>
 <li><p><strong>配列の容量</strong>：Arrayフィールドの要素数は、<code translate="no">max_capacity</code> で指定されているように、Arrayの作成時に定義された最大容量以下でなければならない。この値は1から<strong>4096の</strong>範囲内の整数でなければならない。</p></li>
 <li><p><strong>文字列の処理</strong>：Arrayフィールドの文字列値は、セマンティック・エスケープや変換を行わず、そのまま格納される。例えば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納され、<code translate="no">'a'b'</code> 、<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされる。</p></li>
@@ -68,7 +69,7 @@ summary: ARRAYフィールドは、同じデータ型の要素の順序付きセ
 </ol>
 <p>ここでは、ARRAYフィールドを含むコレクションスキーマを定義する方法を説明します：</p>
 <div class="alert note">
-<p>スキーマを定義する際に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusはあらかじめ定義されていないスカラーフィールドを挿入することができます。ただし、この場合、クエリおよび管理の複雑さが増し、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
+<p>スキーマを定義する際に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusはあらかじめ定義されていないスカラーフィールドを挿入することができます。ただし、この場合、クエリおよび管理の複雑さが増し、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/v2.5.x/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#http">HTTP</a></div>
@@ -83,16 +84,17 @@ client = MilvusClient(uri=SERVER_ADDR)
 
 <span class="hljs-comment"># Define the collection schema</span>
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_fields=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
-<span class="hljs-comment">#  Add `tags` and `ratings` ARRAY fields with nullable=True</span>
+<span class="hljs-comment"># Add `tags` and `ratings` ARRAY fields with nullable=True</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>, max_length=<span class="hljs-number">65535</span>, nullable=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;ratings&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.INT64, max_capacity=<span class="hljs-number">5</span>, nullable=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -269,7 +271,7 @@ export schema=&quot;{
         ></path>
       </svg>
     </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
-<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> と ARRAY フィールド<code translate="no">tags</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細については、「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」を参照してください。</p>
+<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> と ARRAY フィールド<code translate="no">tags</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細については、「<a href="/docs/ja/v2.5.x/index-explained.md">インデックスの説明</a>」を参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -278,18 +280,19 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `age` with AUTOINDEX</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;tags&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    index_name=<span class="hljs-string">&quot;tags_index&quot;</span>
+field_name=<span class="hljs-string">&quot;tags&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+index_name=<span class="hljs-string">&quot;tags_index&quot;</span>
 )
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,  <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>  <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
+field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -428,10 +431,11 @@ data = [
 ]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -546,18 +550,19 @@ client.<span class="hljs-title function_">insert</span>({
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;tags&quot;</span>, <span class="hljs-string">&quot;ratings&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;tags&quot;</span>, <span class="hljs-string">&quot;ratings&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: [&#x27;pop&#x27;, &#x27;rock&#x27;, &#x27;classic&#x27;], &#x27;ratings&#x27;: [5, 4, 3], &#x27;pk&#x27;: 1}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;tags&#x27;: [&#x27;pop&#x27;, &#x27;rock&#x27;, &#x27;classic&#x27;], &#x27;ratings&#x27;: [5, 4, 3], &#x27;pk&#x27;: 1}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 
@@ -610,19 +615,20 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &gt; 4&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;tags&quot;</span>, <span class="hljs-string">&quot;ratings&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;tags&quot;</span>, <span class="hljs-string">&quot;ratings&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: [&#x27;pop&#x27;, &#x27;rock&#x27;, &#x27;classic&#x27;], &#x27;ratings&#x27;: [5, 4, 3], &#x27;embedding&#x27;: [0.12, 0.34, 0.56], &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;tags&#x27;: [&#x27;pop&#x27;, &#x27;rock&#x27;, &#x27;classic&#x27;], &#x27;ratings&#x27;: [5, 4, 3], &#x27;embedding&#x27;: [0.12, 0.34, 0.56], &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;ratings[0] &gt; 4&quot;</span>
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
@@ -701,21 +707,22 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
-    limit=<span class="hljs-number">5</span>,
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-    output_fields=[<span class="hljs-string">&quot;tags&quot;</span>, <span class="hljs-string">&quot;ratings&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>],
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
+limit=<span class="hljs-number">5</span>,
+search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+output_fields=[<span class="hljs-string">&quot;tags&quot;</span>, <span class="hljs-string">&quot;ratings&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>],
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: -0.2479381263256073, &#x27;entity&#x27;: {&#x27;tags&#x27;: [&#x27;pop&#x27;, &#x27;rock&#x27;, &#x27;classic&#x27;], &#x27;ratings&#x27;: [5, 4, 3], &#x27;embedding&#x27;: [0.11999999731779099, 0.3400000035762787, 0.5600000023841858]}}]&quot;</span>
+<span class="hljs-comment"># &quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: -0.2479381263256073, &#x27;entity&#x27;: {&#x27;tags&#x27;: [&#x27;pop&#x27;, &#x27;rock&#x27;, &#x27;classic&#x27;], &#x27;ratings&#x27;: [5, 4, 3], &#x27;embedding&#x27;: [0.11999999731779099, 0.3400000035762787, 0.5600000023841858]}}]&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
@@ -786,4 +793,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>さらに、Milvusは<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> のような高度な配列フィルタリング演算子をサポートしており、クエリー機能をさらに強化することができます。詳細は<a href="/docs/ja/array-operators.md">ARRAY Operatorsを</a>ご参照ください。</p>
+<p>さらに、Milvusは<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> のような高度な配列フィルタリング演算子をサポートしており、クエリー機能をさらに強化することができます。詳細は<a href="/docs/ja/v2.5.x/array-operators.md">ARRAY Operatorsを</a>ご参照ください。</p>

@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: 了解如何在 Kubernetes 上安装 Milvus 集群。
 title: 使用 Docker Compose 运行支持 GPU 的 Milvus
 ---
+
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">使用 Docker Compose 运行支持 GPU 的 Milvus<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">安装 Docker</a>。</li>
-<li>安装前<a href="/docs/zh/prerequisite-gpu.md">请检查硬件和软件要求</a>。</li>
+<li>安装前<a href="/docs/zh/v2.5.x/prerequisite-gpu.md">请检查硬件和软件要求</a>。</li>
 </ul>
 <div class="alert note">
 <p>如果在拉动映像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
@@ -95,10 +96,11 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
 <h3 id="2-Start-Milvus" class="common-anchor-header">2.启动 Milvus</h3><p>在保存 docker-compose.yml 的目录下，通过运行启动 Milvus：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd  ... done
+Creating milvus-etcd ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>如果运行上述命令失败，请检查系统是否安装了 Docker Compose V1。如果是这种情况，建议你根据<a href="https://docs.docker.com/compose/">本页</a>的说明迁移到 Docker Compose V2。</p>
 </div>
@@ -114,12 +116,15 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
---------------------------------------------------------------------------------------------------------------------
-milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
-milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
-milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+
+---
+
+milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
+milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
+milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>你还可以访问 Milvus WebUI，网址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，了解有关 Milvus 实例的更多信息。详情请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+
+<p>你还可以访问 Milvus WebUI，网址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，了解有关 Milvus 实例的更多信息。详情请参阅<a href="/docs/zh/v2.5.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <p>如果在 docker-compose.yml 中为 Milvus 分配了多个 GPU 设备，可以指定哪个 GPU 设备可见或可用。</p>
 <p>让 GPU 设备<code translate="no">0</code> 对 Milvus 可见：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
@@ -197,28 +202,28 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>在 Docker 中安装 Milvus 后，你可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
-<li><p>查看<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，了解有关 Milvus 实例的更多信息。</p></li>
+<li><p>查看<a href="/docs/zh/v2.5.x/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/v2.5.x/milvus-webui.md">Milvus WebUI</a>，了解有关 Milvus 实例的更多信息。</p></li>
 <li><p>了解 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.5.x/manage_databases.md">管理数据库</a></li>
+<li><a href="/docs/zh/v2.5.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.5.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.5.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.5.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.5.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
 <li><p>在云上部署你的 Milvu 集群：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
-<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
-<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
+<li><a href="/docs/zh/v2.5.x/eks.md">亚马逊 EKS</a></li>
+<li><a href="/docs/zh/v2.5.x/gcp.md">谷歌云</a></li>
+<li><a href="/docs/zh/v2.5.x/azure.md">微软 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
-<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.5.x/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
+<li><p>探索<a href="/docs/zh/v2.5.x/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
-<li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

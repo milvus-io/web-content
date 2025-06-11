@@ -5,6 +5,7 @@ related_key: SDK
 summary: Scoprite come installare l'SDK GO di Milvus.
 title: Installare l'SDK Milvus Go
 ---
+
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">Installare l'SDK Milvus Go<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +75,10 @@ title: Installare l'SDK Milvus Go
     </button></h2><p>Dopo aver installato Milvus GO SDK, è possibile:</p>
 <ul>
 <li>Imparare le operazioni di base di Milvus:<ul>
-<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
-<li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
-<li><a href="/docs/it/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
-<li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
-<li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
+<li><a href="/docs/it/v2.5.x/manage-collections.md">Gestire le collezioni</a></li>
+<li><a href="/docs/it/v2.5.x/manage-partitions.md">Gestire le partizioni</a></li>
+<li><a href="/docs/it/v2.5.x/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
+<li><a href="/docs/it/v2.5.x/single-vector-search.md">Ricerca a vettore singolo</a></li>
+<li><a href="/docs/it/v2.5.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
 </ul>

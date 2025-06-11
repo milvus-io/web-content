@@ -3,6 +3,7 @@ id: authenticate.md
 summary: تعرف على كيفية إدارة مصادقة المستخدم في Milvus.
 title: مصادقة وصول المستخدم
 ---
+
 <h1 id="Authenticate-User-Access" class="common-anchor-header">مصادقة وصول المستخدم<button data-href="#Authenticate-User-Access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ title: مصادقة وصول المستخدم
     </button></h1><p>يشرح هذا الدليل كيفية إدارة مصادقة المستخدم في Milvus، بما في ذلك تمكين المصادقة والاتصال كمستخدم وتعديل بيانات اعتماد المستخدم.</p>
 <div class="alert note">
 <ul>
-<li><p>TLS ومصادقة المستخدم هما نهجان مختلفان للأمان. إذا قمت بتمكين كل من مصادقة المستخدم و TLS في نظام Milvus الخاص بك، يجب عليك توفير اسم مستخدم وكلمة مرور ومسارات ملفات الشهادات. للحصول على معلومات حول كيفية تمكين TLS، راجع <a href="/docs/ar/tls.md">التشفير في النقل</a>.</p></li>
+<li><p>TLS ومصادقة المستخدم هما نهجان مختلفان للأمان. إذا قمت بتمكين كل من مصادقة المستخدم و TLS في نظام Milvus الخاص بك، يجب عليك توفير اسم مستخدم وكلمة مرور ومسارات ملفات الشهادات. للحصول على معلومات حول كيفية تمكين TLS، راجع <a href="/docs/ar/v2.5.x/tls.md">التشفير في النقل</a>.</p></li>
 <li><p>تستخدم مقتطفات التعليمات البرمجية في هذه الصفحة <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> الجديد (Python) للتفاعل مع Milvus. سيتم إصدار MilvusClient SDKs الجديدة للغات الأخرى في التحديثات المستقبلية.</p></li>
 </ul>
 </div>
@@ -100,10 +101,11 @@ spec:
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-) 
+uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 إذا فشلت في توفير رمز مميز صالح عند الاتصال بـ Milvus مع تمكين المصادقة، ستتلقى خطأ gRPC.</div>
 <h2 id="Create-a-new-user" class="common-anchor-header">إنشاء مستخدم جديد<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
@@ -135,6 +137,7 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>للمزيد من المعلومات حول إنشاء مستخدمين، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
 <h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">الاتصال بـ Milvus باستخدام مستخدم جديد<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,10 +158,11 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># connect to milvus with the newly created user</span>
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Update-user-password" class="common-anchor-header">تحديث كلمة مرور المستخدم<button data-href="#Update-user-password" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,11 +182,12 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># update password</span>
 
 client.update_password(
-    user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
-    old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
-    new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
+user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
+old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
+new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>لمزيد من المعلومات حول تحديث كلمات مرور المستخدم، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
 <p>إذا نسيت كلمة المرور القديمة، يوفر ميلفوس عنصر تهيئة يسمح لك بتعيين مستخدمين معينين كمستخدمين خارقين. هذا يلغي الحاجة إلى كلمة المرور القديمة عند إعادة تعيين كلمة المرور.</p>
 <p>بشكل افتراضي، يكون الحقل <code translate="no">common.security.superUsers</code> في ملف تكوين ملف Milvus فارغًا، مما يعني أنه يجب على جميع المستخدمين تقديم كلمة المرور القديمة عند إعادة تعيين كلمة المرور الخاصة بهم. ومع ذلك، يمكنك تعيين مستخدمين محددين كمستخدمين متميزين لا يحتاجون إلى تقديم كلمة المرور القديمة. في المقتطف أدناه، تم تعيين <code translate="no">root</code> و <code translate="no">foo</code> كمستخدمين متميزين.</p>
@@ -231,6 +236,7 @@ client.update_password(
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Limitations" class="common-anchor-header">القيود<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,11 +273,11 @@ client.list_users()
       </svg>
     </button></h2><ul>
 <li>قد ترغب أيضًا في معرفة كيفية القيام بـ<ul>
-<li><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة ميلفوس</a></li>
+<li><a href="/docs/ar/v2.5.x/scaleout.md">توسيع نطاق مجموعة ميلفوس</a></li>
 </ul></li>
 <li>إذا كنت مستعدًا لنشر مجموعتك على السحابة:<ul>
-<li>تعرف على كيفية <a href="/docs/ar/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
-<li>تعلم كيفية <a href="/docs/ar/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
-<li>تعرف على كيفية <a href="/docs/ar/azure.md">نشر</a> مجموعة <a href="/docs/ar/azure.md">ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.5.x/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
+<li>تعلم كيفية <a href="/docs/ar/v2.5.x/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.5.x/azure.md">نشر</a> مجموعة <a href="/docs/ar/v2.5.x/azure.md">ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
 </ul></li>
 </ul>

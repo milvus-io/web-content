@@ -6,6 +6,7 @@ summary: >-
   необходимо разработать ее схему. Эта страница поможет вам понять схему
   коллекции и самостоятельно разработать пример схемы.
 ---
+
 <h1 id="Schema-Explained​" class="common-anchor-header">Объяснение схемы<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +46,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Проектирование схемы</span> </span></p>
 <p>Проектирование модели данных поисковой системы включает в себя анализ потребностей бизнеса и абстрагирование информации в виде модели данных, выраженной в виде схемы. Например, поиск по фрагменту текста должен быть "проиндексирован" путем преобразования буквенной строки в вектор с помощью "встраивания" и включения векторного поиска. Помимо этого основного требования, может потребоваться хранение других свойств, таких как временная метка публикации и автор. Эти метаданные позволяют уточнять семантический поиск с помощью фильтрации, возвращая только тексты, опубликованные после определенной даты или определенным автором. Вы также можете получить эти скаляры вместе с основным текстом, чтобы отобразить результат поиска в приложении. Для упорядочивания этих фрагментов текста каждому из них должен быть присвоен уникальный идентификатор, выраженный в виде целого числа или строки. Эти элементы необходимы для реализации сложной логики поиска.</p>
-<p>Обратитесь к <a href="/docs/ru/schema-hands-on.md">Schema Design Hands-On</a>, чтобы узнать, как создать хорошо продуманную схему.</p>
+<p>Обратитесь к <a href="/docs/ru/v2.5.x/schema-hands-on.md">Schema Design Hands-On</a>, чтобы узнать, как создать хорошо продуманную схему.</p>
 <h2 id="Create-Schema​" class="common-anchor-header">Создание схемы<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,6 +70,7 @@ summary: >-
 schema = MilvusClient.create_schema()​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;​
 ​
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();​
@@ -112,6 +114,7 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; ​
 ​
@@ -151,7 +154,7 @@ export schema='{​
 </code></pre>
 <p>При добавлении поля вы можете явно указать его как первичное, установив для свойства <code translate="no">is_primary</code> значение <code translate="no">True</code>. По умолчанию первичное поле принимает значения <strong>Int64</strong>. В этом случае значение первичного поля должно быть целым числом, как на <code translate="no">12345</code>. Если вы решили использовать в первичном поле значения <strong>VarChar</strong>, то значение должно быть строкой, как на <code translate="no">my_entity_1234</code>.</p>
 <p>Вы также можете установить для свойства <code translate="no">autoId</code> значение <code translate="no">True</code>, чтобы Milvus автоматически выделял значения первичного поля при вставке данных.</p>
-<p>Подробнее см. в разделе <a href="/docs/ru/primary-field.md">Первичное поле и автоидентификация</a>.</p>
+<p>Подробнее см. в разделе <a href="/docs/ru/v2.5.x/primary-field.md">Первичное поле и автоидентификация</a>.</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">Добавление векторных полей<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,6 +181,7 @@ export schema='{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
         .dataType(DataType.FloatVector)​
@@ -238,7 +242,7 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>В распространенных случаях вы можете использовать скалярные поля для хранения метаданных векторных вкраплений, хранящихся в Milvus, и проводить поиск по ANN с фильтрацией метаданных для повышения корректности результатов поиска. Milvus поддерживает несколько типов скалярных полей, включая <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> и JSON.</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">Добавление строковых полей</h3><p>В Milvus вы можете использовать поля VarChar для хранения строк. Подробнее о поле VarChar см. в разделе <a href="/docs/ru/string.md">"Строковое поле"</a>.</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">Добавление строковых полей</h3><p>В Milvus вы можете использовать поля VarChar для хранения строк. Подробнее о поле VarChar см. в разделе <a href="/docs/ru/v2.5.x/string.md">"Строковое поле"</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -249,6 +253,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
         .dataType(DataType.VarChar)​
@@ -283,7 +288,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">Добавление числовых полей</h3><p>Milvus поддерживает следующие типы чисел: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> и <code translate="no">Double</code>. Подробнее о числовых полях см. в разделе <a href="/docs/ru/number.md">Числовое поле</a>.</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">Добавление числовых полей</h3><p>Milvus поддерживает следующие типы чисел: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> и <code translate="no">Double</code>. Подробнее о числовых полях см. в разделе <a href="/docs/ru/v2.5.x/number.md">Числовое поле</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -292,6 +297,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)​
         .dataType(DataType.Int64)​
@@ -329,6 +335,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)​
         .dataType(DataType.Bool)​
@@ -358,7 +365,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">Добавление полей JSON</h3><p>В поле JSON обычно хранятся полуструктурированные данные в формате JSON. Подробнее о полях JSON читайте в разделе <a href="/docs/ru/use-json-fields.md">Поле JSON</a>.</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">Добавление полей JSON</h3><p>В поле JSON обычно хранятся полуструктурированные данные в формате JSON. Подробнее о полях JSON читайте в разделе <a href="/docs/ru/v2.5.x/use-json-fields.md">Поле JSON</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -367,6 +374,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)​
         .dataType(DataType.JSON)​
@@ -397,7 +405,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">Добавление полей массива</h3><p>Поле массива хранит список элементов. Типы данных всех элементов в поле массива должны быть одинаковыми. Подробнее о полях массива см. в разделе <a href="/docs/ru/array_data_type.md">Поле массива</a>.</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">Добавление полей массива</h3><p>Поле массива хранит список элементов. Типы данных всех элементов в поле массива должны быть одинаковыми. Подробнее о полях массива см. в разделе <a href="/docs/ru/v2.5.x/array_data_type.md">Поле массива</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -409,6 +417,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)​
         .dataType(DataType.Array)​

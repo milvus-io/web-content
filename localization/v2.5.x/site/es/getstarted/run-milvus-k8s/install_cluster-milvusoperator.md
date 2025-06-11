@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: Aprenda a instalar el clúster Milvus en Kubernetes utilizando Milvus Operator
 title: Instalar Milvus Cluster con Milvus Operator
 ---
+
 <h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Ejecutar Milvus en Kubernetes con Milvus Operator<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,14 +54,15 @@ title: Instalar Milvus Cluster con Milvus Operator
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/es/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Crear un clúster K8s</a>.</p></li>
+<li><p><a href="/docs/es/v2.5.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Crear un clúster K8s</a>.</p></li>
 <li><p>Instale una <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>. Puede comprobar la StorageClass instalada de la siguiente manera.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+NAME PROVISIONER RECLAIMPOLICY VOLUMEBIINDINGMODE ALLOWVOLUMEEXPANSION AGE
+standard (default) k8s.io/minikube-hostpath Delete Immediate <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Compruebe <a href="/docs/es/prerequisite-helm.md">los requisitos de hardware y software</a> antes de la instalación.</p></li>
+
+<li><p>Compruebe <a href="/docs/es/v2.5.x/prerequisite-helm.md">los requisitos de hardware y software</a> antes de la instalación.</p></li>
 <li><p>Antes de instalar Milvus, se recomienda utilizar la <a href="https://milvus.io/tools/sizing">Herramienta de Dimensionamiento de Milvus</a> para estimar los requisitos de hardware basados en el tamaño de sus datos. Esto ayuda a garantizar un rendimiento y una asignación de recursos óptimos para su instalación de Milvus.</p></li>
 </ul>
 <div class="alert note">
@@ -130,9 +132,10 @@ deployment.apps/milvus-operator-controller-manager created
 <p>Puede comprobar si el pod Milvus Operator se está ejecutando de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
-NAME                               READY   STATUS    RESTARTS   AGE
-milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
+NAME READY STATUS RESTARTS AGE
+milvus-operator-5fd77b87dc-msrk4 1/1 Running 0 46s
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Deploy-Milvus" class="common-anchor-header">Despliegue Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,33 +197,34 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <p>Una vez que su cluster Milvus esté listo, el estado de todos los pods en el cluster Milvus debería ser similar al siguiente.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
-NAME                                            READY   STATUS      RESTARTS   AGE
-my-release-etcd-0                               1/1     Running     0          14m
-my-release-etcd-1                               1/1     Running     0          14m
-my-release-etcd-2                               1/1     Running     0          14m
-my-release-milvus-datanode-5c686bd65-wxtmf      1/1     Running     0          6m
-my-release-milvus-indexnode-5b9787b54-xclbx     1/1     Running     0          6m
-my-release-milvus-proxy-84f67cdb7f-pg6wf        1/1     Running     0          6m
-my-release-milvus-querynode-5bcb59f6-nhqqw      1/1     Running     0          6m
-my-release-milvus-mixcoord-fdcccfc84-9964g      1/1     Running     0          6m
-my-release-minio-0                              1/1     Running     0          14m
-my-release-minio-1                              1/1     Running     0          14m
-my-release-minio-2                              1/1     Running     0          14m
-my-release-minio-3                              1/1     Running     0          14m
-my-release-pulsar-bookie-0                      1/1     Running     0          14m
-my-release-pulsar-bookie-1                      1/1     Running     0          14m
-my-release-pulsar-bookie-init-h6tfz             0/1     Completed   0          14m
-my-release-pulsar-broker-0                      1/1     Running     0          14m
-my-release-pulsar-broker-1                      1/1     Running     0          14m
-my-release-pulsar-proxy-0                       1/1     Running     0          14m
-my-release-pulsar-proxy-1                       1/1     Running     0          14m
-my-release-pulsar-pulsar-init-d2t56             0/1     Completed   0          14m
-my-release-pulsar-recovery-0                    1/1     Running     0          14m
-my-release-pulsar-toolset-0                     1/1     Running     0          14m
-my-release-pulsar-zookeeper-0                   1/1     Running     0          14m
-my-release-pulsar-zookeeper-1                   1/1     Running     0          13m
-my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
+NAME READY STATUS RESTARTS AGE
+my-release-etcd-0 1/1 Running 0 14m
+my-release-etcd-1 1/1 Running 0 14m
+my-release-etcd-2 1/1 Running 0 14m
+my-release-milvus-datanode-5c686bd65-wxtmf 1/1 Running 0 6m
+my-release-milvus-indexnode-5b9787b54-xclbx 1/1 Running 0 6m
+my-release-milvus-proxy-84f67cdb7f-pg6wf 1/1 Running 0 6m
+my-release-milvus-querynode-5bcb59f6-nhqqw 1/1 Running 0 6m
+my-release-milvus-mixcoord-fdcccfc84-9964g 1/1 Running 0 6m
+my-release-minio-0 1/1 Running 0 14m
+my-release-minio-1 1/1 Running 0 14m
+my-release-minio-2 1/1 Running 0 14m
+my-release-minio-3 1/1 Running 0 14m
+my-release-pulsar-bookie-0 1/1 Running 0 14m
+my-release-pulsar-bookie-1 1/1 Running 0 14m
+my-release-pulsar-bookie-init-h6tfz 0/1 Completed 0 14m
+my-release-pulsar-broker-0 1/1 Running 0 14m
+my-release-pulsar-broker-1 1/1 Running 0 14m
+my-release-pulsar-proxy-0 1/1 Running 0 14m
+my-release-pulsar-proxy-1 1/1 Running 0 14m
+my-release-pulsar-pulsar-init-d2t56 0/1 Completed 0 14m
+my-release-pulsar-recovery-0 1/1 Running 0 14m
+my-release-pulsar-toolset-0 1/1 Running 0 14m
+my-release-pulsar-zookeeper-0 1/1 Running 0 14m
+my-release-pulsar-zookeeper-1 1/1 Running 0 13m
+my-release-pulsar-zookeeper-2 1/1 Running 0 13m
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Reenvíe un puerto local a Milvus</h3><p>Ejecute el siguiente comando para obtener el puerto en el que sirve su cluster Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pod my-release-milvus-proxy-84f67cdb7f-pg6wf --template</span>
 =&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;
@@ -255,7 +259,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus se entrega con una herramienta GUI integrada llamada Milvus WebUI a la que puede acceder a través de su navegador. Milvus Web UI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus Web UI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la colección, y listar las configuraciones detalladas de Milvus. Para más detalles sobre Milvus Web UI, consulte <a href="/docs/es/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus se entrega con una herramienta GUI integrada llamada Milvus WebUI a la que puede acceder a través de su navegador. Milvus Web UI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus Web UI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la colección, y listar las configuraciones detalladas de Milvus. Para más detalles sobre Milvus Web UI, consulte <a href="/docs/es/v2.5.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>Para habilitar el acceso a Milvus Web UI, necesita reenviar el puerto del pod proxy a un puerto local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -326,27 +330,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Habiendo instalado Milvus en Docker, puede:</p>
 <ul>
-<li><p>Comprobar <a href="/docs/es/quickstart.md">Hello Milvus</a> para ver lo que Milvus puede hacer.</p></li>
+<li><p>Comprobar <a href="/docs/es/v2.5.x/quickstart.md">Hello Milvus</a> para ver lo que Milvus puede hacer.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
-<li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
-<li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
-<li><a href="/docs/es/manage-partitions.md">Gestionar Particiones</a></li>
-<li><a href="/docs/es/insert-update-delete.md">Insertar, Subinsertar y Eliminar</a></li>
-<li><a href="/docs/es/single-vector-search.md">Búsqueda monovectorial</a></li>
-<li><a href="/docs/es/multi-vector-search.md">Búsqueda Híbrida</a></li>
+<li><a href="/docs/es/v2.5.x/manage_databases.md">Gestionar bases de datos</a></li>
+<li><a href="/docs/es/v2.5.x/manage-collections.md">Gestionar colecciones</a></li>
+<li><a href="/docs/es/v2.5.x/manage-partitions.md">Gestionar Particiones</a></li>
+<li><a href="/docs/es/v2.5.x/insert-update-delete.md">Insertar, Subinsertar y Eliminar</a></li>
+<li><a href="/docs/es/v2.5.x/single-vector-search.md">Búsqueda monovectorial</a></li>
+<li><a href="/docs/es/v2.5.x/multi-vector-search.md">Búsqueda Híbrida</a></li>
 </ul></li>
-<li><p><a href="/docs/es/upgrade_milvus_cluster-helm.md">Actualice Milvus utilizando Helm Chart</a>.</p></li>
-<li><p><a href="/docs/es/scaleout.md">Escale su cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/es/v2.5.x/upgrade_milvus_cluster-helm.md">Actualice Milvus utilizando Helm Chart</a>.</p></li>
+<li><p><a href="/docs/es/v2.5.x/scaleout.md">Escale su cluster Milvus</a>.</p></li>
 <li><p>Despliegue su clúster Milvu en nubes:</p>
 <ul>
-<li><a href="/docs/es/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/es/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/es/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/es/v2.5.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/es/v2.5.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/es/v2.5.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore Milvus <a href="/docs/es/milvus-webui.md">WebUI</a>, una interfaz web intuitiva para la observabilidad y gestión de Milvus.</p></li>
-<li><p>Explore Milvus <a href="/docs/es/milvus_backup_overview.md">Backup</a>, una herramienta de código abierto para las copias de seguridad de los datos de Milvus.</p></li>
-<li><p>Explore <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para depurar Milvus y actualizaciones de configuración dinámicas.</p></li>
+<li><p>Explore Milvus <a href="/docs/es/v2.5.x/milvus-webui.md">WebUI</a>, una interfaz web intuitiva para la observabilidad y gestión de Milvus.</p></li>
+<li><p>Explore Milvus <a href="/docs/es/v2.5.x/milvus_backup_overview.md">Backup</a>, una herramienta de código abierto para las copias de seguridad de los datos de Milvus.</p></li>
+<li><p>Explore <a href="/docs/es/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para depurar Milvus y actualizaciones de configuración dinámicas.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
-<li><p><a href="/docs/es/monitor.md">Supervise Milvus con Prometheus</a>.</p></li>
+<li><p><a href="/docs/es/v2.5.x/monitor.md">Supervise Milvus con Prometheus</a>.</p></li>
 </ul>

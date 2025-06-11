@@ -5,6 +5,7 @@ related_key: Docker
 summary: Milvus를 설치하기 전에 필요한 준비 사항을 Docker Compose로 알아보세요.
 title: Docker Compose로 Milvus를 설치하기 위한 요구 사항
 ---
+
 <h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">Docker Compose로 Milvus를 설치하기 위한 요구 사항<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,6 +107,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>하드웨어 및 소프트웨어가 위의 요구 사항을 충족하는 경우 다음을 수행할 수 있습니다.</p>
 <ul>
-<li><a href="/docs/ko/install_standalone-docker.md">Docker에서 Milvus 실행</a></li>
-<li><a href="/docs/ko/install_standalone-docker-compose.md">Docker Compose로 Milvus 실행하기</a></li>
+<li><a href="/docs/ko/v2.5.x/install_standalone-docker.md">Docker에서 Milvus 실행</a></li>
+<li><a href="/docs/ko/v2.5.x/install_standalone-docker-compose.md">Docker Compose로 Milvus 실행하기</a></li>
 </ul>

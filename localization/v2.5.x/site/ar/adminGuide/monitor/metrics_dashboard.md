@@ -3,6 +3,7 @@ id: metrics_dashboard.md
 title: لوحة معلومات مقاييس ميلفوس
 summary: يقدم هذا الموضوع مقاييس المراقبة المعروضة في لوحة معلومات Milvus Dashboard.
 ---
+
 <h1 id="Milvus-Metrics-Dashboard" class="common-anchor-header">لوحة معلومات مقاييس ميلفوس<button data-href="#Milvus-Metrics-Dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ summary: يقدم هذا الموضوع مقاييس المراقبة المعر
       </svg>
     </button></h1><p>يُخرج Milvus قائمة بمقاييس مفصلة متسلسلة زمنيًا أثناء وقت التشغيل. يمكنك استخدام <a href="https://prometheus.io/">Prometheus</a> و <a href="https://grafana.com/">Grafana</a> لتصور المقاييس. يقدم هذا الموضوع مقاييس المراقبة المعروضة في لوحة عدادات Grafana Milvus Dashboard.</p>
 <p>وحدة الوقت في هذا الموضوع هي المللي ثانية. وتشير "النسبة المئوية 99 في المائة" في هذا الموضوع إلى حقيقة أن 99 في المائة من إحصائيات الوقت يتم التحكم فيها ضمن قيمة معينة.</p>
-<p>نوصي بقراءة <a href="/docs/ar/monitor_overview.md">نظرة عامة على إطار عمل مراقبة Milvus</a> لفهم مقاييس Prometheus أولاً.</p>
+<p>نوصي بقراءة <a href="/docs/ar/v2.5.x/monitor_overview.md">نظرة عامة على إطار عمل مراقبة Milvus</a> لفهم مقاييس Prometheus أولاً.</p>
 <p><details><summary>الوكيل</summary></p>
 <table>
 <thead>

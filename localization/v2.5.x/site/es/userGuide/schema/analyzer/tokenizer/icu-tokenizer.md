@@ -9,6 +9,7 @@ summary: >-
   texto en palabras en la mayoría de los idiomas del mundo.
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="ICU" class="common-anchor-header">ICU<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#ICU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +57,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>El tokenizador <code translate="no">icu</code> puede funcionar junto con uno o varios filtros. Por ejemplo, el siguiente código define un analizador que utiliza el tokenizador <code translate="no">icu</code> y <a href="/docs/es/removepunct-filter.md">el filtro remove punct</a>:</p>
+<p>El tokenizador <code translate="no">icu</code> puede funcionar junto con uno o varios filtros. Por ejemplo, el siguiente código define un analizador que utiliza el tokenizador <code translate="no">icu</code> y <a href="/docs/es/v2.5.x/removepunct-filter.md">el filtro remove punct</a>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -74,7 +75,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Después de definir <code translate="no">analyzer_params</code>, puede aplicarlos a un campo <code translate="no">VARCHAR</code> al definir un esquema de colección. Esto permite a Milvus procesar el texto de ese campo utilizando el analizador especificado para una tokenización y filtrado eficientes. Para más detalles, consulte <a href="/docs/es/analyzer-overview.md#Example-use">Ejemplo de uso</a>.</p>
+<p>Después de definir <code translate="no">analyzer_params</code>, puede aplicarlos a un campo <code translate="no">VARCHAR</code> al definir un esquema de colección. Esto permite a Milvus procesar el texto de ese campo utilizando el analizador especificado para una tokenización y filtrado eficientes. Para más detalles, consulte <a href="/docs/es/v2.5.x/analyzer-overview.md#Example-use">Ejemplo de uso</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,6 +122,7 @@ sample_text = <span class="hljs-string">&quot;Привет! Как дела?&quo
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

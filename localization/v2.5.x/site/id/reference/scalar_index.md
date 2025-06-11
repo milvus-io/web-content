@@ -4,6 +4,7 @@ related_key: scalar_index
 summary: Indeks skalar dalam Milvus.
 title: Indeks Skalar
 ---
+
 <h1 id="Scalar-Index" class="common-anchor-header">Indeks Skalar<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ title: Indeks Skalar
         ></path>
       </svg>
     </button></h2><p>Setelah melakukan pencarian kemiripan vektor di Milvus, Anda dapat menggunakan operator logika untuk mengorganisasikan bidang skalar ke dalam ekspresi boolean.</p>
-<p>Ketika Milvus menerima permintaan pencarian dengan ekspresi boolean, Milvus menguraikan ekspresi boolean menjadi pohon sintaks abstrak (AST) untuk menghasilkan rencana fisik untuk pemfilteran atribut. Milvus kemudian menerapkan rencana fisik di setiap segmen untuk menghasilkan <a href="/docs/id/bitset.md">bitset</a> sebagai hasil penyaringan dan menyertakan hasilnya sebagai parameter pencarian vektor untuk mempersempit cakupan pencarian. Dalam hal ini, kecepatan pencarian vektor sangat bergantung pada kecepatan pemfilteran atribut.</p>
+<p>Ketika Milvus menerima permintaan pencarian dengan ekspresi boolean, Milvus menguraikan ekspresi boolean menjadi pohon sintaks abstrak (AST) untuk menghasilkan rencana fisik untuk pemfilteran atribut. Milvus kemudian menerapkan rencana fisik di setiap segmen untuk menghasilkan <a href="/docs/id/v2.5.x/bitset.md">bitset</a> sebagai hasil penyaringan dan menyertakan hasilnya sebagai parameter pencarian vektor untuk mempersempit cakupan pencarian. Dalam hal ini, kecepatan pencarian vektor sangat bergantung pada kecepatan pemfilteran atribut.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +155,12 @@ title: Indeks Skalar
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Untuk mengindeks bidang skalar, baca <a href="/docs/id/index-scalar-fields.md">Membuat Indeks pada Skalar</a>.</p></li>
+<li><p>Untuk mengindeks bidang skalar, baca <a href="/docs/id/v2.5.x/index-scalar-fields.md">Membuat Indeks pada Skalar</a>.</p></li>
 <li><p>Untuk mempelajari lebih lanjut tentang istilah dan aturan terkait yang disebutkan di atas, baca</p>
 <ul>
-<li><a href="/docs/id/bitset.md">Bitset</a></li>
-<li><a href="/docs/id/multi-vector-search.md">Pencarian hibrida</a></li>
-<li><a href="/docs/id/boolean.md">Aturan ekspresi Boolean</a></li>
-<li><a href="/docs/id/schema.md#Supported-data-type">Tipe data yang didukung</a></li>
+<li><a href="/docs/id/v2.5.x/bitset.md">Bitset</a></li>
+<li><a href="/docs/id/v2.5.x/multi-vector-search.md">Pencarian hibrida</a></li>
+<li><a href="/docs/id/v2.5.x/boolean.md">Aturan ekspresi Boolean</a></li>
+<li><a href="/docs/id/v2.5.x/schema.md#Supported-data-type">Tipe data yang didukung</a></li>
 </ul></li>
 </ul>

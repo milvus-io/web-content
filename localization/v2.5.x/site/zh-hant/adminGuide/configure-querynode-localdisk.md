@@ -1,9 +1,10 @@
 ---
 id: configure-querynode-localdisk.md
 title: 使用本機磁碟配置 Milvus QueryNode
-related_key: 'querynode, query node, local disk'
+related_key: "querynode, query node, local disk"
 summary: 瞭解如何設定 Milvus QueryNode 使用本機磁碟。
 ---
+
 <h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">使用本機磁碟配置 Milvus QueryNode<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,11 +39,11 @@ summary: 瞭解如何設定 Milvus QueryNode 使用本機磁碟。
     </button></h2><p>Milvus 是專為人工智能量身打造的向量資料庫，可有效儲存及擷取大量向量資料。它是圖像和視訊分析、自然語言處理和推薦系統等任務的理想選擇。為了確保最佳效能，將磁碟讀取延遲時間降至最低是非常重要的。強烈建議使用本機 NVMe SSD，以防止延遲並保持系統穩定。</p>
 <p>本機磁碟儲存發揮作用的主要功能包括</p>
 <ul>
-<li><a href="/docs/zh-hant/chunk_cache.md"><strong>Chunk 快取</strong></a>：將資料預先載入本機磁碟快取，以加快搜尋速度。</li>
-<li><a href="/docs/zh-hant/mmap.md"><strong>MMap</strong></a>：將檔案內容直接映射到記憶體，以提高記憶體效率。</li>
-<li><a href="/docs/zh-hant/disk_index.md"><strong>DiskANN 索引</strong></a>：需要磁碟儲存空間以進行有效率的索引管理。</li>
+<li><a href="/docs/zh-hant/v2.5.x/chunk_cache.md"><strong>Chunk 快取</strong></a>：將資料預先載入本機磁碟快取，以加快搜尋速度。</li>
+<li><a href="/docs/zh-hant/v2.5.x/mmap.md"><strong>MMap</strong></a>：將檔案內容直接映射到記憶體，以提高記憶體效率。</li>
+<li><a href="/docs/zh-hant/v2.5.x/disk_index.md"><strong>DiskANN 索引</strong></a>：需要磁碟儲存空間以進行有效率的索引管理。</li>
 </ul>
-<p>在本文中，我們將著重於在雲端平台上部署<a href="/docs/zh-hant/install-overview.md#Milvus-Distributed">Milvus Distributed</a>，以及如何設定 QueryNode 使用 NVMe 磁碟儲存。下表列出各雲端供應商推薦的機器類型。</p>
+<p>在本文中，我們將著重於在雲端平台上部署<a href="/docs/zh-hant/v2.5.x/install-overview.md#Milvus-Distributed">Milvus Distributed</a>，以及如何設定 QueryNode 使用 NVMe 磁碟儲存。下表列出各雲端供應商推薦的機器類型。</p>
 <table>
 <thead>
 <tr><th style="text-align:center">雲供應商</th><th style="text-align:center">機器類型</th></tr>
@@ -86,21 +87,22 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <span class="hljs-comment">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Running custom user data script&quot;</span>
 <span class="hljs-keyword">if</span> ( lsblk | fgrep -q nvme1n1 ); <span class="hljs-keyword">then</span>
-    <span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
-    mkfs.xfs /dev/nvme1n1
-    mount /dev/nvme1n1 /mnt/data
-    <span class="hljs-built_in">chmod</span> 0755 /mnt/data
-    <span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
-    <span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
-    UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
-    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span>     /mnt/data   xfs    defaults,noatime  1   1&quot;</span> &gt;&gt; /etc/fstab
+<span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
+mkfs.xfs /dev/nvme1n1
+mount /dev/nvme1n1 /mnt/data
+<span class="hljs-built_in">chmod</span> 0755 /mnt/data
+<span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
+<span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
+<span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
+<span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
+UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span> /mnt/data xfs defaults,noatime 1 1&quot;</span> &gt;&gt; /etc/fstab
 <span class="hljs-keyword">fi</span>
 <span class="hljs-built_in">echo</span> 10485760 &gt; /proc/sys/fs/aio-max-nr
 
 --==MYBOUNDARY==--
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>在上述範例中，我們假設 NVMe 磁碟為<code translate="no">/dev/nvme1n1</code> 。您需要修改腳本以符合您的特定配置。</p>
 </div>
@@ -122,6 +124,7 @@ mkfs.xfs /dev/md0
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/dev/md0 /var/lib/kubelet xfs defaults 0 0&#x27;</span> &gt;&gt; /etc/fstab
 mount -a
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>在上述示例中，我們假設 NVMe 磁碟為<code translate="no">/dev/nvme0n1</code> 和<code translate="no">/dev/nvme1n1</code> 。您需要修改腳本以符合您的特定配置。</p>
 </div>
@@ -134,7 +137,7 @@ mkfs.xfs /dev/nvme0n1
 mount -a
 
 <span class="hljs-built_in">mkdir</span> -p /mnt/data/kubelet /mnt/data/containerd /mnt/data/log/pods
-<span class="hljs-built_in">mkdir</span> -p  /var/lib/kubelet /var/lib/containerd /var/log/pods
+<span class="hljs-built_in">mkdir</span> -p /var/lib/kubelet /var/lib/containerd /var/log/pods
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/kubelet /var/lib/kubelet none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/containerd /var/lib/containerd none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
@@ -143,6 +146,7 @@ mount -a
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init end...&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>在上述示例中，我們假設 NVMe 磁碟為<code translate="no">/dev/nvme0n1</code> 。您需要修改腳本以符合您的特定配置。</p>
 </div>
@@ -219,8 +223,9 @@ fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numj
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
-fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1  --<span class="hljs-built_in">readonly</span>
+fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1 --<span class="hljs-built_in">readonly</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>輸出結果應該是這樣</p>
 <pre><code translate="no" class="language-bash">Jobs: <span class="hljs-number">128</span> (f=<span class="hljs-number">128</span>): [r(<span class="hljs-number">128</span>)][<span class="hljs-number">100.0</span>%][r=1458MiB/s][r=373k IOPS][eta 00m:00s]
 iops-test-job: (groupid=<span class="hljs-number">0</span>, jobs=<span class="hljs-number">128</span>): err= <span class="hljs-number">0</span>: pid=<span class="hljs-number">768</span>: Mon Jun <span class="hljs-number">24</span> 09:<span class="hljs-number">35</span>:06 <span class="hljs-number">2024</span>
@@ -266,7 +271,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>一旦驗證結果令人滿意，您就可以依照下列步驟部署 Milvus Distributed：</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">使用 Helm 部署 Milvus Distributed 的提示</h3><p>QueryNode pod 預設使用 NVMe 磁碟作為 EmptyDir 磁碟區。建議您將 NVMe 磁碟掛載至 QueryNode pod 內的<code translate="no">/var/lib/milvus/data</code> ，以確保最佳效能。</p>
-<p>有關如何使用 Helm 部署 Milvus Distributed 的詳細資訊，請參閱使用<a href="/docs/zh-hant/install_cluster-helm.md">Helm 在 Kubernetes 執行 Milvus</a>。</p>
+<p>有關如何使用 Helm 部署 Milvus Distributed 的詳細資訊，請參閱使用<a href="/docs/zh-hant/v2.5.x/install_cluster-helm.md">Helm 在 Kubernetes 執行 Milvus</a>。</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 部署 Milvus Distributed 的提示</h3><p>Milvus Operator 會自動設定 QueryNode pod 使用 NVMe 磁碟作為 EmptyDir 磁碟區。建議您將下列配置新增至<code translate="no">MilvusCluster</code> 自訂資源：</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -279,4 +284,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>這將確保 QueryNode pod 使用 NVMe 磁碟作為資料卷。有關如何使用 Milvus Operator 部署<a href="/docs/zh-hant/install_cluster-milvusoperator.md">Milvus</a> Distributed 的詳細資訊，請參閱使用<a href="/docs/zh-hant/install_cluster-milvusoperator.md">Milvus Operator 在 Kubernetes 中執行 Milvus</a>。</p>
+<p>這將確保 QueryNode pod 使用 NVMe 磁碟作為資料卷。有關如何使用 Milvus Operator 部署<a href="/docs/zh-hant/v2.5.x/install_cluster-milvusoperator.md">Milvus</a> Distributed 的詳細資訊，請參閱使用<a href="/docs/zh-hant/v2.5.x/install_cluster-milvusoperator.md">Milvus Operator 在 Kubernetes 中執行 Milvus</a>。</p>

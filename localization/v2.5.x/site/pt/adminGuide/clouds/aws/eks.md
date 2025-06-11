@@ -4,6 +4,7 @@ title: Implantar um cluster do Milvus no EKS
 related_key: cluster
 summary: Saiba como implementar um cluster Milvus no EKS
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-EKS" class="common-anchor-header">Implantar um cluster do Milvus no EKS<button data-href="#Deploy-a-Milvus-Cluster-on-EKS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,13 +107,13 @@ summary: Saiba como implementar um cluster Milvus no EKS
 <p>Leia <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Regras de nomenclatura de bucket</a> e observe as regras de nomenclatura ao nomear seu bucket do AWS S3.</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=<span class="hljs-string">&quot;milvus-bucket-<span class="hljs-subst">$(openssl rand -hex 12)</span>&quot;</span>
 
-aws s3api create-bucket --bucket <span class="hljs-string">&quot;<span class="hljs-variable">$milvus_bucket_name</span>&quot;</span> --region <span class="hljs-string">&#x27;us-east-2&#x27;</span> --acl private  --object-ownership ObjectWriter --create-bucket-configuration LocationConstraint=<span class="hljs-string">&#x27;us-east-2&#x27;</span>
-
+aws s3api create-bucket --bucket <span class="hljs-string">&quot;<span class="hljs-variable">$milvus_bucket_name</span>&quot;</span> --region <span class="hljs-string">&#x27;us-east-2&#x27;</span> --acl private --object-ownership ObjectWriter --create-bucket-configuration LocationConstraint=<span class="hljs-string">&#x27;us-east-2&#x27;</span>
 
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># &quot;Location&quot;: &quot;http://milvus-bucket-039dd013c0712f085d60e21f.s3.amazonaws.com/&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Crie uma política de IAM para ler e gravar objetos no bucket criado acima. <strong>Substitua o nome do bucket pelo seu próprio nome.</strong></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;{
   &quot;Version&quot;: &quot;2012-10-17&quot;,
@@ -135,23 +136,23 @@ aws s3api create-bucket --bucket <span class="hljs-string">&quot;<span class="hl
 
 aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://milvus-s3-policy.json
 
-
 <span class="hljs-comment"># Get the ARN from the command output as follows:</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;Policy&quot;: {</span>
-<span class="hljs-comment">#         &quot;PolicyName&quot;: &quot;MilvusS3ReadWrite&quot;,</span>
-<span class="hljs-comment">#         &quot;PolicyId&quot;: &quot;AN5QQVVPM1BVTFlBNkdZT&quot;,</span>
-<span class="hljs-comment">#         &quot;Arn&quot;: &quot;arn:aws:iam::12345678901:policy/MilvusS3ReadWrite&quot;,</span>
-<span class="hljs-comment">#         &quot;Path&quot;: &quot;/&quot;,</span>
-<span class="hljs-comment">#         &quot;DefaultVersionId&quot;: &quot;v1&quot;,</span>
-<span class="hljs-comment">#         &quot;AttachmentCount&quot;: 0,</span>
-<span class="hljs-comment">#         &quot;PermissionsBoundaryUsageCount&quot;: 0,</span>
-<span class="hljs-comment">#         &quot;IsAttachable&quot;: true,</span>
-<span class="hljs-comment">#         &quot;CreateDate&quot;: &quot;2023-11-16T06:00:01+00:00&quot;,</span>
-<span class="hljs-comment">#        &quot;UpdateDate&quot;: &quot;2023-11-16T06:00:01+00:00&quot;</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }    </span>
+<span class="hljs-comment"># &quot;Policy&quot;: {</span>
+<span class="hljs-comment"># &quot;PolicyName&quot;: &quot;MilvusS3ReadWrite&quot;,</span>
+<span class="hljs-comment"># &quot;PolicyId&quot;: &quot;AN5QQVVPM1BVTFlBNkdZT&quot;,</span>
+<span class="hljs-comment"># &quot;Arn&quot;: &quot;arn:aws:iam::12345678901:policy/MilvusS3ReadWrite&quot;,</span>
+<span class="hljs-comment"># &quot;Path&quot;: &quot;/&quot;,</span>
+<span class="hljs-comment"># &quot;DefaultVersionId&quot;: &quot;v1&quot;,</span>
+<span class="hljs-comment"># &quot;AttachmentCount&quot;: 0,</span>
+<span class="hljs-comment"># &quot;PermissionsBoundaryUsageCount&quot;: 0,</span>
+<span class="hljs-comment"># &quot;IsAttachable&quot;: true,</span>
+<span class="hljs-comment"># &quot;CreateDate&quot;: &quot;2023-11-16T06:00:01+00:00&quot;,</span>
+<span class="hljs-comment"># &quot;UpdateDate&quot;: &quot;2023-11-16T06:00:01+00:00&quot;</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># } </span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Anexe a política ao seu usuário do AWS.</p>
 <pre><code translate="no" class="language-shell">aws iam attach-user-policy --user-name &lt;your-user-name&gt; --policy-arn <span class="hljs-string">&quot;arn:aws:iam::&lt;your-iam-account-id&gt;:policy/MilvusS3ReadWrite&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
@@ -162,40 +163,43 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
 kind: ClusterConfig
 
 metadata:
-  name: <span class="hljs-string">&#x27;milvus-eks-cluster&#x27;</span>
-  region: <span class="hljs-string">&#x27;us-east-2&#x27;</span>
-  version: <span class="hljs-string">&quot;1.27&quot;</span>
+name: <span class="hljs-string">&#x27;milvus-eks-cluster&#x27;</span>
+region: <span class="hljs-string">&#x27;us-east-2&#x27;</span>
+version: <span class="hljs-string">&quot;1.27&quot;</span>
 
 iam:
-  withOIDC: <span class="hljs-literal">true</span>
+withOIDC: <span class="hljs-literal">true</span>
 
-  serviceAccounts:
-  - metadata:
-      name: aws-load-balancer-controller
-      namespace: kube-system
-    wellKnownPolicies:
-      awsLoadBalancerController: <span class="hljs-literal">true</span>
+serviceAccounts:
+
+- metadata:
+  name: aws-load-balancer-controller
+  namespace: kube-system
+  wellKnownPolicies:
+  awsLoadBalancerController: <span class="hljs-literal">true</span>
 
 managedNodeGroups:
-  - name: milvus-node-group
-    labels: { role: milvus }
-    instanceType: m6i.4xlarge
-    desiredCapacity: 3
-    privateNetworking: <span class="hljs-literal">true</span>
-    
+
+- name: milvus-node-group
+  labels: { role: milvus }
+  instanceType: m6i.4xlarge
+  desiredCapacity: 3
+  privateNetworking: <span class="hljs-literal">true</span>
+
 addons:
+
 - name: vpc-cni
   version: latest
   attachPolicyARNs:
-    - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+  - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
 - name: coredns
   version: latest
 - name: kube-proxy
   version: latest
 - name: aws-ebs-csi-driver
-  version: latest
-  wellKnownPolicies:
-    ebsCSIController: <span class="hljs-literal">true</span>
+version: latest
+wellKnownPolicies:
+ebsCSIController: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Execute o seguinte comando para criar um cluster EKS.</p>
 <pre><code translate="no" class="language-bash">eksctl create cluster -f eks_cluster.yaml
@@ -208,6 +212,7 @@ addons:
 
 kubectl <span class="hljs-keyword">get</span> nodes -A -o wide
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul>
 <h2 id="Create-a-StorageClass" class="common-anchor-header">Criar uma StorageClass<button data-href="#Create-a-StorageClass" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -289,74 +294,75 @@ helm repo update
   enabled: <span class="hljs-literal">true</span>
 
 service:
-  <span class="hljs-built_in">type</span>: LoadBalancer
-  port: 19530
-  annotations: 
-    service.beta.kubernetes.io/aws-load-balancer-type: external
-    service.beta.kubernetes.io/aws-load-balancer-name: milvus-service
-    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
-    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+<span class="hljs-built_in">type</span>: LoadBalancer
+port: 19530
+annotations:
+service.beta.kubernetes.io/aws-load-balancer-type: external
+service.beta.kubernetes.io/aws-load-balancer-name: milvus-service
+service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
 
 minio:
-  enabled: <span class="hljs-literal">false</span>
+enabled: <span class="hljs-literal">false</span>
 
 externalS3:
-  enabled: <span class="hljs-literal">true</span>
-  host: <span class="hljs-string">&quot;s3.us-east-2.amazonaws.com&quot;</span>
-  port: <span class="hljs-string">&quot;443&quot;</span>
-  useSSL: <span class="hljs-literal">true</span>
-  bucketName: <span class="hljs-string">&quot;&lt;bucket-name&gt;&quot;</span>
-  useIAM: <span class="hljs-literal">false</span>
-  cloudProvider: <span class="hljs-string">&quot;aws&quot;</span>
-  iamEndpoint: <span class="hljs-string">&quot;&quot;</span>
-  accessKey: <span class="hljs-string">&quot;&lt;s3-access-key&gt;&quot;</span>
-  secretKey: <span class="hljs-string">&quot;&lt;s3-secret-key&gt;&quot;</span>
-  region: <span class="hljs-string">&quot;us-east-2&quot;</span>
+enabled: <span class="hljs-literal">true</span>
+host: <span class="hljs-string">&quot;s3.us-east-2.amazonaws.com&quot;</span>
+port: <span class="hljs-string">&quot;443&quot;</span>
+useSSL: <span class="hljs-literal">true</span>
+bucketName: <span class="hljs-string">&quot;&lt;bucket-name&gt;&quot;</span>
+useIAM: <span class="hljs-literal">false</span>
+cloudProvider: <span class="hljs-string">&quot;aws&quot;</span>
+iamEndpoint: <span class="hljs-string">&quot;&quot;</span>
+accessKey: <span class="hljs-string">&quot;&lt;s3-access-key&gt;&quot;</span>
+secretKey: <span class="hljs-string">&quot;&lt;s3-secret-key&gt;&quot;</span>
+region: <span class="hljs-string">&quot;us-east-2&quot;</span>
 
 <span class="hljs-comment"># HA Configurations</span>
 rootCoordinator:
-  replicas: 2
-  activeStandby:
-    enabled: <span class="hljs-literal">true</span>
-  resources: 
-    limits:
-      cpu: 1
-      memory: 2Gi
+replicas: 2
+activeStandby:
+enabled: <span class="hljs-literal">true</span>
+resources:
+limits:
+cpu: 1
+memory: 2Gi
 
 indexCoordinator:
-  replicas: 2
-  activeStandby:
-    enabled: <span class="hljs-literal">true</span>
-  resources: 
-    limits:
-      cpu: <span class="hljs-string">&quot;0.5&quot;</span>
-      memory: 0.5Gi
+replicas: 2
+activeStandby:
+enabled: <span class="hljs-literal">true</span>
+resources:
+limits:
+cpu: <span class="hljs-string">&quot;0.5&quot;</span>
+memory: 0.5Gi
 
 queryCoordinator:
-  replicas: 2
-  activeStandby:
-    enabled: <span class="hljs-literal">true</span>
-  resources: 
-    limits:
-      cpu: <span class="hljs-string">&quot;0.5&quot;</span>
-      memory: 0.5Gi
+replicas: 2
+activeStandby:
+enabled: <span class="hljs-literal">true</span>
+resources:
+limits:
+cpu: <span class="hljs-string">&quot;0.5&quot;</span>
+memory: 0.5Gi
 
 dataCoordinator:
-  replicas: 2
-  activeStandby:
-    enabled: <span class="hljs-literal">true</span>
-  resources: 
-    limits:
-      cpu: <span class="hljs-string">&quot;0.5&quot;</span>
-      memory: 0.5Gi
+replicas: 2
+activeStandby:
+enabled: <span class="hljs-literal">true</span>
+resources:
+limits:
+cpu: <span class="hljs-string">&quot;0.5&quot;</span>
+memory: 0.5Gi
 
 proxy:
-  replicas: 2
-  resources: 
-    limits:
-      cpu: 1
-      memory: 2Gi  
+replicas: 2
+resources:
+limits:
+cpu: 1
+memory: 2Gi  
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Instale o Milvus.</p>
 <pre><code translate="no" class="language-shell">helm install milvus-demo milvus/milvus -n milvus -f milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
@@ -409,16 +415,13 @@ Does collection hello_milvus exist <span class="hljs-keyword">in</span> Milvus: 
 
 === Create collection `hello_milvus` ===
 
-
-=== Start inserting entities       ===
+=== Start inserting entities ===
 
 Number of entities <span class="hljs-keyword">in</span> Milvus: 3000
 
-=== Start Creating index IVF_FLAT  ===
+=== Start Creating index IVF_FLAT ===
 
-
-=== Start loading                  ===
-
+=== Start loading ===
 
 === Start searching based on vector similarity ===
 
@@ -436,9 +439,9 @@ query result:
 -{<span class="hljs-string">&#x27;embeddings&#x27;</span>: [0.20963514, 0.39746657, 0.12019053, 0.6947492, 0.9535575, 0.5454552, 0.82360446, 0.21096309], <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;random&#x27;</span>: 0.6378742006852851}
 search latency = 0.9407s
 query pagination(<span class="hljs-built_in">limit</span>=4):
-        [{<span class="hljs-string">&#x27;random&#x27;</span>: 0.6378742006852851, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;0&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.5763523024650556, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;100&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.9425935891639464, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;1000&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.7893211256191387, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;1001&#x27;</span>}]
+[{<span class="hljs-string">&#x27;random&#x27;</span>: 0.6378742006852851, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;0&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.5763523024650556, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;100&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.9425935891639464, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;1000&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.7893211256191387, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;1001&#x27;</span>}]
 query pagination(offset=1, <span class="hljs-built_in">limit</span>=3):
-        [{<span class="hljs-string">&#x27;random&#x27;</span>: 0.5763523024650556, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;100&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.9425935891639464, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;1000&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.7893211256191387, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;1001&#x27;</span>}]
+[{<span class="hljs-string">&#x27;random&#x27;</span>: 0.5763523024650556, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;100&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.9425935891639464, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;1000&#x27;</span>}, {<span class="hljs-string">&#x27;random&#x27;</span>: 0.7893211256191387, <span class="hljs-string">&#x27;pk&#x27;</span>: <span class="hljs-string">&#x27;1001&#x27;</span>}]
 
 === Start hybrid searching with `random &gt; 0.5` ===
 
@@ -458,9 +461,9 @@ query before delete by <span class="hljs-built_in">expr</span>=`pk <span class="
 
 query after delete by <span class="hljs-built_in">expr</span>=`pk <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;0&quot;</span> , <span class="hljs-string">&quot;1&quot;</span>]` -&gt; result: []
 
-
 === Drop collection `hello_milvus` ===
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul>
 <h2 id="Clean-up-works" class="common-anchor-header">A limpeza funciona<button data-href="#Clean-up-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -495,6 +498,7 @@ aws iam detach-user-policy --user-name &lt;your-user-name&gt; --policy-arn <span
 
 aws iam <span class="hljs-keyword">delete</span>-policy --policy-arn <span class="hljs-string">&#x27;arn:aws:iam::12345678901:policy/MilvusS3ReadWrite&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -513,6 +517,6 @@ aws iam <span class="hljs-keyword">delete</span>-policy --policy-arn <span class
       </svg>
     </button></h2><p>Se você quiser aprender como implantar o Milvus em outras nuvens:</p>
 <ul>
-<li><a href="/docs/pt/gcp.md">Implantar o Milvus Cluster no GCP com o Kubernetes</a></li>
-<li><a href="/docs/pt/azure.md">Implantar o cluster do Milvus no Azure com o Kubernetes</a></li>
+<li><a href="/docs/pt/v2.5.x/gcp.md">Implantar o Milvus Cluster no GCP com o Kubernetes</a></li>
+<li><a href="/docs/pt/v2.5.x/azure.md">Implantar o cluster do Milvus no Azure com o Kubernetes</a></li>
 </ul>

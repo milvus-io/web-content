@@ -1,11 +1,12 @@
 ---
 id: monitor_overview.md
 title: Обзор монитора
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: >-
   Узнайте, как Prometheus и Grafana используются в Milvus для мониторинга и
   оповещения.
 ---
+
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Обзор системы мониторинга Milvus<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +108,7 @@ summary: >-
       </svg>
     </button></h2><p>После изучения базового рабочего процесса мониторинга и оповещения вы узнаете:</p>
 <ul>
-<li><a href="/docs/ru/monitor.md">Развертывать службы мониторинга</a></li>
-<li><a href="/docs/ru/visualize.md">Визуализировать метрики Milvus</a></li>
-<li><a href="/docs/ru/alert.md">Создавать оповещения</a></li>
+<li><a href="/docs/ru/v2.5.x/monitor.md">Развертывать службы мониторинга</a></li>
+<li><a href="/docs/ru/v2.5.x/visualize.md">Визуализировать метрики Milvus</a></li>
+<li><a href="/docs/ru/v2.5.x/alert.md">Создавать оповещения</a></li>
 </ul>

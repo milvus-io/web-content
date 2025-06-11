@@ -2,9 +2,10 @@
 id: install_standalone-docker.md
 label: Docker
 related_key: Docker
-summary: 'Узнайте, как установить Milvus в автономном режиме с помощью Docker.'
+summary: "Узнайте, как установить Milvus в автономном режиме с помощью Docker."
 title: Запуск Milvus в Docker (Linux)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">Запуск Milvus в Docker (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ title: Запуск Milvus в Docker (Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Установите Docker</a>.</li>
-<li>Перед установкой<a href="/docs/ru/prerequisite-docker.md">ознакомьтесь с требованиями к аппаратному и программному обеспечению</a>.</li>
+<li>Перед установкой<a href="/docs/ru/v2.5.x/prerequisite-docker.md">ознакомьтесь с требованиями к аппаратному и программному обеспечению</a>.</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">Установка Milvus в Docker<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +74,7 @@ title: Запуск Milvus в Docker (Linux)
 <li>Чтобы изменить конфигурацию Milvus по умолчанию, добавьте свои настройки в файл <strong>user.yaml</strong> в текущей папке, а затем перезапустите службу.</li>
 <li>Том данных Milvus отображается на <strong>volumes/milvus</strong> в текущей папке.</li>
 </ul>
-<p>Вы можете получить доступ к Milvus WebUI по адресу <code translate="no">http://127.0.0.1:9091/webui/</code>, чтобы узнать больше о вашем экземпляре Milvus. Для получения подробной информации см. раздел <a href="/docs/ru/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Вы можете получить доступ к Milvus WebUI по адресу <code translate="no">http://127.0.0.1:9091/webui/</code>, чтобы узнать больше о вашем экземпляре Milvus. Для получения подробной информации см. раздел <a href="/docs/ru/v2.5.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Остановка и удаление Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,27 +118,27 @@ title: Запуск Milvus в Docker (Linux)
       </svg>
     </button></h2><p>Установив Milvus в Docker, вы можете:</p>
 <ul>
-<li><p>Проверить <a href="/docs/ru/quickstart.md">Quickstart</a>, чтобы узнать, на что способен Milvus.</p></li>
+<li><p>Проверить <a href="/docs/ru/v2.5.x/quickstart.md">Quickstart</a>, чтобы узнать, на что способен Milvus.</p></li>
 <li><p>Изучить основные операции Milvus:</p>
 <ul>
-<li><a href="/docs/ru/manage_databases.md">Управлять базами данных</a></li>
-<li><a href="/docs/ru/manage-collections.md">Управлять коллекциями</a></li>
-<li><a href="/docs/ru/manage-partitions.md">Управление разделами</a></li>
-<li><a href="/docs/ru/insert-update-delete.md">Вставка, вставка и удаление</a></li>
-<li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
-<li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/manage_databases.md">Управлять базами данных</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-collections.md">Управлять коллекциями</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-partitions.md">Управление разделами</a></li>
+<li><a href="/docs/ru/v2.5.x/insert-update-delete.md">Вставка, вставка и удаление</a></li>
+<li><a href="/docs/ru/v2.5.x/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
-<li><p><a href="/docs/ru/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ru/scaleout.md">Масштабирование кластера Milvus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.5.x/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
+<li><p><a href="/docs/ru/v2.5.x/scaleout.md">Масштабирование кластера Milvus</a>.</p></li>
 <li><p>Развертывание кластера Milvu в облаках:</p>
 <ul>
-<li><a href="/docs/ru/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ru/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/ru/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ru/v2.5.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ru/v2.5.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/ru/v2.5.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Изучите <a href="/docs/ru/milvus-webui.md">Milvus WebUI</a>, интуитивно понятный веб-интерфейс для наблюдения и управления Milvus.</p></li>
-<li><p>Изучите <a href="/docs/ru/milvus_backup_overview.md">Milvus Backup</a>, инструмент с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Изучите <a href="/docs/ru/birdwatcher_overview.md">Birdwatcher</a>, инструмент с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Изучите <a href="/docs/ru/v2.5.x/milvus-webui.md">Milvus WebUI</a>, интуитивно понятный веб-интерфейс для наблюдения и управления Milvus.</p></li>
+<li><p>Изучите <a href="/docs/ru/v2.5.x/milvus_backup_overview.md">Milvus Backup</a>, инструмент с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
+<li><p>Изучите <a href="/docs/ru/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>, инструмент с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Изучите <a href="https://github.com/zilliztech/attu">Attu</a>, инструмент с открытым исходным кодом GUI для интуитивного управления Milvus.</p></li>
-<li><p><a href="/docs/ru/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.5.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

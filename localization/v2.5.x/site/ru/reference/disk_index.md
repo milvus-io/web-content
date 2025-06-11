@@ -6,6 +6,7 @@ summary: >-
   поиска.
 title: Индекс на диске
 ---
+
 <h1 id="On-disk-Index" class="common-anchor-header">Индекс на диске<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ title: Индекс на диске
         ></path>
       </svg>
     </button></h1><p>В этой статье представлен DiskANN, алгоритм индексирования на диске для оптимизированного векторного поиска. Основанный на графах Vamana, DiskANN обеспечивает эффективный векторный поиск на диске в больших наборах данных.</p>
-<p>Чтобы повысить производительность запросов, можно <a href="/docs/ru/index-vector-fields.md">указать тип индекса</a> для каждого векторного поля.</p>
+<p>Чтобы повысить производительность запросов, можно <a href="/docs/ru/v2.5.x/index-vector-fields.md">указать тип индекса</a> для каждого векторного поля.</p>
 <div class="alert note"> 
 В настоящее время векторное поле поддерживает только один тип индекса. При переключении типа индекса Milvus автоматически удаляет старый индекс.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">

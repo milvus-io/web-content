@@ -5,6 +5,7 @@ summary: >-
   어간 필터는 단어를 기본 또는 어근 형태(어간이라고 함)로 줄여주므로, 다양한 변형에서 비슷한 의미를 가진 단어를 더 쉽게 찾을 수
   있습니다. 어간 필터는 여러 언어를 지원하므로 다양한 언어적 맥락에서 효과적으로 검색하고 색인을 생성할 수 있습니다.
 ---
+
 <h1 id="Stemmer" class="common-anchor-header">어간<button data-href="#Stemmer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,6 +85,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p><code translate="no">stemmer</code> 필터는 다음과 같은 구성 가능한 매개변수를 허용합니다.</p>
 <table>
    <tr>
@@ -96,7 +98,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
 </table>
 <p><code translate="no">stemmer</code> 필터는 토큰화 도구에서 생성된 용어에 대해 작동하므로 토큰화 도구와 함께 사용해야 합니다.</p>
-<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
+<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,6 +156,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
@@ -163,6 +166,7 @@ sample_text = <span class="hljs-string">&quot;running runs looked ran runner&quo
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

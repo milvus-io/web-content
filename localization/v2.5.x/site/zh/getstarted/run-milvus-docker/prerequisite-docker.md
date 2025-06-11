@@ -5,6 +5,7 @@ related_key: Docker
 summary: 了解使用 Docker Compose 安装 Milvus 之前的必要准备工作。
 title: 使用 Docker Compose 安装 Milvus 的要求
 ---
+
 <h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 安装 Milvus 的要求<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,6 +107,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>如果您的硬件和软件符合上述要求，您可以</p>
 <ul>
-<li><a href="/docs/zh/install_standalone-docker.md">在 Docker 中运行 Milvus</a></li>
-<li><a href="/docs/zh/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a></li>
+<li><a href="/docs/zh/v2.5.x/install_standalone-docker.md">在 Docker 中运行 Milvus</a></li>
+<li><a href="/docs/zh/v2.5.x/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a></li>
 </ul>

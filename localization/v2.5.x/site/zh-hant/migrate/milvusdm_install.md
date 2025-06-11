@@ -3,6 +3,7 @@ id: milvusdm_install.md
 summary: 了解如何安裝 Milvus-Migration 來遷移您的資料。
 title: 安裝遷移工具
 ---
+
 <h1 id="Install-Migration-Tool" class="common-anchor-header">安裝遷移工具<button data-href="#Install-Migration-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +86,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>安裝了 Milvus-migration 工具之後，你可以從不同的來源遷移資料：</p>
 <ul>
-<li><a href="/docs/zh-hant/es2m.md">從 Elasticsearch</a></li>
-<li><a href="/docs/zh-hant/f2m.md">從 Faiss</a></li>
-<li><a href="/docs/zh-hant/m2m.md">從 Milvus 1.x</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/es2m.md">從 Elasticsearch</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/f2m.md">從 Faiss</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/m2m.md">從 Milvus 1.x</a></li>
 </ul>

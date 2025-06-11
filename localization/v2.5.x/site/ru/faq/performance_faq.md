@@ -6,6 +6,7 @@ summary: >-
   производительностью.
 title: FAQ по производительности
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">FAQ по производительности<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +35,7 @@ title: FAQ по производительности
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">Какие факторы влияют на использование процессора?</h4><p>Использование ЦП увеличивается, когда Milvus строит индексы или выполняет запросы. В целом построение индексов требует больших затрат ЦП, за исключением использования Annoy, который работает в один поток.</p>
 <p>При выполнении запросов на использование ЦП влияют <code translate="no">nq</code> и <code translate="no">nprobe</code>. Когда <code translate="no">nq</code> и <code translate="no">nprobe</code> невелики, параллелизм незначителен и загрузка процессора остается низкой.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">Влияет ли одновременная вставка данных и поиск на производительность запросов?</h4><p>Операции вставки не требуют больших затрат ЦП. Однако, поскольку новые сегменты могут не достигнуть порога для построения индекса, Milvus прибегает к поиску методом грубой силы, что значительно влияет на производительность запроса.</p>
-<p>Параметр <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> определяет порог построения индекса для сегмента и по умолчанию установлен на 1024 строки. Дополнительные сведения см. в разделе <a href="/docs/ru/system_configuration.md">Конфигурация системы</a>.</p>
+<p>Параметр <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> определяет порог построения индекса для сегмента и по умолчанию установлен на 1024 строки. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/system_configuration.md">Конфигурация системы</a>.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">Может ли индексирование поля VARCHAR повысить скорость удаления?</h4><p>Индексирование поля VARCHAR может ускорить операции "Удаление по выражению", но только при определенных условиях:</p>
 <ul>
 <li><strong>ИНВЕРТИРОВАННЫЙ индекс</strong>: Этот индекс помогает при использовании <code translate="no">IN</code> или <code translate="no">==</code> выражений для полей VARCHAR, не являющихся первичными ключами.</li>

@@ -5,6 +5,7 @@ summary: >-
   Milvus 2.3.x в Milvus 2.3.x или выше.
 title: С Milvus 2.3.x
 ---
+
 <h1 id="From-Milvus-23x" class="common-anchor-header">С Milvus 2.3.x<button data-href="#From-Milvus-23x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ title: С Milvus 2.3.x
 <li>Целевой Milvus: 2.3.0+</li>
 </ul></li>
 <li><strong>Необходимые инструменты</strong>:<ul>
-<li>Инструмент<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. Подробности установки см. в разделе <a href="/docs/ru/milvusdm_install.md">Установка инструмента миграции</a>.</li>
+<li>Инструмент<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. Подробности установки см. в разделе <a href="/docs/ru/v2.5.x/milvusdm_install.md">Установка инструмента миграции</a>.</li>
 </ul></li>
 <li><strong>Подготовка данных</strong>:<ul>
 <li>Убедитесь, что исходная коллекция Milvus загружена и готова к экспорту данных.</li>
@@ -72,22 +73,23 @@ title: С Milvus 2.3.x
       bufferSize: 500
 
 meta:
-  mode: config
-  version: 2.3.0
-  collection: src_table_name
+mode: config
+version: 2.3.0
+collection: src_table_name
 
 <span class="hljs-built_in">source</span>:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 
 target:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 <button class="copy-code-btn"></button></code></pre>
+
 <p>В следующей таблице описаны параметры в файле конфигурации примера. Дополнительные сведения см. в разделе <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Миграция Milvus: Milvus2.x - Milvus2.x</a>.</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
@@ -120,8 +122,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>Адрес исходного сервера Milvus.</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>Имя пользователя для исходного сервера Milvus. Этот параметр необходим, если на сервере Milvus включена аутентификация пользователей. Дополнительные сведения см. в разделе <a href="/docs/ru/authenticate.md">Включение аутентификации</a>.</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>Пароль для исходного сервера Milvus. Этот параметр необходим, если для вашего сервера Milvus включена аутентификация пользователей. Дополнительные сведения см. в разделе <a href="/docs/ru/authenticate.md">Включить аутентификацию</a>.</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>Имя пользователя для исходного сервера Milvus. Этот параметр необходим, если на сервере Milvus включена аутентификация пользователей. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/authenticate.md">Включение аутентификации</a>.</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>Пароль для исходного сервера Milvus. Этот параметр необходим, если для вашего сервера Milvus включена аутентификация пользователей. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/authenticate.md">Включить аутентификацию</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -132,8 +134,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>Адрес целевого сервера Milvus.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>Имя пользователя для целевого сервера Milvus. Этот параметр необходим, если для сервера Milvus включена аутентификация пользователей. Дополнительные сведения см. в разделе <a href="/docs/ru/authenticate.md">Включение аутентификации</a>.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>Пароль для целевого сервера Milvus. Этот параметр необходим, если для сервера Milvus включена аутентификация пользователей. Дополнительные сведения см. в разделе <a href="/docs/ru/authenticate.md">Включить аутентификацию</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>Имя пользователя для целевого сервера Milvus. Этот параметр необходим, если для сервера Milvus включена аутентификация пользователей. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/authenticate.md">Включение аутентификации</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>Пароль для целевого сервера Milvus. Этот параметр необходим, если для сервера Milvus включена аутентификация пользователей. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/authenticate.md">Включить аутентификацию</a>.</td></tr>
 </tbody>
 </table>
 </li>

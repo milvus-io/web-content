@@ -3,6 +3,7 @@ id: from-m2x.md
 summary: 本指南提供從 Milvus 2.3.x 遷移資料至 Milvus 2.3.x 或更高版本的全面、逐步過程。
 title: 從 Milvus 2.3.x
 ---
+
 <h1 id="From-Milvus-23x" class="common-anchor-header">從 Milvus 2.3.x<button data-href="#From-Milvus-23x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +41,7 @@ title: 從 Milvus 2.3.x
 <li>目標 Milvus: 2.3.0+</li>
 </ul></li>
 <li><strong>所需的工具</strong>：<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。安裝細節請參考<a href="/docs/zh-hant/milvusdm_install.md">安裝遷移工具</a>。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。安裝細節請參考<a href="/docs/zh-hant/v2.5.x/milvusdm_install.md">安裝遷移工具</a>。</li>
 </ul></li>
 <li><strong>資料準備</strong>：<ul>
 <li>確保源 Milvus 套件已載入，並為資料匯出做好準備。</li>
@@ -70,22 +71,23 @@ title: 從 Milvus 2.3.x
       bufferSize: 500
 
 meta:
-  mode: config
-  version: 2.3.0
-  collection: src_table_name
+mode: config
+version: 2.3.0
+collection: src_table_name
 
 <span class="hljs-built_in">source</span>:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 
 target:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 <button class="copy-code-btn"></button></code></pre>
+
 <p>下表描述了示例配置文件中的參數。如需更多資訊，請參考<a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Milvus Migration：Milvus2.x 到 Milvus2.x</a>。</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
@@ -118,8 +120,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>來源 Milvus 伺服器的位址。</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>來源 Milvus 伺服器的使用者名稱。如果您的 Milvus 伺服器啟用使用者驗證，則必須使用此參數。如需詳細資訊，請參閱<a href="/docs/zh-hant/authenticate.md">啟用驗證</a>。</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>來源 Milvus 伺服器的密碼。如果您的 Milvus 伺服器啟用使用者驗證，則必須使用此參數。如需詳細資訊，請參閱<a href="/docs/zh-hant/authenticate.md">啟用驗證</a>。</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>來源 Milvus 伺服器的使用者名稱。如果您的 Milvus 伺服器啟用使用者驗證，則必須使用此參數。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/authenticate.md">啟用驗證</a>。</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>來源 Milvus 伺服器的密碼。如果您的 Milvus 伺服器啟用使用者驗證，則必須使用此參數。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/authenticate.md">啟用驗證</a>。</td></tr>
 </tbody>
 </table>
 </li>
@@ -130,8 +132,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>目標 Milvus 伺服器的位址。</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>目標 Milvus 伺服器的使用者名稱。如果您的 Milvus 伺服器啟用使用者驗證，則必須使用此參數。如需詳細資訊，請參閱<a href="/docs/zh-hant/authenticate.md">啟用驗證</a>。</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>目標 Milvus 伺服器的密碼。如果您的 Milvus 伺服器啟用使用者驗證，則必須使用此參數。如需更多資訊，請參閱<a href="/docs/zh-hant/authenticate.md">啟用驗證</a>。</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>目標 Milvus 伺服器的使用者名稱。如果您的 Milvus 伺服器啟用使用者驗證，則必須使用此參數。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/authenticate.md">啟用驗證</a>。</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>目標 Milvus 伺服器的密碼。如果您的 Milvus 伺服器啟用使用者驗證，則必須使用此參數。如需更多資訊，請參閱<a href="/docs/zh-hant/v2.5.x/authenticate.md">啟用驗證</a>。</td></tr>
 </tbody>
 </table>
 </li>

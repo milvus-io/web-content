@@ -5,6 +5,7 @@ summary: >-
   إلى Milvus 2.3.x أو أعلى.
 title: من Milvus 2.3.x
 ---
+
 <h1 id="From-Milvus-23x" class="common-anchor-header">من Milvus 2.3.x<button data-href="#From-Milvus-23x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ title: من Milvus 2.3.x
 <li>ميلفوس الهدف: 2.3.0+</li>
 </ul></li>
 <li><strong>الأدوات المطلوبة</strong>:<ul>
-<li>أداة<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. للحصول على تفاصيل التثبيت، راجع <a href="/docs/ar/milvusdm_install.md">تثبيت أداة الترحيل</a>.</li>
+<li>أداة<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. للحصول على تفاصيل التثبيت، راجع <a href="/docs/ar/v2.5.x/milvusdm_install.md">تثبيت أداة الترحيل</a>.</li>
 </ul></li>
 <li><strong>إعداد البيانات</strong>:<ul>
 <li>تأكد من تحميل مجموعة Milvus المصدر وجاهزة لتصدير البيانات.</li>
@@ -72,22 +73,23 @@ title: من Milvus 2.3.x
       bufferSize: 500
 
 meta:
-  mode: config
-  version: 2.3.0
-  collection: src_table_name
+mode: config
+version: 2.3.0
+collection: src_table_name
 
 <span class="hljs-built_in">source</span>:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 
 target:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 <button class="copy-code-btn"></button></code></pre>
+
 <p>يصف الجدول التالي المعلمات في ملف التكوين النموذجي. لمزيد من المعلومات، ارجع إلى <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Milvus Migration: Milvus2.x إلى Milvus2.x</a>.</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
@@ -120,8 +122,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>عنوان مصدر خادم ملفوس المصدر.</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>اسم المستخدم لخادم Milvus المصدر. هذه المعلمة مطلوبة إذا تم تمكين مصادقة المستخدم لخادم Milvus الخاص بك. لمزيد من المعلومات، راجع <a href="/docs/ar/authenticate.md">تمكين المصادقة</a>.</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>كلمة المرور لخادم Milvus المصدر. هذه المعلمة مطلوبة إذا تم تمكين مصادقة المستخدم لخادم Milvus الخاص بك. لمزيد من المعلومات، راجع <a href="/docs/ar/authenticate.md">تمكين المصادقة</a>.</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>اسم المستخدم لخادم Milvus المصدر. هذه المعلمة مطلوبة إذا تم تمكين مصادقة المستخدم لخادم Milvus الخاص بك. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/authenticate.md">تمكين المصادقة</a>.</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>كلمة المرور لخادم Milvus المصدر. هذه المعلمة مطلوبة إذا تم تمكين مصادقة المستخدم لخادم Milvus الخاص بك. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/authenticate.md">تمكين المصادقة</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -132,8 +134,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>عنوان خادم Milvus الهدف.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>اسم المستخدم لخادم Milvus الهدف. هذه المعلمة مطلوبة إذا تم تمكين مصادقة المستخدم لخادم Milvus الخاص بك. لمزيد من المعلومات، راجع <a href="/docs/ar/authenticate.md">تمكين المصادقة</a>.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>كلمة المرور لخادم Milvus الهدف. هذه المعلمة مطلوبة إذا تم تمكين مصادقة المستخدم لخادم Milvus الخاص بك. لمزيد من المعلومات، راجع <a href="/docs/ar/authenticate.md">تمكين المصادقة</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>اسم المستخدم لخادم Milvus الهدف. هذه المعلمة مطلوبة إذا تم تمكين مصادقة المستخدم لخادم Milvus الخاص بك. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/authenticate.md">تمكين المصادقة</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>كلمة المرور لخادم Milvus الهدف. هذه المعلمة مطلوبة إذا تم تمكين مصادقة المستخدم لخادم Milvus الخاص بك. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/authenticate.md">تمكين المصادقة</a>.</td></tr>
 </tbody>
 </table>
 </li>

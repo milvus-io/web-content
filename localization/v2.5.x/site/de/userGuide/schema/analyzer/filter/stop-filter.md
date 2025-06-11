@@ -6,6 +6,7 @@ summary: >-
   hilft so, häufige, weniger aussagekräftige Wörter zu eliminieren. Sie können
   die Liste der Stoppwörter mit dem Parameter stop_words konfigurieren.
 ---
+
 <h1 id="Stop" class="common-anchor-header">Stopp<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,6 +90,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Der <code translate="no">stop</code> Filter akzeptiert die folgenden konfigurierbaren Parameter.</p>
 <table>
    <tr>
@@ -106,8 +108,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 </ul></td>
    </tr>
 </table>
-<p>Der Filter <code translate="no">stop</code> arbeitet mit den vom Tokenizer erzeugten Begriffen, muss also in Kombination mit einem Tokenizer verwendet werden. Eine Liste der in Milvus verfügbaren Tokenizer finden Sie unter <a href="/docs/de/standard-tokenizer.md">Standard Tokenizer</a> und seinen Geschwisterseiten.</p>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie auf ein <code translate="no">VARCHAR</code> Feld anwenden, wenn Sie ein Sammelschema definieren. Dies ermöglicht es Milvus, den Text in diesem Feld mit dem angegebenen Analysator für eine effiziente Tokenisierung und Filterung zu verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
+<p>Der Filter <code translate="no">stop</code> arbeitet mit den vom Tokenizer erzeugten Begriffen, muss also in Kombination mit einem Tokenizer verwendet werden. Eine Liste der in Milvus verfügbaren Tokenizer finden Sie unter <a href="/docs/de/v2.5.x/standard-tokenizer.md">Standard Tokenizer</a> und seinen Geschwisterseiten.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie auf ein <code translate="no">VARCHAR</code> Feld anwenden, wenn Sie ein Sammelschema definieren. Dies ermöglicht es Milvus, den Text in diesem Feld mit dem angegebenen Analysator für eine effiziente Tokenisierung und Filterung zu verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,6 +166,7 @@ sample_text = <span class="hljs-string">&quot;The stop filter allows control ove
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

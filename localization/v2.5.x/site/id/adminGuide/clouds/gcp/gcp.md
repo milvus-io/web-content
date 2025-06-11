@@ -4,6 +4,7 @@ title: Menerapkan Cluster Milvus di GKE
 related_key: cluster
 summary: Pelajari cara menggunakan cluster Milvus di GKE.
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-GKE" class="common-anchor-header">Menerapkan Cluster Milvus di GKE<button data-href="#Deploy-a-Milvus-Cluster-on-GKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,34 +81,35 @@ summary: Pelajari cara menggunakan cluster Milvus di GKE.
     --rules=icmp
 
 gcloud compute firewall-rules create milvus-network-allow-internal \
-    --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
-    --description=<span class="hljs-string">&quot;Allows connections from any source in the network IP range to any instance on the network using all protocols.&quot;</span> \
-    --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">10.128</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">9</span> \
-    --action=ALLOW --rules=<span class="hljs-built_in">all</span>
+ --project=milvus-testing-nonprod \
+ --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+ --description=<span class="hljs-string">&quot;Allows connections from any source in the network IP range to any instance on the network using all protocols.&quot;</span> \
+ --direction=INGRESS \
+ --priority=<span class="hljs-number">65534</span> \
+ --source-ranges=<span class="hljs-number">10.128</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">9</span> \
+ --action=ALLOW --rules=<span class="hljs-built_in">all</span>
 
 gcloud compute firewall-rules create milvus-network-allow-rdp \
-    --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
-    --description=<span class="hljs-string">&quot;Allows RDP connections from any source to any instance on the network using port 3389.&quot;</span> \
-    --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
-    --action=ALLOW \
-    --rules=tcp:<span class="hljs-number">3389</span>
+ --project=milvus-testing-nonprod \
+ --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+ --description=<span class="hljs-string">&quot;Allows RDP connections from any source to any instance on the network using port 3389.&quot;</span> \
+ --direction=INGRESS \
+ --priority=<span class="hljs-number">65534</span> \
+ --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
+ --action=ALLOW \
+ --rules=tcp:<span class="hljs-number">3389</span>
 
 gcloud compute firewall-rules create milvus-network-allow-ssh \
-    --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
-    --description=<span class="hljs-string">&quot;Allows TCP connections from any source to any instance on the network using port 22.&quot;</span> \
-    --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
-    --action=ALLOW \
-    --rules=tcp:<span class="hljs-number">22</span>
+ --project=milvus-testing-nonprod \
+ --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+ --description=<span class="hljs-string">&quot;Allows TCP connections from any source to any instance on the network using port 22.&quot;</span> \
+ --direction=INGRESS \
+ --priority=<span class="hljs-number">65534</span> \
+ --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
+ --action=ALLOW \
+ --rules=tcp:<span class="hljs-number">22</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Terakhir, Anda perlu mengizinkan lalu lintas masuk ke instans Milvus yang akan kita buat nanti di port <strong>19530</strong>.</p>
 <pre><code translate="no" class="language-bash">gcloud compute firewall-rules create allow-milvus-<span class="hljs-keyword">in</span> \
     --project=milvus-testing-nonprod  \
@@ -192,22 +194,23 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
     enabled: <span class="hljs-literal">true</span>
 
 service:
-    <span class="hljs-built_in">type</span>: LoadBalancer
+<span class="hljs-built_in">type</span>: LoadBalancer
 
 minio:
-    enabled: <span class="hljs-literal">false</span>
+enabled: <span class="hljs-literal">false</span>
 
 externalS3:
-    enabled: <span class="hljs-literal">true</span>
-    host: storage.googleapis.com
-    port: 443
-    rootPath: milvus/my-release
-    bucketName: milvus-testing-nonprod
-    cloudProvider: gcp
-    useSSL: <span class="hljs-literal">true</span>
-    accessKey: <span class="hljs-string">&quot;&lt;access-key&gt;&quot;</span>
-    secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
+enabled: <span class="hljs-literal">true</span>
+host: storage.googleapis.com
+port: 443
+rootPath: milvus/my-release
+bucketName: milvus-testing-nonprod
+cloudProvider: gcp
+useSSL: <span class="hljs-literal">true</span>
+accessKey: <span class="hljs-string">&quot;&lt;access-key&gt;&quot;</span>
+secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Deploy-Milvus" class="common-anchor-header">Menyebarkan Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -230,7 +233,7 @@ helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada perintah sebelumnya, kita menambahkan repo peta Milvus Helm secara lokal dan memperbarui repo untuk mengambil peta terbaru. Kemudian kita menginstal sebuah instans Milvus dan menamainya dengan nama <strong>my-release</strong>.</p>
 <p>Perhatikan nilai konfigurasi <code translate="no">service.type</code>, yang mengindikasikan bahwa kita ingin mengekspos instans Milvus melalui penyeimbang beban Layer-4.</p>
-<p>Jika Anda ingin mengekspos instans Milvus Anda melalui penyeimbang beban Layer-7, bacalah <a href="/docs/id/gcp_layer7.md">ini</a>.</p>
+<p>Jika Anda ingin mengekspos instans Milvus Anda melalui penyeimbang beban Layer-7, bacalah <a href="/docs/id/v2.5.x/gcp_layer7.md">ini</a>.</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">Verifikasi penerapan<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,6 +285,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>Jika Anda ingin mempelajari cara menerapkan Milvus di cloud lain:</p>
 <ul>
-<li><a href="/docs/id/eks.md">Menerapkan Milvus Cluster di AWS dengan Kubernetes</a></li>
-<li><a href="/docs/id/azure.md">Menerapkan Milvus Cluster di Azure dengan Kubernetes</a></li>
+<li><a href="/docs/id/v2.5.x/eks.md">Menerapkan Milvus Cluster di AWS dengan Kubernetes</a></li>
+<li><a href="/docs/id/v2.5.x/azure.md">Menerapkan Milvus Cluster di Azure dengan Kubernetes</a></li>
 </ul>

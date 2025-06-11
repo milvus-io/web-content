@@ -7,6 +7,7 @@ summary: >-
   usuarios pueden realizar a nivel de colección, base de datos e instancia, lo
   que mejora la seguridad de los datos.
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">Explicación de RBAC<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,9 +70,9 @@ summary: >-
       </svg>
     </button></h2><p>Para lograr el control de acceso a través de RBAC, debe seguir los siguientes pasos:</p>
 <ol>
-<li><p><strong><a href="/docs/es/users_and_roles.md#Create-a-user">Cree un usuario</a></strong>: Además del usuario por defecto <code translate="no">root</code> en Milvus, puede crear nuevos usuarios y establecer contraseñas para proteger la seguridad de los datos.</p></li>
-<li><p><strong><a href="/docs/es/users_and_roles.md#Create-a-role">Cree un rol</a></strong>: Puede crear roles personalizados en función de sus necesidades. Las capacidades específicas de un rol están determinadas por sus privilegios.</p></li>
-<li><p><strong><a href="/docs/es/privilege_group.md">Crear un grupo de privilegios</a></strong>: Combine varios privilegios en un grupo de privilegios para agilizar el proceso de concesión de privilegios a un rol.</p></li>
-<li><p><strong><a href="/docs/es/grant_privileges.md">Conceder privilegios o grupos de privilegios a un rol</a></strong>: Defina las capacidades de un rol concediéndole privilegios o grupos de privilegios.</p></li>
-<li><p><strong><a href="/docs/es/grant_roles.md">Conceder roles a usuarios</a></strong>: Conceda roles con ciertos privilegios a los usuarios para que los usuarios puedan tener los privilegios de un rol. Un mismo rol puede ser otorgado a múltiples usuarios.</p></li>
+<li><p><strong><a href="/docs/es/v2.5.x/users_and_roles.md#Create-a-user">Cree un usuario</a></strong>: Además del usuario por defecto <code translate="no">root</code> en Milvus, puede crear nuevos usuarios y establecer contraseñas para proteger la seguridad de los datos.</p></li>
+<li><p><strong><a href="/docs/es/v2.5.x/users_and_roles.md#Create-a-role">Cree un rol</a></strong>: Puede crear roles personalizados en función de sus necesidades. Las capacidades específicas de un rol están determinadas por sus privilegios.</p></li>
+<li><p><strong><a href="/docs/es/v2.5.x/privilege_group.md">Crear un grupo de privilegios</a></strong>: Combine varios privilegios en un grupo de privilegios para agilizar el proceso de concesión de privilegios a un rol.</p></li>
+<li><p><strong><a href="/docs/es/v2.5.x/grant_privileges.md">Conceder privilegios o grupos de privilegios a un rol</a></strong>: Defina las capacidades de un rol concediéndole privilegios o grupos de privilegios.</p></li>
+<li><p><strong><a href="/docs/es/v2.5.x/grant_roles.md">Conceder roles a usuarios</a></strong>: Conceda roles con ciertos privilegios a los usuarios para que los usuarios puedan tener los privilegios de un rol. Un mismo rol puede ser otorgado a múltiples usuarios.</p></li>
 </ol>

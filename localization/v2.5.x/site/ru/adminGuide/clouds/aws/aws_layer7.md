@@ -6,6 +6,7 @@ summary: >-
   Узнайте, как развернуть кластер Milvus за балансировщиком нагрузки Layer-7 на
   AWS.
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Настройка балансировщика нагрузки Layer-7 для Milvus на AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,9 +25,9 @@ summary: >-
     </button></h1><p>По сравнению с балансировщиком нагрузки уровня 4, балансировщик нагрузки уровня 7 предлагает интеллектуальную балансировку нагрузки и возможности кэширования и является отличным выбором для облачных нативных сервисов.</p>
 <p>В этом руководстве вы узнаете, как настроить балансировщик нагрузки уровня 7 для кластера Milvus, уже работающего за балансировщиком нагрузки уровня 4.</p>
 <h3 id="Before-your-start" class="common-anchor-header">Перед началом работы</h3><ul>
-<li>Вы <a href="/docs/ru/eks.md">развернули кластер Milvus за балансировщиком нагрузки Layer-4 на AWS</a>.</li>
+<li>Вы <a href="/docs/ru/v2.5.x/eks.md">развернули кластер Milvus за балансировщиком нагрузки Layer-4 на AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Настройка конфигураций Milvus</h3><p>В этом руководстве предполагается, что вы уже <a href="/docs/ru/eks.md">развернули кластер Milvus за балансировщиком нагрузки Layer-4 на AWS</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Настройка конфигураций Milvus</h3><p>В этом руководстве предполагается, что вы уже <a href="/docs/ru/v2.5.x/eks.md">развернули кластер Milvus за балансировщиком нагрузки Layer-4 на AWS</a>.</p>
 <p>Перед настройкой балансировщика нагрузки Layer-7 для этого кластера Milvus выполните следующую команду, чтобы удалить балансировщик нагрузки Layer-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -50,19 +51,18 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: <span class="hljs-string">&quot;arn:aws:acm:region:account-id:certificate/certificate-id&quot;</span>
 
 spec:
-  ingressClassName: alb
-  rules:
-    - host: milvus-demo.milvus.io
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: milvus-demo
-              port:
-                number: 19530
+ingressClassName: alb
+rules: - host: milvus-demo.milvus.io
+http:
+paths: - path: /
+pathType: Prefix
+backend:
+service:
+name: milvus-demo
+port:
+number: 19530
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Затем вы можете создать Ingress, применив этот файл к кластеру EKS.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -101,6 +101,7 @@ milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778
 
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;k8s-milvus-milvusde-2f72215c02-778371620.us-east-2.elb.amazonaws.com&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;milvus-demo.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li><strong>Хост</strong> и <strong>имя_сервера</strong> должны быть заменены на ваши собственные.</li>

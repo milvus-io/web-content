@@ -3,6 +3,7 @@ id: main_components.md
 summary: Milvusスタンドアロンおよびクラスタの主要コンポーネントについて学びます。
 title: 主要コンポーネント
 ---
+
 <h1 id="Main-Components" class="common-anchor-header">主要コンポーネント<button data-href="#Main-Components" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,5 +95,5 @@ title: 主要コンポーネント
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvusのメカニズムと設計原理を理解するために、<a href="/docs/ja/four_layers.md">コンピューティング/ストレージ分散を</a>読む。</li>
+<li>Milvusのメカニズムと設計原理を理解するために、<a href="/docs/ja/v2.5.x/four_layers.md">コンピューティング/ストレージ分散を</a>読む。</li>
 </ul>

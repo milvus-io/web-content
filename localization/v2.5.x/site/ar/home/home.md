@@ -1,6 +1,7 @@
 ---
 id: home.md
 ---
+
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 مرحبًا بك في مستندات ميلفوس!</h1></p>
@@ -33,13 +34,13 @@ id: home.md
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/ar/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ar/install_standalone-docker.md"> <p class="link-btn">تثبيت ميلفوس</p> </a><p>تعرف على كيفية تثبيت Milvus باستخدام Docker Compose أو على Kubernetes.</p>
+   <a href="/docs/ar/v2.5.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/ar/v2.5.x/install_standalone-docker.md"> <p class="link-btn">تثبيت ميلفوس</p> </a><p>تعرف على كيفية تثبيت Milvus باستخدام Docker Compose أو على Kubernetes.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/ar/quickstart.md"> <img translate="no" src="/docs/v2.5.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ar/quickstart.md"> <p class="link-btn">البدء السريع</p> </a><p>تعرف على كيفية تشغيل Milvus بسرعة باستخدام نموذج التعليمات البرمجية.</p>
+   <a href="/docs/ar/v2.5.x/quickstart.md"> <img translate="no" src="/docs/v2.5.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/ar/v2.5.x/quickstart.md"> <p class="link-btn">البدء السريع</p> </a><p>تعرف على كيفية تشغيل Milvus بسرعة باستخدام نموذج التعليمات البرمجية.</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +68,31 @@ id: home.md
 <div class="recomment-item">
   <p>استخدام</p>
 <ul>
-<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
-<li><a href="/docs/ar/index-vector-fields.md">فهرسة الحقول المتجهة</a></li>
-<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/get-and-scalar-query.md">استعلام الحصول على واستعلام قياسي</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/v2.5.x/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
+<li><a href="/docs/ar/v2.5.x/index-vector-fields.md">فهرسة الحقول المتجهة</a></li>
+<li><a href="/docs/ar/v2.5.x/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/v2.5.x/get-and-scalar-query.md">استعلام الحصول على واستعلام قياسي</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>النشر</p>
 <ul>
-<li><a href="/docs/ar/configure-docker.md">تكوين ميلفوس</a></li>
-<li><a href="/docs/ar/deploy_s3.md">إدارة التبعيات</a></li>
-<li><a href="/docs/ar/eks.md">النشر على السحابة</a></li>
-<li><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus العنقودية</a></li>
-<li><a href="/docs/ar/monitor_overview.md">المراقبة والتنبيه</a></li>
+<li><a href="/docs/ar/v2.5.x/configure-docker.md">تكوين ميلفوس</a></li>
+<li><a href="/docs/ar/v2.5.x/deploy_s3.md">إدارة التبعيات</a></li>
+<li><a href="/docs/ar/v2.5.x/eks.md">النشر على السحابة</a></li>
+<li><a href="/docs/ar/v2.5.x/scaleout.md">توسيع نطاق مجموعة Milvus العنقودية</a></li>
+<li><a href="/docs/ar/v2.5.x/monitor_overview.md">المراقبة والتنبيه</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>تعلم</p>
 <ul>
-<li><a href="/docs/ar/system_configuration.md">تكوين النظام</a></li>
-<li><a href="/docs/ar/architecture_overview.md">نظرة عامة على البنية</a></li>
-<li><a href="/docs/ar/index.md">فهرس المتجهات</a></li>
-<li><a href="/docs/ar/metric.md">مقاييس التشابه</a></li>
-<li><a href="/docs/ar/glossary.md">مسرد المصطلحات</a></li>
+<li><a href="/docs/ar/v2.5.x/system_configuration.md">تكوين النظام</a></li>
+<li><a href="/docs/ar/v2.5.x/architecture_overview.md">نظرة عامة على البنية</a></li>
+<li><a href="/docs/ar/v2.5.x/index.md">فهرس المتجهات</a></li>
+<li><a href="/docs/ar/v2.5.x/metric.md">مقاييس التشابه</a></li>
+<li><a href="/docs/ar/v2.5.x/glossary.md">مسرد المصطلحات</a></li>
 </ul>
 </div>
 </div>
@@ -113,10 +114,10 @@ id: home.md
       </svg>
     </button></h2><p><em>2024 نوفمبر 2024 - إصدار ميلفوس 2.5.0</em></p>
 <ul>
-<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/full-text-search.md">إجراء بحث نصي كامل</a>.</li>
-<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/keyword-match.md">إجراء مطابقة نصية</a>.</li>
-<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/nullable-and-default.md">تمكين القيم القابلة للإلغاء والقيم الافتراضية</a>.</li>
-<li>تمت إضافة أوصاف <a href="/docs/ar/analyzer-overview.md">المحللات</a>.</li>
-<li>تمت إضافة أوصاف <a href="/docs/ar/bitmap.md">الفهارس النقطية</a>.</li>
+<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/v2.5.x/full-text-search.md">إجراء بحث نصي كامل</a>.</li>
+<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/v2.5.x/keyword-match.md">إجراء مطابقة نصية</a>.</li>
+<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/v2.5.x/nullable-and-default.md">تمكين القيم القابلة للإلغاء والقيم الافتراضية</a>.</li>
+<li>تمت إضافة أوصاف <a href="/docs/ar/v2.5.x/analyzer-overview.md">المحللات</a>.</li>
+<li>تمت إضافة أوصاف <a href="/docs/ar/v2.5.x/bitmap.md">الفهارس النقطية</a>.</li>
 </ul>
 </div>

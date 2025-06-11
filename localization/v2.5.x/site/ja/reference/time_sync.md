@@ -3,6 +3,7 @@ id: time_sync.md
 title: 時刻同期
 summary: Milvusの時刻同期システムについて学ぶ。
 ---
+
 <h1 id="Time-Synchronization" class="common-anchor-header">時刻同期<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: Milvusの時刻同期システムについて学ぶ。
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/timestamp.md">タイムスタンプの</a>概念について学ぶ。</li>
-<li>Milvusの<a href="/docs/ja/data_processing.md">データ処理ワークフローについて</a>学ぶ。</li>
+<li><a href="/docs/ja/v2.5.x/timestamp.md">タイムスタンプの</a>概念について学ぶ。</li>
+<li>Milvusの<a href="/docs/ja/v2.5.x/data_processing.md">データ処理ワークフローについて</a>学ぶ。</li>
 </ul>

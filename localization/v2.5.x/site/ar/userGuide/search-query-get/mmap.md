@@ -9,6 +9,7 @@ summary: >-
   هذه الصفحة على فهم كيفية استخدام Milvus لـ mmap لتمكين تخزين البيانات
   واسترجاعها بسرعة وكفاءة.
 ---
+
 <h1 id="Use-mmap" class="common-anchor-header">استخدام mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +110,7 @@ summary: >-
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
-<p>لتطبيق الإعدادات المذكورة أعلاه على مجموعة Milvus العنقودية الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
+<p>لتطبيق الإعدادات المذكورة أعلاه على مجموعة Milvus العنقودية الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/v2.5.x/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
 <p>في بعض الأحيان، تكون إعدادات mmap العامة غير مرنة عند مواجهة حالات استخدام معينة. ولتطبيق إعدادات بديلة على مجموعة معينة أو فهارسها، فكر في تكوين mmap خاص بمجموعة أو حقل أو فهرس معين. تحتاج إلى تحرير مجموعة وتحميلها قبل أن تدخل التغييرات على إعدادات mmap حيز التنفيذ.</p>
 <h3 id="Field-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالحقل</h3><p>لتكوين mmap الخاص بالحقل، تحتاج إلى تضمين المعلمة <code translate="no">mmap_enabled</code> عند إضافة حقل. يمكنك تمكين mmap mmap على هذا الحقل المحدد عن طريق تعيين هذه المعلمة إلى <code translate="no">True</code>.</p>
 <p>يوضح المثال التالي كيفية تكوين mmap الخاص بالحقل عند إضافة حقل.</p>
@@ -121,8 +122,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -133,20 +134,21 @@ schema = MilvusClient.create_schema()
 
 <span class="hljs-comment"># Add a scalar field and enable mmap</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-    datatype=DataType.INT64,
-    is_primary=<span class="hljs-literal">True</span>,
-    mmap_enabled=<span class="hljs-literal">True</span>,
+field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+datatype=DataType.INT64,
+is_primary=<span class="hljs-literal">True</span>,
+mmap_enabled=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Alter mmap settings on a specific field</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_collection_field(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-    field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -316,20 +318,21 @@ index_params = MilvusClient.prepare_index_params()
 
 <span class="hljs-comment"># Create index on the varchar field with mmap settings</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;title&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
+field_name=<span class="hljs-string">&quot;title&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+<span class="hljs-comment"># highlight-next-line</span>
+params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
 )
 
 <span class="hljs-comment"># Change mmap settings for an index</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_index_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    index_name=<span class="hljs-string">&quot;title&quot;</span>,
-    properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+index_name=<span class="hljs-string">&quot;title&quot;</span>,
+properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -452,15 +455,16 @@ client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</s
 <span class="hljs-comment"># Ensure that the collection has already been released </span>
 <span class="hljs-comment"># and run the following</span>
 client.alter_collection_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    properties={
-        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
-    }
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+properties={
+<span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
+}
 )
 
 <span class="hljs-comment"># Load the collection to make the above change take effect</span>
 client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">client.releaseCollection(ReleaseCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build());

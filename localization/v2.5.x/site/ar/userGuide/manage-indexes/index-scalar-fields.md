@@ -6,6 +6,7 @@ summary: >-
   الصحيحة والسلاسل وما إلى ذلك.
 title: فهرس الحقول العددية
 ---
+
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">فهرس الحقول العددية<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +40,7 @@ title: فهرس الحقول العددية
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">الفهرسة التلقائية</a></strong>: يقرر Milvus تلقائيًا نوع الفهرس بناءً على نوع بيانات الحقل القياسي. وهذا مناسب عندما لا تحتاج إلى التحكم في نوع الفهرس المحدد.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">الفهرسة المخصصة</a></strong>: يمكنك تحديد نوع الفهرس الدقيق، مثل الفهرس المقلوب أو <a href="/docs/ar/bitmap.md">الفهرس النقطي</a>. يوفر هذا المزيد من التحكم في تحديد نوع الفهرس.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">الفهرسة المخصصة</a></strong>: يمكنك تحديد نوع الفهرس الدقيق، مثل الفهرس المقلوب أو <a href="/docs/ar/v2.5.x/bitmap.md">الفهرس النقطي</a>. يوفر هذا المزيد من التحكم في تحديد نوع الفهرس.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">الفهرسة التلقائية<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,16 +77,17 @@ client = MilvusClient(
 index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
-    index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
+index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -142,16 +144,17 @@ client.createIndex(createIndexReq);
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
-    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
+index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -192,8 +195,8 @@ client.createIndex(createIndexReq);
 <p>نوع الفهرس القياسي المراد إنشاؤه. للفهرسة الضمنية، اتركها فارغة أو احذف هذه المعلمة.</p>
 <p>للفهرسة المخصصة، القيم الصالحة هي:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس المقلوب</a>.</p></li>
-<li><p><strong>BITMAP</strong>: نوع فهرس يخزن صورة نقطية لجميع القيم الفريدة في الحقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/bitmap.md">BITMAP</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/scalar_index.md">الفهرس المقلوب</a>.</p></li>
+<li><p><strong>BITMAP</strong>: نوع فهرس يخزن صورة نقطية لجميع القيم الفريدة في الحقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: فرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم فقط الحقول الرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</p></li>
 <li><p><strong>تري</strong>: بنية بيانات شجرية لعمليات البحث والاسترجاع السريع للبادئة. يدعم حقول VARCHAR.</p></li>
 </ul></li>
@@ -217,7 +220,7 @@ client.createIndex(createIndexReq);
 <li><strong>اسم الحقل</strong><em>(سلسلة</em>) اسم الحقل القياسي المراد فهرسته.</li>
 <li><strong>اسم الفهرس</strong><em>(سلسلة</em>) اسم الفهرس القياسي المراد إنشاؤه. يدعم كل حقل قياسي فهرس واحد.</li>
 <li><strong>نوع الفهرس</strong><em>(سلسلة</em>) نوع الفهرس القياسي المراد إنشاؤه. للفهرسة الضمنية، اتركها فارغة أو احذف هذه المعلمة. للفهرسة المخصصة، القيم الصالحة هي<ul>
-<li><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس المقلوب</a>.</li>
+<li><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/scalar_index.md">الفهرس المقلوب</a>.</li>
 <li><strong>STL_SORT</strong>: يفرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم الحقول المنطقية والرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</li>
 <li><strong>تري</strong>: بنية بيانات شجرية لعمليات البحث والاسترجاع السريع للبادئة. يدعم حقول VARCHAR.</li>
 </ul></li>
@@ -238,7 +241,7 @@ client.createIndex(createIndexReq);
 <li><strong>اسم_الحقل</strong><em>(سلسلة</em>) اسم الحقل القياسي المراد فهرسته.</li>
 <li><strong>اسم_الفهرس</strong><em>(سلسلة</em>) اسم الفهرس القياسي المراد إنشاؤه. يدعم كل حقل قياسي فهرس واحد.</li>
 <li><strong>نوع_الفهرس</strong><em>(سلسلة</em>) نوع الفهرس القياسي المراد إنشاؤه. للفهرسة الضمنية، اتركها فارغة أو احذف هذه المعلمة. للفهرسة المخصصة، القيم الصالحة هي<ul>
-<li><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس المقلوب</a>.</li>
+<li><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/scalar_index.md">الفهرس المقلوب</a>.</li>
 <li><strong>STL_SORT</strong>: يفرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم الحقول المنطقية والرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</li>
 <li><strong>تري</strong>: بنية بيانات شجرية لعمليات البحث والاسترجاع السريع للبادئة. يدعم حقول VARCHAR.</li>
 </ul></li>
@@ -278,6 +281,7 @@ client.createIndex(createIndexReq);
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># [&#x27;default_index&#x27;,&#x27;inverted_index&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.List;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.ListIndexesReq;
 

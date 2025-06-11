@@ -3,6 +3,7 @@ id: multi_tenancy.md
 title: 实施多租户
 summary: 在 Milvus，多租户意味着多个客户或团队（称为租户）共享同一个集群，同时保持隔离的数据环境。
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">实施多租户<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ summary: 在 Milvus，多租户意味着多个客户或团队（称为租户）�
         ></path>
       </svg>
     </button></h2><p>Milvus 支持四个级别的多租户：<strong>数据库</strong>、<strong>Collection</strong>、<strong>Partition</strong> 和<strong>Partition Key</strong>。</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">数据库级多租户</h3><p>使用数据库级多租户，每个租户都会收到一个包含一个或多个 Collections 的相应<a href="/docs/zh/manage_databases.md">数据库</a>。</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">数据库级多租户</h3><p>使用数据库级多租户，每个租户都会收到一个包含一个或多个 Collections 的相应<a href="/docs/zh/v2.5.x/manage_databases.md">数据库</a>。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -47,7 +48,7 @@ summary: 在 Milvus，多租户意味着多个客户或团队（称为租户）�
 <li><p><strong>灵活性</strong>：每个数据库都可以拥有不同 Schema 的 Collections，从而提供高度灵活的数据组织，并允许每个租户拥有自己的数据模式。</p></li>
 <li><p><strong>其他</strong>该策略还支持 RBAC，可对每个租户的用户访问进行细粒度控制。此外，您还可以为特定租户灵活加载或释放数据，从而有效管理冷热数据。</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Collections 级多租户功能</h3><p>有了 Collection 级多租户功能，每个租户都会被分配到一个<a href="/docs/zh/manage-collections.md">Collection</a>，从而提供强大的数据隔离功能。</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Collections 级多租户功能</h3><p>有了 Collection 级多租户功能，每个租户都会被分配到一个<a href="/docs/zh/v2.5.x/manage-collections.md">Collection</a>，从而提供强大的数据隔离功能。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -58,7 +59,7 @@ summary: 在 Milvus，多租户意味着多个客户或团队（称为租户）�
 <li><p><strong>灵活性</strong>：此策略允许每个 Collections 拥有自己的 Schema，以适应具有不同数据模式的租户。</p></li>
 <li><p><strong>其他</strong>：这种策略还支持 RBAC，允许对租户进行细粒度的访问控制。此外，您还可以为特定租户灵活加载或释放数据，从而有效管理冷热数据。</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">分区级多租户</h3><p>在分区级多租户中，每个租户都被分配到共享 Collections 中手动创建的<a href="/docs/zh/manage-partitions.md">分区</a>。</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">分区级多租户</h3><p>在分区级多租户中，每个租户都被分配到共享 Collections 中手动创建的<a href="/docs/zh/v2.5.x/manage-partitions.md">分区</a>。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -69,7 +70,7 @@ summary: 在 Milvus，多租户意味着多个客户或团队（称为租户）�
 <li><p><strong>灵活性</strong>：这种策略要求所有租户共享相同的数据 Schema。分区需要手动创建。</p></li>
 <li><p><strong>其他</strong>：分区级别不支持 RBAC。租户既可以单独查询，也可以跨多个分区查询，因此这种方法非常适合涉及跨租户分区的聚合查询或分析的场景。此外，您还可以灵活加载或释放特定租户的数据，从而有效管理冷热数据。</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Partition Key 级多租户</h3><p>采用这种策略，所有租户共享一个 Collections 和 Schema，但每个租户的数据会根据<a href="/docs/zh/use-partition-key.md">分区键值</a>自动路由到 16 个物理隔离的分区中。虽然每个物理分区可以包含多个租户，但不同租户的数据在逻辑上是分开的。</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Partition Key 级多租户</h3><p>采用这种策略，所有租户共享一个 Collections 和 Schema，但每个租户的数据会根据<a href="/docs/zh/v2.5.x/use-partition-key.md">分区键值</a>自动路由到 16 个物理隔离的分区中。虽然每个物理分区可以包含多个租户，但不同租户的数据在逻辑上是分开的。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

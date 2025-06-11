@@ -5,6 +5,7 @@ related_key: SDK
 summary: تعرف على كيفية تثبيت GO SDK الخاص بـ Milvus.
 title: تثبيت Milvus Go SDK
 ---
+
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">تثبيت Milvus Go SDK<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +75,10 @@ title: تثبيت Milvus Go SDK
     </button></h2><p>بعد تثبيت Milvus GO SDK، يمكنك:</p>
 <ul>
 <li>تعلم العمليات الأساسية لـ Milvus:<ul>
-<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإلغاء إدراج وحذف</a></li>
-<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-partitions.md">إدارة الأقسام</a></li>
+<li><a href="/docs/ar/v2.5.x/insert-update-delete.md">إدراج وإلغاء إدراج وحذف</a></li>
+<li><a href="/docs/ar/v2.5.x/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
 </ul>

@@ -5,6 +5,7 @@ summary: >-
   ذلك 0.9.x وما فوق) إلى Milvus 2.x.
 title: من ميلفوس 1.x
 ---
+
 <h1 id="From-Milvus-1x" class="common-anchor-header">من ميلفوس 1.x<button data-href="#From-Milvus-1x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ title: من ميلفوس 1.x
 <li>الهدف ملفوس: 2.x</li>
 </ul></li>
 <li><strong>الأدوات المطلوبة</strong>:<ul>
-<li>أداة<a href="https://github.com/zilliztech/milvus-migration">الترحيل Milvus-migration</a>. للحصول على تفاصيل التثبيت، راجع <a href="/docs/ar/milvusdm_install.md">تثبيت أداة الترحيل</a>.</li>
+<li>أداة<a href="https://github.com/zilliztech/milvus-migration">الترحيل Milvus-migration</a>. للحصول على تفاصيل التثبيت، راجع <a href="/docs/ar/v2.5.x/milvusdm_install.md">تثبيت أداة الترحيل</a>.</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">تصدير البيانات الوصفية الخاصة بتثبيت Milvus المصدر<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

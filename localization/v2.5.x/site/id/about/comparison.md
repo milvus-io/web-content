@@ -3,6 +3,7 @@ id: comparison.md
 title: Perbandingan
 summary: Artikel ini membandingkan Milvus dengan solusi pencarian vektor lainnya.
 ---
+
 <h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">Membandingkan Milvus dengan Alternatif Lain<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,6 +155,6 @@ summary: Artikel ini membandingkan Milvus dengan solusi pencarian vektor lainnya
       </svg>
     </button></h2><ul>
 <li><p><strong>Uji coba</strong>: Rasakan pengalaman Milvus secara langsung dengan memulai menggunakan <a href="https://milvus.io/docs/quickstart.md">quickstart</a> Milvus atau <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">mendaftar ke Zilliz Cloud</a>.</p></li>
-<li><p><strong>Pelajari lebih lanjut</strong>: Selami lebih dalam fitur-fitur Milvus melalui <a href="/docs/id/glossary.md">Terminologi</a> dan <a href="https://milvus.io/docs/manage-collections.md">Panduan Pengguna</a> kami yang komprehensif.</p></li>
+<li><p><strong>Pelajari lebih lanjut</strong>: Selami lebih dalam fitur-fitur Milvus melalui <a href="/docs/id/v2.5.x/glossary.md">Terminologi</a> dan <a href="https://milvus.io/docs/manage-collections.md">Panduan Pengguna</a> kami yang komprehensif.</p></li>
 <li><p><strong>Jelajahi alternatif</strong>: Untuk perbandingan yang lebih luas tentang opsi database vektor, jelajahi sumber daya tambahan di <a href="https://zilliz.com/comparison">halaman ini</a>.</p></li>
 </ul>

@@ -4,6 +4,7 @@ related_key: configure
 summary: 了解 Milvus 的动态配置。
 title: 动态配置 Milvus
 ---
+
 <h1 id="Configure-Milvus-on-the-Fly" class="common-anchor-header">动态配置 Milvus<button data-href="#Configure-Milvus-on-the-Fly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,14 +38,14 @@ title: 动态配置 Milvus
       </svg>
     </button></h2><p>您需要确保</p>
 <ul>
-<li>已安装 Birdwatcher。详情请参阅<a href="/docs/zh/birdwatcher_install_guides.md">安装 Birdwatcher</a>、</li>
+<li>已安装 Birdwatcher。详情请参阅<a href="/docs/zh/v2.5.x/birdwatcher_install_guides.md">安装 Birdwatcher</a>、</li>
 <li>安装了 etcdctl。有关详情，请参阅<a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">与 etcd 交互</a>，或</li>
 <li>安装了其他 etcd 客户端，例如 Python 客户端。</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>本指南中的示例将<code translate="no">proxy.minPasswordLength</code> 的值更改为<code translate="no">8</code> 。您可以使用 "<a href="/docs/zh/dynamic_config.md#Applicable-configuration-items">适用的配置项</a>"中列出的适用密钥替换这些密钥。</li>
-<li>本指南中的示例假定 Milvus 的根路径是<code translate="no">by-dev</code> 。所有配置都列在<code translate="no">by-dev/config</code> 路径下。Milvus 根路径因安装方式而异。对于使用 Helm 图表安装的实例，根路径默认为<code translate="no">by-dev</code> 。如果不知道根路径，请参阅<a href="/docs/zh/birdwatcher_usage_guides.md#Connect-to-etcd">连接到 etcd</a>。</li>
+<li>本指南中的示例将<code translate="no">proxy.minPasswordLength</code> 的值更改为<code translate="no">8</code> 。您可以使用 "<a href="/docs/zh/v2.5.x/dynamic_config.md#Applicable-configuration-items">适用的配置项</a>"中列出的适用密钥替换这些密钥。</li>
+<li>本指南中的示例假定 Milvus 的根路径是<code translate="no">by-dev</code> 。所有配置都列在<code translate="no">by-dev/config</code> 路径下。Milvus 根路径因安装方式而异。对于使用 Helm 图表安装的实例，根路径默认为<code translate="no">by-dev</code> 。如果不知道根路径，请参阅<a href="/docs/zh/v2.5.x/birdwatcher_usage_guides.md#Connect-to-etcd">连接到 etcd</a>。</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">更改配置<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +204,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>了解有关<a href="/docs/zh/system_configuration.md">系统配置的</a>更多信息。</li>
-<li>了解如何使用<a href="/docs/zh/configure_operator.md">Milvus Operator</a>、<a href="/docs/zh/configure-helm.md">Helm 图表</a>和<a href="/docs/zh/configure-docker.md">Docker</a> 配置已安装的<a href="/docs/zh/configure_operator.md">Milvus</a>。</li>
+<li>了解有关<a href="/docs/zh/v2.5.x/system_configuration.md">系统配置的</a>更多信息。</li>
+<li>了解如何使用<a href="/docs/zh/v2.5.x/configure_operator.md">Milvus Operator</a>、<a href="/docs/zh/v2.5.x/configure-helm.md">Helm 图表</a>和<a href="/docs/zh/v2.5.x/configure-docker.md">Docker</a> 配置已安装的<a href="/docs/zh/v2.5.x/configure_operator.md">Milvus</a>。</li>
 </ul>

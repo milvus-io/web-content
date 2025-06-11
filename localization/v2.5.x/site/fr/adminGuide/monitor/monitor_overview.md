@@ -1,11 +1,12 @@
 ---
 id: monitor_overview.md
 title: Aperçu du moniteur
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: >-
   Découvrez comment Prometheus et Grafana sont utilisés dans Milvus pour les
   services de suivi et d'alerte.
 ---
+
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Présentation du cadre de surveillance Milvus<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +108,7 @@ summary: >-
       </svg>
     </button></h2><p>Après avoir découvert le flux de travail de base de la surveillance et de l'alerte, apprenez :</p>
 <ul>
-<li><a href="/docs/fr/monitor.md">Déployer des services de surveillance</a></li>
-<li><a href="/docs/fr/visualize.md">Visualiser les mesures de Milvus</a></li>
-<li><a href="/docs/fr/alert.md">Créer une alerte</a></li>
+<li><a href="/docs/fr/v2.5.x/monitor.md">Déployer des services de surveillance</a></li>
+<li><a href="/docs/fr/v2.5.x/visualize.md">Visualiser les mesures de Milvus</a></li>
+<li><a href="/docs/fr/v2.5.x/alert.md">Créer une alerte</a></li>
 </ul>

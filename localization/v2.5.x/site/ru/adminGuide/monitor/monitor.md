@@ -1,11 +1,12 @@
 ---
 id: monitor.md
 title: Развертывание служб мониторинга
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: >-
   Узнайте, как развернуть службы мониторинга для кластера Milvus с помощью
   Prometheus.
 ---
+
 <h1 id="Deploying-Monitoring-Services-on-Kubernetes" class="common-anchor-header">Развертывание служб мониторинга на Kubernetes<button data-href="#Deploying-Monitoring-Services-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -123,14 +124,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>Если вы развернули службы мониторинга для кластера Milvus, вам также будет интересно узнать следующее:<ul>
-<li><a href="/docs/ru/visualize.md">Визуализировать метрики Milvus в Grafana</a></li>
-<li><a href="/docs/ru/alert.md">Создавать оповещения для служб Milvus</a></li>
-<li>Настроить <a href="/docs/ru/allocate.md">распределение ресурсов</a></li>
+<li><a href="/docs/ru/v2.5.x/visualize.md">Визуализировать метрики Milvus в Grafana</a></li>
+<li><a href="/docs/ru/v2.5.x/alert.md">Создавать оповещения для служб Milvus</a></li>
+<li>Настроить <a href="/docs/ru/v2.5.x/allocate.md">распределение ресурсов</a></li>
 </ul></li>
 <li>Если вы ищете информацию о том, как масштабировать кластер Milvus:<ul>
-<li>Обучение <a href="/docs/ru/scaleout.md">масштабированию кластера Milvus</a></li>
+<li>Обучение <a href="/docs/ru/v2.5.x/scaleout.md">масштабированию кластера Milvus</a></li>
 </ul></li>
 <li>Если вы заинтересованы в обновлении версии Milvus,<ul>
-<li>прочитайте <a href="/docs/ru/upgrade_milvus_cluster-operator.md">руководство по обновлению кластера Milvus</a> и <a href="/docs/ru/upgrade_milvus_cluster-operator.md">руководство</a> <a href="/docs/ru/upgrade_milvus_standalone-operator.md">по обновлению автономной версии Milvus</a>.</li>
+<li>прочитайте <a href="/docs/ru/v2.5.x/upgrade_milvus_cluster-operator.md">руководство по обновлению кластера Milvus</a> и <a href="/docs/ru/v2.5.x/upgrade_milvus_cluster-operator.md">руководство</a> <a href="/docs/ru/v2.5.x/upgrade_milvus_standalone-operator.md">по обновлению автономной версии Milvus</a>.</li>
 </ul></li>
 </ul>

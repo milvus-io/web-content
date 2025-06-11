@@ -6,6 +6,7 @@ summary: >-
   2.x.
 title: Dari Milvus 1.x
 ---
+
 <h1 id="From-Milvus-1x" class="common-anchor-header">Dari Milvus 1.x<button data-href="#From-Milvus-1x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ title: Dari Milvus 1.x
 <li>Target Milvus: 2.x</li>
 </ul></li>
 <li><strong>Alat yang dibutuhkan</strong>:<ul>
-<li>Alat<a href="https://github.com/zilliztech/milvus-migration">migrasi Milvus</a>. Untuk detail instalasi, lihat Menginstal <a href="/docs/id/milvusdm_install.md">Alat Migrasi</a>.</li>
+<li>Alat<a href="https://github.com/zilliztech/milvus-migration">migrasi Milvus</a>. Untuk detail instalasi, lihat Menginstal <a href="/docs/id/v2.5.x/milvusdm_install.md">Alat Migrasi</a>.</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">Mengekspor metadata dari instalasi Milvus sumber<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

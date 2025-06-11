@@ -6,6 +6,7 @@ summary: >-
   prestazioni.
 title: FAQ sulle prestazioni
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">FAQ sulle prestazioni<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +35,7 @@ title: FAQ sulle prestazioni
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">Quali fattori influiscono sull'utilizzo della CPU?</h4><p>L'uso della CPU aumenta quando Milvus costruisce indici o esegue query. In generale, la creazione di indici è intensiva per la CPU, tranne quando si utilizza Annoy, che viene eseguito su un singolo thread.</p>
 <p>Durante l'esecuzione delle query, l'utilizzo della CPU è influenzato da <code translate="no">nq</code> e <code translate="no">nprobe</code>. Quando <code translate="no">nq</code> e <code translate="no">nprobe</code> sono piccoli, la concorrenza è bassa e l'uso della CPU rimane basso.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">L'inserimento simultaneo di dati e la ricerca hanno un impatto sulle prestazioni delle query?</h4><p>Le operazioni di inserimento non sono intensive per la CPU. Tuttavia, poiché i nuovi segmenti potrebbero non aver raggiunto la soglia per la creazione dell'indice, Milvus ricorre alla ricerca bruta, con un impatto significativo sulle prestazioni della query.</p>
-<p>Il parametro <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> determina la soglia di costruzione dell'indice per un segmento ed è impostato per default su 1024 righe. Per ulteriori informazioni, vedere <a href="/docs/it/system_configuration.md">Configurazione del sistema</a>.</p>
+<p>Il parametro <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> determina la soglia di costruzione dell'indice per un segmento ed è impostato per default su 1024 righe. Per ulteriori informazioni, vedere <a href="/docs/it/v2.5.x/system_configuration.md">Configurazione del sistema</a>.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">L'indicizzazione di un campo VARCHAR può migliorare la velocità di cancellazione?</h4><p>L'indicizzazione di un campo VARCHAR può accelerare le operazioni di "Elimina per espressione", ma solo a determinate condizioni:</p>
 <ul>
 <li><strong>Indice INVERTITO</strong>: Questo indice è utile per le espressioni <code translate="no">IN</code> o <code translate="no">==</code> sui campi VARCHAR a chiave non primaria.</li>

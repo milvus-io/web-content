@@ -6,6 +6,7 @@ summary: >-
   문자로 변환합니다. 예를 들어, 이 필터는 í와 같은 문자를 i로 변환하여 특히 다국어 콘텐츠의 경우 텍스트 처리를 더 간단하고 일관성 있게
   만듭니다.
 ---
+
 <h1 id="ASCII-folding" class="common-anchor-header">ASCII 접기<button data-href="#ASCII-folding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,8 +66,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">asciifolding</code> 필터는 토큰화 도구에서 생성된 용어에 대해 작동하므로 토큰화 도구와 함께 사용해야 합니다. Milvus에서 사용할 수 있는 토큰라이저 목록은 <a href="/docs/ko/standard-tokenizer.md">표준 토큰라이저와</a> 그 자매 페이지를 참조하세요.</p>
-<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
+
+<p><code translate="no">asciifolding</code> 필터는 토큰화 도구에서 생성된 용어에 대해 작동하므로 토큰화 도구와 함께 사용해야 합니다. Milvus에서 사용할 수 있는 토큰라이저 목록은 <a href="/docs/ko/v2.5.x/standard-tokenizer.md">표준 토큰라이저와</a> 그 자매 페이지를 참조하세요.</p>
+<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,6 +117,7 @@ sample_text = <span class="hljs-string">&quot;Café Möller serves crème brûl�
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

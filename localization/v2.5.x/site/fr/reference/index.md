@@ -4,6 +4,7 @@ related_key: index
 summary: Mécanisme d'indexation à Milvus.
 title: Index en mémoire
 ---
+
 <h1 id="In-memory-Index" class="common-anchor-header">Index en mémoire<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,9 +20,9 @@ title: Index en mémoire
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette rubrique répertorie les différents types d'index en mémoire pris en charge par Milvus, les scénarios les mieux adaptés à chacun d'entre eux et les paramètres que les utilisateurs peuvent configurer pour obtenir de meilleures performances de recherche. Pour les index sur disque, voir <strong><a href="/docs/fr/disk_index.md">Index sur disque</a></strong>.</p>
+    </button></h1><p>Cette rubrique répertorie les différents types d'index en mémoire pris en charge par Milvus, les scénarios les mieux adaptés à chacun d'entre eux et les paramètres que les utilisateurs peuvent configurer pour obtenir de meilleures performances de recherche. Pour les index sur disque, voir <strong><a href="/docs/fr/v2.5.x/disk_index.md">Index sur disque</a></strong>.</p>
 <p>L'indexation est le processus d'organisation efficace des données et joue un rôle majeur dans l'utilité de la recherche par similarité en accélérant considérablement les requêtes fastidieuses sur de grands ensembles de données.</p>
-<p>Pour améliorer les performances des requêtes, vous pouvez <a href="/docs/fr/index-vector-fields.md">spécifier un type d'index</a> pour chaque champ vectoriel.</p>
+<p>Pour améliorer les performances des requêtes, vous pouvez <a href="/docs/fr/v2.5.x/index-vector-fields.md">spécifier un type d'index</a> pour chaque champ vectoriel.</p>
 <div class="alert note">
 Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Milvus supprime automatiquement l'ancien index lors du changement de type d'index.</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">Index vectoriels ANNS<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +61,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <div class="filter">
  <a href="#floating">Encastrements en virgule flottante</a> <a href="#binary">Encastrements binaires</a> <a href="#sparse">Encastrements épars</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indices pour les intégrations en virgule flottante</h3><p>Pour les encastrements en virgule flottante à 128 dimensions (vecteurs), l'espace de stockage qu'ils occupent est de 128 * la taille de la virgule flottante = 512 octets. Les <a href="/docs/fr/metric.md">mesures de distance</a> utilisées pour les enregistrements en virgule flottante sont la distance euclidienne (<code translate="no">L2</code>) et le produit intérieur (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indices pour les intégrations en virgule flottante</h3><p>Pour les encastrements en virgule flottante à 128 dimensions (vecteurs), l'espace de stockage qu'ils occupent est de 128 * la taille de la virgule flottante = 512 octets. Les <a href="/docs/fr/v2.5.x/metric.md">mesures de distance</a> utilisées pour les enregistrements en virgule flottante sont la distance euclidienne (<code translate="no">L2</code>) et le produit intérieur (<code translate="no">IP</code>).</p>
 <p>Ces types d'index comprennent <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, et <code translate="no">SCANN</code> pour les recherches ANN basées sur l'unité centrale.</p>
 </div>
 <div class="filter-binary">
@@ -71,7 +72,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Index pour les encastrements épars</h3><p>Les index pour les encastrements épars ne prennent en charge que les métriques <code translate="no">IP</code> et <code translate="no">BM25</code> (pour la recherche en texte intégral).</p>
 <p>Type d'index pris en charge pour les encastrements épars : <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
-<p>À partir de la version 2.5.4 de Milvus, <code translate="no">SPARSE_WAND</code> est obsolète. Il est recommandé d'utiliser <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> par souci d'équivalence tout en maintenant la compatibilité. Pour plus d'informations, reportez-vous à <a href="/docs/fr/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+<p>À partir de la version 2.5.4 de Milvus, <code translate="no">SPARSE_WAND</code> est obsolète. Il est recommandé d'utiliser <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> par souci d'équivalence tout en maintenant la compatibilité. Pour plus d'informations, reportez-vous à <a href="/docs/fr/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
@@ -247,7 +248,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Distance</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Facultatif] La métrique de distance choisie.</td><td>Voir <a href="/docs/fr/metric.md">Métriques prises en charge</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Facultatif] La métrique de distance choisie.</td><td>Voir <a href="/docs/fr/v2.5.x/metric.md">Métriques prises en charge</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -537,7 +538,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Distance</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Facultatif] La métrique de distance choisie.</td><td>Voir <a href="/docs/fr/metric.md">Métriques prises en charge</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Facultatif] La métrique de distance choisie.</td><td>Voir <a href="/docs/fr/v2.5.x/metric.md">Métriques prises en charge</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -591,7 +592,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description</th><th>Portée</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>L'algorithme utilisé pour construire et interroger l'index. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md#Set-index-params-for-vector-field">Vecteur épars</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (par défaut), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>L'algorithme utilisé pour construire et interroger l'index. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">Vecteur épars</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (par défaut), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 <tr><td><code translate="no">bm25_k1</code></td><td>Contrôle la saturation de la fréquence des termes. Des valeurs élevées augmentent l'importance de la fréquence des termes dans le classement des documents.</td><td>[1.2, 2.0]</td></tr>
 <tr><td><code translate="no">bm25_b</code></td><td>Contrôle le degré de normalisation de la longueur des documents. La valeur par défaut est 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
@@ -651,5 +652,5 @@ Voir <a href="https://medium.com/unstructured-data-service/how-to-choose-an-inde
         ></path>
       </svg>
     </button></h2><ul>
-<li>En savoir plus sur les <a href="/docs/fr/metric.md">métriques de similarité</a> prises en charge dans Milvus.</li>
+<li>En savoir plus sur les <a href="/docs/fr/v2.5.x/metric.md">métriques de similarité</a> prises en charge dans Milvus.</li>
 </ul>

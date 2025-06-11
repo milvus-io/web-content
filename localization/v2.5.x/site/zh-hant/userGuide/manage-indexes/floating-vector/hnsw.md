@@ -3,6 +3,7 @@ id: hnsw.md
 title: HNSW
 summary: HNSW 索引是一種基於圖的索引演算法，可以提高搜尋高維浮動向量時的效能。它具有優異的搜尋準確性和低延遲，但需要較高的記憶體開銷來維持其階層圖結構。
 ---
+
 <h1 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +54,7 @@ summary: HNSW 索引是一種基於圖的索引演算法，可以提高搜尋高
 <li><p><code translate="no">efConstruction</code>:索引建構時所考慮的候選數。較高的<code translate="no">efConstruction</code> 通常會產生品質較佳的圖形，但需要較多時間來建立。</p></li>
 <li><p><code translate="no">ef</code>:搜尋過程中評估的鄰居數量。增加<code translate="no">ef</code> 可提高找到最近鄰居的可能性，但會減慢搜尋過程。</p></li>
 </ul>
-<p>有關如何調整這些設定以符合您需求的詳細資訊，請參閱<a href="/docs/zh-hant/hnsw.md#Index-params">索引參數</a>。</p>
+<p>有關如何調整這些設定以符合您需求的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/hnsw.md#Index-params">索引參數</a>。</p>
 <h2 id="Build-index" class="common-anchor-header">建立索引<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,28 +77,29 @@ summary: HNSW 索引是一種基於圖的索引演算法，可以提高搜尋高
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
-        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
+<span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在此設定中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引類型。在本範例中，設定值為<code translate="no">HNSW</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用來計算向量間距離的方法。支援的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用來計算向量間距離的方法。支援的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/metric.md">公制類型</a>。</p></li>
 <li><p><code translate="no">params</code>:建立索引的附加設定選項。</p>
 <ul>
 <li><p><code translate="no">M</code>:每個節點可以連線的最大鄰居數量。</p></li>
 <li><p><code translate="no">efConstruction</code>:索引建構期間考慮連接的候選鄰居數量。</p></li>
 </ul>
-<p>若要瞭解<code translate="no">HNSW</code> 索引可用的更多建置參數，請參閱<a href="/docs/zh-hant/hnsw.md#Index-building-params">索引建置參數</a>。</p></li>
+<p>若要瞭解<code translate="no">HNSW</code> 索引可用的更多建置參數，請參閱<a href="/docs/zh-hant/v2.5.x/hnsw.md#Index-building-params">索引建置參數</a>。</p></li>
 </ul>
-<p>索引參數設定完成後，您可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
+<p>索引參數設定完成後，您可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/create-collection.md">建立集合</a>。</p>
 <h2 id="Search-on-index" class="common-anchor-header">在索引上搜尋<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,20 +123,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">10</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">params</code>:在索引上搜尋的其他設定選項。</p>
 <ul>
 <li><code translate="no">ef</code>:搜尋時要考慮的鄰居數。</li>
 </ul>
-<p>若要瞭解<code translate="no">HNSW</code> 索引可用的更多搜尋參數，請參閱<a href="/docs/zh-hant/hnsw.md#Index-specific-search-params">特定</a>於索引的搜尋參數。</p></li>
+<p>若要瞭解<code translate="no">HNSW</code> 索引可用的更多搜尋參數，請參閱<a href="/docs/zh-hant/v2.5.x/hnsw.md#Index-specific-search-params">特定</a>於索引的搜尋參數。</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">索引參數<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -152,7 +155,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本節概述用於建立索引和在索引上執行搜尋的參數。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/hnsw.md#Build-index">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/v2.5.x/hnsw.md#Build-index">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th><p>參數</p></th>
@@ -173,7 +176,7 @@ res = MilvusClient.search(
      <td><p>較高的<code translate="no">efConstruction</code> 通常會產生<strong>更精確的索引</strong>，因為會探索更多的潛在連線。不過，這也會導致建立<strong>索引的時間變長，並增加</strong>建構時的<strong>記憶體使用量</strong>。考慮增加<code translate="no">efConstruction</code> 以提高精確度，尤其是在索引時間不太重要的情況下。</p><p>在資源有限的情況下，可考慮降低<code translate="no">efConstruction</code> ，以加快索引建置速度。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/hnsw.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/v2.5.x/hnsw.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th><p>參數</p></th>

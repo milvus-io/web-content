@@ -1,9 +1,10 @@
 ---
 id: object_storage_operator.md
 title: Milvus 오퍼레이터로 오브젝트 스토리지 구성하기
-related_key: 'minio, s3, storage, etcd, pulsar'
+related_key: "minio, s3, storage, etcd, pulsar"
 summary: Milvus Operator로 오브젝트 스토리지를 구성하는 방법을 알아보세요.
 ---
+
 <h1 id="Configure-Object-Storage-with-Milvus-Operator" class="common-anchor-header">Milvus 오퍼레이터로 오브젝트 스토리지 구성하기<button data-href="#Configure-Object-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,6 +226,6 @@ spec:
       </svg>
     </button></h2><p>Milvus Operator로 다른 Milvus 종속성을 구성하는 방법을 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/meta_storage_operator.md">밀버스 오퍼레이터로 메타 스토리지 구성하기</a></li>
-<li><a href="/docs/ko/message_storage_operator.md">밀버스 오퍼레이터로 메시지 저장소 구성하기</a></li>
+<li><a href="/docs/ko/v2.5.x/meta_storage_operator.md">밀버스 오퍼레이터로 메타 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.5.x/message_storage_operator.md">밀버스 오퍼레이터로 메시지 저장소 구성하기</a></li>
 </ul>

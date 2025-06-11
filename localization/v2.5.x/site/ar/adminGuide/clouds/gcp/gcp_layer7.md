@@ -6,6 +6,7 @@ summary: >-
   تعرف على كيفية نشر مجموعة Milvus العنقودية خلف موازن تحميل من الطبقة السابعة
   على GCP.
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">إعداد موازن تحميل من الطبقة 7 لميلفوس على GCP<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -28,9 +29,9 @@ summary: >-
 <p>لإنشاء مشروع، راجع <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">إنشاء المشاريع وإدارتها</a>. اسم المشروع المستخدم في هذا الدليل هو <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>لقد قمتَ بتثبيت <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a> و <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> و <a href="https://helm.sh/docs/intro/install/">Helm</a> محليًا أو قررت استخدام <a href="https://cloud.google.com/shell">Cloud Shell</a> المستند إلى المتصفح بدلاً من ذلك.</p></li>
 <li><p>قمت <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">بتهيئة gcloud CLI</a> باستخدام بيانات اعتماد حساب GCP الخاص بك.</p></li>
-<li><p>قمت <a href="/docs/ar/gcp.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة الرابعة على GCP</a>.</p></li>
+<li><p>قمت <a href="/docs/ar/v2.5.x/gcp.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة الرابعة على GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">تعديل تكوينات Milvus</h3><p>يفترض هذا الدليل أنك قمت بالفعل <a href="/docs/ar/gcp.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة 4 على GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">تعديل تكوينات Milvus</h3><p>يفترض هذا الدليل أنك قمت بالفعل <a href="/docs/ar/v2.5.x/gcp.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة 4 على GCP</a>.</p>
 <p>قبل إعداد موازن تحميل من الطبقة السابعة لمجموعة Milvus العنقودية هذه، قم بتشغيل الأمر التالي لإزالة موازن تحميل الطبقة الرابعة.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -84,11 +85,12 @@ openssl genrsa -<span class="hljs-keyword">out</span> tls.key <span class="hljs-
 
 <span class="hljs-meta"># Creates a certificate and signs it with the preceding key.</span>
 openssl req -<span class="hljs-keyword">new</span> -key tls.key -<span class="hljs-keyword">out</span> tls.csr \
-    -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
+ -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
 
 openssl x509 -req -days <span class="hljs-number">99999</span> -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
-    -<span class="hljs-keyword">out</span> tls.crt
+ -<span class="hljs-keyword">out</span> tls.crt
 <button class="copy-code-btn"></button></code></pre>
+
 <p>ثم قم بإنشاء سر في مجموعة GKE الخاصة بك مع هذه الملفات لاستخدامها لاحقًا.</p>
 <pre><code translate="no" class="language-bash">kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 <button class="copy-code-btn"></button></code></pre>
@@ -207,6 +209,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <span class="hljs-comment"># For Google-managed certificates, there is not need to do so.</span>
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;34.111.144.65&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;my-release.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li>يجب أن يتطابق عنوان IP ورقم المنفذ في <strong>المضيف</strong> <strong>والمنفذ</strong> مع تلك المدرجة في نهاية <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">إنشاء مدخل لإنشاء موازن تحميل من الطبقة السابعة</a>.</li>

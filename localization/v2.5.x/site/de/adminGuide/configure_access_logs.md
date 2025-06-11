@@ -2,6 +2,7 @@
 id: configure_access_logs.md
 title: Zugriffsprotokolle konfigurieren
 ---
+
 <h1 id="Configure-Access-Logs" class="common-anchor-header">Zugriffsprotokolle konfigurieren<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,9 +22,9 @@ title: Zugriffsprotokolle konfigurieren
 <p>Dieser Leitfaden enthält detaillierte Anweisungen zur Konfiguration von Zugriffsprotokollen in Milvus.</p>
 <p>Die Konfiguration der Zugriffsprotokolle hängt von der Installationsmethode von Milvus ab:</p>
 <ul>
-<li><strong>Helm-Installation</strong>: Konfigurieren Sie unter <code translate="no">values.yaml</code>. Weitere Informationen finden Sie unter <a href="/docs/de/configure-helm.md">Konfigurieren von Milvus mit Helm Charts</a>.</li>
-<li><strong>Docker-Installation</strong>: Konfigurieren Sie unter <code translate="no">milvus.yaml</code>. Weitere Informationen finden Sie unter <a href="/docs/de/configure-docker.md">Konfigurieren von Milvus mit Docker Compose</a>.</li>
-<li><strong>Operator-Installation</strong>: Ändern Sie <code translate="no">spec.components</code> in der Konfigurationsdatei. Weitere Informationen finden Sie unter <a href="/docs/de/configure_operator.md">Konfigurieren von Milvus mit Milvus Operator</a>.</li>
+<li><strong>Helm-Installation</strong>: Konfigurieren Sie unter <code translate="no">values.yaml</code>. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/configure-helm.md">Konfigurieren von Milvus mit Helm Charts</a>.</li>
+<li><strong>Docker-Installation</strong>: Konfigurieren Sie unter <code translate="no">milvus.yaml</code>. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/configure-docker.md">Konfigurieren von Milvus mit Docker Compose</a>.</li>
+<li><strong>Operator-Installation</strong>: Ändern Sie <code translate="no">spec.components</code> in der Konfigurationsdatei. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/configure_operator.md">Konfigurieren von Milvus mit Milvus Operator</a>.</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Konfigurationsoptionen<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

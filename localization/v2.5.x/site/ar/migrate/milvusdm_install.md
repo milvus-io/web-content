@@ -3,6 +3,7 @@ id: milvusdm_install.md
 summary: تعرف على كيفية تثبيت Milvus-Migration لترحيل بياناتك.
 title: تثبيت أداة الترحيل
 ---
+
 <h1 id="Install-Migration-Tool" class="common-anchor-header">تثبيت أداة الترحيل<button data-href="#Install-Migration-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +86,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>بعد تثبيت أداة Milvus-migration، يمكنك ترحيل البيانات من مصادر مختلفة:</p>
 <ul>
-<li><a href="/docs/ar/es2m.md">من Elasticsearch</a></li>
-<li><a href="/docs/ar/f2m.md">من فايس</a></li>
-<li><a href="/docs/ar/m2m.md">من ملفوس 1.x</a></li>
+<li><a href="/docs/ar/v2.5.x/es2m.md">من Elasticsearch</a></li>
+<li><a href="/docs/ar/v2.5.x/f2m.md">من فايس</a></li>
+<li><a href="/docs/ar/v2.5.x/m2m.md">من ملفوس 1.x</a></li>
 </ul>

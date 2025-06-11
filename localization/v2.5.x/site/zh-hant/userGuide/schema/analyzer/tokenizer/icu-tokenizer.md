@@ -7,6 +7,7 @@ summary: >-
   可以準確地將文字分割成世界上大多數語言的單字。
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="ICU" class="common-anchor-header">ICU<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#ICU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +55,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">icu</code> tokenizer 可以與一個或多個過濾器結合使用。例如，以下程式碼定義了一個使用<code translate="no">icu</code> tokenizer 和<a href="/docs/zh-hant/removepunct-filter.md">remove punct 過濾器</a>的分析器：</p>
+<p><code translate="no">icu</code> tokenizer 可以與一個或多個過濾器結合使用。例如，以下程式碼定義了一個使用<code translate="no">icu</code> tokenizer 和<a href="/docs/zh-hant/v2.5.x/removepunct-filter.md">remove punct 過濾器</a>的分析器：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -72,7 +73,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效率的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效率的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,6 +120,7 @@ sample_text = <span class="hljs-string">&quot;Привет! Как дела?&quo
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

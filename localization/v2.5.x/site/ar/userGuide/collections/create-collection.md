@@ -5,6 +5,7 @@ summary: >-
   يمكنك إنشاء مجموعة من خلال تحديد مخططها ومعلمات الفهرس ونوع القياس وما إذا كان
   سيتم تحميلها عند الإنشاء. تقدم هذه الصفحة كيفية إنشاء مجموعة من البداية.
 ---
+
 <h1 id="Create-Collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,9 +41,9 @@ summary: >-
 <p>ويمكنك تحديد كل جانب من جوانب المجموعة، بما في ذلك مخططها ومعلمات الفهرس ونوع المقياس، وما إذا كان يجب تحميلها عند الإنشاء لضمان أن المجموعة تلبي متطلباتك بالكامل.</p>
 <p>لإنشاء مجموعة، تحتاج إلى</p>
 <ul>
-<li><p><a href="/docs/ar/create-collection.md#Create-Schema">إنشاء مخطط</a></p></li>
-<li><p><a href="/docs/ar/create-collection.md#Optional-Set-Index-Parameters">تعيين معلمات الفهرس</a> (اختياري)</p></li>
-<li><p><a href="/docs/ar/create-collection.md#Create-a-Collection">إنشاء مجموعة</a></p></li>
+<li><p><a href="/docs/ar/v2.5.x/create-collection.md#Create-Schema">إنشاء مخطط</a></p></li>
+<li><p><a href="/docs/ar/v2.5.x/create-collection.md#Optional-Set-Index-Parameters">تعيين معلمات الفهرس</a> (اختياري)</p></li>
+<li><p><a href="/docs/ar/v2.5.x/create-collection.md#Create-a-Collection">إنشاء مجموعة</a></p></li>
 </ul>
 <h2 id="Create-Schema" class="common-anchor-header">إنشاء مخطط<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,10 +60,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يحدد المخطط بنية بيانات المجموعة. عند إنشاء مجموعة، تحتاج إلى تصميم المخطط بناءً على متطلباتك. لمزيد من التفاصيل، راجع <a href="/docs/ar/schema.md">شرح المخطط</a>.</p>
+    </button></h2><p>يحدد المخطط بنية بيانات المجموعة. عند إنشاء مجموعة، تحتاج إلى تصميم المخطط بناءً على متطلباتك. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/schema.md">شرح المخطط</a>.</p>
 <p>تُنشئ مقتطفات التعليمات البرمجية التالية مخططًا مع الحقل الديناميكي الممكّن وثلاثة حقول إلزامية باسم <code translate="no">my_id</code> و <code translate="no">my_vector</code> و <code translate="no">my_varchar</code>.</p>
 <div class="alert note">
-<p>يمكنك تعيين القيم الافتراضية لأي حقل قياسي وجعلها قابلة للإلغاء. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>يمكنك تعيين القيم الافتراضية لأي حقل قياسي وجعلها قابلة للإلغاء. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -70,14 +71,14 @@ summary: >-
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 <span class="hljs-comment"># 3.1. Create schema</span>
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># 3.2. Add fields to schema</span>
@@ -85,6 +86,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;my_id&quot;</span>, 
 schema.add_field(field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -225,7 +227,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
     </button></h2><p>يؤدي إنشاء فهرس على حقل معين إلى تسريع البحث في هذا الحقل. يسجل الفهرس ترتيب الكيانات ضمن مجموعة. كما هو موضح في مقتطفات التعليمات البرمجية التالية، يمكنك استخدام <code translate="no">metric_type</code> و <code translate="no">index_type</code> لتحديد الطرق المناسبة لـ Milvus لفهرسة حقل ما وقياس أوجه التشابه بين تضمينات المتجهات.</p>
 <p>في Milvus، يمكنك استخدام <code translate="no">AUTOINDEX</code> كنوع فهرس لجميع الحقول المتجهة، وأحد <code translate="no">COSINE</code> و <code translate="no">L2</code> و <code translate="no">IP</code> كنوع القياس بناءً على احتياجاتك.</p>
 <p>كما هو موضح في مقتطف الكود أعلاه، تحتاج إلى تعيين كل من نوع الفهرس والنوع المتري لحقول المتجهات ونوع الفهرس فقط للحقول القياسية. تعد الفهارس إلزامية للحقول المتجهة، ويُنصح بإنشاء فهارس للحقول القياسية المستخدمة بشكل متكرر في شروط التصفية.</p>
-<p>للتفاصيل، راجع <a href="/docs/ar/index-vector-fields.md">فهرس الحقول المتجهة</a> <a href="/docs/ar/index-scalar-fields.md">وفهرس الحقول القياسية</a>.</p>
+<p>للتفاصيل، راجع <a href="/docs/ar/v2.5.x/index-vector-fields.md">فهرس الحقول المتجهة</a> <a href="/docs/ar/v2.5.x/index-scalar-fields.md">وفهرس الحقول القياسية</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -233,16 +235,17 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># 3.4. Add indexes</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
+field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
 )
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -325,7 +328,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -333,9 +336,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
 
@@ -416,7 +420,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -424,9 +428,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.6 Create a collection and index it separately</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq2</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_2&quot;</span>)
@@ -567,12 +572,13 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+\&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
+\&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">تمكين mmap</h3><p>يتيح Milvus تمكين mmap على جميع المجموعات بشكل افتراضي، مما يسمح لـ Milvus بتعيين بيانات الحقل الخام في الذاكرة بدلاً من تحميلها بالكامل. هذا يقلل من آثار أقدام الذاكرة ويزيد من سعة المجموعة. للحصول على تفاصيل حول mmap، راجع <a href="/docs/ar/mmap.md">استخدام mmap</a>.</p>
+
+<h3 id="Enable-mmap" class="common-anchor-header">تمكين mmap</h3><p>يتيح Milvus تمكين mmap على جميع المجموعات بشكل افتراضي، مما يسمح لـ Milvus بتعيين بيانات الحقل الخام في الذاكرة بدلاً من تحميلها بالكامل. هذا يقلل من آثار أقدام الذاكرة ويزيد من سعة المجموعة. للحصول على تفاصيل حول mmap، راجع <a href="/docs/ar/v2.5.x/mmap.md">استخدام mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#plaintext">نص عادي</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -587,13 +593,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With MMap</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq4</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_4&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_4&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
+.build();
 client.createCollection(customizedSetupReq4);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">create_collection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_4&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -646,13 +653,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With TTL</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq5</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)
+.build();
 client.createCollection(customizedSetupReq5);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_5&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -703,13 +711,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With consistency level</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq6</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_6&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_6&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.consistencyLevel(ConsistencyLevel.BOUNDED)
+.build();
 client.createCollection(customizedSetupReq6);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_6&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -745,6 +754,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمعرفة المزيد عن مستويات الاتساق، راجع <a href="/docs/ar/tune_consistency.md">مستوى الاتساق</a>.</p>
+<p>لمعرفة المزيد عن مستويات الاتساق، راجع <a href="/docs/ar/v2.5.x/tune_consistency.md">مستوى الاتساق</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">تمكين الحقل الديناميكي</h3><p>الحقل الديناميكي في المجموعة هو حقل تدوين كائنات جافا سكريبت (JSON) محجوز باسم <strong>$meta</strong>. بمجرد تمكين هذا الحقل، يحفظ Milvus جميع الحقول غير المعرفة من قبل الهيكلية التي يحملها كل كيان وقيمها كأزواج قيمة مفتاح في الحقل المحجوز.</p>
-<p>للحصول على تفاصيل حول كيفية استخدام الحقل الديناميكي، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
+<p>للحصول على تفاصيل حول كيفية استخدام الحقل الديناميكي، راجع <a href="/docs/ar/v2.5.x/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>

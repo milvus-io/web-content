@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: MilvusをHelmでインストールする前に必要な準備についてご紹介します。
 title: Kubernetes上でMilvusを稼働させるための要件
 ---
+
 <h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">Kubernetes上でMilvusを稼働させるための要件<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,8 +142,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>ハードウェアとソフトウェアが要件を満たしていれば、次のことができます：</p>
 <ul>
-<li><a href="/docs/ja/install_cluster-milvusoperator.md">Milvus Operatorを使用してKubernetでMilvusを実行する。</a></li>
-<li><a href="/docs/ja/install_cluster-helm.md">Helmを使用してKubernetesでMilvusを実行する</a></li>
+<li><a href="/docs/ja/v2.5.x/install_cluster-milvusoperator.md">Milvus Operatorを使用してKubernetでMilvusを実行する。</a></li>
+<li><a href="/docs/ja/v2.5.x/install_cluster-helm.md">Helmを使用してKubernetesでMilvusを実行する</a></li>
 </ul></li>
-<li><p>Milvusのインストール時に設定できるパラメータについては、<a href="/docs/ja/system_configuration.md">システム構成を</a>参照してください。</p></li>
+<li><p>Milvusのインストール時に設定できるパラメータについては、<a href="/docs/ja/v2.5.x/system_configuration.md">システム構成を</a>参照してください。</p></li>
 </ul>

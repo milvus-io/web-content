@@ -4,6 +4,7 @@ title: Milvus 路線圖
 related_key: Milvus roadmap
 summary: Milvus 是一個開放原始碼的向量資料庫，專為人工智能應用程式打造。以下是我們的發展路線圖。
 ---
+
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus 路線圖<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,7 +76,7 @@ summary: Milvus 是一個開放原始碼的向量資料庫，專為人工智能�
 <li>我們的路線圖通常分為三個部分：最近的版本、即將推出的下一個版本，以及未來一年內的中長期願景。</li>
 <li>隨著我們的進展，我們會不斷學習並偶爾調整重點，視需要增加或移除項目。</li>
 <li>這些計劃僅供參考，隨時可能變更，也可能因訂閱服務的不同而有所差異。</li>
-<li>我們會堅定不移地遵循我們的路線圖，並以我們的<a href="/docs/zh-hant/release_notes.md">發行說明</a>做為參考。</li>
+<li>我們會堅定不移地遵循我們的路線圖，並以我們的<a href="/docs/zh-hant/v2.5.x/release_notes.md">發行說明</a>做為參考。</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">如何貢獻<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

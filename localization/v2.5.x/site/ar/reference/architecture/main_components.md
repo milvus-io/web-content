@@ -3,6 +3,7 @@ id: main_components.md
 summary: تعرف على المكونات الرئيسية في Milvus المستقلة والمجموعة العنقودية.
 title: المكونات الرئيسية
 ---
+
 <h1 id="Main-Components" class="common-anchor-header">المكونات الرئيسية<button data-href="#Main-Components" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,5 +95,5 @@ title: المكونات الرئيسية
         ></path>
       </svg>
     </button></h2><ul>
-<li>اقرأ <a href="/docs/ar/four_layers.md">الحوسبة/التخزين الموزع</a> لفهم آلية ومبدأ تصميم ميلفوس.</li>
+<li>اقرأ <a href="/docs/ar/v2.5.x/four_layers.md">الحوسبة/التخزين الموزع</a> لفهم آلية ومبدأ تصميم ميلفوس.</li>
 </ul>

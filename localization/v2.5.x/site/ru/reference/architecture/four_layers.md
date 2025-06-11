@@ -3,6 +3,7 @@ id: four_layers.md
 summary: Структура разделения хранения и вычислений в Milvus.
 title: Дезагрегация систем хранения данных и вычислений
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Дезагрегация систем хранения данных и вычислений<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,5 +120,5 @@ title: Дезагрегация систем хранения данных и в
         ></path>
       </svg>
     </button></h2><ul>
-<li>Для получения более подробной информации об архитектуре Milvus читайте <a href="/docs/ru/main_components.md">раздел Основные компоненты</a>.</li>
+<li>Для получения более подробной информации об архитектуре Milvus читайте <a href="/docs/ru/v2.5.x/main_components.md">раздел Основные компоненты</a>.</li>
 </ul>

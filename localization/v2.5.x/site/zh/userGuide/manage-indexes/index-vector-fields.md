@@ -4,6 +4,7 @@ order: 1
 summary: 本指南将指导您完成创建和管理 Collections 中向量字段索引的基本操作。
 title: 索引向量字段
 ---
+
 <h1 id="Index-Vector-Fields" class="common-anchor-header">索引向量字段<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ title: 索引向量字段
         ></path>
       </svg>
     </button></h2><p>利用存储在索引文件中的元数据，Milvus 以专门的结构组织数据，便于在搜索或查询过程中快速检索所需的信息。</p>
-<p>Milvus 提供多种索引类型和指标，可对字段值进行排序，以实现高效的相似性搜索。下表列出了不同向量字段类型所支持的索引类型和度量。目前，Milvus 支持各种类型的向量数据，包括浮点嵌入（通常称为浮点向量或密集向量）、二进制嵌入（也称为二进制向量）和稀疏嵌入（也称为稀疏向量）。详情请参阅 "<a href="/docs/zh/index.md">内存索引</a>和<a href="/docs/zh/metric.md">相似度指标</a>"。</p>
+<p>Milvus 提供多种索引类型和指标，可对字段值进行排序，以实现高效的相似性搜索。下表列出了不同向量字段类型所支持的索引类型和度量。目前，Milvus 支持各种类型的向量数据，包括浮点嵌入（通常称为浮点向量或密集向量）、二进制嵌入（也称为二进制向量）和稀疏嵌入（也称为稀疏向量）。详情请参阅 "<a href="/docs/zh/v2.5.x/index.md">内存索引</a>和<a href="/docs/zh/v2.5.x/metric.md">相似度指标</a>"。</p>
 <div class="filter">
  <a href="#floating">浮点嵌入</a> <a href="#binary">二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -93,7 +94,7 @@ title: 索引向量字段
 </tbody>
 </table>
 <div class="alert note">
-<p>从 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已被弃用。建议在保持兼容性的前提下，使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 来实现等价。更多信息，请参阅<a href="/docs/zh/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</p>
+<p>从 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已被弃用。建议在保持兼容性的前提下，使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 来实现等价。更多信息，请参阅<a href="/docs/zh/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</p>
 </div>
 </div>
 <p>建议为经常访问的向量场和标量场创建索引。</p>
@@ -112,7 +113,7 @@ title: 索引向量字段
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>正如<a href="/docs/zh/manage-collections.md">管理 Collections</a> 中所解释的，如果在创建 Collections 请求中指定了以下任一条件，Milvus 会在创建 Collections 时自动生成索引并将其加载到内存中：</p>
+    </button></h2><p>正如<a href="/docs/zh/v2.5.x/manage-collections.md">管理 Collections</a> 中所解释的，如果在创建 Collections 请求中指定了以下任一条件，Milvus 会在创建 Collections 时自动生成索引并将其加载到内存中：</p>
 <ul>
 <li><p>向量场的维度和度量类型，或</p></li>
 <li><p>Schema 和索引参数。</p></li>
@@ -133,14 +134,14 @@ title: 索引向量字段
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create schema</span>
 <span class="hljs-comment"># 2.1. Create schema</span>
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># 2.2. Add fields to schema</span>
@@ -149,10 +150,11 @@ schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>,
 
 <span class="hljs-comment"># 3. Create collection</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>, 
-    schema=schema, 
+collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
+schema=schema,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -246,20 +248,21 @@ index_params = MilvusClient.prepare_index_params()
 
 <span class="hljs-comment"># 4.2. Add an index on the vector field.</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
-    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>,
-    params={ <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span> }
+field_name=<span class="hljs-string">&quot;vector&quot;</span>,
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>,
+params={ <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span> }
 )
 
 <span class="hljs-comment"># 4.3. Create an index file</span>
 client.create_index(
-    collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
-    index_params=index_params,
-    sync=<span class="hljs-literal">False</span> <span class="hljs-comment"># Whether to wait for index creation to complete before returning. Defaults to True.</span>
+collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
+index_params=index_params,
+sync=<span class="hljs-literal">False</span> <span class="hljs-comment"># Whether to wait for index creation to complete before returning. Defaults to True.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -450,12 +453,12 @@ res = client.list_indexes(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     &quot;vector_index&quot;,</span>
+<span class="hljs-comment"># &quot;vector_index&quot;,</span>
 <span class="hljs-comment"># ]</span>
 
 res = client.describe_index(
-    collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -463,12 +466,13 @@ res = client.describe_index(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;index_type&quot;: ,</span>
-<span class="hljs-comment">#     &quot;metric_type&quot;: &quot;COSINE&quot;,</span>
-<span class="hljs-comment">#     &quot;field_name&quot;: &quot;vector&quot;,</span>
-<span class="hljs-comment">#     &quot;index_name&quot;: &quot;vector_index&quot;</span>
+<span class="hljs-comment"># &quot;index_type&quot;: ,</span>
+<span class="hljs-comment"># &quot;metric_type&quot;: &quot;COSINE&quot;,</span>
+<span class="hljs-comment"># &quot;field_name&quot;: &quot;vector&quot;,</span>
+<span class="hljs-comment"># &quot;index_name&quot;: &quot;vector_index&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">index</span>.<span class="hljs-property">request</span>.<span class="hljs-property">DescribeIndexReq</span>;
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">index</span>.<span class="hljs-property">response</span>.<span class="hljs-property">DescribeIndexResp</span>;
 
@@ -579,12 +583,13 @@ client.drop_index(
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 6. Drop index</span>
 
 <span class="hljs-type">DropIndexReq</span> <span class="hljs-variable">dropIndexReq</span> <span class="hljs-operator">=</span> DropIndexReq.builder()
-    .collectionName(<span class="hljs-string">&quot;customized_setup&quot;</span>)
-    .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)
-    .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup&quot;</span>)
+.indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)
+.build();
 
 client.dropIndex(dropIndexReq);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 6. Drop the index</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropIndex</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup&quot;</span>,

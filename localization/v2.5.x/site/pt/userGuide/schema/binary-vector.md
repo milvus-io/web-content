@@ -11,6 +11,7 @@ summary: >-
   efetivamente manter a maior parte da integridade e utilidade dos vectores de
   vírgula flutuante originais.
 ---
+
 <h1 id="Binary-Vector" class="common-anchor-header">Vetor binário<button data-href="#Binary-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +64,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>Utilizar o vetor binário</span> </span></p>
 <div class="alert note">
-<p>Embora os vectores binários sejam excelentes em cenários específicos, têm limitações na sua capacidade de expressão, o que dificulta a captura de relações semânticas complexas. Portanto, em cenários do mundo real, os vectores binários são frequentemente utilizados juntamente com outros tipos de vectores para equilibrar a eficiência e a expressividade. Para obter mais informações, consulte <a href="/docs/pt/dense-vector.md">Vetor denso</a> e <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p>
+<p>Embora os vectores binários sejam excelentes em cenários específicos, têm limitações na sua capacidade de expressão, o que dificulta a captura de relações semânticas complexas. Portanto, em cenários do mundo real, os vectores binários são frequentemente utilizados juntamente com outros tipos de vectores para equilibrar a eficiência e a expressividade. Para obter mais informações, consulte <a href="/docs/pt/v2.5.x/dense-vector.md">Vetor denso</a> e <a href="/docs/pt/v2.5.x/sparse_vector.md">Vetor esparso</a>.</p>
 </div>
 <h2 id="Use-binary-vectors" class="common-anchor-header">Usar vetores binários<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,13 +93,14 @@ summary: >-
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">True</span>,
-    enable_dynamic_fields=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">True</span>,
+enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;binary_vector&quot;</span>, datatype=DataType.BINARY_VECTOR, dim=<span class="hljs-number">128</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -204,12 +206,13 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;binary_vector&quot;</span>,
-    index_name=<span class="hljs-string">&quot;binary_vector_index&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;HAMMING&quot;</span>
+field_name=<span class="hljs-string">&quot;binary_vector&quot;</span>,
+index_name=<span class="hljs-string">&quot;binary_vector_index&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;HAMMING&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -245,7 +248,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>No exemplo acima, um índice chamado <code translate="no">binary_vector_index</code> é criado para o campo <code translate="no">binary_vector</code>, usando o tipo de índice <code translate="no">AUTOINDEX</code>. O <code translate="no">metric_type</code> é definido como <code translate="no">HAMMING</code>, indicando que a distância de Hamming é utilizada para a medição da semelhança.</p>
 <p>O Milvus fornece vários tipos de índices para uma melhor experiência de pesquisa vetorial. AUTOINDEX é um tipo de índice especial concebido para suavizar a curva de aprendizagem da pesquisa vetorial. Há muitos tipos de índices disponíveis para escolher. Para mais pormenores, consulte xxx.</p>
-<p>Adicionalmente, o Milvus suporta outras métricas de similaridade para vectores binários. Para mais informações, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p>
+<p>Adicionalmente, o Milvus suporta outras métricas de similaridade para vectores binários. Para mais informações, consulte <a href="/docs/pt/v2.5.x/metric.md">Tipos de métricas</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Criar coleção</h3><p>Quando as definições do vetor binário e do índice estiverem concluídas, crie uma coleção que contenha vectores binários. O exemplo abaixo usa o método <code translate="no">create_collection</code> para criar uma coleção chamada <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -259,16 +262,17 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .build());
+.uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+.build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .indexParams(indexParams)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.indexParams(indexParams)
+.build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
@@ -316,17 +320,18 @@ client.createCollection(requestCreate);
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">bytes</span>(byte_array)
 
 bool_vectors = [
-    [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] + [<span class="hljs-number">0</span>] * <span class="hljs-number">112</span>,
-    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>] + [<span class="hljs-number">0</span>] * <span class="hljs-number">112</span>,
+[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] + [<span class="hljs-number">0</span>] _ <span class="hljs-number">112</span>,
+[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>] + [<span class="hljs-number">0</span>] _ <span class="hljs-number">112</span>,
 ]
 
 data = [{<span class="hljs-string">&quot;binary_vector&quot;</span>: convert_bool_list_to_bytes(bool_vector) <span class="hljs-keyword">for</span> bool_vector <span class="hljs-keyword">in</span> bool_vectors}]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -402,16 +407,16 @@ client.<span class="hljs-title function_">insert</span>({
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
 
-query_bool_list = [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] + [<span class="hljs-number">0</span>] * <span class="hljs-number">112</span>
+query_bool_list = [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] + [<span class="hljs-number">0</span>] \* <span class="hljs-number">112</span>
 query_vector = convert_bool_list_to_bytes(query_bool_list)
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[query_vector],
-    anns_field=<span class="hljs-string">&quot;binary_vector&quot;</span>,
-    search_params=search_params,
-    limit=<span class="hljs-number">5</span>,
-    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[query_vector],
+anns_field=<span class="hljs-string">&quot;binary_vector&quot;</span>,
+search_params=search_params,
+limit=<span class="hljs-number">5</span>,
+output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -419,6 +424,7 @@ res = client.search(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172268&#x27;, &#x27;distance&#x27;: 10.0, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172268&#x27;}}]&quot;] </span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.BinaryVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -495,4 +501,4 @@ curl --request POST \
     \&quot;outputFields\&quot;: [\&quot;pk\&quot;]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter mais informações sobre os parâmetros de pesquisa de similaridade, consulte <a href="/docs/pt/single-vector-search.md">Pesquisa ANN básica</a>.</p>
+<p>Para obter mais informações sobre os parâmetros de pesquisa de similaridade, consulte <a href="/docs/pt/v2.5.x/single-vector-search.md">Pesquisa ANN básica</a>.</p>

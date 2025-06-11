@@ -6,6 +6,7 @@ summary: >-
   v2を使いたい場合、この記事ではMilvus v2.5.xでPulsar v2を使い続けるための手順を説明します。
 title: Milvus v2.5.xとPulsar v2の併用
 ---
+
 <h1 id="Use-Pulsar-v2-with-Milvus-v25x" class="common-anchor-header">Milvus v2.5.xとPulsar v2の併用<button data-href="#Use-Pulsar-v2-with-Milvus-v25x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ title: Milvus v2.5.xとPulsar v2の併用
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは、Milvus v2.5.xを動作させるためにPulsarをv3にアップグレードすることを推奨しています。詳細は<a href="/docs/ja/upgrade-pulsar-v3.md">Pulsarのアップグレードを</a>ご参照ください。しかし、Milvus v2.5.xでPulsar v2を使用したい場合、この記事ではPulsar v2でMilvus v2.5.xを実行する手順をご案内します。</p>
+    </button></h1><p>Milvusでは、Milvus v2.5.xを動作させるためにPulsarをv3にアップグレードすることを推奨しています。詳細は<a href="/docs/ja/v2.5.x/upgrade-pulsar-v3.md">Pulsarのアップグレードを</a>ご参照ください。しかし、Milvus v2.5.xでPulsar v2を使用したい場合、この記事ではPulsar v2でMilvus v2.5.xを実行する手順をご案内します。</p>
 <p>すでに稼働中のMilvusインスタンスがあり、v2.5.xにアップグレードしたいがPulsar v2は使い続けたいという場合は、このページの手順に従ってください。</p>
 <h2 id="Continue-using-Pulsar-v2-while-upgrading-Milvus-v25x" class="common-anchor-header">Milvus v2.5.xをアップグレードしながらPulsar v2を使い続ける<button data-href="#Continue-using-Pulsar-v2-while-upgrading-Milvus-v25x" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +40,7 @@ title: Milvus v2.5.xとPulsar v2の併用
         ></path>
       </svg>
     </button></h2><p>このセクションでは、稼働中のMilvusインスタンスをMilvus v2.5.xにアップグレードしながらPulsar v2を使い続けるための手順をご紹介します。</p>
-<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Milvus Operatorユーザの方へ</h3><p>Milvus OperatorはデフォルトでPulsar v2のアップグレードに対応しています。Milvus<a href="/docs/ja/upgrade_milvus_cluster-operator.md">OperatorによるMilvusクラスタのアップグレードを</a>参照し、Milvusインスタンスをv2.5.xにアップグレードすることができます。</p>
+<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Milvus Operatorユーザの方へ</h3><p>Milvus OperatorはデフォルトでPulsar v2のアップグレードに対応しています。Milvus<a href="/docs/ja/v2.5.x/upgrade_milvus_cluster-operator.md">OperatorによるMilvusクラスタのアップグレードを</a>参照し、Milvusインスタンスをv2.5.xにアップグレードすることができます。</p>
 <p>アップグレードが完了したら、MilvusインスタンスでPulsar v2を使い続けることができます。</p>
 <h3 id="For-Helm-users" class="common-anchor-header">Helmユーザの場合</h3><p>アップグレードの前に、以下を確認してください。</p>
 <ul>
@@ -96,7 +97,7 @@ helm repo update milvus
         ></path>
       </svg>
     </button></h2><p>このセクションでは、Pulsar v2で新しいMilvusインスタンスを作成する手順を説明します。</p>
-<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Milvus Operatorユーザの方へ</h3><p>Milvus v2.5.xを展開する前に、Milvus Customer Resource Definition (CRD)ファイルをダウンロードし、編集する必要があります。Milvus Operatorを使用したMilvusのインストール方法の詳細については、<a href="/docs/ja/install_cluster-milvusoperator.md">Milvus Operatorを使用したMilvusクラスタのインストールを</a>参照してください。</p>
+<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Milvus Operatorユーザの方へ</h3><p>Milvus v2.5.xを展開する前に、Milvus Customer Resource Definition (CRD)ファイルをダウンロードし、編集する必要があります。Milvus Operatorを使用したMilvusのインストール方法の詳細については、<a href="/docs/ja/v2.5.x/install_cluster-milvusoperator.md">Milvus Operatorを使用したMilvusクラスタのインストールを</a>参照してください。</p>
 <ol>
 <li><p>CRDファイルをダウンロードします。</p>
 <pre><code translate="no" class="language-bash">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
@@ -121,7 +122,7 @@ helm repo update milvus
 <pre><code translate="no" class="language-bash">kubectl apply -f milvus_cluster_default.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="For-Helm-users" class="common-anchor-header">Helmユーザの場合</h3><p>Milvus v2.5.xをデプロイする前に、<code translate="no">values.yaml</code> ファイルを用意するか、インライン・パラメータを使用してPulsarのバージョンを指定してください。Helmを使用したMilvusのインストール方法については、「<a href="/docs/ja/install_cluster-helm.md">Helmを使用したMilvusクラスタのインストール</a>」をご参照ください。</p>
+<h3 id="For-Helm-users" class="common-anchor-header">Helmユーザの場合</h3><p>Milvus v2.5.xをデプロイする前に、<code translate="no">values.yaml</code> ファイルを用意するか、インライン・パラメータを使用してPulsarのバージョンを指定してください。Helmを使用したMilvusのインストール方法については、「<a href="/docs/ja/v2.5.x/install_cluster-helm.md">Helmを使用したMilvusクラスタのインストール</a>」をご参照ください。</p>
 <ul>
 <li><p>インライン・パラメータを使用して、Pulsarのバージョンをv2に指定します。</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">true</span>,pulsarv3.enabled=<span class="hljs-literal">false</span>

@@ -4,6 +4,7 @@ related_key: index
 summary: Milvus 的索引机制。
 title: 内存索引
 ---
+
 <h1 id="In-memory-Index" class="common-anchor-header">内存索引<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,9 +20,9 @@ title: 内存索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主题列出了 Milvus 支持的各种类型的内存索引，每种索引最适合的场景，以及用户可以配置的参数，以实现更好的搜索性能。有关磁盘索引，请参阅<strong><a href="/docs/zh/disk_index.md">磁盘索引</a></strong>。</p>
+    </button></h1><p>本主题列出了 Milvus 支持的各种类型的内存索引，每种索引最适合的场景，以及用户可以配置的参数，以实现更好的搜索性能。有关磁盘索引，请参阅<strong><a href="/docs/zh/v2.5.x/disk_index.md">磁盘索引</a></strong>。</p>
 <p>索引是有效组织数据的过程，它通过显著加快大型数据集上耗时查询的速度，在提高相似性搜索的实用性方面发挥着重要作用。</p>
-<p>为了提高查询性能，可以为每个向量场<a href="/docs/zh/index-vector-fields.md">指定一种索引类型</a>。</p>
+<p>为了提高查询性能，可以为每个向量场<a href="/docs/zh/v2.5.x/index-vector-fields.md">指定一种索引类型</a>。</p>
 <div class="alert note">
 目前，一个向量场只支持一种索引类型。切换索引类型时，Milvus 会自动删除旧索引。</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS 向量索引<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +61,7 @@ title: 内存索引
 <div class="filter">
  <a href="#floating">浮点嵌入</a> <a href="#binary">二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮点嵌入的索引</h3><p>对于 128 维浮点嵌入（向量），其占用的存储空间为 128 * float 的大小 = 512 字节。而用于浮点嵌入的<a href="/docs/zh/metric.md">距离度量</a>是欧氏距离（<code translate="no">L2</code> ）和内积（<code translate="no">IP</code> ）。</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮点嵌入的索引</h3><p>对于 128 维浮点嵌入（向量），其占用的存储空间为 128 * float 的大小 = 512 字节。而用于浮点嵌入的<a href="/docs/zh/v2.5.x/metric.md">距离度量</a>是欧氏距离（<code translate="no">L2</code> ）和内积（<code translate="no">IP</code> ）。</p>
 <p>这些类型的索引包括<code translate="no">FLAT</code>,<code translate="no">IVF_FLAT</code>,<code translate="no">IVF_PQ</code>,<code translate="no">IVF_SQ8</code>,<code translate="no">HNSW</code>,<code translate="no">HNSW_SQ</code>,<code translate="no">HNSW_PQ</code>,<code translate="no">HNSW_PRQ</code> 和<code translate="no">SCANN</code> ，用于基于 CPU 的 ANN 搜索。</p>
 </div>
 <div class="filter-binary">
@@ -71,7 +72,7 @@ title: 内存索引
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">稀疏嵌入式索引</h3><p>稀疏嵌入式索引仅支持<code translate="no">IP</code> 和<code translate="no">BM25</code> （用于全文检索）度量。</p>
 <p>稀疏嵌入式支持的索引类型：<code translate="no">SPARSE_INVERTED_INDEX</code> 。</p>
 <div class="alert note">
-<p>从 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已被弃用。建议在保持兼容性的同时，使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 作为等价索引。更多信息，请参阅<a href="/docs/zh/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</p>
+<p>从 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已被弃用。建议在保持兼容性的同时，使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 作为等价索引。更多信息，请参阅<a href="/docs/zh/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
@@ -247,7 +248,7 @@ title: 内存索引
 <tr><th>参数</th><th>描述</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[可选] 选择的距离度量。</td><td>请参阅<a href="/docs/zh/metric.md">支持的度量</a>。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[可选] 选择的距离度量。</td><td>请参阅<a href="/docs/zh/v2.5.x/metric.md">支持的度量</a>。</td></tr>
 </tbody>
 </table>
 </li>
@@ -537,7 +538,7 @@ title: 内存索引
 <tr><th>参数</th><th>描述</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[可选] 选择的距离度量。</td><td>请参阅<a href="/docs/zh/metric.md">支持的度量</a>。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[可选] 选择的距离度量。</td><td>请参阅<a href="/docs/zh/v2.5.x/metric.md">支持的度量</a>。</td></tr>
 </tbody>
 </table>
 </li>
@@ -591,7 +592,7 @@ title: 内存索引
 <tr><th>参数</th><th>说明</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>用于建立和查询索引的算法。详情请参阅<a href="/docs/zh/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</td><td><code translate="no">DAAT_MAXSCORE</code> (默认）， 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>用于建立和查询索引的算法。详情请参阅<a href="/docs/zh/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</td><td><code translate="no">DAAT_MAXSCORE</code> (默认）， 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
 <tr><td><code translate="no">bm25_k1</code></td><td>控制词频饱和度。数值越大，术语频率在文档排序中的重要性越高。</td><td>[1.2, 2.0]</td></tr>
 <tr><td><code translate="no">bm25_b</code></td><td>控制文档长度标准化的程度。默认为 0.75。</td><td>[0, 1]</td></tr>
 </tbody>
@@ -651,5 +652,5 @@ title: 内存索引
         ></path>
       </svg>
     </button></h2><ul>
-<li>进一步了解 Milvus 支持的<a href="/docs/zh/metric.md">相似度指标</a>。</li>
+<li>进一步了解 Milvus 支持的<a href="/docs/zh/v2.5.x/metric.md">相似度指标</a>。</li>
 </ul>

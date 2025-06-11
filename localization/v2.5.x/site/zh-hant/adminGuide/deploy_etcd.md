@@ -1,9 +1,10 @@
 ---
 id: deploy_etcd.md
 title: 使用 Docker Compose 或 Helm 設定元資料儲存空間
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: 學習如何使用 Docker Compose/Helm 為 Milvus 設定元儲存。
 ---
+
 <h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">使用 Docker Compose 或 Helm 設定元資料儲存空間<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +60,7 @@ summary: 學習如何使用 Docker Compose/Helm 為 Milvus 設定元儲存。
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>更多資訊請參閱<a href="/docs/zh-hant/configure_etcd.md">etcd 相關組態</a>。</p>
+<p>更多資訊請參閱<a href="/docs/zh-hant/v2.5.x/configure_etcd.md">etcd 相關組態</a>。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2.執行 Milvus</h3><p>執行下列指令啟動使用 etcd 設定的 Milvus。</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -131,6 +132,6 @@ summary: 學習如何使用 Docker Compose/Helm 為 Milvus 設定元儲存。
       </svg>
     </button></h2><p>了解如何使用 Docker Compose 或 Helm 配置其他 Milvus 依賴項目：</p>
 <ul>
-<li><a href="/docs/zh-hant/deploy_s3.md">使用 Docker Compose 或 Helm 配置物件儲存空間</a></li>
-<li><a href="/docs/zh-hant/deploy_pulsar.md">使用 Docker Compose 或 Helm 設定訊息儲存空間</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/deploy_s3.md">使用 Docker Compose 或 Helm 配置物件儲存空間</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/deploy_pulsar.md">使用 Docker Compose 或 Helm 設定訊息儲存空間</a></li>
 </ul>

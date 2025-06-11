@@ -8,6 +8,7 @@ summary: >-
   pemfilteran skalar untuk menyempurnakan hasil kueri, sehingga memungkinkan
   pencarian kemiripan dalam vektor yang memenuhi kriteria skalar.
 ---
+
 <h1 id="Text-Match" class="common-anchor-header">Pencocokan Teks<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -25,7 +26,7 @@ summary: >-
       </svg>
     </button></h1><p>Pencocokan teks di Milvus memungkinkan pencarian dokumen yang tepat berdasarkan istilah tertentu. Fitur ini terutama digunakan untuk pencarian yang difilter untuk memenuhi kondisi tertentu dan dapat menggabungkan pemfilteran skalar untuk menyaring hasil kueri, sehingga memungkinkan pencarian kemiripan dalam vektor yang memenuhi kriteria skalar.</p>
 <div class="alert note">
-<p>Pencocokan teks berfokus pada pencarian kemunculan yang tepat dari istilah kueri, tanpa menilai relevansi dokumen yang dicocokkan. Jika Anda ingin mengambil dokumen yang paling relevan berdasarkan makna semantik dan pentingnya istilah kueri, kami sarankan Anda menggunakan <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
+<p>Pencocokan teks berfokus pada pencarian kemunculan yang tepat dari istilah kueri, tanpa menilai relevansi dokumen yang dicocokkan. Jika Anda ingin mengambil dokumen yang paling relevan berdasarkan makna semantik dan pentingnya istilah kueri, kami sarankan Anda menggunakan <a href="/docs/id/v2.5.x/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,8 +45,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus mengintegrasikan <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> untuk mendukung indeks terbalik yang mendasarinya dan pencarian teks berbasis istilah. Untuk setiap entri teks, Milvus mengindeksnya dengan mengikuti prosedur:</p>
 <ol>
-<li><p><a href="/docs/id/analyzer-overview.md">Penganalisis</a>: Penganalisis memproses teks masukan dengan menokenya menjadi kata-kata individual, atau token, dan kemudian menerapkan filter sesuai kebutuhan. Hal ini memungkinkan Milvus untuk membangun indeks berdasarkan token-token ini.</p></li>
-<li><p><a href="/docs/id/index-explained.md">Pengindeksan</a>: Setelah analisis teks, Milvus membuat indeks terbalik yang memetakan setiap token unik ke dokumen yang mengandungnya.</p></li>
+<li><p><a href="/docs/id/v2.5.x/analyzer-overview.md">Penganalisis</a>: Penganalisis memproses teks masukan dengan menokenya menjadi kata-kata individual, atau token, dan kemudian menerapkan filter sesuai kebutuhan. Hal ini memungkinkan Milvus untuk membangun indeks berdasarkan token-token ini.</p></li>
+<li><p><a href="/docs/id/v2.5.x/index-explained.md">Pengindeksan</a>: Setelah analisis teks, Milvus membuat indeks terbalik yang memetakan setiap token unik ke dokumen yang mengandungnya.</p></li>
 </ol>
 <p>Ketika pengguna melakukan pencocokan teks, indeks terbalik digunakan untuk mengambil semua dokumen yang mengandung istilah dengan cepat. Hal ini jauh lebih cepat daripada memindai setiap dokumen satu per satu.</p>
 <p>
@@ -67,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pencocokan teks bekerja pada tipe bidang <code translate="no">VARCHAR</code>, yang pada dasarnya adalah tipe data string di Milvus. Untuk mengaktifkan pencocokan teks, setel <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code>, lalu secara opsional konfigurasikan <a href="/docs/id/analyzer-overview.md">penganalisis</a> untuk analisis teks ketika menentukan skema koleksi Anda.</p>
+    </button></h2><p>Pencocokan teks bekerja pada tipe bidang <code translate="no">VARCHAR</code>, yang pada dasarnya adalah tipe data string di Milvus. Untuk mengaktifkan pencocokan teks, setel <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code>, lalu secara opsional konfigurasikan <a href="/docs/id/v2.5.x/analyzer-overview.md">penganalisis</a> untuk analisis teks ketika menentukan skema koleksi Anda.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Tetapkan <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code></h3><p>Untuk mengaktifkan pencocokan teks untuk bidang <code translate="no">VARCHAR</code> tertentu, setel parameter <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code> saat menentukan skema bidang. Ini menginstruksikan Milvus untuk memberi token pada teks dan membuat indeks terbalik untuk bidang yang ditentukan, sehingga memungkinkan pencocokan teks yang cepat dan efisien.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -75,24 +76,25 @@ summary: >-
 
 schema = MilvusClient.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;id&quot;</span>,
-    datatype=DataType.INT64,
-    is_primary=<span class="hljs-literal">True</span>,
-    auto_id=<span class="hljs-literal">True</span>
+field_name=<span class="hljs-string">&quot;id&quot;</span>,
+datatype=DataType.INT64,
+is_primary=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">True</span>
 )
 schema.add_field(
-    field_name=<span class="hljs-string">&#x27;text&#x27;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>, <span class="hljs-comment"># Whether to enable text analysis for this field</span>
-    enable_match=<span class="hljs-literal">True</span> <span class="hljs-comment"># Whether to enable text match</span>
+field_name=<span class="hljs-string">&#x27;text&#x27;</span>,
+datatype=DataType.VARCHAR,
+max_length=<span class="hljs-number">1000</span>,
+enable_analyzer=<span class="hljs-literal">True</span>, <span class="hljs-comment"># Whether to enable text analysis for this field</span>
+enable_match=<span class="hljs-literal">True</span> <span class="hljs-comment"># Whether to enable text match</span>
 )
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;embeddings&quot;</span>,
-    datatype=DataType.FLOAT_VECTOR,
-    dim=<span class="hljs-number">5</span>
+field_name=<span class="hljs-string">&quot;embeddings&quot;</span>,
+datatype=DataType.FLOAT_VECTOR,
+dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -188,7 +190,7 @@ schema.WithField(entity.NewField().
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opsional: Mengkonfigurasi penganalisis</h3><p>Performa dan keakuratan pencocokan kata kunci bergantung pada penganalisis yang dipilih. Penganalisis yang berbeda disesuaikan dengan berbagai bahasa dan struktur teks, sehingga memilih yang tepat dapat secara signifikan memengaruhi hasil pencarian untuk kasus penggunaan spesifik Anda.</p>
-<p>Secara default, Milvus menggunakan <code translate="no">standard</code> analyzer, yang menandai teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengubah teks menjadi huruf kecil. Tidak ada parameter tambahan yang diperlukan untuk menerapkan pengaturan default ini. Untuk informasi lebih lanjut, lihat <a href="/docs/id/standard-analyzer.md">Standar</a>.</p>
+<p>Secara default, Milvus menggunakan <code translate="no">standard</code> analyzer, yang menandai teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengubah teks menjadi huruf kecil. Tidak ada parameter tambahan yang diperlukan untuk menerapkan pengaturan default ini. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/standard-analyzer.md">Standar</a>.</p>
 <p>Jika diperlukan penganalisis yang berbeda, Anda dapat mengonfigurasinya menggunakan parameter <code translate="no">analyzer_params</code>. Misalnya, untuk menerapkan penganalisis <code translate="no">english</code> untuk memproses teks bahasa Inggris:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -275,7 +277,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus juga menyediakan berbagai penganalisis lain yang cocok untuk berbagai bahasa dan skenario. Untuk lebih jelasnya, lihat <a href="/docs/id/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
+<p>Milvus juga menyediakan berbagai penganalisis lain yang cocok untuk berbagai bahasa dan skenario. Untuk lebih jelasnya, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Menggunakan pencocokan teks<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -350,15 +352,16 @@ schema.WithField(entity.NewField().
 
 <span class="hljs-comment"># Assuming &#x27;embeddings&#x27; is the vector field and &#x27;text&#x27; is the VARCHAR field</span>
 result = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
-    anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[query_vector], <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
+anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[query_vector], <span class="hljs-comment"># Query vector</span>
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>;
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
@@ -429,11 +432,12 @@ curl --request POST \
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>
 
 result = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>;
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()

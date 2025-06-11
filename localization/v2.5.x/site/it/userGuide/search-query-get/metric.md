@@ -6,6 +6,7 @@ summary: >-
   i vettori. La scelta di una metrica di distanza appropriata aiuta a migliorare
   significativamente le prestazioni di classificazione e clustering.
 ---
+
 <h1 id="Metric-Types" class="common-anchor-header">Tipi di metriche<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +65,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>Per i campi vettoriali del tipo <code translate="no">SPARSE\_FLOAT\_VECTOR</code>, utilizzare il tipo di metrica <code translate="no">BM25</code> solo quando si esegue la ricerca full text. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p></li>
+<li><p>Per i campi vettoriali del tipo <code translate="no">SPARSE\_FLOAT\_VECTOR</code>, utilizzare il tipo di metrica <code translate="no">BM25</code> solo quando si esegue la ricerca full text. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/v2.5.x/full-text-search.md">Ricerca a testo completo</a>.</p></li>
 <li><p>Per i campi vettoriali del tipo <code translate="no">BINARY_VECTOR</code>, il valore della dimensione (<code translate="no">dim</code>) deve essere un multiplo di 8.</p></li>
 </ul>
 </div>
@@ -247,7 +248,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il BM25 è un metodo di misurazione della rilevanza del testo ampiamente utilizzato, progettato specificamente per la <a href="/docs/it/full-text-search.md">ricerca di testi completi</a>. Combina i seguenti tre fattori chiave:</p>
+    </button></h2><p>Il BM25 è un metodo di misurazione della rilevanza del testo ampiamente utilizzato, progettato specificamente per la <a href="/docs/it/v2.5.x/full-text-search.md">ricerca di testi completi</a>. Combina i seguenti tre fattori chiave:</p>
 <ul>
 <li><p><strong>Frequenza dei termini (TF):</strong> Misura la frequenza con cui un termine appare in un documento. Sebbene frequenze più elevate indichino spesso una maggiore importanza, BM25 utilizza il parametro di saturazione <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span> k <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> per evitare che termini troppo frequenti dominino il punteggio di rilevanza.</p></li>
 <li><p><strong>Frequenza inversa del documento (IDF):</strong> Riflette l'importanza di un termine nell'intero corpus. I termini che compaiono in un minor numero di documenti ricevono un valore IDF più alto, indicando un maggiore contributo alla rilevanza.</p></li>

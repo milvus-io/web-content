@@ -5,6 +5,7 @@ related_key: SDK
 summary: Apprenez à installer le SDK Node.js de Milvus.
 title: Installation de Milvus Nodejs SDK
 ---
+
 <h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">Installation de Milvus Nodejs SDK<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,11 +109,11 @@ yarn add @zilliz/milvus2-sdk-node
 <li><p>Voir le <a href="https://github.com/milvus-io/milvus-sdk-node">démarrage rapide de Milvus node.js sdk</a></p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
-<li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
-<li><a href="/docs/fr/manage-partitions.md">Gérer les partitions</a></li>
-<li><a href="/docs/fr/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
-<li><a href="/docs/fr/single-vector-search.md">Recherche à vecteur unique</a></li>
-<li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
+<li><a href="/docs/fr/v2.5.x/manage-collections.md">Gérer les collections</a></li>
+<li><a href="/docs/fr/v2.5.x/manage-partitions.md">Gérer les partitions</a></li>
+<li><a href="/docs/fr/v2.5.x/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
+<li><a href="/docs/fr/v2.5.x/single-vector-search.md">Recherche à vecteur unique</a></li>
+<li><a href="/docs/fr/v2.5.x/multi-vector-search.md">Recherche hybride</a></li>
 </ul></li>
 <li><p>Explorer la <a href="/api-reference/node/v2.4.x/About.md">référence de l'API Milvus Node.js</a></p></li>
 </ul>

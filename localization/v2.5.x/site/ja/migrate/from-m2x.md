@@ -3,6 +3,7 @@ id: from-m2x.md
 summary: このガイドでは、Milvus 2.3.xからMilvus 2.3.x以上への包括的なステップバイステップのデータ移行プロセスを提供します。
 title: Milvus 2.3.xから
 ---
+
 <h1 id="From-Milvus-23x" class="common-anchor-header">Milvus 2.3.xから<button data-href="#From-Milvus-23x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +41,7 @@ title: Milvus 2.3.xから
 <li>ターゲットMilvus: 2.3.0+.</li>
 </ul></li>
 <li><strong>必要なツール</strong><ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>ツール。インストールの詳細については、<a href="/docs/ja/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>ツール。インストールの詳細については、<a href="/docs/ja/v2.5.x/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
 </ul></li>
 <li><strong>データの準備</strong><ul>
 <li>移行元のMilvusコレクションがロードされ、データエクスポートの準備ができていることを確認する。</li>
@@ -70,22 +71,23 @@ title: Milvus 2.3.xから
       bufferSize: 500
 
 meta:
-  mode: config
-  version: 2.3.0
-  collection: src_table_name
+mode: config
+version: 2.3.0
+collection: src_table_name
 
 <span class="hljs-built_in">source</span>:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 
 target:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 <button class="copy-code-btn"></button></code></pre>
+
 <p>次の表は、例のconfigファイルのパラメータを説明したものです。詳細は<a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Milvus Migration</a> を参照してください<a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">：Milvus2.xからMilvus2.xへの移行</a>」を参照してください。</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
@@ -118,8 +120,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>ソースMilvusサーバのアドレス。</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>ソースMilvusサーバのユーザ名。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、<a href="/docs/ja/authenticate.md">認証の有効</a>化を参照してください。</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>Milvusサーバーのパスワード。このパラメータは、Milvus サーバでユーザ認証が有効になっている場合に必要です。詳細については、「<a href="/docs/ja/authenticate.md">認証の有効化</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>ソースMilvusサーバのユーザ名。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、<a href="/docs/ja/v2.5.x/authenticate.md">認証の有効</a>化を参照してください。</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>Milvusサーバーのパスワード。このパラメータは、Milvus サーバでユーザ認証が有効になっている場合に必要です。詳細については、「<a href="/docs/ja/v2.5.x/authenticate.md">認証の有効化</a>」を参照してください。</td></tr>
 </tbody>
 </table>
 </li>
@@ -130,8 +132,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>ターゲットMilvusサーバのアドレス。</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>対象のMilvusサーバーのユーザー名。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、<a href="/docs/ja/authenticate.md">認証の有効</a>化を参照してください。</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>対象のMilvusサーバのパスワード。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、「<a href="/docs/ja/authenticate.md">認証の有効化</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>対象のMilvusサーバーのユーザー名。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、<a href="/docs/ja/v2.5.x/authenticate.md">認証の有効</a>化を参照してください。</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>対象のMilvusサーバのパスワード。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、「<a href="/docs/ja/v2.5.x/authenticate.md">認証の有効化</a>」を参照してください。</td></tr>
 </tbody>
 </table>
 </li>

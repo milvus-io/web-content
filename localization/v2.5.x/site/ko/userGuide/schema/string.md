@@ -5,6 +5,7 @@ summary: >-
   Milvus에서 VARCHAR는 문자열 데이터를 저장하는 데 사용되는 데이터 유형입니다. VARCHAR 필드를 정의할 때 두 개의 매개변수는
   필수입니다:
 ---
+
 <h1 id="String-Field" class="common-anchor-header">문자열 필드<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -26,7 +27,7 @@ summary: >-
 <li><p><code translate="no">VARCHAR</code> 필드에 저장할 수 있는 최대 바이트 수를 정의하는 <code translate="no">max_length</code> 를 지정합니다. <code translate="no">max_length</code> 의 유효한 범위는 1에서 65,535까지입니다.</p></li>
 </ul>
 <div class="alert note">
-<p>Milvus는 <code translate="no">VARCHAR</code> 필드에 대해 null 값과 기본값을 지원합니다. 이러한 기능을 사용하려면 <code translate="no">nullable</code> 을 <code translate="no">True</code> 으로, <code translate="no">default_value</code> 을 문자열 값으로 설정하세요. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
+<p>Milvus는 <code translate="no">VARCHAR</code> 필드에 대해 null 값과 기본값을 지원합니다. 이러한 기능을 사용하려면 <code translate="no">nullable</code> 을 <code translate="no">True</code> 으로, <code translate="no">default_value</code> 을 문자열 값으로 설정하세요. 자세한 내용은 <a href="/docs/ko/v2.5.x/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">VARCHAR 필드 추가<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +50,7 @@ summary: >-
 <li><p><code translate="no">varchar_field2</code>: 최대 200바이트까지 저장하고, null 값을 허용하지만 기본값은 없습니다.</p></li>
 </ul>
 <div class="alert note">
-<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 미리 정의하지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 미리 정의하지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -64,8 +65,8 @@ client = MilvusClient(uri=SERVER_ADDR)
 
 <span class="hljs-comment"># Define the collection schema</span>
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_fields=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Add `varchar_field1` that supports null values with default value &quot;Unknown&quot;</span>
@@ -75,6 +76,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;varchar_field2&quot;
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -248,7 +250,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>인덱싱은 검색 및 쿼리 성능을 개선하는 데 도움이 됩니다. Milvus에서 인덱싱은 벡터 필드의 경우 필수이지만 스칼라 필드의 경우 선택 사항입니다.</p>
-<p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 와 스칼라 필드 <code translate="no">varchar_field1</code> 에 인덱스를 생성하는 예제입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
+<p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 와 스칼라 필드 <code translate="no">varchar_field1</code> 에 인덱스를 생성하는 예제입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -257,18 +259,19 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `varchar_field1` with AUTOINDEX</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;varchar_field1&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    index_name=<span class="hljs-string">&quot;varchar_index&quot;</span>
+field_name=<span class="hljs-string">&quot;varchar_field1&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+index_name=<span class="hljs-string">&quot;varchar_index&quot;</span>
 )
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify metric_type</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,  <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>  <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
+field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -412,10 +415,11 @@ data = [
 
 <span class="hljs-comment"># Insert data</span>
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -530,18 +534,19 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;varchar_field1&#x27;: &#x27;Product A&#x27;, &#x27;varchar_field2&#x27;: &#x27;High quality product&#x27;, &#x27;pk&#x27;: 1}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;varchar_field1&#x27;: &#x27;Product A&#x27;, &#x27;varchar_field2&#x27;: &#x27;High quality product&#x27;, &#x27;pk&#x27;: 1}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 
@@ -598,21 +603,22 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 is null&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;varchar_field1&#x27;: &#x27;Product B&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 3}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;varchar_field1&#x27;: &#x27;Product C&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 4}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 6}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;varchar_field1&#x27;: &#x27;Product B&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 3}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;varchar_field1&#x27;: &#x27;Product C&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 4}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 6}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;varchar_field2 is null&quot;</span>;
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -666,20 +672,21 @@ curl --request POST \
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 3}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: &#x27;Exclusive deal&#x27;, &#x27;pk&#x27;: 5}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 6}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 3}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: &#x27;Exclusive deal&#x27;, &#x27;pk&#x27;: 5}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;varchar_field1&#x27;: &#x27;Unknown&#x27;, &#x27;varchar_field2&#x27;: None, &#x27;pk&#x27;: 6}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;varchar_field1 == \&quot;Unknown\&quot;&quot;</span>;
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -750,21 +757,22 @@ curl --request POST \
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 == &quot;Best seller&quot;&#x27;</span>
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
-    limit=<span class="hljs-number">5</span>,
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-    output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>],
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
+limit=<span class="hljs-number">5</span>,
+search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>],
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;[{&#x27;id&#x27;: 7, &#x27;distance&#x27;: -0.04468163847923279, &#x27;entity&#x27;: {&#x27;varchar_field1&#x27;: &#x27;&#x27;, &#x27;varchar_field2&#x27;: &#x27;Best seller&#x27;}}]&quot;</span>
+<span class="hljs-comment"># &quot;[{&#x27;id&#x27;: 7, &#x27;distance&#x27;: -0.04468163847923279, &#x27;entity&#x27;: {&#x27;varchar_field1&#x27;: &#x27;&#x27;, &#x27;varchar_field2&#x27;: &#x27;Best seller&#x27;}}]&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 

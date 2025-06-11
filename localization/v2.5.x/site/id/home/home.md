@@ -1,6 +1,7 @@
 ---
 id: home.md
 ---
+
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 Selamat datang di Milvus Docs!</h1></p>
@@ -33,13 +34,13 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/id/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/id/install_standalone-docker.md"> <p class="link-btn">Instal Milvus</p> </a><p>Pelajari cara menginstal Milvus menggunakan Docker Compose atau Kubernetes.</p>
+   <a href="/docs/id/v2.5.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/id/v2.5.x/install_standalone-docker.md"> <p class="link-btn">Instal Milvus</p> </a><p>Pelajari cara menginstal Milvus menggunakan Docker Compose atau Kubernetes.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/id/quickstart.md"> <img translate="no" src="/docs/v2.5.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/id/quickstart.md"> <p class="link-btn">Mulai Cepat</p> </a><p>Pelajari cara menjalankan Milvus dengan cepat dengan kode sampel.</p>
+   <a href="/docs/id/v2.5.x/quickstart.md"> <img translate="no" src="/docs/v2.5.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/id/v2.5.x/quickstart.md"> <p class="link-btn">Mulai Cepat</p> </a><p>Pelajari cara menjalankan Milvus dengan cepat dengan kode sampel.</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +68,31 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
 <div class="recomment-item">
   <p>Menggunakan</p>
 <ul>
-<li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Menambah, dan Menghapus</a></li>
-<li><a href="/docs/id/index-vector-fields.md">Bidang Vektor Indeks</a></li>
-<li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
-<li><a href="/docs/id/get-and-scalar-query.md">Dapatkan &amp; Kueri Skalar</a></li>
+<li><a href="/docs/id/v2.5.x/manage-collections.md">Mengelola Koleksi</a></li>
+<li><a href="/docs/id/v2.5.x/insert-update-delete.md">Menyisipkan, Menambah, dan Menghapus</a></li>
+<li><a href="/docs/id/v2.5.x/index-vector-fields.md">Bidang Vektor Indeks</a></li>
+<li><a href="/docs/id/v2.5.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
+<li><a href="/docs/id/v2.5.x/get-and-scalar-query.md">Dapatkan &amp; Kueri Skalar</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Menyebarkan</p>
 <ul>
-<li><a href="/docs/id/configure-docker.md">Mengkonfigurasi Milvus</a></li>
-<li><a href="/docs/id/deploy_s3.md">Kelola Ketergantungan</a></li>
-<li><a href="/docs/id/eks.md">Menerapkan di Awan</a></li>
-<li><a href="/docs/id/scaleout.md">Menetapkan Skala Cluster Milvus</a></li>
-<li><a href="/docs/id/monitor_overview.md">Monitor dan Peringatan</a></li>
+<li><a href="/docs/id/v2.5.x/configure-docker.md">Mengkonfigurasi Milvus</a></li>
+<li><a href="/docs/id/v2.5.x/deploy_s3.md">Kelola Ketergantungan</a></li>
+<li><a href="/docs/id/v2.5.x/eks.md">Menerapkan di Awan</a></li>
+<li><a href="/docs/id/v2.5.x/scaleout.md">Menetapkan Skala Cluster Milvus</a></li>
+<li><a href="/docs/id/v2.5.x/monitor_overview.md">Monitor dan Peringatan</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Pelajari</p>
 <ul>
-<li><a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a></li>
-<li><a href="/docs/id/architecture_overview.md">Gambaran Umum Arsitektur</a></li>
-<li><a href="/docs/id/index.md">Indeks Vektor</a></li>
-<li><a href="/docs/id/metric.md">Metrik Kemiripan</a></li>
-<li><a href="/docs/id/glossary.md">Daftar Istilah</a></li>
+<li><a href="/docs/id/v2.5.x/system_configuration.md">Konfigurasi Sistem</a></li>
+<li><a href="/docs/id/v2.5.x/architecture_overview.md">Gambaran Umum Arsitektur</a></li>
+<li><a href="/docs/id/v2.5.x/index.md">Indeks Vektor</a></li>
+<li><a href="/docs/id/v2.5.x/metric.md">Metrik Kemiripan</a></li>
+<li><a href="/docs/id/v2.5.x/glossary.md">Daftar Istilah</a></li>
 </ul>
 </div>
 </div>
@@ -113,10 +114,10 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
       </svg>
     </button></h2><p><em>Nov 2024 - Rilis Milvus 2.5.0</em></p>
 <ul>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/full-text-search.md">melakukan pencarian teks lengkap</a>.</li>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/keyword-match.md">melakukan pencocokan teks</a>.</li>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/nullable-and-default.md">mengaktifkan nilai yang dapat dibatalkan dan nilai default</a>.</li>
-<li>Menambahkan deskripsi <a href="/docs/id/analyzer-overview.md">analisa</a>.</li>
-<li>Menambahkan deskripsi <a href="/docs/id/bitmap.md">indeks bitmap</a>.</li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/v2.5.x/full-text-search.md">melakukan pencarian teks lengkap</a>.</li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/v2.5.x/keyword-match.md">melakukan pencocokan teks</a>.</li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/v2.5.x/nullable-and-default.md">mengaktifkan nilai yang dapat dibatalkan dan nilai default</a>.</li>
+<li>Menambahkan deskripsi <a href="/docs/id/v2.5.x/analyzer-overview.md">analisa</a>.</li>
+<li>Menambahkan deskripsi <a href="/docs/id/v2.5.x/bitmap.md">indeks bitmap</a>.</li>
 </ul>
 </div>

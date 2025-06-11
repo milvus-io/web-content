@@ -7,6 +7,7 @@ summary: >-
   при ее создании. На этой странице показано, как мгновенно создать коллекцию с
   настройками по умолчанию.
 ---
+
 <h1 id="Create-Collection-Instantly" class="common-anchor-header">Мгновенное создание коллекции<button data-href="#Create-Collection-Instantly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,8 +51,8 @@ summary: >-
 <li><p>Динамическое поле резервов с именем <strong>$meta</strong> используется для сохранения не определенных схемой полей и их значений в парах ключ-значение.</p></li>
 <li><p>Коллекция автоматически загружается при создании.</p></li>
 </ul>
-<p>Подробнее о терминах, приведенных выше, читайте в разделе <a href="/docs/ru/manage-collections.md">"Объяснение коллекций</a>".</p>
-<p>Стоит отметить, что мгновенное создание коллекции с настройками по умолчанию подходит не для всех сценариев. Советуем ознакомиться с <a href="/docs/ru/create-collection.md">общей процедурой создания коллекции</a>, чтобы лучше понять возможности Milvus.</p>
+<p>Подробнее о терминах, приведенных выше, читайте в разделе <a href="/docs/ru/v2.5.x/manage-collections.md">"Объяснение коллекций</a>".</p>
+<p>Стоит отметить, что мгновенное создание коллекции с настройками по умолчанию подходит не для всех сценариев. Советуем ознакомиться с <a href="/docs/ru/v2.5.x/create-collection.md">общей процедурой создания коллекции</a>, чтобы лучше понять возможности Milvus.</p>
 <h2 id="Quick-Setup" class="common-anchor-header">Быстрая настройка<button data-href="#Quick-Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,18 +78,18 @@ TOKEN = <span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 <span class="hljs-comment"># 2. Create a collection in quick setup mode</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    dimension=<span class="hljs-number">5</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+dimension=<span class="hljs-number">5</span>
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -96,9 +97,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
@@ -233,24 +235,24 @@ TOKEN = <span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 <span class="hljs-comment"># 2. Create a collection in quick setup mode</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>,
-    dimension=<span class="hljs-number">5</span>,
-    primary_field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
-    id_type=<span class="hljs-string">&quot;string&quot;</span>,
-    vector_field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
-    auto_id=<span class="hljs-literal">True</span>,
-    max_length=<span class="hljs-number">512</span>
+collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>,
+dimension=<span class="hljs-number">5</span>,
+primary_field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+id_type=<span class="hljs-string">&quot;string&quot;</span>,
+vector_field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
+auto_id=<span class="hljs-literal">True</span>,
+max_length=<span class="hljs-number">512</span>
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>
+collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -258,9 +260,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
@@ -388,4 +391,4 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Если коллекции, созданные двумя вышеуказанными способами, все еще не удовлетворяют вашим потребностям, выполните процедуру в разделе <a href="/docs/ru/create-collection.md">"Создание коллекции"</a>.</p>
+<p>Если коллекции, созданные двумя вышеуказанными способами, все еще не удовлетворяют вашим потребностям, выполните процедуру в разделе <a href="/docs/ru/v2.5.x/create-collection.md">"Создание коллекции"</a>.</p>

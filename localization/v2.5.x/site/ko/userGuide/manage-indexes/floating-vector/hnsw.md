@@ -5,6 +5,7 @@ summary: >-
   HNSW 인덱스는 고차원 부동 벡터를 검색할 때 성능을 향상시킬 수 있는 그래프 기반 인덱싱 알고리즘입니다. 뛰어난 검색 정확도와 짧은 지연
   시간을 제공하는 반면, 계층적 그래프 구조를 유지하기 위해 높은 메모리 오버헤드를 필요로 합니다.
 ---
+
 <h1 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +56,7 @@ summary: >-
 <li><p><code translate="no">efConstruction</code>: 인덱스 구성 중에 고려되는 후보의 수입니다. <code translate="no">efConstruction</code> 이 높을수록 일반적으로 그래프 품질이 좋아지지만 구축하는 데 더 많은 시간이 필요합니다.</p></li>
 <li><p><code translate="no">ef</code>: 검색 중에 평가되는 이웃의 수입니다. <code translate="no">ef</code> 을 늘리면 가장 가까운 이웃을 찾을 가능성은 높아지지만 검색 프로세스가 느려집니다.</p></li>
 </ul>
-<p>필요에 맞게 이러한 설정을 조정하는 방법에 대한 자세한 내용은 <a href="/docs/ko/hnsw.md#Index-params">색인 매개변수를</a> 참조하세요.</p>
+<p>필요에 맞게 이러한 설정을 조정하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/hnsw.md#Index-params">색인 매개변수를</a> 참조하세요.</p>
 <h2 id="Build-index" class="common-anchor-header">색인 만들기<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,28 +79,29 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
-        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
+<span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">index_type</code>: 빌드할 인덱스 유형입니다. 이 예에서는 값을 <code translate="no">HNSW</code> 로 설정합니다.</p></li>
-<li><p><code translate="no">metric_type</code>: 벡터 간의 거리를 계산하는 데 사용되는 메서드입니다. 지원되는 값은 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code> 입니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p></li>
+<li><p><code translate="no">metric_type</code>: 벡터 간의 거리를 계산하는 데 사용되는 메서드입니다. 지원되는 값은 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code> 입니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/metric.md">메트릭 유형을</a> 참조하세요.</p></li>
 <li><p><code translate="no">params</code>: 인덱스 구축을 위한 추가 구성 옵션입니다.</p>
 <ul>
 <li><p><code translate="no">M</code>: 각 노드가 연결할 수 있는 최대 이웃 수입니다.</p></li>
 <li><p><code translate="no">efConstruction</code>: 인덱스 구축 시 연결을 위해 고려되는 후보 이웃의 수입니다.</p></li>
 </ul>
-<p><code translate="no">HNSW</code> 인덱스에 사용할 수 있는 더 많은 구축 파라미터에 대해 알아보려면 <a href="/docs/ko/hnsw.md#Index-building-params">인덱스 구축 파라미터를</a> 참조하세요.</p></li>
+<p><code translate="no">HNSW</code> 인덱스에 사용할 수 있는 더 많은 구축 파라미터에 대해 알아보려면 <a href="/docs/ko/v2.5.x/hnsw.md#Index-building-params">인덱스 구축 파라미터를</a> 참조하세요.</p></li>
 </ul>
-<p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
+<p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
 <h2 id="Search-on-index" class="common-anchor-header">인덱스에서 검색<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -123,20 +125,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">10</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">params</code>: 색인에서 검색을 위한 추가 구성 옵션.</p>
 <ul>
 <li><code translate="no">ef</code>: 검색 시 고려할 이웃의 수입니다.</li>
 </ul>
-<p><code translate="no">HNSW</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/hnsw.md#Index-specific-search-params">인덱스별 검색 매개변수를</a> 참조하세요.</p></li>
+<p><code translate="no">HNSW</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/v2.5.x/hnsw.md#Index-specific-search-params">인덱스별 검색 매개변수를</a> 참조하세요.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">색인 매개변수<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -154,7 +157,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 인덱스를 만들고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/hnsw.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/hnsw.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>파라미터</p></th>
@@ -175,7 +178,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">efConstruction</code> 이 높을수록 일반적으로 더 많은 잠재적 연결이 탐색되므로 <strong>더 정확한 인덱스가</strong> 생성됩니다. 하지만 <strong>인덱싱 시간이 길어지고</strong> 구성 중에 <strong>메모리 사용량이 증가합니다</strong>. 특히 인덱싱 시간이 덜 중요한 시나리오에서는 정확도를 높이려면 <code translate="no">efConstruction</code> 을 늘리는 것이 좋습니다.</p><p>리소스 제약이 우려되는 경우 인덱스 구축 속도를 높이려면 <code translate="no">efConstruction</code> 을 줄이는 것을 고려하세요.</p><p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/hnsw.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/hnsw.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>파라미터</p></th>

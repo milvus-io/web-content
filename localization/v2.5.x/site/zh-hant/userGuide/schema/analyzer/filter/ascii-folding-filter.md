@@ -5,6 +5,7 @@ summary: >-
   asciifolding 過濾器可將 Basic Latin Unicode 區塊 (前 127 個 ASCII 字元) 以外的字元轉換為相對應的
   ASCII 字元。例如，它可將 í 等字元轉換為 i，使文字處理更簡單、更一致，特別是對於多語言內容。
 ---
+
 <h1 id="ASCII-folding" class="common-anchor-header">ASCII 折疊<button data-href="#ASCII-folding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,8 +65,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">asciifolding</code> 過濾器會在 tokenizer 產生的詞彙上運作，因此必須與 tokenizer 結合使用。如需 Milvus 中可用的 tokenizer 清單，請參考<a href="/docs/zh-hant/standard-tokenizer.md">Standard Tokenizer</a>及其同屬頁面。</p>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這允許 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+
+<p><code translate="no">asciifolding</code> 過濾器會在 tokenizer 產生的詞彙上運作，因此必須與 tokenizer 結合使用。如需 Milvus 中可用的 tokenizer 清單，請參考<a href="/docs/zh-hant/v2.5.x/standard-tokenizer.md">Standard Tokenizer</a>及其同屬頁面。</p>
+<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這允許 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,6 +116,7 @@ sample_text = <span class="hljs-string">&quot;Café Möller serves crème brûl�
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

@@ -8,6 +8,7 @@ summary: >-
   واحدة من النتائج. سيعرض هذا الدليل استراتيجيات إعادة الترتيب التي يدعمها
   ميلفوس ويقدم نصائح لاختيار استراتيجية إعادة الترتيب المناسبة.
 ---
+
 <h1 id="Reranking" class="common-anchor-header">إعادة الترتيب<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,8 +47,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>إعادة تصنيف متعدد المتجهات</span> </span></p>
 <p>في البحث الهجين، تُعد إعادة الترتيب خطوة حاسمة تدمج النتائج من عمليات بحث متعددة المتجهات لضمان أن يكون الناتج النهائي هو الأكثر صلة ودقة. يدعم ميلفوس حاليًا استراتيجيتي إعادة الترتيب التاليتين:</p>
 <ul>
-<li><p><strong><a href="/docs/ar/reranking.md#WeightedRanker">إعادة الترتيب المرجحة</a></strong>: تدمج هذه الاستراتيجية النتائج عن طريق حساب درجة مرجحة للنتائج (أو المسافات) من عمليات بحث متجهات مختلفة. يتم تعيين الأوزان بناءً على أهمية كل حقل متجه، مما يسمح بالتخصيص وفقًا لأولويات حالة استخدام محددة.</p></li>
-<li><p><strong><a href="/docs/ar/reranking.md#RRFRanker">RRFRanker</a> (مصنف دمج الرتب المتبادل)</strong>: تجمع هذه الاستراتيجية بين النتائج بناءً على الترتيب. وهي تستخدم طريقة توازن بين رتب النتائج من عمليات بحث مختلفة، مما يؤدي غالبًا إلى دمج أكثر إنصافًا وفعالية لأنواع أو طرائق بيانات متنوعة.</p></li>
+<li><p><strong><a href="/docs/ar/v2.5.x/reranking.md#WeightedRanker">إعادة الترتيب المرجحة</a></strong>: تدمج هذه الاستراتيجية النتائج عن طريق حساب درجة مرجحة للنتائج (أو المسافات) من عمليات بحث متجهات مختلفة. يتم تعيين الأوزان بناءً على أهمية كل حقل متجه، مما يسمح بالتخصيص وفقًا لأولويات حالة استخدام محددة.</p></li>
+<li><p><strong><a href="/docs/ar/v2.5.x/reranking.md#RRFRanker">RRFRanker</a> (مصنف دمج الرتب المتبادل)</strong>: تجمع هذه الاستراتيجية بين النتائج بناءً على الترتيب. وهي تستخدم طريقة توازن بين رتب النتائج من عمليات بحث مختلفة، مما يؤدي غالبًا إلى دمج أكثر إنصافًا وفعالية لأنواع أو طرائق بيانات متنوعة.</p></li>
 </ul>
 <h2 id="WeightedRanker" class="common-anchor-header">المُصنِّف الموزون<button data-href="#WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -229,8 +230,9 @@ summary: >-
    <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جو جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
-rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) 
+rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.WeightedRanker;
 
 <span class="hljs-type">WeightedRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeightedRanker</span>(Arrays.asList(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.3f</span>))
@@ -427,6 +429,7 @@ reranker := milvusclient.NewWeightedReranker([]<span class="hljs-type">float64</
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 <span class="hljs-type">RRFRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);

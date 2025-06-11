@@ -5,6 +5,7 @@ related_key: SDK
 summary: Milvus의 GO SDK를 설치하는 방법을 알아보세요.
 title: Milvus Go SDK 설치하기
 ---
+
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">Milvus Go SDK 설치하기<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +75,10 @@ title: Milvus Go SDK 설치하기
     </button></h2><p>Milvus GO SDK를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
 <li>Milvus의 기본 작동을 학습합니다:<ul>
-<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 업서트 및 삭제</a></li>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/v2.5.x/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/insert-update-delete.md">삽입, 업서트 및 삭제</a></li>
+<li><a href="/docs/ko/v2.5.x/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/v2.5.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
 </ul>

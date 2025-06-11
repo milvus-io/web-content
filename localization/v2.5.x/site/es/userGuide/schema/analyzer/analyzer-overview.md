@@ -8,6 +8,7 @@ summary: >-
   tokenizador y un filtro. Juntos, transforman el texto de entrada en tokens,
   los refinan y los preparan para una indexación y recuperación eficaces.
 ---
+
 <h1 id="Analyzer-Overview" class="common-anchor-header">Visión general del analizador<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>En el tratamiento de textos, un <strong>analizador</strong> es un componente crucial que convierte el texto en bruto en un formato estructurado que permite realizar búsquedas. Cada analizador suele constar de dos elementos básicos: <strong>un tokenizador</strong> y un <strong>filtro</strong>. Juntos, transforman el texto de entrada en tokens, refinan estos tokens y los preparan para una indexación y recuperación eficientes.</p>
-<p>En Milvus, los analizadores se configuran durante la creación de la colección cuando se añaden los campos <code translate="no">VARCHAR</code> al esquema de la colección. Los tokens producidos por un analizador pueden utilizarse para construir un índice para la concordancia de palabras clave o convertirse en incrustaciones dispersas para la búsqueda de texto completo. Para obtener más información, consulte <a href="/docs/es/keyword-match.md">Coincidencia de texto</a> o <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
+<p>En Milvus, los analizadores se configuran durante la creación de la colección cuando se añaden los campos <code translate="no">VARCHAR</code> al esquema de la colección. Los tokens producidos por un analizador pueden utilizarse para construir un índice para la concordancia de palabras clave o convertirse en incrustaciones dispersas para la búsqueda de texto completo. Para obtener más información, consulte <a href="/docs/es/v2.5.x/keyword-match.md">Coincidencia de texto</a> o <a href="/docs/es/v2.5.x/full-text-search.md">Búsqueda de texto completo</a>.</p>
 <div class="alert note">
 <p>El uso de analizadores puede afectar al rendimiento:</p>
 <ul>
@@ -81,7 +82,7 @@ summary: >-
 <li><p><strong>Analizador personalizado</strong>: Para requisitos más avanzados, los analizadores personalizados le permiten definir su propia configuración especificando tanto el tokenizador como cero o más filtros. Este nivel de personalización es especialmente útil para casos de uso especializados en los que se necesita un control preciso sobre el procesamiento del texto.</p></li>
 </ul>
 <div class="alert note">
-<p>Si omite las configuraciones del analizador durante la creación de la colección, Milvus utiliza por defecto el analizador <code translate="no">standard</code> para todo el procesamiento de texto. Para más detalles, consulte <a href="/docs/es/standard-analyzer.md">Estándar</a>.</p>
+<p>Si omite las configuraciones del analizador durante la creación de la colección, Milvus utiliza por defecto el analizador <code translate="no">standard</code> para todo el procesamiento de texto. Para más detalles, consulte <a href="/docs/es/v2.5.x/standard-analyzer.md">Estándar</a>.</p>
 </div>
 <h3 id="Built-in-analyzer" class="common-anchor-header">Analizador incorporado</h3><p>Los analizadores incorporados en Milvus están preconfigurados con tokenizadores y filtros específicos, lo que le permite utilizarlos inmediatamente sin necesidad de definir estos componentes usted mismo. Cada analizador incorporado sirve como plantilla que incluye un tokenizador y filtros preestablecidos, con parámetros opcionales para su personalización.</p>
 <p>Por ejemplo, para utilizar el analizador integrado <code translate="no">standard</code>, basta con especificar su nombre <code translate="no">standard</code> como <code translate="no">type</code> y, opcionalmente, incluir configuraciones adicionales específicas para este tipo de analizador, como <code translate="no">stop_words</code>:</p>
@@ -116,10 +117,11 @@ text = <span class="hljs-string">&quot;An efficient system relies on a robust an
 
 <span class="hljs-comment"># Run analyzer</span>
 result = client.run_analyzer(
-    text,
-    analyzer_params
+text,
+analyzer_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
 
@@ -166,7 +168,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Esto demuestra que el analizador tokeniza correctamente el texto de entrada filtrando las palabras de parada <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, y <code translate="no">&quot;for&quot;</code>, y devolviendo el resto de tokens significativos.</p>
-<p>La configuración del analizador integrado <code translate="no">standard</code> anterior es equivalente a la configuración de un <a href="/docs/es/analyzer-overview.md#Custom-analyzer">analizador personalizado</a> con los siguientes parámetros, donde las opciones <code translate="no">tokenizer</code> y <code translate="no">filter</code> se definen explícitamente para lograr una funcionalidad similar:</p>
+<p>La configuración del analizador integrado <code translate="no">standard</code> anterior es equivalente a la configuración de un <a href="/docs/es/v2.5.x/analyzer-overview.md#Custom-analyzer">analizador personalizado</a> con los siguientes parámetros, donde las opciones <code translate="no">tokenizer</code> y <code translate="no">filter</code> se definen explícitamente para lograr una funcionalidad similar:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -255,11 +257,11 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <ul>
 <li><p><strong>Filtros integrados</strong>: Preconfigurados por Milvus, requieren una configuración mínima. Puede utilizar estos filtros directamente especificando sus nombres. Los siguientes filtros están incorporados para su uso directo:</p>
 <ul>
-<li><p><code translate="no">lowercase</code>: Convierte el texto a minúsculas, asegurando una coincidencia insensible a mayúsculas y minúsculas. Para más detalles, consulte <a href="/docs/es/lowercase-filter.md">Minúsculas</a>.</p></li>
-<li><p><code translate="no">asciifolding</code>: Convierte los caracteres no ASCII en equivalentes ASCII, lo que simplifica el tratamiento de textos multilingües. Para más información, consulte <a href="/docs/es/ascii-folding-filter.md">Plegado ASCII</a>.</p></li>
-<li><p><code translate="no">alphanumonly</code>: Conserva sólo los caracteres alfanuméricos eliminando los demás. Para más detalles, consulte <a href="/docs/es/alphanumonly-filter.md">Sólo alfanuméricos</a>.</p></li>
-<li><p><code translate="no">cnalphanumonly</code>: Elimina los tokens que contienen caracteres que no sean chinos, letras inglesas o dígitos. Para obtener más información, consulte <a href="/docs/es/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
-<li><p><code translate="no">cncharonly</code>: Elimina los tokens que contienen caracteres no chinos. Para más información, consulte <a href="/docs/es/cncharonly-filter.md">Cncharonly</a>.</p></li>
+<li><p><code translate="no">lowercase</code>: Convierte el texto a minúsculas, asegurando una coincidencia insensible a mayúsculas y minúsculas. Para más detalles, consulte <a href="/docs/es/v2.5.x/lowercase-filter.md">Minúsculas</a>.</p></li>
+<li><p><code translate="no">asciifolding</code>: Convierte los caracteres no ASCII en equivalentes ASCII, lo que simplifica el tratamiento de textos multilingües. Para más información, consulte <a href="/docs/es/v2.5.x/ascii-folding-filter.md">Plegado ASCII</a>.</p></li>
+<li><p><code translate="no">alphanumonly</code>: Conserva sólo los caracteres alfanuméricos eliminando los demás. Para más detalles, consulte <a href="/docs/es/v2.5.x/alphanumonly-filter.md">Sólo alfanuméricos</a>.</p></li>
+<li><p><code translate="no">cnalphanumonly</code>: Elimina los tokens que contienen caracteres que no sean chinos, letras inglesas o dígitos. Para obtener más información, consulte <a href="/docs/es/v2.5.x/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
+<li><p><code translate="no">cncharonly</code>: Elimina los tokens que contienen caracteres no chinos. Para más información, consulte <a href="/docs/es/v2.5.x/cncharonly-filter.md">Cncharonly</a>.</p></li>
 </ul>
 <p><strong>Ejemplo de uso de un filtro incorporado:</strong></p>
 <p><div class="multipleCode">
@@ -288,9 +290,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Filtros personalizados</strong>: Los filtros personalizados permiten configuraciones especializadas. Puede definir un filtro personalizado eligiendo un tipo de filtro válido (<code translate="no">filter.type</code>) y añadiendo configuraciones específicas para cada tipo de filtro. Ejemplos de tipos de filtro que admiten personalización:</p>
 <ul>
-<li><p><code translate="no">stop</code>: Elimina palabras comunes especificadas estableciendo una lista de palabras de detención (por ejemplo, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Para obtener más información, consulte <a href="/docs/es/stop-filter.md">Detener</a>.</p></li>
-<li><p><code translate="no">length</code>: Excluye los tokens en función de criterios de longitud, como el establecimiento de una longitud máxima de token. Para obtener más información, consulte <a href="/docs/es/length-filter.md">Longitud</a>.</p></li>
-<li><p><code translate="no">stemmer</code>: Reduce las palabras a su raíz para una búsqueda más flexible. Para más detalles, consulte <a href="/docs/es/stemmer-filter.md">Stemmer</a>.</p></li>
+<li><p><code translate="no">stop</code>: Elimina palabras comunes especificadas estableciendo una lista de palabras de detención (por ejemplo, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Para obtener más información, consulte <a href="/docs/es/v2.5.x/stop-filter.md">Detener</a>.</p></li>
+<li><p><code translate="no">length</code>: Excluye los tokens en función de criterios de longitud, como el establecimiento de una longitud máxima de token. Para obtener más información, consulte <a href="/docs/es/v2.5.x/length-filter.md">Longitud</a>.</p></li>
+<li><p><code translate="no">stemmer</code>: Reduce las palabras a su raíz para una búsqueda más flexible. Para más detalles, consulte <a href="/docs/es/v2.5.x/stemmer-filter.md">Stemmer</a>.</p></li>
 </ul>
 <p><strong>Ejemplo de configuración de un filtro personalizado:</strong></p>
 <p><div class="multipleCode">
@@ -376,6 +378,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="hljs-comment"># Create a new schema</span>
 schema = client.create_schema(auto_id=<span class="hljs-literal">True</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -447,6 +450,7 @@ result = client.run_analyzer(sample_text, analyzer_params_built_in)
 <span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
 
@@ -522,6 +526,7 @@ result = client.run_analyzer(sample_text, analyzer_params_custom)
 <span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
 Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
@@ -607,12 +612,12 @@ schema.add_field(
 
 <span class="hljs-comment"># Add VARCHAR field &#x27;title&#x27; using the custom analyzer configuration</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
-    datatype=DataType.VARCHAR,
-    max_length=<span class="hljs-number">1000</span>,
-    enable_analyzer=<span class="hljs-literal">True</span>,
-    analyzer_params=analyzer_params_custom,
-    enable_match=<span class="hljs-literal">True</span>,
+field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
+datatype=DataType.VARCHAR,
+max_length=<span class="hljs-number">1000</span>,
+enable_analyzer=<span class="hljs-literal">True</span>,
+analyzer_params=analyzer_params_custom,
+enable_match=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Add a vector field for embeddings</span>
@@ -621,6 +626,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</spa
 <span class="hljs-comment"># Add a primary key field</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -705,11 +711,12 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot
 
 <span class="hljs-comment"># Create the collection with the defined schema and index parameters</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    schema=schema,
-    index_params=index_params
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+schema=schema,
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Set up index params for vector field</span>
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()

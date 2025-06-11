@@ -5,6 +5,7 @@ summary: >-
   melhorias de desempenho e outras questões relacionadas com o desempenho.
 title: FAQ sobre desempenho
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">FAQ sobre desempenho<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -33,7 +34,7 @@ title: FAQ sobre desempenho
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">Que factores afectam a utilização da CPU?</h4><p>O uso da CPU aumenta quando o Milvus está construindo índices ou executando consultas. Em geral, a construção de índices é intensiva em CPU, exceto quando se usa Annoy, que é executado em um único thread.</p>
 <p>Ao executar consultas, o uso da CPU é afetado por <code translate="no">nq</code> e <code translate="no">nprobe</code>. Quando <code translate="no">nq</code> e <code translate="no">nprobe</code> são pequenos, a concorrência é baixa e o uso da CPU permanece baixo.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">A inserção simultânea de dados e a pesquisa afectam o desempenho da consulta?</h4><p>As operações de inserção não consomem muita CPU. No entanto, como os novos segmentos podem não ter atingido o limite para a construção do índice, o Milvus recorre à pesquisa de força bruta - afetando significativamente o desempenho da consulta.</p>
-<p>O parâmetro <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> determina o limite de construção de índice para um segmento, e é definido para 1024 linhas por padrão. Consulte <a href="/docs/pt/system_configuration.md">Configuração do sistema</a> para obter mais informações.</p>
+<p>O parâmetro <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> determina o limite de construção de índice para um segmento, e é definido para 1024 linhas por padrão. Consulte <a href="/docs/pt/v2.5.x/system_configuration.md">Configuração do sistema</a> para obter mais informações.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">A indexação de um campo VARCHAR pode melhorar a velocidade de exclusão?</h4><p>A indexação de um campo VARCHAR pode acelerar as operações "Eliminar por expressão", mas apenas em determinadas condições:</p>
 <ul>
 <li><strong>Índice INVERTED</strong>: Este índice ajuda para <code translate="no">IN</code> ou <code translate="no">==</code> expressões em campos VARCHAR de chave não primária.</li>

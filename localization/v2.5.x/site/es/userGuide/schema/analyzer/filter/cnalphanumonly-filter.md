@@ -5,6 +5,7 @@ summary: >-
   El filtro cnalphanumonly elimina los tokens que contengan caracteres que no
   sean chinos, letras inglesas o dígitos.
 ---
+
 <h1 id="Cnalphanumonly" class="common-anchor-header">Cnalphanumonly<button data-href="#Cnalphanumonly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,8 +64,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>El filtro <code translate="no">cnalphanumonly</code> funciona con los términos generados por el tokenizador, por lo que debe utilizarse en combinación con un tokenizador. Para obtener una lista de los tokenizadores disponibles en Milvus, consulte <a href="/docs/es/standard-tokenizer.md">Standard Tokenizer</a> y sus páginas hermanas.</p>
-<p>Después de definir <code translate="no">analyzer_params</code>, puede aplicarlos a un campo <code translate="no">VARCHAR</code> al definir un esquema de colección. Esto permite a Milvus procesar el texto de ese campo utilizando el analizador especificado para una tokenización y filtrado eficientes. Para más detalles, consulte <a href="/docs/es/analyzer-overview.md#Example-use">Ejemplo de uso</a>.</p>
+<p>El filtro <code translate="no">cnalphanumonly</code> funciona con los términos generados por el tokenizador, por lo que debe utilizarse en combinación con un tokenizador. Para obtener una lista de los tokenizadores disponibles en Milvus, consulte <a href="/docs/es/v2.5.x/standard-tokenizer.md">Standard Tokenizer</a> y sus páginas hermanas.</p>
+<p>Después de definir <code translate="no">analyzer_params</code>, puede aplicarlos a un campo <code translate="no">VARCHAR</code> al definir un esquema de colección. Esto permite a Milvus procesar el texto de ese campo utilizando el analizador especificado para una tokenización y filtrado eficientes. Para más detalles, consulte <a href="/docs/es/v2.5.x/analyzer-overview.md#Example-use">Ejemplo de uso</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,6 +108,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Founda
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

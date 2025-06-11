@@ -6,6 +6,7 @@ summary: >-
   127 حرف ASCII) إلى معادلاتها ASCII. على سبيل المثال، يقوم بتحويل أحرف مثل í
   إلى i، مما يجعل معالجة النص أبسط وأكثر اتساقًا، خاصةً للمحتوى متعدد اللغات.
 ---
+
 <h1 id="ASCII-folding" class="common-anchor-header">طي ASCII<button data-href="#ASCII-folding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,8 +66,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>يعمل عامل التصفية <code translate="no">asciifolding</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة ترميز. للحصول على قائمة بالرموز المتوفرة في ميلفوس، راجع <a href="/docs/ar/standard-tokenizer.md">أداة الترم</a> يز <a href="/docs/ar/standard-tokenizer.md">القياسية</a> وصفحاتها الشقيقة.</p>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لـ Milvus بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل ترميز وتصفية فعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
+
+<p>يعمل عامل التصفية <code translate="no">asciifolding</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة ترميز. للحصول على قائمة بالرموز المتوفرة في ميلفوس، راجع <a href="/docs/ar/v2.5.x/standard-tokenizer.md">أداة الترم</a> يز <a href="/docs/ar/v2.5.x/standard-tokenizer.md">القياسية</a> وصفحاتها الشقيقة.</p>
+<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لـ Milvus بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل ترميز وتصفية فعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,6 +117,7 @@ sample_text = <span class="hljs-string">&quot;Café Möller serves crème brûl�
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

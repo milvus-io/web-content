@@ -4,6 +4,7 @@ related_key: index
 summary: Milvus 中的索引機制。
 title: 記憶體索引
 ---
+
 <h1 id="In-memory-Index" class="common-anchor-header">記憶體索引<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,9 +20,9 @@ title: 記憶體索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主題列出 Milvus 支援的各種類型的記憶體索引、每種索引最適合的情況，以及使用者可以設定的參數，以達到更好的搜尋效能。關於磁碟索引，請參閱<strong><a href="/docs/zh-hant/disk_index.md">磁碟索引</a></strong>。</p>
+    </button></h1><p>本主題列出 Milvus 支援的各種類型的記憶體索引、每種索引最適合的情況，以及使用者可以設定的參數，以達到更好的搜尋效能。關於磁碟索引，請參閱<strong><a href="/docs/zh-hant/v2.5.x/disk_index.md">磁碟索引</a></strong>。</p>
 <p>索引是有效組織資料的過程，它透過大幅加速大型資料集上耗時的查詢，在使相似性搜尋有用方面扮演重要角色。</p>
-<p>為了改善查詢效能，您可以為每個向量欄位<a href="/docs/zh-hant/index-vector-fields.md">指定索引類型</a>。</p>
+<p>為了改善查詢效能，您可以為每個向量欄位<a href="/docs/zh-hant/v2.5.x/index-vector-fields.md">指定索引類型</a>。</p>
 <div class="alert note">
 目前，一個向量欄位只支援一種索引類型。切換索引類型時，Milvus 會自動刪除舊索引。</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS 向量索引<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +61,7 @@ title: 記憶體索引
 <div class="filter">
  <a href="#floating">浮點內嵌</a> <a href="#binary">二進位內嵌</a> <a href="#sparse">稀疏內嵌</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮點嵌入的索引</h3><p>對於 128 維浮點內嵌 (向量)，它們所佔的儲存空間是 128 * float 的大小 = 512 位元組。而浮點內嵌使用的<a href="/docs/zh-hant/metric.md">距離指標</a>是 Euclidean distance (<code translate="no">L2</code>) 和 Inner product (<code translate="no">IP</code>)。</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮點嵌入的索引</h3><p>對於 128 維浮點內嵌 (向量)，它們所佔的儲存空間是 128 * float 的大小 = 512 位元組。而浮點內嵌使用的<a href="/docs/zh-hant/v2.5.x/metric.md">距離指標</a>是 Euclidean distance (<code translate="no">L2</code>) 和 Inner product (<code translate="no">IP</code>)。</p>
 <p>這些類型的索引包括<code translate="no">FLAT</code>,<code translate="no">IVF_FLAT</code>,<code translate="no">IVF_PQ</code>,<code translate="no">IVF_SQ8</code>,<code translate="no">HNSW</code>,<code translate="no">HNSW_SQ</code>,<code translate="no">HNSW_PQ</code>,<code translate="no">HNSW_PRQ</code>, 以及<code translate="no">SCANN</code> ，用於以 CPU 為基礎的 ANN 搜尋。</p>
 </div>
 <div class="filter-binary">
@@ -71,7 +72,7 @@ title: 記憶體索引
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">稀疏內嵌索引</h3><p>稀疏嵌入式索引僅支援<code translate="no">IP</code> 和<code translate="no">BM25</code> （用於全文檢索）度量。</p>
 <p>稀疏嵌入支持的索引類型：<code translate="no">SPARSE_INVERTED_INDEX</code> 。</p>
 <div class="alert note">
-<p>從 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已經被廢棄。取而代之，建議使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 以達到等效，同時保持相容性。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>。</p>
+<p>從 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已經被廢棄。取而代之，建議使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 以達到等效，同時保持相容性。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>。</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
@@ -247,7 +248,7 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[可選] 選擇的距離度量。</td><td>請參閱<a href="/docs/zh-hant/metric.md">支援的公制</a>。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[可選] 選擇的距離度量。</td><td>請參閱<a href="/docs/zh-hant/v2.5.x/metric.md">支援的公制</a>。</td></tr>
 </tbody>
 </table>
 </li>
@@ -537,7 +538,7 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[可選] 選擇的距離度量。</td><td>請參閱<a href="/docs/zh-hant/metric.md">支援的公制</a>。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[可選] 選擇的距離度量。</td><td>請參閱<a href="/docs/zh-hant/v2.5.x/metric.md">支援的公制</a>。</td></tr>
 </tbody>
 </table>
 </li>
@@ -591,7 +592,7 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>用於建立和查詢索引的演算法。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (預設值)， 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>用於建立和查詢索引的演算法。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (預設值)， 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
 <tr><td><code translate="no">bm25_k1</code></td><td>控制詞彙頻率飽和度。較高的值會增加術語頻率在文件排序中的重要性。</td><td>[1.2, 2.0]</td></tr>
 <tr><td><code translate="no">bm25_b</code></td><td>控制文件長度規範化的程度。預設為 0.75。</td><td>[0, 1]</td></tr>
 </tbody>
@@ -651,5 +652,5 @@ title: 記憶體索引
         ></path>
       </svg>
     </button></h2><ul>
-<li>了解更多關於 Milvus 支援的<a href="/docs/zh-hant/metric.md">相似度指標</a>。</li>
+<li>了解更多關於 Milvus 支援的<a href="/docs/zh-hant/v2.5.x/metric.md">相似度指標</a>。</li>
 </ul>

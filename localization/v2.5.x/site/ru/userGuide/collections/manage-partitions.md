@@ -6,6 +6,7 @@ summary: >-
   данных, что и родительская коллекция, но содержит только часть данных
   коллекции. Эта страница поможет вам понять, как управлять разделами.
 ---
+
 <h1 id="Manage-Partitions" class="common-anchor-header">Управление разделами<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ summary: >-
 <p>В коллекции может быть максимум 1024 раздела.</p>
 <div class="alert note">
 <p>Функция <strong>Partition Key</strong> - это оптимизация поиска на основе разделов, позволяющая Milvus распределять сущности по разным разделам на основе значений в определенном скалярном поле. Эта функция помогает реализовать ориентированное на разделы многопользовательское использование и повышает производительность поиска.</p>
-<p>На этой странице данная функция не рассматривается. Более подробную информацию можно найти в разделе <a href="/docs/ru/use-partition-key.md">Использование ключа раздела</a>.</p>
+<p>На этой странице данная функция не рассматривается. Более подробную информацию можно найти в разделе <a href="/docs/ru/v2.5.x/use-partition-key.md">Использование ключа раздела</a>.</p>
 </div>
 <h2 id="List-Partitions" class="common-anchor-header">Список разделов<button data-href="#List-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,12 +66,12 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 res = client.list_partitions(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -79,6 +80,7 @@ res = client.list_partitions(
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [&quot;_default&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ListPartitionsReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -191,7 +193,7 @@ curl --request POST \
 )
 
 res = client.list_partitions(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -200,6 +202,7 @@ res = client.list_partitions(
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [&quot;_default&quot;, &quot;partitionA&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.CreatePartitionReq;
 
 <span class="hljs-type">CreatePartitionReq</span> <span class="hljs-variable">createPartitionReq</span> <span class="hljs-operator">=</span> CreatePartitionReq.builder()
@@ -320,6 +323,7 @@ curl --request POST \
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># True</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.HasPartitionReq;
 
 <span class="hljs-type">HasPartitionReq</span> <span class="hljs-variable">hasPartitionReq</span> <span class="hljs-operator">=</span> HasPartitionReq.builder()
@@ -398,17 +402,18 @@ curl --request POST \
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.LoadPartitionsReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
 
@@ -510,8 +515,8 @@ curl --request POST \
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -519,9 +524,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ReleasePartitionsReq;
 
 <span class="hljs-type">ReleasePartitionsReq</span> <span class="hljs-variable">releasePartitionsReq</span> <span class="hljs-operator">=</span> ReleasePartitionsReq.builder()
@@ -623,14 +629,14 @@ curl --request POST \
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Вставка и удаление объектов</h3><p>Вы можете выполнять вставку, апсерт и удаление в определенных операциях. Для получения подробной информации см.</p>
 <ul>
-<li><p><a href="/docs/ru/insert-update-delete.md#Insert-Entities-into-a-Partition">Вставка сущностей в раздел</a></p></li>
-<li><p><a href="/docs/ru/upsert-entities.md#Upsert-Entities-in-a-Partition">Вставить сущности в раздел</a></p></li>
-<li><p><a href="/docs/ru/delete-entities.md#Delete-Entities-from-Partitions">Удалить сущности из раздела</a></p></li>
+<li><p><a href="/docs/ru/v2.5.x/insert-update-delete.md#Insert-Entities-into-a-Partition">Вставка сущностей в раздел</a></p></li>
+<li><p><a href="/docs/ru/v2.5.x/upsert-entities.md#Upsert-Entities-in-a-Partition">Вставить сущности в раздел</a></p></li>
+<li><p><a href="/docs/ru/v2.5.x/delete-entities.md#Delete-Entities-from-Partitions">Удалить сущности из раздела</a></p></li>
 </ul>
 <h3 id="Search-and-Query" class="common-anchor-header">Поиск и запросы</h3><p>Вы можете выполнять поиск и запросы в определенных разделах. Для получения подробной информации см.</p>
 <ul>
-<li><p><a href="/docs/ru/single-vector-search.md#ANN-Search-in-Partition">Проведение поиска ANN в разделах</a></p></li>
-<li><p><a href="/docs/ru/get-and-scalar-query.md#Queries-in-Partitions">Проведение фильтрации метаданных в разделах</a></p></li>
+<li><p><a href="/docs/ru/v2.5.x/single-vector-search.md#ANN-Search-in-Partition">Проведение поиска ANN в разделах</a></p></li>
+<li><p><a href="/docs/ru/v2.5.x/get-and-scalar-query.md#Queries-in-Partitions">Проведение фильтрации метаданных в разделах</a></p></li>
 </ul>
 <h2 id="Drop-Partition" class="common-anchor-header">Сбросить раздел<button data-href="#Drop-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -656,18 +662,19 @@ curl --request POST \
 )
 
 client.drop_partition(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 res = client.list_partitions(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># [&quot;_default&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.DropPartitionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ReleasePartitionsReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ListPartitionsReq;

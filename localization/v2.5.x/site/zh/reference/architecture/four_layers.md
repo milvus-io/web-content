@@ -3,6 +3,7 @@ id: four_layers.md
 summary: Milvus 的存储/计算分解结构。
 title: 存储/计算分解
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">存储/计算分解<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,5 +120,5 @@ title: 存储/计算分解
         ></path>
       </svg>
     </button></h2><ul>
-<li>阅读 "<a href="/docs/zh/main_components.md">主要组件</a>"，了解有关 Milvus 架构的更多详情。</li>
+<li>阅读 "<a href="/docs/zh/v2.5.x/main_components.md">主要组件</a>"，了解有关 Milvus 架构的更多详情。</li>
 </ul>

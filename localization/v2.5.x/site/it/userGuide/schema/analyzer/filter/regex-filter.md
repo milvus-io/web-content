@@ -7,6 +7,7 @@ summary: >-
   tutto il resto viene scartato.
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="Regex" class="common-anchor-header">Regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +70,7 @@ beta: Milvus 2.5.11+
    </tr>
 </table>
 <p>Il filtro <code translate="no">regex</code> opera sui termini generati dal tokenizer, quindi deve essere usato in combinazione con un tokenizer.</p>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo utilizzando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo utilizzando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/v2.5.x/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,6 +114,7 @@ sample_text = <span class="hljs-string">&quot;testItem apple testCase banana&quo
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>

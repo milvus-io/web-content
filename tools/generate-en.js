@@ -20,7 +20,7 @@ import {
 import { remarkToHtml } from "./remark.js";
 import versionJson from "../version.json" assert { type: "json" };
 
-const VERSIONS = ["v2.5.x", "v2.4.x"];
+const VERSIONS = ["v2.6.x", "v2.5.x"];
 const LATEST_VERSION = versionJson.version;
 const sourceFilePath = "site/en";
 const sourceLang = "en";

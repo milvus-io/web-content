@@ -1,9 +1,10 @@
 ---
 id: object_storage_operator.md
 title: Настройка объектного хранилища с помощью Milvus Operator
-related_key: 'minio, s3, storage, etcd, pulsar'
-summary: 'Узнайте, как настроить объектное хранилище с помощью Milvus Operator.'
+related_key: "minio, s3, storage, etcd, pulsar"
+summary: "Узнайте, как настроить объектное хранилище с помощью Milvus Operator."
 ---
+
 <h1 id="Configure-Object-Storage-with-Milvus-Operator" class="common-anchor-header">Настройка объектного хранилища с помощью Milvus Operator<button data-href="#Configure-Object-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,6 +226,6 @@ spec:
       </svg>
     </button></h2><p>Узнайте, как настроить другие зависимости Milvus с помощью Milvus Operator:</p>
 <ul>
-<li><a href="/docs/ru/meta_storage_operator.md">Настройка хранилища метаданных с помощью Milvus Operator</a></li>
-<li><a href="/docs/ru/message_storage_operator.md">Настройте хранилище сообщений с помощью Milvus Operator</a></li>
+<li><a href="/docs/ru/v2.5.x/meta_storage_operator.md">Настройка хранилища метаданных с помощью Milvus Operator</a></li>
+<li><a href="/docs/ru/v2.5.x/message_storage_operator.md">Настройте хранилище сообщений с помощью Milvus Operator</a></li>
 </ul>

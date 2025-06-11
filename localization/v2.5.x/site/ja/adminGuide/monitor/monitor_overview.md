@@ -1,9 +1,10 @@
 ---
 id: monitor_overview.md
 title: モニターの概要
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: PrometheusとGrafanaがMilvusでどのようにモニタリングとアラートサービスに使用されているかをご紹介します。
 ---
+
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvusモニタリングフレームワークの概要<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +106,7 @@ summary: PrometheusとGrafanaがMilvusでどのようにモニタリングとア
       </svg>
     </button></h2><p>モニタリングとアラートの基本的なワークフローを学んだら、次のことを学びましょう：</p>
 <ul>
-<li><a href="/docs/ja/monitor.md">監視サービスのデプロイ</a></li>
-<li><a href="/docs/ja/visualize.md">Milvusメトリックの可視化</a></li>
-<li><a href="/docs/ja/alert.md">アラートを作成する</a></li>
+<li><a href="/docs/ja/v2.5.x/monitor.md">監視サービスのデプロイ</a></li>
+<li><a href="/docs/ja/v2.5.x/visualize.md">Milvusメトリックの可視化</a></li>
+<li><a href="/docs/ja/v2.5.x/alert.md">アラートを作成する</a></li>
 </ul>
