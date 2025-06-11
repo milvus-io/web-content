@@ -475,7 +475,7 @@ In this example, RRF combines results from two retrievers:
 
 Each retriever contributes up to 50 top matches, which are reranked by RRF, and the final top 10 results are returned.
 
-In Milvus, you can achieve a similar hybrid search by combining searches across multiple vector fields, applying a reranking strategy, and retrieving the top-K results from the combined list. Milvus supports both RRF and weighted reranker strategies. For more details, refer to [Reranking](reranking.md).
+In Milvus, you can achieve a similar hybrid search by combining searches across multiple vector fields, applying a reranking strategy, and retrieving the top-K results from the combined list. Milvus supports both RRF and weighted reranker strategies. For more details, refer to [Reranking](weighted-ranker.md).
 
 The following is a non-strict equivalence of the above Elasticsearch example in Milvus.
 

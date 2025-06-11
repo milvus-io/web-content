@@ -269,6 +269,106 @@
                         "token": "ZDYIwC1HwhTrdlbfOgNcOZ4OnWg",
                         "type": "board",
                         "alt_text": "multi-language-analyzers-workflow"
+                    },
+                    {
+                        "token": "AFrdwVT8ChT11ibs9lpcuN7onZc",
+                        "type": "board",
+                        "alt_text": "phrase-match-workflow"
+                    },
+                    {
+                        "token": "Lm87w7BjYhr0KDb9o1jclNKEnyd",
+                        "type": "board",
+                        "alt_text": "embedding-function-overview"
+                    },
+                    {
+                        "token": "TOGywbCvChKRBnbfSOhcZAtgnsd",
+                        "type": "board",
+                        "alt_text": "credential-config-overflow"
+                    },
+                    {
+                        "token": "GdmNwbkN8haZO8bpQkOc2NIWnqF",
+                        "type": "board",
+                        "alt_text": "weighted-ranker"
+                    },
+                    {
+                        "token": "M2SawupkSh2NZxbX7SAcwqZZnxd",
+                        "type": "board",
+                        "alt_text": "rrf-ranker"
+                    },
+                    {
+                        "token": "DP1AbcqZPoyfqhxpJ2icptjQnfc",
+                        "type": "image",
+                        "alt_text": "gaussian-decay"
+                    },
+                    {
+                        "token": "YaRsbolv9oqomcxrFe5cXBa4nNg",
+                        "type": "image",
+                        "alt_text": "exp-decay"
+                    },
+                    {
+                        "token": "LNwQbV5FYo7OYbxaA1VcetPgnUh",
+                        "type": "image",
+                        "alt_text": "linear-decay"
+                    },
+                    {
+                        "token": "LGZkwu1axhFdHZbCYFTcLMGSnKd",
+                        "type": "board",
+                        "alt_text": "model-ranker-overview"
+                    },
+                    {
+                        "token": "NM0aw26hDheLAZb2HBxc7Q3lnNf",
+                        "type": "board",
+                        "alt_text": "ivf-sq8"
+                    },
+                    {
+                        "token": "AOH0wbTaVhlJNSbno27clhgvnfb",
+                        "type": "board",
+                        "alt_text": "hnsw-sq"
+                    },
+                    {
+                        "token": "URUZwdAsohi8FFbwZRbcGXvfnSf",
+                        "type": "board",
+                        "alt_text": "hnsw-prq"
+                    },
+                    {
+                        "token": "ZNCRw2rmKhEbD0bv0ojc25uGnEd",
+                        "type": "board",
+                        "alt_text": "diskann"
+                    },
+                    {
+                        "token": "We6iwS81khrTgBbZ8uOcywTdnHf",
+                        "type": "board",
+                        "alt_text": "diskann-2"
+                    },
+                    {
+                        "token": "FwO1bZlbBogz0SxsXg5cE4WYnxb",
+                        "type": "image",
+                        "alt_text": "gpu-index-performance"
+                    },
+                    {
+                        "token": "G5VxbkoZLowCcLxEtfmcQl2Yn6d",
+                        "type": "image",
+                        "alt_text": "inverted"
+                    },
+                    {
+                        "token": "VPhswBhHmhJrh3byaVnc3onYnPc",
+                        "type": "board",
+                        "alt_text": "sparse-vector-representation"
+                    },
+                    {
+                        "token": "A7FvwnB5bhpBlKbgrzYcQijbnxg",
+                        "type": "board",
+                        "alt_text": "sparse-vector-workflow"
+                    },
+                    {
+                        "token": "Qx7UwgI6jhrku8bAxZqcYxZMnSe",
+                        "type": "board",
+                        "alt_text": "hybrid-search-workflow"
+                    },
+                    {
+                        "token": "Kc3Cweq1AhAmMGbrVgRcTlTKnUf",
+                        "type": "board",
+                        "alt_text": "data-model-anatomy"
                     }
                 ]
             }

@@ -323,9 +323,11 @@ The possible values are as follows:
 
 - Each import file size should not exceed **16 GB**.
 
-- The maximum number of import requests is limited to **1024**.
+- The maximum number of files per import request should not exceed **1024**. Each import request can have at most 16GB per file * 1024 files = 16TB of data.
 
-- The maximum number of file per import request should not exceed **1024**.
+- The maximum number of concurrent import requests is limited to **1024**.
+
+
 
 - Only one partition name can be specified in an import request. If no partition name is specified, the data will be inserted into the default partition. Additionally, you cannot set a partition name in the import request if you have set the Partition Key in the target collection.
 

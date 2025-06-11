@@ -52,7 +52,7 @@ The Milvus Helm Charts repo at `https://github.com/milvus-io/milvus-helm` has be
 helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 # upgrade existing helm release
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 ```
 
 The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.
@@ -231,7 +231,7 @@ Run the following command to upgrade your running Milvus cluster to the latest v
 
 ```shell
 $ helm repo update
-$ helm upgrade my-release zilliztech/milvus
+$ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 ```
 
 ## Uninstall Milvus
