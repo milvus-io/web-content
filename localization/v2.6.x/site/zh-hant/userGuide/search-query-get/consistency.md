@@ -1,9 +1,9 @@
 ---
 id: consistency.md
-summary: Learn about the four levels of consistency in Milvus.
-title: Consistency
+summary: 了解 Milvus 的四種一致性等級。
+title: 一致性
 ---
-<h1 id="Consistency-Level​" class="common-anchor-header">Consistency Level​<button data-href="#Consistency-Level​" class="anchor-icon" translate="no">
+<h1 id="Consistency-Level​" class="common-anchor-header">一致性等級<button data-href="#Consistency-Level​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Consistency
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As a distributed vector database, Milvus offers multiple levels of consistency to ensure that each node or replica can access the same data during read and write operations. Currently, the supported levels of consistency include <strong>Strong</strong>, <strong>Bounded</strong>, <strong>Eventually</strong>, and <strong>Session</strong>, with <strong>Bounded</strong> being the default level of consistency used.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>作為一個分散式向量資料庫，Milvus 提供多種一致性等級，以確保每個節點或副本在讀寫作業時能存取相同的資料。目前，支援的一致性等級包括<strong>Strong</strong>、<strong>Bounded</strong>、<strong>Eventually</strong> 和<strong>Session</strong>，其中<strong>Bounded</strong>是預設使用的一致性等級。</p>
+<h2 id="Overview​" class="common-anchor-header">概述<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,42 +34,36 @@ title: Consistency
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus is a system that separates storage and computation. In this system, <strong>DataNodes</strong> are responsible for the persistence of data and ultimately store it in distributed object storage such as MinIO/S3. <strong>QueryNodes</strong> handle computational tasks like Search. These tasks involve processing both <strong>batch data</strong> and <strong>streaming data</strong>. Simply put, batch data can be understood as data that has already been stored in object storage while streaming data refers to data that has not yet been stored in object storage. Due to network latency, QueryNodes often do not hold the most recent streaming data. Without additional safeguards, performing Search directly on streaming data may result in the loss of many uncommitted data points, affecting the accuracy of search results.​</p>
+    </button></h2><p>Milvus 是一個將儲存和計算分開的系統。在這個系統中，<strong>資料節點 (DataNodes</strong>) 負責資料的持久化，並最終將資料儲存在分散式物件儲存空間 (例如 MinIO/S3)。<strong>QueryNodes</strong>負責處理搜尋等計算任務。這些任務涉及<strong>批次資料</strong>和<strong>串流資料</strong>的處理。簡單來說，批次資料可以理解為已經儲存於物件儲存空間的資料，而串流資料則是指尚未儲存於物件儲存空間的資料。由於網路延遲的關係，QueryNodes 通常無法保存最新的串流資料。如果沒有額外的保障措施，直接在串流資料上執行 Search 可能會導致遺失許多未承諾的資料點，影響搜尋結果的準確性。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
-    <span>Batch data and streaming data</span>
-  </span>
-</p>
-<p>As shown in the figure above, QueryNodes can receive both streaming data and batch data simultaneously after receiving a Search request. However, due to network latency, the streaming data obtained by QueryNodes may be incomplete.​</p>
-<p>To address this issue, Milvus timestamps each record in the data queue and continuously inserts synchronization timestamps into the data queue. Whenever a synchronization timestamp (syncTs) is received, QueryNodes sets it as the ServiceTime, meaning that QueryNodes can see all data prior to that Service Time. Based on the ServiceTime, Milvus can provide guarantee timestamps (GuaranteeTs) to meet different user requirements for consistency and availability. Users can inform QueryNodes of the need to include data prior to a specified point in time in the search scope by specifying GuaranteeTs in their Search requests.​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
+   </span> <span class="img-wrapper"> <span>批次資料和串流資料</span> </span></p>
+<p>如上圖所示，QueryNodes 在收到 Search 請求後，可以同時接收串流資料和批次資料。然而，由於網路延遲，QueryNodes 取得的串流資料可能不完整。</p>
+<p>為了解決這個問題，Milvus 會為資料佇列中的每條記錄加上時間戳，並持續在資料佇列中插入同步時間戳。每當收到同步時間戳 (syncTs) 時，QueryNodes 會將其設定為 ServiceTime，意即 QueryNodes 可以看到該 Service Time 之前的所有資料。在 ServiceTime 的基礎上，Milvus 可以提供保證時間戳 (GuaranteeTs) 來滿足使用者對一致性和可用性的不同要求。使用者可透過在其 Search 請求中指定 GuaranteeTs，告知 QueryNodes 在搜尋範圍中需要包含指定時間點之前的資料。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
-    <span>ServiceTime and GuaranteeTs</span>
-  </span>
-</p>
-<p>As shown in the figure above, if GuaranteeTs is less than ServiceTime, it means that all data before the specified time point has been fully written to disk, allowing QueryNodes to immediately perform the Search operation. When GuaranteeTs is greater than ServiceTime, QueryNodes must wait until ServiceTime exceeds GuaranteeTs before they can execute the Search operation.​</p>
-<p>Users need to make a trade-off between query accuracy and query latency. If users have high consistency requirements and are not sensitive to query latency, they can set GuaranteeTs to a value as large as possible; if users wish to receive search results quickly and are more tolerant of query accuracy, then GuaranteeTs can be set to a smaller value.​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
+   </span> <span class="img-wrapper"> <span>ServiceTime 與 GuaranteeTs</span> </span></p>
+<p>如上圖所示，如果 GuaranteeTs 小於 ServiceTime，表示指定時間點之前的所有資料已完全寫入磁碟，允許 QueryNodes 立即執行 Search 作業。當 GuaranteeTs 大於 ServiceTime 時，QueryNodes 必須等到 ServiceTime 大於 GuaranteeTs 時，才能執行 Search 作業。</p>
+<p>使用者需要在查詢精確度與查詢延遲之間作出權衡。如果使用者對一致性要求很高，而且對查詢延遲不敏感，他們可以將 GuaranteeTs 設定為盡可能大的值；如果使用者希望快速收到搜尋結果，而且對查詢精確度的容忍度較高，那麼可以將 GuaranteeTs 設定為較小的值。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Levels Illustrated" class="doc-image" id="consistency-levels-illustrated" />
-    <span>Consistency Levels Illustrated</span>
-  </span>
-</p>
-<p>Milvus provides four types of consistency levels with different GuaranteeTs.​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Levels Illustrated" class="doc-image" id="consistency-levels-illustrated" />
+   </span> <span class="img-wrapper"> <span>一致性等級說明</span> </span></p>
+<p>Milvus 提供四種不同 GuaranteeTs 的一致性等級。</p>
 <ul>
-<li><p><strong>Strong</strong>​</p>
-<p>The latest timestamp is used as the GuaranteeTs, and QueryNodes have to wait until the ServiceTime meets the GuaranteeTs before executing Search requests.​</p></li>
-<li><p><strong>Eventual</strong>​</p>
-<p>The GuaranteeTs is set to an extremely small value, such as 1, to avoid consistency checks so that QueryNodes can immediately execute Search requests upon all batch data.​</p></li>
-<li><p><strong>Bounded</strong>​ (default)</p>
-<p>The GuranteeTs is set to a time point earlier than the latest timestamp to make QueryNodes to perform searches with a tolerance of certain data loss.​</p></li>
-<li><p><strong>Session</strong>​</p>
-<p>The latest time point at which the client inserts data is used as the GuaranteeTs so that QueryNodes can perform searches upon all the data inserted by the client.​</p></li>
+<li><p><strong>強</strong></p>
+<p>使用最新的時間戳作為 GuaranteeTs，查詢節點必須等到 ServiceTime 符合 GuaranteeTs 才執行 Search 請求。</p></li>
+<li><p><strong>最終</strong></p>
+<p>GuaranteeTs 設定為極小的值，例如 1，以避免一致性檢查，這樣 QueryNodes 就可以在所有批次資料上立即執行 Search 請求。</p></li>
+<li><p><strong>有限制</strong>(預設)</p>
+<p>GuranteeTs 設定為早於最新時間戳記的時間點，使 QueryNodes 在執行搜尋時可容忍某些資料遺失。</p></li>
+<li><p><strong>會話</strong></p>
+<p>用戶端插入資料的最新時間點作為 GuaranteeTs，以便 QueryNodes 能夠對用戶端插入的所有資料執行搜尋。</p></li>
 </ul>
-<p>Milvus uses Bounded Staleness as the default consistency level. If the GuaranteeTs is left unspecified, the latest ServiceTime is used as the GuaranteeTs.​</p>
-<h2 id="Set-Consistency-Level​" class="common-anchor-header">Set Consistency Level​<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
+<p>Milvus 使用 Bounded Staleness 作為預設的一致性等級。如果未指定 GuaranteeTs，則使用最新的 ServiceTime 作為 GuaranteeTs。</p>
+<h2 id="Set-Consistency-Level​" class="common-anchor-header">設定一致性等級<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,13 +78,10 @@ title: Consistency
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set different consistency levels when you create a collection as well as perform searches and queries.​</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Set Consistency Level upon Creating Collection​</h3><p>When creating a collection, you can set the consistency level for the searches and queries within the collection. The following code example sets the consistency level to <strong>Bounded</strong>.​</p>
+    </button></h2><p>您可以在建立資料集、執行搜尋和查詢時設定不同的一致性層級。</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">建立集合時設定一致性層級</h3><p>當建立一個集合時，您可以為集合內的搜尋和查詢設定一致性層級。以下程式碼範例將統一性層級設定為<strong>Bounded</strong>。</p>
 <div class="multipleCode">
-    <a href="#python">python</a>
-    <a href="#java">java</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
@@ -148,13 +139,10 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Possible values for the <code translate="no">consistency_level</code> parameter are <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, and <code translate="no">Session</code>.​</p>
-<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">Set Consistency Level in Search​</h3><p>You can always change the consistency level for a specific search. The following code example sets the consistency level back to the Bounded. The change applies only to the current search request.​</p>
+<p><code translate="no">consistency_level</code> 參數的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>
+<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">在搜尋中設定一致性層級</h3><p>您可以隨時變更特定搜尋的一致性層級。以下程式碼範例會將一致性層級設定回 Bounded。此變更只適用於目前的搜尋請求。</p>
 <div class="multipleCode">
-    <a href="#python">python</a>
-    <a href="#java">java</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     data=[query_vector],​
@@ -189,12 +177,10 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This parameter is also available in hybrid searches and the search iterator. Possible values for the <code translate="no">consistency_level</code> parameter are <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, and <code translate="no">Session</code>.​</p>
-<h3 id="Set-Consistency-Level-in-Query​" class="common-anchor-header">Set Consistency Level in Query​</h3><p>You can always change the consistency level for a specific search. The following code example sets the consistency level to the <strong>Eventually</strong>. The setting applies only to the current query request.​</p>
+<p>此參數在混合搜尋和搜尋迭代器中也可用。<code translate="no">consistency_level</code> 參數的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>
+<h3 id="Set-Consistency-Level-in-Query​" class="common-anchor-header">在查詢中設定一致性層級</h3><p>您可以隨時變更特定搜尋的一致性層級。以下程式碼範例設定一致性層級為<strong>Eventually</strong>。此設定僅適用於目前的查詢請求。</p>
 <div class="multipleCode">
-    <a href="#python">python</a>
-    <a href="#java">java</a>
-</div>
+   <a href="#python">python</a> <a href="#java">java</a></div>
 <pre><code translate="no" class="language-python">res = client.query(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,​
@@ -215,4 +201,4 @@ curl --request POST \​
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This parameter is also available in the query iterator. Possible values for the <code translate="no">consistency_level</code> parameter are <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, and <code translate="no">Session</code>.​</p>
+<p>查詢迭代器中也可使用此參數。<code translate="no">consistency_level</code> 參數的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>

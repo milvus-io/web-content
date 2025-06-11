@@ -1,13 +1,12 @@
 ---
 id: knowledge_table_with_milvus.md
 summary: >-
-  By default, Knowledge Table uses the Milvus database to store and retrieve the
-  extracted data. This allows users to easily search, filter, and analyze the
-  data using the powerful features of Milvus. In this tutorial, we will show how
-  to get started with Knowledge Table and Milvus.
-title: Knowledge Table with Milvus
+  在預設情況下，Knowledge Table 使用 Milvus
+  資料庫來儲存和擷取萃取的資料。這使得用戶可以使用Milvus的強大功能輕鬆地搜索、過濾和分析數據。在本教程中，我們將介紹如何開始使用 Knowledge
+  Table 和 Milvus。
+title: 使用 Milvus 的知識表
 ---
-<h1 id="Knowledge-Table-with-Milvus" class="common-anchor-header">Knowledge Table with Milvus<button data-href="#Knowledge-Table-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Knowledge-Table-with-Milvus" class="common-anchor-header">使用 Milvus 的知識表<button data-href="#Knowledge-Table-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,9 +21,9 @@ title: Knowledge Table with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/whyhow-ai/knowledge-table">Knowledge Table</a>, developed by <a href="https://www.whyhow.ai/">WhyHow AI</a>, is an open-source package designed to facilitate the extraction and exploration of structured data from unstructured documents. It provides users with a spreadsheet-like interface and enables the creation of knowledge representations, such as tables and graphs, through a natural language query interface. The package includes customizable extraction rules, formatting options, and data traceability through provenance, making it adaptable for diverse applications. It supports seamless integration into RAG workflows, catering to both business users needing a user-friendly interface and developers requiring a flexible backend for efficient document processing.</p>
-<p>By default, Knowledge Table uses the Milvus database to store and retrieve the extracted data. This allows users to easily search, filter, and analyze the data using the powerful features of Milvus. In this tutorial, we will show how to get started with Knowledge Table and Milvus.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>由<a href="https://www.whyhow.ai/">WhyHow AI</a> 所開發的<a href="https://github.com/whyhow-ai/knowledge-table">Knowledge Table</a> 是一套開放原始碼套件，設計用來協助從非結構化文檔中萃取與探索結構化資料。它為使用者提供類似試算表的介面，並可透過自然語言查詢介面建立表格和圖表等知識表象。該套件包括可自訂的擷取規則、格式化選項，以及透過來源進行的資料追溯，使其適用於各種不同的應用程式。它支援與 RAG 工作流程的無縫整合，同時滿足需要友善使用者介面的企業用戶和需要彈性後端以進行有效文件處理的開發人員的需求。</p>
+<p>在預設情況下，Knowledge Table 使用 Milvus 資料庫來儲存和檢索擷取的資料。這使得用戶可以使用 Milvus 的強大功能輕鬆地搜索、過濾和分析數據。在本教程中，我們將介紹如何開始使用 Knowledge Table 和 Milvus。</p>
+<h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,7 +42,7 @@ title: Knowledge Table with Milvus
 <li>Docker</li>
 <li>Docker Compose</li>
 </ul>
-<h2 id="Cloning-the-project" class="common-anchor-header">Cloning the project<button data-href="#Cloning-the-project" class="anchor-icon" translate="no">
+<h2 id="Cloning-the-project" class="common-anchor-header">克隆專案<button data-href="#Cloning-the-project" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +59,7 @@ title: Knowledge Table with Milvus
       </svg>
     </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/whyhow-ai/knowledge-table.git</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-the-environment" class="common-anchor-header">Set up the environment<button data-href="#Set-up-the-environment" class="anchor-icon" translate="no">
+<h2 id="Set-up-the-environment" class="common-anchor-header">設定環境<button data-href="#Set-up-the-environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,17 +74,17 @@ title: Knowledge Table with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You will find the <code translate="no">.env.example</code> file in the project root directory. Copy this file to <code translate="no">.env</code> and fill in the required environment variables.</p>
-<p>For Milvus, you should set the <code translate="no">MILVUS_DB_URI</code> and <code translate="no">MILVUS_DB_TOKEN</code> environment variables. Here are some tips:</p>
+    </button></h2><p>您可以在專案根目錄中找到<code translate="no">.env.example</code> 檔案。複製這個檔案到<code translate="no">.env</code> 並填入所需的環境變數。</p>
+<p>對於 Milvus，您應該設定<code translate="no">MILVUS_DB_URI</code> 和<code translate="no">MILVUS_DB_TOKEN</code> 環境變數。以下是一些提示：</p>
 <blockquote>
 <ul>
-<li>Setting the <code translate="no">MILVUS_DB_URI</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">MILVUS_DB_URI</code> and <code translate="no">MILVUS_DB_TOKEN</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>將<code translate="no">MILVUS_DB_URI</code> 設定為本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
+<li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器位址和連接埠作為您的 uri，例如<code translate="no">http://localhost:19530</code> 。如果您啟用 Milvus 上的驗證功能，請使用 "<your_username>:<your_password>" 作為令牌，否則請勿設定令牌。</li>
+<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務，請調整<code translate="no">MILVUS_DB_URI</code> 和<code translate="no">MILVUS_DB_TOKEN</code> ，它們對應於 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>。</li>
 </ul>
 </blockquote>
-<p>Besides Milvus, you should also set other environments, e.g. <code translate="no">OPENAI_API_KEY</code>. You can get each of these from the respective websites.</p>
-<h2 id="Starting-the-app" class="common-anchor-header">Starting the app<button data-href="#Starting-the-app" class="anchor-icon" translate="no">
+<p>除了 Milvus，您也應該設定其他環境，例如<code translate="no">OPENAI_API_KEY</code> 。您可以從各個網站取得。</p>
+<h2 id="Starting-the-app" class="common-anchor-header">啟動應用程式<button data-href="#Starting-the-app" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -102,7 +101,7 @@ title: Knowledge Table with Milvus
       </svg>
     </button></h2><pre><code translate="no" class="language-sh">$ docker compose up -d --build
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Stopping-the-app" class="common-anchor-header">Stopping the app<button data-href="#Stopping-the-app" class="anchor-icon" translate="no">
+<h2 id="Stopping-the-app" class="common-anchor-header">停止應用程式<button data-href="#Stopping-the-app" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,7 +118,7 @@ title: Knowledge Table with Milvus
       </svg>
     </button></h2><pre><code translate="no" class="language-sh">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Accessing-the-project" class="common-anchor-header">Accessing the project<button data-href="#Accessing-the-project" class="anchor-icon" translate="no">
+<h2 id="Accessing-the-project" class="common-anchor-header">存取專案<button data-href="#Accessing-the-project" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -134,12 +133,12 @@ title: Knowledge Table with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The frontend can be accessed at <code translate="no">http://localhost:3000</code>, and the backend can be accessed at <code translate="no">http://localhost:8000</code>.</p>
+    </button></h2><p>前端可從<code translate="no">http://localhost:3000</code> 存取，後端可從<code translate="no">http://localhost:8000</code> 存取。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/knowlege_table.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>You can play around with the UI and try with your own documents.</p>
-<p>For further demo usage, you can refer to the official <a href="https://github.com/whyhow-ai/knowledge-table/tree/main">Knowledge Table documentation</a>.</p>
+<p>您可以玩弄 UI 並嘗試使用自己的文件。</p>
+<p>如需進一步的使用示範，您可以參考官方的<a href="https://github.com/whyhow-ai/knowledge-table/tree/main">Knowledge Table 文件</a>。</p>

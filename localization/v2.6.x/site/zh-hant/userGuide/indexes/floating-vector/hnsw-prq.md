@@ -49,10 +49,10 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Hnsw Prq</span> </span></p>
 <ol>
 <li><p><strong>乘積量化 (PQ)</strong></p>
-<p>在此階段中，原始向量會被分割成較小的子向量，而每個子向量會被映射到學習到的編碼簿中最接近的中心點。這種映射方式可大幅減少資料大小，但由於每個子向量都是由單一中心點近似而成，因此會產生一些四捨五入的誤差。如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-pq.md#PQ">IVF_PQ</a>。</p></li>
+<p>在此階段中，原始向量會被分割成較小的子向量，而每個子向量會被映射到學習到的編碼簿中最接近的中心點。此對應方式可大幅減少資料大小，但由於每個子向量都是由單一中心點近似而成，因此會產生一些四捨五入的誤差。如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-pq.md#PQ">IVF_PQ</a>。</p></li>
 <li><p><strong>殘餘量化 (RQ)</strong></p>
 <p>在 PQ 階段之後，RQ 會使用額外的編碼本量化殘餘值 - 原始向量與其 PQ 近似值之間的差異。由於殘餘量通常小得多，因此可以更精確地編碼，而不會大量增加儲存空間。</p>
-<p>參數<code translate="no">nrq</code> 決定此殘餘值被反覆量化的次數，讓您可以微調壓縮效率與精確度之間的平衡。</p></li>
+<p>參數<code translate="no">nrq</code> 決定此殘餘值的反覆量化次數，讓您可以微調壓縮效率與精確度之間的平衡。</p></li>
 <li><p><strong>最終壓縮表示</strong></p>
 <p>當 RQ 完成量化殘餘值後，PQ 和 RQ 的整數編碼會合併為單一的壓縮索引。透過捕捉單獨 PQ 可能會遺漏的精細細節，RQ 可在不大幅增加儲存空間的情況下提升精確度。PQ 和 RQ 之間的協同作用就是 PRQ 的定義。</p></li>
 </ol>
@@ -60,7 +60,7 @@ summary: >-
 <ol>
 <li><p><strong>資料壓縮：</strong>首先透過 PQ 將每個向量轉換為粗略的表示，然後透過 RQ 對殘餘進行量化，以進一步精細化。結果是一組代表每個向量的精簡編碼。</p></li>
 <li><p><strong>圖形建構：</strong>壓縮向量（包括 PQ 和 RQ 編碼）是建立 HNSW 圖形的基礎。由於資料是以精簡的形式儲存，因此圖形所需的記憶體較少，並可加快瀏覽速度。</p></li>
-<li><p><strong>候選人檢索：</strong>在搜尋過程中，HNSW 會使用壓縮表示法來遍歷圖形，並擷取候選人資料庫。這可大幅減少需要考慮的向量數量。</p></li>
+<li><p><strong>候選人檢索：</strong>在搜尋過程中，HNSW 會使用壓縮表示法來遍歷圖表，並擷取候選人資料庫。這可大幅減少需要考慮的向量數量。</p></li>
 <li><p><strong>(可選）結果精煉：</strong>初始候選結果可以根據下列參數進行精煉，以獲得更高的精確度：</p>
 <ul>
 <li><p><code translate="no">refine</code>:控制是否啟動此精煉步驟。當設定為<code translate="no">true</code> 時，系統會使用更高精度或未壓縮的表示來重新計算距離。</p></li>
@@ -208,7 +208,7 @@ res = MilvusClient.search(
      <td><p>用來以壓縮形式表示每個子向量中心點索引的位元數。每個編碼本將包含 $2^{textit{nbits}}$ 的中心點。例如，如果<code translate="no">nbits</code> 設定為 8，則每個子向量將由 8 位元的 centroid 索引表示。如此一來，該子向量的編碼簿中就有 2^8$ (256) 個可能的中心點。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 64]</p>
 <p><strong>預設值</strong>：<code translate="no">8</code></p></td>
-     <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼簿，可能會導致原始向量的表示更精確。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
+     <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼本，可能會導致原始向量的表示更精確。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -261,6 +261,6 @@ res = MilvusClient.search(
      <td><p>放大係數，用來控制在精細化（重新排序）階段中，相對於要求的前 K 個結果，有多少額外的候選人會被檢驗。</p></td>
      <td><p><strong>類型</strong>：浮動<strong>範圍</strong>：[1,<em>float_max</em>)</p>
 <p><strong>預設值</strong>：1</p></td>
-     <td><p><code translate="no">refine_k</code> 的值越高，可提高召回率和準確度，但也會增加搜尋時間和資源使用。值為 1 表示精煉過程只考慮初始的前 K 個結果。</p></td>
+     <td><p><code translate="no">refine_k</code> 的較高值可以提高召回率和精確度，但也會增加搜尋時間和資源使用。值為 1 表示精煉過程只考慮初始的前 K 個結果。</p></td>
    </tr>
 </table>

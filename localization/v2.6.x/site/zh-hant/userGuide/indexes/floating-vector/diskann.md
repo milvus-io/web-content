@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p><strong>DISKANN</strong>結合了高效向量搜尋的兩項關鍵技術：</p>
 <ul>
-<li><p><strong>Vamana 圖形</strong>-<strong>以磁碟為基礎</strong>、<strong>以圖形為</strong> <strong>基</strong>礎的索引，可連結資料點（或向量）以在搜尋過程中進行有效率的導航。</p></li>
+<li><p><strong>Vamana 圖形</strong>-<strong>以磁碟為基礎</strong>、<strong>以圖形為</strong> <strong>基</strong>礎的索引，可連結資料點（或向量）以在搜尋過程中有效導航。</p></li>
 <li><p><strong>Product Quantization (PQ)</strong>- 縮小向量大小的<strong>記憶體內</strong>壓縮方法，可快速計算向量間的近似距離。</p></li>
 </ul>
 <h3 id="Index-construction" class="common-anchor-header">索引建構</h3><h4 id="Vamana-graph" class="common-anchor-header">Vamana 圖形</h4><p>Vamana 圖是 DISKANN 基於磁碟策略的核心。它可以處理非常大的資料集，因為它不需要在建立期間或之後完全駐留在記憶體中。</p>
@@ -216,7 +216,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>微調 DISKANN 的參數可讓您根據特定的資料集和搜尋工作負載調整其行為，在速度、準確性和記憶體使用量之間取得適當的平衡。</p>
+    </button></h2><p>微調 DISKANN 的參數可讓您針對特定資料集和搜尋工作量調整其行為，在速度、準確性和記憶體使用量之間取得適當的平衡。</p>
 <h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>這些參數會影響 DISKANN 索引的建構方式。調整這些參數會影響索引大小、建立時間和搜尋品質。</p>
 <table>
    <tr>

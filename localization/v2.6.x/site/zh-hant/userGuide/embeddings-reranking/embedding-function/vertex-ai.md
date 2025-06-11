@@ -105,7 +105,7 @@ beta: Milvus 2.6.x
 <li><p><strong>環境變數</strong>- 最低優先順序</p></li>
 </ul>
 <p><strong>Milvus 配置檔案 (milvus.yaml)</strong></p>
-<p>對於持久性、群集範圍的設定，憑證 json 資料可以 base64 格式編碼，然後在 milvus.yaml 檔案中定義。<code translate="no">cat credentials.json|jq .|base64</code>替換<code translate="no">credentials.json</code> 到您的憑證檔案路徑</p>
+<p>對於持久性、群集範圍的設定，憑證 json 資料可以 base64 格式編碼，然後在 milvus.yaml 檔案中定義。<code translate="no">cat credentials.json|jq .|base64</code>將<code translate="no">credentials.json</code> 替換為您的憑證檔案路徑</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">credential:</span>
   <span class="hljs-attr">gcp1:</span>
     <span class="hljs-attr">credential_json:</span>  <span class="hljs-comment"># base64 based gcp credential data</span>

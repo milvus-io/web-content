@@ -1,7 +1,7 @@
 ---
 id: embed-with-openai.md
 order: 2
-summary: Milvus integrates with OpenAI's models via the OpenAIEmbeddingFunction class.
+summary: Milvus 透過 OpenAIEmbeddingFunction 類別與 OpenAI 的模型整合。
 title: OpenAI
 ---
 <h1 id="OpenAI" class="common-anchor-header">OpenAI<button data-href="#OpenAI" class="anchor-icon" translate="no">
@@ -19,12 +19,12 @@ title: OpenAI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus integrates with OpenAI’s models via the <strong>OpenAIEmbeddingFunction</strong> class. This class provides methods for encoding documents and queries using the pretrained OpenAI models and returning the embeddings as dense vectors compatible with Milvus indexing. To utilize this functionality, obtain an API key from <a href="https://openai.com/api/">OpenAI</a> by creating an account on their platform.</p>
-<p>To use this feature, install the necessary dependencies:</p>
+    </button></h1><p>Milvus 透過<strong>OpenAIEmbeddingFunction</strong>類與 OpenAI 的模型整合。這個類別提供了使用預先訓練的 OpenAI 模型來編碼文件和查詢的方法，並將嵌入返回為與 Milvus 索引相容的密集向量。若要使用此功能，請在<a href="https://openai.com/api/">OpenAI</a>平台上建立帳號，從<a href="https://openai.com/api/">OpenAI</a>取得 API 金鑰。</p>
+<p>要使用此功能，請安裝必要的相依性：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, instantiate the <strong>OpenAIEmbeddingFunction</strong>:</p>
+<p>然後，實體化<strong>OpenAIEmbeddingFunction</strong>：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 openai_ef = model.dense.OpenAIEmbeddingFunction(
@@ -33,16 +33,16 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
     dimensions=<span class="hljs-number">512</span> <span class="hljs-comment"># Set the embedding dimensionality</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Parameters</strong>:</p>
+<p><strong>參數</strong>：</p>
 <ul>
-<li><p><strong>model_name</strong> (<em>string</em>)</p>
-<p>The name of the OpenAI model to use for encoding. Valid options are <strong>text-embedding-3-small</strong>, <strong>text-embedding-3-large</strong>, and <strong>text-embedding-ada-002</strong> (default).</p></li>
-<li><p><strong>api_key</strong> (<em>string</em>)</p>
-<p>The API key for accessing the OpenAI API.</p></li>
-<li><p><strong>dimensions</strong> (<em>int</em>)</p>
-<p>The number of dimensions the resulting output embeddings should have. Only supported in <strong>text-embedding-3</strong> and later models.</p></li>
+<li><p><strong>model_name</strong><em>(string</em>)</p>
+<p>用於編碼的 OpenAI 模型名稱。有效選項為<strong>text-embedding-3-small</strong>、<strong>text-</strong> <strong>embedding-</strong> <strong>3-large</strong> 及<strong>text-embedding-ada-002</strong>（預設）。</p></li>
+<li><p><strong>api_key</strong><em>(字串</em>)</p>
+<p>存取 OpenAI API 的 API 金鑰。</p></li>
+<li><p><strong>dimensions</strong><em>(int</em>)</p>
+<p>輸出的嵌入結果應該有的尺寸數。僅在<strong>text-embedding-3</strong>及更新的模型中支援。</p></li>
 </ul>
-<p>To create embeddings for documents, use the <strong>encode_documents()</strong> method:</p>
+<p>若要為文件建立嵌入式資料，請使用<strong>encode_documents()</strong>方法：</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
@@ -56,7 +56,7 @@ docs_embeddings = openai_ef.encode_documents(docs)
 <span class="hljs-comment"># Print dimension and shape of embeddings</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, openai_ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>預期的輸出與下面相似：</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">1.76741909e-02</span>, -<span class="hljs-number">2.04964578e-02</span>, -<span class="hljs-number">1.09788161e-02</span>, -<span class="hljs-number">5.27223349e-02</span>,
         <span class="hljs-number">4.23139781e-02</span>, -<span class="hljs-number">6.64533582e-03</span>,  <span class="hljs-number">4.21088142e-03</span>,  <span class="hljs-number">1.04644023e-01</span>,
         <span class="hljs-number">5.10009527e-02</span>,  <span class="hljs-number">5.32827862e-02</span>, -<span class="hljs-number">3.26061808e-02</span>, -<span class="hljs-number">3.66494283e-02</span>,
@@ -66,7 +66,7 @@ docs_embeddings = openai_ef.encode_documents(docs)
        -<span class="hljs-number">5.76633997e-02</span>,  <span class="hljs-number">9.68257990e-03</span>,  <span class="hljs-number">4.62721288e-02</span>, -<span class="hljs-number">4.33261096e-02</span>])]
 Dim: <span class="hljs-number">512</span> (<span class="hljs-number">512</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<p>To create embeddings for queries, use the <strong>encode_queries()</strong> method:</p>
+<p>要為查詢建立內嵌，請使用<strong>encode_queries()</strong>方法：</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 
@@ -77,7 +77,7 @@ query_embeddings = openai_ef.encode_queries(queries)
 <span class="hljs-comment"># Print dimension and shape of embeddings</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, openai_ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>預期的輸出與下列內容相似：</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">0.00530251</span>, -<span class="hljs-number">0.01907905</span>, -<span class="hljs-number">0.01672608</span>, -<span class="hljs-number">0.05030033</span>,  <span class="hljs-number">0.01635982</span>,
        -<span class="hljs-number">0.03169853</span>, -<span class="hljs-number">0.0033602</span> ,  <span class="hljs-number">0.09047844</span>,  <span class="hljs-number">0.00030747</span>,  <span class="hljs-number">0.11853652</span>,
        -<span class="hljs-number">0.02870182</span>, -<span class="hljs-number">0.01526102</span>,  <span class="hljs-number">0.05505067</span>,  <span class="hljs-number">0.00993909</span>, -<span class="hljs-number">0.07165466</span>,

@@ -1,9 +1,9 @@
 ---
 id: four_layers.md
-summary: Storage/computing disaggregation structure in Milvus.
-title: Storage/Computing Disaggregation
+summary: Milvus 中的儲存/計算分解結構。
+title: 儲存/計算分解
 ---
-<h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Storage/Computing Disaggregation<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
+<h1 id="StorageComputing-Disaggregation" class="common-anchor-header">儲存/計算分解<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Following the principle of data plane and control plane disaggregation, Milvus comprises four layers that are mutually independent in terms of scalability and disaster recovery.</p>
-<h2 id="Access-layer" class="common-anchor-header">Access layer<button data-href="#Access-layer" class="anchor-icon" translate="no">
+    </button></h1><p>依據資料平面與控制平面分解的原則，Milvus 包含四個層級，在可擴充性及災難復原方面相互獨立。</p>
+<h2 id="Access-layer" class="common-anchor-header">存取層<button data-href="#Access-layer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,12 +34,12 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Composed of a group of stateless proxies, the access layer is the front layer of the system and endpoint to users. It validates client requests and reduces the returned results:</p>
+    </button></h2><p>存取層由一組無狀態代理所組成，是系統的前端層，也是使用者的終點。它驗證用戶端的請求，並減少返回的結果：</p>
 <ul>
-<li>Proxy is in itself stateless. It provides a unified service address using load balancing components such as Nginx, Kubernetes Ingress, NodePort, and LVS.</li>
-<li>As Milvus employs a massively parallel processing (MPP) architecture, the proxy aggregates and post-process the intermediate results before returning the final results to the client.</li>
+<li>代理本身是無狀態的。它使用負載平衡元件（如 Nginx、Kubernetes Ingress、NodePort 和 LVS）提供統一的服務位址。</li>
+<li>由於 Milvus 採用大規模平行處理 (MPP) 架構，因此 Proxy 會先彙集並後加工中間結果，再將最終結果傳回給用戶端。</li>
 </ul>
-<h2 id="Coordinator-service" class="common-anchor-header">Coordinator service<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
+<h2 id="Coordinator-service" class="common-anchor-header">協調器服務<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,12 +54,12 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The coordinator service assigns tasks to the worker nodes and functions as the system’s brain. The tasks it takes on include cluster topology management, load balancing, timestamp generation, data declaration, and data management.</p>
-<p>There are three coordinator types: root coordinator (root coord), data coordinator (data coord), and query coordinator (query coord).</p>
-<h3 id="Root-coordinator-root-coord" class="common-anchor-header">Root coordinator (root coord)</h3><p>Root coord handles data definition language (DDL) and data control language (DCL) requests, such as create or delete collections, partitions, or indexes, as well as manage TSO (timestamp Oracle) and time ticker issuing.</p>
-<h3 id="Query-coordinator-query-coord" class="common-anchor-header">Query coordinator (query coord)</h3><p>Query coord manages topology and load balancing for the query nodes, and handoff from growing segments to sealed segments.</p>
-<h3 id="Data-coordinator-data-coord" class="common-anchor-header">Data coordinator (data coord)</h3><p>Data coord manages topology of the data nodes and index nodes, maintains metadata, and triggers flush, compact, and index building and other background data operations.</p>
-<h2 id="Worker-nodes" class="common-anchor-header">Worker nodes<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
+    </button></h2><p>協調器服務會指派任務給工作節點，並扮演系統大腦的角色。它負責的任務包括群集拓樸管理、負載平衡、時間戳記產生、資料宣告和資料管理。</p>
+<p>有三種協調器類型：根協調器 (root coordinator)、資料協調器 (data coordinator) 和查詢協調器 (query coordinator)。</p>
+<h3 id="Root-coordinator-root-coord" class="common-anchor-header">根協調器 (root coordinator)</h3><p>根協調器處理資料定義語言 (DDL) 和資料控制語言 (DCL) 請求，例如建立或刪除集合、分割或索引，以及管理 TSO（時戳 Oracle）和時間記錄發行。</p>
+<h3 id="Query-coordinator-query-coord" class="common-anchor-header">查詢協調員 (query coordinator)</h3><p>查詢協調員管理查詢節點的拓樸和負載平衡，以及從成長中的區段到封閉區段的交接。</p>
+<h3 id="Data-coordinator-data-coord" class="common-anchor-header">資料協調器 (資料協調器)</h3><p>資料協調器管理資料節點和索引節點的拓樸結構、維護元資料、觸發刷新、壓縮和索引建立以及其他背景資料作業。</p>
+<h2 id="Worker-nodes" class="common-anchor-header">工作節點<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,11 +74,11 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The arms and legs. Worker nodes are dumb executors that follow instructions from the coordinator service and execute data manipulation language (DML) commands from the proxy. Worker nodes are stateless thanks to separation of storage and computation, and can facilitate system scale-out and disaster recovery when deployed on Kubernetes. There are three types of worker nodes:</p>
-<h3 id="Query-node" class="common-anchor-header">Query node</h3><p>Query node retrieves incremental log data and turn them into growing segments by subscribing to the log broker, loads historical data from the object storage, and runs hybrid search between vector and scalar data.</p>
-<h3 id="Data-node" class="common-anchor-header">Data node</h3><p>Data node retrieves incremental log data by subscribing to the log broker, processes mutation requests, and packs log data into log snapshots and stores them in the object storage.</p>
-<h3 id="Index-node" class="common-anchor-header">Index node</h3><p>Index node builds indexes.  Index nodes do not need to be memory resident, and can be implemented with the serverless framework.</p>
-<h2 id="Storage" class="common-anchor-header">Storage<button data-href="#Storage" class="anchor-icon" translate="no">
+    </button></h2><p>手臂和腿。工作節點是遵循協調器服務指示的啞巴執行器，並執行來自代理的資料處理語言 (DML) 指令。由於儲存與計算的分離，工作節點是無狀態的，當部署在 Kubernetes 上時，可促進系統擴充與災難復原。Worker 節點有三種類型：</p>
+<h3 id="Query-node" class="common-anchor-header">查詢節點</h3><p>查詢節點擷取增量日誌資料，並透過訂閱日誌經紀人將其轉換為成長中的區段，從物件儲存載入歷史資料，並執行向量與標量資料之間的混合搜尋。</p>
+<h3 id="Data-node" class="common-anchor-header">資料節點</h3><p>資料節點透過訂閱日誌中介擷取增量日誌資料、處理突變請求、將日誌資料打包成日誌快照並儲存在物件儲存空間。</p>
+<h3 id="Index-node" class="common-anchor-header">索引節點</h3><p>索引節點建立索引。  索引節點不需要駐留記憶體，可以使用無伺服器框架實作。</p>
+<h2 id="Storage" class="common-anchor-header">儲存空間<button data-href="#Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,13 +93,13 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Storage is the bone of the system, responsible for data persistence. It comprises meta storage, log broker, and object storage.</p>
-<h3 id="Meta-storage" class="common-anchor-header">Meta storage</h3><p>Meta storage stores snapshots of metadata such as collection schema, and message consumption checkpoints. Storing metadata demands extremely high availability, strong consistency, and transaction support, so Milvus chose etcd for meta store. Milvus also uses etcd for service registration and health check.</p>
-<h3 id="Object-storage" class="common-anchor-header">Object storage</h3><p>Object storage stores snapshot files of logs, index files for scalar and vector data, and intermediate query results. Milvus uses MinIO as object storage and can be readily deployed on AWS S3 and Azure Blob, two of the world’s most popular, cost-effective storage services. However, object storage has high access latency and charges by the number of queries. To improve its performance and lower the costs, Milvus plans to implement cold-hot data separation on a memory- or SSD-based cache pool.</p>
-<h3 id="WAL-storage" class="common-anchor-header">WAL storage</h3><p>Write-Ahead Log (WAL) storage is the foundation of data durability and consistency in distributed systems. Before any change is committed, it’s first recorded in a log—ensuring that, in the event of a failure, you can recover exactly where you left off.</p>
-<p>Common WAL implementations include Kafka, Pulsar, and Woodpecker. Unlike traditional disk-based solutions, Woodpecker adopts a cloud-native, zero-disk design that writes directly to object storage. This approach scales effortlessly with your needs and simplifies operations by removing the overhead of managing local disks.</p>
-<p>By logging every write operation ahead of time, the WAL layer guarantees a reliable, system-wide mechanism for recovery and consistency—no matter how complex your distributed environment grows.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+    </button></h2><p>儲存是系統的骨骼，負責資料的持久化。它包括元儲存、日誌中介和物件儲存。</p>
+<h3 id="Meta-storage" class="common-anchor-header">元儲存</h3><p>元存儲會儲存元資料的快照，例如集合模式和訊息消耗檢查點。儲存元資料需要極高的可用性、強大的一致性和交易支援，因此 Milvus 選擇 etcd 作為元儲存。Milvus 也使用 etcd 進行服務註冊和健康檢查。</p>
+<h3 id="Object-storage" class="common-anchor-header">物件儲存</h3><p>物件儲存存放日誌的快照檔案、標量與向量資料的索引檔案，以及中間查詢結果。Milvus 使用 MinIO 作為物件儲存，並可隨時部署在 AWS S3 和 Azure Blob 這兩種全球最流行、最具成本效益的儲存服務上。然而，物件儲存有很高的存取延遲，並且會依據查詢次數收費。為了提升效能並降低成本，Milvus 計劃在記憶體或 SSD 為基礎的快取記憶體池上實施冷熱資料分離。</p>
+<h3 id="WAL-storage" class="common-anchor-header">WAL 儲存</h3><p>Write-Ahead Log (WAL) 儲存是分散式系統中資料耐久性與一致性的基礎。在提交任何變更之前，首先會將其記錄在日誌中，以確保在發生故障時，可以準確地恢復到之前的位置。</p>
+<p>常見的 WAL 實作包括 Kafka、Pulsar 和 Woodpecker。與傳統基於磁碟的解決方案不同，Woodpecker 採用雲原生、零磁碟設計，直接寫入物件儲存。這種方法可以毫不費力地根據您的需求進行擴展，並透過消除管理本機磁碟的開銷來簡化作業。</p>
+<p>透過提前記錄每次寫入作業，WAL 層可保證可靠的全系統復原與一致性機制 - 無論您的分散式環境有多複雜。</p>
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,5 +115,5 @@ title: Storage/Computing Disaggregation
         ></path>
       </svg>
     </button></h2><ul>
-<li>Read <a href="/docs/main_components.md">Main Components</a> for more details about the Milvus architecture.</li>
+<li>閱讀「<a href="/docs/zh-hant/main_components.md">主要元件</a>」，瞭解 Milvus 架構的更多詳細資訊。</li>
 </ul>

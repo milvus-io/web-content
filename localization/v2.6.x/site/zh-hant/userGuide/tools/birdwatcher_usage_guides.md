@@ -1,9 +1,9 @@
 ---
 id: birdwatcher_usage_guides.md
-summary: Learn how to use Birdwatch to debug Milvus.
-title: Use Birdwatcher
+summary: 學習如何使用 Birdwatch 調試 Milvus。
+title: 使用觀鳥者
 ---
-<h1 id="Use-Birdwatcher" class="common-anchor-header">Use Birdwatcher<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
+<h1 id="Use-Birdwatcher" class="common-anchor-header">使用觀鳥者<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Use Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through how to use Birdwatcher to check the state of your Milvus and configure it on the fly.</p>
-<h2 id="Start-Birdwatcher" class="common-anchor-header">Start Birdwatcher<button data-href="#Start-Birdwatcher" class="anchor-icon" translate="no">
+    </button></h1><p>本指南將教您如何使用 Birdwatcher 檢查 Milvus 的狀態並進行配置。</p>
+<h2 id="Start-Birdwatcher" class="common-anchor-header">啟動觀鳥者<button data-href="#Start-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,13 +34,13 @@ title: Use Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Birdwatcher is a command-line tool, you can start it as follows:</p>
+    </button></h2><p>Birdwatcher 是一個命令列工具，您可以如下方式啟動它：</p>
 <pre><code translate="no" class="language-shell">./birdwatcher
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you will be greeted with the following prompt:</p>
+<p>然後會出現以下提示：</p>
 <pre><code translate="no" class="language-shell">Offline &gt;
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-to-etcd" class="common-anchor-header">Connect to etcd<button data-href="#Connect-to-etcd" class="anchor-icon" translate="no">
+<h2 id="Connect-to-etcd" class="common-anchor-header">連接至 etcd<button data-href="#Connect-to-etcd" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,29 +55,29 @@ title: Use Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You need to use Birdwatcher to connect to etcd before any other operations.</p>
+    </button></h2><p>在進行其他操作之前，您需要使用 Birdwatcher 連線至 etcd。</p>
 <ul>
-<li><p>Connect with default settings</p>
+<li><p>使用預設設定連接</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect
 Milvus(by-dev) &gt;
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Connect from Birdwatcher in a pod</p>
-<p>If you choose to run Birdwatcher in a Kubernetes pod, you need first obtain the IP address of etcd as follows:</p>
+<li><p>從 Pod 中的 Birdwatcher 連線</p>
+<p>如果您選擇在 Kubernetes pod 中執行 Birdwatcher，您需要先取得 etcd 的 IP 位址，如下所示：</p>
 <pre><code translate="no" class="language-shell">kubectl get pod my-release-etcd-0 -o &#x27;jsonpath={.status.podIP}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Then access the shell of the pod.</p>
+<p>然後存取 pod 的 shell。</p>
 <pre><code translate="no" class="language-shell">kubectl exec --stdin --tty birdwatcher-7f48547ddc-zcbxj -- /bin/sh
 <button class="copy-code-btn"></button></code></pre>
-<p>Finally, use the returned IP address to connect to etcd as follows:</p>
+<p>最後，使用傳回的 IP 位址連接 etcd，如下所示：</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --etcd ${ETCD_IP_ADDR}:2379
 Milvus(by-dev)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Connect with a different root path</p>
-<p>If the root path of your Milvus is different from <code translate="no">by-dev</code> and you are prompted with an error reporting about an incorrect root path, you can connect to etcd as follows:</p>
+<li><p>使用不同的根目錄進行連接</p>
+<p>如果您的 Milvus 的根路徑與<code translate="no">by-dev</code> 不同，並且提示您報告錯誤的根路徑，您可以按以下方式連線到 etcd：</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --rootPath my-release
 Milvus(my-release) &gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>If you do not know the root path of your Milvus, connect to etcd as follows:</p>
+<p>如果您不知道您的 Milvus 的根目錄，請按以下方式連線到 etcd：</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --dry
 using dry mode, ignore rootPath and metaPath
 Etcd(127.0.0.1:2379) &gt; find-milvus
@@ -87,7 +87,7 @@ Etcd(127.0.0.1:2379) &gt; use my-release
 Milvus(my-release) &gt;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Check-Milvus-status" class="common-anchor-header">Check Milvus status<button data-href="#Check-Milvus-status" class="anchor-icon" translate="no">
+<h2 id="Check-Milvus-status" class="common-anchor-header">檢查 Milvus 狀態<button data-href="#Check-Milvus-status" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -102,7 +102,7 @@ Milvus(my-release) &gt;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can use the <code translate="no">show</code> commands to check Milvus status.</p>
+    </button></h2><p>您可以使用<code translate="no">show</code> 命令檢查 Milvus 狀態。</p>
 <pre><code translate="no" class="language-shell">Milvus(my-release) &gt; show -h
 Usage:
    show [command]
@@ -135,7 +135,7 @@ Flags:
 
 Use &quot; show [command] --help&quot; for more information about a command.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-sessions" class="common-anchor-header">List sessions</h3><p>To list sessions associated with different components in Milvus:</p>
+<h3 id="List-sessions" class="common-anchor-header">列出會話</h3><p>列出與 Milvus 不同元件相關的 session：</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show session
 Session:datacoord, ServerID: 3, Version: 2.2.11, Address: 10.244.0.8:13333
 Session:datanode, ServerID: 6, Version: 2.2.11, Address: 10.244.0.8:21124
@@ -146,19 +146,19 @@ Session:querycoord, ServerID: 7, Version: 2.2.11, Address: 10.244.0.8:19531
 Session:querynode, ServerID: 2, Version: 2.2.11, Address: 10.244.0.8:21123
 Session:rootcoord, ServerID: 1, Version: 2.2.11, Address: 10.244.0.8:53100
 <button class="copy-code-btn"></button></code></pre>
-<p>In the command output, each session entry listed by <code translate="no">show session</code> corresponds to a node or service that is currently active and registered in <strong>etcd</strong>.</p>
-<h3 id="Check-databases-and-collections" class="common-anchor-header">Check databases and collections</h3><p>You can list all databases and collections.</p>
+<p>在命令輸出中，由<code translate="no">show session</code> 列出的每個會話項目對應於目前活動並已在<strong>etcd</strong> 中註冊的節點或服務。</p>
+<h3 id="Check-databases-and-collections" class="common-anchor-header">檢查資料庫和資料集</h3><p>您可以列出所有資料庫和集合。</p>
 <ul>
-<li><p>List databases</p>
-<p>In the command output, you can find information about every database.</p>
+<li><p>列出資料庫</p>
+<p>在指令輸出中，您可以找到每個資料庫的相關資訊。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show database
 =============================
 ID: 1   Name: default
 TenantID:        State: DatabaseCreated
 --- Total Database(s): 1
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List collections</p>
-<p>In the command output, you can find detailed information about every collection.</p>
+<li><p>列出集合</p>
+<p>在指令輸出中，您可以找到每個收藏集的詳細資訊。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collections
 ================================================================================
 DBID: 1
@@ -187,8 +187,8 @@ Start position for channel by-dev-rootcoord-dml_0(by-dev-rootcoord-dml_0_4434072
 --- Total channel: 1     Healthy collections: 1
 ================================================================================
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>View a specific collection</p>
-<p>You can view a specific collection by specifying its ID.</p>
+<li><p>檢視特定的收藏集</p>
+<p>您可以透過指定 ID 檢視特定的收藏集。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collection-history --id 443407225551410746
 ================================================================================
 DBID: 1
@@ -214,20 +214,20 @@ Enable Dynamic Schema: false
 Consistency Level: Bounded
 Start position for channel by-dev-rootcoord-dml_0(by-dev-rootcoord-dml_0_443407225551410746v0): [1 0 28 175 133 76 39 6]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>View all loaded collections</p>
-<p>You can have Birdwatcher filter all loaded collections.</p>
+<li><p>檢視所有載入的收藏集</p>
+<p>您可以讓 Birdwatcher 過濾所有已載入的集合。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collection-loaded
 Version: [&gt;= 2.2.0]     CollectionID: 443407225551410746
 ReplicaNumber: 1        LoadStatus: Loaded
 --- Collections Loaded: 1
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List all channel checkpoints of a collection</p>
-<p>You can have Birdwatcher list all checkpoints of a specific collection.</p>
+<li><p>列出集合的所有頻道檢查點</p>
+<p>您可以讓 Birdwatcher 列出特定集合的所有檢查點。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show checkpoint --collection 443407225551410746
 vchannel by-dev-rootcoord-dml_0_443407225551410746v0 seek to 2023-08-08 09:36:09.54 +0000 UTC, cp channel: by-dev-rootcoord-dml_0_443407225551410746v0, Source: Channel Checkpoint
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Check-index-details" class="common-anchor-header">Check index details</h3><p>Run the following command to list all index files in detail.</p>
+<h3 id="Check-index-details" class="common-anchor-header">檢查索引詳細資料</h3><p>執行以下指令，詳細列出所有索引檔案。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show index
 *************2.1.x***************
 *************2.2.x***************
@@ -238,12 +238,12 @@ Index Type: HNSW        Metric Type: L2
 Index Params: 
 ==================================================================
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-partitions" class="common-anchor-header">List partitions</h3><p>Run the following command to list all partitions in a specific collection.</p>
+<h3 id="List-partitions" class="common-anchor-header">列出分區</h3><p>執行下列指令可列出特定資料集中的所有磁碟分割。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show partition --collection 443407225551410746
 Parition ID: 443407225551410747 Name: _default  State: PartitionCreated
 --- Total Database(s): 1
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-channel-status" class="common-anchor-header">Check channel status</h3><p>Run the following command to view channel status</p>
+<h3 id="Check-channel-status" class="common-anchor-header">檢查通道狀態</h3><p>執行下列指令檢視通道狀態</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show channel-watch
 =============================
 key: by-dev/meta/channelwatch/6/by-dev-rootcoord-dml_0_443407225551410746v0
@@ -255,21 +255,21 @@ Flushed segments: []
 Dropped segments: []
 --- Total Channels: 1
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-all-replicas-and-segments" class="common-anchor-header">List all replicas and segments</h3><ul>
-<li><p>List all replicas</p>
-<p>Run the following command to list all replicas and their corresponding collections.</p>
+<h3 id="List-all-replicas-and-segments" class="common-anchor-header">列出所有副本和區段</h3><ul>
+<li><p>列出所有副本</p>
+<p>執行下列指令以列出所有複製品及其對應的集合。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show replica
 ================================================================================
 ReplicaID: 443407225685278721 CollectionID: 443407225551410746 version:&gt;=2.2.0
 All Nodes:[2]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List all segments</p>
-<p>Run the following command to list all segments and their status</p>
+<li><p>列出所有區段</p>
+<p>執行下列指令，以列出所有區段及其狀態</p>
 <pre><code translate="no" class="language-shell">SegmentID: 443407225551610865 State: Flushed, Row Count:5979
 --- Growing: 0, Sealed: 0, Flushed: 1
 --- Total Segments: 1, row count: 5979
 <button class="copy-code-btn"></button></code></pre>
-<p>Run the following command to list all loaded segments in detail. For Milvus 2.1.x, use <code translate="no">show segment-loaded</code> instead.</p>
+<p>執行以下指令，詳細列出所有載入的區段。對於 Milvus 2.1.x，請使用<code translate="no">show segment-loaded</code> 代替。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show segment-loaded-grpc
 ===========
 ServerID 2
@@ -280,7 +280,7 @@ SegmentID: 443407225551610865 CollectionID: 443407225551410746 Channel: by-dev-r
 Sealed segments number: 1    
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="List-configurations" class="common-anchor-header">List configurations</h3><p>You can have Birdwatcher list the current configurations of each Milvus component.</p>
+<h3 id="List-configurations" class="common-anchor-header">列出配置</h3><p>您可以讓 Birdwatcher 列出每個 Milvus 元件的目前配置。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show configurations
 client nil Session:proxy, ServerID: 8, Version: 2.2.11, Address: 10.244.0.8:19529
 Component rootcoord-1
@@ -300,7 +300,7 @@ querynode.cache.enabled: true
 querynode.cache.memorylimit: 2147483648
 querynode.scheduler.maxreadconcurrentratio: 2
 <button class="copy-code-btn"></button></code></pre>
-<p>As an alternative, you can visit each Milvus component to find its configuration. The following demonstrates how to list the configuration of the QueryCoord with ID 7.</p>
+<p>或者，您可以訪問每個 Milvus 元件來查找其配置。下面演示如何列出 ID 為 7 的 QueryCoord 的配置。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show session
 Session:datacoord, ServerID: 3, Version: 2.2.11, Address: 10.244.0.8:13333
 Session:datanode, ServerID: 6, Version: 2.2.11, Address: 10.244.0.8:21124
@@ -335,7 +335,7 @@ Key: querycoord.balancer, Value: ScoreBasedBalancer
 Key: querycoord.autobalance, Value: true
 Key: querycoord.segmenttasktimeout, Value: 120000
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Backup-metrics" class="common-anchor-header">Backup metrics<button data-href="#Backup-metrics" class="anchor-icon" translate="no">
+<h2 id="Backup-metrics" class="common-anchor-header">備份指標<button data-href="#Backup-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -350,7 +350,7 @@ Key: querycoord.segmenttasktimeout, Value: 120000
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can have Birdwatcher back up metrics of all components</p>
+    </button></h2><p>您可以讓 Birdwatcher 備份所有元件的度量值。</p>
 <pre><code translate="no" class="language-shell">Milvus(my-release) &gt; backup
 Backing up ... 100%(2452/2451)
 backup etcd for prefix  done
@@ -364,8 +364,8 @@ http://10.244.0.10:9091/metrics
 http://10.244.0.10:9091/metrics
 backup for prefix done, stored in file: bw_etcd_ALL.230810-075211.bak.gz
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can check the file in the directory where you start Birdwatcher.</p>
-<h2 id="Probe-collections" class="common-anchor-header">Probe collections<button data-href="#Probe-collections" class="anchor-icon" translate="no">
+<p>然後您可以在啟動 Birdwatcher 的目錄中檢查該檔案。</p>
+<h2 id="Probe-collections" class="common-anchor-header">探查集合<button data-href="#Probe-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -380,8 +380,8 @@ backup for prefix done, stored in file: bw_etcd_ALL.230810-075211.bak.gz
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can have Birdwatcher probe the status of loaded collections with specified primary keys or mock queries.</p>
-<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">Probe collection with known primary key</h3><p>In the <code translate="no">probe</code> command, you should specify the primary key using the <code translate="no">pk</code> flag, and the collection ID using the <code translate="no">collection</code> flag.</p>
+    </button></h2><p>您可以讓 Birdwatcher 用指定的主索引鍵或模擬查詢探查已載入集合的狀態。</p>
+<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">探查已知主鍵的集合</h3><p>在<code translate="no">probe</code> 命令中，應使用<code translate="no">pk</code> 標誌指定主索引鍵，並使用<code translate="no">collection</code> 標誌指定集合 ID。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; probe pk --pk 110 --collection 442844725212299747
 PK 110 found on segment 442844725212299830
 Field id, value: &amp;{long_data:&lt;data:110 &gt; }
@@ -389,7 +389,7 @@ Field title, value: &amp;{string_data:&lt;data:&quot;Human Resources Dataficatio
 Field title_vector, value: &amp;{dim:768 float_vector:&lt;data:0.022454707 data:0.007861045 data:0.0063843643 data:0.024065714 data:0.013782166 data:0.018483251 data:-0.026526336 ... data:-0.06579628 data:0.00033906146 data:0.030992996 data:-0.028134001 data:-0.01311325 data:0.012471594 &gt; }
 Field article_meta, value: &amp;{json_data:&lt;data:&quot;{\&quot;link\&quot;:\&quot;https:\\/\\/towardsdatascience.com\\/human-resources-datafication-d44c8f7cb365\&quot;,\&quot;reading_time\&quot;:6,\&quot;publication\&quot;:\&quot;Towards Data Science\&quot;,\&quot;claps\&quot;:256,\&quot;responses\&quot;:0}&quot; &gt; }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">Probe all collections with mock queries</h3><p>You can also have Birdwatcher probe all collections with mock queries.</p>
+<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">使用模擬查詢探查所有集合</h3><p>您也可以讓 Birdwatcher 使用模擬查詢探查所有集合。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; probe query
 probing collection 442682158191982314
 Found vector field vector(103) with dim[384], indexID: 442682158191990455

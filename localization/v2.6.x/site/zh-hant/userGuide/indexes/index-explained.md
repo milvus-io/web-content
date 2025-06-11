@@ -3,7 +3,7 @@ id: index-explained.md
 title: 索引說明
 summary: >-
   索引是建立在資料之上的額外結構。其內部結構取決於所使用的近似近鄰搜尋演算法。索引可加快搜尋速度，但會在搜尋過程中產生額外的預處理時間、空間和
-  RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍很重要）。因此，本文將解釋如何將使用索引的成本降至最低，同時將好處最大化。
+  RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍然很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。
 ---
 <h1 id="Index-Explained" class="common-anchor-header">索引說明<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
