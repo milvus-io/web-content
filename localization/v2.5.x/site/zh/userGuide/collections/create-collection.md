@@ -3,6 +3,7 @@ id: create-collection.md
 title: 创建 Collections
 summary: 您可以通过定义 Schema、索引参数、度量类型以及创建时是否加载来创建一个 Collection。本页将介绍如何从头开始创建 Collections。
 ---
+
 <h1 id="Create-Collection" class="common-anchor-header">创建 Collections<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,9 +39,9 @@ summary: 您可以通过定义 Schema、索引参数、度量类型以及创建�
 <p>你可以确定 Collections 的方方面面，包括其 Schema、索引参数、度量类型，以及是否在创建时加载，以确保集合完全满足你的要求。</p>
 <p>要创建一个 Collection，您需要</p>
 <ul>
-<li><p><a href="/docs/zh/create-collection.md#Create-Schema">创建 Schema</a></p></li>
-<li><p><a href="/docs/zh/create-collection.md#Optional-Set-Index-Parameters">设置索引参数</a>（可选）</p></li>
-<li><p><a href="/docs/zh/create-collection.md#Create-a-Collection">创建 Collections</a></p></li>
+<li><p><a href="/docs/zh/v2.5.x/create-collection.md#Create-Schema">创建 Schema</a></p></li>
+<li><p><a href="/docs/zh/v2.5.x/create-collection.md#Optional-Set-Index-Parameters">设置索引参数</a>（可选）</p></li>
+<li><p><a href="/docs/zh/v2.5.x/create-collection.md#Create-a-Collection">创建 Collections</a></p></li>
 </ul>
 <h2 id="Create-Schema" class="common-anchor-header">创建 Schema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,10 +58,10 @@ summary: 您可以通过定义 Schema、索引参数、度量类型以及创建�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Schema 定义了 Collections 的数据结构。创建 Collections 时，需要根据自己的要求设计模式。有关详细信息，请参阅<a href="/docs/zh/schema.md">Schema Explained</a>。</p>
+    </button></h2><p>Schema 定义了 Collections 的数据结构。创建 Collections 时，需要根据自己的要求设计模式。有关详细信息，请参阅<a href="/docs/zh/v2.5.x/schema.md">Schema Explained</a>。</p>
 <p>以下代码片段创建了一个模式，其中包含启用的 Dynamic Field 和三个必填字段，分别命名为<code translate="no">my_id</code> 、<code translate="no">my_vector</code> 和<code translate="no">my_varchar</code> 。</p>
 <div class="alert note">
-<p>您可以为任何标量字段设置默认值，并使其可归零。有关详情，请参阅<a href="/docs/zh/nullable-and-default.md">Nullable &amp; Default</a>。</p>
+<p>您可以为任何标量字段设置默认值，并使其可归零。有关详情，请参阅<a href="/docs/zh/v2.5.x/nullable-and-default.md">Nullable &amp; Default</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -68,14 +69,14 @@ summary: 您可以通过定义 Schema、索引参数、度量类型以及创建�
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 <span class="hljs-comment"># 3.1. Create schema</span>
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># 3.2. Add fields to schema</span>
@@ -83,6 +84,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;my_id&quot;</span>, 
 schema.add_field(field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -223,7 +225,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
     </button></h2><p>在特定字段上创建索引可加快对该字段的搜索。索引记录了 Collections 中实体的顺序。如以下代码片段所示，您可以使用<code translate="no">metric_type</code> 和<code translate="no">index_type</code> 为 Milvus 选择适当的方式为字段建立索引，并测量向量嵌入之间的相似性。</p>
 <p>在 Milvus 上，您可以使用<code translate="no">AUTOINDEX</code> 作为所有向量场的索引类型，并根据需要使用<code translate="no">COSINE</code> 、<code translate="no">L2</code> 和<code translate="no">IP</code> 中的一种作为度量类型。</p>
 <p>如上述代码片段所示，您需要为向量场同时设置索引类型和度量类型，而只需为标量场设置索引类型。索引对于向量字段是强制性的，建议您在筛选条件中经常使用的标量字段上创建索引。</p>
-<p>有关详情，请参阅<a href="/docs/zh/index-vector-fields.md">索引向量</a> <a href="/docs/zh/index-scalar-fields.md">字段</a>和<a href="/docs/zh/index-scalar-fields.md">索引标量字段</a>。</p>
+<p>有关详情，请参阅<a href="/docs/zh/v2.5.x/index-vector-fields.md">索引向量</a> <a href="/docs/zh/v2.5.x/index-scalar-fields.md">字段</a>和<a href="/docs/zh/v2.5.x/index-scalar-fields.md">索引标量字段</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -231,16 +233,17 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># 3.4. Add indexes</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
+field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
 )
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -323,7 +326,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -331,9 +334,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
 
@@ -414,7 +418,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -422,9 +426,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.6 Create a collection and index it separately</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq2</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_2&quot;</span>)
@@ -565,12 +570,13 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+\&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
+\&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">启用 mmap</h3><p>Milvus 默认在所有 Collections 上启用 mmap，允许 Milvus 将原始字段数据映射到内存中，而不是完全加载它们。这样可以减少内存占用，提高 Collections 的容量。有关 mmap 的详细信息，请参阅<a href="/docs/zh/mmap.md">使用 mmap</a>。</p>
+
+<h3 id="Enable-mmap" class="common-anchor-header">启用 mmap</h3><p>Milvus 默认在所有 Collections 上启用 mmap，允许 Milvus 将原始字段数据映射到内存中，而不是完全加载它们。这样可以减少内存占用，提高 Collections 的容量。有关 mmap 的详细信息，请参阅<a href="/docs/zh/v2.5.x/mmap.md">使用 mmap</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">纯文本</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -585,13 +591,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With MMap</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq4</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_4&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_4&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
+.build();
 client.createCollection(customizedSetupReq4);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">create_collection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_4&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -644,13 +651,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With TTL</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq5</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)
+.build();
 client.createCollection(customizedSetupReq5);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_5&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -701,13 +709,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With consistency level</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq6</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_6&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_6&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.consistencyLevel(ConsistencyLevel.BOUNDED)
+.build();
 client.createCollection(customizedSetupReq6);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_6&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -743,6 +752,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关一致性级别的更多信息，请参阅<a href="/docs/zh/tune_consistency.md">一致性</a>级别。</p>
+<p>有关一致性级别的更多信息，请参阅<a href="/docs/zh/v2.5.x/tune_consistency.md">一致性</a>级别。</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">启用动态字段</h3><p>Collections 中的动态字段是一个保留的 JavaScript Object Notation (JSON) 字段，名为<strong>$meta</strong>。启用该字段后，Milvus 会将每个实体中携带的所有非 Schema 定义字段及其值作为键值对保存在保留字段中。</p>
-<p>有关如何使用动态字段的详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">动态字段</a>。</p>
+<p>有关如何使用动态字段的详细信息，请参阅<a href="/docs/zh/v2.5.x/enable-dynamic-field.md">动态字段</a>。</p>

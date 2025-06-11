@@ -8,6 +8,7 @@ summary: >-
   المعلومات في تصميم نموذج البيانات، والذي يتضمن تحليل متطلبات العمل، وتحديد
   كيفية تنظيم المعلومات، وفهرسة البيانات لجعلها قابلة للبحث الدلالي.
 ---
+
 <h1 id="Schema-Design-Hands-On" class="common-anchor-header">التدريب العملي على تصميم المخطط<button data-href="#Schema-Design-Hands-On" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,19 +121,20 @@ collection_name = <span class="hljs-string">&quot;my_collection&quot;</span>
 client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
+auto_id=<span class="hljs-literal">False</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;article_id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;article id&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;title&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">200</span>, description=<span class="hljs-string">&quot;article title&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;author_info&quot;</span>, datatype=DataType.JSON, description=<span class="hljs-string">&quot;author information&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>, datatype=DataType.INT32, description=<span class="hljs-string">&quot;publish timestamp&quot;</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;image_url&quot;</span>, datatype=DataType.VARCHAR,  max_length=<span class="hljs-number">500</span>, description=<span class="hljs-string">&quot;image URL&quot;</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;image_url&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">500</span>, description=<span class="hljs-string">&quot;image URL&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;image_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;image vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, description=<span class="hljs-string">&quot;article summary&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;summary dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;summary sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -368,8 +370,8 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <p>قد تلاحظ الوسيطة <code translate="no">uri</code> في <code translate="no">MilvusClient</code> ، والتي تُستخدم للاتصال بخادم ميلفوس. يمكنك تعيين الوسيطات على النحو التالي:</p>
 <ul>
-<li><p>إذا كنت تحتاج فقط إلى قاعدة بيانات متجهية محلية للبيانات الصغيرة الحجم أو النماذج الأولية، فإن تعيين الوسيطة كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث تستخدم تلقائيًا <a href="/docs/ar/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</p></li>
-<li><p>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="/docs/ar/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام عنوان الخادم والمنفذ كـ uri، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين ميزة المصادقة على Milvus، استخدم "<your_username>:<your_password>" كرمز مميز، وإلا فلا تقم بتعيين الرمز المميز.</p></li>
+<li><p>إذا كنت تحتاج فقط إلى قاعدة بيانات متجهية محلية للبيانات الصغيرة الحجم أو النماذج الأولية، فإن تعيين الوسيطة كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث تستخدم تلقائيًا <a href="/docs/ar/v2.5.x/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</p></li>
+<li><p>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="/docs/ar/v2.5.x/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام عنوان الخادم والمنفذ كـ uri، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين ميزة المصادقة على Milvus، استخدم "<your_username>:<your_password>" كرمز مميز، وإلا فلا تقم بتعيين الرمز المميز.</p></li>
 <li><p>إذا كنت تستخدم <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، فاضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات في Zilliz Cloud.</p></li>
 </ul>
 <p>أما بالنسبة إلى <code translate="no">auto_id</code> في <code translate="no">MilvusClient.create_schema</code> ، فإن المعرف التلقائي هو سمة للحقل الأساسي الذي يحدد ما إذا كان سيتم تمكين الزيادة التلقائية للحقل الأساسي.  نظرًا لأننا قمنا بتعيين الحقل<code translate="no">article_id</code> كمفتاح أساسي ونريد إضافة معرف المقالة يدويًا، قمنا بتعيين <code translate="no">auto_id</code> False لتعطيل هذه الميزة.</p>
@@ -380,25 +382,26 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>,
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
+field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>,
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 <span class="hljs-keyword">import</span> java.util.ArrayList;
@@ -493,7 +496,7 @@ indexParams=<span class="hljs-string">&#x27;[
 
 <button class="copy-code-btn"></button></code></pre>
 <p>بمجرد إعداد معلمات الفهرس وتطبيقها، يتم تحسين Milvus لمعالجة الاستعلامات المعقدة على البيانات المتجهة والقياسية. تعمل هذه الفهرسة على تحسين أداء ودقة عمليات البحث عن التشابه داخل المجموعة، مما يسمح باسترجاع المقالات بكفاءة استنادًا إلى متجهات الصور والمتجهات الموجزة. من خلال الاستفادة من <code translate="no">AUTOINDEX</code> للمتجهات الكثيفة، و <code translate="no">SPARSE_INVERTED_INDEX</code> للمتجهات المتفرقة و <code translate="no">INVERTED_INDEX</code> للكميات القياسية، يمكن لـ Milvus تحديد النتائج الأكثر صلة وإرجاعها بسرعة، مما يحسن بشكل كبير من تجربة المستخدم الإجمالية وفعالية عملية استرجاع البيانات.</p>
-<p>هناك العديد من أنواع المؤشرات والمقاييس. لمزيد من المعلومات حولها، يمكنك الرجوع إلى <a href="/docs/ar/overview.md#Index-types">نوع فهرس Milvus</a> <a href="/docs/ar/glossary.md#Metric-type">ونوع مقياس Milvus</a>.</p>
+<p>هناك العديد من أنواع المؤشرات والمقاييس. لمزيد من المعلومات حولها، يمكنك الرجوع إلى <a href="/docs/ar/v2.5.x/overview.md#Index-types">نوع فهرس Milvus</a> <a href="/docs/ar/v2.5.x/glossary.md#Metric-type">ونوع مقياس Milvus</a>.</p>
 <h3 id="Create-Collection" class="common-anchor-header">إنشاء مجموعة</h3><p>مع تحديد المخطط والفهارس، نقوم بإنشاء "مجموعة" بهذه المعلمات. المجموعة بالنسبة لـ Milvus مثل الجدول في قاعدة بيانات علائقية.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
@@ -536,6 +539,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>يمكننا التحقق من إنشاء المجموعة بنجاح من خلال وصف المجموعة.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيز</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
@@ -587,4 +591,4 @@ curl --request POST \
       </svg>
     </button></h2><h3 id="Loading-Index" class="common-anchor-header">تحميل الفهرس</h3><p>عند إنشاء مجموعة في Milvus، يمكنك اختيار تحميل الفهرس على الفور أو تأجيله إلى ما بعد استيعاب بعض البيانات بشكل مجمّع. عادةً، لا تحتاج إلى اتخاذ خيار صريح حول هذا الأمر، حيث توضح الأمثلة أعلاه أن الفهرس يتم إنشاؤه تلقائيًا لأي بيانات يتم استيعابها مباشرةً بعد إنشاء المجموعة. هذا يسمح بإمكانية البحث الفوري عن البيانات التي تم استيعابها. ومع ذلك، إذا كان لديك عملية إدراج مجمعة كبيرة بعد إنشاء المجموعة ولا تحتاج إلى البحث عن أي بيانات حتى نقطة معينة، يمكنك تأجيل بناء الفهرس عن طريق حذف index_params في إنشاء المجموعة وإنشاء الفهرس عن طريق استدعاء التحميل صراحةً بعد استيعاب جميع البيانات. تعتبر هذه الطريقة أكثر فعالية لبناء الفهرس على مجموعة كبيرة، ولكن لا يمكن إجراء أي عمليات بحث حتى استدعاء التحميل().</p>
 <h3 id="How-to-Define-Data-Model-For-Multi-tenancy" class="common-anchor-header">كيفية تعريف نموذج البيانات للمستأجرين المتعددين</h3><p>يُستخدم مفهوم المستأجرين المتعددين بشكل شائع في السيناريوهات التي يحتاج فيها تطبيق أو خدمة برمجية واحدة لخدمة عدة مستخدمين أو مؤسسات مستقلة، لكل منها بيئتها المعزولة. يظهر هذا بشكل متكرر في الحوسبة السحابية وتطبيقات SaaS (البرمجيات كخدمة) وأنظمة قواعد البيانات. على سبيل المثال، يمكن أن تستخدم خدمة التخزين السحابي الإيجار المتعدد للسماح لشركات مختلفة بتخزين بياناتها وإدارتها بشكل منفصل مع مشاركة نفس البنية التحتية الأساسية. هذا النهج يزيد من استخدام الموارد والكفاءة مع ضمان أمن البيانات والخصوصية لكل مستأجر.</p>
-<p>أسهل طريقة للتمييز بين المستأجرين هي عزل بياناتهم ومواردهم عن بعضهم البعض. كل مستأجر إما لديه وصول حصري إلى موارد محددة أو يشارك الموارد مع الآخرين لإدارة كيانات Milvus مثل قواعد البيانات والمجموعات والأقسام. هناك طرق محددة تتماشى مع هذه الكيانات لتنفيذ الإيجار المتعدد. يمكنك الرجوع إلى <a href="/docs/ar/multi_tenancy.md#Multi-tenancy-strategies">صفحة الإيجار المتعدد</a> في <a href="/docs/ar/multi_tenancy.md#Multi-tenancy-strategies">ميلفوس</a> للمزيد من المعلومات.</p>
+<p>أسهل طريقة للتمييز بين المستأجرين هي عزل بياناتهم ومواردهم عن بعضهم البعض. كل مستأجر إما لديه وصول حصري إلى موارد محددة أو يشارك الموارد مع الآخرين لإدارة كيانات Milvus مثل قواعد البيانات والمجموعات والأقسام. هناك طرق محددة تتماشى مع هذه الكيانات لتنفيذ الإيجار المتعدد. يمكنك الرجوع إلى <a href="/docs/ar/v2.5.x/multi_tenancy.md#Multi-tenancy-strategies">صفحة الإيجار المتعدد</a> في <a href="/docs/ar/v2.5.x/multi_tenancy.md#Multi-tenancy-strategies">ميلفوس</a> للمزيد من المعلومات.</p>

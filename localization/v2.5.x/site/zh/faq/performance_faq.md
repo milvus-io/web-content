@@ -3,6 +3,7 @@ id: performance_faq.md
 summary: 查找有关搜索性能、性能增强和其他性能相关问题的常见问题答案。
 title: 性能常见问题
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">性能常见问题<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -31,7 +32,7 @@ title: 性能常见问题
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">哪些因素会影响 CPU 占用率？</h4><p>当 Milvus 正在建立索引或运行查询时，CPU 使用率会增加。一般来说，除了使用 Annoy（在单线程上运行）外，索引构建都是 CPU 密集型工作。</p>
 <p>运行查询时，CPU 使用率受<code translate="no">nq</code> 和<code translate="no">nprobe</code> 的影响。当<code translate="no">nq</code> 和<code translate="no">nprobe</code> 较小时，并发量较低，CPU 占用率也较低。</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">同时插入数据和搜索会影响查询性能吗？</h4><p>插入操作不占用 CPU。但是，由于新的数据段可能还没有达到建立索引的阈值，Milvus 会采用暴力搜索，这将严重影响查询性能。</p>
-<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 参数决定了段的索引建立阈值，默认设置为 1024 行。更多信息请参阅<a href="/docs/zh/system_configuration.md">系统配置</a>。</p>
+<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 参数决定了段的索引建立阈值，默认设置为 1024 行。更多信息请参阅<a href="/docs/zh/v2.5.x/system_configuration.md">系统配置</a>。</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">为 VARCHAR 字段建立索引能否提高删除速度？</h4><p>为 VARCHAR 字段建立索引可以加快 "按表达式删除 "操作的速度，但仅限于特定条件下：</p>
 <ul>
 <li><strong>反转索引</strong>：该索引有助于非主键 VARCHAR 字段上的<code translate="no">IN</code> 或<code translate="no">==</code> 表达式。</li>

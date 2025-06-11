@@ -10,6 +10,7 @@ summary: >-
   più simili. Con la ricerca ANN, Milvus offre un'esperienza di ricerca
   efficiente. Questa pagina vi aiuta a imparare a condurre ricerche ANN di base.
 ---
+
 <h1 id="Basic-Vector-Search" class="common-anchor-header">Ricerca vettoriale di base<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,14 +48,14 @@ summary: >-
 <p>Per ridurre la curva di apprendimento, Milvus offre <strong>AUTOINDEX</strong>. Con <strong>AUTOINDEX</strong>, Milvus è in grado di analizzare la distribuzione dei dati all'interno della collezione durante la creazione dell'indice e di impostare i parametri dell'indice più ottimizzati in base all'analisi per trovare un equilibrio tra prestazioni di ricerca e correttezza.</p>
 <p>In questa sezione troverete informazioni dettagliate sui seguenti argomenti:</p>
 <ul>
-<li><p><a href="/docs/it/single-vector-search.md#Single-Vector-Search">Ricerca a vettore singolo</a></p></li>
-<li><p><a href="/docs/it/single-vector-search.md#Bulk-Vector-Search">Ricerca a vettori multipli</a></p></li>
-<li><p><a href="/docs/it/single-vector-search.md#ANN-Search-in-Partition">Ricerca RNA in partizione</a></p></li>
-<li><p><a href="/docs/it/single-vector-search.md#Use-Output-Fields">Uso dei campi di output</a></p></li>
-<li><p><a href="/docs/it/single-vector-search.md#Use-Limit-and-Offset">Utilizzo di limite e offset</a></p></li>
-<li><p><a href="/docs/it/single-vector-search.md#Use-Level">Utilizzare il livello</a></p></li>
-<li><p><a href="/docs/it/single-vector-search.md#Get-Recall-Rate">Ottenere il tasso di richiamo</a></p></li>
-<li><p><a href="/docs/it/single-vector-search.md#Enhancing-ANN-Search">Migliorare la ricerca a RNA</a></p></li>
+<li><p><a href="/docs/it/v2.5.x/single-vector-search.md#Single-Vector-Search">Ricerca a vettore singolo</a></p></li>
+<li><p><a href="/docs/it/v2.5.x/single-vector-search.md#Bulk-Vector-Search">Ricerca a vettori multipli</a></p></li>
+<li><p><a href="/docs/it/v2.5.x/single-vector-search.md#ANN-Search-in-Partition">Ricerca RNA in partizione</a></p></li>
+<li><p><a href="/docs/it/v2.5.x/single-vector-search.md#Use-Output-Fields">Uso dei campi di output</a></p></li>
+<li><p><a href="/docs/it/v2.5.x/single-vector-search.md#Use-Limit-and-Offset">Utilizzo di limite e offset</a></p></li>
+<li><p><a href="/docs/it/v2.5.x/single-vector-search.md#Use-Level">Utilizzare il livello</a></p></li>
+<li><p><a href="/docs/it/v2.5.x/single-vector-search.md#Get-Recall-Rate">Ottenere il tasso di richiamo</a></p></li>
+<li><p><a href="/docs/it/v2.5.x/single-vector-search.md#Enhancing-ANN-Search">Migliorare la ricerca a RNA</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">Ricerca a vettore singolo<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,44 +79,45 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 <span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
-    data=[query_vector],
-    limit=<span class="hljs-number">3</span>,
-    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+data=[query_vector],
+limit=<span class="hljs-number">3</span>,
+search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
 )
 
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
-    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
-        <span class="hljs-built_in">print</span>(hit)
+<span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
+<span class="hljs-built_in">print</span>(hit)
 
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     [</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 551,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.08821295201778412,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 296,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.0800950899720192,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 43,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.07794742286205292,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         }</span>
-<span class="hljs-comment">#     ]</span>
+<span class="hljs-comment"># [</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 551,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.08821295201778412,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 296,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.0800950899720192,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 43,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.07794742286205292,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
@@ -312,56 +314,57 @@ query_vectors = [
 
 <span class="hljs-comment"># 7.2. Start search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    data=query_vectors,
-    limit=<span class="hljs-number">3</span>,
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+data=query_vectors,
+limit=<span class="hljs-number">3</span>,
 )
 
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
-    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
-        <span class="hljs-built_in">print</span>(hit)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
+<span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
+<span class="hljs-built_in">print</span>(hit)
 
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     [</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 551,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.08821295201778412,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 296,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.0800950899720192,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 43,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.07794742286205292,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         }</span>
-<span class="hljs-comment">#     ],</span>
-<span class="hljs-comment">#     [</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 730,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.04431751370429993,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 333,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.04231833666563034,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 232,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.04221535101532936,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         }</span>
-<span class="hljs-comment">#     ]</span>
+<span class="hljs-comment"># [</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 551,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.08821295201778412,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 296,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.0800950899720192,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 43,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.07794742286205292,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># ],</span>
+<span class="hljs-comment"># [</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 730,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.04431751370429993,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 333,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.04231833666563034,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 232,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.04221535101532936,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># ]</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.BaseVector;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
@@ -529,30 +532,31 @@ res = client.search(
 )
 
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
-    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
-        <span class="hljs-built_in">print</span>(hit)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
+<span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
+<span class="hljs-built_in">print</span>(hit)
 
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     [</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 551,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.08821295201778412,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 296,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.0800950899720192,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 43,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.07794742286205292,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {}</span>
-<span class="hljs-comment">#         }</span>
-<span class="hljs-comment">#     ]</span>
+<span class="hljs-comment"># [</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 551,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.08821295201778412,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 296,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.0800950899720192,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 43,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.07794742286205292,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {}</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
@@ -677,42 +681,43 @@ curl --request POST \
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    data=[query_vector],
-    limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
-    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，
-    <span class="hljs-comment"># highlight-next-line</span>
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+data=[query_vector],
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
+search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，
+<span class="hljs-comment"># highlight-next-line</span>
+output_fields=[<span class="hljs-string">&quot;color&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     [</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 551,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.08821295201778412,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {</span>
-<span class="hljs-comment">#                 &quot;color&quot;: &quot;orange_6781&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 296,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.0800950899720192,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {</span>
-<span class="hljs-comment">#                 &quot;color&quot;: &quot;red_4794&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 43,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.07794742286205292,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {</span>
-<span class="hljs-comment">#                 &quot;color&quot;: &quot;grey_8510&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         }</span>
-<span class="hljs-comment">#     ]</span>
+<span class="hljs-comment"># [</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 551,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.08821295201778412,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {</span>
+<span class="hljs-comment"># &quot;color&quot;: &quot;orange_6781&quot;</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 296,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.0800950899720192,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {</span>
+<span class="hljs-comment"># &quot;color&quot;: &quot;red_4794&quot;</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 43,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.07794742286205292,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {</span>
+<span class="hljs-comment"># &quot;color&quot;: &quot;grey_8510&quot;</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
@@ -871,16 +876,17 @@ curl --request POST \
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    data=[query_vector],
-    limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
-    search_params={
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
-        <span class="hljs-comment"># highlight-next-line</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">10</span> <span class="hljs-comment"># The records to skip</span>
-    }
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+data=[query_vector],
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
+search_params={
+<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+<span class="hljs-comment"># highlight-next-line</span>
+<span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">10</span> <span class="hljs-comment"># The records to skip</span>
+}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
@@ -975,30 +981,30 @@ curl --request POST \
 <ul>
 <li><p>Ricerca filtrata</p>
 <p>È possibile includere condizioni di filtraggio in una richiesta di ricerca, in modo che Milvus effettui un filtraggio dei metadati prima di effettuare ricerche sull'RNA, riducendo l'ambito di ricerca dall'intera raccolta alle sole entità che corrispondono alle condizioni di filtraggio specificate.</p>
-<p>Per ulteriori informazioni sul filtraggio dei metadati e sulle condizioni di filtraggio, consultare <a href="/docs/it/filtered-search.md">Ricerca filtrata</a>, <a href="/docs/it/boolean.md">Filtraggio spiegato</a> e gli argomenti correlati.</p></li>
+<p>Per ulteriori informazioni sul filtraggio dei metadati e sulle condizioni di filtraggio, consultare <a href="/docs/it/v2.5.x/filtered-search.md">Ricerca filtrata</a>, <a href="/docs/it/v2.5.x/boolean.md">Filtraggio spiegato</a> e gli argomenti correlati.</p></li>
 <li><p>Ricerca per intervallo</p>
 <p>È possibile migliorare la pertinenza dei risultati della ricerca limitando la distanza o il punteggio delle entità restituite all'interno di un intervallo specifico. In Milvus, una ricerca per intervallo comporta il disegno di due cerchi concentrici con al centro l'incorporamento vettoriale più simile al vettore di interrogazione. La richiesta di ricerca specifica il raggio di entrambi i cerchi e Milvus restituisce tutte le incorporazioni vettoriali che rientrano nel cerchio esterno ma non in quello interno.</p>
-<p>Per ulteriori informazioni sulla ricerca per intervallo, consultare la sezione <a href="/docs/it/range-search.md">Ricerca per intervallo</a>.</p></li>
+<p>Per ulteriori informazioni sulla ricerca per intervallo, consultare la sezione <a href="/docs/it/v2.5.x/range-search.md">Ricerca per intervallo</a>.</p></li>
 <li><p>Ricerca per raggruppamento</p>
 <p>Se le entità restituite hanno lo stesso valore in un campo specifico, i risultati della ricerca potrebbero non rappresentare la distribuzione di tutte le incorporazioni vettoriali nello spazio vettoriale. Per diversificare i risultati della ricerca, si può utilizzare la ricerca per raggruppamento.</p>
-<p>Per ulteriori informazioni sulla ricerca per raggruppamento, consultare la sezione <a href="/docs/it/grouping-search.md">Ricerca per raggruppamento</a>,</p></li>
+<p>Per ulteriori informazioni sulla ricerca per raggruppamento, consultare la sezione <a href="/docs/it/v2.5.x/grouping-search.md">Ricerca per raggruppamento</a>,</p></li>
 <li><p>Ricerca ibrida</p>
 <p>Una collezione può includere fino a quattro campi vettoriali per salvare le incorporazioni vettoriali generate utilizzando diversi modelli di incorporazione. In questo modo, è possibile utilizzare una ricerca ibrida per classificare i risultati della ricerca da questi campi vettoriali, migliorando il tasso di richiamo.</p>
-<p>Per ulteriori informazioni sulla ricerca ibrida, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p></li>
+<p>Per ulteriori informazioni sulla ricerca ibrida, consultare la sezione <a href="/docs/it/v2.5.x/multi-vector-search.md">Ricerca ibrida</a>.</p></li>
 <li><p>Iteratore di ricerca</p>
 <p>Una singola ricerca ANN restituisce un massimo di 16.384 entità. Considerate l'uso di iteratori di ricerca se avete bisogno di più entità da restituire in una singola ricerca.</p>
-<p>Per maggiori dettagli sugli iteratori di ricerca, consultare <a href="/docs/it/with-iterators.md">Iteratore di ricerca</a>.</p></li>
+<p>Per maggiori dettagli sugli iteratori di ricerca, consultare <a href="/docs/it/v2.5.x/with-iterators.md">Iteratore di ricerca</a>.</p></li>
 <li><p>Ricerca a tutto testo</p>
 <p>La ricerca full text è una funzione che recupera i documenti contenenti termini o frasi specifiche in set di dati di testo, classificando poi i risultati in base alla rilevanza. Questa funzione supera le limitazioni della ricerca semantica, che potrebbe trascurare termini precisi, garantendo la ricezione di risultati più accurati e contestualmente rilevanti. Inoltre, semplifica le ricerche vettoriali accettando input di testo grezzo, convertendo automaticamente i dati di testo in embedding sparsi senza dover generare manualmente embedding vettoriali.</p>
-<p>Per maggiori informazioni sulla ricerca full-text, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca full-text</a>.</p></li>
+<p>Per maggiori informazioni sulla ricerca full-text, consultare la sezione <a href="/docs/it/v2.5.x/full-text-search.md">Ricerca full-text</a>.</p></li>
 <li><p>Corrispondenza di parole chiave</p>
 <p>La corrispondenza delle parole chiave in Milvus consente di recuperare documenti precisi in base a termini specifici. Questa funzione è utilizzata principalmente per la ricerca filtrata per soddisfare condizioni specifiche e può incorporare un filtro scalare per affinare i risultati della query, consentendo ricerche di similarità all'interno di vettori che soddisfano criteri scalari.</p>
-<p>Per informazioni dettagliate sulla corrispondenza delle parole chiave, consultare la sezione <a href="/docs/it/keyword-match.md">Corrispondenza delle parole chiave</a>.</p></li>
+<p>Per informazioni dettagliate sulla corrispondenza delle parole chiave, consultare la sezione <a href="/docs/it/v2.5.x/keyword-match.md">Corrispondenza delle parole chiave</a>.</p></li>
 <li><p>Utilizzare la chiave di partizione</p>
 <p>Il coinvolgimento di più campi scalari nel filtraggio dei metadati e l'uso di una condizione di filtraggio piuttosto complicata possono influire sull'efficienza della ricerca. Se si imposta un campo scalare come chiave di partizione e si utilizza una condizione di filtraggio che coinvolge la chiave di partizione nella richiesta di ricerca, si può limitare l'ambito di ricerca alle partizioni corrispondenti ai valori della chiave di partizione specificati.</p>
-<p>Per informazioni dettagliate sulla chiave di partizione, consultare la sezione <a href="/docs/it/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
+<p>Per informazioni dettagliate sulla chiave di partizione, consultare la sezione <a href="/docs/it/v2.5.x/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
 <li><p>Usa mmap</p>
-<p>Per i dettagli sulle impostazioni di mmap, fare riferimento a <a href="/docs/it/mmap.md">Usa mmap</a>.</p></li>
+<p>Per i dettagli sulle impostazioni di mmap, fare riferimento a <a href="/docs/it/v2.5.x/mmap.md">Usa mmap</a>.</p></li>
 <li><p>Compattazione del clustering</p>
-<p>Per i dettagli sulla compattazione del clustering, consultare <a href="/docs/it/clustering-compaction.md">Compattazione del clustering</a>.</p></li>
+<p>Per i dettagli sulla compattazione del clustering, consultare <a href="/docs/it/v2.5.x/clustering-compaction.md">Compattazione del clustering</a>.</p></li>
 </ul>

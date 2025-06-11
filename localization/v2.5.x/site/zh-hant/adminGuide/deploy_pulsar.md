@@ -1,9 +1,10 @@
 ---
 id: deploy_pulsar.md
 title: 使用 Docker Compose 或 Helm 設定訊息儲存空間
-related_key: 'Pulsar, storage'
+related_key: "Pulsar, storage"
 summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
 ---
+
 <h1 id="Configure-Message-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">使用 Docker Compose 或 Helm 設定訊息儲存空間<button data-href="#Configure-Message-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
   port: <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   maxMessageSize: <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>更多資訊請參閱<a href="/docs/zh-hant/configure_pulsar.md">Pulsar 相關設定</a>。</p>
+<p>更多資訊請參閱<a href="/docs/zh-hant/v2.5.x/configure_pulsar.md">Pulsar 相關設定</a>。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2.執行 Milvus</h3><p>執行下列指令啟動使用 Pulsar 設定的 Milvus。</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -63,7 +64,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
         ></path>
       </svg>
     </button></h2><p>對於 K8s 上的 Milvus 集群，你可以在啟動 Milvus 的相同指令中設定 Pulsar。另外，你也可以在啟動 Milvus 之前，使用 /charts/milvus 路徑下<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>套件庫中的<code translate="no">values.yml</code> 檔來設定 Pulsar。</p>
-<p>關於如何使用 Helm<a href="/docs/zh-hant/configure-helm.md">設定</a> Milvus 的詳細資訊，請參考 使用<a href="/docs/zh-hant/configure-helm.md">Helm Charts 設定 Milvus</a>。有關 Pulsar 相關組態項目的詳細資訊，請參閱<a href="/docs/zh-hant/configure_pulsar.md">Pulsar 相關組態</a>。</p>
+<p>關於如何使用 Helm<a href="/docs/zh-hant/v2.5.x/configure-helm.md">設定</a> Milvus 的詳細資訊，請參考 使用<a href="/docs/zh-hant/v2.5.x/configure-helm.md">Helm Charts 設定 Milvus</a>。有關 Pulsar 相關組態項目的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure_pulsar.md">Pulsar 相關組態</a>。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 檔案</h3><ol>
 <li>配置<code translate="no">values.yaml</code> 檔案中的<code translate="no">externalConfigFiles</code> 部分。</li>
 </ol>
@@ -98,7 +99,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
         ></path>
       </svg>
     </button></h2><p>對於 K8s 上的 Milvus 集群，你可以在啟動 Milvus 的同一個命令中配置 Kafka。另外，你也可以在啟動 Milvus 之前，使用 /charts/milvus 路徑上<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>套件庫中的<code translate="no">values.yml</code> 檔來設定 Kafka。</p>
-<p>有關如何使用 Helm<a href="/docs/zh-hant/configure-helm.md">設定</a> Milvus 的詳細資訊，請參考<a href="/docs/zh-hant/configure-helm.md">Configure Milvus with Helm Charts</a>。有關 Pulsar 相關設定項的詳細資訊，請參閱<a href="/docs/zh-hant/configure_pulsar.md">Pulsar 相關設定</a>。</p>
+<p>有關如何使用 Helm<a href="/docs/zh-hant/v2.5.x/configure-helm.md">設定</a> Milvus 的詳細資訊，請參考<a href="/docs/zh-hant/v2.5.x/configure-helm.md">Configure Milvus with Helm Charts</a>。有關 Pulsar 相關設定項的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure_pulsar.md">Pulsar 相關設定</a>。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 檔案</h3><ol>
 <li>如果要使用 Kafka 作為訊息儲存系統，請設定<code translate="no">values.yaml</code> 檔案中的<code translate="no">externalConfigFiles</code> 部分。</li>
 </ol>
@@ -132,7 +133,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus standalone 使用 RocksMQ 作為預設的訊息儲存空間。有關如何使用 Helm 配置 Milvus 的詳細步驟，請參考<a href="/docs/zh-hant/configure-helm.md">Configure Milvus with Helm Charts</a>。關於 RocksMQ 相關配置項的詳細步驟，請參考<a href="/docs/zh-hant/configure_rocksmq.md">RocksMQ 相關配置</a>。</p>
+    </button></h2><p>Milvus standalone 使用 RocksMQ 作為預設的訊息儲存空間。有關如何使用 Helm 配置 Milvus 的詳細步驟，請參考<a href="/docs/zh-hant/v2.5.x/configure-helm.md">Configure Milvus with Helm Charts</a>。關於 RocksMQ 相關配置項的詳細步驟，請參考<a href="/docs/zh-hant/v2.5.x/configure_rocksmq.md">RocksMQ 相關配置</a>。</p>
 <ul>
 <li><p>如果你用 RocksMQ 啟動 Milvus 並想要改變它的設定，你可以用以下 YAML 檔案中改變的設定執行<code translate="no">helm upgrade -f</code> 。</p></li>
 <li><p>如果你已經使用 Helm 獨立安裝了 Milvus，並使用了 RocksMQ 以外的訊息存放區，想要將它改回 RocksMQ，請在刷新所有集合並停止 Milvus 後，使用以下 YAML 檔案執行<code translate="no">helm upgrade -f</code> 。</p></li>
@@ -171,7 +172,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS 是一個實驗性的訊息存放區，可以替代 RocksMQ。關於如何使用 Helm 配置 Milvus 的詳細步驟，請參考<a href="/docs/zh-hant/configure-helm.md">Configure Milvus with Helm Charts</a>。關於 RocksMQ 相關設定項的詳細步驟，請參考<a href="/docs/zh-hant/configure_natsmq.md">NATS 相關設定</a>。</p>
+    </button></h2><p>NATS 是一個實驗性的訊息存放區，可以替代 RocksMQ。關於如何使用 Helm 配置 Milvus 的詳細步驟，請參考<a href="/docs/zh-hant/v2.5.x/configure-helm.md">Configure Milvus with Helm Charts</a>。關於 RocksMQ 相關設定項的詳細步驟，請參考<a href="/docs/zh-hant/v2.5.x/configure_natsmq.md">NATS 相關設定</a>。</p>
 <ul>
 <li><p>如果你用 NATS 啟動 Milvus 並想要改變它的設定，你可以用以下 YAML 檔案中改變的設定執行<code translate="no">helm upgrade -f</code> 。</p></li>
 <li><p>如果您用 NATS 以外的消息存储安装了 Milvus standalone，并想将其更改为 NATS，请在刷新所有集合并停止 Milvus 后，使用下面的 YAML 文件运行<code translate="no">helm upgrade -f</code> 。</p></li>
@@ -235,6 +236,6 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
       </svg>
     </button></h2><p>學習如何使用 Docker Compose 或 Helm 配置其他 Milvus 依賴項目：</p>
 <ul>
-<li><a href="/docs/zh-hant/deploy_s3.md">使用 Docker Compose 或 Helm 配置物件儲存空間</a></li>
-<li><a href="/docs/zh-hant/deploy_etcd.md">使用 Docker Compose 或 Helm 設定 Meta 儲存空間</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/deploy_s3.md">使用 Docker Compose 或 Helm 配置物件儲存空間</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/deploy_etcd.md">使用 Docker Compose 或 Helm 設定 Meta 儲存空間</a></li>
 </ul>

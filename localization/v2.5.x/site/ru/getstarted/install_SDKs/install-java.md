@@ -2,9 +2,10 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-summary: 'Узнайте, как установить Java SDK для Milvus.'
+summary: "Узнайте, как установить Java SDK для Milvus."
 title: Установка Milvus Java SDK
 ---
+
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Установка Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,11 +91,11 @@ title: Установка Milvus Java SDK
 <ul>
 <li><p>Изучить основные операции Milvus:</p>
 <ul>
-<li><a href="/docs/ru/manage-collections.md">Управлять коллекциями</a></li>
-<li><a href="/docs/ru/manage-partitions.md">Управление разделами</a></li>
-<li><a href="/docs/ru/insert-update-delete.md">Вставка, вставка и удаление</a></li>
-<li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
-<li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-collections.md">Управлять коллекциями</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-partitions.md">Управление разделами</a></li>
+<li><a href="/docs/ru/v2.5.x/insert-update-delete.md">Вставка, вставка и удаление</a></li>
+<li><a href="/docs/ru/v2.5.x/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p>Изучите <a href="/api-reference/java/v2.4.x/About.md">справку по API Milvus Java</a></p></li>
 </ul>

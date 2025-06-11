@@ -4,6 +4,7 @@ related_key: disk_index
 summary: Milvusにおけるディスク最適化ベクトル探索のためのディスクインデックス機構。
 title: オンディスク インデックス
 ---
+
 <h1 id="On-disk-Index" class="common-anchor-header">オンディスク インデックス<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ title: オンディスク インデックス
         ></path>
       </svg>
     </button></h1><p>この記事では、ディスクに最適化されたベクトル検索用のオンディスク インデキシング アルゴリズムである DiskANN を紹介する。Vamana グラフに基づく DiskANN は、大規模データセット内の効率的なディスク上ベクトル検索を可能にします。</p>
-<p>クエリー性能を向上させるために、各ベクトルフィールドに<a href="/docs/ja/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
+<p>クエリー性能を向上させるために、各ベクトルフィールドに<a href="/docs/ja/v2.5.x/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
 <div class="alert note"> 
 現在、ベクトルフィールドは1つのインデックスタイプしかサポートしていません。Milvusはインデックスタイプを切り替えると、古いインデックスを自動的に削除します。</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">

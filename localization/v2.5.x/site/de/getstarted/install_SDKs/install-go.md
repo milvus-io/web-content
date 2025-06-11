@@ -2,9 +2,10 @@
 id: install-go.md
 label: Install GO SDK
 related_key: SDK
-summary: 'Erfahren Sie, wie Sie das GO SDK von Milvus installieren.'
+summary: "Erfahren Sie, wie Sie das GO SDK von Milvus installieren."
 title: Milvus Go SDK installieren
 ---
+
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">Milvus Go SDK installieren<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +75,10 @@ title: Milvus Go SDK installieren
     </button></h2><p>Nachdem Sie Milvus GO SDK installiert haben, können Sie:</p>
 <ul>
 <li>Lernen Sie die Grundfunktionen von Milvus kennen:<ul>
-<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
-<li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert und Löschen</a></li>
-<li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
-<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
+<li><a href="/docs/de/v2.5.x/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/manage-partitions.md">Partitionen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/insert-update-delete.md">Einfügen, Upsert und Löschen</a></li>
+<li><a href="/docs/de/v2.5.x/single-vector-search.md">Ein-Vektor-Suche</a></li>
+<li><a href="/docs/de/v2.5.x/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
 </ul>

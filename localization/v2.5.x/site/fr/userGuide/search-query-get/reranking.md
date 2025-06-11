@@ -10,6 +10,7 @@ summary: >-
   reclassement prises en charge par Milvus et fournit des conseils pour
   sélectionner la stratégie de reclassement appropriée.
 ---
+
 <h1 id="Reranking" class="common-anchor-header">Reranking<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,8 +49,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Reranking multi-vecteur</span> </span></p>
 <p>Dans la recherche hybride, le reclassement est une étape cruciale qui intègre les résultats de plusieurs recherches vectorielles afin de garantir que le résultat final est le plus pertinent et le plus précis. Actuellement, Milvus prend en charge les deux stratégies de reclassement suivantes :</p>
 <ul>
-<li><p><strong><a href="/docs/fr/reranking.md#WeightedRanker">WeightedRanker</a></strong>: Cette stratégie fusionne les résultats en calculant un score pondéré des scores (ou distances) des différentes recherches vectorielles. Les poids sont attribués en fonction de l'importance de chaque champ vectoriel, ce qui permet une personnalisation en fonction des priorités des cas d'utilisation spécifiques.</p></li>
-<li><p><strong><a href="/docs/fr/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: Cette stratégie combine les résultats en fonction du classement. Elle utilise une méthode qui équilibre les rangs des résultats provenant de différentes recherches, ce qui conduit souvent à une intégration plus équitable et plus efficace de divers types de données ou de modalités.</p></li>
+<li><p><strong><a href="/docs/fr/v2.5.x/reranking.md#WeightedRanker">WeightedRanker</a></strong>: Cette stratégie fusionne les résultats en calculant un score pondéré des scores (ou distances) des différentes recherches vectorielles. Les poids sont attribués en fonction de l'importance de chaque champ vectoriel, ce qui permet une personnalisation en fonction des priorités des cas d'utilisation spécifiques.</p></li>
+<li><p><strong><a href="/docs/fr/v2.5.x/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: Cette stratégie combine les résultats en fonction du classement. Elle utilise une méthode qui équilibre les rangs des résultats provenant de différentes recherches, ce qui conduit souvent à une intégration plus équitable et plus efficace de divers types de données ou de modalités.</p></li>
 </ul>
 <h2 id="WeightedRanker" class="common-anchor-header">Rangée pondérée<button data-href="#WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -231,8 +232,9 @@ summary: >-
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
-rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) 
+rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.WeightedRanker;
 
 <span class="hljs-type">WeightedRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeightedRanker</span>(Arrays.asList(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.3f</span>))
@@ -429,6 +431,7 @@ reranker := milvusclient.NewWeightedReranker([]<span class="hljs-type">float64</
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 <span class="hljs-type">RRFRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);

@@ -1,9 +1,10 @@
 ---
 id: configure-querynode-localdisk.md
 title: تكوين Milvus QueryNode مع القرص المحلي
-related_key: 'querynode, query node, local disk'
+related_key: "querynode, query node, local disk"
 summary: تعرف على كيفية تهيئة Milvus QueryNode لاستخدام القرص المحلي.
 ---
+
 <h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">تكوين Milvus QueryNode مع القرص المحلي<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,11 +39,11 @@ summary: تعرف على كيفية تهيئة Milvus QueryNode لاستخدام
     </button></h2><p>Milvus هي قاعدة بيانات متجهة تركز على الذكاء الاصطناعي مصممة خصيصًا لتخزين واسترجاع كميات هائلة من البيانات المتجهة بكفاءة. وهي مثالية لمهام مثل تحليل الصور والفيديو ومعالجة اللغة الطبيعية وأنظمة التوصيات. لضمان الأداء الأمثل، من الضروري تقليل زمن انتقال القراءة على القرص إلى الحد الأدنى. يوصى بشدة باستخدام محركات أقراص NVMe SSD المحلية لمنع التأخير والحفاظ على استقرار النظام.</p>
 <p>تتضمن الميزات الرئيسية التي يتم فيها تشغيل تخزين القرص المحلي ما يلي:</p>
 <ul>
-<li><a href="/docs/ar/chunk_cache.md"><strong>ذاكرة التخزين المؤقت للقطع</strong></a>: التحميل المسبق للبيانات في ذاكرة التخزين المؤقت للقرص المحلي للبحث بشكل أسرع.</li>
-<li><a href="/docs/ar/mmap.md"><strong>MMap</strong></a>: تعيين محتويات الملف مباشرة في الذاكرة لتحسين كفاءة الذاكرة.</li>
-<li><a href="/docs/ar/disk_index.md"><strong>فهرس DiskANN</strong></a>: يتطلب تخزين القرص لإدارة الفهرس بكفاءة.</li>
+<li><a href="/docs/ar/v2.5.x/chunk_cache.md"><strong>ذاكرة التخزين المؤقت للقطع</strong></a>: التحميل المسبق للبيانات في ذاكرة التخزين المؤقت للقرص المحلي للبحث بشكل أسرع.</li>
+<li><a href="/docs/ar/v2.5.x/mmap.md"><strong>MMap</strong></a>: تعيين محتويات الملف مباشرة في الذاكرة لتحسين كفاءة الذاكرة.</li>
+<li><a href="/docs/ar/v2.5.x/disk_index.md"><strong>فهرس DiskANN</strong></a>: يتطلب تخزين القرص لإدارة الفهرس بكفاءة.</li>
 </ul>
-<p>في هذه المقالة، سنركز على نشر <a href="/docs/ar/install-overview.md#Milvus-Distributed">Milvus Distributed</a> على المنصات السحابية، وكيفية تكوين QueryNode لاستخدام تخزين القرص NVMe. يسرد الجدول التالي أنواع الأجهزة الموصى بها لمختلف موفري السحابة.</p>
+<p>في هذه المقالة، سنركز على نشر <a href="/docs/ar/v2.5.x/install-overview.md#Milvus-Distributed">Milvus Distributed</a> على المنصات السحابية، وكيفية تكوين QueryNode لاستخدام تخزين القرص NVMe. يسرد الجدول التالي أنواع الأجهزة الموصى بها لمختلف موفري السحابة.</p>
 <table>
 <thead>
 <tr><th style="text-align:center">مزود السحابة</th><th style="text-align:center">نوع الجهاز</th></tr>
@@ -86,21 +87,22 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <span class="hljs-comment">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Running custom user data script&quot;</span>
 <span class="hljs-keyword">if</span> ( lsblk | fgrep -q nvme1n1 ); <span class="hljs-keyword">then</span>
-    <span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
-    mkfs.xfs /dev/nvme1n1
-    mount /dev/nvme1n1 /mnt/data
-    <span class="hljs-built_in">chmod</span> 0755 /mnt/data
-    <span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
-    <span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
-    UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
-    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span>     /mnt/data   xfs    defaults,noatime  1   1&quot;</span> &gt;&gt; /etc/fstab
+<span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
+mkfs.xfs /dev/nvme1n1
+mount /dev/nvme1n1 /mnt/data
+<span class="hljs-built_in">chmod</span> 0755 /mnt/data
+<span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
+<span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
+<span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
+<span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
+UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span> /mnt/data xfs defaults,noatime 1 1&quot;</span> &gt;&gt; /etc/fstab
 <span class="hljs-keyword">fi</span>
 <span class="hljs-built_in">echo</span> 10485760 &gt; /proc/sys/fs/aio-max-nr
 
 --==MYBOUNDARY==--
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>في المثال أعلاه، نفترض أن قرص NVMe هو <code translate="no">/dev/nvme1n1</code>. تحتاج إلى تعديل البرنامج النصي ليتوافق مع التكوين الخاص بك.</p>
 </div>
@@ -122,6 +124,7 @@ mkfs.xfs /dev/md0
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/dev/md0 /var/lib/kubelet xfs defaults 0 0&#x27;</span> &gt;&gt; /etc/fstab
 mount -a
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>في المثال أعلاه، نفترض أن أقراص NVMe هي <code translate="no">/dev/nvme0n1</code> و <code translate="no">/dev/nvme1n1</code>. تحتاج إلى تعديل البرنامج النصي لمطابقة التكوين الخاص بك.</p>
 </div>
@@ -134,7 +137,7 @@ mkfs.xfs /dev/nvme0n1
 mount -a
 
 <span class="hljs-built_in">mkdir</span> -p /mnt/data/kubelet /mnt/data/containerd /mnt/data/log/pods
-<span class="hljs-built_in">mkdir</span> -p  /var/lib/kubelet /var/lib/containerd /var/log/pods
+<span class="hljs-built_in">mkdir</span> -p /var/lib/kubelet /var/lib/containerd /var/log/pods
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/kubelet /var/lib/kubelet none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/containerd /var/lib/containerd none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
@@ -143,6 +146,7 @@ mount -a
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init end...&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>في المثال أعلاه، نفترض أن قرص NVMe هو <code translate="no">/dev/nvme0n1</code>. تحتاج إلى تعديل البرنامج النصي لمطابقة التكوين الخاص بك.</p>
 </div>
@@ -219,8 +223,9 @@ fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numj
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
-fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1  --<span class="hljs-built_in">readonly</span>
+fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1 --<span class="hljs-built_in">readonly</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>ويجب أن يبدو الإخراج هكذا:</p>
 <pre><code translate="no" class="language-bash">Jobs: <span class="hljs-number">128</span> (f=<span class="hljs-number">128</span>): [r(<span class="hljs-number">128</span>)][<span class="hljs-number">100.0</span>%][r=1458MiB/s][r=373k IOPS][eta 00m:00s]
 iops-test-job: (groupid=<span class="hljs-number">0</span>, jobs=<span class="hljs-number">128</span>): err= <span class="hljs-number">0</span>: pid=<span class="hljs-number">768</span>: Mon Jun <span class="hljs-number">24</span> 09:<span class="hljs-number">35</span>:06 <span class="hljs-number">2024</span>
@@ -266,7 +271,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>بمجرد أن تكون نتائج التحقق مرضية، يمكنك نشر Milvus Distributed بالخطوات التالية:</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">نصائح لنشر Milvus Distributed باستخدام Helm</h3><p>تستخدم كبسولة QueryNode أقراص NVMe كوحدات تخزين EmptyDir بشكل افتراضي. يُنصح بتحميل أقراص NVMe على <code translate="no">/var/lib/milvus/data</code> داخل كبسولات QueryNode لضمان الأداء الأمثل.</p>
-<p>للحصول على تفاصيل حول كيفية نشر Milvus Distributed باستخدام Helm، راجع <a href="/docs/ar/install_cluster-helm.md">تشغيل Milvus في Kubernetes باستخدام Helm</a>.</p>
+<p>للحصول على تفاصيل حول كيفية نشر Milvus Distributed باستخدام Helm، راجع <a href="/docs/ar/v2.5.x/install_cluster-helm.md">تشغيل Milvus في Kubernetes باستخدام Helm</a>.</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">نصائح لنشر ميلفوس الموزع باستخدام مشغل ميلفوس</h3><p>يقوم مشغل Milvus تلقائيًا بتكوين جراب QueryNode تلقائيًا لاستخدام أقراص NVMe كوحدات تخزين EmptyDir. يُنصح بإضافة التكوينات التالية إلى المورد المخصص <code translate="no">MilvusCluster</code>:</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -279,4 +284,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>سيضمن ذلك أن تستخدم جراب QueryNode قرص NVMe كوحدة تخزين بيانات. للحصول على تفاصيل حول كيفية نشر ميلفوس الموزعة باستخدام مشغل ميلفوس، راجع <a href="/docs/ar/install_cluster-milvusoperator.md">تشغيل ميلفوس في Kubernetes باستخدام مشغل ميلفوس</a>.</p>
+<p>سيضمن ذلك أن تستخدم جراب QueryNode قرص NVMe كوحدة تخزين بيانات. للحصول على تفاصيل حول كيفية نشر ميلفوس الموزعة باستخدام مشغل ميلفوس، راجع <a href="/docs/ar/v2.5.x/install_cluster-milvusoperator.md">تشغيل ميلفوس في Kubernetes باستخدام مشغل ميلفوس</a>.</p>

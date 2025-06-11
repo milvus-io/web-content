@@ -3,6 +3,7 @@ id: knowhere.md
 summary: Pelajari tentang Knowhere di Milvus.
 title: Knowhere
 ---
+
 <h1 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,8 +75,8 @@ title: Knowhere
     </button></h2><p>Berikut ini adalah keunggulan Knowhere dibandingkan Faiss.</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">Dukungan untuk BitsetView</h4><p>Milvus memperkenalkan mekanisme bitset untuk merealisasikan &quot;penghapusan lunak&quot;. Vektor yang dihapus secara lunak masih ada dalam database tetapi tidak akan dihitung selama pencarian atau kueri kemiripan vektor.</p>
 <p>Setiap bit dalam bitset berhubungan dengan vektor yang diindeks. Jika sebuah vektor ditandai sebagai "1" dalam bitset, itu berarti vektor ini dihapus secara lunak dan tidak akan dilibatkan selama pencarian vektor. Parameter bitset diterapkan pada semua API kueri indeks Faiss yang terbuka di Knowhere, termasuk indeks CPU dan GPU.</p>
-<p>Untuk informasi lebih lanjut tentang mekanisme bitset, lihat <a href="/docs/id/bitset.md">bitset</a>.</p>
-<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Dukungan untuk beberapa metrik kemiripan untuk mengindeks vektor biner</h4><p>Knowhere mendukung <a href="/docs/id/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/id/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/id/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/id/metric.md#Superstructure">Superstruktur</a>, dan <a href="/docs/id/metric.md#Substructure">Substruktur</a>. Jaccard dan Tanimoto dapat digunakan untuk mengukur kemiripan antara dua set sampel, sedangkan Superstruktur dan Substruktur dapat digunakan untuk mengukur kemiripan struktur kimia.</p>
+<p>Untuk informasi lebih lanjut tentang mekanisme bitset, lihat <a href="/docs/id/v2.5.x/bitset.md">bitset</a>.</p>
+<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Dukungan untuk beberapa metrik kemiripan untuk mengindeks vektor biner</h4><p>Knowhere mendukung <a href="/docs/id/v2.5.x/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/id/v2.5.x/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/id/v2.5.x/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/id/v2.5.x/metric.md#Superstructure">Superstruktur</a>, dan <a href="/docs/id/v2.5.x/metric.md#Substructure">Substruktur</a>. Jaccard dan Tanimoto dapat digunakan untuk mengukur kemiripan antara dua set sampel, sedangkan Superstruktur dan Substruktur dapat digunakan untuk mengukur kemiripan struktur kimia.</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">Dukungan untuk set instruksi AVX512</h4><p>Selain <a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>, <a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a> dan <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>, set instruksi yang telah didukung oleh Faiss, Knowhere juga mendukung <a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a>, yang dapat <a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">meningkatkan kinerja pembuatan indeks dan kueri sebesar 20% hingga 30%</a> dibandingkan dengan AVX2.</p>
 <h4 id="Automatic-SIMD-instruction-selection" class="common-anchor-header">Pemilihan instruksi SIMD otomatis</h4><p>Knowhere mendukung pemanggilan instruksi SIMD yang sesuai secara otomatis (misalnya, SIMD SSE, AVX, AVX2, dan AVX512) pada prosesor CPU apa pun (baik di lokasi maupun platform cloud), sehingga pengguna tidak perlu secara manual menentukan flag SIMD (misalnya, "-msse4") selama kompilasi.</p>
 <p>Knowhere dibangun dengan memfaktorkan ulang basis kode Faiss. Fungsi-fungsi umum (misalnya, komputasi kesamaan) yang mengandalkan akselerasi SIMD telah diperhitungkan. Kemudian untuk setiap fungsi, empat versi (yaitu, SSE, AVX, AVX2, AVX512) diimplementasikan dan masing-masing dimasukkan ke dalam file sumber yang terpisah. Kemudian file sumber selanjutnya dikompilasi secara individual dengan bendera SIMD yang sesuai. Oleh karena itu, pada saat runtime, Knowhere dapat secara otomatis memilih instruksi SIMD yang paling sesuai berdasarkan flag CPU saat ini dan kemudian menghubungkan penunjuk fungsi yang tepat menggunakan pengait.</p>
@@ -173,7 +174,7 @@ title: Knowhere
       </svg>
     </button></h2><p>Setelah mempelajari cara kerja Knowhere di Milvus, Anda mungkin juga ingin:</p>
 <ul>
-<li><p>Mempelajari <a href="/docs/id/index.md">berbagai jenis indeks yang didukung oleh Milvus</a>.</p></li>
-<li><p>Mempelajari tentang <a href="/docs/id/bitset.md">mekanisme bitset</a>.</p></li>
-<li><p>Memahami <a href="/docs/id/data_processing.md">bagaimana data diproses</a> di Milvus.</p></li>
+<li><p>Mempelajari <a href="/docs/id/v2.5.x/index.md">berbagai jenis indeks yang didukung oleh Milvus</a>.</p></li>
+<li><p>Mempelajari tentang <a href="/docs/id/v2.5.x/bitset.md">mekanisme bitset</a>.</p></li>
+<li><p>Memahami <a href="/docs/id/v2.5.x/data_processing.md">bagaimana data diproses</a> di Milvus.</p></li>
 </ul>

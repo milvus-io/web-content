@@ -3,6 +3,7 @@ id: replica.md
 summary: Milvusのインメモリレプリカについて学ぶ。
 title: インメモリレプリカ
 ---
+
 <h1 id="In-Memory-Replica" class="common-anchor-header">インメモリレプリカ<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: インメモリレプリカ
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Milvusのインメモリレプリカ(複製)メカニズムについて紹介します。このメカニズムでは、パフォーマンスと可用性を向上させるために、ワーキングメモリ内で複数のセグメント複製を可能にします。</p>
-<p>インメモリ・レプリカの設定方法については、<a href="/docs/ja/configure_querynode.md#queryNodereplicas">クエリ・ノード関連の設定を</a>参照してください。</p>
+<p>インメモリ・レプリカの設定方法については、<a href="/docs/ja/v2.5.x/configure_querynode.md#queryNodereplicas">クエリ・ノード関連の設定を</a>参照してください。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

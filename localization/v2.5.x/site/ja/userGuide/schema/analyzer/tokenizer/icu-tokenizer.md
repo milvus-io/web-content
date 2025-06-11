@@ -6,6 +6,7 @@ summary: >-
   Unicode）オープンソースプロジェクトに基づいて構築されています。ICUのワードブレイクアルゴリズムを使用することで、トークナイザーは世界の大半の言語でテキストを正確に単語に分割することができます。
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="ICU" class="common-anchor-header">ICU<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#ICU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +54,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">icu</code> トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードでは、<code translate="no">icu</code> トー クナイザと<a href="/docs/ja/removepunct-filter.md">remove punct フィルタを</a>使用する解析器を定義します：</p>
+<p><code translate="no">icu</code> トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードでは、<code translate="no">icu</code> トー クナイザと<a href="/docs/ja/v2.5.x/removepunct-filter.md">remove punct フィルタを</a>使用する解析器を定義します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -71,7 +72,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に、<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に、<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/v2.5.x/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,6 +119,7 @@ sample_text = <span class="hljs-string">&quot;Привет! Как дела?&quo
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

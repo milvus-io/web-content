@@ -5,6 +5,7 @@ summary: >-
   В этой теме рассказывается о показателях мониторинга, отображаемых на панели
   Milvus Dashboard.
 ---
+
 <h1 id="Milvus-Metrics-Dashboard" class="common-anchor-header">Приборная панель метрик Milvus<button data-href="#Milvus-Metrics-Dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Во время работы Milvus выводит список подробных метрик с временными рядами. Для визуализации метрик можно использовать <a href="https://prometheus.io/">Prometheus</a> и <a href="https://grafana.com/">Grafana</a>. В этой теме представлены метрики мониторинга, отображаемые в Grafana Milvus Dashboard.</p>
 <p>Единицей времени в этой теме являются миллисекунды. А "99-й процентиль" в этой теме означает, что 99 процентов времени статистика контролируется в пределах определенного значения.</p>
-<p>Для понимания метрик Prometheus мы рекомендуем сначала прочитать <a href="/docs/ru/monitor_overview.md">обзор фреймворка мониторинга Milvus</a>.</p>
+<p>Для понимания метрик Prometheus мы рекомендуем сначала прочитать <a href="/docs/ru/v2.5.x/monitor_overview.md">обзор фреймворка мониторинга Milvus</a>.</p>
 <p><details><summary>Прокси</summary></p>
 <table>
 <thead>

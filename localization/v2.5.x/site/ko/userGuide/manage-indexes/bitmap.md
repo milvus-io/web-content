@@ -4,6 +4,7 @@ title: 비트맵
 related_key: bitmap
 summary: 비트맵 인덱싱은 카디널리티가 낮은 스칼라 필드에서 쿼리 성능을 개선하기 위해 고안된 효율적인 인덱싱 기법입니다.
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">비트맵<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,8 +85,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>이 예에서는 <code translate="no">my_collection</code> 컬렉션의 <code translate="no">category</code> 필드에 비트맵 인덱스를 생성합니다. <code translate="no">add_index()</code> 메서드는 필드 이름, 인덱스 유형 및 인덱스 이름을 지정하는 데 사용됩니다.</p>
-<p>비트맵 인덱스가 생성되면 쿼리 작업에서 <code translate="no">filter</code> 매개변수를 사용하여 인덱싱된 필드를 기반으로 스칼라 필터링을 수행할 수 있습니다. 이렇게 하면 비트맵 인덱스를 사용하여 검색 결과의 범위를 효율적으로 좁힐 수 있습니다. 자세한 내용은 <a href="/docs/ko/boolean.md">메타데이터 필터링을</a> 참조하세요.</p>
+<p>비트맵 인덱스가 생성되면 쿼리 작업에서 <code translate="no">filter</code> 매개변수를 사용하여 인덱싱된 필드를 기반으로 스칼라 필터링을 수행할 수 있습니다. 이렇게 하면 비트맵 인덱스를 사용하여 검색 결과의 범위를 효율적으로 좁힐 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/boolean.md">메타데이터 필터링을</a> 참조하세요.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

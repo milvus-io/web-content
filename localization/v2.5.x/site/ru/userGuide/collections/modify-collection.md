@@ -5,6 +5,7 @@ summary: >-
   Вы можете переименовать коллекцию или изменить ее настройки. Эта страница
   посвящена изменению коллекции.
 ---
+
 <h1 id="Modify-Collection" class="common-anchor-header">Изменить коллекцию<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,15 +43,16 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.rename_collection(
-    old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
+old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.RenameCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -146,10 +148,11 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
 <span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
@@ -199,15 +202,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Если данные коллекции должны быть удалены по истечении определенного периода, подумайте о том, чтобы установить время жизни коллекции (TTL) в секундах. Как только TTL истечет, Milvus удалит все сущности из коллекции.  Удаление происходит асинхронно, что означает, что поиск и запросы все еще возможны до завершения удаления. Подробнее см. в разделе <a href="/docs/ru/set-collection-ttl.md">Установка TTL коллекции</a>.</p></td>
+     <td><p>Если данные коллекции должны быть удалены по истечении определенного периода, подумайте о том, чтобы установить время жизни коллекции (TTL) в секундах. Как только TTL истечет, Milvus удалит все сущности из коллекции.  Удаление происходит асинхронно, что означает, что поиск и запросы все еще возможны до завершения удаления. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/set-collection-ttl.md">Установка TTL коллекции</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>Сопоставление памяти (Mmap) обеспечивает прямой доступ из памяти к большим файлам на диске, позволяя Milvus хранить индексы и данные как в памяти, так и на жестких дисках. Такой подход помогает оптимизировать политику размещения данных на основе частоты доступа, увеличивая емкость хранения коллекций без ущерба для производительности поиска.</p><p>Подробнее см. в разделе <a href="/docs/ru/mmap.md">Использование mmap</a>.</p></td>
+     <td><p>Сопоставление памяти (Mmap) обеспечивает прямой доступ из памяти к большим файлам на диске, позволяя Milvus хранить индексы и данные как в памяти, так и на жестких дисках. Такой подход помогает оптимизировать политику размещения данных на основе частоты доступа, увеличивая емкость хранения коллекций без ущерба для производительности поиска.</p><p>Подробнее см. в разделе <a href="/docs/ru/v2.5.x/mmap.md">Использование mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>При включенной функции Partition Key Isolation Milvus группирует сущности на основе значения Partition Key и создает отдельный индекс для каждой из этих групп. Получив запрос на поиск, Milvus находит индекс на основе значения Partition Key, указанного в условии фильтрации, и ограничивает область поиска сущностями, включенными в индекс, что позволяет избежать сканирования нерелевантных сущностей во время поиска и значительно повысить производительность поиска. Подробнее см. в разделе <a href="/docs/ru/use-partition-key.md#Use-Partition-Key-Isolation">Использование изоляции ключа раздела</a>.</p></td>
+     <td><p>При включенной функции Partition Key Isolation Milvus группирует сущности на основе значения Partition Key и создает отдельный индекс для каждой из этих групп. Получив запрос на поиск, Milvus находит индекс на основе значения Partition Key, указанного в условии фильтрации, и ограничивает область поиска сущностями, включенными в индекс, что позволяет избежать сканирования нерелевантных сущностей во время поиска и значительно повысить производительность поиска. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/use-partition-key.md#Use-Partition-Key-Isolation">Использование изоляции ключа раздела</a>.</p></td>
    </tr>
 </table>
 <h2 id="Drop-Collection-Properties" class="common-anchor-header">Сброс свойств коллекции<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">

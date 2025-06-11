@@ -4,6 +4,7 @@ title: 密集向量
 summary: >-
   密集向量是广泛应用于机器学习和数据分析的数字数据表示。它们由包含实数的数组组成，其中大部分或所有元素都不为零。与稀疏向量相比，密集向量在同一维度上包含更多信息，因为每个维度都持有有意义的值。这种表示方法能有效捕捉复杂的模式和关系，使数据在高维空间中更容易分析和处理。密集向量通常有固定的维数，从几十到几百甚至上千不等，具体取决于具体的应用和要求。
 ---
+
 <h1 id="Dense-Vector" class="common-anchor-header">密集向量<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,6 +62,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>稠密向量可使用各种<a href="https://en.wikipedia.org/wiki/Embedding">嵌入</a>模型生成，如用于图像的 CNN 模型（如<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>、<a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>）和用于文本的语言模型（如<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>、<a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>）。这些模型将原始数据转化为高维空间中的点，捕捉数据的语义特征。此外，Milvus 还提供便捷的方法，帮助用户生成和处理密集向量，详见 Embeddings。</p>
 <p>一旦数据被向量化，就可以存储在 Milvus 中进行管理和向量检索。下图显示了基本流程。</p>
 <p>
@@ -68,7 +70,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>使用密集向量</span> </span></p>
 <div class="alert note">
-<p>除了密集向量，Milvus 还支持稀疏向量和二进制向量。稀疏向量适用于基于特定术语的精确匹配，如关键词搜索和术语匹配，而二进制向量常用于高效处理二进制化数据，如图像模式匹配和某些散列应用。更多信息，请参阅<a href="/docs/zh/binary-vector.md">二进制向量</a>和<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
+<p>除了密集向量，Milvus 还支持稀疏向量和二进制向量。稀疏向量适用于基于特定术语的精确匹配，如关键词搜索和术语匹配，而二进制向量常用于高效处理二进制化数据，如图像模式匹配和某些散列应用。更多信息，请参阅<a href="/docs/zh/v2.5.x/binary-vector.md">二进制向量</a>和<a href="/docs/zh/v2.5.x/sparse_vector.md">稀疏向量</a>。</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">使用密集向量<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,13 +100,14 @@ summary: >-
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">True</span>,
-    enable_dynamic_fields=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">True</span>,
+enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">4</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -231,12 +234,13 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -271,7 +275,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的示例中，使用<code translate="no">AUTOINDEX</code> 索引类型为<code translate="no">dense_vector</code> 字段创建了名为<code translate="no">dense_vector_index</code> 的索引。<code translate="no">metric_type</code> 设置为<code translate="no">IP</code> ，表示将使用内积作为距离度量。</p>
 <p>Milvus 提供多种索引类型，以获得更好的向量搜索体验。AUTOINDEX 是一种特殊的索引类型，旨在平滑向量搜索的学习曲线。有很多索引类型可供您选择。详情请参阅 xxx。</p>
-<p>Milvus 支持其他度量类型。更多信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p>
+<p>Milvus 支持其他度量类型。更多信息，请参阅<a href="/docs/zh/v2.5.x/metric.md">公制类型</a>。</p>
 <h3 id="Create-collection" class="common-anchor-header">创建 Collections</h3><p>完成密集向量和索引参数设置后，就可以创建包含密集向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_collection</code> 的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -285,16 +289,17 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .build());
+.uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+.build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.indexParams(indexes)
+.build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
@@ -335,10 +340,11 @@ client.createCollection(requestCreate);
 ]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -399,12 +405,12 @@ client.<span class="hljs-title function_">insert</span>({
 query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[query_vector],
-    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    search_params=search_params,
-    limit=<span class="hljs-number">5</span>,
-    output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[query_vector],
+anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+search_params=search_params,
+limit=<span class="hljs-number">5</span>,
+output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -412,6 +418,7 @@ res = client.search(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172271&#x27;, &#x27;distance&#x27;: 0.7599999904632568, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172271&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172270&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172270&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -487,4 +494,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关相似性搜索参数的更多信息，请参阅<a href="/docs/zh/single-vector-search.md">基本 ANN 搜索</a>。</p>
+<p>有关相似性搜索参数的更多信息，请参阅<a href="/docs/zh/v2.5.x/single-vector-search.md">基本 ANN 搜索</a>。</p>

@@ -5,6 +5,7 @@ summary: >-
   유사성 메트릭은 벡터 간의 유사성을 측정하는 데 사용됩니다. 적절한 거리 메트릭을 선택하면 분류 및 클러스터링 성능을 크게 향상시키는 데
   도움이 됩니다.
 ---
+
 <h1 id="Metric-Types" class="common-anchor-header">메트릭 유형<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +64,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code> 유형의 벡터 필드의 경우, 전체 텍스트 검색을 수행할 때만 <code translate="no">BM25</code> 메트릭 유형을 사용합니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
+<li><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code> 유형의 벡터 필드의 경우, 전체 텍스트 검색을 수행할 때만 <code translate="no">BM25</code> 메트릭 유형을 사용합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code> 유형의 벡터 필드의 경우 차원 값(<code translate="no">dim</code>)은 8의 배수여야 합니다.</p></li>
 </ul>
 </div>
@@ -246,7 +247,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25는 널리 사용되는 텍스트 관련성 측정 방법으로, 특히 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 위해 설계되었습니다. 다음 세 가지 주요 요소를 결합합니다:</p>
+    </button></h2><p>BM25는 널리 사용되는 텍스트 관련성 측정 방법으로, 특히 <a href="/docs/ko/v2.5.x/full-text-search.md">전체 텍스트 검색을</a> 위해 설계되었습니다. 다음 세 가지 주요 요소를 결합합니다:</p>
 <ul>
 <li><p><strong>용어 빈도(TF):</strong> 문서에서 용어가 얼마나 자주 나타나는지를 측정합니다. 빈도가 높을수록 중요도가 높은 경우가 많지만, BM25는 포화도 매개변수 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span> k <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 를 사용하여 지나치게 빈번한 용어가 관련성 점수를 지배하는 것을 방지합니다.</p></li>
 <li><p><strong>역 문서 빈도(IDF):</strong> 전체 말뭉치에서 용어의 중요도를 반영합니다. 더 적은 수의 문서에 나타나는 용어는 더 높은 IDF 값을 받아 연관성에 대한 기여도가 더 크다는 것을 나타냅니다.</p></li>

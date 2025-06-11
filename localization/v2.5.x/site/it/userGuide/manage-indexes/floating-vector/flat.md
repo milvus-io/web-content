@@ -9,6 +9,7 @@ summary: >-
   avanzata dei dati. Questo approccio garantisce l'accuratezza, offrendo un
   richiamo del 100%, poiché ogni potenziale corrispondenza viene valutata.
 ---
+
 <h1 id="FLAT" class="common-anchor-header">FLAT<button data-href="#FLAT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,20 +49,21 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={} <span class="hljs-comment"># No additional parameters required for FLAT</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={} <span class="hljs-comment"># No additional parameters required for FLAT</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>In questa configurazione:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Il tipo di indice da costruire. In questo esempio, impostare il valore su <code translate="no">FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/v2.5.x/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Per l'indice FLAT non sono necessari parametri aggiuntivi.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/create-collection.md">Creazione di una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/v2.5.x/create-collection.md">Creazione di una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,6 +3,7 @@ id: comparison.md
 title: المقارنة
 summary: تقارن هذه المقالة بين Milvus وحلول البحث المتجه الأخرى.
 ---
+
 <h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">مقارنة ميلفوس مع البدائل<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,6 +155,6 @@ summary: تقارن هذه المقالة بين Milvus وحلول البحث ا
       </svg>
     </button></h2><ul>
 <li><p><strong>التجربة</strong>: اختبر Milvus بشكل مباشر من خلال البدء بـ Milvus <a href="https://milvus.io/docs/quickstart.md">quickstart</a> أو <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">الاشتراك في Zilliz Cloud</a>.</p></li>
-<li><p><strong>اعرف المزيد</strong>: تعمق أكثر في ميزات ميلفوس من خلال <a href="/docs/ar/glossary.md">مصطلحاتنا</a> الشاملة <a href="https://milvus.io/docs/manage-collections.md">وأدلة المستخدم</a>.</p></li>
+<li><p><strong>اعرف المزيد</strong>: تعمق أكثر في ميزات ميلفوس من خلال <a href="/docs/ar/v2.5.x/glossary.md">مصطلحاتنا</a> الشاملة <a href="https://milvus.io/docs/manage-collections.md">وأدلة المستخدم</a>.</p></li>
 <li><p><strong>استكشف البدائل</strong>: لمقارنة أوسع لخيارات قواعد البيانات المتجهة، استكشف موارد إضافية على <a href="https://zilliz.com/comparison">هذه الصفحة</a>.</p></li>
 </ul>

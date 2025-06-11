@@ -4,6 +4,7 @@ title: LinderaCompatible with Milvus 2.5.11+
 summary: lindera tokenizer 執行以字典為基礎的字形分析。對於日文、韓文和中文等字詞不以空格分隔的語言來說，這是一個很好的選擇。
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="Lindera" class="common-anchor-header">Lindera<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Lindera" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +100,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
 </ul></td>
    </tr>
 </table>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,6 +150,7 @@ sample_text = <span class="hljs-string">&quot;東京スカイツリーの最寄�
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

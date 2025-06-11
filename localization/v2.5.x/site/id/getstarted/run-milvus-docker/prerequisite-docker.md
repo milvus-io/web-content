@@ -7,6 +7,7 @@ summary: >-
   Compose.
 title: Persyaratan untuk Menginstalasi Milvus dengan Docker Compose
 ---
+
 <h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">Persyaratan untuk Menginstalasi Milvus dengan Docker Compose<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,6 +109,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>Jika perangkat keras dan perangkat lunak Anda memenuhi persyaratan di atas, Anda dapat</p>
 <ul>
-<li><a href="/docs/id/install_standalone-docker.md">Menjalankan Milvus di Docker</a></li>
-<li><a href="/docs/id/install_standalone-docker-compose.md">Menjalankan Milvus dengan Docker Compose</a></li>
+<li><a href="/docs/id/v2.5.x/install_standalone-docker.md">Menjalankan Milvus di Docker</a></li>
+<li><a href="/docs/id/v2.5.x/install_standalone-docker-compose.md">Menjalankan Milvus dengan Docker Compose</a></li>
 </ul>

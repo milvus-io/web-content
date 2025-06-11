@@ -2,9 +2,10 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-summary: 'Erfahren Sie, wie Sie das Java SDK von Milvus installieren.'
+summary: "Erfahren Sie, wie Sie das Java SDK von Milvus installieren."
 title: Milvus Java SDK installieren
 ---
+
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Milvus Java SDK installieren<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,11 +91,11 @@ title: Milvus Java SDK installieren
 <ul>
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
-<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
-<li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
-<li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
-<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
+<li><a href="/docs/de/v2.5.x/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/manage-partitions.md">Partitionen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
+<li><a href="/docs/de/v2.5.x/single-vector-search.md">Ein-Vektor-Suche</a></li>
+<li><a href="/docs/de/v2.5.x/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
 <li><p>Erkunden Sie die <a href="/api-reference/java/v2.4.x/About.md">Milvus Java API-Referenz</a></p></li>
 </ul>

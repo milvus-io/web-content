@@ -7,6 +7,7 @@ summary: >-
   Compose.
 title: Requisiti per l'installazione di Milvus con Docker Compose
 ---
+
 <h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">Requisiti per l'installazione di Milvus con Docker Compose<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,6 +109,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>Se l'hardware e il software soddisfano i requisiti di cui sopra, è possibile</p>
 <ul>
-<li><a href="/docs/it/install_standalone-docker.md">Eseguire Milvus in Docker</a></li>
-<li><a href="/docs/it/install_standalone-docker-compose.md">Eseguire Milvus con Docker Compose</a></li>
+<li><a href="/docs/it/v2.5.x/install_standalone-docker.md">Eseguire Milvus in Docker</a></li>
+<li><a href="/docs/it/v2.5.x/install_standalone-docker-compose.md">Eseguire Milvus con Docker Compose</a></li>
 </ul>

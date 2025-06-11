@@ -5,6 +5,7 @@ related_key: Docker
 summary: 了解如何使用 Docker Desktop for Windows 獨立安裝 Milvus。
 title: 在 Docker 中執行 Milvus (Linux)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">在 Docker 中執行 Milvus (Windows)<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,6 +65,7 @@ title: 在 Docker 中執行 Milvus (Linux)
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
 </code></pre></li>
+
 <li><p>執行下載的腳本，以 Docker 容器啟動 Milvus。</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;standalone.bat start​
 Wait for Milvus starting...​
@@ -71,6 +73,7 @@ Start successfully.​
 To change the default Milvus configuration, edit user.yaml and restart the service.​
 
 </code></pre>
+
 <p>執行安裝腳本後</p>
 <ul>
 <li><p>一個名為<strong>milvus-standalone</strong>的 docker 容器已經在<strong>19530</strong> 連接埠啟動。</p></li>
@@ -88,6 +91,7 @@ Delete Milvus container successfully. # Container has been removed.​
 Delete successfully. # Data has been removed.​
 
 </code></pre></li>
+
 </ol>
 <h3 id="From-WSL-2​" class="common-anchor-header">從 WSL 2</h3><p>如果您喜歡在 Windows 上使用 Linux 指令和 shell 腳本啟動 Milvus，請確保已經安裝了 WSL 2 指令。有關如何安裝 WSL 2 指令的詳細資訊，您可以參考這篇<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">微軟文章</a>。</p>
 <ol>
@@ -97,6 +101,7 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>下載安裝腳本</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Download the installation script​</span>
 $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh​
@@ -105,6 +110,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>以 docker 容器的方式啟動 Milvus。</p>
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
@@ -112,6 +118,7 @@ Start successfully.​
 To change the default Milvus configuration, add your settings to the user.yaml file and <span class="hljs-keyword">then</span> restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>您可以使用下列指令來管理 Milvus 容器和儲存的資料。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Stop Milvus​</span>
 $ bash standalone_embed.sh stop​
@@ -123,6 +130,7 @@ Delete Milvus container successfully.​
 Delete successfully.​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="Run-Milvus-with-Docker-Compose​" class="common-anchor-header">使用 Docker Compose 執行 Milvus<button data-href="#Run-Milvus-with-Docker-Compose​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,6 +161,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
+
 <p>視您的網路連線而定，下載 Milvus 安裝的映像可能需要一段時間。命名為<strong>milvus-</strong> <strong>standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器啟動後，您可以看到</p>
 <ul>
 <li><p><strong>milvus-etcd</strong>容器不向主機暴露任何連接埠，並將其資料映射到目前資料夾中的<strong>volumes/etcd</strong>。</p></li>
@@ -169,10 +178,12 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>下載 Milvus 配置檔案。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>啟動 Milvus。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
@@ -181,6 +192,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="FAQs​" class="common-anchor-header">常見問題<button data-href="#FAQs​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -214,6 +226,7 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
+
 <li><p>檢查是否已正確安裝 WSL。</p>
 <p>您可以執行下列指令來安裝或更新 WSL 2 指令。</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
@@ -221,6 +234,7 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
+
 <li><p>檢查 Docker Daemon 是否已啟動。</p>
 <p>您需要到 Docker Desktop 的安裝目錄，執行<code translate="no">.\DockerCli.exe -SwitchDaemon</code> 來啟動 Docker Daemon。</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
@@ -228,6 +242,7 @@ C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
+
 <li><p>檢查是否已以<strong>管理員</strong>模式啟動 Docker Desktop。</p>
 <p>確保你已經以管理員模式啟動 Docker Desktop。要這樣做，在<strong>Docker Desktop</strong>上按一下<strong>滑鼠</strong>右鍵，然後選擇<strong>以管理員模式執行</strong>。</p>
 <p>
@@ -275,27 +290,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>在 Docker 中安裝 Milvus 後，您可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh-hant/quickstart.md">Quickstart</a>來了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh-hant/v2.5.x/quickstart.md">Quickstart</a>來了解 Milvus 的功能。</p></li>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh-hant/manage_databases.md">管理資料庫</a></li>
-<li><a href="/docs/zh-hant/manage-collections.md">管理資料集</a></li>
-<li><a href="/docs/zh-hant/manage-partitions.md">管理分割區</a></li>
-<li><a href="/docs/zh-hant/insert-update-delete.md">插入、倒置及刪除</a></li>
-<li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
-<li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage_databases.md">管理資料庫</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-collections.md">管理資料集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-partitions.md">管理分割區</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/insert-update-delete.md">插入、倒置及刪除</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/single-vector-search.md">單向量搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
-<li><p><a href="/docs/zh-hant/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh-hant/scaleout.md">擴充你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/scaleout.md">擴充你的 Milvus 集群</a>。</p></li>
 <li><p>在雲上部署您的 Milvu 集群：</p>
 <ul>
-<li><a href="/docs/zh-hant/eks.md">亞馬遜 EKS</a></li>
-<li><a href="/docs/zh-hant/gcp.md">谷歌雲</a></li>
-<li><a href="/docs/zh-hant/azure.md">微軟 Azure</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/eks.md">亞馬遜 EKS</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/gcp.md">谷歌雲</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/azure.md">微軟 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，Milvus 可觀察與管理的直覺式網頁介面。</p></li>
-<li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus 備份</a>，Milvus 資料備份的開放原始碼工具。</p></li>
-<li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher</a>，用於調試 Milvus 和動態組態更新的開放原始碼工具。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.5.x/milvus-webui.md">Milvus WebUI</a>，Milvus 可觀察與管理的直覺式網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.5.x/milvus_backup_overview.md">Milvus 備份</a>，Milvus 資料備份的開放原始碼工具。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>，用於調試 Milvus 和動態組態更新的開放原始碼工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一個開放源碼 GUI 工具，用於直觀的 Milvus 管理。</p></li>
-<li><p><a href="/docs/zh-hant/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

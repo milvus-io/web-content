@@ -4,6 +4,7 @@ related_key: disk_index
 summary: آلية فهرسة الأقراص في Milvus للبحث المتجه المحسّن على القرص.
 title: الفهرسة على القرص
 ---
+
 <h1 id="On-disk-Index" class="common-anchor-header">الفهرسة على القرص<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ title: الفهرسة على القرص
         ></path>
       </svg>
     </button></h1><p>تقدم هذه المقالة خوارزمية الفهرسة على القرص DiskANN، وهي خوارزمية فهرسة على القرص لعمليات البحث المتجهة المحسّنة على القرص. استنادًا إلى الرسوم البيانية Vamana، يعمل DiskANN على تشغيل عمليات بحث متجهية فعالة على القرص ضمن مجموعات البيانات الكبيرة.</p>
-<p>لتحسين أداء الاستعلام، يمكنك <a href="/docs/ar/index-vector-fields.md">تحديد نوع فهرس</a> لكل حقل متجه.</p>
+<p>لتحسين أداء الاستعلام، يمكنك <a href="/docs/ar/v2.5.x/index-vector-fields.md">تحديد نوع فهرس</a> لكل حقل متجه.</p>
 <div class="alert note"> 
 يدعم الحقل المتجه حاليًا نوع فهرس واحد فقط. يقوم Milvus تلقائيًا بحذف الفهرس القديم عند تبديل نوع الفهرس.</div>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">

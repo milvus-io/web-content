@@ -5,6 +5,7 @@ related_key: SDK
 summary: تعرف على كيفية تثبيت مجموعة أدوات تطوير البرمجيات Java SDK الخاصة بـ Milvus.
 title: تثبيت Milvus Java SDK
 ---
+
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,11 +91,11 @@ title: تثبيت Milvus Java SDK
 <ul>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
-<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
-<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-partitions.md">إدارة الأقسام</a></li>
+<li><a href="/docs/ar/v2.5.x/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
+<li><a href="/docs/ar/v2.5.x/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
 <li><p>استكشف <a href="/api-reference/java/v2.4.x/About.md">مرجع واجهة برمجة تطبيقات Milvus Java</a></p></li>
 </ul>

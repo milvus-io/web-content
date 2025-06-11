@@ -4,6 +4,7 @@ order: 2
 summary: 本指南將引導您為整數、字串等欄位建立及設定標量索引。
 title: 索引標量欄位
 ---
+
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">索引標量欄位<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +38,7 @@ title: 索引標量欄位
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">自動索引</a></strong>：Milvus 根據標量字段的資料類型自動決定索引類型。這適用於不需要控制特定索引類型的情況。</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">自訂索引</a></strong>：您可以指定確切的索引類型，例如反向索引<a href="/docs/zh-hant/bitmap.md">或位圖索引</a>。這提供對索引類型選擇的更多控制。</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">自訂索引</a></strong>：您可以指定確切的索引類型，例如反向索引<a href="/docs/zh-hant/v2.5.x/bitmap.md">或位圖索引</a>。這提供對索引類型選擇的更多控制。</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">自動索引<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,16 +75,17 @@ client = MilvusClient(
 index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
-    index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
+index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -140,16 +142,17 @@ client.createIndex(createIndexReq);
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
-    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
+index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -190,8 +193,8 @@ client.createIndex(createIndexReq);
 <p>要建立的標量索引類型。對於隱含索引，請留空或省略此參數。</p>
 <p>對於自訂索引，有效值為</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (建議) 反向索引由包含所有按字母順序排序的標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/scalar_index.md">標量索引</a>。</p></li>
-<li><p><strong>BITMAP</strong>：一種索引類型，儲存欄位中所有唯一值的位元圖。如需詳細資訊，請參閱<a href="/docs/zh-hant/bitmap.md">BITMAP</a>。</p></li>
+<li><p><strong>INVERTED</strong>: (建議) 反向索引由包含所有按字母順序排序的標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/scalar_index.md">標量索引</a>。</p></li>
+<li><p><strong>BITMAP</strong>：一種索引類型，儲存欄位中所有唯一值的位元圖。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/bitmap.md">BITMAP</a>。</p></li>
 <li><p><strong>STL_SORT</strong>：使用標準模板函式庫排序演算法對標量字段排序。僅支援數值欄位 (例如：INT8、INT16、INT32、INT64、FLOAT、DOUBLE)。</p></li>
 <li><p><strong>Trie</strong>：樹狀資料結構，用於快速前綴搜尋和檢索。支援 VARCHAR 欄位。</p></li>
 </ul></li>
@@ -215,7 +218,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(String</em>) 要建立索引的標量欄位名稱。</li>
 <li><strong>indexName</strong><em>(字串</em>) 要建立的標量索引名稱。每個標量欄位支援一個索引。</li>
 <li><strong>indexType</strong><em>(字串</em>) 要建立的標量索引類型。對於隱含索引，請將它留空或省略此參數。 對於自訂索引，有效值為：<ul>
-<li><strong>INVERTED</strong>: (建議) 反向索引由包含按字母順序排序的所有標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/scalar_index.md">標量索引</a>。</li>
+<li><strong>INVERTED</strong>: (建議) 反向索引由包含按字母順序排序的所有標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/scalar_index.md">標量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用標準模板函式庫排序演算法對標量字段排序。支援布林欄位和數值欄位 (例如：INT8、INT16、INT32、INT64、FLOAT、DOUBLE)。</li>
 <li><strong>Trie</strong>：一種樹狀資料結構，用於快速前綴搜尋和檢索。支援 VARCHAR 欄位。</li>
 </ul></li>
@@ -236,7 +239,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(字串</em>) 要建立索引的標量欄位名稱。</li>
 <li><strong>index_name</strong><em>(string</em>) 要建立的標量索引的名稱。每個標量欄位支援一個索引。</li>
 <li><strong>index_type</strong><em>(string</em>) 要建立的標量索引類型。對於隱含索引，請將它留空或省略此參數。 對於自訂索引，有效值為：<ul>
-<li><strong>INVERTED</strong>: (建議) 反向索引由包含所有按字母順序排序的標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/scalar_index.md">標量索引</a>。</li>
+<li><strong>INVERTED</strong>: (建議) 反向索引由包含所有按字母順序排序的標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/scalar_index.md">標量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用標準模板函式庫排序演算法對標量字段排序。支援布林欄位和數值欄位 (例如：INT8、INT16、INT32、INT64、FLOAT、DOUBLE)。</li>
 <li><strong>Trie</strong>：一種樹狀資料結構，用於快速前綴搜尋和檢索。支援 VARCHAR 欄位。</li>
 </ul></li>
@@ -276,6 +279,7 @@ client.createIndex(createIndexReq);
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># [&#x27;default_index&#x27;,&#x27;inverted_index&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.List;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.ListIndexesReq;
 

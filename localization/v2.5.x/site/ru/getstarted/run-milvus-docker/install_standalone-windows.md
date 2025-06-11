@@ -7,6 +7,7 @@ summary: >-
   для Windows.
 title: Запуск Milvus в Docker (Linux)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">Запуск Milvus в Docker (Windows)<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,6 +67,7 @@ title: Запуск Milvus в Docker (Linux)
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
 </code></pre></li>
+
 <li><p>Запустите загруженный сценарий, чтобы запустить Milvus в качестве контейнера Docker.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;standalone.bat start​
 Wait for Milvus starting...​
@@ -73,6 +75,7 @@ Start successfully.​
 To change the default Milvus configuration, edit user.yaml and restart the service.​
 
 </code></pre>
+
 <p>После запуска сценария установки.</p>
 <ul>
 <li><p>Контейнер docker с именем <strong>milvus-standalone</strong> был запущен на порту <strong>19530</strong>.</p></li>
@@ -90,6 +93,7 @@ Delete Milvus container successfully. # Container has been removed.​
 Delete successfully. # Data has been removed.​
 
 </code></pre></li>
+
 </ol>
 <h3 id="From-WSL-2​" class="common-anchor-header">Из WSL 2</h3><p>Если вы предпочитаете запускать Milvus с помощью команд Linux и сценариев оболочки в Windows, убедитесь, что у вас уже установлена команда WSL 2. Для получения подробной информации об установке команды WSL 2 можно обратиться к этой <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">статье Microsoft</a>.</p>
 <ol>
@@ -99,6 +103,7 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>Загрузите сценарий установки</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Download the installation script​</span>
 $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh​
@@ -107,6 +112,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Запустите Milvus в качестве контейнера docker.</p>
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
@@ -114,6 +120,7 @@ Start successfully.​
 To change the default Milvus configuration, add your settings to the user.yaml file and <span class="hljs-keyword">then</span> restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Для управления контейнером Milvus и хранящимися в нем данными можно использовать следующие команды.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Stop Milvus​</span>
 $ bash standalone_embed.sh stop​
@@ -125,6 +132,7 @@ Delete Milvus container successfully.​
 Delete successfully.​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="Run-Milvus-with-Docker-Compose​" class="common-anchor-header">Запуск Milvus с помощью Docker Compose<button data-href="#Run-Milvus-with-Docker-Compose​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,6 +163,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
+
 <p>В зависимости от вашего сетевого подключения загрузка образов для установки Milvus может занять некоторое время. Когда контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong> будут запущены, вы сможете убедиться, что</p>
 <ul>
 <li><p>Контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>томами/etcd</strong> в текущей папке.</p></li>
@@ -171,10 +180,12 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>Загрузите файл конфигурации Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Запустите Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
@@ -183,6 +194,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="FAQs​" class="common-anchor-header">Вопросы и ответы<button data-href="#FAQs​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -216,6 +228,7 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
+
 <li><p>Проверьте, правильно ли установлена WSL.</p>
 <p>Можно выполнить следующую команду для установки или обновления команды WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
@@ -223,6 +236,7 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
+
 <li><p>Проверьте, запущен ли демон Docker Daemon.</p>
 <p>Необходимо перейти в каталог установки Docker Desktop и выполнить команду <code translate="no">.\DockerCli.exe -SwitchDaemon</code>, чтобы запустить Docker Daemon.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
@@ -230,6 +244,7 @@ C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
+
 <li><p>Проверьте, запустили ли вы Docker Desktop в режиме <strong>администратора</strong>.</p>
 <p>Убедитесь, что вы запустили Docker Desktop в режиме администратора. Для этого щелкните правой кнопкой мыши на <strong>Docker Desktop</strong> и выберите <strong>Запуск от имени администратора</strong>.</p>
 <p>
@@ -277,27 +292,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>Установив Milvus в Docker, вы можете:</p>
 <ul>
-<li><p>Проверить <a href="/docs/ru/quickstart.md">Quickstart</a>, чтобы узнать, на что способен Milvus.</p></li>
+<li><p>Проверить <a href="/docs/ru/v2.5.x/quickstart.md">Quickstart</a>, чтобы узнать, на что способен Milvus.</p></li>
 <li><p>Изучить основные операции Milvus:</p>
 <ul>
-<li><a href="/docs/ru/manage_databases.md">Управлять базами данных</a></li>
-<li><a href="/docs/ru/manage-collections.md">Управлять коллекциями</a></li>
-<li><a href="/docs/ru/manage-partitions.md">Управление разделами</a></li>
-<li><a href="/docs/ru/insert-update-delete.md">Вставка, вставка и удаление</a></li>
-<li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
-<li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/manage_databases.md">Управлять базами данных</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-collections.md">Управлять коллекциями</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-partitions.md">Управление разделами</a></li>
+<li><a href="/docs/ru/v2.5.x/insert-update-delete.md">Вставка, вставка и удаление</a></li>
+<li><a href="/docs/ru/v2.5.x/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
-<li><p><a href="/docs/ru/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ru/scaleout.md">Масштабирование кластера Milvus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.5.x/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
+<li><p><a href="/docs/ru/v2.5.x/scaleout.md">Масштабирование кластера Milvus</a>.</p></li>
 <li><p>Развертывание кластера Milvu в облаках:</p>
 <ul>
-<li><a href="/docs/ru/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ru/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/ru/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ru/v2.5.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ru/v2.5.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/ru/v2.5.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Изучите <a href="/docs/ru/milvus-webui.md">Milvus WebUI</a>, интуитивно понятный веб-интерфейс для наблюдения и управления Milvus.</p></li>
-<li><p>Изучите <a href="/docs/ru/milvus_backup_overview.md">Milvus Backup</a>, инструмент с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Изучите <a href="/docs/ru/birdwatcher_overview.md">Birdwatcher</a>, инструмент с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Изучите <a href="/docs/ru/v2.5.x/milvus-webui.md">Milvus WebUI</a>, интуитивно понятный веб-интерфейс для наблюдения и управления Milvus.</p></li>
+<li><p>Изучите <a href="/docs/ru/v2.5.x/milvus_backup_overview.md">Milvus Backup</a>, инструмент с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
+<li><p>Изучите <a href="/docs/ru/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>, инструмент с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Изучите <a href="https://github.com/zilliztech/attu">Attu</a>, инструмент с открытым исходным кодом GUI для интуитивного управления Milvus.</p></li>
-<li><p><a href="/docs/ru/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.5.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

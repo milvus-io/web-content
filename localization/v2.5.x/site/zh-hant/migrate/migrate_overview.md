@@ -3,6 +3,7 @@ id: migrate_overview.md
 summary: 本文概述了 Milvus-migration 工具，包括支援的遷移、功能和架構。
 title: Milvus 遷移概述
 ---
+
 <h1 id="Milvus-Migration-Overview" class="common-anchor-header">Milvus 遷移概述<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,10 +37,10 @@ title: Milvus 遷移概述
       </svg>
     </button></h2><p><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具支援多種遷移路徑，以滿足不同使用者的需求：</p>
 <ul>
-<li><a href="/docs/zh-hant/es2m.md">Elasticsearch 至 Milvus 2.x</a>：讓使用者能夠從 Elasticsearch 環境遷移資料，以利用 Milvus 最佳化的向量搜尋功能。</li>
-<li><a href="/docs/zh-hant/f2m.md">Faiss 至 Milvus 2.x</a>：提供從 Faiss 轉移資料的實驗性支援，Faiss 是高效率相似性搜尋的流行函式庫。</li>
-<li><a href="/docs/zh-hant/m2m.md">Milvus 1.x 至 Milvus 2.x</a>：確保早期版本的資料能順利過渡到最新的架構。</li>
-<li><a href="/docs/zh-hant/from-m2x.md">Milvus 2.3.x 至 Milvus 2.3.x 或以上版本</a>：為已遷移至 2.3.x 的使用者提供一次性遷移路徑。</li>
+<li><a href="/docs/zh-hant/v2.5.x/es2m.md">Elasticsearch 至 Milvus 2.x</a>：讓使用者能夠從 Elasticsearch 環境遷移資料，以利用 Milvus 最佳化的向量搜尋功能。</li>
+<li><a href="/docs/zh-hant/v2.5.x/f2m.md">Faiss 至 Milvus 2.x</a>：提供從 Faiss 轉移資料的實驗性支援，Faiss 是高效率相似性搜尋的流行函式庫。</li>
+<li><a href="/docs/zh-hant/v2.5.x/m2m.md">Milvus 1.x 至 Milvus 2.x</a>：確保早期版本的資料能順利過渡到最新的架構。</li>
+<li><a href="/docs/zh-hant/v2.5.x/from-m2x.md">Milvus 2.3.x 至 Milvus 2.3.x 或以上版本</a>：為已遷移至 2.3.x 的使用者提供一次性遷移路徑。</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">特點<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

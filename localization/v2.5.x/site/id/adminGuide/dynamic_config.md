@@ -4,6 +4,7 @@ related_key: configure
 summary: Pelajari tentang konfigurasi dinamis Milvus.
 title: Mengkonfigurasi Milvus dengan Cepat
 ---
+
 <h1 id="Configure-Milvus-on-the-Fly" class="common-anchor-header">Mengkonfigurasi Milvus dengan Cepat<button data-href="#Configure-Milvus-on-the-Fly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,14 +38,14 @@ title: Mengkonfigurasi Milvus dengan Cepat
       </svg>
     </button></h2><p>Anda perlu memastikan bahwa: - Anda telah</p>
 <ul>
-<li>Anda telah menginstal Birdwatcher. Untuk detailnya, lihat <a href="/docs/id/birdwatcher_install_guides.md">Menginstal Birdwatcher</a>,</li>
+<li>Anda telah menginstal Birdwatcher. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/birdwatcher_install_guides.md">Menginstal Birdwatcher</a>,</li>
 <li>Anda telah menginstal etcdctl. Untuk detailnya, lihat <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Berinteraksi dengan etcd</a>, atau</li>
 <li>Anda telah menginstal klien etcd lain, seperti klien Python.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>Contoh dalam panduan ini mengubah nilai <code translate="no">proxy.minPasswordLength</code> menjadi <code translate="no">8</code>. Anda dapat mengganti kunci dengan kunci yang berlaku yang tercantum dalam <a href="/docs/id/dynamic_config.md#Applicable-configuration-items">item konfigurasi yang berlaku</a>.</li>
-<li>Contoh dalam panduan ini mengasumsikan bahwa jalur root Milvus Anda adalah <code translate="no">by-dev</code>. Semua konfigurasi terdaftar di bawah jalur <code translate="no">by-dev/config</code>. Jalur root Milvus bervariasi tergantung pada cara Anda menginstalnya. Untuk instans yang terinstalasi menggunakan grafik Helm, jalur root default-nya adalah <code translate="no">by-dev</code>. Jika Anda tidak mengetahui jalur root, lihat Menghubungkan <a href="/docs/id/birdwatcher_usage_guides.md#Connect-to-etcd">ke etcd</a>.</li>
+<li>Contoh dalam panduan ini mengubah nilai <code translate="no">proxy.minPasswordLength</code> menjadi <code translate="no">8</code>. Anda dapat mengganti kunci dengan kunci yang berlaku yang tercantum dalam <a href="/docs/id/v2.5.x/dynamic_config.md#Applicable-configuration-items">item konfigurasi yang berlaku</a>.</li>
+<li>Contoh dalam panduan ini mengasumsikan bahwa jalur root Milvus Anda adalah <code translate="no">by-dev</code>. Semua konfigurasi terdaftar di bawah jalur <code translate="no">by-dev/config</code>. Jalur root Milvus bervariasi tergantung pada cara Anda menginstalnya. Untuk instans yang terinstalasi menggunakan grafik Helm, jalur root default-nya adalah <code translate="no">by-dev</code>. Jika Anda tidak mengetahui jalur root, lihat Menghubungkan <a href="/docs/id/v2.5.x/birdwatcher_usage_guides.md#Connect-to-etcd">ke etcd</a>.</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">Mengubah konfigurasi<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +204,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>Pelajari lebih lanjut tentang <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a>.</li>
-<li>Pelajari cara mengonfigurasi Milvus yang diinstal menggunakan <a href="/docs/id/configure_operator.md">Milvus Operator</a>, <a href="/docs/id/configure-helm.md">Helm chart</a>, dan <a href="/docs/id/configure-docker.md">Docker</a>.</li>
+<li>Pelajari lebih lanjut tentang <a href="/docs/id/v2.5.x/system_configuration.md">Konfigurasi Sistem</a>.</li>
+<li>Pelajari cara mengonfigurasi Milvus yang diinstal menggunakan <a href="/docs/id/v2.5.x/configure_operator.md">Milvus Operator</a>, <a href="/docs/id/v2.5.x/configure-helm.md">Helm chart</a>, dan <a href="/docs/id/v2.5.x/configure-docker.md">Docker</a>.</li>
 </ul>

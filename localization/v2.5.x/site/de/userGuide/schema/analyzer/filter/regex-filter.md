@@ -7,6 +7,7 @@ summary: >-
   Ausdruck übereinstimmt; alles andere wird verworfen.
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="Regex" class="common-anchor-header">Regex<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +70,7 @@ beta: Milvus 2.5.11+
    </tr>
 </table>
 <p>Der Filter <code translate="no">regex</code> wirkt auf die vom Tokenizer erzeugten Terme und muss daher in Kombination mit einem Tokenizer verwendet werden.</p>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,6 +114,7 @@ sample_text = <span class="hljs-string">&quot;testItem apple testCase banana&quo
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>

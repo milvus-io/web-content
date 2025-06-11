@@ -6,6 +6,7 @@ summary: >-
   el rendimiento.
 title: Preguntas más frecuentes
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">Preguntas más frecuentes<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +35,7 @@ title: Preguntas más frecuentes
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">¿Qué factores afectan al uso de la CPU?</h4><p>El uso de la CPU aumenta cuando Milvus construye índices o ejecuta consultas. En general, la creación de índices requiere un uso intensivo de la CPU, excepto cuando se utiliza Annoy, que se ejecuta en un único subproceso.</p>
 <p>Cuando se ejecutan consultas, el uso de la CPU se ve afectado por <code translate="no">nq</code> y <code translate="no">nprobe</code>. Cuando <code translate="no">nq</code> y <code translate="no">nprobe</code> son pequeños, la concurrencia es baja y el uso de la CPU se mantiene bajo.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">¿Insertar datos y realizar búsquedas simultáneamente afecta al rendimiento de las consultas?</h4><p>Las operaciones de inserción no requieren un uso intensivo de la CPU. Sin embargo, como los nuevos segmentos pueden no haber alcanzado el umbral para la creación de índices, Milvus recurre a la búsqueda de fuerza bruta, lo que afecta significativamente al rendimiento de la consulta.</p>
-<p>El parámetro <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> determina el umbral de creación de índices para un segmento, y está fijado en 1024 filas por defecto. Consulte <a href="/docs/es/system_configuration.md">Configuración del sistema</a> para obtener más información.</p>
+<p>El parámetro <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> determina el umbral de creación de índices para un segmento, y está fijado en 1024 filas por defecto. Consulte <a href="/docs/es/v2.5.x/system_configuration.md">Configuración del sistema</a> para obtener más información.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">¿Puede la indexación de un campo VARCHAR mejorar la velocidad de borrado?</h4><p>La indexación de un campo VARCHAR puede acelerar las operaciones de "Borrado por expresión", pero sólo en determinadas condiciones:</p>
 <ul>
 <li><strong>Índice INVERTIDO</strong>: Este índice ayuda para expresiones <code translate="no">IN</code> o <code translate="no">==</code> en campos VARCHAR de clave no primaria.</li>

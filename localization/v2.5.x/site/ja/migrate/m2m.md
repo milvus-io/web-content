@@ -5,6 +5,7 @@ summary: >-
   2.xへのデータ移行について、包括的なステップバイステップのプロセスを説明します。
 title: Milvus 1.x から
 ---
+
 <h1 id="From-Milvus-1x" class="common-anchor-header">Milvus 1.x から<button data-href="#From-Milvus-1x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ title: Milvus 1.x から
 <li>ターゲットMilvus: 2.x</li>
 </ul></li>
 <li><strong>必要なツール</strong><ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツール</a>。インストールの詳細については、<a href="/docs/ja/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツール</a>。インストールの詳細については、<a href="/docs/ja/v2.5.x/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">移行元Milvusのメタデータのエクスポート<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

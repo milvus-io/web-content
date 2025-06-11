@@ -3,6 +3,7 @@ id: tls.md
 title: Enkripsi dalam Perjalanan
 summary: Pelajari cara mengaktifkan proksi TLS di Milvus.
 ---
+
 <h1 id="Encryption-in-Transit" class="common-anchor-header">Enkripsi dalam Perjalanan<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ summary: Pelajari cara mengaktifkan proksi TLS di Milvus.
     </button></h1><p>TLS (Transport Layer Security) adalah protokol enkripsi untuk memastikan keamanan komunikasi. Proksi Milvus menggunakan autentikasi TLS satu arah dan dua arah.</p>
 <p>Topik ini menjelaskan cara mengaktifkan TLS di proxy Milvus untuk lalu lintas gRPC dan RESTful.</p>
 <div class="alert note">
-<p>TLS dan autentikasi pengguna adalah dua pendekatan keamanan yang berbeda. Jika Anda telah mengaktifkan autentikasi pengguna dan TLS di sistem Milvus Anda, Anda harus menyediakan nama pengguna, kata sandi, dan jalur file sertifikat. Untuk informasi tentang cara mengaktifkan <a href="/docs/id/authenticate.md">autentikasi</a> pengguna, lihat <a href="/docs/id/authenticate.md">Mengautentikasi Akses Pengguna</a>.</p>
+<p>TLS dan autentikasi pengguna adalah dua pendekatan keamanan yang berbeda. Jika Anda telah mengaktifkan autentikasi pengguna dan TLS di sistem Milvus Anda, Anda harus menyediakan nama pengguna, kata sandi, dan jalur file sertifikat. Untuk informasi tentang cara mengaktifkan <a href="/docs/id/v2.5.x/authenticate.md">autentikasi</a> pengguna, lihat <a href="/docs/id/v2.5.x/authenticate.md">Mengautentikasi Akses Pengguna</a>.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">Membuat sertifikat Anda sendiri<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,6 +97,7 @@ openssl req -new -key client.key\
     -extfile ./openssl.cnf -extensions v3_req
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p></details></p>
 <p>Variabel-variabel dalam file <code translate="no">gen.sh</code> sangat penting untuk proses pembuatan file permintaan penandatanganan sertifikat. Lima variabel pertama adalah informasi penandatanganan dasar, termasuk negara, negara bagian, lokasi, organisasi, unit organisasi. Perhatian diperlukan saat mengonfigurasi <code translate="no">CommonName</code> karena akan diverifikasi selama komunikasi klien-server.</p>
 <h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">Jalankan <code translate="no">gen.sh</code> untuk menghasilkan sertifikat</h3><p>Jalankan file <code translate="no">gen.sh</code> untuk membuat sertifikat.</p>
@@ -175,9 +177,10 @@ openssl req -new -key client.key\
   <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/milvus/tls/ca.pem</span>
 
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span>
+<span class="hljs-attr">security:</span>
+<span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Parameter</p>
 <ul>
 <li><code translate="no">serverPemPath</code>: Jalur ke file sertifikat server.</li>
@@ -195,9 +198,10 @@ openssl req -new -key client.key\
   <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/milvus/tls/ca.pem</span>
 
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">internaltlsEnabled:</span> <span class="hljs-literal">true</span> 
+<span class="hljs-attr">security:</span>
+<span class="hljs-attr">internaltlsEnabled:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Parameter:</p>
 <ul>
 <li><code translate="no">serverPemPath</code>: Jalur ke file sertifikat server.</li>
@@ -408,24 +412,26 @@ helm install my-release milvus/milvus -f values.yaml
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
-    secure=<span class="hljs-literal">True</span>,
-    server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
-    server_name=<span class="hljs-string">&quot;localhost&quot;</span>
+uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
+secure=<span class="hljs-literal">True</span>,
+server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
+server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Two-way-TLS-connection" class="common-anchor-header">Koneksi TLS dua arah</h3><p>Sediakan jalur ke <code translate="no">client.pem</code>, <code translate="no">client.key</code>, dan <code translate="no">ca.pem</code>, dan pastikan <code translate="no">server_name</code> cocok dengan <code translate="no">CommonName</code> yang dikonfigurasi dalam sertifikat.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
-    secure=<span class="hljs-literal">True</span>,
-    client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
-    client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
-    ca_pem_path=<span class="hljs-string">&quot;path_to/ca.pem&quot;</span>,
-    server_name=<span class="hljs-string">&quot;localhost&quot;</span>
+uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
+secure=<span class="hljs-literal">True</span>,
+client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
+client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
+ca_pem_path=<span class="hljs-string">&quot;path_to/ca.pem&quot;</span>,
+server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Lihat <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls1.py">example_tls1.py</a> dan <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls2.py">example_tls2.py</a> untuk informasi lebih lanjut.</p>
 <h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Menyambungkan ke server Milvus RESTful dengan TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"

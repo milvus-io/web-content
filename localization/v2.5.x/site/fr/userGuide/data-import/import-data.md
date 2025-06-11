@@ -4,6 +4,7 @@ order: 1
 title: Importer des données
 summary: Cette page présente la procédure d'importation des données préparées.
 ---
+
 <h1 id="Import-data" class="common-anchor-header">Importer des données<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,8 +38,8 @@ summary: Cette page présente la procédure d'importation des données préparé
       </svg>
     </button></h2><ul>
 <li><p>Vous avez déjà préparé vos données et les avez placées dans le seau Milvus.</p>
-<p>Si ce n'est pas le cas, vous devez d'abord utiliser <strong>RemoteBulkWriter</strong> pour préparer vos données et vous assurer que les données préparées ont déjà été transférées dans le seau Milvus sur l'instance MinIO démarrée en même temps que votre instance Milvus. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/prepare-source-data.md">Préparation des données source</a>.</p></li>
-<li><p>Vous avez déjà créé une collection avec le schéma que vous utilisez pour préparer vos données. Si ce n'est pas le cas, reportez-vous à la section <a href="/docs/fr/manage-collections.md">Gérer les collections</a>.</p></li>
+<p>Si ce n'est pas le cas, vous devez d'abord utiliser <strong>RemoteBulkWriter</strong> pour préparer vos données et vous assurer que les données préparées ont déjà été transférées dans le seau Milvus sur l'instance MinIO démarrée en même temps que votre instance Milvus. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.5.x/prepare-source-data.md">Préparation des données source</a>.</p></li>
+<li><p>Vous avez déjà créé une collection avec le schéma que vous utilisez pour préparer vos données. Si ce n'est pas le cas, reportez-vous à la section <a href="/docs/fr/v2.5.x/manage-collections.md">Gérer les collections</a>.</p></li>
 </ul>
 <div class="language-python">
 <p>L'extrait de code suivant crée une collection simple avec le schéma donné. Pour plus d'informations sur les paramètres, voir <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> dans la référence SDK.</p>
@@ -70,9 +71,9 @@ url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
 <span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
 resp = bulk_import(
-    url=url,
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    files=[[<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/1.parquet&#x27;</span>],
+url=url,
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+files=[[<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/1.parquet&#x27;</span>],
            [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/2.parquet&#x27;</span>],
            [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/3.parquet&#x27;</span>],
            [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/4.parquet&#x27;</span>],
@@ -87,6 +88,7 @@ resp = bulk_import(
 job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span class="hljs-string">&#x27;jobId&#x27;</span>]
 <span class="hljs-built_in">print</span>(job_id)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">bulkImport</span><span class="hljs-params">(List&lt;List&lt;String&gt;&gt; batchFiles)</span> <span class="hljs-keyword">throws</span> InterruptedException {
     <span class="hljs-type">MilvusImportRequest</span> <span class="hljs-variable">milvusImportRequest</span> <span class="hljs-operator">=</span> MilvusImportRequest.builder()
             .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
@@ -142,6 +144,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 ]
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul></li>
 </ul>
 <p>Les résultats possibles sont les suivants :</p>
@@ -177,12 +180,13 @@ url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
 <span class="hljs-comment"># Get bulk-insert job progress</span>
 resp = get_import_progress(
-    url=url,
-    job_id=<span class="hljs-string">&quot;453265736269038336&quot;</span>,
+url=url,
+job_id=<span class="hljs-string">&quot;453265736269038336&quot;</span>,
 )
 
 <span class="hljs-built_in">print</span>(json.dumps(resp.json(), indent=<span class="hljs-number">4</span>))
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">getImportProgress</span><span class="hljs-params">(String jobId)</span> {
     <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
         System.out.println(<span class="hljs-string">&quot;Wait 5 second to check bulkInsert job state...&quot;</span>);
@@ -287,12 +291,13 @@ url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
 <span class="hljs-comment"># List bulk-insert jobs</span>
 resp = list_import_jobs(
-    url=url,
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+url=url,
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 )
 
 <span class="hljs-built_in">print</span>(json.dumps(resp.json(), indent=<span class="hljs-number">4</span>))
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">listImportJobs</span><span class="hljs-params">()</span> {
     <span class="hljs-type">MilvusListImportJobsRequest</span> <span class="hljs-variable">listImportJobsRequest</span> <span class="hljs-operator">=</span> MilvusListImportJobsRequest.builder().collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>).build();
     <span class="hljs-type">String</span> <span class="hljs-variable">listImportJobsResult</span> <span class="hljs-operator">=</span> BulkImport.listImportJobs(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, listImportJobsRequest);

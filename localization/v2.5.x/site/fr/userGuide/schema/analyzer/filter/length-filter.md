@@ -6,6 +6,7 @@ summary: >-
   longueur spécifiés, ce qui vous permet de contrôler la longueur des tokens
   conservés lors du traitement du texte.
 ---
+
 <h1 id="Length" class="common-anchor-header">Longueur<button data-href="#Length" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,6 +83,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Le filtre <code translate="no">length</code> accepte les paramètres configurables suivants.</p>
 <table>
    <tr>
@@ -93,8 +95,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Définit la longueur maximale du jeton. Les jetons plus longs que cette longueur sont supprimés.</p></td>
    </tr>
 </table>
-<p>Le filtre <code translate="no">length</code> fonctionne sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à la page <a href="/docs/fr/standard-tokenizer.md">Tokenizer standard</a> et à ses pages apparentées.</p>
-<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, voir <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
+<p>Le filtre <code translate="no">length</code> fonctionne sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à la page <a href="/docs/fr/v2.5.x/standard-tokenizer.md">Tokenizer standard</a> et à ses pages apparentées.</p>
+<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, voir <a href="/docs/fr/v2.5.x/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -148,6 +150,7 @@ sample_text = <span class="hljs-string">&quot;The length filter allows control o
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

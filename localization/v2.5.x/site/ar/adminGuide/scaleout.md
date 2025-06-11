@@ -6,6 +6,7 @@ summary: >-
   العنقودية.
 title: توسيع نطاق مجموعة ميلفوس العنقودية
 ---
+
 <h1 id="Scale-a-Milvus-Cluster" class="common-anchor-header">توسيع نطاق مجموعة ميلفوس العنقودية<button data-href="#Scale-a-Milvus-Cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ title: توسيع نطاق مجموعة ميلفوس العنقودية
         ></path>
       </svg>
     </button></h1><p>يدعم Milvus التوسع الأفقي لمكوناته. هذا يعني أنه يمكنك إما زيادة أو تقليل عدد العُقد العاملة من كل نوع وفقًا لحاجتك الخاصة.</p>
-<p>يصف هذا الموضوع كيفية توسيع نطاق مجموعة Milvus وتوسيع نطاقها. نفترض أنك قد قمت بالفعل <a href="/docs/ar/install_cluster-helm.md">بتثبيت مجموعة Milvus</a> قبل التوسع. نوصي أيضًا بالتعرف على <a href="/docs/ar/architecture_overview.md">بنية Milvus</a> قبل البدء.</p>
+<p>يصف هذا الموضوع كيفية توسيع نطاق مجموعة Milvus وتوسيع نطاقها. نفترض أنك قد قمت بالفعل <a href="/docs/ar/v2.5.x/install_cluster-helm.md">بتثبيت مجموعة Milvus</a> قبل التوسع. نوصي أيضًا بالتعرف على <a href="/docs/ar/v2.5.x/architecture_overview.md">بنية Milvus</a> قبل البدء.</p>
 <p>يأخذ هذا البرنامج التعليمي توسيع نطاق ثلاث عقد استعلام كمثال. لتوسيع نطاق أنواع أخرى من العُقد، استبدل <code translate="no">queryNode</code> بنوع العقدة المطابق في سطر الأوامر.</p>
 <div class="alert note">
 <p>للحصول على معلومات حول كيفية توسيع نطاق مجموعة باستخدام مشغل Milvus، راجع <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">توسيع نطاق مجموعة باستخدام مشغل Milvus</a>.</p>
@@ -52,7 +53,7 @@ title: توسيع نطاق مجموعة ميلفوس العنقودية
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>توسيع النطاق</span> </span></p>
-<p>وفقًا <a href="/docs/ar/architecture_overview.md">لبنية Milvus،</a> تتضمن العقد العاملة عديمة الحالة عقدة الاستعلام وعقدة البيانات وعقدة الفهرس والوكيل. لذلك، يمكنك توسيع نطاق هذه الأنواع من العقد لتناسب احتياجات عملك وسيناريوهات التطبيق. يمكنك إما توسيع نطاق مجموعة Milvus يدويًا أو تلقائيًا.</p>
+<p>وفقًا <a href="/docs/ar/v2.5.x/architecture_overview.md">لبنية Milvus،</a> تتضمن العقد العاملة عديمة الحالة عقدة الاستعلام وعقدة البيانات وعقدة الفهرس والوكيل. لذلك، يمكنك توسيع نطاق هذه الأنواع من العقد لتناسب احتياجات عملك وسيناريوهات التطبيق. يمكنك إما توسيع نطاق مجموعة Milvus يدويًا أو تلقائيًا.</p>
 <p>بشكل عام، ستحتاج بشكل عام إلى توسيع نطاق مجموعة Milvus التي قمت بإنشائها إذا تم استخدامها بشكل مفرط. فيما يلي بعض المواقف النموذجية التي قد تحتاج فيها إلى توسيع نطاق مجموعة Milvus:</p>
 <ul>
 <li>ارتفاع استخدام وحدة المعالجة المركزية والذاكرة لفترة من الزمن.</li>
@@ -116,7 +117,7 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running      0          
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك توسيع نطاق مجموعة Milvus إما يدويًا أو تلقائيًا. للتوسع التلقائي باستخدام التحجيم التلقائي للقرنة الأفقية (HPA)، راجع <a href="/docs/ar/hpa.md">تكوين HPA لـ Milvus</a>. إذا تم تمكين القياس التلقائي، فإن مجموعة Milvus ستتقلص أو تتوسع تلقائيًا عندما يصل استهلاك موارد وحدة المعالجة المركزية والذاكرة إلى القيمة التي قمت بتعيينها.</p>
+    </button></h2><p>يمكنك توسيع نطاق مجموعة Milvus إما يدويًا أو تلقائيًا. للتوسع التلقائي باستخدام التحجيم التلقائي للقرنة الأفقية (HPA)، راجع <a href="/docs/ar/v2.5.x/hpa.md">تكوين HPA لـ Milvus</a>. إذا تم تمكين القياس التلقائي، فإن مجموعة Milvus ستتقلص أو تتوسع تلقائيًا عندما يصل استهلاك موارد وحدة المعالجة المركزية والذاكرة إلى القيمة التي قمت بتعيينها.</p>
 <p>في الوقت الحالي، يدعم Milvus 2.1.0 حاليًا التوسيع والتوسع يدويًا فقط.</p>
 <h4 id="Scaling-out" class="common-anchor-header">توسيع النطاق</h4><p>قم بتشغيل <code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> لتوسيع نطاق عقدة الاستعلام يدويًا.</p>
 <p>إذا نجحت، تتم إضافة ثلاث كبسولات قيد التشغيل على عقدة الاستعلام كما هو موضح في المثال التالي.</p>
@@ -168,16 +169,16 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
     </button></h2><ul>
 <li><p>إذا كنت تريد معرفة كيفية مراقبة خدمات ملفوس وإنشاء التنبيهات:</p>
 <ul>
-<li>تعلم <a href="/docs/ar/monitor.md">مراقبة Milvus باستخدام مشغل Prometheus على Kubernetes</a></li>
+<li>تعلم <a href="/docs/ar/v2.5.x/monitor.md">مراقبة Milvus باستخدام مشغل Prometheus على Kubernetes</a></li>
 </ul></li>
 <li><p>إذا كنت مستعداً لنشر مجموعتك على السحابة</p>
 <ul>
-<li>تعرف على كيفية <a href="/docs/ar/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
-<li>تعرف على كيفية <a href="/docs/ar/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
-<li>تعرف على كيفية <a href="/docs/ar/azure.md">نشر ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.5.x/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.5.x/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.5.x/azure.md">نشر ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
 </ul></li>
 <li><p>إذا كنت تبحث عن إرشادات حول كيفية تخصيص الموارد:</p>
 <ul>
-<li><a href="/docs/ar/allocate.md#standalone">تخصيص الموارد على Kubernetes</a></li>
+<li><a href="/docs/ar/v2.5.x/allocate.md#standalone">تخصيص الموارد على Kubernetes</a></li>
 </ul></li>
 </ul>

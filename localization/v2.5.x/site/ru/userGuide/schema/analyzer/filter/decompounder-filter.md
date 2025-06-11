@@ -7,6 +7,7 @@ summary: >-
   особенно полезен для языков, в которых часто используются сложные слова,
   например немецкого.
 ---
+
 <h1 id="Decompounder" class="common-anchor-header">Расщепитель<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,6 +94,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Фильтр <code translate="no">decompounder</code> принимает следующие настраиваемые параметры.</p>
 <table>
    <tr>
@@ -104,8 +106,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Список компонентов слов, используемых для разделения сложных терминов. Этот словарь определяет, как составные слова декомпозируются на отдельные термины.</p></td>
    </tr>
 </table>
-<p>Фильтр <code translate="no">decompounder</code> работает с терминами, сгенерированными токенизатором, поэтому он должен использоваться в сочетании с токенизатором. Список токенизаторов, доступных в Milvus, см. на странице <a href="/docs/ru/standard-tokenizer.md">Standard Tokenizer</a> и других страницах.</p>
-<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/analyzer-overview.md#Example-use">Пример использования</a>.</p>
+<p>Фильтр <code translate="no">decompounder</code> работает с терминами, сгенерированными токенизатором, поэтому он должен использоваться в сочетании с токенизатором. Список токенизаторов, доступных в Milvus, см. на странице <a href="/docs/ru/v2.5.x/standard-tokenizer.md">Standard Tokenizer</a> и других страницах.</p>
+<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/analyzer-overview.md#Example-use">Пример использования</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,6 +172,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Проверка с помощью <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
@@ -179,6 +182,7 @@ sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&q
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

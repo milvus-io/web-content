@@ -4,6 +4,7 @@ title: 正規表達式Compatible with Milvus 2.5.11+
 summary: regex 過濾器是正規表達式過濾器：由 tokenizer 產生的任何 token 只有在符合您提供的表達式時才會被保留；其他的都會被捨棄。
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="Regex" class="common-anchor-header">正規表達式<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Regex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +67,7 @@ beta: Milvus 2.5.11+
    </tr>
 </table>
 <p><code translate="no">regex</code> 過濾器會對 tokenizer 產生的詞彙進行操作，因此必須與 tokenizer 結合使用。</p>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效率的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效率的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,6 +111,7 @@ sample_text = <span class="hljs-string">&quot;testItem apple testCase banana&quo
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>

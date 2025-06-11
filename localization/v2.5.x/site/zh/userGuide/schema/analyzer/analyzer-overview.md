@@ -4,6 +4,7 @@ title: 分析器概述
 summary: >-
   在文本处理中，分析器是将原始文本转换为结构化可搜索格式的关键组件。每个分析器通常由两个核心部件组成：标记器和过滤器。它们共同将输入文本转换为标记，完善这些标记，并为高效索引和检索做好准备。
 ---
+
 <h1 id="Analyzer-Overview" class="common-anchor-header">分析器概述<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>在文本处理中，<strong>分析器</strong>是将原始文本转换为结构化可搜索格式的关键组件。每个分析器通常由两个核心部件组成：<strong>标记器</strong>和<strong>过滤器</strong>。它们共同将输入文本转换为标记，完善这些标记，并为高效索引和检索做好准备。</p>
-<p>在 Milvus 中，创建 Collections 时，将<code translate="no">VARCHAR</code> 字段添加到 Collections Schema 时，会对分析器进行配置。分析器生成的标记可用于建立关键字匹配索引，或转换为稀疏嵌入以进行全文检索。更多信息，请参阅<a href="/docs/zh/keyword-match.md">文本匹配</a>或<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
+<p>在 Milvus 中，创建 Collections 时，将<code translate="no">VARCHAR</code> 字段添加到 Collections Schema 时，会对分析器进行配置。分析器生成的标记可用于建立关键字匹配索引，或转换为稀疏嵌入以进行全文检索。更多信息，请参阅<a href="/docs/zh/v2.5.x/keyword-match.md">文本匹配</a>或<a href="/docs/zh/v2.5.x/full-text-search.md">全文搜索</a>。</p>
 <div class="alert note">
 <p>使用分析器可能会影响性能：</p>
 <ul>
@@ -77,7 +78,7 @@ summary: >-
 <li><p><strong>自定义分析器</strong>：对于更高级的需求，自定义分析器允许你通过指定标记器和零个或多个过滤器来定义自己的配置。这种自定义级别对于需要精确控制文本处理的特殊用例尤其有用。</p></li>
 </ul>
 <div class="alert note">
-<p>如果在创建 Collections 时省略了分析器配置，Milvus 默认使用<code translate="no">standard</code> 分析器进行所有文本处理。有关详情，请参阅<a href="/docs/zh/standard-analyzer.md">标准</a>。</p>
+<p>如果在创建 Collections 时省略了分析器配置，Milvus 默认使用<code translate="no">standard</code> 分析器进行所有文本处理。有关详情，请参阅<a href="/docs/zh/v2.5.x/standard-analyzer.md">标准</a>。</p>
 </div>
 <h3 id="Built-in-analyzer" class="common-anchor-header">内置分析器</h3><p>Milvus 中的内置分析器预先配置了特定的标记符号化器和过滤器，使您可以立即使用它们，而无需自己定义这些组件。每个内置分析器都是一个模板，包括预设的标记化器和过滤器，以及用于自定义的可选参数。</p>
 <p>例如，要使用<code translate="no">standard</code> 内置分析器，只需将其名称<code translate="no">standard</code> 指定为<code translate="no">type</code> ，并可选择包含该分析器类型特有的额外配置，如<code translate="no">stop_words</code> ：</p>
@@ -112,10 +113,11 @@ text = <span class="hljs-string">&quot;An efficient system relies on a robust an
 
 <span class="hljs-comment"># Run analyzer</span>
 result = client.run_analyzer(
-    text,
-    analyzer_params
+text,
+analyzer_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
 
@@ -162,7 +164,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
 <p>这表明分析器正确地对输入文本进行了标记化处理，过滤掉了停止词<code translate="no">&quot;a&quot;</code> 、<code translate="no">&quot;an&quot;</code> 和<code translate="no">&quot;for&quot;</code> ，同时返回了其余有意义的标记。</p>
-<p>上述<code translate="no">standard</code> 内置分析器的配置等同于使用以下参数设置<a href="/docs/zh/analyzer-overview.md#Custom-analyzer">自定义分析器</a>，其中<code translate="no">tokenizer</code> 和<code translate="no">filter</code> 选项是为实现类似功能而明确定义的：</p>
+<p>上述<code translate="no">standard</code> 内置分析器的配置等同于使用以下参数设置<a href="/docs/zh/v2.5.x/analyzer-overview.md#Custom-analyzer">自定义分析器</a>，其中<code translate="no">tokenizer</code> 和<code translate="no">filter</code> 选项是为实现类似功能而明确定义的：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -251,11 +253,11 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <ul>
 <li><p><strong>内置过滤器</strong>：由 Milvus 预先配置，只需最少的设置。您只需指定过滤器的名称，就能立即使用这些过滤器。以下是可直接使用的内置过滤器：</p>
 <ul>
-<li><p><code translate="no">lowercase</code>:将文本转换为小写，确保不区分大小写进行匹配。有关详情，请参阅<a href="/docs/zh/lowercase-filter.md">小写</a>。</p></li>
-<li><p><code translate="no">asciifolding</code>:将非 ASCII 字符转换为 ASCII 对应字符，简化多语言文本处理。有关详情，请参阅<a href="/docs/zh/ascii-folding-filter.md">ASCII 折叠</a>。</p></li>
-<li><p><code translate="no">alphanumonly</code>:只保留字母数字字符，删除其他字符。有关详情，请参阅<a href="/docs/zh/alphanumonly-filter.md">Alphanumonly</a>。</p></li>
-<li><p><code translate="no">cnalphanumonly</code>:删除包含除汉字、英文字母或数字以外的任何字符的标记。有关详情，请参阅<a href="/docs/zh/cnalphanumonly-filter.md">Cnalphanumonly</a>。</p></li>
-<li><p><code translate="no">cncharonly</code>:删除包含任何非汉字的标记。详情请参阅<a href="/docs/zh/cncharonly-filter.md">Cncharonly</a>。</p></li>
+<li><p><code translate="no">lowercase</code>:将文本转换为小写，确保不区分大小写进行匹配。有关详情，请参阅<a href="/docs/zh/v2.5.x/lowercase-filter.md">小写</a>。</p></li>
+<li><p><code translate="no">asciifolding</code>:将非 ASCII 字符转换为 ASCII 对应字符，简化多语言文本处理。有关详情，请参阅<a href="/docs/zh/v2.5.x/ascii-folding-filter.md">ASCII 折叠</a>。</p></li>
+<li><p><code translate="no">alphanumonly</code>:只保留字母数字字符，删除其他字符。有关详情，请参阅<a href="/docs/zh/v2.5.x/alphanumonly-filter.md">Alphanumonly</a>。</p></li>
+<li><p><code translate="no">cnalphanumonly</code>:删除包含除汉字、英文字母或数字以外的任何字符的标记。有关详情，请参阅<a href="/docs/zh/v2.5.x/cnalphanumonly-filter.md">Cnalphanumonly</a>。</p></li>
+<li><p><code translate="no">cncharonly</code>:删除包含任何非汉字的标记。详情请参阅<a href="/docs/zh/v2.5.x/cncharonly-filter.md">Cncharonly</a>。</p></li>
 </ul>
 <p><strong>使用内置过滤器的示例：</strong></p>
 <p><div class="multipleCode">
@@ -284,9 +286,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>自定义过滤器</strong>：自定义过滤器允许进行专门配置。您可以通过选择有效的过滤器类型 (<code translate="no">filter.type</code>) 并为每种过滤器类型添加特定设置来定义自定义过滤器。支持自定义的过滤器类型示例：</p>
 <ul>
-<li><p><code translate="no">stop</code>:通过设置停止词列表（如<code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code> ）删除指定的常用词。有关详情，请参阅<a href="/docs/zh/stop-filter.md">停止</a>。</p></li>
-<li><p><code translate="no">length</code>:根据长度标准（如设置最大标记长度）排除标记。详情请参阅<a href="/docs/zh/length-filter.md">长度</a>。</p></li>
-<li><p><code translate="no">stemmer</code>:将单词还原为词根形式，以便更灵活地进行匹配。详情请参阅<a href="/docs/zh/stemmer-filter.md">词根</a>。</p></li>
+<li><p><code translate="no">stop</code>:通过设置停止词列表（如<code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code> ）删除指定的常用词。有关详情，请参阅<a href="/docs/zh/v2.5.x/stop-filter.md">停止</a>。</p></li>
+<li><p><code translate="no">length</code>:根据长度标准（如设置最大标记长度）排除标记。详情请参阅<a href="/docs/zh/v2.5.x/length-filter.md">长度</a>。</p></li>
+<li><p><code translate="no">stemmer</code>:将单词还原为词根形式，以便更灵活地进行匹配。详情请参阅<a href="/docs/zh/v2.5.x/stemmer-filter.md">词根</a>。</p></li>
 </ul>
 <p><strong>配置自定义过滤器的示例：</strong></p>
 <p><div class="multipleCode">
@@ -372,6 +374,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="hljs-comment"># Create a new schema</span>
 schema = client.create_schema(auto_id=<span class="hljs-literal">True</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -443,6 +446,7 @@ result = client.run_analyzer(sample_text, analyzer_params_built_in)
 <span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
 
@@ -518,6 +522,7 @@ result = client.run_analyzer(sample_text, analyzer_params_custom)
 <span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
 Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
@@ -603,12 +608,12 @@ schema.add_field(
 
 <span class="hljs-comment"># Add VARCHAR field &#x27;title&#x27; using the custom analyzer configuration</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
-    datatype=DataType.VARCHAR,
-    max_length=<span class="hljs-number">1000</span>,
-    enable_analyzer=<span class="hljs-literal">True</span>,
-    analyzer_params=analyzer_params_custom,
-    enable_match=<span class="hljs-literal">True</span>,
+field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
+datatype=DataType.VARCHAR,
+max_length=<span class="hljs-number">1000</span>,
+enable_analyzer=<span class="hljs-literal">True</span>,
+analyzer_params=analyzer_params_custom,
+enable_match=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Add a vector field for embeddings</span>
@@ -617,6 +622,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</spa
 <span class="hljs-comment"># Add a primary key field</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -701,11 +707,12 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot
 
 <span class="hljs-comment"># Create the collection with the defined schema and index parameters</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    schema=schema,
-    index_params=index_params
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+schema=schema,
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Set up index params for vector field</span>
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()

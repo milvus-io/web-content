@@ -7,6 +7,7 @@ summary: >-
   les applications d'intelligence artificielle. Voici notre feuille de route
   pour guider notre développement.
 ---
+
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Feuille de route Milvus<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +79,7 @@ summary: >-
 <li>Notre feuille de route est généralement structurée en trois parties : la version la plus récente, la prochaine version à venir et une vision à moyen et long terme dans l'année à venir.</li>
 <li>Au fur et à mesure que nous progressons, nous apprenons continuellement et nous ajustons occasionnellement notre objectif, en ajoutant ou en supprimant des éléments selon les besoins.</li>
 <li>Ces plans sont indicatifs et sujets à modification, et peuvent varier en fonction des services d'abonnement.</li>
-<li>Nous respectons scrupuleusement notre feuille de route, nos <a href="/docs/fr/release_notes.md">notes de version</a> servant de référence.</li>
+<li>Nous respectons scrupuleusement notre feuille de route, nos <a href="/docs/fr/v2.5.x/release_notes.md">notes de version</a> servant de référence.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">Comment contribuer<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

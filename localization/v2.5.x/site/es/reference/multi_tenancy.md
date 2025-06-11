@@ -6,6 +6,7 @@ summary: >-
   -denominados arrendatarios- comparten el mismo clúster manteniendo entornos de
   datos aislados.
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">Implemente la tenencia múltiple<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus admite la multitenencia en cuatro niveles: <strong>Base de datos</strong>, <strong>Colección</strong>, <strong>Partición</strong> y <strong>Clave de partición</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Arrendamiento múltiple a nivel de base de datos</h3><p>Con la multitenencia a nivel de base de datos, cada arrendatario recibe una <a href="/docs/es/manage_databases.md">base de datos</a> correspondiente que contiene una o más colecciones.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Arrendamiento múltiple a nivel de base de datos</h3><p>Con la multitenencia a nivel de base de datos, cada arrendatario recibe una <a href="/docs/es/v2.5.x/manage_databases.md">base de datos</a> correspondiente que contiene una o más colecciones.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -50,7 +51,7 @@ summary: >-
 <li><p><strong>Flexibilidad</strong>: Cada base de datos puede tener colecciones con diferentes esquemas, ofreciendo una organización de datos altamente flexible y permitiendo que cada inquilino tenga su propio esquema de datos.</p></li>
 <li><p><strong>Otros</strong>: Esta estrategia también admite RBAC, lo que permite un control detallado del acceso de los usuarios por tenant. Además, puede cargar o liberar datos de forma flexible para inquilinos específicos con el fin de gestionar eficazmente los datos calientes y fríos.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Arrendamiento múltiple a nivel de colección</h3><p>Con la tenencia múltiple a nivel de colecciones, a cada inquilino se le asigna una <a href="/docs/es/manage-collections.md">colección</a>, lo que ofrece un fuerte aislamiento de los datos.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Arrendamiento múltiple a nivel de colección</h3><p>Con la tenencia múltiple a nivel de colecciones, a cada inquilino se le asigna una <a href="/docs/es/v2.5.x/manage-collections.md">colección</a>, lo que ofrece un fuerte aislamiento de los datos.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -61,7 +62,7 @@ summary: >-
 <li><p><strong>Flexibilidad</strong>: Esta estrategia permite que cada colección tenga su propio esquema, dando cabida a inquilinos con diferentes esquemas de datos.</p></li>
 <li><p><strong>Otros</strong>: Esta estrategia también admite RBAC, lo que permite un control de acceso granular sobre los inquilinos. Además, puede cargar o liberar datos de forma flexible para inquilinos específicos con el fin de gestionar eficazmente los datos calientes y fríos.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Arrendamiento múltiple a nivel de partición</h3><p>En la multitenencia a nivel de partición, cada inquilino se asigna a una <a href="/docs/es/manage-partitions.md">partición</a> creada manualmente dentro de una colección compartida.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Arrendamiento múltiple a nivel de partición</h3><p>En la multitenencia a nivel de partición, cada inquilino se asigna a una <a href="/docs/es/v2.5.x/manage-partitions.md">partición</a> creada manualmente dentro de una colección compartida.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -72,7 +73,7 @@ summary: >-
 <li><p><strong>Flexibilidad</strong>: Esta estrategia requiere que todos los inquilinos compartan el mismo esquema de datos. Y las particiones deben crearse manualmente.</p></li>
 <li><p><strong>Otros problemas</strong>: No se admite RBAC a nivel de partición. Los inquilinos pueden ser consultados individualmente o a través de múltiples particiones, lo que hace que este enfoque sea adecuado para escenarios que implican consultas agregadas o análisis a través de segmentos de inquilinos. Además, puede cargar o liberar datos de forma flexible para inquilinos específicos con el fin de gestionar eficazmente los datos calientes y fríos.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Arrendamiento múltiple a nivel de clave de partición</h3><p>Con esta estrategia, todos los inquilinos comparten una única colección y esquema, pero los datos de cada inquilino se dirigen automáticamente a 16 particiones físicamente aisladas en función del valor de <a href="/docs/es/use-partition-key.md">la clave de partición</a>. Aunque cada partición física puede contener varios inquilinos, los datos de los distintos inquilinos permanecen lógicamente separados.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Arrendamiento múltiple a nivel de clave de partición</h3><p>Con esta estrategia, todos los inquilinos comparten una única colección y esquema, pero los datos de cada inquilino se dirigen automáticamente a 16 particiones físicamente aisladas en función del valor de <a href="/docs/es/v2.5.x/use-partition-key.md">la clave de partición</a>. Aunque cada partición física puede contener varios inquilinos, los datos de los distintos inquilinos permanecen lógicamente separados.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

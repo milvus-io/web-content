@@ -4,6 +4,7 @@ title: 標準アナライザー
 summary: >-
   標準アナライザーはMilvusのデフォルトアナライザーで、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法に基づいたトークン化を使用するため、ほとんどの言語に有効です。
 ---
+
 <h1 id="Standard-Analyzer" class="common-anchor-header">標準アナライザー<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,8 +38,8 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">standard</code> ：</p>
 <ul>
-<li><p><strong>トークン化</strong>：<code translate="no">standard</code> トークン化器を使用して、文法規則に基づいてテキストを個別の単語単位に分割する。詳細は「<a href="/docs/ja/standard-tokenizer.md">標準</a>」を参照。</p></li>
-<li><p><strong>フィルタ</strong>：<code translate="no">lowercase</code><a href="/docs/ja/lowercase-filter.md"> フィルタを</a>使用して、すべてのトークンを小文字に変換し、大文字と小文字を区別しない検索を可能にする。詳細については</p></li>
+<li><p><strong>トークン化</strong>：<code translate="no">standard</code> トークン化器を使用して、文法規則に基づいてテキストを個別の単語単位に分割する。詳細は「<a href="/docs/ja/v2.5.x/standard-tokenizer.md">標準</a>」を参照。</p></li>
+<li><p><strong>フィルタ</strong>：<code translate="no">lowercase</code><a href="/docs/ja/v2.5.x/lowercase-filter.md"> フィルタを</a>使用して、すべてのトークンを小文字に変換し、大文字と小文字を区別しない検索を可能にする。詳細については</p></li>
 </ul>
 <p><code translate="no">standard</code> アナライザーの機能は、以下のカスタムアナライザー設定と同等です：</p>
 <div class="multipleCode">
@@ -135,7 +136,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定されたアナライザを使用してフィールド内のテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定されたアナライザを使用してフィールド内のテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/v2.5.x/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -190,6 +191,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

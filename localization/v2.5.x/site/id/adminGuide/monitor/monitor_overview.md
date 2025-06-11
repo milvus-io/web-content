@@ -1,11 +1,12 @@
 ---
 id: monitor_overview.md
 title: Ikhtisar Monitor
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: >-
   Pelajari bagaimana Prometheus dan Grafana digunakan di Milvus untuk layanan
   montoring dan peringatan.
 ---
+
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Gambaran umum kerangka kerja pemantauan Milvus<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +108,7 @@ summary: >-
       </svg>
     </button></h2><p>Setelah mempelajari alur kerja dasar pemantauan dan peringatan, pelajari:</p>
 <ul>
-<li><a href="/docs/id/monitor.md">Menerapkan layanan pemantauan</a></li>
-<li><a href="/docs/id/visualize.md">Memvisualisasikan metrik Milvus</a></li>
-<li><a href="/docs/id/alert.md">Membuat peringatan</a></li>
+<li><a href="/docs/id/v2.5.x/monitor.md">Menerapkan layanan pemantauan</a></li>
+<li><a href="/docs/id/v2.5.x/visualize.md">Memvisualisasikan metrik Milvus</a></li>
+<li><a href="/docs/id/v2.5.x/alert.md">Membuat peringatan</a></li>
 </ul>

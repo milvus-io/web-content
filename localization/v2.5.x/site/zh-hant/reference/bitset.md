@@ -3,6 +3,7 @@ id: bitset.md
 summary: 了解 Milvus 中的 bitsets。
 title: 比特集
 ---
+
 <h1 id="Bitset" class="common-anchor-header">比特集<button data-href="#Bitset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +36,7 @@ title: 比特集
         ></path>
       </svg>
     </button></h2><p>比特集是一組比特。比特是只有兩個可能值的元素，最典型的是<code translate="no">0</code> 和<code translate="no">1</code> ，或者是布林值<code translate="no">true</code> 和<code translate="no">false</code> 。在 Milvus 中，比特集是由比特數<code translate="no">0</code> 和<code translate="no">1</code> 組成的陣列，相對於 ints、floats 或 chars，比特集可用來精簡、有效地表示某些資料。位元數預設為<code translate="no">0</code> ，只有在符合特定要求時才會被設定為<code translate="no">1</code> 。</p>
-<p>位元集的運算以<a href="/docs/zh-hant/boolean.md">布林邏輯</a>進行，在<a href="/docs/zh-hant/boolean.md">布林邏輯</a>下，輸出值為有效或無效，也分別以<code translate="no">1</code> 和<code translate="no">0</code> 表示。例如，<a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">邏輯運算符</a> <code translate="no">AND</code> 可用於比較兩個位元集，比較的基礎是位於相同索引位置的項目，並將結果產生一個新的位元集。如果某個位置上的兩個項目相同，那麼在新的位元集中<code translate="no">1</code> 將被寫入該位置；如果兩個項目不同，則<code translate="no">0</code> 。</p>
+<p>位元集的運算以<a href="/docs/zh-hant/v2.5.x/boolean.md">布林邏輯</a>進行，在<a href="/docs/zh-hant/v2.5.x/boolean.md">布林邏輯</a>下，輸出值為有效或無效，也分別以<code translate="no">1</code> 和<code translate="no">0</code> 表示。例如，<a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">邏輯運算符</a> <code translate="no">AND</code> 可用於比較兩個位元集，比較的基礎是位於相同索引位置的項目，並將結果產生一個新的位元集。如果某個位置上的兩個項目相同，那麼在新的位元集中<code translate="no">1</code> 將被寫入該位置；如果兩個項目不同，則<code translate="no">0</code> 。</p>
 <h2 id="Implementation" class="common-anchor-header">實作<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

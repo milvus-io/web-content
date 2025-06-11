@@ -3,6 +3,7 @@ id: bitset.md
 summary: تعرف على مجموعات البتات في ميلفوس.
 title: مجموعة البتات
 ---
+
 <h1 id="Bitset" class="common-anchor-header">مجموعة البتات<button data-href="#Bitset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +36,7 @@ title: مجموعة البتات
         ></path>
       </svg>
     </button></h2><p>مجموعة البتات هي مجموعة من البتات. البتات هي عناصر ذات قيمتين محتملتين فقط، عادةً <code translate="no">0</code> و <code translate="no">1</code> ، أو قيم منطقية <code translate="no">true</code> و <code translate="no">false</code>. في ميلفوس، مجموعات البتات هي صفائف من أرقام البتات <code translate="no">0</code> و <code translate="no">1</code> التي يمكن استخدامها لتمثيل بيانات معينة بشكل مضغوط وفعال على عكس الإنتس أو العوامة أو الأحرف. رقم البت هو <code translate="no">0</code> بشكل افتراضي ولا يتم تعيينه إلى <code translate="no">1</code> إلا إذا كان يفي بمتطلبات معينة.</p>
-<p>تُجرى العمليات على مجموعات البت باستخدام <a href="/docs/ar/boolean.md">المنطق المنطقي،</a> والتي بموجبها تكون قيمة الخرج إما صالحة أو غير صالحة، ويُشار إليها أيضًا بـ <code translate="no">1</code> و <code translate="no">0</code> على التوالي. على سبيل المثال، يمكن استخدام <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">المشغل المنطقي</a> <code translate="no">AND</code> للمقارنة بين مجموعتي بتات استنادًا إلى عنصرين في نفس مواضع الفهرس وإنتاج مجموعة بتات جديدة بالنتائج. إذا كان عنصران في موضع ما متماثلين، فسيتم كتابة مجموعة البتات الجديدة <code translate="no">1</code> في ذلك الموضع؛ <code translate="no">0</code> إذا كانا مختلفين.</p>
+<p>تُجرى العمليات على مجموعات البت باستخدام <a href="/docs/ar/v2.5.x/boolean.md">المنطق المنطقي،</a> والتي بموجبها تكون قيمة الخرج إما صالحة أو غير صالحة، ويُشار إليها أيضًا بـ <code translate="no">1</code> و <code translate="no">0</code> على التوالي. على سبيل المثال، يمكن استخدام <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">المشغل المنطقي</a> <code translate="no">AND</code> للمقارنة بين مجموعتي بتات استنادًا إلى عنصرين في نفس مواضع الفهرس وإنتاج مجموعة بتات جديدة بالنتائج. إذا كان عنصران في موضع ما متماثلين، فسيتم كتابة مجموعة البتات الجديدة <code translate="no">1</code> في ذلك الموضع؛ <code translate="no">0</code> إذا كانا مختلفين.</p>
 <h2 id="Implementation" class="common-anchor-header">التنفيذ<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

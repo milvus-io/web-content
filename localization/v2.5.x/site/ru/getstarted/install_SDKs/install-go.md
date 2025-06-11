@@ -2,9 +2,10 @@
 id: install-go.md
 label: Install GO SDK
 related_key: SDK
-summary: 'Узнайте, как установить GO SDK от Milvus.'
+summary: "Узнайте, как установить GO SDK от Milvus."
 title: Установка Milvus Go SDK
 ---
+
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">Установка Milvus Go SDK<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +75,10 @@ title: Установка Milvus Go SDK
     </button></h2><p>Установив Milvus GO SDK, вы сможете:</p>
 <ul>
 <li>Изучить основные операции Milvus:<ul>
-<li><a href="/docs/ru/manage-collections.md">Управлять коллекциями</a></li>
-<li><a href="/docs/ru/manage-partitions.md">Управлять разделами</a></li>
-<li><a href="/docs/ru/insert-update-delete.md">Вставка, апсерт и удаление</a></li>
-<li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
-<li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-collections.md">Управлять коллекциями</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-partitions.md">Управлять разделами</a></li>
+<li><a href="/docs/ru/v2.5.x/insert-update-delete.md">Вставка, апсерт и удаление</a></li>
+<li><a href="/docs/ru/v2.5.x/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 </ul>

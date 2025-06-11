@@ -5,6 +5,7 @@ related_key: SDK
 summary: MilvusのPython SDKのインストール方法をご紹介します。
 title: Milvus Python SDKのインストール
 ---
+
 <h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">Milvus Python SDKのインストール<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +60,7 @@ title: Milvus Python SDKのインストール
       </svg>
     </button></h2><p>PyMilvusは<a href="https://pypi.org/project/pymilvus/">Python Package Indexに</a>あります。</p>
 <div class="alert note">
-インストールしたMilvusサーバのバージョンに合ったバージョンのPyMilvusをインストールすることを推奨します。詳細については、<a href="/docs/ja/release_notes.md">リリースノートを</a>参照してください。</div>
+インストールしたMilvusサーバのバージョンに合ったバージョンのPyMilvusをインストールすることを推奨します。詳細については、<a href="/docs/ja/v2.5.x/release_notes.md">リリースノートを</a>参照してください。</div>
 <pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">10</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">インストールの確認<button data-href="#Verify-installation" class="anchor-icon" translate="no">
@@ -99,11 +100,11 @@ title: Milvus Python SDKのインストール
 <ul>
 <li><p>Milvusの基本操作を学ぶ：</p>
 <ul>
-<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/v2.5.x/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/v2.5.x/manage-partitions.md">パーティションの管理</a></li>
+<li><a href="/docs/ja/v2.5.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.5.x/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/v2.5.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
 <li><p><a href="/api-reference/pymilvus/v2.4.x/About.md">PyMilvus APIリファレンスを</a>調べる</p></li>
 </ul>

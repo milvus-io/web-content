@@ -10,6 +10,7 @@ summary: >-
   offrant un rappel de 100 %, puisque chaque correspondance potentielle est
   évaluée.
 ---
+
 <h1 id="FLAT" class="common-anchor-header">FLAT<button data-href="#FLAT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,20 +50,21 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={} <span class="hljs-comment"># No additional parameters required for FLAT</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={} <span class="hljs-comment"># No additional parameters required for FLAT</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Dans cette configuration :</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Le type d'index à construire. Dans cet exemple, la valeur est <code translate="no">FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: La méthode utilisée pour calculer la distance entre les vecteurs. Les valeurs prises en charge sont <code translate="no">COSINE</code>, <code translate="no">L2</code> et <code translate="no">IP</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/metric.md">Types de métriques</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: La méthode utilisée pour calculer la distance entre les vecteurs. Les valeurs prises en charge sont <code translate="no">COSINE</code>, <code translate="no">L2</code> et <code translate="no">IP</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.5.x/metric.md">Types de métriques</a>.</p></li>
 <li><p><code translate="no">params</code>: Aucun paramètre supplémentaire n'est nécessaire pour l'index FLAT.</p></li>
 </ul>
-<p>Une fois les paramètres de l'index configurés, vous pouvez créer l'index en utilisant directement la méthode <code translate="no">create_index()</code> ou en transmettant les paramètres de l'index dans la méthode <code translate="no">create_collection</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/create-collection.md">Créer une collection</a>.</p>
+<p>Une fois les paramètres de l'index configurés, vous pouvez créer l'index en utilisant directement la méthode <code translate="no">create_index()</code> ou en transmettant les paramètres de l'index dans la méthode <code translate="no">create_collection</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.5.x/create-collection.md">Créer une collection</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Recherche sur l'index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

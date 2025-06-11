@@ -2,9 +2,10 @@
 id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
-summary: 'Erfahren Sie, wie Sie das Python-SDK von Milvus installieren.'
+summary: "Erfahren Sie, wie Sie das Python-SDK von Milvus installieren."
 title: Milvus Python SDK installieren
 ---
+
 <h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">Milvus Python SDK installieren<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +60,7 @@ title: Milvus Python SDK installieren
       </svg>
     </button></h2><p>PyMilvus ist im <a href="https://pypi.org/project/pymilvus/">Python Package Index</a> verfügbar.</p>
 <div class="alert note">
-Es wird empfohlen, eine PyMilvus-Version zu installieren, die mit der Version des Milvus-Servers übereinstimmt, den Sie installiert haben. Weitere Informationen finden Sie in den <a href="/docs/de/release_notes.md">Release Notes</a>.</div>
+Es wird empfohlen, eine PyMilvus-Version zu installieren, die mit der Version des Milvus-Servers übereinstimmt, den Sie installiert haben. Weitere Informationen finden Sie in den <a href="/docs/de/v2.5.x/release_notes.md">Release Notes</a>.</div>
 <pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">10</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Überprüfen Sie die Installation<button data-href="#Verify-installation" class="anchor-icon" translate="no">
@@ -99,11 +100,11 @@ Es wird empfohlen, eine PyMilvus-Version zu installieren, die mit der Version de
 <ul>
 <li><p>Die grundlegenden Funktionen von Milvus kennenlernen:</p>
 <ul>
-<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
-<li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/insert-update-delete.md">Einfügen, Hochstellen und Löschen</a></li>
-<li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
-<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
+<li><a href="/docs/de/v2.5.x/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/manage-partitions.md">Partitionen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/insert-update-delete.md">Einfügen, Hochstellen und Löschen</a></li>
+<li><a href="/docs/de/v2.5.x/single-vector-search.md">Ein-Vektor-Suche</a></li>
+<li><a href="/docs/de/v2.5.x/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
 <li><p><a href="/api-reference/pymilvus/v2.4.x/About.md">PyMilvus API-Referenz</a> erforschen</p></li>
 </ul>

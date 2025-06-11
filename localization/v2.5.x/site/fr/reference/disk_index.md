@@ -6,6 +6,7 @@ summary: >-
   optimisée.
 title: Index sur disque
 ---
+
 <h1 id="On-disk-Index" class="common-anchor-header">Index sur disque<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ title: Index sur disque
         ></path>
       </svg>
     </button></h1><p>Cet article présente DiskANN, un algorithme d'indexation sur disque pour les recherches vectorielles optimisées sur disque. Basé sur les graphes de Vamana, DiskANN permet d'effectuer des recherches vectorielles sur disque efficaces dans les grands ensembles de données.</p>
-<p>Pour améliorer les performances des requêtes, vous pouvez <a href="/docs/fr/index-vector-fields.md">spécifier un type d'index</a> pour chaque champ vectoriel.</p>
+<p>Pour améliorer les performances des requêtes, vous pouvez <a href="/docs/fr/v2.5.x/index-vector-fields.md">spécifier un type d'index</a> pour chaque champ vectoriel.</p>
 <div class="alert note"> 
 Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Milvus supprime automatiquement l'ancien index lors du changement de type d'index.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">

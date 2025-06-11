@@ -9,6 +9,7 @@ summary: >-
   препинания.
 beta: Milvus 2.5.11+
 ---
+
 <h1 id="Remove-Punct" class="common-anchor-header">Удаление знаков препинания<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +58,7 @@ beta: Milvus 2.5.11+
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Фильтр <code translate="no">removepunct</code> работает с терминами, сгенерированными токенизатором, поэтому он должен использоваться в сочетании с токенизатором.</p>
-<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/analyzer-overview.md#Example-use">Пример использования</a>.</p>
+<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/analyzer-overview.md#Example-use">Пример использования</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,6 +99,7 @@ sample_text = <span class="hljs-string">&quot;Привет! Как дела?&quo
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

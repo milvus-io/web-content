@@ -4,6 +4,7 @@ related_key: scalar_index
 summary: Indice scalaire en Milvus.
 title: Index scalaire
 ---
+
 <h1 id="Scalar-Index" class="common-anchor-header">Index scalaire<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ title: Index scalaire
         ></path>
       </svg>
     </button></h2><p>Lorsque vous effectuez des recherches de similarité vectorielle dans Milvus, vous pouvez utiliser des opérateurs logiques pour organiser les champs scalaires en expressions booléennes.</p>
-<p>Lorsque Milvus reçoit une demande de recherche avec une telle expression booléenne, il analyse l'expression booléenne dans un arbre syntaxique abstrait (AST) afin de générer un plan physique pour le filtrage des attributs. Milvus applique ensuite le plan physique dans chaque segment pour générer un <a href="/docs/fr/bitset.md">jeu de bits</a> comme résultat du filtrage et inclut le résultat comme paramètre de recherche vectorielle pour réduire la portée de la recherche. Dans ce cas, la vitesse des recherches vectorielles dépend fortement de la vitesse du filtrage d'attributs.</p>
+<p>Lorsque Milvus reçoit une demande de recherche avec une telle expression booléenne, il analyse l'expression booléenne dans un arbre syntaxique abstrait (AST) afin de générer un plan physique pour le filtrage des attributs. Milvus applique ensuite le plan physique dans chaque segment pour générer un <a href="/docs/fr/v2.5.x/bitset.md">jeu de bits</a> comme résultat du filtrage et inclut le résultat comme paramètre de recherche vectorielle pour réduire la portée de la recherche. Dans ce cas, la vitesse des recherches vectorielles dépend fortement de la vitesse du filtrage d'attributs.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +155,12 @@ title: Index scalaire
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Pour indexer un champ scalaire, lisez <a href="/docs/fr/index-scalar-fields.md">Construire un index sur des scalaires</a>.</p></li>
+<li><p>Pour indexer un champ scalaire, lisez <a href="/docs/fr/v2.5.x/index-scalar-fields.md">Construire un index sur des scalaires</a>.</p></li>
 <li><p>Pour en savoir plus sur les termes et les règles mentionnés ci-dessus, lisez</p>
 <ul>
-<li><a href="/docs/fr/bitset.md">Bitset</a></li>
-<li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
-<li><a href="/docs/fr/boolean.md">Règles des expressions booléennes</a></li>
-<li><a href="/docs/fr/schema.md#Supported-data-type">Types de données pris en charge</a></li>
+<li><a href="/docs/fr/v2.5.x/bitset.md">Bitset</a></li>
+<li><a href="/docs/fr/v2.5.x/multi-vector-search.md">Recherche hybride</a></li>
+<li><a href="/docs/fr/v2.5.x/boolean.md">Règles des expressions booléennes</a></li>
+<li><a href="/docs/fr/v2.5.x/schema.md#Supported-data-type">Types de données pris en charge</a></li>
 </ul></li>
 </ul>

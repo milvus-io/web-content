@@ -6,6 +6,7 @@ summary: >-
   arquitectura.
 title: Visión general de la migración de Milvus
 ---
+
 <h1 id="Milvus-Migration-Overview" class="common-anchor-header">Visión general de la migración de Milvus<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,10 +40,10 @@ title: Visión general de la migración de Milvus
       </svg>
     </button></h2><p>La herramienta <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> admite una variedad de rutas de migración para adaptarse a las diferentes necesidades de los usuarios:</p>
 <ul>
-<li><a href="/docs/es/es2m.md">Elasticsearch a Milvus 2.x</a>: Permite a los usuarios migrar datos desde entornos Elasticsearch para aprovechar las capacidades de búsqueda vectorial optimizada de Milvus.</li>
-<li><a href="/docs/es/f2m.md">Faiss a Milvus 2.x</a>: Proporcionando soporte experimental para transferir datos desde Faiss, una biblioteca popular para la búsqueda eficiente de similitudes.</li>
-<li><a href="/docs/es/m2m.md">Milvus 1.x a Milvus 2.x</a>: Garantizar que los datos de las versiones anteriores se transfieran sin problemas al marco más reciente.</li>
-<li><a href="/docs/es/from-m2x.md">Milvus 2.3.x a Milvus 2.3.x o superior</a>: Proporcionar una ruta de migración única para los usuarios que ya han migrado a 2.3.x.</li>
+<li><a href="/docs/es/v2.5.x/es2m.md">Elasticsearch a Milvus 2.x</a>: Permite a los usuarios migrar datos desde entornos Elasticsearch para aprovechar las capacidades de búsqueda vectorial optimizada de Milvus.</li>
+<li><a href="/docs/es/v2.5.x/f2m.md">Faiss a Milvus 2.x</a>: Proporcionando soporte experimental para transferir datos desde Faiss, una biblioteca popular para la búsqueda eficiente de similitudes.</li>
+<li><a href="/docs/es/v2.5.x/m2m.md">Milvus 1.x a Milvus 2.x</a>: Garantizar que los datos de las versiones anteriores se transfieran sin problemas al marco más reciente.</li>
+<li><a href="/docs/es/v2.5.x/from-m2x.md">Milvus 2.3.x a Milvus 2.3.x o superior</a>: Proporcionar una ruta de migración única para los usuarios que ya han migrado a 2.3.x.</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">Características<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

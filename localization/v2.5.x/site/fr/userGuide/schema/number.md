@@ -8,6 +8,7 @@ summary: >-
   des quantités, des mesures ou toute autre donnée devant faire l'objet d'un
   traitement mathématique.
 ---
+
 <h1 id="Number-Field" class="common-anchor-header">Champ numérique<button data-href="#Number-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +62,7 @@ summary: >-
 </table>
 <p>Pour déclarer un champ numérique, il suffit de donner à <code translate="no">datatype</code> la valeur d'un des types de données numériques disponibles. Par exemple, <code translate="no">DataType.INT64</code> pour un champ d'entiers ou <code translate="no">DataType.FLOAT</code> pour un champ de nombres à virgule flottante.</p>
 <div class="alert note">
-<p>Milvus prend en charge les valeurs nulles et les valeurs par défaut pour les champs numériques. Pour activer ces fonctions, définissez <code translate="no">nullable</code> sur <code translate="no">True</code> et <code translate="no">default_value</code> sur une valeur numérique. Pour plus de détails, voir <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>Milvus prend en charge les valeurs nulles et les valeurs par défaut pour les champs numériques. Pour activer ces fonctions, définissez <code translate="no">nullable</code> sur <code translate="no">True</code> et <code translate="no">default_value</code> sur une valeur numérique. Pour plus de détails, voir <a href="/docs/fr/v2.5.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <h2 id="Add-number-field" class="common-anchor-header">Ajouter un champ numérique<button data-href="#Add-number-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,7 +85,7 @@ summary: >-
 <li><p><code translate="no">price</code>Le champ : stocke des données flottantes, autorise les valeurs nulles, mais n'a pas de valeur par défaut.</p></li>
 </ul>
 <div class="alert note">
-<p>Si vous définissez <code translate="no">enable_dynamic_fields=True</code> lors de la définition du schéma, Milvus vous permet d'insérer des champs scalaires qui n'ont pas été définis à l'avance. Cependant, cela peut augmenter la complexité des requêtes et de la gestion, ce qui peut avoir un impact sur les performances. Pour plus d'informations, voir <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>
+<p>Si vous définissez <code translate="no">enable_dynamic_fields=True</code> lors de la définition du schéma, Milvus vous permet d'insérer des champs scalaires qui n'ont pas été définis à l'avance. Cependant, cela peut augmenter la complexité des requêtes et de la gestion, ce qui peut avoir un impact sur les performances. Pour plus d'informations, voir <a href="/docs/fr/v2.5.x/enable-dynamic-field.md">Champ dynamique</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -99,8 +100,8 @@ client = MilvusClient(uri=SERVER_ADDR)
 
 <span class="hljs-comment"># Define the collection schema</span>
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_fields=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Add an INT64 field `age` that supports null values with default value 18</span>
@@ -110,6 +111,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;price&quot;</span>, 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -266,7 +268,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>L'indexation permet d'améliorer les performances de recherche et de requête. Dans Milvus, l'indexation est obligatoire pour les champs vectoriels mais facultative pour les champs scalaires.</p>
-<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ scalaire <code translate="no">age</code>, tous deux utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, voir <a href="/docs/fr/index-explained.md">Index expliqué</a>.</p>
+<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ scalaire <code translate="no">age</code>, tous deux utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, voir <a href="/docs/fr/v2.5.x/index-explained.md">Index expliqué</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -275,18 +277,19 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Index `age` with AUTOINDEX</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;age&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    index_name=<span class="hljs-string">&quot;age_index&quot;</span>
+field_name=<span class="hljs-string">&quot;age&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+index_name=<span class="hljs-string">&quot;age_index&quot;</span>
 )
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,  <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>  <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
+field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -419,10 +422,11 @@ data = [
 ]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -514,19 +518,20 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;age&#x27;: 45, &#x27;price&#x27;: None, &#x27;pk&#x27;: 4}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;age&#x27;: 60, &#x27;price&#x27;: None, &#x27;pk&#x27;: 6}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;age&#x27;: 45, &#x27;price&#x27;: None, &#x27;pk&#x27;: 4}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;age&#x27;: 60, &#x27;price&#x27;: None, &#x27;pk&#x27;: 6}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 
@@ -582,21 +587,22 @@ fmt.Println(<span class="hljs-string">&quot;price&quot;</span>, queryResult.GetC
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price is null&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;age&#x27;: 30, &#x27;price&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;age&#x27;: 18, &#x27;price&#x27;: None, &#x27;pk&#x27;: 3}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;age&#x27;: 45, &#x27;price&#x27;: None, &#x27;pk&#x27;: 4}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;age&#x27;: 60, &#x27;price&#x27;: None, &#x27;pk&#x27;: 6}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;age&#x27;: 30, &#x27;price&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;age&#x27;: 18, &#x27;price&#x27;: None, &#x27;pk&#x27;: 3}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;age&#x27;: 45, &#x27;price&#x27;: None, &#x27;pk&#x27;: 4}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;age&#x27;: 60, &#x27;price&#x27;: None, &#x27;pk&#x27;: 6}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;price is null&quot;</span>;
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
@@ -660,19 +666,20 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age == 18&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;age&#x27;: 18, &#x27;price&#x27;: None, &#x27;pk&#x27;: 3}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;age&#x27;: 18, &#x27;price&#x27;: 59.99, &#x27;pk&#x27;: 5}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;age&#x27;: 18, &#x27;price&#x27;: None, &#x27;pk&#x27;: 3}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;age&#x27;: 18, &#x27;price&#x27;: 59.99, &#x27;pk&#x27;: 5}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age == 18&quot;</span>;
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
@@ -749,21 +756,22 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;25 &lt;= age &lt;= 35&quot;</span>
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
-    limit=<span class="hljs-number">5</span>,
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-    output_fields=[<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-string">&quot;price&quot;</span>],
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
+limit=<span class="hljs-number">5</span>,
+search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+output_fields=[<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-string">&quot;price&quot;</span>],
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: -0.2016308456659317, &#x27;entity&#x27;: {&#x27;age&#x27;: 30, &#x27;price&#x27;: None}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: -0.23643313348293304, &#x27;entity&#x27;: {&#x27;age&#x27;: 25, &#x27;price&#x27;: 99.98999786376953}}]&quot;</span>
+<span class="hljs-comment"># &quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: -0.2016308456659317, &#x27;entity&#x27;: {&#x27;age&#x27;: 30, &#x27;price&#x27;: None}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: -0.23643313348293304, &#x27;entity&#x27;: {&#x27;age&#x27;: 25, &#x27;price&#x27;: 99.98999786376953}}]&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -839,4 +847,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, nous définissons d'abord un vecteur de requête et ajoutons une condition de filtrage <code translate="no">25 &lt;= age &lt;= 35</code> pendant la recherche. Cela permet de s'assurer que les résultats de la recherche sont non seulement similaires au vecteur de la requête, mais qu'ils correspondent également à la tranche d'âge spécifiée. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/filtering">Filtrage</a>.</p>
+<p>Dans cet exemple, nous définissons d'abord un vecteur de requête et ajoutons une condition de filtrage <code translate="no">25 &lt;= age &lt;= 35</code> pendant la recherche. Cela permet de s'assurer que les résultats de la recherche sont non seulement similaires au vecteur de la requête, mais qu'ils correspondent également à la tranche d'âge spécifiée. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.5.x/filtering">Filtrage</a>.</p>

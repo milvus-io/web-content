@@ -1,11 +1,12 @@
 ---
 id: monitor.md
 title: Bereitstellung von Überwachungsdiensten
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: >-
   Erfahren Sie, wie Sie mit Prometheus Überwachungsdienste für einen
   Milvus-Cluster bereitstellen.
 ---
+
 <h1 id="Deploying-Monitoring-Services-on-Kubernetes" class="common-anchor-header">Bereitstellen von Überwachungsdiensten auf Kubernetes<button data-href="#Deploying-Monitoring-Services-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -123,14 +124,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>Wenn Sie Überwachungsdienste für den Milvus-Cluster implementiert haben, möchten Sie vielleicht auch lernen, wie man:<ul>
-<li><a href="/docs/de/visualize.md">Visualisieren von Milvus-Metriken in Grafana</a></li>
-<li><a href="/docs/de/alert.md">Einen Alert für Milvus-Dienste erstellen</a></li>
-<li>Ihre <a href="/docs/de/allocate.md">Ressourcenzuweisung</a> anpassen</li>
+<li><a href="/docs/de/v2.5.x/visualize.md">Visualisieren von Milvus-Metriken in Grafana</a></li>
+<li><a href="/docs/de/v2.5.x/alert.md">Einen Alert für Milvus-Dienste erstellen</a></li>
+<li>Ihre <a href="/docs/de/v2.5.x/allocate.md">Ressourcenzuweisung</a> anpassen</li>
 </ul></li>
 <li>Wenn Sie nach Informationen zur Skalierung eines Milvus-Clusters suchen:<ul>
-<li>Lernen Sie <a href="/docs/de/scaleout.md">einen Milvus-Cluster</a> zu <a href="/docs/de/scaleout.md">skalieren</a></li>
+<li>Lernen Sie <a href="/docs/de/v2.5.x/scaleout.md">einen Milvus-Cluster</a> zu <a href="/docs/de/v2.5.x/scaleout.md">skalieren</a></li>
 </ul></li>
 <li>Wenn Sie an einem Upgrade der Milvus-Version interessiert sind,<ul>
-<li>Lesen Sie den <a href="/docs/de/upgrade_milvus_cluster-operator.md">Leitfaden für das Upgrade von Milvus Cluster</a> und den <a href="/docs/de/upgrade_milvus_cluster-operator.md">Leitfaden</a> <a href="/docs/de/upgrade_milvus_standalone-operator.md">für das Upgrade von Milvus Standalone</a>.</li>
+<li>Lesen Sie den <a href="/docs/de/v2.5.x/upgrade_milvus_cluster-operator.md">Leitfaden für das Upgrade von Milvus Cluster</a> und den <a href="/docs/de/v2.5.x/upgrade_milvus_cluster-operator.md">Leitfaden</a> <a href="/docs/de/v2.5.x/upgrade_milvus_standalone-operator.md">für das Upgrade von Milvus Standalone</a>.</li>
 </ul></li>
 </ul>

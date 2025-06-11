@@ -3,6 +3,7 @@ id: time_sync.md
 title: Sinkronisasi Waktu
 summary: Pelajari tentang sistem sinkronisasi waktu di Milvus.
 ---
+
 <h1 id="Time-Synchronization" class="common-anchor-header">Sinkronisasi Waktu<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: Pelajari tentang sistem sinkronisasi waktu di Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Pelajari tentang konsep <a href="/docs/id/timestamp.md">stempel waktu</a>.</li>
-<li>Pelajari tentang <a href="/docs/id/data_processing.md">alur kerja pemrosesan data</a> di Milvus.</li>
+<li>Pelajari tentang konsep <a href="/docs/id/v2.5.x/timestamp.md">stempel waktu</a>.</li>
+<li>Pelajari tentang <a href="/docs/id/v2.5.x/data_processing.md">alur kerja pemrosesan data</a> di Milvus.</li>
 </ul>

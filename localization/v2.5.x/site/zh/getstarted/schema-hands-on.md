@@ -4,6 +4,7 @@ title: 搜索数据模型设计
 summary: >-
   信息检索系统，又称搜索引擎，对于检索增强生成（RAG）、视觉搜索和产品推荐等各种人工智能应用至关重要。这些系统的核心是精心设计的数据模型，用于组织、索引和检索信息。
 ---
+
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">搜索数据模型设计<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,8 +89,8 @@ summary: >-
       </svg>
     </button></h2><p>在 Milvus 中，数据模型通过 Collections Schema 表达。在 Collections 模式中设计正确的字段是实现有效检索的关键。每个字段都定义了存储在 Collections 中的特定数据类型，并在搜索过程中扮演着不同的角色。在高层次上，Milvus 支持两种主要类型的字段：<strong>向量字段</strong>和<strong>标量字段</strong>。</p>
 <p>现在，您可以将数据模型映射到字段 Schema 中，包括向量和任何辅助标量字段。确保每个字段都与数据模型中的属性相关联，尤其要注意向量类型（密集型或标量型）及其维度。</p>
-<h3 id="Vector-Field" class="common-anchor-header">向量字段</h3><p>向量字段存储文本、图像和音频等非结构化数据类型的嵌入。这些嵌入可能是密集型、稀疏型或二进制型，具体取决于数据类型和使用的检索方法。通常，密集向量用于语义搜索，而稀疏向量则更适合全文或词性匹配。当存储和计算资源有限时，二进制向量很有用。一个 Collections 可能包含多个向量场，以实现多模式或混合检索策略。有关该主题的详细指南，请参阅<a href="/docs/zh/multi-vector-search.md">多向量混合检索</a>。</p>
-<p>Milvus 支持向量数据类型：<code translate="no">FLOAT_VECTOR</code> 表示<a href="/docs/zh/dense-vector.md">密集</a>向量，<code translate="no">SPARSE_FLOAT_VECTOR</code> 表示<a href="/docs/zh/sparse_vector.md">稀疏向量</a>，<code translate="no">BINARY_VECTOR</code> 表示<a href="/docs/zh/binary-vector.md">二进制向量</a></p>
+<h3 id="Vector-Field" class="common-anchor-header">向量字段</h3><p>向量字段存储文本、图像和音频等非结构化数据类型的嵌入。这些嵌入可能是密集型、稀疏型或二进制型，具体取决于数据类型和使用的检索方法。通常，密集向量用于语义搜索，而稀疏向量则更适合全文或词性匹配。当存储和计算资源有限时，二进制向量很有用。一个 Collections 可能包含多个向量场，以实现多模式或混合检索策略。有关该主题的详细指南，请参阅<a href="/docs/zh/v2.5.x/multi-vector-search.md">多向量混合检索</a>。</p>
+<p>Milvus 支持向量数据类型：<code translate="no">FLOAT_VECTOR</code> 表示<a href="/docs/zh/v2.5.x/dense-vector.md">密集</a>向量，<code translate="no">SPARSE_FLOAT_VECTOR</code> 表示<a href="/docs/zh/v2.5.x/sparse_vector.md">稀疏向量</a>，<code translate="no">BINARY_VECTOR</code> 表示<a href="/docs/zh/v2.5.x/binary-vector.md">二进制向量</a></p>
 <h3 id="Scalar-Field" class="common-anchor-header">标量字段</h3><p>标量字段存储原始的结构化值，通常称为元数据，如数字、字符串或日期。这些值可以与向量搜索结果一起返回，对于筛选和排序至关重要。它们允许你根据特定属性缩小搜索结果的范围，比如将文档限制在特定类别或定义的时间范围内。</p>
 <p>Milvus 支持标量类型，如<code translate="no">BOOL</code>,<code translate="no">INT8/16/32/64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>,<code translate="no">VARCHAR</code>,<code translate="no">JSON</code> 和<code translate="no">ARRAY</code> ，用于存储和过滤非向量数据。这些类型提高了搜索操作的精度和定制化程度。</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">在模式设计中利用高级功能<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
@@ -109,13 +110,13 @@ summary: >-
       </svg>
     </button></h2><p>在设计 Schema 时，仅仅使用支持的数据类型将数据映射到字段是不够的。必须全面了解字段之间的关系以及可用的配置策略。在设计阶段牢记关键功能，可确保 Schema 不仅能满足当前的数据处理要求，还具有可扩展性和适应性，以满足未来的需求。通过精心整合这些功能，您可以构建一个强大的数据架构，最大限度地发挥 Milvus 的功能，并支持您更广泛的数据策略和目标。以下是创建 Collections Schema 的主要功能概述：</p>
 <h3 id="Primary-Key" class="common-anchor-header">主键</h3><p>主键字段是 Schema 的基本组成部分，因为它能唯一标识 Collections 中的每个实体。必须定义主键。它必须是整数或字符串类型的标量字段，并标记为<code translate="no">is_primary=True</code> 。可选择为主键启用<code translate="no">auto_id</code> ，主键会自动分配整数，随着更多数据被采集到 Collections 中，整数也会随之增长。</p>
-<p>有关详细信息，请参阅<a href="/docs/zh/primary-field.md">主字段和自动 ID</a>。</p>
+<p>有关详细信息，请参阅<a href="/docs/zh/v2.5.x/primary-field.md">主字段和自动 ID</a>。</p>
 <h3 id="Partitioning" class="common-anchor-header">分区</h3><p>为了加快搜索速度，可以选择打开分区。通过为分区指定一个特定的标量字段，并在搜索过程中根据该字段指定过滤条件，可以有效地将搜索范围限制在相关的分区中。这种方法通过缩小搜索域，大大提高了检索操作的效率。</p>
-<p>更多详情，请参阅<a href="/docs/zh/use-partition-key.md">使用 Partition Key</a>。</p>
+<p>更多详情，请参阅<a href="/docs/zh/v2.5.x/use-partition-key.md">使用 Partition Key</a>。</p>
 <h3 id="Analyzer" class="common-anchor-header">分析器</h3><p>分析器是处理和转换文本数据的重要工具。它的主要功能是将原始文本转换为标记，并对其进行结构化处理，以便编制索引和进行检索。具体做法是对字符串进行标记化处理，去掉停顿词，并将单个词的词干转化为标记。</p>
-<p>更多详情，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>。</p>
+<p>更多详情，请参阅<a href="/docs/zh/v2.5.x/analyzer-overview.md">分析器概述</a>。</p>
 <h3 id="Function" class="common-anchor-header">功能</h3><p>Milvus 允许你定义内置函数作为 Schema 的一部分，以自动推导出某些字段。例如，您可以添加内置 BM25 函数，从<code translate="no">VARCHAR</code> 字段生成稀疏向量，以支持全文搜索。这些函数派生字段可简化预处理，并确保 Collections 保持自足和查询就绪。</p>
-<p>更多详情，请参阅<a href="/docs/zh/full-text-search.md">全文检索</a>。</p>
+<p>更多详情，请参阅<a href="/docs/zh/v2.5.x/full-text-search.md">全文检索</a>。</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">真实世界示例<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,7 +146,7 @@ summary: >-
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
      <td><p>启用后自动生成<code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/zh/get-and-scalar-query.md">使用 "获取 "进行查询</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/get-and-scalar-query.md">使用 "获取 "进行查询</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -154,7 +155,7 @@ summary: >-
    <tr>
      <td><p>标题 (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>文章标题</p></td>
-     <td><p><a href="/docs/zh/keyword-match.md">文本匹配</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/keyword-match.md">文本匹配</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -163,7 +164,7 @@ summary: >-
    <tr>
      <td><p>时间戳 (<code translate="no">INT32</code>)</p></td>
      <td><p>发布日期</p></td>
-     <td><p><a href="/docs/zh/use-partition-key.md">按分区密钥过滤</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/use-partition-key.md">按分区密钥过滤</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -172,7 +173,7 @@ summary: >-
    <tr>
      <td><p>文本 (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>文章原始文本</p></td>
-     <td><p><a href="/docs/zh/multi-vector-search.md">多向量混合搜索</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/multi-vector-search.md">多向量混合搜索</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -197,7 +198,7 @@ summary: >-
      <td><p>输出</p></td>
    </tr>
 </table>
-<p>有关<a href="/docs/zh/schema.md">Schema 的</a>更多信息以及添加各类字段的详细指导，请参阅<a href="/docs/zh/schema.md">Schema Explained</a>。</p>
+<p>有关<a href="/docs/zh/v2.5.x/schema.md">Schema 的</a>更多信息以及添加各类字段的详细指导，请参阅<a href="/docs/zh/v2.5.x/schema.md">Schema Explained</a>。</p>
 <h3 id="Initialize-schema" class="common-anchor-header">初始化模式</h3><p>首先，我们需要创建一个空模式。这一步为定义数据模型建立了基础结构。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -205,6 +206,7 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -241,6 +243,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, d
 schema.add_field(field_name=<span class="hljs-string">&quot;text_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;text dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;text sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
@@ -403,14 +406,15 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
-    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
-    output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
-    function_type=FunctionType.BM25,
+name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
+function_type=FunctionType.BM25,
 )
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -476,6 +480,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/zh/create-collection.md">创建 Collection</a></p></li>
-<li><p><a href="/docs/zh/alter-collection-field.md">更改 Collections 字段</a></p></li>
+<li><p><a href="/docs/zh/v2.5.x/create-collection.md">创建 Collection</a></p></li>
+<li><p><a href="/docs/zh/v2.5.x/alter-collection-field.md">更改 Collections 字段</a></p></li>
 </ul>

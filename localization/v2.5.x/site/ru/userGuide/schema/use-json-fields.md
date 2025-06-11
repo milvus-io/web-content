@@ -6,6 +6,7 @@ summary: >-
   вместе с векторными вкраплениями в виде пар ключ-значение. Вот пример того,
   как хранятся данные в формате JSON:
 ---
+
 <h1 id="JSON-Field" class="common-anchor-header">Поле JSON<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,7 +53,7 @@ summary: >-
     </button></h2><ul>
 <li><p><strong>Размер поля</strong>: Размер полей JSON ограничен 65 536 байтами.</p></li>
 <li><p><strong>Вложенные словари</strong>: Любые вложенные словари в значениях полей JSON рассматриваются как обычные строки для хранения.</p></li>
-<li><p><strong>Значения по умолчанию</strong>: Поля JSON не поддерживают значения по умолчанию. Однако вы можете установить атрибут <code translate="no">nullable</code> на <code translate="no">True</code>, чтобы разрешить нулевые значения. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
+<li><p><strong>Значения по умолчанию</strong>: Поля JSON не поддерживают значения по умолчанию. Однако вы можете установить атрибут <code translate="no">nullable</code> на <code translate="no">True</code>, чтобы разрешить нулевые значения. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
 <li><p><strong>Сопоставление типов</strong>: если ключевое значение поля JSON является целым числом или плавающей точкой, его можно сравнивать (с помощью фильтров выражений) только с другим числовым ключом того же типа.</p></li>
 <li><p><strong>Именование</strong>: При именовании JSON-ключей рекомендуется использовать только буквы, цифры и символы подчеркивания. Использование других символов может вызвать проблемы при фильтрации или поиске.</p></li>
 <li><p><strong>Работа со строками</strong>: Milvus хранит строковые значения в полях JSON в том виде, в котором они были введены, без семантического преобразования. Например:</p>
@@ -60,7 +61,7 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, и <code translate="no">&quot;a\\&quot;b&quot;</code> хранятся именно так, как они есть.</p></li>
 <li><p><code translate="no">'a'b'</code> и <code translate="no">&quot;a&quot;b&quot;</code> считаются недействительными.</p></li>
 </ul></li>
-<li><p><strong>Индексирование JSON</strong>: При индексировании JSON-поля можно указать один или несколько путей в JSON-поле для ускорения фильтрации. Каждый дополнительный путь увеличивает накладные расходы на индексирование, поэтому тщательно планируйте стратегию индексирования. Дополнительные сведения об индексировании JSON-поля см. в разделе <a href="/docs/ru/use-json-fields.md#Considerations-on-JSON-indexing">Сведения об индексировании JSON</a>.</p></li>
+<li><p><strong>Индексирование JSON</strong>: При индексировании JSON-поля можно указать один или несколько путей в JSON-поле для ускорения фильтрации. Каждый дополнительный путь увеличивает накладные расходы на индексирование, поэтому тщательно планируйте стратегию индексирования. Дополнительные сведения об индексировании JSON-поля см. в разделе <a href="/docs/ru/v2.5.x/use-json-fields.md#Considerations-on-JSON-indexing">Сведения об индексировании JSON</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">Добавить поле JSON<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,8 +92,8 @@ client = MilvusClient(uri=SERVER_ADDR)
 
 <span class="hljs-comment"># Define the collection schema</span>
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_fields=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Add a JSON field that supports null values</span>
@@ -100,6 +101,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;metadata&quot;</span
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -251,26 +253,27 @@ schema.WithField(entity.NewField().
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-comment"># JSON field name to index</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Index type. Set to INVERTED</span>
-    index_name=<span class="hljs-string">&quot;json_index_1&quot;</span>, <span class="hljs-comment"># Index name</span>
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;]&quot;</span>, <span class="hljs-comment"># Path in JSON field to index</span>
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span> <span class="hljs-comment"># Data type that the extracted JSON values will be cast to</span>
-    }
+field_name=<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-comment"># JSON field name to index</span>
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Index type. Set to INVERTED</span>
+index_name=<span class="hljs-string">&quot;json_index_1&quot;</span>, <span class="hljs-comment"># Index name</span>
+params={
+<span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;]&quot;</span>, <span class="hljs-comment"># Path in JSON field to index</span>
+<span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span> <span class="hljs-comment"># Data type that the extracted JSON values will be cast to</span>
+}
 )
 
 <span class="hljs-comment"># Example 2: Index &#x27;price&#x27; as a numeric type (double)</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
-    index_name=<span class="hljs-string">&quot;json_index_2&quot;</span>,
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>,
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;double&quot;</span>
-    }
+field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
+index_name=<span class="hljs-string">&quot;json_index_2&quot;</span>,
+params={
+<span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>,
+<span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;double&quot;</span>
+}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
@@ -418,19 +421,20 @@ curl --request POST \
 <li>Milvus не разбирает и не преобразует ключи JSON за пределами указанного вами кастинга. Если исходные данные непоследовательны (например, в одних строках хранится строка для ключа <code translate="no">&quot;k&quot;</code>, а в других - число), некоторые строки не будут проиндексированы.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">Индексирование векторного поля</h3><p>В следующем примере создается индекс для векторного поля <code translate="no">embedding</code>, используя тип индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/index-explained.md">"Объяснение индекса</a>".</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">Индексирование векторного поля</h3><p>В следующем примере создается индекс для векторного поля <code translate="no">embedding</code>, используя тип индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/index-explained.md">"Объяснение индекса</a>".</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,  <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>  <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
+field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -568,10 +572,11 @@ data = [
 ]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -713,7 +718,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
       </svg>
     </button></h2><p>После вставки сущностей используйте метод <code translate="no">query</code> для получения сущностей, соответствующих заданным выражениям фильтра.</p>
 <div class="alert note">
-<p>Для полей JSON, допускающих нулевые значения, поле будет считаться нулевым, если весь объект JSON отсутствует или имеет значение <code translate="no">None</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/basic-operators.md#JSON-Fields-with-Null-Values">Поля JSON с нулевыми значениями</a>.</p>
+<p>Для полей JSON, допускающих нулевые значения, поле будет считаться нулевым, если весь объект JSON отсутствует или имеет значение <code translate="no">None</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/basic-operators.md#JSON-Fields-with-Null-Values">Поля JSON с нулевыми значениями</a>.</p>
 </div>
 <p>Чтобы получить сущности, для которых <code translate="no">metadata</code> не является null:</p>
 <div class="multipleCode">
@@ -723,9 +728,9 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata is not null&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-comment"># Expected result:</span>
@@ -736,10 +741,11 @@ res = client.query(
 
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: None, &#x27;brand&#x27;: &#x27;BrandB&#x27;}, &#x27;price&#x27;: 59.99, &#x27;in_stock&#x27;: None}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: None, &#x27;brand&#x27;: &#x27;BrandB&#x27;}, &#x27;price&#x27;: 59.99, &#x27;in_stock&#x27;: None}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 
@@ -795,9 +801,9 @@ fmt.Println(<span class="hljs-string">&quot;metadata&quot;</span>, rs.GetColumn(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-comment"># Expected result:</span>
@@ -809,9 +815,10 @@ res = client.query(
 
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;pk&#x27;: 1, &#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;pk&#x27;: 1, &#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;] == \&quot;electronics\&quot;&quot;</span>;
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
@@ -885,12 +892,12 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
-    limit=<span class="hljs-number">5</span>,
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-    output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>],
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
+limit=<span class="hljs-number">5</span>,
+search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>],
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
 )
 
 <span class="hljs-comment"># Expected result:</span>
@@ -903,9 +910,10 @@ res = client.search(
 
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: -0.2479381263256073, &#x27;entity&#x27;: {&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}}}]&quot;</span>
+<span class="hljs-comment"># &quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: -0.2479381263256073, &#x27;entity&#x27;: {&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}}}]&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
@@ -986,4 +994,4 @@ curl --request POST \
 
 <span class="hljs-comment">##{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Кроме того, Milvus поддерживает расширенные операторы фильтрации JSON, такие как <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, и <code translate="no">JSON_CONTAINS_ANY</code>, которые могут еще больше расширить возможности запроса. Более подробную информацию можно найти в разделе <a href="/docs/ru/json-operators.md">Операторы JSON</a>.</p>
+<p>Кроме того, Milvus поддерживает расширенные операторы фильтрации JSON, такие как <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, и <code translate="no">JSON_CONTAINS_ANY</code>, которые могут еще больше расширить возможности запроса. Более подробную информацию можно найти в разделе <a href="/docs/ru/v2.5.x/json-operators.md">Операторы JSON</a>.</p>

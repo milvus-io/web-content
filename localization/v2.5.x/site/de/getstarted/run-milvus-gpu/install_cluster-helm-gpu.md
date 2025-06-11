@@ -2,9 +2,10 @@
 id: install_cluster-helm-gpu.md
 label: Cluster (Helm)
 related_key: Kubernetes
-summary: 'Erfahren Sie, wie Sie Milvus-Cluster auf Kubernetes installieren.'
+summary: "Erfahren Sie, wie Sie Milvus-Cluster auf Kubernetes installieren."
 title: Starten von Milvus mit GPU-Unterstützung mit Helm Chart
 ---
+
 <h1 id="Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="common-anchor-header">Starten von Milvus mit GPU-Unterstützung mit Helm Chart<button data-href="#Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,14 +55,15 @@ title: Starten von Milvus mit GPU-Unterstützung mit Helm Chart
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">Installieren Sie Helm CLI</a>.</p></li>
-<li><p><a href="/docs/de/prerequisite-gpu.md#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes">Erstellen Sie einen K8s-Cluster mit GPU-Worker-Nodes</a>.</p></li>
+<li><p><a href="/docs/de/v2.5.x/prerequisite-gpu.md#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes">Erstellen Sie einen K8s-Cluster mit GPU-Worker-Nodes</a>.</p></li>
 <li><p>Installieren Sie eine <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>. Sie können die installierte StorageClass wie folgt überprüfen.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+NAME PROVISIONER RECLAIMPOLICY VOLUMEBIINDINGMODE ALLOWVOLUMEEXPANSION AGE
+standard (default) k8s.io/minikube-hostpath Delete Immediate <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Überprüfen Sie vor der Installation <a href="/docs/de/prerequisite-gpu.md">die Hardware- und Software-Anforderungen</a>.</p></li>
+
+<li><p>Überprüfen Sie vor der Installation <a href="/docs/de/v2.5.x/prerequisite-gpu.md">die Hardware- und Software-Anforderungen</a>.</p></li>
 </ul>
 <div class="alert note">
 <p>Wenn Sie beim Ziehen des Images auf Probleme stoßen, kontaktieren Sie uns unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> und geben Sie Details zum Problem an, damit wir Ihnen den nötigen Support bieten können.</p>
@@ -311,7 +313,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus wird mit einem integrierten GUI-Tool namens Milvus WebUI geliefert, auf das Sie über Ihren Browser zugreifen können. Milvus Web UI verbessert die Beobachtbarkeit des Systems durch eine einfache und intuitive Schnittstelle. Sie können Milvus Web UI verwenden, um die Statistiken und Metriken der Komponenten und Abhängigkeiten von Milvus zu beobachten, Datenbank- und Sammlungsdetails zu überprüfen und detaillierte Milvus-Konfigurationen aufzulisten. Für Details über Milvus Web UI, siehe <a href="/docs/de/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus wird mit einem integrierten GUI-Tool namens Milvus WebUI geliefert, auf das Sie über Ihren Browser zugreifen können. Milvus Web UI verbessert die Beobachtbarkeit des Systems durch eine einfache und intuitive Schnittstelle. Sie können Milvus Web UI verwenden, um die Statistiken und Metriken der Komponenten und Abhängigkeiten von Milvus zu beobachten, Datenbank- und Sammlungsdetails zu überprüfen und detaillierte Milvus-Konfigurationen aufzulisten. Für Details über Milvus Web UI, siehe <a href="/docs/de/v2.5.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>Um den Zugriff auf die Milvus Web UI zu ermöglichen, müssen Sie den Proxy-Pod auf einen lokalen Port weiterleiten.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -352,27 +354,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Nachdem Sie Milvus installiert haben, können Sie:</p>
 <ul>
-<li><p><a href="/docs/de/quickstart.md">Quickstart</a> prüfen, um zu sehen, was Milvus alles kann.</p></li>
+<li><p><a href="/docs/de/v2.5.x/quickstart.md">Quickstart</a> prüfen, um zu sehen, was Milvus alles kann.</p></li>
 <li><p>Lernen Sie die Grundfunktionen von Milvus kennen:</p>
 <ul>
-<li><a href="/docs/de/manage_databases.md">Verwalten von Datenbanken</a></li>
-<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
-<li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
-<li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
-<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
+<li><a href="/docs/de/v2.5.x/manage_databases.md">Verwalten von Datenbanken</a></li>
+<li><a href="/docs/de/v2.5.x/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/manage-partitions.md">Partitionen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
+<li><a href="/docs/de/v2.5.x/single-vector-search.md">Ein-Vektor-Suche</a></li>
+<li><a href="/docs/de/v2.5.x/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
-<li><p><a href="/docs/de/upgrade_milvus_cluster-helm.md">Upgrade von Milvus mit Helm Chart</a>.</p></li>
-<li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
+<li><p><a href="/docs/de/v2.5.x/upgrade_milvus_cluster-helm.md">Upgrade von Milvus mit Helm Chart</a>.</p></li>
+<li><p><a href="/docs/de/v2.5.x/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
 <li><p>Verteilen Sie Ihren Milvus-Cluster auf Clouds:</p>
 <ul>
-<li><a href="/docs/de/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/de/gcp.md">Google Wolke</a></li>
-<li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/de/v2.5.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/de/v2.5.x/gcp.md">Google Wolke</a></li>
+<li><a href="/docs/de/v2.5.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
-<li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/v2.5.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
+<li><p>Erkunden Sie <a href="/docs/de/v2.5.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
+<li><p><a href="/docs/de/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für intuitives Milvus-Management.</p></li>
-<li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
+<li><p><a href="/docs/de/v2.5.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

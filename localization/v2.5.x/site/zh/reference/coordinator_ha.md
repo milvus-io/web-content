@@ -3,6 +3,7 @@ id: coordinator_ha.md
 summary: 了解 Milvus 协调员积极待命的工作动机和程序。
 title: 协调器 HA
 ---
+
 <h1 id="Coordinator-HA" class="common-anchor-header">协调器 HA<button data-href="#Coordinator-HA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -18,7 +19,7 @@ title: 协调器 HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>如<a href="/docs/zh/architecture_overview.md">Milvus 架构</a>所示，Milvus 由许多组件组成，并让它们以分布式方式工作。在所有组件中，Milvus 通过<a href="/docs/zh/scaleout.md">扩大和缩小</a>节点来确保工作者的高可用性，使协调者成为链条中唯一的薄弱环节。</p>
+    </button></h1><p>如<a href="/docs/zh/v2.5.x/architecture_overview.md">Milvus 架构</a>所示，Milvus 由许多组件组成，并让它们以分布式方式工作。在所有组件中，Milvus 通过<a href="/docs/zh/v2.5.x/scaleout.md">扩大和缩小</a>节点来确保工作者的高可用性，使协调者成为链条中唯一的薄弱环节。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,23 +96,24 @@ title: 协调器 HA
       - <span class="hljs-string">&quot;pulsar&quot;</span>
       - <span class="hljs-string">&quot;minio&quot;</span>
 
-<span class="hljs-comment">#   add the following to have RootCoords work in active-standby mode</span>
-<span class="hljs-comment">#   rootcoord-1:</span>
-<span class="hljs-comment">#    container_name: milvus-rootcoord-1</span>
-<span class="hljs-comment">#    image: milvusdb/milvus:v2.2.3</span>
-<span class="hljs-comment">#    command: [&quot;milvus&quot;, &quot;run&quot;, &quot;rootcoord&quot;]</span>
-<span class="hljs-comment">#    environment:</span>
-<span class="hljs-comment">#      ETCD_ENDPOINTS: etcd:2379</span>
-<span class="hljs-comment">#      MINIO_ADDRESS: minio:9000</span>
-<span class="hljs-comment">#      PULSAR_ADDRESS: pulsar://pulsar:6650</span>
-<span class="hljs-comment">#      ROOT_COORD_ADDRESS: rootcoord-1:53100</span>
-<span class="hljs-comment">#      # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby</span>
-<span class="hljs-comment">#      ROOT_COORD_ENABLE_ACTIVE_STANDBY: true</span>
-<span class="hljs-comment">#    depends_on:</span>
-<span class="hljs-comment">#      - &quot;etcd&quot;</span>
-<span class="hljs-comment">#      - &quot;pulsar&quot;</span>
-<span class="hljs-comment">#      - &quot;minio&quot;</span>
+<span class="hljs-comment"># add the following to have RootCoords work in active-standby mode</span>
+<span class="hljs-comment"># rootcoord-1:</span>
+<span class="hljs-comment"># container_name: milvus-rootcoord-1</span>
+<span class="hljs-comment"># image: milvusdb/milvus:v2.2.3</span>
+<span class="hljs-comment"># command: [&quot;milvus&quot;, &quot;run&quot;, &quot;rootcoord&quot;]</span>
+<span class="hljs-comment"># environment:</span>
+<span class="hljs-comment"># ETCD_ENDPOINTS: etcd:2379</span>
+<span class="hljs-comment"># MINIO_ADDRESS: minio:9000</span>
+<span class="hljs-comment"># PULSAR_ADDRESS: pulsar://pulsar:6650</span>
+<span class="hljs-comment"># ROOT_COORD_ADDRESS: rootcoord-1:53100</span>
+<span class="hljs-comment"># # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby</span>
+<span class="hljs-comment"># ROOT_COORD_ENABLE_ACTIVE_STANDBY: true</span>
+<span class="hljs-comment"># depends_on:</span>
+<span class="hljs-comment"># - &quot;etcd&quot;</span>
+<span class="hljs-comment"># - &quot;pulsar&quot;</span>
+<span class="hljs-comment"># - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="With-MacLinux-shell" class="common-anchor-header">使用 Mac/Linux shell</h3><p>要启动多个协调器，并让它们以活动-待机模式工作，你可以</p>
 <ol>
 <li><p>下载 Milvus 源代码到本地硬盘，然后按如下方法<a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">从源代码启动 Milvus 集群</a>：</p>
@@ -170,9 +172,9 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
       </svg>
     </button></h2><p>协调器 HA 默认为禁用。您可以通过更改 Milvus 配置文件中的以下项目手动启用该功能。</p>
 <ul>
-<li><a href="/docs/zh/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/zh/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/zh/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/zh/v2.5.x/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/zh/v2.5.x/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/zh/v2.5.x/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

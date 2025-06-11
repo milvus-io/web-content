@@ -3,6 +3,7 @@ id: jieba-tokenizer.md
 title: Jieba
 summary: jiebaトークナイザーは、中国語テキストを構成する単語に分解して処理する。
 ---
+
 <h1 id="Jieba" class="common-anchor-header">Jieba<button data-href="#Jieba" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +81,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>パラメータの詳細については、<a href="/docs/ja/jieba-tokenizer.md#Custom-configuration">カスタム</a>構成を参照してください。</p>
+<p>パラメータの詳細については、<a href="/docs/ja/v2.5.x/jieba-tokenizer.md#Custom-configuration">カスタム</a>構成を参照してください。</p>
 <h3 id="Custom-configuration" class="common-anchor-header">カスタム設定</h3><p>より詳細に制御するには、カスタム辞書を指定し、セグメンテーションモードを選択し、隠れマルコフモデル（HMM）を有効または無効にするカスタム構成を提供できます。例えば</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -143,7 +144,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができる。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができる。詳細については、<a href="/docs/ja/v2.5.x/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -198,6 +199,7 @@ sample_text = <span class="hljs-string">&quot;milvus结巴分词器中文测试&
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

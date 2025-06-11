@@ -9,6 +9,7 @@ summary: >-
   operadores es crucial para construir consultas precisas y maximizar la
   eficiencia de sus búsquedas.
 ---
+
 <h1 id="Basic-Operators" class="common-anchor-header">Operadores básicos<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -237,27 +238,29 @@ summary: >-
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p><strong>Ejemplo 2: Recuperar entidades en las que <code translate="no">metadata</code> no es nulo</strong></p>
 <p>Para buscar entidades en las que el campo <code translate="no">metadata</code> no sea nulo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">Campos ARRAY con valores nulos</h3><p>Milvus permite filtrar campos ARRAY que contienen valores nulos. Un campo ARRAY se trata como nulo de las siguientes maneras:</p>
 <ul>
 <li><p>Todo el campo ARRAY se establece explícitamente como None (nulo), por ejemplo, <code translate="no">&quot;tags&quot;: None</code>.</p></li>
 <li><p>El campo ARRAY falta por completo en la entidad.</p></li>
 </ul>
 <div class="alert note">
-<p>Un campo ARRAY no puede contener valores nulos parciales, ya que todos los elementos de un campo ARRAY deben tener el mismo tipo de datos. Para más detalles, consulte <a href="/docs/es/array_data_type.md">Campo Array</a>.</p>
+<p>Un campo ARRAY no puede contener valores nulos parciales, ya que todos los elementos de un campo ARRAY deben tener el mismo tipo de datos. Para más detalles, consulte <a href="/docs/es/v2.5.x/array_data_type.md">Campo Array</a>.</p>
 </div>
 <p>Para ilustrar mejor cómo maneja Milvus los campos ARRAY con valores nulos, considere los siguientes datos de ejemplo con un campo ARRAY <code translate="no">tags</code>:</p>
 <pre><code translate="no" class="language-python">data = [
@@ -286,20 +289,22 @@ summary: >-
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p><strong>Ejemplo 2: Recuperar entidades en las que <code translate="no">tags</code> no es nulo</strong></p>
 <p>Para recuperar entidades en las que el campo <code translate="no">tags</code> no es nulo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Consejos sobre el uso de operadores básicos con campos JSON y ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

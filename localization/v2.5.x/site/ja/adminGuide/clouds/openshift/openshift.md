@@ -4,6 +4,7 @@ title: OpenShift上にMilvusクラスタをデプロイする
 related_key: cluster
 summary: MilvusクラスタをOpenShift上にデプロイする方法をご紹介します。
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">OpenShift上にMilvusクラスタをデプロイする<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +178,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>Milvusを他のクラウドにデプロイする方法を学びたい場合：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">Kubernetesを使用したAWS上でのMilvusクラスタのデプロイ</a></li>
-<li><a href="/docs/ja/azure.md">Kubernetesを利用したAzureへのMilvusクラスタのデプロイ</a></li>
-<li><a href="/docs/ja/gcp.md">KubernetesでGCPにMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/v2.5.x/eks.md">Kubernetesを使用したAWS上でのMilvusクラスタのデプロイ</a></li>
+<li><a href="/docs/ja/v2.5.x/azure.md">Kubernetesを利用したAzureへのMilvusクラスタのデプロイ</a></li>
+<li><a href="/docs/ja/v2.5.x/gcp.md">KubernetesでGCPにMilvusクラスタをデプロイする</a></li>
 </ul>

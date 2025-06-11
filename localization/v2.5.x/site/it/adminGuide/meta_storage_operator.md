@@ -1,9 +1,10 @@
 ---
 id: meta_storage_operator.md
 title: Configurare la memorizzazione dei metadati con Milvus Operator
-related_key: 'minio, s3, storage, etcd, pulsar'
+related_key: "minio, s3, storage, etcd, pulsar"
 summary: Scoprite come configurare il metaconservazione con Milvus Operator.
 ---
+
 <h1 id="Configure-Meta-Storage-with-Milvus-Operator" class="common-anchor-header">Configurare la memorizzazione dei metadati con Milvus Operator<button data-href="#Configure-Meta-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,6 +113,6 @@ spec:
       </svg>
     </button></h2><p>Imparare a configurare altre dipendenze di Milvus con Milvus Operator:</p>
 <ul>
-<li><a href="/docs/it/object_storage_operator.md">Configurare la memorizzazione degli oggetti con Milvus Operator</a></li>
-<li><a href="/docs/it/message_storage_operator.md">Configurare l'archiviazione dei messaggi con Milvus Operator</a></li>
+<li><a href="/docs/it/v2.5.x/object_storage_operator.md">Configurare la memorizzazione degli oggetti con Milvus Operator</a></li>
+<li><a href="/docs/it/v2.5.x/message_storage_operator.md">Configurare l'archiviazione dei messaggi con Milvus Operator</a></li>
 </ul>

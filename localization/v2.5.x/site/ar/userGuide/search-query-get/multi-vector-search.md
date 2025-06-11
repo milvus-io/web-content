@@ -12,6 +12,7 @@ summary: >-
   البحث في كل من النصوص والصور، أو في حقول نصية متعددة تصف نفس الكائن، أو في
   متجهات كثيفة ومتناثرة لتحسين جودة البحث.
 ---
+
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">البحث الهجين متعدد النواقل<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +35,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>سير عمل البحث المختلط</span> </span></p>
 <p>يدمج البحث الهجين متعدد المتجهات بين طرق بحث مختلفة أو يمتد على نطاق واسع من طرائق مختلفة:</p>
 <ul>
-<li><p><strong>بحث المتجهات المتفرقة والكثيفة</strong>: تعتبر <a href="/docs/ar/dense-vector.md">المتجهات الكثيفة</a> ممتازة لالتقاط العلاقات الدلالية، في حين أن <a href="/docs/ar/sparse_vector.md">المتجهات المتفرقة</a> فعالة للغاية لمطابقة الكلمات المفتاحية بدقة. ويجمع البحث الهجين بين هذه الأساليب لتوفير فهم مفاهيمي واسع النطاق وملاءمة دقيقة للمصطلحات، وبالتالي تحسين نتائج البحث. من خلال الاستفادة من نقاط القوة في كل طريقة، يتغلب البحث المختلط على قيود الأساليب المستقلة، مما يوفر أداءً أفضل للاستعلامات المعقدة. فيما يلي <a href="/docs/ar/full_text_search_with_milvus.md">دليل</a> أكثر تفصيلاً حول الاسترجاع الهجين الذي يجمع بين البحث الدلالي والبحث في النص الكامل.</p></li>
+<li><p><strong>بحث المتجهات المتفرقة والكثيفة</strong>: تعتبر <a href="/docs/ar/v2.5.x/dense-vector.md">المتجهات الكثيفة</a> ممتازة لالتقاط العلاقات الدلالية، في حين أن <a href="/docs/ar/v2.5.x/sparse_vector.md">المتجهات المتفرقة</a> فعالة للغاية لمطابقة الكلمات المفتاحية بدقة. ويجمع البحث الهجين بين هذه الأساليب لتوفير فهم مفاهيمي واسع النطاق وملاءمة دقيقة للمصطلحات، وبالتالي تحسين نتائج البحث. من خلال الاستفادة من نقاط القوة في كل طريقة، يتغلب البحث المختلط على قيود الأساليب المستقلة، مما يوفر أداءً أفضل للاستعلامات المعقدة. فيما يلي <a href="/docs/ar/v2.5.x/full_text_search_with_milvus.md">دليل</a> أكثر تفصيلاً حول الاسترجاع الهجين الذي يجمع بين البحث الدلالي والبحث في النص الكامل.</p></li>
 <li><p><strong>البحث المتجه متعدد الوسائط</strong>: البحث المتجه متعدد الوسائط هو تقنية قوية تتيح لك البحث عبر أنواع مختلفة من البيانات، بما في ذلك النصوص والصور والصوت وغيرها. الميزة الرئيسية لهذا النهج هي قدرته على توحيد الطرائق المختلفة في تجربة بحث سلسة ومتماسكة. على سبيل المثال، في البحث عن المنتجات، قد يقوم المستخدم بإدخال استعلام نصي للعثور على المنتجات الموصوفة بالنصوص والصور. من خلال الجمع بين هذه الطرائق من خلال طريقة بحث مختلطة، يمكنك تحسين دقة البحث أو إثراء نتائج البحث.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">مثال<button data-href="#Example" class="anchor-icon" translate="no">
@@ -84,7 +85,7 @@ summary: >-
 <li><p><code translate="no">text_sparse</code>: يستخدم لتخزين المتجهات المتفرقة للنصوص. هذا الحقل من نوع البيانات <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p><code translate="no">image_dense</code>: يستخدم لتخزين المتجهات الكثيفة لصور المنتج. هذا الحقل هو من نوع البيانات <code translate="no">FLOAT_VETOR</code> مع بُعد متجه يبلغ 512.</p></li>
 </ul>
-<p>نظرًا لأننا سوف نستخدم خوارزمية BM25 المدمجة لإجراء بحث عن النص الكامل في حقل النص، فمن الضروري إضافة ميلفوس <code translate="no">Function</code> إلى المخطط. لمزيد من التفاصيل، يرجى الرجوع إلى <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p>
+<p>نظرًا لأننا سوف نستخدم خوارزمية BM25 المدمجة لإجراء بحث عن النص الكامل في حقل النص، فمن الضروري إضافة ميلفوس <code translate="no">Function</code> إلى المخطط. لمزيد من التفاصيل، يرجى الرجوع إلى <a href="/docs/ar/v2.5.x/full-text-search.md">البحث عن النص الكامل</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -92,8 +93,8 @@ summary: >-
 )
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 <span class="hljs-comment"># Init schema with auto_id disabled</span>
@@ -108,13 +109,14 @@ schema.add_field(field_name=<span class="hljs-string">&quot;image_dense&quot;</s
 
 <span class="hljs-comment"># Add function to schema</span>
 bm25_function = Function(
-    name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>,
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
-    output_field_names=[<span class="hljs-string">&quot;text_sparse&quot;</span>],
-    function_type=FunctionType.BM25,
+name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>,
+input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+output_field_names=[<span class="hljs-string">&quot;text_sparse&quot;</span>],
+function_type=FunctionType.BM25,
 )
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -326,27 +328,28 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Add indexes</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;text_dense&quot;</span>,
-    index_name=<span class="hljs-string">&quot;text_dense_index&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+field_name=<span class="hljs-string">&quot;text_dense&quot;</span>,
+index_name=<span class="hljs-string">&quot;text_dense_index&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
-    index_name=<span class="hljs-string">&quot;text_sparse_index&quot;</span>,
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
-    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># or &quot;DAAT_WAND&quot; or &quot;TAAT_NAIVE&quot;</span>
+field_name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
+index_name=<span class="hljs-string">&quot;text_sparse_index&quot;</span>,
+index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
+params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># or &quot;DAAT_WAND&quot; or &quot;TAAT_NAIVE&quot;</span>
 )
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;image_dense&quot;</span>,
-    index_name=<span class="hljs-string">&quot;image_dense_index&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+field_name=<span class="hljs-string">&quot;image_dense&quot;</span>,
+index_name=<span class="hljs-string">&quot;image_dense_index&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -437,11 +440,12 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    schema=schema,
-    index_params=index_params
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+schema=schema,
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
@@ -505,32 +509,33 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 data=[
-    {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>,
-        <span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...],
-        <span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6366019600530924</span>, -<span class="hljs-number">0.09323198122475052</span>, ...]
-    }，
-    {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
-        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>,
-        <span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...],
-        <span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6414180010301553</span>, <span class="hljs-number">0.8976979978567611</span>, ...]
-    },
-    {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
-        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>,
-        <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...],
-        <span class="hljs-string">&quot;image_dense&quot;</span>: [-<span class="hljs-number">0.6901259768402174</span>, <span class="hljs-number">0.6100500332193755</span>, ...]
-    }
+{
+<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
+<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>,
+<span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...],
+<span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6366019600530924</span>, -<span class="hljs-number">0.09323198122475052</span>, ...]
+}，
+{
+<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
+<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>,
+<span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...],
+<span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6414180010301553</span>, <span class="hljs-number">0.8976979978567611</span>, ...]
+},
+{
+<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
+<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>,
+<span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...],
+<span class="hljs-string">&quot;image_dense&quot;</span>: [-<span class="hljs-number">0.6901259768402174</span>, <span class="hljs-number">0.6100500332193755</span>, ...]
+}
 ]
 
 res = client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -626,7 +631,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">إنشاء مثيلات AnnSearchRequest متعددة</h3><p>يتم تنفيذ البحث الهجين من خلال إنشاء عدة <code translate="no">AnnSearchRequest</code> في الدالة <code translate="no">hybrid_search()</code> ، حيث يمثل كل <code translate="no">AnnSearchRequest</code> طلب بحث ANN أساسي لحقل متجه معين. لذلك، قبل إجراء بحث مختلط، من الضروري إنشاء <code translate="no">AnnSearchRequest</code> لكل حقل متجه.</p>
-<p>بالإضافة إلى ذلك، من خلال تكوين المعلمة <code translate="no">expr</code> في <code translate="no">AnnSearchRequest</code> ، يمكنك تعيين شروط التصفية للبحث الهجين الخاص بك. يرجى الرجوع إلى <a href="/docs/ar/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/boolean.md">والتصفية</a>.</p>
+<p>بالإضافة إلى ذلك، من خلال تكوين المعلمة <code translate="no">expr</code> في <code translate="no">AnnSearchRequest</code> ، يمكنك تعيين شروط التصفية للبحث الهجين الخاص بك. يرجى الرجوع إلى <a href="/docs/ar/v2.5.x/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/v2.5.x/boolean.md">والتصفية</a>.</p>
 <div class="alert note">
 <p>في البحث المختلط، يدعم كل <code translate="no">AnnSearchRequest</code> بيانات استعلام واحدة فقط في البحث المختلط.</p>
 </div>
@@ -646,34 +651,35 @@ query_multimodal_vector = [<span class="hljs-number">0.015829865178701663</span>
 
 <span class="hljs-comment"># text semantic search (dense)</span>
 search_param_1 = {
-    <span class="hljs-string">&quot;data&quot;</span>: [query_dense_vector],
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_dense&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
+<span class="hljs-string">&quot;data&quot;</span>: [query_dense_vector],
+<span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_dense&quot;</span>,
+<span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
+<span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
-request_1 = AnnSearchRequest(**search_param_1)
+request_1 = AnnSearchRequest(\*\*search_param_1)
 
 <span class="hljs-comment"># full-text search (sparse)</span>
 search_param_2 = {
-    <span class="hljs-string">&quot;data&quot;</span>: [query_text],
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
+<span class="hljs-string">&quot;data&quot;</span>: [query_text],
+<span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
+<span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
+<span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
-request_2 = AnnSearchRequest(**search_param_2)
+request_2 = AnnSearchRequest(\*\*search_param_2)
 
 <span class="hljs-comment"># text-to-image search (multimodal)</span>
 search_param_3 = {
-    <span class="hljs-string">&quot;data&quot;</span>: [query_multimodal_vector],
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;image_dense&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
+<span class="hljs-string">&quot;data&quot;</span>: [query_multimodal_vector],
+<span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;image_dense&quot;</span>,
+<span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
+<span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
-request_3 = AnnSearchRequest(**search_param_3)
+request_3 = AnnSearchRequest(\*\*search_param_3)
 
 reqs = [request_1, request_2, request_3]
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.BaseVector;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
@@ -774,7 +780,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>استراتيجية إعادة الترتيب المرجحة</strong>: استخدم هذه الاستراتيجية إذا كانت النتائج تحتاج إلى التركيز على مجال متجه معين. يسمح لك WeightedRanker بتعيين وزن أكبر لحقول متجهات معينة، وإبرازها بشكل أكثر بروزًا.</p></li>
 <li><p><strong>RRRFRanker (مصنف دمج الرتب المتبادل)</strong>: اختر هذه الاستراتيجية عند عدم الحاجة إلى تركيز محدد. يوازن RRRFRanker بشكل فعال بين أهمية كل حقل متجه.</p></li>
 </ul>
-<p>لمزيد من التفاصيل حول آليات إعادة الترتيب هذه، يرجى الرجوع إلى <a href="/docs/ar/reranking.md">إعادة الترتيب</a>.</p>
+<p>لمزيد من التفاصيل حول آليات إعادة الترتيب هذه، يرجى الرجوع إلى <a href="/docs/ar/v2.5.x/reranking.md">إعادة الترتيب</a>.</p>
 <p>في هذا المثال، بما أنه لا يوجد تركيز معين على استعلامات بحث محددة، سنستمر في استخدام استراتيجية RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
@@ -782,6 +788,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
@@ -804,16 +811,17 @@ ranker = RRFRanker(<span class="hljs-number">100</span>)
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 res = client.hybrid_search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    reqs=reqs,
-    ranker=ranker,
-    limit=<span class="hljs-number">2</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+reqs=reqs,
+ranker=ranker,
+limit=<span class="hljs-number">2</span>
 )
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
-    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
-        <span class="hljs-built_in">print</span>(hit)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
+<span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
+<span class="hljs-built_in">print</span>(hit)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;

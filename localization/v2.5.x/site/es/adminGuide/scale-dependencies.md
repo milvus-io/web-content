@@ -2,6 +2,7 @@
 id: scale-dependencies.md
 title: Dependencias de escala
 ---
+
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Dependencias de Milvus Scale<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: Dependencias de escala
       </svg>
     </button></h1><p>Milvus depende de varios componentes como MinIO, Kafka, Pulsar y etcd. Escalar estos componentes puede mejorar la adaptabilidad de Milvus a diferentes requisitos.</p>
 <div class="alert note">
-<p>Para los usuarios de Milvus Operator, consulte <a href="/docs/es/object_storage_operator.md">Configurar el almacenamiento de objetos con Milvus Operator</a>, <a href="/docs/es/meta_storage_operator.md">Configurar el metaalmacenamiento con Milvus Operator</a> y <a href="/docs/es/message_storage_operator.md">Configurar el almacenamiento de mensajes con Milvus Operator</a>.</p>
+<p>Para los usuarios de Milvus Operator, consulte <a href="/docs/es/v2.5.x/object_storage_operator.md">Configurar el almacenamiento de objetos con Milvus Operator</a>, <a href="/docs/es/v2.5.x/meta_storage_operator.md">Configurar el metaalmacenamiento con Milvus Operator</a> y <a href="/docs/es/v2.5.x/message_storage_operator.md">Configurar el almacenamiento de mensajes con Milvus Operator</a>.</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">Escalar MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"

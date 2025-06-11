@@ -4,6 +4,7 @@ title: 在 OpenShift 上部署 Milvus 集群
 related_key: cluster
 summary: 瞭解如何在 OpenShift 上部署 Milvus 群集。
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">在 OpenShift 上部署 Milvus 集群<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +178,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>如果您想學習如何在其他雲上部署 Milvus：</p>
 <ul>
-<li><a href="/docs/zh-hant/eks.md">使用 Kubernetes 在 AWS 上部署 Milvus 叢集</a></li>
-<li><a href="/docs/zh-hant/azure.md">使用 Kubernetes 在 Azure 上部署 Milvus 叢集</a></li>
-<li><a href="/docs/zh-hant/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 叢集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/eks.md">使用 Kubernetes 在 AWS 上部署 Milvus 叢集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/azure.md">使用 Kubernetes 在 Azure 上部署 Milvus 叢集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 叢集</a></li>
 </ul>

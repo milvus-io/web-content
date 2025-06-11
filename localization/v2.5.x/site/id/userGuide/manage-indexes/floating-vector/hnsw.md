@@ -8,6 +8,7 @@ summary: >-
   namun membutuhkan overhead memori yang tinggi untuk mempertahankan struktur
   graf hirarkinya.
 ---
+
 <h1 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +59,7 @@ summary: >-
 <li><p><code translate="no">efConstruction</code>: Jumlah kandidat yang dipertimbangkan selama konstruksi indeks. <code translate="no">efConstruction</code> yang lebih tinggi umumnya menghasilkan kualitas graf yang lebih baik tetapi membutuhkan lebih banyak waktu untuk membangunnya.</p></li>
 <li><p><code translate="no">ef</code>: Jumlah tetangga yang dievaluasi selama pencarian. Meningkatkan <code translate="no">ef</code> akan meningkatkan kemungkinan menemukan tetangga terdekat tetapi memperlambat proses pencarian.</p></li>
 </ul>
-<p>Untuk detail tentang cara menyesuaikan pengaturan ini agar sesuai dengan kebutuhan Anda, lihat <a href="/docs/id/hnsw.md#Index-params">Parameter indeks</a>.</p>
+<p>Untuk detail tentang cara menyesuaikan pengaturan ini agar sesuai dengan kebutuhan Anda, lihat <a href="/docs/id/v2.5.x/hnsw.md#Index-params">Parameter indeks</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Membangun indeks<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,28 +82,29 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
-        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
+<span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Dalam konfigurasi ini:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Jenis indeks yang akan dibangun. Dalam contoh ini, tetapkan nilainya ke <code translate="no">HNSW</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antara vektor. Nilai yang didukung termasuk <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antara vektor. Nilai yang didukung termasuk <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/metric.md">Jenis Metrik</a>.</p></li>
 <li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk membangun indeks.</p>
 <ul>
 <li><p><code translate="no">M</code>: Jumlah maksimum tetangga yang dapat dihubungkan oleh setiap node.</p></li>
 <li><p><code translate="no">efConstruction</code>: Jumlah kandidat tetangga yang dipertimbangkan untuk koneksi selama pembangunan indeks.</p></li>
 </ul>
-<p>Untuk mempelajari lebih lanjut parameter pembangunan yang tersedia untuk indeks <code translate="no">HNSW</code>, lihat Parameter <a href="/docs/id/hnsw.md#Index-building-params">pembangunan indeks</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut parameter pembangunan yang tersedia untuk indeks <code translate="no">HNSW</code>, lihat Parameter <a href="/docs/id/v2.5.x/hnsw.md#Index-building-params">pembangunan indeks</a>.</p></li>
 </ul>
-<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/create-collection.md">Membuat Koleksi</a>.</p>
+<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/create-collection.md">Membuat Koleksi</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Mencari di indeks<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,20 +128,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">10</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Dalam konfigurasi ini:</p>
 <ul>
 <li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk pencarian pada indeks.</p>
 <ul>
 <li><code translate="no">ef</code>: Jumlah tetangga yang perlu dipertimbangkan selama pencarian.</li>
 </ul>
-<p>Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">HNSW</code>, lihat Parameter <a href="/docs/id/hnsw.md#Index-specific-search-params">pencarian khusus indeks</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">HNSW</code>, lihat Parameter <a href="/docs/id/v2.5.x/hnsw.md#Index-specific-search-params">pencarian khusus indeks</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parameter indeks<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,7 +160,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan ikhtisar parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/hnsw.md#Build-index">membangun indeks.</a></p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/v2.5.x/hnsw.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -178,7 +181,7 @@ res = MilvusClient.search(
      <td><p>Nilai <code translate="no">efConstruction</code> yang lebih tinggi biasanya menghasilkan <strong>indeks yang lebih akurat</strong>, karena lebih banyak koneksi potensial yang dieksplorasi. Namun, hal ini juga menyebabkan <strong>waktu pengindeksan yang lebih lama dan penggunaan memori yang lebih besar</strong> selama konstruksi. Pertimbangkan untuk meningkatkan <code translate="no">efConstruction</code> untuk meningkatkan akurasi, terutama dalam skenario di mana waktu pengindeksan tidak terlalu penting.</p><p>Pertimbangkan untuk mengurangi <code translate="no">efConstruction</code> untuk mempercepat konstruksi indeks ketika keterbatasan sumber daya menjadi perhatian.</p><p>Dalam kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam kisaran ini: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> ketika melakukan <a href="/docs/id/hnsw.md#Search-on-index">pencarian di indeks</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> ketika melakukan <a href="/docs/id/v2.5.x/hnsw.md#Search-on-index">pencarian di indeks</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>

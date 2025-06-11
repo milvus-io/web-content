@@ -3,6 +3,7 @@ id: four_layers.md
 summary: هيكل التخزين/التخزين/الحوسبة التفصيلي في ميلفوس.
 title: فصل التخزين/الحوسبة
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">فصل التخزين/الحوسبة<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,5 +120,5 @@ title: فصل التخزين/الحوسبة
         ></path>
       </svg>
     </button></h2><ul>
-<li>اقرأ <a href="/docs/ar/main_components.md">المكونات الرئيسية</a> لمزيد من التفاصيل حول بنية ميلفوس.</li>
+<li>اقرأ <a href="/docs/ar/v2.5.x/main_components.md">المكونات الرئيسية</a> لمزيد من التفاصيل حول بنية ميلفوس.</li>
 </ul>

@@ -3,6 +3,7 @@ id: four_layers.md
 summary: Milvusにおけるストレージ/コンピューティングの分離構造。
 title: ストレージ／コンピューティングの分離
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">ストレージ／コンピューティングの分離<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,5 +120,5 @@ title: ストレージ／コンピューティングの分離
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvusアーキテクチャの詳細については、<a href="/docs/ja/main_components.md">メインコンポーネントを</a>お読みください。</li>
+<li>Milvusアーキテクチャの詳細については、<a href="/docs/ja/v2.5.x/main_components.md">メインコンポーネントを</a>お読みください。</li>
 </ul>

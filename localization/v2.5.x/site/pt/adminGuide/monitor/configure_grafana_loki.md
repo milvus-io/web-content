@@ -5,6 +5,7 @@ summary: >-
   Este tópico descreve como coletar logs usando o Loki e consultar logs de um
   cluster Milvus usando o Grafana.
 ---
+
 <h1 id="Configure-Grafana-Loki" class="common-anchor-header">Configurar o Grafana Loki<button data-href="#Configure-Grafana-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Você instalou <a href="/docs/pt/install_cluster-helm.md">um cluster do Milvus no K8s</a>.</li>
+<li>Você instalou <a href="/docs/pt/v2.5.x/install_cluster-helm.md">um cluster do Milvus no K8s</a>.</li>
 <li>Você instalou as ferramentas necessárias, incluindo <a href="https://helm.sh/docs/intro/install/">Helm</a> e <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Implantar o Loki<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">
@@ -75,8 +76,9 @@ helm repo update
   <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
 
 <span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
+<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Opção 2: usar o AWS S3 para armazenamento</p>
 <p>No exemplo a seguir, substitua <code translate="no">&lt;accessKey&gt;</code> e <code translate="no">&lt;keyId&gt;</code> por sua própria chave de acesso e ID do S3, <code translate="no">s3.endpoint</code> pelo ponto de extremidade do S3 e <code translate="no">s3.region</code> pela região do S3.</p>
 <pre><code translate="no" class="language-yaml">loki:

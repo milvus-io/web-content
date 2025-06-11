@@ -5,6 +5,7 @@ summary: >-
   Pelajari tentang konsep cap waktu dan empat parameter utama terkait cap waktu
   dalam basis data vektor Milvus.
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">Cap waktu<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,5 +106,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Pelajari bagaimana <a href="/docs/id/consistency.md">cap waktu jaminan memungkinkan konsistensi yang dapat disetel di Milvus</a></li>
+<li>Pelajari bagaimana <a href="/docs/id/v2.5.x/consistency.md">cap waktu jaminan memungkinkan konsistensi yang dapat disetel di Milvus</a></li>
 </ul>

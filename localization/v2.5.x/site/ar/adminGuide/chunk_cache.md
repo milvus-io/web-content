@@ -2,6 +2,7 @@
 id: chunk_cache.md
 title: تكوين ذاكرة التخزين المؤقت للقطع
 ---
+
 <h1 id="Configure-Chunk-Cache" class="common-anchor-header">تكوين ذاكرة التخزين المؤقت للقطع<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,11 +54,11 @@ title: تكوين ذاكرة التخزين المؤقت للقطع
     </button></h2><p>يوفر هذا الدليل إرشادات حول كيفية تكوين آلية ذاكرة التخزين المؤقت للقطع لمثيل Milvus. يختلف التكوين باختلاف طريقة تثبيت مثيل Milvus.</p>
 <ul>
 <li><p>بالنسبة لمثيلات Milvus المثبتة باستخدام مخططات Helm Charts</p>
-<p>أضف التكوين إلى الملف <code translate="no">values.yaml</code> ضمن القسم <code translate="no">config</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm Charts</a>.</p></li>
+<p>أضف التكوين إلى الملف <code translate="no">values.yaml</code> ضمن القسم <code translate="no">config</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/configure-helm.md">تكوين Milvus باستخدام مخططات Helm Charts</a>.</p></li>
 <li><p>لمثيلات Milvus المثبتة باستخدام Docker Compose</p>
-<p>أضف التكوين إلى الملف <code translate="no">milvus.yaml</code> الذي استخدمته لبدء تشغيل مثيل Milvus. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-docker.md">تكوين Milvus باستخدام Docker Compose</a>.</p></li>
+<p>أضف التكوين إلى الملف <code translate="no">milvus.yaml</code> الذي استخدمته لبدء تشغيل مثيل Milvus. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/configure-docker.md">تكوين Milvus باستخدام Docker Compose</a>.</p></li>
 <li><p>لمثيلات Milvus المثبتة باستخدام المشغل</p>
-<p>أضف التكوين إلى قسم <code translate="no">spec.components</code> في المورد المخصص <code translate="no">Milvus</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع المشغل</a>.</p></li>
+<p>أضف التكوين إلى قسم <code translate="no">spec.components</code> في المورد المخصص <code translate="no">Milvus</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/configure_operator.md">تكوين Milvus مع المشغل</a>.</p></li>
 </ul>
 <h3 id="Configuration-options" class="common-anchor-header">خيارات التكوين</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode</span>:
     <span class="hljs-attr">cache</span>:

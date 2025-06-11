@@ -4,6 +4,7 @@ title: 全文検索
 summary: >-
   全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の制限を克服し、最も正確で文脈に関連した結果を確実に受け取ることができます。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。
 ---
+
 <h1 id="Full-Text-Search" class="common-anchor-header">全文検索<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ summary: >-
     </button></h1><p>全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の制限を克服し、最も正確で文脈に関連した結果を確実に受け取れるようにします。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。</p>
 <p>関連性のスコアリングにBM25アルゴリズムを使用するこの機能は、特定の検索用語に密接に一致する文書を優先的に検索する、検索拡張世代（RAG）シナリオで特に有用です。</p>
 <div class="alert note">
-<p>全文検索とセマンティックベースの密なベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳細については、<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p>
+<p>全文検索とセマンティックベースの密なベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳細については、<a href="/docs/ja/v2.5.x/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +43,7 @@ summary: >-
     </button></h2><p>全文検索は、手作業による埋め込みを不要にすることで、テキストベースの検索プロセスを簡素化します。この機能は、次のようなワークフローで動作します：</p>
 <ol>
 <li><p><strong>テキスト入力</strong>：テキスト入力： 生のテキスト文書を挿入するか、クエリーテキストを提供します。</p></li>
-<li><p><strong>テキスト分析</strong>：Milvusは<a href="/docs/ja/analyzer-overview.md">アナライザーを使って</a>、入力テキストを検索可能な個々の用語にトークン化します。</p></li>
+<li><p><strong>テキスト分析</strong>：Milvusは<a href="/docs/ja/v2.5.x/analyzer-overview.md">アナライザーを使って</a>、入力テキストを検索可能な個々の用語にトークン化します。</p></li>
 <li><p><strong>関数処理</strong>：組み込み関数がトークン化された用語を受け取り、スパースベクトル表現に変換します。</p></li>
 <li><p><strong>コレクションストア</strong>：Milvusはこれらのスパース埋め込みをコレクションに保存し、効率的な検索を可能にする。</p></li>
 <li><p><strong>BM25スコアリング</strong>：検索中、MilvusはBM25アルゴリズムを適用して保存された文書のスコアを計算し、クエリテキストとの関連性に基づいてマッチした結果をランク付けします。</p></li>
@@ -53,9 +54,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>全文検索</span> </span></p>
 <p>全文検索を使用するには、以下の主な手順に従ってください：</p>
 <ol>
-<li><p><a href="/docs/ja/full-text-search.md#Create-a-collection-for-full-text-search">コレクションを作成</a>する：必要なフィールドを持つコレクションをセットアップし、生テキストをスパース埋め込みに変換する関数を定義する。</p></li>
-<li><p><a href="/docs/ja/full-text-search.md#Insert-text-data">データを挿入する</a>：生テキスト文書をコレクションに取り込む。</p></li>
-<li><p><a href="/docs/ja/full-text-search.md#Perform-full-text-search">検索を実行する</a>：クエリテキストを使用してコレクションを検索し、関連する結果を取得します。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/full-text-search.md#Create-a-collection-for-full-text-search">コレクションを作成</a>する：必要なフィールドを持つコレクションをセットアップし、生テキストをスパース埋め込みに変換する関数を定義する。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/full-text-search.md#Insert-text-data">データを挿入する</a>：生テキスト文書をコレクションに取り込む。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/full-text-search.md#Perform-full-text-search">検索を実行する</a>：クエリテキストを使用してコレクションを検索し、関連する結果を取得します。</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">全文検索用のコレクションの作成<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,8 +85,8 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = MilvusClient.create_schema()
@@ -94,6 +95,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, dat
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -209,7 +211,7 @@ schema.WithField(entity.NewField().
 <p>この構成では</p>
 <ul>
 <li><p><code translate="no">id</code>: は主キーとして機能し、<code translate="no">auto_id=True</code> で自動的に生成される。</p></li>
-<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキスト・データが格納されます。データ型は<code translate="no">VARCHAR</code> でなければなりません。<code translate="no">VARCHAR</code> はテキスト保存用のMilvus文字列データ型です。Milvusがテキストをトークン化できるようにするには、<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvus はテキスト分析に<code translate="no">standard</code><a href="/docs/ja/standard-analyzer.md"> アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/analyzer-overview.md">解析器の概要を</a>参照してください。</p></li>
+<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキスト・データが格納されます。データ型は<code translate="no">VARCHAR</code> でなければなりません。<code translate="no">VARCHAR</code> はテキスト保存用のMilvus文字列データ型です。Milvusがテキストをトークン化できるようにするには、<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvus はテキスト分析に<code translate="no">standard</code><a href="/docs/ja/v2.5.x/standard-analyzer.md"> アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/v2.5.x/analyzer-overview.md">解析器の概要を</a>参照してください。</p></li>
 <li><p><code translate="no">sparse</code>: 全文検索操作のために内部で生成されたスパース埋め込みを格納するために予約されたベクトルフィールドです。データ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> でなければならない。</p></li>
 </ul>
 <p>次に、テキストをスパース・ベクトル表現に変換する関数を定義し、スキーマに追加します：</p>
@@ -224,6 +226,7 @@ schema.WithField(entity.NewField().
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -318,7 +321,7 @@ schema.WithFunction(function)
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
+field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
 
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
@@ -330,6 +333,7 @@ index_params.add_index(
 
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
@@ -369,7 +373,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>作成するインデックスのタイプ<code translate="no">AUTOINDEX</code> Milvusは自動的にインデックス設定を最適化します。インデックス設定をより細かく制御する必要がある場合は、Milvusのスパースベクタで利用可能な様々なインデックスタイプから選択することができます。詳細は<a href="/docs/ja/index.md#Indexes-supported-in-Milvus">Milvusでサポートされるインデックスを</a>参照してください。</p></td>
+     <td><p>作成するインデックスのタイプ<code translate="no">AUTOINDEX</code> Milvusは自動的にインデックス設定を最適化します。インデックス設定をより細かく制御する必要がある場合は、Milvusのスパースベクタで利用可能な様々なインデックスタイプから選択することができます。詳細は<a href="/docs/ja/v2.5.x/index.md#Indexes-supported-in-Milvus">Milvusでサポートされるインデックスを</a>参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -404,12 +408,13 @@ indexes.add(IndexParam.builder()
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.indexParams(indexes)
+.build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
@@ -469,16 +474,17 @@ curl --request POST \
 
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
 List&lt;JsonObject&gt; rows = Arrays.asList(
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.class)
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.class),
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.class),
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.class)
 );
 
 client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(rows)
-        .build());
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.data(rows)
+.build());
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
@@ -526,13 +532,14 @@ client.insert(InsertReq.builder()
 }
 
 client.search(
-    collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
-    data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
-    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
-    limit=<span class="hljs-number">3</span>,
-    search_params=search_params
+collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>,
+data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
+anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
+limit=<span class="hljs-number">3</span>,
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -609,7 +616,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>検索時に無視する重要度の低い用語の割合。詳細は<a href="/docs/ja/sparse_vector.md">スパース・ベクタを</a>参照。</p></td>
+     <td><p>検索時に無視する重要度の低い用語の割合。詳細は<a href="/docs/ja/v2.5.x/sparse_vector.md">スパース・ベクタを</a>参照。</p></td>
    </tr>
    <tr>
      <td></td>

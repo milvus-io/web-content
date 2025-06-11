@@ -6,6 +6,7 @@ summary: >-
   지정하면 검색 범위를 여러 파티션으로 좁힐 수 있어 검색 효율이 향상됩니다. 이 문서에서는 파티션 키의 사용 방법과 관련 고려 사항을
   소개합니다.
 ---
+
 <h1 id="Use-Partition-Key" class="common-anchor-header">파티션 키 사용<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,9 +70,9 @@ summary: >-
       </svg>
     </button></h2><p>파티션 키를 사용하려면 다음을 수행해야 합니다.</p>
 <ul>
-<li><p><a href="/docs/ko/use-partition-key.md#Set-Partition-Key">파티션 키를 설정합니다</a>,</p></li>
-<li><p><a href="/docs/ko/use-partition-key.md#Set-Partition-Numbers">생성할 파티션 수 설정</a> (선택 사항), 그리고</p></li>
-<li><p><a href="/docs/ko/use-partition-key.md#Create-Filtering-Condition">파티션 키를 기준으로 필터링 조건을 만듭니다</a>.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/use-partition-key.md#Set-Partition-Key">파티션 키를 설정합니다</a>,</p></li>
+<li><p><a href="/docs/ko/v2.5.x/use-partition-key.md#Set-Partition-Numbers">생성할 파티션 수 설정</a> (선택 사항), 그리고</p></li>
+<li><p><a href="/docs/ko/v2.5.x/use-partition-key.md#Create-Filtering-Condition">파티션 키를 기준으로 필터링 조건을 만듭니다</a>.</p></li>
 </ul>
 <h3 id="Set-Partition-Key" class="common-anchor-header">파티션 키 설정</h3><p>스칼라 필드를 파티션 키로 지정하려면 스칼라 필드를 추가할 때 <code translate="no">is_partition_key</code> 속성을 <code translate="no">true</code> 으로 설정해야 합니다.</p>
 <div class="alert note">
@@ -84,29 +85,30 @@ summary: >-
 )
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>,
-    datatype=DataType.INT64,
-    is_primary=<span class="hljs-literal">True</span>)
-    
+datatype=DataType.INT64,
+is_primary=<span class="hljs-literal">True</span>)
+
 schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-    datatype=DataType.FLOAT_VECTOR,
-    dim=<span class="hljs-number">5</span>)
+datatype=DataType.FLOAT_VECTOR,
+dim=<span class="hljs-number">5</span>)
 
 <span class="hljs-comment"># Add the partition key</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">512</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    is_partition_key=<span class="hljs-literal">True</span>,
+field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
+datatype=DataType.VARCHAR,
+max_length=<span class="hljs-number">512</span>,
+<span class="hljs-comment"># highlight-next-line</span>
+is_partition_key=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -240,12 +242,13 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-                .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-                .collectionSchema(schema)
-                .numPartitions(<span class="hljs-number">128</span>)
-                .build();
-        client.createCollection(createCollectionReq);
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.numPartitions(<span class="hljs-number">128</span>)
+.build();
+client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithNumPartitions(<span class="hljs-number">128</span>))
@@ -288,6 +291,7 @@ curl --request POST \
 <span class="hljs-comment"># Filter based on multiple partition key values</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 
@@ -356,12 +360,13 @@ Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <sp
 properties.put(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .properties(properties)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.properties(properties)
+.build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithProperty(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-literal">true</span>))
@@ -394,4 +399,4 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>파티션 키 격리를 활성화한 후에도 파티션 <a href="/docs/ko/use-partition-key.md#Set-Partition-Numbers">번호 설정에</a> 설명된 대로 파티션 키와 파티션 수를 설정할 수 있습니다. 파티션 키 기반 필터에는 특정 파티션 키 값만 포함되어야 한다는 점에 유의하세요.</p>
+<p>파티션 키 격리를 활성화한 후에도 파티션 <a href="/docs/ko/v2.5.x/use-partition-key.md#Set-Partition-Numbers">번호 설정에</a> 설명된 대로 파티션 키와 파티션 수를 설정할 수 있습니다. 파티션 키 기반 필터에는 특정 파티션 키 값만 포함되어야 한다는 점에 유의하세요.</p>

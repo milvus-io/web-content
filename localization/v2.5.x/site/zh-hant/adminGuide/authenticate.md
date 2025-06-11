@@ -3,6 +3,7 @@ id: authenticate.md
 summary: 了解如何在 Milvus 中管理使用者驗證。
 title: 認證用戶訪問
 ---
+
 <h1 id="Authenticate-User-Access" class="common-anchor-header">認證用戶訪問<button data-href="#Authenticate-User-Access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ title: 認證用戶訪問
     </button></h1><p>本指南解釋如何在 Milvus 中管理用戶認證，包括啟用認證、以用戶身份連接，以及修改用戶憑證。</p>
 <div class="alert note">
 <ul>
-<li><p>TLS 和用戶認證是兩種不同的安全方法。如果你在 Milvus 系統中同時啟用了用戶認證和 TLS，你必須提供用戶名、密碼和證書檔路徑。有關如何啟用 TLS 的資訊，請參閱<a href="/docs/zh-hant/tls.md">傳輸中的加密</a>。</p></li>
+<li><p>TLS 和用戶認證是兩種不同的安全方法。如果你在 Milvus 系統中同時啟用了用戶認證和 TLS，你必須提供用戶名、密碼和證書檔路徑。有關如何啟用 TLS 的資訊，請參閱<a href="/docs/zh-hant/v2.5.x/tls.md">傳輸中的加密</a>。</p></li>
 <li><p>本頁的程式碼片段使用新的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a>(Python) 與 Milvus 互動。適用於其他語言的新 MilvusClient SDK 將於未來更新中發佈。</p></li>
 </ul>
 </div>
@@ -100,10 +101,11 @@ spec:
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-) 
+uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 如果您在啟用驗證連線到 Milvus 時未能提供有效的令牌，您將會收到 gRPC 錯誤。</div>
 <h2 id="Create-a-new-user" class="common-anchor-header">建立新使用者<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
@@ -135,6 +137,7 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>關於建立使用者的更多資訊，請參考<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a>。</p>
 <h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">使用新使用者連線到 Milvus<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,10 +158,11 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># connect to milvus with the newly created user</span>
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Update-user-password" class="common-anchor-header">更新用戶密碼<button data-href="#Update-user-password" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,11 +182,12 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># update password</span>
 
 client.update_password(
-    user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
-    old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
-    new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
+user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
+old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
+new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>關於更新使用者密碼的更多資訊，請參考<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>。</p>
 <p>如果您忘記舊密碼，Milvus 提供一個設定項目，允許您指定某些使用者為超級使用者。這樣當您重新設定密碼時，就不需要舊密碼了。</p>
 <p>預設情況下，Milvus 配置檔案中的<code translate="no">common.security.superUsers</code> 欄位是空的，這表示所有使用者在重設密碼時都必須提供舊密碼。不過，您可以指定特定使用者為不需要提供舊密碼的超級使用者。在下面的片段中，<code translate="no">root</code> 和<code translate="no">foo</code> 被指定為超級使用者。</p>
@@ -231,6 +236,7 @@ client.update_password(
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Limitations" class="common-anchor-header">限制<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,11 +273,11 @@ client.list_users()
       </svg>
     </button></h2><ul>
 <li>您可能還想學習如何<ul>
-<li><a href="/docs/zh-hant/scaleout.md">擴充 Milvus 叢集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/scaleout.md">擴充 Milvus 叢集</a></li>
 </ul></li>
 <li>如果您已準備好在雲上部署您的集群：<ul>
-<li>學習如何<a href="/docs/zh-hant/eks.md">使用 Terraform 在 Amazon EKS 上部署 Milvus</a></li>
-<li>學習如何<a href="/docs/zh-hant/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
-<li>學習如何<a href="/docs/zh-hant/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.5.x/eks.md">使用 Terraform 在 Amazon EKS 上部署 Milvus</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.5.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.5.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
 </ul></li>
 </ul>

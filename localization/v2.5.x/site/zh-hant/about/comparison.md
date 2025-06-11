@@ -3,6 +3,7 @@ id: comparison.md
 title: 比較
 summary: 本文將比較 Milvus 與其他向量搜尋解決方案。
 ---
+
 <h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">比較 Milvus 與其他選擇<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,6 +155,6 @@ summary: 本文將比較 Milvus 與其他向量搜尋解決方案。
       </svg>
     </button></h2><ul>
 <li><p><strong>試用</strong>：從 Milvus<a href="https://milvus.io/docs/quickstart.md">quickstart</a>或<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">註冊 Zilliz Cloud</a> 開始，親身體驗 Milvus。</p></li>
-<li><p><strong>瞭解更多</strong>：透過我們全面的<a href="/docs/zh-hant/glossary.md">術語及</a> <a href="https://milvus.io/docs/manage-collections.md">使用者指南</a>，深入瞭解 Milvus 的功能。</p></li>
+<li><p><strong>瞭解更多</strong>：透過我們全面的<a href="/docs/zh-hant/v2.5.x/glossary.md">術語及</a> <a href="https://milvus.io/docs/manage-collections.md">使用者指南</a>，深入瞭解 Milvus 的功能。</p></li>
 <li><p><strong>探索替代方案</strong>：如需對向量資料庫選項進行更廣泛的比較，請探索<a href="https://zilliz.com/comparison">此頁面上</a>的其他資源。</p></li>
 </ul>

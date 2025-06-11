@@ -4,6 +4,7 @@ title: 基本演算子
 summary: >-
   Milvusはデータのフィルタリングやクエリを効率的に行うための豊富な基本演算子を提供しています。これらの演算子を使用すると、スカラーフィールド、数値計算、論理条件などに基づいて検索条件を絞り込むことができます。これらの演算子の使い方を理解することは、正確なクエリを構築し、検索の効率を最大化するために非常に重要です。
 ---
+
 <h1 id="Basic-Operators" class="common-anchor-header">基本演算子<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,27 +233,29 @@ summary: >-
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p><strong>例 2：<code translate="no">metadata</code> が NULL ではないエンティティを検索する。</strong></p>
 <p><code translate="no">metadata</code> フィールドが NULL ではないエンティティを検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">NULL値を持つARRAYフィールド</h3><p>MilvusではNULL値を含むARRAYフィールドのフィルタリングが可能です。ARRAYフィールドは以下の方法でNULLとして扱われます：</p>
 <ul>
 <li><p>例えば、<code translate="no">&quot;tags&quot;: None</code> のように、ARRAYフィールド全体が明示的にNone（Null）に設定されている場合。</p></li>
 <li><p>ARRAYフィールドがエンティティから完全に欠落している。</p></li>
 </ul>
 <div class="alert note">
-<p>ARRAY フィールドのすべての要素が同じデータ型でなければならないため、ARRAY フィールドに部分的な NULL 値を含めることはできません。詳細は<a href="/docs/ja/array_data_type.md">配列フィールドを</a>参照してください。</p>
+<p>ARRAY フィールドのすべての要素が同じデータ型でなければならないため、ARRAY フィールドに部分的な NULL 値を含めることはできません。詳細は<a href="/docs/ja/v2.5.x/array_data_type.md">配列フィールドを</a>参照してください。</p>
 </div>
 <p>MilvusがNULL値を持つARRAYフィールドをどのように扱うかをさらに説明するために、ARRAYフィールド<code translate="no">tags</code> を持つ以下のサンプルデータを考えてみましょう：</p>
 <pre><code translate="no" class="language-python">data = [
@@ -281,20 +284,22 @@ summary: >-
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p><strong>例 2：<code translate="no">tags</code> が NULL ではないエンティティを検索する。</strong></p>
 <p><code translate="no">tags</code> フィールドが NULL ではないエンティティを検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">JSONおよびARRAYフィールドで基本演算子を使用する際のヒント<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

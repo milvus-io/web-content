@@ -7,6 +7,7 @@ summary: >-
   untuk meningkatkan kinerja kueri pada bidang skalar dengan kardinalitas
   rendah.
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">BITMAP<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,8 +88,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Pada contoh ini, kita membuat indeks bitmap pada bidang <code translate="no">category</code> dari koleksi <code translate="no">my_collection</code>. Metode <code translate="no">add_index()</code> digunakan untuk menentukan nama field, tipe indeks, dan nama indeks.</p>
-<p>Setelah indeks bitmap dibuat, Anda dapat menggunakan parameter <code translate="no">filter</code> dalam operasi kueri untuk melakukan pemfilteran skalar berdasarkan bidang yang diindeks. Hal ini memungkinkan Anda mempersempit hasil pencarian secara efisien dengan menggunakan indeks bitmap. Untuk informasi lebih lanjut, lihat Pemfilteran <a href="/docs/id/boolean.md">Metadata</a>.</p>
+<p>Setelah indeks bitmap dibuat, Anda dapat menggunakan parameter <code translate="no">filter</code> dalam operasi kueri untuk melakukan pemfilteran skalar berdasarkan bidang yang diindeks. Hal ini memungkinkan Anda mempersempit hasil pencarian secara efisien dengan menggunakan indeks bitmap. Untuk informasi lebih lanjut, lihat Pemfilteran <a href="/docs/id/v2.5.x/boolean.md">Metadata</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

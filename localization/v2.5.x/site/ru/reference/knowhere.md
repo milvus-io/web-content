@@ -3,6 +3,7 @@ id: knowhere.md
 summary: Узнайте о Knowhere в Милвусе.
 title: Knowhere
 ---
+
 <h1 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,8 +75,8 @@ title: Knowhere
     </button></h2><p>Ниже перечислены преимущества Knowhere по сравнению с Faiss.</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">Поддержка BitsetView</h4><p>Milvus вводит механизм битов для реализации &quot;мягкого удаления&quot;. Мягко удаленный вектор все еще существует в базе данных, но не будет вычислен при поиске или запросе векторного сходства.</p>
 <p>Каждый бит в битовом наборе соответствует индексированному вектору. Если в наборе битов вектор помечен как "1", это означает, что данный вектор мягко удален и не будет задействован в векторном поиске. Параметр bitset применяется ко всем API запросов индекса Фейса в Knowhere, включая индексы CPU и GPU.</p>
-<p>Более подробную информацию о механизме bitset можно найти в разделе <a href="/docs/ru/bitset.md">bitset</a>.</p>
-<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Поддержка нескольких метрик сходства для индексирования бинарных векторов</h4><p>Knowhere поддерживает <a href="/docs/ru/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/ru/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/ru/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/ru/metric.md#Superstructure">Superstructure</a> и <a href="/docs/ru/metric.md#Substructure">Substructure</a>. Жаккард и Танимото могут использоваться для измерения сходства между двумя наборами образцов, а Superstructure и Substructure - для измерения сходства химических структур.</p>
+<p>Более подробную информацию о механизме bitset можно найти в разделе <a href="/docs/ru/v2.5.x/bitset.md">bitset</a>.</p>
+<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Поддержка нескольких метрик сходства для индексирования бинарных векторов</h4><p>Knowhere поддерживает <a href="/docs/ru/v2.5.x/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/ru/v2.5.x/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/ru/v2.5.x/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/ru/v2.5.x/metric.md#Superstructure">Superstructure</a> и <a href="/docs/ru/v2.5.x/metric.md#Substructure">Substructure</a>. Жаккард и Танимото могут использоваться для измерения сходства между двумя наборами образцов, а Superstructure и Substructure - для измерения сходства химических структур.</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">Поддержка набора инструкций AVX512</h4><p>Помимо <a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>, <a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a> и <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>, наборов инструкций, уже поддерживаемых Faiss, Knowhere также поддерживает <a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a>, который может <a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">повысить производительность построения индексов и запросов на 20-30 %</a> по сравнению с AVX2.</p>
 <h4 id="Automatic-SIMD-instruction-selection" class="common-anchor-header">Автоматический выбор SIMD-инструкций</h4><p>Knowhere поддерживает автоматический вызов подходящих SIMD-инструкций (например, SIMD SSE, AVX, AVX2 и AVX512) на любом процессоре (как на локальных, так и на облачных платформах), так что пользователям не нужно вручную указывать флаг SIMD (например, "-msse4") во время компиляции.</p>
 <p>Knowhere создается путем рефакторинга кодовой базы Faiss. Общие функции (например, вычисление подобия), которые зависят от ускорения SIMD, вырезаются из кода. Затем для каждой функции реализуются четыре версии (т. е. SSE, AVX, AVX2, AVX512), каждая из которых помещается в отдельный исходный файл. Затем исходные файлы компилируются по отдельности с соответствующим флагом SIMD. Таким образом, во время выполнения Knowhere может автоматически выбирать наиболее подходящие SIMD-инструкции, основываясь на текущих флагах процессора, а затем связывать нужные указатели функций с помощью хуков.</p>
@@ -173,7 +174,7 @@ title: Knowhere
       </svg>
     </button></h2><p>После изучения того, как Knowhere работает в Milvus, вы также можете захотеть:</p>
 <ul>
-<li><p>Узнать о <a href="/docs/ru/index.md">различных типах индексов, которые поддерживает Milvus</a>.</p></li>
-<li><p>Узнать о <a href="/docs/ru/bitset.md">механизме битовых наборов</a>.</p></li>
-<li><p>Понять <a href="/docs/ru/data_processing.md">, как обрабатываются данные</a> в Milvus.</p></li>
+<li><p>Узнать о <a href="/docs/ru/v2.5.x/index.md">различных типах индексов, которые поддерживает Milvus</a>.</p></li>
+<li><p>Узнать о <a href="/docs/ru/v2.5.x/bitset.md">механизме битовых наборов</a>.</p></li>
+<li><p>Понять <a href="/docs/ru/v2.5.x/data_processing.md">, как обрабатываются данные</a> в Milvus.</p></li>
 </ul>

@@ -5,6 +5,7 @@ summary: >-
   分區關鍵（Partition
   Key）是一種基於分區的搜尋優化解決方案。透過指定特定的標量欄位為分區關鍵，並在搜尋過程中根據分區關鍵指定篩選條件，可將搜尋範圍縮小為數個分區，進而提高搜尋效率。本文將介紹如何使用分區關鍵及相關注意事項。
 ---
+
 <h1 id="Use-Partition-Key" class="common-anchor-header">使用分區鑰匙<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,9 +69,9 @@ summary: >-
       </svg>
     </button></h2><p>要使用分區鍵值，您需要</p>
 <ul>
-<li><p><a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Key">設定分割區金鑰</a>、</p></li>
-<li><p><a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Numbers">設定要建立的分割區數量</a>(選用)，以及</p></li>
-<li><p><a href="/docs/zh-hant/use-partition-key.md#Create-Filtering-Condition">根據分割區金鑰建立篩選條件</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/use-partition-key.md#Set-Partition-Key">設定分割區金鑰</a>、</p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/use-partition-key.md#Set-Partition-Numbers">設定要建立的分割區數量</a>(選用)，以及</p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/use-partition-key.md#Create-Filtering-Condition">根據分割區金鑰建立篩選條件</a>。</p></li>
 </ul>
 <h3 id="Set-Partition-Key" class="common-anchor-header">設定分割區金鑰</h3><p>若要指定標量欄位為分割區金鑰，您需要在新增標量欄位時，將其<code translate="no">is_partition_key</code> 屬性設定為<code translate="no">true</code> 。</p>
 <div class="alert note">
@@ -83,29 +84,30 @@ summary: >-
 )
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>,
-    datatype=DataType.INT64,
-    is_primary=<span class="hljs-literal">True</span>)
-    
+datatype=DataType.INT64,
+is_primary=<span class="hljs-literal">True</span>)
+
 schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-    datatype=DataType.FLOAT_VECTOR,
-    dim=<span class="hljs-number">5</span>)
+datatype=DataType.FLOAT_VECTOR,
+dim=<span class="hljs-number">5</span>)
 
 <span class="hljs-comment"># Add the partition key</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">512</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    is_partition_key=<span class="hljs-literal">True</span>,
+field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
+datatype=DataType.VARCHAR,
+max_length=<span class="hljs-number">512</span>,
+<span class="hljs-comment"># highlight-next-line</span>
+is_partition_key=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -239,12 +241,13 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-                .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-                .collectionSchema(schema)
-                .numPartitions(<span class="hljs-number">128</span>)
-                .build();
-        client.createCollection(createCollectionReq);
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.numPartitions(<span class="hljs-number">128</span>)
+.build();
+client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithNumPartitions(<span class="hljs-number">128</span>))
@@ -287,6 +290,7 @@ curl --request POST \
 <span class="hljs-comment"># Filter based on multiple partition key values</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 
@@ -355,12 +359,13 @@ Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <sp
 properties.put(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .properties(properties)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.properties(properties)
+.build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithProperty(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-literal">true</span>))
@@ -393,4 +398,4 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>啟用磁碟分割區金鑰隔離後，您仍可以依照<a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Numbers">Set Partition Numbers（設定磁碟分割區號碼</a>）中的說明，設定磁碟分割區金鑰和磁碟分割<a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Numbers">區號碼</a>。請注意，基於分割區金鑰的篩選程式應該只包含特定的分割區金鑰值。</p>
+<p>啟用磁碟分割區金鑰隔離後，您仍可以依照<a href="/docs/zh-hant/v2.5.x/use-partition-key.md#Set-Partition-Numbers">Set Partition Numbers（設定磁碟分割區號碼</a>）中的說明，設定磁碟分割區金鑰和磁碟分割<a href="/docs/zh-hant/v2.5.x/use-partition-key.md#Set-Partition-Numbers">區號碼</a>。請注意，基於分割區金鑰的篩選程式應該只包含特定的分割區金鑰值。</p>

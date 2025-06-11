@@ -4,6 +4,7 @@ title: 使用 Kubernetes 在 Microsoft Azure 上部署 Milvus
 related_key: cluster
 summary: 瞭解如何在 Azure 上部署 Milvus 群集。
 ---
+
 <h1 id="Deploy-Milvus-on-Azure-with-AKS" class="common-anchor-header">使用 AKS 在 Azure 上部署 Milvus<button data-href="#Deploy-Milvus-on-Azure-with-AKS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -200,27 +201,28 @@ az storage container create -n testmilvus --account-name milvustesting1
   enabled: <span class="hljs-literal">true</span>
 
 service:
-  <span class="hljs-built_in">type</span>: LoadBalancer
+<span class="hljs-built_in">type</span>: LoadBalancer
 
 extraConfigFiles:
-  user.yaml: |+
-    common:
-      storageType: remote
+user.yaml: |+
+common:
+storageType: remote
 
 minio:
-  enabled: <span class="hljs-literal">false</span>
+enabled: <span class="hljs-literal">false</span>
 
 externalS3:
-  enabled: <span class="hljs-literal">true</span>
-  host: core.windows.net
-  port: 443
-  rootPath: my-release
-  bucketName: testmilvus <span class="hljs-comment"># the storage account container name</span>
-  cloudProvider: azure
-  useSSL: <span class="hljs-literal">true</span>
-  accessKey: <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># the storage account name</span>
-  secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span> 
+enabled: <span class="hljs-literal">true</span>
+host: core.windows.net
+port: 443
+rootPath: my-release
+bucketName: testmilvus <span class="hljs-comment"># the storage account container name</span>
+cloudProvider: azure
+useSSL: <span class="hljs-literal">true</span>
+accessKey: <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># the storage account name</span>
+secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Deploy-Milvus" class="common-anchor-header">部署 Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,6 +296,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>如果您想學習如何在其他雲端部署 Milvus：</p>
 <ul>
-<li><a href="/docs/zh-hant/eks.md">使用 Kubernetes 在 AWS 上部署 Milvus 叢集</a></li>
-<li><a href="/docs/zh-hant/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus Cluster</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/eks.md">使用 Kubernetes 在 AWS 上部署 Milvus 叢集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus Cluster</a></li>
 </ul>

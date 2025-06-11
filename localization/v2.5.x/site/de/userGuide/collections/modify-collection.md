@@ -5,6 +5,7 @@ summary: >-
   Sie können eine Sammlung umbenennen oder ihre Einstellungen ändern. Auf dieser
   Seite wird beschrieben, wie Sie eine Sammlung ändern können.
 ---
+
 <h1 id="Modify-Collection" class="common-anchor-header">Sammlung ändern<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,15 +43,16 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.rename_collection(
-    old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
+old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.RenameCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -146,10 +148,11 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
 <span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
@@ -199,15 +202,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Wenn die Daten einer Sammlung nach einem bestimmten Zeitraum gelöscht werden sollen, sollten Sie die Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abgelaufen ist, löscht Milvus alle Entitäten aus der Sammlung.  Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist. Details finden Sie unter <a href="/docs/de/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
+     <td><p>Wenn die Daten einer Sammlung nach einem bestimmten Zeitraum gelöscht werden sollen, sollten Sie die Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abgelaufen ist, löscht Milvus alle Entitäten aus der Sammlung.  Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist. Details finden Sie unter <a href="/docs/de/v2.5.x/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>Memory Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, so dass Milvus Indizes und Daten sowohl im Speicher als auch auf den Festplatten speichern kann. Dieser Ansatz hilft bei der Optimierung der Datenplatzierungspolitik auf der Grundlage der Zugriffshäufigkeit und erweitert die Speicherkapazität für Sammlungen, ohne die Suchleistung zu beeinträchtigen.</p><p>Einzelheiten finden Sie unter <a href="/docs/de/mmap.md">mmap verwenden</a>.</p></td>
+     <td><p>Memory Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, so dass Milvus Indizes und Daten sowohl im Speicher als auch auf den Festplatten speichern kann. Dieser Ansatz hilft bei der Optimierung der Datenplatzierungspolitik auf der Grundlage der Zugriffshäufigkeit und erweitert die Speicherkapazität für Sammlungen, ohne die Suchleistung zu beeinträchtigen.</p><p>Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/mmap.md">mmap verwenden</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>Wenn die Partition Key Isolation aktiviert ist, gruppiert Milvus Entitäten auf der Grundlage des Partition Key Wertes und erstellt für jede dieser Gruppen einen separaten Index. Beim Empfang einer Suchanfrage findet Milvus den Index auf der Grundlage des in der Filterbedingung angegebenen Partitionsschlüsselwerts und schränkt den Suchbereich auf die im Index enthaltenen Entitäten ein, wodurch das Scannen irrelevanter Entitäten während der Suche vermieden und die Suchleistung erheblich verbessert wird. Details finden Sie unter <a href="/docs/de/use-partition-key.md#Use-Partition-Key-Isolation">Partitionsschlüssel-Isolierung verwenden</a>.</p></td>
+     <td><p>Wenn die Partition Key Isolation aktiviert ist, gruppiert Milvus Entitäten auf der Grundlage des Partition Key Wertes und erstellt für jede dieser Gruppen einen separaten Index. Beim Empfang einer Suchanfrage findet Milvus den Index auf der Grundlage des in der Filterbedingung angegebenen Partitionsschlüsselwerts und schränkt den Suchbereich auf die im Index enthaltenen Entitäten ein, wodurch das Scannen irrelevanter Entitäten während der Suche vermieden und die Suchleistung erheblich verbessert wird. Details finden Sie unter <a href="/docs/de/v2.5.x/use-partition-key.md#Use-Partition-Key-Isolation">Partitionsschlüssel-Isolierung verwenden</a>.</p></td>
    </tr>
 </table>
 <h2 id="Drop-Collection-Properties" class="common-anchor-header">Aufsammlungseigenschaften löschen<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">

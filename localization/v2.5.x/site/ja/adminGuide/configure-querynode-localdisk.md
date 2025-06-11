@@ -1,9 +1,10 @@
 ---
 id: configure-querynode-localdisk.md
 title: ローカルディスクを使用したMilvus QueryNodeの設定
-related_key: 'querynode, query node, local disk'
+related_key: "querynode, query node, local disk"
 summary: Milvus QueryNodeがローカルディスクを使用するように設定する方法について説明します。
 ---
+
 <h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">ローカルディスクを使用したMilvus QueryNodeの設定<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,11 +39,11 @@ summary: Milvus QueryNodeがローカルディスクを使用するように設�
     </button></h2><p>MilvusはAIに特化したベクトルデータベースで、膨大なベクトルデータを効率的に保存・検索できるように設計されています。画像・動画解析、自然言語処理、推薦システムなどのタスクに最適です。最適なパフォーマンスを確保するには、ディスクの読み取りレイテンシを最小限に抑えることが極めて重要です。遅延を防ぎ、システムの安定性を維持するためには、ローカルのNVMe SSDを使用することが強く推奨されます。</p>
 <p>ローカル・ディスク・ストレージが活躍する主な機能は以下のとおりです：</p>
 <ul>
-<li><a href="/docs/ja/chunk_cache.md"><strong>チャンク・キャッシュ</strong></a>：データをローカル・ディスク・キャッシュにプリロードし、検索を高速化します。</li>
-<li><a href="/docs/ja/mmap.md"><strong>MMap</strong></a>：ファイルの内容をメモリに直接マッピングし、メモリ効率を向上させます。</li>
-<li><a href="/docs/ja/disk_index.md"><strong>DiskANNインデックス</strong></a>：効率的なインデックス管理のためにディスク・ストレージを必要とする。</li>
+<li><a href="/docs/ja/v2.5.x/chunk_cache.md"><strong>チャンク・キャッシュ</strong></a>：データをローカル・ディスク・キャッシュにプリロードし、検索を高速化します。</li>
+<li><a href="/docs/ja/v2.5.x/mmap.md"><strong>MMap</strong></a>：ファイルの内容をメモリに直接マッピングし、メモリ効率を向上させます。</li>
+<li><a href="/docs/ja/v2.5.x/disk_index.md"><strong>DiskANNインデックス</strong></a>：効率的なインデックス管理のためにディスク・ストレージを必要とする。</li>
 </ul>
-<p>本記事では、<a href="/docs/ja/install-overview.md#Milvus-Distributed">Milvus Distributedを</a>クラウドプラットフォームにデプロイし、NVMeディスクストレージを使用するようにQueryNodeを設定する方法に焦点を当てます。以下の表は、様々なクラウドプロバイダの推奨マシンタイプの一覧です。</p>
+<p>本記事では、<a href="/docs/ja/v2.5.x/install-overview.md#Milvus-Distributed">Milvus Distributedを</a>クラウドプラットフォームにデプロイし、NVMeディスクストレージを使用するようにQueryNodeを設定する方法に焦点を当てます。以下の表は、様々なクラウドプロバイダの推奨マシンタイプの一覧です。</p>
 <table>
 <thead>
 <tr><th style="text-align:center">クラウドプロバイダ</th><th style="text-align:center">マシンタイプ</th></tr>
@@ -86,21 +87,22 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <span class="hljs-comment">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Running custom user data script&quot;</span>
 <span class="hljs-keyword">if</span> ( lsblk | fgrep -q nvme1n1 ); <span class="hljs-keyword">then</span>
-    <span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
-    mkfs.xfs /dev/nvme1n1
-    mount /dev/nvme1n1 /mnt/data
-    <span class="hljs-built_in">chmod</span> 0755 /mnt/data
-    <span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
-    <span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
-    UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
-    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span>     /mnt/data   xfs    defaults,noatime  1   1&quot;</span> &gt;&gt; /etc/fstab
+<span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
+mkfs.xfs /dev/nvme1n1
+mount /dev/nvme1n1 /mnt/data
+<span class="hljs-built_in">chmod</span> 0755 /mnt/data
+<span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
+<span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
+<span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
+<span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
+UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span> /mnt/data xfs defaults,noatime 1 1&quot;</span> &gt;&gt; /etc/fstab
 <span class="hljs-keyword">fi</span>
 <span class="hljs-built_in">echo</span> 10485760 &gt; /proc/sys/fs/aio-max-nr
 
 --==MYBOUNDARY==--
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>上記の例では、NVMe ディスクは<code translate="no">/dev/nvme1n1</code> であると仮定しています。特定の構成に合わせてスクリプトを変更する必要があります。</p>
 </div>
@@ -122,6 +124,7 @@ mkfs.xfs /dev/md0
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/dev/md0 /var/lib/kubelet xfs defaults 0 0&#x27;</span> &gt;&gt; /etc/fstab
 mount -a
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>上記の例では、NVMe ディスクは<code translate="no">/dev/nvme0n1</code> と<code translate="no">/dev/nvme1n1</code> であると仮定しています。特定の構成に合わせてスクリプトを変更する必要があります。</p>
 </div>
@@ -134,7 +137,7 @@ mkfs.xfs /dev/nvme0n1
 mount -a
 
 <span class="hljs-built_in">mkdir</span> -p /mnt/data/kubelet /mnt/data/containerd /mnt/data/log/pods
-<span class="hljs-built_in">mkdir</span> -p  /var/lib/kubelet /var/lib/containerd /var/log/pods
+<span class="hljs-built_in">mkdir</span> -p /var/lib/kubelet /var/lib/containerd /var/log/pods
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/kubelet /var/lib/kubelet none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/containerd /var/lib/containerd none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
@@ -143,6 +146,7 @@ mount -a
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init end...&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>上記の例では、NVMeディスクを<code translate="no">/dev/nvme0n1</code> と仮定しています。特定の構成に合わせてスクリプトを修正する必要があります。</p>
 </div>
@@ -219,8 +223,9 @@ fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numj
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
-fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1  --<span class="hljs-built_in">readonly</span>
+fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1 --<span class="hljs-built_in">readonly</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>そして、出力は以下のようになるはずです：</p>
 <pre><code translate="no" class="language-bash">Jobs: <span class="hljs-number">128</span> (f=<span class="hljs-number">128</span>): [r(<span class="hljs-number">128</span>)][<span class="hljs-number">100.0</span>%][r=1458MiB/s][r=373k IOPS][eta 00m:00s]
 iops-test-job: (groupid=<span class="hljs-number">0</span>, jobs=<span class="hljs-number">128</span>): err= <span class="hljs-number">0</span>: pid=<span class="hljs-number">768</span>: Mon Jun <span class="hljs-number">24</span> 09:<span class="hljs-number">35</span>:06 <span class="hljs-number">2024</span>
@@ -266,7 +271,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>検証結果が満足のいくものであれば、以下の手順でMilvus Distributedをデプロイすることができる：</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Helmを使用してMilvus Distributedをデプロイするためのヒント</h3><p>QueryNodeポッドはデフォルトでNVMeディスクをEmptyDirボリュームとして使用します。最適なパフォーマンスを確保するために、NVMeディスクをQueryNodeポッド内の<code translate="no">/var/lib/milvus/data</code> 。</p>
-<p>Helmを使用したMilvus Distributedのデプロイ方法の詳細については、「<a href="/docs/ja/install_cluster-helm.md">Run Milvus in Kubernetes with Helm</a>」を参照してください。</p>
+<p>Helmを使用したMilvus Distributedのデプロイ方法の詳細については、「<a href="/docs/ja/v2.5.x/install_cluster-helm.md">Run Milvus in Kubernetes with Helm</a>」を参照してください。</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Milvus Operatorを使用してMilvus Distributedをデプロイするためのヒント</h3><p>Milvus Operatorは、NVMeディスクをEmptyDirボリュームとして使用するようにQueryNodeポッドを自動的に設定します。<code translate="no">MilvusCluster</code> カスタムリソースに以下の設定を追加することをお勧めします：</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -279,4 +284,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、QueryNodeポッドがNVMeディスクをデータボリュームとして使用するようになります。Milvus Operatorを使用してMilvus Distributedをデプロイする方法の詳細については、<a href="/docs/ja/install_cluster-milvusoperator.md">Milvus Operatorを使用してKubernetesでMilvusを実行するを</a>参照してください。</p>
+<p>これにより、QueryNodeポッドがNVMeディスクをデータボリュームとして使用するようになります。Milvus Operatorを使用してMilvus Distributedをデプロイする方法の詳細については、<a href="/docs/ja/v2.5.x/install_cluster-milvusoperator.md">Milvus Operatorを使用してKubernetesでMilvusを実行するを</a>参照してください。</p>

@@ -4,6 +4,7 @@ title: OpenShift에 Milvus 클러스터 배포하기
 related_key: cluster
 summary: OpenShift에서 Milvus 클러스터를 배포하는 방법을 알아보세요.
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">OpenShift에 Milvus 클러스터 배포하기<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +178,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>다른 클라우드에 Milvus를 배포하는 방법을 알아보려면 다음과 같이 하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Kubernetes를 사용하여 AWS에 Milvus 클러스터 배포하기</a></li>
-<li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Azure에 Milvus 클러스터 배포하기</a></li>
-<li><a href="/docs/ko/gcp.md">쿠버네티스를 사용하여 GCP에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.5.x/eks.md">Kubernetes를 사용하여 AWS에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.5.x/azure.md">Kubernetes를 사용하여 Azure에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.5.x/gcp.md">쿠버네티스를 사용하여 GCP에 Milvus 클러스터 배포하기</a></li>
 </ul>

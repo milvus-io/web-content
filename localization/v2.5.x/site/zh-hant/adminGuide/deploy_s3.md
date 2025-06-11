@@ -1,9 +1,10 @@
 ---
 id: deploy_s3.md
 title: 使用 Docker Compose 或 Helm 設定物件儲存
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: 學習如何使用 Docker Compose 或 Helm 為 Milvus 設定 S3 儲存。
 ---
+
 <h1 id="Configure-Object-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">使用 Docker Compose 或 Helm 設定物件儲存<button data-href="#Configure-Object-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +46,7 @@ summary: 學習如何使用 Docker Compose 或 Helm 為 Milvus 設定 S3 儲存�
   useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
   bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/configure_minio.md">MinIO/S3 配置</a>。</p>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure_minio.md">MinIO/S3 配置</a>。</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2.完善 docker-compose.yaml</h3><p>您也可以移除<code translate="no">MINIO_ADDRESS</code> 環境變數，讓 milvus 服務在<code translate="no">docker-compose.yaml</code> 。預設的情況下，milvus 會使用本機的 minio 而不是外部的 S3。</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3.執行 Milvus</h3><p>執行下列指令啟動使用 S3 配置的 Milvus。</p>
 <pre><code translate="no" class="language-shell">docker compose up
@@ -127,6 +128,6 @@ summary: 學習如何使用 Docker Compose 或 Helm 為 Milvus 設定 S3 儲存�
       </svg>
     </button></h2><p>了解如何使用 Docker Compose 或 Helm 配置其他 Milvus 依賴項目：</p>
 <ul>
-<li><a href="/docs/zh-hant/deploy_etcd.md">使用 Docker Compose 或 Helm 配置 Meta 儲存空間</a></li>
-<li><a href="/docs/zh-hant/deploy_pulsar.md">使用 Docker Compose 或 Helm 設定訊息儲存空間</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/deploy_etcd.md">使用 Docker Compose 或 Helm 配置 Meta 儲存空間</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/deploy_pulsar.md">使用 Docker Compose 或 Helm 設定訊息儲存空間</a></li>
 </ul>

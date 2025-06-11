@@ -2,6 +2,7 @@
 id: configure_access_logs.md
 title: تكوين سجلات الوصول
 ---
+
 <h1 id="Configure-Access-Logs" class="common-anchor-header">تكوين سجلات الوصول<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,9 +22,9 @@ title: تكوين سجلات الوصول
 <p>يوفر هذا الدليل إرشادات مفصلة حول تكوين سجلات الوصول في ملفوس.</p>
 <p>يعتمد تكوين سجلات الوصول على طريقة تثبيت ميلفوس:</p>
 <ul>
-<li><strong>تثبيت Helm</strong>: التهيئة في <code translate="no">values.yaml</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus مع مخططات Helm</a>.</li>
-<li><strong>تثبيت Docker</strong>: التهيئة في <code translate="no">milvus.yaml</code>. للمزيد من المعلومات، راجع <a href="/docs/ar/configure-docker.md">تكوين Milvus مع Docker Compose</a>.</li>
-<li><strong>تثبيت المشغل</strong>: تعديل <code translate="no">spec.components</code> في ملف التكوين. لمزيد من المعلومات، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع مشغل Milvus</a>.</li>
+<li><strong>تثبيت Helm</strong>: التهيئة في <code translate="no">values.yaml</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/configure-helm.md">تكوين Milvus مع مخططات Helm</a>.</li>
+<li><strong>تثبيت Docker</strong>: التهيئة في <code translate="no">milvus.yaml</code>. للمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/configure-docker.md">تكوين Milvus مع Docker Compose</a>.</li>
+<li><strong>تثبيت المشغل</strong>: تعديل <code translate="no">spec.components</code> في ملف التكوين. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/configure_operator.md">تكوين Milvus مع مشغل Milvus</a>.</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">خيارات التكوين<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

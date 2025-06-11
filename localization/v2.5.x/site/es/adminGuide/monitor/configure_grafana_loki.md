@@ -5,6 +5,7 @@ summary: >-
   Este tema describe cómo recopilar registros utilizando Loki y consultar
   registros para un clúster Milvus utilizando Grafana.
 ---
+
 <h1 id="Configure-Grafana-Loki" class="common-anchor-header">Configurar Grafana Loki<button data-href="#Configure-Grafana-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Ha <a href="/docs/es/install_cluster-helm.md">instalado un clúster Milvus en K8s</a>.</li>
+<li>Ha <a href="/docs/es/v2.5.x/install_cluster-helm.md">instalado un clúster Milvus en K8s</a>.</li>
 <li>Ha instalado las herramientas necesarias, incluyendo <a href="https://helm.sh/docs/intro/install/">Helm</a> y <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Despliegue de Loki<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">
@@ -75,8 +76,9 @@ helm repo update
   <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
 
 <span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
+<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Opción 2: Usar AWS S3 para almacenamiento</p>
 <p>En el siguiente ejemplo, sustituye <code translate="no">&lt;accessKey&gt;</code> y <code translate="no">&lt;keyId&gt;</code> por tu propia clave de acceso e ID de S3, <code translate="no">s3.endpoint</code> por el endpoint de S3 y <code translate="no">s3.region</code> por la región de S3.</p>
 <pre><code translate="no" class="language-yaml">loki:

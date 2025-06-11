@@ -3,6 +3,7 @@ id: stop-filter.md
 title: 停止詞
 summary: 停止篩選器會從標記化文字中移除指定的停止詞，有助於剔除常見、意義較小的詞彙。您可以使用 stop_words 參數設定停止詞清單。
 ---
+
 <h1 id="Stop" class="common-anchor-header">停止詞<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,6 +87,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p><code translate="no">stop</code> 過濾器接受下列可設定的參數。</p>
 <table>
    <tr>
@@ -103,8 +105,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 </ul></td>
    </tr>
 </table>
-<p><code translate="no">stop</code> 過濾器會對 tokenizer 產生的詞彙進行操作，因此必須與 tokenizer 結合使用。如需 Milvus 中可用的標記器清單，請參閱<a href="/docs/zh-hant/standard-tokenizer.md">標準標記器</a>及其同屬頁面。</p>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這允許 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+<p><code translate="no">stop</code> 過濾器會對 tokenizer 產生的詞彙進行操作，因此必須與 tokenizer 結合使用。如需 Milvus 中可用的標記器清單，請參閱<a href="/docs/zh-hant/v2.5.x/standard-tokenizer.md">標準標記器</a>及其同屬頁面。</p>
+<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這允許 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,6 +163,7 @@ sample_text = <span class="hljs-string">&quot;The stop filter allows control ove
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

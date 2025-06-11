@@ -6,6 +6,7 @@ summary: >-
   (appelés locataires) partagent le même cluster tout en conservant des
   environnements de données isolés.
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">Mise en œuvre de la multi-location<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus prend en charge le multi-tenant à quatre niveaux : <strong>Base de données</strong>, <strong>Collection</strong>, <strong>Partition</strong> et <strong>Clé de partition</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la base de données</h3><p>Avec la location multiple au niveau de la base de données, chaque locataire reçoit une <a href="/docs/fr/manage_databases.md">base de données</a> correspondante contenant une ou plusieurs collections.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la base de données</h3><p>Avec la location multiple au niveau de la base de données, chaque locataire reçoit une <a href="/docs/fr/v2.5.x/manage_databases.md">base de données</a> correspondante contenant une ou plusieurs collections.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -50,7 +51,7 @@ summary: >-
 <li><p><strong>Flexibilité</strong>: Chaque base de données peut avoir des collections avec des schémas différents, offrant une organisation des données très flexible et permettant à chaque locataire d'avoir son propre schéma de données.</p></li>
 <li><p><strong>Autres</strong>: Cette stratégie prend également en charge le RBAC, ce qui permet de contrôler finement l'accès des utilisateurs par locataire. En outre, vous pouvez charger ou libérer des données de manière flexible pour des locataires spécifiques afin de gérer efficacement les données chaudes et froides.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la collection</h3><p>Avec la multi-location au niveau de la collection, chaque locataire se voit attribuer une <a href="/docs/fr/manage-collections.md">collection</a>, ce qui permet d'isoler fortement les données.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la collection</h3><p>Avec la multi-location au niveau de la collection, chaque locataire se voit attribuer une <a href="/docs/fr/v2.5.x/manage-collections.md">collection</a>, ce qui permet d'isoler fortement les données.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -61,7 +62,7 @@ summary: >-
 <li><p><strong>Flexibilité</strong>: Cette stratégie permet à chaque collection d'avoir son propre schéma, ce qui permet d'accueillir des locataires ayant des schémas de données différents.</p></li>
 <li><p><strong>Autres</strong>: Cette stratégie prend également en charge le RBAC, ce qui permet un contrôle d'accès granulaire sur les locataires. En outre, vous pouvez charger ou libérer des données de manière flexible pour des locataires spécifiques afin de gérer efficacement les données chaudes et froides.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau des partitions</h3><p>Dans la multi-location au niveau des partitions, chaque locataire est assigné à une <a href="/docs/fr/manage-partitions.md">partition</a> créée manuellement au sein d'une collection partagée.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau des partitions</h3><p>Dans la multi-location au niveau des partitions, chaque locataire est assigné à une <a href="/docs/fr/v2.5.x/manage-partitions.md">partition</a> créée manuellement au sein d'une collection partagée.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -72,7 +73,7 @@ summary: >-
 <li><p><strong>Flexibilité</strong>: Cette stratégie exige que tous les locataires partagent le même schéma de données. De plus, les partitions doivent être créées manuellement.</p></li>
 <li><p><strong>Autres</strong>: Le RBAC n'est pas pris en charge au niveau des partitions. Les locataires peuvent être interrogés individuellement ou à travers plusieurs partitions, ce qui rend cette approche bien adaptée aux scénarios impliquant des requêtes agrégées ou des analyses à travers des segments de locataires. En outre, vous pouvez charger ou libérer des données de manière flexible pour des locataires spécifiques afin de gérer efficacement les données chaudes et froides.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multi-location au niveau de la clé de partition</h3><p>Avec cette stratégie, tous les locataires partagent une collection et un schéma uniques, mais les données de chaque locataire sont automatiquement acheminées vers 16 partitions physiquement isolées en fonction de la valeur de <a href="/docs/fr/use-partition-key.md">la clé de partition</a>. Bien que chaque partition physique puisse contenir plusieurs locataires, les données des différents locataires restent logiquement séparées.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multi-location au niveau de la clé de partition</h3><p>Avec cette stratégie, tous les locataires partagent une collection et un schéma uniques, mais les données de chaque locataire sont automatiquement acheminées vers 16 partitions physiquement isolées en fonction de la valeur de <a href="/docs/fr/v2.5.x/use-partition-key.md">la clé de partition</a>. Bien que chaque partition physique puisse contenir plusieurs locataires, les données des différents locataires restent logiquement séparées.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

@@ -4,6 +4,7 @@ title: 为 GCP 上的 Milvus 设置 Layer-7 负载平衡器
 related_key: cluster
 summary: 了解如何在 GCP 上的 Layer-7 负载均衡器后面部署 Milvus 集群。
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">为 GCP 上的 Milvus 设置 Layer-7 负载平衡器<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -26,9 +27,9 @@ summary: 了解如何在 GCP 上的 Layer-7 负载均衡器后面部署 Milvus �
 <p>要创建项目，请参阅<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">创建和管理项目</a>。本指南中使用的项目名称是<strong>milvus-testing-nonprod</strong>。</p></li>
 <li><p>您已在本地安装了<a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>、<a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> 和<a href="https://helm.sh/docs/intro/install/">Helm</a>，或者决定使用基于浏览器的<a href="https://cloud.google.com/shell">Cloud Shell</a>。</p></li>
 <li><p>您已使用 GCP 账户凭据<a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">初始化了 gcloud CLI</a>。</p></li>
-<li><p>您已<a href="/docs/zh/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 集群</a>。</p></li>
+<li><p>您已<a href="/docs/zh/v2.5.x/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 集群</a>。</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假定您已<a href="/docs/zh/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">调整 Milvus 配置</h3><p>本指南假定您已<a href="/docs/zh/v2.5.x/gcp.md">在 GCP 的第 4 层负载平衡器后面部署了 Milvus 群集</a>。</p>
 <p>在为该 Milvus 群集设置 Layer-7 负载平衡器之前，请运行以下命令移除 Layer-4 负载平衡器。</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -82,11 +83,12 @@ openssl genrsa -<span class="hljs-keyword">out</span> tls.key <span class="hljs-
 
 <span class="hljs-meta"># Creates a certificate and signs it with the preceding key.</span>
 openssl req -<span class="hljs-keyword">new</span> -key tls.key -<span class="hljs-keyword">out</span> tls.csr \
-    -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
+ -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
 
 openssl x509 -req -days <span class="hljs-number">99999</span> -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
-    -<span class="hljs-keyword">out</span> tls.crt
+ -<span class="hljs-keyword">out</span> tls.crt
 <button class="copy-code-btn"></button></code></pre>
+
 <p>然后在 GKE 集群中用这些文件创建一个秘密，以供日后使用。</p>
 <pre><code translate="no" class="language-bash">kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 <button class="copy-code-btn"></button></code></pre>
@@ -205,6 +207,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <span class="hljs-comment"># For Google-managed certificates, there is not need to do so.</span>
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;34.111.144.65&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;my-release.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li><strong>host</strong>和<strong>port</strong>中的 IP 地址和<strong>端口号</strong>应与<a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">Create an Ingress to generate a Layer-7 Load Balancer</a> 末尾列出的一致。</li>

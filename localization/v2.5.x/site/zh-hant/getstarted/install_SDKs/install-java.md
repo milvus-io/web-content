@@ -5,6 +5,7 @@ related_key: SDK
 summary: 學習如何安裝 Milvus 的 Java SDK。
 title: 安裝 Milvus Java SDK
 ---
+
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">安裝 Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,11 +91,11 @@ title: 安裝 Milvus Java SDK
 <ul>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh-hant/manage-collections.md">管理集合</a></li>
-<li><a href="/docs/zh-hant/manage-partitions.md">管理分區</a></li>
-<li><a href="/docs/zh-hant/insert-update-delete.md">插入、倒置與刪除</a></li>
-<li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
-<li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-collections.md">管理集合</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-partitions.md">管理分區</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/insert-update-delete.md">插入、倒置與刪除</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/single-vector-search.md">單向量搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
 <li><p>探索<a href="/api-reference/java/v2.4.x/About.md">Milvus Java API 參考</a></p></li>
 </ul>

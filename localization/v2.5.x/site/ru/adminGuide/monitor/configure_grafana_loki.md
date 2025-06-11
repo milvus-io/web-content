@@ -5,6 +5,7 @@ summary: >-
   В этой теме описано, как собирать журналы с помощью Loki и запрашивать журналы
   для кластера Milvus с помощью Grafana.
 ---
+
 <h1 id="Configure-Grafana-Loki" class="common-anchor-header">Настройка Grafana Loki<button data-href="#Configure-Grafana-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Вы <a href="/docs/ru/install_cluster-helm.md">установили кластер Milvus на K8s</a>.</li>
+<li>Вы <a href="/docs/ru/v2.5.x/install_cluster-helm.md">установили кластер Milvus на K8s</a>.</li>
 <li>Вы установили необходимые инструменты, включая <a href="https://helm.sh/docs/intro/install/">Helm</a> и <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Развертывание Loki<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">
@@ -75,8 +76,9 @@ helm repo update
   <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
 
 <span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
+<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Вариант 2: Использование AWS S3 для хранения данных.</p>
 <p>В следующем примере замените <code translate="no">&lt;accessKey&gt;</code> и <code translate="no">&lt;keyId&gt;</code> на собственный ключ доступа и идентификатор S3, <code translate="no">s3.endpoint</code> - на конечную точку S3, а <code translate="no">s3.region</code> - на регион S3.</p>
 <pre><code translate="no" class="language-yaml">loki:

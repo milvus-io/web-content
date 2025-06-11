@@ -7,6 +7,7 @@ summary: >-
   peut convertir ["High", "Performance", "Vector", "Database"] en ["high",
   "performance", "vector", "database"].
 ---
+
 <h1 id="Lowercase" class="common-anchor-header">Minuscules<button data-href="#Lowercase" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +67,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Le filtre <code translate="no">lowercase</code> fonctionne sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer.</p>
-<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collecte. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
+<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collecte. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/v2.5.x/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,6 +116,7 @@ sample_text = <span class="hljs-string">&quot;The Lowercase Filter Ensures Unifo
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

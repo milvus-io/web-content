@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: تعرف على كيفية تثبيت مجموعة Milvus العنقودية على Kubernetes.
 title: تشغيل Milvus مع دعم وحدة معالجة الرسومات باستخدام Docker Compose
 ---
+
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">تشغيل Milvus مع دعم وحدة معالجة الرسومات باستخدام Docker Compose<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">تثبيت Docker</a>.</li>
-<li><a href="/docs/ar/prerequisite-gpu.md">تحقق من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</li>
+<li><a href="/docs/ar/v2.5.x/prerequisite-gpu.md">تحقق من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</li>
 </ul>
 <div class="alert note">
 <p>إذا واجهت أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
@@ -95,10 +96,11 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
 <h3 id="2-Start-Milvus" class="common-anchor-header">2. ابدأ تشغيل Milvus</h3><p>في الدليل الذي يحتوي على docker-compose.yml، ابدأ تشغيل Milvus عن طريق التشغيل:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd  ... done
+Creating milvus-etcd ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>إذا فشلت في تشغيل الأمر أعلاه، تحقق مما إذا كان نظامك يحتوي على Docker Compose V1 مثبتًا على نظام Docker Compose V1. إذا كانت هذه هي الحالة، ننصحك بالترحيل إلى Docker Compose V2 نظرًا للملاحظات الواردة في <a href="https://docs.docker.com/compose/">هذه الصفحة</a>.</p>
 </div>
@@ -114,12 +116,15 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
---------------------------------------------------------------------------------------------------------------------
-milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
-milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
-milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+
+---
+
+milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
+milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
+milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك أيضًا الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. للحصول على التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a>.</p>
+
+<p>يمكنك أيضًا الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>إذا قمت بتعيين أجهزة GPU متعددة إلى Milvus في docker-compose.yml، يمكنك تحديد جهاز GPU المرئي أو المتاح للاستخدام.</p>
 <p>اجعل جهاز GPU <code translate="no">0</code> مرئيًا لـ Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
@@ -197,28 +202,28 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>تحقق من <a href="/docs/ar/quickstart.md">Quickstart</a> لمعرفة ما يمكن أن يفعله ميلفوس.</p></li>
-<li><p>تحقق من <a href="/docs/ar/milvus-webui.md">واجهة Milvus WebUI</a> لمعرفة المزيد عن مثيل Milvus.</p></li>
+<li><p>تحقق من <a href="/docs/ar/v2.5.x/quickstart.md">Quickstart</a> لمعرفة ما يمكن أن يفعله ميلفوس.</p></li>
+<li><p>تحقق من <a href="/docs/ar/v2.5.x/milvus-webui.md">واجهة Milvus WebUI</a> لمعرفة المزيد عن مثيل Milvus.</p></li>
 <li><p>تعرف على العمليات الأساسية لـ Milvus:</p>
 <ul>
-<li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
-<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
-<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.5.x/manage_databases.md">إدارة قواعد البيانات</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-partitions.md">إدارة الأقسام</a></li>
+<li><a href="/docs/ar/v2.5.x/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
+<li><a href="/docs/ar/v2.5.x/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
-<li><p><a href="/docs/ar/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام مخطط Helm</a>.</p></li>
-<li><p><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة ميلفوس الخاصة بك</a></p></li>
+<li><p><a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام مخطط Helm</a>.</p></li>
+<li><p><a href="/docs/ar/v2.5.x/scaleout.md">توسيع نطاق مجموعة ميلفوس الخاصة بك</a></p></li>
 <li><p>نشر مجموعة ميلفوس الخاصة بك على السحابة:</p>
 <ul>
-<li><a href="/docs/ar/eks.md">أمازون EKS</a></li>
-<li><a href="/docs/ar/gcp.md">جوجل كلاود</a></li>
-<li><a href="/docs/ar/azure.md">مايكروسوفت أزور</a></li>
+<li><a href="/docs/ar/v2.5.x/eks.md">أمازون EKS</a></li>
+<li><a href="/docs/ar/v2.5.x/gcp.md">جوجل كلاود</a></li>
+<li><a href="/docs/ar/v2.5.x/azure.md">مايكروسوفت أزور</a></li>
 </ul></li>
-<li><p>استكشف <a href="/docs/ar/milvus-webui.md">واجهة Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
-<li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
-<li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.5.x/milvus-webui.md">واجهة Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
+<li><p>استكشف Milvus <a href="/docs/ar/v2.5.x/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.5.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/v2.5.x/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

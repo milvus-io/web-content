@@ -5,6 +5,7 @@ related_key: Docker
 summary: تعرف على كيفية تثبيت Milvus مستقل مع Docker.
 title: تشغيل Milvus في Docker (لينكس)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">تشغيل Milvus في Docker (لينكس)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ title: تشغيل Milvus في Docker (لينكس)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">تثبيت Docker</a>.</li>
-<li><a href="/docs/ar/prerequisite-docker.md">تحقق من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</li>
+<li><a href="/docs/ar/v2.5.x/prerequisite-docker.md">تحقق من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">تثبيت Milvus في Docker<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +74,7 @@ title: تشغيل Milvus في Docker (لينكس)
 <li>لتغيير تكوين Milvus الافتراضي، أضف الإعدادات الخاصة بك إلى ملف <strong>user.yaml</strong> في المجلد الحالي ثم أعد تشغيل الخدمة.</li>
 <li>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>وحدات التخزين/ملف Milvus</strong> في المجلد الحالي.</li>
 </ul>
-<p>يمكنك الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد حول مثيل Milvus الخاص بك. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>يمكنك الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد حول مثيل Milvus الخاص بك. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/v2.5.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">إيقاف وحذف ميلفوس<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,27 +118,27 @@ title: تشغيل Milvus في Docker (لينكس)
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>التحقق من <a href="/docs/ar/quickstart.md">Quickstart</a> لمعرفة ما يمكن ل Milvus القيام به.</p></li>
+<li><p>التحقق من <a href="/docs/ar/v2.5.x/quickstart.md">Quickstart</a> لمعرفة ما يمكن ل Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لملفوس:</p>
 <ul>
-<li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
-<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
-<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.5.x/manage_databases.md">إدارة قواعد البيانات</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-partitions.md">إدارة الأقسام</a></li>
+<li><a href="/docs/ar/v2.5.x/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
+<li><a href="/docs/ar/v2.5.x/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
-<li><p><a href="/docs/ar/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام مخطط Helm</a>.</p></li>
-<li><p><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة ميلفوس الخاصة بك</a></p></li>
+<li><p><a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام مخطط Helm</a>.</p></li>
+<li><p><a href="/docs/ar/v2.5.x/scaleout.md">توسيع نطاق مجموعة ميلفوس الخاصة بك</a></p></li>
 <li><p>نشر مجموعة ميلفوس الخاصة بك على السحابة:</p>
 <ul>
-<li><a href="/docs/ar/eks.md">أمازون EKS</a></li>
-<li><a href="/docs/ar/gcp.md">جوجل كلاود</a></li>
-<li><a href="/docs/ar/azure.md">مايكروسوفت أزور</a></li>
+<li><a href="/docs/ar/v2.5.x/eks.md">أمازون EKS</a></li>
+<li><a href="/docs/ar/v2.5.x/gcp.md">جوجل كلاود</a></li>
+<li><a href="/docs/ar/v2.5.x/azure.md">مايكروسوفت أزور</a></li>
 </ul></li>
-<li><p>استكشف <a href="/docs/ar/milvus-webui.md">واجهة Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
-<li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
-<li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.5.x/milvus-webui.md">واجهة Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
+<li><p>استكشف Milvus <a href="/docs/ar/v2.5.x/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.5.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/v2.5.x/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

@@ -3,6 +3,7 @@ id: length-filter.md
 title: 长度
 summary: 长度过滤器可移除不符合指定长度要求的标记，从而控制文本处理过程中保留的标记长度。
 ---
+
 <h1 id="Length" class="common-anchor-header">长度<button data-href="#Length" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,6 +80,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p><code translate="no">length</code> 过滤器接受以下可配置参数。</p>
 <table>
    <tr>
@@ -90,8 +92,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>设置最大标记长度。超过此长度的标记将被删除。</p></td>
    </tr>
 </table>
-<p><code translate="no">length</code> 过滤器对标记符生成器生成的术语进行操作，因此必须与标记符结合使用。有关 Milvus 中可用的标记符列表，请参阅<a href="/docs/zh/standard-tokenizer.md">标准</a>标记符及其同类页面。</p>
-<p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
+<p><code translate="no">length</code> 过滤器对标记符生成器生成的术语进行操作，因此必须与标记符结合使用。有关 Milvus 中可用的标记符列表，请参阅<a href="/docs/zh/v2.5.x/standard-tokenizer.md">标准</a>标记符及其同类页面。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/v2.5.x/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,6 +147,7 @@ sample_text = <span class="hljs-string">&quot;The length filter allows control o
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

@@ -3,6 +3,7 @@ id: time_sync.md
 title: Sincronização de tempo
 summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
 ---
+
 <h1 id="Time-Synchronization" class="common-anchor-header">Sincronização de tempo<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Conhecer o conceito de <a href="/docs/pt/timestamp.md">carimbo de data/hora</a>.</li>
-<li>Saiba mais sobre o <a href="/docs/pt/data_processing.md">fluxo de trabalho de processamento de dados</a> em Milvus.</li>
+<li>Conhecer o conceito de <a href="/docs/pt/v2.5.x/timestamp.md">carimbo de data/hora</a>.</li>
+<li>Saiba mais sobre o <a href="/docs/pt/v2.5.x/data_processing.md">fluxo de trabalho de processamento de dados</a> em Milvus.</li>
 </ul>

@@ -4,6 +4,7 @@ title: نشر مجموعة Milvus على OpenShift
 related_key: cluster
 summary: تعرف على كيفية نشر مجموعة Milvus على OpenShift.
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">نشر مجموعة Milvus على OpenShift<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +178,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>إذا كنت تريد معرفة كيفية نشر ميلفوس على السحب الأخرى:</p>
 <ul>
-<li><a href="/docs/ar/eks.md">نشر مجموعة Milvus العنقودية على AWS باستخدام Kubernetes</a></li>
-<li><a href="/docs/ar/azure.md">نشر مجموعة Milvus العنقودية على Azure باستخدام Kubernetes</a></li>
-<li><a href="/docs/ar/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
+<li><a href="/docs/ar/v2.5.x/eks.md">نشر مجموعة Milvus العنقودية على AWS باستخدام Kubernetes</a></li>
+<li><a href="/docs/ar/v2.5.x/azure.md">نشر مجموعة Milvus العنقودية على Azure باستخدام Kubernetes</a></li>
+<li><a href="/docs/ar/v2.5.x/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
 </ul>

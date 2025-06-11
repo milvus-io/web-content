@@ -3,6 +3,7 @@ id: four_layers.md
 summary: Disaggregationsstruktur für Speicherung und Datenverarbeitung in Milvus.
 title: Disaggregation von Speicherung und Datenverarbeitung
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Disaggregation von Speicherung und Datenverarbeitung<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,5 +120,5 @@ title: Disaggregation von Speicherung und Datenverarbeitung
         ></path>
       </svg>
     </button></h2><ul>
-<li>Lesen Sie <a href="/docs/de/main_components.md">Hauptkomponenten</a> für weitere Details über die Milvus-Architektur.</li>
+<li>Lesen Sie <a href="/docs/de/v2.5.x/main_components.md">Hauptkomponenten</a> für weitere Details über die Milvus-Architektur.</li>
 </ul>

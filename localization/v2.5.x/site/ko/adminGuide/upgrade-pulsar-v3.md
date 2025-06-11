@@ -4,6 +4,7 @@ related_key: upgrade pulsar v3
 summary: 최신 버전의 Milvus v2.5.x를 사용할 수 있도록 Milvus에서 Pulsar를 V2에서 V3로 업그레이드하는 방법을 알아보세요.
 title: Milvus의 Pulsar를 V2에서 V3로 업그레이드하기
 ---
+
 <h1 id="Upgrading-Pulsar-​" class="common-anchor-header">Pulsar 업그레이드<button data-href="#Upgrading-Pulsar-​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ title: Milvus의 Pulsar를 V2에서 V3로 업그레이드하기
       </svg>
     </button></h1><p>이 문서에서는 이미 Pulsar V2로 작동 중인 Milvus 배포가 있는 경우 Pulsar 구성 요소를 V2에서 V3로 업그레이드하는 절차에 대해 설명합니다.</p>
 <p>Milvus v2.5부터는 일부 버그와 보안 취약점을 수정하기 위해 기본적으로 <strong>milvus-helm</strong> 및 <strong>milvus-operator가</strong> Pulsar V3를 사용합니다. Milvus 2.5는 Pulsar 2.x와 호환되지만, Pulsar V3로 업그레이드하는 것은 선택 사항입니다. 안정성과 성능을 향상하려면 Pulsar V3로 업그레이드하는 것이 좋습니다.</p>
-<p>Milvus v2.5.x와 함께 Pulsar V2를 사용하려면 Milvus <a href="/docs/ko/use-pulsar-v2.md">v2.5.x와 함께 Pulsar V2 사용하기를</a> 참조하세요.</p>
+<p>Milvus v2.5.x와 함께 Pulsar V2를 사용하려면 Milvus <a href="/docs/ko/v2.5.x/use-pulsar-v2.md">v2.5.x와 함께 Pulsar V2 사용하기를</a> 참조하세요.</p>
 <div class="alert note">
 <ol>
 <li><p>업그레이드 과정에서 잠시 서비스가 중단될 수 있습니다(일반적으로 데이터 양에 따라 약 몇 분에서 10분 이상 소요됨).</p></li>
@@ -99,10 +100,12 @@ title: Milvus의 Pulsar를 V2에서 V3로 업그레이드하기
 Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">9091</span> -&gt; <span class="hljs-number">9091</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>나중에 정리할 수 있도록 Pid를 저장합니다.</p>
 <pre><code translate="no" class="language-yaml">pid=8116​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>삽입된 모든 데이터를 Pulsar에서 Ojbect Storage로 보존하는 작업을 트리거합니다.</p>
 <pre><code translate="no" class="language-bash">curl 127.0.0.1:9091/api/v1/collections \​
 |curl 127.0.0.1:9091/api/v1/persist -d @/dev/stdin\​
@@ -111,6 +114,7 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <span class="hljs-built_in">cat</span> flushing_segments.json​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력.</p>
 <pre><code translate="no" class="language-yaml">{​
   <span class="hljs-string">&quot;segmentIDs&quot;</span>: [​
@@ -121,22 +125,27 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 }​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>모든 세그먼트 플러시됨을 확인합니다.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> flushing_segments.json|  curl -X GET 127.0.0.1:9091/api/v1/persist/state -d @/dev/stdin ​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>완료되면 다음과 같은 출력이 표시됩니다.</p>
 <pre><code translate="no" class="language-json">{<span class="hljs-string">&quot;status&quot;</span>:{},<span class="hljs-string">&quot;flushed&quot;</span>:<span class="hljs-literal">true</span>}​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>백엔드 <code translate="no">kubectl port-forward</code> 프로세스 중지</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-built_in">kill</span> <span class="hljs-variable">$pid</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력.</p>
 <pre><code translate="no" class="language-yaml">[<span class="hljs-meta">1</span>]  + <span class="hljs-number">8116</span> terminated  kubectl -n <span class="hljs-literal">default</span> port-forward deploy/my-release-milvus-proxy <span class="hljs-number">9091</span>:<span class="hljs-number">9091</span>                      ​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Milvus를 중지하고 Pulsar V2를 삭제합니다.</h3><p>이 단계에서는 Milvus 파드를 중지하고 Pulsar V2 배포를 삭제해야 합니다. 두 가지 섹션이 있습니다:</p>
 <ul>
@@ -152,10 +161,12 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 cat values.yaml​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>명령을 사용하여 Milvus와 모든 종속성을 중지합니다. 데이터 볼륨은 기본적으로 유지되므로 걱정하지 마세요.</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-keyword">default</span> uninstall my-release​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력</p>
 <pre><code translate="no" class="language-bash">These resources were kept due to the resource policy:​
 [<span class="hljs-meta">PersistentVolumeClaim</span>] my-release-minio​
@@ -163,6 +174,7 @@ cat values.yaml​
 release <span class="hljs-string">&quot;my-release&quot;</span> uninstalled​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>펄서 PVC 및 PV(퍼시스턴트 볼륨 클레임 및 퍼시스턴트 볼륨) 목록을 지워야 합니다.</p>
 <pre><code translate="no" class="language-bash">kubectl -n default get pvc -lapp=pulsar,release=my-release |grep -v NAME |awk <span class="hljs-string">&#x27;{print $1}&#x27;</span> &gt; pulsar-pvcs.txt​
 kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL:.spec.volumeName|grep -v VOL &gt; pulsar-pvs.txt​
@@ -172,6 +184,7 @@ kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL
 <span class="hljs-built_in">cat</span> pulsar-pvs.txt​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력</p>
 <pre><code translate="no" class="language-yaml">Volume Claims:​
 my-release-pulsar-bookie-journal-my-release-pulsar-bookie-0​
@@ -187,10 +200,12 @@ pvc-60dcb6e4-760d-46c7-af1a-d1fc153b0caf​
 pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p><code translate="no">pulsar-pvcs.txt</code> 의 PVC 목록이 모두 Pulsar에 대한 것인지 확인합니다. 오류가 없는 것을 확인했다면 PVC를 삭제합니다.</p>
 <pre><code translate="no" class="language-bash">cat pulsar-pvcs.<span class="hljs-property">txt</span> |xargs -I {} kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> pvc {} --wait=<span class="hljs-literal">false</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력.</p>
 <pre><code translate="no" class="language-yaml">persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-journal-my-release-pulsar-bookie-0&quot;</span> deleted​
 persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-journal-my-release-pulsar-bookie-1&quot;</span> deleted​
@@ -199,10 +214,12 @@ persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-l
 persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-zookeeper-data-my-release-pulsar-zookeeper-0&quot;</span> deleted​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>(선택 사항) PVC를 제공하는 스토리지 클래스에 따라 PV를 수동으로 제거해야 할 수도 있습니다.</p>
 <pre><code translate="no" class="language-yaml">cat pulsar-pvs.<span class="hljs-property">txt</span> |xargs -I {} kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> pvc {} --wait=<span class="hljs-literal">false</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>찾을 수 없음 오류가 출력되어도 괜찮습니다. 이미 쿠버네티스 컨트롤러에 의해 삭제되었기 때문입니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-f590a4de-df31-4ca8-a424-007eac3c619a&quot;</span> not found​
 <span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-17b0e215-3e14-4d14-901e-1a1dda9ff5a3&quot;</span> not found​
@@ -211,6 +228,7 @@ persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-zookeepe
 <span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a&quot;</span> not found​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h4 id="Delete-Pulsar-V2-using-Milvus-Operator" class="common-anchor-header">Milvus 오퍼레이터를 사용하여 Pulsar V2 삭제하기</h4><p>Milvus Operator를 사용하여 Milvus를 설치한 경우, 아래 단계에 따라 Milvus 파드를 중지하고 Pulsar V2 배포를 삭제하세요.</p>
 <ol>
@@ -219,6 +237,7 @@ persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-zookeepe
 head milvus.yaml -n <span class="hljs-number">20</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1​
 kind: Milvus​
@@ -242,6 +261,7 @@ spec:​
   components:​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>다음 내용으로 <code translate="no">patch.yaml</code> 파일을 생성합니다.</p>
 <pre><code translate="no" class="language-yaml"># a patch to retain etcd &amp; storage data and <span class="hljs-built_in">delete</span> pulsar data while <span class="hljs-built_in">delete</span> milvus​
 spec:​
@@ -260,20 +280,24 @@ spec:​
         pvcDeletion: <span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p><code translate="no">kubectl patch</code> 을 사용하여 밀버스를 삭제하는 동안 etcd 및 스토리지 데이터를 유지하고 펄서 데이터를 삭제합니다.</p>
 <pre><code translate="no" class="language-yaml">kubectl -n <span class="hljs-keyword">default</span> patch milvus my-release --patch-file patch.yaml --<span class="hljs-keyword">type</span>=merge​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력.</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io/my-release patched​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>밀버스를 중지하고 펄서 V2를 삭제합니다. etcd 및 오브젝트 스토리지 데이터 볼륨은 기본적으로 유지되므로 걱정하지 마세요.</p>
 <pre><code translate="no" class="language-bash">kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> milvus my-release --wait=<span class="hljs-literal">false</span>​
 kubectl -n <span class="hljs-keyword">default</span> get milvus my-release​
 kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> milvus my-release --wait=<span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력: 밀버스가 정상적으로 중지되고 운영자가 펄서 볼륨을 삭제하는 데 몇 분 정도 걸릴 수 있습니다.</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 NAME         MODE      STATUS     UPDATED   AGE​
@@ -281,15 +305,18 @@ my-release   cluster   Deleting   <span class="hljs-literal">True</span>      41
 milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>명령이 완료될 때까지 기다리세요.</p></li>
 <li><p>밀버스 리소스가 사라졌는지 다시 확인합니다.</p>
 <pre><code translate="no" class="language-yaml">kubectl -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> milvus my-release​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력은 다음과 같아야 합니다.</p>
 <pre><code translate="no" class="language-yaml">No resources found <span class="hljs-keyword">in</span> <span class="hljs-literal">default</span> <span class="hljs-keyword">namespace</span>.​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Pulsar V3 및 Milvus 시작</h3><p>이 단계에서는 Pulsar V3와 Milvus 파드를 시작해야 합니다. 두 개의 별도 섹션을 사용할 수 있습니다:</p>
 <ul>
@@ -310,11 +337,13 @@ pulsarv3:​
   <span class="hljs-comment"># append other values for pulsar v3 chart if needs​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>로컬 헬름 리포지토리를 업데이트합니다.</p>
 <pre><code translate="no" class="language-bash">helm repo <span class="hljs-keyword">add</span> zilliztech https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm​</span>
 helm repo update zilliztech​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;zilliztech&quot;</span> already exists <span class="hljs-keyword">with</span> the same configuration, skipping​
 <span class="hljs-title class_">Hang</span> tight <span class="hljs-keyword">while</span> we grab the latest <span class="hljs-keyword">from</span> your chart repositories...​
@@ -322,10 +351,12 @@ helm repo update zilliztech​
 <span class="hljs-title class_">Update</span> <span class="hljs-title class_">Complete</span>. ⎈<span class="hljs-title class_">Happy</span> <span class="hljs-title class_">Helming</span>!⎈​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>편집한 <code translate="no">values.yaml</code> 을 사용하여 최신 헬름 차트 버전으로 밀버스 릴리스를 설치합니다.</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-keyword">default</span> install my-release zilliztech/milvus --reset-values -f values.<span class="hljs-property">yaml</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Output</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-attr">NAME</span>: my-release​
 <span class="hljs-variable constant_">LAST</span> <span class="hljs-attr">DEPLOYED</span>: <span class="hljs-title class_">Fri</span> <span class="hljs-title class_">Nov</span> <span class="hljs-number">22</span> <span class="hljs-number">15</span>:<span class="hljs-number">31</span>:<span class="hljs-number">27</span> <span class="hljs-number">2024</span>​
@@ -335,6 +366,7 @@ helm repo update zilliztech​
 <span class="hljs-variable constant_">TEST</span> <span class="hljs-attr">SUITE</span>: <span class="hljs-title class_">None</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>파드가 모두 스케줄링되고 <code translate="no">kubectl -n default get pods</code> 로 실행되는지 확인한다.</p>
 <p>모든 파드가 시작되는 데 몇 분 정도 걸릴 수 있다.</p>
 <p>출력은 다음과 같습니다.</p>
@@ -361,6 +393,7 @@ my-release-pulsarv3-zookeeper<span class="hljs-number">-1</span>               <
 my-release-pulsarv3-zookeeper<span class="hljs-number">-2</span>               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m2s​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h4 id="Start-Pulsar-V3-and-using-Milvus-Operator" class="common-anchor-header">Pulsar V3를 시작하고 밀버스 오퍼레이터를 사용합니다.</h4><ol>
 <li><p>이전 단계에서 저장한 <code translate="no">milvus.yaml</code> 을 편집합니다.</p>
@@ -381,20 +414,24 @@ spec:​
         values: null​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>밀버스 오퍼레이터가 v1.1.2 이상 버전으로 업그레이드되었는지 확인합니다.</p>
 <pre><code translate="no" class="language-yaml">helm repo <span class="hljs-keyword">add</span> milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator​</span>
 helm repo update milvus-<span class="hljs-keyword">operator</span>​
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>명령을 사용하여 Pulsar V3로 밀버스 시작하기</p>
 <pre><code translate="no" class="language-yaml">kubectl create -f milvus.yaml​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>출력</p>
 <pre><code translate="no" class="language-yaml">milvus.milvus.io/my-release created​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>모든 파드가 <code translate="no">kubectl -n default get pods</code> 로 스케줄링되고 실행되는지 확인합니다. </p>
 <p>모든 파드가 시작되려면 몇 분 정도 걸릴 수 있습니다.</p>
 <p>출력은 다음과 같습니다.</p>
@@ -421,5 +458,6 @@ my-release-pulsar-zookeeper<span class="hljs-number">-1</span>                  
 my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m10s​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <p></p>

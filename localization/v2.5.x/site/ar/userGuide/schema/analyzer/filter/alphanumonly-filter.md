@@ -7,6 +7,7 @@ summary: >-
   التي تكون فيها الأحرف والأرقام الأساسية فقط ذات صلة، مع استبعاد أي أحرف أو
   رموز خاصة.
 ---
+
 <h1 id="Alphanumonly" class="common-anchor-header">Alphanumonly<button data-href="#Alphanumonly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,8 +67,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>يعمل عامل التصفية <code translate="no">alphanumonly</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة ترميز. للحصول على قائمة بالرموز المتوفرة في ميلفوس، راجع <a href="/docs/ar/standard-tokenizer.md">أداة الترم</a> يز <a href="/docs/ar/standard-tokenizer.md">القياسية</a> وصفحاتها الشقيقة.</p>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لـ Milvus بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل ترميز وتصفية فعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
+
+<p>يعمل عامل التصفية <code translate="no">alphanumonly</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة ترميز. للحصول على قائمة بالرموز المتوفرة في ميلفوس، راجع <a href="/docs/ar/v2.5.x/standard-tokenizer.md">أداة الترم</a> يز <a href="/docs/ar/v2.5.x/standard-tokenizer.md">القياسية</a> وصفحاتها الشقيقة.</p>
+<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لـ Milvus بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل ترميز وتصفية فعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,6 +112,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 2.0 @ Scale! #AI #Vector_Da
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

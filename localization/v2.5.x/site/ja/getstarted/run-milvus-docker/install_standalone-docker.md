@@ -5,6 +5,7 @@ related_key: Docker
 summary: MilvusをDockerでスタンドアロンインストールする方法をご紹介します。
 title: DockerでMilvusを起動する(Linux)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">DockerでMilvusを起動する(Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ title: DockerでMilvusを起動する(Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Dockerをインストールして</a>ください。</li>
-<li>インストール前に<a href="/docs/ja/prerequisite-docker.md">ハードウェアとソフトウェアの要件を確認して</a>ください。</li>
+<li>インストール前に<a href="/docs/ja/v2.5.x/prerequisite-docker.md">ハードウェアとソフトウェアの要件を確認して</a>ください。</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">DockerへのMilvusのインストール<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +74,7 @@ title: DockerでMilvusを起動する(Linux)
 <li>Milvusのデフォルト設定を変更するには、カレントフォルダ内の<strong>user.yaml</strong>ファイルに設定を追加し、サービスを再起動します。</li>
 <li>Milvusデータボリュームはカレントフォルダ内の<strong>volumes/milvusに</strong>マッピングされます。</li>
 </ul>
-<p>Milvusインスタンスの詳細については、<code translate="no">http://127.0.0.1:9091/webui/</code> からMilvus WebUIにアクセスすることができます。詳細は<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご参照ください。</p>
+<p>Milvusインスタンスの詳細については、<code translate="no">http://127.0.0.1:9091/webui/</code> からMilvus WebUIにアクセスすることができます。詳細は<a href="/docs/ja/v2.5.x/milvus-webui.md">Milvus WebUIを</a>ご参照ください。</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvusの停止と削除<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,27 +118,27 @@ title: DockerでMilvusを起動する(Linux)
       </svg>
     </button></h2><p>DockerにMilvusをインストールしました：</p>
 <ul>
-<li><p><a href="/docs/ja/quickstart.md">クイックスタートで</a>Milvusの機能を確認する。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/quickstart.md">クイックスタートで</a>Milvusの機能を確認する。</p></li>
 <li><p>Milvusの基本操作を学ぶ：</p>
 <ul>
-<li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
-<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/v2.5.x/manage_databases.md">データベースの管理</a></li>
+<li><a href="/docs/ja/v2.5.x/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/v2.5.x/manage-partitions.md">パーティションの管理</a></li>
+<li><a href="/docs/ja/v2.5.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.5.x/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/v2.5.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
-<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
 <li><p>Milvuクラスタをクラウドにデプロイする：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>
-<li><a href="/docs/ja/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ja/v2.5.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ja/v2.5.x/gcp.md">Googleクラウド</a></li>
+<li><a href="/docs/ja/v2.5.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
-<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
-<li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/v2.5.x/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/v2.5.x/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
+<li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/v2.5.x/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
-<li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
+<li><p><a href="/docs/ja/v2.5.x/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

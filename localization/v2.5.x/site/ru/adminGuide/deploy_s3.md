@@ -1,11 +1,12 @@
 ---
 id: deploy_s3.md
 title: Настройка объектного хранилища с помощью Docker Compose или Helm
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: >-
   Узнайте, как настроить хранилище S3 для Milvus с помощью Docker Compose или
   Helm.
 ---
+
 <h1 id="Configure-Object-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Настройка объектного хранилища с помощью Docker Compose или Helm<button data-href="#Configure-Object-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +48,7 @@ summary: >-
   useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
   bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительные сведения см. в разделе <a href="/docs/ru/configure_minio.md">Конфигурации MinIO/S3</a>.</p>
+<p>Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/configure_minio.md">Конфигурации MinIO/S3</a>.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Доработка docker-compose.yaml</h3><p>Вы также удалите переменную окружения <code translate="no">MINIO_ADDRESS</code> для службы milvus по адресу <code translate="no">docker-compose.yaml</code>. По умолчанию milvus будет использовать локальный minio вместо внешнего S3.</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3. Запустите Milvus</h3><p>Выполните следующую команду, чтобы запустить Milvus, который использует конфигурации S3.</p>
 <pre><code translate="no" class="language-shell">docker compose up
@@ -129,6 +130,6 @@ summary: >-
       </svg>
     </button></h2><p>Узнайте, как настроить другие зависимости Milvus с помощью Docker Compose или Helm:</p>
 <ul>
-<li><a href="/docs/ru/deploy_etcd.md">Настройка метахранилища с помощью Docker Compose или Helm</a></li>
-<li><a href="/docs/ru/deploy_pulsar.md">Настройте хранилище сообщений с помощью Docker Compose или Helm</a></li>
+<li><a href="/docs/ru/v2.5.x/deploy_etcd.md">Настройка метахранилища с помощью Docker Compose или Helm</a></li>
+<li><a href="/docs/ru/v2.5.x/deploy_pulsar.md">Настройте хранилище сообщений с помощью Docker Compose или Helm</a></li>
 </ul>

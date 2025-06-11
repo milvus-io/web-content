@@ -3,6 +3,7 @@ id: metric.md
 title: 度量类型
 summary: 相似度量用于衡量向量之间的相似性。选择合适的距离度量有助于显著提高分类和聚类性能。
 ---
+
 <h1 id="Metric-Types" class="common-anchor-header">度量类型<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +62,7 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
 </table>
 <div class="alert note">
 <ul>
-<li><p>对于<code translate="no">SPARSE\_FLOAT\_VECTOR</code> 类型的向量场，仅在执行全文检索时使用<code translate="no">BM25</code> 公制类型。有关详细信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p></li>
+<li><p>对于<code translate="no">SPARSE\_FLOAT\_VECTOR</code> 类型的向量场，仅在执行全文检索时使用<code translate="no">BM25</code> 公制类型。有关详细信息，请参阅<a href="/docs/zh/v2.5.x/full-text-search.md">全文搜索</a>。</p></li>
 <li><p>对于<code translate="no">BINARY_VECTOR</code> 类型的向量字段，维度值 (<code translate="no">dim</code>) 必须是 8 的倍数。</p></li>
 </ul>
 </div>
@@ -244,7 +245,7 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 是一种广泛使用的文本相关性测量方法，专门用于<a href="/docs/zh/full-text-search.md">全文检索</a>。它结合了以下三个关键因素：</p>
+    </button></h2><p>BM25 是一种广泛使用的文本相关性测量方法，专门用于<a href="/docs/zh/v2.5.x/full-text-search.md">全文检索</a>。它结合了以下三个关键因素：</p>
 <ul>
 <li><p><strong>术语频率 (TF)：</strong>衡量术语在文档中出现的频率。虽然较高的频率通常表示较高的重要性，但 BM25 使用饱和参数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span>k<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>来防止过于频繁的术语主导相关性得分。</p></li>
 <li><p><strong>反向文档频率（IDF）：</strong>反映术语在整个语料库中的重要性。在较少文档中出现的术语会获得较高的 IDF 值，这表明其对相关性的贡献更大。</p></li>

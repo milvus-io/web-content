@@ -7,6 +7,7 @@ summary: >-
   pemadatan pengelompokan dan bagaimana fitur ini dapat meningkatkan kinerja
   pencarian.
 ---
+
 <h1 id="Clustering-Compaction" class="common-anchor-header">Pemadatan Pengelompokan<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +50,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Pemadatan Pengelompokan</span> </span></p>
-<p>Dengan menggunakan <strong>PartitionStats</strong> sebagai referensi, Milvus dapat memangkas data yang tidak relevan setelah menerima permintaan pencarian/kueri yang membawa nilai kunci pengelompokan dan membatasi cakupan pencarian di dalam segmen yang memetakan nilai tersebut, sehingga meningkatkan kinerja pencarian. Untuk detail tentang peningkatan kinerja, lihat <a href="/docs/id/clustering-compaction.md#Benchmark-Test">Tes tolok ukur</a>.</p>
+<p>Dengan menggunakan <strong>PartitionStats</strong> sebagai referensi, Milvus dapat memangkas data yang tidak relevan setelah menerima permintaan pencarian/kueri yang membawa nilai kunci pengelompokan dan membatasi cakupan pencarian di dalam segmen yang memetakan nilai tersebut, sehingga meningkatkan kinerja pencarian. Untuk detail tentang peningkatan kinerja, lihat <a href="/docs/id/v2.5.x/clustering-compaction.md#Benchmark-Test">Tes tolok ukur</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Gunakan Pemadatan Pengelompokan<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,15 +80,16 @@ summary: >-
       <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
 <span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span>
 
 <span class="hljs-attr">datanode:</span>
-  <span class="hljs-attr">clusteringCompaction:</span>
-    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
-    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+<span class="hljs-attr">clusteringCompaction:</span>
+<span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span>
+<span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
+<span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p>Konfigurasi Item</p></th>
@@ -162,7 +164,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>Untuk menerapkan perubahan di atas pada kluster Milvus Anda, silakan ikuti langkah-langkah di <a href="/docs/id/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurasi Milvus dengan Helm</a> dan <a href="/docs/id/configure_operator.md">Konfigurasi Milvus dengan Operator Milvus</a>.</p>
+<p>Untuk menerapkan perubahan di atas pada kluster Milvus Anda, silakan ikuti langkah-langkah di <a href="/docs/id/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurasi Milvus dengan Helm</a> dan <a href="/docs/id/v2.5.x/configure_operator.md">Konfigurasi Milvus dengan Operator Milvus</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Konfigurasi Koleksi</h3><p>Untuk pemadatan cluster dalam koleksi tertentu, Anda harus memilih bidang skalar dari koleksi sebagai kunci clustering.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -172,8 +174,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -183,10 +185,11 @@ schema.add_field(<span class="hljs-string">&quot;var&quot;</span>, DataType.VARC
 schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
-    schema=schema
+collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>,
+schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -287,9 +290,10 @@ job_id = client.compact(
 
 <span class="hljs-comment"># get the compaction state</span>
 client.get_compaction_state(
-    job_id=job_id,
+job_id=job_id,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CompactReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.GetCompactionStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.CompactResp;

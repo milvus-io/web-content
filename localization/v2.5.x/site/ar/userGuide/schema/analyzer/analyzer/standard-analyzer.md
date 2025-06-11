@@ -6,6 +6,7 @@ summary: >-
   حقول النص إذا لم يتم تحديد محلل. وهو يستخدم الترميز القائم على القواعد
   النحوية، مما يجعله فعالاً لمعظم اللغات.
 ---
+
 <h1 id="Standard-Analyzer" class="common-anchor-header">المحلل القياسي<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,8 +40,8 @@ summary: >-
       </svg>
     </button></h2><p>يتكون محلل <code translate="no">standard</code> من:</p>
 <ul>
-<li><p><strong>أداة الترميز</strong>: يستخدم أداة الترميز <code translate="no">standard</code> لتقسيم النص إلى وحدات كلمات منفصلة بناءً على قواعد النحو. لمزيد من المعلومات، راجع <a href="/docs/ar/standard-tokenizer.md">المعيار</a>.</p></li>
-<li><p><strong>عامل التصفية</strong>: يستخدم<a href="/docs/ar/lowercase-filter.md"> عامل</a> التصفية <code translate="no">lowercase</code> لتحويل جميع الرموز إلى أحرف صغيرة، مما يتيح عمليات بحث غير حساسة لحالة الأحرف. لمزيد من المعلومات، راجع</p></li>
+<li><p><strong>أداة الترميز</strong>: يستخدم أداة الترميز <code translate="no">standard</code> لتقسيم النص إلى وحدات كلمات منفصلة بناءً على قواعد النحو. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/standard-tokenizer.md">المعيار</a>.</p></li>
+<li><p><strong>عامل التصفية</strong>: يستخدم<a href="/docs/ar/v2.5.x/lowercase-filter.md"> عامل</a> التصفية <code translate="no">lowercase</code> لتحويل جميع الرموز إلى أحرف صغيرة، مما يتيح عمليات بحث غير حساسة لحالة الأحرف. لمزيد من المعلومات، راجع</p></li>
 </ul>
 <p>تكافئ وظيفة محلل <code translate="no">standard</code> تكوين المحلل المخصص التالي:</p>
 <div class="multipleCode">
@@ -137,7 +138,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح هذا لميلفوس بمعالجة النص في هذا الحقل باستخدام المحلل المحدد لترميز وتصفية فعالة. لمزيد من المعلومات، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">استخدام الأمثلة</a>.</p>
+<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح هذا لميلفوس بمعالجة النص في هذا الحقل باستخدام المحلل المحدد لترميز وتصفية فعالة. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/analyzer-overview.md#Example-use">استخدام الأمثلة</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,6 +193,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

@@ -4,6 +4,7 @@ related_key: scalar_index
 summary: المؤشر القياسي في ميلفوس.
 title: الفهرس القياسي
 ---
+
 <h1 id="Scalar-Index" class="common-anchor-header">الفهرس القياسي<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ title: الفهرس القياسي
         ></path>
       </svg>
     </button></h2><p>بمجرد إجراء عمليات البحث عن تشابه المتجهات في Milvus، يمكنك استخدام العوامل المنطقية لتنظيم الحقول القياسية في تعبيرات منطقية.</p>
-<p>عندما يتلقى Milvus طلب بحث بتعبير منطقي كهذا، فإنه يقوم بتحليل التعبير المنطقي إلى شجرة بناء الجملة المجردة (AST) لإنشاء خطة فعلية لتصفية السمات. ثم يطبق Milvus الخطة الفيزيائية في كل جزء لتوليد <a href="/docs/ar/bitset.md">مجموعة بتات</a> كنتيجة للتصفية ويتضمن النتيجة كمعامل بحث متجه لتضييق نطاق البحث. في هذه الحالة، تعتمد سرعة عمليات البحث المتجه بشكل كبير على سرعة تصفية السمة.</p>
+<p>عندما يتلقى Milvus طلب بحث بتعبير منطقي كهذا، فإنه يقوم بتحليل التعبير المنطقي إلى شجرة بناء الجملة المجردة (AST) لإنشاء خطة فعلية لتصفية السمات. ثم يطبق Milvus الخطة الفيزيائية في كل جزء لتوليد <a href="/docs/ar/v2.5.x/bitset.md">مجموعة بتات</a> كنتيجة للتصفية ويتضمن النتيجة كمعامل بحث متجه لتضييق نطاق البحث. في هذه الحالة، تعتمد سرعة عمليات البحث المتجه بشكل كبير على سرعة تصفية السمة.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +155,12 @@ title: الفهرس القياسي
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>لفهرسة حقل عدد ثابت، اقرأ <a href="/docs/ar/index-scalar-fields.md">إنشاء فهرس على عدد ثابت</a>.</p></li>
+<li><p>لفهرسة حقل عدد ثابت، اقرأ <a href="/docs/ar/v2.5.x/index-scalar-fields.md">إنشاء فهرس على عدد ثابت</a>.</p></li>
 <li><p>لمعرفة المزيد حول المصطلحات والقواعد ذات الصلة المذكورة أعلاه، اقرأ</p>
 <ul>
-<li><a href="/docs/ar/bitset.md">مجموعة بت</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
-<li><a href="/docs/ar/boolean.md">قواعد التعبير المنطقي</a></li>
-<li><a href="/docs/ar/schema.md#Supported-data-type">أنواع البيانات المدعومة</a></li>
+<li><a href="/docs/ar/v2.5.x/bitset.md">مجموعة بت</a></li>
+<li><a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.5.x/boolean.md">قواعد التعبير المنطقي</a></li>
+<li><a href="/docs/ar/v2.5.x/schema.md#Supported-data-type">أنواع البيانات المدعومة</a></li>
 </ul></li>
 </ul>

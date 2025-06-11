@@ -2,6 +2,7 @@
 id: scale-dependencies.md
 title: 規模依賴性
 ---
+
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">擴充 Milvus 的相依性<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: 規模依賴性
       </svg>
     </button></h1><p>Milvus 依賴各種依賴元件，例如 MinIO、Kafka、Pulsar 和 etcd。擴充這些元件可以增強 Milvus 對不同需求的適應性。</p>
 <div class="alert note">
-<p>Milvus Operator 使用者請參考使用 Milvus<a href="/docs/zh-hant/object_storage_operator.md">Operator 配置物件儲存</a>、<a href="/docs/zh-hant/meta_storage_operator.md">使用 Milvus Operator 配置元儲存</a>，以及<a href="/docs/zh-hant/message_storage_operator.md">使用</a> Milvus Operator<a href="/docs/zh-hant/message_storage_operator.md">配置訊息儲存</a>。</p>
+<p>Milvus Operator 使用者請參考使用 Milvus<a href="/docs/zh-hant/v2.5.x/object_storage_operator.md">Operator 配置物件儲存</a>、<a href="/docs/zh-hant/v2.5.x/meta_storage_operator.md">使用 Milvus Operator 配置元儲存</a>，以及<a href="/docs/zh-hant/v2.5.x/message_storage_operator.md">使用</a> Milvus Operator<a href="/docs/zh-hant/v2.5.x/message_storage_operator.md">配置訊息儲存</a>。</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">擴充 MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -5,6 +5,7 @@ related_key: SDK
 summary: Pelajari cara menginstal Java SDK dari Milvus.
 title: Menginstal Milvus Java SDK
 ---
+
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Menginstal Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,11 +91,11 @@ title: Menginstal Milvus Java SDK
 <ul>
 <li><p>Mempelajari operasi dasar Milvus:</p>
 <ul>
-<li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
-<li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
-<li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
+<li><a href="/docs/id/v2.5.x/manage-collections.md">Mengelola Koleksi</a></li>
+<li><a href="/docs/id/v2.5.x/manage-partitions.md">Mengelola Partisi</a></li>
+<li><a href="/docs/id/v2.5.x/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
+<li><a href="/docs/id/v2.5.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
+<li><a href="/docs/id/v2.5.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
 <li><p>Jelajahi <a href="/api-reference/java/v2.4.x/About.md">referensi API Milvus Java</a></p></li>
 </ul>

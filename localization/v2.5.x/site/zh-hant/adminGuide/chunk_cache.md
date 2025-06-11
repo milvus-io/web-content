@@ -2,6 +2,7 @@
 id: chunk_cache.md
 title: 配置分塊緩存
 ---
+
 <h1 id="Configure-Chunk-Cache" class="common-anchor-header">配置分塊緩存<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,11 +54,11 @@ title: 配置分塊緩存
     </button></h2><p>本指南提供如何為Milvus實例配置chunk cache機制的說明。配置因您安裝 Milvus 實例的方式而異。</p>
 <ul>
 <li><p>對於使用 Helm Charts 安裝的 Milvus 實例</p>
-<p>將配置加入<code translate="no">values.yaml</code> 檔案的<code translate="no">config</code> 部分。詳情請參閱<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 設定 Milvus</a>。</p></li>
+<p>將配置加入<code translate="no">values.yaml</code> 檔案的<code translate="no">config</code> 部分。詳情請參閱<a href="/docs/zh-hant/v2.5.x/configure-helm.md">使用 Helm Charts 設定 Milvus</a>。</p></li>
 <li><p>對於使用 Docker Compose 安裝的 Milvus 實體</p>
-<p>將配置新增到您用來啟動 Milvus 實例的<code translate="no">milvus.yaml</code> 檔案。如需詳細資訊，請參閱<a href="/docs/zh-hant/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</p></li>
+<p>將配置新增到您用來啟動 Milvus 實例的<code translate="no">milvus.yaml</code> 檔案。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</p></li>
 <li><p>對於使用 Operator 安裝的 Milvus 實例</p>
-<p>將配置新增到<code translate="no">Milvus</code> 自訂資源的<code translate="no">spec.components</code> 區段。如需詳細資訊，請參閱<a href="/docs/zh-hant/configure_operator.md">使用 Operator 配置 Milvus</a>。</p></li>
+<p>將配置新增到<code translate="no">Milvus</code> 自訂資源的<code translate="no">spec.components</code> 區段。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure_operator.md">使用 Operator 配置 Milvus</a>。</p></li>
 </ul>
 <h3 id="Configuration-options" class="common-anchor-header">組態選項</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode</span>:
     <span class="hljs-attr">cache</span>:

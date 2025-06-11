@@ -5,6 +5,7 @@ summary: >-
   Milvus-Koordinatoren, die im aktiven Bereitschaftsdienst arbeiten.
 title: Koordinator HA
 ---
+
 <h1 id="Coordinator-HA" class="common-anchor-header">Koordinator HA<button data-href="#Coordinator-HA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ title: Koordinator HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Wie in der <a href="/docs/de/architecture_overview.md">Milvus-Architektur</a> dargestellt, besteht Milvus aus vielen Komponenten und lässt sie verteilt arbeiten. Von allen Komponenten sorgt Milvus für die hohe Verfügbarkeit der Arbeiter durch das <a href="/docs/de/scaleout.md">Hoch- und Runterskalieren</a> der Knoten, wobei die Koordinatoren das einzige schwache Glied in der Kette sind.</p>
+    </button></h1><p>Wie in der <a href="/docs/de/v2.5.x/architecture_overview.md">Milvus-Architektur</a> dargestellt, besteht Milvus aus vielen Komponenten und lässt sie verteilt arbeiten. Von allen Komponenten sorgt Milvus für die hohe Verfügbarkeit der Arbeiter durch das <a href="/docs/de/v2.5.x/scaleout.md">Hoch- und Runterskalieren</a> der Knoten, wobei die Koordinatoren das einzige schwache Glied in der Kette sind.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,23 +98,24 @@ title: Koordinator HA
       - <span class="hljs-string">&quot;pulsar&quot;</span>
       - <span class="hljs-string">&quot;minio&quot;</span>
 
-<span class="hljs-comment">#   add the following to have RootCoords work in active-standby mode</span>
-<span class="hljs-comment">#   rootcoord-1:</span>
-<span class="hljs-comment">#    container_name: milvus-rootcoord-1</span>
-<span class="hljs-comment">#    image: milvusdb/milvus:v2.2.3</span>
-<span class="hljs-comment">#    command: [&quot;milvus&quot;, &quot;run&quot;, &quot;rootcoord&quot;]</span>
-<span class="hljs-comment">#    environment:</span>
-<span class="hljs-comment">#      ETCD_ENDPOINTS: etcd:2379</span>
-<span class="hljs-comment">#      MINIO_ADDRESS: minio:9000</span>
-<span class="hljs-comment">#      PULSAR_ADDRESS: pulsar://pulsar:6650</span>
-<span class="hljs-comment">#      ROOT_COORD_ADDRESS: rootcoord-1:53100</span>
-<span class="hljs-comment">#      # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby</span>
-<span class="hljs-comment">#      ROOT_COORD_ENABLE_ACTIVE_STANDBY: true</span>
-<span class="hljs-comment">#    depends_on:</span>
-<span class="hljs-comment">#      - &quot;etcd&quot;</span>
-<span class="hljs-comment">#      - &quot;pulsar&quot;</span>
-<span class="hljs-comment">#      - &quot;minio&quot;</span>
+<span class="hljs-comment"># add the following to have RootCoords work in active-standby mode</span>
+<span class="hljs-comment"># rootcoord-1:</span>
+<span class="hljs-comment"># container_name: milvus-rootcoord-1</span>
+<span class="hljs-comment"># image: milvusdb/milvus:v2.2.3</span>
+<span class="hljs-comment"># command: [&quot;milvus&quot;, &quot;run&quot;, &quot;rootcoord&quot;]</span>
+<span class="hljs-comment"># environment:</span>
+<span class="hljs-comment"># ETCD_ENDPOINTS: etcd:2379</span>
+<span class="hljs-comment"># MINIO_ADDRESS: minio:9000</span>
+<span class="hljs-comment"># PULSAR_ADDRESS: pulsar://pulsar:6650</span>
+<span class="hljs-comment"># ROOT_COORD_ADDRESS: rootcoord-1:53100</span>
+<span class="hljs-comment"># # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby</span>
+<span class="hljs-comment"># ROOT_COORD_ENABLE_ACTIVE_STANDBY: true</span>
+<span class="hljs-comment"># depends_on:</span>
+<span class="hljs-comment"># - &quot;etcd&quot;</span>
+<span class="hljs-comment"># - &quot;pulsar&quot;</span>
+<span class="hljs-comment"># - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="With-MacLinux-shell" class="common-anchor-header">Mit Mac/Linux-Shell</h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, können Sie</p>
 <ol>
 <li><p>Laden Sie den Milvus-Quellcode auf Ihr lokales Laufwerk herunter, und <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">starten Sie einen Milvus-Cluster aus dem Quellcode</a> wie folgt:</p>
@@ -172,9 +174,9 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
       </svg>
     </button></h2><p>Coordinator HA ist standardmäßig deaktiviert. Sie können diese Funktion manuell aktivieren, indem Sie die folgenden Elemente in Ihrer Milvus-Konfigurationsdatei ändern.</p>
 <ul>
-<li><a href="/docs/de/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/de/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/de/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/de/v2.5.x/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/de/v2.5.x/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/de/v2.5.x/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">Begrenzt<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

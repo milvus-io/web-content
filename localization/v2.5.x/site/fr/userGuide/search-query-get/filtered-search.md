@@ -10,6 +10,7 @@ summary: >-
   l'ensemble de la collection aux seules entités correspondant aux conditions de
   filtrage spécifiées.
 ---
+
 <h1 id="Filtered-Search" class="common-anchor-header">Recherche filtrée<button data-href="#Filtered-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,27 +97,28 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[query_vector],
-    limit=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-start</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]
-    <span class="hljs-comment"># highlight-end</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[query_vector],
+limit=<span class="hljs-number">5</span>,
+<span class="hljs-comment"># highlight-start</span>
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,
+output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]
+<span class="hljs-comment"># highlight-end</span>
 )
 
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
-    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
-        <span class="hljs-built_in">print</span>(hit)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
+<span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
+<span class="hljs-built_in">print</span>(hit)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
@@ -258,37 +260,38 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour plus d'informations sur les opérateurs que vous pouvez utiliser dans le filtrage des métadonnées, reportez-vous à <a href="/docs/fr/filtering">Filtrage</a>.</p>
+<p>Pour plus d'informations sur les opérateurs que vous pouvez utiliser dans le filtrage des métadonnées, reportez-vous à <a href="/docs/fr/v2.5.x/filtering">Filtrage</a>.</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">Recherche avec filtrage itératif</h3><p>Pour effectuer une recherche filtrée avec un filtrage itératif, vous pouvez procéder comme suit :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[query_vector],
-    limit=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-start</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>],
-    search_params={
-        <span class="hljs-string">&quot;hints&quot;</span>: <span class="hljs-string">&quot;iterative_filter&quot;</span>
-    }
-    <span class="hljs-comment"># highlight-end</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[query_vector],
+limit=<span class="hljs-number">5</span>,
+<span class="hljs-comment"># highlight-start</span>
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,
+output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>],
+search_params={
+<span class="hljs-string">&quot;hints&quot;</span>: <span class="hljs-string">&quot;iterative_filter&quot;</span>
+}
+<span class="hljs-comment"># highlight-end</span>
 )
 
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
-    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
-        <span class="hljs-built_in">print</span>(hit)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)
+<span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
+<span class="hljs-built_in">print</span>(hit)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;

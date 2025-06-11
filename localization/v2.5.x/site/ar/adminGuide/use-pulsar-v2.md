@@ -7,6 +7,7 @@ summary: >-
   Pulsar v2 مع Milvus v2.5.x.
 title: استخدام Pulsar v2 مع Milvus v2.5.x
 ---
+
 <h1 id="Use-Pulsar-v2-with-Milvus-v25x" class="common-anchor-header">استخدام Pulsar v2 مع Milvus v2.5.x<button data-href="#Use-Pulsar-v2-with-Milvus-v25x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ title: استخدام Pulsar v2 مع Milvus v2.5.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تنصحك Milvus بترقية Pulsar إلى الإصدار 3 لتشغيل Milvus v2.5.x. لمزيد من التفاصيل، راجع <a href="/docs/ar/upgrade-pulsar-v3.md">ترقية Pulsar</a>. ومع ذلك، إذا كنت تفضل استخدام Pulsar v2 مع Milvus v2.5.x، فإن هذه المقالة سترشدك خلال إجراء تشغيل Milvus v2.5.x مع Pulsar v2.</p>
+    </button></h1><p>تنصحك Milvus بترقية Pulsar إلى الإصدار 3 لتشغيل Milvus v2.5.x. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/upgrade-pulsar-v3.md">ترقية Pulsar</a>. ومع ذلك، إذا كنت تفضل استخدام Pulsar v2 مع Milvus v2.5.x، فإن هذه المقالة سترشدك خلال إجراء تشغيل Milvus v2.5.x مع Pulsar v2.</p>
 <p>إذا كان لديك مثيل Milvus قيد التشغيل بالفعل وترغب في ترقيته إلى الإصدار 2.5.x ولكنك تواصل استخدام Pulsar v2، يمكنك اتباع الخطوات الواردة في هذه الصفحة.</p>
 <h2 id="Continue-using-Pulsar-v2-while-upgrading-Milvus-v25x" class="common-anchor-header">الاستمرار في استخدام Pulsar v2 أثناء ترقية Milvus v2.5.x<button data-href="#Continue-using-Pulsar-v2-while-upgrading-Milvus-v25x" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +41,7 @@ title: استخدام Pulsar v2 مع Milvus v2.5.x
         ></path>
       </svg>
     </button></h2><p>سيرشدك هذا القسم إلى الخطوات اللازمة لمواصلة استخدام Pulsar v2 أثناء ترقية مثيل Milvus قيد التشغيل إلى الإصدار Milvus v2.5.x.</p>
-<h3 id="For-Milvus-Operator-users" class="common-anchor-header">لمستخدمي مشغل Milvus</h3><p>يتوافق Milvus Operator مع ترقيات Pulsar v2 بشكل افتراضي. يمكنك ترقية مثيل Milvus الخاص بك إلى الإصدار 2.5.x بالرجوع إلى <a href="/docs/ar/upgrade_milvus_cluster-operator.md">ترقية مجموعة Milvus العنقودية مع مشغل Milvus</a>.</p>
+<h3 id="For-Milvus-Operator-users" class="common-anchor-header">لمستخدمي مشغل Milvus</h3><p>يتوافق Milvus Operator مع ترقيات Pulsar v2 بشكل افتراضي. يمكنك ترقية مثيل Milvus الخاص بك إلى الإصدار 2.5.x بالرجوع إلى <a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-operator.md">ترقية مجموعة Milvus العنقودية مع مشغل Milvus</a>.</p>
 <p>بمجرد اكتمال الترقية، يمكنك متابعة استخدام Pulsar v2 مع مثيل Milvus الخاص بك.</p>
 <h3 id="For-Helm-users" class="common-anchor-header">لمستخدمي Helm</h3><p>قبل الترقية، تأكد من أن</p>
 <ul>
@@ -97,7 +98,7 @@ helm repo update milvus
         ></path>
       </svg>
     </button></h2><p>سيرشدك هذا القسم إلى خطوات إنشاء مثيل Milvus جديد باستخدام Pulsar v2.</p>
-<h3 id="For-Milvus-Operator-users" class="common-anchor-header">لمستخدمي مشغل Milvus</h3><p>قبل أن تقوم بنشر Milvus v2.5.x، تحتاج إلى تنزيل ملف تعريف موارد العميل (CRD) الخاص ب Milvus وتحريره. للحصول على تفاصيل حول كيفية تثبيت Milvus باستخدام مشغل Milvus، راجع <a href="/docs/ar/install_cluster-milvusoperator.md">تثبيت مجموعة Milvus العنقودية باستخدام مشغل Milvus</a>.</p>
+<h3 id="For-Milvus-Operator-users" class="common-anchor-header">لمستخدمي مشغل Milvus</h3><p>قبل أن تقوم بنشر Milvus v2.5.x، تحتاج إلى تنزيل ملف تعريف موارد العميل (CRD) الخاص ب Milvus وتحريره. للحصول على تفاصيل حول كيفية تثبيت Milvus باستخدام مشغل Milvus، راجع <a href="/docs/ar/v2.5.x/install_cluster-milvusoperator.md">تثبيت مجموعة Milvus العنقودية باستخدام مشغل Milvus</a>.</p>
 <ol>
 <li><p>قم بتنزيل ملف CRD.</p>
 <pre><code translate="no" class="language-bash">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
@@ -122,7 +123,7 @@ helm repo update milvus
 <pre><code translate="no" class="language-bash">kubectl apply -f milvus_cluster_default.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="For-Helm-users" class="common-anchor-header">لمستخدمي Helm</h3><p>قبل أن تقوم بنشر Milvus v2.5.x، يمكنك إما إعداد ملف <code translate="no">values.yaml</code> أو استخدام المعلمات المضمنة لتحديد إصدار Pulsar. للحصول على تفاصيل حول كيفية تثبيت Milvus باستخدام Helm، راجع <a href="/docs/ar/install_cluster-helm.md">تثبيت مجموعة Milvus العنقودية باستخدام Helm</a>.</p>
+<h3 id="For-Helm-users" class="common-anchor-header">لمستخدمي Helm</h3><p>قبل أن تقوم بنشر Milvus v2.5.x، يمكنك إما إعداد ملف <code translate="no">values.yaml</code> أو استخدام المعلمات المضمنة لتحديد إصدار Pulsar. للحصول على تفاصيل حول كيفية تثبيت Milvus باستخدام Helm، راجع <a href="/docs/ar/v2.5.x/install_cluster-helm.md">تثبيت مجموعة Milvus العنقودية باستخدام Helm</a>.</p>
 <ul>
 <li><p>استخدم المعلمات المضمنة لتحديد إصدار Pulsar كإصدار v2.</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">true</span>,pulsarv3.enabled=<span class="hljs-literal">false</span>

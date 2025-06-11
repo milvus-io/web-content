@@ -3,6 +3,7 @@ id: use-json-fields.md
 title: JSON 字段
 summary: JSON 字段是一种标量字段，与向量嵌入一起以键值对的形式存储附加信息。下面是一个以 JSON 格式存储数据的示例：
 ---
+
 <h1 id="JSON-Field" class="common-anchor-header">JSON 字段<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +50,7 @@ summary: JSON 字段是一种标量字段，与向量嵌入一起以键值对的
     </button></h2><ul>
 <li><p><strong>字段大小</strong>：JSON 字段的大小限制为 65,536 字节。</p></li>
 <li><p><strong>嵌套字典</strong>：JSON 字段值中的任何嵌套字典都将作为纯字符串存储。</p></li>
-<li><p><strong>默认值</strong>：JSON 字段不支持默认值。不过，您可以将<code translate="no">nullable</code> 属性设置为<code translate="no">True</code> ，以允许空值。有关详情，请参阅<a href="/docs/zh/nullable-and-default.md">Nullable &amp; Default</a>。</p></li>
+<li><p><strong>默认值</strong>：JSON 字段不支持默认值。不过，您可以将<code translate="no">nullable</code> 属性设置为<code translate="no">True</code> ，以允许空值。有关详情，请参阅<a href="/docs/zh/v2.5.x/nullable-and-default.md">Nullable &amp; Default</a>。</p></li>
 <li><p><strong>类型匹配</strong>：如果 JSON 字段的键值是整数或浮点数，则只能（通过表达式过滤器）与另一个相同类型的数字键进行比较。</p></li>
 <li><p><strong>命名</strong>：命名 JSON 键时，建议只使用字母、数字和下划线。使用其他字符可能会在过滤或搜索时造成问题。</p></li>
 <li><p><strong>字符串处理</strong>：Milvus 在 JSON 字段中存储输入的字符串值，不进行语义转换。例如</p>
@@ -57,7 +58,7 @@ summary: JSON 字段是一种标量字段，与向量嵌入一起以键值对的
 <li><p><code translate="no">'a&quot;b'</code>,<code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\\'b'</code>, 和<code translate="no">&quot;a\\&quot;b&quot;</code> 会按原样存储。</p></li>
 <li><p><code translate="no">'a'b'</code> 和 被视为无效。<code translate="no">&quot;a&quot;b&quot;</code> </p></li>
 </ul></li>
-<li><p><strong>JSON 索引</strong>：为 JSON 字段编制索引时，可以在 JSON 字段中指定一个或多个路径，以加快过滤速度。每增加一条路径都会增加索引开销，因此请仔细规划索引策略。有关 JSON 字段索引的更多注意事项，请参阅<a href="/docs/zh/use-json-fields.md#Considerations-on-JSON-indexing">JSON 索引注意事项</a>。</p></li>
+<li><p><strong>JSON 索引</strong>：为 JSON 字段编制索引时，可以在 JSON 字段中指定一个或多个路径，以加快过滤速度。每增加一条路径都会增加索引开销，因此请仔细规划索引策略。有关 JSON 字段索引的更多注意事项，请参阅<a href="/docs/zh/v2.5.x/use-json-fields.md#Considerations-on-JSON-indexing">JSON 索引注意事项</a>。</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">添加 JSON 字段<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,8 +89,8 @@ client = MilvusClient(uri=SERVER_ADDR)
 
 <span class="hljs-comment"># Define the collection schema</span>
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_fields=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Add a JSON field that supports null values</span>
@@ -97,6 +98,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;metadata&quot;</span
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -248,26 +250,27 @@ schema.WithField(entity.NewField().
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-comment"># JSON field name to index</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Index type. Set to INVERTED</span>
-    index_name=<span class="hljs-string">&quot;json_index_1&quot;</span>, <span class="hljs-comment"># Index name</span>
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;]&quot;</span>, <span class="hljs-comment"># Path in JSON field to index</span>
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span> <span class="hljs-comment"># Data type that the extracted JSON values will be cast to</span>
-    }
+field_name=<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-comment"># JSON field name to index</span>
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Index type. Set to INVERTED</span>
+index_name=<span class="hljs-string">&quot;json_index_1&quot;</span>, <span class="hljs-comment"># Index name</span>
+params={
+<span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;]&quot;</span>, <span class="hljs-comment"># Path in JSON field to index</span>
+<span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span> <span class="hljs-comment"># Data type that the extracted JSON values will be cast to</span>
+}
 )
 
 <span class="hljs-comment"># Example 2: Index &#x27;price&#x27; as a numeric type (double)</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
-    index_name=<span class="hljs-string">&quot;json_index_2&quot;</span>,
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>,
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;double&quot;</span>
-    }
+field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
+index_name=<span class="hljs-string">&quot;json_index_2&quot;</span>,
+params={
+<span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>,
+<span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;double&quot;</span>
+}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
@@ -415,19 +418,20 @@ curl --request POST \
 <li>Milvus 不会解析或转换超出你指定铸造的 JSON 键。如果源数据不一致（例如，某些行的键<code translate="no">&quot;k&quot;</code> 存储的是字符串，而其他行存储的是数字），某些行将不会被索引。</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">索引一个向量字段</h3><p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 创建了一个索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。你也可以为每个字段自定义索引类型和参数。有关详情，请参阅<a href="/docs/zh/index-explained.md">索引解释</a>。</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">索引一个向量字段</h3><p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 创建了一个索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。你也可以为每个字段自定义索引类型和参数。有关详情，请参阅<a href="/docs/zh/v2.5.x/index-explained.md">索引解释</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,  <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>  <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
+field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Use automatic indexing to simplify complex index settings</span>
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> <span class="hljs-comment"># Specify similarity metric type, options include L2, COSINE, or IP</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -565,10 +569,11 @@ data = [
 ]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -710,7 +715,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
       </svg>
     </button></h2><p>插入实体后，使用<code translate="no">query</code> 方法检索与指定过滤表达式匹配的实体。</p>
 <div class="alert note">
-<p>对于允许空值的 JSON 字段，如果整个 JSON 对象缺失或设置为<code translate="no">None</code> ，则该字段将被视为空值。有关详细信息，请参阅<a href="/docs/zh/basic-operators.md#JSON-Fields-with-Null-Values">带空值的 JSON 字段</a>。</p>
+<p>对于允许空值的 JSON 字段，如果整个 JSON 对象缺失或设置为<code translate="no">None</code> ，则该字段将被视为空值。有关详细信息，请参阅<a href="/docs/zh/v2.5.x/basic-operators.md#JSON-Fields-with-Null-Values">带空值的 JSON 字段</a>。</p>
 </div>
 <p>检索<code translate="no">metadata</code> 不为空值的实体：</p>
 <div class="multipleCode">
@@ -720,9 +725,9 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata is not null&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-comment"># Expected result:</span>
@@ -733,10 +738,11 @@ res = client.query(
 
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: None, &#x27;brand&#x27;: &#x27;BrandB&#x27;}, &#x27;price&#x27;: 59.99, &#x27;in_stock&#x27;: None}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment"># &quot;{&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: None, &#x27;brand&#x27;: &#x27;BrandB&#x27;}, &#x27;price&#x27;: 59.99, &#x27;in_stock&#x27;: None}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 
@@ -792,9 +798,9 @@ fmt.Println(<span class="hljs-string">&quot;metadata&quot;</span>, rs.GetColumn(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
 
 <span class="hljs-comment"># Expected result:</span>
@@ -806,9 +812,10 @@ res = client.query(
 
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;pk&#x27;: 1, &#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}}&quot;</span>
+<span class="hljs-comment"># &quot;{&#x27;pk&#x27;: 1, &#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;] == \&quot;electronics\&quot;&quot;</span>;
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
@@ -882,12 +889,12 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
-    limit=<span class="hljs-number">5</span>,
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-    output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>],
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
+limit=<span class="hljs-number">5</span>,
+search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>],
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>
 )
 
 <span class="hljs-comment"># Expected result:</span>
@@ -900,9 +907,10 @@ res = client.search(
 
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: -0.2479381263256073, &#x27;entity&#x27;: {&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}}}]&quot;</span>
+<span class="hljs-comment"># &quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: -0.2479381263256073, &#x27;entity&#x27;: {&#x27;metadata&#x27;: {&#x27;product_info&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;price&#x27;: 99.99, &#x27;in_stock&#x27;: True, &#x27;tags&#x27;: [&#x27;summer_sale&#x27;]}}}]&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
@@ -983,4 +991,4 @@ curl --request POST \
 
 <span class="hljs-comment">##{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 还支持高级 JSON 过滤操作符，如<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 和<code translate="no">JSON_CONTAINS_ANY</code> ，这可以进一步增强查询功能。更多详情，请参阅<a href="/docs/zh/json-operators.md">JSON 操作符</a>。</p>
+<p>此外，Milvus 还支持高级 JSON 过滤操作符，如<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 和<code translate="no">JSON_CONTAINS_ANY</code> ，这可以进一步增强查询功能。更多详情，请参阅<a href="/docs/zh/v2.5.x/json-operators.md">JSON 操作符</a>。</p>

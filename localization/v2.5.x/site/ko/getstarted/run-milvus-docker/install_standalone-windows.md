@@ -5,6 +5,7 @@ related_key: Docker
 summary: Windows용 Docker 데스크톱으로 Milvus를 독립형으로 설치하는 방법을 알아보세요.
 title: Docker에서 Milvus 실행(Linux)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">Docker에서 Milvus 실행하기(Windows)<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,6 +65,7 @@ title: Docker에서 Milvus 실행(Linux)
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
 </code></pre></li>
+
 <li><p>다운로드한 스크립트를 실행하여 Milvus를 Docker 컨테이너로 시작합니다.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;standalone.bat start​
 Wait for Milvus starting...​
@@ -71,6 +73,7 @@ Start successfully.​
 To change the default Milvus configuration, edit user.yaml and restart the service.​
 
 </code></pre>
+
 <p>설치 스크립트를 실행한 후</p>
 <ul>
 <li><p>포트 <strong>19530에서</strong> <strong>밀버스-스탠다드얼론이라는</strong> 이름의 도커 컨테이너가 시작되었습니다.</p></li>
@@ -88,6 +91,7 @@ Delete Milvus container successfully. # Container has been removed.​
 Delete successfully. # Data has been removed.​
 
 </code></pre></li>
+
 </ol>
 <h3 id="From-WSL-2​" class="common-anchor-header">WSL 2에서</h3><p>Windows에서 Linux 명령어와 셸 스크립트를 사용하여 Milvus를 시작하려면 WSL 2 명령어를 이미 설치했는지 확인하세요. WSL 2 명령어를 설치하는 방법에 대한 자세한 내용은 이 <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft 문서를</a> 참조하세요.</p>
 <ol>
@@ -97,6 +101,7 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>설치 스크립트를 다운로드합니다.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Download the installation script​</span>
 $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh​
@@ -105,6 +110,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Milvus를 도커 컨테이너로 시작합니다.</p>
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
@@ -112,6 +118,7 @@ Start successfully.​
 To change the default Milvus configuration, add your settings to the user.yaml file and <span class="hljs-keyword">then</span> restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>다음 명령어를 사용하여 Milvus 컨테이너와 저장된 데이터를 관리할 수 있습니다.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Stop Milvus​</span>
 $ bash standalone_embed.sh stop​
@@ -123,6 +130,7 @@ Delete Milvus container successfully.​
 Delete successfully.​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="Run-Milvus-with-Docker-Compose​" class="common-anchor-header">Docker Compose로 Milvus 실행하기<button data-href="#Run-Milvus-with-Docker-Compose​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,6 +161,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
+
 <p>네트워크 연결에 따라 Milvus 설치를 위한 이미지를 다운로드하는 데 시간이 걸릴 수 있습니다. 밀버스 <strong>스탠드얼론</strong>, <strong>밀버스 미니오</strong>, <strong>밀버스-etcd라는</strong> 이름의 컨테이너가 가동되면 다음과 같은 것을 확인할 수 있습니다.</p>
 <ul>
 <li><p><strong>milvus-etcd</strong> 컨테이너는 호스트에 포트를 노출하지 않고 데이터를 현재 폴더의 <strong>볼륨/etcd에</strong> 매핑합니다.</p></li>
@@ -169,10 +178,12 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>Milvus 구성 파일을 다운로드합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Milvus를 시작합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
@@ -181,6 +192,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="FAQs​" class="common-anchor-header">FAQ<button data-href="#FAQs​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -214,6 +226,7 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
+
 <li><p>WSL이 제대로 설치되었는지 확인합니다.</p>
 <p>다음 명령을 실행하여 WSL 2 명령을 설치하거나 업데이트할 수 있습니다.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
@@ -221,6 +234,7 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
+
 <li><p>Docker 데몬이 시작되었는지 확인합니다.</p>
 <p>Docker Desktop의 설치 디렉터리로 이동하여 <code translate="no">.\DockerCli.exe -SwitchDaemon</code> 을 실행하여 Docker Daemon을 시작해야 합니다.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
@@ -228,6 +242,7 @@ C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
+
 <li><p><strong>관리자</strong> 모드에서 Docker Desktop을 시작했는지 확인합니다.</p>
 <p>관리자 모드에서 Docker Desktop을 시작했는지 확인합니다. 그러려면 <strong>Docker Desktop을</strong> 마우스 오른쪽 버튼으로 클릭하고 <strong>관리자 권한으로 실행을</strong> 선택합니다.</p>
 <p>
@@ -275,27 +290,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>Docker에 Milvus를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p><a href="/docs/ko/quickstart.md">빠른 시작을</a> 확인하여 Milvus가 수행할 수 있는 작업을 확인합니다.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/quickstart.md">빠른 시작을</a> 확인하여 Milvus가 수행할 수 있는 작업을 확인합니다.</p></li>
 <li><p>Milvus의 기본 동작에 대해 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/manage_databases.md">데이터베이스 관리</a></li>
-<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/v2.5.x/manage_databases.md">데이터베이스 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
+<li><a href="/docs/ko/v2.5.x/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/v2.5.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
-<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
 <li><p>Milvu 클러스터를 클라우드에 배포하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ko/gcp.md">구글 클라우드</a></li>
-<li><a href="/docs/ko/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ko/v2.5.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ko/v2.5.x/gcp.md">구글 클라우드</a></li>
+<li><a href="/docs/ko/v2.5.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
-<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
-<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
+<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/v2.5.x/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
+<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/v2.5.x/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
+<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/v2.5.x/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
 </ul>

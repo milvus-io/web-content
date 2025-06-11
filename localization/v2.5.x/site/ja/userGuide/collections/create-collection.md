@@ -4,6 +4,7 @@ title: コレクションの作成
 summary: >-
   スキーマ、インデックスパラメータ、メトリックタイプ、作成時にロードするかどうかを定義して、コレクションを作成できます。このページでは、コレクションをゼロから作成する方法を紹介します。
 ---
+
 <h1 id="Create-Collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,9 +40,9 @@ summary: >-
 <p>スキーマ、インデックス・パラメータ、メトリック・タイプ、作成時にロードするかどうかなど、コ レクションのあらゆる側面を決定して、コレクションが要件を完全に満たすようにすることができます。</p>
 <p>コレクションを作成するには</p>
 <ul>
-<li><p><a href="/docs/ja/create-collection.md#Create-Schema">スキーマの作成</a></p></li>
-<li><p><a href="/docs/ja/create-collection.md#Optional-Set-Index-Parameters">インデックスパラメータを設定する</a>（オプション）</p></li>
-<li><p><a href="/docs/ja/create-collection.md#Create-a-Collection">コレクションの作成</a></p></li>
+<li><p><a href="/docs/ja/v2.5.x/create-collection.md#Create-Schema">スキーマの作成</a></p></li>
+<li><p><a href="/docs/ja/v2.5.x/create-collection.md#Optional-Set-Index-Parameters">インデックスパラメータを設定する</a>（オプション）</p></li>
+<li><p><a href="/docs/ja/v2.5.x/create-collection.md#Create-a-Collection">コレクションの作成</a></p></li>
 </ul>
 <h2 id="Create-Schema" class="common-anchor-header">スキーマの作成<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,10 +59,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スキーマはコレクションのデータ構造を定義します。コレクションを作成するときは、要件に基づいてスキーマを設計する必要があります。詳細については、<a href="/docs/ja/schema.md">スキーマの</a>説明を参照してください。</p>
+    </button></h2><p>スキーマはコレクションのデータ構造を定義します。コレクションを作成するときは、要件に基づいてスキーマを設計する必要があります。詳細については、<a href="/docs/ja/v2.5.x/schema.md">スキーマの</a>説明を参照してください。</p>
 <p>以下のコード・スニペットは、enabled ダイナミック・フィールドと、<code translate="no">my_id</code> 、<code translate="no">my_vector</code> 、<code translate="no">my_varchar</code> という 3 つの必須フィールドを持つスキーマを作成します。</p>
 <div class="alert note">
-<p>任意のスカラー・フィールドにデフォルト値を設定し、それを NULL 可能にすることができます。詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
+<p>任意のスカラー・フィールドにデフォルト値を設定し、それを NULL 可能にすることができます。詳細については、「<a href="/docs/ja/v2.5.x/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -69,14 +70,14 @@ summary: >-
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 <span class="hljs-comment"># 3.1. Create schema</span>
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># 3.2. Add fields to schema</span>
@@ -84,6 +85,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;my_id&quot;</span>, 
 schema.add_field(field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -224,7 +226,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
     </button></h2><p>特定のフィールドにインデックスを作成すると、そのフィールドに対する検索が高速化されます。インデックスは、コレクション内のエンティティの順序を記録します。以下のコードスニペットに示すように、<code translate="no">metric_type</code> と<code translate="no">index_type</code> を使って、Milvus がフィールドにインデックスを付ける適切な方法を選択し、ベクトル埋め込み間の類似性を測定することができます。</p>
 <p>Milvusでは、すべてのベクトルフィールドのインデックスタイプとして<code translate="no">AUTOINDEX</code> 、必要に応じてメトリックタイプとして<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> のいずれかを使用することができます。</p>
 <p>上記のコード・スニペットで示したように、ベクトル・フィールドにはインデックス・タイプとメトリック・タイプの両方を設定し、スカラー・フィールドにはインデックス・タイプのみを設定する必要があります。ベクトル・フィールドにはインデックスが必須であり、フィルタリング条件で頻繁に使用されるスカラー・フィールドにはインデックスを作成することをお勧めします。</p>
-<p>詳細は、「<a href="/docs/ja/index-vector-fields.md">ベクトル・フィールドのインデックス</a>」と「<a href="/docs/ja/index-scalar-fields.md">スカラー・フィールドのインデックス</a>」を参照してください。</p>
+<p>詳細は、「<a href="/docs/ja/v2.5.x/index-vector-fields.md">ベクトル・フィールドのインデックス</a>」と「<a href="/docs/ja/v2.5.x/index-scalar-fields.md">スカラー・フィールドのインデックス</a>」を参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -232,16 +234,17 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># 3.4. Add indexes</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
+field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
 )
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -324,7 +327,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -332,9 +335,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
 
@@ -415,7 +419,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -423,9 +427,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.6 Create a collection and index it separately</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq2</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_2&quot;</span>)
@@ -566,12 +571,13 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+\&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
+\&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">mmapを有効にする</h3><p>Milvusはデフォルトですべてのコレクションでmmapを有効にし、Milvusがフィールドデータを完全にロードする代わりに、生のフィールドデータをメモリにマッピングすることを可能にします。これにより、メモリフットプリントが削減され、コレクション容量が増加します。mmapの詳細については、<a href="/docs/ja/mmap.md">Use mmapを</a>参照してください。</p>
+
+<h3 id="Enable-mmap" class="common-anchor-header">mmapを有効にする</h3><p>Milvusはデフォルトですべてのコレクションでmmapを有効にし、Milvusがフィールドデータを完全にロードする代わりに、生のフィールドデータをメモリにマッピングすることを可能にします。これにより、メモリフットプリントが削減され、コレクション容量が増加します。mmapの詳細については、<a href="/docs/ja/v2.5.x/mmap.md">Use mmapを</a>参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">プレーンテキスト</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -586,13 +592,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With MMap</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq4</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_4&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_4&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
+.build();
 client.createCollection(customizedSetupReq4);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">create_collection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_4&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -645,13 +652,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With TTL</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq5</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)
+.build();
 client.createCollection(customizedSetupReq5);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_5&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -702,13 +710,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With consistency level</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq6</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_6&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_6&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.consistencyLevel(ConsistencyLevel.BOUNDED)
+.build();
 client.createCollection(customizedSetupReq6);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_6&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -744,6 +753,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>一貫性レベルの詳細については、<a href="/docs/ja/tune_consistency.md">一貫性レベルを</a>参照してください。</p>
+<p>一貫性レベルの詳細については、<a href="/docs/ja/v2.5.x/tune_consistency.md">一貫性レベルを</a>参照してください。</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">ダイナミック・フィールドの有効化</h3><p>コレクション内の動的フィールドは、<strong>$metaという</strong>名前の予約済みJavaScript Object Notation（JSON）フィールドです。このフィールドを有効にすると、Milvusは各エンティティで保持されるすべての非スキーマ定義フィールドとその値をkey-valueペアとして予約フィールドに保存します。</p>
-<p>動的フィールドの使用方法の詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
+<p>動的フィールドの使用方法の詳細については、<a href="/docs/ja/v2.5.x/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>

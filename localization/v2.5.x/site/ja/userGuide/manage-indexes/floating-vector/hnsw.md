@@ -4,6 +4,7 @@ title: HNSW
 summary: >-
   HNSWインデックスはグラフベースのインデックス作成アルゴリズムであり、高次元の浮動ベクトルを検索する際のパフォーマンスを向上させることができる。優れた検索精度と低レイテンシを提供する一方で、階層的なグラフ構造を維持するために高いメモリオーバーヘッドを必要とする。
 ---
+
 <h1 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +55,7 @@ summary: >-
 <li><p><code translate="no">efConstruction</code>:インデックス構築時に考慮される候補の数。一般に<code translate="no">efConstruction</code> が高いほど質の高いグラフになるが、構築により多くの時間を要する。</p></li>
 <li><p><code translate="no">ef</code>:検索時に評価される近傍ノードの数。<code translate="no">ef</code> を増やすと、最近傍を見つける可能性が向上しますが、検索プロセスが遅くなります。</p></li>
 </ul>
-<p>これらの設定をニーズに合わせて調整する方法の詳細については、<a href="/docs/ja/hnsw.md#Index-params">Index paramsを</a>参照してください。</p>
+<p>これらの設定をニーズに合わせて調整する方法の詳細については、<a href="/docs/ja/v2.5.x/hnsw.md#Index-params">Index paramsを</a>参照してください。</p>
 <h2 id="Build-index" class="common-anchor-header">インデックスの構築<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,28 +78,29 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
-        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
+<span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>この設定では</p>
 <ul>
 <li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">HNSW</code> とします。</p></li>
-<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> があります。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
+<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> があります。詳細については、<a href="/docs/ja/v2.5.x/metric.md">メトリック・タイプを</a>参照してください。</p></li>
 <li><p><code translate="no">params</code>:インデックスを構築するための追加設定オプション。</p>
 <ul>
 <li><p><code translate="no">M</code>:各ノードが接続できる近隣ノードの最大数。</p></li>
 <li><p><code translate="no">efConstruction</code>:インデックス構築時に接続を考慮する近隣候補の数。</p></li>
 </ul>
-<p><code translate="no">HNSW</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/hnsw.md#Index-building-params">インデックス構築パラメータ</a> を参照してください。</p></li>
+<p><code translate="no">HNSW</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/v2.5.x/hnsw.md#Index-building-params">インデックス構築パラメータ</a> を参照してください。</p></li>
 </ul>
-<p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>
+<p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/v2.5.x/create-collection.md">コレクションの作成</a> を参照してください。</p>
 <h2 id="Search-on-index" class="common-anchor-header">インデックスでの検索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,20 +124,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">10</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>この構成では</p>
 <ul>
 <li><p><code translate="no">params</code>:インデックスで検索するための追加構成オプション。</p>
 <ul>
 <li><code translate="no">ef</code>:検索時に考慮する近隣の数。</li>
 </ul>
-<p><code translate="no">HNSW</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/hnsw.md#Index-specific-search-params">インデックス固有の検索パラメータ</a> を参照。</p></li>
+<p><code translate="no">HNSW</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/v2.5.x/hnsw.md#Index-specific-search-params">インデックス固有の検索パラメータ</a> を参照。</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">インデックスパラメータ<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +156,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/hnsw.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/v2.5.x/hnsw.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -174,7 +177,7 @@ res = MilvusClient.search(
      <td><p>より多くの接続候補が探索されるため、<code translate="no">efConstruction</code> を大きくすると、<strong>通常より正確なインデックスが</strong>得られる。しかし、これは<strong>インデックス作成時間の延長と、</strong>作成中の<strong>メモリ使用量の増加にも</strong>つながります。特にインデックス作成時間がそれほど重要でないシナリオでは、精度を向上させるために<code translate="no">efConstruction</code> を増加させることを検討してください。</p><p>リ ソ ース制約が懸念 さ れ る 場合には、<code translate="no">efConstruction</code> を減らして イ ンデ ッ ク ス作成を高速化す る こ と を検討 し て く だ さ い。</p><p>ほとんどの場合、この範囲内の値を設定することを推奨します：[50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<a href="/docs/ja/hnsw.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<a href="/docs/ja/v2.5.x/hnsw.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>

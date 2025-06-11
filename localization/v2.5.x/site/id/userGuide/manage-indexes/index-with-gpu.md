@@ -6,6 +6,7 @@ summary: >-
   untuk meningkatkan performa pencarian.
 title: Indeks dengan GPU
 ---
+
 <h1 id="Index-with-GPU" class="common-anchor-header">Indeks dengan GPU<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ title: Indeks dengan GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini menguraikan langkah-langkah untuk membuat indeks dengan dukungan GPU di Milvus, yang secara signifikan dapat meningkatkan performa pencarian dalam skenario throughput tinggi dan recall tinggi. Untuk detail tentang jenis indeks GPU yang didukung oleh Milvus, lihat <a href="/docs/id/gpu_index.md">Indeks GPU</a>.</p>
+    </button></h1><p>Panduan ini menguraikan langkah-langkah untuk membuat indeks dengan dukungan GPU di Milvus, yang secara signifikan dapat meningkatkan performa pencarian dalam skenario throughput tinggi dan recall tinggi. Untuk detail tentang jenis indeks GPU yang didukung oleh Milvus, lihat <a href="/docs/id/v2.5.x/gpu_index.md">Indeks GPU</a>.</p>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Mengonfigurasi pengaturan Milvus untuk kontrol memori GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,10 +120,11 @@ title: Indeks dengan GPU
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-    index_params=index_params
+field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Search" class="common-anchor-header">Pencarian<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,12 +182,13 @@ collection.create_index(
 collection.load()
 
 collection.search(
-    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-    param=search_params,
-    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+param=search_params,
+limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Limits" class="common-anchor-header">Batas<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

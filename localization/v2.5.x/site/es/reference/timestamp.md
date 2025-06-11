@@ -5,6 +5,7 @@ summary: >-
   Conozca el concepto de marca de tiempo y los cuatro parámetros principales
   relacionados con la marca de tiempo en la base de datos vectorial Milvus.
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">Sello de tiempo<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,5 +106,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Aprenda cómo <a href="/docs/es/consistency.md">la marca de tiempo de garantía permite la consistencia ajustable en Milvus</a></li>
+<li>Aprenda cómo <a href="/docs/es/v2.5.x/consistency.md">la marca de tiempo de garantía permite la consistencia ajustable en Milvus</a></li>
 </ul>
