@@ -1,14 +1,14 @@
 ---
 id: tei-ranker.md
-title: TEI Ranker
+title: TEI-RangiererCompatible with Milvus 2.6.x
 summary: >-
-  The TEI Ranker leverages the Text Embedding Inference (TEI) service from
-  Hugging Face to enhance search relevance through semantic reranking. It
-  represents an advanced approach to search result ordering that goes beyond
-  traditional vector similarity.
+  Der TEI Ranker nutzt den Text Embedding Inference (TEI) Service von Hugging
+  Face, um die Suchrelevanz durch semantisches Reranking zu verbessern. Er
+  stellt einen fortschrittlichen Ansatz für die Ordnung von Suchergebnissen dar,
+  der über die traditionelle Vektorähnlichkeit hinausgeht.
 beta: Milvus 2.6.x
 ---
-<h1 id="TEI-Ranker" class="common-anchor-header">TEI Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#TEI-Ranker" class="anchor-icon" translate="no">
+<h1 id="TEI-Ranker" class="common-anchor-header">TEI-Rangierer<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#TEI-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +23,9 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The TEI Ranker leverages the <a href="/docs/tei-ranker.md">Text Embedding Inference (TEI)</a> service from Hugging Face to enhance search relevance through semantic reranking. It represents an advanced approach to search result ordering that goes beyond traditional vector similarity.</p>
-<p>Compared to <a href="/docs/vllm-ranker.md">vLLM Ranker</a>, TEI Ranker offers straightforward integration with Hugging Face’s ecosystem and pre-trained reranking models, making it ideal for applications where ease of deployment and maintenance are priorities.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>Der TEI Ranker nutzt den <a href="/docs/de/tei-ranker.md">Text Embedding Inference (TEI)</a> Service von Hugging Face, um die Suchrelevanz durch semantisches Reranking zu verbessern. Er stellt einen fortschrittlichen Ansatz für die Ordnung von Suchergebnissen dar, der über die traditionelle Vektorähnlichkeit hinausgeht.</p>
+<p>Im Vergleich zu <a href="/docs/de/vllm-ranker.md">vLLM Ranker</a> bietet TEI Ranker eine einfache Integration in das Hugging Face-Ökosystem und in vortrainierte Reranking-Modelle, wodurch er sich ideal für Anwendungen eignet, bei denen eine einfache Bereitstellung und Wartung im Vordergrund stehen.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,12 +40,12 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before implementing vLLM Ranker in Milvus, ensure you have:</p>
+    </button></h2><p>Bevor Sie vLLM Ranker in Milvus implementieren, müssen Sie sicherstellen, dass Sie über Folgendes verfügen</p>
 <ul>
-<li><p>A Milvus collection with a <code translate="no">VARCHAR</code> field containing the text to be reranked</p></li>
-<li><p>A running TEI service with reranking capabilities. For detailed instructions on setting up a TEI service, refer to the <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">official TEI documentation</a>.</p></li>
+<li><p>Eine Milvus-Sammlung mit einem <code translate="no">VARCHAR</code> -Feld, das den Text enthält, der gerankt werden soll</p></li>
+<li><p>Ein laufender TEI-Dienst mit Ranglistenfunktionen. Detaillierte Anweisungen zum Einrichten eines TEI-Dienstes finden Sie in der <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">offiziellen TEI-Dokumentation</a>.</p></li>
 </ul>
-<h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">Create a TEI ranker function<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
+<h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">Erstellen einer TEI-Ranker-Funktion<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +60,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use TEI Ranker in your Milvus application, create a Function object that specifies how the reranking should operate. This function will be passed to Milvus search operations to enhance result ranking.</p>
+    </button></h2><p>Um TEI Ranker in Ihrer Milvus-Anwendung zu verwenden, erstellen Sie ein Function-Objekt, das angibt, wie das Reranking funktionieren soll. Diese Funktion wird an Milvus-Suchoperationen weitergegeben, um das Ranking der Ergebnisse zu verbessern.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -82,7 +82,7 @@ tei_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Apply to standard vector search<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Auf die Standard-Vektorsuche anwenden<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,7 +97,7 @@ tei_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To apply TEI Ranker to a standard vector search:</p>
+    </button></h2><p>Um TEI Ranker auf eine Standard-Vektorsuche anzuwenden:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = milvus_client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -109,7 +109,7 @@ results = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Apply-to-hybrid-search" class="common-anchor-header">Apply to hybrid search<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+<h2 id="Apply-to-hybrid-search" class="common-anchor-header">Auf hybride Suche anwenden<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -124,7 +124,7 @@ results = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>TEI Ranker can also be used with hybrid search to combine dense and sparse retrieval methods:</p>
+    </button></h2><p>TEI Ranker kann auch mit hybrider Suche verwendet werden, um dichte und spärliche Suchmethoden zu kombinieren:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Configure dense vector search</span>

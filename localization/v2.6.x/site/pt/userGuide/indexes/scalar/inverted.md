@@ -1,13 +1,14 @@
 ---
 id: inverted.md
-title: INVERTED
+title: INVERTIDO
 summary: >-
-  The INVERTED index in Milvus is designed to accelerate filter queries on both
-  scalar fields and structured JSON fields. By mapping terms to the documents or
-  records that contain them, inverted indexes greatly improve query performance
-  compared to brute-force searches.
+  O índice INVERTED no Milvus foi concebido para acelerar as consultas de filtro
+  em campos escalares e campos JSON estruturados. Ao mapear termos para os
+  documentos ou registos que os contêm, os índices invertidos melhoram
+  consideravelmente o desempenho das consultas em comparação com as pesquisas de
+  força bruta.
 ---
-<h1 id="INVERTED" class="common-anchor-header">INVERTED<button data-href="#INVERTED" class="anchor-icon" translate="no">
+<h1 id="INVERTED" class="common-anchor-header">INVERTIDO<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">INVERTED</code> index in Milvus is designed to accelerate filter queries on both scalar fields and structured JSON fields. By mapping terms to the documents or records that contain them, inverted indexes greatly improve query performance compared to brute-force searches.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>O índice <code translate="no">INVERTED</code> em Milvus foi concebido para acelerar as consultas de filtro em campos escalares e campos JSON estruturados. Ao mapear termos para os documentos ou registos que os contêm, os índices invertidos melhoram consideravelmente o desempenho das consultas em comparação com as pesquisas de força bruta.</p>
+<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,25 +39,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Powered by <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus implements inverted indexing to accelerate filter queries, especially for textual data. Here’s how it works:</p>
+    </button></h2><p>Com base no <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, o Milvus implementa a indexação invertida para acelerar as consultas de filtro, especialmente para dados textuais. Veja como funciona:</p>
 <ol>
-<li><p><strong>Tokenize the Data</strong>: Milvus takes your raw data—in this example, two sentences:</p>
+<li><p><strong>Tokenize os dados</strong>: O Milvus pega nos seus dados em bruto - neste exemplo, duas frases:</p>
 <ul>
-<li><p><strong>“Milvus is a cloud-native vector database.”</strong></p></li>
-<li><p><strong>“Milvus is very good at performance.”</strong></p></li>
+<li><p><strong>"Milvus é um banco de dados vetorial nativo da nuvem".</strong></p></li>
+<li><p><strong>"Milvus é muito bom em desempenho".</strong></p></li>
 </ul>
-<p>and breaks them into unique words (e.g., <em>Milvus</em>, <em>is</em>, <em>cloud-native</em>, <em>vector</em>, <em>database</em>, <em>very</em>, <em>good</em>, <em>at</em>, <em>performance</em>).</p></li>
-<li><p><strong>Build the Term Dictionary</strong>: These unique words are stored in a sorted list called the <strong>Term Dictionary</strong>. This dictionary lets Milvus quickly check if a word exists and locate its position in the index.</p></li>
-<li><p><strong>Create the Inverted List</strong>: For each word in the Term Dictionary, Milvus keeps an <strong>Inverted List</strong> showing which documents contain that word. For instance, <strong>“Milvus”</strong> appears in both sentences, so its inverted list points to both document IDs.</p></li>
+<p>e divide-as em palavras únicas (por exemplo, <em>Milvus</em>, <em>is</em>, <em>cloud-native</em>, <em>vetor</em>, <em>database</em>, <em>very</em>, <em>good</em>, <em>at</em>, <em>performance</em>).</p></li>
+<li><p><strong>Criar o dicionário de termos</strong>: Essas palavras exclusivas são armazenadas em uma lista ordenada chamada <strong>Dicionário de termos</strong>. Este dicionário permite ao Milvus verificar rapidamente se uma palavra existe e localizar a sua posição no índice.</p></li>
+<li><p><strong>Criar a Lista Invertida</strong>: Para cada palavra no Dicionário de Termos, o Milvus mantém uma <strong>Lista Invertida</strong> que mostra quais os documentos que contêm essa palavra. Por exemplo, <strong>"Milvus"</strong> aparece em ambas as frases, por isso a sua lista invertida aponta para ambos os IDs de documentos.</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
-    <span>Inverted</span>
-  </span>
-</p>
-<p>Because the dictionary is sorted, term-based filtering can be handled efficiently. Instead of scanning all documents, Milvus just looks up the term in the dictionary and retrieves its inverted list—significantly speeding up searches and filters on large datasets.</p>
-<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">Index a regular scalar field<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
+   </span> <span class="img-wrapper"> <span>Invertida</span> </span></p>
+<p>Como o dicionário está ordenado, a filtragem baseada em termos pode ser tratada de forma eficiente. Em vez de procurar em todos os documentos, o Milvus apenas procura o termo no dicionário e recupera a sua lista invertida - acelerando significativamente as pesquisas e filtros em grandes conjuntos de dados.</p>
+<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">Indexar um campo escalar regular<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +70,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For scalar fields like <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, and <strong>ARRAY</strong>, creating an inverted index is straightforward. Use the <code translate="no">create_index()</code> method with the <code translate="no">index_type</code> parameter set to <code translate="no">&quot;INVERTED&quot;</code>.</p>
+    </button></h2><p>Para campos escalares como <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong> e <strong>ARRAY</strong>, a criação de um índice invertido é simples. Utilize o método <code translate="no">create_index()</code> com o parâmetro <code translate="no">index_type</code> definido como <code translate="no">&quot;INVERTED&quot;</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -90,7 +89,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-a-JSON-field" class="common-anchor-header">Index a JSON field<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Index-a-JSON-field" class="common-anchor-header">Indexar um campo JSON<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,12 +104,12 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus extends its indexing capabilities to JSON fields, allowing you to efficiently filter on nested or structured data stored within a single column. Unlike scalar fields, when indexing a JSON field you must provide two additional parameters:</p>
+    </button></h2><p>O Milvus estende as suas capacidades de indexação a campos JSON, permitindo-lhe filtrar eficientemente dados aninhados ou estruturados armazenados numa única coluna. Ao contrário dos campos escalares, ao indexar um campo JSON, é necessário fornecer dois parâmetros adicionais:</p>
 <ul>
-<li><p><code translate="no">json_path</code><strong>:</strong> Specifies the nested key to index.</p></li>
-<li><p><code translate="no">json_cast_type</code><strong>:</strong> Defines the data type (e.g., <code translate="no">&quot;varchar&quot;</code>, <code translate="no">&quot;double&quot;</code>, or <code translate="no">&quot;bool&quot;</code>) to which the extracted JSON value will be cast.</p></li>
+<li><p><code translate="no">json_path</code><strong>:</strong> Especifica a chave aninhada a ser indexada.</p></li>
+<li><p><code translate="no">json_cast_type</code><strong>:</strong> Define o tipo de dados (por exemplo, <code translate="no">&quot;varchar&quot;</code>, <code translate="no">&quot;double&quot;</code>, ou <code translate="no">&quot;bool&quot;</code>) para o qual o valor JSON extraído será convertido.</p></li>
 </ul>
-<p>For example, consider a JSON field named <code translate="no">metadata</code> with the following structure:</p>
+<p>Por exemplo, considere um campo JSON denominado <code translate="no">metadata</code> com a seguinte estrutura:</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;metadata&quot;: {
     &quot;product_info&quot;: {
@@ -123,7 +122,7 @@ client.create_index(
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>To create inverted indexes on specific JSON paths, you can use the following approach:</p>
+<p>Para criar índices invertidos em caminhos JSON específicos, pode utilizar a seguinte abordagem:</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string.</span>
@@ -151,44 +150,43 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Example Value</p></th>
+     <th><p>Parâmetro</p></th>
+     <th><p>Descrição</p></th>
+     <th><p>Exemplo Valor</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>Name of the JSON field in your schema.</p></td>
+     <td><p>Nome do campo JSON no seu esquema.</p></td>
      <td><p><code translate="no">"metadata"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Index type to create; currently only <code translate="no">INVERTED</code> is supported for JSON path indexing.</p></td>
+     <td><p>Tipo de índice a criar; atualmente, apenas <code translate="no">INVERTED</code> é suportado para indexação de caminhos JSON.</p></td>
      <td><p><code translate="no">"INVERTED"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(Optional) A custom index name. Specify different names if you create multiple indexes on the same JSON field.</p></td>
+     <td><p>(Opcional) Um nome de índice personalizado. Especifique nomes diferentes se criar vários índices no mesmo campo JSON.</p></td>
      <td><p><code translate="no">"json_index_1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code translate="no">metadata["product_info"]["category"]</code> or <code translate="no">metadata["tags"][0]</code>).
- If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
+     <td><p>Especifica qual o caminho JSON a indexar. Você pode direcionar chaves aninhadas, posições de matriz ou ambos (por exemplo, <code translate="no">metadata["product_info"]["category"]</code> ou <code translate="no">metadata["tags"][0]</code>). Se o caminho estiver ausente ou o elemento da matriz não existir para uma linha específica, essa linha será simplesmente ignorada durante a indexação e nenhum erro será lançado.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
+     <td><p>Tipo de dados para o qual o Milvus converterá os valores JSON extraídos ao criar o índice. Valores válidos:</p>
 <ul>
-<li><p><code translate="no">"bool"</code> or <code translate="no">"BOOL"</code></p></li>
-<li><p><code translate="no">"double"</code> or <code translate="no">"DOUBLE"</code></p></li>
-<li><p><code translate="no">"varchar"</code> or <code translate="no">"VARCHAR"</code></p>
-<p><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If the cast fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</p></li>
+<li><p><code translate="no">"bool"</code> ou <code translate="no">"BOOL"</code></p></li>
+<li><p><code translate="no">"double"</code> ou <code translate="no">"DOUBLE"</code></p></li>
+<li><p><code translate="no">"varchar"</code> ou <code translate="no">"VARCHAR"</code></p>
+<p><strong>Nota</strong>: Para valores inteiros, o Milvus utiliza internamente o double para o índice. Os números inteiros grandes acima de 2^53 perdem a precisão. Se a conversão falhar (devido a incompatibilidade de tipos), nenhum erro é lançado e o valor dessa linha não é indexado.</p></li>
 </ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
-<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">Considerations on JSON indexing<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
+<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">Considerações sobre a indexação JSON<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,22 +202,22 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Filtering logic</strong>:</p>
+<li><p><strong>Lógica de filtragem</strong>:</p>
 <ul>
-<li><p>If you <strong>create a double-type index</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), only numeric-type filter conditions can use the index. If the filter compares a double index to a non-numeric condition, Milvus falls back to brute force search.</p></li>
-<li><p>If you <strong>create a varchar-type index</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), only string-type filter conditions can use the index. Otherwise, Milvus falls back to brute force.</p></li>
-<li><p><strong>Boolean</strong> indexing behaves similarly to varchar-type.</p></li>
+<li><p>Se <strong>criar um índice de tipo duplo</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), apenas as condições de filtro de tipo numérico podem utilizar o índice. Se o filtro comparar um índice duplo com uma condição não numérica, o Milvus recorre à pesquisa de força bruta.</p></li>
+<li><p>Se <strong>criar um índice do tipo varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), apenas as condições de filtragem do tipo string podem utilizar o índice. Caso contrário, o Milvus volta à força bruta.</p></li>
+<li><p>A indexação<strong>booleana</strong> comporta-se de forma semelhante à do tipo varchar.</p></li>
 </ul></li>
-<li><p><strong>Term expressions</strong>:</p>
+<li><p><strong>Expressões de termos</strong>:</p>
 <ul>
-<li>You can use <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. However, the index works only for scalar values stored under that path. If <code translate="no">json[&quot;field&quot;]</code> is an array, the query falls back to brute force (array-type indexing is not yet supported).</li>
+<li>Pode utilizar <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. No entanto, o índice funciona apenas para valores escalares armazenados sob esse caminho. Se <code translate="no">json[&quot;field&quot;]</code> for uma matriz, a consulta volta à força bruta (a indexação do tipo matriz ainda não é suportada).</li>
 </ul></li>
-<li><p><strong>Numeric precision</strong>:</p>
+<li><p><strong>Precisão numérica</strong>:</p>
 <ul>
-<li>Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>53</mn></msup></mrow><annotation encoding="application/x-tex">2^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, it loses precision, and queries on those out-of-range values may not match exactly.</li>
+<li>Internamente, o Milvus indexa todos os campos numéricos como duplos. Se um valor numérico exceder <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, perde a precisão, e as consultas sobre esses valores fora do intervalo podem não corresponder exatamente.</li>
 </ul></li>
-<li><p><strong>Data integrity</strong>:</p>
+<li><p><strong>Integridade dos dados</strong>:</p>
 <ul>
-<li>Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key <code translate="no">&quot;k&quot;</code> while others store a number), some rows will not be indexed.</li>
+<li>O Milvus não analisa nem transforma chaves JSON para além do casting especificado. Se os dados de origem forem inconsistentes (por exemplo, algumas linhas armazenam uma cadeia de caracteres para a chave <code translate="no">&quot;k&quot;</code> enquanto outras armazenam um número), algumas linhas não serão indexadas.</li>
 </ul></li>
 </ul>

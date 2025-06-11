@@ -1,14 +1,13 @@
 ---
 id: add-fields-to-an-existing-collection.md
-title: Add Fields to an Existing Collection
+title: إضافة حقول إلى مجموعة موجودةCompatible with Milvus 2.6.x
 summary: >-
-  Milvus allows you to dynamically add new fields to existing collections,
-  making it easy to evolve your data schema as your application needs change.
-  This guide shows you how to add fields in different scenarios using practical
-  examples.
+  يسمح لك Milvus بإضافة حقول جديدة ديناميكيًا إلى المجموعات الموجودة، مما يسهل
+  تطوير مخطط بياناتك مع تغير احتياجات تطبيقك. يوضح لك هذا الدليل كيفية إضافة
+  حقول في سيناريوهات مختلفة باستخدام أمثلة عملية.
 beta: Milvus 2.6.x
 ---
-<h1 id="Add-Fields-to-an-Existing-Collection" class="common-anchor-header">Add Fields to an Existing Collection<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-Fields-to-an-Existing-Collection" class="anchor-icon" translate="no">
+<h1 id="Add-Fields-to-an-Existing-Collection" class="common-anchor-header">إضافة حقول إلى مجموعة موجودة<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-Fields-to-an-Existing-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +22,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus allows you to dynamically add new fields to existing collections, making it easy to evolve your data schema as your application needs change. This guide shows you how to add fields in different scenarios using practical examples.</p>
-<h2 id="Considerations" class="common-anchor-header">Considerations<button data-href="#Considerations" class="anchor-icon" translate="no">
+    </button></h1><p>يسمح لك Milvus بإضافة حقول جديدة ديناميكيًا إلى المجموعات الموجودة، مما يسهل تطوير مخطط بياناتك مع تغير احتياجات تطبيقك. يوضح لك هذا الدليل كيفية إضافة حقول في سيناريوهات مختلفة باستخدام أمثلة عملية.</p>
+<h2 id="Considerations" class="common-anchor-header">الاعتبارات<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,16 +38,16 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before adding fields to your collection, keep these important points in mind:</p>
+    </button></h2><p>قبل إضافة حقول إلى مجموعتك، ضع هذه النقاط المهمة في الاعتبار:</p>
 <ul>
-<li><p>You can add scalar fields (<code translate="no">INT64</code>, <code translate="no">VARCHAR</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, etc.). Vector fields cannot be added to existing collections.</p></li>
-<li><p>New fields must be nullable (nullable=True) to accommodate existing entities that don’t have values for the new field.</p></li>
-<li><p>Adding fields to loaded collections increases memory usage.</p></li>
-<li><p>There’s a maximum limit on total fields per collection. For details, refer to <a href="/docs/limitations.md#Number-of-resources-in-a-collection">Milvus Limits</a>.</p></li>
-<li><p>Field names must be unique among static fields.</p></li>
-<li><p>You cannot add a <code translate="no">$meta</code> field to enable dynamic field functionality for collections that weren’t originally created with <code translate="no">enable_dynamic_field=True</code>.</p></li>
+<li><p>يمكنك إضافة حقول قياسية (<code translate="no">INT64</code> ، <code translate="no">VARCHAR</code> ، ، <code translate="no">FLOAT</code> ، <code translate="no">DOUBLE</code> ، إلخ). لا يمكن إضافة الحقول المتجهة إلى المجموعات الموجودة.</p></li>
+<li><p>يجب أن تكون الحقول الجديدة قابلة للإلغاء (nullable=صحيح) لاستيعاب الكيانات الموجودة التي لا تحتوي على قيم للحقل الجديد.</p></li>
+<li><p>تؤدي إضافة حقول إلى المجموعات المحملة إلى زيادة استخدام الذاكرة.</p></li>
+<li><p>يوجد حد أقصى لإجمالي الحقول لكل مجموعة. لمزيد من التفاصيل، راجع <a href="/docs/ar/limitations.md#Number-of-resources-in-a-collection">حدود ميلفوس</a>.</p></li>
+<li><p>يجب أن تكون أسماء الحقول فريدة بين الحقول الثابتة.</p></li>
+<li><p>لا يمكنك إضافة حقل <code translate="no">$meta</code> لتمكين وظيفة الحقل الديناميكي للمجموعات التي لم يتم إنشاؤها في الأصل باستخدام <code translate="no">enable_dynamic_field=True</code>.</p></li>
 </ul>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,16 +62,16 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This guide assumes you have:</p>
+    </button></h2><p>يفترض هذا الدليل أن لديك</p>
 <ul>
-<li><p>A running Milvus instance</p></li>
-<li><p>Milvus SDK installed</p></li>
-<li><p>An existing collection</p></li>
+<li><p>مثيل Milvus قيد التشغيل</p></li>
+<li><p>تم تثبيت Milvus SDK</p></li>
+<li><p>مجموعة موجودة</p></li>
 </ul>
 <div class="alert note">
-<p>Refer to our <a href="/docs/create-collection.md">Create Collection</a> for collection creation and basic operations.</p>
+<p>ارجع إلى <a href="/docs/ar/create-collection.md">إنشاء مجموعة لإنشاء مجموعة</a> والعمليات الأساسية.</p>
 </div>
-<h2 id="Basic-usage" class="common-anchor-header">Basic usage<button data-href="#Basic-usage" class="anchor-icon" translate="no">
+<h2 id="Basic-usage" class="common-anchor-header">الاستخدام الأساسي<button data-href="#Basic-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +93,7 @@ client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>  <span class="hljs-comment"># Replace with your Milvus server URI</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-1-Quickly-add-nullable-fields" class="common-anchor-header">Scenario 1: Quickly add nullable fields<button data-href="#Scenario-1-Quickly-add-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Scenario-1-Quickly-add-nullable-fields" class="common-anchor-header">السيناريو 1: إضافة حقول قابلة للإلغاء بسرعة<button data-href="#Scenario-1-Quickly-add-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -109,7 +108,7 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The simplest way to extend your collection is by adding nullable fields. This is perfect when you need to quickly add new attributes to your data.</p>
+    </button></h2><p>إن أبسط طريقة لتوسيع مجموعتك هي إضافة حقول قابلة للإلغاء. هذا مثالي عندما تحتاج إلى إضافة سمات جديدة بسرعة إلى بياناتك.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a nullable field to an existing collection</span>
 <span class="hljs-comment"># This operation:</span>
 <span class="hljs-comment"># - Returns almost immediately (non-blocking)</span>
@@ -123,11 +122,11 @@ client.add_collection_field(
     <span class="hljs-comment"># Allows NULL values for existing entities</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="What-to-expect" class="common-anchor-header">What to expect</h3><ul>
-<li><p><strong>Existing entities</strong> will have NULL for the new field</p></li>
-<li><p><strong>New entities</strong> can have either NULL or actual values</p></li>
-<li><p><strong>Field availability</strong> occurs almost immediately with minimal delay due to internal schema synchronization</p></li>
-<li><p><strong>Queryable immediately</strong> after the brief synchronization period</p></li>
+<h3 id="What-to-expect" class="common-anchor-header">ما يجب توقعه</h3><ul>
+<li><p>ستحتوي<strong>الكيانات الحالية</strong> على NULL للحقل الجديد</p></li>
+<li><p>يمكن أن تحتوي<strong>الكيانات الجديدة</strong> على قيم فارغة أو فعلية</p></li>
+<li><p>يحدث<strong>توافر الحقل</strong> على الفور تقريبًا بأقل قدر من التأخير بسبب المزامنة الداخلية للمخطط</p></li>
+<li><p><strong>يمكن الاستعلام عنها مباشرة</strong> بعد فترة المزامنة القصيرة</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query result</span>
 {
@@ -135,7 +134,7 @@ client.add_collection_field(
     <span class="hljs-string">&#x27;created_timestamp&#x27;</span>: <span class="hljs-literal">None</span>  <span class="hljs-comment"># New field shows NULL for existing entities</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Scenario-2-Add-fields-with-default-values" class="common-anchor-header">Scenario 2: Add fields with default values<button data-href="#Scenario-2-Add-fields-with-default-values" class="anchor-icon" translate="no">
+<h2 id="Scenario-2-Add-fields-with-default-values" class="common-anchor-header">السيناريو 2: إضافة حقول بقيم افتراضية<button data-href="#Scenario-2-Add-fields-with-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,7 +149,7 @@ client.add_collection_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you want existing entities to have a meaningful initial value instead of NULL, specify default values.</p>
+    </button></h2><p>عندما تريد أن يكون للكيانات الموجودة قيمة أولية ذات معنى بدلاً من NULL، حدد القيم الافتراضية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a field with default value</span>
 <span class="hljs-comment"># This operation:</span>
 <span class="hljs-comment"># - Sets the default value for all existing entities</span>
@@ -166,11 +165,11 @@ client.add_collection_field(
     <span class="hljs-comment"># Also used for new entities if no value provided</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="What-to-expect" class="common-anchor-header">What to expect</h3><ul>
-<li><p><strong>Existing entities</strong> will have the default value (<code translate="no">&quot;standard&quot;</code>) for the newly added field</p></li>
-<li><p><strong>New entities</strong> can override the default value or use it if no value is provided</p></li>
-<li><p><strong>Field availability</strong> occurs almost immediately with minimal delay</p></li>
-<li><p><strong>Queryable immediately</strong> after the brief synchronization period</p></li>
+<h3 id="What-to-expect" class="common-anchor-header">ما يجب توقعه</h3><ul>
+<li><p>ستحتوي<strong>الكيانات الحالية</strong> على القيمة الافتراضية (<code translate="no">&quot;standard&quot;</code>) للحقل المضاف حديثًا</p></li>
+<li><p>يمكن للكيانات<strong>الجديدة</strong> تجاوز القيمة الافتراضية أو استخدامها إذا لم يتم توفير قيمة</p></li>
+<li><p>يحدث<strong>توافر الحقل</strong> على الفور تقريبًا بأقل تأخير</p></li>
+<li><p><strong>يمكن الاستعلام مباشرةً</strong> بعد فترة المزامنة القصيرة</p></li>
 </ul>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Example query result</span>
 {
@@ -178,7 +177,7 @@ client.add_collection_field(
     <span class="hljs-string">&#x27;priority_level&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>  <span class="hljs-comment"># Shows default value for existing entities</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -193,7 +192,7 @@ client.add_collection_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="common-anchor-header">Can I enable dynamic schema functionality by adding a <code translate="no">$meta</code> field?</h3><p>No, you cannot use <code translate="no">add_collection_field</code> to add a <code translate="no">$meta</code> field to enable dynamic field functionality. Dynamic schema must be enabled when creating the collection by setting <code translate="no">enable_dynamic_field=True</code> in the schema.</p>
+    </button></h2><h3 id="Can-I-enable-dynamic-schema-functionality-by-adding-a-meta-field" class="common-anchor-header">هل يمكنني تمكين وظيفة المخطط الديناميكي عن طريق إضافة حقل <code translate="no">$meta</code> ؟</h3><p>لا، لا يمكنك استخدام <code translate="no">add_collection_field</code> لإضافة حقل <code translate="no">$meta</code> لتمكين وظيفة الحقل الديناميكي. يجب تمكين المخطط الديناميكي عند إنشاء المجموعة عن طريق تعيين <code translate="no">enable_dynamic_field=True</code> في المخطط.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This is NOT supported</span>
 client.add_collection_field(
     collection_name=<span class="hljs-string">&quot;existing_collection&quot;</span>,
@@ -208,8 +207,8 @@ client.create_collection(
     enable_dynamic_field=<span class="hljs-literal">True</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">What happens when I add a field with the same name as a dynamic field key?</h3><p>When your collection has dynamic field enabled (<code translate="no">$meta</code> exists), you can add static fields that have the same name as existing dynamic field keys. The new static field will mask the dynamic field key, but the original dynamic data is preserved.</p>
-<p><strong>Example scenario:</strong></p>
+<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">ماذا يحدث عندما أقوم بإضافة حقل بنفس اسم مفتاح الحقل الديناميكي؟</h3><p>عندما تكون مجموعتك ممكّنة للحقل الديناميكي (<code translate="no">$meta</code> موجود)، يمكنك إضافة حقول ثابتة لها نفس اسم مفاتيح الحقول الديناميكية الموجودة. سيخفي الحقل الثابت الجديد مفتاح الحقل الديناميكي، ولكن يتم الاحتفاظ بالبيانات الديناميكية الأصلية.</p>
+<p><strong>مثال على السيناريو:</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Original collection with dynamic field enabled</span>
 <span class="hljs-comment"># Insert data with dynamic field keys</span>
 data = [{
@@ -237,14 +236,14 @@ new_data = [{
 }]
 client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>, data=new_data)
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>What to expect:</strong></p>
+<p><strong>ما يمكن توقعه:</strong></p>
 <ul>
-<li><p><strong>Existing entities</strong> will have NULL for the new static field <code translate="no">extra_info</code></p></li>
-<li><p><strong>New entities</strong> must use the static field’s data type (<code translate="no">INT64</code>)</p></li>
-<li><p><strong>Original dynamic field key values</strong> are preserved and accessible via <code translate="no">$meta</code> syntax</p></li>
-<li><p><strong>The static field masks the dynamic field key</strong> in normal queries</p></li>
+<li><p>ستحتوي<strong>الكيانات الحالية</strong> على NULL للحقل الثابت الجديد <code translate="no">extra_info</code></p></li>
+<li><p>يجب أن تستخدم<strong>الكيانات الجديدة</strong> نوع بيانات الحقل الثابت (<code translate="no">INT64</code>)</p></li>
+<li><p>يتم الاحتفاظ<strong>بقيم مفاتيح الحقل الديناميكي الأصلي</strong> ويمكن الوصول إليها عبر بناء الجملة <code translate="no">$meta</code> </p></li>
+<li><p><strong>يخفي الحقل الثابت مفتاح الحقل الديناميكي</strong> في الاستعلامات العادية</p></li>
 </ul>
-<p><strong>Accessing both static and dynamic values:</strong></p>
+<p><strong>الوصول إلى كل من القيم الثابتة والديناميكية</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Query static field only (dynamic field key is masked)</span>
 results = client.query(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
@@ -273,4 +272,4 @@ results = client.query(
 )
 <span class="hljs-comment"># Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">How long does it take for a new field to become available?</h3><p>Added fields become available almost immediately, but there may be a brief delay due to internal schema change broadcasting across the Milvus cluster. This synchronization ensures all nodes are aware of the schema update before processing queries involving the new field.</p>
+<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">كم من الوقت يستغرق الحقل الجديد ليصبح متاحًا؟</h3><p>تصبح الحقول المضافة متاحة على الفور تقريبًا، ولكن قد يكون هناك تأخير قصير بسبب بث تغيير المخطط الداخلي عبر مجموعة Milvus. تضمن هذه المزامنة أن تكون جميع العقد على علم بتحديث المخطط قبل معالجة الاستعلامات التي تتضمن الحقل الجديد.</p>

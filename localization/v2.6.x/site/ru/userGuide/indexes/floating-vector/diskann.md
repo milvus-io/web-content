@@ -2,11 +2,12 @@
 id: diskann.md
 title: DISKANN
 summary: >-
-  In large-scale scenarios, where datasets can include billions or even
-  trillions of vectors, standard in-memory indexing methods (e.g., HNSW,
-  IVF_FLAT) often fail to keep pace due to memory limitations. DISKANN offers a
-  disk-based approach that addresses these challenges by maintaining high search
-  accuracy and speed when the dataset size exceeds available RAM.
+  В крупномасштабных сценариях, где наборы данных могут включать миллиарды и
+  даже триллионы векторов, стандартные методы индексирования в памяти (например,
+  HNSW, IVF_FLAT) часто не успевают за скоростью из-за нехватки памяти. DISKANN
+  предлагает дисковый подход, который решает эти проблемы, сохраняя высокую
+  точность и скорость поиска, когда размер набора данных превышает объем
+  доступной оперативной памяти.
 ---
 <h1 id="DISKANN" class="common-anchor-header">DISKANN<button data-href="#DISKANN" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In large-scale scenarios, where datasets can include billions or even trillions of vectors, standard in-memory indexing methods (e.g., <a href="/docs/hnsw.md">HNSW</a>, <a href="/docs/ivf-flat.md">IVF_FLAT</a>) often fail to keep pace due to memory limitations. <strong>DISKANN</strong> offers a disk-based approach that addresses these challenges by maintaining high search accuracy and speed when the dataset size exceeds available RAM.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>В крупномасштабных сценариях, где наборы данных могут включать миллиарды и даже триллионы векторов, стандартные методы индексирования в памяти (например, <a href="/docs/ru/hnsw.md">HNSW</a>, <a href="/docs/ru/ivf-flat.md">IVF_FLAT</a>) часто не успевают за скоростью из-за ограничений памяти. <strong>DISKANN</strong> предлагает дисковый подход, который решает эти проблемы, сохраняя высокую точность и скорость поиска, когда размер набора данных превышает объем доступной оперативной памяти.</p>
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,59 +40,55 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>DISKANN</strong> combines two key techniques for efficient vector search:</p>
+    </button></h2><p><strong>DISKANN</strong> сочетает в себе две ключевые технологии для эффективного векторного поиска:</p>
 <ul>
-<li><p><strong>Vamana Graph</strong> – A <strong>disk-based</strong>, <strong>graph-based</strong> index that connects data points (or vectors) for efficient navigation during search.</p></li>
-<li><p><strong>Product Quantization (PQ)</strong> – An <strong>in-memory</strong> compression method that reduces the size of vectors, enabling quick approximate distance calculations between vectors.</p></li>
+<li><p><strong>Vamana Graph</strong> - <strong>дисковый</strong> индекс на <strong>основе графа</strong>, который соединяет точки данных (или векторы) для эффективной навигации во время поиска.</p></li>
+<li><p><strong>Product Quantization (PQ)</strong> - метод сжатия <strong>в памяти</strong>, который уменьшает размер векторов, позволяя быстро вычислять приблизительное расстояние между векторами.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">Index construction</h3><h4 id="Vamana-graph" class="common-anchor-header">Vamana graph</h4><p>The Vamana graph is central to DISKANN’s disk-based strategy. It can handle very large datasets because it does not need to fully reside in memory during or after construction.</p>
-<p>The following figure shows how a Vamana graph is constructed.</p>
+<h3 id="Index-construction" class="common-anchor-header">Построение индексов</h3><h4 id="Vamana-graph" class="common-anchor-header">Граф Вамана</h4><p>Граф Vamana занимает центральное место в дисковой стратегии DISKANN. Он может работать с очень большими наборами данных, поскольку ему не нужно полностью размещаться в памяти во время или после построения.</p>
+<p>На следующем рисунке показано, как строится граф Vamana.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
-    <span>Diskann</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
+   </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
-<li><p><strong>Initial random connections:</strong> Each data point (vector) is represented as a node in the graph. These nodes are initially connected randomly, forming a dense network. Typically, a node starts with around 500 edges (or connections) for broad connectivity.</p></li>
-<li><p><strong>Refining for efficiency:</strong> The initial random graph undergoes an optimization process to make it more efficient for searching. This involves two key steps:</p>
+<li><p><strong>Начальные случайные соединения:</strong> Каждая точка данных (вектор) представлена в виде узла в графе. Изначально эти узлы соединяются случайным образом, образуя плотную сеть. Обычно узел начинает иметь около 500 ребер (или связей) для обеспечения широкой связности.</p></li>
+<li><p><strong>Уточнение для повышения эффективности:</strong> Первоначальный случайный граф подвергается процессу оптимизации, чтобы сделать его более эффективным для поиска. Это включает в себя два ключевых этапа:</p>
 <ul>
-<li><p><strong>Pruning redundant edges:</strong> The algorithm discards unnecessary connections based on distances between nodes. This step prioritizes higher-quality edges.</p>
-<p>The <code translate="no">max_degree</code> parameter restricts the maximum number of edges per node. A higher <code translate="no">max_degree</code> results in a denser graph, potentially finding more relevant neighbors (higher recall) but also increasing memory usage and search time.</p></li>
-<li><p><strong>Adding strategic shortcuts:</strong> Vamana introduces long-range edges, connecting data points that are far apart in the vector space. These shortcuts allow searches to quickly jump across the graph, bypassing intermediate nodes and significantly speeding up navigation.</p>
-<p>The <code translate="no">search_list_size</code> parameter determines the breadth of the graph refinement process. A higher <code translate="no">search_list_size</code> extends the search for neighbors during construction and can improve final accuracy, but increases index-building time.</p></li>
+<li><p><strong>Обрезка лишних ребер:</strong> Алгоритм отбрасывает ненужные связи на основе расстояния между узлами. На этом этапе приоритет отдается более качественным ребрам.</p>
+<p>Параметр <code translate="no">max_degree</code> ограничивает максимальное количество ребер на узел. Более высокое значение <code translate="no">max_degree</code> приводит к увеличению плотности графа, что потенциально позволяет находить больше релевантных соседей (более высокий уровень запоминания), но также увеличивает объем памяти и время поиска.</p></li>
+<li><p><strong>Добавление стратегических кратчайших путей:</strong> Vamana вводит дальние ребра, соединяющие точки данных, которые находятся на большом расстоянии друг от друга в векторном пространстве. Эти ярлыки позволяют быстро перемещаться по графу, минуя промежуточные узлы и значительно ускоряя навигацию.</p>
+<p>Параметр <code translate="no">search_list_size</code> определяет широту процесса уточнения графа. Более высокий <code translate="no">search_list_size</code> расширяет поиск соседей во время построения и может повысить итоговую точность, но увеличивает время построения индекса.</p></li>
 </ul></li>
 </ol>
-<p>To learn more about parameter tuning, refer to <a href="/docs/diskann.md#diskann-params">DISKANN params</a>.</p>
-<h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN uses <strong>PQ</strong> to compress high-dimensional vectors into smaller representations (<strong>PQ codes</strong>), which are stored in memory for rapid approximate distance calculations.</p>
-<p>The <code translate="no">pq_code_budget_gb_ratio</code> parameter manages the memory footprint dedicated to storing these PQ codes. It represents a ratio between the total size of the vectors (in gigabytes) and the space allocated for storing the PQ codes. You can calculate the actual PQ code budget (in gigabytes) with this formula:</p>
+<p>Чтобы узнать больше о настройке параметров, обратитесь к разделу <a href="/docs/ru/diskann.md#diskann-params">DISKANN params</a>.</p>
+<h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN использует <strong>PQ</strong> для сжатия высокоразмерных векторов в более мелкие представления<strong>(PQ-коды</strong>), которые хранятся в памяти для быстрого вычисления приблизительного расстояния.</p>
+<p>Параметр <code translate="no">pq_code_budget_gb_ratio</code> управляет объемом памяти, выделенным для хранения этих PQ-кодов. Он представляет собой соотношение между общим размером векторов (в гигабайтах) и местом, выделенным для хранения PQ-кодов. Вы можете рассчитать фактический бюджет PQ-кодов (в гигабайтах) по этой формуле:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
 <button class="copy-code-btn"></button></code></pre>
-<p>where:</p>
+<p>где:</p>
 <ul>
-<li><p><code translate="no">vec_field_size_gb</code> is the total size of the vectors (in gigabytes).</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> is a user-defined ratio, representing the fraction of the total data size reserved for PQ codes. This parameter allows for a trade-off between search accuracy and memory resources. For more information on parameter tuning, refer to <a href="/docs/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>.</p></li>
+<li><p><code translate="no">vec_field_size_gb</code> общий размер векторов (в гигабайтах).</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> задаваемый пользователем коэффициент, представляющий собой долю общего объема данных, зарезервированную для PQ-кодов. Этот параметр позволяет найти компромисс между точностью поиска и ресурсами памяти. Дополнительные сведения о настройке параметров см. в разделе <a href="/docs/ru/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Конфигурации DISKANN</a>.</p></li>
 </ul>
-<p>For technical details on the underlying PQ method, refer to <a href="/docs/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
-<h3 id="Search-process" class="common-anchor-header">Search process</h3><p>Once the index (the Vamana graph on disk and PQ codes in memory) is built, DISKANN performs ANN searches as follows:</p>
+<p>Технические подробности о методе PQ см. в разделе <a href="/docs/ru/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
+<h3 id="Search-process" class="common-anchor-header">Процесс поиска</h3><p>После того как индекс (граф Vamana на диске и коды PQ в памяти) построен, DISKANN выполняет поиск ANN следующим образом:</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
-    <span>Diskann 2</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
+   </span> <span class="img-wrapper"> <span>Дисканн 2</span> </span></p>
 <ol>
-<li><p><strong>Query and entry point:</strong> A query vector is provided to locate its nearest neighbors. DISKANN starts from a selected entry point in the Vamana graph, often a node near the global centroid of the dataset. The global centroid represents the average of all vectors, which helps to minimize the traversal distance through the graph to find desired neighbors.</p></li>
-<li><p><strong>Neighborhood exploration:</strong> The algorithm gathers potential candidate neighbors (circles in red in the figure) from the edges of the current node, leveraging in-memory PQ codes to approximate the distances between these candidates and the query vector. These potential candidate neighbors are the nodes directly connected to the selected entry point through edges in the Vamana graph.</p></li>
-<li><p><strong>Selecting nodes for accurate distance calculation:</strong> From the approximate results, a subset of the most promising neighbors (circles in green in the figure) are selected for precise distance evaluations using their original, uncompressed vectors. This requires reading data from disk, which can be time-consuming. DISKANN uses two parameters to control this delicate balance between accuracy and speed:</p>
+<li><p><strong>Запрос и точка входа:</strong> Вектор запроса задается для поиска ближайших соседей. DISKANN начинает работу с выбранной точки входа в граф Вамана, часто это узел, расположенный вблизи глобального центроида набора данных. Глобальный центроид представляет собой среднее значение всех векторов, что позволяет минимизировать расстояние обхода графа для поиска нужных соседей.</p></li>
+<li><p><strong>Поиск соседей:</strong> Алгоритм собирает потенциальных соседей-кандидатов (круги красного цвета на рисунке) с ребер текущего узла, используя коды PQ в памяти для аппроксимации расстояний между этими кандидатами и вектором запроса. Эти потенциальные соседи-кандидаты - узлы, непосредственно связанные с выбранной точкой входа через ребра в графе Vamana.</p></li>
+<li><p><strong>Выбор узлов для точного расчета расстояния:</strong> Из приблизительных результатов выбирается подмножество наиболее перспективных соседей (круги зеленого цвета на рисунке) для точной оценки расстояния по их исходным, несжатым векторам. Это требует считывания данных с диска, что может занять много времени. DISKANN использует два параметра для контроля этого тонкого баланса между точностью и скоростью:</p>
 <ul>
-<li><p><code translate="no">beam_width_ratio</code>: A ration that controls the breadth of the search, determining how many candidate neighbors are selected in parallel to explore their neighbors. A larger <code translate="no">beam_width_ratio</code> results in a wider exploration, potentially leading to higher accuracy but also increasing computational cost and disk I/O. The beam width, or the number of nodes selected, is determined using the formula: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>: The proportion of memory allocated for caching frequently accessed disk data. This caching helps to minimize disk I/O, making repeated searches faster as the data is already in memory.</p></li>
+<li><p><code translate="no">beam_width_ratio</code>: Коэффициент, который управляет широтой поиска, определяя, сколько соседей-кандидатов выбирается параллельно для изучения их соседей. Большее значение <code translate="no">beam_width_ratio</code> приводит к более широкому поиску, что потенциально ведет к повышению точности, но также увеличивает вычислительные затраты и объем дисковых операций ввода-вывода. Ширина луча, или количество выбранных узлов, определяется по формуле: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>: Доля памяти, выделяемая для кэширования часто используемых дисковых данных. Такое кэширование позволяет минимизировать дисковый ввод-вывод и ускорить повторный поиск, поскольку данные уже находятся в памяти.</p></li>
 </ul>
-<p>To learn more about parameter tuning, refer to <a href="/docs/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>.</p></li>
-<li><p><strong>Iterative exploration:</strong> The search iteratively refines the set of candidates, repeatedly performing approximate evaluations (using PQ) followed by precise checks (using original vectors from disk) until a sufficient number of neighbors are found.</p></li>
+<p>Чтобы узнать больше о настройке параметров, обратитесь к разделу <a href="/docs/ru/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Конфигурации DISKANN</a>.</p></li>
+<li><p><strong>Итеративное исследование:</strong> Поиск итеративно уточняет набор кандидатов, многократно выполняя приблизительные оценки (используя PQ), а затем точные проверки (используя исходные векторы с диска), пока не будет найдено достаточное количество соседей.</p></li>
 </ol>
-<h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Enable DISKANN in Milvus<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
+<h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Включение DISKANN в Milvus<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,37 +103,37 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>By default, <strong>DISKANN</strong> is disabled in Milvus to prioritize the speed of in-memory indexes for datasets that fit comfortably in RAM. However, if you’re working with massive datasets or want to take advantage of <strong>DISKANN</strong>'s scalability and SSD optimization, you can easily enable it.</p>
-<p>Here’s how to enable DISKANN in Milvus:</p>
+    </button></h2><p>По умолчанию <strong>DISKANN</strong> в Milvus отключен, чтобы отдать предпочтение скорости индексов в памяти для наборов данных, которые удобно размещаются в оперативной памяти. Однако если вы работаете с большими массивами данных или хотите воспользоваться преимуществами масштабируемости <strong>DISKANN</strong> и оптимизации SSD, вы можете легко включить эту функцию.</p>
+<p>Вот как включить DISKANN в Milvus:</p>
 <ol>
-<li><p><strong>Update the Milvus Configuration File</strong></p>
+<li><p><strong>Обновите файл конфигурации Milvus</strong></p>
 <ol>
-<li><p>Locate your Milvus configuration file<strong>.</strong> (Refer to the Milvus documentation on Configuration for details on finding this file.)</p></li>
-<li><p>Find the <code translate="no">queryNode.enableDisk</code> parameter and set its value to <code translate="no">true</code>:</p>
+<li><p>Найдите свой файл конфигурации Milvus<strong>.</strong> (Подробные сведения о поиске этого файла см. в документации Milvus по конфигурации).</p></li>
+<li><p>Найдите параметр <code translate="no">queryNode.enableDisk</code> и установите его значение на <code translate="no">true</code>:</p>
 <pre><code translate="no" class="language-yaml"> <span class="hljs-attr">queryNode:</span>
      <span class="hljs-attr">enableDisk:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Enables query nodes to load and search using the on-disk index</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol></li>
-<li><p><strong>Optimize Storage for DISKANN</strong></p></li>
+<li><p><strong>Оптимизация хранилища для DISKANN</strong></p></li>
 </ol>
-<p>To ensure the best performance with DISKANN, it’s recommended to store your Milvus data on a fast NVMe SSD. Here’s how to do this for both Milvus Standalone and Cluster deployments:</p>
+<p>Чтобы обеспечить наилучшую производительность DISKANN, рекомендуется хранить данные Milvus на быстром NVMe SSD. Вот как это сделать для автономного и кластерного развертывания Milvus:</p>
 <ul>
 <li><p><strong>Milvus Standalone</strong></p>
 <ul>
-<li><p>Mount the Milvus data directory to an NVMe SSD within the Milvus container. You can do this in the <code translate="no">docker-compose.yml</code> file or using other container management tools.</p></li>
-<li><p>For example, if your NVMe SSD is mounted at <code translate="no">/mnt/nvme</code>, you would update the <code translate="no">volumes</code>section of your <code translate="no">docker-compose.yml</code> like this:</p></li>
+<li><p>Смонтируйте каталог данных Milvus на NVMe SSD в контейнере Milvus. Это можно сделать в файле <code translate="no">docker-compose.yml</code> или с помощью других инструментов управления контейнером.</p></li>
+<li><p>Например, если ваш NVMe SSD смонтирован по адресу <code translate="no">/mnt/nvme</code>, вы должны обновить раздел <code translate="no">volumes</code>в файле <code translate="no">docker-compose.yml</code> следующим образом:</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"> <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">/mnt/nvme/volumes/milvus:/var/lib/milvus</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Milvus Cluster</strong></p>
+<li><p><strong>Кластер Milvus</strong></p>
 <ul>
-<li><p>Mount the Milvus data directory to an NVMe SSD in both the QueryNode and IndexNode containers. You can achieve this through your container orchestration setup.</p></li>
-<li><p>By mounting the data on an NVMe SSD in both node types, you ensure fast read and write speeds for both search and indexing operations.</p></li>
+<li><p>Смонтируйте каталог данных Milvus на NVMe SSD в контейнерах QueryNode и IndexNode. Этого можно добиться с помощью настроек оркестровки контейнеров.</p></li>
+<li><p>Монтируя данные на NVMe SSD в обоих типах узлов, вы обеспечиваете высокую скорость чтения и записи для операций поиска и индексирования.</p></li>
 </ul></li>
 </ul>
-<p>Once you’ve made these changes, restart your Milvus instance for the settings to take effect. Now, Milvus will leverage DISKANN’s capabilities to handle large datasets, delivering efficient and scalable vector search.</p>
-<h2 id="Configure-DISKANN" class="common-anchor-header">Configure DISKANN<button data-href="#Configure-DISKANN" class="anchor-icon" translate="no">
+<p>После внесения этих изменений перезапустите экземпляр Milvus, чтобы настройки вступили в силу. Теперь Milvus будет использовать возможности DISKANN для работы с большими наборами данных, обеспечивая эффективный и масштабируемый векторный поиск.</p>
+<h2 id="Configure-DISKANN" class="common-anchor-header">Настройка DISKANN<button data-href="#Configure-DISKANN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,15 +148,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN parameters can be configured using two primary methods:</p>
+    </button></h2><p>Параметры DISKANN можно настроить двумя основными способами:</p>
 <ul>
-<li><p><strong>Milvus Configuration File:</strong> Adjust DISKANN parameters through the Milvus configuration file. This method is suitable for setting general configuration options for your Milvus instance.</p></li>
-<li><p><strong>Milvus SDK:</strong> Fine-tune DISKANN parameters using the Milvus SDK during index creation or search operations. This allows for more granular control and dynamic parameter adjustments based on specific use cases.</p></li>
+<li><p><strong>Файл конфигурации Milvus:</strong> настройка параметров DISKANN с помощью файла конфигурации Milvus. Этот метод подходит для настройки общих параметров конфигурации экземпляра Milvus.</p></li>
+<li><p><strong>Milvus SDK:</strong> Тонкая настройка параметров DISKANN с помощью Milvus SDK во время создания индекса или операций поиска. Это позволяет осуществлять более детальный контроль и динамическую настройку параметров в зависимости от конкретных случаев использования.</p></li>
 </ul>
 <div class="alert note">
-<p>The configuration made by the SDK overrides any settings defined in the configuration file, offering flexibility and control for specific applications and data sets.</p>
+<p>Настройки, выполненные с помощью SDK, отменяют любые параметры, заданные в файле конфигурации, обеспечивая гибкость и контроль для конкретных приложений и наборов данных.</p>
 </div>
-<h3 id="Milvus-configuration-file" class="common-anchor-header">Milvus configuration file</h3><p>Here’s an example of how to set DISKANN parameters within the <code translate="no">milvus.yaml</code> file:</p>
+<h3 id="Milvus-configuration-file" class="common-anchor-header">Файл конфигурации Milvus</h3><p>Вот пример настройки параметров DISKANN в файле <code translate="no">milvus.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
   <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># When enable this configuration, the index parameters defined following will be automatically populated as index parameters, without requiring user input.</span>
   <span class="hljs-attr">DISKANN:</span>
@@ -171,8 +168,8 @@ summary: >-
     <span class="hljs-attr">search:</span>
       <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="SDK-configuration" class="common-anchor-header">SDK configuration</h3><p>Here’s an example of how to set DISKANN parameters using Milvus SDK.</p>
-<h4 id="Build" class="common-anchor-header">Build</h4><p>To build an <code translate="no">IVF_FLAT</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
+<h3 id="SDK-configuration" class="common-anchor-header">Конфигурация SDK</h3><p>Здесь приведен пример настройки параметров DISKANN с помощью Milvus SDK.</p>
+<h4 id="Build" class="common-anchor-header">Построение</h4><p>Чтобы построить индекс <code translate="no">IVF_FLAT</code> по векторному полю в Milvus, используйте метод <code translate="no">add_index()</code>, указав <code translate="no">index_type</code>, <code translate="no">metric_type</code> и дополнительные параметры индекса.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -191,8 +188,8 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
-<h4 id="Search" class="common-anchor-header">Search</h4><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
+<p>После того как параметры индекса настроены, вы можете создать индекс, используя метод <code translate="no">create_index()</code> напрямую или передавая параметры индекса в метод <code translate="no">create_collection</code>. Подробнее см. в разделе <a href="/docs/ru/create-collection.md">Создание коллекции</a>.</p>
+<h4 id="Search" class="common-anchor-header">Поиск</h4><p>После того как индекс создан и сущности вставлены, можно выполнять поиск по сходству в индексе.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;beam_width_ratio&quot;</span>: <span class="hljs-number">4.0</span>, <span class="hljs-comment"># degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.</span>
@@ -207,7 +204,7 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="DISKANN-params" class="common-anchor-header">DISKANN params<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
+<h2 id="DISKANN-params" class="common-anchor-header">Параметры DISKANN<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -222,75 +219,67 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Fine-tuning DISKANN’s parameters allows you to tailor its behavior to your specific dataset and search workload, striking the right balance between speed, accuracy, and memory usage.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>These parameters influence how the DISKANN index is constructed. Adjusting them can affect the index size, build time, and search quality.</p>
+    </button></h2><p>Тонкая настройка параметров DISKANN позволяет адаптировать его поведение к конкретному набору данных и поисковой нагрузке, добиваясь правильного баланса между скоростью, точностью и использованием памяти.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индексов</h3><p>Эти параметры влияют на то, как строится индекс DISKANN. Их настройка может повлиять на размер индекса, время построения и качество поиска.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>Параметр</p></th>
+     <th><p>Описание</p></th>
+     <th><p>Диапазон значений</p></th>
+     <th><p>Предложение по настройке</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
      <td><p><code translate="no">max_degree</code></p></td>
-     <td><p>Controls the maximum number of connections (edges) each data point can have in the Vamana graph.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, 512]</p>
-<p><strong>Default value</strong>: <code translate="no">56</code></p></td>
-     <td><p>Higher values create denser graphs, potentially increasing recall (finding more relevant results) but also increasing memory usage and build time. 
- In most cases, we recommend you set a value within this range: [10, 100].</p></td>
+     <td><p>Управляет максимальным количеством связей (ребер), которые может иметь каждая точка данных в графе Vamana.</p></td>
+     <td><p><strong>Тип</strong>: Integer <strong>Диапазон</strong>: [1, 512]</p>
+<p><strong>Значение по умолчанию</strong>: <code translate="no">56</code></p></td>
+     <td><p>Более высокие значения создают более плотные графы, что потенциально повышает запоминаемость (поиск более релевантных результатов), но также увеличивает расход памяти и время построения. 
+ В большинстве случаев мы рекомендуем устанавливать значение в пределах этого диапазона: [10, 100].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>Determines the number of candidate neighbors considered for each data point during graph construction.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Default value</strong>: <code translate="no">100</code></p></td>
-     <td><p>Larger values lead to more comprehensive graphs, potentially improving search quality but also increasing build time. 
- In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
+     <td><p>Определяет количество соседей-кандидатов, рассматриваемых для каждой точки данных при построении графа.</p></td>
+     <td><p><strong>Тип</strong>: Integer <strong>Диапазон</strong>: [1, <em>int_max</em>].</p>
+<p><strong>Значение по умолчанию</strong>: <code translate="no">100</code></p></td>
+     <td><p>Большие значения приводят к созданию более полных графов, что потенциально улучшает качество поиска, но также увеличивает время построения. 
+ В большинстве случаев мы рекомендуем задавать значение в пределах этого диапазона: [K, 10K].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">search_cache_budget_gb_ratio</code></p></td>
-     <td><p>Controls the amount of memory allocated for caching frequently accessed parts of the graph during index construction.</p></td>
-     <td><p><strong>Type</strong>: Float
- <strong>Range</strong>: [0.0, 0.3)</p>
-<p><strong>Default value</strong>: <code translate="no">0.10</code></p></td>
-     <td><p>A higher value allocates more memory for caching, significantly reducing disk I/O but consuming more system memory. A lower value uses less memory for caching, potentially increasing the need for disk access.
- In most cases, we recommend you set a value within this range: [0.0, 0.3).</p></td>
+     <td><p>Управляет объемом памяти, выделяемой для кэширования часто используемых частей графа при построении индекса.</p></td>
+     <td><p><strong>Тип</strong>: Float <strong>Диапазон</strong>: [0.0, 0.3)</p>
+<p><strong>Значение по умолчанию</strong>: <code translate="no">0.10</code></p></td>
+     <td><p>При большем значении выделяется больше памяти для кэширования, что значительно сокращает дисковый ввод-вывод, но потребляет больше системной памяти. Меньшее значение использует меньше памяти для кэширования, потенциально увеличивая потребность в обращении к диску. В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [0.0, 0.3).</p></td>
    </tr>
    <tr>
      <td><p>PQ</p></td>
      <td><p><code translate="no">pq_code_budget_gb_ratio</code></p></td>
-     <td><p>Controls the size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data.</p></td>
-     <td><p><strong>Type</strong>: Float
- <strong>Range</strong>: (0.0, 0.25]</p>
-<p><strong>Default value</strong>: <code translate="no">0.125</code></p></td>
-     <td><p>A higher ratio leads to more accurate search results by allocating a larger proportion of memory for PQ codes, effectively storing more information about the original vectors. However, this requires more memory, limiting the capacity for handling large datasets.
- A lower ratio reduces memory usage but potentially sacrifices accuracy, as smaller PQ codes retain less information. This approach is suitable for scenarios where memory constraints are a concern, potentially enabling the indexing of larger datasets.</p>
-<p>In most cases, we recommend you set a value within this range: (0.0625, 0.25]</p></td>
+     <td><p>Регулирует размер PQ-кодов (сжатых представлений точек данных) по сравнению с размером несжатых данных.</p></td>
+     <td><p><strong>Тип</strong>: Плавающая величина <strong>Диапазон</strong>: (0.0, 0.25).</p>
+<p><strong>Значение по умолчанию</strong>: <code translate="no">0.125</code></p></td>
+     <td><p>Более высокое соотношение приводит к более точным результатам поиска за счет выделения большей доли памяти под PQ-коды, эффективно сохраняя больше информации об исходных векторах. Однако для этого требуется больше памяти, что ограничивает возможности работы с большими наборами данных. Более низкое соотношение уменьшает расход памяти, но потенциально приводит к снижению точности, так как меньшие PQ-коды сохраняют меньше информации. Этот подход подходит для сценариев, в которых ограничение памяти является проблемой, и потенциально позволяет индексировать большие наборы данных.</p>
+<p>В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: (0.0625, 0.25).</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>These parameters influence how DISKANN performs searches. Adjusting them can impact search speed, latency, and resource usage.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>Эти параметры влияют на то, как DISKANN выполняет поиск. Их настройка может повлиять на скорость поиска, задержку и использование ресурсов.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>Параметр</p></th>
+     <th><p>Описание</p></th>
+     <th><p>Диапазон значений</p></th>
+     <th><p>Предложение по настройке</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
      <td><p><code translate="no">beam_width_ratio</code></p></td>
-     <td><p>Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.</p></td>
-     <td><p><strong>Type</strong>: Float
- <strong>Range</strong>: [1, max(128 / CPU number, 16)]</p>
-<p><strong>Default value</strong>: <code translate="no">4.0</code></p></td>
-     <td><p>Higher values increase parallelism, which can speed up search on systems with powerful CPUs and SSDs. However, setting it too high might lead to excessive resource contention.
- In most cases, we recommend you set a value within this range: [1.0, 4.0].</p></td>
+     <td><p>Управляет степенью параллелизма при поиске, определяя максимальное количество параллельных запросов ввода-вывода с диска относительно количества доступных ядер процессора.</p></td>
+     <td><p><strong>Тип</strong>: Float <strong>Диапазон</strong>: [1, max(128 / количество CPU, 16)].</p>
+<p><strong>Значение по умолчанию</strong>: <code translate="no">4.0</code></p></td>
+     <td><p>Более высокие значения увеличивают параллелизм, что может ускорить поиск в системах с мощными процессорами и SSD. Однако слишком высокое значение может привести к чрезмерной нагрузке на ресурсы. В большинстве случаев мы рекомендуем устанавливать значение в пределах этого диапазона: [1.0, 4.0].</p></td>
    </tr>
 </table>

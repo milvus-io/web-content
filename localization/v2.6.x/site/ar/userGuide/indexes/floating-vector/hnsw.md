@@ -2,10 +2,10 @@
 id: hnsw.md
 title: HNSW
 summary: >-
-  The HNSW index is a graph-based indexing algorithm that can improve
-  performance when searching for high-dimensional floating vectors. It offers
-  excellent search accuracy and low latency, while it requires high memory
-  overhead to maintain its hierarchical graph structure.
+  فهرس HNSW عبارة عن خوارزمية فهرسة قائمة على الرسم البياني يمكنها تحسين الأداء
+  عند البحث عن المتجهات العائمة عالية الأبعاد. وهو يوفر دقة بحث ممتازة وزمن
+  استجابة منخفض، بينما يتطلب نفقات عالية للذاكرة للحفاظ على بنية الرسم البياني
+  الهرمي.
 ---
 <h1 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <strong>HNSW</strong> index is a <strong>graph-based</strong> indexing algorithm that can improve performance when searching for high-dimensional floating vectors. It offers <strong>excellent</strong> search accuracy and <strong>low</strong> latency, while it requires <strong>high</strong> memory overhead to maintain its hierarchical graph structure.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>فهرس <strong>HNSW</strong> عبارة عن خوارزمية فهرسة <strong>قائمة على الرسم البياني</strong> يمكنها تحسين الأداء عند البحث عن المتجهات العائمة عالية الأبعاد. وهي توفر دقة بحث <strong>ممتازة</strong> وزمن استجابة <strong>منخفض،</strong> بينما تتطلب ذاكرة <strong>عالية</strong> للحفاظ على بنية الرسم البياني الهرمي.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,29 +38,27 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The Hierarchical Navigable Small World (HNSW) algorithm builds a multi-layered graph, kind of like a map with different zoom levels. The <strong>bottom layer</strong> contains all the data points, while the <strong>upper layers</strong> consist of a subset of data points sampled from the lower layer.</p>
-<p>In this hierarchy, each layer contains nodes representing data points, connected by edges that indicate their proximity. The higher layers provide long-distance jumps to quickly get close to the target, while the lower layers enable a fine-grained search for the most accurate results.</p>
-<p>Here’s how it works:</p>
+    </button></h2><p>تُنشئ خوارزمية العالم الصغير القابل للملاحة الهرمي (HNSW) رسمًا بيانيًا متعدد الطبقات، يشبه الخريطة بمستويات تكبير مختلفة. تحتوي <strong>الطبقة السفلية</strong> على جميع نقاط البيانات، بينما تتكون <strong>الطبقات العليا</strong> من مجموعة فرعية من نقاط البيانات المأخوذة من الطبقة السفلية.</p>
+<p>في هذا التسلسل الهرمي، تحتوي كل طبقة على عقد تمثل نقاط البيانات، متصلة بحواف تشير إلى قربها. توفر الطبقات العليا قفزات بعيدة المدى للاقتراب بسرعة من الهدف، بينما تتيح الطبقات السفلى إمكانية البحث الدقيق للحصول على أدق النتائج.</p>
+<p>إليك كيفية عملها</p>
 <ol>
-<li><p><strong>Entry point</strong>: The search starts at a fixed entry point at the top layer, which is a pre-determined node in the graph.</p></li>
-<li><p><strong>Greedy search</strong>: The algorithm greedily moves to the closest neighbor at the current layer until it cannot get any closer to the query vector. The upper layers serve a navigational purpose, acting as a coarse filter to locate potential entry points for the finer search at the lower levels.</p></li>
-<li><p><strong>Layer descend</strong>: Once a <strong>local minimum</strong> is reached at the current layer, the algorithm jumps down to the lower layer, using a pre-established connection, and repeats the greedy search.</p></li>
-<li><p><strong>Final</strong> <strong>refinement</strong>: This process continues until the bottom layer is reached, where a final refinement step identifies the nearest neighbors.</p></li>
+<li><p><strong>نقطة الدخول</strong>: يبدأ البحث عند نقطة دخول ثابتة في الطبقة العليا، وهي عقدة محددة مسبقًا في الرسم البياني.</p></li>
+<li><p><strong>البحث الجشع</strong>: تنتقل الخوارزمية بشراهة إلى أقرب جار في الطبقة الحالية حتى لا تتمكن من الاقتراب من متجه الاستعلام. تخدم الطبقات العليا غرضًا ملاحيًا، حيث تعمل كمرشح خشن لتحديد نقاط الدخول المحتملة للبحث الأدق في المستويات الأدنى.</p></li>
+<li><p><strong>نزول الطبقة</strong>: بمجرد الوصول إلى <strong>الحد الأدنى المحلي</strong> في الطبقة الحالية، تقفز الخوارزمية إلى الطبقة السفلى، باستخدام اتصال محدد مسبقًا، وتكرر البحث الجشع.</p></li>
+<li><p><strong>التنقيح</strong><strong>النهائي</strong>: تستمر هذه العملية حتى الوصول إلى الطبقة السفلى، حيث تحدد خطوة التنقية النهائية أقرب الجيران.</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
-    <span>HNSW</span>
-  </span>
-</p>
-<p>The performance of HNSW depends on several key parameters that control both the structure of the graph and the search behavior. These include:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
+<p>يعتمد أداء HNSW على العديد من المعلمات الرئيسية التي تتحكم في كل من بنية الرسم البياني وسلوك البحث. وتشمل هذه المعلمات</p>
 <ul>
-<li><p><code translate="no">M</code>: The maximum number of edges or connections each node can have in the graph at each level of the hierarchy. A higher <code translate="no">M</code> results in a denser graph and increases recall and accuracy as the search has more pathways to explore, which also consumes more memory and slows down insertion time due to additional connections. As shown in the image above, <strong>M = 5</strong> indicates that each node in the HNSW graph is directly connected to a maximum of 5 other nodes. This creates a moderately dense graph structure where nodes have multiple pathways to reach other nodes.</p></li>
-<li><p><code translate="no">efConstruction</code>: The number of candidates considered during index construction. A higher <code translate="no">efConstruction</code> generally results in a better quality graph but requires more time to build.</p></li>
-<li><p><code translate="no">ef</code>: The number of neighbors evaluated during a search. Increasing <code translate="no">ef</code> improves the likelihood of finding the nearest neighbors but slows down the search process.</p></li>
+<li><p><code translate="no">M</code>: الحد الأقصى لعدد الحواف أو الوصلات التي يمكن أن تمتلكها كل عقدة في الرسم البياني في كل مستوى من مستويات التسلسل الهرمي. يؤدي ارتفاع <code translate="no">M</code> إلى رسم بياني أكثر كثافة ويزيد من التذكر والدقة لأن البحث لديه المزيد من المسارات لاستكشافها، وهو ما يستهلك أيضًا المزيد من الذاكرة ويبطئ وقت الإدراج بسبب الاتصالات الإضافية. كما هو موضح في الصورة أعلاه، يشير <strong>M = 5</strong> إلى أن كل عقدة في الرسم البياني HNSW متصلة مباشرةً بخمس عقد أخرى كحد أقصى. وهذا يخلق بنية رسم بياني معتدل الكثافة حيث يكون للعقد مسارات متعددة للوصول إلى العقد الأخرى.</p></li>
+<li><p><code translate="no">efConstruction</code>: عدد المرشحين الذين تم أخذهم في الاعتبار أثناء بناء الفهرس. يؤدي ارتفاع <code translate="no">efConstruction</code> عمومًا إلى الحصول على رسم بياني بجودة أفضل ولكنه يتطلب وقتًا أطول للبناء.</p></li>
+<li><p><code translate="no">ef</code>: عدد الجيران الذين يتم تقييمهم أثناء البحث. تؤدي زيادة <code translate="no">ef</code> إلى تحسين احتمالية العثور على أقرب الجيران ولكنها تبطئ عملية البحث.</p></li>
 </ul>
-<p>For details on how to adjust these settings to suit your needs, refer to <a href="/docs/hnsw.md#Index-params">Index params</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
+<p>للحصول على تفاصيل حول كيفية ضبط هذه الإعدادات لتناسب احتياجاتك، راجع <a href="/docs/ar/hnsw.md#Index-params">بارامز الفهرس</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">إنشاء فهرس<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +73,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To build an <code translate="no">HNSW</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
+    </button></h2><p>لإنشاء فهرس <code translate="no">HNSW</code> على حقل متجه في ميلفوس، استخدم الطريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> ومعلمات إضافية للفهرس.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -92,19 +90,19 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>في هذا التكوين</p>
 <ul>
-<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">HNSW</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
-<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
+<li><p><code translate="no">index_type</code>: نوع الفهرس المراد إنشاؤه. في هذا المثال، اضبط القيمة على <code translate="no">HNSW</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: الطريقة المستخدمة لحساب المسافة بين المتجهات. تتضمن القيم المدعومة <code translate="no">COSINE</code> و <code translate="no">L2</code> و <code translate="no">IP</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p></li>
+<li><p><code translate="no">params</code>: : خيارات التكوين الإضافية لبناء الفهرس.</p>
 <ul>
-<li><p><code translate="no">M</code>: Maximum number of neighbors each node can connect to.</p></li>
-<li><p><code translate="no">efConstruction</code>: Number of candidate neighbors considered for connection during index construction.</p></li>
+<li><p><code translate="no">M</code>: الحد الأقصى لعدد الجيران الذين يمكن لكل عقدة الاتصال بهم.</p></li>
+<li><p><code translate="no">efConstruction</code>: : عدد الجيران المرشحين للاتصال أثناء بناء الفهرس.</p></li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">HNSW</code> index, refer to <a href="/docs/hnsw.md#Index-building-params">Index building params</a>.</p></li>
+<p>لمعرفة المزيد من معلمات البناء المتوفرة للفهرس <code translate="no">HNSW</code> ، راجع <a href="/docs/ar/hnsw.md#Index-building-params">بارامز بناء الفهرس</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>بمجرد تكوين معلمات الفهرس، يمكنك إنشاء الفهرس باستخدام الأسلوب <code translate="no">create_index()</code> مباشرةً أو تمرير بارامترات الفهرس في الأسلوب <code translate="no">create_collection</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/create-collection.md">إنشاء مجموعة</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">البحث في الفهرس<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,7 +117,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
+    </button></h2><p>بمجرد إنشاء الفهرس وإدراج الكيانات، يمكنك إجراء عمليات بحث عن التشابه على الفهرس.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of neighbors to consider during the search</span>
@@ -134,15 +132,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>في هذا التكوين</p>
 <ul>
-<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
+<li><p><code translate="no">params</code>: خيارات التكوين الإضافية للبحث على الفهرس.</p>
 <ul>
-<li><code translate="no">ef</code>: Number of neighbors to consider during a search.</li>
+<li><code translate="no">ef</code>: عدد الكيانات المجاورة التي يجب أخذها في الاعتبار أثناء البحث.</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">HNSW</code> index, refer to <a href="/docs/hnsw.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
+<p>لمعرفة المزيد من معلمات البحث المتوفرة للفهرس <code translate="no">HNSW</code> ، راجع <a href="/docs/ar/hnsw.md#Index-specific-search-params">باراميات البحث الخاصة بالفهرس</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">بارامترات الفهرس<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -157,40 +155,40 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/hnsw.md#Build-index">building an index</a>.</p>
+    </button></h2><p>يقدم هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
+<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/hnsw.md#Build-index">إنشاء فهرس</a>.</p>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>المعلمة</p></th>
+     <th><p>الوصف</p></th>
+     <th><p>نطاق القيمة</p></th>
+     <th><p>اقتراح الضبط</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Maximum number of connections （or edges) each node can have in the graph, including both outgoing and incoming edges. This parameter directly affects both index construction and search.</p></td>
-     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [2, 2048]</p><p><strong>Default value</strong>: <code translate="no">30</code> (up to 30 outgoing and 30 incoming edges per node)</p></td>
-     <td><p>A larger <code translate="no">M</code> generally leads to <strong>higher accuracy</strong> but <strong>increases memory overhead</strong> and <strong>slows down both index building and search</strong>. Consider increasing <code translate="no">M</code> for datasets with high dimensionality or when high recall is crucial.</p><p>Consider decreasing <code translate="no">M</code> when memory usage and search speed are primary concerns.</p><p>In most cases, we recommend you set a value within this range: [5, 100].</p></td>
+     <td><p>الحد الأقصى لعدد الوصلات （أو الحواف) التي يمكن أن تحتويها كل عقدة في الرسم البياني، بما في ذلك الحواف الصادرة والواردة. تؤثر هذه المعلمة بشكل مباشر على كل من بناء الفهرس والبحث.</p></td>
+     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [2, 2048]</p><p><strong>القيمة الافتراضية</strong>: <code translate="no">30</code> (حتى 30 حافة صادرة و30 حافة واردة لكل عقدة)</p></td>
+     <td><p>تؤدي القيمة الأكبر <code translate="no">M</code> بشكل عام إلى <strong>دقة أعلى</strong> ولكنها <strong>تزيد من عبء الذاكرة</strong> وتبطئ <strong>بناء الفهرس والبحث</strong>. ضع في اعتبارك زيادة <code translate="no">M</code> لمجموعات البيانات ذات الأبعاد العالية أو عندما يكون الاستدعاء العالي أمرًا بالغ الأهمية.</p><p>ضع في اعتبارك تقليل <code translate="no">M</code> عندما يكون استخدام الذاكرة وسرعة البحث من الاهتمامات الأساسية.</p><p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [5, 100].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>Number of candidate neighbors considered for connection during index construction. A larger pool of candidates is evaluated for each new element, but the maximum number of connections actually established is still limited by <code translate="no">M</code>.</p></td>
-     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Default value</strong>: <code translate="no">360</code></p></td>
-     <td><p>A higher <code translate="no">efConstruction</code> typically results in a <strong>more accurate index</strong>, as more potential connections are explored. However, this also leads to <strong>longer indexing time and increased memory usage</strong> during construction. Consider increasing <code translate="no">efConstruction</code> for improved accuracy, especially in scenarios where indexing time is less critical.</p><p>Consider decreasing <code translate="no">efConstruction</code> to speed up index construction when resource constraints are a concern.</p><p>In most cases, we recommend you set a value within this range: [50, 500].</p></td>
+     <td><p>عدد الجيران المرشحين الذين تم أخذهم في الاعتبار أثناء إنشاء الفهرس. يتم تقييم مجموعة أكبر من المرشحين لكل عنصر جديد، ولكن لا يزال الحد الأقصى لعدد الاتصالات التي تم إنشاؤها بالفعل محدودًا بـ <code translate="no">M</code>.</p></td>
+     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1، <em>int_max</em>]</p><p><strong>القيمة الافتراضية</strong>: <code translate="no">360</code></p></td>
+     <td><p>يؤدي ارتفاع <code translate="no">efConstruction</code> عادةً إلى <strong>فهرس أكثر دقة،</strong> حيث يتم استكشاف المزيد من الاتصالات المحتملة. ومع ذلك، يؤدي هذا أيضًا إلى <strong>إطالة وقت الفهرسة وزيادة استخدام الذاكرة</strong> أثناء الإنشاء. ضع في اعتبارك زيادة <code translate="no">efConstruction</code> لتحسين الدقة، خاصة في السيناريوهات التي يكون فيها وقت الفهرسة أقل أهمية.</p><p>فكر في تقليل <code translate="no">efConstruction</code> لتسريع بناء الفهرس عندما تكون قيود الموارد مصدر قلق.</p><p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/hnsw.md#Search-on-index">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/hnsw.md#Search-on-index">البحث في الفهرس</a>.</p>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>المعلمة</p></th>
+     <th><p>الوصف</p></th>
+     <th><p>نطاق القيمة</p></th>
+     <th><p>ضبط الاقتراح</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Controls the breadth of search during nearest neighbor retrieval. It determines how many nodes are visited and evaluated as potential nearest neighbors.  This parameter affects only the search process and applies exclusively to the bottom layer of the graph.</p></td>
-     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Default value</strong>: <em>limit</em> (TopK nearest neighbors to return)</p></td>
-     <td><p>A larger <code translate="no">ef</code> generally leads to <strong>higher search accuracy</strong> as more potential neighbors are considered. However, this also <strong>increases search time</strong>. Consider increasing <code translate="no">ef</code> when achieving high recall is critical and search speed is less of a concern.</p><p>Consider decreasing <code translate="no">ef</code> to prioritize faster searches, especially in scenarios where a slight reduction in accuracy is acceptable.</p><p>In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
+     <td><p>يتحكم في اتساع نطاق البحث أثناء استرجاع أقرب جار. تحدد عدد العقد التي تتم زيارتها وتقييمها كأقرب جيران محتملين.  تؤثر هذه المعلمة على عملية البحث فقط وتطبق حصرياً على الطبقة السفلية من الرسم البياني.</p></td>
+     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1، <em>int_max</em>]</p><p><strong>القيمة الافتراضية</strong>: <em>الحد</em> (أقرب عدد من الجيران الأقرب إلى أقرب جيران للإرجاع)</p></td>
+     <td><p>يؤدي وجود <code translate="no">ef</code> أكبر بشكل عام إلى <strong>دقة بحث أعلى</strong> حيث يتم النظر في المزيد من الجيران المحتملين. ومع ذلك، يؤدي ذلك أيضًا <strong>إلى زيادة وقت البحث</strong>. ضع في اعتبارك زيادة <code translate="no">ef</code> عندما يكون تحقيق الاستدعاء العالي أمرًا بالغ الأهمية وتكون سرعة البحث أقل أهمية.</p><p>ضع في اعتبارك تقليل <code translate="no">ef</code> لإعطاء الأولوية لعمليات البحث الأسرع، خاصةً في السيناريوهات التي يكون فيها الانخفاض الطفيف في الدقة مقبولاً.</p><p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [K, 10K].</p></td>
    </tr>
 </table>

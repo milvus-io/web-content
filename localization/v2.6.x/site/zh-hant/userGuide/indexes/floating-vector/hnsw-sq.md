@@ -2,11 +2,8 @@
 id: hnsw-sq.md
 title: HNSW_SQ
 summary: >-
-  HNSW_SQ combines Hierarchical Navigable Small World (HNSW) graphs with Scalar
-  Quantization (SQ), creating an advanced vector indexing method that offers a
-  controllable size-versus-accuracy trade-off. Compared to standard HNSW, this
-  index type maintains high query processing speed while introducing a slight
-  increase in index construction time.
+  HNSW_SQ 結合了 Hierarchical Navigable Small World (HNSW) 圖形與 Scalar Quantization
+  (SQ)，創造了一種先進的向量索引方法，提供可控制的大小與精確度權衡。與標準 HNSW 相比，此索引類型在維持高查詢處理速度的同時，略微增加了索引建置時間。
 ---
 <h1 id="HNSWSQ" class="common-anchor-header">HNSW_SQ<button data-href="#HNSWSQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_SQ</strong> combines Hierarchical Navigable Small World (HNSW) graphs with Scalar Quantization (SQ), creating an advanced vector indexing method that offers a controllable size-versus-accuracy trade-off. Compared to standard <a href="/docs/hnsw.md">HNSW</a>, this index type maintains high query processing speed while introducing a slight increase in index construction time.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p><strong>HNSW_SQ</strong>結合了 Hierarchical Navigable Small World (HNSW) 圖形與 Scalar Quantization (SQ)，創造了一種先進的向量索引方法，提供可控制的大小與精確度權衡。與標準<a href="/docs/zh-hant/hnsw.md">HNSW</a> 相比，此索引類型在索引建置時間略有增加的同時，仍能維持較高的查詢處理速度。</p>
+<h2 id="Overview" class="common-anchor-header">概觀<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,35 +36,33 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HNSW_SQ combines two indexing techniques: <strong>HNSW</strong> for fast graph-based navigation and <strong>SQ</strong> for efficient vector compression.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW constructs a multi-layer graph where each node corresponds to a vector in the dataset. In this graph, nodes are connected based on their similarity, enabling rapid traversal through the data space. The hierarchical structure allows the search algorithm to narrow down the candidate neighbors, significantly accelerating the search process in high-dimensional spaces.</p>
-<p>For more information, refer to <a href="/docs/hnsw.md">HNSW</a>.</p>
-<h3 id="SQ" class="common-anchor-header">SQ</h3><p>SQ is a method for compressing vectors by representing them with fewer bits. For instance:</p>
+    </button></h2><p>HNSW_SQ 結合了兩種索引技術：<strong>HNSW</strong>用於基於圖表的快速導覽，而<strong>SQ</strong>則用於有效率的向量壓縮。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 會建構一個多層圖表，其中每個節點對應資料集中的向量。在這個圖形中，節點是根據其相似性連接起來的，因此可以快速遍歷資料空間。層級結構可讓搜尋演算法縮小候選鄰近點的範圍，大幅加速高維空間的搜尋過程。</p>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/hnsw.md">HNSW</a>。</p>
+<h3 id="SQ" class="common-anchor-header">SQ</h3><p>SQ 是一種壓縮向量的方法，用較少的位元來表示向量。舉例來說：</p>
 <ul>
-<li><p><strong>SQ8</strong> uses 8 bits, mapping values into 256 levels.  For more information, refer to <a href="/docs/ivf-sq8.md#SQ8">IVF_SQ8</a>.</p></li>
-<li><p><strong>SQ6</strong> uses 6 bits to represent each floating-point value, resulting in 64 discrete levels.</p></li>
+<li><p><strong>SQ8</strong>使用 8 位元，將值映射成 256 層。  如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-sq8.md#SQ8">IVF_SQ8</a>。</p></li>
+<li><p><strong>SQ6</strong>使用 6 位元來表示每個浮點值，因此有 64 個離散的層級。</p></li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/hnsw-sq.png" alt="Hnsw Sq" class="doc-image" id="hnsw-sq" />
-    <span>Hnsw Sq</span>
-  </span>
-</p>
-<p>This reduction in precision dramatically decreases the memory footprint and speeds up the computation while retaining the essential structure of the data.</p>
-<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ combines the strengths of HNSW and SQ to enable efficient approximate nearest neighbor search. Here’s how the process works:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw-sq.png" alt="Hnsw Sq" class="doc-image" id="hnsw-sq" />
+   </span> <span class="img-wrapper"> <span>Hnsw Sq</span> </span></p>
+<p>這種精確度的降低大幅減少了記憶體佔用量，並加快了計算速度，同時保留了資料的基本結構。</p>
+<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ 結合了 HNSW 和 SQ 的優點，以實現高效率的近似近鄰搜尋。以下是這個過程的運作方式：</p>
 <ol>
-<li><p><strong>Data Compression:</strong> SQ compresses the vectors using the <code translate="no">sq_type</code> (for example, SQ6 or SQ8), which reduces memory usage. This compression may lower precision, but it allows the system to handle larger datasets.</p></li>
-<li><p><strong>Graph Construction:</strong> The compressed vectors are used to build an HNSW graph. Because the data is compressed, the resulting graph is smaller and faster to search.</p></li>
-<li><p><strong>Candidate Retrieval:</strong> When a query vector is provided, the algorithm uses the compressed data to quickly identify a pool of candidate neighbors from the HNSW graph.</p></li>
-<li><p><strong>(Optional) Result Refinement:</strong> The initial candidate results can be refined for better accuracy, based on the following parameters:</p>
+<li><p><strong>資料壓縮：</strong>SQ 會使用<code translate="no">sq_type</code> (例如 SQ6 或 SQ8) 來壓縮向量，以減少記憶體使用量。這種壓縮可能會降低精確度，但卻能讓系統處理更大的資料集。</p></li>
+<li><p><strong>圖形建構：</strong>壓縮向量用於建立 HNSW 圖形。由於資料已壓縮，因此產生的圖形更小、搜尋速度更快。</p></li>
+<li><p><strong>候選檢索：</strong>當提供查詢向量時，演算法會使用壓縮資料，從 HNSW 圖中快速找出候選鄰居。</p></li>
+<li><p><strong>(可選）結果精進：</strong>初始候選結果可以根據下列參數進行精煉，以獲得更高的精確度：</p>
 <ul>
-<li><p><code translate="no">refine</code>: Controls whether this refinement step is activated. When set to <code translate="no">true</code>, the system recalculates distances using higher-precision or uncompressed representations.</p></li>
-<li><p><code translate="no">refine_type</code>: Specifies the precision level of data used during refinement (e.g., SQ6, SQ8, BF16). A higher-precision choice such as <code translate="no">FP32</code> can yield more accurate results but requires more memory. This must exceed the precision of the original compressed data set by <code translate="no">sq_type</code>.</p></li>
-<li><p><code translate="no">refine_k</code>: Acts as a magnification factor. For instance, if your top <em>k</em> is 100 and <code translate="no">refine_k</code> is 2, the system re-ranks the top 200 candidates and returns the best 100, enhancing overall accuracy.</p></li>
+<li><p><code translate="no">refine</code>:控制是否啟動此精煉步驟。當設定為<code translate="no">true</code> 時，系統會使用更高精度或未壓縮的表示來重新計算距離。</p></li>
+<li><p><code translate="no">refine_type</code>:指定精煉過程中使用的資料精確度等級（例如 SQ6、SQ8、BF16）。更高精度的選擇，例如<code translate="no">FP32</code> ，可以產生更精確的結果，但需要更多的記憶體。這必須比原始壓縮資料集的精確度高出<code translate="no">sq_type</code> 。</p></li>
+<li><p><code translate="no">refine_k</code>:作為放大係數。例如，如果您的 top<em>k</em>是 100，而<code translate="no">refine_k</code> 是 2，系統會重新排序前 200 名候選人，並傳回最佳的 100 名，以提高整體精確度。</p></li>
 </ul></li>
 </ol>
-<p>For a full list of parameters and valid values, refer to <a href="/docs/hnsw-sq.md#Index-params">Index params</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
+<p>如需參數及有效值的完整清單，請參閱<a href="/docs/zh-hant/hnsw-sq.md#Index-params">索引參數</a>。</p>
+<h2 id="Build-index" class="common-anchor-header">建立索引<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +77,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To build an <code translate="no">HNSW_SQ</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
+    </button></h2><p>要在 Milvus 的向量場上建立<code translate="no">HNSW_SQ</code> 索引，請使用<code translate="no">add_index()</code> 方法，指定<code translate="no">index_type</code>,<code translate="no">metric_type</code>, 以及索引的附加參數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -102,14 +97,14 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>在此設定中</p>
 <ul>
-<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">HNSW_SQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
-<li><p><code translate="no">params</code>: Additional configuration options for building the index. For details, refer to <a href="/docs/hnsw-sq.md#Index-building-params">Index building params</a>.</p></li>
+<li><p><code translate="no">index_type</code>:要建立的索引類型。在本範例中，設定值為<code translate="no">HNSW_SQ</code> 。</p></li>
+<li><p><code translate="no">metric_type</code>:用來計算向量間距離的方法。支援的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
+<li><p><code translate="no">params</code>:建立索引的附加設定選項。詳情請參閱<a href="/docs/zh-hant/hnsw-sq.md#Index-building-params">索引建立參數</a>。</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>索引參數配置完成後，您可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
+<h2 id="Search-on-index" class="common-anchor-header">在索引上搜尋<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -124,7 +119,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
+    </button></h2><p>索引建立且實體插入後，您就可以在索引上執行相似性搜尋。</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -140,11 +135,11 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>在此配置中</p>
 <ul>
-<li><code translate="no">params</code>: Additional configuration options for searching on the index. For details, refer to <a href="/docs/hnsw-sq.md#Index-specific-search-params">Index-specific search params</a>.</li>
+<li><code translate="no">params</code>:在索引上搜索的附加配置选项。詳情請參閱<a href="/docs/zh-hant/hnsw-sq.md#Index-specific-search-params">特定於索引的搜尋參數</a>。</li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">索引參數<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -159,106 +154,93 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">building an index</a>.</p>
+    </button></h2><p>本節概述用於建立索引和在索引上執行搜尋的參數。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">建立索引</a>時可以在<code translate="no">params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>參數</p></th>
+     <th><p>說明</p></th>
+     <th><p>值範圍</p></th>
+     <th><p>調整建議</p></th>
    </tr>
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Maximum number of connections （or edges) each node can have in the graph, including both outgoing and incoming edges.
- This parameter directly affects both index construction and search.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [2, 2048]</p>
-<p><strong>Default value</strong>: <code translate="no">30</code> (up to 30 outgoing and 30 incoming edges per node)</p></td>
-     <td><p>A larger <code translate="no">M</code> generally leads to <strong>higher accuracy</strong> but <strong>increases memory overhead</strong> and <strong>slows down both index building and search</strong>.
- Consider increasing <code translate="no">M</code> for datasets with high dimensionality or when high recall is crucial.</p>
-<p>Consider decreasing <code translate="no">M</code> when memory usage and search speed are primary concerns.</p>
-<p>In most cases, we recommend you set a value within this range: [5, 100].</p></td>
+     <td><p>每個節點在圖表中可擁有的最大連線（或邊緣）數量，包括傳出和傳入的邊緣。 此參數直接影響索引建立和搜尋。</p></td>
+     <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[2, 2048]</p>
+<p><strong>預設值</strong>：<code translate="no">30</code> (每個節點最多可有 30 條出站邊和 30 條入站邊)</p></td>
+     <td><p>較大的<code translate="no">M</code> 通常會帶來<strong>較高的精確度</strong>，<strong>但會增加記憶體開銷</strong>，<strong>並減慢索引建立和搜尋的</strong>速度。對於高維度的資料集或高召回率非常重要時，請考慮增加<code translate="no">M</code> 。</p>
+<p>如果記憶體佔用量和搜尋速度是主要考量，則考慮降低<code translate="no">M</code> 。</p>
+<p>在大多數情況下，我們建議您設定此範圍內的值：[5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>Number of candidate neighbors considered for connection during index construction.
- A larger pool of candidates is evaluated for each new element, but the maximum number of connections actually established is still limited by <code translate="no">M</code>.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Default value</strong>: <code translate="no">360</code></p></td>
-     <td><p>A higher <code translate="no">efConstruction</code> typically results in a <strong>more accurate index</strong>, as more potential connections are explored. However, this also leads to <strong>longer indexing time and increased memory usage</strong> during construction.
- Consider increasing <code translate="no">efConstruction</code> for improved accuracy, especially in scenarios where indexing time is less critical.</p>
-<p>Consider decreasing <code translate="no">efConstruction</code> to speed up index construction when resource constraints are a concern.</p>
-<p>In most cases, we recommend you set a value within this range: [50, 500].</p></td>
+     <td><p>在索引建構過程中，考慮連接的候選鄰居數量。 每個新元素都會評估更多的候選鄰居，但實際建立的最大連接數仍受限於<code translate="no">M</code> 。</p></td>
+     <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1，<em>int_max］</em></p>
+<p><strong>預設值</strong>：<code translate="no">360</code></p></td>
+     <td><p>較高的<code translate="no">efConstruction</code> 通常會產生<strong>更精確的索引</strong>，因為會探索更多的潛在連線。考慮增加<code translate="no">efConstruction</code> 以提高精確度<strong>，</strong>尤其是在索引時間不太重要的情況下。</p>
+<p>在資源有限的情況下，可考慮降低<code translate="no">efConstruction</code> ，以加快索引建置速度。</p>
+<p>在大多數情況下，我們建議您設定此範圍內的值：[50, 500].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>Specifies the scalar quantization method for compressing vectors. Each option offers a different balance between compression and accuracy:</p>
+     <td><p>指定壓縮向量的標量量化方法。每個選項都在壓縮和精確度之間提供不同的平衡：</p>
 <ul>
-<li><p><code translate="no">SQ6</code>: Encodes vectors using 6-bit integers.</p></li>
-<li><p><code translate="no">SQ8</code>: Encodes vectors using 8-bit integers.</p></li>
-<li><p><code translate="no">BF16</code>: Uses the Bfloat16 format.</p></li>
-<li><p><code translate="no">FP16</code>: Uses the standard 16-bit floating-point format.</p></li>
+<li><p><code translate="no">SQ6</code>:使用 6 位元整數編碼向量。</p></li>
+<li><p><code translate="no">SQ8</code>:使用 8 位整數編碼向量。</p></li>
+<li><p><code translate="no">BF16</code>:使用 Bfloat16 格式。</p></li>
+<li><p><code translate="no">FP16</code>:使用標準 16 位元浮點格式。</p></li>
 </ul></td>
-     <td><p><strong>Type</strong>: String
- <strong>Range</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p>
-<p><strong>Default value</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>The choice of <code translate="no">sq_type</code> depends on the specific application's needs. If memory efficiency is a primary concern, <code translate="no">SQ6</code> or <code translate="no">SQ8</code> might be suitable. On the other hand, if accuracy is paramount, <code translate="no">BF16</code> or <code translate="no">FP16</code> could be preferred.</p></td>
+     <td><p><strong>Type</strong>：字串<strong>範圍</strong>：[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> ]</p>
+<p><strong>預設值</strong>：<code translate="no">SQ8</code></p></td>
+     <td><p><code translate="no">sq_type</code> 的選擇取決於特定應用程式的需求。如果記憶體效率是首要考量，<code translate="no">SQ6</code> 或<code translate="no">SQ8</code> 可能適合。另一方面，如果精確度是最重要的，<code translate="no">BF16</code> 或<code translate="no">FP16</code> 可能是首選。</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>A boolean flag that controls whether a refinement step is applied during search. Refinement involves reranking the initial results by computing exact distances between the query vector and candidates.</p></td>
-     <td><p><strong>Type</strong>: Boolean
- <strong>Range</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
-<p><strong>Default value</strong>: <code translate="no">false</code></p></td>
-     <td><p>Set to <code translate="no">true</code> if high accuracy is essential and you can tolerate slightly slower search times. Use <code translate="no">false</code> if speed is a priority and a minor compromise in accuracy is acceptable.</p></td>
+     <td><p>一個布林標誌，用來控制是否在搜尋過程中應用精煉步驟。精煉包括透過計算查詢向量與候選項之間的精確距離，重新排列初始結果。</p></td>
+     <td><p><strong>類型</strong>：<strong>布林範圍</strong>：[<code translate="no">true</code>,<code translate="no">false</code>]</p>
+<p><strong>預設值</strong>：<code translate="no">false</code></p></td>
+     <td><p>如果高準確度是必要的，而且您可以容忍稍慢的搜尋時間，請設定為<code translate="no">true</code> 。如果速度是優先考量，且可以接受精確度的輕微折衷，則使用<code translate="no">false</code> 。</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>Determines the precision of the data used for refinement.
- This precision must be higher than that of the compressed vectors (as set by <code translate="no">sq_type</code>), affecting both the accuracy of the re-ranked vectors and their memory footprint.</p></td>
-     <td><p><strong>Type</strong>: String
- <strong>Range</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
-<p><strong>Default value</strong>: None</p></td>
-     <td><p>Use <code translate="no">FP32</code> for maximum precision at a higher memory cost, or <code translate="no">SQ6</code>/<code translate="no">SQ8</code> for better compression. <code translate="no">BF16</code> and <code translate="no">FP16</code> offer a balanced alternative.</p></td>
+     <td><p>決定用於精煉的資料精確度。 此精確度必須高於壓縮向量的精確度 (由<code translate="no">sq_type</code> 設定)，這會影響重新排序向量的精確度及其記憶體佔用量。</p></td>
+     <td><p><strong>類型</strong>：字串<strong>範圍</strong>:[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code>,<code translate="no">FP32</code> ]。</p>
+<p><strong>預設值</strong>：無</p></td>
+     <td><p>使用<code translate="no">FP32</code> 可在較高記憶體成本下獲得最高精確度，使用<code translate="no">SQ6</code>/<code translate="no">SQ8</code> 則可獲得更好的壓縮效果。<code translate="no">BF16</code> 和<code translate="no">FP16</code> 提供了一個平衡的替代方案。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>參數</p></th>
+     <th><p>說明</p></th>
+     <th><p>值範圍</p></th>
+     <th><p>調整建議</p></th>
    </tr>
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Controls the breadth of search during nearest neighbor retrieval. It determines how many nodes are visited and evaluated as potential nearest neighbors. 
- This parameter affects only the search process and applies exclusively to the bottom layer of the graph.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Default value</strong>: <em>limit</em> (TopK nearest neighbors to return)</p></td>
-     <td><p>A larger <code translate="no">ef</code> generally leads to <strong>higher search accuracy</strong> as more potential neighbors are considered. However, this also <strong>increases search time</strong>.
- Consider increasing <code translate="no">ef</code> when achieving high recall is critical and search speed is less of a concern.</p>
-<p>Consider decreasing <code translate="no">ef</code> to prioritize faster searches, especially in scenarios where a slight reduction in accuracy is acceptable.</p>
-<p>In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
+     <td><p>控制最近鄰檢索時的搜尋範圍。它決定要造訪多少節點，並將其評估為潛在最近鄰居。 
+ 此參數只會影響搜尋過程，並只適用於圖形的底層。</p></td>
+     <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1、<em>int_max］</em></p>
+<p><strong>預設值</strong>:<em>limit</em>(要回傳的 TopK 最近鄰居)</p></td>
+     <td><p>較大的<code translate="no">ef</code> 通常會導致<strong>較高的搜尋準確度</strong>，因為會考慮更多的潛在鄰居。當達到高召回率是關鍵，而<strong>搜尋</strong>速度較不重要時，請考慮增加<code translate="no">ef</code> 。</p>
+<p>考慮降低<code translate="no">ef</code> 以優先加快搜尋速度，尤其是在可以接受稍微降低精確度的情況下。</p>
+<p>在大多數情況下，我們建議您設定此範圍內的值：[K, 10K]。</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>The magnification factor that controls how many extra candidates are examined during the refinement stage, relative to the requested top K results.</p></td>
-     <td><p><strong>Type</strong>: Float
- <strong>Range</strong>: [1, <em>float_max</em>)</p>
-<p><strong>Default value</strong>: 1</p></td>
-     <td><p>Higher values of <code translate="no">refine_k</code> can improve recall and accuracy but will also increase search time and resource usage. A value of 1 means the refinement process considers only the initial top K results.</p></td>
+     <td><p>放大係數，用來控制在精細化階段中，相對於要求的前 K 個結果，有多少額外的候選人會被檢驗。</p></td>
+     <td><p><strong>類型</strong>：浮動<strong>範圍</strong>：[1,<em>float_max</em>)</p>
+<p><strong>預設值</strong>: 1</p></td>
+     <td><p><code translate="no">refine_k</code> 的較高值可以提高召回率和精確度，但也會增加搜尋時間和資源使用。值為 1 表示精煉過程只考慮初始的前 K 個結果。</p></td>
    </tr>
 </table>

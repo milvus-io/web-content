@@ -1,9 +1,7 @@
 ---
 id: openai.md
-title: OpenAI
-summary: >-
-  Use an OpenAI embedding model with Milvus by choosing a model and configuring
-  Milvus with your OpenAI API key.
+title: OpenAICompatible with Milvus 2.6.x
+summary: 通过选择一个模型并用 OpenAI API 密钥配置 Milvus，使用 Milvus 的 OpenAI 嵌入模型。
 beta: Milvus 2.6.x
 ---
 <h1 id="OpenAI" class="common-anchor-header">OpenAI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#OpenAI" class="anchor-icon" translate="no">
@@ -21,8 +19,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Use an OpenAI embedding model with Milvus by choosing a model and configuring Milvus with your OpenAI API key.</p>
-<h2 id="Choose-an-embedding-model" class="common-anchor-header">Choose an embedding model<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
+    </button></h1><p>通过选择一个模型并用你的 OpenAI API 密钥配置 Milvus，使用 Milvus 的 OpenAI 嵌入模型。</p>
+<h2 id="Choose-an-embedding-model" class="common-anchor-header">选择嵌入模型<button data-href="#Choose-an-embedding-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,35 +35,35 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports all embedding models provided by OpenAI. Below are the currently available OpenAI embedding models for quick reference:</p>
+    </button></h2><p>Milvus 支持 OpenAI 提供的所有嵌入模型。以下是当前可用的 OpenAI 嵌入模型，供快速参考：</p>
 <table>
    <tr>
-     <th><p>Model Name</p></th>
-     <th><p>Dimensions</p></th>
-     <th><p>Max Tokens</p></th>
-     <th><p>Description</p></th>
+     <th><p>模型名称</p></th>
+     <th><p>尺寸</p></th>
+     <th><p>最大令牌数</p></th>
+     <th><p>描述</p></th>
    </tr>
    <tr>
      <td><p>text-embedding-3-small</p></td>
-     <td><p>Default: 1,536 (can be shortened to a dimension size below 1,536)</p></td>
+     <td><p>默认：1,536（可缩短至低于 1,536 的尺寸大小）</p></td>
      <td><p>8,191</p></td>
-     <td><p>Ideal for cost-sensitive and scalable semantic search—offers strong performance at a lower price point.</p></td>
+     <td><p>成本敏感型和可扩展语义搜索的理想选择--以较低的价格提供较强的性能。</p></td>
    </tr>
    <tr>
-     <td><p>text-embedding-3-large</p></td>
-     <td><p>Default: 3,072 (can be shortened to a dimension size below 3,072)</p></td>
+     <td><p>文本-Embeddings-3-大号</p></td>
+     <td><p>默认：3,072（可缩短至尺寸小于 3,072）</p></td>
      <td><p>8,191</p></td>
-     <td><p>Best for applications demanding enhanced retrieval accuracy and richer semantic representations.</p></td>
+     <td><p>最适合要求提高检索准确性和丰富语义表述的应用。</p></td>
    </tr>
    <tr>
      <td><p>text-embedding-ada-002</p></td>
-     <td><p>Fixed: 1,536 (cannot be shortened)</p></td>
+     <td><p>固定：1,536（无法缩短）</p></td>
      <td><p>8,191</p></td>
-     <td><p>A previous-generation model suited for legacy pipelines or scenarios requiring backward compatibility.</p></td>
+     <td><p>上一代模型，适合需要向后兼容的传统管道或场景。</p></td>
    </tr>
 </table>
-<p>The third generation embedding models (<strong>text-embedding-3</strong>) support reducing the size of the embedding via a <code translate="no">dim</code> parameter. Typically larger embeddings are more expensive from a compute, memory, and storage perspective. Being able to adjust the number of dimensions allows more control over overall cost and performance. For more details about each model, refer to <a href="https://platform.openai.com/docs/guides/embeddings#embedding-models">Embedding models</a> and <a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI announcement blog post</a>.</p>
-<h2 id="Configure-credentials" class="common-anchor-header">Configure credentials<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+<p>第三代嵌入模型<strong>（text-embedding-3</strong>）支持通过<code translate="no">dim</code> 参数减小嵌入的大小。通常情况下，从计算、内存和存储的角度来看，较大的嵌入会更加昂贵。通过调整维数，可以更好地控制总体成本和性能。有关每种模型的更多详情，请参阅<a href="https://platform.openai.com/docs/guides/embeddings#embedding-models">Embeddings 模型</a>和<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI 公告博文</a>。</p>
+<h2 id="Configure-credentials" class="common-anchor-header">配置证书<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,19 +78,19 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus must know your OpenAI API key before it can request embeddings. Milvus provides two methods to configure credentials:</p>
+    </button></h2><p>Milvus 必须知道您的 OpenAI API 密钥，才能请求嵌入。Milvus 提供两种配置凭据的方法：</p>
 <ul>
-<li><p><strong>Configuration file (recommended):</strong> Store the API key in <code translate="no">milvus.yaml</code> so every restart and node picks it up automatically.</p></li>
-<li><p><strong>Environment variables:</strong> Inject the key at deploy time—ideal for Docker Compose.</p></li>
+<li><p><strong>配置文件（推荐）：</strong>将 API 密钥存储在<code translate="no">milvus.yaml</code> 中，以便每次重启和节点都能自动获取。</p></li>
+<li><p><strong>环境变量：</strong>在部署时注入密钥--最适合 Docker Compose。</p></li>
 </ul>
-<p>Choose one of the two methods below—the configuration file is easier to maintain on bare-metal and VMs, while the env-var route fits container workflows.</p>
+<p>从以下两种方法中选择一种--配置文件在裸机和虚拟机上更易于维护，而环境变量方法适合容器工作流。</p>
 <div class="alert note">
-<p>If an API key for the same provider is present in both the configuration file and an environment variable, Milvus always uses the value in <code translate="no">milvus.yaml</code> and ignores the environment variable.</p>
+<p>如果同一提供商的 API 密钥同时存在于配置文件和环境变量中，Milvus 将始终使用<code translate="no">milvus.yaml</code> 中的值，而忽略环境变量。</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1: Configuration file (recommended & higher priority)</h3><p>Keep your API keys in <code translate="no">milvus.yaml</code>; Milvus reads them at startup and overrides any environment variable for the same provider.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">选项 1：配置文件（推荐且优先级更高）</h3><p>将 API 密钥保存在<code translate="no">milvus.yaml</code> 中；Milvus 会在启动时读取它们，并覆盖同一提供商的任何环境变量。</p>
 <ol>
-<li><p>**Declare your keys under <code translate="no">credential:</code></p>
-<p>You may list one or many API keys—give each a label you invent and will reference later.</p>
+<li><p>**在<code translate="no">credential:</code></p>
+<p>你可以列出一个或多个 API 密钥--给每个密钥贴上你自创的标签，以便日后参考。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">credential:</span>
   <span class="hljs-attr">apikey_dev:</span>            <span class="hljs-comment"># dev environment</span>
@@ -100,9 +98,9 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Putting the API keys here makes them persistent across restarts and lets you switch keys just by changing a label.</p></li>
-<li><p><strong>Tell Milvus which key to use for OpenAI calls</strong></p>
-<p>In the same file, point the OpenAI provider at the label you want it to use.</p>
+<p>把 API 密钥放在这里，可以让它们在重启时保持不变，而且只需更改标签就能切换密钥。</p></li>
+<li><p><strong>告诉 Milvus 调用 OpenAI 时使用哪个密钥</strong></p>
+<p>在同一文件中，将 OpenAI 提供者指向你希望它使用的标签。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -110,23 +108,23 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.openai.com/v1/embeddings   # (optional) custom endpoint</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This binds a specific key to every request Milvus sends to the OpenAI embeddings endpoint.</p></li>
+<p>这样，Milvus 向 OpenAI Embeddings 端点发送的每个请求都会绑定特定密钥。</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Environment variable</h3><p>Use this method when you run Milvus with Docker Compose and prefer to keep secrets out of files and images.</p>
-<p>Milvus falls back to the environment variable only if no key for the provider is found in <code translate="no">milvus.yaml</code>.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">方案 2：环境变量</h3><p>当你使用 Docker Compose 运行 Milvus，并希望不对文件和映像保密时，请使用这种方法。</p>
+<p>只有在<code translate="no">milvus.yaml</code> 中找不到提供程序的密钥时，Milvus 才会使用环境变量。</p>
 <table>
    <tr>
-     <th><p>Variable</p></th>
-     <th><p>Required</p></th>
-     <th><p>Description</p></th>
+     <th><p>变量</p></th>
+     <th><p>需要</p></th>
+     <th><p>描述</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">MILVUSAI_OPENAI_API_KEY</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Makes the OpenAI key available inside each Milvus container <em>(ignored when a key for OpenAI exists in <code translate="no">milvus.yaml</code>)</em></p></td>
+     <td><p>是</p></td>
+     <td><p>使 OpenAI 密钥在每个 Milvus 容器中可用<em>（当<code translate="no">milvus.yaml</code> 中存在 OpenAI 密钥时忽略</em>）<em>。</em></p></td>
    </tr>
 </table>
-<p>In your <strong>docker-compose.yaml</strong> file, set the <code translate="no">MILVUSAI_OPENAI_API_KEY</code> environment variable.</p>
+<p>在<strong>docker-compose.yaml</strong>文件中，设置<code translate="no">MILVUSAI_OPENAI_API_KEY</code> 环境变量。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -135,8 +133,8 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the OpenAI API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_OPENAI_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_OPENAI_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">environment:</code> block injects the key only into the Milvus container, leaving your host OS untouched. For details, refer to <a href="/docs/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configure Milvus with Docker Compose</a>.</p>
-<h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<p><code translate="no">environment:</code> 块只将密钥注入 Milvus 容器，而不会触及主机操作系统。有关详情，请参阅<a href="/docs/zh/configure-docker.md#Configure-Milvus-with-Docker-Compose">使用 Docker Compose 配置 Milvus</a>。</p>
+<h2 id="Use-embedding-function" class="common-anchor-header">使用 Embeddings 功能<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,14 +149,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once credentials are configured, follow these steps to define and use embedding functions.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Step 1: Define schema fields</h3><p>To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:</p>
+    </button></h2><p>配置凭证后，请按照以下步骤定义和使用嵌入函数。</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步骤 1：定义 Schema 字段</h3><p>要使用嵌入函数，请创建一个具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
 <ul>
-<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
-<li><p>A scalar field that stores raw data to be embedded.</p></li>
-<li><p>A vector field reserved to store vector embeddings that the function will generate for the scalar field.</p></li>
+<li><p>主字段，用于唯一标识 Collections 中的每个实体。</p></li>
+<li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
+<li><p>一个向量字段，用于存储函数将为标量字段生成的向量嵌入。</p></li>
 </ul>
-<p>The following example defines a schema with one scalar field <code translate="no">&quot;document&quot;</code> for storing textual data and one vector field <code translate="no">&quot;dense&quot;</code> for storing embeddings to be generated by the Function module. Remember to set the vector dimension (<code translate="no">dim</code>) to match the output of your chosen embedding model.</p>
+<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -180,9 +178,9 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># For instance, OpenAI&#x27;s text-embedding-3-small model outputs 1536-dimensional vectors.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Step 2: Add embedding function to schema</h3><p>The Function module in Milvus automatically converts raw data stored in a scalar field into embeddings and stores them into the explicitly defined vector field.</p>
-<p>The example below adds a Function module (<code translate="no">openai_embedding</code>) that converts the scalar field <code translate="no">&quot;document&quot;</code> into embeddings, storing the resulting vectors in the <code translate="no">&quot;dense&quot;</code> vector field defined earlier.</p>
-<p>Once you have defined your embedding function, add it to your collection schema. This instructs Milvus to use the specified embedding function to process and store embeddings from your text data.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">第 2 步：向 Schema 添加嵌入函数</h3><p>Milvus 中的 Function 模块会自动将标量字段中存储的原始数据转换为嵌入数据，并将其存储到明确定义的向量字段中。</p>
+<p>下面的示例添加了一个 Function 模块 (<code translate="no">openai_embedding</code>)，该模块将标量域<code translate="no">&quot;document&quot;</code> 转换为嵌入，将得到的向量存储到之前定义的<code translate="no">&quot;dense&quot;</code> 向量域中。</p>
+<p>定义好嵌入函数后，将其添加到 Collections Schema 中。这将指示 Milvus 使用指定的嵌入函数来处理和存储文本数据中的嵌入。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                        <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -202,7 +200,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the embedding function to your schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -217,4 +215,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After configuring the embedding function, refer to the <a href="/docs/embedding-function-overview.md">Function Overview</a> for additional guidance on index configuration, data insertion examples, and semantic search operations.</p>
+    </button></h2><p>配置好嵌入函数后，请参阅 "<a href="/docs/zh/embedding-function-overview.md">功能概述</a>"，了解有关索引配置、数据插入示例和语义搜索操作的更多指导。</p>

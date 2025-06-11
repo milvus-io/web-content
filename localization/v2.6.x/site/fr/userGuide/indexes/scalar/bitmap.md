@@ -1,12 +1,13 @@
 ---
 id: bitmap.md
-title: BITMAP​
+title: BITMAP
 related_key: bitmap
 summary: >-
-  Bitmap indexing is an efficient indexing technique designed to improve query
-  performance on low-cardinality scalar fields.
+  L'indexation bitmap est une technique d'indexation efficace conçue pour
+  améliorer les performances des requêtes sur des champs scalaires à faible
+  cardinalité.
 ---
-<h1 id="BITMAP​" class="common-anchor-header">BITMAP​<button data-href="#BITMAP​" class="anchor-icon" translate="no">
+<h1 id="BITMAP​" class="common-anchor-header">BITMAP<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +22,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Bitmap indexing is an efficient indexing technique designed to improve query performance on low-cardinality scalar fields. Cardinality refers to the number of distinct values in a field. Fields with fewer distinct elements are considered low-cardinality.​</p>
-<p>This index type helps reduce the retrieval time of scalar queries by representing field values in a compact binary format and performing efficient bitwise operations on them. Compared to other types of indexes, bitmap indexes typically have higher space efficiency and faster query speeds when dealing with low-cardinality fields.​</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>L'indexation bitmap est une technique d'indexation efficace conçue pour améliorer les performances des requêtes sur des champs scalaires à faible cardinalité. La cardinalité fait référence au nombre de valeurs distinctes dans un champ. Les champs comportant moins d'éléments distincts sont considérés comme étant de faible cardinalité.</p>
+<p>Ce type d'index permet de réduire le temps d'extraction des requêtes scalaires en représentant les valeurs des champs dans un format binaire compact et en effectuant des opérations bit à bit efficaces sur ces valeurs. Par rapport à d'autres types d'index, les index bitmap ont généralement une meilleure efficacité spatiale et des vitesses d'interrogation plus rapides lorsqu'ils traitent des champs à faible cardinalité.</p>
+<h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,26 +39,24 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The term Bitmap combines two words: <strong>Bit</strong> and <strong>Map</strong>. A bit represents the smallest unit of data in a computer, which can only hold a value of either <strong>0</strong> or <strong>1</strong>. A map, in this context, refers to the process of transforming and organizing data according to what value should be assigned to 0 and 1.​</p>
-<p>A bitmap index consists of two main components: bitmaps and keys. Keys represent the unique values in the indexed field. For each unique value, there is a corresponding bitmap. The length of these bitmaps is equal to the number of records in the collection. Each bit in the bitmap corresponds to a record in the collection. If the value of the indexed field in a record matches the key, the corresponding bit is set to <strong>1</strong>; otherwise, it is set to <strong>0</strong>.​</p>
-<p>Consider a collection of documents with fields <strong>Category</strong> and <strong>Public</strong>. We want to retrieve documents that fall into the <strong>Tech</strong> category and are open to the <strong>Public</strong>. In this case, the keys for our bitmap indexes are <strong>Tech</strong> and <strong>Public</strong>.​</p>
+    </button></h2><p>Le terme "bitmap" combine deux mots : <strong>Bit</strong> et <strong>Map</strong>. Un bit représente la plus petite unité de données dans un ordinateur, qui ne peut contenir que la valeur <strong>0</strong> ou <strong>1</strong>. Une carte, dans ce contexte, fait référence au processus de transformation et d'organisation des données en fonction de la valeur à attribuer à 0 et à 1.</p>
+<p>Un index bitmap se compose de deux éléments principaux : les bitmaps et les clés. Les clés représentent les valeurs uniques du champ indexé. À chaque valeur unique correspond une image binaire. La longueur de ces images est égale au nombre d'enregistrements de la collection. Chaque bit dans le bitmap correspond à un enregistrement de la collection. Si la valeur du champ indexé d'un enregistrement correspond à la clé, le bit correspondant est mis à <strong>1</strong>; sinon, il est mis à <strong>0</strong>.</p>
+<p>Considérons une collection de documents avec des champs <strong>Catégorie</strong> et <strong>Public</strong>. Nous voulons retrouver les documents qui appartiennent à la catégorie <strong>Tech</strong> et qui sont ouverts au <strong>public</strong>. Dans ce cas, les clés de nos index bitmap sont <strong>Tech</strong> et <strong>Public</strong>.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap indexing" class="doc-image" id="bitmap-indexing" />
-    <span>Bitmap indexing</span>
-  </span>
-</p>
-<p>As shown in the figure, the bitmap indexes for <strong>Category</strong> and <strong>Public</strong> are:​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap indexing" class="doc-image" id="bitmap-indexing" />
+   </span> <span class="img-wrapper"> <span>Indexation bitmap</span> </span></p>
+<p>Comme le montre la figure, les index bitmap pour <strong>Catégorie</strong> et <strong>Public</strong> sont les suivants.</p>
 <ul>
-<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], which shows that only the 1st and 3rd documents fall into the <strong>Tech</strong> category.​</p></li>
-<li><p><strong>Public</strong>: [1, 0, 0, 1, 0], which shows that only the 1st and 4th documents are open to the <strong>Public</strong>.​</p></li>
+<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], ce qui montre que seuls les 1er et 3e documents appartiennent à la catégorie <strong>Tech</strong>.</p></li>
+<li><p><strong>Public</strong>: [1, 0, 0, 1, 0], ce qui montre que seuls les 1er et 4e documents sont ouverts au <strong>public</strong>.</p></li>
 </ul>
-<p>To find the documents that match both criteria, we perform a bitwise AND operation on these two bitmaps:​</p>
+<p>Pour trouver les documents qui correspondent aux deux critères, nous effectuons une opération ET bit à bit sur ces deux images.</p>
 <ul>
-<li><strong>Tech</strong> AND <strong>Public</strong>: [1, 0, 0, 0, 0]​</li>
+<li><strong>Tech</strong> AND <strong>Public</strong>: [1, 0, 0, 0, 0]</li>
 </ul>
-<p>The resulting bitmap [1, 0, 0, 0, 0] indicates that only the first document (<strong>ID</strong> <strong>1</strong>) satisfies both criteria. By using bitmap indexes and efficient bitwise operations, we can quickly narrow down the search scope, eliminating the need to scan the entire dataset.​</p>
-<h2 id="Create-a-bitmap-index" class="common-anchor-header">Create a bitmap index<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
+<p>Le bitmap résultant [1, 0, 0, 0, 0] indique que seul le premier document<strong>(ID</strong> <strong>1)</strong> répond aux deux critères. L'utilisation d'index bitmap et d'opérations bitwise efficaces permet de restreindre rapidement le champ de la recherche et d'éviter d'avoir à parcourir l'ensemble des données.</p>
+<h2 id="Create-a-bitmap-index" class="common-anchor-header">Créer un index bitmap<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,7 +71,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To create a bitmap index in Milvus, use the <code translate="no">create_index()</code> method and set the <code translate="no">index_type</code> parameter to <code translate="no">&quot;BITMAP&quot;</code>.​</p>
+    </button></h2><p>Pour créer un index bitmap dans Milvus, utilisez la méthode <code translate="no">create_index()</code> et définissez le paramètre <code translate="no">index_type</code> sur <code translate="no">&quot;BITMAP&quot;</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters​</span>
@@ -88,9 +87,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we create a bitmap index on the <code translate="no">category</code> field of the <code translate="no">my_collection</code> collection. The <code translate="no">add_index()</code> method is used to specify the field name, index type, and index name.​</p>
-<p>Once the bitmap index is created, you can use the <code translate="no">filter</code> parameter in query operations to perform scalar filtering based on the indexed field. This allows you to efficiently narrow down the search results using the bitmap index. For more information, refer to <a href="/docs/boolean.md">Metadata Filtering</a>.​</p>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<p>Dans cet exemple, nous créons un index bitmap sur le champ <code translate="no">category</code> de la collection <code translate="no">my_collection</code>. La méthode <code translate="no">add_index()</code> est utilisée pour spécifier le nom du champ, le type d'index et le nom de l'index.</p>
+<p>Une fois l'index bitmap créé, vous pouvez utiliser le paramètre <code translate="no">filter</code> dans les opérations de requête pour effectuer un filtrage scalaire basé sur le champ indexé. Cela vous permet de réduire efficacement les résultats de la recherche à l'aide de l'index bitmap. Pour plus d'informations, voir <a href="/docs/fr/boolean.md">Filtrage des métadonnées</a>.</p>
+<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,21 +105,21 @@ client.create_index(​
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Bitmap indexes are supported only for scalar fields that are not primary keys.​</p></li>
-<li><p>The data type of the field must be one of the following:​</p>
+<li><p>Les index bitmap ne sont pris en charge que pour les champs scalaires qui ne sont pas des clés primaires.</p></li>
+<li><p>Le type de données du champ doit être l'un des suivants.</p>
 <ul>
-<li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>​</p></li>
-<li><p><code translate="no">ARRAY</code> (elements must be one of: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)​</p></li>
+<li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
+<li><p><code translate="no">ARRAY</code> (les éléments doivent être l'un des suivants : <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
 </ul></li>
-<li><p>Bitmap indexes do not support the following data types:​</p>
+<li><p>Les index bitmap ne prennent pas en charge les types de données suivants.</p>
 <ul>
-<li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Floating-point types are not compatible with the binary nature of bitmap indexes.​</p></li>
-<li><p><code translate="no">JSON</code>: JSON data types have a complex structure that cannot be efficiently represented using bitmap indexes.​</p></li>
+<li><p><code translate="no">FLOAT</code> <code translate="no">DOUBLE</code>: Les types de données à virgule flottante ne sont pas compatibles avec la nature binaire des index bitmap.</p></li>
+<li><p><code translate="no">JSON</code>: Les types de données JSON ont une structure complexe qui ne peut pas être représentée efficacement à l'aide d'index bitmap.</p></li>
 </ul></li>
-<li><p>Bitmap indexes are not suitable for fields with high cardinality (i.e., fields with a large number of distinct values).​</p>
+<li><p>Les index bitmap ne conviennent pas aux champs à forte cardinalité (c'est-à-dire aux champs comportant un grand nombre de valeurs distinctes).</p>
 <ul>
-<li><p>As a general guideline, bitmap indexes are most effective when the cardinality of a field is less than 500.​</p></li>
-<li><p>When the cardinality increases beyond this threshold, the performance benefits of bitmap indexes diminish, and the storage overhead becomes significant.​</p></li>
-<li><p>For high-cardinality fields, consider using alternative indexing techniques such as inverted indexes, depending on your specific use case and query requirements.​</p></li>
+<li><p>En règle générale, les index bitmap sont plus efficaces lorsque la cardinalité d'un champ est inférieure à 500.</p></li>
+<li><p>Lorsque la cardinalité dépasse ce seuil, les avantages des index bitmap en termes de performances diminuent et la surcharge de stockage devient importante.</p></li>
+<li><p>Pour les champs de cardinalité élevée, envisagez d'utiliser d'autres techniques d'indexation, telles que les index inversés, en fonction de votre cas d'utilisation spécifique et des exigences de la requête.</p></li>
 </ul></li>
 </ul>

@@ -1,13 +1,11 @@
 ---
 id: NLWeb_with_milvus.md
 summary: >-
-  Learn how to integrate Microsoft NLWeb with Milvus to build powerful natural
-  language interfaces for websites. This tutorial demonstrates how to leverage
-  Milvus' vector database capabilities for efficient semantic search, embedding
-  storage, and context retrieval in NLWeb applications.
-title: Using NLWeb with Milvus
+  了解如何将 Microsoft NLWeb 与 Milvus 集成，为网站构建强大的自然语言界面。本教程演示了如何在 NLWeb 应用程序中利用
+  Milvus 的向量数据库功能进行高效语义搜索、嵌入存储和上下文检索。
+title: 与 Milvus 一起使用 NLWeb
 ---
-<h1 id="Using-NLWeb-with-Milvus" class="common-anchor-header">Using NLWeb with Milvus<button data-href="#Using-NLWeb-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Using-NLWeb-with-Milvus" class="common-anchor-header">与 Milvus 一起使用 NLWeb<button data-href="#Using-NLWeb-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,12 +20,12 @@ title: Using NLWeb with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/microsoft/NLWeb">Microsoft’s NLWeb</a> is a proposed framework that enables natural language interfaces for websites, using <a href="https://schema.org/">Schema.org</a>, formats like RSS and the emerging MCP protocol.</p>
-<p><a href="https://milvus.io/">Milvus</a> is supported as a vector database backend within NLWeb for embedding storage and efficient vector similarity search, enabling powerful context retrieval for natural language processing applications.</p>
+    </button></h1><p><a href="https://github.com/microsoft/NLWeb">微软的 NLWeb</a>是一个拟议的框架，可使用<a href="https://schema.org/">Schema.org</a>、RSS 等格式和新兴的 MCP 协议为网站提供自然语言界面。</p>
+<p><a href="https://milvus.io/">Milvus</a>作为 NLWeb 中的向量数据库后端，支持嵌入存储和高效向量相似性搜索，从而为自然语言处理应用实现强大的上下文检索功能。</p>
 <blockquote>
-<p>This documentation is primarily based on the official <a href="https://github.com/microsoft/NLWeb/blob/main/HelloWorld.md">quick start</a> documentation. If you find any outdated or inconsistent content, please prioritize the official documentation and feel free to raise an issue for us.</p>
+<p>本文档主要基于官方<a href="https://github.com/microsoft/NLWeb/blob/main/HelloWorld.md">快速入门</a>文档。如果您发现任何过时或不一致的内容，请优先使用官方文档，并随时向我们提出问题。</p>
 </blockquote>
-<h2 id="Usage" class="common-anchor-header">Usage<button data-href="#Usage" class="anchor-icon" translate="no">
+<h2 id="Usage" class="common-anchor-header">使用方法<button data-href="#Usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,8 +40,8 @@ title: Using NLWeb with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NLWeb can be configured to use Milvus as the retrieval engine. Below is a guide on how to set up and use NLWeb with Milvus.</p>
-<h3 id="Installation" class="common-anchor-header">Installation</h3><p>Clone the repo and set up your environment:</p>
+    </button></h2><p>NLWeb 可以配置为使用 Milvus 作为检索引擎。以下是如何使用 Milvus 设置和使用 NLWeb 的指南。</p>
+<h3 id="Installation" class="common-anchor-header">安装</h3><p>克隆版本库并设置环境：</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/microsoft/NLWeb
 <span class="hljs-built_in">cd</span> NLWeb
 python -m venv .venv
@@ -52,8 +50,8 @@ python -m venv .venv
 pip install -r requirements.txt
 pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configuring-Milvus" class="common-anchor-header">Configuring Milvus</h3><p>To use <strong>Milvus</strong>, update your configuration.</p>
-<h4 id="Update-config-files-in-codeconfig" class="common-anchor-header">Update config files in <code translate="no">code/config</code></h4><p>Open the <code translate="no">config_retrieval.yaml</code> file and add the Milvus configuration:</p>
+<h3 id="Configuring-Milvus" class="common-anchor-header">配置 Milvus</h3><p>要使用<strong>Milvus</strong>，请更新配置。</p>
+<h4 id="Update-config-files-in-codeconfig" class="common-anchor-header">更新配置文件<code translate="no">code/config</code></h4><p>打开<code translate="no">config_retrieval.yaml</code> 文件，添加 Milvus 配置：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">preferred_endpoint:</span> <span class="hljs-string">milvus_local</span>
 
 <span class="hljs-attr">endpoints:</span>
@@ -64,16 +62,16 @@ pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</spa
     <span class="hljs-comment"># Specify the database type</span>
     <span class="hljs-attr">db_type:</span> <span class="hljs-string">milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Loading-Data" class="common-anchor-header">Loading Data</h3><p>Once configured, load your content using RSS feeds.</p>
-<p>From the <code translate="no">code</code> directory:</p>
+<h3 id="Loading-Data" class="common-anchor-header">加载数据</h3><p>配置完成后，使用 RSS 源加载内容。</p>
+<p>从<code translate="no">code</code> 目录加载内容：</p>
 <pre><code translate="no" class="language-bash">python -m tools.db_load https://feeds.libsyn.com/121695/rss Behind-the-Tech
 <button class="copy-code-btn"></button></code></pre>
-<p>This will ingest the content into your Milvus collection, storing both the text data and vector embeddings.</p>
-<h3 id="Running-the-Server" class="common-anchor-header">Running the Server</h3><p>To start NLWeb, from the <code translate="no">code</code> directory, run:</p>
+<p>这将把内容摄取到你的 Milvus Collections 中，同时存储文本数据和向量嵌入。</p>
+<h3 id="Running-the-Server" class="common-anchor-header">运行服务器</h3><p>要启动 NLWeb，请从<code translate="no">code</code> 目录运行：</p>
 <pre><code translate="no" class="language-bash">python app-file.py
 <button class="copy-code-btn"></button></code></pre>
-<p>You can now query your content via natural language using either the web UI at http://localhost:8000/ or directly through the MCP-compatible REST API.</p>
-<h2 id="Further-Reading" class="common-anchor-header">Further Reading<button data-href="#Further-Reading" class="anchor-icon" translate="no">
+<p>现在，您可以使用 http://localhost:8000/ 的网络用户界面或直接通过与 MCP 兼容的 REST API，通过自然语言查询内容。</p>
+<h2 id="Further-Reading" class="common-anchor-header">更多阅读<button data-href="#Further-Reading" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -89,10 +87,10 @@ pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</spa
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://milvus.io/docs">Milvus Documentation</a></li>
-<li><a href="https://github.com/microsoft/NLWeb">NLWeb Source</a></li>
-<li>Life of a Chat Query</li>
-<li>Modifying behavior by changing prompts</li>
-<li>Modifying control flow</li>
-<li>Modifying the user interface</li>
+<li><a href="https://milvus.io/docs">Milvus 文档</a></li>
+<li><a href="https://github.com/microsoft/NLWeb">NLWeb 源</a></li>
+<li>聊天查询的生命</li>
+<li>通过更改提示修改行为</li>
+<li>修改控制流</li>
+<li>修改用户界面</li>
 </ul>

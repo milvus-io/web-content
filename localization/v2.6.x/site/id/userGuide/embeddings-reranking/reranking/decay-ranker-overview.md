@@ -1,14 +1,14 @@
 ---
 id: decay-ranker-overview.md
-title: Decay Ranker Overview
+title: Gambaran Umum Pemeringkat PeluruhanCompatible with Milvus 2.6.x
 summary: >-
-  In traditional vector search, results are ranked purely by vector
-  similarity—how closely vectors match in mathematical space. But in real-world
-  applications, what makes content truly relevant often depends on more than
-  just semantic similarity.
+  Dalam pencarian vektor tradisional, hasil diurutkan berdasarkan kemiripan
+  vektor-seberapa dekat vektor cocok dalam ruang matematika. Namun dalam
+  aplikasi dunia nyata, apa yang membuat konten benar-benar relevan sering kali
+  bergantung pada lebih dari sekadar kemiripan semantik.
 beta: Milvus 2.6.x
 ---
-<h1 id="Decay-Ranker-Overview" class="common-anchor-header">Decay Ranker Overview<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Decay-Ranker-Overview" class="anchor-icon" translate="no">
+<h1 id="Decay-Ranker-Overview" class="common-anchor-header">Gambaran Umum Pemeringkat Peluruhan<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Decay-Ranker-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,16 +23,16 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In traditional vector search, results are ranked purely by vector similarity—how closely vectors match in mathematical space. But in real-world applications, what makes content truly relevant often depends on more than just semantic similarity.</p>
-<p>Consider these everyday scenarios:</p>
+    </button></h1><p>Dalam pencarian vektor tradisional, hasil diberi peringkat murni berdasarkan kemiripan vektor-seberapa dekat vektor cocok dalam ruang matematika. Namun dalam aplikasi dunia nyata, apa yang membuat konten benar-benar relevan sering kali bergantung pada lebih dari sekadar kemiripan semantik.</p>
+<p>Pertimbangkan skenario sehari-hari ini:</p>
 <ul>
-<li><p>A news search where yesterday’s article should rank higher than a similar article from three years ago</p></li>
-<li><p>A restaurant finder that prioritizes venues 5 minutes away over those requiring a 30-minute drive</p></li>
-<li><p>An e-commerce platform that boosts trending products even when they’re slightly less similar to the search query</p></li>
+<li><p>Pencarian berita di mana artikel kemarin seharusnya memiliki peringkat lebih tinggi daripada artikel serupa dari tiga tahun yang lalu</p></li>
+<li><p>Pencari restoran yang memprioritaskan tempat yang berjarak 5 menit daripada yang membutuhkan waktu 30 menit berkendara</p></li>
+<li><p>Platform e-niaga yang meningkatkan produk yang sedang tren meskipun produk tersebut tidak terlalu mirip dengan kueri penelusuran</p></li>
 </ul>
-<p>These scenarios all share a common need: balancing vector similarity with other numeric factors like time, distance, or popularity.</p>
-<p>Decay rankers in Milvus address this need by adjusting search rankings based on numeric field values. They allow you to balance vector similarity with “freshness,” “nearness,” or other numeric properties of your data, creating more intuitive and contextually relevant search experiences.</p>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<p>Semua skenario ini memiliki kebutuhan yang sama: menyeimbangkan kemiripan vektor dengan faktor numerik lain seperti waktu, jarak, atau popularitas.</p>
+<p>Pemeringkat pembusukan di Milvus memenuhi kebutuhan ini dengan menyesuaikan peringkat pencarian berdasarkan nilai bidang numerik. Mereka memungkinkan Anda untuk menyeimbangkan kemiripan vektor dengan "kesegaran", "kedekatan", atau properti numerik lain dari data Anda, menciptakan pengalaman pencarian yang lebih intuitif dan relevan secara kontekstual.</p>
+<h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -48,11 +48,11 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Decay ranking cannot be used with grouping searches.</p></li>
-<li><p>The field used for decay ranking must be numeric (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, or <code translate="no">DOUBLE</code>).</p></li>
-<li><p>Each decay ranker can only use one numeric field.</p></li>
+<li><p>Peringkat peluruhan tidak dapat digunakan dengan pencarian pengelompokan.</p></li>
+<li><p>Bidang yang digunakan untuk peringkat peluruhan harus berupa angka (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, atau <code translate="no">DOUBLE</code>).</p></li>
+<li><p>Setiap pemeringkat peluruhan hanya dapat menggunakan satu bidang numerik.</p></li>
 </ul>
-<h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">Bagaimana cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,86 +67,86 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Decay ranking enhances traditional vector search by incorporating numeric factors like time or geo distance into the ranking process. The entire process follows these stages:</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Stage 1: Calculate normalized similarity scores</h3><p>First, Milvus calculates and normalizes vector similarity scores to ensure consistent comparison:</p>
+    </button></h2><p>Peringkat peluruhan meningkatkan pencarian vektor tradisional dengan memasukkan faktor numerik seperti waktu atau jarak geografis ke dalam proses pemeringkatan. Keseluruhan prosesnya mengikuti tahap-tahap berikut:</p>
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Tahap 1: Menghitung skor kemiripan yang dinormalisasi</h3><p>Pertama, Milvus menghitung dan menormalkan skor kemiripan vektor untuk memastikan perbandingan yang konsisten:</p>
 <ul>
-<li><p>For <strong>L2</strong> and <strong>JACCARD</strong> distance metrics (where lower values indicate higher similarity):</p>
+<li><p>Untuk metrik jarak <strong>L2</strong> dan <strong>JACCARD</strong> (di mana nilai yang lebih rendah menunjukkan kemiripan yang lebih tinggi):</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
 <button class="copy-code-btn"></button></code></pre>
-<p>This transforms distances into similarity scores between 0-1, where higher is better.</p></li>
-<li><p>For <strong>IP</strong>, <strong>COSINE</strong>, and <strong>BM25</strong> metrics (where higher scores already indicate better matches): Scores are used directly without normalization.</p></li>
+<p>Ini mengubah jarak menjadi skor kemiripan antara 0-1, di mana lebih tinggi lebih baik.</p></li>
+<li><p>Untuk metrik <strong>IP</strong>, <strong>COSINE</strong>, dan <strong>BM25</strong> (di mana nilai yang lebih tinggi sudah mengindikasikan kecocokan yang lebih baik): Skor digunakan secara langsung tanpa normalisasi.</p></li>
 </ul>
-<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">Stage 2: Calculate decay scores</h3><p>Next, Milvus calculates a decay score based on the numeric field value (like timestamp or distance) using your selected decay ranker:</p>
+<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">Tahap 2: Menghitung skor pembusukan</h3><p>Selanjutnya, Milvus menghitung skor peluruhan berdasarkan nilai bidang numerik (seperti stempel waktu atau jarak) menggunakan pemeringkat peluruhan yang Anda pilih:</p>
 <ul>
-<li><p>Each decay ranker transforms raw numeric values into normalized relevance scores between 0-1</p></li>
-<li><p>The decay score represents how relevant an item is based on its “distance” from the ideal point</p></li>
+<li><p>Setiap pemeringkat peluruhan mengubah nilai numerik mentah menjadi skor relevansi yang dinormalisasi antara 0-1</p></li>
+<li><p>Skor peluruhan menunjukkan seberapa relevan sebuah item berdasarkan "jaraknya" dari titik ideal</p></li>
 </ul>
-<p>The specific calculation formula varies depending on the decay ranker type. For details on how to calculate a decay score, refer to the dedicated pages for <a href="/docs/gaussian-decay.md#Formula">Gaussian Decay</a>, <a href="/docs/exponential-decay.md#Formula">Exponential Decay</a>, <a href="/docs/linear-decay.md#Formula">Linear Decay</a>.</p>
-<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Stage 3: Compute final scores</h3><p>Finally, Milvus combines the normalized similarity score and decay score to produce the final ranking score:</p>
+<p>Rumus perhitungan spesifik bervariasi tergantung pada jenis pemeringkat peluruhan. Untuk detail tentang cara menghitung skor peluruhan, lihat halaman khusus untuk <a href="/docs/id/gaussian-decay.md#Formula">Peluruhan Gaussian</a>, <a href="/docs/id/exponential-decay.md#Formula">Peluruhan Eksponensial</a>, <a href="/docs/id/linear-decay.md#Formula">Peluruhan Linier</a>.</p>
+<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Tahap 3: Menghitung skor akhir</h3><p>Terakhir, Milvus menggabungkan skor kemiripan yang dinormalisasi dan skor peluruhan untuk menghasilkan skor peringkat akhir:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>In cases of hybrid search (combining multiple vector fields), Milvus takes the maximum normalized similarity score among search requests:</p>
+<p>Dalam kasus pencarian hibrida (menggabungkan beberapa bidang vektor), Milvus mengambil skor kemiripan ternormalisasi maksimum di antara permintaan pencarian:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>For example, if a research paper scores 0.82 from vector similarity and 0.91 from BM25-based text retrieval in a hybrid search, Milvus uses 0.91 as the base similarity score before applying the decay factor.</p>
-<h3 id="Decay-ranking-in-action" class="common-anchor-header">Decay ranking in action</h3><p>Let’s see decay ranking in a practical scenario—searching for <strong>“AI research papers”</strong> with time-based decay:</p>
+<p>Misalnya, jika sebuah makalah penelitian mendapat skor 0,82 dari kesamaan vektor dan 0,91 dari pencarian teks berbasis BM25 dalam pencarian hibrida, Milvus menggunakan 0,91 sebagai skor kesamaan dasar sebelum menerapkan faktor peluruhan.</p>
+<h3 id="Decay-ranking-in-action" class="common-anchor-header">Peringkat peluruhan dalam aksi</h3><p>Mari kita lihat peringkat peluruhan dalam skenario praktis-mencari <strong>"makalah penelitian AI"</strong> dengan peluruhan berbasis waktu:</p>
 <div class="alert note">
-<p>In this example, decay scores reflect how relevance diminishes with time—newer papers receive scores closer to 1.0, older papers receive lower scores. These values are calculated using a specific decay ranker. For details, refer to <a href="/docs/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a>.</p>
+<p>Dalam contoh ini, skor peluruhan mencerminkan bagaimana relevansi berkurang seiring berjalannya waktu-makalah yang lebih baru menerima skor yang mendekati 1,0, makalah yang lebih lama menerima skor yang lebih rendah. Nilai-nilai ini dihitung dengan menggunakan pemeringkat peluruhan tertentu. Untuk detailnya, lihat <a href="/docs/id/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a>.</p>
 </div>
 <table>
    <tr>
-     <th><p>Paper</p></th>
-     <th><p>Vector Similarity</p></th>
-     <th><p>Normalized Similarity Score</p></th>
-     <th><p>Publication Date</p></th>
-     <th><p>Decay Score</p></th>
-     <th><p>Final Score</p></th>
-     <th><p>Final Rank</p></th>
+     <th><p>Kertas</p></th>
+     <th><p>Kemiripan Vektor</p></th>
+     <th><p>Nilai Kemiripan yang dinormalisasi</p></th>
+     <th><p>Tanggal Publikasi</p></th>
+     <th><p>Skor Peluruhan</p></th>
+     <th><p>Skor Akhir</p></th>
+     <th><p>Peringkat Akhir</p></th>
    </tr>
    <tr>
-     <td><p>Paper A</p></td>
-     <td><p>High</p></td>
+     <td><p>Makalah A</p></td>
+     <td><p>Tinggi</p></td>
      <td><p>0.85 (<code translate="no">COSINE</code>)</p></td>
-     <td><p>2 weeks ago</p></td>
+     <td><p>2 minggu yang lalu</p></td>
      <td><p>0.80</p></td>
      <td><p>0.68</p></td>
      <td>2</td>
    </tr>
    <tr>
-     <td><p>Paper B</p></td>
-     <td><p>Very High</p></td>
-     <td><p>0.92 (<code translate="no">COSINE</code>)</p></td>
-     <td><p>6 months ago</p></td>
+     <td><p>Kertas B</p></td>
+     <td><p>Sangat Tinggi</p></td>
+     <td><p>0,92 (<code translate="no">COSINE</code>)</p></td>
+     <td><p>6 bulan yang lalu</p></td>
      <td><p>0.45</p></td>
      <td><p>0.41</p></td>
      <td>3</td>
    </tr>
    <tr>
-     <td><p>Paper C</p></td>
-     <td><p>Medium</p></td>
-     <td><p>0.75 (<code translate="no">COSINE</code>)</p></td>
-     <td><p>1 day ago</p></td>
+     <td><p>Kertas C</p></td>
+     <td><p>Sedang</p></td>
+     <td><p>0,75 (<code translate="no">COSINE</code>)</p></td>
+     <td><p>1 hari yang lalu</p></td>
      <td><p>0.98</p></td>
      <td><p>0.74</p></td>
      <td>1</td>
    </tr>
    <tr>
-     <td><p>Paper D</p></td>
-     <td><p>Medium-High</p></td>
-     <td><p>0.76 (<code translate="no">COSINE</code>)</p></td>
-     <td><p>3 weeks ago</p></td>
+     <td><p>Kertas D</p></td>
+     <td><p>Sedang-Tinggi</p></td>
+     <td><p>0,76 (<code translate="no">COSINE</code>)</p></td>
+     <td><p>3 minggu yang lalu</p></td>
      <td><p>0.70</p></td>
      <td><p>0.53</p></td>
      <td>4</td>
    </tr>
 </table>
-<p>Without decay reranking, Paper B would rank highest based on pure vector similarity (0.92). However, with decay reranking applied:</p>
+<p>Tanpa pemeringkatan ulang peluruhan, makalah B akan menduduki peringkat tertinggi berdasarkan kemiripan vektor murni (0,92). Namun, dengan diterapkannya pemeringkatan ulang peluruhan:</p>
 <ul>
-<li><p>Paper C jumps to position #1 despite medium similarity because it’s very recent (published yesterday)</p></li>
-<li><p>Paper B drops to position #3 despite excellent similarity because it’s relatively old</p></li>
-<li><p>Paper D uses L2 distance (where lower is better), so its score is normalized from 1.2 to 0.76 before applying decay</p></li>
+<li><p>Makalah C melonjak ke posisi #1 meskipun kemiripannya sedang karena sangat baru (diterbitkan kemarin)</p></li>
+<li><p>Makalah B turun ke posisi #3 meskipun memiliki kemiripan yang sangat baik karena relatif tua</p></li>
+<li><p>Makalah D menggunakan jarak L2 (di mana lebih rendah lebih baik), sehingga skornya dinormalisasi dari 1,2 menjadi 0,76 sebelum menerapkan peluruhan</p></li>
 </ul>
-<h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">Choose the right decay ranker<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
+<h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">Pilih pemeringkat peluruhan yang tepat<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -161,52 +161,52 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus offers distinct decay rankers - <code translate="no">gauss</code>, <code translate="no">exp</code>, <code translate="no">linear</code>, each designed for specific use cases:</p>
+    </button></h2><p>Milvus menawarkan pemeringkat peluruhan yang berbeda - <code translate="no">gauss</code>, <code translate="no">exp</code>, <code translate="no">linear</code>, masing-masing dirancang untuk kasus penggunaan tertentu:</p>
 <table>
    <tr>
-     <th><p>Decay Ranker</p></th>
-     <th><p>Characteristics</p></th>
-     <th><p>Ideal Use Cases</p></th>
-     <th><p>Example Scenario</p></th>
+     <th><p>Pemeringkat Pembusukan</p></th>
+     <th><p>Karakteristik</p></th>
+     <th><p>Kasus Penggunaan Ideal</p></th>
+     <th><p>Contoh Skenario</p></th>
    </tr>
    <tr>
      <td><p>Gaussian (<code translate="no">gauss</code>)</p></td>
-     <td><p>Natural-feeling gradual decline that extends moderately</p></td>
+     <td><p>Penurunan bertahap yang terasa alami yang meluas secara moderat</p></td>
      <td><ul>
-<li><p>General searches requiring balanced results</p></li>
-<li><p>Applications where users have an intuitive sense of distance</p></li>
-<li><p>When moderate distance shouldn't severely penalize results</p></li>
+<li><p>Pencarian umum yang membutuhkan hasil yang seimbang</p></li>
+<li><p>Aplikasi di mana pengguna memiliki perasaan intuitif tentang jarak</p></li>
+<li><p>Ketika jarak yang moderat seharusnya tidak terlalu mempengaruhi hasil</p></li>
 </ul></td>
-     <td><p>In a restaurant search, quality venues 3 km away remain discoverable, though ranked lower than nearby options</p></td>
+     <td><p>Dalam pencarian restoran, tempat berkualitas yang berjarak 3 km tetap dapat ditemukan, meskipun peringkatnya lebih rendah dari pilihan terdekat</p></td>
    </tr>
    <tr>
-     <td><p>Exponential (<code translate="no">exp</code>)</p></td>
-     <td><p>Rapidly decreases at first but maintains a long tail</p></td>
+     <td><p>Eksponensial (<code translate="no">exp</code>)</p></td>
+     <td><p>Menurun dengan cepat pada awalnya tetapi mempertahankan ekor yang panjang</p></td>
      <td><ul>
-<li><p>News feeds where recency is critical</p></li>
-<li><p>Social media where fresh content should dominate</p></li>
-<li><p>When proximity is strongly preferred but exceptional distant items should remain visible</p></li>
+<li><p>Umpan berita di mana kemutakhiran sangat penting</p></li>
+<li><p>Media sosial di mana konten segar harus mendominasi</p></li>
+<li><p>Ketika kedekatan sangat disukai tetapi item yang jauh harus tetap terlihat</p></li>
 </ul></td>
-     <td><p>In a news app, yesterday's stories rank much higher than week-old content, but highly relevant older articles can still appear</p></td>
+     <td><p>Dalam aplikasi berita, berita kemarin memiliki peringkat yang jauh lebih tinggi daripada konten yang sudah berumur satu minggu, tetapi artikel lama yang sangat relevan masih dapat muncul</p></td>
    </tr>
    <tr>
      <td><p>Linear (<code translate="no">linear</code>)</p></td>
-     <td><p>Consistent, predictable decline with a clear cutoff</p></td>
+     <td><p>Penurunan yang konsisten dan dapat diprediksi dengan batas yang jelas</p></td>
      <td><ul>
-<li><p>Applications with natural boundaries</p></li>
-<li><p>Services with distance limits</p></li>
-<li><p>Content with expiration dates or clear thresholds</p></li>
+<li><p>Aplikasi dengan batas-batas alami</p></li>
+<li><p>Layanan dengan batas jarak</p></li>
+<li><p>Konten dengan tanggal kedaluwarsa atau ambang batas yang jelas</p></li>
 </ul></td>
-     <td><p>In an event finder, events beyond a two-week future window simply don't appear at all</p></td>
+     <td><p>Dalam pencari peristiwa, peristiwa di luar jendela dua minggu ke depan tidak akan muncul sama sekali</p></td>
    </tr>
 </table>
-<p>For detailed information about how each decay ranker calculates scores and specific decline patterns, refer to the dedicated documentation:</p>
+<p>Untuk informasi terperinci tentang bagaimana setiap pemeringkat peluruhan menghitung skor dan pola penurunan tertentu, lihat dokumentasi khusus:</p>
 <ul>
-<li><p><a href="/docs/gaussian-decay.md">Gaussian Decay</a></p></li>
-<li><p><a href="/docs/exponential-decay.md">Exponential Decay</a></p></li>
-<li><p><a href="/docs/exponential-decay.md">Exponential Decay</a></p></li>
+<li><p><a href="/docs/id/gaussian-decay.md">Peluruhan Gaussian</a></p></li>
+<li><p><a href="/docs/id/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
+<li><p><a href="/docs/id/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
 </ul>
-<h2 id="Implementation-example" class="common-anchor-header">Implementation example<button data-href="#Implementation-example" class="anchor-icon" translate="no">
+<h2 id="Implementation-example" class="common-anchor-header">Contoh implementasi<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -221,11 +221,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Decay rankers can be applied to both standard vector search and hybrid search operations in Milvus. Below are the key code snippets for implementing this feature.</p>
+    </button></h2><p>Pemeringkat peluruhan dapat diterapkan pada pencarian vektor standar dan operasi pencarian hibrida di Milvus. Di bawah ini adalah cuplikan kode utama untuk mengimplementasikan fitur ini.</p>
 <div class="alert note">
-<p>Before using decay functions, you must first create a collection with appropriate numeric fields (like timestamps, distances, etc.) that will be used for decay calculations. For complete working examples including collection setup, schema definition, and data insertion, refer to <a href="/docs/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implement Time-based Ranking in Milvus</a>.</p>
+<p>Sebelum menggunakan fungsi peluruhan, Anda harus terlebih dahulu membuat koleksi dengan bidang numerik yang sesuai (seperti stempel waktu, jarak, dll.) yang akan digunakan untuk perhitungan peluruhan. Untuk contoh kerja lengkap termasuk penyiapan koleksi, definisi skema, dan penyisipan data, lihat <a href="/docs/id/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Menerapkan Pemeringkatan Berbasis Waktu di Milvus</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Create a decay ranker</h3><p>To implement decay ranking, first define a <code translate="no">Function</code> object with the appropriate configuration:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Membuat pemeringkat peluruhan</h3><p>Untuk mengimplementasikan pemeringkatan peluruhan, pertama-tama tentukan objek <code translate="no">Function</code> dengan konfigurasi yang sesuai:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
@@ -246,82 +246,76 @@ decay_ranker = Function(
 <table>
    <tr>
      <th><p>Parameter</p></th>
-     <th><p>Required?</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value/Example</p></th>
+     <th><p>Diperlukan?</p></th>
+     <th><p>Deskripsi</p></th>
+     <th><p>Nilai/Contoh</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Identifier for your function used when executing searches. Choose a descriptive name relevant to your use case.</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Pengenal untuk fungsi Anda yang digunakan saat menjalankan pencarian. Pilih nama deskriptif yang relevan dengan kasus penggunaan Anda.</p></td>
      <td><p><code translate="no">"time_decay"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Numeric field for decay score calculation. Determines which data attribute will be used for calculating decay (e.g., timestamps for time-based decay, coordinates for location-based decay). 
- Must be a field in your collection that contains relevant numeric values. Supports INT8/16/32/64, FLOAT, DOUBLE.</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Bidang numerik untuk penghitungan skor peluruhan. Menentukan atribut data mana yang akan digunakan untuk menghitung peluruhan (misalnya, stempel waktu untuk peluruhan berbasis waktu, koordinat untuk peluruhan berbasis lokasi). 
+ Harus berupa bidang dalam koleksi Anda yang berisi nilai numerik yang relevan. Mendukung INT8/16/32/64, FLOAT, DOUBLE.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Specifies the type of function being created.
- Must be set to <code translate="no">RERANK</code> for all decay rankers.</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Menentukan jenis fungsi yang sedang dibuat. Harus diatur ke <code translate="no">RERANK</code> untuk semua pemeringkat peluruhan.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Specifies the reranking method to use.
- Must be set to <code translate="no">"decay"</code> to enable decay ranking functionality.</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Menentukan metode pemeringkatan ulang yang akan digunakan. Harus diatur ke <code translate="no">"decay"</code> untuk mengaktifkan fungsionalitas pemeringkatan peluruhan.</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Specifies which mathematical decay ranker to apply. Determines the curve shape of relevance decline.
- See <a href="/docs/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a> section for guidance on selecting the appropriate function.</p></td>
-     <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, or <code translate="no">"linear"</code></p></td>
+     <td><p>Ya</p></td>
+     <td><p>Menentukan pemeringkat peluruhan matematis mana yang akan diterapkan. Menentukan bentuk kurva penurunan relevansi. Lihat bagian <a href="/docs/id/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a> untuk panduan dalam memilih fungsi yang sesuai.</p></td>
+     <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, atau <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Reference point from which decay score is calculated. Items at this value receive maximum relevance scores.</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Titik referensi yang digunakan untuk menghitung skor peluruhan. Item pada nilai ini menerima skor relevansi maksimum.</p></td>
      <td><ul>
-<li>For timestamps: current time (e.g., <code translate="no">int(time.time())</code>)</li>
-<li>For geolocation: user's current coordinates</li>
+<li>Untuk stempel waktu: waktu saat ini (misalnya, <code translate="no">int(time.time())</code>)</li>
+<li>Untuk geolokasi: koordinat pengguna saat ini</li>
 </ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.scale</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Distance or time at which relevance drops to the <code translate="no">decay</code> value. Controls how quickly relevance declines.
- Larger values create a more gradual decline in relevance; smaller values create a steeper decline.</p></td>
+     <td><p>Ya</p></td>
+     <td><p>Jarak atau waktu saat relevansi turun ke nilai <code translate="no">decay</code>. Mengontrol seberapa cepat relevansi menurun. Nilai yang lebih besar membuat penurunan relevansi yang lebih bertahap; nilai yang lebih kecil membuat penurunan yang lebih curam.</p></td>
      <td><ul>
-<li>For time: period in seconds (e.g., <code translate="no">7 * 24 * 60 * 60</code> for 7 days)</li>
-<li>For distance: meters (e.g., <code translate="no">5000</code> for 5km)</li>
+<li>Untuk waktu: periode dalam detik (misalnya, <code translate="no">7 * 24 * 60 * 60</code> selama 7 hari)</li>
+<li>Untuk jarak: meter (misalnya, <code translate="no">5000</code> untuk 5 km)</li>
 </ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.offset</code></p></td>
-     <td><p>No</p></td>
-     <td><p>Creates a "no-decay zone" around the <code translate="no">origin</code> where items maintain full scores (decay score = 1.0).
- Items within this range of the <code translate="no">origin</code> maintain maximum relevance.</p></td>
+     <td><p>Tidak</p></td>
+     <td><p>Menciptakan "zona tanpa peluruhan" di sekitar <code translate="no">origin</code> di mana item mempertahankan nilai penuh (nilai peluruhan = 1,0). Item dalam kisaran <code translate="no">origin</code> ini mempertahankan relevansi maksimum.</p></td>
      <td><ul>
-<li>For time: period in seconds (e.g., <code translate="no">24 * 60 * 60</code> for 1 day)</li>
-<li>For distance: meters (e.g., <code translate="no">500</code> for 500m)</li>
+<li>Untuk waktu: periode dalam detik (misalnya, <code translate="no">24 * 60 * 60</code> selama 1 hari)</li>
+<li>Untuk jarak: meter (misalnya, <code translate="no">500</code> untuk 500m)</li>
 </ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
-     <td><p>No</p></td>
-     <td><p>Score value at the <code translate="no">scale</code> distance, controls curve steepness. Lower values create steeper decline curves; higher values create more gradual decline curves.
- Must be between 0 and 1.</p></td>
+     <td><p>Tidak</p></td>
+     <td><p>Nilai skor pada jarak <code translate="no">scale</code>, mengontrol kecuraman kurva. Nilai yang lebih rendah menciptakan kurva penurunan yang lebih curam; nilai yang lebih tinggi menciptakan kurva penurunan yang lebih bertahap. Harus berada di antara 0 dan 1.</p></td>
      <td><p><code translate="no">0.5</code> (default)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Apply to standard vector search</h3><p>After defining your decay ranker, you can apply it during search operations by passing it to the <code translate="no">ranker</code> parameter:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Menerapkan ke pencarian vektor standar</h3><p>Setelah menentukan pemeringkat peluruhan Anda, Anda dapat menerapkannya selama operasi pencarian dengan meneruskannya ke parameter <code translate="no">ranker</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
@@ -333,7 +327,7 @@ results = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Apply to hybrid search</h3><p>Decay rankers can also be applied to hybrid search operations that combine multiple vector fields:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Terapkan ke pencarian hibrida</h3><p>Pemeringkat peluruhan juga dapat diterapkan pada operasi pencarian hibrida yang menggabungkan beberapa bidang vektor:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
@@ -360,4 +354,4 @@ hybrid_results = milvus_client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In hybrid search, Milvus first finds the maximum similarity score from all vector fields, then applies the decay factor to that score.</p>
+<p>Dalam pencarian gabungan, Milvus pertama-tama menemukan skor kemiripan maksimum dari semua bidang vektor, lalu menerapkan faktor peluruhan pada skor tersebut.</p>

@@ -1,15 +1,12 @@
 ---
 id: tutorial-implement-a-time-based-ranking-in-milvus.md
-title: 'Tutorial: Implement Time-based Ranking in Milvus'
+title: 教學：在 Milvus 中實施以時間為基礎的排名Compatible with Milvus 2.6.x
 summary: >-
-  In many search applications, the freshness of content is just as important as
-  its relevance. News articles, product listings, social media posts, and
-  research papers all benefit from ranking systems that balance semantic
-  relevance with recency. This tutorial demonstrates how to implement time-based
-  ranking in Milvus using decay rankers.
+  在許多搜尋應用中，內容的新鮮度與相關性同樣重要。新聞文章、產品列表、社群媒體文章和研究論文都受益於平衡語意相關性和新鮮度的排名系統。本教學示範如何在
+  Milvus 中使用衰減排名器實現基於時間的排名。
 beta: Milvus 2.6.x
 ---
-<h1 id="Tutorial-Implement-Time-based-Ranking-in-Milvus" class="common-anchor-header">Tutorial: Implement Time-based Ranking in Milvus<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Tutorial-Implement-Time-based-Ranking-in-Milvus" class="anchor-icon" translate="no">
+<h1 id="Tutorial-Implement-Time-based-Ranking-in-Milvus" class="common-anchor-header">教學：在 Milvus 中實施以時間為基礎的排名<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Tutorial-Implement-Time-based-Ranking-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +21,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In many search applications, the freshness of content is just as important as its relevance. News articles, product listings, social media posts, and research papers all benefit from ranking systems that balance semantic relevance with recency. This tutorial demonstrates how to implement time-based ranking in Milvus using decay rankers.</p>
-<h2 id="Understand-decay-rankers-in-Milvus" class="common-anchor-header">Understand decay rankers in Milvus<button data-href="#Understand-decay-rankers-in-Milvus" class="anchor-icon" translate="no">
+    </button></h1><p>在許多搜尋應用中，內容的新鮮度與相關性同樣重要。新聞文章、產品列表、社交媒體文章和研究論文都受益於平衡語義相關性和新鮮度的排名系統。本教程演示了如何在 Milvus 中使用衰減排名器實現基於時間的排名。</p>
+<h2 id="Understand-decay-rankers-in-Milvus" class="common-anchor-header">瞭解 Milvus 中的遞減排名器<button data-href="#Understand-decay-rankers-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,15 +37,15 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Decay rankers allow you to boost or penalize documents based on numeric values (like timestamps) relative to a reference point. For time-based ranking, this means newer documents can receive higher scores than older ones, even when their semantic relevance is similar.</p>
-<p>Milvus supports three types of decay rankers:</p>
+    </button></h2><p>衰減排名器允許您根據相對於參考點的數值（如時間戳記）來提升或懲罰文件。對於以時間為基礎的排名，這意味著較新的文件可以比較舊的文件獲得較高的分數，即使它們的語義相關性類似。</p>
+<p>Milvus 支援三種類型的遞減排名器：</p>
 <ul>
-<li><p><strong>Gaussian</strong> (<code translate="no">gauss</code>): A bell-shaped curve providing smooth, gradual decay</p></li>
-<li><p><strong>Exponential</strong> (<code translate="no">exp</code>): Creates a sharper initial drop-off for strongly emphasizing recent content</p></li>
-<li><p><strong>Linear</strong> (<code translate="no">linear</code>): A straight-line decay that is predictable and easy to understand</p></li>
+<li><p><strong>高斯</strong>(<code translate="no">gauss</code>)：鐘形曲線提供平滑、漸進的遞減。</p></li>
+<li><p><strong>Exponential</strong>(<code translate="no">exp</code>)：為強調最近的內容而創造一個較尖銳的初始遞減</p></li>
+<li><p><strong>Linear</strong>(<code translate="no">linear</code>)：直線衰減，可預測且易於理解</p></li>
 </ul>
-<p>Each ranker has different characteristics that make them suitable for various use cases. For more information, refer to <a href="/docs/decay-ranker-overview.md">Decay Ranker Overview</a>.</p>
-<h2 id="Build-a-time-aware-search-system" class="common-anchor-header">Build a time-aware search system<button data-href="#Build-a-time-aware-search-system" class="anchor-icon" translate="no">
+<p>每種排序器都有不同的特性，因此適用於不同的使用情況。如需詳細資訊，請參閱<a href="/docs/zh-hant/decay-ranker-overview.md">Decay Ranker 概觀</a>。</p>
+<h2 id="Build-a-time-aware-search-system" class="common-anchor-header">建立時間感知的搜尋系統<button data-href="#Build-a-time-aware-search-system" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,7 +60,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We’ll create a news article search system that demonstrates how to effectively rank content based on both relevance and time. Let’s start with the implementation:</p>
+    </button></h2><p>我們將建立一個新聞文章搜尋系統，展示如何有效地根據相關性和時間對內容進行排名。讓我們從實作開始：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> datetime
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -84,7 +81,7 @@ collection_name = <span class="hljs-string">&quot;news_articles_tutorial&quot;</
 <span class="hljs-comment"># Clean up any existing collection with the same name</span>
 milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-1-Design-the-schema" class="common-anchor-header">Step 1: Design the schema<button data-href="#Step-1-Design-the-schema" class="anchor-icon" translate="no">
+<h2 id="Step-1-Design-the-schema" class="common-anchor-header">步驟 1：設計模式<button data-href="#Step-1-Design-the-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -99,7 +96,7 @@ milvus_client.drop_collection(collection_name)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For time-based search, we need to store the publication timestamp along with the content:</p>
+    </button></h2><p>對於以時間為基礎的搜尋，我們需要將發表時間戳與內容一起儲存：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create schema with fields for content and temporal information</span>
 schema = milvus_client.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>, auto_id=<span class="hljs-literal">True</span>)
 schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -109,7 +106,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
 schema.add_field(<span class="hljs-string">&quot;sparse_vector&quot;</span>, DataType.SPARSE_FLOAT_VECTOR)  <span class="hljs-comment"># For sparse (BM25) search</span>
 schema.add_field(<span class="hljs-string">&quot;publish_date&quot;</span>, DataType.INT64)  <span class="hljs-comment"># Timestamp for decay ranking</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-2-Set-up-embedding-functions" class="common-anchor-header">Step 2: Set up embedding functions<button data-href="#Step-2-Set-up-embedding-functions" class="anchor-icon" translate="no">
+<h2 id="Step-2-Set-up-embedding-functions" class="common-anchor-header">步驟 2：設定嵌入功能<button data-href="#Step-2-Set-up-embedding-functions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -124,7 +121,7 @@ schema.add_field(<span class="hljs-string">&quot;publish_date&quot;</span>, Data
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We’ll configure both dense (semantic) and sparse (keyword) embedding functions:</p>
+    </button></h2><p>我們將配置密集（語義）和稀疏（關鍵字）嵌入函數：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create embedding function for semantic search</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;siliconflow_embedding&quot;</span>,
@@ -148,8 +145,8 @@ bm25_function = Function(
 )
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
-<p>For details on how to use Milvus embedding functions, refer to <a href="/docs/embedding-function-overview.md">Embedding Function Overview</a>.</p>
-<h2 id="Step-3-Configure-index-parameters" class="common-anchor-header">Step 3: Configure index parameters<button data-href="#Step-3-Configure-index-parameters" class="anchor-icon" translate="no">
+<p>有關如何使用 Milvus 嵌入函數的詳細資訊，請參閱「嵌入<a href="/docs/zh-hant/embedding-function-overview.md">函數概述</a>」。</p>
+<h2 id="Step-3-Configure-index-parameters" class="common-anchor-header">步驟 3：設定索引參數<button data-href="#Step-3-Configure-index-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -164,7 +161,7 @@ schema.add_function(bm25_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s set up the appropriate index parameters for fast vector search:</p>
+    </button></h2><p>讓我們為快速向量搜尋設定適當的索引參數：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up indexes for fast search</span>
 index_params = milvus_client.prepare_index_params()
 
@@ -187,7 +184,7 @@ milvus_client.create_collection(
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-4-Prepare-sample-data" class="common-anchor-header">Step 4: Prepare sample data<button data-href="#Step-4-Prepare-sample-data" class="anchor-icon" translate="no">
+<h2 id="Step-4-Prepare-sample-data" class="common-anchor-header">步驟 4：準備樣本資料<button data-href="#Step-4-Prepare-sample-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -202,7 +199,7 @@ milvus_client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For this tutorial, we’ll create a set of news articles with different publication dates. Notice how we’ve included pairs of articles with nearly identical content but different dates to clearly demonstrate the decay ranking effect:</p>
+    </button></h2><p>在本教程中，我們將建立一組具有不同出版日期的新聞文章。請注意，我們加入了幾乎內容相同但日期不同的文章對，以清楚展示衰減排名效果：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get current time</span>
 current_time = <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp())
 current_date = datetime.datetime.fromtimestamp(current_time)
@@ -252,7 +249,7 @@ articles = [
 milvus_client.insert(collection_name, articles)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Inserted <span class="hljs-subst">{<span class="hljs-built_in">len</span>(articles)}</span> articles into the collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-5-Configure-different-decay-rankers" class="common-anchor-header">Step 5: Configure different decay rankers<button data-href="#Step-5-Configure-different-decay-rankers" class="anchor-icon" translate="no">
+<h2 id="Step-5-Configure-different-decay-rankers" class="common-anchor-header">步驟 5：配置不同的遞減排名器<button data-href="#Step-5-Configure-different-decay-rankers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -267,7 +264,7 @@ milvus_client.insert(collection_name, articles)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now let’s create three different decay rankers, each with distinct parameters to highlight their differences:</p>
+    </button></h2><p>現在讓我們建立三種不同的遞減排名器，每種都有不同的參數，以突顯它們的差異：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use current time as reference point</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Using current time as reference point&quot;</span>)
 
@@ -316,17 +313,17 @@ linear_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In the preceding code:</p>
+<p>在前面的程式碼中</p>
 <ul>
-<li><p><code translate="no">reranker</code>: Set to <code translate="no">decay</code> for time-based decay functions</p></li>
-<li><p><code translate="no">function</code>: The type of decay function (gauss, exp, or linear)</p></li>
-<li><p><code translate="no">origin</code>: The reference point (usually current time)</p></li>
-<li><p><code translate="no">offset</code>: The period during which documents maintain full relevance</p></li>
-<li><p><code translate="no">scale</code>: Controls how quickly relevance decreases beyond the offset</p></li>
-<li><p><code translate="no">decay</code>: The decay factor at offset+scale (e.g., 0.5 means half relevance)</p></li>
+<li><p><code translate="no">reranker</code>:設定為<code translate="no">decay</code> 用於基於時間的遞減功能</p></li>
+<li><p><code translate="no">function</code>:衰減函數的類型 (高斯、exp 或線性)</p></li>
+<li><p><code translate="no">origin</code>:參考點（通常是當前時間）</p></li>
+<li><p><code translate="no">offset</code>:文件保持完全相關性的期間</p></li>
+<li><p><code translate="no">scale</code>:控制相關性在偏移後下降的速度</p></li>
+<li><p><code translate="no">decay</code>:偏移+標度時的衰減係數（例如，0.5 表示相關度減半）</p></li>
 </ul>
-<p>Notice that we’ve configured the exponential ranker with different parameters to demonstrate how you can tune these functions for different behaviors.</p>
-<h2 id="Step-6-Visualize-the-decay-rankers" class="common-anchor-header">Step 6: Visualize the decay rankers<button data-href="#Step-6-Visualize-the-decay-rankers" class="anchor-icon" translate="no">
+<p>請注意，我們使用不同的參數設定了指數排名器，以示範您可以如何調整這些函數以符合不同的行為。</p>
+<h2 id="Step-6-Visualize-the-decay-rankers" class="common-anchor-header">步驟 6：可視化衰減排序器<button data-href="#Step-6-Visualize-the-decay-rankers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -341,7 +338,7 @@ linear_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before performing searches, let’s create a visual comparison of how these differently configured decay rankers behave:</p>
+    </button></h2><p>在執行搜尋之前，讓我們先建立一個可視化的比較，看看這些不同配置的衰減排名器的行為如何：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Visualize the decay functions with different parameters</span>
 days = np.linspace(<span class="hljs-number">0</span>, <span class="hljs-number">90</span>, <span class="hljs-number">100</span>)
 <span class="hljs-comment"># Gaussian: offset=7, scale=14, decay=0.5</span>
@@ -376,7 +373,7 @@ plt.close()
     
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{days:2d}</span> days | <span class="hljs-subst">{gaussian_decay:<span class="hljs-number">.4</span>f}</span>   | <span class="hljs-subst">{exponential_decay:<span class="hljs-number">.4</span>f}</span>     | <span class="hljs-subst">{linear_decay:<span class="hljs-number">.4</span>f}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Expected output:</p>
+<p>預期輸出：</p>
 <pre><code translate="no" class="language-python">=== TIME DECAY EFFECT VISUALIZATION ===
 Days ago | Gaussian | Exponential | Linear
 -----------------------------------------
@@ -390,7 +387,7 @@ Days ago | Gaussian | Exponential | Linear
 <span class="hljs-number">60</span> days | <span class="hljs-number">0.0725</span>   | <span class="hljs-number">0.0010</span>     | <span class="hljs-number">0.0000</span>
 <span class="hljs-number">90</span> days | <span class="hljs-number">0.0164</span>   | <span class="hljs-number">0.0000</span>     | <span class="hljs-number">0.0000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-7-Helper-function-for-results-display" class="common-anchor-header">Step 7: Helper function for results display<button data-href="#Step-7-Helper-function-for-results-display" class="anchor-icon" translate="no">
+<h2 id="Step-7-Helper-function-for-results-display" class="common-anchor-header">步驟 7：顯示結果的輔助函式<button data-href="#Step-7-Helper-function-for-results-display" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -417,7 +414,7 @@ Days ago | Gaussian | Exponential | Linear
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;   Score: <span class="hljs-subst">{hit.score:<span class="hljs-number">.4</span>f}</span>&quot;</span>)
         <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-8-Compare-standard-vs-decay-based-search" class="common-anchor-header">Step 8: Compare standard vs. decay-based search<button data-href="#Step-8-Compare-standard-vs-decay-based-search" class="anchor-icon" translate="no">
+<h2 id="Step-8-Compare-standard-vs-decay-based-search" class="common-anchor-header">步驟 8：比較標準搜尋與基於衰減的搜尋<button data-href="#Step-8-Compare-standard-vs-decay-based-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -432,7 +429,7 @@ Days ago | Gaussian | Exponential | Linear
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now let’s run a search query and compare the results with and without decay ranking:</p>
+    </button></h2><p>現在讓我們執行搜尋查詢，比較有衰減排序和沒有衰減排序的結果：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define our search query</span>
 query = <span class="hljs-string">&quot;artificial intelligence advancements&quot;</span>
 
@@ -489,7 +486,7 @@ linear_results = milvus_client.search(
 )
 print_search_results(linear_results, <span class="hljs-string">&quot;SEARCH RESULTS WITH LINEAR DECAY RANKING&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Expected output:</p>
+<p>預期輸出：</p>
 <pre><code translate="no" class="language-python">=== SEARCH RESULTS WITHOUT DECAY RANKING ===
 <span class="hljs-number">1.</span> AI Development Updates Released Yesterday
    Published: <span class="hljs-number">2025</span>-05-<span class="hljs-number">14</span> (<span class="hljs-number">1</span> days ago)
@@ -606,7 +603,7 @@ print_search_results(linear_results, <span class="hljs-string">&quot;SEARCH RESU
    Published: <span class="hljs-number">2025</span>-02-<span class="hljs-number">14</span> (<span class="hljs-number">90</span> days ago)
    Score: <span class="hljs-number">0.2158</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-9-Understand-score-calculation" class="common-anchor-header">Step 9: Understand score calculation<button data-href="#Step-9-Understand-score-calculation" class="anchor-icon" translate="no">
+<h2 id="Step-9-Understand-score-calculation" class="common-anchor-header">步驟 9：了解分數計算<button data-href="#Step-9-Understand-score-calculation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -621,7 +618,7 @@ print_search_results(linear_results, <span class="hljs-string">&quot;SEARCH RESU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s break down how final scores are calculated by combining original relevance with decay factors:</p>
+    </button></h2><p>讓我們分析一下如何結合原始相關性與衰減因子來計算最終得分：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a detailed breakdown for the first 3 results from Gaussian decay</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== SCORE CALCULATION BREAKDOWN (GAUSSIAN DECAY) ===&quot;</span>)
 <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> gaussian_results[<span class="hljs-number">0</span>][:<span class="hljs-number">3</span>]:
@@ -644,7 +641,7 @@ print_search_results(linear_results, <span class="hljs-string">&quot;SEARCH RESU
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Actual final score: <span class="hljs-subst">{item.score:<span class="hljs-number">.4</span>f}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>Expected output:</p>
+<p>預期輸出：</p>
 <pre><code translate="no" class="language-python">=== SCORE CALCULATION BREAKDOWN (GAUSSIAN DECAY) ===
 Item: Latest Deep Learning Models Show Remarkable Progress
   Published: <span class="hljs-number">2025</span>-04-<span class="hljs-number">30</span> (<span class="hljs-number">15</span> days ago)
@@ -667,7 +664,7 @@ Item: AI Development Updates Released Yesterday
   Expected final score = Original × Decay: <span class="hljs-number">0.3670</span>
   Actual final score: <span class="hljs-number">0.3670</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-10-Hybrid-search-with-time-decay" class="common-anchor-header">Step 10: Hybrid search with time decay<button data-href="#Step-10-Hybrid-search-with-time-decay" class="anchor-icon" translate="no">
+<h2 id="Step-10-Hybrid-search-with-time-decay" class="common-anchor-header">步驟 10：混合搜尋與時間衰減<button data-href="#Step-10-Hybrid-search-with-time-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -682,7 +679,7 @@ Item: AI Development Updates Released Yesterday
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For more complex scenarios, we can combine dense (semantic) and sparse (keyword) vectors using hybrid search:</p>
+    </button></h2><p>對於更複雜的情況，我們可以使用混合搜尋結合密集（語義）和稀疏（關鍵字）向量：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up hybrid search (combining dense and sparse vectors)</span>
 dense_search = AnnSearchRequest(
     data=[query],
@@ -719,7 +716,7 @@ hybrid_exponential_results = milvus_client.hybrid_search(
 )
 print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot;HYBRID SEARCH RESULTS WITH EXPONENTIAL DECAY RANKING&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Expected output:</p>
+<p>預期輸出：</p>
 <pre><code translate="no" class="language-python">=== HYBRID SEARCH RESULTS WITH GAUSSIAN DECAY RANKING ===
 <span class="hljs-number">1.</span> New AI Research Results Released This Week
    Published: <span class="hljs-number">2025</span>-05-<span class="hljs-number">10</span> (<span class="hljs-number">5</span> days ago)
@@ -778,7 +775,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
    Published: <span class="hljs-number">2025</span>-01-<span class="hljs-number">15</span> (<span class="hljs-number">120</span> days ago)
    Score: <span class="hljs-number">0.0000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-11-Experiment-with-different-parameter-values" class="common-anchor-header">Step 11: Experiment with different parameter values<button data-href="#Step-11-Experiment-with-different-parameter-values" class="anchor-icon" translate="no">
+<h2 id="Step-11-Experiment-with-different-parameter-values" class="common-anchor-header">步驟 11：使用不同參數值進行實驗<button data-href="#Step-11-Experiment-with-different-parameter-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -793,7 +790,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s see how adjusting the scale parameter affects the Gaussian decay function:</p>
+    </button></h2><p>讓我們看看調整比例參數會如何影響高斯衰減函數：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create variations of the Gaussian decay function with different scale parameters</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== PARAMETER VARIATION EXPERIMENT: SCALE ===&quot;</span>)
 <span class="hljs-keyword">for</span> scale_days <span class="hljs-keyword">in</span> [<span class="hljs-number">7</span>, <span class="hljs-number">14</span>, <span class="hljs-number">30</span>]:
@@ -824,7 +821,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
     
     print_search_results(scale_results, <span class="hljs-string">f&quot;SEARCH WITH GAUSSIAN DECAY (SCALE = <span class="hljs-subst">{scale_days}</span> DAYS)&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Expected output:</p>
+<p>預期輸出：</p>
 <pre><code translate="no" class="language-python">=== PARAMETER VARIATION EXPERIMENT: SCALE ===
 
 === SEARCH WITH GAUSSIAN DECAY (SCALE = <span class="hljs-number">7</span> DAYS) ===
@@ -914,7 +911,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
    Published: <span class="hljs-number">2025</span>-01-<span class="hljs-number">15</span> (<span class="hljs-number">120</span> days ago)
    Score: <span class="hljs-number">0.0000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-12-Testing-with-different-queries" class="common-anchor-header">Step 12: Testing with different queries<button data-href="#Step-12-Testing-with-different-queries" class="anchor-icon" translate="no">
+<h2 id="Step-12-Testing-with-different-queries" class="common-anchor-header">步驟 12：使用不同的查詢進行測試<button data-href="#Step-12-Testing-with-different-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -929,7 +926,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s see how decay ranking performs with different search queries:</p>
+    </button></h2><p>讓我們看看衰減排名在不同搜尋查詢的表現：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Try different queries with Gaussian decay</span>
 <span class="hljs-keyword">for</span> test_query <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;machine learning&quot;</span>, <span class="hljs-string">&quot;neural networks&quot;</span>, <span class="hljs-string">&quot;ethics in AI&quot;</span>]:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n=== TESTING QUERY: &#x27;<span class="hljs-subst">{test_query}</span>&#x27; WITH GAUSSIAN DECAY ===&quot;</span>)
@@ -944,7 +941,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
     )
     print_search_results(test_results, <span class="hljs-string">f&quot;TOP 4 RESULTS FOR &#x27;<span class="hljs-subst">{test_query}</span>&#x27;&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Expected output:</p>
+<p>預期輸出：</p>
 <pre><code translate="no" class="language-python">=== TESTING QUERY: <span class="hljs-string">&#x27;machine learning&#x27;</span> WITH GAUSSIAN DECAY ===
 
 === TOP <span class="hljs-number">4</span> RESULTS FOR <span class="hljs-string">&#x27;machine learning&#x27;</span> ===
@@ -1002,7 +999,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
    Published: <span class="hljs-number">2025</span>-02-<span class="hljs-number">14</span> (<span class="hljs-number">90</span> days ago)
    Score: <span class="hljs-number">0.0000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">結論<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1017,13 +1014,13 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Time-based ranking using decay functions in Milvus provides a powerful way to balance semantic relevance with recency. By configuring the appropriate decay function and parameters, you can create search experiences that highlight fresh content while still respecting semantic relevance.</p>
-<p>This approach is particularly valuable for:</p>
+    </button></h2><p>在 Milvus 中使用遞減函數的基於時間的排名提供了一種強大的方式來平衡語義相關性和經常性。透過設定適當的遞減函數和參數，您可以創造出既能突顯新鮮內容，又能尊重語意相關性的搜尋體驗。</p>
+<p>此方法對於下列項目尤其有價值</p>
 <ul>
-<li><p>News and media platforms</p></li>
-<li><p>E-commerce product listings</p></li>
-<li><p>Social media content feeds</p></li>
-<li><p>Knowledge bases and documentation systems</p></li>
-<li><p>Research paper repositories</p></li>
+<li><p>新聞和媒體平台</p></li>
+<li><p>電子商務產品清單</p></li>
+<li><p>社交媒體內容饋送</p></li>
+<li><p>知識庫和文檔系統</p></li>
+<li><p>研究論文資料庫</p></li>
 </ul>
-<p>By understanding the math behind decay functions and experimenting with different parameters, you can fine-tune your search system to provide the optimal balance between relevance and freshness for your specific use case.</p>
+<p>透過瞭解衰減功能背後的數學原理，並嘗試使用不同的參數，您可以微調搜尋系統，針對您的特定使用個案，在相關性與新鮮度之間取得最佳平衡。</p>

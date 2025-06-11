@@ -2,10 +2,7 @@
 id: ivf-sq8.md
 title: IVF_SQ8
 summary: >-
-  The IVF_SQ8 index is a quantization-based indexing algorithm designed to
-  tackle large-scale similarity search challenges. This index type achieves
-  faster searches with a much smaller memory footprint compared to exhaustive
-  search methods.
+  IVF_SQ8インデックスは、大規模な類似検索の課題に取り組むために設計された量子化ベースのインデックス作成アルゴリズムである。このインデックスタイプは、網羅的検索手法に比べ、はるかに少ないメモリフットプリントで高速な検索を実現する。
 ---
 <h1 id="IVFSQ8" class="common-anchor-header">IVF_SQ8<button data-href="#IVFSQ8" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <strong>IVF_SQ8</strong> index is a <strong>quantization-based</strong> indexing algorithm designed to tackle large-scale similarity search challenges. This index type achieves faster searches with a much smaller memory footprint compared to exhaustive search methods.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p><strong>IVF_SQ8</strong>インデックスは、大規模な類似検索の課題に取り組むために設計された<strong>量子化ベースの</strong>インデックス作成アルゴリズムです。このインデックスタイプは、網羅的検索手法と比較して、より少ないメモリフットプリントで高速な検索を実現します。</p>
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,43 +35,41 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The IVF_SQ8 index is built on two key components:</p>
+    </button></h2><p>IVF_SQ8 インデックスは2つの主要なコンポーネントに基づいて構築されている：</p>
 <ul>
-<li><p><strong>Inverted File (IVF)</strong>: Organizes the data into clusters, enabling the search algorithm to focus only on the most relevant subsets of vectors.</p></li>
-<li><p><strong>Scalar Quantization (SQ8)</strong>: Compresses the vectors to a more compact form, drastically reducing memory usage while maintaining enough precision for fast similarity calculations.</p></li>
+<li><p><strong>転置ファイル（IVF）</strong>：データをクラスタに整理し、検索アルゴリズムが最も関連性の高いベクトルのサブセットのみにフォーカスできるようにする。</p></li>
+<li><p><strong>スカラー量子化（SQ8）</strong>：ベクトルをよりコンパクトな形に圧縮し、メモリ使用量を大幅に削減すると同時に、高速な類似度計算のための十分な精度を維持します。</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF is like creating an index in a book. Instead of scanning every page (or, in our case, every vector), you look up specific keywords (clusters) in the index to quickly find the relevant pages (vectors). In our scenario, vectors are grouped into clusters, and the algorithm will search within a few clusters that are close to the query vector.</p>
-<p>Here’s how it works:</p>
+<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVFは、本の索引を作るようなものです。すべてのページ（私たちの場合はすべてのベクトル）をスキャンする代わりに、インデックスで特定のキーワード（クラスタ）を検索し、関連するページ（ベクトル）をすばやく見つけます。このシナリオでは、ベクターはクラスターにグループ化され、アルゴリズムはクエリーベクターに近いいくつかのクラスター内を検索します。</p>
+<p>以下がその仕組みだ：</p>
 <ol>
-<li><p><strong>Clustering:</strong> Your vector dataset is divided into a specified number of clusters, using a clustering algorithm like k-means. Each cluster has a centroid (a representative vector for the cluster).</p></li>
-<li><p><strong>Assignment:</strong> Each vector is assigned to the cluster whose centroid is closest to it.</p></li>
-<li><p><strong>Inverted Index:</strong> An index is created, mapping each cluster centroid to the list of vectors assigned to that cluster.</p></li>
-<li><p><strong>Search:</strong> When you search for nearest neighbors, the search algorithm compares your query vector with the cluster centroids and selects the most promising cluster(s). The search is then narrowed down to the vectors within those selected clusters.</p></li>
+<li><p><strong>クラスタリング：</strong>ベクトルデータセットは、k-meansのようなクラスタリングアルゴリズムを使用して、指定された数のクラスタに分割されます。各クラスタにはセントロイド（クラスタを代表するベクトル）があります。</p></li>
+<li><p><strong>割り当て：</strong>各ベクトルは、セントロイドが最も近いクラスタに割り当てられます。</p></li>
+<li><p><strong>転置インデックス：</strong>各クラスタのセントロイドを、そのクラスタに割り当てられたベクトルのリストにマッピングするインデックスが作成されます。</p></li>
+<li><p><strong>検索：</strong>最近傍を検索する場合、検索アルゴリズムはクエリベクトルとクラスタ重心を比較し、最も有望なクラスタを選択します。そして、その選択されたクラスタ内のベクトルに検索が絞り込まれます。</p></li>
 </ol>
-<p>To learn more about its technical details , refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>Scalar Quantization (SQ) is a technique used to reduce the size of high-dimensional vectors by replacing their values with smaller, more compact representations. The <strong>SQ8</strong> variant uses 8-bit integers instead of the typical 32-bit floating point numbers to store each dimension value of a vector. This greatly reduces the amount of memory required to store the data.</p>
-<p>Here’s how SQ8 works:</p>
+<p>技術的な詳細については、<a href="/docs/ja/ivf-flat.md">IVF_FLATを</a>参照してください。</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>スカラー量子化(SQ)は、高次元ベクトルの値をより小さくコンパクトな表現に置き換えることで、そのサイズを縮小するために使用される手法です。<strong>SQ8では</strong>、ベクトルの各次元の値を格納するのに、一般的な32ビット浮動小数点数の代わりに8ビット整数を使用します。これにより、データの保存に必要なメモリ量が大幅に削減される。</p>
+<p>SQ8の仕組みは以下の通り：</p>
 <ol>
-<li><p><strong>Range Identification:</strong> First, identify the minimum and maximum values within the vector. This range defines the bounds for quantization.</p></li>
-<li><p><strong>Normalization:</strong> Normalize the vector values to a range between 0 and 1 using the formula:</p>
+<li><p><strong>範囲の特定</strong>まず、ベクトル内の最小値と最大値を特定します。この範囲が量子化の境界となる。</p></li>
+<li><p><strong>正規化：</strong>式を使用して、ベクトル値を0から1の範囲に正規化します：</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>normalized_value</mtext><mo>=</mo><mfrac><mrow><mtext>value</mtext><mo>−</mo><mtext>min</mtext></mrow><mrow><mtext>max</mtext><mo>−</mo><mtext>min</mtext></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{normalized\_value} = \frac{\text{value} - \text{min}}{\text{max} - \text{min}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0044em;vertical-align:-0.31em;"></span><span class="mord text"><span class="mord">normalized_value</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1408em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">max</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">min</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">value</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>This ensures all values are mapped proportionally within a standardized range, preparing them for compression.</p></li>
-<li><p><strong>8-Bit Compression:</strong> Multiply the normalized value by 255 (the maximum value for an 8-bit integer) and round the result to the nearest integer. This effectively compresses each value into an 8-bit representation.</p></li>
+<p>これにより、すべての値が標準化された範囲に比例してマッピングされ、圧縮に備えます。</p></li>
+<li><p><strong>8ビット圧縮：</strong>正規化された値に255（8ビット整数の最大値）を掛け、その結果を最も近い整数に丸めます。これにより、各値が効果的に 8 ビット表現に圧縮されます。</p></li>
 </ol>
-<p>Suppose you have a dimension value of 1.2, with a minimum value of -1.7 and a maximum value of 2.3. The following figure shows how SQ8 is applied to convert a float32 value to an int8 integer.</p>
+<p>ディメンジョン値が 1.2 で、最小値が -1.7、最大値が 2.3 であるとします。次の図は、float32 値を int8 整数に変換するために SQ8 がどのように適用されるかを示しています。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
-    <span>Ivf Sq8</span>
-  </span>
-</p>
-<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>The IVF_SQ8 index combines IVF and SQ8 to efficiently perform similarity searches:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
+   </span> <span class="img-wrapper"> <span>IVF SQ8</span> </span></p>
+<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>IVF_SQ8 インデックスは、IVF と SQ8 を組み合わせて効率的に類似検索を行います：</p>
 <ol>
-<li><p><strong>IVF narrows the search scope</strong>: The dataset is divided into clusters, and when a query is issued, IVF first compares the query to the cluster centroids, selecting the most relevant clusters.</p></li>
-<li><p><strong>SQ8 speeds up distance calculations</strong>: Within the selected clusters, SQ8 compresses the vectors into 8-bit integers, reducing memory usage and accelerating distance computations.</p></li>
+<li><p><strong>IVF は検索範囲を狭める</strong>：データセットをクラスタに分割し、クエリが発行されると、IVF はまずクエリとクラスタのセントロイドを比較し、最も関連性の高いクラスタを選択する。</p></li>
+<li><p><strong>SQ8は距離計算を高速化する</strong>：選択されたクラスタ内で、SQ8はベクトルを8ビット整数に圧縮し、メモリ使用量を削減し、距離計算を高速化する。</p></li>
 </ol>
-<p>By using IVF to focus the search and SQ8 to speed up computations, IVF_SQ8 achieves both fast search times and memory efficiency.</p>
-<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
+<p>IVFで探索を絞り込み、SQ8で計算を高速化することで、IVF_SQ8は高速な探索時間とメモリ効率の両方を実現しています。</p>
+<h2 id="Build-index" class="common-anchor-header">インデックスの構築<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -89,7 +84,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To build an <code translate="no">IVF_SQ8</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
+    </button></h2><p>Milvusでベクトル場に<code translate="no">IVF_SQ8</code> インデックスを構築するには、<code translate="no">add_index()</code> メソッドを使用し、<code translate="no">index_type</code> 、<code translate="no">metric_type</code> 、インデックスの追加パラメータを指定します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -105,18 +100,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>この構成では</p>
 <ul>
-<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">IVF_SQ8</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
-<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
+<li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">IVF_SQ8</code> とします。</p></li>
+<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> があります。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
+<li><p><code translate="no">params</code>:インデックスを構築するための追加設定オプション。</p>
 <ul>
-<li><code translate="no">nlist</code>: Number of clusters to create using the k-means algorithm during index building.</li>
+<li><code translate="no">nlist</code>:インデックス構築時に k-means アルゴリズムを使用して作成するクラスタの数。</li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">IVF_SQ8</code> index, refer to <a href="/docs/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">Index building params</a>.</p></li>
+<p><code translate="no">IVF_SQ8</code> インデックスで利用可能な構築パラメータの詳細については、<a href="/docs/ja/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">インデックス構築パラメータを</a>参照してください。</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>
+<h2 id="Search-on-index" class="common-anchor-header">インデックスでの検索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,7 +126,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
+    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックス上で類似検索を実行できます。</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span>, <span class="hljs-comment"># Number of clusters to search for candidates</span>
@@ -146,15 +141,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
+<p>この構成では</p>
 <ul>
-<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
+<li><p><code translate="no">params</code>:インデックスで検索するための追加構成オプション。</p>
 <ul>
-<li><code translate="no">nprobe</code>: Number of clusters to search for candidates.</li>
+<li><code translate="no">nprobe</code>:候補を検索するクラスタの数。</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">IVF_SQ8</code> index, refer to <a href="/docs/ivf-sq8.md#share-PJhqdqNaNodKiexm6F1cD2IInbe">Index-specific search params</a>.</p></li>
+<p><code translate="no">IVF_SQ8</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/ivf-sq8.md#share-PJhqdqNaNodKiexm6F1cD2IInbe">インデックス固有の検索パラメータを</a>参照してください。</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">インデックスパラメータ<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -169,45 +164,41 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">building an index</a>.</p>
+    </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>パラメータ</p></th>
+     <th><p>説明</p></th>
+     <th><p>値の範囲</p></th>
+     <th><p>チューニングの提案</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>The number of clusters to create using the k-means algorithm during index building.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, 65536]</p>
-<p><strong>Default value</strong>: <code translate="no">128</code></p></td>
-     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources.
- In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
+     <td><p>インデックス構築時にk-meansアルゴリズムを使用して作成するクラスタの数。</p></td>
+     <td><p><strong>型</strong>：整数<strong>：</strong>[1, 65536]</p>
+<p><strong>デフォルト値</strong>：<code translate="no">128</code></p></td>
+     <td><p><code translate="no">nlist</code> の値を大きくすると、より洗練されたクラスターを作成することでリコールが向上しますが、インデックス構築時間が長くなります。ほとんどの場合、この範囲内の値を設定することを推奨する：[32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value Range</p></th>
-     <th><p>Tuning Suggestion</p></th>
+     <th><p>パラメータ</p></th>
+     <th><p>説明</p></th>
+     <th><p>値の範囲</p></th>
+     <th><p>チューニングサジェスチョン</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>The number of clusters to search for candidates.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, <em>nlist</em>]</p>
-<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
-     <td><p>Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.
- Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p>
-<p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
+     <td><p>候補を検索するクラスタの数。</p></td>
+     <td><p><strong>型</strong>：整数<strong>Range</strong>：[1,<em>nlist］</em></p>
+<p><strong>デフォルト値</strong>：<code translate="no">8</code></p></td>
+     <td><p>値を大きくすると、より多くのクラスターを検索できるようになり、検索範囲が広がることでリコールが向上しますが、その代償としてクエリの待ち時間が長くなります。速度と精度のバランスをとるために、<code translate="no">nlist</code> に比例して<code translate="no">nprobe</code> を設定します。</p>
+<p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[1, nlist]。</p></td>
    </tr>
 </table>

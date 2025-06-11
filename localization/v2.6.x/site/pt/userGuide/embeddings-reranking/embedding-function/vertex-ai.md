@@ -1,13 +1,14 @@
 ---
 id: vertex-ai.md
-title: Vertex AI
+title: IA do vérticeCompatible with Milvus 2.6.x
 summary: >-
-  Google Cloud Vertex AI is a high-performance service specifically designed for
-  text embedding models. This guide explains how to use Google Cloud Vertex AI
-  with Milvus for efficient text embedding generation.
+  O Google Cloud Vertex AI é um serviço de elevado desempenho concebido
+  especificamente para modelos de incorporação de texto. Este guia explica como
+  utilizar o Google Cloud Vertex AI com o Milvus para uma geração eficiente de
+  incorporação de texto.
 beta: Milvus 2.6.x
 ---
-<h1 id="Vertex-AI" class="common-anchor-header">Vertex AI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Vertex-AI" class="anchor-icon" translate="no">
+<h1 id="Vertex-AI" class="common-anchor-header">IA do vértice<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Vertex-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,14 +23,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Google Cloud <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings">Vertex AI</a> is a high-performance service specifically designed for text embedding models. This guide explains how to use Google Cloud Vertex AI with Milvus for efficient text embedding generation.</p>
-<p>Vertex AI supports several embedding models for different use cases:</p>
+    </button></h1><p>O Google Cloud <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings">Vertex AI</a> é um serviço de elevado desempenho concebido especificamente para modelos de incorporação de texto. Este guia explica como utilizar o Google Cloud Vertex AI com o Milvus para uma geração eficiente de incorporação de texto.</p>
+<p>O Vertex AI suporta vários modelos de incorporação para diferentes casos de utilização:</p>
 <ul>
-<li><p>text-embedding-005 (Latest text embedding model)</p></li>
-<li><p>text-multilingual-embedding-002 (Latest multilingual text embedding model)</p></li>
+<li><p>text-embedding-005 (modelo de incorporação de texto mais recente)</p></li>
+<li><p>text-multilingual-embedding-002 (modelo de incorporação de texto multilingue mais recente)</p></li>
 </ul>
-<p>For details, refer to <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">Vertex AI text embedding models reference</a>.</p>
-<h2 id="Vertex-AI-deployment" class="common-anchor-header">Vertex AI deployment<button data-href="#Vertex-AI-deployment" class="anchor-icon" translate="no">
+<p>Para mais pormenores, consulte a <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">referência dos modelos de incorporação de texto do Vertex AI</a>.</p>
+<h2 id="Vertex-AI-deployment" class="common-anchor-header">Implantação do Vertex AI<button data-href="#Vertex-AI-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,8 +45,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before configuring Milvus with Vertex AI function, you need to configure your Milvus instance to use your Google Cloud service account credentials. Milvus supports two main deployment approaches:</p>
-<h3 id="Standard-deployment-Docker-Compose" class="common-anchor-header">Standard deployment (Docker Compose)</h3><p>In your docker-compose.yaml file, you need to mount the credential file and set the <code translate="no">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</code> environment variable.</p>
+    </button></h2><p>Antes de configurar o Milvus com a função Vertex AI, tem de configurar a sua instância do Milvus para utilizar as credenciais da sua conta de serviço Google Cloud. O Milvus suporta duas abordagens de implantação principais:</p>
+<h3 id="Standard-deployment-Docker-Compose" class="common-anchor-header">Implementação padrão (Docker Compose)</h3><p>No seu ficheiro docker-compose.yaml, tem de montar o ficheiro de credenciais e definir a variável de ambiente <code translate="no">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-comment"># ... other configurations ...</span>
@@ -60,16 +61,16 @@ beta: Milvus 2.6.x
     <span class="hljs-bullet">-</span> <span class="hljs-string">/path/to/your/credentials.json:/milvus/configs/google_application_credentials.json:ro</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Milvus-Helm-Chart-deployment-Kubernetes" class="common-anchor-header">Milvus Helm Chart deployment (Kubernetes)</h3><p>For Kubernetes environments, it is recommended to use a Kubernetes Secret to store the credential file:</p>
+<h3 id="Milvus-Helm-Chart-deployment-Kubernetes" class="common-anchor-header">Implantação do Milvus Helm Chart (Kubernetes)</h3><p>Para ambientes Kubernetes, recomenda-se a utilização de um Kubernetes Secret para armazenar o ficheiro de credenciais:</p>
 <ol>
-<li><p><strong>Create Secret</strong></p>
+<li><p><strong>Criar segredo</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">create</span> <span class="hljs-string">secret</span> <span class="hljs-string">generic</span> <span class="hljs-string">vertex-ai-secret</span> <span class="hljs-string">\</span>
   <span class="hljs-string">--from-file=credentials.json=/path/to/your/credentials.json</span> <span class="hljs-string">\</span>
   <span class="hljs-string">-n</span> <span class="hljs-string">&lt;your-milvus-namespace&gt;</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Configure values.yaml</strong></p>
-<p>Add the following under the standalone or proxy/dataNode sections:</p>
+<li><p><strong>Configurar values.yaml</strong></p>
+<p>Adicione o seguinte nas secções standalone ou proxy/dataNode:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraEnv:</span>
   <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</span>
     <span class="hljs-attr">value:</span> <span class="hljs-string">/milvus/configs/credentials.json</span>
@@ -85,7 +86,7 @@ beta: Milvus 2.6.x
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Configuration-in-Milvus" class="common-anchor-header">Configuration in Milvus<button data-href="#Configuration-in-Milvus" class="anchor-icon" translate="no">
+<h2 id="Configuration-in-Milvus" class="common-anchor-header">Configuração em Milvus<button data-href="#Configuration-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,15 +101,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After deploying your Vertex AI credentials, you’ll need to configure the embedding function. Milvus supports multiple methods to configure authentication credentials for Vertex AI, applied in the following order of precedence:</p>
+    </button></h2><p>Depois de implantar suas credenciais do Vertex AI, você precisará configurar a função de incorporação. O Milvus oferece suporte a vários métodos para configurar credenciais de autenticação para o Vertex AI, aplicados na seguinte ordem de precedência:</p>
 <ul>
-<li><p><strong>Milvus configuration file (milvus.yaml)</strong> — Highest priority</p></li>
-<li><p><strong>Environment variables</strong> — Lowest priority</p></li>
+<li><p><strong>Ficheiro de configuração do Milvus (milvus.yaml)</strong> - Prioridade mais elevada</p></li>
+<li><p><strong>Variáveis de ambiente</strong> - prioridade mais baixa</p></li>
 </ul>
-<p><strong>Milvus configuration file (milvus.yaml)</strong></p>
-<p>For persistent, cluster-wide settings, the credential json data can be encoded in base64 format and then defined in the milvus.yaml file.
-<code translate="no">cat credentials.json|jq .|base64</code>
-replace <code translate="no">credentials.json</code> to your credential file path</p>
+<p><strong>Arquivo de configuração do Milvus (milvus.yaml)</strong></p>
+<p>Para configurações persistentes em todo o cluster, os dados json da credencial podem ser codificados no formato base64 e, em seguida, definidos no arquivo milvus.yaml.<code translate="no">cat credentials.json|jq .|base64</code>substitua <code translate="no">credentials.json</code> pelo caminho do arquivo de credencial</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">credential:</span>
   <span class="hljs-attr">gcp1:</span>
     <span class="hljs-attr">credential_json:</span>  <span class="hljs-comment"># base64 based gcp credential data</span>
@@ -122,8 +121,8 @@ replace <code translate="no">credentials.json</code> to your credential file pat
         <span class="hljs-attr">url:</span>  <span class="hljs-comment"># Your VertexAI embedding url</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Environment variables</strong></p>
-<p>Environment variables offer an alternative configuration method, commonly used when setting up container environments in Docker Compose or Kubernetes deployments.</p>
+<p><strong>Variáveis de ambiente</strong></p>
+<p>As variáveis de ambiente oferecem um método de configuração alternativo, geralmente usado ao configurar ambientes de contêiner em implantações do Docker Compose ou do Kubernetes.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Example (typically set in docker-compose.yaml or Kubernetes manifest)</span>
 <span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
@@ -139,7 +138,7 @@ replace <code translate="no">credentials.json</code> to your credential file pat
     <span class="hljs-attr">value:</span> <span class="hljs-string">/milvus/configs/credentials.json</span>    
     
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<h2 id="Use-embedding-function" class="common-anchor-header">Usar a função de incorporação<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -154,12 +153,12 @@ replace <code translate="no">credentials.json</code> to your credential file pat
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once Vertex AI is configured, follow these steps to define and use embedding functions.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Step 1: Define schema fields</h3><p>To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:</p>
+    </button></h2><p>Depois que o Vertex AI estiver configurado, siga estas etapas para definir e usar funções de incorporação.</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Etapa 1: definir campos de esquema</h3><p>Para usar uma função de incorporação, crie uma coleção com um esquema específico. Esse esquema deve incluir pelo menos três campos necessários:</p>
 <ul>
-<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
-<li><p>A scalar field that stores raw data to be embedded.</p></li>
-<li><p>A vector field reserved to store vector embeddings that the function will generate for the scalar field.</p></li>
+<li><p>O campo primário que identifica de forma exclusiva cada entidade numa coleção.</p></li>
+<li><p>Um campo escalar que armazena os dados brutos a serem incorporados.</p></li>
+<li><p>Um campo vetorial reservado para armazenar as incorporações vectoriais que a função irá gerar para o campo escalar.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType, CollectionSchema, FieldSchema
 
@@ -175,7 +174,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Step 2: Add embedding function to schema</h3><p>The Function module in Milvus automatically converts raw data stored in a scalar field into embeddings and stores them into the explicitly defined vector field.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Adicionar a função de incorporação ao esquema</h3><p>O módulo Function do Milvus converte automaticamente os dados brutos armazenados num campo escalar em embeddings e armazena-os no campo vetorial explicitamente definido.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;vert_func&quot;</span>,                           <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -198,49 +197,49 @@ schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p><strong>Parameter</strong></p></th>
-     <th><p><strong>Description</strong></p></th>
-     <th><p><strong>Required?</strong></p></th>
-     <th><p><strong>Example Value</strong></p></th>
+     <th><p><strong>Parâmetro</strong></p></th>
+     <th><p><strong>Descrição do parâmetro</strong></p></th>
+     <th><p><strong>Necessário?</strong></p></th>
+     <th><p><strong>Exemplo Valor</strong></p></th>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
-     <td><p>The embedding model provider. Set to "vertexai".</p></td>
-     <td><p>Yes</p></td>
+     <td><p>O fornecedor do modelo de incorporação. Definido como "vertexai".</p></td>
+     <td><p>Sim</p></td>
      <td><p><code translate="no">"vertexai"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
-     <td><p>Specifies which Vertex AI embedding model to use.</p></td>
-     <td><p>Yes</p></td>
+     <td><p>Especifica qual o modelo de incorporação Vertex AI a utilizar.</p></td>
+     <td><p>Sim</p></td>
      <td><p><code translate="no">"text-embedding-005"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">projectid</code></p></td>
-     <td><p>Your Google Cloud project ID.</p></td>
-     <td><p>Yes</p></td>
+     <td><p>O ID do seu projeto Google Cloud.</p></td>
+     <td><p>Sim</p></td>
      <td><p><code translate="no">"your-gcp-project-id"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">location</code></p></td>
-     <td><p>The region for the Vertex AI service. Currently, Vertex AI embeddings primarily support us-central1. Defaults to us-central1.</p></td>
-     <td><p>No</p></td>
+     <td><p>A região para o serviço do Vertex AI. Atualmente, os embeddings do Vertex AI suportam principalmente us-central1. O padrão é us-central1.</p></td>
+     <td><p>Não</p></td>
      <td><p><code translate="no">"us-central1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">task</code></p></td>
-     <td><p>Specifies the embedding task type, affecting embedding results. Accepted values: DOC_RETRIEVAL (default), CODE_RETRIEVAL (only 005 supported), STS (Semantic Textual Similarity).</p></td>
-     <td><p>No</p></td>
+     <td><p>Especifica o tipo de tarefa de incorporação, afectando os resultados da incorporação. Valores aceites: DOC_RETRIEVAL (predefinição), CODE_RETRIEVAL (apenas 005 suportado), STS (Semantic Textual Similarity).</p></td>
+     <td><p>Não</p></td>
      <td><p><code translate="no">"DOC_RETRIEVAL"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>The dimension of the output embedding vectors. Accepts integers between 1 and 768. <strong>Note:</strong> If specified, ensure the dim of the vector field in the Schema matches this value.</p></td>
-     <td><p>No</p></td>
+     <td><p>A dimensão dos vectores de incorporação de saída. Aceita números inteiros entre 1 e 768. <strong>Nota:</strong> Se especificado, certifique-se de que a dimensão do campo de vetor no Schema corresponde a este valor.</p></td>
+     <td><p>Não</p></td>
      <td><p><code translate="no">768</code></p></td>
    </tr>
 </table>
-<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">Próximos passos<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -255,4 +254,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After configuring the embedding function, refer to the <a href="/docs/embeddings.md">Function Overview</a> for additional guidance on index configuration, data insertion examples, and semantic search operations.</p>
+    </button></h2><p>Depois de configurar a função de incorporação, consulte a <a href="/docs/pt/embeddings.md">Visão geral da função</a> para obter orientações adicionais sobre a configuração do índice, exemplos de inserção de dados e operações de pesquisa semântica.</p>

@@ -1,16 +1,13 @@
 ---
 id: weighted-ranker.md
-title: Weighted Ranker
+title: 加權排名器
 summary: >-
-  Weighted Ranker intelligently combines and prioritizes results from multiple
-  search paths by assigning different importance weights to each. Similar to how
-  a skilled chef balances multiple ingredients to create the perfect dish,
-  Weighted Ranker balances different search results to deliver the most relevant
-  combined outcomes. This approach is ideal when searching across multiple
-  vector fields or modalities where certain fields should contribute more
-  significantly to the final ranking than others.
+  Weighted Ranker
+  可透過為每個搜尋路徑指定不同的重要性權重，智慧地結合多個搜尋路徑的結果並排定優先順序。與技藝高超的廚師平衡多種材料以創造完美菜餚的方式類似，Weighted
+  Ranker
+  平衡不同的搜尋結果，以提供最相關的結合結果。當您在多個向量領域或模式中進行搜尋時，某些領域對最終排名的貢獻應該比其他領域更大，因此這種方法非常理想。
 ---
-<h1 id="Weighted-Ranker" class="common-anchor-header">Weighted Ranker<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
+<h1 id="Weighted-Ranker" class="common-anchor-header">加權排名器<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Weighted Ranker intelligently combines and prioritizes results from multiple search paths by assigning different importance weights to each. Similar to how a skilled chef balances multiple ingredients to create the perfect dish, Weighted Ranker balances different search results to deliver the most relevant combined outcomes. This approach is ideal when searching across multiple vector fields or modalities where certain fields should contribute more significantly to the final ranking than others.</p>
-<h2 id="When-to-use-Weighted-Ranker" class="common-anchor-header">When to use Weighted Ranker<button data-href="#When-to-use-Weighted-Ranker" class="anchor-icon" translate="no">
+    </button></h1><p>Weighted Ranker 可透過為每個搜尋路徑指定不同的重要性權重，智慧地結合多個搜尋路徑的結果並排定優先順序。與技藝高超的廚師平衡多種材料以創造完美菜餚的方式類似，Weighted Ranker 平衡不同的搜尋結果，以提供最相關的結合結果。當您在多個向量領域或模式之間進行搜尋時，如果某些領域對最終排名的貢獻應該比其他領域更大，那麼這種方法就是最理想的選擇。</p>
+<h2 id="When-to-use-Weighted-Ranker" class="common-anchor-header">何時使用加權排名器<button data-href="#When-to-use-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,31 +38,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Weighted Ranker is specifically designed for hybrid search scenarios where you need to combine results from multiple vector search paths. It’s particularly effective for:</p>
+    </button></h2><p>Weighted Ranker 專門設計用於混合搜尋的情況，在這種情況下，您需要結合來自多個向量搜尋路徑的結果。它對以下情況特別有效</p>
 <table>
    <tr>
-     <th><p>Use Case</p></th>
-     <th><p>Example</p></th>
-     <th><p>Why Weighted Ranker Works Well</p></th>
+     <th><p>使用案例</p></th>
+     <th><p>範例</p></th>
+     <th><p>為什麼加權排名器運作良好</p></th>
    </tr>
    <tr>
-     <td><p>E-commerce search</p></td>
-     <td><p>Product search combining image similarity and text description</p></td>
-     <td><p>Allows retailers to prioritize visual similarity for fashion items while emphasizing text descriptions for technical products</p></td>
+     <td><p>電子商務搜尋</p></td>
+     <td><p>結合圖片相似度與文字描述的產品搜尋</p></td>
+     <td><p>允許零售商優先處理時尚商品的視覺相似性，同時強調技術產品的文字說明</p></td>
    </tr>
    <tr>
-     <td><p>Media content search</p></td>
-     <td><p>Video retrieval using both visual features and audio transcripts</p></td>
-     <td><p>Balances the importance of visual content versus spoken dialogue based on query intent</p></td>
+     <td><p>媒體內容搜尋</p></td>
+     <td><p>同時使用視覺特徵和音訊謄本的視訊檢索</p></td>
+     <td><p>根據查詢意圖平衡視覺內容與口語對話的重要性</p></td>
    </tr>
    <tr>
-     <td><p>Document retrieval</p></td>
-     <td><p>Enterprise document search with multiple embeddings for different sections</p></td>
-     <td><p>Gives higher weight to title and abstract embeddings while still considering full-text embeddings</p></td>
+     <td><p>文件檢索</p></td>
+     <td><p>針對不同部分使用多重嵌入的企業文件搜尋</p></td>
+     <td><p>在考慮全文嵌入的同時，給予標題和摘要嵌入較高的權重</p></td>
    </tr>
 </table>
-<p>If your hybrid search application requires combining multiple search paths while controlling their relative importance, Weighted Ranker is your ideal choice.</p>
-<h2 id="Mechanism-of-Weighted-Ranker" class="common-anchor-header">Mechanism of Weighted Ranker<button data-href="#Mechanism-of-Weighted-Ranker" class="anchor-icon" translate="no">
+<p>如果您的混合搜尋應用需要結合多個搜尋路徑，同時控制它們的相對重要性，Weighted Ranker 就是您的理想選擇。</p>
+<h2 id="Mechanism-of-Weighted-Ranker" class="common-anchor-header">加權排名機制<button data-href="#Mechanism-of-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,20 +77,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The main workflow of the WeightedRanker strategy is as follows:</p>
+    </button></h2><p>WeightedRanker 策略的主要工作流程如下：</p>
 <ol>
-<li><p><strong>Collect Search Scores</strong>: Gather the results and scores from each path of vector search (score_1, score_2).</p></li>
-<li><p><strong>Score Normalization</strong>: Each search may use different similarity metrics, resulting in varied score distributions. For instance, using Inner Product (IP) as a similarity type could result in scores ranging from [−∞,+∞], while using Euclidean distance (L2) results in scores ranging from [0,+∞]. Because the score ranges from different searches vary and cannot be directly compared, it is necessary to normalize the scores from each path of search. Typically, <code translate="no">arctan</code> function is applied to transform the scores into a range between [0, 1] (score_1_normalized, score_2_normalized). Scores closer to 1 indicate higher similarity.</p></li>
-<li><p><strong>Assign Weights</strong>: Based on the importance assigned to different vector fields, weights (<strong>wi</strong>) are allocated to the normalized scores (score_1_normalized, score_2_normalized). The weights of each path should range between [0,1]. The resulting weighted scores are score_1_weighted and score_2_weighted.</p></li>
-<li><p><strong>Merge Scores</strong>: The weighted scores (score_1_weighted, score_2_weighted) are ranked from highest to lowest to produce a final set of scores (score_final).</p></li>
+<li><p><strong>收集搜尋分數</strong>：收集向量搜尋每條路徑的結果和分數 (score_1, score_2)。</p></li>
+<li><p><strong>Score Normalization（分數規範化</strong>）：每次搜尋可能會使用不同的相似度指標，造成不同的分數分佈。例如，使用 Inner Product (IP) 作為相似度類型可能會產生 [-∞,+∞] 的分數範圍，而使用 Euclidean distance (L2) 則會產生 [0,+∞] 的分數範圍。由於不同搜尋的分數範圍各異，無法直接比較，因此有必要將每條搜尋路徑的分數歸一化。一般而言，<code translate="no">arctan</code> 函數會將分數轉換成 [0, 1] 之間的範圍 (score_1_normalized, score_2_normalized)。分數越接近 1 表示相似度越高。</p></li>
+<li><p><strong>指定權重</strong>：根據分配給不同向量領域的重要性，將權重 (<strong>wi</strong>) 分配給歸一化的分數 (score_1_normalized, score_2_normalized)。每條路徑的權重範圍應該在 [0,1] 之間。所得的加權分數為 score_1_weighted 及 score_2_weighted。</p></li>
+<li><p><strong>合併分數</strong>：將加權得分 (score_1_weighted, score_2_weighted) 由高到低排序，產生最後的得分集 (score_final)。</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/weighted-ranker.png" alt="Weighted Ranker" class="doc-image" id="weighted-ranker" />
-    <span>Weighted Ranker</span>
-  </span>
-</p>
-<h2 id="Example-of-Weighted-Ranker" class="common-anchor-header">Example of Weighted Ranker<button data-href="#Example-of-Weighted-Ranker" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/weighted-ranker.png" alt="Weighted Ranker" class="doc-image" id="weighted-ranker" />
+   </span> <span class="img-wrapper"> <span>加權排名器</span> </span></p>
+<h2 id="Example-of-Weighted-Ranker" class="common-anchor-header">加權排名器範例<button data-href="#Example-of-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,14 +103,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This example demonstrates a multimodal Hybrid Search (topK=5) involving images and text and illustrates how the WeightedRanker strategy reranks the results from two ANN searches.</p>
+    </button></h2><p>本範例展示了一個涉及圖片和文字的多模式混合搜尋 (topK=5)，並說明 WeightedRanker 策略如何將兩個 ANN 搜尋的結果重新排序。</p>
 <ul>
-<li>Results of ANN search on images （topK=5)：</li>
+<li>圖像的 ANN 搜尋結果 （topK=5）：</li>
 </ul>
 <table>
    <tr>
      <th><p><strong>ID</strong></p></th>
-     <th><p><strong>Score (image)</strong></p></th>
+     <th><p><strong>得分 (影像)</strong></p></th>
    </tr>
    <tr>
      <td><p>101</p></td>
@@ -139,12 +134,12 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li>Results of ANN search on texts （topK=5)：</li>
+<li>文本的 ANN 檢索結果（topK=5）： ID</li>
 </ul>
 <table>
    <tr>
      <th><p><strong>ID</strong></p></th>
-     <th><p><strong>Score (text)</strong></p></th>
+     <th><p><strong>分數 (文字)</strong></p></th>
    </tr>
    <tr>
      <td><p>198</p></td>
@@ -168,14 +163,14 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li>Use WeightedRanker assign weights to image and text search results. Suppose the weight for the image ANN search is 0.6 and the weight for the text search is 0.4.</li>
+<li>使用 WeightedRanker 為圖片和文字搜尋結果指定權重。假設影像 ANN 搜尋的權重為 0.6，文字搜尋的權重為 0.4。</li>
 </ul>
 <table>
    <tr>
      <th><p><strong>ID</strong></p></th>
-     <th><p><strong>Score (image)</strong></p></th>
-     <th><p><strong>Score (text)</strong></p></th>
-     <th><p><strong>Weighted Score</strong></p></th>
+     <th><p><strong>得分 (影像)</strong></p></th>
+     <th><p><strong>得分（文字）</strong></p></th>
+     <th><p><strong>加權得分</strong></p></th>
    </tr>
    <tr>
      <td><p>101</p></td>
@@ -186,13 +181,13 @@ summary: >-
    <tr>
      <td><p>203</p></td>
      <td><p>0.88</p></td>
-     <td><p>N/A</p></td>
+     <td><p>不適用</p></td>
      <td><p>0.6×0.88+0.4×0=0.528</p></td>
    </tr>
    <tr>
      <td><p>150</p></td>
      <td><p>0.85</p></td>
-     <td><p>N/A</p></td>
+     <td><p>不適用</p></td>
      <td><p>0.6×0.85+0.4×0=0.51</p></td>
    </tr>
    <tr>
@@ -209,25 +204,25 @@ summary: >-
    </tr>
    <tr>
      <td><p>110</p></td>
-     <td><p>Not in Image</p></td>
+     <td><p>不在影像中</p></td>
      <td><p>0.85</p></td>
      <td><p>0.6×0+0.4×0.85=0.34</p></td>
    </tr>
    <tr>
      <td><p>250</p></td>
-     <td><p>Not in Image</p></td>
+     <td><p>不在影像中</p></td>
      <td><p>0.78</p></td>
      <td><p>0.6×0+0.4×0.78=0.312</p></td>
    </tr>
 </table>
 <ul>
-<li>The final results after reranking（topK=5)：</li>
+<li>重排後的最終結果（topK=5):</li>
 </ul>
 <table>
    <tr>
-     <th><p><strong>Rank</strong></p></th>
+     <th><p><strong>排名</strong></p></th>
      <th><p><strong>ID</strong></p></th>
-     <th><p><strong>Final Score</strong></p></th>
+     <th><p><strong>最終得分</strong></p></th>
    </tr>
    <tr>
      <td><p>1</p></td>
@@ -255,7 +250,7 @@ summary: >-
      <td><p>0.51</p></td>
    </tr>
 </table>
-<h2 id="Usage-of-Weighted-Ranker" class="common-anchor-header">Usage of Weighted Ranker<button data-href="#Usage-of-Weighted-Ranker" class="anchor-icon" translate="no">
+<h2 id="Usage-of-Weighted-Ranker" class="common-anchor-header">使用加權排名器<button data-href="#Usage-of-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -270,18 +265,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When using the WeightedRanker strategy, it is necessary to input weight values. The number of weight values to input should correspond to the number of basic ANN search requests in the Hybrid Search. The input weight values should fall in the range of [0,1], with values closer to 1 indicating greater importance.</p>
-<h3 id="Create-a-Weighted-Ranker" class="common-anchor-header">Create a Weighted Ranker</h3><p>For example, suppose there are two basic ANN search requests in a Hybrid Search: text search and image search. If the text search is considered more important, it should be assigned a greater weight.</p>
+    </button></h2><p>使用 WeightedRanker 策略時，必須輸入權重值。輸入的權重值數量應對應於混合搜索中基本 ANN 搜索請求的數量。輸入的權重值應在 [0,1] 的範圍內，值越接近 1 表示重要性越高。</p>
+<h3 id="Create-a-Weighted-Ranker" class="common-anchor-header">建立加權排名器</h3><p>例如，假設混合搜尋中有兩個基本 ANN 搜尋請求：文字搜尋和圖像搜尋。如果文字搜尋被視為更重要，就應該給予較大的權重。</p>
 <div class="alert note">
-<p>Milvus 2.6.x and later let you configure reranking strategies directly via the <code translate="no">Function</code> API. If you’re using an earlier release (before v2.6.0), refer to the <a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">Reranking</a> documentation for setup instructions.</p>
+<p>Milvus 2.6.x 及以後的版本可讓您直接透過<code translate="no">Function</code> API 設定重排策略。如果您使用的是較早的版本（v2.6.0 之前），請參閱<a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">Reranking</a>文件以取得設定指示。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 rerank = Function(
@@ -305,59 +295,51 @@ rerank = Function(
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Required?</p></th>
-     <th><p>Description</p></th>
-     <th><p>Value/Example</p></th>
+     <th><p>參數</p></th>
+     <th><p>需要嗎？</p></th>
+     <th><p>說明</p></th>
+     <th><p>值/範例</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Unique identifier for this Function</p></td>
+     <td><p>是</p></td>
+     <td><p>此功能的唯一識別碼</p></td>
      <td><p><code translate="no">"weight"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>List of vector fields to apply the function to (must be empty for Weighted Ranker)</p></td>
+     <td><p>是</p></td>
+     <td><p>要應用函式的向量欄位清單（對於加權排序器必須為空）</p></td>
      <td><p>[]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>The type of Function to invoke; use <code translate="no">RERANK</code> to specify a reranking strategy</p></td>
+     <td><p>是</p></td>
+     <td><p>要調用的函數類型；使用<code translate="no">RERANK</code> 指定重排策略</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Specifies the reranking method to use.
- Must be set to <code translate="no">weighted</code> to use Weighted Ranker.</p></td>
+     <td><p>是</p></td>
+     <td><p>指定要使用的排名方法。必須設定為<code translate="no">weighted</code> 才能使用 Weighted Ranker。</p></td>
      <td><p><code translate="no">"weighted"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.weights</code></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Array of weights corresponding to each search path; values ∈ [0,1].
- For details, refer to <a href="/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Mechanism of Weighted Ranker</a>.</p></td>
+     <td><p>是</p></td>
+     <td><p>每個搜尋路徑對應的權重陣列；值∈ [0,1]。 詳細資訊請參閱<a href="/docs/zh-hant/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Weighted Ranker 的機制</a>。</p></td>
      <td><p><code translate="no">[0.1, 0.9]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.norm_score</code></p></td>
-     <td><p>No</p></td>
-     <td><p>Whether to normalize raw scores (using arctan) before weighting.
- For details, refer to <a href="/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Mechanism of Weighted Ranker</a>.</p></td>
+     <td><p>否</p></td>
+     <td><p>是否在加權之前將原始分數歸一化（使用 arctan）。 詳情請參閱加權<a href="/docs/zh-hant/weighted-ranker.md#Mechanism-of-Weighted-Ranker">排名機制</a>。</p></td>
      <td><p><code translate="no">True</code></p></td>
    </tr>
 </table>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Apply to hybrid search</h3><p>Weighted Ranker is designed specifically for hybrid search operations that combine multiple vector fields. When performing hybrid search, you must specify the weights for each search path:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">應用於混合搜尋</h3><p>Weighted Ranker 專為結合多向量領域的混合搜尋作業而設計。執行混合搜尋時，您必須指定每條搜尋路徑的權重：</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, AnnSearchRequest
 
 <span class="hljs-comment"># Connect to Milvus server</span>
@@ -399,4 +381,4 @@ hybrid_results = milvus_client.hybrid_search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on hybrid search, refer to <a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
+<p>如需混合搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">多向量混合搜尋</a>。</p>
