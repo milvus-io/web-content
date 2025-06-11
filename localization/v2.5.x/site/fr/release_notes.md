@@ -3,7 +3,6 @@ id: release_notes.md
 summary: Notes de mise à jour de Milvus
 title: Notes de mise à jour
 ---
-
 <h1 id="Release-Notes" class="common-anchor-header">Notes de mise à jour<button data-href="#Release-Notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

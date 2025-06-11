@@ -3,7 +3,6 @@ id: release_notes.md
 summary: Notas de la versión de Milvus
 title: Notas de la versión
 ---
-
 <h1 id="Release-Notes" class="common-anchor-header">Notas de la versión<button data-href="#Release-Notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -652,7 +651,7 @@ title: Notas de la versión
 <li>Se ha corregido un problema esporádico por el que el índice tantivy no podía eliminar los archivos de índice durante la liberación<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
 <li>Corregida la lentitud de indexación causada por tener demasiados hilos<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
 <li>Se ha solucionado un problema que impedía que se omitieran las comprobaciones de cuota de disco durante la importación masiva<a href="https://github.com/milvus-io/milvus/pull/39319">(nº 39319</a>).</li>
-<li>Resueltos los problemas de congelación causados por demasiados consumidores de cola de mensajes limitando la concurrencia<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
+<li>Resueltos los problemas de congelación causados por demasiados consumidores de cola de mensajes mediante la limitación de la concurrencia<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
 <li>Corregidos los tiempos de espera de las consultas causados por los reinicios de MixCoord durante las compactaciones a gran escala<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
 <li>Solucionados los problemas de desequilibrio de canales causados por el tiempo de inactividad de los nodos<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
 <li>Arreglado un problema que podía provocar que el balance de canales se atascara.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>

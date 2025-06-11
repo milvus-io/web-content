@@ -3,7 +3,6 @@ id: release_notes.md
 summary: Note di rilascio di Milvus
 title: Note di rilascio
 ---
-
 <h1 id="Release-Notes" class="common-anchor-header">Note di rilascio<button data-href="#Release-Notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -615,7 +614,7 @@ title: Note di rilascio
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Siamo lieti di annunciare il rilascio di Milvus 2.5.4, che introduce ottimizzazioni chiave delle prestazioni e nuove funzionalità come l'isolamento della PartitionKey, l'indice Sparse con DAAT MaxScore e meccanismi di blocco migliorati. Un punto di forza di questa versione è il supporto per 10.000 collezioni e 1 milione di partizioni, che rappresenta un'importante pietra miliare per i casi di utilizzo multi-tenant. Questa versione risolve anche diversi bug che migliorano la stabilità e l'affidabilità generali; due di questi bug critici possono causare la perdita di dati. Vi invitiamo ad aggiornare o a provare quest'ultima versione e siamo ansiosi di ricevere il vostro feedback per aiutarci a perfezionare continuamente Milvus!</p>
+<p>Siamo lieti di annunciare il rilascio di Milvus 2.5.4, che introduce ottimizzazioni chiave delle prestazioni e nuove funzionalità come l'isolamento della PartitionKey, l'indice Sparse con DAAT MaxScore e meccanismi di blocco migliorati. Un punto di forza di questa versione è il supporto per 10.000 collezioni e 1 milione di partizioni, che rappresenta un'importante pietra miliare per i casi di utilizzo multi-tenant. Questa versione risolve anche diversi bug che migliorano la stabilità e l'affidabilità generali; due dei bug critici possono causare la perdita di dati. Vi invitiamo ad aggiornare o a provare quest'ultima versione e siamo ansiosi di ricevere il vostro feedback per aiutarci a perfezionare continuamente Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
 <li>Supporta l'isolamento delle chiavi di partizione per migliorare le prestazioni con chiavi di partizione multiple<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Per ulteriori informazioni, fare riferimento a <a href="/docs/it/v2.5.x/use-partition-key.md">Utilizzare la chiave di partizione</a>.</li>
 <li>Sparse Index ora supporta DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Per ulteriori informazioni, fare riferimento a <a href="/docs/it/v2.5.x/sparse_vector.md">Vettore sparso</a>.</li>
@@ -737,7 +736,7 @@ title: Note di rilascio
 <h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
 <li>Corretti potenziali deadlock in scenari di concorrenza.<a href="https://github.com/milvus-io/milvus/pull/38863">(#38863</a>)</li>
 <li>Generato il file index_null_offset solo per i campi che supportano valori nulli.<a href="https://github.com/milvus-io/milvus/pull/38834">(#38834</a>)</li>
-<li>Corretto l'uso del piano di recupero dopo il free nella fase di riduzione.<a href="https://github.com/milvus-io/milvus/pull/38841">(#38841</a>)</li>
+<li>Corretto l'utilizzo del piano di recupero dopo il free nella fase di riduzione.<a href="https://github.com/milvus-io/milvus/pull/38841">(#38841</a>)</li>
 <li>Riconosciute le espressioni con AND e OR maiuscoli.<a href="https://github.com/milvus-io/milvus/pull/38928">(#38928</a>)</li>
 <li>Consentito l'abbandono della partizione anche se il caricamento non è riuscito.<a href="https://github.com/milvus-io/milvus/pull/38874">(#38874</a>)</li>
 <li>Corretti i problemi di registrazione del file BM25 durante l'importazione.<a href="https://github.com/milvus-io/milvus/pull/38881">(#38881</a>)</li>

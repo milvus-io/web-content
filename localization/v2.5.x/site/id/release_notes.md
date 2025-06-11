@@ -3,7 +3,6 @@ id: release_notes.md
 summary: Catatan Rilis Milvus
 title: Catatan Rilis
 ---
-
 <h1 id="Release-Notes" class="common-anchor-header">Catatan Rilis<button data-href="#Release-Notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

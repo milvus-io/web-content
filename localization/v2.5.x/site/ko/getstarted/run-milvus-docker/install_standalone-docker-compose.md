@@ -5,7 +5,6 @@ related_key: Docker Compose
 summary: Docker Compose를 사용하여 Milvus를 독립형으로 설치하는 방법을 알아보세요.
 title: Docker Compose로 Milvus 실행하기(Linux)
 ---
-
 <h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Docker Compose로 Milvus 실행하기(Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,11 +62,10 @@ title: Docker Compose로 Milvus 실행하기(Linux)
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd ... done
+Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <ul>
 <li><p>위 명령이 실행되지 않는 경우 시스템에 Docker Compose V1이 설치되어 있는지 확인하시기 바랍니다. <a href="https://docs.docker.com/compose/">이 경우 이 페이지의</a> 참고 사항에 따라 Docker Compose V2로 마이그레이션하는 것이 좋습니다.</p></li>
@@ -86,14 +84,11 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker-compose ps</span>
 
       Name                     Command                  State                            Ports
-
----
-
-milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
-milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
-milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Milvus WebUI( <code translate="no">http://127.0.0.1:9091/webui/</code> )에 액세스하여 Milvus 인스턴스에 대해 자세히 알아볼 수도 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/milvus-webui.md">Milvus WebUI를</a> 참조하세요.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvus 중지 및 삭제<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

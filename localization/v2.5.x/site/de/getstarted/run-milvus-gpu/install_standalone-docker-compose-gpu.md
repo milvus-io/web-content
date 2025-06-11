@@ -2,10 +2,9 @@
 id: install_standalone-docker-compose-gpu.md
 label: Standalone (Docker Compose)
 related_key: Kubernetes
-summary: "Erfahren Sie, wie Sie Milvus-Cluster auf Kubernetes installieren."
+summary: 'Erfahren Sie, wie Sie Milvus-Cluster auf Kubernetes installieren.'
 title: Milvus mit GPU-Unterstützung mit Docker Compose starten
 ---
-
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">Milvus mit GPU-Unterstützung mit Docker Compose starten<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,11 +95,10 @@ title: Milvus mit GPU-Unterstützung mit Docker Compose starten
 <h3 id="2-Start-Milvus" class="common-anchor-header">2. Starten Sie Milvus</h3><p>Starten Sie Milvus in dem Verzeichnis, in dem sich die Datei docker-compose.yml befindet, indem Sie den Befehl ausführen:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd ... done
+Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p>Wenn Sie den obigen Befehl nicht ausführen konnten, überprüfen Sie, ob auf Ihrem System Docker Compose V1 installiert ist. Wenn dies der Fall ist, sollten Sie aufgrund der Hinweise auf <a href="https://docs.docker.com/compose/">dieser Seite</a> auf Docker Compose V2 migrieren.</p>
 </div>
@@ -116,14 +114,11 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
-
----
-
-milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
-milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
-milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Sie können auch auf die Milvus-WebUI unter <code translate="no">http://127.0.0.1:9091/webui/</code> zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>Wenn Sie Milvus in der Datei docker-compose.yml mehrere GPU-Geräte zugewiesen haben, können Sie angeben, welches GPU-Gerät sichtbar oder zur Verwendung verfügbar ist.</p>
 <p>Machen Sie das GPU-Gerät <code translate="no">0</code> für Milvus sichtbar:</p>

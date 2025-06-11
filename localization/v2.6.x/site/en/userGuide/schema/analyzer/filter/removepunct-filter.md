@@ -6,8 +6,9 @@ summary: >-
   that some tokenizers—such as jieba, lindera, and icu—normally keep. Use it
   when you want a cleaner token stream that contains only meaningful text
   tokens, free of commas, periods, and other punctuation.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Remove Punct<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Remove Punct<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

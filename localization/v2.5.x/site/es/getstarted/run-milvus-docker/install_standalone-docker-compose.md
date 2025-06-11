@@ -5,7 +5,6 @@ related_key: Docker Compose
 summary: Aprenda a instalar Milvus de forma autónoma con Docker Compose.
 title: Ejecutar Milvus con Docker Compose (Linux)
 ---
-
 <h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Ejecutar Milvus con Docker Compose (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,11 +62,10 @@ title: Ejecutar Milvus con Docker Compose (Linux)
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd ... done
+Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <ul>
 <li><p>Si no puede ejecutar el comando anterior, compruebe si su sistema tiene instalado Docker Compose V1. Si este es el caso, se le aconseja migrar a Docker Compose V2 debido a las notas en <a href="https://docs.docker.com/compose/">esta página</a>.</p></li>
@@ -86,14 +84,11 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker-compose ps</span>
 
       Name                     Command                  State                            Ports
-
----
-
-milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
-milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
-milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-
 <p>También puede acceder a Milvus WebUI en <code translate="no">http://127.0.0.1:9091/webui/</code> para obtener más información sobre su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/v2.5.x/milvus-webui.md">Milvus Web</a>UI.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Detener y eliminar Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

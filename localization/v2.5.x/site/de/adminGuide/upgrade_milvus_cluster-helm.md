@@ -4,10 +4,9 @@ label: Helm
 order: 1
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: "Erfahren Sie, wie Sie Milvus-Cluster mit Helm Chart aktualisieren können."
+summary: 'Erfahren Sie, wie Sie Milvus-Cluster mit Helm Chart aktualisieren können.'
 title: Milvus-Cluster mit Helm-Diagramm aufrüsten
 ---
-
 <div class="tab-wrapper"><a href="/docs/de/v2.5.x/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/de/v2.5.x/upgrade_milvus_cluster-helm.md" class='active '>BedienerHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">Milvus-Cluster mit Helm-Diagramm aufrüsten<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"

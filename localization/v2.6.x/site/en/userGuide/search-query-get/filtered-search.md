@@ -114,10 +114,8 @@ res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
     limit=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-start</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]
-    <span class="hljs-comment"># highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,</span>
+<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]</span>
 )
 
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
@@ -219,10 +217,8 @@ queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">data</span>: [query_vector],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">filters</span>: <span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">filters</span>: <span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]</span>
 })
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -288,13 +284,11 @@ res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
     limit=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-start</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>],
-    search_params={
-        <span class="hljs-string">&quot;hints&quot;</span>: <span class="hljs-string">&quot;iterative_filter&quot;</span>
-    }
-    <span class="hljs-comment"># highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,</span>
+<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>],</span>
+<span class="highlighted-comment-line">    search_params={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;hints&quot;</span>: <span class="hljs-string">&quot;iterative_filter&quot;</span></span>
+<span class="highlighted-comment-line">    }</span>
 )
 
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
@@ -398,11 +392,9 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;filtered_search_collection&quot;</span>,
     <span class="hljs-attr">data</span>: [query_vector],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">filters</span>: <span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,
-    <span class="hljs-attr">hints</span>: <span class="hljs-string">&quot;iterative_filter&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">filters</span>: <span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">hints</span>: <span class="hljs-string">&quot;iterative_filter&quot;</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]</span>
 })
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>

@@ -3,7 +3,6 @@ id: upgrade_milvus_cluster-docker.md
 summary: Docker Compose로 Milvus 클러스터를 업그레이드하는 방법을 알아보세요.
 title: 도커 컴포즈로 밀버스 클러스터 업그레이드하기
 ---
-
 <div class="tab-wrapper"><a href="/docs/ko/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>밀버스</a><a href="/docs/ko/v2.5.x/upgrade_milvus_cluster-operator.md" class=''>오퍼레이터밀버스 오퍼레이터밀버스</a><a href="/docs/ko/v2.5.x/configure-helm.md" class=''>오퍼레이터헬름도커</a><a href="/docs/ko/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>컴포즈헬름도커</a><a href="/docs/ko/v2.5.x/upgrade_milvus_cluster-helm.md" class=''>컴포즈헬름</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">도커 컴포즈로 밀버스 클러스터 업그레이드하기<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

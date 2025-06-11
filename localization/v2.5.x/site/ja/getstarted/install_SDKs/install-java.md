@@ -5,7 +5,6 @@ related_key: SDK
 summary: MilvusのJava SDKのインストール方法について説明します。
 title: Milvus Java SDKのインストール
 ---
-
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Milvus Java SDKのインストール<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

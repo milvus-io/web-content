@@ -3,7 +3,6 @@ id: upgrade_milvus_cluster-docker.md
 summary: Pelajari cara meningkatkan cluster Milvus dengan Docker Compose.
 title: Memutakhirkan Milvus Cluster dengan Docker Compose
 ---
-
 <div class="tab-wrapper"><a href="/docs/id/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>Operator MilvusOperator</a><a href="/docs/id/v2.5.x/configure_operator.md" class=''>MilvusOperator Mil</a><a href="/docs/id/v2.5.x/upgrade_milvus_cluster-operator.md" class=''>vusOperator</a><a href="/docs/id/v2.5.x/configure-helm.md" class=''>MilvusHelmDocker</a><a href="/docs/id/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/id/v2.5.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">Memutakhirkan Milvus Cluster dengan Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

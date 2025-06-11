@@ -3,7 +3,6 @@ id: release_notes.md
 summary: Milvus Versionshinweise
 title: Hinweise zur Veröffentlichung
 ---
-
 <h1 id="Release-Notes" class="common-anchor-header">Hinweise zur Veröffentlichung<button data-href="#Release-Notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -330,7 +329,7 @@ title: Hinweise zur Veröffentlichung
 <tr><td>2.5.8</td><td>2.5.6</td><td>2.5.7</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>Wir freuen uns, die Veröffentlichung von Milvus 2.5.8 ankündigen zu können, die Verbesserungen bei JSON-Ausdrücken, UTF-8-Validierung, Speichernutzung und Ausgleichslogik enthält. Diese Version enthält außerdem mehrere wichtige Fehlerkorrekturen zur Verbesserung der Gleichzeitigkeit und der Datenverarbeitung. Wir möchten Sie ermutigen, ein Upgrade durchzuführen oder es auszuprobieren, und wie immer hilft uns Ihr Feedback, Milvus kontinuierlich zu verbessern!</p>
+<p>Wir freuen uns, die Veröffentlichung von Milvus 2.5.8 ankündigen zu können, die Verbesserungen bei JSON-Ausdrücken, UTF-8-Validierung, Speichernutzung und Ausgleichslogik enthält. Diese Version enthält auch mehrere wichtige Fehlerkorrekturen zur Verbesserung der Gleichzeitigkeit und der Datenverarbeitung. Wir möchten Sie ermutigen, ein Upgrade durchzuführen oder es auszuprobieren, und wie immer hilft uns Ihr Feedback, Milvus kontinuierlich zu verbessern!</p>
 <h3 id="Features" class="common-anchor-header">Merkmale</h3><ul>
 <li>Unterstützung von JSON <code translate="no">null</code>/<code translate="no">exists</code> Ausdrücken<a href="https://github.com/milvus-io/milvus/pull/41002">(#41002</a>)</li>
 <li>Unterstützung für das Parsen von Sparse-Vektoren aus Parquet-Strukturen bei Bulk-Inserts<a href="https://github.com/milvus-io/milvus/pull/40874">(#40874</a>)</li>
@@ -554,7 +553,7 @@ title: Hinweise zur Veröffentlichung
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><h4 id="Observability" class="common-anchor-header">Beobachtbarkeit</h4><ul>
 <li>Monitor-Metrik zum Abrufen von Rohdaten hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/40155">(#40155</a>)</li>
-<li>[2.5] Metrik für die Latenzzeit von Get-Vektoren hinzugefügt und Fehlermeldung zum Anfragelimit verfeinert<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
+<li>[2.5] Metrik für die Latenzzeit von Get-Vektoren hinzugefügt und Fehlermeldung für das Anfragelimit verfeinert<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
 <li>[2.5] Metrik für Proxy-Warteschlange hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/40071">(#40071</a>)</li>
 <li>Mehr Metrik-Daten veröffentlicht<a href="https://github.com/milvus-io/milvus/pull/39466">(#39466</a>)</li>
 <li>[2.5] Metriken für Parse-Ausdruck hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/39716">(#39716</a>)</li>
@@ -699,7 +698,7 @@ title: Hinweise zur Veröffentlichung
 <h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
 <li>Hinzufügen einer Ressourcengruppen-API für die RESTful-Schnittstelle.<a href="https://github.com/milvus-io/milvus/pull/39092">(#39092</a>)</li>
 <li>Optimierte Abrufleistung durch Nutzung von Bitset SIMD Methoden.<a href="https://github.com/milvus-io/milvus/pull/39041">(#39041</a>)</li>
-<li>Der MVCC-Zeitstempel wird nun als Garantiezeitstempel verwendet, wenn er angegeben ist.<a href="https://github.com/milvus-io/milvus/pull/39019">(#39019</a>)</li>
+<li>Der MVCC-Zeitstempel wurde als Garantiezeitstempel verwendet, wenn er angegeben wurde.<a href="https://github.com/milvus-io/milvus/pull/39019">(#39019</a>)</li>
 <li>Fehlende Lösch-Metriken wurden hinzugefügt.<a href="https://github.com/milvus-io/milvus/pull/38747">(#38747</a>)</li>
 <li>Etcd auf Version v3.5.16 aktualisiert.<a href="https://github.com/milvus-io/milvus/pull/38969">(#38969</a>)</li>
 <li>Neues Go-Paket zur Verwaltung von Protos erstellt.<a href="https://github.com/milvus-io/milvus/pull/39128">(#39128</a>)</li>

@@ -7,7 +7,6 @@ related_key: upgrade Milvus Cluster
 summary: 了解如何使用 Helm 图表升级 Milvus 集群。
 title: 使用 Helm 图表升级 Milvus 群集
 ---
-
 <div class="tab-wrapper"><a href="/docs/zh/v2.5.x/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/zh/v2.5.x/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">使用 Helm 图表升级 Milvus 群集<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +150,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
-<li>脚本对部署的升级顺序进行了硬编码，无法更改。</li>
+<li>脚本硬编码了部署的升级顺序，不可更改。</li>
 <li>脚本使用<code translate="no">kubectl patch</code> 更新部署，使用<code translate="no">kubectl rollout status</code> 观察部署状态。</li>
 <li>脚本使用<code translate="no">kubectl patch</code> 将部署的<code translate="no">app.kubernetes.io/version</code> 标签更新为命令中<code translate="no">-t</code> 标志后指定的标签。</li>
 </ol>

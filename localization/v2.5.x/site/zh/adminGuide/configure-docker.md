@@ -5,7 +5,6 @@ related_key: configure
 summary: 使用 Docker Compose 配置 Milvus。
 title: 使用 Docker Compose 配置 Milvus
 ---
-
 <h1 id="Configure-Milvus-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 配置 Milvus<button data-href="#Configure-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

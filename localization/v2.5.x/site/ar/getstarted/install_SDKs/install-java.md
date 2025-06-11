@@ -5,7 +5,6 @@ related_key: SDK
 summary: تعرف على كيفية تثبيت مجموعة أدوات تطوير البرمجيات Java SDK الخاصة بـ Milvus.
 title: تثبيت Milvus Java SDK
 ---
-
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

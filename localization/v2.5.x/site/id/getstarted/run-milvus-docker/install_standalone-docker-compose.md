@@ -5,7 +5,6 @@ related_key: Docker Compose
 summary: Pelajari cara menginstal Milvus mandiri dengan Docker Compose.
 title: Menjalankan Milvus dengan Docker Compose (Linux)
 ---
-
 <h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Menjalankan Milvus dengan Docker Compose (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,11 +62,10 @@ title: Menjalankan Milvus dengan Docker Compose (Linux)
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd ... done
+Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <ul>
 <li><p>Jika Anda gagal menjalankan perintah di atas, periksa apakah sistem Anda telah menginstal Docker Compose V1. Jika demikian, Anda disarankan untuk bermigrasi ke Docker Compose V2 sesuai dengan catatan di <a href="https://docs.docker.com/compose/">halaman ini</a>.</p></li>
@@ -86,14 +84,11 @@ Creating milvus-standalone ... done
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker-compose ps</span>
 
       Name                     Command                  State                            Ports
-
----
-
-milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
-milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
-milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Anda juga dapat mengakses Milvus WebUI di <code translate="no">http://127.0.0.1:9091/webui/</code> untuk mempelajari lebih lanjut tentang instans Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Menghentikan dan menghapus Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

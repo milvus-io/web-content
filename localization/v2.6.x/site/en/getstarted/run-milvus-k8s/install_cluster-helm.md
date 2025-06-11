@@ -90,7 +90,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
 <p>The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.</p>
 </div>
@@ -247,7 +247,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Run the following command to upgrade your running Milvus cluster to the latest version:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --reset-then-reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Uninstall Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

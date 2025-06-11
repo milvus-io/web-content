@@ -5,7 +5,6 @@ related_key: SDK
 summary: Saiba como instalar o Python SDK do Milvus.
 title: Instalar o Milvus Python SDK
 ---
-
 <h1 id="Install-Milvus-Python-SDK" class="common-anchor-header">Instalar o Milvus Python SDK<button data-href="#Install-Milvus-Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

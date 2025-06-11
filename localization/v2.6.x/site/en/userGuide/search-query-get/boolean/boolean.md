@@ -133,9 +133,9 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>Indexing</strong>: Creates an inverted index mapping unique tokens to documents.</p></li>
 </ol>
 <p>For more details, refer to <a href="/docs/keyword-match.md">Text Match</a>.</p>
-<h4 id="PHRASEMATCH-operator" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operator</h4><p>The <strong>PHRASE_MATCH</strong> operator enables precise retrieval of documents based on exact phrase matches, considering both the order and adjacency of query terms.</p>
+<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>The <strong>PHRASE_MATCH</strong> operator enables precise retrieval of documents based on exact phrase matches, considering both the order and adjacency of query terms.</p>
 <p>For more details, refer to <a href="/docs/phrase-match.md">Phrase Match</a>.</p>
-<h2 id="Random-sampling-operator" class="common-anchor-header">Random sampling operator<button data-href="#Random-sampling-operator" class="anchor-icon" translate="no">
+<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">Random sampling operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: 學習如何使用 Docker Compose 升級 Milvus 單機版。
 title: 使用 Docker Compose 升級 Milvus 單機版
 ---
-
 <div class="tab-wrapper"><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升級 Milvus 單機版<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

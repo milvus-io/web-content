@@ -3,7 +3,6 @@ id: upgrade_milvus_cluster-docker.md
 summary: Découvrez comment mettre à niveau le cluster Milvus avec Docker Compose.
 title: Mise à niveau du cluster Milvus avec Docker Compose
 ---
-
 <div class="tab-wrapper"><a href="/docs/fr/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/fr/v2.5.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/fr/v2.5.x/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/fr/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/fr/v2.5.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">Mise à niveau du cluster Milvus avec Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -147,7 +146,7 @@ docker compose up -d
 <li>Vous pouvez également apprendre à<ul>
 <li><a href="/docs/fr/v2.5.x/scaleout.md">Faire évoluer un cluster Milvus</a></li>
 </ul></li>
-<li>Si vous êtes prêt à déployer votre cluster sur des clouds :<ul>
+<li>Si vous êtes prêt à déployer votre cluster sur des nuages :<ul>
 <li>Apprendre à <a href="/docs/fr/v2.5.x/eks.md">déployer Milvus sur Amazon EKS avec Terraform</a></li>
 <li>Apprendre à <a href="/docs/fr/v2.5.x/gcp.md">déployer le cluster Milvus sur GCP avec Kubernetes</a></li>
 <li>Apprendre à <a href="/docs/fr/v2.5.x/azure.md">déployer Milvus sur Microsoft Azure avec Kubernetes</a></li>
