@@ -1,14 +1,12 @@
 ---
 id: with-iterators.md
-title: Search Iterator
+title: 搜索迭代器
 summary: >-
-  The ANN Search has a maximum limit on the number of entities that can be
-  recalled in a single query, and simply using basic ANN Search may not meet the
-  demands of large-scale retrieval. For ANN Search requests where topK exceeds
-  16,384, it is advisable to consider using the SearchIterator. This section
-  will introduce how to use the SearchIterator and related considerations.
+  ANN Search 对单次查询可调用的实体数量有最大限制，因此仅使用基本 ANN Search 可能无法满足大规模检索的需求。对于 topK 超过
+  16,384 的 ANN Search 请求，建议考虑使用 SearchIterator。本节将介绍如何使用 SearchIterator
+  以及相关注意事项。
 ---
-<h1 id="Search-Iterator" class="common-anchor-header">Search Iterator<button data-href="#Search-Iterator" class="anchor-icon" translate="no">
+<h1 id="Search-Iterator" class="common-anchor-header">搜索迭代器<button data-href="#Search-Iterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The ANN Search has a maximum limit on the number of entities that can be recalled in a single query, and simply using basic ANN Search may not meet the demands of large-scale retrieval. For ANN Search requests where topK exceeds 16,384, it is advisable to consider using the SearchIterator. This section will introduce how to use the SearchIterator and related considerations.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>ANN Search 对单次查询可调用的实体数量有最大限制，因此仅使用基本 ANN Search 可能无法满足大规模检索的需求。对于 topK 超过 16,384 的 ANN Search 请求，建议考虑使用 SearchIterator。本节将介绍如何使用 SearchIterator 以及相关注意事项。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,14 +37,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A Search request returns search results, while a SearchIterator returns an iterator. You can call the <strong>next()</strong> method of this iterator to get the search results.</p>
-<p>Specifically, you can use the SearchIterators as follows:</p>
+    </button></h2><p>Search 请求返回搜索结果，而 SearchIterator 返回迭代器。您可以调用该迭代器的<strong>next()</strong>方法来获取搜索结果。</p>
+<p>具体来说，您可以如下使用 SearchIterator：</p>
 <ol>
-<li><p>Create a SearchIterator and set <strong>the number of entities to return per search request</strong> and <strong>the total number of entities to return</strong>.</p></li>
-<li><p>Call the <strong>next()</strong> method of the SearchIterator in a loop to get the search result in a paginated manner.</p></li>
-<li><p>Call the <strong>close()</strong> method of the iterator to end the loop if the <strong>next()</strong> method returns an empty result.</p></li>
+<li><p>创建一个 SearchIterator，并设置<strong>每次搜索请求返回的实体数</strong>和<strong>返回的实体总数</strong>。</p></li>
+<li><p>在循环中调用 SearchIterator 的<strong>next()</strong>方法，以分页方式获取搜索结果。</p></li>
+<li><p>如果<strong>next()</strong>方法返回的结果为空，则调用迭代器的<strong>close()</strong>方法结束循环。</p></li>
 </ol>
-<h2 id="Create-SearchIterator" class="common-anchor-header">Create SearchIterator<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
+<h2 id="Create-SearchIterator" class="common-anchor-header">创建搜索迭代器<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,14 +59,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates how to create a SearchIterator.</p>
+    </button></h2><p>以下代码片段演示了如何创建一个 SearchIterator。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -142,8 +135,8 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above examples, you have set the number of entities to return per search (<strong>batch_size</strong>/<strong>batchSize</strong>) to 50, and the total number of entities to return (<strong>topK</strong>) to 20,000.</p>
-<h2 id="Use-SearchIterator" class="common-anchor-header">Use SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
+<p>在上述示例中，您将每次搜索返回的实体数<strong>（batch_</strong><strong>size</strong><strong>/batchSize</strong>）设置为 50，将返回的实体总数<strong>（topK</strong>）设置为 20,000。</p>
+<h2 id="Use-SearchIterator" class="common-anchor-header">使用 SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,14 +151,9 @@ iterator = collection.search_iterator(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the SearchIterator is ready, you can call its next() method to get the search results in a paginated manner.</p>
+    </button></h2><p>SearchIterator 就绪后，您可以调用它的 next() 方法，以分页方式获取搜索结果。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">results = []
 
 <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
@@ -199,4 +187,4 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above code examples, you have created an infinite loop and called the <strong>next()</strong> method in the loop to store the search results in a variable and closed the iterator when the <strong>next()</strong> returns nothing.</p>
+<p>在上述代码示例中，您创建了一个无限循环，并在循环中调用<strong>next()</strong>方法将搜索结果存储到一个变量中，然后在<strong>next()</strong>没有返回任何结果时关闭迭代器。</p>

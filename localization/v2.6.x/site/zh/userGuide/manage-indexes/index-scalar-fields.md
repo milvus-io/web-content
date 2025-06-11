@@ -1,12 +1,10 @@
 ---
 id: index-scalar-fields.md
 order: 2
-summary: >-
-  This guide will walk you through creating and configuring scalar indexes for
-  fields such as integers, strings, etc.
-title: Index Scalar Fields
+summary: 本指南将指导您为整数、字符串等字段创建和配置标量索引。
+title: 标量字段索引
 ---
-<h1 id="Index-Scalar-Fields" class="common-anchor-header">Index Scalar Fields<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Scalar-Fields" class="common-anchor-header">标量字段索引<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +19,8 @@ title: Index Scalar Fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, a scalar index is used to speed up metafiltering by a specific non-vector field value, similar to a traditional database index. This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.</p>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">Types of scalar indexing<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+    </button></h1><p>在 Milvus 中，标量索引用于通过特定的非向量字段值加速元过滤，类似于传统的数据库索引。本指南将指导你为整数、字符串等字段创建和配置标量索引。</p>
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">标量索引的类型<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,10 +36,10 @@ title: Index Scalar Fields
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Auto indexing</a></strong>: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Custom indexing</a></strong>: You specify the exact index type, such as an inverted index or <a href="/docs/bitmap.md">bitmap index</a>. This provides more control over the index type selection.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">自动索引</a></strong>：Milvus 根据标量字段的数据类型自动决定索引类型。这适用于不需要控制特定索引类型的情况。</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">自定义索引</a></strong>：你可以指定精确的索引类型，如反转索引<a href="/docs/zh/bitmap.md">或位图索引</a>。这为索引类型选择提供了更多控制。</p></li>
 </ul>
-<h2 id="Auto-indexing" class="common-anchor-header">Auto indexing<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
+<h2 id="Auto-indexing" class="common-anchor-header">自动索引<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,20 +55,17 @@ title: Index Scalar Fields
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To use auto indexing, omit the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
+<p>要使用自动<strong>索引</strong>，请在 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>中省略 index_type 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
 </div>
 <div class="language-java">
-<p>To use auto indexing, omit the <strong>indexType</strong> parameter in <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
+<p>要使用自动<strong>索引</strong>，请省略 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>中的 indexType 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
 </div>
 <div class="language-javascript">
-<p>To use auto indexing, omit the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
+<p>要使用自动<strong>索引</strong>，请省略 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>中的 index_type 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
 </div>
-<p>For mappings between scalar data types and default indexing algorithms, refer to <a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">Scalar field indexing algorithms</a>.</p>
+<p>有关标量数据类型和默认索引算法之间的映射，请参阅<a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">标量字段索引算法</a>。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Auto indexing</span>
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -115,7 +110,7 @@ client.createIndex(createIndexReq);
     <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment">// Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
 })
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Custom-indexing" class="common-anchor-header">Custom indexing<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
+<h2 id="Custom-indexing" class="common-anchor-header">自定义索引<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,20 +126,17 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To use custom indexing, specify a particular index type using the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>要使用自定义<strong>索引</strong>，请在 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>To use custom indexing, specify a particular index type using the <strong>indexType</strong> parameter in <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
+<p>要使用自定义索引，请在.NET 文件中使用<strong>indexType</strong>参数指定特定的索引类型。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>To use custom indexing, specify a particular index type using the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>要使用自定义索引，请在 .NET 文件中使用<strong>index_type</strong>参数指定特定的索引类型。 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
-<p>The example below creates an inverted index for the scalar field <code translate="no">scalar_2</code>.</p>
+<p>下面的示例为标量字段<code translate="no">scalar_2</code> 创建了一个反转索引。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
@@ -185,90 +177,73 @@ client.createIndex(createIndexReq);
 })
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p><strong>Methods and Parameters</strong></p>
+<p><strong>方法和参数</strong></p>
 <ul>
 <li><p><strong>prepare_index_params()</strong></p>
-<p>Prepares an <strong>IndexParams</strong> object.</p></li>
+<p>准备一个<strong>IndexParams</strong>对象。</p></li>
 <li><p><strong>add_index()</strong></p>
-<p>Adds index configurations to the <strong>IndexParams</strong> object.</p>
+<p>向<strong>IndexParams</strong>对象添加索引配置。</p>
 <ul>
-<li><p><strong>field_name</strong> (<em>string</em>)</p>
-<p>The name of the scalar field to index.</p></li>
-<li><p><strong>index_type</strong> (<em>string</em>):</p>
-<p>The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.</p>
-<p>For custom indexing, valid values are:</p>
+<li><p><strong>field_name</strong><em>（字符串）</em></p>
+<p>要索引的标量字段的名称。</p></li>
+<li><p><strong>index_type</strong><em>（字符串</em>）：</p>
+<p>要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。</p>
+<p>对于自定义索引，有效值为</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</p></li>
-<li><p><strong>BITMAP</strong>: An index type that stores a bitmap of all unique values in a field. For details, refer to <a href="/docs/bitmap.md">BITMAP</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
-<li><p><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</p></li>
+<li><p><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</p></li>
+<li><p><strong>BITMAP</strong>：<strong>位图</strong>索引：一种存储字段中所有唯一值的位图的索引类型。有关详情，请参阅<a href="/docs/zh/bitmap.md">BITMAP</a>。</p></li>
+<li><p><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。仅支持数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</p></li>
+<li><p><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</p></li>
 </ul></li>
-<li><p><strong>index_name</strong> (<em>string</em>)</p>
-<p>The name of the scalar index to create. Each scalar field supports one index.</p></li>
+<li><p><strong>index_name</strong><em>（字符串）</em></p>
+<p>要创建的标量索引的名称。每个标量字段支持一个索引。</p></li>
 </ul></li>
 <li><p><strong>create_index()</strong></p>
-<p>Creates the index in the specified collection.</p>
+<p>在指定的 Collection 中创建索引。</p>
 <ul>
-<li><p><strong>collection_name</strong> (<em>string</em>)</p>
-<p>The name of the collection for which the index is created.</p></li>
-<li><p><strong>index_params</strong></p>
-<p>The <strong>IndexParams</strong> object that contains index configurations.</p></li>
+<li><p><strong>collection_name</strong><em>（字符串）</em></p>
+<p>创建索引的 Collection 的名称。</p></li>
+<li><p><strong>索引参数</strong></p>
+<p>包含索引配置的<strong>IndexParams</strong>对象。</p></li>
 </ul></li>
 </ul>
 </div>
 <div class="language-java">
-<p><strong>Methods and Parameters</strong></p>
+<p><strong>方法和参数</strong></p>
 <ul>
-<li><strong>IndexParam</strong>
-Prepares an IndexParam object.
-<ul>
-<li><strong>fieldName</strong> (<em>String</em>)
-The name of the scalar field to index.</li>
-<li><strong>indexName</strong> (<em>String</em>)
-The name of the scalar index to create. Each scalar field supports one index.</li>
-<li><strong>indexType</strong> (<em>String</em>)
-The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
-For custom indexing, valid values are:
-<ul>
-<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
-<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
+<li><strong>IndexParam</strong>准备一个 IndexParam 对象。<ul>
+<li><strong>fieldName</strong><em>（字符串</em>） 要索引的标量字段的名称。</li>
+<li><strong>indexName</strong><em>（字符串</em>） 要创建的标量索引的名称。每个标量字段支持一个索引。</li>
+<li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。 对于自定义索引，有效值为<ul>
+<li><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
+<li><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。支持布尔和数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</li>
+<li><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</li>
 </ul></li>
 </ul></li>
-<li><strong>CreateIndexReq</strong>
-Creates the index in the specified collection.
-<ul>
-<li><strong>collectionName</strong> (<em>String</em>)
-The name of the collection for which the index is created.</li>
-<li><strong>indexParams</strong> (<em>List<IndexParam></em>)
-A list of IndexParam objects that contain index configurations.</li>
+<li><strong>CreateIndexReq</strong>在指定的 Collections 中创建索引。<ul>
+<li><strong>collectionName</strong><em>（字符串</em>） 创建索引的集合名称。</li>
+<li><strong>indexParams</strong><em>(List<IndexParam></em>) 包含索引配置的 IndexParam 对象列表。</li>
 </ul></li>
 </ul>
 </div>
 <div class="language-javascript">
-<p><strong>Methods and Parameters</strong></p>
+<p><strong>方法和参数</strong></p>
 <ul>
-<li><p><strong>createIndex</strong></p>
-<p>Creates the index in the specified collection.</p>
+<li><p><strong>创建索引</strong></p>
+<p>在指定的 Collection 中创建索引。</p>
 <ul>
-<li><strong>collection_name</strong> (<em>string</em>)
-The name of the collection for which the index is created.</li>
-<li><strong>field_name</strong> (<em>string</em>)
-The name of the scalar field to index.</li>
-<li><strong>index_name</strong> (<em>string</em>)
-The name of the scalar index to create. Each scalar field supports one index.</li>
-<li><strong>index_type</strong> (<em>string</em>)
-The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
-For custom indexing, valid values are:
-<ul>
-<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
-<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
+<li><strong>collection_name</strong><em>（字符串</em>） 创建索引的集合名称。</li>
+<li><strong>field_name</strong><em>（字符串</em>） 要创建索引的标量字段的名称。</li>
+<li><strong>index_name</strong><em>（字符串</em>） 要创建的标量索引的名称。每个标量字段支持一个索引。</li>
+<li><strong>index_type</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。 对于自定义索引，有效值为<ul>
+<li><strong>倒排</strong>：（推荐）倒排索引由包含按字母顺序排序的所有标记词的术语字典组成。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
+<li><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。支持布尔和数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</li>
+<li><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
-<h2 id="Verifying-the-result" class="common-anchor-header">Verifying the result<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
+<h2 id="Verifying-the-result" class="common-anchor-header">验证结果<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,19 +259,16 @@ For custom indexing, valid values are:
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> method to verify the creation of scalar indexes:</p>
+<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a>方法验证标量索引的创建：</p>
 </div>
 <div class="language-java">
-<p>Use the <code translate="no">listIndexes()</code> method to verify the creation of scalar indexes:</p>
+<p>使用<code translate="no">listIndexes()</code> 方法验证标量索引的创建：</p>
 </div>
 <div class="language-javascript">
-<p>Use the <code translate="no">listIndexes()</code> method to verify the creation of scalar indexes:</p>
+<p>使用<code translate="no">listIndexes()</code> 方法验证标量索引的创建：</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">client.list_indexes(
     collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>  <span class="hljs-comment"># Specify the collection name</span>
 )

@@ -1,9 +1,7 @@
 ---
 id: integrate_with_haystack.md
-summary: >-
-  This guide demonstrates how to build a Retrieval-Augmented Generation (RAG)
-  system using Haystack and Milvus.
-title: Retrieval-Augmented Generation (RAG) with Milvus and Haystack
+summary: 本指南演示了如何使用 HayStack 和 Milvus 建立检索增强生成（RAG）系统。
+title: 使用 Milvus 和 HayStack 的检索增强生成（RAG）
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -11,7 +9,7 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and Haystack
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="common-anchor-header">Retrieval-Augmented Generation (RAG) with Milvus and Haystack<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
+<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="common-anchor-header">使用 Milvus 和 HayStack 的检索增强生成（RAG）<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,10 +24,10 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and Haystack
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using Haystack and Milvus.</p>
-<p>The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.</p>
-<p><a href="https://haystack.deepset.ai/">Haystack</a> is the open source Python framework by deepset for building custom apps with large language models (LLMs). <a href="https://milvus.io/">Milvus</a> is the world’s most advanced open-source vector database, built to power embedding similarity search and AI applications.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>本指南演示了如何使用 HayStack 和 Milvus 建立一个检索-增强生成（RAG）系统。</p>
+<p>RAG 系统将检索系统与生成模型相结合，根据给定提示生成新文本。该系统首先使用 Milvus 从语料库中检索相关文档，然后使用生成模型根据检索到的文档生成新文本。</p>
+<p><a href="https://haystack.deepset.ai/">HayStack</a>是 deepset 公司推出的开源 Python 框架，用于使用大型语言模型（LLMs）构建定制应用程序。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，用于支持嵌入式相似性搜索和人工智能应用。</p>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,18 +42,18 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and Haystack
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before running this notebook, make sure you have the following dependencies installed:</p>
+    </button></h2><p>在运行本笔记本之前，请确保您已安装以下依赖项：</p>
 <pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重新启动运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重新启动会话"）。</p>
 </div>
-<p>We will use the models from OpenAI. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>我们将使用 OpenAI 的模型。您应将<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-the-data" class="common-anchor-header">Prepare the data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-data" class="common-anchor-header">准备数据<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,8 +68,8 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We use an online content about <a href="https://www.gutenberg.org/cache/epub/7785/pg7785.txt">Leonardo Da Vinci</a> as a store of private knowledge for our RAG pipeline, which is a good data source for a simple RAG pipeline.</p>
-<p>Download it and save it as a local text file.</p>
+    </button></h2><p>我们使用关于<a href="https://www.gutenberg.org/cache/epub/7785/pg7785.txt">达芬奇</a>的在线内容作为 RAG 管道的私人知识库，这对于简单的 RAG 管道来说是一个很好的数据源。</p>
+<p>下载并保存为本地文本文件。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> urllib.request
 
@@ -81,7 +79,7 @@ file_path = <span class="hljs-string">&quot;./davinci.txt&quot;</span>
 <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(file_path):
     urllib.request.urlretrieve(url, file_path)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-the-indexing-Pipeline" class="common-anchor-header">Create the indexing Pipeline<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+<h2 id="Create-the-indexing-Pipeline" class="common-anchor-header">创建索引管道<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,7 +94,7 @@ file_path = <span class="hljs-string">&quot;./davinci.txt&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Create an indexing pipeline that converts the text into documents, splits them into sentences, and embeds them. The documents are then written to the Milvus document store.</p>
+    </button></h2><p>创建一个索引管道，将文本转换成文档，分割成句子并嵌入其中。然后将文档写入 Milvus 文档存储。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> haystack <span class="hljs-keyword">import</span> Pipeline
 <span class="hljs-keyword">from</span> haystack.components.converters <span class="hljs-keyword">import</span> MarkdownToDocument
 <span class="hljs-keyword">from</span> haystack.components.embedders <span class="hljs-keyword">import</span> OpenAIDocumentEmbedder, OpenAITextEmbedder
@@ -116,11 +114,11 @@ document_store = MilvusDocumentStore(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For the connection_args:</p>
+<p>连接参数</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储到这个文件中。</li>
+<li>如果数据规模较大，可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>
+<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">indexing_pipeline = Pipeline()
@@ -147,7 +145,7 @@ E20240516 10:40:32.946725 5309095 milvus_local.cpp:189] [SERVER][GetCollection][
 
 Number of documents: 277
 </code></pre>
-<h2 id="Create-the-retrieval-pipeline" class="common-anchor-header">Create the retrieval pipeline<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+<h2 id="Create-the-retrieval-pipeline" class="common-anchor-header">创建检索管道<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,7 +160,7 @@ Number of documents: 277
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Create a retrieval pipeline that retrieves documents from the Milvus document store using a vector similarity search engine.</p>
+    </button></h2><p>创建一个检索管道，使用向量相似性搜索引擎从 Milvus 文档存储中检索文档。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&#x27;Where is the painting &quot;Warrior&quot; currently stored?&#x27;</span>
 
 retrieval_pipeline = Pipeline()
@@ -200,7 +198,7 @@ supposed copies of a study of this mural painting now hangs on the
 south-east staircase in the Victoria and Albert Museum.
 ----------
 </code></pre>
-<h2 id="Create-the-RAG-pipeline" class="common-anchor-header">Create the RAG pipeline<button data-href="#Create-the-RAG-pipeline" class="anchor-icon" translate="no">
+<h2 id="Create-the-RAG-pipeline" class="common-anchor-header">创建 RAG 管道<button data-href="#Create-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -215,7 +213,7 @@ south-east staircase in the Victoria and Albert Museum.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Create a RAG pipeline that combines the MilvusEmbeddingRetriever and the OpenAIGenerator to answer the question using the retrieved documents.</p>
+    </button></h2><p>创建 RAG 管道，结合 MilvusEmbeddingRetriever 和 OpenAIGenerator，使用检索到的文档回答问题。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> haystack.utils <span class="hljs-keyword">import</span> Secret
 <span class="hljs-keyword">from</span> haystack.components.builders <span class="hljs-keyword">import</span> PromptBuilder
 <span class="hljs-keyword">from</span> haystack.components.generators <span class="hljs-keyword">import</span> OpenAIGenerator
@@ -257,4 +255,4 @@ results = rag_pipeline.run(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">RAG answer: The painting &quot;Warrior&quot; is currently stored in the Malcolm Collection in the British Museum.
 </code></pre>
-<p>For more information about how to use milvus-haystack, please refer to the <a href="https://github.com/milvus-io/milvus-haystack">milvus-haystack Readme</a>.</p>
+<p>有关如何使用 milvus-hayStack 的更多信息，请参阅<a href="https://github.com/milvus-io/milvus-haystack">milvus-haystack Readme</a>。</p>

@@ -1,12 +1,9 @@
 ---
 id: get-and-scalar-query.md
-title: Query
-summary: >-
-  In addition to ANN searches, Milvus also supports metadata filtering through
-  queries. This page introduces how to use Query, Get, and QueryIterators to
-  perform metadata filtering.
+title: 查询
+summary: 除 ANN 搜索外，Milvus 还支持通过查询进行元数据过滤。本页将介绍如何使用查询、获取和查询迭代器来执行元数据过滤。
 ---
-<h1 id="Query" class="common-anchor-header">Query<button data-href="#Query" class="anchor-icon" translate="no">
+<h1 id="Query" class="common-anchor-header">查询<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,11 +18,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.</p>
+    </button></h1><p>除了 ANN 搜索，Milvus 还支持通过查询进行元数据过滤。本页将介绍如何使用查询、获取和查询迭代器来执行元数据过滤。</p>
 <div class="alert note">
-<p>If you dynamically add new fields after the collection has been created, queries that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+<p>如果在创建 Collections 后动态添加新字段，包含这些字段的查询将返回定义的默认值，对于未显式设置值的实体，则返回 NULL。有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">集合概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,68 +37,68 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A Collection can store various types of scalar fields. You can have Milvus filter Entities based on one or more scalar fields. Milvus offers three types of queries: Query, Get, and QueryIterator. The table below compares these three query types.</p>
+    </button></h2><p>Collections 可以存储各种类型的标量字段。你可以让 Milvus 根据一个或多个标量字段过滤实体。Milvus 提供三种类型的查询：查询、获取和查询迭代器。下表比较了这三种查询类型。</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Get</p></th>
-     <th><p>Query</p></th>
-     <th><p>QueryIterator</p></th>
+     <th><p>获取</p></th>
+     <th><p>查询</p></th>
+     <th><p>查询迭代器</p></th>
    </tr>
    <tr>
-     <td><p>Applicable scenarios</p></td>
-     <td><p>To find entities that hold the specified primary keys.</p></td>
-     <td><p>To find all or a specified number of entities that meet the custom filtering conditions</p></td>
-     <td><p>To find all entities that meet the custom filtering conditions in paginated queries.</p></td>
+     <td><p>适用情况</p></td>
+     <td><p>查找持有指定主键的实体。</p></td>
+     <td><p>查找满足自定义筛选条件的所有实体或指定数量的实体</p></td>
+     <td><p>在分页查询中查找满足自定义筛选条件的所有实体。</p></td>
    </tr>
    <tr>
-     <td><p>Filtering method</p></td>
-     <td><p>By primary keys</p></td>
-     <td><p>By filtering expressions.</p></td>
-     <td><p>By filtering expressions.</p></td>
+     <td><p>过滤方法</p></td>
+     <td><p>通过主键</p></td>
+     <td><p>通过过滤表达式</p></td>
+     <td><p>通过过滤表达式</p></td>
    </tr>
    <tr>
-     <td><p>Mandatory parameters</p></td>
+     <td><p>必填参数</p></td>
      <td><ul>
-<li>Collection name</li>
-<li>Primary keys</li>
+<li>Collections 名称</li>
+<li>主键</li>
 </ul></td>
      <td><ul>
-<li>Collection name</li>
-<li>Filtering expressions</li>
+<li>Collections 名称</li>
+<li>过滤表达式</li>
 </ul></td>
      <td><ul>
-<li><p>Collection name</p></li>
-<li><p>Filtering expressions</p></li>
-<li><p>Number of entities to return per query</p></li>
-</ul></td>
-   </tr>
-   <tr>
-     <td><p>Optional parameters</p></td>
-     <td><ul>
-<li>Partition name</li>
-<li>Output fields</li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return</p></li>
-<li><p>Output fields</p></li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return in total</p></li>
-<li><p>Output fields</p></li>
+<li><p>Collections 名称</p></li>
+<li><p>过滤表达式</p></li>
+<li><p>每次查询返回的实体数量</p></li>
 </ul></td>
    </tr>
    <tr>
-     <td><p>Returns</p></td>
-     <td><p>Returns entities that hold the specified primary keys in the specified collection or partition.</p></td>
-     <td><p>Returns all or a specified number of entities that meet the custom filtering conditions in the specified collection or partition.</p></td>
-     <td><p>Returns all entities that meet the custom filtering conditions in the specified collection or partition through paginated queries.</p></td>
+     <td><p>可选参数</p></td>
+     <td><ul>
+<li>分区名称</li>
+<li>输出字段</li>
+</ul></td>
+     <td><ul>
+<li><p>分区名称</p></li>
+<li><p>要返回的实体数量</p></li>
+<li><p>输出字段</p></li>
+</ul></td>
+     <td><ul>
+<li><p>分区名称</p></li>
+<li><p>要返回的实体总数</p></li>
+<li><p>输出字段</p></li>
+</ul></td>
+   </tr>
+   <tr>
+     <td><p>返回值</p></td>
+     <td><p>返回指定集合或分区中持有指定主键的实体。</p></td>
+     <td><p>返回指定集合或分区中符合自定义筛选条件的所有实体或指定数量的实体。</p></td>
+     <td><p>通过分页查询返回指定集合或分区中符合自定义过滤条件的所有实体。</p></td>
    </tr>
 </table>
-<p>For more on metadata filtering, refer to .</p>
-<h2 id="Use-Get" class="common-anchor-header">Use Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>有关元数据过滤的更多信息，请参阅 .NET Framework 3.0。</p>
+<h2 id="Use-Get" class="common-anchor-header">使用获取<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -116,7 +113,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by their primary keys, you can use the <strong>Get</strong> method. The following code examples assume that there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> in your collection and return the entities with primary keys <code translate="no">1</code>, <code translate="no">2</code>, and <code translate="no">3</code>.</p>
+    </button></h2><p>当需要通过主键查找实体时，可以使用<strong>Get</strong>方法。以下代码示例假定集合中有三个名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> 的字段，并返回主键为<code translate="no">1</code> 、<code translate="no">2</code> 和<code translate="no">3</code> 的实体。</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -130,14 +127,9 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>You can get entities by their IDs as follows.</p>
+<p>您可以按如下方式通过 ID 获取实体。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -244,7 +236,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query" class="common-anchor-header">Use Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
+<h2 id="Use-Query" class="common-anchor-header">使用查询<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -259,14 +251,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by custom filtering conditions, use the <strong>Query</strong> method. The following code examples assume there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> and return the specified number of entities that hold a <code translate="no">color</code> value starting with <code translate="no">red</code>.</p>
+    </button></h2><p>当您需要通过自定义过滤条件查找实体时，请使用<strong>查询方法</strong>。以下代码示例假定有三个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> ，并返回从<code translate="no">red</code> 开始持有<code translate="no">color</code> 值的实体的指定数目。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -344,7 +331,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;red_4794&quot;,&quot;id&quot;:4,&quot;vector&quot;:[0.44523495,-0.8757027,0.82207793,0.4640629,0.3033748]},{&quot;color&quot;:&quot;red_9392&quot;,&quot;id&quot;:6,&quot;vector&quot;:[0.8371978,-0.015764369,-0.31062937,-0.56266695,-0.8984948]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-QueryIterator" class="common-anchor-header">Use QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
+<h2 id="Use-QueryIterator" class="common-anchor-header">使用查询迭代器<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -359,14 +346,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by custom filtering conditions through paginated queries, create a <strong>QueryIterator</strong> and use its <strong>next()</strong> method to iterate over all entities to find those meeting the filtering conditions. The following code examples assume that there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> and return all entities that hold a <code translate="no">color</code> value starting with <code translate="no">red</code>.</p>
+    </button></h2><p>当您需要通过分页查询按自定义过滤条件查找实体时，可创建一个<strong>QueryIterator</strong>并使用其<strong>next()</strong>方法遍历所有实体，以查找满足过滤条件的实体。以下代码示例假定有三个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> ，并从<code translate="no">red</code> 开始返回持有<code translate="no">color</code> 值的所有实体。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -443,7 +425,7 @@ results = []
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Not available</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-in-Partitions" class="common-anchor-header">Queries in Partitions<button data-href="#Queries-in-Partitions" class="anchor-icon" translate="no">
+<h2 id="Queries-in-Partitions" class="common-anchor-header">分区中的查询<button data-href="#Queries-in-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -458,14 +440,9 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also perform queries within one or multiple partitions by including the partition names in the Get, Query, or QueryIterator request. The following code examples assume that there is a partition named <strong>PartitionA</strong> in the collection.</p>
+    </button></h2><p>您还可以通过在 Get、Query 或 QueryIterator 请求中包含分区名称，在一个或多个分区中执行查询。以下代码示例假定 Collections 中有一个名为<strong>PartitionA</strong>的分区。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,

@@ -1,14 +1,10 @@
 ---
 id: sparse_vector.md
-title: Sparse Vector
+title: 稀疏向量
 summary: >-
-  Sparse vectors are an important method of capturing surface-level term
-  matching in information retrieval and natural language processing. While dense
-  vectors excel in semantic understanding, sparse vectors often provide more
-  predictable matching results, especially when searching for special terms or
-  textual identifiers.
+  稀疏向量是信息检索和自然语言处理中捕捉表层术语匹配的重要方法。虽然稠密向量在语义理解方面表现出色，但稀疏向量往往能提供更可预测的匹配结果，尤其是在搜索特殊术语或文本标识符时。
 ---
-<h1 id="Sparse-Vector" class="common-anchor-header">Sparse Vector<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
+<h1 id="Sparse-Vector" class="common-anchor-header">稀疏向量<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Sparse vectors are an important method of capturing surface-level term matching in information retrieval and natural language processing. While dense vectors excel in semantic understanding, sparse vectors often provide more predictable matching results, especially when searching for special terms or textual identifiers.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>稀疏向量是信息检索和自然语言处理中捕捉表层术语匹配的重要方法。虽然稠密向量在语义理解方面表现出色，但稀疏向量往往能提供更可预测的匹配结果，尤其是在搜索特殊术语或文本标识符时。</p>
+<h2 id="Overview" class="common-anchor-header">稀疏向量概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,29 +35,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A sparse vector is a special high-dimensional vector where most elements are zero, and only a few dimensions have non-zero values. As shown in the diagram below, dense vectors are typically represented as continuous arrays where each position has a value (e.g., <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). In contrast, sparse vectors store only non-zero elements and their indices of the dimension, often represented as key-value pairs of <code translate="no">{ index: value}</code> (e.g., <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>).</p>
+    </button></h2><p>稀疏向量是一种特殊的高维向量，其中大部分元素为零，只有少数维度具有非零值。如下图所示，稠密向量通常表示为连续数组，其中每个位置都有一个值（例如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。相比之下，稀疏向量只存储非零元素及其维度的索引，通常以<code translate="no">{ index: value}</code> 的键值对表示（如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
-    <span>Sparse Vector Representation</span>
-  </span>
-</p>
-<p>With tokenization and scoring, documents can be represented as bag-of-words vectors, where each dimension corresponds to a specific word in the vocabulary. Only the words present in the document have non-zero values, creating a sparse vector representation. Sparse vectors can be generated using two approaches:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
+   </span> <span class="img-wrapper"> <span>稀疏向量表示法</span> </span></p>
+<p>通过标记化和评分，文档可以表示为词袋向量，其中每个维度对应词汇表中的一个特定单词。只有文档中出现的单词才有非零值，从而形成稀疏向量表示法。稀疏向量可通过两种方法生成：</p>
 <ul>
-<li><p><strong>Traditional statistical techniques</strong>, such as <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) and <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), assign weights to words based on their frequency and importance across a corpus. These methods compute simple statistics as scores for each dimension, which represents a token.  Milvus provides built-in <strong>full-text search</strong> with the BM25 method, which automatically converts text into sparse vectors, eliminating the need for manual preprocessing. This approach is ideal for keyword-based search, where precision and exact matches are important. Refer to <a href="/docs/full-text-search.md">Full Text Search</a> for more information.</p></li>
-<li><p><strong>Neural sparse embedding models</strong> are learned methods to generate sparse representations by training on large datasets. They are typically deep learning models with Transformer architecture, able to expand and weigh terms based on semantic context. Milvus also supports externally generated sparse embeddings from models like <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. See <a href="/docs/embeddings.md#Embedding-Overview">Embeddings</a> for details.</include></p></li>
+<li><p><strong>传统的统计技术</strong>，如<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（词频-反向文档频率）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>（最佳匹配 25），根据词在语料库中的频率和重要性为词分配权重。这些方法将简单的统计数据计算为每个维度的分数，而每个维度代表一个标记。  Milvus 利用 BM25 方法提供内置的<strong>全文搜索</strong>功能，该方法可自动将文本转换为稀疏向量，无需进行人工预处理。这种方法非常适合基于关键字的搜索，在这种搜索中，精确度和精确匹配非常重要。更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p></li>
+<li><p><strong>神经稀疏嵌入模型</strong>是通过在大型数据集上训练生成稀疏表示的学习方法。它们通常是具有 Transformer 架构的深度学习模型，能够根据语义上下文对术语进行扩展和权衡。Milvus 还支持由<a href="https://arxiv.org/abs/2109.10086">SPLADE</a> 等模型外部生成的稀疏嵌入。详情请参阅<a href="/docs/zh/embeddings.md#Embedding-Overview">Embeddings</a>。</include></p></li>
 </ul>
-<p>Sparse vectors and the original text can be stored in Milvus for efficient retrieval. The diagram below outlines the overall process.</p>
+<p>稀疏向量和原文可以存储在 Milvus 中，以便高效检索。下图概述了整个流程。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
-    <span>Sparse Vector Workflow</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
+   </span> <span class="img-wrapper"> <span>稀疏向量工作流程</span> </span></p>
 <div class="alert note">
-<p>In addition to sparse vectors, Milvus also supports dense vectors and binary vectors. Dense vectors are ideal for capturing deep semantic relationships, while binary vectors excel in scenarios like quick similarity comparisons and content deduplication. For more information, refer to <a href="/docs/dense-vector.md">Dense Vector</a> and <a href="/docs/binary-vector.md">Binary Vector</a>.</p>
+<p>除了稀疏向量，Milvus 还支持密集向量和二进制向量。密集向量是捕捉深层语义关系的理想选择，而二进制向量则在快速相似性比较和重复内容删除等场景中表现出色。更多信息，请参阅<a href="/docs/zh/dense-vector.md">密集向量</a>和<a href="/docs/zh/binary-vector.md">二进制向量</a>。</p>
 </div>
-<h2 id="Data-Formats" class="common-anchor-header">Data Formats<button data-href="#Data-Formats" class="anchor-icon" translate="no">
+<h2 id="Data-Formats" class="common-anchor-header">数据格式<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,14 +68,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the following sections, we demonstrate how to store vectors from learned sparse embedding models like SPLADE. If you are looking for something to complement dense-vector-based semantic search, we recommend <a href="/docs/full-text-search.md">Full Text Search</a> with BM25 over SPLADE for simplicity. If you’ve ran quality evaluation and dediced to use SPLADE, you can refer to <a href="/docs/embeddings.md#Embedding-Overview">Embeddings</a> on how to generate sparse vectors with SPLADE.</p>
-<p>Milvus supports  sparse vector input with the following formats:</p>
+    </button></h2><p>在下面的章节中，我们将演示如何从 SPLADE 等学习到的稀疏嵌入模型中存储向量。如果您正在寻找对基于密集向量的语义搜索进行补充的东西，我们推荐使用 BM25 进行<a href="/docs/zh/full-text-search.md">全文搜索</a>，而不是 SPLADE，因为这样做比较简单。如果你已经进行了质量评估，并决定使用 SPLADE，那么你可以参考<a href="/docs/zh/embeddings.md#Embedding-Overview">Embeddings</a>，了解如何使用 SPLADE 生成稀疏向量。</p>
+<p>Milvus 支持以下格式的稀疏向量输入：</p>
 <ul>
-<li><p><strong>List of Dictionaries (formatted as <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
+<li><p><strong>字典列表（格式为<code translate="no">{dimension_index: value, ...}</code>)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a dictionary</span>
 sparse_vectors = [{<span class="hljs-number">27</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">5369</span>: <span class="hljs-number">0.6</span>} , {<span class="hljs-number">100</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">3</span>: <span class="hljs-number">0.8</span>}]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Sparse Matrix (using the <code translate="no">scipy.sparse</code> class)</strong></p>
+<li><p><strong>稀疏矩阵（使用<code translate="no">scipy.sparse</code> 类）</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix
 
 <span class="hljs-comment"># First vector: indices [27, 100, 5369] with values [0.5, 0.3, 0.6]</span>
@@ -92,7 +84,7 @@ indices = [[<span class="hljs-number">27</span>, <span class="hljs-number">100</
 values = [[<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.1</span>]]
 sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>List of Tuple Iterables (e.g. <code translate="no">[(dimension_index, value)]</code>)</strong></p>
+<li><p><strong>元组迭代列表（如<code translate="no">[(dimension_index, value)]</code>)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a list of iterables (e.g. tuples)</span>
 sparse_vector = [
     [(<span class="hljs-number">27</span>, <span class="hljs-number">0.5</span>), (<span class="hljs-number">100</span>, <span class="hljs-number">0.3</span>), (<span class="hljs-number">5369</span>, <span class="hljs-number">0.6</span>)],
@@ -100,7 +92,7 @@ sparse_vector = [
     ]
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Define-Collection-Schema" class="common-anchor-header">Define Collection Schema<button data-href="#Define-Collection-Schema" class="anchor-icon" translate="no">
+<h2 id="Define-Collection-Schema" class="common-anchor-header">定义 Collections Schema<button data-href="#Define-Collection-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,19 +107,14 @@ sparse_vector = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before creating a collection, you need to specify the collection schema, which defines fields  and optionally a function to convert a text field into corresponding sparse vector representation.</p>
-<h3 id="Add-fields" class="common-anchor-header">Add fields</h3><p>To use sparse vectors in Milvus, you need to create a collection with a schema including the following fields:</p>
+    </button></h2><p>创建 Collections 之前，需要指定 Collections Schema，其中定义字段，并可选择将文本字段转换为相应稀疏向量表示的函数。</p>
+<h3 id="Add-fields" class="common-anchor-header">添加字段</h3><p>要在 Milvus 中使用稀疏向量，需要创建一个模式包括以下字段的 Collections：</p>
 <ul>
-<li><p>A <code translate="no">SPARSE_FLOAT_VECTOR</code> field reserved for storing sparse vectors, either auto-generated from a <code translate="no">VARCHAR</code> field or provided directly in the input data.</p></li>
-<li><p>Typically, the raw text that the sparse vector represents is also stored in the collection. You can use a <code translate="no">VARCHAR</code> field for storing the raw text.</p></li>
+<li><p>一个<code translate="no">SPARSE_FLOAT_VECTOR</code> 字段，预留用于存储稀疏向量，可以从<code translate="no">VARCHAR</code> 字段自动生成，也可以直接在输入数据中提供。</p></li>
+<li><p>通常，稀疏向量所代表的原始文本也会存储在 Collections 中。您可以使用<code translate="no">VARCHAR</code> 字段来存储原始文本。</p></li>
 </ul>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -270,16 +257,16 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, three fields are added:</p>
+<p>在此示例中，添加了三个字段：</p>
 <ul>
-<li><p><code translate="no">pk</code>: This field stores primary keys using the <code translate="no">VARCHAR</code> data type, which is auto-generated with a maximum length of 100 bytes.</p></li>
-<li><p><code translate="no">sparse_vector</code>: This field stores sparse vectors using the <code translate="no">SPARSE_FLOAT_VECTOR</code> data type.</p></li>
-<li><p><code translate="no">text</code>: This field stores text strings using the <code translate="no">VARCHAR</code> data type, with a maximum length of 65535 bytes.</p></li>
+<li><p><code translate="no">pk</code>:该字段使用<code translate="no">VARCHAR</code> 数据类型存储主键，该数据类型是自动生成的，最大长度为 100 字节。</p></li>
+<li><p><code translate="no">sparse_vector</code>:该字段使用<code translate="no">SPARSE_FLOAT_VECTOR</code> 数据类型存储稀疏向量。</p></li>
+<li><p><code translate="no">text</code>:该字段使用<code translate="no">VARCHAR</code> 数据类型存储文本字符串，最大长度为 65535 字节。</p></li>
 </ul>
 <div class="alert note">
-<p>To enable Milvus or  to generate sparse vector embeddings from a specified text field during data insertion, an additional step involving a function must be taken. For more information, please refer to  <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
+<p>要启用 Milvus 或在数据插入过程中从指定文本字段生成稀疏向量 Embeddings，必须采取涉及函数的额外步骤。有关详细信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
 </div>
-<h2 id="Set-Index-Parameters" class="common-anchor-header">Set Index Parameters<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
+<h2 id="Set-Index-Parameters" class="common-anchor-header">设置索引参数<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -294,14 +281,9 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The process of creating an index for sparse vectors is similar to that for <a href="/docs/dense-vector.md">dense vectors</a>, but with differences in the specified index type (<code translate="no">index_type</code>), distance metric (<code translate="no">metric_type</code>), and index parameters (<code translate="no">params</code>).</p>
+    </button></h2><p>为稀疏向量创建索引的过程与为<a href="/docs/zh/dense-vector.md">稠密向量</a>创建索引的过程类似，但在指定的索引类型 (<code translate="no">index_type</code>)、距离度量 (<code translate="no">metric_type</code>) 和索引参数 (<code translate="no">params</code>) 上有所不同。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -357,11 +339,11 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This example uses the <code translate="no">SPARSE_INVERTED_INDEX</code> index type with <code translate="no">IP</code> as the metric. For more details, see the following resources:</p>
+<p>本示例使用<code translate="no">SPARSE_INVERTED_INDEX</code> 索引类型和<code translate="no">IP</code> 作为度量。有关详细信息，请参阅以下资源：</p>
 <ul>
-<li><a href="/docs/metric.md">Metric Types</a>: Supported metric types for different field types</li>
+<li><a href="/docs/zh/metric.md">度量类型</a>：不同字段类型支持的度量类型</li>
 </ul>
-<h2 id="Create-Collection" class="common-anchor-header">Create Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+<h2 id="Create-Collection" class="common-anchor-header">创建 Collections<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -376,14 +358,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the sparse vector and index settings are complete, you can create a collection that contains sparse vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_collection</code>.</p>
+    </button></h2><p>完成稀疏向量和索引设置后，就可以创建包含稀疏向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_collection</code> 的集合。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -427,7 +404,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">插入数据<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -442,14 +419,9 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You must provide data for all fields defined during collection creation, except for fields that are auto-generated (such as the primary key with <code translate="no">auto_id</code> enabled). If you are using the built-in BM25 function to auto-generate sparse vectors, you should also omit the sparse vector field when inserting data.</p>
+    </button></h2><p>您必须为创建 Collections 时定义的所有字段提供数据，自动生成的字段除外（例如启用了<code translate="no">auto_id</code> 的主键）。如果使用内置的 BM25 函数自动生成稀疏向量，则在插入数据时也应省略稀疏向量字段。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
     {
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>,
@@ -564,7 +536,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Perform-Similarity-Search" class="common-anchor-header">Perform Similarity Search<button data-href="#Perform-Similarity-Search" class="anchor-icon" translate="no">
+<h2 id="Perform-Similarity-Search" class="common-anchor-header">执行相似性搜索<button data-href="#Perform-Similarity-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -579,14 +551,9 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To perform a similarity search using sparse vectors, prepare both the query data and the search parameters.</p>
+    </button></h2><p>要使用稀疏向量执行相似性搜索，请准备好查询数据和搜索参数。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
 search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># A tunable drop ratio parameter with a valid range between 0 and 1</span>
@@ -628,14 +595,9 @@ queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32<
 <span class="hljs-comment"># Query with the sparse vector</span>
 <span class="hljs-built_in">export</span> queryData=<span class="hljs-string">&#x27;[{1: 0.2, 50: 0.4, 1000: 0.7}]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, execute the similarity search using the <code translate="no">search</code> method:</p>
+<p>然后，使用<code translate="no">search</code> 方法执行相似性搜索：</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=query_data,
@@ -716,4 +678,4 @@ System.out.println(searchR.getSearchResults());
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic Vector Search</a>.</p>
+<p>有关相似性搜索参数的更多信息，请参阅<a href="/docs/zh/single-vector-search.md">基本向量搜索</a>。</p>

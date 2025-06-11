@@ -1,8 +1,8 @@
 ---
 id: glossary.md
-title: Terminology
+title: 术语
 ---
-<h1 id="Terminology" class="common-anchor-header">Terminology<button data-href="#Terminology" class="anchor-icon" translate="no">
+<h1 id="Terminology" class="common-anchor-header">术语<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,7 +17,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="AutoID" class="common-anchor-header">AutoID<button data-href="#AutoID" class="anchor-icon" translate="no">
+    </button></h1><h2 id="AutoID" class="common-anchor-header">自动增益<button data-href="#AutoID" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -32,8 +32,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AutoID is an attribute of the primary field that determines whether to enable AutoIncrement for the primary field. The value of AutoID is defined based on a timestamp. For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema</a>.</p>
-<h2 id="Auto-Index" class="common-anchor-header">Auto Index<button data-href="#Auto-Index" class="anchor-icon" translate="no">
+    </button></h2><p>AutoID 是主字段的一个属性，用于决定是否启用主字段的自动递增。AutoID 的值根据时间戳定义。有关详细信息，请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema</a>。</p>
+<h2 id="Auto-Index" class="common-anchor-header">自动索引<button data-href="#Auto-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -48,7 +48,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus automatically decides the most appropriate index type and params for a specific field based on empirical data. This is ideal for situations when you do not need to control the specific index params. For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md">add_index</a>.</p>
+    </button></h2><p>Milvus 根据经验数据自动为特定字段决定最合适的索引类型和参数。这非常适合不需要控制特定索引参数的情况。更多信息，请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md">add_index</a>。</p>
 <h2 id="Attu" class="common-anchor-header">Attu<button data-href="#Attu" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +64,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/attu">Attu</a> is an all-in-one administration tool for Milvus that significantly reduces the complexity and cost of managing the system.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/attu">Attu</a>是 Milvus 的一体化管理工具，可显著降低系统管理的复杂性和成本。</p>
 <h2 id="Birdwatcher" class="common-anchor-header">Birdwatcher<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,8 +80,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/birdwatcher_overview.md">Birdwatcher</a> is a debugging tool for Milvus that connects to etcd, allowing you to monitor the status of the Milvus server and make adjustments in real-time. It also supports etcd file backups, aiding developers in troubleshooting.</p>
-<h2 id="Bulk-Writer" class="common-anchor-header">Bulk Writer<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
+    </button></h2><p><a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>是 Milvus 的调试工具，可连接 etcd，实时监控 Milvus 服务器的状态并进行调整。它还支持 etcd 文件备份，帮助开发人员排除故障。</p>
+<h2 id="Bulk-Writer" class="common-anchor-header">批量编写工具<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,8 +96,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Bulk Writer</a> is a data processing tool provided by Milvus SDKs (e.g. PyMilvus, Java SDK) , designed to convert raw datasets into a format compatible with Milvus for efficient importing.</p>
-<h2 id="Bulk-Insert" class="common-anchor-header">Bulk Insert<button data-href="#Bulk-Insert" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Bulk Writer</a>是 Milvus SDK（如 PyMilvus、Java SDK）提供的数据处理工具，旨在将原始数据集转换为与 Milvus 兼容的格式，以便高效导入。</p>
+<h2 id="Bulk-Insert" class="common-anchor-header">批量插入<button data-href="#Bulk-Insert" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,7 +112,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">Bulk Insert</a> is an API that enhances writing performance by allowing multiple files to be imported in a single request, optimizing operations with large datasets.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">批量插入（Bulk Insert</a>）是一种应用程序接口（API），通过允许在单个请求中导入多个文件来提高写入性能，从而优化大型数据集的操作符。</p>
 <h2 id="Cardinal" class="common-anchor-header">Cardinal<button data-href="#Cardinal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,8 +128,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cardinal, developed by Zilliz Cloud, is a cutter-edge vector search algorithm that delivers unparalleled search quality and performance. With its innovative design and extensive optimizations, Cardinal outperforms Knowhere by several times to an order of magnitude while adaptively handling diverse production scenarios, such as varying K sizes, high filtering, different data distributions, and so on.</p>
-<h2 id="Channel" class="common-anchor-header">Channel<button data-href="#Channel" class="anchor-icon" translate="no">
+    </button></h2><p>Cardinal 由 Zilliz Cloud 开发，是一种尖端向量搜索算法，可提供无与伦比的搜索质量和性能。凭借创新的设计和广泛的优化，Cardinal 的性能比 Knowhere 高出数倍到一个数量级，同时还能自适应地处理不同的生产场景，如不同的 K 大小、高过滤、不同的数据分布等。</p>
+<h2 id="Channel" class="common-anchor-header">通道<button data-href="#Channel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -144,8 +144,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus utilizes two types of channels, <a href="https://milvus.io/docs/glossary.md#PChannel">PChannel</a> and <a href="https://milvus.io/docs/glossary.md#VChannel">VChannel</a>. Each PChannel corresponds to a topic for log storage, while each VChannel corresponds to a shard in a collection.</p>
-<h2 id="Collection" class="common-anchor-header">Collection<button data-href="#Collection" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus 使用两种类型的通道：<a href="https://milvus.io/docs/glossary.md#PChannel">PC</a>通道和<a href="https://milvus.io/docs/glossary.md#VChannel">V 通道</a>。每个 PC 通道对应一个日志存储主题，而每个 V 通道对应一个 Collections 中的一个分片。</p>
+<h2 id="Collection" class="common-anchor-header">Collections<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -160,8 +160,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, a collection is equivalent to a table in a relational database management system (RDBMS). Collections are major logical objects used to store and manage entities. For more information, refer to <a href="/docs/manage-collections.md">Manage Collections</a>.</p>
-<h2 id="Dependency" class="common-anchor-header">Dependency<button data-href="#Dependency" class="anchor-icon" translate="no">
+    </button></h2><p>在 Milvus 中，集合相当于关系数据库管理系统（RDBMS）中的表。Collections 是用于存储和管理实体的主要逻辑对象。更多信息，请参阅<a href="/docs/zh/manage-collections.md">管理 Collections</a>。</p>
+<h2 id="Dependency" class="common-anchor-header">依赖程序<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,8 +176,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A dependency is a program that another program relies on to work. Milvus’ dependencies include etcd (stores meta data), MinIO or S3 (object storage), and Pulsar (manages snapshot logs). For more information, refer to <a href="https://milvus.io/docs/manage_dependencies.md#Manage-Dependencies">Manage Dependencies</a>.</p>
-<h2 id="Dynamic-schema" class="common-anchor-header">Dynamic schema<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
+    </button></h2><p>依赖程序是另一个程序赖以运行的程序。Milvus 的依赖程序包括 etcd（存储元数据）、MinIO 或 S3（对象存储）和 Pulsar（管理快照日志）。更多信息，请参阅<a href="https://milvus.io/docs/manage_dependencies.md#Manage-Dependencies">管理依赖关系</a>。</p>
+<h2 id="Dynamic-schema" class="common-anchor-header">动态模式 Schema<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,8 +192,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dynamic schema allows you to insert entities with new fields into a collection without modifying the existing schema. This means that you can insert data without knowing the full schema of a collection and can include fields that are not yet defined. You can enable this schema-free capability by enableing the dynamic field when creating a collection. For more information, refer to <a href="/docs/enable-dynamic-field.md">Enable Dynamic Field</a>.</p>
-<h2 id="Embeddings" class="common-anchor-header">Embeddings<button data-href="#Embeddings" class="anchor-icon" translate="no">
+    </button></h2><p>动态模式允许您在不修改现有模式的情况下，将带有新字段的实体插入 Collections。这意味着您可以在不知道 Collections 的完整模式的情况下插入数据，并可以包含尚未定义的字段。您可以在创建 Collections 时启用动态字段，从而启用这种无 Schema 功能。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">启用动态字段</a>。</p>
+<h2 id="Embeddings" class="common-anchor-header">嵌入<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -208,8 +208,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus offers built-in embedding functions that work with popular embedding providers. Before creating a collection in Milvus, you can use these functions to generate embeddings for your datasets, streamlining the process of preparing data and vector searches. To create embeddings in action, refer to <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Using PyMilvus’s Model To Generate Text Embeddings</a>.</p>
-<h2 id="Entity" class="common-anchor-header">Entity<button data-href="#Entity" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus 提供内置嵌入功能，可与流行的嵌入提供商配合使用。在 Milvus 中创建 Collections 之前，您可以使用这些功能为数据集生成嵌入，从而简化准备数据和向量搜索的过程。要在实际操作中创建嵌入，请参阅<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">使用 PyMilvus 的模型生成文本嵌入</a>。</p>
+<h2 id="Entity" class="common-anchor-header">实体<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -224,9 +224,9 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>An entity consists of a group of fields that represent real-world objects. Each entity in Milvus is represented by a unique primary key.</p>
-<p>You can customize primary keys. If you do not configure manually, Milvus automatically assigns the primary key to entities. If you choose to customize the primary key, note that Milvus does not support primary key de-duplication for now. Therefore, there can be duplicate primary keys in the same collection. For more information, refer to <a href="/docs/insert-update-delete.md#Insert-entities">Insert Entities</a>.</p>
-<h2 id="Field" class="common-anchor-header">Field<button data-href="#Field" class="anchor-icon" translate="no">
+    </button></h2><p>实体由一组表示现实世界对象的字段组成。Milvus 中的每个实体都有一个唯一的主键。</p>
+<p>你可以自定义主键。如果不手动配置，Milvus 会自动为实体分配主键。如果选择自定义主键，请注意 Milvus 暂时不支持主键去重。因此，同一 Collections 中可能存在重复的主键。有关详细信息，请参阅<a href="/docs/zh/insert-update-delete.md#Insert-entities">插入实体</a>。</p>
+<h2 id="Field" class="common-anchor-header">字段<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -241,8 +241,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A field in a Milvus collection is equivalent to a column of table in a RDBMS. Fields can be either scalar fields for structured data (e.g., numbers, strings), or vector fields for embedding vectors.</p>
-<h2 id="Filter" class="common-anchor-header">Filter<button data-href="#Filter" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus Collections 中的字段相当于 RDBMS 表中的列。字段可以是结构化数据（如数字、字符串）的标量字段，也可以是嵌入向量的向量字段。</p>
+<h2 id="Filter" class="common-anchor-header">过滤<button data-href="#Filter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -257,8 +257,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports scalar filtering by searching with predicates, allowing you to define <a href="https://milvus.io/docs/boolean.md">filter conditions</a> within queries and searches to refine results.</p>
-<h2 id="Filtered-search" class="common-anchor-header">Filtered search<button data-href="#Filtered-search" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus 支持通过谓词搜索进行标量过滤，允许您在查询和搜索中定义<a href="https://milvus.io/docs/boolean.md">过滤条件</a>，以完善搜索结果。</p>
+<h2 id="Filtered-search" class="common-anchor-header">过滤搜索<button data-href="#Filtered-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -273,8 +273,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. For more information, refer to <a href="/docs/single-vector-search.md#Filtered-search">Filtered search</a>.</p>
-<h2 id="Hybrid-search" class="common-anchor-header">Hybrid search<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
+    </button></h2><p>过滤搜索将标量过滤器应用于向量搜索，允许你根据特定条件完善搜索结果。更多信息，请参阅<a href="/docs/zh/single-vector-search.md#Filtered-search">过滤搜索</a>。</p>
+<h2 id="Hybrid-search" class="common-anchor-header">混合搜索<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -289,8 +289,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">Hybrid Search</a> is an API for hybrid search since Milvus 2.4.0. You can search multiple vector fields and fusion them. For a vector search combined with scalar field filtering, it is referred to as "filtered search". For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p>
-<h2 id="Index" class="common-anchor-header">Index<button data-href="#Index" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">混合</a>搜索是自 Milvus 2.4.0 以来的混合搜索 API。您可以搜索多个向量场并进行融合。对于与标量字段过滤相结合的向量搜索，称为 "过滤搜索"。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
+<h2 id="Index" class="common-anchor-header">索引<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -305,8 +305,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A vector index is a reorganized data structure derived from raw data that can greatly accelerate the process of vector similarity search. Milvus supports a wide range of index types for both vector fields and scalar fields. For more information, refer to <a href="https://milvus.io/docs/index.md">Vector index types</a>.</p>
-<h2 id="Kafka-Milvus-Connector" class="common-anchor-header">Kafka-Milvus Connector<button data-href="#Kafka-Milvus-Connector" class="anchor-icon" translate="no">
+    </button></h2><p>向量索引是从原始数据衍生出来的重组数据结构，可以大大加快向量相似性搜索的过程。Milvus 支持向量场和标量场的多种索引类型。更多信息，请参阅<a href="https://milvus.io/docs/index.md">向量索引类型</a>。</p>
+<h2 id="Kafka-Milvus-Connector" class="common-anchor-header">Kafka-Milvus 连接器<button data-href="#Kafka-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -321,7 +321,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/kafka-connect-milvus">Kafka-Milvus Connector</a> refers to a Kafka sink connector for Milvus. It allows you to stream vector data from Kafka to Milvus.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/kafka-connect-milvus">Kafka-Milvus 连接器</a>指的是 Milvus 的 Kafka 汇连接器。它允许你将向量数据从 Kafka 流式传输到 Milvus。</p>
 <h2 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,8 +337,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> is the core vector execution engine of Milvus which incorporates several vector similarity search libraries including Faiss, Hnswlib, and Annoy. Knowhere is also designed to support heterogeneous computing. It controls on which hardware (CPU or GPU) to execute index building and search requests. This is how Knowhere gets its name - knowing where to execute the operations.</p>
-<h2 id="Log-broker" class="common-anchor-header">Log broker<button data-href="#Log-broker" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a>是 Milvus 的核心向量执行引擎，它集成了多个向量相似性搜索库，包括 Faiss、Hnswlib 和 Annoy。Knowhere 还旨在支持异构计算。它可以控制在哪个硬件（CPU 或 GPU）上执行索引构建和搜索请求。这就是 Knowhere 名字的由来--知道在哪里执行操作符。</p>
+<h2 id="Log-broker" class="common-anchor-header">日志代理<button data-href="#Log-broker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -353,8 +353,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown.</p>
-<h2 id="Log-snapshot" class="common-anchor-header">Log snapshot<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/docs/four_layers.md#Log-broker">日志代理</a>是一个支持回放的发布-订阅系统。它负责流式数据持久化、执行可靠的异步查询、事件通知和返回查询结果。当工作节点从系统故障中恢复时，它还能确保增量数据的完整性。</p>
+<h2 id="Log-snapshot" class="common-anchor-header">日志快照<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -369,8 +369,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A log snapshot is a binary log, a smaller unit in segment that records and handles the updates and changes made to data in Milvus. Data from a segment is persisted in multiple binlogs. There are three types of binlogs in Milvus: InsertBinlog, DeleteBinlog, and DDLBinlog. For more information, refer to <a href="https://milvus.io/docs/four_layers.md#Meta-storage">Meta storage</a>.</p>
-<h2 id="Log-subscriber" class="common-anchor-header">Log subscriber<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
+    </button></h2><p>日志快照是二进制日志，是段中较小的单元，记录并处理 Milvus 中数据的更新和更改。段中的数据会在多个二进制日志中持久化。Milvus 中有三种二进制日志：InsertBinlog、DeleteBinlog 和 DDLBinlog。有关详细信息，请参阅<a href="https://milvus.io/docs/four_layers.md#Meta-storage">元存储</a>。</p>
+<h2 id="Log-subscriber" class="common-anchor-header">日志订阅者<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -385,8 +385,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies.</p>
-<h2 id="Message-storage" class="common-anchor-header">Message storage<button data-href="#Message-storage" class="anchor-icon" translate="no">
+    </button></h2><p>日志订阅者订阅日志序列以更新本地数据，并以只读副本的形式提供服务。</p>
+<h2 id="Message-storage" class="common-anchor-header">消息存储<button data-href="#Message-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -401,8 +401,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Configure Message Storage</a>.</p>
-<h2 id="Metric-type" class="common-anchor-header">Metric type<button data-href="#Metric-type" class="anchor-icon" translate="no">
+    </button></h2><p>消息存储是 Milvus 的日志存储引擎。Milvus 支持 Kafka 或 Pulsa 作为消息存储。有关详细信息，请参阅<a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">配置消息存储</a>。</p>
+<h2 id="Metric-type" class="common-anchor-header">度量类型<button data-href="#Metric-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -417,8 +417,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Similarity metric types are used to measure similarities between vectors. Currently, Milvus supports Euclidean distance (L2), Inner product (IP), Cosine similarity (COSINE), and binary metric types. You can choose the most appropriate metric type based on your scenario. For more information, refer to <a href="https://milvus.io/docs/metric.md">Similarity Metrics</a>.</p>
-<h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
+    </button></h2><p>相似度度量类型用于度量向量之间的相似度。目前，Milvus 支持欧氏距离（L2）、内积（IP）、余弦相似度（COSINE）和二元度量类型。你可以根据你的情况选择最合适的度量类型。更多信息，请参阅 "<a href="https://milvus.io/docs/metric.md">相似度量</a>"。</p>
+<h2 id="Mmap" class="common-anchor-header">内存映射<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -433,8 +433,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Memory-mapped files enable efficient data handling by mapping file contents directly into memory. This is especially useful when memory is limited and loading all data is not possible. This technique can boost data capacity and maintain performance to a point. However, if the data greatly exceeds memory capacity, search and query speeds could significantly decrease. For more information, refer to <a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storage</a>.</p>
-<h2 id="Milvus-Backup" class="common-anchor-header">Milvus Backup<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
+    </button></h2><p>内存映射文件可将文件内容直接映射到内存中，从而实现高效的数据处理。当内存有限且无法加载所有数据时，这种方法尤其有用。这种技术可以提高数据容量，并在一定程度上保持性能。但是，如果数据大大超出内存容量，搜索和查询速度就会大大降低。有关详细信息，请参阅<a href="https://milvus.io/docs/mmap.md">启用 MMap 的数据存储</a>。</p>
+<h2 id="Milvus-Backup" class="common-anchor-header">Milvus 备份<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -449,7 +449,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Milvus Backup</a> is a tool for creating copies of data, which can be used to restore the original after a data loss event.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Milvus 备份</a>是一种创建数据副本的工具，可用于在数据丢失事件发生后恢复原始数据。</p>
 <h2 id="Milvus-CDC" class="common-anchor-header">Milvus CDC<button data-href="#Milvus-CDC" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -465,7 +465,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a> (Change data capture) is a user-friendly tool that can capture and synchronize incremental data in Milvus instances. It ensures the reliability of business data by seamlessly transferring it between source and target instances, allowing for easy incremental backup and disaster recovery.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a>（变更数据捕获）是一个用户友好型工具，可以捕获和同步 Milvus 实例中的增量数据。它通过在源实例和目标实例之间无缝传输数据来确保业务数据的可靠性，从而轻松实现增量备份和灾难恢复。</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -481,8 +481,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/cli_overview.md">Milvus Command-Line Interface</a> (CLI) is a command-line tool that supports database connection, data operations, and import and export of data. Based on <a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a>, it allows the execution of commands through a terminal using interactive command-line prompts.</p>
-<h2 id="Milvus-Migration" class="common-anchor-header">Milvus Migration<button data-href="#Milvus-Migration" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/docs/cli_overview.md">Milvus 命令行界面</a>（CLI）是一种命令行工具，支持数据库连接、数据操作和数据导入导出。它基于<a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a>，允许通过终端使用交互式命令行提示执行命令。</p>
+<h2 id="Milvus-Migration" class="common-anchor-header">Milvus 迁移<button data-href="#Milvus-Migration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -497,8 +497,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvus Migration</a> is an open-source tool designed to facilitate the easy migration of data from various data sources into Milvus 2.x.</p>
-<h2 id="Milvus-cluster" class="common-anchor-header">Milvus cluster<button data-href="#Milvus-cluster" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvus 迁移</a>是一个开源工具，旨在方便将数据从各种数据源轻松迁移到 Milvus 2.x。</p>
+<h2 id="Milvus-cluster" class="common-anchor-header">Milvus 集群<button data-href="#Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -513,8 +513,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">cluster deployment</a> of Milvus, services are provided by a group of nodes to achieve high availability and easy scalability.</p>
-<h2 id="Milvus-standalone" class="common-anchor-header">Milvus standalone<button data-href="#Milvus-standalone" class="anchor-icon" translate="no">
+    </button></h2><p>在 Milvus<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">集群部署</a>中，服务由一组节点提供，以实现高可用性和易扩展性。</p>
+<h2 id="Milvus-standalone" class="common-anchor-header">Milvus 单机版<button data-href="#Milvus-standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -529,8 +529,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In <a href="https://milvus.io/docs/install_standalone-docker.md">standalone deployment</a> of Milvus, all operations including data insertion, index building, and vector similarity search are completed in one single process.</p>
-<h2 id="Multi-Vector" class="common-anchor-header">Multi-Vector<button data-href="#Multi-Vector" class="anchor-icon" translate="no">
+    </button></h2><p>在 Milvus 的<a href="https://milvus.io/docs/install_standalone-docker.md">独立部署</a>中，所有操作包括数据插入、索引建立和向量相似性搜索都在一个进程中完成。</p>
+<h2 id="Multi-Vector" class="common-anchor-header">多向量<button data-href="#Multi-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -545,8 +545,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports multiple vector fields in one collection since 2.4.0. For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p>
-<h2 id="Partition" class="common-anchor-header">Partition<button data-href="#Partition" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus 自 2.4.0 起支持在一个 Collections 中使用多个向量字段。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
+<h2 id="Partition" class="common-anchor-header">分区<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -561,8 +561,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A partition is a division of a collection. Milvus supports dividing collection data into multiple parts on physical storage. This process is called partitioning, and each partition can contain multiple segments. For more information, refer to <a href="https://milvus.io/docs/manage-partitions.md#Manage-Partitions">Manage Partitions</a>.</p>
-<h2 id="Partition-key" class="common-anchor-header">Partition key<button data-href="#Partition-key" class="anchor-icon" translate="no">
+    </button></h2><p>分区是对 Collections 的划分。Milvus 支持在物理存储上将 Collections 数据分成多个部分。这一过程称为分区，每个分区可以包含多个部分。有关详细信息，请参阅<a href="https://milvus.io/docs/manage-partitions.md#Manage-Partitions">管理分区</a>。</p>
+<h2 id="Partition-key" class="common-anchor-header">分区键<button data-href="#Partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -577,8 +577,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The partition key attribute of a field enables the segregation of entities into distinct partitions based on their partition key values. This grouping ensures that entities sharing the same key value are stored together, which can speed up search operations by allowing the system to bypass irrelevant partitions during queries filtered by the partition key field. For more information, refer to <a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Use Partition Key</a>.</p>
-<h2 id="PChannel" class="common-anchor-header">PChannel<button data-href="#PChannel" class="anchor-icon" translate="no">
+    </button></h2><p>字段的 Partition Key 属性可根据实体的 Partition Key 值将实体隔离成不同的分区。这种分组可确保将共享相同键值的实体存储在一起，这样就可以让系统在通过分区键字段过滤的查询过程中绕过无关的分区，从而加快搜索操作。更多信息，请参阅<a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">使用分区关键字</a>。</p>
+<h2 id="PChannel" class="common-anchor-header">PC 通道<button data-href="#PChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -593,7 +593,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannel stands for physical channel. Each PChannel corresponds to a topic for log storage. By default, a group of 16 PChannels will be assigned to store logs that record data insertion, deletion, and update when the Milvus cluster is started. For more information, refer to <a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">Message Channel-related Configurations</a>.</p>
+    </button></h2><p>PChannel 表示物理通道。每个 PC 通道对应一个日志存储主题。默认情况下，当 Milvus 集群启动时，将分配一组 16 个 PChannels 用于存储记录数据插入、删除和更新的日志。有关详细信息，请参阅 "<a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">消息通道相关配置</a>"。</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -609,8 +609,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PyMilvus is a Python SDK of Milvus. Its source code is open-sourced and hosted on <a href="https://github.com/milvus-io/pymilvus">GitHub</a>. You have the flexibility to choose MilvusClient (new version Python SDK) or the original ORM module to talk with Milvus.</p>
-<h2 id="Query" class="common-anchor-header">Query<button data-href="#Query" class="anchor-icon" translate="no">
+    </button></h2><p>PyMilvus 是 Milvus 的 Python SDK。其源代码开源并托管在<a href="https://github.com/milvus-io/pymilvus">GitHub</a> 上。你可以灵活选择 MilvusClient（新版 Python SDK）或原始 ORM 模块与 Milvus 通信。</p>
+<h2 id="Query" class="common-anchor-header">查询<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -625,8 +625,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query</a> is an API that conducts scalar filtering with a specified boolean expression as filter. For more information, refer to <a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">Get & Scalar Query</a>.</p>
-<h2 id="Range-search" class="common-anchor-header">Range search<button data-href="#Range-search" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">查询</a>（<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query</a>）是一种以指定的布尔表达式作为过滤器进行标量过滤的 API。更多信息，请参阅<a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">获取与标量查询</a>。</p>
+<h2 id="Range-search" class="common-anchor-header">范围搜索<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -641,8 +641,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Range search allows you to find vectors that lie within a specified distance from your search vector. For more information, refer to <a href="https://milvus.io/docs/single-vector-search.md#Range-search">Range search</a>.</p>
-<h2 id="Schema" class="common-anchor-header">Schema<button data-href="#Schema" class="anchor-icon" translate="no">
+    </button></h2><p>通过范围搜索，可以找到与搜索向量相距一定距离的向量。更多信息，请参阅<a href="https://milvus.io/docs/single-vector-search.md#Range-search">范围搜索</a>。</p>
+<h2 id="Schema" class="common-anchor-header">模式<button data-href="#Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -657,8 +657,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Schema is the meta information that defines the data type and data property. Each collection has its own collection schema that defines all the fields of a collection, automatic ID (primary key) allocation enablement, and collection description. Field schemas are also included in collection schemas, which defines the name, data type, and other properties of a field. For more information, refer to <a href="https://milvus.io/docs/schema.md#Manage-Schema">Manage Schema</a>.</p>
-<h2 id="Search" class="common-anchor-header">Search<button data-href="#Search" class="anchor-icon" translate="no">
+    </button></h2><p>Schema 是定义数据类型和数据属性的元信息。每个 Collections 都有自己的 Collections Schema，该 Schema 定义了 Collections 的所有字段、自动 ID（主键）分配启用和 Collection 说明。字段模式也包含在 Collections 模式中，它定义了字段的名称、数据类型和其他属性。有关详细信息，请参阅<a href="https://milvus.io/docs/schema.md#Manage-Schema">管理 Schema</a>。</p>
+<h2 id="Search" class="common-anchor-header">搜索<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -673,8 +673,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">Search</a> is an API that performs an operation to conduct a vector similarity search, requiring vector data for its execution. For more information, refer to <a href="https://milvus.io/docs/single-vector-search.md">Single-Vector Search</a>.</p>
-<h2 id="Segment" class="common-anchor-header">Segment<button data-href="#Segment" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">搜索</a>是一种 API，用于执行进行向量相似性搜索的操作符，执行时需要向量数据。更多信息，请参阅<a href="https://milvus.io/docs/single-vector-search.md">单向量搜索</a>。</p>
+<h2 id="Segment" class="common-anchor-header">数据段<button data-href="#Segment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -689,9 +689,9 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A segment is an automatically created data file that stores inserted data. A collection may contain multiple segments, and each segment can hold numerous entities. During a vector similarity search, Milvus examines each segment to compile search results.</p>
-<p>There are two types of segments: growing and sealed. A growing segment continues to collect new data until it hits a specific threshold or time limit, after which it becomes sealed. Once sealed, a segment no longer accepts new data and is transferred to object storage. Meanwhile, incoming data is routed to a new growing segment. The transition from a growing to a sealed segment is triggered either by reaching the predefined entity limit or by exceeding the maximum allowed duration in the growing state. For more information, refer to <a href="https://milvus.io/docs/replica.md#Design-Details">Design Details</a>.</p>
-<h2 id="Spark-Milvus-Connector" class="common-anchor-header">Spark-Milvus Connector<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
+    </button></h2><p>段是一个自动创建的数据文件，用于存储插入的数据。一个 Collections 可能包含多个分段，每个分段可以容纳许多实体。在向量相似性搜索过程中，Milvus 会检查每个分段以编译搜索结果。</p>
+<p>段有两种类型：成长段和封存段。成长型网段会继续 Collections 新数据，直到达到特定的阈值或时间限制，之后就会被封存。一旦封存，分段就不再接受新数据，并被转移到对象存储区。与此同时，传入的数据会被路由到新的增长段。达到预定义的实体限制或超过生长状态允许的最长持续时间，都会触发从生长网段到密封网段的转换。更多信息，请参阅<a href="https://milvus.io/docs/replica.md#Design-Details">设计细节</a>。</p>
+<h2 id="Spark-Milvus-Connector" class="common-anchor-header">Spark-Milvus 连接器<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -706,8 +706,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connector</a> provides seamless integration between Apache Spark and Milvus, combining the data processing and machine learning (ML) features of Apache Spark with the vector data storage and search capabilities of Milvus.</p>
-<h2 id="Shard" class="common-anchor-header">Shard<button data-href="#Shard" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connector</a>提供 Apache Spark 和 Milvus 之间的无缝集成，将 Apache Spark 的数据处理和机器学习（ML）功能与 Milvus 的向量数据存储和搜索功能相结合。</p>
+<h2 id="Shard" class="common-anchor-header">碎片<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -722,9 +722,9 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus enhances data write performance by distributing write operations across multiple nodes using shards, which are organized based on the hashing of primary keys. This leverages the cluster’s parallel computing capabilities.</p>
-<p><em>Partitioning works to reduce read load by specifying a partition name, while sharding spreads write load among multiple servers.</em></p>
-<h2 id="Sparse-vector" class="common-anchor-header">Sparse vector<button data-href="#Sparse-vector" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus 通过使用基于主键散列组织的分片将写操作分布在多个节点上，从而提高了数据写入性能。这充分利用了集群的并行计算能力。</p>
+<p><em>分区通过指定分区名称来减少读取负载，而分片则将写入负载分散到多个服务器上。</em></p>
+<h2 id="Sparse-vector" class="common-anchor-header">稀疏向量<button data-href="#Sparse-vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -739,8 +739,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sparse vectors represent words or phrases using vector embeddings where most elements are zero, with only one non-zero element indicating the presence of a specific word. Sparse vector models, such as SPLADEv2, outperform dense models in out-of-domain knowledge search, keyword-awareness, and interpretability. For more information, refer to <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Sparse Vectors</a>.</p>
-<h2 id="Unstructured-data" class="common-anchor-header">Unstructured data<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
+    </button></h2><p>稀疏向量使用向量 Embeddings 表示单词或短语，其中大部分元素为零，只有一个非零元素表示存在特定单词。稀疏向量模型（如 SPLADEv2）在域外知识搜索、关键词感知和可解释性方面优于密集模型。更多信息，请参阅<a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">稀疏向量</a>。</p>
+<h2 id="Unstructured-data" class="common-anchor-header">非结构化数据<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -755,7 +755,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unstructured data, including images, video, audio, and natural language, is information that does not follow a predefined model or manner of organization. This data type accounts for around 80% of the world’s data, and can be converted into vectors using various artificial intelligence (AI) and ML models.</p>
+    </button></h2><p>非结构化数据包括图像、视频、音频和自然语言，是不遵循预定义模型或组织方式的信息。这种数据类型约占全球数据的 80%，可以使用各种人工智能（AI）和 ML 模型转换成向量。</p>
 <h2 id="VChannel" class="common-anchor-header">VChannel<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -771,8 +771,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/data_processing.md#Data-insertion">VChannel</a> stands for logical channel. Each VChannel represents a shard in a collection. Each collection will be assigned a group of VChannels for recording data insertion, deletion, and update. VChannels are logically separated but physically share resources.</p>
-<h2 id="Vector" class="common-anchor-header">Vector<button data-href="#Vector" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/docs/data_processing.md#Data-insertion">VChannel</a>是逻辑通道的缩写。每个 VChannel 代表一个 Collections 中的一个分片。每个 Collections 会分配一组 VChannels，用于记录数据的插入、删除和更新。VChannels 在逻辑上是分开的，但在物理上共享资源。</p>
+<h2 id="Vector" class="common-anchor-header">向量<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -787,7 +787,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>An embedding vector is a feature abstraction of unstructured data, such as emails, IoT sensor data, Instagram photos, protein structures, and more. Mathematically speaking, an embedding vector is an array of floating-point numbers or binaries. Modern embedding techniques are used to convert unstructured data to embedding vectors. Milvus support both dense and sparse vector since 2.4.0.</p>
+    </button></h2><p>嵌入向量是对电子邮件、物联网传感器数据、Instagram 照片、蛋白质结构等非结构化数据的特征抽象。从数学角度讲，嵌入向量是浮点数或二进制数组。现代嵌入技术用于将非结构化数据转换为嵌入向量。Milvus 自 2.4.0 起支持密集向量和稀疏向量。</p>
 <h2 id="Zilliz-Cloud" class="common-anchor-header">Zilliz Cloud<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -803,4 +803,4 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Fully-managed Milvus on <a href="https://zilliz.com/">Zilliz Cloud</a>, with more enterprise features and highly optimized performance.</p>
+    </button></h2><p>在<a href="https://zilliz.com/">Zilliz Cloud</a> 上全面管理 Milvus，具有更多企业级功能和高度优化的性能。</p>

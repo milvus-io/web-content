@@ -1,10 +1,10 @@
 ---
 id: deploy-cdc-server.md
 order: 2
-summary: This guide provides a step-by-step process for deploying a Milvus-CDC server.
-title: Deploy CDC Server
+summary: 本指南提供了部署 Milvus-CDC 服务器的分步流程。
+title: 部署 CDC 服务器
 ---
-<h1 id="Deploy-CDC-Server" class="common-anchor-header">Deploy CDC Server<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
+<h1 id="Deploy-CDC-Server" class="common-anchor-header">部署 CDC 服务器<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ title: Deploy CDC Server
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide provides a step-by-step process for deploying a Milvus-CDC server.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>本指南提供部署 Milvus-CDC 服务器的分步流程。</p>
+<h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,17 +35,17 @@ title: Deploy CDC Server
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ensure the following conditions are met before deploying a Milvus-CDC server:</p>
+    </button></h2><p>在部署 Milvus-CDC 服务器之前，确保满足以下条件：</p>
 <ul>
-<li><p><strong>Milvus Instances</strong>: Both the source Milvus and at least one target Milvus should be deployed and operational.</p>
+<li><p><strong>Milvus 实例</strong>：源 Milvus 和至少一个目标 Milvus 都应部署并操作符。</p>
 <ul>
-<li><p>Both the source and target Milvus versions must be 2.3.2 or higher, preferably 2.4.x. We recommend uisng the same version for the source and target Milvus to ensure compatibility.</p></li>
-<li><p>Set the <code translate="no">common.ttMsgEnabled</code> configuration of the target Milvus to <code translate="no">false</code>.</p></li>
-<li><p>Configure the source and target Milvus with distinct meta and message storage settings to prevent conflicts. For instance, avoid using the same etcd and rootPath configurations, as well as identical Pulsar services and <code translate="no">chanNamePrefix</code> in multiple Milvus instances.</p></li>
+<li><p>源和目标 Milvus 版本都必须是 2.3.2 或更高，最好是 2.4.x。我们建议源和目标 Milvus 使用相同的版本，以确保兼容性。</p></li>
+<li><p>将目标 Milvus 的<code translate="no">common.ttMsgEnabled</code> 配置设为<code translate="no">false</code> 。</p></li>
+<li><p>用不同的元和消息存储设置配置源和目标 Milvus，以防止冲突。例如，避免在多个 Milvus 实例中使用相同的 etcd 和 rootPath 配置，以及相同的 Pulsar 服务和<code translate="no">chanNamePrefix</code> 。</p></li>
 </ul></li>
-<li><p><strong>Metastore</strong>: Have an etcd or MySQL database ready for the Milvus-CDC metastore.</p></li>
+<li><p><strong>元存储</strong>：为 Milvus-CDC 元存储准备一个 etcd 或 MySQL 数据库。</p></li>
 </ul>
-<h2 id="Steps" class="common-anchor-header">Steps<button data-href="#Steps" class="anchor-icon" translate="no">
+<h2 id="Steps" class="common-anchor-header">步骤<button data-href="#Steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,21 +60,21 @@ title: Deploy CDC Server
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Obtain the Milvus-CDC config file</h3><p>Clone the <a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC repo</a> and navigate to the <code translate="no">milvus-cdc/server/configs</code> directory to access the <code translate="no">cdc.yaml</code> config file.</p>
+    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">获取 Milvus-CDC 配置文件</h3><p>克隆<a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC repo</a>并导航到<code translate="no">milvus-cdc/server/configs</code> 目录，访问<code translate="no">cdc.yaml</code> 配置文件。</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus-cdc.git
 
 <span class="hljs-built_in">cd</span> milvus-cdc/server/configs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Edit-the-config-file" class="common-anchor-header">Edit the config file</h3><p>In the <code translate="no">milvus-cdc/server/configs</code> directory, modify the <code translate="no">cdc.yaml</code> file to customize configurations related to the Milvus-CDC metastore and connection details of the source Milvus.</p>
+<h3 id="Edit-the-config-file" class="common-anchor-header">编辑配置文件</h3><p>在<code translate="no">milvus-cdc/server/configs</code> 目录中，修改<code translate="no">cdc.yaml</code> 文件，自定义与 Milvus-CDC 元存储和源 Milvus 的连接详细信息相关的配置。</p>
 <ul>
-<li><p><strong>Metastore Configuration</strong>:</p>
+<li><p><strong>元存储配置</strong>：</p>
 <ul>
-<li><p><code translate="no">metaStoreConfig.storeType</code>: Type of metastore for Milvus-CDC. Possible values are <code translate="no">etcd</code> or <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Address for connecting to the etcd of Milvus-CDC. Required if <code translate="no">storeType</code> is set to <code translate="no">etcd</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Connection address of the MySQL database for the Milvus-CDC server. Required if <code translate="no">storeType</code> is set to <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>: Root path of the Milvus-CDC metastore. This configuration enables multi-tenancy, allowing multiple CDC services to utilize the same etcd or MySQL instance while achieving isolation through different root paths.</p></li>
+<li><p><code translate="no">metaStoreConfig.storeType</code>:Milvus-CDC 的元存储类型。可能的值是<code translate="no">etcd</code> 或<code translate="no">mysql</code> 。</p></li>
+<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>:用于连接 Milvus-CDC etcd 的地址。如果<code translate="no">storeType</code> 设置为<code translate="no">etcd</code> 则必须使用。</p></li>
+<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>:Milvus-CDC 服务器 MySQL 数据库的连接地址。如果<code translate="no">storeType</code> 设置为<code translate="no">mysql</code> ，则为必填项。</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>:Milvus-CDC 元存储的根路径。此配置可实现多租户，允许多个 CDC 服务使用相同的 etcd 或 MySQL 实例，同时通过不同的根路径实现隔离。</p></li>
 </ul>
-<p>Example configuration:</p>
+<p>配置示例：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
 <span class="hljs-attr">metaStoreConfig:</span>
   <span class="hljs-comment"># the metastore type, available value: etcd, mysql</span>
@@ -87,21 +87,21 @@ title: Deploy CDC Server
   <span class="hljs-comment"># meta data prefix, if multiple cdc services use the same store service, you can set different rootPaths to achieve multi-tenancy</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">cdc</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Source Milvus Configuration:</strong></p>
-<p>Specify the connection details of the source Milvus, including etcd and message storage, to establish a connection between the Milvus-CDC server and the source Milvus.</p>
+<li><p><strong>源 Milvus 配置：</strong></p>
+<p>指定源 Milvus 的连接详细信息，包括 etcd 和消息存储，以便在 Milvus-CDC 服务器和源 Milvus 之间建立连接。</p>
 <ul>
-<li><p><code translate="no">sourceConfig.etcdAddress</code>: Address for connecting to the etcd of the source Milvus. For more information, refer to <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">etcd-related Configurations</a>.</p></li>
-<li><p><code translate="no">sourceConfig.etcdRootPath</code>: Root prefix of the key where the source Milvus stores data in etcd. The value may vary based on the deployment method of the Milvus instance:</p>
+<li><p><code translate="no">sourceConfig.etcdAddress</code>:用于连接源 Milvus 的 etcd 的地址。更多信息，请参阅<a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">etcd 相关配置</a>。</p></li>
+<li><p><code translate="no">sourceConfig.etcdRootPath</code>:源 Milvus 在 etcd 中存储数据的键的根前缀。根据 Milvus 实例的部署方法，该值可能会有所不同：</p>
 <ul>
-<li><p><strong>Helm</strong> or <strong>Docker Compose</strong>: Defaults to <code translate="no">by-dev</code>.</p></li>
-<li><p><strong>Operator</strong>: Defaults to <code translate="no">&lt;release_name&gt;</code>.</p></li>
+<li><p><strong>Helm</strong>或<strong>Docker Compose</strong>：默认为<code translate="no">by-dev</code> 。</p></li>
+<li><p><strong>操作符</strong>：默认为<code translate="no">&lt;release_name&gt;</code> 。</p></li>
 </ul></li>
-<li><p><code translate="no">replicateChan</code>: milvus replicate channel name, which is <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> in the milvus.yaml file</p></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: Pulsar configurations for the source Milvus. If the source Milvus uses Kafka for message storage, remove all Pulsar-related configurations. For more information, refer to <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar-related Configurations</a>.</p></li>
-<li><p><code translate="no">sourceConfig.kafka.address</code>: Kafka address for the source Milvus. Uncomment this configuration if the source Milvus uses Kafka for message storage.</p></li>
+<li><p><code translate="no">replicateChan</code>：Milvus 复制通道名称，在 milvus.yaml 文件中为<code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> 。</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>:源 Milvus 的 Pulsar 配置。如果源 Milvus 使用 Kafka 进行消息存储，请移除所有与 Pulsar 相关的配置。更多信息，请参阅<a href="https://milvus.io/docs/configure_pulsar.md">Pulsar 相关配置</a>。</p></li>
+<li><p><code translate="no">sourceConfig.kafka.address</code>:Milvus 源的 Kafka 地址。如果源 Milvus 使用 Kafka 进行消息存储，则取消注释此配置。</p></li>
 </ul></li>
 </ul>
-<p>Example configuration:</p>
+<p>配置示例：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus-source config, these settings are basically the same as the corresponding configuration of milvus.yaml in milvus source.</span>
 <span class="hljs-attr">sourceConfig:</span>
   <span class="hljs-comment"># etcd config</span>
@@ -126,19 +126,19 @@ title: Deploy CDC Server
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compile the Milvus-CDC server</h3><p>After saving the <code translate="no">cdc.yaml</code> file, navigate to the <code translate="no">milvus-cdc</code> directory and run one of the following commands to compile the server:</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">编译 Milvus-CDC 服务器</h3><p>保存<code translate="no">cdc.yaml</code> 文件后，导航到<code translate="no">milvus-cdc</code> 目录，运行以下命令之一编译服务器：</p>
 <ul>
-<li><p>For a binary file:</p>
+<li><p>对于二进制文件</p>
 <pre><code translate="no" class="language-bash">make build
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>For a Docker image:</p>
+<li><p>对于 Docker 映像</p>
 <pre><code translate="no" class="language-bash">bash build_image.sh
 <button class="copy-code-btn"></button></code></pre>
-<p>For a Docker image, mount the compiled file to <code translate="no">/app/server/configs/cdc.yaml</code> within the container.</p></li>
+<p>对于 Docker 映像，将编译后的文件挂载到容器内的<code translate="no">/app/server/configs/cdc.yaml</code> 。</p></li>
 </ul>
-<h3 id="Start-the-server" class="common-anchor-header">Start the server</h3><ul>
-<li><p>Using the binary</p>
-<p>Navigate to the directory containing the <code translate="no">milvus-cdc</code> binary and the <code translate="no">configs</code> directory with the <code translate="no">cdc.yaml</code> file, then start the server:</p>
+<h3 id="Start-the-server" class="common-anchor-header">启动服务器</h3><ul>
+<li><p>使用二进制文件</p>
+<p>导航到包含<code translate="no">milvus-cdc</code> 二进制文件的目录和包含<code translate="no">cdc.yaml</code> 文件的<code translate="no">configs</code> 目录，然后启动服务器：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>
 .
 ├── milvus-cdc <span class="hljs-comment"># build from source code or download from release page</span>
@@ -148,7 +148,7 @@ title: Deploy CDC Server
 <span class="hljs-comment"># start milvus cdc</span>
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Using Docker Compose:</p>
+<li><p>使用 Docker Compose：</p>
 <pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

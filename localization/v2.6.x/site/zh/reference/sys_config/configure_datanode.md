@@ -2,9 +2,9 @@
 id: configure_datanode.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure dataNode for Milvus.
+summary: 了解如何为 Milvus 配置 dataNode。
 ---
-<h1 id="dataNode-related-Configurations" class="common-anchor-header">dataNode-related Configurations<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataNode-related-Configurations" class="common-anchor-header">数据节点相关配置<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.flowGraph.maxQueueLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum length of task queue in flowgraph      </td>
+      <td>        流程图中任务队列的最大长度      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -66,13 +66,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.flowGraph.maxParallelism">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of tasks executed in parallel in the flowgraph      </td>
+      <td>        流程图中并行执行任务的最大数量      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.maxParallelSyncMgrTasks">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The max concurrent sync task number of datanode sync mgr globally      </td>
+      <td>        数据节点同步管理器的全球最大并发同步任务数      </td>
       <td>256</td>
     </tr>
   </tbody>
@@ -124,14 +124,14 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.skipMode.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Support skip some timetick message to reduce CPU usage      </td>
-      <td>true</td>
+      <td>        支持跳过某些时间戳信息以降低 CPU 占用率      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -153,13 +153,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.skipMode.skipNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Consume one for every n records skipped      </td>
+      <td>        每跳过 n 条记录消耗一条      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.skipMode.coldTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Turn on skip mode after there are only timetick msg for x seconds      </td>
+      <td>        在 x 秒内只有时间戳消息后开启跳过模式      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -211,16 +211,16 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.segment.insertBufSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The maximum size of each binlog file in a segment buffered in memory. Binlog files whose size exceeds this value are then flushed to MinIO or S3 service.</li>      
-        <li>Unit: Byte</li>      
-        <li>Setting this parameter too small causes the system to store a small amount of data too frequently. Setting it too large increases the system's demand for memory.</li>      </td>
+        <li>内存缓冲段中每个 Binlog 文件的最大大小。超过此值的日志文件会被刷新到 MinIO 或 S3 服务。</li>      
+        <li>单位：字节字节</li>      
+        <li>将此参数设置得过小，会导致系统过于频繁地存储少量数据。设置过大则会增加系统对内存的需求。</li>      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -243,13 +243,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.segment.deleteBufBytes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Max buffer size in bytes to flush del for a single channel, default as 16MB      </td>
+      <td>        单通道刷新 del 的最大缓冲区大小（字节），默认为 16MB。      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -272,13 +272,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.segment.syncPeriod">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The period to sync segments if buffer is not empty.      </td>
+      <td>        缓冲区未清空时同步段的周期。      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -301,13 +301,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.memory.forceSyncEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Set true to force sync if memory usage is too high      </td>
+      <td>        设置为 true 可在内存使用率过高时强制同步      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -330,13 +330,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.memory.forceSyncSegmentNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        number of segments to sync, segments with top largest buffer will be synced.      </td>
+      <td>        要同步的分段数，缓冲区最大的分段将被同步。      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -359,13 +359,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.memory.checkInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interal to check datanode memory usage, in milliseconds      </td>
+      <td>        检查数据节点内存使用情况的间隔时间（毫秒      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -388,13 +388,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.memory.forceSyncWatermark">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        memory watermark for standalone, upon reaching this watermark, segments will be synced.      </td>
+      <td>        单机版内存水印，达到此水印后，将同步分段。      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -417,16 +417,16 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.workPoolSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>specify the size of global work pool of all channels</li>      
-        <li>if this parameter <= 0, will set it as the maximum number of CPUs that can be executing</li>      
-        <li>suggest to set it bigger on large collection numbers to avoid blocking</li>      </td>
+        <li>指定所有通道的全局工作池大小</li>      
+        <li>如果该参数 &lt;= 0，则将其设置为可执行 CPU 的最大数量</li>      
+        <li>建议在收集数量较大时将其设置得更大，以避免阻塞</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -449,15 +449,15 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.updateChannelCheckpointMaxParallel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>specify the size of global work pool for channel checkpoint updating</li>      
-        <li>if this parameter <= 0, will set it as 10</li>      </td>
+        <li>指定通道检查点更新的全局工作池大小</li>      
+        <li>如果该参数 &lt;= 0，则设置为 10</li>      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -480,13 +480,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.updateChannelCheckpointInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval duration(in seconds) for datanode to update channel checkpoint of each channel      </td>
+      <td>        数据节点更新每个通道的通道检查点的时间间隔（以秒为单位      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -509,13 +509,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.updateChannelCheckpointRPCTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        timeout in seconds for UpdateChannelCheckpoint RPC call      </td>
+      <td>        UpdateChannelCheckpoint RPC 调用的超时时间（秒      </td>
       <td>20</td>
     </tr>
   </tbody>
@@ -538,13 +538,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.maxChannelCheckpointsPerPRC">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of channel checkpoints per UpdateChannelCheckpoint RPC.      </td>
+      <td>        每次 UpdateChannelCheckpoint RPC 的最大通道检查点数量。      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -567,13 +567,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.channelCheckpointUpdateTickInSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The frequency, in seconds, at which the channel checkpoint updater executes updates.      </td>
+      <td>        通道检查点更新器执行更新的频率（以秒为单位）。      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -596,13 +596,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.import.maxConcurrentTaskNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of import/pre-import tasks allowed to run concurrently on a datanode.      </td>
+      <td>        数据节点上允许同时运行的导入/预导入任务的最大数量。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -625,13 +625,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.import.maxImportFileSizeInGB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum file size (in GB) for an import file, where an import file refers to either a Row-Based file or a set of Column-Based files.      </td>
+      <td>        导入文件的最大文件大小（GB），其中导入文件指基于行的文件或基于列的文件集。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -654,13 +654,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.import.readBufferSizeInMB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The data block size (in MB) read from chunk manager by the datanode during import.      </td>
+      <td>        导入期间数据节点从块管理器读取的数据块大小（单位 MB）。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -683,13 +683,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.import.maxTaskSlotNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of slots occupied by each import/pre-import task.      </td>
+      <td>        每个导入/预导入任务占用的最大槽位数。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -712,13 +712,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.compaction.levelZeroBatchMemoryRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The minimal memory ratio of free memory for level zero compaction executing in batch mode      </td>
+      <td>        以批处理模式执行零级压缩时可用内存的最小内存比率      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -741,13 +741,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.compaction.levelZeroMaxBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Max batch size refers to the max number of L1/L2 segments in a batch when executing L0 compaction. Default to -1, any value that is less than 1 means no limit. Valid range: >= 1.      </td>
+      <td>        最大批量大小是指执行 L0 压缩时，批量中 L1/L2 段的最大数量。默认值为-1，任何小于 1 的值都表示没有限制。有效范围&gt;= 1.  </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -770,14 +770,14 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.compaction.useMergeSort">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable mergeSort mode when performing mixCompaction.      </td>
-      <td>false</td>
+      <td>        执行 mixCompaction 时是否启用 mergeSort（合并排序）模式。      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -799,13 +799,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.compaction.maxSegmentMergeSort">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of segments to be merged in mergeSort mode.      </td>
+      <td>        在合并排序模式下要合并的最大数据段数。      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -828,13 +828,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        秒。强制停止节点而不优雅停止      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -857,13 +857,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.slot.slotCap">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of tasks(e.g. compaction, importing) allowed to run concurrently on a datanode      </td>
+      <td>        允许在数据节点上并发运行的任务（如压缩、导入）的最大数量      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -886,13 +886,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.clusteringCompaction.memoryBufferRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The ratio of memory buffer of clustering compaction. Data larger than threshold will be flushed to storage.      </td>
+      <td>        集群压缩内存缓冲区的比率。大于阈值的数据将被刷新到存储空间。      </td>
       <td>0.3</td>
     </tr>
   </tbody>
@@ -915,13 +915,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.clusteringCompaction.workPoolSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        worker pool size for one clustering compaction job.      </td>
+      <td>        一个聚类压缩任务的工作池大小。      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -944,13 +944,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.bloomFilterApplyParallelFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        parallel factor when to apply pk to bloom filter, default to 4*CPU_CORE_NUM      </td>
+      <td>        将 pk 应用于 bloom 过滤器时的并行因子，默认为 4*CPU_CORE_NUM      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -973,13 +973,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.storage.deltalog">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        deltalog format, options: [json, parquet]      </td>
+      <td>        deltalog 格式，选项[json, parquet］      </td>
       <td>json</td>
     </tr>
   </tbody>
@@ -1002,13 +1002,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of dataNode. If not specified, use the first unicastable address      </td>
+      <td>        数据节点的 TCP/IP 地址。如果未指定，则使用第一个可单播地址      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1031,13 +1031,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of dataNode      </td>
+      <td>        数据节点的 TCP 端口      </td>
       <td>21124</td>
     </tr>
   </tbody>
@@ -1060,13 +1060,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the dataNode can send, unit: byte      </td>
+      <td>        数据节点可发送的每个 RPC 请求的最大大小，单位：字节      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1089,13 +1089,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">单位：字节</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the dataNode can receive, unit: byte      </td>
+      <td>        数据节点可接收的每个 RPC 请求的最大大小，单位：字节      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1118,13 +1118,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">单位：字节</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on dataNode can send, unit: byte      </td>
+      <td>        数据节点客户端可发送的每个 RPC 请求的最大大小，单位：字节      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1147,13 +1147,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">单位：字节</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on dataNode can receive, unit: byte      </td>
+      <td>        数据节点客户端可接收的每个 RPC 请求的最大大小，单位：字节      </td>
       <td>536870912</td>
     </tr>
   </tbody>

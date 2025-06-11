@@ -1,9 +1,7 @@
 ---
 id: build_RAG_with_milvus_and_ollama.md
-summary: >-
-  In this guide, we’ll show you how to leverage Ollama and Milvus to build a RAG
-  (Retrieval-Augmented Generation) pipeline efficiently and securely.
-title: Build RAG with Milvus and Ollama
+summary: 在本指南中，我们将向您展示如何利用 Ollama 和 Milvus 高效、安全地构建 RAG（检索-增强生成）管道。
+title: 使用 Milvus 和 Ollama 构建 RAG
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_ollama.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -11,7 +9,7 @@ title: Build RAG with Milvus and Ollama
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_ollama.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Build-RAG-with-Milvus-and-Ollama" class="common-anchor-header">Build RAG with Milvus and Ollama<button data-href="#Build-RAG-with-Milvus-and-Ollama" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Ollama" class="common-anchor-header">使用 Milvus 和 Ollama 构建 RAG<button data-href="#Build-RAG-with-Milvus-and-Ollama" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,9 +24,9 @@ title: Build RAG with Milvus and Ollama
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://ollama.com/">Ollama</a> is an open-source platform that simplifies running and customizing large language models (LLMs) locally. It provides a user-friendly, cloud-free experience, enabling effortless model downloads, installation, and interaction without requiring advanced technical skills. With a growing library of pre-trained LLMs—from general-purpose to domain-specific—Ollama makes it easy to manage and customize models for various applications. It ensures data privacy and flexibility, empowering users to fine-tune, optimize, and deploy AI-driven solutions entirely on their machines.</p>
-<p>In this guide, we’ll show you how to leverage Ollama and Milvus to build a RAG (Retrieval-Augmented Generation) pipeline efficiently and securely.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://ollama.com/">Ollama</a>是一个开源平台，可简化大型语言模型 (LLM) 的本地运行和定制。它提供了用户友好的无云体验，无需高级技术技能即可轻松实现模型下载、安装和交互。凭借不断增长的预训练 LLMs 库（从通用型到特定领域型），Ollama 可以轻松管理和定制各种应用的模型。它确保了数据的私密性和灵活性，使用户能够完全在自己的机器上微调、优化和部署人工智能驱动的解决方案。</p>
+<p>在本指南中，我们将向您展示如何利用 Ollama 和 Milvus 高效、安全地构建 RAG（检索-增强生成）管道。</p>
+<h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,13 +41,13 @@ title: Build RAG with Milvus and Ollama
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus ollama</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依赖关系和环境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus ollama</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
 </div>
-<h3 id="Prepare-the-data" class="common-anchor-header">Prepare the data</h3><p>We use the FAQ pages from the <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
-<p>Download the zip file and extract documents to the folder <code translate="no">milvus_docs</code>.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">准备数据</h3><p>我们使用<a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 文档 2.4.x</a>中的常见问题页面作为 RAG 中的私有知识，这对于简单的 RAG 管道来说是一个很好的数据源。</p>
+<p>下载 zip 文件并将文档解压缩到<code translate="no">milvus_docs</code> 文件夹中。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -69,7 +67,7 @@ milvus_docs_2.4.x_e 100%[===================&gt;] 598.72K  1.20MB/s    in 0.5s
 
 2024-11-26 21:47:20 (1.20 MB/s) - ‘milvus_docs_2.4.x_en.zip’ saved [613094/613094]
 </code></pre>
-<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
+<p>我们从<code translate="no">milvus_docs/en/faq</code> 文件夹中加载所有标记文件。对于每个文档，我们只需简单地使用 "#"来分隔文件中的内容，这样就能大致分隔出 markdown 文件中每个主要部分的内容。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -80,12 +78,12 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Prepare the LLM and Embedding Model</h3><p>Ollama supports multiple models for both LLM-based tasks and embedding generation, making it easy to develop retrieval-augmented generation (RAG) applications. For this setup:</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">准备 LLM 和 Embeddings 模型</h3><p>Ollama 支持基于 LLM 任务和嵌入生成的多种模型，这使得开发检索增强生成（RAG）应用变得非常容易。在此设置中</p>
 <ul>
-<li>We will use <strong>Llama 3.2 (3B)</strong> as our LLM for text generation tasks.</li>
-<li>For embedding generation, we will use <strong>mxbai-embed-large</strong>, a 334M parameter model optimized for semantic similarity.</li>
+<li>我们将使用<strong>Llama 3.2 (3B)</strong>作为文本生成任务的 LLM。</li>
+<li>对于嵌入生成，我们将使用<strong>mxbai-embed-large</strong>，这是一个针对语义相似性优化的 334M 参数模型。</li>
 </ul>
-<p>Before starting, ensure both models are pulled locally:</p>
+<p>在开始之前，请确保这两个模型都已拉到本地：</p>
 <pre><code translate="no" class="language-python">! ollama pull mxbai-embed-large
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[?25lpulling manifest ⠋ [?25h[?25l[2K[1Gpulling manifest ⠙ [?25h[?25l[2K[1Gpulling manifest ⠹ [?25h[?25l[2K[1Gpulling manifest ⠸ [?25h[?25l[2K[1Gpulling manifest ⠼ [?25h[?25l[2K[1Gpulling manifest ⠴ [?25h[?25l[2K[1Gpulling manifest 
@@ -110,7 +108,7 @@ verifying sha256 digest
 writing manifest 
 success [?25h
 </code></pre>
-<p>With these models ready, we can proceed to implement LLM-driven generation and embedding-based retrieval workflows.</p>
+<p>准备好这些模型后，我们就可以开始实施 LLM 驱动的生成和基于嵌入的检索工作流程了。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> ollama
 
 
@@ -118,7 +116,7 @@ success [?25h
     response = ollama.embeddings(model=<span class="hljs-string">&quot;mxbai-embed-large&quot;</span>, prompt=text)
     <span class="hljs-keyword">return</span> response[<span class="hljs-string">&quot;embedding&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Generate a test embedding and print its dimension and first few elements.</p>
+<p>生成一个测试嵌入并打印其维度和前几个元素。</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -127,7 +125,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">1024
 [0.23276396095752716, 0.4257211685180664, 0.19724100828170776, 0.46120673418045044, -0.46039995551109314, -0.1413791924715042, -0.18261606991291046, -0.07602324336767197, 0.39991313219070435, 0.8337644338607788]
 </code></pre>
-<h2 id="Load-data-into-Milvus" class="common-anchor-header">Load data into Milvus<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-data-into-Milvus" class="common-anchor-header">将数据加载到 Milvus 中<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -142,26 +140,26 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Create the Collection</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">创建 Collections</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>至于<code translate="no">MilvusClient</code> 的参数：</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
+<li>如果数据规模较大，可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>
+<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<p>Check if the collection already exists and drop it if it does.</p>
+<p>检查 Collections 是否已存在，如果已存在，则删除它。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a new collection with specified parameters.</p>
-<p>If we don’t specify any field information, Milvus will automatically create a default <code translate="no">id</code> field for primary key, and a <code translate="no">vector</code> field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.</p>
+<p>使用指定参数创建新 Collections。</p>
+<p>如果我们不指定任何字段信息，Milvus 会自动创建一个主键的默认<code translate="no">id</code> 字段，以及一个存储向量数据的<code translate="no">vector</code> 字段。保留的 JSON 字段用于存储非 Schema 定义的字段及其值。</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
@@ -169,8 +167,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>Iterate through the text lines, create embeddings, and then insert the data into Milvus.</p>
-<p>Here is a new field <code translate="no">text</code>, which is a non-defined field in the collection schema. It will be automatically added to the reserved JSON dynamic field, which can be treated as a normal field at a high level.</p>
+<h3 id="Insert-data" class="common-anchor-header">插入数据</h3><p>遍历文本行，创建 Embeddings，然后将数据插入 Milvus。</p>
+<p>这里有一个新字段<code translate="no">text</code> ，它是 Collections Schema 中的一个非定义字段。它将自动添加到保留的 JSON 动态字段中，在高层次上可将其视为普通字段。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -188,7 +186,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
 
 {'insert_count': 72, 'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71], 'cost': 0}
 </code></pre>
-<h2 id="Build-RAG" class="common-anchor-header">Build RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
+<h2 id="Build-RAG" class="common-anchor-header">构建 RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,10 +201,10 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">Retrieve data for a query</h3><p>Let’s specify a frequent question about Milvus.</p>
+    </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">为查询检索数据</h3><p>让我们指定一个关于 Milvus 的常见问题。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Search for the question in the collection and retrieve the semantic top-3 matches.</p>
+<p>在 Collections 中搜索该问题并检索语义前 3 个匹配项。</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[
@@ -217,7 +215,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s take a look at the search results of the query</p>
+<p>让我们看看查询的搜索结果</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
@@ -240,12 +238,12 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Use LLM to get a RAG response</h3><p>Convert the retrieved documents into a string format.</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">使用 LLM 获取 RAG 响应</h3><p>将检索到的文档转换为字符串格式。</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Define system and user prompts for the Lanage Model. This prompt is assembled with the retrieved documents from Milvus.</p>
+<p>为 Lanage 模型定义系统和用户提示。该提示与从 Milvus 检索到的文档组装在一起。</p>
 <pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 &quot;&quot;&quot;</span>
@@ -259,7 +257,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &lt;/question&gt;
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the <code translate="no">llama3.2</code> model provided by Ollama to generate a response based on the prompts.</p>
+<p>使用 Ollama 提供的<code translate="no">llama3.2</code> 模型，根据提示生成响应。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ollama <span class="hljs-keyword">import</span> chat
 <span class="hljs-keyword">from</span> ollama <span class="hljs-keyword">import</span> ChatResponse
 
@@ -278,4 +276,4 @@ response: ChatResponse = chat(
 
 2. **Metadata**: Generated within Milvus and stored in etcd.
 </code></pre>
-<p>Great! We have successfully built a RAG pipeline with Milvus and Ollama.</p>
+<p>很好！我们利用 Milvus 和 Ollama 成功构建了 RAG 管道。</p>

@@ -1,9 +1,9 @@
 ---
 id: graph_rag_with_milvus.md
-summary: Graph RAG with Milvus
-title: Graph RAG with Milvus
+summary: 用 Milvus 绘制 RAG 图表
+title: 用 Milvus 绘制 RAG 图
 ---
-<h1 id="Graph-RAG-with-Milvus" class="common-anchor-header">Graph RAG with Milvus<button data-href="#Graph-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Graph-RAG-with-Milvus" class="common-anchor-header">用 Milvus 绘制 RAG 图<button data-href="#Graph-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,16 +20,16 @@ title: Graph RAG with Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>The widespread application of large language models highlights the importance of improving the accuracy and relevance of their responses. Retrieval-Augmented Generation (RAG) enhances models with external knowledge bases, providing more contextual information and mitigating issues like hallucination and insufficient knowledge. However, relying solely on simple RAG paradigms has its limitations, especially when dealing with complex entity relationships and multi-hop questions, where the model often struggles to provide accurate answers.</p>
-<p>Introducing knowledge graphs (KGs) into the RAG system offers a new solution. KGs present entities and their relationships in a structured way, providing more precise retrieval information and helping RAG to better handle complex question-answering tasks. KG-RAG is still in its early stages, and there is no consensus on how to effectively retrieve entities and relationships from KGs or how to integrate vector similarity search with graph structures.</p>
-<p>In this notebook, we introduce a simple yet powerful approach to greatly improve the performance of this scenario. It is a simple RAG paradigm with multi-way retrieval and then reranking, but it implements Graph RAG logically, and achieves state-of-the-art performance in handling multi-hop questions. Let’s see how it is implemented.</p>
+<p>大型语言模型的广泛应用凸显了提高其响应准确性和相关性的重要性。检索增强生成（RAG）通过外部知识库来增强模型，提供更多上下文信息，缓解幻觉和知识不足等问题。然而，仅仅依靠简单的 RAG 范式有其局限性，尤其是在处理复杂的实体关系和多跳问题时，模型往往难以提供准确的答案。</p>
+<p>将知识图谱（KG）引入 RAG 系统提供了一种新的解决方案。知识图谱以结构化的方式呈现实体及其关系，提供更精确的检索信息，帮助 RAG 更好地处理复杂的问题解答任务。KG-RAG 仍处于早期阶段，对于如何从 KG 中有效检索实体及其关系，以及如何将向量相似性搜索与图结构相结合，目前还没有达成共识。</p>
+<p>在本笔记本中，我们介绍了一种简单但功能强大的方法，可大大提高该场景的性能。它是一种简单的 RAG 范式，先进行多向检索，然后重新排序，但它在逻辑上实现了 Graph RAG，并在处理多跳问题时实现了最先进的性能。让我们看看它是如何实现的。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,18 +44,18 @@ title: Graph RAG with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before running this notebook, make sure you have the following dependencies installed:</p>
+    </button></h2><p>在运行本笔记本之前，请确保已安装以下依赖项：</p>
 <pre><code translate="no" class="language-python">$ pip install --upgrade --quiet pymilvus numpy scipy langchain langchain-core langchain-openai tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>如果您使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
 </blockquote>
-<p>We will use the models from OpenAI. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>我们将使用 OpenAI 的模型。您应将<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Import the necessary libraries and dependencies.</p>
+<p>导入必要的库和依赖项。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
@@ -67,7 +67,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI, OpenAIEmbeddings
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<p>Initialize the instance of Milvus client, the LLM, and the embedding model.</p>
+<p>初始化 Milvus 客户端实例、LLM 和 Embeddings 模型。</p>
 <pre><code translate="no" class="language-python">milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
 
 llm = ChatOpenAI(
@@ -77,14 +77,14 @@ llm = ChatOpenAI(
 embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For the args in MilvusClient:</p>
+<p>对于 MilvusClient 中的 args：</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，这是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
+<li>如果数据规模较大，可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>
+<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<h2 id="Offline-Data-Loading" class="common-anchor-header">Offline Data Loading<button data-href="#Offline-Data-Loading" class="anchor-icon" translate="no">
+<h2 id="Offline-Data-Loading" class="common-anchor-header">离线数据加载<button data-href="#Offline-Data-Loading" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -99,8 +99,7 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">Data Preparation</h3><p>We will use a nano dataset which introduce the relationship between Bernoulli family and Euler to demonstrate as an example. The nano dataset contains 4 passages and a set of corresponding triplets, where each triplet contains a subject, a predicate, and an object.
-In practice, you can use any approach to extract the triplets from your own custom corpus.</p>
+    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">数据准备</h3><p>我们将以一个介绍伯努利系和欧拉系关系的纳米数据集为例进行演示。这个纳米数据集包含 4 个段落和一组相应的三元组，其中每个三元组包含一个主语、一个谓语和一个宾语。 实际上，您可以使用任何方法从自己的自定义语料库中提取三元组。</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -162,12 +161,12 @@ In practice, you can use any approach to extract the triplets from your own cust
     },
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>We construct the entities and relations as follows:</p>
+<p>我们构建实体和关系的方法如下：</p>
 <ul>
-<li>The entity is the subject or object in the triplet, so we directly extract them from the triplets.</li>
-<li>Here we construct the concept of relationship by directly concatenating the subject, predicate, and object with a space in between.</li>
+<li>实体是三元组中的主语或宾语，因此我们直接从三元组中提取它们。</li>
+<li>在这里，我们通过直接连接主语、谓语和宾语来构建关系概念，中间留有空格。</li>
 </ul>
-<p>We also prepare a dict to map entity id to relation id, and another dict to map relation id to passage id for later use.</p>
+<p>我们还准备了一个 dict，用于将实体 id 映射到关系 id，以及另一个 dict，用于将关系 id 映射到通道 id，以备后用。</p>
 <pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(<span class="hljs-built_in">list</span>)
 relationid_2_passageids = defaultdict(<span class="hljs-built_in">list</span>)
 
@@ -193,7 +192,7 @@ passages = []
             )
         relationid_2_passageids[relations.index(relation)].append(passage_id)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Insertion" class="common-anchor-header">Data Insertion</h3><p>Create Milvus collections for entity, relation, and passage. The entity collection and relation collection are used as the major collections for graph construction in our method, while the passage collection is used as the naive RAG retrieval comparison or auxiliary purpose.</p>
+<h3 id="Data-Insertion" class="common-anchor-header">数据插入</h3><p>为实体、关系和段落创建 Milvus 集合。在我们的方法中，实体集合和关系集合作为图构建的主要集合，而段落集合则作为天真 RAG 检索比较或辅助用途。</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-built_in">len</span>(embedding_model.embed_query(<span class="hljs-string">&quot;foo&quot;</span>))
 
 
@@ -214,7 +213,7 @@ create_milvus_collection(entity_col_name)
 create_milvus_collection(relation_col_name)
 create_milvus_collection(passage_col_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Insert the data with their metadata information into Milvus collections, including entity, relation, and passage collections. The metadata information includes the passage id and the adjacency entity or relation id.</p>
+<p>将数据及其元数据信息插入 Milvus 集合，包括实体集合、关系集合和段落集合。元数据信息包括段落 id 和邻接实体或关系 id。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">milvus_insert</span>(<span class="hljs-params">
     collection_name: <span class="hljs-built_in">str</span>,
     text_list: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>],
@@ -258,7 +257,7 @@ milvus_insert(
 Inserting: 100%|███████████████████████████████████| 1/1 [00:00&lt;00:00,  1.39it/s]
 Inserting: 100%|███████████████████████████████████| 1/1 [00:00&lt;00:00,  2.28it/s]
 </code></pre>
-<h2 id="Online-Querying" class="common-anchor-header">Online Querying<button data-href="#Online-Querying" class="anchor-icon" translate="no">
+<h2 id="Online-Querying" class="common-anchor-header">在线查询<button data-href="#Online-Querying" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -273,9 +272,8 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Similarity Retrieval</h3><p>We retrieve the topK similar entities and relations based on the input query from Milvus.</p>
-<p>When performing the entity retrieving, we should first extract the query entities from the query text using some specific method like NER (Named-entity recognition). For simplicity, we prepare the NER results here. If you want to change the query as your custom question, you have to change the corresponding query NER list.
-In practice, you can use any other model or approach to extract the entities from the query.</p>
+    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">相似性检索</h3><p>我们根据输入的查询从 Milvus 中检索前 K 个相似实体和关系。</p>
+<p>在进行实体检索时，我们应首先使用特定的方法（如 NER（命名实体识别））从查询文本中提取查询实体。为简单起见，我们在此准备了 NER 结果。实际上，您可以使用任何其他模型或方法从查询中提取实体。</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What contribution did the son of Euler&#x27;s teacher make?&quot;</span>
 
 query_ner_list = [<span class="hljs-string">&quot;Euler&quot;</span>]
@@ -303,14 +301,12 @@ relation_search_res = milvus_client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
 )[<span class="hljs-number">0</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expand-Subgraph" class="common-anchor-header">Expand Subgraph</h3><p>We use the retrieved entities and relations to expand the subgraph and obtain the candidate relationships, and then merge them from the two ways. Here is a flow chart of the subgraph expansion process:
-
-  <span class="img-wrapper">
+<h3 id="Expand-Subgraph" class="common-anchor-header">扩展子图</h3><p>我们使用检索到的实体和关系来展开子图并获得候选关系，然后通过两种方式将它们合并。下面是子图扩展过程的流程图：  <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>Here we construct an adjacency matrix and use matrix multiplication to calculate the adjacency mapping information within a few degrees. In this way, we can quickly obtain information of any degree of expansion.</p>
+<p>在这里，我们构建了一个邻接矩阵，并使用矩阵乘法在几度内计算出邻接映射信息。通过这种方法，我们可以快速获取任意扩展度的信息。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Construct the adjacency matrix of entities and relations where the value of the adjacency matrix is 1 if an entity is related to a relation, otherwise 0.</span>
 entity_relation_adj = np.zeros((<span class="hljs-built_in">len</span>(entities), <span class="hljs-built_in">len</span>(relations)))
 <span class="hljs-keyword">for</span> entity_id, entity <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(entities):
@@ -337,7 +333,7 @@ relation_adj_target_degree = relation_adj_1_degree
 
 entity_relation_adj_target_degree = entity_adj_target_degree @ entity_relation_adj
 <button class="copy-code-btn"></button></code></pre>
-<p>By taking the value from the target degree expansion matrix, we can easily expand the corresponding degree from the retrieved entity and relations to obtain all relations of the subgraph.</p>
+<p>通过从目标度扩展矩阵中取值，我们可以很容易地从检索到的实体和关系中扩展出相应的度，从而得到子图的所有关系。</p>
 <pre><code translate="no" class="language-python">expanded_relations_from_relation = <span class="hljs-built_in">set</span>()
 expanded_relations_from_entity = <span class="hljs-built_in">set</span>()
 <span class="hljs-comment"># You can set the similarity threshold here to guarantee the quality of the retrieved ones.</span>
@@ -375,8 +371,8 @@ relation_candidate_texts = [
     relations[relation_id] <span class="hljs-keyword">for</span> relation_id <span class="hljs-keyword">in</span> relation_candidate_ids
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>We have get the candidate relationships by expanding the subgraph, which will be reranked by LLM in the next step.</p>
-<h3 id="LLM-reranking" class="common-anchor-header">LLM reranking</h3><p>In this stage, we deploy the powerful self-attention mechanism of LLM to further filter and refine the candidate set of relationships. We employ a one-shot prompt, incorporating the query and the candidate set of relationships into the prompt, and instruct LLM to select potential relationships that could assist in answering the query. Given that some queries may be complex, we adopt the Chain-of-Thought approach, allowing LLM to articulate its thought process in its response. We stipulate that LLM’s response is in json format for convenient parsing.</p>
+<p>我们通过扩展子图得到了候选关系，下一步将通过 LLM 对其进行重排。</p>
+<h3 id="LLM-reranking" class="common-anchor-header">LLM 重新排序</h3><p>在这一阶段，我们利用 LLM 强大的自我关注机制来进一步过滤和完善候选关系集。我们采用一次性提示，将查询和候选关系集纳入提示中，并指示 LLM 选择有助于回答查询的潜在关系。鉴于某些查询可能比较复杂，我们采用了 "思维链 "方法，允许 LLM 在回复中阐明其思维过程。我们规定 LLM 的响应采用 json 格式，以便于解析。</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:
@@ -447,7 +443,7 @@ rerank_relation_ids = rerank_relations(
     relation_candidate_ids=relation_candidate_ids,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Get-Final-Results" class="common-anchor-header">Get Final Results</h3><p>We can get final retrieved passages from the reranked relationships.</p>
+<h3 id="Get-Final-Results" class="common-anchor-header">获取最终结果</h3><p>我们可以从 Rerankers 关系中获取最终检索到的段落。</p>
 <pre><code translate="no" class="language-python">final_top_k = <span class="hljs-number">2</span>
 
 final_passages = []
@@ -459,7 +455,7 @@ final_passage_ids = []
             final_passages.append(passages[passage_id])
 passages_from_our_method = final_passages[:final_top_k]
 <button class="copy-code-btn"></button></code></pre>
-<p>We can compare the results with the naive RAG method, which retrieves the topK passages based on the query embedding directly from the passage collection.</p>
+<p>我们可以将结果与天真的 RAG 方法进行比较，后者直接从 Collections 中检索出基于查询嵌入的 topK 段落。</p>
 <pre><code translate="no" class="language-python">naive_passage_res = milvus_client.search(
     collection_name=passage_col_name,
     data=[query_embedding],
@@ -510,5 +506,4 @@ Answer from naive RAG: I don't know. The retrieved context does not provide info
 
 Answer from our method: The son of Euler's teacher, Daniel Bernoulli, made major contributions to fluid dynamics, probability, and statistics. He is most famous for Bernoulli’s principle, which describes the behavior of fluid flow and is fundamental to the understanding of aerodynamics.
 </code></pre>
-<p>As we can see, the retrieved passages from the naive RAG missed a ground-truth passage, which led to a wrong answer.
-The retrieved passages from our method are correct, and it helps to get an accurate answer to the question.</p>
+<p>我们可以看到，从幼稚 RAG 方法中检索出的段落遗漏了一个地面实况段落，从而导致了错误的答案。 而从我们的方法中检索出的段落是正确的，这有助于得到问题的准确答案。</p>

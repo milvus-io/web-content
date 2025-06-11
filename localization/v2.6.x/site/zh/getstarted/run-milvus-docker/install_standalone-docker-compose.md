@@ -2,10 +2,10 @@
 id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
-summary: Learn how to install Milvus standalone with Docker Compose.
-title: Run Milvus with Docker Compose (Linux)
+summary: 了解如何使用 Docker Compose 独立安装 Milvus。
+title: 使用 Docker Compose 运行 Milvus (Linux)
 ---
-<h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Run Milvus with Docker Compose (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">使用 Docker Compose 运行 Milvus (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: Run Milvus with Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page illustrates how to launch a Milvus instance in Docker using Docker Compose.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>本页说明如何使用 Docker Compose 在 Docker 中启动 Milvus 实例。</p>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,10 +37,10 @@ title: Run Milvus with Docker Compose (Linux)
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://docs.docker.com/get-docker/">Install Docker</a>.</li>
-<li><a href="/docs/prerequisite-docker.md">Check the requirements for hardware and software</a> prior to your installation.</li>
+<li><a href="https://docs.docker.com/get-docker/">安装 Docker</a>。</li>
+<li>安装前<a href="/docs/zh/prerequisite-docker.md">请检查硬件和软件要求</a>。</li>
 </ul>
-<h2 id="Install-Milvus" class="common-anchor-header">Install Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus" class="common-anchor-header">安装 Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,7 +55,7 @@ title: Run Milvus with Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides a Docker Compose configuration file in the Milvus repository. To install Milvus using Docker Compose, just run</p>
+    </button></h2><p>Milvus 在 Milvus 资源库中提供了 Docker Compose 配置文件。要使用 Docker Compose 安装 Milvus，只需运行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
@@ -68,20 +68,19 @@ Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If this is the case, you are advised to migrate to Docker Compose V2 due to the notes on <a href="https://docs.docker.com/compose/">this page</a>.</p></li>
-<li><p>If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we’ll provide you with the necessary support.</p></li>
+<li><p>如果运行上述命令失败，请检查系统是否安装了 Docker Compose V1。如果是这种情况，建议你根据<a href="https://docs.docker.com/compose/">本页</a>的说明迁移到 Docker Compose V2。</p></li>
+<li><p>如果您在拉取镜像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p></li>
 </ul>
 </div>
-<p>After starting up Milvus,</p>
+<p>启动 Milvus 后、</p>
 <ul>
-<li>Containers named <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, and <strong>milvus-etcd</strong> are up.
-<ul>
-<li>The <strong>milvus-etcd</strong> container does not expose any ports to the host and maps its data to <strong>volumes/etcd</strong> in the current folder.</li>
-<li>The <strong>milvus-minio</strong> container serves ports <strong>9090</strong> and <strong>9091</strong> locally with the default authentication credentials and maps its data to <strong>volumes/minio</strong> in the current folder.</li>
-<li>The <strong>milvus-standalone</strong> container serves ports <strong>19530</strong> locally with the default settings and maps its data to <strong>volumes/milvus</strong> in the current folder.</li>
+<li>名为<strong>milvus-</strong> <strong>standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器启动。<ul>
+<li><strong>milvus-etcd</strong>容器不向主机暴露任何端口，并将其数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</li>
+<li><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地为端口<strong>9090</strong>和<strong>9091</strong>提供服务，并将其数据映射到当前文件夹中的<strong>volumes/minio</strong>。</li>
+<li><strong>Milvus-standalone</strong>容器使用默认设置为本地<strong>19530</strong>端口提供服务，并将其数据映射到当前文件夹中的<strong>volumes/milvus</strong>。</li>
 </ul></li>
 </ul>
-<p>You can check if the containers are up and running using the following command:</p>
+<p>你可以使用以下命令检查容器是否启动并运行：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker-compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -90,8 +89,8 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>You can also access Milvus WebUI at <code translate="no">http://127.0.0.1:9091/webui/</code> to learn more about the your Milvus instance. For details, refer to <a href="/docs/milvus-webui.md">Milvus WebUI</a>.</p>
-<h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Stop and delete Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
+<p>你还可以访问 Milvus WebUI，网址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，了解有关 Milvus 实例的更多信息。详情请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止和删除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,14 +105,14 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can stop and delete this container as follows</p>
+    </button></h2><p>您可以按以下步骤停止和删除此容器</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose down</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Delete service data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,29 +127,29 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Having installed Milvus in Docker, you can:</p>
+    </button></h2><p>在 Docker 中安装 Milvus 后，你可以</p>
 <ul>
-<li><p>Check <a href="/docs/quickstart.md">Quickstart</a> to see what Milvus can do.</p></li>
-<li><p>Learn the basic operations of Milvus:</p>
+<li><p>查看<a href="/docs/zh/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
+<li><p>了解 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
+<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
-<li><p>Deploy your Milvus cluster on clouds:</p>
+<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
+<li><p>在云上部署你的 Milvus 集群：</p>
 <ul>
-<li><a href="/docs/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
+<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
+<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/milvus-webui.md">Milvus WebUI</a>, an intuitive web interface for Milvus observability and management.</p></li>
-<li><p>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
-<li><p>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
-<li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, an open-source GUI tool for intuitive Milvus management.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
+<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

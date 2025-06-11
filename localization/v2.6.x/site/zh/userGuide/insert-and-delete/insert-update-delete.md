@@ -1,12 +1,9 @@
 ---
 id: insert-update-delete.md
-title: Insert Entities
-summary: >-
-  Entities in a collection are data records that share the same set of fields.
-  Field values in every data record form an entity. This page introduces how to
-  insert entities into a collection.
+title: 插入实体
+summary: Collections 中的实体是共享同一组字段的数据记录。每条数据记录中的字段值构成一个实体。本页介绍如何在 Collections 中插入实体。
 ---
-<h1 id="Insert-Entities" class="common-anchor-header">Insert Entities<button data-href="#Insert-Entities" class="anchor-icon" translate="no">
+<h1 id="Insert-Entities" class="common-anchor-header">插入实体<button data-href="#Insert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,11 +18,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Entities in a collection are data records that share the same set of fields. Field values in every data record form an entity. This page introduces how to insert entities into a collection.</p>
+    </button></h1><p>Collections 中的实体是指共享同一组字段的数据记录。每条数据记录中的字段值构成一个实体。本页介绍如何在 Collections 中插入实体。</p>
 <div class="alert note">
-<p>If you dynamically add new fields after the collection has been created, and you do not specify values for these fields when inserting entities, Milvus automatically populates them with either their defined default values or NULL if defaults are not set. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+<p>如果在创建 Collections 后动态添加新字段，并且在插入实体时没有为这些字段指定值，Milvus 会自动用定义的默认值填充这些字段，如果没有设置默认值，则填充 NULL。有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,10 +37,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, an <strong>Entity</strong> refers to data records in a <strong>Collection</strong> that share the same <strong>Schema</strong>, with the data in each field of a row constituting an Entity. Therefore, the Entities within the same Collection have the same attributes (such as field names, data types, and other constraints).</p>
-<p>When inserting an Entity into a Collection, the Entity to be inserted can only be successfully added if it contains all the fields defined in the Schema. The inserted Entity will enter a Partition named <strong>_default</strong> in the order of insertion. Provided that a certain Partition exists, you can also insert Entities into that Partition by specifying the Partition name in the insertion request.</p>
-<p>Milvus also supports dynamic fields to maintain the scalability of the Collection. When the dynamic field is enabled, you can insert fields that are not defined in the Schema into the Collection. These fields and values will be stored as key-value pairs in a reserved field named <strong>$meta</strong>. For more information about dynamic fields, please refer to Dynamic Field.</p>
-<h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">Insert Entities into a Collection<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>在 Milvus 中，<strong>实体</strong>指的是<strong>Collections</strong>中共享相同<strong>Schema</strong> 的数据记录，行中每个字段的数据构成一个实体。因此，同一 Collections 中的实体具有相同的属性（如字段名称、数据类型和其他约束）。</p>
+<p>将实体插入 Collections 时，要插入的实体只有包含 Schema 中定义的所有字段才能成功添加。插入的实体将按插入顺序进入名为<strong>_default</strong>的分区。如果存在某个分区，也可以通过在插入请求中指定分区名称，将实体插入该分区。</p>
+<p>Milvus 还支持动态字段，以保持 Collections 的可扩展性。启用动态字段后，你可以在 Collections 中插入 Schema 中未定义的字段。这些字段和值将作为键值对存储在名为<strong>$meta</strong> 的保留字段中。有关动态字段的更多信息，请参阅动态字段。</p>
+<h2 id="Insert-Entities-into-a-Collection" class="common-anchor-header">将实体插入 Collections<button data-href="#Insert-Entities-into-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,15 +55,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before inserting data, you need to organize your data into a list of dictionaries according to the Schema, with each dictionary representing an Entity and containing all the fields defined in the Schema. If the Collection has the dynamic field enabled, each dictionary can also include fields that are not defined in the Schema.</p>
-<p>In this section, you will insert entities into a Collection created in the quick-setup manner. A Collection created in this manner has only two fields, named <strong>id</strong> and <strong>vector</strong>. Additionally, this Collection has the dynamic field enabled, so the Entities in the example code include a field called <strong>color</strong> that is not defined in the Schema.</p>
+    </button></h2><p>在插入数据之前，需要根据 Schema 将数据组织到字典列表中，每个字典代表一个实体，并包含 Schema 中定义的所有字段。如果 Collection 启用了动态字段，每个字典还可以包含 Schema 中未定义的字段。</p>
+<p>本节将向以快速设置方式创建的 Collection 中插入实体。以这种方式创建的 Collection 只有两个字段，分别名为<strong>id</strong>和<strong>向量</strong>。此外，该 Collections 启用了动态字段，因此示例代码中的实体包含一个名为<strong>color</strong>的字段，该字段在 Schema 中未定义。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -258,7 +250,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-Entities-into-a-Partition" class="common-anchor-header">Insert Entities into a Partition<button data-href="#Insert-Entities-into-a-Partition" class="anchor-icon" translate="no">
+<h2 id="Insert-Entities-into-a-Partition" class="common-anchor-header">将实体插入分区<button data-href="#Insert-Entities-into-a-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -273,14 +265,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also insert entities into a specified partition. The following code snippets assume that you have a partition named <strong>PartitionA</strong> in your collection.</p>
+    </button></h2><p>您还可以将实体插入指定的分区。以下代码片段假定您的 Collections 中有一个名为<strong>PartitionA</strong>的分区。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},

@@ -1,10 +1,7 @@
 ---
 id: lindera-tokenizer.md
-title: Lindera
-summary: >-
-  The lindera tokenizer performs dictionary-based morphological analysis. It is
-  a good choice for languages—such as Japanese, Korean, and Chinese—whose words
-  are not separated by spaces.
+title: LinderaCompatible with Milvus 2.5.11+
+summary: lindera 标记符号化器执行基于字典的形态分析。对于日语、韩语和汉语等单词不以空格分隔的语言，它是一个不错的选择。
 beta: Milvus 2.5.11+
 ---
 <h1 id="Lindera" class="common-anchor-header">Lindera<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Lindera" class="anchor-icon" translate="no">
@@ -22,8 +19,8 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">lindera</code> tokenizer performs dictionary-based morphological analysis. It is a good choice for languages—such as Japanese, Korean, and Chinese—whose words are not separated by spaces.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">lindera</code> 标记符号生成器执行基于字典的形态分析。对于日语、韩语和汉语等单词不以空格分隔的语言，它是一个不错的选择。</p>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,15 +35,15 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use the <code translate="no">lindera</code> tokenizer, you need to use a specially compiled Milvus version. All dictionaries must be explicitly enabled during compilation to be used.</p>
-<p>To enable specific dictionaries, include them in the compilation command:</p>
+    </button></h2><p>要使用<code translate="no">lindera</code> 标记符号生成器，需要使用专门编译的 Milvus 版本。所有词典都必须在编译过程中明确启用才能使用。</p>
+<p>要启用特定字典，请在编译命令中包含它们：</p>
 <pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
 <button class="copy-code-btn"></button></code></pre>
-<p>The complete list of available dictionaries is: <code translate="no">lindera-ipadic</code>, <code translate="no">lindera-ipadic-neologd</code>, <code translate="no">lindera-unidic</code>, <code translate="no">lindera-ko-dic</code>, <code translate="no">lindera-cc-cedict</code>.</p>
-<p>For example, to enable all dictionaries:</p>
+<p>可用词典的完整列表如下<code translate="no">lindera-ipadic</code>,<code translate="no">lindera-ipadic-neologd</code>,<code translate="no">lindera-unidic</code>,<code translate="no">lindera-ko-dic</code>,<code translate="no">lindera-cc-cedict</code> 。</p>
+<p>例如，启用所有词典：</p>
 <pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ipadic-neologd,lindera-unidic,lindera-ko-dic,lindera-cc-cedict
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
+<h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,12 +58,9 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To configure an analyzer using the <code translate="no">lindera</code> tokenizer, set <code translate="no">tokenizer.type</code> to <code translate="no">lindera</code> and choose a dictionary with <code translate="no">dict_kind</code>.</p>
+    </button></h2><p>要配置使用<code translate="no">lindera</code> 标记符号化器的分析器，请将<code translate="no">tokenizer.type</code> 设置为<code translate="no">lindera</code> ，并选择<code translate="no">dict_kind</code> 的字典。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
@@ -85,28 +79,28 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
+     <th><p>参数</p></th>
+     <th><p>参数</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">type</code></p></td>
-     <td><p>The type of tokenizer. This is fixed to <code translate="no">"lindera"</code>.</p></td>
+     <td><p>标记符类型。固定为<code translate="no">"lindera"</code> 。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dict_kind</code></p></td>
-     <td><p>A dictionary used to define vocabulary. Possible values:</p>
+     <td><p>用于定义词汇的字典。可能的值：</p>
 <ul>
-<li><p><code translate="no">ko-dic</code>: Korean - Korean morphological dictionary (<a href="https://bitbucket.org/eunjeon/mecab-ko-dic">MeCab Ko-dic</a>)</p></li>
-<li><p><code translate="no">ipadic</code>: Japanese - Standard morphological dictionary (<a href="https://taku910.github.io/mecab/">MeCab IPADIC</a>)</p></li>
-<li><p><code translate="no">ipadic-neologd</code>: Japanese with neologism dictionary (extended) - Includes new words and proper nouns (<a href="https://github.com/neologd/mecab-ipadic-neologd">IPADIC NEologd</a>)</p></li>
-<li><p><code translate="no">unidic</code>: Japanese UniDic (extended) - Academic standard dictionary with detailed linguistic information (<a href="https://clrd.ninjal.ac.jp/unidic/">UniDic</a>)</p></li>
-<li><p><code translate="no">cc-cedict</code>: Mandarin Chinese (traditional/simplified) - Community-maintained Chinese-English dictionary (<a href="https://cc-cedict.org/wiki/">CC-CEDICT</a>)</p>
-<p><strong>Note:</strong> All dictionaries must be enabled during Milvus compilation to be available for use.</p></li>
+<li><p><code translate="no">ko-dic</code>:韩语 - 韩语形态词典<a href="https://bitbucket.org/eunjeon/mecab-ko-dic">（MeCab Ko-dic）</a></p></li>
+<li><p><code translate="no">ipadic</code>:日语 - 标准形态词典<a href="https://taku910.github.io/mecab/">(MeCab IPADIC</a>)</p></li>
+<li><p><code translate="no">ipadic-neologd</code>:日语新词词典（扩展）- 包括新词和专有名词<a href="https://github.com/neologd/mecab-ipadic-neologd">(IPADIC NEologd</a>)</p></li>
+<li><p><code translate="no">unidic</code>:日语 UniDic（扩展）- 包含详细语言信息的学术标准词典<a href="https://clrd.ninjal.ac.jp/unidic/">(UniDic</a>)</p></li>
+<li><p><code translate="no">cc-cedict</code>:中文普通话（繁体/简体） - 社区维护的汉英词典<a href="https://cc-cedict.org/wiki/">(CC-CEDICT</a>)</p>
+<p><strong>注意：</strong>所有词典必须在 Milvus 编译时启用，才能使用。</p></li>
 </ul></td>
    </tr>
 </table>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就能使用指定的分析器处理该字段中的文本，以实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
+<h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,12 +115,9 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before applying the analyzer configuration to your collection schema, verify its behavior using the <code translate="no">run_analyzer</code> method.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Analyzer configuration</h3><div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-</div>
+    </button></h2><p>在将分析器配置应用到 Collections 模式之前，请使用<code translate="no">run_analyzer</code> 方法验证其行为。</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">分析器配置</h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
@@ -143,11 +134,8 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>, <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verification using <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-</div>
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">使用<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -208,5 +196,5 @@ result, err := client.RunAnalyzer(ctx, option)
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">Expected output</h3><pre><code translate="no" class="language-plaintext">{tokens: [&#x27;東京&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;の&#x27;, &#x27;最寄り駅&#x27;, &#x27;は&#x27;, &#x27;とう&#x27;, &#x27;きょう&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;駅&#x27;, &#x27;で&#x27;]} 
+<h3 id="Expected-output" class="common-anchor-header">预期输出</h3><pre><code translate="no" class="language-plaintext">{tokens: [&#x27;東京&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;の&#x27;, &#x27;最寄り駅&#x27;, &#x27;は&#x27;, &#x27;とう&#x27;, &#x27;きょう&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;駅&#x27;, &#x27;で&#x27;]} 
 <button class="copy-code-btn"></button></code></pre>

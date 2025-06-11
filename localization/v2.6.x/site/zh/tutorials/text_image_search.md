@@ -1,11 +1,9 @@
 ---
 id: text_image_search.md
 summary: >-
-  In this tutorial, we will explore how to implement text-based image retrieval
-  using OpenAI’s CLIP (Contrastive Language-Image Pretraining) model and Milvus.
-  We will generate image embeddings with CLIP, store them in Milvus, and perform
-  efficient similarity searches.
-title: Text-to-Image Search with Milvus
+  在本教程中，我们将探讨如何使用 OpenAI 的 CLIP（对比语言-图像预训练）模型和 Milvus 实现基于文本的图像检索。我们将使用 CLIP
+  生成图像嵌入，将其存储在 Milvus 中，并执行高效的相似性搜索。
+title: 使用 Milvus 进行文本到图像搜索
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -13,7 +11,7 @@ title: Text-to-Image Search with Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">Text-to-Image Search with Milvus<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">使用 Milvus 进行文本到图像搜索<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,9 +26,9 @@ title: Text-to-Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Text-to-image search is an advanced technology that allows users to search for images using natural language text descriptions. It leverages a pretrained multimodal model to convert both text and images into embeddings in a shared semantic space, enabling similarity-based comparisons.</p>
-<p>In this tutorial, we will explore how to implement text-based image retrieval using OpenAI’s CLIP (Contrastive Language-Image Pretraining) model and Milvus. We will generate image embeddings with CLIP, store them in Milvus, and perform efficient similarity searches.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>文本到图像搜索是一种先进的技术，允许用户使用自然语言文本描述搜索图像。它利用预训练的多模态模型将文本和图像转换为共享语义空间中的 Embeddings，从而实现基于相似性的比较。</p>
+<p>在本教程中，我们将探讨如何使用 OpenAI 的 CLIP（对比语言-图像预训练）模型和 Milvus 实现基于文本的图像检索。我们将使用 CLIP 生成图像嵌入，将其存储在 Milvus 中，并执行高效的相似性搜索。</p>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,33 +43,33 @@ title: Text-to-Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before you start, make sure you have all the required packages and example data ready.</p>
-<h3 id="Install-dependencies" class="common-anchor-header">Install dependencies</h3><ul>
-<li><strong>pymilvus>=2.4.2</strong> for interacting with the Milvus database</li>
-<li><strong>clip</strong> for working with the CLIP model</li>
-<li><strong>pillow</strong> for image processing and visualization</li>
+    </button></h2><p>开始之前，请确保已准备好所有必需的软件包和示例数据。</p>
+<h3 id="Install-dependencies" class="common-anchor-header">安装依赖项</h3><ul>
+<li><strong>pymilvus&gt;=2.4.2</strong>用于与 Milvus 数据库交互</li>
+<li><strong>clip</strong>用于使用 CLIP 模型</li>
+<li><strong>pillow</strong>用于图像处理和可视化</li>
 </ul>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus pillow</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install git+https://github.com/openai/CLIP.git</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you’re using Google Colab, you may need to <strong>restart the runtime</strong> (Navigate to the “Runtime” menu at the top of the interface, and select “Restart session” from the dropdown menu.)</p>
+<p>如果使用的是 Google Colab，可能需要<strong>重启运行时</strong>（导航至界面顶部的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
 </div>
-<h3 id="Download-example-data" class="common-anchor-header">Download example data</h3><p>We will use a subset of the <a href="https://www.image-net.org">ImageNet</a> dataset (100 classes, 10 images for each class) as example images. The following command will download the example data and extract it to the local folder <code translate="no">./images_folder</code>:</p>
+<h3 id="Download-example-data" class="common-anchor-header">下载示例数据</h3><p>我们将使用<a href="https://www.image-net.org">ImageNet</a>数据集的一个子集（100 个类别，每个类别 10 幅图像）作为示例图像。以下命令将下载示例数据，并将其解压缩到本地文件夹<code translate="no">./images_folder</code> 中：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q reverse_image_search.zip -d images_folder</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-Milvus" class="common-anchor-header">Set up Milvus</h3><p>Before proceeding, set up your Milvus server and connect using your URI (and optionally, a token):</p>
+<h3 id="Set-up-Milvus" class="common-anchor-header">设置 Milvus</h3><p>在继续之前，请设置您的 Milvus 服务器，并使用您的 URI（以及可选的令牌）进行连接：</p>
 <ul>
-<li><p><strong>Milvus Lite (Recommended for Convenience)</strong>: Set the URI to a local file, such as ./milvus.db. This automatically leverages <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in a single file.</p></li>
-<li><p><strong>Docker or Kubernetes (For Large-Scale Data)</strong>: For handling larger datasets, deploy a more performant Milvus server using <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this case, use the server URI, such as http://localhost:19530, to connect.</p></li>
-<li><p><strong>Zilliz Cloud (Managed Service)</strong>: If you’re using <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, Milvus’s fully managed cloud service, set the the Public Endpoint as URI and API Key as token.</p></li>
+<li><p><strong>Milvus Lite（为方便起见推荐使用）</strong>：将 URI 设置为本地文件，如 ./milvus.db。这会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在一个文件中。</p></li>
+<li><p><strong>Docker 或 Kubernetes（用于大规模数据）</strong>：要处理更大的数据集，可使用<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 部署性能更强的 Milvus 服务器。在这种情况下，请使用服务器 URI（如 http://localhost:19530）进行连接。</p></li>
+<li><p><strong>Zilliz Cloud（托管服务）</strong>：如果使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务），请将公共端点设为 URI，将 API Key 设为令牌。</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Getting-Started" class="common-anchor-header">Getting Started<button data-href="#Getting-Started" class="anchor-icon" translate="no">
+<h2 id="Getting-Started" class="common-anchor-header">开始使用<button data-href="#Getting-Started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,13 +84,13 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that you have the necessary dependencies and data, it’s time to set up feature extractors and start working with Milvus. This section will walk you through the key steps of building a text-to-image search system. Finally, we’ll demonstrate how to retrieve and visualize images based on text queries.</p>
-<h3 id="Define-feature-extractors" class="common-anchor-header">Define feature extractors</h3><p>We will use a pretrained CLIP model to generate image and text embeddings. In this section, we load the pretrained <strong>ViT-B/32</strong> variant of CLIP and define helper functions for encoding image and text:</p>
+    </button></h2><p>现在您已经有了必要的依赖项和数据，是时候设置功能提取器并开始使用 Milvus 了。本节将引导你完成构建文本到图片搜索系统的关键步骤。最后，我们将演示如何根据文本查询检索图像并将其可视化。</p>
+<h3 id="Define-feature-extractors" class="common-anchor-header">定义特征提取器</h3><p>我们将使用预训练的 CLIP 模型来生成图像和文本嵌入。在本节中，我们将加载经过预训练的 CLIP<strong>ViT-B/32</strong>变体，并定义用于图像和文本编码的辅助函数：</p>
 <ul>
-<li><code translate="no">encode_image(image_path)</code>: Processes and encodes images into feature vectors</li>
-<li><code translate="no">encode_text(text)</code>: Encodes text queries into feature vectors</li>
+<li><code translate="no">encode_image(image_path)</code>:将图像处理和编码为特征向量</li>
+<li><code translate="no">encode_text(text)</code>:将文本查询编码为特征向量</li>
 </ul>
-<p>Both functions normalize the output features to ensure consistent comparisons by converting vectors to unit length, which is essential for accurate cosine similarity calculations.</p>
+<p>这两个函数都对输出特征进行归一化处理，通过将向量转换为单位长度来确保一致的比较，这对于精确的余弦相似性计算至关重要。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> clip
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 
@@ -122,14 +120,14 @@ model.<span class="hljs-built_in">eval</span>()
     )  <span class="hljs-comment"># Normalize the text features</span>
     <span class="hljs-keyword">return</span> text_features.squeeze().tolist()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Ingestion" class="common-anchor-header">Data Ingestion</h3><p>To enable semantic image search, we first need to generate embeddings for all images and store them in a vector database for efficient indexing and retrieval. This section provides a step-by-step guide to ingesting image data into Milvus.</p>
-<p><strong>1. Create Milvus Collection</strong></p>
-<p>Before storing image embeddings, you need to create a Milvus collection. The following code demonstrates how to create a collection in a quick-setup mode with the default COSINE metric type. The collection includes the following fields:</p>
+<h3 id="Data-Ingestion" class="common-anchor-header">数据输入</h3><p>要实现语义图像搜索，我们首先需要为所有图像生成 Embeddings，并将其存储到向量数据库中，以便进行高效索引和检索。本节将逐步介绍如何将图像数据导入 Milvus。</p>
+<p><strong>1.创建 Milvus Collections</strong></p>
+<p>在存储图像 Embeddings 之前，需要创建一个 Milvus Collections。下面的代码演示了如何以默认的 COSINE 度量类型在快速设置模式下创建一个 Collection。Collections 包括以下字段：</p>
 <ul>
-<li><p><code translate="no">id</code>: A primary field with auto ID enabled.</p></li>
-<li><p><code translate="no">vector</code>: A field for storing floating-point vector embeddings.</p></li>
+<li><p><code translate="no">id</code>:启用自动 ID 的主字段。</p></li>
+<li><p><code translate="no">vector</code>:用于存储浮点向量 Embeddings 的字段。</p></li>
 </ul>
-<p>If you need a custom schema, refer to the <a href="https://milvus.io/docs/create-collection.md">Milvus documentation</a> for detailed instructions.</p>
+<p>如果需要自定义 Schema，详细说明请参阅<a href="https://milvus.io/docs/create-collection.md">Milvus 文档</a>。</p>
 <pre><code translate="no" class="language-python">collection_name = <span class="hljs-string">&quot;image_collection&quot;</span>
 
 <span class="hljs-comment"># Drop the collection if it already exists</span>
@@ -144,11 +142,11 @@ milvus_client.create_collection(
     enable_dynamic_field=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># enable dynamic field for scalar fields</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>2. Insert Data into Milvus</strong></p>
-<p>In this step, we use a predefined image encoder to generate embeddings for all JPEG images in the example data directory. These embeddings are then inserted into the Milvus collection, along with their corresponding file paths. Each entry in the collection consists of:</p>
+<p><strong>2.向 Milvus 插入数据</strong></p>
+<p>在这一步中，我们使用预定义的图像编码器为示例数据目录中的所有 JPEG 图像生成嵌入。然后将这些嵌入信息连同相应的文件路径一起插入到 Milvus Collections 中。Collections 中的每个条目都由以下内容组成：</p>
 <ul>
-<li><strong>Embedding vector</strong>: The numerical representation of the image. Stored in the field <code translate="no">vector</code>.</li>
-<li><strong>File path</strong>: The location of the image file for reference. Stored in the field <code translate="no">filepath</code> as a dynamic field.</li>
+<li><strong>嵌入向量</strong>：图像的数字表示。存储在字段<code translate="no">vector</code> 中。</li>
+<li><strong>文件路径</strong>：供参考的图像文件位置。作为动态字段存储在<code translate="no">filepath</code> 字段中。</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
@@ -167,7 +165,7 @@ insert_result = milvus_client.insert(collection_name=collection_name, data=raw_d
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted 1000 images into Milvus.
 </code></pre>
-<h3 id="Peform-a-Search" class="common-anchor-header">Peform a Search</h3><p>Now, let’s run a search using an example text query. This will retrieve the most relevant images based on their semantic similarity to the given text description.</p>
+<h3 id="Peform-a-Search" class="common-anchor-header">执行搜索</h3><p>现在，让我们使用示例文本查询执行一次搜索。这将根据图像与给定文本描述的语义相似性检索出最相关的图像。</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;a white dog&quot;</span>
 query_embedding = encode_text(query_text)
 
@@ -178,7 +176,7 @@ search_results = milvus_client.search(
     output_fields=[<span class="hljs-string">&quot;filepath&quot;</span>],  <span class="hljs-comment"># return the filepath field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Visualize results:</p>
+<p>可视化结果：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> display
 
 
@@ -207,8 +205,6 @@ display(concatenated_image)
 Search results:
 </code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
-    <span>png</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
+   </span> <span class="img-wrapper"> <span>png</span> </span></p>

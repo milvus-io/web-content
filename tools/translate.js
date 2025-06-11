@@ -30,17 +30,17 @@ const sourceFilePath = "site/en";
 const sourceLang = "en";
 const targetLangs = [
   "zh",
-  "zh-hant",
-  "ja",
-  "ko",
-  "fr",
-  "de",
-  "it",
-  "pt",
-  "es",
-  "ru",
-  "id",
-  "ar",
+  // "zh-hant",
+  // "ja",
+  // "ko",
+  // "fr",
+  // "de",
+  // "it",
+  // "pt",
+  // "es",
+  // "ru",
+  // "id",
+  // "ar",
 ];
 const cacheFile = CACHE_FILE;
 let total = 0;

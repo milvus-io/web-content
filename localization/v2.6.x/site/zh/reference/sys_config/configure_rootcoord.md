@@ -2,9 +2,9 @@
 id: configure_rootcoord.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure rootCoord for Milvus.
+summary: 了解如何为 Milvus 配置 rootCoord。
 ---
-<h1 id="rootCoord-related-Configurations" class="common-anchor-header">rootCoord-related Configurations<button data-href="#rootCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="rootCoord-related-Configurations" class="common-anchor-header">rootCoord 相关配置<button data-href="#rootCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure rootCoord for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of rootCoord, used to handle data definition language (DDL) and data control language (DCL) requests</p>
+    </button></h1><p>rootCoord 的相关配置，用于处理数据定义语言 (DDL) 和数据控制语言 (DCL) 请求</p>
 <h2 id="rootCoorddmlChannelNum" class="common-anchor-header"><code translate="no">rootCoord.dmlChannelNum</code><button data-href="#rootCoorddmlChannelNum" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,13 +38,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.dmlChannelNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The number of DML-Channels to create at the root coord startup.      </td>
+      <td>        在 Root coord 启动时创建的 DML 通道数。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -67,16 +67,16 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.maxPartitionNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The maximum number of partitions in each collection.</li>      
-        <li>New partitions cannot be created if this parameter is set as 0 or 1.</li>      
-        <li>Range: [0, INT64MAX]</li>      </td>
+        <li>每个 Collection 中分区的最大数量。</li>      
+        <li>如果该参数设置为 0 或 1，则无法创建新分区。</li>      
+        <li>范围[0，INT64MAX］</li>      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -99,15 +99,15 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.minSegmentSizeToEnableIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The minimum row count of a segment required for creating index.</li>      
-        <li>Segments with smaller size than this parameter will not be indexed, and will be searched with brute force.</li>      </td>
+        <li>创建索引所需的最小段行数。</li>      
+        <li>小于此参数的分段将不会被索引，而会被暴力搜索。</li>      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -130,13 +130,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.maxDatabaseNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of database      </td>
+      <td>        数据库的最大数量      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -159,13 +159,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.maxGeneralCapacity">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        upper limit for the sum of of product of partitionNumber and shardNumber      </td>
+      <td>        分区编号与分区编号乘积之和的上限      </td>
       <td>65536</td>
     </tr>
   </tbody>
@@ -188,13 +188,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        秒。强制停止节点而不优雅停止      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -217,13 +217,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of rootCoord. If not specified, use the first unicastable address      </td>
+      <td>        rootCoord 的 TCP/IP 地址。如果未指定，则使用第一个单播地址。      </td>
       <td></td>
     </tr>
   </tbody>
@@ -246,13 +246,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of rootCoord      </td>
+      <td>        根节点的 TCP 端口      </td>
       <td>53100</td>
     </tr>
   </tbody>
@@ -275,13 +275,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the rootCoord can send, unit: byte      </td>
+      <td>        rootCoord 可以发送的每个 RPC 请求的最大大小，单位：字节      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -304,13 +304,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">单位：字节</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the rootCoord can receive, unit: byte      </td>
+      <td>        rootCoord 可以接收的每个 RPC 请求的最大大小，单位：字节      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -333,13 +333,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">单位：字节</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on rootCoord can send, unit: byte      </td>
+      <td>        rootCoord 上的客户端可发送的每个 RPC 请求的最大大小，单位：字节      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -362,13 +362,13 @@ summary: Learn how to configure rootCoord for Milvus.
     </button></h2><table id="rootCoord.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">单位：字节</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on rootCoord can receive, unit: byte      </td>
+      <td>        rootCoord 上的客户端可以接收的每个 RPC 请求的最大大小，单位：字节      </td>
       <td>536870912</td>
     </tr>
   </tbody>
