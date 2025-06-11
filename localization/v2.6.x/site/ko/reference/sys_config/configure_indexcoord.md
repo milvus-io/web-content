@@ -2,9 +2,9 @@
 id: configure_indexcoord.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure indexCoord for Milvus.
+summary: Milvus에 인덱스코드를 구성하는 방법을 알아보세요.
 ---
-<h1 id="indexCoord-related-Configurations" class="common-anchor-header">indexCoord-related Configurations<button data-href="#indexCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="indexCoord-related-Configurations" class="common-anchor-header">인덱스코드 관련 구성<button data-href="#indexCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure indexCoord for Milvus.
     </button></h2><table id="indexCoord.segment.minSegmentNumRowsToEnableIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        It's a threshold. When the segment num rows is less than this value, the segment will not be indexed      </td>
+      <td>        임계값입니다. 세그먼트 행 수가 이 값보다 작으면 세그먼트가 인덱싱되지 않습니다.      </td>
       <td>1024</td>
     </tr>
   </tbody>

@@ -1,14 +1,11 @@
 ---
 id: how_to_enhance_your_rag.md
 summary: >-
-  With the increasing popularity of Retrieval Augmented Generation RAG
-  applications, there is a growing concern about improving their performance.
-  This article presents all possible ways to optimize RAG pipelines and provides
-  corresponding illustrations to help you quickly understand the mainstream RAG
-  optimization strategies.
-title: How to Enhance the Performance of Your RAG Pipeline
+  Retrieval Augmented Generation
+  RAGアプリケーションの人気が高まるにつれ、そのパフォーマンス向上に関する関心が高まっています。この記事では、RAGパイプラインを最適化するすべての可能な方法を紹介し、主流のRAG最適化戦略をすばやく理解できるよう、対応する図解を提供します。
+title: RAGパイプラインのパフォーマンスを向上させる方法
 ---
-<h1 id="How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="common-anchor-header">How to Enhance the Performance of Your RAG Pipeline<button data-href="#How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="anchor-icon" translate="no">
+<h1 id="How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="common-anchor-header">RAGパイプラインのパフォーマンスを向上させる方法<button data-href="#How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +20,9 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>With the increasing popularity of Retrieval Augmented Generation (<a href="https://zilliz.com/learn/Retrieval-Augmented-Generation">RAG</a>) applications, there is a growing concern about improving their performance. This article presents all possible ways to optimize RAG pipelines and provides corresponding illustrations to help you quickly understand the mainstream RAG optimization strategies.</p>
-<p>It’s important to note that we’ll only provide a high-level exploration of these strategies and techniques, focusing on how they integrate into a RAG system. However, we won’t delve into intricate details or guide you through step-by-step implementation.</p>
-<h2 id="A-Standard-RAG-Pipeline" class="common-anchor-header">A Standard RAG Pipeline<button data-href="#A-Standard-RAG-Pipeline" class="anchor-icon" translate="no">
+    </button></h1><p>Retrieval Augmented Generation<a href="https://zilliz.com/learn/Retrieval-Augmented-Generation">(RAG</a>)アプリケーションの人気が高まるにつれ、そのパフォーマンスを向上させることへの関心が高まっています。この記事では、RAGパイプラインを最適化するすべての可能な方法を紹介し、主流のRAG最適化戦略をすばやく理解できるよう、対応する図解を提供します。</p>
+<p>注意すべき点は、これらの戦略とテクニックをRAGシステムにどのように統合するかに焦点を当て、ハイレベルな探索を提供するに過ぎないということです。しかし、複雑な詳細を掘り下げたり、ステップバイステップの実装をガイドすることはありません。</p>
+<h2 id="A-Standard-RAG-Pipeline" class="common-anchor-header">標準的なRAGパイプライン<button data-href="#A-Standard-RAG-Pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,14 +37,14 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The diagram below shows the most straightforward vanilla RAG pipeline. First, document chunks are loaded into a vector store (such as <a href="https://milvus.io/docs">Milvus</a> or <a href="https://zilliz.com/cloud">Zilliz cloud</a>). Then, the vector store retrieves the Top-K most relevant chunks related to the query. These relevant chunks are then injected into the <a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM</a>'s context prompt, and finally, the LLM returns the final answer.</p>
+    </button></h2><p>下図は最も単純なバニラRAGパイプラインを示している。まず、ドキュメントチャンクがベクターストア（<a href="https://milvus.io/docs">Milvusや</a> <a href="https://zilliz.com/cloud">Zilliz cloudなど</a>）にロードされます。次に、ベクターストアはクエリに関連するTop-Kのチャンクを検索する。これらの関連チャンクは<a href="https://zilliz.com/glossary/large-language-models-(llms)">LLMの</a>コンテキストプロンプトに注入され、最終的にLLMは最終的な回答を返す。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="Various-Types-of-RAG-Enhancement-Techniques" class="common-anchor-header">Various Types of RAG Enhancement Techniques<button data-href="#Various-Types-of-RAG-Enhancement-Techniques" class="anchor-icon" translate="no">
+<h2 id="Various-Types-of-RAG-Enhancement-Techniques" class="common-anchor-header">様々なタイプのRAG強化技術<button data-href="#Various-Types-of-RAG-Enhancement-Techniques" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,16 +59,16 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We can classify different RAG enhancement approaches based on their roles in the RAG pipeline stages.</p>
+    </button></h2><p>RAGパイプラインステージにおける役割に基づいて、様々なRAG強化アプローチを分類することができる。</p>
 <ul>
-<li><strong>Query Enhancement</strong>: Modifying and manipulating the query process of the RAG input to better express or process the query intent.</li>
-<li><strong>Indexing Enhancement</strong>: Optimizing the creation of chunking indexes using techniques such as multi-chunking, step-wise indexing, or multi-way indexing.</li>
-<li><strong>Retriever Enhancement</strong>: Applying optimization techniques and strategies during the retrieval process.</li>
-<li><strong>Generator Enhancement</strong>: Adjusting and optimizing prompts when assembling prompts for the LLM to provide better responses.</li>
-<li><strong>RAG Pipeline Enhancement</strong>: Dynamically switching processes within the entire RAG pipeline, including using agents or tools to optimize key steps in the RAG pipeline.</li>
+<li><strong>クエリ強化</strong>：RAG入力のクエリプロセスを変更、操作して、クエリの意図をより適切に表現、処理する。</li>
+<li><strong>インデクシングの強化</strong>：マルチチャンキング、ステップワイズインデックス、マルチウェイインデックスなどのテクニックを使ってチャンキングインデックスの作成を最適化する。</li>
+<li><strong>レトリーバーの強化</strong>：検索プロセス中に最適化技術や戦略を適用する。</li>
+<li><strong>ジェネレーターの強化</strong>：LLMのプロンプトを組み立てる際に、プロンプトを調整・最適化し、より良い応答を提供する。</li>
+<li><strong>RAGパイプラインの強化</strong>：RAGパイプラインの主要なステップを最適化するためのエージェントやツールの使用を含め、RAGパイプライン全体のプロセスを動的に切り替える。</li>
 </ul>
-<p>Next, we will introduce specific methods under each of these categories.</p>
-<h2 id="Query-Enhancement" class="common-anchor-header">Query Enhancement<button data-href="#Query-Enhancement" class="anchor-icon" translate="no">
+<p>次に、それぞれのカテゴリーにおける具体的な手法を紹介する。</p>
+<h2 id="Query-Enhancement" class="common-anchor-header">クエリの強化<button data-href="#Query-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,51 +83,51 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s explore four effective methods to enhance your query experience: Hypothetical Questions, Hypothetical Document Embeddings, Sub-Queries, and Stepback Prompts.</p>
-<h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">Creating Hypothetical Questions</h3><p>Creating hypothetical questions involves utilizing an LLM to generate multiple questions that users might ask about the content within each document chunk. Before the user’s actual query reaches the LLM, the vector store retrieves the most relevant hypothetical questions related to the real query, along with their corresponding document chunks, and forwards them to the LLM.</p>
+    </button></h2><p>クエリー体験を向上させる4つの効果的な方法を探ってみましょう：仮定の質問、仮定のドキュメント埋め込み、サブクエリ、ステップバックプロンプトです。</p>
+<h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">仮定の質問の作成</h3><p>仮定の質問を作成するには、LLMを利用して、各文書チャンク内のコンテンツについてユーザーが質問する可能性のある複数の質問を生成します。ユーザーの実際のクエリがLLMに到達する前に、ベクトルストアは実際のクエリに関連する最も関連性の高い仮定の質問を、対応するドキュメントチャンクとともに取得し、LLMに転送します。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This methodology bypasses the cross-domain asymmetry problem in the vector search process by directly engaging in query-to-query searches, alleviating the burden on vector searches. However, it introduces additional overhead and uncertainty in generating hypothetical questions.</p>
-<h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (Hypothetical Document Embeddings)</h3><p>HyDE stands for Hypothetical Document Embeddings. It leverages an LLM to craft a "<strong><em>Hypothetical Document</em></strong>" or a <strong><em>fake</em></strong> answer in response to a user query devoid of contextual information. This fake answer is then converted into vector embeddings and employed to query the most relevant document chunks within a vector database. Subsequently, the vector database retrieves the Top-K most relevant document chunks and transmits them to the LLM and the original user query to generate the final answer.</p>
+<p>この方法論は、クエリ間の検索に直接関与することで、ベクトル検索プロセスにおけるクロスドメインの非対称性問題を回避し、ベクトル検索の負担を軽減する。しかし、仮想的な質問を生成する際に、さらなるオーバーヘッドと不確実性が発生する。</p>
+<h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (仮説的文書埋め込み)</h3><p>HyDEはHypothetical Document Embeddingsの略。LLMを活用し、文脈情報のないユーザーからの問い合わせに対して、<strong><em>「仮説文書</em></strong>」または<strong><em>偽の</em></strong>回答を作成します。この偽の回答はベクトル埋め込みに変換され、ベクトルデータベース内の最も関連性の高い文書チャンクにクエリーされる。その後、ベクトルデータベースはトップKの最も関連性の高いドキュメントチャンクを検索し、LLMと元のユーザークエリに送信し、最終的な回答を生成する。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This method is similar to the hypothetical question technique in addressing cross-domain asymmetry in vector searches. However, it also has drawbacks, such as the added computational costs and uncertainties of generating fake answers.</p>
-<p>For more information, refer to the <a href="https://arxiv.org/abs/2212.10496">HyDE</a> paper.</p>
-<h3 id="Creating-Sub-Queries" class="common-anchor-header">Creating Sub-Queries</h3><p>When a user query is too complicated, we can use an LLM to break it down into simpler sub-queries before passing them on to the vector database and the LLM. Let’s take a look at an example.</p>
-<p>Imagine a user asking: "<strong><em>What are the differences in features between Milvus and Zilliz Cloud?</em></strong>" This question is quite complex and might not have a straightforward answer in our knowledge base. To tackle this issue, we can split it into two simpler sub-queries:</p>
+<p>この方法は、ベクトル検索におけるクロスドメインの非対称性に対処するという点で、仮説的質問手法に似ている。しかし、計算コストの増加や偽の回答を生成する不確実性などの欠点もあります。</p>
+<p>詳しくは<a href="https://arxiv.org/abs/2212.10496">HyDEの</a>論文を参照してください。</p>
+<h3 id="Creating-Sub-Queries" class="common-anchor-header">サブクエリの作成</h3><p>ユーザークエリが複雑すぎる場合、LLMを使用して、ベクトルデータベースとLLMに渡す前に、より単純なサブクエリに分解することができます。例を見てみよう。</p>
+<p>ユーザーがこう尋ねたとしよう：<strong><em>"MilvusとZilliz Cloudの機能の違いは何ですか？</em></strong>"この質問は非常に複雑で、私たちの知識ベースでは簡単には答えられないかもしれません。この問題に取り組むために、2つの単純なサブクエリに分割することができます：</p>
 <ul>
-<li>Sub-query 1: “What are the features of Milvus?”</li>
-<li>Sub-query 2: “What are the features of Zilliz Cloud?”</li>
+<li>サブクエリ1："Milvusの特徴は？"</li>
+<li>サブクエリ2："Zilliz Cloudの特徴は？"</li>
 </ul>
-<p>Once we have these sub-queries, we send them all to the vector database after converting them into vector embeddings. The vector database then finds the Top-K document chunks most relevant to each sub-query. Finally, the LLM uses this information to generate a better answer.</p>
+<p>これらのサブクエリができたら、それらをすべてベクトル埋め込みに変換してベクトルデータベースに送る。そしてベクトル・データベースは、各サブクエリに最も関連性の高いTop-Kの文書チャンクを見つける。最後に、LLMはこの情報を使ってより良い回答を生成する。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>By breaking down the user query into sub-queries, we make it easier for our system to find relevant information and provide accurate answers, even to complex questions.</p>
-<h3 id="Creating-Stepback-Prompts" class="common-anchor-header">Creating Stepback Prompts</h3><p>Another way to simplify complex user queries is by creating <strong><em>stepback prompts</em></strong>. This technique involves abstracting complicated user queries into <em><em>"</em>stepback questions</em>"** using an LLM. Then, a vector database uses these stepback questions to retrieve the most relevant document chunks. Finally, the LLM generates a more accurate answer based on these retrieved document chunks.</p>
-<p>Let’s illustrate this technique with an example. Consider the following query, which is quite complex and not straightforward to answer directly:</p>
-<p><strong><em>Original User Query: “I have a dataset with 10 billion records and want to store it in Milvus for querying. Is it possible?”</em></strong></p>
-<p>To simplify this user query, we can use an LLM to generate a more straightforward stepback question:</p>
-<p><strong><em>Stepback Question: “What is the dataset size limit that Milvus can handle?”</em></strong></p>
+<p>ユーザークエリをサブクエリに分解することで、複雑な質問であっても、システムが関連する情報を見つけやすくし、正確な回答を提供することができる。</p>
+<h3 id="Creating-Stepback-Prompts" class="common-anchor-header">ステップバックプロンプトの作成</h3><p>複雑なユーザークエリを単純化するもう一つの方法は、<strong><em>ステップバックプロンプトを</em></strong>作成することです。この手法では、LLMを使用して、複雑なユーザーからの質問を<em><em>「</em>ステップバック・クエスチョン</em>」**に抽象化する。次に、ベクトルデータベースはこれらのステップバッククエスチョンを使って、最も関連性の高いドキュメントチャンクを検索する。最後に、LLMはこれらの検索された文書チャンクに基づいて、より正確な回答を生成する。</p>
+<p>このテクニックを例で説明しよう。次のクエリを考えてみましょう。このクエリは非常に複雑で、直接答えるのは簡単ではありません：</p>
+<p><strong><em>元のユーザークエリ"100億レコードのデータセットがあり、Milvusに保存してクエリーしたい。可能か？"</em></strong></p>
+<p>このユーザークエリを単純化するために、LLMを使用してより簡単なステップバッククエスチョンを生成することができます：</p>
+<p><strong><em>ステップバック質問"Milvusが扱えるデータセットサイズの上限は？"</em></strong></p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This method can help us get better and more accurate answers to complex queries. It breaks down the original question into a simpler form, making it easier for our system to find relevant information and provide accurate responses.</p>
-<h2 id="Indexing-Enhancement" class="common-anchor-header">Indexing Enhancement<button data-href="#Indexing-Enhancement" class="anchor-icon" translate="no">
+<p>この方法は、複雑なクエリに対してより正確な回答を得るのに役立ちます。元の質問をよりシンプルな形に分解することで、システムが関連情報を見つけやすくなり、正確な回答を提供しやすくなります。</p>
+<h2 id="Indexing-Enhancement" class="common-anchor-header">インデックスの強化<button data-href="#Indexing-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -145,33 +142,33 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Enhancing indexing is another strategy for enhancing the performance of your RAG applications. Let’s explore three indexing enhancement techniques.</p>
-<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Merging Document Chunks Automatically</h3><p>When building an index, we can employ two granularity levels: child chunks and their corresponding parent chunks. Initially, we search for child chunks at a finer level of detail. Then, we apply a merging strategy: if a specific number, <strong><em>n</em></strong>, of child chunks from the first <strong><em>k</em></strong> child chunks belong to the same parent chunk, we provide this parent chunk to the LLM as contextual information.</p>
+    </button></h2><p>インデックスの強化は、RAGアプリケーションのパフォーマンスを向上させるもう一つの戦略です。ここでは、3つのインデックス強化テクニックを紹介します。</p>
+<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">文書チャンクを自動的にマージする</h3><p>インデックスを構築する際、子チャンクとそれに対応する親チャンクという2つの粒度レベルを採用することができます。まず、より細かいレベルで子チャンクを検索する。最初の<strong><em>k個の</em></strong>子チャンクから特定の数<strong><em>n</em></strong>個の子チャンクが同じ親チャンクに属する場合、この親チャンクを文脈情報としてLLMに提供する。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This methodology has been implemented in <a href="https://docs.llamaindex.ai/en/stable/examples/retrievers/recursive_retriever_nodes.html">LlamaIndex</a>.</p>
-<h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">Constructing Hierarchical Indices</h3><p>When creating indices for documents, we can establish a two-level index: one for document summaries and another for document chunks. The vector search process comprises two stages: initially, we filter relevant documents based on the summary, and subsequently, we retrieve corresponding document chunks exclusively within these relevant documents.</p>
+<p>この方法は<a href="https://docs.llamaindex.ai/en/stable/examples/retrievers/recursive_retriever_nodes.html">LlamaIndexに</a>実装されている。</p>
+<h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">階層インデックスの構築</h3><p>文書に対するインデックスを作成する場合、文書の要約に対するインデックスと、文書のチャンクに対するインデックスの2つのレベルのインデックスを作成することができる。ベクトル検索プロセスは2つの段階からなる。まず、要約に基づいて関連文書をフィルタリングし、その後、これらの関連文書の中だけで対応する文書チャンクを検索する。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach proves beneficial in situations involving extensive data volumes or instances where data is hierarchical, such as content retrieval within a library collection.</p>
-<h3 id="Hybrid-Retrieval-and-Reranking" class="common-anchor-header">Hybrid Retrieval and Reranking</h3><p>The Hybrid Retrieval and Reranking technique integrates one or more supplementary retrieval methods with <a href="https://zilliz.com/learn/vector-similarity-search">vector similarity retrieval</a>. Then, a <a href="https://zilliz.com/learn/optimize-rag-with-rerankers-the-role-and-tradeoffs#What-is-a-Reranker">reranker</a> reranks the retrieved results based on their relevancy to the user query.</p>
-<p>Common supplementary retrieval algorithms include lexical frequency-based methods like <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a> or big models utilizing sparse embeddings like <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. Re-ranking algorithms include RRF or more sophisticated models such as <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, which resembles BERT-like architectures.</p>
+<p>このアプローチは、膨大なデータ量や、図書館コレクション内のコンテンツ検索のようにデータが階層化されている場合に有効である。</p>
+<h3 id="Hybrid-Retrieval-and-Reranking" class="common-anchor-header">ハイブリッド検索と再ランク付け</h3><p>ハイブリッド検索と再ランク付け技術は、1つ以上の補助的な検索手法と<a href="https://zilliz.com/learn/vector-similarity-search">ベクトル類似度検索を</a>統合する。次に、<a href="https://zilliz.com/learn/optimize-rag-with-rerankers-the-role-and-tradeoffs#What-is-a-Reranker">再ランカーが</a>、ユーザーのクエリとの関連性に基づいて検索結果を再ランクする。</p>
+<p>一般的な補助検索アルゴリズムには、<a href="https://milvus.io/docs/embed-with-bm25.md">BM25の</a>ような語彙頻度ベースの手法や、<a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Spladeの</a>ようなスパース埋め込みを利用した大きなモデルがある。再順位付けアルゴリズムには、RRFや、BERTのようなアーキテクチャに似た<a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoderの</a>ような、より洗練されたモデルがある。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach leverages diverse retrieval methods to improve retrieval quality and address potential gaps in vector recall.</p>
-<h2 id="Retriever-Enhancement" class="common-anchor-header">Retriever Enhancement<button data-href="#Retriever-Enhancement" class="anchor-icon" translate="no">
+<p>このアプローチは、検索品質を向上させ、ベクトル想起における潜在的なギャップに対処するために、多様な検索手法を活用する。</p>
+<h2 id="Retriever-Enhancement" class="common-anchor-header">レトリーバの強化<button data-href="#Retriever-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,23 +183,23 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Refinement of the retriever component within the RAG system can also improve RAG applications. Let’s explore some effective methods for enhancing the retriever.</p>
-<h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Sentence Window Retrieval</h3><p>In a basic RAG system, the document chunk given to the LLM is a larger window encompassing the retrieved embedding chunk. This ensures that the information provided to the LLM includes a broader range of contextual details, minimizing information loss. The Sentence Window Retrieval technique decouples the document chunk used for embedding retrieval from the chunk provided to the LLM.</p>
+    </button></h2><p>RAGシステム内のレトリーバーコンポーネントを改良することで、RAGアプリケーションを改善することもできる。レトリーバを強化するための効果的な方法をいくつか探ってみよう。</p>
+<h3 id="Sentence-Window-Retrieval" class="common-anchor-header">センテンスウィンドウの検索</h3><p>基本的なRAGシステムでは、LLMに与えられる文書チャンクは、検索された埋め込みチャンクを包含する大きなウィンドウである。これにより、LLMに提供される情報には、より広い範囲の文脈の詳細が含まれるようになり、情報損失が最小限に抑えられる。センテンスウィンドウ検索技術は、埋め込み検索に使われる文書チャンクと、LLMに提供されるチャンクを切り離す。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>However, expanding the window size may introduce additional interfering information. We can adjust the size of the window expansion based on the specific business needs.</p>
-<h3 id="Meta-data-Filtering" class="common-anchor-header">Meta-data Filtering</h3><p>To ensure more precise answers, we can refine the retrieved documents by filtering metadata like time and category before passing them to the LLM. For instance, if financial reports spanning multiple years are retrieved, filtering based on the desired year will refine the information to meet specific requirements. This method proves effective in situations with extensive data and detailed metadata, such as content retrieval in library collections.</p>
+<p>しかし、ウィンドウサイズを拡大すると、干渉する情報が追加される可能性がある。我々は、特定のビジネスニーズに基づいて、ウィンドウの拡張サイズを調整することができる。</p>
+<h3 id="Meta-data-Filtering" class="common-anchor-header">メタデータのフィルタリング</h3><p>より正確な回答を得るために、LLMに渡す前に、時間やカテゴリーなどのメタデータをフィルタリングすることで、検索された文書を絞り込むことができる。例えば、複数年にわたる財務報告書が検索された場合、希望する年に基づいてフィルタリングすることで、特定の要件を満たすように情報を絞り込むことができます。この方法は、図書館コレクションのコンテンツ検索など、広範なデータと詳細なメタデータがある状況で効果的です。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="Generator-Enhancement" class="common-anchor-header">Generator Enhancement<button data-href="#Generator-Enhancement" class="anchor-icon" translate="no">
+<h2 id="Generator-Enhancement" class="common-anchor-header">ジェネレーターの強化<button data-href="#Generator-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -217,24 +214,24 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s explore more RAG optimizing techniques by improving the generator within a RAG system.</p>
-<h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">Compressing the LLM prompt</h3><p>The noise information within retrieved document chunks can significantly impact the accuracy of RAG’s final answer. The limited prompt window in LLMs also presents a hurdle for more accurate answers. To address this challenge, we can compress irrelevant details, emphasize key paragraphs, and reduce the overall context length of retrieved document chunks.</p>
+    </button></h2><p>RAGシステム内のジェネレーターを改良することで、RAGを最適化するテクニックをさらに探求してみよう。</p>
+<h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">LLMプロンプトの圧縮</h3><p>検索された文書チャンク内のノイズ情報は、RAGの最終的な回答の精度に大きな影響を与える可能性がある。LLMの限られたプロンプトウィンドウもまた、より正確な回答のためのハードルとなる。この課題に対処するために、私たちは無関係な詳細を圧縮し、重要な段落を強調し、検索された文書塊の全体的な文脈の長さを短くすることができる。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach is similar to the earlier discussed hybrid retrieval and reranking method, wherein a reranker is utilized to sift out irrelevant document chunks.</p>
-<h3 id="Adjusting-the-chunk-order-in-the-prompt" class="common-anchor-header">Adjusting the chunk order in the prompt</h3><p>In the paper "<a href="https://arxiv.org/abs/2307.03172">Lost in the middle</a>," researchers observed that LLMs often overlook information in the middle of given documents during the reasoning process. Instead, they tend to rely more on the information presented at the beginning and end of the documents.</p>
-<p>Based on this observation, we can adjust the order of retrieved chunks to improve the answer quality: when retrieving multiple knowledge chunks, chunks with relatively low confidence are placed in the middle, and chunks with relatively high confidence are positioned at both ends.</p>
+<p>このアプローチは、先に述べたハイブリッド検索とリランキング手法に似ており、リランカーを利用して無関係な文書チャンクをふるい落とす。</p>
+<h3 id="Adjusting-the-chunk-order-in-the-prompt" class="common-anchor-header">プロンプト内のチャンク順序の調整</h3><p>論文<a href="https://arxiv.org/abs/2307.03172">"Lost in the middle</a>"において、研究者はLLMが推論プロセスにおいて、与えられた文書の途中の情報をしばしば見落とすことを観察した。その代わりに、彼らは文書の最初と最後に提示された情報に依存する傾向がある。</p>
+<p>この観察に基づき、回答品質を向上させるために、検索されるチャンクの順序を調整することができる。複数の知識チャンクを検索する場合、相対的に信頼度の低いチャンクは中央に、相対的に信頼度の高いチャンクは両端に配置される。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="RAG-Pipeline-Enhancement" class="common-anchor-header">RAG Pipeline Enhancement<button data-href="#RAG-Pipeline-Enhancement" class="anchor-icon" translate="no">
+<h2 id="RAG-Pipeline-Enhancement" class="common-anchor-header">RAGパイプラインの強化<button data-href="#RAG-Pipeline-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -249,18 +246,18 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We can also improve the performance of your RAG applications by enhancing the whole RAG pipeline.</p>
-<h3 id="Self-reflection" class="common-anchor-header">Self-reflection</h3><p>This approach incorporates the concept of self-reflection within AI agents. Then, how does this technique work?</p>
-<p>Some initially retrieved Top-K document chunks are ambiguous and may not answer the user question directly. In such cases, we can conduct a second round of reflection to verify whether these chunks can genuinely address the query.</p>
-<p>We can conduct the reflection using efficient reflection methods such as Natural Language Inference(NLI) models or additional tools like internet searches for verification.</p>
+    </button></h2><p>RAGパイプライン全体を強化することで、RAGアプリケーションのパフォーマンスを向上させることも可能です。</p>
+<h3 id="Self-reflection" class="common-anchor-header">自己反省</h3><p>このアプローチは、AIエージェントに自己反省の概念を取り入れています。では、この手法はどのように機能するのでしょうか？</p>
+<p>最初に検索されたTop-Kの文書チャンクの中には曖昧なものがあり、ユーザーの質問に直接答えられない場合がある。このような場合、2回目のリフレクションを行い、これらのチャンクが純粋にクエリに対応できるかどうかを検証することができる。</p>
+<p>自然言語推論(NLI)モデルのような効率的なリフレクション手法や、検証のためのインターネット検索のような追加ツールを使ってリフレクションを行うことができる。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This concept of self-reflection has been explored in several papers or projects, including <a href="https://arxiv.org/pdf/2310.11511.pdf">Self-RAG</a>, <a href="https://arxiv.org/pdf/2401.15884.pdf">Corrective RAG</a>, <a href="https://github.com/langchain-ai/langgraph/blob/main/examples/reflexion/reflexion.ipynb">LangGraph</a>, etc.</p>
-<h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">Query Routing with an Agent</h3><p>Sometimes, we don’t have to use a RAG system to answer simple questions as it might result in more misunderstanding and inference from misleading information. In such cases, we can use an agent as a router at the querying stage. This agent assesses whether the query needs to go through the RAG pipeline. If it does, the subsequent RAG pipeline is initiated; otherwise, the LLM directly addresses the query.</p>
+<p>この自己反省の概念は、<a href="https://arxiv.org/pdf/2310.11511.pdf">Self-RAG</a>、<a href="https://arxiv.org/pdf/2401.15884.pdf">Corrective RAG</a>、<a href="https://github.com/langchain-ai/langgraph/blob/main/examples/reflexion/reflexion.ipynb">LangGraphなど</a>、いくつかの論文やプロジェクトで研究されている。</p>
+<h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">エージェントによるクエリルーティング</h3><p>単純な質問に答えるためにRAGシステムを使うことは、誤解を招いたり、誤解を招くような情報から推論されたりする可能性があるため、使う必要がないこともある。そのような場合、問い合わせの段階でエージェントをルーターとして使用することができます。このエージェントは、クエリがRAGパイプラインを通過する必要があるかどうかを評価する。そうでなければ、LLMが直接問い合わせに対応する。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
@@ -273,10 +270,10 @@ title: How to Enhance the Performance of Your RAG Pipeline
     <span></span>
   </span>
 </p>
-<p>The agent could take various forms, including an LLM, a small classification model, or even a set of rules.</p>
-<p>By routing queries based on user intent, you can redirect a portion of the queries, leading to a significant boost in response time and a noticeable reduction in unnecessary noise.</p>
-<p>We can extend the query routing technique to other processes within the RAG system, such as determining when to utilize tools like web searches, conducting sub-queries, or searching for images. This approach ensures that each step in the RAG system is optimized based on the specific requirements of the query, leading to more efficient and accurate information retrieval.</p>
-<h2 id="Summary" class="common-anchor-header">Summary<button data-href="#Summary" class="anchor-icon" translate="no">
+<p>エージェントは、LLM、小さな分類モデル、あるいはルールのセットなど、様々な形態をとることができる。</p>
+<p>ユーザーの意図に基づいてクエリをルーティングすることで、クエリの一部をリダイレクトすることができ、レスポンスタイムを大幅に向上させ、不必要なノイズを顕著に減らすことができる。</p>
+<p>クエリ・ルーティング技術をRAGシステム内の他のプロセス、例えばウェブ検索のようなツールの利用時期の決定、サブクエリの実施、画像の検索などに拡張することができる。このアプローチは、RAGシステム内の各ステップがクエリの特定の要件に基づいて最適化されることを保証し、より効率的で正確な情報検索につながる。</p>
+<h2 id="Summary" class="common-anchor-header">まとめ<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -291,6 +288,6 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>While a vanilla RAG pipeline may appear simple, achieving optimal business performance often requires more sophisticated optimization techniques.</p>
-<p>This article summarizes various popular approaches to enhancing the performance of your RAG applications. We also provided clear illustrations to help you quickly understand these concepts and techniques and expedite their implementation and optimization.</p>
-<p>You can get the simple implementations of the major approaches listed in this article at this <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag">GitHub link</a>.</p>
+    </button></h2><p>単純なRAGパイプラインはシンプルに見えるかもしれないが、最適なビジネスパフォーマンスを達成するには、より洗練された最適化技術が必要になることが多い。</p>
+<p>この記事では、RAG アプリケーションのパフォーマンスを向上させるための一般的なさまざまなアプローチをまとめました。また、これらの概念とテクニックを素早く理解し、実装と最適化を迅速化できるように、わかりやすい図解も用意しました。</p>
+<p>この記事で挙げた主なアプローチの簡単な実装は、<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag">GitHubのリンクから</a>入手できます。</p>

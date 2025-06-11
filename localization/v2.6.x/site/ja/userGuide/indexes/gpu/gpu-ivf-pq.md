@@ -117,7 +117,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/gpu-ivf-pq.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/gpu-ivf-pq.md#Build-index">インデックスを構築</a>する際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
@@ -158,12 +158,12 @@ res = MilvusClient.search(
 <li><p><code translate="no">"true"</code>:元のデータセットをキャッシュし、検索結果を絞り込んで再現性を高めます。</p></li>
 <li><p><code translate="no">"false"</code>:GPUメモリを節約するため、元のデータセットをキャッシュしない。</p></li>
 </ul></td>
-     <td><p><strong>タイプ</strong>文字列の<strong>範囲</strong>：[<code translate="no">"true"</code>,<code translate="no">"false"</code>]。</p>
+     <td><p><strong>タイプ</strong>文字列<strong>Range</strong>：[<code translate="no">"true"</code>,<code translate="no">"false"</code>]。</p>
 <p><strong>デフォルト値</strong>：<code translate="no">"false"</code></p></td>
      <td><p><code translate="no">"true"</code> に設定すると、検索結果を絞り込むことで再現性を高めるが、より多くのGPUメモリを使用する。<code translate="no">"false"</code> に設定するとGPUメモリを節約します。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメーター</h3><p>次の表は、<a href="/docs/ja/gpu-ivf-pq.md#Search-on-index">インデックスで検索する</a>ときに<code translate="no">search_params.params</code> で設定できるパラメーターの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメーター</h3><p>次の表は、<a href="/docs/ja/gpu-ivf-pq.md#Search-on-index">インデックスで検索する</a>ときに<code translate="no">search_params.params</code> で設定できるパラメー タの一覧です。</p>
 <table>
    <tr>
      <th></th>

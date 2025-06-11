@@ -44,7 +44,7 @@ title: 릴리스 노트
 </table>
 <p>Milvus 2.5.12를 출시하게 되어 기쁘게 생각합니다! 이번 릴리스에서는 <code translate="no">contains</code> 표현식에 대한 JSON 인덱스 지원과 같은 새로운 기능과 함께 업데이트된 <code translate="no">DescribeCollection</code> API 응답 및 더 엄격한 데이터 만료 압축 등 몇 가지 개선 사항이 도입되었습니다. 이 버전은 또한 중요한 종속성 업데이트를 통합하여 CVE를 수정하고 수많은 버그 수정을 통해 안정성과 성능을 향상시킵니다. 이러한 최신 개선 사항과 수정 사항을 활용하려면 Milvus 2.5.12로 업그레이드하는 것이 좋습니다!</p>
 <h3 id="Features" class="common-anchor-header">주요 기능</h3><ul>
-<li>JSON <code translate="no">contains</code> expr<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>)에 대한 JSON 인덱스 지원이 추가되었습니다.</li>
+<li>JSON <code translate="no">contains</code> expr<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>)에 대한 JSON 인덱스 지원 추가.</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
 <li><code translate="no">DescribeCollection</code> API는 이제 결과에 업데이트 타임스탬프를 포함합니다<a href="https://github.com/milvus-io/milvus/pull/41600">(#41600)</a>.</li>
@@ -168,7 +168,7 @@ title: 릴리스 노트
 <tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.10은 향상된 검색 및 로드 성능, 향상된 메트릭 보고 기능, 가속화된 메트릭 계산을 위한 확장된 SVE 지원을 제공합니다. 또한 이번 릴리스에는 안정성과 정확성을 향상시키는 여러 버그 수정이 포함되어 있습니다. 업그레이드하거나 사용해 보시기 바랍니다. 여러분의 피드백은 Milvus를 더욱 개선하는 데 큰 도움이 됩니다!</p>
+<p>Milvus 2.5.10은 향상된 검색 및 로드 성능, 향상된 메트릭 보고 기능, 가속화된 메트릭 계산을 위한 확장된 SVE 지원을 제공합니다. 이 릴리스에는 안정성과 정확성을 높이는 여러 버그 수정도 포함되어 있습니다. 업그레이드하거나 사용해 보시기 바랍니다. 여러분의 피드백은 Milvus를 더욱 개선하는 데 큰 도움이 됩니다!</p>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
 <li>존재하지 않는 인덱스에 대한 보고 인덱스 메트릭 무시<a href="https://github.com/milvus-io/milvus/pull/41296">(#41296</a>)</li>
 <li>반전된 인덱스가 존재할 때에도 좋아요에 스캔 모드 사용<a href="https://github.com/milvus-io/milvus/pull/41309">(#41309</a>)</li>
@@ -489,7 +489,7 @@ title: 릴리스 노트
 </ul>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><h4 id="Observability" class="common-anchor-header">관찰 가능성</h4><ul>
 <li>원시 데이터 검색을 위한 모니터 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/40155">(#40155</a>).</li>
-<li>[2.5] get 벡터 지연 시간 메트릭 추가 및 요청 제한 오류 메시지 개선<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
+<li>[2.5] get 벡터 지연 시간 메트릭 추가 및 요청 제한 오류 메시지 개선<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>).</li>
 <li>[2.5] 프록시 대기열에 대한 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/40071">(#40071</a>)</li>
 <li>더 많은 메트릭 데이터 노출<a href="https://github.com/milvus-io/milvus/pull/39466">(#39466</a>)</li>
 <li>[2.5] 구문 분석 표현식에 대한 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/39716">(#39716</a>)</li>
@@ -622,7 +622,7 @@ title: 릴리스 노트
 <p>Milvus 2.5.3은 전반적인 안정성, 신뢰성 및 사용성을 개선하기 위해 중요한 버그 수정 및 성능 향상을 제공합니다. 이 버전은 동시성 처리를 개선하고, 데이터 인덱싱 및 검색을 강화하며, 보다 강력한 사용자 환경을 위해 몇 가지 주요 구성 요소를 업데이트합니다.</p>
 <h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
 <li><code translate="no">VARCHAR</code> 기본 키에 <code translate="no">IN</code> 필터를 사용하면 빈 결과가 반환될 수 있는 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39108">(#39108</a>)</li>
-<li>잘못된 결과를 초래할 수 있는 쿼리 작업과 삭제 작업 간의 동시성 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39054">(#39054</a>)</li>
+<li>잘못된 결과로 이어질 수 있는 쿼리 작업과 삭제 작업 간의 동시성 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39054">(#39054</a>)</li>
 <li>쿼리 요청에서 <code translate="no">expr</code> 이 비어 있을 때 반복 필터링으로 인해 발생하는 오류를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39034">(#39034</a>)</li>
 <li>구성 업데이트 중 디스크 오류로 인해 기본 구성 설정이 사용되던 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39072">(#39072</a>)</li>
 <li>클러스터링 압축으로 인해 삭제된 데이터가 손실될 수 있는 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39133">(#39133</a>)</li>
@@ -782,5 +782,5 @@ title: 릴리스 노트
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">DDL 동시성 성능 개선</h4><p>데이터 정의 언어(DDL) 작업의 동시성 성능을 최적화했습니다.</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">RESTful API 기능 조정</h4><p>일관성을 위해 RESTful API의 기능을 다른 SDK와 정렬했습니다.</p>
 <h4 id="Security--Configuration-Updates" class="common-anchor-header">보안 및 구성 업데이트</h4><p>보다 복잡한 환경이나 엔터프라이즈 환경에서 노드 간 통신을 보호하기 위해 TLS를 지원합니다. 자세한 내용은 <a href="/docs/ko/tls.md">보안 구성을</a> 참조하세요.</p>
-<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">압축 성능 향상</h4><p>혼합 압축에서 최대 세그먼트 제한을 제거하고 이제 작은 세그먼트부터 우선순위를 지정하여 효율성이 향상되고 대규모 또는 조각화된 데이터 세트의 쿼리 속도가 빨라졌습니다.</p>
+<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">압축 성능 개선</h4><p>혼합 압축에서 최대 세그먼트 제한을 제거하고 이제 작은 세그먼트부터 우선순위를 지정하여 효율성이 향상되고 대규모 또는 조각화된 데이터 세트의 쿼리 속도가 빨라졌습니다.</p>
 <h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">점수 기반 채널 밸런싱</h4><p>채널 간 부하를 동적으로 분산하는 정책을 도입하여 대규모 배포에서 리소스 활용률과 전반적인 안정성을 향상시켰습니다.</p>

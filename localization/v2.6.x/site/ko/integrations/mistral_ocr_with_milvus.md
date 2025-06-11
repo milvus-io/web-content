@@ -1,9 +1,7 @@
 ---
 id: mistral_ocr_with_milvus.md
-summary: >-
-  This tutorial demonstrates how to build a document understanding system using
-  Milvus and Mistral OCR.
-title: Document Understanding with Mistral OCR and Milvus
+summary: 이 튜토리얼에서는 Milvus와 Mistral OCR을 사용하여 문서 이해 시스템을 구축하는 방법을 설명합니다.
+title: Mistral OCR 및 Milvus를 사용한 문서 이해
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -11,7 +9,7 @@ title: Document Understanding with Mistral OCR and Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">Document Understanding with Mistral OCR and Milvus<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">Mistral OCR 및 Milvus를 사용한 문서 이해<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,7 +24,7 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This tutorial demonstrates how to build a document understanding system using:</p>
+    </button></h1><p>이 튜토리얼에서는 다음을 사용하여 문서 이해 시스템을 구축하는 방법을 보여드립니다:</p>
 <h2 id="Mistral-OCR" class="common-anchor-header">Mistral OCR<button data-href="#Mistral-OCR" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,14 +40,14 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A powerful optical character recognition service that:</p>
+    </button></h2><p>강력한 광학 문자 인식 서비스입니다:</p>
 <ul>
-<li>Processes PDFs, images, and other document formats</li>
-<li>Preserves document structure and formatting</li>
-<li>Handles multi-page documents</li>
-<li>Recognizes tables, lists, and other complex elements</li>
+<li>PDF, 이미지 및 기타 문서 형식 처리</li>
+<li>문서 구조 및 서식 보존</li>
+<li>여러 페이지로 구성된 문서 처리</li>
+<li>표, 목록 및 기타 복잡한 요소 인식</li>
 </ul>
-<h2 id="Mistral-Embeddings" class="common-anchor-header">Mistral Embeddings<button data-href="#Mistral-Embeddings" class="anchor-icon" translate="no">
+<h2 id="Mistral-Embeddings" class="common-anchor-header">미스트랄 임베딩<button data-href="#Mistral-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,13 +63,13 @@ title: Document Understanding with Mistral OCR and Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>Transforms text into numerical representations:</li>
-<li>Converts text into 1024-dimensional vectors</li>
-<li>Captures semantic relationships between concepts</li>
-<li>Enables similarity matching based on meaning</li>
-<li>Provides foundation for semantic search</li>
+<li>텍스트를 숫자 표현으로 변환합니다:</li>
+<li>텍스트를 1024차원 벡터로 변환합니다.</li>
+<li>개념 간의 의미론적 관계 포착</li>
+<li>의미에 기반한 유사도 매칭 지원</li>
+<li>시맨틱 검색을 위한 기반 제공</li>
 </ul>
-<h2 id="Milvus-Vector-Database" class="common-anchor-header">Milvus Vector Database<button data-href="#Milvus-Vector-Database" class="anchor-icon" translate="no">
+<h2 id="Milvus-Vector-Database" class="common-anchor-header">밀버스 벡터 데이터베이스<button data-href="#Milvus-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,23 +84,23 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Specialized database for vector similarity search:</p>
+    </button></h2><p>벡터 유사도 검색을 위한 전문 데이터베이스:</p>
 <ul>
-<li>Open-Source</li>
-<li>Performs efficient Vector Search</li>
-<li>Scales to large document collections</li>
-<li>Supports hybrid search (vector similarity + metadata filtering)</li>
-<li>Optimized for AI applications</li>
+<li>오픈 소스</li>
+<li>효율적인 벡터 검색 수행</li>
+<li>대규모 문서 컬렉션에 맞게 확장 가능</li>
+<li>하이브리드 검색(벡터 유사도 + 메타데이터 필터링) 지원</li>
+<li>AI 애플리케이션에 최적화</li>
 </ul>
-<p>By the end of this tutorial, you’ll have a system that can:</p>
+<p>이 튜토리얼이 끝나면 다음과 같은 시스템을 구축할 수 있습니다:</p>
 <ol>
-<li>Process documents (PDFs/images) via URLs</li>
-<li>Extract text using OCR</li>
-<li>Store the text and vector embeddings in Milvus</li>
-<li>Perform semantic search across your document collection</li>
+<li>URL을 통한 문서(PDF/이미지) 처리</li>
+<li>OCR을 사용하여 텍스트 추출</li>
+<li>Milvus에 텍스트와 벡터 임베딩 저장하기</li>
+<li>문서 컬렉션 전체에서 시맨틱 검색 수행</li>
 </ol>
 <hr>
-<h2 id="Setup-and-Dependencies" class="common-anchor-header">Setup and Dependencies<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
+<h2 id="Setup-and-Dependencies" class="common-anchor-header">설치 및 종속성<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,10 +115,10 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>First, let’s install the required packages:</p>
+    </button></h2><p>먼저 필요한 패키지를 설치해 보겠습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mistralai pymilvus python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Environment-Setup" class="common-anchor-header">Environment Setup<button data-href="#Environment-Setup" class="anchor-icon" translate="no">
+<h2 id="Environment-Setup" class="common-anchor-header">환경 설정<button data-href="#Environment-Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,12 +133,12 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You’ll need:</p>
+    </button></h2><p>다음이 필요합니다:</p>
 <ol>
-<li>A Mistral API key (get one at https://console.mistral.ai/)</li>
-<li>Milvus running locally through <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> or with <a href="https://zilliz.com">Zilliz Cloud</a></li>
+<li>미스트랄 API 키(https://console.mistral.ai/ 에서 받음)</li>
+<li><a href="https://milvus.io/docs/install_standalone-docker.md">Docker를</a> 통해 로컬로 실행하거나 <a href="https://zilliz.com">Zilliz Cloud로</a> 실행하는 Milvus</li>
 </ol>
-<p>Let’s set up our environment:</p>
+<p>환경을 설정해 보겠습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> re
@@ -177,7 +175,7 @@ COLLECTION_NAME = <span class="hljs-string">&quot;document_ocr&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Connected to Mistral API and Milvus at http://localhost:19530
 </code></pre>
-<h2 id="Setting-Up-Milvus-Collection" class="common-anchor-header">Setting Up Milvus Collection<button data-href="#Setting-Up-Milvus-Collection" class="anchor-icon" translate="no">
+<h2 id="Setting-Up-Milvus-Collection" class="common-anchor-header">Milvus 컬렉션 설정하기<button data-href="#Setting-Up-Milvus-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,13 +190,13 @@ COLLECTION_NAME = <span class="hljs-string">&quot;document_ocr&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now, let’s create a Milvus collection to store our document data. The collection will have the following fields:</p>
+    </button></h2><p>이제 문서 데이터를 저장할 Milvus 컬렉션을 만들어 보겠습니다. 컬렉션에는 다음과 같은 필드가 있습니다:</p>
 <ul>
-<li><code translate="no">id</code>: Primary key (auto-generated)</li>
-<li><code translate="no">url</code>: Source URL of the document</li>
-<li><code translate="no">page_num</code>: Page number within the document</li>
-<li><code translate="no">content</code>: Extracted text content</li>
-<li><code translate="no">embedding</code>: Vector representation of the content (1024 dimensions)</li>
+<li><code translate="no">id</code>: 기본 키(자동 생성)</li>
+<li><code translate="no">url</code>: 문서의 소스 URL</li>
+<li><code translate="no">page_num</code>: 문서 내 페이지 번호</li>
+<li><code translate="no">content</code>: 추출된 텍스트 내용</li>
+<li><code translate="no">embedding</code>: 콘텐츠의 벡터 표현(1024 차원)</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_milvus_collection</span>():
     <span class="hljs-string">&quot;&quot;&quot;Create Milvus collection if it doesn&#x27;t exist.&quot;&quot;&quot;</span>
@@ -244,7 +242,7 @@ setup_milvus_collection()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Collection 'document_ocr' already exists.
 </code></pre>
-<h2 id="Core-Functionality" class="common-anchor-header">Core Functionality<button data-href="#Core-Functionality" class="anchor-icon" translate="no">
+<h2 id="Core-Functionality" class="common-anchor-header">핵심 기능<button data-href="#Core-Functionality" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -259,7 +257,7 @@ setup_milvus_collection()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s implement the core functions for our document understanding system:</p>
+    </button></h2><p>문서 이해 시스템의 핵심 기능을 구현해 보겠습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Generate embeddings using Mistral</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_embedding</span>(<span class="hljs-params">text</span>):
     <span class="hljs-string">&quot;&quot;&quot;Generate embedding for text using Mistral embedding model.&quot;&quot;&quot;</span>
@@ -349,7 +347,7 @@ setup_milvus_collection()
     ocr_result = perform_ocr(url)
     <span class="hljs-keyword">return</span> ocr_result
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Search-Functionality" class="common-anchor-header">Search Functionality<button data-href="#Search-Functionality" class="anchor-icon" translate="no">
+<h2 id="Search-Functionality" class="common-anchor-header">검색 기능<button data-href="#Search-Functionality" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -364,7 +362,7 @@ setup_milvus_collection()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now, let’s implement the search functionality to retrieve relevant document content:</p>
+    </button></h2><p>이제 관련 문서 콘텐츠를 검색할 수 있는 검색 기능을 구현해 보겠습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">search_documents</span>(<span class="hljs-params">query, limit=<span class="hljs-number">5</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;Search Milvus for similar content to the query.&quot;&quot;&quot;</span>
     <span class="hljs-comment"># Check if collection exists</span>
@@ -438,7 +436,7 @@ setup_milvus_collection()
         <span class="hljs-string">&quot;documents&quot;</span>: <span class="hljs-built_in">list</span>(unique_urls),
     }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Demo-Processing-Documents" class="common-anchor-header">Demo: Processing Documents<button data-href="#Demo-Processing-Documents" class="anchor-icon" translate="no">
+<h2 id="Demo-Processing-Documents" class="common-anchor-header">데모 문서 처리하기<button data-href="#Demo-Processing-Documents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -453,7 +451,7 @@ setup_milvus_collection()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s process some example documents. You can replace these URLs with your own documents.</p>
+    </button></h2><p>몇 가지 예제 문서를 처리해 보겠습니다. 이러한 URL을 자신의 문서로 대체할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example PDF URL (Mistral AI paper)</span>
 pdf_url = <span class="hljs-string">&quot;https://arxiv.org/pdf/2310.06825.pdf&quot;</span>
 
@@ -482,7 +480,7 @@ Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra 
 
 We introduce Mistral 7B, a 7-billion-parameter language model engineered for superior performance and efficiency. Mistral 7B outperforms the best open 13B model (Llama 2) across all evaluated benchmarks, and the best released 34B model (Llama 1) in reasoning, mathematics, and code generation. Our model leverages grouped-query attention (GQA) for faster inference, coupled with sliding window attention (SWA) to effectively handle sequences of arbitrary length with a reduced inference cost. We also provide a model fine-tuned to follow instructions, Mistral 7B - Instruct, that surpasses Llama 2 13B - chat mod...
 </code></pre>
-<p>Let’s process an image as well:</p>
+<p>이미지도 처리해 보겠습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example image URL (replace with your own)</span>
 image_url = <span class="hljs-string">&quot;https://s3.eu-central-1.amazonaws.com/readcoop.cis.public-assets.prod/hero/old-german-scripts.png&quot;</span>
 
@@ -533,7 +531,7 @@ Image OCR Result:
 ![img-29.jpeg](img-29.jpeg)
 ![img-30.jpeg](img-30.jpeg)
 </code></pre>
-<h2 id="Demo-Searching-Documents" class="common-anchor-header">Demo: Searching Documents<button data-href="#Demo-Searching-Documents" class="anchor-icon" translate="no">
+<h2 id="Demo-Searching-Documents" class="common-anchor-header">데모: 문서 검색하기<button data-href="#Demo-Searching-Documents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -548,7 +546,7 @@ Image OCR Result:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that we’ve processed some documents, let’s search through them:</p>
+    </button></h2><p>이제 몇 가지 문서를 처리했으니 검색해 보겠습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get document statistics</span>
 stats = get_document_stats()
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Total pages stored: <span class="hljs-subst">{stats[<span class="hljs-string">&#x27;total_pages&#x27;</span>]}</span>&quot;</span>)
@@ -603,7 +601,7 @@ Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra 
 
 We introduce Mistral 7B, a 7-billion-parameter language model engineered for superior performance and efficiency. Mistral 7...
 </code></pre>
-<p>Try another search query:</p>
+<p>다른 검색 쿼리를 사용해 보세요:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search for more specific information</span>
 query = <span class="hljs-string">&quot;What are the capabilities of Mistral&#x27;s language models?&quot;</span>
 results = search_documents(query, limit=<span class="hljs-number">3</span>)
@@ -635,7 +633,7 @@ Content: | Model | Answer |
 | :--: | :--: |
 | Mistral 7B - Instruct with Mistral system prompt | To kill a Linux process, you can use the `kill' command followed by the process ID (PID) of the process you want to terminate. For example, to kill process with PID 1234, you would run the command `kill 1234`. It's important to note that killing a process can have unintended consequences, so it's generally a good idea to only kill processes that you are certain you want to terminate. Additionally, it's genera...
 </code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">결론<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -650,12 +648,12 @@ Content: | Model | Answer |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this tutorial, we’ve built a complete document understanding system using Mistral OCR and Milvus. This system can:</p>
+    </button></h2><p>이 튜토리얼에서는 Mistral OCR과 Milvus를 사용하여 완벽한 문서 이해 시스템을 구축했습니다. 이 시스템은 다음을 수행할 수 있습니다:</p>
 <ol>
-<li>Process documents from URLs</li>
-<li>Extract text using Mistral’s OCR capabilities</li>
-<li>Generate vector embeddings for the content</li>
-<li>Store both text and vectors in Milvus</li>
-<li>Perform semantic search across all processed documents</li>
+<li>URL에서 문서 처리</li>
+<li>Mistral의 OCR 기능을 사용하여 텍스트 추출하기</li>
+<li>콘텐츠에 대한 벡터 임베딩 생성</li>
+<li>Milvus에 텍스트와 벡터 모두 저장</li>
+<li>처리된 모든 문서에서 시맨틱 검색 수행</li>
 </ol>
-<p>This approach enables powerful document understanding capabilities that go beyond simple keyword matching, allowing users to find information based on meaning rather than exact text matches.</p>
+<p>이 접근 방식은 단순한 키워드 매칭을 넘어서는 강력한 문서 이해 기능을 지원하여 사용자가 정확한 텍스트 매칭이 아닌 의미를 기반으로 정보를 찾을 수 있도록 합니다.</p>

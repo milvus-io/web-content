@@ -1,12 +1,11 @@
 ---
 id: primary-field.md
-title: Primary Field & AutoID
+title: 기본 필드 및 자동 ID
 summary: >-
-  The primary field uniquely identifies an entity. This page introduces how to
-  add the primary field of two different data types and how to enable Milvus to
-  automatically allocate primary field values.
+  기본 필드는 엔티티를 고유하게 식별합니다. 이 페이지에서는 서로 다른 두 데이터 유형의 기본 필드를 추가하는 방법과 Milvus가 기본 필드
+  값을 자동으로 할당하도록 설정하는 방법을 소개합니다.
 ---
-<h1 id="Primary-Field--AutoID" class="common-anchor-header">Primary Field & AutoID<button data-href="#Primary-Field--AutoID" class="anchor-icon" translate="no">
+<h1 id="Primary-Field--AutoID" class="common-anchor-header">기본 필드 및 자동 ID<button data-href="#Primary-Field--AutoID" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The primary field uniquely identifies an entity. This page introduces how to add the primary field of two different data types and how to enable Milvus to automatically allocate primary field values.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>기본 필드는 엔티티를 고유하게 식별합니다. 이 페이지에서는 서로 다른 두 데이터 유형의 기본 필드를 추가하는 방법과 Milvus가 기본 필드 값을 자동으로 할당하도록 설정하는 방법을 소개합니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,10 +36,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In a collection, the primary key of each entity should be globally unique. When adding the primary field, you need to explicitly set its data type to <strong>VARCHAR</strong> or <strong>INT64</strong>. Setting its data type to <strong>INT64</strong> indicates that the primary keys should be an integer similar to <code translate="no">12345</code>; Setting its data type to <strong>VARCHAR</strong> indicates that the primary keys should be a string similar to <code translate="no">my_entity_1234</code>.</p>
-<p>You can also enable <strong>AutoID</strong> to make Milvus automatically allocate primary keys for incoming entities. Once you have enabled <strong>AutoID</strong> in your collection, do not include primary keys when inserting entities.</p>
-<p>The primary field in a collection does not have a default value and cannot be null.</p>
-<h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">Use Int64 Primary Keys<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
+    </button></h2><p>컬렉션에서 각 엔티티의 기본 키는 전 세계적으로 고유해야 합니다. 기본 필드를 추가할 때 데이터 유형을 명시적으로 <strong>VARCHAR</strong> 또는 <strong>INT64로</strong> 설정해야 합니다. 데이터 유형을 <strong>INT64로</strong> 설정하면 기본 키가 <code translate="no">12345</code> 와 유사한 정수여야 하고, 데이터 유형을 <strong>VARCHAR로</strong> 설정하면 기본 키가 <code translate="no">my_entity_1234</code> 와 유사한 문자열이어야 함을 나타냅니다.</p>
+<p>또한 <strong>AutoID를</strong> 활성화하여 Milvus가 수신 엔티티에 대해 기본 키를 자동으로 할당하도록 할 수도 있습니다. 컬렉션에서 <strong>AutoID를</strong> 활성화한 후에는 엔티티를 삽입할 때 기본 키를 포함하지 마세요.</p>
+<p>컬렉션의 기본 필드에는 기본값이 없으며 null이 될 수 없습니다.</p>
+<h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">Int64 기본 키 사용<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,14 +54,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use primary keys of the Int64 type, you need to set <code translate="no">datatype</code> to <code translate="no">DataType.INT64</code> and set <code translate="no">is_primary</code> to <code translate="no">true</code>. If you also need Milvus to allocate the primary keys for the incoming entities, also set <code translate="no">auto_id</code> to <code translate="no">true</code>.</p>
+    </button></h2><p>Int64 유형의 기본 키를 사용하려면 <code translate="no">datatype</code> 를 <code translate="no">DataType.INT64</code> 로 설정하고 <code translate="no">is_primary</code> 를 <code translate="no">true</code> 로 설정해야 합니다. 들어오는 엔티티의 기본 키를 할당하기 위해 Milvus도 필요한 경우 <code translate="no">auto_id</code> 를 <code translate="no">true</code> 로 설정해야 합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 schema = MilvusClient.create_schema()
@@ -122,7 +116,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-VarChar-Primary-Keys" class="common-anchor-header">Use VarChar Primary Keys<button data-href="#Use-VarChar-Primary-Keys" class="anchor-icon" translate="no">
+<h2 id="Use-VarChar-Primary-Keys" class="common-anchor-header">VarChar 기본 키 사용<button data-href="#Use-VarChar-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -137,14 +131,9 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use VarChar primary keys, in addition to changing the value of the <code translate="no">data_type</code> parameter to <code translate="no">DataType.VARCHAR</code>, you also need to set the <code translate="no">max_length</code> parameter for the field.</p>
+    </button></h2><p>VarChar 기본 키를 사용하려면 <code translate="no">data_type</code> 매개 변수의 값을 <code translate="no">DataType.VARCHAR</code> 으로 변경하는 것 외에도 필드에 <code translate="no">max_length</code> 매개 변수를 설정해야 합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
     datatype=DataType.VARCHAR,

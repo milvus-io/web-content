@@ -1,9 +1,9 @@
 ---
 id: birdwatcher_usage_guides.md
-summary: Learn how to use Birdwatch to debug Milvus.
-title: Use Birdwatcher
+summary: MilvusのデバッグにBirdwatchを使用する方法をご紹介します。
+title: バードウォッチャーを使う
 ---
-<h1 id="Use-Birdwatcher" class="common-anchor-header">Use Birdwatcher<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
+<h1 id="Use-Birdwatcher" class="common-anchor-header">バードウォッチャーを使う<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Use Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through how to use Birdwatcher to check the state of your Milvus and configure it on the fly.</p>
-<h2 id="Start-Birdwatcher" class="common-anchor-header">Start Birdwatcher<button data-href="#Start-Birdwatcher" class="anchor-icon" translate="no">
+    </button></h1><p>このガイドでは、Birdwatcherを使ってMilvusの状態を確認し、その場で設定を行う方法を説明します。</p>
+<h2 id="Start-Birdwatcher" class="common-anchor-header">Birdwatcherの起動<button data-href="#Start-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,13 +34,13 @@ title: Use Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Birdwatcher is a command-line tool, you can start it as follows:</p>
+    </button></h2><p>Birdwatcherはコマンドラインツールですので、以下のように起動します：</p>
 <pre><code translate="no" class="language-shell">./birdwatcher
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you will be greeted with the following prompt:</p>
+<p>すると以下のようなプロンプトが表示されます：</p>
 <pre><code translate="no" class="language-shell">Offline &gt;
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-to-etcd" class="common-anchor-header">Connect to etcd<button data-href="#Connect-to-etcd" class="anchor-icon" translate="no">
+<h2 id="Connect-to-etcd" class="common-anchor-header">etcdに接続<button data-href="#Connect-to-etcd" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,29 +55,29 @@ title: Use Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You need to use Birdwatcher to connect to etcd before any other operations.</p>
+    </button></h2><p>他の操作の前に、Birdwatcherを使ってetcdに接続する必要があります。</p>
 <ul>
-<li><p>Connect with default settings</p>
+<li><p>デフォルト設定で接続</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect
 Milvus(by-dev) &gt;
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Connect from Birdwatcher in a pod</p>
-<p>If you choose to run Birdwatcher in a Kubernetes pod, you need first obtain the IP address of etcd as follows:</p>
+<li><p>ポッド内のBirdwatcherから接続する</p>
+<p>Kubernetesポッド内でBirdwatcherを実行する場合は、まず以下のようにetcdのIPアドレスを取得します：</p>
 <pre><code translate="no" class="language-shell">kubectl get pod my-release-etcd-0 -o &#x27;jsonpath={.status.podIP}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Then access the shell of the pod.</p>
+<p>次にポッドのシェルにアクセスする。</p>
 <pre><code translate="no" class="language-shell">kubectl exec --stdin --tty birdwatcher-7f48547ddc-zcbxj -- /bin/sh
 <button class="copy-code-btn"></button></code></pre>
-<p>Finally, use the returned IP address to connect to etcd as follows:</p>
+<p>最後に、返されたIPアドレスを使って、以下のようにetcdに接続する：</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --etcd ${ETCD_IP_ADDR}:2379
 Milvus(by-dev)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Connect with a different root path</p>
-<p>If the root path of your Milvus is different from <code translate="no">by-dev</code> and you are prompted with an error reporting about an incorrect root path, you can connect to etcd as follows:</p>
+<li><p>別のルートパスで接続する</p>
+<p>Milvusのルートパスが<code translate="no">by-dev</code> 、ルートパスが正しくないというエラーメッセージが表示された場合は、以下の手順でetcdに接続できます：</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --rootPath my-release
 Milvus(my-release) &gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>If you do not know the root path of your Milvus, connect to etcd as follows:</p>
+<p>Milvusのルートパスがわからない場合は、以下の手順でetcdに接続してください：</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --dry
 using dry mode, ignore rootPath and metaPath
 Etcd(127.0.0.1:2379) &gt; find-milvus
@@ -87,7 +87,7 @@ Etcd(127.0.0.1:2379) &gt; use my-release
 Milvus(my-release) &gt;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Check-Milvus-status" class="common-anchor-header">Check Milvus status<button data-href="#Check-Milvus-status" class="anchor-icon" translate="no">
+<h2 id="Check-Milvus-status" class="common-anchor-header">Milvusの状態確認<button data-href="#Check-Milvus-status" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -102,7 +102,7 @@ Milvus(my-release) &gt;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can use the <code translate="no">show</code> commands to check Milvus status.</p>
+    </button></h2><p>Milvusの状態を確認するには、<code translate="no">show</code> 。</p>
 <pre><code translate="no" class="language-shell">Milvus(my-release) &gt; show -h
 Usage:
    show [command]
@@ -135,7 +135,7 @@ Flags:
 
 Use &quot; show [command] --help&quot; for more information about a command.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-sessions" class="common-anchor-header">List sessions</h3><p>To list sessions associated with different components in Milvus:</p>
+<h3 id="List-sessions" class="common-anchor-header">セッションの一覧表示</h3><p>Milvusの様々なコンポーネントに関連するセッションをリストアップする：</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show session
 Session:datacoord, ServerID: 3, Version: 2.2.11, Address: 10.244.0.8:13333
 Session:datanode, ServerID: 6, Version: 2.2.11, Address: 10.244.0.8:21124
@@ -146,19 +146,19 @@ Session:querycoord, ServerID: 7, Version: 2.2.11, Address: 10.244.0.8:19531
 Session:querynode, ServerID: 2, Version: 2.2.11, Address: 10.244.0.8:21123
 Session:rootcoord, ServerID: 1, Version: 2.2.11, Address: 10.244.0.8:53100
 <button class="copy-code-btn"></button></code></pre>
-<p>In the command output, each session entry listed by <code translate="no">show session</code> corresponds to a node or service that is currently active and registered in <strong>etcd</strong>.</p>
-<h3 id="Check-databases-and-collections" class="common-anchor-header">Check databases and collections</h3><p>You can list all databases and collections.</p>
+<p>コマンドの出力では、<code translate="no">show session</code> によってリストされた各セッションエントリが、現在アクティブで<strong>etcd</strong> に登録されているノードまたはサービスに対応します。</p>
+<h3 id="Check-databases-and-collections" class="common-anchor-header">データベースとコレクションの確認</h3><p>すべてのデータベースとコレクションをリストアップできます。</p>
 <ul>
-<li><p>List databases</p>
-<p>In the command output, you can find information about every database.</p>
+<li><p>データベースのリスト</p>
+<p>コマンドの出力で、すべてのデータベースに関する情報を見つけることができます。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show database
 =============================
 ID: 1   Name: default
 TenantID:        State: DatabaseCreated
 --- Total Database(s): 1
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List collections</p>
-<p>In the command output, you can find detailed information about every collection.</p>
+<li><p>コレクションの一覧</p>
+<p>コマンドの出力で、すべてのコレクションに関する詳細情報を見つけることができます。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collections
 ================================================================================
 DBID: 1
@@ -187,8 +187,8 @@ Start position for channel by-dev-rootcoord-dml_0(by-dev-rootcoord-dml_0_4434072
 --- Total channel: 1     Healthy collections: 1
 ================================================================================
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>View a specific collection</p>
-<p>You can view a specific collection by specifying its ID.</p>
+<li><p>特定のコレクションの表示</p>
+<p>IDを指定して特定のコレクションを表示できます。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collection-history --id 443407225551410746
 ================================================================================
 DBID: 1
@@ -214,20 +214,20 @@ Enable Dynamic Schema: false
 Consistency Level: Bounded
 Start position for channel by-dev-rootcoord-dml_0(by-dev-rootcoord-dml_0_443407225551410746v0): [1 0 28 175 133 76 39 6]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>View all loaded collections</p>
-<p>You can have Birdwatcher filter all loaded collections.</p>
+<li><p>すべてのロードされたコレクションを見る</p>
+<p>Birdwatcherに、すべてのロードされたコレクションをフィルタリングさせることができます。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collection-loaded
 Version: [&gt;= 2.2.0]     CollectionID: 443407225551410746
 ReplicaNumber: 1        LoadStatus: Loaded
 --- Collections Loaded: 1
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List all channel checkpoints of a collection</p>
-<p>You can have Birdwatcher list all checkpoints of a specific collection.</p>
+<li><p>コレクションの全チャンネルチェックポイントをリストする</p>
+<p>Birdwatcher に特定のコレクションのすべてのチェックポイントを一覧表示させることができます。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show checkpoint --collection 443407225551410746
 vchannel by-dev-rootcoord-dml_0_443407225551410746v0 seek to 2023-08-08 09:36:09.54 +0000 UTC, cp channel: by-dev-rootcoord-dml_0_443407225551410746v0, Source: Channel Checkpoint
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Check-index-details" class="common-anchor-header">Check index details</h3><p>Run the following command to list all index files in detail.</p>
+<h3 id="Check-index-details" class="common-anchor-header">インデックスの詳細を確認する</h3><p>以下のコマンドを実行すると、全てのインデックスファイルの詳細がリストアップされます。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show index
 *************2.1.x***************
 *************2.2.x***************
@@ -238,12 +238,12 @@ Index Type: HNSW        Metric Type: L2
 Index Params: 
 ==================================================================
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-partitions" class="common-anchor-header">List partitions</h3><p>Run the following command to list all partitions in a specific collection.</p>
+<h3 id="List-partitions" class="common-anchor-header">パーティションのリスト</h3><p>以下のコマンドを実行すると、特定のコレクション内のすべてのパーティションをリストアップします。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show partition --collection 443407225551410746
 Parition ID: 443407225551410747 Name: _default  State: PartitionCreated
 --- Total Database(s): 1
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-channel-status" class="common-anchor-header">Check channel status</h3><p>Run the following command to view channel status</p>
+<h3 id="Check-channel-status" class="common-anchor-header">チャネルステータスの確認</h3><p>以下のコマンドを実行して、チャネルのステータスを表示します。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show channel-watch
 =============================
 key: by-dev/meta/channelwatch/6/by-dev-rootcoord-dml_0_443407225551410746v0
@@ -255,21 +255,21 @@ Flushed segments: []
 Dropped segments: []
 --- Total Channels: 1
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-all-replicas-and-segments" class="common-anchor-header">List all replicas and segments</h3><ul>
-<li><p>List all replicas</p>
-<p>Run the following command to list all replicas and their corresponding collections.</p>
+<h3 id="List-all-replicas-and-segments" class="common-anchor-header">すべてのレプリカとセグメントをリストする</h3><ul>
+<li><p>すべてのレプリカをリストする</p>
+<p>以下のコマンドを実行して、すべてのレプリカと対応するコレクションを一覧表示します。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show replica
 ================================================================================
 ReplicaID: 443407225685278721 CollectionID: 443407225551410746 version:&gt;=2.2.0
 All Nodes:[2]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List all segments</p>
-<p>Run the following command to list all segments and their status</p>
+<li><p>全セグメントの一覧表示</p>
+<p>以下のコマンドを実行して、すべてのセグメントとそのステータスを一覧表示します。</p>
 <pre><code translate="no" class="language-shell">SegmentID: 443407225551610865 State: Flushed, Row Count:5979
 --- Growing: 0, Sealed: 0, Flushed: 1
 --- Total Segments: 1, row count: 5979
 <button class="copy-code-btn"></button></code></pre>
-<p>Run the following command to list all loaded segments in detail. For Milvus 2.1.x, use <code translate="no">show segment-loaded</code> instead.</p>
+<p>以下のコマンドを実行すると、ロードされているすべてのセグメントを詳細に一覧表示します。Milvus 2.1.xの場合は、<code translate="no">show segment-loaded</code> 。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show segment-loaded-grpc
 ===========
 ServerID 2
@@ -280,7 +280,7 @@ SegmentID: 443407225551610865 CollectionID: 443407225551410746 Channel: by-dev-r
 Sealed segments number: 1    
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="List-configurations" class="common-anchor-header">List configurations</h3><p>You can have Birdwatcher list the current configurations of each Milvus component.</p>
+<h3 id="List-configurations" class="common-anchor-header">設定の一覧表示</h3><p>BirdwatcherにMilvusの各コンポーネントの現在の設定を一覧表示させることができます。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show configurations
 client nil Session:proxy, ServerID: 8, Version: 2.2.11, Address: 10.244.0.8:19529
 Component rootcoord-1
@@ -300,7 +300,7 @@ querynode.cache.enabled: true
 querynode.cache.memorylimit: 2147483648
 querynode.scheduler.maxreadconcurrentratio: 2
 <button class="copy-code-btn"></button></code></pre>
-<p>As an alternative, you can visit each Milvus component to find its configuration. The following demonstrates how to list the configuration of the QueryCoord with ID 7.</p>
+<p>別の方法として、Milvusの各コンポーネントにアクセスし、そのコンフィギュレーションを見つけることができます。以下はID 7のQueryCoordの設定をリストアップする方法を示しています。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show session
 Session:datacoord, ServerID: 3, Version: 2.2.11, Address: 10.244.0.8:13333
 Session:datanode, ServerID: 6, Version: 2.2.11, Address: 10.244.0.8:21124
@@ -335,7 +335,7 @@ Key: querycoord.balancer, Value: ScoreBasedBalancer
 Key: querycoord.autobalance, Value: true
 Key: querycoord.segmenttasktimeout, Value: 120000
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Backup-metrics" class="common-anchor-header">Backup metrics<button data-href="#Backup-metrics" class="anchor-icon" translate="no">
+<h2 id="Backup-metrics" class="common-anchor-header">メトリクスのバックアップ<button data-href="#Backup-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -350,7 +350,7 @@ Key: querycoord.segmenttasktimeout, Value: 120000
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can have Birdwatcher back up metrics of all components</p>
+    </button></h2><p>Birdwatcherにすべてのコンポーネントのメトリクスをバックアップさせることができます。</p>
 <pre><code translate="no" class="language-shell">Milvus(my-release) &gt; backup
 Backing up ... 100%(2452/2451)
 backup etcd for prefix  done
@@ -364,8 +364,8 @@ http://10.244.0.10:9091/metrics
 http://10.244.0.10:9091/metrics
 backup for prefix done, stored in file: bw_etcd_ALL.230810-075211.bak.gz
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can check the file in the directory where you start Birdwatcher.</p>
-<h2 id="Probe-collections" class="common-anchor-header">Probe collections<button data-href="#Probe-collections" class="anchor-icon" translate="no">
+<p>その後、Birdwatcherを起動したディレクトリにあるファイルを確認することができます。</p>
+<h2 id="Probe-collections" class="common-anchor-header">コレクションのプローブ<button data-href="#Probe-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -380,8 +380,8 @@ backup for prefix done, stored in file: bw_etcd_ALL.230810-075211.bak.gz
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can have Birdwatcher probe the status of loaded collections with specified primary keys or mock queries.</p>
-<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">Probe collection with known primary key</h3><p>In the <code translate="no">probe</code> command, you should specify the primary key using the <code translate="no">pk</code> flag, and the collection ID using the <code translate="no">collection</code> flag.</p>
+    </button></h2><p>Birdwatcher に、指定した主キーやモッククエリでロードされたコレクションの状態をプローブさせることができます。</p>
+<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">既知の主キーを持つコレクションのプローブ</h3><p><code translate="no">probe</code> コマンドでは、<code translate="no">pk</code> フラグで主キーを指定し、<code translate="no">collection</code> フラグでコレクション ID を指定します。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; probe pk --pk 110 --collection 442844725212299747
 PK 110 found on segment 442844725212299830
 Field id, value: &amp;{long_data:&lt;data:110 &gt; }
@@ -389,7 +389,7 @@ Field title, value: &amp;{string_data:&lt;data:&quot;Human Resources Dataficatio
 Field title_vector, value: &amp;{dim:768 float_vector:&lt;data:0.022454707 data:0.007861045 data:0.0063843643 data:0.024065714 data:0.013782166 data:0.018483251 data:-0.026526336 ... data:-0.06579628 data:0.00033906146 data:0.030992996 data:-0.028134001 data:-0.01311325 data:0.012471594 &gt; }
 Field article_meta, value: &amp;{json_data:&lt;data:&quot;{\&quot;link\&quot;:\&quot;https:\\/\\/towardsdatascience.com\\/human-resources-datafication-d44c8f7cb365\&quot;,\&quot;reading_time\&quot;:6,\&quot;publication\&quot;:\&quot;Towards Data Science\&quot;,\&quot;claps\&quot;:256,\&quot;responses\&quot;:0}&quot; &gt; }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">Probe all collections with mock queries</h3><p>You can also have Birdwatcher probe all collections with mock queries.</p>
+<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">モッククエリですべてのコレクションをプローブする</h3><p>Birdwatcherにモッククエリで全てのコレクションをプローブさせることもできます。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; probe query
 probing collection 442682158191982314
 Found vector field vector(103) with dim[384], indexID: 442682158191990455

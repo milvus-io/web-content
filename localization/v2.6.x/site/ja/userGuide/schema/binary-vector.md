@@ -1,16 +1,10 @@
 ---
 id: binary-vector.md
-title: Binary Vector
+title: バイナリ・ベクトル
 summary: >-
-  Binary vectors are a special form of data representation that convert
-  traditional high-dimensional floating-point vectors into binary vectors
-  containing only 0s and 1s. This transformation not only compresses the size of
-  the vector but also reduces storage and computational costs while retaining
-  semantic information. When precision for non-critical features is not
-  essential, binary vectors can effectively maintain most of the integrity and
-  utility of the original floating-point vectors.
+  バイナリ・ベクトルは、従来の高次元浮動小数点数ベクトルを、0と1のみを含むバイナリ・ベクトルに変換する特殊なデータ表現形式である。この変換により、ベクトルのサイズが圧縮されるだけでなく、意味情報を保持したままストレージと計算コストが削減されます。重要でない特徴の精度が重要でない場合、2値ベクトルは元の浮動小数点ベクトルの完全性と実用性のほとんどを効果的に維持することができます。
 ---
-<h1 id="Binary-Vector" class="common-anchor-header">Binary Vector<button data-href="#Binary-Vector" class="anchor-icon" translate="no">
+<h1 id="Binary-Vector" class="common-anchor-header">バイナリ・ベクトル<button data-href="#Binary-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,9 +19,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Binary vectors are a special form of data representation that convert traditional high-dimensional floating-point vectors into binary vectors containing only 0s and 1s. This transformation not only compresses the size of the vector but also reduces storage and computational costs while retaining semantic information. When precision for non-critical features is not essential, binary vectors can effectively maintain most of the integrity and utility of the original floating-point vectors.</p>
-<p>Binary vectors have a wide range of applications, particularly in situations where computational efficiency and storage optimization are crucial. In large-scale AI systems, such as search engines or recommendation systems, real-time processing of massive amounts of data is key. By reducing the size of the vectors, binary vectors help lower latency and computational costs without significantly sacrificing accuracy. Additionally, binary vectors are useful in resource-constrained environments, such as mobile devices and embedded systems, where memory and processing power are limited. Through the use of binary vectors, complex AI functions can be implemented in these restricted settings while maintaining high performance.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>バイナリ・ベクトルは、従来の高次元浮動小数点数ベクトルを、0と1のみを含むバイナリ・ベクトルに変換する特殊なデータ表現形式である。この変換により、ベクトルのサイズが圧縮されるだけでなく、意味情報を保持したままストレージと計算コストが削減されます。重要でない特徴の精度が重要でない場合、バイナリ・ベクトルは元の浮動小数点ベクトルの完全性と実用性のほとんどを効果的に維持することができます。</p>
+<p>バイナリ・ベクタは、特に計算効率とストレージの最適化が重要な場面で、幅広い応用が可能です。検索エンジンや推薦システムなどの大規模なAIシステムでは、大量のデータのリアルタイム処理が鍵となる。バイナリ・ベクタは、ベクタのサイズを小さくすることで、精度を大幅に犠牲にすることなく、待ち時間と計算コストを低減するのに役立ちます。さらに、バイナリ・ベクタは、メモリや処理能力が制限されているモバイル機器や組み込みシステムなどのリソースに制約のある環境でも有効です。バイナリ・ベクタを使用することで、このような制限のある環境でも、高い性能を維持しながら複雑なAI関数を実装することができます。</p>
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,33 +36,29 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Binary vectors are a method of encoding complex objects (like images, text, or audio) into fixed-length binary values. In Milvus, binary vectors are typically represented as bit arrays or byte arrays. For example, an 8-dimensional binary vector can be represented as <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code>.</p>
-<p>The diagram below shows how binary vectors represent the presence of keywords in text content. In this example, a 10-dimensional binary vector is used to represent two different texts (<strong>Text 1</strong> and <strong>Text 2</strong>), where each dimension corresponds to a word in the vocabulary: 1 indicates the presence of the word in the text, while 0 indicates its absence.</p>
+    </button></h2><p>バイナリベクタは、複雑なオブジェクト（画像、テキスト、音声など）を固定長のバイナリ値にエンコードする方法です。Milvusでは、バイナリベクタは通常ビット配列またはバイト配列として表現されます。例えば、8次元のバイナリベクトルは<code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code> のように表現できます。</p>
+<p>下の図は、バイナリ・ベクトルがテキスト・コンテンツ内のキーワードの存在をどのように表すかを示しています。この例では、10 次元のバイナリ・ベクトルを使用して 2 つの異なるテキスト<strong>（テキスト 1</strong>と<strong>テキスト 2</strong>）を表し、各次元が語彙内の単語に対応します。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
-    <span>Binary Vector</span>
-  </span>
-</p>
-<p>Binary vectors have the following characteristics:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   </span> <span class="img-wrapper"> <span>バイナリ・ベクトル</span> </span></p>
+<p>バイナリ・ベクトルには、以下の特徴があります：</p>
 <ul>
-<li><p><strong>Efficient Storage:</strong> Each dimension requires only 1 bit of storage, significantly reducing storage space.</p></li>
-<li><p><strong>Fast Computation:</strong> Similarity between vectors can be quickly calculated using bitwise operations like XOR.</p></li>
-<li><p><strong>Fixed Length:</strong> The length of the vector remains constant regardless of the original text length, making indexing and retrieval easier.</p></li>
-<li><p><strong>Simple and Intuitive:</strong> Directly reflects the presence of keywords, making it suitable for certain specialized retrieval tasks.</p></li>
+<li><p><strong>効率的なストレージ：</strong>各次元は1ビットのストレージしか必要としないため、ストレージスペースが大幅に削減される。</p></li>
+<li><p><strong>高速計算：</strong>ベクトル間の類似度は、XORのようなビット演算を使って素早く計算できます。</p></li>
+<li><p><strong>固定長：</strong>ベクトルの長さは、元のテキストの長さに関係なく一定であるため、インデックス作成と検索が容易になります。</p></li>
+<li><p><strong>シンプルで直感的：</strong>キーワードの存在を直接反映するため、特定の専門的な検索タスクに適している。</p></li>
 </ul>
-<p>Binary vectors can be generated through various methods. In text processing, predefined vocabularies can be used to set corresponding bits based on word presence. For image processing, perceptual hashing algorithms (like <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) can generate binary features of images. In machine learning applications, model outputs can be binarized to obtain binary vector representations.</p>
-<p>After binary vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.</p>
+<p>バイナリベクトルはさまざまな方法で生成できる。テキスト処理では、あらかじめ定義された語彙を使用して、単語の存在に基づいて対応するビットを設定することができる。画像処理では、（<a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHashの</a>ような）知覚ハッシュアルゴリズムによって画像のバイナリ特徴を生成することができる。機械学習アプリケーションでは、モデル出力を2値化して2値ベクトル表現を得ることができる。</p>
+<p>2値ベクトル化後、データはmilvusに保存され、管理とベクトル検索ができる。下図は基本的なプロセスを示しています。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
-    <span>Use Binary Vector</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   </span> <span class="img-wrapper"> <span>バイナリベクトルの使用</span> </span></p>
 <div class="alert note">
-<p>Although binary vectors excel in specific scenarios, they have limitations in their expressive capability, making it difficult to capture complex semantic relationships. Therefore, in real-world scenarios, binary vectors are often used alongside other vector types to balance efficiency and expressiveness. For more information, refer to <a href="/docs/dense-vector.md">Dense Vector</a> and <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
+<p>バイナリベクトルは特定のシナリオでは優れていますが、表現力に限界があり、複雑な意味的関係を捉えることが困難です。そのため、実世界のシナリオでは、効率と表現力のバランスをとるために、バイナリー・ベクターが他のベクター・タイプと一緒に使用されることがよくあります。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/sparse_vector.md">疎なベクトルを</a>参照してください。</p>
 </div>
-<h2 id="Use-binary-vectors" class="common-anchor-header">Use binary vectors<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
+<h2 id="Use-binary-vectors" class="common-anchor-header">バイナリ・ベクトルの使用<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,18 +73,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Add vector field</h3><p>To use binary vectors in Milvus, first define a vector field for storing binary vectors when creating a collection. This process includes:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">ベクトルフィールドの追加</h3><p>Milvusでバイナリベクトルを使用するには、まずコレクションを作成する際にバイナリベクトルを格納するためのベクトルフィールドを定義します。このプロセスには以下が含まれます：</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported binary vector data type, i.e., <code translate="no">BINARY_VECTOR</code>.</p></li>
-<li><p>Specifying the vector’s dimensions using the <code translate="no">dim</code> parameter. Note that <code translate="no">dim</code> must be a multiple of 8 as binary vectors must be converted into a byte array when inserting. Every 8 boolean values (0 or 1) will be packed into 1 byte. For example, if <code translate="no">dim=128</code>, a 16-byte array is required for insertion.</p></li>
+<li><p><code translate="no">datatype</code> をサポートされるバイナリベクタデータ型、すなわち<code translate="no">BINARY_VECTOR</code> に設定する。</p></li>
+<li><p><code translate="no">dim</code> パラメータを使用して、ベクトルの次元を指定する。バイナリベクタは挿入時にバイト配列に変換する必要があるため、<code translate="no">dim</code> は 8 の倍数でなければならないことに注意。8個のブーリアン値（0または1）はすべて1バイトにパックされる。例えば、<code translate="no">dim=128</code> の場合、挿入には16バイトの配列が必要となる。</p></li>
 </ol>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -205,15 +190,10 @@ schema.WithField(entity.NewField().
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, a vector field named <code translate="no">binary_vector</code> is added for storing binary vectors. The data type of this field is <code translate="no">BINARY_VECTOR</code>, with a dimension of 128.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Set index params for vector field</h3><p>To speed up searches, an index must be created for the binary vector field. Indexing can significantly enhance the retrieval efficiency of large-scale vector data.</p>
+<p>この例では、バイナリ・ベクトルを格納するために、<code translate="no">binary_vector</code> というベクトル・フィールドが追加されています。このフィールドのデータ型は<code translate="no">BINARY_VECTOR</code> で、次元は 128 です。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトル・フィールドにインデックス・パラメータを設定する</h3><p>検索を高速化するには、バイナリ・ベクタ・フィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトル・データの検索効率を大幅に向上させることができます。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -256,17 +236,12 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the example above, an index named <code translate="no">binary_vector_index</code> is created for the <code translate="no">binary_vector</code> field, using the <code translate="no">AUTOINDEX</code> index type. The <code translate="no">metric_type</code> is set to <code translate="no">HAMMING</code>, indicating that Hamming distance is used for similarity measurement.</p>
-<p>Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.</p>
-<p>Additionally, Milvus supports other similarity metrics for binary vectors. For more information, refer to <a href="/docs/metric.md">Metric Types</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Create collection</h3><p>Once the binary vector and index settings are complete, create a collection that contains binary vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_collection</code>.</p>
+<p>上の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、<code translate="no">binary_vector</code> フィールドに<code translate="no">binary_vector_index</code> という名前のインデックスが作成されている。<code translate="no">metric_type</code> は<code translate="no">HAMMING</code> に設定され、ハミング距離が類似性測定に使用されることを示している。</p>
+<p>Milvusはより良いベクトル検索を行うために様々なインデックスタイプを提供しています。AUTOINDEXはベクトル検索の学習曲線を滑らかにするために設計された特別なインデックスタイプです。様々なインデックスタイプを選択することができます。詳しくはxxxをご参照ください。</p>
+<p>さらに、Milvusはバイナリベクトルの他の類似度メトリックもサポートしています。詳細は<a href="/docs/ja/metric.md">Metric Typesを</a>参照してください。</p>
+<h3 id="Create-collection" class="common-anchor-header">コレクションの作成</h3><p>バイナリベクトルとインデックスの設定が完了したら、バイナリベクトルを含むコレクションを作成します。以下の例では、<code translate="no">create_collection</code> メソッドを使用して、<code translate="no">my_collection</code> という名前のコレクションを作成しています。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -317,15 +292,10 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>After creating the collection, use the <code translate="no">insert</code> method to add data containing binary vectors. Note that binary vectors should be provided in the form of a byte array, where each byte represents 8 boolean values.</p>
-<p>For example, for a 128-dimensional binary vector, a 16-byte array is required (since 128 bits ÷ 8 bits/byte = 16 bytes). Below is an example code for inserting data:</p>
+<h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>コレクションを作成した後、<code translate="no">insert</code> メソッドを使用して、バイナリ・ベク ターを含むデータを追加する。バイナリー・ベクターはバイト配列の形で提供する必要があり、各バイトは8つのブール値を表す。</p>
+<p>例えば、128次元のバイナリー・ベクターの場合、16バイトの配列が必要です（128ビット÷8ビット/バイト＝16バイトなので）。以下は、データを挿入するためのコード例である：</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_bool_list_to_bytes</span>(<span class="hljs-params">bool_list</span>):
     <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(bool_list) % <span class="hljs-number">8</span> != <span class="hljs-number">0</span>:
         <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;The length of a boolean list must be a multiple of 8&quot;</span>)
@@ -417,15 +387,10 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Perform similarity search</h3><p>Similarity search is one of the core features of Milvus, allowing you to quickly find data that is most similar to a query vector based on the distance between vectors. To perform a similarity search using binary vectors, prepare the query vector and search parameters, then call the <code translate="no">search</code> method.</p>
-<p>During search operations, binary vectors must also be provided in the form of a byte array. Ensure that the dimensionality of the query vector matches the dimension specified when defining <code translate="no">dim</code> and that every 8 boolean values are converted into 1 byte.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">類似検索の実行</h3><p>類似性検索はMilvusのコア機能の一つであり、ベクトル間の距離に基づいてクエリベクトルに最も類似したデータを素早く見つけることができます。バイナリベクトルを使って類似検索を行うには、クエリベクトルと検索パラメータを用意し、<code translate="no">search</code> メソッドを呼び出します。</p>
+<p>検索操作では、バイナリ・ベクトルもバイト配列の形式で提供する必要がある。クエリ・ベクタの次元が<code translate="no">dim</code> の定義時に指定した次元と一致し、8 個のブーリアン値が 1 バイトに変換されることを確認してください。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -523,4 +488,4 @@ curl --request POST \
     \&quot;outputFields\&quot;: [\&quot;pk\&quot;]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic ANN Search</a>.</p>
+<p>類似検索パラメータの詳細については、<a href="/docs/ja/single-vector-search.md">Basic ANN Searchを</a>参照のこと。</p>

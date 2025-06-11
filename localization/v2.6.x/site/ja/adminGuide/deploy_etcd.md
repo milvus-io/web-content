@@ -1,10 +1,10 @@
 ---
 id: deploy_etcd.md
-title: Configure Meta Storage with Docker Compose or Helm
+title: Docker ComposeまたはHelmでメタストレージを設定する
 related_key: 'S3, storage'
-summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm.
+summary: Docker Compose/Helmでmilvusのメタストレージを設定する方法をご紹介します。
 ---
-<h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Configure Meta Storage with Docker Compose or Helm<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
+<h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Docker ComposeまたはHelmでメタストレージを設定する<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus uses etcd for storing metadata. This topic introduces how to configure etcd with Docker Compose or Helm.</p>
-<h2 id="Configure-etcd-with-Docker-Compose" class="common-anchor-header">Configure etcd with Docker Compose<button data-href="#Configure-etcd-with-Docker-Compose" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusはメタデータの保存にetcdを使用します。このトピックでは、Docker ComposeまたはHelmでetcdを設定する方法を紹介します。</p>
+<h2 id="Configure-etcd-with-Docker-Compose" class="common-anchor-header">Docker Composeでetcdを設定する<button data-href="#Configure-etcd-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +35,7 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-etcd" class="common-anchor-header">1. Configure etcd</h3><p>To configure etcd with Docker Compose, provide your values for the <code translate="no">etcd</code> section in the <code translate="no">milvus.yaml</code> file on the milvus/configs path.</p>
+    </button></h2><h3 id="1-Configure-etcd" class="common-anchor-header">1.etcd の設定</h3><p>Docker Composeでetcdを設定するには、milvus/configパスの<code translate="no">milvus.yaml</code> ファイルの<code translate="no">etcd</code> セクションに値を指定します。</p>
 <pre><code translate="no"><span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">endpoints:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">localhost:2379</span>
@@ -59,12 +59,12 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-attr">dir:</span> <span class="hljs-string">default.etcd</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>See <a href="/docs/configure_etcd.md">etcd-related Configurations</a> for more information.</p>
-<h3 id="2-Run-Milvus" class="common-anchor-header">2. Run Milvus</h3><p>Run the following command to start Milvus that uses the etcd configurations.</p>
+<p>詳細は<a href="/docs/ja/configure_etcd.md">etcd関連の設定を</a>参照してください。</p>
+<h3 id="2-Run-Milvus" class="common-anchor-header">2.Milvusの起動</h3><p>以下のコマンドを実行し、etcdの設定を使用するMilvusを起動します。</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">Configurations only take effect after Milvus starts. See <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Start Milvus</a> for more information.</div>
-<h2 id="Configure-etcd-on-K8s" class="common-anchor-header">Configure etcd on K8s<button data-href="#Configure-etcd-on-K8s" class="anchor-icon" translate="no">
+<div class="alert note">設定はMilvusの起動後にのみ有効になります。詳細は<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Milvusの起動を</a>参照してください。</div>
+<h2 id="Configure-etcd-on-K8s" class="common-anchor-header">K8s上のetcdの設定<button data-href="#Configure-etcd-on-K8s" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,26 +79,26 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For Milvus clusters on K8s, you can configure etcd in the same command that starts Milvus. Alternatively, you can configure etcd using the <code translate="no">values.yml</code> file on the /charts/milvus path in the <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> repository before you start Milvus.</p>
-<p>The following table lists the keys for configuring etcd in the YAML file.</p>
+    </button></h2><p>K8s上のMilvusクラスタでは、Milvusの起動と同じコマンドでetcdを設定することができます。あるいは、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使用してetcdを設定することもできます。</p>
+<p>次の表は、YAML ファイルで etcd を設定するためのキーの一覧です。</p>
 <table>
 <thead>
-<tr><th>Key</th><th>Description</th><th>Value</th></tr>
+<tr><th>キー</th><th>説明</th><th>値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">etcd.enabled</code></td><td>Enables or disables etcd.</td><td><code translate="no">true</code>/<code translate="no">false</code></td></tr>
-<tr><td><code translate="no">externalEtcd.enabled</code></td><td>Enables or disables external etcd.</td><td><code translate="no">true</code>/<code translate="no">false</code></td></tr>
-<tr><td><code translate="no">externalEtcd.endpoints</code></td><td>The endpoint to access etcd.</td><td></td></tr>
+<tr><td><code translate="no">etcd.enabled</code></td><td>etcd を有効または無効にします。</td><td><code translate="no">true</code>/<code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalEtcd.enabled</code></td><td>外部 etcd を有効または無効にする。</td><td><code translate="no">true</code>/<code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalEtcd.endpoints</code></td><td>etcd にアクセスするエンドポイント。</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">Using the YAML file</h3><ol>
-<li>Configure the <code translate="no">etcd</code> section using your values in the <code translate="no">values.yaml</code> file.</li>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用</h3><ol>
+<li><code translate="no">values.yaml</code> ファイルの値を使用して<code translate="no">etcd</code> セクションを設定する。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Configure the <code translate="no">externaletcd</code> section using your values in the <code translate="no">values.yaml</code> file.</li>
+<li><code translate="no">values.yaml</code> ファイルの値を使用して<code translate="no">externaletcd</code> セクションを設定します。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">externalEtcd:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
@@ -107,14 +107,14 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
     <span class="hljs-bullet">-</span> <span class="hljs-string">&lt;your_etcd_IP&gt;:2379</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li>After configuring the preceding sections and saving the <code translate="no">values.yaml</code> file, run the following command to install Milvus that uses the etcd configurations.</li>
+<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、以下のコマンドを実行し、etcd の設定を使用する Milvus をインストールします。</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-a-command" class="common-anchor-header">Using a command</h3><p>To install Milvus and configure etcd, run the following command using your values.</p>
+<h3 id="Using-a-command" class="common-anchor-header">コマンドの使用</h3><p>Milvusをインストールし、etcdを設定するには、以下のコマンドを実行します。</p>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus --set cluster.enabled=true --set etcd.enabled=false --set externaletcd.enabled=true --set externalEtcd.endpoints={&lt;your_etcd_IP&gt;:2379}
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -129,8 +129,8 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Learn how to configure other Milvus dependencies with Docker Compose or Helm:</p>
+    </button></h2><p>Docker ComposeまたはHelmを使用してMilvusの他の依存関係を設定する方法について説明します：</p>
 <ul>
-<li><a href="/docs/deploy_s3.md">Configure Object Storage with Docker Compose or Helm</a></li>
-<li><a href="/docs/deploy_pulsar.md">Configure Message Storage with Docker Compose or Helm</a></li>
+<li><a href="/docs/ja/deploy_s3.md">Docker ComposeまたはHelmでオブジェクトストレージを設定する</a></li>
+<li><a href="/docs/ja/deploy_pulsar.md">Docker ComposeまたはHelmでメッセージストレージを設定する</a></li>
 </ul>

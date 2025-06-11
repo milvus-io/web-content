@@ -1,12 +1,11 @@
 ---
 id: use-json-fields.md
-title: JSON Field
+title: JSON 필드
 summary: >-
-  A JSON field is a scalar field that stores additional information along with
-  vector embeddings, in key-value pairs. Here's an example of how data is stored
-  in JSON format:
+  JSON 필드는 벡터 임베딩과 함께 추가 정보를 키-값 쌍으로 저장하는 스칼라 필드입니다. 다음은 데이터가 JSON 형식으로 저장되는 방법의
+  예입니다:
 ---
-<h1 id="JSON-Field" class="common-anchor-header">JSON Field<button data-href="#JSON-Field" class="anchor-icon" translate="no">
+<h1 id="JSON-Field" class="common-anchor-header">JSON 필드<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> field is a scalar field that stores additional information along with vector embeddings, in key-value pairs. Here’s an example of how data is stored in JSON format:</p>
+    </button></h1><p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a> 필드는 벡터 임베딩과 함께 추가 정보를 키-값 쌍으로 저장하는 스칼라 필드입니다. 다음은 데이터가 JSON 형식으로 저장되는 방법의 예입니다:</p>
 <pre><code translate="no" class="language-python">{
   <span class="hljs-string">&quot;metadata&quot;</span>: {
     <span class="hljs-string">&quot;product_info&quot;</span>: {
@@ -34,7 +33,7 @@ summary: >-
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">제한<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,19 +49,19 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Field Size</strong>: JSON fields are limited to 65,536 bytes in size.</p></li>
-<li><p><strong>Nested Dictionaries</strong>: Any nested dictionaries within JSON field values are treated as plain strings for storage.</p></li>
-<li><p><strong>Default Values</strong>: JSON fields do not support default values. However, you can set the <code translate="no">nullable</code> attribute to <code translate="no">True</code> to allow null values. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p></li>
-<li><p><strong>Type Matching</strong>: If a JSON field’s key value is an integer or float, it can only be compared (via expression filters) with another numeric key of the same type.</p></li>
-<li><p><strong>Naming</strong>: When naming JSON keys, it is recommended to use only letters, numbers, and underscores. Using other characters may cause issues when filtering or searching.</p></li>
-<li><p><strong>String Handling</strong>: Milvus stores string values in JSON fields as entered, without semantic conversion. For example:</p>
+<li><p><strong>필드 크기</strong>: JSON 필드의 크기는 65,536바이트로 제한됩니다.</p></li>
+<li><p><strong>중첩된 사전</strong>: 중첩 사전: JSON 필드 값 내에 중첩된 사전은 저장 시 일반 문자열로 취급됩니다.</p></li>
+<li><p><strong>기본값</strong>: JSON 필드는 기본값을 지원하지 않습니다. 그러나 <code translate="no">nullable</code> 속성을 <code translate="no">True</code> 으로 설정하여 null 값을 허용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p></li>
+<li><p><strong>유형 일치</strong>: JSON 필드의 키 값이 정수 또는 실수인 경우 표현식 필터를 통해서만 같은 유형의 다른 숫자 키와 비교할 수 있습니다.</p></li>
+<li><p><strong>이름 지정</strong>: JSON 키의 이름을 지정할 때는 문자, 숫자, 밑줄만 사용하는 것이 좋습니다. 다른 문자를 사용하면 필터링이나 검색 시 문제가 발생할 수 있습니다.</p></li>
+<li><p><strong>문자열 처리</strong>: 밀버스는 문자열 값을 의미 변환 없이 입력한 그대로 JSON 필드에 저장합니다. 예를 들어</p>
 <ul>
-<li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, and <code translate="no">&quot;a\\&quot;b&quot;</code> are stored exactly as they are.</p></li>
-<li><p><code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid.</p></li>
+<li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, <code translate="no">&quot;a\\&quot;b&quot;</code> 는 그대로 저장됩니다.</p></li>
+<li><p><code translate="no">'a'b'</code> 와 <code translate="no">&quot;a&quot;b&quot;</code> 는 유효하지 않은 것으로 간주됩니다.</p></li>
 </ul></li>
-<li><p><strong>JSON Indexing</strong>: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to <a href="/docs/use-json-fields.md#Considerations-on-JSON-indexing">Considerations on JSON indexing</a>.</p></li>
+<li><p><strong>JSON 인덱싱</strong>: JSON 필드를 색인할 때 JSON 필드에 하나 이상의 경로를 지정하여 필터링을 가속화할 수 있습니다. 경로가 추가될 때마다 인덱싱 오버헤드가 증가하므로 인덱싱 전략을 신중하게 계획하세요. JSON 필드 인덱싱에 대한 자세한 고려 <a href="/docs/ko/use-json-fields.md#Considerations-on-JSON-indexing">사항은 JSON 인덱싱에 대한 고려 사항을</a> 참조하세요.</p></li>
 </ul>
-<h2 id="Add-JSON-field" class="common-anchor-header">Add JSON field<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Add-JSON-field" class="common-anchor-header">JSON 필드 추가<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,14 +76,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To add this JSON field <code translate="no">metadata</code> to your collection schema, use <code translate="no">DataType.JSON</code>. The example below defines a JSON field <code translate="no">metadata</code> that allows null values:</p>
+    </button></h2><p>컬렉션 스키마에 이 JSON 필드 <code translate="no">metadata</code> 를 추가하려면 <code translate="no">DataType.JSON</code> 을 사용합니다. 아래 예제에서는 null 값을 허용하는 JSON 필드 <code translate="no">metadata</code> 를 정의합니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -224,11 +218,11 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>Set <code translate="no">enable_dynamic_fields=True</code> if you need to insert additional, undefined fields in the future.</p></li>
-<li><p>Use <code translate="no">nullable=True</code> to allow missing or null JSON objects.</p></li>
+<li><p>향후 정의되지 않은 필드를 추가로 삽입해야 하는 경우 <code translate="no">enable_dynamic_fields=True</code> 을 설정하세요.</p></li>
+<li><p>누락되거나 null인 JSON 객체를 허용하려면 <code translate="no">nullable=True</code> 을 사용합니다.</p></li>
 </ul>
 </div>
-<h2 id="Set-index-params" class="common-anchor-header">Set index params<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">인덱스 매개변수 설정<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -243,20 +237,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Indexing helps Milvus quickly filter or search across large volumes of data. In Milvus, indexing is:</p>
+    </button></h2><p>인덱싱은 Milvus가 대량의 데이터를 빠르게 필터링하거나 검색하는 데 도움이 됩니다. Milvus에서 인덱싱은</p>
 <ul>
-<li><p><strong>Mandatory</strong> for vector fields (to efficiently run similarity searches).</p></li>
-<li><p><strong>Optional</strong> for JSON fields (to speed up scalar filters on specific JSON paths).</p></li>
+<li><p>벡터 필드의 경우<strong>필수</strong> (유사도 검색을 효율적으로 실행하기 위해).</p></li>
+<li><p>JSON 필드의 경우<strong>선택 사항</strong> (특정 JSON 경로에서 스칼라 필터의 속도를 높이기 위해).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">Index a JSON field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>By default, JSON fields are not indexed, so any filter queries (e.g., <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) must scan all rows. If you want to accelerate queries on specific paths within the <code translate="no">metadata</code> field, you can create an <strong>inverted index</strong> on each path you care about.</p>
-<p>In this example, we will create two indexes on different paths inside the JSON field <code translate="no">metadata</code>:</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">JSON 필드 색인화<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>기본적으로 JSON 필드는 색인화되지 않으므로 모든 필터 쿼리(예: <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>)는 모든 행을 스캔해야 합니다. <code translate="no">metadata</code> 필드 내의 특정 경로에 대한 쿼리를 가속화하려면 관심 있는 각 경로에 <strong>반전된 인덱스를</strong> 만들 수 있습니다.</p>
+<p>이 예제에서는 <code translate="no">metadata</code> 필드 내의 서로 다른 경로에 두 개의 인덱스를 생성합니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string</span>
@@ -373,71 +362,64 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Example Value</p></th>
+     <th><p>파라미터</p></th>
+     <th><p>설명</p></th>
+     <th><p>예제 값</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>Name of the JSON field in your schema.</p></td>
+     <td><p>스키마에 있는 JSON 필드의 이름입니다.</p></td>
      <td><p><code translate="no">"metadata"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Index type to create; currently only <code translate="no">INVERTED</code> is supported for JSON path indexing.</p></td>
+     <td><p>생성할 인덱스 유형(현재 JSON 경로 인덱싱에는 <code translate="no">INVERTED</code> 만 지원됨).</p></td>
      <td><p><code translate="no">"INVERTED"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(Optional) A custom index name. Specify different names if you create multiple indexes on the same JSON field.</p></td>
+     <td><p>(선택 사항) 사용자 정의 인덱스 이름. 동일한 JSON 필드에 여러 인덱스를 생성하는 경우 다른 이름을 지정합니다.</p></td>
      <td><p><code translate="no">"json_index_1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code translate="no">metadata["product_info"]["category"]</code> or <code translate="no">metadata["tags"][0]</code>).
- If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
+     <td><p>인덱싱할 JSON 경로를 지정합니다. 중첩된 키, 배열 위치 또는 둘 다(예: <code translate="no">metadata["product_info"]["category"]</code> 또는 <code translate="no">metadata["tags"][0]</code>)를 대상으로 할 수 있습니다. 경로가 누락되거나 특정 행에 대한 배열 요소가 존재하지 않으면 해당 행은 인덱싱 중에 건너뛰고 오류가 발생되지 않습니다.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
+     <td><p>인덱스를 생성할 때 Milvus가 추출된 JSON 값을 캐스팅할 데이터 유형입니다. 유효한 값</p>
 <ul>
-<li><code translate="no">"bool"</code> or <code translate="no">"BOOL"</code></li>
-<li><code translate="no">"double"</code> or <code translate="no">"DOUBLE"</code></li>
-<li><code translate="no">"varchar"</code> or <code translate="no">"VARCHAR"</code>
-<strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If type casting fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</li>
+<li><code translate="no">"bool"</code> 또는 <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> 또는 <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> 또는 <code translate="no">"VARCHAR"</code><strong>참고</strong>: 정수 값의 경우, Milvus는 내부적으로 인덱스에 double을 사용합니다. 2^53 이상의 큰 정수는 정밀도가 떨어집니다. 유형 불일치로 인해 유형 캐스팅에 실패하면 오류가 발생하지 않으며 해당 행의 값은 색인되지 않습니다.</li>
 </ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
-<h4 id="Considerations-on-JSON-indexing" class="common-anchor-header">Considerations on JSON indexing</h4><ul>
-<li><p><strong>Filtering logic</strong>:</p>
+<h4 id="Considerations-on-JSON-indexing" class="common-anchor-header">JSON 인덱싱에 대한 고려 사항</h4><ul>
+<li><p><strong>필터링 로직</strong>:</p>
 <ul>
-<li><p>If you <strong>create a double-type index</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), only numeric-type filter conditions can use the index. If the filter compares a double index to a non-numeric condition, Milvus falls back to brute force search.</p></li>
-<li><p>If you <strong>create a varchar-type index</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), only string-type filter conditions can use the index. Otherwise, Milvus falls back to brute force.</p></li>
-<li><p><strong>Boolean</strong> indexing behaves similarly to varchar-type.</p></li>
+<li><p><strong>이중 유형 인덱스(</strong><code translate="no">json_cast_type=&quot;double&quot;</code><strong>)를 생성하는</strong> 경우 숫자 유형 필터 조건만 인덱스를 사용할 수 있습니다. 필터가 이중 인덱스를 숫자가 아닌 조건과 비교하는 경우, Milvus는 무차별 대입 검색으로 돌아갑니다.</p></li>
+<li><p><strong>바차르 타입 인덱스(</strong><code translate="no">json_cast_type=&quot;varchar&quot;</code><strong>)를 생성하는</strong> 경우 문자열 타입 필터 조건만 인덱스를 사용할 수 있습니다. 그렇지 않으면 Milvus는 무차별 대입 검색으로 돌아갑니다.</p></li>
+<li><p><strong>부울</strong> 인덱싱은 바차르 타입과 유사하게 작동합니다.</p></li>
 </ul></li>
-<li><p><strong>Term expressions</strong>:</p>
+<li><p><strong>용어 표현식</strong>:</p>
 <ul>
-<li>You can use <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. However, the index works only for scalar values stored under that path. If <code translate="no">json[&quot;field&quot;]</code> is an array, the query falls back to brute force (array-type indexing is not yet supported).</li>
+<li><code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code> 을 사용할 수 있습니다. 그러나 인덱스는 해당 경로 아래에 저장된 스칼라 값에 대해서만 작동합니다. <code translate="no">json[&quot;field&quot;]</code> 이 배열인 경우 쿼리는 무차별 대입으로 돌아갑니다(배열형 인덱싱은 아직 지원되지 않음).</li>
 </ul></li>
-<li><p><strong>Numeric precision</strong>:</p>
+<li><p><strong>숫자 정밀도</strong>:</p>
 <ul>
-<li>Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>53</mn></msup></mrow><annotation encoding="application/x-tex">2^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, it loses precision, and queries on those out-of-range values may not match exactly.</li>
+<li>내부적으로 Milvus는 모든 숫자 필드를 이중으로 색인합니다. 숫자 값이 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53을</span></span></span></span></span></span></span></span></span></span></span></span> 초과하면 정밀도가 떨어지며, 범위를 벗어난 값에 대한 쿼리는 정확히 일치하지 않을 수 있습니다.</li>
 </ul></li>
-<li><p><strong>Data integrity</strong>:</p>
+<li><p><strong>데이터 무결성</strong>:</p>
 <ul>
-<li>Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key <code translate="no">&quot;k&quot;</code> while others store a number), some rows will not be indexed.</li>
+<li>Milvus는 사용자가 지정한 형 변환을 넘어서는 JSON 키를 구문 분석하거나 변환하지 않습니다. 소스 데이터가 일관성이 없는 경우(예: 일부 행은 <code translate="no">&quot;k&quot;</code> 키에 대해 문자열을 저장하고 다른 행은 숫자를 저장하는 경우), 일부 행은 색인되지 않습니다.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">Index a vector field</h3><p>The following example creates an index on the vector field <code translate="no">embedding</code>, using the <code translate="no">AUTOINDEX</code> index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to <a href="/docs/index-explained.md">Index Explained</a>.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">벡터 필드 색인 생성</h3><p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 에 인덱스를 생성하는 예입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
@@ -478,7 +460,7 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Create collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -493,14 +475,9 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the schema and index are defined, create a collection that includes the JSON field.</p>
+    </button></h2><p>스키마와 인덱스가 정의되면 JSON 필드를 포함하는 컬렉션을 만듭니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -537,7 +514,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -552,14 +529,9 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, insert entities that match the schema.</p>
+    </button></h2><p>컬렉션을 생성한 후 스키마와 일치하는 엔티티를 삽입합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {
@@ -723,7 +695,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">Query with filter expressions<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">필터 표현식을 사용하여 쿼리<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -738,18 +710,13 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After inserting entities, use the <code translate="no">query</code> method to retrieve entities that match the specified filter expressions.</p>
+    </button></h2><p>엔티티를 삽입한 후 <code translate="no">query</code> 메서드를 사용하여 지정된 필터 표현식과 일치하는 엔티티를 검색합니다.</p>
 <div class="alert note">
-<p>For JSON fields that allow null values, the field will be treated as null if the entire JSON object is missing or set to <code translate="no">None</code>. For more information, refer to <a href="/docs/basic-operators.md#JSON-Fields-with-Null-Values">JSON Fields with Null Values</a>.</p>
+<p>널 값을 허용하는 JSON 필드의 경우 전체 JSON 객체가 없거나 <code translate="no">None</code> 로 설정된 경우 필드가 널로 처리됩니다. 자세한 내용은 <a href="/docs/ko/basic-operators.md#JSON-Fields-with-Null-Values">Null 값이 있는 JSON 필드를</a> 참조하세요.</p>
 </div>
-<p>To retrieve entities where <code translate="no">metadata</code> is not null:</p>
+<p><code translate="no">metadata</code> 가 null이 아닌 엔티티를 검색하려면 다음과 같이 하세요:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query to filter out records with null metadata</span>
 
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata is not null&#x27;</span>
@@ -821,14 +788,9 @@ fmt.Println(<span class="hljs-string">&quot;metadata&quot;</span>, rs.GetColumn(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1},{&quot;metadata&quot;:&quot;&quot;,&quot;pk&quot;:2},{&quot;metadata&quot;:&quot;&quot;,&quot;pk&quot;:3},{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: null, \&quot;brand\&quot;: \&quot;BrandB\&quot;}, \&quot;price\&quot;: 59.99, \&quot;in_stock\&quot;: null}&quot;,&quot;pk&quot;:4}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where <code translate="no">metadata[&quot;product_info&quot;][&quot;category&quot;]</code> is <code translate="no">&quot;electronics&quot;</code>:</p>
+<p><code translate="no">metadata[&quot;product_info&quot;][&quot;category&quot;]</code> 이 <code translate="no">&quot;electronics&quot;</code> 인 엔티티를 검색하려면 다음과 같이 하세요:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
 
 res = client.query(
@@ -901,7 +863,7 @@ curl --request POST \
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Vector search with filter expressions<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">필터 표현식을 사용한 벡터 검색<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -916,14 +878,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:</p>
+    </button></h2><p>기본 스칼라 필드 필터링 외에도 벡터 유사도 검색을 스칼라 필드 필터와 결합할 수 있습니다. 예를 들어, 다음 코드는 벡터 검색에 스칼라 필드 필터를 추가하는 방법을 보여줍니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>
 
 res = client.search(
@@ -1028,4 +985,4 @@ curl --request POST \
 
 <span class="hljs-comment">##{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Additionally, Milvus supports advanced JSON filtering operators such as <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, and <code translate="no">JSON_CONTAINS_ANY</code>, which can further enhance query capabilities. For more details, refer to <a href="/docs/json-operators.md">JSON Operators</a>.</p>
+<p>또한 Milvus는 <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, <code translate="no">JSON_CONTAINS_ANY</code> 와 같은 고급 JSON 필터링 연산자를 지원하여 쿼리 기능을 더욱 향상시킬 수 있습니다. 자세한 내용은 <a href="/docs/ko/json-operators.md">JSON 연산자를</a> 참조하세요.</p>

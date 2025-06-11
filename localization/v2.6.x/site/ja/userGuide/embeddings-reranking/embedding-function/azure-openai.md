@@ -62,7 +62,7 @@ beta: Milvus 2.6.x
      <td><p>レガシーパイプラインや後方互換性を必要とするシナリオに適した前世代モデル。</p></td>
    </tr>
 </table>
-<p>第三世代の埋め込みモデル<strong>（text-embedding-3</strong>）は、<code translate="no">dim</code> パラメータによって埋め込みサイズを小さくすることができます。一般的に、埋め込みサイズが大きいと、計算、メモリ、ストレージの観点からコストが高くなります。次元数を調整できることで、全体的なコストとパフォーマンスをよりコントロールできるようになります。各モデルの詳細については、<a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard,standard-chat-completions#embeddings">エンベッディングを</a>参照してください。</p>
+<p>第三世代の埋め込みモデル<strong>（text-embedding-3</strong>）は、<code translate="no">dim</code> パラメータによって埋め込みサイズを小さくすることができます。一般的に、埋め込みサイズが大きいと、計算、メモリ、ストレージの観点からコストが高くなります。次元数を調整できることで、全体的なコストとパフォーマンスをよりコントロールできるようになります。各モデルの詳細については、<a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard,standard-chat-completions#embeddings">埋め込みを</a>参照してください。</p>
 <h2 id="Configure-credentials" class="common-anchor-header">認証情報の構成<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +80,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Milvusはエンベッディングをリクエストする前に、Azure OpenAI APIキーを知っている必要があります。Milvusはクレデンシャルを設定するために2つの方法を提供します：</p>
 <ul>
-<li><p><strong>設定ファイル（推奨）：</strong> <code translate="no">milvus.yaml</code> にAPIキーを保存し、再起動とノードが自動的にAPIキーを取得するようにします。</p></li>
+<li><p><strong>設定ファイル（推奨）：</strong> <code translate="no">milvus.yaml</code> にAPIキーを保存し、再起動やノードが自動的にAPIキーを取得するようにします。</p></li>
 <li><p><strong>環境変数：</strong>Docker Composeに最適です。</p></li>
 </ul>
 <p>コンフィギュレーション・ファイルはベアメタルやVMでメンテナンスしやすく、env-varルートはコンテナのワークフローに適している。</p>

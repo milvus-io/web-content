@@ -39,7 +39,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>Functionモジュールが埋め込む入力フィールドは常に値を含んでいなければなりません。</p></li>
-<li><p>Functionモジュールはコレクションスキーマで明示的に定義されたフィールドのみを処理します。</p></li>
+<li><p>Functionモジュールは、コレクションスキーマで明示的に定義されたフィールドのみを処理します。</p></li>
 <li><p>埋め込む入力フィールドは<code translate="no">VARCHAR</code> 型でなければなりません。</p></li>
 <li><p>Functionモジュールは入力フィールドを次のように埋め込むことができる：</p>
 <ul>
@@ -407,7 +407,7 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">ステップ 5: データの挿入</h3><p>コレクションとインデックスを設定したら、生データを挿入する準備ができました。このプロセスでは、生のテキストを提供するだけでよい。先に定義したFunctionモジュールが、各テキスト入力に対応するスパースベクトルを自動的に生成します。</p>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">ステップ 5: データの挿入</h3><p>コレクションとインデックスを設定したら、生データを挿入する準備が整いました。このプロセスでは、生のテキストを提供するだけでよい。先に定義したFunctionモジュールが、各テキスト入力に対応するスパースベクトルを自動的に生成します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},

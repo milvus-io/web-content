@@ -2,9 +2,8 @@
 id: rerankers-bge.md
 order: 2
 summary: >-
-  Milvus supports BGE reranker models through the `BGERerankFunction` class.
-  This functionality allows you to score the relevance of query-document pairs
-  effectively.
+  Milvusは `BGERerankFunction`
+  クラスを通してBGEリランカーモデルをサポートしている。この機能により、クエリとドキュメントのペアの関連性を効果的にスコアリングすることができる。
 title: BGE
 ---
 <h1 id="BGE" class="common-anchor-header">BGE<button data-href="#BGE" class="anchor-icon" translate="no">
@@ -22,12 +21,12 @@ title: BGE
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker">BGE reranker models</a> through the <code translate="no">BGERerankFunction</code> class. This functionality allows you to score the relevance of query-document pairs effectively.</p>
-<p>To use this feature, install the necessary dependencies:</p>
+    </button></h1><p>Milvusは<code translate="no">BGERerankFunction</code> クラスを通して<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker">BGEリランカーモデルを</a>サポートしています。この機能により、クエリとドキュメントのペアの関連性を効果的にスコアリングすることができます。</p>
+<p>この機能を使用するには、必要な依存関係をインストールします：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, instantiate the <code translate="no">BGERerankFunction</code>:</p>
+<p>次に<code translate="no">BGERerankFunction</code> をインスタンス化します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> BGERerankFunction
 
 <span class="hljs-comment"># Define the rerank function</span>
@@ -36,14 +35,14 @@ bge_rf = BGERerankFunction(
     device=<span class="hljs-string">&quot;cpu&quot;</span> <span class="hljs-comment"># Specify the device to use, e.g., &#x27;cpu&#x27; or &#x27;cuda:0&#x27;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Parameters</strong></p>
+<p><strong>パラメータ</strong></p>
 <ul>
-<li><p><code translate="no">model_name</code> (<em>string</em>)</p>
-<p>The name of the model to use. You can specify any of the available BGE reranker model names, for example, <code translate="no">BAAI/bge-reranker-base</code>, <code translate="no">BAAI/bge-reranker-large</code>, etc. If you leave this parameter unspecified, <code translate="no">BAAI/bge-reranker-v2-m3</code> will be used. For a list of available models, refer to <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker#model-list">Model List</a>.</p></li>
-<li><p><code translate="no">device</code> (<em>string</em>)</p>
-<p>Optional. The device to use for running the model. If not specified, the model will be run on the CPU. You can specify <code translate="no">cpu</code> for the CPU and <code translate="no">cuda:n</code> for the nth GPU device.</p></li>
+<li><p><code translate="no">model_name</code> <em>(文字列</em>)</p>
+<p>使用するモデルの名前。利用可能なBGEリランカーのモデル名、例えば<code translate="no">BAAI/bge-reranker-base</code> 、<code translate="no">BAAI/bge-reranker-large</code> 、などを指定できます。このパラメータを未指定のままにすると、<code translate="no">BAAI/bge-reranker-v2-m3</code> が使用されます。利用可能なモデルのリストについては、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker#model-list">モデルリストを</a>参照してください。</p></li>
+<li><p><code translate="no">device</code> <em>(文字列</em>)</p>
+<p>オプション。モデルの実行に使用するデバイス。指定しない場合、モデルはCPU上で実行されます。CPUには<code translate="no">cpu</code> 、n番目のGPUデバイスには<code translate="no">cuda:n</code> を指定できます。</p></li>
 </ul>
-<p>Then, use the following code to rerank documents based on the query:</p>
+<p>次に、以下のコードを使用して、クエリに基づいて文書を再ランクします：</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [
@@ -64,7 +63,7 @@ results = bge_rf(
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Score: <span class="hljs-subst">{result.score:<span class="hljs-number">.6</span>f}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Text: <span class="hljs-subst">{result.text}</span>\n&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>期待される出力は以下のようなものです：</p>
 <pre><code translate="no" class="language-python">Index: <span class="hljs-number">1</span>
 Score: <span class="hljs-number">0.991162</span>
 Text: The Dartmouth Conference <span class="hljs-keyword">in</span> <span class="hljs-number">1956</span> <span class="hljs-keyword">is</span> considered the birthplace of artificial intelligence <span class="hljs-keyword">as</span> a field; here, John McCarthy <span class="hljs-keyword">and</span> others coined the term <span class="hljs-string">&#x27;artificial intelligence&#x27;</span> <span class="hljs-keyword">and</span> laid out its basic goals.

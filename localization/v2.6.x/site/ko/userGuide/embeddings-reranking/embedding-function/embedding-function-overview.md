@@ -6,7 +6,7 @@ summary: >-
   자동으로 호출하여 원시 텍스트 데이터를 벡터 임베딩으로 변환할 수 있습니다. 함수 모듈을 사용하면 더 이상 임베딩 API와 수동으로
   인터페이스할 필요가 없습니다. Milvus는 제공자에게 요청을 보내고, 임베딩을 수신하고, 컬렉션에 저장하는 전체 프로세스를 처리합니다.
   시맨틱 검색의 경우, 쿼리 벡터가 아닌 원시 쿼리 데이터만 제공하면 됩니다. Milvus는 수집에 사용한 것과 동일한 모델로 쿼리 벡터를
-  생성하고 저장된 벡터와 비교한 후 가장 연관성이 높은 결과를 반환합니다.
+  생성하고 저장된 벡터와 비교하여 가장 연관성이 높은 결과를 반환합니다.
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">임베딩 함수 개요<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">

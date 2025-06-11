@@ -50,7 +50,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw-sq.png" alt="Hnsw Sq" class="doc-image" id="hnsw-sq" />
    </span> <span class="img-wrapper"> <span>Hnsw Sq</span> </span></p>
 <p>이 정밀도 감소는 데이터의 필수 구조를 유지하면서 메모리 사용량을 크게 줄이고 계산 속도를 높입니다.</p>
-<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ는 HNSW와 SQ의 강점을 결합하여 효율적인 근사 최인접 이웃 검색을 가능하게 합니다. 프로세스는 다음과 같이 작동합니다:</p>
+<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ는 HNSW와 SQ의 강점을 결합하여 효율적인 근사 근사 이웃 검색을 가능하게 합니다. 프로세스는 다음과 같이 작동합니다:</p>
 <ol>
 <li><p><strong>데이터 압축:</strong> SQ는 <code translate="no">sq_type</code> (예: SQ6 또는 SQ8)를 사용하여 벡터를 압축하여 메모리 사용량을 줄입니다. 이 압축은 정밀도를 낮출 수 있지만 시스템에서 더 큰 데이터 세트를 처리할 수 있게 해줍니다.</p></li>
 <li><p><strong>그래프 구성:</strong> 압축된 벡터는 HNSW 그래프를 구축하는 데 사용됩니다. 데이터가 압축되기 때문에 결과 그래프의 크기가 작아지고 검색 속도가 빨라집니다.</p></li>

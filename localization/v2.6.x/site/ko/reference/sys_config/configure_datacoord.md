@@ -2,9 +2,9 @@
 id: configure_datacoord.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure dataCoord for Milvus.
+summary: Milvus용 데이터코드를 구성하는 방법을 알아보세요.
 ---
-<h1 id="dataCoord-related-Configurations" class="common-anchor-header">dataCoord-related Configurations<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataCoord-related-Configurations" class="common-anchor-header">데이터코드 관련 구성<button data-href="#dataCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.channel.watchTimeoutInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Timeout on watching channels (in seconds). Datanode tickler update watch progress will reset timeout timer.      </td>
+      <td>        채널 시청 시간 제한(초)입니다. 데이터노드 티클러 업데이트 시청 진행 상황이 타임아웃 타이머를 초기화합니다.      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -66,13 +66,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.channel.legacyVersionWithoutRPCWatch">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Datanodes <= this version are considered as legacy nodes, which doesn't have rpc based watch(). This is only used during rolling upgrade where legacy nodes won't get new channels      </td>
+      <td>        데이터노드 &lt;= 이 버전은 레거시 노드로 간주되며, rpc 기반 watch()가 없습니다. 이는 레거시 노드가 새 채널을 얻지 못하는 롤링 업그레이드 중에만 사용됩니다.      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.channel.balanceSilentDuration">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The duration after which the channel manager start background channel balancing      </td>
+      <td>        채널 매니저가 백그라운드 채널 밸런싱을 시작하는 기간입니다.      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -124,13 +124,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.channel.balanceInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval with which the channel manager check dml channel balance status      </td>
+      <td>        채널 매니저가 dml 채널 밸런스 상태를 확인하는 간격입니다.      </td>
       <td>360</td>
     </tr>
   </tbody>
@@ -153,13 +153,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.channel.checkInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval in seconds with which the channel manager advances channel states      </td>
+      <td>        채널 관리자가 채널 상태를 진행하는 간격(초)입니다.      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.channel.notifyChannelOperationTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Timeout notifing channel operations (in seconds).      </td>
+      <td>        채널 작업을 알리는 시간 초과(초)입니다.      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -211,13 +211,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.maxSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of a segment, unit: MB. datacoord.segment.maxSize and datacoord.segment.sealProportion together determine if a segment can be sealed.      </td>
+      <td>        세그먼트의 최대 크기, 단위: 데이터코드 세그먼트 최대 크기와 데이터코드 세그먼트 봉인 비율에 따라 세그먼트 봉인 가능 여부가 결정됩니다.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -240,13 +240,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.diskSegmentMaxSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximun size of a segment in MB for collection which has Disk index      </td>
+      <td>        디스크 인덱스가 있는 컬렉션에 대한 세그먼트의 최대 크기(MB)입니다.      </td>
       <td>2048</td>
     </tr>
   </tbody>
@@ -269,13 +269,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.sealProportion">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The minimum proportion to datacoord.segment.maxSize to seal a segment. datacoord.segment.maxSize and datacoord.segment.sealProportion together determine if a segment can be sealed.      </td>
+      <td>        세그먼트를 봉인하기 위한 datacoord.segment.maxSize에 대한 최소 비율입니다. datacoord.segment.maxSize와 datacoord.segment.sealProportion을 함께 사용하여 세그먼트 봉인 가능 여부를 결정합니다.      </td>
       <td>0.12</td>
     </tr>
   </tbody>
@@ -298,13 +298,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.sealProportionJitter">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segment seal proportion jitter ratio, default value 0.1(10%), if seal proportion is 12%, with jitter=0.1, the actuall applied ratio will be 10.8~12%      </td>
+      <td>        세그먼트 봉인 비율 지터 비율, 기본값 0.1(10%), 봉인 비율이 12%이고 지터가 0.1이면 실제 적용되는 비율은 10.8~12%입니다.      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -327,13 +327,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.assignmentExpiration">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Expiration time of the segment assignment, unit: ms      </td>
+      <td>        세그먼트 할당의 만료 시간, 단위: ms  </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -356,13 +356,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.allocLatestExpireAttempt">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The time attempting to alloc latest lastExpire from rootCoord after restart      </td>
+      <td>        재시작 후 rootCoord에서 최신 lastExpire 할당을 시도하는 시간입니다.      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -385,13 +385,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.maxLife">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The max lifetime of segment in seconds, 24*60*60      </td>
+      <td>        세그먼트의 최대 수명(초), 24*60*60      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -414,16 +414,16 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.maxIdleTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>If a segment didn't accept dml records in maxIdleTime and the size of segment is greater than</li>      
-        <li>minSizeFromIdleToSealed, Milvus will automatically seal it.</li>      
-        <li>The max idle time of segment in seconds, 10*60.</li>      </td>
+        <li>세그먼트가 최대 유휴 시간 동안 dml 레코드를 수락하지 않았고 세그먼트의 크기가</li>      
+        <li>최소 크기에서 유휴 시간보다 크면 Milvus가 자동으로 봉인합니다.</li>      
+        <li>세그먼트의 최대 유휴 시간(초), 10*60.</li>      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -446,13 +446,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.minSizeFromIdleToSealed">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The min size in MB of segment which can be idle from sealed.      </td>
+      <td>        봉인 후 유휴 상태가 될 수 있는 세그먼트의 최소 크기(MB)입니다.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -475,15 +475,15 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.maxBinlogFileNumber">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The max number of binlog (which is equal to the binlog file num of primary key) for one segment, </li>      
-        <li>the segment will be sealed if the number of binlog file reaches to max value.</li>      </td>
+        <li>한 세그먼트에 대한 binlog의 최대 수(기본 키의 binlog 파일 수와 같음)입니다, </li>      
+        <li>binlog 파일 수가 최대 값에 도달하면 세그먼트가 봉인됩니다.</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -506,13 +506,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.smallProportion">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The segment is considered as "small segment" when its # of rows is smaller than      </td>
+      <td>        세그먼트의 행 수가 다음보다 작으면 세그먼트는 "작은 세그먼트"로 간주됩니다.      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -535,15 +535,15 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.compactableProportion">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>(smallProportion * segment max # of rows).</li>      
-        <li>A compaction will happen on small segments if the segment after compaction will have</li>      </td>
+        <li>(작은 비율 * 세그먼트 최대 행 수).</li>      
+        <li>압축 후 세그먼트가 다음과 같은 경우 작은 세그먼트에서 압축이 발생합니다.</li>      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -566,16 +566,16 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segment.expansionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>over (compactableProportion * segment max # of rows) rows.</li>      
-        <li>MUST BE GREATER THAN OR EQUAL TO <smallProportion>!!!</li>      
-        <li>During compaction, the size of segment # of rows is able to exceed segment max # of rows by (expansionRate-1) * 100%. </li>      </td>
+        <li>(압축 가능 비율 * 세그먼트 최대 행 수) 행을 초과합니다.</li>      
+        <li>보다 크거나 같아야 합니다 <smallProportion>!!!</li>      
+        <li>압축하는 동안 세그먼트 행 개수의 크기는 세그먼트 최대 행 개수를 (확장률-1) * 100%만큼 초과할 수 있습니다. </li>      </td>
       <td>1.25</td>
     </tr>
   </tbody>
@@ -598,15 +598,15 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.sealPolicy.channel.growingSegmentsMemSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The size threshold in MB, if the total size of growing segments of each shard </li>      
-        <li>exceeds this threshold, the largest growing segment will be sealed.</li>      </td>
+        <li>MB 단위의 크기 임계값으로, 각 샤드에서 증가하는 세그먼트의 총 크기가 </li>      
+        <li>이 임계값을 초과하면 가장 크게 증가하는 세그먼트가 봉인됩니다.</li>      </td>
       <td>4096</td>
     </tr>
   </tbody>
@@ -629,13 +629,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.autoUpgradeSegmentIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether auto upgrade segment index to index engine's version      </td>
+      <td>        세그먼트 인덱스를 인덱스 엔진의 버전으로 자동 업그레이드할지 여부      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -658,13 +658,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.segmentFlushInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the minimal interval duration(unit: Seconds) between flusing operation on same segment      </td>
+      <td>        동일한 세그먼트에서 플러싱 작업 사이의 최소 간격(단위: 초)    </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -687,15 +687,15 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.enableCompaction">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Switch value to control if to enable segment compaction. </li>      
-        <li>Compaction merges small-size segments into a large segment, and clears the entities deleted beyond the rentention duration of Time Travel.</li>      </td>
+        <li>세그먼트 압축을 활성화할지 여부를 제어하는 스위치 값입니다. </li>      
+        <li>압축은 작은 크기의 세그먼트를 큰 세그먼트로 병합하고 시간 여행의 임대 기간을 초과하여 삭제된 엔티티를 지웁니다.</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -718,15 +718,15 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.enableAutoCompaction">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Switch value to control if to enable automatic segment compaction during which data coord locates and merges compactable segments in the background.</li>      
-        <li>This configuration takes effect only when dataCoord.enableCompaction is set as true.</li>      </td>
+        <li>데이터 코디가 백그라운드에서 압축 가능한 세그먼트를 찾아 병합하는 동안 자동 세그먼트 압축을 활성화할지 여부를 제어하는 스위치 값입니다.</li>      
+        <li>이 구성은 dataCoord.enableCompaction이 true로 설정된 경우에만 적용됩니다.</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -749,17 +749,17 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.taskPrioritizer">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>compaction task prioritizer, options: [default, level, mix]. </li>      
-        <li>default is FIFO.</li>      
-        <li>level is prioritized by level: L0 compactions first, then mix compactions, then clustering compactions.</li>      
-        <li>mix is prioritized by level: mix compactions first, then L0 compactions, then clustering compactions.</li>      </td>
+        <li>압축 작업 우선 순위, 옵션: [기본값, 수준, 혼합]. </li>      
+        <li>기본값은 FIFO입니다.</li>      
+        <li>레벨에 따라 우선순위가 지정됩니다: L0 압축, 믹스 압축, 클러스터링 압축 순입니다.</li>      
+        <li>믹스 우선순위는 수준별: 믹스 압축, L0 압축, 클러스터링 압축 순입니다.</li>      </td>
       <td>default</td>
     </tr>
   </tbody>
@@ -782,13 +782,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.taskQueueCapacity">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        compaction task queue size      </td>
+      <td>        압축 작업 대기열 크기      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -811,13 +811,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.dropTolerance">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Compaction task will be cleaned after finish longer than this time(in seconds)      </td>
+      <td>        다짐 작업이 이 시간보다 오래 완료된 후 정리됩니다(초).      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -840,13 +840,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.gcInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The time interval in seconds for compaction gc      </td>
+      <td>        다짐 작업에 대한 시간 간격(초)      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -869,13 +869,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.mix.triggerInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The time interval in seconds to trigger mix compaction      </td>
+      <td>        혼합 다짐을 트리거하는 시간 간격(초)      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -898,13 +898,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.levelzero.triggerInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The time interval in seconds for trigger L0 compaction      </td>
+      <td>        L0 다짐을 트리거할 시간 간격(초)      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -927,13 +927,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The minmum size in bytes to force trigger a LevelZero Compaction, default as 8MB      </td>
+      <td>        레벨 제로 압축을 강제로 트리거하기 위한 최소 크기(바이트)로, 기본값은 8MB입니다.      </td>
       <td>8388608</td>
     </tr>
   </tbody>
@@ -956,13 +956,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.maxSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maxmum size in bytes to force trigger a LevelZero Compaction, default as 64MB      </td>
+      <td>        레벨 제로 압축을 강제로 트리거할 최대 크기(바이트)로, 기본값은 64MB입니다.      </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -985,13 +985,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The minimum number of deltalog files to force trigger a LevelZero Compaction      </td>
+      <td>        레벨 제로 압축을 강제로 트리거할 최소 델타로그 파일 수입니다.      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1014,13 +1014,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maxmum number of deltalog files to force trigger a LevelZero Compaction, default as 30      </td>
+      <td>        레벨 제로 압축을 강제로 트리거할 델타로그 파일의 최대 개수, 기본값은 30입니다.      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -1043,13 +1043,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.single.ratio.threshold">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The ratio threshold of a segment to trigger a single compaction, default as 0.2      </td>
+      <td>        단일 압축을 트리거할 세그먼트의 비율 임계값, 기본값은 0.2입니다.      </td>
       <td>0.2</td>
     </tr>
   </tbody>
@@ -1072,13 +1072,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.single.deltalog.maxsize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The deltalog size of a segment to trigger a single compaction, default as 16MB      </td>
+      <td>        단일 압축을 트리거할 세그먼트의 델타로그 크기, 기본값은 16MB입니다.      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -1101,13 +1101,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.single.deltalog.maxnum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The deltalog count of a segment to trigger a compaction, default as 200      </td>
+      <td>        압축을 트리거할 세그먼트의 델타로그 개수, 기본값은 200입니다.      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -1130,13 +1130,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.single.expiredlog.maxsize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The expired log size of a segment to trigger a compaction, default as 10MB      </td>
+      <td>        압축을 트리거할 세그먼트의 만료된 로그 크기, 기본값은 10MB입니다.      </td>
       <td>10485760</td>
     </tr>
   </tbody>
@@ -1159,13 +1159,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable clustering compaction      </td>
+      <td>        클러스터링 압축 사용      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1188,13 +1188,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.autoEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable auto clustering compaction      </td>
+      <td>        자동 클러스터링 압축 사용      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1217,13 +1217,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.triggerInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        clustering compaction trigger interval in seconds      </td>
+      <td>        클러스터링 압축 트리거 간격(초)      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -1246,13 +1246,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.minInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The minimum interval between clustering compaction executions of one collection, to avoid redundant compaction      </td>
+      <td>        중복 압축을 방지하기 위해 한 컬렉션의 클러스터링 압축 실행 사이의 최소 간격입니다.      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1275,13 +1275,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.maxInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        If a collection haven't been clustering compacted for longer than maxInterval, force compact      </td>
+      <td>        컬렉션이 최대 간격보다 오래 클러스터링 압축되지 않은 경우 강제로 압축합니다.      </td>
       <td>259200</td>
     </tr>
   </tbody>
@@ -1304,13 +1304,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.newDataSizeThreshold">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        If new data size is large than newDataSizeThreshold, execute clustering compaction      </td>
+      <td>        새 데이터 크기가 newDataSizeThreshold보다 큰 경우 클러스터링 압축을 실행합니다.      </td>
       <td>512m</td>
     </tr>
   </tbody>
@@ -1333,13 +1333,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.maxTrainSizeRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max data size ratio in Kmeans train, if larger than it, will down sampling to meet this limit      </td>
+      <td>        Kmeans 트레인의 최대 데이터 크기 비율로, 이보다 크면 이 제한을 충족하기 위해 다운 샘플링합니다.      </td>
       <td>0.8</td>
     </tr>
   </tbody>
@@ -1362,13 +1362,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.maxCentroidsNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum centroids number in Kmeans train      </td>
+      <td>        Kmeans 트레인의 최대 중심 수   </td>
       <td>10240</td>
     </tr>
   </tbody>
@@ -1391,13 +1391,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.minCentroidsNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum centroids number in Kmeans train      </td>
+      <td>        K평균 열차의 최소 중심 수   </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -1420,13 +1420,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.minClusterSizeRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum cluster size / avg size in Kmeans train      </td>
+      <td>        Kmeans 트레인의 최소 클러스터 크기/평균 크기      </td>
       <td>0.01</td>
     </tr>
   </tbody>
@@ -1449,13 +1449,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.maxClusterSizeRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum cluster size / avg size in Kmeans train      </td>
+      <td>        최대 클러스터 크기 / Kmeans 트레인의 평균 크기      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1478,13 +1478,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.maxClusterSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum cluster size in Kmeans train      </td>
+      <td>        Kmeans 트레인의 최대 클러스터 크기      </td>
       <td>5g</td>
     </tr>
   </tbody>
@@ -1507,13 +1507,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.syncSegmentsInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The time interval for regularly syncing segments      </td>
+      <td>        세그먼트를 정기적으로 동기화하는 시간 간격      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -1536,13 +1536,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.index.memSizeEstimateMultiplier">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        When the memory size is not setup by index procedure, multiplier to estimate the memory size of index data      </td>
+      <td>        인덱스 프로시저에 의해 메모리 크기가 설정되지 않은 경우, 인덱스 데이터의 메모리 크기를 추정하기 위한 곱셈기      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1565,13 +1565,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.enableGarbageCollection">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Switch value to control if to enable garbage collection to clear the discarded data in MinIO or S3 service.      </td>
+      <td>        MinIO 또는 S3 서비스에서 버려진 데이터를 지우기 위해 가비지 컬렉션을 활성화할지 여부를 제어하는 스위치 값입니다.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1594,13 +1594,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.gc.interval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval at which data coord performs garbage collection, unit: second.      </td>
+      <td>        데이터 코디가 가비지 수집을 수행하는 간격(단위: 초)입니다.      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -1623,13 +1623,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.gc.missingTolerance">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The retention duration of the unrecorded binary log (binlog) files. Setting a reasonably large value for this parameter avoids erroneously deleting the newly created binlog files that lack metadata. Unit: second.      </td>
+      <td>        기록되지 않은 바이너리 로그(binlog) 파일의 보존 기간입니다. 이 매개변수의 값을 적당히 크게 설정하면 메타데이터가 없는 새로 만든 binlog 파일이 실수로 삭제되는 것을 방지할 수 있습니다. 단위: 초.      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -1652,13 +1652,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.gc.dropTolerance">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The retention duration of the binlog files of the deleted segments before they are cleared, unit: second.      </td>
+      <td>        삭제된 세그먼트의 빈로그 파일이 지워지기 전의 보존 기간(단위: 초)입니다.      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1681,13 +1681,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.gc.removeConcurrent">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        number of concurrent goroutines to remove dropped s3 objects      </td>
+      <td>        삭제된 S3 개체를 제거하기 위한 동시 고루틴 수   </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -1710,13 +1710,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.gc.scanInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        orphan file (file on oss but has not been registered on meta) on object storage garbage collection scanning interval in hours      </td>
+      <td>        오브젝트 스토리지의 고아 파일(oss에는 있지만 메타에 등록되지 않은 파일) 가비지 컬렉션 스캔 간격(시간)      </td>
       <td>168</td>
     </tr>
   </tbody>
@@ -1739,13 +1739,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.brokerTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        5000ms, dataCoord broker rpc timeout      </td>
+      <td>        5000ms, 데이터코드 브로커 rpc 시간 초과      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -1768,13 +1768,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.autoBalance">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable auto balance      </td>
+      <td>        자동 밸런스 활성화      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1797,13 +1797,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.checkAutoBalanceConfigInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval of check auto balance config      </td>
+      <td>        자동 잔액 설정 확인 간격      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1826,13 +1826,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.import.filesPerPreImportTask">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of files allowed per pre-import task.      </td>
+      <td>        사전 가져오기 작업당 허용되는 최대 파일 수입니다.      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1855,13 +1855,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.import.taskRetention">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The retention period in seconds for tasks in the Completed or Failed state.      </td>
+      <td>        완료 또는 실패 상태의 작업에 대한 보존 기간(초)입니다.      </td>
       <td>10800</td>
     </tr>
   </tbody>
@@ -1884,13 +1884,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.import.maxSizeInMBPerImportTask">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        To prevent generating of small segments, we will re-group imported files. This parameter represents the sum of file sizes in each group (each ImportTask).      </td>
+      <td>        작은 세그먼트가 생성되는 것을 방지하기 위해 가져온 파일을 다시 그룹화합니다. 이 매개변수는 각 그룹(각 ImportTask)의 파일 크기 합계를 나타냅니다.      </td>
       <td>6144</td>
     </tr>
   </tbody>
@@ -1913,13 +1913,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.import.scheduleInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval for scheduling import, measured in seconds.      </td>
+      <td>        가져오기 예약 간격(초 단위)입니다.      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1942,13 +1942,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.import.checkIntervalHigh">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval for checking import, measured in seconds, is set to a high frequency for the import checker.      </td>
+      <td>        가져오기 확인 간격(초 단위)으로, 가져오기 검사기에 대해 높은 빈도로 설정됩니다.      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -1971,13 +1971,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.import.checkIntervalLow">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval for checking import, measured in seconds, is set to a low frequency for the import checker.      </td>
+      <td>        가져오기 검사기의 가져오기 확인 간격(초 단위)이 낮은 빈도로 설정됩니다.      </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -2000,13 +2000,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.import.maxImportFileNumPerReq">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of files allowed per single import request.      </td>
+      <td>        단일 가져오기 요청당 허용되는 최대 파일 수입니다.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -2029,13 +2029,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.import.maxImportJobNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of import jobs that are executing or pending.      </td>
+      <td>        실행 중이거나 보류 중인 가져오기 작업의 최대 개수입니다.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -2058,13 +2058,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.import.waitForIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Indicates whether the import operation waits for the completion of index building.      </td>
+      <td>        가져오기 작업이 인덱스 구축이 완료될 때까지 기다릴지 여부를 나타냅니다.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -2087,13 +2087,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        초. 정상적으로 중지하지 않고 노드 강제 중지      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -2116,13 +2116,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.slot.clusteringCompactionUsage">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        slot usage of clustering compaction job.      </td>
+      <td>        클러스터링 압축 작업의 슬롯 사용량입니다.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -2145,13 +2145,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.slot.mixCompactionUsage">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        slot usage of mix compaction job.      </td>
+      <td>        혼합 다짐 작업의 슬롯 사용량입니다.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2174,13 +2174,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.slot.l0DeleteCompactionUsage">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        slot usage of l0 compaction job.      </td>
+      <td>        L0 다짐 작업의 슬롯 사용량.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -2203,13 +2203,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of dataCoord. If not specified, use the first unicastable address      </td>
+      <td>        데이터코드의 TCP/IP 주소입니다. 지정하지 않으면 첫 번째 유니캐스트 가능한 주소를 사용합니다.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -2232,13 +2232,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of dataCoord      </td>
+      <td>        dataCoord의 TCP 포트      </td>
       <td>13333</td>
     </tr>
   </tbody>
@@ -2261,13 +2261,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the dataCoord can send, unit: byte      </td>
+      <td>        dataCoord가 전송할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -2290,13 +2290,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the dataCoord can receive, unit: byte      </td>
+      <td>        데이터코드가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2319,13 +2319,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on dataCoord can send, unit: byte      </td>
+      <td>        dataCoord의 클라이언트가 보낼 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -2348,13 +2348,13 @@ summary: Learn how to configure dataCoord for Milvus.
     </button></h2><table id="dataCoord.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on dataCoord can receive, unit: byte      </td>
+      <td>        dataCoord의 클라이언트가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>536870912</td>
     </tr>
   </tbody>

@@ -40,7 +40,7 @@ beta: Milvus 2.6.x
     </button></h2><p>컬렉션에 필드를 추가하기 전에 다음과 같은 중요한 사항을 염두에 두세요:</p>
 <ul>
 <li><p>스칼라 필드(<code translate="no">INT64</code>, <code translate="no">VARCHAR</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> 등)를 추가할 수 있습니다. 벡터 필드는 기존 컬렉션에 추가할 수 없습니다.</p></li>
-<li><p>새 필드에 대한 값이 없는 기존 엔티티를 수용하려면 새 필드를 null 가능(nullable=True)으로 설정해야 합니다.</p></li>
+<li><p>새 필드에 대한 값이 없는 기존 엔티티를 수용하려면 새 필드가 널 가능(nullable=True)이어야 합니다.</p></li>
 <li><p>로드된 컬렉션에 필드를 추가하면 메모리 사용량이 증가합니다.</p></li>
 <li><p>컬렉션당 총 필드 수에는 최대 제한이 있습니다. 자세한 내용은 <a href="/docs/ko/limitations.md#Number-of-resources-in-a-collection">밀버스 제한을</a> 참조하세요.</p></li>
 <li><p>필드 이름은 정적 필드 중에서 고유해야 합니다.</p></li>

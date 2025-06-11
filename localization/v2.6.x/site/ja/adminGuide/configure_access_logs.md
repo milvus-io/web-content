@@ -1,8 +1,8 @@
 ---
 id: configure_access_logs.md
-title: Configure Access Logs
+title: アクセスログの設定
 ---
-<h1 id="Configure-Access-Logs" class="common-anchor-header">Configure Access Logs<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
+<h1 id="Configure-Access-Logs" class="common-anchor-header">アクセスログの設定<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,15 +17,15 @@ title: Configure Access Logs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The access log feature in Milvus allows server managers to record and analyze user access behavior, assisting in understanding aspects like query success rates and failure reasons.</p>
-<p>This guide provides detailed instructions on configuring access logs in Milvus.</p>
-<p>Configuration of access logs depends on the installation method of Milvus:</p>
+    </button></h1><p>Milvusのアクセスログ機能を利用することで、サーバ管理者はユーザのアクセス状況を記録・分析し、クエリの成功率や失敗理由などを把握することができます。</p>
+<p>本ガイドでは、Milvusにおけるアクセスログの設定方法について詳しく説明します。</p>
+<p>アクセスログの設定は、Milvusのインストール方法によって異なります：</p>
 <ul>
-<li><strong>Helm Installation</strong>: Configure in <code translate="no">values.yaml</code>. For more information, see <a href="/docs/configure-helm.md">Configure Milvus with Helm Charts</a>.</li>
-<li><strong>Docker Installation</strong>: Configure in <code translate="no">milvus.yaml</code>. For more information, see <a href="/docs/configure-docker.md">Configure Milvus with Docker Compose</a>.</li>
-<li><strong>Operator Installation</strong>: Modify <code translate="no">spec.components</code> in the configuration file. For more information, see <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operator</a>.</li>
+<li><strong>Helm インストール：</strong> <code translate="no">values.yaml</code> 。詳細については、<a href="/docs/ja/configure-helm.md">HelmチャートによるMilvusの設定を</a>参照してください。</li>
+<li><strong>Docker インストール</strong>：<code translate="no">milvus.yaml</code> 。詳細については、<a href="/docs/ja/configure-docker.md">Docker Composeを使用したMilvusの設定を</a>参照してください。</li>
+<li><strong>Operator インストール</strong>：設定ファイルの<code translate="no">spec.components</code> 。詳細については、<a href="/docs/ja/configure_operator.md">Milvus OperatorでMilvusを設定するを</a>参照してください。</li>
 </ul>
-<h2 id="Configuration-options" class="common-anchor-header">Configuration options<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+<h2 id="Configuration-options" class="common-anchor-header">設定オプション<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,13 +40,13 @@ title: Configure Access Logs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Choose among three configuration options based on your needs:</p>
+    </button></h2><p>ニーズに合わせて3つの設定オプションから選択します：</p>
 <ul>
-<li><strong>Base config</strong>: For general purposes.</li>
-<li><strong>Config for local access log files</strong>: For storing logs locally.</li>
-<li><strong>Config for uploading local access logs to MinIO</strong>: For cloud storage and backup.</li>
+<li><strong>基本設定</strong>：基本設定: 一般的な目的。</li>
+<li><strong>ローカルアクセスログファイル用設定</strong>：ログをローカルに保存します。</li>
+<li><strong>ローカルアクセスログをMinIOにアップロードするための設定</strong>：クラウドストレージおよびバックアップ用。</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">Base config</h3><p>Basic configuration involves enabling access logs and defining the log filename or using stdout.</p>
+<h3 id="Base-config" class="common-anchor-header">基本設定</h3><p>基本設定では、アクセスログを有効にし、ログのファイル名を定義するか、標準出力を使用します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -55,10 +55,10 @@ title: Configure Access Logs
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">proxy.accessLog.enable</code>: Whether to enable the access log feature. Defaults to <strong>false</strong>.</li>
-<li><code translate="no">proxy.accessLog.filename</code>: The name of the access log file. If you leave this parameter empty, access logs will be printed to stdout.</li>
+<li><code translate="no">proxy.accessLog.enable</code>:アクセスログ機能を有効にするかどうか。デフォルトは<strong>false</strong>。</li>
+<li><code translate="no">proxy.accessLog.filename</code>:アクセスログのファイル名。このパラメータを空にすると、アクセスログは標準出力に出力されます。</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Config for local access log files</h3><p>Configure local storage for access log files with parameters including the local file path, file size, and rotation interval:</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">ローカルアクセスログファイルの設定</h3><p>ローカルファイルパス、ファイルサイズ、ローテーション間隔などのパラメータを使用して、アクセスログファイルのローカルストレージを設定します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -69,14 +69,14 @@ title: Configure Access Logs
     <span class="hljs-attr">maxBackups:</span> <span class="hljs-number">7</span> <span class="hljs-comment"># Max number of sealed access log files that can be retained</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>These parameters are specified when <code translate="no">filename</code> is not empty.</p>
+<p>これらのパラメータは、<code translate="no">filename</code> が空でない場合に指定します。</p>
 <ul>
-<li><code translate="no">proxy.accessLog.localPath</code>: The local file path where the access log file is stored.</li>
-<li><code translate="no">proxy.accessLog.maxSize</code>: The maximum size in MB allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file.</li>
-<li><code translate="no">proxy.accessLog.rotatedTime</code>: The maximum time interval in seconds allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one.</li>
-<li><code translate="no">proxy.accessLog.maxBackups</code>: The maximum number of sealed access log files that can be retained. If the number of sealed access log files exceeds this limit, the oldest one will be deleted.</li>
+<li><code translate="no">proxy.accessLog.localPath</code>:アクセスログファイルが保存されるローカルファイルパス。</li>
+<li><code translate="no">proxy.accessLog.maxSize</code>:1つのアクセスログファイルに許される最大サイズ（MB）。ログファイルのサイズがこの制限に達した場合、ローテーション処理が開始されます。この処理は、現在のアクセス・ログ・ファイルを封印し、新しいログ・ファイルを作成し、元のログ・ファイルの内容を消去します。</li>
+<li><code translate="no">proxy.accessLog.rotatedTime</code>:1つのアクセス・ログ・ファイルをローテーションするために許容される最大時間間隔を秒単位で指定します。指定された時間間隔に達すると、ローテーション処理がトリガーされ、新しいアクセスログファイルが作成され、前のアクセスログファイルが封印されます。</li>
+<li><code translate="no">proxy.accessLog.maxBackups</code>:封印されたアクセスログファイルの最大保持数。封印されたアクセスログファイルの数がこの上限を超えると、最も古いアクセスログファイルが削除されます。</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Config for uploading local access log files to MinIO</h3><p>Enable and configure settings to upload local access log files to MinIO:</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">ローカルアクセスログファイルのMinIOへのアップロード設定</h3><p>ローカルアクセスログファイルをMinIOにアップロードする設定を有効にして構成します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -90,13 +90,13 @@ title: Configure Access Logs
     <span class="hljs-attr">remoteMaxTime:</span> <span class="hljs-number">0</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>When configuring MinIO parameters, ensure that you have set either <code translate="no">maxSize</code> or <code translate="no">rotatedTime</code>. Failure to do so may result in unsuccessful uploads of local access log files to MinIO.</p>
+<p>MinIOパラメータを構成する場合、<code translate="no">maxSize</code> または<code translate="no">rotatedTime</code> のいずれかを設定していることを確認する。この設定を行わないと、ローカルアクセスログファイルのMinIOへのアップロードに失敗する可能性がある。</p>
 <ul>
-<li><code translate="no">proxy.accessLog.minioEnable</code>: Whether to upload local access log files to MinIO. Defaults to <strong>false</strong>.</li>
-<li><code translate="no">proxy.accessLog.remotePath</code>: The path of the object storage for uploading access log files.</li>
-<li><code translate="no">proxy.accessLog.remoteMaxTime</code>: The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature.</li>
+<li><code translate="no">proxy.accessLog.minioEnable</code>:ローカルアクセスログファイルをMinIOにアップロードするかどうか。デフォルトは<strong>false</strong>です。</li>
+<li><code translate="no">proxy.accessLog.remotePath</code>:アクセスログファイルをアップロードするオブジェクトストレージのパス。</li>
+<li><code translate="no">proxy.accessLog.remoteMaxTime</code>:アクセスログファイルのアップロードに許可される時間間隔。ログファイルのアップロード時間がこの間隔を超えると、ファイルは削除されます。値を 0 に設定すると、この機能は無効になります。</li>
 </ul>
-<h2 id="Formatter-config" class="common-anchor-header">Formatter config<button data-href="#Formatter-config" class="anchor-icon" translate="no">
+<h2 id="Formatter-config" class="common-anchor-header">フォーマッタ設定<button data-href="#Formatter-config" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -111,7 +111,7 @@ title: Configure Access Logs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The default log format used for all methods is the <code translate="no">base</code> format, which does not require specific method associations. However, if you wish to customize the log output for specific methods, you can define a custom log format and apply it to the associated methods.</p>
+    </button></h2><p>すべてのメソッドで使われるデフォルトのログフォーマットは<code translate="no">base</code> フォーマットで、特定のメソッドの関連付けを必要としません。しかし、特定のメソッドのログ出力をカスタマイズしたい場合は、カスタムログフォーマットを定義し、関連するメソッドに適用することができます。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -131,10 +131,10 @@ title: Configure Access Logs
         <span class="hljs-attr">methods:</span> [<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.format</code>: Defines the log format with dynamic metrics. For more information, see <a href="#reference-supported-metrics">Supported metrics</a>.</li>
-<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.methods</code>: Lists Milvus operations using this formatter. To obtain method names, see <strong>MilvusService</strong> in <a href="https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto">Milvus methods</a>.</li>
+<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.format</code>:ダイナミック・メトリクスを使用してログ・フォーマットを定義します。詳細は、「<a href="#reference-supported-metrics">サポートされるメトリッ ク</a>」を参照してください。</li>
+<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.methods</code>:このフォーマッタを使用するMilvusオペレーションを一覧表示します。メソッド名を取得するには、<a href="https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto">Milvusメソッドの</a> <strong>MilvusServiceを</strong>参照してください。</li>
 </ul>
-<h2 id="Reference-Supported-metrics" class="common-anchor-header">Reference: Supported metrics<button data-href="#Reference-Supported-metrics" class="anchor-icon" translate="no">
+<h2 id="Reference-Supported-metrics" class="common-anchor-header">参照：サポートされているメトリクス<button data-href="#Reference-Supported-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,25 +151,25 @@ title: Configure Access Logs
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Metric Name</th><th>Description</th></tr>
+<tr><th>メトリック名</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">$method_name</code></td><td>Name of the method</td></tr>
-<tr><td><code translate="no">$method_status</code></td><td>Status of access: <strong>OK</strong> or <strong>Fail</strong></td></tr>
-<tr><td><code translate="no">$method_expr</code></td><td>Expression used for query, search, or delete operations</td></tr>
-<tr><td><code translate="no">$trace_id</code></td><td>TraceID associated with the access</td></tr>
-<tr><td><code translate="no">$user_addr</code></td><td>IP address of the user</td></tr>
-<tr><td><code translate="no">$user_name</code></td><td>Name of the user</td></tr>
-<tr><td><code translate="no">$response_size</code></td><td>Size of the response data</td></tr>
-<tr><td><code translate="no">$error_code</code></td><td>Error code specific to Milvus</td></tr>
-<tr><td><code translate="no">$error_msg</code></td><td>Detailed error message</td></tr>
-<tr><td><code translate="no">$database_name</code></td><td>Name of the target Milvus database</td></tr>
-<tr><td><code translate="no">$collection_name</code></td><td>Name of the target Milvus collection</td></tr>
-<tr><td><code translate="no">$partition_name</code></td><td>Name or names of the target Milvus partition(s)</td></tr>
-<tr><td><code translate="no">$time_cost</code></td><td>Time taken for completing the access</td></tr>
-<tr><td><code translate="no">$time_now</code></td><td>Time at which the access log is printed (usually equivalent to <code translate="no">$time_end</code>)</td></tr>
-<tr><td><code translate="no">$time_start</code></td><td>Time at which the access starts</td></tr>
-<tr><td><code translate="no">$time_end</code></td><td>Time at which the access ends</td></tr>
-<tr><td><code translate="no">$sdk_version</code></td><td>Version of the Milvus SDK used by the user</td></tr>
+<tr><td><code translate="no">$method_name</code></td><td>メソッド名</td></tr>
+<tr><td><code translate="no">$method_status</code></td><td>アクセスのステータス：<strong>OK</strong>または<strong>失敗</strong></td></tr>
+<tr><td><code translate="no">$method_expr</code></td><td>クエリ、検索、または削除操作に使用される式</td></tr>
+<tr><td><code translate="no">$trace_id</code></td><td>アクセスに関連するTraceID</td></tr>
+<tr><td><code translate="no">$user_addr</code></td><td>ユーザのIPアドレス</td></tr>
+<tr><td><code translate="no">$user_name</code></td><td>ユーザの名前</td></tr>
+<tr><td><code translate="no">$response_size</code></td><td>レスポンスデータのサイズ</td></tr>
+<tr><td><code translate="no">$error_code</code></td><td>Milvus特有のエラーコード</td></tr>
+<tr><td><code translate="no">$error_msg</code></td><td>詳細エラーメッセージ</td></tr>
+<tr><td><code translate="no">$database_name</code></td><td>対象のMilvusデータベース名</td></tr>
+<tr><td><code translate="no">$collection_name</code></td><td>対象のMilvusコレクション名</td></tr>
+<tr><td><code translate="no">$partition_name</code></td><td>対象のMilvusパーティション名</td></tr>
+<tr><td><code translate="no">$time_cost</code></td><td>アクセス完了までの時間</td></tr>
+<tr><td><code translate="no">$time_now</code></td><td>アクセスログが出力された時刻 (通常<code translate="no">$time_end</code> と同じ)</td></tr>
+<tr><td><code translate="no">$time_start</code></td><td>アクセス開始時刻</td></tr>
+<tr><td><code translate="no">$time_end</code></td><td>アクセス終了時刻</td></tr>
+<tr><td><code translate="no">$sdk_version</code></td><td>ユーザが使用したMilvus SDKのバージョン</td></tr>
 </tbody>
 </table>

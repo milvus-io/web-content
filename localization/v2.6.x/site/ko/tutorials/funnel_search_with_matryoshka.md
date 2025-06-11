@@ -1,13 +1,12 @@
 ---
 id: funnel_search_with_matryoshka.md
 summary: >-
-  In this notebook, we examine how to use Matryoshka embeddings with Milvus for
-  semantic search. We illustrate an algorithm called "funnel search" that allows
-  us to perform similarity search over a small subset of our embedding
-  dimensions without a drastic drop in recall.
-title: Funnel Search with Matryoshka Embeddings
+  이 노트에서는 의미론적 검색을 위해 Milvus와 함께 Matryoshka 임베딩을 사용하는 방법을 살펴봅니다. "깔때기 검색"이라는
+  알고리즘을 통해 임베딩 차원의 작은 하위 집합에서 유사성 검색을 수행하여 리콜률을 급격히 떨어뜨리지 않고도 유사성 검색을 수행할 수 있는
+  방법을 설명합니다.
+title: 마트료시카 임베딩을 사용한 퍼널 검색
 ---
-<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">Funnel Search with Matryoshka Embeddings<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
+<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">마트료시카 임베딩을 사용한 퍼널 검색<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,12 +22,11 @@ title: Funnel Search with Matryoshka Embeddings
         ></path>
       </svg>
     </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.6.x/assets/funnel-search.png' width='100%'></div>
-When building efficient vector search systems, one key challenge is managing storage costs while maintaining acceptable latency and recall. Modern embedding models output vectors with hundreds or thousands of dimensions, creating significant storage and computational overhead for the raw vector and index.
-<p>Traditionally, the storage requirements are reduced by applying a quantization or dimensionality reduction method just before building the index. For instance, we can save storage by lowering the precision using Product Quantization (PQ) or the number of dimensions using Principal Component Analysis (PCA). These methods analyze the entire vector set to find a more compact one that maintains the semantic relationships between vectors.</p>
-<p>While effective, these standard approaches reduce precision or dimensionality only once and at a single scale. But what if we could maintain multiple layers of detail simultaneously, like a pyramid of increasingly precise representations?</p>
-<p>Enter Matryoshka embeddings. Named after Russian nesting dolls (see illustration), these clever constructs embed multiple scales of representation within a single vector. Unlike traditional post-processing methods, Matryoshka embeddings learn this multi-scale structure during the initial training process. The result is remarkable: not only does the full embedding capture input semantics, but each nested subset prefix (first half, first quarter, etc.) provides a coherent, if less detailed, representation.</p>
-<p>In this notebook, we examine how to use Matryoshka embeddings with Milvus for semantic search. We illustrate an algorithm called “funnel search” that allows us to perform similarity search over a small subset of our embedding dimensions without a drastic drop in recall.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+효율적인 벡터 검색 시스템을 구축할 때, 한 가지 핵심 과제는 허용 가능한 지연 시간과 리콜을 유지하면서 스토리지 비용을 관리하는 것입니다. 최신 임베딩 모델은 수백 또는 수천 개의 차원을 가진 벡터를 출력하기 때문에 원시 벡터와 인덱스에 상당한 스토리지와 계산 오버헤드를 발생시킵니다.<p>전통적으로 인덱스 구축 직전에 정량화 또는 차원 축소 방법을 적용하면 저장소 요구 사항을 줄일 수 있습니다. 예를 들어, 제품 정량화(PQ)를 사용해 정밀도를 낮추거나 주성분 분석(PCA)을 사용해 차원 수를 줄임으로써 저장 공간을 절약할 수 있습니다. 이러한 방법은 전체 벡터 집합을 분석하여 벡터 간의 의미 관계를 유지하는 더 간결한 벡터 집합을 찾습니다.</p>
+<p>이러한 표준 접근 방식은 효과적이기는 하지만 정밀도나 차원을 단 한 번만 감소시킵니다. 하지만 점점 더 정밀하게 표현되는 피라미드처럼 여러 계층의 디테일을 동시에 유지할 수 있다면 어떨까요?</p>
+<p>마트료시카 임베딩을 소개합니다. 러시아 중첩 인형(그림 참조)에서 이름을 따온 이 기발한 구조는 단일 벡터 내에 여러 스케일의 표현을 임베딩합니다. 기존의 사후 처리 방법과 달리, 마트료시카 임베딩은 초기 학습 과정에서 이 다중 스케일 구조를 학습합니다. 그 결과는 놀랍습니다. 전체 임베딩이 입력 의미를 포착할 뿐만 아니라 중첩된 각 하위 집합 접두사(전반부, 1/4 등)가 덜 상세하더라도 일관성 있는 표현을 제공합니다.</p>
+<p>이 노트에서는 의미 검색을 위해 Milvus와 함께 Matryoshka 임베딩을 사용하는 방법을 살펴봅니다. 또한 "깔때기 검색"이라는 알고리즘을 통해 임베딩 차원의 작은 하위 집합에 대한 유사성 검색을 수행하면서 리콜률을 급격히 떨어뜨리지 않고도 검색을 수행할 수 있는 방법을 설명합니다.</p>
+<h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,13 +43,13 @@ When building efficient vector search systems, one key challenge is managing sto
       </svg>
     </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For CPU-Only:</p>
+<p>CPU 전용:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For CUDA 11.8:</p>
+<p>CUDA 11.8용:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Installation command of CUDA 11.8 is only an example. Please confirm your CUDA version when installing PyTorch.</p>
+<p>CUDA 11.8의 설치 명령은 예시일 뿐입니다. 파이토치 설치 시 사용 중인 CUDA 버전을 확인하시기 바랍니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
@@ -65,7 +63,7 @@ When building efficient vector search systems, one key challenge is managing sto
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Load Matryoshka Embedding Model<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">마트료시카 임베딩 모델 로드<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,7 +78,7 @@ When building efficient vector search systems, one key challenge is managing sto
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Instead of using a standard embedding model such as <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>, we use <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">a model from Nomic</a> trained especially to produce Matryoshka embeddings.</p>
+    </button></h2><p>와 같은 표준 임베딩 모델을 사용하는 대신 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>와 같은 표준 임베딩 <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">모델을</a> 사용하는 대신 Matryoshka 임베딩을 생성하도록 특별히 훈련된 <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">Nomic의 모델을</a> 사용합니다.</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -90,7 +88,7 @@ When building efficient vector search systems, one key challenge is managing sto
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&lt;All keys matched successfully&gt;
 </code></pre>
-<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">Loading Dataset, Embedding Items, and Building Vector Database<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
+<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">데이터 세트 로드, 항목 임베딩 및 벡터 데이터베이스 구축하기<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,7 +103,7 @@ When building efficient vector search systems, one key challenge is managing sto
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code is a modification of that from the documentation page <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search with Sentence Transformers and Milvus”</a>. First, we load the dataset from HuggingFace. It contains around 35k entries, each corresponding to a movie having a Wikipedia article. We will use the <code translate="no">Title</code> and <code translate="no">PlotSummary</code> fields in this example.</p>
+    </button></h2><p>다음 코드는 문서 페이지 <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"문장 트랜스포머와 밀버스를 사용한 영화 검색"</a>의 코드를 수정한 것입니다. 먼저 HuggingFace에서 데이터 세트를 로드합니다. 여기에는 약 35,000개의 항목이 포함되어 있으며, 각 항목은 Wikipedia 문서가 있는 영화에 해당합니다. 이 예제에서는 <code translate="no">Title</code> 및 <code translate="no">PlotSummary</code> 필드를 사용하겠습니다.</p>
 <pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
@@ -114,7 +112,7 @@ When building efficient vector search systems, one key challenge is managing sto
     num_rows: 34886
 })
 </code></pre>
-<p>Next, we connect to a Milvus Lite database, specify the data schema, and create a collection with this schema. We will store both the unnormalized embedding and the first sixth of the embedding in separate fields. The reason for this is that we need the first 1/6th of the Matryoshka embedding for performing a similarity search, and the remaining 5/6ths of the embeddings for reranking and improving the search results.</p>
+<p>다음으로 Milvus Lite 데이터베이스에 연결하여 데이터 스키마를 지정하고 이 스키마로 컬렉션을 생성합니다. 정규화되지 않은 임베딩과 임베딩의 첫 번째 여섯 번째를 모두 별도의 필드에 저장합니다. 그 이유는 유사도 검색을 수행하기 위해 Matryoshka 임베딩의 첫 1/6이 필요하고, 검색 결과의 순위를 재조정하고 개선하기 위해 나머지 5/6의 임베딩이 필요하기 때문입니다.</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-number">768</span>
 search_dim = <span class="hljs-number">128</span>
 collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
@@ -133,9 +131,9 @@ fields = [
 schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus does not currently support searching over subsets of embeddings, so we break the embeddings into two parts: the head represents the initial subset of the vector to index and search, and the tail is the remainder. The model is trained for cosine distance similarity search, so we normalize the head embeddings. However, in order to calculate similarities for larger subsets later on, we need to store the norm of the head embedding, so we can unnormalize it before joining to the tail.</p>
-<p>To perform search via the first 1/6th of the embedding, we will need to create a vector search index over the <code translate="no">head_embedding</code> field. Later on, we will compare the results of “funnel search” with a regular vector search, and so build a search index over the full embedding also.</p>
-<p><em>Importantly, we use the <code translate="no">COSINE</code> rather than the <code translate="no">IP</code> distance metric, because otherwise we would need to keep track of the embedding norms, which would complicate the implementation (this will make more sense once the funnel search algorithm has been described).</em></p>
+<p>Milvus는 현재 임베딩의 하위 집합에 대한 검색을 지원하지 않기 때문에 임베딩을 두 부분으로 나누어 헤드는 색인 및 검색할 벡터의 초기 하위 집합을 나타내고 테일은 나머지 부분입니다. 이 모델은 코사인 거리 유사성 검색을 위해 훈련되었으므로 헤드 임베딩을 정규화합니다. 그러나 나중에 더 큰 하위 집합에 대한 유사도를 계산하려면 헤드 임베딩의 규범을 저장해야 하므로 꼬리에 결합하기 전에 정규화를 해제할 수 있습니다.</p>
+<p>임베딩의 첫 1/6을 통해 검색을 수행하려면 <code translate="no">head_embedding</code> 필드에 벡터 검색 인덱스를 생성해야 합니다. 나중에 '퍼널 검색'의 결과를 일반 벡터 검색과 비교할 것이므로 전체 임베딩에 대해서도 검색 인덱스를 구축할 것입니다.</p>
+<p><em>중요한 것은 <code translate="no">IP</code> 거리 메트릭이 아닌 <code translate="no">COSINE</code> 을 사용하는 것인데, 그렇지 않으면 임베딩 규범을 추적해야 하므로 구현이 복잡해지기 때문입니다(퍼널 검색 알고리즘에 대해 설명하면 더 이해가 쉬울 것입니다).</em></p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
@@ -143,7 +141,7 @@ index_params.add_index(
 index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
 client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
-<p>Finally, we encode the plot summaries for all 35k movies and enter the corresponding embeddings in to the database.</p>
+<p>마지막으로 35,000개의 모든 영화에 대한 줄거리 요약을 인코딩하고 해당 임베딩을 데이터베이스에 입력합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
     <span class="hljs-comment"># This particular model requires us to prefix &#x27;search_document:&#x27; to stored entities</span>
     plot_summary = [<span class="hljs-string">&quot;search_document: &quot;</span> + x.strip() <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> batch[<span class="hljs-string">&quot;PlotSummary&quot;</span>]]
@@ -164,7 +162,7 @@ client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">100%|██████████| 69/69 [05:57&lt;00:00,  5.18s/it]
 </code></pre>
-<h2 id="Performing-Funnel-Search" class="common-anchor-header">Performing Funnel Search<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
+<h2 id="Performing-Funnel-Search" class="common-anchor-header">퍼널 검색 수행하기<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,7 +177,7 @@ client.create_index(collection_name, index_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s now implement a “funnel search” using the first 1/6th of the Matryoshka embedding dimensions. I have three movies in mind for retrieval and have produced my own plot summary for querying the database. We embed the queries, then perform a vector search on the <code translate="no">head_embedding</code> field, retrieving 128 result candidates.</p>
+    </button></h2><p>이제 마트료시카 임베딩 차원의 첫 1/6을 사용해 '퍼널 검색'을 구현해 보겠습니다. 검색할 영화 세 편을 염두에 두고 있으며 데이터베이스 쿼리를 위한 줄거리 요약을 직접 작성했습니다. 쿼리를 임베드한 다음 <code translate="no">head_embedding</code> 필드에서 벡터 검색을 수행하여 128개의 결과 후보를 검색합니다.</p>
 <pre><code translate="no" class="language-python">queries = [
     <span class="hljs-string">&quot;An archaeologist searches for ancient artifacts while fighting Nazis.&quot;</span>,
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>,
@@ -209,7 +207,7 @@ res = client.search(
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;head_embedding&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>At this point, we have performed search over a much smaller vector space, and are therefore likely to have lowered latency and lessened storage requirements for the index relative to search over the full space. Let’s examine the top 5 matches for each query:</p>
+<p>이 시점에서 훨씬 더 작은 벡터 공간에서 검색을 수행했기 때문에 전체 공간에서 검색할 때보다 지연 시간이 줄어들고 인덱스에 대한 저장 공간 요구 사항이 줄어들었을 가능성이 높습니다. 각 쿼리에 대해 상위 5개 일치 항목을 살펴보겠습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query, hits <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(queries, res):
     rows = [x[<span class="hljs-string">&quot;entity&quot;</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> hits][:<span class="hljs-number">5</span>]
 
@@ -243,8 +241,8 @@ The Ref
 Impact
 The House in Marsh Road
 </code></pre>
-<p>As we can see, recall has suffered as a consequence of truncating the embeddings during search. Funnel search fixes this with a clever trick: we can use the remainder of the embedding dimensions to rerank and prune our candidate list to recover retrieval performance without running any additional expensive vector searches.</p>
-<p>For ease of exposition of the funnel search algorithm, we convert the Milvus search hits for each query into a Pandas dataframe.</p>
+<p>보시다시피, 검색 중에 임베딩을 잘라낸 결과 리콜이 저하되었습니다. 퍼널 검색은 이 문제를 영리한 방법으로 해결합니다. 나머지 임베딩 차원을 사용하여 후보 목록의 순위를 재조정하고 잘라내어 비용이 많이 드는 벡터 검색을 추가로 실행하지 않고도 검색 성능을 회복할 수 있습니다.</p>
+<p>퍼널 검색 알고리즘을 쉽게 설명하기 위해 각 쿼리에 대한 Milvus 검색 히트를 Pandas 데이터 프레임으로 변환합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
     Convert a Milvus search result to a Pandas dataframe. This function is specific to our data schema.
@@ -259,8 +257,8 @@ The House in Marsh Road
 
 dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, to perform funnel search we iterate over the increasingly larger subsets of the embeddings. At each iteration, we rerank the candidates according to the new similarities and prune some fraction of the lowest ranked ones.</p>
-<p>To make this concrete, from the previous step we have retrieved 128 candidates using 1/6 of the embedding and query dimensions. The first step in performing funnel search is to recalculate the similarities between the queries and candidates using <em>the first 1/3 of the dimensions</em>. The bottom 64 candidates are pruned. Then we repeat this process with <em>the first 2/3 of the dimensions</em>, and then <em>all of the dimensions</em>, successively pruning to 32 and 16 candidates.</p>
+<p>이제 퍼널 검색을 수행하기 위해 임베딩의 점점 더 큰 하위 집합을 반복합니다. 반복할 때마다 새로운 유사성에 따라 후보의 순위를 재조정하고 가장 낮은 순위를 가진 일부 후보를 제거합니다.</p>
+<p>이를 구체적으로 설명하기 위해 이전 단계에서는 임베딩 및 쿼리 차원의 1/6을 사용하여 128개의 후보를 검색했습니다. 퍼널 검색을 수행하는 첫 번째 단계는 <em>첫 번째 1/3의 차원을</em> 사용하여 쿼리와 후보 간의 유사성을 다시 계산하는 것입니다. 하위 64개의 후보가 제거됩니다. 그런 다음 <em>처음 2/3의 차원과</em> <em>모든 차원에</em> 대해 이 프로세스를 반복하여 32개와 16개의 후보를 연속적으로 정리합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># An optimized implementation would vectorize the calculation of similarity scores across rows (using a matrix)</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_score</span>(<span class="hljs-params">row, query_emb=<span class="hljs-literal">None</span>, dims=<span class="hljs-number">768</span></span>):
     emb = F.normalize(row[<span class="hljs-string">&quot;embedding&quot;</span>][:dims], dim=-<span class="hljs-number">1</span>)
@@ -323,8 +321,8 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>We have been able to restore recall without performing any additional vector searches! Qualitatively, these results seem to have higher recall for “Raiders of the Lost Ark” and “The Shining” than the standard vector search in the tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search using Milvus and Sentence Transformers”</a>, which uses a different embedding model. However, it is unable to find "Ferris Bueller’s Day Off", which we will return to later in the notebook. (See the paper <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> for more quantitative experiments and benchmarking.)</p>
-<h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Comparing Funnel Search to Regular Search<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
+<p>추가 벡터 검색을 수행하지 않고도 리콜을 복원할 수 있었습니다! 질적으로 이러한 결과는 다른 임베딩 모델을 사용하는 튜토리얼 <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">'밀버스와 문장 트랜스포머를 사용한 영화 검색'</a>의 표준 벡터 검색보다 '로스트 아크의 침입자'와 '샤이닝'에 대한 리콜이 더 높은 것으로 보입니다. 그러나 "페리스 뷸러의 하루"는 찾을 수 없으며, 이 내용은 나중에 노트북에서 다시 다룰 예정입니다. (더 많은 정량적 실험과 벤치마킹은 <a href="https://arxiv.org/abs/2205.13147">Matryoshka 표현 학습</a> 논문을 참조하세요.)</p>
+<h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">퍼널 검색과 일반 검색 비교<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -339,7 +337,7 @@ Name: title, dtype: object
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s compare the results of our funnel search to a standard vector search <em>on the same dataset with the same embedding model</em>. We perform a search on the full embeddings.</p>
+    </button></h2><p><em>동일한 임베딩 모델을 사용하는 동일한 데이터 세트에서</em> 퍼널 검색의 결과를 표준 벡터 검색과 비교해 보겠습니다. 전체 임베딩에 대해 검색을 수행합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search on entire embeddings</span>
 res = client.search(
     collection_name=collection_name,
@@ -382,8 +380,8 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>With the exception of the results for "A teenager fakes illness to get off school…", the results under funnel search are almost identical to the full search, even though the funnel search was performed on a search space of 128 dimensions vs 768 dimensions for the regular one.</p>
-<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Investigating Funnel Search Recall Failure for Ferris Bueller’s Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
+<p>"한 십대가 학교를 빠지기 위해 병을 속이고..."에 대한 결과를 제외하면, 퍼널 검색의 경우 128차원의 검색 공간에서 퍼널 검색을 수행한 반면 일반 검색의 경우 768차원에서 검색을 수행했음에도 불구하고 전체 검색과 거의 동일한 결과를 얻을 수 있습니다.</p>
+<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">페리스 뷸러의 휴무일에 대한 퍼널 검색 리콜 실패 조사하기<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -398,7 +396,7 @@ Home Alone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Why didn’t funnel search succeed in retrieving Ferris Bueller’s Day Off? Let’s examine whether or not it was in the original candidate list or was mistakenly filtered out.</p>
+    </button></h2><p>왜 퍼널 검색이 페리스 뷸러의 휴일 검색에 성공하지 못했을까요? 원래 후보 목록에 있었던 것인지 아니면 실수로 필터링이 잘못되었는지 살펴보겠습니다.</p>
 <pre><code translate="no" class="language-python">queries2 = [
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>
 ]
@@ -434,7 +432,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>We see that the issue was that the initial candidate list was not large enough, or rather, the desired hit is not similar enough to the query at the highest level of granularity. Changing it from <code translate="no">128</code> to <code translate="no">256</code> results in successful retrieval. <em>We should form a rule-of-thumb to set the number of candidates on a held-out set to empirically evaluate the trade-off between recall and latency.</em></p>
+<p>초기 후보 목록이 충분히 크지 않았거나, 오히려 원하는 검색어가 가장 높은 수준의 세부 수준에서 쿼리와 충분히 유사하지 않은 것이 문제임을 알 수 있습니다. <code translate="no">128</code> 에서 <code translate="no">256</code> 으로 변경하면 검색에 성공합니다. <em>리콜과 지연 시간 간의 균형을 경험적으로 평가하기 위해 홀드아웃 세트의 후보자 수를 설정하는 경험 법칙을 만들어야 합니다.</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -454,7 +452,7 @@ On the Edge of Innocence
               Unfriended
               Simon Says 
 </code></pre>
-<h2 id="Does-the-order-matter-Prefix-vs-suffix-embeddings" class="common-anchor-header">Does the order matter? Prefix vs suffix embeddings.<button data-href="#Does-the-order-matter-Prefix-vs-suffix-embeddings" class="anchor-icon" translate="no">
+<h2 id="Does-the-order-matter-Prefix-vs-suffix-embeddings" class="common-anchor-header">순서가 중요한가요? 접두사 임베딩 대 접미사 임베딩.<button data-href="#Does-the-order-matter-Prefix-vs-suffix-embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -469,7 +467,7 @@ On the Edge of Innocence
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The model was trained to perform well matching recursively smaller prefixes of the embeddings. Does the order of the dimensions we use matter? For instance, could we also take subsets of the embeddings that are suffixes? In this experiment, we reverse the order of the dimensions in the Matryoshka embeddings and perform a funnel search.</p>
+    </button></h2><p>이 모델은 재귀적으로 작은 접두사 임베딩을 잘 일치시키도록 학습되었습니다. 우리가 사용하는 차원의 순서가 중요할까요? 예를 들어, 접미사인 임베딩의 하위 집합도 사용할 수 있을까요? 이 실험에서는 마트료시카 임베딩의 차원 순서를 반대로 하여 깔때기 검색을 수행합니다.</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;./wikiplots-matryoshka-flipped.db&quot;</span>)
 
 fields = [
@@ -571,8 +569,8 @@ Leopard in the Snow
          Unfaithful
      Always a Bride 
 </code></pre>
-<p>Recall is much poorer than funnel search or regular search as expected (the embedding model was trained by contrastive learning on prefixes of the embedding dimensions, not suffixes).</p>
-<h2 id="Summary" class="common-anchor-header">Summary<button data-href="#Summary" class="anchor-icon" translate="no">
+<p>예상대로 퍼널 검색이나 일반 검색보다 리콜률이 훨씬 떨어집니다(임베딩 모델은 접미사가 아닌 임베딩 차원의 접두사에 대한 대조 학습을 통해 학습되었습니다).</p>
+<h2 id="Summary" class="common-anchor-header">요약<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -587,8 +585,8 @@ Leopard in the Snow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Here is a comparison of our search results across methods:</p>
+    </button></h2><p>다음은 여러 방법의 검색 결과를 비교한 것입니다:</p>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
 <div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.6.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-the-shining.png' width='100%'></div>
-We have shown how to use Matryoshka embeddings with Milvus for performing a more efficient semantic search algorithm called "funnel search." We also explored the importance of the reranking and pruning steps of the algorithm, as well as a failure mode when the initial candidate list is too small. Finally, we discussed how the order of the dimensions is important when forming sub-embeddings - it must be in the same way for which the model was trained. Or rather, it is only because the model was trained in a certain way that prefixes of the embeddings are meaningful. Now you know how to implement Matryoshka embeddings and funnel search to reduce the storage costs of semantic search without sacrificing too much retrieval performance!
+"퍼널 검색"이라는 보다 효율적인 시맨틱 검색 알고리즘을 수행하기 위해 Milvus와 함께 Matryoshka 임베딩을 사용하는 방법을 보여드렸습니다. 또한 알고리즘의 순위 재지정 및 가지치기 단계의 중요성과 초기 후보 목록이 너무 작을 때의 실패 모드에 대해서도 살펴봤습니다. 마지막으로, 하위 임베딩을 구성할 때 차원 순서가 얼마나 중요한지, 즉 모델이 학습된 것과 같은 방식이어야 하는지에 대해 논의했습니다. 또는 오히려 모델이 특정 방식으로 학습되었기 때문에 임베딩의 접두사가 의미가 있는 것입니다. 이제 검색 성능을 크게 저하시키지 않으면서도 시맨틱 검색의 저장 비용을 줄이기 위해 Matryoshka 임베딩과 퍼널 검색을 구현하는 방법을 알게 되었습니다!

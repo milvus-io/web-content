@@ -37,7 +37,7 @@ summary: IVF_FLATインデックスは、浮動小数点ベクトルの検索性
       </svg>
     </button></h2><p><strong>IVF_FLATは</strong> <strong>Inverted File Flatの</strong>略で、浮動小数点ベクトルのインデックス作成と検索に対する二重構造のアプローチを表しています：</p>
 <ul>
-<li><p><strong>反転ファイル（IVF）：</strong>Inverted File (IVF):<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-meansクラスタリングを</a>使用して、ベクトル空間を管理しやすい領域にクラスタリングすることを指します。各クラスタは<strong>重心で</strong>表され、その中のベクトルの参照点として機能する。</p></li>
+<li><p><strong>反転ファイル（IVF）：</strong>Inverted File (IVF):<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-meansクラスタリングを</a>使用して、ベクトル空間を管理しやすい領域にクラスタリングすることを指します。各クラスタは<strong>重心によって</strong>表され、その中のベクトルの参照点として機能する。</p></li>
 <li><p><strong>フラット：</strong>各クラスタ内で、正確な距離計算を行うために、圧縮や量子化を行わず、ベクトルを元の形（フラット構造）で保存することを示す。</p></li>
 </ul>
 <p>下図はその仕組みを示しています：</p>

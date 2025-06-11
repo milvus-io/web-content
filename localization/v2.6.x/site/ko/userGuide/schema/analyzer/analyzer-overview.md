@@ -1,14 +1,12 @@
 ---
 id: analyzer-overview.md
-title: Analyzer Overview
+title: 분석기 개요
 summary: >-
-  In text processing, an analyzer is a crucial component that converts raw text
-  into a structured, searchable format. Each analyzer typically consists of two
-  core elements: tokenizer and filter. Together, they transform input text into
-  tokens, refine these tokens, and prepare them for efficient indexing and
-  retrieval.
+  텍스트 처리에서 분석기는 원시 텍스트를 구조화되고 검색 가능한 형식으로 변환하는 중요한 구성 요소입니다. 각 분석기는 일반적으로 토큰화기와
+  필터라는 두 가지 핵심 요소로 구성됩니다. 이들은 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하며, 효율적인 색인 및 검색을
+  위해 준비합니다.
 ---
-<h1 id="Analyzer-Overview" class="common-anchor-header">Analyzer Overview<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
+<h1 id="Analyzer-Overview" class="common-anchor-header">분석기 개요<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,16 +21,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In text processing, an <strong>analyzer</strong> is a crucial component that converts raw text into a structured, searchable format. Each analyzer typically consists of two core elements: <strong>tokenizer</strong> and <strong>filter</strong>. Together, they transform input text into tokens, refine these tokens, and prepare them for efficient indexing and retrieval.</p>
-<p>In Milvus, analyzers are configured during collection creation when you add <code translate="no">VARCHAR</code> fields to the collection schema. Tokens produced by an analyzer can be used to build an index for keyword matching or converted into sparse embeddings for full text search. For more information, refer to <a href="/docs/keyword-match.md">Text Match</a> or <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
+    </button></h1><p>텍스트 처리에서 <strong>분석기는</strong> 원시 텍스트를 구조화되고 검색 가능한 형식으로 변환하는 중요한 구성 요소입니다. 각 분석기는 일반적으로 <strong>토큰화기와</strong> <strong>필터라는</strong> 두 가지 핵심 요소로 구성됩니다. 이들은 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하며, 효율적인 색인 및 검색을 위해 준비합니다.</p>
+<p>Milvus에서 분석기는 컬렉션 스키마에 <code translate="no">VARCHAR</code> 필드를 추가할 때 컬렉션 생성 중에 구성됩니다. 분석기가 생성한 토큰은 키워드 매칭을 위한 인덱스를 구축하는 데 사용하거나 전체 텍스트 검색을 위해 스파스 임베딩으로 변환할 수 있습니다. 자세한 내용은 <a href="/docs/ko/keyword-match.md">텍스트 검색</a> 또는 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 <div class="alert note">
-<p>The use of analyzers may impact performance:</p>
+<p>분석기를 사용하면 성능에 영향을 미칠 수 있습니다:</p>
 <ul>
-<li><p><strong>Full text search:</strong> For full text search, <strong>DataNode</strong> and <strong>QueryNode</strong> channels consume data more slowly because they must wait for tokenization to complete. As a result, newly ingested data takes longer to become available for search.</p></li>
-<li><p><strong>Keyword match:</strong> For keyword matching, index creation is also slower since tokenization needs to finish before an index can be built.</p></li>
+<li><p><strong>전체 텍스트 검색:</strong> 전체 텍스트 검색의 경우, 토큰화가 완료될 때까지 기다려야 하기 때문에 <strong>DataNode</strong> 및 <strong>QueryNode</strong> 채널은 데이터를 더 느리게 소비합니다. 따라서 새로 수집된 데이터를 검색에 사용할 수 있게 되는 데 시간이 더 오래 걸립니다.</p></li>
+<li><p><strong>키워드 일치:</strong> 키워드 매칭의 경우, 인덱스를 구축하기 전에 토큰화가 완료되어야 하므로 인덱스 생성도 더 느려집니다.</p></li>
 </ul>
 </div>
-<h2 id="Anatomy-of-an-analyzer" class="common-anchor-header">Anatomy of an analyzer<button data-href="#Anatomy-of-an-analyzer" class="anchor-icon" translate="no">
+<h2 id="Anatomy-of-an-analyzer" class="common-anchor-header">분석기의 구조<button data-href="#Anatomy-of-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,22 +45,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>An analyzer in Milvus consists of exactly one <strong>tokenizer</strong> and <strong>zero or more</strong> filters.</p>
+    </button></h2><p>Milvus의 분석기는 정확히 하나의 <strong>토큰화</strong> 도구와 <strong>0개 이상의</strong> 필터로 구성됩니다.</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: The tokenizer breaks input text into discrete units called tokens. These tokens could be words or phrases, depending on the tokenizer type.</p></li>
-<li><p><strong>Filters</strong>: Filters can be applied to tokens to further refine them, for example, by making them lowercase or removing common words.</p></li>
+<li><p><strong>토큰화 도구</strong>: 토큰화기는 입력 텍스트를 토큰이라는 개별 단위로 분해합니다. 이러한 토큰은 토큰라이저 유형에 따라 단어 또는 구문일 수 있습니다.</p></li>
+<li><p><strong>필터</strong>: 필터: 토큰에 필터를 적용하여 토큰을 소문자로 만들거나 일반적인 단어를 제거하는 등 토큰을 더욱 세분화할 수 있습니다.</p></li>
 </ul>
 <div class="alert note">
-<p>Tokenizers support only UTF-8 format. Support for other formats will be added in future releases.</p>
+<p>토큰화기는 UTF-8 형식만 지원합니다. 다른 형식에 대한 지원은 향후 릴리스에서 추가될 예정입니다.</p>
 </div>
-<p>The workflow below shows how an analyzer processes text.</p>
+<p>아래 워크플로에서는 분석기가 텍스트를 처리하는 방법을 보여줍니다.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
-    <span>Analyzer Process Workflow</span>
-  </span>
-</p>
-<h2 id="Analyzer-types" class="common-anchor-header">Analyzer types<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
+   </span> <span class="img-wrapper"> <span>분석기 프로세스 워크플로</span> </span></p>
+<h2 id="Analyzer-types" class="common-anchor-header">분석기 유형<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,23 +73,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides two types of analyzers to meet different text processing needs:</p>
+    </button></h2><p>Milvus는 서로 다른 텍스트 처리 요구 사항을 충족하기 위해 두 가지 유형의 분석기를 제공합니다:</p>
 <ul>
-<li><p><strong>Built-in analyzer</strong>: These are predefined configurations that cover common text processing tasks with minimal setup. Built-in analyzers are ideal for general-purpose searches, as they require no complex configuration.</p></li>
-<li><p><strong>Custom analyzer</strong>: For more advanced requirements, custom analyzers allow you to define your own configuration by specifying both the tokenizer and zero or more filters. This level of customization is especially useful for specialized use cases where precise control over text processing is needed.</p></li>
+<li><p><strong>기본 제공 분석기</strong>: 최소한의 설정으로 일반적인 텍스트 처리 작업을 처리하는 사전 정의된 구성입니다. 기본 제공 분석기는 복잡한 구성이 필요하지 않으므로 범용 검색에 이상적입니다.</p></li>
+<li><p><strong>사용자 정의 분석기</strong>: 보다 고급 요구 사항이 필요한 경우, 사용자 정의 분석기를 사용하면 토큰화 도구와 0개 이상의 필터를 모두 지정하여 자신만의 구성을 정의할 수 있습니다. 이 수준의 사용자 지정은 텍스트 처리에 대한 정밀한 제어가 필요한 특수한 사용 사례에 특히 유용합니다.</p></li>
 </ul>
 <div class="alert note">
-<p>If you omit analyzer configurations during collection creation, Milvus uses the <code translate="no">standard</code> analyzer for all text processing by default. For details, refer to <a href="/docs/standard-analyzer.md">Standard</a>.</p>
+<p>수집 생성 중에 분석기 구성을 생략하는 경우, Milvus는 기본적으로 모든 텍스트 처리에 <code translate="no">standard</code> 분석기를 사용합니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준을</a> 참조하세요.</p>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Built-in analyzer</h3><p>Built-in analyzers in Milvus are pre-configured with specific tokenizers and filters, allowing you to use them immediately without needing to define these components yourself. Each built-in analyzer serves as a template that includes a preset tokenizer and filters, with optional parameters for customization.</p>
-<p>For example, to use the <code translate="no">standard</code> built-in analyzer, simply specify its name <code translate="no">standard</code> as the <code translate="no">type</code> and optionally include extra configurations specific to this analyzer type, such as <code translate="no">stop_words</code>:</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">기본 제공 분석기</h3><p>Milvus의 기본 제공 분석기는 특정 토큰화기 및 필터로 미리 구성되어 있으므로 이러한 구성 요소를 직접 정의할 필요 없이 즉시 사용할 수 있습니다. 각 기본 제공 분석기는 사전 설정된 토큰화 도구와 필터가 포함된 템플릿 역할을 하며, 사용자 지정을 위한 선택적 매개변수를 제공합니다.</p>
+<p>예를 들어 <code translate="no">standard</code> 기본 제공 분석기를 사용하려면 <code translate="no">standard</code> 이름을 <code translate="no">type</code> 로 지정하고 선택적으로 이 분석기 유형에 특정한 추가 구성(예: <code translate="no">stop_words</code>)을 포함하면 됩니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Uses the standard built-in analyzer</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Defines a list of common words (stop words) to exclude from tokenization</span>
@@ -115,14 +106,9 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To check the execution result of an analyzer, use the <code translate="no">run_analyzer</code> method:</p>
+<p>분석기의 실행 결과를 확인하려면 <code translate="no">run_analyzer</code> 메서드를 사용합니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
 
@@ -174,18 +160,13 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The output will be:</p>
+<p>출력은 다음과 같습니다:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>This demonstrates that the analyzer properly tokenizes the input text by filtering out the stop words <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, and <code translate="no">&quot;for&quot;</code>, while returning the remaining meaningful tokens.</p>
-<p>The configuration of the <code translate="no">standard</code> built-in analyzer above is equivalent to setting up a <a href="/docs/analyzer-overview.md#Custom-analyzer">custom analyzer</a> with the following parameters, where <code translate="no">tokenizer</code> and <code translate="no">filter</code> options are explicitly defined to achieve similar functionality:</p>
+<p>이는 분석기가 입력 텍스트를 올바르게 토큰화하여 <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, <code translate="no">&quot;for&quot;</code> 를 필터링하고 나머지 의미 있는 토큰을 반환한다는 것을 보여줍니다.</p>
+<p>위의 <code translate="no">standard</code> 기본 제공 분석기의 구성은 <code translate="no">tokenizer</code> 및 <code translate="no">filter</code> 옵션을 명시적으로 정의하여 유사한 기능을 달성하는 <a href="/docs/ko/analyzer-overview.md#Custom-analyzer">사용자</a> 정의 분석기를 다음 매개 변수로 설정하는 것과 동일합니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -234,25 +215,20 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
    ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus offers the following built-in analyzers, each designed for specific text processing needs:</p>
+<p>Milvus는 다음과 같은 내장 분석기를 제공하며, 각 분석기는 특정 텍스트 처리 요구 사항에 맞게 설계되었습니다:</p>
 <ul>
-<li><p><code translate="no">standard</code>: Suitable for general-purpose text processing, applying standard tokenization and lowercase filtering.</p></li>
-<li><p><code translate="no">english</code>: Optimized for English-language text, with support for English stop words.</p></li>
-<li><p><code translate="no">chinese</code>: Specialized for processing Chinese text, including tokenization adapted for Chinese language structures.</p></li>
+<li><p><code translate="no">standard</code>: 표준 토큰화 및 소문자 필터링을 적용하는 범용 텍스트 처리에 적합합니다.</p></li>
+<li><p><code translate="no">english</code>: 영어 중단어 지원으로 영어 텍스트에 최적화되어 있습니다.</p></li>
+<li><p><code translate="no">chinese</code>: 중국어 구조에 맞는 토큰화 등 중국어 텍스트 처리에 특화되어 있습니다.</p></li>
 </ul>
-<h3 id="Custom-analyzer" class="common-anchor-header">Custom analyzer</h3><p>For more advanced text processing, custom analyzers in Milvus allow you to build a tailored text-handling pipeline by specifying both a <strong>tokenizer</strong> and <strong>filters</strong>. This setup is ideal for specialized use cases where precise control is required.</p>
-<h4 id="Tokenizer" class="common-anchor-header">Tokenizer</h4><p>The <strong>tokenizer</strong> is a <strong>mandatory</strong> component for a custom analyzer, which initiates the analyzer pipeline by breaking down input text into discrete units or <strong>tokens</strong>. Tokenization follows specific rules, such as splitting by whitespace or punctuation, depending on the tokenizer type. This process allows for more precise and independent handling of each word or phrase.</p>
-<p>For example, a tokenizer would convert text <code translate="no">&quot;Vector Database Built for Scale&quot;</code> into separate tokens:</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">사용자 지정 분석기</h3><p>보다 고급 텍스트 처리를 위해 Milvus의 사용자 지정 분석기를 사용하면 <strong>토큰화기와</strong> <strong>필터를</strong> 모두 지정하여 맞춤형 텍스트 처리 파이프라인을 구축할 수 있습니다. 이 설정은 정밀한 제어가 필요한 특수한 사용 사례에 이상적입니다.</p>
+<h4 id="Tokenizer" class="common-anchor-header">토큰화 도구</h4><p><strong>토큰화</strong> 도구는 사용자 정의 분석기의 <strong>필수</strong> 구성 요소로, 입력 텍스트를 개별 단위 또는 <strong>토큰으로</strong> 분해하여 분석기 파이프라인을 시작합니다. 토큰화는 토큰화 유형에 따라 공백이나 구두점으로 분할하는 등의 특정 규칙을 따릅니다. 이 프로세스를 통해 각 단어나 구를 보다 정확하고 독립적으로 처리할 수 있습니다.</p>
+<p>예를 들어, 토큰화기는 <code translate="no">&quot;Vector Database Built for Scale&quot;</code> 텍스트를 별도의 토큰으로 변환합니다:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example of specifying a tokenizer</strong>:</p>
+<p><strong>토큰화기 지정 예시</strong>:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
 }
@@ -270,27 +246,22 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter" class="common-anchor-header">Filter</h4><p><strong>Filters</strong> are <strong>optional</strong> components working on the tokens produced by the tokenizer, transforming or refining them as needed. For example, after applying a <code translate="no">lowercase</code> filter to the tokenized terms <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, the result might be:</p>
+<h4 id="Filter" class="common-anchor-header">필터</h4><p><strong>필터는</strong> 토큰화 도구가 생성한 토큰에 대해 필요에 따라 토큰을 변형하거나 정제하는 <strong>선택적</strong> 구성 요소입니다. 예를 들어, 토큰화된 용어 <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 에 <code translate="no">lowercase</code> 필터를 적용하면 다음과 같은 결과가 나올 수 있습니다:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Filters in a custom analyzer can be either <strong>built-in</strong> or <strong>custom</strong>, depending on configuration needs.</p>
+<p>사용자 정의 분석기의 필터는 구성 요구 사항에 따라 <strong>기본 제공</strong> 또는 <strong>사용자 정의가</strong> 가능합니다.</p>
 <ul>
-<li><p><strong>Built-in filters</strong>: Pre-configured by Milvus, requiring minimal setup. You can use these filters out-of-the-box by specifying their names. The filters below are built-in for direct use:</p>
+<li><p><strong>기본 제공 필터</strong>: Milvus에서 미리 구성한 필터로, 최소한의 설정만 필요합니다. 이러한 필터는 이름을 지정하여 바로 사용할 수 있습니다. 아래 필터는 바로 사용할 수 있는 기본 제공 필터입니다:</p>
 <ul>
-<li><p><code translate="no">lowercase</code>: Converts text to lowercase, ensuring case-insensitive matching. For details, refer to <a href="/docs/lowercase-filter.md">Lowercase</a>.</p></li>
-<li><p><code translate="no">asciifolding</code>: Converts non-ASCII characters to ASCII equivalents, simplifying multilingual text handling. For details, refer to <a href="/docs/ascii-folding-filter.md">ASCII folding</a>.</p></li>
-<li><p><code translate="no">alphanumonly</code>: Retains only alphanumeric characters by removing others. For details, refer to <a href="/docs/alphanumonly-filter.md">Alphanumonly</a>.</p></li>
-<li><p><code translate="no">cnalphanumonly</code>: Removes tokens that contain any characters other than Chinese characters, English letters, or digits. For details, refer to <a href="/docs/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
-<li><p><code translate="no">cncharonly</code>: Removes tokens that contain any non-Chinese characters. For details, refer to <a href="/docs/cncharonly-filter.md">Cncharonly</a>.</p></li>
+<li><p><code translate="no">lowercase</code>: 텍스트를 소문자로 변환하여 대소문자를 구분하지 않는 매칭을 보장합니다. 자세한 내용은 <a href="/docs/ko/lowercase-filter.md">소문자를</a> 참조하세요.</p></li>
+<li><p><code translate="no">asciifolding</code>: ASCII가 아닌 문자를 ASCII에 해당하는 문자로 변환하여 다국어 텍스트 처리를 간소화합니다. 자세한 내용은 <a href="/docs/ko/ascii-folding-filter.md">ASCII 접기를</a> 참조하세요.</p></li>
+<li><p><code translate="no">alphanumonly</code>: 다른 문자를 제거하여 영숫자 문자만 유지합니다. 자세한 내용은 <a href="/docs/ko/alphanumonly-filter.md">영숫자만을</a> 참조하세요.</p></li>
+<li><p><code translate="no">cnalphanumonly</code>: 한자, 영문자 또는 숫자 이외의 문자가 포함된 토큰을 제거합니다. 자세한 내용은 <a href="/docs/ko/cnalphanumonly-filter.md">영숫자만을</a> 참조하십시오.</p></li>
+<li><p><code translate="no">cncharonly</code>: 한자 이외의 문자가 포함된 토큰을 제거합니다. 자세한 내용은 <a href="/docs/ko/cncharonly-filter.md">Cncharonly를</a> 참조하세요.</p></li>
 </ul>
-<p><strong>Example of using a built-in filter:</strong></p>
+<p><strong>기본 제공 필터 사용 예제입니다:</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python</a>
-<a href="#java">Java</a>
-<a href="#javascript">NodeJS</a>
-<a href="#go">Go</a>
-<a href="#bash">cURL</a>
-</div></p>
+<a href="#python">파이썬</a><a href="#java">자바</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>], <span class="hljs-comment"># Optional: Built-in filter that converts text to lowercase</span>
@@ -313,20 +284,15 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
        &quot;filter&quot;:  [&quot;lowercase&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Custom filters</strong>: Custom filters allow for specialized configurations. You can define a custom filter by choosing a valid filter type (<code translate="no">filter.type</code>) and adding specific settings for each filter type. Examples of filter types that support customization:</p>
+<li><p><strong>사용자 정의 필터</strong>: 사용자 정의 필터: 사용자 정의 필터를 사용하면 특수한 구성을 할 수 있습니다. 유효한 필터 유형(<code translate="no">filter.type</code>)을 선택하고 각 필터 유형에 대한 특정 설정을 추가하여 사용자 정의 필터를 정의할 수 있습니다. 사용자 지정을 지원하는 필터 유형의 예는 다음과 같습니다:</p>
 <ul>
-<li><p><code translate="no">stop</code>: Removes specified common words by setting a list of stop words (e.g., <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). For details, refer to <a href="/docs/stop-filter.md">Stop</a>.</p></li>
-<li><p><code translate="no">length</code>: Excludes tokens based on length criteria, such as setting a maximum token length. For details, refer to <a href="/docs/length-filter.md">Length</a>.</p></li>
-<li><p><code translate="no">stemmer</code>: Reduces words to their root forms for more flexible matching. For details, refer to <a href="/docs/stemmer-filter.md">Stemmer</a>.</p></li>
+<li><p><code translate="no">stop</code>: 중지 단어 목록을 설정하여 지정된 일반 단어를 제거합니다(예: <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). 자세한 내용은 <a href="/docs/ko/stop-filter.md">중지를</a> 참조하세요.</p></li>
+<li><p><code translate="no">length</code>: 최대 토큰 길이를 설정하는 등 길이 기준에 따라 토큰을 제외합니다. 자세한 내용은 <a href="/docs/ko/length-filter.md">길이를</a> 참조하세요.</p></li>
+<li><p><code translate="no">stemmer</code>: 보다 유연한 매칭을 위해 단어를 어근 형태로 줄입니다. 자세한 내용은 <a href="/docs/ko/stemmer-filter.md">어간을</a> 참조하세요.</p></li>
 </ul>
-<p><strong>Example of configuring a custom filter:</strong></p>
+<p><strong>사용자 지정 필터 구성 예제:</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python</a>
-<a href="#java">Java</a>
-<a href="#javascript">NodeJS</a>
-<a href="#go">Go</a>
-<a href="#bash">cURL</a>
-</div></p>
+<a href="#python">파이썬</a><a href="#java">자바</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -372,7 +338,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Example-use" class="common-anchor-header">Example use<button data-href="#Example-use" class="anchor-icon" translate="no">
+<h2 id="Example-use" class="common-anchor-header">사용 예<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -387,24 +353,19 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this example, you will create a collection schema that includes:</p>
+    </button></h2><p>이 예에서는 다음을 포함하는 컬렉션 스키마를 만듭니다:</p>
 <ul>
-<li><p>A vector field for embeddings.</p></li>
-<li><p>Two <code translate="no">VARCHAR</code> fields for text processing:</p>
+<li><p>임베딩을 위한 벡터 필드.</p></li>
+<li><p>텍스트 처리를 위한 <code translate="no">VARCHAR</code> 필드 2개:</p>
 <ul>
-<li><p>One field uses a built-in analyzer.</p></li>
-<li><p>The other uses a custom analyzer.</p></li>
+<li><p>한 필드는 기본 제공 분석기를 사용합니다.</p></li>
+<li><p>다른 하나는 사용자 지정 분석기를 사용합니다.</p></li>
 </ul></li>
 </ul>
-<p>Before incorporating these configurations into your collection, you’ll verify each analyzer using the <code translate="no">run_analyzer</code> method.</p>
-<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Step 1: Initialize MilvusClient and create schema</h3><p>Begin by setting up the Milvus client and creating a new schema.</p>
+<p>이러한 구성을 컬렉션에 통합하기 전에 <code translate="no">run_analyzer</code> 방법을 사용하여 각 분석기를 확인합니다.</p>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">1단계: MilvusClient 초기화 및 스키마 만들기</h3><p>Milvus 클라이언트를 설정하고 새 스키마를 생성하는 것으로 시작하세요.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Set up a Milvus client</span>
@@ -462,19 +423,14 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Step 2: Define and verify analyzer configurations</h3><ol>
-<li><p><strong>Configure and verify a built-in analyzer</strong> (<code translate="no">english</code>)<strong>:</strong></p>
+<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">2단계: 분석기 구성 정의 및 확인</h3><ol>
+<li><p><strong>기본 제공 분석기를 구성하고 확인합니다</strong> (<code translate="no">english</code>)<strong>:</strong></p>
 <ul>
-<li><p><strong>Configuration:</strong> Define the analyzer parameters for the built-in English analyzer.</p></li>
-<li><p><strong>Verification:</strong> Use <code translate="no">run_analyzer</code> to check that the configuration produces the expected tokenization.</p></li>
+<li><p><strong>구성:</strong> 기본 제공 영어 분석기에 대한 분석기 매개 변수를 정의합니다.</p></li>
+<li><p><strong>확인:</strong> <code translate="no">run_analyzer</code> 을 사용하여 구성이 예상한 토큰화를 생성하는지 확인합니다.</p></li>
 </ul>
 <p><div class="multipleCode">
-<a href="#python">Python</a>
-<a href="#java">Java</a>
-<a href="#javascript">NodeJS</a>
-<a href="#go">Go</a>
-<a href="#bash">cURL</a>
-</div></p>
+<a href="#python">파이썬</a><a href="#java">자바</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Built-in analyzer configuration for English text processing</span>
 analyzer_params_built_in = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -532,18 +488,13 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Configure and verify a custom analyzer:</strong></p>
+<li><p><strong>사용자 정의 분석기를 구성하고 확인합니다:</strong></p>
 <ul>
-<li><p><strong>Configuration:</strong> Define a custom analyzer that uses a standard tokenizer along with a built-in lowercase filter and custom filters for token length and stop words.</p></li>
-<li><p><strong>Verification:</strong> Use <code translate="no">run_analyzer</code> to ensure the custom configuration processes text as intended.</p></li>
+<li><p><strong>구성:</strong> 기본 제공 소문자 필터 및 토큰 길이 및 중지 단어에 대한 사용자 지정 필터와 함께 표준 토큰화기를 사용하는 사용자 지정 분석기를 정의합니다.</p></li>
+<li><p><strong>확인:</strong> <code translate="no">run_analyzer</code> 을 사용하여 사용자 지정 구성이 의도한 대로 텍스트를 처리하는지 확인하세요.</p></li>
 </ul>
 <p><div class="multipleCode">
-<a href="#python">Python</a>
-<a href="#java">Java</a>
-<a href="#javascript">NodeJS</a>
-<a href="#go">Go</a>
-<a href="#bash">cURL</a>
-</div></p>
+<a href="#python">파이썬</a><a href="#java">자바</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom analyzer configuration with a standard tokenizer and custom filters</span>
 analyzer_params_custom = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
@@ -639,14 +590,9 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Step 3: Add fields to the schema</h3><p>Now that you have verified your analyzer configurations, add them to your schema fields:</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">3단계: 스키마에 필드 추가</h3><p>이제 분석기 구성을 확인했으므로 스키마 필드에 추가합니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>
 schema.add_field(
     field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>,
@@ -749,13 +695,8 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">Step 4: Prepare index parameters and create the collection</h3><div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">4단계: 인덱스 매개변수 준비 및 컬렉션 만들기</h3><div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
 index_params = client.prepare_index_params()
 index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>)

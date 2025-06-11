@@ -2,9 +2,9 @@
 id: configure_etcd.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure etcd for Milvus.
+summary: Milvus用のetcdの設定方法について説明します。
 ---
-<h1 id="etcd-related-Configurations" class="common-anchor-header">etcd-related Configurations<button data-href="#etcd-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="etcd-related-Configurations" class="common-anchor-header">etcd関連設定<button data-href="#etcd-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure etcd for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of etcd, used to store Milvus metadata & service discovery.</p>
+    </button></h1><p>Milvusのメタデータの保存とサービスディスカバリに使用されるetcdの関連設定。</p>
 <h2 id="etcdendpoints" class="common-anchor-header"><code translate="no">etcd.endpoints</code><button data-href="#etcdendpoints" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,16 +38,16 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.endpoints">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Endpoints used to access etcd service. You can change this parameter as the endpoints of your own etcd cluster.</li>      
-        <li>Environment variable: ETCD_ENDPOINTS</li>      
-        <li>etcd preferentially acquires valid address from environment variable ETCD_ENDPOINTS when Milvus is started.</li>      </td>
+        <li>etcdサービスにアクセスするためのエンドポイント。このパラメータはetcdクラスタのエンドポイントとして変更することができます。</li>      
+        <li>環境変数ETCD_ENDPOINTS</li>      
+        <li>etcdはMilvus起動時に環境変数ETCD_ENDPOINTSから有効なアドレスを優先的に取得します。</li>      </td>
       <td>localhost:2379</td>
     </tr>
   </tbody>
@@ -70,19 +70,19 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.rootPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Root prefix of the key to where Milvus stores data in etcd.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      
-        <li>To share an etcd instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them.</li>      
-        <li>Set an easy-to-identify root path for Milvus if etcd service already exists.</li>      
-        <li>Changing this for an already running Milvus instance may result in failures to read legacy data.</li>      </td>
-      <td>by-dev</td>
+        <li>Milvusがetcdにデータを保存するキーのルート接頭辞。</li>      
+        <li>Milvusを初めて起動する前にこのパラメータを変更することをお勧めします。</li>      
+        <li>複数のMilvusインスタンス間でetcdインスタンスを共有する場合は、Milvusインスタンスを起動する前に、インスタンスごとに異なる値に変更することを検討してください。</li>      
+        <li>etcdサービスがすでに存在する場合、Milvusのルートパスをわかりやすく設定する。</li>      
+        <li>既に稼働しているMilvusインスタンスに対してこれを変更すると、レガシーデータの読み込みに失敗する可能性があります。</li>      </td>
+      <td>バイデブ</td>
     </tr>
   </tbody>
 </table>
@@ -104,17 +104,17 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.metaSubPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Sub-prefix of the key to where Milvus stores metadata-related information in etcd.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      </td>
-      <td>meta</td>
+        <li>Milvusがetcdのメタデータ関連情報を保存するキーのサブプレフィックス。</li>      
+        <li>注意Milvusを一定期間使用した後にこのパラメータを変更すると、古いデータへのアクセスに影響します。</li>      
+        <li>Milvusを初めて起動する前にこのパラメータを変更することをお勧めします。</li>      </td>
+      <td>メタ</td>
     </tr>
   </tbody>
 </table>
@@ -136,16 +136,16 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.kvSubPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Sub-prefix of the key to where Milvus stores timestamps in etcd.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended not to change this parameter if there is no specific reason.</li>      </td>
+        <li>Milvusがetcdにタイムスタンプを保存するキーのサブプレフィックス。</li>      
+        <li>注意Milvusを一定期間使用した後にこのパラメータを変更すると、古いデータへのアクセスに影響します。</li>      
+        <li>特に理由がない場合は、このパラメータを変更しないことをお勧めします。</li>      </td>
       <td>kv</td>
     </tr>
   </tbody>
@@ -168,13 +168,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.log.level">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Only supports debug, info, warn, error, panic, or fatal. Default 'info'.      </td>
+      <td>        debug、info、warn、error、panic、fatal のみサポート。デフォルトは「info」である。      </td>
       <td>info</td>
     </tr>
   </tbody>
@@ -197,20 +197,20 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.log.path">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>path is one of:</li>      
-        <li> - "default" as os.Stderr,</li>      
-        <li> - "stderr" as os.Stderr,</li>      
-        <li> - "stdout" as os.Stdout,</li>      
-        <li> - file path to append server logs to.</li>      
-        <li>please adjust in embedded Milvus: /tmp/milvus/logs/etcd.log</li>      </td>
-      <td>stdout</td>
+        <li>パスは以下のいずれか：</li>      
+        <li>- "default "をos.Stderrとして指定します、</li>      
+        <li>- "stderr "をos.Stderrとする、</li>      
+        <li>- "stdout "をos.Stdoutとします、</li>      
+        <li>- サーバログを追加するファイルパス。</li>      
+        <li>組み込みMilvusで調整してください: /tmp/milvus/logs/etcd.log</li>      </td>
+      <td>標準出力</td>
     </tr>
   </tbody>
 </table>
@@ -232,13 +232,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to support ETCD secure connection mode      </td>
+      <td>        ETCDセキュア接続モードをサポートするかどうか      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -261,14 +261,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsCert">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your cert file      </td>
-      <td>/path/to/etcd-client.pem</td>
+      <td>        証明書ファイルへのパス      </td>
+      <td>/パス/to/etcd-client.pem</td>
     </tr>
   </tbody>
 </table>
@@ -290,14 +290,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your key file      </td>
-      <td>/path/to/etcd-client-key.pem</td>
+      <td>        鍵ファイルへのパス      </td>
+      <td>/パス/to/etcd-client-key.pem</td>
     </tr>
   </tbody>
 </table>
@@ -319,14 +319,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsCACert">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your CACert file      </td>
-      <td>/path/to/ca.pem</td>
+      <td>        CACertファイルへのパス      </td>
+      <td>/パス/to/ca.pem</td>
     </tr>
   </tbody>
 </table>
@@ -348,16 +348,16 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsMinVersion">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>TLS min version</li>      
-        <li>Optional values: 1.0, 1.1, 1.2, 1.3。</li>      
-        <li>We recommend using version 1.2 and above.</li>      </td>
+        <li>TLS最小バージョン</li>      
+        <li>オプションの値：1.0, 1.1, 1.2, 1.3。</li>      
+        <li>バージョン1.2以上の使用を推奨。</li>      </td>
       <td>1.3</td>
     </tr>
   </tbody>
@@ -380,13 +380,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.requestTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Etcd operation timeout in milliseconds      </td>
+      <td>        Etcd 操作タイムアウト（ミリ秒単位      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -409,13 +409,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.use.embed">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable embedded Etcd (an in-process EtcdServer).      </td>
+      <td>        組み込み Etcd（プロセス内 EtcdServer）を有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -438,14 +438,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.data.dir">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Embedded Etcd only. please adjust in embedded Milvus: /tmp/milvus/etcdData/      </td>
-      <td>default.etcd</td>
+      <td>        組み込みEtcdのみ。組み込みMilvusで調整してください: /tmp/milvus/etcdData/      </td>
+      <td>デフォルト.etcd</td>
     </tr>
   </tbody>
 </table>
@@ -467,13 +467,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.auth.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable authentication      </td>
+      <td>        認証を有効にするかどうか      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -496,13 +496,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.auth.userName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        username for etcd authentication      </td>
+      <td>        etcd 認証用のユーザー名      </td>
       <td></td>
     </tr>
   </tbody>
@@ -525,13 +525,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.auth.password">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        password for etcd authentication      </td>
+      <td>        etcd 認証用パスワード      </td>
       <td></td>
     </tr>
   </tbody>

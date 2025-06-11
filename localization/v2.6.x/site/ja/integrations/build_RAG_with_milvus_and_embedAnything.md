@@ -1,12 +1,9 @@
 ---
 id: build_RAG_with_milvus_and_embedAnything.md
 summary: >-
-  In this tutorial, we’ll demonstrate how to build a Retrieval-Augmented
-  Generation (RAG) pipeline using EmbedAnything together with Milvus. Rather
-  than tightly coupling with any specific database, EmbedAnything uses a
-  pluggable adapter system, adapters serve as wrappers that define how
-  embeddings are formatted, indexed, and stored in the target vector store.
-title: Building RAG with Milvus and EmbedAnything
+  このチュートリアルでは、EmbedAnythingとMilvusを使用したRAG（Retrieval-Augmented
+  Generation）パイプラインの構築方法を紹介します。EmbedAnythingは、特定のデータベースと密に結合するのではなく、プラグイン可能なアダプタシステムを使用しています。アダプタは、埋め込みがどのようにフォーマットされ、インデックス付けされ、ターゲットベクターストアに格納されるかを定義するラッパーとして機能します。
+title: MilvusとEmbedAnythingでRAGを構築する
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -14,7 +11,7 @@ title: Building RAG with Milvus and EmbedAnything
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_embedAnything.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">Building RAG with Milvus and EmbedAnything<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
+<h1 id="Building-RAG-with-Milvus-and-EmbedAnything" class="common-anchor-header">MilvusとEmbedAnythingでRAGを構築する<button data-href="#Building-RAG-with-Milvus-and-EmbedAnything" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,13 +26,13 @@ title: Building RAG with Milvus and EmbedAnything
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a> is a blazing-fast, lightweight embedding pipeline built in Rust that supports text, PDFs, images, audio, and more.</p>
-<p>In this tutorial, we’ll demonstrate how to build a Retrieval-Augmented Generation (RAG) pipeline using EmbedAnything together with <a href="https://milvus.io">Milvus</a>. Rather than tightly coupling with any specific database, EmbedAnything uses a pluggable <strong>adapter</strong> system — adapters serve as wrappers that define how embeddings are formatted, indexed, and stored in the target vector store.</p>
-<p>By pairing EmbedAnything with a Milvus adapter, you can generate embeddings from diverse file types and efficiently store them in Milvus in just a few lines of code.</p>
+    </button></h1><p><a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnythingは</a>、テキスト、PDF、画像、音声などをサポートする、Rustで構築された高速で軽量な埋め込みパイプラインです。</p>
+<p>このチュートリアルでは、EmbedAnythingと<a href="https://milvus.io">Milvusを</a>使用したRAG（Retrieval-Augmented Generation）パイプラインの構築方法を紹介します。EmbedAnythingは、特定のデータベースと密に結合するのではなく、プラグイン可能な<strong>アダプタ</strong>システムを使用しています。アダプタは、エンベッディングがどのようにフォーマットされ、インデックス付けされ、ターゲットベクターストアに格納されるかを定義するラッパーとして機能します。</p>
+<p>EmbedAnythingとMilvusアダプタを組み合わせることで、わずか数行のコードで、多様なファイルタイプからエンベッディングを生成し、効率的にMilvusに格納することができます。</p>
 <blockquote>
-<p>⚠️ Note: While the adapter in EmbedAnything handles insertion into Milvus, it does not support search out of the box. To build a full RAG pipeline, you’ll also need to instantiate a MilvusClient separately and implement the retrieval logic (e.g., similarity search over vectors) as part of your application.</p>
+<p>⚠️ 注：EmbedAnythingのアダプタはMilvusへの挿入を処理しますが、検索はサポートしていません。完全なRAGパイプラインを構築するには、別途MilvusClientをインスタンス化し、アプリケーションの一部として検索ロジック（例：ベクトルに対する類似検索）を実装する必要があります。</p>
 </blockquote>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,12 +47,12 @@ title: Building RAG with Milvus and EmbedAnything
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus openai embed_anything</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus openai embed_anything</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
-<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">Clone the Repository and Load Adapter</h3><p>Next, we’ll clone the <a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a> repo and add the <code translate="no">examples/adapters</code> directory to the Python path. This is where we store the custom Milvus adapter implementation, which allows EmbedAnything to communicate with Milvus for vector insertion.</p>
+<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">リポジトリのクローンとアダプタのロード</h3><p>次に、<a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a>リポジトリをクローンし、<code translate="no">examples/adapters</code> ディレクトリを Python のパスに追加します。このディレクトリにはEmbedAnythingがMilvusと通信してベクトルを挿入するためのカスタムMilvusアダプタ実装が格納されています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> sys
 
 <span class="hljs-comment"># Clone the EmbedAnything repository if not already cloned</span>
@@ -67,7 +64,7 @@ sys.path.append(<span class="hljs-string">&quot;EmbedAnything/examples/adapters&
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">✅ EmbedAnything cloned and adapter path added.
 </code></pre>
-<p>We will use OpenAI as the LLM in this RAG pipeline. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>このRAGパイプラインではOpenAIをLLMとして使用します。環境変数として<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
@@ -75,7 +72,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 
 openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Build-RAG" class="common-anchor-header">Build RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
+<h2 id="Build-RAG" class="common-anchor-header">RAGのビルド<button data-href="#Build-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,15 +87,15 @@ openai_client = OpenAI()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Initialize Milvus</h3><p>Before we embed any files, we need to prepare two components that interact with Milvus:</p>
+    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Milvusの初期化</h3><p>ファイルを埋め込む前に、Milvusとやりとりする2つのコンポーネントを準備する必要がある：</p>
 <ol>
-<li><code translate="no">MilvusVectorAdapter</code> – This is the Milvus adapter for EmbedAnything, and is used <strong>only for vector ingestion</strong> (i.e., inserting embeddings and creating indexes). It currently does <strong>not</strong> support search operations.</li>
-<li><code translate="no">MilvusClient</code> – This is the official client from <code translate="no">pymilvus</code>, which enables <strong>full access</strong> to Milvus capabilities including vector search, filtering, and collection management.</li>
+<li><code translate="no">MilvusVectorAdapter</code> - これはEmbedAnything用のMilvusアダプタで、<strong>ベクトルインジェスト</strong>（エンベッディングの挿入とインデックスの作成<strong>）のみに</strong>使用します。現在のところ、検索操作はサポートして<strong>いません</strong>。</li>
+<li><code translate="no">MilvusClient</code> - これは からの公式クライアントであり、ベクター検索、フィルタリング、コレクション管理など、Milvus の<code translate="no">pymilvus</code><strong>全機能にアクセスすることが</strong>できます。</li>
 </ol>
-<p>To avoid confusion:</p>
+<p>混乱を避けるために</p>
 <ul>
-<li>Think of <code translate="no">MilvusVectorAdapter</code> as your “write-only” tool for storing vectors.</li>
-<li>Think of <code translate="no">MilvusClient</code> as your “read-and-search” engine to actually perform queries and retrieve documents for RAG.</li>
+<li><code translate="no">MilvusVectorAdapter</code> はベクターを保存するための "書き込み専用 "ツールであるとお考えください。</li>
+<li><code translate="no">MilvusClient</code> は、実際にクエリーを実行し、RAGのドキュメントを検索するための "読み取り・検索 "エンジンであると考えてください。</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> embed_anything
 <span class="hljs-keyword">from</span> embed_anything <span class="hljs-keyword">import</span> (
@@ -128,21 +125,21 @@ milvus_adapter.create_index(dimension=<span class="hljs-number">384</span>)
 Collection 'embed_anything_milvus_collection' created with index.
 </code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusVectorAdapter</code> and <code translate="no">MilvusClient</code>:</p>
+<p><code translate="no">MilvusVectorAdapter</code> と<code translate="no">MilvusClient</code> の引数について：</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利な方法です。</li>
+<li>100万ベクトルを超えるような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンに "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
-<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">Initialize Embedding Model and Embed PDF Document</h3><p>Now we’ll initialize the embedding model. We’ll use the <code translate="no">all-MiniLM-L12-v2 model</code> from the sentence-transformers library, which is a lightweight yet powerful model for generating text embeddings. It produces 384-dimensional embeddings, so this aligns with our Milvus collection dimension being set to 384. This alignment is crucial and ensures compatibility between the vector dimensions stored in Milvus and those generated by the model.</p>
-<p>EmbedAnything supports a lot more embedding models. For more details, please refer to the <a href="https://github.com/StarlightSearch/EmbedAnything">official documentation</a>.</p>
+<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">埋め込みモデルの初期化とPDFドキュメントの埋め込み</h3><p>埋め込みモデルを初期化します。Sentence-transformersライブラリの<code translate="no">all-MiniLM-L12-v2 model</code> 。これは軽量でありながら、テキスト埋め込みを生成するための強力なモデルです。これは384次元の埋め込みを生成するので、Milvusコレクションの次元が384に設定されているのと一致します。このアラインメントは非常に重要で、Milvusに保存されたベクトル次元とモデルによって生成されたベクトル次元の互換性を保証します。</p>
+<p>EmbedAnythingはさらに多くの埋め込みモデルをサポートしています。詳しくは<a href="https://github.com/StarlightSearch/EmbedAnything">公式ドキュメントを</a>参照してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the embedding model</span>
 model = EmbeddingModel.from_pretrained_hf(
     WhichModel.Bert, model_id=<span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L12-v2&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, let’s embed a PDF file. EmbedAnything makes it easy to process PDF (and many more) documents and store their embeddings directly in Milvus.</p>
+<p>それでは、PDFファイルを埋め込んでみましょう。EmbedAnythingは、PDF（およびその他多くの）ドキュメントを簡単に処理し、Milvusに直接埋め込むことができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Embed a PDF file</span>
 data = embed_anything.embed_file(
     <span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>,
@@ -153,8 +150,8 @@ data = embed_anything.embed_file(
 <pre><code translate="no">Converted 12 embeddings for insertion.
 Successfully inserted 12 embeddings.
 </code></pre>
-<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">Retrieve and Generate Response</h3><p>Again, the <code translate="no">MilvusVectorAdapter</code> from EmbedAnything currently is a lightweight abstraction for vector ingestion and indexing only. It <strong>does not support search</strong> or retrieval queries. Therefore, for search relevant documents to build our RAG pipeline, we must directly use the <code translate="no">MilvusClient</code> instance (<code translate="no">milvus_client</code>) to query our Milvus vector store.</p>
-<p>Define a function to retrieve relevant documents from Milvus.</p>
+<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">レスポンスの取得と生成</h3><p>繰り返しますが、現在のところEmbedAnythingの<code translate="no">MilvusVectorAdapter</code> は、ベクトルの取り込みとインデックス作成のみのための軽量な抽象化です。<strong>検索クエリには対応していません</strong>。したがって、RAGパイプラインを構築するための関連文書を検索するためには、Milvusベクターストアにクエリを発行するために、<code translate="no">MilvusClient</code> インスタンス(<code translate="no">milvus_client</code>)を直接使用する必要があります。</p>
+<p>Milvusから関連文書を検索する関数を定義する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">retrieve_documents</span>(<span class="hljs-params">question, top_k=<span class="hljs-number">3</span></span>):
     query_vector = <span class="hljs-built_in">list</span>(
         embed_anything.embed_query([question], embedder=model)[<span class="hljs-number">0</span>].embedding
@@ -168,7 +165,7 @@ Successfully inserted 12 embeddings.
     docs = [(res[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;text&quot;</span>], res[<span class="hljs-string">&quot;distance&quot;</span>]) <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> search_res[<span class="hljs-number">0</span>]]
     <span class="hljs-keyword">return</span> docs
 <button class="copy-code-btn"></button></code></pre>
-<p>Define a function to generate a response using the retrieved documents in the RAG pipeline.</p>
+<p>RAGパイプラインで取得した文書を使用してレスポンスを生成する関数を定義する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_rag_response</span>(<span class="hljs-params">question</span>):
     retrieved_docs = retrieve_documents(question)
     context = <span class="hljs-string">&quot;\n&quot;</span>.join([<span class="hljs-string">f&quot;Text: <span class="hljs-subst">{doc[<span class="hljs-number">0</span>]}</span>\n&quot;</span> <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> retrieved_docs])
@@ -192,7 +189,7 @@ Successfully inserted 12 embeddings.
     )
     <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s test the RAG pipeline with a sample question.</p>
+<p>サンプル質問でRAGパイプラインをテストしてみましょう。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How does Milvus search for similar documents?&quot;</span>
 answer = generate_rag_response(question)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Question: <span class="hljs-subst">{question}</span>&quot;</span>)

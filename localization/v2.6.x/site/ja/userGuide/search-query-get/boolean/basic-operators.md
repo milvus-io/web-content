@@ -1,14 +1,10 @@
 ---
 id: basic-operators.md
-title: Basic Operators
+title: 基本演算子
 summary: >-
-  Milvus provides a rich set of basic operators to help you filter and query
-  data efficiently. These operators allow you to refine your search conditions
-  based on scalar fields, numeric calculations, logical conditions, and more.
-  Understanding how to use these operators is crucial for building precise
-  queries and maximizing the efficiency of your searches.
+  Milvusはデータのフィルタリングやクエリを効率的に行うための豊富な基本演算子を提供しています。これらの演算子を使用すると、スカラーフィールド、数値計算、論理条件などに基づいて検索条件を絞り込むことができます。これらの演算子の使い方を理解することは、正確なクエリを構築し、検索の効率を最大化するために非常に重要です。
 ---
-<h1 id="Basic-Operators" class="common-anchor-header">Basic Operators<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
+<h1 id="Basic-Operators" class="common-anchor-header">基本演算子<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches.</p>
-<h2 id="Comparison-operators" class="common-anchor-header">Comparison operators<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusはデータのフィルタリングやクエリを効率的に行うための豊富な基本演算子を提供しています。これらの演算子を使用すると、スカラーフィールド、数値計算、論理条件などに基づいて検索条件を絞り込むことができます。これらの演算子の使い方を理解することは、正確なクエリを構築し、検索の効率を最大限に高めるために非常に重要です。</p>
+<h2 id="Comparison-operators" class="common-anchor-header">比較演算子<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,34 +35,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Comparison operators are used to filter data based on equality, inequality, or size. They are applicable to numeric and text fields.</p>
-<h3 id="Supported-Comparison-Operators" class="common-anchor-header">Supported Comparison Operators:</h3><ul>
-<li><p><code translate="no">==</code> (Equal to)</p></li>
-<li><p><code translate="no">!=</code> (Not equal to)</p></li>
-<li><p><code translate="no">&gt;</code> (Greater than)</p></li>
-<li><p><code translate="no">&lt;</code> (Less than)</p></li>
-<li><p><code translate="no">&gt;=</code> (Greater than or equal to)</p></li>
-<li><p><code translate="no">&lt;=</code> (Less than or equal to)</p></li>
+    </button></h2><p>比較演算子は、等式、不等式、またはサイズに基づいてデータをフィルタリングするために使用されます。数値フィールドとテキストフィールドに適用できます。</p>
+<h3 id="Supported-Comparison-Operators" class="common-anchor-header">サポートされている比較演算子</h3><ul>
+<li><p><code translate="no">==</code> (等しい）</p></li>
+<li><p><code translate="no">!=</code> (等しくない）</p></li>
+<li><p><code translate="no">&gt;</code> (より大きい）</p></li>
+<li><p><code translate="no">&lt;</code> (より小さい）</p></li>
+<li><p><code translate="no">&gt;=</code> (大以上)</p></li>
+<li><p><code translate="no">&lt;=</code> 以下</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">Example 1: Filtering with Equal To (<code translate="no">==</code>)</h3><p>Assume you have a field named <code translate="no">status</code> and you want to find all entities where <code translate="no">status</code> is "active". You can use the equality operator <code translate="no">==</code>:</p>
+<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">例 1：Equal To (<code translate="no">==</code>) によるフィルタリング</h3><p><code translate="no">status</code> というフィールドがあり、<code translate="no">status</code> が "active" であるすべてのエンティティを検索したいとします。等号演算子<code translate="no">==</code> を使用できます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">Example 2: Filtering with Not Equal To (<code translate="no">!=</code>)</h3><p>To find entities where <code translate="no">status</code> is not "inactive":</p>
+<h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">例 2：Not Equal To (<code translate="no">!=</code>) を使ったフィルタリング</h3><p><code translate="no">status</code> が「非アクティブ」でないエンティティを見つける：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-" class="common-anchor-header">Example 3: Filtering with Greater Than (<code translate="no">&gt;</code>)</h3><p>If you want to find all entities with an <code translate="no">age</code> greater than 30:</p>
+<h3 id="Example-3-Filtering-with-Greater-Than-" class="common-anchor-header">例 3：Greater Than (<code translate="no">&gt;</code>) によるフィルタリング</h3><p><code translate="no">age</code> が 30 より大きいエンティティをすべて検索する場合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than" class="common-anchor-header">Example 4: Filtering with Less Than</h3><p>To find entities where <code translate="no">price</code> is less than 100:</p>
+<h3 id="Example-4-Filtering-with-Less-Than" class="common-anchor-header">例 4: 小を使ったフィルタリング</h3><p><code translate="no">price</code> が 100 未満のエンティティを検索する場合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="common-anchor-header">Example 5: Filtering with Greater Than or Equal To (<code translate="no">&gt;=</code>)</h3><p>If you want to find all entities with <code translate="no">rating</code> greater than or equal to 4:</p>
+<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="common-anchor-header">例 5：Greater Than または Equal To (<code translate="no">&gt;=</code>) によるフィルタリング</h3><p><code translate="no">rating</code> が 4 以上のエンティティをすべて検索する場合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">Example 6: Filtering with Less Than or Equal To</h3><p>To find entities with <code translate="no">discount</code> less than or equal to 10%:</p>
+<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">例 6：以下でのフィルタリング</h3><p><code translate="no">discount</code> が 10% 以下のエンティティを検索する場合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Range-operators" class="common-anchor-header">Range operators<button data-href="#Range-operators" class="anchor-icon" translate="no">
+<h2 id="Range-operators" class="common-anchor-header">範囲演算子<button data-href="#Range-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,29 +77,29 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Range operators help filter data based on specific sets or ranges of values.</p>
-<h3 id="Supported-Range-Operators" class="common-anchor-header">Supported Range Operators:</h3><ul>
-<li><p><code translate="no">IN</code>: Used to match values within a specific set or range.</p></li>
-<li><p><code translate="no">LIKE</code>: Used to match a pattern (mostly for text fields).</p></li>
+    </button></h2><p>範囲演算子は、特定の値の集合または範囲に基づいてデータをフィルタリングするのに役立ちます。</p>
+<h3 id="Supported-Range-Operators" class="common-anchor-header">サポートされている範囲演算子：</h3><ul>
+<li><p><code translate="no">IN</code>:特定のセットまたは範囲内の値をマッチさせるために使用されます。</p></li>
+<li><p><code translate="no">LIKE</code>:パターンにマッチさせるために使用します（主にテキストフィールドの場合）。</p></li>
 </ul>
-<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Example 1: Using <code translate="no">IN</code> to Match Multiple Values</h3><p>If you want to find all entities where the <code translate="no">color</code> is either "red", "green", or "blue":</p>
+<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">例 1：<code translate="no">IN</code> を使用して複数の値に一致させる</h3><p><code translate="no">color</code> が "red"、"green"、または "blue" のいずれかであるすべてのエンティティを検索する場合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This is useful when you want to check for membership in a list of values.</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Example 2: Using <code translate="no">LIKE</code> for Pattern Matching</h3><p>The <code translate="no">LIKE</code> operator is used for pattern matching in string fields. It can match substrings in different positions within the text: as a <strong>prefix</strong>, <strong>infix</strong>, or <strong>suffix</strong>. The <code translate="no">LIKE</code> operator uses the <code translate="no">%</code> symbol as a wildcard, which can match any number of characters (including zero).</p>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Prefix Match (Starts With)</h3><p>To perform a <strong>prefix</strong> match, where the string starts with a given pattern, you can place the pattern at the beginning and use <code translate="no">%</code> to match any characters following it. For example, to find all products whose <code translate="no">name</code> starts with "Prod":</p>
+<p>これは、値のリストに含まれるかどうかを調べたいときに便利です。</p>
+<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">例 2:<code translate="no">LIKE</code> を使ったパターンマッチング</h3><p><code translate="no">LIKE</code> 演算子は文字列フィールドのパターンマッチングに使われます。この演算子は、<strong>プレフィックス</strong>、<strong>インフィックス</strong>、<strong>サフィックスなど</strong>、テキスト内のさまざまな位置の部分文字列にマッチさせることができます。<code translate="no">LIKE</code> 演算子は<code translate="no">%</code> シンボルをワイルドカードとして使い、任意の文字数（ゼロを含む）にマッチさせることができます。</p>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">プレフィックスマッチ（Starts With）</h3><p>文字列が指定したパターンで始まるような<strong>プレフィックス</strong>マッチを行うには、パターンを先頭に置き、<code translate="no">%</code> を使って、それに続く文字にマッチさせることができます。たとえば、<code translate="no">name</code> が "Prod" で始まるすべての製品を検索する場合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name starts with "Prod", such as "Product A", "Product B", etc.</p>
-<h3 id="Suffix-Match-Ends-With" class="common-anchor-header">Suffix Match (Ends With)</h3><p>For a <strong>suffix</strong> match, where the string ends with a given pattern, place the <code translate="no">%</code> symbol at the beginning of the pattern. For example, to find all products whose <code translate="no">name</code> ends with "XYZ":</p>
+<p>これは、"Product A"、"Product B "など、商品名が "Prod "で始まるすべての商品にマッチします。</p>
+<h3 id="Suffix-Match-Ends-With" class="common-anchor-header">接尾辞マッチ（End With）</h3><p>文字列が指定されたパターンで終わる<strong>接尾辞</strong>マッチの場合、<code translate="no">%</code> シンボルをパターンの先頭に置きます。例えば、<code translate="no">name</code> が "XYZ" で終わるすべての製品を検索する場合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name ends with "XYZ", such as "ProductXYZ", "SampleXYZ", etc.</p>
-<h3 id="Infix-Match-Contains" class="common-anchor-header">Infix Match (Contains)</h3><p>To perform an <strong>infix</strong> match, where the pattern can appear anywhere in the string, you can place the <code translate="no">%</code> symbol at both the beginning and the end of the pattern. For example, to find all products whose <code translate="no">name</code> contains the word "Pro":</p>
+<p>この場合、"ProductXYZ"、"SampleXYZ "など、製品名が "XYZ "で終わるすべての製品にマッチします。</p>
+<h3 id="Infix-Match-Contains" class="common-anchor-header">接尾辞マッチ（含む）</h3><p>文字列のどこにでもパターンが出現するような<strong>infix</strong>マッチを行うには、<code translate="no">%</code> シンボルをパターンの最初と最後の両方に置きます。たとえば、<code translate="no">name</code> に "Pro" という単語が含まれるすべての製品を検索します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name contains the substring "Pro", such as "Product", "ProLine", or "SuperPro".</p>
-<h2 id="Arithmetic-Operators" class="common-anchor-header">Arithmetic Operators<button data-href="#Arithmetic-Operators" class="anchor-icon" translate="no">
+<p>これは、"Product"、"ProLine"、"SuperPro "など、製品名に "Pro "という部分文字列が含まれるすべての製品にマッチします。</p>
+<h2 id="Arithmetic-Operators" class="common-anchor-header">算術演算子<button data-href="#Arithmetic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -118,22 +114,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Arithmetic operators allow you to create conditions based on calculations involving numeric fields.</p>
-<h3 id="Supported-Arithmetic-Operators" class="common-anchor-header">Supported Arithmetic Operators:</h3><ul>
-<li><p><code translate="no">+</code> (Addition)</p></li>
-<li><p><code translate="no">-</code> (Subtraction)</p></li>
-<li><p><code translate="no">*</code> (Multiplication)</p></li>
-<li><p><code translate="no">/</code> (Division)</p></li>
-<li><p><code translate="no">%</code> (Modulus)</p></li>
-<li><p><code translate="no">**</code> (Exponentiation)</p></li>
+    </button></h2><p>算術演算子を使用すると、数値フィールドを含む計算に基づいて条件を作成できます。</p>
+<h3 id="Supported-Arithmetic-Operators" class="common-anchor-header">サポートされる算術演算子</h3><ul>
+<li><p><code translate="no">+</code> (加算)</p></li>
+<li><p><code translate="no">-</code> (減算)</p></li>
+<li><p><code translate="no">*</code> (乗算)</p></li>
+<li><p><code translate="no">/</code> (除算)</p></li>
+<li><p><code translate="no">%</code> (モジュラス）</p></li>
+<li><p><code translate="no">**</code> 指数</p></li>
 </ul>
-<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">Example 1: Using Modulus (<code translate="no">%</code>)</h3><p>To find entities where the <code translate="no">id</code> is an even number (i.e., divisible by 2):</p>
+<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">例 1：モジュラス (<code translate="no">%</code>) の使用</h3><p><code translate="no">id</code> が偶数（つまり2で割り切れる）である実体を見つける：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">Example 2: Using Exponentiation (<code translate="no">**</code>)</h3><p>To find entities where <code translate="no">price</code> raised to the power of 2 is greater than 1000:</p>
+<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">例 2: 指数を使う (<code translate="no">**</code>)</h3><p><code translate="no">price</code> の 2 乗が 1000 より大きいエンティティを見つける：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Logical-Operators" class="common-anchor-header">Logical Operators<button data-href="#Logical-Operators" class="anchor-icon" translate="no">
+<h2 id="Logical-Operators" class="common-anchor-header">論理演算子<button data-href="#Logical-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,22 +144,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Logical operators are used to combine multiple conditions into a more complex filter expression. These include <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code>.</p>
-<h3 id="Supported-Logical-Operators" class="common-anchor-header">Supported Logical Operators:</h3><ul>
-<li><p><code translate="no">AND</code>: Combines multiple conditions that must all be true.</p></li>
-<li><p><code translate="no">OR</code>: Combines conditions where at least one must be true.</p></li>
-<li><p><code translate="no">NOT</code>: Negates a condition.</p></li>
+    </button></h2><p>論理演算子は、複数の条件を組み合わせて、より複雑なフィルタ式にするために使用します。これには<code translate="no">AND</code> 、<code translate="no">OR</code> 、および<code translate="no">NOT</code> が含まれます。</p>
+<h3 id="Supported-Logical-Operators" class="common-anchor-header">サポートされている論理演算子</h3><ul>
+<li><p><code translate="no">AND</code>:すべて真でなければならない複数の条件を組み合わせます。</p></li>
+<li><p><code translate="no">OR</code>:少なくとも1つが真でなければならない条件を組み合わせる。</p></li>
+<li><p><code translate="no">NOT</code>:条件を否定する。</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">Example 1: Using <code translate="no">AND</code> to Combine Conditions</h3><p>To find all products where <code translate="no">price</code> is greater than 100 and <code translate="no">stock</code> is greater than 50:</p>
+<h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">例 1:<code translate="no">AND</code> を使って条件を組み合わせる</h3><p><code translate="no">price</code> が 100 より大きく、<code translate="no">stock</code> が 50 より大きい製品をすべて見つける：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">Example 2: Using <code translate="no">OR</code> to Combine Conditions</h3><p>To find all products where <code translate="no">color</code> is either “red” or "blue":</p>
+<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">例 2：<code translate="no">OR</code> を使って条件を組み合わせる</h3><p><code translate="no">color</code> が「赤」または「青」であるすべての製品を検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">Example 3: Using <code translate="no">NOT</code> to Exclude a Condition</h3><p>To find all products where <code translate="no">color</code> is not "green":</p>
+<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">例 3:<code translate="no">NOT</code> を使って条件を除外する</h3><p><code translate="no">color</code> が "green" ではないすべての製品を見つける：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">IS NULL and IS NOT NULL Operators<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
+<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">IS NULL および IS NOT NULL 演算子<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -178,36 +174,36 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> operators are used to filter fields based on whether they contain a null value (absence of data).</p>
+    </button></h2><p><code translate="no">IS NULL</code> および<code translate="no">IS NOT NULL</code> 演算子は、フィールドに NULL 値（データがないこと）が含まれているかどうかに基づいてフィールドをフィルタリングするために使用されます。</p>
 <ul>
-<li><p><code translate="no">IS NULL</code>: Identifies entities where a specific field contains a null value, i.e., the value is absent or undefined.</p></li>
-<li><p><code translate="no">IS NOT NULL</code>: Identifies entities where a specific field contains any value other than null, meaning the field has a valid, defined value.</p></li>
+<li><p><code translate="no">IS NULL</code>:特定のフィールドに NULL 値が含まれる、つまり値が存在しないか未定義のエンティティを識別します。</p></li>
+<li><p><code translate="no">IS NOT NULL</code>:特定のフィールドにヌル以外の値が含まれているエンティティを識別します。</p></li>
 </ul>
 <div class="alert note">
-<p>The operators are case-insensitive, so you can use <code translate="no">IS NULL</code> or <code translate="no">is null</code>, and <code translate="no">IS NOT NULL</code> or <code translate="no">is not null</code>.</p>
+<p>演算子は大文字と小文字を区別しないので、<code translate="no">IS NULL</code> または<code translate="no">is null</code> と、<code translate="no">IS NOT NULL</code> または<code translate="no">is not null</code> を使用できます。</p>
 </div>
-<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Regular Scalar Fields with Null Values</h3><p>Milvus allows filtering on regular scalar fields, such as strings or numbers, with null values.</p>
+<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">NULL値を持つ通常のスカラーフィールド</h3><p>Milvusでは文字列や数値のようなNULL値を持つ通常のスカラーフィールドのフィルタリングが可能です。</p>
 <div class="alert note">
-<p>An empty string <code translate="no">&quot;&quot;</code> is not treated as a null value for a <code translate="no">VARCHAR</code> field.</p>
+<p>空の文字列<code translate="no">&quot;&quot;</code> は<code translate="no">VARCHAR</code> フィールドの NULL 値として扱われません。</p>
 </div>
-<p>To retrieve entities where the <code translate="no">description</code> field is null:</p>
+<p><code translate="no">description</code> フィールドが NULL のエンティティを検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">description</code> field is not null:</p>
+<p><code translate="no">description</code> フィールドが NULL ではないエンティティを検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">description</code> field is not null and the <code translate="no">price</code> field is higher than 10:</p>
+<p><code translate="no">description</code> フィールドが NULL でなく、<code translate="no">price</code> フィールドが 10 より大きいエンティティを検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">JSON Fields with Null Values</h3><p>Milvus allows filtering on JSON fields that contain null values. A JSON field is treated as null in the following ways:</p>
+<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">NULL 値を持つ JSON フィールド</h3><p>Milvusでは、NULL値を含むJSONフィールドのフィルタリングが可能です。JSONフィールドは、以下の方法でNULLとして扱われます：</p>
 <ul>
-<li><p>The entire JSON object is explicitly set to None (null), for example, <code translate="no">{&quot;metadata&quot;: None}</code>.</p></li>
-<li><p>The JSON field itself is completely missing from the entity.</p></li>
+<li><p>JSON オブジェクト全体が明示的に None (null) に設定されている場合 (例:<code translate="no">{&quot;metadata&quot;: None}</code>)。</p></li>
+<li><p>JSONフィールド自体が、エンティティから完全に欠落している。</p></li>
 </ul>
 <div class="alert note">
-<p>If some elements within a JSON object are null (e.g. individual keys), the field is still considered non-null. For example, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> is not treated as null, even though the <code translate="no">category</code> key is null.</p>
+<p>JSONオブジェクト内の一部の要素（個々のキーなど）がNULLの場合でも、フィールドは非NULLとみなされる。例えば、<code translate="no">category</code> のキーがNULLであっても、<code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> はNULLとして扱われない。</p>
 </div>
-<p>To further illustrate how Milvus handles JSON fields with null values, consider the following sample data with a JSON field <code translate="no">metadata</code>:</p>
+<p>MilvusがNULL値を持つJSONフィールドをどのように扱うかをさらに説明するために、次のJSONフィールド<code translate="no">metadata</code> を持つサンプルデータを考えてみましょう：</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
@@ -230,8 +226,8 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where <code translate="no">metadata</code> is null</strong></p>
-<p>To find entities where the <code translate="no">metadata</code> field is either missing or explicitly set to None:</p>
+<p><strong>例 1：<code translate="no">metadata</code> が NULL のエンティティを検索する</strong></p>
+<p><code translate="no">metadata</code> フィールドがないか、明示的に None に設定されているエンティティを検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -240,8 +236,8 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where <code translate="no">metadata</code> is not null</strong></p>
-<p>To find entities where the <code translate="no">metadata</code> field is not null:</p>
+<p><strong>例 2：<code translate="no">metadata</code> が NULL ではないエンティティを検索する。</strong></p>
+<p><code translate="no">metadata</code> フィールドが NULL ではないエンティティを検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -250,15 +246,15 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">ARRAY Fields with Null Values</h3><p>Milvus allows filtering on ARRAY fields that contain null values. An ARRAY field is treated as null in the following ways:</p>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">NULL値を持つARRAYフィールド</h3><p>MilvusではNULL値を含むARRAYフィールドのフィルタリングが可能です。ARRAYフィールドは以下の方法でNULLとして扱われます：</p>
 <ul>
-<li><p>The entire ARRAY field is explicitly set to None (null), for example, <code translate="no">&quot;tags&quot;: None</code>.</p></li>
-<li><p>The ARRAY field is completely missing from the entity.</p></li>
+<li><p>例えば、<code translate="no">&quot;tags&quot;: None</code> のように、ARRAYフィールド全体が明示的にNone（Null）に設定されている場合。</p></li>
+<li><p>ARRAYフィールドがエンティティから完全に欠落している。</p></li>
 </ul>
 <div class="alert note">
-<p>An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to <a href="/docs/array_data_type.md">Array Field</a>.</p>
+<p>ARRAY フィールドのすべての要素が同じデータ型でなければならないため、ARRAY フィールドに部分的な NULL 値を含めることはできません。詳細は<a href="/docs/ja/array_data_type.md">配列フィールドを</a>参照してください。</p>
 </div>
-<p>To further illustrate how Milvus handles ARRAY fields with null values, consider the following sample data with an ARRAY field <code translate="no">tags</code>:</p>
+<p>MilvusがNULL値を持つARRAYフィールドをどのように扱うかをさらに説明するために、ARRAYフィールド<code translate="no">tags</code> を持つ以下のサンプルデータを考えてみましょう：</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
@@ -279,8 +275,8 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where <code translate="no">tags</code> is null</strong></p>
-<p>To retrieve entities where the <code translate="no">tags</code> field is either missing or explicitly set to <code translate="no">None</code>:</p>
+<p><strong>例 1：<code translate="no">tags</code> が NULL のエンティティを検索する</strong></p>
+<p><code translate="no">tags</code> フィールドがないか、明示的に<code translate="no">None</code> に設定されているエンティティを検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -289,8 +285,8 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where <code translate="no">tags</code> is not null</strong></p>
-<p>To retrieve entities where the <code translate="no">tags</code> field is not null:</p>
+<p><strong>例 2：<code translate="no">tags</code> が NULL ではないエンティティを検索する。</strong></p>
+<p><code translate="no">tags</code> フィールドが NULL ではないエンティティを検索する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -299,7 +295,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Tips on Using Basic Operators with JSON and ARRAY Fields<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
+<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">JSONおよびARRAYフィールドで基本演算子を使用する際のヒント<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -314,14 +310,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>While the basic operators in Milvus are versatile and can be applied to scalar fields, they can also be effectively used with the keys and indexes in the JSON and ARRAY fields.</p>
-<p>For example, if you have a <code translate="no">product</code> field that contains multiple keys like <code translate="no">price</code>, <code translate="no">model</code>, and <code translate="no">tags</code>, always reference the key directly:</p>
+    </button></h2><p>Milvusの基本演算子は汎用性があり、スカラーフィールドに適用することができますが、JSONやARRAYフィールドのキーやインデックスにも効果的に使用することができます。</p>
+<p>例えば、<code translate="no">price</code>,<code translate="no">model</code>,<code translate="no">tags</code> のような複数のキーを含む<code translate="no">product</code> フィールドがある場合、常にキーを直接参照します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To find records where the first temperature in an array of recorded temperatures exceeds a certain value, use:</p>
+<p>記録された気温の配列の最初の気温が特定の値を超えているレコードを検索するには、次のように使用する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">結論<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -336,4 +332,4 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus offers a range of basic operators that give you flexibility in filtering and querying your data. By combining comparison, range, arithmetic, and logical operators, you can create powerful filter expressions to narrow down your search results and retrieve the data you need efficiently.</p>
+    </button></h2><p>Milvusには基本的な演算子が揃っており、データのフィルタリングやクエリを柔軟に行うことができます。比較演算子、範囲演算子、算術演算子、論理演算子を組み合わせることで、検索結果を絞り込み、必要なデータを効率的に取得するための強力なフィルタ式を作成することができます。</p>
