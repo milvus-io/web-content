@@ -1,8 +1,8 @@
 ---
 id: scale-dependencies.md
-title: 規模の依存
+title: Scale Dependencies
 ---
-<h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Milvusのスケール依存関係<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
+<h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Scale Milvus Dependencies<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,11 +17,11 @@ title: 規模の依存
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusは、MinIO、Kafka、Pulsar、etcdといった様々な依存関係に依存しています。これらのコンポーネントを拡張することで、Milvusの様々な要件への適応性を高めることができます。</p>
+    </button></h1><p>Milvus relies on various dependencies such as MinIO, Kafka, Pulsar, and etcd. Scaling these components can enhance Milvus’s adaptability to different requirements.</p>
 <div class="alert note">
-<p>Milvus Operatorユーザの方は、<a href="/docs/ja/object_storage_operator.md">Milvus Operatorによるオブジェクトストレージの構成</a>、<a href="/docs/ja/meta_storage_operator.md">Milvus Operatorによるメタストレージの構成</a>、<a href="/docs/ja/message_storage_operator.md">Milvus Operatorによるメッセージストレージの</a>構成を参照してください。</p>
+<p>For Milvus Operator users, refer to <a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a>, <a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a>, and <a href="/docs/message_storage_operator.md">Configure Message Storage with Milvus Operator</a>.</p>
 </div>
-<h2 id="Scale-MinIO" class="common-anchor-header">MinIOの拡張<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
+<h2 id="Scale-MinIO" class="common-anchor-header">Scale MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,7 +36,7 @@ title: 規模の依存
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">MinIOポッドあたりのリソースの増加</h3><p>Milvusで使用されるオブジェクトストレージシステムであるMinIOは、ポッドごとにCPUとメモリのリソースを増やすことができます。</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Increase resources per MinIO pod</h3><p>MinIO, an object storage system used by Milvus, can have its CPU and memory resources increased for each pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">resources:</span>
@@ -44,31 +44,31 @@ title: 規模の依存
        <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
        <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存した後、次のコマンドで変更を適用します：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>また、各MioIO Persistent Volume Claim (PVC)の<code translate="no">spec.resources.requests.storage</code> の値を手動で変更することで、MioIOクラスタのディスク容量を増やすこともできます。デフォルトのストレージクラスでは、ボリュームの拡張を許可する必要があります。</p>
-<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">追加のMinIOサーバープールを追加する（推奨）</h3><p>Milvusインスタンスに追加のMioIOサーバープールを追加することをお勧めします。</p>
+<p>You can also increase the disk capacity for the MioIO cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each MioIO Persistent Volume Claim (PVC). Note that your default storage class should allow volume expansion.</p>
+<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Add an extra MinIO server pool (Recommended)</h3><p>You are advised to add an extra MioIO server pool for your Milvus instance.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">zones:</span> <span class="hljs-number">2</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存した後、以下のコマンドで変更を適用します：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、MinIOクラスタに追加のサーバプールが追加され、Milvusは各サーバプールの空きディスク容量に基づいてMinIOサーバプールに書き込むことができるようになります。たとえば、3つのプールのグループに合計10TiBの空き容量があり、各プールに次のように配分されている場合、次のようになります：</p>
+<p>This adds an additional server pool to your MinIO cluster, allowing Milvus to write to the MinIO server pool based on the free disk capacity of each server pool. For example, if a group of three pools has a total of 10 TiB free space distributed across the pools as follows:</p>
 <table>
 <thead>
-<tr><th></th><th>空き容量</th><th>書き込み可能</th></tr>
+<tr><th></th><th>Free space</th><th>Write possibility</th></tr>
 </thead>
 <tbody>
-<tr><td>プールA</td><td>3 TiB</td><td>30% (3/10)</td></tr>
-<tr><td>プールB</td><td>2 TiB</td><td>20% (2/10)</td></tr>
-<tr><td>プールC</td><td>5ティービー</td><td>50% (5/10)</td></tr>
+<tr><td>Pool A</td><td>3 TiB</td><td>30% (3/10)</td></tr>
+<tr><td>Pool B</td><td>2 TiB</td><td>20% (2/10)</td></tr>
+<tr><td>Pool C</td><td>5 TiB</td><td>50% (5/10)</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>MinIOは、新しいサーバープール間でオブジェクトのバランスを自動的に調整しません。必要に応じて、<code translate="no">mc admin rebalance</code> 、手動でリバランス手順を開始できます。</p>
+<p>MinIO does not automatically rebalance objects across new server pools. You can manually initiate a rebalance procedure with <code translate="no">mc admin rebalance</code> if needed.</p>
 </div>
 <h2 id="Kafka" class="common-anchor-header">Kafka<button data-href="#Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,7 +85,7 @@ title: 規模の依存
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Kafkaブローカーポッドあたりのリソースの増加</h3><p>各ブローカーポッドのCPUリソースとメモリリソースを調整することで、Kafkaブローカーの容量を拡張します。</p>
+    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Increase resource per Kafka broker pod</h3><p>Enhance the Kafka broker capacity by adjusting the CPU and memory resources for each broker pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">resources:</span>
@@ -93,11 +93,11 @@ title: 規模の依存
         <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
         <span class="hljs-attr">memory:</span> <span class="hljs-string">12Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存した後、次のコマンドで変更を適用する：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-bash">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>各Kafka Persistent Volume Claim (PVC)の<code translate="no">spec.resources.requests.storage</code> の値を手動で変更することで、Kafkaクラスタのディスク容量を増やすこともできます。デフォルトのストレージクラスがボリュームの拡張を許可していることを確認します。</p>
-<h2 id="Add-an-extra-Kafka-broker-pool-Recommended" class="common-anchor-header">追加のKafkaブローカープールを追加する（推奨）<button data-href="#Add-an-extra-Kafka-broker-pool-Recommended" class="anchor-icon" translate="no">
+<p>You can also increase the disk capacity for the Kafka cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each Kafka Persistent Volume Claim (PVC). Ensure your default storage class allows volume expansion.</p>
+<h2 id="Add-an-extra-Kafka-broker-pool-Recommended" class="common-anchor-header">Add an extra Kafka broker pool (Recommended)<button data-href="#Add-an-extra-Kafka-broker-pool-Recommended" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,17 +112,17 @@ title: 規模の依存
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusインスタンスに追加のKafkaサーバープールを追加することをお勧めします。</p>
+    </button></h2><p>You are advised to add an extra Kafka server pool for your Milvus instance.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">kafka:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">4</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存した後、以下のコマンドで変更を適用します：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>これでKafkaクラスタに追加のブローカーが追加されます。</p>
+<p>This will add an extra broker to your Kafka cluster.</p>
 <div class="alert note">
-<p>Kafkaはすべてのブローカー間でトピックのバランスを自動的に調整しません。必要に応じて、各Kafkaブローカー・ポッドにログインした後、<code translate="no">bin/kafka-reassign-partitions.sh</code> 。</p>
+<p>Kafka does not automatically rebalance topics across all brokers. Manually rebalance topics/partitions across all Kafka brokers using <code translate="no">bin/kafka-reassign-partitions.sh</code> after logging into each Kafka broker pod if needed.</p>
 </div>
 <h2 id="Pulsar" class="common-anchor-header">Pulsar<button data-href="#Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,8 +139,8 @@ title: 規模の依存
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsarは計算とストレージを分離します。Pulsarブローカー（計算）とPulsarブッキー（ストレージ）の容量を個別に増やすことができます。</p>
-<h2 id="Increase-resources-per-Pulsar-broker-pod" class="common-anchor-header">Pulsarブローカー・ポッドごとにリソースを増やす<button data-href="#Increase-resources-per-Pulsar-broker-pod" class="anchor-icon" translate="no">
+    </button></h2><p>Pulsar separates computation and storage. You can independently increase the capacity of Pulsar brokers (computation) and Pulsar bookies (storage).</p>
+<h2 id="Increase-resources-per-Pulsar-broker-pod" class="common-anchor-header">Increase resources per Pulsar broker pod<button data-href="#Increase-resources-per-Pulsar-broker-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -163,10 +163,10 @@ title: 規模の依存
          <span class="hljs-attr">cpu:</span> <span class="hljs-number">4</span>
          <span class="hljs-attr">memory:</span> <span class="hljs-string">16Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存したら、以下のコマンドで変更を適用します：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Increase-resources-per-Pulsar-bookie-pod" class="common-anchor-header">パルサー・ブッキー・ポッドあたりのリソースを増やす<button data-href="#Increase-resources-per-Pulsar-bookie-pod" class="anchor-icon" translate="no">
+<h2 id="Increase-resources-per-Pulsar-bookie-pod" class="common-anchor-header">Increase resources per Pulsar bookie pod<button data-href="#Increase-resources-per-Pulsar-bookie-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,11 +189,11 @@ title: 規模の依存
          <span class="hljs-attr">cpu:</span> <span class="hljs-number">4</span>
          <span class="hljs-attr">memory:</span> <span class="hljs-string">16Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存後、以下のコマンドで変更を適用します：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>各Pulsarブッキーのパーシステント・ボリューム・クレーム（PVC）の<code translate="no">spec.resources.requests.storage</code> 値を手動で変更することで、Pulsarクラスタのディスク容量を増やすこともできます。デフォルトのストレージ・クラスでは、ボリュームの拡張が可能である必要があります。</p>
-<p>Pulsarブッキー・ポッドには、<code translate="no">journal</code> と<code translate="no">legers</code> の2種類のストレージがあります。<code translate="no">journal</code> タイプのストレージの場合、ストレージ・クラスとして<code translate="no">ssd</code> または<code translate="no">gp3</code> 。以下は、パルサー・ジャーナルにストレージ・クラスを指定する例です。</p>
+<p>You can also increase the disk capacity for the Pulsar cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each Pulsar bookie’s Persistent Volume Claim (PVC). Note that your default storage class should allow volume expansion.</p>
+<p>A Pulsar bookie pod has two types of storage: <code translate="no">journal</code> and <code translate="no">legers</code>. For the <code translate="no">journal</code> type of storage, consider using <code translate="no">ssd</code> or <code translate="no">gp3</code> as the storage class. Here’s an example to specify storageclass for pulsar journal.</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">volumes:</span>
@@ -201,20 +201,20 @@ title: 規模の依存
         <span class="hljs-attr">size:</span> <span class="hljs-string">20Gi</span>
         <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">gp3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">追加のPulsarブローカー・ポッドを追加する</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Add an extra Pulsar broker pod</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">broker:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存したら、以下のコマンドで変更を適用する：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">追加のパルサー・ブッキー・ポッドを追加する（推奨）</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+<h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Add an extra Pulsar bookie pod (Recommended)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">bookkeeper:</span>
     <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存した後、以下のコマンドで変更を適用する：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="etcd" class="common-anchor-header">etcd<button data-href="#etcd" class="anchor-icon" translate="no">
@@ -232,21 +232,21 @@ title: 規模の依存
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">etcdポッドあたりのリソースを増やす（推奨）</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
+    </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Increase resources per etcd pod (recommended)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">resources:</span>
      <span class="hljs-attr">limits:</span>
        <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
        <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存した後、以下のコマンドで変更を適用します：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-extra-etcd-pods" class="common-anchor-header">etcdポッドの追加</h3><p>etcdポッドの総数は奇数でなければなりません。</p>
+<h3 id="Add-extra-etcd-pods" class="common-anchor-header">Add extra etcd pods</h3><p>The total number of etcd pods should be in odd numbers.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">etcd:</span>
   <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">5</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイルを保存した後、以下のコマンドで変更を適用します：</p>
+<p>After saving the file, apply the changes with the following command:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>

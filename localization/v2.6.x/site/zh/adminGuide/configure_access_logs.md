@@ -1,8 +1,8 @@
 ---
 id: configure_access_logs.md
-title: 配置访问日志
+title: Configure Access Logs
 ---
-<h1 id="Configure-Access-Logs" class="common-anchor-header">配置访问日志<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
+<h1 id="Configure-Access-Logs" class="common-anchor-header">Configure Access Logs<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,15 +17,15 @@ title: 配置访问日志
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 的访问日志功能允许服务器管理人员记录和分析用户访问行为，帮助了解查询成功率和失败原因等方面。</p>
-<p>本指南提供在 Milvus 中配置访问日志的详细说明。</p>
-<p>访问日志的配置取决于 Milvus 的安装方法：</p>
+    </button></h1><p>The access log feature in Milvus allows server managers to record and analyze user access behavior, assisting in understanding aspects like query success rates and failure reasons.</p>
+<p>This guide provides detailed instructions on configuring access logs in Milvus.</p>
+<p>Configuration of access logs depends on the installation method of Milvus:</p>
 <ul>
-<li><strong>Helm 安装</strong>：在<code translate="no">values.yaml</code> 中配置。有关详细信息，请参阅<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>。</li>
-<li><strong>Docker 安装</strong>：在<code translate="no">milvus.yaml</code> 中配置。更多信息，请参阅<a href="/docs/zh/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</li>
-<li><strong>操作符安装</strong>：修改配置文件中的<code translate="no">spec.components</code> 。更多信息，请参阅<a href="/docs/zh/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>。</li>
+<li><strong>Helm Installation</strong>: Configure in <code translate="no">values.yaml</code>. For more information, see <a href="/docs/configure-helm.md">Configure Milvus with Helm Charts</a>.</li>
+<li><strong>Docker Installation</strong>: Configure in <code translate="no">milvus.yaml</code>. For more information, see <a href="/docs/configure-docker.md">Configure Milvus with Docker Compose</a>.</li>
+<li><strong>Operator Installation</strong>: Modify <code translate="no">spec.components</code> in the configuration file. For more information, see <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operator</a>.</li>
 </ul>
-<h2 id="Configuration-options" class="common-anchor-header">配置选项<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+<h2 id="Configuration-options" class="common-anchor-header">Configuration options<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,13 +40,13 @@ title: 配置访问日志
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>根据您的需要从三种配置选项中进行选择：</p>
+    </button></h2><p>Choose among three configuration options based on your needs:</p>
 <ul>
-<li><strong>基本配置</strong>：用于一般用途。</li>
-<li><strong>本地访问日志文件配置</strong>：用于在本地存储日志。</li>
-<li><strong>将本地访问日志上传到 MinIO 的配置</strong>：用于云存储和备份。</li>
+<li><strong>Base config</strong>: For general purposes.</li>
+<li><strong>Config for local access log files</strong>: For storing logs locally.</li>
+<li><strong>Config for uploading local access logs to MinIO</strong>: For cloud storage and backup.</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">基本配置</h3><p>基本配置包括启用访问日志、定义日志文件名或使用 stdout。</p>
+<h3 id="Base-config" class="common-anchor-header">Base config</h3><p>Basic configuration involves enabling access logs and defining the log filename or using stdout.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -55,10 +55,10 @@ title: 配置访问日志
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">proxy.accessLog.enable</code>:是否启用访问日志功能。默认为<strong>false</strong>。</li>
-<li><code translate="no">proxy.accessLog.filename</code>:访问日志文件的名称。如果此参数为空，访问日志将打印到 stdout。</li>
+<li><code translate="no">proxy.accessLog.enable</code>: Whether to enable the access log feature. Defaults to <strong>false</strong>.</li>
+<li><code translate="no">proxy.accessLog.filename</code>: The name of the access log file. If you leave this parameter empty, access logs will be printed to stdout.</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">配置本地访问日志文件</h3><p>配置访问日志文件的本地存储，参数包括本地文件路径、文件大小和旋转间隔：</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Config for local access log files</h3><p>Configure local storage for access log files with parameters including the local file path, file size, and rotation interval:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -69,14 +69,14 @@ title: 配置访问日志
     <span class="hljs-attr">maxBackups:</span> <span class="hljs-number">7</span> <span class="hljs-comment"># Max number of sealed access log files that can be retained</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>这些参数在<code translate="no">filename</code> 不为空时指定。</p>
+<p>These parameters are specified when <code translate="no">filename</code> is not empty.</p>
 <ul>
-<li><code translate="no">proxy.accessLog.localPath</code>:存储访问日志文件的本地文件路径。</li>
-<li><code translate="no">proxy.accessLog.maxSize</code>:单个访问日志文件允许的最大大小（MB）。如果日志文件大小达到此限制，将触发一个轮换进程。该过程会封存当前的访问日志文件，创建新的日志文件，并清除原始日志文件的内容。</li>
-<li><code translate="no">proxy.accessLog.rotatedTime</code>:旋转单个访问日志文件的最大时间间隔（秒）。达到指定的时间间隔后，将触发轮换进程，创建新的访问日志文件并封存前一个文件。</li>
-<li><code translate="no">proxy.accessLog.maxBackups</code>:可保留的密封访问日志文件的最大数量。如果封存的访问日志文件数量超过此限制，则会删除最旧的文件。</li>
+<li><code translate="no">proxy.accessLog.localPath</code>: The local file path where the access log file is stored.</li>
+<li><code translate="no">proxy.accessLog.maxSize</code>: The maximum size in MB allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file.</li>
+<li><code translate="no">proxy.accessLog.rotatedTime</code>: The maximum time interval in seconds allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one.</li>
+<li><code translate="no">proxy.accessLog.maxBackups</code>: The maximum number of sealed access log files that can be retained. If the number of sealed access log files exceeds this limit, the oldest one will be deleted.</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">将本地访问日志文件上传到 MinIO 的配置</h3><p>启用并配置将本地访问日志文件上传到 MinIO 的设置：</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Config for uploading local access log files to MinIO</h3><p>Enable and configure settings to upload local access log files to MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -90,13 +90,13 @@ title: 配置访问日志
     <span class="hljs-attr">remoteMaxTime:</span> <span class="hljs-number">0</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>配置 MinIO 参数时，请确保已设置<code translate="no">maxSize</code> 或<code translate="no">rotatedTime</code> 。否则可能导致无法成功将本地访问日志文件上传到 MinIO。</p>
+<p>When configuring MinIO parameters, ensure that you have set either <code translate="no">maxSize</code> or <code translate="no">rotatedTime</code>. Failure to do so may result in unsuccessful uploads of local access log files to MinIO.</p>
 <ul>
-<li><code translate="no">proxy.accessLog.minioEnable</code>:是否将本地访问日志文件上传到 MinIO。默认为<strong>false</strong>。</li>
-<li><code translate="no">proxy.accessLog.remotePath</code>:用于上传访问日志文件的对象存储路径。</li>
-<li><code translate="no">proxy.accessLog.remoteMaxTime</code>:允许上传访问日志文件的时间间隔。如果日志文件的上传时间超过此时间间隔，文件将被删除。将值设为 0 则禁用此功能。</li>
+<li><code translate="no">proxy.accessLog.minioEnable</code>: Whether to upload local access log files to MinIO. Defaults to <strong>false</strong>.</li>
+<li><code translate="no">proxy.accessLog.remotePath</code>: The path of the object storage for uploading access log files.</li>
+<li><code translate="no">proxy.accessLog.remoteMaxTime</code>: The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature.</li>
 </ul>
-<h2 id="Formatter-config" class="common-anchor-header">格式配置<button data-href="#Formatter-config" class="anchor-icon" translate="no">
+<h2 id="Formatter-config" class="common-anchor-header">Formatter config<button data-href="#Formatter-config" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -111,7 +111,7 @@ title: 配置访问日志
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>所有方法使用的默认日志格式是<code translate="no">base</code> 格式，它不需要特定的方法关联。不过，如果希望自定义特定方法的日志输出，可以定义自定义日志格式并将其应用于相关方法。</p>
+    </button></h2><p>The default log format used for all methods is the <code translate="no">base</code> format, which does not require specific method associations. However, if you wish to customize the log output for specific methods, you can define a custom log format and apply it to the associated methods.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -131,10 +131,10 @@ title: 配置访问日志
         <span class="hljs-attr">methods:</span> [<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.format</code>:使用动态指标定义日志格式。更多信息，请参阅<a href="#reference-supported-metrics">支持的指标</a>。</li>
-<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.methods</code>:列出使用此格式的 Milvus 操作符。要获取方法名称，请参阅<a href="https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto">Milvus 方法</a>中的<strong>MilvusService</strong>。</li>
+<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.format</code>: Defines the log format with dynamic metrics. For more information, see <a href="#reference-supported-metrics">Supported metrics</a>.</li>
+<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.methods</code>: Lists Milvus operations using this formatter. To obtain method names, see <strong>MilvusService</strong> in <a href="https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto">Milvus methods</a>.</li>
 </ul>
-<h2 id="Reference-Supported-metrics" class="common-anchor-header">参考：支持的度量<button data-href="#Reference-Supported-metrics" class="anchor-icon" translate="no">
+<h2 id="Reference-Supported-metrics" class="common-anchor-header">Reference: Supported metrics<button data-href="#Reference-Supported-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,25 +151,25 @@ title: 配置访问日志
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>指标名称</th><th>描述</th></tr>
+<tr><th>Metric Name</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">$method_name</code></td><td>方法名称</td></tr>
-<tr><td><code translate="no">$method_status</code></td><td>访问状态：<strong>确定</strong>或<strong>失败</strong></td></tr>
-<tr><td><code translate="no">$method_expr</code></td><td>用于查询、搜索或删除操作的表达式</td></tr>
-<tr><td><code translate="no">$trace_id</code></td><td>与访问相关的跟踪 ID</td></tr>
-<tr><td><code translate="no">$user_addr</code></td><td>用户的 IP 地址</td></tr>
-<tr><td><code translate="no">$user_name</code></td><td>用户名</td></tr>
-<tr><td><code translate="no">$response_size</code></td><td>响应数据的大小</td></tr>
-<tr><td><code translate="no">$error_code</code></td><td>Milvus 特有的错误代码</td></tr>
-<tr><td><code translate="no">$error_msg</code></td><td>详细错误信息</td></tr>
-<tr><td><code translate="no">$database_name</code></td><td>目标 Milvus 数据库名称</td></tr>
-<tr><td><code translate="no">$collection_name</code></td><td>目标 Milvus Collections 的名称</td></tr>
-<tr><td><code translate="no">$partition_name</code></td><td>目标 Milvus 分区的名称或名称</td></tr>
-<tr><td><code translate="no">$time_cost</code></td><td>完成访问所需的时间</td></tr>
-<tr><td><code translate="no">$time_now</code></td><td>打印访问日志的时间（通常相当于<code translate="no">$time_end</code>)</td></tr>
-<tr><td><code translate="no">$time_start</code></td><td>开始访问的时间</td></tr>
-<tr><td><code translate="no">$time_end</code></td><td>访问结束时间</td></tr>
-<tr><td><code translate="no">$sdk_version</code></td><td>用户使用的 Milvus SDK 版本</td></tr>
+<tr><td><code translate="no">$method_name</code></td><td>Name of the method</td></tr>
+<tr><td><code translate="no">$method_status</code></td><td>Status of access: <strong>OK</strong> or <strong>Fail</strong></td></tr>
+<tr><td><code translate="no">$method_expr</code></td><td>Expression used for query, search, or delete operations</td></tr>
+<tr><td><code translate="no">$trace_id</code></td><td>TraceID associated with the access</td></tr>
+<tr><td><code translate="no">$user_addr</code></td><td>IP address of the user</td></tr>
+<tr><td><code translate="no">$user_name</code></td><td>Name of the user</td></tr>
+<tr><td><code translate="no">$response_size</code></td><td>Size of the response data</td></tr>
+<tr><td><code translate="no">$error_code</code></td><td>Error code specific to Milvus</td></tr>
+<tr><td><code translate="no">$error_msg</code></td><td>Detailed error message</td></tr>
+<tr><td><code translate="no">$database_name</code></td><td>Name of the target Milvus database</td></tr>
+<tr><td><code translate="no">$collection_name</code></td><td>Name of the target Milvus collection</td></tr>
+<tr><td><code translate="no">$partition_name</code></td><td>Name or names of the target Milvus partition(s)</td></tr>
+<tr><td><code translate="no">$time_cost</code></td><td>Time taken for completing the access</td></tr>
+<tr><td><code translate="no">$time_now</code></td><td>Time at which the access log is printed (usually equivalent to <code translate="no">$time_end</code>)</td></tr>
+<tr><td><code translate="no">$time_start</code></td><td>Time at which the access starts</td></tr>
+<tr><td><code translate="no">$time_end</code></td><td>Time at which the access ends</td></tr>
+<tr><td><code translate="no">$sdk_version</code></td><td>Version of the Milvus SDK used by the user</td></tr>
 </tbody>
 </table>

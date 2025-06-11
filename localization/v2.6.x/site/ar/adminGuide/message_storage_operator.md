@@ -1,10 +1,10 @@
 ---
 id: message_storage_operator.md
-title: تكوين تخزين الرسائل مع مشغل Milvus
+title: Configure Message Storage with Milvus Operator
 related_key: 'minio, s3, storage, etcd, pulsar'
-summary: تعرف على كيفية تكوين تخزين الرسائل باستخدام مشغل Milvus.
+summary: Learn how to configure message storage with Milvus Operator.
 ---
-<h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">تكوين تخزين الرسائل مع مشغل Milvus<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">Configure Message Storage with Milvus Operator<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,14 +19,14 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يستخدم Milvus RocksMQ أو Pulsar أو Kafka لإدارة سجلات التغييرات الأخيرة، وإخراج سجلات الدفق، وتوفير اشتراكات السجل. يقدم هذا الموضوع كيفية تكوين تبعيات تخزين الرسائل عند تثبيت Milvus مع مشغل Milvus. لمزيد من التفاصيل، راجع <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">تكوين تخزين الرسائل مع</a> مشغل Milvus في مستودع مشغل Milvus.</p>
-<p>يفترض هذا الموضوع أنك قمت بنشر مشغل Milvus.</p>
-<div class="alert note">راجع <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">نشر مشغل Milvus</a> لمزيد من المعلومات. </div>
-<p>تحتاج إلى تحديد ملف تكوين لاستخدام مشغل Milvus لبدء تشغيل مجموعة Milvus.</p>
+    </button></h1><p>Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator. For more details, refer to <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configure Message Storage with Milvus Operator</a> in the Milvus Operator repository.</p>
+<p>This topic assumes that you have deployed Milvus Operator.</p>
+<div class="alert note">See <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
+<p>You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>تحتاج فقط إلى تحرير قالب التعليمات البرمجية في <code translate="no">milvus_cluster_default.yaml</code> لتكوين تبعيات الطرف الثالث. تقدم الأقسام التالية كيفية تكوين تخزين الكائنات و etcd وPulsar على التوالي.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">قبل أن تبدأ<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<p>You only need to edit the code template in <code translate="no">milvus_cluster_default.yaml</code> to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,27 +41,28 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوضح الجدول أدناه ما إذا كانت RocksMQ و NATS و Pulsar و Kafka مدعومة في وضع Milvus المستقل ووضع المجموعة.</p>
+    </button></h2><p>The table below shows whether RocksMQ, NATS, Pulsar, and Kafka are supported in Milvus standalone and cluster mode.</p>
 <table>
 <thead>
-<tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">ناتس</th><th style="text-align:center">بولسار</th><th style="text-align:center">كافكا</th></tr>
+<tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">NATS</th><th style="text-align:center">Pulsar</th><th style="text-align:center">Kafka</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">الوضع المستقل</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
-<tr><td style="text-align:center">الوضع العنقودي</td><td style="text-align:center">✖️</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
+<tr><td style="text-align:center">Standalone mode</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
+<tr><td style="text-align:center">Cluster mode</td><td style="text-align:center">✖️</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
-<p>هناك أيضًا قيود أخرى لتحديد تخزين الرسائل:</p>
+<p>There are also other limitations for specifying the message storage:</p>
 <ul>
-<li>يتم دعم مخزن رسائل واحد فقط لمثيل Milvus واحد. ومع ذلك لا يزال لدينا توافق مع الإصدارات السابقة مع تعيين مخازن رسائل متعددة لمثيل واحد. الأولوية كما يلي:<ul>
-<li>الوضع المستقل:  RocksMQ (افتراضي)&gt; بولسار &gt; كافكا</li>
-<li>الوضع العنقودي: بولسار (افتراضي)&gt; كافكا &gt; كافكا</li>
-<li>لا تشارك النتات المقدمة في 2.3 في قواعد الأولوية هذه للتوافق مع الإصدارات السابقة.</li>
+<li>Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
+<ul>
+<li>standalone mode:  RocksMQ (default) > Pulsar > Kafka</li>
+<li>cluster mode: Pulsar (default) > Kafka</li>
+<li>Nats introduced in 2.3 do not participate in these priority rules for backward compatibility.</li>
 </ul></li>
-<li>لا يمكن تغيير تخزين الرسائل أثناء تشغيل نظام ميلفوس.</li>
-<li>يتم دعم إصدار كافكا 2.x أو 3.x فقط.</li>
+<li>The message storage cannot be changed while the Milvus system is running.</li>
+<li>Only Kafka 2.x or 3.x verison is supported.</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">تكوين RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">Configure RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,11 +77,11 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RocksMQ هو مخزن الرسائل الافتراضي في نظام Milvus المستقل.</p>
+    </button></h2><p>RocksMQ is the default message storage in Milvus standalone.</p>
 <div class="alert note">
-<p>في الوقت الحالي، يمكنك فقط تكوين RocksMQ كمخزن للرسائل في نظام Milvus المستقل باستخدام مشغل Milvus.</p>
+<p>Currently, you can only configure RocksMQ as the message storage for Milvus standalone with Milvus Operator.</p>
 </div>
-<h4 id="Example" class="common-anchor-header">مثال</h4><p>يقوم المثال التالي بتكوين خدمة RocksMQ.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a RocksMQ service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -103,16 +104,16 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">خيارات التكوين الرئيسية:</h5><ul>
-<li><code translate="no">msgStreamType</code>:: rocksmq: يقوم بتعيين RocksMQ بشكل صريح كقائمة انتظار الرسائل</li>
-<li><code translate="no">persistence.enabled</code>: تمكين التخزين الدائم لبيانات RocksMQ.</li>
-<li><code translate="no">persistence.pvcDeletion</code>: عندما يكون صحيحًا، سيتم حذف PVC عندما يتم حذف مثيل Milvus</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: مواصفات Kubernetes PVC القياسية</li>
-<li><code translate="no">accessModes</code>: عادةً <code translate="no">ReadWriteOnce</code> لتخزين الكتل</li>
-<li><code translate="no">storageClassName</code>: فئة التخزين الخاصة بمجموعتك</li>
-<li><code translate="no">storage</code>: حجم وحدة التخزين الثابتة</li>
+<h5 id="Key-configuration-options" class="common-anchor-header">Key configuration options:</h5><ul>
+<li><code translate="no">msgStreamType</code>: rocksmq: Explicitly sets RocksMQ as the message queue</li>
+<li><code translate="no">persistence.enabled</code>: Enables persistent storage for RocksMQ data</li>
+<li><code translate="no">persistence.pvcDeletion</code>: When true, the PVC will be deleted when the Milvus instance is deleted</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Standard Kubernetes PVC specification</li>
+<li><code translate="no">accessModes</code>: Typically <code translate="no">ReadWriteOnce</code> for block storage</li>
+<li><code translate="no">storageClassName</code>: Your cluster’s storage class</li>
+<li><code translate="no">storage</code>: Size of the persistent volume</li>
 </ul>
-<h2 id="Configure-NATS" class="common-anchor-header">تكوين NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h2 id="Configure-NATS" class="common-anchor-header">Configure NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -127,8 +128,8 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS هو تخزين رسائل بديل لـ NATS.</p>
-<h4 id="Example" class="common-anchor-header">مثال</h4><p>يقوم المثال التالي بتكوين خدمة NATS.</p>
+    </button></h2><p>NATS is an alternative message storage for NATS.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a NATS service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -170,25 +171,25 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>لترحيل تخزين الرسائل من RocksMQ إلى NATS، قم بما يلي:</p>
+<p>To migrate the message storage from RocksMQ to NATS, do as follows:</p>
 <ol>
-<li><p>أوقف جميع عمليات DDL.</p></li>
-<li><p>قم باستدعاء واجهة برمجة التطبيقات FlushAll ثم أوقف Milvus بمجرد انتهاء تنفيذ استدعاء واجهة برمجة التطبيقات.</p></li>
-<li><p>تغيير <code translate="no">msgStreamType</code> إلى <code translate="no">natsmq</code> وإجراء التغييرات اللازمة على إعدادات NATS في <code translate="no">spec.dependencies.natsmq</code>.</p></li>
-<li><p>ابدأ تشغيل ميلفوس مرة أخرى وتحقق مما إذا كان:</p>
+<li><p>Stop all DDL operations.</p></li>
+<li><p>Call the FlushAll API and then stop Milvus once the API call finishes executing.</p></li>
+<li><p>Change <code translate="no">msgStreamType</code> to <code translate="no">natsmq</code> and make necessary changes to NATS settings in <code translate="no">spec.dependencies.natsmq</code>.</p></li>
+<li><p>Start Milvus again and check whether:</p>
 <ul>
-<li>إدخال سجل يقرأ <code translate="no">mqType=natsmq</code> موجود في السجلات.</li>
-<li>يوجد دليل باسم <code translate="no">jetstream</code> في الدليل المحدد في <code translate="no">spec.dependencies.natsmq.server.storeDir</code>.</li>
+<li>A log entry that reads <code translate="no">mqType=natsmq</code> is present in the logs.</li>
+<li>A directory named <code translate="no">jetstream</code> is present in the directory specified in <code translate="no">spec.dependencies.natsmq.server.storeDir</code>.</li>
 </ul></li>
-<li><p>(اختياري) قم بالنسخ الاحتياطي وتنظيف ملفات البيانات في دليل تخزين RocksMQ.</p></li>
+<li><p>(Optional) Back up and clean up the data files in the RocksMQ storage directory.</p></li>
 </ol>
 <div class="alert note">
-<p><strong>الاختيار بين RocksMQ و NATS؟</strong></p>
-<p>يستخدم RocksMQ CGO للتفاعل مع RocksDB ويدير الذاكرة بنفسه، بينما يقوم NATS المدمج في تثبيت Milvus بتفويض إدارة الذاكرة إلى جامع القمامة الخاص بـ Go (GC).</p>
-<p>في السيناريو الذي تكون فيه حزمة البيانات أصغر من 64 كيلوبايت، يتفوق RocksDB من حيث استخدام الذاكرة واستخدام وحدة المعالجة المركزية ووقت الاستجابة. من ناحية أخرى، إذا كانت حزمة البيانات أكبر من 64 كيلوبايت، يتفوق NATS من حيث وقت الاستجابة مع وجود ذاكرة كافية وجدولة GC مثالية.</p>
-<p>في الوقت الحالي، يُنصح باستخدام NATS للتجارب فقط.</p>
+<p><strong>Choose between RocksMQ and NATS?</strong></p>
+<p>RockMQ uses CGO to interact with RocksDB and manages the memory by itself, while the pure-GO NATS embedded in the Milvus installation delegates its memory management to Go’s garbage collector (GC).</p>
+<p>In the scenario where the data packet is smaller than 64 kb, RocksDB outperforms in terms of memory usage, CPU usage, and response time. On the other hand, if the data packet is greater than 64 kb, NATS excels in terms of response time with sufficient memory and ideal GC scheduling.</p>
+<p>Currently, you are advised to use NATS only for experiments.</p>
 </div>
-<h2 id="Configure-Pulsar" class="common-anchor-header">تكوين بولسار<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
+<h2 id="Configure-Pulsar" class="common-anchor-header">Configure Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,14 +204,15 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يدير Pulsar سجلات التغييرات الأخيرة، ويخرج سجلات الدفق، ويوفر اشتراكات السجل. يتم دعم تكوين Pulsar لتخزين الرسائل في كل من Milvus المستقل و Milvus cluster. ومع ذلك، مع مشغل Milvus، يمكنك فقط تكوين Pulsar كمخزن للرسائل لمجموعة Milvus العنقودية. أضف الحقول المطلوبة ضمن <code translate="no">spec.dependencies.pulsar</code> لتكوين Pulsar.</p>
-<p><code translate="no">pulsar</code> يدعم <code translate="no">external</code> و <code translate="no">inCluster</code>.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">بولسار خارجي</h3><p><code translate="no">external</code> يشير إلى استخدام خدمة بولسار خارجية. تتضمن الحقول المستخدمة لتكوين خدمة بولسار خارجية ما يلي:</p>
+    </button></h2><p>Pulsar manages logs of recent changes, outputs stream logs, and provides log subscriptions. Configuring Pulsar for message storage is supported in both Milvus standalone and Milvus cluster. However, with Milvus Operator, you can only configure Pulsar as message storage for Milvus cluster. Add required fields under <code translate="no">spec.dependencies.pulsar</code> to configure Pulsar.</p>
+<p><code translate="no">pulsar</code> supports <code translate="no">external</code> and <code translate="no">inCluster</code>.</p>
+<h3 id="External-Pulsar" class="common-anchor-header">External Pulsar</h3><p><code translate="no">external</code> indicates using an external Pulsar service.
+Fields used to configure an external Pulsar service include:</p>
 <ul>
-<li><code translate="no">external</code>:  تشير القيمة <code translate="no">true</code> إلى أن ميلفوس يستخدم خدمة بولسار خارجية.</li>
-<li><code translate="no">endpoints</code>: نقاط نهاية بولسار.</li>
+<li><code translate="no">external</code>:  A <code translate="no">true</code> value indicates that Milvus uses an external Pulsar service.</li>
+<li><code translate="no">endpoints</code>: The endpoints of Pulsar.</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">مثال</h4><p>يقوم المثال التالي بتكوين خدمة بولسار خارجية.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external Pulsar service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -229,8 +231,8 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">بولسار داخلي</h3><p><code translate="no">inCluster</code> يشير إلى أنه عند بدء تشغيل مجموعة Milvus، تبدأ خدمة Pulsar تلقائياً في المجموعة.</p>
-<h4 id="Example" class="common-anchor-header">مثال</h4><p>يقوم المثال التالي بتكوين خدمة Pulsar داخلية.</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">Internal Pulsar</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, a Pulsar service starts automatically in the cluster.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal Pulsar service.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -269,12 +271,12 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">يحدد هذا المثال أعداد النسخ المتماثلة لكل مكون من مكونات Pulsar، وموارد الحوسبة الخاصة ب Pulsar BookKeeper، وتكوينات أخرى.</div>
-<div class="alert note">ابحث عن عناصر التكوين الكاملة لتكوين خدمة Pulsar الداخلية في <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">القيم.yaml.</a> أضف عناصر التكوين حسب الحاجة ضمن <code translate="no">pulsar.inCluster.values</code> كما هو موضح في المثال السابق.</div>
-<p>بافتراض أن ملف التكوين اسمه <code translate="no">milvuscluster.yaml</code> ، قم بتشغيل الأمر التالي لتطبيق التكوين.</p>
+<div class="alert note">This example specifies the numbers of replicas of each component of Pulsar, the compute resources of Pulsar BookKeeper, and other configurations.</div>
+<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>. Add configuration items as needed under <code translate="no">pulsar.inCluster.values</code> as shown in the preceding example.</div>
+<p>Assuming that the configuration file is named <code translate="no">milvuscluster.yaml</code>, run the following command to apply the configuration.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-Kafka" class="common-anchor-header">تكوين كافكا<button data-href="#Configure-Kafka" class="anchor-icon" translate="no">
+<h2 id="Configure-Kafka" class="common-anchor-header">Configure Kafka<button data-href="#Configure-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -289,15 +291,15 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar هو مخزن الرسائل الافتراضي في مجموعة Milvus. إذا كنت تريد استخدام كافكا، أضف الحقل الاختياري <code translate="no">msgStreamType</code> لتكوين كافكا.</p>
-<p><code translate="no">kafka</code> يدعم <code translate="no">external</code> و <code translate="no">inCluster</code>.</p>
-<h3 id="External-Kafka" class="common-anchor-header">كافكا الخارجية</h3><p><code translate="no">external</code> يشير إلى استخدام خدمة كافكا خارجية.</p>
-<p>تتضمن الحقول المستخدمة لتكوين خدمة كافكا خارجية ما يلي:</p>
+    </button></h2><p>Pulsar is the default message storage in a Milvus cluster. If you want to use Kafka, add the optional field <code translate="no">msgStreamType</code> to configure Kafka.</p>
+<p><code translate="no">kafka</code> supports <code translate="no">external</code> and <code translate="no">inCluster</code>.</p>
+<h3 id="External-Kafka" class="common-anchor-header">External Kafka</h3><p><code translate="no">external</code> indicates using an external Kafka service.</p>
+<p>Fields used to configure an external Kafka service include:</p>
 <ul>
-<li><code translate="no">external</code>: تشير القيمة <code translate="no">true</code> إلى أن ميلفوس يستخدم خدمة كافكا خارجية.</li>
-<li><code translate="no">brokerList</code>: قائمة الوسطاء لإرسال الرسائل إليهم.</li>
+<li><code translate="no">external</code>: A <code translate="no">true</code> value indicates that Milvus uses an external Kafka service.</li>
+<li><code translate="no">brokerList</code>: The list of brokers to send the messages to.</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">مثال</h4><p>يقوم المثال التالي بتكوين خدمة كافكا خارجية.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external Kafka service.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -325,10 +327,10 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>يتم دعم تكوينات SASL في المشغل الإصدار 0.8.5 أو إصدار أعلى.</p>
+<p>SASL configurations are supported in operator v0.8.5 or higher version.</p>
 </blockquote>
-<h3 id="Internal-Kafka" class="common-anchor-header">كافكا الداخلية</h3><p><code translate="no">inCluster</code> يشير إلى أنه عند بدء تشغيل مجموعة Milvus، تبدأ خدمة كافكا تلقائيًا في المجموعة.</p>
-<h4 id="Example" class="common-anchor-header">مثال</h4><p>يقوم المثال التالي بتكوين خدمة كافكا داخلية.</p>
+<h3 id="Internal-Kafka" class="common-anchor-header">Internal Kafka</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, a Kafka service starts automatically in the cluster.</p>
+<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal Kafka service.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -344,11 +346,11 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>ابحث عن عناصر التكوين الكاملة لتكوين خدمة كافكا الداخلية <a href="https://artifacthub.io/packages/helm/bitnami/kafka">هنا</a>. أضف عناصر التكوين حسب الحاجة ضمن <code translate="no">kafka.inCluster.values</code>.</p>
-<p>على افتراض أن ملف التكوين اسمه <code translate="no">milvuscluster.yaml</code> ، قم بتشغيل الأمر التالي لتطبيق التكوين.</p>
+<p>Find the complete configuration items to configure an internal Kafka service <a href="https://artifacthub.io/packages/helm/bitnami/kafka">here</a>. Add configuration items as needed under <code translate="no">kafka.inCluster.values</code>.</p>
+<p>Assuming that the configuration file is named <code translate="no">milvuscluster.yaml</code>, run the following command to apply the configuration.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -363,8 +365,8 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعرف على كيفية تكوين تبعيات Milvus الأخرى باستخدام مشغل Milvus:</p>
+    </button></h2><p>Learn how to configure other Milvus dependencies with Milvus Operator:</p>
 <ul>
-<li><a href="/docs/ar/object_storage_operator.md">تكوين تخزين الكائنات باستخدام مشغل Milvus</a></li>
-<li><a href="/docs/ar/meta_storage_operator.md">تكوين التخزين التعريفي باستخدام مشغل Milvus</a></li>
+<li><a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a></li>
+<li><a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
 </ul>

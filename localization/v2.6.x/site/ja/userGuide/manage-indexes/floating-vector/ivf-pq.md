@@ -2,7 +2,10 @@
 id: ivf-pq.md
 title: IVF_PQ
 summary: >-
-  IVF_PQインデックスは、高次元空間における近似最近傍探索のための量子化ベースのインデックス作成アルゴリズムである。グラフベースの手法ほど高速ではないが、IVF_PQは多くの場合メモリ使用量を大幅に削減できるため、大規模なデータセットに対して実用的な選択肢となる。
+  The IVF_PQ index is a quantization-based indexing algorithm for approximate
+  nearest neighbor search in high-dimensional spaces. While not as fast as some
+  graph-based methods, IVF_PQ often requires significantly less memory, making
+  it a practical choice for large datasets.
 ---
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>IVF_PQ</strong>インデックスは、高次元空間における近似最近傍探索のための<strong>量子化ベースの</strong>インデックス作成アルゴリズムである。グラフベースの手法ほど高速ではないが、<strong>IVF_PQは</strong>多くの場合メモリ使用量を大幅に削減できるため、大規模なデータセットに対して実用的な選択肢となる。</p>
-<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>The <strong>IVF_PQ</strong> index is a <strong>quantization-based</strong> indexing algorithm for approximate nearest neighbor search in high-dimensional spaces. While not as fast as some graph-based methods, <strong>IVF_PQ</strong> often requires significantly less memory, making it a practical choice for large datasets.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,64 +38,68 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>IVF_PQは</strong> <strong>Inverted File with Product Quantizationの</strong>略で、効率的なベクトル検索と検索のためにインデックス作成と圧縮を組み合わせたハイブリッドアプローチである。IVF_PQは2つのコアコンポーネントを活用しています：<strong>反転ファイル(IVF)</strong>と<strong>積量子化(PQ)</strong>です。</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVFは、本の索引を作るようなものです。すべてのページ（私たちの場合はすべてのベクトル）をスキャンする代わりに、インデックスで特定のキーワード（クラスタ）を検索し、関連するページ（ベクトル）をすばやく見つけます。このシナリオでは、ベクターはクラスターにグループ化され、アルゴリズムはクエリーベクターに近いいくつかのクラスター内を検索します。</p>
-<p>以下がその仕組みだ：</p>
+    </button></h2><p>The <strong>IVF_PQ</strong> stands for <strong>Inverted File with Product Quantization</strong>, a hybrid approach that combines indexing and compression for efficient vector search and retrieval. It leverages two core components: <strong>Inverted File (IVF)</strong> and <strong>Product Quantization (PQ)</strong>.</p>
+<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF is like creating an index in a book. Instead of scanning every page (or, in our case, every vector), you look up specific keywords (clusters) in the index to quickly find the relevant pages (vectors). In our scenario, vectors are grouped into clusters, and the algorithm will search within a few clusters that are close to the query vector.</p>
+<p>Here’s how it works:</p>
 <ol>
-<li><p><strong>クラスタリング：</strong>ベクトルデータセットは、k-meansのようなクラスタリングアルゴリズムを使用して、指定された数のクラスタに分割されます。各クラスタにはセントロイド（クラスタを代表するベクトル）があります。</p></li>
-<li><p><strong>割り当て：</strong>各ベクトルは、セントロイドが最も近いクラスタに割り当てられます。</p></li>
-<li><p><strong>転置インデックス：</strong>各クラスタのセントロイドを、そのクラスタに割り当てられたベクトルのリストにマッピングするインデックスが作成されます。</p></li>
-<li><p><strong>検索：</strong>最近傍を検索する場合、検索アルゴリズムはクエリベクトルとクラスタ重心を比較し、最も有望なクラスタを選択します。そして、その選択されたクラスタ内のベクトルに検索が絞り込まれます。</p></li>
+<li><p><strong>Clustering:</strong> Your vector dataset is divided into a specified number of clusters, using a clustering algorithm like k-means. Each cluster has a centroid (a representative vector for the cluster).</p></li>
+<li><p><strong>Assignment:</strong> Each vector is assigned to the cluster whose centroid is closest to it.</p></li>
+<li><p><strong>Inverted Index:</strong> An index is created, mapping each cluster centroid to the list of vectors assigned to that cluster.</p></li>
+<li><p><strong>Search:</strong> When you search for nearest neighbors, the search algorithm compares your query vector with the cluster centroids and selects the most promising cluster(s). The search is then narrowed down to the vectors within those selected clusters.</p></li>
 </ol>
-<p>技術的な詳細については、<a href="/docs/ja/ivf-flat.md">IVF_FLAT</a> を参照してください。</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ)</strong>は、高次元ベクトルの圧縮手法であり、高速な類似性検索を可能にすると同時に、ストレージ要件を大幅に削減します。</p>
-<p>PQプロセスには以下の主要な段階があります：</p>
+<p>To learn more about its technical details , refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
+<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ)</strong> is a compression method for high-dimensional vectors that significantly reduces storage requirements while enabling fast similarity search operations.</p>
+<p>The PQ process involves these key stages:</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-1.png" alt="Ivf Pq 1" class="doc-image" id="ivf-pq-1" />
-   </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-1.png" alt="Ivf Pq 1" class="doc-image" id="ivf-pq-1" />
+    <span>Ivf Pq 1</span>
+  </span>
+</p>
 <ol>
-<li><p><strong>次元分解</strong>：このアルゴリズムは、各高次元ベクトルを<code translate="no">m</code> 等しい大きさの部分ベクトルに分解することから始まる。この分解により、元のD次元空間は<code translate="no">m</code> 分割された部分空間に変換され、各下部空間は<em>D/m</em>次元を含む。パラメータ<code translate="no">m</code> は分解の粒度を制御し、圧縮率に直接影響する。</p></li>
-<li><p><strong>部分空間コードブック生成</strong>：それぞれの部分空間内で、アルゴリズムは<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-meansクラスタリングを</a>適用し、代表ベクトル（セントロイド）の集合を学習する。これらのセントロイドは集合的に、その部分空間のコードブックを形成する。各コードブックのセントロイドの数は、パラメータ<code translate="no">nbits</code> によって決定される。ここで、各コードブックは<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">nbits</annotation><mrow><msup><mn>2^{textit{nbits}}</mn></msup></mrow></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits のセントロイドを含む。例えば、</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code> の場合、各コードブックは256個のセントロイドを含む。各セントロイドには<code translate="no">nbits</code> ビットの一意なインデックスが割り当てられる。</p></li>
-<li><p><strong>ベクトル</strong> <strong>量子化</strong>：元のベクトル内の各サブベクトルに対して、PQは対応する部分空間内で、特定のメトリックタイプを使用して、その最も近いセントロイドを特定する。このプロセスは、各サブベクトルをコードブック内の最も近い代表ベクトルに効果的にマッピングする。完全な部分ベクトル座標を格納する代わりに、マッチしたセントロイドのインデックスのみが保持される。</p></li>
-<li><p><strong>圧縮表現</strong>：最終的な圧縮表現は、各サブスペースから1つずつ、<code translate="no">m</code> 、<strong>PQコードと</strong>総称されるインデックスで構成される。このエンコーディングにより、<em>D×32</em>ビット（32ビット浮動小数点数を仮定）から<em>m×n</em>ビットへとストレージ要件が削減され、ベクトル距離の近似能力を維持しながら大幅な圧縮が達成されます。</p></li>
+<li><p><strong>Dimension decomposition</strong>: The algorithm begins by decomposing each high-dimensional vector into <code translate="no">m</code> equal-sized sub-vectors. This decomposition transforms the original D-dimensional space into <code translate="no">m</code> disjoint subspaces, where each subspace contains <em>D/m</em> dimensions. The parameter <code translate="no">m</code> controls the granularity of the decomposition and directly influences the compression ratio.</p></li>
+<li><p><strong>Subspace codebook generation</strong>: Within each subspace, the algorithm applies <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a> to learn a set of representative vectors (centroids). These centroids collectively form a codebook for that subspace. The number of centroids in each codebook is determined by the parameter <code translate="no">nbits</code>, where each codebook contains <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mtext mathvariant="italic">nbits</mtext></msup></mrow><annotation encoding="application/x-tex">2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textit mtight">nbits</span></span></span></span></span></span></span></span></span></span></span></span></span> centroids. For example, if <code translate="no">nbits = 8</code>, each codebook will contain 256 centroids. Each centroid is assigned a unique index with <code translate="no">nbits</code> bits.</p></li>
+<li><p><strong>Vector</strong> <strong>quantization</strong>: For each sub-vector in the original vector, PQ identifies its nearest centroid within the corresponding subspace using a specific metric type. This process effectively maps each sub-vector to its closest representative vector in the codebook. Instead of storing the full sub-vector coordinates, only the index of the matched centroid is retained.</p></li>
+<li><p><strong>Compressed representation</strong>: The final compressed representation consists of <code translate="no">m</code> indices, one from each subspace, collectively referred to as <strong>PQ codes</strong>. This encoding reduces the storage requirement from <em>D × 32</em> bits (assuming 32-bit floating-point numbers) to <em>m</em> × <em>nbits</em> bits, achieving substantial compression while preserving the ability to approximate vector distances.</p></li>
 </ol>
-<p>パラメータのチューニングと最適化の詳細については、<a href="/docs/ja/ivf-pq.md#Index-params">Index paramsを</a>参照してください。</p>
+<p>For more details on parameter tuning and optimization, refer to <a href="/docs/ivf-pq.md#Index-params">Index params</a>.</p>
 <div class="alert note">
-<p>32ビット浮動小数点数を使用した<em>D = 128</em>次元のベクトルを考えます。PQ パラメータ<em>m = 64</em>（部分ベクトル）、<em>nbits = 8</em>（従って、<em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>= 256</em>centroids per subspace）で、ストレージ要件を比較することができます：</p>
+<p>Consider a vector with <em>D = 128</em> dimensions using 32-bit floating-point numbers. With PQ parameters <em>m = 64</em> (sub-vectors) and <em>nbits = 8</em> (thus <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">2^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span> <em>= 256</em> centroids per subspace), we can compare the storage requirements:</p>
 <ul>
-<li><p>元のベクトル：128次元×32ビット＝4,096ビット</p></li>
-<li><p>PQ圧縮ベクトル：64個の部分ベクトル×8ビット＝512ビット</p></li>
+<li><p>Original vector: 128 dimensions × 32 bits = 4,096 bits</p></li>
+<li><p>PQ-compressed vector: 64 sub-vectors × 8 bits = 512 bits</p></li>
 </ul>
-<p>これは8倍の記憶容量の削減を意味する。</p>
+<p>This represents an 8x reduction in storage requirements.</p>
 </div>
-<p><strong>PQによる距離計算</strong></p>
-<p>クエリーベクターで類似検索を行う場合、PQは以下のステップで効率的な距離計算を可能にする：</p>
+<p><strong>Distance computation with PQ</strong></p>
+<p>When performing similarity search with a query vector, PQ enables efficient distance computation through the following steps:</p>
 <ol>
-<li><p><strong>クエリの前処理</strong></p>
+<li><p><strong>Query preprocessing</strong></p>
 <ul>
-<li><p>クエリ・ベクトルは、元のPQ分解構造と一致するように、<code translate="no">m</code> サブ・ベクトルに分解される。</p></li>
-<li><p>各クエリサブベクタと対応するコードブック（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">nbits</annotation><mrow><msup><mn>2^{textit{nbits}}</mn></msup></mrow></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbitsのセントロイドを含む）について、すべてのセントロイドへの距離を計算し、格納する。</span></span></span></span></span></span></span></span></span></p></li>
-<li><p>これは<code translate="no">m</code> ルックアップテーブルを生成し、各テーブルは<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits の距離を含む。</span></span></span></span></span></span></span></span></span></p></li>
+<li><p>The query vector is decomposed into <code translate="no">m</code> sub-vectors, matching the original PQ decomposition structure.</p></li>
+<li><p>For each query sub-vector and its corresponding codebook (containing <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mtext mathvariant="italic">nbits</mtext></msup></mrow><annotation encoding="application/x-tex">2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textit mtight">nbits</span></span></span></span></span></span></span></span></span></span></span></span></span> centroids), compute and store distances to all centroids.</p></li>
+<li><p>This generates <code translate="no">m</code> lookup tables, where each table contains <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mtext mathvariant="italic">nbits</mtext></msup></mrow><annotation encoding="application/x-tex">2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textit mtight">nbits</span></span></span></span></span></span></span></span></span></span></span></span></span> distances.</p></li>
 </ul></li>
-<li><p><strong>距離近似</strong></p>
-<p>PQコードで表現されたデータベースベクトルに対して、クエリベクトルとの近似距離は以下のように計算される：</p>
+<li><p><strong>Distance approximation</strong></p>
+<p>For any database vector represented by PQ codes, its approximate distance to the query vector is computed as follows:</p>
 <ul>
-<li><p><code translate="no">m</code> の各サブベクトルについて、格納されているセントロイドインデックスを使用して、対応するルックアップテーブルから事前に計算された距離を取得する。</p></li>
-<li><p>これらの<code translate="no">m</code> 距離を合計して、特定のメトリックタイプ（ユークリッド距離など）に基づく近似距離を得る。</p></li>
+<li><p>For each of the <code translate="no">m</code> sub-vectors, retrieve the pre-computed distance from the corresponding lookup table using the stored centroid index.</p></li>
+<li><p>Sum these <code translate="no">m</code> distances to obtain the approximate distance based on a specific metric type (e.g. Euclidean distance).</p></li>
 </ul></li>
 </ol>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
-   </span> <span class="img-wrapper"> <span>IVF PQ 2</span> </span></p>
-<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p><strong>IVF_PQ</strong>インデックスは、<strong>IVF</strong>と<strong>PQ の</strong>長所を組み合わせて検索を高速化する。この処理は2つのステップで行われる：</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
+    <span>Ivf Pq 2</span>
+  </span>
+</p>
+<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>The <strong>IVF_PQ</strong> index combines the strengths of <strong>IVF</strong> and <strong>PQ</strong> to accelerate searches. The process works in two steps:</p>
 <ol>
-<li><p><strong>IVFによる粗いフィルタリング</strong>：IVFはベクトル空間をクラスタに分割し、検索範囲を狭める。データセット全体を評価する代わりに、このアルゴリズムはクエリーベクトルに最も近いクラスターのみに焦点を当てる。</p></li>
-<li><p><strong>PQによるきめ細かな比較</strong>：選択されたクラスタ内で、PQは圧縮・量子化されたベクトル表現を用いて近似距離を高速に計算する。</p></li>
+<li><p><strong>Coarse filtering with IVF</strong>: IVF partitions the vector space into clusters, reducing the search scope. Instead of evaluating the entire dataset, the algorithm focuses only on the clusters closest to the query vector.</p></li>
+<li><p><strong>Fine-grained comparison with PQ</strong>: Within the selected clusters, PQ uses compressed and quantized vector representations to compute approximate distances quickly.</p></li>
 </ol>
-<p><strong>IVF_PQ</strong>インデックスの性能は、IVFとPQの両アルゴリズムを制御するパラメータによって大きく影響を受けます。与えられたデータセットとアプリケーションに最適な結果を得るためには、これらのパラメータを調整することが極めて重要です。これらのパラメータの詳細と調整方法については、<a href="/docs/ja/ivf-pq.md#Index-params">Index paramsを</a>参照してください。</p>
-<h2 id="Build-index" class="common-anchor-header">インデックスの構築<button data-href="#Build-index" class="anchor-icon" translate="no">
+<p>The performance of the <strong>IVF_PQ</strong> index is significantly impacted by the parameters that control both the IVF and PQ algorithms. Tuning these parameters is crucial to achieve the optimal results for a given dataset and application. More detailed information about these parameters and how to tune them can be found in <a href="/docs/ivf-pq.md#Index-params">Index params</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,7 +114,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでベクトル場に<code translate="no">IVF_PQ</code> インデックスを構築するには、<code translate="no">add_index()</code> メソッドを使用し、<code translate="no">index_type</code> 、<code translate="no">metric_type</code> 、インデックス用の追加パラメータを指定します。</p>
+    </button></h2><p>To build an <code translate="no">IVF_PQ</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -123,18 +130,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この設定では</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">IVF_PQ</code> とします。</p></li>
-<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> があります。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
-<li><p><code translate="no">params</code>:インデックスを構築するための追加設定オプション。</p>
+<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">IVF_PQ</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
-<li><code translate="no">m</code>:ベクトルを分割するサブベクトルの数。</li>
+<li><code translate="no">m</code>: Number of sub-vectors to split the vector into.</li>
 </ul>
-<p><code translate="no">IVF_PQ</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/ivf-pq.md#Index-building-params">インデックス構築パラメータを</a>参照してください。</p></li>
+<p>To learn more building parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/ivf-pq.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>
-<h2 id="Search-on-index" class="common-anchor-header">インデックスでの検索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,7 +156,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックスで類似検索を実行できます。</p>
+    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
@@ -164,15 +171,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この構成では</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">params</code>:インデックスで検索するための追加構成オプション。</p>
+<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
 <ul>
-<li><code translate="no">nprobe</code>:検索するクラスタの数。</li>
+<li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
 </ul>
-<p><code translate="no">IVF_PQ</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/ivf-pq.md#Index-specific-search-params">インデックス固有の検索パラメータを</a>参照してください。</p></li>
+<p>To learn more search parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/ivf-pq.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">インデックスパラメータ<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,51 +194,51 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/ivf-pq.md#Build-index">インデックスを構築</a>する際に設定できるパラメータの一覧です。</p>
+    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/ivf-pq.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>パラメータ</p></th>
-     <th><p>説明</p></th>
-     <th><p>値の範囲</p></th>
-     <th><p>チューニングの提案</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>インデックス構築時にk-meansアルゴリズムを使用して作成するクラスタの数。</p></td>
-     <td><p><strong>型</strong>：整数<strong>：</strong>[1, 65536]</p><p><strong>デフォルト値</strong>：<code translate="no">128</code></p></td>
-     <td><p>より大きな<code translate="no">nlist</code> 値は、より洗練されたクラスタを作成することでリコールを向上させるが、インデックス構築時間を増加させる。データセットサイズと利用可能なリソースに基づいて最適化する。ほとんどの場合、この範囲内の値を設定することを推奨する：[32, 4096].</p></td>
+     <td><p>The number of clusters to create using the k-means algorithm during index building.</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 65536]</p><p><strong>Default value</strong>: <code translate="no">128</code></p></td>
+     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources. In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
    </tr>
    <tr>
      <td rowspan="2"><p>PQ</p></td>
      <td><p><code translate="no">m</code></p></td>
-     <td><p>量子化処理時に各高次元ベクトルを分割するサブベクトルの数（量子化に使用）。</p></td>
-     <td><p><strong>タイプ</strong>：整数<strong>：</strong>[1, 65536]</p><p><strong>デフォルト値</strong>：なし</p></td>
-     <td><p><code translate="no">m</code> の値を大きくすると精度が向上するが、計算の複雑さとメモリ使用量も増加する。<code translate="no">m</code> は、適切な分解を保証するために、ベクトル次元<em>(D</em>)の約数でなければならない。一般的に推奨される値は<em>m = D/2</em> です。</p><p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[D/8, D]。</p></td>
+     <td><p>The number of sub-vectors (used for quantization) to divide each high-dimensional vector into during the quantization process.</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 65536]</p><p><strong>Default value</strong>: None</p></td>
+     <td><p>A higher <code translate="no">m</code> value can improve accuracy, but it also increases the computational complexity and memory usage. <code translate="no">m</code> must be a divisor of the vector dimension (<em>D</em>) to ensure proper decomposition. A commonly recommended value is <em>m = D/2</em>.</p><p>In most cases, we recommend you set a value within this range: [D/8, D].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>各サブベクトルの重心インデックスを圧縮形式で表現するためのビット数。各コードブックのサイズを直接決定する。各コードブックは$2^{textit{nbits}}$個のセントロイドを含む。例えば、<code translate="no">nbits</code> を8に設定すると、各サブベクトルは8ビットのセントロイドのインデックスで表現される。これにより、そのサブベクトルのコードブックには$2^8$ (256)個のセントロイドの可能性がある。</p></td>
-     <td><p><strong>型</strong>：整数<strong>：</strong>[1, 64]</p><p><strong>デフォルト値</strong>：<code translate="no">8</code></p></td>
-     <td><p><code translate="no">nbits</code> の値を大きくすると、コードブックが大きくなり、元のベクトルをより正確に表現できる可能性がある。しかし、これは各インデックスを格納するためにより多くのビットを使用することを意味し、結果として圧縮率が低くなります。ほとんどの場合、この範囲内の値を設定することをお勧めします：[1, 16].</p></td>
+     <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook. Each codebook will contain $2^{\textit{nbits}}$ centroids. For example, if <code translate="no">nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for $2^8$ (256) possible centroids in the codebook for that sub-vector.</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 64]</p><p><strong>Default value</strong>: <code translate="no">8</code></p></td>
+     <td><p>A higher <code translate="no">nbits</code> value allows for larger codebooks, potentially leading to more accurate representations of the original vectors. However, it also means using more bits to store each index, resulting in less compression. In most cases, we recommend you set a value within this range: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<a href="/docs/ja/ivf-pq.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/ivf-pq.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>パラメータ</p></th>
-     <th><p>説明</p></th>
-     <th><p>値の範囲</p></th>
-     <th><p>チューニングサジェスチョン</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>候補を検索するクラスタの数。</p></td>
-     <td><p><strong>型</strong>：整数<strong>Range</strong>：[1,<em>nlist］</em></p><p><strong>デフォルト値</strong>：<code translate="no">8</code></p></td>
-     <td><p>値を大きくすると、より多くのクラスタを検索できるようになり、検索範囲を広げることでリコールを向上させますが、その代償としてクエリの待ち時間が増加します。速度と精度のバランスをとるために、<code translate="no">nlist</code> に比例して<code translate="no">nprobe</code> を設定します。</p><p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[1, nlist]。</p></td>
+     <td><p>The number of clusters to search for candidates.</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, <em>nlist</em>]</p><p><strong>Default value</strong>: <code translate="no">8</code></p></td>
+     <td><p>Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency. Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p><p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
    </tr>
 </table>

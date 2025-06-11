@@ -1,8 +1,8 @@
 ---
 id: chunk_cache.md
-title: تكوين ذاكرة التخزين المؤقت للقطع
+title: Configure Chunk Cache
 ---
-<h1 id="Configure-Chunk-Cache" class="common-anchor-header">تكوين ذاكرة التخزين المؤقت للقطع<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
+<h1 id="Configure-Chunk-Cache" class="common-anchor-header">Configure Chunk Cache<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: تكوين ذاكرة التخزين المؤقت للقطع
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تتيح آلية التخزين المؤقت للقطع لـ Milvus تحميل البيانات مسبقًا في ذاكرة التخزين المؤقت على القرص الصلب المحلي لعقد الاستعلام قبل الحاجة إليها. تعمل هذه الآلية على تحسين أداء استرجاع المتجهات بشكل كبير من خلال تقليل الوقت الذي يستغرقه تحميل البيانات من القرص إلى الذاكرة.</p>
-<h2 id="Background" class="common-anchor-header">الخلفية<button data-href="#Background" class="anchor-icon" translate="no">
+    </button></h1><p>The chunk cache mechanism enables Milvus to pre-load data into cache on the local hard disk of the query nodes before it is needed. This mechanism significantly improves vector retrieval performance by reducing the time it takes to load data from disk to memory.</p>
+<h2 id="Background" class="common-anchor-header">Background<button data-href="#Background" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,9 +33,9 @@ title: تكوين ذاكرة التخزين المؤقت للقطع
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل إجراء الاستعلامات لاسترداد المتجهات، يحتاج برنامج Milvus إلى تحميل البيانات من تخزين الكائنات إلى ذاكرة التخزين المؤقت على القرص الصلب المحلي لعقد الاستعلام. هذه عملية تستغرق وقتاً طويلاً. قبل أن يتم تحميل جميع البيانات، قد يستجيب ميلفوس لبعض طلبات استرجاع المتجهات مع تأخير.</p>
-<p>ولتحسين أداء الاستعلام، يوفر Milvus آلية ذاكرة تخزين مؤقتة للقطع لتحميل البيانات مسبقاً من تخزين الكائنات في ذاكرة التخزين المؤقت على القرص الصلب المحلي قبل الحاجة إليها. عندما يتم استلام طلب استعلام، يتحقق Segcore أولاً مما إذا كانت البيانات موجودة في ذاكرة التخزين المؤقت، بدلاً من تخزين الكائنات. إذا كانت البيانات موجودة في ذاكرة التخزين المؤقت، يمكن لـ Segcore استرجاعها بسرعة من ذاكرة التخزين المؤقت وإرجاع النتيجة إلى العميل.</p>
-<h2 id="Configure-Chunk-Cache" class="common-anchor-header">تكوين ذاكرة التخزين المؤقت للقطع<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
+    </button></h2><p>Before conducting queries to retrieve vectors, Milvus needs to load the data from object storage to the memory cache on the local hard disk of the query nodes. This is a time-consuming process. Before all data is loaded, Milvus may respond to some vector retrieval requests with a delay.</p>
+<p>To improve the query performance, Milvus provides a chunk cache mechanism to pre-load data from object storage into the cache on the local hard disk before it is needed. When a query request is received, the Segcore first checks if the data is in the cache, instead of the object storage. If the data is in the cache, Segcore can quickly retrieve it from the cache and return the result to the client.</p>
+<h2 id="Configure-Chunk-Cache" class="common-anchor-header">Configure Chunk Cache<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,28 +50,28 @@ title: تكوين ذاكرة التخزين المؤقت للقطع
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر هذا الدليل إرشادات حول كيفية تكوين آلية ذاكرة التخزين المؤقت للقطع لمثيل Milvus. يختلف التكوين باختلاف طريقة تثبيت مثيل Milvus.</p>
+    </button></h2><p>This guide provides instructions on how to configure the chunk cache mechanism for a Milvus instance. Configuration varies with the way you install the Milvus instance.</p>
 <ul>
-<li><p>بالنسبة لمثيلات Milvus المثبتة باستخدام مخططات Helm Charts</p>
-<p>أضف التكوين إلى الملف <code translate="no">values.yaml</code> ضمن القسم <code translate="no">config</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm Charts</a>.</p></li>
-<li><p>لمثيلات Milvus المثبتة باستخدام Docker Compose</p>
-<p>أضف التكوين إلى الملف <code translate="no">milvus.yaml</code> الذي استخدمته لبدء تشغيل مثيل Milvus. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-docker.md">تكوين Milvus باستخدام Docker Compose</a>.</p></li>
-<li><p>لمثيلات Milvus المثبتة باستخدام المشغل</p>
-<p>أضف التكوين إلى قسم <code translate="no">spec.components</code> في المورد المخصص <code translate="no">Milvus</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع المشغل</a>.</p></li>
+<li><p>For Milvus instances installed using Helm Charts</p>
+<p>Add the configuration to the <code translate="no">values.yaml</code> file under the <code translate="no">config</code> section. For details, refer to <a href="/docs/configure-helm.md">Configure Milvus with Helm Charts</a>.</p></li>
+<li><p>For Milvus instances installed using Docker Compose</p>
+<p>Add the configuration to the <code translate="no">milvus.yaml</code> file you have used to start the Milvus instance. For details, refer to <a href="/docs/configure-docker.md">Configure Milvus with Docker Compose</a>.</p></li>
+<li><p>For Milvus instances installed using Operator</p>
+<p>Add the configuration to the <code translate="no">spec.components</code> section of the <code translate="no">Milvus</code> custom resource. For details, refer to <a href="/docs/configure_operator.md">Configure Milvus with Operator</a>.</p></li>
 </ul>
-<h3 id="Configuration-options" class="common-anchor-header">خيارات التكوين</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
+<h3 id="Configuration-options" class="common-anchor-header">Configuration options</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
     <span class="hljs-attr">cache:</span>
         <span class="hljs-attr">warmup:</span> <span class="hljs-string">async</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>تحدد المعلمة <code translate="no">warmup</code> ما إذا كان Milvus يقوم بتحميل البيانات مسبقًا من مخزن الكائنات في ذاكرة التخزين المؤقت على القرص الثابت المحلي لعقد الاستعلام قبل الحاجة إليها. يتم تعيين هذه المعلمة افتراضيًا على <code translate="no">disable</code>. الخيارات الممكنة هي كما يلي:</p>
+<p>The <code translate="no">warmup</code> parameter determines whether Milvus pre-loads data from the object storage into the cache on the local hard disk of the query nodes before it is needed. This parameter defaults to <code translate="no">disable</code>. Possible options are as follows:</p>
 <ul>
-<li><code translate="no">async</code>: يقوم Milvus بالتحميل المسبق للبيانات بشكل غير متزامن في الخلفية، وهو ما لا يؤثر على الوقت الذي يستغرقه تحميل المجموعة. ومع ذلك، قد يواجه المستخدمون تأخيرًا عند استرداد المتجهات لفترة زمنية قصيرة بعد اكتمال عملية التحميل.  هذا هو الخيار الافتراضي.</li>
-<li><code translate="no">sync</code>: يقوم Milvus بالتحميل المسبق للبيانات بشكل متزامن، مما قد يؤثر على الوقت المستغرق لتحميل مجموعة. ومع ذلك، يمكن للمستخدمين إجراء الاستعلامات مباشرة بعد اكتمال عملية التحميل دون أي تأخير.</li>
-<li><code translate="no">disable</code>: لا يقوم Milvus بتحميل البيانات مسبقاً في ذاكرة التخزين المؤقت للذاكرة.</li>
+<li><code translate="no">async</code>: Milvus pre-loads data asynchronously in the background, which does not affect the time it takes to load a collection. However, users may experience a delay when retrieving vectors for a short period of time after the load process is complete.  This is the default option.</li>
+<li><code translate="no">sync</code>: Milvus pre-loads data synchronously, which may affect the time it takes to load a collection. However, users can perform queries immediately after the load process is complete without any delay.</li>
+<li><code translate="no">disable</code>: Milvus does not pre-load data into the memory cache.</li>
 </ul>
-<p>لاحظ أن إعدادات ذاكرة التخزين المؤقت للقطع تنطبق أيضًا عند إدراج بيانات جديدة في المجموعات أو عند إعادة بناء فهارس المجموعة.</p>
-<h3 id="FAQ" class="common-anchor-header">الأسئلة الشائعة</h3><ul>
-<li><p><strong>كيف يمكنني تحديد ما إذا كانت آلية ذاكرة التخزين المؤقت للقطع تعمل بشكل صحيح؟</strong></p>
-<p>ننصحك بالتحقق من زمن الاستجابة لطلب البحث أو الاستعلام بعد تحميل مجموعة. إذا كان زمن التأخير أعلى بكثير من المتوقع (على سبيل المثال، عدة ثوانٍ)، فقد يشير ذلك إلى أن آلية التخزين المؤقت للقطع لا تزال تعمل.</p>
-<p>إذا ظل زمن انتقال الاستعلام مرتفعًا لفترة طويلة. يمكنك التحقق من إنتاجية مخزن الكائنات للتأكد من أن ذاكرة التخزين المؤقت للقطع لا تزال تعمل. في الحالات العادية، ستولد ذاكرة التخزين المؤقت للقطع العاملة إنتاجية عالية على مخزن الكائنات. بدلاً من ذلك، يمكنك ببساطة تجربة ذاكرة التخزين المؤقت للقطع في الوضع <code translate="no">sync</code>.</p></li>
+<p>Note that the chunk cache settings also apply when new data is inserted into collections or the collection indexes are rebuilt.</p>
+<h3 id="FAQ" class="common-anchor-header">FAQ</h3><ul>
+<li><p><strong>How can I determine whether the chunk cache mechanism is working correctly?</strong></p>
+<p>You are advised to check the latency of a search or query request after loading a collection. If the latency is significantly higher than expected (e.g., several seconds), it may indicate that the chunk cache mechanism is still working.</p>
+<p>If the query latency stays high for a long time. You can check the throughput of the object storage to ensure that the chunk cache is still working. In normal cases, the working chunk cache will generate high throughput on the object storage. Alternatively, you can simply try chunk cache in the <code translate="no">sync</code> mode.</p></li>
 </ul>

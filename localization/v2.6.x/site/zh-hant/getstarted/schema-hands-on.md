@@ -1,11 +1,13 @@
 ---
 id: schema-hands-on.md
-title: 搜尋的資料模型設計
+title: Data Model Design for Search
 summary: >-
-  資訊檢索系統，也稱為搜尋引擎，對於各種人工智慧應用，如檢索增生
-  (RAG)、視覺搜尋和產品推薦，都是不可或缺的。這些系統的核心是精心設計的資料模型，用以組織、索引和擷取資訊。
+  Information Retrieval systems, also known as search engines, are essential for
+  various AI applications such as Retrieval-augmented generation (RAG), visual
+  search, and product recommendation. At the core of these systems is a
+  carefully-designed data model to organize, index and retrieve the information.
 ---
-<h1 id="Data-Model-Design-for-Search" class="common-anchor-header">搜尋的資料模型設計<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
+<h1 id="Data-Model-Design-for-Search" class="common-anchor-header">Data Model Design for Search<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,13 +22,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>資訊檢索系統（也稱為搜尋引擎）對於各種人工智慧（AI）應用而言是不可或缺的，例如檢索增強世代（Retrieval-augmented generation，RAG）、視覺搜尋和產品推薦。這些系統的核心是精心設計的資料模型，用以組織、索引和擷取資訊。</p>
-<p>Milvus 可讓您透過集合模式指定搜尋資料模型，組織非結構化資料、其密集或稀疏向量表示法，以及結構化的元資料。無論您處理的是文字、影像或其他資料類型，這份實務指南將協助您了解並應用關鍵的模式概念，以便在實務中設計搜尋資料模型。</p>
+    </button></h1><p>Information Retrieval systems, also known as search engines, are essential for various AI applications such as Retrieval-augmented generation (RAG), visual search, and product recommendation. At the core of these systems is a carefully-designed data model to organize, index and retrieve the information.</p>
+<p>Milvus allows you to specify the search data model through a collection schema, organizing unstructured data, their dense or sparse vector representations, and structured metadata. Whether you’re working with text, images, or other data types, this hands-on guide will help you understand and apply key schema concepts to design a search data model in practice.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
-   </span> <span class="img-wrapper"> <span>資料模型剖析</span> </span></p>
-<h2 id="Data-Model" class="common-anchor-header">資料模型<button data-href="#Data-Model" class="anchor-icon" translate="no">
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
+    <span>Data Model Anatomy</span>
+  </span>
+</p>
+<h2 id="Data-Model" class="common-anchor-header">Data Model<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,38 +45,38 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>搜尋系統的資料模型設計包括分析業務需求，並將資訊抽象為模式表達的資料模型。定義良好的模式對於使資料模型符合業務目標、確保資料一致性和服務品質非常重要。  此外，選擇適當的資料類型和索引對於經濟地達成業務目標也很重要。</p>
-<h3 id="Analyzing-Business-Needs" class="common-anchor-header">分析業務需求</h3><p>要有效解決業務需求，首先要分析使用者將執行的查詢類型，並決定最適合的搜尋方法。</p>
+    </button></h2><p>The data model design of a search system involves analyzing business needs and abstracting information into a schema-expressed data model. A well-defined schema is important for aligning the data model with business objectives, ensuring data consistency and quality of service.  In addition, choosing proper data types and index is important in achieving the business goal economically.</p>
+<h3 id="Analyzing-Business-Needs" class="common-anchor-header">Analyzing Business Needs</h3><p>Effectively addressing business needs begins with analyzing the types of queries users will perform and determining the most suitable search methods.</p>
 <ul>
-<li><p><strong>使用者查詢：</strong>確定使用者預期執行的查詢類型。這有助於確保您的模式支援真實世界的使用個案，並最佳化搜尋效能。這些可能包括</p>
+<li><p><strong>User Queries:</strong> Identify the types of queries users are expected to perform. This helps ensure your schema supports real-world use cases and optimizes search performance. These may include:</p>
 <ul>
-<li><p>檢索符合自然語言查詢的文件</p></li>
-<li><p>尋找與參考影像相似或符合文字描述的影像</p></li>
-<li><p>依據名稱、類別或品牌等屬性搜尋產品</p></li>
-<li><p>根據結構化的元資料（例如出版日期、標籤、評分）過濾項目</p></li>
-<li><p>在混合查詢中結合多種條件（例如，在視覺搜尋中，同時考慮圖片及其標題的語意相似性）</p></li>
+<li><p>Retrieving documents that match a natural language query</p></li>
+<li><p>Finding images similar to a reference image or matching a text description</p></li>
+<li><p>Searching for products by attributes like name, category, or brand</p></li>
+<li><p>Filtering items based on structured metadata (e.g., publication date, tags, ratings)</p></li>
+<li><p>Combining multiple criteria in hybrid queries (e.g., in visual search, considering semantic similarity of both images and their captions)</p></li>
 </ul></li>
-<li><p><strong>搜尋方法：</strong>根據使用者將執行的查詢類型，選擇適當的搜尋技術。不同的方法可達到不同的目的，而且通常可以結合使用，以獲得更強大的結果：</p>
+<li><p><strong>Search Methods:</strong> Choose the appropriate search techniques that align with the types of queries your users will perform. Different methods serve different purposes and can often be combined for more powerful results:</p>
 <ul>
-<li><p><strong>語意搜尋</strong>：使用密集向量相似性來尋找意義相似的項目，適用於文字或影像等非結構化資料。</p></li>
-<li><p><strong>全文搜尋</strong>：使用關鍵字比對來補充語意搜尋。  全文檢索可利用詞彙分析，避免將長字分割成零碎的詞組，在檢索過程中掌握特殊詞彙。</p></li>
-<li><p><strong>元資料篩選</strong>：在向量搜尋之上，應用日期範圍、類別或標籤等限制條件。</p></li>
-</ul></li>
-</ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">將業務需求轉換為搜尋資料模型</h3><p>下一步是將您的業務需求轉換成具體的資料模型，方法是辨識資訊的核心元件及其搜尋方法：</p>
-<ul>
-<li><p>定義您需要儲存的資料，例如原始內容 (文字、影像、音訊)、相關的元資料 (標題、標籤、作者)，以及情境屬性 (時間戳記、使用者行為等)</p></li>
-<li><p>為每個元素決定適當的資料類型和格式。例如</p>
-<ul>
-<li><p>文字描述 → 字串</p></li>
-<li><p>影像或文件嵌入 → 密集或稀疏向量</p></li>
-<li><p>類別、標籤或旗標 → 字串、陣列和 bool</p></li>
-<li><p>價格或評價等數字屬性 → 整數或浮點數</p></li>
-<li><p>結構化資訊，如作者詳細資訊 → json</p></li>
+<li><p><strong>Semantic search</strong>: Uses dense vector similarity to find items with similar meaning, ideal for unstructured data like text or images.</p></li>
+<li><p><strong>Full-text search</strong>: Complementing semantic search with keyword matching.  Full-text search can utilize lexical analysis to avoid breaking long words into fragmented tokens, grasping the special terms during retrieval.</p></li>
+<li><p><strong>Metadata filtering</strong>: On top of vector search, applying constraints like date ranges, categories, or tags.</p></li>
 </ul></li>
 </ul>
-<p>明確定義這些元素可確保資料的一致性、準確的搜尋結果，以及容易與下游應用程式邏輯整合。</p>
-<h2 id="Schema-Design" class="common-anchor-header">模式設計<button data-href="#Schema-Design" class="anchor-icon" translate="no">
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Translates Business Requirements into a Search Data Model</h3><p>The next step is to translate your business requirements into a concrete data model, by identifying the core components of your information and their search methods:</p>
+<ul>
+<li><p>Define the data you need to store, such as raw content (text, images, audio), associated metadata (titles, tags, authorship), and contextual attributes (timestamps, user behavior, etc.)</p></li>
+<li><p>Determine the appropriate data types and formats for each element. For example:</p>
+<ul>
+<li><p>Text descriptions → string</p></li>
+<li><p>Image or document embeddings → dense or sparse vectors</p></li>
+<li><p>Categories, tags, or flags → string, array, and bool</p></li>
+<li><p>Numeric attributes like price or rating → integer or float</p></li>
+<li><p>Structured information such as author details -> json</p></li>
+</ul></li>
+</ul>
+<p>A clear definition of these elements ensures data consistency, accurate search results, and ease of integration with downstream application logics.</p>
+<h2 id="Schema-Design" class="common-anchor-header">Schema Design<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,13 +91,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，資料模型透過集合模式來表達。在集合模式中設計正確的欄位是實現有效檢索的關鍵。每個欄位定義了儲存於資料集中的特定資料類型，並在搜尋過程中扮演獨特的角色。在高層次上，Milvus 支援兩種主要的欄位類型：<strong>向量欄位</strong>和<strong>標量欄位</strong>。</p>
-<p>現在，您可以將資料模型映射為欄位模式，包括向量和任何輔助標量欄位。確保每個欄位都與資料模型的屬性相關，尤其要注意向量類型（dense 或 spase）及其維度。</p>
-<h3 id="Vector-Field" class="common-anchor-header">向量欄位</h3><p>向量欄位會儲存文字、影像和音訊等非結構化資料類型的嵌入。這些嵌入可能是密集、稀疏或二進位，視資料類型和使用的檢索方法而定。通常，密集向量用於語意搜尋，而稀疏向量則較適合全文或詞彙比對。當儲存和計算資源有限時，二進位向量就很有用。一個資料集可能包含數個向量欄位，以啟用多模式或混合式的檢索策略。有關此主題的詳細指南，請參考<a href="/docs/zh-hant/multi-vector-search.md">多向量混合檢索</a>。</p>
-<p>Milvus 支援向量資料類型：<code translate="no">FLOAT_VECTOR</code> 代表<a href="/docs/zh-hant/dense-vector.md">密集向量</a>，<code translate="no">SPARSE_FLOAT_VECTOR</code> 代表<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>，<code translate="no">BINARY_VECTOR</code> 代表<a href="/docs/zh-hant/binary-vector.md">二進位向量</a></p>
-<h3 id="Scalar-Field" class="common-anchor-header">標量欄位</h3><p>標量欄位儲存原始、結構化的值，通常稱為元資料，例如數字、字串或日期。這些值可以與向量搜尋結果一起傳回，對於篩選和排序非常重要。它們允許您根據特定屬性縮小搜尋結果的範圍，例如將文件限制在特定類別或定義的時間範圍內。</p>
-<p>Milvus 支援標量類型，例如<code translate="no">BOOL</code>,<code translate="no">INT8/16/32/64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>,<code translate="no">VARCHAR</code>,<code translate="no">JSON</code>, 和<code translate="no">ARRAY</code> ，用於儲存和過濾非向量資料。這些類型增強了搜尋作業的精確度與客製化。</p>
-<h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">在模式設計中利用進階功能<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
+    </button></h2><p>In Milvus, the data model is expressed through a collection schema. Designing the right fields within a collection schema is key to enabling effective retrieval. Each field defines a particular type of data stored in the collection and plays a distinct role in the search process. On the high level, Milvus supports two main types of fields: <strong>vector fields</strong> and <strong>scalar fields</strong>.</p>
+<p>Now, you can map your data model into a schema of fields, including vectors and any auxiliary scalar fields. Ensure that each field correlates with the attributes from your data model, especially pay attention to your vector type (dense or spase) and its dimension.</p>
+<h3 id="Vector-Field" class="common-anchor-header">Vector Field</h3><p>Vector fields store embeddings for unstructured data types such as text, images, and audio. These embeddings may be dense, sparse, or binary, depending on the data type and the retrieval method utilized. Typically, dense vectors are used for semantic search, while sparse vectors are better suited for full-text or lexical matching. Binary vectors are useful when storage and computational resources are limited. A collection may contain several vector fields to enable multi-modal or hybrid retrieval strategies. For a detailed guide on this topic, please refer to the <a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
+<p>Milvus supports the vector data types: <code translate="no">FLOAT_VECTOR</code> for <a href="/docs/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> for <a href="/docs/sparse_vector.md">Sparse Vector</a>, and <code translate="no">BINARY_VECTOR</code> for <a href="/docs/binary-vector.md">Binary Vector</a></p>
+<h3 id="Scalar-Field" class="common-anchor-header">Scalar Field</h3><p>Scalar fields store primitive, structured values—commonly referred to as metadata—such as numbers, strings, or dates. These values can be returned alongside vector search results and are essential for filtering and sorting. They allow you to narrow search results based on specific attributes, like limiting documents to a particular category or a defined time range.</p>
+<p>Milvus supports scalar types such as <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, and <code translate="no">ARRAY</code> for storing and filtering non-vector data. These types enhance the precision and customization of search operations.</p>
+<h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Leverage Advanced Features in Schema Design<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,16 +112,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>設計模式時，僅使用支援的資料類型將資料映射到欄位是不夠的。必須徹底瞭解欄位之間的關係以及可用於配置的策略。在設計階段牢記關鍵功能，可確保模式不僅能滿足當前的資料處理需求，還能擴充並適應未來的需求。通過仔細整合這些功能，您可以建立一個強大的數據架構，最大限度地發揮 Milvus 的功能，並支持您更廣泛的數據策略和目標。以下是建立集合模式的主要功能概述：</p>
-<h3 id="Primary-Key" class="common-anchor-header">主鍵</h3><p>主鍵字段是模式的基本組成部分，因為它唯一識別集合中的每個實體。定義主索引鍵是必須的。它必須是整數或字串類型的標量欄位，並標示為<code translate="no">is_primary=True</code> 。您可以選擇為主索引鍵啟用<code translate="no">auto_id</code> ，主索引鍵會自動指派整數，並隨著更多資料被擷取到資料集中而單一成長。</p>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/primary-field.md">Primary Field &amp; AutoID</a>。</p>
-<h3 id="Partitioning" class="common-anchor-header">分割</h3><p>為了加快搜尋速度，您可以選擇開啟分割。透過指定特定的標量欄位進行分割，並在搜尋過程中根據此欄位指定篩選條件，可有效地將搜尋範圍限制為僅相關的分割。此方法可縮小搜尋範圍，大幅提升檢索作業的效率。</p>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割鍵</a>。</p>
-<h3 id="Analyzer" class="common-anchor-header">分析器</h3><p>分析器是處理和轉換文字資料的重要工具。它的主要功能是將原始文字轉換為標記，並將它們結構化，以便編制索引和進行檢索。分析器會將字串標記化、刪除停頓字詞，並將個別字詞轉化成標記。</p>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">Analyzer 概觀</a>。</p>
-<h3 id="Function" class="common-anchor-header">功能</h3><p>Milvus 允許您定義內建函式作為模式的一部分，以自動衍生某些欄位。例如，您可以新增內建 BM25 函式，從<code translate="no">VARCHAR</code> 欄位產生稀疏向量，以支援全文檢索。這些由函式衍生的欄位可簡化預先處理程序，並確保資料集維持自足且可隨時查詢。</p>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p>
-<h2 id="A-Real-World-Example" class="common-anchor-header">真實世界範例<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
+    </button></h2><p>When designing a schema, simply mapping your data to fields using the supported data types is not enough. It is essential to have a thorough understanding of the relationships between fields and the strategies available for configuration. Keeping key features in mind during the design phase ensures that the schema not only meets immediate data handling requirements, but is also scalable and adaptable for future needs. By carefully integrating these features, you can build a strong data architecture that maximizes the capabilities of Milvus and supports your broader data strategy and objectives. Here is an overview of the key features creating a collection schema:</p>
+<h3 id="Primary-Key" class="common-anchor-header">Primary Key</h3><p>A primary key field is a fundamental component of a schema, as it uniquely identifies each entity within a collection. Defining a primary key is mandatory. It shall be scalar field of integer or string type and marked as <code translate="no">is_primary=True</code>. Optionally, you can enable <code translate="no">auto_id</code> for the primary key, which is automatically assigned integer numbers that monolithically grow as more data is ingested into the collection.</p>
+<p>For further details, refer to <a href="/docs/primary-field.md">Primary Field & AutoID</a>.</p>
+<h3 id="Partitioning" class="common-anchor-header">Partitioning</h3><p>To speed up the search, you can optionally turn on partitioning. By designating a specific scalar field for partitioning and specifying filtering criteria based on this field during searches, the search scope can be effectively limited to only the relevant partitions. This method significantly enhances the efficiency of retrieval operations by reducing the search domain.</p>
+<p>For further details, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p>
+<h3 id="Analyzer" class="common-anchor-header">Analyzer</h3><p>An analyzer is an essential tool for processing and transforming text data. Its main function is to convert raw text into tokens and to structure them for indexing and retrieval. It does that by tokenizing the string, dropping the stop words, and stemming the individual words into tokens.</p>
+<p>For further details, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p>
+<h3 id="Function" class="common-anchor-header">Function</h3><p>Milvus allows you to define built-in functions as part of the schema to automatically derive certain fields. For instance, you can add a built-in BM25 function that generates a sparse vector from a <code translate="no">VARCHAR</code> field to support full-text search. These function-derived fields streamline preprocessing and ensure that the collection remains self-contained and query-ready.</p>
+<p>For further details, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
+<h2 id="A-Real-World-Example" class="common-anchor-header">A Real World Example<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,57 +136,57 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本節中，我們將概述上圖所示多媒體文件搜尋應用程式的模式設計與程式碼範例。此模式設計用於管理包含文章的資料集，其資料映射至下列欄位：</p>
+    </button></h2><p>In this section, we will outline the schema design and code example for a multimedia document search application shown in above diagram. This schema is designed to manage a dataset containing articles with data mapping to the following fields:</p>
 <table>
    <tr>
-     <th><p><strong>欄位</strong></p></th>
-     <th><p><strong>資料來源</strong></p></th>
-     <th><p><strong>搜尋方法使用</strong></p></th>
-     <th><p><strong>主鍵</strong></p></th>
-     <th><p><strong>分割鍵</strong></p></th>
-     <th><p><strong>分析器</strong></p></th>
-     <th><p><strong>功能輸入/輸出</strong></p></th>
+     <th><p><strong>Field</strong></p></th>
+     <th><p><strong>Data Source</strong></p></th>
+     <th><p><strong>Used By Search Methods</strong></p></th>
+     <th><p><strong>Primary Key</strong></p></th>
+     <th><p><strong>Partition Key</strong></p></th>
+     <th><p><strong>Analyzer</strong></p></th>
+     <th><p><strong>Function Input/Output</strong></p></th>
    </tr>
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
-     <td><p>啟用後自動產生<code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/zh-hant/get-and-scalar-query.md">使用 Get 進行查詢</a></p></td>
+     <td><p>auto-generated with enabled <code translate="no">auto_id</code></p></td>
+     <td><p><a href="/docs/get-and-scalar-query.md">Query using Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
    </tr>
    <tr>
-     <td><p>標題 (<code translate="no">VARCHAR</code>)</p></td>
-     <td><p>文章標題</p></td>
-     <td><p><a href="/docs/zh-hant/keyword-match.md">文字匹配</a></p></td>
+     <td><p>title (<code translate="no">VARCHAR</code>)</p></td>
+     <td><p>article title</p></td>
+     <td><p><a href="/docs/keyword-match.md">Text Match</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
    </tr>
    <tr>
-     <td><p>時間戳 (<code translate="no">INT32</code>)</p></td>
-     <td><p>發佈日期</p></td>
-     <td><p><a href="/docs/zh-hant/use-partition-key.md">依分割區金鑰篩選</a></p></td>
+     <td><p>timestamp (<code translate="no">INT32</code>)</p></td>
+     <td><p>publish date</p></td>
+     <td><p><a href="/docs/use-partition-key.md">Filter by Partition Key</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
    </tr>
    <tr>
-     <td><p>文字 (<code translate="no">VARCHAR</code>)</p></td>
-     <td><p>文章原始文本</p></td>
-     <td><p><a href="/docs/zh-hant/multi-vector-search.md">多向量混合搜尋</a></p></td>
+     <td><p>text (<code translate="no">VARCHAR</code>)</p></td>
+     <td><p>raw text of the article</p></td>
+     <td><p><a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
-     <td><p>輸入</p></td>
+     <td><p>input</p></td>
    </tr>
    <tr>
      <td><p>text_dense_vector (<code translate="no">FLOAT_VECTOR</code>)</p></td>
-     <td><p>由文字嵌入模型產生的密集向量</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/BaGlwzDmyiyVvVk6NurcFclInCd?from=from_parent_docs">基本向量搜尋</a></p></td>
+     <td><p>dense vector generated by a text embedding model</p></td>
+     <td><p><a href="https://zilliverse.feishu.cn/wiki/BaGlwzDmyiyVvVk6NurcFclInCd?from=from_parent_docs">Basic Vector Search</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -190,18 +194,23 @@ summary: >-
    </tr>
    <tr>
      <td><p>text_sparse_vector (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
-     <td><p>內建 BM25 函式自動產生的稀疏向量</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/RQTRwhOVPiwnwokqr4scAtyfnBf?from=from_parent_docs">全文檢索</a></p></td>
+     <td><p>sparse vector auto-generated by a built-in BM25 function</p></td>
+     <td><p><a href="https://zilliverse.feishu.cn/wiki/RQTRwhOVPiwnwokqr4scAtyfnBf?from=from_parent_docs">Full Text Search</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
-     <td><p>輸出</p></td>
+     <td><p>output</p></td>
    </tr>
 </table>
-<p>如需更多關於模式的資訊，以及新增各類欄位的詳細指引，請參閱<a href="/docs/zh-hant/schema.md">Schema Explained</a>。</p>
-<h3 id="Initialize-schema" class="common-anchor-header">初始化模式</h3><p>首先，我們需要建立一個空模式。此步驟為定義資料模型建立基礎結構。</p>
+<p>For more information on schemas and detailed guidance on adding various types of fields, please refer to <a href="/docs/schema.md">Schema Explained</a>.</p>
+<h3 id="Initialize-schema" class="common-anchor-header">Initialize schema</h3><p>To begin, we need to create an empty schema. This step establishes a foundational structure for defining the data model.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 schema = MilvusClient.create_schema()
@@ -230,9 +239,14 @@ schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Skip this step using cURL</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-fields" class="common-anchor-header">新增欄位</h3><p>一旦建立了模式，下一步就是指定組成資料的欄位。每個欄位都與各自的資料類型和屬性相關聯。</p>
+<h3 id="Add-fields" class="common-anchor-header">Add fields</h3><p>Once the schema is created, the next step is to specify the fields that will comprise your data. Each field is associated with their respective data types and attributes.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
 
 schema.add_field(field_name=<span class="hljs-string">&quot;article_id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;article id&quot;</span>)
@@ -392,15 +406,20 @@ schema.addField(AddFieldReq.builder()
     \&quot;fields\&quot;: <span class="hljs-variable">$fields</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在本範例中，欄位指定了下列屬性：</p>
+<p>In this example, the following attributes are specified for fields:</p>
 <ul>
-<li><p>Primary key（主鍵）：<code translate="no">article_id</code> 用作主鍵，可自動為輸入的實體分配主鍵。</p></li>
-<li><p>分區鍵：<code translate="no">timestamp</code> 被指定為分區鍵，可透過分區進行篩選。這可能是</p></li>
-<li><p>文字分析器：文字分析器應用於 2 個字串欄位<code translate="no">title</code> 和<code translate="no">text</code> ，以分別支援文字匹配和全文搜尋。</p></li>
+<li><p>Primary key: the <code translate="no">article_id</code> is used as the primary key enabling automatically allocation of primary keys for incoming entities.</p></li>
+<li><p>Partition key: the <code translate="no">timestamp</code> is assigned as a partition key allowing filtering by partitions. This might be</p></li>
+<li><p>Text analyzer: text analyzer is applied to 2 string fields <code translate="no">title</code> and <code translate="no">text</code> to support text match and full-text search respectively.</p></li>
 </ul>
-<h3 id="Optional-Add-functions" class="common-anchor-header">(選用）新增功能</h3><p>為了增強資料查詢功能，可在模式中加入函式。例如，可以建立函式來處理特定欄位的相關資料。</p>
+<h3 id="Optional-Add-functions" class="common-anchor-header">(Optional) Add functions</h3><p>To enhance data querying capabilities, functions can be incorporated into the schema. For instance, a function can be created to process related to specific fields.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
@@ -460,8 +479,8 @@ schema.WithFunction(function)
     \&quot;functions\&quot;: <span class="hljs-variable">$myFunctions</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>本範例在模式中加入內建的 BM25 函式，利用<code translate="no">text</code> 欄位作為輸入，並將產生的稀疏向量儲存於<code translate="no">text_sparse_vector</code> 欄位。</p>
-<h2 id="Next-Steps" class="common-anchor-header">下一步<button data-href="#Next-Steps" class="anchor-icon" translate="no">
+<p>This example adds a built-in BM25 function in schema, utilizing the <code translate="no">text</code> field as input and storing the resulting sparse vectors in the <code translate="no">text_sparse_vector</code> field.</p>
+<h2 id="Next-Steps" class="common-anchor-header">Next Steps<button data-href="#Next-Steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -477,6 +496,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/zh-hant/create-collection.md">建立集合</a></p></li>
-<li><p><a href="/docs/zh-hant/alter-collection-field.md">更改集合欄位</a></p></li>
+<li><p><a href="/docs/create-collection.md">Create Collection</a></p></li>
+<li><p><a href="/docs/alter-collection-field.md">Alter Collection Field</a></p></li>
 </ul>

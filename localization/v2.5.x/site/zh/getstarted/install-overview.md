@@ -21,7 +21,7 @@ title: Milvus 部署选项概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 是一个高性能、可扩展的向量数据库。它支持各种规模的用例，从在 Jupyter Notebooks 中本地运行的演示到处理数百亿向量的大规模 Kubernetes 集群。目前，Milvus 有三种部署选项：Milvus Lite、Milvus Standalone 和 Milvus Distributed。</p>
+    </button></h1><p>Milvus 是一个高性能、可扩展的向量数据库。它支持各种规模的用例，从在 Jupyter 笔记本中本地运行的演示到处理数百亿向量的大规模 Kubernetes 集群。目前，Milvus 有三种部署选项：Milvus Lite、Milvus Standalone 和 Milvus Distributed。</p>
 <h2 id="Milvus-Lite" class="common-anchor-header">Milvus Lite<button data-href="#Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ title: Milvus 部署选项概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>是一个 Python 库，可导入到您的应用程序中。作为 Milvus 的轻量级版本，它非常适合在 Jupyter 笔记本或资源有限的智能设备上运行快速原型。Milvus Lite 支持与 Milvus 其他部署相同的 API。与 Milvus Lite 交互的客户端代码也能与其他部署模式下的 Milvus 实例协同工作。</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>是一个 Python 库，可以导入到您的应用程序中。作为 Milvus 的轻量级版本，它非常适合在 Jupyter 笔记本或资源有限的智能设备上运行快速原型。Milvus Lite 支持与 Milvus 其他部署相同的 API。与 Milvus Lite 交互的客户端代码也能与其他部署模式下的 Milvus 实例协同工作。</p>
 <p>要将 Milvus Lite 集成到应用程序中，请运行<code translate="no">pip install pymilvus</code> 进行安装，并使用<code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> 语句实例化一个带有本地文件的向量数据库，以持久化所有数据。更多详情，请参阅<a href="https://milvus.io/docs/milvus_lite.md">运行 Milvus Lite</a>。</p>
 <h2 id="Milvus-Standalone" class="common-anchor-header">Milvus 单机版<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,8 +54,8 @@ title: Milvus 部署选项概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone 是单机服务器部署。Milvus Standalone 的所有组件都打包到一个<a href="https://milvus.io/docs/install_standalone-docker.md">Docker 镜像</a>中，部署起来非常方便。如果你有生产工作负载，但又不想使用 Kubernetes，那么在内存充足的单机上运行 Milvus Standalone 是一个不错的选择。此外，Milvus Standalone 通过主从复制支持高可用性。</p>
-<h2 id="Milvus-Distributed" class="common-anchor-header">分布式 Milvus<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus Standalone 是单机服务器部署。Milvus Standalone 的所有组件都打包到一个<a href="https://milvus.io/docs/install_standalone-docker.md">Docker 镜像</a>中，部署起来非常方便。如果你有生产工作负载，但又不想使用 Kubernetes，在内存充足的单机上运行 Milvus Standalone 是个不错的选择。</p>
+<h2 id="Milvus-Distributed" class="common-anchor-header">Milvus Distributed<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,6 +132,6 @@ title: Milvus 部署选项概述
 <tr><td>搜索功能</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td></tr>
 <tr><td>CRUD 操作符</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
 <tr><td>高级数据管理</td><td>不适用</td><td>访问控制<br/>分区<br/>分区密钥</td><td>访问控制<br/>分区<br/>分区密钥<br/>物理资源分组</td></tr>
-<tr><td>一致性级别</td><td>强</td><td>强<br/>有界稳定性<br/>会话<br/>最终</td><td>强<br/>有界稳定性<br/>会话<br/>最终</td></tr>
+<tr><td>一致性级别</td><td>强</td><td>强<br/>有界停滞<br/>会话<br/>最终</td><td>强<br/>有界稳定性<br/>会话<br/>最终</td></tr>
 </tbody>
 </table>

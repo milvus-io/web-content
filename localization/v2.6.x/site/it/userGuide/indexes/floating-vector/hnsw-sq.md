@@ -2,12 +2,11 @@
 id: hnsw-sq.md
 title: HNSW_SQ
 summary: >-
-  HNSW_SQ combina i grafi Hierarchical Navigable Small World (HNSW) con la
-  Quantizzazione Scalare (SQ), creando un metodo di indicizzazione vettoriale
-  avanzato che offre un compromesso controllabile tra dimensione e precisione.
-  Rispetto ai grafi HNSW standard, questo tipo di indice mantiene un'elevata
-  velocità di elaborazione delle query, pur introducendo un leggero aumento del
-  tempo di costruzione dell'indice.
+  HNSW_SQ combines Hierarchical Navigable Small World (HNSW) graphs with Scalar
+  Quantization (SQ), creating an advanced vector indexing method that offers a
+  controllable size-versus-accuracy trade-off. Compared to standard HNSW, this
+  index type maintains high query processing speed while introducing a slight
+  increase in index construction time.
 ---
 <h1 id="HNSWSQ" class="common-anchor-header">HNSW_SQ<button data-href="#HNSWSQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_SQ</strong> combina i grafi Hierarchical Navigable Small World (HNSW) con la Quantizzazione Scalare (SQ), creando un metodo di indicizzazione vettoriale avanzato che offre un compromesso controllabile tra dimensione e precisione. Rispetto ai grafi <a href="/docs/it/hnsw.md">HNSW</a> standard, questo tipo di indice mantiene un'elevata velocità di elaborazione delle query, pur introducendo un leggero aumento del tempo di costruzione dell'indice.</p>
-<h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p><strong>HNSW_SQ</strong> combines Hierarchical Navigable Small World (HNSW) graphs with Scalar Quantization (SQ), creating an advanced vector indexing method that offers a controllable size-versus-accuracy trade-off. Compared to standard <a href="/docs/hnsw.md">HNSW</a>, this index type maintains high query processing speed while introducing a slight increase in index construction time.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,33 +39,35 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HNSW_SQ combina due tecniche di indicizzazione: <strong>HNSW</strong> per una navigazione veloce basata sui grafi e <strong>SQ</strong> per un'efficiente compressione vettoriale.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW costruisce un grafo multistrato in cui ogni nodo corrisponde a un vettore del set di dati. In questo grafo, i nodi sono collegati in base alla loro somiglianza, consentendo una rapida navigazione nello spazio dei dati. La struttura gerarchica consente all'algoritmo di ricerca di restringere i vicini candidati, accelerando in modo significativo il processo di ricerca in spazi ad alta dimensionalità.</p>
-<p>Per ulteriori informazioni, consultare <a href="/docs/it/hnsw.md">HNSW</a>.</p>
-<h3 id="SQ" class="common-anchor-header">SQ</h3><p>SQ è un metodo per comprimere i vettori rappresentandoli con un minor numero di bit. Ad esempio:</p>
+    </button></h2><p>HNSW_SQ combines two indexing techniques: <strong>HNSW</strong> for fast graph-based navigation and <strong>SQ</strong> for efficient vector compression.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW constructs a multi-layer graph where each node corresponds to a vector in the dataset. In this graph, nodes are connected based on their similarity, enabling rapid traversal through the data space. The hierarchical structure allows the search algorithm to narrow down the candidate neighbors, significantly accelerating the search process in high-dimensional spaces.</p>
+<p>For more information, refer to <a href="/docs/hnsw.md">HNSW</a>.</p>
+<h3 id="SQ" class="common-anchor-header">SQ</h3><p>SQ is a method for compressing vectors by representing them with fewer bits. For instance:</p>
 <ul>
-<li><p><strong>SQ8</strong> utilizza 8 bit, mappando i valori in 256 livelli.  Per ulteriori informazioni, consultare <a href="/docs/it/ivf-sq8.md#SQ8">FIV_SQ8</a>.</p></li>
-<li><p><strong>SQ6</strong> utilizza 6 bit per rappresentare ciascun valore in virgola mobile, ottenendo 64 livelli discreti.</p></li>
+<li><p><strong>SQ8</strong> uses 8 bits, mapping values into 256 levels.  For more information, refer to <a href="/docs/ivf-sq8.md#SQ8">IVF_SQ8</a>.</p></li>
+<li><p><strong>SQ6</strong> uses 6 bits to represent each floating-point value, resulting in 64 discrete levels.</p></li>
 </ul>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw-sq.png" alt="Hnsw Sq" class="doc-image" id="hnsw-sq" />
-   </span> <span class="img-wrapper"> <span>Hnsw Sq</span> </span></p>
-<p>Questa riduzione della precisione riduce drasticamente l'ingombro in memoria e velocizza il calcolo, pur mantenendo la struttura essenziale dei dati.</p>
-<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ combina i punti di forza di HNSW e SQ per consentire un'efficiente ricerca approssimata dei vicini. Ecco come funziona il processo:</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/hnsw-sq.png" alt="Hnsw Sq" class="doc-image" id="hnsw-sq" />
+    <span>Hnsw Sq</span>
+  </span>
+</p>
+<p>This reduction in precision dramatically decreases the memory footprint and speeds up the computation while retaining the essential structure of the data.</p>
+<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ combines the strengths of HNSW and SQ to enable efficient approximate nearest neighbor search. Here’s how the process works:</p>
 <ol>
-<li><p><strong>Compressione dei dati:</strong> SQ comprime i vettori utilizzando <code translate="no">sq_type</code> (ad esempio, SQ6 o SQ8), riducendo così l'utilizzo della memoria. Questa compressione può ridurre la precisione, ma permette al sistema di gestire insiemi di dati più grandi.</p></li>
-<li><p><strong>Costruzione del grafico:</strong> I vettori compressi vengono utilizzati per costruire un grafico HNSW. Poiché i dati sono compressi, il grafo risultante è più piccolo e più veloce da cercare.</p></li>
-<li><p><strong>Recupero dei candidati:</strong> Quando viene fornito un vettore di interrogazione, l'algoritmo utilizza i dati compressi per identificare rapidamente un gruppo di vicini candidati dal grafo HNSW.</p></li>
-<li><p><strong>(Opzionale) Affinamento dei risultati:</strong> I risultati iniziali dei candidati possono essere raffinati per ottenere una maggiore precisione, in base ai seguenti parametri:</p>
+<li><p><strong>Data Compression:</strong> SQ compresses the vectors using the <code translate="no">sq_type</code> (for example, SQ6 or SQ8), which reduces memory usage. This compression may lower precision, but it allows the system to handle larger datasets.</p></li>
+<li><p><strong>Graph Construction:</strong> The compressed vectors are used to build an HNSW graph. Because the data is compressed, the resulting graph is smaller and faster to search.</p></li>
+<li><p><strong>Candidate Retrieval:</strong> When a query vector is provided, the algorithm uses the compressed data to quickly identify a pool of candidate neighbors from the HNSW graph.</p></li>
+<li><p><strong>(Optional) Result Refinement:</strong> The initial candidate results can be refined for better accuracy, based on the following parameters:</p>
 <ul>
-<li><p><code translate="no">refine</code>: Controlla se questa fase di affinamento è attivata. Se impostato su <code translate="no">true</code>, il sistema ricalcola le distanze utilizzando rappresentazioni di maggiore precisione o non compresse.</p></li>
-<li><p><code translate="no">refine_type</code>: Specifica il livello di precisione dei dati utilizzati durante il raffinamento (ad esempio, SQ6, SQ8, BF16). Una scelta di precisione superiore, come <code translate="no">FP32</code>, può dare risultati più accurati, ma richiede più memoria. Il livello di precisione deve essere superiore alla precisione dell'insieme di dati compresso originale di <code translate="no">sq_type</code>.</p></li>
-<li><p><code translate="no">refine_k</code>: Agisce come fattore di ingrandimento. Ad esempio, se il top <em>k</em> è 100 e <code translate="no">refine_k</code> è 2, il sistema classifica nuovamente i 200 candidati migliori e restituisce i 100 migliori, migliorando la precisione complessiva.</p></li>
+<li><p><code translate="no">refine</code>: Controls whether this refinement step is activated. When set to <code translate="no">true</code>, the system recalculates distances using higher-precision or uncompressed representations.</p></li>
+<li><p><code translate="no">refine_type</code>: Specifies the precision level of data used during refinement (e.g., SQ6, SQ8, BF16). A higher-precision choice such as <code translate="no">FP32</code> can yield more accurate results but requires more memory. This must exceed the precision of the original compressed data set by <code translate="no">sq_type</code>.</p></li>
+<li><p><code translate="no">refine_k</code>: Acts as a magnification factor. For instance, if your top <em>k</em> is 100 and <code translate="no">refine_k</code> is 2, the system re-ranks the top 200 candidates and returns the best 100, enhancing overall accuracy.</p></li>
 </ul></li>
 </ol>
-<p>Per un elenco completo dei parametri e dei valori validi, consultare la sezione <a href="/docs/it/hnsw-sq.md#Index-params">Parametri dell'indice</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Creazione dell'indice<button data-href="#Build-index" class="anchor-icon" translate="no">
+<p>For a full list of parameters and valid values, refer to <a href="/docs/hnsw-sq.md#Index-params">Index params</a>.</p>
+<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per costruire un indice <code translate="no">HNSW_SQ</code> su un campo vettoriale in Milvus, utilizzare il metodo <code translate="no">add_index()</code>, specificando i parametri <code translate="no">index_type</code>, <code translate="no">metric_type</code> e altri parametri aggiuntivi per l'indice.</p>
+    </button></h2><p>To build an <code translate="no">HNSW_SQ</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -101,14 +102,14 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In questa configurazione:</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: Il tipo di indice da costruire. In questo esempio, impostare il valore su <code translate="no">HNSW_SQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
-<li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la costruzione dell'indice. Per i dettagli, fare riferimento a <a href="/docs/it/hnsw-sq.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p></li>
+<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">HNSW_SQ</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index. For details, refer to <a href="/docs/hnsw-sq.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -123,7 +124,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta costruito l'indice e inserite le entità, è possibile eseguire ricerche di similarità sull'indice.</p>
+    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -139,11 +140,11 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In questa configurazione:</p>
+<p>In this configuration:</p>
 <ul>
-<li><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la ricerca sull'indice. Per i dettagli, fare riferimento a <a href="/docs/it/hnsw-sq.md#Index-specific-search-params">Parametri di ricerca specifici per l'indice</a>.</li>
+<li><code translate="no">params</code>: Additional configuration options for searching on the index. For details, refer to <a href="/docs/hnsw-sq.md#Index-specific-search-params">Index-specific search params</a>.</li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Parametri dell'indice<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,93 +159,106 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Questa sezione fornisce una panoramica dei parametri utilizzati per la creazione di un indice e per l'esecuzione di ricerche sull'indice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">params</code> durante la <a href="/docs/it/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">creazione di un indice</a>.</p>
+    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">building an index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parametro</p></th>
-     <th><p>Descrizione</p></th>
-     <th><p>Valore Intervallo</p></th>
-     <th><p>Suggerimento per la messa a punto</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Numero massimo di connessioni (o bordi) che ogni nodo può avere nel grafo, compresi i bordi in uscita e in entrata. Questo parametro influisce direttamente sulla costruzione dell'indice e sulla ricerca.</p></td>
-     <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [2, 2048]</p>
-<p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 bordi uscenti e 30 bordi entranti per nodo)</p></td>
-     <td><p>Un valore maggiore di <code translate="no">M</code> porta generalmente a una <strong>maggiore accuratezza</strong>, ma <strong>aumenta l'overhead di memoria</strong> e <strong>rallenta sia la costruzione dell'indice che la ricerca</strong>. Considerare di aumentare <code translate="no">M</code> per i set di dati con elevata dimensionalità o quando è fondamentale un richiamo elevato.</p>
-<p>Considerare di diminuire <code translate="no">M</code> quando l'uso della memoria e la velocità di ricerca sono le principali preoccupazioni.</p>
-<p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [5, 100].</p></td>
+     <td><p>Maximum number of connections （or edges) each node can have in the graph, including both outgoing and incoming edges.
+ This parameter directly affects both index construction and search.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [2, 2048]</p>
+<p><strong>Default value</strong>: <code translate="no">30</code> (up to 30 outgoing and 30 incoming edges per node)</p></td>
+     <td><p>A larger <code translate="no">M</code> generally leads to <strong>higher accuracy</strong> but <strong>increases memory overhead</strong> and <strong>slows down both index building and search</strong>.
+ Consider increasing <code translate="no">M</code> for datasets with high dimensionality or when high recall is crucial.</p>
+<p>Consider decreasing <code translate="no">M</code> when memory usage and search speed are primary concerns.</p>
+<p>In most cases, we recommend you set a value within this range: [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>Numero di vicini candidati considerati per la connessione durante la costruzione dell'indice. Per ogni nuovo elemento viene valutato un pool più ampio di candidati, ma il numero massimo di connessioni effettivamente stabilite è ancora limitato da <code translate="no">M</code>.</p></td>
-     <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Valore predefinito</strong>: <code translate="no">360</code></p></td>
-     <td><p>Un valore più alto di <code translate="no">efConstruction</code> si traduce tipicamente in un <strong>indice più accurato</strong>, poiché vengono esplorate più connessioni potenziali. Tuttavia, questo comporta anche <strong>tempi di indicizzazione più lunghi e un maggiore utilizzo della memoria</strong> durante la costruzione. Considerare l'aumento di <code translate="no">efConstruction</code> per migliorare l'accuratezza, soprattutto in scenari in cui il tempo di indicizzazione è meno critico.</p>
-<p>Considerare di diminuire <code translate="no">efConstruction</code> per accelerare la costruzione dell'indice quando le risorse sono limitate.</p>
-<p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [50, 500].</p></td>
+     <td><p>Number of candidate neighbors considered for connection during index construction.
+ A larger pool of candidates is evaluated for each new element, but the maximum number of connections actually established is still limited by <code translate="no">M</code>.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, <em>int_max</em>]</p>
+<p><strong>Default value</strong>: <code translate="no">360</code></p></td>
+     <td><p>A higher <code translate="no">efConstruction</code> typically results in a <strong>more accurate index</strong>, as more potential connections are explored. However, this also leads to <strong>longer indexing time and increased memory usage</strong> during construction.
+ Consider increasing <code translate="no">efConstruction</code> for improved accuracy, especially in scenarios where indexing time is less critical.</p>
+<p>Consider decreasing <code translate="no">efConstruction</code> to speed up index construction when resource constraints are a concern.</p>
+<p>In most cases, we recommend you set a value within this range: [50, 500].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>Specifica il metodo di quantizzazione scalare per la compressione dei vettori. Ogni opzione offre un diverso equilibrio tra compressione e precisione:</p>
+     <td><p>Specifies the scalar quantization method for compressing vectors. Each option offers a different balance between compression and accuracy:</p>
 <ul>
-<li><p><code translate="no">SQ6</code>: Codifica i vettori utilizzando numeri interi a 6 bit.</p></li>
-<li><p><code translate="no">SQ8</code>: Codifica i vettori utilizzando numeri interi a 8 bit.</p></li>
-<li><p><code translate="no">BF16</code>: Utilizza il formato Bfloat16.</p></li>
-<li><p><code translate="no">FP16</code>: Utilizza il formato standard a virgola mobile a 16 bit.</p></li>
+<li><p><code translate="no">SQ6</code>: Encodes vectors using 6-bit integers.</p></li>
+<li><p><code translate="no">SQ8</code>: Encodes vectors using 8-bit integers.</p></li>
+<li><p><code translate="no">BF16</code>: Uses the Bfloat16 format.</p></li>
+<li><p><code translate="no">FP16</code>: Uses the standard 16-bit floating-point format.</p></li>
 </ul></td>
-     <td><p><strong>Tipo</strong>: Stringa <strong>Intervallo</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p>
-<p><strong>Valore predefinito</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>La scelta di <code translate="no">sq_type</code> dipende dalle esigenze specifiche dell'applicazione. Se l'efficienza della memoria è una preoccupazione primaria, <code translate="no">SQ6</code> o <code translate="no">SQ8</code> potrebbero essere adatti. D'altra parte, se l'accuratezza è fondamentale, si potrebbe preferire <code translate="no">BF16</code> o <code translate="no">FP16</code>.</p></td>
+     <td><p><strong>Type</strong>: String
+ <strong>Range</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p>
+<p><strong>Default value</strong>: <code translate="no">SQ8</code></p></td>
+     <td><p>The choice of <code translate="no">sq_type</code> depends on the specific application's needs. If memory efficiency is a primary concern, <code translate="no">SQ6</code> or <code translate="no">SQ8</code> might be suitable. On the other hand, if accuracy is paramount, <code translate="no">BF16</code> or <code translate="no">FP16</code> could be preferred.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>Un flag booleano che controlla se viene applicata una fase di raffinamento durante la ricerca. Il raffinamento consiste nel riordinare i risultati iniziali calcolando le distanze esatte tra il vettore della query e i candidati.</p></td>
-     <td><p><strong>Tipo</strong>: Booleano <strong>Intervallo</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
-<p><strong>Valore predefinito</strong>: <code translate="no">false</code></p></td>
-     <td><p>Impostare <code translate="no">true</code> se è essenziale un'elevata precisione e si possono tollerare tempi di ricerca leggermente più lenti. Utilizzare <code translate="no">false</code> se la velocità è una priorità e un piccolo compromesso nella precisione è accettabile.</p></td>
+     <td><p>A boolean flag that controls whether a refinement step is applied during search. Refinement involves reranking the initial results by computing exact distances between the query vector and candidates.</p></td>
+     <td><p><strong>Type</strong>: Boolean
+ <strong>Range</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
+<p><strong>Default value</strong>: <code translate="no">false</code></p></td>
+     <td><p>Set to <code translate="no">true</code> if high accuracy is essential and you can tolerate slightly slower search times. Use <code translate="no">false</code> if speed is a priority and a minor compromise in accuracy is acceptable.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>Determina la precisione dei dati utilizzati per il raffinamento, che deve essere superiore a quella dei vettori compressi (impostata da <code translate="no">sq_type</code>), influenzando sia la precisione dei vettori riordinati sia il loro ingombro in memoria.</p></td>
-     <td><p><strong>Tipo</strong>: Stringa <strong>Intervallo</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
-<p><strong>Valore predefinito</strong>: Nessuno</p></td>
-     <td><p>Utilizzare <code translate="no">FP32</code> per ottenere la massima precisione con un costo di memoria più elevato, oppure <code translate="no">SQ6</code>/<code translate="no">SQ8</code> per una migliore compressione. <code translate="no">BF16</code> e <code translate="no">FP16</code> offrono un'alternativa equilibrata.</p></td>
+     <td><p>Determines the precision of the data used for refinement.
+ This precision must be higher than that of the compressed vectors (as set by <code translate="no">sq_type</code>), affecting both the accuracy of the re-ranked vectors and their memory footprint.</p></td>
+     <td><p><strong>Type</strong>: String
+ <strong>Range</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
+<p><strong>Default value</strong>: None</p></td>
+     <td><p>Use <code translate="no">FP32</code> for maximum precision at a higher memory cost, or <code translate="no">SQ6</code>/<code translate="no">SQ8</code> for better compression. <code translate="no">BF16</code> and <code translate="no">FP16</code> offer a balanced alternative.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">search_params.params</code> per la <a href="/docs/it/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">ricerca sull'indice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">searching on the index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parametro</p></th>
-     <th><p>Descrizione</p></th>
-     <th><p>Valore Intervallo</p></th>
-     <th><p>Suggerimento per la messa a punto</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Controlla l'ampiezza della ricerca durante il recupero dei vicini. Determina il numero di nodi visitati e valutati come potenziali vicini. 
- Questo parametro influisce solo sul processo di ricerca e si applica esclusivamente al livello inferiore del grafo.</p></td>
-     <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Valore predefinito</strong>: <em>limit</em> (TopK vicini da restituire)</p></td>
-     <td><p>Un valore maggiore di <code translate="no">ef</code> porta generalmente a una <strong>maggiore accuratezza della ricerca</strong>, poiché vengono considerati più potenziali vicini. Considerare di aumentare <code translate="no">ef</code> quando è fondamentale ottenere un richiamo elevato e la velocità di ricerca è meno importante.</p>
-<p>Considerare di diminuire <code translate="no">ef</code> per dare priorità a ricerche più veloci, soprattutto in scenari in cui una leggera riduzione dell'accuratezza è accettabile.</p>
-<p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [K, 10K].</p></td>
+     <td><p>Controls the breadth of search during nearest neighbor retrieval. It determines how many nodes are visited and evaluated as potential nearest neighbors. 
+ This parameter affects only the search process and applies exclusively to the bottom layer of the graph.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, <em>int_max</em>]</p>
+<p><strong>Default value</strong>: <em>limit</em> (TopK nearest neighbors to return)</p></td>
+     <td><p>A larger <code translate="no">ef</code> generally leads to <strong>higher search accuracy</strong> as more potential neighbors are considered. However, this also <strong>increases search time</strong>.
+ Consider increasing <code translate="no">ef</code> when achieving high recall is critical and search speed is less of a concern.</p>
+<p>Consider decreasing <code translate="no">ef</code> to prioritize faster searches, especially in scenarios where a slight reduction in accuracy is acceptable.</p>
+<p>In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>Fattore di ingrandimento che controlla quanti candidati in più vengono esaminati durante la fase di raffinamento, rispetto ai primi K risultati richiesti.</p></td>
-     <td><p><strong>Tipo</strong>: Float <strong>Intervallo</strong>: [1, <em>float_max</em>)</p>
-<p><strong>Valore predefinito</strong>: 1</p></td>
-     <td><p>Valori più alti di <code translate="no">refine_k</code> possono migliorare il richiamo e l'accuratezza, ma aumentano anche il tempo di ricerca e l'utilizzo delle risorse. Un valore di 1 significa che il processo di raffinamento considera solo i primi K risultati iniziali.</p></td>
+     <td><p>The magnification factor that controls how many extra candidates are examined during the refinement stage, relative to the requested top K results.</p></td>
+     <td><p><strong>Type</strong>: Float
+ <strong>Range</strong>: [1, <em>float_max</em>)</p>
+<p><strong>Default value</strong>: 1</p></td>
+     <td><p>Higher values of <code translate="no">refine_k</code> can improve recall and accuracy but will also increase search time and resource usage. A value of 1 means the refinement process considers only the initial top K results.</p></td>
    </tr>
 </table>

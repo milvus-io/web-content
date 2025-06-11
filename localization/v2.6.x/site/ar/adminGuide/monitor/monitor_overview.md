@@ -1,12 +1,12 @@
 ---
 id: monitor_overview.md
-title: نظرة عامة على الشاشة
+title: Monitor Overview
 related_key: 'monitor, alert'
 summary: >-
-  تعرّف على كيفية استخدام Prometheus وGrafana في Milvus لمراقبة خدمات المراقبة
-  والتنبيه.
+  Learn how Prometheus and Grafana are used in Milvus for montoring and alerting
+  services.
 ---
-<h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">نظرة عامة على إطار عمل مراقبة ميلفوس<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
+<h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvus monitoring framework overview<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يشرح هذا الموضوع كيفية استخدام Milvus لبرنامج Prometheus لمراقبة المقاييس و Grafana لتصور المقاييس وإنشاء التنبيهات.</p>
-<h2 id="Prometheus-in-Milvus" class="common-anchor-header">بروميثيوس في ميلفوس<button data-href="#Prometheus-in-Milvus" class="anchor-icon" translate="no">
+    </button></h1><p>This topic explains how Milvus uses Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.</p>
+<h2 id="Prometheus-in-Milvus" class="common-anchor-header">Prometheus in Milvus<button data-href="#Prometheus-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,43 +37,43 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://prometheus.io/docs/introduction/overview/">Prometheus</a> هي مجموعة أدوات مراقبة وتنبيهات مفتوحة المصدر لتطبيقات Kubernetes. يجمع المقاييس ويخزنها كبيانات متسلسلة زمنيًا. وهذا يعني أن المقاييس يتم تخزينها مع الطوابع الزمنية عند تسجيلها، إلى جانب أزواج اختيارية من القيمة الرئيسية تسمى التسميات.</p>
-<p>يستخدم ميلفوس حاليًا المكونات التالية من بروميثيوس:</p>
+    </button></h2><p><a href="https://prometheus.io/docs/introduction/overview/">Prometheus</a> is an open-source monitoring and alerting toolkit for Kubernetes implementations. It collects and stores metrics as time-series data. This means that metrics are stored with timestamps when recorded, alongside with optional key-value pairs called labels.</p>
+<p>Currently Milvus uses the following components of Prometheus:</p>
 <ul>
-<li>نقطة نهاية بروميثيوس لسحب البيانات من نقاط النهاية التي حددها المصدرون.</li>
-<li>مشغل بروميثيوس لإدارة مثيلات مراقبة بروميثيوس بفعالية.</li>
-<li>Kube-prometheus لتوفير مراقبة مجموعة Kubernetes من طرف إلى طرف سهلة التشغيل.</li>
+<li>Prometheus endpoint to pull data from endpoints set by exporters.</li>
+<li>Prometheus operator to effectively manage Prometheus monitoring instances.</li>
+<li>Kube-prometheus to provide easy to operate end-to-end Kubernetes cluster monitoring.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">أسماء المقاييس</h3><p>يحتوي الاسم المتري الصالح في Prometheus على ثلاثة عناصر: مساحة الاسم، والنظام الفرعي، والاسم. ترتبط هذه العناصر الثلاثة بحرف "_".</p>
-<p>مساحة اسم مقاييس Milvus التي يراقبها Prometheus هي "milvus". واعتمادًا على الدور الذي ينتمي إليه المقياس، يجب أن يكون النظام الفرعي الخاص به أحد الأدوار الثمانية التالية: "الدور الجذري"، "الوكيل"، "الدور الفرعي"، "الدور الفرعي للاستعلام"، "الدور الفرعي للاستعلام"، "الدور الفرعي للفهرس"، "الدور الفرعي للفهرس"، "الدور الفرعي للبيانات"، "الدور الفرعي للبيانات".</p>
-<p>على سبيل المثال، مقياس ميلفوس الذي يحسب إجمالي عدد المتجهات التي تم الاستعلام عنها يسمى <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
-<h3 id="Metric-types" class="common-anchor-header">أنواع المقاييس</h3><p>يدعم بروميثيوس أربعة أنواع من المقاييس:</p>
+<h3 id="Metric-names" class="common-anchor-header">Metric names</h3><p>A valid metric name in Prometheus contains three elements: namespace, subsystem, and name. These three elements are connected with "_".</p>
+<p>The namespace of Milvus metrics monitored by Prometheus is "milvus". Depending on the role that a metric belongs to, its subsystem should be one of the following eight roles: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
+<p>For instance, the Milvus metric that calculates the total number of vectors queried is named <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
+<h3 id="Metric-types" class="common-anchor-header">Metric types</h3><p>Prometheus supports four types of metrics:</p>
 <ul>
-<li>العداد: نوع من المقاييس التراكمية التي لا يمكن زيادة قيمتها أو إعادة تعيينها إلى الصفر إلا عند إعادة التشغيل.</li>
-<li>المقياس: نوع من المقاييس التي يمكن أن ترتفع قيمتها أو تنخفض.</li>
-<li>المدرج التكراري: نوع من المقاييس التي يتم حسابها بناءً على دلاء قابلة للتكوين. مثال شائع هو مدة الطلب.</li>
-<li>الملخص: نوع من المقاييس المشابهة للمدرج التكراري الذي يحسب الكميات القابلة للتكوين على مدى نافذة زمنية منزلقة.</li>
+<li>Counter: a type of cumulative metrics whose value can only increase or be reset to zero upon restart.</li>
+<li>Gauge: a type of metrics whose value can either go up and down.</li>
+<li>Histogram: a type of metrics that are counted based on configurable buckets. A common example is request duration.</li>
+<li>Summary: a type of metrics similar to histogram that calculates configurable quantiles over a sliding time window.</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">التسميات المترية</h3><p>يميز Prometheus العينات التي تحمل نفس الاسم القياسي من خلال تسميتها. التسمية هي سمة معينة للمقياس. يجب أن يكون للمقاييس التي تحمل نفس الاسم نفس القيمة للحقل <code translate="no">variable_labels</code>. يسرد الجدول التالي أسماء ومعاني التسميات الشائعة لمقاييس ميلفوس.</p>
+<h3 id="Metric-labels" class="common-anchor-header">Metric labels</h3><p>Prometheus differentiates samples with the same metric name by labeling them. A label is a certain attribute of a metric. Metrics with the same name must have the same value for the <code translate="no">variable_labels</code> field. The following table lists the names and meanings of common labels of Milvus metrics.</p>
 <table>
 <thead>
-<tr><th>اسم التسمية</th><th>التعريف</th><th>القيم</th></tr>
+<tr><th>Label name</th><th>Definition</th><th>Values</th></tr>
 </thead>
 <tbody>
-<tr><td>"node_id"</td><td>الهوية الفريدة للدور.</td><td>معرف فريد عالميًا تم إنشاؤه بواسطة ميلفوس.</td></tr>
-<tr><td>"الحالة"</td><td>حالة العملية أو الطلب الذي تمت معالجته.</td><td>"التخلي" أو "نجاح" أو "فشل".</td></tr>
-<tr><td>"نوع_الاستعلام"</td><td>نوع طلب القراءة.</td><td>"بحث" أو "استعلام".</td></tr>
-<tr><td>"msg_type"</td><td>نوع الرسائل.</td><td>"إدراج" أو "حذف" أو "بحث" أو "استعلام".</td></tr>
-<tr><td>"حالة_قطاع"</td><td>حالة المقطع.</td><td>"مغلق" أو "متزايد" أو "مسح" أو "مسح" أو "مسح" أو "إسقاط" أو "استيراد".</td></tr>
-<tr><td>"حالة_حالة_ذاكرة_مخبأة"</td><td>حالة الكائن المخزن مؤقتًا.</td><td>"إصابة" أو "خطأ".</td></tr>
-<tr><td>"اسم_ذاكرة_مخبأة"</td><td>اسم الكائن المخزن مؤقتًا. تُستخدم هذه التسمية مع تسمية "cache_state".</td><td>مثل "معرّف المجموعة" أو "المخطط"، إلخ.</td></tr>
-<tr><td>"channel_name"</td><td>المواضيع الفعلية في تخزين الرسائل (بولسار أو كافكا).</td><td>على سبيل المثال."by-dev-rootcoord-dml_0"، "by-dev-rootcoord-dml_255"، إلخ.</td></tr>
-<tr><td>"اسم_الدالة"</td><td>اسم الدالة التي تعالج طلبات معينة.</td><td>مثل "إنشاء مجموعة"، "إنشاء مجموعة"، "إنشاء قسم"، "إنشاء فهرس"، إلخ.</td></tr>
-<tr><td>"اسم_المستخدم"</td><td>اسم المستخدم المستخدم المستخدم للمصادقة.</td><td>اسم المستخدم الذي تفضله.</td></tr>
-<tr><td>"Index_task_status"</td><td>حالة مهمة الفهرس في التخزين التعريفي.</td><td>"لم يتم إصدارها" أو "قيد التنفيذ" أو "فاشلة" أو "منتهية" أو "معاد تدويرها".</td></tr>
+<tr><td>“node_id”</td><td>The unique identity of a role.</td><td>A globally unique ID generated by milvus.</td></tr>
+<tr><td>“status”</td><td>The status of a processed operation or request.</td><td>"abandon", "success", or "fail".</td></tr>
+<tr><td>“query_type”</td><td>The type of a read request.</td><td>“search” or "query".</td></tr>
+<tr><td>“msg_type”</td><td>The type of messages.</td><td>"insert", "delete", "search", or "query".</td></tr>
+<tr><td>“segment_state”</td><td>The status of a segment.</td><td>"Sealed", "Growing", "Flushed", "Flushing", "Dropped", or "Importing".</td></tr>
+<tr><td>“cache_state”</td><td>The status of a cached object.</td><td>“hit” or "miss".</td></tr>
+<tr><td>“cache_name”</td><td>The name of a cached object. This label is used together with the label "cache_state".</td><td>Eg. "CollectionID", "Schema", etc.</td></tr>
+<tr><td>“channel_name"</td><td>Physical topics in message storage (Pulsar or Kafka).</td><td>Eg."by-dev-rootcoord-dml_0", "by-dev-rootcoord-dml_255", etc.</td></tr>
+<tr><td>“function_name”</td><td>The name of a function that handles certain requests.</td><td>Eg. "CreateCollection", "CreatePartition", "CreateIndex", etc.</td></tr>
+<tr><td>“user_name”</td><td>The user name used for authentication.</td><td>A user name of your preference.</td></tr>
+<tr><td>“index_task_status”</td><td>The status of an index task in meta storage.</td><td>"unissued", "in-progress", "failed", "finished", or "recycled".</td></tr>
 </tbody>
 </table>
-<h2 id="Grafana-in-Milvus" class="common-anchor-header">غرافانا في ميلفوس<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">
+<h2 id="Grafana-in-Milvus" class="common-anchor-header">Grafana in Milvus<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,9 +88,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana</a> عبارة عن مكدس تصور مفتوح المصدر يمكنه الاتصال بجميع مصادر البيانات. من خلال سحب المقاييس، تساعد المستخدمين على فهم وتحليل ومراقبة البيانات الضخمة.</p>
-<p>يستخدم تطبيق Milvus لوحات معلومات Grafana القابلة للتخصيص لتصور المقاييس.</p>
-<h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana</a> is an open-source visualizing stack that can connect with all data sources. By pulling up metrics, it helps users understand, analyze and monitor massive data.</p>
+<p>Milvus uses Grafana’s customizable dashboards for metric visualization.</p>
+<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,9 +105,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد التعرف على سير العمل الأساسي للمراقبة والتنبيه، تعلّم</p>
+    </button></h2><p>After learning about the basic workflow of monitoring and alerting, learn:</p>
 <ul>
-<li><a href="/docs/ar/monitor.md">نشر خدمات المراقبة</a></li>
-<li><a href="/docs/ar/visualize.md">تصور مقاييس ميلفوس</a></li>
-<li><a href="/docs/ar/alert.md">إنشاء تنبيه</a></li>
+<li><a href="/docs/monitor.md">Deploy monitoring services</a></li>
+<li><a href="/docs/visualize.md">Visualize Milvus metrics</a></li>
+<li><a href="/docs/alert.md">Create an alert</a></li>
 </ul>

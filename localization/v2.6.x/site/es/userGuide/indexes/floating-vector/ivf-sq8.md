@@ -2,10 +2,10 @@
 id: ivf-sq8.md
 title: IVF_SQ8
 summary: >-
-  El índice IVF_SQ8 es un algoritmo de indexación basado en la cuantización y
-  diseñado para afrontar los retos de la búsqueda de similitudes a gran escala.
-  Este tipo de índice permite realizar búsquedas más rápidas con un consumo de
-  memoria mucho menor que los métodos de búsqueda exhaustiva.
+  The IVF_SQ8 index is a quantization-based indexing algorithm designed to
+  tackle large-scale similarity search challenges. This index type achieves
+  faster searches with a much smaller memory footprint compared to exhaustive
+  search methods.
 ---
 <h1 id="IVFSQ8" class="common-anchor-header">IVF_SQ8<button data-href="#IVFSQ8" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El índice <strong>IVF_SQ8</strong> es un algoritmo de indexación <strong>basado en la cuantización</strong>, diseñado para afrontar los retos de la búsqueda de similitudes a gran escala. Este tipo de índice consigue búsquedas más rápidas con una huella de memoria mucho menor en comparación con los métodos de búsqueda exhaustiva.</p>
-<h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>The <strong>IVF_SQ8</strong> index is a <strong>quantization-based</strong> indexing algorithm designed to tackle large-scale similarity search challenges. This index type achieves faster searches with a much smaller memory footprint compared to exhaustive search methods.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,41 +38,43 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El índice IVF_SQ8 se basa en dos componentes clave:</p>
+    </button></h2><p>The IVF_SQ8 index is built on two key components:</p>
 <ul>
-<li><p><strong>Archivo invertido (IVF)</strong>: Organiza los datos en clusters, permitiendo al algoritmo de búsqueda centrarse sólo en los subconjuntos de vectores más relevantes.</p></li>
-<li><p><strong>Cuantización escalar (SQ8)</strong>: Comprime los vectores a una forma más compacta, reduciendo drásticamente el uso de memoria y manteniendo al mismo tiempo la precisión suficiente para realizar cálculos rápidos de similitud.</p></li>
+<li><p><strong>Inverted File (IVF)</strong>: Organizes the data into clusters, enabling the search algorithm to focus only on the most relevant subsets of vectors.</p></li>
+<li><p><strong>Scalar Quantization (SQ8)</strong>: Compresses the vectors to a more compact form, drastically reducing memory usage while maintaining enough precision for fast similarity calculations.</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF es como crear un índice en un libro. En lugar de escanear cada página (o, en nuestro caso, cada vector), se buscan palabras clave específicas (clusters) en el índice para encontrar rápidamente las páginas (vectores) relevantes. En nuestro caso, los vectores se agrupan en clusters, y el algoritmo buscará dentro de unos pocos clusters que estén cerca del vector de consulta.</p>
-<p>El funcionamiento es el siguiente</p>
+<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF is like creating an index in a book. Instead of scanning every page (or, in our case, every vector), you look up specific keywords (clusters) in the index to quickly find the relevant pages (vectors). In our scenario, vectors are grouped into clusters, and the algorithm will search within a few clusters that are close to the query vector.</p>
+<p>Here’s how it works:</p>
 <ol>
-<li><p><strong>Agrupación:</strong> El conjunto de datos vectoriales se divide en un número determinado de clusters, utilizando un algoritmo de agrupación como k-means. Cada cluster tiene un centroide (un vector representativo del cluster).</p></li>
-<li><p><strong>Asignación:</strong> Cada vector se asigna al cluster cuyo centroide está más próximo a él.</p></li>
-<li><p><strong>Índice invertido:</strong> Se crea un índice que asigna el centroide de cada cluster a la lista de vectores asignados a ese cluster.</p></li>
-<li><p><strong>Búsqueda:</strong> Cuando se buscan los vecinos más cercanos, el algoritmo de búsqueda compara el vector de consulta con los centroides de los clústeres y selecciona el clúster o clústeres más prometedores. A continuación, la búsqueda se reduce a los vectores que se encuentran dentro de esos clusters seleccionados.</p></li>
+<li><p><strong>Clustering:</strong> Your vector dataset is divided into a specified number of clusters, using a clustering algorithm like k-means. Each cluster has a centroid (a representative vector for the cluster).</p></li>
+<li><p><strong>Assignment:</strong> Each vector is assigned to the cluster whose centroid is closest to it.</p></li>
+<li><p><strong>Inverted Index:</strong> An index is created, mapping each cluster centroid to the list of vectors assigned to that cluster.</p></li>
+<li><p><strong>Search:</strong> When you search for nearest neighbors, the search algorithm compares your query vector with the cluster centroids and selects the most promising cluster(s). The search is then narrowed down to the vectors within those selected clusters.</p></li>
 </ol>
-<p>Para obtener más información sobre los detalles técnicos, consulte <a href="/docs/es/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>La cuantificación escalar (SQ) es una técnica utilizada para reducir el tamaño de vectores de alta dimensión sustituyendo sus valores por representaciones más pequeñas y compactas. La variante <strong>SQ8</strong> utiliza enteros de 8 bits en lugar de los típicos números en coma flotante de 32 bits para almacenar el valor de cada dimensión de un vector. Esto reduce enormemente la cantidad de memoria necesaria para almacenar los datos.</p>
-<p>A continuación se explica cómo funciona SQ8:</p>
+<p>To learn more about its technical details , refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>Scalar Quantization (SQ) is a technique used to reduce the size of high-dimensional vectors by replacing their values with smaller, more compact representations. The <strong>SQ8</strong> variant uses 8-bit integers instead of the typical 32-bit floating point numbers to store each dimension value of a vector. This greatly reduces the amount of memory required to store the data.</p>
+<p>Here’s how SQ8 works:</p>
 <ol>
-<li><p><strong>Identificación de rangos:</strong> En primer lugar, se identifican los valores mínimo y máximo dentro del vector. Este rango define los límites para la cuantización.</p></li>
-<li><p><strong>Normalización:</strong> Normalice los valores del vector a un rango entre 0 y 1 utilizando la fórmula:</p>
+<li><p><strong>Range Identification:</strong> First, identify the minimum and maximum values within the vector. This range defines the bounds for quantization.</p></li>
+<li><p><strong>Normalization:</strong> Normalize the vector values to a range between 0 and 1 using the formula:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>normalized_value</mtext><mo>=</mo><mfrac><mrow><mtext>value</mtext><mo>−</mo><mtext>min</mtext></mrow><mrow><mtext>max</mtext><mo>−</mo><mtext>min</mtext></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{normalized\_value} = \frac{\text{value} - \text{min}}{\text{max} - \text{min}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0044em;vertical-align:-0.31em;"></span><span class="mord text"><span class="mord">normalized_value</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1408em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">max</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">min</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">value</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>Esto asegura que todos los valores se mapean proporcionalmente dentro de un rango estandarizado, preparándolos para la compresión.</p></li>
-<li><p><strong>Compresión de 8 bits:</strong> Multiplique el valor normalizado por 255 (el valor máximo para un entero de 8 bits) y redondee el resultado al entero más cercano. Esto comprime cada valor en una representación de 8 bits.</p></li>
+<p>This ensures all values are mapped proportionally within a standardized range, preparing them for compression.</p></li>
+<li><p><strong>8-Bit Compression:</strong> Multiply the normalized value by 255 (the maximum value for an 8-bit integer) and round the result to the nearest integer. This effectively compresses each value into an 8-bit representation.</p></li>
 </ol>
-<p>Supongamos que tiene un valor de dimensión de 1,2, con un valor mínimo de -1,7 y un valor máximo de 2,3. La siguiente figura muestra cómo se aplica SQ8 para convertir un valor float32 en un entero int8.</p>
+<p>Suppose you have a dimension value of 1.2, with a minimum value of -1.7 and a maximum value of 2.3. The following figure shows how SQ8 is applied to convert a float32 value to an int8 integer.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
-   </span> <span class="img-wrapper"> <span>Ivf Sq8</span> </span></p>
-<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>El índice IVF_SQ8 combina IVF y SQ8 para realizar búsquedas de similitud de forma eficiente:</p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
+    <span>Ivf Sq8</span>
+  </span>
+</p>
+<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>The IVF_SQ8 index combines IVF and SQ8 to efficiently perform similarity searches:</p>
 <ol>
-<li><p><strong>IVF reduce el ámbito de búsqueda</strong>: El conjunto de datos se divide en clusters, y cuando se realiza una consulta, IVF compara primero la consulta con los centroides de los clusters, seleccionando los clusters más relevantes.</p></li>
-<li><p><strong>SQ8 acelera el cálculo de distancias</strong>: Dentro de los clusters seleccionados, SQ8 comprime los vectores en enteros de 8 bits, lo que reduce el uso de memoria y acelera los cálculos de distancia.</p></li>
+<li><p><strong>IVF narrows the search scope</strong>: The dataset is divided into clusters, and when a query is issued, IVF first compares the query to the cluster centroids, selecting the most relevant clusters.</p></li>
+<li><p><strong>SQ8 speeds up distance calculations</strong>: Within the selected clusters, SQ8 compresses the vectors into 8-bit integers, reducing memory usage and accelerating distance computations.</p></li>
 </ol>
-<p>Al utilizar IVF para centrar la búsqueda y SQ8 para acelerar los cálculos, IVF_SQ8 consigue tanto tiempos de búsqueda rápidos como eficiencia de memoria.</p>
-<h2 id="Build-index" class="common-anchor-header">Crear un índice<button data-href="#Build-index" class="anchor-icon" translate="no">
+<p>By using IVF to focus the search and SQ8 to speed up computations, IVF_SQ8 achieves both fast search times and memory efficiency.</p>
+<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,7 +89,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para construir un índice <code translate="no">IVF_SQ8</code> en un campo vectorial en Milvus, utilice el método <code translate="no">add_index()</code>, especificando el <code translate="no">index_type</code>, <code translate="no">metric_type</code>, y parámetros adicionales para el índice.</p>
+    </button></h2><p>To build an <code translate="no">IVF_SQ8</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -103,18 +105,18 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>En esta configuración:</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: El tipo de índice a construir. En este ejemplo, establezca el valor <code translate="no">IVF_SQ8</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: El método utilizado para calcular la distancia entre vectores. Los valores soportados incluyen <code translate="no">COSINE</code>, <code translate="no">L2</code>, y <code translate="no">IP</code>. Para más detalles, consulte <a href="/docs/es/metric.md">Tipos de métricas</a>.</p></li>
-<li><p><code translate="no">params</code>: Opciones de configuración adicionales para construir el índice.</p>
+<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">IVF_SQ8</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
-<li><code translate="no">nlist</code>: Número de conglomerados que se crearán utilizando el algoritmo k-means durante la construcción del índice.</li>
+<li><code translate="no">nlist</code>: Number of clusters to create using the k-means algorithm during index building.</li>
 </ul>
-<p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">IVF_SQ8</code>, consulte <a href="/docs/es/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">Parámetros de construcción del índice</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">IVF_SQ8</code> index, refer to <a href="/docs/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">Index building params</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -129,7 +131,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez creado el índice e insertadas las entidades, puede realizar búsquedas de similitud en el índice.</p>
+    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span>, <span class="hljs-comment"># Number of clusters to search for candidates</span>
@@ -144,15 +146,15 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>En esta configuración:</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">params</code>: Opciones de configuración adicionales para la búsqueda en el índice.</p>
+<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
 <ul>
-<li><code translate="no">nprobe</code>: Número de clusters para buscar candidatos.</li>
+<li><code translate="no">nprobe</code>: Number of clusters to search for candidates.</li>
 </ul>
-<p>Para conocer más parámetros de búsqueda disponibles para el índice <code translate="no">IVF_SQ8</code>, consulte <a href="/docs/es/ivf-sq8.md#share-PJhqdqNaNodKiexm6F1cD2IInbe">Parámetros de búsqueda específicos del índice</a>.</p></li>
+<p>To learn more search parameters available for the <code translate="no">IVF_SQ8</code> index, refer to <a href="/docs/ivf-sq8.md#share-PJhqdqNaNodKiexm6F1cD2IInbe">Index-specific search params</a>.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Parámetros del índice<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -167,41 +169,45 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En esta sección se ofrece una descripción general de los parámetros utilizados para crear un índice y realizar búsquedas en él.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices</h3><p>La siguiente tabla enumera los parámetros que pueden configurarse en <code translate="no">params</code> al <a href="/docs/es/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">crear un índice</a>.</p>
+    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">building an index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parámetro</p></th>
-     <th><p>Descripción</p></th>
-     <th><p>Rango de valores</p></th>
-     <th><p>Sugerencia de ajuste</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>El número de clusters a crear usando el algoritmo k-means durante la construcción del índice.</p></td>
-     <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 65536]</p>
-<p><strong>Valor por defecto</strong>: <code translate="no">128</code></p></td>
-     <td><p>Los valores mayores de <code translate="no">nlist</code> mejoran la recuperación al crear clusters más refinados, pero aumentan el tiempo de creación del índice. Optimice en función del tamaño del conjunto de datos y de los recursos disponibles. En la mayoría de los casos, se recomienda establecer un valor dentro de este intervalo: [32, 4096].</p></td>
+     <td><p>The number of clusters to create using the k-means algorithm during index building.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, 65536]</p>
+<p><strong>Default value</strong>: <code translate="no">128</code></p></td>
+     <td><p>Larger <code translate="no">nlist</code> values improve recall by creating more refined clusters but increase index building time. Optimize based on dataset size and available resources.
+ In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos del índice</h3><p>La siguiente tabla enumera los parámetros que pueden configurarse en <code translate="no">search_params.params</code> al <a href="/docs/es/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">buscar en el índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">searching on the index</a>.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Parámetro</p></th>
-     <th><p>Descripción</p></th>
-     <th><p>Rango de valores</p></th>
-     <th><p>Sugerencia de ajuste</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value Range</p></th>
+     <th><p>Tuning Suggestion</p></th>
    </tr>
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nprobe</code></p></td>
-     <td><p>El número de clusters para buscar candidatos.</p></td>
-     <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, <em>nlist</em>]</p>
-<p><strong>Valor por defecto</strong>: <code translate="no">8</code></p></td>
-     <td><p>Los valores más altos permiten buscar en más conglomerados, lo que mejora la recuperación al ampliar el alcance de la búsqueda, pero a costa de aumentar la latencia de la consulta. Establezca <code translate="no">nprobe</code> proporcionalmente a <code translate="no">nlist</code> para equilibrar la velocidad y la precisión.</p>
-<p>En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [1, nlist].</p></td>
+     <td><p>The number of clusters to search for candidates.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, <em>nlist</em>]</p>
+<p><strong>Default value</strong>: <code translate="no">8</code></p></td>
+     <td><p>Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.
+ Set <code translate="no">nprobe</code> proportionally to <code translate="no">nlist</code> to balance speed and accuracy.</p>
+<p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
    </tr>
 </table>

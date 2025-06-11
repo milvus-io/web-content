@@ -1,10 +1,10 @@
 ---
 id: configure-querynode-localdisk.md
-title: ローカルディスクを使用したMilvus QueryNodeの設定
+title: Configure Milvus QueryNode with Local Disk
 related_key: 'querynode, query node, local disk'
-summary: ローカルディスクを使用するMilvus QueryNodeの設定方法について説明します。
+summary: Learn how to configure Milvus QueryNode to use local disk.
 ---
-<h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">ローカルディスクを使用したMilvus QueryNodeの設定<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
+<h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">Configure Milvus QueryNode with Local Disk<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: ローカルディスクを使用するMilvus QueryNodeの設定方法�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus QueryNodeでローカルディスクを使用するための設定方法について説明します。</p>
-<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>This article describes how to configure Milvus QueryNode to use local disk storage.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,32 +35,32 @@ summary: ローカルディスクを使用するMilvus QueryNodeの設定方法�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusはAIに特化したベクトルデータベースで、膨大なベクトルデータを効率的に保存・検索できるように設計されています。画像・動画解析、自然言語処理、推薦システムなどのタスクに最適です。最適なパフォーマンスを確保するには、ディスクの読み取りレイテンシを最小限に抑えることが極めて重要です。遅延を防ぎ、システムの安定性を維持するためには、ローカルのNVMe SSDを使用することが強く推奨されます。</p>
-<p>ローカル・ディスク・ストレージが活躍する主な機能は以下のとおりです：</p>
+    </button></h2><p>Milvus is an AI-focused vector database tailored for efficient storage and retrieval of vast quantities of vector data. It is ideal for tasks such as image and video analysis, natural language processing, and recommendation systems. To ensure optimal performance, it is crucial to minimize disk read latency. Using local NVMe SSDs is highly recommended to prevent delays and maintain system stability.</p>
+<p>Key features where local disk storage comes into play include:</p>
 <ul>
-<li><a href="/docs/ja/chunk_cache.md"><strong>チャンク・キャッシュ</strong></a>：データをローカル・ディスク・キャッシュにプリロードし、検索を高速化します。</li>
-<li><a href="/docs/ja/mmap.md"><strong>MMap</strong></a>：ファイルの内容を直接メモリにマップし、メモリ効率を向上させます。</li>
-<li><a href="/docs/ja/disk_index.md"><strong>DiskANNインデックス</strong></a>：効率的なインデックス管理のためにディスク・ストレージを必要とする。</li>
+<li><a href="/docs/chunk_cache.md"><strong>Chunk cache</strong></a>: Preloads data into local disk cache for faster search.</li>
+<li><a href="/docs/mmap.md"><strong>MMap</strong></a>: Maps file contents directly into memory for better memory efficiency.</li>
+<li><a href="/docs/disk_index.md"><strong>DiskANN Index</strong></a>: Requires disk storage for efficient index management.</li>
 </ul>
-<p>本記事では、<a href="/docs/ja/install-overview.md#Milvus-Distributed">Milvus Distributedを</a>クラウドプラットフォームにデプロイし、NVMeディスクストレージを使用するようにQueryNodeを設定する方法に焦点を当てます。以下の表は、様々なクラウドプロバイダーの推奨マシンタイプの一覧です。</p>
+<p>In this article, we will focus on deploying <a href="/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a> on cloud platforms, and how to configure the QueryNode to use NVMe disk storage. The following table lists the recommended machine types of various cloud providers.</p>
 <table>
 <thead>
-<tr><th style="text-align:center">クラウドプロバイダ</th><th style="text-align:center">マシンタイプ</th></tr>
+<tr><th style="text-align:center">Cloud Provider</th><th style="text-align:center">Machine Type</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">AWS</td><td style="text-align:center">R6idシリーズ</td></tr>
-<tr><td style="text-align:center">GCP</td><td style="text-align:center">N2シリーズ</td></tr>
-<tr><td style="text-align:center">アジュール</td><td style="text-align:center">Lsv3シリーズ</td></tr>
-<tr><td style="text-align:center">アリババクラウド</td><td style="text-align:center">i3シリーズ</td></tr>
-<tr><td style="text-align:center">テンセントクラウド</td><td style="text-align:center">IT5シリーズ</td></tr>
+<tr><td style="text-align:center">AWS</td><td style="text-align:center">R6id series</td></tr>
+<tr><td style="text-align:center">GCP</td><td style="text-align:center">N2 series</td></tr>
+<tr><td style="text-align:center">Azure</td><td style="text-align:center">Lsv3  series</td></tr>
+<tr><td style="text-align:center">Alibaba Cloud</td><td style="text-align:center">i3 series</td></tr>
+<tr><td style="text-align:center">Tencent Cloud</td><td style="text-align:center">IT5 series</td></tr>
 </tbody>
 </table>
-<p>これらのマシンタイプはNVMeディスクストレージを提供する。これらのマシンタイプのインスタンスで<code translate="no">lsblk</code> コマンドを使用して、NVMe ディスクストレージがあるかどうかを確認できます。もしあれば、次のステップに進むことができる。</p>
+<p>These machine types provide NVMe disk storage. You can use the <code translate="no">lsblk</code> command on the instances of these machine types to check if they have NVMe disk storage. If they do, you can proceed to the next step.</p>
 <pre><code translate="no" class="language-bash">$ lsblk | grep nvme
 nvme0n1     259:0    0 250.0G  0 disk 
 nvme1n1     259:1    0 250.0G  0 disk 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-Kubernetes-to-use-local-disk" class="common-anchor-header">ローカルディスクを使用するようにKubernetesを設定する<button data-href="#Configure-Kubernetes-to-use-local-disk" class="anchor-icon" translate="no">
+<h2 id="Configure-Kubernetes-to-use-local-disk" class="common-anchor-header">Configure Kubernetes to use local disk<button data-href="#Configure-Kubernetes-to-use-local-disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,8 +75,8 @@ nvme1n1     259:1    0 250.0G  0 disk
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus DistributedのQueryNodeがNVMeディスクストレージを使用するように設定するには、対象のKubernetesクラスタのワーカーノードがコンテナとイメージをNVMeディスクに保存するように設定する必要があります。この手順はクラウドプロバイダによって異なる。</p>
-<h3 id="AWS" class="common-anchor-header">AWS</h3><p>Amazon EKSを使用する場合、ノードグループの構成設定を指定できるローンチテンプレートを使用して管理ノードをカスタマイズできます。以下は、Amazon EKSクラスタのワーカーノードにNVMeディスクをマウントする方法の例です：</p>
+    </button></h2><p>To configure the QueryNode of Milvus Distributed to use NVMe disk storage, you need to configure the worker nodes of the target Kubernetes clusters to store the containers and images on an NVMe disk. The procedure for this varies depending on the cloud providers.</p>
+<h3 id="AWS" class="common-anchor-header">AWS</h3><p>When using Amazon EKS, you can customize managed nodes with launch templates, in which you can specify configuration settings for your node groups. The following is an example of how to mount an NVMe disk on the worker nodes of your Amazon EKS cluster:</p>
 <pre><code translate="no" class="language-bash">MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=<span class="hljs-string">&quot;==MYBOUNDARY==&quot;</span>
 
@@ -102,17 +102,17 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 --==MYBOUNDARY==--
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>上記の例では、NVMe ディスクは<code translate="no">/dev/nvme1n1</code> であると仮定しています。特定の構成に合わせてスクリプトを変更する必要があります。</p>
+<p>In the above example, we assume that the NVMe disk is <code translate="no">/dev/nvme1n1</code>. You need to modify the script to match your specific configuration.</p>
 </div>
-<p>詳細については、<a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">起動テンプレートを使用した管理ノードのカスタマイズを</a>参照してください。</p>
-<h3 id="GCP" class="common-anchor-header">GCP</h3><p>Google Kubernetes Engine（GKE）クラスタ上でLocal SSDストレージをプロビジョニングし、クラスタ内のノードに接続されたLocal SSDでバックアップされたエフェメラルストレージからデータを消費するようにワークロードを設定するには、次のコマンドを実行します：</p>
+<p>For details, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">Customizing managed nodes with launch templates</a>.</p>
+<h3 id="GCP" class="common-anchor-header">GCP</h3><p>To provision Local SSD storage on Google Kubernetes Engine (GKE) clusters, and configure workloads to consume data from Local SSD-backed ephemeral storage attached to nodes in your cluster, run the following command:</p>
 <pre><code translate="no" class="language-bash">gcloud container node-pools create <span class="hljs-variable">${POOL_NAME}</span> \
     --cluster=<span class="hljs-variable">${CLUSTER_NAME}</span> \
     --ephemeral-storage-local-ssd count=<span class="hljs-variable">${NUMBER_OF_DISKS}</span> \
     --machine-type=<span class="hljs-variable">${MACHINE_TYPE}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>詳細については、<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">GKEでのLocal SSDストレージのプロビジョニングを</a>参照してください。</p>
-<h3 id="Azure" class="common-anchor-header">アジュール</h3><p>ローカルNVMeディスクストレージを持つ仮想マシンスケールセット（VMSS）を作成するには、VMインスタンスにカスタムデータを渡す必要があります。以下は、VMSS内のVMインスタンスにNVMeディスクをアタッチする方法の例です：</p>
+<p>For details, see <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">Provisioning Local SSD storage on GKE</a>.</p>
+<h3 id="Azure" class="common-anchor-header">Azure</h3><p>To create a virtual machine scale set (VMSS) with local NVMe disk storage, you need to pass custom data to the VM instances. The following is an example of how to attach an NVMe disk to the VM instances in the VMSS:</p>
 <pre><code translate="no" class="language-bash">mdadm -Cv /dev/md0 -l0 -n2 /dev/nvme0n1 /dev/nvme1n1
 mdadm -Ds &gt; /etc/mdadm/mdadm.conf 
 update-initramfs -u
@@ -123,9 +123,9 @@ mkfs.xfs /dev/md0
 mount -a
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>上記の例では、NVMe ディスクは<code translate="no">/dev/nvme0n1</code> と<code translate="no">/dev/nvme1n1</code> であると仮定しています。特定の構成に合わせてスクリプトを変更する必要があります。</p>
+<p>In the above example, we assume that the NVMe disks are <code translate="no">/dev/nvme0n1</code> and <code translate="no">/dev/nvme1n1</code>. You need to modify the script to match your specific configuration.</p>
 </div>
-<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">AlibabaクラウドとTecentCloud</h3><p>ローカルSSDボリュームを使用するノードプールを作成するには、カスタムデータを渡す必要があります。以下はカスタムデータの例です。</p>
+<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud & TecentCloud</h3><p>To create a node pool that uses Local SSD volumes, we need to pass Custom Data. The following is an example of custom data.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init start...&quot;</span>
 mkfs.xfs /dev/nvme0n1
@@ -144,29 +144,29 @@ mount -a
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init end...&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>上記の例では、NVMeディスクを<code translate="no">/dev/nvme0n1</code> と仮定しています。特定の構成に合わせてスクリプトを修正する必要があります。</p>
+<p>In the above example, we assume that the NVMe disk is <code translate="no">/dev/nvme0n1</code>. You need to modify the script to match your specific configuration.</p>
 </div>
-<h3 id="Your-own-IDC" class="common-anchor-header">独自の IDC</h3><p>独自のIDCを実行しており、コンテナがcontainerdでデフォルトで新しくマウントされたNVMeディスク上のファイルシステムを使用するように設定したい場合は、以下の手順に従ってください：</p>
+<h3 id="Your-own-IDC" class="common-anchor-header">Your own IDC</h3><p>If you are running your own IDC and want to configure your containers to use the filesystem on a newly mounted NVMe disk by default in containerd, follow these steps:</p>
 <ul>
-<li><p><strong>NVMe ディスクをマウントする。</strong></p>
-<p>NVMeディスクがホストマシンに正しくマウントされていることを確認します。お好みのディレクトリにマウントできます。例えば、<code translate="no">/mnt/nvme</code> にマウントする場合、それが正しく設定され、<code translate="no">lsblk</code> または<code translate="no">df -h</code> を実行して<code translate="no">/mnt/nvme</code> で利用可能なディスクを確認できることを確認する。</p></li>
-<li><p><strong>containerd 構成を更新する。</strong></p>
-<p>コンテナ・ストレージのルート・ディレクトリとして新しいマウントを使用するように、containerd 構成を修正します。</p>
+<li><p><strong>Mount the NVMe disks.</strong></p>
+<p>Ensure that your NVMe disk is properly mounted on your host machine. You can mount it to a directory of your choice. For instance, if you mount it to <code translate="no">/mnt/nvme</code>, make sure it is correctly set up and you can see the disk available at <code translate="no">/mnt/nvme</code> by running <code translate="no">lsblk</code> or <code translate="no">df -h</code>.</p></li>
+<li><p><strong>Update containerd configuration.</strong></p>
+<p>Modify the containerd configuration to use the new mount as the root directory for container storage.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /mnt/nvme/containerd /mnt/nvme/containerd/state
 <span class="hljs-built_in">sudo</span> vim /etc/containerd/config.toml
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</code> セクションを探し、<code translate="no">snapshotter</code> と<code translate="no">root</code> の設定を以下のように修正する。</p>
+<p>Locate the <code translate="no">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</code> section, and modify the <code translate="no">snapshotter</code> and <code translate="no">root</code> settings as follows：</p>
 <pre><code translate="no" class="language-toml"><span class="hljs-section">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</span>
 <span class="hljs-attr">snapshotter</span> = <span class="hljs-string">&quot;overlayfs&quot;</span>
 <span class="hljs-attr">root</span> = <span class="hljs-string">&quot;/mnt/nvme/containerd&quot;</span>
 <span class="hljs-attr">state</span> = <span class="hljs-string">&quot;/mnt/nvme/containerd/state&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>containerd を再起動する。</strong></p>
-<p>containerd サービスを再起動して、変更を適用する。</p>
+<li><p><strong>Restart containerd.</strong></p>
+<p>Restart the containerd service to apply the changes.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> systemctl restart containerd
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Verify-disk-performance" class="common-anchor-header">ディスク・パフォーマンスの検証<button data-href="#Verify-disk-performance" class="anchor-icon" translate="no">
+<h2 id="Verify-disk-performance" class="common-anchor-header">Verify disk performance<button data-href="#Verify-disk-performance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,12 +181,12 @@ mount -a
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ディスク性能をベンチマークするための一般的なツールである<a href="https://github.com/axboe/fio">Fio</a> を使用して、ディスク性能を検証することを推奨する。以下は、ディスク性能をテストするために Fio を実行する方法の例である。</p>
+    </button></h2><p>You are advised to verify the disk performance using <a href="https://github.com/axboe/fio">Fio</a>, which is a popular tool for benchmarking disk performance. The following is an example of how to run Fio to test the disk performance.</p>
 <ul>
-<li><p><strong>NVMe ディスクのあるノードにテストポッドをデプロイします。</strong></p>
+<li><p><strong>Deploy the test pod to the node with the NVMe disk.</strong></p>
 <pre><code translate="no" class="language-bash">kubectl create -f ubuntu.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">ubuntu.yaml</code> ファイルは以下のとおりです：</p>
+<p>The <code translate="no">ubuntu.yaml</code> file is as follows:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Pod</span>
 <span class="hljs-attr">metadata:</span>
@@ -203,7 +203,7 @@ mount -a
     <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">data-volume</span>
     <span class="hljs-attr">emptyDir:</span> {}
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Fio を実行してディスク性能をテストします。</strong></p>
+<li><p><strong>Run Fio to test the disk performance.</strong></p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># enter the container</span>
 kubectl <span class="hljs-built_in">exec</span> pod/ubuntu -it bash
 
@@ -221,7 +221,7 @@ fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numj
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
 fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1  --<span class="hljs-built_in">readonly</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>そして、出力は以下のようになるはずです：</p>
+<p>And the output should look like this:</p>
 <pre><code translate="no" class="language-bash">Jobs: 128 (f=128): [r(128)][100.0%][r=1458MiB/s][r=373k IOPS][eta 00m:00s]
 iops-test-job: (groupid=0, <span class="hljs-built_in">jobs</span>=128): err= 0: pid=768: Mon Jun 24 09:35:06 2024
 <span class="hljs-built_in">read</span>: IOPS=349k, BW=1364MiB/s (1430MB/s)(160GiB/120067msec)
@@ -249,7 +249,7 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
     latency   : target=0, window=0, percentile=100.00%, depth=64
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Deploy-Milvus-Distributed" class="common-anchor-header">Milvus Distributedをデプロイします。<button data-href="#Deploy-Milvus-Distributed" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus-Distributed" class="common-anchor-header">Deploy Milvus Distributed<button data-href="#Deploy-Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -264,10 +264,10 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>検証結果が満足のいくものであれば、以下の手順でMilvus Distributedをデプロイすることができる：</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Helmを使用してMilvus Distributedをデプロイするためのヒント</h3><p>QueryNodeポッドはデフォルトでNVMeディスクをEmptyDirボリュームとして使用します。最適なパフォーマンスを確保するために、NVMeディスクをQueryNodeポッド内の<code translate="no">/var/lib/milvus/data</code> 。</p>
-<p>Helmを使用したMilvus Distributedのデプロイ方法の詳細については、「<a href="/docs/ja/install_cluster-helm.md">Run Milvus in Kubernetes with Helm</a>」を参照してください。</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Milvus Operatorを使用してMilvus Distributedをデプロイするためのヒント</h3><p>Milvus Operatorは、NVMeディスクをEmptyDirボリュームとして使用するようにQueryNodeポッドを自動的に設定します。<code translate="no">MilvusCluster</code> カスタムリソースに以下の設定を追加することをお勧めします：</p>
+    </button></h2><p>Once the verification results are satisfactory, you can deploy Milvus Distributed with the following steps:</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Tips for deploying Milvus Distributed using Helm</h3><p>The QueryNode pod uses NVMe disks as EmptyDir volumes by default. You are advised to mount NVMe disks to <code translate="no">/var/lib/milvus/data</code> within the QueryNode pods to ensure optimal performance.</p>
+<p>For details on how to deploy Milvus Distributed using Helm, see <a href="/docs/install_cluster-helm.md">Run Milvus in Kubernetes with Helm</a>.</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Tips for deploying Milvus Distributed using Milvus Operator</h3><p>The Milvus Operator automatically configures the QueryNode pod to use NVMe disks as EmptyDir volumes. You are advised to add the following configurations to the <code translate="no">MilvusCluster</code> custom resource:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
@@ -279,4 +279,4 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
       <span class="hljs-bullet">-</span> <span class="hljs-attr">emptyDir:</span>
         <span class="hljs-attr">name:</span> <span class="hljs-string">data</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、QueryNodeポッドがNVMeディスクをデータボリュームとして使用するようになります。Milvus Operatorを使用してMilvus Distributedをデプロイする方法の詳細については、<a href="/docs/ja/install_cluster-milvusoperator.md">Milvus Operatorを使用してKubernetesでMilvusを実行するを</a>参照してください。</p>
+<p>This will ensure that the QueryNode pod uses the NVMe disk as the data volume. For details on how to deploy Milvus Distributed using Milvus Operator, see <a href="/docs/install_cluster-milvusoperator.md">Run Milvus in Kubernetes with Milvus Operator</a>.</p>

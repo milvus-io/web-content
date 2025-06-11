@@ -1,11 +1,13 @@
 ---
 id: NLWeb_with_milvus.md
 summary: >-
-  Microsoft
-  NLWebとMilvusを統合し、Webサイト用の強力な自然言語インターフェースを構築する方法を学びます。このチュートリアルでは、Milvusのベクトルデータベース機能を活用し、NLWebアプリケーションにおける効率的なセマンティック検索、埋め込みストレージ、コンテキスト検索を実現する方法をご紹介します。
-title: MilvusでNLWebを使う
+  Learn how to integrate Microsoft NLWeb with Milvus to build powerful natural
+  language interfaces for websites. This tutorial demonstrates how to leverage
+  Milvus' vector database capabilities for efficient semantic search, embedding
+  storage, and context retrieval in NLWeb applications.
+title: Using NLWeb with Milvus
 ---
-<h1 id="Using-NLWeb-with-Milvus" class="common-anchor-header">MilvusでNLWebを使う<button data-href="#Using-NLWeb-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Using-NLWeb-with-Milvus" class="common-anchor-header">Using NLWeb with Milvus<button data-href="#Using-NLWeb-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,12 +22,12 @@ title: MilvusでNLWebを使う
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/microsoft/NLWeb">マイクロソフトのNLWebは</a>、<a href="https://schema.org/">Schema.org</a>、RSSのようなフォーマット、そして新しいMCPプロトコルを使って、ウェブサイトのための自然言語インターフェースを可能にするフレームワークです。</p>
-<p><a href="https://milvus.io/">Milvusは</a>、自然言語処理アプリケーションのための強力なコンテキスト検索を可能にする、ストレージと効率的なベクトル類似検索を埋め込むためのNLWeb内のベクトルデータベースバックエンドとしてサポートされています。</p>
+    </button></h1><p><a href="https://github.com/microsoft/NLWeb">Microsoft’s NLWeb</a> is a proposed framework that enables natural language interfaces for websites, using <a href="https://schema.org/">Schema.org</a>, formats like RSS and the emerging MCP protocol.</p>
+<p><a href="https://milvus.io/">Milvus</a> is supported as a vector database backend within NLWeb for embedding storage and efficient vector similarity search, enabling powerful context retrieval for natural language processing applications.</p>
 <blockquote>
-<p>このドキュメントは主に公式<a href="https://github.com/microsoft/NLWeb/blob/main/HelloWorld.md">クイックスタート</a>ドキュメントに基づいています。もし古い内容や一貫性のない内容を見つけた場合は、公式ドキュメントを優先し、遠慮なく私たちに問題を提起してください。</p>
+<p>This documentation is primarily based on the official <a href="https://github.com/microsoft/NLWeb/blob/main/HelloWorld.md">quick start</a> documentation. If you find any outdated or inconsistent content, please prioritize the official documentation and feel free to raise an issue for us.</p>
 </blockquote>
-<h2 id="Usage" class="common-anchor-header">使用方法<button data-href="#Usage" class="anchor-icon" translate="no">
+<h2 id="Usage" class="common-anchor-header">Usage<button data-href="#Usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,8 +42,8 @@ title: MilvusでNLWebを使う
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NLWebはMilvusを検索エンジンとして使用するように設定することができます。以下はMilvusを使用したNLWebの設定と使用方法についてのガイドです。</p>
-<h3 id="Installation" class="common-anchor-header">インストール</h3><p>リポジトリをクローンし、環境を構築します：</p>
+    </button></h2><p>NLWeb can be configured to use Milvus as the retrieval engine. Below is a guide on how to set up and use NLWeb with Milvus.</p>
+<h3 id="Installation" class="common-anchor-header">Installation</h3><p>Clone the repo and set up your environment:</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/microsoft/NLWeb
 <span class="hljs-built_in">cd</span> NLWeb
 python -m venv .venv
@@ -50,8 +52,8 @@ python -m venv .venv
 pip install -r requirements.txt
 pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configuring-Milvus" class="common-anchor-header">Milvusの設定</h3><p><strong>Milvusを</strong>利用するために、設定を更新します。</p>
-<h4 id="Update-config-files-in-codeconfig" class="common-anchor-header">設定ファイルの更新<code translate="no">code/config</code></h4><p><code translate="no">config_retrieval.yaml</code> ファイルを開き、Milvus の設定を追加します：</p>
+<h3 id="Configuring-Milvus" class="common-anchor-header">Configuring Milvus</h3><p>To use <strong>Milvus</strong>, update your configuration.</p>
+<h4 id="Update-config-files-in-codeconfig" class="common-anchor-header">Update config files in <code translate="no">code/config</code></h4><p>Open the <code translate="no">config_retrieval.yaml</code> file and add the Milvus configuration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">preferred_endpoint:</span> <span class="hljs-string">milvus_local</span>
 
 <span class="hljs-attr">endpoints:</span>
@@ -62,16 +64,16 @@ pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</spa
     <span class="hljs-comment"># Specify the database type</span>
     <span class="hljs-attr">db_type:</span> <span class="hljs-string">milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Loading-Data" class="common-anchor-header">データの読み込み</h3><p>設定が完了したら、RSSフィードを使ってコンテンツを読み込みます。</p>
-<p><code translate="no">code</code> ：</p>
+<h3 id="Loading-Data" class="common-anchor-header">Loading Data</h3><p>Once configured, load your content using RSS feeds.</p>
+<p>From the <code translate="no">code</code> directory:</p>
 <pre><code translate="no" class="language-bash">python -m tools.db_load https://feeds.libsyn.com/121695/rss Behind-the-Tech
 <button class="copy-code-btn"></button></code></pre>
-<p>これでコンテンツがMilvusコレクションに取り込まれ、テキストデータとベクター埋め込みデータの両方が保存されます。</p>
-<h3 id="Running-the-Server" class="common-anchor-header">サーバーの実行</h3><p>NLWebを起動するには、<code translate="no">code</code> ディレクトリから、実行します：</p>
+<p>This will ingest the content into your Milvus collection, storing both the text data and vector embeddings.</p>
+<h3 id="Running-the-Server" class="common-anchor-header">Running the Server</h3><p>To start NLWeb, from the <code translate="no">code</code> directory, run:</p>
 <pre><code translate="no" class="language-bash">python app-file.py
 <button class="copy-code-btn"></button></code></pre>
-<p>これで、http://localhost:8000/ のウェブUI、またはMCP互換のREST APIを直接使用して、自然言語経由でコンテンツを照会できるようになります。</p>
-<h2 id="Further-Reading" class="common-anchor-header">参考文献<button data-href="#Further-Reading" class="anchor-icon" translate="no">
+<p>You can now query your content via natural language using either the web UI at http://localhost:8000/ or directly through the MCP-compatible REST API.</p>
+<h2 id="Further-Reading" class="common-anchor-header">Further Reading<button data-href="#Further-Reading" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,10 +89,10 @@ pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</spa
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://milvus.io/docs">Milvusドキュメント</a></li>
-<li><a href="https://github.com/microsoft/NLWeb">NLWebソース</a></li>
-<li>チャットクエリの寿命</li>
-<li>プロンプトの変更による動作の変更</li>
-<li>制御フローの変更</li>
-<li>ユーザーインターフェースの変更</li>
+<li><a href="https://milvus.io/docs">Milvus Documentation</a></li>
+<li><a href="https://github.com/microsoft/NLWeb">NLWeb Source</a></li>
+<li>Life of a Chat Query</li>
+<li>Modifying behavior by changing prompts</li>
+<li>Modifying control flow</li>
+<li>Modifying the user interface</li>
 </ul>

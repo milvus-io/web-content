@@ -1,12 +1,14 @@
 ---
 id: llama_stack_with_milvus.md
-title: 利用 Milvus 的 Llama Stack 构建 RAG
+title: Build RAG with Llama Stack with Milvus
 related_key: Llama Stack
 summary: >-
-  本教程将介绍如何使用 Milvus 搭建一个 Llama Stack 服务器，从而导入私人数据作为知识库。然后，我们将在服务器上执行查询，创建一个完整的
-  RAG 应用程序。
+  This tutorial introduces how to build a Llama Stack Server configured with
+  Milvus, enabling you to import your private data to serve as your knowledge
+  base. We will then perform queries on the server, creating a complete RAG
+  application.
 ---
-<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">与 Milvus 一起使用 Llama Stack 构建 RAG<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">Build RAG with Llama Stack with Milvus<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +23,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a>是一种面向服务、API 优先的方法，用于构建生产型人工智能应用程序。它提供了一个通用堆栈，允许开发人员随时随地进行开发、部署，并利用生产就绪的构建模块，实现真正的提供商独立性。Llama Stack 重点关注 Meta 的 Llama 模型、可组合性、生产就绪性和合作生态系统。</p>
-<p>在本教程中，我们将介绍如何构建一个配置有 Milvus 的 Llama Stack 服务器，使您能够导入您的私有数据作为您的知识库。然后，我们将在服务器上执行查询，创建一个完整的 RAG 应用程序。</p>
-<h2 id="Preparing-the-Environment" class="common-anchor-header">准备环境<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a> is a service-oriented, API-first approach for building production AI applications. It provides a universal stack that allows developers to develop anywhere, deploy everywhere, and leverage production-ready building blocks with true provider independence. The Llama Stack focuses on Meta’s Llama models, composability, production-readiness, and a partnering ecosystem.</p>
+<p>In this tutorial, we will introduce how to build a Llama Stack Server configured with Milvus, enabling you to import your private data to serve as your knowledge base. We will then perform queries on the server, creating a complete RAG application.</p>
+<h2 id="Preparing-the-Environment" class="common-anchor-header">Preparing the Environment<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,17 +40,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>启动 Llama Stack 服务器有多种方式，例如<a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">作为库</a>、<a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">构建发行版</a>等。对于 Llama Stack 中的每个组件，还可以选择不同的提供程序。因此，启动 Llama Stack 服务器的方法有很多种。</p>
-<p>本教程使用以下配置作为启动服务的示例。如果希望以其他方式启动，请参阅《<a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">启动 Llama Stack 服务器</a>》。</p>
+    </button></h2><p>There are many ways to start the Llama Stack server, such as <a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">as a library</a>, <a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">building a distribution</a>, etc. For each component in the Llama Stack, various providers can also be chosen. Therefore, there are numerous ways to launch the Llama Stack server.</p>
+<p>This tutorial uses the following configuration as an example to start the service. If you wish to start it in another way, please refer to <a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">Starting a Llama Stack Server</a>.</p>
 <ul>
-<li>我们使用 Conda 构建一个带有 Milvus 配置的自定义 Distributed。</li>
-<li>我们使用<a href="https://llama-stack.readthedocs.io/en/latest/distributions/self_hosted_distro/together.html#via-conda">Together AI</a>作为 LLM 提供商。</li>
-<li>我们使用默认的<code translate="no">all-MiniLM-L6-v2</code> 作为 Embeddings 模型。</li>
+<li>We use Conda to build a custom distribution with Milvus configuration.</li>
+<li>We use <a href="https://llama-stack.readthedocs.io/en/latest/distributions/self_hosted_distro/together.html#via-conda">Together AI</a> as the LLM provider.</li>
+<li>We use the default <code translate="no">all-MiniLM-L6-v2</code> as the embedding model.</li>
 </ul>
 <div class="alert note">
-<p>本教程主要参考了<a href="https://llama-stack.readthedocs.io/en/latest/index.html">Llama Stack 文档</a>的官方安装指南。如果你在本教程中发现任何过时的部分，可以优先参考官方指南，并为我们创建一个问题。</p>
+<p>This tutorial mainly refers to the official installation guide of the <a href="https://llama-stack.readthedocs.io/en/latest/index.html">Llama Stack documentation</a>. If you find any outdated parts in this tutorial, you can prioritize following the official guide and create an issue for us.</p>
 </div>
-<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">启动 Llama Stack 服务器<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
+<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">Start Llama Stack Server<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,18 +65,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">准备环境</h3><p>由于我们需要使用 Together AI 作为 LLM 服务，因此必须先登录官方网站申请<a href="https://api.together.xyz/settings/api-keys">API 密钥</a>，并将 API 密钥<code translate="no">TOGETHER_API_KEY</code> 设置为环境变量。</p>
-<p>克隆 Llama Stack 源代码</p>
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Prepare the Environment</h3><p>Since we need to use Together AI as the LLM service, we must first log in to the official website to apply for an <a href="https://api.together.xyz/settings/api-keys">API key</a> and set the API key <code translate="no">TOGETHER_API_KEY</code> as an environment variable.</p>
+<p>Clone the Llama Stack source code</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
 <button class="copy-code-btn"></button></code></pre>
-<p>创建 conda 环境并安装依赖项</p>
+<p>Create a conda environment and install dependencies</p>
 <pre><code translate="no" class="language-bash">$ conda create -n stack python=3.10
 $ conda activate stack
 
 $ pip install -e .
 <button class="copy-code-btn"></button></code></pre>
-<p>修改<code translate="no">llama_stack/llama_stack/template/together/run.yaml</code> 中的内容，将 vector_io 部分改为相关的 Milvus 配置。例如，添加</p>
+<p>Modify the content in <code translate="no">llama_stack/llama_stack/template/together/run.yaml</code>, changing the vector_io section to the relevant Milvus configuration. For example, add:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">vector_io:</span>
 <span class="hljs-bullet">-</span> <span class="hljs-attr">provider_id:</span> <span class="hljs-string">milvus</span>
   <span class="hljs-attr">provider_type:</span> <span class="hljs-string">inline::milvus</span>
@@ -87,23 +89,23 @@ $ pip install -e .
 <span class="hljs-comment">#      uri: http://localhost:19530</span>
 <span class="hljs-comment">#      token: root:Milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Llama Stack 中，Milvus 有两种配置方式：本地配置，即<code translate="no">inline::milvus</code> ；远程配置，即<code translate="no">remote::milvus</code> 。</p>
+<p>In Llama Stack, Milvus can be configured in two ways: local configuration, which is <code translate="no">inline::milvus</code>, and remote configuration, which is <code translate="no">remote::milvus</code>.</p>
 <ul>
-<li><p>最简单的方法是本地配置，需要设置<code translate="no">db_path</code> ，这是本地存储<a href="https://milvus.io/docs/quickstart.md">Milvus-Lite</a>文件的路径。</p></li>
-<li><p>远程配置适用于大量数据存储。</p>
+<li><p>The simplest method is local configuration, which requires setting <code translate="no">db_path</code>, a path for locally storing <a href="https://milvus.io/docs/quickstart.md">Milvus-Lite</a> files.</p></li>
+<li><p>Remote configuration is suitable for large data storage.</p>
 <ul>
-<li>如果数据量较大，可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能良好的 Milvus 服务器。在此设置中，请使用服务器 URI，如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。默认的<code translate="no">token</code> 是<code translate="no">root:Milvus</code> 。</li>
-<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 API 密钥</a>相对应。</li>
+<li>If you have a large amount of data, you can set up a performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server URI, e.g., <code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>. The default <code translate="no">token</code> is <code translate="no">root:Milvus</code>.</li>
+<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">从模板构建分发版</h3><p>运行以下命令构建分发版：</p>
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Build distribution from the template</h3><p>Run the following command to build the distribution:</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
-<p>将在<code translate="no">~/.llama/distributions/together/together-run.yaml</code> 生成一个文件。然后，运行此命令启动服务器：</p>
+<p>A file will be generated at <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. Then, run this command to start the server:</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>如果一切顺利，您将看到 Llama Stack 服务器在 8321 端口成功运行。</p>
-<h2 id="Perform-RAG-from-client" class="common-anchor-header">从客户端执行 RAG<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
+<p>If everything goes smoothly, you should see the Llama Stack server successfully running on port 8321.</p>
+<h2 id="Perform-RAG-from-client" class="common-anchor-header">Perform RAG from client<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -118,7 +120,7 @@ $ pip install -e .
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>启动服务器后，就可以编写客户端代码来访问服务器了。下面是一段示例代码：</p>
+    </button></h2><p>Once you have started the server, you can write the client code to access it. Here is a sample code:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> uuid
 <span class="hljs-keyword">from</span> llama_stack_client.types <span class="hljs-keyword">import</span> Document
 <span class="hljs-keyword">from</span> llama_stack_client.lib.agents.agent <span class="hljs-keyword">import</span> Agent
@@ -191,7 +193,8 @@ response = rag_agent.create_turn(
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Response: &quot;</span>)
 <span class="hljs-built_in">print</span>(response.output_message.content)
 <button class="copy-code-btn"></button></code></pre>
-<p>运行此代码执行 RAG 查询。 如果一切正常，输出结果应该如下所示：</p>
+<p>Run this code to perform the RAG query.
+If everything is working properly, the output should look like this:</p>
 <pre><code translate="no" class="language-log">inserting...
 finish init agent...
 Response: 

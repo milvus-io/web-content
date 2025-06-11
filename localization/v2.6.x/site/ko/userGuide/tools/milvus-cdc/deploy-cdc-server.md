@@ -1,10 +1,10 @@
 ---
 id: deploy-cdc-server.md
 order: 2
-summary: 이 가이드는 Milvus-CDC 서버를 배포하는 단계별 프로세스를 제공합니다.
-title: CDC 서버 배포
+summary: This guide provides a step-by-step process for deploying a Milvus-CDC server.
+title: Deploy CDC Server
 ---
-<h1 id="Deploy-CDC-Server" class="common-anchor-header">CDC 서버 배포<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
+<h1 id="Deploy-CDC-Server" class="common-anchor-header">Deploy CDC Server<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ title: CDC 서버 배포
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드는 Milvus-CDC 서버를 배포하는 단계별 프로세스를 제공합니다.</p>
-<h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>This guide provides a step-by-step process for deploying a Milvus-CDC server.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,17 +35,17 @@ title: CDC 서버 배포
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus-CDC 서버를 배포하기 전에 다음 조건이 충족되는지 확인하세요:</p>
+    </button></h2><p>Ensure the following conditions are met before deploying a Milvus-CDC server:</p>
 <ul>
-<li><p><strong>Milvus 인스턴스</strong>: 소스 Milvus와 하나 이상의 대상 Milvus가 모두 배포되어 작동 중이어야 합니다.</p>
+<li><p><strong>Milvus Instances</strong>: Both the source Milvus and at least one target Milvus should be deployed and operational.</p>
 <ul>
-<li><p>소스 및 대상 Milvus 버전은 모두 2.3.2 이상이어야 하며, 가급적 2.4.x가 좋습니다. 호환성을 보장하기 위해 소스 및 대상 Milvus에 동일한 버전을 사용하는 것이 좋습니다.</p></li>
-<li><p>대상 Milvus의 <code translate="no">common.ttMsgEnabled</code> 구성을 <code translate="no">false</code> 으로 설정합니다.</p></li>
-<li><p>충돌을 방지하기 위해 소스 및 대상 Milvus를 별개의 메타 및 메시지 저장소 설정으로 구성하세요. 예를 들어, 여러 Milvus 인스턴스에서 동일한 etcd 및 rootPath 구성은 물론 동일한 Pulsar 서비스 및 <code translate="no">chanNamePrefix</code> 을 사용하지 마세요.</p></li>
+<li><p>Both the source and target Milvus versions must be 2.3.2 or higher, preferably 2.4.x. We recommend uisng the same version for the source and target Milvus to ensure compatibility.</p></li>
+<li><p>Set the <code translate="no">common.ttMsgEnabled</code> configuration of the target Milvus to <code translate="no">false</code>.</p></li>
+<li><p>Configure the source and target Milvus with distinct meta and message storage settings to prevent conflicts. For instance, avoid using the same etcd and rootPath configurations, as well as identical Pulsar services and <code translate="no">chanNamePrefix</code> in multiple Milvus instances.</p></li>
 </ul></li>
-<li><p><strong>메타스토어</strong>: Milvus-CDC 메타스토어를 위한 etcd 또는 MySQL 데이터베이스를 준비하세요.</p></li>
+<li><p><strong>Metastore</strong>: Have an etcd or MySQL database ready for the Milvus-CDC metastore.</p></li>
 </ul>
-<h2 id="Steps" class="common-anchor-header">단계<button data-href="#Steps" class="anchor-icon" translate="no">
+<h2 id="Steps" class="common-anchor-header">Steps<button data-href="#Steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,21 +60,21 @@ title: CDC 서버 배포
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Milvus-CDC 구성 파일 가져오기</h3><p><a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC 리</a> 포지토리를 복제하고 <code translate="no">milvus-cdc/server/configs</code> 디렉토리로 이동하여 <code translate="no">cdc.yaml</code> 구성 파일에 액세스합니다.</p>
+    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Obtain the Milvus-CDC config file</h3><p>Clone the <a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC repo</a> and navigate to the <code translate="no">milvus-cdc/server/configs</code> directory to access the <code translate="no">cdc.yaml</code> config file.</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus-cdc.git
 
 <span class="hljs-built_in">cd</span> milvus-cdc/server/configs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Edit-the-config-file" class="common-anchor-header">구성 파일 편집</h3><p><code translate="no">milvus-cdc/server/configs</code> 디렉터리에서 <code translate="no">cdc.yaml</code> 파일을 수정하여 Milvus-CDC 메타스토어와 관련된 구성 및 소스 Milvus의 연결 세부 정보를 사용자 지정합니다.</p>
+<h3 id="Edit-the-config-file" class="common-anchor-header">Edit the config file</h3><p>In the <code translate="no">milvus-cdc/server/configs</code> directory, modify the <code translate="no">cdc.yaml</code> file to customize configurations related to the Milvus-CDC metastore and connection details of the source Milvus.</p>
 <ul>
-<li><p><strong>메타스토어 구성</strong>:</p>
+<li><p><strong>Metastore Configuration</strong>:</p>
 <ul>
-<li><p><code translate="no">metaStoreConfig.storeType</code>: Milvus-CDC의 메타스토어 유형입니다. 가능한 값은 <code translate="no">etcd</code> 또는 <code translate="no">mysql</code> 입니다.</p></li>
-<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Milvus-CDC의 etcd에 연결하기 위한 주소입니다. <code translate="no">storeType</code> 가 <code translate="no">etcd</code> 로 설정된 경우 필수입니다.</p></li>
-<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Milvus-CDC 서버의 MySQL 데이터베이스 연결 주소입니다. <code translate="no">storeType</code> 가 <code translate="no">mysql</code> 로 설정된 경우 필수.</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>: Milvus-CDC 메타스토어의 루트 경로입니다. 이 구성을 사용하면 멀티 테넌시를 활성화하여 여러 CDC 서비스가 동일한 etcd 또는 MySQL 인스턴스를 활용하면서 서로 다른 루트 경로를 통해 격리할 수 있습니다.</p></li>
+<li><p><code translate="no">metaStoreConfig.storeType</code>: Type of metastore for Milvus-CDC. Possible values are <code translate="no">etcd</code> or <code translate="no">mysql</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Address for connecting to the etcd of Milvus-CDC. Required if <code translate="no">storeType</code> is set to <code translate="no">etcd</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Connection address of the MySQL database for the Milvus-CDC server. Required if <code translate="no">storeType</code> is set to <code translate="no">mysql</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>: Root path of the Milvus-CDC metastore. This configuration enables multi-tenancy, allowing multiple CDC services to utilize the same etcd or MySQL instance while achieving isolation through different root paths.</p></li>
 </ul>
-<p>구성 예시:</p>
+<p>Example configuration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
 <span class="hljs-attr">metaStoreConfig:</span>
   <span class="hljs-comment"># the metastore type, available value: etcd, mysql</span>
@@ -87,21 +87,21 @@ title: CDC 서버 배포
   <span class="hljs-comment"># meta data prefix, if multiple cdc services use the same store service, you can set different rootPaths to achieve multi-tenancy</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">cdc</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>소스 Milvus 구성:</strong></p>
-<p>etcd 및 메시지 저장소를 포함한 소스 Milvus의 연결 세부 정보를 지정하여 Milvus-CDC 서버와 소스 Milvus 간의 연결을 설정합니다.</p>
+<li><p><strong>Source Milvus Configuration:</strong></p>
+<p>Specify the connection details of the source Milvus, including etcd and message storage, to establish a connection between the Milvus-CDC server and the source Milvus.</p>
 <ul>
-<li><p><code translate="no">sourceConfig.etcdAddress</code>: 소스 Milvus의 etcd에 연결하기 위한 주소입니다. 자세한 내용은 <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">etcd 관련 설정을</a> 참고하세요.</p></li>
-<li><p><code translate="no">sourceConfig.etcdRootPath</code>: 소스 Milvus가 etcd에 데이터를 저장하는 키의 루트 접두사. 이 값은 Milvus 인스턴스의 배포 방법에 따라 달라질 수 있습니다:</p>
+<li><p><code translate="no">sourceConfig.etcdAddress</code>: Address for connecting to the etcd of the source Milvus. For more information, refer to <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">etcd-related Configurations</a>.</p></li>
+<li><p><code translate="no">sourceConfig.etcdRootPath</code>: Root prefix of the key where the source Milvus stores data in etcd. The value may vary based on the deployment method of the Milvus instance:</p>
 <ul>
-<li><p><strong>헬름</strong> 또는 <strong>도커 컴포즈</strong>: 기본값은 <code translate="no">by-dev</code> 입니다.</p></li>
-<li><p><strong>연산자</strong>: 기본값은 <code translate="no">&lt;release_name&gt;</code> 입니다.</p></li>
+<li><p><strong>Helm</strong> or <strong>Docker Compose</strong>: Defaults to <code translate="no">by-dev</code>.</p></li>
+<li><p><strong>Operator</strong>: Defaults to <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
-<li><p><code translate="no">replicateChan</code>밀버스 리플리케이트 채널 이름, milvus.yaml 파일에서 <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> 입니다.</p></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: 소스 Milvus에 대한 펄서 구성. 소스 Milvus가 메시지 저장소로 Kafka를 사용하는 경우, 모든 Pulsar 관련 구성을 제거하세요. 자세한 내용은 <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar 관련 구성을</a> 참조하세요.</p></li>
-<li><p><code translate="no">sourceConfig.kafka.address</code>: 소스 Milvus의 Kafka 주소. 소스 Milvus가 메시지 저장소로 Kafka를 사용하는 경우 이 구성의 주석 처리를 해제합니다.</p></li>
+<li><p><code translate="no">replicateChan</code>: milvus replicate channel name, which is <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> in the milvus.yaml file</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: Pulsar configurations for the source Milvus. If the source Milvus uses Kafka for message storage, remove all Pulsar-related configurations. For more information, refer to <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar-related Configurations</a>.</p></li>
+<li><p><code translate="no">sourceConfig.kafka.address</code>: Kafka address for the source Milvus. Uncomment this configuration if the source Milvus uses Kafka for message storage.</p></li>
 </ul></li>
 </ul>
-<p>구성 예시:</p>
+<p>Example configuration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus-source config, these settings are basically the same as the corresponding configuration of milvus.yaml in milvus source.</span>
 <span class="hljs-attr">sourceConfig:</span>
   <span class="hljs-comment"># etcd config</span>
@@ -126,19 +126,19 @@ title: CDC 서버 배포
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Milvus-CDC 서버 컴파일</h3><p><code translate="no">cdc.yaml</code> 파일을 저장한 후 <code translate="no">milvus-cdc</code> 디렉토리로 이동하여 다음 명령 중 하나를 실행하여 서버를 컴파일합니다:</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compile the Milvus-CDC server</h3><p>After saving the <code translate="no">cdc.yaml</code> file, navigate to the <code translate="no">milvus-cdc</code> directory and run one of the following commands to compile the server:</p>
 <ul>
-<li><p>바이너리 파일의 경우</p>
+<li><p>For a binary file:</p>
 <pre><code translate="no" class="language-bash">make build
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Docker 이미지의 경우:</p>
+<li><p>For a Docker image:</p>
 <pre><code translate="no" class="language-bash">bash build_image.sh
 <button class="copy-code-btn"></button></code></pre>
-<p>Docker 이미지의 경우, 컴파일된 파일을 컨테이너 내의 <code translate="no">/app/server/configs/cdc.yaml</code> 에 마운트합니다.</p></li>
+<p>For a Docker image, mount the compiled file to <code translate="no">/app/server/configs/cdc.yaml</code> within the container.</p></li>
 </ul>
-<h3 id="Start-the-server" class="common-anchor-header">서버 시작</h3><ul>
-<li><p>바이너리 사용</p>
-<p><code translate="no">milvus-cdc</code> 바이너리가 포함된 디렉토리와 <code translate="no">cdc.yaml</code> 파일이 있는 <code translate="no">configs</code> 디렉토리로 이동한 다음 서버를 시작합니다:</p>
+<h3 id="Start-the-server" class="common-anchor-header">Start the server</h3><ul>
+<li><p>Using the binary</p>
+<p>Navigate to the directory containing the <code translate="no">milvus-cdc</code> binary and the <code translate="no">configs</code> directory with the <code translate="no">cdc.yaml</code> file, then start the server:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>
 .
 ├── milvus-cdc <span class="hljs-comment"># build from source code or download from release page</span>
@@ -148,7 +148,7 @@ title: CDC 서버 배포
 <span class="hljs-comment"># start milvus cdc</span>
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Docker Compose를 사용합니다:</p>
+<li><p>Using Docker Compose:</p>
 <pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

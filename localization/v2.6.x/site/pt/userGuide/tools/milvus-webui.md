@@ -1,8 +1,8 @@
 ---
 id: milvus-webui.md
 summary: >-
-  O Milvus Web UI é uma ferramenta de gestão gráfica para o Milvus. Melhora a
-  observabilidade do sistema com uma interface simples e intuitiva. É possível
+  Milvus Web UI is a graphical management tool for Milvus. It enhances system
+  observability with a simple and intuitive interface. You can
 title: Milvus WebUI
 ---
 <h1 id="Milvus-WebUI" class="common-anchor-header">Milvus WebUI<button data-href="#Milvus-WebUI" class="anchor-icon" translate="no">
@@ -20,8 +20,8 @@ title: Milvus WebUI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Web UI é uma ferramenta de gestão gráfica para Milvus. Esta ferramenta melhora a observabilidade do sistema com uma interface simples e intuitiva. Pode utilizar a Milvus Web UI para observar as estatísticas e métricas dos componentes e dependências do Milvus, verificar os detalhes da base de dados e da coleção e listar as configurações detalhadas do Milvus.</p>
-<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus Web UI is a graphical management tool for Milvus. It enhances system observability with a simple and intuitive interface. You can use Milvus Web UI to observe the statistics and metrics of the components and dependencies of Milvus, check database and collection details, and list detailed Milvus configurations.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,25 +36,25 @@ title: Milvus WebUI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus Web UI difere do Birdwatcher e do Attu por ser uma ferramenta integrada que permite a observação geral do sistema com uma interface simples e intuitiva.</p>
-<p>A tabela seguinte compara as caraterísticas do Milvus Web UI e do Birdwatcher/Attu:</p>
+    </button></h2><p>Milvus Web UI differs from Birdwatcher and Attu in that it is a built-in tool to provide overall system observability with a simple and intuitive interface.</p>
+<p>The following table compares the features of Milvus Web UI and Birdwatcher/Attu:</p>
 <table>
 <thead>
-<tr><th>Funcionalidade</th><th>Milvus Web UI</th><th>Birdwatcher</th><th>Attu</th></tr>
+<tr><th>Feature</th><th>Milvus Web UI</th><th>Birdwatcher</th><th>Attu</th></tr>
 </thead>
 <tbody>
-<tr><td>Forma operacional</td><td>GUI</td><td>CLI</td><td>GUI</td></tr>
-<tr><td>Utilizadores alvo</td><td>Mantenedores, desenvolvedores</td><td>Mantenedores</td><td>Programadores</td></tr>
-<tr><td>Instalação</td><td>Integrado</td><td>Ferramenta autónoma</td><td>Ferramenta autónoma</td></tr>
-<tr><td>Dependências</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
-<tr><td>Funcionalidades principais</td><td>Ambiente de tempo de execução, detalhes da base de dados/coleção, segmentos, canais, tarefas e pedidos de consulta lentos</td><td>Inspeção de metadados e execução da API Milvus</td><td>Gestão de bases de dados e tarefas operacionais</td></tr>
-<tr><td>Disponível desde</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
+<tr><td>Operational form</td><td>GUI</td><td>CLI</td><td>GUI</td></tr>
+<tr><td>Target users</td><td>Maintainers, developers</td><td>Maintainers</td><td>Developers</td></tr>
+<tr><td>Installation</td><td>Built-in</td><td>Standalone tool</td><td>Standalone tool</td></tr>
+<tr><td>Dependencies</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
+<tr><td>Primary Functionalities</td><td>Runtime environment, database/collection details, segments, channles, tasks, and slow query requests</td><td>Metadata inspection and Milvus API execution</td><td>Database management and operational tasks</td></tr>
+<tr><td>Available since</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>A partir da versão 2.5.0, pode aceder ao Milvus Web UI utilizando o seguinte URL numa instância Milvus em execução:</p>
+<p>As of v2.5.0, you can access Milvus Web UI using the following URL on a running Milvus instance:</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Features" class="common-anchor-header">Caraterísticas<button data-href="#Features" class="anchor-icon" translate="no">
+<h2 id="Features" class="common-anchor-header">Features<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,30 +69,32 @@ title: Milvus WebUI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus Web UI oferece os seguintes recursos:</p>
+    </button></h2><p>Milvus Web UI provides the following features:</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
-   </span> <span class="img-wrapper"> <span>Visão geral do Milvus Web UI</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
+    <span>Milvus Web UI overview</span>
+  </span>
+</p>
 <ul>
-<li><p><a href="#Home">Início</a></p>
-<p>Pode encontrar informações sobre a instância Milvus em execução, os seus componentes, os clientes ligados e as dependências.</p></li>
-<li><p><a href="#Collections">Colecções</a></p>
-<p>Pode ver a lista de bases de dados e colecções atualmente no Milvus e verificar os seus detalhes.</p></li>
-<li><p><a href="#Query">Consulta</a></p>
-<p>Pode visualizar as estatísticas recolhidas dos nós de consulta e dos coordenadores de consulta em termos de segmentos, canais, réplicas e grupos de recursos.</p></li>
-<li><p><a href="#Data">Dados</a></p>
-<p>Pode visualizar as estatísticas recolhidas dos nós de dados em termos de segmentos e canais.</p></li>
-<li><p><a href="#Tasks">Tarefas</a></p>
-<p>Pode visualizar a lista de tarefas em execução no Milvus, incluindo tarefas do agendador Querycoord, tarefas de compactação, tarefas de criação de índices, tarefas de importação e tarefas de sincronização de dados.</p></li>
-<li><p><a href="#Slow-requests">Pedidos lentos</a></p>
-<p>Pode visualizar a lista de pedidos lentos no Milvus, incluindo o tipo de pedido, a duração do pedido e os parâmetros do pedido.</p></li>
-<li><p><a href="#Configurations">Configurações</a></p>
-<p>Pode ver a lista de configurações do Milvus e os seus valores.</p></li>
-<li><p><a href="#Tools">Ferramentas</a></p>
-<p>Pode aceder às duas ferramentas integradas, pprof e Milvus data visualzation tool, a partir da interface Web.</p></li>
+<li><p><a href="#Home">Home</a></p>
+<p>You can find information about the current running Milvus instance, its components, connected clients, and dependencies.</p></li>
+<li><p><a href="#Collections">Collections</a></p>
+<p>You can view the list of databases and collections currently in Milvus and check their details.</p></li>
+<li><p><a href="#Query">Query</a></p>
+<p>You can view the collected statistics of the query nodes and query coordinators in terms of segments, channels, replicas, and resource groups.</p></li>
+<li><p><a href="#Data">Data</a></p>
+<p>You can view the collected statistics of the data nodes in terms of segments and channels.</p></li>
+<li><p><a href="#Tasks">Tasks</a></p>
+<p>You can view the list of tasks running in Milvus, including Querycoord scheduler tasks, compaction tasks, index-building tasks, import tasks, and data synchronization tasks.</p></li>
+<li><p><a href="#Slow-requests">Slow requests</a></p>
+<p>You can view the list of slow requests in Milvus, including the request type, request duration, and request parameters.</p></li>
+<li><p><a href="#Configurations">Configurations</a></p>
+<p>You can view the list of Milvus configurations and their values.</p></li>
+<li><p><a href="#Tools">Tools</a></p>
+<p>You can access the two built-in tools, pprof and Milvus data visualzation tool, from the Web UI.</p></li>
 </ul>
-<h2 id="Home" class="common-anchor-header">Página inicial<button data-href="#Home" class="anchor-icon" translate="no">
+<h2 id="Home" class="common-anchor-header">Home<button data-href="#Home" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,18 +109,20 @@ title: Milvus WebUI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Na página Home, pode encontrar as seguintes informações:</p>
+    </button></h2><p>On the Home page, you can find the following information:</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
-   </span> <span class="img-wrapper"> <span>Página inicial da interface Web do Milvus</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/webui-home.png" alt="Milvus Web UI Home" class="doc-image" id="milvus-web-ui-home" />
+    <span>Milvus Web UI Home</span>
+  </span>
+</p>
 <ul>
-<li><p><strong>Informações do sistema</strong>: Veja as informações do sistema, incluindo informações sobre o modo de implantação, a imagem usada na implantação e informações relacionadas.</p></li>
-<li><p><strong>Informações do componente</strong>: Veja o status e as métricas dos componentes no Milvus, incluindo o status e as métricas dos nós de consulta, nós de dados, nós de índice, coordenadores e proxies.</p></li>
-<li><p><strong>Clientes conectados</strong>: Visualizar os clientes ligados e as respectivas informações, incluindo o tipo e a versão do SDK, o nome de utilizador e o histórico de acesso.</p></li>
-<li><p><strong>Dependências do sistema</strong>: Visualizar o estado e as métricas das dependências do Milvus, incluindo o estado e as métricas do meta store, da fila de mensagens e do armazenamento de objectos.</p></li>
+<li><p><strong>System information</strong>: View system information, including information about the deployment mode, image used in the deployment, and related information.</p></li>
+<li><p><strong>Component Information</strong>: View the status and metrics of the components in Milvus, including the status and metrics of the query nodes, data nodes, index nodes, coordinators, and proxies.</p></li>
+<li><p><strong>Connected clients</strong>: View the connected clients and their information, including the SDK type and version, user name, and their access history.</p></li>
+<li><p><strong>System dependencies</strong>: View the status and metrics of the dependencies of Milvus, including the status and metrics of the meta store, message queue, and object storage.</p></li>
 </ul>
-<h2 id="Collections" class="common-anchor-header">Colecções<button data-href="#Collections" class="anchor-icon" translate="no">
+<h2 id="Collections" class="common-anchor-header">Collections<button data-href="#Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,21 +137,25 @@ title: Milvus WebUI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Na página Collections (Colecções), pode visualizar a lista de bases de dados e colecções atualmente existentes no Milvus e verificar os respectivos detalhes.</p>
+    </button></h2><p>On the Collections page, you can view the list of databases and collections currently in Milvus and check their details.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
-   </span> <span class="img-wrapper"> <span>Coleções do Milvus Web UI</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
+    <span>Milvus Web UI Collections</span>
+  </span>
+</p>
 <ul>
-<li><p><strong>Base de dados</strong>: Ver a lista de bases de dados atualmente no Milvus e os seus detalhes.</p></li>
-<li><p><strong>Coleção</strong>: Visualizar a lista de colecções em cada base de dados e os seus detalhes.</p>
-<p>Pode clicar numa coleção para ver os seus detalhes, incluindo o número de campos, partições, índices e outras informações detalhadas.</p>
+<li><p><strong>Database</strong>: View the list of databases currently in Milvus and their details.</p></li>
+<li><p><strong>Collection</strong>: View the list of collections in each database and their details.</p>
+<p>You can click on a collection to view its details, including the number of fields, partitions, indexes, and other information in detail.</p>
 <p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
-   </span> <span class="img-wrapper"> <span>Detalhes da coleção do Milvus Web UI</span> </span></p></li>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+    <span>Milvus Web UI Collection Details</span>
+  </span>
+</p></li>
 </ul>
-<h2 id="Query" class="common-anchor-header">Consulta<button data-href="#Query" class="anchor-icon" translate="no">
+<h2 id="Query" class="common-anchor-header">Query<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -163,16 +171,18 @@ title: Milvus WebUI
         ></path>
       </svg>
     </button></h2><p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
-   </span> <span class="img-wrapper"> <span>Página de consulta da interface do usuário do Milvus Web</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
+    <span>Milvus Web UI Query Page</span>
+  </span>
+</p>
 <ul>
-<li><p><strong>Segmentos</strong>: Visualize a lista de segmentos e seus detalhes, incluindo o ID do segmento, a coleção correspondente, o estado, o tamanho, etc.</p></li>
-<li><p><strong>Channels (Canais</strong>): Exiba a lista de canais e seus detalhes, incluindo o nome do canal, as coleções correspondentes etc.</p></li>
-<li><p><strong>Réplicas</strong>: Visualize a lista de réplicas e os respectivos detalhes, incluindo a ID da réplica, a coleção correspondente, etc.</p></li>
-<li><p><strong>Grupos de recursos</strong>: Visualizar a lista de grupos de recursos e os respectivos detalhes, incluindo o nome do grupo de recursos, o número de nós de consulta no grupo e as respectivas configurações, etc.</p></li>
+<li><p><strong>Segments</strong>: View the list of segments and their details, including the segment ID, corresponding collection, state, size, etc.</p></li>
+<li><p><strong>Channels</strong>: View the list of channels and their details, including the channel name, corresponding collections, etc.</p></li>
+<li><p><strong>Replicas</strong>: View the list of replicas and their details, including the replica ID, corresponding collection, etc.</p></li>
+<li><p><strong>Resource groups</strong>: View the list of resource groups and their details, including the resource group name, number of query nodes in the group, and its configurations, etc.</p></li>
 </ul>
-<h2 id="Data" class="common-anchor-header">Dados<button data-href="#Data" class="anchor-icon" translate="no">
+<h2 id="Data" class="common-anchor-header">Data<button data-href="#Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -188,14 +198,16 @@ title: Milvus WebUI
         ></path>
       </svg>
     </button></h2><p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
-   </span> <span class="img-wrapper"> <span>Página de dados do Milvus Web UI</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
+    <span>Milvus Web UI Data Page</span>
+  </span>
+</p>
 <ul>
-<li><p><strong>Segmentos</strong>: Visualize a lista de segmentos dos nós de dados/coordenadores e seus detalhes, incluindo o ID do segmento, a coleção correspondente, o estado, o tamanho, etc.</p></li>
-<li><p><strong>Channels (Canais</strong>): Visualize a lista de canais dos nós de dados/coordenadores e os respectivos detalhes, incluindo o nome do canal, as colecções correspondentes, etc.</p></li>
+<li><p><strong>Segments</strong>: View the list of segments from the data nodes/coordinators and their details, including the segment ID, corresponding collection, state, size, etc.</p></li>
+<li><p><strong>Channels</strong>: View the list of channels from the data nodes/coordinators and their details, including the channel name, corresponding collections, etc.</p></li>
 </ul>
-<h2 id="Tasks" class="common-anchor-header">Tarefas<button data-href="#Tasks" class="anchor-icon" translate="no">
+<h2 id="Tasks" class="common-anchor-header">Tasks<button data-href="#Tasks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -211,20 +223,22 @@ title: Milvus WebUI
         ></path>
       </svg>
     </button></h2><p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
-   </span> <span class="img-wrapper"> <span>Página de tarefas do Milvus Web UI</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/webui-tasks.png" alt="Milvus Web UI Tasks Page" class="doc-image" id="milvus-web-ui-tasks-page" />
+    <span>Milvus Web UI Tasks Page</span>
+  </span>
+</p>
 <ul>
-<li><p><strong>Tarefas</strong>: Visualizar a lista de tarefas em execução no Milvus, incluindo o tipo de tarefa, estado e acções.</p>
+<li><p><strong>Tasks</strong>: View the list of tasks running in Milvus, including the task type, state, and actions.</p>
 <ul>
-<li><p><strong>Tarefas do QueryCoord</strong>: Veja todas as tarefas do agendador do QueryCoord, incluindo verificadores de balanceador, índice/segmento/canal/líder nos últimos 15 minutos.</p></li>
-<li><p><strong>Tarefas de compactação</strong>: Veja todas as tarefas de compactação dos coordenadores de dados nos últimos 15 minutos.</p></li>
-<li><p><strong>Tarefas de criação de índices</strong>: Veja todas as tarefas de criação de índices dos coordenadores de dados nos últimos 30 minutos.</p></li>
-<li><p><strong>Tarefas de importação</strong>: Visualizar todas as tarefas de importação dos coordenadores de dados nos últimos 30 minutos.</p></li>
-<li><p><strong>Tarefas de sincronização de dados</strong>: Veja todas as tarefas de sincronização de dados dos nós de dados nos últimos 15 minutos.</p></li>
+<li><p><strong>QueryCoord Tasks</strong>: View all QueryCoord scheduler tasks, including balancer, index/segment/channel/leader checkers in the last 15 minutes.</p></li>
+<li><p><strong>Compaction Tasks</strong>: View all compaction tasks from the data coordinators in the last 15 minutes.</p></li>
+<li><p><strong>Index-Building Tasks</strong>: View all index-building tasks from the data coordinators in the last 30 minutes.</p></li>
+<li><p><strong>Import Tasks</strong>: View all import tasks from the data coordinators in the last 30 minutes.</p></li>
+<li><p><strong>Data Synchronization Tasks</strong>: View all data synchronization tasks from the data nodes in the last 15 minutes.</p></li>
 </ul></li>
 </ul>
-<h2 id="Slow-requests" class="common-anchor-header">Pedidos lentos<button data-href="#Slow-requests" class="anchor-icon" translate="no">
+<h2 id="Slow-requests" class="common-anchor-header">Slow requests<button data-href="#Slow-requests" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -240,13 +254,15 @@ title: Milvus WebUI
         ></path>
       </svg>
     </button></h2><p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
-   </span> <span class="img-wrapper"> <span>Página de pedidos lentos do Milvus Web UI</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
+    <span>Milvus Web UI Slow Requests Page</span>
+  </span>
+</p>
 <ul>
-<li><strong>Pedidos lentos</strong>: Um pedido lento é uma pesquisa ou uma consulta que tem uma latência superior ao valor de <code translate="no">proxy.slowQuerySpanInSeconds</code> especificado na configuração. A lista de solicitações lentas exibe todas as solicitações lentas nos últimos 15 minutos.</li>
+<li><strong>Slow requests</strong>: A slow request is a search or a query that has a latency longer than the value of <code translate="no">proxy.slowQuerySpanInSeconds</code> specified in the configuration. The list of slow requests displays all slow requests in the last 15 minutes.</li>
 </ul>
-<h2 id="Configurations" class="common-anchor-header">Configurações<button data-href="#Configurations" class="anchor-icon" translate="no">
+<h2 id="Configurations" class="common-anchor-header">Configurations<button data-href="#Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -262,13 +278,15 @@ title: Milvus WebUI
         ></path>
       </svg>
     </button></h2><p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
-   </span> <span class="img-wrapper"> <span>Página de configurações do Milvus Web UI</span> </span></p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
+    <span>Milvus Web UI Configurations Page</span>
+  </span>
+</p>
 <ul>
-<li><strong>Configurações</strong>: Visualiza a lista de configurações de tempo de execução do Milvus e seus valores.</li>
+<li><strong>Configurations</strong>: View the list of Milvus runtime configurations and their values.</li>
 </ul>
-<h2 id="Tools" class="common-anchor-header">Ferramentas<button data-href="#Tools" class="anchor-icon" translate="no">
+<h2 id="Tools" class="common-anchor-header">Tools<button data-href="#Tools" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,6 +302,6 @@ title: Milvus WebUI
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>pprof</strong>: Acesse a ferramenta pprof para criação de perfil e depuração do Milvus.</p></li>
-<li><p><strong>Ferramenta de visualização de dados do Milvus</strong>: Aceder à ferramenta de visualização de dados do Milvus para visualizar os dados no Milvus.</p></li>
+<li><p><strong>pprof</strong>: Access the pprof tool for profiling and debugging Milvus.</p></li>
+<li><p><strong>Milvus data visualization tool</strong>: Access the Milvus data visualization tool for visualizing the data in Milvus.</p></li>
 </ul>

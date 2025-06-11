@@ -2,10 +2,9 @@
 id: gpu-cagra.md
 title: GPU_CAGRA
 summary: >-
-  O índice GPU_CAGRA é um índice baseado em gráficos optimizado para GPUs. A
-  utilização de GPUs de grau de inferência para executar a versão GPU do Milvus
-  pode ser mais económica em comparação com a utilização de GPUs de grau de
-  treino dispendiosas.
+  The GPU_CAGRA index is a graph-based index optimized for GPUs. Using
+  inference-grade GPUs to run the Milvus GPU version can be more cost-effective
+  compared to using expensive training-grade GPUs.
 ---
 <h1 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O índice <strong>GPU_CAGRA</strong> é um índice baseado em gráficos optimizado para GPUs. A utilização de GPUs de grau de inferência para executar a versão GPU do Milvus pode ser mais económica em comparação com a utilização de GPUs de grau de treino dispendiosas.</p>
-<h2 id="Build-index" class="common-anchor-header">Criar índice<button data-href="#Build-index" class="anchor-icon" translate="no">
+    </button></h1><p>The <strong>GPU_CAGRA</strong> index is a graph-based index optimized for GPUs. Using inference-grade GPUs to run the Milvus GPU version can be more cost-effective compared to using expensive training-grade GPUs.</p>
+<h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para construir um índice <code translate="no">GPU_CAGRA</code> num campo vetorial em Milvus, utilize o método <code translate="no">add_index()</code>, especificando os parâmetros <code translate="no">index_type</code>, <code translate="no">metric_type</code>, e parâmetros adicionais para o índice.</p>
+    </button></h2><p>To build a <code translate="no">GPU_CAGRA</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -58,14 +57,14 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nesta configuração:</p>
+<p>In this configuration:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: O tipo de índice a construir. Neste exemplo, defina o valor para <code translate="no">GPU_CAGRA</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: O método utilizado para calcular a distância entre vectores. Para obter detalhes, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p></li>
-<li><p><code translate="no">params</code>: Opções de configuração adicionais para criar o índice. Para saber mais sobre os parâmetros de construção disponíveis para o índice <code translate="no">GPU_CAGRA</code>, consulte <a href="/docs/pt/gpu-cagra.md#Index-building-params">Parâmetros de construção do índice</a>.</p></li>
+<li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">GPU_CAGRA</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index. To learn more building parameters available for the <code translate="no">GPU_CAGRA</code> index, refer to <a href="/docs/gpu-cagra.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para obter detalhes, consulte <a href="/docs/pt/create-collection.md">Criar coleção</a>.</p>
-<h2 id="Search-on-index" class="common-anchor-header">Pesquisar no índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,7 +79,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;itopk_size&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-comment"># Determines the size of intermediate results kept during the search</span>
@@ -96,11 +95,11 @@ res = MilvusClient.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nesta configuração:</p>
+<p>In this configuration:</p>
 <ul>
-<li><code translate="no">params</code>: Opções de configuração adicionais para pesquisar no índice. Para saber mais sobre os parâmetros de pesquisa disponíveis para o índice <code translate="no">GPU_CAGRA</code>, consulte <a href="/docs/pt/gpu-cagra.md#Index-specific-search-params">Parâmetros de pesquisa específicos do índice</a>.</li>
+<li><code translate="no">params</code>: Additional configuration options for searching on the index. To learn more search parameters available for the <code translate="no">GPU_CAGRA</code> index, refer to <a href="/docs/gpu-cagra.md#Index-specific-search-params">Index-specific search params</a>.</li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">Parâmetros do índice<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,78 +114,80 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e efetuar pesquisas no índice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/gpu-cagra.md#Build-index">construir um índice</a>.</p>
+    </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/gpu-cagra.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
-     <th><p>Parâmetro</p></th>
-     <th><p>Descrição</p></th>
-     <th><p>Valor predefinido</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Default Value</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">intermediate_graph_degree</code></p></td>
-     <td><p>Afecta a chamada e o tempo de construção ao determinar o grau do gráfico antes da poda. Os valores recomendados são <code translate="no">32</code> ou <code translate="no">64</code>.</p></td>
+     <td><p>Affects recall and build time by determining the graph’s degree before pruning. Recommended values are <code translate="no">32</code> or <code translate="no">64</code>.</p></td>
      <td><p><code translate="no">128</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">graph_degree</code></p></td>
-     <td><p>Afeta o desempenho da pesquisa e a recuperação ao definir o grau do gráfico após a poda. Uma diferença maior entre esses dois graus resulta em um tempo de construção mais longo. Seu valor deve ser menor que o valor de <code translate="no">intermediate_graph_degree</code>.</p></td>
+     <td><p>Affects search performance and recall by setting the graph’s degree after pruning. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of <code translate="no">intermediate_graph_degree</code>.</p></td>
      <td><p><code translate="no">64</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">build_algo</code></p></td>
-     <td><p>Seleciona o algoritmo de geração de gráficos antes da poda. Valores possíveis:</p>
+     <td><p>Selects the graph generation algorithm before pruning. Possible values:</p>
 <ul>
-<li><p><code translate="no">IVF_PQ</code>: Oferece uma qualidade superior mas um tempo de construção mais lento.</p></li>
-<li><p><code translate="no">NN_DESCENT</code>: Fornece uma construção mais rápida com potencialmente menor recuperação.</p></li>
+<li><p><code translate="no">IVF_PQ</code>: Offers higher quality but slower build time.</p></li>
+<li><p><code translate="no">NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</p></li>
 </ul></td>
      <td><p><code translate="no">IVF_PQ</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
-     <td><p>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</p>
+     <td><p>Decides whether to cache the original dataset in GPU memory. Possible values:</p>
 <ul>
-<li><p><code translate="no">"true"</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação, refinando os resultados da pesquisa.</p></li>
-<li><p><code translate="no">"false"</code>: Não coloca em cache o conjunto de dados original para economizar memória da GPU.</p></li>
+<li><p><code translate="no">"true"</code>: Caches the original dataset to enhance recall by refining search results.</p></li>
+<li><p><code translate="no">"false"</code>: Does not cache the original dataset to save gpu memory.</p></li>
 </ul></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>Decide se a GPU deve ser utilizada para a construção do índice e a CPU para a pesquisa. A definição deste parâmetro para <code translate="no">"true"</code> requer a presença do parâmetro <code translate="no">ef</code> nos pedidos de pesquisa.</p></td>
+     <td><p>Decides whether to use GPU for index-building and CPU for search.
+ Setting this parameter to <code translate="no">"true"</code> requires the presence of the <code translate="no">ef</code> parameter in the search requests.</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/gpu-cagra.md#Search-on-index">pesquisar no índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/gpu-cagra.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
-     <th><p>Parâmetro</p></th>
-     <th><p>Descrição</p></th>
-     <th><p>Valor por defeito</p></th>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Default Value</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">itopk_size</code></p></td>
-     <td><p>Determina o tamanho dos resultados intermédios mantidos durante a pesquisa. Um valor maior pode melhorar a recuperação à custa do desempenho da pesquisa. Deve ser pelo menos igual ao valor final do top-k (limite) e é tipicamente uma potência de 2 (por exemplo, 16, 32, 64, 128).</p></td>
-     <td><p>Vazio</p></td>
+     <td><p>Determines the size of intermediate results kept during the search. A larger value may improve recall at the expense of search performance. It should be at least equal to the final top-k (limit) value and is typically a power of 2 (e.g., 16, 32, 64, 128).</p></td>
+     <td><p>Empty</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">search_width</code></p></td>
-     <td><p>Especifica o número de pontos de entrada no gráfico CAGRA durante a pesquisa. Aumentar este valor pode aumentar a recordação, mas pode afetar o desempenho da pesquisa (por exemplo, 1, 2, 4, 8, 16, 32).</p></td>
-     <td><p>Vazio</p></td>
+     <td><p>Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance（e.g. 1, 2, 4, 8, 16, 32).</p></td>
+     <td><p>Empty</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></p></td>
-     <td><p>Controla o processo de iteração da pesquisa. Por defeito, estão definidos para <code translate="no">0</code>, e o CAGRA determina automaticamente o número de iterações com base em <code translate="no">itopk_size</code> e <code translate="no">search_width</code>. O ajuste manual desses valores pode ajudar a equilibrar o desempenho e a precisão.</p></td>
+     <td><p>Controls the search iteration process. By default, they are set to <code translate="no">0</code>, and CAGRA automatically determines the number of iterations based on <code translate="no">itopk_size</code> and <code translate="no">search_width</code>. Adjusting these values manually can help balance performance and accuracy.</p></td>
      <td><p><code translate="no">0</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">team_size</code></p></td>
-     <td><p>Especifica o número de threads CUDA usadas para calcular a distância métrica na GPU. Os valores comuns são uma potência de 2 até 32 (por exemplo, 2, 4, 8, 16, 32). Tem um impacto menor no desempenho da pesquisa. O valor predefinido é <code translate="no">0</code>, em que o Milvus seleciona automaticamente o <code translate="no">team_size</code> com base na dimensão do vetor.</p></td>
+     <td><p>Specifies the number of CUDA threads used for calculating metric distance on the GPU. Common values are a power of 2 up to 32 (e.g. 2, 4, 8, 16, 32). It has a minor impact on search performance. The default value is <code translate="no">0</code>, where Milvus automatically selects the <code translate="no">team_size</code> based on the vector dimension.</p></td>
      <td><p><code translate="no">0</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Especifica o compromisso tempo de consulta/precisão. Um valor mais elevado de <code translate="no">ef</code> conduz a uma pesquisa mais precisa mas mais lenta. Este parâmetro é obrigatório se definir <code translate="no">adapt_for_cpu</code> para <code translate="no">true</code> quando construir o índice.</p></td>
+     <td><p>Specifies the query time/accuracy trade-off. A higher <code translate="no">ef</code> value leads to more accurate but slower search.
+ This parameter is mandatory if you set <code translate="no">adapt_for_cpu</code> to <code translate="no">true</code> when you build the index.</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>
