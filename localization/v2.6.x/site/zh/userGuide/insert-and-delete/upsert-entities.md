@@ -1,14 +1,11 @@
 ---
 id: upsert-entities.md
-title: Upsert Entities
+title: 更新实体
 summary: >-
-  The Upsert operation combines the actions of updating and inserting data.
-  Milvus determines whether to perform an update or an insert operation by
-  checking if the primary key exists. This section will introduce how to Upsert
-  an Entity and the specific behaviors of the Upsert operation in different
-  scenarios.
+  Upsert 操作结合了更新和插入数据的操作。Milvus 通过检查主键是否存在来决定执行更新还是插入操作。本节将介绍如何 Upsert
+  实体，以及在不同情况下 Upsert 操作的具体行为。
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">Upsert Entities<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">更新实体<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,11 +20,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Upsert operation combines the actions of updating and inserting data. Milvus determines whether to perform an update or an insert operation by checking if the primary key exists. This section will introduce how to Upsert an Entity and the specific behaviors of the Upsert operation in different scenarios.</p>
+    </button></h1><p>Upsert 操作结合了更新和插入数据的操作。Milvus 通过检查主键是否存在来决定执行更新还是插入操作。本节将介绍如何 Upsert 实体，以及在不同情况下 Upsert 操作的具体行为。</p>
 <div class="alert note">
-<p>If you dynamically add new fields after the collection has been created, and you do not specify values for these fields when upserting entities, Milvus automatically populates them with either their defined default values or NULL if defaults are not set. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+<p>如果在创建 Collections 后动态添加新字段，并且在上载实体时没有为这些字段指定值，Milvus 会自动用其定义的默认值填充这些字段，如果没有设置默认值，则用 NULL 填充。有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概览<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,22 +39,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to update an Entity in a Collection or are not sure whether to update or insert, you can try using the Upsert operation. When using this operation, it is essential to ensure that the Entity included in the Upsert request contains the primary key; otherwise, an error will occur. Upon receiving an Upsert request, Milvus will execute the following process:</p>
+    </button></h2><p>当你需要更新一个 Collections 中的实体或不确定是更新还是插入时，你可以尝试使用 Upsert 操作。使用该操作时，必须确保 Upsert 请求中包含的实体包含主键，否则会出错。收到 Upsert 请求后，Milvus 将执行以下流程：</p>
 <ol>
-<li><p>Check whether the primary field of the Collection has AutoId enabled.</p>
+<li><p>检查 Collections 的主字段是否启用了 AutoId。</p>
 <ol>
-<li><p>If it is, Milvus will replace the primary key in the Entity with an automatically generated primary key and insert the data.</p></li>
-<li><p>If not, Milvus will use the primary key carried by the Entity to insert the data.</p></li>
+<li><p>如果是，Milvus 将用自动生成的主键替换实体中的主键，并插入数据。</p></li>
+<li><p>如果没有，Milvus 将使用实体携带的主键插入数据。</p></li>
 </ol></li>
-<li><p>Perform a delete operation based on the primary key value of the Entity included in the Upsert request.</p></li>
+<li><p>根据 Upsert 请求中包含的实体主键值执行删除操作。</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/upsert-entities-workflow.png" alt="Upsert Entities Workflow" class="doc-image" id="upsert-entities-workflow" />
-    <span>Upsert Entities Workflow</span>
-  </span>
-</p>
-<h2 id="Upsert-Entity-in-a-Collection" class="common-anchor-header">Upsert Entity in a Collection<button data-href="#Upsert-Entity-in-a-Collection" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-entities-workflow.png" alt="Upsert Entities Workflow" class="doc-image" id="upsert-entities-workflow" />
+   </span> <span class="img-wrapper"> <span>篡改实体工作流程</span> </span></p>
+<h2 id="Upsert-Entity-in-a-Collection" class="common-anchor-header">在 Collections 中上插入实体<button data-href="#Upsert-Entity-in-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,14 +67,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, you will upsert Entities into a Collection created in the quick-setup manner. A Collection created in this manner has only two fields, named <strong>id</strong> and <strong>vector</strong>. Additionally, this Collection has the dynamic field enabled, so the Entities in the example code include a field called <strong>color</strong> that is not defined in the Schema.</p>
+    </button></h2><p>本节将把实体上载到以快速设置方式创建的 Collections 中。以这种方式创建的 Collection 只有两个字段，即<strong>id</strong>和<strong>向量</strong>。此外，该 Collections 启用了动态字段，因此示例代码中的实体包含一个名为<strong>color</strong>的字段，该字段在 Schema 中未定义。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -269,7 +259,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-Entities-in-a-Partition" class="common-anchor-header">Upsert Entities in a Partition<button data-href="#Upsert-Entities-in-a-Partition" class="anchor-icon" translate="no">
+<h2 id="Upsert-Entities-in-a-Partition" class="common-anchor-header">在分区中倒插实体<button data-href="#Upsert-Entities-in-a-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,14 +274,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also insert entities into a specified partition. The following code snippets assume that you have a partition named <strong>PartitionA</strong> in your collection.</p>
+    </button></h2><p>您还可以将实体插入指定的分区。以下代码片段假定您的 Collections 中有一个名为<strong>PartitionA</strong>的分区。</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.06998888224297328</span>, <span class="hljs-number">0.8582816610326578</span>, -<span class="hljs-number">0.9657938677934292</span>, <span class="hljs-number">0.6527905683627726</span>, -<span class="hljs-number">0.8668460657158576</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;black_3651&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.6060703043917468</span>, -<span class="hljs-number">0.3765080534566074</span>, -<span class="hljs-number">0.7710758854987239</span>, <span class="hljs-number">0.36993888322346136</span>, <span class="hljs-number">0.5507513364206531</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;grey_2049&quot;</span>},

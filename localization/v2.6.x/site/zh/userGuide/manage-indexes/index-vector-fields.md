@@ -1,12 +1,10 @@
 ---
 id: index-vector-fields.md
 order: 1
-summary: >-
-  This guide walks you through the basic operations on creating and managing
-  indexes on vector fields in a collection.
-title: Index Vector Fields
+summary: 本指南将指导您完成创建和管理 Collections 中向量字段索引的基本操作。
+title: 索引向量字段
 ---
-<h1 id="Index-Vector-Fields" class="common-anchor-header">Index Vector Fields<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Vector-Fields" class="common-anchor-header">索引向量字段<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +19,8 @@ title: Index Vector Fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through the basic operations on creating and managing indexes on vector fields in a collection.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>本指南将向您介绍在 Collections 中创建和管理向量字段索引的基本操作。</p>
+<h2 id="Overview" class="common-anchor-header">索引概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,25 +35,22 @@ title: Index Vector Fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Leveraging the metadata stored in an index file, Milvus organizes your data in a specialized structure, facilitating rapid retrieval of requested information during searches or queries.</p>
-<p>Milvus provides several index types and metrics to sort field values for efficient similarity searches. The following table lists the supported index types and metrics for different vector field types. Currently, Milvus supports various types of vector data, including floating point embeddings (often known as floating point vectors or dense vectors), binary embeddings (also known as binary vectors), and sparse embeddings (also known as sparse vectors). For details, refer to <a href="/docs/index.md">In-memory Index</a> and <a href="/docs/metric.md">Similarity Metrics</a>.</p>
+    </button></h2><p>利用存储在索引文件中的元数据，Milvus 以专门的结构组织数据，便于在搜索或查询过程中快速检索所需的信息。</p>
+<p>Milvus 提供多种索引类型和指标，可对字段值进行排序，以实现高效的相似性搜索。下表列出了不同向量字段类型所支持的索引类型和度量。目前，Milvus 支持各种类型的向量数据，包括浮点嵌入（通常称为浮点向量或密集向量）、二进制嵌入（也称为二进制向量）和稀疏嵌入（也称为稀疏向量）。详情请参阅 "<a href="/docs/zh/index.md">内存索引</a>和<a href="/docs/zh/metric.md">相似度指标</a>"。</p>
 <div class="filter">
-  <a href="#floating">Floating point embeddings</a>
-  <a href="#binary">Binary embeddings</a>
-  <a href="#sparse">Sparse embeddings</a>
-</div>
+ <a href="#floating">浮点嵌入</a> <a href="#binary">二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
-    <th class="tg-0pky">Index Types</th>
+    <th class="tg-0pky" style="width: 204px;">度量类型</th>
+    <th class="tg-0pky">索引类型</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>Euclidean distance (L2)</li><li>Inner product (IP)</li><li>Cosine similarity (COSINE)</li></td>
-    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
+    <td class="tg-0pky"><ul><li>欧氏距离 (L2)</li><li>内积 (IP)</li><li>余弦相似度 (COSINE)</li></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>平面</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
   </tr>
 </tbody>
 </table>
@@ -64,13 +59,13 @@ title: Index Vector Fields
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
-    <th class="tg-0pky">Index Types</th>
+    <th class="tg-0pky" style="width: 204px;">度量类型</th>
+    <th class="tg-0pky">索引类型</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>Jaccard (JACCARD)</li><li>Hamming (HAMMING)</li></ul></td>
+    <td class="tg-0pky"><ul><li>Jaccard (JACCARD)</li><li>哈明 (HAMMING)</li></ul></td>
     <td class="tg-0pky"><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
   </tr>
 </tbody>
@@ -80,29 +75,29 @@ title: Index Vector Fields
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
-    <th class="tg-0pky">Index Types</th>
+    <th class="tg-0pky" style="width: 204px;">度量类型</th>
+    <th class="tg-0pky">索引类型</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+    <td class="tg-0pky">稀疏反转索引</td>
   </tr>
 </tbody>
 <tbody>
   <tr>
     <td class="tg-0pky">BM25</td>
-    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+    <td class="tg-0pky">稀疏_反转索引</td>
   </tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>From Milvus 2.5.4 onward, <code translate="no">SPARSE_WAND</code> is being deprecated. Instead, it is recommended to use <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> for equivalency while maintaining compatibility. For more information, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+<p>从 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已被弃用。建议在保持兼容性的前提下，使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 来实现等价。更多信息，请参阅<a href="/docs/zh/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</p>
 </div>
 </div>
-<p>It is recommended to create indexes for both the vector field and scalar fields that are frequently accessed.</p>
-<h2 id="Preparations" class="common-anchor-header">Preparations<button data-href="#Preparations" class="anchor-icon" translate="no">
+<p>建议为经常访问的向量场和标量场创建索引。</p>
+<h2 id="Preparations" class="common-anchor-header">准备工作<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,26 +112,23 @@ title: Index Vector Fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>As explained in <a href="/docs/manage-collections.md">Manage Collections</a>, Milvus automatically generates an index and loads it into memory when creating a collection if any of the following conditions are specified in the collection creation request:</p>
+    </button></h2><p>正如<a href="/docs/zh/manage-collections.md">管理 Collections</a> 中所解释的，如果在创建 Collections 请求中指定了以下任一条件，Milvus 会在创建 Collections 时自动生成索引并将其加载到内存中：</p>
 <ul>
-<li><p>The dimensionality of the vector field and the metric type, or</p></li>
-<li><p>The schema and the index parameters.</p></li>
+<li><p>向量场的维度和度量类型，或</p></li>
+<li><p>Schema 和索引参数。</p></li>
 </ul>
-<p>The code snippet below repurposes the existing code to establish a connection to a Milvus instance and create a collection without specifying its index parameters. In this case, the collection lacks an index and remains unloaded.</p>
+<p>下面的代码片段对现有代码进行了重新利用，以建立与 Milvus 实例的连接，并在不指定其索引参数的情况下创建 Collections。在这种情况下，Collection 缺乏索引并保持未加载状态。</p>
 <div class="language-python">
-<p>To prepare for indexing, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> to connect to the Milvus server and set up a collection by using <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
+<p>要准备索引，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并通过使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>和 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>To prepare for indexing, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> to connect to the Milvus server and set up a collection by using <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>要准备索引，使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>连接到 Milvus 服务器，并通过使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>和 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>To prepare for indexing, use <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> to connect to the Milvus server and set up a collection by using <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>要准备索引，使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并通过使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -223,7 +215,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// Success</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-a-Collection" class="common-anchor-header">Index a Collection<button data-href="#Index-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Index-a-Collection" class="common-anchor-header">索引一个 Collection<button data-href="#Index-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -239,19 +231,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To create an index for a collection or index a collection, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> to prepare index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a> to create the index.</p>
+<p>要为一个 Collection 创建索引或为一个 Collection 建立索引，可使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>准备索引参数，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a>来创建索引。</p>
 </div>
 <div class="language-java">
-<p>To create an index for a collection or index a collection, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a> to prepare index parameters and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a> to create the index.</p>
+<p>要为集合创建索引或为集合建立索引，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>准备索引参数和 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a>来创建索引。</p>
 </div>
 <div class="language-javascript">
-<p>To create an index for a collection or index a collection, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>要为集合创建索引或为集合创建索引，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4.1. Set up the index parameters</span>
 index_params = MilvusClient.prepare_index_params()
 
@@ -317,114 +306,114 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>参数</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target file to apply this object applies.</td>
+      <td>应用此对象的目标文件名称。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>用于在特定字段中排列数据的算法名称。有关适用算法，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">index_name</code></td>
-      <td>The name of the index file generated after this object has been applied.</td>
+      <td>应用此对象后生成的索引文件名称。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>指定索引类型的微调参数。有关可能的键和值范围的详细信息，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of an existing collection.</td>
+      <td>现有 Collections 的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+      <td>包含<strong>IndexParam</strong>对象列表的<strong>IndexParams</strong>对象。</td>
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>Controls how the index is built in relation to the client’s request. Valid values:<br><ul><li><code translate="no">True</code> (default): The client waits until the index is fully built before it returns. This means you will not get a response until the process is complete.</li><li><code translate="no">False</code>: The client returns immediately after the request is received and the index is being built in the background. To find out if index creation has been completed, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a> method.</li></ul></td>
+      <td>控制与客户端请求相关的索引构建方式。有效值：<br><ul><li><code translate="no">True</code> (默认）：客户端等待索引完全建立后才返回。这意味着在该过程完成之前不会收到响应。</li><li><code translate="no">False</code>:客户端收到请求后立即返回，索引正在后台建立。要了解索引创建是否已完成，请使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>方法。</li></ul></td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field to apply this IndexParam object applies.</td>
+      <td>应用此 IndexParam 对象的目标字段的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>The name of the index file generated after this object has been applied.</td>
+      <td>应用此对象后生成的索引文件的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>用于在特定字段中排列数据的算法名称。有关适用算法，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The distance metric to use for the index. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
+      <td>索引使用的距离度量。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。</td>
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>Extra index parameters. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>额外的索引参数。有关详细信息，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of an existing collection.</td>
+      <td>现有 Collections 的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field in which to create an index.</td>
+      <td>要创建索引的字段名称。</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The type of the index to create.</td>
+      <td>要创建索引的类型。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The metric type used to measure vector distance.</td>
+      <td>用于测量向量距离的度量类型。</td>
     </tr>
     <tr>
       <td><code translate="no">index_name</code></td>
-      <td>The name of the index to create.</td>
+      <td>要创建的索引名称。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>Other index-specific parameters.</td>
+      <td>其他特定于索引的参数。</td>
     </tr>
   </tbody>
 </table>
 <div class="admonition note">
-<p><strong>notes</strong></p>
-<p>Currently, you can create only one index file for each field in a collection.</p>
+<p><strong>备注</strong></p>
+<p>目前，只能为 Collections 中的每个字段创建一个索引文件。</p>
 </div>
-<h2 id="Check-Index-Details" class="common-anchor-header">Check Index Details<button data-href="#Check-Index-Details" class="anchor-icon" translate="no">
+<h2 id="Check-Index-Details" class="common-anchor-header">检查索引详细信息<button data-href="#Check-Index-Details" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -439,21 +428,18 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you have created an index, you can check its details.</p>
+    </button></h2><p>创建索引后，可以检查其详细信息。</p>
 <div class="language-python">
-<p>To check the index details, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> to list the index names and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> to get the index details.</p>
+<p>要检查索引详细信息，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a>列出索引名称，并用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a>获取索引详细信息。</p>
 </div>
 <div class="language-java">
-<p>To check the index details, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> to get the index details.</p>
+<p>要检查索引详情，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a>获取索引详情。</p>
 </div>
 <div class="language-javascript">
-<p>To check the index details, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> to get the index details.</p>
+<p>要检查索引详情，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a>获取索引详情。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Describe index</span>
 res = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>
@@ -553,8 +539,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You can check the index file created on a specific field, and collect the statistics on the number of rows indexed using this index file.</p>
-<h2 id="Drop-an-Index" class="common-anchor-header">Drop an Index<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
+<p>您可以检查在特定字段上创建的索引文件，并收集使用该索引文件索引的行数统计。</p>
+<h2 id="Drop-an-Index" class="common-anchor-header">删除索引<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -569,24 +555,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can simply drop an index if it is no longer needed.</p>
+    </button></h2><p>如果不再需要索引，可以直接将其删除。</p>
 <div class="alert note">
-<p>Before dropping an index, make sure it has been released first.</p>
+<p>在丢弃索引之前，首先要确保它已被释放。</p>
 </div>
 <div class="language-python">
-<p>To drop an index, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>.</p>
+<p>要删除索引，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>To drop an index, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>要删除索引，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>To drop an index, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>要删除索引，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. Drop index</span>
 client.drop_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
