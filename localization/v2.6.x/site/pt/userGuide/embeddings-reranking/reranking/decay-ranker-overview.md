@@ -68,7 +68,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>A classificação decrescente melhora a pesquisa vetorial tradicional ao incorporar factores numéricos como o tempo ou a distância geográfica no processo de classificação. O processo completo segue as seguintes etapas:</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Etapa 1: Calcular as pontuações de semelhança normalizadas</h3><p>Primeiro, o Milvus calcula e normaliza as pontuações de similaridade dos vectores para garantir uma comparação consistente:</p>
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Fase 1: Calcular as pontuações de semelhança normalizadas</h3><p>Primeiro, o Milvus calcula e normaliza as pontuações de similaridade dos vectores para garantir uma comparação consistente:</p>
 <ul>
 <li><p>Para as métricas de distância <strong>L2</strong> e <strong>JACCARD</strong> (em que valores mais baixos indicam maior semelhança):</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
@@ -85,7 +85,7 @@ beta: Milvus 2.6.x
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Etapa 3: Calcular as pontuações finais</h3><p>Finalmente, o Milvus combina a pontuação de similaridade normalizada e a pontuação de decaimento para produzir a pontuação de classificação final:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>Nos casos de pesquisa híbrida (combinando múltiplos campos vectoriais), Milvus utiliza a pontuação máxima de similaridade normalizada entre os pedidos de pesquisa:</p>
+<p>Nos casos de pesquisa híbrida (combinando vários campos vectoriais), Milvus utiliza a pontuação máxima de similaridade normalizada entre os pedidos de pesquisa:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Por exemplo, se um artigo de investigação tiver uma pontuação de 0,82 na similaridade vetorial e 0,91 na recuperação de texto com base no BM25 numa pesquisa híbrida, o Milvus utiliza 0,91 como pontuação de similaridade de base antes de aplicar o fator de decaimento.</p>
@@ -142,7 +142,7 @@ beta: Milvus 2.6.x
 </table>
 <p>Sem o decay reranking, o Documento B teria a classificação mais elevada com base na semelhança vetorial pura (0,92). No entanto, com a classificação decrescente aplicada:</p>
 <ul>
-<li><p>O artigo C salta para a posição #1 apesar da similaridade média porque é muito recente (publicado ontem)</p></li>
+<li><p>O artigo C salta para a posição #1, apesar da similaridade média, porque é muito recente (publicado ontem)</p></li>
 <li><p>O artigo B desce para a posição #3, apesar da excelente semelhança, porque é relativamente antigo</p></li>
 <li><p>O artigo D utiliza a distância L2 (em que quanto menor for, melhor), pelo que a sua pontuação é normalizada de 1,2 para 0,76 antes de aplicar a desclassificação</p></li>
 </ul>
@@ -183,7 +183,7 @@ beta: Milvus 2.6.x
      <td><p>Exponencial (<code translate="no">exp</code>)</p></td>
      <td><p>Diminui rapidamente no início, mas mantém uma cauda longa</p></td>
      <td><ul>
-<li><p>Feeds de notícias, onde a atualidade é fundamental</p></li>
+<li><p>Feeds de notícias em que a atualidade é fundamental</p></li>
 <li><p>Redes sociais onde o conteúdo fresco deve dominar</p></li>
 <li><p>Quando a proximidade é fortemente preferida, mas os itens excecionalmente distantes devem permanecer visíveis</p></li>
 </ul></td>
@@ -259,7 +259,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Campo numérico para cálculo da pontuação de decaimento. Determina que atributo de dados será utilizado para calcular a deterioração (por exemplo, carimbos de data/hora para deterioração baseada no tempo, coordenadas para deterioração baseada na localização). 
+     <td><p>Campo numérico para o cálculo da pontuação de decaimento. Determina que atributo de dados será utilizado para calcular a deterioração (por exemplo, carimbos de data/hora para deterioração baseada no tempo, coordenadas para deterioração baseada na localização). 
  Tem de ser um campo na sua coleção que contenha valores numéricos relevantes. Suporta INT8/16/32/64, FLOAT, DOUBLE.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>

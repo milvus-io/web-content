@@ -2,7 +2,7 @@
 id: inverted.md
 title: INVERTIDO
 summary: >-
-  O índice INVERTED no Milvus foi concebido para acelerar as consultas de filtro
+  O índice INVERTED em Milvus foi concebido para acelerar as consultas de filtro
   em campos escalares e campos JSON estruturados. Ao mapear termos para os
   documentos ou registos que os contêm, os índices invertidos melhoram
   consideravelmente o desempenho das consultas em comparação com as pesquisas de
@@ -171,7 +171,7 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Especifica qual o caminho JSON a indexar. Você pode direcionar chaves aninhadas, posições de matriz ou ambos (por exemplo, <code translate="no">metadata["product_info"]["category"]</code> ou <code translate="no">metadata["tags"][0]</code>). Se o caminho estiver ausente ou o elemento da matriz não existir para uma linha específica, essa linha será simplesmente ignorada durante a indexação e nenhum erro será lançado.</p></td>
+     <td><p>Especifica o caminho JSON a indexar. Você pode direcionar chaves aninhadas, posições de matriz ou ambos (por exemplo, <code translate="no">metadata["product_info"]["category"]</code> ou <code translate="no">metadata["tags"][0]</code>). Se o caminho estiver ausente ou o elemento da matriz não existir para uma linha específica, essa linha será simplesmente ignorada durante a indexação e nenhum erro será lançado.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
@@ -218,6 +218,6 @@ index_params.add_index(
 </ul></li>
 <li><p><strong>Integridade dos dados</strong>:</p>
 <ul>
-<li>O Milvus não analisa nem transforma chaves JSON para além do casting especificado. Se os dados de origem forem inconsistentes (por exemplo, algumas linhas armazenam uma cadeia de caracteres para a chave <code translate="no">&quot;k&quot;</code> enquanto outras armazenam um número), algumas linhas não serão indexadas.</li>
+<li>O Milvus não analisa ou transforma chaves JSON para além do casting especificado. Se os dados de origem forem inconsistentes (por exemplo, algumas linhas armazenam uma cadeia de caracteres para a chave <code translate="no">&quot;k&quot;</code> enquanto outras armazenam um número), algumas linhas não serão indexadas.</li>
 </ul></li>
 </ul>

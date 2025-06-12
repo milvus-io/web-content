@@ -124,7 +124,7 @@ beta: Milvus 2.6.x
 <p>Isto associa uma chave específica a cada pedido que o Milvus envia para o ponto final de incorporação do OpenAI.</p></li>
 </ol>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">Opção 2: Variável de ambiente</h3><p>Utilize este método quando executar o Milvus com o Docker Compose e preferir manter os segredos fora dos ficheiros e imagens.</p>
-<p>O Milvus recorre à variável de ambiente apenas se não for encontrada nenhuma chave para o fornecedor em <code translate="no">milvus.yaml</code>.</p>
+<p>O Milvus recorre à variável de ambiente apenas se nenhuma chave para o provedor for encontrada em <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
      <th><p>Variável</p></th>
@@ -169,7 +169,7 @@ beta: Milvus 2.6.x
 <li><p>Um campo escalar que armazena os dados brutos a serem incorporados.</p></li>
 <li><p>Um campo vetorial reservado para armazenar as incorporações vectoriais que a função irá gerar para o campo escalar.</p></li>
 </ul>
-<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar as incorporações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
+<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense&quot;</code> para armazenar incrustações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

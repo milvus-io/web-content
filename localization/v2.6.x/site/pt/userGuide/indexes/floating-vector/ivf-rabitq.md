@@ -24,8 +24,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O índice <strong>IVF_RABITQ</strong> é um algoritmo de indexação <strong>baseado na quantização binária</strong> que quantiza vectores FP32 em representações binárias. Este índice oferece uma eficiência de armazenamento excecional com um rácio de compressão de 1 para 32, mantendo taxas de recuperação relativamente boas. Suporta um refinamento opcional para alcançar uma maior recuperação à custa de armazenamento adicional, tornando-o um substituto versátil para <a href="/docs/pt/ivf-sq8.md">IVF_SQ8</a> e <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a> em cenários com limitações de memória.</p>
-<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>O índice <strong>IVF_RABITQ</strong> é um algoritmo de indexação <strong>baseado na quantização binária</strong> que quantiza vectores FP32 em representações binárias. Este índice oferece uma eficiência de armazenamento excecional com um rácio de compressão de 1 para 32, mantendo taxas de recuperação relativamente boas. Suporta um refinamento opcional para obter uma maior recuperação à custa de armazenamento adicional, tornando-o um substituto versátil para <a href="/docs/pt/ivf-sq8.md">IVF_SQ8</a> e <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a> em cenários com limitações de memória.</p>
+<h2 id="Overview" class="common-anchor-header">Síntese<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -221,7 +221,7 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>O processo de refinamento usa quantização de maior qualidade para escolher o número necessário de vizinhos mais próximos de um conjunto <code translate="no">refine_k</code> vezes maior de candidatos escolhidos usando IVF_RABITQ.</p></td>
-     <td><p><strong>Tipo</strong>: Float<br><strong>Intervalo</strong>: [1, <em>float_max</em>)<br><strong>Valor predefinido</strong>: <code translate="no">1</code></p></td>
-     <td><p>Valores mais altos em <code translate="no">refine_k</code> diminuem o QPS, mas aumentam a taxa de recuperação. Comece com <code translate="no">1</code> e teste os valores <code translate="no">2</code>, <code translate="no">3</code>, <code translate="no">4</code> e <code translate="no">5</code> para encontrar a melhor relação entre o QPS e a recuperação para o seu conjunto de dados.</p></td>
+     <td><p><strong>Tipo</strong>: Float<br><strong>Range</strong>: [1, <em>float_max</em>)<br><strong>Valor predefinido</strong>: <code translate="no">1</code></p></td>
+     <td><p>Valores mais altos em <code translate="no">refine_k</code> diminuem o QPS, mas aumentam a taxa de recuperação. Comece com <code translate="no">1</code> e teste os valores <code translate="no">2</code>, <code translate="no">3</code>, <code translate="no">4</code> e <code translate="no">5</code> para encontrar a melhor relação entre QPS e recuperação para o seu conjunto de dados.</p></td>
    </tr>
 </table>

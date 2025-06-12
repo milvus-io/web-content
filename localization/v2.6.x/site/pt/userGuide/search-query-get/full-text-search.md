@@ -1,16 +1,18 @@
 ---
 id: full-text-search.md
-title: Full Text Search
+title: Pesquisa de texto integral
 summary: >-
-  Full text search is a feature that retrieves documents containing specific
-  terms or phrases in text datasets, then ranking the results based on
-  relevance. This feature overcomes semantic search limitations, which might
-  overlook precise terms, ensuring you receive the most accurate and
-  contextually relevant results. Additionally, it simplifies vector searches by
-  accepting raw text input, automatically converting your text data into sparse
-  embeddings without the need to manually generate vector embeddings.
+  A pesquisa de texto integral é uma funcionalidade que recupera documentos que
+  contêm termos ou frases específicos em conjuntos de dados de texto,
+  classificando depois os resultados com base na relevância. Esta funcionalidade
+  ultrapassa as limitações da pesquisa semântica, que pode ignorar termos
+  precisos, garantindo que recebe os resultados mais exactos e contextualmente
+  relevantes. Além disso, simplifica as pesquisas vectoriais ao aceitar a
+  entrada de texto em bruto, convertendo automaticamente os seus dados de texto
+  em embeddings esparsos sem a necessidade de gerar manualmente embeddings
+  vectoriais.
 ---
-<h1 id="Full-Text-Search" class="common-anchor-header">Full Text Search<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search" class="common-anchor-header">Pesquisa de texto integral<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,12 +27,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.</p>
-<p>Using the BM25 algorithm for relevance scoring, this feature is particularly valuable in retrieval-augmented generation (RAG) scenarios, where it prioritizes documents that closely match specific search terms.</p>
+    </button></h1><p>A pesquisa de texto integral é uma funcionalidade que recupera documentos que contêm termos ou frases específicos em conjuntos de dados de texto, classificando depois os resultados com base na relevância. Esta funcionalidade ultrapassa as limitações da pesquisa semântica, que pode ignorar termos precisos, garantindo que recebe os resultados mais exactos e contextualmente relevantes. Além disso, simplifica as pesquisas vectoriais ao aceitar a entrada de texto em bruto, convertendo automaticamente os seus dados de texto em embeddings esparsos sem a necessidade de gerar manualmente embeddings vectoriais.</p>
+<p>Utilizando o algoritmo BM25 para pontuação de relevância, esta funcionalidade é particularmente valiosa em cenários de geração aumentada de recuperação (RAG), onde dá prioridade a documentos que correspondem a termos de pesquisa específicos.</p>
 <div class="alert note">
-<p>By integrating full text search with semantic-based dense vector search, you can enhance the accuracy and relevance of search results. For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p>
+<p>Ao integrar a pesquisa de texto integral com a pesquisa de vectores densos baseada em semântica, pode melhorar a precisão e a relevância dos resultados de pesquisa. Para obter mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,27 +47,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Full text search simplifies the process of text-based searching by eliminating the need for manual embedding. This feature operates through the following workflow:</p>
+    </button></h2><p>A pesquisa de texto integral simplifica o processo de pesquisa baseado em texto, eliminando a necessidade de incorporação manual. Esta funcionalidade funciona através do seguinte fluxo de trabalho:</p>
 <ol>
-<li><p><strong>Text input</strong>: You insert raw text documents or provide query text without any need for manual embedding.</p></li>
-<li><p><strong>Text analysis</strong>: Milvus uses an <a href="/docs/analyzer-overview.md">analyzer</a> to tokenize input text into individual, searchable terms.</p></li>
-<li><p><strong>Function processing</strong>: The built-in function receives tokenized terms and converts them into sparse vector representations.</p></li>
-<li><p><strong>Collection store</strong>: Milvus stores these sparse embeddings in a collection for efficient retrieval.</p></li>
-<li><p><strong>BM25 scoring</strong>: During a search, Milvus applies the BM25 algorithm to calculate scores for the stored documents and ranks matched results based on relevance to the query text.</p></li>
+<li><p><strong>Entrada de texto</strong>: Insere documentos de texto em bruto ou fornece texto de consulta sem qualquer necessidade de incorporação manual.</p></li>
+<li><p><strong>Análise de texto</strong>: O Milvus utiliza um <a href="/docs/pt/analyzer-overview.md">analisador</a> para transformar o texto de entrada em termos individuais e pesquisáveis.</p></li>
+<li><p><strong>Processamento de funções</strong>: A função incorporada recebe os termos tokenizados e converte-os em representações vectoriais esparsas.</p></li>
+<li><p><strong>Armazenamento de colecções</strong>: O Milvus armazena estas representações esparsas numa coleção para uma recuperação eficiente.</p></li>
+<li><p><strong>Pontuação BM25</strong>: Durante uma pesquisa, o Milvus aplica o algoritmo BM25 para calcular as pontuações dos documentos armazenados e classifica os resultados correspondentes com base na relevância para o texto da consulta.</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/full-text-search.png" alt="Full Text Search" class="doc-image" id="full-text-search" />
-    <span>Full Text Search</span>
-  </span>
-</p>
-<p>To use full text search, follow these main steps:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/full-text-search.png" alt="Full Text Search" class="doc-image" id="full-text-search" />
+   </span> <span class="img-wrapper"> <span>Pesquisa de texto integral</span> </span></p>
+<p>Para utilizar a pesquisa de texto integral, siga estes passos principais:</p>
 <ol>
-<li><p><a href="/docs/full-text-search.md#Create-a-collection-for-full-text-search">Create a collection</a>: Set up a collection with necessary fields and define a function to convert raw text into sparse embeddings.</p></li>
-<li><p><a href="/docs/full-text-search.md#Insert-text-data">Insert data</a>: Ingest your raw text documents to the collection.</p></li>
-<li><p><a href="/docs/full-text-search.md#Perform-full-text-search">Perform searches</a>: Use query texts to search through your collection and retrieve relevant results.</p></li>
+<li><p><a href="/docs/pt/full-text-search.md#Create-a-collection-for-full-text-search">Criar uma coleção</a>: Configure uma coleção com os campos necessários e defina uma função para converter o texto em bruto em embeddings esparsos.</p></li>
+<li><p><a href="/docs/pt/full-text-search.md#Insert-text-data">Inserir dados</a>: Ingerir os seus documentos de texto em bruto na coleção.</p></li>
+<li><p><a href="/docs/pt/full-text-search.md#Perform-full-text-search">Efetuar pesquisas</a>: Utilize textos de consulta para pesquisar na sua coleção e obter resultados relevantes.</p></li>
 </ol>
-<h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">Create a collection for full text search<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">Criar uma coleção para pesquisa de texto integral<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,20 +80,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To enable full text search, create a collection with a specific schema. This schema must include three necessary fields:</p>
+    </button></h2><p>Para ativar a pesquisa de texto integral, crie uma coleção com um esquema específico. Este esquema deve incluir três campos necessários:</p>
 <ul>
-<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
-<li><p>A <code translate="no">VARCHAR</code> field that stores raw text documents, with the <code translate="no">enable_analyzer</code> attribute set to <code translate="no">True</code>. This allows Milvus to tokenize text into specific terms for function processing.</p></li>
-<li><p>A <code translate="no">SPARSE_FLOAT_VECTOR</code> field reserved to store sparse embeddings that Milvus will automatically generate for the <code translate="no">VARCHAR</code> field.</p></li>
+<li><p>O campo primário que identifica de forma única cada entidade numa coleção.</p></li>
+<li><p>Um campo <code translate="no">VARCHAR</code> que armazena documentos de texto em bruto, com o atributo <code translate="no">enable_analyzer</code> definido como <code translate="no">True</code>. Isto permite que o Milvus tokenize o texto em termos específicos para processamento de funções.</p></li>
+<li><p>Um campo <code translate="no">SPARSE_FLOAT_VECTOR</code> reservado para armazenar embeddings esparsos que o Milvus irá gerar automaticamente para o campo <code translate="no">VARCHAR</code>.</p></li>
 </ul>
-<h3 id="Define-the-collection-schema" class="common-anchor-header">Define the collection schema</h3><p>First, create the schema and add the necessary fields:</p>
+<h3 id="Define-the-collection-schema" class="common-anchor-header">Definir o esquema da coleção</h3><p>Primeiro, crie o esquema e adicione os campos necessários:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
@@ -219,20 +214,15 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration,</p>
+<p>Nesta configuração,</p>
 <ul>
-<li><p><code translate="no">id</code>: serves as the primary key and is automatically generated with <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: stores your raw text data for full text search operations. The data type must be <code translate="no">VARCHAR</code>, as <code translate="no">VARCHAR</code> is Milvus string data type for text storage. Set <code translate="no">enable_analyzer=True</code> to allow Milvus to tokenize the text. By default, Milvus uses the <code translate="no">standard</code><a href="/docs/standard-analyzer.md"> analyzer</a> for text analysis. To configure a different analyzer, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p></li>
-<li><p><code translate="no">sparse</code>: a vector field reserved to store internally generated sparse embeddings for full text search operations. The data type must be <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">id</code>: serve como chave primária e é gerado automaticamente com <code translate="no">auto_id=True</code>.</p></li>
+<li><p><code translate="no">text</code>: armazena os seus dados de texto em bruto para operações de pesquisa de texto completo. O tipo de dados tem de ser <code translate="no">VARCHAR</code>, uma vez que <code translate="no">VARCHAR</code> é o tipo de dados de cadeia de caracteres do Milvus para armazenamento de texto. Defina <code translate="no">enable_analyzer=True</code> para permitir que o Milvus tokenize o texto. Por defeito, o Milvus utiliza o<a href="/docs/pt/standard-analyzer.md"> analisador</a> <code translate="no">standard</code><a href="/docs/pt/standard-analyzer.md"></a> para a análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
+<li><p><code translate="no">sparse</code>Campo vetorial: um campo vetorial reservado para armazenar as incorporações esparsas geradas internamente para operações de pesquisa de texto completo. O tipo de dados tem de ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
-<p>Now, define a function that will convert your text into sparse vector representations and then add it to the schema:</p>
+<p>Agora, defina uma função que converta o seu texto em representações vectoriais esparsas e, em seguida, adicione-a ao esquema:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
     input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
@@ -307,37 +297,32 @@ schema.WithFunction(function)
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
+     <th><p>Parâmetro</p></th>
+     <th><p>Descrição</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>The name of the function. This function converts your raw text from the <code translate="no">text</code> field into searchable vectors that will be stored in the <code translate="no">sparse</code> field.</p></td>
+     <td><p>O nome da função. Esta função converte o seu texto em bruto do campo <code translate="no">text</code> em vectores pesquisáveis que serão armazenados no campo <code translate="no">sparse</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>The name of the <code translate="no">VARCHAR</code> field requiring text-to-sparse-vector conversion. For <code translate="no">FunctionType.BM25</code>, this parameter accepts only one field name.</p></td>
+     <td><p>O nome do campo <code translate="no">VARCHAR</code> que requer conversão de texto para vetor esparso. Para <code translate="no">FunctionType.BM25</code>, este parâmetro aceita apenas um nome de campo.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>The name of the field where the internally generated sparse vectors will be stored. For <code translate="no">FunctionType.BM25</code>, this parameter accepts only one field name.</p></td>
+     <td><p>O nome do campo onde os vectores esparsos gerados internamente serão armazenados. Para <code translate="no">FunctionType.BM25</code>, este parâmetro aceita apenas um nome de campo.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>The type of the function to use. Set the value to <code translate="no">FunctionType.BM25</code>.</p></td>
+     <td><p>O tipo da função a utilizar. Defina o valor como <code translate="no">FunctionType.BM25</code>.</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>For collections with multiple <code translate="no">VARCHAR</code> fields requiring text-to-sparse-vector conversion, add separate functions to the collection schema, ensuring each function has a unique name and <code translate="no">output_field_names</code> value.</p>
+<p>Para colecções com vários campos <code translate="no">VARCHAR</code> que requerem conversão de texto em vetor esparso, adicione funções separadas ao esquema de coleção, assegurando que cada função tem um nome único e um valor <code translate="no">output_field_names</code>.</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">Configure the index</h3><p>After defining the schema with necessary fields and the built-in function, set up the index for your collection. To simplify this process, use <code translate="no">AUTOINDEX</code> as the <code translate="no">index_type</code>, an option that allows Milvus to choose and configure the most suitable index type based on the structure of your data.</p>
+<h3 id="Configure-the-index" class="common-anchor-header">Configurar o índice</h3><p>Depois de definir o esquema com os campos necessários e a função incorporada, configure o índice para a sua coleção. Para simplificar este processo, utilize <code translate="no">AUTOINDEX</code> como <code translate="no">index_type</code>, uma opção que permite ao Milvus escolher e configurar o tipo de índice mais adequado com base na estrutura dos seus dados.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
@@ -383,46 +368,41 @@ indexes.add(IndexParam.builder()
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
+     <th><p>Parâmetro</p></th>
+     <th><p>Descrição</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>The name of the vector field to index. For full text search, this should be the field that stores the generated sparse vectors. In this example, set the value to <code translate="no">sparse</code>.</p></td>
+     <td><p>O nome do campo vetorial a indexar. Para pesquisa de texto completo, este deve ser o campo que armazena os vectores esparsos gerados. Neste exemplo, defina o valor como <code translate="no">sparse</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>The type of the index to create. <code translate="no">AUTOINDEX</code> allows Milvus to automatically optimize index settings. If you need more control over your index settings, you can choose from various index types available for sparse vectors in Milvus. For more information, refer to <a href="/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</p></td>
+     <td><p>O tipo de índice a criar. <code translate="no">AUTOINDEX</code> permite ao Milvus otimizar automaticamente as definições de índice. Se precisar de mais controlo sobre as definições do índice, pode escolher entre vários tipos de índices disponíveis para vectores esparsos no Milvus. Para mais informações, consulte <a href="/docs/pt/index.md#Indexes-supported-in-Milvus">Índices suportados no Milvus</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
-     <td><p>The value for this parameter must be set to <code translate="no">BM25</code> specifically for full text search functionality.</p></td>
+     <td><p>O valor deste parâmetro deve ser definido como <code translate="no">BM25</code> especificamente para a funcionalidade de pesquisa de texto completo.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>A dictionary of additional parameters specific to the index.</p></td>
+     <td><p>Um dicionário de parâmetros adicionais específicos do índice.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>The algorithm used for building and querying the index. Valid values:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (default): Optimized Document-at-a-Time (DAAT) query processing using the MaxScore algorithm. MaxScore provides better performance for high <em>k</em> values or queries with many terms by skipping terms and documents likely to have minimal impact. It achieves this by partitioning terms into essential and non-essential groups based on their maximum impact scores, focusing on terms that can contribute to the top-k results.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small <em>k</em> values or short queries, where skipping is more feasible.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to <code translate="no">DAAT_MAXSCORE</code> and <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (avgdl), <code translate="no">TAAT_NAIVE</code> dynamically adapts to such changes.</p></li></ul></td>
+     <td><p>O algoritmo utilizado para construir e consultar o índice. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinição): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores <em>k</em> elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Processamento optimizado de consultas DAAT utilizando o algoritmo WAND. O WAND avalia menos documentos atingidos, aproveitando as pontuações de impacto máximo para ignorar documentos não competitivos, mas tem uma sobrecarga mais elevada por hit. Isso torna o WAND mais eficiente para consultas com valores <em>k</em> pequenos ou consultas curtas, em que pular é mais viável.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Processamento de consultas Basic Term-at-a-Time (TAAT). Embora seja mais lento em comparação com <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> oferece uma vantagem única. Ao contrário dos algoritmos DAAT, que utilizam pontuações de impacto máximo armazenadas em cache que permanecem estáticas independentemente das alterações ao parâmetro de coleção global (avgdl), o <code translate="no">TAAT_NAIVE</code> adapta-se dinamicamente a essas alterações.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>Controls the term frequency saturation. Higher values increase the importance of term frequencies in document ranking. Value range: [1.2, 2.0].</p></td>
+     <td><p>Controla a saturação da frequência do termo. Valores mais elevados aumentam a importância das frequências de termos na classificação de documentos. Intervalo de valores: [1.2, 2.0].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
-     <td><p>Controls the extent to which document length is normalized. Values between 0 and 1 are typically used, with a common default around 0.75. A value of 1 means no length normalization, while a value of 0 means full normalization.</p></td>
+     <td><p>Controla a extensão em que o comprimento do documento é normalizado. Normalmente, são usados valores entre 0 e 1, com um padrão comum em torno de 0,75. Um valor de 1 significa nenhuma normalização de comprimento, enquanto um valor de 0 significa normalização completa.</p></td>
    </tr>
 </table>
-<h3 id="Create-the-collection" class="common-anchor-header">Create the collection</h3><p>Now create the collection using the schema and index parameters defined.</p>
+<h3 id="Create-the-collection" class="common-anchor-header">Criar a coleção</h3><p>Agora crie a coleção usando o esquema e os parâmetros de índice definidos.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
     schema=schema, 
@@ -466,7 +446,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-text-data" class="common-anchor-header">Insert text data<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
+<h2 id="Insert-text-data" class="common-anchor-header">Inserir dados de texto<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -481,14 +461,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After setting up your collection and index, you’re ready to insert text data. In this process, you need only to provide the raw text. The built-in function we defined earlier automatically generates the corresponding sparse vector for each text entry.</p>
+    </button></h2><p>Depois de configurar a coleção e o índice, está pronto para inserir dados de texto. Neste processo, só precisa de fornecer o texto em bruto. A função incorporada que definimos anteriormente gera automaticamente o vetor esparso correspondente para cada entrada de texto.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.insert(<span class="hljs-string">&#x27;my_collection&#x27;</span>, [
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
@@ -536,7 +511,7 @@ client.insert(InsertReq.builder()
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Perform-full-text-search" class="common-anchor-header">Perform full text search<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Perform-full-text-search" class="common-anchor-header">Efetuar pesquisa de texto completo<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -551,14 +526,9 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you’ve inserted data into your collection, you can perform full text searches using raw text queries. Milvus automatically converts your query into a sparse vector and ranks the matched search results using the BM25 algorithm, and then returns the topK (<code translate="no">limit</code>) results.</p>
+    </button></h2><p>Depois de inserir os dados na sua coleção, pode efetuar pesquisas de texto completo utilizando consultas de texto em bruto. O Milvus converte automaticamente a sua consulta num vetor esparso e classifica os resultados de pesquisa correspondentes utilizando o algoritmo BM25, devolvendo depois os resultados topK (<code translate="no">limit</code>).</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 }
@@ -638,16 +608,16 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
+     <th><p>Parâmetro</p></th>
+     <th><p>Descrição</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">search_params</code></p></td>
-     <td><p>A dictionary containing search parameters.</p></td>
+     <td><p>Um dicionário que contém parâmetros de pesquisa.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proportion of low-importance terms to ignore during search. For details, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p></td>
+     <td><p>Proporção de termos de baixa importância a ignorar durante a pesquisa. Para obter detalhes, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -655,14 +625,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>The raw query text.</p></td>
+     <td><p>O texto bruto da consulta.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
-     <td><p>The name of the field that contains internally generated sparse vectors.</p></td>
+     <td><p>O nome do campo que contém os vectores esparsos gerados internamente.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
-     <td><p>Maximum number of top matches to return.</p></td>
+     <td><p>Número máximo de correspondências principais a serem retornadas.</p></td>
    </tr>
 </table>

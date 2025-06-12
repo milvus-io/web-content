@@ -137,7 +137,7 @@ res = MilvusClient.search(
      <td><p>O número de clusters a criar utilizando o algoritmo k-means durante a construção do índice.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, 65536]</p>
 <p><strong>Valor predefinido</strong>: <code translate="no">128</code></p></td>
-     <td><p>Valores maiores de <code translate="no">nlist</code> melhoram a recuperação, criando clusters mais refinados, mas aumentam o tempo de criação do índice. Optimize com base no tamanho do conjunto de dados e nos recursos disponíveis. Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [32, 4096].</p></td>
+     <td><p>Valores maiores de <code translate="no">nlist</code> melhoram a recuperação ao criar clusters mais refinados, mas aumentam o tempo de criação do índice. Optimize com base no tamanho do conjunto de dados e nos recursos disponíveis. Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [32, 4096].</p></td>
    </tr>
    <tr>
      <td rowspan="2"><p>PQ</p></td>
@@ -145,7 +145,7 @@ res = MilvusClient.search(
      <td><p>O número de sub-vectores (utilizados para quantização) para dividir cada vetor de alta dimensão durante o processo de quantização.</p></td>
      <td><p><strong>Tipo</strong>: Inteiro <strong>Intervalo</strong>: [1, 65536]</p>
 <p><strong>Valor predefinido</strong>: Nenhum</p></td>
-     <td><p>Um valor <code translate="no">m</code> mais elevado pode melhorar a precisão, mas também aumenta a complexidade computacional e a utilização de memória. <code translate="no">m</code> deve ser um divisor da dimensão do vetor<em>(D</em>) para garantir uma decomposição adequada. Um valor geralmente recomendado é <em>m = D/2</em>.</p>
+     <td><p>Um valor <code translate="no">m</code> mais elevado pode melhorar a precisão, mas também aumenta a complexidade computacional e a utilização de memória. <code translate="no">m</code> tem de ser um divisor da dimensão do vetor<em>(D</em>) para garantir uma decomposição adequada. Um valor geralmente recomendado é <em>m = D/2</em>.</p>
 <p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [D/8, D].</p></td>
    </tr>
    <tr>

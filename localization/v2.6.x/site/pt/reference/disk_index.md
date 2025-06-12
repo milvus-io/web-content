@@ -1,10 +1,12 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Disk index mechanism in Milvus for disk-optimized vector search.
-title: On-disk Index
+summary: >-
+  Mecanismo de índice de disco em Milvus para pesquisa vetorial optimizada por
+  disco.
+title: Índice no disco
 ---
-<h1 id="On-disk-Index" class="common-anchor-header">On-disk Index<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
+<h1 id="On-disk-Index" class="common-anchor-header">Índice no disco<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,12 +21,11 @@ title: On-disk Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This article introduces DiskANN, an on-disk indexing algorithm for disk-optimized vector searches. Based on Vamana graphs, DiskANN powers efficient on-disk vector searches within large datasets.</p>
-<p>To improve query performance, you can <a href="/docs/index-vector-fields.md">specify an index type</a> for each vector field.</p>
+    </button></h1><p>Este artigo apresenta o DiskANN, um algoritmo de indexação em disco para pesquisas vetoriais otimizadas em disco. Com base nos gráficos Vamana, o DiskANN permite pesquisas vetoriais eficientes no disco em grandes conjuntos de dados.</p>
+<p>Para melhorar o desempenho da consulta, é possível <a href="/docs/pt/index-vector-fields.md">especificar um tipo de índice</a> para cada campo de vetor.</p>
 <div class="alert note"> 
-Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
-</div>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+Atualmente, um campo de vetor suporta apenas um tipo de índice. O Milvus exclui automaticamente o índice antigo ao alternar o tipo de índice.</div>
+<h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,16 +40,15 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use DiskANN in Milvus, note that</p>
+    </button></h2><p>Para usar o DiskANN no Milvus, observe que</p>
 <ul>
-<li>The Milvus instance runs on Ubuntu 18.04.6 or a later release.</li>
-<li>The Milvus data path should be mounted to an NVMe SSD for full performance:
-<ul>
-<li>For a Milvus Standalone instance, the data path should be <strong>/var/lib/milvus/data</strong> in the container where the instance runs.</li>
-<li>For a Milvus Cluster instance, the data path should be <strong>/var/lib/milvus/data</strong> in the containers where the QueryNodes and IndexNodes run.</li>
+<li>A instância do Milvus é executada no Ubuntu 18.04.6 ou em uma versão posterior.</li>
+<li>O caminho de dados do Milvus deve ser montado em um SSD NVMe para obter desempenho total:<ul>
+<li>Para uma instância Milvus Standalone, o caminho de dados deve ser <strong>/var/lib/milvus/data</strong> no contentor onde a instância é executada.</li>
+<li>Para uma instância Milvus Cluster, o caminho de dados deve ser <strong>/var/lib/milvus/data</strong> nos contentores onde os QueryNodes e IndexNodes são executados.</li>
 </ul></li>
 </ul>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,12 +63,12 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use DiskANN, ensure that you</p>
+    </button></h2><p>Para utilizar o DiskANN, certifique-se de que</p>
 <ul>
-<li>Use only float vectors with at least 1 dimensions in your data.</li>
-<li>Use only Euclidean Distance (L2), Inner Product (IP), or COSINE to measure the distance between vectors.</li>
+<li>Utilize apenas vectores de flutuação com pelo menos 1 dimensão nos seus dados.</li>
+<li>Utilize apenas a Distância Euclidiana (L2), o Produto Interno (IP) ou COSINE para medir a distância entre vectores.</li>
 </ul>
-<h2 id="Index-and-search-settings" class="common-anchor-header">Index and search settings<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
+<h2 id="Index-and-search-settings" class="common-anchor-header">Configurações de índice e pesquisa<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,20 +84,20 @@ Currently, a vector field only supports one index type. Milvus automatically del
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Index building parameters</p>
-<p>When building a DiskANN index, use <code translate="no">DISKANN</code> as the index type. No index parameters are necessary.</p></li>
-<li><p>Search parameters</p>
+<li><p>Parâmetros de criação de índices</p>
+<p>Ao construir um índice DiskANN, utilize <code translate="no">DISKANN</code> como o tipo de índice. Não são necessários parâmetros de índice.</p></li>
+<li><p>Parâmetros de pesquisa</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor por defeito</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">search_list</code></td><td>Size of the candidate list, a larger size offers a higher recall rate with degraded performance.</td><td>[topk, int32_max]</td><td>16</td></tr>
+<tr><td><code translate="no">search_list</code></td><td>Tamanho da lista de candidatos, um tamanho maior oferece uma taxa de recuperação mais elevada com um desempenho degradado.</td><td>[topk, int32_max]</td><td>16</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h2 id="DiskANN-related-Milvus-configurations" class="common-anchor-header">DiskANN-related Milvus configurations<button data-href="#DiskANN-related-Milvus-configurations" class="anchor-icon" translate="no">
+<h2 id="DiskANN-related-Milvus-configurations" class="common-anchor-header">Configurações de Milvus relacionadas com DiskANN<button data-href="#DiskANN-related-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,7 +112,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DiskANN is tunable. You can modify DiskANN-related parameters in <code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> to improve its performance.</p>
+    </button></h2><p>A DiskANN pode ser afinada. Pode modificar os parâmetros relacionados com a DiskANN em <code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> para melhorar o seu desempenho.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
@@ -124,17 +124,17 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Value Range</th><th>Default Value</th></tr>
+<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo de valores</th><th>Valor predefinido</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">MaxDegree</code></td><td>Maximum degree of the Vamana graph. <br/> A larger value offers a higher recall rate but increases the size of and time to build the index.</td><td>[1, 512]</td><td>56</td></tr>
-<tr><td><code translate="no">SearchListSize</code></td><td>Size of the candidate list. <br/> A larger value increases the time spent on building the index but offers a higher recall rate. <br/> Set it to a value smaller than <code translate="no">MaxDegree</code> unless you need to reduce the index-building time.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Size limit on the PQ code. <br/> A larger value offers a higher recall rate but increases memory usage.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
-<tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Ratio of cached node numbers to raw data. <br/> A larger value improves index-building performance with increased memory usage.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
-<tr><td><code translate="no">BeamWidthRatio</code></td><td>Ratio between the maximum number of IO requests per search iteration and CPU number.</td><td>[1, max(128 / CPU number, 16)]</td><td>4.0</td></tr>
+<tr><td><code translate="no">MaxDegree</code></td><td>Grau máximo do gráfico Vamana. <br/> Um valor mais elevado oferece uma taxa de recuperação mais elevada, mas aumenta o tamanho e o tempo de criação do índice.</td><td>[1, 512]</td><td>56</td></tr>
+<tr><td><code translate="no">SearchListSize</code></td><td>Tamanho da lista de candidatos. <br/> Um valor maior aumenta o tempo despendido na construção do índice, mas oferece uma taxa de recuperação mais elevada. <br/> Defina-o para um valor inferior a <code translate="no">MaxDegree</code> a menos que precise de reduzir o tempo de construção do índice.</td><td>[1, int32_max]</td><td>100</td></tr>
+<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Limite de tamanho do código PQ. <br/> Um valor maior oferece uma taxa de recuperação mais elevada, mas aumenta a utilização de memória.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Rácio de números de nós em cache para dados em bruto. <br/> Um valor maior melhora o desempenho da construção de índices com maior utilização de memória.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
+<tr><td><code translate="no">BeamWidthRatio</code></td><td>Rácio entre o número máximo de pedidos IO por iteração de pesquisa e o número de CPU.</td><td>[1, max(128 / número da CPU, 16)]</td><td>4.0</td></tr>
 </tbody>
 </table>
-<h2 id="Troubleshooting" class="common-anchor-header">Troubleshooting<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
+<h2 id="Troubleshooting" class="common-anchor-header">Resolução de problemas<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,8 +150,8 @@ Currently, a vector field only supports one index type. Milvus automatically del
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>How to deal with the <code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code> error?</p>
-<p>The Linux kernel provides the Asynchronous non-blocking I/O (AIO) feature that allows a process to initiate multiple I/O operations simultaneously without having to wait for any of them to complete. This helps boost performance for applications that can overlap processing and I/O.</p>
-<p>The performance can be tuned using the <code translate="no">/proc/sys/fs/aio-max-nr</code> virtual file in the proc file system. The <code translate="no">aio-max-nr</code> parameter determines the maximum number of allowable concurrent requests.</p>
-<p>The <code translate="no">aio-max-nr</code> defaults to <code translate="no">65535</code>, you can set it up to <code translate="no">10485760</code>.</p></li>
+<li><p>Como lidar com o erro <code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code>?</p>
+<p>O kernel Linux fornece o recurso AIO (Asynchronous non-blocking I/O) que permite que um processo inicie várias operações de E/S simultaneamente sem ter que esperar que qualquer uma delas seja concluída. Isso ajuda a melhorar o desempenho de aplicativos que podem sobrepor processamento e E/S.</p>
+<p>O desempenho pode ser ajustado usando o arquivo virtual <code translate="no">/proc/sys/fs/aio-max-nr</code> no sistema de arquivos proc. O parâmetro <code translate="no">aio-max-nr</code> determina o número máximo de pedidos simultâneos permitidos.</p>
+<p>O parâmetro <code translate="no">aio-max-nr</code> é predefinido para <code translate="no">65535</code>, pode ser configurado para <code translate="no">10485760</code>.</p></li>
 </ul>

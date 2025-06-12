@@ -45,7 +45,7 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
   
    <a href="/bootcamp"> <img translate="no" src="/docs/v2.6.x/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">Bootcamp</p> </a><p>
-  Aprenda a construir aplicações de pesquisa de similaridade vetorial com Milvus.  </p>
+  Aprenda a criar aplicações de pesquisa de similaridade vetorial com o Milvus.  </p>
 </div>
 </div>
 <h2 id="Recommended-articles" class="common-anchor-header">Artigos recomendados<button data-href="#Recommended-articles" class="anchor-icon" translate="no">

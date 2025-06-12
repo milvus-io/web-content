@@ -1,12 +1,13 @@
 ---
 id: integrate_with_hugging-face.md
 summary: >-
-  This tutorial shows how to build a question answering system using Hugging
-  Face as the data loader & embedding generator for data processing and Milvus
-  as the vector database for semantic search.
-title: Question Answering Using Milvus and Hugging Face
+  Este tutorial mostra como construir um sistema de resposta a perguntas
+  utilizando o Hugging Face como carregador de dados e gerador de incorporação
+  para processamento de dados e o Milvus como base de dados vetorial para
+  pesquisa semântica.
+title: Resposta a perguntas utilizando Milvus e Hugging Face
 ---
-<h1 id="Question-Answering-Using-Milvus-and-Hugging-Face" class="common-anchor-header">Question Answering Using Milvus and Hugging Face<button data-href="#Question-Answering-Using-Milvus-and-Hugging-Face" class="anchor-icon" translate="no">
+<h1 id="Question-Answering-Using-Milvus-and-Hugging-Face" class="common-anchor-header">Resposta a perguntas utilizando Milvus e Hugging Face<button data-href="#Question-Answering-Using-Milvus-and-Hugging-Face" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +24,9 @@ title: Question Answering Using Milvus and Hugging Face
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>A question answering system based on semantic search works by finding the most similar question from a dataset of question-answer pairs for a given query question. Once the most similar question is identified, the corresponding answer from the dataset is considered as the answer for the query. This approach relies on semantic similarity measures to determine the similarity between questions and retrieve relevant answers.</p>
-<p>This tutorial shows how to build a question answering system using <a href="https://huggingface.co">Hugging Face</a> as the data loader & embedding generator for data processing and <a href="https://milvus.io">Milvus</a> as the vector database for semantic search.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<p>Um sistema de resposta a perguntas baseado na pesquisa semântica funciona encontrando a pergunta mais semelhante de um conjunto de dados de pares pergunta-resposta para uma determinada pergunta de consulta. Uma vez identificada a pergunta mais semelhante, a resposta correspondente do conjunto de dados é considerada como a resposta à pergunta. Esta abordagem baseia-se em medidas de semelhança semântica para determinar a semelhança entre perguntas e obter respostas relevantes.</p>
+<p>Este tutorial mostra como construir um sistema de resposta a perguntas usando <a href="https://huggingface.co">Hugging Face</a> como carregador de dados e gerador de incorporação para processamento de dados e <a href="https://milvus.io">Milvus</a> como base de dados vetorial para pesquisa semântica.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,18 +41,18 @@ title: Question Answering Using Milvus and Hugging Face
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You need to make sure all required dependencies are installed:</p>
+    </button></h2><p>É necessário certificar-se de que todas as dependências necessárias estão instaladas:</p>
 <ul>
-<li><code translate="no">pymilvus</code>: a python package works with the vector database service powered by Milvus or Zilliz Cloud.</li>
-<li><code translate="no">datasets</code>, <code translate="no">transformers</code>: Hugging Face packages manage data and utilize models.</li>
-<li><code translate="no">torch</code>: a powerful library provides efficient tensor computation and deep learning tools.</li>
+<li><code translate="no">pymilvus</code>: um pacote python funciona com o serviço de base de dados vetorial alimentado por Milvus ou Zilliz Cloud.</li>
+<li><code translate="no">datasets</code> <code translate="no">transformers</code>: Os pacotes Hugging Face gerenciam dados e utilizam modelos.</li>
+<li><code translate="no">torch</code>: uma biblioteca poderosa fornece computação tensorial eficiente e ferramentas de aprendizagem profunda.</li>
 </ul>
 <pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong>. (Clique no menu "Runtime" (Tempo de execução) na parte superior do ecrã e selecione "Restart session" (Reiniciar sessão) no menu pendente).</p>
 </div>
-<h2 id="Prepare-data" class="common-anchor-header">Prepare data<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+<h2 id="Prepare-data" class="common-anchor-header">Preparar dados<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,7 +67,7 @@ title: Question Answering Using Milvus and Hugging Face
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we will load example question-answer pairs from the Hugging Face Datasets. As a demo, we only take partial data from the validation split of <a href="https://huggingface.co/datasets/rajpurkar/squad">SQuAD</a>.</p>
+    </button></h2><p>Nesta secção, vamos carregar exemplos de pares de pergunta-resposta dos conjuntos de dados do Hugging Face. Como demonstração, só utilizamos dados parciais da divisão de validação do <a href="https://huggingface.co/datasets/rajpurkar/squad">SQuAD</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 
 
@@ -90,7 +91,7 @@ data = data.<span class="hljs-built_in">map</span>(
     num_rows: 11
 })
 </code></pre>
-<p>To generate embeddings for questions, you are able to select a text embedding model from Hugging Face Models. In this tutorial, we will use a small sentencce embedding model <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a> as example.</p>
+<p>Para gerar embeddings para perguntas, é possível selecionar um modelo de embedding de texto dos Modelos do Hugging Face. Neste tutorial, utilizaremos um pequeno modelo de incorporação de frases <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a> como exemplo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> transformers <span class="hljs-keyword">import</span> AutoTokenizer, AutoModel
 <span class="hljs-keyword">import</span> torch
 
@@ -134,7 +135,7 @@ model = AutoModel.from_pretrained(MODEL)
 data = data.<span class="hljs-built_in">map</span>(encode_text, batched=<span class="hljs-literal">True</span>, batch_size=INFERENCE_BATCH_SIZE)
 data_list = data.to_list()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Inserir dados<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,8 +150,8 @@ data_list = data.to_list()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we have question-answer pairs ready with question embeddings. The next step is to insert them into the vector database.</p>
-<p>We will first need to connect to Milvus service and create a Milvus collection.</p>
+    </button></h2><p>Agora temos pares pergunta-resposta prontos com a incorporação de perguntas. O próximo passo é inseri-los na base de dados de vectores.</p>
+<p>Primeiro, temos de nos ligar ao serviço Milvus e criar uma coleção Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 
@@ -171,21 +172,21 @@ milvus_client.create_collection(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>Quanto ao argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, pois utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
+<li>Se tiver uma grande escala de dados, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Nesta configuração, utilize o uri do servidor, por exemplo,<code translate="no">http://localhost:19530</code>, como o seu <code translate="no">uri</code>.</li>
+<li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os endereços <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Insert all data into the collection:</p>
+<p>Insira todos os dados na coleção:</p>
 <pre><code translate="no" class="language-python">milvus_client.insert(collection_name=COLLECTION_NAME, data=data_list)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'insert_count': 11,
  'ids': [450072488481390592, 450072488481390593, 450072488481390594, 450072488481390595, 450072488481390596, 450072488481390597, 450072488481390598, 450072488481390599, 450072488481390600, 450072488481390601, 450072488481390602],
  'cost': 0}
 </code></pre>
-<h2 id="Ask-questions" class="common-anchor-header">Ask questions<button data-href="#Ask-questions" class="anchor-icon" translate="no">
+<h2 id="Ask-questions" class="common-anchor-header">Fazer perguntas<button data-href="#Ask-questions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -200,7 +201,7 @@ milvus_client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once all the data is inserted into Milvus, we can ask questions and see what the closest answers are.</p>
+    </button></h2><p>Quando todos os dados estiverem inseridos no Milvus, podemos fazer perguntas e ver quais são as respostas mais próximas.</p>
 <pre><code translate="no" class="language-python">questions = {
     <span class="hljs-string">&quot;question&quot;</span>: [
         <span class="hljs-string">&quot;What is LGM?&quot;</span>,

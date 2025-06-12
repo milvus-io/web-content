@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>O índice <strong>IVF_FLAT</strong> é um algoritmo de indexação que pode melhorar o desempenho da pesquisa para vectores de vírgula flutuante.</p>
 <p>Este tipo de índice é ideal para conjuntos de dados de grande escala que requerem respostas de consulta rápidas e elevada precisão, especialmente quando o agrupamento do conjunto de dados pode reduzir o espaço de pesquisa e está disponível memória suficiente para armazenar dados de agrupamento.</p>
-<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Síntese<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -47,7 +47,7 @@ summary: >-
     </button></h2><p>O design do modelo de dados de um sistema de pesquisa envolve a análise das necessidades do negócio e a abstração da informação num modelo de dados expresso por um esquema. Um esquema bem definido é importante para alinhar o modelo de dados com os objectivos comerciais, garantindo a consistência dos dados e a qualidade do serviço.  Além disso, a escolha de tipos de dados e índices adequados é importante para atingir o objetivo comercial de forma económica.</p>
 <h3 id="Analyzing-Business-Needs" class="common-anchor-header">Analisar as necessidades da empresa</h3><p>A resposta eficaz às necessidades da empresa começa com a análise dos tipos de consultas que os utilizadores irão efetuar e com a determinação dos métodos de pesquisa mais adequados.</p>
 <ul>
-<li><p><strong>Consultas do utilizador:</strong> Identificar os tipos de consultas que se espera que os utilizadores efectuem. Isto ajuda a garantir que o esquema suporta casos de utilização reais e optimiza o desempenho da pesquisa. Estas podem incluir:</p>
+<li><p><strong>Consultas do utilizador:</strong> Identificar os tipos de consultas que se espera que os utilizadores efectuem. Isto ajuda a garantir que o seu esquema suporta casos de utilização reais e optimiza o desempenho da pesquisa. Estas podem incluir:</p>
 <ul>
 <li><p>Recuperar documentos que correspondam a uma consulta de linguagem natural</p></li>
 <li><p>Encontrar imagens semelhantes a uma imagem de referência ou que correspondam a uma descrição de texto</p></li>
@@ -90,7 +90,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No Milvus, o modelo de dados é expresso através de um esquema de coleção. A conceção dos campos certos dentro de um esquema de coleção é fundamental para permitir uma recuperação eficaz. Cada campo define um tipo específico de dados armazenados na coleção e desempenha um papel distinto no processo de pesquisa. Em termos gerais, Milvus suporta dois tipos principais de campos: <strong>campos</strong> <strong>vectoriais</strong> e <strong>campos escalares</strong>.</p>
+    </button></h2><p>No Milvus, o modelo de dados é expresso através de um esquema de coleção. A conceção dos campos certos dentro de um esquema de coleção é fundamental para permitir uma recuperação eficaz. Cada campo define um tipo particular de dados armazenados na coleção e desempenha um papel distinto no processo de pesquisa. Em termos gerais, Milvus suporta dois tipos principais de campos: <strong>campos</strong> <strong>vectoriais</strong> e <strong>campos escalares</strong>.</p>
 <p>Agora, pode mapear o seu modelo de dados para um esquema de campos, incluindo vectores e quaisquer campos escalares auxiliares. Certifique-se de que cada campo está correlacionado com os atributos do seu modelo de dados, prestando especial atenção ao seu tipo de vetor (denso ou spase) e à sua dimensão.</p>
 <h3 id="Vector-Field" class="common-anchor-header">Campo vetorial</h3><p>Os campos vectoriais armazenam embeddings para tipos de dados não estruturados, como texto, imagens e áudio. Esses embeddings podem ser densos, esparsos ou binários, dependendo do tipo de dados e do método de recuperação utilizado. Normalmente, os vectores densos são utilizados para a pesquisa semântica, enquanto os vectores esparsos são mais adequados para a correspondência de texto completo ou lexical. Os vectores binários são úteis quando os recursos de armazenamento e computacionais são limitados. Uma coleção pode conter vários campos vectoriais para permitir estratégias de recuperação multimodais ou híbridas. Para um guia detalhado sobre este tema, consulte a <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida multi-vetorial</a>.</p>
 <p>O Milvus suporta os tipos de dados vectoriais: <code translate="no">FLOAT_VECTOR</code> para <a href="/docs/pt/dense-vector.md">Vetor Denso</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> para <a href="/docs/pt/sparse_vector.md">Vetor Esparso</a> e <code translate="no">BINARY_VECTOR</code> para <a href="/docs/pt/binary-vector.md">Vetor Binário</a></p>
@@ -148,7 +148,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
-     <td><p>gerado automaticamente com ativado <code translate="no">auto_id</code></p></td>
+     <td><p>gerado automaticamente com a opção activada <code translate="no">auto_id</code></p></td>
      <td><p><a href="/docs/pt/get-and-scalar-query.md">Consulta utilizando Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
