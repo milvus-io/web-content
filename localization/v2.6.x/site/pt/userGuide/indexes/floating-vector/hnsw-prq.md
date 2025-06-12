@@ -65,7 +65,7 @@ summary: >-
 <ol>
 <li><p><strong>Compressão de dados:</strong> Cada vetor é primeiro transformado através de PQ para uma representação grosseira e, em seguida, os resíduos são quantizados através de RQ para um maior refinamento. O resultado é um conjunto de códigos compactos que representam cada vetor.</p></li>
 <li><p><strong>Construção de gráficos:</strong> Os vectores comprimidos (incluindo os códigos PQ e RQ) formam a base para a construção do gráfico HNSW. Como os dados são armazenados numa forma compacta, o gráfico requer menos memória e a navegação através dele é acelerada.</p></li>
-<li><p><strong>Recuperação de candidatos:</strong> Durante a pesquisa, o HNSW usa as representações compactadas para percorrer o gráfico e recuperar um conjunto de candidatos. Isto reduz drasticamente o número de vectores que precisam de ser considerados.</p></li>
+<li><p><strong>Recuperação de candidatos:</strong> Durante a pesquisa, o HNSW utiliza as representações comprimidas para percorrer o gráfico e recuperar um conjunto de candidatos. Isto reduz drasticamente o número de vectores que precisam de ser considerados.</p></li>
 <li><p><strong>(Opcional) Refinamento de resultados:</strong> Os resultados iniciais dos candidatos podem ser refinados para uma melhor precisão, com base nos seguintes parâmetros:</p>
 <ul>
 <li><p><code translate="no">refine</code>: Controla se esta etapa de refinamento está activada. Quando definido para <code translate="no">true</code>, o sistema recalcula as distâncias utilizando representações de maior precisão ou não comprimidas.</p></li>
@@ -117,7 +117,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: O método utilizado para calcular a distância entre vectores. Os valores suportados incluem <code translate="no">COSINE</code>, <code translate="no">L2</code>, e <code translate="no">IP</code>. Para obter detalhes, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opções de configuração adicionais para criar o índice. Para obter detalhes, consulte <a href="/docs/pt/hnsw-prq.md#Index-building-params">Parâmetros de construção de índice</a>.</p></li>
 </ul>
-<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para obter detalhes, consulte <a href="/docs/pt/create-collection.md">Criar coleção</a>.</p>
+<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para mais informações, consulte <a href="/docs/pt/create-collection.md">Criar coleção</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Pesquisar no índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,7 +133,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser criado e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -151,7 +151,7 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>Nesta configuração:</p>
 <ul>
-<li><code translate="no">params</code>: Opções de configuração adicionais para pesquisar no índice. Para obter detalhes, consulte Parâmetros <a href="/docs/pt/hnsw-prq.md#Index-specific-search-params">de pesquisa específicos do índice</a>.</li>
+<li><code translate="no">params</code>: Opções de configuração adicionais para pesquisar no índice. Para obter detalhes, consulte <a href="/docs/pt/hnsw-prq.md#Index-specific-search-params">Parâmetros de pesquisa específicos do índice</a>.</li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parâmetros de índice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -168,7 +168,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para construir um índice e executar pesquisas no índice.</p>
+    </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e executar pesquisas no índice.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção de índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/hnsw-prq.md#Build-index">construir um índice</a>.</p>
 <table>
    <tr>
@@ -235,7 +235,7 @@ res = MilvusClient.search(
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
      <td><p>Determina a precisão dos dados utilizados durante o processo de refinamento. Esta precisão tem de ser superior à dos vectores comprimidos (tal como definido pelos parâmetros <code translate="no">m</code> e <code translate="no">nbits</code> ).</p></td>
-     <td><p><strong>Tipo</strong>: String <strong>Intervalo</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
+     <td><p><strong>Type</strong>: String <strong>Intervalo</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
 <p><strong>Valor por defeito</strong>: Nenhum</p></td>
      <td><p>Utilize <code translate="no">FP32</code> para obter a máxima precisão com um custo de memória mais elevado, ou <code translate="no">SQ6</code>/<code translate="no">SQ8</code> para uma melhor compressão. <code translate="no">BF16</code> e <code translate="no">FP16</code> oferecem uma alternativa equilibrada.</p></td>
    </tr>

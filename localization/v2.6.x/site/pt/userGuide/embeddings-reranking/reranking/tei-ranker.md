@@ -43,7 +43,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Antes de implementar o vLLM Ranker no Milvus, certifique-se de que tem:</p>
 <ul>
 <li><p>Uma coleção do Milvus com um campo <code translate="no">VARCHAR</code> contendo o texto a ser ranqueado</p></li>
-<li><p>Um serviço TEI em execução com capacidades de classificação. Para obter instruções detalhadas sobre como configurar um serviço TEI, consulte a <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">documentação oficial do TEI</a>.</p></li>
+<li><p>Um serviço TEI em execução com capacidades de classificação. Para obter instruções detalhadas sobre a configuração de um serviço TEI, consulte a <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">documentação oficial do TEI</a>.</p></li>
 </ul>
 <h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">Criar uma função do classificador TEI<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"

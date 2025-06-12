@@ -53,7 +53,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>text-embedding-3-large</p></td>
-     <td><p>Valeur par défaut : 3 072 (peut être tronquée à une dimension inférieure à 3072)</p></td>
+     <td><p>Défaut : 3 072 (peut être tronqué à une dimension inférieure à 3072)</p></td>
      <td><p>8,191</p></td>
      <td><p>Idéal pour les applications exigeant une meilleure précision de recherche et des représentations sémantiques plus riches.</p></td>
    </tr>

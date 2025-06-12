@@ -80,11 +80,11 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>Query e punto di ingresso:</strong> Viene fornito un vettore di query per individuare i suoi vicini più prossimi. DISKANN parte da un punto di ingresso selezionato nel grafo di Vamana, spesso un nodo vicino al centroide globale del dataset. Il centroide globale rappresenta la media di tutti i vettori e aiuta a minimizzare la distanza di attraversamento del grafo per trovare i vicini desiderati.</p></li>
-<li><p><strong>Esplorazione dei vicini:</strong> L'algoritmo raccoglie i potenziali vicini candidati (cerchi in rosso nella figura) dai bordi del nodo corrente, sfruttando i codici PQ in memoria per approssimare le distanze tra questi candidati e il vettore di interrogazione. Questi potenziali vicini candidati sono i nodi direttamente connessi al punto di ingresso selezionato attraverso i bordi del grafo di Vamana.</p></li>
+<li><p><strong>Esplorazione dei vicini:</strong> L'algoritmo raccoglie i potenziali vicini candidati (cerchi in rosso nella figura) dagli spigoli del nodo corrente, sfruttando i codici PQ in memoria per approssimare le distanze tra questi candidati e il vettore di interrogazione. Questi potenziali vicini candidati sono i nodi direttamente connessi al punto di ingresso selezionato attraverso i bordi del grafo di Vamana.</p></li>
 <li><p><strong>Selezione dei nodi per il calcolo accurato della distanza:</strong> Dai risultati approssimativi, un sottoinsieme dei vicini più promettenti (cerchi in verde nella figura) viene selezionato per una valutazione precisa della distanza utilizzando i loro vettori originali non compressi. Ciò richiede la lettura dei dati dal disco, che può richiedere molto tempo. DISKANN utilizza due parametri per controllare questo delicato equilibrio tra precisione e velocità:</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>: Una razione che controlla l'ampiezza della ricerca, determinando quanti candidati vicini vengono selezionati in parallelo per esplorare i loro vicini. Una <code translate="no">beam_width_ratio</code> più grande comporta un'esplorazione più ampia, che potenzialmente porta a una maggiore accuratezza, ma aumenta anche il costo computazionale e l'I/O su disco. L'ampiezza del fascio, o il numero di nodi selezionati, è determinata dalla formula: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>: La percentuale di memoria allocata per la memorizzazione nella cache dei dati del disco a cui si accede di frequente. La cache aiuta a ridurre al minimo l'I/O su disco, rendendo le ricerche ripetute più veloci perché i dati sono già in memoria.</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>: La percentuale di memoria allocata per la cache dei dati del disco a cui si accede di frequente. La cache aiuta a ridurre al minimo l'I/O su disco, rendendo le ricerche ripetute più veloci perché i dati sono già in memoria.</p></li>
 </ul>
 <p>Per saperne di più sulla regolazione dei parametri, consultare le <a href="/docs/it/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">configurazioni di DISKANN</a>.</p></li>
 <li><p><strong>Esplorazione iterativa:</strong> La ricerca affina iterativamente l'insieme dei candidati, eseguendo ripetutamente valutazioni approssimative (usando PQ) seguite da controlli precisi (usando i vettori originali dal disco) finché non viene trovato un numero sufficiente di vicini.</p></li>
@@ -151,7 +151,7 @@ summary: >-
       </svg>
     </button></h2><p>I parametri di DISKANN possono essere configurati con due metodi principali:</p>
 <ul>
-<li><p><strong>File di configurazione Milvus:</strong> Regolare i parametri di DISKANN attraverso il file di configurazione di Milvus. Questo metodo è adatto per impostare le opzioni generali di configurazione dell'istanza Milvus.</p></li>
+<li><p><strong>File di configurazione di Milvus:</strong> Regolare i parametri di DISKANN attraverso il file di configurazione di Milvus. Questo metodo è adatto per impostare le opzioni generali di configurazione dell'istanza Milvus.</p></li>
 <li><p><strong>SDK Milvus:</strong> Regolare con precisione i parametri DISKANN utilizzando l'SDK Milvus durante la creazione dell'indice o le operazioni di ricerca. Ciò consente un controllo più granulare e la regolazione dinamica dei parametri in base a casi d'uso specifici.</p></li>
 </ul>
 <div class="alert note">
@@ -189,7 +189,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per ulteriori informazioni, consultare <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per ulteriori informazioni, consultare <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h4 id="Search" class="common-anchor-header">Ricerca</h4><p>Una volta creato l'indice e inserite le entità, è possibile eseguire ricerche di similarità sull'indice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
@@ -242,7 +242,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>Determina il numero di candidati vicini considerati per ogni punto dati durante la costruzione del grafico.</p></td>
+     <td><p>Determina il numero di vicini candidati considerati per ogni punto di dati durante la costruzione del grafico.</p></td>
      <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">100</code></p></td>
      <td><p>Valori maggiori portano a grafi più completi, migliorando potenzialmente la qualità della ricerca ma aumentando anche il tempo di costruzione. 
@@ -251,7 +251,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">search_cache_budget_gb_ratio</code></p></td>
-     <td><p>Controlla la quantità di memoria allocata per la cache delle parti del grafo a cui si accede di frequente durante la costruzione dell'indice.</p></td>
+     <td><p>Controlla la quantità di memoria allocata per la memorizzazione nella cache delle parti del grafo a cui si accede di frequente durante la costruzione dell'indice.</p></td>
      <td><p><strong>Tipo</strong>: Variabile <strong>Intervallo</strong>: [0.0, 0.3)</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">0.10</code></p></td>
      <td><p>Un valore più alto alloca più memoria per la cache, riducendo significativamente l'I/O su disco ma consumando più memoria di sistema. Un valore inferiore utilizza meno memoria per la cache, aumentando potenzialmente la necessità di accesso al disco. Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [0.0, 0.3).</p></td>
@@ -263,7 +263,7 @@ res = MilvusClient.search(
      <td><p><strong>Tipo</strong>: Variabile <strong>Intervallo</strong>: (0,0, 0,25]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">0.125</code></p></td>
      <td><p>Un rapporto più alto porta a risultati di ricerca più accurati, allocando una percentuale maggiore di memoria per i codici PQ, memorizzando di fatto più informazioni sui vettori originali. Un rapporto più basso riduce l'uso della memoria, ma potenzialmente sacrifica l'accuratezza, poiché i codici PQ più piccoli conservano meno informazioni. Questo approccio è adatto a scenari in cui i vincoli di memoria sono un problema, consentendo potenzialmente l'indicizzazione di insiemi di dati più grandi.</p>
-<p>Nella maggior parte dei casi, si consiglia di impostare un valore all'interno di questo intervallo: (0.0625, 0.25]</p></td>
+<p>Nella maggior parte dei casi, si consiglia di impostare un valore all'interno di questo intervallo: (0,0625, 0,25].</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice</h3><p>Questi parametri influenzano il modo in cui DISKANN esegue le ricerche. La loro regolazione può influire sulla velocità di ricerca, sulla latenza e sull'utilizzo delle risorse.</p>

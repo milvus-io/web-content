@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>BIN_FLAT</strong>索引是<strong>FLAT</strong>索引的一种变体，专门为二进制嵌入而定制。在向量相似性搜索要求在相对较小的百万级数据集上达到完美精确度的应用中，它表现出色。通过采用一种穷举搜索方法--将每个目标输入与数据集中的所有向量进行比较--BIN_FLAT 可以保证得到精确的结果。这种精确性使其成为评估其他可能提供不到 100%召回率的索引性能的理想基准，尽管其彻底的方法也使其成为处理大规模数据最慢的选择。</p>
+    </button></h1><p><strong>BIN_FLAT</strong>索引是<strong>FLAT</strong>索引的一种变体，专门为二进制嵌入而定制。在向量相似性搜索要求在相对较小、百万级别的数据集上达到完美精确度的应用中，它表现出色。通过采用一种穷举搜索方法--将每个目标输入与数据集中的所有向量进行比较--BIN_FLAT 可以保证得到精确的结果。这种精确性使其成为评估其他可能提供不到 100%召回率的索引性能的理想基准，尽管其彻底的方法也使其成为处理大规模数据最慢的选择。</p>
 <h2 id="Build-index" class="common-anchor-header">建立索引<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +54,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">BIN_FLAT</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的二进制 Embeddings 值包括<code translate="no">HAMMING</code> （默认）和<code translate="no">JACCARD</code> 。有关详情，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。二进制 Embeddings 的支持值包括<code translate="no">HAMMING</code> （默认）和<code translate="no">JACCARD</code> 。有关详情，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
 <li><p><code translate="no">params</code>:BIN_FLAT 索引不需要额外参数。</p></li>
 </ul>
 <p>配置好索引参数后，可直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中传递索引参数来创建索引。详情请参阅<a href="/docs/zh/create-collection.md">创建 Collections</a>。</p>

@@ -2,7 +2,7 @@
 id: gaussian-decay.md
 title: 高斯衰减Compatible with Milvus 2.6.x
 summary: >-
-  高斯衰减也称为正常衰减，它能对搜索结果进行最自然的调整。就像人的视力会随着距离的增加而逐渐模糊一样，高斯衰减会创建一条平滑的钟形曲线，随着项目远离您的理想点，相关性也会逐渐降低。这种方法非常适合您需要一种平衡的衰减方式，既不会对您偏好范围之外的项目造成严重影响，又能显著降低远处项目的相关性。
+  高斯衰减也称为正常衰减，它能对搜索结果进行最自然的调整。就像人的视力会随着距离的增加而逐渐模糊一样，高斯衰减会创建一条平滑的钟形曲线，随着条目远离您的理想点，相关性也会逐渐降低。这种方法非常适合您需要一种平衡的衰减方式，既不会对您偏好范围之外的项目造成严重影响，又能显著降低远处项目的相关性。
 beta: Milvus 2.6.x
 ---
 <h1 id="Gaussian-Decay" class="common-anchor-header">高斯衰减<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Gaussian-Decay" class="anchor-icon" translate="no">
@@ -147,7 +147,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collection，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅<a href="/docs/zh/tutorial-implement-a-time-based-ranking-in-milvus.md">教程：在 Milvus 中实施基于时间的排名</a>。</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">创建衰减排名器</h3><p>用数字字段（在本例中，<code translate="no">distance</code> ，单位为距离用户的米）设置好 Collections 后，创建一个高斯衰减排序器：</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">创建衰减排名器</h3><p>在用数值字段（在本例中，<code translate="no">distance</code> ，单位为距离用户的米）设置好您的 Collections 后，创建一个高斯衰减排序器：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a Gaussian decay ranker for location-based restaurant search</span>

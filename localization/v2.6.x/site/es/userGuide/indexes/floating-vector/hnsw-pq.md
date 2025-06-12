@@ -49,7 +49,7 @@ summary: >-
 <ol>
 <li><p><strong>Compresión de datos</strong>: PQ divide cada vector en varios subvectores y los cuantifica utilizando un libro de códigos de centroides, controlado por parámetros como <code translate="no">m</code> (recuento de subvectores) y <code translate="no">nbits</code> (bits por subvector).</p></li>
 <li><p><strong>Construcción de gráficos</strong>: Los vectores comprimidos se utilizan para construir un gráfico HNSW. Como los vectores se almacenan de forma comprimida, el gráfico resultante suele ser más pequeño, requiere menos memoria y puede recorrerse más rápidamente, lo que acelera significativamente el paso de recuperación de candidatos.</p></li>
-<li><p><strong>Recuperación de candidatos</strong>: Cuando se ejecuta una consulta, el algoritmo utiliza los datos comprimidos en el grafo HNSW para identificar de forma eficiente un grupo de vecinos candidatos. Esta búsqueda basada en el gráfico reduce drásticamente el número de vectores que deben tenerse en cuenta, lo que mejora la latencia de la consulta en comparación con las búsquedas de fuerza bruta.</p></li>
+<li><p><strong>Recuperación de candidatos</strong>: Cuando se ejecuta una consulta, el algoritmo utiliza los datos comprimidos en el grafo HNSW para identificar de forma eficiente un grupo de vecinos candidatos. Esta búsqueda basada en el grafo reduce drásticamente el número de vectores que deben tenerse en cuenta, lo que mejora la latencia de la consulta en comparación con las búsquedas de fuerza bruta.</p></li>
 <li><p><strong>(Opcional) Perfeccionamiento de resultados</strong>: Los resultados candidatos iniciales pueden refinarse para obtener una mayor precisión, basándose en los siguientes parámetros:</p>
 <ul>
 <li><p><code translate="no">refine</code>: Controla si se activa este paso de refinamiento. Si se establece en <code translate="no">true</code>, el sistema recalcula las distancias utilizando representaciones de mayor precisión o sin comprimir.</p></li>
@@ -100,7 +100,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: El método utilizado para calcular la distancia entre vectores. Los valores soportados incluyen <code translate="no">COSINE</code>, <code translate="no">L2</code>, y <code translate="no">IP</code>. Para más detalles, consulte <a href="/docs/es/metric.md">Tipos de métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opciones de configuración adicionales para construir el índice. Para más información, consulte <a href="/docs/es/hnsw-pq.md#Index-building-params">Parámetros de creación de índices</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando el método <code translate="no">create_index()</code> directamente o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

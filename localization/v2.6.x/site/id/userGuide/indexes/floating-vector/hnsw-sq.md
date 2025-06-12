@@ -186,7 +186,7 @@ res = MilvusClient.search(
 <p><strong>Nilai default</strong>: <code translate="no">360</code></p></td>
      <td><p>Nilai <code translate="no">efConstruction</code> yang lebih tinggi biasanya menghasilkan <strong>indeks yang lebih akurat</strong>, karena lebih banyak koneksi potensial yang dieksplorasi. Namun, hal ini juga menyebabkan <strong>waktu pengindeksan yang lebih lama dan peningkatan penggunaan memori</strong> selama konstruksi. Pertimbangkan untuk meningkatkan <code translate="no">efConstruction</code> untuk meningkatkan akurasi, terutama dalam skenario di mana waktu pengindeksan tidak terlalu penting.</p>
 <p>Pertimbangkan untuk mengurangi <code translate="no">efConstruction</code> untuk mempercepat konstruksi indeks ketika keterbatasan sumber daya menjadi perhatian.</p>
-<p>Dalam kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam kisaran ini: [50, 500].</p></td>
+<p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [50, 500].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>

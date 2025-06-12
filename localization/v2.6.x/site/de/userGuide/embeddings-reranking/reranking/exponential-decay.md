@@ -35,7 +35,7 @@ beta: Milvus 2.6.x
 <li><p>Lineares Abklingen nimmt mit einer konstanten Rate ab, bis es genau Null erreicht</p></li>
 </ul>
 <p>Exponentielles Abklingen sorgt dafür, dass der größte Teil der Relevanzreduzierung früh einsetzt, während ein langer Schwanz minimaler, aber von Null verschiedener Relevanz erhalten bleibt.</p>
-<h2 id="When-to-use-exponential-decay" class="common-anchor-header">Wann sollte man exponentiellen Zerfall verwenden?<button data-href="#When-to-use-exponential-decay" class="anchor-icon" translate="no">
+<h2 id="When-to-use-exponential-decay" class="common-anchor-header">Wann wird exponentieller Zerfall verwendet?<button data-href="#When-to-use-exponential-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

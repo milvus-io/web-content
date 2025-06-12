@@ -225,7 +225,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Bevor Sie Abklingfunktionen verwenden, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempel, Entfernungen usw.) erstellen, die für Abklingberechnungen verwendet werden sollen. Vollständige Arbeitsbeispiele, einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneinfügung, finden Sie im <a href="/docs/de/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Zeitbasiertes Ranking in Milvus implementieren</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Um das Decay-Ranking zu implementieren, definieren Sie zunächst ein <code translate="no">Function</code> Objekt mit der entsprechenden Konfiguration:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Um ein Decay-Ranking zu implementieren, definieren Sie zunächst ein <code translate="no">Function</code> Objekt mit der entsprechenden Konfiguration:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
@@ -259,7 +259,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Numerisches Feld für die Berechnung der Abklingrate. Bestimmt, welches Datenattribut für die Berechnung des Verfalls verwendet wird (z. B. Zeitstempel für zeitbasierten Verfall, Koordinaten für ortsbezogenen Verfall). 
+     <td><p>Numerisches Feld für die Berechnung der Abklingrate. Legt fest, welches Datenattribut für die Berechnung des Verfalls verwendet wird (z. B. Zeitstempel für zeitbasierten Verfall, Koordinaten für ortsbezogenen Verfall). 
  Muss ein Feld in Ihrer Sammlung sein, das relevante numerische Werte enthält. Unterstützt INT8/16/32/64, FLOAT, DOUBLE.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
@@ -272,7 +272,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Gibt die zu verwendende Ranking-Methode an. Muss auf <code translate="no">"decay"</code> gesetzt werden, um die Decay-Ranking-Funktionalität zu aktivieren.</p></td>
+     <td><p>Gibt die zu verwendende Ranking-Methode an. Muss auf <code translate="no">"decay"</code> gesetzt werden, um die Funktion "decay ranking" zu aktivieren.</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>

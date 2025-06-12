@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在许多搜索应用中，内容的新鲜度与相关性同等重要。新闻文章、产品列表、社交媒体帖子和研究论文都受益于兼顾语义相关性和新旧程度的排名系统。本教程演示了如何在 Milvus 中使用衰减排名器实现基于时间的排名。</p>
+    </button></h1><p>在许多搜索应用中，内容的新鲜度与相关性同等重要。新闻文章、产品列表、社交媒体帖子和研究论文都受益于兼顾语义相关性和新鲜度的排名系统。本教程演示了如何在 Milvus 中使用衰减排名器实现基于时间的排名。</p>
 <h2 id="Understand-decay-rankers-in-Milvus" class="common-anchor-header">了解 Milvus 中的衰减排名器<button data-href="#Understand-decay-rankers-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -264,7 +264,7 @@ milvus_client.insert(collection_name, articles)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>现在让我们创建三个不同的衰减排名器，每个排名器都有不同的参数，以突出它们之间的差异：</p>
+    </button></h2><p>现在，让我们创建三个不同的衰减排名器，每个排名器都有不同的参数，以突出它们之间的差异：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use current time as reference point</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Using current time as reference point&quot;</span>)
 
@@ -618,7 +618,7 @@ print_search_results(linear_results, <span class="hljs-string">&quot;SEARCH RESU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>让我们来分析一下如何结合原始相关性和衰减因子计算最终得分：</p>
+    </button></h2><p>让我们来分析一下如何结合原始相关性和衰减因素计算最终得分：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a detailed breakdown for the first 3 results from Gaussian decay</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== SCORE CALCULATION BREAKDOWN (GAUSSIAN DECAY) ===&quot;</span>)
 <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> gaussian_results[<span class="hljs-number">0</span>][:<span class="hljs-number">3</span>]:

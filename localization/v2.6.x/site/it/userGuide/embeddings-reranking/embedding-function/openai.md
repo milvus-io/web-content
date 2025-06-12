@@ -100,7 +100,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Mettere le chiavi API in questo punto le rende persistenti tra i vari riavvii e consente di cambiare chiave semplicemente cambiando l'etichetta.</p></li>
+<p>Mettere le chiavi API in questo punto le rende persistenti tra i vari riavvii e consente di cambiare le chiavi semplicemente cambiando l'etichetta.</p></li>
 <li><p><strong>Indicare a Milvus quale chiave usare per le chiamate a OpenAI</strong></p>
 <p>Nello stesso file, indicare al provider OpenAI l'etichetta che si desidera utilizzare.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
@@ -110,7 +110,7 @@ beta: Milvus 2.6.x
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-comment"># url: https://api.openai.com/v1/embeddings   # (optional) custom endpoint</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo modo si lega una chiave specifica a ogni richiesta che Milvus invia all'endpoint OpenAI embeddings.</p></li>
+<p>Questo vincola una chiave specifica a ogni richiesta che Milvus invia all'endpoint OpenAI embeddings.</p></li>
 </ol>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">Opzione 2: variabile d'ambiente</h3><p>Utilizzare questo metodo quando si esegue Milvus con Docker Compose e si preferisce mantenere i segreti fuori dai file e dalle immagini.</p>
 <p>Milvus ricorre alla variabile d'ambiente solo se non viene trovata alcuna chiave per il provider in <code translate="no">milvus.yaml</code>.</p>

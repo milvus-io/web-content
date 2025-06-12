@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
 <p>يدعم Vertex AI العديد من نماذج التضمين لحالات استخدام مختلفة:</p>
 <ul>
 <li><p>تضمين النص-005 (أحدث نموذج تضمين نصي)</p></li>
-<li><p>تضمين النص متعدد اللغات-تضمين النص-002 (أحدث نموذج تضمين نص متعدد اللغات)</p></li>
+<li><p>تضمين نص متعدد اللغات-تضمين النص-002 (أحدث نموذج تضمين نص متعدد اللغات)</p></li>
 </ul>
 <p>للحصول على التفاصيل، ارجع إلى <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">مرجع نماذج تضمين النص Vertex AI</a>.</p>
 <h2 id="Vertex-AI-deployment" class="common-anchor-header">نشر فيرتكس للذكاء الاصطناعي<button data-href="#Vertex-AI-deployment" class="anchor-icon" translate="no">
@@ -173,7 +173,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط</h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الخام المخزنة في الحقل القياسي إلى تضمينات وتخزينها في الحقل المتجه المحدد صراحةً.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط</h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في الحقل المتجه المحدد صراحةً.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;vert_func&quot;</span>,                           <span class="hljs-comment"># Unique identifier for this embedding function</span>

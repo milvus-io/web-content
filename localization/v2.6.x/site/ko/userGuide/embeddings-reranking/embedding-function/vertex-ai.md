@@ -2,8 +2,8 @@
 id: vertex-ai.md
 title: 버텍스 AICompatible with Milvus 2.6.x
 summary: >-
-  구글 클라우드 버텍스 AI는 텍스트 임베딩 모델을 위해 특별히 설계된 고성능 서비스입니다. 이 가이드는 효율적인 텍스트 임베딩 생성을 위해
-  Milvus와 함께 구글 클라우드 버텍스 AI를 사용하는 방법을 설명합니다.
+  구글 클라우드 버텍스 AI는 텍스트 임베딩 모델을 위해 특별히 설계된 고성능 서비스입니다. 이 가이드에서는 효율적인 텍스트 임베딩 생성을
+  위해 Milvus와 함께 구글 클라우드 버텍스 AI를 사용하는 방법을 설명합니다.
 beta: Milvus 2.6.x
 ---
 <h1 id="Vertex-AI" class="common-anchor-header">버텍스 AI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Vertex-AI" class="anchor-icon" translate="no">

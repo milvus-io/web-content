@@ -26,7 +26,7 @@ title: Utiliser NLWeb avec Milvus
     </button></h1><p><a href="https://github.com/microsoft/NLWeb">NLWeb de Microsoft</a> est un cadre proposé qui permet des interfaces en langage naturel pour les sites web, en utilisant <a href="https://schema.org/">Schema.org</a>, des formats tels que RSS et le protocole MCP émergent.</p>
 <p><a href="https://milvus.io/">Milvus</a> est pris en charge en tant que base de données vectorielles dans NLWeb pour le stockage intégré et la recherche efficace de similarités vectorielles, permettant une récupération de contexte puissante pour les applications de traitement du langage naturel.</p>
 <blockquote>
-<p>Cette documentation est principalement basée sur la documentation officielle de <a href="https://github.com/microsoft/NLWeb/blob/main/HelloWorld.md">démarrage rapide</a>. Si vous trouvez un contenu obsolète ou incohérent, veuillez donner la priorité à la documentation officielle et n'hésitez pas à nous faire part d'un problème.</p>
+<p>Cette documentation est principalement basée sur la documentation officielle de <a href="https://github.com/microsoft/NLWeb/blob/main/HelloWorld.md">démarrage rapide</a>. Si vous trouvez du contenu obsolète ou incohérent, veuillez donner la priorité à la documentation officielle et n'hésitez pas à nous faire part d'un problème.</p>
 </blockquote>
 <h2 id="Usage" class="common-anchor-header">Utilisation<button data-href="#Usage" class="anchor-icon" translate="no">
       <svg translate="no"

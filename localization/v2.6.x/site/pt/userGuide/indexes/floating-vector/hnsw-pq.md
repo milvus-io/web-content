@@ -44,7 +44,7 @@ summary: >-
     </button></h2><p>O HNSW_PQ combina duas técnicas de indexação: <strong>HNSW</strong> para uma navegação rápida baseada em grafos e <strong>PQ</strong> para uma compressão vetorial eficiente.</p>
 <h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>O HNSW constrói um grafo de várias camadas em que cada nó corresponde a um vetor no conjunto de dados. Neste gráfico, os nós são ligados com base na sua semelhança, permitindo uma rápida deslocação através do espaço de dados. A estrutura hierárquica permite que o algoritmo de pesquisa reduza os vizinhos candidatos, acelerando significativamente o processo de pesquisa em espaços de elevada dimensão.</p>
 <p>Para mais informações, consulte <a href="/docs/pt/hnsw.md">HNSW</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p>A PQ é uma técnica de compressão de vectores que decompõe vectores de elevada dimensão em sub-vectores mais pequenos, que são depois quantizados e comprimidos. A compressão reduz drasticamente os requisitos de memória e acelera os cálculos de distância.</p>
+<h3 id="PQ" class="common-anchor-header">PQ</h3><p>PQ é uma técnica de compressão de vectores que decompõe vectores de elevada dimensão em sub-vectores mais pequenos, que são depois quantizados e comprimidos. A compressão reduz drasticamente os requisitos de memória e acelera os cálculos de distância.</p>
 <p>Para mais informações, consulte <a href="/docs/pt/ivf-pq.md#PQ">IVF_PQ</a>.</p>
 <h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ</h3><p>O HNSW_PQ combina os pontos fortes do HNSW e do PQ para permitir uma pesquisa eficiente do vizinho mais próximo aproximado. Utiliza PQ para comprimir os dados (reduzindo assim a utilização de memória) e, em seguida, constrói um gráfico HNSW nestes vectores comprimidos para permitir uma rápida recuperação de candidatos. Durante a pesquisa, o algoritmo pode, opcionalmente, refinar os resultados dos candidatos utilizando dados de maior precisão para melhorar a exatidão. Eis como funciona o processo:</p>
 <ol>
@@ -101,7 +101,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: O método utilizado para calcular a distância entre vectores. Os valores suportados incluem <code translate="no">COSINE</code>, <code translate="no">L2</code>, e <code translate="no">IP</code>. Para obter detalhes, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opções de configuração adicionais para criar o índice. Para obter detalhes, consulte <a href="/docs/pt/hnsw-pq.md#Index-building-params">Parâmetros de construção de índice</a>.</p></li>
 </ul>
-<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para mais informações, consulte <a href="/docs/pt/create-collection.md">Criar coleção</a>.</p>
+<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para obter detalhes, consulte <a href="/docs/pt/create-collection.md">Criar coleção</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Pesquisar no índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e executar pesquisas no índice.</p>
+    </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para construir um índice e executar pesquisas no índice.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção de índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/hnsw-pq.md#Build-index">construir um índice</a>.</p>
 <table>
    <tr>
@@ -197,7 +197,7 @@ res = MilvusClient.search(
      <td><p>O número de bits utilizados para representar o índice do centróide de cada sub-vetor na forma comprimida. Ele determina diretamente o tamanho de cada livro de códigos. Cada livro de códigos conterá $2^{\textit{nbits}}$ centroides. Por exemplo, se <code translate="no">nbits</code> estiver definido para 8, cada sub-vetor será representado por um índice de centróide de 8 bits. Isto permite $2^8$ (256) centróides possíveis no livro de códigos para esse sub-vetor.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, 64]</p>
 <p><strong>Valor predefinido</strong>: <code translate="no">8</code></p></td>
-     <td><p>Um valor mais alto em <code translate="no">nbits</code> permite livros de códigos maiores, potencialmente levando a representações mais precisas dos vectores originais. No entanto, também significa utilizar mais bits para armazenar cada índice, resultando numa menor compressão. Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [1, 16].</p></td>
+     <td><p>Um valor <code translate="no">nbits</code> mais alto permite livros de códigos maiores, potencialmente levando a representações mais precisas dos vectores originais. No entanto, também significa utilizar mais bits para armazenar cada índice, resultando numa menor compressão. Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [1, 16].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -232,7 +232,7 @@ res = MilvusClient.search(
  Este parâmetro afecta apenas o processo de pesquisa e aplica-se exclusivamente à camada inferior do gráfico.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valor por defeito</strong>: <em>limite</em> (TopK vizinhos mais próximos a devolver)</p></td>
-     <td><p>Um <code translate="no">ef</code> maior leva geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais vizinhos potenciais. Considere aumentar <code translate="no">ef</code> quando a obtenção de uma alta recuperação é crítica e a velocidade de <strong>pesquisa</strong> é menos preocupante.</p>
+     <td><p>Um <code translate="no">ef</code> maior conduz geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais vizinhos potenciais. Considere aumentar <code translate="no">ef</code> quando a obtenção de uma alta recuperação é crítica e a velocidade de <strong>pesquisa</strong> é menos preocupante.</p>
 <p>Considere diminuir <code translate="no">ef</code> para dar prioridade a pesquisas mais rápidas, especialmente em cenários em que uma ligeira redução na precisão é aceitável.</p>
 <p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [K, 10K].</p></td>
    </tr>

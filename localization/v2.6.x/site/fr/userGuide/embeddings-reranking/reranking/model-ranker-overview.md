@@ -5,11 +5,11 @@ summary: >-
   La recherche vectorielle traditionnelle classe les résultats uniquement en
   fonction de la similarité mathématique, c'est-à-dire de la proximité des
   vecteurs dans un espace à haute dimension. Bien qu'efficace, cette approche
-  passe souvent à côté de la véritable pertinence sémantique. Pensez à une
-  recherche sur les "meilleures pratiques pour l'optimisation des bases de
-  données" : vous pourriez recevoir des documents à forte similarité vectorielle
-  qui mentionnent fréquemment ces termes, mais qui ne fournissent pas réellement
-  de stratégies d'optimisation exploitables.
+  passe souvent à côté de la véritable pertinence sémantique. Pensez à la
+  recherche de "meilleures pratiques pour l'optimisation des bases de données" :
+  vous pourriez recevoir des documents à forte similarité vectorielle qui
+  mentionnent fréquemment ces termes, mais qui ne fournissent pas réellement de
+  stratégies d'optimisation exploitables.
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">Aperçu de Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -181,7 +181,7 @@ model_ranker = Function(
    <tr>
      <th><p>Paramètre</p></th>
      <th><p>Obligatoire ?</p></th>
-     <th><p>Description de l'objet</p></th>
+     <th><p>Description</p></th>
      <th><p>Valeur / Exemple</p></th>
    </tr>
    <tr>

@@ -139,7 +139,7 @@ beta: Milvus 2.6.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>埋め込み機能の概要</span> </span></p>
-<h3 id="Credential-management" class="common-anchor-header">クレデンシャル管理</h3><p>外部のエンベッディングAPIに接続するには、認証情報（APIキーまたはアクセスキーとシークレットキーのペア）が必要です。これらの認証情報をアプリケーションコードに公開することはセキュリティリスクを生みます。Milvusは、認証情報をMilvus設定ファイル(<code translate="no">milvus.yaml</code>)に安全に保存することでこれを解決します。</p>
+<h3 id="Credential-management" class="common-anchor-header">クレデンシャル管理</h3><p>外部のエンベッディングAPIに接続するには、認証情報（APIキーまたはアクセスキーとシークレットキーのペア）が必要です。これらの認証情報をアプリケーションコードに公開すると、セキュリティリスクが発生します。Milvusは、認証情報をMilvus設定ファイル(<code translate="no">milvus.yaml</code>)に安全に保存することでこれを解決します。</p>
 <ol>
 <li><p><strong>認証情報を追加</strong>します：トップレベル<code translate="no">credential:</code> ブロックの下で、各クレデンシャルにユニークなラベルを付け、<code translate="no">function:</code> ブロックでそのラベルを指すようにします。</p></li>
 <li><p><strong>サーバはコンフィグをロード</strong>します：MilvusはYAMLファイルを読み込み、生の鍵をメモリにキャッシュし、ラベルのみを記憶する(例:<code translate="no">apikey1</code>)。</p></li>
@@ -407,7 +407,7 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">ステップ 5: データの挿入</h3><p>コレクションとインデックスを設定したら、生データを挿入する準備が整いました。このプロセスでは、生のテキストを提供するだけでよい。先に定義したFunctionモジュールが、各テキスト入力に対応するスパースベクトルを自動的に生成します。</p>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">ステップ 5: データの挿入</h3><p>コレクションとインデックスを設定したら、生データを挿入する準備ができました。このプロセスでは、生のテキストを提供するだけでよい。先に定義したFunctionモジュールが、各テキスト入力に対応するスパースベクトルを自動的に生成します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},

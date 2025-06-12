@@ -141,7 +141,7 @@ summary: >-
 <li>Cloud-Speicher-Modus (S3): Beim direkten Schreiben auf S3 erreichte Woodpecker 750 MB/s (ca. 68 % der theoretischen Grenze von S3), 5,8× schneller als Kafka und 7× schneller als Pulsar. Obwohl die Latenzzeit höher ist (166 ms), bietet dieses Setup einen außergewöhnlichen Durchsatz für stapelorientierte Arbeitslasten.</li>
 <li>Objektspeicher-Modus (MinIO): Selbst mit MinIO erreichte Woodpecker 71 MB/s - etwa 65 % der Kapazität von MinIO. Diese Leistung ist mit der von Kafka und Pulsar vergleichbar, allerdings bei deutlich geringerem Ressourcenbedarf.</li>
 </ul>
-<p>Woodpecker ist besonders für gleichzeitige Schreibvorgänge mit hohem Volumen optimiert, bei denen die Aufrechterhaltung der Reihenfolge entscheidend ist. Und diese Ergebnisse spiegeln nur die frühen Stadien der Entwicklung wider - laufende Optimierungen bei der E/A-Zusammenführung, der intelligenten Pufferung und dem Prefetching werden die Leistung voraussichtlich noch näher an die theoretischen Grenzen bringen.</p>
+<p>Woodpecker ist besonders für gleichzeitige Schreibvorgänge mit hohem Volumen optimiert, bei denen die Aufrechterhaltung der Reihenfolge entscheidend ist. Und diese Ergebnisse spiegeln nur die frühen Stadien der Entwicklung wider - es wird erwartet, dass laufende Optimierungen bei der E/A-Zusammenführung, der intelligenten Pufferung und dem Prefetching die Leistung noch näher an die theoretischen Grenzen bringen werden.</p>
 <h2 id="Operational-benefits" class="common-anchor-header">Betriebliche Vorteile<button data-href="#Operational-benefits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -45,7 +45,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>テキストエンベッディング-3-小</p></td>
-     <td><p>デフォルト：1,536（1536以下のディメンションサイズに切り換え可能）</p></td>
+     <td><p>デフォルト：1,536（1536以下のディメンションサイズに変換可能）</p></td>
      <td><p>8,191</p></td>
      <td><p>コスト重視でスケーラブルなセマンティック検索に最適-低価格で強力なパフォーマンスを提供。</p></td>
    </tr>
@@ -80,7 +80,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Milvusはエンベッディングをリクエストする前に、Azure OpenAI APIキーを知っている必要があります。Milvusはクレデンシャルを設定するために2つの方法を提供します：</p>
 <ul>
-<li><p><strong>設定ファイル（推奨）：</strong> <code translate="no">milvus.yaml</code> にAPIキーを保存し、再起動やノードが自動的にAPIキーを取得するようにします。</p></li>
+<li><p><strong>設定ファイル（推奨）：</strong> <code translate="no">milvus.yaml</code> にAPIキーを保存し、再起動とノードが自動的にAPIキーを取得するようにします。</p></li>
 <li><p><strong>環境変数：</strong>Docker Composeに最適です。</p></li>
 </ul>
 <p>コンフィギュレーション・ファイルはベアメタルやVMでメンテナンスしやすく、env-varルートはコンテナのワークフローに適している。</p>

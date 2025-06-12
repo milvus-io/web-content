@@ -76,7 +76,7 @@ summary: MilvusのGPUサポートによるインデックスの構築は、高�
    </tr>
    <tr>
      <td><p><a href="/docs/ja/gpu-ivf-flat.md">GPU_IVF_FLAT</a></p></td>
-     <td><p>GPU_IVF_FLATは最も基本的なIVFインデックスで、各ユニットに格納されるエンコードされたデータは元のデータと一致します。検索を行う場合、GPU_IVF_FLAT インデックスのコレクションに対する検索では、top-k (<code translate="no">limit</code>)を256まで設定できることに注意してください。</p></td>
+     <td><p>GPU_IVF_FLATは最も基本的なIVFインデックスで、各ユニットに格納されるエンコードされたデータは元のデータと一致します。検索を行う場合、GPU_IVF_FLAT インデックスのコレクションに対する検索では、top-k (<code translate="no">limit</code>) を最大 256 まで設定できることに注意してください。</p></td>
      <td><p>元データのサイズと同じメモリが必要です。</p></td>
    </tr>
    <tr>

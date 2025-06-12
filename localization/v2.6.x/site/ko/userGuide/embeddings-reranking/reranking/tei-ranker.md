@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TEI Ranker는 의미론적 재순위를 통해 검색 관련성을 향상시키기 위해 Hugging Face의 <a href="/docs/ko/tei-ranker.md">텍스트 임베딩 추론(TEI)</a> 서비스를 활용합니다. 이는 기존의 벡터 유사도를 뛰어넘는 검색 결과 순서에 대한 고급 접근 방식을 나타냅니다.</p>
+    </button></h1><p>TEI Ranker는 의미론적 재랭킹을 통해 검색 관련성을 향상시키기 위해 Hugging Face의 <a href="/docs/ko/tei-ranker.md">텍스트 임베딩 추론(TEI)</a> 서비스를 활용합니다. 이는 기존의 벡터 유사도를 뛰어넘는 검색 결과 순서에 대한 고급 접근 방식을 나타냅니다.</p>
 <p><a href="/docs/ko/vllm-ranker.md">vLLM Ranker와</a> 비교했을 때, TEI Ranker는 허깅 페이스의 에코시스템 및 사전 학습된 재랭크 모델과의 간단한 통합을 제공하므로 배포 및 유지 관리의 용이성이 우선시되는 애플리케이션에 이상적입니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Milvus에서 vLLM Ranker를 구현하기 전에 다음이 필요합니다:</p>
 <ul>
 <li><p>재랭크할 텍스트가 포함된 <code translate="no">VARCHAR</code> 필드가 있는 Milvus 컬렉션</p></li>
-<li><p>순위 재조정 기능이 있는 실행 중인 TEI 서비스. TEI 서비스 설정에 대한 자세한 지침은 <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">공식 TEI 문서를</a> 참조하세요.</p></li>
+<li><p>재랭크 기능이 있는 실행 중인 TEI 서비스. TEI 서비스 설정에 대한 자세한 지침은 <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">공식 TEI 문서를</a> 참조하세요.</p></li>
 </ul>
 <h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">TEI 랭커 기능 만들기<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"

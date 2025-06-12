@@ -64,7 +64,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: El método utilizado para calcular la distancia entre vectores. Para más detalles, consulte <a href="/docs/es/metric.md">Tipos métricos</a>.</p></li>
 <li><p><code translate="no">params</code>: Opciones de configuración adicionales para construir el índice. Para conocer más parámetros de construcción disponibles para el índice <code translate="no">GPU_CAGRA</code>, consulte <a href="/docs/es/gpu-cagra.md#Index-building-params">Parámetros de construcción del índice</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando el método <code translate="no">create_index()</code> directamente o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

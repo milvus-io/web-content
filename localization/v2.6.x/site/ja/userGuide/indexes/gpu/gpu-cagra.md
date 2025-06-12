@@ -59,7 +59,7 @@ index_params.add_index(
 <ul>
 <li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">GPU_CAGRA</code> とします。</p></li>
 <li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
-<li><p><code translate="no">params</code>:インデックスを構築するための追加構成オプション。<code translate="no">GPU_CAGRA</code> インデックスで利用可能な構築パラメータについては、<a href="/docs/ja/gpu-cagra.md#Index-building-params">インデックス構築パラメータを</a>参照してください。</p></li>
+<li><p><code translate="no">params</code>:インデックスを構築するための追加構成オプション。<code translate="no">GPU_CAGRA</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/gpu-cagra.md#Index-building-params">インデックス構築パラメータを</a>参照してください。</p></li>
 </ul>
 <p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>
 <h2 id="Search-on-index" class="common-anchor-header">インデックスでの検索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -95,7 +95,7 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>この構成では</p>
 <ul>
-<li><code translate="no">params</code>:インデックスで検索するための追加構成オプション。<code translate="no">GPU_CAGRA</code> インデックスで使用できる検索パラメータについては、<a href="/docs/ja/gpu-cagra.md#Index-specific-search-params">インデックス固有の検索パラメータを</a>参照してください。</li>
+<li><code translate="no">params</code>:インデックスで検索するための追加構成オプション。<code translate="no">GPU_CAGRA</code> インデックスで使用可能な検索パラメータについては、<a href="/docs/ja/gpu-cagra.md#Index-specific-search-params">インデックス固有の検索パラメータ</a> を参照してください。</li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">インデックスパラメータ<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -143,7 +143,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
      <td><p>元のデータセットをGPUメモリにキャッシュするかどうかを決定します。可能な値：</p>
 <ul>
-<li><p><code translate="no">"true"</code>:元のデータセットをキャッシュし、検索結果を絞り込むことで再現率を高めます。</p></li>
+<li><p><code translate="no">"true"</code>:元のデータセットをキャッシュし、検索結果を精緻化することでリコールを向上させる。</p></li>
 <li><p><code translate="no">"false"</code>:GPUメモリを節約するため、元のデータセットをキャッシュしない。</p></li>
 </ul></td>
      <td><p><code translate="no">"false"</code></p></td>
@@ -183,7 +183,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>クエリ時間と精度のトレードオフを指定します。<code translate="no">ef</code> の値を高くすると、検索精度は高くなりますが、検索速度は遅くなります。 インデックスを構築する際に<code translate="no">adapt_for_cpu</code> から<code translate="no">true</code> を設定した場合、このパラメータは必須となります。</p></td>
+     <td><p>クエリー時間と精度のトレードオフを指定します。<code translate="no">ef</code> の値を高くすると、検索精度は高くなりますが、検索速度は遅くなります。 インデックスを構築する際に<code translate="no">adapt_for_cpu</code> から<code translate="no">true</code> を設定した場合、このパラメータは必須となります。</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>

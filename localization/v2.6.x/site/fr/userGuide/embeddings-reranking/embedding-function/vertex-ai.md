@@ -204,7 +204,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
-     <td><p>Le fournisseur du modèle d'intégration. Défini à "vertexai".</p></td>
+     <td><p>Le fournisseur du modèle d'intégration. La valeur est "vertexai".</p></td>
      <td><p>Oui</p></td>
      <td><p><code translate="no">"vertexai"</code></p></td>
    </tr>

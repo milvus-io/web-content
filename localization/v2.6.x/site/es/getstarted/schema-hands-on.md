@@ -57,12 +57,12 @@ summary: >-
 </ul></li>
 <li><p><strong>Métodos de búsqueda:</strong> Elija las técnicas de búsqueda apropiadas que se ajusten a los tipos de consultas que realizarán sus usuarios. Los distintos métodos sirven para diferentes propósitos y a menudo pueden combinarse para obtener resultados más potentes:</p>
 <ul>
-<li><p><strong>Búsqueda semántica</strong>: Utiliza la similitud de vectores densos para encontrar elementos con significado similar, ideal para datos no estructurados como texto o imágenes.</p></li>
+<li><p><strong>Búsqueda semántica</strong>: Utiliza la similitud vectorial densa para encontrar elementos con significado similar, ideal para datos no estructurados como texto o imágenes.</p></li>
 <li><p><strong>Búsqueda de texto completo</strong>: Complementa la búsqueda semántica con la concordancia de palabras clave.  La búsqueda de texto completo puede utilizar el análisis léxico para evitar dividir palabras largas en tokens fragmentados, captando los términos especiales durante la recuperación.</p></li>
 <li><p><strong>Filtrado de metadatos</strong>: Además de la búsqueda vectorial, aplica restricciones como intervalos de fechas, categorías o etiquetas.</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Traducir los requisitos empresariales en un modelo de datos de búsqueda</h3><p>El siguiente paso consiste en traducir tus requisitos empresariales en un modelo de datos concreto, identificando los componentes básicos de tu información y sus métodos de búsqueda:</p>
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Traducir los requisitos empresariales en un modelo de datos de búsqueda</h3><p>El siguiente paso consiste en traducir tus requisitos empresariales en un modelo de datos concreto, identificando los componentes centrales de tu información y sus métodos de búsqueda:</p>
 <ul>
 <li><p>Defina los datos que necesita almacenar, como el contenido en bruto (texto, imágenes, audio), los metadatos asociados (títulos, etiquetas, autoría) y los atributos contextuales (marcas de tiempo, comportamiento del usuario, etc.).</p></li>
 <li><p>Determine los tipos de datos y formatos adecuados para cada elemento. Por ejemplo:</p>

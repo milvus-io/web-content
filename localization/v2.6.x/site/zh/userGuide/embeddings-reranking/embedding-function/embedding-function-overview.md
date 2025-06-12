@@ -142,7 +142,7 @@ beta: Milvus 2.6.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>嵌入功能概述</span> </span></p>
-<h3 id="Credential-management" class="common-anchor-header">凭证管理</h3><p>连接到外部 Embeddings API 需要验证凭证（API 密钥或访问/保密密钥对）。在应用程序代码中暴露这些凭证会产生安全风险。Milvus 通过将凭证安全地存储在 Milvus 配置文件 (<code translate="no">milvus.yaml</code>) 中来解决这个问题。</p>
+<h3 id="Credential-management" class="common-anchor-header">凭证管理</h3><p>连接到外部 Embeddings API 需要验证凭证（API 密钥或访问/保密密钥对）。在应用程序代码中暴露这些凭证会产生安全风险。Milvus 通过在 Milvus 配置文件 (<code translate="no">milvus.yaml</code>) 中安全地存储凭据来解决这个问题。</p>
 <ol>
 <li><p><strong>添加凭据</strong>：在顶层<code translate="no">credential:</code> 块下，给每个凭据一个唯一的标签；然后在<code translate="no">function:</code> 块中指向该标签。</p></li>
 <li><p><strong>服务器加载配置</strong>：Milvus 会读取 YAML 文件，在内存中缓存原始密钥，并只记住它们的标签（如<code translate="no">apikey1</code> ）。</p></li>
@@ -175,7 +175,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在使用 Milvus 的 Embeddings 功能之前，请配置访问凭证。</p>
+    </button></h2><p>在使用 Milvus 的 Embeddings 功能之前，请配置访问凭据。</p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration" class="common-anchor-header">步骤 1：在 Milvus 配置中添加凭据</h3><p>在<code translate="no">milvus.yaml</code> 文件中，编辑<code translate="no">credential</code> 块，为需要访问的每个提供商添加条目：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>

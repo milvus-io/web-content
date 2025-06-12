@@ -60,7 +60,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Annunci di eventi</p></td>
      <td><p>Piattaforme di biglietti per concerti</p></td>
-     <td><p>Crea un limite chiaro per gli eventi troppo lontani nel tempo</p></td>
+     <td><p>Crea un limite chiaro per gli eventi troppo lontani nel futuro</p></td>
    </tr>
    <tr>
      <td><p>Offerte a tempo limitato</p></td>
@@ -159,7 +159,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Il decadimento lineare può essere applicato sia alla ricerca vettoriale standard che alle operazioni di ricerca ibrida in Milvus. Di seguito sono riportati i principali frammenti di codice per implementare questa funzione.</p>
 <div class="alert note">
-<p>Prima di utilizzare le funzioni di decadimento, è necessario creare una collezione con campi numerici appropriati (come timestamp, distanze, ecc.) che verranno utilizzati per i calcoli di decadimento. Per esempi di lavoro completi, che includono l'impostazione della raccolta, la definizione dello schema e l'inserimento dei dati, consultare l'<a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">esercitazione</a> sul <a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker</a>.</p>
+<p>Prima di utilizzare le funzioni di decadimento, è necessario creare una collezione con campi numerici appropriati (come timestamp, distanze, ecc.) che saranno utilizzati per i calcoli di decadimento. Per esempi di lavoro completi, che includono l'impostazione della raccolta, la definizione dello schema e l'inserimento dei dati, consultare l'<a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">esercitazione</a> sul <a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Creare un ranker di decadimento</h3><p>Dopo aver impostato la raccolta con un campo numerico (in questo esempio, <code translate="no">event_date</code> come secondi da ora), creare un ranker di decadimento lineare:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

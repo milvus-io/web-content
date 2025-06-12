@@ -205,7 +205,7 @@ res = MilvusClient.search(
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 65536]</p>
 <p><strong>Valor por defecto</strong>: Ninguno</p></td>
      <td><p>Un valor más alto de <code translate="no">m</code> puede mejorar la precisión, pero también aumenta la complejidad computacional y el uso de memoria. <code translate="no">m</code> debe ser un divisor de la dimensión del vector<em>(D</em>) para garantizar una descomposición adecuada. Un valor comúnmente recomendado es <em>m = D/2</em>.</p>
-<p>En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [D/8, D].</p></td>
+<p>En la mayoría de los casos, le recomendamos que establezca un valor dentro de este rango: [D/8, D].</p></td>
    </tr>
    <tr>
      <td></td>

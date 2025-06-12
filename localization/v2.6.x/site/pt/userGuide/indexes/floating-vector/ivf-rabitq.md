@@ -222,6 +222,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>O processo de refinamento usa quantização de maior qualidade para escolher o número necessário de vizinhos mais próximos de um conjunto <code translate="no">refine_k</code> vezes maior de candidatos escolhidos usando IVF_RABITQ.</p></td>
      <td><p><strong>Tipo</strong>: Float<br><strong>Range</strong>: [1, <em>float_max</em>)<br><strong>Valor predefinido</strong>: <code translate="no">1</code></p></td>
-     <td><p>Valores mais altos em <code translate="no">refine_k</code> diminuem o QPS, mas aumentam a taxa de recuperação. Comece com <code translate="no">1</code> e teste os valores <code translate="no">2</code>, <code translate="no">3</code>, <code translate="no">4</code> e <code translate="no">5</code> para encontrar a melhor relação entre QPS e recuperação para o seu conjunto de dados.</p></td>
+     <td><p>Valores mais altos em <code translate="no">refine_k</code> diminuem o QPS, mas aumentam a taxa de recuperação. Comece com <code translate="no">1</code> e teste os valores <code translate="no">2</code>, <code translate="no">3</code>, <code translate="no">4</code>, e <code translate="no">5</code> para encontrar a melhor relação entre QPS e recuperação para o seu conjunto de dados.</p></td>
    </tr>
 </table>

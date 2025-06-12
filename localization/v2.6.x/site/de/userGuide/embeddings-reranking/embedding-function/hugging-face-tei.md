@@ -33,7 +33,7 @@ beta: Milvus 2.6.x
 <li><p>Und viele weitere</p></li>
 </ul>
 <div class="alert note">
-<p>Eine aktuelle Liste der unterstützten Modelle finden Sie im <a href="https://github.com/huggingface/text-embeddings-inference">TEI GitHub Repository</a> und im <a href="https://huggingface.co/models?pipeline_tag=text-embedding">Hugging Face Hub</a>.</p>
+<p>Die aktuelle Liste der unterstützten Modelle finden Sie im <a href="https://github.com/huggingface/text-embeddings-inference">TEI GitHub Repository</a> und im <a href="https://huggingface.co/models?pipeline_tag=text-embedding">Hugging Face Hub</a>.</p>
 </div>
 <h2 id="TEI-deployment" class="common-anchor-header">TEI-Einsatz<button data-href="#TEI-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -53,7 +53,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Bevor Sie Milvus mit der TEI-Funktion konfigurieren können, müssen Sie einen laufenden TEI-Dienst haben. Milvus unterstützt zwei Ansätze für den TEI-Einsatz:</p>
 <h3 id="Standard-deployment-external" class="common-anchor-header">Standard-Einsatz (extern)</h3><p>Sie können TEI als eigenständigen Dienst mit den offiziellen Methoden von Hugging Face bereitstellen. Dieser Ansatz bietet Ihnen maximale Flexibilität und Kontrolle über Ihren TEI-Dienst.</p>
 <p>Detaillierte Anweisungen zur Bereitstellung von TEI mit Docker oder anderen Methoden finden Sie in der <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">offiziellen Dokumentation von Hugging Face Text Embeddings Inference</a>.</p>
-<p>Notieren Sie sich nach der Bereitstellung den Endpunkt Ihres TEI-Dienstes (z. B. <code translate="no">http://localhost:8080</code>), da Sie ihn bei der <a href="/docs/de/hugging-face-tei.md#Use-embedding-function-">Verwendung der TEI-Funktion in Milvus</a> benötigen.</p>
+<p>Notieren Sie sich nach der Bereitstellung den Endpunkt Ihres TEI-Dienstes (z. B. <code translate="no">http://localhost:8080</code>), da Sie ihn für die <a href="/docs/de/hugging-face-tei.md#Use-embedding-function-">Verwendung der TEI-Funktion in Milvus</a> benötigen.</p>
 <h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm Chart-Bereitstellung (integriert)</h3><p>Für Kubernetes-Umgebungen bietet Milvus eine integrierte Bereitstellungsoption über sein Helm Chart. Dies vereinfacht den Prozess, indem TEI zusammen mit Milvus bereitgestellt und konfiguriert wird.</p>
 <p>So aktivieren Sie TEI in Ihrer Milvus Helm-Bereitstellung:</p>
 <ol>

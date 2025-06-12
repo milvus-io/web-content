@@ -69,7 +69,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالنسبة للحقول العددية مثل <strong>BOOL</strong> و <strong>INT8</strong> و <strong>INT16</strong> و <strong>INT32</strong> و <strong>INT64</strong> و <strong>FLOAT و FLOAT</strong> و <strong>DOUBLE</strong> و <strong>VARCHAR</strong> و <strong>ARRAY،</strong> فإن إنشاء فهرس مقلوب أمر بسيط ومباشر. استخدم الأسلوب <code translate="no">create_index()</code> مع ضبط المعلمة <code translate="no">index_type</code> على <code translate="no">&quot;INVERTED&quot;</code>.</p>
+    </button></h2><p>بالنسبة للحقول القياسية مثل <strong>BOOL</strong> و <strong>INT8</strong> و <strong>INT16</strong> و <strong>INT32</strong> و <strong>INT64</strong> و <strong>FLOAT و FLOAT</strong> و <strong>DOUBLE</strong> و <strong>VARCHAR</strong> و <strong>ARRAY،</strong> فإن إنشاء فهرس مقلوب أمر بسيط ومباشر. استخدم الأسلوب <code translate="no">create_index()</code> مع ضبط المعلمة <code translate="no">index_type</code> على <code translate="no">&quot;INVERTED&quot;</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -180,7 +180,7 @@ index_params.add_index(
 <li><p><code translate="no">"bool"</code> أو <code translate="no">"BOOL"</code></p></li>
 <li><p><code translate="no">"double"</code> أو <code translate="no">"DOUBLE"</code></p></li>
 <li><p><code translate="no">"varchar"</code> أو <code translate="no">"VARCHAR"</code></p>
-<p><strong>ملاحظة</strong>: بالنسبة لقيم الأعداد الصحيحة، يستخدم Milvus داخليًا مزدوجًا للفهرس. الأعداد الصحيحة الكبيرة التي تزيد عن 2^53 تفقد الدقة. في حال فشل الإرسال (بسبب عدم تطابق النوع)، لا يتم طرح أي خطأ، ولا تتم فهرسة قيمة ذلك الصف.</p></li>
+<p><strong>ملاحظة</strong>: بالنسبة لقيم الأعداد الصحيحة، يستخدم Milvus داخليًا مزدوجًا للفهرس. الأعداد الصحيحة الكبيرة التي تزيد عن 2^53 تفقد الدقة. إذا فشلت عملية الإرسال (بسبب عدم تطابق النوع)، لا يتم طرح أي خطأ، ولا تتم فهرسة قيمة ذلك الصف.</p></li>
 </ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
@@ -217,6 +217,6 @@ index_params.add_index(
 </ul></li>
 <li><p><strong>تكامل البيانات</strong>:</p>
 <ul>
-<li>لا يقوم Milvus بتحليل مفاتيح JSON أو تحويلها خارج نطاق الصب المحدد. إذا كانت بيانات المصدر غير متناسقة (على سبيل المثال، تخزن بعض الصفوف سلسلة للمفتاح <code translate="no">&quot;k&quot;</code> بينما تخزن أخرى رقمًا)، فلن تتم فهرسة بعض الصفوف.</li>
+<li>لا يقوم Milvus بتحليل مفاتيح JSON أو تحويلها خارج نطاق الصب المحدد. إذا كانت البيانات المصدر غير متناسقة (على سبيل المثال، تخزن بعض الصفوف سلسلة للمفتاح <code translate="no">&quot;k&quot;</code> بينما تخزن أخرى رقمًا)، فلن تتم فهرسة بعض الصفوف.</li>
 </ul></li>
 </ul>

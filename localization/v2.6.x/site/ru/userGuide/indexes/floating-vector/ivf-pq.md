@@ -80,7 +80,7 @@ summary: >-
 <li><p>При этом создается <code translate="no">m</code> таблиц поиска, где каждая таблица содержит <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits расстояний.</span></span></span></span></span></span></span></span></span> </p></li>
 </ul></li>
 <li><p><strong>Аппроксимация расстояний</strong></p>
-<p>Для любого вектора базы данных, представленного кодами PQ, его приблизительное расстояние до вектора запроса вычисляется следующим образом:</p>
+<p>Для любого вектора базы данных, представленного PQ-кодами, его приблизительное расстояние до вектора запроса вычисляется следующим образом:</p>
 <ul>
 <li><p>Для каждого из подвекторов <code translate="no">m</code> извлекаем предварительно вычисленное расстояние из соответствующей таблицы поиска, используя сохраненный индекс центроида.</p></li>
 <li><p>Просуммируйте эти <code translate="no">m</code> расстояния, чтобы получить приблизительное расстояние, основанное на определенном типе метрики (например, евклидово расстояние).</p></li>
@@ -92,7 +92,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Ivf Pq 2</span> </span></p>
 <h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>Индекс <strong>IVF_PQ</strong> объединяет сильные стороны <strong>IVF</strong> и <strong>PQ</strong> для ускорения поиска. Процесс работает в два этапа:</p>
 <ol>
-<li><p><strong>Грубая фильтрация с помощью ЭКО</strong>: ЭКО разбивает векторное пространство на кластеры, сокращая область поиска. Вместо того чтобы оценивать весь набор данных, алгоритм фокусируется только на кластерах, наиболее близких к вектору запроса.</p></li>
+<li><p><strong>Грубая фильтрация с помощью ЭКО</strong>: ЭКО разбивает векторное пространство на кластеры, сокращая объем поиска. Вместо того чтобы оценивать весь набор данных, алгоритм фокусируется только на кластерах, наиболее близких к вектору запроса.</p></li>
 <li><p><strong>Тонкое сравнение с помощью PQ</strong>: внутри выбранных кластеров PQ использует сжатые и квантованные представления векторов для быстрого вычисления приблизительных расстояний.</p></li>
 </ol>
 <p>На производительность индекса <strong>IVF_PQ</strong> существенно влияют параметры, управляющие алгоритмами IVF и PQ. Настройка этих параметров очень важна для достижения оптимальных результатов для конкретного набора данных и приложения. Более подробную информацию об этих параметрах и о том, как их настраивать, можно найти в разделе <a href="/docs/ru/ivf-pq.md#Index-params">Index params</a>.</p>

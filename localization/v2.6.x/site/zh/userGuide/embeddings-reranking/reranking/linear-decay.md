@@ -2,7 +2,7 @@
 id: linear-decay.md
 title: 线性衰减Compatible with Milvus 2.6.x
 summary: >-
-  线性衰减会使搜索结果中的相关性直线下降，并以绝对零点为终点。就像即将发生的事件倒计时一样，相关性会逐渐减弱，直到事件过去，线性衰减会随着项目远离您的理想点而使相关性可预测地稳步下降，直到完全消失。这种方法非常适合在需要一致的衰减率和明确的分界线时使用，可确保超出一定界限的项目完全被排除在搜索结果之外。
+  线性衰减会使搜索结果中的相关性直线下降，并以绝对零点为终点。就像即将发生的事件倒计时一样，相关性会逐渐减弱，直到事件过去，线性衰减会随着项目远离您的理想点而使相关性可预测地稳步降低，直到完全消失。这种方法非常适合在需要一致的衰减率和明确的分界线时使用，可确保超出一定界限的项目完全被排除在搜索结果之外。
 beta: Milvus 2.6.x
 ---
 <h1 id="Linear-Decay" class="common-anchor-header">线性衰减<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Linear-Decay" class="anchor-icon" translate="no">
@@ -92,7 +92,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>线性衰减是指以恒定的速度直线下降，直至降到零。这种模式出现在许多日常场景中，如倒计时器、库存耗尽和截止日期临近，在这些场景中，相关性都有一个明确的到期点。</p>
+    </button></h2><p>线性衰减是指以恒定的速度直线下降，直至降到零。这种模式出现在许多日常场景中，如倒计时器、库存耗尽和截止日期临近，在这些场景中，相关性有一个明确的到期点。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
@@ -151,7 +151,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>线性衰减可应用于 Milvus 中的标准向量搜索和混合搜索操作符。下面是实现这一功能的关键代码片段。</p>
 <div class="alert note">
-<p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collections，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅《<a href="/docs/zh/tutorial-implement-a-time-based-ranking-in-milvus.md">衰减排名器教程》</a>。</p>
+<p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collection，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅《<a href="/docs/zh/tutorial-implement-a-time-based-ranking-in-milvus.md">衰减排名器教程》</a>。</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">创建衰减排名器</h3><p>用数字字段（在本例中，<code translate="no">event_date</code> ，即从现在开始的秒）设置好 Collections 后，创建一个线性衰减排序器：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

@@ -2,7 +2,7 @@
 id: NLWeb_with_milvus.md
 summary: >-
   Microsoft
-  NLWebとMilvusを統合し、Webサイト用の強力な自然言語インターフェースを構築する方法を学びます。このチュートリアルでは、Milvusのベクトルデータベース機能を活用し、NLWebアプリケーションにおける効率的なセマンティック検索、埋め込みストレージ、コンテキスト検索を実現する方法をご紹介します。
+  NLWebとMilvusを統合し、ウェブサイト用の強力な自然言語インターフェースを構築する方法を学びます。このチュートリアルでは、Milvusのベクトルデータベース機能を活用し、NLWebアプリケーションにおける効率的なセマンティック検索、埋め込みストレージ、コンテキスト検索を実現する方法をご紹介します。
 title: MilvusでNLWebを使う
 ---
 <h1 id="Using-NLWeb-with-Milvus" class="common-anchor-header">MilvusでNLWebを使う<button data-href="#Using-NLWeb-with-Milvus" class="anchor-icon" translate="no">

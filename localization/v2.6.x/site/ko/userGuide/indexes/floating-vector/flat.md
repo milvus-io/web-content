@@ -4,7 +4,7 @@ title: FLAT
 summary: >-
   FLAT 인덱스는 부동 소수점 벡터를 색인하고 검색하는 가장 간단하고 직관적인 방법 중 하나입니다. 고급 전처리나 데이터 구조화 없이 각
   쿼리 벡터를 데이터 세트의 모든 벡터와 직접 비교하는 무차별 대입 방식에 의존합니다. 이 접근 방식은 모든 잠재적 일치를 평가하기 때문에
-  정확도를 보장하며 100%의 일치율을 제공합니다.
+  정확도를 보장하며 100%의 정확도를 제공합니다.
 ---
 <h1 id="FLAT" class="common-anchor-header">FLAT<button data-href="#FLAT" class="anchor-icon" translate="no">
       <svg translate="no"
