@@ -1,12 +1,14 @@
 ---
 id: range-search.md
-title: Range Search
+title: Recherche par intervalle
 summary: >-
-  A range search improves search result relevancy by restricting the distance or
-  score of the returned entities within a specific range. This page helps you
-  understand what range search is and the procedures to conduct a range search.
+  Une recherche par intervalle améliore la pertinence des résultats de recherche
+  en limitant la distance ou le score des entités retournées à un intervalle
+  spécifique. Cette page vous aide à comprendre ce qu'est une recherche par
+  intervalle et les procédures à suivre pour effectuer une recherche par
+  intervalle.
 ---
-<h1 id="Range-Search" class="common-anchor-header">Range Search<button data-href="#Range-Search" class="anchor-icon" translate="no">
+<h1 id="Range-Search" class="common-anchor-header">Recherche par intervalle<button data-href="#Range-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A range search improves search result relevancy by restricting the distance or score of the returned entities within a specific range. This page helps you understand what range search is and the procedures to conduct a range search.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Une recherche par intervalle améliore la pertinence des résultats de recherche en limitant la distance ou le score des entités retournées à un intervalle spécifique. Cette page vous aide à comprendre ce qu'est une recherche par intervalle et les procédures à suivre pour effectuer une recherche par intervalle.</p>
+<h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,53 +39,51 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When executing a Range Search request, Milvus uses the most similar vectors to the query vector from the ANN Search results as the center, with the <strong>radius</strong> specified in the Search request as the outer circle’s radius, and the <strong>range_filter</strong> as the inner circle’s radius to draw two concentric circles. All vectors with similarity scores that fall within the annular region formed by these two concentric circles will be returned. Here, the <strong>range_filter</strong> can be set to <strong>0</strong>, indicating that all entities within the specified similarity score (radius) will be returned.</p>
+    </button></h2><p>Lors de l'exécution d'une requête de recherche par plage, Milvus utilise les vecteurs les plus similaires au vecteur de requête des résultats de la recherche ANN comme centre, avec le <strong>rayon</strong> spécifié dans la requête de recherche comme rayon du cercle extérieur et le <strong>filtre_périmètre</strong> comme rayon du cercle intérieur pour dessiner deux cercles concentriques. Tous les vecteurs dont les scores de similarité se situent dans la région annulaire formée par ces deux cercles concentriques seront renvoyés. Ici, le <strong>filtre_intervalle</strong> peut être fixé à <strong>0</strong>, ce qui indique que toutes les entités comprises dans le score de similarité spécifié (rayon) seront renvoyées.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" />
-    <span>Range Search</span>
-  </span>
-</p>
-<p>The above diagram shows that a range search request carries two parameters: <strong>radius</strong> and <strong>range_filter</strong>. Upon receiving a range search request, Milvus does the following:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" />
+   </span> <span class="img-wrapper"> <span>Recherche par plage</span> </span></p>
+<p>Le diagramme ci-dessus montre qu'une demande de recherche d'intervalle comporte deux paramètres : <strong>radius</strong> et <strong>range_filter</strong>. Lors de la réception d'une demande de recherche d'intervalle, Milvus effectue les opérations suivantes :</p>
 <ul>
-<li><p>Use the specified metric type (<strong>COSINE</strong>) to find all vector embeddings most similar to the query vector.</p></li>
-<li><p>Filter the vector embeddings whose <strong>distances</strong> or <strong>scores</strong> to the query vector fall within the range specified by the <strong>radius</strong> and <strong>range_filter</strong> parameters.</p></li>
-<li><p>Return the <strong>top-K</strong> entities from the filtered ones.</p></li>
+<li><p>Utiliser le type de métrique spécifié<strong>(COSINE</strong>) pour trouver tous les ancrages vectoriels les plus similaires au vecteur de la requête.</p></li>
+<li><p>Filtrer les intégrations vectorielles dont les <strong>distances</strong> ou les <strong>scores</strong> par rapport au vecteur d'interrogation se situent dans l'intervalle spécifié par les paramètres <strong>radius</strong> et <strong>range_filter</strong>.</p></li>
+<li><p>Renvoyer les <strong>K premières</strong> entités parmi celles qui ont été filtrées.</p></li>
 </ul>
-<p>The way to set <strong>radius</strong> and <strong>range_filter</strong> varies with the metric type of the search. The following table lists the requirements for setting these two parameters with different metric types.</p>
+<p>La manière de définir <strong>radius</strong> et <strong>range_filter</strong> varie en fonction du type de métrique de la recherche. Le tableau suivant répertorie les exigences relatives à la définition de ces deux paramètres en fonction des différents types de métriques.</p>
 <table>
    <tr>
-     <th><p>Metric Type</p></th>
-     <th><p>Denotations</p></th>
-     <th><p>Requirements for Setting radius and range_filter</p></th>
+     <th><p>Type de métrique</p></th>
+     <th><p>Dénotations</p></th>
+     <th><p>Conditions pour définir radius et range_filter</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
-     <td><p>A smaller L2 distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Une distance L2 plus petite indique une plus grande similarité.</p></td>
+     <td><p>Pour ignorer les intégrations vectorielles les plus similaires, assurez-vous que <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
-     <td><p>A greater IP distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Une plus grande distance IP indique une plus grande similarité.</p></td>
+     <td><p>Pour ignorer les enregistrements vectoriels les plus similaires, assurez-vous que <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>A greater COSINE distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Une plus grande distance COSINE indique une plus grande similarité.</p></td>
+     <td><p>Pour ne pas tenir compte des enregistrements vectoriels les plus similaires, assurez-vous que <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
-     <td><p>A smaller Jaccard distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Une distance de Jaccard plus petite indique une plus grande similarité.</p></td>
+     <td><p>Pour ignorer les enregistrements vectoriels les plus similaires, il faut s'assurer que <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>A smaller Hamming distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Une distance de Hamming plus petite indique une plus grande similarité.</p></td>
+     <td><p>Pour ignorer les enregistrements vectoriels les plus similaires, assurez-vous que <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
    </tr>
 </table>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,15 +98,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section demonstrates how to conduct a range search. The search requests in the following code snippets do not carry a metric type, indicating the default metric type <strong>COSINE</strong> applies. In this case, ensure that the <strong>radius</strong> value is smaller than the <strong>range_filter</strong> value.</p>
-<p>In the following code snippets, set <code translate="no">radius</code> to <code translate="no">0.4</code> and <code translate="no">range_filter</code> to <code translate="no">0.6</code> so that Milvus returns all entities whose distances or scores to the query vector fall within <strong>0.4</strong> to <strong>0.6</strong>.</p>
+    </button></h2><p>Cette section montre comment effectuer une recherche par plage. Les requêtes de recherche dans les extraits de code suivants ne comportent pas de type de métrique, ce qui indique que le type de métrique par défaut <strong>COSINE</strong> s'applique. Dans ce cas, assurez-vous que la valeur <strong>radius</strong> est inférieure à la valeur <strong>range_filter</strong>.</p>
+<p>Dans les extraits de code suivants, définissez <code translate="no">radius</code> sur <code translate="no">0.4</code> et <code translate="no">range_filter</code> sur <code translate="no">0.6</code> afin que Milvus renvoie toutes les entités dont les distances ou les scores par rapport au vecteur de requête sont compris entre <strong>0,4</strong> et <strong>0,6</strong>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(

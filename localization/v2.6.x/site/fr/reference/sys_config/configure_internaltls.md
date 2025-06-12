@@ -2,9 +2,9 @@
 id: configure_internaltls.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure internaltls for Milvus.
+summary: Apprenez à configurer internaltls pour Milvus.
 ---
-<h1 id="internaltls-related-Configurations" class="common-anchor-header">internaltls-related Configurations<button data-href="#internaltls-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="internaltls-related-Configurations" class="common-anchor-header">Configurations relatives à internaltls<button data-href="#internaltls-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,12 +39,12 @@ summary: Learn how to configure internaltls for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The server name indication (SNI) for internal TLS, should be the same as the name provided by the certificates ref: https://en.wikipedia.org/wiki/Server_Name_Indication      </td>
+      <td>        L'indication du nom du serveur (SNI) pour TLS interne doit être identique au nom fourni par les certificats ref : https://en.wikipedia.org/wiki/Server_Name_Indication      </td>
       <td>localhost</td>
     </tr>
   </tbody>

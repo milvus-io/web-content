@@ -5,12 +5,12 @@ summary: >-
   La décroissance gaussienne, également connue sous le nom de décroissance
   normale, crée l'ajustement le plus naturel de vos résultats de recherche. À
   l'instar de la vision humaine qui s'estompe progressivement avec la distance,
-  la décroissance gaussienne crée une courbe lisse en forme de cloche qui réduit
-  doucement la pertinence au fur et à mesure que les éléments s'éloignent de
-  votre point idéal. Cette approche est idéale lorsque vous souhaitez une
-  décroissance équilibrée qui ne pénalise pas durement les éléments situés juste
-  en dehors de votre plage préférée, mais qui réduit tout de même de manière
-  significative la pertinence des éléments éloignés.
+  la décroissance gaussienne crée une courbe lisse, en forme de cloche, qui
+  réduit doucement la pertinence à mesure que les éléments s'éloignent de votre
+  point idéal. Cette approche est idéale lorsque vous souhaitez une décroissance
+  équilibrée qui ne pénalise pas durement les éléments situés juste en dehors de
+  votre plage préférée, mais qui réduit tout de même de manière significative la
+  pertinence des éléments éloignés.
 beta: Milvus 2.6.x
 ---
 <h1 id="Gaussian-Decay" class="common-anchor-header">Décroissance gaussienne<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Gaussian-Decay" class="anchor-icon" translate="no">

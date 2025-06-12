@@ -133,7 +133,7 @@ summary: >-
 <li><p>En montant les données sur un SSD NVMe dans les deux types de nœuds, vous garantissez des vitesses de lecture et d'écriture rapides pour les opérations de recherche et d'indexation.</p></li>
 </ul></li>
 </ul>
-<p>Une fois ces modifications effectuées, redémarrez votre instance Milvus pour que les paramètres prennent effet. Désormais, Milvus exploitera les capacités de DISKANN pour traiter de grands ensembles de données, en fournissant une recherche vectorielle efficace et évolutive.</p>
+<p>Une fois ces modifications effectuées, redémarrez votre instance Milvus pour que les paramètres prennent effet. Désormais, Milvus exploitera les capacités de DISKANN pour traiter des ensembles de données volumineux et fournir une recherche vectorielle efficace et évolutive.</p>
 <h2 id="Configure-DISKANN" class="common-anchor-header">Configuration de DISKANN<button data-href="#Configure-DISKANN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,7 +262,7 @@ res = MilvusClient.search(
      <td><p>Contrôle la taille des codes PQ (représentations compressées des points de données) par rapport à la taille des données non compressées.</p></td>
      <td><p><strong>Type</strong>: Flottant <strong>Plage</strong>: (0,0, 0,25)</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">0.125</code></p></td>
-     <td><p>Un ratio plus élevé permet d'obtenir des résultats de recherche plus précis en allouant une plus grande proportion de la mémoire aux codes PQ, ce qui permet de stocker davantage d'informations sur les vecteurs originaux. Un ratio plus faible réduit l'utilisation de la mémoire, mais sacrifie potentiellement la précision, car les codes PQ plus petits conservent moins d'informations. Cette approche convient aux scénarios dans lesquels les contraintes de mémoire sont importantes, et permet éventuellement d'indexer des ensembles de données plus importants.</p>
+     <td><p>Un ratio plus élevé permet d'obtenir des résultats de recherche plus précis en allouant une plus grande proportion de la mémoire aux codes PQ, ce qui permet de stocker plus d'informations sur les vecteurs originaux. Un ratio plus faible réduit l'utilisation de la mémoire, mais sacrifie potentiellement la précision, car les codes PQ plus petits conservent moins d'informations. Cette approche convient aux scénarios dans lesquels les contraintes de mémoire sont importantes, et permet éventuellement d'indexer des ensembles de données plus importants.</p>
 <p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : (0.0625, 0.25)</p></td>
    </tr>
 </table>

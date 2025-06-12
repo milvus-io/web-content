@@ -6,9 +6,8 @@ summary: >-
   indexer et rechercher des vecteurs à virgule flottante. Il repose sur une
   approche brute, dans laquelle chaque vecteur interrogé est directement comparé
   à tous les vecteurs de l'ensemble de données, sans aucun prétraitement ou
-  structuration de données avancés. Cette approche garantit la précision,
-  offrant un rappel de 100 %, puisque chaque correspondance potentielle est
-  évaluée.
+  structuration de données avancés. Cette approche garantit la précision, avec
+  un rappel de 100 %, puisque chaque correspondance potentielle est évaluée.
 ---
 <h1 id="FLAT" class="common-anchor-header">FLAT<button data-href="#FLAT" class="anchor-icon" translate="no">
       <svg translate="no"

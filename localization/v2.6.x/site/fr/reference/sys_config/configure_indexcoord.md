@@ -2,9 +2,9 @@
 id: configure_indexcoord.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure indexCoord for Milvus.
+summary: Découvrez comment configurer indexCoord pour Milvus.
 ---
-<h1 id="indexCoord-related-Configurations" class="common-anchor-header">indexCoord-related Configurations<button data-href="#indexCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="indexCoord-related-Configurations" class="common-anchor-header">Configurations liées à indexCoord<button data-href="#indexCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure indexCoord for Milvus.
     </button></h2><table id="indexCoord.segment.minSegmentNumRowsToEnableIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la configuration</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        It's a threshold. When the segment num rows is less than this value, the segment will not be indexed      </td>
+      <td>        Il s'agit d'un seuil. Lorsque le nombre de lignes du segment est inférieur à cette valeur, le segment n'est pas indexé.      </td>
       <td>1024</td>
     </tr>
   </tbody>

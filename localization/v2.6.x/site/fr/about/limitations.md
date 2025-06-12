@@ -1,10 +1,10 @@
 ---
 id: limitations.md
-title: Milvus Limits
+title: Limites de Milvus
 related_key: Limitations
-summary: Learn about the limits while using Milvus.
+summary: Apprenez à connaître les limites de l'utilisation de Milvus.
 ---
-<h1 id="Milvus-Limits" class="common-anchor-header">Milvus Limits<button data-href="#Milvus-Limits" class="anchor-icon" translate="no">
+<h1 id="Milvus-Limits" class="common-anchor-header">Limites de Milvus<button data-href="#Milvus-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: Learn about the limits while using Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus is committed to providing the best vector databases to power AI applications and vector similarity search. However, the team is continuously working to bring in more features and the best utilities to enhance user experience. This page lists out some known limitations that the users may encounter when using Milvus.</p>
-<h2 id="Length-of-a-resource-name" class="common-anchor-header">Length of a resource name<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus s'engage à fournir les meilleures bases de données vectorielles pour alimenter les applications d'IA et la recherche de similarités vectorielles. Cependant, l'équipe travaille en permanence à l'ajout de nouvelles fonctionnalités et des meilleurs utilitaires pour améliorer l'expérience de l'utilisateur. Cette page énumère certaines limites connues que les utilisateurs peuvent rencontrer lors de l'utilisation de Milvus.</p>
+<h2 id="Length-of-a-resource-name" class="common-anchor-header">Longueur du nom d'une ressource<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,16 +37,16 @@ summary: Learn about the limits while using Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Resource</th><th>Limit</th></tr>
+<tr><th>Ressource</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Collection</td><td>255 characters</td></tr>
-<tr><td>Field</td><td>255 characters</td></tr>
-<tr><td>Index</td><td>255 characters</td></tr>
-<tr><td>Partition</td><td>255  characters</td></tr>
+<tr><td>Collecte</td><td>255 caractères</td></tr>
+<tr><td>Champ</td><td>255 caractères</td></tr>
+<tr><td>Index</td><td>255 caractères</td></tr>
+<tr><td>Partition</td><td>255 caractères</td></tr>
 </tbody>
 </table>
-<h2 id="Naming-rules" class="common-anchor-header">Naming rules<button data-href="#Naming-rules" class="anchor-icon" translate="no">
+<h2 id="Naming-rules" class="common-anchor-header">Règles d'attribution des noms<button data-href="#Naming-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,8 +61,8 @@ summary: Learn about the limits while using Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The name of a resource such the collection name, partition name, or index name can contain numbers, letters, and underscores (_). A resource name must start with a letter or an underscore (_).</p>
-<h2 id="Number-of-resources" class="common-anchor-header">Number of resources<button data-href="#Number-of-resources" class="anchor-icon" translate="no">
+    </button></h2><p>Le nom d'une ressource telle que le nom de la collection, de la partition ou de l'index peut contenir des chiffres, des lettres et des traits de soulignement (_). Le nom d'une ressource doit commencer par une lettre ou un trait de soulignement (_).</p>
+<h2 id="Number-of-resources" class="common-anchor-header">Nombre de ressources<button data-href="#Number-of-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,14 +79,14 @@ summary: Learn about the limits while using Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Resource</th><th>Limit</th></tr>
+<tr><th>Ressource</th><th>Limite</th></tr>
 </thead>
 <tbody>
 <tr><td>Collection</td><td>65,536</td></tr>
-<tr><td>Connection / proxy</td><td>65,536</td></tr>
+<tr><td>Connexion / proxy</td><td>65,536</td></tr>
 </tbody>
 </table>
-<h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Number of resources in a collection<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">
+<h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Nombre de ressources dans une collection<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,17 +103,17 @@ summary: Learn about the limits while using Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Resource</th><th>Limit</th></tr>
+<tr><th>Ressources</th><th>Limite</th></tr>
 </thead>
 <tbody>
 <tr><td>Partition</td><td>1,024</td></tr>
-<tr><td>Shard</td><td>16</td></tr>
-<tr><td>Field</td><td>64</td></tr>
+<tr><td>Part</td><td>16</td></tr>
+<tr><td>Champ</td><td>64</td></tr>
 <tr><td>Index</td><td>1</td></tr>
-<tr><td>Entity</td><td>unlimited</td></tr>
+<tr><td>Entité</td><td>illimité</td></tr>
 </tbody>
 </table>
-<h2 id="Length-of-a-string" class="common-anchor-header">Length of a string<button data-href="#Length-of-a-string" class="anchor-icon" translate="no">
+<h2 id="Length-of-a-string" class="common-anchor-header">Longueur d'une chaîne de caractères<button data-href="#Length-of-a-string" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,13 +130,13 @@ summary: Learn about the limits while using Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Data type</th><th>Limit</th></tr>
+<tr><th>Type de données</th><th>Limite</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65,535</td></tr>
 </tbody>
 </table>
-<h2 id="Dimensions-of-a-vector" class="common-anchor-header">Dimensions of a vector<button data-href="#Dimensions-of-a-vector" class="anchor-icon" translate="no">
+<h2 id="Dimensions-of-a-vector" class="common-anchor-header">Dimensions d'un vecteur<button data-href="#Dimensions-of-a-vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,13 +153,13 @@ summary: Learn about the limits while using Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Property</th><th>Limit</th></tr>
+<tr><th>Propriété</th><th>Limite</th></tr>
 </thead>
 <tbody>
 <tr><td>Dimension</td><td>32,768</td></tr>
 </tbody>
 </table>
-<h2 id="Input-and-Output-per-RPC" class="common-anchor-header">Input and Output per RPC<button data-href="#Input-and-Output-per-RPC" class="anchor-icon" translate="no">
+<h2 id="Input-and-Output-per-RPC" class="common-anchor-header">Entrées et sorties par RPC<button data-href="#Input-and-Output-per-RPC" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,15 +176,15 @@ summary: Learn about the limits while using Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Operation</th><th>Limit</th></tr>
+<tr><th>Fonctionnement</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Insert</td><td>64 MB</td></tr>
-<tr><td>Search</td><td>64 MB</td></tr>
-<tr><td>Query</td><td>64 MB</td></tr>
+<tr><td>Insertion</td><td>64 MO</td></tr>
+<tr><td>Recherche</td><td>64 MB</td></tr>
+<tr><td>Requête</td><td>64 MB</td></tr>
 </tbody>
 </table>
-<h2 id="Load-limits" class="common-anchor-header">Load limits<button data-href="#Load-limits" class="anchor-icon" translate="no">
+<h2 id="Load-limits" class="common-anchor-header">Limites de chargement<button data-href="#Load-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -199,8 +199,8 @@ summary: Learn about the limits while using Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In current release, data to be load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.</p>
-<h2 id="Search-limits" class="common-anchor-header">Search limits<button data-href="#Search-limits" class="anchor-icon" translate="no">
+    </button></h2><p>Dans la version actuelle, les données à charger doivent être inférieures à 90 % des ressources mémoire totales de tous les nœuds de requête afin de réserver des ressources mémoire au moteur d'exécution.</p>
+<h2 id="Search-limits" class="common-anchor-header">Limites de recherche<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -217,14 +217,14 @@ summary: Learn about the limits while using Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Vectors</th><th>Limit</th></tr>
+<tr><th>Vecteurs</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">topk</code> (number of the most similar result to return)</td><td>16,384</td></tr>
-<tr><td><code translate="no">nq</code> (number of the search requests)</td><td>16,384</td></tr>
+<tr><td><code translate="no">topk</code> (nombre de résultats les plus similaires à renvoyer)</td><td>16,384</td></tr>
+<tr><td><code translate="no">nq</code> (nombre de demandes de recherche)</td><td>16,384</td></tr>
 </tbody>
 </table>
-<h2 id="Index-limits-on-different-search-types" class="common-anchor-header">Index limits on different search types<button data-href="#Index-limits-on-different-search-types" class="anchor-icon" translate="no">
+<h2 id="Index-limits-on-different-search-types" class="common-anchor-header">Limites de l'index pour différents types de recherche<button data-href="#Index-limits-on-different-search-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -239,22 +239,22 @@ summary: Learn about the limits while using Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following table provides an overview of the support for various search behaviors across different index types.</p>
+    </button></h2><p>Le tableau suivant donne un aperçu de la prise en charge des différents comportements de recherche selon les différents types d'index.</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>SPARSE_INVERTED_INDEX</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>INDEX_INVERTI_SPARSE</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
-<tr><td>Basic search</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Partition search</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Basic search with raw data retrieved</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Basic search with pagination</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Filtered search</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Range search</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Grouping search</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
-<tr><td>Search with iterator</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Hybrid search</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes(Only RRFRanker)</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Query/Get</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Query with iterator</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Recherche de base</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de partition</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de base avec récupération des données brutes</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de base avec pagination</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche filtrée</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de portée</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de groupes</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Non</td><td>Non</td></tr>
+<tr><td>Recherche avec itérateur</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche hybride</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui (uniquement RRFRanker)</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Interroger/obtenir</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Requête avec itérateur</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
 </tbody>
 </table>
