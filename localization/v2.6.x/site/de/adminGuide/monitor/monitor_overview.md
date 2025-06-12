@@ -1,12 +1,12 @@
 ---
 id: monitor_overview.md
-title: Monitor Overview
+title: Monitor-Übersicht
 related_key: 'monitor, alert'
 summary: >-
-  Learn how Prometheus and Grafana are used in Milvus for montoring and alerting
-  services.
+  Erfahren Sie, wie Prometheus und Grafana in Milvus für Überwachungs- und
+  Alarmierungsdienste eingesetzt werden.
 ---
-<h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvus monitoring framework overview<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
+<h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Überblick über das Milvus-Überwachungs-Framework<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic explains how Milvus uses Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.</p>
+    </button></h1><p>Dieses Thema erklärt, wie Milvus Prometheus zur Überwachung von Metriken und Grafana zur Visualisierung von Metriken und zur Erstellung von Alarmen verwendet.</p>
 <h2 id="Prometheus-in-Milvus" class="common-anchor-header">Prometheus in Milvus<button data-href="#Prometheus-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,40 +37,40 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://prometheus.io/docs/introduction/overview/">Prometheus</a> is an open-source monitoring and alerting toolkit for Kubernetes implementations. It collects and stores metrics as time-series data. This means that metrics are stored with timestamps when recorded, alongside with optional key-value pairs called labels.</p>
-<p>Currently Milvus uses the following components of Prometheus:</p>
+    </button></h2><p><a href="https://prometheus.io/docs/introduction/overview/">Prometheus</a> ist ein Open-Source-Überwachungs- und Alarmierungs-Toolkit für Kubernetes-Implementierungen. Es sammelt und speichert Metriken als Zeitseriendaten. Das bedeutet, dass die Metriken mit Zeitstempeln gespeichert werden, wenn sie aufgezeichnet werden, zusammen mit optionalen Schlüssel-Wert-Paaren, den so genannten Labels.</p>
+<p>Derzeit verwendet Milvus die folgenden Komponenten von Prometheus:</p>
 <ul>
-<li>Prometheus endpoint to pull data from endpoints set by exporters.</li>
-<li>Prometheus operator to effectively manage Prometheus monitoring instances.</li>
-<li>Kube-prometheus to provide easy to operate end-to-end Kubernetes cluster monitoring.</li>
+<li>Prometheus-Endpunkt zum Abrufen von Daten von Endpunkten, die von Exporteuren festgelegt wurden.</li>
+<li>Prometheus-Operator zur effektiven Verwaltung von Prometheus-Überwachungsinstanzen.</li>
+<li>Kube-prometheus für eine einfach zu bedienende End-to-End-Überwachung von Kubernetes-Clustern.</li>
 </ul>
-<h3 id="Metric-names" class="common-anchor-header">Metric names</h3><p>A valid metric name in Prometheus contains three elements: namespace, subsystem, and name. These three elements are connected with "_".</p>
-<p>The namespace of Milvus metrics monitored by Prometheus is "milvus". Depending on the role that a metric belongs to, its subsystem should be one of the following eight roles: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
-<p>For instance, the Milvus metric that calculates the total number of vectors queried is named <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
-<h3 id="Metric-types" class="common-anchor-header">Metric types</h3><p>Prometheus supports four types of metrics:</p>
+<h3 id="Metric-names" class="common-anchor-header">Metrik-Namen</h3><p>Ein gültiger Metrikname in Prometheus enthält drei Elemente: Namespace, Subsystem und Name. Diese drei Elemente sind mit "_" verbunden.</p>
+<p>Der Namespace der Milvus-Metriken, die von Prometheus überwacht werden, ist "milvus". Abhängig von der Rolle, zu der eine Metrik gehört, sollte ihr Subsystem eine der folgenden acht Rollen sein: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
+<p>Die Milvus-Metrik, die die Gesamtzahl der abgefragten Vektoren berechnet, heißt zum Beispiel <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
+<h3 id="Metric-types" class="common-anchor-header">Metrik-Typen</h3><p>Prometheus unterstützt vier Arten von Metriken:</p>
 <ul>
-<li>Counter: a type of cumulative metrics whose value can only increase or be reset to zero upon restart.</li>
-<li>Gauge: a type of metrics whose value can either go up and down.</li>
-<li>Histogram: a type of metrics that are counted based on configurable buckets. A common example is request duration.</li>
-<li>Summary: a type of metrics similar to histogram that calculates configurable quantiles over a sliding time window.</li>
+<li>Zähler: ein Typ kumulativer Metriken, deren Wert nur bei einem Neustart erhöht oder auf Null zurückgesetzt werden kann.</li>
+<li>Gauge: ein Typ von Metriken, deren Wert entweder steigen oder fallen kann.</li>
+<li>Histogramm: eine Art von Metriken, die auf der Grundlage von konfigurierbaren Bereichen gezählt werden. Ein gängiges Beispiel ist die Anfragedauer.</li>
+<li>Zusammenfassung: Eine Art von Metrik, die dem Histogramm ähnelt und konfigurierbare Quantile über ein gleitendes Zeitfenster berechnet.</li>
 </ul>
-<h3 id="Metric-labels" class="common-anchor-header">Metric labels</h3><p>Prometheus differentiates samples with the same metric name by labeling them. A label is a certain attribute of a metric. Metrics with the same name must have the same value for the <code translate="no">variable_labels</code> field. The following table lists the names and meanings of common labels of Milvus metrics.</p>
+<h3 id="Metric-labels" class="common-anchor-header">Metrik-Bezeichnungen</h3><p>Prometheus unterscheidet Stichproben mit demselben Metriknamen, indem es sie beschriftet. Ein Label ist ein bestimmtes Attribut einer Metrik. Metriken mit demselben Namen müssen denselben Wert für das Feld <code translate="no">variable_labels</code> haben. In der folgenden Tabelle sind die Namen und Bedeutungen der gebräuchlichen Bezeichnungen von Milvus-Metriken aufgeführt.</p>
 <table>
 <thead>
-<tr><th>Label name</th><th>Definition</th><th>Values</th></tr>
+<tr><th>Name des Labels</th><th>Definition</th><th>Werte</th></tr>
 </thead>
 <tbody>
-<tr><td>“node_id”</td><td>The unique identity of a role.</td><td>A globally unique ID generated by milvus.</td></tr>
-<tr><td>“status”</td><td>The status of a processed operation or request.</td><td>"abandon", "success", or "fail".</td></tr>
-<tr><td>“query_type”</td><td>The type of a read request.</td><td>“search” or "query".</td></tr>
-<tr><td>“msg_type”</td><td>The type of messages.</td><td>"insert", "delete", "search", or "query".</td></tr>
-<tr><td>“segment_state”</td><td>The status of a segment.</td><td>"Sealed", "Growing", "Flushed", "Flushing", "Dropped", or "Importing".</td></tr>
-<tr><td>“cache_state”</td><td>The status of a cached object.</td><td>“hit” or "miss".</td></tr>
-<tr><td>“cache_name”</td><td>The name of a cached object. This label is used together with the label "cache_state".</td><td>Eg. "CollectionID", "Schema", etc.</td></tr>
-<tr><td>“channel_name"</td><td>Physical topics in message storage (Pulsar or Kafka).</td><td>Eg."by-dev-rootcoord-dml_0", "by-dev-rootcoord-dml_255", etc.</td></tr>
-<tr><td>“function_name”</td><td>The name of a function that handles certain requests.</td><td>Eg. "CreateCollection", "CreatePartition", "CreateIndex", etc.</td></tr>
-<tr><td>“user_name”</td><td>The user name used for authentication.</td><td>A user name of your preference.</td></tr>
-<tr><td>“index_task_status”</td><td>The status of an index task in meta storage.</td><td>"unissued", "in-progress", "failed", "finished", or "recycled".</td></tr>
+<tr><td>"node_id"</td><td>Die eindeutige Identität einer Rolle.</td><td>Eine von milvus generierte, weltweit eindeutige ID.</td></tr>
+<tr><td>"status"</td><td>Der Status einer verarbeiteten Operation oder Anfrage.</td><td>"abandon", "success", oder "fail".</td></tr>
+<tr><td>"query_type"</td><td>Der Typ einer Leseanfrage.</td><td>"search" oder "query".</td></tr>
+<tr><td>"msg_type"</td><td>Die Art der Meldungen.</td><td>"einfügen", "löschen", "suchen" oder "abfragen".</td></tr>
+<tr><td>"segment_state"</td><td>Der Status eines Segments.</td><td>"Sealed", "Growing", "Flushed", "Flushing", "Dropped", oder "Importing".</td></tr>
+<tr><td>"cache_state"</td><td>Der Status eines zwischengespeicherten Objekts.</td><td>"Hit" oder "Miss".</td></tr>
+<tr><td>"cache_name"</td><td>Der Name eines zwischengespeicherten Objekts. Diese Bezeichnung wird zusammen mit der Bezeichnung "cache_state" verwendet.</td><td>Z.B. "CollectionID", "Schema", usw.</td></tr>
+<tr><td>"kanal_name</td><td>Physische Themen im Nachrichtenspeicher (Pulsar oder Kafka).</td><td>Z. B. "by-dev-rootcoord-dml_0", "by-dev-rootcoord-dml_255", usw.</td></tr>
+<tr><td>"funktion_name"</td><td>Der Name einer Funktion, die bestimmte Anfragen bearbeitet.</td><td>Z.B. "CreateCollection", "CreatePartition", "CreateIndex", usw.</td></tr>
+<tr><td>"user_name"</td><td>Der für die Authentifizierung verwendete Benutzername.</td><td>Geben Sie einen Benutzernamen Ihrer Wahl an.</td></tr>
+<tr><td>"index_task_status"</td><td>Der Status eines Index-Tasks im Metaspeicher.</td><td>"unissued", "in-progress", "failed", "finished", oder "recycled".</td></tr>
 </tbody>
 </table>
 <h2 id="Grafana-in-Milvus" class="common-anchor-header">Grafana in Milvus<button data-href="#Grafana-in-Milvus" class="anchor-icon" translate="no">
@@ -88,9 +88,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana</a> is an open-source visualizing stack that can connect with all data sources. By pulling up metrics, it helps users understand, analyze and monitor massive data.</p>
-<p>Milvus uses Grafana’s customizable dashboards for metric visualization.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://grafana.com/docs/grafana/latest/introduction/">Grafana</a> ist ein Open-Source-Visualisierungs-Stack, der mit allen Datenquellen verbunden werden kann. Durch das Abrufen von Metriken hilft es Benutzern, große Datenmengen zu verstehen, zu analysieren und zu überwachen.</p>
+<p>Milvus nutzt die anpassbaren Dashboards von Grafana für die Visualisierung von Metriken.</p>
+<h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,9 +105,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After learning about the basic workflow of monitoring and alerting, learn:</p>
+    </button></h2><p>Nachdem Sie den grundlegenden Arbeitsablauf der Überwachung und Alarmierung kennengelernt haben, lernen Sie:</p>
 <ul>
-<li><a href="/docs/monitor.md">Deploy monitoring services</a></li>
-<li><a href="/docs/visualize.md">Visualize Milvus metrics</a></li>
-<li><a href="/docs/alert.md">Create an alert</a></li>
+<li><a href="/docs/de/monitor.md">Bereitstellen von Überwachungsdiensten</a></li>
+<li><a href="/docs/de/visualize.md">Visualisierung von Milvus-Metriken</a></li>
+<li><a href="/docs/de/alert.md">Einen Alarm erstellen</a></li>
 </ul>

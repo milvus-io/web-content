@@ -1,13 +1,13 @@
 ---
 id: milvus_and_mcp.md
 summary: >-
-  This tutorial walks you through setting up an MCP server for Milvus, allowing
-  AI applications to perform vector searches, manage collections, and retrieve
-  data using natural language commands—without writing custom database queries.
-title: |
-  MCP + Milvus: Connecting AI with Vector Databases
+  Dieses Tutorial führt Sie durch die Einrichtung eines MCP-Servers für Milvus,
+  der es KI-Anwendungen ermöglicht, Vektorsuchen durchzuführen, Sammlungen zu
+  verwalten und Daten mit Befehlen in natürlicher Sprache abzurufen, ohne eigene
+  Datenbankabfragen schreiben zu müssen.
+title: 'MCP + Milvus: Verknüpfung von KI mit Vektordatenbanken'
 ---
-<h1 id="MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="common-anchor-header">MCP + Milvus: Connecting AI with Vector Databases<button data-href="#MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="anchor-icon" translate="no">
+<h1 id="MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="common-anchor-header">MCP + Milvus: Verknüpfung von KI mit Vektordatenbanken<button data-href="#MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,7 @@ title: |
         ></path>
       </svg>
     </button></h1><iframe width="560" height="315" src="https://www.youtube.com/embed/0wAsrUxv8gM?si=BVyRqLJ2PuZIBF5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<h2 id="Introduction" class="common-anchor-header">Introduction<button data-href="#Introduction" class="anchor-icon" translate="no">
+<h2 id="Introduction" class="common-anchor-header">Einführung<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,9 +38,9 @@ title: |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <strong>Model Context Protocol (MCP)</strong> is an open protocol that enables AI applications, such as Claude and Cursor, to interact with external data sources and tools seamlessly. Whether you’re building custom AI applications, integrating AI workflows, or enhancing chat interfaces, MCP provides a standardized way to connect large language models (LLMs) with relevant contextual data.</p>
-<p>This tutorial walks you through <strong>setting up an MCP server for Milvus</strong>, allowing AI applications to perform vector searches, manage collections, and retrieve data using <strong>natural language commands</strong>—without writing custom database queries.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h2><p>Das <strong>Model Context Protocol (MCP)</strong> ist ein offenes Protokoll, das es KI-Anwendungen wie Claude und Cursor ermöglicht, nahtlos mit externen Datenquellen und Tools zu interagieren. Ganz gleich, ob Sie benutzerdefinierte KI-Anwendungen erstellen, KI-Workflows integrieren oder Chat-Schnittstellen verbessern möchten, MCP bietet eine standardisierte Möglichkeit, große Sprachmodelle (LLMs) mit relevanten Kontextdaten zu verbinden.</p>
+<p>Dieses Tutorial führt Sie durch die <strong>Einrichtung eines MCP-Servers für Milvus</strong>, der es KI-Anwendungen ermöglicht, Vektorsuchen durchzuführen, Sammlungen zu verwalten und Daten mithilfe von <strong>Befehlen in natürlicher Sprache</strong>abzurufen <strong>, ohne</strong>eigene Datenbankabfragen schreiben zu müssen.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,13 +55,13 @@ title: |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before setting up the MCP server, ensure you have:</p>
+    </button></h2><p>Bevor Sie den MCP-Server einrichten, stellen Sie sicher, dass Sie Folgendes haben</p>
 <ul>
-<li>Python 3.10 or higher</li>
-<li>A running <a href="https://milvus.io/">Milvus</a> instance</li>
-<li><a href="https://github.com/astral-sh/uv">uv</a> (recommended for running the server)</li>
+<li>Python 3.10 oder höher</li>
+<li>Eine laufende <a href="https://milvus.io/">Milvus-Instanz</a> </li>
+<li><a href="https://github.com/astral-sh/uv">uv</a> (für den Betrieb des Servers empfohlen)</li>
 </ul>
-<h2 id="Getting-Started" class="common-anchor-header">Getting Started<button data-href="#Getting-Started" class="anchor-icon" translate="no">
+<h2 id="Getting-Started" class="common-anchor-header">Erste Schritte<button data-href="#Getting-Started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,15 +76,15 @@ title: |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The recommended way to use this MCP server is to run it directly with uv without installation. This is how both Claude Desktop and Cursor are configured to use it in the examples below.</p>
-<p>If you want to clone the repository:</p>
+    </button></h2><p>Es wird empfohlen, diesen MCP-Server ohne Installation direkt mit uv zu betreiben. In den folgenden Beispielen sind sowohl Claude Desktop als auch Cursor so konfiguriert, dass sie ihn verwenden.</p>
+<p>Wenn Sie das Repository klonen möchten:</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/mcp-server-milvus.git
 <span class="hljs-built_in">cd</span> mcp-server-milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can run the server directly:</p>
+<p>Dann können Sie den Server direkt ausführen:</p>
 <pre><code translate="no" class="language-bash">uv run src/mcp_server_milvus/server.py --milvus-uri http://localhost:19530
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Supported-Applications" class="common-anchor-header">Supported Applications<button data-href="#Supported-Applications" class="anchor-icon" translate="no">
+<h2 id="Supported-Applications" class="common-anchor-header">Unterstützte Anwendungen<button data-href="#Supported-Applications" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -99,13 +99,13 @@ title: |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This MCP server can be used with various AI applications that support the Model Context Protocol, such as:</p>
+    </button></h2><p>Dieser MCP-Server kann mit verschiedenen AI-Anwendungen verwendet werden, die das Model Context Protocol unterstützen, wie z. B:</p>
 <ul>
-<li><strong>Claude Desktop</strong>: Anthropic’s desktop application for Claude</li>
-<li><strong>Cursor</strong>: AI-powered code editor with MCP support in its Composer feature</li>
-<li><strong>Other custom MCP clients</strong> Any application implementing the MCP client specification</li>
+<li><strong>Claude Desktop</strong>: Anthropic's Desktop-Anwendung für Claude</li>
+<li><strong>Cursor</strong>: KI-gestützter Code-Editor mit MCP-Unterstützung in seiner Composer-Funktion</li>
+<li><strong>Andere kundenspezifische MCP-Clients</strong> Jede Anwendung, die die MCP-Client-Spezifikation implementiert</li>
 </ul>
-<h2 id="Using-MCP-with-Claude-Desktop" class="common-anchor-header">Using MCP with Claude Desktop<button data-href="#Using-MCP-with-Claude-Desktop" class="anchor-icon" translate="no">
+<h2 id="Using-MCP-with-Claude-Desktop" class="common-anchor-header">Verwendung von MCP mit Claude Desktop<button data-href="#Using-MCP-with-Claude-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,12 +121,11 @@ title: |
         ></path>
       </svg>
     </button></h2><ol>
-<li>Install <a href="https://claude.ai/download">Claude Desktop</a>.</li>
-<li>Open the Claude configuration file:
-<ul>
-<li>On macOS: <code translate="no">~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
+<li>Installieren Sie <a href="https://claude.ai/download">Claude Desktop</a>.</li>
+<li>Öffnen Sie die Claude-Konfigurationsdatei:<ul>
+<li>Unter macOS: <code translate="no">~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
 </ul></li>
-<li>Add the following configuration:</li>
+<li>Fügen Sie die folgende Konfiguration hinzu:</li>
 </ol>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -145,9 +144,9 @@ title: |
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="4">
-<li>Restart Claude Desktop to apply the changes.</li>
+<li>Starten Sie Claude Desktop neu, um die Änderungen zu übernehmen.</li>
 </ol>
-<h2 id="Using-MCP-with-Cursor" class="common-anchor-header">Using MCP with Cursor<button data-href="#Using-MCP-with-Cursor" class="anchor-icon" translate="no">
+<h2 id="Using-MCP-with-Cursor" class="common-anchor-header">Verwendung von MCP mit Cursor<button data-href="#Using-MCP-with-Cursor" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,22 +161,20 @@ title: |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://docs.cursor.com/context/model-context-protocol">Cursor</a> also supports MCP tools through its Agent feature in Composer. You can add the Milvus MCP server to Cursor in two ways:</p>
-<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">Option 1: Using Cursor Settings UI</h3><ol>
-<li>Open <code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code>.</li>
-<li>Click <code translate="no">+ Add New MCP Server</code>.</li>
-<li>Fill in:
-<ul>
-<li>Type: <code translate="no">stdio</code></li>
+    </button></h2><p><a href="https://docs.cursor.com/context/model-context-protocol">Cursor</a> unterstützt auch MCP-Tools durch seine Agent-Funktion im Composer. Sie können den Milvus MCP-Server auf zwei Arten zu Cursor hinzufügen:</p>
+<h3 id="Option-1-Using-Cursor-Settings-UI" class="common-anchor-header">Option 1: Über die Cursor Settings UI</h3><ol>
+<li>Öffnen Sie <code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code>.</li>
+<li>Klicken Sie auf <code translate="no">+ Add New MCP Server</code>.</li>
+<li>Füllen Sie aus:<ul>
+<li>Typ: <code translate="no">stdio</code></li>
 <li>Name: <code translate="no">milvus</code></li>
-<li>Command:
-<pre><code translate="no" class="language-bash">/PATH/TO/uv --directory /path/to/mcp-server-milvus/src/mcp_server_milvus run server.py --milvus-uri http://127.0.0.1:19530
+<li>Befehl:<pre><code translate="no" class="language-bash">/PATH/TO/uv --directory /path/to/mcp-server-milvus/src/mcp_server_milvus run server.py --milvus-uri http://127.0.0.1:19530
 <button class="copy-code-btn"></button></code></pre></li>
-<li>⚠️ Tip: Use <code translate="no">127.0.0.1</code> instead of <code translate="no">localhost</code> to avoid potential DNS resolution issues.</li>
+<li>⚠️ Tipp: Verwenden Sie <code translate="no">127.0.0.1</code> anstelle von <code translate="no">localhost</code>, um mögliche DNS-Auflösungsprobleme zu vermeiden.</li>
 </ul></li>
 </ol>
-<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">Option 2: Using Project-specific Configuration (Recommended)</h3><ol>
-<li>Create a <code translate="no">.cursor/mcp.json</code> file in your <strong>project root directory</strong>:</li>
+<h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">Option 2: Verwendung einer projektspezifischen Konfiguration (empfohlen)</h3><ol>
+<li>Erstellen Sie eine Datei <code translate="no">.cursor/mcp.json</code> in Ihrem <strong>Projekt-Stammverzeichnis</strong>:</li>
 </ol>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -196,10 +193,10 @@ title: |
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Restart Cursor to apply the configuration.</li>
+<li>Starten Sie Cursor neu, um die Konfiguration zu übernehmen.</li>
 </ol>
-<p>After adding the server, you may need to press the refresh button in the MCP settings to populate the tool list. The Composer Agent will automatically use the Milvus tools when relevant to your queries.</p>
-<h2 id="Verifying-the-Integration" class="common-anchor-header">Verifying the Integration<button data-href="#Verifying-the-Integration" class="anchor-icon" translate="no">
+<p>Nach dem Hinzufügen des Servers müssen Sie möglicherweise die Schaltfläche "Aktualisieren" in den MCP-Einstellungen drücken, um die Tool-Liste aufzufüllen. Der Composer Agent wird automatisch die Milvus-Tools verwenden, wenn sie für Ihre Abfragen relevant sind.</p>
+<h2 id="Verifying-the-Integration" class="common-anchor-header">Überprüfen der Integration<button data-href="#Verifying-the-Integration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -214,14 +211,14 @@ title: |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To ensure the MCP server is correctly set up:</p>
-<h3 id="For-Cursor" class="common-anchor-header">For Cursor</h3><ol>
-<li>Go to <code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code>.</li>
-<li>Confirm that <code translate="no">&quot;Milvus&quot;</code> appears in the list of MCP servers.</li>
-<li>Check if Milvus tools (e.g., <code translate="no">milvus_list_collections</code>, <code translate="no">milvus_vector_search</code>) are listed.</li>
-<li>If errors appear, see the <strong>Troubleshooting</strong> section below.</li>
+    </button></h2><p>So stellen Sie sicher, dass der MCP-Server korrekt eingerichtet ist:</p>
+<h3 id="For-Cursor" class="common-anchor-header">Für Cursor</h3><ol>
+<li>Gehen Sie zu <code translate="no">Cursor Settings</code> → <code translate="no">Features</code> → <code translate="no">MCP</code>.</li>
+<li>Bestätigen Sie, dass <code translate="no">&quot;Milvus&quot;</code> in der Liste der MCP-Server erscheint.</li>
+<li>Prüfen Sie, ob die Milvus-Tools (z. B. <code translate="no">milvus_list_collections</code>, <code translate="no">milvus_vector_search</code>) aufgeführt sind.</li>
+<li>Wenn Fehler auftreten, lesen Sie den Abschnitt <strong>Fehlerbehebung</strong> weiter unten.</li>
 </ol>
-<h2 id="MCP-Server-Tools-for-Milvus" class="common-anchor-header">MCP Server Tools for Milvus<button data-href="#MCP-Server-Tools-for-Milvus" class="anchor-icon" translate="no">
+<h2 id="MCP-Server-Tools-for-Milvus" class="common-anchor-header">MCP-Server-Tools für Milvus<button data-href="#MCP-Server-Tools-for-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -236,37 +233,37 @@ title: |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This MCP server provides multiple tools for <strong>searching, querying, and managing vector data in Milvus</strong>. For more details, please refer to the <a href="https://github.com/zilliztech/mcp-server-milvus">mcp-server-milvus</a> documentation.</p>
-<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 Search and Query Tools</h3><ul>
-<li><strong><code translate="no">milvus-text-search</code></strong> → Search for documents using full text search.</li>
-<li><strong><code translate="no">milvus-vector-search</code></strong> → Perform vector similarity search on a collection.</li>
-<li><strong><code translate="no">milvus-hybrid-search</code></strong> → Perform hybrid search combining vector similarity and attribute filtering.</li>
-<li><strong><code translate="no">milvus-multi-vector-search</code></strong> → Perform vector similarity search with multiple query vectors.</li>
-<li><strong><code translate="no">milvus-query</code></strong> → Query collection using filter expressions.</li>
-<li><strong><code translate="no">milvus-count</code></strong> → Count entities in a collection.</li>
+    </button></h2><p>Dieser MCP-Server bietet mehrere Tools für die <strong>Suche, Abfrage und Verwaltung von Vektordaten in Milvus</strong>. Weitere Einzelheiten entnehmen Sie bitte der Dokumentation <a href="https://github.com/zilliztech/mcp-server-milvus">mcp-server-milvus</a>.</p>
+<h3 id="🔍-Search-and-Query-Tools" class="common-anchor-header">🔍 Such- und Abfragetools</h3><ul>
+<li><strong><code translate="no">milvus-text-search</code></strong> → Suche nach Dokumenten mittels Volltextsuche.</li>
+<li><strong><code translate="no">milvus-vector-search</code></strong> → Durchführen einer Vektorähnlichkeitssuche in einer Sammlung.</li>
+<li><strong><code translate="no">milvus-hybrid-search</code></strong> → Durchführen einer hybriden Suche, die Vektorähnlichkeit und Attributfilterung kombiniert.</li>
+<li><strong><code translate="no">milvus-multi-vector-search</code></strong> → Durchführen einer Vektorähnlichkeitssuche mit mehreren Abfragevektoren.</li>
+<li><strong><code translate="no">milvus-query</code></strong> → Abfrage einer Sammlung mit Filterausdrücken.</li>
+<li><strong><code translate="no">milvus-count</code></strong> → Zählen von Entitäten in einer Sammlung.</li>
 </ul>
-<h3 id="📁-Collection-Management" class="common-anchor-header">📁 Collection Management</h3><ul>
-<li><strong><code translate="no">milvus-list-collections</code></strong> → List all collections in the database.</li>
-<li><strong><code translate="no">milvus-collection-info</code></strong> → Get detailed information about a collection.</li>
-<li><strong><code translate="no">milvus-get-collection-stats</code></strong> → Get statistics about a collection.</li>
-<li><strong><code translate="no">milvus-create-collection</code></strong> → Create a new collection with specified schema.</li>
-<li><strong><code translate="no">milvus-load-collection</code></strong> → Load a collection into memory for search and query.</li>
-<li><strong><code translate="no">milvus-release-collection</code></strong> → Release a collection from memory.</li>
-<li><strong><code translate="no">milvus-get-query-segment-info</code></strong> → Get information about query segments.</li>
-<li><strong><code translate="no">milvus-get-collection-loading-progress</code></strong> → Get the loading progress of a collection.</li>
+<h3 id="📁-Collection-Management" class="common-anchor-header">📁 Sammlungsverwaltung</h3><ul>
+<li><strong><code translate="no">milvus-list-collections</code></strong> → Auflisten aller Sammlungen in der Datenbank.</li>
+<li><strong><code translate="no">milvus-collection-info</code></strong> → Detaillierte Informationen über eine Sammlung abrufen.</li>
+<li><strong><code translate="no">milvus-get-collection-stats</code></strong> → Abrufen von Statistiken über eine Sammlung.</li>
+<li><strong><code translate="no">milvus-create-collection</code></strong> → Erstellen einer neuen Sammlung mit einem bestimmten Schema.</li>
+<li><strong><code translate="no">milvus-load-collection</code></strong> → Laden einer Sammlung in den Speicher zur Suche und Abfrage.</li>
+<li><strong><code translate="no">milvus-release-collection</code></strong> → Eine Sammlung aus dem Speicher freigeben.</li>
+<li><strong><code translate="no">milvus-get-query-segment-info</code></strong> → Informationen über Abfragesegmente abrufen.</li>
+<li><strong><code translate="no">milvus-get-collection-loading-progress</code></strong> → Abrufen des Ladefortschritts einer Sammlung.</li>
 </ul>
-<h3 id="📊-Data-Operations" class="common-anchor-header">📊 Data Operations</h3><ul>
-<li><strong><code translate="no">milvus-insert-data</code></strong> → Insert data into a collection.</li>
-<li><strong><code translate="no">milvus-bulk-insert</code></strong> → Insert data in batches for better performance.</li>
-<li><strong><code translate="no">milvus-upsert-data</code></strong> → Upsert data into a collection (insert or update if exists).</li>
-<li><strong><code translate="no">milvus-delete-entities</code></strong> → Delete entities from a collection based on filter expression.</li>
-<li><strong><code translate="no">milvus-create-dynamic-field</code></strong> → Add a dynamic field to an existing collection.</li>
+<h3 id="📊-Data-Operations" class="common-anchor-header">📊 Datenoperationen</h3><ul>
+<li><strong><code translate="no">milvus-insert-data</code></strong> → Einfügen von Daten in eine Sammlung.</li>
+<li><strong><code translate="no">milvus-bulk-insert</code></strong> → Einfügen von Daten in Stapeln für bessere Leistung.</li>
+<li><strong><code translate="no">milvus-upsert-data</code></strong> → Daten in eine Sammlung einfügen (einfügen oder aktualisieren, falls vorhanden).</li>
+<li><strong><code translate="no">milvus-delete-entities</code></strong> → Löschen von Entitäten aus einer Sammlung basierend auf einem Filterausdruck.</li>
+<li><strong><code translate="no">milvus-create-dynamic-field</code></strong> → Hinzufügen eines dynamischen Feldes zu einer bestehenden Sammlung.</li>
 </ul>
-<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ Index Management</h3><ul>
-<li><strong><code translate="no">milvus-create-index</code></strong> → Create an index on a vector field.</li>
-<li><strong><code translate="no">milvus-get-index-info</code></strong> → Get information about indexes in a collection.</li>
+<h3 id="⚙️-Index-Management" class="common-anchor-header">⚙️ Index-Verwaltung</h3><ul>
+<li><strong><code translate="no">milvus-create-index</code></strong> → Einen Index für ein Vektorfeld erstellen.</li>
+<li><strong><code translate="no">milvus-get-index-info</code></strong> → Abrufen von Informationen über Indizes in einer Sammlung.</li>
 </ul>
-<h2 id="Environment-Variables" class="common-anchor-header">Environment Variables<button data-href="#Environment-Variables" class="anchor-icon" translate="no">
+<h2 id="Environment-Variables" class="common-anchor-header">Umgebungsvariablen<button data-href="#Environment-Variables" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -282,11 +279,11 @@ title: |
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong><code translate="no">MILVUS_URI</code></strong> → Milvus server URI (can be set instead of <code translate="no">--milvus-uri</code>).</li>
-<li><strong><code translate="no">MILVUS_TOKEN</code></strong> → Optional authentication token.</li>
-<li><strong><code translate="no">MILVUS_DB</code></strong> → Database name (defaults to “default”).</li>
+<li><strong><code translate="no">MILVUS_URI</code></strong> → Milvus-Server-URI (kann anstelle von <code translate="no">--milvus-uri</code> gesetzt werden).</li>
+<li><strong><code translate="no">MILVUS_TOKEN</code></strong> → Optionales Authentifizierungs-Token.</li>
+<li><strong><code translate="no">MILVUS_DB</code></strong> → Datenbankname (Standardwert ist "default").</li>
 </ul>
-<h2 id="Development" class="common-anchor-header">Development<button data-href="#Development" class="anchor-icon" translate="no">
+<h2 id="Development" class="common-anchor-header">Entwicklung<button data-href="#Development" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -301,10 +298,10 @@ title: |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To run the server directly:</p>
+    </button></h2><p>Zum direkten Ausführen des Servers:</p>
 <pre><code translate="no" class="language-bash">uv run server.py --milvus-uri http://localhost:19530
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -319,9 +316,9 @@ title: |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Using Claude Desktop</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">Example 1: Listing Collections</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Verwendung von Claude Desktop</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">Beispiel 1: Auflistung von Sammlungen</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
-<p>Claude will then use MCP to check this information on our Milvus DB.</p>
+<p>Claude wird dann MCP verwenden, um diese Informationen in unserer Milvus-DB zu überprüfen.</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
 
 &gt; View result <span class="hljs-keyword">from</span> milvus-list-collections <span class="hljs-keyword">from</span> milvus (local)
@@ -336,9 +333,9 @@ Here are the collections <span class="hljs-keyword">in</span> your Milvus databa
 <span class="hljs-number">6</span>. customized_setup
 <span class="hljs-number">7</span>. streaming_rag_demo
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-2-Searching-for-Documents" class="common-anchor-header">Example 2: Searching for Documents</h4><pre><code translate="no">Find documents in <span class="hljs-keyword">my</span> text_collection that mention <span class="hljs-string">&quot;machine learning&quot;</span>
+<h4 id="Example-2-Searching-for-Documents" class="common-anchor-header">Beispiel 2: Suche nach Dokumenten</h4><pre><code translate="no">Find documents in <span class="hljs-keyword">my</span> text_collection that mention <span class="hljs-string">&quot;machine learning&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Claude will use the full-text search capabilities of Milvus to find relevant documents:</p>
+<p>Claude wird die Volltextsuchfunktionen von Milvus nutzen, um relevante Dokumente zu finden:</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll search for documents about machine learning in your text_collection.</span>
 
 &gt; View result <span class="hljs-keyword">from</span> milvus-<span class="hljs-keyword">text</span>-search <span class="hljs-keyword">from</span> milvus (local)
@@ -346,10 +343,10 @@ Here are the collections <span class="hljs-keyword">in</span> your Milvus databa
 Here are the documents I found that mention machine learning:
 [Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-Cursor" class="common-anchor-header">Using Cursor</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">Example: Creating a Collection</h4><p>In Cursor’s Composer, you can ask:</p>
+<h3 id="Using-Cursor" class="common-anchor-header">Cursor verwenden</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">Beispiel: Erstellen einer Sammlung</h4><p>Im Composer von Cursor können Sie eine Anfrage stellen:</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
-<p>Cursor will use the MCP server to execute this operation:</p>
+<p>Cursor wird den MCP-Server verwenden, um diesen Vorgang auszuführen:</p>
 <pre><code translate="no">I<span class="hljs-comment">&#x27;ll create a new collection called &#x27;articles&#x27; with the specified fields.</span>
 
 &gt; View result <span class="hljs-keyword">from</span> milvus-create-collection <span class="hljs-keyword">from</span> milvus (local)
@@ -359,7 +356,7 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
 - content: <span class="hljs-type">string</span>
 - vector: float vector[<span class="hljs-number">128</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Troubleshooting" class="common-anchor-header">Troubleshooting<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
+<h2 id="Troubleshooting" class="common-anchor-header">Fehlersuche<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -374,33 +371,33 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Common-Issues" class="common-anchor-header">Common Issues</h3><h4 id="Connection-Errors" class="common-anchor-header">Connection Errors</h4><p>If you see errors like "Failed to connect to Milvus server":</p>
+    </button></h2><h3 id="Common-Issues" class="common-anchor-header">Häufige Probleme</h3><h4 id="Connection-Errors" class="common-anchor-header">Verbindungsfehler</h4><p>Wenn Sie Fehler wie "Failed to connect to Milvus server" sehen:</p>
 <ol>
-<li>Verify your Milvus instance is running: <code translate="no">docker ps</code> (if using Docker)</li>
-<li>Check the URI is correct in your configuration</li>
-<li>Ensure there are no firewall rules blocking the connection</li>
-<li>Try using <code translate="no">127.0.0.1</code> instead of <code translate="no">localhost</code> in the URI</li>
+<li>Überprüfen Sie, ob Ihre Milvus-Instanz ausgeführt wird: <code translate="no">docker ps</code> (bei Verwendung von Docker)</li>
+<li>Überprüfen Sie, ob der URI in Ihrer Konfiguration korrekt ist.</li>
+<li>Stellen Sie sicher, dass die Verbindung nicht durch Firewall-Regeln blockiert wird.</li>
+<li>Versuchen Sie, <code translate="no">127.0.0.1</code> anstelle von <code translate="no">localhost</code> im URI zu verwenden.</li>
 </ol>
-<h4 id="Authentication-Issues" class="common-anchor-header">Authentication Issues</h4><p>If you see authentication errors:</p>
+<h4 id="Authentication-Issues" class="common-anchor-header">Probleme mit der Authentifizierung</h4><p>Wenn Sie Authentifizierungsfehler sehen:</p>
 <ol>
-<li>Verify your <code translate="no">MILVUS_TOKEN</code> is correct</li>
-<li>Check if your Milvus instance requires authentication</li>
-<li>Ensure you have the correct permissions for the operations you’re trying to perform</li>
+<li>Überprüfen Sie, ob Ihre <code translate="no">MILVUS_TOKEN</code> korrekt ist.</li>
+<li>Prüfen Sie, ob Ihre Milvus-Instanz eine Authentifizierung erfordert</li>
+<li>Vergewissern Sie sich, dass Sie die richtigen Berechtigungen für die Vorgänge haben, die Sie durchführen möchten.</li>
 </ol>
-<h4 id="Tool-Not-Found" class="common-anchor-header">Tool Not Found</h4><p>If the MCP tools don’t appear in Claude Desktop or Cursor:</p>
+<h4 id="Tool-Not-Found" class="common-anchor-header">Werkzeug nicht gefunden</h4><p>Wenn die MCP-Tools nicht in Claude Desktop oder Cursor angezeigt werden:</p>
 <ol>
-<li>Restart the application</li>
-<li>Check the server logs for any errors</li>
-<li>Verify the MCP server is running correctly</li>
-<li>Press the refresh button in the MCP settings (for Cursor)</li>
+<li>Starten Sie die Anwendung neu</li>
+<li>Prüfen Sie die Serverprotokolle auf eventuelle Fehler</li>
+<li>Überprüfen Sie, ob der MCP-Server korrekt läuft.</li>
+<li>Drücken Sie die Aktualisierungsschaltfläche in den MCP-Einstellungen (für Cursor)</li>
 </ol>
-<h3 id="Getting-Help" class="common-anchor-header">Getting Help</h3><p>If you continue to experience issues:</p>
+<h3 id="Getting-Help" class="common-anchor-header">Hilfe erhalten</h3><p>Wenn Sie weiterhin Probleme haben:</p>
 <ol>
-<li>Check the <a href="https://github.com/zilliztech/mcp-server-milvus/issues">GitHub Issues</a> for similar problems</li>
-<li>Join the <a href="https://discord.gg/zilliz">Zilliz Community Discord</a> for support</li>
-<li>File a new issue with detailed information about your problem</li>
+<li>Überprüfen Sie die <a href="https://github.com/zilliztech/mcp-server-milvus/issues">GitHub Issues</a> auf ähnliche Probleme</li>
+<li>Treten Sie dem <a href="https://discord.gg/zilliz">Zilliz Community Discord</a> bei, um Unterstützung zu erhalten</li>
+<li>Erstelle einen neuen Issue mit detaillierten Informationen zu deinem Problem</li>
 </ol>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">Schlussfolgerung<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -415,4 +412,4 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>By following this tutorial, you now have an <strong>MCP server</strong> running, enabling AI-powered vector search in Milvus. Whether you’re using <strong>Claude Desktop</strong> or <strong>Cursor</strong>, you can now query, manage, and search your Milvus database using <strong>natural language commands</strong>—without writing database code!</p>
+    </button></h2><p>Mit diesem Tutorial haben Sie nun einen <strong>MCP-Server</strong> in Betrieb genommen, der die KI-gestützte Vektorsuche in Milvus ermöglicht. Unabhängig davon, ob Sie <strong>Claude Desktop</strong> oder <strong>Cursor</strong> verwenden, können Sie jetzt Ihre Milvus-Datenbank mit <strong>natürlichsprachlichen Befehlen</strong>abfragen, verwalten und durchsuchen <strong>- ohne</strong>Datenbankcode zu schreiben!</p>

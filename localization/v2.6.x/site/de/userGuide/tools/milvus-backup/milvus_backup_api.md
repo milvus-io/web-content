@@ -1,9 +1,9 @@
 ---
 id: milvus_backup_api.md
-summary: Learn how to use Milvus Backup through API
-title: Back up and Restore Data Using APIs
+summary: 'Erfahren Sie, wie Sie Milvus Backup über API verwenden können'
+title: Sichern und Wiederherstellen von Daten über APIs
 ---
-<h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Back up and Restore Data Using APIs<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
+<h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Sichern und Wiederherstellen von Daten über APIs<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Back up and Restore Data Using APIs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Backup provides data backup and restoration features to ensure the security of your Milvus data.</p>
-<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Obtain Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus Backup bietet Funktionen zur Datensicherung und -wiederherstellung, um die Sicherheit Ihrer Milvus-Daten zu gewährleisten.</p>
+<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Beziehen Sie Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,14 +34,14 @@ title: Back up and Restore Data Using APIs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can either download the compiled binary or build from the source.</p>
-<p>To download the compiled binary, go to the <a href="https://github.com/zilliztech/milvus-backup/releases">release</a> page, where you can find all official releases. Remember, always use the binaries in the release marked as <strong>Latest</strong>.</p>
-<p>To compile from the source, do as follows:</p>
+    </button></h2><p>Sie können entweder die kompilierte Binärdatei herunterladen oder aus dem Quellcode bauen.</p>
+<p>Um die kompilierte Binärdatei herunterzuladen, gehen Sie auf die <a href="https://github.com/zilliztech/milvus-backup/releases">Release-Seite</a>, wo Sie alle offiziellen Releases finden. Denken Sie daran, dass Sie immer die Binärdateien in der als <strong>"Latest"</strong> gekennzeichneten Version verwenden sollten.</p>
+<p>Um aus dem Quellcode zu kompilieren, gehen Sie wie folgt vor:</p>
 <pre><code translate="no" class="language-shell">git clone git@github.com:zilliztech/milvus-backup.git
 go get
 go build
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-configuration-file" class="common-anchor-header">Prepare configuration file<button data-href="#Prepare-configuration-file" class="anchor-icon" translate="no">
+<h2 id="Prepare-configuration-file" class="common-anchor-header">Konfigurationsdatei vorbereiten<button data-href="#Prepare-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,9 +56,9 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Download the <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">example configuration file</a> and tailor it to fit your needs.</p>
-<p>Then create a folder alongside the downloaded or built Milvus Backup binary, name the folder <code translate="no">configs</code>, and place the configuration file inside the <code translate="no">configs</code> folder.</p>
-<p>Your folder structure should be similar to the following:</p>
+    </button></h2><p>Laden Sie die <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">Beispielkonfigurationsdatei</a> herunter und passen Sie sie an Ihre Bedürfnisse an.</p>
+<p>Erstellen Sie dann einen Ordner neben der heruntergeladenen oder erstellten Milvus Backup-Binärdatei, benennen Sie den Ordner <code translate="no">configs</code> und legen Sie die Konfigurationsdatei in den Ordner <code translate="no">configs</code>.</p>
+<p>Ihre Ordnerstruktur sollte in etwa so aussehen wie die folgende:</p>
 <pre>
   <code translate="no">
   workspace
@@ -67,20 +67,20 @@ go build
       └── backup.yaml
   </code>
 </pre>
-<p>Because Milvus Backup cannot back up your data to a local path, ensure that Minio settings are correct when tailoring the configuration file.</p>
+<p>Da Milvus Backup Ihre Daten nicht in einem lokalen Pfad sichern kann, stellen Sie sicher, dass die Minio-Einstellungen korrekt sind, wenn Sie die Konfigurationsdatei anpassen.</p>
 <div class="alert note">
-<p>The name of the default Minio bucket varies with the way you install Milvus. When making changes to Minio settings, do refer to the following table.</p>
+<p>Der Name des Standard-Minio-Buckets variiert je nach der Art der Milvus-Installation. Wenn Sie Änderungen an den Minio-Einstellungen vornehmen, sollten Sie sich an der folgenden Tabelle orientieren.</p>
 <table>
 <thead>
-<tr><th>field</th><th>Docker Compose</th><th>Helm / Milvus Operator</th></tr>
+<tr><th>Feld</th><th>Docker Compose</th><th>Helm/Milvus-Bediener</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">bucketName</code></td><td>a-bucket</td><td>milvus-bucket</td></tr>
-<tr><td><code translate="no">rootPath</code></td><td>files</td><td>file</td></tr>
+<tr><td><code translate="no">bucketName</code></td><td>a-Bucket</td><td>milvus-Bucket</td></tr>
+<tr><td><code translate="no">rootPath</code></td><td>Dateien</td><td>Datei</td></tr>
 </tbody>
 </table>
 </div>
-<h2 id="Start-up-the-API-server" class="common-anchor-header">Start up the API server<button data-href="#Start-up-the-API-server" class="anchor-icon" translate="no">
+<h2 id="Start-up-the-API-server" class="common-anchor-header">Starten Sie den API-Server<button data-href="#Start-up-the-API-server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,14 +95,14 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Then you can start the API server as follows:</p>
+    </button></h2><p>Anschließend können Sie den API-Server wie folgt starten:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server
 <button class="copy-code-btn"></button></code></pre>
-<p>The API server listens on port 8080 by default. You can change it by running it with the <code translate="no">-p</code> flag. To start the API server listening on port 443, do as follows:</p>
+<p>Der API-Server lauscht standardmäßig auf Port 8080. Sie können dies ändern, indem Sie ihn mit dem Flag <code translate="no">-p</code> ausführen. Um den API-Server zu starten, der an Port 443 lauscht, gehen Sie wie folgt vor:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 443
 <button class="copy-code-btn"></button></code></pre>
-<p>You can access the Swagger UI using http://localhost:<port>/api/v1/docs/index.html.</p>
-<h2 id="Prepare-data" class="common-anchor-header">Prepare data<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+<p>Sie können auf die Swagger-Benutzeroberfläche über http://localhost zugreifen:<port>/api/v1/docs/index.html.</p>
+<h2 id="Prepare-data" class="common-anchor-header">Daten vorbereiten<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,12 +117,12 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you run an empty local Milvus instance listening on the default port 19530, use the example Python scripts to generate some data in your instance. Feel free to make necessary changes to the scripts to fit your needs.</p>
-<p>Obtain the <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">scripts</a>. Then run the scripts to generate the data. Ensure that <a href="https://pypi.org/project/pymilvus/">PyMilvus</a>, the official Milvus Python SDK, has been installed.</p>
+    </button></h2><p>Wenn Sie eine leere lokale Milvus-Instanz betreiben, die auf dem Standard-Port 19530 lauscht, verwenden Sie die Python-Beispielskripte, um einige Daten in Ihrer Instanz zu erzeugen. Sie können die Skripte nach Belieben an Ihre Bedürfnisse anpassen.</p>
+<p>Besorgen Sie sich die <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">Skripte</a>. Führen Sie dann die Skripte aus, um die Daten zu erzeugen. Stellen Sie sicher, dass <a href="https://pypi.org/project/pymilvus/">PyMilvus</a>, das offizielle Milvus Python SDK, installiert ist.</p>
 <pre><code translate="no" class="language-shell">python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>This step is optional. If you skip this, ensure that you already have some data in your Milvus instance.</p>
-<h2 id="Back-up-data" class="common-anchor-header">Back up data<button data-href="#Back-up-data" class="anchor-icon" translate="no">
+<p>Dieser Schritt ist optional. Wenn Sie diesen Schritt überspringen, stellen Sie sicher, dass Sie bereits einige Daten in Ihrer Milvus-Instanz haben.</p>
+<h2 id="Back-up-data" class="common-anchor-header">Sichern von Daten<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,8 +138,8 @@ go build
         ></path>
       </svg>
     </button></h2><div class="tab-wrapper"></div>
-<p>Note that running Milvus Backup against a Milvus instance will not normally affect the running of the instance. Your Milvus instance is fully functional during backup or restore.</p>
-<p>Run the following command to create a backup. Change <code translate="no">collection_names</code> and <code translate="no">backup_name</code> if necessary.</p>
+<p>Beachten Sie, dass die Ausführung von Milvus Backup gegen eine Milvus-Instanz normalerweise keinen Einfluss auf den Betrieb der Instanz hat. Ihre Milvus-Instanz ist während der Sicherung oder Wiederherstellung voll funktionsfähig.</p>
+<p>Führen Sie den folgenden Befehl aus, um ein Backup zu erstellen. Ändern Sie <code translate="no">collection_names</code> und <code translate="no">backup_name</code> falls nötig.</p>
 <pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/create&#x27; \
 --header &#x27;Content-Type: application/json&#x27; \
 --data-raw &#x27;{
@@ -150,17 +150,17 @@ go build
   ]
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the command is executed, you can list the backups in the bucket specified in the Minio settings as follows:</p>
+<p>Sobald der Befehl ausgeführt wurde, können Sie die Backups in dem in den Minio-Einstellungen angegebenen Bucket wie folgt auflisten:</p>
 <pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/list&#x27; \
 --header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>And download the backup files as follows:</p>
+<p>Und laden Sie die Sicherungsdateien wie folgt herunter:</p>
 <pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/get_backup?backup_id=&lt;test_backup_id&gt;&amp;backup_name=my_backup&#x27; \
 --header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>While running the above command, change <code translate="no">backup_id</code> and <code translate="no">backup_name</code> to the one returned by the list API.</p>
-<p>Now, you can save the backup files to a safe place for restoration in the future, or upload them to <a href="https://cloud.zilliz.com">Zilliz Cloud</a> to create a managed vector database with your data. For details, refer to <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrate from Milvus to Zilliz Cloud</a>.</p>
-<h2 id="Restore-data" class="common-anchor-header">Restore data<button data-href="#Restore-data" class="anchor-icon" translate="no">
+<p>Ändern Sie bei der Ausführung des obigen Befehls <code translate="no">backup_id</code> und <code translate="no">backup_name</code> in die von der Listen-API zurückgegebenen Werte.</p>
+<p>Jetzt können Sie die Sicherungsdateien an einem sicheren Ort speichern, um sie später wiederherzustellen, oder sie in die <a href="https://cloud.zilliz.com">Zilliz Cloud</a> hochladen, um eine verwaltete Vektordatenbank mit Ihren Daten zu erstellen. Weitere Informationen finden Sie unter <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrieren von Milvus zu Zilliz Cloud</a>.</p>
+<h2 id="Restore-data" class="common-anchor-header">Daten wiederherstellen<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,7 +176,7 @@ go build
         ></path>
       </svg>
     </button></h2><div class="tab-wrapper"></div>
-<p>You can call the restore API command with a <code translate="no">collection_suffix</code> option to create a new collection by restoring the data from the backup. Change <code translate="no">collection_names</code> and <code translate="no">backup_name</code> if necessary.</p>
+<p>Sie können den API-Befehl restore mit der Option <code translate="no">collection_suffix</code> aufrufen, um eine neue Sammlung zu erstellen, indem Sie die Daten aus dem Backup wiederherstellen. Ändern Sie <code translate="no">collection_names</code> und <code translate="no">backup_name</code>, falls erforderlich.</p>
 <pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
 --header &#x27;Content-Type: application/json&#x27; \
 --data-raw &#x27;{
@@ -188,11 +188,11 @@ go build
     &quot;backup_name&quot;:&quot;my_backup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">collection_suffix</code> option allows you to set a suffix for the new collection to be created. The above command will create a new collection called <strong>hello_milvus_recover</strong> in your Milvus instance.</p>
-<p>If you prefer to restore the backed-up collection without changing its name, drop the collection before restoring it from the backup. You can now clean the data generated in <a href="#Prepare-data">Prepare data</a> by running the following command.</p>
+<p>Mit der Option <code translate="no">collection_suffix</code> können Sie ein Suffix für die neu zu erstellende Sammlung festlegen. Mit dem obigen Befehl wird eine neue Sammlung mit dem Namen <strong>hello_milvus_recover</strong> in Ihrer Milvus-Instanz erstellt.</p>
+<p>Wenn Sie die gesicherte Sammlung wiederherstellen möchten, ohne ihren Namen zu ändern, löschen Sie die Sammlung, bevor Sie sie aus der Sicherung wiederherstellen. Sie können nun die in <a href="#Prepare-data">Prepare data</a> erzeugten Daten bereinigen, indem Sie den folgenden Befehl ausführen.</p>
 <pre><code translate="no" class="language-shell">python example/clean_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>Then run the following command to restore the data from the backup.</p>
+<p>Führen Sie dann den folgenden Befehl aus, um die Daten aus der Sicherung wiederherzustellen.</p>
 <pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
 --header &#x27;Content-Type: application/json&#x27; \
 --data-raw &#x27;{
@@ -204,12 +204,12 @@ go build
     &quot;backup_name&quot;:&quot;my_backup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>The restore process can be time-consuming depending on the size of the data to be restored. Therefore, all restore tasks are running asynchronously. You can check the status of a restore task by running:</p>
+<p>Der Wiederherstellungsprozess kann je nach Größe der wiederherzustellenden Daten sehr zeitaufwändig sein. Daher werden alle Wiederherstellungsaufgaben asynchron ausgeführt. Sie können den Status eines Wiederherstellungsauftrags überprüfen, indem Sie ihn ausführen:</p>
 <pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/get_restore?id=&lt;test_restore_id&gt;&#x27; \
 --header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Remember to change <code translate="no">test_restore_id</code> to the one restored by the restore API.</p>
-<h2 id="Verify-restored-data" class="common-anchor-header">Verify restored data<button data-href="#Verify-restored-data" class="anchor-icon" translate="no">
+<p>Denken Sie daran, <code translate="no">test_restore_id</code> in die von der Wiederherstellungs-API wiederhergestellte Datei zu ändern.</p>
+<h2 id="Verify-restored-data" class="common-anchor-header">Überprüfen der wiederhergestellten Daten<button data-href="#Verify-restored-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -224,7 +224,7 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the restore completes, you can verify the restored data by indexing the restored collection as follows:</p>
+    </button></h2><p>Sobald die Wiederherstellung abgeschlossen ist, können Sie die wiederhergestellten Daten überprüfen, indem Sie die wiederhergestellte Sammlung wie folgt indizieren:</p>
 <pre><code translate="no" class="language-shell">python example/verify_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>Note that the above script assumes that you have run the <code translate="no">restore</code> command with the <code translate="no">-s</code> flag and the suffix is set to <code translate="no">-recover</code>. Feel free to make necessary changes to the script to fit your need.</p>
+<p>Beachten Sie, dass das obige Skript davon ausgeht, dass Sie den Befehl <code translate="no">restore</code> mit dem Flag <code translate="no">-s</code> ausgeführt haben und das Suffix auf <code translate="no">-recover</code> gesetzt ist. Sie können das Skript nach Belieben an Ihre Bedürfnisse anpassen.</p>

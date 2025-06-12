@@ -1,15 +1,18 @@
 ---
 id: milvus_and_n8n.md
 summary: >-
-  n8n is a powerful open-source workflow automation platform that allows you to
-  connect various applications, services, and APIs together to create automated
-  workflows without coding. With its node-based visual interface, n8n enables
-  users to build complex automation processes by simply connecting nodes that
-  represent different services or actions. It is self-hostable, highly
-  extensible, and supports both fair-code and enterprise licensing.
-title: Getting Started with Milvus and n8n
+  n8n ist eine leistungsstarke Open-Source-Plattform zur
+  Workflow-Automatisierung, mit der Sie verschiedene Anwendungen, Dienste und
+  APIs miteinander verbinden können, um automatisierte Workflows ohne
+  Programmierung zu erstellen. Mit seiner knotenbasierten visuellen
+  Schnittstelle ermöglicht n8n Benutzern die Erstellung komplexer
+  Automatisierungsprozesse durch einfaches Verbinden von Knoten, die
+  verschiedene Dienste oder Aktionen darstellen. Es ist selbst-hostbar,
+  hochgradig erweiterbar und unterstützt sowohl Fair-Code- als auch
+  Enterprise-Lizenzen.
+title: Erste Schritte mit Milvus und n8n
 ---
-<h1 id="Getting-Started-with-Milvus-and-n8n" class="common-anchor-header">Getting Started with Milvus and n8n<button data-href="#Getting-Started-with-Milvus-and-n8n" class="anchor-icon" translate="no">
+<h1 id="Getting-Started-with-Milvus-and-n8n" class="common-anchor-header">Erste Schritte mit Milvus und n8n<button data-href="#Getting-Started-with-Milvus-and-n8n" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,7 +27,7 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Introduction-to-n8n-and-the-Milvus-Vector-Store-Node" class="common-anchor-header">Introduction to n8n and the Milvus Vector Store Node<button data-href="#Introduction-to-n8n-and-the-Milvus-Vector-Store-Node" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Introduction-to-n8n-and-the-Milvus-Vector-Store-Node" class="common-anchor-header">Einführung in n8n und den Milvus-Vektorspeicher-Knoten<button data-href="#Introduction-to-n8n-and-the-Milvus-Vector-Store-Node" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,10 +42,10 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://n8n.io/">n8n</a> is a powerful open-source workflow automation platform that allows you to connect various applications, services, and APIs together to create automated workflows without coding. With its node-based visual interface, n8n enables users to build complex automation processes by simply connecting nodes that represent different services or actions. It is self-hostable, highly extensible, and supports both fair-code and enterprise licensing.</p>
-<p>The <strong>Milvus Vector Store</strong> node in n8n integrates <a href="https://milvus.io/">Milvus</a> into your automation workflows. This allows you to perform semantic search, power retrieval-augmented generation (RAG) systems, and build intelligent AI applications—all within the n8n ecosystem.</p>
-<p>This documentation is primarily based on the official <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">n8n Milvus Vector Store documentation</a>. If you find any outdated or inconsistent content, please prioritize the official documentation and feel free to raise an issue for us.</p>
-<h2 id="Key-Features" class="common-anchor-header">Key Features<button data-href="#Key-Features" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://n8n.io/">n8n</a> ist eine leistungsstarke Open-Source-Plattform zur Workflow-Automatisierung, mit der Sie verschiedene Anwendungen, Dienste und APIs miteinander verbinden können, um automatisierte Workflows ohne Programmierung zu erstellen. Mit seiner knotenbasierten visuellen Schnittstelle ermöglicht n8n Benutzern die Erstellung komplexer Automatisierungsprozesse durch einfaches Verbinden von Knoten, die verschiedene Dienste oder Aktionen darstellen. Es ist selbst-hostbar, hochgradig erweiterbar und unterstützt sowohl Fair-Code- als auch Enterprise-Lizenzen.</p>
+<p>Der <strong>Milvus-Vektorspeicher-Knoten</strong> in n8n integriert <a href="https://milvus.io/">Milvus</a> in Ihre Automatisierungsabläufe. So können Sie semantische Suchen durchführen, RAG-Systeme (Retrieval-Augmented Generation) betreiben und intelligente KI-Anwendungen erstellen - alles innerhalb des n8n-Ökosystems.</p>
+<p>Diese Dokumentation basiert hauptsächlich auf der offiziellen <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">n8n Milvus Vector Store-Dokumentation</a>. Sollten Sie veraltete oder inkonsistente Inhalte finden, bevorzugen Sie bitte die offizielle Dokumentation und zögern Sie nicht, uns ein Problem zu melden.</p>
+<h2 id="Key-Features" class="common-anchor-header">Hauptmerkmale<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,16 +60,16 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With the Milvus Vector Store node in n8n, you can:</p>
+    </button></h2><p>Mit dem Milvus-Vektorspeicher-Knoten in n8n können Sie:</p>
 <ul>
-<li>Interact with your Milvus database as a <a href="https://docs.n8n.io/glossary/#ai-vector-store">vector store</a></li>
-<li>Insert documents into Milvus</li>
-<li>Get documents from Milvus</li>
-<li>Retrieve documents to provide them to a retriever connected to a <a href="https://docs.n8n.io/glossary/#ai-chain">chain</a></li>
-<li>Connect directly to an <a href="https://docs.n8n.io/glossary/#ai-agent">agent</a> as a <a href="https://docs.n8n.io/glossary/#ai-tool">tool</a></li>
-<li>Filter documents based on metadata</li>
+<li>Interaktion mit Ihrer Milvus-Datenbank als <a href="https://docs.n8n.io/glossary/#ai-vector-store">Vektorspeicher</a></li>
+<li>Dokumente in Milvus einfügen</li>
+<li>Dokumente aus Milvus abrufen</li>
+<li>Dokumente abrufen, um sie einem mit einer <a href="https://docs.n8n.io/glossary/#ai-chain">Kette</a> verbundenen Retriever zur Verfügung zu stellen</li>
+<li>sich direkt mit einem <a href="https://docs.n8n.io/glossary/#ai-agent">Agenten</a> als <a href="https://docs.n8n.io/glossary/#ai-tool">Werkzeug</a> verbinden</li>
+<li>Dokumente auf der Grundlage von Metadaten filtern</li>
 </ul>
-<h2 id="Node-Usage-Patterns" class="common-anchor-header">Node Usage Patterns<button data-href="#Node-Usage-Patterns" class="anchor-icon" translate="no">
+<h2 id="Node-Usage-Patterns" class="common-anchor-header">Muster der Knotenverwendung<button data-href="#Node-Usage-Patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,17 +84,17 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can use the Milvus Vector Store node in n8n in the following patterns.</p>
-<h3 id="Use-as-a-regular-node-to-insert-and-retrieve-documents" class="common-anchor-header">Use as a regular node to insert and retrieve documents</h3><p>You can use the Milvus Vector Store as a regular node to insert, or get documents. This pattern places the Milvus Vector Store in the regular connection flow without using an agent.</p>
-<p>See this <a href="https://n8n.io/workflows/3573-create-a-rag-system-with-paul-essays-milvus-and-openai-for-cited-answers/">example template</a> for how to build a system that stores documents in Milvus and retrieves them to support cited, chat-based answers.</p>
-<h3 id="Connect-directly-to-an-AI-agent-as-a-tool" class="common-anchor-header">Connect directly to an AI agent as a tool</h3><p>You can connect the Milvus Vector Store node directly to the tool connector of an <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.agent/">AI agent</a> to use a vector store as a resource when answering queries.</p>
-<p>Here, the connection would be: AI agent (tools connector) -> Milvus Vector Store node. See this <a href="https://n8n.io/workflows/3576-paul-graham-essay-search-and-chat-with-milvus-vector-database/">example template</a> where data is embedded and indexed in Milvus, and the AI Agent uses the vector store as a knowledge tool for question-answering.</p>
-<h3 id="Use-a-retriever-to-fetch-documents" class="common-anchor-header">Use a retriever to fetch documents</h3><p>You can use the <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.retrievervectorstore/">Vector Store Retriever</a> node with the Milvus Vector Store node to fetch documents from the Milvus Vector Store node. This is often used with the <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.chainretrievalqa/">Question and Answer Chain</a> node to fetch documents from the vector store that match the given chat input.</p>
-<p>A typical node connection flow looks like this: Question and Answer Chain (Retriever connector) -> Vector Store Retriever (Vector Store connector) -> Milvus Vector Store.</p>
-<p>Check out this <a href="https://n8n.io/workflows/3574-create-a-paul-graham-essay-qanda-system-with-openai-and-milvus-vector-database/">workflow example</a> to see how to ingest external data into Milvus and build a chat-based semantic Q&A system.</p>
-<h3 id="Use-the-Vector-Store-Question-Answer-Tool-to-answer-questions" class="common-anchor-header">Use the Vector Store Question Answer Tool to answer questions</h3><p>Another pattern uses the <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.toolvectorstore/">Vector Store Question Answer Tool</a> to summarize results and answer questions from the Milvus Vector Store node. Rather than connecting the Milvus Vector Store directly as a tool, this pattern uses a tool specifically designed to summarizes data in the vector store.</p>
-<p>The connections flow would look like this: AI agent (tools connector) -> Vector Store Question Answer Tool (Vector Store connector) -> Milvus Vector store.</p>
-<h2 id="Node-Operation-Modes" class="common-anchor-header">Node Operation Modes<button data-href="#Node-Operation-Modes" class="anchor-icon" translate="no">
+    </button></h2><p>Sie können den Milvus-Vektorspeicher-Knoten in n8n nach den folgenden Mustern verwenden.</p>
+<h3 id="Use-as-a-regular-node-to-insert-and-retrieve-documents" class="common-anchor-header">Verwendung als regulärer Knoten zum Einfügen und Abrufen von Dokumenten</h3><p>Sie können den Milvus-Vektor-Speicher als regulären Knoten verwenden, um Dokumente einzufügen oder abzurufen. Bei diesem Muster wird der Milvus-Vektorspeicher in den regulären Verbindungsfluss eingebunden, ohne dass ein Agent verwendet wird.</p>
+<p>In dieser <a href="https://n8n.io/workflows/3573-create-a-rag-system-with-paul-essays-milvus-and-openai-for-cited-answers/">Beispielvorlage</a> sehen Sie, wie Sie ein System aufbauen, das Dokumente in Milvus speichert und abruft, um zitierte, chatbasierte Antworten zu unterstützen.</p>
+<h3 id="Connect-directly-to-an-AI-agent-as-a-tool" class="common-anchor-header">Direkte Verbindung mit einem KI-Agenten als Werkzeug</h3><p>Sie können den Milvus-Vektorspeicher-Knoten direkt mit dem Tool-Connector eines <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.agent/">KI-Agenten</a> verbinden, um einen Vektorspeicher als Ressource bei der Beantwortung von Anfragen zu verwenden.</p>
+<p>Hier wäre die Verbindung wie folgt: AI-Agent (Werkzeugkonnektor) -&gt; Milvus-Vektorspeicher-Knoten. Siehe diese <a href="https://n8n.io/workflows/3576-paul-graham-essay-search-and-chat-with-milvus-vector-database/">Beispielvorlage</a>, bei der Daten in Milvus eingebettet und indiziert sind und der KI-Agent den Vektorspeicher als Wissenswerkzeug für die Beantwortung von Fragen verwendet.</p>
+<h3 id="Use-a-retriever-to-fetch-documents" class="common-anchor-header">Verwenden Sie einen Retriever zum Abrufen von Dokumenten</h3><p>Sie können den <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.retrievervectorstore/">Vektorspeicher-Retriever-Knoten</a> mit dem Milvus-Vektorspeicher-Knoten verwenden, um Dokumente aus dem Milvus-Vektorspeicher-Knoten abzurufen. Dies wird häufig mit dem <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.chainretrievalqa/">Frage- und Antwortkettenknoten</a> verwendet, um Dokumente aus dem Vektorspeicher zu holen, die der gegebenen Chateingabe entsprechen.</p>
+<p>Ein typischer Knotenverbindungsfluss sieht wie folgt aus: Frage- und Antwortkette (Retriever-Verbindung) -&gt; Vektorspeicher Retriever (Vektorspeicher-Verbindung) -&gt; Milvus-Vektorspeicher.</p>
+<p>Schauen Sie sich dieses <a href="https://n8n.io/workflows/3574-create-a-paul-graham-essay-qanda-system-with-openai-and-milvus-vector-database/">Workflow-Beispiel</a> an, um zu sehen, wie Sie externe Daten in Milvus aufnehmen und ein Chat-basiertes semantisches Q&amp;A-System aufbauen können.</p>
+<h3 id="Use-the-Vector-Store-Question-Answer-Tool-to-answer-questions" class="common-anchor-header">Verwenden Sie das Vector Store Question Answer Tool, um Fragen zu beantworten</h3><p>Ein anderes Muster verwendet das <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.toolvectorstore/">Vector Store Question Answer Tool</a>, um Ergebnisse zusammenzufassen und Fragen aus dem Milvus Vector Store-Knoten zu beantworten. Anstatt den Milvus-Vektorspeicher direkt als Werkzeug zu verbinden, verwendet dieses Muster ein Werkzeug, das speziell für die Zusammenfassung von Daten im Vektorspeicher entwickelt wurde.</p>
+<p>Der Verbindungsfluss würde wie folgt aussehen: KI-Agent (Tools-Konnektor) -&gt; Vektorspeicher Frage-Antwort-Tool (Vektorspeicher-Konnektor) -&gt; Milvus-Vektorspeicher.</p>
+<h2 id="Node-Operation-Modes" class="common-anchor-header">Betriebsmodi des Knotens<button data-href="#Node-Operation-Modes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,22 +109,22 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The Milvus Vector Store node supports multiple operation modes, each tailored for different workflow use cases. Understanding these modes helps design more effective workflows.</p>
-<p>We will provide a high-level overview of the available operation modes and options below. For a complete list of input parameters and configuration options for each mode, please refer to the <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">official documentation</a>.</p>
+    </button></h2><p>Der Milvus-Vektorspeicher-Knoten unterstützt mehrere Betriebsmodi, die jeweils auf unterschiedliche Workflow-Anwendungsfälle zugeschnitten sind. Das Verständnis dieser Modi hilft bei der Entwicklung effektiverer Arbeitsabläufe.</p>
+<p>Im Folgenden geben wir einen Überblick über die verfügbaren Betriebsmodi und Optionen. Eine vollständige Liste der Eingabeparameter und Konfigurationsoptionen für jeden Modus finden Sie in der <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">offiziellen Dokumentation</a>.</p>
 <hr>
-<h3 id="Operation-Modes-Overview" class="common-anchor-header">Operation Modes Overview</h3><p>The Milvus Vector Store node supports four distinct modes:</p>
+<h3 id="Operation-Modes-Overview" class="common-anchor-header">Überblick über die Betriebsmodi</h3><p>Der Milvus-Vektorspeicher-Knoten unterstützt vier verschiedene Modi:</p>
 <ul>
-<li><strong>Get Many</strong>: Retrieve multiple documents based on semantic similarity to a prompt.</li>
-<li><strong>Insert Documents</strong>: Insert new documents into your Milvus collection.</li>
-<li><strong>Retrieve Documents (As Vector Store for Chain/Tool)</strong>: Use the node as a retriever within a chain-based system.</li>
-<li><strong>Retrieve Documents (As Tool for AI Agent)</strong>: Use the node as a tool resource for an AI agent during question-answering tasks.</li>
+<li><strong>Viele abrufen</strong>: Abrufen mehrerer Dokumente auf der Grundlage der semantischen Ähnlichkeit mit einer Eingabeaufforderung.</li>
+<li><strong>Dokumente einfügen</strong>: Fügen Sie neue Dokumente in Ihre Milvus-Sammlung ein.</li>
+<li><strong>Dokumente abrufen (als Vektorspeicher für Kette/Tool)</strong>: Verwenden Sie den Knoten als Retriever innerhalb eines kettenbasierten Systems.</li>
+<li><strong>Dokumente abrufen (als Tool für AI-Agent)</strong>: Verwenden Sie den Knoten als Tool-Ressource für einen KI-Agenten bei Frage-Antwort-Aufgaben.</li>
 </ul>
-<h3 id="Additional-Node-Options" class="common-anchor-header">Additional Node Options</h3><ul>
-<li><strong>Metadata Filter</strong> (Get Many mode only): Filter results based on custom metadata keys. Multiple fields apply an AND condition.</li>
-<li><strong>Clear Collection</strong> (Insert Documents mode only): Remove existing documents from the collection prior to inserting new ones.</li>
+<h3 id="Additional-Node-Options" class="common-anchor-header">Zusätzliche Knotenoptionen</h3><ul>
+<li><strong>Metadatenfilter</strong> (nur im Modus Viele abrufen): Filtern Sie die Ergebnisse anhand von benutzerdefinierten Metadatenschlüsseln. Auf mehrere Felder wird eine UND-Bedingung angewendet.</li>
+<li><strong>Sammlung löschen</strong> (nur im Modus Dokumente einfügen): Entfernen Sie vorhandene Dokumente aus der Sammlung, bevor Sie neue Dokumente einfügen.</li>
 </ul>
-<h3 id="Related-Resources" class="common-anchor-header">Related Resources</h3><ul>
-<li><a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">n8n Milvus Integration Documentation</a></li>
-<li><a href="https://js.langchain.com/docs/integrations/vectorstores/milvus/">LangChain Milvus Documentation</a></li>
-<li><a href="https://docs.n8n.io/advanced-ai/">n8n Advanced AI Documentation</a></li>
+<h3 id="Related-Resources" class="common-anchor-header">Verwandte Ressourcen</h3><ul>
+<li><a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">n8n Milvus-Integrationsdokumentation</a></li>
+<li><a href="https://js.langchain.com/docs/integrations/vectorstores/milvus/">LangChain Milvus-Dokumentation</a></li>
+<li><a href="https://docs.n8n.io/advanced-ai/">n8n Erweiterte AI-Dokumentation</a></li>
 </ul>

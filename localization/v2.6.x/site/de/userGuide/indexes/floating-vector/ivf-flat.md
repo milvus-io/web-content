@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>Der Begriff <strong>IVF_FLAT</strong> steht für <strong>Inverted File Flat</strong>, was den zweistufigen Ansatz für die Indizierung und Suche nach Fließkomma-Vektoren umschreibt:</p>
 <ul>
-<li><p><strong>Inverted File (IVF):</strong> Bezieht sich auf das Clustern des Vektorraums in überschaubare Regionen mittels <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means Clustering</a>. Jeder Cluster wird durch einen <strong>Zentroid</strong> repräsentiert, der als Referenzpunkt für die Vektoren innerhalb des Clusters dient.</p></li>
+<li><p><strong>Inverted File (IVF):</strong> Bezieht sich auf das Clustering des Vektorraums in handhabbare Regionen unter Verwendung von <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a>. Jeder Cluster wird durch einen <strong>Zentroid</strong> repräsentiert, der als Referenzpunkt für die Vektoren innerhalb des Clusters dient.</p></li>
 <li><p><strong>Flach:</strong> Gibt an, dass die Vektoren innerhalb jedes Clusters in ihrer ursprünglichen Form (flache Struktur) gespeichert werden, ohne Komprimierung oder Quantisierung, um präzise Abstandsberechnungen zu ermöglichen.</p></li>
 </ul>
 <p>Die folgende Abbildung zeigt, wie dies funktioniert:</p>
@@ -58,7 +58,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>IVF FLAT Workflow 2</span> </span></p>
-<p>Wenn Sie den Wert <code translate="no">nprobe</code> erhöhen, können Sie mehr Partitionen in die Suche einbeziehen, was dazu beitragen kann, dass die der Abfrage am nächsten liegende Einbettung nicht übersehen wird, selbst wenn sie sich in einer anderen Partition befindet. Dies hat jedoch den Nachteil, dass sich die Suchzeit erhöht, da mehr Kandidaten ausgewertet werden müssen. Weitere Informationen zur Einstellung der Indexparameter finden Sie unter <a href="/docs/de/ivf-flat.md#Index-params">Indexparameter</a>.</p>
+<p>Wenn Sie den Wert <code translate="no">nprobe</code> erhöhen, können Sie mehr Partitionen in die Suche einbeziehen, was dazu beitragen kann, dass die der Abfrage am nächsten liegende Einbettung nicht übersehen wird, selbst wenn sie sich in einer anderen Partition befindet. Dies hat jedoch den Nachteil, dass sich die Suchzeit erhöht, da mehr Kandidaten evaluiert werden müssen. Weitere Informationen zur Einstellung der Indexparameter finden Sie unter <a href="/docs/de/ivf-flat.md#Index-params">Indexparameter</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -100,7 +100,7 @@ index_params.add_index(
 </ul>
 <p>Weitere Informationen zu den für den Index <code translate="no">IVF_FLAT</code> verfügbaren Erstellungsparametern finden Sie unter <a href="/docs/de/ivf-flat.md#Index-building-params">Indexerstellungsparameter</a>.</p></li>
 </ul>
-<p>Sobald die Indexparameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Indexparameter in der Methode <code translate="no">create_collection</code> übergeben. Einzelheiten finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
+<p>Sobald die Indexparameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Indexparameter in der Methode <code translate="no">create_collection</code> übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Suche im Index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,6 +182,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">nprobe</code></p></td>
      <td><p>Die Anzahl der Cluster, in denen nach Kandidaten gesucht wird. Höhere Werte erlauben es, mehr Cluster zu durchsuchen, was die Wiederauffindbarkeit durch Erweiterung des Suchbereichs verbessert, allerdings auf Kosten einer erhöhten Abfragelatenz.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>nlist</em>]</p><p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
-     <td><p>Das Erhöhen dieses Wertes verbessert die Auffindbarkeit, kann aber die Suche verlangsamen. Stellen Sie <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code> ein, um Geschwindigkeit und Genauigkeit auszugleichen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</p></td>
+     <td><p>Eine Erhöhung dieses Wertes verbessert die Auffindbarkeit, kann aber die Suche verlangsamen. Stellen Sie <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code> ein, um Geschwindigkeit und Genauigkeit auszugleichen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</p></td>
    </tr>
 </table>

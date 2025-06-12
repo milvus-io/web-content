@@ -2,9 +2,9 @@
 id: configure_indexnode.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure indexNode for Milvus.
+summary: 'Erfahren Sie, wie Sie indexNode für Milvus konfigurieren.'
 ---
-<h1 id="indexNode-related-Configurations" class="common-anchor-header">indexNode-related Configurations<button data-href="#indexNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="indexNode-related-Configurations" class="common-anchor-header">indexNode-bezogene Konfigurationen<button data-href="#indexNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.enableDisk">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        enable index node build disk vector index      </td>
+      <td>        Indexknoten zum Erstellen eines Plattenvektorindexes aktivieren      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -66,13 +66,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of indexNode. If not specified, use the first unicastable address      </td>
+      <td>        TCP/IP-Adresse von indexNode. Wenn nicht angegeben, wird die erste unicastbare Adresse verwendet.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of indexNode      </td>
+      <td>        TCP-Port von indexNode      </td>
       <td>21121</td>
     </tr>
   </tbody>
@@ -124,13 +124,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the indexNode can send, unit: byte      </td>
+      <td>        Die maximale Größe jeder RPC-Anfrage, die der indexNode senden kann, Einheit: Byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -153,13 +153,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the indexNode can receive, unit: byte      </td>
+      <td>        Die maximale Größe jeder RPC-Anfrage, die der indexNode empfangen kann, Einheit: Byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on indexNode can send, unit: byte      </td>
+      <td>        Die maximale Größe jeder RPC-Anfrage, die die Clients auf indexNode senden können, Einheit: Byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -211,13 +211,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on indexNode can receive, unit: byte      </td>
+      <td>        Die maximale Größe jeder RPC-Anfrage, die die Clients auf indexNode empfangen können, Einheit: Byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>

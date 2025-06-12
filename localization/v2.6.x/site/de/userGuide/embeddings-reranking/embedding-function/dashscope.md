@@ -42,7 +42,7 @@ beta: Milvus 2.6.x
    <tr>
      <th><p>Modell Name</p></th>
      <th><p>Abmessungen</p></th>
-     <th><p>Max. Token pro Zeile</p></th>
+     <th><p>Maximale Token pro Zeile</p></th>
      <th><p>Unterstützte Sprachen</p></th>
    </tr>
    <tr>
@@ -113,7 +113,7 @@ beta: Milvus 2.6.x
 <p>Dies bindet einen bestimmten Schlüssel an jede Anfrage, die Milvus an den DashScope-Einbettungsendpunkt sendet.</p></li>
 </ol>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Umgebungsvariable</h3><p>Verwenden Sie diese Methode, wenn Sie Milvus mit Docker Compose betreiben und es vorziehen, Geheimnisse aus Dateien und Images herauszuhalten.</p>
-<p>Milvus greift nur dann auf die Umgebungsvariable zurück, wenn unter <code translate="no">milvus.yaml</code> kein Schlüssel für den Anbieter gefunden wird.</p>
+<p>Milvus greift nur dann auf die Umgebungsvariable zurück, wenn unter <code translate="no">milvus.yaml</code> kein Schlüssel für den Provider gefunden wird.</p>
 <table>
    <tr>
      <th><p>Variable</p></th>
