@@ -1,12 +1,12 @@
 ---
 id: integrate_with_memgpt.md
 summary: >-
-  MemGPT makes it easy to build and deploy stateful LLM agents. With Milvus
-  integration, you can build agents with connections to external data sources
-  (RAG).
-title: MemGPT with Milvus Integration
+  MemGPT semplifica la creazione e la distribuzione di agenti LLM stateful.
+  Grazie all'integrazione con Milvus, è possibile creare agenti con connessioni
+  a fonti di dati esterne (RAG).
+title: MemGPT con integrazione Milvus
 ---
-<h1 id="MemGPT-with-Milvus-Integration" class="common-anchor-header">MemGPT with Milvus Integration<button data-href="#MemGPT-with-Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="MemGPT-with-Milvus-Integration" class="common-anchor-header">MemGPT con integrazione Milvus<button data-href="#MemGPT-with-Milvus-Integration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +21,9 @@ title: MemGPT with Milvus Integration
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://memgpt.readme.io/docs/index">MemGPT</a> makes it easy to build and deploy stateful LLM agents. With Milvus integration, you can build agents with connections to external data sources (RAG).</p>
-<p>In this example, we’re going to use MemGPT to chat with a custom data source which is stored in Milvus.</p>
-<h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://memgpt.readme.io/docs/index">MemGPT</a> semplifica la creazione e la distribuzione di agenti LLM stateful. Con l'integrazione di Milvus, è possibile creare agenti con connessioni a fonti di dati esterne (RAG).</p>
+<p>In questo esempio, utilizzeremo MemGPT per chattare con un'origine dati personalizzata memorizzata in Milvus.</p>
+<h2 id="Configuration" class="common-anchor-header">Configurazione<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,21 +38,20 @@ title: MemGPT with Milvus Integration
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To run MemGPT, you should make sure the Python version >= 3.10.</p>
-<p>To enable the Milvus backend, make sure to install the required dependencies with:</p>
+    </button></h2><p>Per eseguire MemGPT, occorre assicurarsi che la versione di Python sia &gt;= 3.10.</p>
+<p>Per abilitare il backend Milvus, assicurarsi di installare le dipendenze necessarie:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&#x27;pymemgpt[milvus]&#x27;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You can configure Milvus connection via command</p>
+<p>È possibile configurare la connessione a Milvus tramite il comando</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">memgpt configure</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">...
 ? Select storage backend for archival data: milvus
 ? Enter the Milvus connection URI (Default: ~/.memgpt/milvus.db): ~/.memgpt/milvus.db
 <button class="copy-code-btn"></button></code></pre>
-<p>You just set the URI to the local file path, e.g. <code translate="no">~/.memgpt/milvus.db</code>, which will automatically invoke the local Milvus service instance through Milvus Lite.</p>
-<p>If you have large scale of data such as more than a million docs, we recommend setting up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubenetes</a>.
-And in this case, your URI should be the server URI, e.g. <code translate="no">http://localhost:19530</code>.</p>
-<h2 id="Creating-an-external-data-source" class="common-anchor-header">Creating an external data source<button data-href="#Creating-an-external-data-source" class="anchor-icon" translate="no">
+<p>È sufficiente impostare l'URI al percorso del file locale, ad esempio <code translate="no">~/.memgpt/milvus.db</code>, che richiamerà automaticamente l'istanza del servizio Milvus locale attraverso Milvus Lite.</p>
+<p>Se si dispone di una grande quantità di dati, ad esempio più di un milione di documenti, si consiglia di impostare un server Milvus più performante su <a href="https://milvus.io/docs/quickstart.md">docker o kubenetes</a>. In questo caso, l'URI dovrebbe essere l'URI del server, ad esempio <code translate="no">http://localhost:19530</code>.</p>
+<h2 id="Creating-an-external-data-source" class="common-anchor-header">Creare una fonte di dati esterna<button data-href="#Creating-an-external-data-source" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,18 +66,18 @@ And in this case, your URI should be the server URI, e.g. <code translate="no">h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To feed external data into a MemGPT chatbot, we first need to create a data source.</p>
-<p>To download the MemGPT research paper we’ll use <code translate="no">curl</code> (you can also just download the PDF from your browser):</p>
+    </button></h2><p>Per alimentare un chatbot MemGPT con dati esterni, è necessario creare una fonte di dati.</p>
+<p>Per scaricare il documento di ricerca di MemGPT utilizzeremo <code translate="no">curl</code> (si può anche scaricare semplicemente il PDF dal browser):</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">we<span class="hljs-string">&#x27;re saving the file as &quot;memgpt_research_paper.pdf&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-string">curl -L -o memgpt_research_paper.pdf https://arxiv.org/pdf/2310.08560.pdf</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Now that we have the paper downloaded, we can create a MemGPT data source using <code translate="no">memgpt load</code>:</p>
+<p>Ora che abbiamo scaricato il documento, possiamo creare una fonte di dati MemGPT utilizzando <code translate="no">memgpt load</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">memgpt load directory --name memgpt_research_paper --input-files=memgpt_research_paper.pdf</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-text">Loading files: 100%|███████████████████████████████████| 1/1 [00:00&lt;00:00,  3.94file/s]
 Loaded 74 passages and 13 documents from memgpt_research_paper
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Attaching-the-data-source-to-a-MemGPT-agent" class="common-anchor-header">Attaching the data source to a MemGPT agent<button data-href="#Attaching-the-data-source-to-a-MemGPT-agent" class="anchor-icon" translate="no">
+<h2 id="Attaching-the-data-source-to-a-MemGPT-agent" class="common-anchor-header">Collegare l'origine dati a un agente MemGPT<button data-href="#Attaching-the-data-source-to-a-MemGPT-agent" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,12 +92,12 @@ Loaded 74 passages and 13 documents from memgpt_research_paper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that we’ve created this data source, we can attach it to a MemGPT chatbot at any time.</p>
-<p>Let’s create a new chatbot using the <code translate="no">memgpt_doc</code> persona (but you can use any persona you want):</p>
+    </button></h2><p>Ora che abbiamo creato questa fonte di dati, possiamo collegarla a un chatbot MemGPT in qualsiasi momento.</p>
+<p>Creiamo un nuovo chatbot utilizzando la persona <code translate="no">memgpt_doc</code> (ma è possibile utilizzare qualsiasi persona):</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">reminder: `memgpt run --persona memgpt_doc` will create a new MemGPT agent using the `memgpt_doc` persona</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">memgpt run --persona memgpt_doc</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Once we’re chatting with the agent, we can “attach” the data source to the agent’s archival memory:</p>
+<p>Una volta che avremo chattato con l'agente, potremo "attaccare" l'origine dati alla memoria di archiviazione dell'agente:</p>
 <pre><code translate="no" class="language-text">? Would you like to select an existing agent? No
 
 🧬 Creating new agent...
@@ -115,7 +114,7 @@ Hit enter to begin (will request first MemGPT message)
 ? Select data source memgpt_research_paper
 100%|███████████████████████████████████| 1/1 [00:00&lt;00:00,  4.81it/s]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Testing-out-our-new-chatbot" class="common-anchor-header">Testing out our new chatbot<button data-href="#Testing-out-our-new-chatbot" class="anchor-icon" translate="no">
+<h2 id="Testing-out-our-new-chatbot" class="common-anchor-header">Prova del nostro nuovo chatbot<button data-href="#Testing-out-our-new-chatbot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,7 +129,7 @@ Hit enter to begin (will request first MemGPT message)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that the data has been loaded into the chatbot’s memory, we can start to ask questions about it:</p>
+    </button></h2><p>Ora che i dati sono stati caricati nella memoria del chatbot, possiamo iniziare a fare domande su di essi:</p>
 <pre><code translate="no" class="language-text">&gt; Enter your message: The paper I loaded into your archival memory is called MemGPT. Can you tell me more about it?
 
 💭 It seems Chad would like to know more about the paper titled &#x27;MemGPT&#x27; that&#x27;s stored in my archival memory. It&#x27;s time to search the archival memory for details and background data to provide a comprehensive

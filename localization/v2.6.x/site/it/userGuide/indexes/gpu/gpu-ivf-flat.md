@@ -67,7 +67,7 @@ index_params.add_index(
 </ul>
 <p>Per conoscere i parametri di costruzione disponibili per l'indice <code translate="no">GPU_IVF_FLAT</code>, fare riferimento a <a href="/docs/it/gpu-ivf-flat.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> oppure passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -24,11 +24,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Nella ricerca vettoriale tradizionale, i risultati sono classificati esclusivamente in base alla somiglianza vettoriale, ovvero alla vicinanza dei vettori nello spazio matematico. Ma nelle applicazioni reali, ciò che rende i contenuti veramente rilevanti spesso dipende da qualcosa di più della semplice somiglianza semantica.</p>
+    </button></h1><p>Nella ricerca vettoriale tradizionale, i risultati sono classificati esclusivamente in base alla somiglianza vettoriale, ovvero alla vicinanza dei vettori nello spazio matematico. Ma nelle applicazioni reali, ciò che rende un contenuto veramente rilevante spesso dipende da qualcosa di più della semplice somiglianza semantica.</p>
 <p>Considerate questi scenari quotidiani:</p>
 <ul>
 <li><p>Una ricerca di notizie in cui l'articolo di ieri dovrebbe essere più importante di un articolo simile di tre anni fa.</p></li>
-<li><p>Un motore di ricerca di ristoranti che dà priorità ai locali a 5 minuti di distanza rispetto a quelli che richiedono 30 minuti di guida</p></li>
+<li><p>Una ricerca di ristoranti che dà priorità ai locali a 5 minuti di distanza rispetto a quelli che richiedono 30 minuti di auto</p></li>
 <li><p>Una piattaforma di e-commerce che dà priorità ai prodotti di tendenza anche quando sono leggermente meno simili alla query di ricerca.</p></li>
 </ul>
 <p>Questi scenari hanno tutti un'esigenza comune: bilanciare la somiglianza vettoriale con altri fattori numerici come il tempo, la distanza o la popolarità.</p>
@@ -176,7 +176,7 @@ beta: Milvus 2.6.x
      <td><ul>
 <li><p>Ricerche generali che richiedono risultati equilibrati</p></li>
 <li><p>Applicazioni in cui gli utenti hanno un senso intuitivo della distanza</p></li>
-<li><p>Quando la distanza moderata non dovrebbe penalizzare gravemente i risultati</p></li>
+<li><p>Quando la distanza moderata non dovrebbe penalizzare pesantemente i risultati</p></li>
 </ul></td>
      <td><p>In una ricerca di ristoranti, i locali di qualità a 3 km di distanza rimangono scoperti, anche se classificati più in basso rispetto alle opzioni vicine</p></td>
    </tr>
@@ -224,7 +224,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>I ranker di decadimento possono essere applicati sia alla ricerca vettoriale standard che alle operazioni di ricerca ibrida in Milvus. Di seguito sono riportati i principali frammenti di codice per l'implementazione di questa funzione.</p>
 <div class="alert note">
-<p>Prima di utilizzare le funzioni di decadimento, è necessario creare una collezione con campi numerici appropriati (come timestamp, distanze, ecc.) che verranno utilizzati per i calcoli di decadimento. Per gli esempi di lavoro completi, che includono l'impostazione della raccolta, la definizione dello schema e l'inserimento dei dati, consultare l'<a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">esercitazione: Implementare una classifica basata sul tempo in Milvus</a>.</p>
+<p>Prima di utilizzare le funzioni di decadimento, è necessario creare una collezione con campi numerici appropriati (come timestamp, distanze, ecc.) che saranno utilizzati per i calcoli di decadimento. Per gli esempi di lavoro completi, che includono l'impostazione della raccolta, la definizione dello schema e l'inserimento dei dati, consultare l'<a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">esercitazione: Implementare una classifica basata sul tempo in Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Creare un classificatore di decadimento</h3><p>Per implementare il ranking di decadimento, occorre innanzitutto definire un oggetto <code translate="no">Function</code> con la configurazione appropriata:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

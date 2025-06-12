@@ -52,7 +52,7 @@ beta: Milvus 2.6.x
      <td><p>RAG, ricerca di documenti, reranking, classificazione, ecc.</p></td>
    </tr>
 </table>
-<p>Per maggiori dettagli, consultare i <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html">modelli di Text Embeddings di Amazon Titan</a>.</p>
+<p>Per maggiori dettagli, consultare i <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html">modelli Amazon Titan Text Embeddings</a>.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurare le credenziali<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,7 +91,7 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">secret_access_key:</span> <span class="hljs-string">&lt;YOUR_PROD_SECRET_ACCESS_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Mettere le credenziali qui le rende persistenti tra i vari riavvii e permette di cambiare le credenziali semplicemente cambiando un'etichetta.</p></li>
-<li><p><strong>Indicare a Milvus quale credenziale usare per le chiamate di servizio</strong></p>
+<li><p><strong>Indicare a Milvus quale credenziale utilizzare per le chiamate di servizio</strong></p>
 <p>Nello stesso file, si indica al provider Bedrock l'etichetta che si desidera utilizzare.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
@@ -101,7 +101,7 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>In questo modo si lega una credenziale specifica a ogni richiesta che Milvus invia al servizio di incorporazione di Bedrock.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Opzione 2: variabile d'ambiente</h3><p>Utilizzate questo metodo quando eseguite Milvus con Docker Compose e preferite tenere i segreti fuori dai file e dalle immagini.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Opzione 2: Variabile d'ambiente</h3><p>Utilizzate questo metodo quando eseguite Milvus con Docker Compose e preferite tenere i segreti fuori dai file e dalle immagini.</p>
 <p>Milvus ricorre alla variabile d'ambiente solo se non viene trovata alcuna credenziale per il provider in <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>

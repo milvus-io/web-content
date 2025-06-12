@@ -54,7 +54,7 @@ summary: >-
 <li><p><strong>(Opzionale) Affinamento dei risultati</strong>: I risultati candidati iniziali possono essere raffinati per ottenere una maggiore precisione, in base ai seguenti parametri:</p>
 <ul>
 <li><p><code translate="no">refine</code>: Controlla se questa fase di raffinamento è attivata. Se impostato su <code translate="no">true</code>, il sistema ricalcola le distanze utilizzando rappresentazioni di precisione superiore o non compresse.</p></li>
-<li><p><code translate="no">refine_type</code>: Specifica il livello di precisione dei dati utilizzati durante il raffinamento (ad esempio, SQ6, SQ8, BF16). Una scelta di precisione più elevata, come <code translate="no">FP32</code>, può produrre risultati più accurati, ma richiede più memoria. Il livello di precisione deve essere superiore alla precisione dell'insieme di dati compresso originale di <code translate="no">sq_type</code>.</p></li>
+<li><p><code translate="no">refine_type</code>: Specifica il livello di precisione dei dati utilizzati durante il raffinamento (ad esempio, SQ6, SQ8, BF16). Una scelta di precisione superiore, come <code translate="no">FP32</code>, può dare risultati più accurati, ma richiede più memoria. Il livello di precisione deve essere superiore alla precisione dell'insieme di dati compresso originale di <code translate="no">sq_type</code>.</p></li>
 <li><p><code translate="no">refine_k</code>: Agisce come fattore di ingrandimento. Ad esempio, se il top <em>k</em> è 100 e <code translate="no">refine_k</code> è 2, il sistema classifica nuovamente i 200 candidati migliori e restituisce i 100 migliori, migliorando l'accuratezza complessiva.</p></li>
 </ul></li>
 </ol>
@@ -167,9 +167,9 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>Numero massimo di connessioni (o bordi) che ogni nodo può avere nel grafo, compresi i bordi in uscita e in entrata. Questo parametro influisce direttamente sulla costruzione dell'indice e sulla ricerca.</p></td>
      <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [2, 2048]</p>
-<p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 bordi uscenti e 30 bordi entranti per nodo)</p></td>
+<p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 bordi in uscita e 30 bordi in entrata per nodo)</p></td>
      <td><p>Un valore maggiore di <code translate="no">M</code> porta generalmente a una <strong>maggiore accuratezza</strong>, ma <strong>aumenta l'overhead di memoria</strong> e <strong>rallenta sia la costruzione dell'indice che la ricerca</strong>. Considerare di aumentare <code translate="no">M</code> per i set di dati con elevata dimensionalità o quando è fondamentale un richiamo elevato.</p>
-<p>Considerare di diminuire <code translate="no">M</code> quando l'uso della memoria e la velocità di ricerca sono le principali preoccupazioni.</p>
+<p>Si consiglia di diminuire <code translate="no">M</code> quando l'uso della memoria e la velocità di ricerca sono le principali preoccupazioni.</p>
 <p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [5, 100].</p></td>
    </tr>
    <tr>

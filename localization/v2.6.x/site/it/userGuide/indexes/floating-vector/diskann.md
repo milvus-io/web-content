@@ -73,7 +73,7 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> è un rapporto definito dall'utente, che rappresenta la frazione della dimensione totale dei dati riservata ai codici PQ. Questo parametro consente di trovare un compromesso tra la precisione della ricerca e le risorse di memoria. Per ulteriori informazioni sulla regolazione dei parametri, consultare le <a href="/docs/it/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">configurazioni DISKANN</a>.</p></li>
 </ul>
 <p>Per i dettagli tecnici sul metodo PQ sottostante, consultare <a href="/docs/it/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
-<h3 id="Search-process" class="common-anchor-header">Processo di ricerca</h3><p>Una volta costruito l'indice (il grafico Vamana su disco e i codici PQ in memoria), DISKANN esegue le ricerche di RNA come segue:</p>
+<h3 id="Search-process" class="common-anchor-header">Processo di ricerca</h3><p>Una volta costruito l'indice (il grafico Vamana su disco e i codici PQ in memoria), DISKANN esegue le ricerche ANN come segue:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
@@ -83,8 +83,8 @@ summary: >-
 <li><p><strong>Esplorazione dei vicini:</strong> L'algoritmo raccoglie i potenziali vicini candidati (cerchi in rosso nella figura) dai bordi del nodo corrente, sfruttando i codici PQ in memoria per approssimare le distanze tra questi candidati e il vettore di interrogazione. Questi potenziali vicini candidati sono i nodi direttamente connessi al punto di ingresso selezionato attraverso i bordi del grafo di Vamana.</p></li>
 <li><p><strong>Selezione dei nodi per il calcolo accurato della distanza:</strong> Dai risultati approssimativi, un sottoinsieme dei vicini più promettenti (cerchi in verde nella figura) viene selezionato per una valutazione precisa della distanza utilizzando i loro vettori originali non compressi. Ciò richiede la lettura dei dati dal disco, che può richiedere molto tempo. DISKANN utilizza due parametri per controllare questo delicato equilibrio tra precisione e velocità:</p>
 <ul>
-<li><p><code translate="no">beam_width_ratio</code>: Una razione che controlla l'ampiezza della ricerca, determinando quanti vicini candidati vengono selezionati in parallelo per esplorare i loro vicini. Una <code translate="no">beam_width_ratio</code> più grande comporta un'esplorazione più ampia, che potenzialmente porta a una maggiore accuratezza, ma aumenta anche il costo computazionale e l'I/O su disco. L'ampiezza del fascio, o il numero di nodi selezionati, è determinata dalla formula: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>: La percentuale di memoria allocata per la cache dei dati del disco a cui si accede di frequente. La cache aiuta a ridurre al minimo l'I/O su disco, rendendo le ricerche ripetute più veloci perché i dati sono già in memoria.</p></li>
+<li><p><code translate="no">beam_width_ratio</code>: Una razione che controlla l'ampiezza della ricerca, determinando quanti candidati vicini vengono selezionati in parallelo per esplorare i loro vicini. Una <code translate="no">beam_width_ratio</code> più grande comporta un'esplorazione più ampia, che potenzialmente porta a una maggiore accuratezza, ma aumenta anche il costo computazionale e l'I/O su disco. L'ampiezza del fascio, o il numero di nodi selezionati, è determinata dalla formula: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>: La percentuale di memoria allocata per la memorizzazione nella cache dei dati del disco a cui si accede di frequente. La cache aiuta a ridurre al minimo l'I/O su disco, rendendo le ricerche ripetute più veloci perché i dati sono già in memoria.</p></li>
 </ul>
 <p>Per saperne di più sulla regolazione dei parametri, consultare le <a href="/docs/it/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">configurazioni di DISKANN</a>.</p></li>
 <li><p><strong>Esplorazione iterativa:</strong> La ricerca affina iterativamente l'insieme dei candidati, eseguendo ripetutamente valutazioni approssimative (usando PQ) seguite da controlli precisi (usando i vettori originali dal disco) finché non viene trovato un numero sufficiente di vicini.</p></li>
@@ -151,7 +151,7 @@ summary: >-
       </svg>
     </button></h2><p>I parametri di DISKANN possono essere configurati con due metodi principali:</p>
 <ul>
-<li><p><strong>File di configurazione Milvus:</strong> Regolare i parametri DISKANN attraverso il file di configurazione Milvus. Questo metodo è adatto per impostare le opzioni generali di configurazione dell'istanza Milvus.</p></li>
+<li><p><strong>File di configurazione Milvus:</strong> Regolare i parametri di DISKANN attraverso il file di configurazione di Milvus. Questo metodo è adatto per impostare le opzioni generali di configurazione dell'istanza Milvus.</p></li>
 <li><p><strong>SDK Milvus:</strong> Regolare con precisione i parametri DISKANN utilizzando l'SDK Milvus durante la creazione dell'indice o le operazioni di ricerca. Ciò consente un controllo più granulare e la regolazione dinamica dei parametri in base a casi d'uso specifici.</p></li>
 </ul>
 <div class="alert note">
@@ -263,7 +263,7 @@ res = MilvusClient.search(
      <td><p><strong>Tipo</strong>: Variabile <strong>Intervallo</strong>: (0,0, 0,25]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">0.125</code></p></td>
      <td><p>Un rapporto più alto porta a risultati di ricerca più accurati, allocando una percentuale maggiore di memoria per i codici PQ, memorizzando di fatto più informazioni sui vettori originali. Un rapporto più basso riduce l'uso della memoria, ma potenzialmente sacrifica l'accuratezza, poiché i codici PQ più piccoli conservano meno informazioni. Questo approccio è adatto a scenari in cui i vincoli di memoria sono un problema, consentendo potenzialmente l'indicizzazione di insiemi di dati più grandi.</p>
-<p>Nella maggior parte dei casi, si consiglia di impostare un valore all'interno di questo intervallo: (0,0625, 0,25].</p></td>
+<p>Nella maggior parte dei casi, si consiglia di impostare un valore all'interno di questo intervallo: (0.0625, 0.25]</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice</h3><p>Questi parametri influenzano il modo in cui DISKANN esegue le ricerche. La loro regolazione può influire sulla velocità di ricerca, sulla latenza e sull'utilizzo delle risorse.</p>

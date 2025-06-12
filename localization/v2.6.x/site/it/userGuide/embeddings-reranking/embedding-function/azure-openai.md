@@ -101,7 +101,7 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
 <p>Mettere le chiavi API in questo punto le rende persistenti tra i vari riavvii e consente di cambiare le chiavi semplicemente cambiando l'etichetta.</p></li>
-<li><p><strong>Indicare a Milvus quale chiave utilizzare per le chiamate ad Azure OpenAI</strong></p>
+<li><p><strong>Dire a Milvus quale chiave usare per le chiamate ad Azure OpenAI</strong></p>
 <p>Nello stesso file, indicare al provider Azure OpenAI l'etichetta che si desidera utilizzare.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
@@ -165,7 +165,7 @@ beta: Milvus 2.6.x
 <li><p>Un campo scalare che memorizza i dati grezzi da incorporare.</p></li>
 <li><p>Un campo vettoriale riservato a memorizzare le incorporazioni vettoriali che la funzione genererà per il campo scalare.</p></li>
 </ul>
-<p>L'esempio seguente definisce uno schema con un campo scalare <code translate="no">&quot;document&quot;</code> per memorizzare i dati testuali e un campo vettoriale <code translate="no">&quot;dense&quot;</code> per memorizzare gli embeddings che saranno generati dal modulo Function. Ricordarsi di impostare la dimensione del vettore (<code translate="no">dim</code>) in modo che corrisponda all'output del modello di embedding scelto.</p>
+<p>L'esempio seguente definisce uno schema con un campo scalare <code translate="no">&quot;document&quot;</code> per memorizzare i dati testuali e un campo vettoriale <code translate="no">&quot;dense&quot;</code> per memorizzare le incorporazioni che saranno generate dal modulo Function. Ricordarsi di impostare la dimensione del vettore (<code translate="no">dim</code>) in modo che corrisponda all'output del modello di embedding scelto.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

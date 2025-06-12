@@ -1,16 +1,19 @@
 ---
 id: binary-vector.md
-title: Binary Vector
+title: Vettore binario
 summary: >-
-  Binary vectors are a special form of data representation that convert
-  traditional high-dimensional floating-point vectors into binary vectors
-  containing only 0s and 1s. This transformation not only compresses the size of
-  the vector but also reduces storage and computational costs while retaining
-  semantic information. When precision for non-critical features is not
-  essential, binary vectors can effectively maintain most of the integrity and
-  utility of the original floating-point vectors.
+  I vettori binari sono una forma speciale di rappresentazione dei dati che
+  converte i tradizionali vettori in virgola mobile ad alta dimensione in
+  vettori binari contenenti solo 0 e 1. Questa trasformazione non solo comprime
+  le dimensioni dei vettori, ma riduce anche i costi di memorizzazione e
+  conserva le informazioni semantiche. Questa trasformazione non solo comprime
+  le dimensioni del vettore, ma riduce anche i costi di archiviazione e di
+  calcolo, conservando le informazioni semantiche. Quando la precisione per le
+  caratteristiche non critiche non è essenziale, i vettori binari possono
+  effettivamente mantenere la maggior parte dell'integrità e dell'utilità dei
+  vettori originali in virgola mobile.
 ---
-<h1 id="Binary-Vector" class="common-anchor-header">Binary Vector<button data-href="#Binary-Vector" class="anchor-icon" translate="no">
+<h1 id="Binary-Vector" class="common-anchor-header">Vettore binario<button data-href="#Binary-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,9 +28,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Binary vectors are a special form of data representation that convert traditional high-dimensional floating-point vectors into binary vectors containing only 0s and 1s. This transformation not only compresses the size of the vector but also reduces storage and computational costs while retaining semantic information. When precision for non-critical features is not essential, binary vectors can effectively maintain most of the integrity and utility of the original floating-point vectors.</p>
-<p>Binary vectors have a wide range of applications, particularly in situations where computational efficiency and storage optimization are crucial. In large-scale AI systems, such as search engines or recommendation systems, real-time processing of massive amounts of data is key. By reducing the size of the vectors, binary vectors help lower latency and computational costs without significantly sacrificing accuracy. Additionally, binary vectors are useful in resource-constrained environments, such as mobile devices and embedded systems, where memory and processing power are limited. Through the use of binary vectors, complex AI functions can be implemented in these restricted settings while maintaining high performance.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>I vettori binari sono una forma speciale di rappresentazione dei dati che converte i tradizionali vettori in virgola mobile ad alta dimensione in vettori binari contenenti solo 0 e 1. Questa trasformazione non solo comprime le dimensioni del vettore, ma riduce anche i costi di archiviazione e di calcolo, mantenendo le informazioni semantiche. Questa trasformazione non solo comprime le dimensioni del vettore, ma riduce anche i costi di archiviazione e di calcolo, mantenendo le informazioni semantiche. Quando la precisione per le caratteristiche non critiche non è essenziale, i vettori binari possono effettivamente mantenere la maggior parte dell'integrità e dell'utilità dei vettori originali in virgola mobile.</p>
+<p>I vettori binari hanno un'ampia gamma di applicazioni, in particolare in situazioni in cui l'efficienza computazionale e l'ottimizzazione della memorizzazione sono fondamentali. Nei sistemi di intelligenza artificiale su larga scala, come i motori di ricerca o i sistemi di raccomandazione, l'elaborazione in tempo reale di enormi quantità di dati è fondamentale. Riducendo le dimensioni dei vettori, i vettori binari aiutano a ridurre la latenza e i costi di calcolo senza sacrificare in modo significativo la precisione. Inoltre, i vettori binari sono utili in ambienti con risorse limitate, come i dispositivi mobili e i sistemi embedded, dove la memoria e la potenza di elaborazione sono limitate. Grazie all'uso dei vettori binari, è possibile implementare complesse funzioni di intelligenza artificiale in questi ambienti limitati, mantenendo alte le prestazioni.</p>
+<h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,33 +45,29 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Binary vectors are a method of encoding complex objects (like images, text, or audio) into fixed-length binary values. In Milvus, binary vectors are typically represented as bit arrays or byte arrays. For example, an 8-dimensional binary vector can be represented as <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code>.</p>
-<p>The diagram below shows how binary vectors represent the presence of keywords in text content. In this example, a 10-dimensional binary vector is used to represent two different texts (<strong>Text 1</strong> and <strong>Text 2</strong>), where each dimension corresponds to a word in the vocabulary: 1 indicates the presence of the word in the text, while 0 indicates its absence.</p>
+    </button></h2><p>I vettori binari sono un metodo per codificare oggetti complessi (come immagini, testo o audio) in valori binari di lunghezza fissa. In Milvus, i vettori binari sono tipicamente rappresentati come array di bit o di byte. Ad esempio, un vettore binario a 8 dimensioni può essere rappresentato come <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code>.</p>
+<p>Il diagramma seguente mostra come i vettori binari rappresentano la presenza di parole chiave nel contenuto del testo. In questo esempio, un vettore binario a 10 dimensioni viene utilizzato per rappresentare due testi diversi<strong>(Testo 1</strong> e <strong>Testo 2</strong>), dove ogni dimensione corrisponde a una parola del vocabolario: 1 indica la presenza della parola nel testo, mentre 0 indica la sua assenza.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
-    <span>Binary Vector</span>
-  </span>
-</p>
-<p>Binary vectors have the following characteristics:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   </span> <span class="img-wrapper"> <span>Vettore binario</span> </span></p>
+<p>I vettori binari hanno le seguenti caratteristiche:</p>
 <ul>
-<li><p><strong>Efficient Storage:</strong> Each dimension requires only 1 bit of storage, significantly reducing storage space.</p></li>
-<li><p><strong>Fast Computation:</strong> Similarity between vectors can be quickly calculated using bitwise operations like XOR.</p></li>
-<li><p><strong>Fixed Length:</strong> The length of the vector remains constant regardless of the original text length, making indexing and retrieval easier.</p></li>
-<li><p><strong>Simple and Intuitive:</strong> Directly reflects the presence of keywords, making it suitable for certain specialized retrieval tasks.</p></li>
+<li><p><strong>Memorizzazione efficiente:</strong> Ogni dimensione richiede solo 1 bit di memoria, riducendo in modo significativo lo spazio di archiviazione.</p></li>
+<li><p><strong>Rapidità di calcolo:</strong> La somiglianza tra vettori può essere calcolata rapidamente utilizzando operazioni bitwise come XOR.</p></li>
+<li><p><strong>Lunghezza fissa:</strong> La lunghezza del vettore rimane costante indipendentemente dalla lunghezza del testo originale, facilitando l'indicizzazione e il recupero.</p></li>
+<li><p><strong>Semplice e intuitivo:</strong> Riflette direttamente la presenza di parole chiave, il che lo rende adatto ad alcuni compiti di ricerca specializzati.</p></li>
 </ul>
-<p>Binary vectors can be generated through various methods. In text processing, predefined vocabularies can be used to set corresponding bits based on word presence. For image processing, perceptual hashing algorithms (like <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) can generate binary features of images. In machine learning applications, model outputs can be binarized to obtain binary vector representations.</p>
-<p>After binary vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.</p>
+<p>I vettori binari possono essere generati con diversi metodi. Nell'elaborazione del testo, si possono utilizzare vocabolari predefiniti per impostare i bit corrispondenti in base alla presenza delle parole. Per l'elaborazione delle immagini, gli algoritmi di hashing percettivo (come <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) possono generare caratteristiche binarie delle immagini. Nelle applicazioni di apprendimento automatico, i risultati dei modelli possono essere binarizzati per ottenere rappresentazioni vettoriali binarie.</p>
+<p>Dopo la vettorizzazione binaria, i dati possono essere archiviati in Milvus per la gestione e il recupero dei vettori. Il diagramma seguente mostra il processo di base.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
-    <span>Use Binary Vector</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   </span> <span class="img-wrapper"> <span>Utilizzare il vettore binario</span> </span></p>
 <div class="alert note">
-<p>Although binary vectors excel in specific scenarios, they have limitations in their expressive capability, making it difficult to capture complex semantic relationships. Therefore, in real-world scenarios, binary vectors are often used alongside other vector types to balance efficiency and expressiveness. For more information, refer to <a href="/docs/dense-vector.md">Dense Vector</a> and <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
+<p>Sebbene i vettori binari siano eccellenti in scenari specifici, hanno dei limiti nella loro capacità espressiva, rendendo difficile catturare relazioni semantiche complesse. Pertanto, negli scenari reali, i vettori binari sono spesso utilizzati insieme ad altri tipi di vettori per bilanciare efficienza ed espressività. Per ulteriori informazioni, consultare <a href="/docs/it/dense-vector.md">Vettori densi</a> e <a href="/docs/it/sparse_vector.md">vettori sparsi</a>.</p>
 </div>
-<h2 id="Use-binary-vectors" class="common-anchor-header">Use binary vectors<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
+<h2 id="Use-binary-vectors" class="common-anchor-header">Utilizzare vettori binari<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,18 +82,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Add vector field</h3><p>To use binary vectors in Milvus, first define a vector field for storing binary vectors when creating a collection. This process includes:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Aggiungere un campo vettoriale</h3><p>Per utilizzare i vettori binari in Milvus, occorre innanzitutto definire un campo vettoriale per memorizzare i vettori binari quando si crea una collezione. Questo processo comprende:</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported binary vector data type, i.e., <code translate="no">BINARY_VECTOR</code>.</p></li>
-<li><p>Specifying the vector’s dimensions using the <code translate="no">dim</code> parameter. Note that <code translate="no">dim</code> must be a multiple of 8 as binary vectors must be converted into a byte array when inserting. Every 8 boolean values (0 or 1) will be packed into 1 byte. For example, if <code translate="no">dim=128</code>, a 16-byte array is required for insertion.</p></li>
+<li><p>Impostare <code translate="no">datatype</code> sul tipo di dati vettoriali binari supportati, cioè <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>Specificare le dimensioni del vettore usando il parametro <code translate="no">dim</code>. Si noti che <code translate="no">dim</code> deve essere un multiplo di 8, poiché i vettori binari devono essere convertiti in array di byte al momento dell'inserimento. Ogni 8 valori booleani (0 o 1) saranno impacchettati in 1 byte. Ad esempio, se <code translate="no">dim=128</code>, per l'inserimento è necessario un array di 16 byte.</p></li>
 </ol>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -205,15 +199,10 @@ schema.WithField(entity.NewField().
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, a vector field named <code translate="no">binary_vector</code> is added for storing binary vectors. The data type of this field is <code translate="no">BINARY_VECTOR</code>, with a dimension of 128.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Set index params for vector field</h3><p>To speed up searches, an index must be created for the binary vector field. Indexing can significantly enhance the retrieval efficiency of large-scale vector data.</p>
+<p>In questo esempio, viene aggiunto un campo vettoriale chiamato <code translate="no">binary_vector</code> per memorizzare vettori binari. Il tipo di dati di questo campo è <code translate="no">BINARY_VECTOR</code>, con una dimensione di 128.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Impostare i parametri dell'indice per il campo vettoriale</h3><p>Per velocizzare le ricerche, è necessario creare un indice per il campo vettoriale binario. L'indicizzazione può migliorare significativamente l'efficienza di recupero dei dati vettoriali su larga scala.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -256,17 +245,12 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the example above, an index named <code translate="no">binary_vector_index</code> is created for the <code translate="no">binary_vector</code> field, using the <code translate="no">AUTOINDEX</code> index type. The <code translate="no">metric_type</code> is set to <code translate="no">HAMMING</code>, indicating that Hamming distance is used for similarity measurement.</p>
-<p>Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.</p>
-<p>Additionally, Milvus supports other similarity metrics for binary vectors. For more information, refer to <a href="/docs/metric.md">Metric Types</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Create collection</h3><p>Once the binary vector and index settings are complete, create a collection that contains binary vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_collection</code>.</p>
+<p>Nell'esempio precedente, viene creato un indice chiamato <code translate="no">binary_vector_index</code> per il campo <code translate="no">binary_vector</code>, utilizzando il tipo di indice <code translate="no">AUTOINDEX</code>. L'indice <code translate="no">metric_type</code> è impostato su <code translate="no">HAMMING</code>, a indicare che la distanza di Hamming è utilizzata per la misurazione della similarità.</p>
+<p>Milvus offre diversi tipi di indice per una migliore esperienza di ricerca vettoriale. AUTOINDEX è un tipo di indice speciale progettato per attenuare la curva di apprendimento della ricerca vettoriale. Sono disponibili molti tipi di indice tra cui scegliere. Per i dettagli, consultare xxx.</p>
+<p>Inoltre, Milvus supporta altre metriche di similarità per vettori binari. Per ulteriori informazioni, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Creare la raccolta</h3><p>Una volta completate le impostazioni dei vettori binari e degli indici, creare una collezione che contenga vettori binari. L'esempio seguente utilizza il metodo <code translate="no">create_collection</code> per creare un insieme chiamato <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -317,15 +301,10 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>After creating the collection, use the <code translate="no">insert</code> method to add data containing binary vectors. Note that binary vectors should be provided in the form of a byte array, where each byte represents 8 boolean values.</p>
-<p>For example, for a 128-dimensional binary vector, a 16-byte array is required (since 128 bits ÷ 8 bits/byte = 16 bytes). Below is an example code for inserting data:</p>
+<h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><p>Dopo aver creato la collezione, utilizzare il metodo <code translate="no">insert</code> per aggiungere dati contenenti vettori binari. Si noti che i vettori binari devono essere forniti sotto forma di array di byte, dove ogni byte rappresenta 8 valori booleani.</p>
+<p>Ad esempio, per un vettore binario di 128 dimensioni, è necessario un array di 16 byte (poiché 128 bit ÷ 8 bit/byte = 16 byte). Di seguito è riportato un esempio di codice per l'inserimento di dati:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_bool_list_to_bytes</span>(<span class="hljs-params">bool_list</span>):
     <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(bool_list) % <span class="hljs-number">8</span> != <span class="hljs-number">0</span>:
         <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;The length of a boolean list must be a multiple of 8&quot;</span>)
@@ -417,15 +396,10 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Perform similarity search</h3><p>Similarity search is one of the core features of Milvus, allowing you to quickly find data that is most similar to a query vector based on the distance between vectors. To perform a similarity search using binary vectors, prepare the query vector and search parameters, then call the <code translate="no">search</code> method.</p>
-<p>During search operations, binary vectors must also be provided in the form of a byte array. Ensure that the dimensionality of the query vector matches the dimension specified when defining <code translate="no">dim</code> and that every 8 boolean values are converted into 1 byte.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Eseguire la ricerca di similarità</h3><p>La ricerca per similarità è una delle caratteristiche principali di Milvus, che consente di trovare rapidamente i dati più simili a un vettore di interrogazione in base alla distanza tra i vettori. Per eseguire una ricerca di similarità utilizzando vettori binari, preparare il vettore di interrogazione e i parametri di ricerca, quindi chiamare il metodo <code translate="no">search</code>.</p>
+<p>Durante le operazioni di ricerca, i vettori binari devono essere forniti anche sotto forma di array di byte. Assicurarsi che la dimensione del vettore di interrogazione corrisponda a quella specificata nella definizione di <code translate="no">dim</code> e che ogni 8 valori booleani siano convertiti in 1 byte.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -523,4 +497,4 @@ curl --request POST \
     \&quot;outputFields\&quot;: [\&quot;pk\&quot;]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic ANN Search</a>.</p>
+<p>Per ulteriori informazioni sui parametri di ricerca della somiglianza, consultare la sezione <a href="/docs/it/single-vector-search.md">Ricerca di base di RNA</a>.</p>

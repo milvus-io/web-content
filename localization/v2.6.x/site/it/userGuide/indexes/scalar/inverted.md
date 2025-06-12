@@ -54,7 +54,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
    </span> <span class="img-wrapper"> <span>Invertito</span> </span></p>
-<p>Poiché il dizionario è ordinato, il filtraggio basato sui termini può essere gestito in modo efficiente. Invece di analizzare tutti i documenti, Milvus si limita a cercare il termine nel dizionario e a recuperarne l'elenco invertito, velocizzando notevolmente le ricerche e i filtri su grandi insiemi di dati.</p>
+<p>Poiché il dizionario è ordinato, il filtraggio basato sui termini può essere gestito in modo efficiente. Invece di analizzare tutti i documenti, Milvus si limita a cercare il termine nel dizionario e a recuperare l'elenco invertito, velocizzando notevolmente le ricerche e i filtri su grandi insiemi di dati.</p>
 <h2 id="Index-a-regular-scalar-field" class="common-anchor-header">Indicizzare un campo scalare regolare<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -171,7 +171,7 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Specifica quale percorso JSON indicizzare. Si può puntare su chiavi annidate, su posizioni di array o su entrambi (ad esempio, <code translate="no">metadata["product_info"]["category"]</code> o <code translate="no">metadata["tags"][0]</code>). Se il percorso manca o l'elemento dell'array non esiste per una determinata riga, quella riga viene semplicemente saltata durante l'indicizzazione e non viene lanciato alcun errore.</p></td>
+     <td><p>Specifica quale percorso JSON indicizzare. Si può puntare su chiavi annidate, su posizioni di array o su entrambi (ad esempio, <code translate="no">metadata["product_info"]["category"]</code> o <code translate="no">metadata["tags"][0]</code>). Se il percorso manca o l'elemento dell'array non esiste per una particolare riga, quella riga viene semplicemente saltata durante l'indicizzazione e non viene lanciato alcun errore.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>

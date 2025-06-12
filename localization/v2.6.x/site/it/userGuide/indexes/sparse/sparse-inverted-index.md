@@ -64,7 +64,7 @@ index_params.add_index(
 </ul></li>
 <li><p><code translate="no">params.inverted_index_algo</code>: L'algoritmo usato per costruire e interrogare l'indice. Valori validi:</p>
 <ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (predefinito): Elaborazione ottimizzata delle query Document-at-a-Time (DAAT) con l'algoritmo MaxScore. MaxScore fornisce prestazioni migliori per valori elevati di <em>k</em> o per query con molti termini, saltando termini e documenti che potrebbero avere un impatto minimo. Ciò si ottiene suddividendo i termini in gruppi essenziali e non essenziali in base ai loro punteggi di impatto massimo, concentrandosi sui termini che possono contribuire ai risultati top-k.</p></li>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (predefinito): Elaborazione ottimizzata delle query Document-at-a-Time (DAAT) con l'algoritmo MaxScore. MaxScore fornisce prestazioni migliori per valori elevati di <em>k</em> o per query con molti termini, saltando termini e documenti che potrebbero avere un impatto minimo. Questo risultato si ottiene suddividendo i termini in gruppi essenziali e non essenziali in base ai punteggi di impatto massimo, concentrandosi sui termini che possono contribuire ai risultati top-k.</p></li>
 <li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Elaborazione ottimizzata delle query DAAT con l'algoritmo WAND. WAND valuta un minor numero di documenti trovati, sfruttando i punteggi di impatto massimo per saltare i documenti non competitivi, ma ha un overhead più elevato per ogni singolo colpo. Questo rende WAND più efficiente per le query con valori <em>k</em> piccoli o per le query brevi, dove il salto è più fattibile.</p></li>
 <li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Elaborazione di query Basic Term-at-a-Time (TAAT). Pur essendo più lento rispetto a <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offre un vantaggio unico. A differenza degli algoritmi DAAT, che utilizzano punteggi di impatto massimo memorizzati nella cache che rimangono statici indipendentemente dalle modifiche al parametro di raccolta globale (avgdl), <code translate="no">TAAT_NAIVE</code> si adatta dinamicamente a tali modifiche.</p></li>
 </ul>
@@ -109,7 +109,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">drop_ratio_search</code>: Ottimizzazione delle prestazioni di ricerca specificando la percentuale di valori piccoli del vettore da ignorare durante il processo di ricerca. Ad esempio, con <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, il 20% più piccolo dei valori nel vettore della query verrà ignorato durante la ricerca.</li>
 </ul>
-<p>Per conoscere gli altri parametri di ricerca disponibili per l'indice <code translate="no">SPARSE_INVERTED_INDEX</code>, consultare i <a href="/docs/it/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">parametri di ricerca specifici dell'indice</a>.</p></li>
+<p>Per conoscere altri parametri di ricerca disponibili per l'indice <code translate="no">SPARSE_INVERTED_INDEX</code>, fare riferimento a <a href="/docs/it/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">Parametri di ricerca specifici dell'indice</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parametri dell'indice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"

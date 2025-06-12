@@ -66,7 +66,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Questa guida presuppone che si disponga di:</p>
 <ul>
 <li><p>Un'istanza Milvus in esecuzione</p></li>
-<li><p>Milvus SDK installato</p></li>
+<li><p>L'SDK Milvus installato</p></li>
 <li><p>Una raccolta esistente</p></li>
 </ul>
 <div class="alert note">
@@ -168,7 +168,7 @@ client.add_collection_field(
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="What-to-expect" class="common-anchor-header">Cosa aspettarsi</h3><ul>
 <li><p>Le<strong>entità esistenti</strong> avranno il valore predefinito (<code translate="no">&quot;standard&quot;</code>) per il nuovo campo aggiunto.</p></li>
-<li><p>Le<strong>nuove entità</strong> possono sovrascrivere il valore predefinito o usarlo se non viene fornito alcun valore</p></li>
+<li><p>Le<strong>nuove entità</strong> possono sovrascrivere il valore predefinito o utilizzarlo se non viene fornito alcun valore</p></li>
 <li><p><strong>La disponibilità del campo</strong> avviene quasi immediatamente con un ritardo minimo</p></li>
 <li><p><strong>Interrogabile subito</strong> dopo il breve periodo di sincronizzazione</p></li>
 </ul>
@@ -208,7 +208,7 @@ client.create_collection(
     enable_dynamic_field=<span class="hljs-literal">True</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">Cosa succede quando si aggiunge un campo con lo stesso nome di una chiave di campo dinamico?</h3><p>Quando la collezione è abilitata alla funzione di campo dinamico (esiste<code translate="no">$meta</code> ), è possibile aggiungere campi statici che hanno lo stesso nome delle chiavi di campo dinamiche esistenti. Il nuovo campo statico maschera la chiave del campo dinamico, ma i dati dinamici originali vengono conservati.</p>
+<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">Cosa succede quando si aggiunge un campo con lo stesso nome di una chiave di campo dinamico?</h3><p>Quando la collezione è abilitata alla funzione di campo dinamico (esiste<code translate="no">$meta</code> ), è possibile aggiungere campi statici che hanno lo stesso nome delle chiavi di campo dinamiche esistenti. Il nuovo campo statico maschererà la chiave del campo dinamico, ma i dati dinamici originali saranno conservati.</p>
 <p><strong>Scenario di esempio:</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Original collection with dynamic field enabled</span>
 <span class="hljs-comment"># Insert data with dynamic field keys</span>

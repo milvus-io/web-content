@@ -92,7 +92,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Ivf Pq 2</span> </span></p>
 <h3 id="IVF-+-PQ" class="common-anchor-header">FIV + PQ</h3><p>L'indice <strong>IVF_PQ</strong> combina i punti di forza di <strong>IVF</strong> e <strong>PQ</strong> per accelerare le ricerche. Il processo funziona in due fasi:</p>
 <ol>
-<li><p><strong>Filtrazione grossolana con IVF</strong>: IVF suddivide lo spazio vettoriale in cluster, riducendo l'ambito di ricerca. Invece di valutare l'intero set di dati, l'algoritmo si concentra solo sui cluster più vicini al vettore di interrogazione.</p></li>
+<li><p><strong>Filtraggio grossolano con IVF</strong>: IVF suddivide lo spazio vettoriale in cluster, riducendo l'ambito di ricerca. Invece di valutare l'intero set di dati, l'algoritmo si concentra solo sui cluster più vicini al vettore di interrogazione.</p></li>
 <li><p><strong>Confronto a grana fine con PQ</strong>: all'interno dei cluster selezionati, PQ utilizza rappresentazioni vettoriali compresse e quantizzate per calcolare rapidamente distanze approssimate.</p></li>
 </ol>
 <p>Le prestazioni dell'indice <strong>IVF_PQ</strong> sono influenzate in modo significativo dai parametri che controllano gli algoritmi IVF e PQ. La regolazione di questi parametri è fondamentale per ottenere i risultati ottimali per un determinato set di dati e una determinata applicazione. Informazioni più dettagliate su questi parametri e sulla loro messa a punto sono disponibili in <a href="/docs/it/ivf-pq.md#Index-params">Parametri dell'indice</a>.</p>
@@ -222,7 +222,7 @@ res = MilvusClient.search(
      <td><p>Un valore più alto di <code translate="no">nbits</code> consente di avere codebook più ampi, che potenzialmente portano a rappresentazioni più accurate dei vettori originali. Tuttavia, significa anche utilizzare più bit per memorizzare ciascun indice, con conseguente minore compressione. Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per gli indici</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">search_params.params</code> durante la <a href="/docs/it/ivf-pq.md#Search-on-index">ricerca sull'indice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per gli indici</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">search_params.params</code> per la <a href="/docs/it/ivf-pq.md#Search-on-index">ricerca sull'indice</a>.</p>
 <table>
    <tr>
      <th></th>

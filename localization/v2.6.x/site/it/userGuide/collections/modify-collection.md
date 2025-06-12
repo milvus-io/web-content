@@ -1,11 +1,11 @@
 ---
 id: modify-collection.md
-title: Modify Collection
+title: Modifica della raccolta
 summary: >-
-  You can rename a collection or change its settings. This page focuses on how
-  to modify a collection.
+  È possibile rinominare una raccolta o modificarne le impostazioni. Questa
+  pagina si concentra su come modificare una raccolta.
 ---
-<h1 id="Modify-Collection" class="common-anchor-header">Modify Collection<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
+<h1 id="Modify-Collection" class="common-anchor-header">Modifica della raccolta<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can rename a collection or change its settings. This page focuses on how to modify a collection.</p>
-<h2 id="Rename-Collection" class="common-anchor-header">Rename Collection<button data-href="#Rename-Collection" class="anchor-icon" translate="no">
+    </button></h1><p>È possibile rinominare una raccolta o modificarne le impostazioni. Questa pagina illustra come modificare una raccolta.</p>
+<h2 id="Rename-Collection" class="common-anchor-header">Rinominare una raccolta<button data-href="#Rename-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +36,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can rename a collection as follows.</p>
+    </button></h2><p>È possibile rinominare una raccolta come segue.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -130,7 +125,7 @@ curl --request POST \
     &quot;newCollectionName&quot;: &quot;my_new_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Collection-Properties" class="common-anchor-header">Set Collection Properties<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Collection-Properties" class="common-anchor-header">Impostare le proprietà di una collezione<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -145,14 +140,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates how to set collection TTL.</p>
+    </button></h2><p>Il seguente frammento di codice mostra come impostare il TTL di una collezione.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -201,26 +191,26 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The applicable collection properties are as follows:</p>
+<p>Le proprietà della collezione applicabili sono le seguenti:</p>
 <table>
    <tr>
-     <th><p>Property</p></th>
-     <th><p>When to Use</p></th>
+     <th><p>Proprietà</p></th>
+     <th><p>Quando usarla</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>If the data of a collection needs to be deleted after a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes all entities from the collection.  The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete. For details, refer to <a href="/docs/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
+     <td><p>Se i dati di una collezione devono essere cancellati dopo un periodo specifico, si può impostare il suo Time-To-Live (TTL) in secondi. Una volta scaduto il TTL, Milvus cancella tutte le entità della collezione.  La cancellazione è asincrona, il che significa che le ricerche e le interrogazioni sono ancora possibili prima che la cancellazione sia completata. Per maggiori dettagli, consultare la sezione <a href="/docs/it/set-collection-ttl.md">Impostare il TTL della collezione</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize data placement policy based on access frequency, expanding storage capacity for collections without impacting search performance.</p><p>For details, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></td>
+     <td><p>La mappatura della memoria (Mmap) consente l'accesso diretto alla memoria a file di grandi dimensioni su disco, permettendo a Milvus di memorizzare indici e dati sia nella memoria che sul disco rigido. Questo approccio consente di ottimizzare i criteri di posizionamento dei dati in base alla frequenza di accesso, aumentando la capacità di archiviazione delle raccolte senza influire sulle prestazioni di ricerca.</p><p>Per ulteriori informazioni, consultare la sezione <a href="/docs/it/mmap.md">Uso di mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>With Partition Key Isolation enabled, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance. For details, refer to <a href="/docs/use-partition-key.md#Use-Partition-Key-Isolation">Use Partition Key Isolation</a>.</p></td>
+     <td><p>Con l'isolamento della chiave di partizione abilitato, Milvus raggruppa le entità in base al valore della chiave di partizione e crea un indice separato per ciascuno di questi gruppi. Quando riceve una richiesta di ricerca, Milvus individua l'indice in base al valore della chiave di partizione specificato nella condizione di filtraggio e limita l'ambito di ricerca alle entità incluse nell'indice, evitando così la scansione di entità irrilevanti durante la ricerca e migliorando notevolmente le prestazioni della ricerca. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/use-partition-key.md#Use-Partition-Key-Isolation">Uso dell'isolamento della chiave di partizione</a>.</p></td>
    </tr>
 </table>
-<h2 id="Drop-Collection-Properties" class="common-anchor-header">Drop Collection Properties<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+<h2 id="Drop-Collection-Properties" class="common-anchor-header">Eliminare le proprietà della raccolta<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,14 +225,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also reset a collection property by dropping it as follows.</p>
+    </button></h2><p>È anche possibile azzerare una proprietà di raccolta eliminandola come segue.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[
