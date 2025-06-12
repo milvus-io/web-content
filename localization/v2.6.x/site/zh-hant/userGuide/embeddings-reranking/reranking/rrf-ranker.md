@@ -65,7 +65,7 @@ summary: >-
      <td><p>當不同系統使用無法比較的評分方法時，可建立共識排名</p></td>
    </tr>
 </table>
-<p>如果您的混合搜尋應用需要以民主方式平衡多種搜尋路徑，而不需要指定明確的權重，RRF Ranker 就是您的理想選擇。</p>
+<p>如果您的混合搜尋應用需要以民主方式平衡多個搜尋路徑，而不需要指定明確的權重，RRF Ranker 就是您的理想選擇。</p>
 <h2 id="Mechanism-of-RRF-Ranker" class="common-anchor-header">RRF Ranker 的機制<button data-href="#Mechanism-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +85,7 @@ summary: >-
 <ol>
 <li><p><strong>收集搜尋排名</strong>：收集向量搜尋各個路徑的結果排名 (rank_1、rank_2)。</p></li>
 <li><p><strong>合併排名</strong>：根據公式轉換各路徑的排名 (rank_rrf_1, rank_rrf_2)。</p>
-<p><em>Ranki</em><em>(d</em>) 是<em>第 i 個擷</em>取器產生的文件<em>d</em>的排名位置。</p></li>
+<p><em>Ranki</em><em>(d</em>) 是<em>第 i (th)</em> <em>個</em>擷取器產生的文件<em>d</em>的排名位置。</p></li>
 <li><p><strong>總結排名</strong>：根據綜合排名對搜尋結果重新排序，以產生最終結果。</p></li>
 </ol>
 <p>
@@ -378,4 +378,4 @@ hybrid_results = milvus_client.hybrid_search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關混合搜尋的更多資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">多向量混合搜尋</a>。</p>
+<p>有關混合搜索的更多資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">多向量混合搜索</a>。</p>

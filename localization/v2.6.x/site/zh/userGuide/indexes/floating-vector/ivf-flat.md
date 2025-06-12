@@ -45,7 +45,7 @@ summary: IVF_FLAT 索引是一种可以提高浮点向量搜索性能的索引�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
    </span> <span class="img-wrapper"> <span>IVF FLAT 工作流程</span> </span></p>
-<p>这种索引方法加快了搜索过程，但也有潜在的缺点：找到的最接近查询嵌入的候选嵌入可能并不是精确的最近嵌入。如果与查询嵌入点最近的嵌入点所在的聚类与根据最近中心点选择的聚类不同，就会出现这种情况（见下面的可视化图示）。</p>
+<p>这种索引方法加快了搜索过程，但也有潜在的缺点：找到的最接近查询嵌入的候选嵌入可能并不是准确的最近嵌入。如果与查询嵌入点最近的嵌入点所在的聚类与根据最近中心点选择的聚类不同，就会出现这种情况（见下面的可视化图示）。</p>
 <p>为了解决这个问题，<strong>IVF_FLAT</strong>提供了两个超参数供我们调整：</p>
 <ul>
 <li><p><code translate="no">nlist</code>:指定使用 k-means 算法创建的分区数量。</p></li>
@@ -91,7 +91,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">IVF_FLAT</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详情，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详细信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
 <li><p><code translate="no">params</code>:用于建立索引的附加配置选项。</p>
 <ul>
 <li><code translate="no">nlist</code>:划分数据集的簇数。</li>
@@ -163,7 +163,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>在建立索引时使用 k-means 算法创建的簇数。每个簇由一个中心点表示，存储一个向量列表。增加该参数可减少每个簇中的向量数量，从而创建更小、更集中的分区。</p></td>
+     <td><p>在建立索引时使用 k-means 算法创建的簇数。每个簇由一个中心点代表，存储一个向量列表。增加该参数可减少每个簇中的向量数量，从而创建更小、更集中的分区。</p></td>
      <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[1, 65536]</p><p><strong>默认值</strong>：<code translate="no">128</code></p></td>
      <td><p><code translate="no">nlist</code> 值越大，通过创建更精细的簇来提高召回率，但会增加索引构建时间。请根据数据集大小和可用资源进行优化。大多数情况下，我们建议在此范围内设置值：[32, 4096].</p></td>
    </tr>

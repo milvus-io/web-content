@@ -4,7 +4,7 @@ title: GPU_IVF_FLAT
 summary: >-
   GPU_IVF_FLAT 인덱스는 GPU 환경 전용으로 설계된 IVF_FLAT 인덱스의 GPU 가속 버전입니다. 이 인덱스는 벡터 데이터를
   nlist 클러스터 단위로 분할하고 먼저 대상 쿼리 벡터를 각 클러스터의 중심과 비교하여 유사성을 계산합니다. nprobe 매개변수를
-  조정하여 가장 가능성이 높은 클러스터만 검색하므로 정확도와 속도 사이의 균형을 유지하면서 쿼리 시간을 단축할 수 있습니다. 기본 개념에 대한
+  조정하면 가장 가능성이 높은 클러스터만 검색되므로 정확도와 속도 사이의 균형을 유지하면서 쿼리 시간을 단축할 수 있습니다. 기본 개념에 대한
   자세한 내용은 IVF_FLAT을 참조하세요.
 ---
 <h1 id="GPUIVFFLAT" class="common-anchor-header">GPU_IVF_FLAT<button data-href="#GPUIVFFLAT" class="anchor-icon" translate="no">

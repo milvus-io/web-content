@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PQ 结合了两种索引技术：<strong>HNSW</strong>用于基于图的快速导航，<strong>PQ</strong>用于高效向量压缩。</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在该图中，节点根据其相似性进行连接，从而实现在数据空间中的快速遍历。分层结构允许搜索算法缩小候选邻域的范围，从而大大加快了高维空间的搜索过程。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在该图中，节点根据其相似性进行连接，从而实现在数据空间中的快速遍历。分层结构允许搜索算法缩小候选邻居的范围，从而大大加快了高维空间的搜索过程。</p>
 <p>更多信息，请参阅<a href="/docs/zh/hnsw.md">HNSW</a>。</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p>PQ 是一种向量压缩技术，可将高维向量分解成更小的子向量，然后对子向量进行量化和压缩。这种压缩技术大大降低了内存需求，并加快了距离计算速度。</p>
 <p>更多信息，请参阅<a href="/docs/zh/ivf-pq.md#PQ">IVF_PQ</a>。</p>
@@ -93,7 +93,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">HNSW_PQ</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详情，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详细信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
 <li><p><code translate="no">params</code>:用于构建索引的附加配置选项。详情请参阅<a href="/docs/zh/hnsw-pq.md#Index-building-params">索引构建参数</a>。</p></li>
 </ul>
 <p>配置好索引参数后，可直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中传递索引参数来创建索引。详情请参阅<a href="/docs/zh/create-collection.md">创建 Collections</a>。</p>
@@ -189,7 +189,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>用于以压缩形式表示每个子向量中心点索引的比特数。每个编码本将包含 $2^{\textit{nbits}}$ 的中心点。例如，如果<code translate="no">nbits</code> 设置为 8，则每个子向量将由一个 8 位的中心点索引表示。这样，该子向量的编码本中就有 2^8$ (256) 个可能的中心点。</p></td>
+     <td><p>用于以压缩形式表示每个子向量中心点索引的比特数。它直接决定了每个编码本的大小。 每个编码本将包含 $2^{\textit{nbits}}$ 的中心点。例如，如果<code translate="no">nbits</code> 设置为 8，则每个子向量将由一个 8 位的中心点索引表示。这样，该子向量的编码本中就有 2^8$ (256) 个可能的中心点。</p></td>
      <td><p><strong>类型</strong>： 整数整数[1, 64]</p>
 <p><strong>默认值</strong>：<code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> 值越大，编码本越大，可能会更精确地表示原始向量。在大多数情况下，我们建议在此范围内设置一个值：[1, 16].</p></td>

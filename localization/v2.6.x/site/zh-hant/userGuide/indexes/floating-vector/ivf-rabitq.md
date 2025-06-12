@@ -82,7 +82,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在 Milvus 中建立向量場的<code translate="no">IVF_RABITQ</code> 索引，請使用<code translate="no">add_index()</code> 方法，指定<code translate="no">index_type</code>,<code translate="no">metric_type</code>, 以及索引的附加參數。</p>
+    </button></h2><p>要在 Milvus 中的向量場上建立<code translate="no">IVF_RABITQ</code> 索引，請使用<code translate="no">add_index()</code> 方法，指定<code translate="no">index_type</code>,<code translate="no">metric_type</code>, 以及索引的附加參數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -189,7 +189,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine_type</code></p></td>
      <td><p>定義<code translate="no">refine</code> 啟用時精煉所使用的資料表示法。</p></td>
      <td><p><strong>類型</strong>：字串<br><strong>範圍：</strong>[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">FP16</code>,<code translate="no">BF16</code>,<code translate="no">FP32</code>]<br><strong>預設值</strong>：無</p></td>
-     <td><p>列出的值依召回率增加、QPS 減少、儲存大小增加的順序顯示。<code translate="no">SQ8</code> 建議作為起點，在精確度和資源使用之間提供良好的平衡。</p></td>
+     <td><p>列出的值依召回率增加、QPS 減少、儲存大小增加的順序顯示。<code translate="no">SQ8</code> 建議作為起點，在精確度與資源使用之間提供良好的平衡。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/ivf-rabitq.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
@@ -219,6 +219,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>精煉程序使用更高的量化品質，從<code translate="no">refine_k</code> 倍大的候選者池中挑選所需數量的最近鄰居，這些候選者是使用 IVF_RABITQ 挑選出來的。</p></td>
      <td><p><strong>類型</strong>：浮點數<br><strong>範圍：</strong>[1,<em>float_max</em>)<br><strong>預設值</strong>：<code translate="no">1</code></p></td>
-     <td><p>較高的<code translate="no">refine_k</code> 值會降低 QPS，但會增加召回率。從<code translate="no">1</code> 開始，然後測試<code translate="no">2</code>,<code translate="no">3</code>,<code translate="no">4</code>, 和<code translate="no">5</code> 的值，為您的資料集找出 QPS 與召回率之間的最佳權衡。</p></td>
+     <td><p><code translate="no">refine_k</code> 值越高，QPS 越低，但召回率越高。從<code translate="no">1</code> 開始，然後測試<code translate="no">2</code>,<code translate="no">3</code>,<code translate="no">4</code>, 和<code translate="no">5</code> 的值，為您的資料集找出 QPS 和召回率之間的最佳權衡。</p></td>
    </tr>
 </table>

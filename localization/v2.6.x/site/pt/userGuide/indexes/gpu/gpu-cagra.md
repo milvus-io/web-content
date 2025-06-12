@@ -138,7 +138,7 @@ res = MilvusClient.search(
      <td><p>Seleciona o algoritmo de geração de gráficos antes da poda. Valores possíveis:</p>
 <ul>
 <li><p><code translate="no">IVF_PQ</code>: Oferece uma qualidade superior mas um tempo de construção mais lento.</p></li>
-<li><p><code translate="no">NN_DESCENT</code>: Oferece uma construção mais rápida com potencialmente menor recuperação.</p></li>
+<li><p><code translate="no">NN_DESCENT</code>: Fornece uma construção mais rápida com potencialmente menor recuperação.</p></li>
 </ul></td>
      <td><p><code translate="no">IVF_PQ</code></p></td>
    </tr>
@@ -146,7 +146,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
      <td><p>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</p>
 <ul>
-<li><p><code translate="no">"true"</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação, refinando os resultados da pesquisa.</p></li>
+<li><p><code translate="no">"true"</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação ao refinar os resultados da pesquisa.</p></li>
 <li><p><code translate="no">"false"</code>: Não coloca em cache o conjunto de dados original para economizar memória da GPU.</p></li>
 </ul></td>
      <td><p><code translate="no">"false"</code></p></td>

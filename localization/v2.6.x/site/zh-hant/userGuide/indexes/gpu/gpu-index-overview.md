@@ -137,5 +137,5 @@ summary: 在 Milvus 中建立支援 GPU 的索引，可以大幅提升高吞吐�
 <li><p><strong>何時適合使用 GPU 索引？</strong></p>
 <p>GPU 索引特別適用於需要高吞吐量或高召回率的情況。例如，在處理大量批次時，GPU 索引的吞吐量可比 CPU 索引高出 100 倍之多。在批次較小的情況下，GPU 索引在效能上仍遠遠優於 CPU 索引。此外，如果需要快速插入資料，整合 GPU 可大幅加快建立索引的過程。</p></li>
 <li><p><strong>GPU 索引（如 GPU_CAGRA、GPU_IVF_PQ、GPU_IVF_FLAT 和 GPU_BRUTE_FORCE）最適合哪些應用場景？</strong></p>
-<p><code translate="no">GPU_CAGRA</code> indexes are ideal for scenarios that demand enhanced performance, albeit at the cost of consuming more memory.對於以節省記憶體為優先考量的環境， 索引可協助將儲存需求降至最低，儘管這會帶來較高的精確度損失。 索引是一個平衡的選擇，在效能與記憶體使用量之間取得折衷。最後， 索引專為徹底搜尋作業而設計，透過執行遍歷搜尋，保證召回率為 1。<code translate="no">GPU_IVF_PQ</code> <code translate="no">GPU_IVF_FLAT</code> <code translate="no">GPU_BRUTE_FORCE</code> </p></li>
+<p><code translate="no">GPU_CAGRA</code> indexes are ideal for scenarios that demand enhanced performance, albeit at the cost of consuming more memory.對於以節省記憶體為優先考量的環境， 索引可幫助將儲存需求降至最低，儘管這會帶來較高的精確度損失。 索引是一個平衡的選擇，在效能與記憶體使用量之間取得折衷。最後， 索引專為徹底搜尋作業而設計，透過執行遍歷搜尋，保證召回率為 1。<code translate="no">GPU_IVF_PQ</code> <code translate="no">GPU_IVF_FLAT</code> <code translate="no">GPU_BRUTE_FORCE</code> </p></li>
 </ul>

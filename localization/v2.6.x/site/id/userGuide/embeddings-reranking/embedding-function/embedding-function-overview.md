@@ -116,7 +116,7 @@ beta: Milvus 2.6.x
      <td><p>Kunci API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/id/cohere.md">Cohere (menyatu)</a></p></td>
+     <td><p><a href="/docs/id/cohere.md">Cohere</a></p></td>
      <td><p>embed-english-v3.0</p></td>
      <td><p>Padat (<code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code>)</p></td>
      <td><p>Kunci API</p></td>

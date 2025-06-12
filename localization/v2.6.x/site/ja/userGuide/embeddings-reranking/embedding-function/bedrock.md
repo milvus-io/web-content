@@ -1,7 +1,7 @@
 ---
 id: bedrock.md
 title: ベッドロックCompatible with Milvus 2.6.x
-summary: このトピックでは、MilvusでAmazon Bedrockの埋め込み関数を設定し、使用する方法について説明します。
+summary: このトピックでは、MilvusにおけるAmazon Bedrock埋め込み関数の設定方法と使用方法について説明します。
 beta: Milvus 2.6.x
 ---
 <h1 id="Bedrock" class="common-anchor-header">ベッドロック<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Bedrock" class="anchor-icon" translate="no">
@@ -97,7 +97,7 @@ beta: Milvus 2.6.x
       <span class="hljs-attr">bedrock:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">aksk_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、MilvusがBedrockエンベッディングサービスに送信するすべてのリクエストに特定のクレデンシャルがバインドされます。</p></li>
+<p>これにより、MilvusがBedrockエンベッディング・サービスに送信するすべてのリクエストに特定のクレデンシャルがバインドされます。</p></li>
 </ol>
 <h3 id="Option-2-Environment-variable" class="common-anchor-header">オプション2：環境変数</h3><p>Docker ComposeでMilvusを実行し、ファイルやイメージから秘密を守りたい場合は、この方法を使用してください。</p>
 <p>Milvusは、<code translate="no">milvus.yaml</code> にプロバイダのクレデンシャルが見つからない場合のみ、環境変数にフォールバックします。</p>

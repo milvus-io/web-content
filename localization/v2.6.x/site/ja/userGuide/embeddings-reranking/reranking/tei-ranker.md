@@ -40,7 +40,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>milvusにvLLM Rankerを実装する前に、以下を確認してください：</p>
 <ul>
-<li><p>リランキング対象のテキストを含む<code translate="no">VARCHAR</code> フィールドを持つ Milvus コレクション。</p></li>
+<li><p>リランキング対象のテキストを含む<code translate="no">VARCHAR</code> フィールドを持つMilvusコレクション。</p></li>
 <li><p>リランキング機能を持つ実行中のTEIサービス。TEIサービスの詳細な設定方法については、<a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">TEI公式ドキュメントを</a>参照してください。</p></li>
 </ul>
 <h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">TEIランカー関数の作成<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">

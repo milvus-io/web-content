@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'indice <strong>GPU_IVF_PQ</strong> si basa sul concetto di <strong>IVF_PQ</strong> combinando il clustering inverso dei file con la quantizzazione del prodotto (PQ), che scompone i vettori ad alta dimensione in sottospazi più piccoli e li quantizza per ottenere ricerche di similarità efficienti. Progettato esclusivamente per ambienti GPU, GPU_IVF_PQ sfrutta l'elaborazione in parallelo per accelerare i calcoli e gestire efficacemente dati vettoriali su larga scala. Per ulteriori informazioni sui concetti fondamentali, consultare <a href="/docs/it/ivf-pq.md">IVF_PQ</a>.</p>
+    </button></h1><p>L'indice <strong>GPU_IVF_PQ</strong> si basa sul concetto di <strong>IVF_PQ</strong>, combinando il clustering inverso dei file con la quantizzazione del prodotto (PQ), che scompone i vettori ad alta dimensione in sottospazi più piccoli e li quantizza per ottenere ricerche di similarità efficienti. Progettato esclusivamente per ambienti GPU, GPU_IVF_PQ sfrutta l'elaborazione in parallelo per accelerare i calcoli e gestire efficacemente dati vettoriali su larga scala. Per ulteriori informazioni sui concetti fondamentali, consultare <a href="/docs/it/ivf-pq.md">IVF_PQ</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Creare un indice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ index_params.add_index(
 <p>In questa configurazione:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Il tipo di indice da costruire. In questo esempio, impostare il valore su <code translate="no">GPU_IVF_PQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per i dettagli, fare riferimento a <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la creazione dell'indice.</p>
 <ul>
 <li><code translate="no">m</code>: Numero di sottovettori in cui dividere il vettore.</li>

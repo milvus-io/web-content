@@ -1,7 +1,7 @@
 ---
 id: openai.md
 title: OpenAICompatible with Milvus 2.6.x
-summary: MilvusでOpenAIの埋め込みモデルを使用するには、モデルを選択し、OpenAIのAPIキーでMilvusを設定します。
+summary: MilvusでOpenAIのエンベッディングモデルを使用するには、モデルを選択し、OpenAIのAPIキーでMilvusを設定します。
 beta: Milvus 2.6.x
 ---
 <h1 id="OpenAI" class="common-anchor-header">OpenAI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#OpenAI" class="anchor-icon" translate="no">
@@ -98,7 +98,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>ここにAPIキーを記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
+<p>APIキーをここに記述することで、再起動後もAPIキーが保持され、ラベルを変更するだけでAPIキーを切り替えることができます。</p></li>
 <li><p><strong>MilvusにOpenAIの呼び出しに使うキーを教える</strong></p>
 <p>同じファイルで、OpenAIプロバイダに使用したいラベルを指定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>

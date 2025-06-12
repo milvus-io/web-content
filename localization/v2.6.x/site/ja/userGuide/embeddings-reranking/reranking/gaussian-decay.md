@@ -70,7 +70,7 @@ beta: Milvus 2.6.x
      <td><p>経験の関連性をバランスよく評価</p></td>
    </tr>
 </table>
-<p>厳しいペナルティや厳格なカットオフなしに、関連性が自然に低下していく感覚が必要な場合は、ガウス減衰が最適です。</p>
+<p>厳しいペナルティや厳格なカットオフなしに、関連性が自然に低下していく感覚を必要とするアプリケーションには、ガウス減衰が最適です。</p>
 <h2 id="Bell-curve-principle" class="common-anchor-header">ベル曲線の原理<button data-href="#Bell-curve-principle" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

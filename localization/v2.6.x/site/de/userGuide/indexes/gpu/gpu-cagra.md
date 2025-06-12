@@ -153,7 +153,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>Entscheidet, ob die GPU für die Indexerstellung und die CPU für die Suche verwendet werden soll. Wenn dieser Parameter auf <code translate="no">"true"</code> gesetzt wird, muss der Parameter <code translate="no">ef</code> in den Suchanfragen vorhanden sein.</p></td>
+     <td><p>Entscheidet, ob die GPU für die Indexerstellung und die CPU für die Suche verwendet werden soll. Die Einstellung dieses Parameters auf <code translate="no">"true"</code> erfordert das Vorhandensein des Parameters <code translate="no">ef</code> in den Suchanfragen.</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>

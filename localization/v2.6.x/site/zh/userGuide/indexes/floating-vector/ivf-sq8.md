@@ -48,7 +48,7 @@ summary: IVF_SQ8 索引是一种基于量化的索引算法，旨在解决大规
 <li><p><strong>搜索：</strong>搜索近邻时，搜索算法会将查询向量与群集中心点进行比较，并选择最有希望的群集。然后将搜索范围缩小到这些选定簇内的向量。</p></li>
 </ol>
 <p>要了解更多技术细节，请参阅<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>。</p>
-<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>标量量化（SQ）是一种用于减少高维向量大小的技术，它将向量的值替换为更小、更紧凑的表示形式。<strong>SQ8</strong>变体使用 8 位整数代替典型的 32 位浮点数来存储向量的每个维度值。这大大减少了存储数据所需的内存量。</p>
+<h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>标量量化（SQ）是一种用于减少高维向量大小的技术，它将向量的值替换为更小、更紧凑的表示形式。<strong>SQ8</strong>变体使用 8 位整数而不是典型的 32 位浮点数来存储向量的每个维度值。这大大减少了存储数据所需的内存量。</p>
 <p>以下是 SQ8 的工作原理：</p>
 <ol>
 <li><p><strong>范围识别：</strong>首先，确定向量内的最小值和最大值。这个范围定义了量化的边界。</p></li>
@@ -62,7 +62,7 @@ summary: IVF_SQ8 索引是一种基于量化的索引算法，旨在解决大规
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />
    </span> <span class="img-wrapper"> <span>IVF SQ8</span> </span></p>
-<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>IVF_SQ8 索引结合了 IVF 和 SQ8，可高效执行相似性搜索：</p>
+<h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>IVF_SQ8 索引结合了 IVF 和 SQ8，可以高效地执行相似性搜索：</p>
 <ol>
 <li><p><strong>IVF 缩小了搜索范围</strong>：数据集被划分为若干簇，当发出查询时，IVF 首先将查询与簇中心点进行比较，然后选择最相关的簇。</p></li>
 <li><p><strong>SQ8 加快了距离计算速度</strong>：在选定的簇内，SQ8 会将向量压缩成 8 位整数，从而减少内存使用量，加快距离计算速度。</p></li>
@@ -102,7 +102,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">IVF_SQ8</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详情，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详细信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
 <li><p><code translate="no">params</code>:用于建立索引的附加配置选项。</p>
 <ul>
 <li><code translate="no">nlist</code>:在索引构建过程中使用 k-means 算法创建的簇数。</li>

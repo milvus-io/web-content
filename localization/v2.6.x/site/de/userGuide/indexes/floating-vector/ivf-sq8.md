@@ -43,7 +43,7 @@ summary: >-
 <li><p><strong>Inverted File (IVF)</strong>: Organisiert die Daten in Clustern, so dass sich der Suchalgorithmus nur auf die relevantesten Teilmengen von Vektoren konzentrieren kann.</p></li>
 <li><p><strong>Skalare Quantisierung (SQ8)</strong>: Komprimiert die Vektoren in eine kompaktere Form, wodurch die Speichernutzung drastisch reduziert wird, während gleichzeitig eine ausreichende Präzision für schnelle Ähnlichkeitsberechnungen erhalten bleibt.</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF ist wie die Erstellung eines Index in einem Buch. Anstatt jede Seite (oder in unserem Fall jeden Vektor) zu durchsuchen, suchen Sie nach bestimmten Schlüsselwörtern (Clustern) im Index, um die relevanten Seiten (Vektoren) schnell zu finden. In unserem Szenario werden die Vektoren in Clustern gruppiert, und der Algorithmus sucht in einigen Clustern, die dem Abfragevektor nahe kommen.</p>
+<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF ist wie die Erstellung eines Index in einem Buch. Anstatt jede Seite (oder in unserem Fall jeden Vektor) zu durchsuchen, suchen Sie nach bestimmten Schlüsselwörtern (Clustern) im Index, um die relevanten Seiten (Vektoren) schnell zu finden. In unserem Szenario werden die Vektoren in Clustern gruppiert, und der Algorithmus sucht in einigen wenigen Clustern, die nahe am Abfragevektor liegen.</p>
 <p>Und so funktioniert's:</p>
 <ol>
 <li><p><strong>Clustering:</strong> Ihr Vektordatensatz wird mithilfe eines Clustering-Algorithmus wie k-means in eine bestimmte Anzahl von Clustern unterteilt. Jeder Cluster hat einen Zentroid (einen repräsentativen Vektor für den Cluster).</p></li>

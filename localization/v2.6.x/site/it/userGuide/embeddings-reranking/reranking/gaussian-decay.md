@@ -54,7 +54,7 @@ beta: Milvus 2.6.x
    <tr>
      <th><p>Caso d'uso</p></th>
      <th><p>Esempio</p></th>
-     <th><p>Perché la gaussiana funziona bene</p></th>
+     <th><p>Perché il decadimento gaussiano funziona bene</p></th>
    </tr>
    <tr>
      <td><p>Ricerche basate sulla posizione</p></td>
@@ -77,7 +77,7 @@ beta: Milvus 2.6.x
      <td><p>Valutazione equilibrata della rilevanza dell'esperienza</p></td>
    </tr>
 </table>
-<p>Se la vostra applicazione richiede una sensazione naturale di rilevanza decrescente, senza penalizzazioni severe o cutoff rigidi, il decadimento gaussiano è probabilmente la scelta migliore.</p>
+<p>Se la vostra applicazione richiede una sensazione naturale di rilevanza decrescente, senza penalizzazioni severe o limiti rigidi, il decadimento gaussiano è probabilmente la scelta migliore.</p>
 <h2 id="Bell-curve-principle" class="common-anchor-header">Principio della curva a campana<button data-href="#Bell-curve-principle" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +93,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il decadimento gaussiano crea una curva regolare a forma di campana che riduce gradualmente la rilevanza all'aumentare della distanza da un punto ideale. Questa distribuzione, che prende il nome dal matematico Carl Friedrich Gauss, compare spesso in natura e in statistica, il che spiega perché sia così intuitiva per la percezione umana.</p>
+    </button></h2><p>Il decadimento gaussiano crea una curva liscia, a forma di campana, che riduce gradualmente la rilevanza all'aumentare della distanza da un punto ideale. Questa distribuzione, che prende il nome dal matematico Carl Friedrich Gauss, compare spesso in natura e in statistica, il che spiega perché sia così intuitiva per la percezione umana.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gaussian-decay.png" alt="Gaussian Decay" class="doc-image" id="gaussian-decay" />
@@ -105,7 +105,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (±2 km): La distanza alla quale la rilevanza scende al valore di decadimento: i ristoranti che distano esattamente 2 chilometri hanno il punteggio di rilevanza dimezzato (0,5).</p></li>
 <li><p><code translate="no">decay</code> (0.5): Il punteggio alla distanza di scala: questo parametro controlla essenzialmente la velocità con cui i punteggi diminuiscono con la distanza.</p></li>
 </ul>
-<p>Come si può vedere dalla curva, i ristoranti oltre i 2 km continuano a diminuire la loro rilevanza, ma non raggiungono mai lo zero. Anche i ristoranti a 4-5 chilometri di distanza mantengono un minimo di rilevanza, consentendo a ristoranti eccellenti ma distanti di apparire ancora nei risultati (anche se classificati più in basso).</p>
+<p>Come si può vedere dalla curva, i ristoranti oltre i 2 km continuano a diminuire la loro rilevanza, ma non raggiungono mai lo zero. Anche i ristoranti a 4-5 chilometri di distanza mantengono un minimo di rilevanza, consentendo a ristoranti eccellenti ma distanti di apparire comunque nei risultati (anche se classificati più in basso).</p>
 <p>Questo comportamento imita il modo in cui le persone pensano naturalmente alla rilevanza della distanza: i posti vicini sono preferiti, ma siamo disposti a viaggiare più lontano per avere opzioni eccezionali.</p>
 <h2 id="Formula" class="common-anchor-header">La formula<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"

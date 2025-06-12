@@ -45,7 +45,7 @@ summary: >-
     </button></h2><p>Woodpeckerの中核となるイノベーションは、ゼロディスク・アーキテクチャです：</p>
 <ul>
 <li>全てのログデータはクラウドオブジェクトストレージ（Amazon S3、Google Cloud Storage、Alibaba OSなど）に保存されます。</li>
-<li>メタデータは<strong>etcdの</strong>ような分散キーバリューストアで管理されます。</li>
+<li>メタデータは<strong>etcdの</strong>ような分散キーバリューストアで管理。</li>
 <li>コアオペレーションにおいてローカルディスクに依存しない</li>
 </ul>
 <p>
@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpeckerはお客様のニーズに合わせて2つのデプロイメントモードを提供します：</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 軽量でメンテナンスフリー</h3><p>MemoryBufferモードは、Woodpeckerが一時的にメモリに書き込みをバッファリングし、定期的にクラウドオブジェクトストレージサービスにフラッシュするシンプルで軽量なデプロイメントオプションです。メタデータは<strong>etcdを使って</strong>管理され、一貫性と協調性を確保します。このモードは、特に書き込みレイテンシの低さが重要でない場合、パフォーマンスよりもシンプルさを優先する小規模なデプロイや本番環境でのバッチ負荷の高いワークロードに最適です。</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 軽量でメンテナンスフリー</h3><p>MemoryBufferモードは、Woodpeckerが一時的にメモリに書き込みをバッファリングし、定期的にクラウドオブジェクトストレージサービスにフラッシュする、シンプルで軽量なデプロイメントオプションです。メタデータは<strong>etcdを使って</strong>管理され、一貫性と協調性を確保します。このモードは、特に書き込みレイテンシの低さが重要でない場合、パフォーマンスよりもシンプルさを優先する小規模なデプロイや本番環境でのバッチ負荷の高いワークロードに最適です。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
@@ -240,5 +240,5 @@ summary: >-
 <li><strong>アップグレードの簡素化：</strong>ステートレス設計により、ダウンタイムの少ないローリングアップデートが可能。</li>
 <li><strong>リソースの予測可能性：</strong>従来のメッセージ・ブローカーと比較して、より安定したリソース使用。</li>
 </ul>
-<p>ミッションクリティカルなRAG、AIエージェント、低レイテンシの検索ワークロードをサポートするベクターデータベースにとって、これらの運用上の利点は革命的です。複雑なメッセージブローカースタックからWoodpeckerのシンプルなアーキテクチャに移行することで、パフォーマンスが向上するだけでなく、開発チームやインフラチームの運用負担も大幅に軽減されます。</p>
+<p>ミッションクリティカルなRAG、AIエージェント、低レイテンシの検索ワークロードをサポートするベクターデータベースにとって、これらの運用上の利点は革命的です。複雑なメッセージブローカースタックからWoodpeckerのシンプルなアーキテクチャに移行することで、パフォーマンスが向上するだけでなく、開発チームやインフラチームの運用負担が大幅に軽減されます。</p>
 <p>S3 Express One Zoneのようなイノベーションによりクラウドインフラが進化し続ける中、Woodpeckerのアーキテクチャは、大規模な運用変更やシステムの再設計を必要とすることなく、これらの進歩の恩恵を自動的に受けることを可能にします。</p>

@@ -104,7 +104,7 @@ beta: Milvus 2.6.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
    </span> <span class="img-wrapper"> <span>Decaimento linear</span> </span></p>
-<p>O gráfico acima mostra como o decaimento linear afectaria as listagens de eventos numa plataforma de venda de bilhetes:</p>
+<p>O gráfico acima mostra como o declínio linear afectaria as listagens de eventos numa plataforma de venda de bilhetes:</p>
 <ul>
 <li><p><code translate="no">origin</code> (data atual): O momento atual, onde a relevância está no máximo (1,0).</p></li>
 <li><p><code translate="no">offset</code> (1 dia): A "janela de eventos imediatos" - todos os eventos que acontecem no dia seguinte mantêm pontuações de relevância completas (1,0), garantindo que eventos muito iminentes não sejam penalizados por pequenas diferenças de tempo.</p></li>

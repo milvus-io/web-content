@@ -145,7 +145,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>l'article C passe en première position malgré une similarité moyenne parce qu'il est très récent (publié hier)</p></li>
 <li><p>L'article B passe en troisième position malgré une excellente similarité, car il est relativement ancien.</p></li>
-<li><p>Le document D utilise la distance L2 (plus elle est faible, mieux c'est), de sorte que son score est normalisé de 1,2 à 0,76 avant l'application de la décroissance.</p></li>
+<li><p>L'article D utilise la distance L2 (plus elle est faible, mieux c'est), et son score est donc normalisé de 1,2 à 0,76 avant l'application de la décroissance.</p></li>
 </ul>
 <h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">Choisir le bon classificateur de désintégration<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"

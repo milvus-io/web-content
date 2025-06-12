@@ -56,7 +56,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">BIN_IVF_FLAT</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的二进制 Embeddings 值包括<code translate="no">HAMMING</code> （默认）和<code translate="no">JACCARD</code> 。有关详情，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。二进制 Embeddings 的支持值包括<code translate="no">HAMMING</code> （默认）和<code translate="no">JACCARD</code> 。有关详情，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
 <li><p><code translate="no">params</code>:用于构建索引的其他配置选项。</p>
 <ul>
 <li><code translate="no">nlist</code>:划分数据集的簇数。</li>

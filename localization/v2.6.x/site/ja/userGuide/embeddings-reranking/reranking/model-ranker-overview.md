@@ -222,7 +222,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">maxBatch</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p>1バッチで処理する文書の最大数。値が大きいほどスループットは向上するが、より多くのメモリを必要とする。</p></td>
+     <td><p>1バッチで処理する文書の最大数。値が大きいほどスループットは向上しますが、より多くのメモリを必要とします。</p></td>
      <td><p><code translate="no">32</code> (デフォルト)</p></td>
    </tr>
 </table>

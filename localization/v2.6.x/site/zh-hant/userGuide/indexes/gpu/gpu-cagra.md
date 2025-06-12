@@ -164,7 +164,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">itopk_size</code></p></td>
-     <td><p>決定搜尋期間保留的中間結果大小。較大的值可能會以犧牲搜尋效能為代價來提高召回率。它應該至少等於最終 top-k (限制) 值，而且通常是 2 的幂次 (例如 16、32、64、128)。</p></td>
+     <td><p>決定搜尋期間保留的中間結果大小。較大的值可能會在犧牲搜尋效能的情況下提高召回率。它應該至少等於最終 top-k (限制) 值，而且通常是 2 的幂次 (例如 16、32、64、128)。</p></td>
      <td><p>空</p></td>
    </tr>
    <tr>
@@ -179,7 +179,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">team_size</code></p></td>
-     <td><p>指定用於計算 GPU 公制距離的 CUDA 線程數。常見的值是 2 的幂次，最高為 32 (例如 2、4、8、16、32)。它對搜尋效能影響不大。預設值是<code translate="no">0</code> ，Milvus 會根據向量維度自動選擇<code translate="no">team_size</code> 。</p></td>
+     <td><p>指定用於計算 GPU 公制距離的 CUDA 線程數。常見的值是 2 的幂數，最高為 32 (例如 2、4、8、16、32)。它對搜尋效能影響不大。預設值是<code translate="no">0</code> ，Milvus 會根據向量維度自動選擇<code translate="no">team_size</code> 。</p></td>
      <td><p><code translate="no">0</code></p></td>
    </tr>
    <tr>

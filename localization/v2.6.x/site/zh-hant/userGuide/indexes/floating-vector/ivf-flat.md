@@ -38,7 +38,7 @@ summary: IVF_FLAT 索引是一種索引演算法，可提高浮點向量的搜�
     </button></h2><p>詞彙<strong>IVF_FLAT</strong>代表<strong>Inverted File Flat</strong>，它概括了其索引和搜尋浮點向量的雙層方法：</p>
 <ul>
 <li><p><strong>Inverted File (IVF)：</strong>指使用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚類將</a>向量空間<a href="https://en.wikipedia.org/wiki/K-means_clustering">聚類</a>為可管理的區域。每個簇都有一個<strong>中心點</strong>，作為簇內向量的參考點。</p></li>
-<li><p><strong>Flat (扁平)：</strong>表示在每個叢集內，向量都以原始形式 (扁平結構) 儲存，不做任何壓縮或量化，以進行精確的距離計算。</p></li>
+<li><p><strong>Flat (扁平)：</strong>表示在每個叢集內，向量都以原始形式 (扁平結構) 儲存，不做任何壓縮或量化，以便進行精確的距離計算。</p></li>
 </ul>
 <p>下圖顯示其運作方式：</p>
 <p>

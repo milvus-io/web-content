@@ -48,7 +48,7 @@ summary: >-
 </ul>
 <p>et les décompose en mots uniques (par exemple, <em>Milvus</em>, <em>est</em>, <em>cloud-native</em>, <em>vector</em>, <em>database</em>, <em>very</em>, <em>good</em>, <em>at</em>, <em>performance</em>).</p></li>
 <li><p><strong>Construire le dictionnaire des termes</strong>: Ces mots uniques sont stockés dans une liste triée appelée <strong>Dictionnaire des termes</strong>. Ce dictionnaire permet à Milvus de vérifier rapidement si un mot existe et de localiser sa position dans l'index.</p></li>
-<li><p><strong>Création de la liste inversée</strong>: Pour chaque mot du dictionnaire de termes, Milvus conserve une <strong>liste inversée</strong> indiquant les documents qui contiennent ce mot. Par exemple, <strong>"Milvus"</strong> apparaît dans les deux phrases, sa liste inversée pointe donc vers les deux ID de document.</p></li>
+<li><p><strong>Création de la liste inversée</strong>: Pour chaque mot du dictionnaire de termes, Milvus conserve une <strong>liste inversée</strong> indiquant les documents qui contiennent ce mot. Par exemple, <strong>"Milvus"</strong> apparaît dans les deux phrases, sa liste inversée pointe donc vers les deux ID de documents.</p></li>
 </ol>
 <p>
   

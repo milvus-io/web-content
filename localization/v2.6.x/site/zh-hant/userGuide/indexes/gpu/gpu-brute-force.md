@@ -57,7 +57,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>:用於計算向量間距離的方法。詳情請參閱<a href="/docs/zh-hant/metric.md">公制類型</a>。</p></li>
 <li><p><code translate="no">params</code>:GPU_BRUTE_FORCE 索引不需要額外的參數。</p></li>
 </ul>
-<p>索引參數設定完成後，您可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。詳情請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
+<p>一旦配置好索引參數，您就可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
 <h2 id="Search-on-index" class="common-anchor-header">在索引上搜尋<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

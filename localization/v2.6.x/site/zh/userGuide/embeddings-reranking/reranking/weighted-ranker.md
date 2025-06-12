@@ -77,9 +77,9 @@ summary: >-
     </button></h2><p>加权排名策略的主要工作流程如下：</p>
 <ol>
 <li><p><strong>Collections 搜索得分</strong>：收集向量搜索各路径的结果和分数（score_1、score_2）。</p></li>
-<li><p><strong>分数归一化</strong>：每次搜索可能会使用不同的相似度指标，从而导致不同的分数分布。例如，使用 "内积"（IP）作为相似度类型可能会产生[-∞,+∞]的分数，而使用 "欧氏距离"（L2）则会产生[0,+∞]的分数。由于不同搜索的得分范围各不相同，无法直接比较，因此有必要对每条搜索路径的得分进行归一化处理。通常情况下，<code translate="no">arctan</code> 函数用于将分数转换为 [0, 1] 之间的范围（score_1_normalized, score_2_normalized）。分数越接近 1 表示相似度越高。</p></li>
+<li><p><strong>分数归一化</strong>：每次搜索可能会使用不同的相似度指标，从而导致不同的分数分布。例如，使用 "内积"（IP）作为相似度类型可能会产生[-∞,+∞]的分数，而使用 "欧氏距离"（L2）则会产生[0,+∞]的分数。由于不同搜索的得分范围各不相同，无法直接比较，因此有必要对每条搜索路径的得分进行归一化处理。通常，<code translate="no">arctan</code> 函数用于将分数转换为 [0, 1] 之间的范围（score_1_normalized, score_2_normalized）。分数越接近 1 表示相似度越高。</p></li>
 <li><p><strong>分配权重</strong>：根据分配给不同向量场的重要性，为归一化分数（score_1_normalized，score_2_normalized）分配权重（<strong>wi</strong>）。每条路径的权重范围应在 [0,1] 之间。由此得出的加权分数为 score_1_weighted 和 score_2_weighted。</p></li>
-<li><p><strong>合并分数</strong>：将加权得分（score_1_weighted、score_2_weighted）从高到低排序，得出最终得分（score_final）。</p></li>
+<li><p><strong>合并分数</strong>：将加权得分（score_1_weighted、score_2_weighted）从高到低排序，得出一组最终得分（score_final）。</p></li>
 </ol>
 <p>
   
@@ -100,7 +100,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本例演示了涉及图像和文本的多模态混合搜索（topK=5），并说明了加权 Ranker 策略如何对两次 ANN 搜索的结果进行重新排序。</p>
+    </button></h2><p>本例演示了涉及图像和文本的多模式混合搜索（topK=5），并说明了加权 Ranker 策略如何对两次 ANN 搜索的结果进行重新排序。</p>
 <ul>
 <li>图像的 ANN 搜索结果（topK=5）： ID</li>
 </ul>

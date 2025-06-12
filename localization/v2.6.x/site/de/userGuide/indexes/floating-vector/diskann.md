@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In großen Szenarien, in denen Datensätze Milliarden oder sogar Billionen von Vektoren umfassen können, können standardmäßige speicherinterne Indizierungsmethoden (z. B. <a href="/docs/de/hnsw.md">HNSW</a>, <a href="/docs/de/ivf-flat.md">IVF_FLAT</a>) aufgrund von Speicherbeschränkungen oft nicht mithalten. <strong>DISKANN</strong> bietet einen plattenbasierten Ansatz, der diese Herausforderungen angeht, indem er eine hohe Suchgenauigkeit und -geschwindigkeit beibehält, wenn die Größe des Datensatzes den verfügbaren Arbeitsspeicher übersteigt.</p>
+    </button></h1><p>In großen Szenarien, in denen Datensätze Milliarden oder sogar Billionen von Vektoren umfassen können, können standardmäßige In-Memory-Indizierungsmethoden (z. B. <a href="/docs/de/hnsw.md">HNSW</a>, <a href="/docs/de/ivf-flat.md">IVF_FLAT</a>) aufgrund von Speicherbeschränkungen oft nicht Schritt halten. <strong>DISKANN</strong> bietet einen plattenbasierten Ansatz, der diese Herausforderungen angeht, indem er eine hohe Suchgenauigkeit und -geschwindigkeit beibehält, wenn die Größe des Datensatzes den verfügbaren Arbeitsspeicher übersteigt.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
-<li><p><strong>Anfängliche zufällige Verbindungen:</strong> Jeder Datenpunkt (Vektor) wird als ein Knoten im Graphen dargestellt. Diese Knoten werden anfangs zufällig miteinander verbunden und bilden ein dichtes Netz. Normalerweise hat ein Knoten zu Beginn etwa 500 Kanten (oder Verbindungen), um eine breite Konnektivität zu gewährleisten.</p></li>
+<li><p><strong>Anfängliche zufällige Verbindungen:</strong> Jeder Datenpunkt (Vektor) wird als ein Knoten im Graphen dargestellt. Diese Knoten werden anfangs zufällig miteinander verbunden und bilden ein dichtes Netz. Normalerweise hat ein Knoten zu Beginn etwa 500 Kanten (oder Verbindungen), um eine breite Konnektivität zu erreichen.</p></li>
 <li><p><strong>Verfeinerung für mehr Effizienz:</strong> Der anfängliche Zufallsgraph wird einem Optimierungsprozess unterzogen, um ihn für die Suche effizienter zu machen. Dies umfasst zwei wichtige Schritte:</p>
 <ul>
 <li><p><strong>Ausschneiden überflüssiger Kanten:</strong> Der Algorithmus verwirft unnötige Verbindungen auf der Grundlage der Entfernungen zwischen den Knoten. Bei diesem Schritt werden Kanten höherer Qualität bevorzugt.</p>
@@ -221,7 +221,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Die Feinabstimmung der DISKANN-Parameter ermöglicht es Ihnen, das Verhalten von DISKANN an Ihren spezifischen Datensatz und Ihre Suchlast anzupassen und das richtige Gleichgewicht zwischen Geschwindigkeit, Genauigkeit und Speichernutzung zu finden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>Diese Parameter beeinflussen, wie der DISKANN-Index aufgebaut wird. Eine Anpassung dieser Parameter kann die Indexgröße, die Erstellungszeit und die Suchqualität beeinflussen.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>Diese Parameter beeinflussen, wie der DISKANN-Index aufgebaut wird. Die Anpassung dieser Parameter kann die Indexgröße, die Erstellungszeit und die Suchqualität beeinflussen.</p>
 <table>
    <tr>
      <th></th>
@@ -236,7 +236,7 @@ res = MilvusClient.search(
      <td><p>Steuert die maximale Anzahl von Verbindungen (Kanten), die jeder Datenpunkt im Vamana-Diagramm haben kann.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 512]</p>
 <p><strong>Standardwert</strong>: <code translate="no">56</code></p></td>
-     <td><p>Höhere Werte führen zu dichteren Graphen, was die Wiederauffindbarkeit erhöht (es werden mehr relevante Ergebnisse gefunden), aber auch die Speichernutzung und die Erstellungszeit erhöht. 
+     <td><p>Höhere Werte führen zu dichteren Graphen, was die Wiederauffindbarkeit erhöht (es werden mehr relevante Ergebnisse gefunden), aber auch den Speicherverbrauch und die Erstellungszeit erhöht. 
  In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [10, 100].</p></td>
    </tr>
    <tr>

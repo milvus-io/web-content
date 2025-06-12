@@ -121,7 +121,7 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>这样，Milvus 向 OpenAI Embeddings 端点发送的每个请求都会绑定特定密钥。</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">方案 2：环境变量</h3><p>当你使用 Docker Compose 运行 Milvus，并希望不对文件和映像保密时，请使用这种方法。</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">方案 2：环境变量</h3><p>当您使用 Docker Compose 运行 Milvus，并希望不对文件和映像保密时，请使用这种方法。</p>
 <p>只有在<code translate="no">milvus.yaml</code> 中找不到提供程序的密钥时，Milvus 才会使用环境变量。</p>
 <table>
    <tr>
@@ -167,7 +167,7 @@ beta: Milvus 2.6.x
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
 <li><p>一个向量字段，用于存储函数将为标量字段生成的向量嵌入。</p></li>
 </ul>
-<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
+<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense&quot;</code> 用于存储将由函数模块生成的嵌入。切记要设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

@@ -54,7 +54,7 @@ beta: Milvus 2.6.x
 <h3 id="Standard-deployment-external" class="common-anchor-header">Implementação standard (externa)</h3><p>Pode implementar o TEI como um serviço autónomo utilizando os métodos oficiais da Hugging Face. Esta abordagem dá-lhe o máximo de flexibilidade e controlo sobre o seu serviço TEI.</p>
 <p>Para obter instruções detalhadas sobre a implantação do TEI usando o Docker ou outros métodos, consulte a <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">documentação oficial da Hugging Face Text Embeddings Inference</a>.</p>
 <p>Após a implantação, anote o ponto de extremidade do serviço TEI (por exemplo, <code translate="no">http://localhost:8080</code>), pois você precisará dele ao <a href="/docs/pt/hugging-face-tei.md#Use-embedding-function-">usar a função TEI no Milvus</a>.</p>
-<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Implantação do Milvus Helm Chart (integrado)</h3><p>Para ambientes Kubernetes, Milvus oferece uma opção de implantação integrada por meio de seu gráfico Helm. Isso simplifica o processo ao implantar e configurar o TEI junto com o Milvus.</p>
+<h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Implantação do Milvus Helm Chart (integrado)</h3><p>Para ambientes Kubernetes, Milvus oferece uma opção de implantação integrada por meio de seu gráfico Helm. Isso simplifica o processo, implantando e configurando o TEI junto com o Milvus.</p>
 <p>Para ativar o TEI na sua implantação do Milvus Helm:</p>
 <ol>
 <li><p>Configurar o <strong>values.yaml</strong> para ativar o TEI:</p>
@@ -106,7 +106,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de implantar seu serviço TEI, você precisará fornecer seu endpoint ao definir uma função de incorporação TEI. Na maioria dos casos, não é necessária qualquer configuração adicional, uma vez que o TEI está ativado por defeito no Milvus.</p>
+    </button></h2><p>Depois de implantar seu serviço TEI, você precisará fornecer seu ponto de extremidade ao definir uma função de incorporação TEI. Na maioria dos casos, não é necessária qualquer configuração adicional, uma vez que o TEI está ativado por defeito no Milvus.</p>
 <p>Se o seu serviço TEI foi implementado com autenticação de chave API (<code translate="no">--api-key</code> flag), no entanto, terá de configurar o Milvus para usar esta chave:</p>
 <ol>
 <li><p><strong>Definir as chaves da API na secção <code translate="no">credential</code>:</strong></p>
@@ -146,7 +146,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
 <li><p>Um campo escalar que armazena os dados brutos a serem incorporados.</p></li>
 <li><p>Um campo vetorial reservado para armazenar as incorporações vectoriais que a função irá gerar para o campo escalar.</p></li>
 </ul>
-<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense_vector&quot;</code> para armazenar incrustações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
+<p>O exemplo seguinte define um esquema com um campo escalar <code translate="no">&quot;document&quot;</code> para armazenar dados textuais e um campo vetorial <code translate="no">&quot;dense_vector&quot;</code> para armazenar as incorporações a serem geradas pelo módulo Function. Não se esqueça de definir a dimensão do vetor (<code translate="no">dim</code>) para corresponder ao resultado do modelo de incorporação escolhido.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType, CollectionSchema, FieldSchema
 
 <span class="hljs-comment"># Assume you have connected to Milvus</span>
@@ -201,7 +201,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">endpoint</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>O endereço de rede que aponta para o seu serviço TEI implementado. Se for implementado através do Milvus Helm Chart, este é normalmente o endereço interno do serviço.</p></td>
+     <td><p>O endereço de rede que aponta para o seu serviço TEI implementado. Se for implementado através do Milvus Helm Chart, é normalmente o endereço interno do serviço.</p></td>
      <td><p>"http://localhost:8080", "http://my-release-milvus-tei:80"</p></td>
    </tr>
    <tr>

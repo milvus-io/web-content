@@ -69,7 +69,7 @@ pip install pymilvus  <span class="hljs-comment"># Add Milvus Python client</spa
 <p>Desde el directorio <code translate="no">code</code>:</p>
 <pre><code translate="no" class="language-bash">python -m tools.db_load https://feeds.libsyn.com/121695/rss Behind-the-Tech
 <button class="copy-code-btn"></button></code></pre>
-<p>Esto ingerirá el contenido en su colección Milvus, almacenando tanto los datos de texto como las incrustaciones vectoriales.</p>
+<p>Esto incorporará el contenido a su colección Milvus, almacenando tanto los datos de texto como las incrustaciones vectoriales.</p>
 <h3 id="Running-the-Server" class="common-anchor-header">Ejecutar el servidor</h3><p>Para iniciar NLWeb, desde el directorio <code translate="no">code</code>, ejecute:</p>
 <pre><code translate="no" class="language-bash">python app-file.py
 <button class="copy-code-btn"></button></code></pre>

@@ -2,7 +2,7 @@
 id: vllm-ranker.md
 title: Classificador vLLMCompatible with Milvus 2.6.x
 summary: >-
-  O vLLM Ranker aproveita a estrutura de inferência vLLM para melhorar a
+  O vLLM Ranker utiliza a estrutura de inferência vLLM para melhorar a
   relevância da pesquisa através da classificação semântica. Representa uma
   abordagem avançada à ordenação de resultados de pesquisa que vai além da
   tradicional semelhança de vectores.
@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>Sistemas de apoio ao cliente que precisam de fazer corresponder os problemas dos utilizadores a soluções relevantes</p></li>
 <li><p>Pesquisa de comércio eletrónico que tem de compreender os atributos do produto e a intenção do utilizador</p></li>
 </ul>
-<p>Comparado ao <a href="/docs/pt/tei-ranker.md">TEI Ranker</a>, o vLLM Ranker oferece maior flexibilidade na seleção e personalização de modelos, tornando-o ideal para aplicações de pesquisa especializadas ou complexas, nas quais as opções de configuração adicionais oferecem benefícios significativos.</p>
+<p>Comparado ao <a href="/docs/pt/tei-ranker.md">TEI Ranker</a>, o vLLM Ranker oferece maior flexibilidade na seleção e personalização de modelos, tornando-o ideal para aplicações de pesquisa especializadas ou complexas, em que as opções de configuração adicionais oferecem benefícios significativos.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -55,7 +55,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">FLOAT_VECTOR</code></p></li>
 <li><p><code translate="no">INT8_VECTOR</code></p></li>
 </ul>
-<p>Les conversions en <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code> ou <code translate="no">BFLOAT16_VECTOR</code> ne sont pas prises en charge.</p></li>
+<p>Les conversions vers <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code> ou <code translate="no">BFLOAT16_VECTOR</code> ne sont pas prises en charge.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +221,7 @@ beta: Milvus 2.6.x
 </code></pre></td>
    </tr>
    <tr>
-     <td><p>Clé API (OpenAI, Voyage AI, etc.)</p></td>
+     <td><p>clé API (OpenAI, Voyage AI, etc.)</p></td>
      <td><p><code translate="no">apikey</code></p></td>
      <td><pre><code translate="no" class="yaml language-yaml"> credential:
      ...
@@ -260,7 +260,7 @@ beta: Milvus 2.6.x
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour plus d'informations sur l'application de la configuration Milvus, voir <a href="/docs/fr/dynamic_config.md">Configurer Milvus à la volée</a>.</p>
+<p>Pour plus d'informations sur l'application de la configuration de Milvus, voir <a href="/docs/fr/dynamic_config.md">Configurer Milvus à la volée</a>.</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">Utiliser la fonction d'intégration<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -375,7 +375,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>L'étiquette d'un titre défini dans la section de haut niveau <code translate="no">credential:</code> de <code translate="no">milvus.yaml</code>. </p>
+     <td><p>L'étiquette d'un titre défini dans la section de niveau supérieur <code translate="no">credential:</code> de <code translate="no">milvus.yaml</code>. </p>
 <ul>
 <li><p>Lorsqu'il est fourni, Milvus récupère la paire de clés ou le jeton API correspondant et signe la demande côté serveur.</p></li>
 <li><p>En cas d'omission (<code translate="no">None</code>), Milvus se rabat sur l'accréditation explicitement configurée pour le fournisseur de modèle cible dans <code translate="no">milvus.yaml</code>.</p></li>

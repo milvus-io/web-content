@@ -56,8 +56,8 @@ summary: >-
    </tr>
    <tr>
      <td><p>Ricerca di contenuti multimediali</p></td>
-     <td><p>Recupero di video utilizzando sia le caratteristiche visive che le trascrizioni audio</p></td>
-     <td><p>Bilancia l'importanza dei contenuti visivi rispetto al dialogo parlato, in base all'intento della query.</p></td>
+     <td><p>Recupero di video utilizzando sia le caratteristiche visive sia le trascrizioni audio</p></td>
+     <td><p>Bilancia l'importanza dei contenuti visivi rispetto al dialogo parlato in base all'intento della query</p></td>
    </tr>
    <tr>
      <td><p>Ricerca di documenti</p></td>

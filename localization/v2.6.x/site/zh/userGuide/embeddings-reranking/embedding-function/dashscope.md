@@ -98,7 +98,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>将 API 密钥放在这里，可以让它们在重启时保持不变，而且只需更改标签就能切换密钥。</p></li>
+<p>把 API 密钥放在这里，可以让它们在重启时保持不变，而且只需更改标签就能切换密钥。</p></li>
 <li><p><strong>告诉 Milvus 在调用 DashScope 时使用哪个密钥</strong></p>
 <p>在同一个文件中，将 DashScope 提供程序指向您希望它使用的标签。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>

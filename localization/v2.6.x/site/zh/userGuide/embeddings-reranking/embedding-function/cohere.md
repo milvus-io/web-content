@@ -71,7 +71,7 @@ beta: Milvus 2.6.x
      <td><p>embed-english-v2.0</p></td>
      <td><p>4,096</p></td>
      <td><p>512</p></td>
-     <td><p>较早的嵌入模型，可对文本进行分类或将其转化为嵌入。仅支持英语。</p></td>
+     <td><p>较早的嵌入式模型，可对文本进行分类或将其转化为嵌入式。仅支持英语。</p></td>
    </tr>
    <tr>
      <td><p>embed-english-light-v2.0</p></td>
@@ -111,7 +111,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>如果同一提供商的 API 密钥同时存在于配置文件和环境变量中，Milvus 将始终使用<code translate="no">milvus.yaml</code> 中的值，而忽略环境变量。</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">选项 1：配置文件（推荐且优先级更高）</h3><p>将 API 密钥保存在<code translate="no">milvus.yaml</code> 中；Milvus 会在启动时读取它们，并覆盖同一提供商的任何环境变量。</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">方案 1：配置文件（推荐且优先级更高）</h3><p>将 API 密钥保存在<code translate="no">milvus.yaml</code> 中；Milvus 会在启动时读取它们，并覆盖同一提供商的任何环境变量。</p>
 <ol>
 <li><p>**在<code translate="no">credential:</code></p>
 <p>你可以列出一个或多个 API 密钥--给每个密钥贴上你自创的标签，以便日后参考。</p>
@@ -122,7 +122,7 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>把 API 密钥放在这里，可以让它们在重启时保持不变，而且只需更改标签就能切换密钥。</p></li>
+<p>将 API 密钥放在这里，可以让它们在重启时保持不变，而且只需更改标签就能切换密钥。</p></li>
 <li><p><strong>告诉 Milvus 调用 OpenAI 时使用哪个密钥</strong></p>
 <p>在同一文件中，将 Cohere 提供程序指向您希望它使用的标签。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
@@ -238,4 +238,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>配置好嵌入函数后，请参阅 "<a href="/docs/zh/embedding-function-overview.md">功能概述</a>"，了解有关索引配置、数据插入示例和语义搜索操作的其他指导。</p>
+    </button></h2><p>配置好嵌入函数后，请参阅 "<a href="/docs/zh/embedding-function-overview.md">功能概述</a>"，了解有关索引配置、数据插入示例和语义搜索操作的更多指导。</p>

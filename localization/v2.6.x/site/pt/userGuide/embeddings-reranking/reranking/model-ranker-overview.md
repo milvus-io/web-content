@@ -5,9 +5,9 @@ summary: >-
   A pesquisa vetorial tradicional classifica os resultados puramente por
   semelhança matemática - o grau de correspondência dos vectores no espaço de
   alta dimensão. Apesar de eficiente, esta abordagem muitas vezes não tem
-  verdadeira relevância semântica. Considere a pesquisa por "melhores práticas
+  verdadeira relevância semântica. Considere a pesquisa de "melhores práticas
   para otimização de bases de dados": poderá receber documentos com elevada
-  semelhança vetorial que mencionam estes termos frequentemente, mas que não
+  semelhança vetorial que mencionam frequentemente estes termos, mas que não
   fornecem estratégias de otimização acionáveis.
 beta: Milvus 2.6.x
 ---
@@ -228,7 +228,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">maxBatch</code></p></td>
      <td><p>Não</p></td>
-     <td><p>Número máximo de documentos a processar num único lote. Valores maiores aumentam o rendimento, mas exigem mais memória.</p></td>
+     <td><p>Número máximo de documentos a processar num único lote. Valores maiores aumentam a taxa de transferência, mas exigem mais memória.</p></td>
      <td><p><code translate="no">32</code> (predefinição)</p></td>
    </tr>
 </table>

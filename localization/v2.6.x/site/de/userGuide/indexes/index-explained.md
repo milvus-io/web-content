@@ -113,7 +113,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomie des Vektorindex</span> </span></p>
-<p>Während der Indexerstellung kombiniert Milvus die gewählte Datenstruktur und die Quantisierungsmethode, um eine optimale <strong>Expansionsrate</strong> zu ermitteln. Zum Zeitpunkt der Abfrage ruft das System <code translate="no">topK × expansion rate</code> Kandidatenvektoren ab, wendet den Refiner an, um die Abstände mit höherer Genauigkeit neu zu berechnen, und gibt schließlich die genauesten Ergebnisse zurück <code translate="no">topK</code>. Dieser hybride Ansatz stellt ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit her, indem er die ressourcenintensive Verfeinerung auf eine gefilterte Teilmenge von Kandidaten beschränkt.</p>
+<p>Während der Indexerstellung kombiniert Milvus die gewählte Datenstruktur und die Quantisierungsmethode, um eine optimale <strong>Expansionsrate</strong> zu bestimmen. Zum Zeitpunkt der Abfrage ruft das System <code translate="no">topK × expansion rate</code> Kandidatenvektoren ab, wendet den Refiner an, um die Abstände mit höherer Genauigkeit neu zu berechnen, und gibt schließlich die genauesten Ergebnisse zurück <code translate="no">topK</code>. Dieser hybride Ansatz stellt ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit her, indem er die ressourcenintensive Verfeinerung auf eine gefilterte Teilmenge von Kandidaten beschränkt.</p>
 <h3 id="Data-structure" class="common-anchor-header">Datenstruktur</h3><p>Die Datenstruktur bildet die grundlegende Schicht des Indexes. Übliche Typen sind:</p>
 <ul>
 <li><p><strong>Invertierte Datei (IVF)</strong></p>
@@ -149,7 +149,7 @@ summary: >-
       </svg>
     </button></h2><p>Bei der Bewertung der Leistung ist es von entscheidender Bedeutung, ein Gleichgewicht zwischen <strong>Erstellungszeit</strong>, <strong>Abfrage pro Sekunde (QPS)</strong> und <strong>Wiederfindungsrate</strong> herzustellen. Die allgemeinen Regeln lauten wie folgt:</p>
 <ul>
-<li><p><strong>Graphenbasierte Indextypen</strong> übertreffen in der Regel die <strong>IVF-Varianten</strong> in Bezug auf die <strong>QPS</strong>.</p></li>
+<li><p><strong>Graphenbasierte Indexarten</strong> übertreffen in der Regel <strong>IVF-Varianten</strong> in Bezug auf die <strong>QPS</strong>.</p></li>
 <li><p><strong>IVF-Varianten</strong> eignen sich besonders für Szenarien mit <strong>einem großen TopK (z. B. über 2.000)</strong>.</p></li>
 <li><p><strong>PQ</strong> bietet typischerweise eine bessere Wiederauffindungsrate bei ähnlichen Kompressionsraten im Vergleich zu <strong>SQ</strong>, obwohl letztere eine schnellere Leistung bietet.</p></li>
 <li><p>Die Verwendung von Festplatten für einen Teil des Index (wie bei <strong>DiskANN</strong>) hilft bei der Verwaltung großer Datenmengen, führt aber auch zu potenziellen IOPS-Engpässen.</p></li>
@@ -175,7 +175,7 @@ summary: >-
 <h3 id="Performance" class="common-anchor-header">Leistung</h3><p>Die Leistung einer Suche bezieht sich in der Regel auf das Top-K, das sich auf die Anzahl der Datensätze bezieht, die die Suche zurückgibt. Wenn es um die Leistung geht, ist Folgendes zu beachten:</p>
 <ul>
 <li><p>Bei einer Suche mit einem kleinen Top-K (z.B. 2.000), die eine hohe Recall-Rate erfordert, sind graphbasierte Indextypen besser als IVF-Varianten.</p></li>
-<li><p>Bei einer Suche mit einem großen Top-K (im Vergleich zur Gesamtzahl der Vektoreinbettungen) sind IVF-Varianten die bessere Wahl als graphbasierte Indextypen.</p></li>
+<li><p>Für eine Suche mit einem großen Top-K (im Vergleich zur Gesamtzahl der Vektoreinbettungen) sind IVF-Varianten die bessere Wahl als graphbasierte Indextypen.</p></li>
 <li><p>Für eine Suche mit einem mittleren Top-K und einem hohen Filterverhältnis sind IVF-Varianten die bessere Wahl.</p></li>
 </ul>
 <h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Entscheidungsmatrix: Auswahl des am besten geeigneten Indextyps</h3><p>Die folgende Tabelle ist eine Entscheidungsmatrix, auf die Sie sich bei der Wahl eines geeigneten Indextyps beziehen können.</p>
@@ -305,7 +305,7 @@ summary: >-
 <p>Die Quantisierung reduziert die Vektorgröße. Beispielsweise führt die Verwendung von PQ mit 8 Unterquantisierern (8 Byte pro Vektor) zu einer drastischen Kompression. Der von den komprimierten Vektoreinbettungen verbrauchte Speicher kann wie folgt berechnet werden:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
-<p>Im Vergleich zu den unkomprimierten Vektoreinbettungen wird eine 64-fache Komprimierungsrate erreicht, und der vom <strong>HNSWPQ-Indextyp</strong> verwendete Gesamtspeicher beträgt <strong>128 MB (Graph) + 8 MB (komprimierter Vektor) = 136 MB</strong>.</p></li>
+<p>Im Vergleich zu den unkomprimierten Vektoreinbettungen wird eine 64-fache Komprimierungsrate erreicht, und der vom Index-Typ <strong>HNSWPQ</strong> verwendete Gesamtspeicher beträgt <strong>128 MB (Graph) + 8 MB (komprimierter Vektor) = 136 MB</strong>.</p></li>
 <li><p><strong>Berechnen Sie den Verfeinerungs-Overhead.</strong></p>
 <p>Bei der Verfeinerung, z. B. bei der Neueinordnung mit Rohvektoren, werden vorübergehend hochpräzise Daten in den Speicher geladen. Für eine Suche, die die 10 besten Ergebnisse mit einer Expansionsrate von 5 abruft, kann der Verfeinerungs-Overhead wie folgt geschätzt werden:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates

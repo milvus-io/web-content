@@ -240,7 +240,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;product_catalog&qu
 <ul>
 <li><p>ستحتوي<strong>الكيانات الحالية</strong> على NULL للحقل الثابت الجديد <code translate="no">extra_info</code></p></li>
 <li><p>يجب أن تستخدم<strong>الكيانات الجديدة</strong> نوع بيانات الحقل الثابت (<code translate="no">INT64</code>)</p></li>
-<li><p>يتم الاحتفاظ<strong>بقيم مفاتيح الحقل الديناميكي الأصلية</strong> ويمكن الوصول إليها عبر بناء الجملة <code translate="no">$meta</code> </p></li>
+<li><p>يتم الاحتفاظ<strong>بقيم مفاتيح الحقل الديناميكي الأصلي</strong> ويمكن الوصول إليها عبر بناء الجملة <code translate="no">$meta</code> </p></li>
 <li><p><strong>يخفي الحقل الثابت مفتاح الحقل الديناميكي</strong> في الاستعلامات العادية</p></li>
 </ul>
 <p><strong>الوصول إلى كل من القيم الثابتة والديناميكية</strong></p>
@@ -272,4 +272,4 @@ results = client.query(
 )
 <span class="hljs-comment"># Returns: {&quot;id&quot;: 2, &quot;extra_info&quot;: 100}  # Static field value</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">كم من الوقت يستغرق الحقل الجديد ليصبح متاحًا؟</h3><p>تصبح الحقول المضافة متاحة على الفور تقريبًا، ولكن قد يكون هناك تأخير وجيز بسبب بث تغيير المخطط الداخلي عبر مجموعة Milvus. تضمن هذه المزامنة أن تكون جميع العقد على علم بتحديث المخطط قبل معالجة الاستعلامات التي تتضمن الحقل الجديد.</p>
+<h3 id="How-long-does-it-take-for-a-new-field-to-become-available" class="common-anchor-header">كم من الوقت يستغرق الحقل الجديد ليصبح متاحًا؟</h3><p>تصبح الحقول المضافة متاحة على الفور تقريبًا، ولكن قد يكون هناك تأخير قصير بسبب بث تغيير المخطط الداخلي عبر مجموعة Milvus. تضمن هذه المزامنة أن تكون جميع العقد على علم بتحديث المخطط قبل معالجة الاستعلامات التي تتضمن الحقل الجديد.</p>

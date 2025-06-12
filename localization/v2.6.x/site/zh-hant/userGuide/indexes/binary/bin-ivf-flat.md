@@ -128,7 +128,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>在建立索引時，使用 k-means 演算法建立的叢集數目。 每個叢集以中心點表示，儲存向量清單。增加此參數可減少每個叢集中的向量數量，從而建立更小、更集中的分割。</p></td>
+     <td><p>在建立索引時，使用 k-means 演算法建立的叢集數目。 每個叢集由一個中心點代表，儲存向量清單。增加此參數可減少每個叢集中的向量數量，從而建立更小、更集中的分割。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 65536]</p>
 <p><strong>預設值</strong>：<code translate="no">128</code></p></td>
      <td><p>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善召回率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。 在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</p></td>

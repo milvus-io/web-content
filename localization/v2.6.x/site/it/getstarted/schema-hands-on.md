@@ -3,10 +3,10 @@ id: schema-hands-on.md
 title: Progettazione del modello di dati per la ricerca
 summary: >-
   I sistemi di Information Retrieval, noti anche come motori di ricerca, sono
-  essenziali per varie applicazioni di IA, come la Retrieval-augmented
-  generation (RAG), la ricerca visiva e la raccomandazione di prodotti. Il cuore
-  di questi sistemi è un modello di dati accuratamente progettato per
-  organizzare, indicizzare e recuperare le informazioni.
+  essenziali per varie applicazioni di intelligenza artificiale, come la
+  Retrieval-augmented generation (RAG), la ricerca visiva e la raccomandazione
+  di prodotti. Il cuore di questi sistemi è un modello di dati accuratamente
+  progettato per organizzare, indicizzare e recuperare le informazioni.
 ---
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">Progettazione del modello di dati per la ricerca<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,8 +91,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>In Milvus, il modello dei dati è espresso attraverso uno schema di raccolta. La progettazione dei campi giusti all'interno di uno schema di raccolta è fondamentale per consentire un recupero efficace. Ogni campo definisce un particolare tipo di dati memorizzati nella collezione e svolge un ruolo distinto nel processo di ricerca. Ad alto livello, Milvus supporta due tipi principali di campi: <strong>campi vettoriali</strong> e <strong>campi scalari</strong>.</p>
-<p>Ora è possibile mappare il modello di dati in uno schema di campi, compresi i vettori e gli eventuali campi scalari ausiliari. Assicuratevi che ogni campo sia correlato agli attributi del vostro modello di dati, prestando particolare attenzione al tipo di vettore (denso o spase) e alla sua dimensione.</p>
-<h3 id="Vector-Field" class="common-anchor-header">Campo vettoriale</h3><p>I campi vettoriali memorizzano le incorporazioni per i tipi di dati non strutturati, come testo, immagini e audio. Queste incorporazioni possono essere dense, rade o binarie, a seconda del tipo di dati e del metodo di recupero utilizzato. In genere, i vettori densi sono utilizzati per la ricerca semantica, mentre i vettori radi sono più adatti per la ricerca full-text o lessicale. I vettori binari sono utili quando le risorse di memoria e di calcolo sono limitate. Una raccolta può contenere diversi campi vettoriali per consentire strategie di recupero multimodali o ibride. Per una guida dettagliata su questo argomento, consultare la <a href="/docs/it/multi-vector-search.md">Ricerca ibrida multivettoriale</a>.</p>
+<p>Ora è possibile mappare il modello di dati in uno schema di campi, compresi i vettori e gli eventuali campi scalari ausiliari. Assicurarsi che ogni campo sia correlato agli attributi del modello di dati, prestando particolare attenzione al tipo di vettore (denso o spase) e alla sua dimensione.</p>
+<h3 id="Vector-Field" class="common-anchor-header">Campo vettoriale</h3><p>I campi vettoriali memorizzano le incorporazioni per i tipi di dati non strutturati, come testo, immagini e audio. Queste incorporazioni possono essere dense, rade o binarie, a seconda del tipo di dati e del metodo di recupero utilizzato. In genere, i vettori densi sono utilizzati per la ricerca semantica, mentre i vettori radi sono più adatti per la ricerca full-text o lessicale. I vettori binari sono utili quando le risorse di memoria e di calcolo sono limitate. Una collezione può contenere diversi campi vettoriali per consentire strategie di recupero multimodali o ibride. Per una guida dettagliata su questo argomento, consultare la <a href="/docs/it/multi-vector-search.md">Ricerca ibrida multivettoriale</a>.</p>
 <p>Milvus supporta i tipi di dati vettoriali: <code translate="no">FLOAT_VECTOR</code> per <a href="/docs/it/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> per <a href="/docs/it/sparse_vector.md">Sparse Vector</a> e <code translate="no">BINARY_VECTOR</code> per <a href="/docs/it/binary-vector.md">Binary Vector</a>.</p>
 <h3 id="Scalar-Field" class="common-anchor-header">Campo scalare</h3><p>I campi scalari memorizzano valori primitivi e strutturati, comunemente chiamati metadati, come numeri, stringhe o date. Questi valori possono essere restituiti insieme ai risultati della ricerca vettoriale e sono essenziali per il filtraggio e l'ordinamento. Permettono di restringere i risultati della ricerca in base ad attributi specifici, come limitare i documenti a una particolare categoria o a un intervallo di tempo definito.</p>
 <p>Milvus supporta tipi scalari come <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, e <code translate="no">ARRAY</code> per memorizzare e filtrare dati non vettoriali. Questi tipi migliorano la precisione e la personalizzazione delle operazioni di ricerca.</p>
@@ -148,7 +148,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
-     <td><p>autogenerato con abilitato <code translate="no">auto_id</code></p></td>
+     <td><p>autogenerato con abilitazione <code translate="no">auto_id</code></p></td>
      <td><p><a href="/docs/it/get-and-scalar-query.md">Interrogazione con Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -395,10 +395,10 @@ schema.addField(AddFieldReq.builder()
     \&quot;fields\&quot;: <span class="hljs-variable">$fields</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, per i campi vengono specificati i seguenti attributi:</p>
+<p>In questo esempio, per i campi sono specificati i seguenti attributi:</p>
 <ul>
-<li><p>Chiave primaria: <code translate="no">article_id</code> viene utilizzata come chiave primaria, consentendo l'assegnazione automatica delle chiavi primarie per le entità in arrivo.</p></li>
-<li><p>Chiave di partizione: <code translate="no">timestamp</code> è assegnata come chiave di partizione, consentendo di filtrare per partizioni. Questa potrebbe essere</p></li>
+<li><p>Chiave primaria: <code translate="no">article_id</code> è utilizzata come chiave primaria, consentendo l'assegnazione automatica delle chiavi primarie per le entità in arrivo.</p></li>
+<li><p>Chiave di partizione: <code translate="no">timestamp</code> è assegnata come chiave di partizione, consentendo il filtraggio per partizioni. Questa potrebbe essere</p></li>
 <li><p>Analizzatore di testo: l'analizzatore di testo viene applicato ai due campi stringa <code translate="no">title</code> e <code translate="no">text</code> per supportare rispettivamente la corrispondenza del testo e la ricerca full-text.</p></li>
 </ul>
 <h3 id="Optional-Add-functions" class="common-anchor-header">(Opzionale) Aggiungere funzioni</h3><p>Per migliorare le capacità di interrogazione dei dati, è possibile incorporare delle funzioni nello schema. Ad esempio, si può creare una funzione per elaborare i dati relativi a campi specifici.</p>

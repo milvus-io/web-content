@@ -213,7 +213,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>Determina la precisión de los datos utilizados para el refinamiento. Esta precisión debe ser mayor que la de los vectores comprimidos (como se establece en <code translate="no">sq_type</code>), lo que afecta tanto a la precisión de los vectores re-clasificados como a su consumo de memoria.</p></td>
+     <td><p>Determina la precisión de los datos utilizados para el refinamiento. Esta precisión debe ser mayor que la de los vectores comprimidos (como se establece en <code translate="no">sq_type</code>), lo que afecta tanto a la precisión de los vectores reordenados como a su consumo de memoria.</p></td>
      <td><p><strong>Tipo</strong>: Cadena <strong>Rango</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
 <p><strong>Valor por defecto</strong>: Ninguno</p></td>
      <td><p>Utilice <code translate="no">FP32</code> para obtener la máxima precisión con un mayor coste de memoria, o <code translate="no">SQ6</code>/<code translate="no">SQ8</code> para una mejor compresión. <code translate="no">BF16</code> y <code translate="no">FP16</code> ofrecen una alternativa equilibrada.</p></td>

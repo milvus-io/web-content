@@ -70,7 +70,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Produktauflistungen</p></td>
      <td><p>Artikel mit Preisen in der Nähe eines Ziels</p></td>
-     <td><p>Sanfter Rückgang der Relevanz bei Preisabweichungen vom Ziel</p></td>
+     <td><p>Sanfter Rückgang der Relevanz, wenn die Preise vom Zielwert abweichen</p></td>
    </tr>
    <tr>
      <td><p>Abgleich von Fachwissen</p></td>
@@ -135,7 +135,7 @@ beta: Milvus 2.6.x
 <li><p>Dividieren Sie durch <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2σ22\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">2σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span></span></span></span></span></span></span></span> 2, das aus Ihren Skalen- und Abklingparametern berechnet wird.</p></li>
 <li><p>Nehmen Sie den negativen Exponenten, der Ihnen einen Wert zwischen 0 und 1 liefert: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo>(</mo><mi>-Wert</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\exp <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(-Wert)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mord">(</span><span class="mord mathnormal">-Wert</span><span class="mclose">)</span></span></span></span></p></li>
 </ol>
-<p>Die Berechnung von <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> σ2\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2 wandelt Ihre Skalen- und Zerfallsparameter in die quadrierte Standardabweichung der Gaußschen Verteilung um. Dadurch erhält die Funktion ihre charakteristische Glockenform.</p>
+<p>Die Berechnung <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> σ2\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2 wandelt Ihre Skalen- und Zerfallsparameter in die quadrierte Standardabweichung der Gaußverteilung um. Dadurch erhält die Funktion ihre charakteristische Glockenform.</p>
 <h2 id="Use-Gaussian-decay" class="common-anchor-header">Verwendung des Gaußschen Abklingens<button data-href="#Use-Gaussian-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,7 +155,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Bevor Sie die Abklingfunktionen verwenden, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempel, Entfernungen usw.) erstellen, die für die Abklingberechnungen verwendet werden sollen. Vollständige Arbeitsbeispiele, einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneinfügung, finden Sie im <a href="/docs/de/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Zeitbasiertes Ranking in Milvus implementieren</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Nachdem Sie Ihre Sammlung mit einem numerischen Feld eingerichtet haben (in diesem Beispiel <code translate="no">distance</code> in Metern vom Benutzer), erstellen Sie eine Gaußsche Abklingrangliste:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Nachdem Sie Ihre Sammlung mit einem numerischen Feld eingerichtet haben (in diesem Beispiel <code translate="no">distance</code> in Metern vom Benutzer), erstellen Sie einen Gauß'schen Zerfallsranker:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a Gaussian decay ranker for location-based restaurant search</span>

@@ -2,7 +2,7 @@
 id: inverted.md
 title: 反転
 summary: >-
-  MilvusのINVERTEDインデックスは、スカラーフィールドと構造化JSONフィールドの両方に対するフィルタクエリを高速化するように設計されています。用語とそれを含む文書またはレコードを対応付けることにより、インバーテッドインデックスは総当たり検索と比較してクエリのパフォーマンスを大幅に向上させます。
+  MilvusのINVERTEDインデックスは、スカラーフィールドと構造化JSONフィールドの両方に対するフィルタクエリを高速化するように設計されています。用語とそれを含むドキュメントまたはレコードを対応付けることにより、インバーテッドインデックスは総当たり検索と比較してクエリのパフォーマンスを大幅に向上させます。
 ---
 <h1 id="INVERTED" class="common-anchor-header">反転<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -100,7 +100,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusはJSONフィールドにインデックス機能を拡張し、単一のカラムに格納されたネストされたデータや構造化されたデータを効率的にフィルタリングできるようにしました。スカラーフィールドとは異なり、JSONフィールドにインデックスを作成する場合、2つのパラメータを追加で指定する必要があります：</p>
+    </button></h2><p>MilvusはJSONフィールドにインデックス機能を拡張し、単一のカラム内に格納されたネストされたデータや構造化されたデータを効率的にフィルタリングできるようにしました。スカラーフィールドとは異なり、JSONフィールドにインデックスを作成する場合、2つのパラメータを追加で指定する必要があります：</p>
 <ul>
 <li><p><code translate="no">json_path</code><strong>:</strong>インデックスを作成するネストされたキーを指定します。</p></li>
 <li><p><code translate="no">json_cast_type</code><strong>:</strong>抽出されたJSON値がキャストされるデータ型（例えば、<code translate="no">&quot;varchar&quot;</code> 、<code translate="no">&quot;double&quot;</code> 、<code translate="no">&quot;bool&quot;</code> ）を定義します。</p></li>
@@ -200,7 +200,7 @@ index_params.add_index(
     </button></h2><ul>
 <li><p><strong>フィルタリングロジック</strong>：</p>
 <ul>
-<li><p><strong>ダブル型インデックス (</strong><code translate="no">json_cast_type=&quot;double&quot;</code><strong>) を作成した</strong>場合、数値型フィルタ条件のみがそのインデックスを使用できます。フィルタでダブルインデックスと数値以外の条件が比較された場合、Milvusは総当たり検索にフォールバックします。</p></li>
+<li><p><strong>double 型のインデックス (</strong><code translate="no">json_cast_type=&quot;double&quot;</code><strong>) を作成した</strong>場合、numeric 型のフィルタ条件のみがそのインデックスを使用できます。フィルタでダブルインデックスと数値以外の条件が比較された場合、Milvusは総当たり検索にフォールバックします。</p></li>
 <li><p><strong>varchar型インデックス(</strong><code translate="no">json_cast_type=&quot;varchar&quot;</code><strong>)を作成した</strong>場合、文字列型フィルタ条件のみがインデックスを使用できます。そうでない場合、Milvusは総当り検索に戻ります。</p></li>
 <li><p><strong>ブール型</strong>インデックスもvarchar型インデックスと同様の動作をします。</p></li>
 </ul></li>

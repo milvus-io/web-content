@@ -34,7 +34,7 @@ beta: Milvus 2.6.x
 <li><p>La désintégration gaussienne suit une courbe en cloche qui se rapproche progressivement de zéro sans jamais l'atteindre</p></li>
 <li><p>La décroissance exponentielle maintient une longue queue de pertinence minimale qui s'étend indéfiniment.</p></li>
 </ul>
-<p>La décroissance linéaire crée un point final unique, ce qui la rend particulièrement efficace pour les applications comportant des limites naturelles ou des échéances.</p>
+<p>La décroissance linéaire crée uniquement un point final définitif, ce qui la rend particulièrement efficace pour les applications comportant des limites naturelles ou des délais.</p>
 <h2 id="When-to-use-linear-decay" class="common-anchor-header">Quand utiliser la décroissance linéaire ?<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

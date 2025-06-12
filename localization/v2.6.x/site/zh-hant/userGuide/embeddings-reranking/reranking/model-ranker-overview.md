@@ -22,7 +22,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>傳統的向量搜尋純粹是透過數學相似性來排列結果，也就是向量在高維空間中的匹配程度。這種方法雖然有效率，但往往會忽略真正的語意相關性。考慮搜尋<strong>「資料庫最佳優化實務」：</strong>您可能會收到高向量相似度的文件，這些文件會經常提到這些詞彙，但實際上卻沒有提供可行的優化策略。</p>
-<p>Model Ranker 整合了先進的語言模型，能夠理解查詢與文件之間的語義關係，從而改變 Milvus 的搜尋方式。它不只依賴向量相似度，還會評估內容意義和上下文，以提供更智慧、更相關的搜尋結果。</p>
+<p>Model Ranker 整合了先進的語言模型，能夠理解查詢與文件之間的語義關係，從而改變 Milvus 的搜尋方式。它不只依賴向量相似度，還會評估內容的意義和上下文，以提供更智慧、更相關的搜尋結果。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
