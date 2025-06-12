@@ -42,7 +42,7 @@ beta: Milvus 2.6.x
    <tr>
      <th><p>Nombre del Modelo</p></th>
      <th><p>Dimensiones</p></th>
-     <th><p>Fichas máximas</p></th>
+     <th><p>Número máximo de fichas</p></th>
      <th><p>Descripción</p></th>
    </tr>
    <tr>

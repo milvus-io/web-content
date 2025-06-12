@@ -62,7 +62,7 @@ summary: >-
 <li><p><strong>Filtrado de metadatos</strong>: Además de la búsqueda vectorial, aplica restricciones como intervalos de fechas, categorías o etiquetas.</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Traducir los requisitos empresariales en un modelo de datos de búsqueda</h3><p>El siguiente paso consiste en traducir tus requisitos empresariales en un modelo de datos concreto, identificando los componentes centrales de tu información y sus métodos de búsqueda:</p>
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Traducir los requisitos empresariales en un modelo de datos de búsqueda</h3><p>El siguiente paso consiste en traducir tus requisitos empresariales en un modelo de datos concreto, identificando los componentes básicos de tu información y sus métodos de búsqueda:</p>
 <ul>
 <li><p>Defina los datos que necesita almacenar, como el contenido en bruto (texto, imágenes, audio), los metadatos asociados (títulos, etiquetas, autoría) y los atributos contextuales (marcas de tiempo, comportamiento del usuario, etc.).</p></li>
 <li><p>Determine los tipos de datos y formatos adecuados para cada elemento. Por ejemplo:</p>

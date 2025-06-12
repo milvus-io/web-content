@@ -1,13 +1,14 @@
 ---
 id: build_RAG_with_milvus_and_firecrawl.md
 summary: >-
-  In this tutorial, we’ll show you how to build a Retrieval-Augmented Generation
-  (RAG) pipeline using Milvus and Firecrawl. The pipeline integrates Firecrawl
-  for web data scraping, Milvus for vector storage, and OpenAI for generating
-  insightful, context-aware responses.
-title: Building RAG with Milvus and Firecrawl
+  En este tutorial, le mostraremos cómo construir un canal de Generación de
+  Recuperación-Aumentada (RAG) usando Milvus y Firecrawl. La canalización
+  integra Firecrawl para el raspado de datos web, Milvus para el almacenamiento
+  vectorial y OpenAI para generar respuestas perspicaces y conscientes del
+  contexto.
+title: Creación de RAG con Milvus y Firecrawl
 ---
-<h1 id="Building-RAG-with-Milvus-and-Firecrawl" class="common-anchor-header">Building RAG with Milvus and Firecrawl<button data-href="#Building-RAG-with-Milvus-and-Firecrawl" class="anchor-icon" translate="no">
+<h1 id="Building-RAG-with-Milvus-and-Firecrawl" class="common-anchor-header">Creación de RAG con Milvus y Firecrawl<button data-href="#Building-RAG-with-Milvus-and-Firecrawl" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,9 +29,9 @@ title: Building RAG with Milvus and Firecrawl
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_firecrawl.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://www.firecrawl.dev/">Firecrawl</a> empowers developers to build AI applications with clean data scraped from any website. With advanced scraping, crawling, and data extraction capabilities, Firecrawl simplifies the process of converting website content into clean markdown or structured data for downstream AI workflows.</p>
-<p>In this tutorial, we’ll show you how to build a Retrieval-Augmented Generation (RAG) pipeline using Milvus and Firecrawl. The pipeline integrates Firecrawl for web data scraping, Milvus for vector storage, and OpenAI for generating insightful, context-aware responses.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p><a href="https://www.firecrawl.dev/">Firecrawl</a> permite a los desarrolladores crear aplicaciones de IA con datos limpios extraídos de cualquier sitio web. Con capacidades avanzadas de scraping, crawling y extracción de datos, Firecrawl simplifica el proceso de convertir contenido de sitios web en markdown limpio o datos estructurados para flujos de trabajo de IA posteriores.</p>
+<p>En este tutorial, le mostraremos cómo crear una canalización de generación mejorada de recuperación (RAG) utilizando Milvus y Firecrawl. La canalización integra Firecrawl para el raspado de datos web, Milvus para el almacenamiento vectorial y OpenAI para generar respuestas perspicaces y conscientes del contexto.</p>
+<h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,24 +46,24 @@ title: Building RAG with Milvus and Firecrawl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><p>To start, install the required dependencies by running the following command:</p>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencias y entorno</h3><p>Para empezar, instala las dependencias necesarias ejecutando el siguiente comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install firecrawl-py pymilvus openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Si utilizas Google Colab, para activar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y selecciona "Reiniciar sesión" en el menú desplegable).</p>
 </div>
-<h3 id="Setting-Up-API-Keys" class="common-anchor-header">Setting Up API Keys</h3><p>To use Firecrawl to scrape data from the specified URL, you need to obtain a <a href="https://www.firecrawl.dev/">FIRECRAWL_API_KEY</a> and set it as an environment variable. Also, we will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">OPENAI_API_KEY</a> as an environment variable as well.</p>
+<h3 id="Setting-Up-API-Keys" class="common-anchor-header">Configuración de las claves API</h3><p>Para utilizar Firecrawl para extraer datos de la URL especificada, es necesario obtener una <a href="https://www.firecrawl.dev/">FIRECRAWL_API_KEY</a> y establecerla como variable de entorno. Además, en este ejemplo utilizaremos OpenAI como LLM. Deberías preparar la <a href="https://platform.openai.com/docs/quickstart">OPENAI_API_KEY</a> como una variable de entorno también.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;FIRECRAWL_API_KEY&quot;</span>] = <span class="hljs-string">&quot;fc-***********&quot;</span>
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Prepare the LLM and Embedding Model</h3><p>We initialize the OpenAI client to prepare the embedding model.</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Preparar el LLM y el modelo de incrustación</h3><p>Inicializamos el cliente OpenAI para preparar el modelo de incrustación.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
-<p>Define a function to generate text embeddings using OpenAI client. We use the <a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-small</a> model as an example.</p>
+<p>Definimos una función para generar incrustaciones de texto utilizando el cliente OpenAI. Usamos el modelo <a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-small</a> como ejemplo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
         openai_client.embeddings.create(<span class="hljs-built_in">input</span>=text, model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
@@ -70,7 +71,7 @@ openai_client = OpenAI()
         .embedding
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Generate a test embedding and print its dimension and first few elements.</p>
+<p>Generar un embedding de prueba e imprimir su dimensión y primeros elementos.</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -79,7 +80,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">1536
 [0.009889289736747742, -0.005578675772994757, 0.00683477520942688, -0.03805781528353691, -0.01824733428657055, -0.04121600463986397, -0.007636285852640867, 0.03225184231996536, 0.018949154764413834, 9.352207416668534e-05]
 </code></pre>
-<h2 id="Scrape-Data-Using-Firecrawl" class="common-anchor-header">Scrape Data Using Firecrawl<button data-href="#Scrape-Data-Using-Firecrawl" class="anchor-icon" translate="no">
+<h2 id="Scrape-Data-Using-Firecrawl" class="common-anchor-header">Extraer datos usando Firecrawl<button data-href="#Scrape-Data-Using-Firecrawl" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,12 +95,12 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Initialize-the-Firecrawl-Application" class="common-anchor-header">Initialize the Firecrawl Application</h3><p>We will use the <code translate="no">firecrawl</code> library to scrape data from the specified URL in markdown format. Begin by initializing the Firecrawl application:</p>
+    </button></h2><h3 id="Initialize-the-Firecrawl-Application" class="common-anchor-header">Inicializar la aplicación Firecrawl</h3><p>Utilizaremos la biblioteca <code translate="no">firecrawl</code> para extraer datos de la URL especificada en formato markdown. Comience inicializando la aplicación Firecrawl:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> firecrawl <span class="hljs-keyword">import</span> FirecrawlApp
 
 app = FirecrawlApp(api_key=os.environ[<span class="hljs-string">&quot;FIRECRAWL_API_KEY&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Scrape-the-Target-Website" class="common-anchor-header">Scrape the Target Website</h3><p>Scrape the content from the target URL. The website <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">LLM-powered Autonomous Agents</a> provides an in-depth exploration of autonomous agent systems built using large language models (LLMs). We will use these content building a RAG system.</p>
+<h3 id="Scrape-the-Target-Website" class="common-anchor-header">Extraer el sitio web de destino</h3><p>Extraiga el contenido de la URL de destino. El sitio web <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">LLM-powered Autonomous Agents</a> proporciona una exploración en profundidad de los sistemas de agentes autónomos construidos utilizando grandes modelos de lenguaje (LLMs). Utilizaremos estos contenidos para construir un sistema RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Scrape a website:</span>
 scrape_status = app.scrape_url(
     <span class="hljs-string">&quot;https://lilianweng.github.io/posts/2023-06-23-agent/&quot;</span>,
@@ -108,7 +109,7 @@ scrape_status = app.scrape_url(
 
 markdown_content = scrape_status[<span class="hljs-string">&quot;markdown&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Process-the-Scraped-Content" class="common-anchor-header">Process the Scraped Content</h3><p>To make the scraped content manageable for insertion into Milvus, we simply use "# " to separate the content, which can roughly separate the content of each main part of the scraped markdown file.</p>
+<h3 id="Process-the-Scraped-Content" class="common-anchor-header">Procesar el contenido raspado</h3><p>Para hacer que el contenido raspado sea manejable para su inserción en Milvus, simplemente utilizamos "# " para separar el contenido, lo que puede separar aproximadamente el contenido de cada parte principal del archivo markdown raspado.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_markdown_content</span>(<span class="hljs-params">content</span>):
     <span class="hljs-keyword">return</span> [section.strip() <span class="hljs-keyword">for</span> section <span class="hljs-keyword">in</span> content.split(<span class="hljs-string">&quot;# &quot;</span>) <span class="hljs-keyword">if</span> section.strip()]
 
@@ -147,7 +148,7 @@ A complicated task usually involves many steps. An agent needs to know what they
 #...
 --------------------------------------------------
 </code></pre>
-<h2 id="Load-Data-into-Milvus" class="common-anchor-header">Load Data into Milvus<button data-href="#Load-Data-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-Data-into-Milvus" class="common-anchor-header">Cargar datos en Milvus<button data-href="#Load-Data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,25 +163,25 @@ A complicated task usually involves many steps. An agent needs to know what they
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-collection" class="common-anchor-header">Create the collection</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+    </button></h2><h3 id="Create-the-collection" class="common-anchor-header">Crear la colección</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>En cuanto al argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li><p>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</p></li>
-<li><p>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</p></li>
-<li><p>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</p></li>
+<li><p>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</p></li>
+<li><p>Si tiene una gran escala de datos, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</p></li>
+<li><p>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">punto final público y a la clave Api</a> en Zilliz Cloud.</p></li>
 </ul>
 </div>
-<p>Check if the collection already exists and drop it if it does.</p>
+<p>Compruebe si la colección ya existe y elimínela en caso afirmativo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a new collection with specified parameters.</p>
-<p>If we don’t specify any field information, Milvus will automatically create a default <code translate="no">id</code> field for primary key, and a <code translate="no">vector</code> field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.</p>
+<p>Crear una nueva colección con los parámetros especificados.</p>
+<p>Si no especificamos ninguna información de campo, Milvus creará automáticamente un campo <code translate="no">id</code> por defecto para la clave primaria, y un campo <code translate="no">vector</code> para almacenar los datos vectoriales. Se utiliza un campo JSON reservado para almacenar campos no definidos por el esquema y sus valores.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
@@ -188,7 +189,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
+<h3 id="Insert-data" class="common-anchor-header">Insertar datos</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
 
@@ -207,7 +208,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
 
 {'insert_count': 17, 'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 'cost': 0}
 </code></pre>
-<h2 id="Build-RAG" class="common-anchor-header">Build RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
+<h2 id="Build-RAG" class="common-anchor-header">Construir RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -222,10 +223,10 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">Retrieve data for a query</h3><p>Let’s specify a query question about the website we just scraped.</p>
+    </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">Recuperar datos para una consulta</h3><p>Vamos a especificar una pregunta de consulta sobre el sitio web que acabamos de raspar.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What are the main components of autonomous agents?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Search for the question in the collection and retrieve the semantic top-3 matches.</p>
+<p>Busquemos la pregunta en la colección y recuperemos las 3 primeras coincidencias semánticas.</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[emb_text(question)],
@@ -234,7 +235,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s take a look at the search results of the query</p>
+<p>Veamos los resultados de la consulta</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
@@ -257,12 +258,12 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Use LLM to get a RAG response</h3><p>Convert the retrieved documents into a string format.</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Utilizar LLM para obtener una respuesta RAG</h3><p>Convertir los documentos recuperados en un formato de cadena.</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Define system and user prompts for the Lanage Model. This prompt is assembled with the retrieved documents from Milvus.</p>
+<p>Definir avisos de sistema y de usuario para el modelo de lenguaje. Este prompt se ensambla con los documentos recuperados de Milvus.</p>
 <pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 &quot;&quot;&quot;</span>
@@ -276,7 +277,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &lt;/question&gt;
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Use OpenAI ChatGPT to generate a response based on the prompts.</p>
+<p>Utilizar OpenAI ChatGPT para generar una respuesta basada en las instrucciones.</p>
 <pre><code translate="no" class="language-python">response = openai_client.chat.completions.create(
     model=<span class="hljs-string">&quot;gpt-4o&quot;</span>,
     messages=[

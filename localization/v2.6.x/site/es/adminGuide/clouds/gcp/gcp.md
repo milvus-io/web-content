@@ -1,10 +1,10 @@
 ---
 id: gcp.md
-title: Deploy a Milvus Cluster on GKE
+title: Despliegue de un clúster de Milvus en GKE
 related_key: cluster
-summary: Learn how to deploy a Milvus cluster on GKE.
+summary: Aprenda a desplegar un clúster Milvus en GKE.
 ---
-<h1 id="Deploy-a-Milvus-Cluster-on-GKE" class="common-anchor-header">Deploy a Milvus Cluster on GKE<button data-href="#Deploy-a-Milvus-Cluster-on-GKE" class="anchor-icon" translate="no">
+<h1 id="Deploy-a-Milvus-Cluster-on-GKE" class="common-anchor-header">Despliegue de un clúster de Milvus en GKE<button data-href="#Deploy-a-Milvus-Cluster-on-GKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,14 +19,12 @@ summary: Learn how to deploy a Milvus cluster on GKE.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus is a cloud-native vector database and can be deployed on various cloud environments. This guide walks you through every detail about setting up Milvus on Google Cloud Platform (GCP).</p>
+    </button></h1><p>Milvus es una base de datos vectorial nativa de la nube y puede desplegarse en varios entornos de nube. Esta guía le guiará a través de cada detalle sobre la configuración de Milvus en Google Cloud Platform (GCP).</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
-    <span>Deploy a Milvus cluster on GCP</span>
-  </span>
-</p>
-<h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
+   </span> <span class="img-wrapper"> <span>Despliegue de un clúster Milvus en GCP</span> </span></p>
+<h2 id="Before-you-start" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,14 +39,14 @@ summary: Learn how to deploy a Milvus cluster on GKE.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To deploy Milvus on GCP, ensure that</p>
+    </button></h2><p>Para desplegar Milvus en GCP, asegúrese de que</p>
 <ul>
-<li><p>A project already exists in your GCP account.</p>
-<p>To create a project, refer to <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creating and managing projects</a>. The name of the project used in this guide is <strong>milvus-testing-nonprod</strong>.</p></li>
-<li><p>You have locally installed <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>, and <a href="https://helm.sh/docs/intro/install/">Helm</a>, or decided to use the browser-based <a href="https://cloud.google.com/shell">Cloud Shell</a> instead.</p></li>
-<li><p>You have <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialized the gcloud CLI</a> with your GCP account credentials.</p></li>
+<li><p>Ya existe un proyecto en su cuenta GCP.</p>
+<p>Para crear un proyecto, consulte <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creación y gestión de proyectos</a>. El nombre del proyecto utilizado en esta guía es <strong>milvus-testing-nonprod</strong>.</p></li>
+<li><p>Ha instalado localmente <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> y <a href="https://helm.sh/docs/intro/install/">Helm</a>, o ha decidido utilizar en su lugar <a href="https://cloud.google.com/shell">Cloud Shell</a> basado en navegador.</p></li>
+<li><p>Ha <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">inicializado gcloud CLI</a> con las credenciales de su cuenta GCP.</p></li>
 </ul>
-<h2 id="Set-up-the-network" class="common-anchor-header">Set up the network<button data-href="#Set-up-the-network" class="anchor-icon" translate="no">
+<h2 id="Set-up-the-network" class="common-anchor-header">Configurar la red<button data-href="#Set-up-the-network" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,14 +61,14 @@ summary: Learn how to deploy a Milvus cluster on GKE.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To ensure Milvus security, you need to create a logically isolated virtual network in your GCP project. The following command creates a VPC.</p>
+    </button></h2><p>Para garantizar la seguridad de Milvus, necesita crear una red virtual lógicamente aislada en su proyecto GCP. El siguiente comando crea una VPC.</p>
 <pre><code translate="no" class="language-bash">gcloud compute networks create milvus-network \
     --project=milvus-testing-nonprod \
     --subnet-mode=auto \
     --mtu=1460 \
     --bgp-routing-mode=regional
 <button class="copy-code-btn"></button></code></pre>
-<p>To facilitate your work, you also need to set up several firewall rules to allow external traffic over ICMP, RDP, and SSH as well as the traffic within the VPC.</p>
+<p>Para facilitar su trabajo, también necesita configurar varias reglas de cortafuegos para permitir el tráfico externo a través de ICMP, RDP y SSH, así como el tráfico dentro de la VPC.</p>
 <pre><code translate="no" class="language-bash">gcloud compute firewall-rules create milvus-network-allow-icmp \
     --project=milvus-testing-nonprod \
     --network=projects/milvus-testing-nonprod/global/networks/milvus-network \
@@ -110,7 +108,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
     --action=ALLOW \
     --rules=tcp:22
 <button class="copy-code-btn"></button></code></pre>
-<p>Finally, you need to allow the incoming traffic to the Milvus instance we will create later at port <strong>19530</strong>.</p>
+<p>Por último, debe permitir el tráfico entrante a la instancia de Milvus que crearemos más adelante en el puerto <strong>19530</strong>.</p>
 <pre><code translate="no" class="language-bash">gcloud compute firewall-rules create allow-milvus-in \
     --project=milvus-testing-nonprod  \
     --description=<span class="hljs-string">&quot;Allow ingress traffic for Milvus on port 19530&quot;</span> \
@@ -121,7 +119,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
     --rules=tcp:19530 \
     --source-ranges=0.0.0.0/0
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Provision-a-Kubernetes-cluster" class="common-anchor-header">Provision a Kubernetes cluster<button data-href="#Provision-a-Kubernetes-cluster" class="anchor-icon" translate="no">
+<h2 id="Provision-a-Kubernetes-cluster" class="common-anchor-header">Aprovisionar un clúster Kubernetes<button data-href="#Provision-a-Kubernetes-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -136,9 +134,9 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this guide, we will use the Google Kubernetes Engine (GKE) service to provision a Kubernetes cluster with two nodes in the <strong>us-west1-a</strong> zone. Each node is an <strong>e2-standard-4</strong> Compute Engine virtual machine running the <strong>COS_CONTAINERD</strong> image.</p>
+    </button></h2><p>En esta guía, utilizaremos el servicio Google Kubernetes Engine (GKE) para aprovisionar un clúster Kubernetes con dos nodos en la zona <strong>us-west1-a</strong>. Cada nodo es una máquina virtual <strong>e2-standard-4</strong> Compute Engine que ejecuta la imagen <strong>COS_CONTAINERD</strong>.</p>
 <div class="alert note">
-<p>You are advised to use the types of machines that offer a minimum memory of 16 GB to ensure service stability.</p>
+<p>Se recomienda utilizar máquinas que ofrezcan una memoria mínima de 16 GB para garantizar la estabilidad del servicio.</p>
 </div>
 <pre><code translate="no" class="language-bash">gcloud container clusters create <span class="hljs-string">&quot;milvus-cluster-1&quot;</span> \
     --project <span class="hljs-string">&quot;milvus-testing-nonprod&quot;</span> \
@@ -157,10 +155,10 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
     --network <span class="hljs-string">&quot;projects/milvus-testing-nonprod/global/networks/milvus-network&quot;</span> \
     --subnetwork <span class="hljs-string">&quot;projects/milvus-testing-nonprod/regions/us-west1/subnetworks/milvus-network&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>It would take a couple of minutes for the Kubernetes cluster to go up. Once the cluster is ready, use the following command to fetch its credentials so that you can run <code translate="no">kubectl</code> commands in your terminal to communicate with the cluster remotely.</p>
+<p>El clúster Kubernetes tardará un par de minutos en ponerse en marcha. Una vez que el clúster esté listo, utilice el siguiente comando para obtener sus credenciales de modo que pueda ejecutar comandos <code translate="no">kubectl</code> en su terminal para comunicarse con el clúster de forma remota.</p>
 <pre><code translate="no" class="language-bash">gcloud container clusters get-credentials milvus-cluster-1 --zone <span class="hljs-string">&quot;us-west1-a&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Google-Cloud-Storage-GCS-as-external-object-storage" class="common-anchor-header">Use Google Cloud Storage (GCS) as external object storage<button data-href="#Use-Google-Cloud-Storage-GCS-as-external-object-storage" class="anchor-icon" translate="no">
+<h2 id="Use-Google-Cloud-Storage-GCS-as-external-object-storage" class="common-anchor-header">Utilizar Google Cloud Storage (GCS) como almacenamiento de objetos externo<button data-href="#Use-Google-Cloud-Storage-GCS-as-external-object-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,21 +174,19 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
         ></path>
       </svg>
     </button></h2><ul>
-<li>Create bucket.</li>
+<li>Crear bucket.</li>
 </ul>
 <pre><code translate="no" class="language-bash">gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Generate User Access Key and Secret Key, you should go to your project’s storage page. In the left sidebar of the dashboard, click Google Cloud Storage and then Settings. Select the INTEROPERABILITY tab. If you haven’t enabled it already, click on Interoperable Access. Then click CREATE A KEY button to create.</li>
+<li>Genera la Clave de Acceso de Usuario y la Clave Secreta, debes ir a la página de almacenamiento de tu proyecto. En la barra lateral izquierda del panel de control, haz clic en Google Cloud Storage y luego en Configuración. Selecciona la pestaña INTEROPERABILIDAD. Si aún no la has habilitado, haz clic en Acceso interoperable. A continuación, haga clic en el botón CREAR UNA CLAVE para crear.</li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
-    <span>GCP Access keys for your user account</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
+   </span> <span class="img-wrapper"> <span>Claves de acceso a GCP para su cuenta de usuario</span> </span></p>
 <ul>
-<li>Add values.yaml</li>
+<li>Añada values.yaml</li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>
     <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
@@ -212,7 +208,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
     <span class="hljs-attr">accessKey:</span> <span class="hljs-string">&quot;&lt;access-key&gt;&quot;</span>
     <span class="hljs-attr">secretKey:</span> <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-Milvus" class="common-anchor-header">Deploy Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus" class="common-anchor-header">Despliegue de Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -227,15 +223,15 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now the Kubernetes cluster is ready. Let’s deploy Milvus right now.</p>
+    </button></h2><p>Ahora el cluster Kubernetes está listo. Despleguemos Milvus ahora mismo.</p>
 <pre><code translate="no" class="language-bash">helm repo add milvus https://zilliztech.github.io/milvus-helm/
 helm repo update
 helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>In the preceding commands, we add the repo of Milvus Helm charts locally and update the repo to fetch the latest charts. Then we install a Milvus instance and name it <strong>my-release</strong>.</p>
-<p>Notice the config <code translate="no">service.type</code> value, which indicates that we would like to expose the Milvus instance through a Layer-4 load balancer.</p>
-<p>If you would like to expose your Milvus instance through a Layer-7 load balancer, <a href="/docs/gcp_layer7.md">read this</a>.</p>
-<h2 id="Verify-the-deployment" class="common-anchor-header">Verify the deployment<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
+<p>En los comandos anteriores, añadimos el repositorio de gráficos de Milvus Helm localmente y actualizamos el repositorio para obtener los gráficos más recientes. Luego instalamos una instancia de Milvus y la llamamos <strong>my-release</strong>.</p>
+<p>Observe el valor config <code translate="no">service.type</code>, que indica que nos gustaría exponer la instancia Milvus a través de un equilibrador de carga de capa 4.</p>
+<p>Si desea exponer su instancia Milvus a través de un equilibrador de carga de capa 7, <a href="/docs/es/gcp_layer7.md">lea esto</a>.</p>
+<h2 id="Verify-the-deployment" class="common-anchor-header">Verifique el despliegue<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -250,10 +246,10 @@ helm install -f values.yaml my-release milvus/milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once all pods are running, run the following command to get the external IP address.</p>
+    </button></h2><p>Una vez que todos los pods estén funcionando, ejecute el siguiente comando para obtener la dirección IP externa.</p>
 <pre><code translate="no" class="language-bash">kubectl get services|grep my-release-milvus|grep LoadBalancer|awk <span class="hljs-string">&#x27;{print $4}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Hello-Milvus" class="common-anchor-header">Hello Milvus<button data-href="#Hello-Milvus" class="anchor-icon" translate="no">
+<h2 id="Hello-Milvus" class="common-anchor-header">Hola Milvus<button data-href="#Hello-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,8 +264,8 @@ helm install -f values.yaml my-release milvus/milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Please refer to <a href="https://milvus.io/docs/v2.3.x/example_code.md">Hello Milvus</a>, change the host value to the external IP address, then run the code.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+    </button></h2><p>Consulte <a href="https://milvus.io/docs/v2.3.x/example_code.md">Hola Milvus</a>, cambie el valor del host por la dirección IP externa y, a continuación, ejecute el código.</p>
+<h2 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,8 +280,8 @@ helm install -f values.yaml my-release milvus/milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
+    </button></h2><p>Si desea aprender cómo desplegar Milvus en otras nubes:</p>
 <ul>
-<li><a href="/docs/eks.md">Deploy Milvus Cluster on AWS with Kubernetes</a></li>
-<li><a href="/docs/azure.md">Deploy Milvus Cluster on Azure With Kubernetes</a></li>
+<li><a href="/docs/es/eks.md">Implementar Milvus Cluster en AWS con Kubernetes</a></li>
+<li><a href="/docs/es/azure.md">Implementar Milvus Cluster en Azure con Kubernetes</a></li>
 </ul>

@@ -1,13 +1,14 @@
 ---
 id: integrate_with_agno.md
-title: Integrate Milvus with Agno
+title: Integrar Milvus con Agno
 summary: >-
-  Milvus vector database enable efficient storage and retrieval of information
-  as embeddings. With Milvus and Agno, you can easily integrate your knowledge
-  into your Agent workflows. This document is a basic guide on how to use Milvus
-  integration with Agno.
+  Las bases de datos vectoriales de Milvus permiten almacenar y recuperar
+  información de forma eficiente en forma de incrustaciones. Con Milvus y Agno,
+  puede integrar fácilmente sus conocimientos en los flujos de trabajo de su
+  Agente. Este documento es una guía básica sobre cómo utilizar la integración
+  de Milvus con Agno.
 ---
-<h1 id="Integrate-Milvus-with-Agno" class="common-anchor-header">Integrate Milvus with Agno<button data-href="#Integrate-Milvus-with-Agno" class="anchor-icon" translate="no">
+<h1 id="Integrate-Milvus-with-Agno" class="common-anchor-header">Integrar Milvus con Agno<button data-href="#Integrate-Milvus-with-Agno" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,9 +29,9 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/integrate_with_phidata.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://docs.agno.com/introduction">Agno</a>(formerly known as Phidata) is a lightweight library for building Multimodal Agents. It allows you to create multi-modal agents that can understand text, images, audio, and video, and leverage various tools and knowledge sources to accomplish complex tasks. Agno supports multi-agent orchestration, enabling teams of agents to collaborate and solve problems together. It also provides a beautiful Agent UI for interacting with your agents.</p>
-<p>Milvus vector database enable efficient storage and retrieval of information as embeddings. With Milvus and Agno, you can easily integrate your knowledge into your Agent workflows. This document is a basic guide on how to use Milvus integration with Agno.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p><a href="https://docs.agno.com/introduction">Agno</a>(antes conocido como Phidata) es una biblioteca ligera para construir agentes multimodales. Le permite crear agentes multimodales que pueden entender texto, imágenes, audio y vídeo, y aprovechar diversas herramientas y fuentes de conocimiento para realizar tareas complejas. Agno soporta la orquestación multi-agente, permitiendo a los equipos de agentes colaborar y resolver problemas juntos. También proporciona una interfaz de usuario de agente atractiva para interactuar con sus agentes.</p>
+<p>La base de datos vectorial Milvus permite almacenar y recuperar información de forma eficiente en forma de incrustaciones. Con Milvus y Agno, puede integrar fácilmente sus conocimientos en los flujos de trabajo de sus Agentes. Este documento es una guía básica sobre cómo utilizar la integración de Milvus con Agno.</p>
+<h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,18 +46,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Install the necessary dependencies:</p>
+    </button></h2><p>Instale las dependencias necesarias:</p>
 <pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Si está utilizando Google Colab, para habilitar las dependencias recién instaladas, es posible que tenga que <strong>reiniciar el tiempo de ejecución</strong> (haga clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla, y seleccione "Reiniciar sesión" en el menú desplegable).</p>
 </div>
-<p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>En este ejemplo utilizaremos OpenAI como LLM. Deberá preparar la <a href="https://platform.openai.com/docs/quickstart">clave api</a> <code translate="no">OPENAI_API_KEY</code> como variable de entorno.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-xxxx&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Initalize-Milvus" class="common-anchor-header">Initalize Milvus<button data-href="#Initalize-Milvus" class="anchor-icon" translate="no">
+<h2 id="Initalize-Milvus" class="common-anchor-header">Inicializar Milvus<button data-href="#Initalize-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +72,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Import the packages and initialize the Milvus vector database instance.</p>
+    </button></h2><p>Importe los paquetes e inicialice la instancia de la base de datos vectorial Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> agno.agent <span class="hljs-keyword">import</span> Agent
 <span class="hljs-keyword">from</span> agno.knowledge.pdf_url <span class="hljs-keyword">import</span> PDFUrlKnowledgeBase
 <span class="hljs-keyword">from</span> agno.vectordb.milvus <span class="hljs-keyword">import</span> Milvus
@@ -82,16 +83,16 @@ vector_db = Milvus(
     uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Specify the collection name and the uri and token(optinal) for your Milvus server.</p>
+<p>Especifique el nombre de la colección y el uri y token(optinal) para su servidor Milvus.</p>
 <div class="alert note">
-<p>Here is how to set the uri and token:</p>
+<p>Aquí se explica cómo establecer el uri y el token:</p>
 <ul>
-<li>If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
-<li>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>Si sólo necesita una base de datos vectorial local para datos a pequeña escala o prototipos, establecer el uri como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
+<li>Si tiene una gran escala de datos, digamos más de un millón de vectores, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. En esta configuración, por favor utilice la dirección del servidor y el puerto como su uri, por ejemplo<code translate="no">http://localhost:19530</code>. Si habilita la función de autenticación en Milvus, utilice "<your_username>:<your_password>" como token, de lo contrario no establezca el token.</li>
+<li>Si utiliza <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">punto final público y a la clave API</a> en Zilliz Cloud.</li>
 </ul>
 </div>
-<h2 id="Load-data" class="common-anchor-header">Load data<button data-href="#Load-data" class="anchor-icon" translate="no">
+<h2 id="Load-data" class="common-anchor-header">Cargar datos<button data-href="#Load-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,7 +107,7 @@ vector_db = Milvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Create a PDF url knowledage base instance and load the data into the instance. We use a public recipe pdf data as an example.</p>
+    </button></h2><p>Cree una instancia base de conocimiento de url PDF y cargue los datos en la instancia. Utilizamos los datos pdf de una receta pública como ejemplo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create knowledge base</span>
 knowledge_base = PDFUrlKnowledgeBase(
     urls=[<span class="hljs-string">&quot;https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf&quot;</span>],
@@ -120,7 +121,7 @@ INFO    Loading knowledge
 INFO    Reading: https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf       
 INFO    Added documents to knowledge base                                                                             
 </code></pre>
-<h2 id="Use-agent-to-response-to-a-question" class="common-anchor-header">Use agent to response to a question<button data-href="#Use-agent-to-response-to-a-question" class="anchor-icon" translate="no">
+<h2 id="Use-agent-to-response-to-a-question" class="common-anchor-header">Usar agente para responder a una pregunta<button data-href="#Use-agent-to-response-to-a-question" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,7 +136,7 @@ INFO    Added documents to knowledge base
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Integrate the knowledge base into an agent, then we can ask the agent a question and get a response.</p>
+    </button></h2><p>Integrar la base de conocimientos en un agente, entonces podemos hacer una pregunta al agente y obtener una respuesta.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create and use the agent</span>
 agent = Agent(knowledge=knowledge_base, show_tool_calls=<span class="hljs-literal">True</span>)
 
@@ -191,4 +192,4 @@ agent.print_response(<span class="hljs-string">&quot;How to make Tom Kha Gai&quo
 ┃                                                                                                                                                             ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<p>Congratulations, you have learned the basics of using Milvus in Agno. If you want to know more about how to use Agno, please refer to the <a href="https://docs.agno.com/introduction">official documentation</a>.</p>
+<p>Enhorabuena, ha aprendido lo básico sobre el uso de Milvus en Agno. Si desea saber más acerca de cómo utilizar Agno, por favor consulte la <a href="https://docs.agno.com/introduction">documentación oficial</a>.</p>

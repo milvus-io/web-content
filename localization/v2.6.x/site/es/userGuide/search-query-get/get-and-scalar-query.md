@@ -1,12 +1,12 @@
 ---
 id: get-and-scalar-query.md
-title: Query
+title: Consulta
 summary: >-
-  In addition to ANN searches, Milvus also supports metadata filtering through
-  queries. This page introduces how to use Query, Get, and QueryIterators to
-  perform metadata filtering.
+  Además de las búsquedas RNA, Milvus también soporta el filtrado de metadatos a
+  través de consultas. Esta página presenta cómo utilizar Query, Get y
+  QueryIterators para realizar el filtrado de metadatos.
 ---
-<h1 id="Query" class="common-anchor-header">Query<button data-href="#Query" class="anchor-icon" translate="no">
+<h1 id="Query" class="common-anchor-header">Consulta<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,11 +21,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.</p>
+    </button></h1><p>Además de las búsquedas RNA, Milvus también soporta el filtrado de metadatos a través de consultas. Esta página presenta cómo utilizar Query, Get y QueryIterators para realizar el filtrado de metadatos.</p>
 <div class="alert note">
-<p>If you dynamically add new fields after the collection has been created, queries that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+<p>Si añade dinámicamente nuevos campos después de haber creado la colección, las consultas que incluyan estos campos devolverán los valores por defecto definidos o NULL para las entidades que no hayan establecido valores explícitamente. Para obtener más información, consulte <a href="/docs/es/add-fields-to-an-existing-collection.md">Añadir campos a una colección existente</a>.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,68 +40,68 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A Collection can store various types of scalar fields. You can have Milvus filter Entities based on one or more scalar fields. Milvus offers three types of queries: Query, Get, and QueryIterator. The table below compares these three query types.</p>
+    </button></h2><p>Una Colección puede almacenar varios tipos de campos escalares. Puede hacer que Milvus filtre Entidades basándose en uno o más campos escalares. Milvus ofrece tres tipos de consultas: Query, Get y QueryIterator. La siguiente tabla compara estos tres tipos de consulta.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Get</p></th>
-     <th><p>Query</p></th>
+     <th><p>Obtener</p></th>
+     <th><p>Consulta</p></th>
      <th><p>QueryIterator</p></th>
    </tr>
    <tr>
-     <td><p>Applicable scenarios</p></td>
-     <td><p>To find entities that hold the specified primary keys.</p></td>
-     <td><p>To find all or a specified number of entities that meet the custom filtering conditions</p></td>
-     <td><p>To find all entities that meet the custom filtering conditions in paginated queries.</p></td>
+     <td><p>Escenarios aplicables</p></td>
+     <td><p>Para encontrar entidades que contengan las claves primarias especificadas.</p></td>
+     <td><p>Para encontrar todas o un número determinado de entidades que cumplan las condiciones de filtrado personalizadas.</p></td>
+     <td><p>Para encontrar todas las entidades que cumplen las condiciones de filtrado personalizadas en consultas paginadas.</p></td>
    </tr>
    <tr>
-     <td><p>Filtering method</p></td>
-     <td><p>By primary keys</p></td>
-     <td><p>By filtering expressions.</p></td>
-     <td><p>By filtering expressions.</p></td>
+     <td><p>Método de filtrado</p></td>
+     <td><p>Por claves primarias</p></td>
+     <td><p>Por expresiones de filtrado.</p></td>
+     <td><p>Por expresiones de filtrado.</p></td>
    </tr>
    <tr>
-     <td><p>Mandatory parameters</p></td>
+     <td><p>Parámetros obligatorios</p></td>
      <td><ul>
-<li>Collection name</li>
-<li>Primary keys</li>
+<li>Nombre de la colección</li>
+<li>Claves primarias</li>
 </ul></td>
      <td><ul>
-<li>Collection name</li>
-<li>Filtering expressions</li>
+<li>Nombre de la colección</li>
+<li>Expresiones de filtrado</li>
 </ul></td>
      <td><ul>
-<li><p>Collection name</p></li>
-<li><p>Filtering expressions</p></li>
-<li><p>Number of entities to return per query</p></li>
-</ul></td>
-   </tr>
-   <tr>
-     <td><p>Optional parameters</p></td>
-     <td><ul>
-<li>Partition name</li>
-<li>Output fields</li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return</p></li>
-<li><p>Output fields</p></li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return in total</p></li>
-<li><p>Output fields</p></li>
+<li><p>Nombre de la colección</p></li>
+<li><p>Expresiones de filtrado</p></li>
+<li><p>Número de entidades a devolver por consulta</p></li>
 </ul></td>
    </tr>
    <tr>
-     <td><p>Returns</p></td>
-     <td><p>Returns entities that hold the specified primary keys in the specified collection or partition.</p></td>
-     <td><p>Returns all or a specified number of entities that meet the custom filtering conditions in the specified collection or partition.</p></td>
-     <td><p>Returns all entities that meet the custom filtering conditions in the specified collection or partition through paginated queries.</p></td>
+     <td><p>Parámetros opcionales</p></td>
+     <td><ul>
+<li>Nombre de la partición</li>
+<li>Campos de salida</li>
+</ul></td>
+     <td><ul>
+<li><p>Nombre de la partición</p></li>
+<li><p>Número de entidades a devolver</p></li>
+<li><p>Campos de salida</p></li>
+</ul></td>
+     <td><ul>
+<li><p>Nombre de la partición</p></li>
+<li><p>Número de entidades a devolver en total</p></li>
+<li><p>Campos de salida</p></li>
+</ul></td>
+   </tr>
+   <tr>
+     <td><p>Devuelve</p></td>
+     <td><p>Devuelve las entidades que tienen las claves primarias especificadas en la colección o partición especificada.</p></td>
+     <td><p>Devuelve todas o un número especificado de entidades que cumplen las condiciones de filtrado personalizadas en la colección o partición especificada.</p></td>
+     <td><p>Devuelve todas las entidades que cumplen las condiciones de filtrado personalizadas en la colección o partición especificada mediante consultas paginadas.</p></td>
    </tr>
 </table>
-<p>For more on metadata filtering, refer to .</p>
-<h2 id="Use-Get" class="common-anchor-header">Use Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>Para obtener más información sobre el filtrado de metadatos, consulte .</p>
+<h2 id="Use-Get" class="common-anchor-header">Uso de Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -116,7 +116,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by their primary keys, you can use the <strong>Get</strong> method. The following code examples assume that there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> in your collection and return the entities with primary keys <code translate="no">1</code>, <code translate="no">2</code>, and <code translate="no">3</code>.</p>
+    </button></h2><p>Cuando necesite encontrar entidades por sus claves primarias, puede utilizar el método <strong>Get</strong>. Los siguientes ejemplos de código suponen que hay tres campos llamados <code translate="no">id</code>, <code translate="no">vector</code>, y <code translate="no">color</code> en su colección y devuelven las entidades con claves primarias <code translate="no">1</code>, <code translate="no">2</code>, y <code translate="no">3</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -130,14 +130,9 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>You can get entities by their IDs as follows.</p>
+<p>Puedes obtener entidades por sus IDs de la siguiente manera.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -244,7 +239,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query" class="common-anchor-header">Use Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
+<h2 id="Use-Query" class="common-anchor-header">Utilizar consulta<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -259,14 +254,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by custom filtering conditions, use the <strong>Query</strong> method. The following code examples assume there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> and return the specified number of entities that hold a <code translate="no">color</code> value starting with <code translate="no">red</code>.</p>
+    </button></h2><p>Cuando necesites encontrar entidades mediante condiciones de filtrado personalizadas, utiliza el método <strong>Query</strong>. Los siguientes ejemplos de código asumen que hay tres campos llamados <code translate="no">id</code>, <code translate="no">vector</code>, y <code translate="no">color</code> y devuelven el número especificado de entidades que tienen un valor <code translate="no">color</code> empezando por <code translate="no">red</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -344,7 +334,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;red_4794&quot;,&quot;id&quot;:4,&quot;vector&quot;:[0.44523495,-0.8757027,0.82207793,0.4640629,0.3033748]},{&quot;color&quot;:&quot;red_9392&quot;,&quot;id&quot;:6,&quot;vector&quot;:[0.8371978,-0.015764369,-0.31062937,-0.56266695,-0.8984948]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-QueryIterator" class="common-anchor-header">Use QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
+<h2 id="Use-QueryIterator" class="common-anchor-header">Utilizar QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -359,14 +349,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by custom filtering conditions through paginated queries, create a <strong>QueryIterator</strong> and use its <strong>next()</strong> method to iterate over all entities to find those meeting the filtering conditions. The following code examples assume that there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> and return all entities that hold a <code translate="no">color</code> value starting with <code translate="no">red</code>.</p>
+    </button></h2><p>Cuando necesites encontrar entidades por condiciones de filtrado personalizadas a través de consultas paginadas, crea un <strong>QueryIterator</strong> y utiliza su método <strong>next()</strong> para iterar sobre todas las entidades y encontrar aquellas que cumplan las condiciones de filtrado. Los siguientes ejemplos de código asumen que hay tres campos llamados <code translate="no">id</code>, <code translate="no">vector</code>, y <code translate="no">color</code> y devuelven todas las entidades que tienen un valor <code translate="no">color</code> empezando por <code translate="no">red</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -443,7 +428,7 @@ results = []
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Not available</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-in-Partitions" class="common-anchor-header">Queries in Partitions<button data-href="#Queries-in-Partitions" class="anchor-icon" translate="no">
+<h2 id="Queries-in-Partitions" class="common-anchor-header">Consultas en particiones<button data-href="#Queries-in-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -458,14 +443,9 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also perform queries within one or multiple partitions by including the partition names in the Get, Query, or QueryIterator request. The following code examples assume that there is a partition named <strong>PartitionA</strong> in the collection.</p>
+    </button></h2><p>También puedes realizar consultas dentro de una o múltiples particiones incluyendo los nombres de las particiones en la petición Get, Query o QueryIterator. Los siguientes ejemplos de código asumen que hay una partición llamada <strong>PartitionA</strong> en la colección.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,

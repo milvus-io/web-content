@@ -74,7 +74,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para construir un índice <code translate="no">HNSW</code> en un campo vectorial en Milvus, utilice el método <code translate="no">add_index()</code>, especificando los parámetros <code translate="no">index_type</code>, <code translate="no">metric_type</code>, y adicionales para el índice.</p>
+    </button></h2><p>Para construir un índice <code translate="no">HNSW</code> sobre un campo vectorial en Milvus, utilice el método <code translate="no">add_index()</code>, especificando los parámetros <code translate="no">index_type</code>, <code translate="no">metric_type</code>, y adicionales para el índice.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -102,7 +102,7 @@ index_params.add_index(
 </ul>
 <p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">HNSW</code>, consulte <a href="/docs/es/hnsw.md#Index-building-params">Parámetros de construcción</a> del <a href="/docs/es/hnsw.md#Index-building-params">índice</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando el método <code translate="no">create_index()</code> directamente o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +169,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>Número máximo de conexiones （o aristas) que puede tener cada nodo en el grafo, incluyendo tanto las aristas salientes como las entrantes. Este parámetro afecta directamente tanto a la construcción del índice como a la búsqueda.</p></td>
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [2, 2048]</p><p><strong>Valor por defecto</strong>: <code translate="no">30</code> (hasta 30 aristas salientes y 30 entrantes por nodo)</p></td>
-     <td><p>Un valor mayor de <code translate="no">M</code> suele dar lugar a <strong>una mayor precisión</strong>, pero <strong>aumenta la sobrecarga de memoria</strong> y <strong>ralentiza tanto la construcción del índice como la búsqueda</strong>. Considere la posibilidad de aumentar <code translate="no">M</code> para conjuntos de datos con alta dimensionalidad o cuando sea crucial una alta recuperación.</p><p>Considere la posibilidad de reducir <code translate="no">M</code> cuando el uso de memoria y la velocidad de búsqueda sean las principales preocupaciones.</p><p>En la mayoría de los casos, se recomienda establecer un valor dentro de este intervalo: [5, 100].</p></td>
+     <td><p>Un valor mayor de <code translate="no">M</code> suele dar lugar a <strong>una mayor precisión</strong>, pero <strong>aumenta la sobrecarga de memoria</strong> y <strong>ralentiza tanto la construcción del índice como la búsqueda</strong>. Considere la posibilidad de aumentar <code translate="no">M</code> para conjuntos de datos de alta dimensionalidad o cuando sea crucial una alta recuperación.</p><p>Considere la posibilidad de reducir <code translate="no">M</code> cuando el uso de memoria y la velocidad de búsqueda sean las principales preocupaciones.</p><p>En la mayoría de los casos, se recomienda establecer un valor dentro de este intervalo: [5, 100].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>

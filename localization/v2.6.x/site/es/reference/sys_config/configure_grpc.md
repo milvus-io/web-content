@@ -2,9 +2,9 @@
 id: configure_grpc.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure grpc for Milvus.
+summary: Aprenda a configurar grpc para Milvus.
 ---
-<h1 id="grpc-related-Configurations" class="common-anchor-header">grpc-related Configurations<button data-href="#grpc-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="grpc-related-Configurations" class="common-anchor-header">Configuraciones relacionadas con grpc<button data-href="#grpc-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure grpc for Milvus.
     </button></h2><table id="grpc.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        second, time to wait graceful stop finish      </td>
+      <td>        second, tiempo de espera para finalizar graceful stop    </td>
       <td>10</td>
     </tr>
   </tbody>

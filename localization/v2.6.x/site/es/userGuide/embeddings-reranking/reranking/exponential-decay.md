@@ -157,7 +157,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>El decaimiento exponencial puede aplicarse tanto a la búsqueda vectorial estándar como a las operaciones de búsqueda híbrida en Milvus. A continuación se muestran los fragmentos de código clave para implementar esta función.</p>
 <div class="alert note">
-<p>Antes de utilizar las funciones de decaimiento, primero debe crear una colección con los campos numéricos apropiados (como marcas de tiempo, distancias, etc.) que se utilizarán para los cálculos de decaimiento. Para ver ejemplos de trabajo completos que incluyan la configuración de la colección, la definición del esquema y la inserción de datos, consulte el <a href="/docs/es/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial del Clasificador por Decaimiento</a>.</p>
+<p>Antes de utilizar las funciones de decaimiento, primero debe crear una colección con campos numéricos apropiados (como marcas de tiempo, distancias, etc.) que se utilizarán para los cálculos de decaimiento. Para ver ejemplos de trabajo completos que incluyan la configuración de la colección, la definición del esquema y la inserción de datos, consulte el <a href="/docs/es/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial del Clasificador por Decaimiento</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Crear un clasificador de descomposición</h3><p>Una vez configurada la colección con un campo numérico (en este ejemplo, <code translate="no">publish_time</code>), cree un clasificador de decaimiento exponencial:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

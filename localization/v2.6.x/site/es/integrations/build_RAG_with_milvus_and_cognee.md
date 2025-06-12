@@ -1,9 +1,9 @@
 ---
 id: build_RAG_with_milvus_and_cognee.md
 summary: >-
-  In this tutorial, we will show you how to build a RAG (Retrieval-Augmented
-  Generation) pipeline with Milvus and Cognee.
-title: Build RAG with Milvus and Cognee
+  En este tutorial, le mostraremos cómo construir un pipeline RAG
+  (Retrieval-Augmented Generation) con Milvus y Cognee.
+title: Construir RAG con Milvus y Cognee
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -11,16 +11,16 @@ title: Build RAG with Milvus and Cognee
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_cognee.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h3 id="Build-RAG-with-Milvus-and-Cognee" class="common-anchor-header">Build RAG with Milvus and Cognee</h3><p><a href="https://www.cognee.ai">Cognee</a> is a developer-first platform that streamlines AI application development with scalable, modular ECL (Extract, Cognify, Load) pipelines. By integrating seamlessly with Milvus,  Cognee enables efficient connection and retrieval of conversations, documents, and transcriptions, reducing hallucinations and optimizing operational costs.</p>
-<p>With strong support for vector stores like Milvus, graph databases, and LLMs, Cognee provides a flexible and customizable framework for building retrieval-augmented generation (RAG) systems. Its production-ready architecture ensures improved accuracy and efficiency for AI-powered applications.</p>
-<p>In this tutorial, we will show you how to build a RAG (Retrieval-Augmented Generation) pipeline with Milvus and Cognee.</p>
+<h3 id="Build-RAG-with-Milvus-and-Cognee" class="common-anchor-header">Construir RAG con Milvus y Cognee</h3><p><a href="https://www.cognee.ai">Cognee</a> es una plataforma "developer-first" que agiliza el desarrollo de aplicaciones de IA con pipelines ECL (Extract, Cognify, Load) escalables y modulares. Al integrarse perfectamente con Milvus, Cognee permite una conexión y recuperación eficientes de conversaciones, documentos y transcripciones, reduciendo las alucinaciones y optimizando los costes operativos.</p>
+<p>Con un sólido soporte para almacenes vectoriales como Milvus, bases de datos de grafos y LLM, Cognee proporciona un marco flexible y personalizable para construir sistemas de generación aumentada de recuperación (RAG). Su arquitectura lista para la producción garantiza una mayor precisión y eficiencia para las aplicaciones impulsadas por IA.</p>
+<p>En este tutorial, le mostraremos cómo construir una canalización RAG (Retrieval-Augmented Generation) con Milvus y Cognee.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus git+https://github.com/topoteretes/cognee.git</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Si estás utilizando Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla, y selecciona "Reiniciar sesión" en el menú desplegable).</p>
 </blockquote>
-<p>By default, it use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a>, and set it in the config <code translate="no">set_llm_api_key()</code> function.</p>
-<p>To configure Milvus as the vector database, set the <code translate="no">VECTOR_DB_PROVIDER</code> to <code translate="no">milvus</code> and specify the <code translate="no">VECTOR_DB_URL</code> and <code translate="no">VECTOR_DB_KEY</code>. Since we are using Milvus Lite to store data in this demo, only the <code translate="no">VECTOR_DB_URL</code> needs to be provided.</p>
+<p>Por defecto, utiliza OpenAI como LLM en este ejemplo. Debe preparar la <a href="https://platform.openai.com/docs/quickstart">clave api</a>, y establecerla en la función config <code translate="no">set_llm_api_key()</code>.</p>
+<p>Para configurar Milvus como la base de datos vectorial, establezca el <code translate="no">VECTOR_DB_PROVIDER</code> a <code translate="no">milvus</code> y especifique el <code translate="no">VECTOR_DB_URL</code> y <code translate="no">VECTOR_DB_KEY</code>. Dado que en esta demo utilizamos Milvus Lite para almacenar datos, sólo es necesario proporcionar <code translate="no">VECTOR_DB_URL</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-keyword">import</span> cognee
@@ -32,19 +32,19 @@ os.environ[<span class="hljs-string">&quot;VECTOR_DB_PROVIDER&quot;</span>] = <s
 os.environ[<span class="hljs-string">&quot;VECTOR_DB_URL&quot;</span>] = <span class="hljs-string">&quot;./milvus.db&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the environment variables <code translate="no">VECTOR_DB_URL</code> and <code translate="no">VECTOR_DB_KEY</code>:</p>
+<p>En cuanto a las variables de entorno <code translate="no">VECTOR_DB_URL</code> y <code translate="no">VECTOR_DB_KEY</code>:</p>
 <ul>
-<li>Setting the <code translate="no">VECTOR_DB_URL</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">VECTOR_DB_URL</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">VECTOR_DB_URL</code> and <code translate="no">VECTOR_DB_KEY</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Establecer <code translate="no">VECTOR_DB_URL</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
+<li>Si tiene una gran escala de datos, puede configurar un servidor Milvus de mayor rendimiento en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">VECTOR_DB_URL</code>.</li>
+<li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">VECTOR_DB_URL</code> y <code translate="no">VECTOR_DB_KEY</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">punto final público y a la clave Api</a> en Zilliz Cloud.</li>
 </ul>
 <p></a></p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Prepare the data</h3><p>We use the FAQ pages from the <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
-<p>Download the zip file and extract documents to the folder <code translate="no">milvus_docs</code>.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Preparar los datos</h3><p>Utilizamos las páginas de preguntas frecuentes de la <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentación de Milvus 2.4.x</a> como conocimiento privado en nuestra RAG, que es una buena fuente de datos para una canalización RAG sencilla.</p>
+<p>Descargamos el archivo zip y extraemos los documentos a la carpeta <code translate="no">milvus_docs</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
+<p>Cargamos todos los archivos markdown de la carpeta <code translate="no">milvus_docs/en/faq</code>. Para cada documento, simplemente utilizamos "# " para separar el contenido del archivo, lo que puede separar aproximadamente el contenido de cada parte principal del archivo markdown.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -55,7 +55,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Build-RAG" class="common-anchor-header">Build RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
+<h2 id="Build-RAG" class="common-anchor-header">Construir RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,18 +70,18 @@ text_lines = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Resetting-Cognee-Data" class="common-anchor-header">Resetting Cognee Data</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.prune.prune_data()
+    </button></h2><h3 id="Resetting-Cognee-Data" class="common-anchor-header">Restablecer los datos de Cognee</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.prune.prune_data()
 <span class="hljs-keyword">await</span> cognee.prune.prune_system(metadata=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>With a clean slate ready, we can now add our dataset and process it into a knowledge graph.</p>
-<h3 id="Adding-Data-and-Cognifying" class="common-anchor-header">Adding Data and Cognifying</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.add(data=text_lines, dataset_name=<span class="hljs-string">&quot;milvus_faq&quot;</span>)
+<p>Con una pizarra limpia lista, ahora podemos añadir nuestro conjunto de datos y procesarlo en un gráfico de conocimiento.</p>
+<h3 id="Adding-Data-and-Cognifying" class="common-anchor-header">Añadir datos y Cognee</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.add(data=text_lines, dataset_name=<span class="hljs-string">&quot;milvus_faq&quot;</span>)
 <span class="hljs-keyword">await</span> cognee.cognify()
 
 <span class="hljs-comment"># [DocumentChunk(id=UUID(&#x27;6889e7ef-3670-555c-bb16-3eb50d1d30b0&#x27;), updated_at=datetime.datetime(2024, 12, 4, 6, 29, 46, 472907, tzinfo=datetime.timezone.utc), text=&#x27;Does the query perform in memory? What are incremental data and historical data?\n\nYes. When ...</span>
 <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">add</code> method loads the dataset (Milvus FAQs) into Cognee and the <code translate="no">cognify</code> method processes the data to extract entities, relationships, and summaries, constructing a knowledge graph.</p>
-<h3 id="Querying-for-Summaries" class="common-anchor-header">Querying for Summaries</h3><p>Now that the data has been processed, let’s query the knowledge graph.</p>
+<p>El método <code translate="no">add</code> carga el conjunto de datos (Milvus FAQs) en Cognee y el método <code translate="no">cognify</code> procesa los datos para extraer entidades, relaciones y resúmenes, construyendo un grafo de conocimiento.</p>
+<h3 id="Querying-for-Summaries" class="common-anchor-header">Consulta de resúmenes</h3><p>Una vez procesados los datos, vamos a consultar el grafo de conocimiento.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.api.v1.search <span class="hljs-keyword">import</span> SearchType
 
 query_text = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
@@ -91,14 +91,14 @@ search_results = <span class="hljs-keyword">await</span> cognee.search(SearchTyp
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'id': 'de5c6713-e079-5d0b-b11d-e9bacd1e0d73', 'text': 'Milvus stores two data types: inserted data and metadata.'}
 </code></pre>
-<p>This query searches the knowledge graph for a summary related to the query text, and the most related candidate is printed.</p>
-<h3 id="Querying-for-Chunks" class="common-anchor-header">Querying for Chunks</h3><p>Summaries offer high-level insights, but for more granular details, we can query specific chunks of data directly from the processed dataset. These chunks are derived from the original data that was added and analyzed during the knowledge graph creation.</p>
+<p>Esta consulta busca en el grafo de conocimiento un resumen relacionado con el texto de la consulta, y se imprime el candidato más relacionado.</p>
+<h3 id="Querying-for-Chunks" class="common-anchor-header">Consulta de fragmentos</h3><p>Los resúmenes ofrecen información de alto nivel, pero para obtener detalles más detallados, podemos consultar fragmentos específicos de datos directamente desde el conjunto de datos procesado. Estos fragmentos se derivan de los datos originales que se añadieron y analizaron durante la creación del gráfico de conocimiento.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.api.v1.search <span class="hljs-keyword">import</span> SearchType
 
 query_text = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 search_results = <span class="hljs-keyword">await</span> cognee.search(SearchType.CHUNKS, query_text=query_text)
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s format and display it for better readability!</p>
+<p>Formateémoslos y visualicémoslos para facilitar su lectura.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_and_print</span>(<span class="hljs-params">data</span>):
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;ID:&quot;</span>, data[<span class="hljs-string">&quot;id&quot;</span>])
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nText:\n&quot;</span>)
@@ -124,12 +124,12 @@ Metadata are generated within Milvus. Each Milvus module has its own metadata th
 
 ###
 </code></pre>
-<p>In our previous steps, we queried the Milvus FAQ dataset for both summaries and specific chunks of data. While this provided detailed insights and granular information, the dataset was large, making it challenging to clearly visualize the dependencies within the knowledge graph.</p>
-<p>To address this, we will reset the Cognee environment and work with a smaller, more focused dataset. This will allow us to better demonstrate the relationships and dependencies extracted during the cognify process. By simplifying the data, we can clearly see how Cognee organizes and structures information in the knowledge graph.</p>
-<h3 id="Reset-Cognee" class="common-anchor-header">Reset Cognee</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.prune.prune_data()
+<p>En los pasos anteriores, consultamos el conjunto de datos de preguntas frecuentes de Milvus para obtener resúmenes y fragmentos específicos de datos. Aunque esto proporcionó información detallada y granular, el conjunto de datos era grande, lo que dificultaba la visualización clara de las dependencias dentro del gráfico de conocimiento.</p>
+<p>Para solucionar este problema, reiniciaremos el entorno Cognee y trabajaremos con un conjunto de datos más pequeño y específico. Esto nos permitirá demostrar mejor las relaciones y dependencias extraídas durante el proceso de Cognee. Al simplificar los datos, podemos ver claramente cómo Cognee organiza y estructura la información en el grafo de conocimiento.</p>
+<h3 id="Reset-Cognee" class="common-anchor-header">Reiniciar Cognee</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">await</span> cognee.prune.prune_data()
 <span class="hljs-keyword">await</span> cognee.prune.prune_system(metadata=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Adding-the-Focused-Dataset" class="common-anchor-header">Adding the Focused Dataset</h3><p>Here, a smaller dataset with only one line of text is added and processed to ensure a focused and easily interpretable knowledge graph.</p>
+<h3 id="Adding-the-Focused-Dataset" class="common-anchor-header">Añadir el conjunto de datos focalizado</h3><p>Aquí, un conjunto de datos más pequeño con sólo una línea de texto es añadido y procesado para asegurar un grafo de conocimiento enfocado y fácilmente interpretable.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># We only use one line of text as the dataset, which simplifies the output later</span>
 text = <span class="hljs-string">&quot;&quot;&quot;
     Natural language processing (NLP) is an interdisciplinary
@@ -139,7 +139,7 @@ text = <span class="hljs-string">&quot;&quot;&quot;
 <span class="hljs-keyword">await</span> cognee.add(text)
 <span class="hljs-keyword">await</span> cognee.cognify()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Querying-for-Insights" class="common-anchor-header">Querying for Insights</h3><p>By focusing on this smaller dataset, we can now clearly analyze the relationships and structure within the knowledge graph.</p>
+<h3 id="Querying-for-Insights" class="common-anchor-header">Búsqueda de información</h3><p>Al centrarnos en este conjunto de datos más pequeño, podemos analizar claramente las relaciones y la estructura del gráfico de conocimiento.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;Tell me about NLP&quot;</span>
 search_results = <span class="hljs-keyword">await</span> cognee.search(SearchType.INSIGHTS, query_text=query_text)
 
@@ -155,5 +155,5 @@ search_results = <span class="hljs-keyword">await</span> cognee.search(SearchTyp
 <span class="hljs-comment"># - The second element is the relationship between nodes (e.g., &#x27;is_a_subfield_of&#x27;).</span>
 <span class="hljs-comment"># - The third element is the target node (e.g., &#x27;computer science&#x27;).</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This output represents the results of a knowledge graph query, showcasing entities (nodes) and their relationships (edges) as extracted from the processed dataset. Each tuple includes a source entity, a relationship type, and a target entity, along with metadata like unique IDs, descriptions, and timestamps. The graph highlights key concepts and their semantic connections, providing a structured understanding of the dataset.</p>
-<p>Congratulations, you have learned the basic usage of cognee with Milvus. If you want to know more advanced usage of cognee, please refer to its official <a href="https://github.com/topoteretes/cognee">page</a> .</p>
+<p>Esta salida representa los resultados de una consulta del grafo de conocimiento, mostrando las entidades (nodos) y sus relaciones (aristas) extraídas del conjunto de datos procesado. Cada tupla incluye una entidad de origen, un tipo de relación y una entidad de destino, junto con metadatos como identificadores únicos, descripciones y marcas de tiempo. El gráfico destaca los conceptos clave y sus conexiones semánticas, proporcionando una comprensión estructurada del conjunto de datos.</p>
+<p>Enhorabuena, ha aprendido el uso básico de cognee con Milvus. Si desea conocer el uso más avanzado de cognee, por favor consulte su <a href="https://github.com/topoteretes/cognee">página</a> oficial .</p>

@@ -279,7 +279,7 @@ res = MilvusClient.search(
      <td><p>Vamana</p></td>
      <td><p><code translate="no">beam_width_ratio</code></p></td>
      <td><p>Controla el grado de paralelismo durante la búsqueda determinando el número máximo de peticiones de E/S de disco paralelas en relación con el número de núcleos de CPU disponibles.</p></td>
-     <td><p><strong>Tipo</strong>: Float <strong>Rango</strong>: [1, max(128 / número de CPU, 16)]</p>
+     <td><p><strong>Tipo</strong>: Float <strong>Rango</strong>: [1, max(128 / número CPU, 16)]</p>
 <p><strong>Valor por defecto</strong>: <code translate="no">4.0</code></p></td>
      <td><p>Los valores más altos aumentan el paralelismo, lo que puede acelerar la búsqueda en sistemas con CPUs y SSDs potentes. En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [1.0, 4.0].</p></td>
    </tr>

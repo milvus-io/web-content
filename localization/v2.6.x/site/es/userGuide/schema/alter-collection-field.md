@@ -1,11 +1,12 @@
 ---
 id: alter-collection-field.md
-title: Alter Collection Field
+title: Modificar un campo de recopilación
 summary: >-
-  You can alter the properties of a collection field to change column
-  constraints or enforce stricter data integrity rules.
+  Puede modificar las propiedades de un campo de colección para cambiar las
+  restricciones de columna o aplicar reglas de integridad de datos más
+  estrictas.
 ---
-<h1 id="Alter-Collection-Field" class="common-anchor-header">Alter Collection Field<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Field" class="common-anchor-header">Modificar un campo de recopilación<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,14 +21,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can alter the properties of a collection field to change column constraints or enforce stricter data integrity rules.</p>
+    </button></h1><p>Puede modificar las propiedades de un campo de colección para cambiar las restricciones de columna o aplicar reglas de integridad de datos más estrictas.</p>
 <div class="alert note">
 <ul>
-<li><p>Each collection consists of only one primary field. Once set during collection creation, you cannot change the primary field or alter its properties.</p></li>
-<li><p>Each collection can have only one partition key. Once set during collection creation, you cannot change the partition key.</p></li>
+<li><p>Cada colección consta de un único campo primario. Una vez establecido durante la creación de la colección, no se puede cambiar el campo primario ni alterar sus propiedades.</p></li>
+<li><p>Cada colección sólo puede tener una clave de partición. Una vez establecida durante la creación de la colección, no se puede cambiar la clave de partición.</p></li>
 </ul>
 </div>
-<h2 id="Alter-VarChar-field" class="common-anchor-header">Alter VarChar field<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
+<h2 id="Alter-VarChar-field" class="common-anchor-header">Alterar un campo VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,12 +43,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A VarChar field has a property named <code translate="no">max_length</code>, which constrains the maximum number of characters the field values can contain. You can change the <code translate="no">max_length</code> property.</p>
-<p>The following example assumes the collection has a VarChar field named <code translate="no">varchar</code> and sets its <code translate="no">max_length</code> property.</p>
+    </button></h2><p>Un campo VarChar tiene una propiedad llamada <code translate="no">max_length</code>, que limita el número máximo de caracteres que pueden contener los valores del campo. Puede modificar la propiedad <code translate="no">max_length</code>.</p>
+<p>El siguiente ejemplo asume que la colección tiene un campo VarChar llamado <code translate="no">varchar</code> y establece su propiedad <code translate="no">max_length</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -80,10 +79,7 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <div class="multipleCode">
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionFieldProperties</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">LOAD_COLLECTION_NAME</span>,
   <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;varchar&#x27;</span>,
@@ -133,7 +129,7 @@ curl --request POST \
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alter-ARRAY-field" class="common-anchor-header">Alter ARRAY field<button data-href="#Alter-ARRAY-field" class="anchor-icon" translate="no">
+<h2 id="Alter-ARRAY-field" class="common-anchor-header">Alterar campo ARRAY<button data-href="#Alter-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,15 +144,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>An array field has two properties, namely <code translate="no">element_type</code> and <code translate="no">max_capacity</code>. The former determines the data type of the elements in an array, while the latter constrains the maximum number of elements in the array. You can change the <code translate="no">max_capacity</code> property only.</p>
-<p>The following example assumes the collection has an array field named <code translate="no">array</code> and sets its <code translate="no">max_capacity</code> property.</p>
+    </button></h2><p>Un campo array tiene dos propiedades, <code translate="no">element_type</code> y <code translate="no">max_capacity</code>. La primera determina el tipo de datos de los elementos de un array, mientras que la segunda limita el número máximo de elementos del array. Sólo se puede modificar la propiedad <code translate="no">max_capacity</code>.</p>
+<p>El siguiente ejemplo asume que la colección tiene un campo array llamado <code translate="no">array</code> y establece su propiedad <code translate="no">max_capacity</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;array&quot;</span>,
@@ -199,7 +190,7 @@ curl --request POST \
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">Alter field-level mmap settings<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
+<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">Modificar la configuración mmap a nivel de campo<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -214,15 +205,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize data placement policy based on access frequency, expanding storage capacity for collections without impacting search performance.</p>
-<p>The following example assumes the collection has a field named <code translate="no">doc_chunk</code> and sets its <code translate="no">mmap_enabled</code> property.</p>
+    </button></h2><p>El mapeo de memoria (Mmap) permite el acceso directo en memoria a archivos grandes en disco, permitiendo a Milvus almacenar índices y datos tanto en memoria como en discos duros. Este enfoque ayuda a optimizar la política de colocación de datos basada en la frecuencia de acceso, ampliando la capacidad de almacenamiento de las colecciones sin afectar al rendimiento de la búsqueda.</p>
+<p>El siguiente ejemplo asume que la colección tiene un campo llamado <code translate="no">doc_chunk</code> y establece su propiedad <code translate="no">mmap_enabled</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,

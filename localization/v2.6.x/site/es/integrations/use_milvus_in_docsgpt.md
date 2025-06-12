@@ -1,11 +1,11 @@
 ---
 id: use_milvus_in_docsgpt.md
 summary: >-
-  In this tutorial, we will show you how to use Milvus as the backend vector
-  database for DocsGPT.
-title: Use Milvus in DocsGPT
+  En este tutorial, le mostraremos cómo utilizar Milvus como base de datos
+  vectorial backend para DocsGPT.
+title: Utilizar Milvus en DocsGPT
 ---
-<h1 id="Use-Milvus-in-DocsGPT" class="common-anchor-header">Use Milvus in DocsGPT<button data-href="#Use-Milvus-in-DocsGPT" class="anchor-icon" translate="no">
+<h1 id="Use-Milvus-in-DocsGPT" class="common-anchor-header">Utilizar Milvus en DocsGPT<button data-href="#Use-Milvus-in-DocsGPT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,12 +20,12 @@ title: Use Milvus in DocsGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/arc53/DocsGPT">DocsGPT</a> is an advanced open-source solution that simplifies finding information in project documentation by integrating powerful GPT models. It enables developers to get accurate answers to their questions about a project easily, eliminating time-consuming manual searches.</p>
-<p>In this tutorial, we will show you how to use Milvus as the backend vector database for DocsGPT.</p>
+    </button></h1><p><a href="https://github.com/arc53/DocsGPT">DocsGPT</a> es una solución avanzada de código abierto que simplifica la búsqueda de información en la documentación de proyectos mediante la integración de potentes modelos GPT. Permite a los desarrolladores obtener fácilmente respuestas precisas a sus preguntas sobre un proyecto, eliminando las búsquedas manuales que tanto tiempo consumen.</p>
+<p>En este tutorial, le mostraremos cómo utilizar Milvus como base de datos vectorial backend para DocsGPT.</p>
 <div class="alert note">
-<p>This tutorial is mainly referred to the <a href="https://github.com/arc53/DocsGPT?tab=readme-ov-file#quickstart">DocsGPT</a> official installation guide. If you find that this tutorial has outdated parts, you can prioritize following the official guide and create an issue to us.</p>
+<p>Este tutorial hace referencia principalmente a la guía de instalación oficial de <a href="https://github.com/arc53/DocsGPT?tab=readme-ov-file#quickstart">DocsGPT</a>. Si encuentra que este tutorial tiene partes desactualizadas, puede priorizar seguir la guía oficial y crearnos un issue.</p>
 </div>
-<h2 id="Requirements" class="common-anchor-header">Requirements<button data-href="#Requirements" class="anchor-icon" translate="no">
+<h2 id="Requirements" class="common-anchor-header">Requisitos<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,8 +40,8 @@ title: Use Milvus in DocsGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Make sure you have <a href="https://docs.docker.com/engine/install/">Docker</a> installed</p>
-<h2 id="Clone-the-repository" class="common-anchor-header">Clone the repository<button data-href="#Clone-the-repository" class="anchor-icon" translate="no">
+    </button></h2><p>Asegúrate de tener <a href="https://docs.docker.com/engine/install/">Docker</a> instalado</p>
+<h2 id="Clone-the-repository" class="common-anchor-header">Clonar el repositorio<button data-href="#Clone-the-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,11 +56,11 @@ title: Use Milvus in DocsGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Clone the repository and navigate to it:</p>
+    </button></h2><p>Clona el repositorio y navega hasta él:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/arc53/DocsGPT.git</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> DocsGPT</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Add-dependency" class="common-anchor-header">Add dependency<button data-href="#Add-dependency" class="anchor-icon" translate="no">
+<h2 id="Add-dependency" class="common-anchor-header">Añadir dependencia<button data-href="#Add-dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,10 +75,10 @@ title: Use Milvus in DocsGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Append <code translate="no">langchain-milvus</code> dependency to the <code translate="no">requirements.txt</code> file under the <code translate="no">application</code> folder:</p>
+    </button></h2><p>Añade la dependencia <code translate="no">langchain-milvus</code> al archivo <code translate="no">requirements.txt</code> bajo la carpeta <code translate="no">application</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\nlangchain-milvus==0.1.6&quot;</span> &gt;&gt; ./application/requirements.txt</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-environment-variables" class="common-anchor-header">Set environment variables<button data-href="#Set-environment-variables" class="anchor-icon" translate="no">
+<h2 id="Set-environment-variables" class="common-anchor-header">Establecer variables de entorno<button data-href="#Set-environment-variables" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,7 +93,7 @@ title: Use Milvus in DocsGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Add <code translate="no">VECTOR_STORE=milvus</code>, <code translate="no">MILVUS_URI=...</code>, <code translate="no">MILVUS_TOKEN=...</code> to the environment variables for both the <code translate="no">backend</code> and <code translate="no">worker</code> services in the <code translate="no">docker-compose.yaml</code> file, just like this:</p>
+    </button></h2><p>Añade <code translate="no">VECTOR_STORE=milvus</code>, <code translate="no">MILVUS_URI=...</code>, <code translate="no">MILVUS_TOKEN=...</code> a las variables de entorno para los servicios <code translate="no">backend</code> y <code translate="no">worker</code> en el archivo <code translate="no">docker-compose.yaml</code>, tal y como se muestra a continuación:</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">backend:</span>
     <span class="hljs-attr">build:</span> <span class="hljs-string">./application</span>
     <span class="hljs-attr">environment:</span>
@@ -109,12 +109,12 @@ title: Use Milvus in DocsGPT
       <span class="hljs-bullet">-</span> <span class="hljs-string">MILVUS_URI=...</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">MILVUS_TOKEN=...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For the <code translate="no">MILVUS_URI</code> and <code translate="no">MILVUS_TOKEN</code>, you can either use fully managed <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(Recommended) service or manually started Milvus service.</p>
+<p>Para los servicios <code translate="no">MILVUS_URI</code> y <code translate="no">MILVUS_TOKEN</code>, puede utilizar el servicio <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(Recomendado) totalmente gestionado o el servicio Milvus iniciado manualmente.</p>
 <ul>
-<li><p>For fully managed Zillz Cloud service: We recommend using Zilliz Cloud service. You can sign up for a free trial account on <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. After that, you will get the <code translate="no">MILVUS_URI</code> and <code translate="no">MILVUS_TOKEN</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a>.</p></li>
-<li><p>For manually started Milvus service: If you want to set up a Milvus service, you can follow the <a href="https://milvus.io/docs/install_standalone-docker-compose.md">official Milvus documentation</a> to set up a Milvus server, and then get the <code translate="no">MILVUS_URI</code> and <code translate="no">MILVUS_TOKEN</code> from the server. The <code translate="no">MILVUS_URI</code> and <code translate="no">MILVUS_TOKEN</code> should be in the format of <code translate="no">http://&lt;your_server_ip&gt;:19530</code> and <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> respectively.</p></li>
+<li><p>Para el servicio Zillz Cloud totalmente gestionado: Recomendamos utilizar el servicio Zilliz Cloud. Puede registrarse para obtener una cuenta de prueba gratuita en <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Después, obtendrá <code translate="no">MILVUS_URI</code> y <code translate="no">MILVUS_TOKEN</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">punto final público y a la clave API</a>.</p></li>
+<li><p>Para iniciar manualmente el servicio Milvus: Si desea configurar un servicio Milvus, puede seguir la <a href="https://milvus.io/docs/install_standalone-docker-compose.md">documentación oficial de Milvus</a> para configurar un servidor Milvus y, a continuación, obtener los <code translate="no">MILVUS_URI</code> y <code translate="no">MILVUS_TOKEN</code> del servidor. Los <code translate="no">MILVUS_URI</code> y <code translate="no">MILVUS_TOKEN</code> deben tener el formato <code translate="no">http://&lt;your_server_ip&gt;:19530</code> y <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> respectivamente.</p></li>
 </ul>
-<h2 id="Start-the-services" class="common-anchor-header">Start the services<button data-href="#Start-the-services" class="anchor-icon" translate="no">
+<h2 id="Start-the-services" class="common-anchor-header">Inicie los servicios<button data-href="#Start-the-services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -129,16 +129,14 @@ title: Use Milvus in DocsGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Run: <code translate="no">./setup.sh</code></p>
-<p>Then navigate to http://localhost:5173/.</p>
-<p>You can play around with the UI and ask questions about your documents.</p>
+    </button></h2><p>Ejecútalos: <code translate="no">./setup.sh</code></p>
+<p>A continuación, vaya a http://localhost:5173/.</p>
+<p>Puedes jugar con la interfaz de usuario y hacer preguntas sobre tus documentos.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
-    <span>alt text</span>
-  </span>
-</p>
-<p>If you want to stop the services, run:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
+   </span> <span class="img-wrapper"> <span>texto alternativo</span> </span></p>
+<p>Si quieres parar los servicios, ejecuta:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For further details and more advanced setups, please refer to the <a href="https://github.com/arc53/DocsGPT">DocsGPT</a> official documentation.</p>
+<p>Para más detalles y configuraciones más avanzadas, consulta la documentación oficial <a href="https://github.com/arc53/DocsGPT">de DocsGPT</a>.</p>

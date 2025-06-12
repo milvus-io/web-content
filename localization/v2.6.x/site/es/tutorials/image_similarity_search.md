@@ -1,9 +1,9 @@
 ---
 id: image_similarity_search.md
-summary: image search with Milvus
-title: Image Search with Milvus
+summary: búsqueda de imágenes con Milvus
+title: Búsqueda de imágenes con Milvus
 ---
-<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Image Search with Milvus<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Búsqueda de imágenes con Milvus<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ title: Image Search with Milvus
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/image_search_with_milvus/pics/image_search_demo.png"/></p>
-<p>In this notebook, we will show you how to use Milvus to search for similar images in a dataset. We will use a subset of the <a href="https://www.image-net.org/">ImageNet</a> dataset, then search for an image of an Afghan hound to demonstrate this.</p>
-<h2 id="Dataset-Preparation" class="common-anchor-header">Dataset Preparation<button data-href="#Dataset-Preparation" class="anchor-icon" translate="no">
+<p>En este cuaderno, le mostraremos cómo utilizar Milvus para buscar imágenes similares en un conjunto de datos. Utilizaremos un subconjunto del conjunto de datos <a href="https://www.image-net.org/">ImageNet</a> y buscaremos una imagen de un sabueso afgano para demostrarlo.</p>
+<h2 id="Dataset-Preparation" class="common-anchor-header">Preparación del conjunto de datos<button data-href="#Dataset-Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,11 +37,11 @@ title: Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>First, we need to load the dataset and unextract it for further processing.</p>
+    </button></h2><p>En primer lugar, tenemos que cargar el conjunto de datos y extraerlo para su posterior procesamiento.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q -o reverse_image_search.zip</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prequisites" class="common-anchor-header">Prequisites<button data-href="#Prequisites" class="anchor-icon" translate="no">
+<h2 id="Prequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,23 +56,23 @@ title: Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To run this notebook, you need to have the following dependencies installed:</p>
+    </button></h2><p>Para ejecutar este cuaderno, es necesario tener instaladas las siguientes dependencias:</p>
 <ul>
-<li>pymilvus>=2.4.2</li>
+<li>pymilvus&gt;=2.4.2</li>
 <li>timm</li>
 <li>torch</li>
 <li>numpy</li>
 <li>sklearn</li>
-<li>pillow</li>
+<li>almohada</li>
 </ul>
-<p>To run Colab, we provide the handy commands to install the necessary dependencies.</p>
+<p>Para ejecutar Colab, proporcionamos los prácticos comandos para instalar las dependencias necesarias.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus --upgrade</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install timm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Si utilizas Google Colab, para activar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong>. (Haga clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y seleccione "Reiniciar sesión" en el menú desplegable).</p>
 </div>
-<h2 id="Define-the-Feature-Extractor" class="common-anchor-header">Define the Feature Extractor<button data-href="#Define-the-Feature-Extractor" class="anchor-icon" translate="no">
+<h2 id="Define-the-Feature-Extractor" class="common-anchor-header">Definir el extractor de características<button data-href="#Define-the-Feature-Extractor" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,7 +87,7 @@ title: Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Then, we need to define a feature extractor which extracts embedding from an image using timm’s ResNet-34 model.</p>
+    </button></h2><p>A continuación, necesitamos definir un extractor de características que extraiga la incrustación de una imagen utilizando el modelo ResNet-34 de timm.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 <span class="hljs-keyword">import</span> timm
@@ -128,7 +128,7 @@ title: Image Search with Milvus
 
         <span class="hljs-keyword">return</span> normalize(feature_vector.reshape(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>), norm=<span class="hljs-string">&quot;l2&quot;</span>).flatten()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-Milvus-Collection" class="common-anchor-header">Create a Milvus Collection<button data-href="#Create-a-Milvus-Collection" class="anchor-icon" translate="no">
+<h2 id="Create-a-Milvus-Collection" class="common-anchor-header">Crear una colección Milvus<button data-href="#Create-a-Milvus-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -143,7 +143,7 @@ title: Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Then we need to create Milvus collection to store the image embeddings</p>
+    </button></h2><p>A continuación, tenemos que crear una colección Milvus para almacenar las incrustaciones de la imagen</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Set up a Milvus client</span>
@@ -161,14 +161,14 @@ client.create_collection(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>En cuanto al argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
+<li>Si tiene una gran escala de datos, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</li>
+<li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste los <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint y a la clave Api</a> en Zilliz Cloud.</li>
 </ul>
 </div>
-<h2 id="Insert-the-Embeddings-to-Milvus" class="common-anchor-header">Insert the Embeddings to Milvus<button data-href="#Insert-the-Embeddings-to-Milvus" class="anchor-icon" translate="no">
+<h2 id="Insert-the-Embeddings-to-Milvus" class="common-anchor-header">Insertar los Embeddings en Milvus<button data-href="#Insert-the-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -183,7 +183,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We will extract embeddings of each image using the ResNet34 model and insert images from the training set into Milvus.</p>
+    </button></h2><p>Extraeremos los embeddings de cada imagen utilizando el modelo ResNet34 e insertaremos las imágenes del conjunto de entrenamiento en Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 extractor = FeatureExtractor(<span class="hljs-string">&quot;resnet34&quot;</span>)
@@ -235,21 +235,17 @@ display(concatenated_image)
 <pre><code translate="no">'query'
 </code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
-    <span>png</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+   </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <pre><code translate="no">'results'
 </code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/results.png" alt="Results" class="doc-image" id="results" />
-    <span>Results</span>
-  </span>
-</p>
-<p>We can see that most of the images are from the same category as the search image, which is the Afghan hound. This means that we found similar images to the search image.</p>
-<h2 id="Quick-Deploy" class="common-anchor-header">Quick Deploy<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/results.png" alt="Results" class="doc-image" id="results" />
+   </span> <span class="img-wrapper"> <span>Resultados</span> </span></p>
+<p>Podemos ver que la mayoría de las imágenes son de la misma categoría que la imagen de búsqueda, que es el sabueso afgano. Esto significa que hemos encontrado imágenes similares a la imagen de búsqueda.</p>
+<h2 id="Quick-Deploy" class="common-anchor-header">Despliegue rápido<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -264,4 +260,4 @@ display(concatenated_image)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To learn about how to start an online demo with this tutorial, please refer to <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/image_search_with_milvus">the example application</a>.</p>
+    </button></h2><p>Para saber cómo iniciar una demostración en línea con este tutorial, consulte <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/image_search_with_milvus">la aplicación de ejemplo</a>.</p>

@@ -1,12 +1,13 @@
 ---
 id: manage-partitions.md
-title: Manage Partitions
+title: Gestionar particiones
 summary: >-
-  A partition is a subset of a collection. Each partition shares the same data
-  structure with its parent collection but contains only a subset of the data in
-  the collection. This page helps you understand how to manage partitions.
+  Una partición es un subconjunto de una colección. Cada partición comparte la
+  misma estructura de datos con su colección padre, pero contiene sólo un
+  subconjunto de los datos de la colección. Esta página le ayuda a entender cómo
+  gestionar particiones.
 ---
-<h1 id="Manage-Partitions" class="common-anchor-header">Manage Partitions<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
+<h1 id="Manage-Partitions" class="common-anchor-header">Gestionar particiones<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A partition is a subset of a collection. Each partition shares the same data structure with its parent collection but contains only a subset of the data in the collection. This page helps you understand how to manage partitions.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Una partición es un subconjunto de una colección. Cada partición comparte la misma estructura de datos con su colección padre, pero contiene sólo un subconjunto de los datos de la colección. Esta página le ayuda a entender cómo gestionar particiones.</p>
+<h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,14 +38,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When creating a collection, Milvus also creates a partition named <strong>_default</strong> in the collection. If you are not going to add any other partitions, all entities inserted into the collection go into the default partition, and all searches and queries are also carried out within the default partition.</p>
-<p>You can add more partitions and insert entities into them based on certain criteria. Then you can restrict your searches and queries within certain partitions, improving search performance.</p>
-<p>A collection can have a maximum of 1,024 partitions.</p>
+    </button></h2><p>Cuando se crea una colección, Milvus también crea una partición llamada <strong>_default</strong> en la colección. Si no va a añadir ninguna otra partición, todas las entidades insertadas en la colección van a la partición por defecto, y todas las búsquedas y consultas se realizan también dentro de la partición por defecto.</p>
+<p>Puede añadir más particiones e insertar entidades en ellas en función de determinados criterios. A continuación, puede restringir las búsquedas y consultas dentro de ciertas particiones, mejorando el rendimiento de la búsqueda.</p>
+<p>Una colección puede tener un máximo de 1.024 particiones.</p>
 <div class="alert note">
-<p>The <strong>Partition Key</strong> feature is a search optimization based on partitions and allows Milvus to distribute entities into different partitions based on the values in a specific scalar field. This feature helps implement partition-oriented multi-tenancy and improves search performance.</p>
-<p>This feature will not be discussed on this page. To find more, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p>
+<p>La función <strong>Clave de partición</strong> es una optimización de búsqueda basada en particiones y permite a Milvus distribuir entidades en diferentes particiones basándose en los valores de un campo escalar específico. Esta característica ayuda a implementar la multi-tenencia orientada a particiones y mejora el rendimiento de la búsqueda.</p>
+<p>Esta característica no será discutida en esta página. Para más información, consulte <a href="/docs/es/use-partition-key.md">Utilizar clave de partición</a>.</p>
 </div>
-<h2 id="List-Partitions" class="common-anchor-header">List Partitions<button data-href="#List-Partitions" class="anchor-icon" translate="no">
+<h2 id="List-Partitions" class="common-anchor-header">Listar Particiones<button data-href="#List-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,14 +60,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When creating a collection, Milvus also creates a partition named <strong>_default</strong> in the collection. You can list the partitions in a collection as follows.</p>
+    </button></h2><p>Cuando se crea una colección, Milvus también crea una partición llamada <strong>_default</strong> en la colección. Puede listar las particiones en una colección como sigue.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -172,7 +168,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-Partition" class="common-anchor-header">Create Partition<button data-href="#Create-Partition" class="anchor-icon" translate="no">
+<h2 id="Create-Partition" class="common-anchor-header">Crear partición<button data-href="#Create-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,14 +183,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can add more partitions to the collection and insert entities into these partitions based on certain criteria.</p>
+    </button></h2><p>Puedes añadir más particiones a la colección e insertar entidades en estas particiones basándote en ciertos criterios.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_partition(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
@@ -301,7 +292,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Check-for-a-Specific-Partition" class="common-anchor-header">Check for a Specific Partition<button data-href="#Check-for-a-Specific-Partition" class="anchor-icon" translate="no">
+<h2 id="Check-for-a-Specific-Partition" class="common-anchor-header">Buscar una partición específica<button data-href="#Check-for-a-Specific-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -316,14 +307,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippets demonstrate how to check whether a partition exists in a specific collection.</p>
+    </button></h2><p>Los siguientes fragmentos de código demuestran cómo comprobar si existe una partición en una colección específica.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.has_partition(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
@@ -388,7 +374,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-and-Release-Partitions" class="common-anchor-header">Load and Release Partitions<button data-href="#Load-and-Release-Partitions" class="anchor-icon" translate="no">
+<h2 id="Load-and-Release-Partitions" class="common-anchor-header">Cargar y liberar particiones<button data-href="#Load-and-Release-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -403,15 +389,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can separately load or release one or certain partitions.</p>
-<h3 id="Load-Partitions" class="common-anchor-header">Load Partitions</h3><p>You can separately load specific partitions in a collection. It is worth noting that the load status of a collection stays unloaded if there is an unloaded partition in the collection.</p>
+    </button></h2><p>Puede cargar o liberar por separado una o varias particiones.</p>
+<h3 id="Load-Partitions" class="common-anchor-header">Cargar Particiones</h3><p>Puedes cargar por separado particiones específicas en una colección. Cabe destacar que el estado de carga de una colección permanece sin cargar si hay una partición sin cargar en la colección.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_partitions(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>]
@@ -521,14 +502,9 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-Partitions" class="common-anchor-header">Release Partitions</h3><p>You can also release specific partitions.</p>
+<h3 id="Release-Partitions" class="common-anchor-header">Liberar particiones</h3><p>También puedes liberar particiones específicas.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.release_partitions(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>]
@@ -631,7 +607,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Data-Operations-Within-Partitions" class="common-anchor-header">Data Operations Within Partitions<button data-href="#Data-Operations-Within-Partitions" class="anchor-icon" translate="no">
+<h2 id="Data-Operations-Within-Partitions" class="common-anchor-header">Operaciones de Datos dentro de Particiones<button data-href="#Data-Operations-Within-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -646,18 +622,18 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Insert and Delete Entities</h3><p>You can perform insert, upsert, and delete operations in specific operations. For details, refer to</p>
+    </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Insertar y Borrar Entidades</h3><p>Puede realizar operaciones de inserción, inserción ascendente y eliminación en operaciones específicas. Para más detalles, consulte</p>
 <ul>
-<li><p><a href="/docs/insert-update-delete.md#Insert-Entities-into-a-Partition">Insert Entities into Partition</a></p></li>
-<li><p><a href="/docs/upsert-entities.md#Upsert-Entities-in-a-Partition">Upsert Entities into Partition</a></p></li>
-<li><p><a href="/docs/delete-entities.md#Delete-Entities-from-Partitions">Delete Entities from Partition</a></p></li>
+<li><p><a href="/docs/es/insert-update-delete.md#Insert-Entities-into-a-Partition">Insertar Entidades en una Partición</a></p></li>
+<li><p><a href="/docs/es/upsert-entities.md#Upsert-Entities-in-a-Partition">Insertar Entidades en la Partición</a></p></li>
+<li><p><a href="/docs/es/delete-entities.md#Delete-Entities-from-Partitions">Borrar Entidades de la Partición</a></p></li>
 </ul>
-<h3 id="Search-and-Query" class="common-anchor-header">Search and Query</h3><p>You can conduct searches and queries within specific partitions. For details, refer to</p>
+<h3 id="Search-and-Query" class="common-anchor-header">Búsqueda y Consulta</h3><p>Puede realizar búsquedas y consultas dentro de particiones específicas. Para más detalles, consulte</p>
 <ul>
-<li><p><a href="/docs/single-vector-search.md#ANN-Search-in-Partition">Conduct ANN Searches within Partitions</a></p></li>
-<li><p><a href="/docs/get-and-scalar-query.md#Queries-in-Partitions">Conduct Metadata Filtering within Partitions</a></p></li>
+<li><p><a href="/docs/es/single-vector-search.md#ANN-Search-in-Partition">Realizar Búsquedas RNA dentro de Particiones</a></p></li>
+<li><p><a href="/docs/es/get-and-scalar-query.md#Queries-in-Partitions">Filtrado de metadatos en particiones</a></p></li>
 </ul>
-<h2 id="Drop-Partition" class="common-anchor-header">Drop Partition<button data-href="#Drop-Partition" class="anchor-icon" translate="no">
+<h2 id="Drop-Partition" class="common-anchor-header">Eliminar particiones<button data-href="#Drop-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -672,14 +648,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can drop partitions that are no longer needed. Before dropping a partition, ensure that the partition has been released.</p>
+    </button></h2><p>Puede eliminar particiones que ya no necesite. Antes de soltar una partición, asegúrese de que la partición ha sido liberada.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.release_partitions(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>]

@@ -1,10 +1,12 @@
 ---
 id: aws_layer7.md
-title: Set up a Layer-7 Load Balancer for Milvus on AWS
+title: Configurar un balanceador de carga de capa 7 para Milvus en AWS
 related_key: cluster
-summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on AWS.
+summary: >-
+  Aprenda a implementar un clúster Milvus detrás de un equilibrador de carga
+  Layer-7 en AWS.
 ---
-<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Set up a Layer-7 Load Balancer for Milvus on AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
+<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Configurar un balanceador de carga de capa 7 para Milvus en AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,22 +21,22 @@ summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>When compared to a Layer-4 load balancer, a Layer-7 load balancer offers smart load balancing and caching capabilities and is a great choice for cloud-native services.</p>
-<p>This guide walks you through setting up a layer-7 load balancer for a Milvus cluster already running behind a Layer-4 load balancer.</p>
-<h3 id="Before-your-start" class="common-anchor-header">Before your start</h3><ul>
-<li>You have <a href="/docs/eks.md">deployed a Milvus cluster behind a Layer-4 load balancer on AWS</a>.</li>
+    </button></h1><p>En comparación con un equilibrador de carga de capa 4, un equilibrador de carga de capa 7 ofrece capacidades inteligentes de equilibrio de carga y almacenamiento en caché y es una gran opción para los servicios nativos de la nube.</p>
+<p>Esta guía le guía a través de la configuración de un equilibrador de carga de capa 7 para un clúster Milvus que ya se está ejecutando detrás de un equilibrador de carga de capa 4.</p>
+<h3 id="Before-your-start" class="common-anchor-header">Antes de empezar</h3><ul>
+<li>Ha <a href="/docs/es/eks.md">implementado un clúster Milvus detrás de un equilibrador de carga de capa 4 en AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/eks.md">deployed a Milvus cluster behind a Layer-4 load balancer on AWS</a>.</p>
-<p>Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Ajustar las configuraciones de Milvus</h3><p>Esta guía asume que ya ha <a href="/docs/es/eks.md">implementado un clúster Milvus detrás de un equilibrador de carga de capa 4 en AWS</a>.</p>
+<p>Antes de configurar un equilibrador de carga de capa 7 para este clúster Milvus, ejecute el siguiente comando para eliminar el equilibrador de carga de capa 4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Prepare TLS certificates</h3><p>TLS requires certificates to work. We’re using <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> to manage certificates and need to import an existing certificate into ACM. Refer to <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Import Certificate</a>. The following is an example.</p>
+<h3 id="Prepare-TLS-certificates" class="common-anchor-header">Prepare los certificados TLS</h3><p>TLS requiere certificados para funcionar. Estamos utilizando <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> para gestionar certificados y necesitamos importar un certificado existente en ACM. Consulte <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Importar certificado</a>. A continuación se muestra un ejemplo.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># If the import-certificate command is successful, it returns the arn of the imported certificate.</span>
 aws acm import-certificate --certificate fileb://Certificate.pem \
       --certificate-chain fileb://CertificateChain.pem \
       --private-key fileb://PrivateKey.pem  
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Create an Ingress to generate a Layer-7 Load Balancer</h3><p>Prepare the ingress file as follows and name it <code translate="no">ingress.yaml</code>. <strong>Do replace the certificate arn and host with your own.</strong></p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Crear un Ingress para generar un equilibrador de carga de capa 7</h3><p>Prepare el archivo ingress como se indica a continuación y nómbrelo <code translate="no">ingress.yaml</code>. <strong>Sustituya el arn y el host del certificado por los suyos propios.</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>
@@ -61,18 +63,18 @@ aws acm import-certificate --certificate fileb://Certificate.pem \
               <span class="hljs-attr">port:</span>
                 <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can create the Ingress by applying the file to your EKS cluster.</p>
+<p>A continuación, puede crear el Ingress aplicando el archivo a su clúster EKS.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, wait for AWS to set up the Layer-7 load balancer. You can check the progress by running</p>
+<p>Ahora, espera a que AWS configure el balanceador de carga de capa 7. Puedes comprobar el progreso ejecutando</p>
 <pre><code translate="no" class="language-bash">kubectl -f ingress.yaml get -w
 <button class="copy-code-btn"></button></code></pre>
-<p>The output should be similar to the following:</p>
+<p>La salida debería ser similar a la siguiente:</p>
 <pre><code translate="no" class="language-shell">NAME          CLASS   HOSTS                   ADDRESS                                                                PORTS   AGE
 milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778371620.us-east-2.elb.amazonaws.com   80      10m
 <button class="copy-code-btn"></button></code></pre>
-<p>Once an address is displayed in the <strong>ADDRESS</strong> field, the Layer-7 load balancer is ready to use.</p>
-<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Verify the connection through the Layer-7 load balancer<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
+<p>Una vez que aparezca una dirección en el campo <strong>ADDRESS</strong>, el equilibrador de carga Layer-7 estará listo para su uso.</p>
+<h2 id="Verify-the-connection-through-the-Layer-7-load-balancer" class="common-anchor-header">Verificar la conexión a través del equilibrador de carga Layer-7<button data-href="#Verify-the-connection-through-the-Layer-7-load-balancer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,7 +89,7 @@ milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This guide uses PyMilvus to verify the connection to the Milvus service behind the Layer-7 load balancer we have just created. For detailed steps, <a href="https://milvus.io/docs/v2.3.x/example_code.md">read this</a>.</p>
+    </button></h2><p>Esta guía utiliza PyMilvus para verificar la conexión al servicio Milvus detrás del equilibrador de carga Layer-7 que acabamos de crear. Para pasos detallados, <a href="https://milvus.io/docs/v2.3.x/example_code.md">lea esto</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     connections,
     utility,
@@ -101,7 +103,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>The <strong>host</strong> and <strong>server_name</strong> should replace with your own.</li>
-<li>If you have set up a DNS record to map domain name to the alb, replace the <strong>host</strong> with the domain name and omit <strong>server_name</strong>.</li>
+<li>El <strong>host</strong> y <strong>server_name</strong> deben ser reemplazados por los tuyos.</li>
+<li>Si ha configurado un registro DNS para asignar el nombre de dominio al alb, sustituya el <strong>host</strong> por el nombre de dominio y omita <strong>server_name</strong>.</li>
 </ul>
 </div>

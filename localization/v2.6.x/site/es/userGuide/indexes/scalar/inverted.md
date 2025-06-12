@@ -205,7 +205,7 @@ index_params.add_index(
 <li><p><strong>Lógica de filtrado</strong>:</p>
 <ul>
 <li><p>Si <strong>crea un índice de tipo doble</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), sólo las condiciones de filtro de tipo numérico pueden utilizar el índice. Si el filtro compara un índice doble con una condición no numérica, Milvus vuelve a la búsqueda por fuerza bruta.</p></li>
-<li><p>Si <strong>crea un índice de tipo varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), sólo las condiciones de filtro de tipo cadena pueden utilizar el índice. De lo contrario, Milvus vuelve a la fuerza bruta.</p></li>
+<li><p>Si <strong>crea un índice de tipo varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), sólo las condiciones de filtro de tipo cadena pueden utilizar el índice. En caso contrario, Milvus vuelve a la fuerza bruta.</p></li>
 <li><p>La indexación<strong>booleana</strong> se comporta de forma similar a la de tipo varchar.</p></li>
 </ul></li>
 <li><p><strong>Expresiones de términos</strong>:</p>

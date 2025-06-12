@@ -137,7 +137,7 @@ index_params.add_index(
 </ul>
 <p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="/docs/es/ivf-pq.md#Index-building-params">Parámetros de construcción del índice</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice al método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -213,7 +213,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">m</code></p></td>
      <td><p>Número de subvectores (utilizados para la cuantificación) en los que se dividirá cada vector de alta dimensión durante el proceso de cuantificación.</p></td>
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 65536]</p><p><strong>Valor por defecto</strong>: Ninguno</p></td>
-     <td><p>Un valor más alto de <code translate="no">m</code> puede mejorar la precisión, pero también aumenta la complejidad computacional y el uso de memoria. <code translate="no">m</code> debe ser un divisor de la dimensión del vector<em>(D</em>) para garantizar una descomposición adecuada. Un valor comúnmente recomendado es <em>m = D/2</em>.</p><p>En la mayoría de los casos, le recomendamos que establezca un valor dentro de este rango: [D/8, D].</p></td>
+     <td><p>Un valor más alto de <code translate="no">m</code> puede mejorar la precisión, pero también aumenta la complejidad computacional y el uso de memoria. <code translate="no">m</code> debe ser un divisor de la dimensión del vector<em>(D</em>) para garantizar una descomposición adecuada. Un valor comúnmente recomendado es <em>m = D/2</em>.</p><p>En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [D/8, D].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>

@@ -1,12 +1,12 @@
 ---
 id: load-and-release.md
-title: Load & Release
+title: Cargar y liberar
 summary: >-
-  Loading a collection is the prerequisite to conducting similarity searches and
-  queries in collections. This page focuses on the procedures for loading and
-  releasing a collection.
+  Cargar una colección es el requisito previo para realizar búsquedas y
+  consultas de similitud en las colecciones. Esta página se centra en los
+  procedimientos para cargar y liberar una colección.
 ---
-<h1 id="Load--Release" class="common-anchor-header">Load & Release<button data-href="#Load--Release" class="anchor-icon" translate="no">
+<h1 id="Load--Release" class="common-anchor-header">Cargar y liberar<button data-href="#Load--Release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Loading a collection is the prerequisite to conducting similarity searches and queries in collections. This page focuses on the procedures for loading and releasing a collection.</p>
-<h2 id="Load-Collection" class="common-anchor-header">Load Collection<button data-href="#Load-Collection" class="anchor-icon" translate="no">
+    </button></h1><p>Cargar una colección es el requisito previo para realizar búsquedas y consultas de similitud en las colecciones. Esta página se centra en los procedimientos para cargar y liberar una colección.</p>
+<h2 id="Load-Collection" class="common-anchor-header">Cargar una colección<button data-href="#Load-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +37,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you load a collection, Milvus loads the index files and the raw data of all fields into memory for rapid response to searches and queries. Entities inserted after a collection load are automatically indexed and loaded.</p>
-<p>The following code snippets demonstrate how to load a collection.</p>
+    </button></h2><p>Al cargar una colección, Milvus carga los archivos de índice y los datos sin procesar de todos los campos en la memoria para responder rápidamente a las búsquedas y consultas. Las entidades insertadas después de cargar una colección se indexan y cargan automáticamente.</p>
+<p>Los siguientes fragmentos de código demuestran cómo cargar una colección.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -205,7 +200,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Specific-Fields" class="common-anchor-header">Load Specific Fields<button data-href="#Load-Specific-Fields" class="anchor-icon" translate="no">
+<h2 id="Load-Specific-Fields" class="common-anchor-header">Cargar campos específicos<button data-href="#Load-Specific-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -220,18 +215,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus can load only the fields involved in searches and queries, reducing memory usage and improving search performance.</p>
+    </button></h2><p>Milvus puede cargar sólo los campos implicados en las búsquedas y consultas, reduciendo el uso de memoria y mejorando el rendimiento de las búsquedas.</p>
 <div class="alert note">
-<p>Partial collection loading is currently in beta and not recommended for production use.</p>
+<p>La carga parcial de colecciones se encuentra actualmente en fase beta y no se recomienda su uso en producción.</p>
 </div>
-<p>The following code snippet assumes that you have created a collection named <strong>my_collection</strong>, and there are two fields named <strong>my_id</strong> and <strong>my_vector</strong> in the collection.</p>
+<p>El siguiente fragmento de código asume que ha creado una colección llamada <strong>mi_colección</strong>, y que hay dos campos llamados <strong>mi_id</strong> y <strong>mi_vector</strong> en la colección.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span></span>
@@ -302,10 +292,10 @@ fmt.Println(state)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># REST</span>
 Not support yet
 <button class="copy-code-btn"></button></code></pre>
-<p>If you choose to load specific fields, it is worth noting that only the fields included in <code translate="no">load_fields</code> can be used as filters and output fields in searches and queries. You should always include the names of the primary field and at least one vector field in <code translate="no">load_fields</code>.</p>
-<p>You can also use <code translate="no">skip_load_dynamic_field</code> to determine whether to load the dynamic field. The dynamic field is a reserved JSON field named <strong>$meta</strong> and saves all non-schema-defined fields and their values in key-value pairs. When loading the dynamic field, all keys in the fields are loaded and available for filtering and output. If all keys in the dynamic field are not involved in metadata filtering and output, set <code translate="no">skip_load_dynamic_field</code> to <code translate="no">True</code>.</p>
-<p>To load more fields after the collection load, you need to release the collection first to avoid possible errors prompted because of index changes.</p>
-<h2 id="Release-Collection" class="common-anchor-header">Release Collection<button data-href="#Release-Collection" class="anchor-icon" translate="no">
+<p>Si decides cargar campos específicos, conviene tener en cuenta que sólo los campos incluidos en <code translate="no">load_fields</code> pueden utilizarse como filtros y campos de salida en búsquedas y consultas. Siempre debe incluir los nombres del campo primario y al menos un campo vectorial en <code translate="no">load_fields</code>.</p>
+<p>También puede utilizar <code translate="no">skip_load_dynamic_field</code> para determinar si se debe cargar el campo dinámico. El campo dinámico es un campo JSON reservado denominado <strong>$meta</strong> y guarda todos los campos no definidos por el esquema y sus valores en pares clave-valor. Al cargar el campo dinámico, todas las claves de los campos se cargan y están disponibles para el filtrado y la salida. Si todas las claves del campo dinámico no participan en el filtrado y la salida de metadatos, establezca <code translate="no">skip_load_dynamic_field</code> en <code translate="no">True</code>.</p>
+<p>Para cargar más campos después de la carga de la colección, primero debe liberar la colección para evitar posibles errores provocados por cambios en el índice.</p>
+<h2 id="Release-Collection" class="common-anchor-header">Liberación de la colección<button data-href="#Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -320,15 +310,10 @@ Not support yet
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Searches and queries are memory-intensive operations. To save the cost, you are advised to release the collections that are currently not in use.</p>
-<p>The following code snippet demonstrates how to release a collection.</p>
+    </button></h2><p>Las búsquedas y consultas son operaciones que consumen mucha memoria. Para ahorrar costes, se recomienda liberar las colecciones que no se estén utilizando en ese momento.</p>
+<p>El siguiente fragmento de código muestra cómo liberar una colección.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>
 client.release_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>

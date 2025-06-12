@@ -240,7 +240,7 @@ summary: >-
 <h3 id="Enhanced-production-operations" class="common-anchor-header">Operaciones de producción mejoradas</h3><ul>
 <li><strong>Rendimiento predecible:</strong> Resultados coherentes en todas las escalas y configuraciones de despliegue.</li>
 <li><strong>Actualizaciones simplificadas:</strong> El diseño sin estado permite actualizaciones continuas con un tiempo de inactividad mínimo.</li>
-<li><strong>Previsibilidad de recursos:</strong> Uso de recursos más estable en comparación con los agentes de mensajes tradicionales.</li>
+<li><strong>Previsibilidad de recursos:</strong> Uso de recursos más estable en comparación con los corredores de mensajes tradicionales.</li>
 </ul>
 <p>Estas ventajas operativas son revolucionarias para las bases de datos vectoriales que soportan cargas de trabajo de misión crítica de GAR, agentes de IA y búsquedas de baja latencia. La transición de las complejas pilas de intermediarios de mensajes a la arquitectura simplificada de Woodpecker no solo aumenta el rendimiento, sino que también reduce significativamente la carga operativa de los equipos de desarrollo e infraestructura.</p>
 <p>A medida que la infraestructura de nube sigue evolucionando con innovaciones como S3 Express One Zone, la arquitectura de Woodpecker permite a las organizaciones beneficiarse automáticamente de estos avances sin necesidad de grandes cambios operativos o rediseños del sistema.</p>

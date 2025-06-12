@@ -1,9 +1,9 @@
 ---
 id: birdwatcher_install_guides.md
-summary: Learn how to install Birdwatch to debug Milvus.
-title: Install Birdwatcher
+summary: Aprenda a instalar Birdwatch para depurar Milvus.
+title: Instalar Birdwatcher
 ---
-<h1 id="Install-Birdwatcher" class="common-anchor-header">Install Birdwatcher<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
+<h1 id="Install-Birdwatcher" class="common-anchor-header">Instalar Birdwatcher<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Install Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page demonstrates how to install Birdwatcher.</p>
-<h2 id="Local-install" class="common-anchor-header">Local install<button data-href="#Local-install" class="anchor-icon" translate="no">
+    </button></h1><p>Esta página muestra cómo instalar Birdwatcher.</p>
+<h2 id="Local-install" class="common-anchor-header">Instalación local<button data-href="#Local-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,35 +34,35 @@ title: Install Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you have installed Milvus Standalone <a href="/docs/install_standalone-docker.md">using docker</a>, you’d better download and install the built binary, install Birdwatcher as a common Go module, or build Birdwatcher from the source.</p>
+    </button></h2><p>Si ha instalado Milvus Standalone <a href="/docs/es/install_standalone-docker.md">usando docker</a>, será mejor que descargue e instale el binario construido, instale Birdwatcher como un módulo Go común, o construya Birdwatcher desde el código fuente.</p>
 <ul>
-<li><p>Install it as a common Go module.</p>
+<li><p>Instálalo como un módulo Go común.</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
 cd birdwatcher
 go install github.com/milvus-io/birdwatcher
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can run Birdwatcher as follows:</p>
+<p>A continuación, puede ejecutar Birdwatcher de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell">go run main.go
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Build it from the source.</p>
+<li><p>Construirlo desde el código fuente.</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
 cd birdwatcher
 go build -o birdwatcher main.go
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can run Birdwatcher as follows:</p>
+<p>A continuación, puede ejecutar Birdwatcher de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell">./birdwatcher
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Download the already-built binary</p>
-<p>First, open the <a href="https://github.com/milvus-io/birdwatcher/releases/latest">latest release page</a>, and find the prepared binaries.</p>
+<li><p>Descarga el binario ya construido</p>
+<p>Primero, abre la <a href="https://github.com/milvus-io/birdwatcher/releases/latest">página de la última versión</a>, y encuentra los binarios preparados.</p>
 <pre><code translate="no" class="language-shell">wget -O birdwatcher.tar.gz \
 https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&lt;os&gt;_&lt;arch&gt;.tar.gz
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can decompress the tarball and use Birdwatcher as follows:</p>
+<p>A continuación, puede descomprimir el tarball y utilizar Birdwatcher de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell">tar -xvzf birdwatcher.tar.gz
 ./birdwatcher
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Install-as-a-Kubernetes-pod" class="common-anchor-header">Install as a Kubernetes pod<button data-href="#Install-as-a-Kubernetes-pod" class="anchor-icon" translate="no">
+<h2 id="Install-as-a-Kubernetes-pod" class="common-anchor-header">Instalar como un pod Kubernetes<button data-href="#Install-as-a-Kubernetes-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,7 +77,7 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you have installed either Milvus Standalone <a href="/docs/install_standalone-helm.md">using the Helm charts</a> or <a href="/docs/install_standalone-operator.md">the Milvus Operator</a> or Milvus Cluster <a href="/docs/install_cluster-helm.md">using the Helm charts</a> or <a href="/docs/install_cluster-milvusoperator.md">the Milvus Operator</a>, you are advised to install Birdwatcher as a Kubernetes pod.</p>
+    </button></h2><p>Si ha instalado Milvus Standalone <a href="/docs/es/install_standalone-helm.md">utilizando los</a> <a href="/docs/es/install_cluster-helm.md">gráficos Helm</a> o <a href="/docs/es/install_standalone-operator.md">Milvus Operator</a> o Milvus Cluster <a href="/docs/es/install_cluster-helm.md">utilizando los gráficos Helm</a> o <a href="/docs/es/install_cluster-milvusoperator.md">Milvus Operator</a>, se le recomienda instalar Birdwatcher como un pod Kubernetes.</p>
 <h3 id="Prepare-deploymentyml" class="common-anchor-header">Prepare deployment.yml</h3><pre><code translate="no" class="language-yml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span>
 <span class="hljs-attr">metadata:</span>
@@ -100,12 +100,12 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
             <span class="hljs-attr">cpu:</span> <span class="hljs-string">&quot;500m&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If the image available on DockerHub is not the latest, you can build an image of Birdwatcher using the Dockerfile provided with the source code as follows:</p>
+<p>Si la imagen disponible en DockerHub no es la más reciente, puede construir una imagen de Birdwatcher utilizando el Dockerfile proporcionado con el código fuente como se indica a continuación:</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
 cd birdwatcher
 docker build -t milvusdb/birdwatcher .
 <button class="copy-code-btn"></button></code></pre>
-<p>To deploy a locally built image, you need to add <code translate="no">imagePullPolicy</code> to the above specs and set it to <code translate="no">Never</code>.</p>
+<p>Para desplegar una imagen construida localmente, es necesario añadir <code translate="no">imagePullPolicy</code> a las especificaciones anteriores y establecerlo en <code translate="no">Never</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">birdwatcher</span>
         <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/birdwatcher</span>
@@ -113,6 +113,6 @@ docker build -t milvusdb/birdwatcher .
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Apply-deploymentyml" class="common-anchor-header">Apply deployment.yml</h3><p>Save the above YAML in a file and name it <code translate="no">deployment.yml</code>, and run the following command</p>
+<h3 id="Apply-deploymentyml" class="common-anchor-header">Aplicar deployment.yml</h3><p>Guarde el YAML anterior en un archivo y nómbrelo <code translate="no">deployment.yml</code>, y ejecute el siguiente comando</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f deployment.yml
 <button class="copy-code-btn"></button></code></pre>

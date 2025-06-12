@@ -1,8 +1,8 @@
 ---
 id: configure_access_logs.md
-title: Configure Access Logs
+title: Configurar registros de acceso
 ---
-<h1 id="Configure-Access-Logs" class="common-anchor-header">Configure Access Logs<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
+<h1 id="Configure-Access-Logs" class="common-anchor-header">Configurar registros de acceso<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,15 +17,15 @@ title: Configure Access Logs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The access log feature in Milvus allows server managers to record and analyze user access behavior, assisting in understanding aspects like query success rates and failure reasons.</p>
-<p>This guide provides detailed instructions on configuring access logs in Milvus.</p>
-<p>Configuration of access logs depends on the installation method of Milvus:</p>
+    </button></h1><p>La función de registro de acceso en Milvus permite a los administradores de servidores registrar y analizar el comportamiento de acceso de los usuarios, ayudando a comprender aspectos como las tasas de éxito de las consultas y las razones de los fallos.</p>
+<p>Esta guía proporciona instrucciones detalladas para configurar los registros de acceso en Milvus.</p>
+<p>La configuración de los registros de acceso depende del método de instalación de Milvus:</p>
 <ul>
-<li><strong>Helm Installation</strong>: Configure in <code translate="no">values.yaml</code>. For more information, see <a href="/docs/configure-helm.md">Configure Milvus with Helm Charts</a>.</li>
-<li><strong>Docker Installation</strong>: Configure in <code translate="no">milvus.yaml</code>. For more information, see <a href="/docs/configure-docker.md">Configure Milvus with Docker Compose</a>.</li>
-<li><strong>Operator Installation</strong>: Modify <code translate="no">spec.components</code> in the configuration file. For more information, see <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operator</a>.</li>
+<li><strong>Instalación de Helm</strong>: Configure en <code translate="no">values.yaml</code>. Para obtener más información, consulte <a href="/docs/es/configure-helm.md">Configurar Milvus con gráficos Helm</a>.</li>
+<li><strong>Instalación de Docker</strong>: Configure en <code translate="no">milvus.yaml</code>. Para más información, consulte <a href="/docs/es/configure-docker.md">Configurar Milvus con Docker Compose</a>.</li>
+<li><strong>Instalación de Operador</strong>: Modifique <code translate="no">spec.components</code> en el archivo de configuración. Para más información, consulte <a href="/docs/es/configure_operator.md">Configurar Milvus con Milvus Operator</a>.</li>
 </ul>
-<h2 id="Configuration-options" class="common-anchor-header">Configuration options<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+<h2 id="Configuration-options" class="common-anchor-header">Opciones de configuración<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,13 +40,13 @@ title: Configure Access Logs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Choose among three configuration options based on your needs:</p>
+    </button></h2><p>Elija entre tres opciones de configuración en función de sus necesidades:</p>
 <ul>
-<li><strong>Base config</strong>: For general purposes.</li>
-<li><strong>Config for local access log files</strong>: For storing logs locally.</li>
-<li><strong>Config for uploading local access logs to MinIO</strong>: For cloud storage and backup.</li>
+<li><strong>Base config</strong>: Para propósitos generales.</li>
+<li><strong>Configuración para archivos de registro de acceso local</strong>: Para almacenar registros localmente.</li>
+<li><strong>Configuración para subir los logs de acceso local a MinIO</strong>: Para almacenamiento en la nube y copias de seguridad.</li>
 </ul>
-<h3 id="Base-config" class="common-anchor-header">Base config</h3><p>Basic configuration involves enabling access logs and defining the log filename or using stdout.</p>
+<h3 id="Base-config" class="common-anchor-header">Configuración básica</h3><p>La configuración básica consiste en habilitar los registros de acceso y definir el nombre del archivo de registro o utilizar stdout.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -55,10 +55,10 @@ title: Configure Access Logs
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">proxy.accessLog.enable</code>: Whether to enable the access log feature. Defaults to <strong>false</strong>.</li>
-<li><code translate="no">proxy.accessLog.filename</code>: The name of the access log file. If you leave this parameter empty, access logs will be printed to stdout.</li>
+<li><code translate="no">proxy.accessLog.enable</code>: Habilitar o no la función de registro de acceso. Por defecto es <strong>false</strong>.</li>
+<li><code translate="no">proxy.accessLog.filename</code>: El nombre del archivo de registro de acceso. Si deja este parámetro vacío, los registros de acceso se imprimirán en stdout.</li>
 </ul>
-<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Config for local access log files</h3><p>Configure local storage for access log files with parameters including the local file path, file size, and rotation interval:</p>
+<h3 id="Config-for-local-access-log-files" class="common-anchor-header">Configuración de archivos de registro de acceso locales</h3><p>Configure el almacenamiento local para los archivos de registro de acceso con parámetros que incluyen la ruta del archivo local, el tamaño del archivo y el intervalo de rotación:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -69,14 +69,14 @@ title: Configure Access Logs
     <span class="hljs-attr">maxBackups:</span> <span class="hljs-number">7</span> <span class="hljs-comment"># Max number of sealed access log files that can be retained</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>These parameters are specified when <code translate="no">filename</code> is not empty.</p>
+<p>Estos parámetros se especifican cuando <code translate="no">filename</code> no está vacío.</p>
 <ul>
-<li><code translate="no">proxy.accessLog.localPath</code>: The local file path where the access log file is stored.</li>
-<li><code translate="no">proxy.accessLog.maxSize</code>: The maximum size in MB allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file.</li>
-<li><code translate="no">proxy.accessLog.rotatedTime</code>: The maximum time interval in seconds allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one.</li>
-<li><code translate="no">proxy.accessLog.maxBackups</code>: The maximum number of sealed access log files that can be retained. If the number of sealed access log files exceeds this limit, the oldest one will be deleted.</li>
+<li><code translate="no">proxy.accessLog.localPath</code>: La ruta del archivo local donde se almacena el archivo de registro de acceso.</li>
+<li><code translate="no">proxy.accessLog.maxSize</code>: El tamaño máximo en MB permitido para un único archivo de registro de acceso. Si el tamaño del archivo de registro alcanza este límite, se iniciará un proceso de rotación. Este proceso sella el archivo de registro de acceso actual, crea un nuevo archivo de registro y borra el contenido del archivo de registro original.</li>
+<li><code translate="no">proxy.accessLog.rotatedTime</code>: El intervalo de tiempo máximo en segundos permitido para rotar un único archivo de registro de acceso. Al alcanzar el intervalo de tiempo especificado, se desencadenará un proceso de rotación, que resultará en la creación de un nuevo archivo de registro de acceso y el sellado del anterior.</li>
+<li><code translate="no">proxy.accessLog.maxBackups</code>: El número máximo de archivos de registro de acceso sellados que se pueden conservar. Si el número de archivos de registro de acceso sellados supera este límite, se eliminará el más antiguo.</li>
 </ul>
-<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Config for uploading local access log files to MinIO</h3><p>Enable and configure settings to upload local access log files to MinIO:</p>
+<h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Configuración para cargar archivos de registro de acceso local en MinIO</h3><p>Habilite y configure los parámetros para cargar archivos de registro de acceso local a MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -90,13 +90,13 @@ title: Configure Access Logs
     <span class="hljs-attr">remoteMaxTime:</span> <span class="hljs-number">0</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>When configuring MinIO parameters, ensure that you have set either <code translate="no">maxSize</code> or <code translate="no">rotatedTime</code>. Failure to do so may result in unsuccessful uploads of local access log files to MinIO.</p>
+<p>Al configurar los parámetros de MinIO, asegúrese de haber establecido <code translate="no">maxSize</code> o <code translate="no">rotatedTime</code>. Si no lo hace, es posible que no se carguen correctamente los archivos de registro de acceso local en MinIO.</p>
 <ul>
-<li><code translate="no">proxy.accessLog.minioEnable</code>: Whether to upload local access log files to MinIO. Defaults to <strong>false</strong>.</li>
-<li><code translate="no">proxy.accessLog.remotePath</code>: The path of the object storage for uploading access log files.</li>
-<li><code translate="no">proxy.accessLog.remoteMaxTime</code>: The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature.</li>
+<li><code translate="no">proxy.accessLog.minioEnable</code>: Si desea cargar archivos de registro de acceso local a MinIO. Por defecto es <strong>false</strong>.</li>
+<li><code translate="no">proxy.accessLog.remotePath</code>: La ruta del objeto de almacenamiento para cargar los archivos de registro de acceso.</li>
+<li><code translate="no">proxy.accessLog.remoteMaxTime</code>: El intervalo de tiempo permitido para cargar archivos de registro de acceso. Si el tiempo de carga de un archivo de registro supera este intervalo, el archivo se eliminará. El valor 0 desactiva esta función.</li>
 </ul>
-<h2 id="Formatter-config" class="common-anchor-header">Formatter config<button data-href="#Formatter-config" class="anchor-icon" translate="no">
+<h2 id="Formatter-config" class="common-anchor-header">Configuración del formateador<button data-href="#Formatter-config" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -111,7 +111,7 @@ title: Configure Access Logs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The default log format used for all methods is the <code translate="no">base</code> format, which does not require specific method associations. However, if you wish to customize the log output for specific methods, you can define a custom log format and apply it to the associated methods.</p>
+    </button></h2><p>El formato de registro por defecto utilizado para todos los métodos es el formato <code translate="no">base</code>, que no requiere asociaciones específicas de métodos. Sin embargo, si desea personalizar la salida de registro para métodos específicos, puede definir un formato de registro personalizado y aplicarlo a los métodos asociados.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
@@ -131,10 +131,10 @@ title: Configure Access Logs
         <span class="hljs-attr">methods:</span> [<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.format</code>: Defines the log format with dynamic metrics. For more information, see <a href="#reference-supported-metrics">Supported metrics</a>.</li>
-<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.methods</code>: Lists Milvus operations using this formatter. To obtain method names, see <strong>MilvusService</strong> in <a href="https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto">Milvus methods</a>.</li>
+<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.format</code>: Define el formato de registro con métricas dinámicas. Para obtener más información, consulte <a href="#reference-supported-metrics">Métricas admitidas</a>.</li>
+<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.methods</code>: Lista las operaciones Milvus que utilizan este formateador. Para obtener los nombres de los métodos, consulte <strong>MilvusService</strong> en <a href="https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto">Métodos Milvus</a>.</li>
 </ul>
-<h2 id="Reference-Supported-metrics" class="common-anchor-header">Reference: Supported metrics<button data-href="#Reference-Supported-metrics" class="anchor-icon" translate="no">
+<h2 id="Reference-Supported-metrics" class="common-anchor-header">Referencia: Métricas admitidas<button data-href="#Reference-Supported-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,25 +151,25 @@ title: Configure Access Logs
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Metric Name</th><th>Description</th></tr>
+<tr><th>Métrica Nombre</th><th>Descripción</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">$method_name</code></td><td>Name of the method</td></tr>
-<tr><td><code translate="no">$method_status</code></td><td>Status of access: <strong>OK</strong> or <strong>Fail</strong></td></tr>
-<tr><td><code translate="no">$method_expr</code></td><td>Expression used for query, search, or delete operations</td></tr>
-<tr><td><code translate="no">$trace_id</code></td><td>TraceID associated with the access</td></tr>
-<tr><td><code translate="no">$user_addr</code></td><td>IP address of the user</td></tr>
-<tr><td><code translate="no">$user_name</code></td><td>Name of the user</td></tr>
-<tr><td><code translate="no">$response_size</code></td><td>Size of the response data</td></tr>
-<tr><td><code translate="no">$error_code</code></td><td>Error code specific to Milvus</td></tr>
-<tr><td><code translate="no">$error_msg</code></td><td>Detailed error message</td></tr>
-<tr><td><code translate="no">$database_name</code></td><td>Name of the target Milvus database</td></tr>
-<tr><td><code translate="no">$collection_name</code></td><td>Name of the target Milvus collection</td></tr>
-<tr><td><code translate="no">$partition_name</code></td><td>Name or names of the target Milvus partition(s)</td></tr>
-<tr><td><code translate="no">$time_cost</code></td><td>Time taken for completing the access</td></tr>
-<tr><td><code translate="no">$time_now</code></td><td>Time at which the access log is printed (usually equivalent to <code translate="no">$time_end</code>)</td></tr>
-<tr><td><code translate="no">$time_start</code></td><td>Time at which the access starts</td></tr>
-<tr><td><code translate="no">$time_end</code></td><td>Time at which the access ends</td></tr>
-<tr><td><code translate="no">$sdk_version</code></td><td>Version of the Milvus SDK used by the user</td></tr>
+<tr><td><code translate="no">$method_name</code></td><td>Nombre del método</td></tr>
+<tr><td><code translate="no">$method_status</code></td><td>Estado del acceso: <strong>OK</strong> o <strong>Fail</strong></td></tr>
+<tr><td><code translate="no">$method_expr</code></td><td>Expresión utilizada para las operaciones de consulta, búsqueda o eliminación</td></tr>
+<tr><td><code translate="no">$trace_id</code></td><td>TraceID asociado al acceso</td></tr>
+<tr><td><code translate="no">$user_addr</code></td><td>Dirección IP del usuario</td></tr>
+<tr><td><code translate="no">$user_name</code></td><td>Nombre del usuario</td></tr>
+<tr><td><code translate="no">$response_size</code></td><td>Tamaño de los datos de respuesta</td></tr>
+<tr><td><code translate="no">$error_code</code></td><td>Código de error específico de Milvus</td></tr>
+<tr><td><code translate="no">$error_msg</code></td><td>Mensaje de error detallado</td></tr>
+<tr><td><code translate="no">$database_name</code></td><td>Nombre de la base de datos Milvus de destino</td></tr>
+<tr><td><code translate="no">$collection_name</code></td><td>Nombre de la colección Milvus de destino</td></tr>
+<tr><td><code translate="no">$partition_name</code></td><td>Nombre o nombres de la(s) partición(es) Milvus de destino</td></tr>
+<tr><td><code translate="no">$time_cost</code></td><td>Tiempo necesario para completar el acceso</td></tr>
+<tr><td><code translate="no">$time_now</code></td><td>Hora a la que se imprime el registro de acceso (normalmente equivalente a <code translate="no">$time_end</code>)</td></tr>
+<tr><td><code translate="no">$time_start</code></td><td>Hora de inicio del acceso</td></tr>
+<tr><td><code translate="no">$time_end</code></td><td>Hora a la que finaliza el acceso</td></tr>
+<tr><td><code translate="no">$sdk_version</code></td><td>Versión del SDK de Milvus utilizada por el usuario</td></tr>
 </tbody>
 </table>

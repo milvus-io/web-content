@@ -32,7 +32,7 @@ beta: Milvus 2.6.x
 <li><p>Una plataforma de comercio electrónico que potencie los productos de moda aunque sean ligeramente menos similares a la consulta de búsqueda.</p></li>
 </ul>
 <p>Todos estos escenarios comparten una necesidad común: equilibrar la similitud vectorial con otros factores numéricos como el tiempo, la distancia o la popularidad.</p>
-<p>Los clasificadores de decrecimiento de Milvus responden a esta necesidad ajustando las clasificaciones de búsqueda en función de los valores de los campos numéricos. Le permiten equilibrar la similitud vectorial con la "frescura", la "proximidad" u otras propiedades numéricas de sus datos, creando experiencias de búsqueda más intuitivas y contextualmente relevantes.</p>
+<p>Los clasificadores de decrecimiento de Milvus responden a esta necesidad ajustando las clasificaciones de búsqueda en función de los valores de los campos numéricos. Le permiten equilibrar la similitud vectorial con la "frescura", la "cercanía" u otras propiedades numéricas de sus datos, creando experiencias de búsqueda más intuitivas y contextualmente relevantes.</p>
 <h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -56,7 +56,7 @@ summary: >-
 <li><p><strong>Cuantización del producto (PQ)</strong></p>
 <p>En esta fase, el vector original se divide en subvectores más pequeños, y cada subvector se asigna a su centroide más cercano en un libro de códigos aprendido. Esta asignación reduce significativamente el tamaño de los datos, pero introduce algunos errores de redondeo, ya que cada subvector se aproxima a un único centroide. Para más información, consulte <a href="/docs/es/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
 <li><p><strong>Cuantificación residual (RQ)</strong></p>
-<p>Después de la etapa PQ, RQ cuantiza el residuo (la diferencia entre el vector original y su aproximación basada en PQ) utilizando libros de códigos adicionales. Como este residuo suele ser mucho más pequeño, puede codificarse con mayor precisión sin un gran aumento del almacenamiento.</p>
+<p>Tras la etapa PQ, la RQ cuantiza el residuo (la diferencia entre el vector original y su aproximación basada en PQ) utilizando libros de códigos adicionales. Como este residuo suele ser mucho más pequeño, puede codificarse con mayor precisión sin un gran aumento del almacenamiento.</p>
 <p>El parámetro <code translate="no">nrq</code> determina cuántas veces se cuantifica iterativamente este residuo, lo que permite ajustar con precisión el equilibrio entre eficacia y precisión de la compresión.</p></li>
 <li><p><strong>Representación final de la compresión</strong></p>
 <p>Una vez que RQ termina de cuantizar el residuo, los códigos enteros de PQ y RQ se combinan en un único índice comprimido. Al capturar detalles refinados que PQ por sí solo podría pasar por alto, RQ mejora la precisión sin causar un aumento significativo en el almacenamiento. Esta sinergia entre PQ y RQ es lo que define a PRQ.</p></li>
@@ -117,7 +117,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: El método utilizado para calcular la distancia entre vectores. Los valores soportados incluyen <code translate="no">COSINE</code>, <code translate="no">L2</code>, y <code translate="no">IP</code>. Para más detalles, consulte <a href="/docs/es/metric.md">Tipos de métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opciones de configuración adicionales para construir el índice. Para más información, consulte <a href="/docs/es/hnsw-prq.md#Index-building-params">Parámetros de creación de índices</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando el método <code translate="no">create_index()</code> directamente o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -205,7 +205,7 @@ res = MilvusClient.search(
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 65536]</p>
 <p><strong>Valor por defecto</strong>: Ninguno</p></td>
      <td><p>Un valor más alto de <code translate="no">m</code> puede mejorar la precisión, pero también aumenta la complejidad computacional y el uso de memoria. <code translate="no">m</code> debe ser un divisor de la dimensión del vector<em>(D</em>) para garantizar una descomposición adecuada. Un valor comúnmente recomendado es <em>m = D/2</em>.</p>
-<p>En la mayoría de los casos, le recomendamos que establezca un valor dentro de este rango: [D/8, D].</p></td>
+<p>En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [D/8, D].</p></td>
    </tr>
    <tr>
      <td></td>

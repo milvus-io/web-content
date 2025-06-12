@@ -1,9 +1,9 @@
 ---
 id: recommendation_system.md
-summary: Build a personalized recommender system with Milvus.
-title: Recommender System
+summary: Cree un sistema de recomendación personalizado con Milvus.
+title: Sistema de recomendación
 ---
-<h1 id="Recommender-System" class="common-anchor-header">Recommender System<button data-href="#Recommender-System" class="anchor-icon" translate="no">
+<h1 id="Recommender-System" class="common-anchor-header">Sistema de recomendación<button data-href="#Recommender-System" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,21 +18,19 @@ title: Recommender System
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This tutorial demonstrates how to use Milvus, the open-source vector database, to build a recommendation system.</p>
-<p>The ML model and third-party software used include:</p>
+    </button></h1><p>Este tutorial muestra cómo utilizar Milvus, la base de datos vectorial de código abierto, para crear un sistema de recomendación.</p>
+<p>El modelo ML y el software de terceros utilizados incluyen:</p>
 <ul>
 <li>PaddlePaddle</li>
-<li>Redis or MySQL</li>
+<li>Redis o MySQL</li>
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p></br></p>
-<p>The recommender system is a subset of the information filtering system, which can be used in various scenarios including personalized movie, music, product, and feed stream recommendation. Unlike search engines, recommender systems do not require users to accurately describe their needs but discover users’ needs and interests by analyzing user behaviors.</p>
+<p>El sistema de recomendación es un subconjunto del sistema de filtrado de información, que puede utilizarse en varios escenarios, incluyendo la recomendación personalizada de películas, música, productos y feeds. A diferencia de los motores de búsqueda, los sistemas de recomendación no requieren que los usuarios describan con precisión sus necesidades, sino que descubren las necesidades e intereses de los usuarios analizando sus comportamientos.</p>
 <p></br></p>
-<p>In this tutorial, you will learn how to build a movie recommender system that can suggest movies meeting user interests. To build such a recommender system, first download a movie-related dataset. This tutorial uses MovieLens 1M. Alternatively, you can prepare your own datasets, which should include such information as users’ ratings of movies, users’ demographic characteristics, and movie description. Use PaddlePaddle to combine user IDs and features and convert them into 256-dimensional vectors. Convert movie IDs and features into vectors in a similar way. Store the movie vectors in Milvus and use user vectors for similarity search. If the user vector is similar to a movie vector, Milvus will return the movie vector and its ID as the recommendation result. Then query movie information using the movie vector ID stored in Redis or MySQL.</p>
+<p>En este tutorial, aprenderás a crear un sistema de recomendación de películas que pueda sugerir películas que se ajusten a los intereses del usuario. Para crear un sistema de recomendación de este tipo, descargue primero un conjunto de datos relacionados con películas. Este tutorial utiliza MovieLens 1M. También puede preparar sus propios conjuntos de datos, que deben incluir información como las valoraciones de las películas por parte de los usuarios, las características demográficas de los usuarios y la descripción de la película. Utilice PaddlePaddle para combinar los ID de usuario y las características y convertirlos en vectores de 256 dimensiones. Convierta los ID y las características de las películas en vectores de forma similar. Almacene los vectores de películas en Milvus y utilice los vectores de usuario para la búsqueda de similitudes. Si el vector de usuario es similar a un vector de película, Milvus devolverá el vector de película y su ID como resultado de la recomendación. A continuación, consulte la información de la película utilizando el ID del vector de película almacenado en Redis o MySQL.</p>
 <p></br></p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/recommendation_system.png" alt="recommender_system" class="doc-image" id="recommender_system" />
-    <span>recommender_system</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/recommendation_system.png" alt="recommender_system" class="doc-image" id="recommender_system" />
+   </span> <span class="img-wrapper"> <span>sistema_recomendador</span> </span></p>

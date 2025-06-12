@@ -122,7 +122,7 @@ beta: Milvus 2.6.x
 
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Variables de entorno</strong></p>
-<p>Las variables de entorno ofrecen un método de configuración alternativo, comúnmente utilizado al configurar entornos de contenedores en Docker Compose o despliegues de Kubernetes.</p>
+<p>Las variables de entorno ofrecen un método de configuración alternativo, comúnmente utilizado cuando se configuran entornos de contenedores en Docker Compose o despliegues de Kubernetes.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Example (typically set in docker-compose.yaml or Kubernetes manifest)</span>
 <span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
 <span class="hljs-attr">standalone:</span>
