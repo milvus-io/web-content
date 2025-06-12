@@ -24,6 +24,38 @@ title: Upgrade Milvus Cluster with Milvus Operator
         ></path>
       </svg>
     </button></h1><p>This guide describes how to upgrade your Milvus cluster with Milvus operator.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>As of Milvus 2.6.0, the legacy separate coordinators (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) have been consolidated into a single <code translate="no">mixCoord</code>. Before upgrading, make sure your CRD spec uses <code translate="no">mixCoord</code> rather than individual coordinator components.</p>
+<p>If you are using the separate coordinators, modify your specification:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">mixCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># set to 1 or more</span>
+    <span class="hljs-attr">dataCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+    <span class="hljs-attr">queryCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+    <span class="hljs-attr">indexCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">Upgrade your Milvus operator<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,10 +78,13 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <button class="copy-code-btn"></button></code></pre>
 <p>Once you have upgraded your Milvus operator to the latest version, you have the following choices:</p>
 <ul>
-<li>To upgrade Milvus from v2.2.3 or later releases to 2.5.12, you can <a href="#Conduct-a-rolling-upgrade">conduct a rolling upgrade</a>.</li>
+<li>To upgrade Milvus from v2.2.3, you can <a href="#Conduct-a-rolling-upgrade">conduct a rolling upgrade</a>.</li>
 <li>To upgrade Milvus from a minor release before v2.2.3 to 2.5.12, you are advised to <a href="#Upgrade-Milvus-by-changing-its-image">upgrade Milvus by changing its image version</a>.</li>
 <li>To upgrade Milvus from v2.1.x to 2.5.12, you need to <a href="#Migrate-the-metadata">migrate the metadata</a> before the actual upgrade.</li>
 </ul>
+<blockquote>
+<p><strong>Note</strong>: It’s highly recommended to upgrade one minor version at a time, and to use the latest stable release of that minor version. For example, if you are upgrading from v2.4.x to v2.6.x, you should first upgrade to the latest v2.4.x, then to the latest v2.5.x, and finally to v2.6.x. This ensures that you are using the latest stable release of each minor version, which is more likely to be compatible with your existing data and configurations.</p>
+</blockquote>
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Conduct a rolling upgrade<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,6 +112,9 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+    <span class="hljs-comment"># Milvus Operator recognizes the image tag as a semantic version, and decides what to do based on the version.</span>
+    <span class="hljs-comment"># So in case you&#x27;re using a non-sermantic verison image tag, you may also need to set the `version` field so that Milvus Operator can recognize the version correctly</span>
+    <span class="hljs-attr">version:</span> <span class="hljs-string">v2.5.12</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In this above configuration file, set <code translate="no">spec.components.enableRollingUpdate</code> to <code translate="no">true</code> and set <code translate="no">spec.components.image</code> to the desired Milvus version.</p>
 <p>By default, Milvus performs rolling upgrade for coordinators in an ordered way, in which it replaces the coordinator pod images one after another. To reduce the upgrade time, consider setting <code translate="no">spec.components.imageUpdateMode</code> to <code translate="no">all</code> so that Milvus replaces all pod images at the same time.</p>

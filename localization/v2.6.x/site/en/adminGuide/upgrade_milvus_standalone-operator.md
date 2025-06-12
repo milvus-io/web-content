@@ -46,10 +46,13 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <button class="copy-code-btn"></button></code></pre>
 <p>Once you have upgraded your Milvus operator to the latest version, you have the following choices:</p>
 <ul>
-<li>To upgrade Milvus from v2.2.3 or later releases to 2.5.12, you can <a href="#Conduct-a-rolling-upgrade">conduct a rolling upgrade</a>.</li>
+<li>To upgrade Milvus from v2.2.3, you can <a href="#Conduct-a-rolling-upgrade">conduct a rolling upgrade</a>.</li>
 <li>To upgrade Milvus from a minor release before v2.2.3 to 2.5.12, you are advised to <a href="#Upgrade-Milvus-by-changing-its-image">upgrade Milvus by changing its image version</a>.</li>
 <li>To upgrade Milvus from v2.1.x to 2.5.12, you need to <a href="#Migrate-the-metadata">migrate the metadata</a> before the actual upgrade.</li>
 </ul>
+<blockquote>
+<p><strong>Note</strong>: It’s highly recommended to upgrade one minor version at a time, and to use the latest stable release of that minor version. For example, if you are upgrading from v2.4.x to v2.6.x, you should first upgrade to the latest v2.4.x, then to the latest v2.5.x, and finally to v2.6.x. This ensures that you are using the latest stable release of each minor version, which is more likely to be compatible with your existing data and configurations.</p>
+</blockquote>
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Conduct a rolling upgrade<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
